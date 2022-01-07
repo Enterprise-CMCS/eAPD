@@ -6,19 +6,19 @@ export const saveContractor = (activityIndex, index, data) => (dispatch, getStat
   const previousState = getState();
   
   let indexCalculated = index;
-  
-  if(previousState.apd.data.keyPersonnel[index] === undefined) {
-    indexCalculated = previousState.apd.data.keyPersonnel.length;
+  console.log("state", previousState.apd.data);
+  if(previousState.apd.data.activities[activityIndex].contractorResources[index] === undefined) {
+    indexCalculated = previousState.apd.data.activities[activityIndex].contractorResources.length;
     dispatch({
       type: ADD_APD_ITEM,
-      path: `/activities/${activityIndex}/contractorResource/-`,
+      path: `/activities/${activityIndex}/contractorResources/-`,
       state: getState()
     });
   }
   
   dispatch({
     type: EDIT_APD,
-    path: `/activities/${activityIndex}/contractorResource/${activityIndex}`,
+    path: `/activities/${activityIndex}/contractorResources/${index}`,
     value: data
   });
   

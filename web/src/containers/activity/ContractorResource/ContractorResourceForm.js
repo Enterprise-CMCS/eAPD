@@ -81,20 +81,20 @@ const ContractorResourceForm = forwardRef(
     useEffect(() => {
       console.log("appdFFYS", apdFFYs);
       console.log("item is...", item);
-      console.log("state is...", state);
+      console.log("state.start is...", state.start);
     }, [state])
     
     const handleSubmit = e => {
       e.preventDefault();
-      savePerson(activityIndex, index, state);
+      saveContractor(activityIndex, index, state);
     };
   
     const getHandler = action => ({ target: { value } }) => {
       action(activityIndex, index, value);
     };
   
-    const getDateHandler = action => (_, dateStr) => {
-      action(activityIndex, index, dateStr);
+    const getDateHandler = action => (e, dateStr) => {
+      dispatch({ type: 'updateField', field: `${action}`, payload: dateStr })
     };
   
     const setHourlyOff = () => {
@@ -185,17 +185,13 @@ const ContractorResourceForm = forwardRef(
           <DateField
             label="Contract start date"
             value={state.start}
-            onChange={e =>
-              dispatch({ type: 'updateField', field: 'start', payload: e.target.value })
-            }
+            onChange={getDateHandler('start')}
           />
           <DateField
             label="Contract end date"
             hint=""
             value={state.end}
-            onChange={e =>
-              dispatch({ type: 'updateField', field: 'end', payload: e.target.value })
-            }
+            onChange={getDateHandler('end')}
           />
         </div>
         <DollarField
