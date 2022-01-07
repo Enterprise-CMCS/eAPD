@@ -84,16 +84,8 @@ const config = {
         ]
       },
       {
-        test: /\.(woff2?|ttf|otf|eot|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'static/fonts'
-            }
-          }
-        ]
+        test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+        type: 'asset/resource'
       },
       {
         test: /\.yaml$/,
