@@ -19,7 +19,7 @@ class PopulatePage {
 
   fillTextField = (className, string, index) => {
     if (Number.isInteger(index)) {
-      cy.get(`[class="${className}"]`).eq(index).clear().type(string);
+      cy.get(`[class="${className}"]`).eq(index).type(string);
     } else {
       cy.get(`[class="${className}"]`).clear().type(string);
     }
@@ -29,87 +29,117 @@ class PopulatePage {
     cy.findByLabelText(id).clear().type(string);
   };
 
-  fillActivityOverview = (
+  fillActivityOverview = ({
     shortOverview,
     startDate,
     endDate,
-    detailedDesc,
-    justifications
-  ) => {
-    cy.setTinyMceContent('activity-short-overview-field', shortOverview);
-
+    detailedDescription,
+    supportingJustifications,
+    supportsMedicaid
+  } = {}) => {
     this.fillDate('Start date', startDate);
     this.fillDate('End date', endDate);
 
-    cy.setTinyMceContent('activity-description-field', detailedDesc);
-    cy.setTinyMceContent('activity-alternatives-field', justifications);
+    cy.setTinyMceContent('activity-short-overview-field', shortOverview);
+    cy.setTinyMceContent('activity-description-field', detailedDescription);
+    cy.setTinyMceContent(
+      'activity-alternatives-field',
+      supportingJustifications
+    );
+    cy.setTinyMceContent(
+      'standards-and-conditions-supports-field',
+      supportsMedicaid
+    );
   };
 
-  fillOutcomeForm = (outcome, metric1, metric2) => {
+  fillOutcomeForm = ({ outcome, metrics } = {}) => {
+    cy.findByRole('button', { name: /Add Outcome/i }).click();
     this.fillTextField('ds-c-field', outcome, 0);
-    this.fillTextField('ds-c-field', metric1, 1);
-    cy.findByRole('button', { name: /Add Metric/ }).click();
-    this.fillTextField('ds-c-field', metric2, 2);
-    cy.findByRole('button', { name: /Done/i }).click();
-  };
-
-  fillMilestoneForm = (milestone, date) => {
-    this.fillInputField('Name', milestone);
-    cy.get('[class="ds-c-fieldset"]').within(() => {
-      this.fillDate('Target completion date', date);
+    metrics.forEach((metric, index) => {
+      this.fillTextField('ds-c-field', metric, index + 1);
+      if (index < metrics.length - 1) {
+        cy.findByRole('button', { name: /Add Metric/i }).click();
+      }
     });
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
-  fillContractorForm = (
-    name,
-    desc,
-    startDate,
-    endDate,
-    totalCost,
-    FFYcosts,
-    index
-  ) => {
-    this.fillTextField('ds-c-field', name);
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
-    cy.setTinyMceContent(`contractor-description-field-${index}`, desc);
-
-    this.fillDate('Contract start date', startDate);
-    this.fillDate('Contract end date', endDate);
-
-    this.fillTextField(
-      'ds-c-field ds-c-field--currency ds-c-field--medium',
-      totalCost,
-      0
-    );
-
-    this.fillTextField(
-      'ds-c-field ds-c-field--currency ds-c-field--medium',
-      FFYcosts[0],
-      1
-    );
-
-    this.fillTextField(
-      'ds-c-field ds-c-field--currency ds-c-field--medium',
-      FFYcosts[1],
-      2
-    );
+  fillMilestoneForm = ({ milestone, targetDate } = {}) => {
+    this.fillInputField('Name', milestone);
+    cy.get('[class="ds-c-fieldset"]').within(() => {
+      this.fillDate('Target completion date', targetDate);
+    });
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
-  fillCostAllocation = (mainDesc, FFYDescriptions, FFYCosts, years) => {
-    cy.setTinyMceContent('cost-allocation-methodology-field', mainDesc);
+  fillContractorForm = ({
+    years,
+    name,
+    description,
+    start,
+    end,
+    totalCosts,
+    hourly = false,
+    FFYcosts,
+    index
+  } = {}) => {
+    this.fillTextField('ds-c-field', name);
+
+    this.fillDate('Contract start date', start);
+    this.fillDate('Contract end date', end);
+
+    this.fillTextField(
+      'ds-c-field ds-c-field--currency ds-c-field--medium',
+      totalCosts,
+      0
+    );
+
+    if (hourly) {
+      cy.findByRole('radio', { name: /Yes/i }).click({ force: true });
+      years.forEach((year, i) => {
+        this.fillTextField('ds-c-field ds-c-field--medium', FFYcosts[i][0], i);
+
+        this.fillTextField(
+          'ds-c-field ds-c-field--currency ds-c-field--medium',
+          FFYcosts[i][1],
+          i + 1
+        );
+      });
+    } else {
+      years.forEach((year, i) => {
+        this.fillTextField(
+          'ds-c-field ds-c-field--currency ds-c-field--medium',
+          FFYcosts[i],
+          i + 1
+        );
+      });
+    }
+
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.setTinyMceContent(`contractor-description-field-${index}`, description);
+
+    cy.findByRole('button', { name: /Done/i }).click();
+  };
+
+  fillCostAllocation = ({
+    description,
+    FFYdescriptions,
+    costs,
+    years
+  } = {}) => {
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.setTinyMceContent('cost-allocation-methodology-field', description);
 
     years.forEach((year, i) => {
       cy.setTinyMceContent(
         `cost-allocation-narrative-${year}-other-sources-field`,
-        FFYDescriptions[i]
+        FFYdescriptions[i]
       );
-      this.fillTextField('ds-c-field ds-c-field--currency', FFYCosts[i], i);
+      this.fillTextField('ds-c-field ds-c-field--currency', costs[i], i);
     });
   };
 
-  fillQuarter = (quarter, stateValue, contractorValue) => {
+  fillQuarter = ({ quarter, stateValue, contractorValue } = {}) => {
     const contractorInput = quarter + 4;
 
     cy.get('[class="budget-table"]').within(() => {
@@ -122,30 +152,6 @@ class PopulatePage {
         .eq(contractorInput)
         .clear()
         .type(contractorValue);
-    });
-  };
-
-  checkQuarterSubtotal = (
-    stateString,
-    contractorString,
-    expectedState,
-    expectedContractor
-  ) => {
-    const stateVal = this.budgetPage.convertStringToNum(stateString);
-    const contractorVal = this.budgetPage.convertStringToNum(contractorString);
-
-    expect(stateVal).to.be.closeTo(expectedState, 5);
-    expect(contractorVal).to.be.closeTo(expectedContractor, 5);
-  };
-
-  checkPercentageSubtotal = (staff, contractor) => {
-    cy.get('[class="budget-table"]').within(() => {
-      cy.get('[class="budget-table--number budget-table--subtotal"]')
-        .eq(0)
-        .should('contain', `+${staff}%`);
-      cy.get('[class="budget-table--number budget-table--subtotal"]')
-        .eq(2)
-        .should('contain', `+${contractor}%`);
     });
   };
 }

@@ -1,4 +1,5 @@
 import ActivitiesStateStaffExpensesPage from '../../../page-objects/activities-state-staff-expenses-page';
+import ExportPage from '../../../page-objects/export-page';
 
 export const testDefaultStateStaffAndExpenses = () => {
   it('should display the default state staff and expenses', () => {
@@ -15,10 +16,22 @@ export const testDefaultStateStaffAndExpenses = () => {
     cy.waitForSave();
   });
 
-  // TODO: export view tests
+  it('should display the default activity overview in the export view', () => {
+    const exportPage = new ExportPage();
+    cy.goToExportView();
+
+    exportPage.checkStateStaff({
+      activityHeader: 'Activity 1: Program Administration'
+    });
+    exportPage.checkStateExpenses({
+      activityHeader: 'Activity 1: Program Administration'
+    });
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+  });
 };
 
-export const testStateStaffAndExpensesWithData = () => {
+export const testStateStaffAndExpensesWithData = years => {
   let staffExpensesPage;
   let activityData;
 
@@ -47,7 +60,6 @@ export const testStateStaffAndExpensesWithData = () => {
         level: 3
       }).should('exist');
 
-      cy.log('State Staff');
       staffExpensesPage.addStaff();
       staffExpensesPage.addStaff();
 
@@ -92,7 +104,6 @@ export const testStateStaffAndExpensesWithData = () => {
         stateStaff[1].ftes
       );
 
-      cy.log('State Expenses');
       staffExpensesPage.addExpense();
       staffExpensesPage.addExpense();
 
@@ -138,7 +149,27 @@ export const testStateStaffAndExpensesWithData = () => {
       cy.waitForSave();
     });
 
-    // TODO: export view tests
+    it('should display the default activity overview in the export view', () => {
+      const exportPage = new ExportPage();
+      cy.goToExportView();
+
+      const { name } = activityData.activityOverview[0];
+      const staff = activityData.staff.slice(1, 2);
+      const expenses = activityData.expenses.slice(1, 2);
+
+      exportPage.checkStateStaff({
+        activityHeader: `Activity 1: ${name}`,
+        staff,
+        years
+      });
+      exportPage.checkStateExpenses({
+        activityHeader: `Activity 1: ${name}`,
+        expenses,
+        years
+      });
+
+      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+    });
   });
 
   describe('Activity 2', () => {
@@ -156,7 +187,6 @@ export const testStateStaffAndExpensesWithData = () => {
         level: 3
       }).should('exist');
 
-      cy.log('State Staff');
       staffExpensesPage.addStaff();
       staffExpensesPage.addStaff();
 
@@ -178,7 +208,6 @@ export const testStateStaffAndExpensesWithData = () => {
         );
       });
 
-      cy.log('State Expenses');
       staffExpensesPage.addExpense();
       staffExpensesPage.addExpense();
 
@@ -202,6 +231,26 @@ export const testStateStaffAndExpensesWithData = () => {
       cy.waitForSave();
     });
 
-    // TODO: export view tests
+    it('should display the default activity overview in the export view', () => {
+      const exportPage = new ExportPage();
+      cy.goToExportView();
+
+      const { name } = activityData.activityOverview[1];
+      const staff = activityData.staff.slice(2);
+      const expenses = activityData.expenses.slice(2);
+
+      exportPage.checkStateStaff({
+        activityHeader: `Activity 2: ${name}`,
+        staff,
+        years
+      });
+      exportPage.checkStateExpenses({
+        activityHeader: `Activity 2: ${name}`,
+        expenses,
+        years
+      });
+
+      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
+    });
   });
 };

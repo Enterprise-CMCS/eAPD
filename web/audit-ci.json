@@ -1,20 +1,14 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1005059, 1006754],
+  "allowlist": [
+    1005174, 1004946, 1004967, 1005024, 1005029, 1005154, 1005291, 1006846
+  ],
   "_comment": {
-    "1005059": {
-      "advisory": "https://github.com/advisories/GHSA-whgm-jr23-g3j9",
-      "module": "ansi-html",
-      "affects": [
-        "webpack-dev-server>ansi-html",
-        "@storybook/react>@pmmmwh/react-refresh-webpack-plugin>ansi-html"
-      ]
-    },
-    "1006754": {
-      "advisory": "https://github.com/advisories/GHSA-7p7h-4mm5-852v",
-      "module": "trim-newlines",
-      "affects": ["node-sass@4.14.1 - used for css during the build process"]
+    "1005174": {
+      "advisory": "https://github.com/advisories/GHSA-w8qv-6jwh-64r5",
+      "module": "browserslist",
+      "affects": ["@storybook/react@6.4.9 - storybook"]
     }
   },
   "registry": "https://registry.npmjs.org"

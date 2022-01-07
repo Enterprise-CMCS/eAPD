@@ -15,8 +15,9 @@ import { testAssurancesAndComplianceWithData } from '../../helpers/apd/assurance
 import { testExecutiveSummaryWithData } from '../../helpers/apd/executive-summary';
 
 // Tests an APD by adding data and checking the results
-describe('APD with Data', { tags: ['@apd', '@data'] }, () => {
+describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   let apdUrl;
+  let apdId;
   const years = [];
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
@@ -27,6 +28,7 @@ describe('APD with Data', { tags: ['@apd', '@data'] }, () => {
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
+      apdId = apdUrl.split('/').pop();
     });
   });
 
@@ -35,19 +37,7 @@ describe('APD with Data', { tags: ['@apd', '@data'] }, () => {
   });
 
   after(() => {
-    cy.useStateStaff();
-    cy.get(`a[href='${apdUrl}']`).should('exist');
-
-    cy.get(`a[href='${apdUrl}']`)
-      .parent()
-      .parent()
-      .parent()
-      .contains('Delete')
-      .click();
-
-    cy.get('.ds-c-button--danger').click();
-
-    cy.get(`a[href='${apdUrl}']`).should('not.exist');
+    cy.deleteAPD(apdId);
   });
 
   describe('Form View', () => {

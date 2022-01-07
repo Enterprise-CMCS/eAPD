@@ -7,9 +7,9 @@ import 'tinymce/tinymce';
 
 import tokens from '../../tokens.json';
 import {
-  CONSENT_COOKIE_NAME,
-  API_COOKIE_NAME
-} from '../../../web/src/constants';
+  API_COOKIE_NAME,
+  CONSENT_COOKIE_NAME
+} from '../../../web/src/cookie-constants';
 
 const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000
@@ -176,6 +176,24 @@ Cypress.Commands.add('waitForSave', () => {
       delay: 400 // delay before next iteration, ms
     }
   );
+});
+
+Cypress.Commands.add('deleteAPD', apdId => {
+  if (apdId) {
+    cy.useStateStaff();
+    cy.get(`a[href='/apd/${apdId}']`).then($el => {
+      cy.intercept('DELETE', `${Cypress.env('API')}/apds/${apdId}`).as(
+        'delete'
+      );
+
+      cy.wrap($el).parent().parent().parent().contains('Delete').click();
+
+      cy.get('.ds-c-button--danger').click();
+      cy.wait('@delete');
+    });
+  }
+
+  cy.get(`a[href='/apd/${apdId}']`).should('not.exist');
 });
 
 Cypress.Commands.add('goToApdOverview', () => {

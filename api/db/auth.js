@@ -1,3 +1,4 @@
+const isPast = require('date-fns/isPast');
 const knex = require('./knex');
 
 const getAuthActivities = async ({ db = knex } = {}) =>
@@ -84,8 +85,35 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
       // eslint-disable-next-line no-param-reassign
       states[row.state_id] = row.status
       return states
-
     }, {}));
+
+/**
+ * Retrieves all affiliations tied to a user
+ * @async
+ * @function
+ * @returns {Array} 
+ */
+const getExpiredUserAffiliations = async (userId, { db = knex } = {}) => 
+  db('auth_affiliations')
+    .select()
+    .where('user_id', userId)
+    .then(rows => {
+      const expiredRows = rows.filter(row => isPast(row.expires_at))
+      return expiredRows;
+    })
+
+/**
+ * Retrieves a single affiliation by user per state
+ * @async
+ * @function
+ * @returns {Object}
+ */
+const getAffiliationsByState = async (userId, stateId, { db = knex } = {}) => 
+  db('auth_affiliations')
+    .where('user_id', userId)
+    .andWhere('state_id', stateId)
+    .select()
+    .first();
 
 /**
  * Retrieves a user's permissions per state
@@ -95,6 +123,7 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
  */
 const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
   const roles = (await getRolesAndActivities()) || [];
+  
   return db
     .select({
       stateId: 'state_id',
@@ -121,5 +150,7 @@ module.exports = {
   getActiveAuthRoles,
   getRolesAndActivities,
   getUserAffiliatedStates,
-  getUserPermissionsForStates
+  getUserPermissionsForStates,
+  getExpiredUserAffiliations,
+  getAffiliationsByState
 };

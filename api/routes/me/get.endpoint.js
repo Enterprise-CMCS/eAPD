@@ -22,7 +22,6 @@ describe('/me endpoint | GET', () => {
   it('when authenticated, with no permissions', async () => {
     const api = login('no-permissions');
     const response = await api.get(url);
-
     expect(response.status).toEqual(200);
     expect(response.data.states).toEqual({});
   });
