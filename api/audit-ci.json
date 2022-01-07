@@ -1,30 +1,12 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1004946, 1006724, 1006767],
+  "allowlist": [1005092],
   "_comment": {
-    "1004946": {
-      "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
-      "module": "ansi-regex",
-      "affects": [
-        "eslint@7.24.0 - linter",
-        "jest@27.4.2 - testing",
-        "tap@15.1.5 - testing",
-        "migrate-mongoose@4.0.0 - used to seed mongo but not in production or staging",
-        "nodemon@2.0.7 - used to run server in development",
-        "sharp@0.29.3 - used in production, but ansi-regex is in the npmlog"
-      ]
-    },
-    "1006724": {
-      "advisory": "https://github.com/advisories/GHSA-896r-f27r-55mw",
-      "module": "json-schema",
-      "affects": ["tap@15.1.2 - testing"]
-    },
-    "1006767": {
-      "advisory": "https://github.com/advisories/GHSA-qrmm-w75w-3wpx",
-      "module": "swagger-ui-dist",
-      "affects": ["swagger-ui-express - is used in production"],
-      "remediation": "commented out swagger docs until they patch this issue"
+    "1005092": {
+      "advisory": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
+      "module": "yargs-parser",
+      "affects": ["migrate-mongoose@4.0.0 - not used in production"]
     }
   },
   "registry": "https://registry.npmjs.org"

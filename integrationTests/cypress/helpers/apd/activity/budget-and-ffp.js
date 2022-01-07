@@ -29,9 +29,27 @@ export const testDefaultBudgetAndFFP = years => {
             budgetPage.checkTotalComputableMedicaidCost(0);
             budgetPage.checkActivityTotalCostTable(0, 0, 1);
 
+<<<<<<< HEAD
             budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
 
             budgetPage.checkQuarterTable('default', '', 0);
+=======
+            budgetPage.checkActivityTotalCostTable({
+              index: 1,
+              activityTotalCosts: 0,
+              otherFunding: 0,
+              totalComputableMedicaidCost: 0
+            });
+
+            budgetPage.checkCostSplitTable({
+              federalSharePercentage: 0.9,
+              federalShareAmount: 0,
+              stateSharePercentage: 0.1,
+              stateShareAmount: 0,
+              totalComputableMedicaidCost: 0
+            });
+            budgetPage.checkQuarterTable();
+>>>>>>> tforkner/3100-move-apds-to-mongodb
           });
       });
       budgetPage.checkFFYtotals(

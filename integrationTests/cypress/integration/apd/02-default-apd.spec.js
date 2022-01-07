@@ -15,8 +15,9 @@ import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances
 import { testDefaultExecutiveSummary } from '../../helpers/apd/executive-summary';
 
 // Tests the default values of an APD
-describe('Default APD', { tags: ['@apd', '@default'] }, () => {
+describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   let apdUrl;
+  let apdId;
   const years = [];
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
@@ -27,6 +28,7 @@ describe('Default APD', { tags: ['@apd', '@default'] }, () => {
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
+      apdId = apdUrl.split('/').pop();
     });
   });
 
@@ -35,6 +37,7 @@ describe('Default APD', { tags: ['@apd', '@default'] }, () => {
   });
 
   after(() => {
+<<<<<<< HEAD
     cy.useStateStaff();
     cy.get(`a[href='${apdUrl}']`).should('exist');
 
@@ -48,6 +51,9 @@ describe('Default APD', { tags: ['@apd', '@default'] }, () => {
     cy.get('.ds-c-button--danger').click();
 
     cy.get(`a[href='${apdUrl}']`).should('not.exist');
+=======
+    cy.deleteAPD(apdId);
+>>>>>>> tforkner/3100-move-apds-to-mongodb
   });
 
   describe('Form View', () => {

@@ -45,10 +45,56 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       const today = new Date();
 
-      cy.get('.apd--title').contains(
+      cy.get('#apd-header-info').contains(
         `Created: ${today.toLocaleDateString('en-US', options)}`
       );
 
+    cy.get('#apd-header-info').contains(`Created: ${  today.toLocaleDateString("en-US", options)}`);
+  });
+
+  it('changes the apd name', () => {
+    cy.visit('/');
+    cy.contains('Create new').click();
+
+    const title1 = 'HITECH IAPD';
+    const title2 = 'My Awesome eAPD';
+    const title3 = 'Magnus Archive Project';
+
+    cy.get('#apd-title-input').contains(`${title1}`)
+
+    // Change name in APD Summary text box
+    cy.focused()
+      .should('have.attr', 'name', 'apd-name')
+      .clear()
+      .type(`${title2}`)
+      .blur();
+
+    cy.get('#apd-title-input')
+      .contains(`${title2}`)
+      .click();
+
+    // Change name via APD Header
+    cy.focused()
+      .should('have.attr', 'id', 'apd-title-input')
+      .clear()
+      .type(`${title3}`)
+      .blur();
+
+    cy.get('#apd-title-input')
+      .contains(`${title3}`);
+
+    // Change name by clicking EDIT button
+    cy.get('#title-edit-link')
+      .click();
+
+    cy.focused()
+      .should('have.attr', 'id', 'apd-title-input')
+      .clear()
+      .type(`${title2}`)
+      .blur();
+
+      cy.get('#apd-title-input')
+        .contains(`${title2}`);
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
       cy.get('[type="checkbox"][checked]').each((_, index, list) =>
         years.push(list[index].value)
@@ -207,7 +253,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
     it('should handle entering data in Key State Personnel', () => {
       cy.goToKeyStatePersonnel();
-      cy.log('Add blank primary contact');
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
       cy.findByRole('button', { name: /Done/i }).click();
 
@@ -239,7 +284,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@primaryContactVals').contains('Delete').should('not.exist');
       cy.get('@primaryContactVals').contains('Edit').should('exist');
 
-      cy.log('Add blank non-primary key personnel');
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
       cy.findByRole('button', { name: /Done/i }).click();
 
@@ -266,7 +310,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@personnelVals').contains('Delete').should('exist');
       cy.get('@personnelVals').contains('Edit').should('exist');
 
-      cy.log('Add blank key personnel that is chargeable to the project');
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
       // Have to force check; cypress does not think radio buttons are visible
       cy.get('input[type="radio"][value="yes"]')
@@ -318,7 +361,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     it('should handle enter data in Outcomes and Milestones', () => {
       cy.goToOutcomesAndMilestones(0);
 
-      cy.log('should be able to add a blank Outcome');
       cy.findByRole('button', { name: /Add Outcome/i }).click();
 
       activityPage.checkTextField('ds-c-field', '', 0); // Outcome
@@ -334,7 +376,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.contains('Edit').click();
       activityPage.checkMetricFunctionality();
 
-      cy.log('should be able to add Milestone');
       cy.findByRole('button', { name: /Add Milestone/i }).click();
       activityPage.checkInputField('Name', '');
       activityPage.checkDate('Target completion date');
@@ -349,7 +390,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     it('should handle entering data inState Staff and Expenses', () => {
       cy.goToStateStaffAndExpenses(0);
 
-      cy.log('should be able to add a state staff');
       cy.findByRole('button', { name: /Add State Staff/i }).click();
 
       activityPage.checkInputField('Personnel title', '');
@@ -365,7 +405,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         0
       );
 
-      cy.log('should be able to add a state expense');
       cy.findByRole('button', { name: /Add State Expense/i }).click();
       activityPage.checkInputField('Description', '');
       activityPage.checkFFYinputCostFields(years, '');
@@ -410,7 +449,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     it('should handle entering data in Budget and FFP', () => {
       cy.goToBudgetAndFFP(0);
 
-      cy.log('should change calculations based on federal-state split');
       cy.then(() => {
         years.forEach(year => {
           cy.contains(`Budget for FFY ${year}`)
@@ -431,7 +469,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         });
       });
 
-      cy.log('should show the default values in the budget table');
       cy.then(() => {
         years.forEach(year => {
           cy.contains(`Activity 1 Budget for FFY ${year}`)
@@ -541,7 +578,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     it('should display the correct data in Export views', () => {
       cy.goToExportView();
 
-      cy.log('Key State Personnel');
       cy.findByRole('heading', { name: /Key State Personnel/i })
         .parent()
         .as('personnel');
@@ -586,7 +622,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .eq(2)
         .should('have.text', str);
 
-      cy.log('Activities');
       cy.findByRole('heading', {
         name: /Activity 1: Program AdministrationOutcomes and Metrics/i
       })
@@ -690,7 +725,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         });
       });
 
-      cy.log('Activity Schedule Summary');
       exportPage
         .getAllActivityScheduleMilestoneTables()
         .should('have.length', 1);
@@ -704,9 +738,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .getActivityScheduleMilestoneName(0, 0)
         .should('eq', 'Milestone not specified');
 
-      cy.log(
-        'should display the default values in the activity breakdown table'
-      );
       cy.then(() => {
         years.forEach(year => {
           proposedBudgetPage
@@ -757,7 +788,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
 
     it('should handle deleting subform values', () => {
-      cy.log('Key Personnel');
       cy.goToKeyStatePersonnel();
 
       const deleteKeyPersonnel = name => {
@@ -802,7 +832,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .findByRole('heading', { name: /3.*/i })
         .should('not.exist');
 
-      cy.log('Outcomes and Milestones');
       cy.goToOutcomesAndMilestones(0);
 
       activityPage.checkDeleteButton(
@@ -816,8 +845,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         'Delete Milestone?',
         'Milestone not specified'
       );
-
-      cy.log('State Staff and Expenses');
       cy.goToStateStaffAndExpenses(0);
 
       activityPage.checkDeleteButton(
@@ -832,7 +859,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         'Category not specified'
       );
 
-      cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);
 
       activityPage.checkDeleteButton(

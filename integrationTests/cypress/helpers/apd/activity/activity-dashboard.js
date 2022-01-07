@@ -14,9 +14,11 @@ export const testDefaultActivityDashboard = years => {
     cy.contains('Activity 2').should('not.exist');
 
     cy.contains('Delete').should('not.exist');
-    cy.contains('Edit').should('exist');
 
-    cy.contains('Edit').click();
+    cy.get('#activities')
+      .contains('Edit').should('exist')
+      .contains('Edit').click();
+    
     cy.url().should('contain', '/activity/0/overview');
 
     cy.waitForSave();
@@ -118,7 +120,8 @@ export const testActivityDashboardWithData = () => {
 
     cy.contains('Add Activity').click();
     cy.contains('Activity 2: Untitled').should('exist');
-    cy.findAllByText('Edit').eq(1).click();
+    cy.get('#activities')
+      .findAllByText('Edit').eq(1).click();
 
     cy.findByLabelText('Activity name').type(activityOverview.newActivityName);
     cy.findByRole('radio', { name: /HIE/i }).check({ force: true });

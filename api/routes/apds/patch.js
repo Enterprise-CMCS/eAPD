@@ -5,13 +5,7 @@ const { can, userCanEditAPD } = require('../../middleware');
 
 // This is a list of property paths that cannot be changed with this endpoint.
 // Any patches pointing at these paths will be ignored.
-const staticFields = [
-  '/name',
-  '/createdAt',
-  '/updatedAt',
-  '/status',
-  '/stateId'
-];
+const staticFields = ['/createdAt', '/updatedAt', '/status', '/stateId'];
 
 module.exports = (app, { updateAPDDocument = ua } = {}) => {
   logger.silly('setting up PATCH /apds/:id route');

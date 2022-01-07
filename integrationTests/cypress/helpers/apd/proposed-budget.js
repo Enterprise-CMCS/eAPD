@@ -129,42 +129,35 @@ export const testProposedBudgetWithData = years => {
     cy.url().should('include', '/proposed-budget');
     cy.findByRole('heading', { level: 2, name: 'Proposed Budget' });
 
-    cy.log('Summary Budget by Activity, Total Computable Medicaid Cost');
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
       expected: budgetData.dataSummaryBudgetByActivity
     });
 
-    cy.log('Summary Budget by Activity, Activity Breakdown');
     proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
       years,
       activityList,
       expected: budgetData.dataActivityBreakdown
     });
 
-    cy.log('Summary Budget Table by Expense Type, Expense Type tables');
     proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
       years: [...years, 'total'],
       expected: budgetData.dataSummaryBudgetTable.byTypes
     });
 
-    cy.log('Summary Budget Table by Expense Type, Activities Totals table');
     proposedBudgetPage.verifySummaryBudgetTableTotal({
       expected: budgetData.dataSummaryBudgetTable.totals
     });
 
-    cy.log('Quarterly Federal Share by FFY, FFY tables');
     proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
       years,
       expected: budgetData.dataQuarterlyFederalShare
     });
 
-    cy.log('Quarterly Federal Share by FFY, Total tables');
     proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
       expected: budgetData.dataQuarterlyFederalShare
     });
 
-    cy.log('Estimated Quarterly Incentive Payments, FFY tables');
     proposedBudgetPage.fillInEQIPFormByFFY({
       years,
       expected: budgetData.dataEQIP
@@ -177,42 +170,35 @@ export const testProposedBudgetWithData = years => {
   it('should export the correct values for Proposed Budget Export View', () => {
     cy.goToExportView();
 
-    cy.log('Summary Budget by Activity, Total Computable Medicaid Cost');
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
       expected: budgetData.dataSummaryBudgetByActivity
     });
 
-    cy.log('Summary Budget by Activity, Activity Breakdown');
     proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
       years,
       activityList,
       expected: budgetData.dataActivityBreakdown
     });
 
-    cy.log('Summary Budget Table by Expense Type, Expense Type tables');
     proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
       years: [...years, 'total'],
       expected: budgetData.dataSummaryBudgetTable.byTypes
     });
 
-    cy.log('Summary Budget Table by Expense Type, Activities Totals table');
     proposedBudgetPage.verifySummaryBudgetTableTotal({
       expected: budgetData.dataSummaryBudgetTable.totals
     });
 
-    cy.log('Quarterly Federal Share by FFP, FFY tables');
     proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
       years,
       expected: budgetData.dataQuarterlyFederalShare
     });
 
-    cy.log('Quarterly Federal Share by FFP, Total tables');
     proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
       expected: budgetData.dataQuarterlyFederalShare
     });
 
-    cy.log('Estimated Quarterly Incentive Payments, FFY tables');
     proposedBudgetPage.verifyEQIPViewByFFY({
       years,
       expected: budgetData.dataEQIP

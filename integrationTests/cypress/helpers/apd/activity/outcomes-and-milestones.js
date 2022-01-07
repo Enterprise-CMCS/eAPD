@@ -78,7 +78,6 @@ export const testOutcomesAndMilestonesWithData = () => {
       cy.contains(outcomes.names[0]).should('not.exist');
       cy.contains(`Outcome: ${outcomes.names[1]}`).should('exist');
 
-      cy.log('fills out milestones in activity 1');
       cy.goToOutcomesAndMilestones(0);
 
       const milestones = activityData.milestones[0];

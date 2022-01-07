@@ -47,7 +47,6 @@ export const testStateStaffAndExpensesWithData = () => {
         level: 3
       }).should('exist');
 
-      cy.log('State Staff');
       staffExpensesPage.addStaff();
       staffExpensesPage.addStaff();
 
@@ -92,7 +91,6 @@ export const testStateStaffAndExpensesWithData = () => {
         stateStaff[1].ftes
       );
 
-      cy.log('State Expenses');
       staffExpensesPage.addExpense();
       staffExpensesPage.addExpense();
 
@@ -156,7 +154,6 @@ export const testStateStaffAndExpensesWithData = () => {
         level: 3
       }).should('exist');
 
-      cy.log('State Staff');
       staffExpensesPage.addStaff();
       staffExpensesPage.addStaff();
 
@@ -178,7 +175,6 @@ export const testStateStaffAndExpensesWithData = () => {
         );
       });
 
-      cy.log('State Expenses');
       staffExpensesPage.addExpense();
       staffExpensesPage.addExpense();
 
