@@ -9,7 +9,6 @@ exports[`the unexpected error alert component renders as expected if there is an
     className="ds-u-left-border-warning"
     closeButtonText="Close"
     closeButtonVariation="transparent"
-    closeIcon={<CloseIcon />}
     escapeExitDisabled={false}
     escapeExits={true}
     heading={
@@ -89,7 +88,6 @@ exports[`the unexpected error alert component renders as expected if there is an
     className="ds-u-left-border-warning"
     closeButtonText="Close"
     closeButtonVariation="transparent"
-    closeIcon={<CloseIcon />}
     escapeExitDisabled={false}
     escapeExits={true}
     heading={

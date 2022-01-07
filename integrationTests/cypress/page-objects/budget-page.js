@@ -1,75 +1,63 @@
 /* eslint-disable radix */
-import { addCommas, convertDollarStrToNum } from './helper';
-
 class BudgetPage {
-  checkTotalComputableMedicaidCost = ({
-    label = 'Activity Total Computable Medicaid Cost',
-    totalComputableMedicaidCost
-  }) => {
-    cy.get('[class="budget-table--subtotal budget-table--row__header"]')
-      .contains(label)
-      .parent()
-      .should('contain', `$${addCommas(totalComputableMedicaidCost)}`);
+  addCommas = string => {
+    const converted = string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return converted;
   };
 
-  checkActivityTotalCostTable = ({
-    activityTotalCosts,
-    otherFunding,
-    totalComputableMedicaidCost,
-    index
-  } = {}) => {
+  checkTotalComputableMedicaidCost = expectedValue => {
+    const convert = this.addCommas(expectedValue);
+    cy.contains('Total Computable Medicaid Cost')
+      .parent()
+      .should('contain', `$${convert}`);
+  };
+
+  checkActivityTotalCostTable = (activityValue, otherFundingValue, index) => {
+    const medicaidValue = activityValue - otherFundingValue;
+    const converted = this.addCommas(activityValue);
+    const converted2 = this.addCommas(otherFundingValue);
     cy.get('[class="budget-table activity-budget-table"]')
       .eq(index)
       .within(() => {
         cy.contains('Activity Total Cost')
           .parent()
-          .should('contain', `$${addCommas(activityTotalCosts)}`);
+          .should('contain', `$${converted}`);
         cy.contains('Other Funding')
           .parent()
-          .should('contain', `$${addCommas(otherFunding)}`);
-        cy.contains('Total Computable Medicaid Cost')
-          .parent()
-          .should('contain', `$${addCommas(totalComputableMedicaidCost)}`);
+          .should('contain', `$${converted2}`);
+        this.checkTotalComputableMedicaidCost(medicaidValue);
       });
   };
 
-  checkSubtotalTable = ({ title, subtotal, otherFunding } = {}) => {
-    cy.get('.budget-table--row__header')
-      .contains(title)
-      .parent()
-      .nextUntil('.budget-table--row__header')
-      .then($rows => {
-        expect($rows.length).to.be.at.least(2);
-        const secondToLastIndex = $rows.length - 2;
-        const lastIndex = $rows.length - 1;
-        cy.wrap($rows)
-          .eq(secondToLastIndex)
-          .children()
-          .then($cells => {
-            cy.wrap($cells.eq(0)).should('contain', 'Other Funding Amount');
-            cy.wrap($cells.eq(1)).should('have.text', '-');
-            cy.wrap($cells.eq(2)).shouldBeCloseTo(otherFunding);
-          });
-        cy.wrap($rows)
-          .eq(lastIndex)
-          .children()
-          .then($cells => {
-            cy.wrap($cells.eq(0)).should('contain', `${title} Subtotal`);
-            cy.wrap($cells.eq(1)).shouldBeCloseTo(subtotal);
-          });
-      });
+  checkSubtotalTable = (title, otherFundingAmount, keyPersonnelAmount) => {
+    let subtotal;
+    if (title === 'State Staff') {
+      cy.contains(title)
+        .parent()
+        .next()
+        .should('contain', `$${keyPersonnelAmount}`);
+      cy.contains('Other Funding Amount')
+        .parent()
+        .should('contain', `$${otherFundingAmount}`);
+      subtotal = otherFundingAmount + keyPersonnelAmount;
+    } else {
+      cy.contains(title)
+        .parent()
+        .next()
+        .should('contain', `$${otherFundingAmount}`);
+      subtotal = otherFundingAmount;
+    }
+
+    cy.contains(`${title} Subtotal`).parent().should('contain', `$${subtotal}`);
   };
 
-  checkTableRow = ({ title, costs, salary = null, ftes = null } = {}) => {
+  checkTableRow = (title, expectedValue, numFTEs) => {
     cy.contains(title)
       .parent()
       .within(() => {
-        cy.contains(`$${addCommas(costs)}`).should('exist');
-        if (salary) {
-          cy.contains(`$${addCommas(salary)}`).should('exist');
-        }
-        if (ftes) {
-          cy.contains(`${ftes} FTE`).should('exist');
+        cy.contains(`$${expectedValue}`).should('exist');
+        if (Number.isInteger(numFTEs)) {
+          cy.contains(`${numFTEs} FTE`).should('exist');
         }
       });
   };
@@ -85,82 +73,71 @@ class BudgetPage {
       .should('have.value', '90-10');
   };
 
-  checkCostSplitTable = ({
-    federalSharePercentage,
-    federalShareAmount,
-    stateSharePercentage,
-    stateShareAmount,
-    totalComputableMedicaidCost
-  }) => {
-    cy.wrap(federalSharePercentage + stateSharePercentage).should('equal', 1);
+  costSplitTableRow = (fedOrState, split, value, total) => {
+    const convertedVal = this.addCommas(value);
+    const convertedTotal = this.addCommas(total);
 
-    cy.get('[class="budget-table--subtotal budget-table--row__header"]')
-      .contains(/^Total Computable Medicaid Cost$/i)
+    cy.contains(fedOrState)
       .parent()
-      .should('contain', `$${addCommas(totalComputableMedicaidCost)}`)
-      .next()
-      .children($cells => {
-        cy.wrap($cells.eq(0)).should('contain', 'Federal Share');
-        cy.wrap($cells.eq(1)).shouldBeCloseTo(totalComputableMedicaidCost);
-        // cell 2 is X
-        cy.wrap($cells.eq(3)).should(
+      .within(() => {
+        cy.get('[class="budget-table--number"]')
+          .eq(0)
+          .should('contain', `$${convertedVal}`);
+        cy.get('[class="budget-table--number ds-u-padding--0"]').should(
           'have.text',
-          `${federalSharePercentage * 100}%`
+          '×'
         );
-        // cell 4 is =
-        cy.wrap($cells.eq(5)).shouldBeCloseTo(federalShareAmount);
-      })
-      .next()
-      .children($cells => {
-        cy.wrap($cells.eq(0)).should('contain', 'State Share');
-        cy.wrap($cells.eq(1)).shouldBeCloseTo(totalComputableMedicaidCost);
-        // cell 2 is X
-        cy.wrap($cells.eq(3)).should(
-          'have.text',
-          `${stateSharePercentage * 100}%`
+        cy.get('[class="budget-table--number ds-u-text-align--left"]').should(
+          'contain',
+          `${split}%`
         );
-        // cell 4 is =
-        cy.wrap($cells.eq(5)).shouldBeCloseTo(stateShareAmount);
+        cy.get('[class="budget-table--number"]').eq(1).should('contain', '=');
+        cy.get('[class="budget-table--number"]')
+          .eq(2)
+          .should('contain', `$${convertedTotal}`);
       });
   };
 
-  checkFFYtotals = ({
+  checkCostSplitTable = (federal, state, expectedMedicaid) => {
+    const fedTotal = federal * 0.01 * expectedMedicaid;
+    const stateTotal = state * 0.01 * expectedMedicaid;
+
+    if (fedTotal + stateTotal !== expectedMedicaid) {
+      throw new Error('Activity Table Calculation Failure');
+    }
+
+    this.checkTotalComputableMedicaidCost(expectedMedicaid);
+    this.costSplitTableRow(
+      'Federal Share',
+      federal,
+      expectedMedicaid,
+      fedTotal
+    );
+    this.costSplitTableRow('State Share', state, expectedMedicaid, stateTotal);
+  };
+
+  checkFFYtotals = (
     years,
-    activityIndex,
     activityName,
     totalCost,
-    totalOtherFunding,
-    totalTotalMedicaidCost,
-    fundingSplit,
-    totalFederalShare,
+    otherFundingCost,
+    medicaidCost,
+    split,
+    federalShare,
     state,
-    totalStateShare
-  }) => {
-    cy.contains(
-      `Activity ${activityIndex + 1} Budget for FFY ${years[years.length - 1]}`
-    )
-      .parent()
-      .parent()
-      .next()
-      .should('contain', `FFY ${years[0]}-${years[years.length - 1]} Totals`)
+    stateShare
+  ) => {
+    cy.contains(`FFY ${years[0]}-${years[years.length - 1]} Totals`)
       .next()
       .within(() => {
-        cy.contains(
-          `${activityName} activity is $${addCommas(totalCost)}`
-        ).should('exist');
-        cy.contains(`other funding of $${addCommas(totalOtherFunding)}`).should(
+        cy.contains(`${activityName} activity is $${totalCost}`).should(
           'exist'
         );
-        cy.contains(
-          `Medicaid cost is $${addCommas(totalTotalMedicaidCost)}`
-        ).should('exist');
-        cy.contains(fundingSplit).should('exist');
-        cy.contains(`federal share of $${addCommas(totalFederalShare)}`).should(
-          'exist'
-        );
-        cy.contains(`${state} share of $${addCommas(totalStateShare)}`).should(
-          'exist'
-        );
+        cy.contains(`other funding of $${otherFundingCost}`).should('exist');
+        cy.contains(`Medicaid cost is $${medicaidCost}`).should('exist');
+        cy.contains(split).should('exist');
+        cy.contains(`federal share of $${federalShare}`).should('exist');
+        cy.contains(`${state} share of $${stateShare}`).should('exist');
 
         years.forEach(year => {
           cy.contains(year).should('exist');
@@ -168,170 +145,121 @@ class BudgetPage {
       });
   };
 
-  checkSubtotalValue = expectedValue => {
-    cy.get(
-      '[class="budget-table--number budget-table--subtotal"]'
-    ).shouldBeCloseTo(expectedValue);
-  };
-
-  checkSubtotalString = expectedValue => {
+  checkSubtotal = expectedValue => {
     cy.get('[class="budget-table--number budget-table--subtotal"]').should(
       'contain',
       expectedValue
     );
   };
 
-  quarterTablePercentageRow = ({
-    isExportView = false,
-    rowHeader,
-    quarterPercentage = [],
-    subtotalPercentage
-  }) => {
-    cy.contains(rowHeader)
+  quarterTableInputRow = (
+    row,
+    defaultOrExport,
+    expectedValue,
+    expectedSubtotal
+  ) => {
+    cy.contains(row)
       .parent()
       .within(() => {
-        if (isExportView) {
-          quarterPercentage.forEach((quarterPercent, i) => {
-            cy.get('[class="budget-table--number"]')
-              .eq(i)
-              .should('contain', `${quarterPercent} %`);
-          });
-        } else {
-          quarterPercentage.forEach((quarterPercent, i) => {
+        if (defaultOrExport === 'default') {
+          for (let i = 0; i < 4; i += 1) {
             cy.get('[class="ds-c-field budget-table--input__number"]')
               .eq(i)
-              .should('have.value', quarterPercent);
-          });
+              .should('have.value', expectedValue);
+          }
+        } else {
+          for (let i = 0; i < 4; i += 1) {
+            cy.get('[class="budget-table--number"]')
+              .eq(i)
+              .should('contain', `${expectedValue} %`);
+          }
         }
-        this.checkSubtotalString(`+${subtotalPercentage}%`);
+        this.checkSubtotal(`+${expectedSubtotal}%`);
       });
   };
 
-  quarterTableCostRow = ({ rowHeader, quarterCosts = [], subtotalCosts }) => {
-    cy.contains(rowHeader)
+  quarterTableSubtotalRow = (row, expectedValue, expectedSubtotal) => {
+    cy.contains(row)
       .parent()
       .next()
       .within(() => {
-        quarterCosts.forEach((quarterCost, i) => {
+        for (let i = 0; i < 4; i += 1) {
           cy.get('[class="budget-table--number"]')
             .eq(i)
-            .shouldBeCloseTo(quarterCost);
-        });
-        this.checkSubtotalValue(subtotalCosts);
+            .should('contain', `$${expectedValue}`);
+        }
+        this.checkSubtotal(`$${expectedSubtotal}`);
       });
   };
 
-  quarterTableFFPTotalRow = ({ quarterFFPs = [], totalFFP }) => {
+  quarterTableBottomRow = (expectedValue, expectedSubtotal) => {
     cy.contains('Total Enhanced FFP')
       .parent()
       .within(() => {
-        quarterFFPs.forEach((quarterFFP, i) => {
+        for (let i = 0; i < 4; i += 1) {
           cy.get('[class="budget-table--number budget-table--total"]')
             .eq(i)
-            .shouldBeCloseTo(quarterFFP);
-        });
-        this.checkSubtotalValue(totalFFP);
-      });
-  };
-
-  checkQuarterSubtotal = ({
-    stateQuarterlyCosts,
-    contractorQuarterlyCosts
-  } = {}) => {
-    cy.get('[class="budget-table"]').within(() => {
-      cy.get('[data-cy="subtotal"]').then($td => {
-        expect($td.length).to.equal(12);
-        for (let quarter = 0; quarter < 4; quarter += 1) {
-          cy.wrap($td.eq(quarter)).shouldBeCloseTo(
-            stateQuarterlyCosts[quarter],
-            5
-          );
-          cy.wrap($td.eq(quarter + 4)).shouldBeCloseTo(
-            contractorQuarterlyCosts[quarter],
-            5
-          );
+            .should('contain', `$${expectedValue}`);
         }
+        this.checkSubtotal(`$${expectedSubtotal}`);
       });
-    });
   };
 
-  checkSubtotalPercentage = ({
-    stateSubtotalPercentage,
-    contractorSubtotalPercentage
-  } = {}) => {
-    cy.get('[class="budget-table"]').within(() => {
-      cy.get('[class="budget-table--number budget-table--subtotal"]')
-        .eq(0)
-        .should('contain', `+${stateSubtotalPercentage}%`);
-      cy.get('[class="budget-table--number budget-table--subtotal"]')
-        .eq(2)
-        .should('contain', `+${contractorSubtotalPercentage}%`);
-    });
-  };
+  checkQuarterTable = (defaultOrExport, expectedValue, expectedSubtotal) => {
+    this.quarterTableInputRow(
+      'State Staff and Expenses (In-House Costs)',
+      defaultOrExport,
+      expectedValue,
+      expectedSubtotal
+    );
+    this.quarterTableSubtotalRow(
+      'State Staff and Expenses (In-House Costs)',
+      expectedValue,
+      expectedSubtotal
+    );
 
-  checkSubtotalCost = ({ stateSubtotalCost, contractorSubtotalCost } = {}) => {
-    cy.get('[class="budget-table"]').within(() => {
-      cy.get('[class="budget-table--number budget-table--subtotal"]')
-        .eq(1)
-        .shouldBeCloseTo(stateSubtotalCost);
-      cy.get('[class="budget-table--number budget-table--subtotal"]')
-        .eq(3)
-        .shouldBeCloseTo(contractorSubtotalCost);
-    });
-  };
+    this.quarterTableInputRow(
+      'Private Contractor Costs',
+      defaultOrExport,
+      expectedValue,
+      expectedSubtotal
+    );
+    this.quarterTableSubtotalRow(
+      'Private Contractor Costs',
+      expectedValue,
+      expectedSubtotal
+    );
 
-  checkQuarterTable = ({
-    isExportView = false,
-    stateQuarterlyPercentage = ['', '', '', ''],
-    stateSubtotalPercentage = 0,
-    stateQuarterlyCosts = [0, 0, 0, 0],
-    stateSubtotalCost = 0,
-    contractorQuarterlyPercentage = ['', '', '', ''],
-    contractorSubtotalPercentage = 0,
-    contractorQuarterlyCosts = [0, 0, 0, 0],
-    contractorSubtotalCost = 0,
-    quarterFFPs = [0, 0, 0, 0],
-    totalFFP = 0
-  } = {}) => {
-    this.quarterTablePercentageRow({
-      isExportView,
-      rowHeader: 'State Staff and Expenses (In-House Costs)',
-      quarterPercentage: stateQuarterlyPercentage,
-      subtotalPercentage: stateSubtotalPercentage
-    });
-    this.quarterTableCostRow({
-      rowHeader: 'State Staff and Expenses (In-House Costs)',
-      quarterCosts: stateQuarterlyCosts,
-      subtotalCosts: stateSubtotalCost
-    });
-
-    this.quarterTablePercentageRow({
-      isExportView,
-      rowHeader: 'Private Contractor Costs',
-      quarterPercentage: contractorQuarterlyPercentage,
-      subtotalPercentage: contractorSubtotalPercentage
-    });
-    this.quarterTableCostRow({
-      rowHeader: 'Private Contractor Costs',
-      quarterCosts: contractorQuarterlyCosts,
-      subtotalCosts: contractorSubtotalCost
-    });
-
-    this.quarterTableFFPTotalRow({ quarterFFPs, totalFFP });
+    this.quarterTableBottomRow(expectedValue, expectedSubtotal);
   };
 
   // Indexes for subtotals
-  checkSubtotalRows = () => {
-    cy.get('[data-cy="subtotal"]').should($td => {
-      const staffTotal = convertDollarStrToNum($td.eq(0).text());
-      const expensesTotal = convertDollarStrToNum($td.eq(1).text());
-      const contractorTotal = convertDollarStrToNum($td.eq(2).text());
-      const expectedMedicaidTotal = convertDollarStrToNum($td.eq(3).text());
+  checkSubtotalRows = (year, num) => {
+    cy.findAllByText(`Activity ${num} Budget for FFY ${year}`)
+      .parent()
+      .within(() => {
+        cy.get('[data-cy="subtotal"]').should($td => {
+          const staffTotal = this.convertStringToNum($td.eq(0).text());
+          const expensesTotal = this.convertStringToNum($td.eq(1).text());
+          const contractorTotal = this.convertStringToNum($td.eq(2).text());
 
-      const expectedTCMC = staffTotal + expensesTotal + contractorTotal;
+          const calculatedTotal = staffTotal + expensesTotal + contractorTotal;
 
-      expect(expectedTCMC).to.be.closeTo(expectedMedicaidTotal, 5);
-    });
+          const expectedMedicaidTotal = this.convertStringToNum(
+            $td.eq(3).text()
+          );
+
+          if (calculatedTotal !== expectedMedicaidTotal) {
+            throw new Error('Subtotal rows do not add up');
+          }
+        });
+      });
+  };
+
+  convertStringToNum = string => {
+    const minusDollar = string.replace(/\$/g, '');
+    const minusCommas = minusDollar.replace(/,/g, '');
+    return parseInt(minusCommas);
   };
 
   computeFFYtotal = (staff, expenses, contractor) => {
@@ -340,18 +268,18 @@ class BudgetPage {
 
   checkEachQuarterSubtotal = () => {
     cy.get('[class="budget-table"]').within(() => {
-      cy.get('[data-cy="subtotal"]').should($td => {
-        for (let quarter = 0; quarter < 4; quarter += 1) {
-          const stateSubtotal = convertDollarStrToNum($td.eq(quarter).text());
-          const contractorSubtotal = convertDollarStrToNum(
-            $td.eq(quarter + 4).text()
-          );
-          const subtotal = convertDollarStrToNum($td.eq(quarter + 8).text());
+      for (let i = 0; i < 4; i += 1) {
+        cy.get('[data-cy="subtotal"]').should($el => {
+          const subtotal = this.convertStringToNum($el.eq(i).text());
+          const subtotal2 = this.convertStringToNum($el.eq(i + 4).text());
 
-          const expectedSubtotal = stateSubtotal + contractorSubtotal;
-          expect(expectedSubtotal).to.be.closeTo(subtotal, 5);
-        }
-      });
+          const sum = this.convertStringToNum($el.eq(i + 8).text());
+
+          if (subtotal + subtotal2 !== sum) {
+            throw new Error(`Quarter ${i + 1} does not add up`);
+          }
+        });
+      }
     });
   };
 }

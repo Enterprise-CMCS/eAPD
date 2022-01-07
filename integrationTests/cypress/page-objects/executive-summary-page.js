@@ -1,114 +1,90 @@
 /* eslint class-methods-use-this: "off" */
-import { getDateRange } from './helper';
 
 class ExecutiveSummaryPage {
   // 0 based indexing
-  checkActivitySummary = ({
-    index,
-    years,
-    activityName,
-    shortOverview,
-    startDate,
-    endDate,
-    activityTotalCosts,
-    totalComputableMedicaidCost,
-    federalShareAmount,
-    ffys
-  }) => {
-    cy.get('#executive-summary-summary')
+  getActivitySummary = (index) => {
+    return cy.get('#executive-summary-summary')
       .parent()
-      .contains('h4', `Activity ${index + 1}: ${activityName}`)
-      .next()
-      .within(() => {
-        if (shortOverview) {
-          cy.contains(shortOverview);
-        }
-        cy.contains('Start Date - End Date:')
-          .parent()
-          .should('contain', getDateRange(startDate, endDate));
-        cy.contains('Total Cost of Activity:')
-          .next()
-          .shouldBeCloseTo(activityTotalCosts);
-        cy.contains('Total Computable Medicaid Cost:')
-          .parent()
-          .siblings($el => {
-            cy.wrap($el[1]).shouldBeCloseTo(totalComputableMedicaidCost);
-            cy.wrap($el[3]).shouldBeCloseTo(federalShareAmount);
-          });
-        ffys.forEach(
-          (
-            {
-              activityTotalCosts: ffyATC,
-              totalComputableMedicaidCost: ffyTCMC,
-              federalShareAmount: ffyFSA
-            },
-            i
-          ) => {
-            cy.contains('strong', `FFY ${years[i]}`)
-              .parent()
-              .siblings($el => {
-                cy.wrap($el[1]).shouldBeCloseTo(ffyATC);
-                cy.wrap($el[4]).shouldBeCloseTo(ffyTCMC);
-                cy.wrap($el[6]).shouldBeCloseTo(ffyFSA);
-              });
-          }
-        );
-      });
+      .contains('div', `Activity ${index + 1}:`)
   };
 
-  checkTotalCostSummary = ({
-    years,
-    totalCost,
-    totalTotalMedicaidCost,
-    totalFederalShare,
-    ffys
-  }) => {
-    cy.get('#executive-summary-summary')
+  getActivityName = (index) => {
+    return cy.get('#executive-summary-summary')
       .parent()
-      .contains('h4', 'Total Cost')
-      .next()
-      .within(() => {
-        cy.contains('Federal Fiscal Years Requested:')
-          .parent()
-          .should('contain', years.join(', '));
-        cy.contains('Total Computable Medicaid Cost:')
-          .parent()
-          .siblings($el => {
-            cy.wrap($el[1]).shouldBeCloseTo(totalTotalMedicaidCost);
-            cy.wrap($el[3]).shouldBeCloseTo(totalFederalShare);
-          });
-        cy.contains('Total Funding Request:').next().shouldBeCloseTo(totalCost);
-        ffys.forEach(
-          (
-            {
-              activityTotalCosts,
-              totalComputableMedicaidCost,
-              federalShareAmount
-            },
-            i
-          ) => {
-            cy.contains('strong', `FFY ${years[i]}`)
-              .parent()
-              .siblings($el => {
-                cy.wrap($el[1]).shouldBeCloseTo(activityTotalCosts);
-                cy.wrap($el[4]).shouldBeCloseTo(totalComputableMedicaidCost);
-                cy.wrap($el[6]).shouldBeCloseTo(federalShareAmount);
-              });
-          }
-        );
-      });
-  };
+      .contains(`Activity ${index + 1}:`)
+  }
 
-  getTableRows = ({ title, year }) => {
-    cy.contains('table', title).as('table');
-    if (year) {
-      return cy.get('@table').contains(`FFY ${year}`).siblings();
+  getActivityDates = (index) => {
+    return this.getActivitySummary(index)
+      .contains('li', /Start date - End date:/i)
+  }
+
+  getActivityCost = (index) => {
+    return this.getActivitySummary(index)
+      .contains('li', /Total cost of activity:/i)
+  }
+
+  getActivityMedicaidCost = (index, year) => {
+    if(year) {
+      return this.getActivitySummary(index)
+        .contains('li', `FFY ${year}:`)
     }
-    return cy
-      .get('@table')
-      .contains(/^Total$/i)
-      .siblings();
+    return this.getActivitySummary(index)
+      .contains('li', /Total Computable Medicaid Cost:/i)
+  }
+
+  clickActivityEdit = (index) => {
+    this.getActivitySummary(index)
+      .parent()
+      .findByRole('button', { name:/Edit/i })
+      .click()
+  }
+
+  getTotalCostDiv = () => {
+    return cy.get('#executive-summary-summary')
+      .parent()
+      .findByRole('heading', { name: /Total cost/i })
+      .parent()
   };
+
+  getRequestedFiscalYears = () => {
+    return this.getTotalCostDiv()
+      .contains('li', /Federal Fiscal Years requested:/i);
+  }
+
+  getTotalMedicaidCost = () => {
+    return this.getTotalCostDiv()
+      .contains('li', /Total Computable Medicaid Cost:/i);
+  }
+
+  getTotalFundingRequest = () => {
+    return this.getTotalCostDiv()
+      .contains('li', /Total Funding Request:/i);
+  }
+
+  getTotalYearCost = (year) => {
+    return this.getTotalCostDiv()
+      .contains('li', `FFY ${year}:`);
+  }
+
+  getTableRows = (costCategory, year) => {
+    cy.contains('table', costCategory)
+      .as('table')
+    if(year) {
+      return cy.get('@table')
+        .contains(`FFY ${year}`)
+        .siblings()
+    }
+    return cy.get('@table')
+      .contains(/^Total$/i)
+      .siblings()
+  }
+
+  getCategoryCells = (source, payer) => {
+    return cy.get(`[headers="program-budget-table-${source} `
+    + `program-budget-table-${source}-${payer}"]`);
+  }
+
 }
 
 export default ExecutiveSummaryPage;

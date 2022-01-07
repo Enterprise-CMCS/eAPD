@@ -1,6 +1,5 @@
 import ActivityPage from '../../../page-objects/activity-page';
 import PopulatePage from '../../../page-objects/populate-page';
-import ExportPage from '../../../page-objects/export-page';
 
 export const testDefaultOutcomesAndMilestones = () => {
   it('should display the default activity overview', () => {
@@ -20,20 +19,7 @@ export const testDefaultOutcomesAndMilestones = () => {
     cy.waitForSave();
   });
 
-  it('should display the default activity overview in the export view', () => {
-    const exportPage = new ExportPage();
-
-    cy.goToExportView();
-
-    exportPage.checkOutcomes({
-      activityHeader: 'Activity 1: Program Administration'
-    });
-    exportPage.checkMilestones({
-      activityHeader: 'Activity 1: Program Administration'
-    });
-
-    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
-  });
+  // TODO: export view tests
 };
 
 export const testOutcomesAndMilestonesWithData = () => {
@@ -70,15 +56,19 @@ export const testOutcomesAndMilestonesWithData = () => {
       const outcomes = activityData.outcomes[0];
 
       Cypress._.times(2, i => {
-        populatePage.fillOutcomeForm({
-          outcome: outcomes.names[i],
-          metrics: outcomes.metrics[i]
-        });
+        cy.findByRole('button', { name: /Add Outcome/i }).click();
 
-        activityPage.checkOutcomeOutput({
-          outcome: outcomes.names[i],
-          metrics: outcomes.metrics[i]
-        });
+        populatePage.fillOutcomeForm(
+          outcomes.names[i],
+          outcomes.metrics[i][0],
+          outcomes.metrics[i][1]
+        );
+
+        activityPage.checkOutcomeOutput(
+          outcomes.names[i],
+          outcomes.metrics[i][0],
+          outcomes.metrics[i][1]
+        );
       });
 
       cy.contains('Delete').click();
@@ -94,15 +84,15 @@ export const testOutcomesAndMilestonesWithData = () => {
       Cypress._.times(2, i => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
 
-        populatePage.fillMilestoneForm({
-          milestone: milestones.names[i],
-          targetDate: milestones.dates[i]
-        });
+        populatePage.fillMilestoneForm(
+          milestones.names[i],
+          milestones.dates[i]
+        );
 
-        activityPage.checkMilestoneOutput({
-          milestone: `${i + 1}. ${milestones.names[i]}`,
-          targetDate: milestones.dates[i].join('/')
-        });
+        activityPage.checkMilestoneOutput(
+          `${i + 1}. ${milestones.names[i]}`,
+          `${milestones.dates[i][0]}/${milestones.dates[i][1]}/${milestones.dates[i][2]}`
+        );
       });
 
       cy.findAllByText('Delete').eq(1).click();
@@ -116,28 +106,7 @@ export const testOutcomesAndMilestonesWithData = () => {
       cy.waitForSave();
     });
 
-    it('should display the default activity overview in the export view', () => {
-      const exportPage = new ExportPage();
-      cy.goToExportView();
-
-      const { name } = activityData.activityOverview[0];
-      const outcomes = activityData.outcomes[0];
-      const milestones = activityData.milestones[0];
-
-      exportPage.checkOutcomes({
-        activityHeader: `Activity 1: ${name}`,
-        outcome: outcomes.names[1],
-        metrics: outcomes.metrics[1]
-      });
-
-      exportPage.checkMilestones({
-        activityHeader: `Activity 1: ${name}`,
-        milestone: milestones.names[1],
-        milestoneCompletionDate: milestones.dates[1].join('/')
-      });
-
-      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
-    });
+    // TODO: export view tests
   });
 
   describe('Activity 2', () => {
@@ -150,49 +119,31 @@ export const testOutcomesAndMilestonesWithData = () => {
         name: /^Activity 2:/i,
         level: 2
       }).should('exist');
+      cy.findByRole('heading', { name: /Outcomes and Metrics/i }).should(
+        'exist'
+      );
 
       const outcomes = activityData.outcomes[1];
       const milestones = activityData.milestones[1];
 
       Cypress._.times(2, i => {
-        populatePage.fillOutcomeForm({
-          outcome: outcomes.names[i],
-          metrics: outcomes.metrics[i]
-        });
+        cy.findByRole('button', { name: /Add Outcome/i }).click();
+        populatePage.fillOutcomeForm(
+          outcomes.names[i],
+          outcomes.metrics[i][0],
+          outcomes.metrics[i][1]
+        );
 
         cy.findByRole('button', { name: /Add Milestone/i }).click();
-        populatePage.fillMilestoneForm({
-          milestone: milestones.names[i],
-          targetDate: milestones.dates[i]
-        });
+        populatePage.fillMilestoneForm(
+          milestones.names[i],
+          milestones.dates[i]
+        );
       });
 
       cy.waitForSave();
     });
 
-    it('should display the default activity overview in the export view', () => {
-      const exportPage = new ExportPage();
-      cy.goToExportView();
-
-      const { name } = activityData.activityOverview[1];
-      const outcomes = activityData.outcomes[1];
-      const milestones = activityData.milestones[1];
-
-      Cypress._.times(2, i => {
-        exportPage.checkOutcomes({
-          activityHeader: `Activity 2: ${name}`,
-          outcome: outcomes.names[i],
-          metrics: outcomes.metrics[i]
-        });
-
-        exportPage.checkMilestones({
-          activityHeader: `Activity 2: ${name}`,
-          milestone: milestones.names[i],
-          milestoneCompletionDate: milestones.dates[i].join('/')
-        });
-      });
-
-      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
-    });
+    // TODO: export view tests
   });
 };

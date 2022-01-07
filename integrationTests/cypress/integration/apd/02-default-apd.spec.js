@@ -37,7 +37,23 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   });
 
   after(() => {
+<<<<<<< HEAD
+    cy.useStateStaff();
+    cy.get(`a[href='${apdUrl}']`).should('exist');
+
+    cy.get(`a[href='${apdUrl}']`)
+      .parent()
+      .parent()
+      .parent()
+      .contains('Delete')
+      .click();
+
+    cy.get('.ds-c-button--danger').click();
+
+    cy.get(`a[href='${apdUrl}']`).should('not.exist');
+=======
     cy.deleteAPD(apdId);
+>>>>>>> tforkner/3100-move-apds-to-mongodb
   });
 
   describe('Form View', () => {
