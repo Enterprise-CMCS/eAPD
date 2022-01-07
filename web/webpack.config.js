@@ -85,7 +85,10 @@ const config = {
       },
       {
         test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/[hash][ext][query]'
+        }
       },
       {
         test: /\.yaml$/,

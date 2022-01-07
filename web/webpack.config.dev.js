@@ -5,13 +5,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   mode: 'development',
-  entry: {
-    js: [path.join(__dirname, 'src/app.dev.js')]
-  },
+  entry: [
+    'webpack/hot/dev-server.js',
+    'webpack-dev-server/client/index.js?hot=true&live-reload=true',
+    path.join(__dirname, 'src/app.dev.js')
+  ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js',
-    publicPath: '/'
+    publicPath: '/',
+    assetModuleFilename: 'images/[hash][ext][query]'
   },
   module: {
     rules: [
@@ -53,7 +56,10 @@ const config = {
       },
       {
         test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/[hash][ext][query]'
+        }
       },
       {
         test: /\.yaml$/,
@@ -70,6 +76,7 @@ const config = {
       OKTA_SERVER_ID: '',
       OKTA_CLIENT_ID: ''
     }),
+    // Plugin for hot module replacement
     new webpack.HotModuleReplacementPlugin(),
     // Inject our app scripts into our HTML kickstarter
     new HtmlWebpackPlugin({
@@ -80,13 +87,15 @@ const config = {
   devtool: 'eval-source-map',
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'src/static'),
+      directory: path.resolve(__dirname, './dist/static'),
       publicPath: '/static/'
     },
     historyApiFallback: true,
     host: '0.0.0.0',
-    hot: true,
-    port: '8001'
+    port: '8001',
+    // Dev server client for web socket transport, hot and live reload logic
+    hot: false,
+    client: false
   }
 };
 
