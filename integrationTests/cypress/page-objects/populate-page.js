@@ -55,10 +55,11 @@ class PopulatePage {
   fillOutcomeForm = ({ outcome, metrics } = {}) => {
     cy.findByRole('button', { name: /Add Outcome/i }).click();
     this.fillTextField('ds-c-field', outcome, 0);
+    cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
     metrics.forEach((metric, index) => {
       this.fillTextField('ds-c-field', metric, index + 1);
       if (index < metrics.length - 1) {
-        cy.findByRole('button', { name: /Add Metric/i }).click();
+        cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
       }
     });
     cy.findByRole('button', { name: /Done/i }).click();
