@@ -53,12 +53,25 @@ const ContractorResourceForm = forwardRef(
             ...state,
             [action.field]: action.payload
           }
-        case 'updateCosts':
+        case 'setHourly':
           return {
             ...state,
-            costs: {
-              ...state.costs,
-              [action.year]: action.value
+            hourly: {
+              data: { 
+                ...state.hourly.data
+              },
+              useHourly: action.payload
+            }
+          }
+        case 'updateHourly':
+          return {
+            ...state,
+            hourly: {
+              ...state.hourly.useHourly,
+              data: {
+                ...state.hourly.data,
+                [action.year]: action.value  
+              }
             }
           }
         default:
@@ -79,9 +92,8 @@ const ContractorResourceForm = forwardRef(
     );
     
     useEffect(() => {
-      console.log("appdFFYS", apdFFYs);
-      console.log("item is...", item);
-      console.log("state.start is...", state.start);
+      console.log("state:", state);
+      console.log('apdFFYs', apdFFYs);
     }, [state])
     
     const handleSubmit = e => {
@@ -98,27 +110,32 @@ const ContractorResourceForm = forwardRef(
     };
   
     const setHourlyOff = () => {
-      setIsHourly(activityIndex, index, false);
-  
-      // set cost to non-hourly cost saved from last time the radio button was switched (if any)
-      apdFFYs.forEach(ffy => {
-        if (nonHourlyCost[ffy]) {
-          setCostForYear(activityIndex, index, ffy, nonHourlyCost[ffy]);
-        }
-      });
+      dispatch({ type: 'setHourly', payload: false })
+  //     setIsHourly(activityIndex, index, false);
+  // 
+  //     // set cost to non-hourly cost saved from last time the radio button was switched (if any)
+  //     apdFFYs.forEach(ffy => {
+  //       if (nonHourlyCost[ffy]) {
+  //         setCostForYear(activityIndex, index, ffy, nonHourlyCost[ffy]);
+  //       }
+  //     });
     };
   
     const setHourlyOn = () => {
+      // setIsHourly(activityIndex, index, true);
+      dispatch({ type: 'setHourly', payload: true })
+      
       // save non-hourly cost in case the radio button is switched back to non-hourly
       setNonHourlyCost(
-        apdFFYs.reduce((o, ffy) => ({ ...o, [ffy]: years[ffy] }), {})
+        apdFFYs.reduce((o, ffy) => ({ ...o, [ffy]: state.years[ffy] }), {})
       );
   
-      setIsHourly(activityIndex, index, true);
   
       // set cost to hours x rate
       apdFFYs.forEach(ffy => {
-        if (hourly.data[ffy].hours && hourly.data[ffy].rate) {
+        if (state.hourly.data[ffy].hours && state.hourly.data[ffy].rate) {
+          dispatch({ type: 'updateHourly', year: ffy, value: state.hourly.data[ffy].hours * state.hourly.data[ffy].rate })
+          
           setCostForYear(
             activityIndex,
             index,
@@ -211,9 +228,7 @@ const ContractorResourceForm = forwardRef(
             checked={!state.hourly.useHourly}
             label="No"
             name={`apd-activity-contractor-hourly-${state.key}-no`}
-            onChange={e =>
-              dispatch({ type: 'updateField', field: 'hourly', payload: e.target.value })
-            }
+            onChange={setHourlyOff}
             type="radio"
             value="no"
           />
@@ -221,12 +236,13 @@ const ContractorResourceForm = forwardRef(
             checked={state.hourly.useHourly}
             label="Yes"
             name={`apd-activity-contractor-hourly-${state.key}-yes`}
-            onChange={() => {}}
+            onChange={setHourlyOn}
             type="radio"
             value="yes"
             checkedChildren={
               <div className="ds-c-choice__checkedChild">
                 {apdFFYs.map(ffy => (
+                  console.log("hey its working", state.hourly.data),
                   <Fragment key={ffy}>
                     <FormLabel>FFY {ffy}</FormLabel>
                     <div className="ds-l-row ds-u-padding-left--2">
@@ -235,9 +251,8 @@ const ContractorResourceForm = forwardRef(
                         name={`contractor-num-hours-ffy-${ffy}`}
                         labelClassName="ds-u-margin-top--1"
                         size="medium"
-                        value={1}
-                        // value={state.hourly.data[ffy].hours}
-                        // onChange={getHandlerForYearlyHours(ffy)}
+                        value={state.hourly.data[ffy].hours}
+                        onChange={getHandlerForYearlyHours(ffy)}
                       />
                       <DollarField
                         className="ds-u-margin-left--1"
@@ -245,12 +260,12 @@ const ContractorResourceForm = forwardRef(
                         name={`contractor-hourly-rate-ffy-${ffy}`}
                         labelClassName="ds-u-margin-top--1"
                         size="medium"
-                        value={1}
-                        // value={state.hourly.data[ffy].rate}
-                        // onChange={getHandlerForYearlyHourlyRate(ffy)}
+                        value={state.hourly.data[ffy].rate}
+                        onChange={getHandlerForYearlyHourlyRate(ffy)}
                       />
                     </div>
                   </Fragment>
+
                 ))}
               </div>
             }
