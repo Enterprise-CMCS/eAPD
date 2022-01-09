@@ -27,13 +27,7 @@ export const testDefaultBudgetAndFFP = years => {
             budgetPage.checkSubtotalTable('Other State Expenses', 0);
             budgetPage.checkSubtotalTable('Private Contractor', 0);
             budgetPage.checkTotalComputableMedicaidCost(0);
-            budgetPage.checkActivityTotalCostTable(0, 0, 1);
 
-<<<<<<< HEAD
-            budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
-
-            budgetPage.checkQuarterTable('default', '', 0);
-=======
             budgetPage.checkActivityTotalCostTable({
               index: 1,
               activityTotalCosts: 0,
@@ -49,7 +43,6 @@ export const testDefaultBudgetAndFFP = years => {
               totalComputableMedicaidCost: 0
             });
             budgetPage.checkQuarterTable();
->>>>>>> tforkner/3100-move-apds-to-mongodb
           });
       });
       budgetPage.checkFFYtotals(
