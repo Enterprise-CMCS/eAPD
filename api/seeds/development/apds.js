@@ -1,5 +1,3 @@
-const { seed } = require('../shared/apds');
-
 const apd = {
   years: ['2022', '2023'],
   name: 'HITECH IAPD',
@@ -779,18 +777,12 @@ const apd = {
 
 const data = [
   {
-    model: 'APD',
-    documents: [
-      {
-        stateId: 'ak',
-        status: 'draft',
-        ...apd
-      }
-    ]
+    stateId: 'ak',
+    status: 'draft',
+    ...apd
   }
 ];
 
 module.exports = {
-  apd,
-  seed: () => seed(data)
+  data
 };

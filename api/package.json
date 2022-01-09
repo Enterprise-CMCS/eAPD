@@ -15,7 +15,9 @@
     "mongoose-migrate": "migrate --config mongo-migrate.js --autosync up",
     "mongoose-migrate-down": "migrate --config mongo-migrate.js down",
     "migrate": "npm run knex-migrate && npm run mongoose-migrate",
-    "seed": "knex seed:run --specific=main.js",
+    "knex-seed": "knex seed:run --specific=main.js",
+    "mongoose-seed": "md-seed run --dropdb && md-seed run",
+    "seed": "npm run knex-seed && npm run mongoose-seed",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost npm run seed",
     "seed-users": "knex seed:run --specific=base-users.js",
     "start": "node main.js",
@@ -99,8 +101,8 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.4",
     "migrate-mongoose": "^4.0.0",
-    "mongoose": "^5.13.9",
-    "mongoose-seed": "^0.6.0",
+    "mongoose": "^6.1.5",
+    "mongoose-data-seed": "^2.1.6",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
@@ -142,5 +144,8 @@
     "setupFilesAfterEnv": [
       "./jest.setup.js"
     ]
+  },
+  "mdSeed": {
+    "seedersFolder": "./mongo-seeds"
   }
 }

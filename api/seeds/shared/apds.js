@@ -6,8 +6,11 @@ exports.seed = data =>
     try {
       seeder.connect(
         process.env.MONGO_URL,
-        { useUnifiedTopology: true },
-        () => {
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        err => {
+          if (err) reject(err);
+
+          logger.verbose('Setting up MongoDB connection');
           // Load Mongoose models
           seeder.loadModels(['./models/apd.js']);
 

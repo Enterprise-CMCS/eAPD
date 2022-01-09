@@ -64,6 +64,7 @@ services:
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
       - MONGO_DATABASE=${MONGO_DATABASE}
+      - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=eapd}
       - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd}
       - CYPRESS_TESTS=${CYPRESS_TESTS}
     volumes:

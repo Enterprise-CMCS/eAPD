@@ -8,8 +8,7 @@ const setup = () =>
     logger.verbose('Setting up MongoDB connection');
     const connectionString =
       process.env.MONGO_URL || 'mongodb://mongo:cms@mongo:27017/eapd';
-    const dbName =
-      process.env.MONGO_DATABASE || connectionString.split('/').pop();
+    const dbName = process.env.MONGO_DATABASE || 'eapd';
     return mongoose
       .connect(connectionString, {
         useNewUrlParser: true,
