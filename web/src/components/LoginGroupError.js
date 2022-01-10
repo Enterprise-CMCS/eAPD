@@ -9,7 +9,7 @@ const LoginGroupError = ({ onCancel }) => {
       <div className="ds-l-container">
         <div className="login-card login-card__error">
           <h1 className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center ds-u-margin--0">
-            <img src="/static/icons/error.svg" alt="Error Icon" height="40" />
+            <img src="static/icons/error.svg" alt="Error Icon" height="40" />
             <span>Job Code Missing</span>
           </h1>
           <p>

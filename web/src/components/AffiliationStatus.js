@@ -3,7 +3,10 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Instruction from './Instruction';
-import { getUserStateOrTerritory, getUserStateOrTerritoryStatus } from '../reducers/user.selector';
+import {
+  getUserStateOrTerritory,
+  getUserStateOrTerritoryStatus
+} from '../reducers/user.selector';
 import { AFFILIATION_STATUSES } from '../constants';
 import UpgradeBrowser from './UpgradeBrowser';
 import axios from '../util/api';
@@ -32,22 +35,27 @@ const ApprovalStatus = ({ status, mailTo, administratorType }) => {
 
   return (
     <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center ds-u-margin-y--4">
-      <img alt={options[status].alt} src={options[status].src} width={options[status].width} />
+      <img
+        alt={options[status].alt}
+        src={options[status].src}
+        width={options[status].width}
+      />
       <h3 className="ds-u-margin-bottom--1">{options[status].status}</h3>
       <p className="ds-u-margin--0">
         Contact the{' '}
-        {mailTo && <a href={`mailto:${mailTo}`}>{administratorType} Administrator</a>} for more
-        information.
+        {mailTo && (
+          <a href={`mailto:${mailTo}`}>{administratorType} Administrator</a>
+        )}{' '}
+        for more information.
       </p>
     </div>
-  )
+  );
 };
 ApprovalStatus.propTypes = {
   status: PropType.string.isRequired,
   mailTo: PropType.string.isRequired,
   administratorType: PropType.string.isRequired
 };
-
 
 // TODO: We'll have to figure out a way to only show this the first time they go into an approved state?
 // const Approved = () => (
@@ -88,7 +96,7 @@ const AffiliationStatus = ({ state, approvalStatus }) => {
                   data-testid="eAPDlogo"
                 >
                   <img
-                    src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
+                    src="static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
                     alt="eAPD Logo"
                   />
                 </div>
@@ -103,7 +111,7 @@ const AffiliationStatus = ({ state, approvalStatus }) => {
             <ApprovalStatus
               status={approvalStatus}
               mailTo={mailTo || 'CMS-EAPD@cms.hhs.gov'}
-              administratorType='State'
+              administratorType="State"
             />
           </div>
         </main>

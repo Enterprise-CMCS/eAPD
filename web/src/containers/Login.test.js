@@ -109,7 +109,7 @@ describe('login component', () => {
   });
 
   it('should show the warning text if heartbeat returns an error', async () => {
-    fetchMock.onGet('/heartbeat').reply(500, {});
+    fetchMock.onGet('/heartbeat').timeout();
     const { getByText } = setup();
 
     await waitFor(() => {
