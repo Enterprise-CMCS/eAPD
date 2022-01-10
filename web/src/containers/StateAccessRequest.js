@@ -249,7 +249,7 @@ const StateAccessRequest = ({
             />
             <img
               className="eapd-autocomplete__search-icon"
-              src="/static/icons/search.svg"
+              src="static/icons/search.svg"
               alt="Search icon"
             />
           </Autocomplete>
