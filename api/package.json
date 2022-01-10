@@ -77,16 +77,16 @@
     "@okta/jwt-verifier": "^2.3.0",
     "@okta/okta-sdk-nodejs": "^6.2.0",
     "ajv": "^8.8.2",
-    "aws-sdk": "^2.1052.0",
+    "aws-sdk": "^2.1053.0",
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
-    "chalk": "^4.1.2",
+    "chalk": "^5.0.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
-    "file-type": "^16.5.3",
+    "file-type": "^17.1.1",
     "form-data": "^4.0.0",
     "jsonpatch": "^3.0.1",
     "jsonpointer": "^5.0.0",
@@ -99,7 +99,7 @@
     "sharp": "^0.29.3",
     "swagger-ui-express": "^4.3.0",
     "uuid": "^8.3.2",
-    "winston": "^3.3.3"
+    "winston": "^3.3.4"
   },
   "engines": {
     "node": "^14.16.0"
