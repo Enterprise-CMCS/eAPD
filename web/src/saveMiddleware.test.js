@@ -47,7 +47,7 @@ describe('automatic save middleware', () => {
     const DEBOUNCE_TIME = 300;
 
     beforeEach(() => {
-      jest.useFakeTimers();
+      jest.useFakeTimers('legacy');
     });
 
     const next = jest.fn().mockReturnValue('bob');
@@ -90,23 +90,14 @@ describe('automatic save middleware', () => {
     });
 
     xit('queues an incoming save if a save is already in progress, then executes that save when the previous save succeeds', () => {
-      const saveResolvers = [];
-      const actionResolvers = [];
-
-      const saveAction = jest.fn().mockReturnValue(() =>
-        new Promise(resolve => {
-          saveResolvers.push(resolve);
-        }).then(() => {
-          store.dispatch({ type: 'save apd' });
-        })
-      );
-      const activityAction = jest.fn().mockReturnValue(() =>
-        new Promise(resolve => {
-          actionResolvers.push(resolve);
-        }).then(() => {
-          store.dispatch({ type: 'activity performed' });
-        })
-      );
+      const saveAction = jest
+        .fn()
+        .mockReturnValue(async () => store.dispatch({ type: 'save apd' }));
+      const activityAction = jest
+        .fn()
+        .mockReturnValue(async () =>
+          store.dispatch({ type: 'activity performed' })
+        );
 
       const middleware = saveMiddleware(store, { saveAction, activityAction })(
         next
@@ -132,10 +123,6 @@ describe('automatic save middleware', () => {
       jest.advanceTimersByTime(DEBOUNCE_TIME);
       expect(saveAction.mock.calls.length).toBe(1);
       expect(activityAction.mock.calls.length).toBe(1);
-
-      // Complete the initial save.
-      saveResolvers[0]();
-      actionResolvers[0]();
 
       // Now advance the timer, and make sure the save has been triggered a
       // second time. This is where we make sure the enqueued save actually
@@ -163,23 +150,14 @@ describe('automatic save middleware', () => {
     });
 
     it('queues an incoming save if a save is already in progress, then executes that save when the previous save fails', () => {
-      const saveRejectors = [];
-      const actionRejectors = [];
-
-      const saveAction = jest.fn().mockReturnValue(() =>
-        new Promise((_, reject) => {
-          saveRejectors.push(reject);
-        }).then(() => {
-          store.dispatch({ type: 'save apd' });
-        })
-      );
-      const activityAction = jest.fn().mockReturnValue(() =>
-        new Promise((_, reject) => {
-          actionRejectors.push(reject);
-        }).then(() => {
-          store.dispatch({ type: 'activity performed' });
-        })
-      );
+      const saveAction = jest
+        .fn()
+        .mockReturnValue(async () => store.dispatch({ type: 'save failed' }));
+      const activityAction = jest
+        .fn()
+        .mockReturnValue(async () =>
+          store.dispatch({ type: 'activity performed' })
+        );
 
       const middleware = saveMiddleware(store, { saveAction, activityAction })(
         next
@@ -205,10 +183,6 @@ describe('automatic save middleware', () => {
       jest.advanceTimersByTime(DEBOUNCE_TIME);
       expect(saveAction.mock.calls.length).toBe(1);
       expect(activityAction.mock.calls.length).toBe(1);
-
-      // Fail the initial save.
-      saveRejectors[0]();
-      actionRejectors[0]();
 
       // Now advance the timer, and make sure the save has been triggered a
       // second time. This is where we make sure the enqueued save actually
@@ -237,23 +211,14 @@ describe('automatic save middleware', () => {
     });
 
     xit('queues an incoming save if a save is already in progress, then executes that save when the previous save fails', () => {
-      const saveRejectors = [];
-      const actionRejectors = [];
-
-      const saveAction = jest.fn().mockReturnValue(() =>
-        new Promise((_, reject) => {
-          saveRejectors.push(reject);
-        }).then(() => {
-          store.dispatch({ type: 'save apd' });
-        })
-      );
-      const activityAction = jest.fn().mockReturnValue(() =>
-        new Promise((_, reject) => {
-          actionRejectors.push(reject);
-        }).then(() => {
-          store.dispatch({ type: 'activity performed' });
-        })
-      );
+      const saveAction = jest
+        .fn()
+        .mockReturnValue(async () => store.dispatch({ type: 'save apd' }));
+      const activityAction = jest
+        .fn()
+        .mockReturnValue(async () =>
+          store.dispatch({ type: 'activity performed' })
+        );
 
       const middleware = saveMiddleware(store, { saveAction, activityAction })(
         next
@@ -279,10 +244,6 @@ describe('automatic save middleware', () => {
       jest.advanceTimersByTime(DEBOUNCE_TIME);
       expect(saveAction.mock.calls.length).toBe(1);
       expect(activityAction.mock.calls.length).toBe(1);
-
-      // Fail the initial save.
-      saveRejectors[0]();
-      actionRejectors[0]();
 
       // Now advance the timer, and make sure the save has been triggered a
       // second time. This is where we make sure the enqueued save actually

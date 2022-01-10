@@ -40,11 +40,16 @@ const CheckCircle = ({ ...props }) => (
 const File = ({ ...props }) => <FontAwesomeIcon icon={faFileAlt} {...props} />;
 const Envelope = () => <FontAwesomeIcon icon={faEnvelope} />;
 const PDFFile = () => (
-  <img src="/static/img/pdf_doc.svg" alt="PDF" width="16em" />
+  <img src="static/img/pdf_doc.svg" alt="PDF" width="16em" />
 );
 const PDFFileBlue = () => (
-  <img src="/static/icons/pdf_blue.svg" width="15.24px" height="19px" alt="PDF document icon" />
-)
+  <img
+    src="static/icons/pdf_blue.svg"
+    width="15.24px"
+    height="19px"
+    alt="PDF document icon"
+  />
+);
 const LockIcon = () => <FontAwesomeIcon icon={faLock} />;
 const Spinner = ({ ...props }) => (
   <FontAwesomeIcon icon={faSpinner} {...props} />

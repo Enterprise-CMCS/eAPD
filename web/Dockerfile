@@ -10,4 +10,4 @@ ADD ./package-lock.json .
 
 RUN npm ci
 
-CMD npm run start -- --public=0.0.0.0:8080
+CMD npm run start
