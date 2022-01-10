@@ -14,5 +14,9 @@ module.exports = {
     '\\.js?$': 'babel-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
+  transformIgnorePatterns: [
+    // add node_modules here that _should_ be transformed
+    '/node_modules/(?!d3-array|d3-format|d3-geo).+\\.js$'
+  ],
   moduleFileExtensions: ['js', 'yaml']
 };

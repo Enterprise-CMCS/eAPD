@@ -20,15 +20,12 @@ const config = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: {
-          and: [/node_modules/], // Exclude libraries in node_modules ...
-          not: [
-            // Except for a few of them that needs to be transpiled because they use modern syntax
-            /unfetch/,
-            /d3-array|d3-scale|d3-format/,
-            /@hapi[\\/]joi-date/
-          ]
-        },
+        include: [
+          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, 'node_modules/d3-array'),
+          path.resolve(__dirname, 'node_modules/d3-format'),
+          path.resolve(__dirname, 'node_modules/d3-geo')
+        ],
         use: {
           loader: 'babel-loader',
           options: {

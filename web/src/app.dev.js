@@ -1,3 +1,4 @@
+/* eslint-disable import/no-import-module-exports */
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import '@okta/okta-auth-js/polyfill';
@@ -20,6 +21,7 @@ import { html as browserHtml } from './components/UpgradeBrowser';
 import cookieHtml from './components/EnableCookies';
 
 import './styles/index.scss';
+/* eslint-enable import/no-import-module-exports */
 
 if (browserIsRed) {
   document.getElementById('app').innerHTML = `

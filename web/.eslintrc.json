@@ -1,8 +1,13 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "extends": ["airbnb", "prettier", "plugin:jsx-a11y/strict"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "requireConfigFile": false
+  },
   "rules": {
     "arrow-body-style": "off",
+    "react/function-component-definition": "off",
     "jsx-a11y/anchor-is-valid": [
       2,
       {

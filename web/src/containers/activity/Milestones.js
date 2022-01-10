@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
@@ -21,23 +21,21 @@ const Milestone = ({ activity, activityIndex, add, remove }) => {
 
   return (
     <Subsection resource="activities.milestones">
-      <Fragment>
-        <div className="mb3">
-          <hr />
+      <div className="mb3">
+        <hr />
 
-          <FormAndReviewList
-            activityIndex={activityIndex}
-            addButtonText={t('activities.milestones.addMilestoneButtonText')}
-            list={activity.schedule}
-            collapsed={MilestoneReview}
-            expanded={MilestoneForm}
-            noDataMessage={t('activities.milestones.noMilestonesNotice')}
-            onAddClick={handleAdd}
-            onDeleteClick={handleDelete}
-            allowDeleteAll
-          />
-        </div>
-      </Fragment>
+        <FormAndReviewList
+          activityIndex={activityIndex}
+          addButtonText={t('activities.milestones.addMilestoneButtonText')}
+          list={activity.schedule}
+          collapsed={MilestoneReview}
+          expanded={MilestoneForm}
+          noDataMessage={t('activities.milestones.noMilestonesNotice')}
+          onAddClick={handleAdd}
+          onDeleteClick={handleDelete}
+          allowDeleteAll
+        />
+      </div>
     </Subsection>
   );
 };
