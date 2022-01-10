@@ -1,7 +1,9 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1005174, 1005024, 1005029, 1005154, 1005291, 1006846],
+  "allowlist": [
+    1005174, 1005024, 1005029, 1005154, 1005291, 1006846, 1006852, 1006854
+  ],
   "_comment": {
     "1005174": {
       "advisory": "https://github.com/advisories/GHSA-w8qv-6jwh-64r5",
@@ -40,6 +42,20 @@
       "advisory": "https://github.com/advisories/GHSA-566m-qj78-rww5",
       "module": "postcss",
       "affects": ["@storybook/addon-docs@6.4.9 - storybook"]
+    },
+    "1006852": {
+      "advisory": "https://github.com/advisories/GHSA-5rrq-pxf6-6jx5",
+      "module": "node-forge",
+      "affects": [
+        "webpack-dev-server@4.7.2 - used in development not production"
+      ]
+    },
+    "1006854": {
+      "advisory": "https://github.com/advisories/GHSA-gf8q-jrpm-jvxq",
+      "module": "node-forge",
+      "affects": [
+        "webpack-dev-server@4.7.2 - used in development not production"
+      ]
     }
   },
   "registry": "https://registry.npmjs.org"
