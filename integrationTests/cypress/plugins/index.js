@@ -23,7 +23,7 @@ const knex = require('./knex');
 module.exports = (on, config) => {
   require('cypress-grep/src/plugin')(config); // eslint-disable-line global-require, import/no-extraneous-dependencies
 
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars, default-param-last
   on('before:browser:launch', (browser = {}, launchOptions) => {
     prepareAudit(launchOptions);
 

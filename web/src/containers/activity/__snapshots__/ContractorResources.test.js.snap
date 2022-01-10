@@ -18,7 +18,6 @@ exports[`the ContractorResources component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(ContractorResourceForm)",
         "type": [Function],
       }
     }

@@ -25,7 +25,6 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(StatePersonForm)",
         "type": [Function],
       }
     }
