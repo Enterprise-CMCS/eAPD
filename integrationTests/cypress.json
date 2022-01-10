@@ -12,7 +12,7 @@
     },
     "API": "http://localhost:8081",
     "fedadmin": "fedadmin",
-    "fedadmin_pw": "%dez%A%4*11m3E",
+    "fedadmin_pw": "",
     "stateadmin": "stateadmin",
     "stateadmin_pw": "",
     "statestaff": "statestaff",
