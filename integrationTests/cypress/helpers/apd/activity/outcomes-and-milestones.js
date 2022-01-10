@@ -10,7 +10,7 @@ export const testDefaultOutcomesAndMilestones = () => {
       level: 3
     }).should('exist');
 
-    cy.contains('Outcomes have not been added for this activity.').should(
+    cy.contains('Add at least one outcome for this activity.').should(
       'exist'
     );
     cy.contains('Milestones have not been added for this activity.').should(

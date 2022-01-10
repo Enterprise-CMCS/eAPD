@@ -885,7 +885,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.goToOutcomesAndMilestones(0);
 
       activityPage.checkDeleteButton(
-        'Outcomes have not been added for this activity.',
+        'Add at least one outcome for this activity.',
         'Delete Outcome and Metrics?',
         'Outcome not specified'
       );
