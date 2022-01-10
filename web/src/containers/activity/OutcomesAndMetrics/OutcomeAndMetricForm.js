@@ -93,7 +93,6 @@ const OutcomeAndMetricForm = ({
             key={`activity${activityIndex}-index${index}`}
             autoFocus
             name="outcome"
-            className="data-entry-box"
             label="Outcome"
             hint="Describe a distinct and measurable improvement for this system."
             value={outcome}
