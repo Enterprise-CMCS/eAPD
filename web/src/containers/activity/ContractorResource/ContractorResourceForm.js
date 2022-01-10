@@ -11,15 +11,6 @@ import NumberField from '../../../components/NumberField';
 import RichText from '../../../components/RichText';
 
 import {
-  setContractorDescription,
-  setContractorEndDate,
-  setContractorIsHourly,
-  setContractorName,
-  setContractorStartDate,
-  setContractorTotalCost,
-  setContractorCostForYear,
-  setContractorNumberOfHoursForYear,
-  setContractorHourlyRateForYear,
   saveContractor
 } from '../../../actions/editActivity';
 
@@ -28,17 +19,7 @@ const ContractorResourceForm = forwardRef(
     {
       activityIndex,
       index,
-      // item: { description, end, hourly, key, name, start, totalCost, years },
       item,
-      setDescription,
-      setEndDate,
-      setIsHourly,
-      setName,
-      setStartDate,
-      setTotalCost,
-      setCostForYear,
-      setNumberOfHoursForYear,
-      setHourlyRateForYear,
       saveContractor
     },
     ref 
@@ -51,27 +32,52 @@ const ContractorResourceForm = forwardRef(
         case 'updateField':
           return {
             ...state,
-            [action.field]: action.payload
+            [action.field]: action.value
           }
         case 'setHourly':
           return {
             ...state,
             hourly: {
+              useHourly: action.value,
               data: { 
                 ...state.hourly.data
-              },
-              useHourly: action.payload
+              }
             }
           }
-        case 'updateHourly':
+        case 'updateHourlyHours':
           return {
             ...state,
             hourly: {
-              ...state.hourly.useHourly,
+              ...state.hourly,
               data: {
                 ...state.hourly.data,
-                [action.year]: action.value  
+                [action.year]: {
+                  ...state.hourly.data[action.year],
+                  hours: action.value
+                }
               }
+            }
+          }
+        case 'updateHourlyRate':
+          return {
+            ...state,
+            hourly: {
+              ...state.hourly,
+              data: {
+                ...state.hourly.data,
+                [action.year]: {
+                  ...state.hourly.data[action.year],
+                  rate: action.value
+                }
+              }
+            }
+          }
+        case 'updateYearCost':
+          return {
+            ...state,
+            years: {
+              ...state.years,
+              [action.year]: action.value
             }
           }
         default:
@@ -91,75 +97,31 @@ const ContractorResourceForm = forwardRef(
       )
     );
     
-    useEffect(() => {
-      console.log("state:", state);
-      console.log('apdFFYs', apdFFYs);
-    }, [state])
-    
     const handleSubmit = e => {
       e.preventDefault();
       saveContractor(activityIndex, index, state);
     };
-  
-    const getHandler = action => ({ target: { value } }) => {
-      action(activityIndex, index, value);
-    };
-  
+    
     const getDateHandler = action => (e, dateStr) => {
-      dispatch({ type: 'updateField', field: `${action}`, payload: dateStr })
-    };
-  
-    const setHourlyOff = () => {
-      dispatch({ type: 'setHourly', payload: false })
-  //     setIsHourly(activityIndex, index, false);
-  // 
-  //     // set cost to non-hourly cost saved from last time the radio button was switched (if any)
-  //     apdFFYs.forEach(ffy => {
-  //       if (nonHourlyCost[ffy]) {
-  //         setCostForYear(activityIndex, index, ffy, nonHourlyCost[ffy]);
-  //       }
-  //     });
-    };
-  
-    const setHourlyOn = () => {
-      // setIsHourly(activityIndex, index, true);
-      dispatch({ type: 'setHourly', payload: true })
-      
-      // save non-hourly cost in case the radio button is switched back to non-hourly
-      setNonHourlyCost(
-        apdFFYs.reduce((o, ffy) => ({ ...o, [ffy]: state.years[ffy] }), {})
-      );
-  
-  
-      // set cost to hours x rate
-      apdFFYs.forEach(ffy => {
-        if (state.hourly.data[ffy].hours && state.hourly.data[ffy].rate) {
-          dispatch({ type: 'updateHourly', year: ffy, value: state.hourly.data[ffy].hours * state.hourly.data[ffy].rate })
-          
-          setCostForYear(
-            activityIndex,
-            index,
-            ffy,
-            hourly.data[ffy].hours * hourly.data[ffy].rate
-          );
-        }
-      });
+      dispatch({ type: 'updateField', field: `${action}`, value: dateStr })
     };
   
     const getHandlerForYearlyCost = year => ({ target: { value } }) => {
-      setCostForYear(activityIndex, index, year, value);
+      dispatch({ type: 'updateYearCost', year: year, value: value })
     };
   
     const getHandlerForYearlyHours = year => ({ target: { value } }) => {
-      setNumberOfHoursForYear(activityIndex, index, year, value);
+      dispatch({ type: 'updateHourlyHours', year: year, value: value })
+      dispatch({ type: 'updateYearCost', year: year, value: value * state.hourly.data[year].rate })
     };
   
     const getHandlerForYearlyHourlyRate = year => ({ target: { value } }) => {
-      setHourlyRateForYear(activityIndex, index, year, value);
+      dispatch({ type: 'updateHourlyRate', year: year, value: value })
+      dispatch({ type: 'updateYearCost', year: year, value: state.hourly.data[year].hours * value })
     };
   
     const syncDescription = html => {
-      dispatch({ type: 'updateField', field: 'description', payload: html })
+      dispatch({ type: 'updateField', field: 'description', value: html })
     };
   
     return (
@@ -172,7 +134,7 @@ const ContractorResourceForm = forwardRef(
           labelClassName="full-width-label"
           value={state.name}
           onChange={e =>
-            dispatch({ type: 'updateField', field: 'name', payload: e.target.value })
+            dispatch({ type: 'updateField', field: 'name', value: e.target.value })
           }
         />
         <FormLabel
@@ -219,7 +181,7 @@ const ContractorResourceForm = forwardRef(
           labelClassName="full-width-label"
           value={state.totalCost}
           onChange={e =>
-            dispatch({ type: 'updateField', field: 'totalCost', payload: e.target.value })
+            dispatch({ type: 'updateField', field: 'totalCost', value: e.target.value })
           }
         />
         <fieldset className="ds-c-fieldset">
@@ -228,7 +190,7 @@ const ContractorResourceForm = forwardRef(
             checked={!state.hourly.useHourly}
             label="No"
             name={`apd-activity-contractor-hourly-${state.key}-no`}
-            onChange={setHourlyOff}
+            onChange={() => dispatch({ type: 'setHourly', value: false })}
             type="radio"
             value="no"
           />
@@ -236,13 +198,12 @@ const ContractorResourceForm = forwardRef(
             checked={state.hourly.useHourly}
             label="Yes"
             name={`apd-activity-contractor-hourly-${state.key}-yes`}
-            onChange={setHourlyOn}
+            onChange={() => dispatch({ type: 'setHourly', value: true })}
             type="radio"
             value="yes"
             checkedChildren={
               <div className="ds-c-choice__checkedChild">
                 {apdFFYs.map(ffy => (
-                  console.log("hey its working", state.hourly.data),
                   <Fragment key={ffy}>
                     <FormLabel>FFY {ffy}</FormLabel>
                     <div className="ds-l-row ds-u-padding-left--2">
@@ -265,7 +226,6 @@ const ContractorResourceForm = forwardRef(
                       />
                     </div>
                   </Fragment>
-
                 ))}
               </div>
             }
@@ -311,27 +271,10 @@ ContractorResourceForm.propTypes = {
     totalCost: PropTypes.number,
     years: PropTypes.object
   }).isRequired,
-  setDescription: PropTypes.func.isRequired,
-  setEndDate: PropTypes.func.isRequired,
-  setIsHourly: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired,
-  setStartDate: PropTypes.func.isRequired,
-  setTotalCost: PropTypes.func.isRequired,
-  setCostForYear: PropTypes.func.isRequired,
-  setNumberOfHoursForYear: PropTypes.func.isRequired,
-  setHourlyRateForYear: PropTypes.func.isRequired
+  saveContractor: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  setDescription: setContractorDescription,
-  setEndDate: setContractorEndDate,
-  setIsHourly: setContractorIsHourly,
-  setName: setContractorName,
-  setStartDate: setContractorStartDate,
-  setTotalCost: setContractorTotalCost,
-  setCostForYear: setContractorCostForYear,
-  setNumberOfHoursForYear: setContractorNumberOfHoursForYear,
-  setHourlyRateForYear: setContractorHourlyRateForYear,
   saveContractor: saveContractor
 };
 
