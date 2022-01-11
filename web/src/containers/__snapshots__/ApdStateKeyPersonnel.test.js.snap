@@ -11,6 +11,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       "$$typeof": Symbol(react.memo),
       "WrappedComponent": [Function],
       "compare": null,
+      "displayName": "Connect(PersonForm)",
       "type": [Function],
     }
   }
