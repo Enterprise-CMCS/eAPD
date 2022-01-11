@@ -92,6 +92,7 @@ const OutcomeAndMetricForm = ({
           <TextField
             key={`activity${activityIndex}-index${index}`}
             autoFocus
+            data-cy={`outcome-${index}`}
             name="outcome"
             label="Outcome"
             hint="Describe a distinct and measurable improvement for this system."
@@ -115,8 +116,9 @@ const OutcomeAndMetricForm = ({
                 className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
               >
                 <TextField
-                  id={`${activityIndex}-metric${index}`}
+                  id={`${activityIndex}-metric${i}`}
                   name="metric"
+                  data-cy={`metric-${index}-${i}`}
                   label="Metric"
                   hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
                   value={metric}

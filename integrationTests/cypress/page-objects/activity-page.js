@@ -65,7 +65,7 @@ class ActivityPage {
   };
 
   checkMetricFunctionality = () => {
-    cy.findByRole('button', { name: /Add Metric/i }).click();
+    cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
     cy.get('[class="ds-c-review"]')
       .eq(0)
       .within(() => {

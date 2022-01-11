@@ -376,32 +376,91 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.contains('Activity 2').should('not.exist');
     });
 
-    it.only('should handle enter data in Outcomes and Milestones', () => {
+    it('should handle enter data in Outcomes and Milestones', () => {
+      const firstOutcome = 'outcome-0';
+      const firstMetric = 'metric-0-0';
+      const secondMetric = 'metric-0-1';
+
       cy.goToOutcomesAndMilestones(0);
 
       cy.findByRole('button', { name: /Add Outcome/i }).click();
 
-      activityPage.checkTextField('ds-c-field', '', 0); // Outcome
+      cy.get(`[data-cy=${firstOutcome}]`)
+        .should('have.value', '')
+        .blur()
+        .should('have.class', 'missing-text-alert');
+
+      cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+
+      cy.get(`[data-cy=${firstMetric}]`)
+        .should('have.value', '')
+        .click()
+        .blur()
+        .should('have.class', 'missing-text-alert');
 
       cy.findByRole('button', { name: /Done/i }).should('be.disabled');
 
-      // activityPage.checkOutcomeOutput({
-      //   outcome: 'Outcome not specified',
-      //   metrics: []
-      // });
+      cy.get(`[data-cy=${firstOutcome}]`)
+        .click()
+        .type(`${firstOutcome}`)
+        .should('not.have.class', 'missing-text-alert');
 
-      // cy.contains('Edit').click();
-      // activityPage.checkMetricFunctionality();
+      cy.get(`[data-cy=${firstMetric}]`)
+        .click()
+        .type(`${firstMetric}`)
+        .should('not.have.class', 'missing-text-alert');
 
-      // cy.findByRole('button', { name: /Add Milestone/i }).click();
-      // activityPage.checkInputField('Name', '');
-      // activityPage.checkDate('Target completion date');
-      // cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Done/i })
+        .should('not.be.disabled')
+        .click();
 
-      // activityPage.checkMilestoneOutput({
-      //   milestone: 'Milestone not specified',
-      //   targetDate: 'Date not specified'
-      // });
+      activityPage.checkOutcomeOutput({
+        outcome: `${firstOutcome}`,
+        metrics: [`${firstMetric}`]
+      });
+
+      cy.contains('Edit').click();
+
+      cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+
+      cy.get(`[data-cy=${secondMetric}]`)
+        .click()
+        .type(`${secondMetric}`);
+        
+        cy.get('[class="ds-c-review"]')
+        .eq(1)
+        .within(() => {
+          cy.contains('Delete')
+          .should('exist');
+        });
+
+      cy.get('[class="ds-c-review"]')
+        .eq(0)
+        .within(() => {
+          cy.contains('Delete')
+          .should('exist')
+          .click();
+        });
+
+      cy.contains('Delete Metric?').should('exist');
+      cy.get('#react-aria-modal-dialog')
+        .within(() => {
+          cy.findByRole('button', { name: /Delete/ }).click();
+        });
+
+      cy.findByRole('button', { name: /Done/i })
+        .should('not.be.disabled')
+        .click();
+
+      cy.findByRole('button', { name: /Add Milestone/i }).click();
+      activityPage.checkInputField('Name', '');
+      activityPage.checkDate('Target completion date');
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      activityPage.checkMilestoneOutput({
+        milestone: 'Milestone not specified',
+        targetDate: 'Date not specified'
+      });
     });
 
     it('should handle entering data inState Staff and Expenses', () => {
