@@ -23,8 +23,7 @@ const ContractorResourceForm = forwardRef(
       saveContractor
     },
     ref 
-) => {
-    
+) => {    
     const initialState = item;
     
     function reducer(state, action) {

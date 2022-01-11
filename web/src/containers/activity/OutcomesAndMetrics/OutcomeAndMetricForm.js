@@ -1,7 +1,7 @@
 import { TextField } from '@cmsgov/design-system';
 
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment, useMemo, forwardRef } from 'react';
 import { connect } from 'react-redux';
 import {
   setOutcome as setOutcomeAction,
@@ -9,14 +9,22 @@ import {
 } from '../../../actions/editActivity';
 import Review from '../../../components/Review';
 
-const OutcomeAndMetricForm = ({
-  activityIndex,
-  item: { metrics, outcome },
-  index,
-  setMetric,
-  setOutcome,
-  removeMetric
-}) => {
+import {
+  saveOutcome
+} from '../../../actions/editActivity';
+
+const OutcomeAndMetricForm = forwardRef(
+  (
+    {
+      activityIndex,
+      item: { metrics, outcome },
+      index,
+      setMetric,
+      setOutcome,
+      removeMetric
+    },
+    ref
+) => {
   const changeOutcome = useMemo(
     () => ({ target: { value } }) => {
       setOutcome(activityIndex, index, value);
@@ -26,6 +34,11 @@ const OutcomeAndMetricForm = ({
 
   const changeMetric = i => ({ target: { value } }) => {
     setMetric(activityIndex, index, i, value);
+  };
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    saveOutcome(activityIndex, index, state);
   };
 
   return (
@@ -72,7 +85,8 @@ const OutcomeAndMetricForm = ({
       ))}
     </Fragment>
   );
-};
+}
+);
 
 OutcomeAndMetricForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
@@ -88,7 +102,8 @@ OutcomeAndMetricForm.propTypes = {
 
 const mapDispatchToProps = {
   setOutcome: setOutcomeAction,
-  setMetric: setOutcomeMetric
+  setMetric: setOutcomeMetric,
+  saveOutcome: saveOutcome
 };
 
 export default connect(null, mapDispatchToProps)(OutcomeAndMetricForm);

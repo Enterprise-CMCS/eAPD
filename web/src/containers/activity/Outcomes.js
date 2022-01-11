@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -17,28 +17,41 @@ import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { selectOMsByActivityIndex } from '../../reducers/activities.selectors';
 
+import { newOutcome } from '../../reducers/activities.js';
+
 const Outcomes = ({
   activityIndex,
   add,
   addMetric,
-  outcomes,
+  list,
   remove,
   removeMetric
 }) => {
+  const [localList, setLocalList] = useState(list);
+        
+  useEffect(() => {
+    setLocalList(list)
+  }, [list])
+  
   const handleAdd = () => {
-    add(activityIndex);
+    const newListItem = newOutcome();
+    setLocalList([...localList, newListItem]);
   };
-
+  
   const handleAddMetric = omIndex => {
     addMetric(activityIndex, omIndex);
   };
-
+  
   const handleDelete = index => {
     remove(activityIndex, index);
   };
-
+  
   const handleDeleteMetric = (omIndex, metricIndex) => {
     removeMetric(activityIndex, omIndex, metricIndex);
+  };
+  
+  const onCancel = e => {
+    setLocalList(list);
   };
 
   return (
@@ -50,7 +63,7 @@ const Outcomes = ({
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText="Add Outcome"
-        list={outcomes}
+        list={localList}
         collapsed={OutcomeAndMetricReview}
         expanded={OutcomeAndMetricForm}
         extraItemButtons={[
@@ -59,6 +72,7 @@ const Outcomes = ({
         removeMetric={handleDeleteMetric}
         noDataMessage={t('activities.outcomes.noDataNotice')}
         onAddClick={handleAdd}
+        onCancelClick={onCancel}
         onDeleteClick={handleDelete}
         handleChange={() => {}}
         allowDeleteAll
@@ -69,19 +83,17 @@ const Outcomes = ({
 
 Outcomes.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  add: PropTypes.func.isRequired,
   addMetric: PropTypes.func.isRequired,
-  outcomes: PropTypes.array.isRequired,
+  list: PropTypes.array.isRequired,
   remove: PropTypes.func.isRequired,
   removeMetric: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  outcomes: selectOMsByActivityIndex(state, { activityIndex })
+  list: selectOMsByActivityIndex(state, { activityIndex })
 });
 
 const mapDispatchToProps = {
-  add: addOutcome,
   addMetric: addOutcomeMetric,
   remove: removeOutcome,
   removeMetric: removeOutcomeMetric

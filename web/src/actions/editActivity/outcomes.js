@@ -1,6 +1,6 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
-export const addOutcome = activityIndex => (dispatch, getState) =>
+export const saveOutcome = activityIndex => (dispatch, getState) =>
   dispatch({
     type: ADD_APD_ITEM,
     path: `/activities/${activityIndex}/outcomes/-`,
