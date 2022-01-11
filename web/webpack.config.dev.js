@@ -20,22 +20,8 @@ const config = {
     rules: [
       {
         test: /\.m?js$/,
-        include: [
-          path.resolve(__dirname, 'src'),
-          path.resolve(__dirname, 'node_modules/d3-array'),
-          path.resolve(__dirname, 'node_modules/d3-format'),
-          path.resolve(__dirname, 'node_modules/d3-geo')
-        ],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [['@babel/preset-env', { targets: 'defaults, ie >= 11' }]],
-            plugins: [
-              '@babel/plugin-proposal-class-properties',
-              '@babel/plugin-transform-runtime'
-            ]
-          }
-        }
+        exclude: /node_modules\/(?!(d3-format|d3-geo)\/)/,
+        loader: 'babel-loader'
       },
 
       // In dev, load our styles directly into the generated JS. That way
