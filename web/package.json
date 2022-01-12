@@ -191,7 +191,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.2",
+    "webpack-dev-server": "^4.7.3",
     "yaml-jest": "^1.2.0",
     "yaml-loader": "^0.6.0"
   }
