@@ -298,12 +298,12 @@ jobs:
           name: Check Docker Pull Limit Default User
           command: |
             TOKEN=$(curl --user "$DOCKER_USERNAME:$DOCKER_PASSWORD" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl -v --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1
+            curl -v --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
       - run:
           name: Check Docker Pull Limit OpenAPI User
           command: |
             TOKEN=$(curl --user "$DOCKER_VALIDATE_OPENAPI_UN:$DOCKER_VALIDATE_OPENAPI_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl -v --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1
+            curl -v --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
   # Validates YAML files. Doesn't look at content, just structure. Doesn't
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
