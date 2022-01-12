@@ -29,7 +29,7 @@ const config = {
       {
         test: /\.m?js$/,
         exclude: /node_modules\/(?!(d3-format|d3-geo)\/)/,
-        loader: 'babel-loader'
+        use: ['babel-loader']
       },
       {
         test: /\.scss$/,

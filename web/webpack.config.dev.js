@@ -3,6 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const modulesToTranspile = ['d3-format', 'd3-geo'];
+
 const config = {
   mode: 'development',
   entry: [
@@ -21,7 +23,7 @@ const config = {
       {
         test: /\.m?js$/,
         exclude: /node_modules\/(?!(d3-format|d3-geo)\/)/,
-        loader: 'babel-loader'
+        use: ['babel-loader']
       },
 
       // In dev, load our styles directly into the generated JS. That way

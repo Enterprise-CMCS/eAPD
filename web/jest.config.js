@@ -1,4 +1,9 @@
 module.exports = {
+  globals: {
+    'babel-jest': {
+      babelrcFile: '<rootDir>/.babelrc.js'
+    }
+  },
   coverageDirectory: '../coverage',
   rootDir: 'src',
   setupFiles: ['../polyfills.test.js', '../setup.enzyme.test.js'],
@@ -16,7 +21,7 @@ module.exports = {
   },
   transformIgnorePatterns: [
     // add node_modules here that _should_ be transformed
-    '/node_modules/(?!d3-array|d3-format|d3-geo).+\\.js$'
+    '/node_modules/(?!(d3-format|d3-geo)/)/'
   ],
   moduleFileExtensions: ['js', 'yaml']
 };
