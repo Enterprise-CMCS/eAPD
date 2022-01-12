@@ -17,7 +17,7 @@ import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { selectOMsByActivityIndex } from '../../reducers/activities.selectors';
 
-import { newOutcome } from '../../reducers/activities.js';
+import { newOutcome, newOutcomeMetric } from '../../reducers/activities.js';
 
 const Outcomes = ({
   activityIndex,
@@ -38,8 +38,12 @@ const Outcomes = ({
     setLocalList([...localList, newListItem]);
   };
   
-  const handleAddMetric = omIndex => {
-    addMetric(activityIndex, omIndex);
+  const handleAddMetric = omIndex => {    
+    const newMetric = newOutcomeMetric();
+    const localListCopy = [...localList];
+    localListCopy[omIndex].metrics = [...localListCopy[omIndex].metrics, newMetric];
+    
+    setLocalList(localListCopy);
   };
   
   const handleDelete = index => {

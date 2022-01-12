@@ -11,7 +11,7 @@ export const saveContractor = (activityIndex, contractorIndex, data) => (dispatc
   const previousState = getState();
   
   let indexCalculated = contractorIndex;
-  console.log("state", previousState.apd.data);
+  
   if(previousState.apd.data.activities[activityIndex].contractorResources[contractorIndex] === undefined) {
     indexCalculated = previousState.apd.data.activities[activityIndex].contractorResources.length;
     dispatch({
