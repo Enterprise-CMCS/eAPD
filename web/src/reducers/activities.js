@@ -1,6 +1,5 @@
 import { arrToObj, generateKey as defaultGenerateKey } from '../util';
 
-
 // Make this thing injectible for testing.
 let generateKey = defaultGenerateKey;
 export const setKeyGenerator = fn => {
