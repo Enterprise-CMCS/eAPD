@@ -9,10 +9,7 @@ const presets = [
   ],
   ['@babel/preset-react']
 ];
-const plugins = [
-  'babel-plugin-transform-require-context',
-  '@babel/plugin-transform-runtime'
-];
+const plugins = [];
 
 module.exports = {
   presets,
