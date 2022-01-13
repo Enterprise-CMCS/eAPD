@@ -320,8 +320,7 @@ jobs:
   # Runs backend API integration/end-to-end tests.
   backend api endpoint test:
     machine:
-      image: cimg/base:2021.04
-#      image: ubuntu-2004:202104-01
+      image: ubuntu-2004:202104-01
     steps:
       - checkout
       - attach_workspace:
@@ -363,8 +362,7 @@ jobs:
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
     machine:
-      image: cimg/base:2021.04
-      #image: ubuntu-2004:202104-01
+      image: ubuntu-2004:202104-01
     steps:
       - checkout
       - attach_workspace:
@@ -486,8 +484,7 @@ jobs:
 
   owasp zap scan:
     machine:
-      image: cimg/base:2021.04
-      #image: ubuntu-2004:202104-01
+      image: ubuntu-2004:202104-01
     steps:
       - checkout
       - attach_workspace:
