@@ -20,7 +20,6 @@ exports[`PersonCostForm component renders correctly 1`] = `
       value={100000}
     />
     <NumberField
-      fieldRef={null}
       hint=""
       label="Number of FTEs"
       mask={null}
@@ -60,7 +59,6 @@ exports[`PersonCostForm component renders correctly 1`] = `
       value={120000}
     />
     <NumberField
-      fieldRef={null}
       hint=""
       label="Number of FTEs"
       mask={null}

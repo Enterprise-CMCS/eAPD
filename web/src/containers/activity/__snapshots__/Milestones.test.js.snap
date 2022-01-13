@@ -22,7 +22,6 @@ exports[`the Milestones component renders correctly 1`] = `
           "$$typeof": Symbol(react.memo),
           "WrappedComponent": [Function],
           "compare": null,
-          "displayName": "Connect(MilestoneForm)",
           "type": [Function],
         }
       }

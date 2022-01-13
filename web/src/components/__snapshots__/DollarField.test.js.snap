@@ -11,7 +11,6 @@ exports[`DollarField component renders correctly 1`] = `
 >
   <NumberField
     className="stuff"
-    fieldRef={null}
     label="test label"
     mask="currency"
     min={null}
