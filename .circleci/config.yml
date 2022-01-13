@@ -294,16 +294,7 @@ jobs:
             docker create -v /openapi --name openapi alpine /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
-      - run:
-          name: Check Docker Pull Limit Default User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_USERNAME:$DOCKER_PASSWORD" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl -v --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
-      - run:
-          name: Check Docker Pull Limit OpenAPI User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_VALIDATE_OPENAPI_UN:$DOCKER_VALIDATE_OPENAPI_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl -v --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
+
   # Validates YAML files. Doesn't look at content, just structure. Doesn't
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
@@ -694,6 +685,41 @@ jobs:
             else
               echo "Not a pull request"
             fi
+      - run:
+          name: Check Docker Pull Limit Default User
+          command: |
+            TOKEN=$(curl --user "$DOCKER_USERNAME:$DOCKER_PASSWORD" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
+      - run:
+          name: Check Docker Pull Limit OpenAPI User
+          command: |
+            TOKEN=$(curl --user "$DOCKER_VALIDATE_OPENAPI_UN:$DOCKER_VALIDATE_OPENAPI_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
+      - run:
+          name: Check Docker Pull Limit Vulnerablity User
+          command: |
+            TOKEN=$(curl --user "$DOCKER_DEPS_VULN_UN:$DOCKER_DEPS_VULN_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
+      - run:
+          name: Check Docker Pull Limit Dependency User
+          command: |
+            TOKEN=$(curl --user "$DOCKER_INSTALL_DEPS_UN:$DOCKER_INSTALL_DEPS_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
+      - run:
+          name: Check Docker Pull Limit Lint User
+          command: |
+            TOKEN=$(curl --user "$DOCKER_LINT_UN:$DOCKER_LINT_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
+      - run:
+          name: Check Docker Pull Limit OWASP User
+          command: |
+            TOKEN=$(curl --user "$DOCKER_OWASP_ZAP_SCAN_UN:$DOCKER_OWASP_ZAP_SCAN_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
+      - run:
+          name: Check Docker Pull Limit Tests User
+          command: |
+            TOKEN=$(curl --user "$DOCKER_TESTS_UN:$DOCKER_TESTS_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
 
   # Zips up artifacts created in build steps and makes them available as
   # CircleCI artifact downloads.
