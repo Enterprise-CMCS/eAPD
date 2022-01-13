@@ -87,7 +87,7 @@ const FormAndReviewList = ({
 }) => {
   const combinedClassName = useMemo(
     () => ['form-and-review-list', className].join(' '),
-    className
+    [className]
   );
 
   const [hasAdded, setHasAdded] = useState(false);

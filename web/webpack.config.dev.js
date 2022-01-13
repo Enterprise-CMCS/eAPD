@@ -3,8 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const modulesToTranspile = ['d3-format', 'd3-geo'];
-
 const config = {
   mode: 'development',
   entry: [

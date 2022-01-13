@@ -14,13 +14,19 @@ const NameAndFundingSourceForm = ({
   setFundingSource,
   setName
 }) => {
-  const changeName = useCallback(({ target: { value } }) => {
-    setName(index, value);
-  });
+  const changeName = useCallback(
+    ({ target: { value } }) => {
+      setName(index, value);
+    },
+    [index, setName]
+  );
 
-  const changeFundingSource = useCallback(({ target: { value } }) => {
-    setFundingSource(index, value);
-  });
+  const changeFundingSource = useCallback(
+    ({ target: { value } }) => {
+      setFundingSource(index, value);
+    },
+    [index, setFundingSource]
+  );
 
   const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
     checked: fundingSource === choice,
@@ -30,6 +36,7 @@ const NameAndFundingSourceForm = ({
 
   return (
     <Fragment>
+      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
         autoFocus
         label="Activity name"

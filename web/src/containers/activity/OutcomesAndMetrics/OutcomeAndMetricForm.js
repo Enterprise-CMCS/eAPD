@@ -18,18 +18,22 @@ const OutcomeAndMetricForm = ({
   removeMetric
 }) => {
   const changeOutcome = useMemo(
-    () => ({ target: { value } }) => {
-      setOutcome(activityIndex, index, value);
-    },
-    [index]
+    () =>
+      ({ target: { value } }) => {
+        setOutcome(activityIndex, index, value);
+      },
+    [activityIndex, index, setOutcome]
   );
 
-  const changeMetric = i => ({ target: { value } }) => {
-    setMetric(activityIndex, index, i, value);
-  };
+  const changeMetric =
+    i =>
+    ({ target: { value } }) => {
+      setMetric(activityIndex, index, i, value);
+    };
 
   return (
     <Fragment key={`activity${activityIndex}-index${index}-form`}>
+      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
         key={`activity${activityIndex}-index${index}`}
         autoFocus

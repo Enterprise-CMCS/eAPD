@@ -10,7 +10,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
-    '\\.[jt]sx?$': '../jest.transform.js',
+    '\\.[jt]sx?$': 'babel-jest',
     '\\.yaml$': 'yaml-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },

@@ -18,16 +18,17 @@ const MilestoneForm = ({
 }) => {
   const changeDate = useCallback(
     (_, dateStr) => setEndDate(activityIndex, index, dateStr),
-    []
+    [activityIndex, index, setEndDate]
   );
   const changeName = useCallback(
     ({ target: { value } }) => setName(activityIndex, index, value),
-    []
+    [activityIndex, index, setName]
   );
 
   return (
     <Fragment>
       <h6 className="ds-h4">Milestone {index + 1}:</h6>
+      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
         autoFocus
         label="Name"

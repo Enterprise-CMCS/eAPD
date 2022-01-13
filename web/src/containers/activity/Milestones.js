@@ -13,11 +13,14 @@ import { selectActivityByIndex } from '../../reducers/activities.selectors';
 const Milestone = ({ activity, activityIndex, add, remove }) => {
   const handleAdd = useCallback(() => {
     add(activityIndex);
-  });
+  }, [activityIndex, add]);
 
-  const handleDelete = useCallback(index => {
-    remove(activityIndex, index);
-  });
+  const handleDelete = useCallback(
+    index => {
+      remove(activityIndex, index);
+    },
+    [activityIndex, remove]
+  );
 
   return (
     <Subsection resource="activities.milestones">
