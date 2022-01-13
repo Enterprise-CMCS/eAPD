@@ -1,5 +1,3 @@
-import sinon from 'sinon';
-
 const load = () => {
   jest.resetModules();
   return require('./index'); // eslint-disable-line global-require
@@ -17,27 +15,27 @@ describe('utility arrays', () => {
 
 describe('provides default years based on now', () => {
   test('before October', () => {
-    const clock = sinon.useFakeTimers();
+    jest.useFakeTimers().setSystemTime(new Date('1970-09-01').getTime());
     // tick forward 10 days, so we're not on the weird date boundary
-    clock.tick(864000000);
+    jest.advanceTimersByTime(864000000);
     const { defaultAPDYearOptions, defaultAPDYears } = load();
 
     expect(defaultAPDYearOptions).toEqual(['1970', '1971', '1972']);
     expect(defaultAPDYears).toEqual(['1970', '1971']);
 
-    clock.restore();
+    jest.clearAllTimers();
   });
 
   test('after October', () => {
-    const clock = sinon.useFakeTimers();
+    jest.useFakeTimers().setSystemTime(new Date('1970-10-01').getTime());
     // tick forward 360 days
-    clock.tick(31104000000);
+    jest.advanceTimersByTime(31104000000);
     const { defaultAPDYearOptions, defaultAPDYears } = load();
 
     expect(defaultAPDYearOptions).toEqual(['1971', '1972', '1973']);
     expect(defaultAPDYears).toEqual(['1971', '1972']);
 
-    clock.restore();
+    jest.clearAllTimers();
   });
 });
 
@@ -99,7 +97,9 @@ describe('utility functions', () => {
     expect(stateDateRangeToDisplay('2014-04-03', '2015-04-19')).toEqual(
       '4/3/2014 - 4/19/2015'
     );
-    expect(stateDateRangeToDisplay(null, null)).toEqual('Date not specified - Date not specified');
+    expect(stateDateRangeToDisplay(null, null)).toEqual(
+      'Date not specified - Date not specified'
+    );
     expect(stateDateRangeToDisplay('2014-04-03', null)).toEqual(
       '4/3/2014 - Date not specified'
     );
@@ -112,7 +112,9 @@ describe('utility functions', () => {
     expect(stateDateRangeToDisplay('2020-14-35', '9999-01-99')).toEqual(
       'Invalid date - Invalid date'
     );
-    expect(stateDateRangeToDisplay()).toEqual('Date not specified - Date not specified');    
+    expect(stateDateRangeToDisplay()).toEqual(
+      'Date not specified - Date not specified'
+    );
   });
 
   test('converts an array into an object with array values as object keys', () => {
