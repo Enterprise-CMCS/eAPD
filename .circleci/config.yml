@@ -667,8 +667,8 @@ jobs:
           working_directory: ~/project/bin/preview-deploy
           command: |
             if [ -n "$CIRCLE_PULL_REQUEST" ]; then
-              apt-get -qq update
-              apt-get -qq install jq -y
+              sudo apt-get -qq update
+              sudo apt-get -qq install jq -y
               pip install --quiet awscli
               PRNUM=$(basename $CIRCLE_PULL_REQUEST)
               URL=$(./aws.sh \
