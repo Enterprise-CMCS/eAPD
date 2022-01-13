@@ -1,33 +1,20 @@
-module.exports = function (api) {
-  api.cache(true);
-
-  const presets = [
-    [
-      '@babel/preset-env',
-      {
-        targets: {
-          node: 'current'
-        }
+const presets = [
+  [
+    '@babel/preset-env',
+    {
+      targets: {
+        node: 'current'
       }
-    ],
-    ['@babel/preset-react']
-  ];
-  const plugins = [
-    'react-hot-loader/babel',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-syntax-dynamic-import'
-  ];
+    }
+  ],
+  ['@babel/preset-react']
+];
+const plugins = [
+  'babel-plugin-transform-require-context',
+  '@babel/plugin-transform-runtime'
+];
 
-  return {
-    presets,
-    plugins
-    // env: {
-    //   test: {
-    //     plugins: [
-    //       '@babel/plugin-transform-runtime',
-    //       'transform-require-context'
-    //     ]
-    //   }
-    // }
-  };
+module.exports = {
+  presets,
+  plugins
 };

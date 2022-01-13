@@ -36,7 +36,7 @@ module.exports = (on, config) => {
   on(
     'file:preprocessor',
     browserify({
-      parser: 'babel-eslint'
+      parser: '@babel/eslint-parser'
     })
   );
 

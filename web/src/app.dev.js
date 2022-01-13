@@ -6,7 +6,6 @@ import '@okta/okta-auth-js/polyfill';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
 import { routerMiddleware } from 'connected-react-router';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
@@ -58,12 +57,7 @@ if (browserIsRed) {
   );
 
   const render = (Component, props) => {
-    ReactDOM.render(
-      <AppContainer>
-        <Component {...props} />
-      </AppContainer>,
-      document.getElementById('app')
-    );
+    ReactDOM.render(<Component {...props} />, document.getElementById('app'));
   };
 
   module.hot.accept('./components/Root.js', () => {

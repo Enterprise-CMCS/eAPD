@@ -1,9 +1,4 @@
 module.exports = {
-  globals: {
-    'babel-jest': {
-      babelrcFile: '<rootDir>/.babelrc.js'
-    }
-  },
   coverageDirectory: '../coverage',
   rootDir: 'src',
   setupFiles: ['../polyfills.test.js', '../setup.enzyme.test.js'],
@@ -15,13 +10,10 @@ module.exports = {
   testEnvironment: 'jsdom',
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
+    '\\.[jt]sx?$': '../jest.transform.js',
     '\\.yaml$': 'yaml-jest',
-    '\\.js?$': 'babel-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
-  transformIgnorePatterns: [
-    // add node_modules here that _should_ be transformed
-    '/node_modules/(?!(d3-format|d3-geo)/)/'
-  ],
+  transformIgnorePatterns: ['node_modules/(?!(d3-format|d3-geo|d3-array)/)'],
   moduleFileExtensions: ['js', 'yaml']
 };
