@@ -247,7 +247,7 @@ jobs:
   # because "npm ci" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: cimg/node:14
+      - image: cimg/node:14.16.1
 #      - image: node:14
         auth:
           username: $DOCKER_INSTALL_DEPS_UN
@@ -278,7 +278,7 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: cimg/node:14    
+      - image: cimg/node:14.16.1    
       #- image: circleci/node:14
         auth:
           username: $DOCKER_VALIDATE_OPENAPI_UN
@@ -301,7 +301,7 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: cimg/node:14    
+      - image: cimg/node:14.16.1    
       #- image: node:14
         auth:
           username: $DOCKER_TESTS_UN
@@ -346,7 +346,7 @@ jobs:
   # Lints the backend code.
   backend lint:
     docker:
-      - image: cimg/node:14    
+      - image: cimg/node:14.16.1    
       #- image: node:14
         auth:
           username: $DOCKER_LINT_UN
@@ -402,7 +402,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/node:14    
+      - image: cimg/node:14.16.1    
       #- image: node:14
         auth:
           username: $DOCKER_USERNAME
@@ -423,7 +423,7 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: cimg/node:14    
+      - image: cimg/node:14.16.1    
       #- image: node:14
         auth:
           username: $DOCKER_LINT_UN
@@ -440,7 +440,7 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: cimg/node:14
+      - image: cimg/node:14.16.1
       #- image: node:14
         auth:
           username: $DOCKER_TESTS_UN
@@ -469,7 +469,7 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: cimg/node:14    
+      - image: cimg/node:14.16.1    
       #- image: node:14
         auth:
           username: $DOCKER_DEPS_VULN_UN
@@ -535,7 +535,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/python:3
+      - image: cimg/python:3.10.1
       #- image: python:3
         auth:
           username: $DOCKER_USERNAME
@@ -618,7 +618,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/python:3
+      - image: cimg/python:3.10.1
       #- image: python:3
         auth:
           username: $DOCKER_USERNAME
@@ -658,7 +658,7 @@ jobs:
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
     docker:
-      - image: cimg/python:3
+      - image: cimg/python:3.10.1
       #- image: python:3
         auth:
           username: $DOCKER_USERNAME
@@ -738,7 +738,7 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: cimg/node:14    
+      - image: cimg/node:14.16.1    
       #- image: node:14
         auth:
           username: $DOCKER_USERNAME
