@@ -247,7 +247,8 @@ jobs:
   # because "npm ci" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: node:14
+      - image: cimg/node:14
+#      - image: node:14
         auth:
           username: $DOCKER_INSTALL_DEPS_UN
           password: $DOCKER_INSTALL_DEPS_PW
@@ -277,7 +278,8 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: circleci/node:14
+      - image: cimg/node:14    
+      #- image: circleci/node:14
         auth:
           username: $DOCKER_VALIDATE_OPENAPI_UN
           password: $DOCKER_VALIDATE_OPENAPI_PW
@@ -299,7 +301,8 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: node:14
+      - image: cimg/node:14    
+      #- image: node:14
         auth:
           username: $DOCKER_TESTS_UN
           password: $DOCKER_TESTS_PW
@@ -317,7 +320,8 @@ jobs:
   # Runs backend API integration/end-to-end tests.
   backend api endpoint test:
     machine:
-      image: ubuntu-2004:202104-01
+      image: cimg/base:2021.04
+#      image: ubuntu-2004:202104-01
     steps:
       - checkout
       - attach_workspace:
@@ -342,7 +346,8 @@ jobs:
   # Lints the backend code.
   backend lint:
     docker:
-      - image: node:14
+      - image: cimg/node:14    
+      #- image: node:14
         auth:
           username: $DOCKER_LINT_UN
           password: $DOCKER_LINT_PW
@@ -358,7 +363,8 @@ jobs:
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
     machine:
-      image: ubuntu-2004:202104-01
+      image: cimg/base:2021.04
+      #image: ubuntu-2004:202104-01
     steps:
       - checkout
       - attach_workspace:
@@ -396,7 +402,8 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: node:14
+      - image: cimg/node:14    
+      #- image: node:14
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -416,7 +423,8 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: node:14
+      - image: cimg/node:14    
+      #- image: node:14
         auth:
           username: $DOCKER_LINT_UN
           password: $DOCKER_LINT_PW
@@ -432,7 +440,8 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: node:14
+      - image: cimg/node:14
+      #- image: node:14
         auth:
           username: $DOCKER_TESTS_UN
           password: $DOCKER_TESTS_PW
@@ -460,10 +469,10 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: node:14
+      - image: cimg/node:14    
+      #- image: node:14
         auth:
           username: $DOCKER_DEPS_VULN_UN
-
           password: $DOCKER_DEPS_VULN_PW
     steps:
       - checkout
@@ -477,7 +486,8 @@ jobs:
 
   owasp zap scan:
     machine:
-      image: ubuntu-2004:202104-01
+      image: cimg/base:2021.04
+      #image: ubuntu-2004:202104-01
     steps:
       - checkout
       - attach_workspace:
@@ -525,7 +535,8 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: python:3
+      - image: cimg/python:3
+      #- image: python:3
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -607,7 +618,8 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: python:3
+      - image: cimg/python:3
+      #- image: python:3
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -646,7 +658,8 @@ jobs:
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
     docker:
-      - image: python:3
+      - image: cimg/python:3
+      #- image: python:3
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -725,7 +738,8 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: node:14
+      - image: cimg/node:14    
+      #- image: node:14
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
