@@ -545,8 +545,8 @@ jobs:
           name: deploy to production
           working_directory: ~/project/bin/prod-deploy
           command: |
-            apt-get -qq update
-            apt-get -qq install jq -y
+            sudo apt-get -qq update
+            sudo apt-get -qq install jq -y
             pip install --quiet awscli
             ./aws.sh \
               --API_AWS_ACCESS_KEY_ID "${<< parameters.env >>_API_AWS_ACCESS_KEY_ID}" \
@@ -627,8 +627,8 @@ jobs:
       - run:
           name: sync to s3
           command: |
-            apt-get update
-            apt-get install awscli -y
+            sudo apt-get update
+            sudo apt-get install awscli -y
             aws s3 sync web/dist s3://"${<< parameters.env >>_WEB_AWS_S3_BUCKET}" --region ${<< parameters.env >>_WEB_AWS_REGION} --delete
             # Copy up index.html separately, so we can set metadata on it to
             # disable client cacheing
