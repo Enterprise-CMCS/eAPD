@@ -24,12 +24,21 @@ const FormAndReviewItem = ({
     }
     setCollapsed(true);
   }, []);
+  
   const expand = useCallback(() => setCollapsed(false), []);
   
   const handleCancel = () => {
     onCancelClick();
     collapse();
   }
+  
+  useEffect(() => {
+    console.log("item in FormAndReviewItem", item);
+  },[item])
+  
+  useEffect(() => {
+    console.log("item.metrics in FormAndReviewItem", item.metrics);    
+  }, [item.metrics])
   
   if (collapsed) {
     return (
@@ -107,6 +116,10 @@ const FormAndReviewList = ({
     () => ['form-and-review-list', className].join(' '),
     className
   );
+  
+  useEffect(() => {
+    console.log("list in FormAndReviewList", list);
+  }, [list])
 
   const addClick = e => {
     setHasAdded(true);

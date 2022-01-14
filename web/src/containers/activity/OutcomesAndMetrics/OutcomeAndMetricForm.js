@@ -24,9 +24,7 @@ const OutcomeAndMetricForm = forwardRef(
       removeMetric
     },
     ref
-) => {
-  const initialState = item;
-  
+) => {  
   function reducer(state, action) {
     switch (action.type) {
       case 'updateField':
@@ -43,23 +41,48 @@ const OutcomeAndMetricForm = forwardRef(
           metrics: metricsCopy
         }        
       }
+      case 'removeMetric': {
+        const metricsCopy = [...state.metrics];
+        metricsCopy.splice(action.index, 1);
+        console.log("metrics copy", metricsCopy);
+        return {
+          ...state,
+          metrics: metricsCopy
+        }        
+      }
+      case 'syncMetrics':
+        const updatedMetrics = [...item.metrics];
+        return {
+          ...state,
+          metrics: updatedMetrics
+        }
       default:
         throw new Error(
           'Unrecognized action type provided to OutcomesAndMetricForm reducer'
         );
     }
-  }
+  }  
+  
+  const [state, dispatch] = useReducer(reducer, item);
   
   useEffect(() => {
-    console.log("state changed", state);
-    console.log("item changed", item);
-  }, [state, item])
+    console.log("item.metrics updated in OutcomesAndMetricsForm");
+    dispatch({ type: 'syncMetrics', value: item.metrics })
+  }, [item.metrics]);
   
-  const [state, dispatch] = useReducer(reducer, initialState);
+  useEffect(() => {
+    console.log("item changed in OutcomesAndMetricsForm", item);
+  }, [item]);
   
   const handleSubmit = e => {
     e.preventDefault();
     saveOutcome(activityIndex, index, state);
+  };
+  
+  const handleDeleteMetric = (outcomeIndex, metricIndex) => {
+    console.log('metricIndex', metricIndex);
+    // dispatch({ type: 'removeMetric', index: metricIndex });
+    removeMetric(outcomeIndex, metricIndex);
   };
   
   const changeMetric = i => ({ target: { value } }) => {
@@ -67,50 +90,51 @@ const OutcomeAndMetricForm = forwardRef(
   };
 
   return (
-    <form index={index} ref={ref} onSubmit={handleSubmit}>
-      <Fragment key={`activity${activityIndex}-index${index}-form`}>
-        <TextField
-          key={`activity${activityIndex}-index${index}`}
-          autoFocus
-          name="outcome"
-          className="data-entry-box"
-          label="Outcome"
-          hint="Describe a distinct and measurable improvement for this system."
-          value={state.outcome}
-          multiline
-          rows="4"
-          onChange={e => 
-            dispatch({ type: 'updateField', field: 'outcome', value: e.target.value })
+    <form index={index} ref={ref} onSubmit={handleSubmit} key={`activity${activityIndex}-index${index}-form`}>
+      <TextField
+        key={`activity${activityIndex}-index${index}`}
+        autoFocus
+        name="outcome"
+        className="data-entry-box"
+        label="Outcome"
+        hint="Describe a distinct and measurable improvement for this system."
+        value={state.outcome}
+        multiline
+        rows="4"
+        onChange={e => 
+          dispatch({ type: 'updateField', field: 'outcome', value: e.target.value })
+        }
+      />
+      {state.metrics.map(({ key, metric }, i) => (
+        <Review
+          key={key}
+          onDeleteClick={
+            state.metrics.length === 1 && metric === ''
+              ? null
+              : () => handleDeleteMetric(index, i)
           }
-        />
-        {state.metrics.map(({ key, metric }, i) => (
-          <Review
+          // onDeleteClick={() => handleDeleteMetric(index, i)}
+          onDeleteLabel="Remove"
+          skipConfirmation
+          ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
+          objType="Metric"
+        >
+          <div
             key={key}
-            onDeleteClick={
-              state.metrics.length === 1 && metric === ''
-                ? null
-                : () => removeMetric(index, i)
-            }
-            ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
-            objType="Metric"
+            className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
           >
-            <div
-              key={key}
-              className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-            >
-              <TextField
-                name="metric"
-                label="Metric"
-                hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-                value={metric}
-                multiline
-                rows="4"
-                onChange={changeMetric(i)}
-              />
-            </div>
-          </Review>
-        ))}
-      </Fragment>
+            <TextField
+              name="metric"
+              label="Metric"
+              hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+              value={metric}
+              multiline
+              rows="4"
+              onChange={changeMetric(i)}
+            />
+          </div>
+        </Review>
+      ))}
     </form>
   );
   }

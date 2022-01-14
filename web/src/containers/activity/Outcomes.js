@@ -8,10 +8,7 @@ import {
 } from './OutcomesAndMetrics';
 import FormAndReviewList from '../../components/FormAndReviewList';
 import {
-  addOutcome,
-  addOutcomeMetric,
   removeOutcome,
-  removeOutcomeMetric
 } from '../../actions/editActivity';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
@@ -21,15 +18,13 @@ import { newOutcome, newOutcomeMetric } from '../../reducers/activities.js';
 
 const Outcomes = ({
   activityIndex,
-  add,
-  addMetric,
   list,
-  remove,
-  removeMetric
+  remove
 }) => {
   const [localList, setLocalList] = useState(list);
         
   useEffect(() => {
+    console.log("useEffect called with list", list);
     setLocalList(list)
   }, [list])
   
@@ -38,11 +33,10 @@ const Outcomes = ({
     setLocalList([...localList, newListItem]);
   };
   
-  const handleAddMetric = omIndex => {    
+  const handleAddMetric = omIndex => {   
     const newMetric = newOutcomeMetric();
     const localListCopy = [...localList];
     localListCopy[omIndex].metrics = [...localListCopy[omIndex].metrics, newMetric];
-    
     setLocalList(localListCopy);
   };
   
@@ -51,10 +45,13 @@ const Outcomes = ({
   };
   
   const handleDeleteMetric = (omIndex, metricIndex) => {
-    removeMetric(activityIndex, omIndex, metricIndex);
+    const localListCopy = [...localList];
+    localListCopy[omIndex].metrics.splice(metricIndex, 1);
+    setLocalList(localListCopy);
   };
   
   const onCancel = e => {
+    console.log("onCancel called with list", list);
     setLocalList(list);
   };
 
@@ -87,10 +84,8 @@ const Outcomes = ({
 
 Outcomes.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  addMetric: PropTypes.func.isRequired,
   list: PropTypes.array.isRequired,
-  remove: PropTypes.func.isRequired,
-  removeMetric: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
@@ -98,11 +93,11 @@ const mapStateToProps = (state, { activityIndex }) => ({
 });
 
 const mapDispatchToProps = {
-  addMetric: addOutcomeMetric,
-  remove: removeOutcome,
-  removeMetric: removeOutcomeMetric
+  remove: removeOutcome
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Outcomes);
-
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(Outcomes);
 export { Outcomes as plain, mapStateToProps, mapDispatchToProps };

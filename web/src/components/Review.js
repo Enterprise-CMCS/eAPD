@@ -12,6 +12,8 @@ const Review = ({
   editHref,
   onDeleteClick,
   onEditClick,
+  onDeleteLabel,
+  skipConfirmation,
   ...rest
 }) => {
   // If there's an editHref, we need to catch the onEditClick event before
@@ -38,6 +40,14 @@ const Review = ({
     onDeleteClick();
     setShowDeleteModal(false);
   };
+  
+  const handleDeleteClick = () => {
+    if(skipConfirmation) {
+      onDeleteClick();
+    } else {
+      setShowDeleteModal(true);      
+    }
+  }
 
   return (
     <ReviewSummary
@@ -72,11 +82,11 @@ const Review = ({
               <Button
                 size="small"
                 variation="transparent"
-                onClick={() => setShowDeleteModal(true)}
+                onClick={handleDeleteClick}
                 aria-label={`Delete${ariaLabel ? ` ${ariaLabel}` : ''}`}
                 className="ds-u-color--error"
-              >
-                Delete
+              >               
+                {onDeleteLabel || 'Delete'}
               </Button>
             </Fragment>
           )}
