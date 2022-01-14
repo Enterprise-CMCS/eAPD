@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 const FormAndReviewItem = ({
   collapsedComponent: Collapsed,
   expandedComponent: Expanded,
-  extraButtons,
   index,
   initialExpanded,
   item,
@@ -65,15 +64,6 @@ const FormAndReviewItem = ({
       >
         Save
       </Button>
-      {extraButtons.map(({ onClick, text }) => (
-        <Button
-          key={text}
-          className="ds-u-margin-left--2"
-          onClick={() => onClick(index)}
-        >
-          {text}
-        </Button>
-      ))}
     </div>
   );
 };
@@ -84,13 +74,11 @@ FormAndReviewItem.propTypes = {
     PropTypes.elementType
   ]).isRequired,
   expandedComponent: PropTypes.elementType.isRequired,
-  extraButtons: PropTypes.array,
   index: PropTypes.number.isRequired,
   initialExpanded: PropTypes.bool
 };
 
 FormAndReviewItem.defaultProps = {
-  extraButtons: [],
   initialExpanded: true
 };
 
@@ -101,7 +89,6 @@ const FormAndReviewList = ({
   className,
   collapsed,
   expanded,
-  extraItemButtons,
   list,
   noDataMessage,
   onAddClick,
@@ -136,7 +123,6 @@ const FormAndReviewList = ({
             key={item.key}
             collapsedComponent={collapsed}
             expandedComponent={expanded}
-            extraButtons={extraItemButtons}
             index={index}
             initialExpanded={hasAdded && index === list.length - 1}
             item={item}
@@ -164,7 +150,6 @@ FormAndReviewList.propTypes = {
   collapsed: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
     .isRequired,
   expanded: PropTypes.elementType.isRequired,
-  extraItemButtons: PropTypes.array,
   list: PropTypes.array.isRequired,
   noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onAddClick: PropTypes.func,

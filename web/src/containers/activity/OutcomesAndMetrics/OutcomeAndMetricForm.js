@@ -1,8 +1,10 @@
-import { TextField } from '@cmsgov/design-system';
+import { TextField, Button } from '@cmsgov/design-system';
 
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, forwardRef, useReducer, useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import Icon, { faPlusCircle } from '../../../components/Icons';
 
 import {
   setOutcome as setOutcomeAction,
@@ -14,14 +16,15 @@ import {
   saveOutcome
 } from '../../../actions/editActivity';
 
+import { newOutcomeMetric } from '../../../reducers/activities.js';
+
 const OutcomeAndMetricForm = forwardRef(
   (
     {
       activityIndex,
       item,
       index,
-      saveOutcome,
-      removeMetric
+      saveOutcome
     },
     ref
 ) => {  
@@ -32,6 +35,24 @@ const OutcomeAndMetricForm = forwardRef(
           ...state,
           [action.field]: action.value
         }
+      case 'addMetric': {
+        const newMetric = newOutcomeMetric();
+        return {
+          ...state,
+          metrics: [
+            ...state.metrics,
+            newMetric
+          ]
+        }
+      }
+      case 'removeMetric': {
+        const metricsCopy = [...state.metrics];
+        metricsCopy.splice(action.index, 1);
+        return {
+          ...state,
+          metrics: metricsCopy
+        }        
+      }
       case 'updateMetrics': {
         const metricsCopy = [...state.metrics];
         metricsCopy[action.metricIndex].metric = action.value;
@@ -41,21 +62,6 @@ const OutcomeAndMetricForm = forwardRef(
           metrics: metricsCopy
         }        
       }
-      case 'removeMetric': {
-        const metricsCopy = [...state.metrics];
-        metricsCopy.splice(action.index, 1);
-        console.log("metrics copy", metricsCopy);
-        return {
-          ...state,
-          metrics: metricsCopy
-        }        
-      }
-      case 'syncMetrics':
-        const updatedMetrics = [...item.metrics];
-        return {
-          ...state,
-          metrics: updatedMetrics
-        }
       default:
         throw new Error(
           'Unrecognized action type provided to OutcomesAndMetricForm reducer'
@@ -65,24 +71,17 @@ const OutcomeAndMetricForm = forwardRef(
   
   const [state, dispatch] = useReducer(reducer, item);
   
-  useEffect(() => {
-    console.log("item.metrics updated in OutcomesAndMetricsForm");
-    dispatch({ type: 'syncMetrics', value: item.metrics })
-  }, [item.metrics]);
-  
-  useEffect(() => {
-    console.log("item changed in OutcomesAndMetricsForm", item);
-  }, [item]);
-  
   const handleSubmit = e => {
     e.preventDefault();
     saveOutcome(activityIndex, index, state);
   };
   
+  const handleAddMetric = () => {
+    dispatch({ type: 'addMetric' });
+  }
+  
   const handleDeleteMetric = (outcomeIndex, metricIndex) => {
-    console.log('metricIndex', metricIndex);
-    // dispatch({ type: 'removeMetric', index: metricIndex });
-    removeMetric(outcomeIndex, metricIndex);
+    dispatch({ type: 'removeMetric', index: metricIndex });
   };
   
   const changeMetric = i => ({ target: { value } }) => {
@@ -113,7 +112,6 @@ const OutcomeAndMetricForm = forwardRef(
               ? null
               : () => handleDeleteMetric(index, i)
           }
-          // onDeleteClick={() => handleDeleteMetric(index, i)}
           onDeleteLabel="Remove"
           skipConfirmation
           ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
@@ -135,6 +133,16 @@ const OutcomeAndMetricForm = forwardRef(
           </div>
         </Review>
       ))}
+      <div className="align-content-right ds-u-margin-y--0" style={{width: 485}}>
+        <Button
+          key={`activity${activityIndex}-index${index}-add-metric`}
+          className="ds-c-button ds-c-button--transparent"
+          onClick={handleAddMetric}
+        >
+          <Icon icon={faPlusCircle} className='ds-u-margin-right--1' />
+          Add Metric to Outcome
+        </Button>
+      </div>
     </form>
   );
   }

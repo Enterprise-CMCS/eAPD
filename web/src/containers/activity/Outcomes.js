@@ -14,7 +14,7 @@ import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { selectOMsByActivityIndex } from '../../reducers/activities.selectors';
 
-import { newOutcome, newOutcomeMetric } from '../../reducers/activities.js';
+import { newOutcome } from '../../reducers/activities.js';
 
 const Outcomes = ({
   activityIndex,
@@ -33,25 +33,11 @@ const Outcomes = ({
     setLocalList([...localList, newListItem]);
   };
   
-  const handleAddMetric = omIndex => {   
-    const newMetric = newOutcomeMetric();
-    const localListCopy = [...localList];
-    localListCopy[omIndex].metrics = [...localListCopy[omIndex].metrics, newMetric];
-    setLocalList(localListCopy);
-  };
-  
   const handleDelete = index => {
     remove(activityIndex, index);
   };
   
-  const handleDeleteMetric = (omIndex, metricIndex) => {
-    const localListCopy = [...localList];
-    localListCopy[omIndex].metrics.splice(metricIndex, 1);
-    setLocalList(localListCopy);
-  };
-  
   const onCancel = e => {
-    console.log("onCancel called with list", list);
     setLocalList(list);
   };
 
@@ -67,10 +53,6 @@ const Outcomes = ({
         list={localList}
         collapsed={OutcomeAndMetricReview}
         expanded={OutcomeAndMetricForm}
-        extraItemButtons={[
-          { onClick: handleAddMetric, text: 'Add Metric' }
-        ]}
-        removeMetric={handleDeleteMetric}
         noDataMessage={t('activities.outcomes.noDataNotice')}
         onAddClick={handleAdd}
         onCancelClick={onCancel}
