@@ -43,7 +43,7 @@ export const addMissingTextAlert = (e, p, n) => {
 
 export const removeMissingTextAlert = (e, p) => {
   const lastDiv = p.lastChild;
-
+  console.log('BOOM')
   if(lastDiv.classList.contains(error)) {
     e.classList.remove(alert);
     lastDiv.classList.remove(error);
@@ -58,6 +58,7 @@ export const validateText = (e) => {
   const elName = el.name;
   const parent = el.parentNode;
   const text = el.innerHTML.trim();
+  const elValue = el.value;
 
-  return text === '' ? addMissingTextAlert(el, parent, elName) : removeMissingTextAlert(el, parent);
+  return text || elValue === '' ? addMissingTextAlert(el, parent, elName) : removeMissingTextAlert(el, parent);
 };

@@ -8,6 +8,7 @@ import {
   setMilestoneName
 } from '../../../actions/editActivity';
 import DateField from '../../../components/DateField';
+import { validateText } from '../../../helpers/textValidation';
 
 const MilestoneForm = ({
   activityIndex,
@@ -34,6 +35,8 @@ const MilestoneForm = ({
         name="name"
         value={milestone}
         onChange={changeName}
+        onBlur={validateText}
+        onKeyUp={validateText}
       />
       <DateField
         label="Target completion date"
