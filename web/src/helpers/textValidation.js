@@ -21,6 +21,21 @@ export const disableBtn = (e) => {
         }
 };
 
+export const addMissingDateAlert = () => {
+
+};
+
+export const removeMissingDateAlert = () => {
+
+};
+
+export const validateDate = (e) => {
+  const el = e.currentTarget;
+  const elValue = el.value;
+
+  return elValue === '' ? addMissingDateAlert() : removeMissingDateAlert();
+};
+
 export const addMissingTextAlert = (e, p, n) => {
   const lastDiv = p.lastChild;
   const div = document.createElement('div');
@@ -54,7 +69,7 @@ export const removeMissingTextAlert = (e, p) => {
 };
 
 export const validateText = (e) => {
-  const el = e.currentTarget
+  const el = e.currentTarget;
   const elName = el.name;
   const parent = el.parentNode;
   const text = el.innerHTML.trim();
