@@ -84,14 +84,14 @@
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
-    "dotenv": "^11.0.0",
+    "dotenv": "^14.2.0",
     "express": "^4.17.2",
     "file-type": "^16.5.3",
     "form-data": "^4.0.0",
     "jsonpatch": "^3.0.1",
     "jsonpointer": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.95.15",
+    "knex": "^1.0.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
     "pg": "^8.7.1",
@@ -117,6 +117,9 @@
     "sinon": "^12.0.1",
     "supertest": "^6.2.1",
     "tap": "^15.1.6"
+  },
+  "updateRestrictions": {
+    "file-type": "can't upgrade to 17 because it requires babel"
   },
   "resolutions": {},
   "jest": {
