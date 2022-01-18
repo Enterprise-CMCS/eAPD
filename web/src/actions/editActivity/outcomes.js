@@ -2,11 +2,9 @@ import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 export const saveOutcome = (activityIndex, outcomeIndex, data) => (dispatch, getState) => {
   const previousState = getState();
-  
+
   let indexCalculated = outcomeIndex;
-  
-  console.log("stuff", {activityIndex, outcomeIndex, data});
-  
+
   if(previousState.apd.data.activities[activityIndex].outcomes[outcomeIndex] === undefined) {
     indexCalculated = previousState.apd.data.activities[activityIndex].outcomes.length;
     dispatch({

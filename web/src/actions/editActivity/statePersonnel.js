@@ -1,12 +1,27 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 import { updateBudget } from '../budget';
 
-export const addPersonnel = activityIndex => (dispatch, getState) => {
+export const savePersonnel = (activityIndex, personnelIndex, data) => (dispatch, getState) => {
+  console.log("data passed to save", data);
+  const previousState = getState();
+
+  let indexCalculated = personnelIndex;
+
+  if(previousState.apd.data.activities[activityIndex].statePersonnel[personnelIndex] === undefined) {
+    indexCalculated = previousState.apd.data.activities[activityIndex].statePersonnel.length;
+    dispatch({
+      type: ADD_APD_ITEM,
+      path: `/activities/${activityIndex}/statePersonnel/-`,
+      state: getState()
+    });
+  }
+  
   dispatch({
-    type: ADD_APD_ITEM,
-    path: `/activities/${activityIndex}/statePersonnel/-`,
-    state: getState()
+    type: EDIT_APD,
+    path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}`,
+    value: data
   });
+  
   dispatch(updateBudget());
 };
 
@@ -14,50 +29,6 @@ export const removePersonnel = (activityIndex, personnelIndex) => dispatch => {
   dispatch({
     type: REMOVE_APD_ITEM,
     path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}`
-  });
-  dispatch(updateBudget());
-};
-
-export const setPersonnelTitle = (activityIndex, personnelIndex, title) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}/title`,
-  value: title
-});
-
-export const setPersonnelDescription = (
-  activityIndex,
-  personnelIndex,
-  description
-) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}/description`,
-  value: description
-});
-
-export const setPersonnelCostForYear = (
-  activityIndex,
-  personnelIndex,
-  year,
-  cost
-) => dispatch => {
-  dispatch({
-    type: EDIT_APD,
-    path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}/years/${year}/amt`,
-    value: cost
-  });
-  dispatch(updateBudget());
-};
-
-export const setPersonnelFTEForYear = (
-  activityIndex,
-  personnelIndex,
-  year,
-  fte
-) => dispatch => {
-  dispatch({
-    type: EDIT_APD,
-    path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}/years/${year}/perc`,
-    value: fte
   });
   dispatch(updateBudget());
 };

@@ -1,49 +1,70 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  setMilestoneEndDate,
-  setMilestoneName
-} from '../../../actions/editActivity';
 import DateField from '../../../components/DateField';
 
-const MilestoneForm = ({
-  activityIndex,
-  index,
-  item: { endDate, milestone },
-  setEndDate,
-  setName
-}) => {
-  const changeDate = useCallback(
-    (_, dateStr) => setEndDate(activityIndex, index, dateStr),
-    []
-  );
-  const changeName = useCallback(
-    ({ target: { value } }) => setName(activityIndex, index, value),
-    []
-  );
+import {
+  saveMilestone
+} from '../../../actions/editActivity';
+
+const MilestoneForm = forwardRef(
+  (
+    {
+      activityIndex,
+      index,
+      item,
+      saveMilestone
+    },
+    ref
+  ) => {
+  
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'updateField':
+        return {
+          ...state,
+          [action.field]: action.value
+        }
+      default:
+        throw new Error(
+          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+        );
+    }
+  }  
+  
+  const [state, dispatch] = useReducer(reducer, item);
+  
+  const changeDate = (_, dateStr) => dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
+  
+  const changeName = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'milestone', value: value });
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    saveMilestone(activityIndex, index, state);
+  };
 
   return (
-    <Fragment>
+    <form index={index} ref={ref} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Milestone {index + 1}:</h6>
       <TextField
         autoFocus
         label="Name"
         name="name"
-        value={milestone}
+        value={state.milestone}
         onChange={changeName}
       />
       <DateField
         label="Target completion date"
         hint=""
-        value={endDate}
+        value={state.endDate}
         onChange={changeDate}
       />
-    </Fragment>
+    </form>
   );
-};
+}
+);
 
 MilestoneForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
@@ -51,16 +72,15 @@ MilestoneForm.propTypes = {
   item: PropTypes.shape({
     endDate: PropTypes.string.isRequired,
     milestone: PropTypes.string.isRequired
-  }).isRequired,
-  setEndDate: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired
+  }).isRequired
 };
 
 const mapDispatchToProps = {
-  setEndDate: setMilestoneEndDate,
-  setName: setMilestoneName
+  saveMilestone: saveMilestone
 };
 
-export default connect(null, mapDispatchToProps)(MilestoneForm);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  MilestoneForm
+);
 
 export { MilestoneForm as plain, mapDispatchToProps };

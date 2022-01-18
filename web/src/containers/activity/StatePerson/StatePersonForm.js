@@ -1,76 +1,123 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useReducer, forwardRef, useEffect } from 'react';
 import { connect } from 'react-redux';
-
-import {
-  setPersonnelFTEForYear,
-  setPersonnelCostForYear,
-  setPersonnelDescription,
-  setPersonnelTitle
-} from '../../../actions/editActivity';
 
 import TextArea from '../../../components/TextArea';
 import PersonCostForm from '../../../components/PersonCostForm';
 
-const StatePersonForm = ({
-  activityIndex,
-  item: { description, title, years },
-  index,
-  setCost,
-  setDescription,
-  setFTE,
-  setTitle
-}) => {
+import {
+  savePersonnel
+} from '../../../actions/editActivity/';
+
+const StatePersonForm = forwardRef(
+  (
+    {
+      activityIndex,
+      item,
+      index,
+      savePersonnel
+    },
+  ref
+) => {
+  
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'updateField':
+        return {
+          ...state,
+          [action.field]: action.value
+        }
+      case 'updateCosts':
+        return {
+          ...state,
+          years: {
+            ...state.years,
+            [action.year]: {
+              ...state.years[action.year],
+              amt: action.value
+            }
+          }
+        }
+      case 'updateFte':
+        return {
+          ...state,
+          years: {
+            ...state.years,
+            [action.year]: {
+              ...state.years[action.year],
+              perc: action.value
+            }
+          }
+        }
+      default:
+        throw new Error(
+          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+        );
+    }
+  }
+  
+  const [state, dispatch] = useReducer(reducer, item);
+  
+  useEffect(() => {
+    console.log("state", state);
+  }, [state]);
+  
   const editTitle = useCallback(
-    ({ target: { value } }) => setTitle(activityIndex, index, value),
+    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'title', value: value }),
     [index]
   );
 
   const editDesc = useCallback(
-    ({ target: { value } }) => setDescription(activityIndex, index, value),
+    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value: value }),
     [index]
   );
 
   const getEditCostForYear = useCallback(
     (year, value) => {
-      setCost(activityIndex, index, year, value);
+      dispatch({ type: 'updateCosts', year: year, value: value });
     },
     [index]
   );
 
   const getEditFTEForYear = useCallback(
     (year, value) => {
-      setFTE(activityIndex, index, year, value);
+      dispatch({ type: 'updateFte', year: year, value: value });
     },
     [index]
   );
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    savePersonnel(activityIndex, index, state);
+  };
 
   return (
-    <Fragment>
+    <form index={index} ref={ref} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
       <TextField
         autoFocus
         label="Personnel title"
         name="title"
-        value={title}
+        value={state.title}
         onChange={editTitle}
       />
       <TextArea
         label="Description"
         rows={5}
         name="desc"
-        value={description}
+        value={state.description}
         onChange={editDesc}
       />
       <PersonCostForm
-        items={years}
+        items={state.years}
         setCost={getEditCostForYear}
         setFTE={getEditFTEForYear}
       />
-    </Fragment>
+    </form>
   );
-};
+}
+);
 
 StatePersonForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
@@ -80,19 +127,15 @@ StatePersonForm.propTypes = {
     title: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired,
-  setCost: PropTypes.func.isRequired,
-  setDescription: PropTypes.func.isRequired,
-  setFTE: PropTypes.func.isRequired,
-  setTitle: PropTypes.func.isRequired
+  savePersonnel: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  setFTE: setPersonnelFTEForYear,
-  setCost: setPersonnelCostForYear,
-  setDescription: setPersonnelDescription,
-  setTitle: setPersonnelTitle
+  savePersonnel: savePersonnel
 };
 
-export default connect(null, mapDispatchToProps)(StatePersonForm);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  StatePersonForm
+);
 
 export { StatePersonForm as plain, mapDispatchToProps };

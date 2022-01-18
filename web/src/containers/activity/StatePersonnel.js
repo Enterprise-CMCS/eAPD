@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { addPersonnel, removePersonnel } from '../../actions/editActivity';
@@ -9,14 +9,38 @@ import Instruction from '../../components/Instruction';
 import { t } from '../../i18n';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
+
+import { selectApdYears } from '../../reducers/apd.selectors';
+
 import { StatePersonForm, StatePersonReview } from './StatePerson';
 
-const StatePersonnel = ({ activityIndex, add, personnel, remove }) => {
-  const handleDelete = useCallback(index => {
-    remove(activityIndex, index);
-  });
+import { newStatePerson } from '../../reducers/activities.js';
 
-  const handleAdd = useCallback(() => add(activityIndex));
+const StatePersonnel = ({ 
+  activityIndex, 
+  personnel, 
+  remove,
+  years
+}) => {
+  
+  const [localList, setLocalList] = useState(personnel);
+          
+  useEffect(() => {
+    setLocalList(personnel)
+  }, [personnel])
+  
+  const handleAdd = () => {
+    const newListItem = newStatePerson(years);
+    setLocalList([...localList, newListItem]);
+  };
+  
+  const handleDelete = index => {
+    remove(activityIndex, index);
+  };
+  
+  const onCancel = e => {
+    setLocalList(personnel);
+  };
 
   return (
     <Fragment>
@@ -24,11 +48,12 @@ const StatePersonnel = ({ activityIndex, add, personnel, remove }) => {
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText={t('activities.statePersonnel.addButtonText')}
-        list={personnel}
+        list={localList}
         collapsed={StatePersonReview}
         expanded={StatePersonForm}
         noDataMessage={t('activities.statePersonnel.noDataNotice')}
         onAddClick={handleAdd}
+        onCancelClick={onCancel}
         onDeleteClick={handleDelete}
         allowDeleteAll
       />
@@ -38,17 +63,17 @@ const StatePersonnel = ({ activityIndex, add, personnel, remove }) => {
 
 StatePersonnel.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  add: PropTypes.func.isRequired,
   personnel: PropTypes.array.isRequired,
-  remove: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  personnel: selectActivityStatePersonnel(state, { activityIndex })
+  personnel: selectActivityStatePersonnel(state, { activityIndex }),
+  years: selectApdYears(state)
 });
 
 const mapDispatchToProps = {
-  add: addPersonnel,
   remove: removePersonnel
 };
 

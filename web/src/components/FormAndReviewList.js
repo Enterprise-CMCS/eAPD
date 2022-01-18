@@ -31,14 +31,6 @@ const FormAndReviewItem = ({
     collapse();
   }
   
-  useEffect(() => {
-    console.log("item in FormAndReviewItem", item);
-  },[item])
-  
-  useEffect(() => {
-    console.log("item.metrics in FormAndReviewItem", item.metrics);    
-  }, [item.metrics])
-  
   if (collapsed) {
     return (
       <div ref={container} className="form-and-review-list--item__collapsed">
@@ -103,10 +95,6 @@ const FormAndReviewList = ({
     () => ['form-and-review-list', className].join(' '),
     className
   );
-  
-  useEffect(() => {
-    console.log("list in FormAndReviewList", list);
-  }, [list])
 
   const addClick = e => {
     setHasAdded(true);

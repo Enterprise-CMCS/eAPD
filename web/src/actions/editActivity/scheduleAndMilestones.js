@@ -1,5 +1,26 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
+export const saveMilestone = (activityIndex, milestoneIndex, data) => (dispatch, getState) => {
+  const previousState = getState();
+  
+  let indexCalculated = milestoneIndex;
+  
+  if(previousState.apd.data.activities[activityIndex].schedule[milestoneIndex] === undefined) {
+    indexCalculated = previousState.apd.data.activities[activityIndex].schedule.length;
+    dispatch({
+      type: ADD_APD_ITEM,
+      path: `/activities/${activityIndex}/schedule/-`,
+      state: getState()
+    });
+  }
+  
+  dispatch({
+    type: EDIT_APD,
+    path: `/activities/${activityIndex}/schedule/${milestoneIndex}`,
+    value: data
+  });
+}
+
 export const addMilestone = activityIndex => (dispatch, getState) => {
   dispatch({
     type: ADD_APD_ITEM,

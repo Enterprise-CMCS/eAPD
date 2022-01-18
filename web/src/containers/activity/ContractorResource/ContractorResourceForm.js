@@ -1,6 +1,6 @@
 import { FormLabel, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, forwardRef, useMemo, useState, useReducer, useEffect } from 'react';
+import React, { Fragment, forwardRef, useMemo, useState, useReducer } from 'react';
 import { connect } from 'react-redux';
 
 import Choice from '../../../components/Choice';
@@ -12,7 +12,7 @@ import RichText from '../../../components/RichText';
 
 import {
   saveContractor
-} from '../../../actions/editActivity';
+} from '../../../actions/editActivity/';
 
 const ContractorResourceForm = forwardRef(
   (

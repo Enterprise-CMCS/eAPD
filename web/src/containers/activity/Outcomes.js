@@ -24,7 +24,6 @@ const Outcomes = ({
   const [localList, setLocalList] = useState(list);
         
   useEffect(() => {
-    console.log("useEffect called with list", list);
     setLocalList(list)
   }, [list])
   
@@ -57,7 +56,6 @@ const Outcomes = ({
         onAddClick={handleAdd}
         onCancelClick={onCancel}
         onDeleteClick={handleDelete}
-        handleChange={() => {}}
         allowDeleteAll
       />
     </Subsection>
