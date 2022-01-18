@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useReducer, forwardRef, useEffect } from 'react';
+import React, { Fragment, useCallback, useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import TextArea from '../../../components/TextArea';
@@ -58,10 +58,6 @@ const StatePersonForm = forwardRef(
   }
   
   const [state, dispatch] = useReducer(reducer, item);
-  
-  useEffect(() => {
-    console.log("state", state);
-  }, [state]);
   
   const editTitle = useCallback(
     ({ target: { value } }) => dispatch({ type: 'updateField', field: 'title', value: value }),

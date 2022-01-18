@@ -2,7 +2,6 @@ import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 import { updateBudget } from '../budget';
 
 export const savePersonnel = (activityIndex, personnelIndex, data) => (dispatch, getState) => {
-  console.log("data passed to save", data);
   const previousState = getState();
 
   let indexCalculated = personnelIndex;
