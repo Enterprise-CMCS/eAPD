@@ -6,25 +6,25 @@ const Footer = () => {
       <div className="ds-l-container">
         <div className="ds-l-row ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
           <img
-            src="/static/img/dhhs_logo_black.png"
+            src="static/img/dhhs_logo_black.png"
             alt="Health and Human Services logo"
             className="hhs-logo"
             width="80px"
           />
           <img
-            src="/static/img/cms-logo.png"
+            src="static/img/cms-logo.png"
             alt="Centers for Medicare & Medicaid Services Logo"
             className="cms-logo"
             width="150px"
           />
           <img
-            src="/static/img/macpro_logo_transparent.png"
+            src="static/img/macpro_logo_transparent.png"
             alt="MACPro logo"
             className="macpro-logo"
             width="100px"
           />
           <img
-            src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
+            src="static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
             alt="eAPD logo"
             className="eAPD-logo"
             width="115px"

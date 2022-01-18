@@ -19,7 +19,9 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
 
     it('should ask a user without affiliations to request one', () => {
       cy.loginWithEnv('norole');
-      cy.findByLabelText(/Select your State Affiliation/i).type('alas');
+      cy.findByLabelText(/Select your State Affiliation/i)
+        .clear()
+        .type('alas');
       cy.get('li').should('have.length', 1);
       cy.get('li:first-of-type').click();
       cy.findByRole('button', { name: /Submit/ }).click();
@@ -54,7 +56,9 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('button', { name: /norole/ }).click();
       cy.findByText(/Manage Account/).click();
 
-      cy.findByLabelText(/Request a new State Affiliation/i).type('alab');
+      cy.findByLabelText(/Request a new State Affiliation/i)
+        .clear()
+        .type('alab');
       cy.get('ul.ds-c-list--bare').children().should('have.length', 1);
       cy.get('ul.ds-c-list--bare').children('li:first-of-type').click();
       cy.findByRole('button', { name: /Submit/ }).click();
@@ -159,15 +163,21 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
     it('should allow a new user to select multiple affiliations the first time', () => {
       cy.loginWithEnv('norole');
 
-      cy.findByLabelText(/Select your State Affiliation/i).type('alas');
+      cy.findByLabelText(/Select your State Affiliation/i)
+        .clear()
+        .type('alas');
       cy.get('li').should('have.length', 1);
       cy.get('li:first-of-type').click();
 
-      cy.findByLabelText(/Select your State Affiliation/i).type('alab');
+      cy.findByLabelText(/Select your State Affiliation/i)
+        .clear()
+        .type('alab');
       cy.get('li').should('have.length', 1);
       cy.get('li:first-of-type').click();
 
-      cy.findByLabelText(/Select your State Affiliation/i).type('colo');
+      cy.findByLabelText(/Select your State Affiliation/i)
+        .clear()
+        .type('colo');
       cy.get('li').should('have.length', 1);
       cy.get('li:first-of-type').click();
 
@@ -202,7 +212,9 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
 
     it('should handle a user selecting one affiliation and then requesting multiple additional affiliations', () => {
       cy.loginWithEnv('norole');
-      cy.findByLabelText(/Select your State Affiliation/i).type('alas');
+      cy.findByLabelText(/Select your State Affiliation/i)
+        .clear()
+        .type('alas');
       cy.get('li').should('have.length', 1);
       cy.get('li:first-of-type').click();
       cy.findByRole('button', { name: /Submit/ }).click();
@@ -214,11 +226,15 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('button', { name: /norole/ }).click();
       cy.findByText(/Manage Account/).click();
 
-      cy.findByLabelText(/Request a new State Affiliation/i).type('alaba');
+      cy.findByLabelText(/Request a new State Affiliation/i)
+        .clear()
+        .type('alaba');
       cy.get('ul.ds-c-list--bare').children().should('have.length', 1);
       cy.get('ul.ds-c-list--bare').children('li:first-of-type').click();
 
-      cy.findByLabelText(/Request a new State Affiliation/i).type('colo');
+      cy.findByLabelText(/Request a new State Affiliation/i)
+        .clear()
+        .type('colo');
       cy.get('ul.ds-c-list--bare').children().should('have.length', 1);
       cy.get('ul.ds-c-list--bare').children('li:first-of-type').click();
 

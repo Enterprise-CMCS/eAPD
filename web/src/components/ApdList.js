@@ -37,9 +37,9 @@ const ApdList = ({
     select(id, `${route}/${id}`);
   };
 
-  const canCreateApd = activities.indexOf('edit-document') >=0
+  const canCreateApd = activities.indexOf('edit-document') >= 0;
 
-  const canDeleteApd = activities.indexOf('edit-document') >=0
+  const canDeleteApd = activities.indexOf('edit-document') >= 0;
 
   if (isLoading) {
     return (
@@ -67,7 +67,7 @@ const ApdList = ({
                   data-testid="eAPDlogo"
                 >
                   <img
-                    src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
+                    src="static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
                     alt="eAPD Logo"
                   />
                 </div>
