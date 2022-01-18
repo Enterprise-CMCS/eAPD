@@ -319,7 +319,7 @@ jobs:
 
   # Runs backend API integration/end-to-end tests.
   backend api endpoint test:
-    machine:
+    machine: true
       image: ubuntu-2004:202104-01
     steps:
       - checkout
@@ -361,7 +361,7 @@ jobs:
 
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
-    machine:
+    machine: true
       image: ubuntu-2004:202104-01
     steps:
       - checkout
@@ -483,7 +483,7 @@ jobs:
             npm run audit
 
   owasp zap scan:
-    machine:
+    machine: true
       image: ubuntu-2004:202104-01
     steps:
       - checkout
