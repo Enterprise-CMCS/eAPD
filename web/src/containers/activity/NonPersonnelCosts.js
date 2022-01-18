@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
@@ -9,26 +9,41 @@ import {
 } from './NonPersonnelCost';
 
 import {
-  addNonPersonnelCost,
   removeNonPersonnelCost
 } from '../../actions/editActivity';
+
+import { newExpense } from '../../reducers/activities.js';
+
+import { selectApdYears } from '../../reducers/apd.selectors';
+
 import { selectActivityNonPersonnelCosts } from '../../reducers/activities.selectors';
 import Instruction from '../../components/Instruction';
 import { t } from '../../i18n';
 
 const NonPersonnelCosts = ({
   activityIndex,
-  addExpense,
   expenses,
-  removeExpense
+  removeExpense,
+  years
 }) => {
-  const handleDelete = useCallback(index => {
+  const [localList, setLocalList] = useState(expenses);
+          
+  useEffect(() => {
+    setLocalList(expenses)
+  }, [expenses])
+  
+  const handleAdd = () => {
+    const newListItem = newExpense(years);
+    setLocalList([...localList, newListItem]);
+  };
+  
+  const handleDelete = index => {
     removeExpense(activityIndex, index);
-  });
-
-  const handleAdd = useCallback(() => {
-    addExpense(activityIndex);
-  });
+  };
+  
+  const onCancel = e => {
+    setLocalList(expenses);
+  };
 
   return (
     <Fragment>
@@ -36,11 +51,12 @@ const NonPersonnelCosts = ({
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText={t('activities.expenses.addButtonText')}
-        list={expenses}
+        list={localList}
         collapsed={NonPersonnelCostReview}
         expanded={NonPersonnelCostForm}
         noDataMessage={t('activities.expenses.noDataNotice')}
         onAddClick={handleAdd}
+        onCancelClick={onCancel}
         onDeleteClick={handleDelete}
         allowDeleteAll
       />
@@ -51,16 +67,16 @@ const NonPersonnelCosts = ({
 NonPersonnelCosts.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   expenses: PropTypes.array.isRequired,
-  addExpense: PropTypes.func.isRequired,
-  removeExpense: PropTypes.func.isRequired
+  removeExpense: PropTypes.func.isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  expenses: selectActivityNonPersonnelCosts(state, activityIndex)
+  expenses: selectActivityNonPersonnelCosts(state, activityIndex),
+  years: selectApdYears(state)
 });
 
 const mapDispatchToProps = {
-  addExpense: addNonPersonnelCost,
   removeExpense: removeNonPersonnelCost
 };
 

@@ -1,6 +1,6 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -11,27 +11,63 @@ import {
 import DollarField from '../../../components/DollarField';
 import TextArea from '../../../components/TextArea';
 
-const NonPersonnelCostForm = ({
-  activityIndex,
-  index,
-  item: { category, description, years },
-  setCategory,
-  setDescription,
-  setCost
-}) => {
+import {
+  saveNonPersonnelCost
+} from '../../../actions/editActivity/';
+
+const NonPersonnelCostForm = forwardRef(
+  (
+    {
+      activityIndex,
+      index,
+      item,
+      saveNonPersonnelCost
+    },
+    ref
+) => {
+  
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'updateField':
+        return {
+          ...state,
+          [action.field]: action.value
+        }
+      case 'updateCosts':
+        return {
+          ...state,
+          years: {
+            ...state.years,
+            [action.year]: action.value
+          }
+        }
+      default:
+        throw new Error(
+          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+        );
+    }
+  }
+  
+  const [state, dispatch] = useReducer(reducer, item);
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    saveNonPersonnelCost(activityIndex, index, state);
+  };
+  
   const editCategory = useCallback(
-    ({ target: { value } }) => setCategory(activityIndex, index, value),
+    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'category', value: value }),
     [index]
   );
 
   const editDesc = useCallback(
-    ({ target: { value } }) => setDescription(activityIndex, index, value),
+    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value: value }),
     [index]
   );
 
   const getEditCostForYear = useCallback(
     year => ({ target: { value } }) =>
-      setCost(activityIndex, index, year, value),
+      dispatch({ type: 'updateCosts', year: year, value: value }),
     [index]
   );
 
@@ -45,14 +81,14 @@ const NonPersonnelCostForm = ({
   ].map(item => ({ label: item, value: item }));
   categories.unshift({label:'Select an option', value:''})
   return (
-    <Fragment>
+    <form index={index} ref={ref} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
       <Dropdown
         autoFocus
         label="Category"
         name="category"
         options={categories}
-        value={category}
+        value={state.category}
         onChange={editCategory}
       />
 
@@ -60,11 +96,11 @@ const NonPersonnelCostForm = ({
         label="Description"
         rows={5}
         name="desc"
-        value={description}
+        value={state.description}
         onChange={editDesc}
       />
 
-      {Object.entries(years).map(([year, cost]) => (
+      {Object.entries(state.years).map(([year, cost]) => (
         <DollarField
           key={year}
           label={`FFY ${year} Cost`}
@@ -74,9 +110,10 @@ const NonPersonnelCostForm = ({
           onChange={getEditCostForYear(year)}
         />
       ))}
-    </Fragment>
+    </form>
   );
-};
+}
+);
 
 NonPersonnelCostForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
@@ -86,17 +123,15 @@ NonPersonnelCostForm.propTypes = {
     description: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired,
-  setCategory: PropTypes.func.isRequired,
-  setDescription: PropTypes.func.isRequired,
-  setCost: PropTypes.func.isRequired
+  saveNonPersonnelCost: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  setCategory: setNonPersonnelCostCategory,
-  setDescription: setNonPersonnelCostDescription,
-  setCost: setNonPersonnelCostForYear
+  saveNonPersonnelCost: saveNonPersonnelCost
 };
 
-export default connect(null, mapDispatchToProps)(NonPersonnelCostForm);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  NonPersonnelCostForm
+);
 
 export { NonPersonnelCostForm as plain, mapDispatchToProps };

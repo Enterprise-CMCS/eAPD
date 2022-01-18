@@ -1,12 +1,26 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 import { updateBudget } from '../budget';
 
-export const addNonPersonnelCost = activityIndex => (dispatch, getState) => {
+export const saveNonPersonnelCost = (activityIndex, nonPersonnelIndex, data) => (dispatch, getState) => {
+  const previousState = getState();
+
+  let indexCalculated = nonPersonnelIndex;
+
+  if(previousState.apd.data.activities[activityIndex].expenses[nonPersonnelIndex] === undefined) {
+    indexCalculated = previousState.apd.data.activities[activityIndex].expenses.length;
+    dispatch({
+      type: ADD_APD_ITEM,
+      path: `/activities/${activityIndex}/expenses/-`,
+      state: getState()
+    });
+  }
+  
   dispatch({
-    type: ADD_APD_ITEM,
-    path: `/activities/${activityIndex}/expenses/-`,
-    state: getState()
+    type: EDIT_APD,
+    path: `/activities/${activityIndex}/expenses/${nonPersonnelIndex}`,
+    value: data
   });
+  
   dispatch(updateBudget());
 };
 
@@ -17,40 +31,6 @@ export const removeNonPersonnelCost = (
   dispatch({
     type: REMOVE_APD_ITEM,
     path: `/activities/${activityIndex}/expenses/${costIndex}`
-  });
-  dispatch(updateBudget());
-};
-
-export const setNonPersonnelCostCategory = (
-  activityIndex,
-  costIndex,
-  category
-) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/expenses/${costIndex}/category`,
-  value: category
-});
-
-export const setNonPersonnelCostDescription = (
-  activityIndex,
-  costIndex,
-  description
-) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/expenses/${costIndex}/description`,
-  value: description
-});
-
-export const setNonPersonnelCostForYear = (
-  activityIndex,
-  costIndex,
-  year,
-  cost
-) => dispatch => {
-  dispatch({
-    type: EDIT_APD,
-    path: `/activities/${activityIndex}/expenses/${costIndex}/years/${year}`,
-    value: cost
   });
   dispatch(updateBudget());
 };
