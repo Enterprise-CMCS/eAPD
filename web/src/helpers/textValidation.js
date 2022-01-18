@@ -2,14 +2,20 @@
 const error = 'missing-text-error';
 const alert = 'missing-text-alert';
 
-export const findAncestor = (e) => {
+export const findTextAncestor = (e) => {
   // eslint-disable-next-line no-param-reassign
   while ((e = e.parentNode) && !e.classList.contains('form-and-review-list--item__expanded'));
   return e;
 }
 
+export const findDateAncestor = (e) => {
+  // eslint-disable-next-line no-param-reassign
+  while ((e = e.parentNode) && !e.classList.contains('ds-c-datefield__container'));
+  return e;
+};
+
 export const disableBtn = (e) => {
-  const container = findAncestor(e);
+  const container = findTextAncestor(e);
   const doneBtn = container.querySelector('#form-and-review-list--done-btn');
 
   if (container
@@ -21,19 +27,52 @@ export const disableBtn = (e) => {
         }
 };
 
-export const addMissingDateAlert = () => {
+export const addMissingDateAlert = (e) => {
+  const container = findDateAncestor(e);
+  const div = document.createElement('div');
+  const formContainer = findTextAncestor(e);
+  const doneBtn = formContainer.querySelector('#form-and-review-list--done-btn');
+  const parent = container.parentNode;
 
-};
+  
+  if (formContainer
+        .querySelectorAll(`.${error}`)
+        .length > 0) {
+      doneBtn.disabled = true;
+    } else {
+      doneBtn.disabled = false;
+    }
 
-export const removeMissingDateAlert = () => {
+  
+    if (!parent
+          .querySelectorAll(`.${error}`)
+          .length > 0) {
+      div.innerHTML = 'Please provide a target completion date.';
+      div.classList.add(error);
+      e.classList.add(alert);    
+      parent.appendChild(div);
+    }
+  };
+  
+export const removeMissingDateAlert = (e) => {
+  const container = findDateAncestor(e);
+  const parent = container.parentNode;
+  const lastDiv = parent.lastChild;
 
+  if(lastDiv.classList.contains(error)) {
+    e.classList.remove(alert);
+    lastDiv.classList.remove(error);
+    parent.removeChild(lastDiv);
+  }
+
+  disableBtn(e);
 };
 
 export const validateDate = (e) => {
   const el = e.currentTarget;
   const elValue = el.value;
 
-  return elValue === '' ? addMissingDateAlert() : removeMissingDateAlert();
+  return elValue === '' ? addMissingDateAlert(el) : removeMissingDateAlert(el);
 };
 
 export const addMissingTextAlert = (e, p, n) => {
@@ -58,7 +97,7 @@ export const addMissingTextAlert = (e, p, n) => {
 
 export const removeMissingTextAlert = (e, p) => {
   const lastDiv = p.lastChild;
-  console.log('BOOM')
+
   if(lastDiv.classList.contains(error)) {
     e.classList.remove(alert);
     lastDiv.classList.remove(error);
