@@ -292,7 +292,7 @@ jobs:
       - run:
           name: validate
           command: |
-            docker login -u $DOCKER_VALIDATE_OPENAPI_UN -p $DOCKER_VALIDATE_OPENAPI_PW
+            echo "$DOCKER_VALIDATE_OPENAPI_PW" |docker login -u $DOCKER_VALIDATE_OPENAPI_UN --password-stdin
             docker create -v /openapi --name openapi alpine /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
@@ -329,7 +329,7 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
+            echo "$DOCKER_TESTS_PW" |docker login -u $DOCKER_TESTS_UN --password-stdin
             docker build -t cms-eapd/api ./
       - run:
           name: run tests
@@ -371,7 +371,7 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
+            echo "$DOCKER_TESTS_PW" |docker login -u $DOCKER_TESTS_UN --password-stdin
             docker build -t cms-eapd/api ./
       - run:
           name: run tests
@@ -493,25 +493,25 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_OWASP_ZAP_SCAN_PW" |docker login -u $DOCKER_OWASP_ZAP_SCAN_UN --password-stdin
             docker build -t cms-eapd/api ./
       - run:
           name: start everything up
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_OWASP_ZAP_SCAN_PW" |docker login -u $DOCKER_OWASP_ZAP_SCAN_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_OWASP_ZAP_SCAN_PW" |docker login -u $DOCKER_OWASP_ZAP_SCAN_UN --password-stdin
             docker pull owasp/zap2docker-stable
       - run:
           name: run owasp zap
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_OWASP_ZAP_SCAN_PW" |docker login -u $DOCKER_OWASP_ZAP_SCAN_UN --password-stdin
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
