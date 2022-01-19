@@ -1,5 +1,11 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
+/**
+ * Adds or updates a milestone resource from an activity
+ * @param {Number} activityIndex Index of the activity the milestone is part of
+ * @param {Number} milestoneIndex Index of the milestone
+ * @param {Object} data payload of the milestone to be saved
+ */
 export const saveMilestone = (activityIndex, milestoneIndex, data) => (dispatch, getState) => {
   const previousState = getState();
   
@@ -16,46 +22,19 @@ export const saveMilestone = (activityIndex, milestoneIndex, data) => (dispatch,
   
   dispatch({
     type: EDIT_APD,
-    path: `/activities/${activityIndex}/schedule/${milestoneIndex}`,
+    path: `/activities/${activityIndex}/schedule/${indexCalculated}`,
     value: data
-  });
-}
-
-export const addMilestone = activityIndex => (dispatch, getState) => {
-  dispatch({
-    type: ADD_APD_ITEM,
-    path: `/activities/${activityIndex}/schedule/-`,
-    state: getState()
   });
 };
 
+/**
+ * Remove a milestone resource from an activity
+ * @param {Number} activityIndex Index of the activity to remove the milestone from
+ * @param {Number} milestoneIndex Index of the milestone to remove
+ */
 export const removeMilestone = (activityIndex, milestoneIndex) => dispatch => {
   dispatch({
     type: REMOVE_APD_ITEM,
     path: `/activities/${activityIndex}/schedule/${milestoneIndex}`
   });
 };
-
-export const setActivityStartDate = (activityIndex, date) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/plannedStartDate`,
-  value: date
-});
-
-export const setActivityEndDate = (activityIndex, date) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/plannedEndDate`,
-  value: date
-});
-
-export const setMilestoneName = (activityIndex, milestoneIndex, name) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/schedule/${milestoneIndex}/milestone`,
-  value: name
-});
-
-export const setMilestoneEndDate = (activityIndex, milestoneIndex, date) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/schedule/${milestoneIndex}/endDate`,
-  value: date
-});

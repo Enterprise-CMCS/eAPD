@@ -2,7 +2,9 @@ import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from './symbols';
 import { updateBudget } from '../budget';
 
 /**
- * Save key personnel to the APD
+ * Adds or updates a key personnel resource from an apd
+ * @param {Number} index Index of the key personnel
+ * @param {Object} data payload of the key personnel to be saved
  */
 export const saveKeyPersonnel = (index, data) => (dispatch, getState) => {
   const previousState = getState();

@@ -1,5 +1,11 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
+/**
+ * Adds or updates an outcome resource from an activity
+ * @param {Number} activityIndex Index of the activity the outcome is part of
+ * @param {Number} outcomeIndex Index of the outcome
+ * @param {Object} data payload of the outcome to be saved
+ */
 export const saveOutcome = (activityIndex, outcomeIndex, data) => (dispatch, getState) => {
   const previousState = getState();
 
@@ -16,52 +22,19 @@ export const saveOutcome = (activityIndex, outcomeIndex, data) => (dispatch, get
   
   dispatch({
     type: EDIT_APD,
-    path: `/activities/${activityIndex}/outcomes/${outcomeIndex}`,
+    path: `/activities/${activityIndex}/outcomes/${indexCalculated}`,
     value: data
   });
 }
 
-export const addOutcomeMetric = (activityIndex, omIndex) => (
-  dispatch,
-  getState
-) =>
-  dispatch({
-    type: ADD_APD_ITEM,
-    path: `/activities/${activityIndex}/outcomes/${omIndex}/metrics/-`,
-    state: getState()
-  });
-
-export const removeOutcome = (activityIndex, omIndex) => dispatch => {
+/**
+ * Remove an outcome resource from an activity
+ * @param {Number} activityIndex Index of the activity to remove the outcome from
+ * @param {Number} outcomeIndex Index of the outcome to remove
+ */
+export const removeOutcome = (activityIndex, outcomeIndex) => dispatch => {
   dispatch({
     type: REMOVE_APD_ITEM,
-    path: `/activities/${activityIndex}/outcomes/${omIndex}`
+    path: `/activities/${activityIndex}/outcomes/${outcomeIndex}`
   });
 };
-
-export const removeOutcomeMetric = (
-  activityIndex,
-  omIndex,
-  metricIndex
-) => dispatch => {
-  dispatch({
-    type: REMOVE_APD_ITEM,
-    path: `/activities/${activityIndex}/outcomes/${omIndex}/metrics/${metricIndex}`
-  });
-};
-
-export const setOutcome = (activityIndex, omIndex, outcome) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/outcomes/${omIndex}/outcome`,
-  value: outcome
-});
-
-export const setOutcomeMetric = (
-  activityIndex,
-  omIndex,
-  metricIndex,
-  metric
-) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/outcomes/${omIndex}/metrics/${metricIndex}/metric`,
-  value: metric
-});
