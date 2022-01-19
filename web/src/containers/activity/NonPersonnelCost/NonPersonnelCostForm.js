@@ -1,19 +1,14 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useReducer, forwardRef } from 'react';
+import React, { useCallback, useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  setNonPersonnelCostCategory,
-  setNonPersonnelCostDescription,
-  setNonPersonnelCostForYear
-} from '../../../actions/editActivity';
 import DollarField from '../../../components/DollarField';
 import TextArea from '../../../components/TextArea';
 
 import {
-  saveNonPersonnelCost
-} from '../../../actions/editActivity/';
+  saveNonPersonnelCost as actualSaveNonPersonnelCost
+} from '../../../actions/editActivity';
 
 const NonPersonnelCostForm = forwardRef(
   (
@@ -56,18 +51,18 @@ const NonPersonnelCostForm = forwardRef(
   };
   
   const editCategory = useCallback(
-    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'category', value: value }),
+    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'category', value }),
     [index]
   );
 
   const editDesc = useCallback(
-    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value: value }),
+    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value }),
     [index]
   );
 
   const getEditCostForYear = useCallback(
     year => ({ target: { value } }) =>
-      dispatch({ type: 'updateCosts', year: year, value: value }),
+      dispatch({ type: 'updateCosts', year, value }),
     [index]
   );
 
@@ -78,7 +73,7 @@ const NonPersonnelCostForm = forwardRef(
     'Travel',
     'Administrative operations',
     'Miscellaneous expenses for the project'
-  ].map(item => ({ label: item, value: item }));
+  ].map(category => ({ label: category, value: category }));
   categories.unshift({label:'Select an option', value:''})
   return (
     <form index={index} ref={ref} onSubmit={handleSubmit}>
@@ -127,7 +122,7 @@ NonPersonnelCostForm.propTypes = {
 };
 
 const mapDispatchToProps = {
-  saveNonPersonnelCost: saveNonPersonnelCost
+  saveNonPersonnelCost: actualSaveNonPersonnelCost
 };
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(

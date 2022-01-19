@@ -14,7 +14,7 @@ import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { selectOMsByActivityIndex } from '../../reducers/activities.selectors';
 
-import { newOutcome } from '../../reducers/activities.js';
+import { newOutcome } from '../../reducers/activities';
 
 const Outcomes = ({
   activityIndex,
@@ -36,7 +36,7 @@ const Outcomes = ({
     remove(activityIndex, index);
   };
   
-  const onCancel = e => {
+  const onCancel = () => {
     setLocalList(list);
   };
 

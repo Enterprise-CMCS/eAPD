@@ -1,12 +1,12 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useReducer, forwardRef } from 'react';
+import React, { useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import DateField from '../../../components/DateField';
 
 import {
-  saveMilestone
+  saveMilestone as actualSaveMilestone
 } from '../../../actions/editActivity';
 
 const MilestoneForm = forwardRef(
@@ -38,7 +38,7 @@ const MilestoneForm = forwardRef(
   
   const changeDate = (_, dateStr) => dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
   
-  const changeName = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'milestone', value: value });
+  const changeName = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'milestone', value });
   
   const handleSubmit = e => {
     e.preventDefault();
@@ -72,11 +72,12 @@ MilestoneForm.propTypes = {
   item: PropTypes.shape({
     endDate: PropTypes.string.isRequired,
     milestone: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  saveMilestone: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  saveMilestone: saveMilestone
+  saveMilestone: actualSaveMilestone
 };
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(

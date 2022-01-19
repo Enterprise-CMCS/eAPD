@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
@@ -12,7 +12,7 @@ import {
   removeNonPersonnelCost
 } from '../../actions/editActivity';
 
-import { newExpense } from '../../reducers/activities.js';
+import { newExpense } from '../../reducers/activities';
 
 import { selectApdYears } from '../../reducers/apd.selectors';
 
@@ -27,7 +27,7 @@ const NonPersonnelCosts = ({
   years
 }) => {
   const [localList, setLocalList] = useState(expenses);
-          
+
   useEffect(() => {
     setLocalList(expenses)
   }, [expenses])
@@ -41,7 +41,7 @@ const NonPersonnelCosts = ({
     removeExpense(activityIndex, index);
   };
   
-  const onCancel = e => {
+  const onCancel = () => {
     setLocalList(expenses);
   };
 

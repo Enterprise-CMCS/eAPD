@@ -1,20 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-
-import { addPersonnel, removePersonnel } from '../../actions/editActivity';
-import { selectActivityStatePersonnel } from '../../reducers/activities.selectors';
 
 import Instruction from '../../components/Instruction';
 import { t } from '../../i18n';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
-
-import { selectApdYears } from '../../reducers/apd.selectors';
-
 import { StatePersonForm, StatePersonReview } from './StatePerson';
 
-import { newStatePerson } from '../../reducers/activities.js';
+import { selectActivityStatePersonnel } from '../../reducers/activities.selectors';
+import { selectApdYears } from '../../reducers/apd.selectors';
+import { newStatePerson } from '../../reducers/activities';
+import { removePersonnel } from '../../actions/editActivity';
 
 const StatePersonnel = ({ 
   activityIndex, 
@@ -38,9 +35,7 @@ const StatePersonnel = ({
     remove(activityIndex, index);
   };
   
-  const onCancel = e => {
-    setLocalList(personnel);
-  };
+  const onCancel = () => setLocalList(personnel);
 
   return (
     <Fragment>

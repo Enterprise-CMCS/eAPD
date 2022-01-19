@@ -1,14 +1,14 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useReducer, forwardRef } from 'react';
+import React, { useCallback, useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import TextArea from '../../../components/TextArea';
 import PersonCostForm from '../../../components/PersonCostForm';
 
 import {
-  savePersonnel
-} from '../../../actions/editActivity/';
+  savePersonnel as actualSavePersonnel
+} from '../../../actions/editActivity';
 
 const StatePersonForm = forwardRef(
   (
@@ -60,25 +60,25 @@ const StatePersonForm = forwardRef(
   const [state, dispatch] = useReducer(reducer, item);
   
   const editTitle = useCallback(
-    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'title', value: value }),
+    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'title', value }),
     [index]
   );
 
   const editDesc = useCallback(
-    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value: value }),
+    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value }),
     [index]
   );
 
   const getEditCostForYear = useCallback(
     (year, value) => {
-      dispatch({ type: 'updateCosts', year: year, value: value });
+      dispatch({ type: 'updateCosts', year, value });
     },
     [index]
   );
 
   const getEditFTEForYear = useCallback(
     (year, value) => {
-      dispatch({ type: 'updateFte', year: year, value: value });
+      dispatch({ type: 'updateFte', year, value });
     },
     [index]
   );
@@ -127,7 +127,7 @@ StatePersonForm.propTypes = {
 };
 
 const mapDispatchToProps = {
-  savePersonnel: savePersonnel
+  savePersonnel: actualSavePersonnel
 };
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(

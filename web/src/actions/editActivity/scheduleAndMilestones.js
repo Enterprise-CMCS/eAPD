@@ -38,3 +38,15 @@ export const removeMilestone = (activityIndex, milestoneIndex) => dispatch => {
     path: `/activities/${activityIndex}/schedule/${milestoneIndex}`
   });
 };
+
+export const setActivityStartDate = (activityIndex, date) => ({
+  type: EDIT_APD,
+  path: `/activities/${activityIndex}/plannedStartDate`,
+  value: date
+});
+
+export const setActivityEndDate = (activityIndex, date) => ({
+  type: EDIT_APD,
+  path: `/activities/${activityIndex}/plannedEndDate`,
+  value: date
+});

@@ -1,22 +1,17 @@
 import { TextField, Button } from '@cmsgov/design-system';
 
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, forwardRef, useReducer, useEffect } from 'react';
+import React, { forwardRef, useReducer } from 'react';
 import { connect } from 'react-redux';
 
 import Icon, { faPlusCircle } from '../../../components/Icons';
-
-import {
-  setOutcome as setOutcomeAction,
-  setOutcomeMetric
-} from '../../../actions/editActivity';
 import Review from '../../../components/Review';
 
 import {
-  saveOutcome
+  saveOutcome as actualSaveOutcome
 } from '../../../actions/editActivity';
 
-import { newOutcomeMetric } from '../../../reducers/activities.js';
+import { newOutcomeMetric } from '../../../reducers/activities';
 
 const OutcomeAndMetricForm = forwardRef(
   (
@@ -85,7 +80,7 @@ const OutcomeAndMetricForm = forwardRef(
   };
   
   const changeMetric = i => ({ target: { value } }) => {
-    dispatch({ type: 'updateMetrics', metricIndex: i, value: value })
+    dispatch({ type: 'updateMetrics', metricIndex: i, value })
   };
 
   return (
@@ -155,11 +150,11 @@ OutcomeAndMetricForm.propTypes = {
     metrics: PropTypes.array,
     outcome: PropTypes.string
   }).isRequired,
-  removeMetric: PropTypes.func.isRequired
+  saveOutcome: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  saveOutcome: saveOutcome
+  saveOutcome: actualSaveOutcome
 };
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(

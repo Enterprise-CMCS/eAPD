@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import { t } from '../../i18n';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
 import { MilestoneForm, MilestoneReview } from './Milestone';
-
-import { removeMilestone } from '../../actions/editActivity';
 import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
 
-import { newMilestone } from '../../reducers/activities.js';
+import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import { removeMilestone } from '../../actions/editActivity';
+import { newMilestone } from '../../reducers/activities';
 
 const Milestone = ({ activity, activityIndex, remove }) => {
   
@@ -29,8 +29,8 @@ const Milestone = ({ activity, activityIndex, remove }) => {
     remove(activityIndex, index);
   };
   
-  const onCancel = e => {
-    setLocalList(list);
+  const onCancel = () => {
+    setLocalList(activity);
   };
   
   return (

@@ -12,15 +12,15 @@ export const newMilestone = (milestone = '', endDate = '') => ({
   endDate
 });
 
+export const newOutcomeMetric = () => ({
+  key: generateKey(),
+  metric: ''
+});
+
 export const newOutcome = () => ({
   key: generateKey(),
   outcome: '',
   metrics: [newOutcomeMetric()]
-});
-
-export const newOutcomeMetric = () => ({
-  key: generateKey(),
-  metric: ''
 });
 
 export const statePersonDefaultYear = () => ({ amt: '', perc: '' });

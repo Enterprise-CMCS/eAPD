@@ -1,6 +1,6 @@
 import { FormLabel, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, forwardRef, useMemo, useState, useReducer } from 'react';
+import React, { Fragment, forwardRef, useMemo, useReducer } from 'react';
 import { connect } from 'react-redux';
 
 import Choice from '../../../components/Choice';
@@ -11,8 +11,8 @@ import NumberField from '../../../components/NumberField';
 import RichText from '../../../components/RichText';
 
 import {
-  saveContractor
-} from '../../../actions/editActivity/';
+  saveContractor as actualSaveContractor
+} from '../../../actions/editActivity';
 
 const ContractorResourceForm = forwardRef(
   (
@@ -89,12 +89,6 @@ const ContractorResourceForm = forwardRef(
     const [state, dispatch] = useReducer(reducer, initialState);
     
     const apdFFYs = useMemo(() => Object.keys(state.years), [state.years]);
-    const [nonHourlyCost, setNonHourlyCost] = useState(
-      apdFFYs.reduce(
-        (o, ffy) => ({ ...o, [ffy]: !state.hourly.useHourly ? state.years[ffy] : '' }),
-        {}
-      )
-    );
     
     const handleSubmit = e => {
       e.preventDefault();
@@ -106,17 +100,17 @@ const ContractorResourceForm = forwardRef(
     };
   
     const getHandlerForYearlyCost = year => ({ target: { value } }) => {
-      dispatch({ type: 'updateYearCost', year: year, value: value })
+      dispatch({ type: 'updateYearCost', year, value })
     };
   
     const getHandlerForYearlyHours = year => ({ target: { value } }) => {
-      dispatch({ type: 'updateHourlyHours', year: year, value: value })
-      dispatch({ type: 'updateYearCost', year: year, value: value * state.hourly.data[year].rate })
+      dispatch({ type: 'updateHourlyHours', year, value })
+      dispatch({ type: 'updateYearCost', year, value: value * state.hourly.data[year].rate })
     };
   
     const getHandlerForYearlyHourlyRate = year => ({ target: { value } }) => {
-      dispatch({ type: 'updateHourlyRate', year: year, value: value })
-      dispatch({ type: 'updateYearCost', year: year, value: state.hourly.data[year].hours * value })
+      dispatch({ type: 'updateHourlyRate', year, value })
+      dispatch({ type: 'updateYearCost', year, value: state.hourly.data[year].hours * value })
     };
   
     const syncDescription = html => {
@@ -274,7 +268,7 @@ ContractorResourceForm.propTypes = {
 };
 
 const mapDispatchToProps = {
-  saveContractor: saveContractor
+  saveContractor: actualSaveContractor
 };
 
 export default connect(null, mapDispatchToProps, null, { forwardRef: true })(

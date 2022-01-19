@@ -114,7 +114,9 @@ Review.propTypes = {
   title: PropTypes.string,
   editHref: PropTypes.string,
   onDeleteClick: PropTypes.func,
-  onEditClick: PropTypes.func
+  onEditClick: PropTypes.func,
+  onDeleteLabel: PropTypes.string,
+  skipConfirmation: PropTypes.bool
 };
 
 Review.defaultProps = {
@@ -124,7 +126,9 @@ Review.defaultProps = {
   title: null,
   editHref: null,
   onDeleteClick: null,
-  onEditClick: null
+  onEditClick: null,
+  onDeleteLabel: null,
+  skipConfirmation: false
 };
 
 export default Review;

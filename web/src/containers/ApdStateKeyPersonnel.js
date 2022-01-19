@@ -7,23 +7,23 @@ import FormAndReviewList from '../components/FormAndReviewList';
 import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 
 import { removeKeyPersonnel } from '../actions/editApd';
-import { getKeyPersonnel } from '../reducers/apd.js';
+import { getKeyPersonnel } from '../reducers/apd';
 
 const ApdStateKeyPersonnel = ({ remove, list, years }) => {
-  
+
   const [localList, setLocalList] = useState(list);
-    
+
   useEffect(() => {
     setLocalList(list)
   }, [list])
-  
-  const addClick = e => {
-    const isPrimary = list.length === 0 ? true : false;
+
+  const addClick = () => {
+    const isPrimary = list.length === 0;
     const newListItem = getKeyPersonnel(years, isPrimary);
     setLocalList([...localList, newListItem]);
   };
   
-  const onCancel = e => {
+  const onCancel = () => {
     setLocalList(list);
   };
     

@@ -2,23 +2,20 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import { t } from '../../i18n';
+
 import {
   ContractorResourceForm,
   ContractorResourceReview
 } from './ContractorResource';
 import FormAndReviewList from '../../components/FormAndReviewList';
-
-import {
-  removeContractor as removeAction
-} from '../../actions/editActivity';
-
-import { selectApdYears } from '../../reducers/apd.selectors';
+import { Subsection } from '../../components/Section';
 
 import { selectContractorsByActivityIndex } from '../../reducers/activities.selectors';
-import { newContractor } from '../../reducers/activities.js';
+import { selectApdYears } from '../../reducers/apd.selectors';
 
-import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
+import { removeContractor as removeAction } from '../../actions/editActivity';
+import { newContractor } from '../../reducers/activities';
 
 const ContractorResources = ({
   activityIndex,
@@ -32,12 +29,12 @@ const ContractorResources = ({
     setLocalList(list)
   }, [list])
   
-  const addClick = e => {
+  const addClick = () => {
     const newListItem = newContractor(years);
     setLocalList([...localList, newListItem]);
   };
   
-  const onCancel = e => {
+  const onCancel = () => {
     setLocalList(list);
   };
 

@@ -1,5 +1,5 @@
 import { Alert, Button } from '@cmsgov/design-system';
-import React, { useEffect, useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const FormAndReviewItem = ({
@@ -67,15 +67,17 @@ FormAndReviewItem.propTypes = {
   ]).isRequired,
   expandedComponent: PropTypes.elementType.isRequired,
   index: PropTypes.number.isRequired,
-  initialExpanded: PropTypes.bool
+  initialExpanded: PropTypes.bool,
+  onCancelClick: PropTypes.func,
+  item: PropTypes.object.isRequired
 };
 
 FormAndReviewItem.defaultProps = {
-  initialExpanded: true
+  initialExpanded: true,
+  onCancelClick: null
 };
 
 const FormAndReviewList = ({
-  createNew,
   addButtonText,
   allowDeleteAll,
   className,
@@ -96,7 +98,7 @@ const FormAndReviewList = ({
     className
   );
 
-  const addClick = e => {
+  const addClick = () => {
     setHasAdded(true);
     onAddClick();
   };
@@ -141,17 +143,19 @@ FormAndReviewList.propTypes = {
   list: PropTypes.array.isRequired,
   noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onAddClick: PropTypes.func,
-  onDeleteClick: PropTypes.func
+  onDeleteClick: PropTypes.func,
+  onCancelClick: PropTypes.func,
+  item: PropTypes.object.isRequired
 };
 
 FormAndReviewList.defaultProps = {
   addButtonText: null,
   allowDeleteAll: false,
   className: null,
-  extraItemButtons: [],
   noDataMessage: null,
   onAddClick: null,
-  onDeleteClick: null
+  onDeleteClick: null,
+  onCancelClick: null
 };
 
 export default FormAndReviewList;

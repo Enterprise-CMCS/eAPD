@@ -1,18 +1,15 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, forwardRef, useState, useReducer, useEffect } from 'react';
+import React, { forwardRef, useReducer } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
 import { t } from '../../i18n';
+
 import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
 
-import {
-  saveKeyPersonnel
-} from '../../actions/editApd';
-
-import { selectApdYears } from '../../reducers/apd.selectors';
+import { saveKeyPersonnel } from '../../actions/editApd';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
@@ -65,16 +62,12 @@ const PersonForm = forwardRef(
       savePerson(index, state);
     };
 
-    const setPersonHasCosts = newHasCosts => () => {
-      setHasCosts(index, newHasCosts);
-    };
-
     const setCostForYear = (year, value) => {
-      dispatch({ type: 'updateCosts', field: 'costs', year: year, value: value })
+      dispatch({ type: 'updateCosts', field: 'costs', year, value })
     };
 
     const setFTEForYear = (year, value) => {
-      dispatch({ type: 'updateFte', field: 'fte', year: year, value: +value })
+      dispatch({ type: 'updateFte', field: 'fte', year, value: +value })
     };
 
     const primary = index === 0;
@@ -124,7 +117,7 @@ const PersonForm = forwardRef(
             checked={!state.hasCosts}
             label="No"
             name={`apd-state-profile-hascosts-${index}`}
-            onChange={e =>
+            onChange={() =>
               dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
             }
             type="radio"
@@ -134,7 +127,7 @@ const PersonForm = forwardRef(
             checked={state.hasCosts}
             label="Yes"
             name={`apd-state-profile-hascosts-${index}`}
-            onChange={e =>
+            onChange={() =>
               dispatch({ type: 'updateField', field: 'hasCosts', payload: true })
             }
             type="radio"
@@ -173,7 +166,8 @@ PersonForm.propTypes = {
     fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
-  years: PropTypes.array.isRequired
+  years: PropTypes.array.isRequired,
+  savePerson: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
