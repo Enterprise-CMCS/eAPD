@@ -14,8 +14,9 @@ docker-compose -f docker-compose.endpoint-tests.yml up -d
 sleep 3
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
-docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run test-endpoints $@
+docker-compose -f docker-compose.endpoint-tests.yml exec -e NODE_OPTIONS=--max_old_space_size=4096 api-for-testing npm run test-endpoints $@
 EXIT_CODE=$?
+echo $EXIT_CODE
 docker-compose -f docker-compose.endpoint-tests.yml down
 
 mv endpoint-data.json ./endpoint-tests

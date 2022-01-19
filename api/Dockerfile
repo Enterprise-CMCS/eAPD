@@ -1,4 +1,4 @@
-FROM node:14-bullseye
+FROM node:16.13.2-bullseye
 
 RUN npm i -g npm
 
