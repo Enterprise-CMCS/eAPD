@@ -46,11 +46,12 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         return next({ status: 400, message: validateApd.errors });
       }
 
-      const id = await createAPD({
+      const { id } = await createAPD({
         state_id: req.user.state.id,
         status: 'draft',
         document: apd
       });
+      logger.info({ message: `APD created ${JSON.stringify(id)}` });
 
       return res.send({
         ...apd,
