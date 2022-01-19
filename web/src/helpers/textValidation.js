@@ -30,20 +30,8 @@ export const disableBtn = (e) => {
 export const addMissingDateAlert = (e) => {
   const container = findDateAncestor(e);
   const div = document.createElement('div');
-  const formContainer = findTextAncestor(e);
-  const doneBtn = formContainer.querySelector('#form-and-review-list--done-btn');
   const parent = container.parentNode;
 
-  
-  if (formContainer
-        .querySelectorAll(`.${error}`)
-        .length > 0) {
-      doneBtn.disabled = true;
-    } else {
-      doneBtn.disabled = false;
-    }
-
-  
     if (!parent
           .querySelectorAll(`.${error}`)
           .length > 0) {
@@ -52,6 +40,8 @@ export const addMissingDateAlert = (e) => {
       e.classList.add(alert);    
       parent.appendChild(div);
     }
+
+    disableBtn(e);
   };
   
 export const removeMissingDateAlert = (e) => {
