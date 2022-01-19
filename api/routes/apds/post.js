@@ -51,7 +51,6 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         status: 'draft',
         document: apd
       });
-      logger.info({ message: `APD created ${JSON.stringify(id)}` });
 
       return res.send({
         ...apd,
