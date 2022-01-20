@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the StatePersonForm component renders correctly 1`] = `
-<Fragment>
+<form
+  index={83}
+  onSubmit={[Function]}
+>
   <h6
     className="ds-h4"
   >
@@ -43,5 +46,5 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     setCost={[Function]}
     setFTE={[Function]}
   />
-</Fragment>
+</form>
 `;

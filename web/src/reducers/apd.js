@@ -232,19 +232,17 @@ const getHumanTimestamp = iso8601 => {
   })}`;
 };
 
-export const getKeyPersonnel = (years = [], isPrimary = false) => {
-  return {
-    costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
-    email: '',
-    expanded: true,
-    hasCosts: false,
-    isPrimary,
-    fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
-    name: '',
-    position: '',
-    key: generateKey()    
-  }
-};
+export const getKeyPersonnel = (years = [], isPrimary = false) => ({
+  costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
+  email: '',
+  expanded: true,
+  hasCosts: false,
+  isPrimary,
+  fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
+  name: '',
+  position: '',
+  key: generateKey()
+});
 
 export const getAPDId = ({
   apd: {
@@ -273,14 +271,17 @@ export const getAPDYearRange = ({
     ? `${years[0]}${years.length > 1 ? `-${years[years.length - 1]}` : ''}`
     : '';
 
-export const getPatchesForAddingItem = (state, path, data) => {
+export const getPatchesForAddingItem = (state, path) => {
   switch (path) {
     case '/keyPersonnel/-':
       return [
         {
           op: 'add',
           path,
-          value: data
+          value: getKeyPersonnel(
+            state.data.years,
+            !state.data.keyPersonnel || state.data.keyPersonnel.length === 0
+          )
         }
       ];
     case '/activities/-':

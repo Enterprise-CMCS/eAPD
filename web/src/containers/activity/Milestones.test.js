@@ -21,14 +21,12 @@ describe('the Milestones component', () => {
       ]
     },
     activityIndex: 7,
-    add: jest.fn(),
     remove: jest.fn()
   };
 
   const component = shallow(<Milestones {...props} />);
 
   beforeEach(() => {
-    props.add.mockClear();
     props.remove.mockClear();
   });
 
@@ -38,11 +36,6 @@ describe('the Milestones component', () => {
 
   describe('events', () => {
     const list = component.find('FormAndReviewList');
-    it('handles adding a new milestone', () => {
-      list.prop('onAddClick')();
-
-      expect(props.add).toHaveBeenCalledWith(7);
-    });
 
     it('handles removing a milestone', () => {
       list.prop('onDeleteClick')(0);
@@ -68,7 +61,6 @@ describe('the Milestones component', () => {
 
     it('map dispatch to props', () => {
       expect(mapDispatchToProps).toEqual({
-        add: addMilestone,
         remove: removeMilestone
       });
     });

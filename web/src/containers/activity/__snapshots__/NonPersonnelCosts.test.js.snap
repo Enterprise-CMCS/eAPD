@@ -22,14 +22,21 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
     collapsed={[Function]}
     expanded={
       Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(NonPersonnelCostForm)",
-        "type": [Function],
+        "$$typeof": Symbol(react.forward_ref),
+        "WrappedComponent": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "activityIndex": [Function],
+            "index": [Function],
+            "item": [Function],
+            "saveNonPersonnelCost": [Function],
+          },
+          "render": [Function],
+        },
+        "displayName": "Connect(Component)",
+        "render": [Function],
       }
     }
-    extraItemButtons={Array []}
     list={
       Array [
         Object {
@@ -45,6 +52,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
     }
     noDataMessage="Other state expenses have not been added for this activity."
     onAddClick={[Function]}
+    onCancelClick={[Function]}
     onDeleteClick={[Function]}
   />
 </Fragment>

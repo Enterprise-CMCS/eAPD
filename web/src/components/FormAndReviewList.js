@@ -126,9 +126,11 @@ const FormAndReviewList = ({
           />
         ))
       )}
-      <Button className="visibility--screen" onClick={addClick}>
-        {addButtonText || 'Add another'}
-      </Button>
+      {onAddClick && (
+        <Button className="visibility--screen" onClick={addClick}>
+          {addButtonText || 'Add another'}
+        </Button>
+      )}
     </div>
   );
 };
@@ -144,8 +146,7 @@ FormAndReviewList.propTypes = {
   noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onAddClick: PropTypes.func,
   onDeleteClick: PropTypes.func,
-  onCancelClick: PropTypes.func,
-  item: PropTypes.object.isRequired
+  onCancelClick: PropTypes.func
 };
 
 FormAndReviewList.defaultProps = {

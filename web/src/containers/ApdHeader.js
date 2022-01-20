@@ -67,7 +67,7 @@ const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
             </div>
           ) }
         </div>
-        <Button id='title-edit-link' class='ds-c-button ds-c-button--transparent' onClick={() => {
+        <Button id='title-edit-link' className='ds-c-button ds-c-button--transparent' onClick={() => {
           setEditing(true)
           const e = document.getElementById('apd-title-input')
           e.click()

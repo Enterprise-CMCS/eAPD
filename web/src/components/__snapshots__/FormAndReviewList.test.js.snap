@@ -7,7 +7,6 @@ exports[`FormAndReviewList component add button calls add event 1`] = `
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
-    extraButtons={Array []}
     index={0}
     initialExpanded={false}
     item={
@@ -16,12 +15,12 @@ exports[`FormAndReviewList component add button calls add event 1`] = `
       }
     }
     key="item 1"
+    onCancelClick={null}
     onDeleteClick={[Function]}
   />
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
-    extraButtons={Array []}
     index={1}
     initialExpanded={true}
     item={
@@ -30,6 +29,7 @@ exports[`FormAndReviewList component add button calls add event 1`] = `
       }
     }
     key="item2"
+    onCancelClick={null}
     onDeleteClick={[Function]}
   />
   <Button
@@ -47,9 +47,9 @@ exports[`FormAndReviewList component expands and collapses items 1`] = `
 <FormAndReviewItem
   collapsedComponent={[Function]}
   expandedComponent={[Function]}
-  extraButtons={Array []}
   index={1}
   initialExpanded={false}
+  onCancelClick={null}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -74,9 +74,9 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
 <FormAndReviewItem
   collapsedComponent={[Function]}
   expandedComponent={[Function]}
-  extraButtons={Array []}
   index={1}
   initialExpanded={false}
+  onCancelClick={null}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -94,6 +94,20 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
       <div />
     </Expanded>
     <Button
+      className="ds-u-margin-right--2"
+      component="button"
+      onClick={[Function]}
+      type="button"
+    >
+      <button
+        className="ds-c-button ds-u-margin-right--2"
+        onClick={[Function]}
+        type="button"
+      >
+        Cancel
+      </button>
+    </Button>
+    <Button
       component="button"
       id="form-and-review-list--done-btn"
       onClick={[Function]}
@@ -106,7 +120,7 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
         onClick={[Function]}
         type="button"
       >
-        Done
+        Save
       </button>
     </Button>
   </div>
@@ -117,9 +131,9 @@ exports[`FormAndReviewList component expands and collapses items 3`] = `
 <FormAndReviewItem
   collapsedComponent={[Function]}
   expandedComponent={[Function]}
-  extraButtons={Array []}
   index={1}
   initialExpanded={false}
+  onCancelClick={null}
   prop1="passed down"
   prop2="passed down"
   prop3="passed down"
@@ -140,79 +154,6 @@ exports[`FormAndReviewList component expands and collapses items 3`] = `
 </FormAndReviewItem>
 `;
 
-exports[`FormAndReviewList component handles extra buttons on list items passes extra buttons into the items, if provided 1`] = `
-<div
-  className="form-and-review-list "
->
-  <FormAndReviewItem
-    collapsedComponent={[MockFunction]}
-    expandedComponent={[MockFunction]}
-    extraButtons={
-      Array [
-        "button 1",
-        "button 2",
-      ]
-    }
-    index={0}
-    initialExpanded={false}
-    item={
-      Object {
-        "key": "key 1",
-      }
-    }
-    key="key 1"
-    onDeleteClick={null}
-  />
-  <Button
-    className="visibility--screen"
-    component="button"
-    onClick={[Function]}
-    type="button"
-  >
-    Add another
-  </Button>
-</div>
-`;
-
-exports[`FormAndReviewList component handles extra buttons on list items renders any buttons passed in 1`] = `
-<div
-  className="form-and-review-list--item__expanded"
->
-  <Expanded
-    collapse={[Function]}
-    index={1}
-    initialCollapsed={false}
-  />
-  <Button
-    component="button"
-    id="form-and-review-list--done-btn"
-    onClick={[Function]}
-    type="button"
-    variation="primary"
-  >
-    Done
-  </Button>
-  <Button
-    className="ds-u-margin-left--2"
-    component="button"
-    key="button 1"
-    onClick={[Function]}
-    type="button"
-  >
-    button 1
-  </Button>
-  <Button
-    className="ds-u-margin-left--2"
-    component="button"
-    key="button 2"
-    onClick={[Function]}
-    type="button"
-  >
-    button 2
-  </Button>
-</div>
-`;
-
 exports[`FormAndReviewList component renders properly with a custom class name 1`] = `
 <div
   className="form-and-review-list test-class"
@@ -220,7 +161,6 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
-    extraButtons={Array []}
     index={0}
     initialExpanded={false}
     item={
@@ -230,12 +170,12 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
       }
     }
     key="one"
+    onCancelClick={null}
     onDeleteClick={[Function]}
   />
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
-    extraButtons={Array []}
     index={1}
     initialExpanded={false}
     item={
@@ -245,6 +185,7 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
       }
     }
     key="two"
+    onCancelClick={null}
     onDeleteClick={[Function]}
   />
   <Button
@@ -265,7 +206,6 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
-    extraButtons={Array []}
     index={0}
     initialExpanded={false}
     item={
@@ -274,6 +214,7 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
       }
     }
     key="one"
+    onCancelClick={null}
     onDeleteClick={null}
   />
   <Button
@@ -294,7 +235,6 @@ exports[`FormAndReviewList component renders properly with just one item and all
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
-    extraButtons={Array []}
     index={0}
     initialExpanded={false}
     item={
@@ -303,6 +243,7 @@ exports[`FormAndReviewList component renders properly with just one item and all
       }
     }
     key="one"
+    onCancelClick={null}
     onDeleteClick={[Function]}
   />
   <Button
@@ -323,7 +264,6 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
-    extraButtons={Array []}
     index={0}
     initialExpanded={false}
     item={
@@ -333,12 +273,12 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
       }
     }
     key="one"
+    onCancelClick={null}
     onDeleteClick={[Function]}
   />
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
     expandedComponent={[MockFunction]}
-    extraButtons={Array []}
     index={1}
     initialExpanded={false}
     item={
@@ -348,6 +288,7 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
       }
     }
     key="two"
+    onCancelClick={null}
     onDeleteClick={[Function]}
   />
   <Button
