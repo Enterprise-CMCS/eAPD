@@ -27,42 +27,9 @@ export const disableBtn = (e) => {
         }
 };
 
-export const addMissingDateAlert = (e) => {
-  const container = findDateAncestor(e);
-  const div = document.createElement('div');
-  const parent = container.parentNode;
-
-    if (!parent
-          .querySelectorAll(`.${error}`)
-          .length > 0) {
-      div.innerHTML = 'Please provide a target completion date.';
-      div.classList.add(error);
-      e.classList.add(alert);    
-      parent.appendChild(div);
-    }
-
-    disableBtn(e);
-  };
-  
-export const removeMissingDateAlert = (e) => {
-  const container = findDateAncestor(e);
-  const parent = container.parentNode;
-  const lastDiv = parent.lastChild;
-
-  if(lastDiv.classList.contains(error)) {
-    e.classList.remove(alert);
-    lastDiv.classList.remove(error);
-    parent.removeChild(lastDiv);
-  }
-
-  disableBtn(e);
-};
-
 export const validateDate = (e) => {
   const el = e.currentTarget;
-  const elValue = el.value;
-
-  return elValue === '' ? addMissingDateAlert(el) : removeMissingDateAlert(el);
+  console.log(el);
 };
 
 export const addMissingTextAlert = (e, p, n) => {
