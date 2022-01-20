@@ -1,7 +1,11 @@
 {
   "low": true,
   "package-manager": "auto",
+<<<<<<< HEAD
   "allowlist": [ 1006865 ],
+=======
+  "allowlist": [1006865],
+>>>>>>> main
   "_comment": {},
   "registry": "https://registry.npmjs.org"
 }
