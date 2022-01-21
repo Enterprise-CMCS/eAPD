@@ -376,7 +376,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.contains('Activity 2').should('not.exist');
     });
 
-    it('should handle enter data in Outcomes and Milestones', () => {
+    it.only('should handle enter data in Outcomes and Milestones', () => {
       const firstOutcome = 'outcome-0';
       const firstMetric = 'metric-0-0';
       const secondMetric = 'metric-0-1';

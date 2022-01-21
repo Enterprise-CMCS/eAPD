@@ -9,8 +9,7 @@ import {
 } from '../../../actions/editActivity';
 import DateField from '../../../components/DateField';
 import { 
-  validateText,
-  validateDate
+  validateText
 } from '../../../helpers/textValidation';
 
 const MilestoneForm = ({
@@ -46,8 +45,6 @@ const MilestoneForm = ({
         hint=""
         value={endDate}
         onChange={changeDate}
-        onBlur={validateDate}
-        onKeyUp={validateDate}
       />
     </Fragment>
   );

@@ -27,11 +27,6 @@ export const disableBtn = (e) => {
         }
 };
 
-export const validateDate = (e) => {
-  const el = e.currentTarget;
-  console.log(el);
-};
-
 export const addMissingTextAlert = (e, p, n) => {
   const lastDiv = p.lastChild;
   const div = document.createElement('div');
