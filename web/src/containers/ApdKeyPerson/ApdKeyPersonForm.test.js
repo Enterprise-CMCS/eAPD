@@ -29,7 +29,7 @@ describe('the ApdKeyPersonForm component', () => {
     years: ['1992', '1993']
   };
 
-  const component = shallow(<KeyPersonForm {...props} />);
+  const component = mount(<KeyPersonForm {...props} />);
 
   beforeEach(() => {
     props.savePerson.mockClear();
@@ -54,12 +54,10 @@ describe('the ApdKeyPersonForm component', () => {
   describe('events', () => {
     it('handles submitting the form', () => {
       component
-        .findWhere(
-          c => c.name() === 'ChoiceComponent' && c.prop('value') === 'no'
-        )
-        .simulate('change');
+        .find('form')
+        .simulate('submit');
 
-      expect(props.setHasCosts).toHaveBeenCalledWith(1, false);
+      expect(props.savePerson).toHaveBeenCalled();
     });
   });
 
