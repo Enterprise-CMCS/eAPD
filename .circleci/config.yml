@@ -487,7 +487,6 @@ jobs:
       image: ubuntu-2004:202104-01
     steps:
       - checkout
-      - setup_remote_docker
       - attach_workspace:
           at: ~/project
       - run:
