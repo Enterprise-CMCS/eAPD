@@ -52,22 +52,16 @@ workflows:
             tags:
               ignore: ignore-owasp
       - validate openapi:
-          context:
-            - docker-hub-creds
           filters:
             tags:
               only: /.*/
       - yaml test:
-          context:
-            - docker-hub-creds
           filters:
             tags:
               only: /.*/
 
       # backend jobs
       - backend api endpoint test:
-          context:
-            - docker-hub-creds      
           filters:
             tags:
               only: /.*/
@@ -88,8 +82,6 @@ workflows:
           requires:
             - install dependencies
       - backend unit test:
-          context:
-            - docker-hub-creds      
           filters:
             tags:
               only: /.*/
@@ -139,8 +131,6 @@ workflows:
           requires:
             - install dependencies
       - frontend test:
-          context:
-            - docker-hub-creds      
           filters:
             tags:
               only: /.*/
@@ -497,6 +487,7 @@ jobs:
       image: ubuntu-2004:202104-01
     steps:
       - checkout
+      - setup_remote_docker
       - attach_workspace:
           at: ~/project
       - run:
