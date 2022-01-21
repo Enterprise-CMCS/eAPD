@@ -18,14 +18,14 @@ import { newOutcome } from '../../reducers/activities';
 
 const Outcomes = ({
   activityIndex,
-  list,
+  outcomes,
   remove
 }) => {
-  const [localList, setLocalList] = useState(list);
+  const [localList, setLocalList] = useState(outcomes);
         
   useEffect(() => {
-    setLocalList(list)
-  }, [list])
+    setLocalList(outcomes)
+  }, [outcomes])
   
   const handleAdd = () => {
     const newListItem = newOutcome();
@@ -37,7 +37,7 @@ const Outcomes = ({
   };
   
   const onCancel = () => {
-    setLocalList(list);
+    setLocalList(outcomes);
   };
 
   return (
@@ -64,12 +64,12 @@ const Outcomes = ({
 
 Outcomes.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  list: PropTypes.array.isRequired,
+  outcomes: PropTypes.array.isRequired,
   remove: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  list: selectOMsByActivityIndex(state, { activityIndex })
+  outcomes: selectOMsByActivityIndex(state, { activityIndex })
 });
 
 const mapDispatchToProps = {

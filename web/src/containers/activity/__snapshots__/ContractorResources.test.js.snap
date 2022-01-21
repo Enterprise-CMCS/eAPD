@@ -15,65 +15,24 @@ exports[`the ContractorResources component renders correctly 1`] = `
     collapsed={[Function]}
     expanded={
       Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "displayName": "Connect(ContractorResourceForm)",
-        "type": [Function],
+        "$$typeof": Symbol(react.forward_ref),
+        "WrappedComponent": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "activityIndex": [Function],
+            "index": [Function],
+            "item": [Function],
+            "saveContractor": [Function],
+          },
+          "render": [Function],
+        },
+        "displayName": "Connect(Component)",
+        "render": [Function],
       }
-    }
-    extraItemButtons={Array []}
-    list={
-      Array [
-        Object {
-          "hourly": Object {
-            "data": Object {
-              "1997": Object {
-                "hours": 100,
-                "rate": 15,
-              },
-            },
-          },
-          "id": "contractor 1",
-          "key": "key 1",
-          "years": Object {
-            "1997": 1500,
-          },
-        },
-        Object {
-          "hourly": Object {
-            "data": Object {
-              "1998": Object {
-                "hours": 200,
-                "rate": 20,
-              },
-            },
-          },
-          "id": "contractor 2",
-          "key": "key 2",
-          "years": Object {
-            "1998": 4000,
-          },
-        },
-        Object {
-          "hourly": Object {
-            "data": Object {
-              "1999": Object {
-                "hours": 300,
-                "rate": 25,
-              },
-            },
-          },
-          "id": "contractor 3",
-          "key": "key 3",
-          "years": Object {
-            "1999": 7500,
-          },
-        },
-      ]
     }
     noDataMessage="Private contractors have not been added for this activity."
     onAddClick={[Function]}
+    onCancelClick={[Function]}
     onDeleteClick={[Function]}
   />
 </Subsection>

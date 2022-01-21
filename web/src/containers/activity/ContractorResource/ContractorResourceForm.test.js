@@ -3,6 +3,10 @@ import React from 'react';
 
 import { plain as ContractorForm } from './ContractorResourceForm';
 
+import {
+  saveContractor as actualSaveContractor
+} from '../../../actions/editActivity';
+
 describe('the ContractorResourceForm component', () => {
   const props = {
     activityIndex: 43,
@@ -33,27 +37,11 @@ describe('the ContractorResourceForm component', () => {
         1067: 400
       }
     },
-    setDescription: jest.fn(),
-    setEndDate: jest.fn(),
-    setIsHourly: jest.fn(),
-    setName: jest.fn(),
-    setStartDate: jest.fn(),
-    setTotalCost: jest.fn(),
-    setCostForYear: jest.fn(),
-    setNumberOfHoursForYear: jest.fn(),
-    setHourlyRateForYear: jest.fn()
+    saveContractor: jest.fn(),
   };
 
   beforeEach(() => {
-    props.setDescription.mockClear();
-    props.setEndDate.mockClear();
-    props.setIsHourly.mockClear();
-    props.setName.mockClear();
-    props.setStartDate.mockClear();
-    props.setTotalCost.mockClear();
-    props.setCostForYear.mockClear();
-    props.setNumberOfHoursForYear.mockClear();
-    props.setHourlyRateForYear.mockClear();
+    props.saveContractor.mockClear();
   });
 
   test('renders correctly', () => {

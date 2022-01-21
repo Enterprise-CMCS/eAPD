@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the ApdKeyPersonForm component renders correctly 1`] = `
-<Fragment>
+<form
+  index={1}
+  onSubmit={[Function]}
+>
   <h4
     className="ds-h4"
   >
@@ -15,21 +18,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
   <TextField
     autoFocus={true}
     label="Name"
-    name="apd-state-profile-pocname1"
+    name="apd-state-profile-pocname-1"
     onChange={[Function]}
     type="text"
     value="Bob the Builder"
   />
   <TextField
     label="Email"
-    name="apd-state-profile-pocemail1"
+    name="apd-state-profile-pocemail-1"
     onChange={[Function]}
     type="text"
     value="email address"
   />
   <TextField
     label="Role"
-    name="apd-state-profile-pocposition1"
+    name="apd-state-profile-pocposition-1"
     onChange={[Function]}
     type="text"
     value="The Builder"
@@ -45,7 +48,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     <ChoiceComponent
       checked={false}
       label="No"
-      name="apd-state-profile-hascosts-no1"
+      name="apd-state-profile-hascosts-1"
       onChange={[Function]}
       type="radio"
       value="no"
@@ -74,17 +77,20 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
         />
       }
       label="Yes"
-      name="apd-state-profile-hascosts-yes1"
+      name="apd-state-profile-hascosts-1"
       onChange={[Function]}
       type="radio"
       value="yes"
     />
   </fieldset>
-</Fragment>
+</form>
 `;
 
 exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `
-<Fragment>
+<form
+  index={1}
+  onSubmit={[Function]}
+>
   <h4
     className="ds-h4"
   >
@@ -98,21 +104,21 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
   <TextField
     autoFocus={true}
     label="Name"
-    name="apd-state-profile-pocname1"
+    name="apd-state-profile-pocname-1"
     onChange={[Function]}
     type="text"
     value="Bob the Builder"
   />
   <TextField
     label="Email"
-    name="apd-state-profile-pocemail1"
+    name="apd-state-profile-pocemail-1"
     onChange={[Function]}
     type="text"
     value="email address"
   />
   <TextField
     label="Role"
-    name="apd-state-profile-pocposition1"
+    name="apd-state-profile-pocposition-1"
     onChange={[Function]}
     type="text"
     value="The Builder"
@@ -128,7 +134,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     <ChoiceComponent
       checked={true}
       label="No"
-      name="apd-state-profile-hascosts-no1"
+      name="apd-state-profile-hascosts-1"
       onChange={[Function]}
       type="radio"
       value="no"
@@ -157,17 +163,20 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
         />
       }
       label="Yes"
-      name="apd-state-profile-hascosts-yes1"
+      name="apd-state-profile-hascosts-1"
       onChange={[Function]}
       type="radio"
       value="yes"
     />
   </fieldset>
-</Fragment>
+</form>
 `;
 
 exports[`the ApdKeyPersonForm component renders correctly if the person is a primary contact 1`] = `
-<Fragment>
+<form
+  index={0}
+  onSubmit={[Function]}
+>
   <h4
     className="ds-h4"
   >
@@ -181,21 +190,21 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
   <TextField
     autoFocus={true}
     label="Name"
-    name="apd-state-profile-pocname0"
+    name="apd-state-profile-pocname-0"
     onChange={[Function]}
     type="text"
     value="Bob the Builder"
   />
   <TextField
     label="Email"
-    name="apd-state-profile-pocemail0"
+    name="apd-state-profile-pocemail-0"
     onChange={[Function]}
     type="text"
     value="email address"
   />
   <TextField
     label="Role"
-    name="apd-state-profile-pocposition0"
+    name="apd-state-profile-pocposition-0"
     onChange={[Function]}
     type="text"
     value="The Builder"
@@ -211,7 +220,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     <ChoiceComponent
       checked={false}
       label="No"
-      name="apd-state-profile-hascosts-no0"
+      name="apd-state-profile-hascosts-0"
       onChange={[Function]}
       type="radio"
       value="no"
@@ -240,11 +249,11 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
         />
       }
       label="Yes"
-      name="apd-state-profile-hascosts-yes0"
+      name="apd-state-profile-hascosts-0"
       onChange={[Function]}
       type="radio"
       value="yes"
     />
   </fieldset>
-</Fragment>
+</form>
 `;

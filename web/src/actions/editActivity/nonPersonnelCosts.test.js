@@ -79,12 +79,10 @@ describe('APD activity edit actions for non-personnel section', () => {
       }
     };
     
-    const store = mockStore(state);
-    
-    const expense = {key: '123', category: 'test category updated'};
-    
+    const store = mockStore(state);    
+    const expense = {key: '123', category: 'test category updated'};    
     store.dispatch(saveNonPersonnelCost(0, 0, expense));
-  
+      
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,
