@@ -392,7 +392,7 @@ jobs:
 
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
-   docker:
+    docker:
       - image: cimg/node:14.16.1    
         auth:
           username: $DOCKER_TESTS_UN
