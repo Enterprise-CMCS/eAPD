@@ -346,7 +346,7 @@ jobs:
 
 ############### Rewrite of Backend API Tests
   backend api endpoint test:
-   docker:
+    docker:
       - image: cimg/node:14.16.1    
         auth:
           username: $DOCKER_TESTS_UN
