@@ -264,6 +264,9 @@ jobs:
           name: install api dependencies
           working_directory: ~/project/api
           command: npm ci
+      - run:
+          name: setup nvm
+          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
       - save_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
           paths:
@@ -367,7 +370,6 @@ jobs:
           working_directory: ~/project/api
           command: |
             # Switch to Node 14.
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
@@ -414,7 +416,6 @@ jobs:
           working_directory: ~/project/api
           command: |
             # Switch to Node 14.
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
