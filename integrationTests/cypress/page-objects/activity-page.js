@@ -91,7 +91,7 @@ class ActivityPage {
     cy.contains('Delete Metric?').should('not.exist');
 
     cy.get('div.ds-c-review > div > button.ds-c-button').should('not.exist');
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   checkMilestoneOutput = ({ milestone, targetDate }) => {

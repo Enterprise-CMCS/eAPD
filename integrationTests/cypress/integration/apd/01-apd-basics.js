@@ -272,7 +272,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     it('should handle entering data in Key State Personnel', () => {
       cy.goToKeyStatePersonnel();
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       // Get div for the element containing user data as an alias
       cy.get('.form-and-review-list')
@@ -303,7 +303,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@primaryContactVals').contains('Edit').should('exist');
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
       cy.get('.form-and-review-list')
@@ -333,7 +333,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('input[type="radio"][value="yes"]')
         .scrollIntoView()
         .check({ force: true });
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
       cy.get('.form-and-review-list')
@@ -384,7 +384,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkTextField('ds-c-field', '', 0); // Outcome
       activityPage.checkTextField('ds-c-field', '', 1); // Metric
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       activityPage.checkOutcomeOutput({
         outcome: 'Outcome not specified',
@@ -397,7 +397,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Add Milestone/i }).click();
       activityPage.checkInputField('Name', '');
       activityPage.checkDate('Target completion date');
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       activityPage.checkMilestoneOutput({
         milestone: 'Milestone not specified',
@@ -421,7 +421,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }))
       });
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       activityPage.checkStateStaffOutput({
         name: 'Personnel title not specified',
@@ -436,7 +436,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         years,
         FFYcosts: years.map(() => '')
       });
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       activityPage.checkOtherStateExpensesOutput({
         category: 'Category not specified',
@@ -465,7 +465,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         FFYcosts: years.map(() => '')
       });
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       activityPage.checkPrivateContractorOutput({
         name: 'Private Contractor or Vendor Name not specified',

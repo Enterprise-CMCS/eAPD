@@ -121,7 +121,7 @@ export const testKeyStatePersonnelWithData = years => {
         .clear()
         .type(userData[1].username);
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
@@ -136,7 +136,7 @@ export const testKeyStatePersonnelWithData = years => {
           expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
           expect($lis.eq(1)).to.contain(userData[1].username);
         });
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
@@ -152,7 +152,7 @@ export const testKeyStatePersonnelWithData = years => {
       years.forEach(year => {
         cy.contains(`FFY ${year} Cost`).should('exist');
       });
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
     });
 
     cy.findAllByRole('button', { name: /Delete/i })
@@ -179,7 +179,7 @@ export const testKeyStatePersonnelWithData = years => {
         .clear()
         .type(userData[2].username);
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       cy.get('.ds-c-review__heading')
         .contains('2.')
