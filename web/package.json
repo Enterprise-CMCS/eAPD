@@ -137,7 +137,7 @@
     "@storybook/addon-queryparams": "^6.2.9",
     "@storybook/builder-webpack5": "^6.4.14",
     "@storybook/manager-webpack5": "^6.4.9",
-    "@storybook/react": "^6.4.9",
+    "@storybook/react": "^6.4.14",
     "@storybook/source-loader": "^6.4.9",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
