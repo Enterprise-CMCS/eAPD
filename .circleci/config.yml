@@ -377,11 +377,6 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-#            # Switch to Node 14.
-#            export NVM_DIR="/opt/circleci/.nvm"
-#            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#            nvm install 14
-#            nvm alias default v14
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -423,12 +418,6 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-#            # Switch to Node 14.
-#            export NVM_DIR="/opt/circleci/.nvm"
-#            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#            nvm install 14
-#            nvm alias default 14
-#            nvm i
             ./unit-test.sh
       - run:
           name: report coverage
