@@ -376,12 +376,18 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.contains('Activity 2').should('not.exist');
     });
 
-    it.only('should handle enter data in Outcomes and Milestones', () => {
+    it('should handle enter data in Outcomes and Milestones', () => {
       const outcomes = [
         {outcome: 'This is an outcome.', 
          metrics: ['One metric, ah ha ha', 'Two metrics, ah ha ha']}
       ];
-      
+
+      const milestones = [{
+        milestoneName: "Miles's Milestone",
+        dateMonth: 1,
+        dateDay: 2,
+        dateYear: 2023
+      }];
 
       cy.goToOutcomesAndMilestones(0);
 
@@ -461,15 +467,33 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.get('[class="ds-c-review"]')
           .should('have.length', 1);
 
-      // cy.findByRole('button', { name: /Add Milestone/i }).click();
-      // activityPage.checkInputField('Name', '');
-      // activityPage.checkDate('Target completion date');
-      // cy.findByRole('button', { name: /Done/i }).click();
+      cy.wrap(milestones).each((element, index) => {
+        cy.findByRole('button', { name: /Add Milestone/i }).click();
 
-      // activityPage.checkMilestoneOutput({
-      //   milestone: 'Milestone not specified',
-      //   targetDate: 'Date not specified'
-      // });
+        cy.get(`[data-cy=milestone-${index}]`)
+          .should('have.value', '')
+          .blur()
+          .should('have.class', 'missing-text-alert');
+
+        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+
+        cy.get(`[data-cy=milestone-${index}]`)
+          .click()
+          .type(element.milestoneName)
+          .should('not.have.class', 'missing-text-alert');
+
+        cy.findByRole('button', { name: /Done/i })
+          .should('not.be.disabled')
+          .click();
+
+        cy.waitForSave();
+
+        activityPage.checkMilestoneOutput({
+          milestone: element.milestoneName,
+          targetDate: 'Date not specified'
+        });
+      });
+
     });
 
     it('should handle entering data inState Staff and Expenses', () => {
@@ -637,7 +661,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       schedulePage.getAllActivityScheduleMilestones(0).should('have.length', 1);
       schedulePage
         .getActivityScheduleMilestoneName(0, 0)
-        .should('eq', 'Milestone not specified');
+        .should('eq', "Miles's Milestone");
     });
 
     it('should handle entering data in Proposed Budget', () => {
@@ -748,7 +772,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .next()
         .next()
         .next()
-        .should('have.text', '1. Milestone not specified')
+        .should('have.text', "1. Miles's Milestone")
         .next()
         .should('have.text', 'Target completion date:  Date not specified');
 
@@ -851,7 +875,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       exportPage.getAllActivityScheduleMilestones(0).should('have.length', 1);
       exportPage
         .getActivityScheduleMilestoneName(0, 0)
-        .should('eq', 'Milestone not specified');
+        .should('eq', "Miles's Milestone");
 
       cy.then(() => {
         years.forEach(year => {
@@ -958,7 +982,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkDeleteButton(
         'Milestones have not been added for this activity.',
         'Delete Milestone?',
-        'Milestone not specified'
+        "Miles's Milestone"
       );
       cy.goToStateStaffAndExpenses(0);
 
