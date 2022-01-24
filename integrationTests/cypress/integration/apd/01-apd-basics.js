@@ -1,5 +1,5 @@
-import ActivityPage from '../../page-objects/activity-page';
 import BudgetPage from '../../page-objects/budget-page';
+import ActivityPage from '../../page-objects/activity-page';
 import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
@@ -412,56 +412,54 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               .should('have.class', 'missing-text-alert');
 
             cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+
+            cy.get(`[data-cy=metric-${index}-${i}]`)
+              .click()
+              .type(`${metric}`)
+              .should('not.have.class', 'missing-text-alert');
+
+            cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
           })
+
         }
+
+        cy.findByRole('button', { name: /Done/i }).click();
+
+        activityPage.checkOutcomeOutput({
+          outcome: element.outcome,
+          metrics: element.metrics
+        })
       });
 
-      // cy.get(`[data-cy=${firstMetric}]`)
-      //   .click()
-      //   .type(`${firstMetric}`)
-      //   .should('not.have.class', 'missing-text-alert');
+      cy.contains('Edit').click();
 
-      // cy.findByRole('button', { name: /Done/i })
-      //   .should('not.be.disabled')
-      //   .click();
+      cy.get('[class="ds-c-review"]')
+      .eq(1)
+      .within(() => {
+        cy.contains('Delete')
+        .should('exist');
+      });
 
-      // activityPage.checkOutcomeOutput({
-      //   outcome: `${firstOutcome}`,
-      //   metrics: [`${firstMetric}`]
-      // });
+      cy.get('[class="ds-c-review"]')
+        .eq(0)
+        .within(() => {
+          cy.contains('Delete')
+          .should('exist')
+          .click();
+        });
 
-      // cy.contains('Edit').click();
+      cy.contains('Delete Metric?').should('exist');
+      cy.get('#react-aria-modal-dialog')
+        .within(() => {
+          cy.findByRole('button', { name: /Delete/ }).click();
+        });
 
-      // cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+      cy.findByRole('button', { name: /Done/i })
+        .should('not.be.disabled')
+        .click();
 
-      // cy.get(`[data-cy=${secondMetric}]`)
-      //   .click()
-      //   .type(`${secondMetric}`);
-        
-      //   cy.get('[class="ds-c-review"]')
-      //   .eq(1)
-      //   .within(() => {
-      //     cy.contains('Delete')
-      //     .should('exist');
-      //   });
-
-      // cy.get('[class="ds-c-review"]')
-      //   .eq(0)
-      //   .within(() => {
-      //     cy.contains('Delete')
-      //     .should('exist')
-      //     .click();
-      //   });
-
-      // cy.contains('Delete Metric?').should('exist');
-      // cy.get('#react-aria-modal-dialog')
-      //   .within(() => {
-      //     cy.findByRole('button', { name: /Delete/ }).click();
-      //   });
-
-      // cy.findByRole('button', { name: /Done/i })
-      //   .should('not.be.disabled')
-      //   .click();
+        cy.get('[class="ds-c-review"]')
+          .should('have.length', 1);
 
       // cy.findByRole('button', { name: /Add Milestone/i }).click();
       // activityPage.checkInputField('Name', '');
