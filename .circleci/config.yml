@@ -339,7 +339,7 @@ jobs:
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
-            nvm alias default v14
+            nvm alias default 14
             nvm i
             ./endpoint-tests/endpoint.sh
 
@@ -382,7 +382,7 @@ jobs:
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
-            nvm alias default v14
+            nvm alias default 14
             nvm i
             ./unit-test.sh
       - run:
