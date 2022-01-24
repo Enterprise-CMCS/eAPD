@@ -367,13 +367,11 @@ jobs:
           working_directory: ~/project/api
           command: |
             # Switch to Node 14.
-            sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs npm
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
-            nvm alias default 14
-            nvm i
-            ./endpoint-tests/endpoint.sh 
+            nvm alias default v14
+            ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
   backend lint:
@@ -394,10 +392,14 @@ jobs:
 
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
-    machine: true
-      #image: ubuntu-2004:202104-01
+   docker:
+      - image: cimg/node:14.16.1    
+        auth:
+          username: $DOCKER_TESTS_UN
+          password: $DOCKER_TESTS_PW
     steps:
       - checkout
+      - setup_remote_docker
       - attach_workspace:
           at: ~/project
       - run:
@@ -411,7 +413,6 @@ jobs:
           working_directory: ~/project/api
           command: |
             # Switch to Node 14.
-            sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs npm
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
