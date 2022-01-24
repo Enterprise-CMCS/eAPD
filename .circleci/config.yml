@@ -266,7 +266,15 @@ jobs:
           command: npm ci
       - run:
           name: setup nvm
-          command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+          command: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            nvm install 14
+            nvm alias default 14
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV            
       - save_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
           paths:
@@ -369,11 +377,11 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 14.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 14
-            nvm alias default v14
+#            # Switch to Node 14.
+#            export NVM_DIR="/opt/circleci/.nvm"
+#            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#            nvm install 14
+#            nvm alias default v14
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -415,12 +423,12 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 14.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 14
-            nvm alias default 14
-            nvm i
+#            # Switch to Node 14.
+#            export NVM_DIR="/opt/circleci/.nvm"
+#            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#            nvm install 14
+#            nvm alias default 14
+#            nvm i
             ./unit-test.sh
       - run:
           name: report coverage
