@@ -377,90 +377,101 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
 
     it.only('should handle enter data in Outcomes and Milestones', () => {
-      const firstOutcome = 'outcome-0';
-      const firstMetric = 'metric-0-0';
-      const secondMetric = 'metric-0-1';
+      const outcomes = [
+        {outcome: 'This is an outcome.', 
+         metrics: ['One metric, ah ha ha', 'Two metrics, ah ha ha']}
+      ];
+      
 
       cy.goToOutcomesAndMilestones(0);
 
-      cy.findByRole('button', { name: /Add Outcome/i }).click();
+      cy.wrap(outcomes).each((element, index) => {
+        cy.findByRole('button', { name: /Add Outcome/i }).click();
+        cy.get(`[data-cy='outcome-${index}']`)
+          .should('have.value', '')
+          .blur()
+          .should('have.class', 'missing-text-alert');
 
-      cy.get(`[data-cy=${firstOutcome}]`)
-        .should('have.value', '')
-        .blur()
-        .should('have.class', 'missing-text-alert');
+        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
 
-      cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+        cy.get(`[data-cy='outcome-${index}']`)
+          .click()
+          .type(`${element.outcome}`)
+          .should('not.have.class', 'missing-text-alert');
 
-      cy.get(`[data-cy=${firstMetric}]`)
-        .should('have.value', '')
-        .click()
-        .blur()
-        .should('have.class', 'missing-text-alert');
+        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
 
-      cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+        if (Array.isArray(element.metrics)) {
+          cy.wrap(element.metrics).each((metric, i) => {
+            cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
 
-      cy.get(`[data-cy=${firstOutcome}]`)
-        .click()
-        .type(`${firstOutcome}`)
-        .should('not.have.class', 'missing-text-alert');
+            cy.get(`[data-cy=metric-${index}-${i}]`)
+              .should('have.value', '')
+              .click()
+              .blur()
+              .should('have.class', 'missing-text-alert');
 
-      cy.get(`[data-cy=${firstMetric}]`)
-        .click()
-        .type(`${firstMetric}`)
-        .should('not.have.class', 'missing-text-alert');
-
-      cy.findByRole('button', { name: /Done/i })
-        .should('not.be.disabled')
-        .click();
-
-      activityPage.checkOutcomeOutput({
-        outcome: `${firstOutcome}`,
-        metrics: [`${firstMetric}`]
+            cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+          })
+        }
       });
 
-      cy.contains('Edit').click();
+      // cy.get(`[data-cy=${firstMetric}]`)
+      //   .click()
+      //   .type(`${firstMetric}`)
+      //   .should('not.have.class', 'missing-text-alert');
 
-      cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+      // cy.findByRole('button', { name: /Done/i })
+      //   .should('not.be.disabled')
+      //   .click();
 
-      cy.get(`[data-cy=${secondMetric}]`)
-        .click()
-        .type(`${secondMetric}`);
+      // activityPage.checkOutcomeOutput({
+      //   outcome: `${firstOutcome}`,
+      //   metrics: [`${firstMetric}`]
+      // });
+
+      // cy.contains('Edit').click();
+
+      // cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+
+      // cy.get(`[data-cy=${secondMetric}]`)
+      //   .click()
+      //   .type(`${secondMetric}`);
         
-        cy.get('[class="ds-c-review"]')
-        .eq(1)
-        .within(() => {
-          cy.contains('Delete')
-          .should('exist');
-        });
+      //   cy.get('[class="ds-c-review"]')
+      //   .eq(1)
+      //   .within(() => {
+      //     cy.contains('Delete')
+      //     .should('exist');
+      //   });
 
-      cy.get('[class="ds-c-review"]')
-        .eq(0)
-        .within(() => {
-          cy.contains('Delete')
-          .should('exist')
-          .click();
-        });
+      // cy.get('[class="ds-c-review"]')
+      //   .eq(0)
+      //   .within(() => {
+      //     cy.contains('Delete')
+      //     .should('exist')
+      //     .click();
+      //   });
 
-      cy.contains('Delete Metric?').should('exist');
-      cy.get('#react-aria-modal-dialog')
-        .within(() => {
-          cy.findByRole('button', { name: /Delete/ }).click();
-        });
+      // cy.contains('Delete Metric?').should('exist');
+      // cy.get('#react-aria-modal-dialog')
+      //   .within(() => {
+      //     cy.findByRole('button', { name: /Delete/ }).click();
+      //   });
 
-      cy.findByRole('button', { name: /Done/i })
-        .should('not.be.disabled')
-        .click();
+      // cy.findByRole('button', { name: /Done/i })
+      //   .should('not.be.disabled')
+      //   .click();
 
-      cy.findByRole('button', { name: /Add Milestone/i }).click();
-      activityPage.checkInputField('Name', '');
-      activityPage.checkDate('Target completion date');
-      cy.findByRole('button', { name: /Done/i }).click();
+      // cy.findByRole('button', { name: /Add Milestone/i }).click();
+      // activityPage.checkInputField('Name', '');
+      // activityPage.checkDate('Target completion date');
+      // cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkMilestoneOutput({
-        milestone: 'Milestone not specified',
-        targetDate: 'Date not specified'
-      });
+      // activityPage.checkMilestoneOutput({
+      //   milestone: 'Milestone not specified',
+      //   targetDate: 'Date not specified'
+      // });
     });
 
     it('should handle entering data inState Staff and Expenses', () => {

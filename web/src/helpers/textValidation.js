@@ -66,5 +66,5 @@ export const validateText = (e) => {
   const text = el.innerHTML.trim();
   const elValue = el.value;
 
-  return text || elValue === '' ? addMissingTextAlert(el, parent, elName) : removeMissingTextAlert(el, parent);
+  return text || elValue !== '' ? removeMissingTextAlert(el, parent) : addMissingTextAlert(el, parent, elName) ;
 };
