@@ -37,7 +37,7 @@ exports[`the Milestones component renders correctly 1`] = `
           },
         ]
       }
-      noDataMessage="Milestones have not been added for this activity."
+      noDataMessage="Add milestone(s) for this activity."
       onAddClick={[Function]}
       onDeleteClick={[Function]}
     />

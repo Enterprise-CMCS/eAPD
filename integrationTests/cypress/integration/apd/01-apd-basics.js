@@ -980,7 +980,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       );
 
       activityPage.checkDeleteButton(
-        'Milestones have not been added for this activity.',
+        'Add milestone(s) for this activity.',
         'Delete Milestone?',
         "Miles's Milestone"
       );
