@@ -340,6 +340,7 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
             nvm alias default v14
+            nvm i
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -382,6 +383,7 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
             nvm alias default v14
+            nvm i
             ./unit-test.sh
       - run:
           name: report coverage
