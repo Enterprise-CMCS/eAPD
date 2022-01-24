@@ -318,31 +318,53 @@ jobs:
   # These all depend on "install dependencies" running first.
 
   # Runs backend API integration/end-to-end tests.
+  #backend api endpoint test:
+  #  machine: true
+  #    #image: ubuntu-2004:202104-01
+  #  steps:
+  #    - checkout
+  #    - attach_workspace:
+  #        at: ~/project
+  #    - run:
+  #        name: build API image
+  #        working_directory: ~/project/api
+  #        command: |
+  #          docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
+  #          docker build -t cms-eapd/api ./
+  #    - run:
+  #        name: run tests
+  #        working_directory: ~/project/api
+  #        command: |
+  #          # Switch to Node 14.
+  #          sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs npm
+  #          export NVM_DIR="/opt/circleci/.nvm"
+  #          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  #          nvm install 14
+  #          nvm alias default 14
+  #          nvm i
+  #          ./endpoint-tests/endpoint.sh
+
+############### Rewrite of Backend API Tests
   backend api endpoint test:
-    machine: true
-      #image: ubuntu-2004:202104-01
+   docker:
+      - image: cimg/node:14.16.1    
+        auth:
+          username: $DOCKER_TESTS_UN
+          password: $DOCKER_TESTS_PW
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project
+          at: ~/project 
       - run:
           name: build API image
           working_directory: ~/project/api
           command: |
             docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
-            docker build -t cms-eapd/api ./
+            docker build -t cms-eapd/api ./               
+      - run: npm install
       - run:
-          name: run tests
           working_directory: ~/project/api
-          command: |
-            # Switch to Node 14.
-            sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs npm
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 14
-            nvm alias default 14
-            nvm i
-            ./endpoint-tests/endpoint.sh
+          command: ./endpoint-tests/endpoint.sh  
 
   # Lints the backend code.
   backend lint:
