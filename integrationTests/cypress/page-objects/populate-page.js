@@ -61,7 +61,8 @@ class PopulatePage {
         cy.findByRole('button', { name: /Add Metric/i }).click();
       }
     });
-    cy.findByRole('button', { name: /Save/i }).click();
+    cy.get('button[id="form-and-review-list--done-btn"]').click()
+    // cy.findByRole('button', { name: /Save/i }).click();
   };
 
   fillMilestoneForm = ({ milestone, targetDate } = {}) => {
@@ -69,7 +70,8 @@ class PopulatePage {
     cy.get('[class="ds-c-fieldset"]').within(() => {
       this.fillDate('Target completion date', targetDate);
     });
-    cy.findByRole('button', { name: /Save/i }).click();
+    cy.get('button[id="form-and-review-list--done-btn"]').click()
+    // cy.findByRole('button', { name: /Save/i }).click();
   };
 
   fillContractorForm = ({

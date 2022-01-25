@@ -45,7 +45,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     <TextField
       autoFocus={true}
       label="Name"
-      name="apd-state-profile-pocname-1"
+      name="apd-state-profile-pocname1"
       onChange={[Function]}
       type="text"
       value="Bob the Builder"
@@ -83,7 +83,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             errorId="field_1-error"
             errorPlacement="top"
             id="field_1"
-            name="apd-state-profile-pocname-1"
+            name="apd-state-profile-pocname1"
             onChange={[Function]}
             setRef={[Function]}
             type="text"
@@ -94,7 +94,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               autoFocus={true}
               className="ds-c-field"
               id="field_1"
-              name="apd-state-profile-pocname-1"
+              name="apd-state-profile-pocname1"
               onChange={[Function]}
               type="text"
               value="Bob the Builder"
@@ -105,7 +105,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     </TextField>
     <TextField
       label="Email"
-      name="apd-state-profile-pocemail-1"
+      name="apd-state-profile-pocemail1"
       onChange={[Function]}
       type="text"
       value="email address"
@@ -142,7 +142,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             errorId="field_2-error"
             errorPlacement="top"
             id="field_2"
-            name="apd-state-profile-pocemail-1"
+            name="apd-state-profile-pocemail1"
             onChange={[Function]}
             setRef={[Function]}
             type="text"
@@ -152,7 +152,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               aria-invalid={false}
               className="ds-c-field"
               id="field_2"
-              name="apd-state-profile-pocemail-1"
+              name="apd-state-profile-pocemail1"
               onChange={[Function]}
               type="text"
               value="email address"
@@ -163,7 +163,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     </TextField>
     <TextField
       label="Role"
-      name="apd-state-profile-pocposition-1"
+      name="apd-state-profile-pocposition1"
       onChange={[Function]}
       type="text"
       value="The Builder"
@@ -200,7 +200,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             errorId="field_3-error"
             errorPlacement="top"
             id="field_3"
-            name="apd-state-profile-pocposition-1"
+            name="apd-state-profile-pocposition1"
             onChange={[Function]}
             setRef={[Function]}
             type="text"
@@ -210,7 +210,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               aria-invalid={false}
               className="ds-c-field"
               id="field_3"
-              name="apd-state-profile-pocposition-1"
+              name="apd-state-profile-pocposition1"
               onChange={[Function]}
               type="text"
               value="The Builder"
@@ -230,7 +230,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       <ChoiceComponent
         checked={false}
         label="No"
-        name="apd-state-profile-hascosts-1"
+        name="apd-state-profile-hascosts1"
         onChange={[Function]}
         type="radio"
         value="no"
@@ -239,7 +239,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
           <Choice
             checked={false}
             label="No"
-            name="apd-state-profile-hascosts-1"
+            name="apd-state-profile-hascosts1"
             onChange={[Function]}
             type="radio"
             value="no"
@@ -252,19 +252,19 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               <input
                 checked={false}
                 className="ds-c-choice"
-                id="radio_apd-state-profile-hascosts-1_4"
-                name="apd-state-profile-hascosts-1"
+                id="radio_apd-state-profile-hascosts1_4"
+                name="apd-state-profile-hascosts1"
                 onChange={[Function]}
                 type="radio"
                 value="no"
               />
               <FormLabel
                 component="label"
-                fieldId="radio_apd-state-profile-hascosts-1_4"
+                fieldId="radio_apd-state-profile-hascosts1_4"
               >
                 <label
                   className="ds-c-label"
-                  htmlFor="radio_apd-state-profile-hascosts-1_4"
+                  htmlFor="radio_apd-state-profile-hascosts1_4"
                 >
                   <span
                     className=""
@@ -301,7 +301,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
           />
         }
         label="Yes"
-        name="apd-state-profile-hascosts-1"
+        name="apd-state-profile-hascosts1"
         onChange={[Function]}
         type="radio"
         value="yes"
@@ -331,7 +331,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               />
             }
             label="Yes"
-            name="apd-state-profile-hascosts-1"
+            name="apd-state-profile-hascosts1"
             onChange={[Function]}
             type="radio"
             value="yes"
@@ -344,19 +344,19 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               <input
                 checked={true}
                 className="ds-c-choice"
-                id="radio_apd-state-profile-hascosts-1_5"
-                name="apd-state-profile-hascosts-1"
+                id="radio_apd-state-profile-hascosts1_5"
+                name="apd-state-profile-hascosts1"
                 onChange={[Function]}
                 type="radio"
                 value="yes"
               />
               <FormLabel
                 component="label"
-                fieldId="radio_apd-state-profile-hascosts-1_5"
+                fieldId="radio_apd-state-profile-hascosts1_5"
               >
                 <label
                   className="ds-c-label"
-                  htmlFor="radio_apd-state-profile-hascosts-1_5"
+                  htmlFor="radio_apd-state-profile-hascosts1_5"
                 >
                   <span
                     className=""
@@ -854,21 +854,21 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
   <TextField
     autoFocus={true}
     label="Name"
-    name="apd-state-profile-pocname-1"
+    name="apd-state-profile-pocname1"
     onChange={[Function]}
     type="text"
     value="Bob the Builder"
   />
   <TextField
     label="Email"
-    name="apd-state-profile-pocemail-1"
+    name="apd-state-profile-pocemail1"
     onChange={[Function]}
     type="text"
     value="email address"
   />
   <TextField
     label="Role"
-    name="apd-state-profile-pocposition-1"
+    name="apd-state-profile-pocposition1"
     onChange={[Function]}
     type="text"
     value="The Builder"
@@ -884,7 +884,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     <ChoiceComponent
       checked={true}
       label="No"
-      name="apd-state-profile-hascosts-1"
+      name="apd-state-profile-hascosts1"
       onChange={[Function]}
       type="radio"
       value="no"
@@ -913,7 +913,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
         />
       }
       label="Yes"
-      name="apd-state-profile-hascosts-1"
+      name="apd-state-profile-hascosts1"
       onChange={[Function]}
       type="radio"
       value="yes"
@@ -940,21 +940,21 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
   <TextField
     autoFocus={true}
     label="Name"
-    name="apd-state-profile-pocname-0"
+    name="apd-state-profile-pocname0"
     onChange={[Function]}
     type="text"
     value="Bob the Builder"
   />
   <TextField
     label="Email"
-    name="apd-state-profile-pocemail-0"
+    name="apd-state-profile-pocemail0"
     onChange={[Function]}
     type="text"
     value="email address"
   />
   <TextField
     label="Role"
-    name="apd-state-profile-pocposition-0"
+    name="apd-state-profile-pocposition0"
     onChange={[Function]}
     type="text"
     value="The Builder"
@@ -970,7 +970,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     <ChoiceComponent
       checked={false}
       label="No"
-      name="apd-state-profile-hascosts-0"
+      name="apd-state-profile-hascosts0"
       onChange={[Function]}
       type="radio"
       value="no"
@@ -999,7 +999,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
         />
       }
       label="Yes"
-      name="apd-state-profile-hascosts-0"
+      name="apd-state-profile-hascosts0"
       onChange={[Function]}
       type="radio"
       value="yes"

@@ -86,7 +86,7 @@ const PersonForm = forwardRef(
         </p>
         <TextField
           autoFocus
-          name={`apd-state-profile-pocname-${index}`}
+          name={`apd-state-profile-pocname${index}`}
           label={t(`${tRoot}.labels.name`)}
           value={state.name}
           onChange={e =>
@@ -94,7 +94,7 @@ const PersonForm = forwardRef(
           }
         />
         <TextField
-          name={`apd-state-profile-pocemail-${index}`}
+          name={`apd-state-profile-pocemail${index}`}
           label={t(`${tRoot}.labels.email`)}
           value={state.email}
           onChange={e =>
@@ -102,7 +102,7 @@ const PersonForm = forwardRef(
           }
         />
         <TextField
-          name={`apd-state-profile-pocposition-${index}`}
+          name={`apd-state-profile-pocposition${index}`}
           label={t(`${tRoot}.labels.position`)}
           value={state.position}
           onChange={e =>
@@ -116,7 +116,7 @@ const PersonForm = forwardRef(
           <Choice
             checked={!state.hasCosts}
             label="No"
-            name={`apd-state-profile-hascosts-${index}`}
+            name={`apd-state-profile-hascosts${index}`}
             onChange={() =>
               dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
             }
@@ -126,7 +126,7 @@ const PersonForm = forwardRef(
           <Choice
             checked={state.hasCosts}
             label="Yes"
-            name={`apd-state-profile-hascosts-${index}`}
+            name={`apd-state-profile-hascosts${index}`}
             onChange={() =>
               dispatch({ type: 'updateField', field: 'hasCosts', payload: true })
             }
