@@ -976,7 +976,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkDeleteButton(
         'Add at least one outcome for this activity.',
         'Delete Outcome and Metrics?',
-        'outcome-0'
+        'This is an outcome.'
       );
 
       activityPage.checkDeleteButton(
