@@ -369,7 +369,8 @@ jobs:
           working_directory: ~/project/api
           command: |
             docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
-            docker build -t cms-eapd/api ./               
+#            docker build -t cms-eapd/api ./
+            docker build -t cms-eapd/api /app
       - run:
           name: run tests
           working_directory: ~/project/api
@@ -409,7 +410,8 @@ jobs:
           working_directory: ~/project/api
           command: |
             docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
-            docker build -t cms-eapd/api ./
+#            docker build -t cms-eapd/api ./
+            docker build -t cms-eapd/api /app/
       - run:
           name: run tests
           working_directory: ~/project/api
