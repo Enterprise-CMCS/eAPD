@@ -70,13 +70,13 @@ describe('APD activity edit actions for state personnel section', () => {
     const stateWithResource = state;
     stateWithResource.apd.data.activities[0].statePersonnel.push({ key: '123', name: 'test state personnel' });
     
-    const store = mockStore(stateWithResource);
+    const storeWithResource = mockStore(stateWithResource);
     
     const statePersonnel = {key: '123', statePersonnel: 'test state personnel updated'};
     
-    store.dispatch(savePersonnel(0, 0, statePersonnel));
+    storeWithResource.dispatch(savePersonnel(0, 0, statePersonnel));
     
-    expect(store.getActions()).toEqual([
+    expect(storeWithResource.getActions()).toEqual([
       {
         type: EDIT_APD,
         path: '/activities/0/statePersonnel/0',

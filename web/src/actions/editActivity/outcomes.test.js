@@ -51,13 +51,13 @@ describe('APD activity edit actions for outcomes and metrics section', () => {
     const stateWithOutcome = mockState;
     stateWithOutcome.apd.data.activities[0].outcomes.push({ key: '123', outcome: 'test outcome' });
     
-    const store = mockStore(stateWithOutcome);
+    const storeWithOutcome = mockStore(stateWithOutcome);
     
     const outcome = {key: '123', outcome: 'test outcome updated'};
     
-    store.dispatch(saveOutcome(0, 0, outcome));
+    storeWithOutcome.dispatch(saveOutcome(0, 0, outcome));
     
-    expect(store.getActions()).toEqual([
+    expect(storeWithOutcome.getActions()).toEqual([
       {
         type: EDIT_APD,
         path: '/activities/0/outcomes/0',

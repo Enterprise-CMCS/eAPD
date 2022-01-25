@@ -6,7 +6,8 @@ import {
   mapDispatchToProps,
   mapStateToProps
 } from './Milestones';
-import { addMilestone, removeMilestone } from '../../actions/editActivity';
+
+import { removeMilestone } from '../../actions/editActivity';
 
 describe('the Milestones component', () => {
   const props = {

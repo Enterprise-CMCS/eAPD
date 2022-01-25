@@ -36,7 +36,7 @@ describe('APD activity edit actions for activity schedule and milestones section
       {
         type: ADD_APD_ITEM,
         path: '/activities/0/schedule/-',
-        state: state
+        state
       },
       {
         type: EDIT_APD,
@@ -62,26 +62,24 @@ describe('APD activity edit actions for activity schedule and milestones section
     ]);
   });
   
-  it('dispatches an action for updating an existing milestone', () => {
-    const state = {
-      apd: {
-        data: {
-          activities: [
-           {
-             schedule: [
-               { milestone: 'milestone' }
-             ]
-           } 
-          ]
+  it('dispatches an action for updating an existing milestone', () => {    
+    const storeWithMilestone = mockStore({
+        apd: {
+          data: {
+            activities: [
+             {
+               schedule: [
+                 { milestone: 'milestone' }
+               ]
+             } 
+            ]
+          }
         }
-      }
-    };
-    
-    const store = mockStore(state);
+      });
     const milestone = {key: '123', milestone: 'test milestone updated'};
-    store.dispatch(saveMilestone(0, 0, milestone));
+    storeWithMilestone.dispatch(saveMilestone(0, 0, milestone));
       
-    expect(store.getActions()).toEqual([
+    expect(storeWithMilestone.getActions()).toEqual([
       {
         type: EDIT_APD,
         path: '/activities/0/schedule/0',

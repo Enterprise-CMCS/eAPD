@@ -70,13 +70,13 @@ describe('APD activity edit actions for contractor resources section', () => {
     const stateWithResource = state;
     stateWithResource.apd.data.activities[0].contractorResources.push({ key: '123', name: 'test contractor' });
     
-    const store = mockStore(stateWithResource);
+    const storeWithResource = mockStore(stateWithResource);
     
     const contractor = {key: '123', contractor: 'test contractor updated'};
     
-    store.dispatch(saveContractor(0, 0, contractor));
+    storeWithResource.dispatch(saveContractor(0, 0, contractor));
     
-    expect(store.getActions()).toEqual([
+    expect(storeWithResource.getActions()).toEqual([
       {
         type: EDIT_APD,
         path: '/activities/0/contractorResources/0',

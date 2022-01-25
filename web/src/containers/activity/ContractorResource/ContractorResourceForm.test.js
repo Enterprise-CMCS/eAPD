@@ -3,10 +3,6 @@ import React from 'react';
 
 import { plain as ContractorForm } from './ContractorResourceForm';
 
-import {
-  saveContractor as actualSaveContractor
-} from '../../../actions/editActivity';
-
 describe('the ContractorResourceForm component', () => {
   const props = {
     activityIndex: 43,

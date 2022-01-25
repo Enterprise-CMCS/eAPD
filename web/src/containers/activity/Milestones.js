@@ -30,7 +30,7 @@ const Milestone = ({ activity, activityIndex, remove }) => {
   };
   
   const onCancel = () => {
-    setLocalList(activity);
+    setLocalList(activity.schedule);
   };
   
   return (
