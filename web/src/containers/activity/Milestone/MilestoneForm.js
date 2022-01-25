@@ -38,8 +38,12 @@ const MilestoneForm = ({
         name="name"
         value={milestone}
         onChange={changeName}
-        onBlur={validateText}
-        onKeyUp={validateText}
+        onBlur={(e) => {
+          validateText(e, 'milestone name');
+        }}
+        onKeyUp={(e) => {
+          validateText(e, 'milestone name');
+        }}
       />
       <DateField
         label="Target completion date"

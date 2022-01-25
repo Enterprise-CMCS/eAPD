@@ -7,6 +7,7 @@ import { titleCase } from 'title-case';
 import { t } from '../../i18n';
 import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
+import { validateText } from '../../helpers/textValidation';
 
 import {
   setKeyPersonCost,
@@ -65,19 +66,38 @@ const PersonForm = ({
         name={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
         value={name}
+        cy-data={`key-person-name-${index}`}
         onChange={handleChange(setName)}
+        onKeyUp={(e) => {
+          validateText(e, 'name');
+        }}
+        onBlur={(e) => {
+          validateText(e, 'name');
+        }}
       />
       <TextField
         name={`apd-state-profile-pocemail${index}`}
         label={t(`${tRoot}.labels.email`)}
         value={email}
         onChange={handleChange(setEmail)}
+        onKeyUp={(e) => {
+          validateText(e, 'email');
+        }}
+        onBlur={(e) => {
+          validateText(e, 'email');
+        }}
       />
       <TextField
         name={`apd-state-profile-pocposition${index}`}
         label={t(`${tRoot}.labels.position`)}
         value={position}
         onChange={handleChange(setRole)}
+        onKeyUp={(e) => {
+          validateText(e, 'role');
+        }}
+        onBlur={(e) => {
+          validateText(e, 'role');
+        }}
       />
 
       <fieldset className="ds-c-fieldset">

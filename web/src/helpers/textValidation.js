@@ -59,12 +59,11 @@ export const removeMissingTextAlert = (e, p) => {
   disableBtn(e);
 };
 
-export const validateText = (e) => {
+export const validateText = (e, label) => {
   const el = e.currentTarget;
-  const elName = el.name;
   const parent = el.parentNode;
   const text = el.innerHTML.trim();
   const elValue = el.value;
 
-  return text || elValue !== '' ? removeMissingTextAlert(el, parent) : addMissingTextAlert(el, parent, elName) ;
+  return text || elValue !== '' ? removeMissingTextAlert(el, parent) : addMissingTextAlert(el, parent, label) ;
 };
