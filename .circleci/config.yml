@@ -248,7 +248,6 @@ jobs:
   install dependencies:
     docker:
       - image: cimg/node:14.16.1
-#      - image: node:14
         auth:
           username: $DOCKER_INSTALL_DEPS_UN
           password: $DOCKER_INSTALL_DEPS_PW
@@ -290,7 +289,6 @@ jobs:
   validate openapi:
     docker:
       - image: cimg/node:14.16.1    
-      #- image: circleci/node:14
         auth:
           username: $DOCKER_VALIDATE_OPENAPI_UN
           password: $DOCKER_VALIDATE_OPENAPI_PW
@@ -313,7 +311,6 @@ jobs:
   yaml test:
     docker:
       - image: cimg/node:14.16.1    
-      #- image: node:14
         auth:
           username: $DOCKER_TESTS_UN
           password: $DOCKER_TESTS_PW
@@ -383,7 +380,6 @@ jobs:
   backend lint:
     docker:
       - image: cimg/node:14.16.1    
-      #- image: node:14
         auth:
           username: $DOCKER_LINT_UN
           password: $DOCKER_LINT_PW
@@ -437,7 +433,6 @@ jobs:
         type: string
     docker:
       - image: cimg/node:14.16.1    
-      #- image: node:14
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -458,7 +453,6 @@ jobs:
   frontend lint:
     docker:
       - image: cimg/node:14.16.1    
-      #- image: node:14
         auth:
           username: $DOCKER_LINT_UN
           password: $DOCKER_LINT_PW
@@ -475,7 +469,6 @@ jobs:
   frontend test:
     docker:
       - image: cimg/node:14.16.1
-      #- image: node:14
         auth:
           username: $DOCKER_TESTS_UN
           password: $DOCKER_TESTS_PW
@@ -504,7 +497,6 @@ jobs:
         type: string
     docker:
       - image: cimg/node:14.16.1    
-      #- image: node:14
         auth:
           username: $DOCKER_DEPS_VULN_UN
           password: $DOCKER_DEPS_VULN_PW
@@ -520,7 +512,6 @@ jobs:
 
   owasp zap scan:
     machine: true
-      #image: ubuntu-2004:202104-01
     steps:
       - checkout
       - attach_workspace:
@@ -569,7 +560,6 @@ jobs:
         type: string
     docker:
       - image: cimg/python:3.10.1
-      #- image: python:3
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -652,7 +642,6 @@ jobs:
         type: string
     docker:
       - image: cimg/python:3.10.1
-      #- image: python:3
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -692,7 +681,6 @@ jobs:
   preview deploy:
     docker:
       - image: cimg/python:3.10.1
-      #- image: python:3
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -777,7 +765,6 @@ jobs:
   store artifacts:
     docker:
       - image: cimg/node:14.16.1    
-      #- image: node:14
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
