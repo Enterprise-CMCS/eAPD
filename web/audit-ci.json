@@ -3,7 +3,7 @@
   "package-manager": "auto",
   "allowlist": [
     1005174, 1005024, 1005029, 1005154, 1005291, 1006846, 1006852, 1006854,
-    1006865, 1006864
+    1006865, 1006864, 1006865
   ],
   "_comment": {
     "1005174": {
@@ -56,6 +56,13 @@
       "module": "node-forge",
       "affects": [
         "webpack-dev-server@4.7.2 - used in development not production"
+      ]
+    }
+    "1006854": {
+      "advisory": "https://github.com/advisories/GHSA-qrpm-p2h7-hrv2",
+      "module": "nanoid",
+      "affects": [
+        "sanitize-html"
       ]
     }
   },
