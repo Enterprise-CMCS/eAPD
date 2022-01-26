@@ -375,6 +375,12 @@ jobs:
           working_directory: ~/project/api
           command: |
             ./endpoint-tests/endpoint.sh
+      - run:
+          name: Debugging commands
+          command: |
+            pwd
+            ls -la
+                        
 
   # Lints the backend code.
   backend lint:
@@ -420,6 +426,12 @@ jobs:
           when: always
           working_directory: ~/project/api
           command: bash <(curl -s https://codecov.io/bash)
+      - run:
+          name: Debugging commands
+          command: |
+            pwd
+            ls -la
+
 
   # ===== Frontend jobs =====
   # These all depend on "install dependencies" running first.
