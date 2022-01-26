@@ -374,14 +374,12 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            ./endpoint-tests/endpoint.sh
-      - run:
-          name: Debugging commands
-          command: |
+            echo "Output of pwd"
             pwd
-            ls -la
-                        
-
+            echo "Output of ls -la"
+            ls -la          
+            ./endpoint-tests/endpoint.sh
+                      
   # Lints the backend code.
   backend lint:
     docker:
@@ -420,18 +418,16 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
+            echo "Output of pwd"
+            pwd
+            echo "Output of ls -la"
+            ls -la
             ./unit-test.sh
       - run:
           name: report coverage
           when: always
           working_directory: ~/project/api
           command: bash <(curl -s https://codecov.io/bash)
-      - run:
-          name: Debugging commands
-          command: |
-            pwd
-            ls -la
-
 
   # ===== Frontend jobs =====
   # These all depend on "install dependencies" running first.
