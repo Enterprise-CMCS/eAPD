@@ -52,3 +52,7 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
+
+networks:
+  default:
+    name: eapd_default      

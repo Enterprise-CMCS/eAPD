@@ -2,17 +2,17 @@
 
 export NODE_ENV=test
 
-docker-compose --net api_default -f docker-compose.endpoint-tests.yml up -d db
+docker-compose -f docker-compose.endpoint-tests.yml up -d db
 
-docker-compose --net api_default -f docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "DROP DATABASE IF EXISTS hitech_apd_test;"'
-docker-compose --net api_default -f docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "CREATE DATABASE hitech_apd_test;"'
+docker-compose -f docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "DROP DATABASE IF EXISTS hitech_apd_test;"'
+docker-compose -f docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "CREATE DATABASE hitech_apd_test;"'
 
-docker-compose --net api_default -f docker-compose.endpoint-tests.yml run api-for-testing npm run migrate
-docker-compose --net api_default -f docker-compose.endpoint-tests.yml run api-for-testing npm run seed
+docker-compose -f docker-compose.endpoint-tests.yml run api-for-testing npm run migrate
+docker-compose -f docker-compose.endpoint-tests.yml run api-for-testing npm run seed
 
-docker-compose --net api_default -f docker-compose.endpoint-tests.yml run api-for-testing npm run test $@
+docker-compose -f docker-compose.endpoint-tests.yml run api-for-testing npm run test $@
 EXIT_CODE=$?
 
-docker-compose --net api_default -f docker-compose.endpoint-tests.yml down
+docker-compose -f docker-compose.endpoint-tests.yml down
 
 exit $EXIT_CODE
