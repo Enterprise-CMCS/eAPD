@@ -1,6 +1,6 @@
-FROM node:16.13.2-bullseye
+FROM node:16-bullseye
 
-RUN npm i -g npm
+RUN npm i -g npm@8
 
 RUN mkdir /app
 WORKDIR /app
@@ -8,6 +8,6 @@ WORKDIR /app
 ADD ./package.json .
 ADD ./package-lock.json .
 
-RUN npm ci
+RUN npm ci --registry=https://registry.npmjs.org
 
 CMD npm run start-dev

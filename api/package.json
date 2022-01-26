@@ -23,8 +23,9 @@
     "test-endpoints": "jest --detectOpenHandles 'endpoint'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec --lines=0 --functions=0 --branches=0 --statements=0",
     "prettier": "prettier --config \"../.prettierrc\" --write \"**/*.js\"",
-    "preinstall": "npx force-resolutions",
-    "fullTest": "./unit-test.sh"
+    "preinstall": "npx npm-force-resolutions",
+    "fullTest": "./unit-test.sh",
+    "npm-check": "npx npm-check-updates"
   },
   "repository": {
     "type": "git",
@@ -73,55 +74,57 @@
     "url": "https://github.com/CMSgov/eAPD/issues"
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
-  "dependencies": {
-    "@okta/jwt-verifier": "^2.3.0",
-    "@okta/okta-sdk-nodejs": "^6.2.0",
-    "ajv": "^8.9.0",
-    "aws-sdk": "^2.1058.0",
-    "axios": "^0.25.0",
-    "body-parser": "^1.19.1",
-    "chalk": "^4.1.2",
-    "compression": "^1.7.4",
-    "cors": "^2.8.5",
-    "date-fns": "^2.28.0",
-    "dotenv": "^14.2.0",
-    "express": "^4.17.2",
-    "file-type": "^16.5.3",
-    "form-data": "^4.0.0",
-    "jsonpatch": "^3.0.1",
-    "jsonpointer": "^5.0.0",
-    "jsonwebtoken": "^8.5.1",
-    "knex": "^1.0.1",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.4",
-    "pg": "^8.7.1",
-    "sanitize-html": "^2.6.1",
-    "sharp": "^0.29.3",
-    "swagger-ui-express": "^4.3.0",
-    "uuid": "^8.3.2",
-    "winston": "^3.4.0",
-    "zxcvbn": "^4.4.2"
-  },
   "engines": {
-    "node": "^16.13.2"
+    "node": "16.13.2"
+  },
+  "dependencies": {
+    "@okta/jwt-verifier": "2.3.0",
+    "@okta/okta-sdk-nodejs": "6.2.0",
+    "ajv": "8.9.0",
+    "aws-sdk": "2.1064.0",
+    "axios": "0.25.0",
+    "body-parser": "1.19.1",
+    "chalk": "4.1.2",
+    "compression": "1.7.4",
+    "cors": "2.8.5",
+    "date-fns": "2.28.0",
+    "dotenv": "14.3.2",
+    "express": "4.17.2",
+    "file-type": "16.5.3",
+    "form-data": "4.0.0",
+    "jsonpatch": "3.0.1",
+    "jsonpointer": "5.0.0",
+    "jsonwebtoken": "8.5.1",
+    "knex": "1.0.1",
+    "morgan": "1.10.0",
+    "multer": "1.4.4",
+    "pg": "8.7.1",
+    "sanitize-html": "2.6.1",
+    "sharp": "0.29.3",
+    "swagger-ui-express": "4.3.0",
+    "uuid": "8.3.2",
+    "winston": "3.4.0",
+    "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "colors": "^1.4.0",
-    "eslint": "^8.7.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.4",
-    "jest": "^27.4.7",
-    "nodemon": "^2.0.15",
-    "prettier": "^2.5.1",
-    "sinon": "^12.0.1",
-    "supertest": "^6.2.1",
-    "tap": "^15.1.6"
+    "colors": "1.4.0",
+    "eslint": "8.7.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.25.4",
+    "jest": "27.4.7",
+    "nodemon": "2.0.15",
+    "prettier": "2.5.1",
+    "sinon": "12.0.1",
+    "supertest": "6.2.2",
+    "tap": "15.1.6"
   },
   "updateRestrictions": {
     "file-type": "can't upgrade to 17 because it requires babel"
   },
-  "resolutions": {},
+  "resolutions": {
+    "node-fetch": "2.6.7"
+  },
   "jest": {
     "testMatch": [
       "**/?(*.)+(spec|test|endpoint).js?(x)"

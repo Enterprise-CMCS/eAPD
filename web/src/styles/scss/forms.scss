@@ -43,9 +43,9 @@ button,
 
 div.form--with-reviews {
   border-bottom: 2px solid $border-color;
-  margin-bottom: nth($spacers, 3);
-  margin-top: nth($spacers, 3);
-  padding-bottom: nth($spacers, 3);
+  margin-bottom: $spacer-3;
+  margin-top: $spacer-3;
+  padding-bottom: $spacer-3;
 }
 
 // Above is a previous class that was used by the APD key personnel form/review
@@ -60,18 +60,18 @@ div.form--with-reviews {
 
 .form-and-review-list {
   > button {
-    margin-top: nth($spacers, 3);
+    margin-top: $spacer-3;
   }
 }
 
 .form-and-review-list--item__expanded {
   border-bottom: 2px solid $border-color;
-  padding-bottom: nth($spacers, 4);
-  padding-top: nth($spacers, 3);
+  padding-bottom: $spacer-4;
+  padding-top: $spacer-3;
 }
 
 #form-and-review-list--done-btn {
-  margin-top: nth($spacers, 5);
+  margin-top: $spacer-5;
 }
 
 .input-holder__percent {
