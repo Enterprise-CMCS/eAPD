@@ -74,7 +74,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     </div>
   </Review>
   <div
-    className="align-content-right ds-u-margin-y--0"
+    className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2"
     style={
       Object {
         "width": 485,
