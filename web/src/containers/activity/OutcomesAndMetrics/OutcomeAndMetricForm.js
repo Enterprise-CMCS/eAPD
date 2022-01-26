@@ -128,7 +128,7 @@ const OutcomeAndMetricForm = forwardRef(
           </div>
         </Review>
       ))}
-      <div className="align-content-right ds-u-margin-y--0" style={{width: 485}}>
+      <div className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2" style={{width: 485}}>
         <Button
           key={`activity${activityIndex}-index${index}-add-metric`}
           className="ds-c-button ds-c-button--transparent"
