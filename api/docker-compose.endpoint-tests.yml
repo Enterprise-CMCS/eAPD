@@ -55,5 +55,4 @@ services:
 
 networks:
   default:
-    external:
-      name: eapd_default      
+    name: eapd_default      
