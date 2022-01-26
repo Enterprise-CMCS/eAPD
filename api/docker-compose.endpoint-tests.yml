@@ -54,5 +54,5 @@ services:
       - /app/node_modules
 
 networks:
-  app:
-    name: eapd_default      
+  default:
+    driver: eapd_default      
