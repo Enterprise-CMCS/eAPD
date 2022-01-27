@@ -39,10 +39,10 @@ const MilestoneForm = ({
         value={milestone}
         onChange={changeName}
         onBlur={(e) => {
-          validateText(e, 'milestone name');
+          validateText(e, 'milestone name', '.');
         }}
         onKeyUp={(e) => {
-          validateText(e, 'milestone name');
+          validateText(e, 'milestone name', '.');
         }}
       />
       <DateField

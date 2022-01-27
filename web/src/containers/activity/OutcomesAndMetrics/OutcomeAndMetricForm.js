@@ -44,10 +44,10 @@ const OutcomeAndMetricForm = ({
         rows="4"
         onChange={changeOutcome}
         onBlur={(e) => {
-          validateText(e, 'name');
+          validateText(e, 'name', '.');
         }}
         onKeyUp={(e) => {
-          validateText(e, 'name');
+          validateText(e, 'name', '.');
         }}
         />
 
@@ -73,10 +73,10 @@ const OutcomeAndMetricForm = ({
               rows="4"
               onChange={changeMetric(i)}
               onBlur={(e) => {
-                validateText(e, 'matric');
+                validateText(e, 'metric', '.');
               }}
               onKeyUp={(e) => {
-                validateText(e, 'matric');
+                validateText(e, 'metric', '.');
               }}
               />
           </div>
