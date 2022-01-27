@@ -93,6 +93,14 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
     >
       <div />
     </Expanded>
+    <p
+      className="align-content-right ds-u-margin-y--0"
+      style={
+        Object {
+          "width": "485px",
+        }
+      }
+    />
     <Button
       component="button"
       id="form-and-review-list--done-btn"
@@ -183,6 +191,95 @@ exports[`FormAndReviewList component handles extra buttons on list items renders
     index={1}
     initialCollapsed={false}
   />
+  <p
+    className="align-content-right ds-u-margin-y--0"
+    style={
+      Object {
+        "width": "485px",
+      }
+    }
+  >
+    <Button
+      className="ds-c-button ds-c-button--transparent"
+      component="button"
+      key="button 1"
+      onClick={[Function]}
+      type="button"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className="ds-u-margin-right--1"
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Object {
+            "icon": Array [
+              512,
+              512,
+              Array [],
+              "f055",
+              "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z",
+            ],
+            "iconName": "plus-circle",
+            "prefix": "fas",
+          }
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+      button 1
+    </Button>
+    <Button
+      className="ds-c-button ds-c-button--transparent"
+      component="button"
+      key="button 2"
+      onClick={[Function]}
+      type="button"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className="ds-u-margin-right--1"
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Object {
+            "icon": Array [
+              512,
+              512,
+              Array [],
+              "f055",
+              "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z",
+            ],
+            "iconName": "plus-circle",
+            "prefix": "fas",
+          }
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+      button 2
+    </Button>
+  </p>
   <Button
     component="button"
     id="form-and-review-list--done-btn"
@@ -191,24 +288,6 @@ exports[`FormAndReviewList component handles extra buttons on list items renders
     variation="primary"
   >
     Done
-  </Button>
-  <Button
-    className="ds-u-margin-left--2"
-    component="button"
-    key="button 1"
-    onClick={[Function]}
-    type="button"
-  >
-    button 1
-  </Button>
-  <Button
-    className="ds-u-margin-left--2"
-    component="button"
-    key="button 2"
-    onClick={[Function]}
-    type="button"
-  >
-    button 2
   </Button>
 </div>
 `;
@@ -365,13 +444,13 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
 <div
   className="form-and-review-list "
 >
-  <Alert
-    headingLevel="2"
-    role="region"
-    variation="error"
-  >
-    displayed when there is no data
-  </Alert>
+  <div>
+    <p
+      className="ds-u-margin-top--4"
+    >
+      displayed when there is no data
+    </p>
+  </div>
   <Button
     className="visibility--screen"
     component="button"
@@ -402,12 +481,12 @@ exports[`FormAndReviewList component renders properly without an add button if t
 <div
   className="form-and-review-list "
 >
-  <Alert
-    headingLevel="2"
-    role="region"
-    variation="error"
-  >
-    displayed when there is no data
-  </Alert>
+  <div>
+    <p
+      className="ds-u-margin-top--4"
+    >
+      displayed when there is no data
+    </p>
+  </div>
 </div>
 `;

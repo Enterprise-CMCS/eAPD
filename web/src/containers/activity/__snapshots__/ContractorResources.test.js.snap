@@ -13,6 +13,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
     allowDeleteAll={true}
     className={null}
     collapsed={[Function]}
+    errorCheck={false}
     expanded={
       Object {
         "$$typeof": Symbol(react.memo),
