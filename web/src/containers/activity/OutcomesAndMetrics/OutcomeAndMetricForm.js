@@ -8,6 +8,7 @@ import {
   setOutcomeMetric
 } from '../../../actions/editActivity';
 import Review from '../../../components/Review';
+import { validateText } from '../../../helpers/textValidation';
 
 const OutcomeAndMetricForm = ({
   activityIndex,
@@ -87,51 +88,50 @@ const OutcomeAndMetricForm = ({
   }
 
   return (
+    
     <Fragment key={`activity${activityIndex}-index${index}-form`}>
-        <div id={outcomeContainer}>
-          <TextField
-            key={`activity${activityIndex}-index${index}`}
-            autoFocus
-            data-cy={`outcome-${index}`}
-            name="outcome"
-            label="Outcome"
-            hint="Describe a distinct and measurable improvement for this system."
-            value={outcome}
-            multiline
-            rows="4"
-            onChange={changeOutcome}
-            onBlur={checkForText}
-            onKeyUp={checkForText}
-          />
+      <TextField
+        key={`activity${activityIndex}-index${index}`}
+        autoFocus
+        data-cy={`outcome-${index}`}
+        name="outcome"
+        label="Outcome"
+        hint="Describe a distinct and measurable improvement for this system."
+        value={outcome}
+        multiline
+        rows="4"
+        onChange={changeOutcome}
+        onBlur={validateText}
+        onKeyUp={validateText}
+        />
 
-          {metrics.map(({ key, metric }, i) => (
-            <Review
-              key={key}
-              onDeleteClick={() => removeMetric(index, i)}
-              ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
-              objType="Metric"
+      {metrics.map(({ key, metric }, i) => (
+        <Review
+        key={key}
+        onDeleteClick={() => removeMetric(index, i)}
+        ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
+        objType="Metric"
+        >
+          <div
+            key={key}
+            className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
             >
-              <div
-                key={key}
-                className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-              >
-                <TextField
-                  id={`${activityIndex}-metric${i}`}
-                  name="metric"
-                  data-cy={`metric-${index}-${i}`}
-                  label="Metric"
-                  hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-                  value={metric}
-                  multiline
-                  rows="4"
-                  onChange={changeMetric(i)}
-                  onBlur={checkForText}
-                  onKeyUp={checkForText}
-                />
-              </div>
-            </Review>
-          ))}
-      </div>
+            <TextField
+              id={`${activityIndex}-metric${i}`}
+              name="metric"
+              data-cy={`metric-${index}-${i}`}
+              label="Metric"
+              hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+              value={metric}
+              multiline
+              rows="4"
+              onChange={changeMetric(i)}
+              onBlur={validateText}
+              onKeyUp={validateText}
+              />
+          </div>
+        </Review>
+      ))}
     </Fragment>
   );
 };
