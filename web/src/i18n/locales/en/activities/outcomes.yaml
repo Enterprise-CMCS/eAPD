@@ -27,7 +27,7 @@ instruction:
 
     3. Percentage of children in Medicaid with lead poisoning that had timely follow-up testing by providers.
 
-noDataNotice: Outcomes have not been added for this activity.
+noDataNotice: Add at least one outcome for this activity.
 
 description:
   input:

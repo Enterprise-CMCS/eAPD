@@ -54,7 +54,7 @@ describe('activities reducer helpers', () => {
     expect(newOutcome()).toEqual({
       key: '--- key ---',
       outcome: '',
-      metrics: [{ key: '--- key ---', metric: '' }]
+      metrics: []
     });
   });
 
