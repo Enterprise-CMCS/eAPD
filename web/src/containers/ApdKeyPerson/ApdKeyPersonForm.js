@@ -69,10 +69,10 @@ const PersonForm = ({
         cy-data={`key-person-name-${index}`}
         onChange={handleChange(setName)}
         onKeyUp={(e) => {
-          validateText(e, 'name');
+          validateText(e, 'name', ' for the point of contact.');
         }}
         onBlur={(e) => {
-          validateText(e, 'name');
+          validateText(e, 'name', ' for the point of contact.');
         }}
       />
       <TextField
@@ -81,10 +81,10 @@ const PersonForm = ({
         value={email}
         onChange={handleChange(setEmail)}
         onKeyUp={(e) => {
-          validateText(e, 'email');
+          validateText(e, 'email', ' for the point of contact.');
         }}
         onBlur={(e) => {
-          validateText(e, 'email');
+          validateText(e, 'email', ' for the point of contact.');
         }}
       />
       <TextField
@@ -93,10 +93,10 @@ const PersonForm = ({
         value={position}
         onChange={handleChange(setRole)}
         onKeyUp={(e) => {
-          validateText(e, 'role');
+          validateText(e, 'role', ' for the point of contact.');
         }}
         onBlur={(e) => {
-          validateText(e, 'role');
+          validateText(e, 'role', ' for the point of contact.');
         }}
       />
 
