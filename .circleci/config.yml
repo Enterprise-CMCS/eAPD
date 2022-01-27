@@ -274,12 +274,6 @@ jobs:
             nvm alias default 14
             echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
-      - run:
-          name: setup docker api volume
-          working_directory: ~/project/api
-          command: |
-            docker create -v /app --name api alpine:3.4 /bin/true
-            docker cp ./ api:/app
       - save_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
           paths:
@@ -377,6 +371,12 @@ jobs:
             docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
             docker build -t cms-eapd/api ./
       - run:
+          name: setup docker api volume
+          working_directory: ~/project/api
+          command: |
+            docker create -v /app --name api alpine:3.4 /bin/true
+            docker cp ./ api:/app            
+      - run:
           name: run tests
           working_directory: ~/project/api
           command: |
@@ -420,6 +420,12 @@ jobs:
           command: |
             docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
             docker build -t cms-eapd/api ./
+      - run:
+          name: setup docker api volume
+          working_directory: ~/project/api
+          command: |
+            docker create -v /app --name api alpine:3.4 /bin/true
+            docker cp ./ api:/app            
       - run:
           name: run tests
           working_directory: ~/project/api
