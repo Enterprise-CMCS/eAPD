@@ -28,29 +28,9 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     onEditClick={null}
     title={null}
   >
-    <TextField
-      autoFocus={true}
-      data-cy="outcome-1"
-      hint="Describe a distinct and measurable improvement for this system."
-      key="activity93-index1"
-      label="Outcome"
-      multiline={true}
-      name="outcome"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onKeyUp={[Function]}
-      rows="4"
-      type="text"
-      value="outcome description"
-    />
-    <Review
-      ariaLabel="1. metric 1"
-      editHref={null}
+    <div
+      className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
       key="om key 1"
-      objType="Metric"
-      onDeleteClick={[Function]}
-      onEditClick={null}
-      title={null}
     >
       <TextField
         data-cy="metric-1-0"
@@ -80,10 +60,6 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     <div
       className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
       key="om key 2"
-      objType="Metric"
-      onDeleteClick={[Function]}
-      onEditClick={null}
-      title={null}
     >
       <TextField
         data-cy="metric-1-1"
