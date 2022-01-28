@@ -15,7 +15,7 @@
     "test-watch": "TZ=utc npm run test:generate-output -- --watch",
     "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\"",
     "prebuild:storybook": "npm run test:generate-output",
-    "build-storybook": "build-storybook -o ../docs-build",
+    "build-storybook": "npm run prebuild:storybook && build-storybook -o ../docs-build",
     "deploy-storybook": "storybook-to-ghpages --out=../docs-build",
     "storybook": "start-storybook -p 6006"
   },
