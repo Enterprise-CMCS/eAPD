@@ -1,13 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1005092],
-  "_comment": {
-    "1005092": {
-      "advisory": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
-      "module": "yargs-parser",
-      "affects": ["migrate-mongoose@4.0.0 - not used in production"]
-    }
-  },
+  "allowlist": [],
+  "_comment": {},
   "registry": "https://registry.npmjs.org"
 }

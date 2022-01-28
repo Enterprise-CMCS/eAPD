@@ -7,8 +7,8 @@
       "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
       "module": "ansi-regex",
       "affects": [
-        "cypress-grep@2.12.2 - testing",
-        "sqlite3@4.2.0 - sql for testing"
+        "cypress-grep@2.12.2 - cypress",
+        "sqlite3@4.2.0 - sql but just for testing"
       ]
     }
   },

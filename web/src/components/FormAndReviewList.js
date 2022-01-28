@@ -2,6 +2,8 @@ import { Alert, Button } from '@cmsgov/design-system';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon, { faPlusCircle } from './Icons';
+
 const FormAndReviewItem = ({
   collapsedComponent: Collapsed,
   expandedComponent: Expanded,
@@ -33,6 +35,18 @@ const FormAndReviewItem = ({
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
       <Expanded index={index} {...rest} collapse={collapse} />
+      <p className='align-content-right ds-u-margin-y--0' style={{ width: '485px' }}>
+        {extraButtons.map(({ onClick, text }) => (
+          <Button
+            key={text}
+            className="ds-c-button ds-c-button--transparent"
+            onClick={() => onClick(index)}
+          >
+            <Icon icon={faPlusCircle} className='ds-u-margin-right--1' />
+            {text}
+          </Button>
+        ))}
+      </p>
       <Button
         id="form-and-review-list--done-btn"
         variation="primary"
@@ -40,15 +54,6 @@ const FormAndReviewItem = ({
       >
         Done
       </Button>
-      {extraButtons.map(({ onClick, text }) => (
-        <Button
-          key={text}
-          className="ds-u-margin-left--2"
-          onClick={() => onClick(index)}
-        >
-          {text}
-        </Button>
-      ))}
     </div>
   );
 };
@@ -77,6 +82,7 @@ const FormAndReviewList = ({
   allowDeleteAll,
   className,
   collapsed,
+  errorCheck,
   expanded,
   extraItemButtons,
   list,
@@ -87,8 +93,10 @@ const FormAndReviewList = ({
 }) => {
   const combinedClassName = useMemo(
     () => ['form-and-review-list', className].join(' '),
-    className
+    [className]
   );
+
+  const noDataOptions = noDataMessage || 'This list is empty'
 
   const [hasAdded, setHasAdded] = useState(false);
   const addClick = e => {
@@ -99,7 +107,15 @@ const FormAndReviewList = ({
   return (
     <div className={combinedClassName}>
       {list.length === 0 && noDataMessage !== false ? (
-        <Alert variation="error">{noDataMessage || 'This list is empty'}</Alert>
+        <div>
+          {errorCheck === true ? (
+            <Alert variation="error">{noDataOptions}</Alert>
+          ) : (
+            <p className="ds-u-margin-top--4">
+              {noDataOptions}
+            </p>
+          )}
+        </div>
       ) : (
         list.map((item, index) => (
           <FormAndReviewItem
@@ -134,6 +150,7 @@ FormAndReviewList.propTypes = {
   className: PropTypes.string,
   collapsed: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
     .isRequired,
+  errorCheck: PropTypes.bool,
   expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
     .isRequired,
   extraItemButtons: PropTypes.array,
@@ -147,6 +164,7 @@ FormAndReviewList.defaultProps = {
   addButtonText: null,
   allowDeleteAll: false,
   className: null,
+  errorCheck: false,
   extraItemButtons: [],
   noDataMessage: null,
   onAddClick: null,

@@ -20,8 +20,8 @@ describe('auth/certifications get endpoint', () => {
 
     describe('when authenticated as a user with permission', () => {
       let api;
-      beforeAll(() => {
-        api = login();
+      beforeAll(async () => {
+        api = login('fed-admin');
       });
 
       it('valid request', async () => {

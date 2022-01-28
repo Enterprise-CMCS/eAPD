@@ -6,12 +6,12 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
   allowDeleteAll={false}
   className={null}
   collapsed={[Function]}
+  errorCheck={false}
   expanded={
     Object {
       "$$typeof": Symbol(react.memo),
       "WrappedComponent": [Function],
       "compare": null,
-      "displayName": "Connect(PersonForm)",
       "type": [Function],
     }
   }

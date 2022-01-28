@@ -1,6 +1,6 @@
-FROM node:14-bullseye
+FROM node:16-bullseye
 
-RUN npm i -g npm
+RUN npm i -g npm@8
 
 RUN mkdir /app
 WORKDIR /app
@@ -10,4 +10,4 @@ ADD ./package-lock.json .
 
 RUN npm ci
 
-CMD npm run start -- --public=0.0.0.0:8080
+CMD npm run start

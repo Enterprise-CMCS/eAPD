@@ -247,7 +247,7 @@ jobs:
   # because "npm ci" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: node:14
+      - image: node:16
         auth:
           username: $DOCKER_INSTALL_DEPS_UN
           password: $DOCKER_INSTALL_DEPS_PW
@@ -277,7 +277,7 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:16
         auth:
           username: $DOCKER_VALIDATE_OPENAPI_UN
           password: $DOCKER_VALIDATE_OPENAPI_PW
@@ -299,7 +299,7 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: node:14
+      - image: node:16
         auth:
           username: $DOCKER_TESTS_UN
           password: $DOCKER_TESTS_PW
@@ -332,7 +332,7 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 14.
+            # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
@@ -342,7 +342,7 @@ jobs:
   # Lints the backend code.
   backend lint:
     docker:
-      - image: node:14
+      - image: node:16
         auth:
           username: $DOCKER_LINT_UN
           password: $DOCKER_LINT_PW
@@ -373,7 +373,7 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 14.
+            # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
@@ -396,7 +396,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: node:14
+      - image: node:16
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
@@ -416,7 +416,7 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: node:14
+      - image: node:16
         auth:
           username: $DOCKER_LINT_UN
           password: $DOCKER_LINT_PW
@@ -432,7 +432,7 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: node:14
+      - image: node:16
         auth:
           username: $DOCKER_TESTS_UN
           password: $DOCKER_TESTS_PW
@@ -460,7 +460,7 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: node:14
+      - image: node:16
         auth:
           username: $DOCKER_DEPS_VULN_UN
 
@@ -692,7 +692,7 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: node:14
+      - image: node:16
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD

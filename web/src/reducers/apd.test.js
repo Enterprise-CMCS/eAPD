@@ -1,10 +1,9 @@
-import sinon from 'sinon';
 import { RESET, SELECT_APD_SUCCESS } from '../actions/app/symbols';
 
 // The Hubble Space Telescope was launched on the space shuttle Discovery on
 // April 24, 1990.  FFY 1990.  Set this clock before we import code under test,
 // so that the stuff we import will use our faked-out clock.
-const mockClock = sinon.useFakeTimers(new Date(1990, 3, 24).getTime());
+jest.useFakeTimers().setSystemTime(new Date('1990-04-24').getTime());
 
 const { default: apd, getPatchesForAddingItem } = require('./apd');
 const {
@@ -26,7 +25,7 @@ const regulations = require('../util/regulations').default;
 
 describe('APD reducer', () => {
   afterAll(() => {
-    mockClock.restore();
+    jest.clearAllTimers();
   });
 
   const initialState = {
@@ -929,12 +928,7 @@ describe('APD reducer', () => {
               outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  metrics: [
-                    {
-                      key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                      metric: ''
-                    }
-                  ],
+                  metrics: [],
                   outcome: ''
                 }
               ]

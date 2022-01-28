@@ -45,11 +45,15 @@ class PopulatePage {
     cy.setTinyMceContent('activity-alternatives-field', justifications);
   };
 
-  fillOutcomeForm = (outcome, metric1, metric2) => {
+  fillOutcomeForm = ({ outcome, metrics }) => {
     this.fillTextField('ds-c-field', outcome, 0);
-    this.fillTextField('ds-c-field', metric1, 1);
-    cy.findByRole('button', { name: /Add Metric/ }).click();
-    this.fillTextField('ds-c-field', metric2, 2);
+    cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+    metrics.forEach((metric, index) => {
+      this.fillTextField('ds-c-field', metric, index + 1);
+      if (index < metrics.length - 1) {
+        cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+      }
+    });
     cy.findByRole('button', { name: /Done/i }).click();
   };
 

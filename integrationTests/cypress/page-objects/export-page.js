@@ -208,6 +208,7 @@ class ExportPage {
     });
   }
 
+  // eslint-disable-next-line default-param-last
   checkActivityHeader = (name = 'Untitled', num) => {
     cy.findByRole('heading', { name: /^Activities$/i })
       .parent()

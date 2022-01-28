@@ -1,7 +1,5 @@
 const path = require('path');
 
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -23,31 +21,15 @@ const config = {
     // vendored chunk.
     splitChunks: {
       chunks: 'all'
-    }
+    },
+    moduleIds: 'deterministic'
   },
   module: {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: {
-          and: [/node_modules/], // Exclude libraries in node_modules ...
-          not: [
-            // Except for a few of them that needs to be transpiled because they use modern syntax
-            /unfetch/,
-            /d3-array|d3-scale|d3-format/,
-            /@hapi[\\/]joi-date/
-          ]
-        },
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [['@babel/preset-env', { targets: 'defaults, ie >= 11' }]],
-            plugins: [
-              '@babel/plugin-proposal-class-properties',
-              '@babel/plugin-transform-runtime'
-            ]
-          }
-        }
+        exclude: /node_modules\/(?!(d3-array|d3-format|d3-geo)\/)/,
+        use: ['babel-loader']
       },
       {
         test: /\.scss$/,
@@ -68,24 +50,28 @@ const config = {
           {
             loader: 'postcss-loader',
             options: {
-              postcssOptions: { plugins: [autoprefixer(), cssnano()] }
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      browsers: 'last 2 versions'
+                    }
+                  ]
+                ]
+              }
             }
           },
           // Load the SCSS/SASS
-          { loader: 'sass-loader' }
+          'sass-loader'
         ]
       },
       {
-        test: /\.(woff2?|ttf|otf|eot|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'static/fonts'
-            }
-          }
-        ]
+        test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/[hash][ext][query]'
+        }
       },
       {
         test: /\.yaml$/,
@@ -105,16 +91,15 @@ const config = {
       OKTA_CLIENT_ID: ''
     }),
 
-    // uses module hashs as IDs instead of numeric indices, so adding a new
-    // file to the app doesn't cause vendored output hash to change
-    new webpack.HashedModuleIdsPlugin(),
-
     // Inject our app scripts into our HTML kickstarter
     new HtmlWebpackPlugin({
       minify: { removeComments: true },
       template: 'src/index.html'
     })
-  ]
+  ],
+  stats: {
+    children: true
+  }
 };
 
 module.exports = config;

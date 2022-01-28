@@ -24,31 +24,32 @@ const StatePersonForm = ({
 }) => {
   const editTitle = useCallback(
     ({ target: { value } }) => setTitle(activityIndex, index, value),
-    [index]
+    [activityIndex, index, setTitle]
   );
 
   const editDesc = useCallback(
     ({ target: { value } }) => setDescription(activityIndex, index, value),
-    [index]
+    [activityIndex, index, setDescription]
   );
 
   const getEditCostForYear = useCallback(
     (year, value) => {
       setCost(activityIndex, index, year, value);
     },
-    [index]
+    [activityIndex, index, setCost]
   );
 
   const getEditFTEForYear = useCallback(
     (year, value) => {
       setFTE(activityIndex, index, year, value);
     },
-    [index]
+    [activityIndex, index, setFTE]
   );
 
   return (
     <Fragment>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
+      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
         autoFocus
         label="Personnel title"

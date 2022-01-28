@@ -228,7 +228,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         medicaidOffice: { bigBird: 'grover' }
       });
 
-      createAPD.resolves('apd id');
+      createAPD.resolves({ id: 'apd id' });
 
       await handler(req, res, next);
 

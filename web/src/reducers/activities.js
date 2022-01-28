@@ -20,7 +20,7 @@ export const newOutcomeMetric = () => ({
 export const newOutcome = () => ({
   key: generateKey(),
   outcome: '',
-  metrics: [newOutcomeMetric()]
+  metrics: []
 });
 
 export const statePersonDefaultYear = () => ({ amt: '', perc: '' });

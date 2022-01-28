@@ -10,25 +10,31 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
   const [stateAffiliations, setStateAffiliations] = useState([]);
   const [selectedAffiliation, setSelectedAffiliation] = useState({});
 
-  useEffect(() => {
-    (async () => {
-      const state = certification.state.toLowerCase();
+  useEffect(
+    () => {
+      (async () => {
+        const state = certification.state.toLowerCase();
 
-      const affiliations = await axios.get(
-        `/states/${state}/affiliations?matches=true`
-      );
-      setStateAffiliations(affiliations.data);
-      /* Compare the certification email/name to the affiliations and make 
-          it the default one selected in the dropdown */
-      const match = affiliations.data.find(affiliation => {
-        return (
-          affiliation.email === certification.email ||
-          affiliation.displayName === certification.name
+        const affiliations = await axios.get(
+          `/states/${state}/affiliations?matches=true`
         );
-      });
-      setSelectedAffiliation(match);
-    })();
-  }, []);
+        setStateAffiliations(affiliations.data);
+        /* Compare the certification email/name to the affiliations and make 
+          it the default one selected in the dropdown */
+        const match = affiliations.data.find(affiliation => {
+          return (
+            affiliation.email === certification.email ||
+            affiliation.displayName === certification.name
+          );
+        });
+        setSelectedAffiliation(match);
+      })();
+    },
+    // we want this to run on load so we don't need any thing
+    // in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const handleUserSelect = event => {
     const userInfo = stateAffiliations.find(

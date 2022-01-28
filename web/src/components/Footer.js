@@ -12,19 +12,19 @@ const Footer = () => {
             width="80px"
           />
           <img
-            src="/static/img/cms-logo.png"
+            src="static/img/cms-logo.png"
             alt="Centers for Medicare & Medicaid Services Logo"
             className="cms-logo"
             width="150px"
           />
           <img
-            src="/static/img/macpro_logo_transparent.png"
+            src="static/img/macpro_logo_transparent.png"
             alt="MACPro logo"
             className="macpro-logo"
             width="100px"
           />
           <img
-            src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
+            src="static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
             alt="eAPD logo"
             className="eAPD-logo"
             width="115px"

@@ -37,18 +37,24 @@ const ApdViewOnly = ({
   const { apdId: paramApdId } = useParams();
   const history = useHistory();
 
-  useEffect(() => {
-    if (!paramApdId && !apdId) {
-      history.push('/');
-    } else if (apdId && !paramApdId) {
-      history.push(`/print/${apdId}`);
-    } else if (paramApdId && (!apdId || apdId !== paramApdId)) {
-      setIsLoading(true);
-      goToApd(paramApdId, `/print/${paramApdId}`);
-    } else {
-      setIsLoading(false);
-    }
-  }, []);
+  useEffect(
+    () => {
+      if (!paramApdId && !apdId) {
+        history.push('/');
+      } else if (apdId && !paramApdId) {
+        history.push(`/print/${apdId}`);
+      } else if (paramApdId && (!apdId || apdId !== paramApdId)) {
+        setIsLoading(true);
+        goToApd(paramApdId, `/print/${paramApdId}`);
+      } else {
+        setIsLoading(false);
+      }
+    },
+    // we want this to run on load so we don't need any thing
+    // in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   useEffect(() => {
     if (apdId) {

@@ -54,7 +54,7 @@ const Outcomes = ({
         collapsed={OutcomeAndMetricReview}
         expanded={OutcomeAndMetricForm}
         extraItemButtons={[
-          { onClick: handleAddMetric, text: 'Add Metric' }
+          { onClick: handleAddMetric, text: 'Add Metric to Outcome' }
         ]}
         removeMetric={handleDeleteMetric}
         noDataMessage={t('activities.outcomes.noDataNotice')}

@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 import { push } from 'connected-react-router';
 
 import { plain as ExportAndSubmit, mapDispatchToProps } from './ApdExport';
@@ -23,7 +22,7 @@ describe('apd export component', () => {
   });
 
   test('routes to print preview', () => {
-    const fakePush = sinon.spy();
+    const fakePush = jest.fn();
     const component = shallow(
       <ExportAndSubmit
         push={fakePush}
@@ -33,7 +32,7 @@ describe('apd export component', () => {
     );
     component.find('Button').simulate('click');
 
-    expect(fakePush.calledOnce).toEqual(true);
+    expect(fakePush).toHaveBeenCalledTimes(1);
   });
 
   test('maps dispatch to props', () => {

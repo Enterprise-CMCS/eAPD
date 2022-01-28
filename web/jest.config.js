@@ -7,11 +7,13 @@ module.exports = {
   moduleNameMapper: {
     '^apd-(.*)-library$': '<rootDir>/shared/apd-$1-library.js'
   },
+  testEnvironment: 'jsdom',
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
-    '\\.yaml$': 'jest-transform-yaml',
-    '\\.js?$': 'babel-jest'
+    '\\.[jt]sx?$': 'babel-jest',
+    '\\.yaml$': 'yaml-jest',
+    '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
-  moduleFileExtensions: ['js', 'yaml'],
-  testEnvironment: '../custom-jest-environment.js'
+  transformIgnorePatterns: ['node_modules/(?!(d3-format|d3-geo|d3-array)/)'],
+  moduleFileExtensions: ['js', 'yaml']
 };

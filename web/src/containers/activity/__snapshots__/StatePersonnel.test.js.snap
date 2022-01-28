@@ -20,12 +20,12 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
     allowDeleteAll={true}
     className={null}
     collapsed={[Function]}
+    errorCheck={false}
     expanded={
       Object {
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(StatePersonForm)",
         "type": [Function],
       }
     }

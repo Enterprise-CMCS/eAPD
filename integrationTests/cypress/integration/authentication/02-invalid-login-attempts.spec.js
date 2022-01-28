@@ -14,12 +14,14 @@ describe('Invalid Login Attempts', { tags: ['@auth'] }, () => {
 
       cy.findByRole('button', { name: /Log in/i }).should('be.disabled');
 
-      cy.findByLabelText('EUA ID').type(Cypress.env('statestaff'));
+      cy.findByLabelText('EUA ID').clear().type(Cypress.env('statestaff'));
       cy.findByRole('button', { name: /Log in/i }).should('be.disabled');
 
-      cy.findByLabelText('Password').type(Cypress.env('statestaff_pw'), {
-        log: false
-      });
+      cy.findByLabelText('Password')
+        .clear()
+        .type(Cypress.env('statestaff_pw'), {
+          log: false
+        });
       cy.findByRole('button', { name: /Log in/i }).should('be.enabled');
     });
 

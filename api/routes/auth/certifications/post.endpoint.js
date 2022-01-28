@@ -12,7 +12,7 @@ describe('auth/certifications endpoints', () => {
     const db = getDB();
     beforeAll(() => setupDB(db));
     afterAll(() => teardownDB(db));
-    
+
     const validRequestBody = {
       ffy: 2021,
       name: 'Roger Klotz',
@@ -29,8 +29,8 @@ describe('auth/certifications endpoints', () => {
 
     describe('when authenticated as a user with permission', () => {
       let api;
-      beforeAll(() => {
-        api = login();
+      beforeAll(async () => {
+        api = login('fed-admin');
       });
 
       it('with no request body', async () => {

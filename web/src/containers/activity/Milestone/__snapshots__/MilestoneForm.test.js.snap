@@ -11,9 +11,12 @@ exports[`the MilestoneForm component renders correctly 1`] = `
   </h6>
   <TextField
     autoFocus={true}
+    data-cy="milestone-3252"
     label="Name"
     name="name"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="Milestone name"
   />

@@ -601,6 +601,7 @@ const buildBudget = incomingBigState => {
   return newState;
 };
 
+// eslint-disable-next-line default-param-last
 const reducer = (state = initialState([]), action) => {
   switch (action.type) {
     case RESET:

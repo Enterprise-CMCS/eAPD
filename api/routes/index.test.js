@@ -3,7 +3,6 @@ const sinon = require('sinon');
 const endpointIndex = require('./index');
 
 tap.test('endpoint setup', async endpointTest => {
-
   const app = {
     get: sinon.spy(),
     use: sinon.spy()
@@ -21,26 +20,23 @@ tap.test('endpoint setup', async endpointTest => {
   const meEndpoint = sinon.spy();
   const rolesEndpoint = sinon.spy();
   const statesEndpoint = sinon.spy();
-  const stateAffiliationEndpoint = sinon.spy()
+  const stateAffiliationEndpoint = sinon.spy();
   const usersEndpoint = sinon.spy();
   const openAPI = {};
 
-  endpointIndex(
-    app,
-    {
-      affiliationsEndpoint,
-      apdsEndpoint,
-      apdsEventsEndpoint,
-      apdsFilesEndpoint,
-      authEndpoint,
-      docsEndpoint,
-      rolesEndpoint,
-      statesEndpoint,
-      stateAffiliationEndpoint,
-      usersEndpoint,
-      openAPIdoc:{}
-    }
-  );
+  endpointIndex(app, {
+    affiliationsEndpoint,
+    apdsEndpoint,
+    apdsEventsEndpoint,
+    apdsFilesEndpoint,
+    authEndpoint,
+    docsEndpoint,
+    rolesEndpoint,
+    statesEndpoint,
+    stateAffiliationEndpoint,
+    usersEndpoint,
+    openAPIdoc: {}
+  });
 
   endpointTest.ok(
     affiliationsEndpoint.calledWith(app),
@@ -89,7 +85,6 @@ tap.test('endpoint setup', async endpointTest => {
     'users endpoint is setup with the app'
   );
 
-
   endpointTest.ok(
     app.get.calledWith('/open-api', sinon.match.func),
     'sets up an endpoint to fetch OpenAPI spec'
@@ -113,6 +108,6 @@ tap.test('endpoint setup', async endpointTest => {
 
   // endpointTest.test('GET /api-docs', async t => {
   //   const response = await request(api).get('/api-docs');
-  //   t.equals(response.status, 301, 'successful');
+  //   t.equal(response.status, 301, 'successful');
   // });
 });
