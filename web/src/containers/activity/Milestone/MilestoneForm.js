@@ -8,6 +8,9 @@ import {
   setMilestoneName
 } from '../../../actions/editActivity';
 import DateField from '../../../components/DateField';
+import { 
+  validateText
+} from '../../../helpers/textValidation';
 
 const MilestoneForm = ({
   activityIndex,
@@ -31,10 +34,13 @@ const MilestoneForm = ({
       {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
         autoFocus
+        data-cy={`milestone-${index}`}
         label="Name"
         name="name"
         value={milestone}
         onChange={changeName}
+        onBlur={validateText}
+        onKeyUp={validateText}
       />
       <DateField
         label="Target completion date"

@@ -81,7 +81,7 @@
     "@okta/jwt-verifier": "2.3.0",
     "@okta/okta-sdk-nodejs": "6.2.0",
     "ajv": "8.9.0",
-    "aws-sdk": "2.1064.0",
+    "aws-sdk": "2.1065.0",
     "axios": "0.25.0",
     "body-parser": "1.19.1",
     "chalk": "4.1.2",
@@ -103,7 +103,7 @@
     "sharp": "0.29.3",
     "swagger-ui-express": "4.3.0",
     "uuid": "8.3.2",
-    "winston": "3.4.0",
+    "winston": "3.5.0",
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {

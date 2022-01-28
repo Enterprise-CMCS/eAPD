@@ -50,6 +50,7 @@
     "pg": "8.7.1"
   },
   "resolutions": {
+    "cached-path-relative": "1.1.0",
     "node-fetch": "2.6.7"
   }
 }

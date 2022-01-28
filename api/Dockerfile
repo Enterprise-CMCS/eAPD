@@ -8,6 +8,6 @@ WORKDIR /app
 ADD ./package.json .
 ADD ./package-lock.json .
 
-RUN npm ci --registry=https://registry.npmjs.org
+RUN npm ci
 
 CMD npm run start-dev

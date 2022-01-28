@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="ds-l-container">
         <div className="ds-l-row ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
           <img
-            src="static/img/dhhs_logo_black.png"
+            src="/static/img/dhhs_logo_black.png"
             alt="Health and Human Services logo"
             className="hhs-logo"
             width="80px"

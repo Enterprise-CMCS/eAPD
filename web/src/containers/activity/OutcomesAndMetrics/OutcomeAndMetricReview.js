@@ -16,16 +16,18 @@ const OutcomeAndMetricReview = ({
     <p className="ds-u-margin-top--2">
       <strong>Outcome:</strong> {outcome || 'Outcome not specified'}
     </p>
-    <p className="ds-u-margin-top--2">
-      <ul className="ds-c-list--bare">
-        <strong>Metrics:</strong>
-        {metrics.map(({ key, metric }, index) => (
-          <li key={key} className="ds-u-margin-bottom--2">
-            {index + 1}. {metric || 'Metric not specified'}
-          </li>
-        ))}
-      </ul>
-    </p>
+    {metrics.length > 0 ? (
+      <p className="ds-u-margin-top--2">
+        <ul className="ds-c-list--bare">
+          <strong>Metrics:</strong>
+          {metrics.map(({ key, metric }, index) => (
+            <li key={key} className="ds-u-margin-bottom--2">
+              {index + 1}. {metric || 'Metric not specified'}
+            </li>
+          ))}
+        </ul>
+      </p>
+    ) : null}
   </Review>
 );
 

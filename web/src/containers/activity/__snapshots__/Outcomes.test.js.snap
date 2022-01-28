@@ -16,6 +16,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
     allowDeleteAll={true}
     className={null}
     collapsed={[Function]}
+    errorCheck={false}
     expanded={
       Object {
         "$$typeof": Symbol(react.memo),
@@ -28,7 +29,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
       Array [
         Object {
           "onClick": [Function],
-          "text": "Add Metric",
+          "text": "Add Metric to Outcome",
         },
       ]
     }
@@ -46,7 +47,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
         },
       ]
     }
-    noDataMessage="Outcomes have not been added for this activity."
+    noDataMessage="Add at least one outcome for this activity."
     onAddClick={[Function]}
     onDeleteClick={[Function]}
     removeMetric={[Function]}

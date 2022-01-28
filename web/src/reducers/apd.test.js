@@ -913,12 +913,7 @@ describe('APD reducer', () => {
               outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  metrics: [
-                    {
-                      key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                      metric: ''
-                    }
-                  ],
+                  metrics: [],
                   outcome: ''
                 }
               ]

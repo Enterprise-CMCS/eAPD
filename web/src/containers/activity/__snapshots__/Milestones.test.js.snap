@@ -17,6 +17,7 @@ exports[`the Milestones component renders correctly 1`] = `
       allowDeleteAll={true}
       className={null}
       collapsed={[Function]}
+      errorCheck={false}
       expanded={
         Object {
           "$$typeof": Symbol(react.memo),
@@ -35,7 +36,7 @@ exports[`the Milestones component renders correctly 1`] = `
           },
         ]
       }
-      noDataMessage="Milestones have not been added for this activity."
+      noDataMessage="Add milestone(s) for this activity."
       onAddClick={[Function]}
       onDeleteClick={[Function]}
     />
