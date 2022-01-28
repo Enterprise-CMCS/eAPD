@@ -9,7 +9,7 @@ const setup = () =>
     const connectionString =
       process.env.MONGO_URL || 'mongodb://mongo:cms@mongo:27017/eapd';
     const dbName = process.env.MONGO_DATABASE || 'eapd';
-    return mongoose
+    mongoose
       .connect(connectionString, {
         useNewUrlParser: true,
         useUnifiedTopology: true,

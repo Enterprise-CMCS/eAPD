@@ -105,7 +105,7 @@
     "jsonwebtoken": "8.5.1",
     "knex": "1.0.1",
     "migrate-mongoose": "4.0.0",
-    "mongoose": "5.13.9",
+    "mongoose": "5.13.14",
     "mongoose-data-seed": "2.1.6",
     "morgan": "1.10.0",
     "multer": "1.4.4",
