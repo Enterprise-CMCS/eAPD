@@ -40,7 +40,12 @@ const CheckCircle = ({ ...props }) => (
 const File = ({ ...props }) => <FontAwesomeIcon icon={faFileAlt} {...props} />;
 const Envelope = () => <FontAwesomeIcon icon={faEnvelope} />;
 const PDFFile = () => (
-  <img src="static/img/pdf_doc.svg" alt="PDF" width="16em" />
+  <img 
+    src="/static/img/pdf_doc.svg"
+    width="15.24px"
+    height="19px" 
+    alt="PDF document icon" 
+  />
 );
 const PDFFileBlue = () => (
   <img
