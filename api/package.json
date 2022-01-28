@@ -101,7 +101,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.4",
     "migrate-mongoose": "^4.0.0",
-    "mongoose": "^6.1.5",
+    "mongoose": "^5.13.9",
     "mongoose-data-seed": "^2.1.6",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
@@ -116,7 +116,7 @@
     "zxcvbn": "^4.4.2"
   },
   "engines": {
-    "node": "^14.16.0"
+    "node": "^16.13.2"
   },
   "devDependencies": {
     "colors": "^1.4.0",
