@@ -398,7 +398,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkInputField('Name', '');
       activityPage.checkDate('Target completion date');
       cy.findByRole('button', { name: /Save/i }).click();
-
+      
+      cy.waitForSave();
+      
       activityPage.checkMilestoneOutput({
         milestone: 'Milestone not specified',
         targetDate: 'Date not specified'

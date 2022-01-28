@@ -109,7 +109,7 @@ export const testProposedBudgetWithData = years => {
   before(() => {
     proposedBudgetPage = new ProposedBudgetPage();
     const activityPage = new ActivitySchedulePage();
-    cy.waitForSave(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+
     cy.goToActivityScheduleSummary();
     cy.findByRole('heading', {
       name: /Activity Schedule Summary/i,
