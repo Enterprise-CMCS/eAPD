@@ -316,92 +316,32 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .get('h4').contains(element.name)
           .should('exist');
 
-        if (index === 0) {
           cy.get('@personneVals')
-            .find('li')
-            .should($lis => {
-              expect($lis).to.have.length(2);
-              expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
-              expect($lis.eq(1)).to.contain('Role not specified');
+          .find('li')
+          .should($lis => {
+              if (index === 0) {
+                expect($lis).to.have.length(2);
+                expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
+                expect($lis.eq(1)).to.contain('Role not specified');
+              } else {
+                  expect($lis).to.have.length(1);
+                  expect($lis.eq(0)).to.contain('Role not specified');
+              }
             });
-        } else {
-          cy.get('@personneVals')
-            .find('li')
-            .should($lis => {
-              expect($lis).to.have.length(1);
-              expect($lis.eq(1)).to.contain('Role not specified');
-            });
-        }
         // Protects against edge case of having '$' in name or role
         cy.get('@personneVals')
           .contains('Total cost:')
           .next()
           .shouldHaveValue(0);
 
+        cy.get('@personneVals').contains('Edit').should('exist');
+
         if (index === 0) {
           cy.get('@personneVals').contains('Delete').should('not.exist');
         } else {
           cy.get('@personneVals').contains('Delete').should('exist');
         }
-        cy.get('@personneVals').contains('Edit').should('exist');
       });
-
-      // Check for default values
-      cy.get('.form-and-review-list')
-        .findByRole('heading', { name: /2.*/i })
-        .parent()
-        .parent()
-        .as('personnelVals');
-      cy.get('@personnelVals')
-        .findByRole('heading', { name: /Key Personnel name not specified/i })
-        .should('exist');
-      cy.get('@personnelVals')
-        .find('li')
-        .should($lis => {
-          expect($lis).to.have.length(1);
-          expect($lis.eq(0)).to.contain('Role not specified');
-        });
-      cy.get('@personnelVals')
-        .contains('Total cost:')
-        .next()
-        .shouldHaveValue(0);
-
-      cy.get('@personnelVals').contains('Delete').should('exist');
-      cy.get('@personnelVals').contains('Edit').should('exist');
-
-      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-      // Have to force check; cypress does not think radio buttons are visible
-      cy.get('input[type="radio"][value="yes"]')
-        .scrollIntoView()
-        .check({ force: true });
-      cy.findByRole('button', { name: /Done/i }).click();
-
-      // Check for default values
-      cy.get('.form-and-review-list')
-        .findByRole('heading', { name: /3.*/i })
-        .parent()
-        .parent()
-        .as('personnelVals');
-      cy.get('@personnelVals')
-        .findByRole('heading', { name: /Key Personnel name not specified/i })
-        .should('exist');
-      cy.get('@personnelVals')
-        .find('li')
-        .should($lis => {
-          expect($lis).to.have.length(1);
-          expect($lis.eq(0)).to.contain('Role not specified');
-        });
-
-      // Check that FFY, FTE, and Total cost for each applicable year is 0.
-      years.forEach(year => {
-        cy.get('@personnelVals').should(
-          'contain',
-          `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`
-        );
-      });
-
-      cy.get('@personnelVals').contains('Delete').should('exist');
-      cy.get('@personnelVals').contains('Edit').should('exist');
     });
 
     it('should handle entering data in Activity Dashboard', () => {
