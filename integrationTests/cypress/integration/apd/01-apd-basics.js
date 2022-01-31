@@ -269,41 +269,82 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       proposedBudgetPage = new ProposedBudgetPage();
     });
 
-    it('should handle entering data in Key State Personnel', () => {
+    it.only('should handle entering data in Key State Personnel', () => {
+      const personnel = [
+        {name: 'Jean Luc Picard',
+         email: 'picard@gmail.com',
+         role: 'Captain'},
+        {name: 'William Riker',
+         email: 'riker@gmail.com',
+         role: 'First Mate'},
+        {name: 'Geordi La Forge',
+         email: 'laforge@gmail.com',
+         role: 'Chief Engineer'}
+      ]
+
       cy.goToKeyStatePersonnel();
-      cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-      cy.findByRole('button', { name: /Done/i }).click();
 
-      // Get div for the element containing user data as an alias
-      cy.get('.form-and-review-list')
-        .findByRole('heading', { name: /1.*/i })
-        .parent()
-        .parent()
-        .as('primaryContactVals');
-      // Check for default values
-      cy.get('@primaryContactVals')
-        .findByRole('heading', {
-          name: /Primary Point of Contact name not specified/i
-        })
-        .should('exist');
-      cy.get('@primaryContactVals')
-        .find('li')
-        .should($lis => {
-          expect($lis).to.have.length(2);
-          expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
-          expect($lis.eq(1)).to.contain('Role not specified');
-        });
-      // Protects against edge case of having '$' in name or role
-      cy.get('@primaryContactVals')
-        .contains('Total cost:')
-        .next()
-        .shouldHaveValue(0);
+      cy.wrap(personnel).each((element, index) => {
+        if (index === 0) {
+          cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+        } else {
+          cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+        }
 
-      cy.get('@primaryContactVals').contains('Delete').should('not.exist');
-      cy.get('@primaryContactVals').contains('Edit').should('exist');
+        cy.get(`[cy-data='key-person-name-${index}']`)
+          .should('have.value', '')
+          .blur()
+          .should('have.class', 'missing-text-alert')
 
-      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-      cy.findByRole('button', { name: /Done/i }).click();
+        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+
+        cy.get(`[cy-data='key-person-name-${index}']`)
+          .click()
+          .type(element.name)
+          .should('not.have.class', 'missing-text-alert')
+
+        cy.findByRole('button', { name: /Done/i }).click();
+        // Get div for the element containing user data as an alias
+        cy.get('.form-and-review-list')
+          .get('h4').contains(`${index + 1}.`)
+          .parent()
+          .parent()
+          .as('personneVals');
+
+        // Check for default values
+        cy.get('@personneVals')
+          .get('h4').contains(element.name)
+          .should('exist');
+
+        if (index === 0) {
+          cy.get('@personneVals')
+            .find('li')
+            .should($lis => {
+              expect($lis).to.have.length(2);
+              expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
+              expect($lis.eq(1)).to.contain('Role not specified');
+            });
+        } else {
+          cy.get('@personneVals')
+            .find('li')
+            .should($lis => {
+              expect($lis).to.have.length(1);
+              expect($lis.eq(1)).to.contain('Role not specified');
+            });
+        }
+        // Protects against edge case of having '$' in name or role
+        cy.get('@personneVals')
+          .contains('Total cost:')
+          .next()
+          .shouldHaveValue(0);
+
+        if (index === 0) {
+          cy.get('@personneVals').contains('Delete').should('not.exist');
+        } else {
+          cy.get('@personneVals').contains('Delete').should('exist');
+        }
+        cy.get('@personneVals').contains('Edit').should('exist');
+      });
 
       // Check for default values
       cy.get('.form-and-review-list')

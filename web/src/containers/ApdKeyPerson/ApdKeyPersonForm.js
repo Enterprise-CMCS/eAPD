@@ -79,6 +79,7 @@ const PersonForm = ({
         name={`apd-state-profile-pocemail${index}`}
         label={t(`${tRoot}.labels.email`)}
         value={email}
+        cy-data={`key-person-email-${index}`}
         onChange={handleChange(setEmail)}
         onKeyUp={(e) => {
           validateText(e, 'email', ' for the point of contact.');
@@ -91,6 +92,7 @@ const PersonForm = ({
         name={`apd-state-profile-pocposition${index}`}
         label={t(`${tRoot}.labels.position`)}
         value={position}
+        cy-data={`key-person-role-${index}`}
         onChange={handleChange(setRole)}
         onKeyUp={(e) => {
           validateText(e, 'role', ' for the point of contact.');
@@ -102,14 +104,6 @@ const PersonForm = ({
 
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
-        <Choice
-          checked={!hasCosts}
-          label="No"
-          name={`apd-state-profile-hascosts-no${index}`}
-          onChange={setPersonHasCosts(false)}
-          type="radio"
-          value="no"
-        />
         <Choice
           checked={hasCosts}
           label="Yes"
@@ -135,6 +129,14 @@ const PersonForm = ({
               setFTE={setFTEForYear}
             />
           }
+        />
+        <Choice
+          checked={!hasCosts}
+          label="No"
+          name={`apd-state-profile-hascosts-no${index}`}
+          onChange={setPersonHasCosts(false)}
+          type="radio"
+          value="no"
         />
       </fieldset>
     </Fragment>
