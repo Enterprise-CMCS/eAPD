@@ -9,36 +9,43 @@ class ProposedBudgetPage {
       .contains(`Combined Activity Costs FFY ${ffy}`)
       .findParent('.budget-table');
 
-  getCACByFFYAndType = ({ ffy, type }) =>
-    this.getCACByFFY({ ffy }).contains(type);
-
-  getCACByFFYAndTypeAndExpense = ({ ffy, type, expense }) =>
-    this.getCACByFFYAndType({ ffy, type })
+  verifyCACTable = (items, type) => {
+    cy.contains(type)
       .parent()
       .nextUntil('.budget-table--row__header')
-      .contains(expense)
-      .next();
+      .within(() => {
+        cy.contains('State Staff Total')
+          .next()
+          .shouldBeCloseTo(items['State Staff Total']);
+
+        cy.contains('Other State Expenses Total')
+          .next()
+          .shouldBeCloseTo(items['Other State Expenses Total']);
+
+        cy.contains('Private Contractor Total')
+          .next()
+          .shouldBeCloseTo(items['Private Contractor Total']);
+
+        cy.contains(`${type} Total`)
+          .next()
+          .shouldBeCloseTo(items[`${type} Total`]);
+      });
+  };
 
   getTotalComputableMedicaidCostByFFY = ({ ffy }) =>
     cy.contains(`FFY ${ffy} Total Computable Medicaid Cost`).next();
 
   verifyComputableMedicaidCostByFFY = ({ years, expected }) => {
     _.forEach(years, (ffy, index) => {
-      const { programsTypes } = expected[index];
-      _.forEach(programsTypes, type => {
-        const expenses = expected[index].programTypes[type];
-        _.forEach(expenses, (value, expense) => {
-          this.getCACByFFYAndTypeAndExpense({
-            ffy,
-            type,
-            expense
-          }).shouldBeCloseTo(value);
+      const { programTypes, totalComputableMedicaidCost } = expected[index];
+      this.getCACByFFY({ ffy }).within(() => {
+        _.forEach(programTypes, (items, type) => {
+          this.verifyCACTable(items, type);
         });
+        this.getTotalComputableMedicaidCostByFFY({ ffy }).shouldBeCloseTo(
+          totalComputableMedicaidCost
+        );
       });
-
-      this.getTotalComputableMedicaidCostByFFY({ ffy }).shouldBeCloseTo(
-        expected[index].totalComputableMedicaidCost
-      );
     });
   };
 
