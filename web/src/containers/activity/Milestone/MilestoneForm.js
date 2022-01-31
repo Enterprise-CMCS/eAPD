@@ -9,6 +9,10 @@ import {
   saveMilestone as actualSaveMilestone
 } from '../../../actions/editActivity';
 
+import { 
+  validateText
+} from '../../../helpers/textValidation';
+
 const MilestoneForm = forwardRef(
   (
     {
@@ -50,10 +54,13 @@ const MilestoneForm = forwardRef(
       <h6 className="ds-h4">Milestone {index + 1}:</h6>
       <TextField
         autoFocus
+        data-cy={`milestone-${index}`}
         label="Name"
         name="name"
         value={state.milestone}
         onChange={changeName}
+        onBlur={validateText}
+        onKeyUp={validateText}
       />
       <DateField
         label="Target completion date"

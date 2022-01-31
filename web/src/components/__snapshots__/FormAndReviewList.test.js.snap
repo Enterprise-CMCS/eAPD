@@ -306,13 +306,13 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
 <div
   className="form-and-review-list "
 >
-  <Alert
-    headingLevel="2"
-    role="region"
-    variation="error"
-  >
-    displayed when there is no data
-  </Alert>
+  <div>
+    <p
+      className="ds-u-margin-top--4"
+    >
+      displayed when there is no data
+    </p>
+  </div>
   <Button
     className="visibility--screen"
     component="button"
@@ -343,12 +343,12 @@ exports[`FormAndReviewList component renders properly without an add button if t
 <div
   className="form-and-review-list "
 >
-  <Alert
-    headingLevel="2"
-    role="region"
-    variation="error"
-  >
-    displayed when there is no data
-  </Alert>
+  <div>
+    <p
+      className="ds-u-margin-top--4"
+    >
+      displayed when there is no data
+    </p>
+  </div>
 </div>
 `;

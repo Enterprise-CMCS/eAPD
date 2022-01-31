@@ -82,6 +82,7 @@ const FormAndReviewList = ({
   allowDeleteAll,
   className,
   collapsed,
+  errorCheck,
   expanded,
   list,
   noDataMessage,
@@ -97,6 +98,8 @@ const FormAndReviewList = ({
     () => ['form-and-review-list', className].join(' '),
     className
   );
+  
+  const noDataOptions = noDataMessage || 'This list is empty';
 
   const addClick = () => {
     setHasAdded(true);
@@ -106,7 +109,15 @@ const FormAndReviewList = ({
   return (
     <div className={combinedClassName}>
       {list.length === 0 && noDataMessage !== false ? (
-        <Alert variation="error">{noDataMessage || 'This list is empty'}</Alert>
+        <div>
+          {errorCheck === true ? (
+            <Alert variation="error">{noDataOptions}</Alert>
+          ) : (
+            <p className="ds-u-margin-top--4">
+              {noDataOptions}
+            </p>
+          )}
+        </div>
       ) : (
         list.map((item, index) => (
           <FormAndReviewItem
@@ -141,7 +152,9 @@ FormAndReviewList.propTypes = {
   className: PropTypes.string,
   collapsed: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
     .isRequired,
-  expanded: PropTypes.elementType.isRequired,
+  errorCheck: PropTypes.bool,
+  expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
+    .isRequired,
   list: PropTypes.array.isRequired,
   noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onAddClick: PropTypes.func,
@@ -153,6 +166,7 @@ FormAndReviewList.defaultProps = {
   addButtonText: null,
   allowDeleteAll: false,
   className: null,
+  errorCheck: false,
   noDataMessage: null,
   onAddClick: null,
   onDeleteClick: null,

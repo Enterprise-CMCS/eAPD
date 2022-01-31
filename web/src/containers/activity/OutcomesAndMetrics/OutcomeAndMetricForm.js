@@ -11,6 +11,8 @@ import {
   saveOutcome as actualSaveOutcome
 } from '../../../actions/editActivity';
 
+import { validateText } from '../../../helpers/textValidation';
+
 import { newOutcomeMetric } from '../../../reducers/activities';
 
 const OutcomeAndMetricForm = forwardRef(
@@ -88,8 +90,8 @@ const OutcomeAndMetricForm = forwardRef(
       <TextField
         key={`activity${activityIndex}-index${index}`}
         autoFocus
+        data-cy={`outcome-${index}`}
         name="outcome"
-        className="data-entry-box"
         label="Outcome"
         hint="Describe a distinct and measurable improvement for this system."
         value={state.outcome}
@@ -98,6 +100,8 @@ const OutcomeAndMetricForm = forwardRef(
         onChange={e => 
           dispatch({ type: 'updateField', field: 'outcome', value: e.target.value })
         }
+        onBlur={validateText}
+        onKeyUp={validateText}
       />
       {state.metrics.map(({ key, metric }, i) => (
         <Review
@@ -111,20 +115,26 @@ const OutcomeAndMetricForm = forwardRef(
           skipConfirmation
           ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
           objType="Metric"
-        >
+          onBlur={validateText}
+          onKeyUp={validateText}
+          >
           <div
             key={key}
             className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-          >
+            >
             <TextField
+              id={`${activityIndex}-metric${i}`}
               name="metric"
+              data-cy={`metric-${index}-${i}`}
               label="Metric"
               hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
               value={metric}
               multiline
               rows="4"
               onChange={changeMetric(i)}
-            />
+              onBlur={validateText}
+              onKeyUp={validateText}
+              />
           </div>
         </Review>
       ))}

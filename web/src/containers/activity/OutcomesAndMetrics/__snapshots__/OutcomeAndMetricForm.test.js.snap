@@ -8,13 +8,15 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
 >
   <TextField
     autoFocus={true}
-    className="data-entry-box"
+    data-cy="outcome-1"
     hint="Describe a distinct and measurable improvement for this system."
     key="activity93-index1"
     label="Outcome"
     multiline={true}
     name="outcome"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     rows="4"
     type="text"
     value="outcome description"
@@ -24,9 +26,11 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     editHref={null}
     key="om key 1"
     objType="Metric"
+    onBlur={[Function]}
     onDeleteClick={[Function]}
     onDeleteLabel="Remove"
     onEditClick={null}
+    onKeyUp={[Function]}
     skipConfirmation={true}
     title={null}
   >
@@ -35,11 +39,15 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       key="om key 1"
     >
       <TextField
+        data-cy="metric-1-0"
         hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+        id="93-metric0"
         label="Metric"
         multiline={true}
         name="metric"
+        onBlur={[Function]}
         onChange={[Function]}
+        onKeyUp={[Function]}
         rows="4"
         type="text"
         value="metric 1"
@@ -51,9 +59,11 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     editHref={null}
     key="om key 2"
     objType="Metric"
+    onBlur={[Function]}
     onDeleteClick={[Function]}
     onDeleteLabel="Remove"
     onEditClick={null}
+    onKeyUp={[Function]}
     skipConfirmation={true}
     title={null}
   >
@@ -62,11 +72,15 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       key="om key 2"
     >
       <TextField
+        data-cy="metric-1-1"
         hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+        id="93-metric1"
         label="Metric"
         multiline={true}
         name="metric"
+        onBlur={[Function]}
         onChange={[Function]}
+        onKeyUp={[Function]}
         rows="4"
         type="text"
         value="metric 2"

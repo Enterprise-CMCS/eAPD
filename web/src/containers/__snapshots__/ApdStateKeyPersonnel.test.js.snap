@@ -6,6 +6,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
   allowDeleteAll={false}
   className={null}
   collapsed={[Function]}
+  errorCheck={false}
   expanded={
     Object {
       "$$typeof": Symbol(react.forward_ref),

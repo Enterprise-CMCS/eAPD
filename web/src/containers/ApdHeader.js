@@ -17,7 +17,7 @@ const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
     if (isEditing === true) {
       inputEl.focus();
     }
-  }, [isEditing])
+  }, [isEditing]);
 
   const onBlur = (e) => {
     const apdNameInput = e.target.value;

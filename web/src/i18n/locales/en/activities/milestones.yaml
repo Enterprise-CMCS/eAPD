@@ -1,7 +1,6 @@
 title: Milestones
 instruction:
   detail: >-
-    List major milestones the state is working toward as part of this
-    activity. Include work occurring under previously approved APDs.
-noMilestonesNotice: Milestones have not been added for this activity.
+    Milestones are measurable and sequential achievements within an activity's schedule which highlights the activity's successes. List major milestones the state is working toward as part of this activity. Include work occurring under previously approved APDs.
+noMilestonesNotice: Add milestone(s) for this activity.
 addMilestoneButtonText: Add Milestone
