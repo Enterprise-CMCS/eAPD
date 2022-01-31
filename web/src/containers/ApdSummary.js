@@ -102,9 +102,7 @@ const ApdSummary = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
-      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
-        autoFocus
         className="remove-clearfix"
         label="APD Name"
         name="apd-name"

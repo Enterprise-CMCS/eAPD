@@ -64,11 +64,11 @@ const PersonForm = ({
       </p>
       {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
-        autoFocus
         name={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
         value={name}
         onChange={handleChange(setName)}
+        className="remove-clearfix"
       />
       <TextField
         name={`apd-state-profile-pocemail${index}`}

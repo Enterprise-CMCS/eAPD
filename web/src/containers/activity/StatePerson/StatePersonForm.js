@@ -49,13 +49,12 @@ const StatePersonForm = ({
   return (
     <Fragment>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
-      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
-        autoFocus
         label="Personnel title"
         name="title"
         value={title}
         onChange={editTitle}
+        className="remove-clearfix"
       />
       <TextArea
         label="Description"

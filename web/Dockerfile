@@ -8,6 +8,6 @@ WORKDIR /app
 ADD ./package.json .
 ADD ./package-lock.json .
 
-RUN npm ci
+RUN npm ci --no-audit
 
 CMD npm run start
