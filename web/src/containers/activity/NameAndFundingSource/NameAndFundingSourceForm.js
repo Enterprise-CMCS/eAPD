@@ -36,13 +36,12 @@ const NameAndFundingSourceForm = ({
 
   return (
     <Fragment>
-      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
-        autoFocus
         label="Activity name"
         name="activity-name"
         value={name}
         onChange={changeName}
+        className="remove-clearfix"
       />
       <ChoiceList
         choices={choices}

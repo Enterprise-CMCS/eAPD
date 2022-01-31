@@ -65,11 +65,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('#apd-title-input').contains(`${title1}`);
 
       // Change name in APD Summary text box
-      cy.focused()
-        .should('have.attr', 'name', 'apd-name')
-        .clear()
-        .type(`${title2}`)
-        .blur();
+      cy.findByLabelText('APD Name').clear().type(`${title2}`).blur();
 
       cy.get('#apd-title-input').contains(`${title2}`).click();
 
@@ -377,6 +373,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
         cy.get(`[data-cy='outcome-${index}']`)
+          .click()
           .should('have.value', '')
           .blur()
           .should('have.class', 'missing-text-alert');
@@ -395,8 +392,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
 
             cy.get(`[data-cy=metric-${index}-${i}]`)
-              .should('have.value', '')
               .click()
+              .should('have.value', '')
               .blur()
               .should('have.class', 'missing-text-alert');
 
@@ -450,6 +447,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
 
         cy.get(`[data-cy=milestone-${index}]`)
+          .click()
           .should('have.value', '')
           .blur()
           .should('have.class', 'missing-text-alert');

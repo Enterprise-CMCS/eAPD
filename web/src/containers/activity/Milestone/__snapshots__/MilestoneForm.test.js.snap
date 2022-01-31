@@ -10,7 +10,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
     :
   </h6>
   <TextField
-    autoFocus={true}
+    className="remove-clearfix"
     data-cy="milestone-3252"
     label="Name"
     name="name"

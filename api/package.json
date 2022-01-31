@@ -139,8 +139,5 @@
     ],
     "testEnvironment": "node",
     "testTimeout": 30000
-  },
-  "mdSeed": {
-    "seedersFolder": "./mongo-seeds"
   }
 }
