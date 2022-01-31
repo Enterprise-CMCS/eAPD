@@ -18,7 +18,7 @@ const setup = () =>
       })
       .then(() => {
         logger.verbose('MongoDB connected');
-        resolve(mongoose.connection);
+        resolve();
       })
       .catch(err => {
         logger.error(`Error in MongoDB connection: ${err}`);

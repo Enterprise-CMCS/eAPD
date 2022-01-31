@@ -3,7 +3,6 @@ const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
 const { setup: setupMongo, teardown: teardownMongo } = require('../db/mongodb');
-const { drop } = require('../seeds/shared/apds');
 const logger = require('../logger')('endpoint-utils');
 
 const { API_HOST, API_PORT, PORT } = process.env;
@@ -56,7 +55,6 @@ const setupDB = async db => {
 const teardownDB = async db => {
   await db.destroy();
   logger.info('Database teardown complete.');
-  await drop();
   await teardownMongo();
   logger.info('Mongo teardown complete.');
 };

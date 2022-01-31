@@ -6,6 +6,7 @@ const roles = require('./roles');
 const testStates = require('./states');
 const affiliations = require('./affiliations');
 const certifications = require('./certifications');
+const apds = require('../shared/apds');
 
 exports.seed = async knex => {
   // Don't seed this data if we're not in a test environment.
@@ -21,4 +22,7 @@ exports.seed = async knex => {
   await testStates.seed(knex);
   await affiliations.seed(knex);
   await certifications.seed(knex);
+
+  // seed APDs in mongo
+  await apds.seed();
 };
