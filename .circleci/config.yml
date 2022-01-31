@@ -249,8 +249,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1
         auth:
-          username: $DOCKER_INSTALL_DEPS_UN
-          password: $DOCKER_INSTALL_DEPS_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - restore_cache:
@@ -290,8 +290,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1    
         auth:
-          username: $DOCKER_VALIDATE_OPENAPI_UN
-          password: $DOCKER_VALIDATE_OPENAPI_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - setup_remote_docker
@@ -301,7 +301,7 @@ jobs:
       - run:
           name: validate
           command: |
-            docker login -u $DOCKER_VALIDATE_OPENAPI_UN -p $DOCKER_VALIDATE_OPENAPI_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker create -v /openapi --name openapi alpine /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
@@ -312,8 +312,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1    
         auth:
-          username: $DOCKER_TESTS_UN
-          password: $DOCKER_TESTS_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - run: npm install glob
@@ -354,36 +354,27 @@ jobs:
 
 ############### Rewrite of Backend API Tests
   backend api endpoint test:
-    docker:
-      - image: cimg/node:14.16.1    
-        auth:
-          username: $DOCKER_TESTS_UN
-          password: $DOCKER_TESTS_PW
+    machine:
+      image: ubuntu-2004:202104-01
     steps:
       - checkout
-      - setup_remote_docker
       - attach_workspace:
-          at: ~/project 
+          at: ~/project
       - run:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api ./
-      - run:
-          name: setup docker api volume
-          working_directory: ~/project/api
-          command: |
-            docker create -v /app --name api alpine:3.4 /bin/true
-            docker cp ./ api:/app            
       - run:
           name: run tests
           working_directory: ~/project/api
           command: |
-            echo "Output of pwd"
-            pwd
-            echo "Output of ls -la"
-            ls -la          
+            # Switch to Node 14.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 14
+            nvm alias default v14
             ./endpoint-tests/endpoint.sh
                       
   # Lints the backend code.
@@ -391,8 +382,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1    
         auth:
-          username: $DOCKER_LINT_UN
-          password: $DOCKER_LINT_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -404,36 +395,27 @@ jobs:
 
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
-    docker:
-      - image: cimg/node:14.16.1    
-        auth:
-          username: $DOCKER_TESTS_UN
-          password: $DOCKER_TESTS_PW
+    machine:
+      image: ubuntu-2004:202104-01
     steps:
       - checkout
-      - setup_remote_docker
       - attach_workspace:
           at: ~/project
       - run:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api ./
-      - run:
-          name: setup docker api volume
-          working_directory: ~/project/api
-          command: |
-            docker create -v /app --name api alpine:3.4 /bin/true
-            docker cp ./ api:/app            
       - run:
           name: run tests
           working_directory: ~/project/api
           command: |
-            echo "Output of pwd"
-            pwd
-            echo "Output of ls -la"
-            ls -la
+            # Switch to Node 14.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 14
+            nvm alias default v14
             ./unit-test.sh
       - run:
           name: report coverage
@@ -454,8 +436,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1    
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -474,8 +456,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1    
         auth:
-          username: $DOCKER_LINT_UN
-          password: $DOCKER_LINT_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -490,8 +472,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1
         auth:
-          username: $DOCKER_TESTS_UN
-          password: $DOCKER_TESTS_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -518,8 +500,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1    
         auth:
-          username: $DOCKER_DEPS_VULN_UN
-          password: $DOCKER_DEPS_VULN_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -531,7 +513,8 @@ jobs:
             npm run audit
 
   owasp zap scan:
-    machine: true
+    machine:
+      image: ubuntu-2004:202104-01
     steps:
       - checkout
       - attach_workspace:
@@ -540,25 +523,25 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api ./
       - run:
           name: start everything up
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker pull owasp/zap2docker-stable
       - run:
           name: run owasp zap
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
@@ -581,8 +564,8 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -663,8 +646,8 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -702,8 +685,8 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - run:
@@ -740,45 +723,10 @@ jobs:
               echo "Not a pull request"
             fi
       - run:
-          name: Check Docker Pull Limit Default User
+          name: Check Docker Pull Limit eAPD User
           command: |
-            TOKEN=$(curl --user "$DOCKER_USERNAME:$DOCKER_PASSWORD" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
+            TOKEN=$(curl --user "$DOCKER_EAPD_UN:$DOCKER_EAPD_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
             curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
-      - run:
-          name: Check Docker Pull Limit OpenAPI User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_VALIDATE_OPENAPI_UN:$DOCKER_VALIDATE_OPENAPI_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
-      - run:
-          name: Check Docker Pull Limit Vulnerablity User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_DEPS_VULN_UN:$DOCKER_DEPS_VULN_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
-      - run:
-          name: Check Docker Pull Limit Dependency User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_INSTALL_DEPS_UN:$DOCKER_INSTALL_DEPS_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
-      - run:
-          name: Check Docker Pull Limit Lint User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_LINT_UN:$DOCKER_LINT_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
-      - run:
-          name: Check Docker Pull Limit OWASP User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_OWASP_ZAP_SCAN_UN:$DOCKER_OWASP_ZAP_SCAN_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
-      - run:
-          name: Check Docker Pull Limit Tests User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_TESTS_UN:$DOCKER_TESTS_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
-      - run:
-          name: Check Docker Pull Limit Unauthorized User            
-          command: |
-            TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            echo $TOKEN
             
   # Zips up artifacts created in build steps and makes them available as
   # CircleCI artifact downloads.
@@ -786,8 +734,8 @@ jobs:
     docker:
       - image: cimg/node:14.16.1    
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
