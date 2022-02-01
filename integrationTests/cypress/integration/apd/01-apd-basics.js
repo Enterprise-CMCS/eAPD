@@ -3,6 +3,7 @@ import ActivityPage from '../../page-objects/activity-page';
 import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
+import { get } from 'tinymce';
 
 /// <reference types="cypress" />
 
@@ -269,7 +270,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       proposedBudgetPage = new ProposedBudgetPage();
     });
 
-    it.only('should handle entering data in Key State Personnel', () => {
+    it('should handle entering data in Key State Personnel', () => {
       const personnel = [
         {name: 'Jean Luc Picard',
          email: 'picard@gmail.com',
@@ -303,44 +304,95 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .type(element.name)
           .should('not.have.class', 'missing-text-alert')
 
-        cy.findByRole('button', { name: /Done/i }).click();
+        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
+
+        cy.get(`[cy-data='key-person-email-${index}'`)
+          .should('have.value', '')
+          .click()
+          .blur()
+          .should('have.class', 'missing-text-alert')
+
+        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+
+        cy.get(`[cy-data='key-person-email-${index}']`)
+          .click()
+          .type(element.email)
+          .should('not.have.class', 'missing-text-alert')
+
+        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
+
+        cy.get(`[cy-data='key-person-role-${index}'`)
+          .should('have.value', '')
+          .click()
+          .blur()
+          .should('have.class', 'missing-text-alert')
+
+        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+
+        cy.get(`[cy-data='key-person-role-${index}']`)
+          .click()
+          .type(element.role)
+          .should('not.have.class', 'missing-text-alert')
+
+        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled').click();
+
         // Get div for the element containing user data as an alias
         cy.get('.form-and-review-list')
           .get('h4').contains(`${index + 1}.`)
           .parent()
           .parent()
-          .as('personneVals');
+          .as('personnelVals');
 
         // Check for default values
-        cy.get('@personneVals')
+        cy.get('@personnelVals')
           .get('h4').contains(element.name)
           .should('exist');
 
-          cy.get('@personneVals')
+          cy.get('@personnelVals')
           .find('li')
           .should($lis => {
               if (index === 0) {
                 expect($lis).to.have.length(2);
                 expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
-                expect($lis.eq(1)).to.contain('Role not specified');
+                expect($lis.eq(1)).to.contain(element.role);
               } else {
                   expect($lis).to.have.length(1);
-                  expect($lis.eq(0)).to.contain('Role not specified');
+                  expect($lis.eq(0)).to.contain(element.role);
               }
             });
         // Protects against edge case of having '$' in name or role
-        cy.get('@personneVals')
+        cy.get('@personnelVals')
           .contains('Total cost:')
           .next()
           .shouldHaveValue(0);
 
-        cy.get('@personneVals').contains('Edit').should('exist');
+        cy.get('@personnelVals').contains('Edit').should('exist');
 
         if (index === 0) {
-          cy.get('@personneVals').contains('Delete').should('not.exist');
+          cy.get('@personnelVals').contains('Delete').should('not.exist');
         } else {
-          cy.get('@personneVals').contains('Delete').should('exist');
+          cy.get('@personnelVals').contains('Delete').should('exist');
         }
+      });
+
+      cy.get('.form-and-review-list')
+        .get('h4').contains(personnel.length - 1)
+        .parent()
+        .parent()
+        .as('lastItem');
+
+      cy.get('@lastItem').contains('Edit').click();
+
+      cy.get('input[type="radio"][value="yes"]')
+        .scrollIntoView()
+        .check({ force: true });
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      years.forEach(year => {
+        cy.get('@lastItem').should(
+          'contain',
+          `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`
+        );
       });
     });
 
@@ -599,13 +651,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.contains('State Staff')
                 .parent()
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should('have.text', 'Jean Luc Picard (APD Key Personnel)$0')
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should('have.text', 'William Riker (APD Key Personnel)$0×0 FTE=$0')
                 .next()
                 .should(
                   'have.text',
-                  'Not specified (APD Key Personnel)$0×0 FTE=$0'
+                  'Geordi La Forge (APD Key Personnel)$0'
                 )
                 .next()
                 .should('have.text', 'Personnel title not specified$0× FTE=$0')
@@ -659,15 +711,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .as('stateStaff');
           cy.get('@stateStaff')
             .eq(0)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', 'Jean Luc Picard (APD Key Personnel)$0');
           cy.get('@stateStaff')
             .eq(1)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', 'William Riker (APD Key Personnel)$0×0 FTE=$0');
           cy.get('@stateStaff')
             .eq(2)
             .should(
               'have.text',
-              'Not specified (APD Key Personnel)$0×0 FTE=$0'
+              'Geordi La Forge (APD Key Personnel)$0'
             );
           cy.get('@stateStaff')
             .eq(3)
@@ -714,23 +766,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .first()
         .should(
           'have.text',
-          '1. Primary Point of Contact name not specified' +
+          '1. Jean Luc Picard' +
             'Primary APD Point of Contact' +
-            'Role not specified' +
-            'Email: ' +
+            'Captain' +
+            'Email: picard@gmail.com' +
             'Total cost: $0'
         )
-        .next()
-        .should(
-          'have.text',
-          '2. Key Personnel name not specified' +
-            'Role not specified' +
-            'Email: ' +
-            'Total cost: $0'
-        );
 
       // Create string to check for personnel who is chargeable for the project for certain years.
-      let str = '3. Key Personnel name not specifiedRole not specifiedEmail: ';
+      let str = '2. William RikerFirst MateEmail: riker@gmail.com';
       str += years
         .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
         .join('');
@@ -741,8 +785,16 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         })
         .next()
         .find('ul')
-        .eq(2)
-        .should('have.text', str);
+        .eq(1)
+        .should('have.text', str)
+        .next()
+        .should(
+          'have.text',
+          '3. Geordi La Forge' +
+            'Chief Engineer' +
+            'Email: laforge@gmail.com' +
+            'Total cost: $0'
+        );
 
       cy.findByRole('heading', {
         name: /Activity 1: Program AdministrationOutcomes and Metrics/i
@@ -818,13 +870,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.contains('State Staff')
                 .parent()
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should('have.text', 'Jean Luc Picard (APD Key Personnel)$0')
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should('have.text', 'William Riker (APD Key Personnel)$0×0 FTE=$0')
                 .next()
                 .should(
                   'have.text',
-                  'Not specified (APD Key Personnel)$0×0 FTE=$0'
+                  'Geordi La Forge (APD Key Personnel)$0'
                 )
                 .next()
                 .should('have.text', 'Personnel title not specified$0× FTE=$0')
@@ -869,15 +921,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .as('stateStaff');
           cy.get('@stateStaff')
             .eq(0)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', 'Jean Luc Picard (APD Key Personnel)$0');
           cy.get('@stateStaff')
             .eq(1)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', 'William Riker (APD Key Personnel)$0×0 FTE=$0');
           cy.get('@stateStaff')
             .eq(2)
             .should(
               'have.text',
-              'Not specified (APD Key Personnel)$0×0 FTE=$0'
+              'Geordi La Forge (APD Key Personnel)$0'
             );
           cy.get('@stateStaff')
             .eq(3)
