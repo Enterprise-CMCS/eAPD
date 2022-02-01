@@ -456,7 +456,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               .click()
               .type(`${metric}`)
               .should('not.have.class', 'missing-text-alert');
-
             cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
           })
 

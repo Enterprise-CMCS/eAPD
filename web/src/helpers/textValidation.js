@@ -66,4 +66,5 @@ export const validateText = (e, label, suffix) => {
   const elValue = el.value;
 
   return text || elValue !== '' ? removeMissingTextAlert(el, parent) : addMissingTextAlert(el, parent, label, suffix) ;
+
 };
