@@ -8,15 +8,21 @@ import { logout as dispatchLogout } from '../actions/auth';
 
 const Logout = ({ authenticated, logout }) => {
   const history = useHistory();
-  useEffect(() => {
-    logout();
-  }, []);
+  useEffect(
+    () => {
+      logout();
+    },
+    // we want this to run on load so we don't need any thing
+    // in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   useEffect(() => {
     if (!authenticated) {
       history.push('/login');
     }
-  }, [authenticated]);
+  }, [authenticated, history]);
 
   return <span />;
 };

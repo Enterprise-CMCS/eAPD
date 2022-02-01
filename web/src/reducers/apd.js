@@ -320,6 +320,7 @@ const initialState = {
   selectAPDOnLoad: false
 };
 
+// eslint-disable-next-line default-param-last
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_APD_ITEM: {

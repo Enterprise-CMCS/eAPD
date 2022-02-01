@@ -155,7 +155,7 @@ workflows:
             - yaml test
             - backend unit test
             - backend api endpoint test
-            
+
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
@@ -288,7 +288,7 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: cimg/node:14.16.1    
+      - image: cimg/node:14.16.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -310,7 +310,7 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: cimg/node:14.16.1    
+      - image: cimg/node:14.16.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -352,7 +352,7 @@ jobs:
   #          nvm i
   #          ./endpoint-tests/endpoint.sh
 
-############### Rewrite of Backend API Tests
+  ############### Rewrite of Backend API Tests
   backend api endpoint test:
     machine:
       image: ubuntu-2004:202104-01
@@ -370,17 +370,17 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 14.
+            # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
             nvm alias default v14
             ./endpoint-tests/endpoint.sh
-                      
+
   # Lints the backend code.
   backend lint:
     docker:
-      - image: cimg/node:14.16.1    
+      - image: cimg/node:14.16.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -411,7 +411,7 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 14.
+            # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 14
@@ -434,7 +434,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/node:14.16.1    
+      - image: cimg/node:14.16.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -454,7 +454,7 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: cimg/node:14.16.1    
+      - image: cimg/node:14.16.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -498,7 +498,7 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: cimg/node:14.16.1    
+      - image: cimg/node:14.16.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -722,12 +722,12 @@ jobs:
             else
               echo "Not a pull request"
             fi
-            
+
   # Zips up artifacts created in build steps and makes them available as
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: cimg/node:14.16.1    
+      - image: cimg/node:14.16.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW

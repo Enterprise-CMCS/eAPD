@@ -154,10 +154,11 @@ const StateAdminLetters = () => {
   const history = useHistory();
 
   const [tableData, setTableData] = useState([]);
-  const [showMatchUserDialog, setShowMatchUserDialog]= useState(false);
-  const [showDeleteCertificationDialog, setShowDeleteCertificationDialog]= useState(false);
-  const [selectedCertification, setSelectedCertification]= useState({});
-    
+  const [showMatchUserDialog, setShowMatchUserDialog] = useState(false);
+  const [showDeleteCertificationDialog, setShowDeleteCertificationDialog] =
+    useState(false);
+  const [selectedCertification, setSelectedCertification] = useState({});
+
   useEffect(() => {
     (async () => {
       const certificationLetters = await axios.get('/auth/certifications');
@@ -250,30 +251,33 @@ const StateAdminLetters = () => {
 
   const handleHideMatchUserDialog = () => {
     setShowMatchUserDialog(false);
-  }
-  
+  };
+
   const handleShowDeleteCertificationDialog = event => {
-    const certificationId = event.target.parentNode.parentNode.getAttribute('data-certification-id');
-    const certification = page.find(row => Number(certificationId) === Number(row.original.id) );
+    const certificationId = event.target.parentNode.parentNode.getAttribute(
+      'data-certification-id'
+    );
+    const certification = page.find(
+      row => Number(certificationId) === Number(row.original.id)
+    );
     setSelectedCertification(certification.original);
     setShowDeleteCertificationDialog(true);
-  }
-  
+  };
+
   const handleHideDeleteCertificationDialog = () => {
     setShowDeleteCertificationDialog(false);
-  }
-  
+  };
+
   const handleDeleteConfirmationSubmit = async () => {
-    const response = await axios
-      .delete('/auth/certifications', {
-        data: { 
-          certificationId: selectedCertification.id
-        }
-      });
+    const response = await axios.delete('/auth/certifications', {
+      data: {
+        certificationId: selectedCertification.id
+      }
+    });
     if (response.status === 200) {
       setShowDeleteCertificationDialog(false);
     }
-  }
+  };
 
   return (
     <div id="state-admin-letters">
@@ -300,9 +304,13 @@ const StateAdminLetters = () => {
       <Table {...getTableProps()} className="ds-u-margin-top--1" borderless>
         <TableHead>
           {headerGroups.map(headerGroup => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
+            <TableRow
+              key={headerGroup.getHeaderGroupProps()}
+              {...headerGroup.getHeaderGroupProps()}
+            >
               {headerGroup.headers.map(column => (
                 <TableCell
+                  key={column.getHeaderProps().key}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render('Header')}
@@ -321,13 +329,17 @@ const StateAdminLetters = () => {
             prepareRow(row);
             return (
               <TableRow
+                key={row.getRowProps().key}
                 {...row.getRowProps()}
                 data-certification-id={row.original.id}
               >
                 {row.cells.map(cell => {
                   if (cell.column.id === 'file') {
                     return (
-                      <TableCell {...cell.getCellProps()}>
+                      <TableCell
+                        key={cell.getCellProps().key}
+                        {...cell.getCellProps()}
+                      >
                         <a href={`${cell.value}`}>
                           <PDFFileBlue />
                         </a>
@@ -337,9 +349,14 @@ const StateAdminLetters = () => {
                   if (cell.column.id === 'actions') {
                     return (
                       <TableCell {...cell.getCellProps()}>
-                        {cell.row.values.matchStatus !== 'Matched' &&
-                          <Button variation="transparent" onClick={handleShowDeleteCertificationDialog}>Delete</Button>
-                        }
+                        {cell.row.values.matchStatus !== 'Matched' && (
+                          <Button
+                            variation="transparent"
+                            onClick={handleShowDeleteCertificationDialog}
+                          >
+                            Delete
+                          </Button>
+                        )}
                         {cell.row.values.matchStatus === 'Pending Match' && (
                           <Button onClick={handleShowMatchUserDialog}>
                             Match To User
@@ -349,7 +366,10 @@ const StateAdminLetters = () => {
                     );
                   }
                   return (
-                    <TableCell {...cell.getCellProps()}>
+                    <TableCell
+                      key={cell.getCellProps().key}
+                      {...cell.getCellProps()}
+                    >
                       {cell.render('Cell')}
                     </TableCell>
                   );

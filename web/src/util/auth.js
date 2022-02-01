@@ -31,6 +31,7 @@ const getConfig = () => {
   let config;
   if (
     process.env.API_URL &&
+    // eslint-disable-next-line prefer-regex-literals
     process.env.API_URL.match(new RegExp(/cms.gov$/))
   ) {
     config = {

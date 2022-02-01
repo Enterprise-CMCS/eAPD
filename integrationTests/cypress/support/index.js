@@ -21,10 +21,8 @@ import { commandTimings } from 'cypress-timings'; // eslint-disable-line import/
 
 import './commands';
 
-import {
-  API_COOKIE_NAME,
-  CONSENT_COOKIE_NAME
-} from '../../../web/src/cookie-constants';
+const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
+const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 // Alternatively you can use CommonJS syntax:
 require('cypress-grep')(); // eslint-disable-line import/no-extraneous-dependencies
