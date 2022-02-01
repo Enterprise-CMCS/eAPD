@@ -18,6 +18,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     value="personnel title"
   />
   <TextArea
+    className="remove-clearfix"
     label="Description"
     name="desc"
     onChange={[Function]}
