@@ -17,4 +17,6 @@ fileignoreconfig:
     checksum: 247db44f1a364108397b2ce4a2e096c7a6650eb9b79ad05dd64bea5f71a697f8
   - filename: integrationTests/cypress/helpers/apd/proposed-budget-calculations.js
     checksum: a468dcd1f872efb7b3816b2380200def3218961cae63b3d33b2bf7fa09da2984
+  - filename: .circleci/config.yml
+    checksum: 593bcf3e72581345ca84c90ad3bd9cc8ab6fbec860bb61981fda2c0dc2b58136
 version: ''
