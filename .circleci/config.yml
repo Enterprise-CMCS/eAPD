@@ -722,11 +722,6 @@ jobs:
             else
               echo "Not a pull request"
             fi
-      - run:
-          name: Check Docker Pull Limit eAPD User
-          command: |
-            TOKEN=$(curl --user "$DOCKER_EAPD_UN:$DOCKER_EAPD_PW" "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
-            curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest 2>&1 |egrep "ratelimit-limit|ratelimit-remaining"
             
   # Zips up artifacts created in build steps and makes them available as
   # CircleCI artifact downloads.
