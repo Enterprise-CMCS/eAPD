@@ -14,23 +14,32 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
   </p>
   <TextField
     autoFocus={true}
+    cy-data="key-person-name-1"
     label="Name"
     name="apd-state-profile-pocname1"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="Bob the Builder"
   />
   <TextField
+    cy-data="key-person-email-1"
     label="Email"
     name="apd-state-profile-pocemail1"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="email address"
   />
   <TextField
+    cy-data="key-person-role-1"
     label="Role"
     name="apd-state-profile-pocposition1"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="The Builder"
   />
@@ -42,14 +51,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     >
       Does this person have costs directly attributable to this program?
     </legend>
-    <ChoiceComponent
-      checked={false}
-      label="No"
-      name="apd-state-profile-hascosts-no1"
-      onChange={[Function]}
-      type="radio"
-      value="no"
-    />
     <ChoiceComponent
       checked={true}
       checkedChildren={
@@ -78,6 +79,14 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       onChange={[Function]}
       type="radio"
       value="yes"
+    />
+    <ChoiceComponent
+      checked={false}
+      label="No"
+      name="apd-state-profile-hascosts-no1"
+      onChange={[Function]}
+      type="radio"
+      value="no"
     />
   </fieldset>
 </Fragment>
@@ -97,23 +106,32 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
   </p>
   <TextField
     autoFocus={true}
+    cy-data="key-person-name-1"
     label="Name"
     name="apd-state-profile-pocname1"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="Bob the Builder"
   />
   <TextField
+    cy-data="key-person-email-1"
     label="Email"
     name="apd-state-profile-pocemail1"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="email address"
   />
   <TextField
+    cy-data="key-person-role-1"
     label="Role"
     name="apd-state-profile-pocposition1"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="The Builder"
   />
@@ -125,14 +143,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     >
       Does this person have costs directly attributable to this program?
     </legend>
-    <ChoiceComponent
-      checked={true}
-      label="No"
-      name="apd-state-profile-hascosts-no1"
-      onChange={[Function]}
-      type="radio"
-      value="no"
-    />
     <ChoiceComponent
       checked={false}
       checkedChildren={
@@ -162,6 +172,14 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
       type="radio"
       value="yes"
     />
+    <ChoiceComponent
+      checked={true}
+      label="No"
+      name="apd-state-profile-hascosts-no1"
+      onChange={[Function]}
+      type="radio"
+      value="no"
+    />
   </fieldset>
 </Fragment>
 `;
@@ -180,23 +198,32 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
   </p>
   <TextField
     autoFocus={true}
+    cy-data="key-person-name-0"
     label="Name"
     name="apd-state-profile-pocname0"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="Bob the Builder"
   />
   <TextField
+    cy-data="key-person-email-0"
     label="Email"
     name="apd-state-profile-pocemail0"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="email address"
   />
   <TextField
+    cy-data="key-person-role-0"
     label="Role"
     name="apd-state-profile-pocposition0"
+    onBlur={[Function]}
     onChange={[Function]}
+    onKeyUp={[Function]}
     type="text"
     value="The Builder"
   />
@@ -208,14 +235,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     >
       Does this person have costs directly attributable to this program?
     </legend>
-    <ChoiceComponent
-      checked={false}
-      label="No"
-      name="apd-state-profile-hascosts-no0"
-      onChange={[Function]}
-      type="radio"
-      value="no"
-    />
     <ChoiceComponent
       checked={true}
       checkedChildren={
@@ -244,6 +263,14 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
       onChange={[Function]}
       type="radio"
       value="yes"
+    />
+    <ChoiceComponent
+      checked={false}
+      label="No"
+      name="apd-state-profile-hascosts-no0"
+      onChange={[Function]}
+      type="radio"
+      value="no"
     />
   </fieldset>
 </Fragment>
