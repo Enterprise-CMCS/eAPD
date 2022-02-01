@@ -62,6 +62,7 @@ const StatePersonForm = ({
         name="desc"
         value={description}
         onChange={editDesc}
+        className="remove-clearfix"
       />
       <PersonCostForm
         items={years}
