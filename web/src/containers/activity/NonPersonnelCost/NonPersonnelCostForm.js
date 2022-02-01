@@ -21,18 +21,19 @@ const NonPersonnelCostForm = ({
 }) => {
   const editCategory = useCallback(
     ({ target: { value } }) => setCategory(activityIndex, index, value),
-    [index]
+    [activityIndex, index, setCategory]
   );
 
   const editDesc = useCallback(
     ({ target: { value } }) => setDescription(activityIndex, index, value),
-    [index]
+    [activityIndex, index, setDescription]
   );
 
   const getEditCostForYear = useCallback(
-    year => ({ target: { value } }) =>
-      setCost(activityIndex, index, year, value),
-    [index]
+    year =>
+      ({ target: { value } }) =>
+        setCost(activityIndex, index, year, value),
+    [activityIndex, index, setCost]
   );
 
   const categories = [
@@ -43,10 +44,11 @@ const NonPersonnelCostForm = ({
     'Administrative operations',
     'Miscellaneous expenses for the project'
   ].map(item => ({ label: item, value: item }));
-  categories.unshift({label:'Select an option', value:''})
+  categories.unshift({ label: 'Select an option', value: '' });
   return (
     <Fragment>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
+      {/* eslint-disable jsx-a11y/no-autofocus */}
       <Dropdown
         autoFocus
         label="Category"

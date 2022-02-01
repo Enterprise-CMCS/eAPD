@@ -1,7 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import sinon from 'sinon';
 
 import * as actions from './admin';
 
@@ -172,7 +171,7 @@ describe('admin actions', () => {
 
     it('handles success', async () => {
       const store = mockStore({ notification: { open: false, queue: [] } });
-      const dispatchGetUsers = sinon.stub().returns({ type: 'get users' });
+      const dispatchGetUsers = jest.fn().mockReturnValue({ type: 'get users' });
 
       fetchMock.onPost('/users').reply(200);
 

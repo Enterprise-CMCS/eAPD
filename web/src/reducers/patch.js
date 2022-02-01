@@ -32,6 +32,7 @@ const indexOfLastReplacePatch = (patches, path) => {
 
 let patchesPendingSave = 0;
 
+// eslint-disable-next-line default-param-last
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case RESET:

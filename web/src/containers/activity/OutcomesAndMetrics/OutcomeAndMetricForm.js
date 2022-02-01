@@ -19,25 +19,27 @@ const OutcomeAndMetricForm = ({
   removeMetric
 }) => {
   const changeOutcome = useMemo(
-    () => ({ target: { value } }) => {
-      setOutcome(activityIndex, index, value);
-    },
-    [index]
+    () =>
+      ({ target: { value } }) => {
+        setOutcome(activityIndex, index, value);
+      },
+    [activityIndex, index, setOutcome]
   );
 
-  const changeMetric = i => ({ target: { value } }) => {
-    setMetric(activityIndex, index, i, value);
-  };
+  const changeMetric =
+    i =>
+    ({ target: { value } }) => {
+      setMetric(activityIndex, index, i, value);
+    };
 
   return (
-    
     <Fragment key={`activity${activityIndex}-index${index}-form`}>
       <TextField
         key={`activity${activityIndex}-index${index}`}
-        autoFocus
         data-cy={`outcome-${index}`}
         name="outcome"
         label="Outcome"
+        className="remove-clearfix"
         hint="Describe a distinct and measurable improvement for this system."
         value={outcome}
         multiline
@@ -45,24 +47,25 @@ const OutcomeAndMetricForm = ({
         onChange={changeOutcome}
         onBlur={validateText}
         onKeyUp={validateText}
-        />
+      />
 
       {metrics.map(({ key, metric }, i) => (
         <Review
-        key={key}
-        onDeleteClick={() => removeMetric(index, i)}
-        ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
-        objType="Metric"
+          key={key}
+          onDeleteClick={() => removeMetric(index, i)}
+          ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
+          objType="Metric"
         >
           <div
             key={key}
             className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-            >
+          >
             <TextField
               id={`${activityIndex}-metric${i}`}
               name="metric"
               data-cy={`metric-${index}-${i}`}
               label="Metric"
+              className="remove-clearfix"
               hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
               value={metric}
               multiline
@@ -70,7 +73,7 @@ const OutcomeAndMetricForm = ({
               onChange={changeMetric(i)}
               onBlur={validateText}
               onKeyUp={validateText}
-              />
+            />
           </div>
         </Review>
       ))}

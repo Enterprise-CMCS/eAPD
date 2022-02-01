@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Dollars from '../../components/Dollars';
 
@@ -30,25 +30,24 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
         : 'Key Personnel name not specified';
     }
     return (
-      <Fragment>
-        <ul className="ds-c-list--bare" key={person.name}>
-          <li>
-            <h3>
-              {index + 1}. {displayName}
-            </h3>
-          </li>
-          {person.isPrimary ? <li>Primary APD Point of Contact</li> : null}
-          <li>{person.position || 'Role not specified'}</li>
-          <li>
-            <strong>Email: </strong>
-            {person.email}
-          </li>
-          <li>{costByYear(person)}</li>
-        </ul>
-      </Fragment>
+      <ul className="ds-c-list--bare" key={person.name}>
+        <li>
+          <h3>
+            {index + 1}. {displayName}
+          </h3>
+        </li>
+        {person.isPrimary ? <li>Primary APD Point of Contact</li> : null}
+        <li>{person.position || 'Role not specified'}</li>
+        <li>
+          <strong>Email: </strong>
+          {person.email}
+        </li>
+        <li>{costByYear(person)}</li>
+      </ul>
     );
   };
 
+  /* eslint-disable react/no-unstable-nested-components */
   const MedicaidOffice = ({ medicaidOffice }) => {
     const { address1, address2, city, state, zip } = medicaidOffice;
 
