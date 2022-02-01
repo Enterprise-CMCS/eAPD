@@ -1,5 +1,5 @@
-import ActivityPage from '../../page-objects/activity-page';
 import BudgetPage from '../../page-objects/budget-page';
+import ActivityPage from '../../page-objects/activity-page';
 import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
@@ -377,32 +377,123 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
 
     it('should handle enter data in Outcomes and Milestones', () => {
+      const outcomes = [
+        {outcome: 'This is an outcome.', 
+         metrics: ['One metric, ah ha ha', 'Two metrics, ah ha ha']}
+      ];
+
+      const milestones = [{
+        milestoneName: "Miles's Milestone",
+        dateMonth: 1,
+        dateDay: 2,
+        dateYear: 2023
+      }];
+
       cy.goToOutcomesAndMilestones(0);
 
-      cy.findByRole('button', { name: /Add Outcome/i }).click();
+      cy.wrap(outcomes).each((element, index) => {
+        cy.findByRole('button', { name: /Add Outcome/i }).click();
+        cy.get(`[data-cy='outcome-${index}']`)
+          .should('have.value', '')
+          .blur()
+          .should('have.class', 'missing-text-alert');
 
-      activityPage.checkTextField('ds-c-field', '', 0); // Outcome
-      activityPage.checkTextField('ds-c-field', '', 1); // Metric
+        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
 
-      cy.findByRole('button', { name: /Done/i }).click();
+        cy.get(`[data-cy='outcome-${index}']`)
+          .click()
+          .type(`${element.outcome}`)
+          .should('not.have.class', 'missing-text-alert');
 
-      activityPage.checkOutcomeOutput({
-        outcome: 'Outcome not specified',
-        metrics: ['Metric not specified']
+        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
+
+        if (Array.isArray(element.metrics)) {
+          cy.wrap(element.metrics).each((metric, i) => {
+            cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+
+            cy.get(`[data-cy=metric-${index}-${i}]`)
+              .should('have.value', '')
+              .click()
+              .blur()
+              .should('have.class', 'missing-text-alert');
+
+            cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+
+            cy.get(`[data-cy=metric-${index}-${i}]`)
+              .click()
+              .type(`${metric}`)
+              .should('not.have.class', 'missing-text-alert');
+
+            cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
+          })
+
+        }
+
+        cy.findByRole('button', { name: /Done/i }).click();
+
+        activityPage.checkOutcomeOutput({
+          outcome: element.outcome,
+          metrics: element.metrics
+        })
       });
 
       cy.contains('Edit').click();
-      activityPage.checkMetricFunctionality();
 
-      cy.findByRole('button', { name: /Add Milestone/i }).click();
-      activityPage.checkInputField('Name', '');
-      activityPage.checkDate('Target completion date');
-      cy.findByRole('button', { name: /Done/i }).click();
-
-      activityPage.checkMilestoneOutput({
-        milestone: 'Milestone not specified',
-        targetDate: 'Date not specified'
+      cy.get('[class="ds-c-review"]')
+      .eq(1)
+      .within(() => {
+        cy.contains('Delete')
+        .should('exist');
       });
+
+      cy.get('[class="ds-c-review"]')
+        .eq(0)
+        .within(() => {
+          cy.contains('Delete')
+          .should('exist')
+          .click();
+        });
+
+      cy.contains('Delete Metric?').should('exist');
+      cy.get('#react-aria-modal-dialog')
+        .within(() => {
+          cy.findByRole('button', { name: /Delete/ }).click();
+        });
+
+      cy.findByRole('button', { name: /Done/i })
+        .should('not.be.disabled')
+        .click();
+
+        cy.get('[class="ds-c-review"]')
+          .should('have.length', 1);
+
+      cy.wrap(milestones).each((element, index) => {
+        cy.findByRole('button', { name: /Add Milestone/i }).click();
+
+        cy.get(`[data-cy=milestone-${index}]`)
+          .should('have.value', '')
+          .blur()
+          .should('have.class', 'missing-text-alert');
+
+        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+
+        cy.get(`[data-cy=milestone-${index}]`)
+          .click()
+          .type(element.milestoneName)
+          .should('not.have.class', 'missing-text-alert');
+
+        cy.findByRole('button', { name: /Done/i })
+          .should('not.be.disabled')
+          .click();
+
+        cy.waitForSave();
+
+        activityPage.checkMilestoneOutput({
+          milestone: element.milestoneName,
+          targetDate: 'Date not specified'
+        });
+      });
+
     });
 
     it('should handle entering data inState Staff and Expenses', () => {
@@ -570,7 +661,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       schedulePage.getAllActivityScheduleMilestones(0).should('have.length', 1);
       schedulePage
         .getActivityScheduleMilestoneName(0, 0)
-        .should('eq', 'Milestone not specified');
+        .should('eq', "Miles's Milestone");
     });
 
     it('should handle entering data in Proposed Budget', () => {
@@ -677,13 +768,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       })
         .next()
         .next()
-        .should('have.text', 'Outcome:  Outcome not specified')
-        .next()
-        .should('have.text', 'Metrics: 1. Metric not specified')
         .next()
         .next()
         .next()
-        .should('have.text', '1. Milestone not specified')
+        .next()
+        .should('have.text', "1. Miles's Milestone")
         .next()
         .should('have.text', 'Target completion date:  Date not specified');
 
@@ -786,7 +875,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       exportPage.getAllActivityScheduleMilestones(0).should('have.length', 1);
       exportPage
         .getActivityScheduleMilestoneName(0, 0)
-        .should('eq', 'Milestone not specified');
+        .should('eq', "Miles's Milestone");
 
       cy.then(() => {
         years.forEach(year => {
@@ -885,15 +974,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.goToOutcomesAndMilestones(0);
 
       activityPage.checkDeleteButton(
-        'Outcomes have not been added for this activity.',
+        'Add at least one outcome for this activity.',
         'Delete Outcome and Metrics?',
-        'Outcome not specified'
+        'This is an outcome.'
       );
 
       activityPage.checkDeleteButton(
-        'Milestones have not been added for this activity.',
+        'Add milestone(s) for this activity.',
         'Delete Milestone?',
-        'Milestone not specified'
+        "Miles's Milestone"
       );
       cy.goToStateStaffAndExpenses(0);
 
