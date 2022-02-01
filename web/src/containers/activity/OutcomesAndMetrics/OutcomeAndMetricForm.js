@@ -49,7 +49,7 @@ const OutcomeAndMetricForm = ({
         onKeyUp={(e) => {
           validateText(e, 'name', '.');
         }}
-        />
+      />
 
       {metrics.map(({ key, metric }, i) => (
         <Review
@@ -78,7 +78,7 @@ const OutcomeAndMetricForm = ({
               onKeyUp={(e) => {
                 validateText(e, 'metric', '.');
               }}
-              />
+            />
           </div>
         </Review>
       ))}
