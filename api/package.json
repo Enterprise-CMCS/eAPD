@@ -98,7 +98,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.6.0",
     "sanitize-html": "^2.3.3",
-    "sharp": "^0.28.1",
+    "sharp": "^0.29.3",
     "swagger-ui-express": "^4.2.0",
     "uuid": "^8.3.2",
     "winston": "^3.3.3",
