@@ -12,6 +12,7 @@ echo "[]" > endpoint-data.json
 
 docker-compose -f docker-compose.endpoint-tests.yml up -d
 sleep 3
+docker cp ./ api-for-testing:/app/ 
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run test-endpoints $@
