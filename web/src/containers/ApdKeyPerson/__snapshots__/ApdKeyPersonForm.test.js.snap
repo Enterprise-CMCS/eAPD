@@ -13,7 +13,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
   </p>
   <TextField
-    autoFocus={true}
     cy-data="key-person-name-1"
     label="Name"
     name="apd-state-profile-pocname1"
@@ -105,7 +104,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
   </p>
   <TextField
-    autoFocus={true}
     cy-data="key-person-name-1"
     label="Name"
     name="apd-state-profile-pocname1"
@@ -197,7 +195,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
   </p>
   <TextField
-    autoFocus={true}
     cy-data="key-person-name-0"
     label="Name"
     name="apd-state-profile-pocname0"
