@@ -227,6 +227,24 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
       });
     });
+
+    it('should go to the Activity Overview page when edit is clicked in Executive Summary', () => {
+      cy.goToExecutiveSummary();
+
+      cy.get('#executive-summary-summary')
+        .parent()
+        .contains('div', 'Activity 1: Program Administration')
+        .parent()
+        .parent()
+        .findByRole('button', { name: 'Edit' })
+        .click();
+
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
+    });
   });
 
   describe('Subforms', () => {
@@ -479,27 +497,37 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       activityPage.checkInputField('Personnel title', '');
       activityPage.checkInputField('Description', '');
-      activityPage.checkStateStaffFFY(years, '');
+      activityPage.checkStateStaffFFY({
+        years,
+        expectedValue: years.map(() => ({
+          cost: '',
+          fte: '',
+          total: 0
+        }))
+      });
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkStateStaffOutput(
-        'Personnel title not specified',
+      activityPage.checkStateStaffOutput({
+        name: 'Personnel title not specified',
         years,
-        0,
-        0
-      );
+        cost: 0,
+        fte: 0
+      });
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
       activityPage.checkInputField('Description', '');
-      activityPage.checkFFYinputCostFields(years, '');
+      activityPage.checkFFYinputCostFields({
+        years,
+        FFYcosts: years.map(() => '')
+      });
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkOtherStateExpensesOutput(
-        'Category not specified',
+      activityPage.checkOtherStateExpensesOutput({
+        category: 'Category not specified',
         years,
-        [0, 0]
-      );
+        FFYcosts: [0, 0]
+      });
     });
 
     it('should handle entering data in Private Contractor Costs', () => {
@@ -517,18 +545,22 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         0
       );
       cy.get('[type="radio"][checked]').should('have.value', 'no');
-      activityPage.checkFFYinputCostFields(years, '');
+      activityPage.checkFFYinputCostFields({
+        years,
+        FFYcosts: years.map(() => '')
+      });
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      activityPage.checkPrivateContractorOutput(
-        'Private Contractor or Vendor Name not specified',
-        'Procurement Methodology and Description of Services not specified',
-        'Full Contract Term: Date not specified - Date not specified',
-        'Total Contract Cost: $0',
+      activityPage.checkPrivateContractorOutput({
+        name: 'Private Contractor or Vendor Name not specified',
+        description:
+          'Procurement Methodology and Description of Services not specified',
+        dateRange: 'Date not specified - Date not specified',
+        totalCosts: 0,
         years,
-        [0, 0]
-      );
+        FFYcosts: [0, 0]
+      });
     });
 
     it('should handle entering data in Budget and FFP', () => {
@@ -543,13 +575,31 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               budgetPage.checkSplitFunctionality();
 
               cy.get('[class="ds-c-field"]').select('75-25');
-              budgetPage.checkCostSplitTable(75, 25, 0, 0, 0);
+              budgetPage.checkCostSplitTable({
+                federalSharePercentage: 0.75,
+                federalShareAmount: 0,
+                stateSharePercentage: 0.25,
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
+              });
 
               cy.get('[class="ds-c-field"]').select('50-50');
-              budgetPage.checkCostSplitTable(50, 50, 0, 0, 0);
+              budgetPage.checkCostSplitTable({
+                federalSharePercentage: 0.5,
+                federalShareAmount: 0,
+                stateSharePercentage: 0.5,
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
+              });
 
               cy.get('[class="ds-c-field"]').select('90-10');
-              budgetPage.checkCostSplitTable(90, 10, 0, 0, 0);
+              budgetPage.checkCostSplitTable({
+                federalSharePercentage: 0.9,
+                federalShareAmount: 0,
+                stateSharePercentage: 0.1,
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
+              });
             });
         });
       });
@@ -770,7 +820,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .next()
         .should(
           'have.text',
-          `Full Contract Term: Dates not specifiedTotal Contract Cost: $0${privateContractorCosts}`
+          `Full Contract Term: Date not specified - Date not specifiedTotal Contract Cost: $0${privateContractorCosts}`
         );
 
       cy.then(() => {

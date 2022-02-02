@@ -9,6 +9,9 @@ const { id: fedAdminRoleId } = roles.find(
 const { id: stateAdminRoleId } = roles.find(
   role => role.name === 'eAPD State Admin'
 );
+const { id: stateStaffRoleId } = roles.find(
+  role => role.name === 'eAPD State Staff'
+);
 const adminAffiliations = states
   .filter(state => state.id !== 'ak')
   .map(state => ({
@@ -71,7 +74,7 @@ exports.seed = async knex => {
       id: 4006,
       user_id: 'state-admin',
       state_id: 'md',
-      role_id: stateAdminRoleId,
+      role_id: stateStaffRoleId,
       status: 'approved',
       expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     }
