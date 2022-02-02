@@ -3,15 +3,23 @@ const { states } = require('../../util/states');
 
 // affiliate 'all-permissions' user with all states
 const { id: adminRoleId } = roles.find(role => role.name === 'eAPD Admin');
-const { id: fedAdminRoleId } = roles.find(role => role.name === 'eAPD Federal Admin');
-const { id: stateAdminRoleId } = roles.find(role => role.name === 'eAPD State Admin');
+const { id: fedAdminRoleId } = roles.find(
+  role => role.name === 'eAPD Federal Admin'
+);
+const { id: stateAdminRoleId } = roles.find(
+  role => role.name === 'eAPD State Admin'
+);
+const { id: stateStaffRoleId } = roles.find(
+  role => role.name === 'eAPD State Staff'
+);
 const adminAffiliations = states
   .filter(state => state.id !== 'ak')
   .map(state => ({
     user_id: 'all-permissions',
     state_id: state.id,
     role_id: adminRoleId,
-    status: 'approved'
+    status: 'approved',
+    expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
   }));
 
 exports.seed = async knex => {
@@ -28,28 +36,32 @@ exports.seed = async knex => {
       user_id: 2020,
       state_id: 'md',
       role_id: '1107',
-      status: 'approved'
+      status: 'approved',
+      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     },
     {
       id: 4002,
       user_id: 'all-permissions',
       state_id: 'ak',
       role_id: adminRoleId,
-      status: 'approved'
+      status: 'approved',
+      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     },
     {
       id: 4003,
       user_id: 'fed-admin',
       state_id: 'fd',
       role_id: fedAdminRoleId,
-      status: 'approved'
+      status: 'approved',
+      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     },
     {
       id: 4004,
       user_id: 'state-admin',
       state_id: 'ak',
       role_id: stateAdminRoleId,
-      status: 'approved'
+      status: 'approved',
+      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     },
     {
       id: 4005,
@@ -57,6 +69,14 @@ exports.seed = async knex => {
       state_id: 'ak',
       role_id: null,
       status: 'requested'
+    },
+    {
+      id: 4006,
+      user_id: 'state-admin',
+      state_id: 'md',
+      role_id: stateStaffRoleId,
+      status: 'approved',
+      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     }
   ]);
   await knex('okta_users').del();
@@ -97,5 +117,4 @@ exports.seed = async knex => {
       metadata: '{}'
     }
   ]);
-
 };

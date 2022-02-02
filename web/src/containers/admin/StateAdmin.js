@@ -45,11 +45,17 @@ const StateAdmin = ({
     })();
 
     return () => controller?.abort();
-  }, [activeTab]);
+  }, [activeTab, currentState.id, affiliations]);
 
-  useEffect(() => {
-    fetchTypes();
-  }, []);
+  useEffect(
+    () => {
+      fetchTypes();
+    },
+    // we want this to run on load so we don't need any thing
+    // in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const currentTab = id => {
     setActiveTab(id);

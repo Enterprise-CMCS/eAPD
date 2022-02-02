@@ -25,6 +25,15 @@ const fedAdmin = {
   }
 };
 
+const stateAdmin = {
+  status: 'ACTIVE',
+  id: 'state-admin',
+  profile: {
+    displayName: 'State Admin',
+    email: 'stateadmin@email.com'
+  }
+};
+
 const allPermissionsNoState = {
   status: 'ACTIVE',
   id: 'all-permissions-no-state',
@@ -51,7 +60,8 @@ const mockOktaClient = {
         allPermissions,
         allPermissionsNoState,
         allPermissionsAndState,
-        fedAdmin
+        fedAdmin,
+        stateAdmin
       ]);
     });
   },
@@ -79,6 +89,11 @@ const mockOktaClient = {
     if (id === 'fed-admin') {
       return new Promise(resolve => {
         resolve(fedAdmin);
+      });
+    }
+    if (id === 'state-admin') {
+      return new Promise(resolve => {
+        resolve(stateAdmin);
       });
     }
     return new Promise(resolve => {
@@ -133,6 +148,14 @@ const mockVerifyJWT = token => {
       resolve({
         sub: 'fedadmin@email.com',
         uid: 'fed-admin'
+      });
+    });
+  }
+  if (token === 'state-admin') {
+    return new Promise(resolve => {
+      resolve({
+        sub: 'stateadmin@email.com',
+        uid: 'state-admin'
       });
     });
   }

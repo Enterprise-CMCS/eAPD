@@ -121,9 +121,7 @@ describe('auth reducer', () => {
   });
 
   it('should handle LOGIN_SUCCESS', () => {
-    expect(
-      auth(initialState, { type: LOGIN_SUCCESS })
-    ).toEqual({
+    expect(auth(initialState, { type: LOGIN_SUCCESS })).toEqual({
       ...initialState,
       authenticated: true,
       fetching: false,
@@ -134,15 +132,15 @@ describe('auth reducer', () => {
 
   it('should not update user info with LOGIN_SUCCESS', () => {
     expect(
-      auth(initialState, { type: LOGIN_SUCCESS, data: 'user data'})
+      auth(initialState, { type: LOGIN_SUCCESS, data: 'user data' })
     ).toEqual({
       ...initialState,
       authenticated: true,
       fetching: false,
       initialCheck: true,
       hasEverLoggedOn: true
-    })
-  })
+    });
+  });
 
   it('should handle LOGIN_FAILURE', () => {
     expect(auth(initialState, { type: LOGIN_FAILURE, error: 'foo' })).toEqual({
@@ -159,7 +157,7 @@ describe('auth reducer', () => {
       initialCheck: true
     });
   });
-  
+
   it('should handle LOGOUT_SUCCESS', () => {
     expect(auth(initialState, { type: LOGOUT_SUCCESS })).toEqual({
       ...initialState,
@@ -173,7 +171,7 @@ describe('auth reducer', () => {
       isLoggingOut: false
     });
   });
-  
+
   describe('when user is already logged in', () => {
     it('should reset auth after LOGOUT_SUCCESS', () => {
       const state = {
@@ -218,6 +216,7 @@ describe('auth reducer', () => {
   });
 
   describe('manages the users session token', () => {
+    // eslint-disable-next-line no-promise-executor-return
     const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     it('should update latestActivity on LATEST_ACTIVITY', async () => {

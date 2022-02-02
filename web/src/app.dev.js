@@ -1,3 +1,4 @@
+/* eslint-disable import/no-import-module-exports */
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import '@okta/okta-auth-js/polyfill';
@@ -5,7 +6,6 @@ import '@okta/okta-auth-js/polyfill';
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
 import { routerMiddleware } from 'connected-react-router';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
@@ -20,6 +20,7 @@ import { html as browserHtml } from './components/UpgradeBrowser';
 import cookieHtml from './components/EnableCookies';
 
 import './styles/index.scss';
+/* eslint-enable import/no-import-module-exports */
 
 if (browserIsRed) {
   document.getElementById('app').innerHTML = `
@@ -56,12 +57,7 @@ if (browserIsRed) {
   );
 
   const render = (Component, props) => {
-    ReactDOM.render(
-      <AppContainer>
-        <Component {...props} />
-      </AppContainer>,
-      document.getElementById('app')
-    );
+    ReactDOM.render(<Component {...props} />, document.getElementById('app'));
   };
 
   module.hot.accept('./components/Root.js', () => {

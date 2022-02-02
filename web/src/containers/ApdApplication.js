@@ -41,20 +41,26 @@ const ApdApplication = ({
   const history = useHistory();
   const location = useLocation();
 
-  useEffect(() => {
-    if (!paramApdId && !apdId) {
-      dispatchSelectApdOnLoad('/apd');
-      history.push('/');
-    } else if (apdId && !paramApdId) {
-      history.push(`/apd/${apdId}`);
-    } else if (paramApdId && (!apdId || apdId !== paramApdId)) {
-      setIsLoading(true);
-      const { pathname = `/apd/${paramApdId}`, hash = '' } = location || {};
-      dispatchSelectApd(paramApdId, `${pathname}${hash}`);
-    } else {
-      setIsLoading(false);
-    }
-  }, []);
+  useEffect(
+    () => {
+      if (!paramApdId && !apdId) {
+        dispatchSelectApdOnLoad('/apd');
+        history.push('/');
+      } else if (apdId && !paramApdId) {
+        history.push(`/apd/${apdId}`);
+      } else if (paramApdId && (!apdId || apdId !== paramApdId)) {
+        setIsLoading(true);
+        const { pathname = `/apd/${paramApdId}`, hash = '' } = location || {};
+        dispatchSelectApd(paramApdId, `${pathname}${hash}`);
+      } else {
+        setIsLoading(false);
+      }
+    },
+    // we want this to run on load so we don't need any thing
+    // in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   useEffect(() => {
     if (apdId) {

@@ -16,6 +16,7 @@ jest.mock('./app', () => {
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
+// eslint-disable-next-line no-promise-executor-return
 const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 describe('auth actions', () => {

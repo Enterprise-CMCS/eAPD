@@ -8,7 +8,6 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(Dashboard)",
         "type": [Function],
       }
     }
@@ -22,7 +21,6 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(ApdApplication)",
         "type": [Function],
       }
     }
@@ -36,7 +34,6 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(ApdViewOnly)",
         "type": [Function],
       }
     }
@@ -50,7 +47,6 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(LoginApplication)",
         "type": [Function],
       }
     }
@@ -64,7 +60,6 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(Logout)",
         "type": [Function],
       }
     }
@@ -77,7 +72,6 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(ManageAccount)",
         "type": [Function],
       }
     }
@@ -90,7 +84,6 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(SelectAffiliation)",
         "type": [Function],
       }
     }
@@ -103,7 +96,6 @@ exports[`Routes component renders correctly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(StateAdmin)",
         "type": [Function],
       }
     }
