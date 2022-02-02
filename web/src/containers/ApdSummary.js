@@ -35,22 +35,21 @@ const ApdSummary = ({
   years,
   yearOptions
 }) => {
-
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
 
   const changeName = ({ target: { value } }) => {
     setName(value);
-  }
+  };
 
-  const onBlur = (e) => {
+  const onBlur = e => {
     const apdNameInput = e.target.value;
 
     if (apdNameInput.trim() === '') {
-      setName('Untitled APD')
+      setName('Untitled APD');
     } else {
-      setName(apdNameInput)
+      setName(apdNameInput);
     }
-  }
+  };
 
   const onRemove = () => {
     removeApdYear(elementDeleteFFY.value);
@@ -60,7 +59,7 @@ const ApdSummary = ({
   const onCancel = () => {
     setElementDeleteFFY(null);
     elementDeleteFFY.checked = true;
-  }
+  };
 
   const handleYears = e => {
     const year = e.target.value;
@@ -85,27 +84,25 @@ const ApdSummary = ({
 
   const getLabelElement = () => {
     if (years.length > 0) {
-      return t('apd.overview.instruction.short')
+      return t('apd.overview.instruction.short');
     }
     return (
       <React.Fragment>
         {t('apd.overview.instruction.short')}
-        <Alert variation='error' >
-          <div style={{fontWeight: 400}}>
-            At least one FFY must be selected to continue with your APD. Select your FFY(s).
+        <Alert variation="error">
+          <div style={{ fontWeight: 400 }}>
+            At least one FFY must be selected to continue with your APD. Select
+            your FFY(s).
           </div>
         </Alert>
-
-
       </React.Fragment>
-    )
-  }
+    );
+  };
 
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
       <TextField
-        autoFocus
         className="remove-clearfix"
         label="APD Name"
         name="apd-name"
@@ -170,11 +167,7 @@ const ApdSummary = ({
         />
       </div>
       {elementDeleteFFY && (
-        <DeleteModal
-          objType="FFY"
-          onCancel={onCancel}
-          onDelete={onRemove}
-        />
+        <DeleteModal objType="FFY" onCancel={onCancel} onDelete={onRemove} />
       )}
     </Section>
   );
@@ -206,7 +199,7 @@ const mapDispatchToProps = {
   setHIT: setNarrativeForHIT,
   setMMIS: setNarrativeForMMIS,
   setName: setApdName,
-  setOverview: setProgramOverview,
+  setOverview: setProgramOverview
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdSummary);

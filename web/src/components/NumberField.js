@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useState, useEffect } from 'react';
 
 const NumberField = ({
-  fieldRef,
   onBlur,
   onChange,
   value,
@@ -13,9 +12,10 @@ const NumberField = ({
   ...props
 }) => {
   const [local, setLocal] = useState(value ? value.toString() : '');
-  useEffect(() => setLocal(maskValue(value ? value.toString() : '', mask)), [
-    value
-  ]);
+  useEffect(
+    () => setLocal(maskValue(value ? value.toString() : '', mask)),
+    [value, mask]
+  );
 
   const stringToNumber = stringValue => {
     // use ParseFloat rather than "+" because it won't throw an error and
@@ -48,6 +48,7 @@ const NumberField = ({
         });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [onBlur, onChange]
   );
 
@@ -61,6 +62,7 @@ const NumberField = ({
         });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [onChange]
   );
 
@@ -83,10 +85,6 @@ const NumberField = ({
 };
 
 NumberField.propTypes = {
-  fieldRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) })
-  ]),
   mask: PropTypes.oneOf(['currency', 'phone', 'ssn', 'zip']),
   min: PropTypes.number,
   onBlur: PropTypes.func,
@@ -96,7 +94,6 @@ NumberField.propTypes = {
 };
 
 NumberField.defaultProps = {
-  fieldRef: null,
   mask: null,
   min: null,
   onBlur: null,

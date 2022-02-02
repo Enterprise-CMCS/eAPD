@@ -3,12 +3,11 @@ import React from 'react';
 
 import { plain as ExecutiveSummary, mapStateToProps } from './ExecutiveSummary';
 
-let mockPush;
+const mockPush = jest.fn();
 
 jest.mock('react-router-dom', () => {
-  mockPush = jest.fn();
   return {
-    useHistory: jest.fn().mockReturnValue({ push: mockPush }),
+    useHistory: jest.fn().mockReturnValue({ push: () => mockPush() }),
     useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' }),
     useParams: jest.fn().mockReturnValue({ apdId: 2 })
   };

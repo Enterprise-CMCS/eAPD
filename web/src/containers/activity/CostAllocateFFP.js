@@ -141,49 +141,47 @@ const CostAllocateFFP = ({
           {/* in viewonly mode, we'll pull everything into a single table
               table since there aren't form elements to fill in */}
           {isViewOnly && (
-            <Fragment>
-              <table className="budget-table activity-budget-table">
-                <tbody>
-                  <tr className="budget-table--subtotal budget-table--row__header">
-                    <th colSpan="5">Activity Total Cost</th>
-                    <td className="budget-table--number">
-                      <Dollars>{years[ffy].totalCost}</Dollars>
-                    </td>
-                  </tr>
-                  <tr className="title">
-                    <td>Other Funding</td>
-                    <td colSpan="3" />
-                    <td>-</td>
-                    <td className="budget-table--number">
-                      <Dollars>{years[ffy].otherFunding}</Dollars>
-                    </td>
-                  </tr>
-                  <tr className="budget-table--subtotal budget-table--row__highlight">
-                    <td>Total Computable Medicaid Cost</td>
-                    <td colSpan="4" />
-                    <td className="budget-table--number">
-                      <Dollars>{years[ffy].medicaidShare}</Dollars>
-                    </td>
-                  </tr>
-                  <CostSummaryRows
-                    items={[
-                      {
-                        description: 'Federal Share',
-                        totalCost: years[ffy].federalShare,
-                        unitCost: years[ffy].medicaidShare,
-                        units: `${costAllocation[ffy].ffp.federal}%`
-                      },
-                      {
-                        description: 'State Share',
-                        totalCost: years[ffy].stateShare,
-                        unitCost: years[ffy].medicaidShare,
-                        units: `${costAllocation[ffy].ffp.state}%`
-                      }
-                    ]}
-                  />
-                </tbody>
-              </table>
-            </Fragment>
+            <table className="budget-table activity-budget-table">
+              <tbody>
+                <tr className="budget-table--subtotal budget-table--row__header">
+                  <th colSpan="5">Activity Total Cost</th>
+                  <td className="budget-table--number">
+                    <Dollars>{years[ffy].totalCost}</Dollars>
+                  </td>
+                </tr>
+                <tr className="title">
+                  <td>Other Funding</td>
+                  <td colSpan="3" />
+                  <td>-</td>
+                  <td className="budget-table--number">
+                    <Dollars>{years[ffy].otherFunding}</Dollars>
+                  </td>
+                </tr>
+                <tr className="budget-table--subtotal budget-table--row__highlight">
+                  <td>Total Computable Medicaid Cost</td>
+                  <td colSpan="4" />
+                  <td className="budget-table--number">
+                    <Dollars>{years[ffy].medicaidShare}</Dollars>
+                  </td>
+                </tr>
+                <CostSummaryRows
+                  items={[
+                    {
+                      description: 'Federal Share',
+                      totalCost: years[ffy].federalShare,
+                      unitCost: years[ffy].medicaidShare,
+                      units: `${costAllocation[ffy].ffp.federal}%`
+                    },
+                    {
+                      description: 'State Share',
+                      totalCost: years[ffy].stateShare,
+                      unitCost: years[ffy].medicaidShare,
+                      units: `${costAllocation[ffy].ffp.state}%`
+                    }
+                  ]}
+                />
+              </tbody>
+            </table>
           )}
 
           {!isViewOnly && (
@@ -227,7 +225,7 @@ const CostAllocateFFP = ({
                   label="federal-state split"
                   labelClassName="sr-only"
                   options={[
-                    { label: "Select an option", value:'0-100' },
+                    { label: 'Select an option', value: '0-100' },
                     { label: '90-10', value: '90-10' },
                     { label: '75-25', value: '75-25' },
                     { label: '50-50', value: '50-50' }
@@ -342,7 +340,7 @@ const mapStateToProps = (
 
   return {
     aKey: activity.key,
-    activityName: activity.name || "Untitled",
+    activityName: activity.name || 'Untitled',
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,

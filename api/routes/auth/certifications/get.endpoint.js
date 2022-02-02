@@ -7,14 +7,13 @@ const {
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
 
-
-describe('auth/certifications get endpoint', () => {  
+describe('auth/certifications get endpoint', () => {
   describe('GET /auth/certifications', () => {
     const db = getDB();
     beforeAll(() => setupDB(db));
     afterAll(() => teardownDB(db));
 
-    const url = '/auth/certifications'
+    const url = '/auth/certifications';
 
     unauthenticatedTest('get', url);
     unauthorizedTest('get', url);
@@ -22,7 +21,7 @@ describe('auth/certifications get endpoint', () => {
     describe('when authenticated as a user with permission', () => {
       let api;
       beforeAll(async () => {
-        api = login();
+        api = login('fed-admin');
       });
 
       it('valid request', async () => {
@@ -31,7 +30,6 @@ describe('auth/certifications get endpoint', () => {
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
       });
-
     });
   });
 });
