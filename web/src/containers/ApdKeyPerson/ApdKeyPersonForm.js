@@ -30,9 +30,11 @@ const PersonForm = ({
   setTime,
   years
 }) => {
-  const handleChange = action => ({ target: { value } }) => {
-    action(index, value);
-  };
+  const handleChange =
+    action =>
+    ({ target: { value } }) => {
+      action(index, value);
+    };
 
   const setPersonHasCosts = newHasCosts => () => {
     setHasCosts(index, newHasCosts);
@@ -60,12 +62,13 @@ const PersonForm = ({
           ? t(`${tRoot}.labels.notePrimary`)
           : t(`${tRoot}.labels.noteSecondary`)}
       </p>
+      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
-        autoFocus
         name={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
         value={name}
         onChange={handleChange(setName)}
+        className="remove-clearfix"
       />
       <TextField
         name={`apd-state-profile-pocemail${index}`}

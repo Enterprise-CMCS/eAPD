@@ -44,7 +44,7 @@ const ActivityOverview = ({
     html => {
       setOverview(activityIndex, html);
     },
-    [activity.key]
+    [activityIndex, setOverview]
   );
 
   const descriptionLabel = useMemo(
@@ -76,7 +76,7 @@ const ActivityOverview = ({
     html => {
       setDescription(activityIndex, html);
     },
-    [activity.key]
+    [activityIndex, setDescription]
   );
 
   const alternativesLabel = useMemo(
@@ -97,7 +97,7 @@ const ActivityOverview = ({
     html => {
       setAlternatives(activityIndex, html);
     },
-    [activity.key]
+    [activityIndex, setAlternatives]
   );
 
   return (
@@ -108,7 +108,7 @@ const ActivityOverview = ({
     >
       {activityIndex === 0 ? (
         <Fragment>
-          <h4>Activity name: {activity.name || "Untitled"}</h4>
+          <h4>Activity name: {activity.name || 'Untitled'}</h4>
           <h4>Funding source: {activity.fundingSource}</h4>
         </Fragment>
       ) : (

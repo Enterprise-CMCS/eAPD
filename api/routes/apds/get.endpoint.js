@@ -8,11 +8,11 @@ const {
 } = require('../../endpoint-tests/utils');
 
 describe('APD endpoint', () => {
-  describe('List APDs endpoint | GET /apds', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
+  const db = getDB();
+  beforeAll(() => setupDB(db));
+  afterAll(() => teardownDB(db));
 
+  describe('List APDs endpoint | GET /apds', () => {
     const url = '/apds';
 
     unauthenticatedTest('get', url);
@@ -28,10 +28,6 @@ describe('APD endpoint', () => {
   });
 
   describe('Get specific APD | GET /apds/:id', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
-
     const url = id => `/apds/${id}`;
 
     unauthenticatedTest('get', url(4000));
@@ -47,7 +43,7 @@ describe('APD endpoint', () => {
       describe('as a user with a state', () => {
         let api;
         beforeAll(async () => {
-          api = login();
+          api = login('state-admin');
         });
 
         it('when requesting an APD that does not exist', async () => {

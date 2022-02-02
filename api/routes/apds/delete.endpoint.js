@@ -36,7 +36,7 @@ describe('APD endpoint', () => {
       });
 
       it('with an APD that is not in draft', async () => {
-        const api = login();
+        const api = login('state-admin');
         const response = await api.delete(url(4002));
 
         expect(response.status).toEqual(400);
@@ -44,7 +44,7 @@ describe('APD endpoint', () => {
       });
 
       it('with a valid update', async () => {
-        const api = login();
+        const api = login('state-admin');
         const response = await api.delete(url(4001), {
           programOverview: 'new overview'
         });

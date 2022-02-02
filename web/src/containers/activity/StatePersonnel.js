@@ -12,11 +12,14 @@ import FormAndReviewList from '../../components/FormAndReviewList';
 import { StatePersonForm, StatePersonReview } from './StatePerson';
 
 const StatePersonnel = ({ activityIndex, add, personnel, remove }) => {
-  const handleDelete = useCallback(index => {
-    remove(activityIndex, index);
-  });
+  const handleDelete = useCallback(
+    index => {
+      remove(activityIndex, index);
+    },
+    [activityIndex, remove]
+  );
 
-  const handleAdd = useCallback(() => add(activityIndex));
+  const handleAdd = useCallback(() => add(activityIndex), [activityIndex, add]);
 
   return (
     <Fragment>

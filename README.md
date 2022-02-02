@@ -1,6 +1,6 @@
 [![Build status](https://img.shields.io/circleci/project/github/CMSgov/eAPD.svg)](https://circleci.com/gh/CMSgov/workflows/eAPD)
 [![Test coverage](https://img.shields.io/codecov/c/github/CMSgov/eAPD.svg)](https://codecov.io/gh/CMSgov/eAPD)
-![Node.js >= 14.16](https://img.shields.io/badge/node-%3E%3D%2014.16-brightgreen.svg)
+![Node.js >= 16.13](https://img.shields.io/badge/node-%3E%3D%2016.13-brightgreen.svg)
 
 # CMS eAPD app
 
@@ -57,7 +57,6 @@ export JWT_SECRET=# any string is fine here.  It does affect your security postu
 export MONGO_DATABASE="eapd" #This is only a local value.  It will be different in production
 export MONGO_URL="mongodb://mongo:cms@localhost:27017/eapd" #This is only a local value.  It will be different in production
 ```
-
 
 ### Create Okta accounts
 

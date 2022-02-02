@@ -1,4 +1,4 @@
-const knex = require('knex');
+const knex = require('knex'); // eslint-disable-line import/no-extraneous-dependencies
 const config = require('../../knexfile');
 
 const { NODE_ENV } = process.env;

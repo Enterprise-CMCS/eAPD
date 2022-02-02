@@ -1,7 +1,8 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "ecmaVersion": 2020
+    "ecmaVersion": 8,
+    "requireConfigFile": false
   },
   "extends": [
     "airbnb",
@@ -28,6 +29,7 @@
     ],
     "jsx-a11y/label-has-associated-control": ["error", { "assert": "either" }],
 
+    "class-methods-use-this": "off",
     "no-param-reassign": [2, { "props": false }],
 
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
