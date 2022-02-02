@@ -286,6 +286,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
 
         cy.get(`[cy-data='key-person-name-${index}']`)
+          .click()
           .should('have.value', '')
           .blur()
           .should('have.class', 'missing-text-alert')
