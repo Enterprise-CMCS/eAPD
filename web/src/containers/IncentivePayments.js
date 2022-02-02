@@ -31,21 +31,29 @@ const IncentivePayments = ({
   isViewOnly,
   years
 }) => {
-  const updateEHPayment = (year, quarter) => ({ target: { value } }) => {
-    setEHPayment(year, quarter, value);
-  };
+  const updateEHPayment =
+    (year, quarter) =>
+    ({ target: { value } }) => {
+      setEHPayment(year, quarter, value);
+    };
 
-  const updateEHCount = (year, quarter) => ({ target: { value } }) => {
-    setEHCount(year, quarter, value);
-  };
+  const updateEHCount =
+    (year, quarter) =>
+    ({ target: { value } }) => {
+      setEHCount(year, quarter, value);
+    };
 
-  const updateEPPayment = (year, quarter) => ({ target: { value } }) => {
-    setEPPayment(year, quarter, value);
-  };
+  const updateEPPayment =
+    (year, quarter) =>
+    ({ target: { value } }) => {
+      setEPPayment(year, quarter, value);
+    };
 
-  const updateEPCount = (year, quarter) => ({ target: { value } }) => {
-    setEPCount(year, quarter, value);
-  };
+  const updateEPCount =
+    (year, quarter) =>
+    ({ target: { value } }) => {
+      setEPCount(year, quarter, value);
+    };
 
   return (
     <Fragment>
@@ -104,7 +112,10 @@ const IncentivePayments = ({
                       )}
                     </td>
                   ))}
-                  <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
+                  <td
+                    className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+                    data-cy="subtotal"
+                  >
                     <Dollars>{totals.ehAmt.byYear[year]}</Dollars>
                   </td>
                 </Fragment>
@@ -133,7 +144,10 @@ const IncentivePayments = ({
                       )}
                     </td>
                   ))}
-                  <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
+                  <td
+                    className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+                    data-cy="subtotal"
+                  >
                     {formatNum(totals.ehCt.byYear[year])}
                   </td>
                 </Fragment>
@@ -162,7 +176,10 @@ const IncentivePayments = ({
                       )}
                     </td>
                   ))}
-                  <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
+                  <td
+                    className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+                    data-cy="subtotal"
+                  >
                     <Dollars>{totals.epAmt.byYear[year]}</Dollars>
                   </td>
                 </Fragment>
@@ -191,7 +208,10 @@ const IncentivePayments = ({
                       )}
                     </td>
                   ))}
-                  <td className="budget-table--number budget-table--col__highlight budget-table--subtotal">
+                  <td
+                    className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+                    data-cy="subtotal"
+                  >
                     {formatNum(totals.epCt.byYear[year])}
                   </td>
                 </Fragment>

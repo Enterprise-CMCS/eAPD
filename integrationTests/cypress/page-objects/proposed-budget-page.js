@@ -295,23 +295,19 @@ class ProposedBudgetPage {
   fillInEQIPFormByFFY = ({ years, expected }) => {
     _.forEach(years, (ffy, index) => {
       const ffyValues = expected[index];
-      _.forEach(ffyValues, (equipValues, type) => {
-        _.forEach(equipValues, (quarterValue, quarterIndex) => {
-          if (quarterIndex === equipValues.length - 1) {
-            this.getEQIPByFFYAndIncentiveTypeAndQuarter({
-              ffy,
-              type,
-              quarterIndex
-            }).shouldBeCloseTo(quarterValue);
-          } else {
-            this.getEQIPByFFYAndIncentiveTypeAndQuarter({
-              ffy,
-              type,
-              quarterIndex
-            })
-              .find('input')
-              .type(quarterValue);
-          }
+      this.getEQIPByFFY({ ffy }).within(() => {
+        _.forEach(ffyValues, (equipValues, type) => {
+          cy.contains(type)
+            .parent()
+            .within(row => {
+              _.forEach(equipValues, (quarterValue, quarterIndex) => {
+                if (quarterIndex === equipValues.length - 1) {
+                  cy.get('[data-cy="subtotal"]').shouldBeCloseTo(quarterValue);
+                } else {
+                  cy.get(row).find('input').eq(quarterIndex).type(quarterValue);
+                }
+              });
+            });
         });
       });
     });
