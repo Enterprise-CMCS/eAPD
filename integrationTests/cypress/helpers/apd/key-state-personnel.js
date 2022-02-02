@@ -161,11 +161,8 @@ export const testKeyStatePersonnelWithData = years => {
         cy.contains(`FFY ${year} Cost`).should('not.exist');
       });
 
-      cy.get('input[type="radio"][value="yes"]').check({ force: true });
+      cy.get('input[type="radio"][value="no"]').check({ force: true });
 
-      years.forEach(year => {
-        cy.contains(`FFY ${year} Cost`).should('exist');
-      });
       cy.findByRole('button', { name: /Done/i }).click();
 
       cy.get('.form-and-review-list')
@@ -175,7 +172,13 @@ export const testKeyStatePersonnelWithData = years => {
       cy.get('.form-and-review-list')
         .findAllByRole('button', { name: /Edit/i }).eq(1).click();
 
-      cy.get('input[type="radio"][value="no"]').check({ force: true });
+      cy.get('input[type="radio"][value="yes"]')
+        .scrollIntoView()
+        .check({ force: true });
+
+      years.forEach(year => {
+        cy.contains(`FFY ${year} Cost`).should('exist');
+      });
 
       cy.findByRole('button', { name: /Done/i }).click();
 
@@ -240,7 +243,7 @@ export const testKeyStatePersonnelWithData = years => {
         );
 
       // Create string to check for personnel who is chargeable for the project for certain years.
-      let str = `2. ${userData[2].name}${userData[2].username}Email: ${userData[2].email}Total cost: $0`;
+      let str = `2. ${userData[2].name}${userData[2].username}Email: ${userData[2].email}`;
       str += years
         .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
         .join('');
