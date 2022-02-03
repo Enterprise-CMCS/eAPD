@@ -75,70 +75,84 @@ export const testKeyStatePersonnelWithData = years => {
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
 
     cy.fixture('users').then(userData => {
+      const firstUser = userData[0];
+      const secondUser = userData[1];
+      const thirdUser = userData[2];
+
       cy.get('input[name="apd-state-profile-mdname"]')
         .clear()
-        .type(userData[0].name);
+        .type(firstUser.name);
 
       cy.get('input[name="apd-state-profile-mdemail"]')
         .clear()
-        .type(userData[0].email);
+        .type(firstUser.email)
 
       cy.get('input[name="apd-state-profile-mdphone"]')
         .clear()
-        .type(userData[0].phone);
+        .type(firstUser.phone)
 
       cy.get('input[name="apd-state-profile-addr1"]')
         .clear()
-        .type(userData[0].address.street);
+        .type(firstUser.address.street)
 
       cy.get('input[name="apd-state-profile-addr2"]')
         .clear()
-        .type(userData[0].address.suite);
+        .type(firstUser.address.suite)
 
       cy.get('input[name="apd-state-profile-city"]')
         .clear()
-        .type(userData[0].address.city);
+        .type(firstUser.address.city)
+
+      cy.get('select[id="apd-state-profile-state"]')
+        .invoke('val', 'AL')
+        .trigger('change');
 
       cy.get('input[name="apd-state-profile-zip"]')
         .clear()
-        .type(userData[0].address.zipcode);
-
-      cy.get('select[name="apd-state-profile-state"]')
-        .invoke('val', 'AL')
-        .trigger('change');
+        .type(firstUser.address.zipcode)
 
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
 
       cy.get('input[name="apd-state-profile-pocname0"]')
         .clear()
-        .type(userData[1].name);
+        .type(secondUser.name);
 
       cy.get('input[name="apd-state-profile-pocemail0"]')
         .clear()
-        .type(userData[1].email);
+        .type(secondUser.email);
 
       cy.get('input[name="apd-state-profile-pocposition0"]')
         .clear()
-        .type(userData[1].username);
+        .type(secondUser.username);
 
       cy.findByRole('button', { name: /Done/i }).click();
 
-      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-
       cy.get('.ds-c-review__heading')
         .contains('1.')
-        .should('have.text', `1. ${userData[1].name}`);
+        .should('have.text', `1. ${secondUser.name}`);
+  
       cy.get('.ds-c-review__heading')
         .contains('1.')
         .next()
         .find('li')
         .should($lis => {
           expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
-          expect($lis.eq(1)).to.contain(userData[1].username);
+          expect($lis.eq(1)).to.contain(secondUser.username);
         });
-      cy.findByRole('button', { name: /Done/i }).click();
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+
+      cy.get('input[name="apd-state-profile-pocname1"]')
+          .clear()
+          .type(thirdUser.name);
+
+        cy.get('input[name="apd-state-profile-pocemail1"]')
+          .clear()
+          .type(thirdUser.email);
+
+        cy.get('input[name="apd-state-profile-pocposition1"]')
+          .clear()
+          .type(thirdUser.username);
 
       // Toggle to see if the FFY cost prompts appear/disappear
       cy.get('input[type="radio"][value="no"]').check({ force: true });
@@ -147,49 +161,36 @@ export const testKeyStatePersonnelWithData = years => {
         cy.contains(`FFY ${year} Cost`).should('not.exist');
       });
 
-      cy.get('input[type="radio"][value="yes"]').check({ force: true });
+      cy.get('input[type="radio"][value="no"]').check({ force: true });
+
+      cy.findByRole('button', { name: /Done/i }).click();
+
+      cy.get('.form-and-review-list')
+        .findAllByRole('button', { name: /Edit/i })
+        .should('have.length', 2);
+
+      cy.get('.form-and-review-list')
+        .findAllByRole('button', { name: /Edit/i }).eq(1).click();
+
+      cy.get('input[type="radio"][value="yes"]')
+        .scrollIntoView()
+        .check({ force: true });
 
       years.forEach(year => {
         cy.contains(`FFY ${year} Cost`).should('exist');
       });
-      cy.findByRole('button', { name: /Done/i }).click();
-    });
-
-    cy.findAllByRole('button', { name: /Delete/i })
-      .eq(0)
-      .click();
-    cy.get('.ds-c-button--danger').click();
-    cy.get('.form-and-review-list')
-      .findAllByRole('button', { name: /Edit/i })
-      .should('have.length', 2);
-
-    cy.get('.form-and-review-list')
-      .findAllByRole('button', { name: /Edit/i }).eq(1).click();
-
-    cy.fixture('users').then(userData => {
-      cy.get('input[name="apd-state-profile-pocname1"]')
-        .clear()
-        .type(userData[2].name);
-
-      cy.get('input[name="apd-state-profile-pocemail1"]')
-        .clear()
-        .type(userData[2].email);
-
-      cy.get('input[name="apd-state-profile-pocposition1"]')
-        .clear()
-        .type(userData[2].username);
 
       cy.findByRole('button', { name: /Done/i }).click();
 
       cy.get('.ds-c-review__heading')
         .contains('2.')
-        .should('have.text', `2. ${userData[2].name}`);
+        .should('have.text', `2. ${thirdUser.name}`);
       cy.get('.ds-c-review__heading')
         .contains('2.')
         .next()
         .find('li')
         .should($lis => {
-          expect($lis.eq(0)).to.contain(userData[2].username);
+          expect($lis.eq(0)).to.contain(thirdUser.username);
         });
 
       cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting

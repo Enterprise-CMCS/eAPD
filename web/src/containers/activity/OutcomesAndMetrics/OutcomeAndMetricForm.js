@@ -45,8 +45,12 @@ const OutcomeAndMetricForm = ({
         multiline
         rows="4"
         onChange={changeOutcome}
-        onBlur={validateText}
-        onKeyUp={validateText}
+        onBlur={(e) => {
+          validateText(e, 'name', '.');
+        }}
+        onKeyUp={(e) => {
+          validateText(e, 'name', '.');
+        }}
       />
 
       {metrics.map(({ key, metric }, i) => (
@@ -71,8 +75,12 @@ const OutcomeAndMetricForm = ({
               multiline
               rows="4"
               onChange={changeMetric(i)}
-              onBlur={validateText}
-              onKeyUp={validateText}
+              onBlur={(e) => {
+                validateText(e, 'metric', '.');
+              }}
+              onKeyUp={(e) => {
+                validateText(e, 'metric', '.');
+              }}
             />
           </div>
         </Review>
