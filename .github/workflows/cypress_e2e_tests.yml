@@ -59,6 +59,7 @@ jobs:
         with:
           config-file: ./integrationTests/cypress.json
           wait-on: 'http://localhost:8080'
+          install: false
           headless: true
           record: true
           parallel: true
