@@ -37,8 +37,8 @@ jobs:
         run: |
           docker login -u $DOCKER_EAPD_UN -p $DOCKER_EAPD_PW
           docker-compose up -d
-          docker-compose exec -T api npm run migrate
-          docker-compose exec -T api npm run seed
+          docker-compose exec api npm run migrate
+          docker-compose exec api npm run seed
       - name: Cypress setup
         working-directory: ./integrationTests
         env:
