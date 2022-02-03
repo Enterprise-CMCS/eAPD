@@ -27,15 +27,15 @@ export const disableBtn = (e) => {
         }
 };
 
-export const addMissingTextAlert = (e, p, n) => {
+export const addMissingTextAlert = (e, p, l, s) => {
   const lastDiv = p.lastChild;
   const div = document.createElement('div');
   const vowels = ("aeiouAEIOU");
 
-  if (vowels.indexOf(n[0]) !== -1) {
-    div.innerHTML = `Provide an ${n}`;
+  if (vowels.indexOf(l[0]) !== -1) {
+    div.innerHTML = `Provide an ${l}${s}`;
   } else {
-    div.innerHTML = `Provide a ${n}`;
+    div.innerHTML = `Provide a ${l}${s}`;
   }
 
   if (!lastDiv.classList.contains(error)) {
@@ -59,12 +59,12 @@ export const removeMissingTextAlert = (e, p) => {
   disableBtn(e);
 };
 
-export const validateText = (e) => {
+export const validateText = (e, label, suffix) => {
   const el = e.currentTarget;
-  const elName = el.name;
   const parent = el.parentNode;
   const text = el.innerHTML.trim();
   const elValue = el.value;
 
-  return text || elValue !== '' ? removeMissingTextAlert(el, parent) : addMissingTextAlert(el, parent, elName) ;
+  return text || elValue !== '' ? removeMissingTextAlert(el, parent) : addMissingTextAlert(el, parent, label, suffix) ;
+
 };
