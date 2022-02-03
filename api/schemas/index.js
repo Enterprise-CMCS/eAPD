@@ -1,5 +1,5 @@
 /* eslint-disable import/no-dynamic-require, global-require */
-const Ajv = require("ajv").default({ allErrors: true });
+const Ajv = require("ajv").default;
 
 // all schemas, except the base apd document schema
 const schemas = [
