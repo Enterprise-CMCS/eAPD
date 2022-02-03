@@ -22,13 +22,16 @@ const NonPersonnelCosts = ({
   expenses,
   removeExpense
 }) => {
-  const handleDelete = useCallback(index => {
-    removeExpense(activityIndex, index);
-  });
+  const handleDelete = useCallback(
+    index => {
+      removeExpense(activityIndex, index);
+    },
+    [activityIndex, removeExpense]
+  );
 
   const handleAdd = useCallback(() => {
     addExpense(activityIndex);
-  });
+  }, [activityIndex, addExpense]);
 
   return (
     <Fragment>

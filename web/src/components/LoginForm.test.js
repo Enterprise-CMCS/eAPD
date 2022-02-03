@@ -8,12 +8,11 @@ import {
 
 import LoginForm from './LoginForm';
 
-let mockGoBack;
+const mockGoBack = jest.fn();
 
 jest.mock('react-router-dom', () => {
-  mockGoBack = jest.fn();
   return {
-    useHistory: jest.fn().mockReturnValue({ goBack: mockGoBack })
+    useHistory: jest.fn().mockReturnValue({ goBack: () => mockGoBack() })
   };
 });
 

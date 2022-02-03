@@ -98,7 +98,7 @@ The system is composed of three primary parts: a PostgreSQL database, a backend 
 
 The backend API application uses these primary software libraries and frameworks:
 
-- Node.js 14.16, or higher 14.x version
+- Node.js 16.13, or higher 16.x version
 - Express web application server
 - Knex.js database query builder and migration management
 - Passport authentication middleware

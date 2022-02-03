@@ -32,6 +32,7 @@ const fullStateSchema = {
   properties: {
     id,
     name,
+    // eslint-disable-next-line camelcase
     medicaid_office
   }
 };

@@ -12,13 +12,19 @@ import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import { stateDateToDisplay } from '../../util';
 
 const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
-  const handleActivityStartChange = useCallback((_, dateStr) => {
-    setStartDate(activityIndex, dateStr);
-  });
+  const handleActivityStartChange = useCallback(
+    (_, dateStr) => {
+      setStartDate(activityIndex, dateStr);
+    },
+    [activityIndex, setStartDate]
+  );
 
-  const handleActivityEndChange = useCallback((_, dateStr) => {
-    setEndDate(activityIndex, dateStr);
-  });
+  const handleActivityEndChange = useCallback(
+    (_, dateStr) => {
+      setEndDate(activityIndex, dateStr);
+    },
+    [activityIndex, setEndDate]
+  );
 
   return (
     <Subsection resource="activities.schedule">

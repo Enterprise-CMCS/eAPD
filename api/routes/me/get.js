@@ -23,7 +23,7 @@ module.exports = (
     try {
       const jwt = extractor(req);
       const claims = jwt ? await verifyWebToken(jwt, { verifier }) : false;
-      if (!claims) return res.status(401).end();      
+      if (!claims) return res.status(401).end();
       await updateFromOkta(claims.id);
       const newClaims = await checkExpired(claims);
       return res.send(newClaims);
