@@ -247,7 +247,7 @@ jobs:
   # because "npm ci" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -288,7 +288,7 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -310,7 +310,7 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -380,7 +380,7 @@ jobs:
   # Lints the backend code.
   backend lint:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -434,7 +434,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -454,7 +454,7 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -470,7 +470,7 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -498,7 +498,7 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -729,7 +729,7 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.9.1
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW

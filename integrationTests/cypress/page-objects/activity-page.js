@@ -1,4 +1,5 @@
 import BudgetPage from './budget-page';
+import { addCommas, getDateRange } from './helper';
 
 class ActivityPage {
   budgetPage = new BudgetPage();
@@ -19,8 +20,7 @@ class ActivityPage {
   };
 
   checkError = (className, expectedLength) => {
-    cy.get(`[class="${className}]`)
-      .should('have.length', expectedLength)
+    cy.get(`[class="${className}]`).should('have.length', expectedLength);
   };
 
   checkInputField = (name, expectedValue) => {
@@ -56,12 +56,11 @@ class ActivityPage {
     cy.contains(check).should('not.exist');
   };
 
-  checkOutcomeOutput = (outcome, metric1, metric2) => {
+  checkOutcomeOutput = ({ outcome, metrics }) => {
     cy.contains(outcome).should('exist');
-    cy.contains(metric1).should('exist');
-    if (metric2 != null) {
-      cy.contains(metric2).should('exist');
-    }
+    metrics.forEach(metric => {
+      cy.contains(metric).should('exist');
+    });
   };
 
   checkMetricFunctionality = () => {
@@ -99,80 +98,79 @@ class ActivityPage {
     cy.findByRole('button', { name: /Done/i }).click();
   };
 
-  checkMilestoneOutput = (name, dateRange) => {
-    cy.contains(name).should('exist');
-    cy.contains(dateRange).should('exist');
+  checkMilestoneOutput = ({ milestone, targetDate }) => {
+    cy.contains(milestone).should('exist');
+    cy.contains(targetDate).should('exist');
   };
 
-  checkStateStaffFFY = (years, expectedValue) => {
-    years.forEach(year => {
+  checkStateStaffFFY = ({ years, expectedValue }) => {
+    years.forEach((year, index) => {
       cy.contains(`FFY ${year} Cost`)
         .next('div')
         .within(() => {
-          cy.findByLabelText('Cost with benefits').should(
-            'have.value',
-            expectedValue
-          );
-          cy.findByLabelText('Number of FTEs').should(
-            'have.value',
-            expectedValue
-          );
-          cy.contains('Total: $0').should('exist');
+          const { cost, fte, total } = expectedValue[index];
+          cy.findByLabelText('Cost with benefits').should('have.value', cost);
+          cy.findByLabelText('Number of FTEs').should('have.value', fte);
+          cy.contains(`Total: $${total}`).should('exist');
         });
     });
   };
 
-  checkStateStaffOutput = (name, years, cost, numFTEs) => {
+  checkStateStaffOutput = ({ name, years, cost, fte }) => {
     cy.contains(name).should('exist');
 
     years.forEach(year => {
       cy.contains(`FFY ${year}`)
         .parent()
         .within(() => {
-          cy.contains(`Cost: $${cost}`).should('exist');
-          cy.contains(`FTEs: ${numFTEs}`).should('exist');
-          cy.contains(`Total: $${cost * numFTEs}`);
+          cy.contains(`Cost: $${addCommas(cost)}`).should('exist');
+          cy.contains(`FTEs: ${fte}`).should('exist');
+          cy.contains(`Total: $${addCommas(cost * fte)}`);
         });
     });
   };
 
-  checkFFYinputCostFields = (years, expectedValue) => {
-    years.forEach(year => {
+  checkFFYinputCostFields = ({ years, FFYcosts }) => {
+    years.forEach((year, index) => {
       cy.findByLabelText(`FFY ${year} Cost`).should(
         'have.value',
-        expectedValue
+        FFYcosts[index]
       );
     });
   };
 
-  checkFFYcosts = (years, expectedValues) => {
+  checkFFYcosts = ({ years, FFYcosts }) => {
     cy.then(() => {
       years.forEach((year, i) => {
-        const convert = this.budgetPage.addCommas(expectedValues[i]);
+        const convert = addCommas(FFYcosts[i]);
         cy.contains(`FFY ${year} Cost: $${convert}`).should('exist');
       });
     });
   };
 
-  checkOtherStateExpensesOutput = (category, years, expectedValue) => {
+  checkOtherStateExpensesOutput = ({ category, years, FFYcosts }) => {
     cy.contains(category).should('exist');
-    this.checkFFYcosts(years, expectedValue);
+    this.checkFFYcosts({ years, FFYcosts });
   };
 
-  checkPrivateContractorOutput = (
+  checkPrivateContractorOutput = ({
     name,
     description,
-    dateRange,
-    totalCost,
+    start,
+    end,
+    totalCosts,
     years,
-    expectedValue
-  ) => {
-    const convert = this.budgetPage.addCommas(totalCost);
+    FFYcosts
+  }) => {
+    const dateRange = getDateRange(start, end);
+
     cy.contains(name).should('exist');
     cy.contains(description).should('exist');
-    cy.contains(dateRange).should('exist');
-    cy.contains(`${convert}`).should('exist');
-    this.checkFFYcosts(years, expectedValue);
+    cy.contains(`Full Contract Term: ${dateRange}`).should('exist');
+    cy.contains(`Total Contract Cost: $${addCommas(totalCosts)}`).should(
+      'exist'
+    );
+    this.checkFFYcosts({ years, FFYcosts });
   };
 }
 

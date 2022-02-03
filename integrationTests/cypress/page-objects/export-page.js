@@ -1,9 +1,5 @@
 /* eslint class-methods-use-this: "off" */
-
-// Extract just the numbers from an input string
-const extractNumber = str => {
-  return parseInt(str.replace(/\D/g, ''), 10);
-};
+import { extractNumber, addCommas, getDateRange } from './helper';
 
 class ExportPage {
   // Get the years referenced by previous activities
@@ -216,14 +212,14 @@ class ExportPage {
       .should('exist');
   };
 
-  checkExecutiveSummary = (
+  checkExecutiveSummary = ({
     activities,
     years,
     dateRange,
     totalCost,
     medicaidCost,
     federalShare
-  ) => {
+  }) => {
     for (let i = 0; i < activities.length; i += 1) {
       cy.contains(`Activity ${i + 1}: ${activities[i][0]}`)
         .parent()
@@ -256,130 +252,287 @@ class ExportPage {
       });
   };
 
-  checkActivityOverview = (
-    desc,
-    start,
-    end,
-    detailedDesc,
+  checkActivityOverview = ({
+    activityHeader,
+    shortOverview,
+    startDate,
+    endDate,
+    detailedDescription,
     supportingJustifications,
-    supports,
-    doesNotSupport
-  ) => {
-    cy.findByText(/Provide a short overview of the activity/i)
-      .next()
-      .should('have.text', desc);
-    cy.contains('Start date').parent().should('contain', start);
-    cy.contains('End date').parent().should('contain', end);
-
-    cy.contains('Activity Overview').next().should('have.text', detailedDesc);
-    cy.contains('Supporting Justification')
-      .next()
-      .should('have.text', supportingJustifications);
-
-    cy.contains('This activity supports')
+    supportsMedicaid,
+    doesNotSupportsMedicaid
+  } = {}) => {
+    cy.findByRole('heading', {
+      level: 2,
+      name: activityHeader
+    })
       .parent()
-      .next()
-      .should('contain', supports);
-    cy.contains('This activity does not support')
+      .within(() => {
+        cy.findByText(/Provide a short overview of the activity/i)
+          .next()
+          .should('have.text', shortOverview);
+        cy.contains('Start date').parent().should('contain', startDate);
+        cy.contains('End date').parent().should('contain', endDate);
+
+        cy.contains('Activity Overview')
+          .next()
+          .should('have.text', detailedDescription);
+        cy.contains('Supporting Justification')
+          .next()
+          .should('have.text', supportingJustifications);
+
+        cy.contains('This activity supports')
+          .parent()
+          .next()
+          .should('contain', supportsMedicaid);
+        cy.contains('This activity does not support')
+          .parent()
+          .next()
+          .should('contain', doesNotSupportsMedicaid);
+      });
+  };
+
+  checkOutcomes = ({ activityHeader, outcome, metrics } = {}) => {
+    cy.findByRole('heading', {
+      level: 2,
+      name: activityHeader
+    })
       .parent()
-      .next()
-      .should('contain', doesNotSupport);
+      .within(() => {
+        if (!outcome) {
+          cy.contains('Outcomes and Metrics')
+            .next()
+            .next()
+            .should('contain', 'Milestones');
+        } else {
+          cy.contains(outcome)
+            .should('exist')
+            .next()
+            .within(() => {
+              metrics.forEach((metric, index) => {
+                cy.contains(`${index + 1}. ${metric}`).should('exist');
+              });
+            });
+        }
+      });
   };
 
-  checkOutcomesAndMilestones = (
-    emptyOrFilled,
-    outcomeName,
-    metricName,
-    milestoneName,
-    dateRange
-  ) => {
-    if (emptyOrFilled === 'empty') {
-      cy.contains('Outcomes and Metrics')
-        .next()
-        .next()
-        .should('contain', 'Milestones');
-    } else {
-      cy.contains('Outcomes and Metrics')
-        .next()
-        .should('contain', outcomeName)
-        .next()
-        .should('contain', metricName);
-
-      cy.contains('Milestones')
-        .next()
-        .should('contain', milestoneName)
-        .next()
-        .should(dateRange);
-    }
+  checkMilestones = ({
+    activityHeader,
+    milestone,
+    milestoneCompletionDate
+  } = {}) => {
+    cy.findByRole('heading', {
+      level: 2,
+      name: activityHeader
+    })
+      .parent()
+      .within(() => {
+        if (!milestone) {
+          cy.contains('Outcomes and Metrics')
+            .next()
+            .next()
+            .should('contain', 'Milestones')
+            .next()
+            .should('contain', 'State staff');
+        } else {
+          cy.contains(milestone)
+            .should('exist')
+            .parent()
+            .next()
+            .should('contain', milestoneCompletionDate);
+        }
+      });
   };
 
-  checkStateExpenses = emptyOrFilled => {
-    if (emptyOrFilled === 'empty') {
-      cy.contains('State staff')
-        .next()
-        .should('contain', 'Other state expenses');
-      cy.contains('Other state expenses');
-      // This is no longer the next element
-      //   .next()
-      //   .should('contain', 'Private Contractor Costs');
-    }
+  checkStateStaff = ({ activityHeader, staff, years } = {}) => {
+    cy.findByRole('heading', {
+      level: 2,
+      name: activityHeader
+    })
+      .parent()
+      .within(() => {
+        if (!staff) {
+          cy.contains(/State staff/i)
+            .next()
+            .should('contain', 'Other state expenses');
+        } else {
+          staff.forEach(({ title, description, costs, ftes }, index) => {
+            cy.contains(`${index + 1}. ${title}`)
+              .should('exist')
+              .parent()
+              .next()
+              .should('contain', description)
+              .next()
+              .within(() => {
+                years.forEach((year, i) => {
+                  cy.contains(
+                    `FFY ${year} Cost: $${addCommas(costs[i])} | FTEs: ${
+                      ftes[i]
+                    } | Total: $${addCommas(costs[i] * ftes[i])}`
+                  ).should('exist');
+                });
+              });
+          });
+        }
+      });
   };
 
-  checkPrivateContractorCosts = (
-    emptyOrFilled,
-    name,
-    desc,
-    dateRange,
-    totalCost
-  ) => {
-    if (emptyOrFilled === 'empty') {
-      cy.contains('Private Contractor Costs')
-        .next()
-        .should('contain', 'Cost Allocation');
-    } else {
-      cy.contains('Private Contractor Costs')
-        .next()
-        .should('contain', name)
-        .next()
-        .next()
-        .should('contain', desc)
-        .next()
-        .within(() => {
-          cy.contains(dateRange).should('exist');
-          cy.contains(totalCost).should('exist');
-          // still need to get individual year costs
+  checkStateExpenses = ({ activityHeader, expenses, years } = {}) => {
+    cy.findByRole('heading', {
+      level: 2,
+      name: activityHeader
+    })
+      .parent()
+      .within(() => {
+        if (!expenses) {
+          cy.contains('Other state expenses')
+            .next()
+            .should('contain', 'Private Contractor Costs');
+        } else {
+          expenses.forEach(({ category, description, costs }, index) => {
+            cy.contains(`${index + 1}. ${category}`)
+              .should('exist')
+              .parent()
+              .next()
+              .should('have.text', description)
+              .next()
+              .within(() => {
+                years.forEach((year, i) => {
+                  cy.contains(
+                    `FFY ${year} Cost: $${addCommas(costs[i])}`
+                  ).should('exist');
+                });
+              });
+          });
+        }
+      });
+  };
+
+  checkPrivateContractorCosts = ({ activityHeader, contractors, years }) => {
+    cy.findByRole('heading', {
+      level: 2,
+      name: activityHeader
+    })
+      .parent()
+      .within(() => {
+        if (!contractors) {
+          cy.contains('Private Contractor Costs')
+            .next()
+            .should('contain', 'Cost Allocation');
+        } else {
+          contractors.forEach(
+            (
+              { name, description, start, end, totalCosts, FFYcosts },
+              index
+            ) => {
+              cy.contains(`${index + 1}. ${name}`)
+                .should('exist')
+                .parent()
+                .next()
+                .next()
+                .should('have.text', description)
+                .next()
+                .within(() => {
+                  const dateRange = getDateRange(start, end);
+
+                  cy.contains('Full Contract Term:')
+                    .parent()
+                    .should('contain', dateRange);
+                  cy.contains('Total Contract Cost:')
+                    .next()
+                    .should('contain', addCommas(totalCosts));
+                  years.forEach((year, i) => {
+                    if (Array.isArray(FFYcosts[i])) {
+                      cy.contains(
+                        `FFY ${year} Cost: $${addCommas(
+                          addCommas(FFYcosts[i][0] * FFYcosts[i][1])
+                        )}`
+                      )
+                        .should('exist')
+                        .should('contain', `Number of hours: ${FFYcosts[i][0]}`)
+                        .should('contain', `Hourly rate: $${FFYcosts[i][1]}`);
+                    } else {
+                      cy.contains(
+                        `FFY ${year} Cost: $${addCommas(FFYcosts[i])}`
+                      ).should('exist');
+                    }
+                  });
+                });
+            }
+          );
+        }
+      });
+  };
+
+  checkCostAllocationAndOtherFunding = ({
+    activityHeader,
+    years,
+    description,
+    FFYdescriptions,
+    costs
+  }) => {
+    cy.findByRole('heading', {
+      level: 2,
+      name: activityHeader
+    })
+      .parent()
+      .within(() => {
+        cy.contains('Description of Cost Allocation Methodology')
+          .next()
+          .should('have.text', description);
+
+        years.forEach((year, i) => {
+          cy.contains('h3', `FFY ${year}`)
+            .next()
+            .should('contain', 'Other Funding Description')
+            .next()
+            .should('have.text', FFYdescriptions[i])
+            .next()
+            .should('contain', `Other Funding Amount: $${addCommas(costs[i])}`);
         });
-    }
+      });
   };
 
-  checkCostAllocation = desc => {
-    cy.contains('Description of Cost Allocation Methodology')
-      .next()
-      .should('have.text', desc);
-  };
-
-  checkOtherFunding = (year, expectedText, expectedValue) => {
-    cy.contains('h3', `FFY ${year}`)
-      .next()
-      .should('contain', 'Other Funding Description')
-      .next()
-      .should('have.text', expectedText);
-
-    cy.contains('h3', `FFY ${year}`)
-      .next()
-      .next()
-      .next()
-      .should('contain', `$${expectedValue}`);
-  };
-
-  checkRowTotals = (otherFundingValue, medicaidValue) => {
-    cy.contains('td', 'Other Funding')
+  checkRowTotals = ({
+    activityTotalCosts,
+    otherFunding,
+    totalComputableMedicaidCost,
+    federalSharePercentage,
+    federalShareAmount,
+    stateSharePercentage,
+    stateShareAmount
+  }) => {
+    cy.contains('Activity Total Cost')
       .parent()
-      .should('contain', `$${otherFundingValue}`);
-
-    cy.contains('td', 'Total Computable Medicaid Cost')
-      .parent()
-      .should('contain', `$${medicaidValue}`);
+      .should('contain', `$${addCommas(activityTotalCosts)}`)
+      .next()
+      .should('have.text', `Other Funding-$${addCommas(otherFunding)}`)
+      .next()
+      .should(
+        'have.text',
+        `Total Computable Medicaid Cost$${addCommas(
+          totalComputableMedicaidCost
+        )}`
+      )
+      .next()
+      .children($cells => {
+        cy.wrap($cells.eq(0)).should('contain', 'Federal Share');
+        cy.wrap($cells.eq(1)).shouldBeCloseTo(totalComputableMedicaidCost);
+        // cell 2 is X
+        cy.wrap($cells.eq(3)).should('have.text', `${federalSharePercentage}%`);
+        // cell 4 is =
+        cy.wrap($cells.eq(5)).shouldBeCloseTo(federalShareAmount);
+      })
+      .next()
+      .children($cells => {
+        cy.wrap($cells.eq(0)).should('contain', 'State Share');
+        cy.wrap($cells.eq(1)).shouldBeCloseTo(totalComputableMedicaidCost);
+        // cell 2 is X
+        cy.wrap($cells.eq(3)).should('have.text', `${stateSharePercentage}%`);
+        // cell 4 is =
+        cy.wrap($cells.eq(5)).shouldBeCloseTo(stateShareAmount);
+      });
   };
 
   checkActivityNameAtEnd = (name = 'Untitled') => {
@@ -500,6 +653,116 @@ class ExportPage {
       .parent()
       .next()
       .invoke('text');
+  };
+
+  checkExecutiveSummaryTotalCostSummary = ({
+    years,
+    totalCost,
+    totalTotalMedicaidCost,
+    totalFederalShare,
+    ffys
+  }) => {
+    cy.findByRole('heading', { level: 2, name: /Executive Summary/i })
+      .parent()
+      .findByRole('heading', { name: /Total Cost of All Activities/i })
+      .next()
+      .within(() => {
+        cy.contains('Federal Fiscal Years requested:')
+          .parent()
+          .should('contain', years.join(', '));
+        cy.contains('Total Computable Medicaid Cost:')
+          .parent()
+          .siblings($el => {
+            cy.wrap($el[1]).shouldBeCloseTo(totalTotalMedicaidCost);
+            cy.wrap($el[3]).shouldBeCloseTo(totalFederalShare);
+          });
+        cy.contains('Total funding request:').next().shouldBeCloseTo(totalCost);
+        ffys.forEach(
+          (
+            {
+              activityTotalCosts,
+              totalComputableMedicaidCost,
+              federalShareAmount
+            },
+            i
+          ) => {
+            cy.contains('strong', `FFY ${years[i]}`)
+              .parent()
+              .siblings($el => {
+                cy.wrap($el[1]).shouldBeCloseTo(activityTotalCosts);
+                cy.wrap($el[4]).shouldBeCloseTo(totalComputableMedicaidCost);
+                cy.wrap($el[6]).shouldBeCloseTo(federalShareAmount);
+              });
+          }
+        );
+      });
+  };
+
+  checkExecutiveSummaryActivitySummary = ({
+    index,
+    years,
+    activityName,
+    shortOverview,
+    startDate,
+    endDate,
+    activityTotalCosts,
+    totalComputableMedicaidCost,
+    federalShareAmount,
+    ffys
+  }) => {
+    cy.findByRole('heading', { level: 2, name: /Executive Summary/i })
+      .parent()
+      .contains('h3', `Activity ${index + 1}: ${activityName}`)
+      .next()
+      .within(() => {
+        if (shortOverview) {
+          cy.contains(shortOverview);
+        }
+        cy.contains('Start date - End date:')
+          .parent()
+          .should('contain', getDateRange(startDate, endDate));
+        cy.contains('Total cost of activity:')
+          .next()
+          .shouldBeCloseTo(activityTotalCosts);
+        cy.contains('Total Computable Medicaid Cost:')
+          .parent()
+          .siblings($el => {
+            cy.wrap($el[1]).shouldBeCloseTo(totalComputableMedicaidCost);
+            cy.wrap($el[3]).shouldBeCloseTo(federalShareAmount);
+          });
+        ffys.forEach(
+          (
+            {
+              activityTotalCosts: ffyATC,
+              totalComputableMedicaidCost: ffyTCMC,
+              federalShareAmount: ffyFSA
+            },
+            i
+          ) => {
+            cy.contains('strong', `FFY ${years[i]}`)
+              .parent()
+              .siblings($el => {
+                cy.wrap($el[1]).shouldBeCloseTo(ffyATC);
+                cy.wrap($el[4]).shouldBeCloseTo(ffyTCMC);
+                cy.wrap($el[6]).shouldBeCloseTo(ffyFSA);
+              });
+          }
+        );
+      });
+  };
+
+  getExecutiveSummaryProgramBudgetTableRow = ({ title, year }) => {
+    cy.findByRole('heading', { level: 2, name: /Executive Summary/i })
+      .parent()
+      .contains('table', title)
+      .as('table');
+    if (year) {
+      return cy.get('@table').contains(`FFY ${year}`).siblings();
+    }
+    return cy
+      .get('@table')
+      .contains(/^Total$/i)
+      .siblings();
   };
 }
 

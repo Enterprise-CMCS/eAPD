@@ -413,7 +413,7 @@ describe('APD reducer', () => {
               {
                 hourly: {
                   data: {
-                    1741: { hours: '', rate: '' },
+                    1741: { hours: 0, rate: 0 },
                     1742: { hours: 20, rate: 22 },
                     1743: { hours: 25, rate: 27 }
                   }
@@ -463,7 +463,7 @@ describe('APD reducer', () => {
             statePersonnel: [
               {
                 years: {
-                  1741: { amt: '', perc: '' },
+                  1741: { amt: 0, perc: 0 },
                   1742: 0,
                   1743: 0
                 }
@@ -890,8 +890,8 @@ describe('APD reducer', () => {
                   files: [],
                   hourly: {
                     data: {
-                      1403: { hours: '', rate: '' },
-                      1404: { hours: '', rate: '' }
+                      1403: { hours: 0, rate: 0 },
+                      1404: { hours: 0, rate: 0 }
                     },
                     useHourly: false
                   },
@@ -1052,8 +1052,8 @@ describe('APD reducer', () => {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   title: '',
                   years: {
-                    1403: { amt: '', perc: '' },
-                    1404: { amt: '', perc: '' }
+                    1403: { amt: 0, perc: 0 },
+                    1404: { amt: 0, perc: 0 }
                   }
                 }
               ]

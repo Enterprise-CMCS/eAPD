@@ -621,7 +621,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   'Not specified (APD Key Personnel)$0×0 FTE=$0'
                 )
                 .next()
-                .should('have.text', 'Personnel title not specified$0× FTE=$0')
+                .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
                 .next()
                 .next()
                 .next()
@@ -684,7 +684,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Personnel title not specified$0× FTE=$0');
+            .should('have.text', 'Personnel title not specified$0×0 FTE=$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -840,7 +840,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   'Not specified (APD Key Personnel)$0×0 FTE=$0'
                 )
                 .next()
-                .should('have.text', 'Personnel title not specified$0× FTE=$0')
+                .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
                 .next()
                 .next()
                 .next()
@@ -894,7 +894,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Personnel title not specified$0× FTE=$0');
+            .should('have.text', 'Personnel title not specified$0×0 FTE=$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({

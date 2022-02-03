@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Dollars from '../../../components/Dollars';
 
 import CostAllocateFFP from '../../activity/CostAllocateFFP';
-import { stateDateToDisplay } from '../../../util';
+import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../util';
 
 const isYear = value => !!value.match(/^[0-9]{4}$/);
 
@@ -91,15 +91,6 @@ const Activity = ({ activity, activityIndex }) => {
   };
 
   const buildContractor = (contractor, index) => {
-    const contractTerm = () => {
-      if (!contractor.start && !contractor.end) {
-        return 'Dates not specified';
-      }
-      const start = contractor.start === '' ? 'unspecified' : contractor.start;
-      const end = contractor.end === '' ? 'unspecified' : contractor.end;
-      return `${start} — ${end}`;
-    };
-
     return (
       <Fragment key={uuidv4()}>
         <p className="ds-u-margin-bottom--0">
@@ -122,7 +113,7 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           <li>
             <strong>Full Contract Term: </strong>
-            {contractTerm()}
+            {stateDateRangeToDisplay(contractor.start, contractor.end)}
           </li>
           <li>
             <strong>Total Contract Cost: </strong>
@@ -151,7 +142,7 @@ const Activity = ({ activity, activityIndex }) => {
     <div key={uuidv4()}>
       <hr className="section-rule" />
       <h2>
-        Activity {activityIndex + 1}: {activity.name || "Untitled"}
+        Activity {activityIndex + 1}: {activity.name || 'Untitled'}
       </h2>
       <strong>Provide a short overview of the activity:</strong>
       <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
@@ -169,7 +160,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1}: {activity.name || "Untitled"}
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
         Statement of Alternative Considerations and Supporting Justification
@@ -178,7 +169,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1}: {activity.name || "Untitled"}
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br /> Standards and Conditions
       </h3>
@@ -219,7 +210,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1}: {activity.name || "Untitled"}
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
         Outcomes and Metrics
@@ -234,7 +225,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1}: {activity.name || "Untitled"}
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
         State staff
@@ -245,7 +236,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1}: {activity.name || "Untitled"}
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
         Other state expenses
@@ -254,7 +245,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1}: {activity.name || "Untitled"}
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
         Private Contractor Costs
@@ -265,7 +256,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1}: {activity.name || "Untitled"}
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
         Cost Allocation
@@ -305,7 +296,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <h3 className="viewonly-activity-header">
         <small>
-          Activity {activityIndex + 1}: {activity.name || "Untitled"}
+          Activity {activityIndex + 1}: {activity.name || 'Untitled'}
         </small>
         <br />
         Budget and FFP

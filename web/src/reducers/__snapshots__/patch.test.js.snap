@@ -53,8 +53,8 @@ Array [
     "op": "add",
     "path": "/activities/0/contractorResources/0/hourly/data/2019",
     "value": Object {
-      "hours": "",
-      "rate": "",
+      "hours": 0,
+      "rate": 0,
     },
   },
   Object {
@@ -71,8 +71,8 @@ Array [
     "op": "add",
     "path": "/activities/0/statePersonnel/0/years/2019",
     "value": Object {
-      "amt": "",
-      "perc": "",
+      "amt": 0,
+      "perc": 0,
     },
   },
   Object {

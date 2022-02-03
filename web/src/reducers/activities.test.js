@@ -26,8 +26,8 @@ describe('activities reducer helpers', () => {
       hourly: {
         useHourly: false,
         data: {
-          1991: { hours: '', rate: '' },
-          1992: { hours: '', rate: '' }
+          1991: { hours: 0, rate: 0 },
+          1992: { hours: 0, rate: 0 }
         }
       }
     });
@@ -70,7 +70,7 @@ describe('activities reducer helpers', () => {
       key: '--- key ---',
       title: '',
       description: '',
-      years: { 8732: { amt: '', perc: '' }, bob: { amt: '', perc: '' } }
+      years: { 8732: { amt: 0, perc: 0 }, bob: { amt: 0, perc: 0 } }
     });
   });
 

@@ -66,7 +66,35 @@ tap.test('APD data initializer', async test => {
         }
       }
     ],
-    federalCitations: {},
+    federalCitations: {
+      procurement: [
+        { title: '42 CFR Part 495.348', checked: null, explanation: '' },
+        { title: 'SMM Section 11267', checked: null, explanation: '' },
+        { title: '45 CFR 95.613', checked: null, explanation: '' },
+        { title: '45 CFR 75.326', checked: null, explanation: '' }
+      ],
+      recordsAccess: [
+        { title: '42 CFR Part 495.350', checked: null, explanation: '' },
+        { title: '42 CFR Part 495.352', checked: null, explanation: '' },
+        { title: '42 CFR Part 495.346', checked: null, explanation: '' },
+        { title: '42 CFR 433.112(b)', checked: null, explanation: '' },
+        { title: '45 CFR Part 95.615', checked: null, explanation: '' },
+        { title: 'SMM Section 11267', checked: null, explanation: '' }
+      ],
+      softwareRights: [
+        { title: '42 CFR 495.360', checked: null, explanation: '' },
+        { title: '45 CFR 95.617', checked: null, explanation: '' },
+        { title: '42 CFR Part 431.300', checked: null, explanation: '' },
+        { title: '42 CFR Part 433.112', checked: null, explanation: '' }
+      ],
+      security: [
+        {
+          title: '45 CFR 164 Security and Privacy',
+          checked: null,
+          explanation: ''
+        }
+      ]
+    },
     incentivePayments: {
       ehAmt: {
         1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
