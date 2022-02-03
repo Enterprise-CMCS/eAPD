@@ -23,6 +23,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
+      - name: Login to Docker GitHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_EAPD_UN }}
+          password: ${{ secrets.DOCKER_EAPD_PW }}
       - name: Starting Dockerized eAPD App
         working-directory: ./
         env:
@@ -32,10 +37,7 @@ jobs:
           OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          DOCKER_EAPD_UN: ${{ secrets.DOCKER_EAPD_UN }}
-          DOCKER_EAPD_PW: ${{ secrets.DOCKER_EAPD_PW }}
         run: |
-          docker login -u $DOCKER_EAPD_UN -p $DOCKER_EAPD_PW
           docker-compose up -d
           docker-compose exec api npm run migrate
           docker-compose exec api npm run seed
