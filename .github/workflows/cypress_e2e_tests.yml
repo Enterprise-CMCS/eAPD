@@ -26,8 +26,8 @@ jobs:
       - name: Login to Docker GitHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_CYPRESS_UN }}
-          password: ${{ secrets.DOCKER_CYPRESS_PW }}
+          username: ${{ secrets.DOCKER_EAPD_UN }}
+          password: ${{ secrets.DOCKER_EAPD_PW }}
       - name: Starting Dockerized eAPD App
         working-directory: ./
         env:
@@ -39,8 +39,8 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
         run: |
           docker-compose up -d
-          docker-compose exec api npm run migrate
-          docker-compose exec api npm run seed
+          docker-compose exec -T api npm run migrate
+          docker-compose exec -T api npm run seed
       - name: Cypress setup
         working-directory: ./integrationTests
         env:
