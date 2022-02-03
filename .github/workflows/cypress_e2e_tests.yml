@@ -60,6 +60,7 @@ jobs:
           config-file: ./integrationTests/cypress.json
           wait-on: 'http://localhost:8080'
           install: false
+          command: npm run cypress:run
           headless: true
           record: true
           parallel: true
