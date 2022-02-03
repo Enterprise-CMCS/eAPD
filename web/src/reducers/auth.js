@@ -35,13 +35,14 @@ const initialState = {
   expiresAt: null
 };
 
+// eslint-disable-next-line default-param-last
 const auth = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_CHECK_REQUEST:
       return {
         ...state,
         initialCheck: true
-      }
+      };
     case LOGIN_REQUEST:
       return {
         ...state,

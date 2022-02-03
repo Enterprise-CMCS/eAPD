@@ -6,10 +6,9 @@ import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
 import tokens from '../../tokens.json';
-import {
-  API_COOKIE_NAME,
-  CONSENT_COOKIE_NAME
-} from '../../../web/src/cookie-constants';
+
+const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
+const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000

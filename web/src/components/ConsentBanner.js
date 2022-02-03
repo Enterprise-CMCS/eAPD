@@ -12,6 +12,7 @@ const ConsentBanner = ({ onAgree }) => {
       };
       if (
         process.env.API_URL &&
+        // eslint-disable-next-line prefer-regex-literals
         !process.env.API_URL.match(new RegExp(/localhost/i)) &&
         !process.env.API_URL.match('/api')
       ) {

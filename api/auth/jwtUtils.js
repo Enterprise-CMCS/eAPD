@@ -4,13 +4,15 @@ const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID } = require('../db');
 const { getStateById } = require('../db/states');
-const { 
+const {
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
   getExpiredUserAffiliations: actualGetExpiredUserAffiliations,
   getAffiliationsByState: actualGetAffiliationsByState
 } = require('../db/auth');
-const { updateAuthAffiliation: actualUpdateAuthAffiliation } = require('../db/affiliations');
+const {
+  updateAuthAffiliation: actualUpdateAuthAffiliation
+} = require('../db/affiliations');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -51,6 +53,7 @@ const jwtExtractor = req => {
 
   const { url } = req;
   const cookieStr = req.headers.cookie || req.get('Cookie');
+  // eslint-disable-next-line prefer-regex-literals
   const regex = new RegExp(
     /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)|(^\/auth\/certifications\/files\/.*)/i
   );
@@ -139,7 +142,7 @@ const changeState = async (
   } = {}
 ) => {
   const stateAffiliation = await getAffiliationsByState_(user.id, stateId);
-  
+
   if (isPast(stateAffiliation.expires_at)) {
     await updateAuthAffiliation_({
       affiliationId: stateAffiliation.id,
@@ -148,16 +151,16 @@ const changeState = async (
       changedBy: 'system',
       stateId: stateAffiliation.state_id,
       ffy: null
-    })
+    });
   }
-    
+
   // copy the user to prevent altering it
   const newUser = JSON.parse(JSON.stringify(user));
   newUser.state = await getStateById_(stateId);
-  newUser.state.id = stateId;  
+  newUser.state.id = stateId;
   const permissions = await getUserPermissionsForStates_(user.id);
   newUser.activities = permissions[stateId];
-  newUser.permissions = [{[stateId]: permissions[stateId]},]
+  newUser.permissions = [{ [stateId]: permissions[stateId] }];
   const affiliations = await getAffiliatedStates_(user.id);
   newUser.states = affiliations;
 
@@ -171,9 +174,9 @@ const verifyAndUpdateExpirations = async (
     getAffiliatedStates_ = actualGetUserAffiliatedStates,
     updateAuthAffiliation_ = actualUpdateAuthAffiliation
   } = {}
-) => { 
+) => {
   const expiredAffiliations = await getExpiredUserAffiliations_(claims.id);
-  
+
   const updatedAffiliations = expiredAffiliations.map(async affiliation => {
     await updateAuthAffiliation_({
       affiliationId: affiliation.id,
@@ -182,11 +185,11 @@ const verifyAndUpdateExpirations = async (
       changedBy: 'system',
       stateId: affiliation.state_id,
       ffy: null
-    })
+    });
   });
-  
+
   await Promise.all(updatedAffiliations);
-  
+
   // copy the token to prevent altering it
   const newClaims = JSON.parse(JSON.stringify(claims));
   const affiliations = await getAffiliatedStates_(claims.id);

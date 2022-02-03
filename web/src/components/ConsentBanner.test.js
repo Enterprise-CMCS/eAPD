@@ -1,15 +1,14 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 import { render, axe } from 'apd-testing-library';
 
 import ConsentBanner from './ConsentBanner';
 
 describe('Consent banner component', () => {
-  const onAgree = sinon.spy();
+  const onAgree = jest.fn();
 
   beforeEach(() => {
-    onAgree.resetHistory();
+    jest.resetAllMocks();
   });
 
   describe('when there is no cookie', () => {
@@ -34,7 +33,7 @@ describe('Consent banner component', () => {
       const component = shallow(<ConsentBanner onAgree={onAgree} />);
       component.find('Button').find({ variation: 'primary' }).simulate('click');
 
-      expect(onAgree.calledOnce).toEqual(true);
+      expect(onAgree).toHaveBeenCalledTimes(1);
     });
   });
 

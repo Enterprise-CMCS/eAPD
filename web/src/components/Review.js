@@ -29,7 +29,7 @@ const Review = ({
           onEditClick(...args);
         }
       },
-    [editHref]
+    [editHref, onEditClick]
   );
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);

@@ -9,12 +9,11 @@ import {
   mapDispatchToProps
 } from './EntryDetails';
 
-let mockPush;
+const mockPush = jest.fn();
 
 jest.mock('react-router-dom', () => {
-  mockPush = jest.fn();
   return {
-    useHistory: jest.fn().mockReturnValue({ push: mockPush }),
+    useHistory: jest.fn().mockReturnValue({ push: () => mockPush() }),
     useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' })
   };
 });
@@ -72,10 +71,7 @@ describe('the (Activity) EntryDetails component', () => {
     const component = shallow(<EntryDetails {...props} />);
     const review = component.find('Review').dive();
     // Second button is the delete button
-    review
-      .find('Button')
-      .at(1)
-      .simulate('click');
+    review.find('Button').at(1).simulate('click');
     // The remove function should not have fired.
     expect(props.remove).toHaveBeenCalledTimes(0);
   });

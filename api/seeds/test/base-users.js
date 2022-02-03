@@ -5,11 +5,9 @@ const { createUsersToAdd } = require('../shared/set-up-users');
 const { issueTokens } = require('../shared/issueTokens');
 
 exports.seed = async knex => {
-  const {
-    oktaAffiliations,
-    stateCertifications,
-    oktaUsers
-  } = await createUsersToAdd(knex, oktaClient);
+  const { oktaAffiliations, stateCertifications, oktaUsers } =
+    await createUsersToAdd(knex, oktaClient);
+  logger.info(`Affiliations ${JSON.stringify(oktaAffiliations)}`);
   await knex('auth_affiliations').insert(oktaAffiliations);
   logger.info('Completed adding affiliations');
   await knex('okta_users').insert(oktaUsers);
