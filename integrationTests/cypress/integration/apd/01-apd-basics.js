@@ -411,15 +411,12 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
       ];
 
-      const milestones = [
-        {
-          milestoneName: "Miles's Milestone",
-          dateMonth: 1,
-          dateDay: 2,
-          dateYear: 2023
-        }
-      ];
-
+      const milestones = [{
+        milestoneName: "Miles's Milestone",
+        dateMonth: 1,
+        dateDay: 2,
+        dateYear: 2023
+      }];
       cy.goToOutcomesAndMilestones(0);
 
       cy.wrap(outcomes).each((element, index) => {
@@ -471,7 +468,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       });
 
       cy.contains('Edit').click();
-
+  
       cy.get('[class="ds-c-review"]')
         .eq(1)
         .within(() => {
