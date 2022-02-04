@@ -10,7 +10,7 @@ fileignoreconfig:
   - filename: web/src/containers/activity/OutcomesAndMetrics/OutcomeAndMetricReview.js
     checksum: b7a1e0864e7a9b4350bb11a1f7da20c36bfff6f48a3cb6d60a6be503e09270a3
   - filename: .circleci/config.yml
-    checksum: 8b13c73839ca89e850dc659b5344eeefe2d6157f4b5a1a4cc450aa9c7e3f1177
+    checksum: afda519c52aaae28c6a6d0e8807aaf29134333d70e0ca20b55766cdcce3bc507
   - filename: .github/workflows/cypress_e2e_tests.yml
     checksum: d76d99893c2235d1eed36fe19ee02f484eff8665211cdd32fd1712c420fe3cce
 version: ''
