@@ -22,7 +22,6 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
         "$$typeof": Symbol(react.memo),
         "WrappedComponent": [Function],
         "compare": null,
-        "displayName": "Connect(OutcomeAndMetricForm)",
         "type": [Function],
       }
     }

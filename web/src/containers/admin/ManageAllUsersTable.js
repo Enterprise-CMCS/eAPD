@@ -19,41 +19,99 @@ const ManageAllUsersTable = ({
 }) => {
   const { id: currentUserId, activities: currentUserActivities } = currentUser;
 
-  
   const showActions = affiliation => {
     return (
       currentUserId !== affiliation.userId &&
       currentUserActivities.indexOf('edit-affiliations') !== -1
     );
   };
-  
+
+  /* eslint-disable react/no-unstable-nested-components */
   const AffiliationFirstRow = ({ primaryAffiliation, affiliation }) => {
     return (
-      <TableRow className={primaryAffiliation.affiliations.length > 1 ? "all-users-table--first-row-multi" : ""} key={affiliation.id}>
-        <TableCell component='th' style= {{ 'verticalAlign': 'top' }} rowSpan={primaryAffiliation.affiliations.length}>{primaryAffiliation.displayName}</TableCell>
-        <TableCell component='td' style= {{ 'verticalAlign': 'top' }} rowSpan={primaryAffiliation.affiliations.length}>{primaryAffiliation.email}</TableCell>
-        <TableCell component='td' style= {{ 'verticalAlign': 'top' }} rowSpan={primaryAffiliation.affiliations.length}>{primaryAffiliation.primaryPhone}</TableCell>
-        <TableCell className="all-users-table--state">{affiliation.stateId.toUpperCase()}</TableCell>
-        {tab === 'active' ? <TableCell className="all-users-table--role">{affiliation.role}</TableCell> : null}
-        {tab === 'inactive' ? <TableCell className="all-users-table--status">{affiliation.status}</TableCell> : null}
+      <TableRow
+        className={
+          primaryAffiliation.affiliations.length > 1
+            ? 'all-users-table--first-row-multi'
+            : ''
+        }
+        key={affiliation.id}
+      >
+        <TableCell
+          component="th"
+          style={{ verticalAlign: 'top' }}
+          rowSpan={primaryAffiliation.affiliations.length}
+        >
+          {primaryAffiliation.displayName}
+        </TableCell>
+        <TableCell
+          component="td"
+          style={{ verticalAlign: 'top' }}
+          rowSpan={primaryAffiliation.affiliations.length}
+        >
+          {primaryAffiliation.email}
+        </TableCell>
+        <TableCell
+          component="td"
+          style={{ verticalAlign: 'top' }}
+          rowSpan={primaryAffiliation.affiliations.length}
+        >
+          {primaryAffiliation.primaryPhone}
+        </TableCell>
+        <TableCell className="all-users-table--state">
+          {affiliation.stateId.toUpperCase()}
+        </TableCell>
+        {tab === 'active' ? (
+          <TableCell className="all-users-table--role">
+            {affiliation.role}
+          </TableCell>
+        ) : null}
+        {tab === 'inactive' ? (
+          <TableCell className="all-users-table--status">
+            {affiliation.status}
+          </TableCell>
+        ) : null}
         <TableCell className="all-users-table--actions">
-          <AffiliationActions primaryAffiliation={primaryAffiliation} affiliation={affiliation} />
+          <AffiliationActions
+            primaryAffiliation={primaryAffiliation}
+            affiliation={affiliation}
+          />
         </TableCell>
       </TableRow>
-    )
-  }
+    );
+  };
   const AffiliationRow = ({ primaryAffiliation, affiliation }) => {
     return (
-      <TableRow className={primaryAffiliation.affiliations.length > 1 ? "all-users-table--row-multi" : ""} key={affiliation.id}>
-        <TableCell className="all-users-table--state">{affiliation.stateId.toUpperCase()}</TableCell>
-        {tab === 'active' ? <TableCell className="all-users-table--role">{affiliation.role}</TableCell> : null}
-        {tab === 'inactive' ? <TableCell className="all-users-table--status">{affiliation.status}</TableCell> : null}
+      <TableRow
+        className={
+          primaryAffiliation.affiliations.length > 1
+            ? 'all-users-table--row-multi'
+            : ''
+        }
+        key={affiliation.id}
+      >
+        <TableCell className="all-users-table--state">
+          {affiliation.stateId.toUpperCase()}
+        </TableCell>
+        {tab === 'active' ? (
+          <TableCell className="all-users-table--role">
+            {affiliation.role}
+          </TableCell>
+        ) : null}
+        {tab === 'inactive' ? (
+          <TableCell className="all-users-table--status">
+            {affiliation.status}
+          </TableCell>
+        ) : null}
         <TableCell className="all-users-table--actions">
-          <AffiliationActions primaryAffiliation={primaryAffiliation} affiliation={affiliation} />
+          <AffiliationActions
+            primaryAffiliation={primaryAffiliation}
+            affiliation={affiliation}
+          />
         </TableCell>
       </TableRow>
-    )
-  }
+    );
+  };
 
   const AffiliationActions = ({ primaryAffiliation, affiliation }) => {
     // Only show revoked for the active tab
@@ -65,14 +123,17 @@ const ManageAllUsersTable = ({
       displayedActions = [actions[1]];
     }
     return (
-      <div className="ds-u-display--flex" data-primary-affiliation-id={primaryAffiliation.id} data-id={affiliation.id} data-state={affiliation.stateId} >
-        {showActions(primaryAffiliation) && (
-          displayedActions            
-        )}
-       </div>
-    )
-  }
-  
+      <div
+        className="ds-u-display--flex"
+        data-primary-affiliation-id={primaryAffiliation.id}
+        data-id={affiliation.id}
+        data-state={affiliation.stateId}
+      >
+        {showActions(primaryAffiliation) && displayedActions}
+      </div>
+    );
+  };
+
   return (
     <Fragment>
       {isFetching && <p>Loading...</p>}
@@ -97,9 +158,21 @@ const ManageAllUsersTable = ({
               <Fragment key={primaryAffiliation.id}>
                 {primaryAffiliation.affiliations.map((affiliation, index) => {
                   if (index === 0) {
-                    return (<AffiliationFirstRow key={affiliation.id} primaryAffiliation={primaryAffiliation} affiliation={affiliation} />)
+                    return (
+                      <AffiliationFirstRow
+                        key={affiliation.id}
+                        primaryAffiliation={primaryAffiliation}
+                        affiliation={affiliation}
+                      />
+                    );
                   }
-                  return (<AffiliationRow key={affiliation.id} primaryAffiliation={primaryAffiliation} affiliation={affiliation} />)
+                  return (
+                    <AffiliationRow
+                      key={affiliation.id}
+                      primaryAffiliation={primaryAffiliation}
+                      affiliation={affiliation}
+                    />
+                  );
                 })}
               </Fragment>
             ))}

@@ -29,7 +29,7 @@
 
 .card--footer {
   border-top: 1px solid $border-color !important;
-  margin-top: nth($spacers, 5);
+  margin-top: $spacer-4;
 }
 
 .eapd-card {

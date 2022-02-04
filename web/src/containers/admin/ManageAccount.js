@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { useHistory } from 'react-router-dom';
 
 import {
   createAccessRequest as actualCreateAccessRequest,
-  completeAccessRequest as actualCompleteAccessRequest,
+  completeAccessRequest as actualCompleteAccessRequest
 } from '../../actions/auth';
 
 import StateAccessRequest from '../StateAccessRequest';
@@ -23,25 +23,26 @@ const ManageAccount = ({
   currentUser,
   dashboard
 }) => {
-
   const history = useHistory();
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const [currentAffiliations, setCurrentAffiliations] = useState([])
+  const [currentAffiliations, setCurrentAffiliations] = useState([]);
 
-  useEffect( ()=>{
+  useEffect(() => {
     const fetchData = async () => {
-      const affiliations = await axios.get('/affiliations/me')
-      setCurrentAffiliations(affiliations.data)
-      return null
-    }
+      const affiliations = await axios.get('/affiliations/me');
+      setCurrentAffiliations(affiliations.data);
+      return null;
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
   const handleCreateAccessRequest = async states => {
     const response = await createAccessRequest(states);
-    if (response) { setShowConfirmation(true) }
+    if (response) {
+      setShowConfirmation(true);
+    }
   };
 
   const handleCompleteAccessRequest = async () => {
@@ -49,38 +50,35 @@ const ManageAccount = ({
     history.push('/');
   };
 
-  if(error) {
+  if (error) {
     setShowConfirmation(false);
   }
 
   const secondaryButtonText = isAdmin
     ? 'Admin Dashboard'
     : `${
-      currentUser.state && currentUser.state.id
-        ? `${currentUser.state.id.toUpperCase()} `
-        : ''
-    }APD Home`
-  
-  return (
-    <Fragment>
-      {showConfirmation ? 
-        <StateAccessRequestConfirmation action={handleCompleteAccessRequest} />
-        : <StateAccessRequest
-            saveAction={handleCreateAccessRequest}
-            fetching={false}
-            errorMessage={error}
-            currentAffiliations={currentAffiliations}
-            secondaryButtonText={secondaryButtonText}
-            cancelAction={dashboard}
-          />
-      }
-    </Fragment>
+        currentUser.state && currentUser.state.id
+          ? `${currentUser.state.id.toUpperCase()} `
+          : ''
+      }APD Home`;
+
+  return showConfirmation ? (
+    <StateAccessRequestConfirmation action={handleCompleteAccessRequest} />
+  ) : (
+    <StateAccessRequest
+      saveAction={handleCreateAccessRequest}
+      fetching={false}
+      errorMessage={error}
+      currentAffiliations={currentAffiliations}
+      secondaryButtonText={secondaryButtonText}
+      cancelAction={dashboard}
+    />
   );
 };
 
 ManageAccount.defaultProps = {
   error: null,
-  currentUser: null,
+  currentUser: null
 };
 
 ManageAccount.propTypes = {
@@ -101,8 +99,7 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   error: state.auth.error,
   isAdmin: getIsFedAdmin(state),
-  currentUser: state.user,
-
+  currentUser: state.user
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAccount);

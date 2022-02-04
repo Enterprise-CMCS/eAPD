@@ -8,7 +8,7 @@ import { generateKey as actualGenerateKey } from '../util';
 const Nav = ({ generateKey, items, pathname }) => {
   // force component update when pathname changes
   const [key, setKey] = useState('');
-  useEffect(() => setKey(generateKey()), [pathname]);
+  useEffect(() => setKey(generateKey()), [pathname, generateKey]);
   return (
     <nav aria-label="Main Navigation">
       <VerticalNav component={NavLink} items={items} key={key} />

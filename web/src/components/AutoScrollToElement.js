@@ -12,7 +12,7 @@ const AutoScrollToElement = ({ location, action }) => {
       element.scrollIntoView();
       window.scrollBy(0, -50); // compensate for header
     }
-  }, [location]);
+  }, [location, hash, action]);
 
   return null;
 };

@@ -14,13 +14,19 @@ const NameAndFundingSourceForm = ({
   setFundingSource,
   setName
 }) => {
-  const changeName = useCallback(({ target: { value } }) => {
-    setName(index, value);
-  });
+  const changeName = useCallback(
+    ({ target: { value } }) => {
+      setName(index, value);
+    },
+    [index, setName]
+  );
 
-  const changeFundingSource = useCallback(({ target: { value } }) => {
-    setFundingSource(index, value);
-  });
+  const changeFundingSource = useCallback(
+    ({ target: { value } }) => {
+      setFundingSource(index, value);
+    },
+    [index, setFundingSource]
+  );
 
   const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
     checked: fundingSource === choice,
@@ -31,11 +37,11 @@ const NameAndFundingSourceForm = ({
   return (
     <Fragment>
       <TextField
-        autoFocus
         label="Activity name"
         name="activity-name"
         value={name}
         onChange={changeName}
+        className="remove-clearfix"
       />
       <ChoiceList
         choices={choices}

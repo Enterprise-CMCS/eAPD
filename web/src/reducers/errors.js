@@ -60,6 +60,7 @@ const errorActions = {
   [ADMIN_EDIT_ME_ERROR]: ['editOwnAccount', 'Unknown error editing account']
 };
 
+// eslint-disable-next-line default-param-last
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN_CREATE_USER_REQUEST:

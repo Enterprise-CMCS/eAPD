@@ -28,6 +28,11 @@ exports[`PercentField component renders correctly 1`] = `
   >
     <TextField
       className="stuff"
+      fieldRef={
+        Object {
+          "current": null,
+        }
+      }
       label="test label"
       mask={null}
       name="test name"
@@ -69,6 +74,11 @@ exports[`PercentField component renders correctly 1`] = `
           <TextInput
             errorId="field_1-error"
             errorPlacement="top"
+            fieldRef={
+              Object {
+                "current": null,
+              }
+            }
             id="field_1"
             mask={null}
             name="test name"
@@ -83,6 +93,11 @@ exports[`PercentField component renders correctly 1`] = `
             <input
               aria-invalid={false}
               className="ds-c-field ds-c-field--medium"
+              fieldRef={
+                Object {
+                  "current": null,
+                }
+              }
               id="field_1"
               name="test name"
               onBlur={[Function]}

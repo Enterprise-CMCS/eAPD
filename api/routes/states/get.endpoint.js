@@ -26,7 +26,7 @@ describe('US States endpoint', () => {
     unauthenticatedTest('get', '/states/ak');
 
     it('returns 200', async () => {
-      const authedClient = login();
+      const authedClient = login('state-admin');
       const response = await authedClient.get('/states/ak');
       expect(response.status).toEqual(200);
       const keys = Object.keys(response.data);

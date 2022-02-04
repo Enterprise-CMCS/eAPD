@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 import { plain as ExportInstructions, mapDispatchToProps } from './Export';
 import { printApd, saveApdEvent } from '../../actions/app';
@@ -15,14 +14,14 @@ describe('apd export component', () => {
   });
 
   test('triggers a print action', () => {
-    const print = sinon.spy();
-    const log = sinon.spy();
+    const print = jest.fn();
+    const log = jest.fn();
     const component = shallow(
       <ExportInstructions printApd={print} saveApdEvent={log} />
     );
     component.find('Button').first().simulate('click');
 
-    expect(print.calledOnce).toEqual(true);
+    expect(print).toHaveBeenCalledTimes(1);
   });
 
   test('maps dispatch to props', () => {
