@@ -23,7 +23,9 @@ const ContractorResourceForm = forwardRef(
       saveContractor
     },
     ref 
-) => {    
+) => {
+    ContractorResourceForm.displayName = 'ContractorResourceForm';
+    
     const initialState = item;
     
     function reducer(state, action) {

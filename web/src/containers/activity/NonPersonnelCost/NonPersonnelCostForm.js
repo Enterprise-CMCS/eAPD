@@ -1,6 +1,6 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useCallback, useReducer, forwardRef } from 'react';
+import React, { useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import DollarField from '../../../components/DollarField';
@@ -20,7 +20,8 @@ const NonPersonnelCostForm = forwardRef(
     },
     ref
 ) => {
-  
+  NonPersonnelCostForm.displayName = 'NonPersonnelCostForm';
+
   function reducer(state, action) {
     switch (action.type) {
       case 'updateField':
@@ -50,21 +51,11 @@ const NonPersonnelCostForm = forwardRef(
     saveNonPersonnelCost(activityIndex, index, state);
   };
   
-  const editCategory = useCallback(
-    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'category', value }),
-    [index]
-  );
+  const editCategory = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'category', value });
 
-  const editDesc = useCallback(
-    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value }),
-    [index]
-  );
+  const editDesc = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value })
 
-  const getEditCostForYear = useCallback(
-    year => ({ target: { value } }) =>
-      dispatch({ type: 'updateCosts', year, value }),
-    [index]
-  );
+  const getEditCostForYear = year => ({ target: { value } }) => dispatch({ type: 'updateCosts', year, value });
 
   const categories = [
     'Hardware, software, and licensing',

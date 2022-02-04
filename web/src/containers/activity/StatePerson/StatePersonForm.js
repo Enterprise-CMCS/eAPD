@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useCallback, useReducer, forwardRef } from 'react';
+import React, { useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import TextArea from '../../../components/TextArea';
@@ -20,7 +20,8 @@ const StatePersonForm = forwardRef(
     },
   ref
 ) => {
-  
+  StatePersonForm.displayName = 'StatePersonForm';
+
   function reducer(state, action) {
     switch (action.type) {
       case 'updateField':
@@ -59,29 +60,13 @@ const StatePersonForm = forwardRef(
   
   const [state, dispatch] = useReducer(reducer, item);
   
-  const editTitle = useCallback(
-    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'title', value }),
-    [index]
-  );
+  const editTitle = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'title', value });
 
-  const editDesc = useCallback(
-    ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value }),
-    [index]
-  );
+  const editDesc = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value });
 
-  const getEditCostForYear = useCallback(
-    (year, value) => {
-      dispatch({ type: 'updateCosts', year, value });
-    },
-    [index]
-  );
+  const getEditCostForYear = (year, value) => dispatch({ type: 'updateCosts', year, value });
 
-  const getEditFTEForYear = useCallback(
-    (year, value) => {
-      dispatch({ type: 'updateFte', year, value });
-    },
-    [index]
-  );
+  const getEditFTEForYear = (year, value) => dispatch({ type: 'updateFte', year, value });
   
   const handleSubmit = e => {
     e.preventDefault();

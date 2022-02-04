@@ -23,6 +23,8 @@ const PersonForm = forwardRef(
     },
     ref
   ) => {
+    PersonForm.displayName = 'PersonForm';
+    
     const initialState = item;
     
     function reducer(state, action) {

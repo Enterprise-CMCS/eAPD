@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the ApdKeyPersonForm component renders correctly 1`] = `
-<ForwardRef
+<PersonForm
   index={1}
   item={
     Object {
@@ -829,7 +829,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       </ChoiceComponent>
     </fieldset>
   </form>
-</ForwardRef>
+</PersonForm>
 `;
 
 exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `

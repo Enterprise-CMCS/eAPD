@@ -24,7 +24,9 @@ const OutcomeAndMetricForm = forwardRef(
       saveOutcome
     },
     ref
-) => {  
+) => {
+  OutcomeAndMetricForm.displayName = 'OutcomeAndMetricForm';
+  
   function reducer(state, action) {
     switch (action.type) {
       case 'updateField':

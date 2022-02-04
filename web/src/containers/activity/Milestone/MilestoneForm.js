@@ -23,7 +23,8 @@ const MilestoneForm = forwardRef(
     },
     ref
   ) => {
-  
+  MilestoneForm.displayName = 'MilestoneForm';
+
   function reducer(state, action) {
     switch (action.type) {
       case 'updateField':

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
-<ForwardRef
+<NonPersonnelCostForm
   activityIndex={44}
   index={83}
   item={
@@ -482,5 +482,5 @@ exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
       </NumberField>
     </DollarField>
   </form>
-</ForwardRef>
+</NonPersonnelCostForm>
 `;
