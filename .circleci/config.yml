@@ -358,10 +358,11 @@ jobs:
             nvm alias default 16
             npm ci
             ./cypress-ci-setup.sh
+            docker-compose -f docker-compose.cypress-ci.yml up -d
       - run:
           name: run e2e tests
           working_directory: ~/project/integrationTests
-          command: npm run cy:run:ci -- --key $CYPRESS_RECORD_KEY
+          command: docker-compose exec cypress npm run cy:run:ci -- --key $CYPRESS_RECORD_KEY
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.

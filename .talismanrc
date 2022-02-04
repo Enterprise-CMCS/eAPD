@@ -12,5 +12,5 @@ fileignoreconfig:
   - filename: .circleci/config.yml
     checksum: afda519c52aaae28c6a6d0e8807aaf29134333d70e0ca20b55766cdcce3bc507
   - filename: .github/workflows/cypress_e2e_tests.yml
-    checksum: d76d99893c2235d1eed36fe19ee02f484eff8665211cdd32fd1712c420fe3cce
+    checksum: 7ba2b4bca91c87dcf28e4efc9131797a4b1033d627822a28faacf9cda094ac86
 version: ''
