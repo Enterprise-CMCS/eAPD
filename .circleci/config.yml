@@ -247,7 +247,7 @@ jobs:
   # because "npm ci" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -270,8 +270,8 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-            nvm install 14
-            nvm alias default 14
+            nvm install 16
+            nvm alias default 16
             echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - save_cache:
@@ -288,7 +288,7 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -310,7 +310,7 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -373,14 +373,14 @@ jobs:
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 14
-            nvm alias default v14
+            nvm install 16
+            nvm alias default 16
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
   backend lint:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -414,8 +414,8 @@ jobs:
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 14
-            nvm alias default v14
+            nvm install 16
+            nvm alias default 16
             ./unit-test.sh
       - run:
           name: report coverage
@@ -434,7 +434,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -454,7 +454,7 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -470,7 +470,7 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -498,7 +498,7 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -727,7 +727,7 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: cimg/node:14.16.1
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
