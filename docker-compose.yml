@@ -62,9 +62,8 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
-      - MONGO_DATABASE=${MONGO_DATABASE}
+      - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
       - MONGO_URL=mongodb://mongo:cms@mongo:27017/eapd
-      - CYPRESS_TESTS=${CYPRESS_TESTS}
     volumes:
       - type: bind
         source: ./api
