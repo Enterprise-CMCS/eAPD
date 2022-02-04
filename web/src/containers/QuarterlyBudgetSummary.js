@@ -28,7 +28,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
           <div key={source}>
             <h4 className="ds-h4 header-with-top-margin">{sourceDisplay}</h4>
             {years.map(year => (
-              <table className="budget-table" key={year}>
+              <table className="budget-table" key={year} data-cy="QFSTable">
                 <caption className="ds-u-visibility--screen-reader">
                   {t('ffy', { year })} {sourceDisplay} Quarterly Federal Share
                 </caption>
@@ -82,7 +82,10 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 </tbody>
               </table>
             ))}
-            <table className="budget-table budget-table--totals">
+            <table
+              className="budget-table budget-table--totals"
+              data-cy="QFSTotals"
+            >
               <colgroup>
                 <col className="budget-table--col-header__fixed-width" />
                 <col />

@@ -494,5 +494,349 @@
       "EP Payments": [800, 400, 500, 750, 2450],
       "EP Count (optional)": [1, 2, 3, 4, 10]
     }
-  ]
+  ],
+
+  "defaultCombinedActivityCost": [
+    {
+      "programTypes": {
+        "HIT Total": ["$0"],
+        "HIE Total": ["$0"],
+        "MMIS Total": ["$0"]
+      },
+      "totalComputableMedicaidCost": 0
+    },
+    {
+      "programTypes": {
+        "HIT Total": ["$0"],
+        "HIE Total": ["$0"],
+        "MMIS Total": ["$0"]
+      },
+      "totalComputableMedicaidCost": 0
+    }
+  ],
+
+  "defaultActivityBreakdown2": [
+    {
+      "activities": [
+        {
+          "expenses": {
+            "State Staff Subtotal": ["$0"],
+            "Other State Expenses Subtotal": ["$0"],
+            "Private Contractor Subtotal": ["$0"] 
+          },
+          "totalComputableMedicaidCost": 0
+        }
+      ]
+    },
+    {
+      "activities": [
+        {
+          "expenses": {
+            "State Staff Subtotal": ["$0"],
+            "Other State Expenses Subtotal": ["$0"],
+            "Private Contractor Subtotal": ["$0"] 
+          },
+          "totalComputableMedicaidCost": 0
+        }
+      ]
+    }
+  ],
+
+  "defaultSummaryBudget": [
+    {
+      "programTypes": {
+        "HIT": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        },
+        "HIE": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        },
+        "MMIS": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        }
+      }
+    },
+    {
+      "programTypes": {
+        "HIT": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        },
+        "HIE": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        },
+        "MMIS": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        }
+      }
+    },
+    {
+      "programTypes": {
+        "HIT": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        },
+        "HIE": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        },
+        "MMIS": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        }
+      }
+    }
+  ],
+
+  "defaultSummaryBudgetTotals": {
+    "FFY 2022": ["$0", "$0", "$0"],
+    "FFY 2023": ["$0", "$0", "$0"],
+    "Total": ["$0", "$0", "$0"] 
+  },
+
+  "defaultQFSByActivity": [
+    {
+      "programTypes": {
+        "HIT and HIE": {
+          "In-House Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Private Contractor Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Total Enhanced FFP": ["$0", "$0", "$0", "$0", "$0"]
+        },
+        "MMIS": {
+          "In-House Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Private Contractor Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Total Enhanced FFP": ["$0", "$0", "$0", "$0", "$0"]
+        }
+      }
+    },
+    {
+      "programTypes": {
+        "HIT and HIE": {
+          "In-House Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Private Contractor Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Total Enhanced FFP": ["$0", "$0", "$0", "$0", "$0"]
+        },
+        "MMIS": {
+          "In-House Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Private Contractor Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Total Enhanced FFP": ["$0", "$0", "$0", "$0", "$0"]
+        }
+      }
+    }
+  ],
+
+  "defaultHITandHIETotal": {
+    "In-House Costs": ["$0"],
+    "Private Contractor Costs": ["$0"],
+    "Total Enhanced FFP": ["$0"]
+  },
+
+  "defaultMMISTotal": {
+    "In-House Costs": ["$0"],
+    "Private Contractor Costs": ["$0"],
+    "Total Enhanced FFP": ["$0"]
+  },
+
+  "populatedCombinedActivityCost": [
+    {
+      "programTypes": {
+        "HIT Total": ["$363,000"],
+        "HIE Total": ["$270,512"],
+        "MMIS Total": ["$0"]
+      },
+      "totalComputableMedicaidCost": 633512
+    },
+    {
+      "programTypes": {
+        "HIT Total": ["$384,000"],
+        "HIE Total": ["$268,802"],
+        "MMIS Total": ["$0"]
+      },
+      "totalComputableMedicaidCost": 652802
+    }
+  ],
+
+  "populatedActivityBreakdown": [
+    {
+      "activities": [
+        {
+          "expenses": {
+            "State Staff Subtotal": 298883,
+            "Other State Expenses Subtotal": 34524,
+            "Private Contractor Subtotal": 29592
+          },
+          "totalComputableMedicaidCost": 363000
+        },
+        {
+          "expenses": {
+            "State Staff Subtotal": 189707,
+            "Other State Expenses Subtotal": 39910,
+            "Private Contractor Subtotal": 40895
+          },
+          "totalComputableMedicaidCost": 270512
+        }
+      ]
+    },
+    {
+      "activities": [
+        {
+          "expenses": {
+            "State Staff Subtotal": 320327,
+            "Other State Expenses Subtotal": 34286,
+            "Private Contractor Subtotal": 29388
+          },
+          "totalComputableMedicaidCost": 384000
+        },
+        {
+          "expenses": {
+            "State Staff Subtotal": 189749,
+            "Other State Expenses Subtotal": 38898,
+            "Private Contractor Subtotal": 40156
+          },
+          "totalComputableMedicaidCost": 268802
+        }
+      ]
+    }
+  ],
+
+  "populatedSummaryBudget": [
+    {
+      "programTypes": {
+        "HIT": {
+          "State Staff": ["$74,721", "$224,163", "$298,883"],  
+          "Other State Expenses": ["$8,631", "$25,893", "$34,525"],
+          "Private Contractor": ["$7,398", "$22,194", "$29,592"],
+          "Subtotal": ["$90,750", "$272,250", "$363,000"]  
+        },
+        "HIE": {
+          "State Staff": ["$94,853", "$94,853", "$189,707"],  
+          "Other State Expenses": ["$19,955", "$19,955", "$39,910"],
+          "Private Contractor": ["$20,448", "$20,448", "$40,895"],
+          "Subtotal": ["$135,256", "$135,256", "$270,512"]  
+        },
+        "MMIS": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        }
+      }
+    },
+    {
+      "programTypes": {
+        "HIT": {
+          "State Staff": ["$160,163", "$160,163", "$320,326"],  
+          "Other State Expenses": ["$17,143", "$17,143", "$34,286"],
+          "Private Contractor": ["$14,694", "$14,694", "$29,388"],
+          "Subtotal": ["$192,000", "$192,000", "$384,000"]  
+        },
+        "HIE": {
+          "State Staff": ["$18,975", "$170,774", "$189,749"],  
+          "Other State Expenses": ["$3,890", "$35,008", "$38,898"],
+          "Private Contractor": ["$4,015", "$36,140", "$40,155"],
+          "Subtotal": ["$26,880", "$241,922", "$268,802"]  
+        },
+        "MMIS": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        }
+      }
+    },
+    {
+      "programTypes": {
+        "HIT": {
+          "State Staff": ["$234,884", "$384,326", "$619,209"],  
+          "Other State Expenses": ["$25,774", "$43,036", "$68,811"],
+          "Private Contractor": ["$22,092", "$36,888", "$58,980"],
+          "Subtotal": ["$282,750", "$464,250", "$747,000"]  
+        },
+        "HIE": {
+          "State Staff": ["$113,828", "$265,627", "$379,456"],  
+          "Other State Expenses": ["$23,845", "$54,963", "$78,808"],
+          "Private Contractor": ["$24,463", "$56,588", "$81,050"],
+          "Subtotal": ["$162,136", "$377,178", "$539,314"]  
+        },
+        "MMIS": {
+          "State Staff": ["$0", "$0", "$0"],  
+          "Other State Expenses": ["$0", "$0", "$0"],
+          "Private Contractor": ["$0", "$0", "$0"],
+          "Subtotal": ["$0", "$0", "$0"]  
+        }
+      }
+    }
+  ],
+
+  "populatedSummaryBudgetTotals": {
+    "FFY 2022": ["$226,006", "$407,506", "$633,512"],
+    "FFY 2023": ["$218,880", "$433,922", "$652,802"],
+    "Total": ["$444,886", "$841,428", "$1,286,314"] 
+  },
+
+  "populatedQFSByActivity": [
+    {
+      "programTypes": {
+        "HIT and HIE": {
+          "In-House Costs": ["$91,218", "$91,216", "$91,216", "$91,214", "$364,864"],
+          "Private Contractor Costs": ["$10,661", "$10,661", "$10,660", "$10,660", "$42,642"],
+          "Total Enhanced FFP": ["$101,879", "$101,877", "$101,876", "$101,874", "$407,506"]
+        },
+        "MMIS": {
+          "In-House Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Private Contractor Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Total Enhanced FFP": ["$0", "$0", "$0", "$0", "$0"]
+        }
+      }
+    },
+    {
+      "programTypes": {
+        "HIT and HIE": {
+          "In-House Costs": ["$95,773", "$95,773", "$95,772", "$95,770", "$383,088"],
+          "Private Contractor Costs": ["$12,709", "$12,709", "$12,708", "$12,708", "$50,834"],
+          "Total Enhanced FFP": ["$108,482", "$108,482", "$108,480", "$108,478", "$433,922"]
+        },
+        "MMIS": {
+          "In-House Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Private Contractor Costs": ["$0", "$0", "$0", "$0", "$0"],
+          "Total Enhanced FFP": ["$0", "$0", "$0", "$0", "$0"]
+        }
+      }
+    }
+  ],
+
+  "populatedHITandHIETotal": {
+    "In-House Costs": ["$747,952"],
+    "Private Contractor Costs": ["$93,476"],
+    "Total Enhanced FFP": ["$841,428"]
+  },
+
+  "populatedMMISTotal": {
+    "In-House Costs": ["$0"],
+    "Private Contractor Costs": ["$0"],
+    "Total Enhanced FFP": ["$0"]
+  }
 }

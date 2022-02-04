@@ -4,48 +4,67 @@ const { _ } = Cypress;
 class ProposedBudgetPage {
   // Combined Activity Costs - CAC
 
-  getCACByFFY = ({ ffy }) =>
+  getCACByIndex = ({ ffy }) =>
     cy
       .contains(`Combined Activity Costs FFY ${ffy}`)
       .findParent('.budget-table');
 
-  verifyCACTable = (items, type) => {
-    cy.contains(type)
-      .parent()
-      .nextUntil('.budget-table--row__header')
-      .within(() => {
-        cy.contains('State Staff Total')
-          .next()
-          .shouldBeCloseTo(items['State Staff Total']);
+  // verifyCACTable = (items, type) => {
+  //   cy.contains(type)
+  //     .parent()
+  //     .nextUntil('.budget-table--row__header')
+  //     .within(() => {
+  //       cy.contains('State Staff Total')
+  //         .next()
+  //         .shouldBeCloseTo(items['State Staff Total']);
 
-        cy.contains('Other State Expenses Total')
-          .next()
-          .shouldBeCloseTo(items['Other State Expenses Total']);
+  //       cy.contains('Other State Expenses Total')
+  //         .next()
+  //         .shouldBeCloseTo(items['Other State Expenses Total']);
 
-        cy.contains('Private Contractor Total')
-          .next()
-          .shouldBeCloseTo(items['Private Contractor Total']);
+  //       cy.contains('Private Contractor Total')
+  //         .next()
+  //         .shouldBeCloseTo(items['Private Contractor Total']);
 
-        cy.contains(`${type} Total`)
-          .next()
-          .shouldBeCloseTo(items[`${type} Total`]);
-      });
-  };
+  //       cy.contains(`${type} Total`)
+  //         .next()
+  //         .shouldBeCloseTo(items[`${type} Total`]);
+  //     });
+  // };
 
   getTotalComputableMedicaidCostByFFY = ({ ffy }) =>
     cy.contains(`FFY ${ffy} Total Computable Medicaid Cost`).next();
 
   verifyComputableMedicaidCostByFFY = ({ years, expected }) => {
+    // _.forEach(years, (ffy, index) => {
+    //   const { programTypes, totalComputableMedicaidCost } = expected[index];
+    //   this.getCACByFFY({ ffy }).within(() => {
+    //     _.forEach(programTypes, (items, type) => {
+    //       this.verifyCACTable(items, type);
+    //     });
+    //     this.getTotalComputableMedicaidCostByFFY({ ffy }).shouldBeCloseTo(
+    //       totalComputableMedicaidCost
+    //     );
+    //   });
+    // });
+
     _.forEach(years, (ffy, index) => {
-      const { programTypes, totalComputableMedicaidCost } = expected[index];
-      this.getCACByFFY({ ffy }).within(() => {
-        _.forEach(programTypes, (items, type) => {
-          this.verifyCACTable(items, type);
+      cy.get('[data-cy="CACTable"]')
+        .eq(index)
+        .then(table => {
+          const { programTypes, totalComputableMedicaidCost } = expected[index];
+          cy.get(table)
+            .getTable()
+            .then(tableData => {
+              cy.log(JSON.stringify(tableData));
+              expect(tableData).to.deep.include(programTypes);
+            });
+          cy.get(table).within(() => {
+            this.getTotalComputableMedicaidCostByFFY({ ffy }).shouldBeCloseTo(
+              totalComputableMedicaidCost
+            );
+          });
         });
-        this.getTotalComputableMedicaidCostByFFY({ ffy }).shouldBeCloseTo(
-          totalComputableMedicaidCost
-        );
-      });
     });
   };
 
@@ -107,37 +126,48 @@ class ProposedBudgetPage {
   getTCMCValueByActivity = ({ ffy, index }) =>
     this.getTCMCByActivity({ ffy, index }).children('.budget-table--number');
 
-  verifyActvityBreakdownByFFYAndActivity = ({
-    years,
-    activityList,
-    expected
-  }) => {
+  verifyActvityBreakdown = ({ years, activityList, expected }) => {
+    // _.forEach(years, (ffy, ffyIndex) => {
+    //   _.forEach(activityList, (activityName, index) => {
+    //     const { expenses, totalComputableMedicaidCost } =
+    //       expected[ffyIndex].activities[index];
+    //     _.forEach(expenses, (items, expense) => {
+    //       // TODO: Add this back once the default test is truly default
+    //       this.getBreakdownByFFYAndActivityAndExpense({
+    //         ffy,
+    //         index,
+    //         expense
+    //       }).should('have.length', Object.keys(items).length);
+    //       this.getBreakdownByFFYAndActivityAndExpenseOtherFundingTotalValue({
+    //         ffy,
+    //         index,
+    //         expense
+    //       }).shouldBeCloseTo(items['Other Funding Amount']);
+    //       this.getBreakdownByFFYAndActivityAndExpenseSubtotalValue({
+    //         ffy,
+    //         index,
+    //         expense
+    //       }).shouldBeCloseTo(items[`${expense} Subtotal`]);
+    //     });
+
+    //     this.getTCMCValueByActivity({ ffy, index }).shouldBeCloseTo(
+    //       totalComputableMedicaidCost
+    //     );
+    //   });
+    // });
+
     _.forEach(years, (ffy, ffyIndex) => {
       _.forEach(activityList, (activityName, index) => {
         const { expenses, totalComputableMedicaidCost } =
           expected[ffyIndex].activities[index];
-        _.forEach(expenses, (items, expense) => {
-          // TODO: Add this back once the default test is truly default
-          this.getBreakdownByFFYAndActivityAndExpense({
-            ffy,
-            index,
-            expense
-          }).should('have.length', Object.keys(items).length);
-          this.getBreakdownByFFYAndActivityAndExpenseOtherFundingTotalValue({
-            ffy,
-            index,
-            expense
-          }).shouldBeCloseTo(items['Other Funding Amount']);
-          this.getBreakdownByFFYAndActivityAndExpenseSubtotalValue({
-            ffy,
-            index,
-            expense
-          }).shouldBeCloseTo(items[`${expense} Subtotal`]);
-        });
 
-        this.getTCMCValueByActivity({ ffy, index }).shouldBeCloseTo(
-          totalComputableMedicaidCost
-        );
+        cy.get(`#activity-${index + 1}-${ffy}`).then(table => {
+          cy.get(table).within(() => {
+            _.forEach(expenses, (items, expense) => {
+              cy.contains(expense).next().shouldBeCloseTo(items);
+            });
+          });
+        });
       });
     });
   };
@@ -168,28 +198,51 @@ class ProposedBudgetPage {
       .siblings('td')
       .eq(2);
 
-  verifySummaryBudgetTableByTypeAndFFY = ({ years, expected }) => {
-    _.forEach(expected, (typeValue, type) => {
-      _.forEach(years, (ffy, index) => {
-        const expenses = typeValue[index];
-        _.forEach(expenses, (values, expense) => {
-          this.getSBTByTypeAndFFYAndExpenseStateTotalValue({
-            type,
-            ffy,
-            expense
-          }).shouldBeCloseTo(values[0], 3);
-          this.getSBTByTypeAndFFYAndExpenseFederalTotalValue({
-            type,
-            ffy,
-            expense
-          }).shouldBeCloseTo(values[1], 3);
-          this.getSBTByTypeAndFFYAndExpenseMTCValue({
-            type,
-            ffy,
-            expense
-          }).shouldBeCloseTo(values[2], 3);
-        });
+  verifySummaryBudgetTables = ({ years, expected, expectedTotals }) => {
+    // _.forEach(expected, (typeValue, type) => {
+    //   _.forEach(years, (ffy, index) => {
+    //     const expenses = typeValue[index];
+    //     _.forEach(expenses, (values, expense) => {
+    //       this.getSBTByTypeAndFFYAndExpenseStateTotalValue({
+    //         type,
+    //         ffy,
+    //         expense
+    //       }).shouldBeCloseTo(values[0], 3);
+    //       this.getSBTByTypeAndFFYAndExpenseFederalTotalValue({
+    //         type,
+    //         ffy,
+    //         expense
+    //       }).shouldBeCloseTo(values[1], 3);
+    //       this.getSBTByTypeAndFFYAndExpenseMTCValue({
+    //         type,
+    //         ffy,
+    //         expense
+    //       }).shouldBeCloseTo(values[2], 3);
+    //     });
+    //   });
+    // });
+
+    _.forEach(years, (ffy, index) => {
+      const { programTypes } = expected[index];
+      _.forEach(programTypes, (item, type) => {
+        cy.get(`[data-cy="summaryBudget${type}"]`)
+          .eq(index)
+          .then(table => {
+            cy.get(table)
+              .getTable()
+              .then(tableData => {
+                expect(tableData).to.deep.include(item);
+              });
+          });
       });
+    });
+
+    cy.get('[data-cy="summaryBudgetTotals"]').then(table => {
+      cy.get(table)
+        .getTable()
+        .then(tableData => {
+          expect(tableData).to.deep.include(expectedTotals);
+        });
     });
   };
 
@@ -238,20 +291,47 @@ class ProposedBudgetPage {
       .siblings()
       .eq(columnIndex);
 
-  verifyQuarterlyFederalShareByFFY = ({ years, expected }) => {
-    _.forEach(expected, (values, header) => {
-      _.forEach(years, (ffy, index) => {
-        const ffyValues = expected[header].byFFY[index];
-        _.forEach(ffyValues, (ffyValue, row) => {
-          _.forEach(ffyValue, (columnValue, columnIndex) => {
-            this.getQFSByHeaderAndRowHeaderValue({
-              ffy,
-              header,
-              row,
-              columnIndex
-            }).shouldBeCloseTo(columnValue, 3);
-          });
-        });
+  verifyQuarterlyFederalShareByActivity = ({ years, expected }) => {
+    // _.forEach(expected, (values, header) => {
+    //   _.forEach(years, (ffy, index) => {
+    //     const ffyValues = expected[header].byFFY[index];
+    //     _.forEach(ffyValues, (ffyValue, row) => {
+    //       _.forEach(ffyValue, (columnValue, columnIndex) => {
+    //         this.getQFSByHeaderAndRowHeaderValue({
+    //           ffy,
+    //           header,
+    //           row,
+    //           columnIndex
+    //         }).shouldBeCloseTo(columnValue, 3);
+    //       });
+    //     });
+    //   });
+    // });
+
+    _.forEach(years, (ffy, index) => {
+      const { programTypes } = expected[index];
+      _.forEach(programTypes, (item, type) => {
+        if (type === 'HIT and HIE') {
+          cy.get('[data-cy="QFSTable"]')
+            .eq(index)
+            .then(table => {
+              cy.get(table)
+                .getTable()
+                .then(tableData => {
+                  expect(tableData).to.deep.include(item);
+                });
+            });
+        } else if (type === 'MMIS') {
+          cy.get('[data-cy="QFSTable"]')
+            .eq(index + years.length)
+            .then(table => {
+              cy.get(table)
+                .getTable()
+                .then(tableData => {
+                  expect(tableData).to.deep.include(item);
+                });
+            });
+        }
       });
     });
   };
@@ -265,16 +345,39 @@ class ProposedBudgetPage {
   getQFSTotalsByHeaderAndRowHeaderValue = ({ header, row }) =>
     this.getQFSTotalsByHeaderAndRowHeader({ header, row }).siblings().eq(0);
 
-  verifyQuarterlyFederalShareByFFYTotals = ({ expected }) => {
-    _.forEach(expected, (ffyValues, header) => {
-      const { totals } = ffyValues;
-      _.forEach(totals, (value, row) => {
-        this.getQFSTotalsByHeaderAndRowHeaderValue({
-          header,
-          row
-        }).shouldBeCloseTo(value, 5);
+  verifyQuarterlyFederalShareByTotals = ({
+    expectedHITandHIETotal,
+    expectedMMISTotal
+  }) => {
+    // _.forEach(expected, (ffyValues, header) => {
+    //   const { totals } = ffyValues;
+    //   _.forEach(totals, (value, row) => {
+    //     this.getQFSTotalsByHeaderAndRowHeaderValue({
+    //       header,
+    //       row
+    //     }).shouldBeCloseTo(value, 5);
+    //   });
+    // });
+
+    cy.get('[data-cy="QFSTotals"]')
+      .eq(0)
+      .then(table => {
+        cy.get(table)
+          .getTable()
+          .then(tableData => {
+            expect(tableData).to.deep.include(expectedHITandHIETotal);
+          });
       });
-    });
+
+    cy.get('[data-cy="QFSTotals"]')
+      .eq(1)
+      .then(table => {
+        cy.get(table)
+          .getTable()
+          .then(tableData => {
+            expect(tableData).to.deep.include(expectedMMISTotal);
+          });
+      });
   };
 
   // Estimated Quarterly Incentive Payments - EQIP
