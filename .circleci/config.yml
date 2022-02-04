@@ -59,6 +59,10 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - e2e test:
+          filters:
+            tags:
+              only: /.*/
 
       # backend jobs
       - backend api endpoint test:
