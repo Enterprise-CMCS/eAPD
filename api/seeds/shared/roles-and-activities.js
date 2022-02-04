@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+const chalk = require('chalk'); // eslint-disable-line import/no-unresolved
 const logger = require('../../logger')('roles seeder');
 const {
   activities,

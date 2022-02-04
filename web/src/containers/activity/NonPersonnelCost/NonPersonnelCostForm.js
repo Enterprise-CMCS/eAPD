@@ -78,6 +78,7 @@ const NonPersonnelCostForm = forwardRef(
   return (
     <form index={index} ref={ref} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
+      {/* eslint-disable jsx-a11y/no-autofocus */}
       <Dropdown
         autoFocus
         label="Category"

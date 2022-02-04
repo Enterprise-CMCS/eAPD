@@ -101,8 +101,12 @@ describe('<ManageUserTable />', () => {
       isFetching: false,
       currentUser: { id: '00u5mfj967KsdvCCC297' },
       actions: [
-        <button type="button">Edit Role</button>,
-        <button type="button">Revoke</button>
+        <button type="button" key="edit-role">
+          Edit Role
+        </button>,
+        <button type="button" key="revoke">
+          Revoke
+        </button>
       ]
     };
     renderUtils = renderWithConnection(<ManageUserTable {...props} />);

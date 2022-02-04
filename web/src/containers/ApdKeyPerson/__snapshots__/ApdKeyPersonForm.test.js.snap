@@ -403,7 +403,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       value={100}
                     >
                       <NumberField
-                        fieldRef={null}
                         label="Cost with benefits"
                         mask="currency"
                         min={null}
@@ -500,7 +499,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       </NumberField>
                     </DollarField>
                     <NumberField
-                      fieldRef={null}
                       hint="For example: 0.5 = 0.5 FTE = 50% time"
                       label="FTE Allocation"
                       mask={null}
@@ -623,7 +621,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       value={300}
                     >
                       <NumberField
-                        fieldRef={null}
                         label="Cost with benefits"
                         mask="currency"
                         min={null}
@@ -720,7 +717,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       </NumberField>
                     </DollarField>
                     <NumberField
-                      fieldRef={null}
                       hint="For example: 0.5 = 0.5 FTE = 50% time"
                       label="FTE Allocation"
                       mask={null}

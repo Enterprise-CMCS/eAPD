@@ -30,7 +30,6 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
           },
           "render": [Function],
         },
-        "displayName": "Connect(Component)",
         "render": [Function],
       }
     }

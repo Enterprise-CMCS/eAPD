@@ -20,25 +20,8 @@ const config = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: {
-          and: [/node_modules/], // Exclude libraries in node_modules ...
-          not: [
-            // Except for a few of them that needs to be transpiled because they use modern syntax
-            /unfetch/,
-            /d3-array|d3-scale|d3-format/,
-            /@hapi[\\/]joi-date/
-          ]
-        },
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [['@babel/preset-env', { targets: 'defaults, ie >= 11' }]],
-            plugins: [
-              '@babel/plugin-proposal-class-properties',
-              '@babel/plugin-transform-runtime'
-            ]
-          }
-        }
+        exclude: /node_modules\/(?!(d3-format|d3-geo|d3-array)\/)/,
+        use: ['babel-loader']
       },
 
       // In dev, load our styles directly into the generated JS. That way

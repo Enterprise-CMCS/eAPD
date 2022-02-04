@@ -3,22 +3,6 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState, useMemo } from 'react';
 
-// Dates are stored internally as YYYY-MM-DD. The design system date field
-// expects separate day, month, and year values. So split the incoming
-// date up into its pieces.
-const splitDate = date =>
-  useMemo(() => {
-    if (!date) {
-      return {
-        day: '',
-        month: '',
-        year: ''
-      };
-    }
-    const [year, month, day] = date.slice(0, 10).split('-');
-    return { day: +day || '', month: +month || '', year: +year || '' };
-  }, [date]);
-
 // The design system will call our formatter before calling our change event
 // handlers. This formatter puts the date pieces back into our internal date
 // string format.
@@ -43,7 +27,20 @@ const DateField = ({ value, onChange, ...rest }) => {
     yearInvalid: false
   });
 
-  const dateParts = splitDate(value);
+  // Dates are stored internally as YYYY-MM-DD. The design system date field
+  // expects separate day, month, and year values. So split the incoming
+  // date up into its pieces.
+  const dateParts = useMemo(() => {
+    if (!value) {
+      return {
+        day: '',
+        month: '',
+        year: ''
+      };
+    }
+    const [year, month, day] = value.slice(0, 10).split('-');
+    return { day: +day || '', month: +month || '', year: +year || '' };
+  }, [value]);
 
   const getErrorMsg = () => {
     const date = moment(value, 'YYYY-M-D', true);

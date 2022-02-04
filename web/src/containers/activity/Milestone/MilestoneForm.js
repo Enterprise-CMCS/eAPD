@@ -53,11 +53,11 @@ const MilestoneForm = forwardRef(
     <form index={index} ref={ref} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Milestone {index + 1}:</h6>
       <TextField
-        autoFocus
         data-cy={`milestone-${index}`}
         label="Name"
         name="name"
         value={state.milestone}
+        className="remove-clearfix"
         onChange={changeName}
         onBlur={validateText}
         onKeyUp={validateText}

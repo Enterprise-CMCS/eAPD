@@ -1,7 +1,4 @@
-import { 
-  LOGOUT_SUCCESS, 
-  UPDATE_USER_INFO 
-} from '../actions/auth';
+import { LOGOUT_SUCCESS, UPDATE_USER_INFO } from '../actions/auth';
 
 import {
   ADMIN_EDIT_ME_ERROR,
@@ -19,6 +16,7 @@ const initialState = {
   error: false
 };
 
+// eslint-disable-next-line default-param-last
 const user = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN_EDIT_ME_REQUEST:

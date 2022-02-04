@@ -49,52 +49,45 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         `Created: ${today.toLocaleDateString('en-US', options)}`
       );
 
-    cy.get('#apd-header-info').contains(`Created: ${  today.toLocaleDateString("en-US", options)}`);
-  });
+      cy.get('#apd-header-info').contains(
+        `Created: ${today.toLocaleDateString('en-US', options)}`
+      );
+    });
 
-  it('changes the apd name', () => {
-    cy.visit('/');
-    cy.contains('Create new').click();
+    it('changes the apd name', () => {
+      cy.visit('/');
+      cy.contains('Create new').click();
 
-    const title1 = 'HITECH IAPD';
-    const title2 = 'My Awesome eAPD';
-    const title3 = 'Magnus Archive Project';
+      const title1 = 'HITECH IAPD';
+      const title2 = 'My Awesome eAPD';
+      const title3 = 'Magnus Archive Project';
 
-    cy.get('#apd-title-input').contains(`${title1}`)
+      cy.get('#apd-title-input').contains(`${title1}`);
 
-    // Change name in APD Summary text box
-    cy.focused()
-      .should('have.attr', 'name', 'apd-name')
-      .clear()
-      .type(`${title2}`)
-      .blur();
+      // Change name in APD Summary text box
+      cy.findByLabelText('APD Name').clear().type(`${title2}`).blur();
 
-    cy.get('#apd-title-input')
-      .contains(`${title2}`)
-      .click();
+      cy.get('#apd-title-input').contains(`${title2}`).click();
 
-    // Change name via APD Header
-    cy.focused()
-      .should('have.attr', 'id', 'apd-title-input')
-      .clear()
-      .type(`${title3}`)
-      .blur();
+      // Change name via APD Header
+      cy.focused()
+        .should('have.attr', 'id', 'apd-title-input')
+        .clear()
+        .type(`${title3}`)
+        .blur();
 
-    cy.get('#apd-title-input')
-      .contains(`${title3}`);
+      cy.get('#apd-title-input').contains(`${title3}`);
 
-    // Change name by clicking EDIT button
-    cy.get('#title-edit-link')
-      .click();
+      // Change name by clicking EDIT button
+      cy.get('#title-edit-link').click();
 
-    cy.focused()
-      .should('have.attr', 'id', 'apd-title-input')
-      .clear()
-      .type(`${title2}`)
-      .blur();
+      cy.focused()
+        .should('have.attr', 'id', 'apd-title-input')
+        .clear()
+        .type(`${title2}`)
+        .blur();
 
-      cy.get('#apd-title-input')
-        .contains(`${title2}`);
+      cy.get('#apd-title-input').contains(`${title2}`);
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
       cy.get('[type="checkbox"][checked]').each((_, index, list) =>
         years.push(list[index].value)
@@ -378,22 +371,27 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
     it('should handle enter data in Outcomes and Milestones', () => {
       const outcomes = [
-        {outcome: 'This is an outcome.', 
-         metrics: ['One metric, ah ha ha', 'Two metrics, ah ha ha']}
+        {
+          outcome: 'This is an outcome.',
+          metrics: ['One metric, ah ha ha', 'Two metrics, ah ha ha']
+        }
       ];
 
-      const milestones = [{
-        milestoneName: "Miles's Milestone",
-        dateMonth: 1,
-        dateDay: 2,
-        dateYear: 2023
-      }];
+      const milestones = [
+        {
+          milestoneName: "Miles's Milestone",
+          dateMonth: 1,
+          dateDay: 2,
+          dateYear: 2023
+        }
+      ];
 
       cy.goToOutcomesAndMilestones(0);
 
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
         cy.get(`[data-cy='outcome-${index}']`)
+          .click()
           .should('have.value', '')
           .blur()
           .should('have.class', 'missing-text-alert');
@@ -412,8 +410,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
 
             cy.get(`[data-cy=metric-${index}-${i}]`)
-              .should('have.value', '')
               .click()
+              .should('have.value', '')
               .blur()
               .should('have.class', 'missing-text-alert');
 
@@ -434,7 +432,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         activityPage.checkOutcomeOutput({
           outcome: element.outcome,
           metrics: element.metrics
-        })
+        });
       });
 
       cy.contains('Edit').click();
@@ -458,13 +456,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .should('not.be.disabled')
         .click();
 
-        cy.get('[class="ds-c-review"]')
-          .should('have.length', 1);
+      cy.get('[class="ds-c-review"]').should('have.length', 1);
 
       cy.wrap(milestones).each((element, index) => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
 
         cy.get(`[data-cy=milestone-${index}]`)
+          .click()
           .should('have.value', '')
           .blur()
           .should('have.class', 'missing-text-alert');
@@ -487,7 +485,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           targetDate: 'Date not specified'
         });
       });
-
     });
 
     it('should handle entering data inState Staff and Expenses', () => {

@@ -4,6 +4,7 @@ const initialState = {
   ariaRegionMessage: ''
 };
 
+// eslint-disable-next-line default-param-last
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ARIA_ANNOUNCE_CHANGE:

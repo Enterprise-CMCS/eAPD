@@ -7,7 +7,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
   onSubmit={[Function]}
 >
   <TextField
-    autoFocus={true}
+    className="remove-clearfix"
     data-cy="outcome-1"
     hint="Describe a distinct and measurable improvement for this system."
     key="activity93-index1"
@@ -39,6 +39,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       key="om key 1"
     >
       <TextField
+        className="remove-clearfix"
         data-cy="metric-1-0"
         hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
         id="93-metric0"
@@ -72,6 +73,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       key="om key 2"
     >
       <TextField
+        className="remove-clearfix"
         data-cy="metric-1-1"
         hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
         id="93-metric1"

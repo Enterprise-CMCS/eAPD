@@ -31,7 +31,6 @@ exports[`the Milestones component renders correctly 1`] = `
             },
             "render": [Function],
           },
-          "displayName": "Connect(Component)",
           "render": [Function],
         }
       }

@@ -155,7 +155,7 @@ workflows:
             - yaml test
             - backend unit test
             - backend api endpoint test
-            
+
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
@@ -247,10 +247,10 @@ jobs:
   # because "npm ci" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_INSTALL_DEPS_UN
-          password: $DOCKER_INSTALL_DEPS_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - restore_cache:
@@ -263,6 +263,17 @@ jobs:
           name: install api dependencies
           working_directory: ~/project/api
           command: npm ci
+      - run:
+          name: setup nvm
+          command: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            nvm install 16
+            nvm alias default 16
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - save_cache:
           key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
           paths:
@@ -277,10 +288,10 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: circleci/node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_VALIDATE_OPENAPI_UN
-          password: $DOCKER_VALIDATE_OPENAPI_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - setup_remote_docker
@@ -290,7 +301,7 @@ jobs:
       - run:
           name: validate
           command: |
-            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker create -v /openapi --name openapi alpine /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
@@ -299,10 +310,10 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_TESTS_UN
-          password: $DOCKER_TESTS_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - run: npm install glob
@@ -315,6 +326,33 @@ jobs:
   # These all depend on "install dependencies" running first.
 
   # Runs backend API integration/end-to-end tests.
+  #backend api endpoint test:
+  #  machine: true
+  #    #image: ubuntu-2004:202104-01
+  #  steps:
+  #    - checkout
+  #    - attach_workspace:
+  #        at: ~/project
+  #    - run:
+  #        name: build API image
+  #        working_directory: ~/project/api
+  #        command: |
+  #          docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
+  #          docker build -t cms-eapd/api ./
+  #    - run:
+  #        name: run tests
+  #        working_directory: ~/project/api
+  #        command: |
+  #          # Switch to Node 14.
+  #          sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs npm
+  #          export NVM_DIR="/opt/circleci/.nvm"
+  #          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  #          nvm install 14
+  #          nvm alias default 14
+  #          nvm i
+  #          ./endpoint-tests/endpoint.sh
+
+  ############### Rewrite of Backend API Tests
   backend api endpoint test:
     machine:
       image: ubuntu-2004:202104-01
@@ -326,26 +364,26 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api ./
       - run:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 14.
+            # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 14
-            nvm alias default v14
+            nvm install 16
+            nvm alias default 16
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
   backend lint:
     docker:
-      - image: node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_LINT_UN
-          password: $DOCKER_LINT_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -367,17 +405,17 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_TESTS_UN -p $DOCKER_TESTS_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api ./
       - run:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 14.
+            # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 14
-            nvm alias default v14
+            nvm install 16
+            nvm alias default 16
             ./unit-test.sh
       - run:
           name: report coverage
@@ -396,10 +434,10 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -416,10 +454,10 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_LINT_UN
-          password: $DOCKER_LINT_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -432,10 +470,10 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_TESTS_UN
-          password: $DOCKER_TESTS_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -460,11 +498,10 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_DEPS_VULN_UN
-
-          password: $DOCKER_DEPS_VULN_PW
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -486,25 +523,25 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api ./
       - run:
           name: start everything up
           working_directory: ~/project/api
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
       - run:
           name: pull owasp zap docker image
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker pull owasp/zap2docker-stable
       - run:
           name: run owasp zap
           command: |
-            docker login -u $DOCKER_OWASP_ZAP_SCAN_UN -p $DOCKER_OWASP_ZAP_SCAN_PW
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
@@ -525,10 +562,10 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: python:3
+      - image: cimg/python:3.10.1
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -537,8 +574,8 @@ jobs:
           name: deploy to production
           working_directory: ~/project/bin/prod-deploy
           command: |
-            apt-get -qq update
-            apt-get -qq install jq -y
+            sudo apt-get -qq update
+            sudo apt-get -qq install jq -y
             pip install --quiet awscli
             ./aws.sh \
               --API_AWS_ACCESS_KEY_ID "${<< parameters.env >>_API_AWS_ACCESS_KEY_ID}" \
@@ -607,10 +644,10 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: python:3
+      - image: cimg/python:3.10.1
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -618,8 +655,8 @@ jobs:
       - run:
           name: sync to s3
           command: |
-            apt-get update
-            apt-get install awscli -y
+            sudo apt-get update
+            sudo apt-get install awscli -y
             aws s3 sync web/dist s3://"${<< parameters.env >>_WEB_AWS_S3_BUCKET}" --region ${<< parameters.env >>_WEB_AWS_REGION} --delete
             # Copy up index.html separately, so we can set metadata on it to
             # disable client cacheing
@@ -646,10 +683,10 @@ jobs:
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
     docker:
-      - image: python:3
+      - image: cimg/python:3.10.1
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - run:
@@ -657,8 +694,8 @@ jobs:
           working_directory: ~/project/bin/preview-deploy
           command: |
             if [ -n "$CIRCLE_PULL_REQUEST" ]; then
-              apt-get -qq update
-              apt-get -qq install jq -y
+              sudo apt-get -qq update
+              sudo apt-get -qq install jq -y
               pip install --quiet awscli
               PRNUM=$(basename $CIRCLE_PULL_REQUEST)
               URL=$(./aws.sh \
@@ -690,10 +727,10 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: node:14
+      - image: cimg/node:16.13.2
         auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
@@ -702,8 +739,8 @@ jobs:
           name: create backend build artifact zip
           working_directory: ~/project
           command: |
-            apt-get update
-            apt-get install zip -y
+            sudo apt-get update
+            sudo apt-get install zip -y
             cd api
             npm ci --only=production
             cd ..

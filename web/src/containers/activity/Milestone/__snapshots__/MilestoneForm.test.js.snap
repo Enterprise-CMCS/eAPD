@@ -24,7 +24,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
       :
     </h6>
     <TextField
-      autoFocus={true}
+      className="remove-clearfix"
       data-cy="milestone-3252"
       label="Name"
       name="name"
@@ -35,14 +35,14 @@ exports[`the MilestoneForm component renders correctly 1`] = `
       value="Milestone name"
     >
       <FormControl
-        className="ds-u-clearfix"
+        className="ds-u-clearfix remove-clearfix"
         component="div"
         label="Name"
         labelComponent="label"
         render={[Function]}
       >
         <div
-          className="ds-u-clearfix"
+          className="ds-u-clearfix remove-clearfix"
         >
           <FormLabel
             component="label"
@@ -63,7 +63,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
             </label>
           </FormLabel>
           <TextInput
-            autoFocus={true}
             data-cy="milestone-3252"
             errorId="field_1-error"
             errorPlacement="top"
@@ -78,7 +77,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
           >
             <input
               aria-invalid={false}
-              autoFocus={true}
               className="ds-c-field"
               data-cy="milestone-3252"
               id="field_1"

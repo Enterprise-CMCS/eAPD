@@ -15,6 +15,7 @@ const initialState = {
   affiliations: []
 };
 
+// eslint-disable-next-line default-param-last
 const admin = (state = initialState, action) => {
   switch (action.type) {
     case ADMIN_GET_ACTIVITIES_SUCCESS:

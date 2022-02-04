@@ -8,12 +8,11 @@ import {
 } from './SessionEndingAlert';
 import { extendSession, logout } from '../actions/auth';
 
-let mockPush;
+const mockPush = jest.fn();
 
 jest.mock('react-router-dom', () => {
-  mockPush = jest.fn();
   return {
-    useHistory: jest.fn().mockReturnValue({ push: mockPush })
+    useHistory: jest.fn().mockReturnValue({ push: () => mockPush() })
   };
 });
 
@@ -43,23 +42,10 @@ describe('the session ending alert component', () => {
     };
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
-    const countdown = component
-      .childAt(1)
-      .dive()
-      .dive();
+    const countdown = component.childAt(1).dive().dive();
     const aside = countdown.find('aside');
-    expect(
-      aside
-        .childAt(0)
-        .dive()
-        .text()
-    ).toEqual('Sign out');
-    expect(
-      aside
-        .childAt(1)
-        .dive()
-        .text()
-    ).toEqual('Stay signed in');
+    expect(aside.childAt(0).dive().text()).toEqual('Sign out');
+    expect(aside.childAt(1).dive().text()).toEqual('Stay signed in');
   });
 
   it('renders as expected if there is and error and is saving', () => {
@@ -73,23 +59,10 @@ describe('the session ending alert component', () => {
     };
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
-    const countdown = component
-      .childAt(1)
-      .dive()
-      .dive();
+    const countdown = component.childAt(1).dive().dive();
     const aside = countdown.find('aside');
-    expect(
-      aside
-        .childAt(1)
-        .dive()
-        .text()
-    ).toEqual('<Spinner /> Signing in');
-    expect(
-      aside
-        .childAt(0)
-        .dive()
-        .text()
-    ).toEqual('Sign out');
+    expect(aside.childAt(1).dive().text()).toEqual('<Spinner /> Signing in');
+    expect(aside.childAt(0).dive().text()).toEqual('Sign out');
   });
 
   it('renders as expected if there is and error and is signing out', () => {
@@ -103,23 +76,10 @@ describe('the session ending alert component', () => {
     };
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
-    const countdown = component
-      .childAt(1)
-      .dive()
-      .dive();
+    const countdown = component.childAt(1).dive().dive();
     const aside = countdown.find('aside');
-    expect(
-      aside
-        .childAt(1)
-        .dive()
-        .text()
-    ).toEqual('Stay signed in');
-    expect(
-      aside
-        .childAt(0)
-        .dive()
-        .text()
-    ).toEqual('<Spinner /> Signing out');
+    expect(aside.childAt(1).dive().text()).toEqual('Stay signed in');
+    expect(aside.childAt(0).dive().text()).toEqual('<Spinner /> Signing out');
   });
 
   it('maps redux state to component props', () => {

@@ -89,10 +89,10 @@ const OutcomeAndMetricForm = forwardRef(
     <form index={index} ref={ref} onSubmit={handleSubmit} key={`activity${activityIndex}-index${index}-form`}>
       <TextField
         key={`activity${activityIndex}-index${index}`}
-        autoFocus
         data-cy={`outcome-${index}`}
         name="outcome"
         label="Outcome"
+        className="remove-clearfix"
         hint="Describe a distinct and measurable improvement for this system."
         value={state.outcome}
         multiline
@@ -121,12 +121,13 @@ const OutcomeAndMetricForm = forwardRef(
           <div
             key={key}
             className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-            >
+          >
             <TextField
               id={`${activityIndex}-metric${i}`}
               name="metric"
               data-cy={`metric-${index}-${i}`}
               label="Metric"
+              className="remove-clearfix"
               hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
               value={metric}
               multiline
@@ -134,7 +135,7 @@ const OutcomeAndMetricForm = forwardRef(
               onChange={changeMetric(i)}
               onBlur={validateText}
               onKeyUp={validateText}
-              />
+            />
           </div>
         </Review>
       ))}

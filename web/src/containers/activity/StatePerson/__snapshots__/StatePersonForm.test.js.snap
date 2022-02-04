@@ -13,7 +13,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     :
   </h6>
   <TextField
-    autoFocus={true}
+    className="remove-clearfix"
     label="Personnel title"
     name="title"
     onChange={[Function]}
@@ -21,6 +21,7 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     value="personnel title"
   />
   <TextArea
+    className="remove-clearfix"
     label="Description"
     name="desc"
     onChange={[Function]}

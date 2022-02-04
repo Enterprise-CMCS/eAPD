@@ -34,7 +34,6 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
           },
           "render": [Function],
         },
-        "displayName": "Connect(Component)",
         "render": [Function],
       }
     }

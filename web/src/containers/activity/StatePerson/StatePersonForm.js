@@ -92,11 +92,11 @@ const StatePersonForm = forwardRef(
     <form index={index} ref={ref} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
       <TextField
-        autoFocus
         label="Personnel title"
         name="title"
         value={state.title}
         onChange={editTitle}
+        className="remove-clearfix"
       />
       <TextArea
         label="Description"
@@ -104,6 +104,7 @@ const StatePersonForm = forwardRef(
         name="desc"
         value={state.description}
         onChange={editDesc}
+        className="remove-clearfix"
       />
       <PersonCostForm
         items={state.years}

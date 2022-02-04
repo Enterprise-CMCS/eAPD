@@ -282,7 +282,6 @@ exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
       value={2398235}
     >
       <NumberField
-        fieldRef={null}
         label="FFY 7473 Cost"
         mask="currency"
         min={null}
@@ -387,7 +386,6 @@ exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
       value={72323}
     >
       <NumberField
-        fieldRef={null}
         label="FFY 7474 Cost"
         mask="currency"
         min={null}
