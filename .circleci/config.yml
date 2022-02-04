@@ -60,9 +60,11 @@ workflows:
             tags:
               only: /.*/
       - e2e test:
+          env: PREVIEW
           filters:
-            tags:
-              only: /.*/
+            branches:
+              ignore:
+                - main
 
       # backend jobs
       - backend api endpoint test:
@@ -340,12 +342,12 @@ jobs:
           name: start dockerized eAPD app
           command: |
             export NODE_ENV=development
-            export API_URL="${<< parameters.env >>_WEB_API_URL}"
-            export OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}"
-            export OKTA_API_KEY="${<< parameters.env >>_OKTA_API_KEY}"
-            export OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}"
-            export OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}"
-            export JWT_SECRET="${<< parameters.env >>_JWT_SECRET}"
+            export API_URL="PREVIEW_WEB_API_URL"
+            export OKTA_DOMAIN="PREVIEW_OKTA_DOMAIN"
+            export OKTA_API_KEY="PREVIEW_OKTA_API_KEY"
+            export OKTA_SERVER_ID="PREVIEW_OKTA_SERVER_ID"
+            export OKTA_CLIENT_ID="PREVIEW_OKTA_CLIENT_ID"
+            export JWT_SECRET="PREVIEW_JWT_SECRET"
             docker-compose up -d
             docker-compose exec api npm run migrate
             docker-compose exec api npm run seed
