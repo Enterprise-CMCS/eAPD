@@ -41,39 +41,17 @@ jobs:
           docker-compose up -d
           docker-compose exec -T api npm run migrate
           docker-compose exec -T api npm run seed
-      - name: Cache NPM and Cypress 📦
-        uses: actions/cache@v2
-        with:
-          working-directory: ./integrationTests
-          path: |
-            ~/.cache/Cypress
-            node_modules
-          key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install node
         uses: actions/setup-node@v2
         with:
           node-version: '16.13.2'
-      - name: Cypress setup
-        working-directory: ./integrationTests
-        run: |
-          npm ci
-          sh cypress-ci-setup.sh
-        env:
-          NODE_ENV: development
-          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
-          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
-          OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
-          OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
       - name: Cypress tests
         uses: cypress-io/github-action@v2.9.7
         with:
           working-directory: ./integrationTests
           browser: chrome
           config-file: cypress.json
-          # we have already installed all dependencies above
-          install: false
+          install-command: npm ci && sh cypress-ci-setup.sh
           build: npx cypress info
           command: npx cypress run --env grepTags=${{ matrix.containers }}
           wait-on: 'http://localhost:8080, http://localhost:8081/heartbeat'
@@ -81,6 +59,7 @@ jobs:
           headless: true
           record: true
           tag: ${{ matrix.containers }}
+          ci-build-id: '${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
