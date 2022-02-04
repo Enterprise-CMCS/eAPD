@@ -322,6 +322,32 @@ jobs:
           working_directory: ~/project/web
           command: node yaml-tests.js
 
+  e2e test:
+    docker:
+      - image: cimg/node:16.13.2
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project/integrationTests
+      - run:
+          name: start dockerized eAPD app
+          command: |
+            export NODE_ENV=development
+            docker-compose up -d
+            docker-compose exec api npm run migrate
+            docker-compose exec api npm run seed
+      - run:
+          name: set up cypress
+          command: |
+            npm ci
+            sh cypress-ci-setup.sh
+      - run:
+          name: run e2e tests
+          command: npm run cy:run:ci -- --key $CYPRESS_RECORD_KEY
+
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
 
