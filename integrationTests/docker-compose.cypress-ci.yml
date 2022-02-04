@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   cypress:
-    image: 'cypress/included:9.3.1'
+    image: 'cypress/included:9.4.1'
     environment:
       - CYPRESS_baseUrl=http://localhost:8080/
       - NODE_ENV=development
