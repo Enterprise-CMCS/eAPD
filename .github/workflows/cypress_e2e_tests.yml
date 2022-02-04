@@ -18,8 +18,9 @@ jobs:
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        # run 3 copies of the current job in parallel
-        containers: [1, 2, 3]
+        # run 5 copies of the current job in parallel
+        containers:
+          ['@admin', '@auth', '@apd+@basic', '@apd+@default', '@apd+@data']
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
@@ -41,6 +42,18 @@ jobs:
           docker-compose up -d
           docker-compose exec -T api npm run migrate
           docker-compose exec -T api npm run seed
+      - name: Cache NPM and Cypress 📦
+        uses: actions/cache@v2
+        with:
+          working-directory: ./integrationTests
+          path: |
+            ~/.cache/Cypress
+            node_modules
+          key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.2'
       - name: Cypress setup
         working-directory: ./integrationTests
         env:
@@ -55,18 +68,27 @@ jobs:
           npm ci
           sh cypress-ci-setup.sh
       - name: Cypress tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2.9.7
         with:
           working-directory: ./integrationTests
+          browser: chrome
           config-file: cypress.json
-          wait-on: 'http://localhost:8080'
           install: false
-          command: npm run cy:run
+          build: npx cypress info
+          command: npx cypress run --env grepTags=${{ matrix.containers }}
+          wait-on: 'http://localhost:8080, http://localhost:8081/heartbeat'
+          wait-on-timeout: 300
           headless: true
           record: true
-          parallel: true
-          group: 'Actions example'
+          tag: ${{ matrix.containers }}
         env:
+          NODE_ENV: development
+          OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
+          OKTA_API_KEY: ${{ secrets.OKTA_API_KEY }}
+          OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
+          OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # Recommended: pass the GitHub token lets this action correctly
