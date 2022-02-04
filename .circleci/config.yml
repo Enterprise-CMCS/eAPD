@@ -60,7 +60,6 @@ workflows:
             tags:
               only: /.*/
       - e2e test:
-          env: PREVIEW
           filters:
             branches:
               ignore:
