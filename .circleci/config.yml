@@ -537,7 +537,7 @@ jobs:
           name: pull owasp zap docker image
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker pull owasp/zap2docker-stable
+            docker pull owasp/zap2docker-stable:2.11.1
       - run:
           name: run owasp zap
           command: |
@@ -545,7 +545,7 @@ jobs:
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
-              owasp/zap2docker-stable \
+              owasp/zap2docker-stable:2.11.1 \
               zap-api-scan.py \
               -c api-scan.conf \
               -t http://api-for-testing:8000/open-api \
@@ -597,7 +597,7 @@ jobs:
               --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
               --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
-              --MONGO_URL "${<< parameters.env >>_MONGO_URL}"
+              --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
               --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}"
 
       - run:

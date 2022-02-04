@@ -18,17 +18,11 @@ jobs:
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        # run 5 copies of the current job in parallel
-        containers:
-          ['@admin', '@auth', '@apd+@basic', '@apd+@default', '@apd+@data']
+        # run 3 copies of the current job in parallel
+        containers: ['@apd+@default', '@apd+@data', '@admin; @auth']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
-      - name: Login to Docker GitHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_CYPRESS_UN }}
-          password: ${{ secrets.DOCKER_CYPRESS_PW }}
+        uses: actions/checkout@v2
       - name: Starting Dockerized eAPD App
         working-directory: ./
         env:
@@ -38,24 +32,34 @@ jobs:
           OKTA_SERVER_ID: ${{ secrets.OKTA_SERVER_ID }}
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DOCKER_CYPRESS_UN: ${{ secrets.DOCKER_CYPRESS_UN }}
+          DOCKER_CYPRESS_PW: ${{ secrets.DOCKER_CYPRESS_PW }}
         run: |
+          docker login -u $DOCKER_CYPRESS_UN -p $DOCKER_CYPRESS_PW
           docker-compose up -d
           docker-compose exec -T api npm run migrate
           docker-compose exec -T api npm run seed
+        # cache NPM modules and Cypress binary folder
+        # we can use "package-lock.json" as the key file
+        # to make sure we use the precise Cypress version
+        # (which is important when using ^ version in package.json)
+        # see https://github.com/actions/cache
       - name: Cache NPM and Cypress 📦
         uses: actions/cache@v2
         with:
-          working-directory: ./integrationTests
           path: |
             ~/.cache/Cypress
-            node_modules
+            integrationTests/node_modules
           key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - name: Install node
         uses: actions/setup-node@v2
         with:
-          node-version: '16.13.2'
+          node-version: '16'
       - name: Cypress setup
         working-directory: ./integrationTests
+        run: |
+          npm ci
+          sh cypress-ci-setup.sh
         env:
           NODE_ENV: development
           OKTA_DOMAIN: ${{ secrets.OKTA_DOMAIN }}
@@ -64,12 +68,10 @@ jobs:
           OKTA_CLIENT_ID: ${{ secrets.OKTA_CLIENT_ID }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
-        run: |
-          npm ci
-          sh cypress-ci-setup.sh
       - name: Cypress tests
         uses: cypress-io/github-action@v2.9.7
         with:
+          # we have already installed all dependencies above
           working-directory: ./integrationTests
           browser: chrome
           config-file: cypress.json
@@ -90,7 +92,26 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           CYPRESS_ENV: ${{ secrets.CYPRESS_ENV }}
           # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # Recommended: pass the GitHub token lets this action correctly
           # determine the unique run id necessary to re-run the checks
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        # after the test run completes
+        # store videos and any screenshots
+        # NOTE: screenshots will be generated only if E2E test failed
+        # thus we store screenshots only on failures
+        # Alternative: create and commit an empty cypress/screenshots folder
+        # to always have something to upload
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
