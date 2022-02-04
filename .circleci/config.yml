@@ -305,7 +305,6 @@ jobs:
             docker create -v /openapi --name openapi alpine /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
-
   # Validates YAML files. Doesn't look at content, just structure. Doesn't
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
@@ -376,7 +375,6 @@ jobs:
             nvm install 16
             nvm alias default 16
             ./endpoint-tests/endpoint.sh
-
   # Lints the backend code.
   backend lint:
     docker:
@@ -511,7 +509,6 @@ jobs:
           working_directory: ~/project/<< parameters.path >>
           command: |
             npm run audit
-
   owasp zap scan:
     machine:
       image: ubuntu-2004:202104-01
@@ -550,7 +547,6 @@ jobs:
               -c api-scan.conf \
               -t http://api-for-testing:8000/open-api \
               -f openapi
-
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
   # they are all related to deployment.
@@ -598,7 +594,6 @@ jobs:
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
               --MONGO_MONGO_INITDB_DATABASE "${<< parameters.env >>_MONGO_INITDB_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}"
-
       - run:
           when: on_fail
           name: notify on deployment failure
@@ -617,7 +612,6 @@ jobs:
                 }'
             fi
             false
-
   # Cleans up preview deploys that are no longer associated with open pull
   # requests.
   #  cleanup preview deploys:
@@ -679,7 +673,6 @@ jobs:
                 }'
             fi
             false
-
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
     docker:
@@ -722,7 +715,6 @@ jobs:
             else
               echo "Not a pull request"
             fi
-
   # Zips up artifacts created in build steps and makes them available as
   # CircleCI artifact downloads.
   store artifacts:
