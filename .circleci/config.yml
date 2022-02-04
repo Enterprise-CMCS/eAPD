@@ -349,14 +349,18 @@ jobs:
             docker-compose exec api npm run seed
       - run:
           name: set up cypress
+          working_directory: ~/project/integrationTests
           command: |
-            sudo apt-get update
-            sudo apt-get install zip -y
-            cd integrationTests
+            # Switch to Node 16.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16
+            nvm alias default 16
             npm ci
             ./cypress-ci-setup.sh
       - run:
           name: run e2e tests
+          working_directory: ~/project/integrationTests
           command: npm run cy:run:ci -- --key $CYPRESS_RECORD_KEY
 
   # ===== Backend jobs =====
