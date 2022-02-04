@@ -333,7 +333,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project/integrationTests
+          at: ~/project
       - run:
           name: start dockerized eAPD app
           command: |
@@ -350,8 +350,11 @@ jobs:
       - run:
           name: set up cypress
           command: |
+            sudo apt-get update
+            sudo apt-get install zip -y
+            cd integrationTests
             npm ci
-            sh cypress-ci-setup.sh
+            ./cypress-ci-setup.sh
       - run:
           name: run e2e tests
           command: npm run cy:run:ci -- --key $CYPRESS_RECORD_KEY
