@@ -53,7 +53,7 @@ jobs:
           config-file: cypress.json
           install-command: npm ci && sh cypress-ci-setup.sh
           build: npx cypress info
-          command: npx cypress run --record --key ${{ CYPRESS_RECORD_KEY }} --env grepTags=${{ matrix.containers }}
+          command: npx cypress run --record --key ${{ env.CYPRESS_RECORD_KEY }} --env grepTags=${{ matrix.containers }}
           wait-on: 'http://localhost:8080, http://localhost:8081/heartbeat'
           wait-on-timeout: 300
           headless: true
