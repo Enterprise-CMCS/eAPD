@@ -338,12 +338,11 @@ jobs:
           name: start dockerized eAPD app
           command: |
             export NODE_ENV=development
-            export API_URL="PREVIEW_WEB_API_URL"
-            export OKTA_DOMAIN="PREVIEW_OKTA_DOMAIN"
-            export OKTA_API_KEY="PREVIEW_OKTA_API_KEY"
-            export OKTA_SERVER_ID="PREVIEW_OKTA_SERVER_ID"
-            export OKTA_CLIENT_ID="PREVIEW_OKTA_CLIENT_ID"
-            export JWT_SECRET="PREVIEW_JWT_SECRET"
+            export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
+            export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
+            export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
+            export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
+            export JWT_SECRET="$PREVIEW_JWT_SECRET"
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
             docker-compose exec api npm run migrate
