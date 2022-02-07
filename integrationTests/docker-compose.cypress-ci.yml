@@ -80,7 +80,6 @@ services:
       - NODE_ENV=development
       - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
     working_dir: /eAPD/integrationTests
-    network_mode: 'host'
     volumes:
       - ../:/eAPD
 

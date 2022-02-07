@@ -357,6 +357,7 @@ jobs:
           working_directory: ~/project/integrationTests
           command: |
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.cypress-ci.yml up --exit-code-from cypress
 
   # ===== Backend jobs =====
