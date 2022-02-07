@@ -335,7 +335,7 @@ jobs:
       - attach_workspace:
           at: ~/project/integrationTests
       - run:
-          name: run e2e tests
+          name: set up environment
           working_directory: ~/project/integrationTests
           command: |
             export NODE_ENV=development
