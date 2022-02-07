@@ -333,9 +333,9 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project
+          at: ~/project/integrationTests
       - run:
-          name: start dockerized eAPD app
+          name: set up environment
           command: |
             export NODE_ENV=development
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
@@ -343,26 +343,17 @@ jobs:
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose up -d
-            docker-compose exec api npm run migrate
-            docker-compose exec api npm run seed
-      - run:
-          name: set up cypress
-          working_directory: ~/project/integrationTests
-          command: |
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 16
             nvm alias default 16
-            npm ci
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             ./cypress-ci-setup.sh
-            docker-compose -f docker-compose.cypress-ci.yml up -d
       - run:
           name: run e2e tests
           working_directory: ~/project/integrationTests
-          command: docker-compose -f docker-compose.cypress-ci.yml exec cypress npm run cy:run:ci -- --key $CYPRESS_RECORD_KEY
+          command: docker-compose -f docker-compose.cypress-ci.yml exec cypress npm run cy:run:ci --  --parallel --record --key $CYPRESS_RECORD_KEY
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
