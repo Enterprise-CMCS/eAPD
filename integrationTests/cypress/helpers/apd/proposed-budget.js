@@ -19,7 +19,7 @@ export const testDefaultProposedBudget = years => {
     });
   });
 
-  it.only('should have the default values for Proposed Budget', () => {
+  it('should have the default values for Proposed Budget', () => {
     cy.goToProposedBudget();
 
     cy.url().should('include', '/proposed-budget');
@@ -30,21 +30,17 @@ export const testDefaultProposedBudget = years => {
       expected: budgetData.defaultCombinedActivityCost
     });
 
-    // proposedBudgetPage.verifyActvityBreakdown({
-    //   years,
-    //   activityList,
-    //   expected: budgetData.defaultActivityBreakdown
-    // });
+    proposedBudgetPage.verifyActvityBreakdown({
+      years,
+      activityList,
+      expected: budgetData.defaultActivityBreakdown
+    });
 
     proposedBudgetPage.verifySummaryBudgetTables({
       years: [...years, 'total'],
       expected: budgetData.defaultSummaryBudget,
       expectedTotals: budgetData.defaultSummaryBudgetTotals
     });
-
-    // proposedBudgetPage.verifySummaryBudgetTableTotal({
-    //   expected: budgetData.defaultSummaryBudgetTable.totals
-    // });
 
     proposedBudgetPage.verifyQuarterlyFederalShareByActivity({
       years,
@@ -56,10 +52,10 @@ export const testDefaultProposedBudget = years => {
       expectedMMISTotal: budgetData.defaultMMISTotal
     });
 
-    // proposedBudgetPage.verifyEQIPFormByFFY({
-    //   years,
-    //   expected: budgetData.defaultEQIP
-    // });
+    proposedBudgetPage.verifyEQIPFormByFFY({
+      years,
+      expected: budgetData.defaultEQIP
+    });
   });
 
   it('should display the default values for Proposed Budget in export view', () => {
@@ -67,34 +63,32 @@ export const testDefaultProposedBudget = years => {
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
-      expected: budgetData.defaultSummaryBudgetByActivity
+      expected: budgetData.defaultCombinedActivityCost
     });
 
-    proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
+    proposedBudgetPage.verifyActvityBreakdown({
       years,
       activityList,
       expected: budgetData.defaultActivityBreakdown
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
+    proposedBudgetPage.verifySummaryBudgetTables({
       years: [...years, 'total'],
-      expected: budgetData.defaultSummaryBudgetTable.byTypes
+      expected: budgetData.defaultSummaryBudget,
+      expectedTotals: budgetData.defaultSummaryBudgetTotals
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableTotal({
-      expected: budgetData.defaultSummaryBudgetTable.totals
-    });
-
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
+    proposedBudgetPage.verifyQuarterlyFederalShareByActivity({
       years,
-      expected: budgetData.defaultQuarterlyFederalShare
+      expected: budgetData.defaultQFSByActivity
     });
 
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-      expected: budgetData.defaultQuarterlyFederalShare
+    proposedBudgetPage.verifyQuarterlyFederalShareByTotals({
+      expectedHITandHIETotal: budgetData.defaultHITandHIETotal,
+      expectedMMISTotal: budgetData.defaultMMISTotal
     });
 
-    proposedBudgetPage.verifyEQIPViewByFFY({
+    proposedBudgetPage.verifyEQIPFormByFFY({
       years,
       expected: budgetData.defaultEQIP
     });
@@ -166,7 +160,7 @@ export const testProposedBudgetWithData = years => {
     cy.waitForSave();
   });
 
-  it.only('should export the correct values for Proposed Budget Export View', () => {
+  it('should export the correct values for Proposed Budget Export View', () => {
     cy.goToExportView();
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
@@ -196,10 +190,10 @@ export const testProposedBudgetWithData = years => {
       expectedMMISTotal: budgetData.populatedMMISTotal
     });
 
-    // proposedBudgetPage.verifyEQIPViewByFFY({
-    //   years,
-    //   expected: budgetData.dataEQIP
-    // });
+    proposedBudgetPage.verifyEQIPFormByFFY({
+      years,
+      expected: budgetData.populatedEQIP
+    });
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });

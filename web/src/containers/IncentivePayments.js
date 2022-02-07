@@ -59,7 +59,7 @@ const IncentivePayments = ({
     <Fragment>
       {years.map(year => (
         <Fragment key={year}>
-          <table className="budget-table">
+          <table className="budget-table" data-cy="EQIPTable">
             <caption className="ds-u-visibility--screen-reader">
               {t('ffy', { year })} Incentive Payments by Quarter
             </caption>
