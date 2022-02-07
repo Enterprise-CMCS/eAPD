@@ -63,19 +63,26 @@ const DateField = ({ value, onChange, ...rest }) => {
     let monthInvalid = false;
     let yearInvalid = false;
 
-    if (!dateParts.month) {
-      message.push('Month is required.');
-      monthInvalid = true;
+    if (!dateParts.month || !dateParts.day || !dateParts.year) {
+      message.push('Please provide a target completion date.');
+
+      if (!dateParts.month) {
+        monthInvalid = true;
+      }
+
+      if (!dateParts.day) {
+        dayInvalid = true;
+      }
+
+      if (!dateParts.year) {
+        yearInvalid = true;
+      }
     }
     if (dateParts.month > 12) {
       message.push('Month must be between 1 and 12.');
       monthInvalid = true;
     }
 
-    if (!dateParts.day) {
-      message.push('Day is required.');
-      dayInvalid = true;
-    }
     if (dateParts.day > 31) {
       message.push('Day must be less than 31.');
       dayInvalid = true;
@@ -110,6 +117,7 @@ const DateField = ({ value, onChange, ...rest }) => {
       dateFormatter={joinDate}
       onChange={onChange}
       onComponentBlur={getErrorMsg}
+      errorPlacement='bottom'
     />
   );
 };
