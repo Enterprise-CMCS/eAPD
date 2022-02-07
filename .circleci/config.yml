@@ -352,13 +352,14 @@ jobs:
             nvm alias default 16
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             ./cypress-ci-setup.sh
+            npm install
       - run:
           name: run e2e tests
           working_directory: ~/project/integrationTests
           command: |
+            export NODE_ENV=development
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f docker-compose.cypress-ci.yml up --exit-code-from cypress
+            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.

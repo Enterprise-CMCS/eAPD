@@ -1,4 +1,4 @@
-docker-compose -f docker-compose.cypress-ci.yml up -d db mongo api web
+docker-compose -f docker-compose.cypress-ci.yml up -d
 sleep 3
 
 docker-compose -f docker-compose.cypress-ci.yml exec api npm run migrate

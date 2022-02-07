@@ -68,20 +68,6 @@ services:
         target: /app
         consistency: delegated
       - /app/node_modules
-  cypress:
-    image: 'cypress/included:9.4.1'
-    depends_on:
-      - db
-      - mongo
-      - web
-      - api
-    entrypoint: 'cypress run -C cypress.json -b chrome --parallel --record --key $${CYPRESS_RECORD_KEY}'
-    environment:
-      - NODE_ENV=development
-      - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
-    working_dir: /eAPD/integrationTests
-    volumes:
-      - ../:/eAPD
 
 networks:
   default:
