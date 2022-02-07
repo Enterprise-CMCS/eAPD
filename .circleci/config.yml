@@ -336,6 +336,7 @@ jobs:
           at: ~/project/integrationTests
       - run:
           name: set up environment
+          working_directory: ~/project/integrationTests
           command: |
             export NODE_ENV=development
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
