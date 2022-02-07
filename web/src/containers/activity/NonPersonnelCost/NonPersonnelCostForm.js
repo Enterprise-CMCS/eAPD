@@ -67,7 +67,7 @@ const NonPersonnelCostForm = forwardRef(
   ].map(category => ({ label: category, value: category }));
   categories.unshift({label:'Select an option', value:''})
   return (
-    <form index={index} ref={ref} onSubmit={handleSubmit}>
+    <form index={index} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
       {/* eslint-disable jsx-a11y/no-autofocus */}
       <Dropdown
@@ -97,6 +97,7 @@ const NonPersonnelCostForm = forwardRef(
           onChange={getEditCostForYear(year)}
         />
       ))}
+      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
     </form>
   );
 }

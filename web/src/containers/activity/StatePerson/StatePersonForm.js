@@ -74,7 +74,7 @@ const StatePersonForm = forwardRef(
   };
 
   return (
-    <form index={index} ref={ref} onSubmit={handleSubmit}>
+    <form index={index} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
       <TextField
         label="Personnel title"
@@ -96,6 +96,7 @@ const StatePersonForm = forwardRef(
         setCost={getEditCostForYear}
         setFTE={getEditFTEForYear}
       />
+      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
     </form>
   );
 }

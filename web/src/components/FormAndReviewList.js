@@ -50,7 +50,7 @@ const FormAndReviewItem = ({
         variation="primary"
         onClick={() => {
           collapse();
-          formRef.current.dispatchEvent(new Event('submit'));
+          formRef.current.click();
           }
         }
       >

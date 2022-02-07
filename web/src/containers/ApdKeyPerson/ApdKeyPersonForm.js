@@ -75,7 +75,7 @@ const PersonForm = forwardRef(
     const primary = index === 0;
 
     return (
-      <form index={index} ref={ref} onSubmit={handleSubmit}>
+      <form index={index} onSubmit={handleSubmit}>
         <h4 className="ds-h4">
           {primary
             ? titleCase(t(`${tRoot}.labels.titlePrimary`))
@@ -154,6 +154,7 @@ const PersonForm = forwardRef(
             }
           />
         </fieldset>
+        <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
       </form>
     );
   }

@@ -51,7 +51,7 @@ const MilestoneForm = forwardRef(
   };
 
   return (
-    <form index={index} ref={ref} onSubmit={handleSubmit}>
+    <form index={index} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Milestone {index + 1}:</h6>
       <TextField
         data-cy={`milestone-${index}`}
@@ -69,6 +69,7 @@ const MilestoneForm = forwardRef(
         value={state.endDate}
         onChange={changeDate}
       />
+      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
     </form>
   );
 }

@@ -88,7 +88,7 @@ const OutcomeAndMetricForm = forwardRef(
   };
 
   return (
-    <form index={index} ref={ref} onSubmit={handleSubmit} key={`activity${activityIndex}-index${index}-form`}>
+    <form index={index} key={`activity${activityIndex}-index${index}-form`} onSubmit={handleSubmit}>
       <TextField
         key={`activity${activityIndex}-index${index}`}
         data-cy={`outcome-${index}`}
@@ -151,6 +151,7 @@ const OutcomeAndMetricForm = forwardRef(
           Add Metric to Outcome
         </Button>
       </div>
+      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
     </form>
   );
   }

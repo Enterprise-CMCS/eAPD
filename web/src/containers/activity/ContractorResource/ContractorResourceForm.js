@@ -120,7 +120,7 @@ const ContractorResourceForm = forwardRef(
     };
   
     return (
-      <form index={index} ref={ref} onSubmit={handleSubmit}>
+      <form index={index} onSubmit={handleSubmit}>
         <TextField
           autoFocus
           label="Private Contractor or Vendor Name"
@@ -248,6 +248,7 @@ const ContractorResourceForm = forwardRef(
             />
           ))
         )}
+        <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
       </form>
     );
   }
