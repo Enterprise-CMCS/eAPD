@@ -70,9 +70,15 @@ services:
       - /app/node_modules
   cypress:
     image: 'cypress/included:9.4.1'
+    depends_on:
+      - db
+      - mongo
+      - web
+      - api
+    entrypoint: 'cypress run -C cypress.json -b chrome --headless --parallel --record --key $${CYPRESS_RECORD_KEY}'
     environment:
-      - CYPRESS_baseUrl=http://localhost:8080/
       - NODE_ENV=development
+      - CYPRESS_RECORD_KEY=${CYPRESS_RECORD_KEY}
     working_dir: /eAPD/integrationTests
     network_mode: 'host'
     volumes:

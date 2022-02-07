@@ -335,7 +335,7 @@ jobs:
       - attach_workspace:
           at: ~/project/integrationTests
       - run:
-          name: set up environment
+          name: run e2e tests
           working_directory: ~/project/integrationTests
           command: |
             export NODE_ENV=development
@@ -344,6 +344,7 @@ jobs:
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
+            export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -356,7 +357,7 @@ jobs:
           working_directory: ~/project/integrationTests
           command: |
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
-            docker-compose -f docker-compose.cypress-ci.yml exec cypress npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY
+            docker-compose -f docker-compose.cypress-ci.yml up --exit-code-from cypress
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
