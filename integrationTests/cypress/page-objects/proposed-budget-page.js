@@ -14,7 +14,7 @@ class ProposedBudgetPage {
         .then(table => {
           const { programTypes, totalComputableMedicaidCost } = expected[index];
           cy.get(table)
-            .getTable()
+            .getEAPDTable()
             .then(tableData => {
               cy.log(JSON.stringify(tableData));
               expect(tableData).to.deep.include(programTypes);
@@ -58,7 +58,7 @@ class ProposedBudgetPage {
           .eq(index)
           .then(table => {
             cy.get(table)
-              .getTable()
+              .getEAPDTable()
               .then(tableData => {
                 expect(tableData).to.deep.include(item);
               });
@@ -68,7 +68,7 @@ class ProposedBudgetPage {
 
     cy.get('[data-cy="summaryBudgetTotals"]').then(table => {
       cy.get(table)
-        .getTable()
+        .getEAPDTable()
         .then(tableData => {
           expect(tableData).to.deep.include(expectedTotals);
         });
@@ -85,7 +85,7 @@ class ProposedBudgetPage {
             .eq(index)
             .then(table => {
               cy.get(table)
-                .getTable()
+                .getEAPDTable()
                 .then(tableData => {
                   expect(tableData).to.deep.include(item);
                 });
@@ -95,7 +95,7 @@ class ProposedBudgetPage {
             .eq(index + years.length)
             .then(table => {
               cy.get(table)
-                .getTable()
+                .getEAPDTable()
                 .then(tableData => {
                   expect(tableData).to.deep.include(item);
                 });
@@ -113,7 +113,7 @@ class ProposedBudgetPage {
       .eq(0)
       .then(table => {
         cy.get(table)
-          .getTable()
+          .getEAPDTable()
           .then(tableData => {
             expect(tableData).to.deep.include(expectedHITandHIETotal);
           });
@@ -123,7 +123,7 @@ class ProposedBudgetPage {
       .eq(1)
       .then(table => {
         cy.get(table)
-          .getTable()
+          .getEAPDTable()
           .then(tableData => {
             expect(tableData).to.deep.include(expectedMMISTotal);
           });
@@ -167,7 +167,7 @@ class ProposedBudgetPage {
           .eq(index)
           .within(table => {
             cy.get(table)
-              .getTable()
+              .getEAPDTable()
               .then(tableData => {
                 expect(tableData[type]).to.deep.include(typeValues);
               });
