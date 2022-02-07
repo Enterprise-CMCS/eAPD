@@ -828,6 +828,11 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
         </div>
       </ChoiceComponent>
     </fieldset>
+    <input
+      className="ds-u-visibility--hidden"
+      hidden={true}
+      type="submit"
+    />
   </form>
 </PersonForm>
 `;
@@ -915,6 +920,11 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
       value="yes"
     />
   </fieldset>
+  <input
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
 </form>
 `;
 
@@ -1001,5 +1011,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
       value="yes"
     />
   </fieldset>
+  <input
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
 </form>
 `;

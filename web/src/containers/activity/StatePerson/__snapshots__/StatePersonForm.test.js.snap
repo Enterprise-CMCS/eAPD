@@ -47,5 +47,10 @@ exports[`the StatePersonForm component renders correctly 1`] = `
     setCost={[Function]}
     setFTE={[Function]}
   />
+  <input
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
 </form>
 `;

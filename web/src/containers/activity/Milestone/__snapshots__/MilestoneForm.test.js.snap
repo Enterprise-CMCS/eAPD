@@ -427,6 +427,11 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         </FormControl>
       </DateField>
     </DateField>
+    <input
+      className="ds-u-visibility--hidden"
+      hidden={true}
+      type="submit"
+    />
   </form>
 </MilestoneForm>
 `;

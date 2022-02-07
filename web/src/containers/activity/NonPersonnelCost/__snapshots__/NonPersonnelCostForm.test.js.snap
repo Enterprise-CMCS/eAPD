@@ -481,6 +481,11 @@ exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
         </TextField>
       </NumberField>
     </DollarField>
+    <input
+      className="ds-u-visibility--hidden"
+      hidden={true}
+      type="submit"
+    />
   </form>
 </NonPersonnelCostForm>
 `;

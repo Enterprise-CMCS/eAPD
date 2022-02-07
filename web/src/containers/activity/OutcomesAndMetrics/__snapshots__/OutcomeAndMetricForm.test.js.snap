@@ -138,5 +138,10 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       Add Metric to Outcome
     </Button>
   </div>
+  <input
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
 </form>
 `;

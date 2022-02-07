@@ -183,5 +183,10 @@ exports[`the ContractorResourceForm component renders correctly 1`] = `
     size="medium"
     value={400}
   />
+  <input
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
 </form>
 `;
