@@ -9,4 +9,9 @@ docker cp \
 echo "Creating Cypress Env File"
 echo $CYPRESS_ENV >> ./cypress.env.json
 
-npx cypress run -C cypress.json --parallel --record $1 $2
+npx cypress run -C cypress.json --parallel --record $1 $2 $@
+
+EXIT_CODE=$?
+echo $EXIT_CODE
+
+exit $EXIT_CODE
