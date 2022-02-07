@@ -29,6 +29,15 @@ class ProposedBudgetPage {
   };
 
   // Activity Breakdown
+  getBreakdownByFFYAndActivity = ({ ffy, index }) =>
+    cy.get(`#activity-${index + 1}-${ffy}`);
+
+  getBreakdownByFFYAndActivityAndExpense = ({ ffy, index, expense }) =>
+    this.getBreakdownByFFYAndActivity({ ffy, index })
+      .contains(expense)
+      .parent()
+      .nextUntil('.budget-table--row__header');
+
   verifyActvityBreakdown = ({ years, activityList, expected }) => {
     _.forEach(years, (ffy, ffyIndex) => {
       _.forEach(activityList, (activityName, index) => {
