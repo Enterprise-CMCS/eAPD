@@ -354,7 +354,9 @@ jobs:
       - run:
           name: run e2e tests
           working_directory: ~/project/integrationTests
-          command: docker-compose -f docker-compose.cypress-ci.yml exec cypress npm run cy:run:ci --  --parallel --record --key $CYPRESS_RECORD_KEY
+          command: |
+            export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
+            docker-compose -f docker-compose.cypress-ci.yml exec cypress npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
