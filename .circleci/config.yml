@@ -338,10 +338,13 @@ jobs:
           working_directory: ~/project/web
           command: node yaml-tests.js
   e2e test:
-    machine:
-      image: ubuntu-2004:202104-01
-    # tells CircleCI to execute this job on 3 machines simultaneously
-    parallelism: 3
+    docker:
+      - image: cimg/node:16.13.2
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    # tells CircleCI to execute this job on 4 machines simultaneously
+    parallelism: 4
     steps:
       - checkout
       - attach_workspace:
@@ -351,12 +354,10 @@ jobs:
           working_directory: ~/project
           command: |
             sudo apt-get update
-            sudo apt-get install -y libgbm-dev
-            # Switch to Node 16.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.13.2
-            nvm alias default 16.13.2
+            sudo apt-get install -y libgbm-dev py-pip python3-dev openssl-dev 
+            sudo curl -L "https://github.com/docker/compose/releases/download/2.2.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+            sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
       - run:
           name: set up environment
           working_directory: ~/project
