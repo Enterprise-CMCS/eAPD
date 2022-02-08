@@ -59,7 +59,7 @@ DataRowGroup.propTypes = {
 
 const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
   return (
-    <table className="budget-table">
+    <table className="budget-table" data-cy="CACTable">
       <thead>
         <tr className="budget-table--row__primary-header">
           <th scope="col">
