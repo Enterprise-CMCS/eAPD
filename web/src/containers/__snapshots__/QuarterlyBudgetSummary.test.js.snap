@@ -12,6 +12,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </h4>
     <table
       className="budget-table"
+      data-cy="QFSTable"
       key="1"
     >
       <caption
@@ -225,6 +226,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </table>
     <table
       className="budget-table"
+      data-cy="QFSTable"
       key="2"
     >
       <caption
@@ -440,6 +442,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </table>
     <table
       className="budget-table budget-table--totals"
+      data-cy="QFSTotals"
     >
       <colgroup>
         <col
@@ -522,6 +525,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </h4>
     <table
       className="budget-table"
+      data-cy="QFSTable"
       key="1"
     >
       <caption
@@ -737,6 +741,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </table>
     <table
       className="budget-table"
+      data-cy="QFSTable"
       key="2"
     >
       <caption
@@ -952,6 +957,7 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
     </table>
     <table
       className="budget-table budget-table--totals"
+      data-cy="QFSTotals"
     >
       <colgroup>
         <col

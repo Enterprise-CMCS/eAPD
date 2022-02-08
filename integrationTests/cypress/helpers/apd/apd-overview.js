@@ -111,6 +111,8 @@ export const testAPDOverviewWithData = () => {
       );
     });
 
+    cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+
     // must be done as a chunk because the tinyMCE fields don't have
     // time to load if they are done individually
     cy.setTinyMceContent(
@@ -124,7 +126,6 @@ export const testAPDOverviewWithData = () => {
 
     cy.setTinyMceContent('mmis-overview-field', apdOverview.MMIS);
 
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.waitForSave();
   });
 
@@ -136,10 +137,7 @@ export const testAPDOverviewWithData = () => {
     // FFY Check
     cy.then(() => {
       yearRange.forEach((y, i) => {
-        cy.get('[class="ds-h1 ds-u-margin-top--2"]').should(
-          'contain',
-          y[i]
-        );
+        cy.get('[class="ds-h1 ds-u-margin-top--2"]').should('contain', y[i]);
       });
     });
 

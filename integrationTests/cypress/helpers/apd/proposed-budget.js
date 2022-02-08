@@ -27,31 +27,29 @@ export const testDefaultProposedBudget = years => {
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
-      expected: budgetData.defaultSummaryBudgetByActivity
+      expected: budgetData.defaultCombinedActivityCost
     });
 
-    proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
+    proposedBudgetPage.verifyActvityBreakdown({
       years,
       activityList,
       expected: budgetData.defaultActivityBreakdown
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
+    proposedBudgetPage.verifySummaryBudgetTables({
       years: [...years, 'total'],
-      expected: budgetData.defaultSummaryBudgetTable.byTypes
+      expected: budgetData.defaultSummaryBudget,
+      expectedTotals: budgetData.defaultSummaryBudgetTotals
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableTotal({
-      expected: budgetData.defaultSummaryBudgetTable.totals
-    });
-
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
+    proposedBudgetPage.verifyQuarterlyFederalShareByActivity({
       years,
-      expected: budgetData.defaultQuarterlyFederalShare
+      expected: budgetData.defaultQFSByActivity
     });
 
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-      expected: budgetData.defaultQuarterlyFederalShare
+    proposedBudgetPage.verifyQuarterlyFederalShareByTotals({
+      expectedHITandHIETotal: budgetData.defaultHITandHIETotal,
+      expectedMMISTotal: budgetData.defaultMMISTotal
     });
 
     proposedBudgetPage.verifyEQIPFormByFFY({
@@ -65,34 +63,32 @@ export const testDefaultProposedBudget = years => {
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
-      expected: budgetData.defaultSummaryBudgetByActivity
+      expected: budgetData.defaultCombinedActivityCost
     });
 
-    proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
+    proposedBudgetPage.verifyActvityBreakdown({
       years,
       activityList,
       expected: budgetData.defaultActivityBreakdown
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
+    proposedBudgetPage.verifySummaryBudgetTables({
       years: [...years, 'total'],
-      expected: budgetData.defaultSummaryBudgetTable.byTypes
+      expected: budgetData.defaultSummaryBudget,
+      expectedTotals: budgetData.defaultSummaryBudgetTotals
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableTotal({
-      expected: budgetData.defaultSummaryBudgetTable.totals
-    });
-
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
+    proposedBudgetPage.verifyQuarterlyFederalShareByActivity({
       years,
-      expected: budgetData.defaultQuarterlyFederalShare
+      expected: budgetData.defaultQFSByActivity
     });
 
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-      expected: budgetData.defaultQuarterlyFederalShare
+    proposedBudgetPage.verifyQuarterlyFederalShareByTotals({
+      expectedHITandHIETotal: budgetData.defaultHITandHIETotal,
+      expectedMMISTotal: budgetData.defaultMMISTotal
     });
 
-    proposedBudgetPage.verifyEQIPViewByFFY({
+    proposedBudgetPage.verifyEQIPFormByFFY({
       years,
       expected: budgetData.defaultEQIP
     });
@@ -131,31 +127,29 @@ export const testProposedBudgetWithData = years => {
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
-      expected: budgetData.dataSummaryBudgetByActivity
+      expected: budgetData.populatedCombinedActivityCost
     });
 
-    proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
+    proposedBudgetPage.verifyActvityBreakdown({
       years,
       activityList,
-      expected: budgetData.dataActivityBreakdown
+      expected: budgetData.populatedActivityBreakdown
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
+    proposedBudgetPage.verifySummaryBudgetTables({
       years: [...years, 'total'],
-      expected: budgetData.dataSummaryBudgetTable.byTypes
+      expected: budgetData.populatedSummaryBudget,
+      expectedTotals: budgetData.populatedSummaryBudgetTotals
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableTotal({
-      expected: budgetData.dataSummaryBudgetTable.totals
-    });
-
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
+    proposedBudgetPage.verifyQuarterlyFederalShareByActivity({
       years,
-      expected: budgetData.dataQuarterlyFederalShare
+      expected: budgetData.populatedQFSByActivity
     });
 
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-      expected: budgetData.dataQuarterlyFederalShare
+    proposedBudgetPage.verifyQuarterlyFederalShareByTotals({
+      expectedHITandHIETotal: budgetData.populatedHITandHIETotal,
+      expectedMMISTotal: budgetData.populatedMMISTotal
     });
 
     proposedBudgetPage.fillInEQIPFormByFFY({
@@ -172,36 +166,34 @@ export const testProposedBudgetWithData = years => {
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
-      expected: budgetData.dataSummaryBudgetByActivity
+      expected: budgetData.populatedCombinedActivityCost
     });
 
-    proposedBudgetPage.verifyActvityBreakdownByFFYAndActivity({
+    proposedBudgetPage.verifyActvityBreakdown({
       years,
       activityList,
-      expected: budgetData.dataActivityBreakdown
+      expected: budgetData.populatedActivityBreakdown
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableByTypeAndFFY({
+    proposedBudgetPage.verifySummaryBudgetTables({
       years: [...years, 'total'],
-      expected: budgetData.dataSummaryBudgetTable.byTypes
+      expected: budgetData.populatedSummaryBudget,
+      expectedTotals: budgetData.populatedSummaryBudgetTotals
     });
 
-    proposedBudgetPage.verifySummaryBudgetTableTotal({
-      expected: budgetData.dataSummaryBudgetTable.totals
-    });
-
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFY({
+    proposedBudgetPage.verifyQuarterlyFederalShareByActivity({
       years,
-      expected: budgetData.dataQuarterlyFederalShare
+      expected: budgetData.populatedQFSByActivity
     });
 
-    proposedBudgetPage.verifyQuarterlyFederalShareByFFYTotals({
-      expected: budgetData.dataQuarterlyFederalShare
+    proposedBudgetPage.verifyQuarterlyFederalShareByTotals({
+      expectedHITandHIETotal: budgetData.populatedHITandHIETotal,
+      expectedMMISTotal: budgetData.populatedMMISTotal
     });
 
-    proposedBudgetPage.verifyEQIPViewByFFY({
+    proposedBudgetPage.verifyEQIPFormByFFY({
       years,
-      expected: budgetData.dataEQIP
+      expected: budgetData.populatedEQIP
     });
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
