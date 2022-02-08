@@ -4,6 +4,7 @@ exports[`incentive payments component renders correctly 1`] = `
 <Fragment>
   <table
     className="budget-table"
+    data-cy="EQIPTable"
   >
     <caption
       className="ds-u-visibility--screen-reader"
@@ -130,6 +131,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           <Dollars>
             10
@@ -221,6 +223,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           42
         </td>
@@ -294,6 +297,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           <Dollars>
             74
@@ -385,6 +389,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           106
         </td>
@@ -393,6 +398,7 @@ exports[`incentive payments component renders correctly 1`] = `
   </table>
   <table
     className="budget-table"
+    data-cy="EQIPTable"
   >
     <caption
       className="ds-u-visibility--screen-reader"
@@ -519,6 +525,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           <Dollars>
             26
@@ -610,6 +617,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           58
         </td>
@@ -683,6 +691,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           <Dollars>
             90
@@ -774,6 +783,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           122
         </td>
