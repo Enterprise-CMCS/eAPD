@@ -8,12 +8,6 @@ export const findTextAncestor = (e) => {
   return e;
 }
 
-export const findDateAncestor = (e) => {
-  // eslint-disable-next-line no-param-reassign
-  while ((e = e.parentNode) && !e.classList.contains('ds-c-datefield__container'));
-  return e;
-};
-
 export const disableBtn = (e) => {
   const container = findTextAncestor(e);
   const doneBtn = container.querySelector('#form-and-review-list--done-btn');
@@ -65,6 +59,6 @@ export const validateText = (e, label, suffix) => {
   const text = el.innerHTML.trim();
   const elValue = el.value;
 
-  return text || elValue !== '' ? removeMissingTextAlert(el, parent) : addMissingTextAlert(el, parent, label, suffix) ;
+  return text || elValue !== '' ? removeMissingTextAlert(el, parent) : addMissingTextAlert(el, parent, label, suffix);
 
 };
