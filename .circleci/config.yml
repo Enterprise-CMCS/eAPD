@@ -353,22 +353,15 @@ jobs:
           name: set up cypress
           working_directory: ~/project/integrationTests
           command: |
-            export NODE_ENV=development
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16 $@
-            echo "install node 16 $?"
-            nvm alias default 16 $@
-            echo "default node 16 $?"
-            ./cypress-ci-setup.sh $@
-            echo "cypress ci setup $?"
-            npm install $@
-            echo "npm install $?"
-            npx cypress install --force $@
-            echo "cypress install $?"
-            npx cypress verify $@
-            echo "cypress verify $?"
+            nvm install 16
+            nvm alias default 16
+            ./cypress-ci-setup.sh
+            npm install
+            npx cypress install --force
+            npx cypress verify
       - run:
           name: run e2e tests
           working_directory: ~/project/integrationTests
