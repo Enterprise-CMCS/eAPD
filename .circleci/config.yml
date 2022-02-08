@@ -64,6 +64,15 @@ workflows:
             branches:
               ignore:
                 - main
+          requires:
+            - frontend lint
+            - backend lint
+            - frontend dependency vulnerability scan
+            - backend dependency vulnerability scan
+            - frontend test
+            - yaml test
+            - backend unit test
+            - backend api endpoint test
 
       # backend jobs
       - backend api endpoint test:
@@ -350,10 +359,9 @@ jobs:
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
 
-            sudo apt-get update
-            sudo apt-get install -y libgbm-dev curl
-            curl -o- https://raw.githubusercontent.com/docker/compose/v2.2.3/install.sh | bash
-            sudo chmod +x /usr/local/bin/docker-compose
+            curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
             docker-compose up -d
             docker-compose exec api npm run migrate
