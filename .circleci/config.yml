@@ -354,7 +354,7 @@ jobs:
           working_directory: ~/project
           command: |
             sudo apt-get update
-            sudo apt-get install -y libgbm-dev
+            sudo apt-get install -y libgbm-dev python3-dev
 
             mkdir -p ~/.docker/cli-plugins/
             curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
