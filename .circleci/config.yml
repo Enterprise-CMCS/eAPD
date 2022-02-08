@@ -328,24 +328,25 @@ jobs:
           command: node yaml-tests.js
 
   e2e test:
-    machine:
-      image: ubuntu-2004:202104-01
+    # use Cypress built Docker image with Node 10 and npm 6
+    docker:
+      - image: cypress/base:16.13.2
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    # tells CircleCI to execute this job on 4 machines simultaneously
+    parallelism: 4
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
-      - run:
-          name: set up node
-          working_directory: ~/project
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y libgbm-dev
+      # - run:
+      #     name: set up node
+      #     working_directory: ~/project
+      #     command: |
+      #       sudo apt-get update
+      #       sudo apt-get install -y libgbm-dev
 
-            # Switch to Node 16.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.13.2
-            nvm alias default 16.13.2
       - run:
           name: set up environment
           working_directory: ~/project
