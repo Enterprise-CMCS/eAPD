@@ -194,6 +194,7 @@
     "history": "can't upgrade to 17 react-router v6"
   },
   "resolutions": {
-    "node-fetch": "2.6.7"
+    "node-fetch": "2.6.7",
+    "glob-parent": "5.1.2"
   }
 }
