@@ -353,11 +353,14 @@ jobs:
           name: set up cypress
           working_directory: ~/project/integrationTests
           command: |
+            sudo apt-get update
+            sudo apt-get install -y libgbm-dev
+
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16
-            nvm alias default 16
+            nvm install 16.13.2
+            nvm alias default 16.13.2
             ./cypress-ci-setup.sh
             npm install
             npx cypress install --force
