@@ -375,7 +375,7 @@ jobs:
           command: |
             export NODE_ENV=development
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
-            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CI_BUILD_NUMBER-$CIRCLE_BRANCH"
+            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_JOB-$CIRCLE_BRANCH"
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
