@@ -328,25 +328,25 @@ jobs:
           command: node yaml-tests.js
 
   e2e test:
-    # use Cypress built Docker image with Node 10 and npm 6
     docker:
-      - image: cypress/base:16.13.2
+      - image: cimg/node:16.13.2
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
-    # tells CircleCI to execute this job on 4 machines simultaneously
-    parallelism: 4
+    # tells CircleCI to execute this job on 3 machines simultaneously
+    parallelism: 3
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
-      # - run:
-      #     name: set up node
-      #     working_directory: ~/project
-      #     command: |
-      #       sudo apt-get update
-      #       sudo apt-get install -y libgbm-dev
-
+      - run:
+          name: set up node
+          working_directory: ~/project
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libgbm-dev curl
+            sudo curl -L "https://github.com/docker/compose/releases/download/2.2.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
       - run:
           name: set up environment
           working_directory: ~/project
