@@ -1,10 +1,7 @@
-echo "Creating TOKEN_LOC env var"
-export TOKEN_LOC=$(docker exec eapd_api_1 find /app -type f -name tokens.json)
+export NODE_ENV=development
 
-echo "Copying token"
-docker cp \
-  $(docker ps -aqf "name=eapd_api_1"):$TOKEN_LOC \
-  ./tokens.json
+docker-compose exec api npm run migrate
+docker-compose exec api npm run seed
 
 echo "Creating Cypress Env File"
 echo $CYPRESS_ENV >> ./cypress.env.json
