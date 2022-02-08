@@ -70,7 +70,6 @@ workflows:
             - frontend dependency vulnerability scan
             - backend dependency vulnerability scan
             - frontend test
-            - yaml test
             - backend unit test
             - backend api endpoint test
 
@@ -202,6 +201,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            - e2e test
       - frontend deploy:
           name: frontend deploy production
           env: PRODUCTION
@@ -216,6 +216,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            - e2e test
 
       # joint jobs
       - preview deploy:
@@ -228,6 +229,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
+            - e2e test
 
       - store artifacts:
           name: store artifacts staging
@@ -335,19 +337,26 @@ jobs:
       - run:
           working_directory: ~/project/web
           command: node yaml-tests.js
-
   e2e test:
-    docker:
-      - image: cimg/node:16.13.2
-        auth:
-          username: $DOCKER_EAPD_UN
-          password: $DOCKER_EAPD_PW
+    machine:
+      image: ubuntu-2004:202104-01
     # tells CircleCI to execute this job on 3 machines simultaneously
     parallelism: 3
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
+      - run:
+          name: set up node
+          working_directory: ~/project
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libgbm-dev
+            # Switch to Node 16.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.13.2
+            nvm alias default 16.13.2
       - run:
           name: set up environment
           working_directory: ~/project
@@ -358,11 +367,7 @@ jobs:
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
-
-            curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
             docker-compose exec api npm run migrate
             docker-compose exec api npm run seed
@@ -382,7 +387,7 @@ jobs:
           command: |
             export NODE_ENV=development
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
-            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_JOB-$CIRCLE_BRANCH"
+            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests"
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
