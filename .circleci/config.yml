@@ -333,10 +333,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project/integrationTests
+          at: ~/project
       - run:
           name: set up environment
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project
           command: |
             export NODE_ENV=development
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
@@ -344,22 +344,32 @@ jobs:
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
-            export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
+
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            docker-compose up -d
+            docker-compose exec api npm run migrate
+            docker-compose exec api npm run seed
+      - run:
+          name: set up cypress
+          working_directory: ~/project/integrationTests
+          command: |
+            export NODE_ENV=development
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 16
             nvm alias default 16
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             ./cypress-ci-setup.sh
             npm install
+            npx cypress install --force
+            npx cypress verify
       - run:
           name: run e2e tests
           working_directory: ~/project/integrationTests
           command: |
             export NODE_ENV=development
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
-            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY
+            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CI_BUILD_NUMBER-$CIRCLE_BRANCH"
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.

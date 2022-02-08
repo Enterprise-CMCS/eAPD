@@ -52,6 +52,7 @@ services:
     image: cms-eapd/api
     depends_on:
       - db
+      - mongo
     environment:
       - PORT=8000
       - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
