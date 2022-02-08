@@ -368,7 +368,6 @@ jobs:
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
             cp ../api/seeds/test/tokens.json ./tokens.json
-            ./cypress-ci-setup.sh
             npm install
             npx cypress install --force
             npx cypress verify
