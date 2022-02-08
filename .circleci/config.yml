@@ -352,7 +352,7 @@ jobs:
 
             sudo apt-get update
             sudo apt-get install -y libgbm-dev curl
-            sudo curl -L "https://github.com/docker/compose/releases/download/2.2.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            curl -o- https://raw.githubusercontent.com/docker/compose/v2.2.3/install.sh | bash
             sudo chmod +x /usr/local/bin/docker-compose
 
             docker-compose up -d
