@@ -354,10 +354,12 @@ jobs:
           working_directory: ~/project
           command: |
             sudo apt-get update
-            sudo apt-get install -y libgbm-dev py-pip python3-dev openssl-dev 
-            sudo curl -L "https://github.com/docker/compose/releases/download/2.2.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-            sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+            sudo apt-get install -y libgbm-dev
+            sudo apt-get install -y py-pip python3-dev
+
+            mkdir -p ~/.docker/cli-plugins/
+            curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+            chmod +x ~/.docker/cli-plugins/docker-compose
       - run:
           name: set up environment
           working_directory: ~/project
