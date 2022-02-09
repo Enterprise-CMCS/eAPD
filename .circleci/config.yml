@@ -356,7 +356,8 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y libgbm-dev python3-dev containerd docker.io docker
             mkdir -p ~/.docker/cli-plugins/
-            curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+            #curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+            pip3 insall docker-compose
             sudo chmod +x ~/.docker/cli-plugins/docker-compose
             docker-compose --version
       - run:
