@@ -8,25 +8,105 @@ const goTotStateAdminPortal = () => {
   cy.contains('AK State admin').click();
 };
 
-// Approve requested role - make sure they are moved to active and have the right role log in as requested role and make sure you have access
-// Restore revoked role - make sure they are moved to active log in as revoked role and make sure you have access
-// Change state staff's role to state contractor - verify this change
-// Revoke state contractor - make sure they are moved to inactive and have the revoked role; log in as state contractor and make sure they dont have access
-// reset requested role and reject - make sure they are moved to inactive and have denied tag
+const clickButton = (role, button) => {
+  cy.findAllByText(role)
+    .parent()
+    .within(() => {
+      cy.contains(button).click();
+    });
+};
 
-// Test cancel buttons as well
-
-// If a tab is empty this appears "No users on this tab at this time"
-
-// Make a function for the UI of approving/restoring
+const verifyRole = (name, role) => {
+  cy.findAllByText(name)
+    .parent()
+    .within(() => {
+      cy.contains(role);
+    });
+};
 
 describe('tests state admin portal', () => {
   it('state admin manages roles', { tags: ['@state', '@admin'] }, () => {
+    // Request access on No Role
+    cy.loginWithEnv('norole');
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(2500); // Allows time to log in
+    cy.get('[class="ds-c-field"]').type('Alask');
+    cy.contains('Alaska').click();
+    cy.findByRole('button', { name: 'Submit' }).click();
+    cy.findByRole('button', { name: 'Ok' }).click();
+    cy.contains('norole').click();
+    cy.contains('Log out').click();
+
     goTotStateAdminPortal();
-    cy.contains('Requested Role')
-      .parent()
-      .within(() => {
-        cy.contains('Approve').click();
-      });
+
+    // Test approving access on Requested Role and Denying on No Role
+    clickButton('Requested Role', 'Approve');
+    cy.contains('Edit Role');
+    cy.findByRole('button', { name: 'Cancel' }).click();
+
+    clickButton('Requested Role', 'Approve');
+    cy.get('select').select('eAPD State Staff');
+    cy.findByRole('button', { name: 'Save' }).click();
+
+    clickButton('No Role', 'Deny');
+    cy.contains('Deny');
+    cy.findByRole('button', { name: 'Cancel' }).click();
+
+    clickButton('No Role', 'Deny');
+    cy.findByRole('button', { name: 'Confirm' }).click();
+
+    cy.contains('No users on this tab at this time');
+    cy.contains('Active').click();
+    verifyRole('Requested Role', 'eAPD State Staff');
+
+    // Test changing roles on State Staff
+    clickButton('State Staff', 'Edit Role');
+    cy.get('select').select('eAPD State Contractor');
+    cy.findByRole('button', { name: 'Save' }).click();
+    verifyRole('State Staff', 'eAPD State Contractor');
+
+    // Test revoking access on State Contractor
+    clickButton('State Contractor', 'Revoke');
+    cy.contains('Revoke');
+    cy.findByRole('button', { name: 'Cancel' }).click();
+
+    clickButton('State Contractor', 'Revoke');
+    cy.findByRole('button', { name: 'Confirm' }).click();
+
+    cy.contains('Inactive').click();
+    verifyRole('State Contractor', 'Revoked');
+
+    // Verify No Role was moved to Inactive
+    verifyRole('No Role', 'Denied');
+
+    // Test restoring access on Denied Role
+    clickButton('Denied Role', 'Restore Access');
+    cy.get('select').select('eAPD State Staff');
+    cy.findByRole('button', { name: 'Save' }).click();
+
+    cy.contains('Active').click();
+    verifyRole('Denied Role', 'eAPD State Staff');
+
+    // Verify Requested Role was approved
+    cy.loginWithEnv('requestedrole');
+    cy.contains('HITECH IAPD');
+    cy.contains('requestedrole').click();
+    cy.contains('Log out').click();
+
+    // Verify State Contractor was revoked
+    cy.loginWithEnv('statecontractor');
+    cy.contains('Approval Permissions Revoked');
+    cy.contains('statecontractor').click();
+    cy.contains('Log out').click();
+
+    // Verify Revoked Role has access
+    cy.loginWithEnv('deniedrole');
+    cy.contains('HITECH IAPD');
+    cy.contains('deniedrole').click();
+    cy.contains('Log out').click();
+
+    // Verify No Role was denined
+    cy.loginWithEnv('norole');
+    cy.contains('Approval Has Been Denied');
   });
 });
