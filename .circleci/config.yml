@@ -350,6 +350,7 @@ jobs:
 #    parallelism: 4
     steps:
       - checkout
+      - setup_remote_docker
       - attach_workspace:
           at: ~/project
       - run:
@@ -377,6 +378,7 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             pwd
             ls -la
+            set -x
             docker-compose up -d
             docker-compose exec -T api npm run migrate
             docker-compose exec -T api npm run seed
