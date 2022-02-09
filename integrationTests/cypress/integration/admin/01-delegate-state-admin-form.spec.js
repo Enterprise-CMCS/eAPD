@@ -49,7 +49,7 @@ describe(
     // it('tests default values', () => {
     //   cy.url().should('include', '/delegate-state-admin');
 
-    it.only('tests default values', () => {
+    it('tests default values', () => {
       cy.url().should('include', '/delegate-state-admin');
 
       cy.get('legend').contains('Period of Delegated Authority');
