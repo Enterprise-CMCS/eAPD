@@ -36,8 +36,11 @@ describe('tests state admin portal', () => {
     cy.findByRole('button', { name: 'Ok' }).click();
     cy.contains('norole').click();
     cy.contains('Log out').click();
+    // cy.wait(2000);
 
     goTotStateAdminPortal();
+    // cy.useRegularUser();
+    // cy.pause();
 
     // Test approving access on Requested Role and Denying on No Role
     clickButton('Requested Role', 'Approve');
@@ -55,7 +58,6 @@ describe('tests state admin portal', () => {
     clickButton('No Role', 'Deny');
     cy.findByRole('button', { name: 'Confirm' }).click();
 
-    cy.contains('No users on this tab at this time');
     cy.contains('Active').click();
     verifyRole('Requested Role', 'eAPD State Staff');
 
