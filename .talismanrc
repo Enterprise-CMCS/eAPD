@@ -25,4 +25,8 @@ fileignoreconfig:
     checksum: 593bcf3e72581345ca84c90ad3bd9cc8ab6fbec860bb61981fda2c0dc2b58136
   - filename: .github/workflows/cypress_e2e_tests.yml
     checksum: 3833c60dc3f29a562125054caee58416d43c176b165552434a5702672d7d7cd2
+  - filename: web/src/containers/BudgetSummary.js
+    checksum: aa478bdb174ea34f6695875b9d61c63aa80387d39eb91c98fb8b7e0b8a9fcf79
+  - filename: web/src/containers/QuarterlyBudgetSummary.js
+    checksum: d5cd73534169fae9d9441e5c5a2e1d501189ba23c628b5742a5681bee0d42db3
 version: ''

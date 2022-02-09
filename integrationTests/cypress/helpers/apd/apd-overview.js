@@ -111,7 +111,8 @@ export const testAPDOverviewWithData = () => {
       );
     });
 
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+
     // must be done as a chunk because the tinyMCE fields don't have
     // time to load if they are done individually
     cy.setTinyMceContent(
