@@ -1,64 +1,54 @@
 import { DateField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { addMissingTextAlert, removeMissingTextAlert } from '../helpers/textValidation';
+import { isValid, isFuture } from 'date-fns';
+// import { addMissingTextAlert, removeMissingTextAlert } from '../helpers/textValidation';
 
-// import { disableBtn } from '../helpers/textValidation'
+import { disableBtn } from '../helpers/textValidation'
 
 class DSDateField extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      errorMessage: [],
       day: '',
       month: '',
-      year: '',
+      year: ''
     };
   }
 
   render() {
-    const error = 'missing-text-error';
-    const alert = 'missing-text-alert';
+    const month = this.state.month;
+    const day = this.state.day;
+    const year = this.state.year;
+    const errorMsg = this.state.errorMessage;
+    const date = new Date(`${year}-${month}-${day}`)
 
-    const findDateAncestor = (e) => {
-      // eslint-disable-next-line no-param-reassign
-      while ((e = e.parentNode) && !e.classList.contains('ds-c-datefield__container'));
-      return e;
-    };
+    const getErrorMsg = (e) => {
+      let errors = [...errorMsg]
 
-    const addMissingDateAlert = (e, c) => {
-      const lastDiv = c.lastDiv;
-      const div = document.createElement('div');
-
-      div.innerHTML = 'Please provide target completion date';
-
-      e.classList.add(alert)
-
-      if (!lastDiv.classList.contains(error)) {
-        div.classList.add(error);
-      }
-    };
-
-    const validateDate = (e) => {
-      const el = e.target;
-      const parent = el.parentNode;
-      const container = findDateAncestor(el);
-      const dateSegments = container.querySelectorAll('.ds-c-field');
-
-      for(var i = 0, l = dateSegments.length; i < l; i++){
-        const inputVal = dateSegments[i].value;
-        return inputVal !== '' ? null : addMissingDateAlert(el, container);
+      if (isValid(date) && isFuture(date)) {
+        this.setState({errorMessage: []});
+        return;
+      } else {
+        const msg = 'Please provide a target completion date.';
+        if (errors.length < 1) {
+          errors.push(msg);
+          this.setState({errorMessage: errors});
+        }
+        disableBtn(e.target);
       };
     };
 
     return (
       <DateField
-        monthValue={this.state.month}
-        dayValue={this.state.day}
-        yearValue={this.state.year}
+        monthValue={month}
+        dayValue={day}
+        yearValue={year}
         onChange={(e, dateObject) => this.setState(dateObject)}
-        onBlur={(e) => {
-          validateDate(e)
-        }}
+        errorMessage={errorMsg}
+        errorPlacement='bottom'
+        onComponentBlur={getErrorMsg}
       />
     );
   }
