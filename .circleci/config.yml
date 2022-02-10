@@ -343,6 +343,7 @@ jobs:
   e2e test:
     machine:
       image: ubuntu-2004:202104-01
+    parallelism: 4
     steps:
       - checkout
       - attach_workspace:
