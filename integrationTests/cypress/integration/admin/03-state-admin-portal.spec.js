@@ -1,9 +1,16 @@
 /// <reference types="cypress" />
+const logout = () => {
+  cy.get(
+    '[class="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"]'
+  ).click();
+  cy.contains('Log out').click();
+  cy.contains('You have securely logged out');
+};
+
 const goTotStateAdminPortal = () => {
   cy.useRegularUser();
   cy.get(
-    // Click dropdown menu, username doesn't load so you cant search that
-    '[aria-label="Logged in as undefined. Click to manage your account."]'
+    '[class="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"]'
   ).click();
   cy.contains('AK State admin').click();
 };
@@ -25,22 +32,21 @@ const verifyRole = (name, role) => {
 };
 
 describe('tests state admin portal', () => {
-  it('state admin manages roles', { tags: ['@state', '@admin'] }, () => {
+  it('tests state admin portal', { tags: ['@state', '@admin'] }, () => {
     // Request access on No Role
     cy.loginWithEnv('norole');
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(2500); // Allows time to log in
+    cy.contains('Verify Your Identity');
     cy.get('[class="ds-c-field"]').type('Alask');
     cy.contains('Alaska').click();
     cy.findByRole('button', { name: 'Submit' }).click();
     cy.findByRole('button', { name: 'Ok' }).click();
-    cy.contains('norole').click();
-    cy.contains('Log out').click();
-    // cy.wait(2000);
+    logout();
 
     goTotStateAdminPortal();
-    // cy.useRegularUser();
-    // cy.pause();
+    // cy.wait(2000);
+    cy.contains('Active').click();
+    cy.contains('Requests').click();
+    cy.contains('Alaska eAPD State Administrator Portal');
 
     // Test approving access on Requested Role and Denying on No Role
     clickButton('Requested Role', 'Approve');
@@ -61,11 +67,17 @@ describe('tests state admin portal', () => {
     cy.contains('Active').click();
     verifyRole('Requested Role', 'eAPD State Staff');
 
-    // Test changing roles on State Staff
+    // Test changing roles on State Staff to State Contractor
     clickButton('State Staff', 'Edit Role');
     cy.get('select').select('eAPD State Contractor');
     cy.findByRole('button', { name: 'Save' }).click();
     verifyRole('State Staff', 'eAPD State Contractor');
+
+    // Test changing roles on State Contractor to State Staff
+    clickButton('State Contractor', 'Edit Role');
+    cy.get('select').select('eAPD State Staff');
+    cy.findByRole('button', { name: 'Save' }).click();
+    verifyRole('State Contractor', 'eAPD State Staff');
 
     // Test revoking access on State Contractor
     clickButton('State Contractor', 'Revoke');
@@ -91,24 +103,25 @@ describe('tests state admin portal', () => {
 
     // Verify Requested Role was approved
     cy.loginWithEnv('requestedrole');
+    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
     cy.contains('HITECH IAPD');
-    cy.contains('requestedrole').click();
-    cy.contains('Log out').click();
+    logout();
 
     // Verify State Contractor was revoked
     cy.loginWithEnv('statecontractor');
+    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
     cy.contains('Approval Permissions Revoked');
-    cy.contains('statecontractor').click();
-    cy.contains('Log out').click();
+    logout();
 
     // Verify Revoked Role has access
     cy.loginWithEnv('deniedrole');
+    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
     cy.contains('HITECH IAPD');
-    cy.contains('deniedrole').click();
-    cy.contains('Log out').click();
+    logout();
 
     // Verify No Role was denined
     cy.loginWithEnv('norole');
+    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
     cy.contains('Approval Has Been Denied');
   });
 });
