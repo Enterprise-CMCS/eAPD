@@ -2,9 +2,8 @@ import { DateField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { isValid, isFuture } from 'date-fns';
-// import { addMissingTextAlert, removeMissingTextAlert } from '../helpers/textValidation';
 
-import { disableBtn } from '../helpers/textValidation'
+import { findTextAncestor } from '../helpers/textValidation';
 
 class DSDateField extends PureComponent {
   constructor(props) {
@@ -24,11 +23,24 @@ class DSDateField extends PureComponent {
     const errorMsg = this.state.errorMessage;
     const date = new Date(`${year}-${month}-${day}`)
 
+    const disableBtn = (e, b) => {
+      const target = e.target;
+      const container = findTextAncestor(target);
+      const doneBtn = container.querySelector('#form-and-review-list--done-btn');
+
+      if (b) {
+        doneBtn.disabled = true;
+      } else {
+        doneBtn.disabled = false;
+      }
+    };
+
     const getErrorMsg = (e) => {
       let errors = [...errorMsg]
 
       if (isValid(date) && isFuture(date)) {
         this.setState({errorMessage: []});
+        disableBtn(e, false);
         return;
       } else {
         const msg = 'Please provide a target completion date.';
@@ -36,7 +48,7 @@ class DSDateField extends PureComponent {
           errors.push(msg);
           this.setState({errorMessage: errors});
         }
-        disableBtn(e.target);
+        disableBtn(e, true);
       };
     };
 
