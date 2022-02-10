@@ -350,7 +350,6 @@ jobs:
 #    parallelism: 4
     steps:
       - checkout
-      - setup_remote_docker
       - attach_workspace:
           at: ~/project
       - run:
