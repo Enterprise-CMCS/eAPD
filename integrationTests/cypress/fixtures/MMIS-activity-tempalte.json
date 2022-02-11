@@ -1,0 +1,150 @@
+{
+  "activityName": "Robust Market Strategy",
+
+  "activityOverview": 
+    {
+      "name": "Robust Market Strategy",
+      "fundingType": "MMIS",
+      "shortOverview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Libero enim sed faucibus turpis in eu mi.",
+      "startDate": [3, 1, 2023],
+      "endDate": [8, 11, 2025],
+      "detailedDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id eu nisl nunc mi ipsum faucibus.",
+      "supportingJustifications": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis viverra nibh cras pulvinar mattis nunc sed blandit.",
+      "supportsMedicaid": "This activity support the medicaid standards and conditions."
+    },
+
+  "outcomes": [
+    {
+      "names": [
+        "Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.",
+        "Provide support to EPs and EHs through attestation process."
+      ],
+      "metrics": [
+        [
+          "Complete SLR modifications by 11/1/21",
+          "Accept attestations through 4/30/22"
+        ],
+        [
+          "Guidance available on Tycho''s websites",
+          "Office hours availble for EPs and EHs"
+        ]
+      ]
+    }
+  ],
+
+  "milestones": [
+    {
+      "names": [
+        "Implementation of Final Rule and Stage 3 System Developments",
+        "Environmental Scan Completion"
+      ],
+      "dates": [
+        [10, 5, 2021],
+        [3, 2, 2022]
+      ]
+    }
+  ],
+
+  "staff": [
+    {
+      "title": "Public Information Officer",
+      "description": "Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program",
+      "costs": [165000, 170000],
+      "ftes": [0.5, 0.5]
+    },
+    {
+      "title": "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
+      "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
+      "costs": [110012, 111102],
+      "ftes": [1, 1]
+    }
+  ],
+
+  "expenses": [
+    {
+      "category": "Hardware, software, and licensing",
+      "costs": [40000, 40000],
+      "description": "Purchases of new laptops and licenses for Office software."
+    },
+    {
+      "category": "Equipment and supplies",
+      "costs": [500, 200],
+      "description": "Paper, pens, and pencils."
+    }
+  ],
+
+  "privateContractors": [
+    {
+      "name": "Tech Consulting Inc.",
+      "description": "Technology consulting and planning services.",
+      "start": [1, 5, 2014],
+      "end": [3, 2, 2025],
+      "totalCosts": 80000,
+      "FFYcosts": [40000, 40000]
+    },
+    {
+      "name": "Interface Vendor Inc.",
+      "description": "Hosting and development support.",
+      "start": [4, 7, 2020],
+      "end": [1, 2, 2024],
+      "totalCosts": 3000,
+      "FFYcosts": [
+        [10, 150],
+        [75, 20]
+      ]
+    }
+  ],
+
+  "costAllocation": [
+    {
+      "description": "Activity 3 description for overall cost allocation.",
+      "FFYdescriptions": [
+        "This is the Other Funding description for Activity 3 - FFY 2021",
+        "This is the Other Funding description for Activity 3 - FFY 2022"
+      ],
+      "costs": [4000, 9000]
+    }
+  ],
+
+  "splitConstants": [
+    {
+      "split": "75-25",
+      "fed": 0.75,
+      "state": 0.25
+    },
+    {
+      "split": "50-50",
+      "fed": 0.5,
+      "state": 0.5
+    },
+    {
+      "split": "90-10",
+      "fed": 0.9,
+      "state": 0.1
+    }
+  ],
+
+  "quarterVals": [
+    {
+      "string": "For Activity 3",
+      "stateVals": [
+        [25, 25, 25, 25],
+        [25, 25, 25, 25]
+      ],
+      "contractorVals": [
+        [25, 25, 25, 25],
+        [25, 25, 25, 25]
+      ]
+    }
+  ],
+
+  "totals": [
+    {
+      "staff": [303000, 327000],
+      "expenses": [35000, 35000],
+      "contractors": [30000, 30000],
+      "other": [5000, 8000],
+      "fedShare": [0.75, 0.5]
+    }
+  ]
+}

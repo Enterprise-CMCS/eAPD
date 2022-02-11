@@ -13,6 +13,7 @@ import { testActivityScheduleSummaryWithData } from '../../helpers/apd/activity-
 import { testProposedBudgetWithData } from '../../helpers/apd/proposed-budget';
 import { testAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance';
 import { testExecutiveSummaryWithData } from '../../helpers/apd/executive-summary';
+import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
 
 // Tests an APD by adding data and checking the results
 describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
@@ -87,6 +88,10 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
 
       describe('Budget and FFP', () => {
         testBudgetAndFFPWithData(years);
+      });
+
+      describe('Add MMIS Activity', () => {
+        addMMISActivity();
       });
     });
 
