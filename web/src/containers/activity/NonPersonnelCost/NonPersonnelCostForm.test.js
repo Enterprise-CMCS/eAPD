@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 
 import {
@@ -7,17 +7,13 @@ import {
 } from './NonPersonnelCostForm';
 
 import {
-  setNonPersonnelCostCategory,
-  setNonPersonnelCostDescription,
-  setNonPersonnelCostForYear
+  saveNonPersonnelCost as actualSaveNonPersonnelCost
 } from '../../../actions/editActivity';
 
 describe('the NonPersonnelCostForm component', () => {
-  const setCategory = jest.fn();
-  const setCost = jest.fn();
-  const setDescription = jest.fn();
+  const saveNonPersonnelCost = jest.fn();
 
-  const component = shallow(
+  const component = mount(
     <NonPersonnelCostForm
       activityIndex={44}
       index={83}
@@ -29,16 +25,12 @@ describe('the NonPersonnelCostForm component', () => {
           7474: 72323
         }
       }}
-      setCategory={setCategory}
-      setCost={setCost}
-      setDescription={setDescription}
+      saveNonPersonnelCost={saveNonPersonnelCost}
     />
   );
 
   beforeEach(() => {
-    setCategory.mockClear();
-    setCost.mockClear();
-    setDescription.mockClear();
+    saveNonPersonnelCost.mockClear();
   });
 
   it('matches the snapshot', () =>{
@@ -46,34 +38,17 @@ describe('the NonPersonnelCostForm component', () => {
   })
 
   describe('events', () => {
-    test('handles changing the cost total for a year', () => {
+    test('handles saving the non personnel cost', () => {
       component
-        .find('DollarField')
-        .first()
-        .simulate('change', { target: { value: 'new total' } });
-      expect(setCost).toHaveBeenCalledWith(44, 83, '7473', 'new total');
-    });
-
-    test('handles changing the cost category', () => {
-      component
-        .find('Dropdown')
-        .simulate('change', { target: { value: 'new category' } });
-      expect(setCategory).toHaveBeenCalledWith(44, 83, 'new category');
-    });
-
-    test('handles changing the cost desc', () => {
-      component
-        .find('TextArea')
-        .simulate('change', { target: { value: 'new desc' } });
-      expect(setDescription).toHaveBeenCalledWith(44, 83, 'new desc');
+        .find('form')
+        .simulate('submit');
+      expect(saveNonPersonnelCost).toHaveBeenCalled();
     });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setCategory: setNonPersonnelCostCategory,
-      setDescription: setNonPersonnelCostDescription,
-      setCost: setNonPersonnelCostForYear
+      saveNonPersonnelCost: actualSaveNonPersonnelCost,
     });
   });
 

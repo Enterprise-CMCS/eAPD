@@ -7,10 +7,7 @@ import {
   mapDispatchToProps
 } from './Outcomes';
 import {
-  addOutcome,
-  addOutcomeMetric,
-  removeOutcome,
-  removeOutcomeMetric
+  removeOutcome
 } from '../../actions/editActivity';
 
 describe('activity Outcomes and Metrics component', () => {
@@ -22,15 +19,11 @@ describe('activity Outcomes and Metrics component', () => {
       { key: 'outcome 2' },
       { key: 'outcome 3' }
     ],
-    add: jest.fn(),
-    addMetric: jest.fn(),
-    remove: jest.fn(),
-    removeMetric: jest.fn()
+    remove: jest.fn()
   };
   const component = shallow(<OutcomesAndMetrics {...props} />);
 
   beforeEach(() => {
-    props.add.mockClear();
     props.remove.mockClear();
   });
 
@@ -41,11 +34,6 @@ describe('activity Outcomes and Metrics component', () => {
   describe('events', () => {
     const list = component.find('FormAndReviewList');
 
-    it('handles adding a new outcome', () => {
-      list.prop('onAddClick')();
-      expect(props.add).toHaveBeenCalledWith(activityIndex);
-    });
-
     it('handles deleting an outcome', () => {
       list.prop('onDeleteClick')(1);
       expect(props.remove).toHaveBeenCalledWith(activityIndex, 1);
@@ -54,10 +42,7 @@ describe('activity Outcomes and Metrics component', () => {
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      add: addOutcome,
-      addMetric: addOutcomeMetric,
       remove: removeOutcome,
-      removeMetric: removeOutcomeMetric
     });
   });
 

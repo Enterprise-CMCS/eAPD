@@ -33,7 +33,9 @@ exports[`executive summary component renders correctly 1`] = `
         key="a1"
         objType={null}
         onDeleteClick={null}
+        onDeleteLabel={null}
         onEditClick={null}
+        skipConfirmation={false}
         title={null}
       >
         <p
@@ -149,7 +151,9 @@ exports[`executive summary component renders correctly 1`] = `
         key="a2"
         objType={null}
         onDeleteClick={null}
+        onDeleteLabel={null}
         onEditClick={null}
+        skipConfirmation={false}
         title={null}
       >
         <p
@@ -260,7 +264,9 @@ exports[`executive summary component renders correctly 1`] = `
         headingLevel="4"
         objType={null}
         onDeleteClick={null}
+        onDeleteLabel={null}
         onEditClick={null}
+        skipConfirmation={false}
         title={null}
       >
         <p>

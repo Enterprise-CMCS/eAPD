@@ -36,7 +36,7 @@ const ApdStateKeyPerson = ({
         )}
       </div>
     ),
-    [costs, fte, hasCosts]
+    [hasCosts, costs, fte]
   );
 
   return (
