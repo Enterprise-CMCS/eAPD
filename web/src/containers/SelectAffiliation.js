@@ -80,7 +80,7 @@ const SelectAffiliation = ({
       onSave={onSave}
       error={error}
       primaryButtonText={['Submit', 'Updating']}
-      cancelable
+      cancelable={false}
     >
       <h1 className="ds-h3">State Affiliation</h1>
       <ChoiceList

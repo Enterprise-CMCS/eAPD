@@ -164,6 +164,7 @@ exports[`budget summary component renders correctly 1`] = `
     </h4>
     <table
       className="budget-table"
+      data-cy="summaryBudgetHIT"
       key="1"
     >
       <caption
@@ -192,6 +193,7 @@ exports[`budget summary component renders correctly 1`] = `
     </table>
     <table
       className="budget-table"
+      data-cy="summaryBudgetHIT"
       key="2"
     >
       <caption
@@ -220,6 +222,7 @@ exports[`budget summary component renders correctly 1`] = `
     </table>
     <table
       className="budget-table"
+      data-cy="summaryBudgetHIT"
       key="total"
     >
       <caption
@@ -256,6 +259,7 @@ exports[`budget summary component renders correctly 1`] = `
     </h4>
     <table
       className="budget-table"
+      data-cy="summaryBudgetHIE"
       key="1"
     >
       <caption
@@ -284,6 +288,7 @@ exports[`budget summary component renders correctly 1`] = `
     </table>
     <table
       className="budget-table"
+      data-cy="summaryBudgetHIE"
       key="2"
     >
       <caption
@@ -312,6 +317,7 @@ exports[`budget summary component renders correctly 1`] = `
     </table>
     <table
       className="budget-table"
+      data-cy="summaryBudgetHIE"
       key="total"
     >
       <caption
@@ -348,6 +354,7 @@ exports[`budget summary component renders correctly 1`] = `
     </h4>
     <table
       className="budget-table"
+      data-cy="summaryBudgetMMIS"
       key="1"
     >
       <caption
@@ -376,6 +383,7 @@ exports[`budget summary component renders correctly 1`] = `
     </table>
     <table
       className="budget-table"
+      data-cy="summaryBudgetMMIS"
       key="2"
     >
       <caption
@@ -404,6 +412,7 @@ exports[`budget summary component renders correctly 1`] = `
     </table>
     <table
       className="budget-table"
+      data-cy="summaryBudgetMMIS"
       key="total"
     >
       <caption
@@ -433,6 +442,7 @@ exports[`budget summary component renders correctly 1`] = `
   </div>
   <table
     className="budget-table"
+    data-cy="summaryBudgetTotals"
   >
     <caption
       className="ds-h4"
