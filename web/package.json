@@ -193,9 +193,5 @@
     "react-router-dom": "can't upgrade to v6 because our system requires routes to be connected to redux",
     "history": "can't upgrade to 17 react-router v6"
   },
-  "resolutions": {
-    "glob-parent": "5.1.2",
-    "postcss": "8.2.13",
-    "trim": "0.0.3"
-  }
+  "resolutions": {}
 }
