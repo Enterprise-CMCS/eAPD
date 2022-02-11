@@ -29,4 +29,6 @@ docs-build
 
 # Terraform ignores
 *.terraform
+*.terraform.lock.hcl
+*/terraform.tfstate*
 env_vars.sh
