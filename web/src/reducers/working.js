@@ -38,6 +38,7 @@ const noActions = new Map([
   [ADMIN_EDIT_ME_SUCCESS, 'editOwnAccount']
 ]);
 
+// eslint-disable-next-line default-param-last
 const reducer = (state = initialState, { type }) => {
   switch (type) {
     case ADMIN_CREATE_USER_REQUEST:

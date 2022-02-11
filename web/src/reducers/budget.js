@@ -36,7 +36,7 @@ const expenseTypeNames = [
   'combined'
 ];
 
-const FFPOptions = new Set(['90-10', '75-25', '50-50']);
+const FFPOptions = new Set(['90-10', '75-25', '50-50', '0-100']);
 
 const expenseTypes = (years, names = expenseTypeNames) =>
   names.reduce(
@@ -599,6 +599,7 @@ const buildBudget = incomingBigState => {
   return newState;
 };
 
+// eslint-disable-next-line default-param-last
 const reducer = (state = initialState([]), action) => {
   switch (action.type) {
     case RESET:

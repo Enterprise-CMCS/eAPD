@@ -4,6 +4,7 @@ exports[`incentive payments component renders correctly 1`] = `
 <Fragment>
   <table
     className="budget-table"
+    data-cy="EQIPTable"
   >
     <caption
       className="ds-u-visibility--screen-reader"
@@ -130,6 +131,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           <Dollars>
             10
@@ -151,7 +153,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q1 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="ehCt payments for 1, quarter 1"
             labelClassName="sr-only"
             mask={null}
@@ -171,7 +172,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q2 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="ehCt payments for 1, quarter 2"
             labelClassName="sr-only"
             mask={null}
@@ -191,7 +191,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q3 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="ehCt payments for 1, quarter 3"
             labelClassName="sr-only"
             mask={null}
@@ -211,7 +210,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q4 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="ehCt payments for 1, quarter 4"
             labelClassName="sr-only"
             mask={null}
@@ -225,6 +223,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           42
         </td>
@@ -298,6 +297,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           <Dollars>
             74
@@ -319,7 +319,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q1 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="epCt payments for 1, quarter 1"
             labelClassName="sr-only"
             mask={null}
@@ -339,7 +338,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q2 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="epCt payments for 1, quarter 2"
             labelClassName="sr-only"
             mask={null}
@@ -359,7 +357,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q3 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="epCt payments for 1, quarter 3"
             labelClassName="sr-only"
             mask={null}
@@ -379,7 +376,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q4 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="epCt payments for 1, quarter 4"
             labelClassName="sr-only"
             mask={null}
@@ -393,6 +389,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           106
         </td>
@@ -401,6 +398,7 @@ exports[`incentive payments component renders correctly 1`] = `
   </table>
   <table
     className="budget-table"
+    data-cy="EQIPTable"
   >
     <caption
       className="ds-u-visibility--screen-reader"
@@ -527,6 +525,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           <Dollars>
             26
@@ -548,7 +547,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q1 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="ehCt payments for 2, quarter 1"
             labelClassName="sr-only"
             mask={null}
@@ -568,7 +566,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q2 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="ehCt payments for 2, quarter 2"
             labelClassName="sr-only"
             mask={null}
@@ -588,7 +585,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q3 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="ehCt payments for 2, quarter 3"
             labelClassName="sr-only"
             mask={null}
@@ -608,7 +604,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q4 eh-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="ehCt payments for 2, quarter 4"
             labelClassName="sr-only"
             mask={null}
@@ -622,6 +617,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           58
         </td>
@@ -695,6 +691,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           <Dollars>
             90
@@ -716,7 +713,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q1 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="epCt payments for 2, quarter 1"
             labelClassName="sr-only"
             mask={null}
@@ -736,7 +732,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q2 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="epCt payments for 2, quarter 2"
             labelClassName="sr-only"
             mask={null}
@@ -756,7 +751,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q3 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="epCt payments for 2, quarter 3"
             labelClassName="sr-only"
             mask={null}
@@ -776,7 +770,6 @@ exports[`incentive payments component renders correctly 1`] = `
             aria-labelledby="q4 ep-count"
             className="budget-table--input-holder"
             fieldClassName="budget-table--input__number"
-            fieldRef={null}
             label="epCt payments for 2, quarter 4"
             labelClassName="sr-only"
             mask={null}
@@ -790,6 +783,7 @@ exports[`incentive payments component renders correctly 1`] = `
         </td>
         <td
           className="budget-table--number budget-table--col__highlight budget-table--subtotal"
+          data-cy="subtotal"
         >
           122
         </td>

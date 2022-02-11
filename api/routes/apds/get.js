@@ -25,18 +25,18 @@ module.exports = (
       const apds = (await getAllAPDsByState(stateId)).map(
         ({
           // eslint-disable-next-line camelcase
-          created_at,
+          created_at: created,
           document: { name, years },
           id,
           status,
           // eslint-disable-next-line camelcase
-          updated_at
+          updated_at: updated
         }) => ({
           id,
-          created: created_at,
+          created,
           name,
           status,
-          updated: updated_at,
+          updated,
           years
         })
       );

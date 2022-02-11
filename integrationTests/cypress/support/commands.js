@@ -6,10 +6,9 @@ import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
 import tokens from '../../tokens.json';
-import {
-  API_COOKIE_NAME,
-  CONSENT_COOKIE_NAME
-} from '../../../web/src/cookie-constants';
+
+const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
+const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
 const EXPIRY_DATE = Math.ceil(
   new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).getTime() / 1000
@@ -514,4 +513,23 @@ Cypress.Commands.add('goToProgramBudgetTable', () => {
 Cypress.Commands.add('goToExportView', () => {
   cy.contains('Export and Submit').click();
   cy.contains('Continue to Review').click();
+});
+
+Cypress.Commands.add('getEAPDTable', { prevSubject: true }, subject => {
+  if (subject.get().length > 1)
+    throw new Error(
+      `Selector "${subject.selector}" returned more than 1 element.`
+    );
+
+  const tableElement = subject.get()[0];
+  const headers = [...tableElement.querySelectorAll('tbody tr')].map(row => {
+    return [...row.querySelectorAll('th')].map(e => e.textContent);
+  });
+
+  // transform rows into array of array of strings for each td
+  const rows = [...tableElement.querySelectorAll('tbody tr')].map(row => {
+    return [...row.querySelectorAll('td')].map(e => e.textContent);
+  });
+
+  return Object.assign(...headers.map((k, i) => ({ [k]: rows[i] })));
 });

@@ -46,19 +46,25 @@ const LoginApplication = ({
   const history = useHistory();
   const location = useLocation();
 
-  useEffect(() => {
-    const controller = new AbortController();
-    if (!initialCheck && !showConsent) {
-      setRestoringSession(true);
-      authCheckAction({
-        signal: controller.signal
-      }).then(() => {
-        setRestoringSession(false);
-      });
-    }
+  useEffect(
+    () => {
+      const controller = new AbortController();
+      if (!initialCheck && !showConsent) {
+        setRestoringSession(true);
+        authCheckAction({
+          signal: controller.signal
+        }).then(() => {
+          setRestoringSession(false);
+        });
+      }
 
-    return () => controller?.abort();
-  }, []);
+      return () => controller?.abort();
+    },
+    // we want this to run on load so we don't need any thing
+    // in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   let errorMessage = null;
 

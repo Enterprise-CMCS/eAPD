@@ -89,7 +89,7 @@ const BudgetSummary = ({ activities, data, years }) => (
         HIT Activities
       </h4>
       {[...years, 'total'].map(yr => (
-        <table className="budget-table" key={yr}>
+        <table className="budget-table" key={yr} data-cy="summaryBudgetHIT">
           <caption className="ds-u-visibility--screen-reader">
             FFY {yr} HIT Activities
           </caption>
@@ -108,7 +108,7 @@ const BudgetSummary = ({ activities, data, years }) => (
         HIE Activities
       </h4>
       {[...years, 'total'].map(yr => (
-        <table className="budget-table" key={yr}>
+        <table className="budget-table" key={yr} data-cy="summaryBudgetHIE">
           <caption className="ds-u-visibility--screen-reader">
             FFY {yr} HIE Activities
           </caption>
@@ -127,7 +127,7 @@ const BudgetSummary = ({ activities, data, years }) => (
         MMIS Activities
       </h4>
       {[...years, 'total'].map(yr => (
-        <table className="budget-table" key={yr}>
+        <table className="budget-table" key={yr} data-cy="summaryBudgetMMIS">
           <caption className="ds-u-visibility--screen-reader">
             FFY {yr} MMIS Activities
           </caption>
@@ -145,7 +145,7 @@ const BudgetSummary = ({ activities, data, years }) => (
       ))}
     </div>
 
-    <table className="budget-table">
+    <table className="budget-table" data-cy="summaryBudgetTotals">
       <caption className="ds-h4">Activities Totals</caption>
       <thead>
         <tr>

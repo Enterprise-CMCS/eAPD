@@ -44,9 +44,11 @@ const ContractorResourceForm = ({
     )
   );
 
-  const getHandler = action => ({ target: { value } }) => {
-    action(activityIndex, index, value);
-  };
+  const getHandler =
+    action =>
+    ({ target: { value } }) => {
+      action(activityIndex, index, value);
+    };
 
   const getDateHandler = action => (_, dateStr) => {
     action(activityIndex, index, dateStr);
@@ -84,17 +86,23 @@ const ContractorResourceForm = ({
     });
   };
 
-  const getHandlerForYearlyCost = year => ({ target: { value } }) => {
-    setCostForYear(activityIndex, index, year, value);
-  };
+  const getHandlerForYearlyCost =
+    year =>
+    ({ target: { value } }) => {
+      setCostForYear(activityIndex, index, year, value);
+    };
 
-  const getHandlerForYearlyHours = year => ({ target: { value } }) => {
-    setNumberOfHoursForYear(activityIndex, index, year, value);
-  };
+  const getHandlerForYearlyHours =
+    year =>
+    ({ target: { value } }) => {
+      setNumberOfHoursForYear(activityIndex, index, year, value);
+    };
 
-  const getHandlerForYearlyHourlyRate = year => ({ target: { value } }) => {
-    setHourlyRateForYear(activityIndex, index, year, value);
-  };
+  const getHandlerForYearlyHourlyRate =
+    year =>
+    ({ target: { value } }) => {
+      setHourlyRateForYear(activityIndex, index, year, value);
+    };
 
   const syncDescription = html => {
     setDescription(activityIndex, index, html);
@@ -103,10 +111,10 @@ const ContractorResourceForm = ({
   return (
     <Fragment>
       <TextField
-        autoFocus
         label="Private Contractor or Vendor Name"
         name="contractor-name"
         hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
+        className="remove-clearfix"
         labelClassName="full-width-label"
         value={name}
         onChange={getHandler(setName)}

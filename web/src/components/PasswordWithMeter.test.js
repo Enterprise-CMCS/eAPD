@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import sinon from 'sinon';
 
 // Import the lazy-loading zxcvbn so we can use jest's mocking functionality
 // eslint-disable-next-line no-unused-vars
@@ -42,13 +41,13 @@ describe('PasswordWithmeter component', () => {
   });
 
   it('calls out on change', () => {
-    const onChange = sinon.spy();
+    const onChange = jest.fn();
     const event = { target: { value: 'change event' } };
 
     const component = shallow(<Password value="" onChange={onChange} />);
     component.find('TextField').simulate('change', event);
 
-    expect(onChange.calledWith(event)).toEqual(true);
+    expect(onChange).toHaveBeenLastCalledWith(event);
   });
 
   it('shows the strength meter when parameter is true', () => {

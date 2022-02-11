@@ -93,7 +93,7 @@ const FormAndReviewList = ({
 }) => {
   const combinedClassName = useMemo(
     () => ['form-and-review-list', className].join(' '),
-    className
+    [className]
   );
 
   const noDataOptions = noDataMessage || 'This list is empty'
