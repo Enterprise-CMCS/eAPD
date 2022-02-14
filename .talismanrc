@@ -23,4 +23,8 @@ fileignoreconfig:
     checksum: a468dcd1f872efb7b3816b2380200def3218961cae63b3d33b2bf7fa09da2984
   - filename: .circleci/config.yml
     checksum: 3b37ddbb081fe1f9500b4d73cbc2f845ffe609a08152d7db6b9ceceb8228c70d
+  - filename: bin/preview-deploy/aws.user-data.sh
+    checksum: 6887d9c547bc6d9076d54afe49acd26828ac389e8f05365dcb47cf6d4547be83
+  - filename: packer/mongo.sh
+    checksum: a4cbd55c0dfb75500d2c0cf31efa1fe5dd851fed2fe49050b1c51913a2b23f4e
 version: ''
