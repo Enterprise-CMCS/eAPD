@@ -102,7 +102,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         dayInvalid={false}
         dayLabel="Day"
         dayName="day"
-        dayValue={16}
         errorMessage={Array []}
         errorPlacement="bottom"
         hint=""
@@ -110,13 +109,11 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         monthInvalid={false}
         monthLabel="Month"
         monthName="month"
-        monthValue={8}
         onChange={[Function]}
         onComponentBlur={[Function]}
         yearInvalid={false}
         yearLabel="Year"
         yearName="year"
-        yearValue={1942}
       >
         <FormControl
           component="fieldset"
@@ -156,18 +153,15 @@ exports[`the MilestoneForm component renders correctly 1`] = `
               dayInvalid={false}
               dayLabel="Day"
               dayName="day"
-              dayValue={16}
               labelId="field_2-label"
               monthInvalid={false}
               monthLabel="Month"
               monthName="month"
-              monthValue={8}
               onChange={[Function]}
               onComponentBlur={[Function]}
               yearInvalid={false}
               yearLabel="Year"
               yearName="year"
-              yearValue={1942}
             >
               <div
                 className="ds-c-datefield__container ds-l-form-row"
@@ -185,7 +179,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
-                  value={8}
                 >
                   <FormControl
                     className="ds-u-clearfix ds-l-col--auto"
@@ -231,7 +224,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                         onChange={[Function]}
                         setRef={[Function]}
                         type="text"
-                        value={8}
                       >
                         <input
                           aria-describedby="field_2-label"
@@ -244,7 +236,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                           onChange={[Function]}
                           pattern="[0-9]*"
                           type="text"
-                          value={8}
                         />
                       </TextInput>
                     </div>
@@ -268,7 +259,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
-                  value={16}
                 >
                   <FormControl
                     className="ds-u-clearfix ds-l-col--auto"
@@ -314,7 +304,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                         onChange={[Function]}
                         setRef={[Function]}
                         type="text"
-                        value={16}
                       >
                         <input
                           aria-describedby="field_2-label"
@@ -327,7 +316,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                           onChange={[Function]}
                           pattern="[0-9]*"
                           type="text"
-                          value={16}
                         />
                       </TextInput>
                     </div>
@@ -351,7 +339,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
-                  value={1942}
                 >
                   <FormControl
                     className="ds-u-clearfix ds-l-col--auto"
@@ -397,7 +384,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                         onChange={[Function]}
                         setRef={[Function]}
                         type="text"
-                        value={1942}
                       >
                         <input
                           aria-describedby="field_2-label"
@@ -410,7 +396,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                           onChange={[Function]}
                           pattern="[0-9]*"
                           type="text"
-                          value={1942}
                         />
                       </TextInput>
                     </div>

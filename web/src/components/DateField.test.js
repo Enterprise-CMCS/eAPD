@@ -64,27 +64,6 @@ describe('DateField wrapper component', () => {
       <DateField value="1942-11-8" onChange={onChange} />
     );
 
-    const joinDate = component.find('DateField').prop('dateFormatter');
-
-    it('returns an empty string if all parts of the date are missing', () => {
-      expect(joinDate({})).toEqual('');
-    });
-
-    it('does not prepend zeroes if not necessary', () => {
-      // Operation Torch ends in success.
-      expect(joinDate({ day: 16, month: 11, year: 1942 })).toEqual(
-        '1942-11-16'
-      );
-    });
-
-    // Erwin Rommel, commander of German forces in Africa, returns to Berlin
-    // in defeat. A few weeks later, the German forces remaining in Africa
-    // surrender to the Allies.
-    it('prepends zeroes to month and day fields, as appropriate', () => {
-      expect(joinDate({ day: 9, month: 3, year: 1943 })).toEqual('1943-03-09');
-    });
-  });
-
   test('handles changes', () => {
     const component = shallow(
       // Allied forces halt Operation Market Garden, unable to cross the Rhine
