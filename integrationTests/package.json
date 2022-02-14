@@ -8,7 +8,7 @@
     "preinstall": "npx npm-force-resolutions",
     "cy:open": "./cypress-setup.sh open",
     "cy:run": "./cypress-setup.sh run",
-    "cy:run:ci": "cypress run",
+    "cy:run:ci": "cypress run -C cypress.json ",
     "lint": "eslint 'cypress/**/*.js'",
     "npm-check": "npx npm-check-updates"
   },
@@ -31,7 +31,7 @@
     "@cypress/browserify-preprocessor": "3.0.2",
     "@testing-library/cypress": "8.0.2",
     "axios": "0.25.0",
-    "cypress": "9.3.1",
+    "cypress": "9.4.1",
     "cypress-audit": "1.1.0",
     "cypress-grep": "2.13.1",
     "cypress-react-selector": "2.3.15",
