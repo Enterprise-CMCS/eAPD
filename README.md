@@ -55,7 +55,8 @@ export OKTA_CLIENT_ID= #from admin, or Applications -> (your application) -> Gen
 export OKTA_API_KEY= #from admin, API -> Tokens -> Create Token, and the Token Value
 export JWT_SECRET=# any string is fine here.  It does affect your security posture, but for local development it doesn't matter.
 export MONGO_DATABASE="eapd" #This is only a local value.  It will be different in production
-export MONGO_URL="mongodb://mongo:cms@localhost:27017/eapd" #This is only a local value.  It will be different in production
+export MONGO_ADMIN_URL="mongodb://mongo:cms@mongo:27017/eapd?authSource=eapd" #This is only a local value.  It will be different in production
+export MONGO_URL="mongodb://mongo:cms@mongo:27017/eapd?authSource=eapd" #This is only a local value.  It will be different in production
 ```
 
 ### Create Okta accounts
