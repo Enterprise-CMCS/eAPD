@@ -575,6 +575,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               budgetPage.checkSplitFunctionality();
 
               cy.get('[class="ds-c-field"]').select('75-25');
+              cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.75,
                 federalShareAmount: 0,
@@ -584,6 +585,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
+              cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.5,
                 federalShareAmount: 0,
@@ -593,6 +595,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
+              cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.9,
                 federalShareAmount: 0,

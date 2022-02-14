@@ -52,6 +52,7 @@ services:
     image: cms-eapd/api
     depends_on:
       - db
+      - mongo
     environment:
       - PORT=8000
       - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
@@ -63,10 +64,9 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
-      - MONGO_DATABASE=${MONGO_DATABASE}
       - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=eapd}
       - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd}
-      - CYPRESS_TESTS=${CYPRESS_TESTS}
+      - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
     volumes:
       - type: bind
         source: ./api

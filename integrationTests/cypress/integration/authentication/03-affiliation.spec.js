@@ -115,29 +115,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByText(/Alabama/).click();
       cy.findByRole('button', { name: 'Submit' }).click();
 
-      cy.findByRole('button', { name: /norole/ }).click();
-      cy.findByText(/Switch State Affiliation/).click();
-
-      cy.findByLabelText(/Alaska/).should('exist');
-      cy.findByLabelText(/Alabama/).should('exist');
-
-      cy.findByRole('button', { name: /Cancel/ }).click();
       cy.findByRole('heading', { name: /Alabama APDs/ }).should('exist');
-    });
-
-    it('should let users cancel switching states', () => {
-      cy.loginWithEnv('norole');
-
-      // select from the new affiliations
-      cy.findByText(/Alaska/).click();
-      cy.findByRole('button', { name: 'Submit' }).click();
-
-      cy.findByRole('button', { name: /norole/ }).click();
-      cy.findByText(/Switch State Affiliation/).click();
-
-      cy.findByRole('button', { name: /Cancel/ }).click();
-
-      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
     });
 
     it('should let users switch states', () => {

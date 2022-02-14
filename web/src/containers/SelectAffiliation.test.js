@@ -61,11 +61,6 @@ describe('Switch Affiliation component', () => {
     setup();
     expect(screen.getByRole('button', { name: 'Submit' })).toBeTruthy();
   });
-  test('renders cancel button', async () => {
-    fetchMock.onGet('/affiliations/me').reply(200, []);
-    setup();
-    expect(screen.getByRole('button', { name: 'Cancel' })).toBeTruthy();
-  });
   test('renders current state as default selected', async () => {
     fetchMock
       .onGet('/affiliations/me')
