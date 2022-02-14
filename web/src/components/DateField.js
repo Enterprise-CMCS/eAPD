@@ -4,22 +4,6 @@ import formatISO from 'date-fns/formatISO';
 import PropTypes from 'prop-types';
 import React, { useState, useMemo } from 'react';
 
-// The design system will call our formatter before calling our change event
-// handlers. This formatter puts the date pieces back into our internal date
-// string format.
-const joinDate = ({ day, month, year }) => {
-  // If the date is empty, revert to an empty string so it can save
-  // successfully.
-  if (!day && !month && !year) {
-    return '';
-  }
-
-  // Make sure it's an ISO-8601 date, which uses 2-digit month and day
-  return `${year}-${month < 10 ? `0${month}` : month}-${
-    day < 10 ? `0${day}` : day
-  }`;
-};
-
 const DateField = ({ value, onChange, ...rest }) => {
   const [errorInfo, setErrorInfo] = useState({
     errorMessage: [],
