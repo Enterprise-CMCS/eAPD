@@ -104,6 +104,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         dayName="day"
         dayValue={16}
         errorMessage={Array []}
+        errorPlacement="bottom"
         hint=""
         label="Target completion date"
         monthInvalid={false}
@@ -120,6 +121,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         <FormControl
           component="fieldset"
           errorMessage={Array []}
+          errorPlacement="bottom"
           hint=""
           label="Target completion date"
           labelComponent="legend"
@@ -132,7 +134,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
             <FormLabel
               component="legend"
               errorId="field_2-error"
-              errorMessage={Array []}
               hint=""
               id="field_2-label"
             >
@@ -144,16 +145,10 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   className=""
                 >
                   Target completion date
-                </span>
-                <InlineError
-                  id="field_2-error"
-                >
-                  <span
-                    className="ds-c-inline-error ds-c-field__error-message"
-                    id="field_2-error"
-                    role="alert"
+                  <div
+                    className="ds-u-visibility--screen-reader"
                   />
-                </InlineError>
+                </span>
               </legend>
             </FormLabel>
             <DateInput
@@ -423,6 +418,15 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                 </TextField>
               </div>
             </DateInput>
+            <InlineError
+              id="field_2-error"
+            >
+              <span
+                className="ds-c-inline-error ds-c-field__error-message"
+                id="field_2-error"
+                role="alert"
+              />
+            </InlineError>
           </fieldset>
         </FormControl>
       </DateField>

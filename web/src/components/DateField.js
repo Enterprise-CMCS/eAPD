@@ -12,10 +12,7 @@ const DateField = ({ value, onChange, ...rest }) => {
     yearInvalid: false
   });
 
-  // Dates are stored internally as YYYY-MM-DD. The design system date field
-  // expects separate day, month, and year values. So split the incoming
-  // date up into its pieces.
-  const dateParts = useMemo(() => {
+  const dateParts = () => {
     if (!value) {
       return {
         day: '',
@@ -24,8 +21,8 @@ const DateField = ({ value, onChange, ...rest }) => {
       };
     }
     const [year, month, day] = value.slice(0, 10).split('-');
-    return { day: +day || '', month: +month || '', year: +year || '' };
-  }, [value]);
+    return { day: day || '', month: month || '', year: +year || '' };
+  }
 
   const dateStr = (dateObject) => {
     const date = formatISO(new Date(dateObject.year, dateObject.month - 1, dateObject.day), { representation: 'date' })
