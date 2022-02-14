@@ -28,265 +28,248 @@ export const addMMISActivity = years => {
     cy.fixture('MMIS-activity-template.json').then(data => {
       activityData = data;
     });
+  });
 
-    describe('Add a MMIS Activity and check in export view', () => {
-      it('Adds an MMIS Activity and checks the export view', () => {
-        cy.goToActivityDashboard();
+  describe('Add a MMIS Activity and check in export view', () => {
+    it('Adds an MMIS Activity and checks the export view', () => {
+      cy.goToActivityDashboard();
 
-        // Add activity
-        cy.url().should('include', '/activities');
-        cy.findByRole('heading', { name: /Activities/i, level: 2 }).should(
-          'exist'
-        );
-        cy.contains('Add Activity').click();
-        cy.contains('Activity 3: Untitled').should('exist');
-        cy.get('#activities').findAllByText('Edit').eq(2).click();
+      // Add activity
+      cy.url().should('include', '/activities');
+      cy.findByRole('heading', { name: /Activities/i, level: 2 }).should(
+        'exist'
+      );
+      cy.contains('Add Activity').click();
+      cy.contains('Activity 3: Untitled').should('exist');
+      cy.get('#activities').findAllByText('Edit').eq(2).click();
 
-        // Fill out Activity Overview
-        cy.findByLabelText('Activity name').type(activityData.activityName);
-        cy.findByRole('radio', { name: /MMIS/i }).check({ force: true });
-        cy.findAllByText(`Activity 3: ${activityData.activityName}`).should(
-          'exist'
-        );
-        fillOutActivityPage.fillActivityOverview(activityData.activityOverview);
+      // Fill out Activity Overview
+      cy.findByLabelText('Activity name').type(activityData.activityName);
+      cy.findByRole('radio', { name: /MMIS/i }).check({ force: true });
+      cy.findAllByText(`Activity 3: ${activityData.activityName}`).should(
+        'exist'
+      );
+      fillOutActivityPage.fillActivityOverview(activityData.activityOverview);
 
-        cy.waitForSave();
-        cy.findByRole('button', { name: 'Next' }).click();
+      cy.waitForSave();
+      cy.findByRole('button', { name: 'Continue' }).click();
 
-        // Fill out Outcomes and Milestones
-        cy.findByRole('heading', {
-          name: /^Activity 3:/i,
-          level: 2
-        }).should('exist');
+      // Fill out Outcomes and Milestones
+      cy.findByRole('heading', {
+        name: /^Activity 3:/i,
+        level: 2
+      }).should('exist');
 
-        fillOutActivityPage.fillOutcomesAndMilestones(
-          activityData.outcomes,
-          activityData.milestones
-        );
+      fillOutActivityPage.fillOutcomesAndMilestones(
+        activityData.outcomes,
+        activityData.milestones
+      );
 
-        cy.waitForSave();
-        cy.findByRole('button', { name: 'Next' }).click();
+      cy.waitForSave();
+      cy.findByRole('button', { name: 'Continue' }).click();
 
-        // Fill out State Staff and Other State Expenses
-        cy.findByRole('heading', {
-          name: /Activity 3:/i,
-          level: 2
-        }).should('exist');
+      // Fill out State Staff and Other State Expenses
+      // cy.findByRole('heading', {
+      //   name: /Activity 3:/i,
+      //   level: 2
+      // }).should('exist');
 
-        cy.waitForSave();
-        cy.findByRole('button', { name: 'Next' }).click();
+      // fillOutActivityPage.fillStateStaffAndExpenses(
+      //   activityData.staff,
+      //   activityData.expenses
+      // );
 
-        // Fill out Private Contractor Costs
-        cy.findByRole('heading', {
-          name: /^Activity 3:/i,
-          level: 2
-        }).should('exist');
-        cy.findByRole('heading', {
-          name: /Private Contractor Costs/i,
-          level: 3
-        }).should('exist');
+      // cy.waitForSave();
+      // cy.findByRole('button', { name: 'Continue' }).click();
 
-        const [contractor1, contractor2] =
-          activityData.privateContractors.slice(2);
+      // Fill out Private Contractor Costs
+      // cy.findByRole('heading', {
+      //   name: /^Activity 3:/i,
+      //   level: 2
+      // }).should('exist');
 
-        cy.findByRole('button', { name: /Add Contractor/i }).click();
-        cy.findByLabelText(/Private Contractor or Vendor Name/i).should(
-          'exist'
-        );
-        populatePage.fillContractorForm({ ...contractor1, years, index: 0 });
+      // fillOutActivityPage.fillPrivateContactors(
+      //   activityData.privateContractors,
+      //   years
+      // );
 
-        // Add another private contractor
-        cy.findByRole('button', { name: /Add Contractor/i }).click();
-        cy.findByLabelText(/Private Contractor or Vendor Name/i).should(
-          'exist'
-        );
+      // cy.waitForSave();
+      // cy.findByRole('button', { name: 'Continue' }).click();
 
-        populatePage.fillContractorForm({
-          ...contractor2,
-          hourly: true,
-          years,
-          index: 1
-        });
-        cy.waitForSave();
-        cy.findByRole('button', { name: 'Next' }).click();
+      // Fill out Cost Allocation
+      // fillOutActivityPage.fillCostAllocation(
+      //   activityData.costAllocation,
+      //   years
+      // );
 
-        // Fill out Cost Allocation
-        const allocation = activityData.costAllocation[1];
+      // const staff1 = activityData.staff[0];
+      // const staff2 = activityData.staff[1];
+      // const expense1 = activityData.expenses[0];
+      // const expense2 = activityData.expenses[1];
+      // const contractor1 = activityData.privateContractors[0];
+      // const contractor2 = activityData.privateContractors[1];
 
-        populatePage.fillCostAllocation({
-          ...allocation,
-          years
-        });
+      // years.forEach((year, i) => {
+      //   const staffTotal =
+      //     staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
 
-        const staff1 = activityData.staff[2];
-        const staff2 = activityData.staff[3];
-        const expense1 = activityData.expenses[2];
-        const expense2 = activityData.expenses[3];
-        // const contractor1 = activityData.privateContractors[2];
-        // const contractor2 = activityData.privateContractors[3];
+      //   const expenseTotal = expense1.costs[i] + expense2.costs[i];
 
-        years.forEach((year, i) => {
-          const staffTotal =
-            staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
+      //   const contractorTotal =
+      //     contractor1.FFYcosts[i] +
+      //     contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
 
-          const expenseTotal = expense1.costs[i] + expense2.costs[i];
+      //   const activityTotalCosts =
+      //     staffTotal + expenseTotal + contractorTotal;
 
-          const contractorTotal =
-            contractor1.FFYcosts[i] +
-            contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
+      //   budgetPage.checkActivityTotalCostTable({
+      //     activityTotalCosts,
+      //     otherFunding: activityData.costs[i],
+      //     totalComputableMedicaidCost:
+      //       activityTotalCosts - activityData.costs[i],
+      //     index: i
+      //   });
+      // });
 
-          const activityTotalCosts =
-            staffTotal + expenseTotal + contractorTotal;
+      // cy.waitForSave();
+      // cy.findByRole('button', { name: 'Continue' }).click();
 
-          budgetPage.checkActivityTotalCostTable({
-            activityTotalCosts,
-            otherFunding: allocation.costs[i],
-            totalComputableMedicaidCost:
-              activityTotalCosts - allocation.costs[i],
-            index: i
-          });
-        });
+      // Fill out Budget and FFP
+      // cy.findByRole('heading', {
+      //   name: /^Activity 2:/i,
+      //   level: 2
+      // }).should('exist');
+      // cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
+      //   'exist'
+      // );
 
-        cy.waitForSave();
-        cy.findByRole('button', { name: 'Next' }).click();
+      // years.forEach((year, i) => {
+      //   const {
+      //     expenses,
+      //     totalComputableMedicaidCost,
+      //     activityTotalCosts,
+      //     otherFunding
+      //   } = budgetData.budgetTableByActivities[1].ffys[i];
 
-        // Fill out Budget and FFP
-        cy.findByRole('heading', {
-          name: /^Activity 2:/i,
-          level: 2
-        }).should('exist');
-        cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
-          'exist'
-        );
+      //   cy.findAllByText(`Activity 2 Budget for FFY ${year}`)
+      //     .parent()
+      //     .parent()
+      //     .within(() => {
+      //       cy.get('[class="budget-table activity-budget-table"]')
+      //         .eq(0)
+      //         .within(() => {
+      //           Object.keys(expenses).forEach(key => {
+      //             const {
+      //               title,
+      //               items,
+      //               otherFunding: expenseOtherFunding,
+      //               subtotal
+      //             } = expenses[key];
+      //             items.forEach(item => {
+      //               budgetPage.checkTableRow(item);
+      //             });
+      //             budgetPage.checkSubtotalTable({
+      //               title,
+      //               subtotal,
+      //               otherFunding: expenseOtherFunding
+      //             });
+      //           });
 
-        // years.forEach((year, i) => {
-        //   const {
-        //     expenses,
-        //     totalComputableMedicaidCost,
-        //     activityTotalCosts,
-        //     otherFunding
-        //   } = budgetData.budgetTableByActivities[1].ffys[i];
+      //           budgetPage.checkSubtotalRows();
 
-        //   cy.findAllByText(`Activity 2 Budget for FFY ${year}`)
-        //     .parent()
-        //     .parent()
-        //     .within(() => {
-        //       cy.get('[class="budget-table activity-budget-table"]')
-        //         .eq(0)
-        //         .within(() => {
-        //           Object.keys(expenses).forEach(key => {
-        //             const {
-        //               title,
-        //               items,
-        //               otherFunding: expenseOtherFunding,
-        //               subtotal
-        //             } = expenses[key];
-        //             items.forEach(item => {
-        //               budgetPage.checkTableRow(item);
-        //             });
-        //             budgetPage.checkSubtotalTable({
-        //               title,
-        //               subtotal,
-        //               otherFunding: expenseOtherFunding
-        //             });
-        //           });
+      //           budgetPage.checkTotalComputableMedicaidCost({
+      //             label: 'Activity 2 Total Computable Medicaid Cost',
+      //             totalComputableMedicaidCost
+      //           });
+      //         });
 
-        //           budgetPage.checkSubtotalRows();
+      //       budgetPage.checkActivityTotalCostTable({
+      //         index: 1,
+      //         activityTotalCosts,
+      //         otherFunding,
+      //         totalComputableMedicaidCost
+      //       });
 
-        //           budgetPage.checkTotalComputableMedicaidCost({
-        //             label: 'Activity 2 Total Computable Medicaid Cost',
-        //             totalComputableMedicaidCost
-        //           });
-        //         });
+      //       const { split } = activityData.splitConstants[i + 1];
 
-        //       budgetPage.checkActivityTotalCostTable({
-        //         index: 1,
-        //         activityTotalCosts,
-        //         otherFunding,
-        //         totalComputableMedicaidCost
-        //       });
+      //       cy.get('[class="ds-c-field"]').select(split);
 
-        //       const { split } = activityData.splitConstants[i + 1];
+      //       const {
+      //         federalSharePercentage,
+      //         federalShareAmount,
+      //         stateSharePercentage,
+      //         stateShareAmount
+      //       } = budgetData.fedStateSplitTableByActivity[1].ffys[i];
 
-        //       cy.get('[class="ds-c-field"]').select(split);
+      //       budgetPage.checkCostSplitTable({
+      //         federalSharePercentage,
+      //         federalShareAmount,
+      //         stateSharePercentage,
+      //         stateShareAmount,
+      //         totalComputableMedicaidCost
+      //       });
 
-        //       const {
-        //         federalSharePercentage,
-        //         federalShareAmount,
-        //         stateSharePercentage,
-        //         stateShareAmount
-        //       } = budgetData.fedStateSplitTableByActivity[1].ffys[i];
+      //       const {
+      //         stateQuarterlyPercentage,
+      //         stateSubtotalPercentage,
+      //         stateQuarterlyCosts,
+      //         stateSubtotalCost,
+      //         contractorQuarterlyPercentage,
+      //         contractorSubtotalPercentage,
+      //         contractorQuarterlyCosts,
+      //         contractorSubtotalCost
+      //       } = budgetData.estimatedQuarterlyExpenditureByActivity[1].ffys[i];
+      //       for (let quarter = 0; quarter < 4; quarter += 1) {
+      //         const stateValue = stateQuarterlyPercentage[quarter];
+      //         const contractorValue = contractorQuarterlyPercentage[quarter];
 
-        //       budgetPage.checkCostSplitTable({
-        //         federalSharePercentage,
-        //         federalShareAmount,
-        //         stateSharePercentage,
-        //         stateShareAmount,
-        //         totalComputableMedicaidCost
-        //       });
+      //         populatePage.fillQuarter({
+      //           quarter,
+      //           stateValue,
+      //           contractorValue
+      //         });
+      //       }
 
-        //       const {
-        //         stateQuarterlyPercentage,
-        //         stateSubtotalPercentage,
-        //         stateQuarterlyCosts,
-        //         stateSubtotalCost,
-        //         contractorQuarterlyPercentage,
-        //         contractorSubtotalPercentage,
-        //         contractorQuarterlyCosts,
-        //         contractorSubtotalCost
-        //       } = budgetData.estimatedQuarterlyExpenditureByActivity[1].ffys[i];
-        //       for (let quarter = 0; quarter < 4; quarter += 1) {
-        //         const stateValue = stateQuarterlyPercentage[quarter];
-        //         const contractorValue = contractorQuarterlyPercentage[quarter];
+      //       budgetPage.checkSubtotalPercentage({
+      //         stateSubtotalPercentage,
+      //         contractorSubtotalPercentage
+      //       });
 
-        //         populatePage.fillQuarter({
-        //           quarter,
-        //           stateValue,
-        //           contractorValue
-        //         });
-        //       }
+      //       budgetPage.checkSubtotalCost({
+      //         stateSubtotalCost,
+      //         contractorSubtotalCost
+      //       });
 
-        //       budgetPage.checkSubtotalPercentage({
-        //         stateSubtotalPercentage,
-        //         contractorSubtotalPercentage
-        //       });
+      //       budgetPage.checkQuarterSubtotal({
+      //         stateQuarterlyCosts,
+      //         contractorQuarterlyCosts
+      //       });
 
-        //       budgetPage.checkSubtotalCost({
-        //         stateSubtotalCost,
-        //         contractorSubtotalCost
-        //       });
+      //       budgetPage.checkEachQuarterSubtotal();
+      //     });
+      // });
 
-        //       budgetPage.checkQuarterSubtotal({
-        //         stateQuarterlyCosts,
-        //         contractorQuarterlyCosts
-        //       });
+      // const {
+      //   totalCost,
+      //   totalOtherFunding,
+      //   totalTotalMedicaidCost,
+      //   totalFederalShare,
+      //   totalStateShare
+      // } = budgetData.ffyTotalDescription[1];
+      // budgetPage.checkFFYtotals({
+      //   years,
+      //   activityIndex: 1,
+      //   activityName,
+      //   totalCost,
+      //   totalOtherFunding,
+      //   totalTotalMedicaidCost,
+      //   fundingSplit: `50/50 (FFY ${years[0]}) and 90/10 (FFY ${years[1]})`,
+      //   totalFederalShare,
+      //   state: 'Alaska',
+      //   totalStateShare
+      // });
 
-        //       budgetPage.checkEachQuarterSubtotal();
-        //     });
-        // });
-
-        // const {
-        //   totalCost,
-        //   totalOtherFunding,
-        //   totalTotalMedicaidCost,
-        //   totalFederalShare,
-        //   totalStateShare
-        // } = budgetData.ffyTotalDescription[1];
-        // budgetPage.checkFFYtotals({
-        //   years,
-        //   activityIndex: 1,
-        //   activityName,
-        //   totalCost,
-        //   totalOtherFunding,
-        //   totalTotalMedicaidCost,
-        //   fundingSplit: `50/50 (FFY ${years[0]}) and 90/10 (FFY ${years[1]})`,
-        //   totalFederalShare,
-        //   state: 'Alaska',
-        //   totalStateShare
-        // });
-
-        cy.waitForSave();
-      });
+      cy.waitForSave();
     });
   });
 };

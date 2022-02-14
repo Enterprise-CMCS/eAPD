@@ -5,11 +5,11 @@
     {
       "name": "Robust Market Strategy",
       "fundingType": "MMIS",
-      "shortOverview": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Libero enim sed faucibus turpis in eu mi.",
+      "shortOverview": "The Robust Market Strategy activity has a short overview and this is it.",
       "startDate": [3, 1, 2023],
       "endDate": [8, 11, 2025],
-      "detailedDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id eu nisl nunc mi ipsum faucibus.",
-      "supportingJustifications": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis viverra nibh cras pulvinar mattis nunc sed blandit.",
+      "detailedDescription": "This is a very long and winded detailed description of the new activity named Robust Market Strategy",
+      "supportingJustifications": "The Robust Market Strategy activity provides supporting justification here.",
       "supportsMedicaid": "This activity support the medicaid standards and conditions."
     },
 
