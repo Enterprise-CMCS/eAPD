@@ -13,8 +13,12 @@ const {
 describe('Affiliations endpoint | GET', () => {
   const api = login('state-admin');
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   describe('GET /states/:stateId/affiliations', () => {
     unauthenticatedTest('get', '/states/ak/affiliations');

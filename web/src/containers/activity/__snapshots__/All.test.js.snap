@@ -14,17 +14,17 @@ exports[`the Activities component renders correctly 1`] = `
     />
     <Connect(EntryDetails)
       activityIndex={0}
-      apdId={2}
+      apdId="0123456789abcdef01234560"
       key="key1"
     />
     <Connect(EntryDetails)
       activityIndex={1}
-      apdId={2}
+      apdId="0123456789abcdef01234560"
       key="key2"
     />
     <Connect(EntryDetails)
       activityIndex={2}
-      apdId={2}
+      apdId="0123456789abcdef01234560"
       key="key3"
     />
     <Button

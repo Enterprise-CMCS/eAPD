@@ -19,7 +19,7 @@ const initialProps = {
 };
 
 jest.mock('react-router-dom', () => ({
-  useParams: jest.fn().mockReturnValue({ apdId: 2 })
+  useParams: jest.fn().mockReturnValue({ apdId: '0123456789abcdef01234560' })
 }));
 
 const setup = props => shallow(<Activities {...initialProps} {...props} />);

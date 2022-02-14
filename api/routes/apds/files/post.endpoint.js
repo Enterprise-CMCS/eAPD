@@ -1,54 +1,60 @@
 const fs = require('fs');
 const FormData = require('form-data');
 const {
-  buildForm,
-  getDB,
-  setupDB,
-  teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
+const {
+  mnAPDId,
+  akAPDId,
+  finalAPDId,
+  badAPDId
+} = require('../../../seeds/test/apds');
 
 describe('APD files endpoints', () => {
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
-
     const url = id => `/apds/${id}/files`;
-    const form = buildForm({ file: 'this is my new file' });
 
-    unauthenticatedTest('post', url(0));
-    unauthorizedTest('post', url(0));
+    const buildFileForm = filename => {
+      const imagePath = `${process.cwd()}/test-data/files/${filename}`;
+      expect(fs.existsSync(imagePath)).toBeTruthy();
+
+      const formData = new FormData();
+      formData.append('file', fs.readFileSync(imagePath), filename);
+      const options = {
+        headers: {
+          ...formData.getHeaders()
+        }
+      };
+      return { formData, options };
+    };
+
+    unauthenticatedTest('post', url(badAPDId));
+    unauthorizedTest('post', url(badAPDId));
 
     describe('when authenticated as a user with permission', () => {
       let api;
-      beforeAll(async () => {
+      beforeAll(() => {
         api = login('state-admin');
       });
 
       it('with a non-existant apd ID', async () => {
-        const response = await api.post(url(9000), form);
+        const { formData, options } = buildFileForm('eAPD_logo.png');
+        const response = await api.post(
+          url(badAPDId),
+          formData.getBuffer(),
+          options
+        );
 
-        expect(response.status).toEqual(400);
+        expect(response.status).toEqual(404);
         expect(response.data).toMatchSnapshot();
       });
 
       it(`with an APD in a state other than the user's state`, async () => {
-        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.png`;
-        expect(fs.existsSync(imagePath)).toBeTruthy();
-
-        const formData = new FormData();
-        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.png');
-        const options = {
-          headers: {
-            ...formData.getHeaders()
-          }
-        };
-
+        const { formData, options } = buildFileForm('eAPD_logo.png');
         const response = await api.post(
-          url(4000),
+          url(mnAPDId),
           formData.getBuffer(),
           options
         );
@@ -58,19 +64,9 @@ describe('APD files endpoints', () => {
       });
 
       it('with an APD that is not in draft', async () => {
-        const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.png`;
-        expect(fs.existsSync(imagePath)).toBeTruthy();
-
-        const formData = new FormData();
-        formData.append('file', fs.readFileSync(imagePath), 'eAPD_logo.png');
-        const options = {
-          headers: {
-            ...formData.getHeaders()
-          }
-        };
-
+        const { formData, options } = buildFileForm('eAPD_logo.png');
         const response = await api.post(
-          url(4002),
+          url(finalAPDId),
           formData.getBuffer(),
           options
         );
@@ -91,7 +87,7 @@ describe('APD files endpoints', () => {
           }
         };
 
-        api.post(url(4001), formData.getBuffer(), options).catch(e => {
+        await api.post(url(akAPDId), formData.getBuffer(), options).catch(e => {
           expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
@@ -109,7 +105,7 @@ describe('APD files endpoints', () => {
           }
         };
 
-        api.post(url(4001), formData.getBuffer(), options).catch(e => {
+        await api.post(url(akAPDId), formData.getBuffer(), options).catch(e => {
           expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
@@ -127,7 +123,7 @@ describe('APD files endpoints', () => {
           }
         };
 
-        api.post(url(4001), formData.getBuffer(), options).catch(e => {
+        await api.post(url(akAPDId), formData.getBuffer(), options).catch(e => {
           expect(e.response.status).toEqual(415);
           expect(e.response.data).toMatchSnapshot();
         });
@@ -146,20 +142,14 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(4001),
+          url(akAPDId),
           formData.getBuffer(),
           options
         );
 
         expect(response.status).toEqual(200);
-        expect(response.data.url).toEqual(
-          expect.stringMatching(/apds\/4001\/files\/[a-f0-9]{64}/)
-        );
-
-        const filename = response.data.url.match(
-          /apds\/4001\/files\/([a-f0-9]{64})/
-        )[1];
-        expect(fs.existsSync(`test-data/files/${filename}`)).toEqual(true);
+        const re = new RegExp(`apds/${akAPDId}/files/[a-f0-9]{64}`);
+        expect(response.data.url).toEqual(expect.stringMatching(re));
       });
 
       it('with a valid request (jpg)', async () => {
@@ -175,7 +165,7 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(4001),
+          url(akAPDId),
           formData.getBuffer(),
           options
         );
@@ -197,7 +187,7 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(4001),
+          url(akAPDId),
           formData.getBuffer(),
           options
         );
@@ -219,7 +209,7 @@ describe('APD files endpoints', () => {
         };
 
         const response = await api.post(
-          url(4001),
+          url(akAPDId),
           formData.getBuffer(),
           options
         );

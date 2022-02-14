@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Become root user to perform installation and configuration
 sudo su <<R_USER
 #!/bin/bash

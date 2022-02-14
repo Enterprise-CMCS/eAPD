@@ -103,7 +103,7 @@ export const getPatchesToAddYear = (state, year) => {
 
     patches.push({
       op: 'add',
-      path: `/activities/${activityIndex}/costAllocationNarrative/${year}`,
+      path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`,
       value: costAllocationNarrative()
     });
 
@@ -187,7 +187,7 @@ export const getPatchesToRemoveYear = (state, year) => {
 
     patches.push({
       op: 'remove',
-      path: `/activities/${activityIndex}/costAllocationNarrative/${year}`
+      path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`
     });
 
     patches.push({
@@ -310,6 +310,11 @@ export const getPatchesForAddingItem = (state, path) => {
       return [{ op: 'add', path, value: null }];
   }
 };
+
+const getFederalCitations = federalCitations =>
+  Object.values(federalCitations).every(regs => regs.length > 0)
+    ? federalCitations
+    : initialAssurances;
 
 const initialState = {
   data: {},
@@ -437,7 +442,7 @@ const reducer = (state = initialState, action) => {
     case RESET:
       return { ...state, data: {} };
 
-    case SELECT_APD_SUCCESS:
+    case SELECT_APD_SUCCESS: {
       return {
         ...state,
         data: {
@@ -475,10 +480,7 @@ const reducer = (state = initialState, action) => {
               key: generateKey()
             })
           ),
-          federalCitations:
-            Object.keys(action.apd.federalCitations).length > 0
-              ? action.apd.federalCitations
-              : initialAssurances,
+          federalCitations: getFederalCitations(action.apd.federalCitations),
           keyPersonnel: action.apd.keyPersonnel.map(kp => ({
             ...kp,
             key: generateKey()
@@ -488,6 +490,7 @@ const reducer = (state = initialState, action) => {
           yearOptions: defaultAPDYearOptions
         }
       };
+    }
     case SELECT_APD_FAILURE:
       return { ...state, data: {}, fetching: false, error: action.data };
     case SET_APD_TO_SELECT_ON_LOAD:

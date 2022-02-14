@@ -164,7 +164,9 @@ export const testKeyStatePersonnelWithData = years => {
       .should('have.length', 2);
 
     cy.get('.form-and-review-list')
-      .findAllByRole('button', { name: /Edit/i }).eq(1).click();
+      .findAllByRole('button', { name: /Edit/i })
+      .eq(1)
+      .click();
 
     cy.fixture('users').then(userData => {
       cy.get('input[name="apd-state-profile-pocname1"]')

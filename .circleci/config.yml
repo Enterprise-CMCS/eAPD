@@ -320,7 +320,7 @@ jobs:
           name: validate
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker create -v /openapi --name openapi alpine /bin/true
+            docker create -v /openapi --name openapi cimg/node:16.9.1 /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
 
@@ -516,7 +516,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_DATABASE="${<< parameters.env >>_MONGO_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -608,7 +608,7 @@ jobs:
           name: pull owasp zap docker image
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker pull owasp/zap2docker-stable
+            docker pull owasp/zap2docker-stable:2.11.1
       - run:
           name: run owasp zap
           command: |
@@ -616,7 +616,7 @@ jobs:
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
-              owasp/zap2docker-stable \
+              owasp/zap2docker-stable:2.11.1 \
               zap-api-scan.py \
               -c api-scan.conf \
               -t http://api-for-testing:8000/open-api \
@@ -667,8 +667,9 @@ jobs:
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
               --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
-              --MONGO_MONGO_INITDB_DATABASE "${<< parameters.env >>_MONGO_INITDB_DATABASE}" \
-              --MONGO_URL "${<< parameters.env >>_MONGO_URL}"
+              --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
+              --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
+              --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}"
 
       - run:
           when: on_fail
@@ -787,7 +788,8 @@ jobs:
                 --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME" \
                 --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD" \
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
-                --MONGO_URL "$PREVIEW_MONGO_URL" 
+                --MONGO_URL "$PREVIEW_MONGO_URL" \
+                --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else

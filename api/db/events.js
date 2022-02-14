@@ -11,19 +11,11 @@ const createEventForAPD = async (
     `adding ${eventType} event for apd ${apdID}, event ID = ${eventID}`
   );
 
-  const intApdID = parseInt(apdID, 10);
-  if (Number.isNaN(intApdID)) {
-    logger.error(
-      `error saving ${eventID} to database ${apdID} is not a valid value`
-    );
-    return null;
-  }
-
   try {
     await db('apd_events').insert({
       event_id: eventID,
       user_id: userID,
-      apd_id: intApdID,
+      apd_id: apdID,
       event_type: eventType,
       event_at: new Date().toISOString(),
       metadata
