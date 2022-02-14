@@ -26,5 +26,5 @@ fileignoreconfig:
   - filename: bin/preview-deploy/aws.user-data.sh
     checksum: 6887d9c547bc6d9076d54afe49acd26828ac389e8f05365dcb47cf6d4547be83
   - filename: packer/mongo.sh
-    checksum: 373e3e6ffbfa60863ed028aebec05cc586d7d461b7a5bc767b7717dbea96519f
+    checksum: a4cbd55c0dfb75500d2c0cf31efa1fe5dd851fed2fe49050b1c51913a2b23f4e
 version: ''
