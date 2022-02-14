@@ -124,6 +124,7 @@ const CostAllocateFFP = ({
           <table
             className="budget-table activity-budget-table"
             id={`activity${activityIndex}-ffy${ffy}`}
+            data-cy="FFPActivityTable"
           >
             <caption className="ds-h3">
               Activity {activityIndex + 1} Budget for FFY {ffy}
@@ -141,7 +142,10 @@ const CostAllocateFFP = ({
           {/* in viewonly mode, we'll pull everything into a single table
               table since there aren't form elements to fill in */}
           {isViewOnly && (
-            <table className="budget-table activity-budget-table">
+            <table
+              className="budget-table activity-budget-table"
+              data-cy="FFPActivityTable"
+            >
               <tbody>
                 <tr className="budget-table--subtotal budget-table--row__header">
                   <th colSpan="5">Activity Total Cost</th>
@@ -186,7 +190,10 @@ const CostAllocateFFP = ({
 
           {!isViewOnly && (
             <Fragment>
-              <table className="budget-table activity-budget-table">
+              <table
+                className="budget-table activity-budget-table"
+                data-cy="FFPActivityTotalCostTable"
+              >
                 <tbody>
                   <tr className="budget-table--subtotal budget-table--row__header">
                     <th colSpan="2">Activity Total Cost</th>
@@ -235,7 +242,10 @@ const CostAllocateFFP = ({
                 />
               </div>
 
-              <table className="budget-table activity-budget-table">
+              <table
+                className="budget-table activity-budget-table"
+                data-cy="FFPFedStateSplitTable"
+              >
                 <tbody>
                   <tr className="budget-table--subtotal budget-table--row__header">
                     <th colSpan="5">Total Computable Medicaid Cost</th>
