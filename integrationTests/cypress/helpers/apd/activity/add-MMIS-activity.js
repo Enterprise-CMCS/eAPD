@@ -52,7 +52,7 @@ export const addMMISActivity = years => {
       fillOutActivityPage.fillActivityOverview(activityData.activityOverview);
 
       cy.waitForSave();
-      cy.findByRole('button', { name: 'Continue' }).click();
+      cy.get('[id="continue-button"]').click();
 
       // Fill out Outcomes and Milestones
       cy.findByRole('heading', {
@@ -66,20 +66,20 @@ export const addMMISActivity = years => {
       );
 
       cy.waitForSave();
-      cy.findByRole('button', { name: 'Continue' }).click();
+      cy.get('[id="continue-button"]').click();
 
       // Fill out State Staff and Other State Expenses
-      // cy.findByRole('heading', {
-      //   name: /Activity 3:/i,
-      //   level: 2
-      // }).should('exist');
+      cy.findByRole('heading', {
+        name: /Activity 3:/i,
+        level: 2
+      }).should('exist');
 
-      // fillOutActivityPage.fillStateStaffAndExpenses(
-      //   activityData.staff,
-      //   activityData.expenses
-      // );
+      fillOutActivityPage.fillStateStaffAndExpenses(
+        activityData.staff,
+        activityData.expenses
+      );
 
-      // cy.waitForSave();
+      cy.waitForSave();
       // cy.findByRole('button', { name: 'Continue' }).click();
 
       // Fill out Private Contractor Costs

@@ -1,9 +1,10 @@
 import PopulatePage from './populate-page';
-import staffExpensesPage from './activities-state-staff-expenses-page';
+import StaffExpensesPage from './activities-state-staff-expenses-page';
 
 const { _ } = Cypress;
 
 const populatePage = new PopulatePage();
+const staffExpensesPage = new StaffExpensesPage();
 
 class FillOutActivityPage {
   // Activity Overview
@@ -35,14 +36,14 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
-    Cypress._.times(outcomes.names.length(), i => {
-      PopulatePage.fillOutcomeForm({
+    _.forEach(outcomes.names, (name, i) => {
+      populatePage.fillOutcomeForm({
         outcome: outcomes.names[i],
         metrics: outcomes.metrics[i]
       });
 
       cy.findByRole('button', { name: /Add Milestone/i }).click();
-      PopulatePage.fillMilestoneForm({
+      populatePage.fillMilestoneForm({
         milestone: milestones.names[i],
         targetDate: milestones.dates[i]
       });
@@ -55,11 +56,11 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
-    staffExpensesPage.addStaff();
-    staffExpensesPage.addStaff();
+    // staffExpensesPage.addStaff();
+    // staffExpensesPage.addStaff();
 
     _.forEach(staffList, (staff, i) => {
-      // see what i is before you run this
+      staffExpensesPage.addStaff();
       staffExpensesPage.fillStaff(
         i,
         staff.title,

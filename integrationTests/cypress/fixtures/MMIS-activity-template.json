@@ -13,37 +13,35 @@
       "supportsMedicaid": "This activity support the medicaid standards and conditions."
     },
 
-  "outcomes": [
+  "outcomes":
     {
       "names": [
-        "Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.",
-        "Provide support to EPs and EHs through attestation process."
+        "Accept measures for quality assurance until 2023, and modify FCR to meet new spec sheets released by the Third Quarter.",
+        "Provide airline suggesstions to AEIs and PLEs through Big Brand processes."
       ],
       "metrics": [
         [
-          "Complete SLR modifications by 11/1/21",
-          "Accept attestations through 4/30/22"
+          "Complete FCR modifications by 2/18/23",
+          "Provide suggestions up until 7/22/24"
         ],
         [
-          "Guidance available on Tycho''s websites",
-          "Office hours availble for EPs and EHs"
+          "Guidance can be viewed on Tyrone's alumni websites",
+          "Office hours availble only on Wednesdays and Fridays"
         ]
       ]
-    }
-  ],
+    },
 
-  "milestones": [
+  "milestones":
     {
       "names": [
-        "Implementation of Final Rule and Stage 3 System Developments",
-        "Environmental Scan Completion"
+        "Begin development of the final chapter in Quarted four",
+        "Environmental Acusation Funds"
       ],
       "dates": [
-        [10, 5, 2021],
-        [3, 2, 2022]
+        [5, 8, 2023],
+        [11, 4, 2024]
       ]
-    }
-  ],
+    },
 
   "staff": [
     {
