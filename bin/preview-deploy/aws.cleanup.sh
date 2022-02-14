@@ -30,7 +30,7 @@ function cleanupPreviewDeploys() {
   echo "• Finding existing preview instances"
   EXISTING_INSTANCES=$(findExistingInstances)
 
-  echo "• Terminating instances for closed/merged pull requests"
+  echo "• Terminating instances for closed/merged pull requests"
   while read -r INSTANCE_INFO; do
     terminateIfClosedPR $INSTANCE_INFO "$OPEN_PRS"
   done <<< "$EXISTING_INSTANCES"

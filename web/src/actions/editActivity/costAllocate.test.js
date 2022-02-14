@@ -43,7 +43,7 @@ describe('APD activity edit actions for cost allocation section', () => {
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,
-        path: '/activities/1/costAllocationNarrative/2020/otherSources',
+        path: '/activities/1/costAllocationNarrative/years/2020/otherSources',
         value: 'rich Uncle Pennybags'
       }
     ]);

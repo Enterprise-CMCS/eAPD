@@ -23,7 +23,7 @@ tap.test('APD-related middleware', async middlewareTests => {
       async invalidTest => {
         getAPDByID.rejects(err);
 
-        const req = { meta: {}, params: { 'apd-id': 9 } };
+        const req = { meta: {}, params: { 'apd-id': '9' } };
         await loadApd({ getAPDByID })(req, res, next);
 
         invalidTest.ok(next.called, 'next is called');
@@ -34,26 +34,25 @@ tap.test('APD-related middleware', async middlewareTests => {
     loadApdTests.test('when there is no associated APD', async invalidTest => {
       getAPDByID.resolves(null);
 
-      const req = { meta: {}, params: { 'apd-id': 9 } };
+      const req = { meta: {}, params: { 'apd-id': '9' } };
       await loadApd({ getAPDByID })(req, res, next);
 
-      invalidTest.ok(res.status.calledWith(400), 'HTTP status is set to 400');
+      invalidTest.ok(res.status.calledWith(404), 'HTTP status is set to 400');
       invalidTest.ok(res.end.calledOnce, 'response is closed');
       invalidTest.ok(next.notCalled, 'next is not called');
     });
 
     loadApdTests.test('when there is an associated APD', async validTest => {
       getAPDByID.resolves({
-        document: {
-          this: 'is the APD document'
-        },
-        id: 'apd id',
-        state_id: 'apd state',
+        this: 'is the APD document',
+        _id: 'apd id',
+        stateId: 'apd state',
         status: 'draft or something',
-        updated_at: 'in the past'
+        updatedAt: 'in the past',
+        createdAt: 'in the further past'
       });
 
-      const req = { meta: {}, params: { 'apd-id': 9 } };
+      const req = { meta: {}, params: { 'apd-id': '9' } };
       await loadApd({ getAPDByID })(req, res, next);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not set');
@@ -66,7 +65,8 @@ tap.test('APD-related middleware', async middlewareTests => {
           id: 'apd id',
           state: 'apd state',
           status: 'draft or something',
-          updated: 'in the past'
+          updated: 'in the past',
+          created: 'in the further past'
         },
         'sets the APD on the request object'
       );
@@ -132,10 +132,6 @@ tap.test('APD-related middleware', async middlewareTests => {
       );
 
       test.ok(res.status.calledWith(400), 'HTTP status is set to 400');
-      test.ok(
-        res.send.calledWith({ error: 'apd-not-editable' }),
-        'sends error token'
-      );
       test.ok(res.end.calledOnce, 'response is closed');
       test.ok(next.notCalled, 'next is not called');
     });

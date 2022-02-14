@@ -25,7 +25,8 @@ const setup = (props = {}) => {
     initialState: {
       apd: {
         data: {
-          id: '123',
+          id: 123,
+          name: 'Test APD',
           activities: [],
           keyPersonnel: [],
           incentivePayments: {
@@ -119,7 +120,7 @@ const setup = (props = {}) => {
         },
         byId: {
           123: {
-            name: 'test apd'
+            name: 'Test APD'
           }
         }
       }

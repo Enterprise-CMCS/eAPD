@@ -190,7 +190,8 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
 
     it('should handle a user selecting one affiliation and then requesting multiple additional affiliations', () => {
       cy.loginWithEnv('norole');
-      cy.findByLabelText(/Select your State Affiliation/i)
+      
+      cy.findByLabelText(/Select your State Affiliation/i, { timeout: 3000 })
         .clear()
         .type('alas');
       cy.get('li').should('have.length', 1);
