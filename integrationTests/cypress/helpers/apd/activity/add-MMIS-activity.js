@@ -80,59 +80,59 @@ export const addMMISActivity = years => {
       );
 
       cy.waitForSave();
-      // cy.findByRole('button', { name: 'Continue' }).click();
+      cy.get('[id="continue-button"]').click();
 
       // Fill out Private Contractor Costs
-      // cy.findByRole('heading', {
-      //   name: /^Activity 3:/i,
-      //   level: 2
-      // }).should('exist');
+      cy.findByRole('heading', {
+        name: /^Activity 3:/i,
+        level: 2
+      }).should('exist');
 
-      // fillOutActivityPage.fillPrivateContactors(
-      //   activityData.privateContractors,
-      //   years
-      // );
+      fillOutActivityPage.fillPrivateContactors(
+        activityData.privateContractors,
+        years
+      );
 
-      // cy.waitForSave();
-      // cy.findByRole('button', { name: 'Continue' }).click();
+      cy.waitForSave();
+      cy.get('[id="continue-button"]').click();
 
       // Fill out Cost Allocation
-      // fillOutActivityPage.fillCostAllocation(
-      //   activityData.costAllocation,
-      //   years
-      // );
+      fillOutActivityPage.fillCostAllocation(
+        activityData.costAllocation,
+        years
+      );
 
-      // const staff1 = activityData.staff[0];
-      // const staff2 = activityData.staff[1];
-      // const expense1 = activityData.expenses[0];
-      // const expense2 = activityData.expenses[1];
-      // const contractor1 = activityData.privateContractors[0];
-      // const contractor2 = activityData.privateContractors[1];
+      const staff1 = activityData.staff[0];
+      const staff2 = activityData.staff[1];
+      const expense1 = activityData.expenses[0];
+      const expense2 = activityData.expenses[1];
+      const contractor1 = activityData.privateContractors[0];
+      const contractor2 = activityData.privateContractors[1];
 
-      // years.forEach((year, i) => {
-      //   const staffTotal =
-      //     staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
+      years.forEach((year, i) => {
+        const staffTotal =
+          staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
 
-      //   const expenseTotal = expense1.costs[i] + expense2.costs[i];
+        const expenseTotal = expense1.costs[i] + expense2.costs[i];
 
-      //   const contractorTotal =
-      //     contractor1.FFYcosts[i] +
-      //     contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
+        const contractorTotal =
+          contractor1.FFYcosts[i] +
+          contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
 
-      //   const activityTotalCosts =
-      //     staffTotal + expenseTotal + contractorTotal;
+        const activityTotalCosts = staffTotal + expenseTotal + contractorTotal;
 
-      //   budgetPage.checkActivityTotalCostTable({
-      //     activityTotalCosts,
-      //     otherFunding: activityData.costs[i],
-      //     totalComputableMedicaidCost:
-      //       activityTotalCosts - activityData.costs[i],
-      //     index: i
-      //   });
-      // });
+        const otherFunding = activityData.costAllocation.costs[i];
 
-      // cy.waitForSave();
-      // cy.findByRole('button', { name: 'Continue' }).click();
+        budgetPage.checkActivityTotalCostTable({
+          activityTotalCosts,
+          otherFunding,
+          totalComputableMedicaidCost: activityTotalCosts - otherFunding,
+          index: i
+        });
+      });
+
+      cy.waitForSave();
+      // cy.get('[id="continue-button"]').click();
 
       // Fill out Budget and FFP
       // cy.findByRole('heading', {

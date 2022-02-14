@@ -56,9 +56,6 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
-    // staffExpensesPage.addStaff();
-    // staffExpensesPage.addStaff();
-
     _.forEach(staffList, (staff, i) => {
       staffExpensesPage.addStaff();
       staffExpensesPage.fillStaff(
@@ -77,10 +74,8 @@ class FillOutActivityPage {
       );
     });
 
-    staffExpensesPage.addExpense();
-    staffExpensesPage.addExpense();
-
     _.forEach(expenseList, (expense, i) => {
+      staffExpensesPage.addExpense();
       staffExpensesPage.fillExpense(
         i,
         expense.category,
@@ -97,48 +92,43 @@ class FillOutActivityPage {
   };
 
   fillPrivateContactors = (contractorList, years = {}) => {
+    cy.findByRole('heading', {
+      name: /Private Contractor Costs/i,
+      level: 3
+    }).should('exist');
+
     _.forEach(contractorList, (contractor, i) => {
-      cy.findByRole('heading', {
-        name: /Private Contractor Costs/i,
-        level: 3
-      }).should('exist');
+      cy.findByRole('button', { name: /Add Contractor/i }).click();
+      populatePage.fillTextField('ds-c-field', contractor.name);
 
-      this.fillTextField('ds-c-field', contractor.name);
+      populatePage.fillDate('Contract start date', contractor.start);
+      populatePage.fillDate('Contract end date', contractor.end);
 
-      this.fillDate('Contract start date', contractor.start);
-      this.fillDate('Contract end date', contractor.end);
-
-      this.fillTextField(
+      populatePage.fillTextField(
         'ds-c-field ds-c-field--currency ds-c-field--medium',
         contractor.totalCosts,
         0
       );
 
-      let hourly;
-      if (contractor.FFYcosts[0].length() === years.length()) {
-        hourly = true;
-      } else {
-        hourly = false;
-      }
-
-      if (hourly) {
+      if (contractor.hourly) {
         cy.findByRole('radio', { name: /Yes/i }).click({ force: true });
-        years.forEach((year, index) => {
-          this.fillTextField(
+        // years is empty for some reason
+        _.forEach(years, (year, index) => {
+          populatePage.fillTextField(
             'ds-c-field ds-c-field--medium',
             contractor.FFYcosts[index][0],
             index
           );
 
-          this.fillTextField(
+          populatePage.fillTextField(
             'ds-c-field ds-c-field--currency ds-c-field--medium',
             contractor.FFYcosts[index][1],
             index + 1
           );
         });
       } else {
-        years.forEach((year, index) => {
-          this.fillTextField(
+        _.forEach(years, (year, index) => {
+          populatePage.fillTextField(
             'ds-c-field ds-c-field--currency ds-c-field--medium',
             contractor.FFYcosts[index],
             index + 1
@@ -163,12 +153,12 @@ class FillOutActivityPage {
       allocation.description
     );
 
-    years.forEach((year, i) => {
+    _.forEach(years, (year, i) => {
       cy.setTinyMceContent(
         `cost-allocation-narrative-${year}-other-sources-field`,
         allocation.FFYdescriptions[i]
       );
-      this.fillTextField(
+      populatePage.fillTextField(
         'ds-c-field ds-c-field--currency',
         allocation.costs[i],
         i

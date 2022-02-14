@@ -45,64 +45,65 @@
 
   "staff": [
     {
-      "title": "Public Information Officer",
-      "description": "Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program",
-      "costs": [165000, 170000],
-      "ftes": [0.5, 0.5]
+      "title": "Private Security Trainer",
+      "description": "Designed to create, combine, and construct systems that involve highly secure information",
+      "costs": [215000, 107000],
+      "ftes": [0.25, 0.25]
     },
     {
-      "title": "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
-      "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
-      "costs": [110012, 111102],
-      "ftes": [1, 1]
+      "title": "Professional Office Manager (Office Administrator III)",
+      "description": "Daily responsibilities lie within managing thousands of individuals in their daily routine and work life",
+      "costs": [169824, 114712],
+      "ftes": [0.5, 1.5]
     }
   ],
 
   "expenses": [
     {
-      "category": "Hardware, software, and licensing",
-      "costs": [40000, 40000],
-      "description": "Purchases of new laptops and licenses for Office software."
+      "category": "Training and outreach",
+      "costs": [75000, 100000],
+      "description": "Courses designed to train newhires and reach out to communities for potential employment opportunities."
     },
     {
       "category": "Equipment and supplies",
-      "costs": [500, 200],
-      "description": "Paper, pens, and pencils."
+      "costs": [1000, 2500],
+      "description": "Paper, paper, and even more paper"
     }
   ],
 
   "privateContractors": [
     {
-      "name": "Tech Consulting Inc.",
-      "description": "Technology consulting and planning services.",
-      "start": [1, 5, 2014],
-      "end": [3, 2, 2025],
-      "totalCosts": 80000,
-      "FFYcosts": [40000, 40000]
+      "name": "Studio 56",
+      "description": "Electronical and digital services",
+      "start": [12, 25, 2023],
+      "end": [8, 12, 2024],
+      "totalCosts": 65000,
+      "hourly": false,
+      "FFYcosts": [30000, 35000]
     },
     {
-      "name": "Interface Vendor Inc.",
-      "description": "Hosting and development support.",
-      "start": [4, 7, 2020],
-      "end": [1, 2, 2024],
-      "totalCosts": 3000,
+      "name": "Feel Good Inc.",
+      "description": "Windmill service company",
+      "start": [9, 27, 2023],
+      "end": [7, 11, 2024],
+      "totalCosts": 5000,
+      "hourly": true,
       "FFYcosts": [
-        [10, 150],
-        [75, 20]
+        [10, 300],
+        [5, 400]
       ]
     }
   ],
 
-  "costAllocation": [
+  "costAllocation":
     {
       "description": "Activity 3 description for overall cost allocation.",
       "FFYdescriptions": [
-        "This is the Other Funding description for Activity 3 - FFY 2021",
-        "This is the Other Funding description for Activity 3 - FFY 2022"
+        "This is the Other Funding description for Activity 3 - FFY 2022",
+        "This is the Other Funding description for Activity 3 - FFY 2023"
       ],
       "costs": [4000, 9000]
-    }
-  ],
+    },
 
   "splitConstants": [
     {
