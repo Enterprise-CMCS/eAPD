@@ -268,6 +268,7 @@ curl -o backend.zip -L __BUILDURL__
 unzip backend.zip
 rm backend.zip
 cd api
+npm ci --only=production 
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
 npm rebuild knex

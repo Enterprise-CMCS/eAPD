@@ -203,6 +203,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            # - e2e test
       - frontend deploy:
           name: frontend deploy production
           env: PRODUCTION
@@ -217,6 +218,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            # - e2e test
 
       # joint jobs
       - preview deploy:
@@ -229,6 +231,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
+            # - e2e test
 
       - store artifacts:
           name: store artifacts staging
