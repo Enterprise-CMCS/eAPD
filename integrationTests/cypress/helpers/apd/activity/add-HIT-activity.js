@@ -9,7 +9,7 @@ import PopulatePage from '../../../page-objects/populate-page';
 
 // Check export view
 
-export const addMMISActivity = years => {
+export const addHITActivity = years => {
   let populatePage;
   let activityPage;
   let staffExpensesPage;
@@ -25,13 +25,13 @@ export const addMMISActivity = years => {
     budgetPage = new BudgetPage();
     fillOutActivityPage = new FillOutActivityPage();
 
-    cy.fixture('MMIS-activity-template.json').then(data => {
+    cy.fixture('HIT-activity-template.json').then(data => {
       activityData = data;
     });
   });
 
-  describe('Add a MMIS Activity and check in export view', () => {
-    it('Adds an MMIS Activity and checks the export view', () => {
+  describe('Add a HIT Activity and check in export view', () => {
+    it('Adds an HIT Activity and checks the export view', () => {
       cy.goToActivityDashboard();
 
       // Add activity
@@ -39,14 +39,11 @@ export const addMMISActivity = years => {
       cy.findByRole('heading', { name: /Activities/i, level: 2 }).should(
         'exist'
       );
-      cy.contains('Add Activity').click();
-      cy.contains('Activity 3: Untitled').should('exist');
-      cy.get('#activities').findAllByText('Edit').eq(2).click();
+      cy.contains('Activity 1: Program Administration (HIT)').should('exist');
+      cy.get('#activities').findAllByText('Edit').eq(0).click();
 
       // Fill out Activity Overview
-      cy.findByLabelText('Activity name').type(activityData.activityName);
-      cy.findByRole('radio', { name: /MMIS/i }).check({ force: true });
-      cy.findAllByText(`Activity 3: ${activityData.activityName}`).should(
+      cy.findAllByText(`Activity 1: ${activityData.activityName}`).should(
         'exist'
       );
       fillOutActivityPage.fillActivityOverview(activityData.activityOverview);
@@ -56,7 +53,7 @@ export const addMMISActivity = years => {
 
       // Fill out Outcomes and Milestones
       cy.findByRole('heading', {
-        name: /^Activity 3:/i,
+        name: /^Activity 1:/i,
         level: 2
       }).should('exist');
 
@@ -70,7 +67,7 @@ export const addMMISActivity = years => {
 
       // Fill out State Staff and Other State Expenses
       cy.findByRole('heading', {
-        name: /Activity 3:/i,
+        name: /Activity 1:/i,
         level: 2
       }).should('exist');
 
@@ -84,7 +81,7 @@ export const addMMISActivity = years => {
 
       // Fill out Private Contractor Costs
       cy.findByRole('heading', {
-        name: /^Activity 3:/i,
+        name: /^Activity 1:/i,
         level: 2
       }).should('exist');
 
@@ -116,8 +113,7 @@ export const addMMISActivity = years => {
         const expenseTotal = expense1.costs[i] + expense2.costs[i];
 
         const contractorTotal =
-          contractor1.FFYcosts[i] +
-          contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
+          contractor1.FFYcosts[i] + contractor2.FFYcosts[i];
 
         const activityTotalCosts = staffTotal + expenseTotal + contractorTotal;
 
@@ -136,15 +132,15 @@ export const addMMISActivity = years => {
 
       // Fill out Budget and FFP
       cy.findByRole('heading', {
-        name: /^Activity 3:/i,
+        name: /^Activity 1:/i,
         level: 2
       }).should('exist');
 
       fillOutActivityPage.checkBudgetAndFFPTables({
         budgetData: activityData.budgetAndFFPTables,
         years,
-        firstSplit: '90-10',
-        secondSplit: '50-50'
+        firstSplit: '50-50',
+        secondSplit: '75-25'
       });
 
       const {
@@ -156,12 +152,12 @@ export const addMMISActivity = years => {
       } = activityData.FFYTotalDescription;
       budgetPage.checkFFYtotals({
         years,
-        activityIndex: 2,
+        activityIndex: 0,
         activityName: activityData.activityName,
         totalCost,
         totalOtherFunding,
         totalTotalMedicaidCost,
-        fundingSplit: `90/10 (FFY ${years[0]}) and 50/50 (FFY ${years[1]})`,
+        fundingSplit: `50/50 (FFY ${years[0]}) and 75/25 (FFY ${years[1]})`,
         totalFederalShare,
         state: 'Alaska',
         totalStateShare

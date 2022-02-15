@@ -145,5 +145,99 @@
       "other": [5000, 8000],
       "fedShare": [0.75, 0.5]
     }
-  ]
+  ],
+
+  "budgetAndFFPTables": {
+    "activityBudgetTable": [
+      [
+        [],
+        ["Private Security Trainer", "$215,000", "0.25 FTE", "$53,750"],
+        ["Professional Office Manager (Office Administrator III)", "$169,824", "0.5 FTE", "$84,912"],
+        ["Other Funding Amount", "$2,240"],
+        ["State Staff Subtotal", "$136,422"],
+        [],
+        ["Training and outreach", "$75,000"],
+        ["Equipment and supplies", "$1,000"],
+        ["Other Funding Amount", "$1,227"],
+        ["Other State Expenses Subtotal", "$74,773"],
+        [],
+        ["Studio 56", "$30,000"],
+        ["Feel Good Inc.", "$300", "10 hours", "$3,000"],
+        ["Other Funding Amount", "$533"],
+        ["Private Contractor Subtotal", "$32,467"],
+        ["Activity 3 Total Computable Medicaid Cost", "$243,662"]
+      ],
+      [
+        [],
+        ["Private Security Trainer", "$107,000", "0.25 FTE", "$26,750"],
+        ["Professional Office Manager (Office Administrator III)", "$114,712", "1.5 FTE", "$172,068"],
+        ["Other Funding Amount", "$5,289"],
+        ["State Staff Subtotal", "$193,529"],
+        [],
+        ["Training and outreach", "$100,000"],
+        ["Equipment and supplies", "$2,500"],
+        ["Other Funding Amount", "$2,727"],
+        ["Other State Expenses Subtotal", "$99,773"],
+        [],
+        ["Studio 56", "$35,000"],
+        ["Feel Good Inc.", "$400", "5 hours", "$2,000"],
+        ["Other Funding Amount", "$984"],
+        ["Private Contractor Subtotal", "$36,016"],
+        ["Activity 3 Total Computable Medicaid Cost", "$329,318"]
+      ]
+    ],
+
+    "activityTotalCostTable": [
+      [
+        ["$247,662"],
+        ["Other Funding", "$4,000"],
+        ["Activity Total Computable Medicaid Cost", "$243,662"]
+      ],
+      [
+        ["$338,318"],
+        ["Other Funding", "$9,000"],
+        ["Activity Total Computable Medicaid Cost", "$329,318"]
+      ]
+    ],
+
+    "activityFedSplitTable": [
+      [
+        ["$243,662"],
+        ["Federal Share", "$243,662", "90%", "$219,296"],
+        ["State Share", "$243,662", "10%", "$24,366"]
+      ],
+      [
+        ["$329,318"],
+        ["Federal Share", "$329,318", "50%", "$164,659"],
+        ["State Share", "$329,318", "50%", "$164,659"]
+      ]
+    ],
+
+    "quarterVals": [
+      [25, 25, 25, 25, 25, 25, 25, 25],
+      [25, 25, 25, 25, 25, 25, 25, 25]
+    ],
+
+    "activityEstQuarterlyExpenditure": [
+      [
+        ["$47,519", "$47,519", "$47,519", "$47,518", "$190,075"],
+        ["$7,306", "$7,305", "$7,305", "$7,305", "$29,221"],
+        ["$54,825", "$54,824", "$54,824", "$54,823", "$219,296"]
+      ],
+      [
+        ["$36,663", "$36,663", "$36,663", "$36,662", "$146,651"],
+        ["$4,502", "$4,502", "$4,502", "$4,502", "$18,008"],
+        ["$41,165", "$41,165", "$41,165", "$41,164", "$164,659"]
+      ]
+    ]
+  },
+
+  "FFYTotalDescription":
+  {
+    "totalCost": 585980,
+    "totalOtherFunding": 13000,
+    "totalTotalMedicaidCost": 572980,
+    "totalFederalShare": 383955,
+    "totalStateShare": 189025
+  }
 }

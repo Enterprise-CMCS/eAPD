@@ -165,5 +165,96 @@ class FillOutActivityPage {
       );
     });
   };
+
+  checkBudgetAndFFPTables = ({
+    budgetData = {},
+    years = {},
+    firstSplit = '0-100',
+    secondSplit = '0-100'
+  }) => {
+    cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
+      'exist'
+    );
+
+    _.forEach(years, (year, ffyIndex) => {
+      cy.get('[data-cy="FFPActivityTable"]')
+        .eq(ffyIndex)
+        .then(table => {
+          cy.get(table)
+            .getActivityTable()
+            .then(tableData => {
+              _.forEach(budgetData.activityBudgetTable[ffyIndex], (data, i) => {
+                _.forEach(data, elem => {
+                  expect(tableData[i]).to.deep.include(elem);
+                });
+              });
+            });
+        });
+
+      cy.get('[data-cy="FFPActivityTotalCostTable"]')
+        .eq(ffyIndex)
+        .then(table => {
+          cy.get(table)
+            .getActivityTable()
+            .then(tableData => {
+              _.forEach(
+                budgetData.activityTotalCostTable[ffyIndex],
+                (data, i) => {
+                  _.forEach(data, elem => {
+                    expect(tableData[i]).to.deep.include(elem);
+                  });
+                }
+              );
+            });
+        });
+
+      if (ffyIndex === 0) {
+        cy.get('select.ds-c-field').eq(ffyIndex).select(firstSplit);
+      } else {
+        cy.get('select.ds-c-field').eq(ffyIndex).select(secondSplit);
+      }
+
+      cy.get('[data-cy="FFPFedStateSplitTable"]')
+        .eq(ffyIndex)
+        .then(table => {
+          cy.get(table)
+            .getActivityTable()
+            .then(tableData => {
+              _.forEach(
+                budgetData.activityFedSplitTable[ffyIndex],
+                (data, i) => {
+                  _.forEach(data, elem => {
+                    expect(tableData[i]).to.deep.include(elem);
+                  });
+                }
+              );
+            });
+        });
+
+      cy.get('[data-cy="FFPQuarterBudgetTable"]')
+        .eq(ffyIndex)
+        .then(table => {
+          cy.get(table).within(() => {
+            cy.get('input').then(inputFields => {
+              _.forEach(inputFields, (elem, i) => {
+                cy.get(elem).clear().type(budgetData.quarterVals[ffyIndex][i]);
+              });
+            });
+          });
+
+          cy.get(table)
+            .getActivityTable()
+            .then(tableData => {
+              // cy.log(JSON.stringify(tableData));
+              _.forEach(
+                budgetData.activityEstQuarterlyExpenditure[ffyIndex],
+                data => {
+                  expect(tableData).to.deep.include(data);
+                }
+              );
+            });
+        });
+    });
+  };
 }
 export default FillOutActivityPage;
