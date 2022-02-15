@@ -1,5 +1,4 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
-import moment from 'moment';
 import formatISO from 'date-fns/formatISO';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -43,30 +42,20 @@ const DateField = ({ value, onChange, ...rest }) => {
     let monthInvalid = false;
     let yearInvalid = false;
 
-    if (!dayVal || !monthVal || yearVal.length !== 4) {
+    if (!dayVal || dayVal > 31 || !monthVal || monthVal > 12 || yearVal.length !== 4) {
       message.push('Please provide a target completion date.')
 
-      if (!dayVal) {
+      if (!dayVal || dayVal > 31) {
         dayInvalid = true;
       }
 
-      if (!monthVal) {
+      if (!monthVal || monthVal > 12) {
         monthInvalid = true;
       }
 
       if (!yearVal) {
         yearInvalid = true;
       }
-    }
-
-    if (monthVal > 12) {
-      message.push('Month must be between 1 and 12.');
-      monthInvalid = true;
-    }
-
-    if (dayVal > 31) {
-      message.push('Day must be less than 31.');
-      dayInvalid = true;
     }
 
     setErrorInfo({
