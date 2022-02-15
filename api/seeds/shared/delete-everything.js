@@ -17,12 +17,11 @@ exports.seed = async knex =>
         knex('apd_files').del(),
         knex('users').del(),
         knex('state_admin_certifications_audit').del(),
-        knex('auth_affiliations').del(),
         knex('okta_users').del()
       ])
     )
-    .then(() => knex('state_admin_certifications').del())
     .then(() => knex('auth_affiliations').del())
+    .then(() => knex('state_admin_certifications').del())
     .then(() => knex('auth_roles').del())
     .then(() => knex('apds').del())
     .then(() => knex('states').del());
