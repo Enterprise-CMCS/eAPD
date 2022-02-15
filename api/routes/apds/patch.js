@@ -1,13 +1,13 @@
 const sanitize = require('../../util/sanitize');
 const logger = require('../../logger')('apds route put');
-const { updateAPDDocument: ua } = require('../../db');
+const { updateAPDDocument: ua, validateDoc: va } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
 
 // This is a list of property paths that cannot be changed with this endpoint.
 // Any patches pointing at these paths will be ignored.
 const staticFields = ['/createdAt', '/updatedAt', '/status', '/stateId'];
 
-module.exports = (app, { updateAPDDocument = ua } = {}) => {
+module.exports = (app, { updateAPDDocument = ua, validateDoc = va } = {}) => {
   logger.silly('setting up PATCH /apds/:id route');
   app.patch(
     '/apds/:id',
@@ -35,6 +35,9 @@ module.exports = (app, { updateAPDDocument = ua } = {}) => {
           ...rest,
           value: sanitize(value)
         }));
+
+        // const testing = await validateDoc();
+        // console.log("testing...", testing);
 
         const {
           errors,

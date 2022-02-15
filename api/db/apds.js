@@ -7,9 +7,12 @@ const { validateApd } = require('../schemas');
 
 const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
   let newApd = new APD(apd);
+  newApd.validate(errors => {
+    console.log("errors", Object.keys(errors.errors));
+  });
 
-  newApd = await newApd.save();
-  return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
+  // newApd = await newApd.save();
+  // return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
 const deleteAPDByID = async (id, { APD = mongoose.model('APD') } = {}) =>
@@ -54,6 +57,13 @@ const patchAPD = async (
   return newDocument;
 };
 
+// Ty note: my understanding of how this works w.r.t. the validations:
+// 1. Attempt to update the APD using mongoose and its built-in validators. 
+// 2. If any fail, go through them and remove invalid ones
+// 3. Re-try updating the APD with any ones that failed removed (via setting the value to null)
+// 4. Validate against the json schema (seperate from the mongoose ones)
+// 5. Return errors from the update(including mongoose validations) AND our custom validation
+// like this- errors: { ...updateErrors, ...validationErrors },
 const updateAPDDocument = async (
   id,
   stateId,
@@ -66,6 +76,7 @@ const updateAPDDocument = async (
 ) => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
+  console.log("apdDoc in update...", apdDoc.validate())
   if (patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};
@@ -164,11 +175,25 @@ const updateAPDDocument = async (
   };
 };
 
+const validateDoc = async (
+  id,
+  stateId,
+  {
+    APD = mongoose.model('APD'),
+  } = {}
+) => {
+  const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
+  console.log("apdDoc", apdDoc);
+  // const validated = apdDoc.validateSync();
+  console.log("validate...", validated);
+}
+
 module.exports = {
   createAPD,
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument
+  updateAPDDocument,
+  validateDoc
 };

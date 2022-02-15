@@ -76,11 +76,18 @@ const apdSchema = new mongoose.Schema({
   activities: [
     {
       _id: false,
-      alternatives: String,
+      alternatives: {
+        type: String,
+        minLength: 1
+      },
       contractorResources: [
         {
           _id: false,
-          description: String,
+          description: {
+            type: String,
+            minLength: 1,
+            description: 'Must include a contractor resource description'
+          },
           end: Date,
           hourly: {
             data: {
@@ -254,7 +261,9 @@ const apdSchema = new mongoose.Schema({
   keyPersonnel: [
     {
       _id: false,
-      name: String,
+      name: {
+        type: String
+      },
       position: String,
       email: String,
       isPrimary: Boolean,
@@ -329,12 +338,18 @@ const apdSchema = new mongoose.Schema({
     )
   },
   previousActivitySummary: String,
-  programOverview: String,
+  programOverview: {
+    type: String,
+    minLength: 1
+  },
   stateProfile: {
     medicaidDirector: {
       name: String,
       email: String,
-      phone: String
+      phone: {
+        type: String,
+        minLength: 1
+      }
     },
     medicaidOffice: {
       address1: String,
@@ -358,6 +373,8 @@ const apdSchema = new mongoose.Schema({
     }
   ]
 });
+
+apdSchema.set('validateBeforeSave', false);
 
 const APD = mongoose.model('APD', apdSchema);
 
