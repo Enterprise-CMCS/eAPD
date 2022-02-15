@@ -320,7 +320,7 @@ jobs:
           name: validate
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker create -v /openapi --name openapi cimg/node:16.9.1 /bin/true
+            docker create -v /openapi --name openapi cimg/node:16.13.2 /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
 
