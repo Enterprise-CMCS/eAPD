@@ -204,6 +204,7 @@ workflows:
             - frontend test
             - yaml test
             # - e2e test
+
       - frontend deploy:
           name: frontend deploy production
           env: PRODUCTION
