@@ -87,15 +87,6 @@ const OutcomeAndMetricForm = forwardRef(
     dispatch({ type: 'updateMetrics', metricIndex: i, value })
   };
 
-  const checkForText = e => {
-    const element = e.currentTarget;
-    const text = element.innerHTML.trim();
-    const parent = element.parentNode;
-    const elName = element.name;
-    
-    return text === '' ? addMissingTextAlert(element, parent, elName) : removeMissingTextAlert(element, parent);
-  }
-
   return (
     <form index={index} key={`activity${activityIndex}-index${index}-form`} onSubmit={handleSubmit}>
       <TextField

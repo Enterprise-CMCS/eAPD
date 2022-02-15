@@ -56,14 +56,6 @@ describe('DateField wrapper component', () => {
   });
 
   describe('stitches dates back together properly', () => {
-    const component = shallow(
-      // Operation Torch begins to relieve pressure on Allied forces
-      // in North Africa and open options for an invasion of southern
-      // Europe. This represented the opening of the second European
-      // front following the German invasion of the Soviet Union.
-      <DateField value="1942-11-8" onChange={onChange} />
-    );
-
   test('handles changes', () => {
     const component = shallow(
       // Allied forces halt Operation Market Garden, unable to cross the Rhine

@@ -122,7 +122,6 @@ const ContractorResourceForm = forwardRef(
     return (
       <form index={index} onSubmit={handleSubmit}>
         <TextField
-          autoFocus
           label="Private Contractor or Vendor Name"
           name="contractor-name"
           hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."

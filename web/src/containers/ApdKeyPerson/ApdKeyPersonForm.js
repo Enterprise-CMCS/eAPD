@@ -87,7 +87,6 @@ const PersonForm = forwardRef(
             : t(`${tRoot}.labels.noteSecondary`)}
         </p>
         <TextField
-          autoFocus
           name={`apd-state-profile-pocname${index}`}
           label={t(`${tRoot}.labels.name`)}
           value={state.name}
