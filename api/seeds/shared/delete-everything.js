@@ -20,8 +20,8 @@ exports.seed = async knex =>
         knex('okta_users').del()
       ])
     )
-    .then(() => knex('auth_affiliations').del())
     .then(() => knex('state_admin_certifications').del())
+    .then(() => knex('auth_affiliations').del())
     .then(() => knex('auth_roles').del())
     .then(() => knex('apds').del())
     .then(() => knex('states').del());
