@@ -54,17 +54,4 @@ describe('DateField wrapper component', () => {
       )
     ).toMatchSnapshot();
   });
-
-  describe('stitches dates back together properly', () => {
-    test('handles changes', () => {
-      const component = shallow(
-        // Allied forces halt Operation Market Garden, unable to cross the Rhine
-        // River. However, they succeeded in liberating several Dutch cities and
-        // disrupting V-2 rocket launches.
-        <DateField value="1944-9-25" onChange={onChange} />
-      );
-      component.find('DateField').simulate('change', 'moop moop');
-      expect(onChange).toHaveBeenCalledWith('moop moop');
-    });
-  })
 });
