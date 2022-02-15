@@ -815,7 +815,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install zip -y
             cd api
-            npm ci --only=production
+            npm ci
             cd ..
             zip -r /tmp/backend.zip api/*
             zip -r /tmp/frontend.zip web/dist/*
