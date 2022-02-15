@@ -13,8 +13,11 @@ const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
+
+const mongo = require('./db/mongodb');
 const me = require('./routes/me/index');
 
+mongo.setup();
 const api = express();
 
 // Turn off the X-Powered-By header that reveals information about the api

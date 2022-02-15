@@ -11,7 +11,7 @@ import budget from '../fixtures/ak-budget.json';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useParams: jest.fn().mockReturnValue({ apdId: 1 })
+  useParams: jest.fn().mockReturnValue({ apdId: '0123456789abcdef01234567' })
 }));
 
 const user = {
@@ -56,7 +56,7 @@ describe('apd (application) component', () => {
         ...apd,
         ...budget
       },
-      initialHistory: ['/apd/1']
+      initialHistory: ['/apd/0123456789abcdef01234567']
     });
 
     expect(screen.getByText(/HITECH IAPD | FFY 2020-2021/)).toBeTruthy();
@@ -67,11 +67,11 @@ describe('apd (application) component', () => {
       initialState: {
         ...user
       },
-      initialHistory: ['/apd/1']
+      initialHistory: ['/apd/0123456789abcdef01234567']
     });
 
     expect(history.length).toEqual(1);
-    expect(history.location.pathname).toEqual('/apd/1');
+    expect(history.location.pathname).toEqual('/apd/0123456789abcdef01234567');
   });
 
   it('renders correctly for non-admin, no APD selected', () => {
@@ -121,7 +121,7 @@ describe('apd (application) component', () => {
         ...apd,
         ...budget
       },
-      initialHistory: ['/apd/1']
+      initialHistory: ['/apd/0123456789abcdef01234567']
     });
     expect(history.length).toEqual(1);
     expect(history.location.pathname).toEqual('/');
@@ -132,7 +132,7 @@ describe('apd (application) component', () => {
       apd: {
         data: {
           created: 'creation date',
-          id: 123456789,
+          id: '0123456789abcdef01234567',
           name: 'florp',
           years: ['dinkus', 'dorkus', 'durkus']
         }
@@ -147,7 +147,7 @@ describe('apd (application) component', () => {
     };
 
     expect(mapStateToProps(state)).toEqual({
-      apdId: 123456789,
+      apdId: '0123456789abcdef01234567',
       isAdmin: true,
       isEditor: true,
       place: 'place',

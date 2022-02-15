@@ -5,7 +5,7 @@ const initialAssurances = Object.entries(assurancesList).reduce(
     ...acc,
     [name]: Object.keys(regulations).map(reg => ({
       title: reg,
-      checked: '',
+      checked: null,
       explanation: ''
     }))
   }),

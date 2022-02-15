@@ -4,7 +4,6 @@ const {
 } = require('../../openAPI/helpers');
 
 const openAPI = {
-
   '/apds/{id}/files': {
     post: {
       tags: ['APDs', 'files'],
@@ -64,13 +63,15 @@ const openAPI = {
         403: {
           description: 'The apd ID does not match any known apds for the user'
         },
+        404: {
+          description: 'The apd ID does not match any known apds'
+        },
         415: {
           description: 'The file is not a valid format'
         }
       }
     }
-  },
-
+  }
 };
 
 const getApdFile = {

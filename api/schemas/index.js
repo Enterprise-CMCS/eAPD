@@ -1,5 +1,5 @@
 /* eslint-disable import/no-dynamic-require, global-require */
-const Ajv = require("ajv").default
+const Ajv = require('ajv').default;
 
 // all schemas, except the base apd document schema
 const schemas = [
@@ -29,7 +29,13 @@ const options = {
 };
 
 const ajv = new Ajv(options);
-// schemas.forEach(schema => ajv.addSchema(schema));
+ajv.addFormat('custom-date-time', dateTimeString => {
+  if (dateTimeString) {
+    return !isNaN(Date.parse(dateTimeString)); // eslint-disable-line no-restricted-globals
+  }
+  return true;
+});
+
 const validateApd = ajv.compile(apdSchema);
 
 module.exports = {

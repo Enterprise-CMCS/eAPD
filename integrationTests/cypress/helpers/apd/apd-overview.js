@@ -127,6 +127,7 @@ export const testAPDOverviewWithData = () => {
     cy.setTinyMceContent('mmis-overview-field', apdOverview.MMIS);
 
     cy.waitForSave();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
   });
 
   it('should display the correct values in the export view', () => {
