@@ -682,6 +682,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               budgetPage.checkSplitFunctionality();
 
               cy.get('[class="ds-c-field"]').select('75-25');
+              cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.75,
                 federalShareAmount: 0,
@@ -691,6 +692,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
+              cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.5,
                 federalShareAmount: 0,
@@ -700,6 +702,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
+              cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.9,
                 federalShareAmount: 0,
@@ -728,7 +731,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   'Not specified (APD Key Personnel)$0×0 FTE=$0'
                 )
                 .next()
-                .should('have.text', 'Personnel title not specified$0× FTE=$0')
+                .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
                 .next()
                 .next()
                 .next()
@@ -791,7 +794,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Personnel title not specified$0× FTE=$0');
+            .should('have.text', 'Personnel title not specified$0×0 FTE=$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -947,7 +950,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   'Not specified (APD Key Personnel)$0×0 FTE=$0'
                 )
                 .next()
-                .should('have.text', 'Personnel title not specified$0× FTE=$0')
+                .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
                 .next()
                 .next()
                 .next()
@@ -1001,7 +1004,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Personnel title not specified$0× FTE=$0');
+            .should('have.text', 'Personnel title not specified$0×0 FTE=$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({

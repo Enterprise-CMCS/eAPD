@@ -56,6 +56,7 @@ services:
     environment:
       - PORT=8000
       - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
+      - TEST_DB_NAME=${TEST_DB_NAME:-hitech_apd_test}
       - NODE_ENV=development
       - DISABLE_SAME_SITE=yes
       - OKTA_DOMAIN=${OKTA_DOMAIN}
@@ -63,8 +64,9 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
+      - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=eapd}
+      - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd}
       - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
-      - MONGO_URL=mongodb://mongo:cms@mongo:27017/eapd
     volumes:
       - type: bind
         source: ./api

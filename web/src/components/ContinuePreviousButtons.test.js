@@ -11,12 +11,12 @@ const defaultProps = {
   continueLink: {
     id: 'apd-previous-activitites-nav',
     label: 'Results of Previous Activities',
-    url: '/apd/1/previous-activities'
+    url: '/apd/0123456789abcdef01234567/previous-activities'
   },
   previousLink: {
     id: 'apd-state-profile-nav',
     label: 'Key State Personnel',
-    url: '/apd/1/state-profile'
+    url: '/apd/0123456789abcdef01234567/state-profile'
   }
 };
 
@@ -32,8 +32,12 @@ describe('<ContinuePreviousButtons /> component', () => {
   it('renders links, when provided', () => {
     const component = setup();
     const links = component.find(Link);
-    expect(links.last().prop('to')).toBe('/apd/1/previous-activities');
-    expect(links.first().prop('to')).toBe('/apd/1/state-profile');
+    expect(links.last().prop('to')).toBe(
+      '/apd/0123456789abcdef01234567/previous-activities'
+    );
+    expect(links.first().prop('to')).toBe(
+      '/apd/0123456789abcdef01234567/state-profile'
+    );
   });
 
   it('does not render links, with null inputs', () => {
@@ -67,12 +71,12 @@ describe('<ContinuePreviousButtons /> component', () => {
       continueLink: {
         id: 'apd-activity-1-oms-nav',
         label: 'Outcome and metrics',
-        url: '/apd/1/activity/1/oms'
+        url: '/apd/0123456789abcdef01234567/activity/1/oms'
       },
       previousLink: {
         id: 'apd-activity-0-ffp-nav',
         label: 'FFP and budget',
-        url: '/apd/1/activity/0/ffp'
+        url: '/apd/0123456789abcdef01234567/activity/0/ffp'
       }
     };
     const component = setup(props);

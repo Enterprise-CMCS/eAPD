@@ -46,8 +46,14 @@ describe('automatic save middleware', () => {
   describe('debounces saves', () => {
     const DEBOUNCE_TIME = 300;
 
+    beforeAll(() => {
+      jest.useFakeTimers();
+    });
+    afterAll(() => {
+      jest.useRealTimers();
+    });
     beforeEach(() => {
-      jest.useFakeTimers('legacy');
+      jest.clearAllTimers();
     });
 
     const next = jest.fn().mockReturnValue('bob');

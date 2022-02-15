@@ -9,17 +9,16 @@ const {
 } = require('../../../../endpoint-tests/utils');
 
 describe('auth/certifications/files endpoints', () => {
-
   describe('Upload a state certification letter/file | POST /auth/certifications/files', () => {
     const form = buildForm({ file: 'this is my file' });
-    const url = '/auth/certifications/files'
+    const url = '/auth/certifications/files';
 
     unauthenticatedTest('post', url);
     unauthorizedTest('post', url);
 
     describe('when authenticated as a user with permission', () => {
       let api;
-      beforeAll(async () => {
+      beforeAll(() => {
         api = login();
       });
 
@@ -47,7 +46,7 @@ describe('auth/certifications/files endpoints', () => {
           expect(e.response.data).toMatchSnapshot();
         });
       });
-      
+
       it('with an invalid request (jpg)', async () => {
         const imagePath = `${process.cwd()}/test-data/files/eAPD_logo.jpg`;
         expect(fs.existsSync(imagePath)).toBeTruthy();
@@ -60,11 +59,7 @@ describe('auth/certifications/files endpoints', () => {
           }
         };
 
-        const response = await api.post(
-          url,
-          formData.getBuffer(),
-          options
-        );
+        const response = await api.post(url, formData.getBuffer(), options);
 
         expect(response.status).toEqual(415);
         expect(response.data).toMatchSnapshot();
@@ -83,7 +78,7 @@ describe('auth/certifications/files endpoints', () => {
         };
 
         const response = await api.post(url, formData.getBuffer(), options);
-        
+
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
       });

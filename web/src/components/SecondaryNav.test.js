@@ -10,8 +10,8 @@ import { addActivity } from '../actions/editActivity';
 const defaultProps = {
   activityCount: 2,
   addActivity: jest.fn(),
-  location: { pathname: '/apd/1/activity/1/ffp' },
-  useParams: () => ({ apdId: '1', activityIndex: '1' })
+  location: { pathname: '/apd/0123456789abcdef01234567/activity/1/ffp' },
+  useParams: () => ({ apdId: '0123456789abcdef01234567', activityIndex: '1' })
 };
 
 const setup = (props = {}) => {
@@ -33,7 +33,9 @@ describe('Secondary Nav component', () => {
 
   it('renders without add activity button when on the last activity but not on the FFP section', () => {
     const component = setup({
-      location: { pathname: '/apd/1/activity/1/overview' }
+      location: {
+        pathname: '/apd/0123456789abcdef01234567/activity/1/overview'
+      }
     });
     expect(component.find('Link').exists()).toBe(false);
   });
@@ -41,7 +43,9 @@ describe('Secondary Nav component', () => {
   it('handles add activity button click', () => {
     const component = setup();
     const link = component.find('.ds-c-button');
-    expect(link.props().to).toBe(`/apd/${defaultProps.useParams().apdId}/activities`);
+    expect(link.props().to).toBe(
+      `/apd/${defaultProps.useParams().apdId}/activities`
+    );
 
     link.simulate('click');
 
@@ -65,7 +69,7 @@ describe('Secondary Nav component', () => {
         }
       },
       router: {
-        location: { pathname: '/apd/1/activity/1/ffp' }
+        location: { pathname: '/apd/0123456789abcdef01234567/activity/1/ffp' }
       }
     };
 
@@ -75,7 +79,7 @@ describe('Secondary Nav component', () => {
         { anchor: 'activity-2', name: 'activity', key: '2' }
       ],
       activityCount: 2,
-      location: { pathname: '/apd/1/activity/1/ffp' }
+      location: { pathname: '/apd/0123456789abcdef01234567/activity/1/ffp' }
     });
   });
 

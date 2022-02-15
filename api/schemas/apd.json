@@ -18,7 +18,13 @@
     "years"
   ],
   "properties": {
+    "_id": { "type": "string" },
     "name": { "type": "string" },
+    "createdAt": { "$ref": "definitions.json#/definitions/optionalFullDate" },
+    "updatedAt": { "$ref": "definitions.json#/definitions/optionalFullDate" },
+    "stateId": { "type": "string" },
+    "status": { "type": "string" },
+    "__v": { "type": "number" },
     "activities": {
       "type": "array",
       "items": { "$ref": "activity.json" }
