@@ -74,4 +74,4 @@ describe('DateField wrapper component', () => {
     component.find('DateField').simulate('change', 'moop moop');
     expect(onChange).toHaveBeenCalledWith('moop moop');
   });
-});
+})});

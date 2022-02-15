@@ -9,9 +9,7 @@ import {
   saveMilestone as actualSaveMilestone
 } from '../../../actions/editActivity';
 
-import { 
-  validateText
-} from '../../../helpers/textValidation';
+import { validateText } from '../../../helpers/textValidation';
 
 const MilestoneForm = forwardRef(
   (
