@@ -59,21 +59,21 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - e2e test:
-          filters:
-            branches:
-              ignore:
-                - main
-            tags:
-              ignore: ignore-e2e
-          requires:
-            - frontend lint
-            - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
-            - frontend test
-            - backend unit test
-            - backend api endpoint test
+      # - e2e test:
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - main
+      #       tags:
+      #         ignore: ignore-e2e
+      #     requires:
+      #       - frontend lint
+      #       - backend lint
+      #       - frontend dependency vulnerability scan
+      #       - backend dependency vulnerability scan
+      #       - frontend test
+      #       - backend unit test
+      #       - backend api endpoint test
 
       # backend jobs
       - backend api endpoint test:
@@ -203,7 +203,6 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            - e2e test
       - frontend deploy:
           name: frontend deploy production
           env: PRODUCTION
@@ -218,7 +217,6 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            - e2e test
 
       # joint jobs
       - preview deploy:
@@ -231,7 +229,6 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
-            - e2e test
 
       - store artifacts:
           name: store artifacts staging
@@ -320,7 +317,7 @@ jobs:
           name: validate
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker create -v /openapi --name openapi cimg/node:16.9.1 /bin/true
+            docker create -v /openapi --name openapi cimg/node:16.13.2 /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
 
@@ -815,7 +812,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install zip -y
             cd api
-            npm ci --only=production
+            npm ci
             cd ..
             zip -r /tmp/backend.zip api/*
             zip -r /tmp/frontend.zip web/dist/*
