@@ -45,8 +45,8 @@ source ~/.bashrc
 
 # We're using Node 16, and we don't care about minor/patch versions, so always
 # get the latest.
-nvm install 16
-nvm alias default 16
+nvm install 16.13.2
+nvm alias default 16.13.2
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
