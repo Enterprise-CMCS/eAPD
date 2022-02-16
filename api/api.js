@@ -17,7 +17,11 @@ const errorHandler = require('./middleware/errorHandler');
 const mongo = require('./db/mongodb');
 const me = require('./routes/me/index');
 
-mongo.setup().catch(err => logger.error(`Error setting up MongoDB: ${err}`));
+try {
+  mongo.setup();
+} catch (err) {
+  logger.error(`Error setting up MongoDB: ${err}`);
+}
 const api = express();
 
 // Turn off the X-Powered-By header that reveals information about the api
