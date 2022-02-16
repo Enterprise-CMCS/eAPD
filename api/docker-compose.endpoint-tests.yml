@@ -37,6 +37,7 @@ services:
       - API_PORT=8000
       - API_HOST=api-for-testing
       - ENDPOINT_COVERAGE_CAPTURE=true
+      - MONGO_ADMIN_URL=mongodb://admin-user:admin-password@mongo:27017/
       - MONGO_URL=mongodb://mongo-test:cms@mongo:27017/eapd-test?authSource=eapd-test
       - MONGO_DATABASE=eapd-test
       - FILE_STORE=local

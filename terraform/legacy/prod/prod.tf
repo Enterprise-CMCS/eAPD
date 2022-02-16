@@ -1,6 +1,6 @@
+
 ### FUTURE USE ###
 ### Will function like main.tf for Prod ###
-
 terraform {
   backend "s3" {
     bucket         = "eapd-terraform-state"
@@ -19,3 +19,7 @@ provider "aws" {
     access_key = ""
     secret_key = ""
 }
+
+module "eAPD" {
+    source = "./modules"
+    instance_name = var.instance_name

@@ -6,11 +6,16 @@ const {
   unauthenticatedTest,
   unauthorizedTest
 } = require('../../endpoint-tests/utils');
+const { mnAPDId, akAPDId, badAPDId } = require('../../seeds/test/apds');
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
   const url = apdID => `/apds/${apdID}`;
 
@@ -19,36 +24,31 @@ describe('APD endpoint | PATCH /apds/:id', () => {
 
   describe('when authenticated as a user with permission', () => {
     let api;
-    beforeAll(async () => {
+    beforeAll(() => {
       api = login('state-admin');
     });
 
     it('with a non-existant apd ID', async () => {
-      const response = await api.patch(url(9000));
+      const response = await api.patch(url(badAPDId));
 
-      expect(response.status).toEqual(400);
+      expect(response.status).toEqual(404);
       expect(response.data).toMatchSnapshot();
     });
 
     it(`with an APD in a state other than the user's state`, async () => {
-      const response = await api.patch(url(4000));
+      const response = await api.patch(url(mnAPDId));
 
       expect(response.status).toEqual(403);
       expect(response.data).toMatchSnapshot();
     });
 
     it(`with a body that is not valid`, async () => {
-      const data = [
-        {
-          doesNot: 'have op',
-          path: 'does exist'
-        }
-      ];
+      const data = 'update something';
 
-      const response = await api.patch(url(4001), data);
-      delete response.data.updated;
+      const response = await api.patch(url(akAPDId), data);
 
       expect(response.status).toEqual(400);
+      expect(response.data.errors).not.toBeNull();
       expect(response.data).toMatchSnapshot();
     });
 
@@ -56,16 +56,21 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = [
         {
           op: 'replace',
-          path: '/stateProfile/medicaidDirector/name',
-          value: 3
+          path: '/activities/0/schedule/0/endDate',
+          value: '2022-13-12'
         }
       ];
 
-      const response = await api.patch(url(4001), data);
-      delete response.data.updated;
+      const response = await api.patch(url(akAPDId), data);
 
-      expect(response.status).toEqual(400);
-      expect(response.data).toMatchSnapshot();
+      expect(response.status).toEqual(200);
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
 
     it('with a valid patch that also attempts to update a readonly property', async () => {
@@ -78,23 +83,25 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         { op: 'replace', path: '/name', value: 'new APD name' },
         {
           op: 'replace',
-          path: '/activities/1/costAllocation/2019/ffp/federal',
-          value: 80
+          path: '/activities/0/costAllocation/2019/ffp/federal',
+          value: 75
         }
       ];
 
-      const response = await api.patch(url(4001), data);
+      const response = await api.patch(url(akAPDId), data);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something
       // fancy with the snapshots, just pull out the date and test it with a
       // regex.
-      const { updated } = response.data;
-      delete response.data.updated;
-
       expect(response.status).toEqual(200);
-      expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
-      expect(response.data).toMatchSnapshot();
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
 
     it(`patch succeeds with an invalid date`, async () => {
@@ -106,18 +113,20 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(4001), data);
+      const response = await api.patch(url(akAPDId), data);
 
       // The updated date is the date/time stamp of when the APD is saved, so
       // it'll change with each test run.  Rather than figure out something
       // fancy with the snapshots, just pull out the date and test it with a
       // regex.
-      const { updated } = response.data;
-      delete response.data.updated;
-
       expect(response.status).toEqual(200);
-      expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
-      expect(response.data).toMatchSnapshot();
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
 
     it('prevents a dangerous value from being stored', async () => {
@@ -130,13 +139,51 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         }
       ];
 
-      const response = await api.patch(url(4001), data);
-      const { programOverview } = response.data;
-      delete response.data.updated;
+      const response = await api.patch(url(akAPDId), data);
+      const { apd: { programOverview } = {} } = response.data;
 
       expect(response.status).toEqual(200);
       expect(programOverview).toEqual('<a>XSS</a>');
-      expect(response.data).toMatchSnapshot();
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
+    });
+
+    it('with a valid patch that also attempts to update a readonly property', async () => {
+      const data = [
+        {
+          op: 'replace',
+          path: '/stateProfile/medicaidDirector/name',
+          value: 'Bob the Builder'
+        },
+        { op: 'replace', path: '/status', value: 'submitted' },
+        {
+          op: 'replace',
+          path: '/activities/1/costAllocation/2019/ffp/federal',
+          value: 80
+        }
+      ];
+
+      const response = await api.patch(url(akAPDId), data);
+
+      // The updated date is the date/time stamp of when the APD is saved, so
+      // it'll change with each test run.  Rather than figure out something
+      // fancy with the snapshots, just pull out the date and test it with a
+      // regex.
+
+      expect(response.status).toEqual(200);
+      expect(response.data.apd.status).toEqual('draft');
+      expect(response.data).toMatchSnapshot({
+        apd: {
+          updated: expect.stringMatching(
+            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+          )
+        }
+      });
     });
   });
 });

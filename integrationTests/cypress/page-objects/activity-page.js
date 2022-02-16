@@ -20,8 +20,7 @@ class ActivityPage {
   };
 
   checkError = (className, expectedLength) => {
-    cy.get(`[class="${className}]`)
-      .should('have.length', expectedLength)
+    cy.get(`[class="${className}]`).should('have.length', expectedLength);
   };
 
   checkInputField = (name, expectedValue) => {

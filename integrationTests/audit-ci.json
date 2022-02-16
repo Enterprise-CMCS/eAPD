@@ -1,16 +1,7 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1004946],
-  "_comment": {
-    "1004946": {
-      "advisory": "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
-      "module": "ansi-regex",
-      "affects": [
-        "cypress-grep@2.12.2 - cypress",
-        "sqlite3@4.2.0 - sql but just for testing"
-      ]
-    }
-  },
+  "allowlist": [],
+  "_comment": {},
   "registry": "https://registry.npmjs.org"
 }

@@ -31,4 +31,5 @@ docs-build
 *.terraform
 *.terraform.lock.hcl
 */terraform.tfstate*
+*.terraform*
 env_vars.sh

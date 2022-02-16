@@ -319,7 +319,7 @@ describe('budget reducer', () => {
               id: 6,
               key: '6',
               name: 'no funding program',
-              fundingSource: false,
+              fundingSource: null,
               years: ['1931', '1932', '1933'],
               costAllocation: {
                 1931: { ffp: { federal: 50, state: 50 }, other: 0 },
@@ -1542,7 +1542,7 @@ describe('budget reducer', () => {
         {
           id: 6,
           name: 'no funding program',
-          fundingSource: false,
+          fundingSource: null,
           data: {
             otherFunding: {
               1931: {
