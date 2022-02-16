@@ -28,6 +28,7 @@ const setup = () =>
       })
       .catch(err => {
         logger.error(`Error in MongoDB connection: ${err}`);
+        logger.error(`Full error: ${JSON.stringify(err)}`);
         reject(err);
       });
   });
