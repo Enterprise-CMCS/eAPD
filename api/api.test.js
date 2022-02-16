@@ -6,6 +6,7 @@ const mongo = require('./db/mongodb');
 const knex = require('./db/knex');
 
 sinon.stub(mongo, 'setup').returns({});
+sinon.stub(mongo, 'getConnectionStatus').returns('connected');
 
 let api;
 let response;
