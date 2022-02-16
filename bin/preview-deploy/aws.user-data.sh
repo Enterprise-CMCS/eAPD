@@ -113,14 +113,17 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 
 #Preparing Mongo DB Users
 cd ~
-cat <<MONGOUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '','pwd' : '', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
+cat <<MONGOROOTUSERSEED > mongo-init.sh
 mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : '$MONGO_INITDB_DATABASE'}]});"
 MONGOROOTUSERSEED
 cd ~/eAPD/api
 sh ~/mongo-init.sh
-mongo  -u  -p  --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role:'readWrite', db: ''}, {role:'dbAdmin', db: ''}]});"
+NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY npm run migrate
+cd ~
+cat <<MONGOUSERSEED > mongo-user.sh
+mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
+sh ~/mongo-user.sh
 E_USER
 
 sudo yum remove -y gcc-c++
