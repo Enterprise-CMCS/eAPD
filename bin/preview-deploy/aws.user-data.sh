@@ -27,6 +27,7 @@ export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
 export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
 export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
 export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
+export DATABASE_URL="__DATABASE_URL"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
@@ -98,6 +99,7 @@ echo "module.exports = {
       MONGO_DATABASE: '__MONGO_DATABASE__',
       MONGO_URL: '__MONGO_URL__',
       MONGO_ADMIN_URL: '__MONGO_ADMIN_URL__',
+      DATABASE_URL: '__DATABASE_URL__',
     },
   }]
 };" > ecosystem.config.js
