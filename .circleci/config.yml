@@ -668,7 +668,7 @@ jobs:
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
               --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
-              --MONGO_MONGO_INITDB_DATABASE "${<< parameters.env >>_MONGO_INITDB_DATABASE}" \
+              --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
               --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}"
 
