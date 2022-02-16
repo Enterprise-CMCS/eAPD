@@ -18,7 +18,7 @@ const { setup: mongoSetup } = require('./db/mongodb');
 const me = require('./routes/me/index');
 
 try {
-  await mongoSetup();
+  mongoSetup();
 } catch (err) {
   logger.error(`Error setting up MongoDB: ${err}`);
 }
