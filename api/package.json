@@ -135,6 +135,8 @@
     "node-fetch": "2.6.7"
   },
   "jest": {
+    "globalSetup": "./jest.setup.js",
+    "globalTeardown": "./jest.teardown.js",
     "testMatch": [
       "**/?(*.)+(spec|test|endpoint).js?(x)"
     ],

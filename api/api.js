@@ -14,10 +14,7 @@ const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
 
-const {
-  setup: mongoSetup,
-  getConnectionStatus: getMongoConnectionStatus
-} = require('./db/mongodb');
+const { setup: mongoSetup } = require('./db/mongodb');
 const me = require('./routes/me/index');
 
 try {
@@ -96,12 +93,7 @@ api.use(bodyParser.json({ limit: '5mb' }));
 // no cookie/token processing, etc.
 logger.debug('setting up heartbeat endpoint');
 api.get('/heartbeat', (_, res) => {
-  if (getMongoConnectionStatus() !== 'connected') {
-    return res.status(503).json({
-      error: 'Server error: MongoDB is not connected'
-    });
-  }
-  return res.status(204).end();
+  res.status(204).end();
 });
 
 // Registers Passport, related handlers, and
