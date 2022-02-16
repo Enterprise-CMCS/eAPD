@@ -99,8 +99,8 @@ source ~/.bashrc
 
 # We're using Node 14, and we don't care about minor/patch versions, so always
 # get the latest.
-nvm install 14
-nvm alias default 14
+nvm install 16
+nvm alias default 16
 
 git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
 cd ~/eAPD/api
@@ -113,7 +113,7 @@ mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITD
 MONGOROOTUSERSEED
 cd ~/eAPD/api
 sh ~/mongo-init.sh
-NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY DATABASE_URL=$DATABASE_URL npm run migrate
+NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY npm run migrate
 cd ~
 cat <<MONGOUSERSEED > mongo-user.sh
 mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
