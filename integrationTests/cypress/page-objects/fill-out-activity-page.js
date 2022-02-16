@@ -245,7 +245,6 @@ class FillOutActivityPage {
           cy.get(table)
             .getActivityTable()
             .then(tableData => {
-              // cy.log(JSON.stringify(tableData));
               _.forEach(
                 budgetData.activityEstQuarterlyExpenditure[ffyIndex],
                 data => {

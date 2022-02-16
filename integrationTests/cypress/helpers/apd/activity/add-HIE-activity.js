@@ -1,29 +1,37 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 
+import ActivitiesStateStaffExpensesPage from '../../../page-objects/activities-state-staff-expenses-page';
+import ActivityPage from '../../../page-objects/activity-page';
 import BudgetPage from '../../../page-objects/budget-page';
 import FillOutActivityPage from '../../../page-objects/fill-out-activity-page';
-import ExportPage from '../../../page-objects/export-page';
+import PopulatePage from '../../../page-objects/populate-page';
 
-export const addHITActivity = years => {
+// Check export view
+
+export const addHIEActivity = years => {
+  let populatePage;
+  let activityPage;
+  let staffExpensesPage;
   let budgetPage;
-  let exportPage;
   let fillOutActivityPage;
 
   let activityData;
 
   before(() => {
+    populatePage = new PopulatePage();
+    activityPage = new ActivityPage();
+    staffExpensesPage = new ActivitiesStateStaffExpensesPage();
     budgetPage = new BudgetPage();
-    exportPage = new ExportPage();
     fillOutActivityPage = new FillOutActivityPage();
 
-    cy.fixture('HIT-activity-template.json').then(data => {
+    cy.fixture('HIE-activity-template.json').then(data => {
       activityData = data;
     });
   });
 
-  describe('Add a HIT Activity and check in export view', () => {
-    it('Adds an HIT Activity and checks the export view', () => {
+  describe('Add a HIE Activity and check in export view', () => {
+    it('Adds an HIE Activity and checks the export view', () => {
       cy.goToActivityDashboard();
 
       // Add activity
@@ -31,11 +39,14 @@ export const addHITActivity = years => {
       cy.findByRole('heading', { name: /Activities/i, level: 2 }).should(
         'exist'
       );
-      cy.contains('Activity 1: Program Administration (HIT)').should('exist');
-      cy.get('#activities').findAllByText('Edit').eq(0).click();
+      cy.contains('Add Activity').click();
+      cy.contains('Activity 2: Untitled').should('exist');
+      cy.get('#activities').findAllByText('Edit').eq(1).click();
 
       // Fill out Activity Overview
-      cy.findAllByText(`Activity 1: ${activityData.activityName}`).should(
+      cy.findByLabelText('Activity name').type(activityData.activityName);
+      cy.findByRole('radio', { name: /HIE/i }).check({ force: true });
+      cy.findAllByText(`Activity 2: ${activityData.activityName}`).should(
         'exist'
       );
       fillOutActivityPage.fillActivityOverview(activityData.activityOverview);
@@ -45,7 +56,7 @@ export const addHITActivity = years => {
 
       // Fill out Outcomes and Milestones
       cy.findByRole('heading', {
-        name: /^Activity 1:/i,
+        name: /^Activity 2:/i,
         level: 2
       }).should('exist');
 
@@ -59,7 +70,7 @@ export const addHITActivity = years => {
 
       // Fill out State Staff and Other State Expenses
       cy.findByRole('heading', {
-        name: /Activity 1:/i,
+        name: /Activity 2:/i,
         level: 2
       }).should('exist');
 
@@ -73,7 +84,7 @@ export const addHITActivity = years => {
 
       // Fill out Private Contractor Costs
       cy.findByRole('heading', {
-        name: /^Activity 1:/i,
+        name: /^Activity 2:/i,
         level: 2
       }).should('exist');
 
@@ -105,7 +116,8 @@ export const addHITActivity = years => {
         const expenseTotal = expense1.costs[i] + expense2.costs[i];
 
         const contractorTotal =
-          contractor1.FFYcosts[i] + contractor2.FFYcosts[i];
+          contractor1.FFYcosts[i] +
+          contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
 
         const activityTotalCosts = staffTotal + expenseTotal + contractorTotal;
 
@@ -124,14 +136,14 @@ export const addHITActivity = years => {
 
       // Fill out Budget and FFP
       cy.findByRole('heading', {
-        name: /^Activity 1:/i,
+        name: /^Activity 2:/i,
         level: 2
       }).should('exist');
 
       fillOutActivityPage.checkBudgetAndFFPTables({
         budgetData: activityData.budgetAndFFPTables,
         years,
-        firstSplit: '50-50',
+        firstSplit: '90-10',
         secondSplit: '75-25'
       });
 
@@ -144,91 +156,20 @@ export const addHITActivity = years => {
       } = activityData.FFYTotalDescription;
       budgetPage.checkFFYtotals({
         years,
-        activityIndex: 0,
+        activityIndex: 1,
         activityName: activityData.activityName,
         totalCost,
         totalOtherFunding,
         totalTotalMedicaidCost,
-        fundingSplit: `50/50 (FFY ${years[0]}) and 75/25 (FFY ${years[1]})`,
+        fundingSplit: `90/10 (FFY ${years[0]}) and 75/25 (FFY ${years[1]})`,
         totalFederalShare,
         state: 'Alaska',
         totalStateShare
       });
 
       cy.waitForSave();
-      cy.goToExportView();
 
-      // Check activity list list in export view
-      cy.findAllByText('Activities')
-        .next()
-        .within(() => {
-          cy.contains(`1. ${activityData.activityName} | HIT`);
-        });
-
-      // Check activity section in export view
-      cy.findAllByText('Activities')
-        .parent()
-        .within(() => {
-          cy.findAllByText(`Activity 1: ${activityData.activityName}`)
-            .parent()
-            .within(() => {
-              // Check Activity Overview
-              const overviewData = activityData.activityOverview;
-              exportPage.checkActivityOverviewNew({
-                ...overviewData,
-                doesNotSupportsMedicaid:
-                  'No response was provided for how this activity will support the Medicaid standards and conditions.',
-                startDate: overviewData.startDate.join('/'),
-                endDate: overviewData.endDate.join('/')
-              });
-
-              // Check Outcomes and Milestones
-              const outcomeVar = activityData.outcomes;
-              const milestoneVar = activityData.milestones;
-
-              Cypress._.times(2, i => {
-                exportPage.checkOutcomes({
-                  outcome: outcomeVar.names[i],
-                  metrics: outcomeVar.metrics[i]
-                });
-
-                exportPage.checkMilestones({
-                  milestone: milestoneVar.names[i],
-                  milestoneCompletionDate: milestoneVar.dates[i].join('/')
-                });
-              });
-
-              // Check State Staff and Expenses
-              const staffVar = activityData.staff;
-              const expensesVar = activityData.expenses;
-
-              exportPage.checkStateStaffNew({
-                staff: staffVar,
-                years
-              });
-              exportPage.checkStateExpensesNew({
-                expenses: expensesVar,
-                years
-              });
-
-              // Check Private Contractors
-              const contractors = activityData.privateContractors;
-
-              exportPage.checkPrivateContractorCostsNew({
-                contractors,
-                years
-              });
-
-              // Check Cost Allocation
-              const costAllocationVar = activityData.costAllocation;
-              exportPage.checkCostAllocationAndOtherFundingNew({
-                years,
-                costAllocation: costAllocationVar
-              });
-
-              // Check Budget and FFP have to add test variables to the export view page for this section
-            });
-        });
+      // Check values in export view
     });
   });
 };

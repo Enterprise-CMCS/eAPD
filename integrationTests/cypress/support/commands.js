@@ -541,9 +541,6 @@ Cypress.Commands.add('getActivityTable', { prevSubject: true }, subject => {
     );
 
   const tableElement = subject.get()[0];
-  // const headers = [...tableElement.querySelectorAll('tbody tr')].map(row => {
-  //   return [...row.querySelectorAll()].map(e => e.textContent);
-  // });
 
   // transform rows into array of array of strings for each td
   const rows = [...tableElement.querySelectorAll('tbody tr')].map(row => {
@@ -551,5 +548,4 @@ Cypress.Commands.add('getActivityTable', { prevSubject: true }, subject => {
   });
 
   return rows;
-  // return Object.assign(...headers.map((k, i) => ({ [k]: rows[i] })));
 });

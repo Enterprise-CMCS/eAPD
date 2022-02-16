@@ -120,20 +120,6 @@
     }
   ],
 
-  "quarterVals": [
-    {
-      "string": "For Activity 1",
-      "stateVals": [
-        [25, 25, 25, 25],
-        [25, 25, 25, 25]
-      ],
-      "contractorVals": [
-        [25, 25, 25, 25],
-        [25, 25, 25, 25]
-      ]
-    }
-  ],
-
   "totals": [
     {
       "staff": [303000, 327000],
