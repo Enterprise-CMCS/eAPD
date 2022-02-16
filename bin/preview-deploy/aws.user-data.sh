@@ -119,7 +119,7 @@ mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITD
 MONGOROOTUSERSEED
 cd ~/eAPD/api
 sh ~/mongo-init.sh
-mongo -u -p --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role:'readWrite', db: ''}]});"
+mongo -u -p --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role: 'dbOwner', db: ''}]});"
 MONGOUSERSEED
 E_USER
 
