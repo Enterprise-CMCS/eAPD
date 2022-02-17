@@ -38,16 +38,6 @@ touch /app/api/logs/Database-migration-out.log
 touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
-# Install nvm.  Do it inside the ec2-user home directory so that user will have
-# access to it forever, just in case we need to get into the machine and
-# manually do some stuff to it.
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-source ~/.bashrc
-
-# We're using Node 16, and we don't care about minor/patch versions, so always
-# get the latest.
-nvm install 16
-nvm alias default 16
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
@@ -112,40 +102,11 @@ cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
-
-#Preparing Mongo DB Users
-cd ~
-cat <<MONGOROOTUSERSEED > mongo-init.sh
-mongo admin --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : '$MONGO_INITDB_DATABASE'}]});"
-MONGOROOTUSERSEED
-cd /app/api
-sh ~/mongo-init.sh
-NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY npm run migrate
-cd ~
-cat <<MONGOUSERSEED > mongo-user.sh
-mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
-MONGOUSERSEED
-sh ~/mongo-user.sh
 E_USER
 
 sudo yum remove -y gcc-c++
 
-# SELinux context so Nginx can READ the files in /app/web
-mv home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf
-chown -R nginx /app/web
-semanage fcontext -a -t httpd_sys_content_t /etc/nginx/nginx.conf
-restorecon -Rv /etc/nginx/nginx.conf
-semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
-restorecon -Rv /app/web
-setsebool -P httpd_can_network_connect 1
-
-# Harden & Restart Mongo
-sh /home/ec2-user/mongo-init.sh
-sed -i 's|#security:|security:|g' /etc/mongod.conf
-sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
-rm mongo-init.sh
 
 # Restart Nginx
 systemctl enable nginx
