@@ -5,7 +5,7 @@ import BudgetPage from '../../../page-objects/budget-page';
 import FillOutActivityPage from '../../../page-objects/fill-out-activity-page';
 import ExportPage from '../../../page-objects/export-page';
 
-// Check export view
+const { _ } = Cypress;
 
 export const addHIEActivity = years => {
   let budgetPage;
@@ -103,7 +103,7 @@ export const addHIEActivity = years => {
       const contractor1 = activityData.privateContractors[0];
       const contractor2 = activityData.privateContractors[1];
 
-      years.forEach((year, i) => {
+      _.forEach(years, (year, i) => {
         const staffTotal =
           staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
 

@@ -2,17 +2,12 @@
 import { testAPDOverviewWithData } from '../../helpers/apd/apd-overview';
 import { testKeyStatePersonnelWithData } from '../../helpers/apd/key-state-personnel';
 import { testResultsOfPreviousActivitiesWithData } from '../../helpers/apd/results-of-previous-activities';
-import { testActivityDashboardWithData } from '../../helpers/apd/activity/activity-dashboard';
-import { testActivityOverviewWithData } from '../../helpers/apd/activity/activity-overview';
-import { testOutcomesAndMilestonesWithData } from '../../helpers/apd/activity/outcomes-and-milestones';
-import { testStateStaffAndExpensesWithData } from '../../helpers/apd/activity/state-staff-and-expenses';
-import { testPrivateContractorCostsWithData } from '../../helpers/apd/activity/private-contractor-costs';
-import { testCostAllocationAndOtherFundingWithData } from '../../helpers/apd/activity/cost-allocation-and-other-funding';
-import { testBudgetAndFFPWithData } from '../../helpers/apd/activity/budget-and-ffp';
 import { testActivityScheduleSummaryWithData } from '../../helpers/apd/activity-schedule-summary';
 import { testProposedBudgetWithData } from '../../helpers/apd/proposed-budget';
 import { testAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance';
 import { testExecutiveSummaryWithData } from '../../helpers/apd/executive-summary';
+import { addHITActivity } from '../../helpers/apd/activity/add-HIT-activity';
+import { addHIEActivity } from '../../helpers/apd/activity/add-HIE-activity';
 import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
 
 // Tests an APD by adding data and checking the results
@@ -62,36 +57,16 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     });
 
     describe('Activities', () => {
-      describe('Activity Dashboard', () => {
-        testActivityDashboardWithData(years);
+      describe('Add HIT Activity', () => {
+        addHITActivity(years);
       });
 
-      describe('Activity Overview', () => {
-        testActivityOverviewWithData(years);
-      });
-
-      describe('Outcomes and Milestones', () => {
-        testOutcomesAndMilestonesWithData(years);
-      });
-
-      describe('State Staff and Expenses', () => {
-        testStateStaffAndExpensesWithData(years);
-      });
-
-      describe('Private Contractor Costs', () => {
-        testPrivateContractorCostsWithData(years);
-      });
-
-      describe('Cost Allocation and Other Funding', () => {
-        testCostAllocationAndOtherFundingWithData(years);
-      });
-
-      describe('Budget and FFP', () => {
-        testBudgetAndFFPWithData(years);
+      describe('Add HIE Activity', () => {
+        addHIEActivity(years);
       });
 
       describe('Add MMIS Activity', () => {
-        addMMISActivity();
+        addMMISActivity(years);
       });
     });
 
