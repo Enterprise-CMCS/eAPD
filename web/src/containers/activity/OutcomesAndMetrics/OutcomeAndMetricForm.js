@@ -81,15 +81,6 @@ const OutcomeAndMetricForm = ({
       setMetric(activityIndex, index, i, value);
     };
 
-  const checkForText = e => {
-    const element = e.currentTarget;
-    const text = element.innerHTML.trim();
-    const parent = element.parentNode;
-    const elName = element.name;
-    
-    return text === '' ? addMissingTextAlert(element, parent, elName) : removeMissingTextAlert(element, parent);
-  }
-
   return (
     <Fragment key={`activity${activityIndex}-index${index}-form`}>
       <TextField
