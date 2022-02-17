@@ -1375,13 +1375,24 @@
                 "costAllocationNarrative": {
                   "type": "object",
                   "properties": {
+                    "years": {
+                      "type": "object",
+                      "description": "Details of each year",
+                      "x-patternProperties": {
+                        "^[0-9]{4}$": {
+                          "type": "object",
+                          "properties": {
+                            "otherSources": {
+                              "type": "string",
+                              "description": "Description of other funding sources"
+                            }
+                          }
+                        }
+                      }
+                    },
                     "methodology": {
                       "type": "string",
                       "description": "Description of the cost allocation methodology"
-                    },
-                    "otherSources": {
-                      "type": "string",
-                      "description": "Description of other funding sources"
                     }
                   }
                 },

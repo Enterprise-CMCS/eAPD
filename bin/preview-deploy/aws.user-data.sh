@@ -21,6 +21,7 @@ export OKTA_API_KEY="__OKTA_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
+export MONGO_ADMIN_URL="__MONGO_ADMIN_URL__"
 export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
 export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
 export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
@@ -95,7 +96,8 @@ echo "module.exports = {
       OKTA_API_KEY: '__OKTA_API_KEY__',
       JWT_SECRET: '__JWT_SECRET__',
       MONGO_DATABASE: '__MONGO_DATABASE__',
-      MONGO_URL: '__MONGO_URL__'
+      MONGO_URL: '__MONGO_URL__',
+      MONGO_ADMIN_URL: '__MONGO_ADMIN_URL__',
     },
   }]
 };" > ecosystem.config.js
@@ -113,7 +115,11 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 cd ~
 cat <<MONGOUSERSEED > mongo-init.sh
 mongo admin --eval "db.runCommand({'createUser' : '','pwd' : '', 'roles' : [{'role' : 'root','db' : 'admin'}]});"
-mongo  -u  -p  --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role:'readWrite', db: ''}]});"
+mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : '$MONGO_INITDB_DATABASE'}]});"
+MONGOROOTUSERSEED
+cd ~/eAPD/api
+sh ~/mongo-init.sh
+mongo  -u  -p  --authenticationDatabase admin --eval "db.createUser({user: '', pwd: '', roles:[{role:'readWrite', db: ''}, {role:'dbAdmin', db: ''}]});"
 MONGOUSERSEED
 E_USER
 
@@ -134,7 +140,6 @@ sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 systemctl restart mongod
 rm mongo-init.sh
-#su - ec2-user -c 'npm run mongoose-migrate'
 
 # Restart Nginx
 systemctl enable nginx

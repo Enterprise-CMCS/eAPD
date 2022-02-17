@@ -6,7 +6,9 @@ import reducer, { getContinuePreviousLinks } from './nav';
 
 describe('staticItems', () => {
   it('defines the apd resources within the app', () => {
-    const labels = staticItems(1).map(item => item.label);
+    const labels = staticItems('0123456789abcdef01234567').map(
+      item => item.label
+    );
     expect(labels).toEqual([
       'APD Overview',
       'Key State Personnel',
@@ -24,7 +26,7 @@ describe('staticItems', () => {
     // getContinuePreviousLinks() uses this feature of the data to ignore links
     // with #fragments in their URL. A URL #fragment indicates a particular
     // section of a resource.
-    staticItems(1).forEach(item => {
+    staticItems('0123456789abcdef01234567').forEach(item => {
       if (!item.items || !item.items.length) return;
       const hash = item.items[0].url.split('#')[2];
       expect(hash).toBeFalsy();
@@ -36,16 +38,18 @@ describe('getContinuePreviousLinks()', () => {
   test('first apd page', () => {
     const { continueLink, previousLink } = getContinuePreviousLinks(
       '1',
-      '/apd/1/apd-overview',
-      staticItems(1)
+      '/apd/0123456789abcdef01234567/apd-overview',
+      staticItems('0123456789abcdef01234567')
     );
-    expect(continueLink.url).toEqual('/apd/1/state-profile');
+    expect(continueLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/state-profile'
+    );
     expect(previousLink).toBeFalsy();
   });
 
   test('activities list page', () => {
-    const apdId = '1';
-    const url = '/apd/1/activities';
+    const apdId = '0123456789abcdef01234567';
+    const url = '/apd/0123456789abcdef01234567/activities';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
     const items = getItems({ apdId, activities, url });
     const { continueLink, previousLink } = getContinuePreviousLinks(
@@ -53,13 +57,17 @@ describe('getContinuePreviousLinks()', () => {
       url,
       items
     );
-    expect(continueLink.url).toEqual('/apd/1/schedule-summary');
-    expect(previousLink.url).toEqual('/apd/1/previous-activities');
+    expect(continueLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/schedule-summary'
+    );
+    expect(previousLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/previous-activities'
+    );
   });
 
   test('activity page', () => {
-    const apdId = '1';
-    const url = '/apd/1/activity/0/ffp';
+    const apdId = '0123456789abcdef01234567';
+    const url = '/apd/0123456789abcdef01234567/activity/0/ffp';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
     const items = getItems({ apdId, activities, url });
     const { continueLink, previousLink } = getContinuePreviousLinks(
@@ -67,13 +75,17 @@ describe('getContinuePreviousLinks()', () => {
       url,
       items
     );
-    expect(continueLink.url).toEqual('/apd/1/activity/1/overview');
-    expect(previousLink.url).toEqual('/apd/1/activity/0/cost-allocation');
+    expect(continueLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/activity/1/overview'
+    );
+    expect(previousLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/activity/0/cost-allocation'
+    );
   });
 
   test('schedule summary page', () => {
-    const apdId = '1';
-    const url = '/apd/1/schedule-summary';
+    const apdId = '0123456789abcdef01234567';
+    const url = '/apd/0123456789abcdef01234567/schedule-summary';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
     const items = getItems({ apdId, activities, url });
     const { continueLink, previousLink } = getContinuePreviousLinks(
@@ -81,18 +93,24 @@ describe('getContinuePreviousLinks()', () => {
       url,
       items
     );
-    expect(continueLink.url).toEqual('/apd/1/proposed-budget');
-    expect(previousLink.url).toEqual('/apd/1/activities');
+    expect(continueLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/proposed-budget'
+    );
+    expect(previousLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/activities'
+    );
   });
 
   test('last apd page', () => {
     const { continueLink, previousLink } = getContinuePreviousLinks(
       '1',
-      '/apd/1/export',
-      staticItems(1)
+      '/apd/0123456789abcdef01234567/export',
+      staticItems('0123456789abcdef01234567')
     );
     expect(continueLink).toBeFalsy();
-    expect(previousLink.url).toEqual('/apd/1/executive-summary');
+    expect(previousLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/executive-summary'
+    );
   });
 });
 
@@ -101,10 +119,10 @@ describe('nav reducer', () => {
 
   beforeEach(() => {
     state = reducer({
-      apdId: 1,
+      apdId: '0123456789abcdef01234567',
       activities: [],
       continueLink: null,
-      items: staticItems(1),
+      items: staticItems('0123456789abcdef01234567'),
       previousLink: null
     });
   });
@@ -138,7 +156,7 @@ describe('nav reducer', () => {
       const payload = {
         payload: {
           location: {
-            pathname: '/apd/1/proposed-budget',
+            pathname: '/apd/0123456789abcdef01234567/proposed-budget',
             hash: '#budget-summary-table'
           }
         }
@@ -153,12 +171,14 @@ describe('nav reducer', () => {
       const payload = {
         payload: {
           location: {
-            pathname: '/apd/1/apd-overview'
+            pathname: '/apd/0123456789abcdef01234567/apd-overview'
           }
         }
       };
       const nextState = reducer(state, { type: LOCATION_CHANGE, ...payload });
-      expect(nextState.continueLink.url).toEqual('/apd/1/state-profile');
+      expect(nextState.continueLink.url).toEqual(
+        '/apd/0123456789abcdef01234567/state-profile'
+      );
     });
   });
 });

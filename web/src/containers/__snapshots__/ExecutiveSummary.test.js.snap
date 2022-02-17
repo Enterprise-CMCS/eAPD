@@ -20,7 +20,7 @@ exports[`executive summary component renders correctly 1`] = `
       <Review
         ariaLabel={null}
         className=""
-        editHref="/apd/2/activity/0/overview"
+        editHref="/apd/0123456789abcdef01234560/activity/0/overview"
         heading={
           <React.Fragment>
             Activity 
@@ -136,7 +136,7 @@ exports[`executive summary component renders correctly 1`] = `
       <Review
         ariaLabel={null}
         className="ds-u-border-bottom--0"
-        editHref="/apd/2/activity/1/overview"
+        editHref="/apd/0123456789abcdef01234560/activity/1/overview"
         heading={
           <React.Fragment>
             Activity 

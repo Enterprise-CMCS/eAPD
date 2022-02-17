@@ -40,6 +40,7 @@ class PopulatePage {
     this.fillDate('Start date', startDate);
     this.fillDate('End date', endDate);
 
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('activity-short-overview-field', shortOverview);
     cy.setTinyMceContent('activity-description-field', detailedDescription);
     cy.setTinyMceContent(

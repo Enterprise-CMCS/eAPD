@@ -1,6 +1,6 @@
-FROM node:16-bullseye
+FROM node:16.13.2-bullseye
 
-RUN npm i -g npm@8
+RUN npm i -g npm@8.3.1
 
 RUN mkdir /app
 WORKDIR /app

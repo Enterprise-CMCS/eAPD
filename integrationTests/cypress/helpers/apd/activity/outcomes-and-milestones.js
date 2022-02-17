@@ -10,12 +10,8 @@ export const testDefaultOutcomesAndMilestones = () => {
       level: 3
     }).should('exist');
 
-    cy.contains('Add at least one outcome for this activity.').should(
-      'exist'
-    );
-    cy.contains('Add milestone(s) for this activity.').should(
-      'exist'
-    );
+    cy.contains('Add at least one outcome for this activity.').should('exist');
+    cy.contains('Add milestone(s) for this activity.').should('exist');
 
     cy.waitForSave();
   });

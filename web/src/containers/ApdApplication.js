@@ -37,7 +37,7 @@ const ApdApplication = ({
   useLocation
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const paramApdId = +useParams().apdId;
+  const paramApdId = useParams().apdId;
   const history = useHistory();
   const location = useLocation();
 
@@ -106,7 +106,7 @@ ApdApplication.propTypes = {
   isAdmin: PropTypes.bool.isRequired,
   isEditor: PropTypes.bool.isRequired,
   place: PropTypes.object.isRequired,
-  apdId: PropTypes.number,
+  apdId: PropTypes.string,
   selectApd: PropTypes.func.isRequired,
   setApdToSelectOnLoad: PropTypes.func.isRequired,
   userRole: PropTypes.string.isRequired,

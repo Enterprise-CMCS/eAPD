@@ -9,6 +9,22 @@ fileignoreconfig:
     checksum: da8456882b3816efe3a55c447cc09301eb5e8b7ac516c3e2d78f336ab10d47b4
   - filename: web/src/containers/activity/OutcomesAndMetrics/OutcomeAndMetricReview.js
     checksum: b7a1e0864e7a9b4350bb11a1f7da20c36bfff6f48a3cb6d60a6be503e09270a3
+  - filename: web/src/containers/admin/ManageUserTable.test.js
+    checksum: 9ef1cfde77fbe7260d733b3ad9c5d2a76d5ab1c9b95ee6b195c5015c6d1632b9
+  - filename: web/src/containers/admin/StateAdminLetters.js
+    checksum: 98a4ed98525683906bd93c027c1fde6cb4cc7ac207bb3c881a48525469f20da9
+  - filename: web/src/containers/admin/ManageAllUsersTable.js
+    checksum: 70d6aaf5b3eb9228d773b11250112b7c19064904345f5c79d379c3f77b30411a
+  - filename: web/src/containers/viewOnly/ApdStateProfile.js
+    checksum: 32b5d0e09efe9bb79b2a81e3cabb06925417f5b5369fbb1fe33d65b40af90b2a
+  - filename: web/src/containers/StateAccessRequest.js
+    checksum: 247db44f1a364108397b2ce4a2e096c7a6650eb9b79ad05dd64bea5f71a697f8
+  - filename: integrationTests/cypress/helpers/apd/proposed-budget-calculations.js
+    checksum: a468dcd1f872efb7b3816b2380200def3218961cae63b3d33b2bf7fa09da2984
   - filename: .circleci/config.yml
-    checksum: d45c82bed1f99de9a094e4234cc5e2665f63e48f2515cb63de62d020f216f537
+    checksum: 3b37ddbb081fe1f9500b4d73cbc2f845ffe609a08152d7db6b9ceceb8228c70d
+  - filename: bin/preview-deploy/aws.user-data.sh
+    checksum: 6887d9c547bc6d9076d54afe49acd26828ac389e8f05365dcb47cf6d4547be83
+  - filename: packer/mongo.sh
+    checksum: a4cbd55c0dfb75500d2c0cf31efa1fe5dd851fed2fe49050b1c51913a2b23f4e
 version: ''

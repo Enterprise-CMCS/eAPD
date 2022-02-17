@@ -23,7 +23,7 @@ export const newOutcome = () => ({
   metrics: []
 });
 
-export const statePersonDefaultYear = () => ({ amt: '', perc: '' });
+export const statePersonDefaultYear = () => ({ amt: 0, perc: 0 });
 export const newStatePerson = years => ({
   key: generateKey(),
   title: '',
@@ -32,7 +32,7 @@ export const newStatePerson = years => ({
 });
 
 export const contractorDefaultYear = () => 0;
-export const contractorDefaultHourly = () => ({ hours: '', rate: '' });
+export const contractorDefaultHourly = () => ({ hours: 0, rate: 0 });
 export const newContractor = years => ({
   key: generateKey(),
   name: '',
@@ -81,7 +81,7 @@ export const quarterlyFFPEntry = () =>
 
 export const newActivity = ({
   name = '',
-  fundingSource = false,
+  fundingSource = null,
   years = []
 } = {}) => {
   const costAllocationNarrativeYears = arrToObj(
@@ -89,13 +89,15 @@ export const newActivity = ({
     costAllocationNarrative()
   );
 
-  const obj = {
+  return {
     alternatives: '',
     contractorResources: [],
     costAllocation: arrToObj(years, costAllocationEntry()),
     costAllocationNarrative: {
       methodology: '',
-      ...costAllocationNarrativeYears
+      years: {
+        ...costAllocationNarrativeYears
+      }
     },
     description: '',
     expenses: [],
@@ -118,5 +120,4 @@ export const newActivity = ({
       expanded: name === 'Program Administration'
     }
   };
-  return obj;
 };
