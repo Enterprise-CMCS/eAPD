@@ -18,55 +18,6 @@ const OutcomeAndMetricForm = ({
   setOutcome,
   removeMetric
 }) => {
-  const outcomeContainer = `activite${activityIndex}-outcome${index}`;
-
-  const disableButton = () => {
-    const container = document.getElementById(outcomeContainer).parentElement;
-    const doneBtn = container.querySelector('#form-and-review-list--done-btn');
-
-    if (document
-          .getElementById(outcomeContainer)
-          .querySelectorAll('.missing-text-alert')
-          .length > 0) {
-          doneBtn.disabled = true;
-        } else {
-          doneBtn.disabled = false;
-        }
-  }
-
-  const addMissingTextAlert = (e, p, n) => {
-    const lastDiv = p.lastChild;
-    const missTextError = 'missing-text-error';
-    const div = document.createElement('div');
-    const vowels = ("aeiouAEIOU");
-
-    if (vowels.indexOf(n[0]) !== -1) {
-      div.innerHTML = `Provide an ${n}`;
-    } else {
-      div.innerHTML = `Provide a ${n}`;
-    }
-    
-    if (!lastDiv.classList.contains(missTextError)) {
-      div.classList.add('missing-text-error')
-      e.classList.add('missing-text-alert')
-      p.appendChild(div)
-    }
-
-    disableButton();
-  }
-
-  const removeMissingTextAlert = (e, p) => {
-    const lastDiv = p.lastChild;
-    const missTextError = 'missing-text-error';
-    e.classList.remove('missing-text-alert')
-    
-    if (lastDiv.classList.contains(missTextError)) {
-      p.removeChild(lastDiv);
-    }
-
-    disableButton();
-  }
-
   const changeOutcome = useMemo(
     () =>
       ({ target: { value } }) => {
