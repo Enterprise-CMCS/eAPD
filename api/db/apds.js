@@ -96,7 +96,9 @@ const updateAPDDocument = async (
 ) => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
-  console.log("apdDoc in update...", apdDoc.validate())
+  
+  // Todo: do validations on updates
+
   if (patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};
@@ -195,25 +197,11 @@ const updateAPDDocument = async (
   };
 };
 
-const validateDoc = async (
-  id,
-  stateId,
-  {
-    APD = mongoose.model('APD'),
-  } = {}
-) => {
-  const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
-  console.log("apdDoc", apdDoc);
-  // const validated = apdDoc.validateSync();
-  console.log("validate...", validated);
-}
-
 module.exports = {
   createAPD,
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument,
-  validateDoc
+  updateAPDDocument
 };

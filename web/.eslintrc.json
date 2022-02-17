@@ -10,6 +10,7 @@
   ],
   "plugins": ["react"],
   "parserOptions": {
+    "requireConfigFile": false,
     "ecmaVersion": 8,
     "ecmaFeatures": {
       "jsx": true

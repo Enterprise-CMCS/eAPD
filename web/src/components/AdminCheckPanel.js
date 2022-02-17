@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { toggleAdminCheck } from '../actions/app/apd';
@@ -14,9 +14,8 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
     toggleAdmin(false);
   };
 
-
   return (
-    <div>
+    <Fragment>
       {showAdminCheck && (
         <Drawer
           footerTitle="Footer Title"
@@ -37,7 +36,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
           ))}
         </Drawer>
       )}
-    </div>
+    </Fragment>
   );
 };
 
