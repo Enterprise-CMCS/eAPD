@@ -33,13 +33,13 @@ touch /app/api/logs/cms-hitech-apd-api.logs
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
-cd ~/eAPD/web
+cd eAPD/web
 npm ci
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
 mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up
-mv ~/eAPD/api/* /app/api
+mv eAPD/api/* /app/api
 cd /app/api
 npm ci --only=production
 # Build and seed the database
@@ -90,6 +90,13 @@ echo "module.exports = {
 };" > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
+
+NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY npm run migrate
+cd ~
+cat <<MONGOUSERSEED > mongo-user.sh
+mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
+MONGOUSERSEED
+sh ~/mongo-user.sh
 E_USER
 
 sudo yum remove -y gcc-c++
