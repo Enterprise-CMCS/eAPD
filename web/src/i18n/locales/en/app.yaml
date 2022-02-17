@@ -23,3 +23,5 @@ exportAndSubmit:
   title: Export and Submit
 reviewAndDownload: 
   title: Review and Download
+adminCheck:
+  title: Administrative Check

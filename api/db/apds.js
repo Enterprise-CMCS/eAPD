@@ -6,13 +6,33 @@ const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
 
 const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
+  //  idea: use the custom validation message for the actual feedback in the admin check?
   let newApd = new APD(apd);
-  newApd.validate(errors => {
-    console.log("errors", Object.keys(errors.errors));
-  });
 
-  // newApd = await newApd.save();
-  // return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
+  const validate = newApd.validateSync();
+
+  const metadata = {};
+
+  // Total validation errors added to metadata
+  metadata.incomplete = Object.keys(validate.errors).length;
+
+  // Add each validation error as an object
+  // Todo: need to figure out how to group by apd sections
+  // Todo: need to get a count per section
+  const todoList = Object.keys(validate.errors).map(key => {
+    return {
+      key,
+      name: validate.errors[key].path,
+      description: validate.errors[key].message
+    }
+  })
+
+  metadata.todo = todoList;
+
+  newApd.metadata = metadata;
+
+  newApd = await newApd.save({ validateBeforeSave: false });
+  return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
 const deleteAPDByID = async (id, { APD = mongoose.model('APD') } = {}) =>

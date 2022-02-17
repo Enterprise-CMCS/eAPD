@@ -78,14 +78,18 @@ const apdSchema = new mongoose.Schema({
       _id: false,
       alternatives: {
         type: String,
-        minLength: 1
+        validate: {
+          validator(v) {
+            return v.trim().length > 0;
+          },
+          message: 'Provide a statement of alternative considerations and supporting justification'
+        },
       },
       contractorResources: [
         {
           _id: false,
           description: {
             type: String,
-            minLength: 1,
             description: 'Must include a contractor resource description'
           },
           end: Date,
@@ -346,10 +350,7 @@ const apdSchema = new mongoose.Schema({
     medicaidDirector: {
       name: String,
       email: String,
-      phone: {
-        type: String,
-        minLength: 1
-      }
+      phone: String
     },
     medicaidOffice: {
       address1: String,
@@ -371,10 +372,13 @@ const apdSchema = new mongoose.Schema({
         message: 'Provided year is invalid.'
       }
     }
-  ]
+  ],
+  metadata: {
+    incomplete: Number,
+    todo: [],
+    recents: []
+  }
 });
-
-apdSchema.set('validateBeforeSave', false);
 
 const APD = mongoose.model('APD', apdSchema);
 

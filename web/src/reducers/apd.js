@@ -34,7 +34,8 @@ import {
   SAVE_APD_SUCCESS,
   SELECT_APD_SUCCESS,
   SELECT_APD_FAILURE,
-  SET_APD_TO_SELECT_ON_LOAD
+  SET_APD_TO_SELECT_ON_LOAD,
+  ADMIN_CHECK_TOGGLE
 } from '../actions/app';
 import { defaultAPDYearOptions, generateKey } from '../util';
 import initialAssurances from '../util/regulations';
@@ -322,6 +323,7 @@ const initialState = {
   fetching: false,
   loaded: false,
   error: '',
+  adminCheck: false,
   selectAPDOnLoad: false
 };
 
@@ -382,6 +384,14 @@ const reducer = (state = initialState, action) => {
     case REMOVE_APD_YEAR: {
       const patches = getPatchesToRemoveYear(state, action.value);
       return { ...state, data: applyPatch(state.data, patches) };
+    }
+
+    case ADMIN_CHECK_TOGGLE: {
+      console.log("action", action);
+      return {
+        ...state,
+        adminCheck: action.data
+      }
     }
 
     case CREATE_APD_SUCCESS:

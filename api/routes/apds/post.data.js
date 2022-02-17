@@ -53,6 +53,12 @@ const getNewApd = () => {
     ]
   });
 
+  const getMetadata = () => ({
+    incomplete: 0,
+    todo: [],
+    recents: []
+  });
+
   return {
     activities: [
       {
@@ -130,7 +136,8 @@ const getNewApd = () => {
         zip: ''
       }
     },
-    years
+    years,
+    metadata: getMetadata()
   };
 };
 
