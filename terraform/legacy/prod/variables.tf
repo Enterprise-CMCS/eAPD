@@ -1,0 +1,1 @@
+variable "instance_name" {}

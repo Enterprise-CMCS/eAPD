@@ -91,11 +91,6 @@ const Activity = ({ activity, activityIndex }) => {
   };
 
   const buildContractor = (contractor, index) => {
-    const contractTerm = stateDateRangeToDisplay(
-      contractor.start,
-      contractor.end
-    );
-
     return (
       <Fragment key={uuidv4()}>
         <p className="ds-u-margin-bottom--0">
@@ -118,7 +113,7 @@ const Activity = ({ activity, activityIndex }) => {
         <ul className="ds-c-list--bare">
           <li>
             <strong>Full Contract Term: </strong>
-            {contractTerm}
+            {stateDateRangeToDisplay(contractor.start, contractor.end)}
           </li>
           <li>
             <strong>Total Contract Cost: </strong>
@@ -275,7 +270,7 @@ const Activity = ({ activity, activityIndex }) => {
 
       <hr className="subsection-rule" />
       <h3>Other Funding</h3>
-      {Object.entries(activity.costAllocationNarrative)
+      {Object.entries(activity.costAllocationNarrative.years)
         .filter(([year, _]) => isYear(year)) // eslint-disable-line no-unused-vars
         .map(([year, narrative]) => (
           <Fragment key={uuidv4()}>

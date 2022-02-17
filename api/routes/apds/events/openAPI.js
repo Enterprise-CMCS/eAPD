@@ -4,7 +4,6 @@ const {
 } = require('../../openAPI/helpers');
 
 const openAPI = {
-
   '/apds/{id}/events': {
     post: {
       tags: ['APDs', 'events'],
@@ -54,11 +53,11 @@ const openAPI = {
             }
           })
         },
-        400: {
-          description: 'The apd ID does not match any known apds'
-        },
         403: {
           description: 'The apd ID does not match any known apds for the user'
+        },
+        404: {
+          description: 'The apd ID does not match any known apds'
         }
       }
     }
@@ -66,5 +65,5 @@ const openAPI = {
 };
 
 module.exports = {
-  ...requiresAuth(openAPI),
+  ...requiresAuth(openAPI)
 };

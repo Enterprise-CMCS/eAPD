@@ -17,7 +17,7 @@ import {
 import AlertMissingFFY from '../components/AlertMissingFFY';
 
 const ExecutiveSummary = ({ data, total, years }) => {
-  const apdId = +useParams().apdId;
+  const { apdId } = useParams();
   return (
     <React.Fragment>
       <Waypoint />

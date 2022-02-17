@@ -1,8 +1,10 @@
 const tap = require('tap');
 const sinon = require('sinon');
+const { SchemaTypes } = require('mongoose');
 
 const { can } = require('../../middleware');
 const postEndpoint = require('./post');
+const mongo = require('../../db/mongodb');
 
 // The Cassini probe enters orbit around Saturn, about 7 years after launch.
 // On its long journey, it surveyed Venus, Earth, an asteroid, and Jupiter.
@@ -13,13 +15,16 @@ const postEndpoint = require('./post');
 //
 // Mock with UTC date so the time is consistent regardless of local timezone
 const mockClock = sinon.useFakeTimers(Date.UTC(2004, 6, 1, 12));
-tap.teardown(() => {
-  mockClock.restore();
-});
+let sandbox;
+let app;
 
 tap.test('apds POST endpoint', async endpointTest => {
-  const sandbox = sinon.createSandbox();
-  const app = { post: sandbox.stub() };
+  endpointTest.before(async () => {
+    SchemaTypes.ClockDate = SchemaTypes.Date;
+    await mongo.setup();
+    sandbox = sinon.createSandbox();
+    app = { post: sandbox.stub() };
+  });
 
   endpointTest.test('setup', async test => {
     postEndpoint(app);
@@ -66,31 +71,6 @@ tap.test('apds POST endpoint', async endpointTest => {
       test.ok(next.calledWith(error), 'HTTP status set to 400');
     });
 
-    tests.test(
-      'sends a 400 if the newly-generated APD fails schema validation',
-      async test => {
-        getStateProfile.resolves({ medicaidDirector: { name: 3 } });
-        await handler(req, res, next);
-
-        test.ok(
-          next.calledWith({
-            status: 400,
-            message: [
-              {
-                keyword: 'type',
-                instancePath: '/stateProfile/medicaidDirector/name',
-                schemaPath:
-                  'stateProfile.json/properties/medicaidDirector/properties/name/type',
-                params: { type: 'string' },
-                message: 'must be string'
-              }
-            ]
-          }),
-          'HTTP status set to 400'
-        );
-      }
-    );
-
     tests.test('sends back the new APD if everything works', async test => {
       const expectedApd = {
         activities: [
@@ -103,8 +83,10 @@ tap.test('apds POST endpoint', async endpointTest => {
             },
             costAllocationNarrative: {
               methodology: '',
-              2004: { otherSources: '' },
-              2005: { otherSources: '' }
+              years: {
+                2004: { otherSources: '' },
+                2005: { otherSources: '' }
+              }
             },
             description: '',
             expenses: [],
@@ -136,7 +118,35 @@ tap.test('apds POST endpoint', async endpointTest => {
             }
           }
         ],
-        federalCitations: {},
+        federalCitations: {
+          procurement: [
+            { title: '42 CFR Part 495.348', checked: null, explanation: '' },
+            { title: 'SMM Section 11267', checked: null, explanation: '' },
+            { title: '45 CFR 95.613', checked: null, explanation: '' },
+            { title: '45 CFR 75.326', checked: null, explanation: '' }
+          ],
+          recordsAccess: [
+            { title: '42 CFR Part 495.350', checked: null, explanation: '' },
+            { title: '42 CFR Part 495.352', checked: null, explanation: '' },
+            { title: '42 CFR Part 495.346', checked: null, explanation: '' },
+            { title: '42 CFR 433.112(b)', checked: null, explanation: '' },
+            { title: '45 CFR Part 95.615', checked: null, explanation: '' },
+            { title: 'SMM Section 11267', checked: null, explanation: '' }
+          ],
+          softwareRights: [
+            { title: '42 CFR 495.360', checked: null, explanation: '' },
+            { title: '45 CFR 95.617', checked: null, explanation: '' },
+            { title: '42 CFR Part 431.300', checked: null, explanation: '' },
+            { title: '42 CFR Part 433.112', checked: null, explanation: '' }
+          ],
+          security: [
+            {
+              title: '45 CFR 164 Security and Privacy',
+              checked: null,
+              explanation: ''
+            }
+          ]
+        },
         incentivePayments: {
           ehAmt: {
             2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
@@ -221,16 +231,16 @@ tap.test('apds POST endpoint', async endpointTest => {
         medicaidOffice: { bigBird: 'grover' }
       });
 
-      createAPD.resolves({ id: 'apd id' });
+      createAPD.resolves('apd id');
 
       await handler(req, res, next);
 
       test.same(
         createAPD.args[0][0],
         {
-          state_id: 'st',
+          stateId: 'st',
           status: 'draft',
-          document: expectedApd
+          ...expectedApd
         },
         'expected APD is created'
       );
@@ -246,5 +256,10 @@ tap.test('apds POST endpoint', async endpointTest => {
         'responds with the new APD object'
       );
     });
+  });
+
+  endpointTest.teardown(async () => {
+    await mongo.teardown();
+    mockClock.restore();
   });
 });
