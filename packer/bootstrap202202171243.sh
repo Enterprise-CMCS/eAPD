@@ -109,7 +109,6 @@ export OKTA_DOMAIN="$OKTA_DOMAIN"
 export OKTA_API_KEY="$OKTA_API_KEY"
 export ENVIRONMENT="$ENVIRONMENT"
 
-#!/bin/bash
 # Prepare PostGres test database
 sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
@@ -126,9 +125,10 @@ source ~/.bashrc
 nvm install 16.13.2
 nvm alias default 16.13.2
 
-git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
-cd ~/eAPD/api
-npm ci
+# Install pm2: https://www.npmjs.com/package/pm2
+# This is what'll manage running the API Node app. It'll keep it alive and make
+# sure it's running when the EC2 instance restarts.
+npm i -g pm2
 
 #Preparing Mongo DB Users
 cd ~

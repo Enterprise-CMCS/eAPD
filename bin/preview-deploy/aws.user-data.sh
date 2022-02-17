@@ -1,14 +1,5 @@
 #!/bin/bash
-# Prepare test database
-sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
-sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
-
 sudo yum install -y gcc-c++
-
-# Start & Enable Mongo
-systemctl daemon-reload
-systemctl enable mongod
-systemctl start mongod
 
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
@@ -39,25 +30,29 @@ touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
 
-# Install pm2: https://www.npmjs.com/package/pm2
-# This is what'll manage running the API Node app. It'll keep it alive and make
-# sure it's running when the EC2 instance restarts.
-npm i -g pm2
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
-cd eAPD/web
+cd ~/eAPD/web
 npm ci
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
 mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up
-mv eAPD/api/* /app/api
+mv ~/eAPD/api/* /app/api
 cd /app/api
 npm ci --only=production
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
 NODE_ENV=development DEV_DB_HOST=localhost npm run seed
+
+# Setting Up New Relic Application Monitor
+npm install newrelic --save
+cp node_modules/newrelic/newrelic.js ./newrelic.js
+sed -i 's|My Application|eAPD API|g' newrelic.js
+sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
+sed -i "1 s|^|require('newrelic');\n|" main.js
+
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace
@@ -95,22 +90,9 @@ echo "module.exports = {
 };" > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
-
-# Setting Up New Relic Application Monitor
-npm install newrelic --save
-cp node_modules/newrelic/newrelic.js ./newrelic.js
-sed -i 's|My Application|eAPD API|g' newrelic.js
-sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|require('newrelic');\n|" main.js
 E_USER
 
 sudo yum remove -y gcc-c++
-
-systemctl restart mongod
-
-# Restart Nginx
-systemctl enable nginx
-systemctl restart nginx
 
 # Restart New Relic Infrastructure Monitor
 systemctl enable newrelic-infra
