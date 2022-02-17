@@ -1,29 +1,23 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 
-import ActivitiesStateStaffExpensesPage from '../../../page-objects/activities-state-staff-expenses-page';
-import ActivityPage from '../../../page-objects/activity-page';
 import BudgetPage from '../../../page-objects/budget-page';
 import FillOutActivityPage from '../../../page-objects/fill-out-activity-page';
-import PopulatePage from '../../../page-objects/populate-page';
+import ExportPage from '../../../page-objects/export-page';
 
 // Check export view
 
 export const addHIEActivity = years => {
-  let populatePage;
-  let activityPage;
-  let staffExpensesPage;
   let budgetPage;
   let fillOutActivityPage;
+  let exportPage;
 
   let activityData;
 
   before(() => {
-    populatePage = new PopulatePage();
-    activityPage = new ActivityPage();
-    staffExpensesPage = new ActivitiesStateStaffExpensesPage();
     budgetPage = new BudgetPage();
     fillOutActivityPage = new FillOutActivityPage();
+    exportPage = new ExportPage();
 
     cy.fixture('HIE-activity-template.json').then(data => {
       activityData = data;
@@ -168,8 +162,78 @@ export const addHIEActivity = years => {
       });
 
       cy.waitForSave();
+      cy.goToExportView();
 
-      // Check values in export view
+      // Check activity list list in export view
+      cy.findAllByText('Activities')
+        .next()
+        .within(() => {
+          cy.contains(`2. ${activityData.activityName} | HIE`);
+        });
+
+      // Check activity section in export view
+      cy.findAllByText('Activities')
+        .parent()
+        .within(() => {
+          cy.findAllByText(`Activity 2: ${activityData.activityName}`)
+            .parent()
+            .within(() => {
+              // Check Activity Overview
+              const overviewData = activityData.activityOverview;
+              exportPage.checkActivityOverviewNew({
+                ...overviewData,
+                doesNotSupportsMedicaid:
+                  'No response was provided for how this activity will support the Medicaid standards and conditions.',
+                startDate: overviewData.startDate.join('/'),
+                endDate: overviewData.endDate.join('/')
+              });
+
+              // Check Outcomes and Milestones
+              Cypress._.times(2, i => {
+                exportPage.checkOutcomes({
+                  outcome: activityData.outcomes.names[i],
+                  metrics: activityData.outcomes.metrics[i]
+                });
+
+                exportPage.checkMilestones({
+                  milestone: activityData.milestones.names[i],
+                  milestoneCompletionDate:
+                    activityData.milestones.dates[i].join('/')
+                });
+              });
+
+              // Check State Staff and Expenses
+              exportPage.checkStateStaffNew({
+                staff: activityData.staff,
+                years
+              });
+              exportPage.checkStateExpensesNew({
+                expenses: activityData.expenses,
+                years
+              });
+
+              // Check Private Contractors
+              exportPage.checkPrivateContractorCostsNew({
+                contractors: activityData.privateContractors,
+                years
+              });
+
+              // Check Cost Allocation
+              exportPage.checkCostAllocationAndOtherFundingNew({
+                years,
+                costAllocation: activityData.costAllocation
+              });
+
+              // Check Budget and FFP
+              fillOutActivityPage.checkBudgetAndFFPTables({
+                budgetData: activityData.budgetAndFFPTables,
+                years,
+                firstSplit: '50-50',
+                secondSplit: '75-25',
+                isViewOnly: true
+              });
+            });
+        });
     });
   });
 };

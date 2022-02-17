@@ -7,15 +7,15 @@ import ExportPage from '../../../page-objects/export-page';
 
 export const addHITActivity = years => {
   let budgetPage;
-  let exportPage;
   let fillOutActivityPage;
+  let exportPage;
 
   let activityData;
 
   before(() => {
     budgetPage = new BudgetPage();
-    exportPage = new ExportPage();
     fillOutActivityPage = new FillOutActivityPage();
+    exportPage = new ExportPage();
 
     cy.fixture('HIT-activity-template.json').then(data => {
       activityData = data;
@@ -128,11 +128,16 @@ export const addHITActivity = years => {
         level: 2
       }).should('exist');
 
+      cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
+        'exist'
+      );
+
       fillOutActivityPage.checkBudgetAndFFPTables({
         budgetData: activityData.budgetAndFFPTables,
         years,
         firstSplit: '50-50',
-        secondSplit: '75-25'
+        secondSplit: '75-25',
+        isViewOnly: false
       });
 
       const {
@@ -183,50 +188,49 @@ export const addHITActivity = years => {
               });
 
               // Check Outcomes and Milestones
-              const outcomeVar = activityData.outcomes;
-              const milestoneVar = activityData.milestones;
-
               Cypress._.times(2, i => {
                 exportPage.checkOutcomes({
-                  outcome: outcomeVar.names[i],
-                  metrics: outcomeVar.metrics[i]
+                  outcome: activityData.outcomes.names[i],
+                  metrics: activityData.outcomes.metrics[i]
                 });
 
                 exportPage.checkMilestones({
-                  milestone: milestoneVar.names[i],
-                  milestoneCompletionDate: milestoneVar.dates[i].join('/')
+                  milestone: activityData.milestones.names[i],
+                  milestoneCompletionDate:
+                    activityData.milestones.dates[i].join('/')
                 });
               });
 
               // Check State Staff and Expenses
-              const staffVar = activityData.staff;
-              const expensesVar = activityData.expenses;
-
               exportPage.checkStateStaffNew({
-                staff: staffVar,
+                staff: activityData.staff,
                 years
               });
               exportPage.checkStateExpensesNew({
-                expenses: expensesVar,
+                expenses: activityData.expenses,
                 years
               });
 
               // Check Private Contractors
-              const contractors = activityData.privateContractors;
-
               exportPage.checkPrivateContractorCostsNew({
-                contractors,
+                contractors: activityData.privateContractors,
                 years
               });
 
               // Check Cost Allocation
-              const costAllocationVar = activityData.costAllocation;
               exportPage.checkCostAllocationAndOtherFundingNew({
                 years,
-                costAllocation: costAllocationVar
+                costAllocation: activityData.costAllocation
               });
 
-              // Check Budget and FFP have to add test variables to the export view page for this section
+              // Check Budget and FFP
+              fillOutActivityPage.checkBudgetAndFFPTables({
+                budgetData: activityData.budgetAndFFPTables,
+                years,
+                firstSplit: '50-50',
+                secondSplit: '75-25',
+                isViewOnly: true
+              });
             });
         });
     });

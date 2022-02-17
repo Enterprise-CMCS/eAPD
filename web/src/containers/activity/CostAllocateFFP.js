@@ -144,7 +144,7 @@ const CostAllocateFFP = ({
           {isViewOnly && (
             <table
               className="budget-table activity-budget-table"
-              data-cy="FFPActivityTable"
+              data-cy="FFPActivityTotalCostTable"
             >
               <tbody>
                 <tr className="budget-table--subtotal budget-table--row__header">
@@ -162,7 +162,7 @@ const CostAllocateFFP = ({
                   </td>
                 </tr>
                 <tr className="budget-table--subtotal budget-table--row__highlight">
-                  <td>Total Computable Medicaid Cost</td>
+                  <td>Activity Total Computable Medicaid Cost</td>
                   <td colSpan="4" />
                   <td className="budget-table--number">
                     <Dollars>{years[ffy].medicaidShare}</Dollars>

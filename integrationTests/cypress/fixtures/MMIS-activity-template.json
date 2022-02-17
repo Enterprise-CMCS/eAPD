@@ -215,6 +215,23 @@
         ["$4,502", "$4,502", "$4,502", "$4,502", "$18,008"],
         ["$41,165", "$41,165", "$41,165", "$41,164", "$164,659"]
       ]
+    ],
+
+    "activityTotalCostTableExportView": [
+      [
+        ["$247,662"],
+        ["Other Funding", "$4,000"],
+        ["Activity Total Computable Medicaid Cost", "$243,662"],
+        ["Federal Share", "$243,662", "90%", "$219,296"],
+        ["State Share", "$243,662", "10%", "$24,366"]
+      ],
+      [
+        ["$338,318"],
+        ["Other Funding", "$9,000"],
+        ["Activity Total Computable Medicaid Cost", "$329,318"],
+        ["Federal Share", "$329,318", "50%", "$164,659"],
+        ["State Share", "$329,318", "50%", "$164,659"]
+      ]
     ]
   },
 
