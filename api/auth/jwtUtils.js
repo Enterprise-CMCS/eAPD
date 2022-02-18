@@ -8,7 +8,8 @@ const {
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
   getExpiredUserAffiliations: actualGetExpiredUserAffiliations,
-  getAffiliationsByState: actualGetAffiliationsByState
+  getAffiliationsByState: actualGetAffiliationsByState,
+  auditUserLogin: actualAuditUserLogin
 } = require('../db/auth');
 const {
   updateAuthAffiliation: actualUpdateAuthAffiliation
@@ -119,6 +120,7 @@ const exchangeToken = async (
   req,
   { extractor = jwtExtractor, verifier = verifyJWT, getUser = getUserByID } = {}
 ) => {
+  console.log('exchangeToken');
   const oktaJWT = extractor(req);
   // verify the token using the okta verifier.
   const claims = oktaJWT ? await verifyWebToken(oktaJWT, { verifier }) : false;
@@ -126,6 +128,7 @@ const exchangeToken = async (
 
   const { uid, ...additionalValues } = claims;
   const user = await getUser(uid, true, { additionalValues });
+  console.log({ user, uid, ...additionalValues });
   user.jwt = sign(user);
   return user;
 };
@@ -139,6 +142,7 @@ const changeState = async (
     getAffiliatedStates_ = actualGetUserAffiliatedStates,
     getAffiliationsByState_ = actualGetAffiliationsByState,
     updateAuthAffiliation_ = actualUpdateAuthAffiliation
+    // auditUserLogin_ = actualAuditUserLogin
   } = {}
 ) => {
   const stateAffiliation = await getAffiliationsByState_(user.id, stateId);
@@ -163,6 +167,8 @@ const changeState = async (
   newUser.permissions = [{ [stateId]: permissions[stateId] }];
   const affiliations = await getAffiliatedStates_(user.id);
   newUser.states = affiliations;
+
+  // auditUserLogin_(stateAffiliation);
 
   return sign(newUser, {});
 };

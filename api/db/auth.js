@@ -5,24 +5,16 @@ const getAuthActivities = async ({ db = knex } = {}) =>
   db('auth_activities').select();
 
 const getAuthActivitiesByIDs = async (ids, { db = knex } = {}) =>
-  db('auth_activities')
-    .whereIn('id', ids)
-    .select();
+  db('auth_activities').whereIn('id', ids).select();
 
 const getAuthRoleByID = async (roleID, { db = knex } = {}) =>
-  db('auth_roles')
-    .where('id', roleID)
-    .first();
+  db('auth_roles').where('id', roleID).first();
 
 const getAuthRoleByName = async (roleName, { db = knex } = {}) =>
-  db('auth_roles')
-    .where('name', roleName)
-    .first();
+  db('auth_roles').where('name', roleName).first();
 
 const getActiveAuthRoles = async ({ db = knex } = {}) => {
-  const roles = await db('auth_roles')
-    .where('isActive', true)
-    .select();
+  const roles = await db('auth_roles').where('isActive', true).select();
   await Promise.all(
     roles.map(async role => {
       const activityIDs = (
@@ -35,9 +27,7 @@ const getActiveAuthRoles = async ({ db = knex } = {}) => {
         .map(({ activity_id }) => activity_id);
 
       const activities = (
-        await db('auth_activities')
-          .whereIn('id', activityIDs)
-          .select('name')
+        await db('auth_activities').whereIn('id', activityIDs).select('name')
       ).map(({ name }) => name);
 
       // eslint-disable-next-line no-param-reassign
@@ -58,7 +48,7 @@ const getRolesAndActivities = async ({ db = knex } = {}) =>
     .select({
       id: 'roles.id',
       name: 'roles.name',
-      activities: db.raw('array_agg(activities.name)'),
+      activities: db.raw('array_agg(activities.name)')
     })
     .from({ rolesActivities: 'auth_role_activity_mapping' })
     .join(
@@ -81,26 +71,28 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
     .select('state_id', 'status')
     .from('auth_affiliations')
     .where('user_id', userId)
-    .then(rows => rows.reduce( (states, row) => {
-      // eslint-disable-next-line no-param-reassign
-      states[row.state_id] = row.status
-      return states
-    }, {}));
+    .then(rows =>
+      rows.reduce((states, row) => {
+        // eslint-disable-next-line no-param-reassign
+        states[row.state_id] = row.status;
+        return states;
+      }, {})
+    );
 
 /**
  * Retrieves all affiliations tied to a user
  * @async
  * @function
- * @returns {Array} 
+ * @returns {Array}
  */
-const getExpiredUserAffiliations = async (userId, { db = knex } = {}) => 
+const getExpiredUserAffiliations = async (userId, { db = knex } = {}) =>
   db('auth_affiliations')
     .select()
     .where('user_id', userId)
     .then(rows => {
-      const expiredRows = rows.filter(row => isPast(row.expires_at))
+      const expiredRows = rows.filter(row => isPast(row.expires_at));
       return expiredRows;
-    })
+    });
 
 /**
  * Retrieves a single affiliation by user per state
@@ -108,7 +100,7 @@ const getExpiredUserAffiliations = async (userId, { db = knex } = {}) =>
  * @function
  * @returns {Object}
  */
-const getAffiliationsByState = async (userId, stateId, { db = knex } = {}) => 
+const getAffiliationsByState = async (userId, stateId, { db = knex } = {}) =>
   db('auth_affiliations')
     .where('user_id', userId)
     .andWhere('state_id', stateId)
@@ -123,7 +115,7 @@ const getAffiliationsByState = async (userId, stateId, { db = knex } = {}) =>
  */
 const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
   const roles = (await getRolesAndActivities()) || [];
-  
+
   return db
     .select({
       stateId: 'state_id',
@@ -142,6 +134,20 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
     );
 };
 
+/**
+ * Retrieves a single affiliation by user per state
+ * @async
+ * @function
+ * @returns {Object}
+ */
+const auditUserLogin = async (data, { db = knex } = {}) =>
+  db('okta_user_audit').insert({
+    user_id: data.user_id,
+    state_id: data.state_id,
+    role_id: data.role_id,
+    affiliation_status: data.status
+  });
+
 module.exports = {
   getAuthActivities,
   getAuthActivitiesByIDs,
@@ -152,5 +158,6 @@ module.exports = {
   getUserAffiliatedStates,
   getUserPermissionsForStates,
   getExpiredUserAffiliations,
-  getAffiliationsByState
+  getAffiliationsByState,
+  auditUserLogin
 };
