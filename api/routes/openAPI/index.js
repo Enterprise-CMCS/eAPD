@@ -188,9 +188,19 @@ module.exports = {
                     description:
                       'Description of the cost allocation methodology'
                   },
-                  otherSources: {
-                    type: 'string',
-                    description: 'Description of other funding sources'
+                  years: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          otherSources: {
+                            type: 'string',
+                            description: 'Description of other funding sources'
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },

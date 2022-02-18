@@ -4,7 +4,9 @@ import { push } from 'connected-react-router';
 
 import { plain as ExportAndSubmit, mapDispatchToProps } from './ApdExport';
 
-const useParams = jest.fn().mockReturnValue({ apdId: 123 });
+const useParams = jest
+  .fn()
+  .mockReturnValue({ apdId: '0123456789abcdef01234567' });
 
 describe('apd export component', () => {
   test('renders correctly', () => {

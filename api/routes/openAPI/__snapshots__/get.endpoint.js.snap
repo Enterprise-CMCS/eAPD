@@ -113,9 +113,19 @@ Object {
                       "description": "Description of the cost allocation methodology",
                       "type": "string",
                     },
-                    "otherSources": Object {
-                      "description": "Description of other funding sources",
-                      "type": "string",
+                    "years": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "properties": Object {
+                            "otherSources": Object {
+                              "description": "Description of other funding sources",
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                      },
                     },
                   },
                   "type": "object",
@@ -721,13 +731,16 @@ Object {
             "description": "The APD was archived",
           },
           "400": Object {
-            "description": "Invalid request, such as requesting to archive an APD that is not editable",
+            "description": "The apd is not in draft",
           },
           "401": Object {
             "description": "The user is not logged in",
           },
           "403": Object {
             "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable",
           },
         },
         "security": Array [
@@ -875,6 +888,9 @@ Object {
           "403": Object {
             "description": "The apd ID does not match any known apds for the user",
           },
+          "404": Object {
+            "description": "The apd does not exist",
+          },
         },
         "security": Array [
           Object {
@@ -937,14 +953,14 @@ Object {
             },
             "description": "The status of the event being logged",
           },
-          "400": Object {
-            "description": "The apd ID does not match any known apds",
-          },
           "401": Object {
             "description": "The user is not logged in",
           },
           "403": Object {
             "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds",
           },
         },
         "security": Array [
@@ -1018,6 +1034,9 @@ Object {
           },
           "403": Object {
             "description": "The apd ID does not match any known apds for the user",
+          },
+          "404": Object {
+            "description": "The apd ID does not match any known apds",
           },
           "415": Object {
             "description": "The file is not a valid format",

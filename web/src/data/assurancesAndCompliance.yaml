@@ -1,3 +1,5 @@
+# if the title or number of regs in any section change, you MUST update
+# the regsGenerator in api/routes/apds/post.data.js
 procurement:
   42 CFR Part 495.348: https://www.ecfr.gov/cgi-bin/text-idx?SID=60f02a079c6f091871999372387e5750&mc=true&node=se42.5.495_1348&rgn=div8
   SMM Section 11267: https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html

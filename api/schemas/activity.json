@@ -44,12 +44,7 @@
       }
     },
     "fundingSource": {
-      "enum": [
-        "HIE",
-        "HIT",
-        "MMIS",
-        false
-      ]
+      "enum": ["HIE", "HIT", "MMIS", null]
     },
     "name": {
       "type": "string"
@@ -71,10 +66,7 @@
       "items": {
         "$id": "#/properties/activities/items/properties/schedule/items",
         "type": "object",
-        "required": [
-          "endDate",
-          "milestone"
-        ],
+        "required": ["endDate", "milestone"],
         "properties": {
           "endDate": {
             "$id": "#/properties/activities/items/properties/schedule/items/properties/endDate",
@@ -89,10 +81,7 @@
     },
     "standardsAndConditions": {
       "type": "object",
-      "required": [
-        "doesNotSupport",
-        "supports"
-      ],
+      "required": ["doesNotSupport", "supports"],
       "properties": {
         "doesNotSupport": {
           "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/doesNotSupport",
@@ -119,20 +108,12 @@
         "^[0-9]{4}$": {
           "$id": "#/properties/activities/items/properties/quarterlyFFP/year",
           "type": "object",
-          "required": [
-            "1",
-            "2",
-            "3",
-            "4"
-          ],
+          "required": ["1", "2", "3", "4"],
           "patternProperties": {
             "^(1|2|3|4)$": {
               "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter",
               "type": "object",
-              "required": [
-                "contractors",
-                "inHouse"
-              ],
+              "required": ["contractors", "inHouse"],
               "properties": {
                 "contractors": {
                   "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/contractors",
