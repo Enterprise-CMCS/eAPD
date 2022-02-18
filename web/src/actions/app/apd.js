@@ -58,7 +58,7 @@ export const saveApd = () => (dispatch, getState) => {
     return axios
       .patch(`/apds/${apdID}`, patches)
       .then(res => {
-        dispatch({ type: SAVE_APD_SUCCESS, data: res.data.apd });
+        dispatch({ type: SAVE_APD_SUCCESS, data: res.data.apd, metadata: res.data.apd._doc.metadata });
         return res.data.apd;
       })
       .catch(error => {

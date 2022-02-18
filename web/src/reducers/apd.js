@@ -444,6 +444,7 @@ const reducer = (state = initialState, action) => {
         },
         data: {
           ...state.data,
+          metadata: action.metadata,
           created: getHumanDatestamp(action.data.created),
           updated: getHumanTimestamp(action.data.updated)
         }

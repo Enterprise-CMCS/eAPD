@@ -78,8 +78,6 @@ const patchAPD = async (
 
   const validate = newDocForValidation.validateSync();
 
-  console.log("validate 123", validate);
-
   const metadata = {};
 
   // Total validation errors added to metadata
@@ -143,6 +141,7 @@ const updateAPDDocument = async (
     });
     try {
       updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
+      console.log("updateDoc", updatedDoc)
     } catch (err) {
       console.log("error patching APD", err);
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
