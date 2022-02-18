@@ -110,6 +110,10 @@ semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
 restorecon -Rv /app/web
 setsebool -P httpd_can_network_connect 1
 
+# Restart Nginx
+systemctl enable nginx
+systemctl restart nginx
+
 # Restart New Relic Infrastructure Monitor
 systemctl enable newrelic-infra
 systemctl start newrelic-infra
