@@ -9,7 +9,6 @@ curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infra
 yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
 yum install newrelic-infra -y
 
-
 # Add a user group for the default user, and make it the owner of the /app
 # directory.  Unzip stuff there and then set permissions.
 groupadd eapd
