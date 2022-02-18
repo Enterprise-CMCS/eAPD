@@ -92,6 +92,10 @@ systemctl daemon-reload
 systemctl enable mongod
 systemctl start mongod
 
+# Restart Nginx
+systemctl enable nginx
+systemctl restart nginx
+
 # Test to see the command that is getting built for pulling the Git Branch
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the

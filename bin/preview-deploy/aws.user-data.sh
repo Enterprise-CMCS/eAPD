@@ -101,6 +101,15 @@ E_USER
 
 sudo yum remove -y gcc-c++
 
+# SELinux context so Nginx can READ the files in /app/web
+mv /home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf
+chown -R nginx /app/web
+semanage fcontext -a -t httpd_sys_content_t /etc/nginx/nginx.conf
+restorecon -Rv /etc/nginx/nginx.conf
+semanage fcontext -a -t httpd_sys_content_t "/app/web(/.*)?"
+restorecon -Rv /app/web
+setsebool -P httpd_can_network_connect 1
+
 # Restart New Relic Infrastructure Monitor
 systemctl enable newrelic-infra
 systemctl start newrelic-infra
