@@ -34,7 +34,7 @@ touch /app/api/logs/cms-hitech-apd-api.logs
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
-npm ci
+yes | npm ci
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" npm run build
 mv dist/* /app/web
 cd ~
