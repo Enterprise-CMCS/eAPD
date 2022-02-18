@@ -693,7 +693,7 @@ class ExportPage {
       .next()
       .should(
         'have.text',
-        `Total Computable Medicaid Cost$${addCommas(
+        `Activity Total Computable Medicaid Cost$${addCommas(
           totalComputableMedicaidCost
         )}`
       )
