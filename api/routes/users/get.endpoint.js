@@ -15,9 +15,14 @@ const get = (id = '') => {
 };
 
 describe('users endpoint', () => {
-  const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  describe('users endpoint | GET /users', () => {
+    const db = getDB();
+    beforeAll(async () => {
+      await setupDB(db);
+    });
+    afterAll(async () => {
+      await teardownDB(db);
+    });
 
   describe('users endpoint | GET /users', () => {
     unauthenticatedTest('get', url);
@@ -30,6 +35,14 @@ describe('users endpoint', () => {
   });
 
   describe('users endpoint | GET /users/:userID', () => {
+    const db = getDB();
+    beforeAll(async () => {
+      await setupDB(db);
+    });
+    afterAll(async () => {
+      await teardownDB(db);
+    });
+
     unauthenticatedTest('get', `${url}/some-id`);
     unauthorizedTest('get', `${url}/some-id`);
 

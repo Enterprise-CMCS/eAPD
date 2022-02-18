@@ -2,18 +2,9 @@ const mongoose = require('mongoose');
 
 const quarterlyFFP = new mongoose.Schema(
   {
-    combined: {
-      type: Number,
-      default: 0
-    },
-    contractors: {
-      type: Number,
-      default: 0
-    },
-    inHouse: {
-      type: Number,
-      default: 0
-    }
+    combined: Number,
+    contractors: Number,
+    inHouse: Number
   },
   { _id: false }
 );
@@ -32,22 +23,10 @@ const federalCitation = new mongoose.Schema(
 
 const incentivePayment = new mongoose.Schema(
   {
-    1: {
-      type: Number,
-      default: 0
-    },
-    2: {
-      type: Number,
-      default: 0
-    },
-    3: {
-      type: Number,
-      default: 0
-    },
-    4: {
-      type: Number,
-      default: 0
-    }
+    1: Number,
+    2: Number,
+    3: Number,
+    4: Number
   },
   { _id: false }
 );
@@ -87,14 +66,8 @@ const apdSchema = new mongoose.Schema({
               type: Map,
               of: new mongoose.Schema(
                 {
-                  hours: {
-                    type: Number,
-                    default: 0
-                  },
-                  rate: {
-                    type: Number,
-                    default: 0
-                  }
+                  hours: Number,
+                  rate: Number
                 },
                 { _id: false }
               )
@@ -103,10 +76,7 @@ const apdSchema = new mongoose.Schema({
           },
           name: String,
           start: Date,
-          totalCost: {
-            type: Number,
-            default: 0
-          },
+          totalCost: Number,
           years: {
             type: Map,
             of: Number
@@ -118,19 +88,10 @@ const apdSchema = new mongoose.Schema({
         of: new mongoose.Schema(
           {
             ffp: {
-              federal: {
-                type: Number,
-                default: 0
-              },
-              state: {
-                type: Number,
-                default: 0
-              }
+              federal: Number,
+              state: Number
             },
-            other: {
-              type: Number,
-              default: 0
-            }
+            other: Number
           },
           { _id: false }
         )
@@ -198,14 +159,8 @@ const apdSchema = new mongoose.Schema({
             type: Map,
             of: new mongoose.Schema(
               {
-                amt: {
-                  type: Number,
-                  default: 0
-                },
-                perc: {
-                  type: Number,
-                  default: 0
-                }
+                amt: Number,
+                perc: Number
               },
               { _id: false }
             )
@@ -260,18 +215,12 @@ const apdSchema = new mongoose.Schema({
       isPrimary: Boolean,
       fte: {
         type: Map,
-        of: {
-          type: Number,
-          default: 0
-        }
+        of: Number
       },
       hasCosts: Boolean,
       costs: {
         type: Map,
-        of: {
-          type: Number,
-          default: 0
-        }
+        of: Number
       }
     }
   ],
@@ -283,45 +232,21 @@ const apdSchema = new mongoose.Schema({
     of: new mongoose.Schema(
       {
         hithie: {
-          federalActual: {
-            type: Number,
-            default: 0
-          },
-          totalApproved: {
-            type: Number,
-            default: 0
-          }
+          federalActual: Number,
+          totalApproved: Number
         },
         mmis: {
           50: {
-            federalActual: {
-              type: Number,
-              default: 0
-            },
-            totalApproved: {
-              type: Number,
-              default: 0
-            }
+            federalActual: Number,
+            totalApproved: Number
           },
           75: {
-            federalActual: {
-              type: Number,
-              default: 0
-            },
-            totalApproved: {
-              type: Number,
-              default: 0
-            }
+            federalActual: Number,
+            totalApproved: Number
           },
           90: {
-            federalActual: {
-              type: Number,
-              default: 0
-            },
-            totalApproved: {
-              type: Number,
-              default: 0
-            }
+            federalActual: Number,
+            totalApproved: Number
           }
         }
       },

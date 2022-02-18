@@ -7,12 +7,14 @@ const {
   unauthorizedTest
 } = require('../../../endpoint-tests/utils');
 
-describe('auth roles endpoint get endpoint', () => {
-  describe('GET /auth/roles', () => {
-    const db = getDB();
-    beforeAll(() => setupDB(db));
-    afterAll(() => teardownDB(db));
-    const url = '/auth/roles';
+describe('auth roles endpoint | GET /auth/roles', () => {
+  const db = getDB();
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
 
     unauthenticatedTest('get', url);
     unauthorizedTest('get', url);
@@ -21,8 +23,35 @@ describe('auth roles endpoint get endpoint', () => {
       const api = login('state-admin');
       const response = await api.get(url);
 
-      expect(response.status).toEqual(200);
-      expect(response.data).toMatchSnapshot();
-    });
+  it('when authenticated', async () => {
+    const api = login();
+    const response = await api.get(url);
+
+    expect(response.status).toEqual(200);
+    expect(response.data).toMatchSnapshot();
+  });
+});
+
+describe('state switch endpoint | GET /auth/state/:stateId', () => {
+  const db = getDB();
+  beforeAll(async () => {
+    await setupDB(db);
+  });
+  afterAll(async () => {
+    await teardownDB(db);
+  });
+
+  const url = '/auth/state';
+
+  unauthenticatedTest('get', `${url}/ak`);
+  unauthorizedTest('get', `${url}/ak`);
+
+  it('when authenticated', async () => {
+    const api = login('all-permissions');
+    const response = await api.get(`${url}/mn`);
+
+    expect(response.status).toEqual(200);
+    const claims = await actualVerifyEAPDToken(response.data.jwt);
+    expect(claims.state).toMatchSnapshot();
   });
 });

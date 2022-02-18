@@ -8,8 +8,9 @@ const setup = () =>
     logger.verbose('Setting up MongoDB connection');
     const connectionString =
       process.env.MONGO_URL || 'mongodb://mongo:cms@mongo:27017/eapd';
-    const dbName = process.env.MONGO_DATABASE || 'eapd';
-    mongoose
+    const dbName =
+      process.env.MONGO_DATABASE || connectionString.split('/').pop();
+    return mongoose
       .connect(connectionString, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -18,7 +19,7 @@ const setup = () =>
       })
       .then(() => {
         logger.verbose('MongoDB connected');
-        resolve();
+        resolve(mongoose.connection);
       })
       .catch(err => {
         logger.error(`Error in MongoDB connection: ${err}`);

@@ -1624,89 +1624,10 @@ Object {
     ],
     "created": "1865-12-06T00:00:00.000Z",
     "federalCitations": Object {
-      "procurement": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.348",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.613",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 75.326",
-        },
-      ],
-      "recordsAccess": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.350",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.352",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.346",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 433.112(b)",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR Part 95.615",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-      ],
-      "security": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 164 Security and Privacy",
-        },
-      ],
-      "softwareRights": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 495.360",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.617",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 431.300",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 433.112",
-        },
-      ],
+      "procurement": Array [],
+      "recordsAccess": Array [],
+      "security": Array [],
+      "softwareRights": Array [],
     },
     "id": "eeac3c9865059f26eccb0600",
     "incentivePayments": Object {
@@ -3549,89 +3470,10 @@ Object {
     ],
     "created": "1865-12-06T00:00:00.000Z",
     "federalCitations": Object {
-      "procurement": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.348",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.613",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 75.326",
-        },
-      ],
-      "recordsAccess": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.350",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.352",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.346",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 433.112(b)",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR Part 95.615",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-      ],
-      "security": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 164 Security and Privacy",
-        },
-      ],
-      "softwareRights": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 495.360",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.617",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 431.300",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 433.112",
-        },
-      ],
+      "procurement": Array [],
+      "recordsAccess": Array [],
+      "security": Array [],
+      "softwareRights": Array [],
     },
     "id": "eeac3c9865059f26eccb0600",
     "incentivePayments": Object {
@@ -5467,89 +5309,10 @@ Object {
     ],
     "created": "1865-12-06T00:00:00.000Z",
     "federalCitations": Object {
-      "procurement": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.348",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.613",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 75.326",
-        },
-      ],
-      "recordsAccess": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.350",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.352",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.346",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 433.112(b)",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR Part 95.615",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-      ],
-      "security": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 164 Security and Privacy",
-        },
-      ],
-      "softwareRights": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 495.360",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.617",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 431.300",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 433.112",
-        },
-      ],
+      "procurement": Array [],
+      "recordsAccess": Array [],
+      "security": Array [],
+      "softwareRights": Array [],
     },
     "id": "eeac3c9865059f26eccb0600",
     "incentivePayments": Object {
@@ -7392,89 +7155,10 @@ Object {
     ],
     "created": "1865-12-06T00:00:00.000Z",
     "federalCitations": Object {
-      "procurement": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.348",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.613",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 75.326",
-        },
-      ],
-      "recordsAccess": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.350",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.352",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.346",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 433.112(b)",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR Part 95.615",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-      ],
-      "security": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 164 Security and Privacy",
-        },
-      ],
-      "softwareRights": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 495.360",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.617",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 431.300",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 433.112",
-        },
-      ],
+      "procurement": Array [],
+      "recordsAccess": Array [],
+      "security": Array [],
+      "softwareRights": Array [],
     },
     "id": "eeac3c9865059f26eccb0600",
     "incentivePayments": Object {
@@ -9306,89 +8990,10 @@ Object {
     ],
     "created": "1865-12-06T00:00:00.000Z",
     "federalCitations": Object {
-      "procurement": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.348",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.613",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 75.326",
-        },
-      ],
-      "recordsAccess": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.350",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.352",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 495.346",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 433.112(b)",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR Part 95.615",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "SMM Section 11267",
-        },
-      ],
-      "security": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 164 Security and Privacy",
-        },
-      ],
-      "softwareRights": Array [
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR 495.360",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "45 CFR 95.617",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 431.300",
-        },
-        Object {
-          "checked": null,
-          "explanation": "",
-          "title": "42 CFR Part 433.112",
-        },
-      ],
+      "procurement": Array [],
+      "recordsAccess": Array [],
+      "security": Array [],
+      "softwareRights": Array [],
     },
     "id": "eeac3c9865059f26eccb0600",
     "incentivePayments": Object {

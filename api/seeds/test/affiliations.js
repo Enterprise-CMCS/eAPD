@@ -9,9 +9,6 @@ const { id: fedAdminRoleId } = roles.find(
 const { id: stateAdminRoleId } = roles.find(
   role => role.name === 'eAPD State Admin'
 );
-const { id: stateStaffRoleId } = roles.find(
-  role => role.name === 'eAPD State Staff'
-);
 const adminAffiliations = states
   .filter(state => state.id !== 'ak')
   .map(state => ({

@@ -5,11 +5,8 @@
   "_comment": {
     "1005092": {
       "advisory": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
-      "modules": "yargs-parser",
-      "cvss-score": "5.3 moderate",
-      "affects": [
-        "migrate-mongoose@4.0.0 - used during migration process, but not active in production"
-      ]
+      "module": "yargs-parser",
+      "affects": ["migrate-mongoose@4.0.0 - not used in production"]
     }
   },
   "registry": "https://registry.npmjs.org"

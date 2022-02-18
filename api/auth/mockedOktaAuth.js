@@ -54,16 +54,14 @@ const allPermissionsAndState = {
 
 const mockOktaClient = {
   listUsers: () => {
-    return new Promise(resolve => {
-      resolve([
-        noPermissions,
-        allPermissions,
-        allPermissionsNoState,
-        allPermissionsAndState,
-        fedAdmin,
-        stateAdmin
-      ]);
-    });
+    return Promise.resolve([
+      noPermissions,
+      allPermissions,
+      allPermissionsNoState,
+      allPermissionsAndState,
+      fedAdmin,
+      stateAdmin
+    ]);
   },
   getUser: id => {
     if (id === 'no-permissions') {
@@ -82,13 +80,9 @@ const mockOktaClient = {
       return Promise.resolve(fedAdmin);
     }
     if (id === 'state-admin') {
-      return new Promise(resolve => {
-        resolve(stateAdmin);
-      });
+      return Promise.resolve(stateAdmin);
     }
-    return new Promise(resolve => {
-      resolve(allPermissionsAndState);
-    });
+    return Promise.resolve(allPermissionsAndState);
   }
 };
 
@@ -135,17 +129,7 @@ const mockVerifyJWT = token => {
       uid: 'state-admin'
     });
   }
-  if (token === 'state-admin') {
-    return new Promise(resolve => {
-      resolve({
-        sub: 'stateadmin@email.com',
-        uid: 'state-admin'
-      });
-    });
-  }
-  return new Promise(resolve => {
-    resolve(false);
-  });
+  return Promise.resolve(false);
 };
 
 module.exports = {

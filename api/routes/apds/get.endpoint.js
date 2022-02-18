@@ -9,9 +9,14 @@ const {
 const { mnAPDId, akAPDId, badAPDId } = require('../../seeds/test/apds');
 
 describe('APD endpoint', () => {
-  const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  describe('List APDs endpoint | GET /apds', () => {
+    const db = getDB();
+    beforeAll(async () => {
+      await setupDB(db);
+    });
+    afterAll(async () => {
+      await teardownDB(db);
+    });
 
   describe('List APDs endpoint | GET /apds', () => {
     const url = '/apds';
@@ -29,6 +34,14 @@ describe('APD endpoint', () => {
   });
 
   describe('Get specific APD | GET /apds/:id', () => {
+    const db = getDB();
+    beforeAll(async () => {
+      await setupDB(db);
+    });
+    afterAll(async () => {
+      await teardownDB(db);
+    });
+
     const url = id => `/apds/${id}`;
 
     unauthenticatedTest('get', url(mnAPDId));
@@ -43,7 +56,7 @@ describe('APD endpoint', () => {
 
       describe('as a user with a state', () => {
         let api;
-        beforeAll(async () => {
+        beforeAll(() => {
           api = login('state-admin');
         });
 

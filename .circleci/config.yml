@@ -316,8 +316,13 @@ jobs:
       - run:
           name: validate
           command: |
+<<<<<<< HEAD
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker create -v /openapi --name openapi cimg/node:16.13.2 /bin/true
+=======
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            docker create -v /openapi --name openapi alpine:3 /bin/true
+>>>>>>> tforkner/3100-move-apds-to-mongodb
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
 

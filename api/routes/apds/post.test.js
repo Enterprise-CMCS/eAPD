@@ -71,6 +71,34 @@ tap.test('apds POST endpoint', async endpointTest => {
       test.ok(next.calledWith(error), 'HTTP status set to 400');
     });
 
+<<<<<<< HEAD
+=======
+    // tests.test(
+    //   'sends a 400 if the newly-generated APD fails schema validation',
+    //   async test => {
+    //     getStateProfile.resolves({ medicaidDirector: { name: 3 } });
+    //     await handler(req, res, next);
+
+    //     test.ok(
+    //       next.calledWith({
+    //         status: 400,
+    //         message: [
+    //           {
+    //             keyword: 'type',
+    //             instancePath: '/stateProfile/medicaidDirector/name',
+    //             schemaPath:
+    //               'stateProfile.json/properties/medicaidDirector/properties/name/type',
+    //             params: { type: 'string' },
+    //             message: 'must be string'
+    //           }
+    //         ]
+    //       }),
+    //       'HTTP status set to 400'
+    //     );
+    //   }
+    // );
+
+>>>>>>> tforkner/3100-move-apds-to-mongodb
     tests.test('sends back the new APD if everything works', async test => {
       const expectedApd = {
         activities: [

@@ -85,10 +85,23 @@ export const selectApd =
     dispatch({ type: SELECT_APD_REQUEST });
     dispatch(ariaAnnounceApdLoading());
 
-    return axios
-      .get(`/apds/${id}`)
-      .then(req => {
-        dispatch({ type: SELECT_APD_SUCCESS, apd: req.data });
+  return axios
+    .get(`/apds/${id}`)
+    .then(req => {
+      dispatch({ type: SELECT_APD_SUCCESS, apd: req.data });
+      dispatch({
+        type: APD_ACTIVITIES_CHANGE,
+        activities: req.data.activities
+      });
+
+      // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
+      // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
+      // values using an EDIT_APD action. That way the initial values get saved back to the API.
+      if (
+        Object.values(req.data.federalCitations).every(
+          regs => regs.length === 0
+        )
+      ) {
         dispatch({
           type: APD_ACTIVITIES_CHANGE,
           activities: req.data.activities

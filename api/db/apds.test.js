@@ -273,10 +273,6 @@ tap.test('database wrappers / apds', async apdsTests => {
       test.equal(updatedAt, '1904-10-03T00:00:00.000Z');
       test.ok(stateUpdated, 'state was updated');
     });
-
-    updateAPDDocumentTests.afterEach(() => {
-      clock.restore();
-    });
   });
 
   apdsTests.teardown(async () => {
@@ -284,6 +280,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       await deleteAPD(id);
     }
     await mongo.teardown();
+    clock.restore();
     clockStub.restore();
   });
 });

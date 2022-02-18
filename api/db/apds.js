@@ -89,8 +89,14 @@ const updateAPDDocument = async (
 
       if (err?.errors) {
         Object.keys(err.errors).forEach(key => {
-          const { name, message, stringValue, value, kind, valueType } =
-            err.errors[key];
+          const {
+            name,
+            message,
+            stringValue,
+            value,
+            kind,
+            valueType
+          } = err.errors[key];
 
           // convert error path from mongo style to json patch style
           const dataPath = `/${key.replace(/\./g, '/')}`;
