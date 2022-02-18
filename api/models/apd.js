@@ -172,7 +172,13 @@ const apdSchema = new mongoose.Schema({
       ],
       fundingSource: {
         type: String,
-        enum: ['HIE', 'HIT', 'MMIS', null]
+        enum: ['HIE', 'HIT', 'MMIS', null],
+        validate: {
+          validator(v) {
+            return v !== null;
+          },
+          message: "Please select a funding source"
+        }
       },
       name: String,
       outcomes: [
@@ -266,7 +272,13 @@ const apdSchema = new mongoose.Schema({
     {
       _id: false,
       name: {
-        type: String
+        type: String,
+        validate: {
+          validator: v => {
+            return v.trim().length > 0;
+          },
+          message: 'Provide a key personnel name'
+        }
       },
       position: String,
       email: String,
@@ -344,7 +356,12 @@ const apdSchema = new mongoose.Schema({
   previousActivitySummary: String,
   programOverview: {
     type: String,
-    minLength: 1
+    validate: {
+      validator: v => {
+        return v.trim().length > 0;
+      },
+      message: 'Please provide a program overview'
+    }
   },
   stateProfile: {
     medicaidDirector: {

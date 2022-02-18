@@ -11,6 +11,8 @@ const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
 
   const validate = newApd.validateSync();
 
+  console.log("validate", validate);
+
   const metadata = {};
 
   // Total validation errors added to metadata
@@ -68,13 +70,43 @@ const patchAPD = async (
   const apdJSON = JSON.parse(JSON.stringify(apdDoc));
   // apply the patches to the apd
   const { newDocument } = applyPatch(apdJSON, patch);
+
+  // check for new validation errors
+  // only way I could think of is to cast newDocument as a mongoose document
+  // so we could perform the validation manually
+  const newDocForValidation = new APD(newDocument);
+
+  const validate = newDocForValidation.validateSync();
+
+  console.log("validate 123", validate);
+
+  const metadata = {};
+
+  // Total validation errors added to metadata
+  metadata.incomplete = Object.keys(validate.errors).length;
+
+  // Add each validation error as an object
+  // Todo: need to figure out how to group by apd sections
+  // Todo: need to get a count per section
+  const todoList = Object.keys(validate.errors).map(key => {
+    return {
+      key,
+      name: validate.errors[key].path,
+      description: validate.errors[key].message
+    }
+  })
+
+  metadata.todo = todoList;
+
+  newDocForValidation.metadata = metadata; 
+
   // update the apd in the database
-  await APD.replaceOne({ _id: id, stateId }, newDocument, {
+  await APD.replaceOne({ _id: id, stateId }, newDocForValidation, {
     multipleCastError: true,
-    runValidators: true
+    runValidators: false
   });
   // return the updated apd
-  return newDocument;
+  return newDocForValidation;
 };
 
 // Ty note: my understanding of how this works w.r.t. the validations:
@@ -112,6 +144,7 @@ const updateAPDDocument = async (
     try {
       updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
     } catch (err) {
+      console.log("error patching APD", err);
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
 
       // convert patch array to a map to make it easier to update the error cases
