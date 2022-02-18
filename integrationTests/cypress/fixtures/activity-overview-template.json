@@ -21,6 +21,16 @@
       "detailedDescription": "Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the HIT Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required HIT changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.",
       "supportingJustifications": "Medicaid Claims Data Feed to the HIE",
       "supportsMedicaid": "This activity does support the medicaid standards and conditions."
+    },
+    {
+      "name": "Robust Market Strategy",
+      "fundingType": "MMIS",
+      "shortOverview": "The Robust Market Strategy activity has a short overview and this is it.",
+      "startDate": [3, 1, 2023],
+      "endDate": [8, 11, 2025],
+      "detailedDescription": "This is a very long and winded detailed description of the new activity named Robust Market Strategy",
+      "supportingJustifications": "The Robust Market Strategy activity provides supporting justification here.",
+      "supportsMedicaid": "This activity support the medicaid standards and conditions."
     }
   ],
 
@@ -53,6 +63,22 @@
           "Provides recepie save feature"
         ]
       ]
+    },
+    {
+      "names": [
+        "Accept measures for quality assurance until 2023, and modify FCR to meet new spec sheets released by the Third Quarter.",
+        "Provide airline suggesstions to AEIs and PLEs through Big Brand processes."
+      ],
+      "metrics": [
+        [
+          "Complete FCR modifications by 2/18/23",
+          "Provide suggestions up until 7/22/24"
+        ],
+        [
+          "Guidance can be viewed on Tyrone's alumni websites",
+          "Office hours availble only on Wednesdays and Fridays"
+        ]
+      ]
     }
   ],
 
@@ -75,6 +101,16 @@
       "dates": [
         [12, 6, 2022],
         [3, 5, 2023]
+      ]
+    },
+    {
+      "names": [
+        "Begin development of the final chapter in Quarted four",
+        "Environmental Acusation Funds"
+      ],
+      "dates": [
+        [5, 8, 2023],
+        [11, 4, 2024]
       ]
     }
   ],
@@ -103,6 +139,18 @@
       "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
       "costs": [110012, 111102],
       "ftes": [1, 1]
+    },
+    {
+      "title": "Private Security Trainer",
+      "description": "Designed to create, combine, and construct systems that involve highly secure information",
+      "costs": [215000, 107000],
+      "ftes": [0.25, 0.25]
+    },
+    {
+      "title": "Professional Office Manager (Office Administrator III)",
+      "description": "Daily responsibilities lie within managing thousands of individuals in their daily routine and work life",
+      "costs": [169824, 114712],
+      "ftes": [0.5, 1.5]
     }
   ],
 
@@ -126,6 +174,16 @@
       "category": "Equipment and supplies",
       "costs": [500, 200],
       "description": "Paper, pens, and pencils."
+    },
+    {
+      "category": "Training and outreach",
+      "costs": [75000, 100000],
+      "description": "Courses designed to train newhires and reach out to communities for potential employment opportunities."
+    },
+    {
+      "category": "Equipment and supplies",
+      "costs": [1000, 2500],
+      "description": "Paper, paper, and even more paper"
     }
   ],
 
@@ -164,6 +222,27 @@
         [10, 150],
         [75, 20]
       ]
+    },
+    {
+      "name": "Studio 56",
+      "description": "Electronical and digital services",
+      "start": [12, 25, 2023],
+      "end": [8, 12, 2024],
+      "totalCosts": 65000,
+      "hourly": false,
+      "FFYcosts": [30000, 35000]
+    },
+    {
+      "name": "Feel Good Inc.",
+      "description": "Windmill service company",
+      "start": [9, 27, 2023],
+      "end": [7, 11, 2024],
+      "totalCosts": 5000,
+      "hourly": true,
+      "FFYcosts": [
+        [10, 300],
+        [5, 400]
+      ]
     }
   ],
 
@@ -181,6 +260,14 @@
       "FFYdescriptions": [
         "This is the Other Funding description for Activity 2 - FFY 2021",
         "This is the Other Funding description for Activity 2 - FFY 2022"
+      ],
+      "costs": [4000, 9000]
+    },
+    {
+      "description": "Activity 3 description for overall cost allocation.",
+      "FFYdescriptions": [
+        "This is the Other Funding description for Activity 3 - FFY 2022",
+        "This is the Other Funding description for Activity 3 - FFY 2023"
       ],
       "costs": [4000, 9000]
     }
@@ -226,6 +313,17 @@
         [25, 25, 25, 25],
         [25, 25, 25, 25]
       ]
+    },
+    {
+      "string": "For Activity 3",
+      "stateVals": [
+        [25, 25, 25, 25],
+        [25, 25, 25, 25]
+      ],
+      "contractorVals": [
+        [25, 25, 25, 25],
+        [25, 25, 25, 25]
+      ]
     }
   ],
 
@@ -243,6 +341,13 @@
       "contractors": [41500, 41500],
       "other": [4000, 9000],
       "fedShare": [0.5, 0.9]
+    },
+    {
+      "staff": [303000, 327000],
+      "expenses": [35000, 35000],
+      "contractors": [30000, 30000],
+      "other": [5000, 8000],
+      "fedShare": [0.75, 0.5]
     }
   ]
 }

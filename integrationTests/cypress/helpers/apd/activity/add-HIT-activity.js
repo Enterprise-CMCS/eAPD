@@ -53,7 +53,8 @@ export const addHITActivity = years => {
 
       fillOutActivityPage.fillOutcomesAndMilestones(
         activityData.outcomes,
-        activityData.milestones
+        activityData.milestones,
+        true // Test delete flag
       );
 
       cy.waitForSave();
@@ -67,7 +68,8 @@ export const addHITActivity = years => {
 
       fillOutActivityPage.fillStateStaffAndExpenses(
         activityData.staff,
-        activityData.expenses
+        activityData.expenses,
+        true // Test delete flag
       );
 
       cy.waitForSave();
@@ -81,7 +83,8 @@ export const addHITActivity = years => {
 
       fillOutActivityPage.fillPrivateContactors(
         activityData.privateContractors,
-        years
+        years,
+        true // Test delete flag
       );
 
       cy.waitForSave();
@@ -93,21 +96,16 @@ export const addHITActivity = years => {
         years
       );
 
-      const staff1 = activityData.staff[0];
-      const staff2 = activityData.staff[1];
-      const expense1 = activityData.expenses[0];
-      const expense2 = activityData.expenses[1];
-      const contractor1 = activityData.privateContractors[0];
-      const contractor2 = activityData.privateContractors[1];
+      const staff = activityData.staff[1];
+      const expense = activityData.expenses[1];
+      const contractor = activityData.privateContractors[1];
 
       _.forEach(years, (year, i) => {
-        const staffTotal =
-          staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
+        const staffTotal = staff.costs[i] * staff.ftes[i];
 
-        const expenseTotal = expense1.costs[i] + expense2.costs[i];
+        const expenseTotal = expense.costs[i];
 
-        const contractorTotal =
-          contractor1.FFYcosts[i] + contractor2.FFYcosts[i];
+        const contractorTotal = contractor.FFYcosts[i];
 
         const activityTotalCosts = staffTotal + expenseTotal + contractorTotal;
 
@@ -137,8 +135,8 @@ export const addHITActivity = years => {
       fillOutActivityPage.checkBudgetAndFFPTables({
         budgetData: activityData.budgetAndFFPTables,
         years,
-        firstSplit: '50-50',
-        secondSplit: '75-25',
+        firstSplit: '75-25',
+        secondSplit: '50-50',
         isViewOnly: false
       });
 
@@ -156,7 +154,7 @@ export const addHITActivity = years => {
         totalCost,
         totalOtherFunding,
         totalTotalMedicaidCost,
-        fundingSplit: `50/50 (FFY ${years[0]}) and 75/25 (FFY ${years[1]})`,
+        fundingSplit: `75/25 (FFY ${years[0]}) and 50/50 (FFY ${years[1]})`,
         totalFederalShare,
         state: 'Alaska',
         totalStateShare
@@ -190,32 +188,30 @@ export const addHITActivity = years => {
               });
 
               // Check Outcomes and Milestones
-              Cypress._.times(2, i => {
-                exportPage.checkOutcomes({
-                  outcome: activityData.outcomes.names[i],
-                  metrics: activityData.outcomes.metrics[i]
-                });
+              exportPage.checkOutcomesNew({
+                outcome: activityData.outcomes.names[1],
+                metrics: activityData.outcomes.metrics[1]
+              });
 
-                exportPage.checkMilestones({
-                  milestone: activityData.milestones.names[i],
-                  milestoneCompletionDate:
-                    activityData.milestones.dates[i].join('/')
-                });
+              exportPage.checkMilestonesNew({
+                milestone: activityData.milestones.names[1],
+                milestoneCompletionDate:
+                  activityData.milestones.dates[1].join('/')
               });
 
               // Check State Staff and Expenses
               exportPage.checkStateStaffNew({
-                staff: activityData.staff,
+                staff: activityData.staff.slice(1),
                 years
               });
               exportPage.checkStateExpensesNew({
-                expenses: activityData.expenses,
+                expenses: activityData.expenses.slice(1),
                 years
               });
 
               // Check Private Contractors
               exportPage.checkPrivateContractorCostsNew({
-                contractors: activityData.privateContractors,
+                contractors: activityData.privateContractors.slice(1),
                 years
               });
 

@@ -32,9 +32,9 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     cy.visit(apdUrl);
   });
 
-  after(() => {
-    cy.deleteAPD(apdId);
-  });
+  // after(() => {
+  //   cy.deleteAPD(apdId);
+  // });
 
   describe('Form View', () => {
     describe('APD Overview', () => {

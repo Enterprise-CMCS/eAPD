@@ -30,7 +30,7 @@ class FillOutActivityPage {
     );
   };
 
-  fillOutcomesAndMilestones = (outcomes, milestones = {}) => {
+  fillOutcomesAndMilestones = (outcomes, milestones, testDelete = false) => {
     cy.findByRole('heading', {
       name: /Outcomes and Metrics/i,
       level: 3
@@ -41,16 +41,39 @@ class FillOutActivityPage {
         outcome: outcomes.names[i],
         metrics: outcomes.metrics[i]
       });
+    });
 
+    if (testDelete) {
+      // Tests deleting Outcomes
+      cy.contains('Delete').click();
+      cy.contains('Delete Outcome and Metrics?').should('exist');
+      cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+
+      cy.contains(outcomes.names[0]).should('not.exist');
+      cy.contains(`Outcome: ${outcomes.names[1]}`).should('exist');
+    }
+
+    _.forEach(milestones.names, (name, i) => {
       cy.findByRole('button', { name: /Add Milestone/i }).click();
       populatePage.fillMilestoneForm({
         milestone: milestones.names[i],
         targetDate: milestones.dates[i]
       });
     });
+
+    if (testDelete) {
+      // Tests deleting milestone
+      cy.findAllByText('Delete').eq(1).click();
+      cy.contains('Delete Milestone?').should('exist');
+      cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+
+      cy.contains('Delete Milestone?').should('not.exist');
+      cy.contains(milestones.names[0]).should('not.exist');
+      cy.contains(`1. ${milestones.names[1]}`).should('exist');
+    }
   };
 
-  fillStateStaffAndExpenses = (staffList, expenseList = {}) => {
+  fillStateStaffAndExpenses = (staffList, expenseList, testDelete = false) => {
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
@@ -74,6 +97,31 @@ class FillOutActivityPage {
       );
     });
 
+    if (testDelete) {
+      // Tests deleting State Staff
+      cy.findByRole('heading', { name: /^State Staff$/i })
+        .next()
+        .next()
+        .children()
+        .then(children => {
+          if (children.length > 1) {
+            staffExpensesPage.deleteStaff(0);
+          }
+        });
+
+      cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 1);
+
+      // Check that the first staff on the page (index 0) has the second
+      // staff's info
+      staffExpensesPage.verifyStaff(
+        0,
+        staffList[1].title,
+        staffList[1].description,
+        staffList[1].costs,
+        staffList[1].ftes
+      );
+    }
+
     _.forEach(expenseList, (expense, i) => {
       staffExpensesPage.addExpense();
       staffExpensesPage.fillExpense(
@@ -89,9 +137,33 @@ class FillOutActivityPage {
         expense.description
       );
     });
+
+    if (testDelete) {
+      // Test deleting other state expense
+      cy.findByRole('heading', { name: /^Other State Expenses$/i })
+        .next()
+        .next()
+        .children()
+        .then(children => {
+          if (children.length > 1) {
+            staffExpensesPage.deleteExpense(0);
+          }
+        });
+
+      // If there are just two delete buttons, then an expense has been deleted;
+      // the other delete button is from the remaining staff.
+      cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 2);
+
+      staffExpensesPage.verifyExpense(
+        0,
+        expenseList[1].category,
+        expenseList[1].costs,
+        expenseList[1].description
+      );
+    }
   };
 
-  fillPrivateContactors = (contractorList, years = {}) => {
+  fillPrivateContactors = (contractorList, years, testDelete = false) => {
     cy.findByRole('heading', {
       name: /Private Contractor Costs/i,
       level: 3
@@ -144,6 +216,15 @@ class FillOutActivityPage {
 
       cy.findByRole('button', { name: /Done/i }).click();
     });
+
+    if (testDelete) {
+      cy.findAllByText('Delete').eq(0).click();
+      cy.contains('Delete Private Contractor?').should('exist');
+      cy.get('.ds-c-button--danger').click();
+
+      cy.contains(`1. ${contractorList[0].name}`).should('not.exist');
+      cy.contains(`1. ${contractorList[1].name}`).should('exist');
+    }
   };
 
   fillCostAllocation = (allocation, years = {}) => {

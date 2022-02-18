@@ -137,8 +137,8 @@ export const addHIEActivity = years => {
       fillOutActivityPage.checkBudgetAndFFPTables({
         budgetData: activityData.budgetAndFFPTables,
         years,
-        firstSplit: '90-10',
-        secondSplit: '75-25'
+        firstSplit: '50-50',
+        secondSplit: '90-10'
       });
 
       const {
@@ -155,7 +155,7 @@ export const addHIEActivity = years => {
         totalCost,
         totalOtherFunding,
         totalTotalMedicaidCost,
-        fundingSplit: `90/10 (FFY ${years[0]}) and 75/25 (FFY ${years[1]})`,
+        fundingSplit: `50/50 (FFY ${years[0]}) and 90/10 (FFY ${years[1]})`,
         totalFederalShare,
         state: 'Alaska',
         totalStateShare
