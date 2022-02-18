@@ -18,17 +18,18 @@ describe('APD endpoint', () => {
       await teardownDB(db);
     });
 
-  describe('List APDs endpoint | GET /apds', () => {
-    const url = '/apds';
+    describe('List APDs endpoint | GET /apds', () => {
+      const url = '/apds';
 
-    unauthenticatedTest('get', url);
-    unauthorizedTest('get', url);
+      unauthenticatedTest('get', url);
+      unauthorizedTest('get', url);
 
-    describe('when authenticated', () => {
-      it('as a user with all permissions', async () => {
-        const api = login('all-permissions');
-        const response = await api.get(url);
-        expect(response.status).toEqual(200);
+      describe('when authenticated', () => {
+        it('as a user with all permissions', async () => {
+          const api = login('all-permissions');
+          const response = await api.get(url);
+          expect(response.status).toEqual(200);
+        });
       });
     });
   });
