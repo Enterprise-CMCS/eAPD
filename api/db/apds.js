@@ -5,33 +5,108 @@ const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
 
-const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
-  //  idea: use the custom validation message for the actual feedback in the admin check?
-  let newApd = new APD(apd);
+// Revisit this
+const sections = {
+  overview: {
+    title: 'APD Overview',
+    link: '/'
+  },
+  keyStatePersonnel: {
+    title: 'Key State Personnel',
+    link: '/'
+  },
+  previousActivities: {
+    title: 'Results of Previous Activities',
+    link: '/'
+  },
+  activities: {
+    title: 'Activity',
+    link: '/'
+  },
+  activitySchedule: {
+    title: 'Activity Schedule Summary',
+    link: '/'
+  },
+  proposedBudget: {
+    title: 'Proposed Budget',
+    link: '/'
+  },
+  assurancesAndCompliances: {
+    title: 'Assurances and Compliance',
+    link: '/'
+  }
+}
 
-  const validate = newApd.validateSync();
-
-  console.log("validate", validate);
+// Take an APD mongoose document, validate it, build a new object
+// collecting all validation errors. Return that new object
+const adminCheck = apd => {
+  const validate = apd.validateSync();
 
   const metadata = {};
 
   // Total validation errors added to metadata
   metadata.incomplete = Object.keys(validate.errors).length;
-
-  // Add each validation error as an object
-  // Todo: need to figure out how to group by apd sections
-  // Todo: need to get a count per section
-  const todoList = Object.keys(validate.errors).map(key => {
-    return {
-      key,
-      name: validate.errors[key].path,
-      description: validate.errors[key].message
+  
+  const todoList = [];
+  
+  for (let index in sections) {
+    if (!sections.hasOwnProperty(index)) {
+      continue;
     }
-  })
+    let section = {
+      [index]: {
+        name: sections[index].title,
+        link: sections[index].link,
+        incomplete: 0,
+        fields: [
+          
+        ]
+      }
+    }
+    
+    const fieldErrors = Object.keys(validate.errors).map(key => {
+      return {
+        key,
+        name: validate.errors[key].path,
+        description: validate.errors[key].message
+      }
+    });
+    
+    // Go through each section and manually add errors to fields based on their keys
+    // For the demo only do programOverview, an activity, and key state personnel
+    // Need to figure out how we can make this more programmatic 
+    const programOverview = fieldErrors.filter(err => err.key === 'programOverview');
+    const keyPersonnel = fieldErrors.filter(err => err.key.startsWith('keyPersonnel'));
+    const activities = fieldErrors.filter(err => err.key.startsWith('activities'));
+    
+    if(index === 'overview') {
+      section[index].fields = programOverview;
+      section[index].incomplete = programOverview.length;
+    }
+    
+    if(index === 'keyStatePersonnel') {
+      section[index].fields = keyPersonnel;
+      section[index].incomplete = keyPersonnel.length;
+    }
+    
+    if(index === 'activities') {
+      section[index].fields = activities;
+      section[index].incomplete = activities.length;
+    }
+    
+    todoList.push(section);    
+  }
 
   metadata.todo = todoList;
+  console.log("metadata", metadata);
+  return metadata;
+}
 
-  newApd.metadata = metadata;
+const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
+  //  idea: use the custom validation message for the actual feedback in the admin check?
+  let newApd = new APD(apd);
+
+  newApd.metadata = adminCheck(newApd);
 
   newApd = await newApd.save({ validateBeforeSave: false });
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
@@ -75,28 +150,8 @@ const patchAPD = async (
   // only way I could think of is to cast newDocument as a mongoose document
   // so we could perform the validation manually
   const newDocForValidation = new APD(newDocument);
-
-  const validate = newDocForValidation.validateSync();
-
-  const metadata = {};
-
-  // Total validation errors added to metadata
-  metadata.incomplete = Object.keys(validate.errors).length;
-
-  // Add each validation error as an object
-  // Todo: need to figure out how to group by apd sections
-  // Todo: need to get a count per section
-  const todoList = Object.keys(validate.errors).map(key => {
-    return {
-      key,
-      name: validate.errors[key].path,
-      description: validate.errors[key].message
-    }
-  })
-
-  metadata.todo = todoList;
-
-  newDocForValidation.metadata = metadata; 
+  
+  newDocForValidation.metadata = adminCheck(newDocForValidation); 
 
   // update the apd in the database
   await APD.replaceOne({ _id: id, stateId }, newDocForValidation, {
@@ -126,8 +181,6 @@ const updateAPDDocument = async (
 ) => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
-  
-  // Todo: do validations on updates
 
   if (patch.length > 0) {
     let updatedDoc;
@@ -141,7 +194,6 @@ const updateAPDDocument = async (
     });
     try {
       updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
-      console.log("updateDoc", updatedDoc)
     } catch (err) {
       console.log("error patching APD", err);
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);

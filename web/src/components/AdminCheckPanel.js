@@ -27,11 +27,20 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
             Review the list below for any required fields in this APD which are missing content. These fields must be completed before submission to CMS.
           </p>
           <p>Total # of incomplete {metadata.incomplete}</p>
-          {metadata.todo.map(todo => (
+          {metadata.todo.map((todo, index) => (
             <div>
-              <p><strong>{todo.key}</strong></p>
-              <p>{todo.name}</p>
-              <p>{todo.description}</p>
+            {todo[Object.keys(todo)].incomplete > 0 && (
+              <div className="ds-u-padding-bottom--2">
+                <strong>{todo[Object.keys(todo)].name}</strong>
+                <p className="ds-u-margin--0">Incomplete: {todo[Object.keys(todo)].incomplete}</p>
+                {todo[Object.keys(todo)].fields.map(item => (
+                  <div className="ds-u-padding-bottom--2">
+                    <div><strong>Field name:</strong> {item.name}</div>
+                    <div><strong>Field description:</strong> {item.description}</div>
+                  </div>
+                ))}
+              </div>
+            )}
             </div>
           ))}
         </Drawer>

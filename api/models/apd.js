@@ -23,7 +23,13 @@ const federalCitation = new mongoose.Schema(
     title: String,
     checked: {
       type: Boolean,
-      default: null
+      default: null,
+      validate: {
+        validator: v => {
+          return !null;
+        },
+        message: 'Choose an option for federal citation'
+      }
     },
     explanation: String
   },
