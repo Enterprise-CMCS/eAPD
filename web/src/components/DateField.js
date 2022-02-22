@@ -1,7 +1,7 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import formatISO from 'date-fns/formatISO';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
 const DateField = ({ value, onChange, ...rest }) => {
   const [errorInfo, setErrorInfo] = useState({
@@ -11,7 +11,10 @@ const DateField = ({ value, onChange, ...rest }) => {
     yearInvalid: false
   });
 
-  const dateParts = () => {
+  // Dates are stored internally as YYYY-MM-DD. The design system date field
+  // expects separate day, month, and year values. So split the incoming
+  // date up into its pieces.
+  const dateParts = useMemo(() => {
     if (!value) {
       return {
         day: '',
@@ -21,7 +24,7 @@ const DateField = ({ value, onChange, ...rest }) => {
     }
     const [year, month, day] = value.slice(0, 10).split('-');
     return { day: day || '', month: month || '', year: +year || '' };
-  }
+  }, [value]);
 
   const dateStr = (dateObject) => {
     const year = dateObject.year;
@@ -33,6 +36,7 @@ const DateField = ({ value, onChange, ...rest }) => {
   }
 
   const getErrorMsg = (dateObject) => {
+    console.log(dateParts.day);
     const dayVal = dateObject.day;
     const monthVal = dateObject.month;
     const yearVal = dateObject.year;
