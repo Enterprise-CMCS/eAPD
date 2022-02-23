@@ -44,8 +44,8 @@ nvm alias default 16.13.2
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
-npm ci webpack --no-audit --loglevel verbose 2>&1 |tee /home/ec2-user/npm-webpack-install.log
 npm ci --no-audit --loglevel verbose 2>&1 |tee /home/ec2-user/npm-web-install.log
+npm install webpack --loglevel verbose 2>&1 |tee /home/ec2-user/npm-webpack-install.log
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" npm run build 2>&1 |tee /home/ec2-user/npm-build.log
 mv dist/* /app/web
 cd ~
