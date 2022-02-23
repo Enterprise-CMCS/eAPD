@@ -1,5 +1,5 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
-import formatISO from 'date-fns/formatISO';
+import formatISO from 'date-fns';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 

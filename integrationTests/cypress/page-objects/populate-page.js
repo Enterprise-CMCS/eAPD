@@ -71,7 +71,7 @@ class PopulatePage {
     this.fillInputField('Name', milestone);
     cy.get('[class="ds-c-fieldset"]').within(() => {
       this.fillDate('Target completion date', targetDate);
-    });
+    }).blur();
     cy.get('button[id="form-and-review-list--done-btn"]').click()
     // cy.findByRole('button', { name: /Save/i }).click();
   };
