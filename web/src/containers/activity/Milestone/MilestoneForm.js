@@ -57,6 +57,7 @@ const MilestoneForm = forwardRef(
         name="name"
         value={state.milestone}
         className="remove-clearfix"
+        fieldClassName='required-input'
         onChange={changeName}
         onBlur={validateText}
         onKeyUp={validateText}

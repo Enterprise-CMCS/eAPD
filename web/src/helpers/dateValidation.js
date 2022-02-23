@@ -4,11 +4,12 @@ export const findTextAncestor = (e) => {
   return e;
 }
 
-export const selectAllInputs = () => {
-  var inputs = document.getElementsByTagName('input');
+export const selectAllInputs = (cont) => {
+  var inputs = cont.getElementsByClassName('required-input');
   var emptyInputs = 0;
   for (var i = 0; i < inputs.length; i += 1) {
     var input = inputs[i];
+    console.log(input.value)
     if (input.value === "") {
       emptyInputs++
       console.log(input.classList)
