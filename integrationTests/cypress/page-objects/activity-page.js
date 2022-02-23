@@ -27,14 +27,14 @@ class ActivityPage {
     cy.findByLabelText(name).should('have.value', expectedValue);
   };
 
-  checkDate = (string, month, day, year) => {
+  checkDate = (string, month = '', day = '', year = '') => {
     cy.contains(string)
       .parent()
       .next('div')
       .within(() => {
-        cy.findByLabelText('Month').should('have.value', month || '');
-        cy.findByLabelText('Day').should('have.value', day || '');
-        cy.findByLabelText('Year').should('have.value', year || '');
+        cy.findByLabelText('Month').should('have.value', month);
+        cy.findByLabelText('Day').should('have.value', day);
+        cy.findByLabelText('Year').should('have.value', year);
       });
   };
 
