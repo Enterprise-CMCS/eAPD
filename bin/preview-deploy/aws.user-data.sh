@@ -37,8 +37,8 @@ git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
 pwd
-npm ci --no-audit --loglevel verbose
-API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" npm run build |tee /home/ec2-user/npm-build.log
+npm install --no-audit --loglevel verbose 2>&1 | /home/ec2-user/npm-web-install.log
+API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" npm run build 2>&1 |tee /home/ec2-user/npm-build.log
 mv dist/* /app/web
 cd ~
 pwd
@@ -46,13 +46,13 @@ pwd
 mv eAPD/api/* /app/api
 cd /app/api
 pwd
-npm ci --only=production --loglevel verbose
+npm install --only=production --loglevel verbose 2>&1 |tee /home/ec2-user/npm-api-install.log
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
 NODE_ENV=development DEV_DB_HOST=localhost npm run seed
 
 # Setting Up New Relic Application Monitor
-npm install newrelic --save --loglevel verbose
+npm install newrelic --save --loglevel verbose 2>&1 |tee /home/ec2-user/npm-newrelic-install.log
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
