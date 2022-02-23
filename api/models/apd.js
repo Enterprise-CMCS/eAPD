@@ -28,7 +28,7 @@ const federalCitation = new mongoose.Schema(
         validator: v => {
           return !null;
         },
-        message: 'Choose an option for federal citation'
+        message: 'Please check yes or no'
       }
     },
     explanation: String
@@ -283,7 +283,9 @@ const apdSchema = new mongoose.Schema({
           validator: v => {
             return v.trim().length > 0;
           },
-          message: 'Provide a key personnel name'
+          message: v => {
+           return {name: 'Provide a key personnel name', foo: 'bar'}; 
+          }
         }
       },
       position: String,
