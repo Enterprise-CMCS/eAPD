@@ -5,7 +5,6 @@ sudo yum install -y gcc-c++
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
-pwd
 export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
@@ -22,7 +21,6 @@ export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 export DATABASE_URL="__DATABASE_URL"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
-pwd
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
@@ -46,12 +44,10 @@ nvm alias default 16.13.2
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
-pwd
 npm install --no-audit --loglevel verbose 2>&1 | /home/ec2-user/npm-web-install.log
-API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" npm run build 2>&1 |tee /home/ec2-user/npm-build.log
+NODE_ENV=development API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" npm run build 2>&1 |tee /home/ec2-user/npm-build.log
 mv dist/* /app/web
 cd ~
-pwd
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
