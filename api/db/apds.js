@@ -49,6 +49,7 @@ const adminCheck = apd => {
   
   const todoList = [];
   
+  // Switch this to Object.keys and use an array iterator
   for (let index in sections) {
     if (!sections.hasOwnProperty(index)) {
       continue;
@@ -75,7 +76,7 @@ const adminCheck = apd => {
     // Go through each section and manually add errors to fields based on their keys
     // For the demo only do programOverview, an activity, and key state personnel
     // Need to figure out how we can make this more programmatic 
-    const programOverview = fieldErrors.filter(err => err.key === 'programOverview');
+    const programOverview = fieldErrors.filter(err => err.key === 'programOverview' || err.key === 'narrativeHIE');
     const keyPersonnel = fieldErrors.filter(err => err.key.startsWith('keyPersonnel'));
     const activities = fieldErrors.filter(err => err.key.startsWith('activities'));
     

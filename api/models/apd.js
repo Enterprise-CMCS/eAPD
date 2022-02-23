@@ -306,7 +306,15 @@ const apdSchema = new mongoose.Schema({
       }
     }
   ],
-  narrativeHIE: String,
+  narrativeHIE: {
+    type: String,
+    validate: {
+      validator: v => {
+        return v.trim().length > 0;
+      },
+      message: 'Please provide an HIE overview'
+    },
+  },
   narrativeHIT: String,
   narrativeMMIS: String,
   previousActivityExpenses: {
