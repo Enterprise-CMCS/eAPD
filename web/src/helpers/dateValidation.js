@@ -4,7 +4,7 @@ export const findTextAncestor = (e) => {
   return e;
 }
 
-export const selectAllInputs = (cont) => {
+export const selectAllInputs = () => {
   var inputs = document.getElementsByTagName('input');
   var emptyInputs = 0;
   for (var i = 0; i < inputs.length; i += 1) {
