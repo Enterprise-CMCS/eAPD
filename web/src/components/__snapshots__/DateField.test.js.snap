@@ -3,6 +3,7 @@
 exports[`DateField wrapper component handles invalid dates day and year are not set 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={1}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -10,11 +11,14 @@ exports[`DateField wrapper component handles invalid dates day and year are not 
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={3}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={2001}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -24,6 +28,7 @@ exports[`DateField wrapper component handles invalid dates day and year are not 
 exports[`DateField wrapper component handles invalid dates day is a leap day but not a leap year 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={1}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -31,11 +36,14 @@ exports[`DateField wrapper component handles invalid dates day is a leap day but
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={3}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={2019}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -45,6 +53,7 @@ exports[`DateField wrapper component handles invalid dates day is a leap day but
 exports[`DateField wrapper component handles invalid dates day is invalid for month and year 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={NaN}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -52,11 +61,14 @@ exports[`DateField wrapper component handles invalid dates day is invalid for mo
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={NaN}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={NaN}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -66,6 +78,7 @@ exports[`DateField wrapper component handles invalid dates day is invalid for mo
 exports[`DateField wrapper component handles invalid dates day is not set 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={1}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -73,11 +86,14 @@ exports[`DateField wrapper component handles invalid dates day is not set 1`] = 
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={3}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={2000}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -87,6 +103,7 @@ exports[`DateField wrapper component handles invalid dates day is not set 1`] = 
 exports[`DateField wrapper component handles invalid dates empty date 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue=""
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -94,11 +111,14 @@ exports[`DateField wrapper component handles invalid dates empty date 1`] = `
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue=""
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue=""
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -108,6 +128,7 @@ exports[`DateField wrapper component handles invalid dates empty date 1`] = `
 exports[`DateField wrapper component handles invalid dates month and day are not set 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={1}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -115,11 +136,14 @@ exports[`DateField wrapper component handles invalid dates month and day are not
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={1}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={2000}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -129,6 +153,7 @@ exports[`DateField wrapper component handles invalid dates month and day are not
 exports[`DateField wrapper component handles invalid dates month and year are not set 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={1}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -136,11 +161,14 @@ exports[`DateField wrapper component handles invalid dates month and year are no
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={3}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={2001}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -150,6 +178,7 @@ exports[`DateField wrapper component handles invalid dates month and year are no
 exports[`DateField wrapper component handles invalid dates month is not set 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={NaN}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -157,11 +186,14 @@ exports[`DateField wrapper component handles invalid dates month is not set 1`] 
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={NaN}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={NaN}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -171,6 +203,7 @@ exports[`DateField wrapper component handles invalid dates month is not set 1`] 
 exports[`DateField wrapper component handles invalid dates month is out of range 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={NaN}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -178,11 +211,14 @@ exports[`DateField wrapper component handles invalid dates month is out of range
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={NaN}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={NaN}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -192,6 +228,7 @@ exports[`DateField wrapper component handles invalid dates month is out of range
 exports[`DateField wrapper component handles invalid dates year is 3 digits 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={3}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -199,11 +236,14 @@ exports[`DateField wrapper component handles invalid dates year is 3 digits 1`] 
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={3}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={200}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -213,6 +253,7 @@ exports[`DateField wrapper component handles invalid dates year is 3 digits 1`] 
 exports[`DateField wrapper component handles invalid dates year is 5 digits 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={3}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -220,11 +261,14 @@ exports[`DateField wrapper component handles invalid dates year is 5 digits 1`] 
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={3}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={20000}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -234,6 +278,7 @@ exports[`DateField wrapper component handles invalid dates year is 5 digits 1`] 
 exports[`DateField wrapper component handles invalid dates year is not set 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={3}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -241,11 +286,14 @@ exports[`DateField wrapper component handles invalid dates year is not set 1`] =
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={3}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={2001}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -255,6 +303,7 @@ exports[`DateField wrapper component handles invalid dates year is not set 1`] =
 exports[`DateField wrapper component passes other props along to design system component 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={17}
   dayInvalid={false}
   dayLabel="THE DAY"
   dayName="day"
@@ -262,11 +311,14 @@ exports[`DateField wrapper component passes other props along to design system c
   errorPlacement="bottom"
   hint=""
   label="Date"
+  monthDefaultValue={9}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={1944}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
@@ -276,6 +328,7 @@ exports[`DateField wrapper component passes other props along to design system c
 exports[`DateField wrapper component renders properly with defaults 1`] = `
 <DateField
   dateFormatter={[Function]}
+  dayDefaultValue={6}
   dayInvalid={false}
   dayLabel="Day"
   dayName="day"
@@ -283,11 +336,14 @@ exports[`DateField wrapper component renders properly with defaults 1`] = `
   errorPlacement="bottom"
   hint="For example: 4 / 28 / 1986"
   label="Date"
+  monthDefaultValue={6}
   monthInvalid={false}
   monthLabel="Month"
   monthName="month"
+  onBlur={[Function]}
   onChange={[Function]}
   onComponentBlur={[Function]}
+  yearDefaultValue={1944}
   yearInvalid={false}
   yearLabel="Year"
   yearName="year"
