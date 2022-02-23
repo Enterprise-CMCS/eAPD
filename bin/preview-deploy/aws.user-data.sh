@@ -5,6 +5,7 @@ sudo yum install -y gcc-c++
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
+pwd
 export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
@@ -21,6 +22,7 @@ export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 export DATABASE_URL="__DATABASE_URL"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
+pwd
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
@@ -34,20 +36,23 @@ touch /app/api/logs/cms-hitech-apd-api.logs
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
-npm ci --no-audit --only=production |tee /home/ec2-user/npm-ci.log
+pwd
+npm ci --no-audit --loglevel verbose
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" npm run build |tee /home/ec2-user/npm-build.log
 mv dist/* /app/web
 cd ~
+pwd
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
-npm ci --only=production
+pwd
+npm ci --only=production --loglevel verbose
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
 NODE_ENV=development DEV_DB_HOST=localhost npm run seed
 
 # Setting Up New Relic Application Monitor
-npm install newrelic --save
+npm install newrelic --save --loglevel verbose
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
@@ -93,10 +98,12 @@ pm2 start ecosystem.config.js
 
 NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY npm run migrate
 cd ~
+pwd
 cat <<MONGOUSERSEED > mongo-user.sh
 mongo -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 sh ~/mongo-user.sh
+rm ~/mongo-user.sh
 E_USER
 
 sudo yum remove -y gcc-c++
