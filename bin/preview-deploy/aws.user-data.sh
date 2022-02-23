@@ -32,6 +32,16 @@ touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
 
+# Install nvm.  Do it inside the ec2-user home directory so that user will have
+# access to it forever, just in case we need to get into the machine and
+# manually do some stuff to it.
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+source ~/.bashrc
+
+# We're using Node 16.13.2, we care about minor/patch versions
+nvm install 16.13.2
+nvm alias default 16.13.2
+
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
