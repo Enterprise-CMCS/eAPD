@@ -59,7 +59,7 @@ NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
 NODE_ENV=development DEV_DB_HOST=localhost npm run seed
 
 # Setting Up New Relic Application Monitor
-npm ci newrelic --save --loglevel verbose 2>&1 |tee /home/ec2-user/npm-newrelic-install.log
+npm install newrelic --save --loglevel verbose 2>&1 |tee /home/ec2-user/npm-newrelic-install.log
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
