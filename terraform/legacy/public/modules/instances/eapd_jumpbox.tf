@@ -1,3 +1,11 @@
+variable "eapd_jumpbox_ami" {}
+variable "eapd_jumpbox_instance_type" {}
+variable "eapd_jumpbox_key_name_bb" {}
+variable "eapd_jumpbox_key_name_tf" {}
+variable "eapd_jumpbox_vpc_security_group_ids" {}
+variable "eapd_jumpbox_subnet_id" {}
+variable "eapd_jumpbox_associate_public_ip_address" {}
+
 data "aws_ami" "latest_silver_image" {
     most_recent = true
     owners = ["582599238767"]
@@ -12,7 +20,6 @@ data "aws_ami" "latest_silver_image" {
 }
 
 resource "aws_instance" "eapd_jumpbox_bb" {
-
     ami                         = data.aws_ami.latest_silver_image.id
     instance_type               = "t3.medium"
     key_name                    = "eapd_bbrooks"
@@ -29,7 +36,6 @@ resource "aws_instance" "eapd_jumpbox_bb" {
 }
 
 resource "aws_instance" "eapd_jumpbox_tf" {
-
     ami                         = data.aws_ami.latest_silver_image.id
     instance_type               = "t3.medium"
     key_name                    = "tforkner_eapd"
@@ -44,7 +50,6 @@ resource "aws_instance" "eapd_jumpbox_tf" {
         Terraform = "True"
     }
 }
-
 resource "aws_instance" "eapd_jumpbox_tb" {
 
     ami                         = data.aws_ami.latest_silver_image.id
@@ -78,3 +83,4 @@ resource "aws_instance" "eapd_jumpbox_nz" {
         Terraform = "True"
     }
 }
+
