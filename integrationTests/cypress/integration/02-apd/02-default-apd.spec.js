@@ -13,12 +13,13 @@ import { testDefaultActivityScheduleSummary } from '../../helpers/apd/activity-s
 import { testDefaultProposedBudget } from '../../helpers/apd/proposed-budget';
 import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance';
 import { testDefaultExecutiveSummary } from '../../helpers/apd/executive-summary';
+import { checkDefaultActivity } from '../../helpers/apd/activity/check-default-activity';
 
 // Tests the default values of an APD
 describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   let apdUrl;
   let apdId;
-  const years = [];
+  const years = [2022, 2023];
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
@@ -36,9 +37,9 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
     cy.visit(apdUrl);
   });
 
-  after(() => {
-    cy.deleteAPD(apdId);
-  });
+  // after(() => {
+  //   cy.deleteAPD(apdId);
+  // });
 
   describe('Form View', () => {
     /* eslint-disable-next-line prefer-arrow-callback, func-names */
@@ -63,6 +64,10 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
 
     describe('default Results of Previous Activities', () => {
       testDefaultResultsOfPreviousActivities(years);
+    });
+
+    describe.only('Checks Default Activity', () => {
+      checkDefaultActivity(years);
     });
 
     describe('default Activities', () => {

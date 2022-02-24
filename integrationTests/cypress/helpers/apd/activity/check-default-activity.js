@@ -107,7 +107,6 @@ export const checkDefaultActivity = years => {
       cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       activityPage.checkTinyMCE('cost-allocation-methodology-field', '');
 
-      // cy.then(() => {
       _.forEach(years, (year, i) => {
         activityPage.checkTinyMCE(
           `cost-allocation-narrative-${year}-other-sources-field`,
@@ -121,21 +120,47 @@ export const checkDefaultActivity = years => {
             cy.get(table)
               .getActivityTable()
               .then(tableData => {
-                // _.forEach(defaultData.costAllocationTables, data => {
-                //   _.forEach(data, elem => {
-                //     expect(tableData).to.deep.include(elem);
-                //   });
-                // });
-                cy.log(JSON.stringify(tableData));
+                _.forEach(defaultData.costAllocationTables, data => {
+                  _.forEach(data, elem => {
+                    expect(tableData).to.deep.include(elem);
+                  });
+                });
               });
           });
       });
-      // });
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
 
       // Check Budget and FFP
+      cy.findByRole('heading', { name: /Budget and FFP/i, level: 2 }).should(
+        'exist'
+      );
+
+      // Check Federal State Split Table
+      defaultData.splits.forEach(split => {
+        cy.get('[class="ds-c-field"]').eq(0).select(split);
+
+        cy.get('[data-cy="FFPFedStateSplitTable"]')
+          .eq(0)
+          .then(table => {
+            cy.get(table)
+              .getActivityTable()
+              .then(tableData => {
+                _.forEach(tableData, data => {
+                  if (split === '90-10') {
+                    expect(defaultData.ninteyTenSplit).to.deep.include(data);
+                  } else if (split === '75-25') {
+                    expect(
+                      defaultData.seventyFiveTwentyFiveSplit
+                    ).to.deep.include(data);
+                  } else {
+                    expect(defaultData.fiftyFiftySplit).to.deep.include(data);
+                  }
+                });
+              });
+          });
+      });
     });
   });
 };

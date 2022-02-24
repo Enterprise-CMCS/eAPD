@@ -1,14 +1,34 @@
 {
   "costAllocationTables": [
     [
-      ["Activity Total Cost", "$0"],
+      ["$0"],
       ["Other Funding", "-", "$0"],
       ["Total Computable Medicaid Cost", "$0"]
     ],
     [
-      ["Activity Total Cost", "$0"],
+      ["$0"],
       ["Other Funding", "-", "$0"],
       ["Total Computable Medicaid Cost", "$0"]
     ]
+  ],
+
+  "splits": ["75-25", "50-50", "90-10"],
+
+  "ninteyTenSplit": [
+    ["$0"],
+    ["Federal Share", "$0", "×", "90%", "=", "$0"],
+    ["State Share", "$0", "×", "10%", "=", "$0"]
+  ],
+
+  "fiftyFiftySplit": [
+    ["$0"],
+    ["Federal Share", "$0", "×", "50%", "=", "$0"],
+    ["State Share", "$0", "×", "50%", "=", "$0"]
+  ],
+
+  "seventyFiveTwentyFiveSplit": [
+    ["$0"],
+    ["Federal Share", "$0", "×", "75%", "=", "$0"],
+    ["State Share", "$0", "×", "25%", "=", "$0"]
   ]
 }
