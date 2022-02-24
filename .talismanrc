@@ -22,9 +22,23 @@ fileignoreconfig:
   - filename: integrationTests/cypress/helpers/apd/proposed-budget-calculations.js
     checksum: a468dcd1f872efb7b3816b2380200def3218961cae63b3d33b2bf7fa09da2984
   - filename: .circleci/config.yml
-    checksum: 3b37ddbb081fe1f9500b4d73cbc2f845ffe609a08152d7db6b9ceceb8228c70d
-  - filename: bin/preview-deploy/aws.user-data.sh
-    checksum: 6887d9c547bc6d9076d54afe49acd26828ac389e8f05365dcb47cf6d4547be83
+    checksum: 158054cc49d802af360ed5fbac50e99cb7e2b0cbdf4a06112027e2bf4fdf4370
   - filename: packer/mongo.sh
-    checksum: a4cbd55c0dfb75500d2c0cf31efa1fe5dd851fed2fe49050b1c51913a2b23f4e
+    checksum: 9c9f7c4e1df72b2161f7330281f3106c61ffd498cb832ea39dd484ae97f57563
+  - filename: api/db/mongo-init.sh
+    checksum: ab93ba9d0a69ca3433f74d42cf1b1dda1ad66273d1ed52fb70e1e537e57f2484
+  - filename: docker-compose.yml
+    checksum: 6c5bfd5000fc45b322be1474cc6537ed865ca40f2c056c2e8e3faa35749b4ea3
+  - filename: terraform/legacy/impl/impl.tf
+    checksum: 3d5791377e046a6be651c074ebee10a6f6a14bdf39729e9ad85d1a41b51d4208
+  - filename: terraform/legacy/public/public.tf
+    checksum: 97f0e3f166521da8e1b353249c2ebf924e895441c3c529082139d8c568be97d5
+  - filename: terraform/greenfield/eapd/backend.tf
+    checksum: 6493417587c26082c56c2a989247a7473c723f8bb5b7f44d1f8abcbb6770daaf
+  - filename: terraform/legacy/test/test.tf
+    checksum: 6249aa76cb7a7a256cff500b983c50a849cc4c17344a9d28f0d68c08dfa2ffd5
+  - filename: bin/preview-deploy/aws.user-data.sh
+    checksum: af91623a0e0faea6d808c6b09d4905423d21d3f99a546ff4323ec8292a2a950b
+  - filename: packer/bootstrap202202171243.sh
+    checksum: abefeeea56189bacb6a79a0e970dec059acf9c674f4894ef0861475b06ff3b9a
 version: ''
