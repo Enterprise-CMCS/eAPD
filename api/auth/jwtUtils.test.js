@@ -265,11 +265,9 @@ tap.test('Local jwtUtils', async t => {
     const token = sign(payload);
 
     // make sure the token is in fact valid
-    t.ok(actualVerifyEAPDToken(token), 'a valid token was verified');
+    const actualPayload = await actualVerifyEAPDToken(token);
+    t.ok(actualPayload, 'a valid token was verified');
 
-    const actualPayload = await verifyWebToken(token, {
-      verifier: actualVerifyEAPDToken
-    });
     // all of the keys seem to be here.
     Object.keys(payload).forEach(key => {
       t.same(actualPayload[key], payload[key], `${key} is in the jwt`);
