@@ -123,7 +123,7 @@ tap.test('database wrappers / users', async usersTests => {
         role_id: 'role id',
         status: 'approved',
         username: unsanitizedUser.login,
-        expires_at: new Date('2020-12-16T00:00:00.000Z')
+        expires_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 365)
       }
     ]);
     getStateById.withArgs('state1').resolves({

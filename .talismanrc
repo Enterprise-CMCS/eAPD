@@ -28,7 +28,7 @@ fileignoreconfig:
   - filename: packer/mongo.sh
     checksum: a4cbd55c0dfb75500d2c0cf31efa1fe5dd851fed2fe49050b1c51913a2b23f4e
   - filename: .dccache
-    checksum: 6001e4a330da728981771c3786f22b8186fbfe7504525bcf4e8527d399a419aa
+    checksum: 4218351cae45784cd3c72c38ae30c80308876268e91268472633908e7fd6c520
   - filename: api/db/certifications.test.js
     checksum: bde9edc441f163a446b2785e0ee0a7c1f3c57776d03706d61b3608713d348d5a
 version: ''

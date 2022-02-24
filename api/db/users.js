@@ -60,9 +60,12 @@ const populateUserRole = async (
     const states = (await getUserAffiliatedStates(user.id)) || {};
     if (Object.keys(states).length) {
       const selectedState = stateId || Object.keys(states)[0];
-      const affiliation = await getAffiliationsByState(user.id, selectedState);
+      const [affiliation] = await getAffiliationsByState(
+        user.id,
+        selectedState
+      );
       if (affiliation) {
-        if (isPast(affiliation.expires_at)) {
+        if (isPast(new Date(affiliation.expires_at))) {
           await updateAuthAffiliation({
             affiliationId: affiliation.id,
             newRoleId: -1,
