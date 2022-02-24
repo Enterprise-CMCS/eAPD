@@ -414,7 +414,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .click()
         .should('have.value', '')
         .blur()
-        .should('have.class', 'missing-text-alert');
+        .should('have.class', 'ds-c-field--error');
         
         cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
@@ -429,7 +429,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.get(`[data-cy='outcome-${index}']`)
           .click()
           .type(`${element.outcome}`)
-          .should('not.have.class', 'missing-text-alert');
+          .should('not.have.class', 'ds-c-field--error');
 
         cy.findByRole('button', { name: /Save/i }).should('not.be.disabled');
 
@@ -441,14 +441,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               .click()
               .should('have.value', '')
               .blur()
-              .should('have.class', 'missing-text-alert');
+              .should('have.class', 'ds-c-field--error');
 
             cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
               .type(`${metric}`)
-              .should('not.have.class', 'missing-text-alert');
+              .should('not.have.class', 'ds-c-field--error');
 
             cy.findByRole('button', { name: /Save/i }).should('not.be.disabled');
           })
@@ -504,7 +504,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .click()
         .should('have.value', '')
         .blur()
-        .should('have.class', 'missing-text-alert');
+        .should('have.class', 'ds-c-field--error');
         
         cy.findByRole('button', { name: /Save/i }).should('be.disabled');
         
@@ -519,7 +519,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.get(`[data-cy=milestone-${index}]`)
           .click()
           .type(element.milestoneName)
-          .should('not.have.class', 'missing-text-alert');
+          .should('not.have.class', 'ds-c-field--error');
 
         cy.findByRole('button', { name: /Save/i })
           .should('not.be.disabled')
