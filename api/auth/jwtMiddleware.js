@@ -24,10 +24,12 @@ const jwtMiddleware = async (
   try {
     const jwt = extractor(req);
     const claims = jwt ? await verifyToken(jwt) : false;
+    console.log({ claims });
     if (!claims) return next();
     req.user = claims;
   } catch (err) {
-    logger.error(`error message: ${err.message}`);
+    logger.error(`error message: ${err.message || err.error}`);
+    return next(err);
   }
   return next();
 };

@@ -1,15 +1,11 @@
 const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
-const isPast = require('date-fns/isPast');
 const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
-const { getUserByID } = require('../db');
-const { getStateById } = require('../db/states');
+const { getUserByID, populateUserRole } = require('../db');
 const {
-  getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
-  getExpiredUserAffiliations: actualGetExpiredUserAffiliations,
-  getAffiliationsByState: actualGetAffiliationsByState,
-  auditUserLogin: actualAuditUserLogin
+  getExpiredUserAffiliations: actualGetExpiredUserAffiliations
+  // auditUserLogin: actualAuditUserLogin
 } = require('../db/auth');
 const {
   updateAuthAffiliation: actualUpdateAuthAffiliation
@@ -24,8 +20,8 @@ const {
  * allows for switching between okta and local varification patterns
  * @returns {(Object|Boolean)} JWT payload, or false
  */
-const verifyWebToken = async (token, { verifier = verifyJWT } = {}) => {
-  return verifier(token)
+const verifyWebToken = (token, { verifier = verifyJWT } = {}) =>
+  verifier(token)
     .then(claims => {
       // the token is valid (per Okta)
       return claims;
@@ -35,7 +31,6 @@ const verifyWebToken = async (token, { verifier = verifyJWT } = {}) => {
       logger.error(token, `invalid token: ${err.message}`);
       return false;
     });
-};
 
 /**
  * Extracts the JWT from the Request Authorization Header.
@@ -109,8 +104,7 @@ const sign = (payload, options = defaultOptions) => {
 
 const verifyEAPDToken = token => {
   try {
-    const payload = jwt.verify(token, getSecret());
-    return Promise.resolve(payload);
+    return jwt.verify(token, getSecret());
   } catch (err) {
     throw new Error('invalid Token');
   }
@@ -120,7 +114,6 @@ const exchangeToken = async (
   req,
   { extractor = jwtExtractor, verifier = verifyJWT, getUser = getUserByID } = {}
 ) => {
-  console.log('exchangeToken');
   const oktaJWT = extractor(req);
   // verify the token using the okta verifier.
   const claims = oktaJWT ? await verifyWebToken(oktaJWT, { verifier }) : false;
@@ -128,49 +121,20 @@ const exchangeToken = async (
 
   const { uid, ...additionalValues } = claims;
   const user = await getUser(uid, true, { additionalValues });
-  console.log({ user, uid, ...additionalValues });
+  console.log({ user });
   user.jwt = sign(user);
+
   return user;
 };
 
 const changeState = async (
   user,
   stateId,
-  {
-    getStateById_ = getStateById,
-    getUserPermissionsForStates_ = actualGetUserPermissionsForStates,
-    getAffiliatedStates_ = actualGetUserAffiliatedStates,
-    getAffiliationsByState_ = actualGetAffiliationsByState,
-    updateAuthAffiliation_ = actualUpdateAuthAffiliation
-    // auditUserLogin_ = actualAuditUserLogin
-  } = {}
+  { populate = populateUserRole } = {}
 ) => {
-  const stateAffiliation = await getAffiliationsByState_(user.id, stateId);
+  const populatedUser = await populate(user, stateId);
 
-  if (isPast(stateAffiliation.expires_at)) {
-    await updateAuthAffiliation_({
-      affiliationId: stateAffiliation.id,
-      newRoleId: -1,
-      newStatus: 'revoked',
-      changedBy: 'system',
-      stateId: stateAffiliation.state_id,
-      ffy: null
-    });
-  }
-
-  // copy the user to prevent altering it
-  const newUser = JSON.parse(JSON.stringify(user));
-  newUser.state = await getStateById_(stateId);
-  newUser.state.id = stateId;
-  const permissions = await getUserPermissionsForStates_(user.id);
-  newUser.activities = permissions[stateId];
-  newUser.permissions = [{ [stateId]: permissions[stateId] }];
-  const affiliations = await getAffiliatedStates_(user.id);
-  newUser.states = affiliations;
-
-  // auditUserLogin_(stateAffiliation);
-
-  return sign(newUser, {});
+  return sign(populatedUser, {});
 };
 
 const verifyAndUpdateExpirations = async (
@@ -203,8 +167,9 @@ const verifyAndUpdateExpirations = async (
   return newClaims;
 };
 
-const mockVerifyEAPDJWT = token => {
-  return getUserByID(token, false);
+const mockVerifyEAPDJWT = async token => {
+  const user = await getUserByID(token, false);
+  return user;
 };
 
 if (process.env.NODE_ENV === 'test') {

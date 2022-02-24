@@ -140,12 +140,17 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
  * @function
  * @returns {Object}
  */
-const auditUserLogin = async (data, { db = knex } = {}) =>
+const auditUserLogin = async (
+  { user_id, username, name, state_id, role_id, status }, // eslint-disable-line camelcase
+  { db = knex } = {}
+) =>
   db('okta_user_audit').insert({
-    user_id: data.user_id,
-    state_id: data.state_id,
-    role_id: data.role_id,
-    affiliation_status: data.status
+    user_id, // eslint-disable-line camelcase
+    username,
+    name,
+    state_id, // eslint-disable-line camelcase
+    role_id, // eslint-disable-line camelcase
+    affiliation_status: status
   });
 
 module.exports = {

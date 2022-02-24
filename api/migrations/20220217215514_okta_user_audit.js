@@ -5,6 +5,8 @@
 exports.up = async knex =>
   knex.schema.createTable('okta_user_audit', table => {
     table.string('user_id').notNullable().comment('id of the user in the okta');
+    table.string('username').comment('username of the user');
+    table.string('name').comment('name of the user');
     table
       .string('state_id')
       .notNullable()
@@ -23,9 +25,9 @@ exports.up = async knex =>
 
     table.foreign('user_id').references('okta_users.user_id');
     table.foreign('state_id').references('states.id');
-    table.foreigh('role_id').references('auth_roles.id');
+    table.foreign('role_id').references('auth_roles.id');
 
-    table.unique(['user_id', 'state_id', 'role_id', 'logged_in_at']);
+    table.unique(['user_id', 'state_id', 'logged_in_at']);
   });
 
 /**

@@ -383,47 +383,14 @@ tap.test('Local jwtUtils', async t => {
   });
 
   t.test('Change State of a token', async t => {
-    const getStateById = sinon.stub();
-    getStateById.withArgs('new').resolves({
-      id: 'new',
-      address1: 'New Address1',
-      director: {
-        name: 'New Director'
-      }
-    });
+    const populateUserRole = sinon.stub();
 
-    const originalPermissions = [
-      'original-roles',
-      'original-affiliations',
-      'original-affiliations'
-    ];
     const newPermissions = [
       'new-draft',
       'new-document',
       'new-document',
       'new-roles'
     ];
-    const getUserPermissionsForStates = sinon.stub();
-
-    getUserPermissionsForStates.withArgs('ABCD1234').resolves({
-      original: originalPermissions,
-      new: newPermissions
-    });
-
-    const getAffiliationsByState = sinon.stub();
-
-    getAffiliationsByState.withArgs('ABCD1234', 'new').resolves({
-      id: 60,
-      state_id: 'new',
-      expires_at: new Date('2090-12-16T00:00:00.000Z')
-    });
-
-    const getAffiliatedStates = sinon.stub();
-
-    getAffiliatedStates.withArgs('new').resolves({
-      new: 'approved',
-      original: 'approved'
-    });
 
     const user = {
       id: 'ABCD1234',
@@ -444,11 +411,20 @@ tap.test('Local jwtUtils', async t => {
       ]
     };
 
+    populateUserRole.withArgs(user, 'new').resolves({
+      ...user,
+      activities: newPermissions,
+      state: {
+        id: 'new',
+        address1: 'New Address1',
+        director: {
+          name: 'New Director'
+        }
+      }
+    });
+
     const token = await changeState(user, 'new', {
-      getStateById_: getStateById,
-      getUserPermissionsForStates_: getUserPermissionsForStates,
-      getAffiliatedStates_: getAffiliatedStates,
-      getAffiliationsByState_: getAffiliationsByState
+      populate: populateUserRole
     });
     const newUser = await actualVerifyEAPDToken(token);
 
@@ -458,83 +434,7 @@ tap.test('Local jwtUtils', async t => {
       newPermissions,
       'token activities are those from the right permission set'
     );
-
     t.same(user.state.id, 'original', 'original user is unchanged');
-  });
-
-  t.test('Change State of a token with expired affiliation', async t => {
-    const getStateById = sinon.stub();
-    getStateById.withArgs('new').resolves({
-      id: 'new',
-      address1: 'New Address1',
-      director: {
-        name: 'New Director'
-      }
-    });
-
-    const originalPermissions = [
-      'original-roles',
-      'original-affiliations',
-      'original-affiliations'
-    ];
-    const newPermissions = [
-      'new-draft',
-      'new-document',
-      'new-document',
-      'new-roles'
-    ];
-    const getUserPermissionsForStates = sinon.stub();
-
-    getUserPermissionsForStates.withArgs('ABCD1234').resolves({
-      original: originalPermissions,
-      new: newPermissions
-    });
-
-    const getAffiliationsByState = sinon.stub();
-
-    getAffiliationsByState.withArgs('ABCD1234', 'new').resolves({
-      id: 60,
-      state_id: 'new',
-      expires_at: new Date('2020-12-16T00:00:00.000Z')
-    });
-
-    const getAffiliatedStates = sinon.stub();
-
-    getAffiliatedStates.withArgs('new').resolves({
-      new: 'approved',
-      original: 'approved'
-    });
-
-    const user = {
-      id: 'ABCD1234',
-      state: {
-        id: 'original',
-        address1: 'Original Address1',
-        director: {
-          name: 'Original Director'
-        }
-      },
-      states: { original: 'approved', new: 'approved' },
-
-      foo: 'bar',
-      activities: [
-        'original-roles',
-        'original-affiliations',
-        'original-affiliations'
-      ]
-    };
-
-    const updateAuthAffiliation = sinon.spy();
-
-    await changeState(user, 'new', {
-      getStateById_: getStateById,
-      getUserPermissionsForStates_: getUserPermissionsForStates,
-      getAffiliatedStates_: getAffiliatedStates,
-      getAffiliationsByState_: getAffiliationsByState,
-      updateAuthAffiliation_: updateAuthAffiliation
-    });
-
-    t.ok(updateAuthAffiliation.calledOnce);
   });
 
   t.test(

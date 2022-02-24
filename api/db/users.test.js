@@ -2,12 +2,12 @@ const sinon = require('sinon');
 const tap = require('tap');
 const dbMock = require('./dbMock.test');
 const oktaAuthMock = require('../auth/oktaAuthMock.test');
-const knex = require('./knex')
+const knex = require('./knex');
 
 const {
   getAllUsers,
   getUserByID,
-  populateUser,
+  populateUserRole,
   sanitizeUser
 } = require('./users');
 
@@ -20,40 +20,47 @@ tap.test('database wrappers / users', async usersTests => {
 
   const sanitizedUser = {
     activities: 'auth activities',
-    affiliations: 'user affiliations',
+    affiliation: 'user affiliation',
     id: 'user id',
     name: 'real name',
-    phone: 'phone number',
-    roles: 'user auth role',
-    username: 'email address',
-    state: 'user state',
     permissions: 'permissions',
+    phone: 'phone number',
     role: 'role',
-    states: []
+    state: 'user state',
+    states: [],
+    username: 'email address'
   };
 
   const unsanitizedUser = {
     activities: 'auth activities',
-    affiliations: 'user affiliations',
+    affiliation: 'user affiliation',
     id: 'user id',
     displayName: 'real name',
+    permissions: 'permissions',
     primaryPhone: 'phone number',
-    auth_roles: 'user auth role',
     login: 'email address',
     other: 'junk',
     password: 'oh no password',
     position: 'user position',
-    state: 'user state',
-    permissions: 'permissions',
     role: 'role',
+    state: 'user state',
     states: []
   };
 
-  // let getUserPermissionsForStates;
-  // let getUserAffiliatedStates;
-  // let getAffiliationsByUserId;
-  // let getStateById;
-  // let getRolesAndActivities;
+  const newPermissions = [
+    'new-draft',
+    'new-document',
+    'new-document',
+    'new-roles'
+  ];
+
+  let getUserAffiliatedStates;
+  let getAffiliationsByState;
+  let getStateById;
+  let getUserPermissionsForStates;
+  let getRolesAndActivities;
+  let updateAuthAffiliation;
+  let auditUserLogin;
 
   usersTests.beforeEach(async () => {
     sandbox.resetBehavior();
@@ -64,26 +71,208 @@ tap.test('database wrappers / users', async usersTests => {
 
     populate.resolves({
       activities: 'auth activities',
-      affiliations: 'user affiliations',
+      affiliation: 'user affiliation',
       id: 'user id',
       displayName: 'real name',
+      permissions: 'permissions',
       primaryPhone: 'phone number',
-      auth_roles: 'user auth role',
       login: 'email address',
       other: 'junk',
       password: 'oh no password',
       position: 'user position',
-      state: 'user state',
-      permissions: 'permissions',
       role: 'role',
+      state: 'user state',
       states: []
     });
 
-    // getUserPermissionsForStates = sandbox.stub().resolves('permissions');
-    // getUserAffiliatedStates = sandbox.stub().resolves([]);
-    // getAffiliationsByUserId = sandbox.stub().resolves([]);
-    // getStateById = sandbox.stub().resolves({});
-    // getRolesAndActivities = sandbox.stub().resolves([]);
+    getUserAffiliatedStates = sandbox.stub();
+    getAffiliationsByState = sandbox.stub();
+    getStateById = sandbox.stub();
+    getUserPermissionsForStates = sandbox.stub();
+    getRolesAndActivities = sandbox.stub();
+    updateAuthAffiliation = sandbox.stub();
+    auditUserLogin = sandbox.stub();
+
+    getAffiliationsByState.withArgs(unsanitizedUser.id, 'state1').resolves([
+      {
+        id: 'affiliation',
+        user_id: unsanitizedUser.id,
+        state_id: 'state1',
+        role_id: 'role id',
+        status: 'approved',
+        username: unsanitizedUser.login,
+        expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
+      }
+    ]);
+    getAffiliationsByState.withArgs(unsanitizedUser.id, 'state2').resolves([
+      {
+        id: 'affiliation',
+        user_id: unsanitizedUser.id,
+        state_id: 'state2',
+        role_id: 'role id',
+        status: 'approved',
+        username: unsanitizedUser.login,
+        expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
+      }
+    ]);
+    getAffiliationsByState.withArgs(unsanitizedUser.id, 'exp').resolves([
+      {
+        id: 'affiliation',
+        user_id: unsanitizedUser.id,
+        state_id: 'exp',
+        role_id: 'role id',
+        status: 'approved',
+        username: unsanitizedUser.login,
+        expires_at: new Date('2020-12-16T00:00:00.000Z')
+      }
+    ]);
+    getStateById.withArgs('state1').resolves({
+      id: 'state1',
+      address1: 'New Address 1',
+      director: {
+        name: 'Director Name 1'
+      }
+    });
+    getStateById.withArgs('state2').resolves({
+      id: 'state2',
+      address1: 'New Address 2',
+      director: {
+        name: 'Director Name 2'
+      }
+    });
+    getUserPermissionsForStates.resolves(newPermissions);
+    getRolesAndActivities.resolves([
+      {
+        id: 'role id',
+        name: 'role name',
+        activities: newPermissions
+      }
+    ]);
+  });
+
+  usersTests.test('populate user role', async populateUserRoleTests => {
+    populateUserRoleTests.test('no user', async test => {
+      const user = await populateUserRole(null, null, {
+        getUserAffiliatedStates,
+        getAffiliationsByState,
+        getStateById,
+        getUserPermissionsForStates,
+        getRolesAndActivities,
+        updateAuthAffiliation,
+        auditUserLogin
+      });
+
+      test.equal(user, null);
+    });
+
+    populateUserRoleTests.test('no affiliations', async test => {
+      getUserAffiliatedStates.resolves({});
+      const user = await populateUserRole(unsanitizedUser, null, {
+        getUserAffiliatedStates,
+        getAffiliationsByState,
+        getStateById,
+        getUserPermissionsForStates,
+        getRolesAndActivities,
+        updateAuthAffiliation,
+        auditUserLogin
+      });
+      test.same(user, { ...unsanitizedUser, states: {} });
+    });
+
+    populateUserRoleTests.test('no affiliations with state id', async test => {
+      getUserAffiliatedStates.resolves({});
+      const user = await populateUserRole(unsanitizedUser, 'state1', {
+        getUserAffiliatedStates,
+        getAffiliationsByState,
+        getStateById,
+        getUserPermissionsForStates,
+        getRolesAndActivities,
+        updateAuthAffiliation,
+        auditUserLogin
+      });
+      test.same(user, { ...unsanitizedUser, states: {} });
+    });
+
+    // expires_at: new Date('2020-12-16T00:00:00.000Z')
+    populateUserRoleTests.test('1 affiliation, no stateId', async test => {
+      getUserAffiliatedStates.resolves({ state1: 'approved' });
+      await populateUserRole(unsanitizedUser, null, {
+        getUserAffiliatedStates,
+        getAffiliationsByState,
+        getStateById,
+        getUserPermissionsForStates,
+        getRolesAndActivities,
+        updateAuthAffiliation,
+        auditUserLogin
+      });
+      test.ok(
+        getAffiliationsByState.calledOnceWith(unsanitizedUser.id, 'state1')
+      );
+      test.ok(updateAuthAffiliation.notCalled);
+      test.ok(auditUserLogin.calledOnce);
+    });
+
+    populateUserRoleTests.test('2 affiliation2, no stateId', async test => {
+      getUserAffiliatedStates.resolves({
+        state1: 'approved',
+        state2: 'approved'
+      });
+      await populateUserRole(unsanitizedUser, null, {
+        getUserAffiliatedStates,
+        getAffiliationsByState,
+        getStateById,
+        getUserPermissionsForStates,
+        getRolesAndActivities,
+        updateAuthAffiliation,
+        auditUserLogin
+      });
+      test.ok(
+        getAffiliationsByState.calledOnceWith(unsanitizedUser.id, 'state1')
+      );
+      test.ok(updateAuthAffiliation.notCalled);
+      test.ok(auditUserLogin.notCalled);
+    });
+
+    populateUserRoleTests.test('2 affiliation2 with state id', async test => {
+      getUserAffiliatedStates.resolves({
+        state1: 'approved',
+        state2: 'approved'
+      });
+      await populateUserRole(unsanitizedUser, 'state2', {
+        getUserAffiliatedStates,
+        getAffiliationsByState,
+        getStateById,
+        getUserPermissionsForStates,
+        getRolesAndActivities,
+        updateAuthAffiliation,
+        auditUserLogin
+      });
+      test.ok(
+        getAffiliationsByState.calledOnceWith(unsanitizedUser.id, 'state2')
+      );
+      test.ok(updateAuthAffiliation.notCalled);
+      test.ok(auditUserLogin.calledOnce);
+    });
+
+    populateUserRoleTests.test('expired affiliation', async test => {
+      getUserAffiliatedStates.resolves({
+        state1: 'approved',
+        state2: 'approved',
+        exp: 'approved'
+      });
+      await populateUserRole(unsanitizedUser, 'exp', {
+        getUserAffiliatedStates,
+        getAffiliationsByState,
+        getStateById,
+        getUserPermissionsForStates,
+        getRolesAndActivities,
+        updateAuthAffiliation,
+        auditUserLogin
+      });
+      test.ok(getAffiliationsByState.calledOnceWith(unsanitizedUser.id, 'exp'));
+      test.ok(updateAuthAffiliation.calledOnce);
+      test.ok(auditUserLogin.calledOnce);
+    });
   });
 
   usersTests.test('getting all users', async getAllUsersTests => {
@@ -126,12 +315,20 @@ tap.test('database wrappers / users', async usersTests => {
       client.getUser
         .withArgs('user id')
         .resolves({ status: 'ACTIVE', profile: { some: 'user' } });
-      db.where.withArgs({user_id:'user id'}).returnsThis()
-      db.first.resolves({ user_id: 'user id', email:'someAddress@email.com', metadata:'{foo:bar}' });
-      const user = await getUserByID('user id', false, { client, populate, db });
-      test.ok(client.getUser.notCalled)
+      db.where.withArgs({ user_id: 'user id' }).returnsThis();
+      db.first.resolves({
+        user_id: 'user id',
+        email: 'someAddress@email.com',
+        metadata: '{foo:bar}'
+      });
+      const user = await getUserByID('user id', false, {
+        client,
+        populate,
+        db
+      });
+      test.ok(client.getUser.notCalled);
       // profile is not in scope because we didn't call OKTA
-      test.ok(populate.calledWith({ id: 'user id'}));
+      test.ok(populate.calledWith({ id: 'user id' }));
       test.same(user, sanitizedUser);
     });
 
@@ -200,7 +397,8 @@ tap.test('database wrappers / users', async usersTests => {
     'populating a user with related data',
     async populateUserTests => {
       populateUserTests.test('without a user', async test => {
-        test.equal(await populateUser(), undefined);
+        const populatedUser = await populateUserRole();
+        test.same(populatedUser, null);
       });
 
       // populateUserTests.test(
@@ -236,7 +434,7 @@ tap.test('database wrappers / users', async usersTests => {
       //     populateUserTestsWithValues.test(
       //       'pass in roles and state',
       //       async test => {
-      //         const user = await populateUser(
+      //         const user = await populateUserRole(
       //           {
       //             groups: ['user role'],
       //             displayName: 'this just goes through',
@@ -258,7 +456,7 @@ tap.test('database wrappers / users', async usersTests => {
       //       'pass in state and get roles',
       //       async test => {
       //         getGroups.withArgs('user id').resolves(['user role']);
-      //         const user = await populateUser(
+      //         const user = await populateUserRole(
       //           {
       //             id: 'user id',
       //             activities: 'these are overwritten',
@@ -282,7 +480,7 @@ tap.test('database wrappers / users', async usersTests => {
       //       'pass in state and get empty roles',
       //       async test => {
       //         getGroups.withArgs('user id').resolves([]);
-      //         const user = await populateUser(
+      //         const user = await populateUserRole(
       //           {
       //             id: 'user id',
       //             activities: 'these are overwritten',
@@ -308,7 +506,7 @@ tap.test('database wrappers / users', async usersTests => {
       //         getApplicationProfile
       //           .withArgs('user id')
       //           .resolves({ affiliations: ['state id'] });
-      //         const user = await populateUser(
+      //         const user = await populateUserRole(
       //           {
       //             id: 'user id',
       //             activities: 'these are overwritten',
@@ -334,7 +532,7 @@ tap.test('database wrappers / users', async usersTests => {
       //         getApplicationProfile
       //           .withArgs('user id')
       //           .resolves({ affiliations: [] });
-      //         const user = await populateUser(
+      //         const user = await populateUserRole(
       //           {
       //             id: 'user id',
       //             activities: 'these are overwritten',
@@ -360,7 +558,7 @@ tap.test('database wrappers / users', async usersTests => {
       //         getApplicationProfile
       //           .withArgs('user id')
       //           .resolves({ affiliations: [] });
-      //         const user = await populateUser(
+      //         const user = await populateUserRole(
       //           {
       //             id: 'user id',
       //             activities: 'these are overwritten',
@@ -390,7 +588,7 @@ tap.test('database wrappers / users', async usersTests => {
       //         activities.whereIn.withArgs('id', []).returnsThis();
       //         activities.select.withArgs('name').resolves([]);
 
-      //         const user = await populateUser(
+      //         const user = await populateUserRole(
       //           {
       //             activities: 'these are overwritten',
       //             groups: ['user role'],
@@ -413,7 +611,7 @@ tap.test('database wrappers / users', async usersTests => {
       // populateUserTests.test(
       //   'with a user without activities or a state',
       //   async test => {
-      //     const user = await populateUser(
+      //     const user = await populateUserRole(
       //       { email: 'email' },
       //       { db, getUserPermissionsForStates, getUserAffiliatedStates, getAffiliationsByUserId, getStateById, getRolesAndActivities }
       //     );
@@ -432,39 +630,37 @@ tap.test('database wrappers / users', async usersTests => {
     test.same(
       sanitizeUser({
         activities: 'some activities',
-        affiliations: 'user affiliations',
+        affiliation: 'user affiliation',
         id: 'my user id',
         displayName: 'this is my name',
         primaryPhone: 'call me maybe',
-        auth_roles: 'my permissions',
+        permissions: 'permissions',
         bob: 'builds bridges',
         login: 'purple_unicorn@compuserve.net',
         password: 'OH NO I HAVE PUBLISHED MY PASSWORD',
         position: 'center square',
         groups: 'the zany one',
         state: 'this is where I live',
+        states: [],
         username: 'this does not survive the transition either',
-        permissions: 'permissions',
-        role: 'role',
-        states: []
+        role: 'role'
       }),
       {
         activities: 'some activities',
-        affiliations: 'user affiliations',
+        affiliation: 'user affiliation',
         id: 'my user id',
         name: 'this is my name',
-        phone: 'call me maybe',
-        roles: 'my permissions',
-        state: 'this is where I live',
-        username: 'purple_unicorn@compuserve.net',
         permissions: 'permissions',
+        phone: 'call me maybe',
         role: 'role',
-        states: []
+        state: 'this is where I live',
+        states: [],
+        username: 'purple_unicorn@compuserve.net'
       }
     );
   });
 
-  usersTests.teardown(() =>{
-    knex.destroy()
-  })
+  usersTests.teardown(async () => {
+    await knex.destroy();
+  });
 });

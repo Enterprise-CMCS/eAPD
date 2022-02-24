@@ -1,86 +1,119 @@
-const logger = require('../logger')('db/users');
+const isPast = require('date-fns/isPast');
 const { oktaClient } = require('../auth/oktaAuth');
-const knex = require('./knex');
+// const knex = require('./knex');
 const {
+  // getRolesAndActivities: actualGetRolesAndActivities,
+  getUserAffiliatedStates: actualGetUserAffiliatedStates,
+  getAffiliationsByState: actualGetAffiliationsByState,
+  getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getRolesAndActivities: actualGetRolesAndActivities,
-  getUserAffiliatedStates: actualGetUserAffiliatedStates
+  auditUserLogin: actualAuditUserLogin
 } = require('./auth');
+const {
+  updateAuthAffiliation: actualUpdateAuthAffiliation
+} = require('./affiliations');
 const { getStateById: actualGetStateById } = require('./states');
 const { createOrUpdateOktaUser, getOktaUser } = require('./oktaUsers');
 
 const sanitizeUser = user => ({
   activities: user.activities,
-  affiliations: user.affiliations,
+  affiliation: user.affiliation,
   id: user.id,
   name: user.displayName,
   permissions: user.permissions,
   phone: user.primaryPhone,
   role: user.role,
-  roles: user.auth_roles,
   state: user.state,
   states: user.states,
   username: user.login
 });
 
-const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
-  return db.select('*').from('auth_affiliations').where({ user_id: id });
-};
+// const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
+//   return db.select('*').from('auth_affiliations').where({ user_id: id });
+// };
 
-const actualGetSelectedStateIdByUserId = (id, { db = knex } = {}) => {
-  return db
-    .select('state_id')
-    .from('users')
-    .where({ uid: id })
-    .first()
-    .then(result => (result ? result.state_id : undefined));
-};
-
-const populateUser = async (
+/**
+ * Populates a user with their role and permissions for the state passed in
+ * if no state is passed in it will use the first state the user is affiliated
+ * with. If the affiliation is expired, it will update it to revoke the user's
+ * access to the state. The audit table will also be updated to show that the
+ * user has logged into the state.
+ *
+ * @param {*} user object retrieved from jwt
+ * @param {*} stateId state id to populate user permissions for
+ * @returns user object with permissions for the state
+ */
+const populateUserRole = async (
   user,
+  stateId = null,
   {
     getUserAffiliatedStates = actualGetUserAffiliatedStates,
-    getStateById = actualGetStateById,
+    getAffiliationsByState = actualGetAffiliationsByState,
+    updateAuthAffiliation = actualUpdateAuthAffiliation,
+    auditUserLogin = actualAuditUserLogin,
     getRolesAndActivities = actualGetRolesAndActivities,
-    getSelectedStateIdByUserId = actualGetSelectedStateIdByUserId,
-    getAffiliationsByUserId = actualGetAffiliationsByUserId
+    getStateById = actualGetStateById,
+    getUserPermissionsForStates = actualGetUserPermissionsForStates
   } = {}
 ) => {
   if (user) {
-    const populatedUser = user;
-    populatedUser.states = (await getUserAffiliatedStates(user.id)) || [];
+    const states = (await getUserAffiliatedStates(user.id)) || {};
+    if (Object.keys(states).length) {
+      const selectedState = stateId || Object.keys(states)[0];
+      const affiliation = await getAffiliationsByState(user.id, selectedState);
+      if (affiliation) {
+        if (isPast(affiliation.expires_at)) {
+          await updateAuthAffiliation({
+            affiliationId: affiliation.id,
+            newRoleId: -1,
+            newStatus: 'revoked',
+            changedBy: 'system',
+            stateId: affiliation.state_id,
+            ffy: null
+          });
 
-    // grab the selected affiliation
-    const selectedStateId = await getSelectedStateIdByUserId(user.id);
-    logger.info({ selectedStateId, uid: user.id });
-    const affiliations = (await getAffiliationsByUserId(user.id)) || [];
+          affiliation.role_id = null;
+          affiliation.status = 'revoked';
+        }
 
-    let affiliation;
-    if (selectedStateId) {
-      affiliation = affiliations.find(a => a.state_id === selectedStateId);
-    } else {
-      // grab the first affiliation if none selected
-      affiliation = affiliations.find(Boolean);
+        console.log(`States length ${Object.keys(states).length === 1}`);
+        if (stateId || Object.keys(states).length === 1) {
+          // we should only record the user logging in if they have specified a state
+          // or if they are only affiliated with one state
+          auditUserLogin({
+            ...affiliation,
+            name: user.name || user.displayName
+          });
+        }
+
+        const roles = (await getRolesAndActivities()) || [];
+        const role =
+          affiliation && roles.find(r => r.id === affiliation.role_id);
+        const state = await getStateById(selectedState);
+        const permissions = await getUserPermissionsForStates(user.id);
+        return {
+          ...user,
+          state,
+          states,
+          role: role && role.name,
+          affiliation,
+          activities: permissions[selectedState],
+          permissions: [{ [selectedState]: permissions[selectedState] }]
+        };
+      }
     }
-
-    const roles = (await getRolesAndActivities()) || [];
-    const role = affiliation && roles.find(r => r.id === affiliation.role_id);
-
-    populatedUser.state =
-      affiliation &&
-      affiliation.state_id &&
-      (await getStateById(affiliation.state_id));
-    populatedUser.role = role && role.name;
-    populatedUser.activities = (role && role.activities) || [];
-
-    return populatedUser;
+    return {
+      ...user,
+      states: states || {}
+    };
   }
-  return user;
+  return null;
 };
 
 const getAllUsers = async ({
   clean = true,
   client = oktaClient,
-  populate = populateUser
+  populate = populateUserRole
 } = {}) => {
   const users = await client.listUsers();
 
@@ -98,7 +131,7 @@ const getUserByID = async (
   {
     clean = true,
     client = oktaClient,
-    populate = populateUser,
+    populate = populateUserRole,
     additionalValues,
     db
   } = {}
@@ -131,6 +164,6 @@ const getUserByID = async (
 module.exports = {
   getAllUsers,
   getUserByID,
-  populateUser,
+  populateUserRole,
   sanitizeUser
 };
