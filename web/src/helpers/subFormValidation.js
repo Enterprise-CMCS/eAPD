@@ -27,6 +27,13 @@ export const disableSave = (container) => {
       removeError(input)
     }
   }
+
+  if (emptyInputs > 0) {
+    const doneBtn = container.querySelector('#form-and-review-list--done-btn');
+    doneBtn.disabled = true;
+  } else {
+    doneBtn.disabled = false;
+  }
 }
 
 export const validateSubForm = (e) => {
