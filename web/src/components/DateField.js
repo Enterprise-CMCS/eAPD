@@ -1,11 +1,10 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import formatISO from 'date-fns';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-
-import { disableBtn } from '../helpers/dateValidation';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const dateParts = (value) => {
+  console.log({value})
   if (!value) {
     return {
       day: '',
@@ -14,6 +13,7 @@ const dateParts = (value) => {
     };
   } else {
     const newDate = new Date(value);
+    console.log(newDate.getDate())
     
     return {
       day: newDate.getUTCDate(),
@@ -91,7 +91,6 @@ const DateField = ({ value, onChange, ...rest }) => {
         getErrorMsg(dateObject)
       }}
       errorPlacement='bottom'
-      onBlur={disableBtn}
     />
   );
 };
