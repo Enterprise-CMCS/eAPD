@@ -28,7 +28,7 @@ fileignoreconfig:
   - filename: api/db/mongo-init.sh
     checksum: ab93ba9d0a69ca3433f74d42cf1b1dda1ad66273d1ed52fb70e1e537e57f2484
   - filename: docker-compose.yml
-    checksum: 6c5bfd5000fc45b322be1474cc6537ed865ca40f2c056c2e8e3faa35749b4ea3
+    checksum: bf75f0f1a68256ffa76eeb60bf56bda9dcfbe09b7783d76f42f0acc33f0cc6d7
   - filename: terraform/legacy/impl/impl.tf
     checksum: 3d5791377e046a6be651c074ebee10a6f6a14bdf39729e9ad85d1a41b51d4208
   - filename: terraform/legacy/public/public.tf

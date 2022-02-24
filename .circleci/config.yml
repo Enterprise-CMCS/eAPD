@@ -59,21 +59,21 @@ workflows:
           filters:
             tags:
               only: /.*/
-      # - e2e test:
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - main
-      #       tags:
-      #         ignore: ignore-e2e
-      #     requires:
-      #       - frontend lint
-      #       - backend lint
-      #       - frontend dependency vulnerability scan
-      #       - backend dependency vulnerability scan
-      #       - frontend test
-      #       - backend unit test
-      #       - backend api endpoint test
+      - e2e test:
+          filters:
+            branches:
+              ignore:
+                - main
+            tags:
+              ignore: ignore-e2e
+          requires:
+            - frontend lint
+            - backend lint
+            - frontend dependency vulnerability scan
+            - backend dependency vulnerability scan
+            - frontend test
+            - backend unit test
+            - backend api endpoint test
 
       # backend jobs
       - backend api endpoint test:
@@ -203,7 +203,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            # - e2e test
+            - e2e test
 
       - frontend deploy:
           name: frontend deploy production
@@ -219,7 +219,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            # - e2e test
+            - e2e test
 
       # joint jobs
       - preview deploy:
@@ -232,7 +232,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
-            # - e2e test
+            - e2e test
 
       - store artifacts:
           name: store artifacts staging
