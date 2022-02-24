@@ -137,37 +137,37 @@
     "activityBudgetTable": [
       [
         [],
-        ["Private Security Trainer", "$215,000", "0.25 FTE", "$53,750"],
-        ["Professional Office Manager (Office Administrator III)", "$169,824", "0.5 FTE", "$84,912"],
-        ["Other Funding Amount", "$2,240"],
+        ["Private Security Trainer", "$215,000", "×", "0.25 FTE", "=", "$53,750"],
+        ["Professional Office Manager (Office Administrator III)", "$169,824", "×", "0.5 FTE", "=", "$84,912"],
+        ["Other Funding Amount", "-", "$2,240"],
         ["State Staff Subtotal", "$136,422"],
         [],
-        ["Training and outreach", "$75,000"],
-        ["Equipment and supplies", "$1,000"],
-        ["Other Funding Amount", "$1,227"],
+        ["Training and outreach", "", "", "", "", "$75,000"],
+        ["Equipment and supplies", "", "", "", "", "$1,000"],
+        ["Other Funding Amount", "-", "$1,227"],
         ["Other State Expenses Subtotal", "$74,773"],
         [],
-        ["Studio 56", "$30,000"],
-        ["Feel Good Inc.", "$300", "10 hours", "$3,000"],
-        ["Other Funding Amount", "$533"],
+        ["Studio 56", "", "", "", "", "$30,000"],
+        ["Feel Good Inc.", "$300", "×", "10 hours", "=", "$3,000"],
+        ["Other Funding Amount", "-", "$533"],
         ["Private Contractor Subtotal", "$32,467"],
         ["Activity 3 Total Computable Medicaid Cost", "$243,662"]
       ],
       [
         [],
-        ["Private Security Trainer", "$107,000", "0.25 FTE", "$26,750"],
-        ["Professional Office Manager (Office Administrator III)", "$114,712", "1.5 FTE", "$172,068"],
-        ["Other Funding Amount", "$5,289"],
+        ["Private Security Trainer", "$107,000", "×", "0.25 FTE", "=", "$26,750"],
+        ["Professional Office Manager (Office Administrator III)", "$114,712", "×", "1.5 FTE", "=", "$172,068"],
+        ["Other Funding Amount", "-", "$5,289"],
         ["State Staff Subtotal", "$193,529"],
         [],
-        ["Training and outreach", "$100,000"],
-        ["Equipment and supplies", "$2,500"],
-        ["Other Funding Amount", "$2,727"],
+        ["Training and outreach", "", "", "", "", "$100,000"],
+        ["Equipment and supplies", "", "", "", "", "$2,500"],
+        ["Other Funding Amount", "-", "$2,727"],
         ["Other State Expenses Subtotal", "$99,773"],
         [],
-        ["Studio 56", "$35,000"],
-        ["Feel Good Inc.", "$400", "5 hours", "$2,000"],
-        ["Other Funding Amount", "$984"],
+        ["Studio 56", "", "", "", "", "$35,000"],
+        ["Feel Good Inc.", "$400", "×", "5 hours", "=", "$2,000"],
+        ["Other Funding Amount", "-", "$984"],
         ["Private Contractor Subtotal", "$36,016"],
         ["Activity 3 Total Computable Medicaid Cost", "$329,318"]
       ]
@@ -176,12 +176,12 @@
     "activityTotalCostTable": [
       [
         ["$247,662"],
-        ["Other Funding", "$4,000"],
+        ["Other Funding", "-", "$4,000"],
         ["Activity Total Computable Medicaid Cost", "$243,662"]
       ],
       [
         ["$338,318"],
-        ["Other Funding", "$9,000"],
+        ["Other Funding", "-", "$9,000"],
         ["Activity Total Computable Medicaid Cost", "$329,318"]
       ]
     ],
@@ -189,13 +189,13 @@
     "activityFedSplitTable": [
       [
         ["$243,662"],
-        ["Federal Share", "$243,662", "90%", "$219,296"],
-        ["State Share", "$243,662", "10%", "$24,366"]
+        ["Federal Share", "$243,662", "×", "90%", "=", "$219,296"],
+        ["State Share", "$243,662", "×", "10%", "=", "$24,366"]
       ],
       [
         ["$329,318"],
-        ["Federal Share", "$329,318", "50%", "$164,659"],
-        ["State Share", "$329,318", "50%", "$164,659"]
+        ["Federal Share", "$329,318", "×", "50%", "=", "$164,659"],
+        ["State Share", "$329,318", "×", "50%", "=", "$164,659"]
       ]
     ],
 
@@ -220,17 +220,17 @@
     "activityTotalCostTableExportView": [
       [
         ["$247,662"],
-        ["Other Funding", "$4,000"],
-        ["Activity Total Computable Medicaid Cost", "$243,662"],
-        ["Federal Share", "$243,662", "90%", "$219,296"],
-        ["State Share", "$243,662", "10%", "$24,366"]
+        ["Other Funding", "", "-", "$4,000"],
+        ["Activity Total Computable Medicaid Cost", "", "$243,662"],
+        ["Federal Share", "$243,662", "×", "90%", "=", "$219,296"],
+        ["State Share", "$243,662", "×", "10%", "=", "$24,366"]
       ],
       [
         ["$338,318"],
-        ["Other Funding", "$9,000"],
-        ["Activity Total Computable Medicaid Cost", "$329,318"],
-        ["Federal Share", "$329,318", "50%", "$164,659"],
-        ["State Share", "$329,318", "50%", "$164,659"]
+        ["Other Funding", "", "-", "$9,000"],
+        ["Activity Total Computable Medicaid Cost", "", "$329,318"],
+        ["Federal Share", "$329,318", "×", "50%", "=", "$164,659"],
+        ["State Share", "$329,318", "×", "50%", "=", "$164,659"]
       ]
     ]
   },
