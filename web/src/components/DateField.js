@@ -1,28 +1,7 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import formatISO from 'date-fns';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState } from 'react';
-
-const dateParts = (value) => {
-  console.log({value})
-  if (!value) {
-    return {
-      day: '',
-      month: '',
-      year: ''
-    };
-  } else {
-    const newDate = new Date(value);
-    console.log(newDate.getDate())
-    
-    return {
-      day: newDate.getUTCDate(),
-      month: newDate.getUTCMonth() + 1,
-      year: newDate.getUTCFullYear()
-    }
-
-  }
-};
+import React, { useMemo, useState } from 'react';
 
 const DateField = ({ value, onChange, ...rest }) => {
   const [errorInfo, setErrorInfo] = useState({
@@ -32,7 +11,20 @@ const DateField = ({ value, onChange, ...rest }) => {
     yearInvalid: false
   });
 
-  const [dateObj, setDateObj] = useState(dateParts(value));
+  // Dates are stored internally as YYYY-MM-DD. The design system date field
+  // expects separate day, month, and year values. So split the incoming
+  // date up into its pieces.
+  const dateParts = useMemo(() => {
+    if (!value) {
+      return {
+        day: '',
+        month: '',
+        year: ''
+      };
+    }
+    const [year, month, day] = value.slice(0, 10).split('-');
+    return { day: day || '', month: month || '', year: +year || '' };
+  }, [value]);
 
   const dateStr = (dateObject) => {
     const year = dateObject.year;
@@ -44,6 +36,7 @@ const DateField = ({ value, onChange, ...rest }) => {
   }
 
   const getErrorMsg = (dateObject) => {
+    console.log(dateParts.day);
     const dayVal = dateObject.day;
     const monthVal = dateObject.month;
     const yearVal = dateObject.year;
@@ -81,9 +74,9 @@ const DateField = ({ value, onChange, ...rest }) => {
     <DSDateField
       {...rest}
       {...errorInfo}
-      dayDefaultValue={dateObj.day}
-      monthDefaultValue={dateObj.month}
-      yearDefaultValue={dateObj.year}
+      dayValue={dateParts.day}
+      monthValue={dateParts.month}
+      yearValue={dateParts.year}
       onChange={(_, dateObject) => {
         onChange(_, dateStr(dateObject))
       }}
