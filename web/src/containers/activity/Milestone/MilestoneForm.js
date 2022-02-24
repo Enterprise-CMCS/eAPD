@@ -68,6 +68,7 @@ const MilestoneForm = forwardRef(
         value={state.endDate}
         onChange={changeDate}
         onBlur={validateSubForm}
+        onKeyUp={validateSubForm}
       />
       <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
     </form>

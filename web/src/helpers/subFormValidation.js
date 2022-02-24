@@ -15,6 +15,7 @@ export const removeError = (input) => {
 }
 
 export const disableSave = (container) => {
+  const doneBtn = container.querySelector('#form-and-review-list--done-btn');
   var inputs = container.querySelectorAll('input[type=text]')
   var emptyInputs = 0;
 
@@ -29,7 +30,6 @@ export const disableSave = (container) => {
   }
 
   if (emptyInputs > 0) {
-    const doneBtn = container.querySelector('#form-and-review-list--done-btn');
     doneBtn.disabled = true;
   } else {
     doneBtn.disabled = false;
