@@ -1,6 +1,6 @@
 /* eslint-disable no-cond-assign */
 const error = 'missing-text-error';
-const alert = 'missing-text-alert';
+const fieldAlert = 'ds-c-field--error';
 
 export const findTextAncestor = (e) => {
   // eslint-disable-next-line no-param-reassign
@@ -34,7 +34,7 @@ export const addMissingTextAlert = (e, p, n) => {
 
   if (!lastDiv.classList.contains(error)) {
     div.classList.add(error);
-    e.classList.add(alert);
+    e.classList.add(fieldAlert);
     p.appendChild(div);
   }
 
@@ -45,9 +45,11 @@ export const removeMissingTextAlert = (e, p) => {
   const lastDiv = p.lastChild;
 
   if(lastDiv.classList.contains(error)) {
-    e.classList.remove(alert);
+    e.classList.remove(fieldAlert);
     lastDiv.classList.remove(error);
     p.removeChild(lastDiv);
+  } else if (e.classList.contains(fieldAlert)) {
+    e.classList.remove(fieldAlert);
   }
 
   disableBtn(e);

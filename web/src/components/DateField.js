@@ -1,7 +1,7 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import formatISO from 'date-fns/formatISO';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 const dateParts = (value) => {
   if (!value) {
@@ -11,9 +11,7 @@ const dateParts = (value) => {
       year: ''
     };
   } else {
-    const newDate = new Date(value);
-    console.log(newDate.getDate())
-    
+    const newDate = new Date(value);    
     return {
       day: newDate.getUTCDate(),
       month: newDate.getUTCMonth() + 1,

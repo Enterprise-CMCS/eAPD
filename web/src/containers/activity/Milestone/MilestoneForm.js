@@ -10,6 +10,7 @@ import {
 } from '../../../actions/editActivity';
 
 import { validateText } from '../../../helpers/textValidation';
+import { validateSubForm } from '../../../helpers/subFormValidation';
 
 const MilestoneForm = forwardRef(
   (
@@ -57,7 +58,6 @@ const MilestoneForm = forwardRef(
         name="name"
         value={state.milestone}
         className="remove-clearfix"
-        fieldClassName='required-input'
         onChange={changeName}
         onBlur={validateText}
         onKeyUp={validateText}
@@ -67,6 +67,7 @@ const MilestoneForm = forwardRef(
         hint=""
         value={state.endDate}
         onChange={changeDate}
+        onBlur={validateSubForm}
       />
       <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
     </form>
