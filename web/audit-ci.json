@@ -1,61 +1,19 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [
-    1005174, 1005024, 1005029, 1005154, 1005291, 1006846, 1006852, 1006854,
-    1006865, 1006864, 1006947
-  ],
+  "allowlist": [1005291, 1006947],
   "_comment": {
-    "1005174": {
-      "advisory": "https://github.com/advisories/GHSA-w8qv-6jwh-64r5",
-      "module": "browserslist",
-      "affects": ["@storybook/builder-webpack5@6.4.9 - storybook"]
-    },
-    "1005024": {
-      "advisory": "https://github.com/advisories/GHSA-c36v-fmgq-m8hx",
-      "module": "immer",
-      "affects": ["@storybook/builder-webpack5@6.4.9 - storybook"]
-    },
-    "1005029": {
-      "advisory": "https://github.com/advisories/GHSA-33f9-j839-rf8h",
-      "module": "immer",
-      "affects": ["@storybook/builder-webpack5@6.4.9 - storybook"]
-    },
-    "1005154": {
-      "advisory": "https://github.com/advisories/GHSA-ww39-953v-wcq6",
-      "module": "glob-parent",
-      "affects": [
-        "@storybook/addon-docs@6.4.9 - storybook",
-        "@storybook/react@6.4.9 - storybook"
-      ]
-    },
     "1005291": {
       "advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
       "module": "trim",
-      "affects": ["@storybook/addon-docs@6.4.9 - storybook"]
+      "affects": ["@storybook/addon-docs@6.4.18 - storybook"]
     },
-    "1004967": {
-      "advisory": "https://github.com/advisories/GHSA-rp65-9cf3-cjxr",
-      "module": "nth-check",
-      "affects": ["cssnano@4.1.11 - used to build css, not used in production"]
-    },
-    "1006846": {
-      "advisory": "https://github.com/advisories/GHSA-566m-qj78-rww5",
-      "module": "postcss",
-      "affects": ["@storybook/addon-docs@6.4.9 - storybook"]
-    },
-    "1006852": {
-      "advisory": "https://github.com/advisories/GHSA-5rrq-pxf6-6jx5",
-      "module": "node-forge",
+    "1006947": {
+      "advisory": "https://github.com/advisories/GHSA-ww39-953v-wcq6",
+      "module": "glob-parent",
       "affects": [
-        "webpack-dev-server@4.7.2 - used in development not production"
-      ]
-    },
-    "1006854": {
-      "advisory": "https://github.com/advisories/GHSA-gf8q-jrpm-jvxq",
-      "module": "node-forge",
-      "affects": [
-        "webpack-dev-server@4.7.2 - used in development not production"
+        "@storybook/addon-docs@6.4.18 - storybook",
+        "@storybook/react@6.4.18 - storybook"
       ]
     }
   },
