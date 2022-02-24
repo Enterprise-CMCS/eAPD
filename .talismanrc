@@ -22,7 +22,7 @@ fileignoreconfig:
   - filename: bin/preview-deploy/aws.user-data.sh
     checksum: 56d65ab9d0cca67ae0ad44ac952ce2e14b8a92e7404e01cb9ef116a4d4a987de
   - filename: docker-compose.yml
-    checksum: 6c5bfd5000fc45b322be1474cc6537ed865ca40f2c056c2e8e3faa35749b4ea3
+    checksum: bf75f0f1a68256ffa76eeb60bf56bda9dcfbe09b7783d76f42f0acc33f0cc6d7
   - filename: packer/bootstrap202202171243.sh
     checksum: 596aaacbbb5a410a3311d1a81f849bab511534554f4518f90ea47dc095a67123
   - filename: terraform/greenfield/eapd/backend.tf

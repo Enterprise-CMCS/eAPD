@@ -9,12 +9,6 @@ const setup = () =>
     const connectionString =
       process.env.MONGO_URL || 'mongodb://mongo:cms@mongo:27017/eapd';
     const dbName = process.env.MONGO_DATABASE || 'eapd';
-    logger.info(
-      `Connecting to MongoDB at ${dbName} at ${connectionString.replace(
-        /:\/\/.*@/,
-        '://'
-      )}`
-    );
 
     mongoose.connection.on('connected', () => {
       logger.verbose('MongoDB connected');
@@ -29,7 +23,6 @@ const setup = () =>
       });
     } catch (err) {
       logger.error(`Error in MongoDB connection: ${err}`);
-      logger.error(`Full error: ${JSON.stringify(err)}`);
       reject(err);
     }
   });
