@@ -255,8 +255,8 @@ source ~/.bashrc
 
 # We're using Node 16, and we don't care about minor/patch versions, so always
 # get the latest.
-nvm install 16
-nvm alias default 16
+nvm install 16.13.2
+nvm alias default 16.13.2
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
@@ -268,6 +268,7 @@ curl -o backend.zip -L __BUILDURL__
 unzip backend.zip
 rm backend.zip
 cd api
+npm ci --only=production 
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
 npm rebuild knex
