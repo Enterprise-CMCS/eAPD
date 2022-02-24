@@ -43,7 +43,7 @@ function deployPreviewtoEC2() {
   EXISTING_INSTANCES=$(findExistingInstances)
 
   AMI_ID=$(findAMI)
-  print "• Using most recent eAPD Plantinum AMI: $AMI_ID"
+  print "• Using most recent eAPD Preview AMI: $AMI_ID"
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
@@ -151,6 +151,8 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__MONGO_DATABASE_PASSWORD__|`echo $MONGO_DATABASE_PASSWORD`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__DATABASE_URL__|`echo $DATABASE_URL`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 
@@ -164,13 +166,13 @@ function configureUserData() {
 #   PR_NUM - Github pull request number associated with this instance
 function createNewInstance() {
   aws ec2 run-instances \
-    --instance-type t3.medium \
+    --instance-type t3.large \
     --image-id $1 \
     --security-group-ids "$AWS_SECURITY_GROUP" \
     --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}},{Key=cms-cloud-exempt:open-sg,Value=CLDSPT-5877}]" \
     --user-data file://aws.user-data.sh \
-    --key-name tforkner_eapd \
+    --key-name eapd_bbrooks \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
@@ -179,7 +181,7 @@ function findAMI() {
   aws ec2 describe-images \
     --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
     --filter 'Name=is-public,Values=false' \
-    --filter 'Name=name,Values=eAPD Platinum AMI - *' \
+    --filter 'Name=name,Values=eAPD Preview AMI - *' \
     | jq -r -c 'sort_by(.date)|last|.id'
 }
 
