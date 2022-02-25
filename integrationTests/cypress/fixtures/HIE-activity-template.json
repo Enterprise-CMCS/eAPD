@@ -134,37 +134,37 @@
     "activityBudgetTable": [
       [
         [],
-        ["Public Information Officer", "$165,000", "0.5 FTE", "$82,500"],
-        ["Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)", "$110,012", "1 FTE", "$110,012"],
-        ["Other Funding Amount", "$2,805"],
+        ["Public Information Officer", "$165,000", "×", "0.5 FTE", "=", "$82,500"],
+        ["Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)", "$110,012", "×", "1 FTE", "=", "$110,012"],
+        ["Other Funding Amount", "-", "$2,805"],
         ["State Staff Subtotal", "$189,707"],
         [],
-        ["Hardware, software, and licensing", "$40,000"],
-        ["Equipment and supplies", "$500"],
-        ["Other Funding Amount", "$590"],
+        ["Hardware, software, and licensing", "", "", "", "", "$40,000"],
+        ["Equipment and supplies", "", "", "", "", "$500"],
+        ["Other Funding Amount", "-", "$590"],
         ["Other State Expenses Subtotal", "$39,910"],
         [],
-        ["Tech Consulting Inc.", "$40,000"],
-        ["Interface Vendor Inc.", "$150", "10 hours", "$1,500"],
-        ["Other Funding Amount", "$605"],
+        ["Tech Consulting Inc.", "", "", "", "", "$40,000"],
+        ["Interface Vendor Inc.", "$150", "×", "10 hours", "=", "$1,500"],
+        ["Other Funding Amount", "-", "$605"],
         ["Private Contractor Subtotal", "$40,895"],
         ["Activity 2 Total Computable Medicaid Cost", "$270,512"]
       ],
       [
         [],
-        ["Public Information Officer", "$170,000", "0.5 FTE", "$85,000"],
-        ["Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)", "$111,102", "1 FTE", "$111,102"],
-        ["Other Funding Amount", "$6,353"],
+        ["Public Information Officer", "$170,000", "×", "0.5 FTE", "=", "$85,000"],
+        ["Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)", "$111,102", "×", "1 FTE", "=", "$111,102"],
+        ["Other Funding Amount", "-", "$6,353"],
         ["State Staff Subtotal", "$189,749"],
         [],
-        ["Hardware, software, and licensing", "$40,000"],
-        ["Equipment and supplies", "$200"],
-        ["Other Funding Amount", "$1,302"],
+        ["Hardware, software, and licensing", "", "", "", "", "$40,000"],
+        ["Equipment and supplies", "", "", "", "", "$200"],
+        ["Other Funding Amount", "-", "$1,302"],
         ["Other State Expenses Subtotal", "$38,898"],
         [],
-        ["Tech Consulting Inc.", "$40,000"],
-        ["Interface Vendor Inc.", "$20", "75 hours", "$1,500"],
-        ["Other Funding Amount", "$1,345"],
+        ["Tech Consulting Inc.", "", "", "", "", "$40,000"],
+        ["Interface Vendor Inc.", "$20", "×", "75 hours", "=", "$1,500"],
+        ["Other Funding Amount", "-", "$1,345"],
         ["Private Contractor Subtotal", "$40,155"],
         ["Activity 2 Total Computable Medicaid Cost", "$268,802"]
       ]
@@ -173,12 +173,12 @@
     "activityTotalCostTable": [
       [
         ["$274,512"],
-        ["Other Funding", "$4,000"],
+        ["Other Funding", "-", "$4,000"],
         ["Activity Total Computable Medicaid Cost", "$270,512"]
       ],
       [
         ["$277,802"],
-        ["Other Funding", "$9,000"],
+        ["Other Funding", "-", "$9,000"],
         ["Activity Total Computable Medicaid Cost", "$268,802"]
       ]
     ],
@@ -186,13 +186,13 @@
     "activityFedSplitTable": [
       [
         ["$270,512"],
-        ["Federal Share", "$270,512", "50%", "$135,256"],
-        ["State Share", "$270,512", "50%", "$135,256"]
+        ["Federal Share", "$270,512", "×", "50%", "=", "$135,256"],
+        ["State Share", "$270,512", "×", "50%", "=", "$135,256"]
       ],
       [
         ["$268,802"],
-        ["Federal Share", "$268,802", "90%", "$241,922"],
-        ["State Share", "$268,802", "10%", "$26,880"]
+        ["Federal Share", "$268,802", "×", "90%", "=", "$241,922"],
+        ["State Share", "$268,802", "×", "10%", "=", "$26,880"]
       ]
     ],
 
@@ -217,17 +217,17 @@
     "activityTotalCostTableExportView": [
       [
         ["$274,512"],
-        ["Other Funding", "$4,000"],
-        ["Activity Total Computable Medicaid Cost", "$270,512"],
-        ["Federal Share", "$270,512", "50%", "$135,256"],
-        ["State Share", "$270,512", "50%", "$135,256"]
+        ["Other Funding", "", "-", "$4,000"],
+        ["Activity Total Computable Medicaid Cost", "", "$270,512"],
+        ["Federal Share", "$270,512", "×", "50%", "=", "$135,256"],
+        ["State Share", "$270,512", "×", "50%", "=", "$135,256"]
       ],
       [
         ["$277,802"],
-        ["Other Funding", "$9,000"],
-        ["Activity Total Computable Medicaid Cost", "$268,802"],
-        ["Federal Share", "$268,802", "90%", "$241,922"],
-        ["State Share", "$268,802", "10%", "$26,880"]
+        ["Other Funding", "", "-", "$9,000"],
+        ["Activity Total Computable Medicaid Cost", "", "$268,802"],
+        ["Federal Share", "$268,802", "×", "90%", "=", "$241,922"],
+        ["State Share", "$268,802", "×", "10%", "=", "$26,880"]
       ]
     ]
   },

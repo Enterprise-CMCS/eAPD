@@ -203,6 +203,8 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            # - e2e test
+
       - frontend deploy:
           name: frontend deploy production
           env: PRODUCTION
@@ -217,6 +219,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            # - e2e test
 
       # joint jobs
       - preview deploy:
@@ -229,6 +232,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
+            # - e2e test
 
       - store artifacts:
           name: store artifacts staging
@@ -513,7 +517,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_DATABASE="${<< parameters.env >>_MONGO_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -786,7 +790,8 @@ jobs:
                 --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD" \
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
                 --MONGO_URL "$PREVIEW_MONGO_URL" \
-                --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL"
+                --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
+                --DATABASE_URL "$PREVIEW_DATABASE_URL"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
@@ -812,7 +817,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install zip -y
             cd api
-            npm ci
+            npm ci --only=production
             cd ..
             zip -r /tmp/backend.zip api/*
             zip -r /tmp/frontend.zip web/dist/*

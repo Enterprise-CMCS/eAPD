@@ -261,10 +261,8 @@ class FillOutActivityPage {
           cy.get(table)
             .getActivityTable()
             .then(tableData => {
-              _.forEach(budgetData.activityBudgetTable[ffyIndex], (data, i) => {
-                _.forEach(data, elem => {
-                  expect(tableData[i]).to.deep.include(elem);
-                });
+              _.forEach(budgetData.activityBudgetTable[ffyIndex], data => {
+                expect(tableData).to.deep.include(data);
               });
             });
         });
@@ -276,14 +274,9 @@ class FillOutActivityPage {
             cy.get(table)
               .getActivityTable()
               .then(tableData => {
-                _.forEach(
-                  budgetData.activityTotalCostTable[ffyIndex],
-                  (data, i) => {
-                    _.forEach(data, elem => {
-                      expect(tableData[i]).to.deep.include(elem);
-                    });
-                  }
-                );
+                _.forEach(budgetData.activityTotalCostTable[ffyIndex], data => {
+                  expect(tableData).to.deep.include(data);
+                });
               });
           });
 
@@ -299,14 +292,9 @@ class FillOutActivityPage {
             cy.get(table)
               .getActivityTable()
               .then(tableData => {
-                _.forEach(
-                  budgetData.activityFedSplitTable[ffyIndex],
-                  (data, i) => {
-                    _.forEach(data, elem => {
-                      expect(tableData[i]).to.deep.include(elem);
-                    });
-                  }
-                );
+                _.forEach(budgetData.activityFedSplitTable[ffyIndex], data => {
+                  expect(tableData).to.deep.include(data);
+                });
               });
           });
       } else {
@@ -318,10 +306,8 @@ class FillOutActivityPage {
               .then(tableData => {
                 _.forEach(
                   budgetData.activityTotalCostTableExportView[ffyIndex],
-                  (data, i) => {
-                    _.forEach(data, elem => {
-                      expect(tableData[i]).to.deep.include(elem);
-                    });
+                  data => {
+                    expect(tableData).to.deep.include(data);
                   }
                 );
               });

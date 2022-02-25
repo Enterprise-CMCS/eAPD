@@ -1,10 +1,10 @@
-
 ### FUTURE USE ###
-### Will function like main.tf for Prod ###
+### Will function like main.tf for Staging ###
+
 terraform {
   backend "s3" {
     bucket         = "eapd-terraform-state"
-    key            = "eapd_prod_terraform.tfstate"
+    key            = "eapd_impl_terraform.tfstate"
     region         = "us-east-1"
     ### Potential future use, allows for resource locking to prevent collisions from multiple users 
     # Replace this with your DynamoDB table name!
@@ -19,7 +19,3 @@ provider "aws" {
     access_key = ""
     secret_key = ""
 }
-
-module "eAPD" {
-    source = "./modules"
-    instance_name = var.instance_name
