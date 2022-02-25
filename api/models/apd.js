@@ -53,7 +53,6 @@ const incentivePayment = new mongoose.Schema(
 );
 
 const apdSchema = new mongoose.Schema({
-  name: String,
   createdAt: {
     type: Date,
     default: Date.now(),
@@ -72,6 +71,117 @@ const apdSchema = new mongoose.Schema({
   stateId: {
     type: String,
     required: true
+  },
+  apdOverview: {
+    name: String,
+    years: [
+      {
+        _id: false,
+        type: String,
+        validate: {
+          validator: v => {
+            const re = /^[0-9]{4}$/;
+            return v == null || re.test(v);
+          },
+          message: 'Provided year is invalid.'
+        }
+      }
+    ],
+    programOverview: String,
+    narrativeHIT: String,
+    narrativeHIE: String,
+    narrativeMMIS: String
+  },
+  keyStatePersonnel: {
+    medicaidDirector: {
+      name: String,
+      email: String,
+      phone: String
+    },
+    medicaidOffice: {
+      address1: String,
+      address2: String,
+      city: String,
+      state: String,
+      zip: String
+    },
+    keyPersonnel: [
+      {
+        _id: false,
+        name: String,
+        position: String,
+        email: String,
+        isPrimary: Boolean,
+        fte: {
+          type: Map,
+          of: {
+            type: Number,
+            default: 0
+          }
+        },
+        hasCosts: Boolean,
+        costs: {
+          type: Map,
+          of: {
+            type: Number,
+            default: 0
+          }
+        }
+      }
+    ]
+  },
+  previousActivities: {
+    previousActivitySummary: String,
+    actualExpenditures: {
+      type: Map,
+      of: new mongoose.Schema(
+        {
+          hithie: {
+            federalActual: {
+              type: Number,
+              default: 0
+            },
+            totalApproved: {
+              type: Number,
+              default: 0
+            }
+          },
+          mmis: {
+            50: {
+              federalActual: {
+                type: Number,
+                default: 0
+              },
+              totalApproved: {
+                type: Number,
+                default: 0
+              }
+            },
+            75: {
+              federalActual: {
+                type: Number,
+                default: 0
+              },
+              totalApproved: {
+                type: Number,
+                default: 0
+              }
+            },
+            90: {
+              federalActual: {
+                type: Number,
+                default: 0
+              },
+              totalApproved: {
+                type: Number,
+                default: 0
+              }
+            }
+          }
+        },
+        { _id: false }
+      )
+    }
   },
   activities: [
     {
@@ -227,136 +337,35 @@ const apdSchema = new mongoose.Schema({
       }
     }
   ],
-  federalCitations: {
+  // Currently there are no inputs in activity schedule summary
+  // but this should be used to follow the sections pattern
+  // activityScheduleSummary: {},
+  proposedBudget: {
+    incentivePayments: {
+      ehAmt: {
+        type: Map,
+        of: incentivePayment
+      },
+      ehCt: {
+        type: Map,
+        of: incentivePayment
+      },
+      epAmt: {
+        type: Map,
+        of: incentivePayment
+      },
+      epCt: {
+        type: Map,
+        of: incentivePayment
+      }
+    } 
+  },
+  assurancesAndCompliances: {
     procurement: [federalCitation],
     recordsAccess: [federalCitation],
     softwareRights: [federalCitation],
     security: [federalCitation]
-  },
-  incentivePayments: {
-    ehAmt: {
-      type: Map,
-      of: incentivePayment
-    },
-    ehCt: {
-      type: Map,
-      of: incentivePayment
-    },
-    epAmt: {
-      type: Map,
-      of: incentivePayment
-    },
-    epCt: {
-      type: Map,
-      of: incentivePayment
-    }
-  },
-  keyPersonnel: [
-    {
-      _id: false,
-      name: String,
-      position: String,
-      email: String,
-      isPrimary: Boolean,
-      fte: {
-        type: Map,
-        of: {
-          type: Number,
-          default: 0
-        }
-      },
-      hasCosts: Boolean,
-      costs: {
-        type: Map,
-        of: {
-          type: Number,
-          default: 0
-        }
-      }
-    }
-  ],
-  narrativeHIE: String,
-  narrativeHIT: String,
-  narrativeMMIS: String,
-  previousActivityExpenses: {
-    type: Map,
-    of: new mongoose.Schema(
-      {
-        hithie: {
-          federalActual: {
-            type: Number,
-            default: 0
-          },
-          totalApproved: {
-            type: Number,
-            default: 0
-          }
-        },
-        mmis: {
-          50: {
-            federalActual: {
-              type: Number,
-              default: 0
-            },
-            totalApproved: {
-              type: Number,
-              default: 0
-            }
-          },
-          75: {
-            federalActual: {
-              type: Number,
-              default: 0
-            },
-            totalApproved: {
-              type: Number,
-              default: 0
-            }
-          },
-          90: {
-            federalActual: {
-              type: Number,
-              default: 0
-            },
-            totalApproved: {
-              type: Number,
-              default: 0
-            }
-          }
-        }
-      },
-      { _id: false }
-    )
-  },
-  previousActivitySummary: String,
-  programOverview: String,
-  stateProfile: {
-    medicaidDirector: {
-      name: String,
-      email: String,
-      phone: String
-    },
-    medicaidOffice: {
-      address1: String,
-      address2: String,
-      city: String,
-      state: String,
-      zip: String
-    }
-  },
-  years: [
-    {
-      _id: false,
-      type: String,
-      validate: {
-        validator: v => {
-          const re = /^[0-9]{4}$/;
-          return v == null || re.test(v);
-        },
-        message: 'Provided year is invalid.'
-      }
-    }
-  ]
+  }
 });
 
 const APD = mongoose.model('APD', apdSchema);
