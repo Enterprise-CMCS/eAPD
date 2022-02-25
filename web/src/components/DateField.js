@@ -51,7 +51,7 @@ const DateField = ({ value, onChange, ...rest }) => {
     let yearInvalid = false;
 
     if (!dayVal || dayVal > 31 || !monthVal || monthVal > 12 || yearVal.length !== 4) {
-      message.push('Please provide a target completion date.')
+      message.push('Please enter a valid date.')
 
       if (!dayVal || dayVal > 31) {
         dayInvalid = true;
