@@ -1,0 +1,243 @@
+{
+  "activityName": "Claims Data Analytics",
+
+  "activityOverview": 
+    {
+      "name": "Claims Data Analytics",
+      "fundingType": "HIE",
+      "shortOverview": "To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
+      "startDate": [2, 24, 2032],
+      "endDate": [8, 28, 2034],
+      "detailedDescription": "Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the HIT Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required HIT changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.",
+      "supportingJustifications": "Medicaid Claims Data Feed to the HIE",
+      "supportsMedicaid": "This activity does support the medicaid standards and conditions."
+    },
+
+  "outcomes":
+    {
+      "names": [
+        "Supplies driven across the continent",
+        "Free community cooking lessons"
+      ],
+      "metrics": [
+        ["Provides supplies across the U.S.", "Must be completed by due date"],
+        [
+          "Gives opporunity to cook cheap meals",
+          "Provides recepie save feature"
+        ]
+      ]
+    },
+
+  "milestones":
+    {
+      "names": [
+        "Completion by the due date",
+        "Follows the 3 guiding principles"
+      ],
+      "dates": [
+        [12, 6, 2022],
+        [3, 5, 2023]
+      ]
+    },
+
+  "staff": [
+    {
+      "title": "Public Information Officer",
+      "description": "Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program",
+      "costs": [165000, 170000],
+      "ftes": [0.5, 0.5]
+    },
+    {
+      "title": "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
+      "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
+      "costs": [110012, 111102],
+      "ftes": [1, 1]
+    }
+  ],
+
+  "expenses": [
+    {
+      "category": "Hardware, software, and licensing",
+      "costs": [40000, 40000],
+      "description": "Purchases of new laptops and licenses for Office software."
+    },
+    {
+      "category": "Equipment and supplies",
+      "costs": [500, 200],
+      "description": "Paper, pens, and pencils."
+    }
+  ],
+
+  "privateContractors": [
+    {
+      "name": "Tech Consulting Inc.",
+      "description": "Technology consulting and planning services.",
+      "start": [1, 5, 2014],
+      "end": [3, 2, 2025],
+      "totalCosts": 80000,
+      "hourly": false,
+      "FFYcosts": [40000, 40000]
+    },
+    {
+      "name": "Interface Vendor Inc.",
+      "description": "Hosting and development support.",
+      "start": [4, 7, 2020],
+      "end": [1, 2, 2024],
+      "totalCosts": 3000,
+      "hourly": true,
+      "FFYcosts": [
+        [10, 150],
+        [75, 20]
+      ]
+    }
+  ],
+
+  "costAllocation":
+  {
+    "description": "Activity 2 description for overall cost allocation.",
+    "FFYdescriptions": [
+      "This is the Other Funding description for Activity 2 - FFY 2021",
+      "This is the Other Funding description for Activity 2 - FFY 2022"
+    ],
+    "costs": [4000, 9000]
+  },
+
+  "splitConstants": [
+    {
+      "split": "75-25",
+      "fed": 0.75,
+      "state": 0.25
+    },
+    {
+      "split": "50-50",
+      "fed": 0.5,
+      "state": 0.5
+    },
+    {
+      "split": "90-10",
+      "fed": 0.9,
+      "state": 0.1
+    }
+  ],
+
+  "totals": [
+    {
+      "staff": [192512, 196102],
+      "expenses": [40500, 40200],
+      "contractors": [41500, 41500],
+      "other": [4000, 9000],
+      "fedShare": [0.1, 0.9]
+    }
+  ],
+
+  "budgetAndFFPTables": {
+    "activityBudgetTable": [
+      [
+        [],
+        ["Public Information Officer", "$165,000", "×", "0.5 FTE", "=", "$82,500"],
+        ["Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)", "$110,012", "×", "1 FTE", "=", "$110,012"],
+        ["Other Funding Amount", "-", "$2,805"],
+        ["State Staff Subtotal", "$189,707"],
+        [],
+        ["Hardware, software, and licensing", "", "", "", "", "$40,000"],
+        ["Equipment and supplies", "", "", "", "", "$500"],
+        ["Other Funding Amount", "-", "$590"],
+        ["Other State Expenses Subtotal", "$39,910"],
+        [],
+        ["Tech Consulting Inc.", "", "", "", "", "$40,000"],
+        ["Interface Vendor Inc.", "$150", "×", "10 hours", "=", "$1,500"],
+        ["Other Funding Amount", "-", "$605"],
+        ["Private Contractor Subtotal", "$40,895"],
+        ["Activity 2 Total Computable Medicaid Cost", "$270,512"]
+      ],
+      [
+        [],
+        ["Public Information Officer", "$170,000", "×", "0.5 FTE", "=", "$85,000"],
+        ["Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)", "$111,102", "×", "1 FTE", "=", "$111,102"],
+        ["Other Funding Amount", "-", "$6,353"],
+        ["State Staff Subtotal", "$189,749"],
+        [],
+        ["Hardware, software, and licensing", "", "", "", "", "$40,000"],
+        ["Equipment and supplies", "", "", "", "", "$200"],
+        ["Other Funding Amount", "-", "$1,302"],
+        ["Other State Expenses Subtotal", "$38,898"],
+        [],
+        ["Tech Consulting Inc.", "", "", "", "", "$40,000"],
+        ["Interface Vendor Inc.", "$20", "×", "75 hours", "=", "$1,500"],
+        ["Other Funding Amount", "-", "$1,345"],
+        ["Private Contractor Subtotal", "$40,155"],
+        ["Activity 2 Total Computable Medicaid Cost", "$268,802"]
+      ]
+    ],
+
+    "activityTotalCostTable": [
+      [
+        ["$274,512"],
+        ["Other Funding", "-", "$4,000"],
+        ["Activity Total Computable Medicaid Cost", "$270,512"]
+      ],
+      [
+        ["$277,802"],
+        ["Other Funding", "-", "$9,000"],
+        ["Activity Total Computable Medicaid Cost", "$268,802"]
+      ]
+    ],
+
+    "activityFedSplitTable": [
+      [
+        ["$270,512"],
+        ["Federal Share", "$270,512", "×", "50%", "=", "$135,256"],
+        ["State Share", "$270,512", "×", "50%", "=", "$135,256"]
+      ],
+      [
+        ["$268,802"],
+        ["Federal Share", "$268,802", "×", "90%", "=", "$241,922"],
+        ["State Share", "$268,802", "×", "10%", "=", "$26,880"]
+      ]
+    ],
+
+    "quarterVals": [
+      [25, 25, 25, 25, 25, 25, 25, 25],
+      [25, 25, 25, 25, 25, 25, 25, 25]
+    ],
+
+    "activityEstQuarterlyExpenditure": [
+      [
+        ["$28,703", "$28,702", "$28,702", "$28,701", "$114,808"],
+        ["$5,112", "$5,112", "$5,112", "$5,112", "$20,448"],
+        ["$33,815", "$33,814", "$33,814", "$33,813", "$135,256"]
+      ],
+      [
+        ["$51,446", "$51,446", "$51,445", "$51,445", "$205,782"],
+        ["$9,035", "$9,035", "$9,035", "$9,035", "$36,140"],
+        ["$60,481", "$60,481", "$60,480", "$60,480", "$241,922"]
+      ]
+    ],
+
+    "activityTotalCostTableExportView": [
+      [
+        ["$274,512"],
+        ["Other Funding", "", "-", "$4,000"],
+        ["Activity Total Computable Medicaid Cost", "", "$270,512"],
+        ["Federal Share", "$270,512", "×", "50%", "=", "$135,256"],
+        ["State Share", "$270,512", "×", "50%", "=", "$135,256"]
+      ],
+      [
+        ["$277,802"],
+        ["Other Funding", "", "-", "$9,000"],
+        ["Activity Total Computable Medicaid Cost", "", "$268,802"],
+        ["Federal Share", "$268,802", "×", "90%", "=", "$241,922"],
+        ["State Share", "$268,802", "×", "10%", "=", "$26,880"]
+      ]
+    ]
+  },
+
+  "FFYTotalDescription":
+  {
+    "totalCost": 552314,
+    "totalOtherFunding": 13000,
+    "totalTotalMedicaidCost": 539314,
+    "totalFederalShare": 377178,
+    "totalStateShare": 162136
+  }
+}

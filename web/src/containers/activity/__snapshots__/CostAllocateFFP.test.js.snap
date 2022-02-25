@@ -12,6 +12,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   >
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPActivityTable"
       id="activity0-ffy1990"
     >
       <caption
@@ -151,6 +152,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
     </table>
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPActivityTotalCostTable"
     >
       <tbody>
         <tr
@@ -250,6 +252,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
     </div>
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPFedStateSplitTable"
     >
       <tbody>
         <tr
@@ -316,6 +319,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
   >
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPActivityTable"
       id="activity0-ffy1991"
     >
       <caption
@@ -455,6 +459,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
     </table>
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPActivityTotalCostTable"
     >
       <tbody>
         <tr
@@ -554,6 +559,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
     </div>
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPFedStateSplitTable"
     >
       <tbody>
         <tr
@@ -772,6 +778,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   >
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPActivityTable"
       id="activity0-ffy1990"
     >
       <caption
@@ -911,6 +918,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
     </table>
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPActivityTotalCostTable"
     >
       <tbody>
         <tr
@@ -953,7 +961,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
           className="budget-table--subtotal budget-table--row__highlight"
         >
           <td>
-            Total Computable Medicaid Cost
+            Activity Total Computable Medicaid Cost
           </td>
           <td
             colSpan="4"
@@ -1005,6 +1013,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
   >
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPActivityTable"
       id="activity0-ffy1991"
     >
       <caption
@@ -1144,6 +1153,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
     </table>
     <table
       className="budget-table activity-budget-table"
+      data-cy="FFPActivityTotalCostTable"
     >
       <tbody>
         <tr
@@ -1186,7 +1196,7 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in vi
           className="budget-table--subtotal budget-table--row__highlight"
         >
           <td>
-            Total Computable Medicaid Cost
+            Activity Total Computable Medicaid Cost
           </td>
           <td
             colSpan="4"
