@@ -1,0 +1,241 @@
+{
+  "activityName": "Program Administration",
+
+  "activityOverview": 
+  {
+    "name": "Program Administration",
+    "fundingType": "HIT",
+    "shortOverview": "Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.",
+    "startDate": [7, 14, 2021],
+    "endDate": [3, 12, 2024],
+    "detailedDescription": "Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program. The modifications of the SLR for CMS program rule changes and guidance changes (Stage 3, IPPS, and OPPS) will require extensive development and implementation efforts and is essential to the effective administration of the Medicaid EHR Incentive Program. Modifications to the SLR are done in phases depending on how CMS rule changes occur. The implementation of the design elements will require provider onboarding activities to be initiated and completed including outreach and training for all program participants. The SLR will increase the efficiency with which Tycho Medicaid administers the program; allow for increased oversight and assure that the program is operated in accordance with the complex and evolving program rules and requirements.",
+    "supportingJustifications": "The 2015-2017 rule changes are significant and wide ranging; minimally accommodating the new attestations will be problematic for the remainder of the program. Program benefits will potentially not be maximized. To be prepared for Stage 3 and to properly implement all 2015-2017 rule changes; Tycho plans to implement all necessary modifications.",
+    "supportsMedicaid": "This activity support the medicaid standards and conditions."
+  },
+
+  "outcomes":
+    {
+      "names": [
+        "Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.",
+        "Provide support to EPs and EHs through attestation process."
+      ],
+      "metrics": [
+        [
+          "Complete SLR modifications by 11/1/21",
+          "Accept attestations through 4/30/22"
+        ],
+        [
+          "Guidance available on Tycho''s websites",
+          "Office hours availble for EPs and EHs"
+        ]
+      ]
+    },
+
+  "milestones":
+    {
+      "names": [
+        "Implementation of Final Rule and Stage 3 System Developments",
+        "Environmental Scan Completion"
+      ],
+      "dates": [
+        [10, 5, 2021],
+        [3, 2, 2022]
+      ]
+    },
+
+  "staff": [
+    {
+      "title": "Project Assistant",
+      "description": "Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.",
+      "costs": [86000, 88000],
+      "ftes": [1, 1]
+    },
+    {
+      "title": "Accountant III",
+      "description": "Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.",
+      "costs": [101000, 109000],
+      "ftes": [3, 3]
+    }
+  ],
+
+  "expenses": [
+    {
+      "category": "Training and outreach",
+      "costs": [40000, 40000],
+      "description": "Recorded media and radio for supporting outreach."
+    },
+    {
+      "category": "Travel",
+      "costs": [35000, 35000],
+      "description": "Airplane tickets, gasoline, and taxi services."
+    }
+  ],
+
+  "privateContractors": [
+    {
+      "name": "Super SLR Incorporated",
+      "description": "Maintain SLR",
+      "start": [12, 9, 2034],
+      "end": [5, 12, 2040],
+      "totalCosts": 50000,
+      "hourly": false,
+      "FFYcosts": [25000, 25000]
+    },
+    {
+      "name": "Bob the Builder",
+      "description": "Can he build it? Yes he can!",
+      "start": [2, 4, 2006],
+      "end": [5, 16, 2008],
+      "totalCosts": 60000,
+      "hourly": false,
+      "FFYcosts": [30000, 30000]
+    }
+  ],
+
+  "costAllocation":
+  {
+    "description": "Activity 1 description for overall cost allocation.",
+    "FFYdescriptions": [
+      "This is the Other Funding description for Activity 1 - FFY 2021",
+      "This is the Other Funding description for Activity 1 - FFY 2022"
+    ],
+    "costs": [5000, 8000]
+  },
+
+  "splitConstants": [
+    {
+      "split": "75-25",
+      "fed": 0.75,
+      "state": 0.25
+    },
+    {
+      "split": "50-50",
+      "fed": 0.5,
+      "state": 0.5
+    },
+    {
+      "split": "90-10",
+      "fed": 0.9,
+      "state": 0.1
+    }
+  ],
+
+  "totals": [
+    {
+      "staff": [303000, 327000],
+      "expenses": [35000, 35000],
+      "contractors": [30000, 30000],
+      "other": [5000, 8000],
+      "fedShare": [0.75, 0.5]
+    }
+  ],
+
+  "budgetAndFFPTables": {
+    "activityBudgetTable": [
+      [
+        [],
+        ["Ervin Howell (APD Key Personnel)", "", "", "", "", "$0"],
+        ["Clementine Bauch (APD Key Personnel)", "$0", "×", "0 FTE", "=", "$0"],
+        ["Accountant III", "$101,000", "×", "3 FTE", "=", "$303,000"],
+        ["Other Funding Amount", "-", "$4,117"],
+        ["State Staff Subtotal", "$298,883"],
+        [],
+        ["Travel", "", "", "", "", "$35,000"],
+        ["Other Funding Amount", "-", "$475"],
+        ["Other State Expenses Subtotal", "$34,525"],
+        [],
+        ["Bob the Builder", "", "", "", "", "$30,000"],
+        ["Other Funding Amount", "-", "$408"],
+        ["Private Contractor Subtotal", "$29,592"],
+        ["Activity 1 Total Computable Medicaid Cost", "$363,000"]
+      ],
+      [
+        [],
+        ["Ervin Howell (APD Key Personnel)", "", "", "", "", "$0"],
+        ["Clementine Bauch (APD Key Personnel)", "$0", "×", "0 FTE", "=", "$0"],
+        ["Accountant III", "$109,000", "×", "3 FTE", "=", "$327,000"],
+        ["Other Funding Amount", "-", "$6,674"],
+        ["State Staff Subtotal", "$320,326"],
+        [],
+        ["Travel", "", "", "", "", "$35,000"],
+        ["Other Funding Amount", "-", "$714"],
+        ["Other State Expenses Subtotal", "$34,286"],
+        [],
+        ["Bob the Builder", "", "", "", "", "$30,000"],
+        ["Other Funding Amount", "-", "$612"],
+        ["Private Contractor Subtotal", "$29,388"],
+        ["Activity 1 Total Computable Medicaid Cost", "$384,000"]
+      ]
+    ],
+
+    "activityTotalCostTable": [
+      [
+        ["$368,000"],
+        ["Other Funding", "-", "$5,000"],
+        ["Activity Total Computable Medicaid Cost", "$363,000"]
+      ],
+      [
+        ["$392,000"],
+        ["Other Funding", "-", "$8,000"],
+        ["Activity Total Computable Medicaid Cost", "$384,000"]
+      ]
+    ],
+
+    "activityFedSplitTable": [
+      [
+        ["$363,000"],
+        ["Federal Share", "$363,000", "×", "75%", "=", "$272,250"],
+        ["State Share", "$363,000", "×", "25%", "=", "$90,750"]
+      ],
+      [
+        ["$384,000"],
+        ["Federal Share", "$384,000", "×", "50%", "=", "$192,000"],
+        ["State Share", "$384,000", "×", "50%", "=", "$192,000"]
+      ]
+    ],
+
+    "quarterVals": [
+      [25, 25, 25, 25, 25, 25, 25, 25],
+      [25, 25, 25, 25, 25, 25, 25, 25]
+    ],
+
+    "activityEstQuarterlyExpenditure": [
+      [
+        ["$62,515", "$62,514", "$62,514", "$62,513", "$250,056"],
+        ["$5,549", "$5,549", "$5,548", "$5,548", "$22,194"],
+        ["$68,064", "$68,063", "$68,062", "$68,061", "$272,250"]
+      ],
+      [
+        ["$44,327", "$44,327", "$44,327", "$44,325", "$177,306"],
+        ["$3,674", "$3,674", "$3,673", "$3,673", "$14,694"],
+        ["$48,001", "$48,001", "$48,000", "$47,998", "$192,000"]
+      ]
+    ],
+
+    "activityTotalCostTableExportView": [
+      [
+        ["$368,000"],
+        ["Other Funding", "", "-", "$5,000"],
+        ["Activity Total Computable Medicaid Cost", "", "$363,000"],
+        ["Federal Share", "$363,000", "×", "75%", "=", "$272,250"],
+        ["State Share", "$363,000", "×",  "25%", "=", "$90,750"]
+      ],
+      [
+        ["$392,000"],
+        ["Other Funding", "", "-", "$8,000"],
+        ["Activity Total Computable Medicaid Cost", "", "$384,000"],
+        ["Federal Share", "$384,000", "×", "50%", "=", "$192,000"],
+        ["State Share", "$384,000", "×", "50%", "=", "$192,000"]
+      ]
+    ]
+  },
+
+  "FFYTotalDescription":
+  {
+    "totalCost": 760000,
+    "totalOtherFunding": 13000,
+    "totalTotalMedicaidCost": 747000,
+    "totalFederalShare": 464250,
+    "totalStateShare": 282750
+  }
+}

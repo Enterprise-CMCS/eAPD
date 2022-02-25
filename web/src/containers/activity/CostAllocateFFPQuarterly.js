@@ -31,15 +31,19 @@ const CostAllocateFFPQuarterly = ({
   setInHouseFFP,
   year
 }) => {
-  const setInHouse = quarter => ({ target: { value } }) => {
-    setInHouseFFP(activityIndex, year, quarter, value);
-    announce(aKey, year, quarter, 'inHouse');
-  };
+  const setInHouse =
+    quarter =>
+    ({ target: { value } }) => {
+      setInHouseFFP(activityIndex, year, quarter, value);
+      announce(aKey, year, quarter, 'inHouse');
+    };
 
-  const setContractor = quarter => ({ target: { value } }) => {
-    setContractorFFP(activityIndex, year, quarter, value);
-    announce(aKey, year, quarter, 'contractors');
-  };
+  const setContractor =
+    quarter =>
+    ({ target: { value } }) => {
+      setContractorFFP(activityIndex, year, quarter, value);
+      announce(aKey, year, quarter, 'contractors');
+    };
 
   // Wait until the budget is ready
   if (!quarterlyFFP) {
@@ -47,7 +51,7 @@ const CostAllocateFFPQuarterly = ({
   }
 
   return (
-    <table className="budget-table" key={year}>
+    <table className="budget-table" key={year} data-cy="FFPQuarterBudgetTable">
       <caption className="ds-u-visibility--screen-reader">
         Enter the federal fiscal year {year} quarterly breakdown by percentage.
       </caption>
