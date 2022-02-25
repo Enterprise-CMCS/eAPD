@@ -29,7 +29,7 @@ const DateField = ({ value, onChange, ...rest }) => {
     yearInvalid: false
   });
 
-  const [dateObj, setDateObj] = useState(dateParts(value));
+  const [dateObj] = useState(dateParts(value));
 
   const dateStr = (dateObject) => {
     const year = dateObject.year;
