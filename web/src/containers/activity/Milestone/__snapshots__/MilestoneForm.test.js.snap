@@ -94,7 +94,9 @@ exports[`the MilestoneForm component renders correctly 1`] = `
     <DateField
       hint=""
       label="Target completion date"
+      onBlur={[Function]}
       onChange={[Function]}
+      onKeyUp={[Function]}
       value="1942-8-16"
     >
       <DateField
@@ -114,6 +116,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         onBlur={[Function]}
         onChange={[Function]}
         onComponentBlur={[Function]}
+        onKeyUp={[Function]}
         yearDefaultValue={1942}
         yearInvalid={false}
         yearLabel="Year"
@@ -166,6 +169,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onComponentBlur={[Function]}
+              onKeyUp={[Function]}
               yearDefaultValue={1942}
               yearInvalid={false}
               yearLabel="Year"
