@@ -5,6 +5,7 @@ exports[`the cost allocation quarterly FFP component gracefully falls back if th
 exports[`the cost allocation quarterly FFP component renders as expected 1`] = `
 <table
   className="budget-table"
+  data-cy="FFPQuarterBudgetTable"
   key="13"
 >
   <caption

@@ -533,3 +533,19 @@ Cypress.Commands.add('getEAPDTable', { prevSubject: true }, subject => {
 
   return Object.assign(...headers.map((k, i) => ({ [k]: rows[i] })));
 });
+
+Cypress.Commands.add('getActivityTable', { prevSubject: true }, subject => {
+  if (subject.get().length > 1)
+    throw new Error(
+      `Selector "${subject.selector}" returned more than 1 element.`
+    );
+
+  const tableElement = subject.get()[0];
+
+  // transform rows into array of array of strings for each td
+  const rows = [...tableElement.querySelectorAll('tbody tr')].map(row => {
+    return [...row.querySelectorAll('td')].map(e => e.textContent);
+  });
+
+  return rows;
+});
