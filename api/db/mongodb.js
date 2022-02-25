@@ -9,6 +9,7 @@ const setup = () =>
     const connectionString =
       process.env.MONGO_URL || 'mongodb://mongo:cms@mongo:27017/eapd';
     const dbName = process.env.MONGO_DATABASE || 'eapd';
+    const authSource = process.env.MONGO_AUTH_SOURCE || 'admin';
 
     mongoose.connection.on('connected', () => {
       logger.verbose('MongoDB connected');
@@ -19,6 +20,7 @@ const setup = () =>
       mongoose.connect(connectionString, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        authSource,
         dbName
       });
     } catch (err) {

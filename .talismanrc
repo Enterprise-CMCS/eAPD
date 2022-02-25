@@ -18,7 +18,7 @@ fileignoreconfig:
   - filename: integrationTests/cypress/helpers/apd/proposed-budget-calculations.js
     checksum: a468dcd1f872efb7b3816b2380200def3218961cae63b3d33b2bf7fa09da2984
   - filename: api/db/mongo-init.sh
-    checksum: ab93ba9d0a69ca3433f74d42cf1b1dda1ad66273d1ed52fb70e1e537e57f2484
+    checksum: e23b0467fead83a35f17eebd56d5df9c7e07b48b6473d3bf51676252fe4b491c
   - filename: bin/preview-deploy/aws.user-data.sh
     checksum: 56d65ab9d0cca67ae0ad44ac952ce2e14b8a92e7404e01cb9ef116a4d4a987de
   - filename: docker-compose.yml
@@ -37,4 +37,6 @@ fileignoreconfig:
     checksum: c6390cfe3f0773838a652b89a3d5d81c515ba19370fb3291793b2cb013890f70
   - filename: packer/mongo.sh
     checksum: f2cf6ede450bb3ae47fd14960d149e460980d7ece2e11b7f2b3c49b2296ac56c
+  - filename: api/docker-compose.endpoint-tests.yml
+    checksum: 026209c9cd53a8b8ae13e41b5bfdd23e0608aa75ddef1f2216acbdfa9f1e91bc
 version: ''

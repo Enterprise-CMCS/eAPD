@@ -19,7 +19,6 @@ tap.test('jwtMiddleware', async t => {
 
   t.afterEach(async () => {
     sandbox.resetHistory();
-    console.log('completed resetting sandbox');
   });
 
   t.test('given a valid authorization header', async t => {

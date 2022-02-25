@@ -100,7 +100,7 @@ const getExpiredUserAffiliations = async (userId, { db = knex } = {}) =>
  * @function
  * @returns {Object}
  */
-const getAffiliationsByState = async (userId, stateId, { db = knex } = {}) =>
+const getAffiliationByState = async (userId, stateId, { db = knex } = {}) =>
   db('auth_affiliations')
     .where('user_id', userId)
     .andWhere('state_id', stateId)
@@ -163,6 +163,6 @@ module.exports = {
   getUserAffiliatedStates,
   getUserPermissionsForStates,
   getExpiredUserAffiliations,
-  getAffiliationsByState,
+  getAffiliationByState,
   auditUserLogin
 };

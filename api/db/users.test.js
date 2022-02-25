@@ -55,7 +55,7 @@ tap.test('database wrappers / users', async usersTests => {
   ];
 
   let getUserAffiliatedStates;
-  let getAffiliationsByState;
+  let getAffiliationByState;
   let getStateById;
   let getUserPermissionsForStates;
   let getRolesAndActivities;
@@ -86,46 +86,40 @@ tap.test('database wrappers / users', async usersTests => {
     });
 
     getUserAffiliatedStates = sandbox.stub();
-    getAffiliationsByState = sandbox.stub();
+    getAffiliationByState = sandbox.stub();
     getStateById = sandbox.stub();
     getUserPermissionsForStates = sandbox.stub();
     getRolesAndActivities = sandbox.stub();
     updateAuthAffiliation = sandbox.stub();
     auditUserLogin = sandbox.stub();
 
-    getAffiliationsByState.withArgs(unsanitizedUser.id, 'state1').resolves([
-      {
-        id: 'affiliation',
-        user_id: unsanitizedUser.id,
-        state_id: 'state1',
-        role_id: 'role id',
-        status: 'approved',
-        username: unsanitizedUser.login,
-        expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
-      }
-    ]);
-    getAffiliationsByState.withArgs(unsanitizedUser.id, 'state2').resolves([
-      {
-        id: 'affiliation',
-        user_id: unsanitizedUser.id,
-        state_id: 'state2',
-        role_id: 'role id',
-        status: 'approved',
-        username: unsanitizedUser.login,
-        expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
-      }
-    ]);
-    getAffiliationsByState.withArgs(unsanitizedUser.id, 'exp').resolves([
-      {
-        id: 'affiliation',
-        user_id: unsanitizedUser.id,
-        state_id: 'exp',
-        role_id: 'role id',
-        status: 'approved',
-        username: unsanitizedUser.login,
-        expires_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 365)
-      }
-    ]);
+    getAffiliationByState.withArgs(unsanitizedUser.id, 'state1').resolves({
+      id: 'affiliation',
+      user_id: unsanitizedUser.id,
+      state_id: 'state1',
+      role_id: 'role id',
+      status: 'approved',
+      username: unsanitizedUser.login,
+      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
+    });
+    getAffiliationByState.withArgs(unsanitizedUser.id, 'state2').resolves({
+      id: 'affiliation',
+      user_id: unsanitizedUser.id,
+      state_id: 'state2',
+      role_id: 'role id',
+      status: 'approved',
+      username: unsanitizedUser.login,
+      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
+    });
+    getAffiliationByState.withArgs(unsanitizedUser.id, 'exp').resolves({
+      id: 'affiliation',
+      user_id: unsanitizedUser.id,
+      state_id: 'exp',
+      role_id: 'role id',
+      status: 'approved',
+      username: unsanitizedUser.login,
+      expires_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 365)
+    });
     getStateById.withArgs('state1').resolves({
       id: 'state1',
       address1: 'New Address 1',
@@ -154,7 +148,7 @@ tap.test('database wrappers / users', async usersTests => {
     populateUserRoleTests.test('no user', async test => {
       const user = await populateUserRole(null, null, {
         getUserAffiliatedStates,
-        getAffiliationsByState,
+        getAffiliationByState,
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
@@ -169,28 +163,44 @@ tap.test('database wrappers / users', async usersTests => {
       getUserAffiliatedStates.resolves({});
       const user = await populateUserRole(unsanitizedUser, null, {
         getUserAffiliatedStates,
-        getAffiliationsByState,
+        getAffiliationByState,
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
         updateAuthAffiliation,
         auditUserLogin
       });
-      test.same(user, { ...unsanitizedUser, states: {} });
+      test.same(user, {
+        ...unsanitizedUser,
+        state: {},
+        states: {},
+        role: '',
+        affiliation: {},
+        activities: [],
+        permissions: []
+      });
     });
 
     populateUserRoleTests.test('no affiliations with state id', async test => {
       getUserAffiliatedStates.resolves({});
       const user = await populateUserRole(unsanitizedUser, 'state1', {
         getUserAffiliatedStates,
-        getAffiliationsByState,
+        getAffiliationByState,
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
         updateAuthAffiliation,
         auditUserLogin
       });
-      test.same(user, { ...unsanitizedUser, states: {} });
+      test.same(user, {
+        ...unsanitizedUser,
+        state: {},
+        states: {},
+        role: '',
+        affiliation: {},
+        activities: [],
+        permissions: []
+      });
     });
 
     // expires_at: new Date('2020-12-16T00:00:00.000Z')
@@ -198,7 +208,7 @@ tap.test('database wrappers / users', async usersTests => {
       getUserAffiliatedStates.resolves({ state1: 'approved' });
       await populateUserRole(unsanitizedUser, null, {
         getUserAffiliatedStates,
-        getAffiliationsByState,
+        getAffiliationByState,
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
@@ -206,7 +216,7 @@ tap.test('database wrappers / users', async usersTests => {
         auditUserLogin
       });
       test.ok(
-        getAffiliationsByState.calledOnceWith(unsanitizedUser.id, 'state1')
+        getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state1')
       );
       test.ok(updateAuthAffiliation.notCalled);
       test.ok(auditUserLogin.calledOnce);
@@ -219,7 +229,7 @@ tap.test('database wrappers / users', async usersTests => {
       });
       await populateUserRole(unsanitizedUser, null, {
         getUserAffiliatedStates,
-        getAffiliationsByState,
+        getAffiliationByState,
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
@@ -227,7 +237,7 @@ tap.test('database wrappers / users', async usersTests => {
         auditUserLogin
       });
       test.ok(
-        getAffiliationsByState.calledOnceWith(unsanitizedUser.id, 'state1')
+        getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state1')
       );
       test.ok(updateAuthAffiliation.notCalled);
       test.ok(auditUserLogin.notCalled);
@@ -240,7 +250,7 @@ tap.test('database wrappers / users', async usersTests => {
       });
       await populateUserRole(unsanitizedUser, 'state2', {
         getUserAffiliatedStates,
-        getAffiliationsByState,
+        getAffiliationByState,
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
@@ -248,7 +258,7 @@ tap.test('database wrappers / users', async usersTests => {
         auditUserLogin
       });
       test.ok(
-        getAffiliationsByState.calledOnceWith(unsanitizedUser.id, 'state2')
+        getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state2')
       );
       test.ok(updateAuthAffiliation.notCalled);
       test.ok(auditUserLogin.calledOnce);
@@ -262,14 +272,14 @@ tap.test('database wrappers / users', async usersTests => {
       });
       await populateUserRole(unsanitizedUser, 'exp', {
         getUserAffiliatedStates,
-        getAffiliationsByState,
+        getAffiliationByState,
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
         updateAuthAffiliation,
         auditUserLogin
       });
-      test.ok(getAffiliationsByState.calledOnceWith(unsanitizedUser.id, 'exp'));
+      test.ok(getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'exp'));
       test.ok(updateAuthAffiliation.calledOnce);
       test.ok(auditUserLogin.calledOnce);
     });

@@ -127,7 +127,6 @@ tap.test('Local jwtUtils', async t => {
     getDefaultOptions,
     sign,
     actualVerifyEAPDToken,
-    verifyWebToken,
     exchangeToken,
     changeState,
     verifyAndUpdateExpirations

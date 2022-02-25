@@ -4,7 +4,7 @@ const { oktaClient } = require('../auth/oktaAuth');
 const {
   // getRolesAndActivities: actualGetRolesAndActivities,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
-  getAffiliationsByState: actualGetAffiliationsByState,
+  getAffiliationByState: actualGetAffiliationsByState,
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getRolesAndActivities: actualGetRolesAndActivities,
   auditUserLogin: actualAuditUserLogin
@@ -48,7 +48,7 @@ const populateUserRole = async (
   stateId = null,
   {
     getUserAffiliatedStates = actualGetUserAffiliatedStates,
-    getAffiliationsByState = actualGetAffiliationsByState,
+    getAffiliationByState = actualGetAffiliationsByState,
     updateAuthAffiliation = actualUpdateAuthAffiliation,
     auditUserLogin = actualAuditUserLogin,
     getRolesAndActivities = actualGetRolesAndActivities,
@@ -57,13 +57,13 @@ const populateUserRole = async (
   } = {}
 ) => {
   if (user) {
+    let affiliation = {};
+    let role = '';
+    let state = {};
     const states = (await getUserAffiliatedStates(user.id)) || {};
     if (Object.keys(states).length) {
       const selectedState = stateId || Object.keys(states)[0];
-      const [affiliation] = await getAffiliationsByState(
-        user.id,
-        selectedState
-      );
+      affiliation = await getAffiliationByState(user.id, selectedState);
       if (affiliation) {
         if (isPast(new Date(affiliation.expires_at))) {
           await updateAuthAffiliation({
@@ -79,7 +79,6 @@ const populateUserRole = async (
           affiliation.status = 'revoked';
         }
 
-        console.log(`States length ${Object.keys(states).length === 1}`);
         if (stateId || Object.keys(states).length === 1) {
           // we should only record the user logging in if they have specified a state
           // or if they are only affiliated with one state
@@ -90,10 +89,9 @@ const populateUserRole = async (
         }
 
         const roles = (await getRolesAndActivities()) || [];
-        const role =
-          affiliation && roles.find(r => r.id === affiliation.role_id);
-        const state = await getStateById(selectedState);
-        const permissions = await getUserPermissionsForStates(user.id);
+        role = affiliation && roles.find(r => r.id === affiliation.role_id);
+        state = (await getStateById(selectedState)) || {};
+        const permissions = (await getUserPermissionsForStates(user.id)) || [];
         return {
           ...user,
           state,
@@ -107,7 +105,12 @@ const populateUserRole = async (
     }
     return {
       ...user,
-      states: states || {}
+      state,
+      states,
+      role,
+      affiliation,
+      activities: [],
+      permissions: []
     };
   }
   return null;

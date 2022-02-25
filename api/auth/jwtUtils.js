@@ -121,7 +121,6 @@ const exchangeToken = async (
 
   const { uid, ...additionalValues } = claims;
   const user = await getUser(uid, true, { additionalValues });
-  console.log({ user });
   user.jwt = sign(user);
 
   return user;

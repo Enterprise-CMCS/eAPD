@@ -18,12 +18,14 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin-user
       - MONGO_INITDB_ROOT_PASSWORD=admin-password
-      - MONGO_INITDB_DATABASE=eapd
-      - DATABASE_USERNAME=mongo
-      - DATABASE_PASSWORD=cms
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_DATABASE_USERNAME=mongo
+      - MONGO_DATABASE_PASSWORD=cms
+      - MONGO_DATABASE=eapd
     volumes:
       - mongodata:/mongodata
       - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+
     command: [--auth]
     expose:
       - 27017
@@ -67,6 +69,7 @@ services:
       - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://admin-user:admin-password@mongo:27017/admin}
       - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd}
       - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
+      - MONGO_AUTH_SOURCE=${MONGO_AUTH_SOURCE:-admin]
     volumes:
       - type: bind
         source: ./api
