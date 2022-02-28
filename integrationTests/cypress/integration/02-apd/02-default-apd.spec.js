@@ -2,13 +2,6 @@
 import { testDefaultAPDOverview } from '../../helpers/apd/apd-overview';
 import { testDefaultKeyStatePersonnel } from '../../helpers/apd/key-state-personnel';
 import { testDefaultResultsOfPreviousActivities } from '../../helpers/apd/results-of-previous-activities';
-import { testDefaultActivityDashboard } from '../../helpers/apd/activity/activity-dashboard';
-import { testDefaultActivityOverview } from '../../helpers/apd/activity/activity-overview';
-import { testDefaultOutcomesAndMilestones } from '../../helpers/apd/activity/outcomes-and-milestones';
-import { testDefaultStateStaffAndExpenses } from '../../helpers/apd/activity/state-staff-and-expenses';
-import { testDefaultPrivateContractorCosts } from '../../helpers/apd/activity/private-contractor-costs';
-import { testDefaultCostAllocationAndOtherFunding } from '../../helpers/apd/activity/cost-allocation-and-other-funding';
-import { testDefaultBudgetAndFFP } from '../../helpers/apd/activity/budget-and-ffp';
 import { testDefaultActivityScheduleSummary } from '../../helpers/apd/activity-schedule-summary';
 import { testDefaultProposedBudget } from '../../helpers/apd/proposed-budget';
 import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance';
@@ -19,7 +12,7 @@ import { checkDefaultActivity } from '../../helpers/apd/activity/check-default-a
 describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   let apdUrl;
   let apdId;
-  const years = [2022, 2023];
+  const years = [];
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
@@ -37,9 +30,9 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
     cy.visit(apdUrl);
   });
 
-  // after(() => {
-  //   cy.deleteAPD(apdId);
-  // });
+  after(() => {
+    cy.deleteAPD(apdId);
+  });
 
   describe('Form View', () => {
     /* eslint-disable-next-line prefer-arrow-callback, func-names */
@@ -66,38 +59,8 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
       testDefaultResultsOfPreviousActivities(years);
     });
 
-    describe.only('Checks Default Activity', () => {
+    describe('Checks Default Activity', () => {
       checkDefaultActivity(years);
-    });
-
-    describe('default Activities', () => {
-      describe('default Activity Dashboard', () => {
-        testDefaultActivityDashboard(years);
-      });
-
-      describe('default Activity Overview', () => {
-        testDefaultActivityOverview(years);
-      });
-
-      describe('default Outcomes and Milestones', () => {
-        testDefaultOutcomesAndMilestones(years);
-      });
-
-      describe('default State Staff and Expenses', () => {
-        testDefaultStateStaffAndExpenses(years);
-      });
-
-      describe('default Private Contractor Costs', () => {
-        testDefaultPrivateContractorCosts(years);
-      });
-
-      describe('default Cost Allocation and Other Funding', () => {
-        testDefaultCostAllocationAndOtherFunding(years);
-      });
-
-      describe('default Budget and FFP', () => {
-        testDefaultBudgetAndFFP(years);
-      });
     });
 
     describe('default Activity Schedule Summary', () => {

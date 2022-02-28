@@ -300,7 +300,7 @@ class ExportPage {
     supportingJustifications,
     supportsMedicaid,
     doesNotSupportsMedicaid
-  } = {}) => {
+  }) => {
     cy.findByText(/Provide a short overview of the activity/i)
       .next()
       .should('have.text', shortOverview);
@@ -324,7 +324,8 @@ class ExportPage {
       .should('contain', doesNotSupportsMedicaid);
   };
 
-  checkOutcomes = ({ activityHeader, outcome, metrics } = {}) => {
+  checkOutcomesDefault = ({ activityHeader, outcome, metrics } = {}) => {
+    // Previously named checkOutcomes
     cy.findByRole('heading', {
       level: 2,
       name: activityHeader

@@ -1,11 +1,17 @@
 /* eslint-disable import/prefer-default-export */
 
 import ActivityPage from '../../../page-objects/activity-page';
+import BudgetPage from '../../../page-objects/budget-page';
+import ExportPage from '../../../page-objects/export-page';
+import FillOutActivityPage from '../../../page-objects/fill-out-activity-page';
 
 const { _ } = Cypress;
 
 export const checkDefaultActivity = years => {
   let activityPage;
+  let budgetPage;
+  let exportPage;
+  let fillOutActivityPage;
 
   let defaultData;
 
@@ -13,7 +19,11 @@ export const checkDefaultActivity = years => {
     cy.fixture('default-activity-template.json').then(data => {
       defaultData = data;
     });
+
     activityPage = new ActivityPage();
+    budgetPage = new BudgetPage();
+    exportPage = new ExportPage();
+    fillOutActivityPage = new FillOutActivityPage();
   });
 
   describe('Check default activity values and check in export view', () => {
@@ -137,7 +147,7 @@ export const checkDefaultActivity = years => {
         'exist'
       );
 
-      // Check Federal State Split Table
+      // Check Federal State Split Functionality
       defaultData.splits.forEach(split => {
         cy.get('[class="ds-c-field"]').eq(0).select(split);
 
@@ -161,6 +171,88 @@ export const checkDefaultActivity = years => {
               });
           });
       });
+
+      fillOutActivityPage.checkBudgetAndFFPTables({
+        budgetData: defaultData.budgetAndFFPTables,
+        years,
+        firstSplit: '90-10',
+        secondSplit: '90-10',
+        isViewOnly: false,
+        isDefaultTest: true
+      });
+
+      const {
+        totalCost,
+        totalOtherFunding,
+        totalTotalMedicaidCost,
+        totalFederalShare,
+        totalStateShare
+      } = defaultData.FFYTotalDescription;
+      budgetPage.checkFFYtotals({
+        years,
+        activityIndex: 0,
+        activityName: defaultData.activityName,
+        totalCost,
+        totalOtherFunding,
+        totalTotalMedicaidCost,
+        fundingSplit: `90/10 (FFY ${years[0]} and FFY ${years[1]})`,
+        totalFederalShare,
+        state: 'Alaska',
+        totalStateShare
+      });
+
+      // Check Export View
+      cy.goToExportView();
+
+      // Check activity list list in export view
+      cy.findAllByText('Activities')
+        .next()
+        .within(() => {
+          cy.contains(`1. ${defaultData.activityName} | HIT`);
+        });
+
+      // Check activity section in export view
+      cy.findAllByText('Activities')
+        .parent()
+        .within(() => {
+          cy.findAllByText(`Activity 1: ${defaultData.activityName}`)
+            .parent()
+            .within(() => {
+              // Check Activity Overview
+              const overviewData = defaultData.activityOverview;
+              exportPage.checkActivityOverviewNew({
+                ...overviewData
+              });
+
+              // Check Outcomes and Milestones
+              exportPage.checkOutcomesNew({});
+
+              exportPage.checkMilestonesNew({});
+
+              // Check State Staff and Expenses
+              exportPage.checkStateStaffNew({});
+              exportPage.checkStateExpensesNew({});
+
+              // Check Private Contractors
+              exportPage.checkPrivateContractorCostsNew({});
+
+              // Check Cost Allocation
+              exportPage.checkCostAllocationAndOtherFundingNew({
+                years,
+                costAllocation: defaultData.costAllocation
+              });
+
+              // Check Budget and FFP
+              fillOutActivityPage.checkBudgetAndFFPTables({
+                budgetData: defaultData.budgetAndFFPTables,
+                years,
+                firstSplit: '90-10',
+                secondSplit: '90-10',
+                isViewOnly: true,
+                isDefaultTest: true
+              });
+            });
+        });
     });
   });
 };

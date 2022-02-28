@@ -1,4 +1,24 @@
 {
+  "activityName": "Program Administration",
+
+  "activityOverview": {
+    "name": "Program Administration",
+    "fundingType": "HIT",
+    "shortOverview": "",
+    "startDate": "Date not specified",
+    "endDate": "Date not specified",
+    "detailedDescription": "",
+    "supportingJustifications": "",
+    "supportsMedicaid": "No response was provided for how this activity will support the Medicaid standards and conditions.",
+    "doesNotSupportsMedicaid": "No response was provided for how this activity will support the Medicaid standards and conditions."
+  },
+
+  "costAllocation": {
+    "description": "",
+    "FFYdescriptions": ["",""],
+    "costs": [0, 0]
+  },
+
   "costAllocationTables": [
     [
       ["$0"],
@@ -86,39 +106,43 @@
       ]
     ],
 
-    "quarterVals": [
-      [25, 25, 25, 25, 25, 25, 25, 25],
-      [25, 25, 25, 25, 25, 25, 25, 25]
-    ],
-
     "activityEstQuarterlyExpenditure": [
       [
-        ["$47,519", "$47,519", "$47,519", "$47,518", "$190,075"],
-        ["$7,306", "$7,305", "$7,305", "$7,305", "$29,221"],
-        ["$54,825", "$54,824", "$54,824", "$54,823", "$219,296"]
+        ["$0", "$0", "$0", "$0", "$0"],
+        ["$0", "$0", "$0", "$0", "$0"],
+        ["$0", "$0", "$0", "$0", "$0"]
       ],
       [
-        ["$36,663", "$36,663", "$36,663", "$36,662", "$146,651"],
-        ["$4,502", "$4,502", "$4,502", "$4,502", "$18,008"],
-        ["$41,165", "$41,165", "$41,165", "$41,164", "$164,659"]
+        ["$0", "$0", "$0", "$0", "$0"],
+        ["$0", "$0", "$0", "$0", "$0"],
+        ["$0", "$0", "$0", "$0", "$0"]
       ]
     ],
 
     "activityTotalCostTableExportView": [
       [
-        ["$247,662"],
-        ["Other Funding", "", "-", "$4,000"],
-        ["Activity Total Computable Medicaid Cost", "", "$243,662"],
-        ["Federal Share", "$243,662", "×", "90%", "=", "$219,296"],
-        ["State Share", "$243,662", "×", "10%", "=", "$24,366"]
+        ["$0"],
+        ["Other Funding", "", "-", "$0"],
+        ["Activity Total Computable Medicaid Cost", "", "$0"],
+        ["Federal Share", "$0", "×", "90%", "=", "$0"],
+        ["State Share", "$0", "×", "10%", "=", "$0"]
       ],
       [
-        ["$338,318"],
-        ["Other Funding", "", "-", "$9,000"],
-        ["Activity Total Computable Medicaid Cost", "", "$329,318"],
-        ["Federal Share", "$329,318", "×", "50%", "=", "$164,659"],
-        ["State Share", "$329,318", "×", "50%", "=", "$164,659"]
+        ["$0"],
+        ["Other Funding", "", "-", "$0"],
+        ["Activity Total Computable Medicaid Cost", "", "$0"],
+        ["Federal Share", "$0", "×", "90%", "=", "$0"],
+        ["State Share", "$0", "×", "10%", "=", "$0"]
       ]
     ]
+  },
+
+  "FFYTotalDescription":
+  {
+    "totalCost": 0,
+    "totalOtherFunding": 0,
+    "totalTotalMedicaidCost": 0,
+    "totalFederalShare": 0,
+    "totalStateShare": 0
   }
 }
