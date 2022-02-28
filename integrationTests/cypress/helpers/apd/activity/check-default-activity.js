@@ -220,24 +220,24 @@ export const checkDefaultActivity = years => {
             .within(() => {
               // Check Activity Overview
               const overviewData = defaultData.activityOverview;
-              exportPage.checkActivityOverviewNew({
+              exportPage.checkActivityOverview({
                 ...overviewData
               });
 
               // Check Outcomes and Milestones
-              exportPage.checkOutcomesNew({});
+              exportPage.checkOutcomes({});
 
-              exportPage.checkMilestonesNew({});
+              exportPage.checkMilestones({});
 
               // Check State Staff and Expenses
-              exportPage.checkStateStaffNew({});
-              exportPage.checkStateExpensesNew({});
+              exportPage.checkStateStaff({});
+              exportPage.checkStateExpenses({});
 
               // Check Private Contractors
-              exportPage.checkPrivateContractorCostsNew({});
+              exportPage.checkPrivateContractorCosts({});
 
               // Check Cost Allocation
-              exportPage.checkCostAllocationAndOtherFundingNew({
+              exportPage.checkCostAllocationAndOtherFunding({
                 years,
                 costAllocation: defaultData.costAllocation
               });
