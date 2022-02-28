@@ -1,20 +1,25 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1005291, 1006947],
+  "allowlist": [1005291, 1006947, 1007048],
   "_comment": {
     "1005291": {
       "advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
       "module": "trim",
-      "affects": ["@storybook/addon-docs@6.4.18 - storybook"]
+      "affects": ["@storybook/addon-docs@6.4.19 - storybook"]
     },
     "1006947": {
       "advisory": "https://github.com/advisories/GHSA-ww39-953v-wcq6",
       "module": "glob-parent",
       "affects": [
-        "@storybook/addon-docs@6.4.18 - storybook",
-        "@storybook/react@6.4.18 - storybook"
+        "@storybook/addon-docs@6.4.19 - storybook",
+        "@storybook/react@6.4.19 - storybook"
       ]
+    },
+    "1007048": {
+      "advisory": "https://github.com/advisories/GHSA-3949-f494-cm99",
+      "module": "prismjs",
+      "affects": ["@storybook/addon-a11y@6.4.19 - storybook"]
     }
   },
   "registry": "https://registry.npmjs.org"

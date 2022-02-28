@@ -20,7 +20,7 @@ tap.test('Okta jwtUtils', async t => {
 
     t.test('given a valid JWT', async t => {
       const claims = { email: 'test@email.com' };
-      mockVerifier.resolves(claims);
+      mockVerifier.returns(claims);
       const result = await verifyWebToken('good token', {
         verifier: mockVerifier
       });
@@ -28,7 +28,7 @@ tap.test('Okta jwtUtils', async t => {
     });
 
     t.test('given an invalid JWT string', async t => {
-      mockVerifier.rejects({ message: 'bad token' });
+      mockVerifier.returns(false);
       const result = await verifyWebToken('bad token', {
         verifier: mockVerifier
       });
