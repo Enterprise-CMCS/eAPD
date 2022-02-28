@@ -22,10 +22,7 @@ const jwtMiddleware = async (
   { extractor = jwtExtractor, verifyToken = verifyEAPDToken } = {}
 ) => {
   try {
-    logger.info({ extractor });
     const jwt = extractor(req);
-    logger.info({ jwt });
-    logger.info({ verifyToken });
     const claims = jwt ? await verifyToken(jwt) : false;
     if (!claims) return next();
     req.user = claims;

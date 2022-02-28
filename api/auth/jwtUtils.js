@@ -5,7 +5,6 @@ const { getUserByID, populateUserRole } = require('../db');
 const {
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
   getExpiredUserAffiliations: actualGetExpiredUserAffiliations
-  // auditUserLogin: actualAuditUserLogin
 } = require('../db/auth');
 const {
   updateAuthAffiliation: actualUpdateAuthAffiliation
