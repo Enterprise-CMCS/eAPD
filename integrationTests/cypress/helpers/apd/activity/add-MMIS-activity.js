@@ -190,12 +190,12 @@ export const addMMISActivity = years => {
 
               // Check Outcomes and Milestones
               Cypress._.times(2, i => {
-                exportPage.checkOutcomes({
+                exportPage.checkOutcomesNew({
                   outcome: activityData.outcomes.names[i],
                   metrics: activityData.outcomes.metrics[i]
                 });
 
-                exportPage.checkMilestones({
+                exportPage.checkMilestonesNew({
                   milestone: activityData.milestones.names[i],
                   milestoneCompletionDate:
                     activityData.milestones.dates[i].join('/')
