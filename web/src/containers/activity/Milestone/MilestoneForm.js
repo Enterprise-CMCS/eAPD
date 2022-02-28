@@ -11,6 +11,7 @@ import {
 
 import { validateText } from '../../../helpers/textValidation';
 import { validateSubForm } from '../../../helpers/subFormValidation';
+import { validate } from 'uuid';
 
 const MilestoneForm = forwardRef(
   (
@@ -57,10 +58,10 @@ const MilestoneForm = forwardRef(
         label="Name"
         name="name"
         value={state.milestone}
-        className="remove-clearfix"
+        className="remove-clearfix textfield__container"
         onChange={changeName}
-        onBlur={validateText}
-        onKeyUp={validateText}
+        onBlur={validateSubForm}
+        onKeyUp={validateSubForm}
       />
       <DateField
         label="Target completion date"

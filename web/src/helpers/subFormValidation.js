@@ -1,3 +1,5 @@
+import { disableBtn } from "./textValidation";
+
 export const findSubForm = (e) => {
   // eslint-disable-next-line no-param-reassign
   while ((e = e.parentNode) && !e.classList.contains('form-and-review-list--item__expanded'));
@@ -14,22 +16,25 @@ export const removeError = (input) => {
   input.classList.remove('ds-c-field--error');
 }
 
-export const disableSave = (container) => {
-  const doneBtn = container.querySelector('#form-and-review-list--done-btn');
-  var inputs = container.querySelectorAll('input[type=text]')
-  var emptyInputs = 0;
+export const validateInputFields = (subForm) => {
+  var inputs = subForm.getElementsByTagName('input');
+
+  const doneBtn = subForm.querySelector('#form-and-review-list--done-btn');
 
   for (var i = 0; i < inputs.length; i += 1) {
-    var input = inputs[i];
-    if (input.value === "") {
-      emptyInputs++
+    var input = inputs[i],
+        inputVal = input.value;
+
+    if (inputVal === '') {
       addError(input);
-    } else if (input.value !== "") {
-      removeError(input)
+    } else {
+      removeError(input);
     }
   }
 
-  if (emptyInputs > 0) {
+  var inputErrors = subForm.getElementsByClassName('ds-c-field--error');
+
+  if (inputErrors.length - 1 > 0) {
     doneBtn.disabled = true;
   } else {
     doneBtn.disabled = false;
@@ -39,5 +44,5 @@ export const disableSave = (container) => {
 export const validateSubForm = (e) => {
   const el = e.target;
   const subForm = findSubForm(el);
-  disableSave(subForm);
+  validateInputFields(subForm);
 }

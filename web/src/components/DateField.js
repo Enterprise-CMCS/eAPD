@@ -50,18 +50,20 @@ const DateField = ({ value, onChange, ...rest }) => {
     let monthInvalid = false;
     let yearInvalid = false;
 
-    if (!dayVal || dayVal > 31 || !monthVal || monthVal > 12 || yearVal.length !== 4) {
+    if (!dayVal || dayVal > 31 || dayVal < 0 ||
+        !monthVal || monthVal > 12 || monthVal < 0 ||
+        yearVal.length !== 4) {
       message.push('Please enter a valid date.')
 
-      if (!dayVal || dayVal > 31) {
+      if (!dayVal || dayVal > 31 || dayVal < 0) {
         dayInvalid = true;
       }
 
-      if (!monthVal || monthVal > 12) {
+      if (!monthVal || monthVal > 12 || monthVal < 0) {
         monthInvalid = true;
       }
 
-      if (!yearVal) {
+      if (!yearVal || yearVal.length) {
         yearInvalid = true;
       }
     }
