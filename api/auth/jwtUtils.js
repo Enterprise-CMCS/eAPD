@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
-const logger = require('../logger')('jwtUtils');
+// const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID, populateUserRole } = require('../db');
 const {
@@ -21,16 +21,7 @@ const {
  * @returns {(Object|Boolean)} JWT payload, or false
  */
 const verifyWebToken = (token, { verifier = verifyJWT } = {}) =>
-  verifier(token)
-    .then(claims => {
-      // the token is valid (per Okta)
-      return claims;
-    })
-    .catch(err => {
-      // a validation failed, inspect the error
-      logger.error(token, `invalid token: ${err.message}`);
-      return false;
-    });
+  verifier(token);
 
 /**
  * Extracts the JWT from the Request Authorization Header.

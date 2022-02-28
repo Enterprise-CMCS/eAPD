@@ -32,6 +32,7 @@ const verifyRole = (name, role) => {
 };
 
 describe('tests state admin portal', () => {
+  before(() => cy.task('db:resetnorole'));
   it('tests state admin portal', { tags: ['@state', '@admin'] }, () => {
     // Request access on No Role
     cy.loginWithEnv('norole');

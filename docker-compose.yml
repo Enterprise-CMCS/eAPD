@@ -67,7 +67,7 @@ services:
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
       - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://admin-user:admin-password@mongo:27017/admin}
-      - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd}
+      - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=admin}
       - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
       - MONGO_AUTH_SOURCE=${MONGO_AUTH_SOURCE:-admin}
     volumes:

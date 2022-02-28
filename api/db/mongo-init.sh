@@ -8,7 +8,7 @@ mongo -- "$MONGO_INITDB_DATABASE" <<EOF
 
   var admin = db.getSiblingDB(adminDbName)
   admin.auth(rootUser, rootPassword);
-  
+
   var eapd = db.getSiblingDB(eapdDbName); 
   admin.createUser({
     user: eapdUser,
