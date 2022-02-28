@@ -389,6 +389,7 @@ jobs:
       - run:
           name: run e2e tests
           working_directory: ~/project/integrationTests
+          no_output_timeout: 60m
           command: |
             export NODE_ENV=development
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
