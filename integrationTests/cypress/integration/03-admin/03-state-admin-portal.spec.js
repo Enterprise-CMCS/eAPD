@@ -32,9 +32,9 @@ const verifyRole = (name, role) => {
 };
 
 describe('tests state admin portal', () => {
-  before(() => cy.task('db:resetnorole'));
-  it('tests state admin portal', { tags: ['@state', '@admin'] }, () => {
+  it('tests state admin portal', { tags: ['@state', '@admin'] }, async () => {
     // Request access on No Role
+    await cy.task('db:resetnorole');
     cy.loginWithEnv('norole');
     cy.contains('Verify Your Identity');
     cy.get('[class="ds-c-field"]').type('Alask');

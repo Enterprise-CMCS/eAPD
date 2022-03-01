@@ -170,8 +170,11 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
 
 const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(setupTokenManager());
-  const expiresAt = await setTokens(sessionToken);
-  dispatch(updateSessionExpiration(expiresAt));
+  console.log('updating expiration');
+  if (sessionToken) {
+    const expiresAt = await setTokens(sessionToken);
+    dispatch(updateSessionExpiration(expiresAt));
+  }
   dispatch(setLatestActivity());
 
   const user = await dispatch(getCurrentUser());
@@ -184,6 +187,7 @@ const authenticationSuccess = sessionToken => async dispatch => {
     return '/login/affiliations/request';
   }
   if (Object.keys(user.states).length === 1) {
+    console.log(`user states ${Object.keys(user.states)}`);
     dispatch(updateUserInfo(user));
     dispatch(completeLogin());
     if (user.activities) {
@@ -264,6 +268,7 @@ export const login = (username, password) => dispatch => {
   dispatch(requestLogin());
   return authenticateUser(username, password)
     .then(async res => {
+      console.log(`res.status ${res.status}`);
       if (res.status === 'PASSWORD_EXPIRED') {
         // show error message on current page
         return dispatch(failLogin('PASSWORD_EXPIRED'));
@@ -298,6 +303,7 @@ export const login = (username, password) => dispatch => {
       }
 
       if (res.status === 'SUCCESS') {
+        console.log('successful login');
         return dispatch(authenticationSuccess(res.sessionToken));
       }
       return null;

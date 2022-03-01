@@ -148,8 +148,29 @@ const getUserByID = async (
   let oktaUser;
   if (checkOkta) {
     oktaUser = await client.getUser(id);
+    console.log({ oktaUser });
     if (oktaUser) {
-      await createOrUpdateOktaUser(oktaUser.id, oktaUser.profile.email);
+      const {
+        id: oktaId,
+        profile: {
+          email,
+          displayName,
+          secondEmail,
+          primaryPhone,
+          mobilePhone,
+          login,
+          ...metadata
+        }
+      } = oktaUser;
+      await createOrUpdateOktaUser(oktaId, {
+        email,
+        displayName,
+        secondEmail,
+        primaryPhone,
+        mobilePhone,
+        login,
+        metadata
+      });
     }
   } else {
     oktaUser = await getOktaUser(id, { db });

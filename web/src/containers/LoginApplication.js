@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, useCallback, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
@@ -46,20 +46,19 @@ const LoginApplication = ({
   const history = useHistory();
   const location = useLocation();
 
-  useEffect(
-    () => {
-      const controller = new AbortController();
-      if (!initialCheck && !showConsent) {
-        setRestoringSession(true);
-        authCheckAction({
-          signal: controller.signal
-        }).then(() => {
+  const restoreSessionCallback = useCallback(() => {
+    if (!initialCheck && !showConsent) {
+      setRestoringSession(true);
+      authCheckAction().then(() => {
+        setTimeout(() => {
           setRestoringSession(false);
-        });
-      }
+        }, 1000);
+      });
+    }
+  }, [initialCheck, showConsent]);
 
-      return () => controller?.abort();
-    },
+  useEffect(
+    () => restoreSessionCallback(),
     // we want this to run on load so we don't need any thing
     // in the dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps

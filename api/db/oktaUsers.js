@@ -10,23 +10,24 @@ const getOktaUser = (user_id, { db = knex } = {}) => {
 const getUserFromOkta = async username =>
   (await oktaClient.getUser(username)) || {};
 
-const createOktaUser = (user_id, email, metadata, { db = knex } = {}) =>
+const createOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
   db('okta_users').insert({
     user_id,
-    email,
-    metadata
+    ...oktaUser
   });
 
-const updateOktaUser = (user_id, email, metadata, { db = knex } = {}) =>
-  db('okta_users').where({ user_id }).update({ email, metadata });
+const updateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
+  db('okta_users').where({ user_id }).update(oktaUser);
 
-const createOrUpdateOktaUser = (user_id, email, metadata, { db = knex } = {}) =>
-  getOktaUser(user_id, { db })
+const createOrUpdateOktaUser = (user_id, oktaUser, { db = knex } = {}) => {
+  console.log({ user_id, oktaUser });
+  return getOktaUser(user_id, { db })
     .then(user => {
+      console.log({ user });
       if (!user) {
-        return createOktaUser(user_id, email, metadata, { db });
+        return createOktaUser(user_id, oktaUser, { db });
       }
-      return updateOktaUser(user_id, email, metadata, { db });
+      return updateOktaUser(user_id, oktaUser, { db });
     })
     .catch(e =>
       logger.error({
@@ -34,6 +35,7 @@ const createOrUpdateOktaUser = (user_id, email, metadata, { db = knex } = {}) =>
         e
       })
     );
+};
 
 const sanitizeProfile = profile => {
   const desiredFields = [
