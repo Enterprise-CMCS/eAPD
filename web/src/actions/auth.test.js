@@ -948,6 +948,9 @@ describe('auth actions', () => {
 
       const expectedActions = [
         {
+          type: actions.LATEST_ACTIVITY,
+        },
+        {
           type: actions.UPDATE_USER_INFO,
           data: {
             name: 'moop',
