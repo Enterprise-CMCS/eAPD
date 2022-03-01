@@ -148,7 +148,6 @@ const getUserByID = async (
   let oktaUser;
   if (checkOkta) {
     oktaUser = await client.getUser(id);
-    console.log({ oktaUser });
     if (oktaUser) {
       const {
         id: oktaId,

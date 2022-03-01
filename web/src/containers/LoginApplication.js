@@ -55,7 +55,7 @@ const LoginApplication = ({
         }, 1000);
       });
     }
-  }, [initialCheck, showConsent]);
+  }, [initialCheck, showConsent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(
     () => restoreSessionCallback(),

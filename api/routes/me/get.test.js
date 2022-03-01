@@ -31,20 +31,18 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test('get me handler', async test => {
     const extractor = sinon.stub();
     const eapdTokenVerifier = sinon.stub();
-    const updateFromOkta = sinon.stub();
-    const checkExpired = sinon.stub();
+    const getUser = sinon.stub();
 
     extractor.withArgs(req).returns(req.jwt);
 
     eapdTokenVerifier.withArgs(req.jwt).resolves(claims);
-    
-    checkExpired.withArgs(claims).resolves(claims);
+
+    getUser.withArgs(claims.id, true).resolves(claims);
 
     getEndpoint(app, {
       extractor,
       verifier: eapdTokenVerifier,
-      updateFromOkta,
-      checkExpired
+      getUser
     });
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 
@@ -60,7 +58,7 @@ tap.test('me GET endpoint', async endpointTest => {
       'calls the token extractor with the request'
     );
 
-    test.ok(updateFromOkta.calledWith(123));
+    test.ok(getUser.calledWith(123));
 
     test.ok(res.send.calledWith(claims), 'sends back the claims object');
   });

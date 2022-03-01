@@ -19,11 +19,9 @@ const createOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
 const updateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
   db('okta_users').where({ user_id }).update(oktaUser);
 
-const createOrUpdateOktaUser = (user_id, oktaUser, { db = knex } = {}) => {
-  console.log({ user_id, oktaUser });
-  return getOktaUser(user_id, { db })
+const createOrUpdateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
+  getOktaUser(user_id, { db })
     .then(user => {
-      console.log({ user });
       if (!user) {
         return createOktaUser(user_id, oktaUser, { db });
       }
@@ -35,7 +33,6 @@ const createOrUpdateOktaUser = (user_id, oktaUser, { db = knex } = {}) => {
         e
       })
     );
-};
 
 const sanitizeProfile = profile => {
   const desiredFields = [
