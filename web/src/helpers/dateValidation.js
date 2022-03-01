@@ -1,5 +1,3 @@
-// import isValid from 'date-fns/isValid';
-
 // check if Number
 function IsNumeric(input) {
   return (input - 0) == input && input.length > 0;
