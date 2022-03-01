@@ -1,5 +1,5 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
-import formatISO from 'date-fns/formatISO';
+import { formatISO } from 'date-fns';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -50,6 +50,8 @@ const DateField = ({ value, onChange, ...rest }) => {
     let monthInvalid = false;
     let yearInvalid = false;
 
+    // Validation for parsing & the date
+
     if (!dayVal || dayVal > 31 || dayVal < 0 ||
         !monthVal || monthVal > 12 || monthVal < 0 ||
         yearVal.length !== 4) {
@@ -83,11 +85,11 @@ const DateField = ({ value, onChange, ...rest }) => {
       dayDefaultValue={dateObj.day}
       monthDefaultValue={dateObj.month}
       yearDefaultValue={dateObj.year}
-      onChange={(_, dateObject) => {
-        onChange(_, dateStr(dateObject))
-      }}
       onComponentBlur={(_, dateObject) => {
-        getErrorMsg(dateObject)
+        getErrorMsg(dateObject);
+      }}
+      onChange={(_, dateObject) => {
+        onChange(_, dateStr(dateObject));
       }}
       errorPlacement='bottom'
     />

@@ -11,7 +11,6 @@ import {
 
 import { validateText } from '../../../helpers/textValidation';
 import { validateSubForm } from '../../../helpers/subFormValidation';
-import { validate } from 'uuid';
 
 const MilestoneForm = forwardRef(
   (
