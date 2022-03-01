@@ -521,6 +521,24 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .type(element.milestoneName)
           .should('not.have.class', 'ds-c-field--error');
 
+        cy.get(`.ds-c-field--month`)
+          .click()
+          .type(element.dateMonth)
+          .blur()
+          .should('not.have.class', 'ds-c-field--error');
+
+        cy.get(`.ds-c-field--day`)
+          .click()
+          .type(element.dateDay)
+          .blur()
+          .should('not.have.class', 'ds-c-field--error');
+
+        cy.get(`.ds-c-field--year`)
+          .click()
+          .type(element.dateYear)
+          .blur()
+          .should('not.have.class', 'ds-c-field--error');
+
         cy.findByRole('button', { name: /Save/i })
           .should('not.be.disabled')
           .click();
@@ -540,7 +558,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
         activityPage.checkMilestoneOutput({
           milestone: element.milestoneName,
-          targetDate: 'Date not specified'
+          targetDate: '1/2/2023'
         });
       });
     });
@@ -878,7 +896,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .next()
         .should('have.text', "1. Miles's Milestone")
         .next()
-        .should('have.text', 'Target completion date:  Date not specified');
+        .should('have.text', 'Target completion date:  1/2/2023');
 
       cy.findByRole('heading', {
         name: /Activity 1: Program AdministrationState staff/i
