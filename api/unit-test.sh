@@ -13,6 +13,6 @@ docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run test $@
 EXIT_CODE=$?
 
-# docker-compose -f docker-compose.endpoint-tests.yml down
+docker-compose -f docker-compose.endpoint-tests.yml down
 
 exit $EXIT_CODE
