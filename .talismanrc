@@ -39,4 +39,7 @@ fileignoreconfig:
     checksum: f2cf6ede450bb3ae47fd14960d149e460980d7ece2e11b7f2b3c49b2296ac56c
   - filename: api/docker-compose.endpoint-tests.yml
     checksum: 026209c9cd53a8b8ae13e41b5bfdd23e0608aa75ddef1f2216acbdfa9f1e91bc
+  - filename: README.md
+    checksum: acdd51d20171b6d8c23a503b9c4c175e1366e02899f335f97b7636958c7a2d43
+    ignore_detectors: [filename, filesize]
 version: ''

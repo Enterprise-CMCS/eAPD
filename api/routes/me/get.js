@@ -1,31 +1,27 @@
 const logger = require('../../logger')('me route get');
 const {
-  jwtExtractor,
   verifyEAPDToken,
   exchangeToken,
+  updateUserToken,
   verifyWebToken
 } = require('../../auth/jwtUtils');
-const { getUserByID } = require('../../db');
 
 module.exports = (
   app,
   {
-    extractor = jwtExtractor,
-    verifier = verifyEAPDToken,
+    verifyOkta = verifyWebToken,
+    verifyEAPD = verifyEAPDToken,
     tokenExchanger = exchangeToken,
-    getUser = getUserByID
+    tokenUpdater = updateUserToken
   } = {}
 ) => {
   logger.debug('setting up GET endpoint');
   app.get('/me', async (req, res, next) => {
     try {
-      const jwt = extractor(req);
-      const claims = jwt ? await verifyWebToken(jwt, { verifier }) : false;
-      if (!claims) return res.status(401).end();
-
-      const { id, ...additionalValues } = claims;
-      const user = await getUser(id, true, { additionalValues });
-
+      // when getting the user's data, the eAPD token is suppied,
+      // so the verifier should be the eAPD verifier
+      const user = await tokenUpdater(req, { verifier: verifyEAPD });
+      if (!user) return res.status(401).send();
       return res.send(user);
     } catch (e) {
       return next(e);
@@ -34,7 +30,9 @@ module.exports = (
 
   app.get('/me/jwToken', async (req, res, next) => {
     try {
-      const user = await tokenExchanger(req, res);
+      // when exchaning tokens, you switch an Okta token for a EAPD token,
+      // so the verifier should be the Okta verifier
+      const user = await tokenExchanger(req, { verifier: verifyOkta });
       if (!user) return res.status(401).send();
       return res.send(user);
     } catch (e) {

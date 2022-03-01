@@ -109,6 +109,10 @@ const getCurrentUser =
     const response = await axios
       .get('/me', options)
       .then(res => {
+        if (res.data?.jwt) {
+          setCookie(res.data.jwt);
+        }
+
         return res;
       })
       .catch(error => {

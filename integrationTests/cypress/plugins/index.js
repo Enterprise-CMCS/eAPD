@@ -41,40 +41,62 @@ module.exports = (on, config) => {
   );
 
   on('task', {
-    'db:resetnorole': async () => {
-      const oktaUser = await knex('okta_users')
+    'db:resetnorole': () => {
+      return knex('okta_users')
         .where('login', 'norole')
-        .first();
-      if (oktaUser) {
-        await knex('auth_affiliations')
-          .where('user_id', oktaUser.user_id)
-          .delete();
-      }
-      return null;
+        .first()
+        .then(oktaUser => {
+          if (oktaUser) {
+            return knex('auth_affiliations')
+              .where('user_id', oktaUser.user_id)
+              .delete()
+              .then(() => ({ success: true }))
+              .catch(error => ({ success: false, error }));
+          }
+          return { success: false, error: 'User not found' };
+        })
+        .catch(error => ({ success: false, error }));
     },
-    'db:resetcertification': async ({ email }) => {
-      const cert = await knex('state_admin_certifications')
+    'db:resetcertification': ({ email }) => {
+      return knex('state_admin_certifications')
         .where('email', email)
-        .first();
-      if (cert) {
-        await knex('state_admin_certifications_audit')
-          .where('certificationId', cert.id)
-          .delete();
-        await knex('state_admin_certifications').where('email', email).delete();
-      }
-      return null;
+        .first()
+        .then(cert => {
+          if (cert) {
+            return knex('state_admin_certifications_audit')
+              .where('certificationId', cert.id)
+              .delete()
+              .then(() => {
+                return knex('state_admin_certifications')
+                  .where('email', email)
+                  .delete()
+                  .then(() => ({ success: true }))
+                  .catch(error => ({ success: false, error }));
+              })
+              .catch(error => ({ success: false, error }));
+          }
+          return { success: false, error: 'no certificate found' };
+        })
+        .catch(error => ({ success: false, error }));
     },
-    'db:resetcertificationmatch': async () => {
-      await knex('state_admin_certifications_audit')
+    'db:resetcertificationmatch': () => {
+      return knex('state_admin_certifications_audit')
         .where('certificationId', 1002)
-        .delete();
-      await knex('state_admin_certifications')
-        .where('id', 1002)
-        .update({ affiliationId: null });
-      await knex('auth_affiliations')
-        .where('id', 1001)
-        .update({ role_id: null, status: 'requested' });
-      return null;
+        .delete()
+        .then(() => {
+          return knex('state_admin_certifications')
+            .where('id', 1002)
+            .update({ affiliationId: null })
+            .then(() => {
+              return knex('auth_affiliations')
+                .where('id', 1001)
+                .update({ role_id: null, status: 'requested' })
+                .then(() => ({ success: true }))
+                .catch(error => ({ success: false, error }));
+            })
+            .catch(error => ({ success: false, error }));
+        })
+        .catch(error => ({ success: false, error }));
     },
     lighthouse: lighthouse(), // calling the function is important
     pa11y: pa11y() // calling the function is important

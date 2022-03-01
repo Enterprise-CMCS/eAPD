@@ -128,8 +128,7 @@ tap.test('Local jwtUtils', async t => {
     sign,
     actualVerifyEAPDToken,
     exchangeToken,
-    changeState,
-    verifyAndUpdateExpirations
+    changeState
   } = require('./jwtUtils');
 
   const payload = {
@@ -433,87 +432,4 @@ tap.test('Local jwtUtils', async t => {
     );
     t.same(user.state.id, 'original', 'original user is unchanged');
   });
-
-  t.test(
-    'Verify and update affiliation expirations, with no expired affiliations',
-    async t => {
-      const claims = {
-        id: '123',
-        name: 'State Admin',
-        state: {
-          id: 'ak',
-          name: 'Alaska'
-        },
-        states: {
-          ak: 'approved',
-          md: 'approved'
-        },
-        username: 'stateadmin'
-      };
-
-      const getExpiredUserAffiliations = sinon.stub();
-      getExpiredUserAffiliations.withArgs(claims.id).resolves([]);
-
-      const getAffiliatedStates = sinon.stub();
-      getAffiliatedStates.withArgs(claims.id).resolves({
-        ak: 'approved',
-        md: 'approved'
-      });
-
-      const updateAuthAffiliation = sinon.spy();
-
-      const newClaims = await verifyAndUpdateExpirations(claims, {
-        getExpiredUserAffiliations_: getExpiredUserAffiliations,
-        getAffiliatedStates_: getAffiliatedStates,
-        updateAuthAffiliation_: updateAuthAffiliation
-      });
-
-      t.ok(updateAuthAffiliation.notCalled);
-      t.same(claims, newClaims);
-    }
-  );
-
-  t.test(
-    'Verify and update affiliation expirations, with an expired affiliation',
-    async t => {
-      const claims = {
-        id: '123',
-        name: 'State Admin',
-        state: {
-          id: 'ak',
-          name: 'Alaska'
-        },
-        states: {
-          ak: 'approved',
-          md: 'approved'
-        },
-        username: 'stateadmin'
-      };
-
-      const getExpiredUserAffiliations = sinon.stub();
-      getExpiredUserAffiliations.withArgs(claims.id).resolves([
-        {
-          id: '123',
-          state_id: 'ak'
-        }
-      ]);
-
-      const getAffiliatedStates = sinon.stub();
-      getAffiliatedStates.withArgs(claims.id).resolves({
-        ak: 'revoked',
-        md: 'approved'
-      });
-
-      const updateAuthAffiliation = sinon.spy();
-
-      const newClaims = await verifyAndUpdateExpirations(claims, {
-        getExpiredUserAffiliations_: getExpiredUserAffiliations,
-        getAffiliatedStates_: getAffiliatedStates,
-        updateAuthAffiliation_: updateAuthAffiliation
-      });
-
-      t.ok(updateAuthAffiliation.calledOnce);
-      t.same(newClaims.states.ak, 'revoked');
-    }
-  );
 });

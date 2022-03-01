@@ -2,13 +2,6 @@ const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtok
 // const logger = require('../logger')('jwtUtils');
 const { verifyJWT } = require('./oktaAuth');
 const { getUserByID, populateUserRole } = require('../db');
-const {
-  getUserAffiliatedStates: actualGetUserAffiliatedStates,
-  getExpiredUserAffiliations: actualGetExpiredUserAffiliations
-} = require('../db/auth');
-const {
-  updateAuthAffiliation: actualUpdateAuthAffiliation
-} = require('../db/affiliations');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -116,6 +109,26 @@ const exchangeToken = async (
   return user;
 };
 
+const updateUserToken = async (
+  req,
+  {
+    extractor = jwtExtractor,
+    verifier = verifyEAPDToken,
+    getUser = getUserByID
+  } = {}
+) => {
+  const oktaJWT = extractor(req);
+  // verify the token using the eAPD verifier.
+  const claims = oktaJWT ? await verifyWebToken(oktaJWT, { verifier }) : false;
+  if (!claims) return null;
+
+  const { id, ...additionalValues } = claims;
+  const user = await getUser(id, true, { additionalValues });
+  user.jwt = sign(user);
+
+  return user;
+};
+
 const changeState = async (
   user,
   stateId,
@@ -124,36 +137,6 @@ const changeState = async (
   const populatedUser = await populate(user, stateId);
 
   return sign(populatedUser, {});
-};
-
-const verifyAndUpdateExpirations = async (
-  claims,
-  {
-    getExpiredUserAffiliations_ = actualGetExpiredUserAffiliations,
-    getAffiliatedStates_ = actualGetUserAffiliatedStates,
-    updateAuthAffiliation_ = actualUpdateAuthAffiliation
-  } = {}
-) => {
-  const expiredAffiliations = await getExpiredUserAffiliations_(claims.id);
-
-  const updatedAffiliations = expiredAffiliations.map(async affiliation => {
-    await updateAuthAffiliation_({
-      affiliationId: affiliation.id,
-      newRoleId: -1,
-      newStatus: 'revoked',
-      changedBy: 'system',
-      stateId: affiliation.state_id,
-      ffy: null
-    });
-  });
-
-  await Promise.all(updatedAffiliations);
-
-  // copy the token to prevent altering it
-  const newClaims = JSON.parse(JSON.stringify(claims));
-  const affiliations = await getAffiliatedStates_(claims.id);
-  newClaims.states = affiliations;
-  return newClaims;
 };
 
 const mockVerifyEAPDJWT = async token => {
@@ -169,9 +152,9 @@ if (process.env.NODE_ENV === 'test') {
     sign,
     verifyEAPDToken: mockVerifyEAPDJWT,
     exchangeToken,
+    updateUserToken,
     actualVerifyEAPDToken: verifyEAPDToken,
-    changeState,
-    verifyAndUpdateExpirations
+    changeState
   };
 } else {
   module.exports = {
@@ -181,7 +164,7 @@ if (process.env.NODE_ENV === 'test') {
     sign,
     verifyEAPDToken,
     exchangeToken,
-    changeState,
-    verifyAndUpdateExpirations
+    updateUserToken,
+    changeState
   };
 }
