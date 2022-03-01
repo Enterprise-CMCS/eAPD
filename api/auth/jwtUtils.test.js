@@ -128,6 +128,7 @@ tap.test('Local jwtUtils', async t => {
     sign,
     actualVerifyEAPDToken,
     exchangeToken,
+    updateUserToken,
     changeState
   } = require('./jwtUtils');
 
@@ -377,6 +378,90 @@ tap.test('Local jwtUtils', async t => {
 
     t.ok(getUser.notCalled, 'get user not called because no JWT was present');
   });
+
+  t.test('updateUserToken works', async t => {
+    const extractor = sinon.stub();
+    const verifier = sinon.stub();
+    const getUser = sinon.stub();
+
+    const req = { jwt: 'AAAA.BBBB.DDDD' };
+    const user = { id: '1234' };
+
+    extractor.withArgs(req).returns(req.jwt);
+    verifier.withArgs(req.jwt).resolves(user);
+    const { id, ...additionalValues } = user;
+    getUser.withArgs(user.id, true, { additionalValues }).returns(user);
+
+    const updatedUser = await updateUserToken(req, {
+      extractor,
+      verifier,
+      getUser
+    });
+    t.ok(updatedUser.jwt, 'user has a JWT');
+
+    t.ok(
+      actualVerifyEAPDToken(updatedUser.jwt),
+      'user has a valid JWT set on them'
+    );
+
+    t.ok(user.id, updatedUser.id, 'user has the expected value');
+  });
+
+  t.test(
+    'updateUserToken returns null if there is no JWT in the req',
+    async t => {
+      const extractor = sinon.stub();
+      const oktaVerify = sinon.stub();
+      const getUser = sinon.stub();
+
+      const req = { jwt: 'AAAA.BBBB.DDDD' };
+      const user = { uid: '1234' };
+
+      extractor.withArgs(req).returns(false);
+      oktaVerify.withArgs(req.jwt).returns(user);
+      const { id, ...additionalValues } = user;
+      getUser.withArgs(user.id, true, { additionalValues }).returns(user);
+
+      const newUser = await updateUserToken(req, {
+        extractor,
+        oktaVerify,
+        getUser
+      });
+      t.same(newUser, null, 'user is null');
+
+      t.ok(oktaVerify.notCalled, 'Okta not called because JWT was missing');
+
+      t.ok(getUser.notCalled, 'get user not called because no JWT was present');
+    }
+  );
+
+  t.test(
+    "updateUserToken returns null if eAPD verifier doesn't validate it",
+    async t => {
+      const extractor = sinon.stub();
+      const verifier = sinon.stub();
+      const getUser = sinon.stub();
+
+      const req = { jwt: 'AAAA.BBBB.DDDD' };
+      const user = { uid: '1234' };
+
+      extractor.withArgs(req).returns(req.jwt);
+      verifier.withArgs(req.jwt).resolves(false);
+      const { uid, ...additionalValues } = user;
+      getUser.withArgs(user.uid, true, { additionalValues }).returns(user);
+
+      const newUser = await updateUserToken(req, {
+        extractor,
+        verifier,
+        getUser
+      });
+      t.same(newUser, null, 'user is null');
+
+      t.ok(verifier.calledWith(req.jwt), 'okta was called with the JWT');
+
+      t.ok(getUser.notCalled, 'get user not called because no JWT was present');
+    }
+  );
 
   t.test('Change State of a token', async t => {
     const populateUserRole = sinon.stub();
