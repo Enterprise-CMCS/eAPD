@@ -27,7 +27,11 @@ module.exports = (on, config) => {
   on('before:browser:launch', (browser = {}, launchOptions) => {
     prepareAudit(launchOptions);
 
-    if (browser.family === 'chromium') {
+    if (browser.name === 'chrome') {
+      launchOptions.args.push('--disable-dev-shm-usage');
+    } else if (browser.name === 'electron') {
+      launchOptions.args['disable-dev-shm-usage'] = true;
+    } else if (browser.family === 'chromium') {
       launchOptions.args.push('--disable-dev-shm-usage');
     }
 

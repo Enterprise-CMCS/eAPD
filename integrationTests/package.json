@@ -8,7 +8,7 @@
     "preinstall": "npx npm-force-resolutions",
     "cy:open": "./cypress-setup.sh open",
     "cy:run": "./cypress-setup.sh run",
-    "cy:run:ci": "cypress run -C cypress.json ",
+    "cy:run:ci": "cypress run -C cypress.json --headless --browser chrome",
     "lint": "eslint 'cypress/**/*.js'",
     "npm-check": "npx npm-check-updates"
   },
