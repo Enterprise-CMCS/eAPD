@@ -10,41 +10,31 @@ import Dollars from '../../../components/Dollars';
 import NumberField from '../../../components/NumberField';
 import RichText from '../../../components/RichText';
 
-import {
-  saveContractor as actualSaveContractor
-} from '../../../actions/editActivity';
+import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
 
 const ContractorResourceForm = forwardRef(
-  (
-    {
-      activityIndex,
-      index,
-      item,
-      saveContractor
-    },
-    ref 
-) => {
+  ({ activityIndex, index, item, saveContractor }, ref) => {
     ContractorResourceForm.displayName = 'ContractorResourceForm';
-    
+
     const initialState = item;
-    
+
     function reducer(state, action) {
       switch (action.type) {
         case 'updateField':
           return {
             ...state,
             [action.field]: action.value
-          }
+          };
         case 'setHourly':
           return {
             ...state,
             hourly: {
               useHourly: action.value,
-              data: { 
+              data: {
                 ...state.hourly.data
               }
             }
-          }
+          };
         case 'updateHourlyHours':
           return {
             ...state,
@@ -58,7 +48,7 @@ const ContractorResourceForm = forwardRef(
                 }
               }
             }
-          }
+          };
         case 'updateHourlyRate':
           return {
             ...state,
@@ -72,7 +62,7 @@ const ContractorResourceForm = forwardRef(
                 }
               }
             }
-          }
+          };
         case 'updateYearCost':
           return {
             ...state,
@@ -80,56 +70,74 @@ const ContractorResourceForm = forwardRef(
               ...state.years,
               [action.year]: action.value
             }
-          }
+          };
         default:
           throw new Error(
             'Unrecognized action type provided to ContractorResourceForm reducer'
           );
       }
     }
-    
+
     const [state, dispatch] = useReducer(reducer, initialState);
-    
+
     const apdFFYs = useMemo(() => Object.keys(state.years), [state.years]);
-    
+
     const handleSubmit = e => {
       e.preventDefault();
       saveContractor(activityIndex, index, state);
     };
-    
+
     const getDateHandler = action => (e, dateStr) => {
-      dispatch({ type: 'updateField', field: `${action}`, value: dateStr })
+      dispatch({ type: 'updateField', field: `${action}`, value: dateStr });
     };
-  
-    const getHandlerForYearlyCost = year => ({ target: { value } }) => {
-      dispatch({ type: 'updateYearCost', year, value })
-    };
-  
-    const getHandlerForYearlyHours = year => ({ target: { value } }) => {
-      dispatch({ type: 'updateHourlyHours', year, value })
-      dispatch({ type: 'updateYearCost', year, value: value * state.hourly.data[year].rate })
-    };
-  
-    const getHandlerForYearlyHourlyRate = year => ({ target: { value } }) => {
-      dispatch({ type: 'updateHourlyRate', year, value })
-      dispatch({ type: 'updateYearCost', year, value: state.hourly.data[year].hours * value })
-    };
-  
+
+    const getHandlerForYearlyCost =
+      year =>
+      ({ target: { value } }) => {
+        dispatch({ type: 'updateYearCost', year, value });
+      };
+
+    const getHandlerForYearlyHours =
+      year =>
+      ({ target: { value } }) => {
+        dispatch({ type: 'updateHourlyHours', year, value });
+        dispatch({
+          type: 'updateYearCost',
+          year,
+          value: value * state.hourly.data[year].rate
+        });
+      };
+
+    const getHandlerForYearlyHourlyRate =
+      year =>
+      ({ target: { value } }) => {
+        dispatch({ type: 'updateHourlyRate', year, value });
+        dispatch({
+          type: 'updateYearCost',
+          year,
+          value: state.hourly.data[year].hours * value
+        });
+      };
+
     const syncDescription = html => {
-      dispatch({ type: 'updateField', field: 'description', value: html })
+      dispatch({ type: 'updateField', field: 'description', value: html });
     };
-  
+
     return (
       <form index={index} onSubmit={handleSubmit}>
         <TextField
-          autoFocus
           label="Private Contractor or Vendor Name"
           name="contractor-name"
           hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
           labelClassName="full-width-label"
+          className="remove-clearfix"
           value={state.name}
           onChange={e =>
-            dispatch({ type: 'updateField', field: 'name', value: e.target.value })
+            dispatch({
+              type: 'updateField',
+              field: 'name',
+              value: e.target.value
+            })
           }
         />
         <FormLabel
@@ -176,7 +184,11 @@ const ContractorResourceForm = forwardRef(
           labelClassName="full-width-label"
           value={state.totalCost}
           onChange={e =>
-            dispatch({ type: 'updateField', field: 'totalCost', value: e.target.value })
+            dispatch({
+              type: 'updateField',
+              field: 'totalCost',
+              value: e.target.value
+            })
           }
         />
         <fieldset className="ds-c-fieldset">
@@ -248,7 +260,12 @@ const ContractorResourceForm = forwardRef(
             />
           ))
         )}
-        <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
+        <input
+          className="ds-u-visibility--hidden"
+          type="submit"
+          ref={ref}
+          hidden
+        />
       </form>
     );
   }

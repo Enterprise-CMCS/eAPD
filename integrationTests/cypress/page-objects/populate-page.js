@@ -13,7 +13,7 @@ class PopulatePage {
       .within(() => {
         cy.findByLabelText('Month').clear().type(list[0]);
         cy.findByLabelText('Day').clear().type(list[1]);
-        cy.findByLabelText('Year').clear().type(list[2]);
+        cy.findByLabelText('Year').clear().type(list[2]).blur();
       });
   };
 

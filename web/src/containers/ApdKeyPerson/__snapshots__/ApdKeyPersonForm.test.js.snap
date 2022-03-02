@@ -43,7 +43,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
     </p>
     <TextField
-      autoFocus={true}
       label="Name"
       name="apd-state-profile-pocname1"
       onChange={[Function]}
@@ -79,7 +78,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             </label>
           </FormLabel>
           <TextInput
-            autoFocus={true}
             errorId="field_1-error"
             errorPlacement="top"
             id="field_1"
@@ -91,7 +89,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
           >
             <input
               aria-invalid={false}
-              autoFocus={true}
               className="ds-c-field"
               id="field_1"
               name="apd-state-profile-pocname1"
@@ -843,7 +840,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
   </p>
   <TextField
-    autoFocus={true}
     label="Name"
     name="apd-state-profile-pocname1"
     onChange={[Function]}
@@ -934,7 +930,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
   </p>
   <TextField
-    autoFocus={true}
     label="Name"
     name="apd-state-profile-pocname0"
     onChange={[Function]}
