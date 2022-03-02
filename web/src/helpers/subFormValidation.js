@@ -1,9 +1,19 @@
 import { findDateForm } from './dateValidation';
 
-export const findSubForm = (e) => {
+function findSubForm(e) {
   // eslint-disable-next-line no-param-reassign
   while ((e = e.parentNode) && !e.classList.contains('form-and-review-list--item__expanded'));
   return e;
+}
+
+function notADateField(input) {
+  var inputName = input.name;
+
+  if (inputName === "day" || inputName === "year" || inputName === "month") {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 export const disableSave = (subForm) => {
@@ -18,8 +28,28 @@ export const disableSave = (subForm) => {
 }
 
 export const addError = (input) => {
+  var inputName = input.name,
+      inputParent = input.parentNode;
+
   if (!input.classList.contains('ds-c-field--error')) {
     input.classList.add('ds-c-field--error');
+  }
+
+  if (input.classList.contains('ds-c-field') && notADateField(input)) {
+    var lastDiv = inputParent.lastChild,
+        div = document.createElement('div'),
+        vowels = ("aeiouAEIOU");
+
+    if (vowels.indexOf(inputName[0]) !== -1) {
+      div.innerHTML = `Provide an ${inputName}`;
+    } else {
+      div.innerHTML = `Provide a ${inputName}`;
+    }
+
+    if (!lastDiv.classList.contains('ds-c-field__error-message')) {
+      div.classList.add('ds-c-field__error-message');
+      inputParent.appendChild(div);
+    }
   }
 }
 
