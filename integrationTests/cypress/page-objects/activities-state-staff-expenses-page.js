@@ -8,7 +8,7 @@ const extractNumber = str => {
 class ActivitiesStateStaffExpensesPage {
   addStaff = () => {
     cy.findByRole('button', { name: /^Add State Staff$/i }).click();
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   deleteStaff = index => {
@@ -64,7 +64,7 @@ class ActivitiesStateStaffExpensesPage {
           });
       });
 
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   verifyStaff = (staffIndex, title, desc, costs, ftes) => {
@@ -126,7 +126,7 @@ class ActivitiesStateStaffExpensesPage {
 
   addExpense = () => {
     cy.findByRole('button', { name: /^Add State Expense$/i }).click();
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   deleteExpense = index => {
@@ -157,7 +157,7 @@ class ActivitiesStateStaffExpensesPage {
       cy.wrap($el).clear().type(costs[index]);
     });
 
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   verifyExpense = (expenseIndex, category, costs, desc) => {

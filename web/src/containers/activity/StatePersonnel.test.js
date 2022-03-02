@@ -7,12 +7,11 @@ import {
   mapDispatchToProps
 } from './StatePersonnel';
 
-import { addPersonnel, removePersonnel } from '../../actions/editActivity';
+import { removePersonnel } from '../../actions/editActivity';
 
 describe('activity state personnel costs subsection', () => {
   const props = {
     activityIndex: 72,
-    add: jest.fn(),
     personnel: [
       {
         category: 'test category',
@@ -29,7 +28,6 @@ describe('activity state personnel costs subsection', () => {
   const component = shallow(<StatePersonnel {...props} />);
 
   beforeEach(() => {
-    props.add.mockClear();
     props.remove.mockClear();
   });
 
@@ -39,11 +37,6 @@ describe('activity state personnel costs subsection', () => {
 
   describe('events', () => {
     const list = component.find('FormAndReviewList');
-
-    it('handles adding a new state person', () => {
-      list.prop('onAddClick')();
-      expect(props.add).toHaveBeenCalledWith(72);
-    });
 
     it('handles deleting a state person', () => {
       list.prop('onDeleteClick')(0);
@@ -73,7 +66,6 @@ describe('activity state personnel costs subsection', () => {
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      add: addPersonnel,
       remove: removePersonnel
     });
   });

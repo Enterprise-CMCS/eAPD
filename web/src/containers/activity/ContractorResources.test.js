@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ContractorResources';
-import { addContractor, removeContractor } from '../../actions/editActivity';
+import { removeContractor } from '../../actions/editActivity';
 
 describe('the ContractorResources component', () => {
   const activityIndex = 0;
@@ -59,14 +59,12 @@ describe('the ContractorResources component', () => {
         }
       }
     ],
-    addContractor: jest.fn(),
     removeContractor: jest.fn()
   };
 
   const component = shallow(<ContractorResources {...props} />);
 
   beforeEach(() => {
-    props.addContractor.mockClear();
     props.removeContractor.mockClear();
   });
 
@@ -76,11 +74,6 @@ describe('the ContractorResources component', () => {
 
   describe('events', () => {
     const list = component.find('FormAndReviewList');
-
-    it('handles adding a new contractor resource', () => {
-      list.prop('onAddClick')();
-      expect(props.addContractor).toHaveBeenCalledWith(activityIndex);
-    });
 
     it('handles deleting a contractor resource', () => {
       list.prop('onDeleteClick')(1);
@@ -95,21 +88,25 @@ describe('the ContractorResources component', () => {
           apd: {
             data: {
               activities: [
-                { contractorResources: 'contractorx' },
-                { contractorResources: 'contractory' },
-                { contractorResources: 'contractorz' }
-              ]
+                { 
+                  contractorResources: [ 
+                    { key: '123' }
+                  ] 
+                },
+              ],
+              years: ['2022', '2023']
             }
-          }
+          },
         },
-        { activityIndex: 2 }
+        { activityIndex: 0 }
       )
     ).toEqual({
-      contractors: 'contractorz'
+      list: [{ key: '123' }],
+      years: ['2022', '2023']
     });
   });
 
   test('maps dispatch actions to props', () => {
-    expect(mapDispatchToProps).toEqual({ addContractor, removeContractor });
+    expect(mapDispatchToProps).toEqual({ removeContractor });
   });
 });
