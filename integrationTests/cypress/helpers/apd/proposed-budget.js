@@ -105,6 +105,7 @@ export const testProposedBudgetWithData = years => {
   before(() => {
     proposedBudgetPage = new ProposedBudgetPage();
     const activityPage = new ActivitySchedulePage();
+
     cy.goToActivityScheduleSummary();
     cy.findByRole('heading', {
       name: /Activity Schedule Summary/i,

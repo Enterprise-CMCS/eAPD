@@ -29,7 +29,7 @@ exports[`APD header renders correctly 1`] = `
       </div>
     </div>
     <Button
-      class="ds-c-button ds-c-button--transparent"
+      className="ds-c-button ds-c-button--transparent"
       component="button"
       id="title-edit-link"
       onClick={[Function]}

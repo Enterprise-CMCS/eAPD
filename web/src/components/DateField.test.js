@@ -54,45 +54,4 @@ describe('DateField wrapper component', () => {
       )
     ).toMatchSnapshot();
   });
-
-  describe('stitches dates back together properly', () => {
-    const component = shallow(
-      // Operation Torch begins to relieve pressure on Allied forces
-      // in North Africa and open options for an invasion of southern
-      // Europe. This represented the opening of the second European
-      // front following the German invasion of the Soviet Union.
-      <DateField value="1942-11-8" onChange={onChange} />
-    );
-
-    const joinDate = component.find('DateField').prop('dateFormatter');
-
-    it('returns an empty string if all parts of the date are missing', () => {
-      expect(joinDate({})).toEqual('');
-    });
-
-    it('does not prepend zeroes if not necessary', () => {
-      // Operation Torch ends in success.
-      expect(joinDate({ day: 16, month: 11, year: 1942 })).toEqual(
-        '1942-11-16'
-      );
-    });
-
-    // Erwin Rommel, commander of German forces in Africa, returns to Berlin
-    // in defeat. A few weeks later, the German forces remaining in Africa
-    // surrender to the Allies.
-    it('prepends zeroes to month and day fields, as appropriate', () => {
-      expect(joinDate({ day: 9, month: 3, year: 1943 })).toEqual('1943-03-09');
-    });
-  });
-
-  test('handles changes', () => {
-    const component = shallow(
-      // Allied forces halt Operation Market Garden, unable to cross the Rhine
-      // River. However, they succeeded in liberating several Dutch cities and
-      // disrupting V-2 rocket launches.
-      <DateField value="1944-9-25" onChange={onChange} />
-    );
-    component.find('DateField').simulate('change', 'moop moop');
-    expect(onChange).toHaveBeenCalledWith('moop moop');
-  });
 });
