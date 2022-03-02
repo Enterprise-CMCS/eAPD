@@ -354,10 +354,10 @@ jobs:
           working_directory: ~/project
           command: |
             sudo apt-get update
-            sudo apt-get install -y libgbm-dev wget fonts-liberation
+            sudo apt-get install -y libgbm-dev wget fonts-liberation xdg-utils
 
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome-stable_current_amd64.deb || true
             sudo apt-get -f install
             sudo dpkg -i google-chrome-stable_current_amd64.deb
 
