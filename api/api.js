@@ -71,8 +71,6 @@ api.use((_, res, next) => {
   next();
 });
 
-api.use(require('sanitize').middleware);
-
 api.use((req, res, next) => {
   req.id = uuidv4();
   req.meta = {};
