@@ -1,39 +1,94 @@
-import { TextField } from '@cmsgov/design-system';
+import { TextField, Button } from '@cmsgov/design-system';
 
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo } from 'react';
+import React, { forwardRef, useReducer } from 'react';
 import { connect } from 'react-redux';
-import {
-  setOutcome as setOutcomeAction,
-  setOutcomeMetric
-} from '../../../actions/editActivity';
+
+import Icon, { faPlusCircle } from '../../../components/Icons';
 import Review from '../../../components/Review';
+
+import {
+  saveOutcome as actualSaveOutcome
+} from '../../../actions/editActivity';
+
 import { validateText } from '../../../helpers/textValidation';
 
-const OutcomeAndMetricForm = ({
-  activityIndex,
-  item: { metrics, outcome },
-  index,
-  setMetric,
-  setOutcome,
-  removeMetric
-}) => {
-  const changeOutcome = useMemo(
-    () =>
-      ({ target: { value } }) => {
-        setOutcome(activityIndex, index, value);
-      },
-    [activityIndex, index, setOutcome]
-  );
+import { newOutcomeMetric } from '../../../reducers/activities';
 
-  const changeMetric =
-    i =>
-    ({ target: { value } }) => {
-      setMetric(activityIndex, index, i, value);
-    };
+const OutcomeAndMetricForm = forwardRef(
+  (
+    {
+      activityIndex,
+      item,
+      index,
+      saveOutcome
+    },
+    ref
+) => {
+  OutcomeAndMetricForm.displayName = 'OutcomeAndMetricForm';
+  
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'updateField':
+        return {
+          ...state,
+          [action.field]: action.value
+        }
+      case 'addMetric': {
+        const newMetric = newOutcomeMetric();
+        return {
+          ...state,
+          metrics: [
+            ...state.metrics,
+            newMetric
+          ]
+        }
+      }
+      case 'removeMetric': {
+        const metricsCopy = [...state.metrics];
+        metricsCopy.splice(action.index, 1);
+        return {
+          ...state,
+          metrics: metricsCopy
+        }        
+      }
+      case 'updateMetrics': {
+        const metricsCopy = [...state.metrics];
+        metricsCopy[action.metricIndex].metric = action.value;
+        
+        return {
+          ...state,
+          metrics: metricsCopy
+        }        
+      }
+      default:
+        throw new Error(
+          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+        );
+    }
+  }  
+  
+  const [state, dispatch] = useReducer(reducer, item);
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    saveOutcome(activityIndex, index, state);
+  };
+  
+  const handleAddMetric = () => {
+    dispatch({ type: 'addMetric' });
+  }
+  
+  const handleDeleteMetric = (outcomeIndex, metricIndex) => {
+    dispatch({ type: 'removeMetric', index: metricIndex });
+  };
+  
+  const changeMetric = i => ({ target: { value } }) => {
+    dispatch({ type: 'updateMetrics', metricIndex: i, value })
+  };
 
   return (
-    <Fragment key={`activity${activityIndex}-index${index}-form`}>
+    <form index={index} key={`activity${activityIndex}-index${index}-form`} onSubmit={handleSubmit}>
       <TextField
         key={`activity${activityIndex}-index${index}`}
         data-cy={`outcome-${index}`}
@@ -41,21 +96,30 @@ const OutcomeAndMetricForm = ({
         label="Outcome"
         className="remove-clearfix"
         hint="Describe a distinct and measurable improvement for this system."
-        value={outcome}
+        value={state.outcome}
         multiline
         rows="4"
-        onChange={changeOutcome}
+        onChange={e => 
+          dispatch({ type: 'updateField', field: 'outcome', value: e.target.value })
+        }
         onBlur={validateText}
         onKeyUp={validateText}
       />
-
-      {metrics.map(({ key, metric }, i) => (
+      {state.metrics.map(({ key, metric }, i) => (
         <Review
           key={key}
-          onDeleteClick={() => removeMetric(index, i)}
+          onDeleteClick={
+            state.metrics.length === 1 && metric === ''
+              ? null
+              : () => handleDeleteMetric(index, i)
+          }
+          onDeleteLabel="Remove"
+          skipConfirmation
           ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
           objType="Metric"
-        >
+          onBlur={validateText}
+          onKeyUp={validateText}
+          >
           <div
             key={key}
             className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
@@ -77,9 +141,21 @@ const OutcomeAndMetricForm = ({
           </div>
         </Review>
       ))}
-    </Fragment>
+      <div className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2" style={{width: 485}}>
+        <Button
+          key={`activity${activityIndex}-index${index}-add-metric`}
+          className="ds-c-button ds-c-button--transparent"
+          onClick={handleAddMetric}
+        >
+          <Icon icon={faPlusCircle} className='ds-u-margin-right--1' />
+          Add Metric to Outcome
+        </Button>
+      </div>
+      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
+    </form>
   );
-};
+  }
+);
 
 OutcomeAndMetricForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
@@ -88,16 +164,15 @@ OutcomeAndMetricForm.propTypes = {
     metrics: PropTypes.array,
     outcome: PropTypes.string
   }).isRequired,
-  setOutcome: PropTypes.func.isRequired,
-  setMetric: PropTypes.func.isRequired,
-  removeMetric: PropTypes.func.isRequired
+  saveOutcome: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  setOutcome: setOutcomeAction,
-  setMetric: setOutcomeMetric
+  saveOutcome: actualSaveOutcome
 };
 
-export default connect(null, mapDispatchToProps)(OutcomeAndMetricForm);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  OutcomeAndMetricForm
+);
 
 export { OutcomeAndMetricForm as plain, mapDispatchToProps };

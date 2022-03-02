@@ -63,6 +63,26 @@ class ActivityPage {
     });
   };
 
+  checkMetricFunctionality = () => {
+    cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+    cy.get('[class="ds-c-review"]')
+      .eq(0)
+      .within(() => {
+        cy.contains('Remove').should('exist');
+      });
+    cy.get('[class="ds-c-review"]')
+      .eq(1)
+      .within(() => {
+        cy.contains('Remove').should('exist');
+      });
+
+    cy.get('div.ds-c-review > div > button.ds-c-button').eq(1).click();
+    cy.contains('Delete Metric?').should('not.exist');
+
+    cy.get('div.ds-c-review > div > button.ds-c-button').should('not.exist');
+    cy.findByRole('button', { name: /Save/i }).click();
+  };
+
   checkMilestoneOutput = ({ milestone, targetDate }) => {
     cy.contains(milestone).should('exist');
     cy.contains(targetDate).should('exist');

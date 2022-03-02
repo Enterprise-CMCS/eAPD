@@ -1,37 +1,46 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import { t } from '../../i18n';
 
 import {
   ContractorResourceForm,
   ContractorResourceReview
 } from './ContractorResource';
 import FormAndReviewList from '../../components/FormAndReviewList';
-
-import {
-  addContractor as addAction,
-  removeContractor as removeAction
-} from '../../actions/editActivity';
+import { Subsection } from '../../components/Section';
 
 import { selectContractorsByActivityIndex } from '../../reducers/activities.selectors';
+import { selectApdYears } from '../../reducers/apd.selectors';
 
-import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
+import { removeContractor as removeAction } from '../../actions/editActivity';
+import { newContractor } from '../../reducers/activities';
 
 const ContractorResources = ({
   activityIndex,
-  addContractor,
-  contractors,
-  removeContractor
+  list,
+  removeContractor,
+  years
 }) => {
-  const handleAdd = () => {
-    addContractor(activityIndex);
+  const [localList, setLocalList] = useState(list);
+      
+  useEffect(() => {
+    setLocalList(list)
+  }, [list])
+  
+  const addClick = () => {
+    const newListItem = newContractor(years);
+    setLocalList([...localList, newListItem]);
+  };
+  
+  const onCancel = () => {
+    setLocalList(list);
   };
 
   const handleDelete = index => {
     removeContractor(activityIndex, index);
   };
-
   return (
     <Subsection
       resource="activities.contractorResources"
@@ -40,11 +49,12 @@ const ContractorResources = ({
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText="Add Contractor"
-        list={contractors}
+        list={localList}
         collapsed={ContractorResourceReview}
         expanded={ContractorResourceForm}
         noDataMessage={t('activities.contractorResources.noDataNotice')}
-        onAddClick={handleAdd}
+        onAddClick={addClick}
+        onCancelClick={onCancel}
         onDeleteClick={handleDelete}
         allowDeleteAll
       />
@@ -54,17 +64,17 @@ const ContractorResources = ({
 
 ContractorResources.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  addContractor: PropTypes.func.isRequired,
-  contractors: PropTypes.array.isRequired,
-  removeContractor: PropTypes.func.isRequired
+  list: PropTypes.array.isRequired,
+  removeContractor: PropTypes.func.isRequired,
+  years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  contractors: selectContractorsByActivityIndex(state, { activityIndex })
+  list: selectContractorsByActivityIndex(state, { activityIndex }),
+  years: selectApdYears(state)
 });
 
 const mapDispatchToProps = {
-  addContractor: addAction,
   removeContractor: removeAction
 };
 

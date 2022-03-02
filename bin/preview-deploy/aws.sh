@@ -166,7 +166,7 @@ function configureUserData() {
 #   PR_NUM - Github pull request number associated with this instance
 function createNewInstance() {
   aws ec2 run-instances \
-    --instance-type t3.large \
+    --instance-type t3.medium \
     --image-id $1 \
     --security-group-ids "$AWS_SECURITY_GROUP" \
     --subnet-id "$AWS_SUBNET" \

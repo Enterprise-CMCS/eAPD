@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -8,37 +8,36 @@ import {
 } from './OutcomesAndMetrics';
 import FormAndReviewList from '../../components/FormAndReviewList';
 import {
-  addOutcome,
-  addOutcomeMetric,
   removeOutcome,
-  removeOutcomeMetric
 } from '../../actions/editActivity';
 import { Subsection } from '../../components/Section';
 import { t } from '../../i18n';
 import { selectOMsByActivityIndex } from '../../reducers/activities.selectors';
 
+import { newOutcome } from '../../reducers/activities';
+
 const Outcomes = ({
   activityIndex,
-  add,
-  addMetric,
   outcomes,
-  remove,
-  removeMetric
+  remove
 }) => {
+  const [localList, setLocalList] = useState(outcomes);
+        
+  useEffect(() => {
+    setLocalList(outcomes)
+  }, [outcomes])
+  
   const handleAdd = () => {
-    add(activityIndex);
+    const newListItem = newOutcome();
+    setLocalList([...localList, newListItem]);
   };
-
-  const handleAddMetric = omIndex => {
-    addMetric(activityIndex, omIndex);
-  };
-
+  
   const handleDelete = index => {
     remove(activityIndex, index);
   };
-
-  const handleDeleteMetric = (omIndex, metricIndex) => {
-    removeMetric(activityIndex, omIndex, metricIndex);
+  
+  const onCancel = () => {
+    setLocalList(outcomes);
   };
 
   return (
@@ -50,17 +49,13 @@ const Outcomes = ({
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText="Add Outcome"
-        list={outcomes}
+        list={localList}
         collapsed={OutcomeAndMetricReview}
         expanded={OutcomeAndMetricForm}
-        extraItemButtons={[
-          { onClick: handleAddMetric, text: 'Add Metric to Outcome' }
-        ]}
-        removeMetric={handleDeleteMetric}
         noDataMessage={t('activities.outcomes.noDataNotice')}
         onAddClick={handleAdd}
+        onCancelClick={onCancel}
         onDeleteClick={handleDelete}
-        handleChange={() => {}}
         allowDeleteAll
       />
     </Subsection>
@@ -69,11 +64,8 @@ const Outcomes = ({
 
 Outcomes.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  add: PropTypes.func.isRequired,
-  addMetric: PropTypes.func.isRequired,
   outcomes: PropTypes.array.isRequired,
-  remove: PropTypes.func.isRequired,
-  removeMetric: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
@@ -81,12 +73,11 @@ const mapStateToProps = (state, { activityIndex }) => ({
 });
 
 const mapDispatchToProps = {
-  add: addOutcome,
-  addMetric: addOutcomeMetric,
-  remove: removeOutcome,
-  removeMetric: removeOutcomeMetric
+  remove: removeOutcome
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Outcomes);
-
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(Outcomes);
 export { Outcomes as plain, mapStateToProps, mapDispatchToProps };

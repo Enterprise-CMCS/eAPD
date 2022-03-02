@@ -214,7 +214,7 @@ class FillOutActivityPage {
         contractor.description
       );
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
     });
 
     if (testDelete) {
