@@ -354,9 +354,11 @@ jobs:
           working_directory: ~/project
           command: |
             sudo apt-get update
-            sudo apt-get install -y libgbm-dev wget
+            sudo apt-get install -y libgbm-dev wget fonts-liberation
 
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome-stable_current_amd64.deb
+            sudo apt-get -f install
             sudo dpkg -i google-chrome-stable_current_amd64.deb
 
             # Switch to Node 16.
