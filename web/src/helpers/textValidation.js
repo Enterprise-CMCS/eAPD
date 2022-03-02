@@ -1,18 +1,12 @@
 /* eslint-disable no-cond-assign */
 const error = 'missing-text-error';
-const alert = 'missing-text-alert';
+const fieldAlert = 'ds-c-field--error';
 
 export const findTextAncestor = (e) => {
   // eslint-disable-next-line no-param-reassign
   while ((e = e.parentNode) && !e.classList.contains('form-and-review-list--item__expanded'));
   return e;
 }
-
-export const findDateAncestor = (e) => {
-  // eslint-disable-next-line no-param-reassign
-  while ((e = e.parentNode) && !e.classList.contains('ds-c-datefield__container'));
-  return e;
-};
 
 export const disableBtn = (e) => {
   const container = findTextAncestor(e);
@@ -40,7 +34,7 @@ export const addMissingTextAlert = (e, p, l, s) => {
 
   if (!lastDiv.classList.contains(error)) {
     div.classList.add(error);
-    e.classList.add(alert);
+    e.classList.add(fieldAlert);
     p.appendChild(div);
   }
 
@@ -51,9 +45,11 @@ export const removeMissingTextAlert = (e, p) => {
   const lastDiv = p.lastChild;
 
   if(lastDiv.classList.contains(error)) {
-    e.classList.remove(alert);
+    e.classList.remove(fieldAlert);
     lastDiv.classList.remove(error);
     p.removeChild(lastDiv);
+  } else if (e.classList.contains(fieldAlert)) {
+    e.classList.remove(fieldAlert);
   }
 
   disableBtn(e);

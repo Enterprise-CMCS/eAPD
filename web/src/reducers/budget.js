@@ -36,7 +36,7 @@ const expenseTypeNames = [
   'combined'
 ];
 
-const FFPOptions = new Set(['90-10', '75-25', '50-50']);
+const FFPOptions = new Set(['90-10', '75-25', '50-50', '0-100']);
 
 const expenseTypes = (years, names = expenseTypeNames) =>
   names.reduce(
@@ -587,10 +587,12 @@ const buildBudget = incomingBigState => {
 
   const roundProps = o => {
     Object.entries(o).forEach(([key, value]) => {
-      if (typeof value === 'number') {
-        o[key] = fixNum(value);
-      } else if (typeof value === 'object') {
-        roundProps(value);
+      if (value) {
+        if (typeof value === 'number') {
+          o[key] = fixNum(value);
+        } else if (typeof value === 'object') {
+          roundProps(value);
+        }
       }
     });
   };

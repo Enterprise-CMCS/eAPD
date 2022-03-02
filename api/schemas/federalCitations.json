@@ -13,10 +13,7 @@
             "type": "string"
           },
           "checked": {
-            "oneOf": [
-              { "type": "boolean" },
-              { "type": "string", "pattern": "^$" }
-            ]
+            "oneOf": [{ "type": "boolean" }, { "type": "null" }]
           },
           "explanation": {
             "type": "string"

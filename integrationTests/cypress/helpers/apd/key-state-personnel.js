@@ -125,7 +125,7 @@ export const testKeyStatePersonnelWithData = years => {
         .clear()
         .type(secondUser.username);
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       cy.get('.ds-c-review__heading')
         .contains('1.')
@@ -139,6 +139,7 @@ export const testKeyStatePersonnelWithData = years => {
           expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
           expect($lis.eq(1)).to.contain(secondUser.username);
         });
+      cy.findByRole('button', { name: /Save/i }).click();
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
@@ -163,11 +164,24 @@ export const testKeyStatePersonnelWithData = years => {
 
       cy.get('input[type="radio"][value="no"]').check({ force: true });
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      years.forEach(year => {
+        cy.contains(`FFY ${year} Cost`).should('exist');
+      });
+      cy.findByRole('button', { name: /Save/i }).click();
+    });
 
-      cy.get('.form-and-review-list')
-        .findAllByRole('button', { name: /Edit/i })
-        .should('have.length', 2);
+    cy.findAllByRole('button', { name: /Delete/i })
+      .eq(0)
+      .click();
+    cy.get('.ds-c-button--danger').click();
+    cy.get('.form-and-review-list')
+      .findAllByRole('button', { name: /Edit/i })
+      .should('have.length', 2);
+
+    cy.get('.form-and-review-list')
+      .findAllByRole('button', { name: /Edit/i })
+      .eq(1)
+      .click();
 
       cy.get('.form-and-review-list')
         .findAllByRole('button', { name: /Edit/i }).eq(1).click();
@@ -180,7 +194,7 @@ export const testKeyStatePersonnelWithData = years => {
         cy.contains(`FFY ${year} Cost`).should('exist');
       });
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       cy.get('.ds-c-review__heading')
         .contains('2.')

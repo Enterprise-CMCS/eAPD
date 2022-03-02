@@ -1,44 +1,57 @@
 import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import { t } from '../../i18n';
 
 import FormAndReviewList from '../../components/FormAndReviewList';
 import { MilestoneForm, MilestoneReview } from './Milestone';
-
-import { addMilestone, removeMilestone } from '../../actions/editActivity';
 import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
+
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
+import { removeMilestone } from '../../actions/editActivity';
+import { newMilestone } from '../../reducers/activities';
 
-const Milestone = ({ activity, activityIndex, add, remove }) => {
-  const handleAdd = useCallback(() => {
-    add(activityIndex);
-  }, [activityIndex, add]);
-
-  const handleDelete = useCallback(
-    index => {
-      remove(activityIndex, index);
-    },
-    [activityIndex, remove]
-  );
-
+const Milestone = ({ activity, activityIndex, remove }) => {
+  
+  const [localList, setLocalList] = useState(activity.schedule);
+        
+  useEffect(() => {
+    setLocalList(activity.schedule)
+  }, [activity.schedule])
+  
+  const handleAdd = () => {
+    const newListItem = newMilestone();
+    setLocalList([...localList, newListItem]);
+  };
+  
+  const handleDelete = index => {
+    remove(activityIndex, index);
+  };
+  
+  const onCancel = () => {
+    setLocalList(activity.schedule);
+  };
+  
   return (
     <Subsection resource="activities.milestones">
-      <div className="mb3">
-        <hr />
-
-        <FormAndReviewList
-          activityIndex={activityIndex}
-          addButtonText={t('activities.milestones.addMilestoneButtonText')}
-          list={activity.schedule}
-          collapsed={MilestoneReview}
-          expanded={MilestoneForm}
-          noDataMessage={t('activities.milestones.noMilestonesNotice')}
-          onAddClick={handleAdd}
-          onDeleteClick={handleDelete}
-          allowDeleteAll
-        />
-      </div>
+      <Fragment>
+        <div className="mb3">
+          <hr />
+          <FormAndReviewList
+            activityIndex={activityIndex}
+            addButtonText={t('activities.milestones.addMilestoneButtonText')}
+            list={localList}
+            collapsed={MilestoneReview}
+            expanded={MilestoneForm}
+            noDataMessage={t('activities.milestones.noMilestonesNotice')}
+            onAddClick={handleAdd}
+            onCancelClick={onCancel}
+            onDeleteClick={handleDelete}
+            allowDeleteAll
+          />
+        </div>
+      </Fragment>
     </Subsection>
   );
 };
@@ -46,7 +59,6 @@ const Milestone = ({ activity, activityIndex, add, remove }) => {
 Milestone.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
-  add: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired
 };
 
@@ -55,7 +67,6 @@ const mapStateToProps = (state, { activityIndex }) => ({
 });
 
 const mapDispatchToProps = {
-  add: addMilestone,
   remove: removeMilestone
 };
 

@@ -1,9 +1,9 @@
 const truncate = require('../shared/delete-everything');
 const roles = require('../shared/roles-and-activities');
 const states = require('../shared/states');
-const apds = require('./apds');
 const state = require('./state');
 const users = require('./base-users');
+const apds = require('../shared/apds');
 
 exports.seed = async knex => {
   // Don't seed this data if we're not in a development environment.
@@ -15,8 +15,9 @@ exports.seed = async knex => {
   await truncate.seed(knex);
   await roles.seed(knex);
   await states.seed(knex);
-  await apds.seed(knex);
   await state.seed(knex);
   await users.seed(knex);
 
+  // seed APDs in mongo
+  await apds.seed();
 };

@@ -6,33 +6,46 @@ import { UPDATE_BUDGET } from '../budget';
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 import {
-  addPersonnel,
-  removePersonnel,
-  setPersonnelCostForYear,
-  setPersonnelDescription,
-  setPersonnelFTEForYear,
-  setPersonnelTitle
+  savePersonnel,
+  removePersonnel
 } from './statePersonnel';
 
 const mockStore = configureStore([thunk]);
 
 describe('APD activity edit actions for state personnel section', () => {
-  const store = mockStore('test state');
+  const state = {
+    apd: {
+      data: {
+        activities: [
+          {
+            statePersonnel: []
+          }
+        ]
+      }
+    }
+  };
+  
+  const store = mockStore(state);
 
   beforeEach(() => {
     store.clearActions();
   });
 
-  it('dispatches an action for adding a state personnel', () => {
-    store.dispatch(addPersonnel(17));
+  it('dispatches an action for adding a new state personnel', () => {
+    store.dispatch(savePersonnel(0, null, {}));
 
     expect(store.getActions()).toEqual([
       {
         type: ADD_APD_ITEM,
-        path: '/activities/17/statePersonnel/-',
-        state: 'test state'
+        path: '/activities/0/statePersonnel/-',
+        state
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      {
+        type: EDIT_APD,
+        path: '/activities/0/statePersonnel/0',
+        value: {}
+      },
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -42,56 +55,35 @@ describe('APD activity edit actions for state personnel section', () => {
     };
     global.confirm.mockReturnValue(true);
 
-    store.dispatch(removePersonnel(17, 9, { global }));
+    store.dispatch(removePersonnel(0, 0, { global }));
 
     expect(store.getActions()).toEqual([
       {
         type: REMOVE_APD_ITEM,
-        path: '/activities/17/statePersonnel/9'
+        path: '/activities/0/statePersonnel/0'
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
-
-  it('dispatches an action for setting a state personnel title', () => {
-    expect(setPersonnelTitle(17, 9, 'new title')).toEqual({
-      type: EDIT_APD,
-      path: '/activities/17/statePersonnel/9/title',
-      value: 'new title'
-    });
-  });
-
-  it('dispatches an action for setting a state personnel description', () => {
-    expect(setPersonnelDescription(17, 9, 'new desc')).toEqual({
-      type: EDIT_APD,
-      path: '/activities/17/statePersonnel/9/description',
-      value: 'new desc'
-    });
-  });
-
-  it('dispatches an action for setting a state personnel cost for a year', () => {
-    store.dispatch(setPersonnelCostForYear(17, 9, 1997, 2358));
-
-    expect(store.getActions()).toEqual([
+  
+  it('dispatches an action for updating an existing state personnel', () => {
+    const stateWithResource = state;
+    stateWithResource.apd.data.activities[0].statePersonnel.push({ key: '123', name: 'test state personnel' });
+    
+    const storeWithResource = mockStore(stateWithResource);
+    
+    const statePersonnel = {key: '123', statePersonnel: 'test state personnel updated'};
+    
+    storeWithResource.dispatch(savePersonnel(0, 0, statePersonnel));
+    
+    expect(storeWithResource.getActions()).toEqual([
       {
         type: EDIT_APD,
-        path: '/activities/17/statePersonnel/9/years/1997/amt',
-        value: 2358
+        path: '/activities/0/statePersonnel/0',
+        value: statePersonnel
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
-
-  it('dispatches an action for setting a state personnel FTE for a year', () => {
-    store.dispatch(setPersonnelFTEForYear(17, 9, 1997, 3));
-
-    expect(store.getActions()).toEqual([
-      {
-        type: EDIT_APD,
-        path: '/activities/17/statePersonnel/9/years/1997/perc',
-        value: 3
-      },
-      { type: UPDATE_BUDGET, state: 'test state' }
-    ]);
-  });
+  
 });

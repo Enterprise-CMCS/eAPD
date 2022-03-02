@@ -59,6 +59,21 @@ workflows:
           filters:
             tags:
               only: /.*/
+      # - e2e test:
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - main
+      #       tags:
+      #         ignore: ignore-e2e
+      #     requires:
+      #       - frontend lint
+      #       - backend lint
+      #       - frontend dependency vulnerability scan
+      #       - backend dependency vulnerability scan
+      #       - frontend test
+      #       - backend unit test
+      #       - backend api endpoint test
 
       # backend jobs
       - backend api endpoint test:
@@ -188,6 +203,8 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            # - e2e test
+
       - frontend deploy:
           name: frontend deploy production
           env: PRODUCTION
@@ -202,6 +219,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            # - e2e test
 
       # joint jobs
       - preview deploy:
@@ -214,6 +232,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
+            # - e2e test
 
       - store artifacts:
           name: store artifacts staging
@@ -302,7 +321,7 @@ jobs:
           name: validate
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker create -v /openapi --name openapi alpine /bin/true
+            docker create -v /openapi --name openapi cimg/node:16.13.2 /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
   # Validates YAML files. Doesn't look at content, just structure. Doesn't
@@ -320,6 +339,59 @@ jobs:
       - run:
           working_directory: ~/project/web
           command: node yaml-tests.js
+
+  e2e test:
+    machine:
+      image: ubuntu-2004:202104-01
+    parallelism: 4
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: set up environment
+          working_directory: ~/project
+          command: |
+            export NODE_ENV=development
+            export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
+            export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
+            export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
+            export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
+            export JWT_SECRET="$PREVIEW_JWT_SECRET"
+
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            docker-compose up -d
+            docker-compose exec api npm run migrate
+            docker-compose exec api npm run seed
+      - run:
+          name: set up node
+          working_directory: ~/project
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libgbm-dev
+
+            # Switch to Node 16.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.13.2
+            nvm alias default 16.13.2
+      - run:
+          name: set up cypress
+          working_directory: ~/project/integrationTests
+          command: |
+            export NODE_ENV=development
+            echo $CYPRESS_ENV >> ./cypress.env.json
+            cp ../api/seeds/test/tokens.json ./tokens.json
+            npm install
+            npx cypress install --force
+            npx cypress verify
+      - run:
+          name: run e2e tests
+          working_directory: ~/project/integrationTests
+          command: |
+            export NODE_ENV=development
+            export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
+            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests"
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
@@ -534,7 +606,7 @@ jobs:
           name: pull owasp zap docker image
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker pull owasp/zap2docker-stable
+            docker pull owasp/zap2docker-stable:2.11.1
       - run:
           name: run owasp zap
           command: |
@@ -542,7 +614,7 @@ jobs:
             docker run \
               --network api_default \
               -v "$(pwd)/owasp":/zap/wrk \
-              owasp/zap2docker-stable \
+              owasp/zap2docker-stable:2.11.1 \
               zap-api-scan.py \
               -c api-scan.conf \
               -t http://api-for-testing:8000/open-api \
@@ -592,8 +664,10 @@ jobs:
               --OKTA_CLIENT_ID "${<< parameters.env >>_OKTA_CLIENT_ID}" \
               --OKTA_API_KEY "${<< parameters.env >>_OKTA_API_KEY}" \
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
-              --MONGO_MONGO_INITDB_DATABASE "${<< parameters.env >>_MONGO_INITDB_DATABASE}" \
-              --MONGO_URL "${<< parameters.env >>_MONGO_URL}"
+              --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
+              --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
+              --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}"
+
       - run:
           when: on_fail
           name: notify on deployment failure
@@ -709,7 +783,9 @@ jobs:
                 --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME" \
                 --MONGO_DATABASE_PASSWORD "$PREVIEW_MONGO_DATABASE_PASSWORD" \
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
-                --MONGO_URL "$PREVIEW_MONGO_URL" 
+                --MONGO_URL "$PREVIEW_MONGO_URL" \
+                --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
+                --DATABASE_URL "$PREVIEW_DATABASE_URL"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else

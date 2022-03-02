@@ -50,6 +50,7 @@ describe('budget reducer', () => {
       '50-50': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
       '75-25': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
       '90-10': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+      '0-100': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
       combined: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } }
     },
     activityTotals: [],
@@ -318,7 +319,7 @@ describe('budget reducer', () => {
               id: 6,
               key: '6',
               name: 'no funding program',
-              fundingSource: false,
+              fundingSource: null,
               years: ['1931', '1932', '1933'],
               costAllocation: {
                 1931: { ffp: { federal: 50, state: 50 }, other: 0 },
@@ -1307,6 +1308,12 @@ describe('budget reducer', () => {
           1933: { federal: 1890, state: 210, medicaid: 2100, total: 2100 },
           total: { federal: 1890, state: 210, medicaid: 2100, total: 2100 }
         },
+        '0-100': {
+          1931: { federal: 0, state: 0, medicaid: 0, total: 0 },
+          1932: { federal: 0, state: 0, medicaid: 0, total: 0 },
+          1933: { federal: 0, state: 0, medicaid: 0, total: 0 },
+          total: { federal: 0, state: 0, medicaid: 0, total: 0 }
+        },
         combined: {
           1931: { federal: 750, state: 750, medicaid: 1500, total: 2500 },
           1932: { federal: 1500, state: 500, medicaid: 2000, total: 3000 },
@@ -1535,7 +1542,7 @@ describe('budget reducer', () => {
         {
           id: 6,
           name: 'no funding program',
-          fundingSource: false,
+          fundingSource: null,
           data: {
             otherFunding: {
               1931: {

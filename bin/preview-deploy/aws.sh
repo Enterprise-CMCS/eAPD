@@ -43,7 +43,7 @@ function deployPreviewtoEC2() {
   EXISTING_INSTANCES=$(findExistingInstances)
 
   AMI_ID=$(findAMI)
-  print "• Using most recent eAPD Plantinum AMI: $AMI_ID"
+  print "• Using most recent eAPD Preview AMI: $AMI_ID"
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
@@ -137,6 +137,8 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__MONGO_URL__|`echo $MONGO_URL`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__MONGO_ADMIN_URL__|`echo $MONGO_ADMIN_URL`|g" aws.user-data.sh
+
   sed -i'.backup' -e "s|__NEW_RELIC_LICENSE_KEY__|`echo $NEW_RELIC_LICENSE_KEY`|g" aws.user-data.sh
 
   sed -i'.backup' -e "s|__MONGO_INITDB_ROOT_USERNAME__|`echo $MONGO_INITDB_ROOT_USERNAME`|g" aws.user-data.sh
@@ -148,6 +150,8 @@ function configureUserData() {
   sed -i'.backup' -e "s|__MONGO_DATABASE_USERNAME__|`echo $MONGO_DATABASE_USERNAME`|g" aws.user-data.sh
 
   sed -i'.backup' -e "s|__MONGO_DATABASE_PASSWORD__|`echo $MONGO_DATABASE_PASSWORD`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__DATABASE_URL__|`echo $DATABASE_URL`|g" aws.user-data.sh
 
   rm aws.user-data.sh.backup
 }
@@ -177,7 +181,7 @@ function findAMI() {
   aws ec2 describe-images \
     --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
     --filter 'Name=is-public,Values=false' \
-    --filter 'Name=name,Values=eAPD Platinum AMI - *' \
+    --filter 'Name=name,Values=eAPD Preview AMI - *' \
     | jq -r -c 'sort_by(.date)|last|.id'
 }
 

@@ -1,55 +1,77 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { forwardRef, useReducer } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
 import { t } from '../../i18n';
+
 import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
 import { validateText } from '../../helpers/textValidation';
 
-import {
-  setKeyPersonCost,
-  setKeyPersonEmail,
-  setKeyPersonHasCosts,
-  setKeyPersonName,
-  setKeyPersonFTE,
-  setKeyPersonRole
-} from '../../actions/editApd';
+import { saveKeyPersonnel } from '../../actions/editApd';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
-const PersonForm = ({
-  index,
-  item: { costs, email, hasCosts, name, fte, position },
-  setCost,
-  setEmail,
-  setHasCosts,
-  setName,
-  setRole,
-  setTime,
-  years
-}) => {
-  const handleChange =
-    action =>
-    ({ target: { value } }) => {
-      action(index, value);
+const PersonForm = forwardRef(
+  (
+    {
+      index,
+      item,
+      savePerson,
+      years
+    },
+    ref
+  ) => {
+    PersonForm.displayName = 'PersonForm';
+    
+    const initialState = item;
+    
+    function reducer(state, action) {
+      switch (action.type) {
+        case 'updateField':
+          return {
+            ...state,
+            [action.field]: action.payload
+          }
+        case 'updateCosts':
+          return {
+            ...state,
+            costs: {
+              ...state.costs,
+              [action.year]: action.value
+            }
+          }
+        case 'updateFte':
+          return {
+            ...state,
+            fte: {
+              ...state.fte,
+              [action.year]: action.value
+            }
+          }
+        default:
+          throw new Error(
+            'Unrecognized action type provided to ApdKeyPersonForm reducer'
+          );
+      }
+    }
+    
+    const [state, dispatch] = useReducer(reducer, initialState);
+    
+    const handleSubmit = e => {
+      e.preventDefault();
+      savePerson(index, state);
     };
 
-  const setPersonHasCosts = newHasCosts => () => {
-    setHasCosts(index, newHasCosts);
-  };
+    const setCostForYear = (year, value) => {
+      dispatch({ type: 'updateCosts', field: 'costs', year, value })
+    };
 
-  const setCostForYear = (year, value) => {
-    setCost(index, year, value);
-  };
-
-  const setFTEForYear = (year, value) => {
-    setTime(index, year, +value);
-  };
-
-  const primary = index === 0;
+    const setFTEForYear = (year, value) => {
+      dispatch({ type: 'updateFte', field: 'fte', year, value: +value })
+    };
 
   return (
     <Fragment>
@@ -143,7 +165,7 @@ const PersonForm = ({
       </fieldset>
     </Fragment>
   );
-};
+});
 PersonForm.propTypes = {
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
@@ -154,24 +176,16 @@ PersonForm.propTypes = {
     fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired
   }).isRequired,
-  setCost: PropTypes.func.isRequired,
-  setEmail: PropTypes.func.isRequired,
-  setHasCosts: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired,
-  setRole: PropTypes.func.isRequired,
-  setTime: PropTypes.func.isRequired,
-  years: PropTypes.array.isRequired
+  years: PropTypes.array.isRequired,
+  savePerson: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  setCost: setKeyPersonCost,
-  setEmail: setKeyPersonEmail,
-  setHasCosts: setKeyPersonHasCosts,
-  setName: setKeyPersonName,
-  setRole: setKeyPersonRole,
-  setTime: setKeyPersonFTE
+  savePerson: saveKeyPersonnel
 };
 
-export default connect(null, mapDispatchToProps)(PersonForm);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  PersonForm
+);
 
 export { PersonForm as plain, mapDispatchToProps };
