@@ -350,6 +350,21 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
+          name: set up node
+          working_directory: ~/project
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libgbm-dev wget
+
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+            # Switch to Node 16.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.13.2
+            nvm alias default 16.13.2
+      - run:
           name: set up environment
           working_directory: ~/project
           command: |
@@ -364,18 +379,6 @@ jobs:
             docker-compose up -d
             docker-compose exec api npm run migrate
             docker-compose exec api npm run seed
-      - run:
-          name: set up node
-          working_directory: ~/project
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y libgbm-dev
-
-            # Switch to Node 16.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.13.2
-            nvm alias default 16.13.2
       - run:
           name: set up cypress
           working_directory: ~/project/integrationTests
