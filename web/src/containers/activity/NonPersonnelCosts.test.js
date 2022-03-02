@@ -8,14 +8,12 @@ import {
 } from './NonPersonnelCosts';
 
 import {
-  addNonPersonnelCost,
   removeNonPersonnelCost
 } from '../../actions/editActivity';
 
 describe('activity non-personnel costs subsection', () => {
   const props = {
     activityIndex: 58,
-    addExpense: jest.fn(),
     expenses: [
       {
         category: 'test category',
@@ -32,7 +30,6 @@ describe('activity non-personnel costs subsection', () => {
   const component = shallow(<NonPersonnelCosts {...props} />);
 
   beforeEach(() => {
-    props.addExpense.mockClear();
     props.removeExpense.mockClear();
   });
 
@@ -42,11 +39,6 @@ describe('activity non-personnel costs subsection', () => {
 
   describe('events', () => {
     const list = component.find('FormAndReviewList');
-
-    it('handles adding a new cost', () => {
-      list.prop('onAddClick')();
-      expect(props.addExpense).toHaveBeenCalledWith(58);
-    });
 
     it('handles deleting a cost', () => {
       list.prop('onDeleteClick')(0);
@@ -81,7 +73,6 @@ describe('activity non-personnel costs subsection', () => {
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      addExpense: addNonPersonnelCost,
       removeExpense: removeNonPersonnelCost
     });
   });

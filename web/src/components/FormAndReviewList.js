@@ -2,17 +2,18 @@ import { Alert, Button } from '@cmsgov/design-system';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Icon, { faPlusCircle } from './Icons';
-
 const FormAndReviewItem = ({
   collapsedComponent: Collapsed,
   expandedComponent: Expanded,
-  extraButtons,
   index,
   initialExpanded,
+  item,
+  onCancelClick,
   ...rest
 }) => {
   const container = useRef(null);
+  const formRef = useRef(null);
+  
   const [collapsed, setCollapsed] = useState(!initialExpanded);
   const collapse = useCallback(() => {
     const { top } = container.current.getBoundingClientRect();
@@ -22,37 +23,38 @@ const FormAndReviewItem = ({
     }
     setCollapsed(true);
   }, []);
+  
   const expand = useCallback(() => setCollapsed(false), []);
-
+  
+  const handleCancel = () => {
+    onCancelClick();
+    collapse();
+  }
+  
   if (collapsed) {
     return (
       <div ref={container} className="form-and-review-list--item__collapsed">
-        <Collapsed index={index} {...rest} expand={expand} />
+        <Collapsed index={index} item={item} {...rest} expand={expand} />
       </div>
     );
   }
 
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
-      <Expanded index={index} {...rest} collapse={collapse} />
-      <p className='align-content-right ds-u-margin-y--0' style={{ width: '485px' }}>
-        {extraButtons.map(({ onClick, text }) => (
-          <Button
-            key={text}
-            className="ds-c-button ds-c-button--transparent"
-            onClick={() => onClick(index)}
-          >
-            <Icon icon={faPlusCircle} className='ds-u-margin-right--1' />
-            {text}
-          </Button>
-        ))}
-      </p>
+      <Expanded index={index} ref={formRef} item={item} {...rest} collapse={collapse} />
+      <Button onClick={() => handleCancel()} className="ds-u-margin-right--2">
+        Cancel
+      </Button>
       <Button
         id="form-and-review-list--done-btn"
         variation="primary"
-        onClick={collapse}
+        onClick={() => {
+          collapse();
+          formRef.current.click();
+          }
+        }
       >
-        Done
+        Save
       </Button>
     </div>
   );
@@ -63,18 +65,16 @@ FormAndReviewItem.propTypes = {
     PropTypes.string,
     PropTypes.elementType
   ]).isRequired,
-  expandedComponent: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.elementType
-  ]).isRequired,
-  extraButtons: PropTypes.array,
+  expandedComponent: PropTypes.elementType.isRequired,
   index: PropTypes.number.isRequired,
-  initialExpanded: PropTypes.bool
+  initialExpanded: PropTypes.bool,
+  onCancelClick: PropTypes.func,
+  item: PropTypes.object.isRequired
 };
 
 FormAndReviewItem.defaultProps = {
-  extraButtons: [],
-  initialExpanded: true
+  initialExpanded: true,
+  onCancelClick: null
 };
 
 const FormAndReviewList = ({
@@ -84,24 +84,26 @@ const FormAndReviewList = ({
   collapsed,
   errorCheck,
   expanded,
-  extraItemButtons,
   list,
   noDataMessage,
   onAddClick,
+  onCancelClick,
   onDeleteClick,
   ...rest
 }) => {
+
+  const [hasAdded, setHasAdded] = useState(false);
+  
   const combinedClassName = useMemo(
     () => ['form-and-review-list', className].join(' '),
     [className]
   );
+  
+  const noDataOptions = noDataMessage || 'This list is empty';
 
-  const noDataOptions = noDataMessage || 'This list is empty'
-
-  const [hasAdded, setHasAdded] = useState(false);
-  const addClick = e => {
+  const addClick = () => {
     setHasAdded(true);
-    onAddClick(e);
+    onAddClick();
   };
 
   return (
@@ -122,7 +124,6 @@ const FormAndReviewList = ({
             key={item.key}
             collapsedComponent={collapsed}
             expandedComponent={expanded}
-            extraButtons={extraItemButtons}
             index={index}
             initialExpanded={hasAdded && index === list.length - 1}
             item={item}
@@ -131,6 +132,7 @@ const FormAndReviewList = ({
                 ? () => onDeleteClick(index)
                 : null
             }
+            onCancelClick={onCancelClick}
             {...rest}
           />
         ))
@@ -153,11 +155,11 @@ FormAndReviewList.propTypes = {
   errorCheck: PropTypes.bool,
   expanded: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
     .isRequired,
-  extraItemButtons: PropTypes.array,
   list: PropTypes.array.isRequired,
   noDataMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onAddClick: PropTypes.func,
-  onDeleteClick: PropTypes.func
+  onDeleteClick: PropTypes.func,
+  onCancelClick: PropTypes.func
 };
 
 FormAndReviewList.defaultProps = {
@@ -165,10 +167,10 @@ FormAndReviewList.defaultProps = {
   allowDeleteAll: false,
   className: null,
   errorCheck: false,
-  extraItemButtons: [],
   noDataMessage: null,
   onAddClick: null,
-  onDeleteClick: null
+  onDeleteClick: null,
+  onCancelClick: null
 };
 
 export default FormAndReviewList;

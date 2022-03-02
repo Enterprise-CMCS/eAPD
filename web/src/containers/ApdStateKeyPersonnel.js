@@ -1,22 +1,42 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { ApdKeyPersonForm, ApdKeyPersonReview } from './ApdKeyPerson';
-import { addKeyPerson, removeKeyPerson } from '../actions/editApd';
 import FormAndReviewList from '../components/FormAndReviewList';
 import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
 
-const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
+import { removeKeyPersonnel } from '../actions/editApd';
+import { getKeyPersonnel } from '../reducers/apd';
+
+const ApdStateKeyPersonnel = ({ remove, list, years }) => {
+
+  const [localList, setLocalList] = useState(list);
+
+  useEffect(() => {
+    setLocalList(list)
+  }, [list])
+
+  const addClick = () => {
+    const isPrimary = list.length === 0;
+    const newListItem = getKeyPersonnel(years, isPrimary);
+    setLocalList([...localList, newListItem]);
+  };
+  
+  const onCancel = () => {
+    setLocalList(list);
+  };
+    
   return (
     <FormAndReviewList
       addButtonText={
-        poc.length === 0 ? 'Add Primary Contact' : 'Add Key Personnel'
+        list.length === 0 ? 'Add Primary Contact' : 'Add Key Personnel'
       }
-      list={poc}
+      list={localList}
       collapsed={ApdKeyPersonReview}
       expanded={ApdKeyPersonForm}
-      onAddClick={() => add()}
+      onAddClick={addClick}
+      onCancelClick={onCancel}
       onDeleteClick={index => remove(index)}
       noDataMessage="Primary Point of Contact has not been added for this activity."
       years={years}
@@ -25,20 +45,18 @@ const ApdStateKeyPersonnel = ({ add, poc, remove, years }) => {
 };
 
 ApdStateKeyPersonnel.propTypes = {
-  add: PropTypes.func.isRequired,
-  poc: PropTypes.arrayOf(PropTypes.object).isRequired,
   remove: PropTypes.func.isRequired,
+  list: PropTypes.arrayOf(PropTypes.object).isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapStateToProps = state => ({
-  poc: selectKeyPersonnel(state),
+  list: selectKeyPersonnel(state),
   years: selectApdYears(state)
 });
 
 const mapDispatchToProps = {
-  add: addKeyPerson,
-  remove: removeKeyPerson
+  remove: removeKeyPersonnel
 };
 
 export default connect(

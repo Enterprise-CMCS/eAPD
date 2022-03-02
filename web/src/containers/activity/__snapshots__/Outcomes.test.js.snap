@@ -19,21 +19,20 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
     errorCheck={false}
     expanded={
       Object {
-        "$$typeof": Symbol(react.memo),
-        "WrappedComponent": [Function],
-        "compare": null,
-        "type": [Function],
+        "$$typeof": Symbol(react.forward_ref),
+        "WrappedComponent": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "activityIndex": [Function],
+            "index": [Function],
+            "item": [Function],
+            "saveOutcome": [Function],
+          },
+          "render": [Function],
+        },
+        "render": [Function],
       }
     }
-    extraItemButtons={
-      Array [
-        Object {
-          "onClick": [Function],
-          "text": "Add Metric to Outcome",
-        },
-      ]
-    }
-    handleChange={[Function]}
     list={
       Array [
         Object {
@@ -49,8 +48,8 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
     }
     noDataMessage="Add at least one outcome for this activity."
     onAddClick={[Function]}
+    onCancelClick={[Function]}
     onDeleteClick={[Function]}
-    removeMetric={[Function]}
   />
 </Subsection>
 `;

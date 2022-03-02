@@ -6,12 +6,11 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ApdStateKeyPersonnel';
-import { addKeyPerson, removeKeyPerson } from '../actions/editApd';
+import { removeKeyPersonnel } from '../actions/editApd';
 
 describe('apd state profile, Medicaid office component', () => {
   const props = {
-    add: jest.fn(),
-    poc: [
+    list: [
       {
         key: 'person1',
         name: 'person name',
@@ -38,7 +37,6 @@ describe('apd state profile, Medicaid office component', () => {
   const component = shallow(<KeyPersonnel {...props} />);
 
   beforeEach(() => {
-    props.add.mockClear();
     props.remove.mockClear();
   });
 
@@ -48,11 +46,6 @@ describe('apd state profile, Medicaid office component', () => {
 
   describe('events', () => {
     const list = component.find('FormAndReviewList');
-
-    it('handles adding a new key person', () => {
-      list.prop('onAddClick')();
-      expect(props.add).toHaveBeenCalled();
-    });
 
     it('handles deleting a key person', () => {
       list.prop('onDeleteClick')(0);
@@ -70,13 +63,12 @@ describe('apd state profile, Medicaid office component', () => {
           }
         }
       })
-    ).toEqual({ poc: 'these are my people', years: 'and these are my years' });
+    ).toEqual({ list: 'these are my people', years: 'and these are my years' });
   });
 
   it('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      add: addKeyPerson,
-      remove: removeKeyPerson
+      remove: removeKeyPersonnel
     });
   });
 });
