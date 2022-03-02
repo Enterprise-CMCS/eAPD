@@ -1,18 +1,16 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 
 import { plain as MilestoneForm, mapDispatchToProps } from './MilestoneForm';
 
 import {
-  setMilestoneEndDate,
-  setMilestoneName
+  saveMilestone as actualSaveMilestone
 } from '../../../actions/editActivity';
 
 describe('the MilestoneForm component', () => {
-  const setEndDate = jest.fn();
-  const setName = jest.fn();
+  const saveMilestone = jest.fn();
 
-  const component = shallow(
+  const component = mount(
     <MilestoneForm
       activityIndex={225}
       index={3252}
@@ -23,14 +21,12 @@ describe('the MilestoneForm component', () => {
         endDate: '1942-8-16',
         milestone: 'Milestone name'
       }}
-      setEndDate={setEndDate}
-      setName={setName}
+      saveMilestone={saveMilestone}
     />
   );
 
   beforeEach(() => {
-    setEndDate.mockClear();
-    setName.mockClear();
+    saveMilestone.mockClear();
   });
 
   test('renders correctly', () => {
@@ -38,25 +34,17 @@ describe('the MilestoneForm component', () => {
   });
 
   describe('events', () => {
-    test('handles changing the milestone name', () => {
+    test('handles saving the milestone', () => {
       component
-        .find('TextField')
-        .simulate('change', { target: { value: 'new name' } });
-      expect(setName).toHaveBeenCalledWith(225, 3252, 'new name');
-    });
-
-    test('handles changing the milestone date', () => {
-      component
-        .find('DateField')
-        .simulate('change', 'ignored text', 'new date');
-      expect(setEndDate).toHaveBeenCalledWith(225, 3252, 'new date');
+        .find('form')
+        .simulate('submit');
+      expect(saveMilestone).toHaveBeenCalled();
     });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setEndDate: setMilestoneEndDate,
-      setName: setMilestoneName
+      saveMilestone: actualSaveMilestone
     });
   });
 });

@@ -1,16 +1,11 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1005291, 1006846, 1006947],
+  "allowlist": [1005291, 1006947, 1007048],
   "_comment": {
     "1005291": {
       "advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
       "module": "trim",
-      "affects": ["@storybook/addon-docs@6.4.18 - storybook"]
-    },
-    "1006846": {
-      "advisory": "https://github.com/advisories/GHSA-566m-qj78-rww5",
-      "module": "postcss",
       "affects": ["@storybook/addon-docs@6.4.18 - storybook"]
     },
     "1006947": {

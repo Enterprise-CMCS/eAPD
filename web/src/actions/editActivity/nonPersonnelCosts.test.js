@@ -6,36 +6,48 @@ import { UPDATE_BUDGET } from '../budget';
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 import {
-  addNonPersonnelCost,
-  removeNonPersonnelCost,
-  setNonPersonnelCostCategory,
-  setNonPersonnelCostDescription,
-  setNonPersonnelCostForYear
+  saveNonPersonnelCost,
+  removeNonPersonnelCost
 } from './nonPersonnelCosts';
 
 const mockStore = configureStore([thunk]);
 
 describe('APD activity edit actions for non-personnel section', () => {
-  const store = mockStore('test state');
-
-  beforeEach(() => {
-    store.clearActions();
-  });
-
   it('dispatches an action for adding a non-personnel expense', () => {
-    store.dispatch(addNonPersonnelCost(17));
+    const state = {
+      apd: {
+        data: {
+          activities: [
+           {
+             expenses: []
+           } 
+          ]
+        }
+      }
+    };
+    
+    const store = mockStore(state);
+    
+    store.dispatch(saveNonPersonnelCost(0, 0, {}));
 
     expect(store.getActions()).toEqual([
       {
         type: ADD_APD_ITEM,
-        path: '/activities/17/expenses/-',
-        state: 'test state'
+        path: '/activities/0/expenses/-',
+        state
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      {
+        type: EDIT_APD,
+        path: '/activities/0/expenses/0',
+        value: {}
+      },
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
   it('dispatches an action for removing a non-personnel expense if approved', () => {
+    const store = mockStore('test state');
+    
     const global = {
       confirm: jest.fn()
     };
@@ -51,33 +63,34 @@ describe('APD activity edit actions for non-personnel section', () => {
       { type: UPDATE_BUDGET, state: 'test state' }
     ]);
   });
-
-  it('dispatches an action for setting a non-personnel expense cost category', () => {
-    expect(setNonPersonnelCostCategory(17, 9, 'new category')).toEqual({
-      type: EDIT_APD,
-      path: '/activities/17/expenses/9/category',
-      value: 'new category'
-    });
-  });
-
-  it('dispatches an action for setting a non-personnel cost description', () => {
-    expect(setNonPersonnelCostDescription(17, 9, 'new desc')).toEqual({
-      type: EDIT_APD,
-      path: '/activities/17/expenses/9/description',
-      value: 'new desc'
-    });
-  });
-
-  it('dispatches an action for setting a non-personnel expense cost for a year', () => {
-    store.dispatch(setNonPersonnelCostForYear(17, 9, 1997, 2358));
-
+  
+  it('dispatches an action for updating an existing non-personnel expense', () => {
+    const state = {
+      apd: {
+        data: {
+          activities: [
+           {
+             expenses: [
+               { category: "training" }
+             ]
+           } 
+          ]
+        }
+      }
+    };
+    
+    const store = mockStore(state);    
+    const expense = {key: '123', category: 'test category updated'};    
+    store.dispatch(saveNonPersonnelCost(0, 0, expense));
+      
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,
-        path: '/activities/17/expenses/9/years/1997',
-        value: 2358
+        path: '/activities/0/expenses/0',
+        value: expense
       },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
+
 });

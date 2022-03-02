@@ -12,7 +12,9 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
       headingLevel="4"
       objType="Key Personnel"
       onDeleteClick={[MockFunction]}
+      onDeleteLabel={null}
       onEditClick={[MockFunction]}
+      skipConfirmation={false}
       title={null}
     >
       <ul
@@ -85,7 +87,9 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
       heading="13. Bob the Builder"
       objType={null}
       onDeleteClick={null}
+      onDeleteLabel={null}
       onEditClick={null}
+      skipConfirmation={false}
       title={null}
     >
       <ul

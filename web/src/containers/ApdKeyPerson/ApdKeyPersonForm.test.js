@@ -3,14 +3,7 @@ import React from 'react';
 
 import { plain as KeyPersonForm, mapDispatchToProps } from './ApdKeyPersonForm';
 
-import {
-  setKeyPersonCost,
-  setKeyPersonEmail,
-  setKeyPersonHasCosts,
-  setKeyPersonName,
-  setKeyPersonFTE,
-  setKeyPersonRole
-} from '../../actions/editApd';
+import { saveKeyPersonnel } from '../../actions/editApd';
 
 describe('the ApdKeyPersonForm component', () => {
   const props = {
@@ -31,25 +24,15 @@ describe('the ApdKeyPersonForm component', () => {
       position: 'The Builder'
     },
 
-    setCost: jest.fn(),
-    setEmail: jest.fn(),
-    setHasCosts: jest.fn(),
-    setName: jest.fn(),
-    setRole: jest.fn(),
-    setTime: jest.fn(),
+    savePerson: jest.fn(),
 
     years: ['1992', '1993']
   };
 
-  const component = shallow(<KeyPersonForm {...props} />);
+  const component = mount(<KeyPersonForm {...props} />);
 
   beforeEach(() => {
-    props.setCost.mockClear();
-    props.setEmail.mockClear();
-    props.setHasCosts.mockClear();
-    props.setName.mockClear();
-    props.setRole.mockClear();
-    props.setTime.mockClear();
+    props.savePerson.mockClear();
   });
 
   it('renders correctly', () => {
@@ -69,65 +52,18 @@ describe('the ApdKeyPersonForm component', () => {
   });
 
   describe('events', () => {
-    [
-      ['apd-state-profile-pocname1', 'name', props.setName],
-      ['apd-state-profile-pocemail1', 'email', props.setEmail],
-      ['apd-state-profile-pocposition1', 'role', props.setRole]
-    ].forEach(([formName, property, action]) => {
-      it(`handles changing the ${property}`, () => {
-        component
-          .findWhere(c => c.prop('name') === formName)
-          .simulate('change', { target: { value: 'new value' } });
-
-        expect(action).toHaveBeenCalledWith(1, 'new value');
-      });
-    });
-
-    it('handles toggling hasCosts off', () => {
+    it('handles submitting the form', () => {
       component
-        .findWhere(
-          c => c.name() === 'ChoiceComponent' && c.prop('value') === 'no'
-        )
-        .simulate('change');
+        .find('form')
+        .simulate('submit');
 
-      expect(props.setHasCosts).toHaveBeenCalledWith(1, false);
-    });
-
-    it('handles toggling hasCosts on', () => {
-      component
-        .findWhere(
-          c => c.name() === 'ChoiceComponent' && c.prop('value') === 'yes'
-        )
-        .simulate('change');
-
-      expect(props.setHasCosts).toHaveBeenCalledWith(1, true);
-    });
-
-    it('handles changing cost for FFY', () => {
-      mount(<KeyPersonForm {...props} />)
-        .find('input[name="cost"]')
-        .first()
-        .simulate('change', { target: { value: 9000 } });
-      expect(props.setCost(1, 1992, 9000));
-    });
-
-    it('handles changing fte for FFY', () => {
-      mount(<KeyPersonForm {...props} />)
-        .find('input[name="ftes"]')
-        .first()
-        .simulate('change', { target: { value: 0.4 } });
-      expect(props.setTime(1, 1992, 0.4));
+      expect(props.savePerson).toHaveBeenCalled();
     });
   });
 
   it('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
-      setCost: setKeyPersonCost,
-      setEmail: setKeyPersonEmail,
-      setHasCosts: setKeyPersonHasCosts,
-      setName: setKeyPersonName,
-      setRole: setKeyPersonRole,
-      setTime: setKeyPersonFTE
+      savePerson: saveKeyPersonnel
     });
   });
 });

@@ -1,53 +1,79 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  setMilestoneEndDate,
-  setMilestoneName
-} from '../../../actions/editActivity';
 import DateField from '../../../components/DateField';
-import { validateText } from '../../../helpers/textValidation';
 
-const MilestoneForm = ({
-  activityIndex,
-  index,
-  item: { endDate, milestone },
-  setEndDate,
-  setName
-}) => {
-  const changeDate = useCallback(
-    (_, dateStr) => setEndDate(activityIndex, index, dateStr),
-    [activityIndex, index, setEndDate]
-  );
-  const changeName = useCallback(
-    ({ target: { value } }) => setName(activityIndex, index, value),
-    [activityIndex, index, setName]
-  );
+import {
+  saveMilestone as actualSaveMilestone
+} from '../../../actions/editActivity';
+
+import { validateSubForm } from '../../../helpers/subFormValidation';
+
+const MilestoneForm = forwardRef(
+  (
+    {
+      activityIndex,
+      index,
+      item,
+      saveMilestone
+    },
+    ref
+  ) => {
+  MilestoneForm.displayName = 'MilestoneForm';
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'updateField':
+        return {
+          ...state,
+          [action.field]: action.value
+        }
+      default:
+        throw new Error(
+          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+        );
+    }
+  }  
+  
+  const [state, dispatch] = useReducer(reducer, item);
+  
+  const changeDate = (_, dateStr) => dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
+  
+  const changeName = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'milestone', value });
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    saveMilestone(activityIndex, index, state);
+  };
 
   return (
-    <Fragment>
+    <form index={index} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Milestone {index + 1}:</h6>
       <TextField
         data-cy={`milestone-${index}`}
         label="Name"
         name="name"
-        className="remove-clearfix"
-        value={milestone}
+        value={state.milestone}
+        className="remove-clearfix textfield__container"
         onChange={changeName}
-        onBlur={validateText}
-        onKeyUp={validateText}
+        onBlur={validateSubForm}
+        onKeyUp={validateSubForm}
       />
       <DateField
         label="Target completion date"
         hint=""
-        value={endDate}
+        value={state.endDate}
         onChange={changeDate}
+        onBlur={validateSubForm}
+        onKeyUp={validateSubForm}
       />
-    </Fragment>
+      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
+    </form>
   );
-};
+}
+);
 
 MilestoneForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
@@ -56,15 +82,15 @@ MilestoneForm.propTypes = {
     endDate: PropTypes.string.isRequired,
     milestone: PropTypes.string.isRequired
   }).isRequired,
-  setEndDate: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired
+  saveMilestone: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  setEndDate: setMilestoneEndDate,
-  setName: setMilestoneName
+  saveMilestone: actualSaveMilestone
 };
 
-export default connect(null, mapDispatchToProps)(MilestoneForm);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  MilestoneForm
+);
 
 export { MilestoneForm as plain, mapDispatchToProps };

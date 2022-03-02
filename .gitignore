@@ -28,5 +28,8 @@ web/yarn.lock
 docs-build
 
 # Terraform ignores
+*.terraform
+*.terraform.lock.hcl
+*/terraform.tfstate*
 *.terraform*
 env_vars.sh
