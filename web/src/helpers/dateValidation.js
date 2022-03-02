@@ -10,8 +10,6 @@ function addError(input) {
   }
 };
 
-// Month & Year
-
 // Full Date
 export const findDateForm = (subForm) => {
   const dateForms = subForm.getElementsByClassName('ds-c-datefield__container');
