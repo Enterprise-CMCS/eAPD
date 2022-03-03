@@ -9,15 +9,15 @@ const { _ } = Cypress;
 
 export const addMMISActivity = years => {
   let budgetPage;
-  let fillOutActivityPage;
   let exportPage;
+  let fillOutActivityPage;
 
   let activityData;
 
   before(() => {
     budgetPage = new BudgetPage();
-    fillOutActivityPage = new FillOutActivityPage();
     exportPage = new ExportPage();
+    fillOutActivityPage = new FillOutActivityPage();
 
     cy.fixture('MMIS-activity-template.json').then(data => {
       activityData = data;
@@ -180,7 +180,7 @@ export const addMMISActivity = years => {
             .within(() => {
               // Check Activity Overview
               const overviewData = activityData.activityOverview;
-              exportPage.checkActivityOverviewNew({
+              exportPage.checkActivityOverview({
                 ...overviewData,
                 doesNotSupportsMedicaid:
                   'No response was provided for how this activity will support the Medicaid standards and conditions.',
@@ -203,23 +203,23 @@ export const addMMISActivity = years => {
               });
 
               // Check State Staff and Expenses
-              exportPage.checkStateStaffNew({
+              exportPage.checkStateStaff({
                 staff: activityData.staff,
                 years
               });
-              exportPage.checkStateExpensesNew({
+              exportPage.checkStateExpenses({
                 expenses: activityData.expenses,
                 years
               });
 
               // Check Private Contractors
-              exportPage.checkPrivateContractorCostsNew({
+              exportPage.checkPrivateContractorCosts({
                 contractors: activityData.privateContractors,
                 years
               });
 
               // Check Cost Allocation
-              exportPage.checkCostAllocationAndOtherFundingNew({
+              exportPage.checkCostAllocationAndOtherFunding({
                 years,
                 costAllocation: activityData.costAllocation
               });
