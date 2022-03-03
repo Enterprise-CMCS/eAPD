@@ -27,35 +27,49 @@ const MilestoneForm = forwardRef(
       }
     }
 
-  return (
-    <form index={index} onSubmit={handleSubmit}>
-      <h6 className="ds-h4">Milestone {index + 1}:</h6>
-      <TextField
-        data-cy={`milestone-${index}`}
-        label="Name"
-        name="name"
-        value={state.milestone}
-        className="remove-clearfix textfield__container"
-        onChange={changeName}
-        onBlur={(e) => {
-          validateText(e, 'milestone name', '.');
-        }}
-        onKeyUp={(e) => {
-          validateText(e, 'milestone name', '.');
-        }}
-      />
-      <DateField
-        label="Target completion date"
-        hint=""
-        value={state.endDate}
-        onChange={changeDate}
-        onBlur={validateSubForm}
-        onKeyUp={validateSubForm}
-      />
-      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
-    </form>
-  );
-}
+    const [state, dispatch] = useReducer(reducer, item);
+
+    const changeDate = (_, dateStr) =>
+      dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
+
+    const changeName = ({ target: { value } }) =>
+      dispatch({ type: 'updateField', field: 'milestone', value });
+
+    const handleSubmit = e => {
+      e.preventDefault();
+      saveMilestone(activityIndex, index, state);
+    };
+
+    return (
+      <form index={index} onSubmit={handleSubmit}>
+        <h6 className="ds-h4">Milestone {index + 1}:</h6>
+        <TextField
+          data-cy={`milestone-${index}`}
+          label="Name"
+          name="name"
+          value={state.milestone}
+          className="remove-clearfix textfield__container"
+          onChange={changeName}
+          onBlur={validateSubForm}
+          onKeyUp={validateSubForm}
+        />
+        <DateField
+          label="Target completion date"
+          hint=""
+          value={state.endDate}
+          onChange={changeDate}
+          onBlur={validateSubForm}
+          onKeyUp={validateSubForm}
+        />
+        <input
+          className="ds-u-visibility--hidden"
+          type="submit"
+          ref={ref}
+          hidden
+        />
+      </form>
+    );
+  }
 );
 
 MilestoneForm.propTypes = {
