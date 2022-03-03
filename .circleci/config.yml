@@ -59,21 +59,21 @@ workflows:
           filters:
             tags:
               only: /.*/
-      # - e2e test:
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - main
-      #       tags:
-      #         ignore: ignore-e2e
-      #     requires:
-      #       - frontend lint
-      #       - backend lint
-      #       - frontend dependency vulnerability scan
-      #       - backend dependency vulnerability scan
-      #       - frontend test
-      #       - backend unit test
-      #       - backend api endpoint test
+      - e2e test:
+          filters:
+            branches:
+              ignore:
+                - main
+            tags:
+              ignore: ignore-e2e
+          requires:
+            - frontend lint
+            - backend lint
+            - frontend dependency vulnerability scan
+            - backend dependency vulnerability scan
+            - frontend test
+            - backend unit test
+            - backend api endpoint test
 
       # backend jobs
       - backend api endpoint test:
@@ -203,7 +203,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            # - e2e test
+            - e2e test
 
       - frontend deploy:
           name: frontend deploy production
@@ -219,7 +219,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            # - e2e test
+            - e2e test
 
       # joint jobs
       - preview deploy:
@@ -232,7 +232,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
-            # - e2e test
+            - e2e test
 
       - store artifacts:
           name: store artifacts staging
@@ -349,6 +349,21 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
+          name: set up node
+          working_directory: ~/project
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libgbm-dev wget fonts-liberation xdg-utils
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome-stable_current_amd64.deb || true
+            sudo apt-get -f install
+            sudo dpkg -i google-chrome-stable_current_amd64.deb
+            # Switch to Node 16.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.13.2
+            nvm alias default 16.13.2
+      - run:
           name: set up environment
           working_directory: ~/project
           command: |
@@ -364,18 +379,6 @@ jobs:
             docker-compose exec api npm run migrate
             docker-compose exec api npm run seed
       - run:
-          name: set up node
-          working_directory: ~/project
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y libgbm-dev
-
-            # Switch to Node 16.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.13.2
-            nvm alias default 16.13.2
-      - run:
           name: set up cypress
           working_directory: ~/project/integrationTests
           command: |
@@ -388,6 +391,7 @@ jobs:
       - run:
           name: run e2e tests
           working_directory: ~/project/integrationTests
+          no_output_timeout: 60m
           command: |
             export NODE_ENV=development
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
