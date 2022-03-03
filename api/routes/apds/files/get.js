@@ -1,4 +1,3 @@
-const { param } = require('express-validator');
 const logger = require('../../../logger')('apds file routes');
 const { can } = require('../../../middleware');
 const { fileBelongsToAPD: fb } = require('../../../db');
@@ -9,8 +8,6 @@ module.exports = (app, { fileBelongsToAPD = fb, getFile = get } = {}) => {
 
   app.get(
     '/apds/:id/files/:fileID',
-    param('id').isMongoId(),
-    param('fileID').escape(),
     can('view-document'),
     async (req, res, next) => {
       try {

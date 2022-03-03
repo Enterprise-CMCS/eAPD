@@ -47,7 +47,7 @@ module.exports = (
           throw e;
         }
 
-        return res.send({ url: `/apds/${req.params.id}/files/${fileID}` });
+        return res.json({ url: `/apds/${req.params.id}/files/${fileID}` });
       } catch (e) {
         logger.error({ id: req.id, message: e });
         return next({ message: 'Unable to upload file' });

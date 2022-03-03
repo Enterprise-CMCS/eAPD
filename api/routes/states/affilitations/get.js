@@ -1,4 +1,3 @@
-const { param, query } = require('express-validator');
 const logger = require('../../../logger')('affiliations route get');
 const {
   getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
@@ -19,8 +18,6 @@ module.exports = (
 ) => {
   app.get(
     '/states/:stateId/affiliations',
-    param('stateId').trim().isLength({ max: 2 }).escape(),
-    query('status').optional().isIn(['pending', 'active', 'inactive']),
     can('view-affiliations'),
     validForState('stateId'),
     async (request, response, next) => {
@@ -29,8 +26,7 @@ module.exports = (
         message: `handling GET /states/${request.params.stateId}/affiliations`
       });
       const { stateId } = request.params;
-      const { status, matches } = request.query;
-
+      const { status = null, matches = false } = request.query;
       try {
         if (stateId === 'fd') {
           const affiliations = await getAllPopulatedAffiliations({
