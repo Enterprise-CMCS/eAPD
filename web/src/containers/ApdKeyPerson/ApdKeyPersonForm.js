@@ -8,8 +8,8 @@ import { t } from '../../i18n';
 
 import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
-import { validateText } from '../../helpers/textValidation';
 
+import { validateText } from '../../helpers/textValidation';
 import { saveKeyPersonnel } from '../../actions/editApd';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
@@ -47,24 +47,27 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
           'Unrecognized action type provided to ApdKeyPersonForm reducer'
         );
     }
-    
-    const [state, dispatch] = useReducer(reducer, initialState);
-    
-    const handleSubmit = e => {
-      e.preventDefault();
-      savePerson(index, state);
-    };
+  }
 
-    const setCostForYear = (year, value) => {
-      dispatch({ type: 'updateCosts', field: 'costs', year, value })
-    };
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-    const setFTEForYear = (year, value) => {
-      dispatch({ type: 'updateFte', field: 'fte', year, value: +value })
-    };
+  const handleSubmit = e => {
+    e.preventDefault();
+    savePerson(index, state);
+  };
+
+  const setCostForYear = (year, value) => {
+    dispatch({ type: 'updateCosts', field: 'costs', year, value });
+  };
+
+  const setFTEForYear = (year, value) => {
+    dispatch({ type: 'updateFte', field: 'fte', year, value: +value });
+  };
+
+  const primary = index === 0;
 
   return (
-    <Fragment>
+    <form index={index} onSubmit={handleSubmit}>
       <h4 className="ds-h4">
         {primary
           ? titleCase(t(`${tRoot}.labels.titlePrimary`))
@@ -75,13 +78,17 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
           ? t(`${tRoot}.labels.notePrimary`)
           : t(`${tRoot}.labels.noteSecondary`)}
       </p>
-      {/* eslint-disable jsx-a11y/no-autofocus */}
       <TextField
         name={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
-        value={name}
-        cy-data={`key-person-name-${index}`}
-        onChange={handleChange(setName)}
+        value={state.name}
+        onChange={e =>
+          dispatch({
+            type: 'updateField',
+            field: 'name',
+            payload: e.target.value
+          })
+        }
         onKeyUp={(e) => {
           validateText(e, 'name', ' for the point of contact.');
         }}
@@ -92,9 +99,14 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
       <TextField
         name={`apd-state-profile-pocemail${index}`}
         label={t(`${tRoot}.labels.email`)}
-        value={email}
-        cy-data={`key-person-email-${index}`}
-        onChange={handleChange(setEmail)}
+        value={state.email}
+        onChange={e =>
+          dispatch({
+            type: 'updateField',
+            field: 'email',
+            payload: e.target.value
+          })
+        }
         onKeyUp={(e) => {
           validateText(e, 'email', ' for the point of contact.');
         }}
@@ -105,9 +117,14 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
       <TextField
         name={`apd-state-profile-pocposition${index}`}
         label={t(`${tRoot}.labels.position`)}
-        value={position}
-        cy-data={`key-person-role-${index}`}
-        onChange={handleChange(setRole)}
+        value={state.position}
+        onChange={e =>
+          dispatch({
+            type: 'updateField',
+            field: 'position',
+            payload: e.target.value
+          })
+        }
         onKeyUp={(e) => {
           validateText(e, 'role', ' for the point of contact.');
         }}
@@ -115,14 +132,25 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
           validateText(e, 'role', ' for the point of contact.');
         }}
       />
-
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
         <Choice
-          checked={hasCosts}
+          checked={!state.hasCosts}
+          label="No"
+          name={`apd-state-profile-hascosts${index}`}
+          onChange={() =>
+            dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
+          }
+          type="radio"
+          value="no"
+        />
+        <Choice
+          checked={state.hasCosts}
           label="Yes"
-          name={`apd-state-profile-hascosts-yes${index}`}
-          onChange={setPersonHasCosts(true)}
+          name={`apd-state-profile-hascosts${index}`}
+          onChange={() =>
+            dispatch({ type: 'updateField', field: 'hasCosts', payload: true })
+          }
           type="radio"
           value="yes"
           checkedChildren={
@@ -131,8 +159,8 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
                 (o, year) => ({
                   ...o,
                   [year]: {
-                    amt: costs[year],
-                    perc: fte[year]
+                    amt: state.costs[year],
+                    perc: state.fte[year]
                   }
                 }),
                 {}
@@ -143,19 +171,15 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
               setFTE={setFTEForYear}
             />
           }
-          type="radio"
-          value="no"
-        />
-        <Choice
-          checked={!hasCosts}
-          label="No"
-          name={`apd-state-profile-hascosts-no${index}`}
-          onChange={setPersonHasCosts(false)}
-          type="radio"
-          value="no"
         />
       </fieldset>
-    </Fragment>
+      <input
+        className="ds-u-visibility--hidden"
+        type="submit"
+        ref={ref}
+        hidden
+      />
+    </form>
   );
 });
 PersonForm.propTypes = {
