@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": "^14.16.0"
+    "node": "^16.13.2"
   },
   "dependencies": {
     "@foreachbe/cypress-tinymce": "^1.0.0",
