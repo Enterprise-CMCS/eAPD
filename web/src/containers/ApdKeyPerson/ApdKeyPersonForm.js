@@ -14,48 +14,38 @@ import { saveKeyPersonnel } from '../../actions/editApd';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
-const PersonForm = forwardRef(
-  (
-    {
-      index,
-      item,
-      savePerson,
-      years
-    },
-    ref
-  ) => {
-    PersonForm.displayName = 'PersonForm';
-    
-    const initialState = item;
-    
-    function reducer(state, action) {
-      switch (action.type) {
-        case 'updateField':
-          return {
-            ...state,
-            [action.field]: action.payload
+const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
+  PersonForm.displayName = 'PersonForm';
+
+  const initialState = item;
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'updateField':
+        return {
+          ...state,
+          [action.field]: action.payload
+        };
+      case 'updateCosts':
+        return {
+          ...state,
+          costs: {
+            ...state.costs,
+            [action.year]: action.value
           }
-        case 'updateCosts':
-          return {
-            ...state,
-            costs: {
-              ...state.costs,
-              [action.year]: action.value
-            }
+        };
+      case 'updateFte':
+        return {
+          ...state,
+          fte: {
+            ...state.fte,
+            [action.year]: action.value
           }
-        case 'updateFte':
-          return {
-            ...state,
-            fte: {
-              ...state.fte,
-              [action.year]: action.value
-            }
-          }
-        default:
-          throw new Error(
-            'Unrecognized action type provided to ApdKeyPersonForm reducer'
-          );
-      }
+        };
+      default:
+        throw new Error(
+          'Unrecognized action type provided to ApdKeyPersonForm reducer'
+        );
     }
     
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -153,6 +143,8 @@ const PersonForm = forwardRef(
               setFTE={setFTEForYear}
             />
           }
+          type="radio"
+          value="no"
         />
         <Choice
           checked={!hasCosts}

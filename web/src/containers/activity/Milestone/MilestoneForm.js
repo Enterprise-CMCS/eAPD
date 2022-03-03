@@ -5,48 +5,27 @@ import { connect } from 'react-redux';
 
 import DateField from '../../../components/DateField';
 
-import {
-  saveMilestone as actualSaveMilestone
-} from '../../../actions/editActivity';
+import { saveMilestone as actualSaveMilestone } from '../../../actions/editActivity';
 
 import { validateSubForm } from '../../../helpers/subFormValidation';
 
 const MilestoneForm = forwardRef(
-  (
-    {
-      activityIndex,
-      index,
-      item,
-      saveMilestone
-    },
-    ref
-  ) => {
-  MilestoneForm.displayName = 'MilestoneForm';
+  ({ activityIndex, index, item, saveMilestone }, ref) => {
+    MilestoneForm.displayName = 'MilestoneForm';
 
-  function reducer(state, action) {
-    switch (action.type) {
-      case 'updateField':
-        return {
-          ...state,
-          [action.field]: action.value
-        }
-      default:
-        throw new Error(
-          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
-        );
+    function reducer(state, action) {
+      switch (action.type) {
+        case 'updateField':
+          return {
+            ...state,
+            [action.field]: action.value
+          };
+        default:
+          throw new Error(
+            'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+          );
+      }
     }
-  }  
-  
-  const [state, dispatch] = useReducer(reducer, item);
-  
-  const changeDate = (_, dateStr) => dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
-  
-  const changeName = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'milestone', value });
-  
-  const handleSubmit = e => {
-    e.preventDefault();
-    saveMilestone(activityIndex, index, state);
-  };
 
   return (
     <form index={index} onSubmit={handleSubmit}>
