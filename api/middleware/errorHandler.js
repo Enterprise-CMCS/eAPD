@@ -55,13 +55,15 @@ const errorHandler = (err, req, res, next) => {
     message = { error: ERROR_MESSAGES[500] };
   }
 
+  if (message.error.match(/getaddrinfo ENOTFOUND mongo/i)) {
+    status = 500;
+    message = { error: ERROR_MESSAGES[500] };
+  }
+
   if (res.headersSent) {
     return next(err);
   }
-  return res
-    .status(status)
-    .send(message)
-    .end();
+  return res.status(status).json(message).end();
 };
 
 module.exports = errorHandler;

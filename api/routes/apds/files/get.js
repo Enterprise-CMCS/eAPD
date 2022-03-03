@@ -1,5 +1,4 @@
 const { param } = require('express-validator');
-const sanitize = require('../../../util/sanitize');
 const logger = require('../../../logger')('apds file routes');
 const { can } = require('../../../middleware');
 const { fileBelongsToAPD: fb } = require('../../../db');
@@ -15,11 +14,12 @@ module.exports = (app, { fileBelongsToAPD = fb, getFile = get } = {}) => {
     can('view-document'),
     async (req, res, next) => {
       try {
-        const id = sanitize(req.params.id);
-        const fileID = sanitize(req.params.fileID);
+        const { id, fileID } = req.params;
+
         if (await fileBelongsToAPD(fileID, id)) {
           const file = await getFile(fileID);
-          res.send(file).end();
+          // deepcode ignore XSS: files are stored by our system after they have been sanitized
+          res.end(file);
         } else {
           res.status(400).end();
         }

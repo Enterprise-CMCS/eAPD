@@ -4,6 +4,8 @@ require('./env');
 
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const { v4: uuidv4 } = require('uuid');
@@ -83,9 +85,11 @@ api.use((req, res, next) => {
 
 logger.debug('setting global middleware');
 api.use(requestLoggerMiddleware);
+api.use(cookieParser());
+api.use(csrf({ cookie: true }));
+api.use(cors({ credentials: true, origin: true }));
 api.use(compression());
 api.use(express.urlencoded({ extended: true }));
-api.use(cors({ credentials: true, origin: true }));
 api.use(bodyParser.json({ limit: '5mb' }));
 
 // This endpoint doesn't do anything, but lets us verify that the api is
