@@ -5,7 +5,7 @@ export const testDefaultKeyStatePersonnel = () => {
     cy.url().should('contain', '/state-profile');
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
 
-    cy.get('input[name="apd-state-profile-mdname"]')
+    cy.get('input[name="-mdname"]')
       .clear()
       .should('have.text', '');
 
@@ -113,15 +113,15 @@ export const testKeyStatePersonnelWithData = years => {
 
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
 
-      cy.get('input[name="apd-state-profile-pocname0"]')
+      cy.get('input[cy-data="apd-state-profile-pocname0"]')
         .clear()
         .type(secondUser.name);
 
-      cy.get('input[name="apd-state-profile-pocemail0"]')
+      cy.get('input[cy-data="apd-state-profile-pocemail0"]')
         .clear()
         .type(secondUser.email);
 
-      cy.get('input[name="apd-state-profile-pocposition0"]')
+      cy.get('input[cy-data="apd-state-profile-pocposition0"]')
         .clear()
         .type(secondUser.username);
 
@@ -143,15 +143,15 @@ export const testKeyStatePersonnelWithData = years => {
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
-      cy.get('input[name="apd-state-profile-pocname1"]')
+      cy.get('input[cy-data="apd-state-profile-pocname1"]')
           .clear()
           .type(thirdUser.name);
 
-        cy.get('input[name="apd-state-profile-pocemail1"]')
+        cy.get('input[cy-data="apd-state-profile-pocemail1"]')
           .clear()
           .type(thirdUser.email);
 
-        cy.get('input[name="apd-state-profile-pocposition1"]')
+        cy.get('input[cy-data="apd-state-profile-pocposition1"]')
           .clear()
           .type(thirdUser.username);
 

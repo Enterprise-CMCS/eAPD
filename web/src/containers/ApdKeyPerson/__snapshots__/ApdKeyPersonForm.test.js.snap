@@ -43,8 +43,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
     </p>
     <TextField
+      cy-data="apd-state-profile-pocname1"
       label="Name"
-      name="apd-state-profile-pocname1"
+      name="name"
       onBlur={[Function]}
       onChange={[Function]}
       onKeyUp={[Function]}
@@ -80,10 +81,11 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             </label>
           </FormLabel>
           <TextInput
+            cy-data="apd-state-profile-pocname1"
             errorId="field_1-error"
             errorPlacement="top"
             id="field_1"
-            name="apd-state-profile-pocname1"
+            name="name"
             onBlur={[Function]}
             onChange={[Function]}
             onKeyUp={[Function]}
@@ -94,8 +96,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             <input
               aria-invalid={false}
               className="ds-c-field"
+              cy-data="apd-state-profile-pocname1"
               id="field_1"
-              name="apd-state-profile-pocname1"
+              name="name"
               onBlur={[Function]}
               onChange={[Function]}
               onKeyUp={[Function]}
@@ -107,8 +110,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       </FormControl>
     </TextField>
     <TextField
+      cy-data="apd-state-profile-pocemail1"
       label="Email"
-      name="apd-state-profile-pocemail1"
+      name="email"
       onBlur={[Function]}
       onChange={[Function]}
       onKeyUp={[Function]}
@@ -144,10 +148,11 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             </label>
           </FormLabel>
           <TextInput
+            cy-data="apd-state-profile-pocemail1"
             errorId="field_2-error"
             errorPlacement="top"
             id="field_2"
-            name="apd-state-profile-pocemail1"
+            name="email"
             onBlur={[Function]}
             onChange={[Function]}
             onKeyUp={[Function]}
@@ -158,8 +163,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             <input
               aria-invalid={false}
               className="ds-c-field"
+              cy-data="apd-state-profile-pocemail1"
               id="field_2"
-              name="apd-state-profile-pocemail1"
+              name="email"
               onBlur={[Function]}
               onChange={[Function]}
               onKeyUp={[Function]}
@@ -171,8 +177,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       </FormControl>
     </TextField>
     <TextField
+      cy-data="apd-state-profile-pocposition1"
       label="Role"
-      name="apd-state-profile-pocposition1"
+      name="role"
       onBlur={[Function]}
       onChange={[Function]}
       onKeyUp={[Function]}
@@ -208,10 +215,11 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             </label>
           </FormLabel>
           <TextInput
+            cy-data="apd-state-profile-pocposition1"
             errorId="field_3-error"
             errorPlacement="top"
             id="field_3"
-            name="apd-state-profile-pocposition1"
+            name="role"
             onBlur={[Function]}
             onChange={[Function]}
             onKeyUp={[Function]}
@@ -222,8 +230,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             <input
               aria-invalid={false}
               className="ds-c-field"
+              cy-data="apd-state-profile-pocposition1"
               id="field_3"
-              name="apd-state-profile-pocposition1"
+              name="role"
               onBlur={[Function]}
               onChange={[Function]}
               onKeyUp={[Function]}
@@ -858,8 +867,9 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
   </p>
   <TextField
+    cy-data="apd-state-profile-pocname1"
     label="Name"
-    name="apd-state-profile-pocname1"
+    name="name"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyUp={[Function]}
@@ -867,8 +877,9 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     value="Bob the Builder"
   />
   <TextField
+    cy-data="apd-state-profile-pocemail1"
     label="Email"
-    name="apd-state-profile-pocemail1"
+    name="email"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyUp={[Function]}
@@ -876,8 +887,9 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     value="email address"
   />
   <TextField
+    cy-data="apd-state-profile-pocposition1"
     label="Role"
-    name="apd-state-profile-pocposition1"
+    name="role"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyUp={[Function]}
@@ -954,8 +966,9 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     Personnel listed in this section must be assigned to APD by name, role, time commitment, and cost, where applicable.
   </p>
   <TextField
+    cy-data="apd-state-profile-pocname0"
     label="Name"
-    name="apd-state-profile-pocname0"
+    name="name"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyUp={[Function]}
@@ -963,8 +976,9 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     value="Bob the Builder"
   />
   <TextField
+    cy-data="apd-state-profile-pocemail0"
     label="Email"
-    name="apd-state-profile-pocemail0"
+    name="email"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyUp={[Function]}
@@ -972,8 +986,9 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     value="email address"
   />
   <TextField
+    cy-data="apd-state-profile-pocposition0"
     label="Role"
-    name="apd-state-profile-pocposition0"
+    name="role"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyUp={[Function]}

@@ -26,11 +26,9 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     editHref={null}
     key="om key 1"
     objType="Metric"
-    onBlur={[Function]}
     onDeleteClick={[Function]}
     onDeleteLabel="Remove"
     onEditClick={null}
-    onKeyUp={[Function]}
     skipConfirmation={true}
     title={null}
   >
@@ -60,11 +58,9 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     editHref={null}
     key="om key 2"
     objType="Metric"
-    onBlur={[Function]}
     onDeleteClick={[Function]}
     onDeleteLabel="Remove"
     onEditClick={null}
-    onKeyUp={[Function]}
     skipConfirmation={true}
     title={null}
   >

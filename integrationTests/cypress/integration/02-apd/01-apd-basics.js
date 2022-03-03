@@ -286,9 +286,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         )
         .should('exist');
 
-      cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-      cy.findByRole('button', { name: /Save/i }).click();
-
       cy.wrap(personnel).each((element, index) => {
         if (index === 0) {
           cy.findByRole('button', { name: /Add Primary Contact/i }).click();
@@ -296,50 +293,50 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           cy.findByRole('button', { name: /Add Key Personnel/i }).click();
         }
 
-        cy.get(`[cy-data='key-person-name-${index}']`)
+        cy.get(`[cy-data='apd-state-profile-pocname${index}']`)
           .click()
           .should('have.value', '')
           .blur()
-          .should('have.class', 'missing-text-alert')
+          .should('have.class', 'ds-c-field--error')
 
-        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
-        cy.get(`[cy-data='key-person-name-${index}']`)
+        cy.get(`[cy-data='apd-state-profile-pocname${index}']`)
           .click()
           .type(element.name)
-          .should('not.have.class', 'missing-text-alert')
+          .should('not.have.class', 'ds-c-field--error')
 
-        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
-        cy.get(`[cy-data='key-person-email-${index}'`)
+        cy.get(`[cy-data='apd-state-profile-pocemail${index}'`)
           .should('have.value', '')
           .click()
           .blur()
-          .should('have.class', 'missing-text-alert')
+          .should('have.class', 'ds-c-field--error')
 
-        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
-        cy.get(`[cy-data='key-person-email-${index}']`)
+        cy.get(`[cy-data='apd-state-profile-pocemail${index}']`)
           .click()
           .type(element.email)
-          .should('not.have.class', 'missing-text-alert')
+          .should('not.have.class', 'ds-c-field--error')
 
-        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
-        cy.get(`[cy-data='key-person-role-${index}'`)
+        cy.get(`[cy-data='apd-state-profile-pocposition${index}'`)
           .should('have.value', '')
           .click()
           .blur()
-          .should('have.class', 'missing-text-alert')
+          .should('have.class', 'ds-c-field--error')
 
-        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
-        cy.get(`[cy-data='key-person-role-${index}']`)
+        cy.get(`[cy-data='apd-state-profile-pocposition${index}']`)
           .click()
           .type(element.role)
-          .should('not.have.class', 'missing-text-alert')
+          .should('not.have.class', 'ds-c-field--error')
 
-        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled').click();
+        cy.findByRole('button', { name: /Save/i }).should('not.be.disabled').click();
 
         // Get div for the element containing user data as an alias
         cy.get('.form-and-review-list')
@@ -394,15 +391,17 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .eq(1)
         .click();
 
-      cy.get('input[name="apd-state-profile-pocname1"]').type('Test cancel');
+      cy.get('input[cy-data="apd-state-profile-pocname1"]').type('Test cancel');
 
       cy.get('.form-and-review-list')
         .findByRole('button', { name: /Cancel/i })
         .click();
 
-      cy.get('.ds-c-review__heading')
-        .contains('2. Key Personnel name not specified')
-        .should('exist');
+
+      cy.get('.form-and-review-list')
+        .findAllByRole('button', { name: /Edit/i })
+        .eq(1)
+        .click();
 
       cy.get('input[type="radio"][value="yes"]')
         .scrollIntoView()
