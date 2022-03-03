@@ -72,14 +72,14 @@ export const validateInputFields = (subForm) => {
     }
   }
 
-  for (var i = 0; i < textareas.length; i += 1) {
-    var input = textareas[i],
-        inputVal = input.value;
+  for (var j = 0; j < textareas.length; j += 1) {
+    var text = textareas[j],
+        textVal = text.value;
 
-    if (inputVal === '') {
-      addError(input);
+    if (textVal === '') {
+      addError(text);
     } else {
-      removeError(input);
+      removeError(text);
     }
   }
 
