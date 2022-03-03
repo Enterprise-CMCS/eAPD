@@ -99,7 +99,9 @@ const OutcomeAndMetricForm = forwardRef(
         value={state.outcome}
         multiline
         rows="4"
-        onChange={changeOutcome}
+        onChange={e => 
+          dispatch({ type: 'updateField', field: 'outcome', value: e.target.value })
+        }
         onBlur={(e) => {
           validateText(e, 'name', '.');
         }}
