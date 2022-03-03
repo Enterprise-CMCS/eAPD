@@ -104,7 +104,7 @@
     "zxcvbn": "^4.4.2"
   },
   "engines": {
-    "node": "^14.16.0"
+    "node": "^16.13.2"
   },
   "devDependencies": {
     "colors": "^1.4.0",
