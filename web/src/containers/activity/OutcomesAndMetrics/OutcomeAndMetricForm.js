@@ -11,7 +11,7 @@ import {
   saveOutcome as actualSaveOutcome
 } from '../../../actions/editActivity';
 
-import { validateText } from '../../../helpers/textValidation';
+import { validateSubForm } from '../../../helpers/subFormValidation';
 
 import { newOutcomeMetric } from '../../../reducers/activities';
 
@@ -102,12 +102,8 @@ const OutcomeAndMetricForm = forwardRef(
         onChange={e => 
           dispatch({ type: 'updateField', field: 'outcome', value: e.target.value })
         }
-        onBlur={(e) => {
-          validateText(e, 'name', '.');
-        }}
-        onKeyUp={(e) => {
-          validateText(e, 'name', '.');
-        }}
+        onBlur={validateSubForm}
+        onKeyUp={validateSubForm}
       />
       {state.metrics.map(({ key, metric }, i) => (
         <Review
@@ -121,8 +117,6 @@ const OutcomeAndMetricForm = forwardRef(
           skipConfirmation
           ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
           objType="Metric"
-          onBlur={validateText}
-          onKeyUp={validateText}
           >
           <div
             key={key}
@@ -139,12 +133,8 @@ const OutcomeAndMetricForm = forwardRef(
               multiline
               rows="4"
               onChange={changeMetric(i)}
-              onBlur={(e) => {
-                validateText(e, 'metric', '.');
-              }}
-              onKeyUp={(e) => {
-                validateText(e, 'metric', '.');
-              }}
+              onBlur={validateSubForm}
+              onKeyUp={validateSubForm}
             />
           </div>
         </Review>

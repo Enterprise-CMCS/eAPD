@@ -9,8 +9,8 @@ import { t } from '../../i18n';
 import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
 
-import { validateText } from '../../helpers/textValidation';
 import { saveKeyPersonnel } from '../../actions/editApd';
+import { validateSubForm } from '../../helpers/subFormValidation';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
@@ -79,7 +79,8 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
           : t(`${tRoot}.labels.noteSecondary`)}
       </p>
       <TextField
-        name={`apd-state-profile-pocname${index}`}
+        name="name for the point of contact."
+        cy-data={`apd-state-profile-pocname${index}`}
         label={t(`${tRoot}.labels.name`)}
         value={state.name}
         onChange={e =>
@@ -89,15 +90,12 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
             payload: e.target.value
           })
         }
-        onKeyUp={(e) => {
-          validateText(e, 'name', ' for the point of contact.');
-        }}
-        onBlur={(e) => {
-          validateText(e, 'name', ' for the point of contact.');
-        }}
+        onKeyUp={validateSubForm}
+        onBlur={validateSubForm}
       />
       <TextField
-        name={`apd-state-profile-pocemail${index}`}
+        name="email for the point of contact."
+        cy-data={`apd-state-profile-pocemail${index}`}
         label={t(`${tRoot}.labels.email`)}
         value={state.email}
         onChange={e =>
@@ -107,15 +105,12 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
             payload: e.target.value
           })
         }
-        onKeyUp={(e) => {
-          validateText(e, 'email', ' for the point of contact.');
-        }}
-        onBlur={(e) => {
-          validateText(e, 'email', ' for the point of contact.');
-        }}
+        onKeyUp={validateSubForm}
+        onBlur={validateSubForm}
       />
       <TextField
-        name={`apd-state-profile-pocposition${index}`}
+        name="position for the point of contact."
+        cy-data={`apd-state-profile-pocposition${index}`}
         label={t(`${tRoot}.labels.position`)}
         value={state.position}
         onChange={e =>
@@ -125,29 +120,15 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
             payload: e.target.value
           })
         }
-        onKeyUp={(e) => {
-          validateText(e, 'role', ' for the point of contact.');
-        }}
-        onBlur={(e) => {
-          validateText(e, 'role', ' for the point of contact.');
-        }}
+        onKeyUp={validateSubForm}
+        onBlur={validateSubForm}
       />
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
         <Choice
-          checked={!state.hasCosts}
-          label="No"
-          name={`apd-state-profile-hascosts${index}`}
-          onChange={() =>
-            dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
-          }
-          type="radio"
-          value="no"
-        />
-        <Choice
           checked={state.hasCosts}
           label="Yes"
-          name={`apd-state-profile-hascosts${index}`}
+          cy-data={`apd-state-profile-hascosts${index}`}
           onChange={() =>
             dispatch({ type: 'updateField', field: 'hasCosts', payload: true })
           }
@@ -171,6 +152,16 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
               setFTE={setFTEForYear}
             />
           }
+        />
+        <Choice
+          checked={!state.hasCosts}
+          label="No"
+          cy-data={`apd-state-profile-hascosts${index}`}
+          onChange={() =>
+            dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
+          }
+          type="radio"
+          value="no"
         />
       </fieldset>
       <input

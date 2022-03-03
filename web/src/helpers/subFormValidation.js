@@ -58,10 +58,22 @@ export const removeError = (input) => {
 }
 
 export const validateInputFields = (subForm) => {
-  var inputs = subForm.getElementsByTagName('input');
+  var inputs = subForm.getElementsByTagName('input'),
+      textareas = subForm.getElementsByTagName('textarea');
 
   for (var i = 0; i < inputs.length; i += 1) {
     var input = inputs[i],
+        inputVal = input.value;
+
+    if (inputVal === '') {
+      addError(input);
+    } else {
+      removeError(input);
+    }
+  }
+
+  for (var i = 0; i < textareas.length; i += 1) {
+    var input = textareas[i],
         inputVal = input.value;
 
     if (inputVal === '') {
