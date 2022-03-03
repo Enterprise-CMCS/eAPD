@@ -5,7 +5,7 @@ export const testDefaultKeyStatePersonnel = () => {
     cy.url().should('contain', '/state-profile');
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
 
-    cy.get('input[name="-mdname"]')
+    cy.get('input[name="apd-state-profile-mdname"]')
       .clear()
       .should('have.text', '');
 
@@ -139,7 +139,6 @@ export const testKeyStatePersonnelWithData = years => {
           expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
           expect($lis.eq(1)).to.contain(secondUser.username);
         });
-      cy.findByRole('button', { name: /Save/i }).click();
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
@@ -164,24 +163,11 @@ export const testKeyStatePersonnelWithData = years => {
 
       cy.get('input[type="radio"][value="no"]').check({ force: true });
 
-      years.forEach(year => {
-        cy.contains(`FFY ${year} Cost`).should('exist');
-      });
       cy.findByRole('button', { name: /Save/i }).click();
-    });
 
-    cy.findAllByRole('button', { name: /Delete/i })
-      .eq(0)
-      .click();
-    cy.get('.ds-c-button--danger').click();
-    cy.get('.form-and-review-list')
-      .findAllByRole('button', { name: /Edit/i })
-      .should('have.length', 2);
-
-    cy.get('.form-and-review-list')
-      .findAllByRole('button', { name: /Edit/i })
-      .eq(1)
-      .click();
+      cy.get('.form-and-review-list')
+        .findAllByRole('button', { name: /Edit/i })
+        .should('have.length', 2);
 
       cy.get('.form-and-review-list')
         .findAllByRole('button', { name: /Edit/i }).eq(1).click();
@@ -261,6 +247,7 @@ export const testKeyStatePersonnelWithData = years => {
       str += years
         .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
         .join('');
+      cy.log(years);
 
       cy.get('@personnel')
         .findByRole('heading', {

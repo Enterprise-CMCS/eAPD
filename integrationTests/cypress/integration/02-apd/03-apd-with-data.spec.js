@@ -48,7 +48,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       });
     });
 
-    describe('Key State Personnel', () => {
+    describe.only('Key State Personnel', () => {
       testKeyStatePersonnelWithData(years);
     });
 
