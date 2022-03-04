@@ -72,21 +72,21 @@ const apdSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  apdOverview: {
-    name: String,
-    years: [
-      {
-        _id: false,
-        type: String,
-        validate: {
-          validator: v => {
-            const re = /^[0-9]{4}$/;
-            return v == null || re.test(v);
-          },
-          message: 'Provided year is invalid.'
-        }
+  name: String,
+  years: [
+    {
+      _id: false,
+      type: String,
+      validate: {
+        validator: v => {
+          const re = /^[0-9]{4}$/;
+          return v == null || re.test(v);
+        },
+        message: 'Provided year is invalid.'
       }
-    ],
+    }
+  ],
+  apdOverview: {
     programOverview: String,
     narrativeHIT: String,
     narrativeHIE: String,
@@ -209,8 +209,8 @@ const apdSchema = new mongoose.Schema({
                 { _id: false }
               )
             },
-            useHourly: Boolean
           },
+          useHourly: Boolean,
           name: String,
           start: Date,
           totalCost: {

@@ -15,12 +15,14 @@ export const selectSummary = ({
   apd: {
     data: {
       name,
-      narrativeHIE,
-      narrativeHIT,
-      narrativeMMIS,
-      programOverview,
       years,
-      yearOptions
+      yearOptions,
+      apdOverview: {
+        programOverview,        
+        narrativeHIE,
+        narrativeHIT,
+        narrativeMMIS
+      } = {}
     }
   }
 }) => ({
@@ -33,8 +35,8 @@ export const selectSummary = ({
   yearOptions
 });
 
-export const selectKeyPersonnel = state => state.apd.data.keyPersonnel;
-export const selectStateProfile = state => state.apd.data.stateProfile;
+export const selectKeyPersonnel = state => state.apd.data.keyStatePersonnel.keyPersonnel;
+export const selectStateProfile = state => state.apd.data.keyStatePersonnel;
 
 export const selectPreviousActivitySummary = state =>
   state.apd.data.previousActivitySummary;
@@ -42,7 +44,7 @@ export const selectPreviousActivitySummary = state =>
 export const selectPreviousHITHIEActivities = createSelector(
   [selectApdData],
   ({ previousActivityExpenses }) =>
-    Object.entries(previousActivityExpenses).reduce(
+    Object.entries(previousActivities.actualExpenditures).reduce(
       (o, [year, expenses]) => ({
         ...o,
         [year]: {
@@ -57,7 +59,7 @@ export const selectPreviousHITHIEActivities = createSelector(
 export const selectPreviousMMISActivities = createSelector(
   [selectApdData],
   ({ previousActivityExpenses }) =>
-    Object.entries(previousActivityExpenses).reduce(
+    Object.entries(previousActivities.actualExpenditures).reduce(
       (o, [year, expenses]) => ({
         ...o,
         [year]: expenses.mmis
@@ -69,7 +71,7 @@ export const selectPreviousMMISActivities = createSelector(
 export const selectPreviousActivityExpensesTotals = createSelector(
   [selectApdData],
   ({ previousActivityExpenses }) =>
-    Object.entries(previousActivityExpenses).reduce(
+    Object.entries(previousActivities.actualExpenditures).reduce(
       (acc, [ffy, expenses]) => ({
         ...acc,
         [ffy]: {
@@ -92,7 +94,7 @@ export const selectPreviousActivityExpensesTotals = createSelector(
     )
 );
 
-export const selectFederalCitations = state => state.apd.data.federalCitations;
+export const selectFederalCitations = state => state.apd.data.assurancesAndCompliances;
 
 const addObjVals = obj => Object.values(obj).reduce((a, b) => +a + +b, 0);
 

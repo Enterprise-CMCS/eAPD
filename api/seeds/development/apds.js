@@ -1,7 +1,7 @@
 const apd = {
+  name: 'HITECH IAPD',
+  years: ['2022', '2023'],
   apdOverview: {
-    name: 'HITECH IAPD',
-    years: ['2022', '2023'],
     programOverview: "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.</p>\n<p>The original IAPD request supported the first phase of the Station''s participation in the development and expansion of the use of EHR and collaboration among state entities in a Health Information Exchange (HIE) network. In the first phase, Tycho implemented the system changes necessary to support the Tycho EHR Provider Incentive Payment Program as well as the administrative supports necessary for implementation and operation of this program.&nbsp;</p>\n<ol>\n<li>The first IAPDU requested additional support for the EHR Provider Incentive Payment Program and additional project support.</li>\n<li>The second IAPDU requested funding for the Division of Senior and Disabilities Services (DSDS) Automated Service Plan (ASP) system, supporting expanded use of EHRs.</li>\n<li>The third IAPDU requested additional and continued support of HIT initiatives.</li>\n</ol>\n<p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>\n<p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
     narrativeHIT: '<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>\n<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>',
     narrativeHIE: "<p>Tycho''s existing health information infrastructure consists of various organizations operating at the enterprise, local, regional and state levels, and includes:</p>\n<ul>\n<li>Health systems, affiliated providers, and ancillary services;</li>\n<li>State agencies health data repositories;</li>\n<li>Specialized participants that operate for specific purposes including, but not limited to, laboratory services, radiology, public health, research and quality assessment;</li>\n<li>Information and service providers that operate in vertical markets such as e-Prescribing, State registries, Medicaid and Medicare;</li>\n<li>Private payers and clearinghouses that transmit administrative data for claims purposes and for pay for performance programs.</li>\n</ul>\n<p>The Tycho HIE has planned to implement a robust public health modernization plan which includes the development of specialized registries and interfaces to the HIE to significantly increase the ability for EPs and EHs to achieve meaningful use. Additionally, plans to collect CQM data and the creation of a Personal Health Record (PHR) has been identified as activities to complete.</p>\n<p></p>\n<p>Payers/Providers must complete a participation agreement form and possible addendum to participate in the HIE and other services. Governance for the HIE has been defined by the State statute, any related regulations and by the HIE board of directors.</p>\n<p></p>\n<p>Appropriate cost allocation is a fundamental principle of the federal FFP program to ensure that private sector beneficiaries of public investments are covering the incremental cost of their use. A sustainability plan for proportional investments by other payers/providers than Medicaid was developed in concert with the Tycho HIE Board of Directors and a broad cross-section of stakeholders under the leadership of the Tycho HIE Executive Director and State HIT Coordinator. The Tycho HIEâs fee structure and detailed participation agreements can be viewed at: tychoMedicaid.com</p>",
@@ -82,9 +82,9 @@ const apd = {
             data: {
               2022: { hours: '', rate: '' },
               2023: { hours: '', rate: '' }
-            },
-            useHourly: false
+            }
           },
+          useHourly: false,
           name: 'Super SLR Incorporated',
           start: '',
           totalCost: 32423,
@@ -97,9 +97,9 @@ const apd = {
             data: {
               2022: { hours: '', rate: '' },
               2023: { hours: '', rate: '' }
-            },
-            useHourly: false
+            }
           },
+          useHourly: false,
           name: 'Tech Consulting Inc.',
           start: '',
           totalCost: 473573,
@@ -289,9 +289,9 @@ const apd = {
             data: {
               2022: { hours: '', rate: '' },
               2023: { hours: '', rate: '' }
-            },
-            useHourly: false
+            }
           },
+          useHourly: false,
           name: 'Interface Vendor Inc.',
           start: '',
           totalCost: 26453574,
@@ -304,9 +304,9 @@ const apd = {
             data: {
               2022: { hours: '', rate: '' },
               2023: { hours: '', rate: '' }
-            },
-            useHourly: false
+            }
           },
+          useHourly: false,
           name: 'TBD',
           start: '',
           totalCost: 7398,
@@ -471,9 +471,9 @@ const apd = {
             data: {
               2022: { hours: '', rate: '' },
               2023: { hours: '', rate: '' }
-            },
-            useHourly: false
+            }
           },
+          useHourly: false,
           name: 'Sample Training Contractor Name',
           start: '2022-01-01',
           totalCost: 20000,
@@ -598,9 +598,9 @@ const apd = {
             data: {
               2022: { hours: '', rate: '' },
               2023: { hours: '', rate: '' }
-            },
-            useHourly: false
+            }
           },
+          useHourly: false,
           name: 'RFP Planning Vendor Inc.',
           start: '',
           totalCost: 68734,
@@ -613,9 +613,9 @@ const apd = {
             data: {
               2022: { hours: '', rate: '' },
               2023: { hours: '', rate: '' }
-            },
-            useHourly: false
+            }
           },
+          useHourly: false,
           name: 'Blue Button Builder Inc.',
           start: '',
           totalCost: 1235246,

@@ -273,14 +273,14 @@ export const getAPDYearRange = ({
 
 export const getPatchesForAddingItem = (state, path) => {
   switch (path) {
-    case '/keyPersonnel/-':
+    case '/keyStatePersonnel/keyPersonnel/-':
       return [
         {
           op: 'add',
           path,
           value: getKeyPersonnel(
             state.data.years,
-            !state.data.keyPersonnel || state.data.keyPersonnel.length === 0
+            !state.data.keyStatePersonnel.keyPersonnel || state.data.keyStatePersonnel.keyPersonnel.length === 0
           )
         }
       ];
@@ -311,9 +311,9 @@ export const getPatchesForAddingItem = (state, path) => {
   }
 };
 
-const getFederalCitations = federalCitations =>
-  Object.values(federalCitations).every(regs => regs.length > 0)
-    ? federalCitations
+const getAssurancesAndCompliances = assurancesAndCompliances =>
+  Object.values(assurancesAndCompliances).every(regs => regs.length > 0)
+    ? assurancesAndCompliances
     : initialAssurances;
 
 const initialState = {
@@ -353,20 +353,20 @@ const reducer = (state = initialState, action) => {
         ])
       };
     }
-
+    
     case EDIT_APD_NAME: {
       return {
-        ...state,
-        byId: {
-          ...state.byId,
-          [action.id]: {
-            ...state.byId[action.id],
-            name: action.name
-          }
+       ...state,
+       byId: {
+         ...state.byId,
+         [action.id]: {
+           ...state.byId[action.id],
+           name: action.name
+         }
         }
       };
     }
-
+    
     case REMOVE_APD_ITEM: {
       return {
         ...state,
@@ -480,8 +480,8 @@ const reducer = (state = initialState, action) => {
               key: generateKey()
             })
           ),
-          federalCitations: getFederalCitations(action.apd.federalCitations),
-          keyPersonnel: action.apd.keyPersonnel.map(kp => ({
+          assurancesAndCompliances: getAssurancesAndCompliances(action.apd.assurancesAndCompliances),
+          keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
             ...kp,
             key: generateKey()
           })),
