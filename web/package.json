@@ -18,7 +18,8 @@
     "build:storybook": "build-storybook -o ../docs-build",
     "deploy-storybook": "storybook-to-ghpages --out=../docs-build",
     "storybook": "start-storybook -p 6006",
-    "npm-check": "npx npm-check-updates"
+    "npm-check": "npx npm-check-updates",
+    "stryker": "TZ=utc stryker run"
   },
   "repository": {
     "type": "git",
@@ -181,7 +182,6 @@
     "path-browserify": "1.0.1",
     "prettier": "2.5.1",
     "react-app-polyfill": "3.0.0",
-    "react-scripts": "^5.0.0",
     "react-test-renderer": "17.0.2",
     "redux-mock-store": "1.5.4",
     "storybook-addon-designs": "6.2.1",
