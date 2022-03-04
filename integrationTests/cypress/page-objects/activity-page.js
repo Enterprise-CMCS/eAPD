@@ -27,14 +27,14 @@ class ActivityPage {
     cy.findByLabelText(name).should('have.value', expectedValue);
   };
 
-  checkDate = (string, month, day, year) => {
+  checkDate = (string, month = '', day = '', year = '') => {
     cy.contains(string)
       .parent()
       .next('div')
       .within(() => {
-        cy.findByLabelText('Month').should('have.value', month || '');
-        cy.findByLabelText('Day').should('have.value', day || '');
-        cy.findByLabelText('Year').should('have.value', year || '');
+        cy.findByLabelText('Month').should('have.value', month);
+        cy.findByLabelText('Day').should('have.value', day);
+        cy.findByLabelText('Year').should('have.value', year);
       });
   };
 
@@ -68,34 +68,19 @@ class ActivityPage {
     cy.get('[class="ds-c-review"]')
       .eq(0)
       .within(() => {
-        cy.contains('Delete').should('exist');
+        cy.contains('Remove').should('exist');
       });
     cy.get('[class="ds-c-review"]')
       .eq(1)
       .within(() => {
-        cy.contains('Delete').should('exist');
+        cy.contains('Remove').should('exist');
       });
 
     cy.get('div.ds-c-review > div > button.ds-c-button').eq(1).click();
-    cy.contains('Delete Metric?').should('exist');
-    cy.get('#react-aria-modal-dialog').within(() => {
-      cy.findByRole('button', { name: /Cancel/ }).click();
-    });
-    cy.contains('Delete Metric?').should('not.exist');
-    cy.get('div.ds-c-review > div > button.ds-c-button').should(
-      'have.length',
-      2
-    );
-
-    cy.get('div.ds-c-review > div > button.ds-c-button').eq(1).click();
-    cy.contains('Delete Metric?').should('exist');
-    cy.get('#react-aria-modal-dialog').within(() => {
-      cy.findByRole('button', { name: /Delete/ }).click();
-    });
     cy.contains('Delete Metric?').should('not.exist');
 
     cy.get('div.ds-c-review > div > button.ds-c-button').should('not.exist');
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   checkMilestoneOutput = ({ milestone, targetDate }) => {

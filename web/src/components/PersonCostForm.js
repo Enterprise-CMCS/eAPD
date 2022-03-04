@@ -45,7 +45,6 @@ const PersonCostForm = ({
               name="ftes"
               size="medium"
               min={0}
-              numeric
               hint={hint}
               value={perc}
               onChange={handleFTEChange(year)}

@@ -9,15 +9,15 @@ const { _ } = Cypress;
 
 export const addHITActivity = years => {
   let budgetPage;
-  let fillOutActivityPage;
   let exportPage;
+  let fillOutActivityPage;
 
   let activityData;
 
   before(() => {
     budgetPage = new BudgetPage();
-    fillOutActivityPage = new FillOutActivityPage();
     exportPage = new ExportPage();
+    fillOutActivityPage = new FillOutActivityPage();
 
     cy.fixture('HIT-activity-template.json').then(data => {
       activityData = data;
@@ -179,7 +179,7 @@ export const addHITActivity = years => {
             .within(() => {
               // Check Activity Overview
               const overviewData = activityData.activityOverview;
-              exportPage.checkActivityOverviewNew({
+              exportPage.checkActivityOverview({
                 ...overviewData,
                 doesNotSupportsMedicaid:
                   'No response was provided for how this activity will support the Medicaid standards and conditions.',
@@ -188,35 +188,35 @@ export const addHITActivity = years => {
               });
 
               // Check Outcomes and Milestones
-              exportPage.checkOutcomesNew({
+              exportPage.checkOutcomes({
                 outcome: activityData.outcomes.names[1],
                 metrics: activityData.outcomes.metrics[1]
               });
 
-              exportPage.checkMilestonesNew({
+              exportPage.checkMilestones({
                 milestone: activityData.milestones.names[1],
                 milestoneCompletionDate:
                   activityData.milestones.dates[1].join('/')
               });
 
               // Check State Staff and Expenses
-              exportPage.checkStateStaffNew({
+              exportPage.checkStateStaff({
                 staff: activityData.staff.slice(1),
                 years
               });
-              exportPage.checkStateExpensesNew({
+              exportPage.checkStateExpenses({
                 expenses: activityData.expenses.slice(1),
                 years
               });
 
               // Check Private Contractors
-              exportPage.checkPrivateContractorCostsNew({
+              exportPage.checkPrivateContractorCosts({
                 contractors: activityData.privateContractors.slice(1),
                 years
               });
 
               // Check Cost Allocation
-              exportPage.checkCostAllocationAndOtherFundingNew({
+              exportPage.checkCostAllocationAndOtherFunding({
                 years,
                 costAllocation: activityData.costAllocation
               });

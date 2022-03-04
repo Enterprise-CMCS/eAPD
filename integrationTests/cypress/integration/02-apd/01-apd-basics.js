@@ -265,7 +265,16 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     it('should handle entering data in Key State Personnel', () => {
       cy.goToKeyStatePersonnel();
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.get('.form-and-review-list')
+        .contains(
+          'Primary Point of Contact has not been added for this activity.'
+        )
+        .should('exist');
+
+      cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       // Get div for the element containing user data as an alias
       cy.get('.form-and-review-list')
@@ -296,7 +305,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@primaryContactVals').contains('Edit').should('exist');
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
       cy.get('.form-and-review-list')
@@ -321,12 +330,27 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@personnelVals').contains('Delete').should('exist');
       cy.get('@personnelVals').contains('Edit').should('exist');
 
+      cy.get('.form-and-review-list')
+        .findAllByRole('button', { name: /Edit/i })
+        .eq(1)
+        .click();
+
+      cy.get('input[name="apd-state-profile-pocname1"]').type('Test cancel');
+
+      cy.get('.form-and-review-list')
+        .findByRole('button', { name: /Cancel/i })
+        .click();
+
+      cy.get('.ds-c-review__heading')
+        .contains('2. Key Personnel name not specified')
+        .should('exist');
+
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
       // Have to force check; cypress does not think radio buttons are visible
       cy.get('input[type="radio"][value="yes"]')
         .scrollIntoView()
         .check({ force: true });
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
       cy.get('.form-and-review-list')
@@ -394,16 +418,24 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .click()
           .should('have.value', '')
           .blur()
-          .should('have.class', 'missing-text-alert');
+          .should('have.class', 'ds-c-field--error');
 
-        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
+        cy.findByRole('button', { name: /Cancel/i }).click();
+
+        cy.get('.form-and-review-list')
+          .contains('Add at least one outcome for this activity.')
+          .should('exist');
+
+        cy.findByRole('button', { name: /Add Outcome/i }).click();
 
         cy.get(`[data-cy='outcome-${index}']`)
           .click()
           .type(`${element.outcome}`)
-          .should('not.have.class', 'missing-text-alert');
+          .should('not.have.class', 'ds-c-field--error');
 
-        cy.findByRole('button', { name: /Done/i }).should('not.be.disabled');
+        cy.findByRole('button', { name: /Save/i }).should('not.be.disabled');
 
         if (Array.isArray(element.metrics)) {
           cy.wrap(element.metrics).each((metric, i) => {
@@ -413,22 +445,37 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               .click()
               .should('have.value', '')
               .blur()
-              .should('have.class', 'missing-text-alert');
+              .should('have.class', 'ds-c-field--error');
 
-            cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+            cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
               .type(`${metric}`)
-              .should('not.have.class', 'missing-text-alert');
+              .should('not.have.class', 'ds-c-field--error');
 
-            cy.findByRole('button', { name: /Done/i }).should(
+            cy.findByRole('button', { name: /Save/i }).should(
               'not.be.disabled'
             );
           });
         }
 
-        cy.findByRole('button', { name: /Done/i }).click();
+        cy.findByRole('button', { name: /Save/i }).click();
+
+        cy.get('.form-and-review-list')
+          .eq(0)
+          .findAllByRole('button', { name: /Edit/i })
+          .click();
+
+        cy.get(`[data-cy='outcome-${index}']`)
+          .click()
+          .clear()
+          .type(`Test cancel`);
+
+        cy.get('.form-and-review-list')
+          .eq(0)
+          .findByRole('button', { name: /Cancel/i })
+          .click();
 
         activityPage.checkOutcomeOutput({
           outcome: element.outcome,
@@ -441,21 +488,16 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('[class="ds-c-review"]')
         .eq(1)
         .within(() => {
-          cy.contains('Delete').should('exist');
+          cy.contains('Remove').should('exist');
         });
 
       cy.get('[class="ds-c-review"]')
         .eq(0)
         .within(() => {
-          cy.contains('Delete').should('exist').click();
+          cy.contains('Remove').should('exist').click();
         });
 
-      cy.contains('Delete Metric?').should('exist');
-      cy.get('#react-aria-modal-dialog').within(() => {
-        cy.findByRole('button', { name: /Delete/ }).click();
-      });
-
-      cy.findByRole('button', { name: /Done/i })
+      cy.findByRole('button', { name: /Save/i })
         .should('not.be.disabled')
         .click();
 
@@ -468,30 +510,79 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .click()
           .should('have.value', '')
           .blur()
-          .should('have.class', 'missing-text-alert');
+          .should('have.class', 'ds-c-field--error');
 
-        cy.findByRole('button', { name: /Done/i }).should('be.disabled');
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
+        cy.findByRole('button', { name: /Cancel/i }).click();
+
+        cy.get('.form-and-review-list')
+          .contains('Add milestone(s) for this activity.')
+          .should('exist');
+
+        cy.findByRole('button', { name: /Add Milestone/i }).click();
 
         cy.get(`[data-cy=milestone-${index}]`)
           .click()
           .type(element.milestoneName)
-          .should('not.have.class', 'missing-text-alert');
+          .should('not.have.class', 'ds-c-field--error');
 
-        cy.findByRole('button', { name: /Done/i })
+        cy.get(`.ds-c-field--month`)
+          .click()
+          .type(element.dateMonth)
+          .blur()
+          .should('not.have.class', 'ds-c-field--error');
+
+        cy.get(`.ds-c-field--day`)
+          .click()
+          .type(element.dateDay)
+          .blur()
+          .should('not.have.class', 'ds-c-field--error');
+
+        cy.get(`.ds-c-field--year`)
+          .click()
+          .type(element.dateYear)
+          .blur()
+          .should('not.have.class', 'ds-c-field--error');
+
+        cy.findByRole('button', { name: /Save/i })
           .should('not.be.disabled')
           .click();
 
         cy.waitForSave();
 
+        cy.get('.form-and-review-list')
+          .eq(1)
+          .findAllByRole('button', { name: /Edit/i })
+          .click();
+
+        cy.get(`[data-cy='milestone-${index}']`)
+          .click()
+          .clear()
+          .type(`Test cancel`);
+
+        cy.get('.form-and-review-list')
+          .eq(1)
+          .findByRole('button', { name: /Cancel/i })
+          .click();
+
         activityPage.checkMilestoneOutput({
           milestone: element.milestoneName,
-          targetDate: 'Date not specified'
+          targetDate: '1/2/2023'
         });
       });
     });
 
-    it('should handle entering data inState Staff and Expenses', () => {
+    it('should handle entering data in State Staff and Expenses', () => {
       cy.goToStateStaffAndExpenses(0);
+
+      cy.findByRole('button', { name: /Add State Staff/i }).click();
+
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.get('.form-and-review-list')
+        .contains('State staff have not been added for this activity.')
+        .should('exist');
 
       cy.findByRole('button', { name: /Add State Staff/i }).click();
 
@@ -506,7 +597,21 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }))
       });
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.waitForSave();
+
+      cy.get('.form-and-review-list')
+        .eq(0)
+        .findAllByRole('button', { name: /Edit/i })
+        .click();
+
+      cy.findByLabelText('Personnel title').type('Test cancel');
+
+      cy.get('.form-and-review-list')
+        .eq(0)
+        .findByRole('button', { name: /Cancel/i })
+        .click();
 
       activityPage.checkStateStaffOutput({
         name: 'Personnel title not specified',
@@ -516,12 +621,34 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       });
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
+
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.get('.form-and-review-list')
+        .contains('Other state expenses have not been added for this activity.')
+        .should('exist');
+
+      cy.findByRole('button', { name: /Add State Expense/i }).click();
+
       activityPage.checkInputField('Description', '');
       activityPage.checkFFYinputCostFields({
         years,
         FFYcosts: years.map(() => '')
       });
-      cy.findByRole('button', { name: /Done/i }).click();
+
+      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.get('.form-and-review-list')
+        .eq(1)
+        .findAllByRole('button', { name: /Edit/i })
+        .click();
+
+      cy.findByLabelText('Description').type('Test cancel');
+
+      cy.get('.form-and-review-list')
+        .eq(1)
+        .findByRole('button', { name: /Cancel/i })
+        .click();
 
       activityPage.checkOtherStateExpensesOutput({
         category: 'Category not specified',
@@ -532,6 +659,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
     it('should handle entering data in Private Contractor Costs', () => {
       cy.goToPrivateContractorCosts(0);
+
+      cy.findByRole('button', { name: /Add Contractor/i }).click();
+
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.get('.form-and-review-list')
+        .contains('Private contractors have not been added for this activity.')
+        .should('exist');
 
       cy.findByRole('button', { name: /Add Contractor/i }).click();
 
@@ -550,7 +685,19 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         FFYcosts: years.map(() => '')
       });
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.get('.form-and-review-list')
+        .eq(0)
+        .findAllByRole('button', { name: /Edit/i })
+        .click();
+
+      cy.get('input[name="contractor-name"]').type('Test cancel');
+
+      cy.get('.form-and-review-list')
+        .eq(0)
+        .findByRole('button', { name: /Cancel/i })
+        .click();
 
       activityPage.checkPrivateContractorOutput({
         name: 'Private Contractor or Vendor Name not specified',
@@ -771,7 +918,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .next()
         .should('have.text', "1. Miles's Milestone")
         .next()
-        .should('have.text', 'Target completion date:  Date not specified');
+        .should('have.text', 'Target completion date:  1/2/2023');
 
       cy.findByRole('heading', {
         name: /Activity 1: Program AdministrationState staff/i

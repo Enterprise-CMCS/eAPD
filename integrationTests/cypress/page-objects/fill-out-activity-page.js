@@ -214,7 +214,7 @@ class FillOutActivityPage {
         contractor.description
       );
 
-      cy.findByRole('button', { name: /Done/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
     });
 
     if (testDelete) {
@@ -252,7 +252,8 @@ class FillOutActivityPage {
     years = {},
     firstSplit = '0-100',
     secondSplit = '0-100',
-    isViewOnly = false
+    isViewOnly = false,
+    isDefaultTest = false
   }) => {
     _.forEach(years, (year, ffyIndex) => {
       cy.get('[data-cy="FFPActivityTable"]')
@@ -317,7 +318,7 @@ class FillOutActivityPage {
       cy.get('[data-cy="FFPQuarterBudgetTable"]')
         .eq(ffyIndex)
         .then(table => {
-          if (!isViewOnly) {
+          if (!isViewOnly && !isDefaultTest) {
             cy.get(table).within(() => {
               cy.get('input').then(inputFields => {
                 _.forEach(inputFields, (elem, i) => {
