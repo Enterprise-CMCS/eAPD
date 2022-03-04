@@ -116,17 +116,6 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
         <Choice
-          checked={!state.hasCosts}
-          label="No"
-          name={`apd-state-profile-hascosts${index}`}
-          onChange={() =>
-            dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
-          }
-          type="radio"
-          value="no"
-        />
-        <Choice
-          checked={state.hasCosts}
           label="Yes"
           name={`apd-state-profile-hascosts${index}`}
           onChange={() =>
@@ -152,6 +141,15 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
               setFTE={setFTEForYear}
             />
           }
+        />
+        <Choice
+          label="No"
+          name={`apd-state-profile-hascosts${index}`}
+          onChange={() =>
+            dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
+          }
+          type="radio"
+          value="no"
         />
       </fieldset>
       <input
