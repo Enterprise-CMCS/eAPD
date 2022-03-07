@@ -116,6 +116,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
       <fieldset className="ds-c-fieldset">
         <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
         <Choice
+          checked={state.hasCosts === true}
           label="Yes"
           name={`apd-state-profile-hascosts${index}`}
           onChange={() =>
@@ -143,6 +144,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
           }
         />
         <Choice
+          checked={state.hasCosts === false}
           label="No"
           name={`apd-state-profile-hascosts${index}`}
           onChange={() =>
