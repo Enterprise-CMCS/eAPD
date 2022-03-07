@@ -39,11 +39,11 @@ export const selectKeyPersonnel = state => state.apd.data.keyStatePersonnel.keyP
 export const selectStateProfile = state => state.apd.data.keyStatePersonnel;
 
 export const selectPreviousActivitySummary = state =>
-  state.apd.data.previousActivitySummary;
+  state.apd.data.previousActivities.previousActivitySummary;
 
 export const selectPreviousHITHIEActivities = createSelector(
   [selectApdData],
-  ({ previousActivityExpenses }) =>
+  ({ previousActivities }) =>
     Object.entries(previousActivities.actualExpenditures).reduce(
       (o, [year, expenses]) => ({
         ...o,
@@ -58,7 +58,7 @@ export const selectPreviousHITHIEActivities = createSelector(
 
 export const selectPreviousMMISActivities = createSelector(
   [selectApdData],
-  ({ previousActivityExpenses }) =>
+  ({ previousActivities }) =>
     Object.entries(previousActivities.actualExpenditures).reduce(
       (o, [year, expenses]) => ({
         ...o,
@@ -70,7 +70,7 @@ export const selectPreviousMMISActivities = createSelector(
 
 export const selectPreviousActivityExpensesTotals = createSelector(
   [selectApdData],
-  ({ previousActivityExpenses }) =>
+  ({ previousActivities }) =>
     Object.entries(previousActivities.actualExpenditures).reduce(
       (acc, [ffy, expenses]) => ({
         ...acc,
@@ -100,15 +100,19 @@ const addObjVals = obj => Object.values(obj).reduce((a, b) => +a + +b, 0);
 
 export const selectIncentivePayments = ({
   apd: {
-    data: { incentivePayments }
+    data: { 
+      proposedBudget: {
+        incentivePayments
+      }  
+    }
   }
 }) => incentivePayments;
 
 export const selectIncentivePaymentTotals = createSelector(
   [selectApdData],
-  ({ incentivePayments, years }) => {
+  ({ proposedBudget, years }) => {
     const totals = INCENTIVE_ENTRIES.reduce((obj, entry) => {
-      const datum = incentivePayments[entry.id];
+      const datum = proposedBudget.incentivePayments[entry.id];
       const byYear = years.reduce((obj2, yr) => {
         obj2[yr] = addObjVals(datum[yr]);
         return obj2;
