@@ -344,7 +344,7 @@ jobs:
   e2e test:
     machine:
       image: ubuntu-2004:202104-01
-    parallelism: 3
+    parallelism: 5
     steps:
       - checkout
       - attach_workspace:
@@ -398,21 +398,37 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.spec.js"; fi
       - run:
-          name: run e2e tests apd
+          name: run e2e tests apd - basics
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd" --spec "cypress/integration/02-apd/*.spec.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.js"; fi
       - run:
-          name: run e2e tests admin
+          name: run e2e tests apd - default
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.spec.js"; fi
+      - run:
+          name: run e2e tests apd - data
+          working_directory: ~/project/integrationTests
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.spec.js"; fi
+      - run:
+          name: run e2e tests admin
+          working_directory: ~/project/integrationTests
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
