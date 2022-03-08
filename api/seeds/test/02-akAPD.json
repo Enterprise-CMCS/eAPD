@@ -1,5 +1,120 @@
 {
   "name": "AZ-1921-07-11-HITECH-APD",
+  "years": ["2019", "2020"],
+  "apdOverview": {
+    "programOverview": "",
+    "narrativeHIE": "",
+    "narrativeHIT": "",
+    "narrativeMMIS": ""
+  },
+  "keyStatePersonnel": {
+    "medicaidDirector": {
+      "name": "",
+      "email": "",
+      "phone": ""
+    },
+    "medicaidOffice": {
+      "address1": "",
+      "address2": "",
+      "city": "",
+      "state": "",
+      "zip": ""
+    },
+    "keyPersonnel": [
+      {
+        "name": "James Holden",
+        "position": "HIT Coordinator",
+        "email": "JimPushesButtons@tycho.com",
+        "isPrimary": true,
+        "fte": {
+          "2019": 1.0,
+          "2020": 1.0
+        },
+        "hasCosts": true,
+        "costs": {
+          "2019": 100000,
+          "2020": 100000
+        }
+      },
+      {
+        "name": "Fred Johnson",
+        "position": "State Medicaid Director",
+        "email": "FJohnson@tycho.com",
+        "isPrimary": false,
+        "fte": {
+          "2019": 0.3,
+          "2020": 0.3
+        },
+        "hasCosts": false,
+        "costs": {}
+      }
+    ]
+  },
+  "previousActivities": {
+    "previousActivitySummary": "",
+    "actualExpenditures": {
+      "2016": {
+        "hithie": {
+          "federalActual": 320000,
+          "totalApproved": 540000
+        },
+        "mmis": {
+          "50": {
+            "federalActual": 0,
+            "totalApproved": 0
+          },
+          "75": {
+            "federalActual": 0,
+            "totalApproved": 0
+          },
+          "90": {
+            "federalActual": 0,
+            "totalApproved": 0
+          }
+        }
+      },
+      "2017": {
+        "hithie": {
+          "federalActual": 140000,
+          "totalApproved": 280000
+        },
+        "mmis": {
+          "50": {
+            "federalActual": 23445,
+            "totalApproved": 82545
+          },
+          "75": {
+            "federalActual": 23440,
+            "totalApproved": 75340
+          },
+          "90": {
+            "federalActual": 235720,
+            "totalApproved": 262460
+          }
+        }
+      },
+      "2018": {
+        "hithie": {
+          "federalActual": 146346,
+          "totalApproved": 234526
+        },
+        "mmis": {
+          "50": {
+            "federalActual": 129387,
+            "totalApproved": 375445
+          },
+          "75": {
+            "federalActual": 413246,
+            "totalApproved": 654455
+          },
+          "90": {
+            "federalActual": 614544,
+            "totalApproved": 863455
+          }
+        }
+      }
+    }    
+  },
   "activities": [
     {
       "alternatives": "<p>Modifications to State Level Registry (SLR)</p>\n<ul>\n<li>Minimize Modifications</li>\n<li>Minimize cost</li>\n<li>Decreased implementation time.</li>\n</ul>\n<p>The 2015-2017 rule changes are significant and wide ranging; minimally accommodating the new attestations will be problematic for the remainder of the program. Program benefits will potentially not be maximized. To be prepared for Stage 3 and to properly implement all 2015-2017 rule changes; Tycho plans to implement all necessary modifications.</p>\n<ul>\n<li>Modifications to State Level Registry (SLR)</li>\n<li>Implement the changes as outlined</li>\n<li>The EHR Incentive Program will have the ability to be fully supported.</li>\n<li>Support of electronic submission of CQMs, enhancing the support of the emphasis on interoperability.</li>\n</ul>\n<p>There are no significant disadvantages to this option.</p>\n<p></p>\n<p>Implementing the changes as outlined provide the optimal opportunity to maximize the benefits of the EHR program and its impact on the delivery of health care with improved quality and outcomes.</p>\n",
@@ -1360,7 +1475,91 @@
       ]
     }
   ],
-  "federalCitations": {
+  "proposedBudget": {
+    "incentivePayments": {
+      "ehAmt": {
+        "2018": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "2019": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "2020": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      },
+      "ehCt": {
+        "2018": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "2019": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "2020": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      },
+      "epAmt": {
+        "2018": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "2019": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "2020": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      },
+      "epCt": {
+        "2018": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "2019": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        },
+        "2020": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      }
+    }
+  },
+  "assurancesAndCompliances": {
     "procurement": [
       { "title": "42 CFR Part 495.348", "checked": null, "explanation": "" },
       { "title": "SMM Section 11267", "checked": null, "explanation": "" },
@@ -1388,198 +1587,5 @@
         "explanation": ""
       }
     ]
-  },
-  "incentivePayments": {
-    "ehAmt": {
-      "2018": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      },
-      "2019": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      },
-      "2020": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      }
-    },
-    "ehCt": {
-      "2018": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      },
-      "2019": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      },
-      "2020": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      }
-    },
-    "epAmt": {
-      "2018": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      },
-      "2019": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      },
-      "2020": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      }
-    },
-    "epCt": {
-      "2018": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      },
-      "2019": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      },
-      "2020": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-      }
-    }
-  },
-  "keyPersonnel": [
-    {
-      "name": "James Holden",
-      "position": "HIT Coordinator",
-      "email": "JimPushesButtons@tycho.com",
-      "isPrimary": true,
-      "fte": {
-        "2019": 1.0,
-        "2020": 1.0
-      },
-      "hasCosts": true,
-      "costs": {
-        "2019": 100000,
-        "2020": 100000
-      }
-    },
-    {
-      "name": "Fred Johnson",
-      "position": "State Medicaid Director",
-      "email": "FJohnson@tycho.com",
-      "isPrimary": false,
-      "fte": {
-        "2019": 0.3,
-        "2020": 0.3
-      },
-      "hasCosts": false,
-      "costs": {}
-    }
-  ],
-  "narrativeHIE": "",
-  "narrativeHIT": "",
-  "narrativeMMIS": "",
-  "previousActivityExpenses": {
-    "2016": {
-      "hithie": {
-        "federalActual": 320000,
-        "totalApproved": 540000
-      },
-      "mmis": {
-        "50": {
-          "federalActual": 0,
-          "totalApproved": 0
-        },
-        "75": {
-          "federalActual": 0,
-          "totalApproved": 0
-        },
-        "90": {
-          "federalActual": 0,
-          "totalApproved": 0
-        }
-      }
-    },
-    "2017": {
-      "hithie": {
-        "federalActual": 140000,
-        "totalApproved": 280000
-      },
-      "mmis": {
-        "50": {
-          "federalActual": 23445,
-          "totalApproved": 82545
-        },
-        "75": {
-          "federalActual": 23440,
-          "totalApproved": 75340
-        },
-        "90": {
-          "federalActual": 235720,
-          "totalApproved": 262460
-        }
-      }
-    },
-    "2018": {
-      "hithie": {
-        "federalActual": 146346,
-        "totalApproved": 234526
-      },
-      "mmis": {
-        "50": {
-          "federalActual": 129387,
-          "totalApproved": 375445
-        },
-        "75": {
-          "federalActual": 413246,
-          "totalApproved": 654455
-        },
-        "90": {
-          "federalActual": 614544,
-          "totalApproved": 863455
-        }
-      }
-    }
-  },
-  "previousActivitySummary": "",
-  "programOverview": "",
-  "stateProfile": {
-    "medicaidDirector": {
-      "name": "",
-      "email": "",
-      "phone": ""
-    },
-    "medicaidOffice": {
-      "address1": "",
-      "address2": "",
-      "city": "",
-      "state": "",
-      "zip": ""
-    }
-  },
-  "years": ["2019", "2020"]
+  }
 }

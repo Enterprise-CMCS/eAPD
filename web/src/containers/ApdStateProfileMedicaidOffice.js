@@ -129,7 +129,8 @@ ApdStateProfile.propTypes = {
   setZip: PropTypes.func.isRequired,
   stateProfile: PropTypes.shape({
     medicaidDirector: PropTypes.object,
-    medicaidOffice: PropTypes.object
+    medicaidOffice: PropTypes.object,
+    keyPersonnel: PropTypes.array
   }).isRequired
 };
 

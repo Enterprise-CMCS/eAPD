@@ -59,7 +59,7 @@ describe('APD selectors', () => {
   it('selects the federal citations for the current APD', () => {
     expect(
       selectFederalCitations({
-        apd: { data: { federalCitations: 'citations' } }
+        apd: { data: { assurancesAndCompliances: 'citations' } }
       })
     ).toEqual('citations');
   });
@@ -67,7 +67,7 @@ describe('APD selectors', () => {
   it('selects the raw incentive payment data for the current APD', () => {
     expect(
       selectIncentivePayments({
-        apd: { data: { incentivePayments: 'payments' } }
+        apd: { data: { proposedBudget: { incentivePayments: 'payments' } } }
       })
     ).toEqual('payments');
   });
@@ -77,23 +77,25 @@ describe('APD selectors', () => {
       selectIncentivePaymentTotals({
         apd: {
           data: {
-            incentivePayments: {
-              ehAmt: {
-                2014: { 1: 10, 2: 20, 3: 30, 4: 40 },
-                2015: { 1: 100, 2: 200, 3: 300, 4: 400 }
-              },
-              ehCt: {
-                2014: { 1: 1, 2: 2, 3: 3, 4: 4 },
-                2015: { 1: 5, 2: 6, 3: 7, 4: 8 }
-              },
-              epAmt: {
-                2014: { 1: 10, 2: 15, 3: 20, 4: 25 },
-                2015: { 1: 30, 2: 35, 3: 40, 4: 45 }
-              },
-              epCt: {
-                2014: { 1: 5, 2: 5, 3: 5, 4: 5 },
-                2015: { 1: 3, 2: 3, 3: 3, 4: 3 }
-              }
+            proposedBudget: {
+              incentivePayments: {
+                ehAmt: {
+                  2014: { 1: 10, 2: 20, 3: 30, 4: 40 },
+                  2015: { 1: 100, 2: 200, 3: 300, 4: 400 }
+                },
+                ehCt: {
+                  2014: { 1: 1, 2: 2, 3: 3, 4: 4 },
+                  2015: { 1: 5, 2: 6, 3: 7, 4: 8 }
+                },
+                epAmt: {
+                  2014: { 1: 10, 2: 15, 3: 20, 4: 25 },
+                  2015: { 1: 30, 2: 35, 3: 40, 4: 45 }
+                },
+                epCt: {
+                  2014: { 1: 5, 2: 5, 3: 5, 4: 5 },
+                  2015: { 1: 3, 2: 3, 3: 3, 4: 3 }
+                }
+              },              
             },
             years: ['2014', '2015']
           }
@@ -109,7 +111,7 @@ describe('APD selectors', () => {
 
   it('selects the key personnel for the current APD', () => {
     expect(
-      selectKeyPersonnel({ apd: { data: { keyPersonnel: 'people' } } })
+      selectKeyPersonnel({ apd: { data: { keyStatePersonnel: { keyPersonnel: 'people' } } } })
     ).toEqual('people');
   });
 
@@ -118,23 +120,25 @@ describe('APD selectors', () => {
       selectPreviousActivityExpensesTotals({
         apd: {
           data: {
-            previousActivityExpenses: {
-              2014: {
-                hithie: { federalActual: 10, totalApproved: 100 },
-                mmis: {
-                  50: { federalActual: 20, totalApproved: 200 },
-                  75: { federalActual: 30, totalApproved: 300 },
-                  90: { federalActual: 40, totalApproved: 400 }
+            previousActivities: {
+              actualExpenditures: {
+                2014: {
+                  hithie: { federalActual: 10, totalApproved: 100 },
+                  mmis: {
+                    50: { federalActual: 20, totalApproved: 200 },
+                    75: { federalActual: 30, totalApproved: 300 },
+                    90: { federalActual: 40, totalApproved: 400 }
+                  }
+                },
+                2015: {
+                  hithie: { federalActual: 5, totalApproved: 100 },
+                  mmis: {
+                    50: { federalActual: 10, totalApproved: 100 },
+                    75: { federalActual: 15, totalApproved: 100 },
+                    90: { federalActual: 20, totalApproved: 100 }
+                  }
                 }
-              },
-              2015: {
-                hithie: { federalActual: 5, totalApproved: 100 },
-                mmis: {
-                  50: { federalActual: 10, totalApproved: 100 },
-                  75: { federalActual: 15, totalApproved: 100 },
-                  90: { federalActual: 20, totalApproved: 100 }
-                }
-              }
+              }              
             }
           }
         }
@@ -152,7 +156,7 @@ describe('APD selectors', () => {
   it('selects the previous activity summary for the current APD', () => {
     expect(
       selectPreviousActivitySummary({
-        apd: { data: { previousActivitySummary: 'summary' } }
+        apd: { data: { previousActivities: { previousActivitySummary: 'summary' } } }
       })
     ).toEqual('summary');
   });
@@ -162,9 +166,11 @@ describe('APD selectors', () => {
       selectPreviousHITHIEActivities({
         apd: {
           data: {
-            previousActivityExpenses: {
-              2014: { hithie: { federalActual: 123, totalApproved: 456 } },
-              2015: { hithie: { federalActual: 789, totalApproved: 'abc' } }
+            previousActivities: {
+              actualExpenditures: {
+                2014: { hithie: { federalActual: 123, totalApproved: 456 } },
+                2015: { hithie: { federalActual: 789, totalApproved: 'abc' } }
+              }              
             }
           }
         }
@@ -180,9 +186,11 @@ describe('APD selectors', () => {
       selectPreviousMMISActivities({
         apd: {
           data: {
-            previousActivityExpenses: {
-              2014: { mmis: '2014 data' },
-              2015: { mmis: '2015 data' }
+            previousActivities: {
+              actualExpenditures: {
+                2014: { mmis: '2014 data' },
+                2015: { mmis: '2015 data' }
+              }              
             }
           }
         }
@@ -193,9 +201,9 @@ describe('APD selectors', () => {
     });
   });
 
-  it('selects the state profile for the current APD', () => {
+  it('selects the key state personnel for the current APD', () => {
     expect(
-      selectStateProfile({ apd: { data: { stateProfile: 'state' } } })
+      selectStateProfile({ apd: { data: { keyStatePersonnel: 'state' } } })
     ).toEqual('state');
   });
 
@@ -204,12 +212,14 @@ describe('APD selectors', () => {
       selectSummary({
         apd: {
           data: {
-            narrativeHIE: 'HIE narrative',
-            narrativeHIT: 'HIT narrative',
-            narrativeMMIS: 'MMIS narrative',
-            programOverview: 'program overview',
+            apdOverview: {
+              narrativeHIE: 'HIE narrative',
+              narrativeHIT: 'HIT narrative',
+              narrativeMMIS: 'MMIS narrative',
+              programOverview: 'program overview',
+            },
             years: 'federal fiscal years of this APD',
-            yearOptions: 'available federal fiscal years'
+            yearOptions: 'available federal fiscal years'              
           }
         }
       })

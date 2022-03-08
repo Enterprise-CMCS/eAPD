@@ -45,22 +45,22 @@ export const getPatchesToAddYear = (state, year) => {
     { op: 'replace', path: '/years', value: years },
     {
       op: 'add',
-      path: `/incentivePayments/ehAmt/${year}`,
+      path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     {
       op: 'add',
-      path: `/incentivePayments/ehCt/${year}`,
+      path: `/proposedBudget/incentivePayments/ehCt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     {
       op: 'add',
-      path: `/incentivePayments/epAmt/${year}`,
+      path: `/proposedBudget/incentivePayments/epAmt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     {
       op: 'add',
-      path: `/incentivePayments/epCt/${year}`,
+      path: `/proposedBudget/incentivePayments/epCt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     }
   ];
@@ -114,16 +114,16 @@ export const getPatchesToAddYear = (state, year) => {
     });
   });
 
-  state.data.keyPersonnel.forEach((_, i) => {
+  state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
     patches.push({
       op: 'add',
-      path: `/keyPersonnel/${i}/costs/${year}`,
+      path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`,
       value: 0
     });
 
     patches.push({
       op: 'add',
-      path: `/keyPersonnel/${i}/fte/${year}`,
+      path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
       value: 0
     });
   });
@@ -138,19 +138,19 @@ export const getPatchesToRemoveYear = (state, year) => {
     { op: 'remove', path: `/years/${index}` },
     {
       op: 'remove',
-      path: `/incentivePayments/ehAmt/${year}`
+      path: `/proposedBudget/incentivePayments/ehAmt/${year}`
     },
     {
       op: 'remove',
-      path: `/incentivePayments/ehCt/${year}`
+      path: `/proposedBudget/incentivePayments/ehCt/${year}`
     },
     {
       op: 'remove',
-      path: `/incentivePayments/epAmt/${year}`
+      path: `/proposedBudget/incentivePayments/epAmt/${year}`
     },
     {
       op: 'remove',
-      path: `/incentivePayments/epCt/${year}`
+      path: `/proposedBudget/incentivePayments/epCt/${year}`
     }
   ];
 
@@ -196,15 +196,15 @@ export const getPatchesToRemoveYear = (state, year) => {
     });
   });
 
-  state.data.keyPersonnel.forEach((_, i) => {
+  state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
     patches.push({
       op: 'remove',
-      path: `/keyPersonnel/${i}/costs/${year}`
+      path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`
     });
 
     patches.push({
       op: 'remove',
-      path: `/keyPersonnel/${i}/fte/${year}`
+      path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`
     });
   });
 
