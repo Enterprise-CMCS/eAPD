@@ -60,7 +60,7 @@ const schemas = Joi.object({
     is: 'no',
     then: Joi.object().pattern(
       /\d{4}/,
-      Joi.number().required().messages({
+      Joi.number().positive().greater(0).required().messages({
         'number.empty': 'Provide a number greater than 0'
       })
     )
@@ -333,24 +333,33 @@ const ContractorResourceForm = forwardRef(
                         <Fragment key={ffy}>
                           <FormLabel>FFY {ffy}</FormLabel>
                           <div className="ds-l-row ds-u-padding-left--2">
-                            <NumberField
-                              label="Number of hours"
-                              labelClassName="ds-u-margin-top--1"
-                              size="medium"
-                              value={state.hourly.data[ffy].hours}
-                              onChange={e => {
-                                const { value } = e.target;
-                                dispatch({
-                                  type: 'updateHourlyHours',
-                                  year: ffy,
-                                  value
-                                });
-                                dispatch({
-                                  type: 'updateYearCost',
-                                  year: ffy,
-                                  value: value * state.hourly.data[ffy].rate
-                                });
-                              }}
+                            <Controller
+                              key={ffy}
+                              name={`years.${ffy}`}
+                              control={control}
+                              render={({
+                                field: { onChange, onBlur, value }
+                              }) => (
+                                <NumberField
+                                  label="Number of hours"
+                                  labelClassName="ds-u-margin-top--1"
+                                  size="medium"
+                                  value={state.hourly.data[ffy].hours}
+                                  onChange={e => {
+                                    const { value } = e.target;
+                                    dispatch({
+                                      type: 'updateHourlyHours',
+                                      year: ffy,
+                                      value
+                                    });
+                                    dispatch({
+                                      type: 'updateYearCost',
+                                      year: ffy,
+                                      value: value * state.hourly.data[ffy].rate
+                                    });
+                                  }}
+                                />
+                              )}
                             />
                             <DollarField
                               className="ds-u-margin-left--1"
@@ -427,6 +436,8 @@ const ContractorResourceForm = forwardRef(
                     onChange(e);
                   }}
                   onBlur={onBlur}
+                  errorMessage={errors?.years?.[ffy]?.message}
+                  errorPlacement="bottom"
                 />
               )}
             />
