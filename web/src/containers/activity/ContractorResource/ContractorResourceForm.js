@@ -8,7 +8,7 @@ import React, {
   useReducer,
   useEffect
 } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useFormContext } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
@@ -46,16 +46,20 @@ const schemas = Joi.object({
   useHourly: Joi.string().required().messages({
     'string.empty': 'Must select hourly or yearly'
   }),
-  // hourly: Joi.alternatives().conditional('useHourly', {
-  //   is: 'yes',
-  //   then: Joi.object().pattern(
-  //     /\d{4}/,
-  //     Joi.object({
-  //       hours: Joi.number().required(),
-  //       rate: Joi.number().required()
-  //     })
-  //   )
-  // }),
+  hourly: Joi.alternatives().conditional('useHourly', {
+    is: 'yes',
+    then: Joi.object().pattern(
+      /\d{4}/,
+      Joi.object({
+        hours: Joi.number().required().messages({
+          'number.empty': 'Hours is required'
+        }),
+        rate: Joi.number().required().messages({
+          'number.empty': 'Rate is required'
+        })
+      })
+    )
+  }),
   years: Joi.alternatives().conditional('useHourly', {
     is: 'no',
     then: Joi.object().pattern(
@@ -66,6 +70,60 @@ const schemas = Joi.object({
     )
   })
 });
+
+const HourlyRateForm = (onHoursChange, onRateChange) => {
+  const { register } = useFormContext();
+  return (
+    <div className="ds-c-choice__checkedChild">
+      {apdFFYs.map(ffy => (
+        <Fragment key={ffy}>
+          <FormLabel>FFY {ffy}</FormLabel>
+          <div className="ds-l-row ds-u-padding-left--2">
+            <Controller
+              key={ffy}
+              name={`hourly.${ffy}.hours`}
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <NumberField
+                  label="Number of hours"
+                  labelClassName="ds-u-margin-top--1"
+                  size="medium"
+                  value={value}
+                  onChange={e => {
+                    onHoursChange(ffy, e);
+                    onChange(e);
+                  }}
+                  onBlur={onBlur}
+                  errorMessage={errors?.hourly[ffy].hours?.message}
+                />
+              )}
+            />
+            <Controller
+              key={ffy}
+              name={`hourly.${ffy}.rate`}
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <DollarField
+                  className="ds-u-margin-left--1"
+                  label="Hourly rate"
+                  labelClassName="ds-u-margin-top--1"
+                  size="medium"
+                  value={value}
+                  onChange={e => {
+                    onRateChange(ffy, e);
+                    onChange(e);
+                  }}
+                  onBlur={onBlur}
+                  errorMessage={errors?.hourly[ffy].rate?.message}
+                />
+              )}
+            />
+          </div>
+        </Fragment>
+      ))}
+    </div>
+  );
+};
 
 const getCheckedValue = value => {
   if (value != null) {
@@ -89,7 +147,8 @@ const ContractorResourceForm = forwardRef(
         end: item.end,
         totalCost: item.totalCost,
         useHourly: getCheckedValue(item.hourly.useHourly),
-        years: item.years
+        years: item.years,
+        hourly: item.hourly.data
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
@@ -328,63 +387,32 @@ const ContractorResourceForm = forwardRef(
                   value: 'yes',
                   defaultChecked: value === 'yes',
                   checkedChildren: (
-                    <div className="ds-c-choice__checkedChild">
-                      {apdFFYs.map(ffy => (
-                        <Fragment key={ffy}>
-                          <FormLabel>FFY {ffy}</FormLabel>
-                          <div className="ds-l-row ds-u-padding-left--2">
-                            <Controller
-                              key={ffy}
-                              name={`years.${ffy}`}
-                              control={control}
-                              render={({
-                                field: { onChange, onBlur, value }
-                              }) => (
-                                <NumberField
-                                  label="Number of hours"
-                                  labelClassName="ds-u-margin-top--1"
-                                  size="medium"
-                                  value={state.hourly.data[ffy].hours}
-                                  onChange={e => {
-                                    const { value } = e.target;
-                                    dispatch({
-                                      type: 'updateHourlyHours',
-                                      year: ffy,
-                                      value
-                                    });
-                                    dispatch({
-                                      type: 'updateYearCost',
-                                      year: ffy,
-                                      value: value * state.hourly.data[ffy].rate
-                                    });
-                                  }}
-                                />
-                              )}
-                            />
-                            <DollarField
-                              className="ds-u-margin-left--1"
-                              label="Hourly rate"
-                              labelClassName="ds-u-margin-top--1"
-                              size="medium"
-                              value={state.hourly.data[ffy].rate}
-                              onChange={e => {
-                                const { value } = e.target;
-                                dispatch({
-                                  type: 'updateHourlyRate',
-                                  year: ffy,
-                                  value
-                                });
-                                dispatch({
-                                  type: 'updateYearCost',
-                                  year: ffy,
-                                  value: state.hourly.data[ffy].hours * value
-                                });
-                              }}
-                            />
-                          </div>
-                        </Fragment>
-                      ))}
-                    </div>
+                    <HourlyRateForm
+                      onHoursChange={(ffy, e) => {
+                        dispatch({
+                          type: 'updateHourlyHours',
+                          year: ffy,
+                          value: e.target.value
+                        });
+                        dispatch({
+                          type: 'updateYearCost',
+                          year: ffy,
+                          value: e.target.value * state.hourly.data[ffy].rate
+                        });
+                      }}
+                      onRateChange={(ffy, e) => {
+                        dispatch({
+                          type: 'updateHourlyRate',
+                          year: ffy,
+                          value: e.target.value
+                        });
+                        dispatch({
+                          type: 'updateYearCost',
+                          year: ffy,
+                          value: state.hourly.data[ffy].hours * e.target.value
+                        });
+                      }}
+                    />
                   )
                 },
                 {
