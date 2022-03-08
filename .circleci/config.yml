@@ -346,9 +346,11 @@ jobs:
       image: ubuntu-2004:202104-01
     parameters:
       test_dirs:
-        - 'cypress/integration/01-authentication'
-        - 'cypress/integration/02-apd'
-        - 'cypress/integration/03-admin'
+        [
+          'cypress/integration/01-authentication',
+          'cypress/integration/02-apd',
+          'cypress/integration/03-admin'
+        ]
     parallelism: 3
     steps:
       - checkout
