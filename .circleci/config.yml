@@ -344,6 +344,11 @@ jobs:
   e2e test:
     machine:
       image: ubuntu-2004:202104-01
+    parameters:
+      test_dirs:
+        - 'cypress/integration/01-authentication'
+        - 'cypress/integration/02-apd'
+        - 'cypress/integration/03-admin'
     parallelism: 3
     steps:
       - checkout
@@ -396,7 +401,8 @@ jobs:
           command: |
             export NODE_ENV=development
             export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
-            npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests" --spec "cypress/integration/0$CIRCLE_NODE_INDEX-*/*.spec.js"
+            echo "${<< parameters.test_dirs[CIRCLE_NODE_INDEX] >>}"
+            npm run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests" --spec "cypress/integration/0${CIRCLE_NODE_INDEX+1}-*/*.spec.js"
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
