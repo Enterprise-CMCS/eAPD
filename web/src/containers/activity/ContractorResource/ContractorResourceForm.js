@@ -88,7 +88,8 @@ const ContractorResourceForm = forwardRef(
         start: item.start,
         end: item.end,
         totalCost: item.totalCost,
-        useHourly: getCheckedValue(item.hourly.useHourly)
+        useHourly: getCheckedValue(item.hourly.useHourly),
+        years: item.years
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
