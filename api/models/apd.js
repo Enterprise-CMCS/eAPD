@@ -104,8 +104,7 @@ const apdSchema = new mongoose.Schema({
           name: String,
           start: Date,
           totalCost: {
-            type: Number,
-            default: 0
+            type: Number
           },
           years: {
             type: Map,

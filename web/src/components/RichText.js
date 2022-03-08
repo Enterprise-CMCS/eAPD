@@ -86,7 +86,7 @@ const fileButtonOnClick = (button, editor, upload) => () => {
 };
 
 // sets up the image button
-const setupTinyMCE = upload => editor => {
+const setupTinyMCE = (upload, onBlur) => editor => {
   editor.on('init', () => {
     const { id } = editor;
     const event = new CustomEvent(`tinymceLoaded.${id}`, {
@@ -94,6 +94,11 @@ const setupTinyMCE = upload => editor => {
       editor: this
     });
     document.dispatchEvent(event);
+  });
+
+  editor.on('blur', () => {
+    console.log('onBlur');
+    onBlur();
   });
 
   editor.ui.registry.addButton('eapdImageUpload', {
@@ -151,7 +156,7 @@ class RichText extends Component {
   };
 
   render() {
-    const { uploadFile: upload, content } = this.props;
+    const { uploadFile: upload, content, onBlur } = this.props;
     const { id } = this.state;
 
     // https://www.tiny.cloud/docs/plugins/
@@ -186,7 +191,7 @@ class RichText extends Component {
           init={{
             toolbar,
             plugins,
-            setup: setupTinyMCE(upload),
+            setup: setupTinyMCE(upload, onBlur),
             autoresize_bottom_margin: 0,
             browser_spellcheck: true,
             file_picker_types: 'image',
@@ -217,13 +222,15 @@ RichText.propTypes = {
   content: PropTypes.string,
   id: PropTypes.string,
   onSync: PropTypes.func,
+  onBlur: PropTypes.func,
   uploadFile: PropTypes.func.isRequired
 };
 
 RichText.defaultProps = {
   content: '',
   id: '',
-  onSync: () => {}
+  onSync: () => {},
+  onBlur: () => {}
 };
 
 const mapDispatchToProps = { uploadFile };

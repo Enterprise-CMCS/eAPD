@@ -1,20 +1,103 @@
-import { FormLabel, TextField } from '@cmsgov/design-system';
+import { FormLabel, TextField, ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, forwardRef, useMemo, useReducer } from 'react';
+import Joi from 'joi';
+import React, {
+  Fragment,
+  forwardRef,
+  useMemo,
+  useReducer,
+  useEffect
+} from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import Choice from '../../../components/Choice';
 import DateField from '../../../components/DateField';
 import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import NumberField from '../../../components/NumberField';
 import RichText from '../../../components/RichText';
 
+// import validationSchema from '../../../static/schemas/privateContractor';
 import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
 
+const schemas = Joi.object({
+  name: Joi.string().required().messages({
+    'string.empty': 'Name is required'
+  }),
+  description: Joi.string().required().messages({
+    'string.empty': 'Description is required'
+  }),
+  start: Joi.date().iso().required().messages({
+    'date.base': 'Start date is required',
+    'date.empty': 'Start date is required',
+    'date.format': 'Start date must be a valid date'
+  }),
+  end: Joi.date().iso().min(Joi.ref('start')).required().messages({
+    'date.base': 'End date is required',
+    'date.empty': 'End date is required',
+    'date.format': 'End date must be a valid date',
+    'date.min': 'End date must be after start date'
+  }),
+  totalCost: Joi.number().required().messages({
+    'number.empty': 'Total cost is required',
+    'number.format': 'Total cost must be a valid number'
+  }),
+  useHourly: Joi.string().required().messages({
+    'string.empty': 'Must select hourly or yearly'
+  }),
+  // hourly: Joi.alternatives().conditional('useHourly', {
+  //   is: 'yes',
+  //   then: Joi.object().pattern(
+  //     /\d{4}/,
+  //     Joi.object({
+  //       hours: Joi.number().required(),
+  //       rate: Joi.number().required()
+  //     })
+  //   )
+  // }),
+  years: Joi.alternatives().conditional('useHourly', {
+    is: 'no',
+    then: Joi.object().pattern(
+      /\d{4}/,
+      Joi.number().required().messages({
+        'number.empty': 'Provide a number greater than 0'
+      })
+    )
+  })
+});
+
+const getCheckedValue = value => {
+  if (value != null) {
+    return value ? 'yes' : 'no';
+  }
+  return null;
+};
+
 const ContractorResourceForm = forwardRef(
-  ({ activityIndex, index, item, saveContractor }, ref) => {
+  ({ activityIndex, index, item, saveContractor, setFormValid }, ref) => {
     ContractorResourceForm.displayName = 'ContractorResourceForm';
+    const {
+      handleSubmit,
+      control,
+      formState: { errors, isValid: isFormValid }
+    } = useForm({
+      defaultValues: {
+        name: item.name,
+        description: item.description,
+        start: item.start,
+        end: item.end,
+        totalCost: item.totalCost,
+        useHourly: getCheckedValue(item.hourly.useHourly)
+      },
+      mode: 'onBlur',
+      reValidateMode: 'onBlur',
+      resolver: joiResolver(schemas)
+    });
+
+    useEffect(() => {
+      setFormValid(isFormValid);
+    }, [isFormValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const initialState = item;
 
@@ -82,63 +165,34 @@ const ContractorResourceForm = forwardRef(
 
     const apdFFYs = useMemo(() => Object.keys(state.years), [state.years]);
 
-    const handleSubmit = e => {
-      e.preventDefault();
+    const onSubmit = () => {
       saveContractor(activityIndex, index, state);
     };
 
-    const getDateHandler = action => (e, dateStr) => {
-      dispatch({ type: 'updateField', field: `${action}`, value: dateStr });
-    };
-
-    const getHandlerForYearlyCost =
-      year =>
-      ({ target: { value } }) => {
-        dispatch({ type: 'updateYearCost', year, value });
-      };
-
-    const getHandlerForYearlyHours =
-      year =>
-      ({ target: { value } }) => {
-        dispatch({ type: 'updateHourlyHours', year, value });
-        dispatch({
-          type: 'updateYearCost',
-          year,
-          value: value * state.hourly.data[year].rate
-        });
-      };
-
-    const getHandlerForYearlyHourlyRate =
-      year =>
-      ({ target: { value } }) => {
-        dispatch({ type: 'updateHourlyRate', year, value });
-        dispatch({
-          type: 'updateYearCost',
-          year,
-          value: state.hourly.data[year].hours * value
-        });
-      };
-
-    const syncDescription = html => {
-      dispatch({ type: 'updateField', field: 'description', value: html });
-    };
-
     return (
-      <form index={index} onSubmit={handleSubmit}>
-        <TextField
-          label="Private Contractor or Vendor Name"
-          name="contractor-name"
-          hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
-          labelClassName="full-width-label"
-          className="remove-clearfix"
-          value={state.name}
-          onChange={e =>
-            dispatch({
-              type: 'updateField',
-              field: 'name',
-              value: e.target.value
-            })
-          }
+      <form index={index} onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name="name"
+          control={control}
+          render={({ field: { onChange, ...props } }) => (
+            <TextField
+              {...props}
+              label="Private Contractor or Vendor Name"
+              hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
+              labelClassName="full-width-label"
+              className="remove-clearfix"
+              onChange={e => {
+                dispatch({
+                  type: 'updateField',
+                  field: 'name',
+                  value: e.target.value
+                });
+                onChange(e);
+              }}
+              errorMessage={errors?.name?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
         <FormLabel
           className="full-width-label"
@@ -151,94 +205,196 @@ const ContractorResourceForm = forwardRef(
             procurements.
           </span>
         </FormLabel>
-        <RichText
-          name="contractor-description"
-          id={`contractor-description-field-${index}`}
-          content={state.description}
-          onSync={syncDescription}
-          editorClassName="rte-textarea-1"
+        <Controller
+          name="description"
+          control={control}
+          render={({ field: { onChange, onBlur } }) => (
+            <RichText
+              name="contractor-description"
+              id={`contractor-description-field-${index}`}
+              content={state.description}
+              onSync={html => {
+                dispatch({
+                  type: 'updateField',
+                  field: 'description',
+                  value: html
+                });
+                onChange(html);
+              }}
+              onBlur={onBlur}
+              editorClassName="rte-textarea-1"
+            />
+          )}
         />
+        {errors?.description && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            {errors.description.message}
+          </span>
+        )}
         <FormLabel>Full Contract Term</FormLabel>
         <span className="ds-c-field__hint">
           Provide the total length of the contract, including any option years.
           Contract term may extend beyond the FFY(s) included in this APD.
         </span>
         <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
-          <DateField
-            label="Contract start date"
-            value={state.start}
-            onChange={getDateHandler('start')}
+          <Controller
+            name="start"
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <DateField
+                label="Contract start date"
+                value={value}
+                onChange={(e, dateStr) => {
+                  dispatch({
+                    type: 'updateField',
+                    field: 'start',
+                    value: dateStr
+                  });
+                  onChange(e);
+                }}
+                onBlur={onBlur}
+                errorMessage={errors?.start?.message}
+              />
+            )}
           />
-          <DateField
-            label="Contract end date"
-            hint=""
-            value={state.end}
-            onChange={getDateHandler('end')}
+          <Controller
+            name="end"
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => {
+              return (
+                <DateField
+                  label="Contract end date"
+                  value={value}
+                  onChange={(e, dateStr) => {
+                    dispatch({
+                      type: 'updateField',
+                      field: 'end',
+                      value: dateStr
+                    });
+                    onChange(e);
+                  }}
+                  onBlur={onBlur}
+                  errorMessage={errors?.end?.message}
+                />
+              );
+            }}
           />
         </div>
-        <DollarField
-          label="Total Contract Cost"
-          name="contractor-total-cost"
-          size="medium"
-          hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."
-          labelClassName="full-width-label"
-          value={state.totalCost}
-          onChange={e =>
-            dispatch({
-              type: 'updateField',
-              field: 'totalCost',
-              value: e.target.value
-            })
-          }
+        <Controller
+          name="totalCost"
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <DollarField
+              label="Total Contract Cost"
+              name="contractor-total-cost"
+              size="medium"
+              hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."
+              labelClassName="full-width-label"
+              value={value}
+              onBlur={onBlur}
+              onChange={e => {
+                dispatch({
+                  type: 'updateField',
+                  field: 'totalCost',
+                  value: e.target.value
+                });
+                onChange(e);
+              }}
+            />
+          )}
         />
-        <fieldset className="ds-c-fieldset">
-          <legend className="ds-c-label">This is an hourly resource</legend>
-          <Choice
-            checked={!state.hourly.useHourly}
-            label="No"
-            name={`apd-activity-contractor-hourly-${state.key}-no`}
-            onChange={() => dispatch({ type: 'setHourly', value: false })}
-            type="radio"
-            value="no"
-          />
-          <Choice
-            checked={state.hourly.useHourly}
-            label="Yes"
-            name={`apd-activity-contractor-hourly-${state.key}-yes`}
-            onChange={() => dispatch({ type: 'setHourly', value: true })}
-            type="radio"
-            value="yes"
-            checkedChildren={
-              <div className="ds-c-choice__checkedChild">
-                {apdFFYs.map(ffy => (
-                  <Fragment key={ffy}>
-                    <FormLabel>FFY {ffy}</FormLabel>
-                    <div className="ds-l-row ds-u-padding-left--2">
-                      <NumberField
-                        label="Number of hours"
-                        name={`contractor-num-hours-ffy-${ffy}`}
-                        labelClassName="ds-u-margin-top--1"
-                        size="medium"
-                        value={state.hourly.data[ffy].hours}
-                        onChange={getHandlerForYearlyHours(ffy)}
-                      />
-                      <DollarField
-                        className="ds-u-margin-left--1"
-                        label="Hourly rate"
-                        name={`contractor-hourly-rate-ffy-${ffy}`}
-                        labelClassName="ds-u-margin-top--1"
-                        size="medium"
-                        value={state.hourly.data[ffy].rate}
-                        onChange={getHandlerForYearlyHourlyRate(ffy)}
-                      />
+        {errors?.totalCost && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            {errors.totalCost.message}
+          </span>
+        )}
+        <Controller
+          name="useHourly"
+          control={control}
+          render={({ field: { name, onChange, onBlur, value } }) => (
+            <ChoiceList
+              label="This is an hourly resource"
+              name={name}
+              choices={[
+                {
+                  label: 'Yes',
+                  value: 'yes',
+                  defaultChecked: value === 'yes',
+                  checkedChildren: (
+                    <div className="ds-c-choice__checkedChild">
+                      {apdFFYs.map(ffy => (
+                        <Fragment key={ffy}>
+                          <FormLabel>FFY {ffy}</FormLabel>
+                          <div className="ds-l-row ds-u-padding-left--2">
+                            <NumberField
+                              label="Number of hours"
+                              labelClassName="ds-u-margin-top--1"
+                              size="medium"
+                              value={state.hourly.data[ffy].hours}
+                              onChange={e => {
+                                const { value } = e.target;
+                                dispatch({
+                                  type: 'updateHourlyHours',
+                                  year: ffy,
+                                  value
+                                });
+                                dispatch({
+                                  type: 'updateYearCost',
+                                  year: ffy,
+                                  value: value * state.hourly.data[ffy].rate
+                                });
+                              }}
+                            />
+                            <DollarField
+                              className="ds-u-margin-left--1"
+                              label="Hourly rate"
+                              labelClassName="ds-u-margin-top--1"
+                              size="medium"
+                              value={state.hourly.data[ffy].rate}
+                              onChange={e => {
+                                const { value } = e.target;
+                                dispatch({
+                                  type: 'updateHourlyRate',
+                                  year: ffy,
+                                  value
+                                });
+                                dispatch({
+                                  type: 'updateYearCost',
+                                  year: ffy,
+                                  value: state.hourly.data[ffy].hours * value
+                                });
+                              }}
+                            />
+                          </div>
+                        </Fragment>
+                      ))}
                     </div>
-                  </Fragment>
-                ))}
-              </div>
-            }
-          />
-        </fieldset>
-        {state.hourly.useHourly ? (
+                  )
+                },
+                {
+                  label: 'No',
+                  value: 'no',
+                  defaultChecked: value === 'no'
+                }
+              ]}
+              type="radio"
+              onChange={e => {
+                dispatch({ type: 'setHourly', value: e.target.value });
+                onChange(e);
+              }}
+              onComponentBlur={onBlur}
+              errorMessage={errors?.useHourly?.message}
+              errorPlacement="bottom"
+            />
+          )}
+        />
+        {state.hourly.useHourly === 'yes' || state.hourly.useHourly === true ? (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <Fragment key={ffy}>
@@ -249,14 +405,26 @@ const ContractorResourceForm = forwardRef(
           </p>
         ) : (
           apdFFYs.map(ffy => (
-            <DollarField
+            <Controller
               key={ffy}
-              label={`FFY ${ffy} Cost`}
-              name={`contractor-cost-ffy-${ffy}`}
-              disabled={state.hourly.useHourly}
-              size="medium"
-              value={state.years[ffy]}
-              onChange={getHandlerForYearlyCost(ffy)}
+              name={`years.${ffy}`}
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <DollarField
+                  label={`FFY ${ffy} Cost`}
+                  size="medium"
+                  value={value}
+                  onChange={e => {
+                    dispatch({
+                      type: 'updateYearCost',
+                      year: ffy,
+                      value: e.target.value
+                    });
+                    onChange(e);
+                  }}
+                  onBlur={onBlur}
+                />
+              )}
             />
           ))
         )}
@@ -275,16 +443,17 @@ ContractorResourceForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
-    description: PropTypes.string,
-    end: PropTypes.string,
-    hourly: PropTypes.object,
-    key: PropTypes.string,
     name: PropTypes.string,
+    description: PropTypes.string,
     start: PropTypes.string,
+    end: PropTypes.string,
+    key: PropTypes.string,
     totalCost: PropTypes.number,
+    hourly: PropTypes.object,
     years: PropTypes.object
   }).isRequired,
-  saveContractor: PropTypes.func.isRequired
+  saveContractor: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
