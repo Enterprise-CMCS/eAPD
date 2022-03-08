@@ -394,7 +394,8 @@ const ContractorResourceForm = forwardRef(
             />
           )}
         />
-        {state.hourly.useHourly === 'yes' || state.hourly.useHourly === true ? (
+        {(state.hourly.useHourly === 'yes' ||
+          state.hourly.useHourly === true) && (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <Fragment key={ffy}>
@@ -403,7 +404,9 @@ const ContractorResourceForm = forwardRef(
               </Fragment>
             ))}
           </p>
-        ) : (
+        )}
+        {(state.hourly.useHourly === 'no' ||
+          state.hourly.useHourly === false) &&
           apdFFYs.map(ffy => (
             <Controller
               key={ffy}
@@ -426,8 +429,7 @@ const ContractorResourceForm = forwardRef(
                 />
               )}
             />
-          ))
-        )}
+          ))}
         <input
           className="ds-u-visibility--hidden"
           type="submit"
