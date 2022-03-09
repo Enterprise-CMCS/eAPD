@@ -33,6 +33,7 @@ const OutcomeAndMetricReview = ({
 );
 
 OutcomeAndMetricReview.propTypes = {
+  index: PropTypes.number.isRequired,
   expand: PropTypes.func.isRequired,
   item: PropTypes.shape({
     metrics: PropTypes.array,
