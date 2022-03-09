@@ -5,7 +5,7 @@
     "programOverview": "",
     "narrativeHIE": "",
     "narrativeHIT": "",
-    "narrativeMMIS": "",
+    "narrativeMMIS": ""
   },
   "keyStatePersonnel": {
     "medicaidDirector": { 
@@ -20,7 +20,7 @@
       "state": "",
       "zip": ""
     },
-    "keyPersonnel": [],
+    "keyPersonnel": []
   },
   "previousActivities": {
     "previousActivitySummary": "",
