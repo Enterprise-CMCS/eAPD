@@ -1,8 +1,7 @@
 const isPast = require('date-fns/isPast');
 const { oktaClient } = require('../auth/oktaAuth');
-// const knex = require('./knex');
+const knex = require('./knex');
 const {
-  // getRolesAndActivities: actualGetRolesAndActivities,
   getUserAffiliatedStates: actualGetUserAffiliatedStates,
   getAffiliationByState: actualGetAffiliationsByState,
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
@@ -27,10 +26,6 @@ const sanitizeUser = user => ({
   states: user.states,
   username: user.login
 });
-
-// const actualGetAffiliationsByUserId = (id, { db = knex } = {}) => {
-//   return db.select('*').from('auth_affiliations').where({ user_id: id });
-// };
 
 /**
  * Populates a user with their role and permissions for the state passed in
@@ -142,7 +137,7 @@ const getUserByID = async (
     client = oktaClient,
     populate = populateUserRole,
     additionalValues,
-    db
+    db = knex
   } = {}
 ) => {
   let oktaUser;
