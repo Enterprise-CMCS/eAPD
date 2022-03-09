@@ -58,7 +58,9 @@ describe('apd state profile, Medicaid office component', () => {
       mapStateToProps({
         apd: {
           data: {
-            keyPersonnel: 'these are my people',
+            keyStatePersonnel: {
+              keyPersonnel: 'these are my people'
+            },
             years: 'and these are my years'
           }
         }

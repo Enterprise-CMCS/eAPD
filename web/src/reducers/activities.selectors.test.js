@@ -146,14 +146,16 @@ describe('activities state selectors', () => {
             },
             'three'
           ],
-          keyPersonnel: [
-            {
-              costs: { 1990: 100, 1991: 200 },
-              hasCosts: true,
-              name: 'key person',
-              fte: { 1990: 1.0, 1991: 0.75 }
-            }
-          ],
+          keyStatePersonnel: {
+            keyPersonnel: [
+              {
+                costs: { 1990: 100, 1991: 200 },
+                hasCosts: true,
+                name: 'key person',
+                fte: { 1990: 1.0, 1991: 0.75 }
+              }
+            ]            
+          },
           years: ['1990', '1991']
         }
       },

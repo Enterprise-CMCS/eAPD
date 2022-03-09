@@ -280,7 +280,7 @@ export const getPatchesForAddingItem = (state, path) => {
           path,
           value: getKeyPersonnel(
             state.data.years,
-            !state.data.keyStatePersonnel.keyPersonnel || state.data.keyStatePersonnel.keyPersonnel.length === 0
+            !state.data.keyStatePersonnel?.keyPersonnel || state.data.keyStatePersonnel.keyPersonnel.length === 0
           )
         }
       ];
@@ -481,10 +481,12 @@ const reducer = (state = initialState, action) => {
             })
           ),
           assurancesAndCompliances: getAssurancesAndCompliances(action.apd.assurancesAndCompliances),
-          keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
+          keyStatePersonnel: {
+            keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
             ...kp,
             key: generateKey()
-          })),
+            }))
+          },
           created: getHumanDatestamp(action.apd.created),
           updated: getHumanTimestamp(action.apd.updated),
           yearOptions: defaultAPDYearOptions

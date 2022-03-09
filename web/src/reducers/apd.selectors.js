@@ -36,7 +36,7 @@ export const selectSummary = ({
 });
 
 export const selectKeyPersonnel = state => state.apd.data.keyStatePersonnel.keyPersonnel;
-export const selectStateProfile = state => state.apd.data.keyStatePersonnel;
+export const selectKeyStatePersonnel = state => state.apd.data.keyStatePersonnel;
 
 export const selectPreviousActivitySummary = state =>
   state.apd.data.previousActivities.previousActivitySummary;

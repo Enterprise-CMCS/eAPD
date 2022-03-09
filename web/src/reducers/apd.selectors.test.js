@@ -11,7 +11,7 @@ import {
   selectPreviousActivitySummary,
   selectPreviousHITHIEActivities,
   selectPreviousMMISActivities,
-  selectStateProfile,
+  selectKeyStatePersonnel,
   selectSummary
 } from './apd.selectors';
 
@@ -203,7 +203,7 @@ describe('APD selectors', () => {
 
   it('selects the key state personnel for the current APD', () => {
     expect(
-      selectStateProfile({ apd: { data: { keyStatePersonnel: 'state' } } })
+      selectKeyStatePersonnel({ apd: { data: { keyStatePersonnel: 'state' } } })
     ).toEqual('state');
   });
 
