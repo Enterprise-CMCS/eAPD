@@ -17,12 +17,6 @@ const ContractorResourceReview = ({
     [end, start]
   );
 
-  const log = () => {
-    console.log(hourly);
-  }
-
-  log();
-
   return (
     <Review
       heading={`${index + 1}. ${
