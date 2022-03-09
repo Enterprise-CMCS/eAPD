@@ -5,7 +5,7 @@
     "narrativeHIE": "",
     "narrativeHIT": "",
     "narrativeMMIS": "",
-    "programOverview": "",
+    "programOverview": ""
   },
   "keyStatePersonnel": {
     "medicaidDirector": {
@@ -48,7 +48,7 @@
         "hasCosts": false,
         "costs": {}
       }
-    ],
+    ]
   },
   "previousActivities": {
     "previousActivitySummary": "",
@@ -1557,7 +1557,7 @@
           "4": 0
         }
       }
-    },
+    }
   },
   "assurancesAndCompliances": {
     "procurement": [
@@ -1587,5 +1587,5 @@
         "explanation": ""
       }
     ]
-  },
+  }
 }
