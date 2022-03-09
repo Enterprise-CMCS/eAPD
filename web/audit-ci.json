@@ -1,14 +1,14 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1044314, 1044129],
+  "allowlist": [1054783, 1054598],
   "_comment": {
-    "1044314": {
+    "1054783": {
       "advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
       "module": "trim",
       "affects": ["@storybook/addon-docs@6.4.18 - storybook"]
     },
-    "1044129": {
+    "1054598": {
       "advisory": "https://github.com/advisories/GHSA-ww39-953v-wcq6",
       "module": "glob-parent",
       "affects": [
