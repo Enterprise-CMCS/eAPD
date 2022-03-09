@@ -27,3 +27,17 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "terraform-state-b
         }
     }
 }
+
+resource "aws_s3_bucket_public_access_block" "terraform-state-bucket-public-access-block" {
+  bucket = aws_s3_bucket.terraform-state-bucket.id
+
+  block_public_acls   = true
+  block_public_policy = true
+}
+
+resource "aws_s3_bucket_versioning" "terraform-state-bucket-versioning" {
+  bucket = aws_s3_bucket.terraform-state-bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
