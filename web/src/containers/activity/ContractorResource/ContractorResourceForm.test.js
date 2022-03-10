@@ -33,7 +33,7 @@ describe('the ContractorResourceForm component', () => {
         1067: 400
       }
     },
-    saveContractor: jest.fn(),
+    saveContractor: jest.fn()
   };
 
   beforeEach(() => {

@@ -7,65 +7,60 @@ import { connect } from 'react-redux';
 import Icon, { faPlusCircle } from '../../../components/Icons';
 import Review from '../../../components/Review';
 
+<<<<<<< HEAD
 import {
   saveOutcome as actualSaveOutcome
 } from '../../../actions/editActivity';
 
 import { validateSubForm } from '../../../helpers/subFormValidation';
+=======
+import { saveOutcome as actualSaveOutcome } from '../../../actions/editActivity';
+>>>>>>> tforkner/3499-private-contractor-costs-validation
 
 import { newOutcomeMetric } from '../../../reducers/activities';
 
 const OutcomeAndMetricForm = forwardRef(
-  (
-    {
-      activityIndex,
-      item,
-      index,
-      saveOutcome
-    },
-    ref
-) => {
-  OutcomeAndMetricForm.displayName = 'OutcomeAndMetricForm';
-  
-  function reducer(state, action) {
-    switch (action.type) {
-      case 'updateField':
-        return {
-          ...state,
-          [action.field]: action.value
+  ({ activityIndex, item, index, saveOutcome }, ref) => {
+    OutcomeAndMetricForm.displayName = 'OutcomeAndMetricForm';
+
+    function reducer(state, action) {
+      switch (action.type) {
+        case 'updateField':
+          return {
+            ...state,
+            [action.field]: action.value
+          };
+        case 'addMetric': {
+          const newMetric = newOutcomeMetric();
+          return {
+            ...state,
+            metrics: [...state.metrics, newMetric]
+          };
         }
-      case 'addMetric': {
-        const newMetric = newOutcomeMetric();
-        return {
-          ...state,
-          metrics: [
-            ...state.metrics,
-            newMetric
-          ]
+        case 'removeMetric': {
+          const metricsCopy = [...state.metrics];
+          metricsCopy.splice(action.index, 1);
+          return {
+            ...state,
+            metrics: metricsCopy
+          };
         }
+        case 'updateMetrics': {
+          const metricsCopy = [...state.metrics];
+          metricsCopy[action.metricIndex].metric = action.value;
+
+          return {
+            ...state,
+            metrics: metricsCopy
+          };
+        }
+        default:
+          throw new Error(
+            'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+          );
       }
-      case 'removeMetric': {
-        const metricsCopy = [...state.metrics];
-        metricsCopy.splice(action.index, 1);
-        return {
-          ...state,
-          metrics: metricsCopy
-        }        
-      }
-      case 'updateMetrics': {
-        const metricsCopy = [...state.metrics];
-        metricsCopy[action.metricIndex].metric = action.value;
-        
-        return {
-          ...state,
-          metrics: metricsCopy
-        }        
-      }
-      default:
-        throw new Error(
-          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
-        );
     }
+<<<<<<< HEAD
   }  
   
   const [state, dispatch] = useReducer(reducer, item);
@@ -119,9 +114,68 @@ const OutcomeAndMetricForm = forwardRef(
           objType="Metric"
           >
           <div
+=======
+
+    const [state, dispatch] = useReducer(reducer, item);
+
+    const handleSubmit = e => {
+      e.preventDefault();
+      saveOutcome(activityIndex, index, state);
+    };
+
+    const handleAddMetric = () => {
+      dispatch({ type: 'addMetric' });
+    };
+
+    const handleDeleteMetric = (outcomeIndex, metricIndex) => {
+      dispatch({ type: 'removeMetric', index: metricIndex });
+    };
+
+    const changeMetric =
+      i =>
+      ({ target: { value } }) => {
+        dispatch({ type: 'updateMetrics', metricIndex: i, value });
+      };
+
+    return (
+      <form
+        index={index}
+        key={`activity${activityIndex}-index${index}-form`}
+        onSubmit={handleSubmit}
+      >
+        <TextField
+          key={`activity${activityIndex}-index${index}`}
+          data-cy={`outcome-${index}`}
+          name="outcome"
+          label="Outcome"
+          className="remove-clearfix"
+          hint="Describe a distinct and measurable improvement for this system."
+          value={state.outcome}
+          multiline
+          rows="4"
+          onChange={e =>
+            dispatch({
+              type: 'updateField',
+              field: 'outcome',
+              value: e.target.value
+            })
+          }
+        />
+        {state.metrics.map(({ key, metric }, i) => (
+          <Review
+>>>>>>> tforkner/3499-private-contractor-costs-validation
             key={key}
-            className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+            onDeleteClick={
+              state.metrics.length === 1 && metric === ''
+                ? null
+                : () => handleDeleteMetric(index, i)
+            }
+            onDeleteLabel="Remove"
+            skipConfirmation
+            ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
+            objType="Metric"
           >
+<<<<<<< HEAD
             <TextField
               id={`${activityIndex}-metric${i}`}
               name="metric"
@@ -144,14 +198,48 @@ const OutcomeAndMetricForm = forwardRef(
           key={`activity${activityIndex}-index${index}-add-metric`}
           className="ds-c-button ds-c-button--transparent"
           onClick={handleAddMetric}
+=======
+            <div
+              key={key}
+              className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+            >
+              <TextField
+                id={`${activityIndex}-metric${i}`}
+                name="metric"
+                data-cy={`metric-${index}-${i}`}
+                label="Metric"
+                className="remove-clearfix"
+                hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+                value={metric}
+                multiline
+                rows="4"
+                onChange={changeMetric(i)}
+              />
+            </div>
+          </Review>
+        ))}
+        <div
+          className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2"
+          style={{ width: 485 }}
+>>>>>>> tforkner/3499-private-contractor-costs-validation
         >
-          <Icon icon={faPlusCircle} className='ds-u-margin-right--1' />
-          Add Metric to Outcome
-        </Button>
-      </div>
-      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
-    </form>
-  );
+          <Button
+            key={`activity${activityIndex}-index${index}-add-metric`}
+            className="ds-c-button ds-c-button--transparent"
+            onClick={handleAddMetric}
+          >
+            <Icon icon={faPlusCircle} className="ds-u-margin-right--1" />
+            Add Metric to Outcome
+          </Button>
+        </div>
+        <input
+          className="ds-u-visibility--hidden"
+          type="submit"
+          ref={ref}
+          hidden
+        />
+      </form>
+    );
   }
 );
 

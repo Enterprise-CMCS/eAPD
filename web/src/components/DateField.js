@@ -1,9 +1,10 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import { formatISO } from 'date-fns';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { isNumeric } from '../util/formats';
 
-const dateParts = (value) => {
+const dateParts = value => {
   if (!value) {
     return {
       day: '',
@@ -11,71 +12,82 @@ const dateParts = (value) => {
       year: ''
     };
   } else {
-    const newDate = new Date(value);    
+    const newDate = new Date(value);
     return {
       day: newDate.getUTCDate(),
       month: newDate.getUTCMonth() + 1,
       year: newDate.getUTCFullYear()
-    }
-
+    };
   }
 };
 
-const DateField = ({ value, onChange, ...rest }) => {
+const DateField = ({ value, onChange, onBlur, errorMessage, ...rest }) => {
   const [errorInfo, setErrorInfo] = useState({
-    errorMessage: [],
+    errorMessage,
     dayInvalid: false,
     monthInvalid: false,
     yearInvalid: false
   });
 
+  useEffect(() => {
+    if (errorMessage) {
+      setErrorInfo({
+        ...errorInfo,
+        errorMessage
+      });
+    }
+  }, [errorMessage]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const [dateObj] = useState(dateParts(value));
 
-  const dateStr = (dateObject) => {
+  const dateStr = dateObject => {
     const year = dateObject.year;
     const month = dateObject.month - 1;
     const day = dateObject.day;
 
-    const date = formatISO(new Date(year, month, day), { representation: 'date' })
+    const date = formatISO(new Date(year, month, day), {
+      representation: 'date'
+    });
     return date;
-  }
+  };
 
-  const getErrorMsg = (dateObject) => {
-    const dayVal = dateObject.day;
-    const monthVal = dateObject.month;
-    const yearVal = dateObject.year;
+  const getErrorMsg = dateObject => {
+    const { day, month, year } = dateObject;
 
-    const message = [];
-    let dayInvalid = false;
-    let monthInvalid = false;
-    let yearInvalid = false;
+    const errors = {
+      errorMessage: '',
+      dayInvalid: false,
+      monthInvalid: false,
+      yearInvalid: false
+    };
 
-    // Validation for parsing & the date
-
-    if (!dayVal || dayVal > 31 || dayVal < 0 ||
-        !monthVal || monthVal > 12 || monthVal < 0 ||
-        yearVal.length !== 4) {
-      message.push('Please enter a valid date.')
-
-      if (!dayVal || dayVal > 31 || dayVal < 0) {
-        dayInvalid = true;
-      }
-
-      if (!monthVal || monthVal > 12 || monthVal < 0) {
-        monthInvalid = true;
-      }
-
-      if (!yearVal || yearVal.length) {
-        yearInvalid = true;
-      }
+    if (!day && !month && !year) {
+      setErrorInfo({
+        dayInvalid: true,
+        monthInvalid: true,
+        yearInvalid: true,
+        errorMessage: 'Date is required'
+      });
     }
 
-    setErrorInfo({
-      errorMessage: message.join(' '),
-      dayInvalid,
-      monthInvalid,
-      yearInvalid
-    });
+    // Validation for parsing & the date
+    if (!isNumeric(year) || year < 1900 || year > 2100) {
+      errors.yearInvalid = true;
+      errors.errorMessage = errors.errorMessage || 'Must have a valid year';
+    }
+
+    if (!isNumeric(month) || month < 1 || month > 12) {
+      errors.monthInvalid = true;
+      errors.errorMessage = errors.errorMessage || 'Must have a valid month';
+    }
+
+    var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
+    if (!isNumeric(day) || day < 1 || day > lastDayOfMonth.getDate() + 1) {
+      errors.dayInvalid = true;
+      errors.errorMessage = errors.errorMessage || 'Must have a valid day';
+    }
+
+    setErrorInfo(errors);
   };
 
   return (
@@ -87,18 +99,27 @@ const DateField = ({ value, onChange, ...rest }) => {
       yearDefaultValue={dateObj.year}
       onComponentBlur={(_, dateObject) => {
         getErrorMsg(dateObject);
+        onBlur();
       }}
       onChange={(_, dateObject) => {
         onChange(_, dateStr(dateObject));
       }}
-      errorPlacement='bottom'
+      errorPlacement="bottom"
     />
   );
 };
 
 DateField.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
+  errorMessage: PropTypes.string
+};
+
+DateField.defaultProps = {
+  onBlur: () => {},
+  value: null,
+  errorMessage: ''
 };
 
 export default DateField;

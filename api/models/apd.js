@@ -88,12 +88,10 @@ const apdSchema = new mongoose.Schema({
               of: new mongoose.Schema(
                 {
                   hours: {
-                    type: Number,
-                    default: 0
+                    type: Number
                   },
                   rate: {
-                    type: Number,
-                    default: 0
+                    type: Number
                   }
                 },
                 { _id: false }
@@ -104,8 +102,7 @@ const apdSchema = new mongoose.Schema({
           name: String,
           start: Date,
           totalCost: {
-            type: Number,
-            default: 0
+            type: Number
           },
           years: {
             type: Map,
