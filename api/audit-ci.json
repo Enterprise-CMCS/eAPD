@@ -1,9 +1,9 @@
 {
   "low": true,
   "package-manager": "auto",
-  "allowlist": [1054519],
+  "allowlist": [1059749],
   "_comment": {
-    "1054519": {
+    "1059749": {
       "advisory": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
       "modules": "yargs-parser",
       "cvss-score": "5.3 moderate",
