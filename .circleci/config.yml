@@ -164,8 +164,8 @@ workflows:
             - owasp zap scan
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+#            - frontend dependency vulnerability scan
+#            - backend dependency vulnerability scan
             - frontend test
             - yaml test
             - backend unit test
