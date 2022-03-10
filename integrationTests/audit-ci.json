@@ -1,7 +1,6 @@
 {
   "low": true,
-  "package-manager": "auto",
+  "package-manager": "yarn",
   "allowlist": [],
-  "_comment": {},
-  "registry": "https://registry.npmjs.org"
+  "_comment": {}
 }

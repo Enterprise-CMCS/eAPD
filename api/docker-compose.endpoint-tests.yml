@@ -47,7 +47,7 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
-    command: npm start
+    command: yarn start
     expose:
       - 8000
     volumes:

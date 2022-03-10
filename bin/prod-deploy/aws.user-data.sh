@@ -268,10 +268,10 @@ curl -o backend.zip -L __BUILDURL__
 unzip backend.zip
 rm backend.zip
 cd api
-npm ci --only=production 
+yarn install --frozen-lockfile --production=true
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
-npm rebuild knex
+yarn rebuild knex
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace the
@@ -280,7 +280,7 @@ npm rebuild knex
 echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
-npm install newrelic --save
+yarn add newrelic --save
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
