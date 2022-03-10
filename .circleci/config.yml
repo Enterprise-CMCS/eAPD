@@ -388,9 +388,6 @@ jobs:
             nvm install 16.13.2
             nvm alias default 16.13.2
             nvm use 16.13.2
-            node -v 
-            npm -v
-            yarn -v
 
             yarn install --frozen-lockfile
             npx cypress install --force
@@ -400,6 +397,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
+            if [[ $CIRCLE_NODE_INDEX == "0"]]; then nvm use 16.13.2; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.spec.js"; fi
@@ -408,6 +406,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
+            if [[ $CIRCLE_NODE_INDEX == "1"]]; then nvm use 16.13.2; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.spec.js"; fi
@@ -416,6 +415,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
+            if [[ $CIRCLE_NODE_INDEX == "2"]]; then nvm use 16.13.2; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.spec.js"; fi
@@ -424,6 +424,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
+            if [[ $CIRCLE_NODE_INDEX == "3"]]; then nvm use 16.13.2; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.spec.js"; fi
@@ -432,6 +433,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
+            if [[ $CIRCLE_NODE_INDEX == "4"]]; then nvm use 16.13.2; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
