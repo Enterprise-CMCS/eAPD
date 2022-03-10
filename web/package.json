@@ -9,7 +9,7 @@
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "build": "npm run scaffold && NODE_ENV=production webpack --config webpack.config.js",
     "lint": "eslint 'src/**/*.js'",
-    "start": "npm run scaffold && webpack serve --config webpack.config.dev.js",
+    "start": "npm run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
     "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json",
     "test": "TZ=utc jest --collectCoverage",
     "test-watch": "TZ=utc npm run test:generate-output -- --watch",
