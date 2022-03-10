@@ -262,7 +262,7 @@ tap.test('database wrappers / apds', async apdsTests => {
         [
           {
             op: 'replace',
-            path: '/stateProfile/medicaidOffice/address1',
+            path: '/keyStatePersonnel/medicaidOffice/address1',
             value: '132 Green St'
           }
         ],

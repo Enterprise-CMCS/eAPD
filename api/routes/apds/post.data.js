@@ -97,11 +97,13 @@ const getNewApd = () => {
       }
     ],
     assurancesAndCompliances: regsGenerator(),
-    incentivePayments: {
-      ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-      ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-      epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-      epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
+    proposedBudget: {
+      incentivePayments: {
+        ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
+      }      
     },
     keyStatePersonnel: {
       medicaidDirector: {
