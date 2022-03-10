@@ -41,7 +41,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   describe('Create APD', () => {
-    it('creates a new APD with current date and the first two years checked', () => {
+    it('creates a default new APD and handles changing the name', () => {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       const today = new Date();
 
@@ -52,12 +52,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('#apd-header-info').contains(
         `Created: ${today.toLocaleDateString('en-US', options)}`
       );
-    });
 
-    it('changes the apd name', () => {
-      cy.visit('/');
-      cy.contains('Create new').click();
-
+      cy.log('change the APD name');
       const title1 = 'HITECH IAPD';
       const title2 = 'My Awesome eAPD';
       const title3 = 'Magnus Archive Project';
@@ -96,33 +92,31 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   describe('Navigation', () => {
-    it('confirms Continue buttons redirect to correct sections', () => {
-      cy.wrap(pageTitles).each((title, index) => {
+    it('confirms navigation', () => {
+      cy.log('Click through Continue buttons');
+      cy.wrap([...pageTitles]).each((title, index, titles) => {
         cy.get('.ds-c-vertical-nav__item').contains(title).click();
         cy.get('.ds-h2').should('contain', title);
 
-        if (index < pageTitles.length - 1) {
+        cy.log(`${titles[index + 1]}`);
+        if (index < titles.length - 1) {
           cy.get('#continue-button').click();
-          cy.get('.ds-h2').should('contain', pageTitles[index + 1]);
+          cy.get('.ds-h2').should('contain', titles[index + 1]);
         }
       });
-    });
 
-    it('confirms Back buttons redirect to correct sections', () => {
-      const reversePageTitles = pageTitles.reverse();
-
-      cy.wrap(reversePageTitles).each((title, index) => {
+      cy.log('Click through Previous buttons');
+      cy.wrap([...pageTitles].reverse()).each((title, index, reverseTitles) => {
         cy.get('.ds-c-vertical-nav__item').contains(title).click();
         cy.get('.ds-h2').should('contain', title);
 
-        if (index < reversePageTitles.length - 1) {
+        if (index < reverseTitles.length - 1) {
           cy.get('#previous-button').click();
-          cy.get('.ds-h2').should('contain', pageTitles[index + 1]);
+          cy.get('.ds-h2').should('contain', reverseTitles[index + 1]);
         }
       });
-    });
 
-    it('confirms side nav buttons redirect to correct sections', () => {
+      cy.log('confirms side nav buttons redirect to correct sections');
       const pages = [
         { parent: 'APD Overview', label: '' },
         {
@@ -163,9 +157,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
         cy.get('.ds-h2').should('contain', index.parent);
       });
-    });
 
-    it('confirms anchor links redirect to correct sections', () => {
+      cy.log('confirms anchor links redirect to correct sections');
       const pageWithAnchors = [
         {
           parent: 'Key State Personnel',
@@ -226,9 +219,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .then(offset => cy.window().its('scrollY').should('eq', offset));
         }
       });
-    });
 
-    it('should go to the Activity Overview page when edit is clicked in Executive Summary', () => {
+      cy.log(
+        'should go to the Activity Overview page when edit is clicked in Executive Summary'
+      );
       cy.goToExecutiveSummary();
 
       cy.get('#executive-summary-summary')
@@ -262,7 +256,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       proposedBudgetPage = new ProposedBudgetPage();
     });
 
-    it('should handle entering data in Key State Personnel', () => {
+    it('should handle entering data', () => {
+      cy.log('Key State Personnel');
       cy.goToKeyStatePersonnel();
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
       cy.findByRole('button', { name: /Cancel/i }).click();
@@ -312,23 +307,23 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .findByRole('heading', { name: /2.*/i })
         .parent()
         .parent()
-        .as('personnelVals');
-      cy.get('@personnelVals')
+        .as('personnelVals1');
+      cy.get('@personnelVals1')
         .findByRole('heading', { name: /Key Personnel name not specified/i })
         .should('exist');
-      cy.get('@personnelVals')
+      cy.get('@personnelVals1')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(1);
           expect($lis.eq(0)).to.contain('Role not specified');
         });
-      cy.get('@personnelVals')
+      cy.get('@personnelVals1')
         .contains('Total cost:')
         .next()
         .shouldHaveValue(0);
 
-      cy.get('@personnelVals').contains('Delete').should('exist');
-      cy.get('@personnelVals').contains('Edit').should('exist');
+      cy.get('@personnelVals1').contains('Delete').should('exist');
+      cy.get('@personnelVals1').contains('Edit').should('exist');
 
       cy.get('.form-and-review-list')
         .findAllByRole('button', { name: /Edit/i })
@@ -357,11 +352,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .findByRole('heading', { name: /3.*/i })
         .parent()
         .parent()
-        .as('personnelVals');
-      cy.get('@personnelVals')
+        .as('personnelVals2');
+      cy.get('@personnelVals2')
         .findByRole('heading', { name: /Key Personnel name not specified/i })
         .should('exist');
-      cy.get('@personnelVals')
+      cy.get('@personnelVals2')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(1);
@@ -370,17 +365,16 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       // Check that FFY, FTE, and Total cost for each applicable year is 0.
       years.forEach(year => {
-        cy.get('@personnelVals').should(
+        cy.get('@personnelVals2').should(
           'contain',
           `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`
         );
       });
 
-      cy.get('@personnelVals').contains('Delete').should('exist');
-      cy.get('@personnelVals').contains('Edit').should('exist');
-    });
+      cy.get('@personnelVals2').contains('Delete').should('exist');
+      cy.get('@personnelVals2').contains('Edit').should('exist');
 
-    it('should handle entering data in Activity Dashboard', () => {
+      cy.log('Activity Dashboard');
       cy.goToActivityDashboard();
 
       // Testing add activity button at end of Activitiy
@@ -391,9 +385,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Delete Activity/i }).click();
       cy.waitForSave();
       cy.contains('Activity 2').should('not.exist');
-    });
 
-    it('should handle enter data in Outcomes and Milestones', () => {
       const outcomes = [
         {
           outcome: 'This is an outcome.',
@@ -410,6 +402,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
       ];
 
+      cy.log('Outcomes and Milestones');
       cy.goToOutcomesAndMilestones(0);
 
       cy.wrap(outcomes).each((element, index) => {
@@ -571,9 +564,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           targetDate: '1/2/2023'
         });
       });
-    });
 
-    it('should handle entering data in State Staff and Expenses', () => {
+      cy.log('State Staff and Expenses');
       cy.goToStateStaffAndExpenses(0);
 
       cy.findByRole('button', { name: /Add State Staff/i }).click();
@@ -655,9 +647,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         years,
         FFYcosts: [0, 0]
       });
-    });
 
-    it('should handle entering data in Private Contractor Costs', () => {
+      cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);
 
       cy.findByRole('button', { name: /Add Contractor/i }).click();
@@ -708,9 +699,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         years,
         FFYcosts: [0, 0]
       });
-    });
 
-    it('should handle entering data in Budget and FFP', () => {
+      cy.log('Budget and FFP');
       cy.goToBudgetAndFFP(0);
 
       cy.then(() => {
@@ -788,9 +778,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             });
         });
       });
-    });
 
-    it('should handle entering data in Activity Schedule Summary', () => {
+      cy.log('Activity Schedule Summary');
       cy.goToActivityScheduleSummary();
       schedulePage
         .getAllActivityScheduleMilestoneTables()
@@ -806,9 +795,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       schedulePage
         .getActivityScheduleMilestoneName(0, 0)
         .should('eq', "Miles's Milestone");
-    });
 
-    it('should handle entering data in Proposed Budget', () => {
+      cy.log('Proposed Budget');
       cy.goToProposedBudget();
 
       cy.then(() => {
@@ -858,9 +846,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
         });
       });
-    });
 
-    it('should display the correct data in Export views', () => {
+      cy.log('Export Views');
       cy.goToExportView();
 
       cy.findByRole('heading', { name: /Key State Personnel/i })

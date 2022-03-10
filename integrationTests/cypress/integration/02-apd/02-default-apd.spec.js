@@ -2,17 +2,11 @@
 import { testDefaultAPDOverview } from '../../helpers/apd/apd-overview';
 import { testDefaultKeyStatePersonnel } from '../../helpers/apd/key-state-personnel';
 import { testDefaultResultsOfPreviousActivities } from '../../helpers/apd/results-of-previous-activities';
-import { testDefaultActivityDashboard } from '../../helpers/apd/activity/activity-dashboard';
-import { testDefaultActivityOverview } from '../../helpers/apd/activity/activity-overview';
-import { testDefaultOutcomesAndMilestones } from '../../helpers/apd/activity/outcomes-and-milestones';
-import { testDefaultStateStaffAndExpenses } from '../../helpers/apd/activity/state-staff-and-expenses';
-import { testDefaultPrivateContractorCosts } from '../../helpers/apd/activity/private-contractor-costs';
-import { testDefaultCostAllocationAndOtherFunding } from '../../helpers/apd/activity/cost-allocation-and-other-funding';
-import { testDefaultBudgetAndFFP } from '../../helpers/apd/activity/budget-and-ffp';
 import { testDefaultActivityScheduleSummary } from '../../helpers/apd/activity-schedule-summary';
 import { testDefaultProposedBudget } from '../../helpers/apd/proposed-budget';
 import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance';
 import { testDefaultExecutiveSummary } from '../../helpers/apd/executive-summary';
+import { checkDefaultActivity } from '../../helpers/apd/activity/check-default-activity';
 
 // Tests the default values of an APD
 describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
@@ -67,34 +61,8 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
       testDefaultResultsOfPreviousActivities(years);
     });
 
-    describe('default Activities', () => {
-      describe('default Activity Dashboard', () => {
-        testDefaultActivityDashboard(years);
-      });
-
-      describe('default Activity Overview', () => {
-        testDefaultActivityOverview(years);
-      });
-
-      describe('default Outcomes and Milestones', () => {
-        testDefaultOutcomesAndMilestones(years);
-      });
-
-      describe('default State Staff and Expenses', () => {
-        testDefaultStateStaffAndExpenses(years);
-      });
-
-      describe('default Private Contractor Costs', () => {
-        testDefaultPrivateContractorCosts(years);
-      });
-
-      describe('default Cost Allocation and Other Funding', () => {
-        testDefaultCostAllocationAndOtherFunding(years);
-      });
-
-      describe('default Budget and FFP', () => {
-        testDefaultBudgetAndFFP(years);
-      });
+    describe('Checks Default Activity', () => {
+      checkDefaultActivity(years);
     });
 
     describe('default Activity Schedule Summary', () => {
