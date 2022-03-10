@@ -18,7 +18,7 @@ const Activity = ({ activity, activityIndex }) => {
           {outcome.outcome || 'Outcome not specified'}
         </p>
         <div className="ds-u-margin-top--2">
-          <ul className="ds-c-list--bare">
+          <ul className="ds-c-list--bare subform__container">
             <strong>Metrics: </strong>
             {outcome.metrics.map(({ metric }, index) => (
               <li key={uuidv4()} className="ds-u-margin-bottom--2">
@@ -120,15 +120,17 @@ const Activity = ({ activity, activityIndex }) => {
             <Dollars>{contractor.totalCost}</Dollars>
           </li>
           {Object.entries(contractor.years).map(([year, cost]) => (
-            <li key={year}>
+            <li className='ds-u-margin-left--1 ds-u-margin-top--1' key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
               {contractor.hourly.useHourly === true && (
                 <Fragment key={uuidv4()}>
-                  <p>Number of hours: {contractor.hourly.data[year].hours}</p>
-                  <p>
-                    Hourly rate:{' '}
-                    <Dollars>{contractor.hourly.data[year].rate}</Dollars>
-                  </p>
+                  <div className='subform__container'>
+                    <p>Number of hours: {contractor.hourly.data[year].hours}</p>
+                    <p>
+                      Hourly rate:{' '}
+                      <Dollars>{contractor.hourly.data[year].rate}</Dollars>
+                    </p>
+                  </div>
                 </Fragment>
               )}
             </li>
@@ -193,20 +195,22 @@ const Activity = ({ activity, activityIndex }) => {
         </p>
       )}
 
-      <p>
-        <strong>
-          This activity does not support the Medicaid standards and conditions
-          from 42 CFR 433.112.
-        </strong>
-      </p>
-      {activity.standardsAndConditions.doesNotSupport ? (
-        <p>{activity.standardsAndConditions.doesNotSupport}</p>
-      ) : (
+      <div className='subform__container'>
         <p>
-          No response was provided for how this activity will support the
-          Medicaid standards and conditions.
+          <strong>
+            This activity does not support the Medicaid standards and conditions
+            from 42 CFR 433.112.
+          </strong>
         </p>
-      )}
+        {activity.standardsAndConditions.doesNotSupport ? (
+          <p>{activity.standardsAndConditions.doesNotSupport}</p>
+        ) : (
+          <p>
+            No response was provided for how this activity will support the
+            Medicaid standards and conditions.
+          </p>
+        )}
+      </div>
 
       <h3 className="viewonly-activity-header">
         <small>
