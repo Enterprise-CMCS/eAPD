@@ -8,6 +8,8 @@ WORKDIR /app
 ADD ./package.json .
 ADD ./package-lock.json .
 
+RUN chown -R node:node /app
+USER node:node
 RUN npm ci --no-audit
 
 CMD npm run start
