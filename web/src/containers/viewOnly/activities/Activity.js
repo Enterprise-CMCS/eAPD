@@ -279,20 +279,22 @@ const Activity = ({ activity, activityIndex }) => {
         .map(([year, narrative]) => (
           <Fragment key={uuidv4()}>
             <h3>FFY {year}</h3>
-            <h4>Other Funding Description</h4>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: narrative.otherSources
-              }}
-            />
-            <div>
-              <strong>Other Funding Amount: </strong>
-              <Dollars>
-                {
-                  (activity.costAllocation[year.toString()] || { other: 0 })
-                    .other
-                }
-              </Dollars>
+            <div className='subform__container'>
+              <h4>Other Funding Description</h4>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: narrative.otherSources
+                }}
+              />
+              <div>
+                <strong>Other Funding Amount: </strong>
+                <Dollars>
+                  {
+                    (activity.costAllocation[year.toString()] || { other: 0 })
+                      .other
+                  }
+                </Dollars>
+              </div>
             </div>
             <hr className="subsection-rule" />
           </Fragment>
