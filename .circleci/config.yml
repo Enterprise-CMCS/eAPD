@@ -388,6 +388,9 @@ jobs:
             nvm install 16.13.2
             nvm alias default 16.13.2
             nvm use 16.13.2
+            node -v 
+            npm -v
+            yarn -v
 
             yarn install --frozen-lockfile
             npx cypress install --force
