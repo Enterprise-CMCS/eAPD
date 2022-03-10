@@ -359,12 +359,6 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb || true
             sudo apt-get -f install
             sudo dpkg -i google-chrome-stable_current_amd64.deb
-            # Switch to Node 16.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.13.2
-            nvm alias default 16.13.2
-            nvm use 16.13.2
       - run:
           name: set up environment
           working_directory: ~/project
@@ -387,6 +381,14 @@ jobs:
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
             cp ../api/seeds/test/tokens.json ./tokens.json
+
+            # Switch to Node 16.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.13.2
+            nvm alias default 16.13.2
+            nvm use 16.13.2
+
             yarn install --frozen-lockfile
             npx cypress install --force
             npx cypress verify
