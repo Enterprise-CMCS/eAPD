@@ -286,15 +286,13 @@ const Activity = ({ activity, activityIndex }) => {
                   __html: narrative.otherSources
                 }}
               />
-              <div>
-                <strong>Other Funding Amount: </strong>
-                <Dollars>
-                  {
-                    (activity.costAllocation[year.toString()] || { other: 0 })
-                      .other
-                  }
-                </Dollars>
-              </div>
+              <h4>Other Funding Amount: </h4>
+              <Dollars>
+                {
+                  (activity.costAllocation[year.toString()] || { other: 0 })
+                    .other
+                }
+              </Dollars>
             </div>
             <hr className="subsection-rule" />
           </Fragment>
