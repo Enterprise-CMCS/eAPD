@@ -40,25 +40,27 @@ source ~/.bashrc
 nvm install 16.13.2
 nvm alias default 16.13.2
 
+npm i -g yarn@1.22.17
+
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
-npm ci --no-audit
-npm install webpack
-API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" npm run build
+yarn add webpack@5.70.0 webpack-cli@4.9.2
+yarn install --frozen-lockfile
+API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
-npm ci --only=production
+yarn install --frozen-lockfile --production=true
 # Build and seed the database
-NODE_ENV=development DEV_DB_HOST=localhost npm run migrate
-NODE_ENV=development DEV_DB_HOST=localhost npm run seed
+NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate
+NODE_ENV=development DEV_DB_HOST=localhost yarn run seed
 
 # Setting Up New Relic Application Monitor
-npm install newrelic --save
+yarn add newrelic --save
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
@@ -102,7 +104,7 @@ echo "module.exports = {
 # Start it up
 pm2 start ecosystem.config.js
 
-NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY npm run migrate
+NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
 #cd ~
 #mongo -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
 E_USER
