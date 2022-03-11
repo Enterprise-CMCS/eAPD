@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
-    "preinstall": "npx npm-force-resolutions",
-    "cy:open": "./cypress-setup.sh open",
+    "cy:open": "./cypress-setup.sh open -- --numTestsKeptInMemory=20",
     "cy:run": "./cypress-setup.sh run",
     "cy:run:ci": "cypress run -C cypress.json --headless --browser chrome ",
     "lint": "eslint 'cypress/**/*.js'",

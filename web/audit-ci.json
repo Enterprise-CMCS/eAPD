@@ -1,14 +1,27 @@
 {
   "low": true,
-  "package-manager": "auto",
-  "allowlist": [1005291, 1006947, 1007048],
+  "package-manager": "yarn",
+  "allowlist": [
+    "*|@storybook/addon-docs>@mdx-js/mdx>remark-parse>trim",
+    "*|@storybook/addon-docs>@mdx-js/mdx>remark-mdx>remark-parse>trim",
+    "*|@storybook/addon-docs>@mdx-js/loader>@mdx-js/mdx>remark-mdx>remark-parse>trim",
+    "*|@storybook/addon-essentials>@storybook/addon-docs>@mdx-js/loader>@mdx-js/mdx>remark-mdx>remark-parse>trim",
+    "*|@storybook/addon-docs>@storybook/core>@storybook/core-server>@storybook/csf-tools>@mdx-js/mdx>remark-mdx>remark-parse>trim",
+    "*|@storybook/addon-essentials>@storybook/addon-docs>@storybook/core>@storybook/core-server>@storybook/csf-tools>@mdx-js/mdx>remark-mdx>remark-parse>trim",
+    "*|@storybook/react>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent",
+    "*|@storybook/addon-controls>@storybook/core-common>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent",
+    "*|@storybook/addon-essentials>@storybook/addon-controls>@storybook/core-common>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent",
+    "*|@storybook/addon-essentials>@storybook/addon-docs>@storybook/builder-webpack4>@storybook/core-common>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent",
+    "*|@storybook/addon-docs>@storybook/core>@storybook/core-server>@storybook/builder-webpack4>@storybook/core-common>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent",
+    "*|@storybook/addon-essentials>@storybook/addon-docs>@storybook/core>@storybook/core-server>@storybook/builder-webpack4>@storybook/core-common>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent"
+  ],
   "_comment": {
-    "1005291": {
+    "trim": {
       "advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
       "module": "trim",
       "affects": ["@storybook/addon-docs@6.4.18 - storybook"]
     },
-    "1006947": {
+    "glob-parent": {
       "advisory": "https://github.com/advisories/GHSA-ww39-953v-wcq6",
       "module": "glob-parent",
       "affects": [
@@ -16,6 +29,5 @@
         "@storybook/react@6.4.18 - storybook"
       ]
     }
-  },
-  "registry": "https://registry.npmjs.org"
+  }
 }

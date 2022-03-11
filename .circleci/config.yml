@@ -260,10 +260,10 @@ jobs:
   # These jobs don't rely on anything else having happened first, and cut
   # across both backend and frontend.
 
-  # Installs npm dependencies for the frontend and backend pieces, then saves
-  # those in the workflow workspace. Save the npm cache to CircleCI cache to
+  # Installs yarn dependencies for the frontend and backend pieces, then saves
+  # those in the workflow workspace. Save the yarn cache to CircleCI cache to
   # speed up subsequent builds, but don't save the dependencies to cache
-  # because "npm ci" deletes the node_modules folder anyway so it's pointless.
+  # because "yarn install --frozen-lockfile" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
       - image: cimg/node:16.13.2
@@ -273,15 +273,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
       - run:
           name: install web dependencies
           working_directory: ~/project/web
-          command: npm ci
+          command: yarn install --frozen-lockfile
       - run:
           name: install api dependencies
           working_directory: ~/project/api
-          command: npm ci
+          command: yarn install --frozen-lockfile
       - run:
           name: setup nvm
           command: |
@@ -294,9 +294,9 @@ jobs:
             echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - save_cache:
-          key: cms-hitech-apd-npm-{{ checksum "web/package-lock.json" }}-{{ checksum "api/package-lock.json" }}
+          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
           paths:
-            - /root/.npm
+            - /root/.yarnrc
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -335,8 +335,8 @@ jobs:
           password: $DOCKER_EAPD_PW
     steps:
       - checkout
-      - run: npm install glob
-      - run: npm install js-yaml
+      - run: yarn add glob
+      - run: yarn add js-yaml
       - run:
           working_directory: ~/project/web
           command: node yaml-tests.js
@@ -344,7 +344,7 @@ jobs:
   e2e test:
     machine:
       image: ubuntu-2004:202104-01
-    parallelism: 4
+    parallelism: 5
     steps:
       - checkout
       - attach_workspace:
@@ -359,11 +359,6 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb || true
             sudo apt-get -f install
             sudo dpkg -i google-chrome-stable_current_amd64.deb
-            # Switch to Node 16.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.13.2
-            nvm alias default 16.13.2
       - run:
           name: set up environment
           working_directory: ~/project
@@ -377,8 +372,8 @@ jobs:
 
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
-            docker-compose exec api npm run migrate
-            docker-compose exec api npm run seed
+            docker-compose exec api yarn run migrate
+            docker-compose exec api yarn run seed
       - run:
           name: set up cypress
           working_directory: ~/project/integrationTests
@@ -386,17 +381,62 @@ jobs:
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
             cp ../api/seeds/test/tokens.json ./tokens.json
-            npm install
+
+            # Switch to Node 16.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.13.2
+            nvm alias default 16.13.2
+            nvm use 16.13.2
+
+            yarn install --frozen-lockfile
             npx cypress install --force
             npx cypress verify
       - run:
-          name: run e2e tests
+          name: run e2e tests authentication
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
-            export NODE_ENV=development
-            export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
-            npm run cy:run:ci -- --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests"
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.spec.js"; fi
+      - run:
+          name: run e2e tests apd - basics
+          working_directory: ~/project/integrationTests
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.spec.js"; fi
+      - run:
+          name: run e2e tests apd - default
+          working_directory: ~/project/integrationTests
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.spec.js"; fi
+      - run:
+          name: run e2e tests apd - data
+          working_directory: ~/project/integrationTests
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.spec.js"; fi
+      - run:
+          name: run e2e tests admin
+          working_directory: ~/project/integrationTests
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
@@ -419,12 +459,12 @@ jobs:
   #        name: run tests
   #        working_directory: ~/project/api
   #        command: |
-  #          # Switch to Node 14.
-  #          sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs npm
+  #          # Switch to Node 16.13.2.
+  #          sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs yarn
   #          export NVM_DIR="/opt/circleci/.nvm"
   #          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  #          nvm install 14
-  #          nvm alias default 14
+  #          nvm install 16.13.2
+  #          nvm alias default 16.13.2
   #          nvm i
   #          ./endpoint-tests/endpoint.sh
 
@@ -467,7 +507,7 @@ jobs:
       - run:
           name: run linter
           working_directory: ~/project/api
-          command: npm run lint
+          command: yarn lint
 
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
@@ -521,7 +561,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" npm run build
+          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -541,7 +581,7 @@ jobs:
       - run:
           name: run linter
           working_directory: ~/project/web
-          command: npm run lint
+          command: yarn lint
 
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
@@ -557,7 +597,7 @@ jobs:
       - run:
           name: run tests
           working_directory: ~/project/web
-          command: npm test -- --runInBand
+          command: yarn test -- --runInBand
       - run:
           name: report coverage
           when: always
@@ -586,7 +626,7 @@ jobs:
           name: vulnerability scan
           working_directory: ~/project/<< parameters.path >>
           command: |
-            npm run audit
+            yarn run audit
 
   owasp zap scan:
     machine:
@@ -607,8 +647,8 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml up -d
-            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run migrate
-            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing npm run seed
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
           command: |
@@ -821,7 +861,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install zip -y
             cd api
-            npm ci --only=production
+            yarn install --frozen-lockfile --production=true
             cd ..
             zip -r /tmp/backend.zip api/*
             zip -r /tmp/frontend.zip web/dist/*
