@@ -22,8 +22,7 @@
       "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly",
       "type": "object",
       "required": [
-        "data",
-        "useHourly"
+        "data"
       ],
       "properties": {
         "data": {
@@ -49,12 +48,12 @@
               }
             }
           }
-        },
-        "useHourly": {
-          "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/useHourly",
-          "type": "boolean"
         }
       }
+    },
+    "useHourly": {
+      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/useHourly",
+      "type": "boolean"
     },
     "name": {
       "$id": "#/properties/activities/items/properties/contractorResources/items/properties/name",

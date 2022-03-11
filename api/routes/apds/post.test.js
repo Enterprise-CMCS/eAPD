@@ -194,7 +194,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         },
         previousActivities: {
           previousActivitySummary: '',
-          previousActivityExpenses: {
+          actualExpenditures: {
             2004: {
               hithie: {
                 federalActual: 0,

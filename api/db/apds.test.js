@@ -196,11 +196,11 @@ tap.test('database wrappers / apds', async apdsTests => {
     updateAPDDocumentTests.test('with a valid patch', async test => {
       const {
         errors,
-        apd: { updatedAt, programOverview }
+        apd: { updatedAt, apdOverview: { programOverview } }
       } = await updateAPDDocument(id, 'co', [
         {
           op: 'replace',
-          path: `/programOverview`,
+          path: `/apdOverview/programOverview`,
           value: 'This is the test of a <a>program overview</a>'
         }
       ]);

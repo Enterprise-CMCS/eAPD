@@ -132,9 +132,9 @@
                 "hours": "",
                 "rate": ""
               }
-            },
-            "useHourly": false
+            }
           },
+          "useHourly": false,
           "name": "Super SLR Incorporated",
           "start": "",
           "totalCost": 32423,
@@ -443,9 +443,9 @@
                 "hours": "",
                 "rate": ""
               }
-            },
-            "useHourly": false
+            }
           },
+          "useHourly": false,
           "name": "Interface Vendor Inc.",
           "start": "",
           "totalCost": 26453574,
@@ -726,9 +726,9 @@
                 "hours": "",
                 "rate": ""
               }
-            },
-            "useHourly": false
+            }
           },
+          "useHourly": false,
           "name": "",
           "start": "",
           "totalCost": 3496874,
@@ -928,9 +928,9 @@
                 "hours": "",
                 "rate": ""
               }
-            },
-            "useHourly": false
+            }
           },
+          "useHourly": false,
           "name": "RFP Planning Vendor Inc.",
           "start": "",
           "totalCost": 4368734,
@@ -1114,9 +1114,9 @@
                 "hours": "",
                 "rate": ""
               }
-            },
-            "useHourly": false
+            }
           },
+          "useHourly": false,
           "name": "TBD",
           "start": "",
           "totalCost": 246477,
@@ -1308,9 +1308,9 @@
                 "hours": "",
                 "rate": ""
               }
-            },
-            "useHourly": false
+            }
           },
+          "useHourly": false,
           "name": "Tech Consulting Inc.",
           "start": "",
           "totalCost": 264574,
