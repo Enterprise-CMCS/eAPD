@@ -25,8 +25,8 @@ jobs:
       - name: Install and Build
         run: |
           cd web
-          npm install
-          npm run build:storybook
+          yarn install
+          yarn build:storybook
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.8
         with:
