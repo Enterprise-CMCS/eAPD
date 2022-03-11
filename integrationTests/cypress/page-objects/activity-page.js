@@ -155,7 +155,7 @@ class ActivityPage {
     cy.contains(`Total Contract Cost: $${addCommas(totalCosts)}`).should(
       'exist'
     );
-    this.checkFFYcosts({ years, FFYcosts });
+    // this.checkFFYcosts({ years, FFYcosts });
   };
 }
 
