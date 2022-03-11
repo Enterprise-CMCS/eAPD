@@ -262,6 +262,7 @@ nvm alias default 16.13.2
 # This is what'll manage running the API Node app. It'll keep it alive and make
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
+npm i -g yarn@1.22.17
 # Get the built API code
 cd /app
 curl -o backend.zip -L __BUILDURL__
@@ -272,6 +273,7 @@ yarn install --frozen-lockfile --production=true
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
 yarn rebuild knex
+
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace the

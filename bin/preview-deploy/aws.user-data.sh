@@ -40,13 +40,15 @@ source ~/.bashrc
 nvm install 16.13.2
 nvm alias default 16.13.2
 
+npm i -g yarn@1.22.17
+
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD/web
+yarn add webpack@5.70.0 webpack-cli@4.9.2
 yarn install --frozen-lockfile
-yarn add webpack
-API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn run build
+API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up
