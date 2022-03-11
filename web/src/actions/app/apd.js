@@ -137,7 +137,6 @@ export const createApd =
     return axios
       .post('/apds')
       .then(async req => {
-        console.log({ req });
         dispatch({ type: CREATE_APD_SUCCESS, data: req.data });
         await dispatch(
           selectApd(req.data.id, `/apd/${req.data.id}`, { pushRoute })

@@ -132,12 +132,6 @@ export const stateDateToDisplay = date => {
   if (!date) {
     return 'Date not specified';
   }
-  console.log(
-    `stateDateToDisplay ${date} typeof ${typeof date} sliced to ${date.slice(
-      0,
-      10
-    )}`
-  );
 
   const m = moment(date.slice(0, 10), 'YYYY-MM-DD', true);
   if (m.isValid()) {

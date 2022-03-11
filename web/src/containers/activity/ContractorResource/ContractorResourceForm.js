@@ -21,6 +21,7 @@ import validationSchema from '../../../static/schemas/privateContractor';
 import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
 
 const getCheckedValue = value => {
+  console.log({ value });
   if (value != null) {
     return value ? 'yes' : 'no';
   }
@@ -33,9 +34,8 @@ const ContractorResourceForm = forwardRef(
     const {
       handleSubmit,
       control,
-      formState: { errors, isValid, isValidating },
-      resetField: resetFieldErrors,
-      getValues
+      formState: { errors, isValid },
+      resetField: resetFieldErrors
     } = useForm({
       defaultValues: {
         name: item.name,
@@ -53,22 +53,8 @@ const ContractorResourceForm = forwardRef(
     });
 
     useEffect(() => {
-      console.log('isValid changed');
-      console.log({ errors, isValid, isValidating });
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-      console.log('errors changed');
-      console.log({ errors, isValid, isValidating });
-    }, [errors, errors.useHourly, errors.hourly, errors.years]);
-
-    useEffect(() => {
-      console.log('isValidating changed');
-      console.log(`validating... hourly is ${getValues('useHourly')}`);
-      const { error, value } = validationSchema.validate(getValues());
-      console.log({ error, value, errors, isValid, isValidating });
-    }, [isValidating]);
 
     const initialState = item;
 
@@ -371,12 +357,6 @@ const ContractorResourceForm = forwardRef(
                                     handleHourlyHoursChange(ffy, e);
                                     hoursOnChange(e);
                                   }}
-                                  errorMessage={
-                                    errors?.hourly
-                                      ? errors?.hourly[ffy]?.hours?.message
-                                      : null
-                                  }
-                                  errorPlacement="bottom"
                                 />
                               )}
                             />
@@ -397,15 +377,29 @@ const ContractorResourceForm = forwardRef(
                                     handleHourlyRateChange(ffy, e);
                                     rateOnChange(e);
                                   }}
-                                  errorMessage={
-                                    errors?.hourly
-                                      ? errors?.hourly[ffy]?.rate?.message
-                                      : null
-                                  }
-                                  errorPlacement="bottom"
                                 />
                               )}
                             />
+                          </div>
+                          <div>
+                            <Fragment>
+                              {errors?.hourly && errors.hourly[ffy]?.hours && (
+                                <span
+                                  className="ds-c-inline-error ds-c-field__error-message"
+                                  role="alert"
+                                >
+                                  {errors.hourly[ffy]?.hours?.message}
+                                </span>
+                              )}
+                              {errors?.hourly && errors.hourly[ffy]?.rate && (
+                                <span
+                                  className="ds-c-inline-error ds-c-field__error-message"
+                                  role="alert"
+                                >
+                                  {errors.hourly[ffy]?.rate?.message}
+                                </span>
+                              )}
+                            </Fragment>
                           </div>
                         </Fragment>
                       ))}

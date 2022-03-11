@@ -28,9 +28,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
       data-cy="milestone-3252"
       label="Name"
       name="name"
-      onBlur={[Function]}
       onChange={[Function]}
-      onKeyUp={[Function]}
       type="text"
       value="Milestone name"
     >
@@ -68,9 +66,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
             errorPlacement="top"
             id="field_1"
             name="name"
-            onBlur={[Function]}
             onChange={[Function]}
-            onKeyUp={[Function]}
             setRef={[Function]}
             type="text"
             value="Milestone name"
@@ -81,9 +77,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
               data-cy="milestone-3252"
               id="field_1"
               name="name"
-              onBlur={[Function]}
               onChange={[Function]}
-              onKeyUp={[Function]}
               type="text"
               value="Milestone name"
             />
@@ -92,11 +86,11 @@ exports[`the MilestoneForm component renders correctly 1`] = `
       </FormControl>
     </TextField>
     <DateField
+      errorMessage=""
       hint=""
       label="Target completion date"
       onBlur={[Function]}
       onChange={[Function]}
-      onKeyUp={[Function]}
       value="1942-8-16"
     >
       <DateField
@@ -105,7 +99,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         dayInvalid={false}
         dayLabel="Day"
         dayName="day"
-        errorMessage={Array []}
+        errorMessage=""
         errorPlacement="bottom"
         hint=""
         label="Target completion date"
@@ -113,10 +107,8 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         monthInvalid={false}
         monthLabel="Month"
         monthName="month"
-        onBlur={[Function]}
         onChange={[Function]}
         onComponentBlur={[Function]}
-        onKeyUp={[Function]}
         yearDefaultValue={1942}
         yearInvalid={false}
         yearLabel="Year"
@@ -124,7 +116,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
       >
         <FormControl
           component="fieldset"
-          errorMessage={Array []}
+          errorMessage=""
           errorPlacement="bottom"
           hint=""
           label="Target completion date"
@@ -132,12 +124,12 @@ exports[`the MilestoneForm component renders correctly 1`] = `
           render={[Function]}
         >
           <fieldset
-            aria-invalid={true}
             className="ds-c-fieldset"
           >
             <FormLabel
               component="legend"
               errorId="field_2-error"
+              errorMessage=""
               hint=""
               id="field_2-label"
             >
@@ -149,9 +141,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   className=""
                 >
                   Target completion date
-                  <div
-                    className="ds-u-visibility--screen-reader"
-                  />
                 </span>
               </legend>
             </FormLabel>
@@ -166,10 +155,8 @@ exports[`the MilestoneForm component renders correctly 1`] = `
               monthInvalid={false}
               monthLabel="Month"
               monthName="month"
-              onBlur={[Function]}
               onChange={[Function]}
               onComponentBlur={[Function]}
-              onKeyUp={[Function]}
               yearDefaultValue={1942}
               yearInvalid={false}
               yearLabel="Year"
@@ -424,15 +411,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                 </TextField>
               </div>
             </DateInput>
-            <InlineError
-              id="field_2-error"
-            >
-              <span
-                className="ds-c-inline-error ds-c-field__error-message"
-                id="field_2-error"
-                role="alert"
-              />
-            </InlineError>
           </fieldset>
         </FormControl>
       </DateField>
