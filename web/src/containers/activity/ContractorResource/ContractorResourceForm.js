@@ -1,6 +1,5 @@
 import { FormLabel, TextField, ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import Joi from 'joi';
 import React, {
   Fragment,
   forwardRef,
@@ -18,68 +17,8 @@ import Dollars from '../../../components/Dollars';
 import NumberField from '../../../components/NumberField';
 import RichText from '../../../components/RichText';
 
-// import validationSchema from '../../../static/schemas/privateContractor';
+import validationSchema from '../../../static/schemas/privateContractor';
 import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
-
-const schemas = Joi.object({
-  name: Joi.string().required().messages({
-    'string.empty': 'Name is required'
-  }),
-  description: Joi.string().required().messages({
-    'string.empty': 'Description is required'
-  }),
-  start: Joi.date().iso().required().messages({
-    'date.base': 'Start date is required',
-    'date.empty': 'Start date is required',
-    'date.format': 'Start date must be a valid date'
-  }),
-  end: Joi.date().iso().min(Joi.ref('start')).required().messages({
-    'date.base': 'End date is required',
-    'date.empty': 'End date is required',
-    'date.format': 'End date must be a valid date',
-    'date.min': 'End date must be after start date'
-  }),
-  totalCost: Joi.number().required().messages({
-    'number.empty': 'Total cost is required',
-    'number.format': 'Total cost must be a valid number'
-  }),
-  useHourly: Joi.string().required().messages({
-    'string.empty': 'Must select hourly or yearly'
-  }),
-  hourly: Joi.alternatives().conditional('useHourly', {
-    is: 'yes',
-    then: Joi.object().pattern(
-      /\d{4}/,
-      Joi.object({
-        hours: Joi.number().positive().required().messages({
-          'number.empty': 'Hours is required',
-          'number.format': 'Hours must be a valid number',
-          'number.positive': 'Hours must be positive'
-        }),
-        rate: Joi.number().positive().greater(0).required().messages({
-          'number.empty': 'Rate is required',
-          'number.format': 'Rate must be a valid number',
-          'number.positive': 'Rate must be positive',
-          'number.greater': 'Rate must be greater than 0'
-        })
-      })
-    ),
-    otherwise: Joi.any()
-  }),
-  years: Joi.alternatives().conditional('useHourly', {
-    is: 'no',
-    then: Joi.object().pattern(
-      /\d{4}/,
-      Joi.number().positive().greater(0).required().messages({
-        'number.empty': 'Cost is required',
-        'number.format': 'Cost must be a valid number',
-        'number.positive': 'Cost must be positive',
-        'number.greater': 'Cost must be greater than 0'
-      })
-    ),
-    otherwise: Joi.any()
-  })
-});
 
 const getCheckedValue = value => {
   if (value != null) {
@@ -110,7 +49,7 @@ const ContractorResourceForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(schemas)
+      resolver: joiResolver(validationSchema)
     });
 
     useEffect(() => {
@@ -127,7 +66,7 @@ const ContractorResourceForm = forwardRef(
     useEffect(() => {
       console.log('isValidating changed');
       console.log(`validating... hourly is ${getValues('useHourly')}`);
-      const { error, value } = schemas.validate(getValues());
+      const { error, value } = validationSchema.validate(getValues());
       console.log({ error, value, errors, isValid, isValidating });
     }, [isValidating]);
 
