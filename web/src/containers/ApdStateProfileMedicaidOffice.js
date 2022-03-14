@@ -35,7 +35,9 @@ const ApdStateProfile = ({
   keyStatePersonnel
 }) => {
   const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
-
+  
+  console.log("keyStatePersonnel", keyStatePersonnel);
+  
   const handleChange = action => ({ target: { value } }) => {
     action(value);
   };

@@ -482,6 +482,7 @@ const reducer = (state = initialState, action) => {
           ),
           assurancesAndCompliances: getAssurancesAndCompliances(action.apd.assurancesAndCompliances),
           keyStatePersonnel: {
+            ...action.apd.keyStatePersonnel,
             keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
             ...kp,
             key: generateKey()
