@@ -19,15 +19,15 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         // values so that if the states table info is missing any fields,
         // we preserve the defaults
 
-//         apd.keyStatePersonnel.medicaidDirector = {
-//           ...apd.keyStatePersonnel.medicaidDirector,
-//           ...stateProfile.medicaidDirector
-//         };
-// 
-//         apd.keyStatePersonnel.medicaidOffice = {
-//           ...apd.keyStatePersonnel.medicaidOffice,
-//           ...stateProfile.medicaidOffice
-//         };
+        apd.keyStatePersonnel.medicaidDirector = {
+          ...apd.keyStatePersonnel.medicaidDirector,
+          ...stateProfile.medicaidDirector
+        };
+
+        apd.keyStatePersonnel.medicaidOffice = {
+          ...apd.keyStatePersonnel.medicaidOffice,
+          ...stateProfile.medicaidOffice
+        };
       }
 
       try {
@@ -36,7 +36,6 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
           status: 'draft',
           ...apd
         });
-        console.log("id or whatever", id);
 
         return res.send({
           ...apd,
