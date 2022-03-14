@@ -1,7 +1,10 @@
 import { TextField, Button } from '@cmsgov/design-system';
 
 import PropTypes from 'prop-types';
-import React, { forwardRef, useReducer } from 'react';
+import Joi from 'joi';
+import React, { forwardRef, useReducer, useEffect, useDebugValue } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import Icon, { faPlusCircle } from '../../../components/Icons';
@@ -11,9 +14,52 @@ import { saveOutcome as actualSaveOutcome } from '../../../actions/editActivity'
 
 import { newOutcomeMetric } from '../../../reducers/activities';
 
+const outcomeMetricSchema = Joi.object({
+  outcome: Joi.string().required().messages({
+    'string.empty': 'Object is required'
+  }),
+  metrics: Joi.array().items(Joi.string().required().messages({
+    'string.empty': 'Metric is required'
+  }))
+});
+
 const OutcomeAndMetricForm = forwardRef(
-  ({ activityIndex, item, index, saveOutcome }, ref) => {
+  ({ activityIndex, item, index, saveOutcome, setFormValid }, ref) => {
     OutcomeAndMetricForm.displayName = 'OutcomeAndMetricForm';
+    const {
+      handleSubmit,
+      control,
+      formState: { errors, isValid, isValidating },
+      resetField: resetFieldErrors,
+      getValues
+    } = useForm({
+      defaultValues: {
+        outcome: item.outcome,
+        metrics: item.metrics
+      },
+      mode: 'onBlur',
+      reValidateMode: 'onBlur',
+      resolver: joiResolver(outcomeMetricSchema)
+    })
+
+    useEffect(() => {
+      console.log('isValid changed');
+      console.log({ errors, isValid, isValidating });
+      setFormValid(isValid);
+    }, [isValid]);
+
+    useEffect(() => {
+      console.log('errors changed');
+      console.log({ errors, isValid, isValidating })
+    }, [errors]);
+
+    useEffect(() => {
+      console.log('isValidating changed');
+      const { error, value } = outcomeMetricSchema.validate(getValues());
+      console.log({ error, value, errors, isValid, isValidating });
+    }, [isValidating]);
+
+    const initialState = item;
 
     function reducer(state, action) {
       switch (action.type) {
@@ -55,9 +101,18 @@ const OutcomeAndMetricForm = forwardRef(
 
     const [state, dispatch] = useReducer(reducer, item);
 
-    const handleSubmit = e => {
+    const handleOutcomeChange = e => {
+      dispatch({
+        type: 'updateField',
+        field: 'outcome',
+        value: e.target.value
+      });
+    };
+
+    const onSubmit = e => {
       e.preventDefault();
       saveOutcome(activityIndex, index, state);
+      handleSubmit(e);
     };
 
     const handleAddMetric = () => {
@@ -78,25 +133,29 @@ const OutcomeAndMetricForm = forwardRef(
       <form
         index={index}
         key={`activity${activityIndex}-index${index}-form`}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       >
-        <TextField
-          key={`activity${activityIndex}-index${index}`}
-          data-cy={`outcome-${index}`}
+        <Controller
           name="outcome"
-          label="Outcome"
-          className="remove-clearfix"
-          hint="Describe a distinct and measurable improvement for this system."
-          value={state.outcome}
-          multiline
-          rows="4"
-          onChange={e =>
-            dispatch({
-              type: 'updateField',
-              field: 'outcome',
-              value: e.target.value
-            })
-          }
+          control={control}
+          render={({ field: { onChange, ...props} }) => (
+            <TextField
+              {...props}
+              key={`activity${activityIndex}-index${index}`}
+              data-cy={`outcome-${index}`}
+              label="Outcome"
+              className="remove-clearfix"
+              hint="Describe a distinct and measurable improvement for this system."
+              multiline
+              rows="4"
+              onChange={e =>{
+                handleOutcomeChange(e);
+                onChange(e);
+              }}
+              errorMessage={errors?.outcome?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
         {state.metrics.map(({ key, metric }, i) => (
           <Review
