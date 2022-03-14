@@ -40,7 +40,9 @@ source ~/.bashrc
 nvm install 16.13.2
 nvm alias default 16.13.2
 
-npm i -g yarn@1.22.17
+# Install yarn
+corepack enable
+npm i -g corepack
 
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
