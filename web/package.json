@@ -144,7 +144,7 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "6.4.19",
+    "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "6.4.19",
     "@storybook/addon-controls": "6.4.19",
     "@storybook/addon-docs": "6.4.19",
