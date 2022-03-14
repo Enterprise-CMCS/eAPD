@@ -144,7 +144,7 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "6.4.19",
+    "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "6.4.19",
     "@storybook/addon-controls": "6.4.19",
     "@storybook/addon-docs": "6.4.19",
@@ -194,5 +194,6 @@
     "react-router": "can't upgrade to v6 because our system requires routes to be connected to redux",
     "react-router-dom": "can't upgrade to v6 because our system requires routes to be connected to redux",
     "history": "can't upgrade to 17 react-router v6"
-  }
+  },
+  "packageManager": "yarn@1.22.15"
 }
