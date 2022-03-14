@@ -100,7 +100,7 @@ module.exports = {
                   'Brief description of MMIS-funded activities contained in this APD'
               }
             }
-          }
+          },
           activities: arrayOf({
             type: 'object',
             properties: {
@@ -511,70 +511,74 @@ module.exports = {
             }
           },
           previousActivities: {
-            previousActivitySummary: {
-              type: 'string',
-              description:
-                'High-level outline of activities approved in previous APD'
-            },
-            actualExpenditures: {
-              type: 'object',
-              'x-patternProperties': {
-                '^[0-9]{4}$': {
-                  type: 'object',
-                  properties: {
-                    hithie: {
-                      type: 'object',
-                      description: 'HIT- and HIE-funded expenses',
-                      properties: {
-                        federalActual: {
-                          type: 'number',
-                          description: 'Total federal share actually spent'
-                        },
-                        totalApproved: {
-                          type: 'number',
-                          description: 'Total approved in the previous APD'
+            type: 'object',
+            description: 'Previous Activities section',
+            properties: {
+              previousActivitySummary: {
+                type: 'string',
+                description:
+                  'High-level outline of activities approved in previous APD'
+              },
+              actualExpenditures: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      hithie: {
+                        type: 'object',
+                        description: 'HIT- and HIE-funded expenses',
+                        properties: {
+                          federalActual: {
+                            type: 'number',
+                            description: 'Total federal share actually spent'
+                          },
+                          totalApproved: {
+                            type: 'number',
+                            description: 'Total approved in the previous APD'
+                          }
                         }
-                      }
-                    },
-                    mmis: {
-                      type: 'object',
-                      description: 'HIT-funded expenses',
-                      properties: {
-                        50: {
-                          federalActual: {
-                            type: 'number',
-                            description: 'Total federal share actually spent'
+                      },
+                      mmis: {
+                        type: 'object',
+                        description: 'HIT-funded expenses',
+                        properties: {
+                          50: {
+                            federalActual: {
+                              type: 'number',
+                              description: 'Total federal share actually spent'
+                            },
+                            totalApproved: {
+                              type: 'number',
+                              description: 'Total approved in the previous APD'
+                            }
                           },
-                          totalApproved: {
-                            type: 'number',
-                            description: 'Total approved in the previous APD'
-                          }
-                        },
-                        75: {
-                          federalActual: {
-                            type: 'number',
-                            description: 'Total federal share actually spent'
+                          75: {
+                            federalActual: {
+                              type: 'number',
+                              description: 'Total federal share actually spent'
+                            },
+                            totalApproved: {
+                              type: 'number',
+                              description: 'Total approved in the previous APD'
+                            }
                           },
-                          totalApproved: {
-                            type: 'number',
-                            description: 'Total approved in the previous APD'
-                          }
-                        },
-                        90: {
-                          federalActual: {
-                            type: 'number',
-                            description: 'Total federal share actually spent'
-                          },
-                          totalApproved: {
-                            type: 'number',
-                            description: 'Total approved in the previous APD'
+                          90: {
+                            federalActual: {
+                              type: 'number',
+                              description: 'Total federal share actually spent'
+                            },
+                            totalApproved: {
+                              type: 'number',
+                              description: 'Total approved in the previous APD'
+                            }
                           }
                         }
                       }
                     }
                   }
                 }
-              }
+              }              
             }
           },
           state: {
