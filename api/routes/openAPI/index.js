@@ -76,6 +76,31 @@ module.exports = {
             description:
               'The APD document name, following SEA naming conventions'
           },
+          apdOverview: {
+            type: 'object',
+            description: 'APD Overview section',
+            properties: {
+              programOverview: {
+                type: 'string',
+                description: 'An overview of the overall program'
+              },
+              narrativeHIE: {
+                type: 'string',
+                description:
+                  'Brief description of HIE-funded activities contained in this APD'
+              },
+              narrativeHIT: {
+                type: 'string',
+                description:
+                  'Brief description of HIT-funded activities contained in this APD'
+              },
+              narrativeMMIS: {
+                type: 'string',
+                description:
+                  'Brief description of MMIS-funded activities contained in this APD'
+              }
+            }
+          }
           activities: arrayOf({
             type: 'object',
             properties: {
@@ -369,160 +394,41 @@ module.exports = {
               }
             }
           }),
-          federalCitations: {
+          assurancesAndCompliances: {
             type: 'object',
             description:
               'Federal citations that states must assert compliance with. This is a free-form object.'
           },
-          incentivePayments: {
+          proposedBudget: {
             type: 'object',
-            description: 'APD incentive payments',
-            'x-patternProperties': {
-              '^e[hc](Amt|Ct)$': {
+            description: 'Proposed budget section',
+            properties: {
+              incentivePayments: {
                 type: 'object',
+                description: 'APD incentive payments',
                 'x-patternProperties': {
-                  '^[0-9]{4}$': {
+                  '^e[hc](Amt|Ct)$': {
                     type: 'object',
                     'x-patternProperties': {
-                      '^[1-4]$': {
-                        type: 'number',
-                        description:
-                          'EH or EC payment or count for the given federal fiscal year and quarter'
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          keyPersonnel: arrayOf({
-            type: 'object',
-            properties: {
-              costs: {
-                type: 'object',
-                'x-patternProperties': {
-                  '^[0-9]{4}$': {
-                    type: 'number',
-                    description: `Person's cost for the year described by the property name`
-                  }
-                }
-              },
-              email: { type: 'string', description: `Person's email address` },
-              hasCosts: {
-                type: 'boolean',
-                description:
-                  'Whether the person has costs attributable to the project'
-              },
-              isPrimary: {
-                type: 'boolean',
-                description:
-                  'Whether the person is the primary point of contact for the APD'
-              },
-              name: { type: 'string', description: `Person's name` },
-              fte: {
-                type: 'object',
-                'x-patternProperties': {
-                  '^[0-9]{0,2}': {
-                    type: 'number',
-                    description: `FTE equivalent of this person's time dedicated to the project`
-                  }
-                }
-              },
-              position: { type: 'string', description: `Person's position` }
-            }
-          }),
-          narrativeHIE: {
-            type: 'string',
-            description:
-              'Brief description of HIE-funded activities contained in this APD'
-          },
-          narrativeHIT: {
-            type: 'string',
-            description:
-              'Brief description of HIT-funded activities contained in this APD'
-          },
-          narrativeMMIS: {
-            type: 'string',
-            description:
-              'Brief description of MMIS-funded activities contained in this APD'
-          },
-          previousActivityExpenses: {
-            type: 'object',
-            'x-patternProperties': {
-              '^[0-9]{4}$': {
-                type: 'object',
-                properties: {
-                  hithie: {
-                    type: 'object',
-                    description: 'HIT- and HIE-funded expenses',
-                    properties: {
-                      federalActual: {
-                        type: 'number',
-                        description: 'Total federal share actually spent'
-                      },
-                      totalApproved: {
-                        type: 'number',
-                        description: 'Total approved in the previous APD'
-                      }
-                    }
-                  },
-                  mmis: {
-                    type: 'object',
-                    description: 'HIT-funded expenses',
-                    properties: {
-                      50: {
-                        federalActual: {
-                          type: 'number',
-                          description: 'Total federal share actually spent'
-                        },
-                        totalApproved: {
-                          type: 'number',
-                          description: 'Total approved in the previous APD'
-                        }
-                      },
-                      75: {
-                        federalActual: {
-                          type: 'number',
-                          description: 'Total federal share actually spent'
-                        },
-                        totalApproved: {
-                          type: 'number',
-                          description: 'Total approved in the previous APD'
-                        }
-                      },
-                      90: {
-                        federalActual: {
-                          type: 'number',
-                          description: 'Total federal share actually spent'
-                        },
-                        totalApproved: {
-                          type: 'number',
-                          description: 'Total approved in the previous APD'
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        'x-patternProperties': {
+                          '^[1-4]$': {
+                            type: 'number',
+                            description:
+                              'EH or EC payment or count for the given federal fiscal year and quarter'
+                          }
                         }
                       }
                     }
                   }
                 }
-              }
+              }              
             }
           },
-          previousActivitySummary: {
-            type: 'string',
-            description:
-              'High-level outline of activities approved in previous APD'
-          },
-          programOverview: {
-            type: 'string',
-            description: 'An overview of the overall program'
-          },
-          state: {
-            type: 'string',
-            description:
-              'Two-letter ID of the state, territory, or district this APD belongs to, lowercase'
-          },
-          stateProfile: {
+          keyStatePersonnel: {
             type: 'object',
-            description: 'The state profile for this specific APD',
+            description: 'Key State Personnel section',
             properties: {
               medicaidDirector: {
                 type: 'object',
@@ -565,8 +471,116 @@ module.exports = {
                     description: 'State Medicaid office address ZIP code'
                   }
                 }
+              },
+              keyPersonnel: arrayOf({
+                type: 'object',
+                properties: {
+                  costs: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'number',
+                        description: `Person's cost for the year described by the property name`
+                      }
+                    }
+                  },
+                  email: { type: 'string', description: `Person's email address` },
+                  hasCosts: {
+                    type: 'boolean',
+                    description:
+                      'Whether the person has costs attributable to the project'
+                  },
+                  isPrimary: {
+                    type: 'boolean',
+                    description:
+                      'Whether the person is the primary point of contact for the APD'
+                  },
+                  name: { type: 'string', description: `Person's name` },
+                  fte: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{0,2}': {
+                        type: 'number',
+                        description: `FTE equivalent of this person's time dedicated to the project`
+                      }
+                    }
+                  },
+                  position: { type: 'string', description: `Person's position` }
+                }
+              })
+            }
+          },
+          previousActivities: {
+            previousActivitySummary: {
+              type: 'string',
+              description:
+                'High-level outline of activities approved in previous APD'
+            },
+            actualExpenditures: {
+              type: 'object',
+              'x-patternProperties': {
+                '^[0-9]{4}$': {
+                  type: 'object',
+                  properties: {
+                    hithie: {
+                      type: 'object',
+                      description: 'HIT- and HIE-funded expenses',
+                      properties: {
+                        federalActual: {
+                          type: 'number',
+                          description: 'Total federal share actually spent'
+                        },
+                        totalApproved: {
+                          type: 'number',
+                          description: 'Total approved in the previous APD'
+                        }
+                      }
+                    },
+                    mmis: {
+                      type: 'object',
+                      description: 'HIT-funded expenses',
+                      properties: {
+                        50: {
+                          federalActual: {
+                            type: 'number',
+                            description: 'Total federal share actually spent'
+                          },
+                          totalApproved: {
+                            type: 'number',
+                            description: 'Total approved in the previous APD'
+                          }
+                        },
+                        75: {
+                          federalActual: {
+                            type: 'number',
+                            description: 'Total federal share actually spent'
+                          },
+                          totalApproved: {
+                            type: 'number',
+                            description: 'Total approved in the previous APD'
+                          }
+                        },
+                        90: {
+                          federalActual: {
+                            type: 'number',
+                            description: 'Total federal share actually spent'
+                          },
+                          totalApproved: {
+                            type: 'number',
+                            description: 'Total approved in the previous APD'
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
+          },
+          state: {
+            type: 'string',
+            description:
+              'Two-letter ID of the state, territory, or district this APD belongs to, lowercase'
           },
           status: {
             type: 'string',
