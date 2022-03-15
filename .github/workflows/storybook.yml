@@ -1,18 +1,17 @@
 name: Deploy Storybook
-on: push
-# on:
-#   pull_request:
-#     branches:
-#       - main
-#     paths:
-#       [
-#         'web/.storybook/**',
-#         'web/src/stories/**',
-#         'web/src/**/*.story.js',
-#         'web/src/**/*.story.mdx',
-#         'web/src/components/**',
-#         'web/src/containers/**'
-#       ]
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      [
+        'web/.storybook/**',
+        'web/src/stories/**',
+        'web/src/**/*.story.js',
+        'web/src/**/*.story.mdx',
+        'web/src/components/**',
+        'web/src/containers/**'
+      ]
 jobs:
   storybook-deploy:
     runs-on: ubuntu-18.04
