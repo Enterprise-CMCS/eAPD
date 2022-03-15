@@ -18,7 +18,7 @@ const outcomeMetricSchema = Joi.object({
   outcome: Joi.string().required().messages({
     'string.empty': 'Object is required'
   }),
-  metrics: Joi.array().items(Joi.string().required().messages({
+  metrics: Joi.array().items(Joi.string().messages({
     'string.empty': 'Metric is required'
   }))
 });
@@ -30,7 +30,6 @@ const OutcomeAndMetricForm = forwardRef(
       handleSubmit,
       control,
       formState: { errors, isValid, isValidating },
-      resetField: resetFieldErrors,
       getValues
     } = useForm({
       defaultValues: {
@@ -123,8 +122,7 @@ const OutcomeAndMetricForm = forwardRef(
       dispatch({ type: 'removeMetric', index: metricIndex });
     };
 
-    const changeMetric =
-      i =>
+    const handleChangeMetric = (i, e) =>
       ({ target: { value } }) => {
         dispatch({ type: 'updateMetrics', metricIndex: i, value });
       };
@@ -136,13 +134,13 @@ const OutcomeAndMetricForm = forwardRef(
         onSubmit={onSubmit}
       >
         <Controller
+          key={`activity${activityIndex}-index${index}`}
+          data-cy={`outcome-${index}`}
           name="outcome"
           control={control}
           render={({ field: { onChange, ...props} }) => (
             <TextField
               {...props}
-              key={`activity${activityIndex}-index${index}`}
-              data-cy={`outcome-${index}`}
               label="Outcome"
               className="remove-clearfix"
               hint="Describe a distinct and measurable improvement for this system."
@@ -174,17 +172,28 @@ const OutcomeAndMetricForm = forwardRef(
               key={key}
               className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
             >
-              <TextField
-                id={`${activityIndex}-metric${i}`}
+              <Controller
                 name="metric"
-                data-cy={`metric-${index}-${i}`}
-                label="Metric"
-                className="remove-clearfix"
-                hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-                value={metric}
-                multiline
-                rows="4"
-                onChange={changeMetric(i)}
+                control={control}
+                render={({ field: { onChange, ...props} }) => (
+                  <TextField
+                    id={`${activityIndex}-metric${i}`}
+                    name={`metrics[${i}]`}
+                    data-cy={`metric-${index}-${i}`}
+                    label="Metric"
+                    className="remove-clearfix"
+                    hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+                    value={metric}
+                    multiline
+                    rows="4"
+                    // onChange={changeMetric(i)}
+                    onChange={e => {
+                      handleMetricChange(i, e);
+                      onChange(e)
+                    }}
+                    errorPlacement="bottom"
+                  />
+                )}
               />
             </div>
           </Review>
