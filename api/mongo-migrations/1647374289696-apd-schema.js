@@ -24,6 +24,7 @@ async function up () {
   const updatedApds = apds.map(apd => {
     // Add current properties to their respective new parent properties
     return {
+      id: apd.id,
       createdAt: apd.createdAt,
       updatedAt: apd.updatedAt,
       years: apd.years,
@@ -56,14 +57,12 @@ async function up () {
     }
   });
   
-  console.log("updated apd", updatedApds[0]);
-  
-  // Save them as new APDs
+  // Update them into the database
   try {
-    // insert the updated APDs into the mongo database
-    const res = apds.forEach( async apd => {
-      await this('APD').replaceOne({ _id: apd._id }, apd);
+    const res = updatedApds.forEach( async apd => {
+      await this('APD').replaceOne( apd._id, { ...apd });
     });
+    logger.info(`${res.length} APDs updated to new schema`);
   } catch (error) {
     logger.error(error);
   }
