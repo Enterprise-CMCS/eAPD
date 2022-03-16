@@ -9,3 +9,4 @@ storybook-static/*
 
 # stryker temp files
 .stryker-tmp
+reports
