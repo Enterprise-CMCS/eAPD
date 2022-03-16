@@ -14,7 +14,7 @@ import { saveOutcome as actualSaveOutcome } from '../../../actions/editActivity'
 
 import { newOutcomeMetric } from '../../../reducers/activities';
 
-const outcomeMetricSchema = Joi.object({
+const outcomeMetricSchema = Joi.object({ 
   outcome: Joi.string().required().messages({
     'string.base': 'Outcome is required',
     'string.empty': 'Outcome is required'
@@ -164,11 +164,7 @@ const OutcomeAndMetricForm = forwardRef(
         {state.metrics.map(({ key, metric }, i) => (
           <Review
             key={key}
-            onDeleteClick={
-              state.metrics.length === 1 && metric === ''
-                ? null
-                : () => handleDeleteMetric(index, i)
-            }
+            onDeleteClick={ () => handleDeleteMetric(index, i) }
             onDeleteLabel="Remove"
             skipConfirmation
             ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
