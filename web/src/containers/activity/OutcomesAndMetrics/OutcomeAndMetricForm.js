@@ -18,9 +18,12 @@ const outcomeMetricSchema = Joi.object({
   outcome: Joi.string().required().messages({
     'string.empty': 'Object is required'
   }),
-  metrics: Joi.array().items(Joi.string().messages({
-    'string.empty': 'Metric is required'
-  }))
+  metrics: Joi.array().when(Joi.array().min(1), {
+    then: Joi.array().min(1).items(Joi.string().required().messages({
+        'string.empty': 'Metric is required'
+      })),
+    otherwise: Joi.allow(null)
+  })
 });
 
 const OutcomeAndMetricForm = forwardRef(
@@ -122,9 +125,12 @@ const OutcomeAndMetricForm = forwardRef(
       dispatch({ type: 'removeMetric', index: metricIndex });
     };
 
-    const handleChangeMetric = (i, e) =>
-      ({ target: { value } }) => {
-        dispatch({ type: 'updateMetrics', metricIndex: i, value });
+    const handleMetricChange = (e, i) => {
+        dispatch({ 
+          type: 'updateMetrics', 
+          metricIndex: i, 
+          value: e.target.value 
+        });
       };
 
     return (
@@ -173,7 +179,7 @@ const OutcomeAndMetricForm = forwardRef(
               className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
             >
               <Controller
-                name="metric"
+                name="metrics"
                 control={control}
                 render={({ field: { onChange, ...props} }) => (
                   <TextField
@@ -186,11 +192,11 @@ const OutcomeAndMetricForm = forwardRef(
                     value={metric}
                     multiline
                     rows="4"
-                    // onChange={changeMetric(i)}
                     onChange={e => {
-                      handleMetricChange(i, e);
+                      handleMetricChange(e, i);
                       onChange(e)
                     }}
+                    errorMessage={errors?.metric?.message}
                     errorPlacement="bottom"
                   />
                 )}
