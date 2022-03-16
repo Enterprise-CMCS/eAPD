@@ -11,12 +11,16 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     className="ds-u-padding-y--0 visibility--screen"
   >
     <DateField
+      errorMessage=""
       label="Start date"
+      onBlur={[Function]}
       onChange={[Function]}
       value="1944-10-02"
     />
     <DateField
+      errorMessage=""
       label="End date"
+      onBlur={[Function]}
       onChange={[Function]}
       value="1944-11-08"
     />

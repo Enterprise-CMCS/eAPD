@@ -1,6 +1,5 @@
 import { FormLabel, TextField, ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import Joi from 'joi';
 import React, {
   Fragment,
   forwardRef,
@@ -18,70 +17,11 @@ import Dollars from '../../../components/Dollars';
 import NumberField from '../../../components/NumberField';
 import RichText from '../../../components/RichText';
 
-// import validationSchema from '../../../static/schemas/privateContractor';
+import validationSchema from '../../../static/schemas/privateContractor';
 import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
 
-const schemas = Joi.object({
-  name: Joi.string().required().messages({
-    'string.empty': 'Name is required'
-  }),
-  description: Joi.string().required().messages({
-    'string.empty': 'Description is required'
-  }),
-  start: Joi.date().iso().required().messages({
-    'date.base': 'Start date is required',
-    'date.empty': 'Start date is required',
-    'date.format': 'Start date must be a valid date'
-  }),
-  end: Joi.date().iso().min(Joi.ref('start')).required().messages({
-    'date.base': 'End date is required',
-    'date.empty': 'End date is required',
-    'date.format': 'End date must be a valid date',
-    'date.min': 'End date must be after start date'
-  }),
-  totalCost: Joi.number().required().messages({
-    'number.empty': 'Total cost is required',
-    'number.format': 'Total cost must be a valid number'
-  }),
-  useHourly: Joi.string().required().messages({
-    'string.empty': 'Must select hourly or yearly'
-  }),
-  hourly: Joi.alternatives().conditional('useHourly', {
-    is: 'yes',
-    then: Joi.object().pattern(
-      /\d{4}/,
-      Joi.object({
-        hours: Joi.number().positive().required().messages({
-          'number.empty': 'Hours is required',
-          'number.format': 'Hours must be a valid number',
-          'number.positive': 'Hours must be positive'
-        }),
-        rate: Joi.number().positive().greater(0).required().messages({
-          'number.empty': 'Rate is required',
-          'number.format': 'Rate must be a valid number',
-          'number.positive': 'Rate must be positive',
-          'number.greater': 'Rate must be greater than 0'
-        })
-      })
-    ),
-    otherwise: Joi.any()
-  }),
-  years: Joi.alternatives().conditional('useHourly', {
-    is: 'no',
-    then: Joi.object().pattern(
-      /\d{4}/,
-      Joi.number().positive().greater(0).required().messages({
-        'number.empty': 'Cost is required',
-        'number.format': 'Cost must be a valid number',
-        'number.positive': 'Cost must be positive',
-        'number.greater': 'Cost must be greater than 0'
-      })
-    ),
-    otherwise: Joi.any()
-  })
-});
-
 const getCheckedValue = value => {
+  console.log({ value });
   if (value != null) {
     return value ? 'yes' : 'no';
   }
@@ -94,9 +34,8 @@ const ContractorResourceForm = forwardRef(
     const {
       handleSubmit,
       control,
-      formState: { errors, isValid, isValidating },
-      resetField: resetFieldErrors,
-      getValues
+      formState: { errors, isValid },
+      resetField: resetFieldErrors
     } = useForm({
       defaultValues: {
         name: item.name,
@@ -110,26 +49,12 @@ const ContractorResourceForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(schemas)
+      resolver: joiResolver(validationSchema)
     });
 
     useEffect(() => {
-      console.log('isValid changed');
-      console.log({ errors, isValid, isValidating });
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-      console.log('errors changed');
-      console.log({ errors, isValid, isValidating });
-    }, [errors, errors.useHourly, errors.hourly, errors.years]);
-
-    useEffect(() => {
-      console.log('isValidating changed');
-      console.log(`validating... hourly is ${getValues('useHourly')}`);
-      const { error, value } = schemas.validate(getValues());
-      console.log({ error, value, errors, isValid, isValidating });
-    }, [isValidating]);
 
     const initialState = item;
 
@@ -432,12 +357,6 @@ const ContractorResourceForm = forwardRef(
                                     handleHourlyHoursChange(ffy, e);
                                     hoursOnChange(e);
                                   }}
-                                  errorMessage={
-                                    errors?.hourly
-                                      ? errors?.hourly[ffy]?.hours?.message
-                                      : null
-                                  }
-                                  errorPlacement="bottom"
                                 />
                               )}
                             />
@@ -458,15 +377,29 @@ const ContractorResourceForm = forwardRef(
                                     handleHourlyRateChange(ffy, e);
                                     rateOnChange(e);
                                   }}
-                                  errorMessage={
-                                    errors?.hourly
-                                      ? errors?.hourly[ffy]?.rate?.message
-                                      : null
-                                  }
-                                  errorPlacement="bottom"
                                 />
                               )}
                             />
+                          </div>
+                          <div>
+                            <Fragment>
+                              {errors?.hourly && errors.hourly[ffy]?.hours && (
+                                <span
+                                  className="ds-c-inline-error ds-c-field__error-message"
+                                  role="alert"
+                                >
+                                  {errors.hourly[ffy]?.hours?.message}
+                                </span>
+                              )}
+                              {errors?.hourly && errors.hourly[ffy]?.rate && (
+                                <span
+                                  className="ds-c-inline-error ds-c-field__error-message"
+                                  role="alert"
+                                >
+                                  {errors.hourly[ffy]?.rate?.message}
+                                </span>
+                              )}
+                            </Fragment>
                           </div>
                         </Fragment>
                       ))}

@@ -97,7 +97,6 @@ const setupTinyMCE = (upload, onBlur) => editor => {
   });
 
   editor.on('blur', () => {
-    console.log('onBlur');
     onBlur();
   });
 

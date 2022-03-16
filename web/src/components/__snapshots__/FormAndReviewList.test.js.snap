@@ -90,6 +90,7 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
       prop1="passed down"
       prop2="passed down"
       prop3="passed down"
+      setFormValid={[Function]}
     >
       <div />
     </Expanded>
@@ -109,6 +110,7 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
     </Button>
     <Button
       component="button"
+      disabled={false}
       id="form-and-review-list--done-btn"
       onClick={[Function]}
       type="button"
@@ -116,6 +118,7 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
     >
       <button
         className="ds-c-button ds-c-button--primary"
+        disabled={false}
         id="form-and-review-list--done-btn"
         onClick={[Function]}
         type="button"
