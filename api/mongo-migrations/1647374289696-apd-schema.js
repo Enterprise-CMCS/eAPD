@@ -23,9 +23,13 @@ async function up () {
   // Create new object by sections/new schema
   const updatedApds = apds.map(apd => {
     // Add current properties to their respective new parent properties
-    console.log('maybe', apd.stateProfile.medicaidDirector);
     return {
-      ...apd,
+      createdAt: apd.createdAt,
+      updatedAt: apd.updatedAt,
+      years: apd.years,
+      stateId: apd.stateId,
+      status: apd.status,
+      name: apd.name,
       apdOverview: {
         programOverview: apd.programOverview,
         narrativeHIT: apd.narrativeHIT,
@@ -41,10 +45,10 @@ async function up () {
         previousActivitySummary: apd.previousActivitySummary,
         actualExpenditures: apd.previousActivityExpenses
       },
-      // activities: [
-      //   ...apd.activities,
-      //   contractorResources: convertContractorResources(apd.activities.contractorResources)
-      // ],
+      activities: apd.activities.map(activity => ({
+        ...activity,
+        contractorResources: convertContractorResources(activity.contractorResources)
+      })),
       proposedBudget: {
         incentivePayments: apd.incentivePayments
       },
@@ -58,7 +62,7 @@ async function up () {
   try {
     // insert the updated APDs into the mongo database
     const res = apds.forEach( async apd => {
-      await this('APD').replaceOne({ _id: apd._id }, { apd });
+      await this('APD').replaceOne({ _id: apd._id }, apd);
     });
   } catch (error) {
     logger.error(error);
