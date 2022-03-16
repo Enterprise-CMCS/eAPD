@@ -23,6 +23,7 @@ async function up () {
   // Create new object by sections/new schema
   const updatedApds = apds.map(apd => {
     // Add current properties to their respective new parent properties
+    console.log('maybe', apd.stateProfile.medicaidDirector);
     return {
       ...apd,
       apdOverview: {
@@ -32,34 +33,33 @@ async function up () {
         narrativeMMIS: apd.narrativeMMIS
       },
       keyStatePersonnel: {
-        medicareDirector: apd.stateProfile.medicareDirector ?? apd.keyStatePersonnel.medicareDirector,
-        medicaidDirector: apd.stateProfile.medicaidDirector ?? apd.keyStatePersonnel.medicaidDirector,
-        keyPersonnel: apd.keyPersonnel ?? apd.keyStatePersonnel.keyPerssonel
+        medicaidDirector: apd.stateProfile.medicaidDirector,
+        medicaidOffice: apd.stateProfile.medicaidOffice,
+        keyPersonnel: apd.keyPersonnel
       },
       previousActivities: {
-        previousActivitySummary: apd.previousActivitySummary ?? apd.previousActivities.previousActivitySummary,
-        actualExpenditures: apd.previousActivityExpenses ?? apd.previousActivities.actualExpenditures
+        previousActivitySummary: apd.previousActivitySummary,
+        actualExpenditures: apd.previousActivityExpenses
       },
-      activities: [
-        ...apd.activities,
-        contractorResources: convertContractorResources(apd.activities.contractorResources)
-      ],
+      // activities: [
+      //   ...apd.activities,
+      //   contractorResources: convertContractorResources(apd.activities.contractorResources)
+      // ],
       proposedBudget: {
-        incentivePayments: apd.incentivePayments ?? apd.proposedBudget.incentivePayments
+        incentivePayments: apd.incentivePayments
       },
-      assurancesAndCompliances: apd.federalCitations ?? apd.assurancesAndCompliances
+      assurancesAndCompliances: apd.federalCitations
     }
-  })
+  });
+  
+  console.log("updated apd", updatedApds[0]);
   
   // Save them as new APDs
   try {
     // insert the updated APDs into the mongo database
-    const res = apds.forEach(apd => {
-      console.log("id:", apd.id);
-      console.log("_id:", apd._id);
-      await this('APD').update({_id: apd.id}, apd);
+    const res = apds.forEach( async apd => {
+      await this('APD').replaceOne({ _id: apd._id }, { apd });
     });
-    logger.info(`${res.length} APDs updated`);
   } catch (error) {
     logger.error(error);
   }
