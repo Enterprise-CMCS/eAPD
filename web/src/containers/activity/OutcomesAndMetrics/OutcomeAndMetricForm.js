@@ -2,7 +2,7 @@ import { TextField, Button } from '@cmsgov/design-system';
 
 import PropTypes from 'prop-types';
 import Joi from 'joi';
-import React, { forwardRef, useReducer, useEffect, useDebugValue } from 'react';
+import React, { forwardRef, useReducer, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -16,13 +16,13 @@ import { newOutcomeMetric } from '../../../reducers/activities';
 
 const outcomeMetricSchema = Joi.object({
   outcome: Joi.string().required().messages({
-    'string.empty': 'Object is required'
+    'string.base': 'Outcome is required',
+    'string.empty': 'Outcome is required'
   }),
-  metrics: Joi.object().pattern(
-      /\d+/,
-      Joi.string().messages({
-        'string.empty': 'Metric is required'      
-      })
+  metrics: Joi.array().items(
+    Joi.string().messages({
+      'string.empty': 'Metric is required'
+    })
   )
 });
 
@@ -42,7 +42,7 @@ const OutcomeAndMetricForm = forwardRef(
       mode: 'onBlur',
       reValidateMode: 'onBlur',
       resolver: joiResolver(outcomeMetricSchema)
-    })
+    });
 
     useEffect(() => {
       console.log('isValid changed');
@@ -52,7 +52,7 @@ const OutcomeAndMetricForm = forwardRef(
 
     useEffect(() => {
       console.log('errors changed');
-      console.log({ errors, isValid, isValidating })
+      console.log({ errors, isValid, isValidating });
     }, [errors]);
 
     useEffect(() => {
@@ -101,7 +101,7 @@ const OutcomeAndMetricForm = forwardRef(
       }
     }
 
-    const [state, dispatch] = useReducer(reducer, item);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     const handleOutcomeChange = e => {
       dispatch({
@@ -126,12 +126,12 @@ const OutcomeAndMetricForm = forwardRef(
     };
 
     const handleMetricChange = (e, i) => {
-        dispatch({ 
-          type: 'updateMetrics', 
-          metricIndex: i, 
-          value: e.target.value 
-        });
-      };
+      dispatch({
+        type: 'updateMetrics',
+        metricIndex: i,
+        value: e.target.value
+      });
+    };
 
     return (
       <form
@@ -144,7 +144,7 @@ const OutcomeAndMetricForm = forwardRef(
           data-cy={`outcome-${index}`}
           name="outcome"
           control={control}
-          render={({ field: { onChange, ...props} }) => (
+          render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
               label="Outcome"
@@ -152,7 +152,7 @@ const OutcomeAndMetricForm = forwardRef(
               hint="Describe a distinct and measurable improvement for this system."
               multiline
               rows="4"
-              onChange={e =>{
+              onChange={e => {
                 handleOutcomeChange(e);
                 onChange(e);
               }}
@@ -181,8 +181,9 @@ const OutcomeAndMetricForm = forwardRef(
               <Controller
                 name={`metrics.${i}`}
                 control={control}
-                render={({ field: { onChange, ...props} }) => (
+                render={({ field: { onChange, ...props } }) => (
                   <TextField
+                    {...props}
                     id={`${activityIndex}-metric${i}`}
                     name={`metrics.${i}`}
                     data-cy={`metric-${index}-${i}`}
@@ -194,9 +195,9 @@ const OutcomeAndMetricForm = forwardRef(
                     rows="4"
                     onChange={e => {
                       handleMetricChange(e, i);
-                      onChange(e)
+                      onChange(e);
                     }}
-                    errorMessage={errors?.metrics?.message}
+                    errorMessage={errors?.metrics && errors.metrics[i]?.message}
                     errorPlacement="bottom"
                   />
                 )}
@@ -235,7 +236,8 @@ OutcomeAndMetricForm.propTypes = {
     metrics: PropTypes.array,
     outcome: PropTypes.string
   }).isRequired,
-  saveOutcome: PropTypes.func.isRequired
+  saveOutcome: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
