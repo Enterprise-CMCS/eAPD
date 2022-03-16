@@ -59,10 +59,9 @@ async function up () {
   
   // Update them into the database
   try {
-    const res = updatedApds.forEach( async apd => {
+    updatedApds.forEach( async apd => {
       await this('APD').replaceOne( apd._id, { ...apd });
     });
-    logger.info(`${res.length} APDs updated to new schema`);
   } catch (error) {
     logger.error(error);
   }
