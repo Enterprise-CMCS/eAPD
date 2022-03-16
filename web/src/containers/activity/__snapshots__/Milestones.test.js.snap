@@ -20,13 +20,20 @@ exports[`the Milestones component renders correctly 1`] = `
       errorCheck={false}
       expanded={
         Object {
-          "$$typeof": Symbol(react.memo),
-          "WrappedComponent": [Function],
-          "compare": null,
-          "type": [Function],
+          "$$typeof": Symbol(react.forward_ref),
+          "WrappedComponent": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "propTypes": Object {
+              "activityIndex": [Function],
+              "index": [Function],
+              "item": [Function],
+              "saveMilestone": [Function],
+            },
+            "render": [Function],
+          },
+          "render": [Function],
         }
       }
-      extraItemButtons={Array []}
       list={
         Array [
           Object {
@@ -38,6 +45,7 @@ exports[`the Milestones component renders correctly 1`] = `
       }
       noDataMessage="Add milestone(s) for this activity."
       onAddClick={[Function]}
+      onCancelClick={[Function]}
       onDeleteClick={[Function]}
     />
   </div>

@@ -8,7 +8,9 @@ exports[`the MilestoneReview component renders correctly 1`] = `
   headingLevel="4"
   objType="Milestone"
   onDeleteClick={[MockFunction]}
+  onDeleteLabel={null}
   onEditClick={[MockFunction]}
+  skipConfirmation={false}
   title={null}
 >
   <p

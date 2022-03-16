@@ -5,29 +5,37 @@ import { UPDATE_BUDGET } from '../budget';
 
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from './symbols';
 import {
-  addKeyPerson,
-  removeKeyPerson,
-  setKeyPersonCost,
-  setKeyPersonEmail,
-  setKeyPersonHasCosts,
-  setKeyPersonName,
-  setKeyPersonFTE,
-  setKeyPersonRole
+  saveKeyPersonnel,
+  removeKeyPersonnel,
 } from './keyPersonnel';
 
 const mockStore = configureStore([thunk]);
 
 describe('APD edit actions for APD key personnel', () => {
   it('dispatchs an action for adding a key person', () => {
-    const store = mockStore('add state');
-    store.dispatch(addKeyPerson());
+    const state = {
+      apd: {
+        data: {
+          keyPersonnel: []
+        }
+      }
+    };
+    
+    const store = mockStore(state);
+    store.dispatch(saveKeyPersonnel(null, {}));
 
     expect(store.getActions()).toEqual([
       {
         type: ADD_APD_ITEM,
         path: '/keyPersonnel/-',
-        state: 'add state'
-      }
+        state
+      },
+      {
+        type: EDIT_APD,
+        path: '/keyPersonnel/0',
+        value: {}
+      },
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 
@@ -35,7 +43,7 @@ describe('APD edit actions for APD key personnel', () => {
     const store = mockStore('remove state');
     const global = { confirm: jest.fn().mockReturnValue(true) };
 
-    store.dispatch(removeKeyPerson(17, { global }));
+    store.dispatch(removeKeyPersonnel(17, { global }));
 
     expect(store.getActions()).toEqual([
       {
@@ -48,79 +56,31 @@ describe('APD edit actions for APD key personnel', () => {
       }
     ]);
   });
-
-  it('dispatches an action for setting a key person name', () => {
-    expect(setKeyPersonName(1, 'person name')).toEqual({
-      type: EDIT_APD,
-      path: '/keyPersonnel/1/name',
-      value: 'person name'
-    });
-  });
-
-  it('dispatches an action for setting a key person email', () => {
-    expect(setKeyPersonEmail(3, 'person email')).toEqual({
-      type: EDIT_APD,
-      path: '/keyPersonnel/3/email',
-      value: 'person email'
-    });
-  });
-
-  it('dispatches an action for setting a key person role', () => {
-    expect(setKeyPersonRole(5, 'person role')).toEqual({
-      type: EDIT_APD,
-      path: '/keyPersonnel/5/position',
-      value: 'person role'
-    });
-  });
-
-  it('dispatches an action for setting a key person FTE', () => {
-    const store = mockStore('key person state');
-    store.dispatch(setKeyPersonFTE(7, 1967, 3.25));
-
+  
+  it('dispatches an action for updating an existing contractor', () => {
+    const state = {
+      apd: {
+        data: {
+          keyPersonnel: [
+            { name: "Test Personnel" }
+          ]
+        }
+      }
+    };
+    
+    const store = mockStore(state);
+    
+    const personnel = {key: '123', name: 'test personnel updated'};
+    
+    store.dispatch(saveKeyPersonnel(0, personnel));
+    
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,
-        path: '/keyPersonnel/7/fte/1967',
-        value: 3.25
+        path: '/keyPersonnel/0',
+        value: personnel
       },
-      {
-        type: UPDATE_BUDGET,
-        state: 'key person state'
-      }
-    ]);
-  });
-
-  it('dispatches an action for setting whether a key person has costs', () => {
-    const store = mockStore('state');
-    store.dispatch(setKeyPersonHasCosts(11, true));
-
-    expect(store.getActions()).toEqual([
-      {
-        type: EDIT_APD,
-        path: '/keyPersonnel/11/hasCosts',
-        value: true
-      },
-      {
-        type: UPDATE_BUDGET,
-        state: 'state'
-      }
-    ]);
-  });
-
-  it('dispatches an action for setting a key person cost for a year', () => {
-    const store = mockStore('another state');
-    store.dispatch(setKeyPersonCost(13, 1973, 3572));
-
-    expect(store.getActions()).toEqual([
-      {
-        type: EDIT_APD,
-        path: '/keyPersonnel/13/costs/1973',
-        value: 3572
-      },
-      {
-        type: UPDATE_BUDGET,
-        state: 'another state'
-      }
+      { type: UPDATE_BUDGET, state }
     ]);
   });
 });

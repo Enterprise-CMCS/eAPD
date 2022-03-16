@@ -8,7 +8,9 @@ exports[`the StatePersonReview component renders correctly 1`] = `
   headingLevel="5"
   objType="State Staff Expenses"
   onDeleteClick={[MockFunction]}
+  onDeleteLabel={null}
   onEditClick={[MockFunction]}
+  skipConfirmation={false}
   title={null}
 >
   test desc

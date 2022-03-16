@@ -13,7 +13,7 @@ class PopulatePage {
       .within(() => {
         cy.findByLabelText('Month').clear().type(list[0]);
         cy.findByLabelText('Day').clear().type(list[1]);
-        cy.findByLabelText('Year').clear().type(list[2]);
+        cy.findByLabelText('Year').clear().type(list[2]).blur();
       });
   };
 
@@ -63,7 +63,8 @@ class PopulatePage {
         cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
       }
     });
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.get('button[id="form-and-review-list--done-btn"]').click()
+    // cy.findByRole('button', { name: /Save/i }).click();
   };
 
   fillMilestoneForm = ({ milestone, targetDate } = {}) => {
@@ -71,7 +72,8 @@ class PopulatePage {
     cy.get('[class="ds-c-fieldset"]').within(() => {
       this.fillDate('Target completion date', targetDate);
     });
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.get('button[id="form-and-review-list--done-btn"]').click()
+    // cy.findByRole('button', { name: /Save/i }).click();
   };
 
   fillContractorForm = ({
@@ -120,7 +122,7 @@ class PopulatePage {
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent(`contractor-description-field-${index}`, description);
 
-    cy.findByRole('button', { name: /Done/i }).click();
+    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   fillCostAllocation = ({

@@ -8,7 +8,9 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
   headingLevel="5"
   objType="Private Contractor"
   onDeleteClick={[MockFunction]}
+  onDeleteLabel={null}
   onEditClick={[MockFunction]}
+  skipConfirmation={false}
   title={null}
 >
   <p

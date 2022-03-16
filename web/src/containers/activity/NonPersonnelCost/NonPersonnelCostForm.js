@@ -1,40 +1,61 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  setNonPersonnelCostCategory,
-  setNonPersonnelCostDescription,
-  setNonPersonnelCostForYear
-} from '../../../actions/editActivity';
 import DollarField from '../../../components/DollarField';
 import TextArea from '../../../components/TextArea';
 
-const NonPersonnelCostForm = ({
-  activityIndex,
-  index,
-  item: { category, description, years },
-  setCategory,
-  setDescription,
-  setCost
-}) => {
-  const editCategory = useCallback(
-    ({ target: { value } }) => setCategory(activityIndex, index, value),
-    [activityIndex, index, setCategory]
-  );
+import {
+  saveNonPersonnelCost as actualSaveNonPersonnelCost
+} from '../../../actions/editActivity';
 
-  const editDesc = useCallback(
-    ({ target: { value } }) => setDescription(activityIndex, index, value),
-    [activityIndex, index, setDescription]
-  );
+const NonPersonnelCostForm = forwardRef(
+  (
+    {
+      activityIndex,
+      index,
+      item,
+      saveNonPersonnelCost
+    },
+    ref
+) => {
+  NonPersonnelCostForm.displayName = 'NonPersonnelCostForm';
 
-  const getEditCostForYear = useCallback(
-    year =>
-      ({ target: { value } }) =>
-        setCost(activityIndex, index, year, value),
-    [activityIndex, index, setCost]
-  );
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'updateField':
+        return {
+          ...state,
+          [action.field]: action.value
+        }
+      case 'updateCosts':
+        return {
+          ...state,
+          years: {
+            ...state.years,
+            [action.year]: action.value
+          }
+        }
+      default:
+        throw new Error(
+          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+        );
+    }
+  }
+  
+  const [state, dispatch] = useReducer(reducer, item);
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+    saveNonPersonnelCost(activityIndex, index, state);
+  };
+  
+  const editCategory = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'category', value });
+
+  const editDesc = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value })
+
+  const getEditCostForYear = year => ({ target: { value } }) => dispatch({ type: 'updateCosts', year, value });
 
   const categories = [
     'Hardware, software, and licensing',
@@ -43,10 +64,10 @@ const NonPersonnelCostForm = ({
     'Travel',
     'Administrative operations',
     'Miscellaneous expenses for the project'
-  ].map(item => ({ label: item, value: item }));
-  categories.unshift({ label: 'Select an option', value: '' });
+  ].map(category => ({ label: category, value: category }));
+  categories.unshift({label:'Select an option', value:''})
   return (
-    <Fragment>
+    <form index={index} onSubmit={handleSubmit}>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
       {/* eslint-disable jsx-a11y/no-autofocus */}
       <Dropdown
@@ -54,7 +75,7 @@ const NonPersonnelCostForm = ({
         label="Category"
         name="category"
         options={categories}
-        value={category}
+        value={state.category}
         onChange={editCategory}
       />
 
@@ -62,11 +83,11 @@ const NonPersonnelCostForm = ({
         label="Description"
         rows={5}
         name="desc"
-        value={description}
+        value={state.description}
         onChange={editDesc}
       />
 
-      {Object.entries(years).map(([year, cost]) => (
+      {Object.entries(state.years).map(([year, cost]) => (
         <DollarField
           key={year}
           label={`FFY ${year} Cost`}
@@ -76,9 +97,11 @@ const NonPersonnelCostForm = ({
           onChange={getEditCostForYear(year)}
         />
       ))}
-    </Fragment>
+      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
+    </form>
   );
-};
+}
+);
 
 NonPersonnelCostForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
@@ -88,17 +111,15 @@ NonPersonnelCostForm.propTypes = {
     description: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired,
-  setCategory: PropTypes.func.isRequired,
-  setDescription: PropTypes.func.isRequired,
-  setCost: PropTypes.func.isRequired
+  saveNonPersonnelCost: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
-  setCategory: setNonPersonnelCostCategory,
-  setDescription: setNonPersonnelCostDescription,
-  setCost: setNonPersonnelCostForYear
+  saveNonPersonnelCost: actualSaveNonPersonnelCost
 };
 
-export default connect(null, mapDispatchToProps)(NonPersonnelCostForm);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  NonPersonnelCostForm
+);
 
 export { NonPersonnelCostForm as plain, mapDispatchToProps };

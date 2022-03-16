@@ -21,7 +21,9 @@ exports[`the NameAndFundingSourceReview component renders correctly when expandi
     headingLevel="4"
     objType="Funding Source"
     onDeleteClick={null}
+    onDeleteLabel={null}
     onEditClick={null}
+    skipConfirmation={false}
     title={null}
   />
 </div>
@@ -48,7 +50,9 @@ exports[`the NameAndFundingSourceReview component renders correctly when expandi
     headingLevel="4"
     objType="Funding Source"
     onDeleteClick={null}
+    onDeleteLabel={null}
     onEditClick={[MockFunction]}
+    skipConfirmation={false}
     title={null}
   />
 </div>
