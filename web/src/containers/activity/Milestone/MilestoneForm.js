@@ -7,8 +7,6 @@ import DateField from '../../../components/DateField';
 
 import { saveMilestone as actualSaveMilestone } from '../../../actions/editActivity';
 
-import { validateSubForm } from '../../../helpers/subFormValidation';
-
 const MilestoneForm = forwardRef(
   ({ activityIndex, index, item, saveMilestone }, ref) => {
     MilestoneForm.displayName = 'MilestoneForm';
@@ -50,16 +48,12 @@ const MilestoneForm = forwardRef(
           value={state.milestone}
           className="remove-clearfix textfield__container"
           onChange={changeName}
-          onBlur={validateSubForm}
-          onKeyUp={validateSubForm}
         />
         <DateField
           label="Target completion date"
           hint=""
           value={state.endDate}
           onChange={changeDate}
-          onBlur={validateSubForm}
-          onKeyUp={validateSubForm}
         />
         <input
           className="ds-u-visibility--hidden"
