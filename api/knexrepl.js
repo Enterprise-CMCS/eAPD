@@ -1,7 +1,7 @@
 // https://medium.com/@sobinsunny/orm-console-with-repl-961ee264ed93
 
 // usage:
-// $ npm run knex-console
+// $ yarn run knex-console
 // knex> const rows = await knex('apds')
 // knex> rows[0].document.activities
 // knex> await db.getPermissions(2020)

@@ -92,8 +92,8 @@ finished, you can populate the database. While the docker process is still
 running, open a new terminal window or tab and run:
 
 ```shell
-docker-compose exec api npm run migrate
-docker-compose exec api npm run seed
+docker-compose exec api yarn run migrate
+docker-compose exec api yarn run seed
 ```
 
 You should now be able to open the app at
