@@ -3087,7 +3087,7 @@
     "@testing-library/dom" "^8.0.0"
     "@types/react-dom" "*"
 
-"@testing-library/user-event@^13.5.0":
+"@testing-library/user-event@13.5.0":
   version "13.5.0"
   resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-13.5.0.tgz#69d77007f1e124d55314a2b73fd204b333b13295"
   integrity sha512-5Kwtbo3Y/NowpkbRuSepbyMFkZmHgD+vPzYB/RJ4oxt5Gj/avFFBYjhw27cqSVPVw/3a67NK1PbiIr9k4Gwmdg==
@@ -3621,7 +3621,7 @@
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.15.0":
+"@typescript-eslint/utils@5.15.0", "@typescript-eslint/utils@^5.13.0":
   version "5.15.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.15.0.tgz#468510a0974d3ced8342f37e6c662778c277f136"
   integrity sha512-081rWu2IPKOgTOhHUk/QfxuFog8m4wxW43sXNOMSCdh578tGJ1PAaWPsj42LOa7pguh173tNlMigsbrHvh/mtA==
@@ -6802,6 +6802,13 @@ eslint-plugin-storybook@0.5.7:
     "@storybook/csf" "^0.0.1"
     "@typescript-eslint/experimental-utils" "^5.3.0"
     requireindex "^1.1.0"
+
+eslint-plugin-testing-library@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.1.0.tgz#6ad539a53d4e897d3045902f8e534e07cebd4e8b"
+  integrity sha512-YSNzasJUbyhOTe14ZPygeOBvcPvcaNkwHwrj4vdf+uirr2D32JTDaKi6CP5Os2aWtOcvt4uBSPXp9h5xGoqvWQ==
+  dependencies:
+    "@typescript-eslint/utils" "^5.13.0"
 
 eslint-scope@5.1.1, eslint-scope@^5.1.1:
   version "5.1.1"

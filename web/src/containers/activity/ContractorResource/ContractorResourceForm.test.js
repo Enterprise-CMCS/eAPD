@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   renderWithConnection,
+  act,
   screen,
   within,
   waitFor
@@ -42,12 +43,16 @@ const defaultProps = {
   setFormValid: jest.fn()
 };
 
-const setup = (props = {}) => {
-  return renderWithConnection(<ContractorForm {...defaultProps} {...props} />);
+const setup = async (props = {}) => {
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  const renderUtils = await act(async () => {
+    renderWithConnection(<ContractorForm {...defaultProps} {...props} />);
+  });
+  return renderUtils;
 };
 
 const verifyDateField = (text, expectValue) => {
-  const fieldset = within(screen.getByText(text).closest('fieldset'));
+  const fieldset = within(screen.getByText(text).closest('fieldset')); // eslint-disable-line testing-library/no-node-access
   expect(fieldset.getByLabelText('Month')).toHaveValue(expectValue.month);
   expect(fieldset.getByLabelText('Day')).toHaveValue(expectValue.day);
   expect(fieldset.getByLabelText('Year')).toHaveValue(expectValue.year);
@@ -55,7 +60,7 @@ const verifyDateField = (text, expectValue) => {
 
 const verifyHourlyField = expectValue => {
   const fieldset = within(
-    screen.getByText(/This is an hourly resource/i).closest('fieldset')
+    screen.getByText(/This is an hourly resource/i).closest('fieldset') // eslint-disable-line testing-library/no-node-access
   );
   if (expectValue == 'yes') {
     expect(fieldset.getByLabelText('Yes')).toBeChecked();
@@ -68,8 +73,12 @@ const verifyHourlyField = expectValue => {
 };
 
 describe('the ContractorResourceForm component', () => {
-  test('renders correctly', () => {
-    setup();
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  test('renders correctly', async () => {
+    await setup();
     expect(
       screen.getByLabelText(/Private Contractor or Vendor Name/i)
     ).toHaveValue(defaultProps.item.name);
@@ -96,99 +105,130 @@ describe('the ContractorResourceForm component', () => {
     expect(screen.queryByLabelText(/^FFY 1067$/i)).toBeNull();
   });
 
-  test('renders error when name is null', async () => {
-    setup({});
-
-    const input = screen.getByRole('textbox', { name: /name/i });
-
-    userEvent.clear(input);
-    userEvent.tab();
-
-    expect(defaultProps.setFormValid).toHaveBeenCalledWith(false);
-
-    await waitFor(() =>
-      expect(
-        screen.findByText('Provide a private contractor or vendor name.')
-      ).toBeTruthy()
-    );
-  });
-
-  test('renders error when name is empty string', async () => {
-    setup({});
-
-    const input = screen.getByRole('textbox', { name: /name/i });
-
-    userEvent.clear(input);
-    userEvent.type(input, '');
-    userEvent.tab();
-
-    expect(defaultProps.setFormValid).toHaveBeenCalledWith(false);
-
-    await waitFor(() =>
-      expect(
-        screen.getByText('Provide a private contractor or vendor name.')
-      ).toBeTruthy()
-    );
-  });
-
-  test('renders error when description is null', async () => {
+  test('renders errors when fields are empty', async () => {
     await setup({
       ...defaultProps,
-      item: {
-        ...defaultProps.item,
-        description: null
-      }
+      item: { hourly: { useHourly: null }, years: { 1066: null, 1067: null } }
     });
 
-    userEvent.click(
-      screen.getByLabelText(
-        /Procurement Methodology and Description of Services/i
-      )
+    // name
+    const nameInput = screen.getByLabelText(
+      /Private Contractor or Vendor Name/i
     );
-    userEvent.click(document.body);
+    userEvent.click(nameInput);
+    await waitFor(() => {
+      expect(nameInput).toHaveFocus();
+    });
+
+    // description doesn't load in tests
+
+    // start date - month, day, year
+    const startFieldset = within(
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getByText(/Contract start date/i).closest('fieldset')
+    );
+    userEvent.tab();
+    await waitFor(() => {
+      expect(startFieldset.getByLabelText('Month')).toHaveFocus();
+    });
+    userEvent.tab();
+    await waitFor(() => {
+      expect(startFieldset.getByLabelText('Day')).toHaveFocus();
+    });
+    userEvent.tab();
+    await waitFor(() => {
+      expect(startFieldset.getByLabelText('Year')).toHaveFocus();
+    });
+
+    // end date - month, day, year
+    const endFieldset = within(
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getByText(/Contract end date/i).closest('fieldset')
+    );
+    userEvent.tab();
+    await waitFor(() => {
+      expect(endFieldset.getByLabelText('Month')).toHaveFocus();
+    });
+    userEvent.tab();
+    await waitFor(() => {
+      expect(endFieldset.getByLabelText('Day')).toHaveFocus();
+    });
+    userEvent.tab();
+    await waitFor(() => {
+      expect(endFieldset.getByLabelText('Year')).toHaveFocus();
+    });
+
+    // total contract cost
+    userEvent.tab();
+    await waitFor(() => {
+      expect(screen.getByLabelText(/Total Contract Cost/i)).toHaveFocus();
+    });
+
+    // useHourly
+    userEvent.tab();
+    const fieldset = within(
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getByText(/This is an hourly resource/i).closest('fieldset')
+    );
+    await waitFor(() => {
+      expect(fieldset.getByLabelText('Yes')).toHaveFocus();
+    });
+
+    // cancel
+    userEvent.tab();
+
+    // expect(screen.getByRole('button', { name: /cancel/i })).toHaveFocus();
+    // expect(await screen.findByRole('button', { name: /save/i })).toBeDisabled();
+
+    await waitFor(async () => {
+      expect(await screen.findAllByRole('alert')).toHaveLength(5);
+    });
+  });
+
+  test('renders error when name is null', async () => {
+    await setup({});
+
+    const input = screen.getByRole('textbox', { name: /name/i });
+
+    userEvent.clear(input);
+    await waitFor(() => {
+      expect(input).toHaveFocus();
+    });
+    userEvent.tab();
 
     await waitFor(() => {
-      expect(
-        screen.findByText(
-          /Provide a procurement methodology and description of services/i
-        )
-      ).toBeTruthy();
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
     });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+
+    const error = await screen.findByText(
+      /Provide a private contractor or vendor name/i
+    );
+    expect(error).toBeInTheDocument();
   });
 
   test('renders error when start date is null', async () => {
-    setup({});
+    await setup({});
 
-    const fieldset = within(
+    const startFieldset = within(
+      // eslint-disable-next-line testing-library/no-node-access
       screen.getByText(/Contract start date/i).closest('fieldset')
     );
 
-    userEvent.clear(fieldset.getByLabelText('Month'));
-    userEvent.click(document.body);
-
+    userEvent.clear(startFieldset.getByLabelText('Month'));
     await waitFor(() => {
-      expect(screen.getByText(/Provide a start date/i)).toBeTruthy();
+      expect(startFieldset.getByLabelText('Month')).toHaveFocus();
     });
-  });
-
-  test('renders error when total cost is null', async () => {
-    setup({});
-
-    const input = screen.getByLabelText(/Total Contract Cost/i);
-
-    userEvent.clear(input);
+    userEvent.tab();
+    userEvent.tab();
     userEvent.tab();
 
-    await waitFor(() =>
-      expect(defaultProps.setFormValid).toHaveBeenCalledWith(false)
-    );
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
-    await waitFor(() =>
-      expect(
-        screen.findByText(
-          /Provide a contract cost greater than or equal to $0/i
-        )
-      ).toBeTruthy()
-    );
+    const error = await screen.findByText(/Provide a start date/i);
+    expect(error).toBeInTheDocument();
   });
 });

@@ -3,12 +3,16 @@ import Joi from 'joi';
 const schemas = Joi.object({
   name: Joi.string().trim().min(1).required().messages({
     'string.base': 'Provide a private contractor or vendor name.',
-    'string.empty': 'Provide a private contractor or vendor name.'
+    'string.empty': 'Provide a private contractor or vendor name.',
+    'string.min': 'Provide a private contractor or vendor name.'
   }),
   description: Joi.string().trim().min(1).required().messages({
     'string.base':
       'Provide a procurement methodology and description of services.',
     'string.empty':
+      'Provide a procurement methodology and description of services.',
+
+    'string.min':
       'Provide a procurement methodology and description of services.'
   }),
   start: Joi.date().iso().required().messages({
