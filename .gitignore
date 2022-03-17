@@ -23,9 +23,10 @@ api/seeds/test/tokens.json
 */cypress.env.json
 *cypress.env.json
 
-# use npm to manage packages, not yarn
-api/yarn.lock
-web/yarn.lock
+# use yarn to manage packages, not npm
+api/package-lock.json
+web/package-lock.json
+integrationTests/package-lock.json
 docs-build
 
 # Terraform ignores

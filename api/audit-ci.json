@@ -1,9 +1,9 @@
 {
   "low": true,
-  "package-manager": "auto",
-  "allowlist": [1041438],
+  "package-manager": "yarn",
+  "allowlist": ["*|migrate-mongoose>yargs>yargs-parser"],
   "_comment": {
-    "1041438": {
+    "yargs-parser": {
       "advisory": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
       "modules": "yargs-parser",
       "cvss-score": "5.3 moderate",
@@ -11,6 +11,5 @@
         "migrate-mongoose@4.0.0 - used during migration process, but not active in production"
       ]
     }
-  },
-  "registry": "https://registry.npmjs.org"
+  }
 }
