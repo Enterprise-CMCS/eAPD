@@ -21,7 +21,8 @@ const outcomeMetricSchema = Joi.object({
   }),
   metrics: Joi.array().items(
     Joi.string().messages({
-      'string.empty': 'Metric is required'
+      'string.empty': 'Metric is required',
+      'string.null': 'Metric is required'
     })
   )
 });
@@ -32,7 +33,7 @@ const OutcomeAndMetricForm = forwardRef(
     const {
       handleSubmit,
       control,
-      formState: { errors, isValid, isValidating },
+      formState: { error, errors, isValid, isValidating },
       getValues
     } = useForm({
       defaultValues: {
@@ -59,7 +60,7 @@ const OutcomeAndMetricForm = forwardRef(
       console.log('isValidating changed');
       const { error, value } = outcomeMetricSchema.validate(getValues());
       console.log({ error, value, errors, isValid, isValidating });
-    }, [isValidating]);
+    }, [isValidating, errors]);
 
     const initialState = item;
 
@@ -71,7 +72,10 @@ const OutcomeAndMetricForm = forwardRef(
             [action.field]: action.value
           };
         case 'addMetric': {
+          console.log(state.metrics)
           const newMetric = newOutcomeMetric();
+          console.log(newMetric);
+          console.log(state.metrics);
           return {
             ...state,
             metrics: [...state.metrics, newMetric]
@@ -87,6 +91,9 @@ const OutcomeAndMetricForm = forwardRef(
         }
         case 'updateMetrics': {
           const metricsCopy = [...state.metrics];
+          console.log({ metricsCopy });
+          console.log(action.metricIndex);
+          console.log(action.value);
           metricsCopy[action.metricIndex].metric = action.value;
 
           return {
@@ -161,46 +168,48 @@ const OutcomeAndMetricForm = forwardRef(
             />
           )}
         />
-        {state.metrics.map(({ key, metric }, i) => (
-          <Review
-            key={key}
-            onDeleteClick={ () => handleDeleteMetric(index, i) }
-            onDeleteLabel="Remove"
-            skipConfirmation
-            ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
-            objType="Metric"
-          >
-            <div
+        {state.metrics.map(({ key, metric = "" }, i) => {
+          console.log({metric, key, i});
+          return (
+            <Review
               key={key}
-              className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+              onDeleteClick={ () => handleDeleteMetric(index, i) }
+              onDeleteLabel="Remove"
+              skipConfirmation
+              ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
+              objType="Metric"
             >
-              <Controller
-                name={`metrics.${i}`}
-                control={control}
-                render={({ field: { onChange, ...props } }) => (
-                  <TextField
-                    {...props}
-                    id={`${activityIndex}-metric${i}`}
-                    name={`metrics.${i}`}
-                    data-cy={`metric-${index}-${i}`}
-                    label="Metric"
-                    className="remove-clearfix"
-                    hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-                    value={metric}
-                    multiline
-                    rows="4"
-                    onChange={e => {
-                      handleMetricChange(e, i);
-                      onChange(e);
-                    }}
-                    errorMessage={errors?.metrics && errors.metrics[i]?.message}
-                    errorPlacement="bottom"
-                  />
-                )}
-              />
-            </div>
-          </Review>
-        ))}
+              <div
+                key={key}
+                className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+              >
+                <Controller
+                  name={`metrics[${i}].metric`}
+                  control={control}
+                  render={({ field: { onChange, ...props } }) => (
+                    <TextField
+                      {...props}
+                      id={`${activityIndex}-metric${i}`}
+                      name={`metrics[${i}]`}
+                      data-cy={`metric-${index}-${i}`}
+                      label="Metric"
+                      className="remove-clearfix"
+                      hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+                      defaultValue={metric}
+                      multiline
+                      rows="4"
+                      onChange={e => {
+                        handleMetricChange(e, i);
+                        onChange(e);
+                      }}
+                      errorMessage={errors?.metrics && errors?.metrics[i]?.message}
+                      errorPlacement="bottom"
+                    />
+                  )}
+                />
+              </div>
+            </Review>
+        )})}
         <div
           className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2"
           style={{ width: 485 }}
