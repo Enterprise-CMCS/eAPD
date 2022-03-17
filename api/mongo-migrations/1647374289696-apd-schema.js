@@ -1,4 +1,4 @@
-const logger = require('../logger')('mongoose-migrate/migrate-from-postgres');
+const logger = require('../logger')('mongoose-migrate/migrate-apd-schema');
 
 /**
  * Update the APD schema to more closely match the front end nav/page sections
@@ -22,7 +22,6 @@ async function up () {
   
   // Create new object by sections/new schema
   const updatedApds = apds.map(apd => {
-    // Add current properties to their respective new parent properties
     return {
       id: apd.id,
       createdAt: apd.createdAt,
@@ -60,7 +59,7 @@ async function up () {
   // Update them into the database
   try {
     updatedApds.forEach( async apd => {
-      await this('APD').replaceOne( apd._id, { ...apd });
+      await this('APD').replaceOne(apd._id, { ...apd });
     });
   } catch (error) {
     logger.error(error);
@@ -71,7 +70,7 @@ async function up () {
  * Make any changes that UNDO the up function side effects here (if possible)
  */
 async function down () {
-  // Write migration here
+  
 }
 
 module.exports = { up, down };
