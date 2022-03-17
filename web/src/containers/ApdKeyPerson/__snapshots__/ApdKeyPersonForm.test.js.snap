@@ -248,7 +248,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
           />
         }
         label="Yes"
-        name="apd-state-profile-hascosts1"
+        name="apd-state-profile-hascosts1-yes"
         onChange={[Function]}
         type="radio"
         value="yes"
@@ -278,7 +278,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               />
             }
             label="Yes"
-            name="apd-state-profile-hascosts1"
+            name="apd-state-profile-hascosts1-yes"
             onChange={[Function]}
             type="radio"
             value="yes"
@@ -291,19 +291,19 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               <input
                 checked={true}
                 className="ds-c-choice"
-                id="radio_apd-state-profile-hascosts1_4"
-                name="apd-state-profile-hascosts1"
+                id="radio_apd-state-profile-hascosts1-yes_4"
+                name="apd-state-profile-hascosts1-yes"
                 onChange={[Function]}
                 type="radio"
                 value="yes"
               />
               <FormLabel
                 component="label"
-                fieldId="radio_apd-state-profile-hascosts1_4"
+                fieldId="radio_apd-state-profile-hascosts1-yes_4"
               >
                 <label
                   className="ds-c-label"
-                  htmlFor="radio_apd-state-profile-hascosts1_4"
+                  htmlFor="radio_apd-state-profile-hascosts1-yes_4"
                 >
                   <span
                     className=""
@@ -767,7 +767,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       <ChoiceComponent
         checked={false}
         label="No"
-        name="apd-state-profile-hascosts1"
+        name="apd-state-profile-hascosts1-no"
         onChange={[Function]}
         type="radio"
         value="no"
@@ -776,7 +776,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
           <Choice
             checked={false}
             label="No"
-            name="apd-state-profile-hascosts1"
+            name="apd-state-profile-hascosts1-no"
             onChange={[Function]}
             type="radio"
             value="no"
@@ -789,19 +789,19 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               <input
                 checked={false}
                 className="ds-c-choice"
-                id="radio_apd-state-profile-hascosts1_9"
-                name="apd-state-profile-hascosts1"
+                id="radio_apd-state-profile-hascosts1-no_9"
+                name="apd-state-profile-hascosts1-no"
                 onChange={[Function]}
                 type="radio"
                 value="no"
               />
               <FormLabel
                 component="label"
-                fieldId="radio_apd-state-profile-hascosts1_9"
+                fieldId="radio_apd-state-profile-hascosts1-no_9"
               >
                 <label
                   className="ds-c-label"
-                  htmlFor="radio_apd-state-profile-hascosts1_9"
+                  htmlFor="radio_apd-state-profile-hascosts1-no_9"
                 >
                   <span
                     className=""
@@ -892,7 +892,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
         />
       }
       label="Yes"
-      name="apd-state-profile-hascosts1"
+      name="apd-state-profile-hascosts1-yes"
       onChange={[Function]}
       type="radio"
       value="yes"
@@ -900,7 +900,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     <ChoiceComponent
       checked={true}
       label="No"
-      name="apd-state-profile-hascosts1"
+      name="apd-state-profile-hascosts1-no"
       onChange={[Function]}
       type="radio"
       value="no"
@@ -982,7 +982,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
         />
       }
       label="Yes"
-      name="apd-state-profile-hascosts0"
+      name="apd-state-profile-hascosts0-yes"
       onChange={[Function]}
       type="radio"
       value="yes"
@@ -990,7 +990,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     <ChoiceComponent
       checked={false}
       label="No"
-      name="apd-state-profile-hascosts0"
+      name="apd-state-profile-hascosts0-no"
       onChange={[Function]}
       type="radio"
       value="no"
