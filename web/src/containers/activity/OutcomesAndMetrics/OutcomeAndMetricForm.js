@@ -3,7 +3,7 @@ import { TextField, Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import Joi from 'joi';
 import React, { forwardRef, useReducer, useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
@@ -20,8 +20,11 @@ const outcomeMetricSchema = Joi.object({
     'string.empty': 'Outcome is required'
   }),
   metrics: Joi.array().items(
-    Joi.string().messages({
-      'string.empty': 'Metric is required'
+    Joi.object({
+      metric: Joi.string().messages({
+        'string.empty': 'Metric is required',
+        'string.null': 'Metric is required'
+      })
     })
   )
 });
@@ -44,6 +47,11 @@ const OutcomeAndMetricForm = forwardRef(
       resolver: joiResolver(outcomeMetricSchema)
     });
 
+    const { fields, append, remove } = useFieldArray({
+      control,
+      name: 'metrics'
+    });
+
     useEffect(() => {
       console.log('isValid changed');
       console.log({ errors, isValid, isValidating });
@@ -59,7 +67,7 @@ const OutcomeAndMetricForm = forwardRef(
       console.log('isValidating changed');
       const { error, value } = outcomeMetricSchema.validate(getValues());
       console.log({ error, value, errors, isValid, isValidating });
-    }, [isValidating]);
+    }, [isValidating, errors]);
 
     const initialState = item;
 
@@ -71,10 +79,9 @@ const OutcomeAndMetricForm = forwardRef(
             [action.field]: action.value
           };
         case 'addMetric': {
-          const newMetric = newOutcomeMetric();
           return {
             ...state,
-            metrics: [...state.metrics, newMetric]
+            metrics: [...state.metrics, action.metric]
           };
         }
         case 'removeMetric': {
@@ -87,6 +94,9 @@ const OutcomeAndMetricForm = forwardRef(
         }
         case 'updateMetrics': {
           const metricsCopy = [...state.metrics];
+          console.log({ metricsCopy });
+          console.log(action.metricIndex);
+          console.log(action.value);
           metricsCopy[action.metricIndex].metric = action.value;
 
           return {
@@ -117,8 +127,8 @@ const OutcomeAndMetricForm = forwardRef(
       handleSubmit(e);
     };
 
-    const handleAddMetric = () => {
-      dispatch({ type: 'addMetric' });
+    const handleAddMetric = newMetric => {
+      dispatch({ type: 'addMetric', metric: newMetric });
     };
 
     const handleDeleteMetric = (outcomeIndex, metricIndex) => {
@@ -161,50 +171,54 @@ const OutcomeAndMetricForm = forwardRef(
             />
           )}
         />
-        {state.metrics.map(({ key, metric }, i) => (
-          <Review
-            key={key}
-            onDeleteClick={
-              state.metrics.length === 1 && metric === ''
-                ? null
-                : () => handleDeleteMetric(index, i)
-            }
-            onDeleteLabel="Remove"
-            skipConfirmation
-            ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
-            objType="Metric"
-          >
-            <div
-              key={key}
-              className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+        {fields.map((metric, i) => {
+          console.log({ metric, index });
+          return (
+            <Review
+              key={metric.key}
+              onDeleteClick={() => {
+                remove(i);
+                handleDeleteMetric(index, i);
+              }}
+              onDeleteLabel="Remove"
+              skipConfirmation
+              ariaLabel={`${i + 1}. ${metric.metric || 'Metric not specified'}`}
+              objType="Metric"
             >
-              <Controller
-                name={`metrics.${i}`}
-                control={control}
-                render={({ field: { onChange, ...props } }) => (
-                  <TextField
-                    {...props}
-                    id={`${activityIndex}-metric${i}`}
-                    name={`metrics.${i}`}
-                    data-cy={`metric-${index}-${i}`}
-                    label="Metric"
-                    className="remove-clearfix"
-                    hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-                    value={metric}
-                    multiline
-                    rows="4"
-                    onChange={e => {
-                      handleMetricChange(e, i);
-                      onChange(e);
-                    }}
-                    errorMessage={errors?.metrics && errors.metrics[i]?.message}
-                    errorPlacement="bottom"
-                  />
-                )}
-              />
-            </div>
-          </Review>
-        ))}
+              <div
+                key={metric.key}
+                className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+              >
+                <Controller
+                  name={`metrics[${i}].metric`}
+                  control={control}
+                  defaultValue={metric.metric}
+                  render={({ field: { onChange, ...props } }) => (
+                    <TextField
+                      {...props}
+                      id={`${activityIndex}-metric${i}`}
+                      name={`metrics[${i}]`}
+                      data-cy={`metric-${index}-${i}`}
+                      label="Metric"
+                      className="remove-clearfix"
+                      hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+                      multiline
+                      rows="4"
+                      onChange={e => {
+                        handleMetricChange(e, i);
+                        onChange(e);
+                      }}
+                      errorMessage={
+                        errors?.metrics && errors?.metrics[i]?.metric.message
+                      }
+                      errorPlacement="bottom"
+                    />
+                  )}
+                />
+              </div>
+            </Review>
+          );
+        })}
         <div
           className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2"
           style={{ width: 485 }}
@@ -212,7 +226,11 @@ const OutcomeAndMetricForm = forwardRef(
           <Button
             key={`activity${activityIndex}-index${index}-add-metric`}
             className="ds-c-button ds-c-button--transparent"
-            onClick={handleAddMetric}
+            onClick={() => {
+              const newMetric = newOutcomeMetric();
+              append(newMetric);
+              handleAddMetric(newMetric);
+            }}
           >
             <Icon icon={faPlusCircle} className="ds-u-margin-right--1" />
             Add Metric to Outcome
