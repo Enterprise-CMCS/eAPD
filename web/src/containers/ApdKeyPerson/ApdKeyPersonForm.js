@@ -118,7 +118,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
         <Choice
           checked={state.hasCosts === true}
           label="Yes"
-          name={`apd-state-profile-hascosts${index}`}
+          name={`apd-state-profile-hascosts${index}-yes`}
           onChange={() =>
             dispatch({ type: 'updateField', field: 'hasCosts', payload: true })
           }
@@ -146,7 +146,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
         <Choice
           checked={state.hasCosts === false}
           label="No"
-          name={`apd-state-profile-hascosts${index}`}
+          name={`apd-state-profile-hascosts${index}-no`}
           onChange={() =>
             dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
           }
