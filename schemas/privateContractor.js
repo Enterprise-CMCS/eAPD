@@ -1,11 +1,11 @@
 import Joi from 'joi';
 
 const schemas = Joi.object({
-  name: Joi.string().required().messages({
+  name: Joi.string().trim().min(1).required().messages({
     'string.base': 'Provide a private contractor or vendor name.',
     'string.empty': 'Provide a private contractor or vendor name.'
   }),
-  description: Joi.string().required().messages({
+  description: Joi.string().trim().min(1).required().messages({
     'string.base':
       'Provide a procurement methodology and description of services.',
     'string.empty':
@@ -14,7 +14,7 @@ const schemas = Joi.object({
   start: Joi.date().iso().required().messages({
     'date.base': 'Provide a start date.',
     'date.empty': 'Provide a start date.',
-    'date.format': 'Provider a valid start date.'
+    'date.format': 'Provide a start date.'
   }),
   end: Joi.date().iso().min(Joi.ref('start')).required().messages({
     'date.base': 'Provide an end date.',

@@ -54,40 +54,45 @@ const DateField = ({ value, onChange, onBlur, errorMessage, ...rest }) => {
   const getErrorMsg = dateObject => {
     const { day, month, year } = dateObject;
 
-    const errors = {
-      errorMessage: '',
-      dayInvalid: false,
-      monthInvalid: false,
-      yearInvalid: false
-    };
-
-    if (!day && !month && !year) {
+    if (errorMessage) {
+      setErrorInfo({
+        ...errorInfo,
+        errorMessage
+      });
+    } else if (!day && !month && !year) {
       setErrorInfo({
         dayInvalid: true,
         monthInvalid: true,
         yearInvalid: true,
         errorMessage: 'Date is required'
       });
-    }
+    } else {
+      const errors = {
+        errorMessage: '',
+        dayInvalid: false,
+        monthInvalid: false,
+        yearInvalid: false
+      };
 
-    // Validation for parsing & the date
-    if (!isNumeric(year) || year < 1900 || year > 2100) {
-      errors.yearInvalid = true;
-      errors.errorMessage = errors.errorMessage || 'Must have a valid year';
-    }
+      // Validation for parsing & the date
+      if (!isNumeric(year) || year < 1900 || year > 2100) {
+        errors.yearInvalid = true;
+        errors.errorMessage = errors.errorMessage || 'Must have a valid year';
+      }
 
-    if (!isNumeric(month) || month < 1 || month > 12) {
-      errors.monthInvalid = true;
-      errors.errorMessage = errors.errorMessage || 'Must have a valid month';
-    }
+      if (!isNumeric(month) || month < 1 || month > 12) {
+        errors.monthInvalid = true;
+        errors.errorMessage = errors.errorMessage || 'Must have a valid month';
+      }
 
-    var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
-    if (!isNumeric(day) || day < 1 || day > lastDayOfMonth.getDate() + 1) {
-      errors.dayInvalid = true;
-      errors.errorMessage = errors.errorMessage || 'Must have a valid day';
-    }
+      var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
+      if (!isNumeric(day) || day < 1 || day > lastDayOfMonth.getDate() + 1) {
+        errors.dayInvalid = true;
+        errors.errorMessage = errors.errorMessage || 'Must have a valid day';
+      }
 
-    setErrorInfo(errors);
+      setErrorInfo(errors);
+    }
   };
 
   return (
