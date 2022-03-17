@@ -323,7 +323,7 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker create -v /openapi --name openapi cimg/node:16.13.2 /bin/true
             docker cp ./openapi.json openapi:/openapi
-            docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator openapi.json
+            docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator:0.2.0 openapi.json
 
   # Validates YAML files. Doesn't look at content, just structure. Doesn't
   # enforce a schema either - strictly checks that the files are valid YAML.
