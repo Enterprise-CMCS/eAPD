@@ -21,6 +21,7 @@ const outcomeMetricSchema = Joi.object({
   }),
   metrics: Joi.array().items(
     Joi.object({
+      key: Joi.any(),
       metric: Joi.string().messages({
         'string.empty': 'Metric is required',
         'string.null': 'Metric is required'
