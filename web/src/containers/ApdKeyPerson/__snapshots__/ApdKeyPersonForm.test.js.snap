@@ -216,96 +216,72 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
         </div>
       </FormControl>
     </TextField>
-    <fieldset
-      className="ds-c-fieldset"
+    <ChoiceList
+      choices={
+        Array [
+          Object {
+            "checked": false,
+            "checkedChildren": <PersonCostForm
+              costLabel="Cost with benefits"
+              fteLabel="FTE Allocation"
+              hint="For example: 0.5 = 0.5 FTE = 50% time"
+              items={
+                Object {
+                  "1992": Object {
+                    "amt": 100,
+                    "perc": 0.32,
+                  },
+                  "1993": Object {
+                    "amt": 300,
+                    "perc": 0.57,
+                  },
+                }
+              }
+              setCost={[Function]}
+              setFTE={[Function]}
+            />,
+            "label": "Yes",
+            "value": "yes",
+          },
+          Object {
+            "checked": false,
+            "label": "No",
+            "value": "no",
+          },
+        ]
+      }
+      label="Does this person have costs directly attributable to this program?"
+      name="apd-state-profile-hascosts1"
+      onChange={[Function]}
+      type="radio"
     >
-      <legend
-        className="ds-c-label"
+      <FormControl
+        component="fieldset"
+        label="Does this person have costs directly attributable to this program?"
+        labelComponent="legend"
+        render={[Function]}
       >
-        Does this person have costs directly attributable to this program?
-      </legend>
-      <ChoiceComponent
-        checked={false}
-        label="No"
-        name="apd-state-profile-hascosts1"
-        onChange={[Function]}
-        type="radio"
-        value="no"
-      >
-        <div>
+        <fieldset
+          className="ds-c-fieldset"
+        >
+          <FormLabel
+            component="legend"
+            errorId="field_4-error"
+            id="field_4-label"
+          >
+            <legend
+              className="ds-c-label"
+              id="field_4-label"
+            >
+              <span
+                className=""
+              >
+                Does this person have costs directly attributable to this program?
+              </span>
+            </legend>
+          </FormLabel>
           <Choice
             checked={false}
-            label="No"
-            name="apd-state-profile-hascosts1"
-            onChange={[Function]}
-            type="radio"
-            value="no"
-          >
-            <div
-              aria-atomic={null}
-              aria-live={null}
-              aria-relevant={null}
-            >
-              <input
-                checked={false}
-                className="ds-c-choice"
-                id="radio_apd-state-profile-hascosts1_4"
-                name="apd-state-profile-hascosts1"
-                onChange={[Function]}
-                type="radio"
-                value="no"
-              />
-              <FormLabel
-                component="label"
-                fieldId="radio_apd-state-profile-hascosts1_4"
-              >
-                <label
-                  className="ds-c-label"
-                  htmlFor="radio_apd-state-profile-hascosts1_4"
-                >
-                  <span
-                    className=""
-                  >
-                    No
-                  </span>
-                </label>
-              </FormLabel>
-            </div>
-          </Choice>
-        </div>
-      </ChoiceComponent>
-      <ChoiceComponent
-        checked={true}
-        checkedChildren={
-          <PersonCostForm
-            costLabel="Cost with benefits"
-            fteLabel="FTE Allocation"
-            hint="For example: 0.5 = 0.5 FTE = 50% time"
-            items={
-              Object {
-                "1992": Object {
-                  "amt": 100,
-                  "perc": 0.32,
-                },
-                "1993": Object {
-                  "amt": 300,
-                  "perc": 0.57,
-                },
-              }
-            }
-            setCost={[Function]}
-            setFTE={[Function]}
-          />
-        }
-        label="Yes"
-        name="apd-state-profile-hascosts1"
-        onChange={[Function]}
-        type="radio"
-        value="yes"
-      >
-        <div>
-          <Choice
-            checked={true}
             checkedChildren={
               <PersonCostForm
                 costLabel="Cost with benefits"
@@ -327,6 +303,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 setFTE={[Function]}
               />
             }
+            inputClassName=""
+            inputRef={[Function]}
+            key="yes"
             label="Yes"
             name="apd-state-profile-hascosts1"
             onChange={[Function]}
@@ -339,7 +318,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               aria-relevant="additions text"
             >
               <input
-                checked={true}
+                checked={false}
                 className="ds-c-choice"
                 id="radio_apd-state-profile-hascosts1_5"
                 name="apd-state-profile-hascosts1"
@@ -362,459 +341,53 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                   </span>
                 </label>
               </FormLabel>
-              <PersonCostForm
-                costLabel="Cost with benefits"
-                fteLabel="FTE Allocation"
-                hint="For example: 0.5 = 0.5 FTE = 50% time"
-                items={
-                  Object {
-                    "1992": Object {
-                      "amt": 100,
-                      "perc": 0.32,
-                    },
-                    "1993": Object {
-                      "amt": 300,
-                      "perc": 0.57,
-                    },
-                  }
-                }
-                setCost={[Function]}
-                setFTE={[Function]}
-              >
-                <div>
-                  <h5
-                    className="ds-h5"
-                  >
-                    FFY 
-                    1992
-                     Cost
-                  </h5>
-                  <div
-                    className="ds-c-choice__checkedChild ds-u-padding-y--0"
-                  >
-                    <DollarField
-                      label="Cost with benefits"
-                      name="cost"
-                      onChange={[Function]}
-                      size="medium"
-                      value={100}
-                    >
-                      <NumberField
-                        label="Cost with benefits"
-                        mask="currency"
-                        min={null}
-                        name="cost"
-                        onBlur={null}
-                        onChange={[Function]}
-                        round={true}
-                        size="medium"
-                        value={100}
-                      >
-                        <TextField
-                          label="Cost with benefits"
-                          mask="currency"
-                          name="cost"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          size="medium"
-                          type="text"
-                          value="100"
-                        >
-                          <FormControl
-                            className="ds-u-clearfix"
-                            component="div"
-                            label="Cost with benefits"
-                            labelComponent="label"
-                            render={[Function]}
-                          >
-                            <div
-                              className="ds-u-clearfix"
-                            >
-                              <FormLabel
-                                component="label"
-                                errorId="field_6-error"
-                                fieldId="field_6"
-                                id="field_6-label"
-                              >
-                                <label
-                                  className="ds-c-label"
-                                  htmlFor="field_6"
-                                  id="field_6-label"
-                                >
-                                  <span
-                                    className=""
-                                  >
-                                    Cost with benefits
-                                  </span>
-                                </label>
-                              </FormLabel>
-                              <TextInput
-                                errorId="field_6-error"
-                                errorPlacement="top"
-                                id="field_6"
-                                mask="currency"
-                                name="cost"
-                                onBlur={[Function]}
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                setRef={[Function]}
-                                size="medium"
-                                type="text"
-                                value="100"
-                              >
-                                <Mask
-                                  mask="currency"
-                                >
-                                  <div
-                                    className="ds-c-field-mask ds-c-field-mask--currency"
-                                  >
-                                    <div
-                                      className="ds-c-field__before ds-c-field__before--currency"
-                                    >
-                                      $
-                                    </div>
-                                    <input
-                                      aria-invalid={false}
-                                      className="ds-c-field ds-c-field--currency ds-c-field--medium"
-                                      id="field_6"
-                                      inputMode="numeric"
-                                      name="cost"
-                                      onBlur={[Function]}
-                                      onChange={[Function]}
-                                      onFocus={[Function]}
-                                      pattern="[0-9.,-]*"
-                                      type="text"
-                                      value="100"
-                                    />
-                                  </div>
-                                </Mask>
-                              </TextInput>
-                            </div>
-                          </FormControl>
-                        </TextField>
-                      </NumberField>
-                    </DollarField>
-                    <NumberField
-                      hint="For example: 0.5 = 0.5 FTE = 50% time"
-                      label="FTE Allocation"
-                      mask={null}
-                      min={0}
-                      name="ftes"
-                      onBlur={null}
-                      onChange={[Function]}
-                      round={false}
-                      size="medium"
-                      value={0.32}
-                    >
-                      <TextField
-                        hint="For example: 0.5 = 0.5 FTE = 50% time"
-                        label="FTE Allocation"
-                        mask={null}
-                        name="ftes"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        size="medium"
-                        type="text"
-                        value="0.32"
-                      >
-                        <FormControl
-                          className="ds-u-clearfix"
-                          component="div"
-                          hint="For example: 0.5 = 0.5 FTE = 50% time"
-                          label="FTE Allocation"
-                          labelComponent="label"
-                          render={[Function]}
-                        >
-                          <div
-                            className="ds-u-clearfix"
-                          >
-                            <FormLabel
-                              component="label"
-                              errorId="field_7-error"
-                              fieldId="field_7"
-                              hint="For example: 0.5 = 0.5 FTE = 50% time"
-                              id="field_7-label"
-                            >
-                              <label
-                                className="ds-c-label"
-                                htmlFor="field_7"
-                                id="field_7-label"
-                              >
-                                <span
-                                  className=""
-                                >
-                                  FTE Allocation
-                                </span>
-                                <span
-                                  className="ds-c-field__hint"
-                                >
-                                  For example: 0.5 = 0.5 FTE = 50% time
-                                </span>
-                              </label>
-                            </FormLabel>
-                            <TextInput
-                              errorId="field_7-error"
-                              errorPlacement="top"
-                              id="field_7"
-                              mask={null}
-                              name="ftes"
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              onFocus={[Function]}
-                              setRef={[Function]}
-                              size="medium"
-                              type="text"
-                              value="0.32"
-                            >
-                              <input
-                                aria-invalid={false}
-                                className="ds-c-field ds-c-field--medium"
-                                id="field_7"
-                                name="ftes"
-                                onBlur={[Function]}
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                type="text"
-                                value="0.32"
-                              />
-                            </TextInput>
-                          </div>
-                        </FormControl>
-                      </TextField>
-                    </NumberField>
-                    <p>
-                      <strong>
-                        Total: 
-                      </strong>
-                      <Dollars>
-                        <span>
-                          $32
-                        </span>
-                      </Dollars>
-                    </p>
-                  </div>
-                  <h5
-                    className="ds-h5"
-                  >
-                    FFY 
-                    1993
-                     Cost
-                  </h5>
-                  <div
-                    className="ds-c-choice__checkedChild ds-u-padding-y--0"
-                  >
-                    <DollarField
-                      label="Cost with benefits"
-                      name="cost"
-                      onChange={[Function]}
-                      size="medium"
-                      value={300}
-                    >
-                      <NumberField
-                        label="Cost with benefits"
-                        mask="currency"
-                        min={null}
-                        name="cost"
-                        onBlur={null}
-                        onChange={[Function]}
-                        round={true}
-                        size="medium"
-                        value={300}
-                      >
-                        <TextField
-                          label="Cost with benefits"
-                          mask="currency"
-                          name="cost"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          size="medium"
-                          type="text"
-                          value="300"
-                        >
-                          <FormControl
-                            className="ds-u-clearfix"
-                            component="div"
-                            label="Cost with benefits"
-                            labelComponent="label"
-                            render={[Function]}
-                          >
-                            <div
-                              className="ds-u-clearfix"
-                            >
-                              <FormLabel
-                                component="label"
-                                errorId="field_8-error"
-                                fieldId="field_8"
-                                id="field_8-label"
-                              >
-                                <label
-                                  className="ds-c-label"
-                                  htmlFor="field_8"
-                                  id="field_8-label"
-                                >
-                                  <span
-                                    className=""
-                                  >
-                                    Cost with benefits
-                                  </span>
-                                </label>
-                              </FormLabel>
-                              <TextInput
-                                errorId="field_8-error"
-                                errorPlacement="top"
-                                id="field_8"
-                                mask="currency"
-                                name="cost"
-                                onBlur={[Function]}
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                setRef={[Function]}
-                                size="medium"
-                                type="text"
-                                value="300"
-                              >
-                                <Mask
-                                  mask="currency"
-                                >
-                                  <div
-                                    className="ds-c-field-mask ds-c-field-mask--currency"
-                                  >
-                                    <div
-                                      className="ds-c-field__before ds-c-field__before--currency"
-                                    >
-                                      $
-                                    </div>
-                                    <input
-                                      aria-invalid={false}
-                                      className="ds-c-field ds-c-field--currency ds-c-field--medium"
-                                      id="field_8"
-                                      inputMode="numeric"
-                                      name="cost"
-                                      onBlur={[Function]}
-                                      onChange={[Function]}
-                                      onFocus={[Function]}
-                                      pattern="[0-9.,-]*"
-                                      type="text"
-                                      value="300"
-                                    />
-                                  </div>
-                                </Mask>
-                              </TextInput>
-                            </div>
-                          </FormControl>
-                        </TextField>
-                      </NumberField>
-                    </DollarField>
-                    <NumberField
-                      hint="For example: 0.5 = 0.5 FTE = 50% time"
-                      label="FTE Allocation"
-                      mask={null}
-                      min={0}
-                      name="ftes"
-                      onBlur={null}
-                      onChange={[Function]}
-                      round={false}
-                      size="medium"
-                      value={0.57}
-                    >
-                      <TextField
-                        hint="For example: 0.5 = 0.5 FTE = 50% time"
-                        label="FTE Allocation"
-                        mask={null}
-                        name="ftes"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        size="medium"
-                        type="text"
-                        value="0.57"
-                      >
-                        <FormControl
-                          className="ds-u-clearfix"
-                          component="div"
-                          hint="For example: 0.5 = 0.5 FTE = 50% time"
-                          label="FTE Allocation"
-                          labelComponent="label"
-                          render={[Function]}
-                        >
-                          <div
-                            className="ds-u-clearfix"
-                          >
-                            <FormLabel
-                              component="label"
-                              errorId="field_9-error"
-                              fieldId="field_9"
-                              hint="For example: 0.5 = 0.5 FTE = 50% time"
-                              id="field_9-label"
-                            >
-                              <label
-                                className="ds-c-label"
-                                htmlFor="field_9"
-                                id="field_9-label"
-                              >
-                                <span
-                                  className=""
-                                >
-                                  FTE Allocation
-                                </span>
-                                <span
-                                  className="ds-c-field__hint"
-                                >
-                                  For example: 0.5 = 0.5 FTE = 50% time
-                                </span>
-                              </label>
-                            </FormLabel>
-                            <TextInput
-                              errorId="field_9-error"
-                              errorPlacement="top"
-                              id="field_9"
-                              mask={null}
-                              name="ftes"
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              onFocus={[Function]}
-                              setRef={[Function]}
-                              size="medium"
-                              type="text"
-                              value="0.57"
-                            >
-                              <input
-                                aria-invalid={false}
-                                className="ds-c-field ds-c-field--medium"
-                                id="field_9"
-                                name="ftes"
-                                onBlur={[Function]}
-                                onChange={[Function]}
-                                onFocus={[Function]}
-                                type="text"
-                                value="0.57"
-                              />
-                            </TextInput>
-                          </div>
-                        </FormControl>
-                      </TextField>
-                    </NumberField>
-                    <p>
-                      <strong>
-                        Total: 
-                      </strong>
-                      <Dollars>
-                        <span>
-                          $171
-                        </span>
-                      </Dollars>
-                    </p>
-                  </div>
-                </div>
-              </PersonCostForm>
             </div>
           </Choice>
-        </div>
-      </ChoiceComponent>
-    </fieldset>
+          <Choice
+            checked={false}
+            inputClassName=""
+            inputRef={[Function]}
+            key="no"
+            label="No"
+            name="apd-state-profile-hascosts1"
+            onChange={[Function]}
+            type="radio"
+            value="no"
+          >
+            <div
+              aria-atomic={null}
+              aria-live={null}
+              aria-relevant={null}
+            >
+              <input
+                checked={false}
+                className="ds-c-choice"
+                id="radio_apd-state-profile-hascosts1_6"
+                name="apd-state-profile-hascosts1"
+                onChange={[Function]}
+                type="radio"
+                value="no"
+              />
+              <FormLabel
+                component="label"
+                fieldId="radio_apd-state-profile-hascosts1_6"
+              >
+                <label
+                  className="ds-c-label"
+                  htmlFor="radio_apd-state-profile-hascosts1_6"
+                >
+                  <span
+                    className=""
+                  >
+                    No
+                  </span>
+                </label>
+              </FormLabel>
+            </div>
+          </Choice>
+        </fieldset>
+      </FormControl>
+    </ChoiceList>
     <input
       className="ds-u-visibility--hidden"
       hidden={true}
@@ -860,52 +433,45 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     type="text"
     value="The Builder"
   />
-  <fieldset
-    className="ds-c-fieldset"
-  >
-    <legend
-      className="ds-c-label"
-    >
-      Does this person have costs directly attributable to this program?
-    </legend>
-    <ChoiceComponent
-      checked={true}
-      label="No"
-      name="apd-state-profile-hascosts1"
-      onChange={[Function]}
-      type="radio"
-      value="no"
-    />
-    <ChoiceComponent
-      checked={false}
-      checkedChildren={
-        <PersonCostForm
-          costLabel="Cost with benefits"
-          fteLabel="FTE Allocation"
-          hint="For example: 0.5 = 0.5 FTE = 50% time"
-          items={
-            Object {
-              "1992": Object {
-                "amt": 100,
-                "perc": 0.32,
-              },
-              "1993": Object {
-                "amt": 300,
-                "perc": 0.57,
-              },
+  <ChoiceList
+    choices={
+      Array [
+        Object {
+          "checked": false,
+          "checkedChildren": <PersonCostForm
+            costLabel="Cost with benefits"
+            fteLabel="FTE Allocation"
+            hint="For example: 0.5 = 0.5 FTE = 50% time"
+            items={
+              Object {
+                "1992": Object {
+                  "amt": 100,
+                  "perc": 0.32,
+                },
+                "1993": Object {
+                  "amt": 300,
+                  "perc": 0.57,
+                },
+              }
             }
-          }
-          setCost={[Function]}
-          setFTE={[Function]}
-        />
-      }
-      label="Yes"
-      name="apd-state-profile-hascosts1"
-      onChange={[Function]}
-      type="radio"
-      value="yes"
-    />
-  </fieldset>
+            setCost={[Function]}
+            setFTE={[Function]}
+          />,
+          "label": "Yes",
+          "value": "yes",
+        },
+        Object {
+          "checked": false,
+          "label": "No",
+          "value": "no",
+        },
+      ]
+    }
+    label="Does this person have costs directly attributable to this program?"
+    name="apd-state-profile-hascosts1"
+    onChange={[Function]}
+    type="radio"
+  />
   <input
     className="ds-u-visibility--hidden"
     hidden={true}
@@ -950,52 +516,45 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     type="text"
     value="The Builder"
   />
-  <fieldset
-    className="ds-c-fieldset"
-  >
-    <legend
-      className="ds-c-label"
-    >
-      Does this person have costs directly attributable to this program?
-    </legend>
-    <ChoiceComponent
-      checked={false}
-      label="No"
-      name="apd-state-profile-hascosts0"
-      onChange={[Function]}
-      type="radio"
-      value="no"
-    />
-    <ChoiceComponent
-      checked={true}
-      checkedChildren={
-        <PersonCostForm
-          costLabel="Cost with benefits"
-          fteLabel="FTE Allocation"
-          hint="For example: 0.5 = 0.5 FTE = 50% time"
-          items={
-            Object {
-              "1992": Object {
-                "amt": 100,
-                "perc": 0.32,
-              },
-              "1993": Object {
-                "amt": 300,
-                "perc": 0.57,
-              },
+  <ChoiceList
+    choices={
+      Array [
+        Object {
+          "checked": false,
+          "checkedChildren": <PersonCostForm
+            costLabel="Cost with benefits"
+            fteLabel="FTE Allocation"
+            hint="For example: 0.5 = 0.5 FTE = 50% time"
+            items={
+              Object {
+                "1992": Object {
+                  "amt": 100,
+                  "perc": 0.32,
+                },
+                "1993": Object {
+                  "amt": 300,
+                  "perc": 0.57,
+                },
+              }
             }
-          }
-          setCost={[Function]}
-          setFTE={[Function]}
-        />
-      }
-      label="Yes"
-      name="apd-state-profile-hascosts0"
-      onChange={[Function]}
-      type="radio"
-      value="yes"
-    />
-  </fieldset>
+            setCost={[Function]}
+            setFTE={[Function]}
+          />,
+          "label": "Yes",
+          "value": "yes",
+        },
+        Object {
+          "checked": false,
+          "label": "No",
+          "value": "no",
+        },
+      ]
+    }
+    label="Does this person have costs directly attributable to this program?"
+    name="apd-state-profile-hascosts0"
+    onChange={[Function]}
+    type="radio"
+  />
   <input
     className="ds-u-visibility--hidden"
     hidden={true}
