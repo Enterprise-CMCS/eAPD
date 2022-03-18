@@ -123,15 +123,13 @@
           "description": "Maintain SLR",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -147,15 +145,13 @@
           "description": "Technology consulting and planning services.",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -434,15 +430,13 @@
           "description": "Hosting and development support.",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -458,15 +452,13 @@
           "description": "Interface M&O contractor.",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -717,15 +709,13 @@
           "description": "",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -919,15 +909,13 @@
           "description": "",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -943,15 +931,13 @@
           "description": "",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -1105,15 +1091,13 @@
           "description": "Gateway Implementation.",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -1129,15 +1113,13 @@
           "description": "Gateway Development Planning and RFP",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -1299,15 +1281,13 @@
           "description": "Research for and RFP development for MITA 3.0 SSA",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,
@@ -1323,15 +1303,13 @@
           "description": "MITA 3.0 implementation.",
           "end": "",
           "hourly": {
-            "data": {
-              "2019": {
-                "hours": "",
-                "rate": ""
-              },
-              "2020": {
-                "hours": "",
-                "rate": ""
-              }
+            "2019": {
+              "hours": "",
+              "rate": ""
+            },
+            "2020": {
+              "hours": "",
+              "rate": ""
             }
           },
           "useHourly": false,

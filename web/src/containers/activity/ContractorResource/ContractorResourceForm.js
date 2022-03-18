@@ -28,24 +28,16 @@ const ContractorResourceForm = forwardRef(
         case 'setHourly':
           return {
             ...state,
-            hourly: {
-              useHourly: action.value,
-              data: {
-                ...state.hourly.data
-              }
-            }
+            useHourly: action.value
           };
         case 'updateHourlyHours':
           return {
             ...state,
             hourly: {
               ...state.hourly,
-              data: {
-                ...state.hourly.data,
-                [action.year]: {
-                  ...state.hourly.data[action.year],
-                  hours: action.value
-                }
+              [action.year]: {
+                ...state.hourly[action.year],
+                hours: action.value
               }
             }
           };
@@ -54,12 +46,9 @@ const ContractorResourceForm = forwardRef(
             ...state,
             hourly: {
               ...state.hourly,
-              data: {
-                ...state.hourly.data,
-                [action.year]: {
-                  ...state.hourly.data[action.year],
-                  rate: action.value
-                }
+              [action.year]: {
+                ...state.hourly[action.year],
+                rate: action.value
               }
             }
           };
@@ -104,7 +93,7 @@ const ContractorResourceForm = forwardRef(
         dispatch({
           type: 'updateYearCost',
           year,
-          value: value * state.hourly.data[year].rate
+          value: value * state.hourly[year].rate
         });
       };
 
@@ -115,7 +104,7 @@ const ContractorResourceForm = forwardRef(
         dispatch({
           type: 'updateYearCost',
           year,
-          value: state.hourly.data[year].hours * value
+          value: state.hourly[year].hours * value
         });
       };
 
@@ -219,7 +208,7 @@ const ContractorResourceForm = forwardRef(
                         name={`contractor-num-hours-ffy-${ffy}`}
                         labelClassName="ds-u-margin-top--1"
                         size="medium"
-                        value={state.hourly.data[ffy].hours}
+                        value={state.hourly[ffy].hours}
                         onChange={getHandlerForYearlyHours(ffy)}
                       />
                       <DollarField
@@ -228,7 +217,7 @@ const ContractorResourceForm = forwardRef(
                         name={`contractor-hourly-rate-ffy-${ffy}`}
                         labelClassName="ds-u-margin-top--1"
                         size="medium"
-                        value={state.hourly.data[ffy].rate}
+                        value={state.hourly[ffy].rate}
                         onChange={getHandlerForYearlyHourlyRate(ffy)}
                       />
                     </div>
@@ -278,6 +267,7 @@ ContractorResourceForm.propTypes = {
     description: PropTypes.string,
     end: PropTypes.string,
     hourly: PropTypes.object,
+    useHourly: PropTypes.bool,
     key: PropTypes.string,
     name: PropTypes.string,
     start: PropTypes.string,

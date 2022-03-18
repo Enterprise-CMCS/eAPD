@@ -21,31 +21,22 @@
     "hourly": {
       "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly",
       "type": "object",
-      "required": [
-        "data"
-      ],
-      "properties": {
-        "data": {
-          "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/data",
+      "patternProperties": {
+        "^[0-9]{4}$": {
+          "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year",
           "type": "object",
-          "patternProperties": {
-            "^[0-9]{4}$": {
-              "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year",
-              "type": "object",
-              "required": [
-                "hours",
-                "rate"
-              ],
-              "properties": {
-                "hours": {
-                  "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/hours",
-                  "$ref": "definitions.json#/definitions/optionalNumber"
-                },
-                "rate": {
-                  "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/rate",
-                  "$ref": "definitions.json#/definitions/optionalNumber"
-                }
-              }
+          "required": [
+            "hours",
+            "rate"
+          ],
+          "properties": {
+            "hours": {
+              "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/hours",
+              "$ref": "definitions.json#/definitions/optionalNumber"
+            },
+            "rate": {
+              "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/rate",
+              "$ref": "definitions.json#/definitions/optionalNumber"
             }
           }
         }

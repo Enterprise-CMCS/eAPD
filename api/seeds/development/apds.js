@@ -79,10 +79,8 @@ const apd = {
           description: 'Maintain SLR',
           end: '',
           hourly: {
-            data: {
-              2022: { hours: '', rate: '' },
-              2023: { hours: '', rate: '' }
-            }
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Super SLR Incorporated',
@@ -94,10 +92,8 @@ const apd = {
           description: 'Technology consulting and planning services.',
           end: '',
           hourly: {
-            data: {
-              2022: { hours: '', rate: '' },
-              2023: { hours: '', rate: '' }
-            }
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Tech Consulting Inc.',
@@ -286,10 +282,8 @@ const apd = {
           description: 'Hosting and development support.',
           end: '',
           hourly: {
-            data: {
-              2022: { hours: '', rate: '' },
-              2023: { hours: '', rate: '' }
-            }
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Interface Vendor Inc.',
@@ -301,10 +295,8 @@ const apd = {
           description: 'Interface M&O contractor.',
           end: '',
           hourly: {
-            data: {
-              2022: { hours: '', rate: '' },
-              2023: { hours: '', rate: '' }
-            }
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'TBD',
@@ -468,10 +460,8 @@ const apd = {
           description: 'Creates materials for training ',
           end: '2022-05-31',
           hourly: {
-            data: {
-              2022: { hours: '', rate: '' },
-              2023: { hours: '', rate: '' }
-            }
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Sample Training Contractor Name',
@@ -595,10 +585,8 @@ const apd = {
           description: '',
           end: '',
           hourly: {
-            data: {
-              2022: { hours: '', rate: '' },
-              2023: { hours: '', rate: '' }
-            }
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'RFP Planning Vendor Inc.',
@@ -610,10 +598,8 @@ const apd = {
           description: '',
           end: '',
           hourly: {
-            data: {
-              2022: { hours: '', rate: '' },
-              2023: { hours: '', rate: '' }
-            }
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Blue Button Builder Inc.',

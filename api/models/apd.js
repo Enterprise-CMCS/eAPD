@@ -193,22 +193,20 @@ const apdSchema = new mongoose.Schema({
           description: String,
           end: Date,
           hourly: {
-            data: {
-              type: Map,
-              of: new mongoose.Schema(
-                {
-                  hours: {
-                    type: Number,
-                    default: 0
-                  },
-                  rate: {
-                    type: Number,
-                    default: 0
-                  }
+            type: Map,
+            of: new mongoose.Schema(
+              {
+                hours: {
+                  type: Number,
+                  default: 0
                 },
-                { _id: false }
-              )
-            },
+                rate: {
+                  type: Number,
+                  default: 0
+                }
+              },
+              { _id: false }
+            )
           },
           useHourly: Boolean,
           name: String,

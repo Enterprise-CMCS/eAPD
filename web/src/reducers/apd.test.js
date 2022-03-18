@@ -331,10 +331,8 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  data: {
-                    1742: { hours: 20, rate: 22 },
-                    1743: { hours: 25, rate: 27 }
-                  }
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
                 },
                 years: {
                   1742: 0,
@@ -421,11 +419,9 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  data: {
-                    1741: { hours: 0, rate: 0 },
-                    1742: { hours: 20, rate: 22 },
-                    1743: { hours: 25, rate: 27 }
-                  }
+                  1741: { hours: 0, rate: 0 },
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
                 },
                 years: {
                   1741: 0,
@@ -545,11 +541,9 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  data: {
-                    1741: { hours: '', rate: '' },
-                    1742: { hours: 20, rate: 22 },
-                    1743: { hours: 25, rate: 27 }
-                  }
+                  1741: { hours: '', rate: '' },
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
                 },
                 years: {
                   1741: 0,
@@ -665,10 +659,8 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  data: {
-                    1742: { hours: 20, rate: 22 },
-                    1743: { hours: 25, rate: 27 }
-                  }
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
                 },
                 years: {
                   1742: 0,
@@ -916,12 +908,10 @@ describe('APD reducer', () => {
                   end: '',
                   files: [],
                   hourly: {
-                    data: {
-                      1403: { hours: 0, rate: 0 },
-                      1404: { hours: 0, rate: 0 }
-                    },
-                    useHourly: false
+                    1403: { hours: 0, rate: 0 },
+                    1404: { hours: 0, rate: 0 }
                   },
+                  useHourly: false,
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   name: '',
                   start: '',
