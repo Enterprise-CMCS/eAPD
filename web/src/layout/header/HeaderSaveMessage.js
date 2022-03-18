@@ -6,11 +6,11 @@ import {
   selectError,
   selectIsSaving,
   selectLastSaved
-} from '../reducers/saving';
+} from '../../reducers/saving';
 
-import SaveMessage from './SaveMessage';
+import SaveMessage from '../../components/SaveMessage';
 
-import { Check, Xmark, Spinner } from './Icons';
+import { Check, Xmark, Spinner } from '../../components/Icons';
 
 const HeaderSaveMessage = ({ isSaving, lastSaved, error }) => {
   const [active, setActive] = useState(isSaving);
