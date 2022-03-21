@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, { useReducer, Fragment, useState, useEffect } from 'react';
 
 import { Autocomplete, Badge, TextField } from '@cmsgov/design-system';
-import AuthenticationForm from '../components/AuthenticationForm';
+import AuthenticationForm from './AuthenticationForm';
 
-import { STATES } from '../util/states';
+import { STATES } from '../../util/states';
 
-import axios from '../util/api';
+import axios from '../../util/api';
 
 const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
 

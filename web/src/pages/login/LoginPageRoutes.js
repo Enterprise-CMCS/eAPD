@@ -6,16 +6,16 @@ import {
   useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
-import Login from './Login';
-import LoginLocked from '../components/LoginLocked';
-import LoginGroupError from '../components/LoginGroupError';
-import LoginMFAEnroll from '../components/LoginMFAEnroll';
-import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
-import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
-import LoginMFA from './LoginMFA';
-import StateAccessRequest from './StateAccessRequest';
-import StateAccessRequestConfirmation from './StateAccessRequestConfirmation';
-import SelectAffiliation from './SelectAffiliation';
+import Login from '../../containers/Login';
+import LoginLocked from '../../components/LoginLocked';
+import LoginGroupError from '../../components/LoginGroupError';
+import LoginMFAEnroll from '../../components/LoginMFAEnroll';
+import LoginMFAEnrollPhoneNumber from '../../components/LoginMFAEnrollPhoneNumber';
+import LoginMFAVerifyAuthApp from '../../components/LoginMFAVerifyAuthApp';
+import LoginMFA from '../../containers/LoginMFA';
+import StateAccessRequest from '../../containers/StateAccessRequest';
+import StateAccessRequestConfirmation from '../../containers/StateAccessRequestConfirmation';
+import SelectAffiliation from '../../containers/SelectAffiliation';
 
 const LoginPageRoutes = ({
   useRouteMatch,

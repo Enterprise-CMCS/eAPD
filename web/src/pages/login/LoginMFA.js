@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import AuthenticationForm from '../components/AuthenticationForm';
+import AuthenticationForm from './AuthenticationForm';
 
 const LoginMFA = ({
   saveAction,

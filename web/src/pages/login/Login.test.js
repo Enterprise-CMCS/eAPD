@@ -9,7 +9,7 @@ import {
 import Login from './Login';
 
 import MockAdapter from 'axios-mock-adapter';
-import axios from '../util/api';
+import axios from '../../util/api';
 
 const defaultProps = {
   hasEverLoggedOn: false,
