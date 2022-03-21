@@ -83,4 +83,3 @@ resource "aws_instance" "eapd_jumpbox_nz" {
         Terraform = "True"
     }
 }
-

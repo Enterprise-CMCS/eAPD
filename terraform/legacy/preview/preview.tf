@@ -1,6 +1,4 @@
 ### Provide variables in non-Git tfvars file
-variable "vpc_id" {}
-
 terraform {
   backend "s3" {
     bucket         = "eapd-terraform-state"
@@ -60,4 +58,9 @@ resource "aws_security_group" "eapd-pr-sg-east-test" {
   }
 }
 
+module "mongo" {
+    source = "./modules/databases"
 
+    instance_name = var.instance_name
+    newrelic_liscense_key = var.newrelic_liscense_key
+}
