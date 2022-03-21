@@ -1,25 +1,29 @@
 import Joi from 'joi';
 
 const schemas = Joi.object({
-  name: Joi.string().required().messages({
+  name: Joi.string().trim().min(1).required().messages({
     'string.base': 'Provide a private contractor or vendor name.',
-    'string.empty': 'Provide a private contractor or vendor name.'
+    'string.empty': 'Provide a private contractor or vendor name.',
+    'string.min': 'Provide a private contractor or vendor name.'
   }),
-  description: Joi.string().required().messages({
+  description: Joi.string().trim().min(1).required().messages({
     'string.base':
       'Provide a procurement methodology and description of services.',
     'string.empty':
+      'Provide a procurement methodology and description of services.',
+
+    'string.min':
       'Provide a procurement methodology and description of services.'
   }),
   start: Joi.date().iso().required().messages({
     'date.base': 'Provide a start date.',
     'date.empty': 'Provide a start date.',
-    'date.format': 'Provider a valid start date.'
+    'date.format': 'Provide a start date.'
   }),
   end: Joi.date().iso().min(Joi.ref('start')).required().messages({
     'date.base': 'Provide an end date.',
     'date.empty': 'Provide an end date.',
-    'date.format': 'Provide a valid end date.',
+    'date.format': 'Provide an end date.',
     'date.min': 'Provide an end date that is after the start date.'
   }),
   totalCost: Joi.number().positive().required().messages({

@@ -659,7 +659,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .contains('Private contractors have not been added for this activity.')
         .should('exist');
 
-      cy.findByRole('button', { name: /Add Contractor/i }).click();
+      cy.findByRole('button', { name: /Add Contractor/i }).should(
+        'be.disabled'
+      );
 
       activityPage.checkTextField('ds-c-field', '');
       activityPage.checkTinyMCE('contractor-description-field-0', '');

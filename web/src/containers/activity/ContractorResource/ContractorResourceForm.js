@@ -281,15 +281,17 @@ const ContractorResourceForm = forwardRef(
           <Controller
             name="end"
             control={control}
-            render={({ field: { onChange, onBlur, value } }) => {
+            render={({ field: { onChange, onBlur, name, value } }) => {
               return (
                 <DateField
+                  name={name}
                   label="Contract end date"
                   value={value}
                   onChange={(e, dateStr) => {
                     handleDateChange('end', dateStr);
                     onChange(e);
                   }}
+                  onBlur={onBlur}
                   onComponentBlur={onBlur}
                   errorMessage={errors?.end?.message}
                 />

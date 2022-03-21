@@ -23,7 +23,7 @@ const schemas = Joi.object({
   end: Joi.date().iso().min(Joi.ref('start')).required().messages({
     'date.base': 'Provide an end date.',
     'date.empty': 'Provide an end date.',
-    'date.format': 'Provide a valid end date.',
+    'date.format': 'Provide an end date.',
     'date.min': 'Provide an end date that is after the start date.'
   }),
   totalCost: Joi.number().positive().required().messages({
