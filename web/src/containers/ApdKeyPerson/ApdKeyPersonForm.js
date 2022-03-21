@@ -1,4 +1,4 @@
-import { TextField } from '@cmsgov/design-system';
+import { TextField, ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { forwardRef, useReducer } from 'react';
 import { connect } from 'react-redux';
@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { titleCase } from 'title-case';
 import { t } from '../../i18n';
 
-import Choice from '../../components/Choice';
 import PersonCostForm from '../../components/PersonCostForm';
 
 import { saveKeyPersonnel } from '../../actions/editApd';
@@ -63,6 +62,14 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
     dispatch({ type: 'updateFte', field: 'fte', year, value: +value });
   };
 
+  const handleHasCostsChange = e => {
+    dispatch({
+      type: 'updateField',
+      field: 'hasCosts',
+      payload: e.target.value
+    });
+  };
+
   const primary = index === 0;
 
   return (
@@ -113,47 +120,44 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
           })
         }
       />
-      <fieldset className="ds-c-fieldset">
-        <legend className="ds-c-label">{t(`${tRoot}.labels.hasCosts`)}</legend>
-        <Choice
-          checked={!state.hasCosts}
-          label="No"
-          name={`apd-state-profile-hascosts${index}`}
-          onChange={() =>
-            dispatch({ type: 'updateField', field: 'hasCosts', payload: false })
+      <ChoiceList
+        label={t(`${tRoot}.labels.hasCosts`)}
+        name={`apd-state-profile-hascosts${index}`}
+        choices={[
+          {
+            label: 'Yes',
+            value: 'yes',
+            checked: state.hasCosts === 'yes',
+            checkedChildren: (
+              <PersonCostForm
+                items={years.reduce(
+                  (o, year) => ({
+                    ...o,
+                    [year]: {
+                      amt: state.costs[year],
+                      perc: state.fte[year]
+                    }
+                  }),
+                  {}
+                )}
+                fteLabel="FTE Allocation"
+                hint="For example: 0.5 = 0.5 FTE = 50% time"
+                setCost={setCostForYear}
+                setFTE={setFTEForYear}
+              />
+            )
+          },
+          {
+            label: 'No',
+            value: 'no',
+            checked: state.hasCosts === 'no'
           }
-          type="radio"
-          value="no"
-        />
-        <Choice
-          checked={state.hasCosts}
-          label="Yes"
-          name={`apd-state-profile-hascosts${index}`}
-          onChange={() =>
-            dispatch({ type: 'updateField', field: 'hasCosts', payload: true })
-          }
-          type="radio"
-          value="yes"
-          checkedChildren={
-            <PersonCostForm
-              items={years.reduce(
-                (o, year) => ({
-                  ...o,
-                  [year]: {
-                    amt: state.costs[year],
-                    perc: state.fte[year]
-                  }
-                }),
-                {}
-              )}
-              fteLabel="FTE Allocation"
-              hint="For example: 0.5 = 0.5 FTE = 50% time"
-              setCost={setCostForYear}
-              setFTE={setFTEForYear}
-            />
-          }
-        />
-      </fieldset>
+        ]}
+        type="radio"
+        onChange={e => {
+          handleHasCostsChange(e);
+        }}
+      />
       <input
         className="ds-u-visibility--hidden"
         type="submit"
