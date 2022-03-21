@@ -31,8 +31,8 @@ export const newStatePerson = years => ({
   years: arrToObj(years, statePersonDefaultYear())
 });
 
-export const contractorDefaultYear = () => 0;
-export const contractorDefaultHourly = () => ({ hours: 0, rate: 0 });
+export const contractorDefaultYear = () => null;
+export const contractorDefaultHourly = () => ({ hours: null, rate: null });
 export const newContractor = years => ({
   key: generateKey(),
   name: '',
@@ -40,7 +40,7 @@ export const newContractor = years => ({
   start: '',
   end: '',
   files: [],
-  totalCost: 0,
+  totalCost: null,
   years: arrToObj(years, contractorDefaultYear()),
   hourly: {
     useHourly: null,

@@ -45,7 +45,6 @@ services:
         target: /app
         consistency: delegated
       - /app/node_modules
-      - ./schemas:/app/src/static/schemas
     ports:
       - 8080:8001
 

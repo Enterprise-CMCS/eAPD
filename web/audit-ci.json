@@ -28,6 +28,11 @@
         "@storybook/addon-docs@6.4.18 - storybook",
         "@storybook/react@6.4.18 - storybook"
       ]
+    },
+    "1059359": {
+      "advisory": "https://github.com/advisories/GHSA-3949-f494-cm99",
+      "module": "prismjs",
+      "affects": ["@storybook/addon-a11y@6.4.18 - storybook"]
     }
   }
 }

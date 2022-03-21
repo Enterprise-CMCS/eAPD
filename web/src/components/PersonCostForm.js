@@ -16,14 +16,12 @@ const PersonCostForm = ({
   const handleCostChange =
     year =>
     ({ target: { value } }) => {
-      console.log(`handleCostChange ${year} ${value}`);
       setCost(year, value);
     };
 
   const handleFTEChange =
     year =>
     ({ target: { value } }) => {
-      console.log(`handleFTEChange ${year} ${value}`);
       setFTE(year, value);
     };
 

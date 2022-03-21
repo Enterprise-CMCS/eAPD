@@ -24,6 +24,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
             "index": [Function],
             "item": [Function],
             "saveContractor": [Function],
+            "setFormValid": [Function],
           },
           "render": [Function],
         },
