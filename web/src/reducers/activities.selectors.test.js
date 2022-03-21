@@ -104,23 +104,19 @@ describe('activities state selectors', () => {
                 {
                   name: 'contractor 2.1',
                   hourly: {
-                    data: {
-                      1990: { hours: 10, rate: 10 },
-                      1991: { hours: 20, rate: 20 }
-                    },
-                    useHourly: false
+                    1990: { hours: 10, rate: 10 },
+                    1991: { hours: 20, rate: 20 }
                   },
+                  useHourly: false,
                   years: { 1990: 1000, 1991: 2000 }
                 },
                 {
                   name: 'contractor 2.2',
                   hourly: {
-                    data: {
-                      1990: { hours: 30, rate: 30 },
-                      1991: { hours: 40, rate: 40 }
-                    },
-                    useHourly: true
+                    1990: { hours: 30, rate: 30 },
+                    1991: { hours: 40, rate: 40 }
                   },
+                  useHourly: true,
                   years: { 1990: 3000, 1991: 4000 }
                 }
               ],
