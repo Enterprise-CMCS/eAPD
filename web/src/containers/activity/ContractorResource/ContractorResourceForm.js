@@ -183,7 +183,7 @@ const ContractorResourceForm = forwardRef(
         <fieldset className="ds-c-fieldset">
           <legend className="ds-c-label">This is an hourly resource</legend>
           <Choice
-            checked={!state.hourly.useHourly}
+            checked={!state.useHourly}
             label="No"
             name={`apd-activity-contractor-hourly-${state.key}-no`}
             onChange={() => dispatch({ type: 'setHourly', value: false })}
@@ -191,7 +191,7 @@ const ContractorResourceForm = forwardRef(
             value="no"
           />
           <Choice
-            checked={state.hourly.useHourly}
+            checked={state.useHourly}
             label="Yes"
             name={`apd-activity-contractor-hourly-${state.key}-yes`}
             onChange={() => dispatch({ type: 'setHourly', value: true })}
@@ -227,7 +227,7 @@ const ContractorResourceForm = forwardRef(
             }
           />
         </fieldset>
-        {state.hourly.useHourly ? (
+        {state.useHourly ? (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <Fragment key={ffy}>
@@ -242,7 +242,7 @@ const ContractorResourceForm = forwardRef(
               key={ffy}
               label={`FFY ${ffy} Cost`}
               name={`contractor-cost-ffy-${ffy}`}
-              disabled={state.hourly.useHourly}
+              disabled={state.useHourly}
               size="medium"
               value={state.years[ffy]}
               onChange={getHandlerForYearlyCost(ffy)}

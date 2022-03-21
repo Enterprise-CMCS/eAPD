@@ -247,7 +247,6 @@ describe('APD reducer', () => {
     it('sets keys and preserves the federal citations if they are defined', () => {
       action.apd.assurancesAndCompliances = { key: 'value' };
       
-      console.log("initials", apd(initialState, action));
       expect(apd(initialState, action)).toEqual({
         ...initialState,
         data: {

@@ -69,7 +69,7 @@ export const getPatchesToAddYear = (state, year) => {
     activity.contractorResources.forEach((_, i) => {
       patches.push({
         op: 'add',
-        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/data/${year}`,
+        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`,
         value: contractorDefaultHourly()
       });
       patches.push({
@@ -158,7 +158,7 @@ export const getPatchesToRemoveYear = (state, year) => {
     activity.contractorResources.forEach((_, i) => {
       patches.push({
         op: 'remove',
-        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/data/${year}`
+        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`
       });
       patches.push({
         op: 'remove',
