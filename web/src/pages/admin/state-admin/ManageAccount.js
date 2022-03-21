@@ -7,13 +7,13 @@ import { useHistory } from 'react-router-dom';
 import {
   createAccessRequest as actualCreateAccessRequest,
   completeAccessRequest as actualCompleteAccessRequest
-} from '../../actions/auth';
+} from '../../../actions/auth';
 
-import StateAccessRequest from '../../pages/login/StateAccessRequest';
-import StateAccessRequestConfirmation from '../../pages/login/StateAccessRequestConfirmation';
-import { getIsFedAdmin } from '../../reducers/user.selector';
-import { goToDashboard } from '../../actions/app';
-import axios from '../../util/api';
+import StateAccessRequest from '../../login/StateAccessRequest';
+import StateAccessRequestConfirmation from '../../login/StateAccessRequestConfirmation';
+import { getIsFedAdmin } from '../../../reducers/user.selector';
+import { goToDashboard } from '../../../actions/app';
+import axios from '../../../util/api';
 
 const ManageAccount = ({
   createAccessRequest,
