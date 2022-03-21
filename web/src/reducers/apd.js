@@ -236,7 +236,7 @@ export const getKeyPersonnel = (years = [], isPrimary = false) => ({
   costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
   email: '',
   expanded: true,
-  hasCosts: false,
+  hasCosts: null,
   isPrimary,
   fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
   name: '',
