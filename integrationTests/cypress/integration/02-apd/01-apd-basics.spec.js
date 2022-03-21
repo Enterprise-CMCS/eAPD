@@ -426,6 +426,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.get(`[data-cy='outcome-${index}']`)
           .click()
           .type(`${element.outcome}`)
+          .blur()
           .should('not.have.class', 'ds-c-field--error');
 
         cy.findByRole('button', { name: /Save/i }).should('not.be.disabled');
@@ -445,6 +446,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
               .type(`${metric}`)
+              .blur()
               .should('not.have.class', 'ds-c-field--error');
 
             cy.findByRole('button', { name: /Save/i }).should(

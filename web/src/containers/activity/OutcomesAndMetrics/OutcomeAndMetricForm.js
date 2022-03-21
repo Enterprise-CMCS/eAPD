@@ -12,23 +12,8 @@ import Review from '../../../components/Review';
 
 import { saveOutcome as actualSaveOutcome } from '../../../actions/editActivity';
 
+import outcomeMetricSchema from '../../../static/schemas/outcomeMetric';
 import { newOutcomeMetric } from '../../../reducers/activities';
-
-const outcomeMetricSchema = Joi.object({
-  outcome: Joi.string().required().messages({
-    'string.base': 'Outcome is required',
-    'string.empty': 'Outcome is required'
-  }),
-  metrics: Joi.array().items(
-    Joi.object({
-      key: Joi.any(),
-      metric: Joi.string().messages({
-        'string.empty': 'Metric is required',
-        'string.null': 'Metric is required'
-      })
-    })
-  )
-});
 
 const OutcomeAndMetricForm = forwardRef(
   ({ activityIndex, item, index, saveOutcome, setFormValid }, ref) => {
@@ -158,6 +143,7 @@ const OutcomeAndMetricForm = forwardRef(
           render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
+              data-cy={`outcome-${index}`}
               label="Outcome"
               className="remove-clearfix"
               hint="Describe a distinct and measurable improvement for this system."
