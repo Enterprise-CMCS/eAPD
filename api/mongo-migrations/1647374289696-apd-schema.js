@@ -14,7 +14,7 @@ async function up () {
       return {
         ...contractorResource,
         hourly: {
-          data: { ...contractorResource.hourly.data }
+          ...contractorResource.hourly.data
         },
         useHourly: contractorResource.hourly.useHourly
       };
