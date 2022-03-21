@@ -44,7 +44,6 @@ tap.test('apds files endpoints', async endpointTest => {
       ),
       'endpoint for fetching APD files is setup'
     );
-
   });
 
   endpointTest.test('GET endpoint for fetching an APD file', async tests => {
@@ -92,7 +91,7 @@ tap.test('apds files endpoints', async endpointTest => {
     tests.test(
       'the file belongs to the APD and there is no trouble getting it',
       async test => {
-        const file = {};
+        const file = Buffer.from('some file');
         di.fileBelongsToAPD.resolves(true);
         di.getFile.resolves(file);
 
@@ -102,10 +101,11 @@ tap.test('apds files endpoints', async endpointTest => {
           next
         );
 
-        test.ok(res.send.calledWith(file), 'sends the file');
-        test.ok(res.end.calledAfter(res.send), 'response is terminated');
+        test.ok(
+          res.end.calledWith(file),
+          'sends the file and response is terminated'
+        );
       }
     );
   });
-
 });

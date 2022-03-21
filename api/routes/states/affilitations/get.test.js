@@ -110,7 +110,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
 
       test.ok(res.status.notCalled, 'HTTP status not explicitly set');
       test.ok(
-        res.send.calledWith(pending),
+        res.json.calledWith(pending),
         'Pending Affiliation info is sent back'
       );
     });
@@ -209,10 +209,9 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
 
       test.ok(res.status.notCalled, 'HTTP status not explicitly set');
       test.ok(
-        res.send.calledWith(affiliation),
+        res.json.calledWith(affiliation),
         'Affiliation info is sent back'
       );
     });
   });
 });
-
