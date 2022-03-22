@@ -3,10 +3,10 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import TagManager from 'react-gtm-module';
 
-import ApdList from '../components/ApdList';
-import AffiliationStatus from '../components/AffiliationStatus';
-import { getUserStateOrTerritoryStatus } from '../reducers/user.selector';
-import { AFFILIATION_STATUSES } from '../constants';
+import ApdList from './ApdList';
+import AffiliationStatus from './AffiliationStatus';
+import { getUserStateOrTerritoryStatus } from '../../../reducers/user.selector';
+import { AFFILIATION_STATUSES } from '../../../constants';
 
 const StateDashboard = ({ state, role, approvalStatus }) => {
   TagManager.dataLayer({
@@ -34,7 +34,7 @@ StateDashboard.propTypes = {
 
 const mapStateToProps = state => ({
   // Todo: Update this to have a better default state
-  state: state.user.data.state || {name: 'Loading', id: ''},
+  state: state.user.data.state || { name: 'Loading', id: '' },
   role: state.user.data.role || 'Pending Role',
   approvalStatus:
     getUserStateOrTerritoryStatus(state) || AFFILIATION_STATUSES.REQUESTED
