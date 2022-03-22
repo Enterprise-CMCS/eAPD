@@ -3,7 +3,7 @@ const {
   getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
   getPopulatedAffiliationById: _getPopulatedAffiliationsById,
   getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
-  getAffiliationMatches: _getAffiliationMatches,
+  getAffiliationMatches: _getAffiliationMatches
 } = require('../../../db');
 const { can, validForState } = require('../../../middleware');
 
@@ -13,7 +13,7 @@ module.exports = (
     getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,
     getPopulatedAffiliationById = _getPopulatedAffiliationsById,
     getAllPopulatedAffiliations = _getAllPopulatedAffiliations,
-    getAffiliationMatches = _getAffiliationMatches,
+    getAffiliationMatches = _getAffiliationMatches
   } = {}
 ) => {
   app.get(
@@ -27,28 +27,27 @@ module.exports = (
       });
       const { stateId } = request.params;
       const { status = null, matches = false } = request.query;
-
       try {
         if (stateId === 'fd') {
           const affiliations = await getAllPopulatedAffiliations({
             status
           });
-          return response.send(affiliations);
-        };
+          return response.json(affiliations);
+        }
         if (matches === 'true') {
           const affiliations = await getAffiliationMatches({
             stateId,
             isFedAdmin: true
           });
-          return response.send(affiliations);
-        };
+          return response.json(affiliations);
+        }
         const affiliations = await getPopulatedAffiliationsByStateId({
           stateId,
           status,
           isFedAdmin: request.user.role === 'eAPD Federal Admin'
         });
 
-        return response.send(affiliations);
+        return response.json(affiliations);
       } catch (e) {
         return next(e);
       }
@@ -72,7 +71,7 @@ module.exports = (
         });
 
         if (affiliation) {
-          return response.send(affiliation);
+          return response.json(affiliation);
         }
 
         logger.verbose({
@@ -85,5 +84,4 @@ module.exports = (
       }
     }
   );
-
 };
