@@ -3,14 +3,17 @@ import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import Icon, { File, faPlusCircle } from './Icons';
-import Instruction from './Instruction';
-import DeleteModal from './DeleteModal';
-import { createApd, deleteApd, selectApd } from '../actions/app';
-import { t } from '../i18n';
-import { selectApdDashboard, selectApds } from '../reducers/apd.selectors';
-import UpgradeBrowser from './UpgradeBrowser';
-import Loading from './Loading';
+import Icon, { File, faPlusCircle } from '../../../components/Icons';
+import Instruction from '../../../components/Instruction';
+import DeleteModal from '../../../components/DeleteModal';
+import { createApd, deleteApd, selectApd } from '../../../actions/app';
+import { t } from '../../../i18n';
+import {
+  selectApdDashboard,
+  selectApds
+} from '../../../reducers/apd.selectors';
+import UpgradeBrowser from '../../../components/UpgradeBrowser';
+import Loading from '../../../components/Loading';
 
 const ApdList = ({
   apds,
