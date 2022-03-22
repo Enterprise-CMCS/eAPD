@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { withRouter } from 'react-router';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../layout/header/Header';
+import Footer from '../layout/footer/Footer';
 import routes from '../routes';
 import SessionEndingAlert from '../containers/SessionEndingAlert';
 
