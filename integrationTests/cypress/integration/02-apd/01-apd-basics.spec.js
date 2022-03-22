@@ -3,6 +3,7 @@ import ActivityPage from '../../page-objects/activity-page';
 import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
+import ActivityFillOutPage from '../../page-objects/fill-out-activity-page';
 
 /// <reference types="cypress" />
 
@@ -29,7 +30,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   before(() => {
     cy.useStateStaff();
 
-    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.findByRole('button', { name: /Create new/i }, { }).click();
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
@@ -247,6 +248,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     let schedulePage;
     let exportPage;
     let proposedBudgetPage;
+    let fillOutActivityPage;
 
     before(() => {
       activityPage = new ActivityPage();
@@ -254,6 +256,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       schedulePage = new ActivitySchedulePage();
       exportPage = new ExportPage();
       proposedBudgetPage = new ProposedBudgetPage();
+      fillOutActivityPage = new ActivityFillOutPage();
     });
 
     it('should handle entering data', () => {
@@ -401,6 +404,16 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           dateYear: 2023
         }
       ];
+
+      const privateContractor = {
+        name: 'Test Private Contractor',
+        description: 'Test description',
+        start: [1, 1, 2020],
+        end: [1, 2, 2023],
+        totalCosts: 12345,
+        hourly: false,
+        FFYCosts: [6045, 6300]
+      };
 
       cy.log('Outcomes and Milestones');
       cy.goToOutcomesAndMilestones(0);
@@ -703,6 +716,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       });
 
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
+      fillOutActivityPage.fillPrivateContractors([privateContractor], years);
 
       cy.get('input[name="contractor-name"]').type('Test cancel');
 
