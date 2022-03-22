@@ -1,0 +1,1046 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ManageAllUsersTable /> renders correctly for users with multiple affiliations 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <table
+        class="ds-c-table ds-c-table--borderless all-users-table"
+        role="table"
+      >
+        <thead
+          role="rowgroup"
+        >
+          <tr
+            role="row"
+          >
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Email
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Phone Number
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              State
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Role
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          role="rowgroup"
+        >
+          <tr
+            class="all-users-table--first-row-multi"
+            role="row"
+          >
+            <th
+              class="ds-c-table__cell--align-left"
+              role="rowheader"
+              rowspan="2"
+              style="vertical-align: top;"
+            >
+              Liz Lemon
+            </th>
+            <td
+              class="ds-c-table__cell--align-left"
+              role="cell"
+              rowspan="2"
+              style="vertical-align: top;"
+            >
+              liz@lemon.com
+            </td>
+            <td
+              class="ds-c-table__cell--align-left"
+              role="cell"
+              rowspan="2"
+              style="vertical-align: top;"
+            >
+              4045555555
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--state"
+              role="cell"
+            >
+              MD
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--role"
+              role="cell"
+            >
+              eAPD State Contractor
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--actions"
+              role="cell"
+            >
+              <div
+                class="ds-u-display--flex"
+                data-id="2"
+                data-primary-affiliation-id="2"
+                data-state="md"
+              />
+            </td>
+          </tr>
+          <tr
+            class="all-users-table--row-multi"
+            role="row"
+          >
+            <td
+              class="ds-c-table__cell--align-left all-users-table--state"
+              role="cell"
+            >
+              LA
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--role"
+              role="cell"
+            >
+              eAPD State Contractor
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--actions"
+              role="cell"
+            >
+              <div
+                class="ds-u-display--flex"
+                data-id="12"
+                data-primary-affiliation-id="2"
+                data-state="la"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <table
+      class="ds-c-table ds-c-table--borderless all-users-table"
+      role="table"
+    >
+      <thead
+        role="rowgroup"
+      >
+        <tr
+          role="row"
+        >
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Email
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Phone Number
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            State
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Role
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        role="rowgroup"
+      >
+        <tr
+          class="all-users-table--first-row-multi"
+          role="row"
+        >
+          <th
+            class="ds-c-table__cell--align-left"
+            role="rowheader"
+            rowspan="2"
+            style="vertical-align: top;"
+          >
+            Liz Lemon
+          </th>
+          <td
+            class="ds-c-table__cell--align-left"
+            role="cell"
+            rowspan="2"
+            style="vertical-align: top;"
+          >
+            liz@lemon.com
+          </td>
+          <td
+            class="ds-c-table__cell--align-left"
+            role="cell"
+            rowspan="2"
+            style="vertical-align: top;"
+          >
+            4045555555
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--state"
+            role="cell"
+          >
+            MD
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--role"
+            role="cell"
+          >
+            eAPD State Contractor
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--actions"
+            role="cell"
+          >
+            <div
+              class="ds-u-display--flex"
+              data-id="2"
+              data-primary-affiliation-id="2"
+              data-state="md"
+            />
+          </td>
+        </tr>
+        <tr
+          class="all-users-table--row-multi"
+          role="row"
+        >
+          <td
+            class="ds-c-table__cell--align-left all-users-table--state"
+            role="cell"
+          >
+            LA
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--role"
+            role="cell"
+          >
+            eAPD State Contractor
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--actions"
+            role="cell"
+          >
+            <div
+              class="ds-u-display--flex"
+              data-id="12"
+              data-primary-affiliation-id="2"
+              data-state="la"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<ManageAllUsersTable /> renders correctly for users with single affiliations 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <table
+        class="ds-c-table ds-c-table--borderless all-users-table"
+        role="table"
+      >
+        <thead
+          role="rowgroup"
+        >
+          <tr
+            role="row"
+          >
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Email
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Phone Number
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              State
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          role="rowgroup"
+        >
+          <tr
+            class=""
+            role="row"
+          >
+            <th
+              class="ds-c-table__cell--align-left"
+              role="rowheader"
+              rowspan="1"
+              style="vertical-align: top;"
+            >
+              Liz Lemon
+            </th>
+            <td
+              class="ds-c-table__cell--align-left"
+              role="cell"
+              rowspan="1"
+              style="vertical-align: top;"
+            >
+              liz@lemon.com
+            </td>
+            <td
+              class="ds-c-table__cell--align-left"
+              role="cell"
+              rowspan="1"
+              style="vertical-align: top;"
+            >
+              4045555555
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--state"
+              role="cell"
+            >
+              MD
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--actions"
+              role="cell"
+            >
+              <div
+                class="ds-u-display--flex"
+                data-id="14"
+                data-primary-affiliation-id="14"
+                data-state="md"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <table
+      class="ds-c-table ds-c-table--borderless all-users-table"
+      role="table"
+    >
+      <thead
+        role="rowgroup"
+      >
+        <tr
+          role="row"
+        >
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Email
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Phone Number
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            State
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        role="rowgroup"
+      >
+        <tr
+          class=""
+          role="row"
+        >
+          <th
+            class="ds-c-table__cell--align-left"
+            role="rowheader"
+            rowspan="1"
+            style="vertical-align: top;"
+          >
+            Liz Lemon
+          </th>
+          <td
+            class="ds-c-table__cell--align-left"
+            role="cell"
+            rowspan="1"
+            style="vertical-align: top;"
+          >
+            liz@lemon.com
+          </td>
+          <td
+            class="ds-c-table__cell--align-left"
+            role="cell"
+            rowspan="1"
+            style="vertical-align: top;"
+          >
+            4045555555
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--state"
+            role="cell"
+          >
+            MD
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--actions"
+            role="cell"
+          >
+            <div
+              class="ds-u-display--flex"
+              data-id="14"
+              data-primary-affiliation-id="14"
+              data-state="md"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`<ManageAllUsersTable /> renders correctly with both single and multi-affiliation users 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <table
+        class="ds-c-table ds-c-table--borderless all-users-table"
+        role="table"
+      >
+        <thead
+          role="rowgroup"
+        >
+          <tr
+            role="row"
+          >
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Email
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Phone Number
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              State
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Role
+            </th>
+            <th
+              class="ds-c-table__cell--align-left"
+              role="columnheader"
+              scope="col"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          role="rowgroup"
+        >
+          <tr
+            class=""
+            role="row"
+          >
+            <th
+              class="ds-c-table__cell--align-left"
+              role="rowheader"
+              rowspan="1"
+              style="vertical-align: top;"
+            >
+              Liz Lemon
+            </th>
+            <td
+              class="ds-c-table__cell--align-left"
+              role="cell"
+              rowspan="1"
+              style="vertical-align: top;"
+            >
+              liz@lemon.com
+            </td>
+            <td
+              class="ds-c-table__cell--align-left"
+              role="cell"
+              rowspan="1"
+              style="vertical-align: top;"
+            >
+              4045555555
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--state"
+              role="cell"
+            >
+              MD
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--role"
+              role="cell"
+            >
+              eAPD State Contractor
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--actions"
+              role="cell"
+            >
+              <div
+                class="ds-u-display--flex"
+                data-id="14"
+                data-primary-affiliation-id="14"
+                data-state="md"
+              />
+            </td>
+          </tr>
+          <tr
+            class="all-users-table--first-row-multi"
+            role="row"
+          >
+            <th
+              class="ds-c-table__cell--align-left"
+              role="rowheader"
+              rowspan="2"
+              style="vertical-align: top;"
+            >
+              Liz Lemon
+            </th>
+            <td
+              class="ds-c-table__cell--align-left"
+              role="cell"
+              rowspan="2"
+              style="vertical-align: top;"
+            >
+              liz@lemon.com
+            </td>
+            <td
+              class="ds-c-table__cell--align-left"
+              role="cell"
+              rowspan="2"
+              style="vertical-align: top;"
+            >
+              4045555555
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--state"
+              role="cell"
+            >
+              MD
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--role"
+              role="cell"
+            >
+              eAPD State Contractor
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--actions"
+              role="cell"
+            >
+              <div
+                class="ds-u-display--flex"
+                data-id="2"
+                data-primary-affiliation-id="2"
+                data-state="md"
+              />
+            </td>
+          </tr>
+          <tr
+            class="all-users-table--row-multi"
+            role="row"
+          >
+            <td
+              class="ds-c-table__cell--align-left all-users-table--state"
+              role="cell"
+            >
+              LA
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--role"
+              role="cell"
+            >
+              eAPD State Contractor
+            </td>
+            <td
+              class="ds-c-table__cell--align-left all-users-table--actions"
+              role="cell"
+            >
+              <div
+                class="ds-u-display--flex"
+                data-id="12"
+                data-primary-affiliation-id="2"
+                data-state="la"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <table
+      class="ds-c-table ds-c-table--borderless all-users-table"
+      role="table"
+    >
+      <thead
+        role="rowgroup"
+      >
+        <tr
+          role="row"
+        >
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Email
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Phone Number
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            State
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Role
+          </th>
+          <th
+            class="ds-c-table__cell--align-left"
+            role="columnheader"
+            scope="col"
+          >
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        role="rowgroup"
+      >
+        <tr
+          class=""
+          role="row"
+        >
+          <th
+            class="ds-c-table__cell--align-left"
+            role="rowheader"
+            rowspan="1"
+            style="vertical-align: top;"
+          >
+            Liz Lemon
+          </th>
+          <td
+            class="ds-c-table__cell--align-left"
+            role="cell"
+            rowspan="1"
+            style="vertical-align: top;"
+          >
+            liz@lemon.com
+          </td>
+          <td
+            class="ds-c-table__cell--align-left"
+            role="cell"
+            rowspan="1"
+            style="vertical-align: top;"
+          >
+            4045555555
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--state"
+            role="cell"
+          >
+            MD
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--role"
+            role="cell"
+          >
+            eAPD State Contractor
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--actions"
+            role="cell"
+          >
+            <div
+              class="ds-u-display--flex"
+              data-id="14"
+              data-primary-affiliation-id="14"
+              data-state="md"
+            />
+          </td>
+        </tr>
+        <tr
+          class="all-users-table--first-row-multi"
+          role="row"
+        >
+          <th
+            class="ds-c-table__cell--align-left"
+            role="rowheader"
+            rowspan="2"
+            style="vertical-align: top;"
+          >
+            Liz Lemon
+          </th>
+          <td
+            class="ds-c-table__cell--align-left"
+            role="cell"
+            rowspan="2"
+            style="vertical-align: top;"
+          >
+            liz@lemon.com
+          </td>
+          <td
+            class="ds-c-table__cell--align-left"
+            role="cell"
+            rowspan="2"
+            style="vertical-align: top;"
+          >
+            4045555555
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--state"
+            role="cell"
+          >
+            MD
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--role"
+            role="cell"
+          >
+            eAPD State Contractor
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--actions"
+            role="cell"
+          >
+            <div
+              class="ds-u-display--flex"
+              data-id="2"
+              data-primary-affiliation-id="2"
+              data-state="md"
+            />
+          </td>
+        </tr>
+        <tr
+          class="all-users-table--row-multi"
+          role="row"
+        >
+          <td
+            class="ds-c-table__cell--align-left all-users-table--state"
+            role="cell"
+          >
+            LA
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--role"
+            role="cell"
+          >
+            eAPD State Contractor
+          </td>
+          <td
+            class="ds-c-table__cell--align-left all-users-table--actions"
+            role="cell"
+          >
+            <div
+              class="ds-u-display--flex"
+              data-id="12"
+              data-primary-affiliation-id="2"
+              data-state="la"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

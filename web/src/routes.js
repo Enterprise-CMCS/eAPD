@@ -3,9 +3,9 @@ import Dashboard from './containers/Dashboard';
 import ApdApplication from './containers/ApdApplication';
 import ApdViewOnly from './containers/viewOnly/Apd';
 import LoginApplication from './containers/LoginApplication';
-import ManageAccount from './containers/admin/ManageAccount';
-import StateAdmin from './containers/admin/StateAdmin';
-import DelegateStateAdminForm from './containers/admin/DelegateStateAdminForm';
+import ManageAccount from './pages/admin/state-admin/ManageAccount';
+import StateAdmin from './pages/admin/state-admin/StateAdmin';
+import DelegateStateAdminForm from './pages/admin/fed-admin/DelegateStateAdminForm';
 import SelectAffiliation from './pages/login/SelectAffiliation';
 import Logout from './pages/login/Logout';
 

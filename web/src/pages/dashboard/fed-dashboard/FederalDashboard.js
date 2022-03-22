@@ -2,7 +2,7 @@ import PropType from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import FederalAdmin from '../../../containers/admin/FederalAdmin';
+import FederalAdmin from '../../admin/fed-admin/FederalAdmin';
 import { ApprovalStatus } from '../state-dashboard/AffiliationStatus';
 
 import { getUserStateOrTerritoryStatus } from '../../../reducers/user.selector';
