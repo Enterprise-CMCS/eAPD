@@ -214,6 +214,7 @@ tap.test('Local jwtUtils', async t => {
   });
 
   t.test('verifying a token signed with a different secret', async t => {
+    // deepcode ignore HardcodedSecret/test: test code
     const token = jwt.sign(payload, 'BBBBBBBBBBBBBBBBBBBBBBB');
 
     t.throws(() => actualVerifyEAPDToken(token), 'a bad token throws an error');

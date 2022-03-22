@@ -27,7 +27,7 @@ module.exports = (
 
         const { error = null } = await validateDoc(buffer);
         if (error) {
-          res.status(415).send({ error }).end();
+          res.status(415).json({ error }).end();
           return;
         }
 

@@ -18,7 +18,7 @@ tap.only('apds files endpoints', async endpointTest => {
 
   const res = {
     status: sandbox.stub(),
-    send: sandbox.stub(),
+    json: sandbox.stub(),
     end: sandbox.stub()
   };
 
@@ -29,7 +29,7 @@ tap.only('apds files endpoints', async endpointTest => {
     sandbox.resetHistory();
 
     res.status.returns(res);
-    res.send.returns(res);
+    res.json.returns(res);
     res.end.returns(res);
   });
   endpointTest.test('setup', async setupTest => {
@@ -43,7 +43,6 @@ tap.only('apds files endpoints', async endpointTest => {
       ),
       'endpoint for posting APD files is setup'
     );
-
   });
   endpointTest.test('POST endpoint for uploading an APD file', async tests => {
     let handler;
@@ -71,11 +70,11 @@ tap.only('apds files endpoints', async endpointTest => {
 
       test.ok(res.status.calledWith(415), 'sends a 415 error');
       test.ok(
-        res.send.calledWith({
+        res.json.calledWith({
           error: 'User is trying to upload a text-based file'
         })
       );
-      test.ok(res.send.calledAfter(res.status), 'response is terminated');
+      test.ok(res.json.calledAfter(res.status), 'response is terminated');
     });
 
     tests.test('the file is not an image', async test => {
@@ -90,11 +89,11 @@ tap.only('apds files endpoints', async endpointTest => {
       await handler(req, res, next);
       test.ok(res.status.calledWith(415), 'sends a 415 error');
       test.ok(
-        res.send.calledWith({
+        res.json.calledWith({
           error: 'User is trying to upload a file type of application/pdf'
         })
       );
-      test.ok(res.send.calledAfter(res.status), 'response is terminated');
+      test.ok(res.json.calledAfter(res.status), 'response is terminated');
     });
 
     tests.test(
@@ -188,7 +187,7 @@ tap.only('apds files endpoints', async endpointTest => {
         'the file is put into storage from the request data and the database ID'
       );
       test.ok(
-        res.send.calledWith({ url: '/apds/apd id/files/new file ID' }),
+        res.json.calledWith({ url: '/apds/apd id/files/new file ID' }),
         'sends the file URL'
       );
     });
