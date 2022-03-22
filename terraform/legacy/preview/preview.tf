@@ -37,15 +37,63 @@ resource "aws_security_group" "eapd-pr-sg-east-test" {
   }
 
   ingress {
-    description = "SSH Access from Internet"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["0.0.0.0/0"]
+    description = "HI-C-dev-vpc-EnterpriseSgStack-178CJ9KJ940R8-EnterpriseAccessSg-1QRL3Z8BRGTZT"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["10.128.0.0/16", "10.129.0.0/16", "10.244.96.0/19", "10.223.120.0/22", "10.223.126.0/23"]
   }
 
+  ingress {
+    description = "VPN Servers Private East"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["10.232.32.0/19"]
+  }
+
+  ingress {
+    description = "Cisco VPN Instance 2 Public East"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["34.196.35.156/32"]
+  }
+
+  ingress {
+    description = "Cisco VPN Instance 1 Public East"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["52.20.26.200/32"]
+  }
+
+  ingress {
+    description = "Cisco VPN Instance 3 Public East"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["52.5.212.71/32"]
+  }
+
+  ingress {
+    description = "TF IP Address"
+    from_port   = 0
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["68.134.21.72/32"]
+  }
+
+  ingress {
+    description = "BB IP Address"
+    from_port   = 0
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["73.173.73.13/32"]
+  }  
+
   egress {
+    description = "Egress to the world"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
