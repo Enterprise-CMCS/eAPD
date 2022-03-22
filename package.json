@@ -1,0 +1,56 @@
+{
+  "name": "cms-hitech-apd-webapp",
+  "version": "1.0.0",
+  "description": "APD app for CMS HITECH program",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMSgov/eAPD.git"
+  },
+  "keywords": [
+    "cms",
+    "medicaid",
+    "hitech",
+    "emr",
+    "apd"
+  ],
+  "contributors": [
+    "Akua Amponsah",
+    "Nicolas Aretakis",
+    "Heather Battaglia",
+    "Ty Bolt",
+    "Ronald Bronson",
+    "Bill Brooks",
+    "Richard Davis",
+    "Jenn Downs",
+    "Nicole Fenton",
+    "Tiffany Forkner",
+    "Eghosa Guobadia",
+    "Austin Hernandez",
+    "James Hupp",
+    "Jesse James",
+    "Meghana Khandekar",
+    "Jerome Lee",
+    "Nikki Lee",
+    "Christopher (CM) Lubinksi",
+    "Chris Miraflor",
+    "Darren Mirano",
+    "Aviva Oskow",
+    "Paul Phillips",
+    "Laura Poncé",
+    "Brendan Sudol",
+    "Caryn Swartz",
+    "Jen Thibault",
+    "Greg Walker",
+    "Nichole Weems",
+    "Nicole Zonnenberg"
+  ],
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/CMSgov/eAPD/issues"
+  },
+  "homepage": "https://github.com/CMSgov/eAPD#readme",
+  "engines": {
+    "node": "16.13.2"
+  }
+}

@@ -51,13 +51,13 @@ tap.test('user GET endpoint', async endpointTest => {
     });
 
     handlerTest.test('sends back a list of users', async validTest => {
-      getAllUsers.resolves('these are all the users');
+      getAllUsers.resolves([{ userInfo: 'these are all the users' }]);
 
       await handler({}, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith('these are all the users'),
+        res.json.calledWith([{ userInfo: 'these are all the users' }]),
         'body is set to the list of users'
       );
     });
@@ -89,12 +89,12 @@ tap.test('user GET endpoint', async endpointTest => {
     );
 
     handlerTest.test('sends the requested user', async validTest => {
-      getUserByID.resolves('here is a user');
+      getUserByID.resolves({ userInfo: 'here is a user' });
       await handler({ params: { id: 1 } }, res);
 
       validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
       validTest.ok(
-        res.send.calledWith('here is a user'),
+        res.json.calledWith({ userInfo: 'here is a user' }),
         'requested user is sent'
       );
     });

@@ -27,6 +27,7 @@ module.exports = (app, { updateAPDDocument = ua } = {}) => {
 
       try {
         // Filter out any patches that target unchangeable properties
+        // deepcode ignore HTTPSourceWithUncheckedType: we are sanitizing everything right after this
         const patch = req.body.filter(
           ({ path }) => !staticFields.includes(path)
         );
