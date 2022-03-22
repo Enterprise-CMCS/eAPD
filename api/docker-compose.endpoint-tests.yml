@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services:
   db:
     image: postgres:10.18-bullseye
@@ -13,13 +13,12 @@ services:
   mongo:
     image: mongo:5.0.3
     environment:
-      - PUID=1000
-      - PGID=1000
       - MONGO_INITDB_ROOT_USERNAME=admin-user
       - MONGO_INITDB_ROOT_PASSWORD=admin-password
-      - MONGO_INITDB_DATABASE=eapd-test
-      - DATABASE_USERNAME=mongo-test
-      - DATABASE_PASSWORD=cms
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_DATABASE_USERNAME=mongo-test
+      - MONGO_DATABASE_PASSWORD=cms-test
+      - MONGO_DATABASE=eapd-test
     volumes:
       - ./db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
     command: [--auth]
@@ -31,14 +30,15 @@ services:
     image: cms-eapd/api
     depends_on:
       - db
+      - mongo
     environment:
       - PORT=8000
       - NODE_ENV=test
       - API_PORT=8000
       - API_HOST=api-for-testing
       - ENDPOINT_COVERAGE_CAPTURE=true
-      - MONGO_ADMIN_URL=mongodb://admin-user:admin-password@mongo:27017/
-      - MONGO_URL=mongodb://mongo-test:cms@mongo:27017/eapd-test?authSource=eapd-test
+      - MONGO_ADMIN_URL=mongodb://admin-user:admin-password@mongo:27017/admin
+      - MONGO_URL=mongodb://mongo-test:cms-test@mongo:27017/eapd-test?authSource=admin
       - MONGO_DATABASE=eapd-test
       - FILE_STORE=local
       - FILE_PATH=test-data/files

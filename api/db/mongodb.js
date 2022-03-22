@@ -7,14 +7,9 @@ const setup = () =>
   new Promise((resolve, reject) => {
     logger.verbose('Setting up MongoDB connection');
     const connectionString =
-      process.env.MONGO_URL || 'mongodb://mongo:cms@mongo:27017/eapd';
+      process.env.MONGO_URL ||
+      'mongodb://mongo:cms@mongo:27017/eapd?authSource=admin';
     const dbName = process.env.MONGO_DATABASE || 'eapd';
-    logger.info(
-      `Connecting to MongoDB at ${dbName} at ${connectionString.replace(
-        /:\/\/.*@/,
-        '://'
-      )}`
-    );
 
     mongoose.connection.on('connected', () => {
       logger.verbose('MongoDB connected');
