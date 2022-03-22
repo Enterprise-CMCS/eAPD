@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { titleCase } from 'title-case';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import { removeActivity } from '../../actions/editActivity';
-import NavLink from '../../components/NavLink';
+import NavLink from '../../layout/nav/NavLink';
 
 import { t } from '../../i18n';
 import DeleteModal from '../../components/DeleteModal';
