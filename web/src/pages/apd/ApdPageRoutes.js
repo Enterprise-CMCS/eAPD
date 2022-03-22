@@ -7,17 +7,17 @@ import {
   useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
-import ApdHeader from '../layout/header/ApdHeader';
-import Activities from './activity/All';
-import EntryPage from './activity/EntryPage';
-import AssurancesAndCompliance from './AssurancesAndCompliance';
-import Export from './ApdExport';
-import ApdSummary from './ApdSummary';
-import ExecutiveSummary from './ExecutiveSummary';
-import PreviousActivities from './PreviousActivities';
-import ProposedBudget from './ProposedBudget';
-import ScheduleSummary from './ScheduleSummary';
-import StateProfile from '../components/ApdStateProfile';
+import ApdHeader from '../../layout/header/ApdHeader';
+import Activities from '../../containers/activity/All';
+import EntryPage from '../../containers/activity/EntryPage';
+import AssurancesAndCompliance from '../../containers/AssurancesAndCompliance';
+import Export from '../../containers/ApdExport';
+import ApdSummary from '../../containers/ApdSummary';
+import ExecutiveSummary from '../../containers/ExecutiveSummary';
+import PreviousActivities from '../../containers/PreviousActivities';
+import ProposedBudget from '../../containers/ProposedBudget';
+import ScheduleSummary from '../../containers/ScheduleSummary';
+import StateProfile from '../../components/ApdStateProfile';
 
 const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
   const { path } = useRouteMatch();
