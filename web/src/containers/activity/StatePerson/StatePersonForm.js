@@ -1,10 +1,15 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useReducer, forwardRef } from 'react';
+import React, { useEffect, useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
+
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 import TextArea from '../../../components/TextArea';
 import PersonCostForm from '../../../components/PersonCostForm';
+
+import statePersonnelSchema from '../../../static/schemas/statePersonnel';
 
 import {
   savePersonnel as actualSavePersonnel
@@ -16,19 +21,29 @@ const StatePersonForm = forwardRef(
       activityIndex,
       item,
       index,
-      savePersonnel
+      savePersonnel,
+      setFormValid
     },
   ref
 ) => {
   StatePersonForm.displayName = 'StatePersonForm';
+  
+  const {
+    handleSubmit,
+    control,
+    formState: { errors, isValid, isValidating },
+    getValues
+  } = useForm({
+    defaultValues: {
+      ...item
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(statePersonnelSchema)
+  });
 
   function reducer(state, action) {
     switch (action.type) {
-      case 'updateField':
-        return {
-          ...state,
-          [action.field]: action.value
-        }
       case 'updateCosts':
         return {
           ...state,
@@ -59,43 +74,79 @@ const StatePersonForm = forwardRef(
   }
   
   const [state, dispatch] = useReducer(reducer, item);
-  
-  const editTitle = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'title', value });
-
-  const editDesc = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value });
 
   const getEditCostForYear = (year, value) => dispatch({ type: 'updateCosts', year, value });
 
   const getEditFTEForYear = (year, value) => dispatch({ type: 'updateFte', year, value });
   
-  const handleSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
-    savePersonnel(activityIndex, index, state);
+    savePersonnel(activityIndex, index, getValues());
   };
-
+  useEffect(() => {
+    console.log("item", item);
+    console.log("errors", errors);
+    console.log("values", getValues());    
+  }, [isValidating])
   return (
-    <form index={index} onSubmit={handleSubmit}>
+    <form index={index} onSubmit={onSubmit}>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
-      <TextField
-        label="Personnel title"
+      <Controller
+        control={control}
         name="title"
-        value={state.title}
-        onChange={editTitle}
-        className="remove-clearfix"
+        render={({
+          field: { onChange, value, ...props }
+        }) => (
+          <TextField
+            {...props}
+            label="Personnel title"
+            name="title"
+            value={value}
+            onChange={onChange}
+            className="remove-clearfix"
+            errorMessage={
+              errors?.title?.message
+            }
+          />
+        )}
       />
-      <TextArea
-        label="Description"
-        rows={5}
-        name="desc"
-        value={state.description}
-        onChange={editDesc}
-        className="remove-clearfix"
+      
+      <Controller
+        control={control}
+        name="description"
+        render={({
+          field: { onChange, value, ...props }
+        }) => (
+          <TextArea
+            {...props}
+            label="Description"
+            rows={5}
+            value={value}
+            onChange={onChange}
+            className="remove-clearfix"
+            errorMessage={
+              errors?.description?.message
+            }
+          />
+        )}
       />
-      <PersonCostForm
-        items={state.years}
-        setCost={getEditCostForYear}
-        setFTE={getEditFTEForYear}
-      />
+      
+      <div className="ds-u-margin-top--3">
+        <Controller
+          control={control}
+          name="years"
+          render={({
+            field: { onChange, value, ...props }
+          }) => (
+            <PersonCostForm
+              items={value}
+              onChange={onChange}
+              // setCost={getEditCostForYear}
+              // setFTE={getEditFTEForYear}
+            />
+          )}
+        />
+      </div>
       <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
     </form>
   );
