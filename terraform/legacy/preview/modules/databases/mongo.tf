@@ -17,7 +17,7 @@ resource "aws_instance" "eapd_mongo" {
     vpc_security_group_ids      = ["sg-0bc99618daf4cd5da"]
     subnet_id                   = "subnet-09af713f4e068ac99"
     key_name                    = "eapd_bbrooks"
-    user_data                   = "../../../../../bin/preview-deploy/aws.user-data.sh"
+#    user_data                   = "${file("../../../bin/preview-deploy/aws.user-data.sh")}"
     associate_public_ip_address = true #This is a preview resource, should be moved to preview Terraform
     tags = {
         Name = var.instance_name
@@ -27,10 +27,9 @@ resource "aws_instance" "eapd_mongo" {
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
         Terraform = "True"
     }
-#    depends_on = [aws_security_group.eapd-staging-mongo-ec2]
     disable_api_termination = false # True in Prod
-#    user_data = <<-EOL
-#    #!/bin/bash -xe
-#    sudo sh -c "echo license_key: '$var.new_relic_liscense_key' >> /etc/newrelic-infra.yml"
-#    EOL
+    user_data = <<-EOL
+    #!/bin/bash -xe
+    sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
+    EOL
 }
