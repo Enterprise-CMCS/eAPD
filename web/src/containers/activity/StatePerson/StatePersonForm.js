@@ -32,7 +32,8 @@ const StatePersonForm = forwardRef(
     handleSubmit,
     control,
     formState: { errors, isValid, isValidating },
-    getValues
+    getValues,
+    setValue
   } = useForm({
     defaultValues: {
       ...item
@@ -42,52 +43,28 @@ const StatePersonForm = forwardRef(
     resolver: joiResolver(statePersonnelSchema)
   });
 
-  function reducer(state, action) {
-    switch (action.type) {
-      case 'updateCosts':
-        return {
-          ...state,
-          years: {
-            ...state.years,
-            [action.year]: {
-              ...state.years[action.year],
-              amt: action.value
-            }
-          }
-        }
-      case 'updateFte':
-        return {
-          ...state,
-          years: {
-            ...state.years,
-            [action.year]: {
-              ...state.years[action.year],
-              perc: action.value
-            }
-          }
-        }
-      default:
-        throw new Error(
-          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
-        );
-    }
-  }
-  
-  const [state, dispatch] = useReducer(reducer, item);
+  const getEditCostForYear = (year, value) => {
+    // Manually update the react-hook-form store
+    setValue(`years[${year}].amt`, value, { shouldValidate: true })
+  };
 
-  const getEditCostForYear = (year, value) => dispatch({ type: 'updateCosts', year, value });
-
-  const getEditFTEForYear = (year, value) => dispatch({ type: 'updateFte', year, value });
+  const getEditFTEForYear = (year, value) => {
+    // Manually update the react-hook-form store
+    setValue(`years[${year}].perc`, value, { shouldValidate: true })
+  };
   
   const onSubmit = e => {
     e.preventDefault();
     savePersonnel(activityIndex, index, getValues());
   };
+  
+  // Remove this debugging stuff
   useEffect(() => {
     console.log("item", item);
     console.log("errors", errors);
     console.log("values", getValues());    
   }, [isValidating])
+  
   return (
     <form index={index} onSubmit={onSubmit}>
       <h6 className="ds-h4">Personnel {index + 1}:</h6>
@@ -139,10 +116,13 @@ const StatePersonForm = forwardRef(
             field: { onChange, value, ...props }
           }) => (
             <PersonCostForm
+              {...props}
               items={value}
-              onChange={onChange}
-              // setCost={getEditCostForYear}
-              // setFTE={getEditFTEForYear}
+              setCost={getEditCostForYear}
+              setFTE={getEditFTEForYear}
+              errorMessage={
+                'testing'
+              }
             />
           )}
         />
