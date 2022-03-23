@@ -93,9 +93,11 @@
     "date-fns": "2.28.0",
     "dotenv": "15.0.0",
     "express": "4.17.3",
+    "express-validator": "6.14.0",
     "fast-json-patch": "3.1.0",
     "file-type": "16.5.3",
     "form-data": "4.0.0",
+    "helmet": "5.0.2",
     "jsonpatch": "3.1.0",
     "jsonpatch-to-mongodb": "1.0.0",
     "jsonpointer": "5.0.0",
@@ -138,6 +140,9 @@
     ],
     "testEnvironment": "node",
     "testTimeout": 30000
+  },
+  "resolutions": {
+    "minimist": "1.2.6"
   },
   "packageManager": "yarn@1.22.15"
 }

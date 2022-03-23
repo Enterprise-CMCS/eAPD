@@ -83,7 +83,7 @@
     "@fortawesome/free-regular-svg-icons": "5.15.4",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
     "@fortawesome/react-fontawesome": "0.1.17",
-    "@okta/okta-auth-js": "5.11.0",
+    "@okta/okta-auth-js": "6.0.0",
     "@snyk/protect": "1.866.0",
     "@tinymce/tinymce-react": "3.13.1",
     "@uppy/core": "2.1.5",
@@ -153,6 +153,8 @@
     "@storybook/addon-jest": "6.4.19",
     "@storybook/addon-links": "6.4.19",
     "@storybook/addon-queryparams": "6.2.9",
+    "@stryker-mutator/core": "5.6.1",
+    "@stryker-mutator/jest-runner": "5.6.1",
     "@storybook/builder-webpack5": "6.4.19",
     "@storybook/manager-webpack5": "6.4.19",
     "@storybook/react": "6.4.19",
@@ -195,6 +197,10 @@
     "react-router": "can't upgrade to v6 because our system requires routes to be connected to redux",
     "react-router-dom": "can't upgrade to v6 because our system requires routes to be connected to redux",
     "history": "can't upgrade to 17 react-router v6"
+  },
+  "resolutions": {
+    "minimist": "1.2.6",
+    "node-forge": "1.3.0"
   },
   "packageManager": "yarn@1.22.15"
 }

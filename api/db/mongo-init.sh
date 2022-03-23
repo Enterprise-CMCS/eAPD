@@ -18,3 +18,4 @@ mongo -- "$MONGO_INITDB_DATABASE" <<EOF
   eapd.createCollection('apds');
   eapd.createCollection('migrations');
 EOF
+
