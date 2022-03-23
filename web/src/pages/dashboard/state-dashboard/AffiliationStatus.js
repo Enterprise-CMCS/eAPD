@@ -2,14 +2,14 @@ import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import Instruction from './Instruction';
+import Instruction from '../../../components/Instruction';
 import {
   getUserStateOrTerritory,
   getUserStateOrTerritoryStatus
-} from '../reducers/user.selector';
-import { AFFILIATION_STATUSES } from '../constants';
-import UpgradeBrowser from './UpgradeBrowser';
-import axios from '../util/api';
+} from '../../../reducers/user.selector';
+import { AFFILIATION_STATUSES } from '../../../constants';
+import UpgradeBrowser from '../../../components/UpgradeBrowser';
+import axios from '../../../util/api';
 
 const ApprovalStatus = ({ status, mailTo, administratorType }) => {
   const options = {

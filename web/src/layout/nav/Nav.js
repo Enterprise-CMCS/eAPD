@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { VerticalNav } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
-import NavLink from '../components/NavLink';
-import { generateKey as actualGenerateKey } from '../util';
+import NavLink from './NavLink';
+import { generateKey as actualGenerateKey } from '../../util';
 
 const Nav = ({ generateKey, items, pathname }) => {
   // force component update when pathname changes

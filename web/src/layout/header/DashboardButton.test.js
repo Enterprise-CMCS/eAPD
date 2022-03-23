@@ -4,7 +4,7 @@ import {
   plain as DashboardButton,
   mapDispatchToProps
 } from './DashboardButton';
-import { goToDashboard } from '../actions/app';
+import { goToDashboard } from '../../actions/app';
 
 describe('the dashboard button', () => {
   it('renders as expected', () => {
