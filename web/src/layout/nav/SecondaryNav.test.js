@@ -5,7 +5,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './SecondaryNav';
-import { addActivity } from '../actions/editActivity';
+import { addActivity } from '../../actions/editActivity';
 
 const defaultProps = {
   activityCount: 2,

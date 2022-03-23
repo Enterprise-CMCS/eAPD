@@ -5,7 +5,7 @@ import {
   plain as AffiliationStatus,
   ApprovalStatus
 } from './AffiliationStatus';
-import { AFFILIATION_STATUSES } from '../constants';
+import { AFFILIATION_STATUSES } from '../../../constants';
 
 const { DENIED, REQUESTED, REVOKED } = AFFILIATION_STATUSES;
 
@@ -63,7 +63,11 @@ describe('<ApprovalStatus />', () => {
 
   it('displays a mailto link', () => {
     render(
-      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
+      <ApprovalStatus
+        status={REQUESTED}
+        mailTo="em@il.com,admin@mo.gov"
+        administratorType="State"
+      />
     );
     const aTag = screen.getByText('State Administrator', { selector: 'a' });
     expect(aTag).toBeInTheDocument();
@@ -72,19 +76,32 @@ describe('<ApprovalStatus />', () => {
 
   it('displays the status text', () => {
     render(
-      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
+      <ApprovalStatus
+        status={REQUESTED}
+        mailTo="em@il.com,admin@mo.gov"
+        administratorType="State"
+      />
     );
-    const statusText = screen.getByText(requestedStatusOptions.status, { selector: 'h3' });
+    const statusText = screen.getByText(requestedStatusOptions.status, {
+      selector: 'h3'
+    });
     expect(statusText).toBeInTheDocument();
   });
 
   it('displays the img correctly', () => {
     render(
-      <ApprovalStatus status={REQUESTED} mailTo="em@il.com,admin@mo.gov" administratorType='State' />
+      <ApprovalStatus
+        status={REQUESTED}
+        mailTo="em@il.com,admin@mo.gov"
+        administratorType="State"
+      />
     );
     const img = screen.getByAltText(requestedStatusOptions.alt);
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', requestedStatusOptions.src);
-    expect(img).toHaveAttribute('width', requestedStatusOptions.width.toString());
+    expect(img).toHaveAttribute(
+      'width',
+      requestedStatusOptions.width.toString()
+    );
   });
 });

@@ -2,7 +2,7 @@ import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { goToDashboard } from '../actions/app';
+import { goToDashboard } from '../../actions/app';
 
 const DashboardButton = ({ children, dashboard }) => {
   return (
