@@ -4,6 +4,7 @@ require('./env');
 
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const { v4: uuidv4 } = require('uuid');
@@ -22,7 +23,10 @@ try {
 } catch (err) {
   logger.error(`Error setting up MongoDB: ${err}`);
 }
+
+// deepcode ignore UseCsurfForExpress: we need a larger ticket to implement csurf
 const api = express();
+api.use(helmet());
 
 // Turn off the X-Powered-By header that reveals information about the api
 // architecture. No need just giving away all the information, though this
@@ -83,9 +87,9 @@ api.use((req, res, next) => {
 
 logger.debug('setting global middleware');
 api.use(requestLoggerMiddleware);
+api.use(cors({ credentials: true, origin: true }));
 api.use(compression());
 api.use(express.urlencoded({ extended: true }));
-api.use(cors({ credentials: true, origin: true }));
 api.use(bodyParser.json({ limit: '5mb' }));
 
 // This endpoint doesn't do anything, but lets us verify that the api is

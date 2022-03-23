@@ -52,5 +52,18 @@ describe('APD event actions', () => {
         metadata: { something: 'metadata' }
       });
     });
+
+    it('tests undefined axios', async () => {
+      spy = jest
+        .spyOn(axios, 'post')
+        .mockImplementation(() => Promise.resolve({}));
+
+      const response = await store.dispatch(saveApdEvent(APD_EVENTS.EXPORT));
+      expect(spy).toHaveBeenCalledWith(`/apds/${apdID}/events`, {
+        eventType: APD_EVENTS.EXPORT,
+        metadata: null
+      });
+      expect(response).toBeNull();
+    });
   });
 });

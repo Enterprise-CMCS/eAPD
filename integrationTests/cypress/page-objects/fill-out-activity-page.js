@@ -183,7 +183,7 @@ class FillOutActivityPage {
       );
 
       if (contractor.hourly) {
-        cy.findByRole('radio', { name: /Yes/i }).click({ force: true });
+        cy.get('[type="radio"].ds-c-choice').first().check({ force: true });
         // years is empty for some reason
         _.forEach(years, (year, index) => {
           populatePage.fillTextField(
@@ -199,6 +199,7 @@ class FillOutActivityPage {
           );
         });
       } else {
+        cy.get('[type="radio"].ds-c-choice').eq(1).check('No', { force: true });
         _.forEach(years, (year, index) => {
           populatePage.fillTextField(
             'ds-c-field ds-c-field--currency ds-c-field--medium',
