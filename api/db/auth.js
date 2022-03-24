@@ -135,7 +135,7 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
 };
 
 /**
- * Retrieves a single affiliation by user per state
+ * Retrieves adds a log to the audit table to show that a user has logged into a state
  * @async
  * @function
  * @returns {Object}
