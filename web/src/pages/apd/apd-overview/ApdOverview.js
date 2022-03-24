@@ -19,7 +19,7 @@ import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
 import { selectSummary } from '../../../reducers/apd.selectors';
 
-const ApdSummary = ({
+const ApdOverview = ({
   addApdYear,
   name,
   narrativeHIE,
@@ -173,7 +173,7 @@ const ApdSummary = ({
   );
 };
 
-ApdSummary.propTypes = {
+ApdOverview.propTypes = {
   addApdYear: PropTypes.func.isRequired,
   removeApdYear: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
@@ -202,6 +202,6 @@ const mapDispatchToProps = {
   setOverview: setProgramOverview
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApdSummary);
+export default connect(mapStateToProps, mapDispatchToProps)(ApdOverview);
 
-export { ApdSummary as plain, mapStateToProps, mapDispatchToProps };
+export { ApdOverview as plain, mapStateToProps, mapDispatchToProps };
