@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
-import DeleteModal from '../components/DeleteModal';
+import DeleteModal from '../../../components/DeleteModal';
 
 import {
   addYear,
@@ -12,12 +12,12 @@ import {
   setNarrativeForHIT,
   setNarrativeForMMIS,
   setProgramOverview
-} from '../actions/editApd';
-import RichText from '../components/RichText';
-import Instruction from '../components/Instruction';
-import { Section } from '../components/Section';
-import { t } from '../i18n';
-import { selectSummary } from '../reducers/apd.selectors';
+} from '../../../actions/editApd';
+import RichText from '../../../components/RichText';
+import Instruction from '../../../components/Instruction';
+import { Section } from '../../../components/Section';
+import { t } from '../../../i18n';
+import { selectSummary } from '../../../reducers/apd.selectors';
 
 const ApdSummary = ({
   addApdYear,
