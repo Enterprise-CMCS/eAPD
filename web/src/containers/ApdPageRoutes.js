@@ -7,7 +7,7 @@ import {
   useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
-import ApdHeader from './ApdHeader';
+import ApdHeader from '../layout/header/ApdHeader';
 import Activities from './activity/All';
 import EntryPage from './activity/EntryPage';
 import AssurancesAndCompliance from './AssurancesAndCompliance';

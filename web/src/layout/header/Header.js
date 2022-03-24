@@ -7,8 +7,8 @@ import {
   getIsFedAdmin,
   getUserStateOrTerritory,
   getCanUserViewStateAdmin
-} from '../reducers/user.selector';
-import { t } from '../i18n';
+} from '../../reducers/user.selector';
+import { t } from '../../i18n';
 
 import DashboardButton from './DashboardButton';
 import HeaderSaveMessage from './HeaderSaveMessage';
@@ -20,7 +20,7 @@ import Icon, {
   faPeopleArrows,
   faEdit,
   faUserShield
-} from './Icons';
+} from '../../components/Icons';
 
 class Header extends Component {
   constructor(props) {
@@ -145,28 +145,25 @@ class Header extends Component {
                                 to="/manage-account"
                                 onClick={this.toggleDropdown}
                                 className="nav--dropdown__action"
-                                >
-                                  <Icon
-                                    icon={faEdit}
-                                    style={{ width: '14px' }}
-                                    />
-                                  Manage Account
+                              >
+                                <Icon icon={faEdit} style={{ width: '14px' }} />
+                                Manage Account
                               </Link>
-                            </li>                        
-                          <li>
-                            <Link
-                              to="/select-affiliation"
-                              onClick={this.toggleDropdown}
-                              className="nav--dropdown__action"
+                            </li>
+                            <li>
+                              <Link
+                                to="/select-affiliation"
+                                onClick={this.toggleDropdown}
+                                className="nav--dropdown__action"
                               >
                                 <Icon
                                   icon={faPeopleArrows}
                                   style={{ width: '14px' }}
                                 />
                                 Switch State Affiliation
-                            </Link>
-                          </li>
-                        </Fragment>
+                              </Link>
+                            </li>
+                          </Fragment>
                         )}
                         <li>
                           <Link
