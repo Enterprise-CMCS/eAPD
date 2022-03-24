@@ -18,7 +18,7 @@ module.exports = (
   logger.debug('setting up GET endpoint');
   app.get('/me', async (req, res, next) => {
     try {
-      // when getting the user's data, the eAPD token is suppied,
+      // when getting the user's data, the eAPD token is supplied,
       // so the verifier should be the eAPD verifier
       const user = await tokenUpdater(req, { verifier: verifyEAPD });
       if (!user) return res.status(401).send();
