@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 
 import DollarField from './DollarField';
 import Dollars from './Dollars';
@@ -11,7 +11,10 @@ const PersonCostForm = ({
   fteLabel,
   setCost,
   setFTE,
-  hint
+  hint,
+  errors,
+  onBlur,
+  control
 }) => {
   const handleCostChange =
     year =>
@@ -24,6 +27,10 @@ const PersonCostForm = ({
     ({ target: { value } }) => {
       setFTE(year, value);
     };
+  
+  useEffect(() => {
+    console.log("errors", errors)
+  },[])
 
   return (
     <div>
@@ -37,6 +44,8 @@ const PersonCostForm = ({
               size="medium"
               value={amt}
               onChange={handleCostChange(year)}
+              errorMessage={errors && errors[year]?.amt?.message}
+              onBlur={onBlur}
             />
             <NumberField
               label={fteLabel}
@@ -46,6 +55,8 @@ const PersonCostForm = ({
               hint={hint}
               value={perc}
               onChange={handleFTEChange(year)}
+              errorMessage={errors && errors[year]?.perc?.message}
+              onBlur={onBlur}
             />
             <p>
               <strong>Total: </strong>

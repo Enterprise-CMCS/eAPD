@@ -1,9 +1,9 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useEffect, useReducer, forwardRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
-import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 import TextArea from '../../../components/TextArea';
@@ -29,9 +29,8 @@ const StatePersonForm = forwardRef(
   StatePersonForm.displayName = 'StatePersonForm';
   
   const {
-    handleSubmit,
     control,
-    formState: { errors, isValid, isValidating },
+    formState: { errors, isValid },
     getValues,
     setValue
   } = useForm({
@@ -45,12 +44,12 @@ const StatePersonForm = forwardRef(
 
   const getEditCostForYear = (year, value) => {
     // Manually update the react-hook-form store
-    setValue(`years[${year}].amt`, value, { shouldValidate: true })
+    setValue(`years[${year}].amt`, value)
   };
 
   const getEditFTEForYear = (year, value) => {
     // Manually update the react-hook-form store
-    setValue(`years[${year}].perc`, value, { shouldValidate: true })
+    setValue(`years[${year}].perc`, value)
   };
   
   const onSubmit = e => {
@@ -58,12 +57,9 @@ const StatePersonForm = forwardRef(
     savePersonnel(activityIndex, index, getValues());
   };
   
-  // Remove this debugging stuff
   useEffect(() => {
-    console.log("item", item);
-    console.log("errors", errors);
-    console.log("values", getValues());    
-  }, [isValidating])
+    setFormValid(isValid);
+  }, [isValid, setFormValid])
   
   return (
     <form index={index} onSubmit={onSubmit}>
@@ -113,16 +109,15 @@ const StatePersonForm = forwardRef(
           control={control}
           name="years"
           render={({
-            field: { onChange, value, ...props }
+            field: { onBlur, value, ...props }
           }) => (
             <PersonCostForm
               {...props}
               items={value}
               setCost={getEditCostForYear}
               setFTE={getEditFTEForYear}
-              errorMessage={
-                'testing'
-              }
+              errors={errors.years}
+              onBlur={onBlur}
             />
           )}
         />
@@ -141,7 +136,8 @@ StatePersonForm.propTypes = {
     title: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired,
-  savePersonnel: PropTypes.func.isRequired
+  savePersonnel: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
