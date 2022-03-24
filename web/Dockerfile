@@ -6,6 +6,8 @@ WORKDIR /app
 ADD ./package.json .
 ADD ./yarn.lock .
 
+RUN chown -R node:node /app
+USER node:node
 RUN yarn install --frozen-lockfile
 
 CMD yarn run start
