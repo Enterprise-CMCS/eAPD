@@ -163,7 +163,7 @@ class FillOutActivityPage {
     }
   };
 
-  fillPrivateContactors = (contractorList, years, testDelete = false) => {
+  addPrivateContractors = (contractorList, years, testDelete = false) => {
     cy.findByRole('heading', {
       name: /Private Contractor Costs/i,
       level: 3
@@ -171,49 +171,8 @@ class FillOutActivityPage {
 
     _.forEach(contractorList, (contractor, i) => {
       cy.findByRole('button', { name: /Add Contractor/i }).click();
-      populatePage.fillTextField('ds-c-field', contractor.name);
 
-      populatePage.fillDate('Contract start date', contractor.start);
-      populatePage.fillDate('Contract end date', contractor.end);
-
-      populatePage.fillTextField(
-        'ds-c-field ds-c-field--currency ds-c-field--medium',
-        contractor.totalCosts,
-        0
-      );
-
-      if (contractor.hourly) {
-        cy.get('[type="radio"].ds-c-choice').first().check({ force: true });
-        // years is empty for some reason
-        _.forEach(years, (year, index) => {
-          populatePage.fillTextField(
-            'ds-c-field ds-c-field--medium',
-            contractor.FFYcosts[index][0],
-            index
-          );
-
-          populatePage.fillTextField(
-            'ds-c-field ds-c-field--currency ds-c-field--medium',
-            contractor.FFYcosts[index][1],
-            index + 1
-          );
-        });
-      } else {
-        cy.get('[type="radio"].ds-c-choice').eq(1).check('No', { force: true });
-        _.forEach(years, (year, index) => {
-          populatePage.fillTextField(
-            'ds-c-field ds-c-field--currency ds-c-field--medium',
-            contractor.FFYcosts[index],
-            index + 1
-          );
-        });
-      }
-
-      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.setTinyMceContent(
-        `contractor-description-field-${i}`,
-        contractor.description
-      );
+      this.fillPrivateContactor(contractor, i, years);
 
       cy.findByRole('button', { name: /Save/i }).click();
     });
@@ -226,6 +185,51 @@ class FillOutActivityPage {
       cy.contains(`1. ${contractorList[0].name}`).should('not.exist');
       cy.contains(`1. ${contractorList[1].name}`).should('exist');
     }
+  };
+
+  fillPrivateContactor = (contractor, i, years) => {
+    cy.get('input[name="name"]').clear().type(contractor.name);
+
+    populatePage.fillDate('Contract start date', contractor.start);
+    populatePage.fillDate('Contract end date', contractor.end);
+
+    cy.get('input[name="totalCost"]').clear().type(contractor.totalCosts);
+
+    if (contractor.hourly) {
+      cy.get('[type="radio"].ds-c-choice').eq(0).check({ force: true });
+      // years is empty for some reason
+      _.forEach(years, (year, index) => {
+        populatePage.fillTextField(
+          'ds-c-field ds-c-field--medium',
+          contractor.FFYcosts[index][0],
+          index
+        );
+
+        populatePage.fillTextField(
+          'ds-c-field ds-c-field--currency ds-c-field--medium',
+          contractor.FFYcosts[index][1],
+          index + 1
+        );
+      });
+    } else {
+      cy.get('[type="radio"].ds-c-choice').eq(1).check({ force: true });
+      _.forEach(years, (year, index) => {
+        populatePage.fillTextField(
+          'ds-c-field ds-c-field--currency ds-c-field--medium',
+          contractor.FFYcosts[index],
+          index + 1
+        );
+      });
+    }
+
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.setTinyMceContent(
+      `contractor-description-field-${i}`,
+      contractor.description
+    );
+
+    // adding this line so that everything is validated again after it's added
+    cy.get('input[name="name"]').focus().blur();
   };
 
   fillCostAllocation = (allocation, years = {}) => {

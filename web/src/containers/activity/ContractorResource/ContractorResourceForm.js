@@ -21,8 +21,8 @@ import validationSchema from '../../../static/schemas/privateContractor';
 import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
 
 const getCheckedValue = value => {
-  if (value != null) {
-    return value ? 'yes' : 'no';
+  if (value !== null) {
+    return value ? 'true' : 'false';
   }
   return null;
 };
@@ -332,8 +332,8 @@ const ContractorResourceForm = forwardRef(
               choices={[
                 {
                   label: 'Yes',
-                  value: 'yes',
-                  checked: value === 'yes',
+                  value: 'true',
+                  checked: JSON.parse(value),
                   checkedChildren: (
                     <div className="ds-c-choice__checkedChild">
                       {apdFFYs.map(ffy => (
@@ -414,8 +414,8 @@ const ContractorResourceForm = forwardRef(
                 },
                 {
                   label: 'No',
-                  value: 'no',
-                  checked: value === 'no'
+                  value: 'false',
+                  checked: JSON.parse(value) === false
                 }
               ]}
               type="radio"
@@ -432,9 +432,8 @@ const ContractorResourceForm = forwardRef(
             />
           )}
         />
-        {(state.hourly.useHourly === 'yes' ||
-          state.hourly.useHourly === true ||
-          !state.hourly.useHourly) && (
+        {state.hourly.useHourly === null ||
+        JSON.parse(state.hourly.useHourly) === true ? (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <div key={ffy}>
@@ -443,31 +442,32 @@ const ContractorResourceForm = forwardRef(
               </div>
             ))}
           </p>
+        ) : (
+          <p className="ds-u-margin-bottom--0">
+            {apdFFYs.map(ffy => (
+              <Controller
+                key={ffy}
+                name={`years.${ffy}`}
+                control={control}
+                render={({ field: { onChange, onBlur, name, value } }) => (
+                  <DollarField
+                    name={name}
+                    value={value}
+                    label={`FFY ${ffy} Cost`}
+                    size="medium"
+                    onBlur={onBlur}
+                    onChange={e => {
+                      handleYearCostChange(ffy, e);
+                      onChange(e);
+                    }}
+                    errorMessage={errors?.years?.[ffy]?.message}
+                    errorPlacement="bottom"
+                  />
+                )}
+              />
+            ))}
+          </p>
         )}
-        {(state.hourly.useHourly === 'no' ||
-          state.hourly.useHourly === false) &&
-          apdFFYs.map(ffy => (
-            <Controller
-              key={ffy}
-              name={`years.${ffy}`}
-              control={control}
-              render={({ field: { onChange, onBlur, name, value } }) => (
-                <DollarField
-                  name={name}
-                  value={value}
-                  label={`FFY ${ffy} Cost`}
-                  size="medium"
-                  onBlur={onBlur}
-                  onChange={e => {
-                    handleYearCostChange(ffy, e);
-                    onChange(e);
-                  }}
-                  errorMessage={errors?.years?.[ffy]?.message}
-                  errorPlacement="bottom"
-                />
-              )}
-            />
-          ))}
         <input
           className="ds-u-visibility--hidden"
           type="submit"
