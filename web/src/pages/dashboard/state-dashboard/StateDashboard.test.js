@@ -1,9 +1,9 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { AFFILIATION_STATUSES } from '../constants';
+import { AFFILIATION_STATUSES } from '../../../constants';
 
-import ApdList from '../components/ApdList';
-import AffiliationStatus from '../components/AffiliationStatus';
+import ApdList from './ApdList';
+import AffiliationStatus from './AffiliationStatus';
 
 import { plain as StateDashboard } from './StateDashboard';
 

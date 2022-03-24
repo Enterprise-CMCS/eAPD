@@ -1,10 +1,10 @@
 import React from 'react';
 import ApdList from './ApdList';
-import { renderWithConnection } from '../shared/apd-testing-library';
-import mockAxios from '../util/api';
-import { AFFILIATION_STATUSES } from '../constants';
+import { renderWithConnection } from '../../../shared/apd-testing-library';
+import mockAxios from '../../../util/api';
+import { AFFILIATION_STATUSES } from '../../../constants';
 
-jest.mock('../util/api', () => ({
+jest.mock('../../../util/api', () => ({
   get: jest.fn(),
   post: jest.fn(),
   patch: jest.fn(),
@@ -48,11 +48,8 @@ describe('<ApdList />', () => {
             user: {
               data: {
                 state: { id: 'mo' },
-                states: { 'mo': AFFILIATION_STATUSES.APPROVED },
-                activities: [
-                  "view-document",
-                  "edit-document",
-                ]
+                states: { mo: AFFILIATION_STATUSES.APPROVED },
+                activities: ['view-document', 'edit-document']
               }
             }
           }
@@ -102,10 +99,7 @@ describe('<ApdList />', () => {
               data: {
                 state: { id: 'mo' },
                 states: { state_id: AFFILIATION_STATUSES.APPROVED },
-                activities: [
-                  "view-document",
-                  "edit-document",
-                ]
+                activities: ['view-document', 'edit-document']
               }
             },
             apd: {
@@ -149,10 +143,7 @@ describe('<ApdList />', () => {
               affiliations: [
                 { state_id: 'mo', status: AFFILIATION_STATUSES.APPROVED }
               ],
-              activities: [
-                "not-view-document",
-                "not-edit-document",
-              ]
+              activities: ['not-view-document', 'not-edit-document']
             }
           }
         }
@@ -165,6 +156,6 @@ describe('<ApdList />', () => {
     });
   });
 
-// Deleted tests here because the role is not the relevant factor.  This is driven by
-// activities, so changing those is more important than a specific role.
+  // Deleted tests here because the role is not the relevant factor.  This is driven by
+  // activities, so changing those is more important than a specific role.
 });

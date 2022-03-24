@@ -165,7 +165,7 @@ function addEcosystemToUserData() {
       },
     },{
       name: 'Database migration',
-      script: 'npm',
+      script: 'yarn',
       args: 'run migrate',
       autorestart: false,
       error_file: '/app/api/logs/Database-migration-error.log',
@@ -182,7 +182,7 @@ function addEcosystemToUserData() {
       }
     },{
       name: 'Database seeding',
-      script: 'npm',
+      script: 'yarn',
       args: 'run seed',
       autorestart: false,
       error_file: '/app/api/logs/Database-seeding-error.log',

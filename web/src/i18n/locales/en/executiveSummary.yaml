@@ -1,7 +1,10 @@
 title: Executive Summary
 helpText: >-
-  Review this executive summary based on the activity details
-  provided. Program budget tables are automatically included for review.
+  This Executive Summary is automatically generated from the short
+  descriptions you provided throughout the APD and activities. It is 
+  structured in a way so your State Officer can quickly assess the APD 
+  when starting their review. When the APD is exported, the Executive 
+  Summary will appear at the beginning of the exported PDF.
 total: Total
 summary:
   title: Activities Summary
