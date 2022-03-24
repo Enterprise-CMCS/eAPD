@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useEffect, forwardRef } from 'react';
+import React, { useEffect, useState, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -30,7 +30,7 @@ const StatePersonForm = forwardRef(
   
   const {
     control,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty },
     getValues,
     setValue
   } = useForm({
@@ -41,6 +41,8 @@ const StatePersonForm = forwardRef(
     reValidateMode: 'onBlur',
     resolver: joiResolver(statePersonnelSchema)
   });
+  
+  const [subFormValid, setSubFormValid] = useState(false);
 
   const getEditCostForYear = (year, value) => {
     // Manually update the react-hook-form store
@@ -58,7 +60,10 @@ const StatePersonForm = forwardRef(
   };
   
   useEffect(() => {
-    setFormValid(isValid);
+    // Todo: update this as it probably doesn't work
+    if(subFormValid) {
+      setFormValid(isValid);      
+    }
   }, [isValid, setFormValid])
   
   return (
@@ -107,7 +112,6 @@ const StatePersonForm = forwardRef(
       <div className="ds-u-margin-top--3">
         <Controller
           control={control}
-          name="years"
           render={({
             field: { onBlur, value, ...props }
           }) => (
@@ -116,12 +120,12 @@ const StatePersonForm = forwardRef(
               items={value}
               setCost={getEditCostForYear}
               setFTE={getEditFTEForYear}
-              errors={errors.years}
-              onBlur={onBlur}
+              setFormValid={(value) => setSubFormValid(value)}
             />
           )}
         />
       </div>
+      
       <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
     </form>
   );

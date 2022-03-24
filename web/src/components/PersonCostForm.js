@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, Fragment } from 'react';
 
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+
+import personCostSchema from '../static/schemas/personCost'
+
 import DollarField from './DollarField';
 import Dollars from './Dollars';
 import NumberField from './NumberField';
@@ -11,11 +16,23 @@ const PersonCostForm = ({
   fteLabel,
   setCost,
   setFTE,
-  hint,
-  errors,
-  onBlur,
-  control
+  hint
 }) => {
+  
+  const {
+    control,
+    formState: { errors, isValid },
+    getValues,
+    setValue
+  } = useForm({
+    defaultValues: {
+      ...items
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(personCostSchema)
+  });
+  
   const handleCostChange =
     year =>
     ({ target: { value } }) => {
@@ -28,25 +45,36 @@ const PersonCostForm = ({
       setFTE(year, value);
     };
   
-  useEffect(() => {
-    console.log("errors", errors)
-  },[])
-
   return (
     <div>
-      {Object.entries(items).map(([year, { amt, perc }]) => (
+      {Object.entries(items.years).map(([year, { amt, perc }]) => (
         <Fragment key={year}>
           <h5 className="ds-h5">FFY {year} Cost</h5>
           <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
+            
+          <Controller
+            control={control}
+            name="amt"
+            render={({
+              field: { onBlur, value }
+            }) => (
             <DollarField
               label={costLabel}
-              name="cost"
+              name="amt"
               size="medium"
               value={amt}
               onChange={handleCostChange(year)}
-              errorMessage={errors && errors[year]?.amt?.message}
-              onBlur={onBlur}
+              errorMessage={'todo'}
             />
+            )}
+          />
+          
+          <Controller
+            control={control}
+            name={`years[${year}].perc`}
+            render={({
+              field: { onBlur, value }
+            }) => (
             <NumberField
               label={fteLabel}
               name="ftes"
@@ -55,9 +83,11 @@ const PersonCostForm = ({
               hint={hint}
               value={perc}
               onChange={handleFTEChange(year)}
-              errorMessage={errors && errors[year]?.perc?.message}
-              onBlur={onBlur}
+              errorMessage={'todo'}
             />
+            )}
+          />
+          
             <p>
               <strong>Total: </strong>
               <Dollars>{amt * perc}</Dollars>
