@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  renderWithConnection,
-  waitFor,
-  screen,
-  fireEvent
-} from 'apd-testing-library';
+import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
 
 import SelectAffiliation from './SelectAffiliation';
 import MockAdapter from 'axios-mock-adapter';
@@ -44,7 +39,7 @@ describe('Switch Affiliation component', () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
     setup();
     expect(
-      screen.queryByText('Please select your state affiliation')
+      screen.getByText('Please select your state affiliation')
     ).toBeTruthy();
   });
   test('renders correct set of radio options', async () => {
@@ -52,7 +47,7 @@ describe('Switch Affiliation component', () => {
       .onGet('/affiliations/me')
       .reply(200, [{ stateId: 'md' }, { stateId: 'ak' }]);
     setup();
-    await waitFor(() => screen.getByLabelText('Maryland'));
+    await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeTruthy();
     expect(screen.getByLabelText('Alaska')).toBeTruthy();
   });
@@ -66,7 +61,7 @@ describe('Switch Affiliation component', () => {
       .onGet('/affiliations/me')
       .reply(200, [{ stateId: 'md' }, { stateId: 'ak' }]);
     setup();
-    await waitFor(() => screen.getByLabelText('Maryland'));
+    await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeChecked();
     expect(screen.getByLabelText('Alaska')).not.toBeChecked();
   });
@@ -75,7 +70,7 @@ describe('Switch Affiliation component', () => {
       .onGet('/affiliations/me')
       .reply(200, [{ stateId: 'md' }, { stateId: 'ak' }]);
     setup();
-    await waitFor(() => screen.getByLabelText('Maryland'));
+    await screen.findByLabelText('Maryland');
     expect(screen.getByLabelText('Maryland')).toBeTruthy();
     fireEvent.click(screen.getByLabelText('Alaska'));
     expect(screen.getByLabelText('Alaska')).toBeChecked();

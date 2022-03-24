@@ -3,7 +3,7 @@ import {
   renderWithConnection,
   fireEvent,
   axe,
-  waitFor
+  screen
 } from 'apd-testing-library';
 
 import Login from './Login';
@@ -32,73 +32,84 @@ describe('login component', () => {
   });
 
   it('renders correctly if logged in previously but not logged in now (shows logout notice)', () => {
-    const { getByText } = setup({ hasEverLoggedOn: true });
+    setup({ hasEverLoggedOn: true });
 
-    expect(getByText(/You have securely logged out/i)).toBeTruthy();
+    expect(screen.getByText(/You have securely logged out/i)).toBeTruthy();
   });
 
   it('renders correctly if not logged in, and never logged in', () => {
-    const { queryByText, queryByRole, queryByLabelText } = setup();
+    setup();
 
-    expect(queryByText(/You have securely logged out/i)).toBeNull();
-    expect(queryByRole('button', { name: /log in/i })).toBeDisabled();
+    expect(screen.queryByText(/You have securely logged out/i)).toBeNull();
+    expect(screen.queryByRole('button', { name: /log in/i })).toBeDisabled();
 
-    fireEvent.change(queryByLabelText('EUA ID'), {
+    fireEvent.change(screen.queryByLabelText('EUA ID'), {
       target: { name: 'username', value: 'bob' }
     });
-    fireEvent.change(queryByLabelText('Password'), {
+    fireEvent.change(screen.queryByLabelText('Password'), {
       target: { name: 'password', value: 'secret' }
     });
 
-    expect(queryByRole('button', { name: /log in/i })).toBeEnabled();
+    expect(screen.queryByRole('button', { name: /log in/i })).toBeEnabled();
   });
 
   it('renders correctly if not logged in and there is an error', () => {
-    const { getByText } = setup({ errorMessage: 'something here' });
+    setup({ errorMessage: 'something here' });
 
-    expect(getByText('something here')).toBeTruthy();
+    expect(screen.getByText('something here')).toBeTruthy();
   });
 
   it('renders correctly if not logged in and fetching data', () => {
-    const { container, queryByRole } = setup({ fetching: true });
+    const { container } = setup({ fetching: true });
 
-    expect(queryByRole('button', { name: /logging in/i })).toBeTruthy();
-    expect(queryByRole('button', { name: /logging in/i })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /logging in/i })).toBeTruthy();
+    expect(
+      screen.queryByRole('button', { name: /logging in/i })
+    ).toBeDisabled();
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
     expect(container.querySelector('.ds-c-spinner')).toBeTruthy();
   });
 
   it('renders forgot password help text and link', () => {
-    const { getByText, getByRole } = setup();
-    expect(getByText(/Forgot password?/i)).toBeTruthy();
-    expect(getByRole('link', { name: /Reset password at EUA/i })).toBeTruthy();
+    setup();
+    expect(screen.getByText(/Forgot password?/i)).toBeTruthy();
+    expect(
+      screen.getByRole('link', { name: /Reset password at EUA/i })
+    ).toBeTruthy();
   });
 
   it('renders new user guides, links, and help email', () => {
-    const { getByText, getByRole } = setup();
+    setup();
 
-    expect(getByRole('heading', { name: 'New Users' })).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'New Users' })).toBeTruthy();
     expect(
-      getByText(
+      screen.getByText(
         'New users must have an EUA account with the correct job codes before logging into the system.'
       )
     ).toBeTruthy();
 
-    expect(getByRole('link', { name: 'How to Get Started' })).toBeTruthy();
-    expect(getByRole('link', { name: 'How to Access the eAPD' })).toBeTruthy();
-    expect(getByRole('link', { name: 'CMS-EAPD@cms.hhs.gov' })).toBeTruthy();
+    expect(
+      screen.getByRole('link', { name: 'How to Get Started' })
+    ).toBeTruthy();
+    expect(
+      screen.getByRole('link', { name: 'How to Access the eAPD' })
+    ).toBeTruthy();
+    expect(
+      screen.getByRole('link', { name: 'CMS-EAPD@cms.hhs.gov' })
+    ).toBeTruthy();
   });
 
   it('calls login prop', () => {
-    const { queryByRole, queryByLabelText } = setup();
+    setup();
 
-    fireEvent.change(queryByLabelText('EUA ID'), {
+    fireEvent.change(screen.queryByLabelText('EUA ID'), {
       target: { name: 'username', value: 'bob' }
     });
-    fireEvent.change(queryByLabelText('Password'), {
+    fireEvent.change(screen.queryByLabelText('Password'), {
       target: { name: 'password', value: 'secret' }
     });
 
-    fireEvent.click(queryByRole('button', { name: /log in/i }));
+    fireEvent.click(screen.queryByRole('button', { name: /log in/i }));
     expect(defaultProps.login).toHaveBeenCalledWith('bob', 'secret');
   });
 
@@ -110,12 +121,10 @@ describe('login component', () => {
 
   it('should show the warning text if heartbeat returns an error', async () => {
     fetchMock.onGet('/heartbeat').timeout();
-    const { getByText } = setup();
+    setup();
 
-    await waitFor(() => {
-      expect(
-        getByText('The eAPD system is down, try again later.')
-      ).toBeTruthy();
-    });
+    expect(
+      await screen.findByText('The eAPD system is down, try again later.')
+    ).toBeTruthy();
   });
 });

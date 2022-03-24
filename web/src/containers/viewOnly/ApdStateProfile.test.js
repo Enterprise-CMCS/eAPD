@@ -15,7 +15,7 @@ describe('APD Summary/viewOnly component', () => {
       }
     };
     render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
-    expect(screen.queryByText(/No response was provided/i)).toBeTruthy();
+    expect(screen.getByText(/No response was provided/i)).toBeTruthy();
   });
 
   test('renders key personnel when provided', () => {
@@ -35,8 +35,8 @@ describe('APD Summary/viewOnly component', () => {
         keyPersonnel={keyPersonnel}
       />
     );
-    expect(screen.queryByText(/Primary Person Name/i)).toBeTruthy();
-    expect(screen.queryByText(/Primary APD Point of Contact/i)).toBeTruthy();
+    expect(screen.getByText(/Primary Person Name/i)).toBeTruthy();
+    expect(screen.getByText(/Primary APD Point of Contact/i)).toBeTruthy();
   });
 
   test('renders the correct state medicaid office address when provided', () => {
@@ -50,7 +50,7 @@ describe('APD Summary/viewOnly component', () => {
       }
     };
     render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
-    expect(screen.queryByText(/123 Street St/i)).toBeTruthy();
+    expect(screen.getByText(/123 Street St/i)).toBeTruthy();
   });
 
   test('renders the correct message when no address is provided', () => {
@@ -78,6 +78,6 @@ describe('APD Summary/viewOnly component', () => {
         keyPersonnel={keyPersonnel}
       />
     );
-    expect(screen.queryByText(/No response was provided/i)).toBeTruthy();
+    expect(screen.getByText(/No response was provided/i)).toBeTruthy();
   });
 });

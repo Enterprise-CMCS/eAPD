@@ -4,7 +4,7 @@ import {
   renderWithConnection,
   screen,
   fireEvent,
-  waitFor,
+  within,
   waitForElementToBeRemoved
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
@@ -70,7 +70,7 @@ const initialState = {
         name: 'eAPD State Contractor'
       }
     ],
-    affiliations: [requestedAffiliation, activeAffiliation, inactiveAffiliation]
+    affiliations: []
   },
   auth: {
     user: {
@@ -83,63 +83,60 @@ const initialState = {
       state: {
         id: 'md',
         name: 'Maryland'
-      }
+      },
+      activities: ['edit-affiliations']
     }
   }
 };
 
+const setup = (props = {}, options = {}) =>
+  renderWithConnection(<StateAdmin {...props} />, options);
+
+const loadTab = async tab => {
+  fireEvent.click(screen.getByRole('tab', { name: tab }));
+  await waitForElementToBeRemoved(() =>
+    within(screen.getByRole('tabpanel', { name: tab })).queryByText(
+      'Loading...'
+    )
+  );
+};
+
 describe('<StateAdmin />', () => {
   beforeEach(() => {
-    fetchMock.reset();
+    fetchMock.resetHistory();
+    fetchMock.onGet('/roles').reply(200, []);
+    fetchMock
+      .onPatch(`/states/md/affiliations/${requestedAffiliation.id}`)
+      .reply(200);
   });
 
   describe('with no affiliations', () => {
     beforeEach(async () => {
-      const props = {
-        getRoleTypes: jest.fn(),
-        getAffiliations: jest.fn(),
-        updateAffiliation: jest.fn()
-      };
-
       const stateId = initialState.user.data.state.id;
-      fetchMock.onGet('/roles').reply(200, []);
-      fetchMock
-        .onGet(`/states/${stateId}/affiliations?status=active`)
-        .reply(200, []);
-      fetchMock
-        .onGet(`/states/${stateId}/affiliations?status=inactive`)
-        .reply(200, []);
       fetchMock
         .onGet(`/states/${stateId}/affiliations?status=pending`)
         .reply(200, []);
-      renderWithConnection(<StateAdmin {...props} />, {
-        initialState: {
-          ...initialState,
-          admin: {
-            ...initialState.admin,
-            affiliations: []
-          }
-        }
-      });
-
-      await waitForElementToBeRemoved(
-        () => screen.getAllByText('Loading...')[0]
-      );
     });
 
-    it('renders no results message', () => {
+    it('renders no results message', async () => {
+      setup({}, { initialState });
+      await loadTab('Requests');
       expect(
         screen.getAllByText('No users on this tab at this time')
-      ).toHaveLength(3);
+      ).toBeTruthy();
     });
 
-    it('renders header', () => {
+    it('renders header', async () => {
+      setup({}, { initialState });
+      await loadTab('Requests');
       expect(
         screen.getByText('Maryland eAPD State Administrator Portal')
       ).toBeTruthy();
     });
 
-    it('renders correct tabs', () => {
+    it('renders correct tabs', async () => {
+      setup({}, { initialState });
+      await loadTab('Requests');
       expect(screen.getByText('Requests')).toBeTruthy();
       expect(screen.getByText('Active')).toBeTruthy();
       expect(screen.getByText('Inactive')).toBeTruthy();
@@ -148,35 +145,15 @@ describe('<StateAdmin />', () => {
 
   describe('with a pending request', () => {
     beforeEach(async () => {
-      const props = {
-        getRoleTypes: jest.fn(),
-        getAffiliations: jest.fn(),
-        updateAffiliation: jest.fn()
-      };
       const stateId = initialState.user.data.state.id;
-      fetchMock.onGet('/roles').reply(200, []);
-      fetchMock
-        .onGet(`/states/${stateId}/affiliations?status=active`)
-        .reply(200, []);
-      fetchMock
-        .onGet(`/states/${stateId}/affiliations?status=inactive`)
-        .reply(200, []);
       fetchMock
         .onGet(`/states/${stateId}/affiliations?status=pending`)
         .reply(200, [requestedAffiliation]);
-      fetchMock
-        .onPatch(`/states/${stateId}/affiliations/${requestedAffiliation.id}`)
-        .reply(200);
-      renderWithConnection(<StateAdmin {...props} />, {
-        initialState
-      });
-
-      await waitForElementToBeRemoved(
-        () => screen.getAllByText('Loading...')[0]
-      );
     });
 
     it('renders name, email, phone', async () => {
+      setup({}, { initialState });
+      await loadTab('Requests');
       // Note: we render the affiliations in each tab and update on tab change, so we
       // expect to see 3 instances which is why this is using getAllByText
       expect(
@@ -189,45 +166,37 @@ describe('<StateAdmin />', () => {
     });
 
     it('renders approve and deny buttons', async () => {
+      setup({}, { initialState });
+      await loadTab('Requests');
       expect(screen.getByText('Approve')).toBeTruthy();
       expect(screen.getByText('Deny')).toBeTruthy();
     });
 
     it('should open manage modal on approve', async () => {
+      setup({}, { initialState });
+      await loadTab('Requests');
       expect(screen.getByText('Approve')).toBeTruthy();
       fireEvent.click(screen.getByText('Approve'));
-      await waitFor(() => {
-        expect(
-          screen.getByRole('heading', { name: 'Edit Role' })
-        ).toBeInTheDocument();
-      });
+      expect(
+        await screen.findByRole('heading', { name: 'Edit Role' })
+      ).toBeInTheDocument();
     });
   });
 
-  xdescribe('with an active affiliation', () => {
+  describe('with an active affiliation', () => {
     beforeEach(() => {
-      const props = {
-        currentState: {
-          id: 'md',
-          name: 'Maryland'
-        },
-        affiliations: [activeAffiliation],
-        roleTypes: [{ id: 50, name: 'eAPD Federal Admin' }],
-        getRoleTypes: jest.fn(),
-        getAffiliations: jest.fn(),
-        updateAffiliation: jest.fn()
-      };
-      fetchMock.onGet('/roles').reply(200, []);
+      const stateId = initialState.user.data.state.id;
       fetchMock
-        .onGet(`/states/md/affiliations?status=pending`)
-        .reply(200, [requestedAffiliation]);
+        .onGet(`/states/${stateId}/affiliations?status=active`)
+        .reply(200, [activeAffiliation]);
       fetchMock
-        .onPatch(`/states/md/affiliations/${requestedAffiliation.id}`)
-        .reply(200);
-      renderWithConnection(<StateAdmin {...props} />);
+        .onGet(`/states/${stateId}/affiliations?status=pending`)
+        .reply(200, []);
     });
 
-    test('renders name, email, phone, role', () => {
+    test('renders name, email, phone, role', async () => {
+      setup({}, { initialState });
+      await loadTab('Active');
       expect(screen.getAllByText(activeAffiliation.displayName)).toHaveLength(
         3
       );
@@ -239,52 +208,41 @@ describe('<StateAdmin />', () => {
       expect(screen.getAllByText(activeAffiliation.role)).toHaveLength(1);
     });
 
-    test('renders edit role and revoke buttons', () => {
+    test('renders edit role and revoke buttons', async () => {
+      setup({}, { initialState });
+      await loadTab('Active');
       expect(screen.getByText('Edit Role')).toBeTruthy();
       expect(screen.getByText('Revoke')).toBeTruthy();
     });
 
     it('should open manage modal on Edit Role', async () => {
+      setup({}, { initialState });
+      await loadTab('Active');
       fireEvent.click(screen.getByText('Edit Role'));
-      await waitFor(() => {
-        expect(
-          screen.getByRole('heading', { name: 'Edit Role' })
-        ).toBeInTheDocument();
-      });
+      expect(
+        await screen.findByRole('heading', { name: 'Edit Role' })
+      ).toBeInTheDocument();
     });
 
     it('should open confirmation modal on revoke', async () => {
+      setup({}, { initialState });
+      await loadTab('Active');
       fireEvent.click(screen.getByText('Revoke'));
-      await waitFor(() => {
-        expect(screen.getByText('Confirm')).toBeInTheDocument();
-      });
+      expect(await screen.findByText('Confirm')).toBeInTheDocument();
     });
   });
 
-  xdescribe('with an inactive affiliation', () => {
+  describe('with an inactive affiliation', () => {
     beforeEach(() => {
-      const props = {
-        currentState: {
-          id: 'md',
-          name: 'Maryland'
-        },
-        affiliations: [inactiveAffiliation],
-        roleTypes: [{ id: 50, name: 'eAPD Federal Admin' }],
-        getRoleTypes: jest.fn(),
-        getAffiliations: jest.fn(),
-        updateAffiliation: jest.fn()
-      };
-      fetchMock.onGet('/roles').reply(200, []);
+      fetchMock.onGet(`/states/md/affiliations?status=pending`).reply(200, []);
       fetchMock
-        .onGet(`/states/md/affiliations?status=pending`)
-        .reply(200, [requestedAffiliation]);
-      fetchMock
-        .onPatch(`/states/md/affiliations/${requestedAffiliation.id}`)
-        .reply(200);
-      renderWithConnection(<StateAdmin {...props} />);
+        .onGet(`/states/md/affiliations?status=inactive`)
+        .reply(200, [inactiveAffiliation]);
     });
 
-    test('renders name, email, phone, status', () => {
+    test('renders name, email, phone, status', async () => {
+      setup({}, { initialState });
+      await loadTab('Inactive');
       expect(screen.getAllByText(inactiveAffiliation.displayName)).toHaveLength(
         3
       );
@@ -296,17 +254,19 @@ describe('<StateAdmin />', () => {
       expect(screen.getAllByText(inactiveAffiliation.status)).toHaveLength(1);
     });
 
-    test('renders restore access button', () => {
+    test('renders restore access button', async () => {
+      setup({}, { initialState });
+      await loadTab('Inactive');
       expect(screen.getByText('Restore Access')).toBeTruthy();
     });
 
     it('should open manage modal on Restore Access', async () => {
+      setup({}, { initialState });
+      await loadTab('Inactive');
       fireEvent.click(screen.getByText('Restore Access'));
-      await waitFor(() => {
-        expect(
-          screen.getByRole('heading', { name: 'Edit Role' })
-        ).toBeInTheDocument();
-      });
+      expect(
+        await screen.findByRole('heading', { name: 'Edit Role' })
+      ).toBeInTheDocument();
     });
   });
 

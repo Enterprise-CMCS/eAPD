@@ -43,15 +43,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   describe('Create APD', () => {
     it('creates a default new APD and handles changing the name', () => {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const options = { month: 'long', day: 'numeric', year: 'numeric' };
       const today = new Date();
 
       cy.get('#apd-header-info').contains(
-        `Created: ${today.toLocaleDateString('en-US', options)}`
+        `Created: ${today.toLocaleDateString('en-us', options)}`
       );
 
       cy.get('#apd-header-info').contains(
-        `Created: ${today.toLocaleDateString('en-US', options)}`
+        `Created: ${today.toLocaleDateString('en-us', options)}`
       );
 
       cy.log('change the APD name');

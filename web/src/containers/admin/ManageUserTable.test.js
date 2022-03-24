@@ -1,9 +1,6 @@
 import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+import { renderWithConnection, screen } from 'apd-testing-library';
 import ManageUserTable from './ManageUserTable';
-
-let props;
-let renderUtils;
 
 const requestedAffiliation = {
   displayName: 'Liz Lemon',
@@ -44,58 +41,55 @@ const deniedAffiliation = {
   userId: '00u5mfj967KsdvDDD297'
 };
 
+const setup = (props = {}) =>
+  renderWithConnection(<ManageUserTable {...props} />);
+
 describe('<ManageUserTable />', () => {
   test('shows loading when data is fetching', () => {
-    props = {
+    const props = {
       tab: 'active',
       isFetching: true,
       affiliations: [],
       actions: [],
       currentUser: { id: '123' }
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText('Loading...')).toBeTruthy();
+    setup(props);
+    expect(screen.getByText('Loading...')).toBeTruthy();
   });
 
   test('shows correct table headers in requests tab', () => {
-    props = {
+    const props = {
       tab: 'pending',
       affiliations: [requestedAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123' }
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText('Name')).toBeTruthy();
-    expect(getByText('Email')).toBeTruthy();
-    expect(getByText('Phone Number')).toBeTruthy();
-    expect(getByText('Actions')).toBeTruthy();
+    setup(props);
+    expect(screen.getByText('Name')).toBeTruthy();
+    expect(screen.getByText('Email')).toBeTruthy();
+    expect(screen.getByText('Phone Number')).toBeTruthy();
+    expect(screen.getByText('Actions')).toBeTruthy();
   });
 
   test('shows correct table headers in active tab', () => {
-    props = {
+    const props = {
       tab: 'active',
       affiliations: [approvedAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123' }
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText('Name')).toBeTruthy();
-    expect(getByText('Email')).toBeTruthy();
-    expect(getByText('Phone Number')).toBeTruthy();
-    expect(getByText('Role')).toBeTruthy();
-    expect(getByText('Actions')).toBeTruthy();
+    setup(props);
+    expect(screen.getByText('Name')).toBeTruthy();
+    expect(screen.getByText('Email')).toBeTruthy();
+    expect(screen.getByText('Phone Number')).toBeTruthy();
+    expect(screen.getByText('Role')).toBeTruthy();
+    expect(screen.getByText('Actions')).toBeTruthy();
   });
 
   test('does now show actions for current users affiliation', () => {
-    props = {
+    const props = {
       tab: 'active',
       affiliations: [approvedAffiliation],
       isFetching: false,
@@ -109,82 +103,75 @@ describe('<ManageUserTable />', () => {
         </button>
       ]
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-    const { queryByRole } = renderUtils;
-    expect(queryByRole('button', { name: 'Edit Role' })).toBeNull();
-    expect(queryByRole('button', { name: 'Revoke' })).toBeNull();
+    setup(props);
+    expect(screen.queryByRole('button', { name: 'Edit Role' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Revoke' })).toBeNull();
   });
 
   test('shows correct table headers in inactive tab', () => {
-    props = {
+    const props = {
       tab: 'inactive',
       affiliations: [deniedAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123' }
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText('Name')).toBeTruthy();
-    expect(getByText('Email')).toBeTruthy();
-    expect(getByText('Phone Number')).toBeTruthy();
-    expect(getByText('Status')).toBeTruthy();
-    expect(getByText('Actions')).toBeTruthy();
+    setup(props);
+    expect(screen.getByText('Name')).toBeTruthy();
+    expect(screen.getByText('Email')).toBeTruthy();
+    expect(screen.getByText('Phone Number')).toBeTruthy();
+    expect(screen.getByText('Status')).toBeTruthy();
+    expect(screen.getByText('Actions')).toBeTruthy();
   });
 
   test('shows correct data in requests tab', () => {
-    props = {
+    const props = {
       tab: 'pending',
       affiliations: [requestedAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123' }
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText(requestedAffiliation.displayName)).toBeTruthy();
-    expect(getByText(requestedAffiliation.email)).toBeTruthy();
-    expect(getByText(requestedAffiliation.primaryPhone)).toBeTruthy();
+    setup(props);
+    expect(screen.getByText(requestedAffiliation.displayName)).toBeTruthy();
+    expect(screen.getByText(requestedAffiliation.email)).toBeTruthy();
+    expect(screen.getByText(requestedAffiliation.primaryPhone)).toBeTruthy();
   });
 
   test('shows correct data in active tab', () => {
-    props = {
+    const props = {
       tab: 'active',
       affiliations: [approvedAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123' }
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText(approvedAffiliation.displayName)).toBeTruthy();
-    expect(getByText(approvedAffiliation.email)).toBeTruthy();
-    expect(getByText(approvedAffiliation.primaryPhone)).toBeTruthy();
-    expect(getByText(approvedAffiliation.role)).toBeTruthy();
+    setup(props);
+    expect(screen.getByText(approvedAffiliation.displayName)).toBeTruthy();
+    expect(screen.getByText(approvedAffiliation.email)).toBeTruthy();
+    expect(screen.getByText(approvedAffiliation.primaryPhone)).toBeTruthy();
+    expect(screen.getByText(approvedAffiliation.role)).toBeTruthy();
   });
 
   test('shows correct data in inactive tab', () => {
-    props = {
+    const props = {
       tab: 'inactive',
       affiliations: [deniedAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123' }
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText(deniedAffiliation.displayName)).toBeTruthy();
-    expect(getByText(deniedAffiliation.email)).toBeTruthy();
-    expect(getByText(deniedAffiliation.primaryPhone)).toBeTruthy();
-    expect(getByText(deniedAffiliation.status, { exact: false })).toBeTruthy();
+    setup(props);
+    expect(screen.getByText(deniedAffiliation.displayName)).toBeTruthy();
+    expect(screen.getByText(deniedAffiliation.email)).toBeTruthy();
+    expect(screen.getByText(deniedAffiliation.primaryPhone)).toBeTruthy();
+    expect(
+      screen.getByText(deniedAffiliation.status, { exact: false })
+    ).toBeTruthy();
   });
 
   test('renders passed in actions', () => {
-    props = {
+    const props = {
       tab: 'active',
       affiliations: [approvedAffiliation],
       isFetching: false,
@@ -195,9 +182,7 @@ describe('<ManageUserTable />', () => {
       ],
       currentUser: { id: '123' }
     };
-    renderUtils = renderWithConnection(<ManageUserTable {...props} />);
-
-    const { getByText } = renderUtils;
-    expect(getByText('Take Action')).toBeTruthy();
+    setup(props);
+    expect(screen.getByText('Take Action')).toBeTruthy();
   });
 });

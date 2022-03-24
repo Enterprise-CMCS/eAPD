@@ -59,12 +59,10 @@ describe('<StateAccessRequest />', () => {
 
     setup();
 
-    await waitFor(() => {
-      expect(
-        screen.getByRole('heading', { name: 'Manage Account' })
-      ).toBeTruthy();
-      expect(screen.getByText('Existing Affiliations')).toBeTruthy();
-    });
+    expect(
+      await screen.findByRole('heading', { name: 'Manage Account' })
+    ).toBeTruthy();
+    expect(await screen.findByText('Existing Affiliations')).toBeTruthy();
   });
 
   it('renders existing affiliations', async () => {
@@ -84,14 +82,12 @@ describe('<StateAccessRequest />', () => {
     ]);
     setup();
 
-    await waitFor(() => {
-      expect(screen.getByText('Active')).toBeTruthy();
-      expect(screen.getByText('Arizona')).toBeTruthy();
-      expect(screen.getByText('Revoked')).toBeTruthy();
-      expect(screen.getByText('Maryland')).toBeTruthy();
-      expect(screen.getByText('Pending')).toBeTruthy();
-      expect(screen.getByText('Alaska')).toBeTruthy();
-    });
+    expect(await screen.findByText('Active')).toBeTruthy();
+    expect(await screen.findByText('Arizona')).toBeTruthy();
+    expect(await screen.findByText('Revoked')).toBeTruthy();
+    expect(await screen.findByText('Maryland')).toBeTruthy();
+    expect(await screen.findByText('Pending')).toBeTruthy();
+    expect(await screen.findByText('Alaska')).toBeTruthy();
   });
 
   it('renders message when no affiliations exist per status', async () => {
@@ -142,7 +138,7 @@ describe('<StateAccessRequest />', () => {
   it('renders the input when entered', async () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
     setup();
-    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
+    await screen.findByLabelText('Select your State Affiliation');
     const input = screen.getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Al' } });
     expect(input.value).toBe('Al');
@@ -151,7 +147,7 @@ describe('<StateAccessRequest />', () => {
   it('renders the selection badge when an item is picked', async () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
     setup();
-    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
+    await screen.findByLabelText('Select your State Affiliation');
     const input = screen.getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Alabama' } });
     fireEvent.click(screen.getByText('Alabama'));
@@ -160,32 +156,32 @@ describe('<StateAccessRequest />', () => {
 
   it('renders the no results on an invalid entry', async () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
-    const { getByText, getByLabelText } = setup();
-    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
-    const input = getByLabelText('Select your State Affiliation');
+    setup();
+    await screen.findByLabelText('Select your State Affiliation');
+    const input = screen.getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'invalid123999' } });
-    expect(getByText('No results')).toBeTruthy();
+    expect(screen.getByText('No results')).toBeTruthy();
   });
 
   it('properly removes a selection', async () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
-    const { getByText, getByLabelText, getByRole, queryByText } = setup();
-    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
-    const input = getByLabelText('Select your State Affiliation');
+    setup();
+    await screen.findByLabelText('Select your State Affiliation');
+    const input = screen.getByLabelText('Select your State Affiliation');
     fireEvent.change(input, { target: { value: 'Alabama' } });
-    fireEvent.click(getByText('Alabama'));
-    fireEvent.click(getByRole('button', { name: 'Remove Alabama' }));
-    expect(queryByText('Alabama')).toBeNull();
+    fireEvent.click(screen.getByText('Alabama'));
+    fireEvent.click(screen.getByRole('button', { name: 'Remove Alabama' }));
+    expect(screen.queryByText('Alabama')).toBeNull();
   });
 
   it('renders the submit button as disabled until a selection is made', async () => {
     fetchMock.onGet('/affiliations/me').reply(200, []);
-    const { getByText, getByLabelText } = setup();
-    await waitFor(() => screen.getByLabelText('Select your State Affiliation'));
-    const input = getByLabelText('Select your State Affiliation');
-    expect(getByText('Submit')).toHaveAttribute('disabled');
+    setup();
+    await screen.findByLabelText('Select your State Affiliation');
+    const input = screen.getByLabelText('Select your State Affiliation');
+    expect(screen.getByText('Submit')).toHaveAttribute('disabled');
     fireEvent.change(input, { target: { value: 'Al' } });
-    fireEvent.click(getByText('Alabama'));
-    expect(getByText('Submit')).not.toHaveAttribute('disabled');
+    fireEvent.click(screen.getByText('Alabama'));
+    expect(screen.getByText('Submit')).not.toHaveAttribute('disabled');
   });
 });

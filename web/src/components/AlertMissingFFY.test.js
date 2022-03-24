@@ -6,7 +6,7 @@ describe('<AlertMissingFFY />', () => {
   it('displays the alert', () => {
     render(<AlertMissingFFY years={[]} apdId="0123456789abcdef01234567" />);
     expect(
-      screen.queryByText(
+      screen.getByText(
         'At least one FFY must be selected to continue with your APD.'
       )
     ).toBeInTheDocument();

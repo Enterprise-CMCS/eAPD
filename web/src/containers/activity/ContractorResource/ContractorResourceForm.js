@@ -22,7 +22,7 @@ import { saveContractor as actualSaveContractor } from '../../../actions/editAct
 
 const getCheckedValue = value => {
   if (value !== null) {
-    return value ? 'true' : 'false';
+    return value ? 'yes' : 'no';
   }
   return null;
 };
@@ -332,8 +332,8 @@ const ContractorResourceForm = forwardRef(
               choices={[
                 {
                   label: 'Yes',
-                  value: 'true',
-                  checked: JSON.parse(value),
+                  value: 'yes',
+                  checked: value === 'yes',
                   checkedChildren: (
                     <div className="ds-c-choice__checkedChild">
                       {apdFFYs.map(ffy => (
@@ -414,8 +414,8 @@ const ContractorResourceForm = forwardRef(
                 },
                 {
                   label: 'No',
-                  value: 'false',
-                  checked: JSON.parse(value) === false
+                  value: 'no',
+                  checked: value === 'no'
                 }
               ]}
               type="radio"
@@ -433,7 +433,8 @@ const ContractorResourceForm = forwardRef(
           )}
         />
         {state.hourly.useHourly === null ||
-        JSON.parse(state.hourly.useHourly) === true ? (
+        state.hourly.useHourly === true ||
+        state.hourly.useHourly === 'yes' ? (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <div key={ffy}>
