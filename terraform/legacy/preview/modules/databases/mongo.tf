@@ -17,7 +17,8 @@ resource "aws_instance" "eapd_mongo" {
     vpc_security_group_ids      = ["sg-0bc99618daf4cd5da"]
     subnet_id                   = "subnet-09af713f4e068ac99"
     key_name                    = "eapd_bbrooks"
-#    user_data                   = "${file("../../../bin/preview-deploy/aws.user-data.sh")}"
+    user_data                   = "${file("../../../packer/mongo.sh")}"
+#    user_data                   = "../../../bin/prod-deploy/aws.user-data.sh"
     associate_public_ip_address = true #This is a preview resource, should be moved to preview Terraform
     tags = {
         Name = var.instance_name
@@ -28,8 +29,22 @@ resource "aws_instance" "eapd_mongo" {
         Terraform = "True"
     }
     disable_api_termination = false # True in Prod
-    user_data = <<-EOL
-    #!/bin/bash -xe
-    sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
-    EOL
+#    user_data = <<-EOL
+#    #!/bin/bash -xe
+#    sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
+#    EOL
+    
+    connection {
+        type = "ssh"
+        user = var.ssh_user
+        private_key = file(var.ssh_key)
+        host = self.public_ip
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "sudo sh -c 'echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml'",
+        ]
+    }
+
 }
