@@ -1,7 +1,5 @@
 FROM node:16.13.2-bullseye
 
-RUN yarn set version berry
-
 RUN mkdir /app
 WORKDIR /app
 

@@ -433,13 +433,14 @@ const ContractorResourceForm = forwardRef(
           )}
         />
         {(state.hourly.useHourly === 'yes' ||
-          state.hourly.useHourly === true) && (
+          state.hourly.useHourly === true ||
+          !state.hourly.useHourly) && (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
-              <Fragment key={ffy}>
+              <div key={ffy}>
                 <FormLabel>FFY {ffy} Cost</FormLabel>
                 <Dollars>{state.years[ffy]}</Dollars>
-              </Fragment>
+              </div>
             ))}
           </p>
         )}

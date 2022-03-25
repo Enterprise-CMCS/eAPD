@@ -83,7 +83,7 @@
     "@fortawesome/free-regular-svg-icons": "5.15.4",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
     "@fortawesome/react-fontawesome": "0.1.17",
-    "@hookform/resolvers": "^2.8.8",
+    "@hookform/resolvers": "2.8.8",
     "@okta/okta-auth-js": "6.0.0",
     "@snyk/protect": "1.866.0",
     "@tinymce/tinymce-react": "3.13.1",
