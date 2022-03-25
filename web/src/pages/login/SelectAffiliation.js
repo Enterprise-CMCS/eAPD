@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { ChoiceList } from '@cmsgov/design-system';
-import CardForm from '../components/CardForm';
+import CardForm from '../../components/CardForm';
 
-import { STATES } from '../util/states';
-import axios from '../util/api';
+import { STATES } from '../../util/states';
+import axios from '../../util/api';
 
-import { selectAffiliation } from '../actions/auth';
+import { selectAffiliation } from '../../actions/auth';
 
 const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
 

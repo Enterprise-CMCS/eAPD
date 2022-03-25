@@ -1,7 +1,7 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { Button } from '@cmsgov/design-system';
-import { apiUrl } from '../util/api';
+import { apiUrl } from '../../util/api';
 
 const LoginGroupError = ({ onCancel }) => {
   return (
