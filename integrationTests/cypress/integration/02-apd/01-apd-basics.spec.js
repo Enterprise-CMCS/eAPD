@@ -659,7 +659,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.get('.form-and-review-list')
-        .contains('Private contractors have not been added for this activity.')
+        .contains('Add private contractor(s) for this activity.')
         .should('exist');
 
       cy.findByRole('button', { name: /Add Contractor/i }).click();
@@ -1159,7 +1159,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.goToPrivateContractorCosts(0);
 
       activityPage.checkDeleteButton(
-        'Private contractors have not been added for this activity',
+        'Add private contractor(s) for this activity.',
         'Delete Private Contractor?',
         'Test Private Contractor'
       );

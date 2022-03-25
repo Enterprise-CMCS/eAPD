@@ -100,7 +100,7 @@ export const checkDefaultActivity = years => {
       }).should('exist');
 
       cy.contains(
-        'Private contractors have not been added for this activity.'
+        'Add private contractor(s) for this activity.'
       ).should('exist');
 
       cy.waitForSave();
