@@ -5,10 +5,10 @@ import {
   axe,
   screen,
   waitFor
-} from '../shared/apd-testing-library';
+} from '../../shared/apd-testing-library';
 import StateAccessRequest from './StateAccessRequest';
 import MockAdapter from 'axios-mock-adapter';
-import axios from '../util/api';
+import axios from '../../util/api';
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 const defaultProps = {
