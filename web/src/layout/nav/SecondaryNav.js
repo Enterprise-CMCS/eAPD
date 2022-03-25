@@ -2,13 +2,13 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, useParams as actualUseParams } from 'react-router-dom';
-import ContinuePreviousButtons from './ContinuePreviousButtons';
+import ContinuePreviousButtons from '../../components/ContinuePreviousButtons';
 
 import {
   selectActivitiesSidebar,
   selectActivityCount
-} from '../reducers/activities.selectors';
-import { addActivity as actualAddActivity } from '../actions/editActivity';
+} from '../../reducers/activities.selectors';
+import { addActivity as actualAddActivity } from '../../actions/editActivity';
 
 const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
   const { activityIndex } = useParams();

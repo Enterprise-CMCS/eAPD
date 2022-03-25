@@ -1,10 +1,13 @@
 import React from 'react';
 import ApdList from './ApdList';
-import { renderWithConnection, screen } from '../shared/apd-testing-library';
-import mockAxios from '../util/api';
-import { AFFILIATION_STATUSES } from '../constants';
+import {
+  renderWithConnection,
+  screen
+} from '../../../shared/apd-testing-library';
+import mockAxios from '../../../util/api';
+import { AFFILIATION_STATUSES } from '../../../constants';
 
-jest.mock('../util/api', () => ({
+jest.mock('../../../util/api', () => ({
   get: jest.fn(),
   post: jest.fn(),
   patch: jest.fn(),
