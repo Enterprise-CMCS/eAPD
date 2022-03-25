@@ -7,11 +7,11 @@ import {
 } from 'react-router-dom';
 
 import Login from './Login';
-import LoginLocked from '../components/LoginLocked';
-import LoginGroupError from '../components/LoginGroupError';
-import LoginMFAEnroll from '../components/LoginMFAEnroll';
-import LoginMFAEnrollPhoneNumber from '../components/LoginMFAEnrollPhoneNumber';
-import LoginMFAVerifyAuthApp from '../components/LoginMFAVerifyAuthApp';
+import LoginLocked from './LoginLocked';
+import LoginGroupError from './LoginGroupError';
+import LoginMFAEnroll from './LoginMFAEnroll';
+import LoginMFAEnrollPhoneNumber from './LoginMFAEnrollPhoneNumber';
+import LoginMFAVerifyAuthApp from './LoginMFAVerifyAuthApp';
 import LoginMFA from './LoginMFA';
 import StateAccessRequest from './StateAccessRequest';
 import StateAccessRequestConfirmation from './StateAccessRequestConfirmation';

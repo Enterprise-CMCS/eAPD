@@ -8,7 +8,7 @@ import {
 
 import SelectAffiliation from './SelectAffiliation';
 import MockAdapter from 'axios-mock-adapter';
-import axios from '../util/api';
+import axios from '../../util/api';
 
 const defaultProps = {
   currentStateId: 'md',

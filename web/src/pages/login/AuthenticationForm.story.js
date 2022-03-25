@@ -1,25 +1,26 @@
 import React from 'react';
-import LoginForm from './LoginForm';
-import * as CardFormStory from './CardForm.story';
+import AuthenticationForm from './AuthenticationForm';
+import * as CardFormStory from '../../components/CardForm.story';
 
 export default {
-  title: 'LoginForm',
-  component: LoginForm,
+  title: 'AuthenticationForm',
+  component: AuthenticationForm,
   decorators: CardFormStory.decorators,
   parameters: {
-    jest: ['LoginForm.test.js']
+    jest: ['AuthenticationForm.test.js']
   }
 };
 
-export const Basic = args => <LoginForm {...args} />;
+export const Basic = args => <AuthenticationForm {...args} />;
+
 Basic.args = {
   ...CardFormStory.Basic.args
 };
 
 const Template = args => (
-  <LoginForm {...args}>
+  <AuthenticationForm {...args}>
     <CardFormStory.Form />
-  </LoginForm>
+  </AuthenticationForm>
 );
 
 export const TextField = Template.bind({});

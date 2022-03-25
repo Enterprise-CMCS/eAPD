@@ -9,8 +9,8 @@ import {
   completeAccessRequest as actualCompleteAccessRequest
 } from '../../actions/auth';
 
-import StateAccessRequest from '../StateAccessRequest';
-import StateAccessRequestConfirmation from '../StateAccessRequestConfirmation';
+import StateAccessRequest from '../../pages/login/StateAccessRequest';
+import StateAccessRequestConfirmation from '../../pages/login/StateAccessRequestConfirmation';
 import { getIsFedAdmin } from '../../reducers/user.selector';
 import { goToDashboard } from '../../actions/app';
 import axios from '../../util/api';
