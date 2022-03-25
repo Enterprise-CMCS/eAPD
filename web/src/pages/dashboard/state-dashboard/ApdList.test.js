@@ -1,8 +1,11 @@
 import React from 'react';
 import ApdList from './ApdList';
-import { renderWithConnection, screen } from '../shared/apd-testing-library';
-import mockAxios from '../util/api';
-import { AFFILIATION_STATUSES } from '../constants';
+import {
+  renderWithConnection,
+  screen
+} from '../../../shared/apd-testing-library';
+import mockAxios from '../../../util/api';
+import { AFFILIATION_STATUSES } from '../../../constants';
 
 jest.mock('../../../util/api', () => ({
   get: jest.fn(),
@@ -45,18 +48,6 @@ describe('<ApdList />', () => {
   describe('no apds', () => {
     beforeEach(() => {
       mockAxios.get.mockImplementation(() => Promise.resolve({ data: [] }));
-<<<<<<< HEAD:web/src/pages/dashboard/state-dashboard/ApdList.test.js
-      renderUtils = renderWithConnection(
-        <ApdList {...props} pending={false} />,
-        {
-          initialState: {
-            user: {
-              data: {
-                state: { id: 'mo' },
-                states: { mo: AFFILIATION_STATUSES.APPROVED },
-                activities: ['view-document', 'edit-document']
-              }
-=======
       props = { pending: false };
       options = {
         initialState: {
@@ -65,7 +56,6 @@ describe('<ApdList />', () => {
               state: { id: 'mo' },
               states: { mo: AFFILIATION_STATUSES.APPROVED },
               activities: ['view-document', 'edit-document']
->>>>>>> tforkner/3499-private-contractor-costs-validation:web/src/components/ApdList.test.js
             }
           }
         }
@@ -106,26 +96,6 @@ describe('<ApdList />', () => {
   describe('default state with apds', () => {
     beforeEach(() => {
       mockAxios.get.mockImplementation(() => Promise.resolve({ data: [apd] }));
-<<<<<<< HEAD:web/src/pages/dashboard/state-dashboard/ApdList.test.js
-      renderUtils = renderWithConnection(
-        <ApdList {...props} pending={false} />,
-        {
-          initialState: {
-            user: {
-              data: {
-                state: { id: 'mo' },
-                states: { state_id: AFFILIATION_STATUSES.APPROVED },
-                activities: ['view-document', 'edit-document']
-              }
-            },
-            apd: {
-              byId: {
-                [apd.id]: {
-                  ...apd,
-                  created: createdStr,
-                  updated: updatedStr
-                }
-=======
       props = { pending: false };
       options = {
         initialState: {
@@ -142,7 +112,6 @@ describe('<ApdList />', () => {
                 ...apd,
                 created: createdStr,
                 updated: updatedStr
->>>>>>> tforkner/3499-private-contractor-costs-validation:web/src/components/ApdList.test.js
               }
             }
           }
