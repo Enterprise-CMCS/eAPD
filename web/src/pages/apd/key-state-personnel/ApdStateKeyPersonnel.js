@@ -2,10 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  ApdKeyPersonForm,
-  ApdKeyPersonReview
-} from '../../../containers/ApdKeyPerson';
+import ApdKeyPersonForm from './ApdKeyPersonForm';
+import ApdKeyPersonReview from './ApdKeyPersonReview';
 import FormAndReviewList from '../../../components/FormAndReviewList';
 import {
   selectApdYears,

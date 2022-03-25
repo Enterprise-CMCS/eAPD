@@ -6,7 +6,7 @@ import KeyPersonnel from './ApdStateKeyPersonnel';
 import Waypoint from '../../../containers/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
-const ApdStateProfile = () => (
+const KeyStatePersonnel = () => (
   <React.Fragment>
     <Waypoint />
     <AlertMissingFFY />
@@ -30,4 +30,4 @@ const ApdStateProfile = () => (
   </React.Fragment>
 );
 
-export default ApdStateProfile;
+export default KeyStatePersonnel;
