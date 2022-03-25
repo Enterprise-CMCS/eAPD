@@ -113,16 +113,16 @@ module "mongo" {
     newrelic_liscense_key = var.newrelic_liscense_key
     ssh_user = var.ssh_user
     ssh_key = var.ssh_key
-    mongo_initdb_root_username = var.mongo_initdb_root_username
-    mongo_initdb_root_password = var.mongo_initdb_root_password
-    mongo_initdb_database = var.mongo_initdb_database
-    mongo_database_username = var.mongo_database_username
-    mongo_database_password = var.mongo_database_password
-    mongo_database = var.mongo_database
-    mongo_admin_url = var.mongo_admin_url
-    database_url = var.database_url
-    okta_domain = var.okta_domain
-    okta_api_key = var.okta_api_key
-    environment = var.environment
+    MONGO_DATABASE = var.preview_mongo_database
+    MONGO_INITDB_ROOT_USERNAME = var.preview_mongo_initdb_root_username
+    MONGO_INITDB_ROOT_PASSWORD = var.preview_mongo_initdb_root_password
+    MONGO_INITDB_DATABASE = var.preview_mongo_initdb_database
+    MONGO_DATABASE_USERNAME = var.preview_mongo_database_username
+    MONGO_DATABASE_PASSWORD = var.preview_mongo_database_password
+    MONGO_ADMIN_URL = var.preview_mongo_admin_url
+    DATABASE_URL = var.preview_database_url
+    OKTA_DOMAIN = var.preview_okta_domain
+    OKTA_API_KEY = var.preview_okta_api_key
+    ENVIRONMENT = var.preview_environment
 
 }

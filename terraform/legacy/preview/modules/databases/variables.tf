@@ -6,24 +6,24 @@ variable "ssh_user" {}
 
 variable "ssh_key" {}
 
-variable "mongo_initdb_root_username" {}
+variable "MONGO_INITDB_ROOT_USERNAME" {}
 
-variable "mongo_initdb_root_password" {}
+variable "MONGO_INITDB_ROOT_PASSWORD" {}
 
-variable "mongo_initdb_database" {}
+variable "MONGO_INITDB_DATABASE" {}
 
-variable "mongo_database_username" {}
+variable "MONGO_DATABASE_USERNAME" {}
 
-variable "mongo_database_password"{}
+variable "MONGO_DATABASE_PASSWORD"{}
 
-variable "mongo_database" {}
+variable "MONGO_DATABASE" {}
 
-variable "mongo_admin_url" {}
+variable "MONGO_ADMIN_URL" {}
 
-variable "database_url" {}
+variable "DATABASE_URL" {}
 
-variable "okta_domain" {}
+variable "OKTA_DOMAIN" {}
 
-variable "okta_api_key" {}
+variable "OKTA_API_KEY" {}
 
-variable "environment" {}
+variable "ENVIRONMENT" {}
