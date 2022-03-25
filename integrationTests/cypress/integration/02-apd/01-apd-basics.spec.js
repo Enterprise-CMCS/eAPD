@@ -43,15 +43,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   describe('Create APD', () => {
     it('creates a default new APD and handles changing the name', () => {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const options = { month: 'long', day: 'numeric', year: 'numeric' };
       const today = new Date();
 
       cy.get('#apd-header-info').contains(
-        `Created: ${today.toLocaleDateString('en-US', options)}`
+        `Created: ${today.toLocaleDateString('en-us', options)}`
       );
 
       cy.get('#apd-header-info').contains(
-        `Created: ${today.toLocaleDateString('en-US', options)}`
+        `Created: ${today.toLocaleDateString('en-us', options)}`
       );
 
       cy.log('change the APD name');
@@ -405,16 +405,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
       ];
 
-      const privateContractor = {
-        name: 'Test Private Contractor',
-        description: 'Test description',
-        start: [1, 1, 2020],
-        end: [1, 2, 2023],
-        totalCosts: 12345,
-        hourly: false,
-        FFYcosts: [6045, 6300]
-      };
-
       cy.log('Outcomes and Milestones');
       cy.goToOutcomesAndMilestones(0);
 
@@ -651,6 +641,16 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         FFYcosts: [0, 0]
       });
 
+      const privateContractor = {
+        name: 'Test Private Contractor',
+        description: 'Test description',
+        start: [1, 1, 2020],
+        end: [1, 2, 2023],
+        totalCosts: 20,
+        hourly: false,
+        FFYcosts: [10, 10]
+      };
+
       cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);
 
@@ -665,7 +665,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Add Contractor/i }).click();
 
       activityPage.checkTextField('ds-c-field', '');
-      cy.get('[class="ds-c-field"]').focus().blur();
+      cy.get('input[name="name"]').focus().blur();
       cy.contains('Provide a private contractor or vendor name.').should(
         'exist'
       );
@@ -712,28 +712,34 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       });
 
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
-      cy.findByRole('button', { name: /Cancel/i }).click();
 
-      fillOutActivityPage.fillPrivateContactors([privateContractor], years);
+      fillOutActivityPage.fillPrivateContactor(privateContractor, 0, years);
 
-      cy.findByRole('button', { name: /Save/i }).should('be.enabled').click();
+      cy.findByRole('button', { name: /Save/i })
+        .should('not.be.disabled')
+        .click();
 
-      cy.get('input[name="contractor-name"]').type('Test cancel');
+      cy.get('.form-and-review-list')
+        .eq(0)
+        .findAllByRole('button', { name: /Edit/i })
+        .click();
+
+      cy.get('input[name="name"]').clear().type('Test cancel');
 
       cy.get('.form-and-review-list')
         .eq(0)
         .findByRole('button', { name: /Cancel/i })
         .click();
 
-      // activityPage.checkPrivateContractorOutput({
-      //   name: 'Private Contractor or Vendor Name not specified',
-      //   description:
-      //     'Procurement Methodology and Description of Services not specified',
-      //   dateRange: 'Date not specified - Date not specified',
-      //   totalCosts: 0,
-      //   years,
-      //   FFYcosts: [0, 0]
-      // });
+      activityPage.checkPrivateContractorOutput({
+        name: privateContractor.name,
+        description: privateContractor.description,
+        start: privateContractor.start,
+        end: privateContractor.end,
+        totalCosts: privateContractor.totalCosts,
+        years,
+        FFYcosts: privateContractor.FFYcosts
+      });
 
       cy.log('Budget and FFP');
       cy.goToBudgetAndFFP(0);
@@ -750,30 +756,30 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.75,
-                federalShareAmount: 0,
+                federalShareAmount: 8,
                 stateSharePercentage: 0.25,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
+                stateShareAmount: 2,
+                totalComputableMedicaidCost: 10
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.5,
-                federalShareAmount: 0,
+                federalShareAmount: 5,
                 stateSharePercentage: 0.5,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
+                stateShareAmount: 5,
+                totalComputableMedicaidCost: 10
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.9,
-                federalShareAmount: 0,
+                federalShareAmount: 9,
                 stateSharePercentage: 0.1,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
+                stateShareAmount: 1,
+                totalComputableMedicaidCost: 10
               });
             });
         });
@@ -806,10 +812,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should(
-                  'have.text',
-                  'Private Contractor or Vendor Name not specified$0'
-                );
+                .should('have.text', 'Test Private Contractor$10');
             });
         });
       });
@@ -875,10 +878,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Private Contractor'
             })
             .eq(0)
-            .should(
-              'have.text',
-              'Private Contractor or Vendor Name not specified$0'
-            );
+            .should('have.text', 'Test Private Contractor$10');
         });
       });
 
@@ -969,30 +969,28 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         );
 
       const privateContractorCosts = years
-        .map(year => `FFY ${year} Cost: $0`)
+        .map(year => `FFY ${year} Cost: $10`)
         .join('');
       cy.findByRole('heading', {
         name: /Activity 1: Program AdministrationPrivate Contractor Costs/i
       })
         .next()
-        .should(
-          'have.text',
-          '1. Private Contractor or Vendor Name not specified'
-        )
+        .should('have.text', '1. Test Private Contractor')
         .next()
         .should(
           'have.text',
           'Procurement Methodology and Description of Services'
         )
         .next()
-        .should(
-          'have.text',
-          'Procurement Methodology and Description of Services not specified'
-        )
+        .should('have.text', 'Test description')
         .next()
         .should(
           'have.text',
-          `Full Contract Term: Date not specified - Date not specifiedTotal Contract Cost: $0${privateContractorCosts}`
+          `Full Contract Term: ${privateContractor.start.join(
+            '/'
+          )} - ${privateContractor.end.join(
+            '/'
+          )}Total Contract Cost: $20${privateContractorCosts}`
         );
 
       cy.then(() => {
@@ -1022,10 +1020,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should(
-                  'have.text',
-                  'Private Contractor or Vendor Name not specified$0'
-                );
+                .should('have.text', 'Test Private Contractor$10');
             });
         });
       });
@@ -1084,10 +1079,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Private Contractor'
             })
             .eq(0)
-            .should(
-              'have.text',
-              'Private Contractor or Vendor Name not specified$0'
-            );
+            .should('have.text', 'Test Private Contractor$10');
         });
       });
     });
@@ -1169,7 +1161,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkDeleteButton(
         'Private contractors have not been added for this activity',
         'Delete Private Contractor?',
-        'Private Contractor or Vendor Name not specified'
+        'Test Private Contractor'
       );
     });
   });

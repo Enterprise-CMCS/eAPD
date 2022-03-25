@@ -1,8 +1,8 @@
 import React from 'react';
 import ApdList from './ApdList';
-import { renderWithConnection } from '../../../shared/apd-testing-library';
-import mockAxios from '../../../util/api';
-import { AFFILIATION_STATUSES } from '../../../constants';
+import { renderWithConnection, screen } from '../shared/apd-testing-library';
+import mockAxios from '../util/api';
+import { AFFILIATION_STATUSES } from '../constants';
 
 jest.mock('../../../util/api', () => ({
   get: jest.fn(),
@@ -11,8 +11,17 @@ jest.mock('../../../util/api', () => ({
   delete: jest.fn()
 }));
 
+let options;
 let props;
-let renderUtils;
+const defaultProps = {
+  apds: [],
+  fetching: false,
+  createApd: jest.fn(),
+  deleteApd: jest.fn(),
+  selectApd: jest.fn(),
+  route: '/apd',
+  error: undefined
+};
 
 const apd = {
   id: '1',
@@ -25,22 +34,18 @@ const apd = {
 const createdStr = 'July 27, 2020';
 const updatedStr = 'July 28, 2020, 3:20 PM EDT';
 
-describe('<ApdList />', () => {
-  beforeEach(() => {
-    props = {
-      apds: [],
-      fetching: false,
-      createApd: jest.fn(),
-      deleteApd: jest.fn(),
-      selectApd: jest.fn(),
-      route: '/apd',
-      error: undefined
-    };
-  });
+const setup = (props = {}, options = {}) => {
+  return renderWithConnection(
+    <ApdList {...defaultProps} {...props} />,
+    options
+  );
+};
 
+describe('<ApdList />', () => {
   describe('no apds', () => {
     beforeEach(() => {
       mockAxios.get.mockImplementation(() => Promise.resolve({ data: [] }));
+<<<<<<< HEAD:web/src/pages/dashboard/state-dashboard/ApdList.test.js
       renderUtils = renderWithConnection(
         <ApdList {...props} pending={false} />,
         {
@@ -51,16 +56,26 @@ describe('<ApdList />', () => {
                 states: { mo: AFFILIATION_STATUSES.APPROVED },
                 activities: ['view-document', 'edit-document']
               }
+=======
+      props = { pending: false };
+      options = {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              states: { mo: AFFILIATION_STATUSES.APPROVED },
+              activities: ['view-document', 'edit-document']
+>>>>>>> tforkner/3499-private-contractor-costs-validation:web/src/components/ApdList.test.js
             }
           }
         }
-      );
+      };
     });
 
     it('should display the introduction and instructions', () => {
-      const { getByText } = renderUtils;
+      setup(props, options);
       expect(
-        getByText(
+        screen.getByText(
           /The eAPD is designed to help you create and manage your HITECH Advanced Planning Documents/i
         )
       ).toBeTruthy();
@@ -68,22 +83,22 @@ describe('<ApdList />', () => {
 
     it('should handle clicking the create APD button', async () => {
       mockAxios.post.mockImplementation(() => Promise.resolve({ data: apd }));
-      const { getByRole } = renderUtils;
-      expect(getByRole('button', { name: /Create new/i })).toBeTruthy();
+      setup(props, options);
+      expect(screen.getByRole('button', { name: /Create new/i })).toBeTruthy();
       // fireEvent.click(getByRole('button', { name: /Create new/i }));
       // expect(props.createApd).toHaveBeenCalled();
     });
 
     it('should display the empty APD message', () => {
-      const { getByText } = renderUtils;
-      expect(getByText(/You have not created any APDs./i)).toBeTruthy();
+      setup(props, options);
+      expect(screen.getByText(/You have not created any APDs./i)).toBeTruthy();
     });
 
     it("shouldn't display the pending message", () => {
-      const { queryByAltText, queryByText } = renderUtils;
-      expect(queryByAltText(/Puzzle Piece Icon/i)).toBeNull();
+      setup(props, options);
+      expect(screen.queryByAltText(/Puzzle Piece Icon/i)).toBeNull();
       expect(
-        queryByText(/Approval Pending From State Administrator/i)
+        screen.queryByText(/Approval Pending From State Administrator/i)
       ).toBeNull();
     });
   });
@@ -91,6 +106,7 @@ describe('<ApdList />', () => {
   describe('default state with apds', () => {
     beforeEach(() => {
       mockAxios.get.mockImplementation(() => Promise.resolve({ data: [apd] }));
+<<<<<<< HEAD:web/src/pages/dashboard/state-dashboard/ApdList.test.js
       renderUtils = renderWithConnection(
         <ApdList {...props} pending={false} />,
         {
@@ -109,33 +125,52 @@ describe('<ApdList />', () => {
                   created: createdStr,
                   updated: updatedStr
                 }
+=======
+      props = { pending: false };
+      options = {
+        initialState: {
+          user: {
+            data: {
+              state: { id: 'mo' },
+              states: { state_id: AFFILIATION_STATUSES.APPROVED },
+              activities: ['view-document', 'edit-document']
+            }
+          },
+          apd: {
+            byId: {
+              [apd.id]: {
+                ...apd,
+                created: createdStr,
+                updated: updatedStr
+>>>>>>> tforkner/3499-private-contractor-costs-validation:web/src/components/ApdList.test.js
               }
             }
           }
         }
-      );
+      };
     });
 
     it('should display the APD', () => {
-      const { getByText } = renderUtils;
-      expect(getByText(apd.name)).toBeTruthy();
-      expect(getByText(updatedStr)).toBeTruthy();
-      expect(getByText(createdStr)).toBeTruthy();
+      setup(props, options);
+      expect(screen.getByText(apd.name)).toBeTruthy();
+      expect(screen.getByText(updatedStr)).toBeTruthy();
+      expect(screen.getByText(createdStr)).toBeTruthy();
     });
 
     it('should allow the user to click on the APD to edit', () => {
-      const { getByText } = renderUtils;
-      expect(getByText(apd.name)).toBeTruthy();
+      setup(props, options);
+      expect(screen.getByText(apd.name)).toBeTruthy();
     });
 
     it('should allow the user to click the delete APD button', () => {
-      const { getByText } = renderUtils;
-      expect(getByText(/Delete/i)).toBeTruthy();
+      setup(props, options);
+      expect(screen.getByText(/Delete/i)).toBeTruthy();
     });
   });
   describe('federal admin viewing state dashboard', () => {
     beforeEach(() => {
-      renderUtils = renderWithConnection(<ApdList {...props} />, {
+      props = {};
+      options = {
         initialState: {
           user: {
             data: {
@@ -147,12 +182,12 @@ describe('<ApdList />', () => {
             }
           }
         }
-      });
+      };
     });
 
     it('should not display the create apd button', () => {
-      const { queryByText } = renderUtils;
-      expect(queryByText('Create new')).toBeNull();
+      setup(props, options);
+      expect(screen.queryByText('Create new')).toBeNull();
     });
   });
 

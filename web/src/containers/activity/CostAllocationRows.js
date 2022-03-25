@@ -4,7 +4,7 @@ import Dollars from '../../components/Dollars';
 
 export const CostSummaryRows = ({ items }) =>
   items.map(({ description, totalCost, unitCost, units }) => (
-    <tr key={description || 'notSelected' }>
+    <tr key={description || 'notSelected'}>
       <td className="title">{description || 'Category Not Selected'}</td>
       <td className="budget-table--number">
         {unitCost !== null && <Dollars>{unitCost}</Dollars>}

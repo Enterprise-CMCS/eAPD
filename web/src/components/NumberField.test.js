@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import NumberField from './NumberField';
 
 let onBlur;
@@ -16,7 +16,7 @@ const defaultProps = {
 // https://testing-library.com/docs/example-input-event/
 const setup = (props = {}) => {
   const utils = render(<NumberField {...defaultProps} {...props} />);
-  const input = utils.getByLabelText('test-label');
+  const input = screen.getByLabelText('test-label');
   return {
     input,
     ...utils

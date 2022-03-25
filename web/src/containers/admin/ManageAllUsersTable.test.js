@@ -1,9 +1,6 @@
 import React from 'react';
-import { render } from 'apd-testing-library';
+import { render, screen } from 'apd-testing-library';
 import ManageAllUsersTable from './ManageAllUsersTable';
-
-let props;
-let renderResult;
 
 const mockSingleAffiliation = {
   displayName: 'Liz Lemon',
@@ -11,16 +8,16 @@ const mockSingleAffiliation = {
   id: 14,
   mobilePhone: null,
   primaryPhone: '4045555555',
-  role: "eAPD Federal Admin",
+  role: 'eAPD Federal Admin',
   secondEmail: null,
   stateId: 'md',
   status: 'requested',
   userId: '00u5mfj967KsdvBBB297',
   affiliations: [
     {
-      role: "eAPD State Contractor",
-      stateId: "md",
-      status: "approved",
+      role: 'eAPD State Contractor',
+      stateId: 'md',
+      status: 'approved',
       id: 14
     }
   ]
@@ -32,22 +29,22 @@ const mockMultipleAffiliation = {
   id: 2,
   mobilePhone: null,
   primaryPhone: '4045555555',
-  role: "eAPD Federal Admin",
+  role: 'eAPD Federal Admin',
   secondEmail: null,
   stateId: 'md',
   status: 'requested',
   userId: '00u5mfj967KsdvBBB297',
   affiliations: [
     {
-      role: "eAPD State Contractor",
-      stateId: "md",
-      status: "approved",
+      role: 'eAPD State Contractor',
+      stateId: 'md',
+      status: 'approved',
       id: 2
     },
     {
-      role: "eAPD State Contractor",
-      stateId: "la",
-      status: "approved",
+      role: 'eAPD State Contractor',
+      stateId: 'la',
+      status: 'approved',
       id: 12
     }
   ]
@@ -59,75 +56,75 @@ const mockFedAffiliation = {
   id: 3,
   mobilePhone: null,
   primaryPhone: '4045555555',
-  role: "eAPD Federal Admin",
+  role: 'eAPD Federal Admin',
   secondEmail: null,
   stateId: 'fd',
   status: 'approved',
   userId: '3',
   affiliations: [
     {
-      role: "eAPD Federal Admin",
-      stateId: "fd",
-      status: "approved",
+      role: 'eAPD Federal Admin',
+      stateId: 'fd',
+      status: 'approved',
       id: 3
     }
   ]
 };
 
+const setup = (props = {}) => render(<ManageAllUsersTable {...props} />);
+
 describe('<ManageAllUsersTable />', () => {
   test('shows loading when data is fetching', () => {
-    props = {
+    const props = {
       tab: 'active',
       isFetching: true,
       affiliations: [],
       actions: [],
       currentUser: { id: '123', activities: ['edit-affiliations'] }
     };
-    renderResult = render(<ManageAllUsersTable {...props} />);
+    setup(props);
 
-    const { getByText } = renderResult;
-    expect(getByText('Loading...')).toBeTruthy();
+    expect(screen.getByText('Loading...')).toBeTruthy();
   });
 
-
   test('renders correctly for users with single affiliations', () => {
-    props = {
+    const props = {
       tab: 'pending',
       affiliations: [mockSingleAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123', activities: ['edit-affiliations'] }
     };
-    renderResult = render(<ManageAllUsersTable {...props} />);
-    expect(renderResult).toMatchSnapshot();
+    const { container } = setup(props);
+    expect(container).toMatchSnapshot();
   });
-  
+
   test('renders correctly for users with multiple affiliations', () => {
-    props = {
+    const props = {
       tab: 'active',
       affiliations: [mockMultipleAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123', activities: ['edit-affiliations'] }
     };
-    renderResult = render(<ManageAllUsersTable {...props} />);
-    expect(renderResult).toMatchSnapshot();
+    const { container } = setup(props);
+    expect(container).toMatchSnapshot();
   });
-  
+
   test('renders correctly with both single and multi-affiliation users', () => {
-    props = {
+    const props = {
       tab: 'active',
       affiliations: [mockSingleAffiliation, mockMultipleAffiliation],
       isFetching: false,
       actions: [],
       currentUser: { id: '123', activities: ['edit-affiliations'] }
     };
-    renderResult = render(<ManageAllUsersTable {...props} />);
-    expect(renderResult).toMatchSnapshot();
+    const { container } = setup(props);
+    expect(container).toMatchSnapshot();
   });
 
   test('renders passed in actions', () => {
-    props = {
+    const props = {
       tab: 'pending',
       affiliations: [mockSingleAffiliation],
       isFetching: false,
@@ -138,14 +135,12 @@ describe('<ManageAllUsersTable />', () => {
       ],
       currentUser: { id: '1234', activities: ['edit-affiliations'] }
     };
-    renderResult = render(<ManageAllUsersTable {...props} />);
-
-    const { getByText } = renderResult;
-    expect(getByText('Take Action')).toBeTruthy();
+    setup(props);
+    expect(screen.getByText('Take Action')).toBeTruthy();
   });
 
   test('does not render actions for ones own affiliation', () => {
-    props = {
+    const props = {
       tab: 'active',
       affiliations: [mockFedAffiliation],
       isFetching: false,
@@ -156,14 +151,12 @@ describe('<ManageAllUsersTable />', () => {
       ],
       currentUser: { id: '3', activities: ['edit-affiliations'] }
     };
-    renderResult = render(<ManageAllUsersTable {...props} />);
-
-    const { queryByText } = renderResult;
-    expect(queryByText('Take Action')).not.toBeInTheDocument();
+    setup(props);
+    expect(screen.queryByText('Take Action')).not.toBeInTheDocument();
   });
-  
+
   test('does not render edit action for active affiliations', () => {
-    props = {
+    const props = {
       tab: 'active',
       affiliations: [mockFedAffiliation],
       isFetching: false,
@@ -177,11 +170,7 @@ describe('<ManageAllUsersTable />', () => {
       ],
       currentUser: { id: '42', activities: ['edit-affiliations'] }
     };
-    renderResult = render(<ManageAllUsersTable {...props} />);
-
-    const { queryByText } = renderResult;
-    expect(queryByText('Edit Role')).not.toBeInTheDocument();
+    setup(props);
+    expect(screen.queryByText('Edit Role')).not.toBeInTheDocument();
   });
-
-
 });
