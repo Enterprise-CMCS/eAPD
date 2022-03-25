@@ -3,11 +3,11 @@ import { useHistory } from 'react-router-dom';
 
 import { TextField, Dropdown, Button, ChoiceList } from '@cmsgov/design-system';
 
-import axios, { apiUrl } from '../../util/api';
-import { twoYears } from '../../util';
-import { STATES } from '../../util/states';
-import NumberField from '../../components/NumberField';
-import DocumentUpload from '../../components/DocumentUpload';
+import axios, { apiUrl } from '../../../util/api';
+import { twoYears } from '../../../util';
+import { STATES } from '../../../util/states';
+import NumberField from '../../../components/NumberField';
+import DocumentUpload from '../../../components/DocumentUpload';
 
 const dropdownOptions = STATES.map(item => {
   return {
