@@ -348,7 +348,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .check({ force: true });
       cy.findByRole('button', { name: /Save/i }).click();
 
-      cy.log("LOL")
       // Check for default values
       cy.get('.form-and-review-list')
         .findByRole('heading', { name: /3.*/i })
