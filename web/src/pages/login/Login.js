@@ -2,11 +2,11 @@ import { TextField, Alert } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { useState, Fragment, useEffect } from 'react';
 
-import LoginForm from '../components/LoginForm';
-import Password from '../components/PasswordWithMeter';
-import UpgradeBrowser from '../components/UpgradeBrowser';
+import LoginForm from './LoginForm';
+import Password from '../../components/PasswordWithMeter';
+import UpgradeBrowser from '../../components/UpgradeBrowser';
 
-import axios, { apiUrl } from '../util/api';
+import axios, { apiUrl } from '../../util/api';
 
 const Login = ({ hasEverLoggedOn, errorMessage, fetching, login }) => {
   const [username, setUsername] = useState('');
