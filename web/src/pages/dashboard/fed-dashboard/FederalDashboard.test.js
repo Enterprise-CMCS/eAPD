@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { AFFILIATION_STATUSES } from '../../../constants';
 
-import FederalAdmin from '../../../containers/admin/FederalAdmin';
+import FederalAdmin from '../../admin/fed-admin/FederalAdmin';
 import { ApprovalStatus } from '../state-dashboard/AffiliationStatus';
 
 import { plain as FederalDashboard } from './FederalDashboard';
