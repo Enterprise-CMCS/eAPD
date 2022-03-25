@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
 const { verifyJWT } = require('./oktaAuth');
-const { getUserByID, populateUserRole } = require('../db');
+const { getUserByID, populateUserRole, userLoggedIntoState } = require('../db');
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -103,6 +103,7 @@ const exchangeToken = async (
 
   const { uid, ...additionalValues } = claims;
   const user = await getUser(uid, true, { additionalValues });
+  await userLoggedIntoState(user);
   user.jwt = sign(user);
 
   return user;
@@ -134,7 +135,7 @@ const changeState = async (
   { populate = populateUserRole } = {}
 ) => {
   const populatedUser = await populate(user, stateId);
-
+  userLoggedIntoState(populatedUser, stateId);
   return sign(populatedUser, {});
 };
 

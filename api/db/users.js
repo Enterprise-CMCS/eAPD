@@ -28,6 +28,28 @@ const sanitizeUser = user => ({
 });
 
 /**
+ *
+ * @param {*} user
+ * @param {*} stateId
+ * @param {*} param2
+ * @returns
+ */
+const userLoggedIntoState = async (
+  { name, states, displayName, affiliation } = {},
+  stateId = null,
+  { auditUserLogin = actualAuditUserLogin } = {}
+) => {
+  if (affiliation && (stateId || Object.keys(states).length === 1)) {
+    // we should only record the user logging in if they have specified a state
+    // or if they are only affiliated with one state
+    await auditUserLogin({
+      ...affiliation,
+      name: name || displayName
+    });
+  }
+};
+
+/**
  * Populates a user with their role and permissions for the state passed in
  * if no state is passed in it will use the first state the user is affiliated
  * with. If the affiliation is expired, it will update it to revoke the user's
@@ -45,7 +67,6 @@ const populateUserRole = async (
     getUserAffiliatedStates = actualGetUserAffiliatedStates,
     getAffiliationByState = actualGetAffiliationsByState,
     updateAuthAffiliation = actualUpdateAuthAffiliation,
-    auditUserLogin = actualAuditUserLogin,
     getRolesAndActivities = actualGetRolesAndActivities,
     getStateById = actualGetStateById,
     getUserPermissionsForStates = actualGetUserPermissionsForStates
@@ -75,15 +96,6 @@ const populateUserRole = async (
 
           affiliation.role_id = null;
           affiliation.status = 'revoked';
-        }
-
-        if (stateId || Object.keys(states).length === 1) {
-          // we should only record the user logging in if they have specified a state
-          // or if they are only affiliated with one state
-          auditUserLogin({
-            ...affiliation,
-            name: user.name || user.displayName
-          });
         }
 
         const roles = (await getRolesAndActivities()) || [];
@@ -189,5 +201,6 @@ module.exports = {
   getAllUsers,
   getUserByID,
   populateUserRole,
-  sanitizeUser
+  sanitizeUser,
+  userLoggedIntoState
 };
