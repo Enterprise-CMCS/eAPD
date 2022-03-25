@@ -46,7 +46,7 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
       <strong>
         FFY 
         1066
-         Cost:
+        Cost:
       </strong>
        
       <Dollars>
@@ -59,7 +59,7 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
       <strong>
         FFY 
         1067
-         Cost:
+        Cost:
       </strong>
        
       <Dollars>
