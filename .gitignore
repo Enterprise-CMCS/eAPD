@@ -4,7 +4,6 @@ web/node_modules
 api/node_modules
 integrationTests/node_modules
 
-
 # misc
 .DS_Store
 .env
