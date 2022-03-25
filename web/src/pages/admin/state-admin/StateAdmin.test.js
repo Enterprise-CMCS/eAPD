@@ -9,13 +9,13 @@ import {
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
-import axios from '../../util/api';
+import axios from '../../../util/api';
 import StateAdmin, { mapStateToProps, mapDispatchToProps } from './StateAdmin';
 import {
   getAffiliations,
   updateAffiliation,
   getRoleTypes
-} from '../../actions/admin';
+} from '../../../actions/admin';
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 

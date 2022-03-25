@@ -7,12 +7,12 @@ import {
   getRoleTypes,
   getAffiliations,
   updateAffiliation
-} from '../../actions/admin';
+} from '../../../actions/admin';
 
-import { getUserStateOrTerritory } from '../../reducers/user.selector';
+import { getUserStateOrTerritory } from '../../../reducers/user.selector';
 
-import ManageRoleDialog from './ManageRoleDialog';
-import ConfirmationDialog from './ConfirmationDialog';
+import ManageRoleDialog from '../ManageRoleDialog';
+import ConfirmationDialog from '../ConfirmationDialog';
 import ManageAllUsersTable from './ManageAllUsersTable';
 import StateAdminLetters from './StateAdminLetters';
 

@@ -9,7 +9,7 @@ import {
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
-import axios from '../../util/api';
+import axios from '../../../util/api';
 import FederalAdmin from './FederalAdmin';
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
