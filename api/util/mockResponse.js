@@ -7,6 +7,7 @@ const mockResponse = () => {
   res.headersSent = false;
   res.status = sinon.stub().returns(res);
   res.send = sinon.stub().returns(res);
+  res.json = sinon.stub().returns(res);
   res.end = sinon.stub();
   res.setHeader = sinon.stub();
   res.clearCookie = sinon.stub();

@@ -4,7 +4,7 @@ import React from 'react';
 import { titleCase } from 'title-case';
 import Instruction from './Instruction';
 import { t } from '../i18n';
-import SecondaryNav from './SecondaryNav';
+import SecondaryNav from '../layout/nav/SecondaryNav';
 
 const Section = ({ children, id, resource }) => {
   const title = t([resource, 'title'], { defaultValue: false });

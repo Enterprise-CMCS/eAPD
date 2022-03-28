@@ -9,11 +9,11 @@ import {
 } from 'react-router-dom';
 import TagManager from 'react-gtm-module';
 
-import Sidebar from './Sidebar';
+import Sidebar from '../layout/nav/Sidebar';
 import UnexpectedError from './UnexpectedError';
 import { setApdToSelectOnLoad, selectApd } from '../actions/app';
 
-import ApdPageRoutes from './ApdPageRoutes';
+import ApdPageRoutes from '../pages/apd/ApdPageRoutes';
 import Loading from '../components/Loading';
 
 import { getAPDId } from '../reducers/apd';

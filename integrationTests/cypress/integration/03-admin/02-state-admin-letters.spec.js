@@ -113,11 +113,11 @@ describe('state admin letters table', { tags: ['@fed', '@admin'] }, () => {
 
     cy.contains('Match State Admin Letter to User');
 
-    getInputByLabel('Select User').select('State Staff');
+    getInputByLabel('Select User').select('State Staff', { force: true });
 
     cy.get('#dialog-content').find('li').contains('State Staff');
 
-    getInputByLabel('Select User').select('State Admin');
+    getInputByLabel('Select User').select('State Admin', { force: true });
 
     cy.contains('Match and Approve Access').click();
 
