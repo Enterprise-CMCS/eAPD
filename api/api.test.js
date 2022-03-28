@@ -73,10 +73,10 @@ tap.test('express api', async t => {
       }
     );
 
-    errorTests.teardown(() => {
+    errorTests.teardown(async () => {
       // reattach database
       process.env.TEST_DB_HOST = testDbHost;
-      knex.destroy();
+      await knex.destroy();
     });
   });
 });

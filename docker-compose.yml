@@ -25,6 +25,7 @@ services:
     volumes:
       - mongodata:/mongodata
       - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+
     command: [--auth]
     expose:
       - 27017
@@ -73,6 +74,7 @@ services:
       - MONGO_ADMIN_URL=${MONGO_ADMIN_URL:-mongodb://admin-user:admin-password@mongo:27017/admin}
       - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=admin}
       - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
+      - MONGO_AUTH_SOURCE=${MONGO_AUTH_SOURCE:-admin}
     volumes:
       - type: bind
         source: ./api
