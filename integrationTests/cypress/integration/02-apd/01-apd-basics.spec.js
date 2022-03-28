@@ -30,7 +30,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.useStateStaff();
 
     cy.findByRole('button', { name: /Create new/i }).click();
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
     });

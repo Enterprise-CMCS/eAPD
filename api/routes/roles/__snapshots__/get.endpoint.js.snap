@@ -2,55 +2,26 @@
 
 exports[`Roles endpoint GET /roles returns expected roles given a fed admin 1`] = `
 Array [
-  Object {
-    "id": 1102,
-    "name": "eAPD Federal Admin",
-  },
-  Object {
-    "id": 1106,
-    "name": "eAPD State Admin",
-  },
+  "eAPD Federal Admin",
+  "eAPD State Admin",
 ]
 `;
 
 exports[`Roles endpoint GET /roles returns expected roles given a state admin 1`] = `
 Array [
-  Object {
-    "id": 1107,
-    "name": "eAPD State Staff",
-  },
-  Object {
-    "id": 1108,
-    "name": "eAPD State Contractor",
-  },
+  "eAPD State Staff",
+  "eAPD State Contractor",
 ]
 `;
 
 exports[`Roles endpoint GET /roles returns expected roles given a system admin 1`] = `
 Array [
-  Object {
-    "id": 1101,
-    "name": "eAPD Admin",
-  },
-  Object {
-    "id": 1102,
-    "name": "eAPD Federal Admin",
-  },
-  Object {
-    "id": 1106,
-    "name": "eAPD State Admin",
-  },
-  Object {
-    "id": 1107,
-    "name": "eAPD State Staff",
-  },
-  Object {
-    "id": 1108,
-    "name": "eAPD State Contractor",
-  },
-  Object {
-    "id": 1110,
-    "name": "eAPD System Admin",
-  },
+  "eAPD System Admin",
+  "eAPD Federal Admin",
+  "eAPD State Admin",
+  "eAPD State Staff",
+  "eAPD State Contractor",
+  "eAPD Tester",
+  "eAPD No Permissions",
 ]
 `;

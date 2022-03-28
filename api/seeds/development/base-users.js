@@ -6,11 +6,8 @@ const { createUsersToAdd } = require('../shared/set-up-users');
 const { issueTokens } = require('../shared/issueTokens');
 
 exports.seed = async knex => {
-  const {
-    oktaAffiliations,
-    stateCertifications,
-    oktaUsers
-  } = await createUsersToAdd(knex, oktaClient);
+  const { oktaAffiliations, stateCertifications, oktaUsers } =
+    await createUsersToAdd(knex, oktaClient);
   await knex('auth_affiliations').insert(oktaAffiliations);
   logger.info('Completed adding affiliations');
   await knex('okta_users').insert(oktaUsers);
@@ -39,4 +36,3 @@ exports.seed = async knex => {
     logger.error(`Errors creating tokens ${err}`);
   }
 };
-

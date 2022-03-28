@@ -109,6 +109,10 @@ const getCurrentUser =
     const response = await axios
       .get('/me', options)
       .then(res => {
+        if (res.data?.jwt) {
+          setCookie(res.data.jwt);
+        }
+
         return res;
       })
       .catch(error => {
@@ -170,8 +174,10 @@ export const mfaAddPhone = mfaSelected => async dispatch => {
 
 const authenticationSuccess = sessionToken => async dispatch => {
   dispatch(setupTokenManager());
-  const expiresAt = await setTokens(sessionToken);
-  dispatch(updateSessionExpiration(expiresAt));
+  if (sessionToken) {
+    const expiresAt = await setTokens(sessionToken);
+    dispatch(updateSessionExpiration(expiresAt));
+  }
   dispatch(setLatestActivity());
 
   const user = await dispatch(getCurrentUser());
