@@ -1,8 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as ExportInstructions, mapDispatchToProps } from './Export';
-import { printApd, saveApdEvent } from '../../actions/app';
+import {
+  plain as ExportInstructions,
+  mapDispatchToProps
+} from './ExportReadOnly';
+import { printApd, saveApdEvent } from '../../../actions/app';
 
 describe('apd export component', () => {
   test('renders correctly', () => {
