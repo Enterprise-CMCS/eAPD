@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 
 import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
 
-import axios from '../../util/api';
-import { STATES } from '../../util/states';
+import axios from '../../../util/api';
+import { STATES } from '../../../util/states';
 
 const MatchStateAdminDialog = ({ certification, hideModal }) => {
   const [stateAffiliations, setStateAffiliations] = useState([]);

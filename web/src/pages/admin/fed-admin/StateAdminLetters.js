@@ -22,12 +22,12 @@ import {
   TextField
 } from '@cmsgov/design-system';
 
-import axios from '../../util/api';
+import axios from '../../../util/api';
 
 import MatchStateAdminDialog from './MatchStateAdminDialog';
 
-import DeleteModal from '../../components/DeleteModal';
-import { PDFFileBlue } from '../../components/Icons';
+import DeleteModal from '../../../components/DeleteModal';
+import { PDFFileBlue } from '../../../components/Icons';
 
 const certificationRow = record => {
   const calculateStatus = (affiliationId, potentialMatches) => {
