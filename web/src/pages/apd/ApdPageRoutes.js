@@ -12,7 +12,7 @@ import Activities from '../../containers/activity/All';
 import EntryPage from '../../containers/activity/EntryPage';
 import AssurancesAndCompliance from '../../containers/AssurancesAndCompliance';
 import Export from '../../containers/ApdExport';
-import ApdSummary from '../../containers/ApdSummary';
+import ApdOverview from './apd-overview/ApdOverview';
 import ExecutiveSummary from '../../containers/ExecutiveSummary';
 import PreviousActivities from '../../containers/PreviousActivities';
 import ProposedBudget from '../../containers/ProposedBudget';
@@ -40,7 +40,7 @@ const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
         </Route>
 
         <Route path={`${path}/apd-overview`}>
-          <ApdSummary />
+          <ApdOverview />
         </Route>
 
         <Route path={`${path}/previous-activities`}>
