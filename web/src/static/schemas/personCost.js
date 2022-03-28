@@ -1,7 +1,6 @@
 import Joi from 'joi';
 
-const personCostSchema = Joi.object({
-  years: Joi.object().pattern(
+const personCostSchema = Joi.object().pattern(
     /\d{4}/,
     Joi.object({
       amt: Joi.number().positive().required().messages({
@@ -15,8 +14,7 @@ const personCostSchema = Joi.object({
         'number.positive': 'Provide a number greater than 0.',
         'number.greater': 'Provide a number greater than 0.'
       })
-    })
-  )
-});
+  })
+);
 
 export default personCostSchema;

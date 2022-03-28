@@ -43,6 +43,14 @@ const StatePersonForm = forwardRef(
   });
   
   const [subFormValid, setSubFormValid] = useState(false);
+  
+  useEffect(() => {
+    if(isValid && subFormValid) {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  }, [isValid, subFormValid])
 
   const getEditCostForYear = (year, value) => {
     // Manually update the react-hook-form store
@@ -59,12 +67,10 @@ const StatePersonForm = forwardRef(
     savePersonnel(activityIndex, index, getValues());
   };
   
-  useEffect(() => {
-    // Todo: update this as it probably doesn't work
-    if(subFormValid) {
-      setFormValid(isValid);      
-    }
-  }, [isValid, setFormValid])
+  const handleSubForm = value => {
+    console.log("subForm valid:", value);
+    setSubFormValid(value);
+  }  
   
   return (
     <form index={index} onSubmit={onSubmit}>
@@ -112,15 +118,16 @@ const StatePersonForm = forwardRef(
       <div className="ds-u-margin-top--3">
         <Controller
           control={control}
+          name="years"
           render={({
             field: { onBlur, value, ...props }
           }) => (
             <PersonCostForm
               {...props}
-              items={value}
+              value={value}
               setCost={getEditCostForYear}
               setFTE={getEditFTEForYear}
-              setFormValid={(value) => setSubFormValid(value)}
+              setFormValid={handleSubForm}
             />
           )}
         />

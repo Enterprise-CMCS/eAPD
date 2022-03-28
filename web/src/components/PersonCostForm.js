@@ -11,12 +11,13 @@ import Dollars from './Dollars';
 import NumberField from './NumberField';
 
 const PersonCostForm = ({
-  items,
+  value,
   costLabel,
   fteLabel,
   setCost,
   setFTE,
-  hint
+  hint,
+  setFormValid
 }) => {
   
   const {
@@ -26,7 +27,7 @@ const PersonCostForm = ({
     setValue
   } = useForm({
     defaultValues: {
-      ...items
+      ...value
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -37,53 +38,62 @@ const PersonCostForm = ({
     year =>
     ({ target: { value } }) => {
       setCost(year, value);
+      setValue(`[${year}].amt`, value);
     };
 
   const handleFTEChange =
     year =>
     ({ target: { value } }) => {
       setFTE(year, value);
+      setValue(`[${year}].perc`, value);
     };
+  
+  useEffect(() => {
+    setFormValid(isValid);
+  }, [isValid])
   
   return (
     <div>
-      {Object.entries(items.years).map(([year, { amt, perc }]) => (
+      {Object.entries(value).map(([year, { amt, perc }]) => (
         <Fragment key={year}>
           <h5 className="ds-h5">FFY {year} Cost</h5>
           <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
             
           <Controller
             control={control}
-            name="amt"
+            name={`[${year}].amt`}
             render={({
-              field: { onBlur, value }
+              field: { onBlur, value, ...props }
             }) => (
             <DollarField
+              {...props}
               label={costLabel}
-              name="amt"
+              name={`[${year}].amt`}
               size="medium"
-              value={amt}
+              value={value}
               onChange={handleCostChange(year)}
-              errorMessage={'todo'}
+              onBlur={onBlur}
+              errorMessage={errors && errors[`${year}`]?.amt?.message}
             />
             )}
           />
           
           <Controller
             control={control}
-            name={`years[${year}].perc`}
+            name={`[${year}].perc`}
             render={({
-              field: { onBlur, value }
+              field: { onBlur, value, ...props }
             }) => (
             <NumberField
+              {...props}
               label={fteLabel}
-              name="ftes"
               size="medium"
               min={0}
               hint={hint}
-              value={perc}
+              value={value}
               onChange={handleFTEChange(year)}
-              errorMessage={'todo'}
+              onBlur={onBlur}
+              errorMessage={errors && errors[`${year}`]?.perc?.message}
             />
             )}
           />
@@ -100,7 +110,7 @@ const PersonCostForm = ({
 };
 
 PersonCostForm.propTypes = {
-  items: PropTypes.object.isRequired,
+  value: PropTypes.object.isRequired,
   costLabel: PropTypes.string,
   fteLabel: PropTypes.string,
   setCost: PropTypes.func.isRequired,

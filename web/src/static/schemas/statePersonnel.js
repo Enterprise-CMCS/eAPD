@@ -7,7 +7,8 @@ const statePersonnelSchema = Joi.object({
   }),
   description: Joi.string().required().messages({
     'string.empty': 'Description is required'
-  })
+  }),
+  years: Joi.object()
 });
 
 export default statePersonnelSchema;
