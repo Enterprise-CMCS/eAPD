@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../../i18n';
-import { selectActivitySchedule } from '../../reducers/activities.selectors';
+import { t } from '../../../i18n';
+import { selectActivitySchedule } from '../../../reducers/activities.selectors';
 
 const ScheduleSummary = ({ activities }) => (
   <div>
