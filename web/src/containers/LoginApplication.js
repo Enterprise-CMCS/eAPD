@@ -4,8 +4,8 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, useHistory, useLocation } from 'react-router-dom';
 
-import LoginPageRoutes from './LoginPageRoutes';
-import ConsentBanner from '../components/ConsentBanner';
+import LoginPageRoutes from '../pages/login/LoginPageRoutes';
+import ConsentBanner from '../pages/login/ConsentBanner';
 import Loading from '../components/Loading';
 
 import { MFA_FACTOR_TYPES } from '../constants';
