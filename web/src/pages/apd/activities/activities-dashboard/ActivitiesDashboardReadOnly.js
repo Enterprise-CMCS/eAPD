@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import ActivityList from './ActivityList';
+import ActivityList from './ActivityListReadOnly';
 import Activity from './Activity';
 
 const Activities = ({ activities }) => {
