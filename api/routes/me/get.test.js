@@ -29,38 +29,16 @@ tap.test('me GET endpoint', async endpointTest => {
   });
 
   endpointTest.test('get me handler', async test => {
-    const extractor = sinon.stub();
-    const eapdTokenVerifier = sinon.stub();
-    const updateFromOkta = sinon.stub();
-    const checkExpired = sinon.stub();
+    const updateUserToken = sinon.stub();
 
-    extractor.withArgs(req).returns(req.jwt);
-
-    eapdTokenVerifier.withArgs(req.jwt).resolves(claims);
-    
-    checkExpired.withArgs(claims).resolves(claims);
+    updateUserToken.withArgs(req).resolves(claims);
 
     getEndpoint(app, {
-      extractor,
-      verifier: eapdTokenVerifier,
-      updateFromOkta,
-      checkExpired
+      tokenUpdater: updateUserToken
     });
     const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 
     await meHandler(req, res, next);
-
-    test.ok(
-      extractor.calledWith(req),
-      'calls the token extractor with the request'
-    );
-
-    test.ok(
-      eapdTokenVerifier.calledWith(req.jwt),
-      'calls the token extractor with the request'
-    );
-
-    test.ok(updateFromOkta.calledWith(123));
 
     test.ok(res.send.calledWith(claims), 'sends back the claims object');
   });
@@ -68,51 +46,14 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test(
     "get me handler returns 401 if it can't extract a token ",
     async test => {
-      const extractor = sinon.stub();
-      const eapdTokenVerifier = sinon.stub();
+      const updateUserToken = sinon.stub();
 
-      extractor.withArgs(req).returns('');
+      updateUserToken.withArgs(req).returns(null);
 
-      getEndpoint(app, { extractor });
+      getEndpoint(app, { tokenUpdater: updateUserToken });
       const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 
       await meHandler(req, res, next);
-
-      test.ok(
-        extractor.calledWith(req),
-        'calls the token extractor with the request'
-      );
-
-      test.ok(eapdTokenVerifier.notCalled, "doesn't call the token verifier");
-
-      test.ok(res.status.calledWith(401), 'returns a 401 status code');
-    }
-  );
-
-  endpointTest.test(
-    "get me handler returns 401 if it can't verify a token ",
-    async test => {
-      const extractor = sinon.stub();
-      const eapdTokenVerifier = sinon.stub();
-
-      extractor.withArgs(req).returns(req.jwt);
-
-      eapdTokenVerifier.withArgs(req.jwt).resolves(null);
-
-      getEndpoint(app, { extractor, verifier: eapdTokenVerifier });
-      const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
-
-      await meHandler(req, res, next);
-
-      test.ok(
-        extractor.calledWith(req),
-        'calls the token extractor with the request'
-      );
-
-      test.ok(
-        eapdTokenVerifier.calledWith(req.jwt),
-        'call the token verifier with the JWT'
-      );
 
       test.ok(res.status.calledWith(401), 'returns a 401 status code');
     }
@@ -121,28 +62,15 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test(
     'get me handler returns 400 if the verifier throws an error ',
     async test => {
-      const extractor = sinon.stub();
-      const eapdTokenVerifier = sinon.stub();
+      const updateUserToken = sinon.stub();
       const error = new Error('some error');
 
-      extractor.withArgs(req).returns(req.jwt);
+      updateUserToken.withArgs(req).throws(error);
 
-      eapdTokenVerifier.withArgs(req.jwt).throws(error);
-
-      getEndpoint(app, { extractor, verifier: eapdTokenVerifier });
+      getEndpoint(app, { tokenUpdater: updateUserToken });
       const meHandler = app.get.args.filter(arg => arg[0] === '/me')[0][1];
 
       await meHandler(req, res, next);
-
-      test.ok(
-        extractor.calledWith(req),
-        'calls the token extractor with the request'
-      );
-
-      test.ok(
-        eapdTokenVerifier.calledWith(req.jwt),
-        'call the token verifier with the JWT'
-      );
 
       test.ok(next.calledWith(error), 'returns a call to next');
     }
@@ -160,11 +88,6 @@ tap.test('me GET endpoint', async endpointTest => {
 
     await meHandler(req, res, next);
 
-    test.ok(
-      tokenExchanger.calledWith(req),
-      'calls the token exchanger with the request'
-    );
-
     test.ok(res.send.calledWith(user), 'returns a user');
   });
 
@@ -181,11 +104,6 @@ tap.test('me GET endpoint', async endpointTest => {
       )[0][1];
 
       await meHandler(req, res, next);
-
-      test.ok(
-        tokenExchanger.calledWith(req),
-        'calls the token exchanger with the request'
-      );
 
       test.ok(
         res.status.calledWith(401),
