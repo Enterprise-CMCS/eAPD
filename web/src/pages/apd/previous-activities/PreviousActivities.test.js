@@ -7,7 +7,7 @@ import {
   mapDispatchToProps
 } from './PreviousActivities';
 
-import { setPreviousActivitySummary } from '../actions/editApd';
+import { setPreviousActivitySummary } from '../../../actions/editApd';
 
 describe('previous activities component', () => {
   const props = {

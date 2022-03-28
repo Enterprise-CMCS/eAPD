@@ -10,7 +10,7 @@ import {
 import {
   setPreviousActivityApprovedExpenseForHITandHIE,
   setPreviousActivityFederalActualExpenseForHITandHIE
-} from '../actions/editApd';
+} from '../../../actions/editApd';
 
 describe('apd previous activity table, mmis component', () => {
   const props = {

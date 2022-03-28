@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ApdPreviousActivityTableHI from '../ApdPreviousActivityTable';
-import ApdPreviousActivityTableMMIS from '../ApdPreviousActivityTableMMIS';
-import ApdPreviousActivityTableTotal from '../ApdPreviousActivityTableTotal';
+import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
+import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
+import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
 
-import { selectPreviousActivitySummary } from '../../reducers/apd.selectors';
+import { selectPreviousActivitySummary } from '../../../reducers/apd.selectors';
 
 const PreviousActivities = ({ previousActivitySummary }) => {
   /* eslint-disable react/no-danger */
