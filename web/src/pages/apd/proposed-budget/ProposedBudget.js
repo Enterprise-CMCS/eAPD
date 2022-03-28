@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { Section, Subsection } from '../components/Section';
+import { Section, Subsection } from '../../../components/Section';
 import SummaryBudgetByActivity from './SummaryBudgetByActivity';
 import BudgetSummary from './BudgetSummary';
-import Waypoint from './ConnectedWaypoint';
+import Waypoint from '../../../containers/ConnectedWaypoint';
 import IncentivePayments from './IncentivePayments';
 import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
-import AlertMissingFFY from '../components/AlertMissingFFY';
+import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const ProposedBudget = () => (
   <React.Fragment>
     <Waypoint />
-    <AlertMissingFFY/>
+    <AlertMissingFFY />
     <Section resource="proposedBudget">
       <Waypoint id="summary-schedule-by-activity-table" />
       <Subsection
