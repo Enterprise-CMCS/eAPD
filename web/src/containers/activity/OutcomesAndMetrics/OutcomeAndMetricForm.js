@@ -36,8 +36,7 @@ const OutcomeAndMetricForm = forwardRef(
     const {
       handleSubmit,
       control,
-      formState: { errors, isValid, isValidating },
-      getValues
+      formState: { errors, isValid }
     } = useForm({
       defaultValues: {
         outcome: item.outcome,
