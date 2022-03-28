@@ -1,15 +1,13 @@
 {
-  "name": "cypress_tests",
+  "name": "@cms-eapd/e2e",
   "version": "1.0.0",
   "description": "Cypress tests for the EAPD tool",
   "main": "index.js",
   "scripts": {
-    "audit": "npx audit-ci --config ./audit-ci.json",
+    "lint": "eslint 'cypress/**/*.js'",
     "cy:open": "./cypress-setup.sh open -- --numTestsKeptInMemory=20",
     "cy:run": "./cypress-setup.sh run",
-    "cy:run:ci": "cypress run -C cypress.json --headless --browser chrome ",
-    "lint": "eslint 'cypress/**/*.js'",
-    "npm-check": "npx npm-check-updates"
+    "cy:run:ci": "cypress run -C cypress.json --headless --browser chrome "
   },
   "repository": {
     "type": "git",
