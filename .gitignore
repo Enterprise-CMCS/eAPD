@@ -19,14 +19,14 @@ schema.sql
 Makefile
 api/seeds/test/tokens.json
 
-/integrationTests/cypress.env.json
+/e2e/cypress.env.json
 */cypress.env.json
 *cypress.env.json
 
 # use yarn to manage packages, not npm
 api/package-lock.json
 web/package-lock.json
-integrationTests/package-lock.json
+e2e/package-lock.json
 docs-build
 
 # Terraform ignores

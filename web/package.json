@@ -1,70 +1,26 @@
 {
-  "name": "cms-hitech-apd-webapp",
-  "version": "1.0.0",
+  "name": "@cms-eapd/web",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
   "scripts": {
-    "audit": "npx audit-ci --config ./audit-ci.json",
+    "lint": "eslint 'src/**/*.js'",
+    "build": "yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
+    "start": "yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
     "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
-    "build": "yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
-    "lint": "eslint 'src/**/*.js'",
-    "start": "yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
     "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json",
     "test": "TZ=utc jest --collectCoverage",
     "test-watch": "TZ=utc yarn run test:generate-output -- --watch",
-    "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\"",
+    "stryker": "TZ=utc stryker run",
     "prebuild:storybook": "yarn run scaffold && yarn run test:generate-output",
     "build:storybook": "build-storybook -o ../docs-build",
     "deploy-storybook": "storybook-to-ghpages --out=../docs-build",
-    "storybook": "start-storybook -p 6006",
-    "npm-check": "npx npm-check-updates",
-    "stryker": "TZ=utc stryker run",
-    "prepare": "yarn run snyk-protect",
-    "snyk-protect": "snyk-protect"
+    "storybook": "start-storybook -p 6006"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CMSgov/eAPD.git"
   },
-  "keywords": [
-    "cms",
-    "medicaid",
-    "hitech",
-    "emr",
-    "apd"
-  ],
-  "contributors": [
-    "Akua Amponsah",
-    "Nicolas Aretakis",
-    "Heather Battaglia",
-    "Ty Bolt",
-    "Ronald Bronson",
-    "Bill Brooks",
-    "Richard Davis",
-    "Jenn Downs",
-    "Nicole Fenton",
-    "Tiffany Forkner",
-    "Eghosa Guobadia",
-    "Austin Hernandez",
-    "James Hupp",
-    "Jesse James",
-    "Meghana Khandekar",
-    "Jerome Lee",
-    "Nikki Lee",
-    "Christopher (CM) Lubinksi",
-    "Chris Miraflor",
-    "Darren Mirano",
-    "Aviva Oskow",
-    "Paul Phillips",
-    "Laura Poncé",
-    "Brendan Sudol",
-    "Caryn Swartz",
-    "Jen Thibault",
-    "Greg Walker",
-    "Nichole Weems",
-    "Nicole Zonnenberg"
-  ],
   "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/CMSgov/eAPD/issues"
@@ -84,7 +40,6 @@
     "@fortawesome/free-solid-svg-icons": "5.15.4",
     "@fortawesome/react-fontawesome": "0.1.17",
     "@okta/okta-auth-js": "6.0.0",
-    "@snyk/protect": "1.866.0",
     "@tinymce/tinymce-react": "3.13.1",
     "@uppy/core": "2.1.5",
     "@uppy/react": "2.1.2",
@@ -197,10 +152,6 @@
     "react-router": "can't upgrade to v6 because our system requires routes to be connected to redux",
     "react-router-dom": "can't upgrade to v6 because our system requires routes to be connected to redux",
     "history": "can't upgrade to 17 react-router v6"
-  },
-  "resolutions": {
-    "minimist": "1.2.6",
-    "node-forge": "1.3.0"
   },
   "packageManager": "yarn@1.22.15"
 }

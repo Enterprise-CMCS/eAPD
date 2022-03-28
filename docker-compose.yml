@@ -32,7 +32,9 @@ services:
       - 27017:27017
 
   web:
-    build: ./web
+    build:
+      context: .
+      dockerfile: ./web/Dockerfile
     image: cms-eapd/web
     environment:
       - API_URL=http://localhost:8081
@@ -45,11 +47,14 @@ services:
         target: /app
         consistency: delegated
       - /app/node_modules
+
     ports:
       - 8080:8001
 
   api:
-    build: ./api
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
     image: cms-eapd/api
     depends_on:
       - db

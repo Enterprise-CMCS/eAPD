@@ -29,13 +29,7 @@ workflows:
     jobs:
       - install dependencies
       - dependency vulnerability scan:
-          name: backend dependency vulnerability scan
-          path: api
-          requires:
-            - install dependencies
-      - dependency vulnerability scan:
-          name: frontend dependency vulnerability scan
-          path: web
+          name: dependency vulnerability scan
           requires:
             - install dependencies
 
@@ -44,6 +38,10 @@ workflows:
     jobs:
       # independent jobs
       - install dependencies:
+          filters:
+            tags:
+              only: /.*/
+      - dependency vulnerability scan:
           filters:
             tags:
               only: /.*/
@@ -69,8 +67,7 @@ workflows:
           requires:
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend test
             - backend unit test
             - backend api endpoint test
@@ -82,26 +79,21 @@ workflows:
               only: /.*/
           requires:
             - install dependencies
-      - dependency vulnerability scan:
-          filters:
-            tags:
-              only: /.*/
-          name: backend dependency vulnerability scan
-          path: api
-          requires:
-            - install dependencies
+            - dependency vulnerability scan
       - backend lint:
           filters:
             tags:
               only: /.*/
           requires:
             - install dependencies
+            - dependency vulnerability scan
       - backend unit test:
           filters:
             tags:
               only: /.*/
           requires:
             - install dependencies
+            - dependency vulnerability scan
       - backend deploy:
           name: backend deploy staging
           env: STAGING
@@ -112,7 +104,6 @@ workflows:
           requires:
             - store artifacts staging
             - backend api endpoint test
-            - backend dependency vulnerability scan
             - backend lint
             - backend unit test
       - backend deploy:
@@ -126,31 +117,24 @@ workflows:
           requires:
             - store artifacts prod
             - backend api endpoint test
-            - backend dependency vulnerability scan
             - backend lint
             - backend unit test
 
       # frontend jobs
-      - dependency vulnerability scan:
-          filters:
-            tags:
-              only: /.*/
-          name: frontend dependency vulnerability scan
-          path: web
-          requires:
-            - install dependencies
       - frontend lint:
           filters:
             tags:
               only: /.*/
           requires:
             - install dependencies
+            - dependency vulnerability scan
       - frontend test:
           filters:
             tags:
               only: /.*/
           requires:
             - install dependencies
+            - dependency vulnerability scan
             - yaml test
       - frontend build:
           name: frontend build preview
@@ -164,8 +148,7 @@ workflows:
             - owasp zap scan
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend test
             - yaml test
             - backend unit test
@@ -180,7 +163,7 @@ workflows:
             tags:
               only: /^v.*/
           requires:
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
       - frontend build:
           name: frontend build staging
           env: STAGING
@@ -189,7 +172,7 @@ workflows:
               only:
                 - main
           requires:
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
       - frontend deploy:
           name: frontend deploy staging
           env: STAGING
@@ -199,7 +182,7 @@ workflows:
                 - main
           requires:
             - frontend build staging
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend lint
             - frontend test
             - yaml test
@@ -215,7 +198,7 @@ workflows:
               only: /^v.*/
           requires:
             - frontend build prod
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend lint
             - frontend test
             - yaml test
@@ -241,7 +224,7 @@ workflows:
               only:
                 - main
           requires:
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend build staging
 
       - store artifacts:
@@ -252,7 +235,7 @@ workflows:
             tags:
               only: /^v.*/
           requires:
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend build prod
 
 jobs:
@@ -273,14 +256,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
+          key: cms-hitech-apd-yarn-{{ checksum "yarn.lock" }}
       - run:
-          name: install web dependencies
-          working_directory: ~/project/web
-          command: yarn install --frozen-lockfile
-      - run:
-          name: install api dependencies
-          working_directory: ~/project/api
+          name: install dependencies
+          working_directory: ~/project
           command: yarn install --frozen-lockfile
       - run:
           name: setup nvm
@@ -294,14 +273,13 @@ jobs:
             echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - save_cache:
-          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
+          key: cms-hitech-apd-yarn-{{ checksum "yarn.lock" }}
           paths:
             - /root/.yarnrc
       - persist_to_workspace:
           root: ~/project
           paths:
-            - api/node_modules
-            - web/node_modules
+            - node_modules
 
   # Runs an OpenAPI validator on the API spec generated by our code to ensure
   # it's a valid OpenAPI document.
@@ -376,7 +354,7 @@ jobs:
             docker-compose exec api yarn run seed
       - run:
           name: set up cypress
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           command: |
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
@@ -394,7 +372,7 @@ jobs:
             npx cypress verify
       - run:
           name: run e2e tests authentication
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.13.2; fi
@@ -403,7 +381,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.spec.js"; fi
       - run:
           name: run e2e tests apd - basics
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.13.2; fi
@@ -412,7 +390,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.spec.js"; fi
       - run:
           name: run e2e tests apd - default
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.13.2; fi
@@ -421,7 +399,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.spec.js"; fi
       - run:
           name: run e2e tests apd - data
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.13.2; fi
@@ -430,7 +408,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.spec.js"; fi
       - run:
           name: run e2e tests admin
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.13.2; fi
@@ -609,10 +587,6 @@ jobs:
 
   # Uses audit-ci to scan the installed dependencies for known vulnerabilities.
   dependency vulnerability scan:
-    parameters:
-      path:
-        description: The path to test
-        type: string
     docker:
       - image: cimg/node:16.13.2
         auth:
@@ -624,7 +598,6 @@ jobs:
           at: ~/project
       - run:
           name: vulnerability scan
-          working_directory: ~/project/<< parameters.path >>
           command: |
             yarn run audit
 
