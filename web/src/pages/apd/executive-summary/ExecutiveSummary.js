@@ -4,17 +4,17 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
-import Waypoint from './ConnectedWaypoint';
-import Dollars from '../components/Dollars';
-import Review from '../components/Review';
-import { Section, Subsection } from '../components/Section';
+import Waypoint from '../../../containers/ConnectedWaypoint';
+import Dollars from '../../../components/Dollars';
+import Review from '../../../components/Review';
+import { Section, Subsection } from '../../../components/Section';
 
-import { selectApdYears } from '../reducers/apd.selectors';
+import { selectApdYears } from '../../../reducers/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
-} from '../reducers/budget.selectors';
-import AlertMissingFFY from '../components/AlertMissingFFY';
+} from '../../../reducers/budget.selectors';
+import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const ExecutiveSummary = ({ data, total, years }) => {
   const { apdId } = useParams();
@@ -33,7 +33,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
               key={activity.key}
               heading={
                 <Fragment>
-                  Activity {i + 1}: {activity.name || "Untitled"}
+                  Activity {i + 1}: {activity.name || 'Untitled'}
                 </Fragment>
               }
               headingLevel="4"
