@@ -20,7 +20,7 @@ tap.test('Okta jwtUtils', async t => {
 
     t.test('given a valid JWT', async t => {
       const claims = { email: 'test@email.com' };
-      mockVerifier.resolves(claims);
+      mockVerifier.returns(claims);
       const result = await verifyWebToken('good token', {
         verifier: mockVerifier
       });
@@ -28,7 +28,7 @@ tap.test('Okta jwtUtils', async t => {
     });
 
     t.test('given an invalid JWT string', async t => {
-      mockVerifier.rejects({ message: 'bad token' });
+      mockVerifier.returns(false);
       const result = await verifyWebToken('bad token', {
         verifier: mockVerifier
       });
@@ -127,10 +127,9 @@ tap.test('Local jwtUtils', async t => {
     getDefaultOptions,
     sign,
     actualVerifyEAPDToken,
-    verifyWebToken,
     exchangeToken,
-    changeState,
-    verifyAndUpdateExpirations
+    updateUserToken,
+    changeState
   } = require('./jwtUtils');
 
   const payload = {
@@ -266,11 +265,9 @@ tap.test('Local jwtUtils', async t => {
     const token = sign(payload);
 
     // make sure the token is in fact valid
-    t.ok(actualVerifyEAPDToken(token), 'a valid token was verified');
+    const actualPayload = await actualVerifyEAPDToken(token);
+    t.ok(actualPayload, 'a valid token was verified');
 
-    const actualPayload = await verifyWebToken(token, {
-      verifier: actualVerifyEAPDToken
-    });
     // all of the keys seem to be here.
     Object.keys(payload).forEach(key => {
       t.same(actualPayload[key], payload[key], `${key} is in the jwt`);
@@ -309,6 +306,7 @@ tap.test('Local jwtUtils', async t => {
     const extractor = sinon.stub();
     const verifier = sinon.stub();
     const getUser = sinon.stub();
+    const auditUserLogin = sinon.stub();
 
     const req = { jwt: 'AAAA.BBBB.DDDD' };
     const claims = { uid: '1234' };
@@ -317,17 +315,21 @@ tap.test('Local jwtUtils', async t => {
     verifier.withArgs(req.jwt).resolves(claims);
     const { uid, ...additionalValues } = claims;
     getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+    auditUserLogin.resolves();
 
     const user = await exchangeToken(req, {
       extractor,
       verifier,
-      getUser
+      getUser,
+      auditUserLogin
     });
     t.ok(user.jwt, 'user has a JWT');
 
     t.ok(actualVerifyEAPDToken(user.jwt), 'user has a valid JWT set on them');
 
     t.ok(user.uid, claims.uid, 'user has the expected value');
+
+    t.ok(auditUserLogin.calledOnce, 'auditUserLogin was called');
   });
 
   t.test(
@@ -336,6 +338,7 @@ tap.test('Local jwtUtils', async t => {
       const extractor = sinon.stub();
       const oktaVerify = sinon.stub();
       const getUser = sinon.stub();
+      const auditUserLogin = sinon.stub();
 
       const req = { jwt: 'AAAA.BBBB.DDDD' };
       const claims = { uid: '1234' };
@@ -344,17 +347,21 @@ tap.test('Local jwtUtils', async t => {
       oktaVerify.withArgs(req.jwt).returns(claims);
       const { uid, ...additionalValues } = claims;
       getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+      auditUserLogin.resolves();
 
       const user = await exchangeToken(req, {
         extractor,
         oktaVerify,
-        getUser
+        getUser,
+        auditUserLogin
       });
       t.same(user, null, 'user is null');
 
       t.ok(oktaVerify.notCalled, 'Okta not called because JWT was missing');
 
       t.ok(getUser.notCalled, 'get user not called because no JWT was present');
+
+      t.ok(auditUserLogin.notCalled, 'auditUserLogin was not called');
     }
   );
 
@@ -362,6 +369,7 @@ tap.test('Local jwtUtils', async t => {
     const extractor = sinon.stub();
     const verifier = sinon.stub();
     const getUser = sinon.stub();
+    const auditUserLogin = sinon.stub();
 
     const req = { jwt: 'AAAA.BBBB.DDDD' };
     const claims = { uid: '1234' };
@@ -370,61 +378,117 @@ tap.test('Local jwtUtils', async t => {
     verifier.withArgs(req.jwt).resolves(false);
     const { uid, ...additionalValues } = claims;
     getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+    auditUserLogin.resolves();
 
     const user = await exchangeToken(req, {
       extractor,
       verifier,
-      getUser
+      getUser,
+      auditUserLogin
     });
     t.same(user, null, 'user is null');
 
     t.ok(verifier.calledWith(req.jwt), 'okta was called with the JWT');
 
     t.ok(getUser.notCalled, 'get user not called because no JWT was present');
+
+    t.ok(auditUserLogin.notCalled, 'auditUserLogin was not called');
   });
 
-  t.test('Change State of a token', async t => {
-    const getStateById = sinon.stub();
-    getStateById.withArgs('new').resolves({
-      id: 'new',
-      address1: 'New Address1',
-      director: {
-        name: 'New Director'
-      }
-    });
+  t.test('updateUserToken works', async t => {
+    const extractor = sinon.stub();
+    const verifier = sinon.stub();
+    const getUser = sinon.stub();
 
-    const originalPermissions = [
-      'original-roles',
-      'original-affiliations',
-      'original-affiliations'
-    ];
+    const req = { jwt: 'AAAA.BBBB.DDDD' };
+    const user = { id: '1234' };
+
+    extractor.withArgs(req).returns(req.jwt);
+    verifier.withArgs(req.jwt).resolves(user);
+    const { id, ...additionalValues } = user;
+    getUser.withArgs(user.id, true, { additionalValues }).returns(user);
+
+    const updatedUser = await updateUserToken(req, {
+      extractor,
+      verifier,
+      getUser
+    });
+    t.ok(updatedUser.jwt, 'user has a JWT');
+
+    t.ok(
+      actualVerifyEAPDToken(updatedUser.jwt),
+      'user has a valid JWT set on them'
+    );
+
+    t.ok(user.id, updatedUser.id, 'user has the expected value');
+  });
+
+  t.test(
+    'updateUserToken returns null if there is no JWT in the req',
+    async t => {
+      const extractor = sinon.stub();
+      const oktaVerify = sinon.stub();
+      const getUser = sinon.stub();
+
+      const req = { jwt: 'AAAA.BBBB.DDDD' };
+      const user = { uid: '1234' };
+
+      extractor.withArgs(req).returns(false);
+      oktaVerify.withArgs(req.jwt).returns(user);
+      const { id, ...additionalValues } = user;
+      getUser.withArgs(user.id, true, { additionalValues }).returns(user);
+
+      const newUser = await updateUserToken(req, {
+        extractor,
+        oktaVerify,
+        getUser
+      });
+      t.same(newUser, null, 'user is null');
+
+      t.ok(oktaVerify.notCalled, 'Okta not called because JWT was missing');
+
+      t.ok(getUser.notCalled, 'get user not called because no JWT was present');
+    }
+  );
+
+  t.test(
+    "updateUserToken returns null if eAPD verifier doesn't validate it",
+    async t => {
+      const extractor = sinon.stub();
+      const verifier = sinon.stub();
+      const getUser = sinon.stub();
+
+      const req = { jwt: 'AAAA.BBBB.DDDD' };
+      const user = { uid: '1234' };
+
+      extractor.withArgs(req).returns(req.jwt);
+      verifier.withArgs(req.jwt).resolves(false);
+      const { uid, ...additionalValues } = user;
+      getUser.withArgs(user.uid, true, { additionalValues }).returns(user);
+
+      const newUser = await updateUserToken(req, {
+        extractor,
+        verifier,
+        getUser
+      });
+      t.same(newUser, null, 'user is null');
+
+      t.ok(verifier.calledWith(req.jwt), 'okta was called with the JWT');
+
+      t.ok(getUser.notCalled, 'get user not called because no JWT was present');
+    }
+  );
+
+  t.test('Change State of a token', async t => {
+    const populateUserRole = sinon.stub();
+    const auditUserLogin = sinon.stub();
+
     const newPermissions = [
       'new-draft',
       'new-document',
       'new-document',
       'new-roles'
     ];
-    const getUserPermissionsForStates = sinon.stub();
-
-    getUserPermissionsForStates.withArgs('ABCD1234').resolves({
-      original: originalPermissions,
-      new: newPermissions
-    });
-
-    const getAffiliationsByState = sinon.stub();
-
-    getAffiliationsByState.withArgs('ABCD1234', 'new').resolves({
-      id: 60,
-      state_id: 'new',
-      expires_at: new Date('2090-12-16T00:00:00.000Z')
-    });
-
-    const getAffiliatedStates = sinon.stub();
-
-    getAffiliatedStates.withArgs('new').resolves({
-      new: 'approved',
-      original: 'approved'
-    });
 
     const user = {
       id: 'ABCD1234',
@@ -445,11 +509,22 @@ tap.test('Local jwtUtils', async t => {
       ]
     };
 
+    populateUserRole.withArgs(user, 'new').resolves({
+      ...user,
+      activities: newPermissions,
+      state: {
+        id: 'new',
+        address1: 'New Address1',
+        director: {
+          name: 'New Director'
+        }
+      }
+    });
+    auditUserLogin.resolves();
+
     const token = await changeState(user, 'new', {
-      getStateById_: getStateById,
-      getUserPermissionsForStates_: getUserPermissionsForStates,
-      getAffiliatedStates_: getAffiliatedStates,
-      getAffiliationsByState_: getAffiliationsByState
+      populate: populateUserRole,
+      auditUserLogin
     });
     const newUser = await actualVerifyEAPDToken(token);
 
@@ -459,165 +534,7 @@ tap.test('Local jwtUtils', async t => {
       newPermissions,
       'token activities are those from the right permission set'
     );
-
     t.same(user.state.id, 'original', 'original user is unchanged');
+    t.ok(auditUserLogin.calledOnce, 'auditUserLogin was called once');
   });
-
-  t.test('Change State of a token with expired affiliation', async t => {
-    const getStateById = sinon.stub();
-    getStateById.withArgs('new').resolves({
-      id: 'new',
-      address1: 'New Address1',
-      director: {
-        name: 'New Director'
-      }
-    });
-
-    const originalPermissions = [
-      'original-roles',
-      'original-affiliations',
-      'original-affiliations'
-    ];
-    const newPermissions = [
-      'new-draft',
-      'new-document',
-      'new-document',
-      'new-roles'
-    ];
-    const getUserPermissionsForStates = sinon.stub();
-
-    getUserPermissionsForStates.withArgs('ABCD1234').resolves({
-      original: originalPermissions,
-      new: newPermissions
-    });
-
-    const getAffiliationsByState = sinon.stub();
-
-    getAffiliationsByState.withArgs('ABCD1234', 'new').resolves({
-      id: 60,
-      state_id: 'new',
-      expires_at: new Date('2020-12-16T00:00:00.000Z')
-    });
-
-    const getAffiliatedStates = sinon.stub();
-
-    getAffiliatedStates.withArgs('new').resolves({
-      new: 'approved',
-      original: 'approved'
-    });
-
-    const user = {
-      id: 'ABCD1234',
-      state: {
-        id: 'original',
-        address1: 'Original Address1',
-        director: {
-          name: 'Original Director'
-        }
-      },
-      states: { original: 'approved', new: 'approved' },
-
-      foo: 'bar',
-      activities: [
-        'original-roles',
-        'original-affiliations',
-        'original-affiliations'
-      ]
-    };
-
-    const updateAuthAffiliation = sinon.spy();
-
-    await changeState(user, 'new', {
-      getStateById_: getStateById,
-      getUserPermissionsForStates_: getUserPermissionsForStates,
-      getAffiliatedStates_: getAffiliatedStates,
-      getAffiliationsByState_: getAffiliationsByState,
-      updateAuthAffiliation_: updateAuthAffiliation
-    });
-
-    t.ok(updateAuthAffiliation.calledOnce);
-  });
-
-  t.test(
-    'Verify and update affiliation expirations, with no expired affiliations',
-    async t => {
-      const claims = {
-        id: '123',
-        name: 'State Admin',
-        state: {
-          id: 'ak',
-          name: 'Alaska'
-        },
-        states: {
-          ak: 'approved',
-          md: 'approved'
-        },
-        username: 'stateadmin'
-      };
-
-      const getExpiredUserAffiliations = sinon.stub();
-      getExpiredUserAffiliations.withArgs(claims.id).resolves([]);
-
-      const getAffiliatedStates = sinon.stub();
-      getAffiliatedStates.withArgs(claims.id).resolves({
-        ak: 'approved',
-        md: 'approved'
-      });
-
-      const updateAuthAffiliation = sinon.spy();
-
-      const newClaims = await verifyAndUpdateExpirations(claims, {
-        getExpiredUserAffiliations_: getExpiredUserAffiliations,
-        getAffiliatedStates_: getAffiliatedStates,
-        updateAuthAffiliation_: updateAuthAffiliation
-      });
-
-      t.ok(updateAuthAffiliation.notCalled);
-      t.same(claims, newClaims);
-    }
-  );
-
-  t.test(
-    'Verify and update affiliation expirations, with an expired affiliation',
-    async t => {
-      const claims = {
-        id: '123',
-        name: 'State Admin',
-        state: {
-          id: 'ak',
-          name: 'Alaska'
-        },
-        states: {
-          ak: 'approved',
-          md: 'approved'
-        },
-        username: 'stateadmin'
-      };
-
-      const getExpiredUserAffiliations = sinon.stub();
-      getExpiredUserAffiliations.withArgs(claims.id).resolves([
-        {
-          id: '123',
-          state_id: 'ak'
-        }
-      ]);
-
-      const getAffiliatedStates = sinon.stub();
-      getAffiliatedStates.withArgs(claims.id).resolves({
-        ak: 'revoked',
-        md: 'approved'
-      });
-
-      const updateAuthAffiliation = sinon.spy();
-
-      const newClaims = await verifyAndUpdateExpirations(claims, {
-        getExpiredUserAffiliations_: getExpiredUserAffiliations,
-        getAffiliatedStates_: getAffiliatedStates,
-        updateAuthAffiliation_: updateAuthAffiliation
-      });
-
-      t.ok(updateAuthAffiliation.calledOnce);
-      t.same(newClaims.states.ak, 'revoked');
-    }
-  );
 });
