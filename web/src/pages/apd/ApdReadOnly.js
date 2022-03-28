@@ -12,15 +12,15 @@ import { selectApdData } from '../../reducers/apd.selectors';
 import { selectBudget } from '../../reducers/budget.selectors';
 import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
-import ApdStateProfile from './ApdStateProfile';
-import ApdSummary from './ApdSummary';
-import PreviousActivities from './PreviousActivities';
-import Activities from './activities/All';
-import ScheduleSummary from './ScheduleSummary';
-import ProposedBudget from './ProposedBudget';
-import AssuranceAndCompliance from './AssurancesAndCompliance';
-import ExecutiveSummary from './ExecutiveSummary';
-import ExportInstructions from './Export';
+import ApdStateProfile from '../../containers/viewOnly/ApdStateProfile';
+import ApdSummary from '../../containers/viewOnly/ApdSummary';
+import PreviousActivities from '../../containers/viewOnly/PreviousActivities';
+import Activities from '../../containers/viewOnly/activities/All';
+import ScheduleSummary from '../../containers/viewOnly/ScheduleSummary';
+import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
+import AssuranceAndCompliance from '../../containers/viewOnly/AssurancesAndCompliance';
+import ExecutiveSummary from '../../containers/viewOnly/ExecutiveSummary';
+import ExportInstructions from '../../containers/viewOnly/Export';
 import Loading from '../../components/Loading';
 
 const ApdViewOnly = ({

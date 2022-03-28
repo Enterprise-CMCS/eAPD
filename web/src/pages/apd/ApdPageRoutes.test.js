@@ -1,8 +1,8 @@
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 import ApdPageRoutes from './ApdPageRoutes';
-import apd from '../fixtures/ak-apd.json';
-import budget from '../fixtures/ak-budget.json';
+import apd from '../../fixtures/ak-apd.json';
+import budget from '../../fixtures/ak-budget.json';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

@@ -2,9 +2,9 @@ import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
-import ApdSummary from './ApdSummary';
+import ApdSummary from './ApdOverview';
 
-jest.mock('../util/api', () => ({
+jest.mock('../../../util/api', () => ({
   get: jest.fn(),
   post: jest.fn(),
   patch: jest.fn(),
