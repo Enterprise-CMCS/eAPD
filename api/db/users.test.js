@@ -8,7 +8,8 @@ const {
   getAllUsers,
   getUserByID,
   populateUserRole,
-  sanitizeUser
+  sanitizeUser,
+  userLoggedIntoState
 } = require('./users');
 
 tap.test('database wrappers / users', async usersTests => {
@@ -144,6 +145,57 @@ tap.test('database wrappers / users', async usersTests => {
     ]);
   });
 
+  usersTests.test('userLoggedIntoState', async userLoggedIntoStateTest => {
+    userLoggedIntoStateTest.test('no affiliation', async test => {
+      auditUserLogin.resolves({});
+      const user = { ...sanitizedUser, affiliation: null };
+      await userLoggedIntoState(user, 'state1', { auditUserLogin });
+
+      test.ok(auditUserLogin.notCalled);
+    });
+
+    userLoggedIntoStateTest.test('no stateId and no states', async test => {
+      auditUserLogin.resolves({});
+      const user = { ...sanitizedUser };
+      await userLoggedIntoState(user, null, { auditUserLogin });
+
+      test.ok(auditUserLogin.notCalled);
+    });
+
+    userLoggedIntoStateTest.test('1 state', async test => {
+      auditUserLogin.resolves({});
+      const user = { ...sanitizedUser, states: { state1: { role: 'Admin' } } };
+      await userLoggedIntoState(user, null, { auditUserLogin });
+
+      test.ok(auditUserLogin.calledOnce);
+    });
+
+    userLoggedIntoStateTest.test('state id and multiple states', async test => {
+      auditUserLogin.resolves({});
+      const user = {
+        ...sanitizedUser,
+        states: { state1: { role: 'Admin' }, state2: { role: 'Staff' } }
+      };
+      await userLoggedIntoState(user, 'state1', { auditUserLogin });
+
+      test.ok(auditUserLogin.calledOnce);
+    });
+
+    userLoggedIntoStateTest.test(
+      'no state id and multiple states',
+      async test => {
+        auditUserLogin.resolves({});
+        const user = {
+          ...sanitizedUser,
+          states: { state1: { role: 'Admin' }, state2: { role: 'Staff' } }
+        };
+        await userLoggedIntoState(user, null, { auditUserLogin });
+
+        test.ok(auditUserLogin.notCalled);
+      }
+    );
+  });
+
   usersTests.test('populate user role', async populateUserRoleTests => {
     populateUserRoleTests.test('no user', async test => {
       const user = await populateUserRole(null, null, {
@@ -152,8 +204,7 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation,
-        auditUserLogin
+        updateAuthAffiliation
       });
 
       test.equal(user, null);
@@ -167,8 +218,7 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation,
-        auditUserLogin
+        updateAuthAffiliation
       });
       test.same(user, {
         ...unsanitizedUser,
@@ -189,8 +239,7 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation,
-        auditUserLogin
+        updateAuthAffiliation
       });
       test.same(user, {
         ...unsanitizedUser,
@@ -212,14 +261,12 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation,
-        auditUserLogin
+        updateAuthAffiliation
       });
       test.ok(
         getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state1')
       );
       test.ok(updateAuthAffiliation.notCalled);
-      test.ok(auditUserLogin.calledOnce);
     });
 
     populateUserRoleTests.test('2 affiliation2, no stateId', async test => {
@@ -233,14 +280,12 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation,
-        auditUserLogin
+        updateAuthAffiliation
       });
       test.ok(
         getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state1')
       );
       test.ok(updateAuthAffiliation.notCalled);
-      test.ok(auditUserLogin.notCalled);
     });
 
     populateUserRoleTests.test('2 affiliation2 with state id', async test => {
@@ -254,14 +299,12 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation,
-        auditUserLogin
+        updateAuthAffiliation
       });
       test.ok(
         getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state2')
       );
       test.ok(updateAuthAffiliation.notCalled);
-      test.ok(auditUserLogin.calledOnce);
     });
 
     populateUserRoleTests.test('expired affiliation', async test => {
@@ -276,12 +319,10 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation,
-        auditUserLogin
+        updateAuthAffiliation
       });
       test.ok(getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'exp'));
       test.ok(updateAuthAffiliation.calledOnce);
-      test.ok(auditUserLogin.calledOnce);
     });
   });
 

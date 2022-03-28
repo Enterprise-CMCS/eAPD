@@ -94,7 +94,12 @@ const verifyEAPDToken = token => {
 
 const exchangeToken = async (
   req,
-  { extractor = jwtExtractor, verifier = verifyJWT, getUser = getUserByID } = {}
+  {
+    extractor = jwtExtractor,
+    verifier = verifyJWT,
+    getUser = getUserByID,
+    auditUserLogin = userLoggedIntoState
+  } = {}
 ) => {
   const oktaJWT = extractor(req);
   // verify the token using the okta verifier.
@@ -103,7 +108,7 @@ const exchangeToken = async (
 
   const { uid, ...additionalValues } = claims;
   const user = await getUser(uid, true, { additionalValues });
-  await userLoggedIntoState(user);
+  await auditUserLogin(user);
   user.jwt = sign(user);
 
   return user;
@@ -132,10 +137,10 @@ const updateUserToken = async (
 const changeState = async (
   user,
   stateId,
-  { populate = populateUserRole } = {}
+  { populate = populateUserRole, auditUserLogin = userLoggedIntoState } = {}
 ) => {
   const populatedUser = await populate(user, stateId);
-  userLoggedIntoState(populatedUser, stateId);
+  auditUserLogin(populatedUser, stateId);
   return sign(populatedUser, {});
 };
 

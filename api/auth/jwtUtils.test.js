@@ -306,6 +306,7 @@ tap.test('Local jwtUtils', async t => {
     const extractor = sinon.stub();
     const verifier = sinon.stub();
     const getUser = sinon.stub();
+    const auditUserLogin = sinon.stub();
 
     const req = { jwt: 'AAAA.BBBB.DDDD' };
     const claims = { uid: '1234' };
@@ -314,17 +315,21 @@ tap.test('Local jwtUtils', async t => {
     verifier.withArgs(req.jwt).resolves(claims);
     const { uid, ...additionalValues } = claims;
     getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+    auditUserLogin.resolves();
 
     const user = await exchangeToken(req, {
       extractor,
       verifier,
-      getUser
+      getUser,
+      auditUserLogin
     });
     t.ok(user.jwt, 'user has a JWT');
 
     t.ok(actualVerifyEAPDToken(user.jwt), 'user has a valid JWT set on them');
 
     t.ok(user.uid, claims.uid, 'user has the expected value');
+
+    t.ok(auditUserLogin.calledOnce, 'auditUserLogin was called');
   });
 
   t.test(
@@ -333,6 +338,7 @@ tap.test('Local jwtUtils', async t => {
       const extractor = sinon.stub();
       const oktaVerify = sinon.stub();
       const getUser = sinon.stub();
+      const auditUserLogin = sinon.stub();
 
       const req = { jwt: 'AAAA.BBBB.DDDD' };
       const claims = { uid: '1234' };
@@ -341,17 +347,21 @@ tap.test('Local jwtUtils', async t => {
       oktaVerify.withArgs(req.jwt).returns(claims);
       const { uid, ...additionalValues } = claims;
       getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+      auditUserLogin.resolves();
 
       const user = await exchangeToken(req, {
         extractor,
         oktaVerify,
-        getUser
+        getUser,
+        auditUserLogin
       });
       t.same(user, null, 'user is null');
 
       t.ok(oktaVerify.notCalled, 'Okta not called because JWT was missing');
 
       t.ok(getUser.notCalled, 'get user not called because no JWT was present');
+
+      t.ok(auditUserLogin.notCalled, 'auditUserLogin was not called');
     }
   );
 
@@ -359,6 +369,7 @@ tap.test('Local jwtUtils', async t => {
     const extractor = sinon.stub();
     const verifier = sinon.stub();
     const getUser = sinon.stub();
+    const auditUserLogin = sinon.stub();
 
     const req = { jwt: 'AAAA.BBBB.DDDD' };
     const claims = { uid: '1234' };
@@ -367,17 +378,21 @@ tap.test('Local jwtUtils', async t => {
     verifier.withArgs(req.jwt).resolves(false);
     const { uid, ...additionalValues } = claims;
     getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+    auditUserLogin.resolves();
 
     const user = await exchangeToken(req, {
       extractor,
       verifier,
-      getUser
+      getUser,
+      auditUserLogin
     });
     t.same(user, null, 'user is null');
 
     t.ok(verifier.calledWith(req.jwt), 'okta was called with the JWT');
 
     t.ok(getUser.notCalled, 'get user not called because no JWT was present');
+
+    t.ok(auditUserLogin.notCalled, 'auditUserLogin was not called');
   });
 
   t.test('updateUserToken works', async t => {
@@ -466,6 +481,7 @@ tap.test('Local jwtUtils', async t => {
 
   t.test('Change State of a token', async t => {
     const populateUserRole = sinon.stub();
+    const auditUserLogin = sinon.stub();
 
     const newPermissions = [
       'new-draft',
@@ -504,9 +520,11 @@ tap.test('Local jwtUtils', async t => {
         }
       }
     });
+    auditUserLogin.resolves();
 
     const token = await changeState(user, 'new', {
-      populate: populateUserRole
+      populate: populateUserRole,
+      auditUserLogin
     });
     const newUser = await actualVerifyEAPDToken(token);
 
@@ -517,5 +535,6 @@ tap.test('Local jwtUtils', async t => {
       'token activities are those from the right permission set'
     );
     t.same(user.state.id, 'original', 'original user is unchanged');
+    t.ok(auditUserLogin.calledOnce, 'auditUserLogin was called once');
   });
 });
