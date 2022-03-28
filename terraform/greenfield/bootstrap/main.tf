@@ -35,6 +35,8 @@ resource "aws_s3_bucket_public_access_block" "terraform-state-bucket-public-acce
 
   block_public_acls   = true
   block_public_policy = true
+  ignore_public_acls  = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket_versioning" "terraform-state-bucket-versioning" {
@@ -44,72 +46,72 @@ resource "aws_s3_bucket_versioning" "terraform-state-bucket-versioning" {
   }
 }
 
-#data "aws_iam_policy_document" "bucket-require-tls" {
-#  statement {
-#    sid    = "RequireTLS"
-#    effect = "Deny"
-
-#    principals {
-#      type        = "AWS"
-#      identifiers = ["var.aws_account_id"]
-#    }
-
-#    actions = ["s3:*",]
-
-#    resources = [
-#      "arn:aws:s3:::/*",
-#      "arn:aws:s3:::",
-#    ]
-
-#    condition {
-#      test     = "Bool"
-#      variable = "aws:SecureTransport"
-#      values   = ["false"]
-#    }
-
-#    condition {
-#      test     = "NumericLessThan"
-#      variable = "s3:TlsVersion"
-#      values = ["1.2"]
-#    }
-#  }
-#}
-
-resource "aws_iam_policy" "terraform-state-bucket-require-tls" {
-  name = "terraform_state_bucket_require_tls_policy"
-  path = "/"
-  description = "IAM Policy for Terraform State Bucket Require TLS"
-  policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Principal": {
-        "AWS": "*"
-      },
-      "Action": [
-        "s3:*"
-      ],
-      "Resource": [
-        "arn:aws:s3:::aws_s3_bucket.terraform-state-bucket.id/*",
-        "arn:aws:s3:::aws_s3_bucket.terraform-state-bucket.id"
-      ],
-      "Effect": "Deny",
-      "Condition": {
-        "Bool": {
-          "aws:SecureTransport": "false"
-        },
-        "NumericLessThan": {
-          "s3:TlsVersion": "1.2"
-        }
-      }
-    }
-  ]
-}
-POLICY
-}
-
 resource "aws_s3_bucket_policy" "terraform-state-bucket-require-tls" {
   bucket = aws_s3_bucket.terraform-state-bucket.id
-  policy = aws_iam_policy.terraform-state-bucket-require-tls.arn
+  policy = data.aws_iam_policy_document.bucket-require-tls.json
 }
+
+data "aws_iam_policy_document" "bucket-require-tls" {
+  statement {
+    sid    = "RequireTLS"
+    effect = "Deny"
+
+    principals {
+      type        = "AWS"
+      identifiers = [ var.aws_account_id]
+    }
+
+    actions = ["s3:*",]
+
+    resources = [
+      "${aws_s3_bucket.terraform-state-bucket.arn}/*",
+      "${aws_s3_bucket.terraform-state-bucket.arn}",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["false"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "s3:TlsVersion"
+      values = ["1.2"]
+    }
+  }
+}
+
+#resource "aws_iam_policy" "terraform-state-bucket-require-tls" {
+#  name = "terraform_state_bucket_require_tls_policy"
+#  path = "/"
+#  description = "IAM Policy for Terraform State Bucket Require TLS"
+#  policy = <<POLICY
+#{
+#  "Version": "2012-10-17",
+#  "Statement": [
+#    {
+#      "Principal": {
+#        "AWS": "*"
+#      },
+#      "Action": [
+#        "s3:*"
+#      ],
+#      "Resource": [
+#        "arn:aws:s3:::aws_s3_bucket.terraform-state-bucket.id/*",
+#        "arn:aws:s3:::aws_s3_bucket.terraform-state-bucket.id"
+#      ],
+#      "Effect": "Deny",
+#      "Condition": {
+#        "Bool": {
+#          "aws:SecureTransport": "false"
+#        },
+#        "NumericLessThan": {
+#          "s3:TlsVersion": "1.2"
+#        }
+#      }
+#    }
+#  ]
+#}
+#POLICY
+#}
