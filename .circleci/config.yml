@@ -28,10 +28,7 @@ workflows:
                 - main
     jobs:
       - install dependencies
-      - dependency vulnerability scan:
-          name: dependency vulnerability scan
-          requires:
-            - install dependencies
+      - dependency vulnerability scan
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
@@ -45,6 +42,8 @@ workflows:
           filters:
             tags:
               only: /.*/
+          requires:
+            - install dependencies
       - owasp zap scan:
           filters:
             tags:
@@ -67,7 +66,6 @@ workflows:
           requires:
             - frontend lint
             - backend lint
-            - dependency vulnerability scan
             - frontend test
             - backend unit test
             - backend api endpoint test
@@ -80,6 +78,7 @@ workflows:
           requires:
             - install dependencies
             - dependency vulnerability scan
+
       - backend lint:
           filters:
             tags:
@@ -148,7 +147,6 @@ workflows:
             - owasp zap scan
             - frontend lint
             - backend lint
-            - dependency vulnerability scan
             - frontend test
             - yaml test
             - backend unit test
@@ -182,7 +180,6 @@ workflows:
                 - main
           requires:
             - frontend build staging
-            - dependency vulnerability scan
             - frontend lint
             - frontend test
             - yaml test
@@ -198,7 +195,6 @@ workflows:
               only: /^v.*/
           requires:
             - frontend build prod
-            - dependency vulnerability scan
             - frontend lint
             - frontend test
             - yaml test
@@ -224,7 +220,6 @@ workflows:
               only:
                 - main
           requires:
-            - dependency vulnerability scan
             - frontend build staging
 
       - store artifacts:
@@ -587,6 +582,10 @@ jobs:
 
   # Uses audit-ci to scan the installed dependencies for known vulnerabilities.
   dependency vulnerability scan:
+    parameters:
+      path:
+        description: The path to test
+        type: string
     docker:
       - image: cimg/node:16.13.2
         auth:
@@ -598,6 +597,7 @@ jobs:
           at: ~/project
       - run:
           name: vulnerability scan
+          working_directory: ~/project/<< parameters.path >>
           command: |
             yarn run audit
 
@@ -833,9 +833,7 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install zip -y
-            cd api
             yarn install --frozen-lockfile --production=true
-            cd ..
             zip -r /tmp/backend.zip api/*
             zip -r /tmp/frontend.zip web/dist/*
       - run:
