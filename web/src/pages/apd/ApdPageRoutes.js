@@ -10,7 +10,7 @@ import {
 import ApdHeader from '../../layout/header/ApdHeader';
 import Activities from '../../containers/activity/All';
 import EntryPage from '../../containers/activity/EntryPage';
-import AssurancesAndCompliance from '../../containers/AssurancesAndCompliance';
+import AssurancesAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
 import Export from '../../containers/ApdExport';
 import ApdOverview from './apd-overview/ApdOverview';
 import ExecutiveSummary from '../../containers/ExecutiveSummary';
