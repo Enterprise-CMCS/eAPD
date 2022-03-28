@@ -20,7 +20,7 @@ import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
 import ProposedBudget from './proposed-budget/ProposedBudget';
 import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
 import ExecutiveSummary from './executive-summary/ExecutiveSummary';
-import ExportInstructions from '../../containers/viewOnly/Export';
+import ExportInstructions from './export/ExportReadOnly';
 import Loading from '../../components/Loading';
 
 const ApdViewOnly = ({
