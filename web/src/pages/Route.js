@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route as PublicRoute, Switch } from 'react-router-dom';
 
-import routes from '../routes';
-import AdminRoute from '../pages/admin/AdminRoute';
+import routes from './routes';
+import AdminRoute from './admin/AdminRoute';
 import PrivateRoute from '../containers/PrivateRoute';
 
 const Routes = () => (
