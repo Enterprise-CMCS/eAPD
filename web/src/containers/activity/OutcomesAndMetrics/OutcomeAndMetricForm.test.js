@@ -12,6 +12,7 @@ import {
 
 describe('the OutcomeAndMetricForm component', () => {
   const saveOutcome = jest.fn();
+  const setFormValid = jest.fn();
   
   const component = shallow(
     <OutcomeAndMetricForm
@@ -32,6 +33,7 @@ describe('the OutcomeAndMetricForm component', () => {
         ]
       }}
       saveOutcome={saveOutcome}
+      setFormValid={setFormValid}
     />
   );
 
@@ -64,6 +66,7 @@ describe('the OutcomeAndMetricForm component', () => {
             ]
           }}
           saveOutcome={saveOutcome}
+          setFormValid={setFormValid}
         />
       )
         .find('form')

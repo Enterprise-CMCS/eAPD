@@ -24,7 +24,7 @@ const Outcomes = ({
   const [localList, setLocalList] = useState(outcomes);
         
   useEffect(() => {
-    setLocalList(outcomes)
+    setLocalList(outcomes);
   }, [outcomes])
   
   const handleAdd = () => {
