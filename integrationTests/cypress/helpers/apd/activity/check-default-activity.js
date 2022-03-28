@@ -99,9 +99,9 @@ export const checkDefaultActivity = years => {
         level: 3
       }).should('exist');
 
-      cy.contains(
-        'Add private contractor(s) for this activity.'
-      ).should('exist');
+      cy.contains('Add private contractor(s) for this activity.').should(
+        'exist'
+      );
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();

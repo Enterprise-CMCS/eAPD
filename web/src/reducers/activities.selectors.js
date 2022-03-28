@@ -99,7 +99,7 @@ export const selectActivityCostSummary = createSelector(
             totalCost: c.years[year],
             unitCost: c.hourly.useHourly ? c.hourly.data[year].rate : null,
             units:
-              c.hourly.useHourly === true || c.hourly.useHourly === 'true'
+              c.hourly.useHourly === true || c.hourly.useHourly === 'yes'
                 ? `${c.hourly.data[year].hours} hours`
                 : null
           })),

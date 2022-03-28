@@ -1159,7 +1159,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.goToPrivateContractorCosts(0);
 
       activityPage.checkDeleteButton(
-        'Add private contractor(s) for this activity.',
+        'Add private contractor(s) for this activity',
         'Delete Private Contractor?',
         'Test Private Contractor'
       );
