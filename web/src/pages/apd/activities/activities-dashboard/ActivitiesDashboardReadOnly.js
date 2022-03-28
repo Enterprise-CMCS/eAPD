@@ -3,7 +3,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import ActivityList from './ActivityListReadOnly';
-import Activity from './Activity';
+import Activity from './ActivityReadOnly';
 
 const Activities = ({ activities }) => {
   return (
