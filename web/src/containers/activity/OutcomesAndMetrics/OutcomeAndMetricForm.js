@@ -54,21 +54,8 @@ const OutcomeAndMetricForm = forwardRef(
     });
 
     useEffect(() => {
-      console.log('isValid changed');
-      console.log({ isValid });
       setFormValid(isValid);
-    }, [isValid]);
-
-    useEffect(() => {
-      console.log('errors changed');
-      console.log({ errors });
-    }, [errors]);
-
-    useEffect(() => {
-      console.log('isValidating changed');
-      const { error, value } = outcomeMetricSchema.validate(getValues());
-      console.log({ error, value, errors, isValidating });
-    }, [isValidating, errors]);
+    }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const initialState = item;
 

@@ -6,18 +6,124 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
   key="activity93-index1-form"
   onSubmit={[Function]}
 >
-  <TextField
-    className="remove-clearfix"
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "metrics": Array [
+            Object {
+              "key": "om key 1",
+              "metric": "metric 1",
+            },
+            Object {
+              "key": "om key 2",
+              "metric": "metric 2",
+            },
+          ],
+          "outcome": "outcome description",
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "metrics": Array [
+            Object {
+              "key": "om key 1",
+              "metric": "metric 1",
+            },
+            Object {
+              "key": "om key 2",
+              "metric": "metric 2",
+            },
+          ],
+          "outcome": "outcome description",
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {
+            "metrics",
+          },
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "metrics": Array [
+              Object {
+                "key": "om key 1",
+                "metric": "metric 1",
+              },
+              Object {
+                "key": "om key 2",
+                "metric": "metric 2",
+              },
+            ],
+            "outcome": "outcome description",
+          },
+          "mode": "onBlur",
+          "reValidateMode": "onBlur",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": "all",
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
     data-cy="outcome-1"
-    hint="Describe a distinct and measurable improvement for this system."
     key="activity93-index1"
-    label="Outcome"
-    multiline={true}
     name="outcome"
-    onChange={[Function]}
-    rows="4"
-    type="text"
-    value="outcome description"
+    render={[Function]}
   />
   <Review
     ariaLabel="1. metric 1"
@@ -34,18 +140,123 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
       key="om key 1"
     >
-      <TextField
-        className="remove-clearfix"
-        data-cy="metric-1-0"
-        hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-        id="93-metric0"
-        label="Metric"
-        multiline={true}
-        name="metric"
-        onChange={[Function]}
-        rows="4"
-        type="text"
-        value="metric 1"
+      <Component
+        control={
+          Object {
+            "_defaultValues": Object {
+              "metrics": Array [
+                Object {
+                  "key": "om key 1",
+                  "metric": "metric 1",
+                },
+                Object {
+                  "key": "om key 2",
+                  "metric": "metric 2",
+                },
+              ],
+              "outcome": "outcome description",
+            },
+            "_executeSchema": [Function],
+            "_fields": Object {},
+            "_formState": Object {
+              "dirtyFields": Object {},
+              "errors": Object {},
+              "isDirty": false,
+              "isSubmitSuccessful": false,
+              "isSubmitted": false,
+              "isSubmitting": false,
+              "isValid": false,
+              "isValidating": false,
+              "submitCount": 0,
+              "touchedFields": Object {},
+            },
+            "_formValues": Object {
+              "metrics": Array [
+                Object {
+                  "key": "om key 1",
+                  "metric": "metric 1",
+                },
+                Object {
+                  "key": "om key 2",
+                  "metric": "metric 2",
+                },
+              ],
+              "outcome": "outcome description",
+            },
+            "_getDirty": [Function],
+            "_getFieldArray": [Function],
+            "_getWatch": [Function],
+            "_names": Object {
+              "array": Set {
+                "metrics",
+              },
+              "mount": Set {},
+              "unMount": Set {},
+              "watch": Set {},
+            },
+            "_options": Object {
+              "defaultValues": Object {
+                "metrics": Array [
+                  Object {
+                    "key": "om key 1",
+                    "metric": "metric 1",
+                  },
+                  Object {
+                    "key": "om key 2",
+                    "metric": "metric 2",
+                  },
+                ],
+                "outcome": "outcome description",
+              },
+              "mode": "onBlur",
+              "reValidateMode": "onBlur",
+              "resolver": [Function],
+              "shouldFocusError": true,
+            },
+            "_proxyFormState": Object {
+              "dirtyFields": false,
+              "errors": "all",
+              "isDirty": false,
+              "isValid": "all",
+              "isValidating": "all",
+              "touchedFields": false,
+            },
+            "_removeUnmounted": [Function],
+            "_stateFlags": Object {
+              "action": false,
+              "mount": false,
+              "watch": false,
+            },
+            "_subjects": Object {
+              "array": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "state": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "watch": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+            },
+            "_updateFieldArray": [Function],
+            "_updateValid": [Function],
+            "getFieldState": [Function],
+            "register": [Function],
+            "unregister": [Function],
+          }
+        }
+        defaultValue="metric 1"
+        name="metrics[0].metric"
+        render={[Function]}
       />
     </div>
   </Review>
@@ -64,18 +275,123 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
       className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
       key="om key 2"
     >
-      <TextField
-        className="remove-clearfix"
-        data-cy="metric-1-1"
-        hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-        id="93-metric1"
-        label="Metric"
-        multiline={true}
-        name="metric"
-        onChange={[Function]}
-        rows="4"
-        type="text"
-        value="metric 2"
+      <Component
+        control={
+          Object {
+            "_defaultValues": Object {
+              "metrics": Array [
+                Object {
+                  "key": "om key 1",
+                  "metric": "metric 1",
+                },
+                Object {
+                  "key": "om key 2",
+                  "metric": "metric 2",
+                },
+              ],
+              "outcome": "outcome description",
+            },
+            "_executeSchema": [Function],
+            "_fields": Object {},
+            "_formState": Object {
+              "dirtyFields": Object {},
+              "errors": Object {},
+              "isDirty": false,
+              "isSubmitSuccessful": false,
+              "isSubmitted": false,
+              "isSubmitting": false,
+              "isValid": false,
+              "isValidating": false,
+              "submitCount": 0,
+              "touchedFields": Object {},
+            },
+            "_formValues": Object {
+              "metrics": Array [
+                Object {
+                  "key": "om key 1",
+                  "metric": "metric 1",
+                },
+                Object {
+                  "key": "om key 2",
+                  "metric": "metric 2",
+                },
+              ],
+              "outcome": "outcome description",
+            },
+            "_getDirty": [Function],
+            "_getFieldArray": [Function],
+            "_getWatch": [Function],
+            "_names": Object {
+              "array": Set {
+                "metrics",
+              },
+              "mount": Set {},
+              "unMount": Set {},
+              "watch": Set {},
+            },
+            "_options": Object {
+              "defaultValues": Object {
+                "metrics": Array [
+                  Object {
+                    "key": "om key 1",
+                    "metric": "metric 1",
+                  },
+                  Object {
+                    "key": "om key 2",
+                    "metric": "metric 2",
+                  },
+                ],
+                "outcome": "outcome description",
+              },
+              "mode": "onBlur",
+              "reValidateMode": "onBlur",
+              "resolver": [Function],
+              "shouldFocusError": true,
+            },
+            "_proxyFormState": Object {
+              "dirtyFields": false,
+              "errors": "all",
+              "isDirty": false,
+              "isValid": "all",
+              "isValidating": "all",
+              "touchedFields": false,
+            },
+            "_removeUnmounted": [Function],
+            "_stateFlags": Object {
+              "action": false,
+              "mount": false,
+              "watch": false,
+            },
+            "_subjects": Object {
+              "array": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "state": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "watch": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+            },
+            "_updateFieldArray": [Function],
+            "_updateValid": [Function],
+            "getFieldState": [Function],
+            "register": [Function],
+            "unregister": [Function],
+          }
+        }
+        defaultValue="metric 2"
+        name="metrics[1].metric"
+        render={[Function]}
       />
     </div>
   </Review>
