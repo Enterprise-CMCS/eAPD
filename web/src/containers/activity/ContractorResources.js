@@ -24,16 +24,16 @@ const ContractorResources = ({
   years
 }) => {
   const [localList, setLocalList] = useState(list);
-      
+
   useEffect(() => {
-    setLocalList(list)
-  }, [list])
-  
+    setLocalList(list);
+  }, [list]);
+
   const addClick = () => {
     const newListItem = newContractor(years);
     setLocalList([...localList, newListItem]);
   };
-  
+
   const onCancel = () => {
     setLocalList(list);
   };

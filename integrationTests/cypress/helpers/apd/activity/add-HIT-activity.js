@@ -81,7 +81,7 @@ export const addHITActivity = years => {
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillPrivateContactors(
+      fillOutActivityPage.addPrivateContractors(
         activityData.privateContractors,
         years,
         true // Test delete flag

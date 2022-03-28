@@ -4,7 +4,8 @@ import {
   act,
   screen,
   within,
-  waitFor
+  waitFor,
+  prettyDOM
 } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
@@ -452,6 +453,7 @@ describe('the ContractorResourceForm component', () => {
     userEvent.tab(); // hours 1067
     userEvent.tab(); // rates 1067
     userEvent.tab(); // out of hourly costs
+    console.log(prettyDOM(input));
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
@@ -491,6 +493,7 @@ describe('the ContractorResourceForm component', () => {
     userEvent.tab(); // cost 1066
     userEvent.tab(); // cost 1067
     userEvent.tab(); // out of yearly costs
+    console.log(prettyDOM(input));
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);

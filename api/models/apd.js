@@ -56,12 +56,12 @@ const apdSchema = new mongoose.Schema({
   name: String,
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
     required: true
   },
   updatedAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
     required: true
   },
   status: {

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { withRouter } from 'react-router';
-import Header from './Header';
-import Footer from './Footer';
-import routes from '../routes';
+import Header from '../layout/header/Header';
+import Footer from '../layout/footer/Footer';
+import routes from '../pages/routes';
 import SessionEndingAlert from '../containers/SessionEndingAlert';
 
 const cardRoutes = routes.filter(r => r.isCard).map(r => r.path);

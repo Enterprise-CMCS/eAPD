@@ -98,9 +98,10 @@ export const selectActivityCostSummary = createSelector(
               c.name || 'Private Contractor or Vendor Name not specified',
             totalCost: c.years[year],
             unitCost: c.hourly.useHourly ? c.hourly.data[year].rate : null,
-            units: c.hourly.useHourly
-              ? `${c.hourly.data[year].hours} hours`
-              : null
+            units:
+              c.hourly.useHourly === true || c.hourly.useHourly === 'yes'
+                ? `${c.hourly.data[year].hours} hours`
+                : null
           })),
           contractorResourcesTotal: activity.contractorResources.reduce(
             (sum, contractor) => sum + contractor.years[year],

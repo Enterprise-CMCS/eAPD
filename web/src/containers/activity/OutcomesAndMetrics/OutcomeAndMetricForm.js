@@ -12,8 +12,23 @@ import Review from '../../../components/Review';
 
 import { saveOutcome as actualSaveOutcome } from '../../../actions/editActivity';
 
-import outcomeMetricSchema from '../../../static/schemas/outcomeMetric';
 import { newOutcomeMetric } from '../../../reducers/activities';
+
+const outcomeMetricSchema = Joi.object({
+  outcome: Joi.string().required().messages({
+    'string.base': 'Outcome is required',
+    'string.empty': 'Outcome is required'
+  }),
+  metrics: Joi.array().items(
+    Joi.object({
+      key: Joi.any(),
+      metric: Joi.string().messages({
+        'string.empty': 'Metric is required',
+        'string.null': 'Metric is required'
+      })
+    })
+  )
+});
 
 const OutcomeAndMetricForm = forwardRef(
   ({ activityIndex, item, index, saveOutcome, setFormValid }, ref) => {
@@ -21,8 +36,7 @@ const OutcomeAndMetricForm = forwardRef(
     const {
       handleSubmit,
       control,
-      formState: { errors, isValid, isValidating },
-      getValues
+      formState: { errors, isValid }
     } = useForm({
       defaultValues: {
         outcome: item.outcome,
@@ -39,21 +53,8 @@ const OutcomeAndMetricForm = forwardRef(
     });
 
     useEffect(() => {
-      console.log('isValid changed');
-      console.log({ errors, isValid, isValidating });
       setFormValid(isValid);
-    }, [isValid]);
-
-    useEffect(() => {
-      console.log('errors changed');
-      console.log({ errors, isValid, isValidating });
-    }, [errors]);
-
-    useEffect(() => {
-      console.log('isValidating changed');
-      const { error, value } = outcomeMetricSchema.validate(getValues());
-      console.log({ error, value, errors, isValid, isValidating });
-    }, [isValidating, errors]);
+    }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const initialState = item;
 

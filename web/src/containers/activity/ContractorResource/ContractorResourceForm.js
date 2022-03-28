@@ -21,7 +21,7 @@ import validationSchema from '../../../static/schemas/privateContractor';
 import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
 
 const getCheckedValue = value => {
-  if (value != null) {
+  if (value !== null) {
     return value ? 'yes' : 'no';
   }
   return null;
@@ -432,41 +432,43 @@ const ContractorResourceForm = forwardRef(
             />
           )}
         />
-        {(state.hourly.useHourly === 'yes' ||
-          state.hourly.useHourly === true) && (
+        {state.hourly.useHourly === null ||
+        state.hourly.useHourly === true ||
+        state.hourly.useHourly === 'yes' ? (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
-              <Fragment key={ffy}>
+              <div key={ffy}>
                 <FormLabel>FFY {ffy} Cost</FormLabel>
                 <Dollars>{state.years[ffy]}</Dollars>
-              </Fragment>
+              </div>
+            ))}
+          </p>
+        ) : (
+          <p className="ds-u-margin-bottom--0">
+            {apdFFYs.map(ffy => (
+              <Controller
+                key={ffy}
+                name={`years.${ffy}`}
+                control={control}
+                render={({ field: { onChange, onBlur, name, value } }) => (
+                  <DollarField
+                    name={name}
+                    value={value}
+                    label={`FFY ${ffy} Cost`}
+                    size="medium"
+                    onBlur={onBlur}
+                    onChange={e => {
+                      handleYearCostChange(ffy, e);
+                      onChange(e);
+                    }}
+                    errorMessage={errors?.years?.[ffy]?.message}
+                    errorPlacement="bottom"
+                  />
+                )}
+              />
             ))}
           </p>
         )}
-        {(state.hourly.useHourly === 'no' ||
-          state.hourly.useHourly === false) &&
-          apdFFYs.map(ffy => (
-            <Controller
-              key={ffy}
-              name={`years.${ffy}`}
-              control={control}
-              render={({ field: { onChange, onBlur, name, value } }) => (
-                <DollarField
-                  name={name}
-                  value={value}
-                  label={`FFY ${ffy} Cost`}
-                  size="medium"
-                  onBlur={onBlur}
-                  onChange={e => {
-                    handleYearCostChange(ffy, e);
-                    onChange(e);
-                  }}
-                  errorMessage={errors?.years?.[ffy]?.message}
-                  errorPlacement="bottom"
-                />
-              )}
-            />
-          ))}
         <input
           className="ds-u-visibility--hidden"
           type="submit"
