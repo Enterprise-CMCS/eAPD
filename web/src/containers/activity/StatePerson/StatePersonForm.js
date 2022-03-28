@@ -30,7 +30,7 @@ const StatePersonForm = forwardRef(
   
   const {
     control,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid },
     getValues,
     setValue
   } = useForm({
@@ -50,7 +50,7 @@ const StatePersonForm = forwardRef(
     } else {
       setFormValid(false);
     }
-  }, [isValid, subFormValid])
+  }, [isValid, subFormValid, setFormValid])
 
   const getEditCostForYear = (year, value) => {
     // Manually update the react-hook-form store
@@ -120,7 +120,7 @@ const StatePersonForm = forwardRef(
           control={control}
           name="years"
           render={({
-            field: { onBlur, value, ...props }
+            field: { value, ...props }
           }) => (
             <PersonCostForm
               {...props}

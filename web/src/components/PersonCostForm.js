@@ -23,7 +23,6 @@ const PersonCostForm = ({
   const {
     control,
     formState: { errors, isValid },
-    getValues,
     setValue
   } = useForm({
     defaultValues: {
@@ -50,7 +49,7 @@ const PersonCostForm = ({
   
   useEffect(() => {
     setFormValid(isValid);
-  }, [isValid])
+  }, [isValid, setFormValid])
   
   return (
     <div>
@@ -115,7 +114,8 @@ PersonCostForm.propTypes = {
   fteLabel: PropTypes.string,
   setCost: PropTypes.func.isRequired,
   setFTE: PropTypes.func.isRequired,
-  hint: PropTypes.string
+  hint: PropTypes.string,
+  setFormValid: PropTypes.func.isRequired
 };
 
 PersonCostForm.defaultProps = {
