@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import Dollars from '../components/Dollars';
-import { selectBudgetActivitiesByFundingSource } from '../reducers/budget.selectors';
+import Dollars from '../../../components/Dollars';
+import { selectBudgetActivitiesByFundingSource } from '../../../reducers/budget.selectors';
 
 const categories = [
   { category: 'statePersonnel', title: 'State Staff' },

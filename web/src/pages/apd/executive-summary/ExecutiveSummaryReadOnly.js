@@ -3,16 +3,16 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import ExecutiveSummaryBudget from '../ExecutiveSummaryBudget';
-import Dollars from '../../components/Dollars';
-import Review from '../../components/Review';
-import { t } from '../../i18n';
+import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
+import Dollars from '../../../components/Dollars';
+import Review from '../../../components/Review';
+import { t } from '../../../i18n';
 
-import { selectApdYears } from '../../reducers/apd.selectors';
+import { selectApdYears } from '../../../reducers/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
-} from '../../reducers/budget.selectors';
+} from '../../../reducers/budget.selectors';
 
 class ExecutiveSummary extends PureComponent {
   render() {

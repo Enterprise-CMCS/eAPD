@@ -14,12 +14,12 @@ import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import KeyStatePersonnel from './key-state-personnel/KeyStatePersonnel';
 import ApdSummary from '../../containers/viewOnly/ApdSummary';
-import PreviousActivities from '../../containers/viewOnly/PreviousActivities';
+import PreviousActivities from './previous-activities/PreviousActivities';
 import Activities from '../../containers/viewOnly/activities/All';
-import ScheduleSummary from '../../containers/viewOnly/ScheduleSummary';
-import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
-import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
-import ExecutiveSummary from '../../containers/viewOnly/ExecutiveSummary';
+import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
+import ProposedBudget from './proposed-budget/ProposedBudget';
+import AssuranceAndCompliance from '../../containers/viewOnly/AssurancesAndCompliance';
+import ExecutiveSummary from './executive-summary/ExecutiveSummary';
 import ExportInstructions from '../../containers/viewOnly/Export';
 import Loading from '../../components/Loading';
 
