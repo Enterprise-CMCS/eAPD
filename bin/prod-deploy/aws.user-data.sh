@@ -234,6 +234,8 @@ yum install newrelic-infra -y
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
+# Add New Relic License Key to Infra Monitor config
+sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
@@ -244,17 +246,13 @@ touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
 
-# Add New Relic License Key to Infra Monitor config
-sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
-
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
 # manually do some stuff to it.
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16, and we don't care about minor/patch versions, so always
-# get the latest.
+# We're using Node 16, we care about minor/patch versions
 nvm install 16.13.2
 nvm alias default 16.13.2
 
@@ -274,6 +272,12 @@ yarn install --frozen-lockfile --production=true
 # the knex CLI will work correctly.
 yarn rebuild knex
 
+npm i -g newrelic
+cp node_modules/newrelic/newrelic.js ./newrelic.js
+sed -i 's|My Application|eAPD API|g' newrelic.js
+sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
+sed -i "1 s|^|require('newrelic');\n|" main.js
+
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace the
@@ -282,11 +286,6 @@ yarn rebuild knex
 echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
-yarn global add newrelic
-cp node_modules/newrelic/newrelic.js ./newrelic.js
-sed -i 's|My Application|eAPD API|g' newrelic.js
-sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|require('newrelic');\n|" main.js
 E_USER
 
 # Restart New Relic Infrastructure Monitor
