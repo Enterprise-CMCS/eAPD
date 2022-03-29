@@ -263,9 +263,10 @@ npm i -g pm2
 npm i -g yarn@1.22.17
 # Get the built API code
 cd /app
+echo __BUILDURL__
 curl -o backend.zip -L __BUILDURL__
 unzip backend.zip
-rm backend.zip
+# rm backend.zip
 cd api
 yarn install --frozen-lockfile --production=true
 # There are some platform-dependent binaries that need to be rebuilt before
@@ -286,11 +287,6 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
-yarn global add newrelic
-cp node_modules/newrelic/newrelic.js ./newrelic.js
-sed -i 's|My Application|eAPD API|g' newrelic.js
-sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|require('newrelic');\n|" main.js
 E_USER
 
 # Restart New Relic Infrastructure Monitor
