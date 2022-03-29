@@ -78,6 +78,7 @@ ContractorResourceReview.propTypes = {
     name: PropTypes.string,
     start: PropTypes.string,
     totalCost: PropTypes.number,
+    useHourly: PropTypes.bool,
     years: PropTypes.object
   }).isRequired,
   onDeleteClick: PropTypes.func

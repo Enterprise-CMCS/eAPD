@@ -120,15 +120,15 @@ const Activity = ({ activity, activityIndex }) => {
             <Dollars>{contractor.totalCost}</Dollars>
           </li>
           {Object.entries(contractor.years).map(([year, cost]) => (
-            <li className='ds-u-margin-left--1 ds-u-margin-top--1' key={year}>
+            <li className='ds-u-margin-top--1' key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
               {contractor.useHourly === true && (
                 <Fragment key={uuidv4()}>
                   <div className='subform__container'>
-                    <p>Number of hours: {contractor.hourly.data[year].hours}</p>
+                    <p>Number of hours: {contractor.hourly[year].hours}</p>
                     <p>
                       Hourly rate:{' '}
-                      <Dollars>{contractor.hourly.data[year].rate}</Dollars>
+                      <Dollars>{contractor.hourly[year].rate}</Dollars>
                     </p>
                   </div>
                 </Fragment>
