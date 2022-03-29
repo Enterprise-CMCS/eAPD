@@ -282,7 +282,7 @@ yarn rebuild knex
 echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
-yarn add newrelic --save
+yarn global add newrelic
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
