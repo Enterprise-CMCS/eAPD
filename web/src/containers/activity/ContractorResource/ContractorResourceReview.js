@@ -46,8 +46,7 @@ const ContractorResourceReview = ({
         <li>
           <strong>Total Contract Cost:</strong> <Dollars>{totalCost}</Dollars>
         </li>
-        {apdFFYs.map(ffy => {
-          return hourly.useHourly === false ?
+        {apdFFYs.map(ffy => hourly.useHourly === false ? 
             <li key={ffy}>
               <strong>FFY {ffy} Cost:</strong>
               <div className='ds-u-margin-y--1'>
