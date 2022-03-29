@@ -1,7 +1,6 @@
 import { TextField, Button } from '@cmsgov/design-system';
 
 import PropTypes from 'prop-types';
-import Joi from 'joi';
 import React, { forwardRef, useReducer, useEffect } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -10,25 +9,10 @@ import { connect } from 'react-redux';
 import Icon, { faPlusCircle } from '../../../components/Icons';
 import Review from '../../../components/Review';
 
+import validationSchema from '../../../static/schemas/outcomeMetric';
 import { saveOutcome as actualSaveOutcome } from '../../../actions/editActivity';
 
 import { newOutcomeMetric } from '../../../reducers/activities';
-
-const outcomeMetricSchema = Joi.object({
-  outcome: Joi.string().required().messages({
-    'string.base': 'Outcome is required',
-    'string.empty': 'Outcome is required'
-  }),
-  metrics: Joi.array().items(
-    Joi.object({
-      key: Joi.any(),
-      metric: Joi.string().messages({
-        'string.empty': 'Metric is required',
-        'string.null': 'Metric is required'
-      })
-    })
-  )
-});
 
 const OutcomeAndMetricForm = forwardRef(
   ({ activityIndex, item, index, saveOutcome, setFormValid }, ref) => {
@@ -44,7 +28,7 @@ const OutcomeAndMetricForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(outcomeMetricSchema)
+      resolver: joiResolver(validationSchema)
     });
 
     const { fields, append, remove } = useFieldArray({
