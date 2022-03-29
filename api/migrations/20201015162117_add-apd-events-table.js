@@ -10,14 +10,8 @@ exports.up = async knex =>
       .string('user_id', 64)
       .comment('the Okta ID of the user')
       .notNullable();
-    table
-      .integer('apd_id')
-      .comment('the ID of the APD')
-      .notNullable();
-    table
-      .string('event_type', 128)
-      .comment('the type of event')
-      .notNullable();
+    table.integer('apd_id').comment('the ID of the APD').notNullable();
+    table.string('event_type', 128).comment('the type of event').notNullable();
     table
       .timestamp('event_at')
       .comment('when the event happened')

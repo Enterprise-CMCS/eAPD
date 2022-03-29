@@ -99,7 +99,7 @@ const Activity = ({ activity, activityIndex }) => {
             {contractor.name ||
               'Private Contractor or Vendor Name not specified'}
           </strong>
-          {contractor.hourly.useHourly === true && ' (hourly resource)'}
+          {contractor.useHourly === true && ' (hourly resource)'}
         </p>
         <strong>Procurement Methodology and Description of Services</strong>
         <p
@@ -122,7 +122,7 @@ const Activity = ({ activity, activityIndex }) => {
           {Object.entries(contractor.years).map(([year, cost]) => (
             <li className='ds-u-margin-left--1 ds-u-margin-top--1' key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
-              {contractor.hourly.useHourly === true && (
+              {contractor.useHourly === true && (
                 <Fragment key={uuidv4()}>
                   <div className='subform__container'>
                     <p>Number of hours: {contractor.hourly.data[year].hours}</p>
