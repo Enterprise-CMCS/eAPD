@@ -48,9 +48,9 @@ const ContractorResourceReview = ({
         </li>
         {apdFFYs.map(ffy => {
           return hourly.useHourly === false ?
-            <li className='ds-u-margin-left--3' key={ffy}>
+            <li key={ffy}>
               <strong>FFY {ffy} Cost:</strong>
-              <div className='subform__container ds-u-margin-y--1'>
+              <div className='ds-u-margin-y--1'>
                 <Dollars>{years[ffy]}</Dollars>
               </div>
             </li>
