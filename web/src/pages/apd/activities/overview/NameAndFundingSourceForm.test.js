@@ -9,7 +9,7 @@ import {
 import {
   setActivityName,
   setActivityFundingSource
-} from '../../../actions/editActivity';
+} from '../../../../actions/editActivity';
 
 describe('the activity name and funding source component', () => {
   const props = {

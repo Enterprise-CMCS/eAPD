@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity overview/summary section (in the activity body) renders correctly 1`] = `
+<Subsection
+  headerClassName="header-with-top-margin"
+  id="activity-overview-37"
+  nested={false}
+  resource="activities.overview"
+>
+  <Component
+    index={37}
+    item={
+      Object {
+        "fundingSource": undefined,
+        "name": undefined,
+      }
+    }
+  />
+  <div
+    className="data-entry-box"
+  >
+    <FormLabel
+      className="ds-c-label--full-width"
+      component="label"
+      fieldId="activity-short-overview-field"
+      hint="Details for the activity go in the following sections."
+    >
+      Provide a short overview of the activity.
+    </FormLabel>
+    <Connect(RichText)
+      editorClassName="rte-textarea-l"
+      id="activity-short-overview-field"
+      onSync={[Function]}
+    />
+  </div>
+  <Connect(Schedule)
+    activityIndex={37}
+  />
+  <div
+    className="data-entry-box"
+  >
+    <FormLabel
+      className="ds-c-label--full-width"
+      component="label"
+      fieldId="activity-description-field"
+      hint=""
+    >
+      Include as much detail as is necessary to explain the activity.
+    </FormLabel>
+    <Connect(RichText)
+      editorClassName="rte-textarea-l"
+      id="activity-description-field"
+      onSync={[Function]}
+    />
+  </div>
+  <div
+    className="data-entry-box"
+  >
+    <FormLabel
+      className="ds-c-label--full-width"
+      component="label"
+      fieldId="activity-alternatives-field"
+      hint=""
+    >
+      Statement of alternative considerations and supporting justification
+    </FormLabel>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="activities.overview.activityAlternativesInput"
+    />
+    <Connect(RichText)
+      editorClassName="rte-textarea-l"
+      id="activity-alternatives-field"
+      onSync={[Function]}
+    />
+  </div>
+  <hr />
+</Subsection>
+`;
