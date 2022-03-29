@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity Outcomes and Metrics component renders properly 1`] = `
+<Subsection
+  headerClassName={null}
+  id="activity-outcomes-0"
+  nested={false}
+  resource="activities.outcomes"
+>
+  <hr
+    className="subsection-rule"
+  />
+  <FormAndReviewList
+    activityIndex={0}
+    addButtonText="Add Outcome"
+    allowDeleteAll={true}
+    className={null}
+    errorCheck={false}
+    list={
+      Array [
+        Object {
+          "key": "outcome 1",
+        },
+        Object {
+          "key": "outcome 2",
+        },
+        Object {
+          "key": "outcome 3",
+        },
+      ]
+    }
+    noDataMessage="Add at least one outcome for this activity."
+    onAddClick={[Function]}
+    onCancelClick={[Function]}
+    onDeleteClick={[Function]}
+  />
+</Subsection>
+`;

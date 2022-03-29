@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
+<form
+  index={1}
+  key="activity93-index1-form"
+  onSubmit={[Function]}
+>
+  <TextField
+    className="remove-clearfix"
+    data-cy="outcome-1"
+    hint="Describe a distinct and measurable improvement for this system."
+    key="activity93-index1"
+    label="Outcome"
+    multiline={true}
+    name="outcome"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyUp={[Function]}
+    rows="4"
+    type="text"
+    value="outcome description"
+  />
+  <Review
+    ariaLabel="1. metric 1"
+    editHref={null}
+    key="om key 1"
+    objType="Metric"
+    onBlur={[Function]}
+    onDeleteClick={[Function]}
+    onDeleteLabel="Remove"
+    onEditClick={null}
+    onKeyUp={[Function]}
+    skipConfirmation={true}
+    title={null}
+  >
+    <div
+      className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+      key="om key 1"
+    >
+      <TextField
+        className="remove-clearfix"
+        data-cy="metric-1-0"
+        hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+        id="93-metric0"
+        label="Metric"
+        multiline={true}
+        name="metric"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyUp={[Function]}
+        rows="4"
+        type="text"
+        value="metric 1"
+      />
+    </div>
+  </Review>
+  <Review
+    ariaLabel="2. metric 2"
+    editHref={null}
+    key="om key 2"
+    objType="Metric"
+    onBlur={[Function]}
+    onDeleteClick={[Function]}
+    onDeleteLabel="Remove"
+    onEditClick={null}
+    onKeyUp={[Function]}
+    skipConfirmation={true}
+    title={null}
+  >
+    <div
+      className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+      key="om key 2"
+    >
+      <TextField
+        className="remove-clearfix"
+        data-cy="metric-1-1"
+        hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+        id="93-metric1"
+        label="Metric"
+        multiline={true}
+        name="metric"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyUp={[Function]}
+        rows="4"
+        type="text"
+        value="metric 2"
+      />
+    </div>
+  </Review>
+  <div
+    className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2"
+    style={
+      Object {
+        "width": 485,
+      }
+    }
+  >
+    <Button
+      className="ds-c-button ds-c-button--transparent"
+      component="button"
+      key="activity93-index1-add-metric"
+      onClick={[Function]}
+      type="button"
+    >
+      <FontAwesomeIcon
+        border={false}
+        className="ds-u-margin-right--1"
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Object {
+            "icon": Array [
+              512,
+              512,
+              Array [],
+              "f055",
+              "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm144 276c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92h-92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z",
+            ],
+            "iconName": "plus-circle",
+            "prefix": "fas",
+          }
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
+      Add Metric to Outcome
+    </Button>
+  </div>
+  <input
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
+</form>
+`;

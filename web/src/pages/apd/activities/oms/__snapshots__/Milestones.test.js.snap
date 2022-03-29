@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Milestones component renders correctly 1`] = `
+<Subsection
+  headerClassName={null}
+  id={null}
+  nested={false}
+  resource="activities.milestones"
+>
+  <div
+    className="mb3"
+  >
+    <hr />
+    <FormAndReviewList
+      activityIndex={7}
+      addButtonText="Add Milestone"
+      allowDeleteAll={true}
+      className={null}
+      errorCheck={false}
+      list={
+        Array [
+          Object {
+            "endDate": "1945-05-05",
+            "key": "milestone 1",
+            "milestone": "Liberation Day",
+          },
+        ]
+      }
+      noDataMessage="Add milestone(s) for this activity."
+      onAddClick={[Function]}
+      onCancelClick={[Function]}
+      onDeleteClick={[Function]}
+    />
+  </div>
+</Subsection>
+`;
