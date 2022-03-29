@@ -6,7 +6,7 @@ import { stateDateRangeToDisplay } from '../../../util';
 
 const ContractorResourceReview = ({
   index,
-  item: { description, end, hourly, name, start, totalCost, years },
+  item: { description, end, hourly, name, start, totalCost, useHourly, years },
   expand,
   onDeleteClick
 }) => {
@@ -46,22 +46,19 @@ const ContractorResourceReview = ({
         <li>
           <strong>Total Contract Cost:</strong> <Dollars>{totalCost}</Dollars>
         </li>
-        {apdFFYs.map(ffy => hourly.useHourly === false ? 
+        {apdFFYs.map(ffy => useHourly === false ? 
             <li key={ffy}>
-              <strong>FFY {ffy} Cost:</strong>
-              <div className='ds-u-margin-y--1'>
-                <Dollars>{years[ffy]}</Dollars>
-              </div>
+              <strong>FFY {ffy} Cost:</strong> <Dollars>{years[ffy]}</Dollars>
             </li>
           :
             <li className='ds-u-margin-left--3'>
               <strong>FFY {ffy} Cost:</strong>
               <div className='subform__container ds-u-margin-y--1'>
                 <div className='ds-u-margin-y--1'>
-                  <strong>Number of Hours:</strong> {hourly.data[ffy].hours}
+                  <strong>Number of Hours:</strong> {hourly[ffy].hours}
                 </div>
                 <div className='ds-u-margin-y--1'>
-                  <strong>Hourly Rate:</strong> <Dollars>{hourly.data[ffy].rate}</Dollars>/hour
+                  <strong>Hourly Rate:</strong> <Dollars>{hourly[ffy].rate}</Dollars>/hour
                 </div>
               </div>
             </li>
