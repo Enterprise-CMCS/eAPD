@@ -3,7 +3,9 @@ import React from 'react';
 
 import Dollars from '../../components/Dollars';
 
-const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
+const ApdStateProfile = ({ keyStatePersonnel }) => {
+  const { keyPersonnel } = keyStatePersonnel;
+  
   const costByYear = person =>
     person.hasCosts ? (
       <div>
@@ -83,20 +85,20 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
       <h3>Medicaid director</h3>
       <ul className="ds-c-list--bare">
         <li>
-          <strong>Name: </strong> {stateProfile.medicaidDirector.name}
+          <strong>Name: </strong> {keyStatePersonnel.medicaidDirector.name}
         </li>
         <li>
           <strong>Email: </strong>
-          {stateProfile.medicaidDirector.email}
+          {keyStatePersonnel.medicaidDirector.email}
         </li>
         <li>
           <strong>Phone: </strong>
-          {stateProfile.medicaidDirector.phone}
+          {keyStatePersonnel.medicaidDirector.phone}
         </li>
       </ul>
       <hr className="subsection-rule" />
       <h3>Medicaid office address</h3>
-      <MedicaidOffice medicaidOffice={stateProfile.medicaidOffice} />
+      <MedicaidOffice medicaidOffice={keyStatePersonnel.medicaidOffice} />
       <hr className="section-rule" />
       <h2>Key Personnel and Program Management</h2>
       <ol className="ds-u-padding-left--0" key="key-personnel">
@@ -109,7 +111,7 @@ const ApdStateProfile = ({ stateProfile, keyPersonnel }) => {
 };
 
 ApdStateProfile.propTypes = {
-  stateProfile: PropTypes.shape({
+  keyStatePersonnel: PropTypes.shape({
     medicaidOffice: PropTypes.shape({
       address1: PropTypes.string,
       address2: PropTypes.string,
@@ -117,9 +119,9 @@ ApdStateProfile.propTypes = {
       state: PropTypes.string,
       zip: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     }).isRequired,
-    medicaidDirector: PropTypes.object.isRequired
+    medicaidDirector: PropTypes.object.isRequired,
+    keyPersonnel: PropTypes.array.isRequired
   }).isRequired,
-  keyPersonnel: PropTypes.array.isRequired
 };
 
 export default ApdStateProfile;

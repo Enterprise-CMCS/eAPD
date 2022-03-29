@@ -15,7 +15,7 @@ import {
   setMedicaidOfficeZip
 } from '../actions/editApd';
 import { t } from '../i18n';
-import { selectStateProfile } from '../reducers/apd.selectors';
+import { selectKeyStatePersonnel } from '../reducers/apd.selectors';
 import { selectState } from '../reducers/user';
 import { STATES } from '../util';
 
@@ -32,10 +32,10 @@ const ApdStateProfile = ({
   setCity,
   setState,
   setZip,
-  stateProfile
+  keyStatePersonnel
 }) => {
-  const { medicaidDirector, medicaidOffice } = stateProfile;
-
+  const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
+  
   const handleChange = action => ({ target: { value } }) => {
     action(value);
   };
@@ -127,15 +127,16 @@ ApdStateProfile.propTypes = {
   setCity: PropTypes.func.isRequired,
   setState: PropTypes.func.isRequired,
   setZip: PropTypes.func.isRequired,
-  stateProfile: PropTypes.shape({
+  keyStatePersonnel: PropTypes.shape({
     medicaidDirector: PropTypes.object,
-    medicaidOffice: PropTypes.object
+    medicaidOffice: PropTypes.object,
+    keyPersonnel: PropTypes.array
   }).isRequired
 };
 
 const mapStateToProps = state => ({
   defaultStateID: selectState(state).id,
-  stateProfile: selectStateProfile(state)
+  keyStatePersonnel: selectKeyStatePersonnel(state)
 });
 
 const mapDispatchToProps = {
