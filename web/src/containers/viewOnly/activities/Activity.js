@@ -266,7 +266,7 @@ const Activity = ({ activity, activityIndex }) => {
         Cost Allocation
       </h3>
       <h4>Description of Cost Allocation Methodology</h4>
-      <div
+      <div className='subform__container'
         dangerouslySetInnerHTML={{
           __html: activity.costAllocationNarrative.methodology
         }}
