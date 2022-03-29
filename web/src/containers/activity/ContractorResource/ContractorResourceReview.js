@@ -65,7 +65,7 @@ const ContractorResourceReview = ({
                 </div>
               </div>
             </li>
-        })}
+        )}
       </ul>
     </Review>
   );
