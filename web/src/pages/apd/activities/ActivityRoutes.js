@@ -10,9 +10,9 @@ import ContractorResources from '../../../containers/activity/ContractorResource
 import CostAllocation from '../../../containers/activity/CostAllocation';
 import FFP from '../../../containers/activity/CostAllocateFFP';
 import Costs from '../../../containers/activity/Costs';
-import Milestones from '../../../containers/activity/Milestones';
+import Milestones from './oms/Milestones';
 import Overview from './overview/Overview';
-import Outcomes from '../../../containers/activity/Outcomes';
+import Outcomes from './oms/Outcomes';
 import StandardsAndConditions from './overview/StandardsAndConditions';
 import { Section } from '../../../components/Section';
 

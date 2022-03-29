@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Review from '../../../components/Review';
+import Review from '../../../../components/Review';
 
 const OutcomeAndMetricReview = ({
   item: { metrics, outcome },

@@ -2,37 +2,37 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../../i18n';
+import { t } from '../../../../i18n';
 
-import FormAndReviewList from '../../components/FormAndReviewList';
-import { MilestoneForm, MilestoneReview } from './Milestone';
-import { Subsection } from '../../components/Section';
+import FormAndReviewList from '../../../../components/FormAndReviewList';
+import { MilestoneForm } from './MilestoneForm';
+import { MilestoneReview } from './MilestoneReview';
+import { Subsection } from '../../../../components/Section';
 
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
-import { removeMilestone } from '../../actions/editActivity';
-import { newMilestone } from '../../reducers/activities';
+import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
+import { removeMilestone } from '../../../../actions/editActivity';
+import { newMilestone } from '../../../../reducers/activities';
 
 const Milestone = ({ activity, activityIndex, remove }) => {
-  
   const [localList, setLocalList] = useState(activity.schedule);
-        
+
   useEffect(() => {
-    setLocalList(activity.schedule)
-  }, [activity.schedule])
-  
+    setLocalList(activity.schedule);
+  }, [activity.schedule]);
+
   const handleAdd = () => {
     const newListItem = newMilestone();
     setLocalList([...localList, newListItem]);
   };
-  
+
   const handleDelete = index => {
     remove(activityIndex, index);
   };
-  
+
   const onCancel = () => {
     setLocalList(activity.schedule);
   };
-  
+
   return (
     <Subsection resource="activities.milestones">
       <Fragment>

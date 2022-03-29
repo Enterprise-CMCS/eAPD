@@ -6,13 +6,11 @@ import {
   mapDispatchToProps
 } from './OutcomeAndMetricForm';
 
-import {
-  saveOutcome as actualSaveOutcome
-} from '../../../actions/editActivity';
+import { saveOutcome as actualSaveOutcome } from '../../../../actions/editActivity';
 
 describe('the OutcomeAndMetricForm component', () => {
   const saveOutcome = jest.fn();
-  
+
   const component = shallow(
     <OutcomeAndMetricForm
       activityIndex={93}

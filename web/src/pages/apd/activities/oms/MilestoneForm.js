@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import React, { useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
-import DateField from '../../../components/DateField';
+import DateField from '../../../../components/DateField';
 
-import { saveMilestone as actualSaveMilestone } from '../../../actions/editActivity';
+import { saveMilestone as actualSaveMilestone } from '../../../../actions/editActivity';
 
-import { validateSubForm } from '../../../helpers/subFormValidation';
+import { validateSubForm } from '../../../../helpers/subFormValidation';
 
 const MilestoneForm = forwardRef(
   ({ activityIndex, index, item, saveMilestone }, ref) => {
