@@ -69,7 +69,11 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
       payload: e.target.value
     });
   };
-
+  
+  // Todo: This is a placeholder until this component is updated
+  // to use a joi schema and react-hook-form
+  const setFormValid = () => {}
+  
   const primary = index === 0;
 
   return (
@@ -130,7 +134,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
             checked: state.hasCosts === 'yes',
             checkedChildren: (
               <PersonCostForm
-                items={years.reduce(
+                value={years.reduce(
                   (o, year) => ({
                     ...o,
                     [year]: {
@@ -144,6 +148,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
                 hint="For example: 0.5 = 0.5 FTE = 50% time"
                 setCost={setCostForYear}
                 setFTE={setFTEForYear}
+                setFormValid={setFormValid}
               />
             )
           },

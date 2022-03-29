@@ -386,7 +386,7 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@isaacs/import-jsx@*", "@isaacs/import-jsx@^4.0.1":
+"@isaacs/import-jsx@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@isaacs/import-jsx/-/import-jsx-4.0.1.tgz#493cab5fc543a0703dba7c3f5947d6499028a169"
   integrity sha512-l34FEsEqpdYdGcQjRCxWy+7rHY6euUbOBz9FI+Mq6oQeVhNegHcXFSJxVxrJvOpO31NbnDjS74quKXDlPDearA==
@@ -855,10 +855,10 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react@*":
-  version "17.0.42"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.42.tgz#8242b9219bf8a911c47f248e327206fea3f4ee5a"
-  integrity sha512-nuab3x3CpJ7VFeNA+3HTUuEkvClYHXqWtWd7Ud6AZYW7Z3NH9WKtgU+tFB0ZLcHq+niB/HnzLcaZPqMJ95+k5Q==
+"@types/react@^17":
+  version "17.0.43"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.43.tgz#4adc142887dd4a2601ce730bc56c3436fdb07a55"
+  integrity sha512-8Q+LNpdxf057brvPu1lMtC5Vn7J119xrP1aq4qiaefNioQUYANF/CYeK4NsKorSZyUGJ66g0IM+4bbjwx45o2A==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -3271,7 +3271,7 @@ ini@~1.3.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
-ink@*, ink@^3.2.0:
+ink@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ink/-/ink-3.2.0.tgz#434793630dc57d611c8fe8fffa1db6b56f1a16bb"
   integrity sha512-firNp1q3xxTzoItj/eOOSZQnYSlyrWks5llCTVX37nJ59K3eXbQ8PtzCguqo8YI19EELo5QxaKnJd4VxzhU8tg==
@@ -5568,7 +5568,7 @@ react-reconciler@^0.26.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react@*:
+react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
@@ -6595,7 +6595,7 @@ tr46@~0.0.3:
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
 
-treport@*:
+treport@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/treport/-/treport-3.0.3.tgz#0666bb1b00b6ed6e2ba82ae76b79d77fb03c505a"
   integrity sha512-pCg4Bc0Uv0ntAkYjYJAncA6h6Srv1eEFa5vcak8paahgU1TrJ2rZm0RPZ8E8uycz+P55quzsDnACw01jpWfk7Q==

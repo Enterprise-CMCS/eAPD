@@ -48,6 +48,7 @@ const PersonCostForm = ({
     };
   
   useEffect(() => {
+    console.log("value", value)
     setFormValid(isValid);
   }, [isValid, setFormValid])
   
