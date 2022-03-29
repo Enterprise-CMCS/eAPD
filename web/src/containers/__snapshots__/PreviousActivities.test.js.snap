@@ -28,7 +28,6 @@ exports[`previous activities component renders correctly 1`] = `
         </h4>
       </label>
       <Connect(RichText)
-        content="bob"
         editorClassName="rte-textarea-l"
         id="previous-activity-summary-field"
         onSync={[Function]}

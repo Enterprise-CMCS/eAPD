@@ -6,7 +6,7 @@ import { EDIT_APD } from './symbols';
  */
 export const setPreviousActivitySummary = summary => ({
   type: EDIT_APD,
-  path: '/previousActivitySummary',
+  path: '/previousActivities/previousActivitySummary',
   value: summary
 });
 
@@ -21,7 +21,7 @@ export const setPreviousActivityApprovedExpenseForHITandHIE = (
   expense
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivityExpenses/${year}/hithie/totalApproved`,
+  path: `/previousActivities/actualExpenditures/${year}/hithie/totalApproved`,
   value: expense
 });
 
@@ -36,7 +36,7 @@ export const setPreviousActivityFederalActualExpenseForHITandHIE = (
   expense
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivityExpenses/${year}/hithie/federalActual`,
+  path: `/previousActivities/actualExpenditures/${year}/hithie/federalActual`,
   value: expense
 });
 
@@ -51,7 +51,7 @@ export const setPreviousActivityApprovedExpenseforMMIS50FFP = (
   expense
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivityExpenses/${year}/mmis/50/totalApproved`,
+  path: `/previousActivities/actualExpenditures/${year}/mmis/50/totalApproved`,
   value: expense
 });
 
@@ -66,7 +66,7 @@ export const setPreviousActivityApprovedExpenseforMMIS75FFP = (
   expense
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivityExpenses/${year}/mmis/75/totalApproved`,
+  path: `/previousActivities/actualExpenditures/${year}/mmis/75/totalApproved`,
   value: expense
 });
 
@@ -81,7 +81,7 @@ export const setPreviousActivityApprovedExpenseforMMIS90FFP = (
   expense
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivityExpenses/${year}/mmis/90/totalApproved`,
+  path: `/previousActivities/actualExpenditures/${year}/mmis/90/totalApproved`,
   value: expense
 });
 
@@ -96,7 +96,7 @@ export const setPreviousActivityFederalActualExpenseforMMIS50FFP = (
   expense
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivityExpenses/${year}/mmis/50/federalActual`,
+  path: `/previousActivities/actualExpenditures/${year}/mmis/50/federalActual`,
   value: expense
 });
 
@@ -111,7 +111,7 @@ export const setPreviousActivityFederalActualExpenseforMMIS75FFP = (
   expense
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivityExpenses/${year}/mmis/75/federalActual`,
+  path: `/previousActivities/actualExpenditures/${year}/mmis/75/federalActual`,
   value: expense
 });
 
@@ -126,6 +126,6 @@ export const setPreviousActivityFederalActualExpenseforMMIS90FFP = (
   expense
 ) => ({
   type: EDIT_APD,
-  path: `/previousActivityExpenses/${year}/mmis/90/federalActual`,
+  path: `/previousActivities/actualExpenditures/${year}/mmis/90/federalActual`,
   value: expense
 });

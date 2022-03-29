@@ -80,11 +80,13 @@ describe('incentive payments component', () => {
       mapStateToProps({
         apd: {
           data: {
-            incentivePayments: {
-              ehAmt: { 1: [1, 2, 3, 4], 2: [5, 6, 7, 8] },
-              ehCt: { 1: [9, 10, 11, 12], 2: [13, 14, 15, 16] },
-              epAmt: { 1: [17, 18, 19, 20], 2: [21, 22, 23, 24] },
-              epCt: { 1: [25, 26, 27, 28], 2: [29, 30, 31, 32] }
+            proposedBudget: {
+              incentivePayments: {
+                ehAmt: { 1: [1, 2, 3, 4], 2: [5, 6, 7, 8] },
+                ehCt: { 1: [9, 10, 11, 12], 2: [13, 14, 15, 16] },
+                epAmt: { 1: [17, 18, 19, 20], 2: [21, 22, 23, 24] },
+                epCt: { 1: [25, 26, 27, 28], 2: [29, 30, 31, 32] }
+              },              
             },
             years: ['1', '2']
           }
