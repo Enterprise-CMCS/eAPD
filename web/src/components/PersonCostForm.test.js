@@ -5,7 +5,7 @@ import PersonCostForm from './PersonCostForm';
 
 describe('PersonCostForm component', () => {
   const props = {
-    items: {
+    value: {
       1972: { amt: 100000, perc: 1 },
       1973: { amt: 120000, perc: 0.75 }
     },
