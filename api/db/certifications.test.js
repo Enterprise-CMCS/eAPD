@@ -1,18 +1,21 @@
 const tap = require('tap');
-const knex = require('./knex')
-const { getStateAdminCertifications, archiveStateAdminCertification } = require('./certifications')
+const knex = require('./knex');
+const {
+  getStateAdminCertifications,
+  archiveStateAdminCertification
+} = require('./certifications');
 
-const setupDB = async (certifications, oktaUsers, authAffiliations) =>{
-  await knex('okta_users').insert(oktaUsers)
-  await knex('auth_affiliations').insert(authAffiliations)
-  await knex('state_admin_certifications').insert(certifications)
-}
+const setupDB = async (certifications, oktaUsers, authAffiliations) => {
+  await knex('okta_users').insert(oktaUsers);
+  await knex('auth_affiliations').insert(authAffiliations);
+  await knex('state_admin_certifications').insert(certifications);
+};
 
 const OKTA_USERS = {
   emailMatch: {
     user_id: 'emailMatch',
     email: 'matchme@email.com',
-    displayName:'Not a match',
+    displayName: 'Not a match',
     secondEmail: '',
     primaryPhone: '',
     mobilePhone: '',
@@ -21,13 +24,13 @@ const OKTA_USERS = {
   nameMatch: {
     user_id: 'nameMatch',
     email: 'idontmatch@email.com',
-    displayName:'Match Flynn',
+    displayName: 'Match Flynn',
     secondEmail: '',
     primaryPhone: '',
     mobilePhone: '',
     login: 'namematchusername'
   }
-}
+};
 
 const AUTH_AFFILIATIONS = {
   emailMatch: {
@@ -42,13 +45,13 @@ const AUTH_AFFILIATIONS = {
     status: 'approved',
     username: 'namematchusername'
   }
-}
+};
 
 // This query is not that complicated, except for the part where it guesses how many matches
 // might exist for a given state admin certifications. As a result that is what the tests focus on.
 tap.test('certifications query tests', async sacQueryTest => {
-  let stateStaffRoleId
-  let fedAdminRoleId
+  let stateStaffRoleId;
+  let fedAdminRoleId;
 
   sacQueryTest.before(async () => {
     stateStaffRoleId = await knex('auth_roles')
@@ -60,13 +63,13 @@ tap.test('certifications query tests', async sacQueryTest => {
       .where({ name: 'eAPD Federal Admin' })
       .first()
       .then(role => role.id);
-  })
+  });
 
   sacQueryTest.beforeEach(async () => {
-    await knex('state_admin_certifications').delete()
-    await knex('auth_affiliations').delete()
-    await knex('okta_users').delete()
-  })
+    await knex('state_admin_certifications').delete();
+    await knex('auth_affiliations').delete();
+    await knex('okta_users').delete();
+  });
 
   sacQueryTest.test('query returns all expected fields', async t => {
     // insert a state admin certification
@@ -80,8 +83,8 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedOn: new Date(),
       ffy: 2022,
       status: 'active'
-    }
-    
+    };
+
     const expectedFields = [
       'id',
       'name',
@@ -92,23 +95,27 @@ tap.test('certifications query tests', async sacQueryTest => {
       'fileUrl',
       'ffy',
       'potentialMatches'
-    ]
-    const oktaUsers = OKTA_USERS.emailMatch
+    ];
+    const oktaUsers = OKTA_USERS.emailMatch;
 
-    const authAffiliations = { role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch }
+    const authAffiliations = {
+      role_id: stateStaffRoleId,
+      ...AUTH_AFFILIATIONS.emailMatch
+    };
 
-    await setupDB(certifications, oktaUsers, authAffiliations)
+    await setupDB(certifications, oktaUsers, authAffiliations);
 
-    const results = await getStateAdminCertifications()
-    t.same(results.length, 1)
+    const results = await getStateAdminCertifications();
+    t.same(results.length, 1);
     // every expected field needs to be there
-    t.ok(expectedFields.every(field =>{
-      return Object.keys(results[0]).includes(field)
-    }))
+    t.ok(
+      expectedFields.every(field => {
+        return Object.keys(results[0]).includes(field);
+      })
+    );
     // if every expected field is there, this will fail if there are extra fields
-    t.ok(Object.keys(results[0]).length === expectedFields.length)
-
-  })
+    t.ok(Object.keys(results[0]).length === expectedFields.length);
+  });
 
   sacQueryTest.test('potentialMatches based on an email', async t => {
     // insert a state admin certification
@@ -122,21 +129,22 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedOn: new Date(),
       ffy: 2022,
       status: 'active'
+    };
+    const oktaUsers = OKTA_USERS.emailMatch;
 
-    }
-    const oktaUsers = OKTA_USERS.emailMatch
+    const authAffiliations = {
+      role_id: stateStaffRoleId,
+      ...AUTH_AFFILIATIONS.emailMatch
+    };
 
-    const authAffiliations = { role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch }
+    await setupDB(certifications, oktaUsers, authAffiliations);
 
-    await setupDB(certifications, oktaUsers, authAffiliations)
+    const results = await getStateAdminCertifications();
+    t.same(results.length, 1);
+    t.same(results[0].potentialMatches, 1);
+  });
 
-    const results = await getStateAdminCertifications()
-    t.same(results.length, 1)
-    t.same(results[0].potentialMatches, 1)
-
-  })
-
-  sacQueryTest.test('potentialMatches based on a name', async t =>{
+  sacQueryTest.test('potentialMatches based on a name', async t => {
     // insert a state admin certification
     const certifications = {
       email: 'cantmatchme@email.com',
@@ -148,20 +156,23 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedOn: new Date(),
       ffy: 2022,
       status: 'active'
-    }
+    };
 
-    const oktaUsers = OKTA_USERS.nameMatch
+    const oktaUsers = OKTA_USERS.nameMatch;
 
-    const authAffiliations = { role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.nameMatch}
+    const authAffiliations = {
+      role_id: stateStaffRoleId,
+      ...AUTH_AFFILIATIONS.nameMatch
+    };
 
-    await setupDB(certifications, oktaUsers, authAffiliations)
+    await setupDB(certifications, oktaUsers, authAffiliations);
 
-    const results = await getStateAdminCertifications()
-    t.same(results.length, 1)
-    t.same(results[0].potentialMatches, 1)
-  })
+    const results = await getStateAdminCertifications();
+    t.same(results.length, 1);
+    t.same(results[0].potentialMatches, 1);
+  });
 
-  sacQueryTest.test('fails to find any potentialMatches', async t =>{
+  sacQueryTest.test('fails to find any potentialMatches', async t => {
     // insert a state admin certification
     const certifications = {
       email: 'nomatches@email.com',
@@ -173,169 +184,204 @@ tap.test('certifications query tests', async sacQueryTest => {
       uploadedOn: new Date(),
       ffy: 2022,
       status: 'active'
+    };
+
+    const oktaUsers = OKTA_USERS.nameMatch;
+
+    const authAffiliations = {
+      role_id: stateStaffRoleId,
+      ...AUTH_AFFILIATIONS.nameMatch
+    };
+
+    await setupDB(certifications, oktaUsers, authAffiliations);
+
+    const results = await getStateAdminCertifications();
+    t.same(results.length, 1);
+    t.same(results[0].potentialMatches, 0);
+  });
+
+  sacQueryTest.test(
+    'potentialMatches based on an email and a name',
+    async t => {
+      // insert a state admin certification
+      const certifications = {
+        email: 'matchme@email.com',
+        name: 'Match Flynn',
+        state: 'ak',
+        fileUrl: '/auth/certifications/files/whatever.pdf',
+        phone: '4438675309',
+        uploadedBy: 'unitTest',
+        uploadedOn: new Date(),
+        ffy: 2022,
+        status: 'active'
+      };
+      const oktaUsers = [OKTA_USERS.nameMatch, OKTA_USERS.emailMatch];
+
+      const authAffiliations = [
+        { role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch },
+        { role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.nameMatch }
+      ];
+
+      await setupDB(certifications, oktaUsers, authAffiliations);
+
+      const results = await getStateAdminCertifications();
+      t.same(results.length, 1);
+      t.same(results[0].potentialMatches, 2);
     }
+  );
 
-    const oktaUsers = OKTA_USERS.nameMatch
+  sacQueryTest.test(
+    'does not find a federal admin as a potentialMatch',
+    async t => {
+      // insert a state admin certification
+      const certifications = {
+        email: 'matchme@email.com',
+        name: 'Cant match me Flynn',
+        state: 'ak',
+        fileUrl: '/auth/certifications/files/whatever.pdf',
+        phone: '4438675309',
+        uploadedBy: 'unitTest',
+        uploadedOn: new Date(),
+        ffy: 2022,
+        status: 'active'
+      };
+      const oktaUsers = OKTA_USERS.emailMatch;
 
-    const authAffiliations = { role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.nameMatch}
+      const authAffiliations = {
+        role_id: fedAdminRoleId,
+        ...AUTH_AFFILIATIONS.emailMatch
+      };
 
-    await setupDB(certifications, oktaUsers, authAffiliations)
+      await setupDB(certifications, oktaUsers, authAffiliations);
 
-    const results = await getStateAdminCertifications()
-    t.same(results.length, 1)
-    t.same(results[0].potentialMatches, 0)
-  })
-
-  sacQueryTest.test('potentialMatches based on an email and a name', async t =>{
-    // insert a state admin certification
-    const certifications = {
-      email: 'matchme@email.com',
-      name: 'Match Flynn',
-      state: 'ak',
-      fileUrl: '/auth/certifications/files/whatever.pdf',
-      phone: '4438675309',
-      uploadedBy: 'unitTest',
-      uploadedOn: new Date(),
-      ffy: 2022,
-      status: 'active'
+      const results = await getStateAdminCertifications();
+      t.same(results.length, 1);
+      t.same(results[0].potentialMatches, 0);
     }
-    const oktaUsers = [OKTA_USERS.nameMatch, OKTA_USERS.emailMatch]
+  );
 
+  sacQueryTest.test(
+    'returns an error when attempting to archive a matched certification',
+    async t => {
+      const certifications = {
+        id: '1001',
+        email: 'matchme@email.com',
+        name: 'Cant match me Flynn',
+        state: 'ak',
+        fileUrl: '/auth/certifications/files/whatever.pdf',
+        phone: '4438675309',
+        uploadedBy: 'unitTest',
+        uploadedOn: new Date(),
+        ffy: 2022,
+        affiliationId: '1234',
+        status: 'active'
+      };
 
-    const authAffiliations = [
-      {role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch},
-      {role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.nameMatch},
-    ]
+      const authAffiliations = [
+        {
+          id: '1234',
+          role_id: stateStaffRoleId,
+          ...AUTH_AFFILIATIONS.emailMatch
+        }
+      ];
 
-    await setupDB(certifications, oktaUsers, authAffiliations)
+      const oktaUsers = OKTA_USERS.emailMatch;
 
-    const results = await getStateAdminCertifications()
-    t.same(results.length, 1)
-    t.same(results[0].potentialMatches, 2)
-  })
+      await setupDB(certifications, oktaUsers, authAffiliations);
 
-  sacQueryTest.test('does not find a federal admin as a potentialMatch', async t =>{
-    // insert a state admin certification
-    const certifications = {
-      email: 'matchme@email.com',
-      name: 'Cant match me Flynn',
-      state: 'ak',
-      fileUrl: '/auth/certifications/files/whatever.pdf',
-      phone: '4438675309',
-      uploadedBy: 'unitTest',
-      uploadedOn: new Date(),
-      ffy: 2022,
-      status: 'active'
+      const results = await archiveStateAdminCertification({
+        id: '1001',
+        archived_by: 'emailMatch'
+      });
+
+      t.same(results.error, 'certification is already matched');
     }
-    const oktaUsers = OKTA_USERS.emailMatch
+  );
 
-    const authAffiliations = { role_id: fedAdminRoleId, ...AUTH_AFFILIATIONS.emailMatch}
+  sacQueryTest.test(
+    'returns an error when attempting to archive an already archived certification',
+    async t => {
+      const certifications = {
+        id: '1001',
+        email: 'matchme@email.com',
+        name: 'Cant match me Flynn',
+        state: 'ak',
+        fileUrl: '/auth/certifications/files/whatever.pdf',
+        phone: '4438675309',
+        uploadedBy: 'unitTest',
+        uploadedOn: new Date(),
+        ffy: 2022,
+        affiliationId: null,
+        status: 'archived'
+      };
 
-    await setupDB(certifications, oktaUsers, authAffiliations)
+      const authAffiliations = [
+        {
+          id: '1234',
+          role_id: stateStaffRoleId,
+          ...AUTH_AFFILIATIONS.emailMatch
+        }
+      ];
 
-    const results = await getStateAdminCertifications()
-    t.same(results.length, 1)
-    t.same(results[0].potentialMatches, 0)
-  })
-  
-  sacQueryTest.test('returns an error when attempting to archive a matched certification', async t => {
-    const certifications = {
-      id: '1001',
-      email: 'matchme@email.com',
-      name: 'Cant match me Flynn',
-      state: 'ak',
-      fileUrl: '/auth/certifications/files/whatever.pdf',
-      phone: '4438675309',
-      uploadedBy: 'unitTest',
-      uploadedOn: new Date(),
-      ffy: 2022,
-      affiliationId: '1234',
-      status: 'active'
+      const oktaUsers = OKTA_USERS.emailMatch;
+
+      await setupDB(certifications, oktaUsers, authAffiliations);
+
+      const results = await archiveStateAdminCertification({
+        id: '1001',
+        archived_by: 'emailMatch'
+      });
+
+      t.same(results.error, 'certification is already archived');
     }
+  );
 
-    const authAffiliations = [
-      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
-    ]
-    
-    const oktaUsers = OKTA_USERS.emailMatch
-    
-    await setupDB(certifications, oktaUsers, authAffiliations)
-    
-    const results = await archiveStateAdminCertification({
-      id: '1001',
-      archived_by: 'emailMatch'
-    })
-    
-    t.same(results.error, 'certification is already matched')
-  })
+  sacQueryTest.test(
+    'updates a certification to archived with valid data',
+    async t => {
+      const certifications = {
+        id: '1001',
+        email: 'matchme@email.com',
+        name: 'Cant match me Flynn',
+        state: 'ak',
+        fileUrl: '/auth/certifications/files/whatever.pdf',
+        phone: '4438675309',
+        uploadedBy: 'unitTest',
+        uploadedOn: new Date(),
+        ffy: 2022,
+        affiliationId: null,
+        status: 'active'
+      };
 
-  sacQueryTest.test('returns an error when attempting to archive an already archived certification', async t => {
-    const certifications = {
-      id: '1001',
-      email: 'matchme@email.com',
-      name: 'Cant match me Flynn',
-      state: 'ak',
-      fileUrl: '/auth/certifications/files/whatever.pdf',
-      phone: '4438675309',
-      uploadedBy: 'unitTest',
-      uploadedOn: new Date(),
-      ffy: 2022,
-      affiliationId: null,
-      status: 'archived'
+      const authAffiliations = [
+        {
+          id: '1234',
+          role_id: stateStaffRoleId,
+          ...AUTH_AFFILIATIONS.emailMatch
+        }
+      ];
+
+      const oktaUsers = OKTA_USERS.emailMatch;
+
+      await setupDB(certifications, oktaUsers, authAffiliations);
+
+      await archiveStateAdminCertification({
+        id: '1001',
+        archived_by: 'emailMatch'
+      });
+
+      const results = await knex('state_admin_certifications')
+        .select('status')
+        .where('id', certifications.id)
+        .first()
+        .then(row => row);
+
+      t.same(results.status, 'archived');
     }
+  );
 
-    const authAffiliations = [
-      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
-    ]
-    
-    const oktaUsers = OKTA_USERS.emailMatch
-    
-    await setupDB(certifications, oktaUsers, authAffiliations)
-    
-    const results = await archiveStateAdminCertification({
-      id: '1001',
-      archived_by: 'emailMatch'
-    })
-    
-    t.same(results.error, 'certification is already archived')
-  })
-
-  sacQueryTest.test('updates a certification to archived with valid data', async t => {
-    const certifications = {
-      id: '1001',
-      email: 'matchme@email.com',
-      name: 'Cant match me Flynn',
-      state: 'ak',
-      fileUrl: '/auth/certifications/files/whatever.pdf',
-      phone: '4438675309',
-      uploadedBy: 'unitTest',
-      uploadedOn: new Date(),
-      ffy: 2022,
-      affiliationId: null,
-      status: 'active'
-    }
-    
-    const authAffiliations = [
-      {id: '1234', role_id: stateStaffRoleId, ...AUTH_AFFILIATIONS.emailMatch}
-    ]
-    
-    const oktaUsers = OKTA_USERS.emailMatch
-    
-    await setupDB(certifications, oktaUsers, authAffiliations)
-    
-    await archiveStateAdminCertification({
-      id: '1001',
-      archived_by: 'emailMatch'
-    })
-
-    const results = await knex('state_admin_certifications').select('status').where('id', certifications.id).first().then((row) => row);
-
-    t.same(results.status, 'archived')
-  })
-
-
-  sacQueryTest.teardown(() =>{
-    knex.destroy()
-    return null
-  })
-})
+  sacQueryTest.teardown(async () => {
+    await knex.destroy();
+    return null;
+  });
+});

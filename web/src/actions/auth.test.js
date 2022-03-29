@@ -948,10 +948,8 @@ describe('auth actions', () => {
 
       const expectedActions = [
         {
-          type: actions.UPDATE_EXPIRATION,
-          data: expiresAt
+          type: actions.LATEST_ACTIVITY,
         },
-        { type: actions.LATEST_ACTIVITY },
         {
           type: actions.UPDATE_USER_INFO,
           data: {
