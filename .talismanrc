@@ -15,7 +15,7 @@ fileignoreconfig:
     checksum: 32b5d0e09efe9bb79b2a81e3cabb06925417f5b5369fbb1fe33d65b40af90b2a
   - filename: web/src/containers/StateAccessRequest.js
     checksum: 247db44f1a364108397b2ce4a2e096c7a6650eb9b79ad05dd64bea5f71a697f8
-  - filename: integrationTests/cypress/helpers/apd/proposed-budget-calculations.js
+  - filename: e2e/cypress/helpers/apd/proposed-budget-calculations.js
     checksum: a468dcd1f872efb7b3816b2380200def3218961cae63b3d33b2bf7fa09da2984
   - filename: api/db/mongo-init.sh
     checksum: e23b0467fead83a35f17eebd56d5df9c7e07b48b6473d3bf51676252fe4b491c
