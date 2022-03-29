@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
-import Review from '../../../components/Review';
+import Review from '../../../../components/Review';
 
 const NameAndFundingSourceReview = ({
   disableExpand,

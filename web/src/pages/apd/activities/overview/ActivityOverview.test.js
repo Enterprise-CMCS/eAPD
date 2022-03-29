@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as EntryPage, mapStateToProps } from './EntryPage';
+import { plain as EntryPage, mapStateToProps } from './ActivityOverview';
 
 jest.mock('react-router-dom', () => ({
   useParams: jest.fn().mockReturnValue({ activityIndex: 2 })

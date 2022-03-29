@@ -10,7 +10,7 @@ import {
 import {
   setActivityStandardAndConditionDoesNotSupportExplanation,
   setActivityStandardAndConditionSupportExplanation
-} from '../../actions/editActivity';
+} from '../../../../actions/editActivity';
 
 describe('the Schedule (milestones) component', () => {
   const props = {
@@ -70,7 +70,8 @@ describe('the Schedule (milestones) component', () => {
 
     it('map dispatch to props', () => {
       expect(mapDispatchToProps).toEqual({
-        setDoesNotSupport: setActivityStandardAndConditionDoesNotSupportExplanation,
+        setDoesNotSupport:
+          setActivityStandardAndConditionDoesNotSupportExplanation,
         setSupport: setActivityStandardAndConditionSupportExplanation
       });
     });

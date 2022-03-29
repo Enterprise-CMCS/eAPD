@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import {
   setActivityEndDate,
   setActivityStartDate
-} from '../../actions/editActivity';
-import { Subsection } from '../../components/Section';
-import DateField from '../../components/DateField';
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
-import { stateDateToDisplay } from '../../util';
+} from '../../../../actions/editActivity';
+import { Subsection } from '../../../../components/Section';
+import DateField from '../../../../components/DateField';
+import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
+import { stateDateToDisplay } from '../../../../util';
 
 const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
   const handleActivityStartChange = useCallback(
