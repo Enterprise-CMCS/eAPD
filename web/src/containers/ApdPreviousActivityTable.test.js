@@ -58,25 +58,27 @@ describe('apd previous activity table, mmis component', () => {
       mapStateToProps({
         apd: {
           data: {
-            previousActivityExpenses: {
-              1: {
-                hithie: {
-                  federalActual: 1,
-                  totalApproved: 2
+            previousActivities: {
+              actualExpenditures: {
+                1: {
+                  hithie: {
+                    federalActual: 1,
+                    totalApproved: 2
+                  },
+                  mmis: {
+                    some: 'junk'
+                  }
                 },
-                mmis: {
-                  some: 'junk'
+                2: {
+                  hithie: {
+                    federalActual: 3,
+                    totalApproved: 4
+                  },
+                  mmis: {
+                    more: 'garbage'
+                  }
                 }
-              },
-              2: {
-                hithie: {
-                  federalActual: 3,
-                  totalApproved: 4
-                },
-                mmis: {
-                  more: 'garbage'
-                }
-              }
+              }              
             }
           }
         }

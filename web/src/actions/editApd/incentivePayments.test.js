@@ -10,7 +10,7 @@ describe('APD edit actions for incentive payments', () => {
   it('dispatches an action for setting the EH count for a fiscal year and quarter', () => {
     expect(setIncentiveEHCount('year', 'quarter', 34)).toEqual({
       type: EDIT_APD,
-      path: '/incentivePayments/ehCt/year/quarter',
+      path: '/proposedBudget/incentivePayments/ehCt/year/quarter',
       value: 34
     });
   });
@@ -18,7 +18,7 @@ describe('APD edit actions for incentive payments', () => {
   it('dispatches an action for setting the EH payment for a fiscal year and quarter', () => {
     expect(setIncentiveEHPayment('year', 'quarter', 74)).toEqual({
       type: EDIT_APD,
-      path: '/incentivePayments/ehAmt/year/quarter',
+      path: '/proposedBudget/incentivePayments/ehAmt/year/quarter',
       value: 74
     });
   });
@@ -26,7 +26,7 @@ describe('APD edit actions for incentive payments', () => {
   it('dispatches an action for setting the EC count for a fiscal year and quarter', () => {
     expect(setIncentiveEPCount('year', 'quarter', 735)).toEqual({
       type: EDIT_APD,
-      path: '/incentivePayments/epCt/year/quarter',
+      path: '/proposedBudget/incentivePayments/epCt/year/quarter',
       value: 735
     });
   });
@@ -34,7 +34,7 @@ describe('APD edit actions for incentive payments', () => {
   it('dispatches an action for setting the EC payment for a fiscal year and quarter', () => {
     expect(setIncentiveEPPayment('year', 'quarter', 24)).toEqual({
       type: EDIT_APD,
-      path: '/incentivePayments/epAmt/year/quarter',
+      path: '/proposedBudget/incentivePayments/epAmt/year/quarter',
       value: 24
     });
   });
