@@ -864,6 +864,9 @@ jobs:
             yarn install --frozen-lockfile --production=true
             cd ..
             zip -r /tmp/backend.zip api/*
+          name: Creaet Frontend Build Artifact Zip
+          working_directory: ~/project
+          command: |
             zip -r /tmp/frontend.zip web/dist/*
       - run:
           name: persist build URL to workspace
