@@ -1,6 +1,6 @@
 {
   "name": "@cms-eapd/e2e",
-  "version": "1.0.0",
+  "version": "4.0.3",
   "description": "Cypress tests for the EAPD tool",
   "main": "index.js",
   "scripts": {

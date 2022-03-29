@@ -1,5 +1,6 @@
 {
   "name": "@cms-eapd/web",
+  "version": "4.0.3",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
   "scripts": {
