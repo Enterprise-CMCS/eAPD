@@ -45,22 +45,22 @@ export const getPatchesToAddYear = (state, year) => {
     { op: 'replace', path: '/years', value: years },
     {
       op: 'add',
-      path: `/incentivePayments/ehAmt/${year}`,
+      path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     {
       op: 'add',
-      path: `/incentivePayments/ehCt/${year}`,
+      path: `/proposedBudget/incentivePayments/ehCt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     {
       op: 'add',
-      path: `/incentivePayments/epAmt/${year}`,
+      path: `/proposedBudget/incentivePayments/epAmt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     },
     {
       op: 'add',
-      path: `/incentivePayments/epCt/${year}`,
+      path: `/proposedBudget/incentivePayments/epCt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     }
   ];
@@ -69,7 +69,7 @@ export const getPatchesToAddYear = (state, year) => {
     activity.contractorResources.forEach((_, i) => {
       patches.push({
         op: 'add',
-        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/data/${year}`,
+        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`,
         value: contractorDefaultHourly()
       });
       patches.push({
@@ -114,16 +114,16 @@ export const getPatchesToAddYear = (state, year) => {
     });
   });
 
-  state.data.keyPersonnel.forEach((_, i) => {
+  state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
     patches.push({
       op: 'add',
-      path: `/keyPersonnel/${i}/costs/${year}`,
+      path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`,
       value: 0
     });
 
     patches.push({
       op: 'add',
-      path: `/keyPersonnel/${i}/fte/${year}`,
+      path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
       value: 0
     });
   });
@@ -138,19 +138,19 @@ export const getPatchesToRemoveYear = (state, year) => {
     { op: 'remove', path: `/years/${index}` },
     {
       op: 'remove',
-      path: `/incentivePayments/ehAmt/${year}`
+      path: `/proposedBudget/incentivePayments/ehAmt/${year}`
     },
     {
       op: 'remove',
-      path: `/incentivePayments/ehCt/${year}`
+      path: `/proposedBudget/incentivePayments/ehCt/${year}`
     },
     {
       op: 'remove',
-      path: `/incentivePayments/epAmt/${year}`
+      path: `/proposedBudget/incentivePayments/epAmt/${year}`
     },
     {
       op: 'remove',
-      path: `/incentivePayments/epCt/${year}`
+      path: `/proposedBudget/incentivePayments/epCt/${year}`
     }
   ];
 
@@ -158,7 +158,7 @@ export const getPatchesToRemoveYear = (state, year) => {
     activity.contractorResources.forEach((_, i) => {
       patches.push({
         op: 'remove',
-        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/data/${year}`
+        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`
       });
       patches.push({
         op: 'remove',
@@ -196,15 +196,15 @@ export const getPatchesToRemoveYear = (state, year) => {
     });
   });
 
-  state.data.keyPersonnel.forEach((_, i) => {
+  state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
     patches.push({
       op: 'remove',
-      path: `/keyPersonnel/${i}/costs/${year}`
+      path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`
     });
 
     patches.push({
       op: 'remove',
-      path: `/keyPersonnel/${i}/fte/${year}`
+      path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`
     });
   });
 
@@ -273,14 +273,14 @@ export const getAPDYearRange = ({
 
 export const getPatchesForAddingItem = (state, path) => {
   switch (path) {
-    case '/keyPersonnel/-':
+    case '/keyStatePersonnel/keyPersonnel/-':
       return [
         {
           op: 'add',
           path,
           value: getKeyPersonnel(
             state.data.years,
-            !state.data.keyPersonnel || state.data.keyPersonnel.length === 0
+            !state.data.keyStatePersonnel?.keyPersonnel || state.data.keyStatePersonnel.keyPersonnel.length === 0
           )
         }
       ];
@@ -311,9 +311,9 @@ export const getPatchesForAddingItem = (state, path) => {
   }
 };
 
-const getFederalCitations = federalCitations =>
-  Object.values(federalCitations).every(regs => regs.length > 0)
-    ? federalCitations
+const getAssurancesAndCompliances = assurancesAndCompliances =>
+  Object.values(assurancesAndCompliances).every(regs => regs.length > 0)
+    ? assurancesAndCompliances
     : initialAssurances;
 
 const initialState = {
@@ -353,20 +353,20 @@ const reducer = (state = initialState, action) => {
         ])
       };
     }
-
+    
     case EDIT_APD_NAME: {
       return {
-        ...state,
-        byId: {
-          ...state.byId,
-          [action.id]: {
-            ...state.byId[action.id],
-            name: action.name
-          }
+       ...state,
+       byId: {
+         ...state.byId,
+         [action.id]: {
+           ...state.byId[action.id],
+           name: action.name
+         }
         }
       };
     }
-
+    
     case REMOVE_APD_ITEM: {
       return {
         ...state,
@@ -480,11 +480,14 @@ const reducer = (state = initialState, action) => {
               key: generateKey()
             })
           ),
-          federalCitations: getFederalCitations(action.apd.federalCitations),
-          keyPersonnel: action.apd.keyPersonnel.map(kp => ({
+          assurancesAndCompliances: getAssurancesAndCompliances(action.apd.assurancesAndCompliances),
+          keyStatePersonnel: {
+            ...action.apd.keyStatePersonnel,
+            keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
             ...kp,
             key: generateKey()
-          })),
+            }))
+          },
           created: getHumanDatestamp(action.apd.created),
           updated: getHumanTimestamp(action.apd.updated),
           yearOptions: defaultAPDYearOptions

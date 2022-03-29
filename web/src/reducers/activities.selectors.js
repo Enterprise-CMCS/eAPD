@@ -58,7 +58,10 @@ export const selectActivityCostSummary = createSelector(
     // Program Administration. For other activities, just returns empty arrays.
     {
       apd: {
-        data: { keyPersonnel, years }
+        data: { 
+          keyStatePersonnel: { keyPersonnel },
+          years
+        }
       }
     },
     { activityIndex }

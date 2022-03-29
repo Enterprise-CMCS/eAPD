@@ -127,10 +127,10 @@ const Activity = ({ activity, activityIndex }) => {
               {(contractor.hourly.useHourly === true ||
                 contractor.hourly.useHourly === 'yes') && (
                 <Fragment key={uuidv4()}>
-                  <p>Number of hours: {contractor.hourly.data[year].hours}</p>
+                  <p>Number of hours: {contractor.hourly[year].hours}</p>
                   <p>
                     Hourly rate:{' '}
-                    <Dollars>{contractor.hourly.data[year].rate}</Dollars>
+                    <Dollars>{contractor.hourly[year].rate}</Dollars>
                   </p>
                 </Fragment>
               )}

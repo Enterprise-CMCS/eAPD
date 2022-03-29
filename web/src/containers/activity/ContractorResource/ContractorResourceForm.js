@@ -67,24 +67,16 @@ const ContractorResourceForm = forwardRef(
         case 'setHourly':
           return {
             ...state,
-            hourly: {
-              useHourly: action.value,
-              data: {
-                ...state.hourly.data
-              }
-            }
+            useHourly: action.value
           };
         case 'updateHourlyHours':
           return {
             ...state,
             hourly: {
               ...state.hourly,
-              data: {
-                ...state.hourly.data,
-                [action.year]: {
-                  ...state.hourly.data[action.year],
-                  hours: action.value
-                }
+              [action.year]: {
+                ...state.hourly[action.year],
+                hours: action.value
               }
             }
           };
@@ -93,12 +85,9 @@ const ContractorResourceForm = forwardRef(
             ...state,
             hourly: {
               ...state.hourly,
-              data: {
-                ...state.hourly.data,
-                [action.year]: {
-                  ...state.hourly.data[action.year],
-                  rate: action.value
-                }
+              [action.year]: {
+                ...state.hourly[action.year],
+                rate: action.value
               }
             }
           };
