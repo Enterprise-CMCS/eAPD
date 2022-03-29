@@ -173,13 +173,13 @@ describe('APD reducer', () => {
         // them out a window. The king literally died of shock. This was the
         // First Defenestration of Prague.
         created: '1419-07-30T00:00:00Z',
-        assurancesAndCompliances: {
+        federalCitations: {
           procurement: [],
           recordsAccess: [],
           softwareRights: [],
           security: []
         },
-        keyStatePersonnel: { keyPersonnel: [{ name: 'key person 1' }] },
+        keyPersonnel: [{ name: 'key person 1' }],
         value: `hurr hurr i'm a burr`,
         // Some nobles are tossed out a window in the Second Defenestration
         // of Prague, kicking off the Thirty Years' War
@@ -228,15 +228,13 @@ describe('APD reducer', () => {
             }
           ],
           created: 'July 30, 1419',
-          assurancesAndCompliances: regulations,
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                name: 'key person 1'
-              }
-            ]            
-          },
+          federalCitations: regulations,
+          keyPersonnel: [
+            {
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              name: 'key person 1'
+            }
+          ],
           value: `hurr hurr i'm a burr`,
           updated: 'May 23, 1618, 10:30 AM GMT',
           yearOptions: ['1990', '1991', '1992']
@@ -245,8 +243,8 @@ describe('APD reducer', () => {
     });
 
     it('sets keys and preserves the federal citations if they are defined', () => {
-      action.apd.assurancesAndCompliances = { key: 'value' };
-      
+      action.apd.federalCitations = { key: 'value' };
+
       expect(apd(initialState, action)).toEqual({
         ...initialState,
         data: {
@@ -287,15 +285,13 @@ describe('APD reducer', () => {
             }
           ],
           created: 'July 30, 1419',
-          assurancesAndCompliances: { key: 'value' },
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                name: 'key person 1'
-              }
-            ]            
-          },
+          federalCitations: { key: 'value' },
+          keyPersonnel: [
+            {
+              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              name: 'key person 1'
+            }
+          ],
           value: `hurr hurr i'm a burr`,
           updated: 'May 23, 1618, 10:30 AM GMT',
           yearOptions: ['1990', '1991', '1992']
@@ -330,8 +326,10 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  1742: { hours: 20, rate: 22 },
-                  1743: { hours: 25, rate: 27 }
+                  data: {
+                    1742: { hours: 20, rate: 22 },
+                    1743: { hours: 25, rate: 27 }
+                  }
                 },
                 years: {
                   1742: 0,
@@ -361,40 +359,36 @@ describe('APD reducer', () => {
             ]
           }
         ],
-        proposedBudget: {
-          incentivePayments: {
-            ehAmt: {
-              1742: { 1: 1, 2: 1, 3: 1, 4: 1 },
-              1743: { 1: 2, 2: 2, 3: 2, 4: 2 }
-            },
-            ehCt: {
-              1742: { 1: 3, 2: 3, 3: 3, 4: 3 },
-              1743: { 1: 4, 2: 4, 3: 4, 4: 4 }
-            },
-            epAmt: {
-              1742: { 1: 5, 2: 5, 3: 5, 4: 5 },
-              1743: { 1: 6, 2: 6, 3: 6, 4: 6 }
-            },
-            epCt: {
-              1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
-              1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
-            }
-          }          
+        incentivePayments: {
+          ehAmt: {
+            1742: { 1: 1, 2: 1, 3: 1, 4: 1 },
+            1743: { 1: 2, 2: 2, 3: 2, 4: 2 }
+          },
+          ehCt: {
+            1742: { 1: 3, 2: 3, 3: 3, 4: 3 },
+            1743: { 1: 4, 2: 4, 3: 4, 4: 4 }
+          },
+          epAmt: {
+            1742: { 1: 5, 2: 5, 3: 5, 4: 5 },
+            1743: { 1: 6, 2: 6, 3: 6, 4: 6 }
+          },
+          epCt: {
+            1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
+            1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
+          }
         },
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: {
-                1742: 1,
-                1243: 2
-              },
-              fte: {
-                1742: 1,
-                1243: 2
-              }
+        keyPersonnel: [
+          {
+            costs: {
+              1742: 1,
+              1243: 2
+            },
+            fte: {
+              1742: 1,
+              1243: 2
             }
-          ]          
-        },
+          }
+        ],
         years: ['1742', '1743']
       }
     };
@@ -477,46 +471,42 @@ describe('APD reducer', () => {
             ]
           }
         ],
-        proposedBudget: {
-          incentivePayments: {
-            ehAmt: {
-              1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
-              1742: { 1: 1, 2: 1, 3: 1, 4: 1 },
-              1743: { 1: 2, 2: 2, 3: 2, 4: 2 }
-            },
-            ehCt: {
-              1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
-              1742: { 1: 3, 2: 3, 3: 3, 4: 3 },
-              1743: { 1: 4, 2: 4, 3: 4, 4: 4 }
-            },
-            epAmt: {
-              1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
-              1742: { 1: 5, 2: 5, 3: 5, 4: 5 },
-              1743: { 1: 6, 2: 6, 3: 6, 4: 6 }
-            },
-            epCt: {
-              1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
-              1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
-              1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
-            }
-          }          
+        incentivePayments: {
+          ehAmt: {
+            1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            1742: { 1: 1, 2: 1, 3: 1, 4: 1 },
+            1743: { 1: 2, 2: 2, 3: 2, 4: 2 }
+          },
+          ehCt: {
+            1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            1742: { 1: 3, 2: 3, 3: 3, 4: 3 },
+            1743: { 1: 4, 2: 4, 3: 4, 4: 4 }
+          },
+          epAmt: {
+            1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            1742: { 1: 5, 2: 5, 3: 5, 4: 5 },
+            1743: { 1: 6, 2: 6, 3: 6, 4: 6 }
+          },
+          epCt: {
+            1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
+            1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
+          }
         },
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: {
-                1741: 0,
-                1742: 1,
-                1243: 2
-              },
-              fte: {
-                1741: 0,
-                1742: 1,
-                1243: 2
-              }
+        keyPersonnel: [
+          {
+            costs: {
+              1741: 0,
+              1742: 1,
+              1243: 2
+            },
+            fte: {
+              1741: 0,
+              1742: 1,
+              1243: 2
             }
-          ]          
-        },
+          }
+        ],
         years: ['1741', '1742', '1743']
       }
     });
@@ -542,9 +532,11 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  1741: { hours: '', rate: '' },
-                  1742: { hours: 20, rate: 22 },
-                  1743: { hours: 25, rate: 27 }
+                  data: {
+                    1741: { hours: '', rate: '' },
+                    1742: { hours: 20, rate: 22 },
+                    1743: { hours: 25, rate: 27 }
+                  }
                 },
                 years: {
                   1741: 0,
@@ -599,46 +591,42 @@ describe('APD reducer', () => {
             ]
           }
         ],
-        proposedBudget: {
-          incentivePayments: {
-            ehAmt: {
-              1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
-              1742: { 1: 1, 2: 1, 3: 1, 4: 1 },
-              1743: { 1: 2, 2: 2, 3: 2, 4: 2 }
-            },
-            ehCt: {
-              1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
-              1742: { 1: 3, 2: 3, 3: 3, 4: 3 },
-              1743: { 1: 4, 2: 4, 3: 4, 4: 4 }
-            },
-            epAmt: {
-              1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
-              1742: { 1: 5, 2: 5, 3: 5, 4: 5 },
-              1743: { 1: 6, 2: 6, 3: 6, 4: 6 }
-            },
-            epCt: {
-              1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
-              1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
-              1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
-            }
-          }          
+        incentivePayments: {
+          ehAmt: {
+            1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            1742: { 1: 1, 2: 1, 3: 1, 4: 1 },
+            1743: { 1: 2, 2: 2, 3: 2, 4: 2 }
+          },
+          ehCt: {
+            1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            1742: { 1: 3, 2: 3, 3: 3, 4: 3 },
+            1743: { 1: 4, 2: 4, 3: 4, 4: 4 }
+          },
+          epAmt: {
+            1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            1742: { 1: 5, 2: 5, 3: 5, 4: 5 },
+            1743: { 1: 6, 2: 6, 3: 6, 4: 6 }
+          },
+          epCt: {
+            1741: { 1: 0, 2: 0, 3: 0, 4: 0 },
+            1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
+            1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
+          }
         },
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: {
-                1741: 0,
-                1742: 1,
-                1243: 2
-              },
-              fte: {
-                1741: 0,
-                1742: 1,
-                1243: 2
-              }
+        keyPersonnel: [
+          {
+            costs: {
+              1741: 0,
+              1742: 1,
+              1243: 2
+            },
+            fte: {
+              1741: 0,
+              1742: 1,
+              1243: 2
             }
-          ]          
-        },
+          }
+        ],
         years: ['1741', '1742', '1743']
       }
     };
@@ -660,8 +648,10 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  1742: { hours: 20, rate: 22 },
-                  1743: { hours: 25, rate: 27 }
+                  data: {
+                    1742: { hours: 20, rate: 22 },
+                    1743: { hours: 25, rate: 27 }
+                  }
                 },
                 years: {
                   1742: 0,
@@ -691,40 +681,36 @@ describe('APD reducer', () => {
             ]
           }
         ],
-        proposedBudget: {
-          incentivePayments: {
-            ehAmt: {
-              1742: { 1: 1, 2: 1, 3: 1, 4: 1 },
-              1743: { 1: 2, 2: 2, 3: 2, 4: 2 }
-            },
-            ehCt: {
-              1742: { 1: 3, 2: 3, 3: 3, 4: 3 },
-              1743: { 1: 4, 2: 4, 3: 4, 4: 4 }
-            },
-            epAmt: {
-              1742: { 1: 5, 2: 5, 3: 5, 4: 5 },
-              1743: { 1: 6, 2: 6, 3: 6, 4: 6 }
-            },
-            epCt: {
-              1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
-              1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
-            }
-          }          
+        incentivePayments: {
+          ehAmt: {
+            1742: { 1: 1, 2: 1, 3: 1, 4: 1 },
+            1743: { 1: 2, 2: 2, 3: 2, 4: 2 }
+          },
+          ehCt: {
+            1742: { 1: 3, 2: 3, 3: 3, 4: 3 },
+            1743: { 1: 4, 2: 4, 3: 4, 4: 4 }
+          },
+          epAmt: {
+            1742: { 1: 5, 2: 5, 3: 5, 4: 5 },
+            1743: { 1: 6, 2: 6, 3: 6, 4: 6 }
+          },
+          epCt: {
+            1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
+            1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
+          }
         },
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: {
-                1742: 1,
-                1243: 2
-              },
-              fte: {
-                1742: 1,
-                1243: 2
-              }
+        keyPersonnel: [
+          {
+            costs: {
+              1742: 1,
+              1243: 2
+            },
+            fte: {
+              1742: 1,
+              1243: 2
             }
-          ]          
-        },
+          }
+        ],
         years: ['1742', '1743']
       }
     });
@@ -745,29 +731,27 @@ describe('APD reducer', () => {
     it('should add a new primary key personnel', () => {
       const state = {
         data: {
-          keyStatePersonnel: { keyPersonnel: [] },
+          keyPersonnel: [],
           years: ['1', '2']
         }
       };
       expect(
-        apd(state, { type: ADD_APD_ITEM, path: '/keyStatePersonnel/keyPersonnel/-' })
+        apd(state, { type: ADD_APD_ITEM, path: '/keyPersonnel/-' })
       ).toEqual({
         data: {
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                costs: { 1: 0, 2: 0 },
-                email: '',
-                expanded: true,
-                hasCosts: null,
-                isPrimary: true,
-                fte: { 1: 0, 2: 0 },
-                name: '',
-                position: '',
-                key: expect.stringMatching(/^[a-f0-9]{8}$/)
-              }
-            ]            
-          },
+          keyPersonnel: [
+            {
+              costs: { 1: 0, 2: 0 },
+              email: '',
+              expanded: true,
+              hasCosts: null,
+              isPrimary: true,
+              fte: { 1: 0, 2: 0 },
+              name: '',
+              position: '',
+              key: expect.stringMatching(/^[a-f0-9]{8}$/)
+            }
+          ],
           years: ['1', '2']
         }
       });
@@ -776,54 +760,50 @@ describe('APD reducer', () => {
     it('should add a new state key personnel', () => {
       const state = {
         data: {
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                costs: { 1: 0, 2: 0 },
-                email: '',
-                expanded: true,
-                hasCosts: null,
-                isPrimary: true,
-                fte: { 1: 0, 2: 0 },
-                name: '',
-                position: '',
-                key: 'primary'
-              }
-            ]            
-          },
+          keyPersonnel: [
+            {
+              costs: { 1: 0, 2: 0 },
+              email: '',
+              expanded: true,
+              hasCosts: null,
+              isPrimary: true,
+              fte: { 1: 0, 2: 0 },
+              name: '',
+              position: '',
+              key: 'primary'
+            }
+          ],
           years: ['1', '2']
         }
       };
       expect(
-        apd(state, { type: ADD_APD_ITEM, path: '/keyStatePersonnel/keyPersonnel/-' })
+        apd(state, { type: ADD_APD_ITEM, path: '/keyPersonnel/-' })
       ).toEqual({
         data: {
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                costs: { 1: 0, 2: 0 },
-                email: '',
-                expanded: true,
-                hasCosts: null,
-                isPrimary: true,
-                fte: { 1: 0, 2: 0 },
-                name: '',
-                position: '',
-                key: 'primary'
-              },
-              {
-                costs: { 1: 0, 2: 0 },
-                email: '',
-                expanded: true,
-                hasCosts: null,
-                isPrimary: false,
-                fte: { 1: 0, 2: 0 },
-                name: '',
-                position: '',
-                key: expect.stringMatching(/^[a-f0-9]{8}$/)
-              }
-            ]            
-          },
+          keyPersonnel: [
+            {
+              costs: { 1: 0, 2: 0 },
+              email: '',
+              expanded: true,
+              hasCosts: null,
+              isPrimary: true,
+              fte: { 1: 0, 2: 0 },
+              name: '',
+              position: '',
+              key: 'primary'
+            },
+            {
+              costs: { 1: 0, 2: 0 },
+              email: '',
+              expanded: true,
+              hasCosts: null,
+              isPrimary: false,
+              fte: { 1: 0, 2: 0 },
+              name: '',
+              position: '',
+              key: expect.stringMatching(/^[a-f0-9]{8}$/)
+            }
+          ],
           years: ['1', '2']
         }
       });
@@ -915,7 +895,6 @@ describe('APD reducer', () => {
                     },
                     useHourly: null
                   },
-                  useHourly: false,
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   name: '',
                   start: '',
@@ -1173,12 +1152,12 @@ describe('APD reducer helper methods', () => {
       expect(
         getPatchesForAddingItem(
           { data: { years: ['1', '2'] } },
-          '/keyStatePersonnel/keyPersonnel/-'
+          '/keyPersonnel/-'
         )
       ).toEqual([
         {
           op: 'add',
-          path: '/keyStatePersonnel/keyPersonnel/-',
+          path: '/keyPersonnel/-',
           value: {
             costs: { 1: 0, 2: 0 },
             email: '',
@@ -1197,13 +1176,13 @@ describe('APD reducer helper methods', () => {
     it('gets patches for adding a key personnel', () => {
       expect(
         getPatchesForAddingItem(
-          { data: { years: ['1', '2'], keyStatePersonnel: { keyPersonnel: [{ isPrimary: true }] } } },
-          '/keyStatePersonnel/keyPersonnel/-'
+          { data: { years: ['1', '2'], keyPersonnel: [{ isPrimary: true }] } },
+          '/keyPersonnel/-'
         )
       ).toEqual([
         {
           op: 'add',
-          path: '/keyStatePersonnel/keyPersonnel/-',
+          path: '/keyPersonnel/-',
           value: {
             costs: { 1: 0, 2: 0 },
             email: '',
