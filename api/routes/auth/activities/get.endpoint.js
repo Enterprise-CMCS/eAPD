@@ -13,8 +13,9 @@ describe('auth activities endpoint | GET /auth/activities', () => {
   it('when authenticated', async () => {
     const api = login();
     const response = await api.get(url);
+    const permissions = response.data.map(p => p.name);
 
     expect(response.status).toEqual(200);
-    expect(response.data).toMatchSnapshot();
+    expect(permissions).toMatchSnapshot();
   });
 });

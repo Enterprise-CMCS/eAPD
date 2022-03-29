@@ -20,10 +20,13 @@ describe('/me endpoint | GET', () => {
   unauthenticatedTest('get', url);
 
   it('when authenticated, with no permissions', async () => {
+    // no-permissions is now tied into the actual database
+    // so it has to have an affiliation, wy is used because
+    // it's the end of the alphabetic list
     const api = login('no-permissions');
     const response = await api.get(url);
     expect(response.status).toEqual(200);
-    expect(response.data.states).toEqual({});
+    expect(response.data.states).toEqual({ wy: 'approved' });
   });
 
   describe('user is authenticated, with all permissions', () => {
