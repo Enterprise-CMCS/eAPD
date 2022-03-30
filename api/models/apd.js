@@ -355,7 +355,7 @@ const apdSchema = new mongoose.Schema({
         type: Map,
         of: incentivePayment
       }
-    } 
+    }
   },
   assurancesAndCompliances: {
     procurement: [federalCitation],

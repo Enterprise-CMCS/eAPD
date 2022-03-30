@@ -42,9 +42,9 @@ const ContractorResourceForm = forwardRef(
         start: item.start,
         end: item.end,
         totalCost: item.totalCost,
-        useHourly: getCheckedValue(item.hourly.useHourly),
+        useHourly: getCheckedValue(item.useHourly),
         years: item.years,
-        hourly: item.hourly.data
+        hourly: item.hourly
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
@@ -155,7 +155,7 @@ const ContractorResourceForm = forwardRef(
       dispatch({
         type: 'updateYearCost',
         year: ffy,
-        value: e.target.value * state.hourly.data[ffy].rate
+        value: e.target.value * state.hourly[ffy].rate
       });
     };
 
@@ -168,7 +168,7 @@ const ContractorResourceForm = forwardRef(
       dispatch({
         type: 'updateYearCost',
         year: ffy,
-        value: state.hourly.data[ffy].hours * e.target.value
+        value: state.hourly[ffy].hours * e.target.value
       });
     };
 
@@ -473,11 +473,13 @@ ContractorResourceForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
+    key: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
     start: PropTypes.string,
     end: PropTypes.string,
     totalCost: PropTypes.number,
+    useHourly: PropTypes.bool,
     hourly: PropTypes.object,
     years: PropTypes.object
   }).isRequired,

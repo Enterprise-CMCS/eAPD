@@ -99,8 +99,7 @@ const Activity = ({ activity, activityIndex }) => {
             {contractor.name ||
               'Private Contractor or Vendor Name not specified'}
           </strong>
-          {(contractor.hourly.useHourly === true ||
-            contractor.hourly.useHourly === 'true') &&
+          {(contractor.useHourly === true || contractor.useHourly === 'yes') &&
             ' (hourly resource)'}
         </p>
         <strong>Procurement Methodology and Description of Services</strong>

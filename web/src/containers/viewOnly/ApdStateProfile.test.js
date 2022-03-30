@@ -29,12 +29,12 @@ describe('APD Summary/viewOnly component', () => {
         name: 'Primary Person Name'
       }
     ];
-    render(
-      <ApdStateProfile
-        stateProfile={stateProfile}
-        keyPersonnel={keyPersonnel}
-      />
-    );
+    const keyStatePersonnel = {
+      medicaidOffice: {},
+      medicaidDirector: {},
+      keyPersonnel: keyPersonnel
+    };
+    render(<ApdStateProfile keyStatePersonnel={keyStatePersonnel} />);
     expect(screen.getByText(/Primary Person Name/i)).toBeTruthy();
     expect(screen.getByText(/Primary APD Point of Contact/i)).toBeTruthy();
   });
@@ -66,18 +66,7 @@ describe('APD Summary/viewOnly component', () => {
         name: 'Test'
       }
     };
-    const keyPersonnel = [
-      {
-        isPrimary: true,
-        name: 'Primary Person Name'
-      }
-    ];
-    render(
-      <ApdStateProfile
-        stateProfile={stateProfile}
-        keyPersonnel={keyPersonnel}
-      />
-    );
+    render(<ApdStateProfile keyStatePersonnel={keyStatePersonnel} />);
     expect(screen.getByText(/No response was provided/i)).toBeTruthy();
   });
 });
