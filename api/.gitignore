@@ -1,7 +1,0 @@
-.env
-.nyc_output
-coverage
-hitech_api*.log*
-
-endpoint-data.json
-endpoint-tests/endpoint-data.json

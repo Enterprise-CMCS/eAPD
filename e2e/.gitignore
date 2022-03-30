@@ -1,4 +1,0 @@
-cypress/screenshots/*
-cypress/videos/*
-cypress.env.json
-tokens.json
