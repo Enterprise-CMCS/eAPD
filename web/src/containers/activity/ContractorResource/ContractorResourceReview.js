@@ -51,7 +51,7 @@ const ContractorResourceReview = ({
               <strong>FFY {ffy} Cost:</strong> <Dollars>{years[ffy]}</Dollars>
             </li>
           :
-            <li className='ds-u-margin-left--3'>
+            <li key={ffy} className='ds-u-margin-left--3'>
               <strong>FFY {ffy} Cost:</strong>
               <div className='subform__container ds-u-margin-y--1'>
                 <div className='ds-u-margin-y--1'>

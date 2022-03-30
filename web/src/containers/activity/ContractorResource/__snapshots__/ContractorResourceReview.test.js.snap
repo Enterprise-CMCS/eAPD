@@ -41,7 +41,7 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
       </Dollars>
     </li>
     <li
-      key="1066"
+      className="ds-u-margin-left--3"
     >
       <strong>
         FFY 
@@ -49,15 +49,18 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
          Cost:
       </strong>
       <div
-        className="ds-u-margin-y--1"
+        className="subform__container ds-u-margin-y--1"
       >
-        <Dollars>
-          300
-        </Dollars>
+        <div
+          className="ds-u-margin-y--1"
+        />
+        <div
+          className="ds-u-margin-y--1"
+        />
       </div>
     </li>
     <li
-      key="1067"
+      className="ds-u-margin-left--3"
     >
       <strong>
         FFY 
@@ -65,11 +68,14 @@ exports[`the ContractorResourceReview component renders correctly 1`] = `
          Cost:
       </strong>
       <div
-        className="ds-u-margin-y--1"
+        className="subform__container ds-u-margin-y--1"
       >
-        <Dollars>
-          400
-        </Dollars>
+        <div
+          className="ds-u-margin-y--1"
+        />
+        <div
+          className="ds-u-margin-y--1"
+        />
       </div>
     </li>
   </ul>
