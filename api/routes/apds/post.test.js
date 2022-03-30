@@ -73,6 +73,14 @@ tap.test('apds POST endpoint', async endpointTest => {
 
     tests.test('sends back the new APD if everything works', async test => {
       const expectedApd = {
+        name: 'HITECH IAPD',
+        years: ['2004', '2005'],
+        apdOverview: {
+          programOverview: '',
+          narrativeHIE: '',
+          narrativeHIT: '',
+          narrativeMMIS: ''
+        },
         activities: [
           {
             alternatives: '',
@@ -118,7 +126,7 @@ tap.test('apds POST endpoint', async endpointTest => {
             }
           }
         ],
-        federalCitations: {
+        assurancesAndCompliances: {
           procurement: [
             { title: '42 CFR Part 495.348', checked: null, explanation: '' },
             { title: 'SMM Section 11267', checked: null, explanation: '' },
@@ -147,67 +155,27 @@ tap.test('apds POST endpoint', async endpointTest => {
             }
           ]
         },
-        incentivePayments: {
-          ehAmt: {
-            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
-            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
-          },
-          ehCt: {
-            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
-            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
-          },
-          epAmt: {
-            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
-            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
-          },
-          epCt: {
-            2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
-            2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
-          }
+        proposedBudget: {
+          incentivePayments: {
+            ehAmt: {
+              2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+              2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
+            },
+            ehCt: {
+              2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+              2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
+            },
+            epAmt: {
+              2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+              2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
+            },
+            epCt: {
+              2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
+              2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
+            }
+          }          
         },
-        keyPersonnel: [],
-        name: 'HITECH IAPD',
-        narrativeHIE: '',
-        narrativeHIT: '',
-        narrativeMMIS: '',
-        previousActivityExpenses: {
-          2004: {
-            hithie: {
-              federalActual: 0,
-              totalApproved: 0
-            },
-            mmis: {
-              90: { federalActual: 0, totalApproved: 0 },
-              75: { federalActual: 0, totalApproved: 0 },
-              50: { federalActual: 0, totalApproved: 0 }
-            }
-          },
-          2003: {
-            hithie: {
-              federalActual: 0,
-              totalApproved: 0
-            },
-            mmis: {
-              90: { federalActual: 0, totalApproved: 0 },
-              75: { federalActual: 0, totalApproved: 0 },
-              50: { federalActual: 0, totalApproved: 0 }
-            }
-          },
-          2002: {
-            hithie: {
-              federalActual: 0,
-              totalApproved: 0
-            },
-            mmis: {
-              90: { federalActual: 0, totalApproved: 0 },
-              75: { federalActual: 0, totalApproved: 0 },
-              50: { federalActual: 0, totalApproved: 0 }
-            }
-          }
-        },
-        previousActivitySummary: '',
-        programOverview: '',
-        stateProfile: {
+        keyStatePersonnel: {
           medicaidDirector: {
             email: '',
             name: '',
@@ -221,9 +189,47 @@ tap.test('apds POST endpoint', async endpointTest => {
             state: '',
             zip: '',
             bigBird: 'grover'
-          }
+          },
+          keyPersonnel: []
         },
-        years: ['2004', '2005']
+        previousActivities: {
+          previousActivitySummary: '',
+          actualExpenditures: {
+            2004: {
+              hithie: {
+                federalActual: 0,
+                totalApproved: 0
+              },
+              mmis: {
+                90: { federalActual: 0, totalApproved: 0 },
+                75: { federalActual: 0, totalApproved: 0 },
+                50: { federalActual: 0, totalApproved: 0 }
+              }
+            },
+            2003: {
+              hithie: {
+                federalActual: 0,
+                totalApproved: 0
+              },
+              mmis: {
+                90: { federalActual: 0, totalApproved: 0 },
+                75: { federalActual: 0, totalApproved: 0 },
+                50: { federalActual: 0, totalApproved: 0 }
+              }
+            },
+            2002: {
+              hithie: {
+                federalActual: 0,
+                totalApproved: 0
+              },
+              mmis: {
+                90: { federalActual: 0, totalApproved: 0 },
+                75: { federalActual: 0, totalApproved: 0 },
+                50: { federalActual: 0, totalApproved: 0 }
+              }
+            }
+          }          
+        },
       };
 
       getStateProfile.resolves({

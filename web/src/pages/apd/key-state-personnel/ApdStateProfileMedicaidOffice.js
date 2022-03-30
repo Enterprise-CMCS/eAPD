@@ -32,7 +32,7 @@ const ApdStateProfile = ({
   setCity,
   setState,
   setZip,
-  stateProfile
+  keyStatePersonnel
 }) => {
   const { medicaidDirector, medicaidOffice } = stateProfile;
 
@@ -129,15 +129,16 @@ ApdStateProfile.propTypes = {
   setCity: PropTypes.func.isRequired,
   setState: PropTypes.func.isRequired,
   setZip: PropTypes.func.isRequired,
-  stateProfile: PropTypes.shape({
+  keyStatePersonnel: PropTypes.shape({
     medicaidDirector: PropTypes.object,
-    medicaidOffice: PropTypes.object
+    medicaidOffice: PropTypes.object,
+    keyPersonnel: PropTypes.array
   }).isRequired
 };
 
 const mapStateToProps = state => ({
   defaultStateID: selectState(state).id,
-  stateProfile: selectStateProfile(state)
+  keyStatePersonnel: selectKeyStatePersonnel(state)
 });
 
 const mapDispatchToProps = {

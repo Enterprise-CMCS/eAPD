@@ -1,13 +1,5 @@
 /// <reference types="cypress" />
-const logout = () => {
-  cy.get(
-    '[class="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"]'
-  ).click();
-  cy.contains('Log out').click();
-  cy.contains('You have securely logged out');
-};
-
-const goTotStateAdminPortal = () => {
+const goToStateAdminPortal = () => {
   cy.useRegularUser();
   cy.get(
     '[class="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"]'
@@ -32,17 +24,18 @@ const verifyRole = (name, role) => {
 };
 
 describe('tests state admin portal', () => {
-  it('tests state admin portal', { tags: ['@state', '@admin'] }, () => {
+  it('tests state admin portal', { tags: ['@state', '@admin'] }, async () => {
     // Request access on No Role
+    cy.task('db:resetnorole');
     cy.loginWithEnv('norole');
     cy.contains('Verify Your Identity');
     cy.get('[class="ds-c-field"]').type('Alask');
     cy.contains('Alaska').click();
     cy.findByRole('button', { name: 'Submit' }).click();
     cy.findByRole('button', { name: 'Ok' }).click();
-    logout();
+    cy.logout();
 
-    goTotStateAdminPortal();
+    goToStateAdminPortal();
     // cy.wait(2000);
     cy.contains('Active').click();
     cy.contains('Requests').click();
@@ -105,19 +98,19 @@ describe('tests state admin portal', () => {
     cy.loginWithEnv('requestedrole');
     cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
     cy.contains('HITECH IAPD');
-    logout();
+    cy.logout();
 
     // Verify State Contractor was revoked
     cy.loginWithEnv('statecontractor');
     cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
     cy.contains('Approval Permissions Revoked');
-    logout();
+    cy.logout();
 
     // Verify Revoked Role has access
     cy.loginWithEnv('deniedrole');
     cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
     cy.contains('HITECH IAPD');
-    logout();
+    cy.logout();
 
     // Verify No Role was denined
     cy.loginWithEnv('norole');

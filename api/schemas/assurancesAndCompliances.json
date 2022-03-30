@@ -1,5 +1,5 @@
 {
-  "$id": "federalCitations.json",
+  "$id": "assurancesAndCompliances.json",
   "type": "object",
   "required": [],
   "patternProperties": {
