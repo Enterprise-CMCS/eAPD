@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activity state personnel costs subsection renders correctly 1`] = `
+<Fragment>
+  <Instruction
+    args={null}
+    headingDisplay={
+      Object {
+        "className": "ds-h3",
+        "level": "h3",
+      }
+    }
+    labelFor={null}
+    reverse={false}
+    source="activities.statePersonnel.instruction"
+  />
+  <FormAndReviewList
+    activityIndex={72}
+    addButtonText="Add State Staff"
+    allowDeleteAll={true}
+    className={null}
+    errorCheck={false}
+    list={
+      Array [
+        Object {
+          "category": "test category",
+          "desc": "test desc",
+          "key": "personnel key",
+          "years": Object {
+            "2027": 34355,
+            "2028": 48833,
+          },
+        },
+      ]
+    }
+    noDataMessage="State staff have not been added for this activity."
+    onAddClick={[Function]}
+    onCancelClick={[Function]}
+    onDeleteClick={[Function]}
+  />
+</Fragment>
+`;
