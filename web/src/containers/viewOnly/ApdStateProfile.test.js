@@ -15,7 +15,7 @@ describe('APD Summary/viewOnly component', () => {
       },
       keyPersonnel: []
     };
-    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
+    render(<ApdStateProfile keyStatePersonnel={keyStatePersonnel} />);
     expect(screen.getByText(/No response was provided/i)).toBeTruthy();
   });
 
@@ -47,7 +47,7 @@ describe('APD Summary/viewOnly component', () => {
       },
       keyPersonnel: []
     };
-    render(<ApdStateProfile stateProfile={stateProfile} keyPersonnel={[]} />);
+    render(<ApdStateProfile keyStatePersonnel={keyStatePersonnel} />);
     expect(screen.getByText(/123 Street St/i)).toBeTruthy();
   });
 
