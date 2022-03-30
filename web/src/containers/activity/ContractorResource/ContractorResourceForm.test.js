@@ -17,17 +17,15 @@ const defaultProps = {
   item: {
     description: 'They cleaned up the latrines after the Battle of Hastings',
     end: '1066-10-15',
+    useHourly: false,
     hourly: {
-      useHourly: false,
-      data: {
-        1066: {
-          hours: 10,
-          rate: 100
-        },
-        1067: {
-          hours: 20,
-          rate: 200
-        }
+      1066: {
+        hours: 10,
+        rate: 100
+      },
+      1067: {
+        hours: 20,
+        rate: 200
       }
     },
     id: 'contractor 1',

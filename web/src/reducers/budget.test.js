@@ -361,18 +361,20 @@ describe('budget reducer', () => {
               }
             }
           ],
-          keyPersonnel: [
-            {
-              costs: { 1931: 150, 1932: 151, 1933: 152 },
-              fte: { 1931: 0, 1932: 0.5, 1933: 1 },
-              hasCosts: false
-            },
-            {
-              costs: { 1931: 150, 1932: 1500, 1933: 15000 },
-              fte: { 1931: 0, 1932: 0.3, 1933: 1 },
-              hasCosts: true
-            }
-          ],
+          keyStatePersonnel: {
+            keyPersonnel: [
+              {
+                costs: { 1931: 150, 1932: 151, 1933: 152 },
+                fte: { 1931: 0, 1932: 0.5, 1933: 1 },
+                hasCosts: false
+              },
+              {
+                costs: { 1931: 150, 1932: 1500, 1933: 15000 },
+                fte: { 1931: 0, 1932: 0.3, 1933: 1 },
+                hasCosts: true
+              }
+            ]            
+          },
           years: ['1931', '1932', '1933']
         }
       }

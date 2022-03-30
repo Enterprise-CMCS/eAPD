@@ -5,8 +5,10 @@ mongo -- "$MONGO_INITDB_DATABASE" <<EOF
   var eapdUser = "$MONGO_DATABASE_USERNAME"
   var eapdPassword = "$MONGO_DATABASE_PASSWORD"
   var eapdDbName = "$MONGO_DATABASE"
+
   var admin = db.getSiblingDB(adminDbName)
   admin.auth(rootUser, rootPassword);
+
   var eapd = db.getSiblingDB(eapdDbName); 
   admin.createUser({
     user: eapdUser,
@@ -16,3 +18,4 @@ mongo -- "$MONGO_INITDB_DATABASE" <<EOF
   eapd.createCollection('apds');
   eapd.createCollection('migrations');
 EOF
+
