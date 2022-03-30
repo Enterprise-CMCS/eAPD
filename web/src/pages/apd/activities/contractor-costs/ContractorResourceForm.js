@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import React, { Fragment, forwardRef, useMemo, useReducer } from 'react';
 import { connect } from 'react-redux';
 
-import Choice from '../../../components/Choice';
-import DateField from '../../../components/DateField';
-import DollarField from '../../../components/DollarField';
-import Dollars from '../../../components/Dollars';
-import NumberField from '../../../components/NumberField';
-import RichText from '../../../components/RichText';
+import Choice from '../../../../components/Choice';
+import DateField from '../../../../components/DateField';
+import DollarField from '../../../../components/DollarField';
+import Dollars from '../../../../components/Dollars';
+import NumberField from '../../../../components/NumberField';
+import RichText from '../../../../components/RichText';
 
-import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
+import { saveContractor as actualSaveContractor } from '../../../../actions/editActivity';
 
 const ContractorResourceForm = forwardRef(
   ({ activityIndex, index, item, saveContractor }, ref) => {

@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ContractorResources';
-import { removeContractor } from '../../actions/editActivity';
+import { removeContractor } from '../../../../actions/editActivity';
 
 describe('the ContractorResources component', () => {
   const activityIndex = 0;
@@ -88,15 +88,13 @@ describe('the ContractorResources component', () => {
           apd: {
             data: {
               activities: [
-                { 
-                  contractorResources: [ 
-                    { key: '123' }
-                  ] 
-                },
+                {
+                  contractorResources: [{ key: '123' }]
+                }
               ],
               years: ['2022', '2023']
             }
-          },
+          }
         },
         { activityIndex: 0 }
       )

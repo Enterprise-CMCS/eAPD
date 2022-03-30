@@ -6,7 +6,7 @@ import {
   useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
-import ContractorResources from '../../../containers/activity/ContractorResources';
+import ContractorResources from './contractor-costs/ContractorResources';
 import CostAllocation from '../../../containers/activity/CostAllocation';
 import FFP from '../../../containers/activity/CostAllocateFFP';
 import Costs from './state-costs/Costs';
