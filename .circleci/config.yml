@@ -834,8 +834,8 @@ jobs:
                 --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
                 --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY" \
                 --JWT_SECRET "$PREVIEW_JWT_SECRET" \
-                --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \                
-                --MONGO_INITDB_ROOT_USERNAME "$REVIEW_MONGO_INITDB_ROOT_USERNAME" \
+                --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \              
+                --MONGO_INITDB_ROOT_USERNAME "$PREVIEW_MONGO_INITDB_ROOT_USERNAME" \
                 --MONGO_INITDB_ROOT_PASSWORD "$PREVIEW_MONGO_INITDB_ROOT_PASSWORD" \
                 --MONGO_INITDB_DATABASE "$PREVIEW_MONGO_INITDB_DATABASE" \
                 --MONGO_DATABASE_USERNAME "$PREVIEW_MONGO_DATABASE_USERNAME" \
