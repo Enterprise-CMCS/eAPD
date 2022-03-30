@@ -5,6 +5,8 @@ sudo yum install -y gcc-c++
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
+cd ~
+# Prepare the environment
 export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
@@ -20,7 +22,8 @@ export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
 export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 export DATABASE_URL="__DATABASE_URL__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
-cd ~
+
+# Create app logs and directories
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
@@ -29,9 +32,6 @@ touch /app/api/logs/Database-migration-out.log
 touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
-#Trouble Shooting
-echo __BUILDURL__ |tee buildurl.txt
-curl -o backend.zip -L __BUILDURL__
 
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
