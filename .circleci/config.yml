@@ -296,7 +296,7 @@ jobs:
           name: save yarn package cache
           key: cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - .cache/yarn
+            - ~/project/.cache/yarn
       - persist_to_workspace:
           root: ~/project
           paths:
