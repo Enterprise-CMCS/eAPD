@@ -18,7 +18,7 @@ export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
 export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
 export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
 export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
-export DATABASE_URL="__DATABASE_URL"
+export DATABASE_URL="__DATABASE_URL__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 cd ~
 mkdir -p /app/api/logs
@@ -29,6 +29,9 @@ touch /app/api/logs/Database-migration-out.log
 touch /app/api/logs/Database-seeding-error.log
 touch /app/api/logs/Database-seeding-out.log
 touch /app/api/logs/cms-hitech-apd-api.logs
+#Trouble Shooting
+echo __BUILDURL__ |tee buildurl.txt
+curl -o backend.zip -L __BUILDURL__
 
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and

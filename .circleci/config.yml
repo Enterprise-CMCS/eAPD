@@ -566,6 +566,13 @@ jobs:
           root: ~/project
           paths:
             - web/dist
+      - run:
+          name: persist build URL to workspace
+          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ./build-url.txt                      
 
   # Lints the frontend code.
   frontend lint:
@@ -827,6 +834,7 @@ jobs:
                 --OKTA_CLIENT_ID "$PREVIEW_OKTA_CLIENT_ID" \
                 --OKTA_API_KEY "$PREVIEW_OKTA_API_KEY" \
                 --JWT_SECRET "$PREVIEW_JWT_SECRET" \
+                --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \                
                 --MONGO_INITDB_ROOT_USERNAME "$REVIEW_MONGO_INITDB_ROOT_USERNAME" \
                 --MONGO_INITDB_ROOT_PASSWORD "$PREVIEW_MONGO_INITDB_ROOT_PASSWORD" \
                 --MONGO_INITDB_DATABASE "$PREVIEW_MONGO_INITDB_DATABASE" \
