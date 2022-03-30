@@ -15,7 +15,7 @@ import {
   setMedicaidOfficeZip
 } from '../../../actions/editApd';
 import { t } from '../../../i18n';
-import { selectStateProfile } from '../../../reducers/apd.selectors';
+import { selectKeyStatePersonnel } from '../../../reducers/apd.selectors';
 import { selectState } from '../../../reducers/user';
 import { STATES } from '../../../util';
 
@@ -34,21 +34,13 @@ const ApdStateProfile = ({
   setZip,
   keyStatePersonnel
 }) => {
-<<<<<<< HEAD:web/src/pages/apd/key-state-personnel/ApdStateProfileMedicaidOffice.js
-  const { medicaidDirector, medicaidOffice } = stateProfile;
+  const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
 
   const handleChange =
     action =>
     ({ target: { value } }) => {
       action(value);
     };
-=======
-  const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
-  
-  const handleChange = action => ({ target: { value } }) => {
-    action(value);
-  };
->>>>>>> 5ea25047303d454ecafe03d8ad8c0249b2cfa059:web/src/containers/ApdStateProfileMedicaidOffice.js
 
   return (
     <Fragment>
