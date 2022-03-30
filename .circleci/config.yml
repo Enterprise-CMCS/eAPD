@@ -280,10 +280,7 @@ jobs:
       - run:
           name: install dependencies
           working_directory: ~/project
-          command: |
-            yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
-            cp -r node_modules /api/
-            cp -r node_modules /web/
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
       - run:
           name: setup nvm
           command: |
