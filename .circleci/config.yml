@@ -280,7 +280,10 @@ jobs:
       - run:
           name: install dependencies
           working_directory: ~/project
-          command: yarn install --frozen-lockfile
+          command: |
+            yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+            cp -r node_modules /api/
+            cp -r node_modules /web/
       - run:
           name: setup nvm
           command: |
@@ -296,8 +299,7 @@ jobs:
           name: save yarn package cache
           key: cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/project/api/node_modules
-            - ~/project/web/node_modules
+            - ~/.cache/yarn
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -581,10 +583,8 @@ jobs:
           at: ~/project
       - run:
           name: run linter
-          working_directory: ~/project
-          command: |
-            cd web
-            yarn lint
+          working_directory: ~/project/web
+          command: yarn lint
 
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
