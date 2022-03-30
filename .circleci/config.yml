@@ -296,7 +296,9 @@ jobs:
           key: cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-            - node_modules
+      - persist_to_workspace:
+          root: ~/project
+          paths:
             - api/node_modules
             - web/node_modules
 
