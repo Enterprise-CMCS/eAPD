@@ -4,15 +4,15 @@ const personCostSchema = Joi.object().pattern(
     /\d{4}/,
     Joi.object({
       amt: Joi.number().positive().required().messages({
-        'number.empty': 'Provide a cost.',
-        'number.format': 'Provide a valid amount.',
+        'number.empty': 'Please provide a FTE cost greater than or equal to $0.',
+        'number.format': 'Please provide a FTE cost greater than or equal to $0.',
         'number.positive':
-          'Provide an amount greater than or equal to 0.'
+          'Please provide a FTE cost greater than or equal to $0.'
       }),
       perc: Joi.number().positive().greater(0).required().messages({
-        'number.empty': 'Provide number of FTEs.',
-        'number.positive': 'Provide a number greater than 0.',
-        'number.greater': 'Provide a number greater than 0.'
+        'number.empty': 'Provide a FTE number greater than or equal to 0.',
+        'number.positive': 'Provide a FTE number greater than or equal to 0.',
+        'number.greater': 'Provide a FTE number greater than or equal to 0.'
       })
   })
 );

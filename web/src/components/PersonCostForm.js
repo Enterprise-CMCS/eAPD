@@ -49,7 +49,7 @@ const PersonCostForm = ({
   
   useEffect(() => {
     setFormValid(isValid);
-  }, [isValid, setFormValid, value])
+  }, [isValid]) // eslint-disable-line react-hooks/exhaustive-deps
   
   return (
     <div>
@@ -73,6 +73,7 @@ const PersonCostForm = ({
               onChange={handleCostChange(year)}
               onBlur={onBlur}
               errorMessage={errors && errors[`${year}`]?.amt?.message}
+              errorPlacement="bottom"
             />
             )}
           />
@@ -93,6 +94,7 @@ const PersonCostForm = ({
               onChange={handleFTEChange(year)}
               onBlur={onBlur}
               errorMessage={errors && errors[`${year}`]?.perc?.message}
+              errorPlacement="bottom"
             />
             )}
           />

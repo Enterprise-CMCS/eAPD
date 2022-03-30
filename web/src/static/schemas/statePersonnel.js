@@ -3,10 +3,10 @@ import Joi from 'joi';
 const statePersonnelSchema = Joi.object({
   key: Joi.string(),
   title: Joi.string().required().messages({
-    'string.empty': 'Title is required'
+    'string.empty': 'Provide a personnel title.'
   }),
   description: Joi.string().required().messages({
-    'string.empty': 'Description is required'
+    'string.empty': 'Provide a personnel description.'
   }),
   years: Joi.object()
 });

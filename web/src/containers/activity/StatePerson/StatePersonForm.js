@@ -50,7 +50,7 @@ const StatePersonForm = forwardRef(
     } else {
       setFormValid(false);
     }
-  }, [isValid, subFormValid, setFormValid])
+  }, [isValid, subFormValid]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const getEditCostForYear = (year, value) => {
     // Manually update the react-hook-form store
@@ -91,6 +91,7 @@ const StatePersonForm = forwardRef(
             errorMessage={
               errors?.title?.message
             }
+            errorPlacement="bottom"
           />
         )}
       />
@@ -111,6 +112,7 @@ const StatePersonForm = forwardRef(
             errorMessage={
               errors?.description?.message
             }
+            errorPlacement="bottom"
           />
         )}
       />
