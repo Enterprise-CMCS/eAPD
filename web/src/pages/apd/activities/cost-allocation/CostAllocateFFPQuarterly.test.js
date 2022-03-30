@@ -6,11 +6,11 @@ import {
   makeMapStateToProps,
   mapDispatchToProps
 } from './CostAllocateFFPQuarterly';
-import { ariaAnnounceFFPQuarterly } from '../../actions/aria';
+import { ariaAnnounceFFPQuarterly } from '../../../../actions/aria';
 import {
   setFFPForInHouseCostsForFiscalQuarter,
   setFFPForContractorCostsForFiscalQuarter
-} from '../../actions/editActivity';
+} from '../../../../actions/editActivity';
 
 describe('the cost allocation quarterly FFP component', () => {
   const quarterlyFFP = {
