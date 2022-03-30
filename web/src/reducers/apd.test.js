@@ -173,13 +173,13 @@ describe('APD reducer', () => {
         // them out a window. The king literally died of shock. This was the
         // First Defenestration of Prague.
         created: '1419-07-30T00:00:00Z',
-        federalCitations: {
+        assurancesAndCompliances: {
           procurement: [],
           recordsAccess: [],
           softwareRights: [],
           security: []
         },
-        keyPersonnel: [{ name: 'key person 1' }],
+        keyStatePersonnel: { keyPersonnel: [{ name: 'key person 1' }] },
         value: `hurr hurr i'm a burr`,
         // Some nobles are tossed out a window in the Second Defenestration
         // of Prague, kicking off the Thirty Years' War
@@ -330,10 +330,8 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  data: {
-                    1742: { hours: 20, rate: 22 },
-                    1743: { hours: 25, rate: 27 }
-                  }
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
                 },
                 years: {
                   1742: 0,
@@ -383,18 +381,20 @@ describe('APD reducer', () => {
             }
           }
         },
-        keyPersonnel: [
-          {
-            costs: {
-              1742: 1,
-              1243: 2
-            },
-            fte: {
-              1742: 1,
-              1243: 2
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1742: 1,
+                1243: 2
+              },
+              fte: {
+                1742: 1,
+                1243: 2
+              }
             }
-          }
-        ],
+          ]
+        },
         years: ['1742', '1743']
       }
     };
@@ -499,20 +499,22 @@ describe('APD reducer', () => {
             }
           }
         },
-        keyPersonnel: [
-          {
-            costs: {
-              1741: 0,
-              1742: 1,
-              1243: 2
-            },
-            fte: {
-              1741: 0,
-              1742: 1,
-              1243: 2
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1741: 0,
+                1742: 1,
+                1243: 2
+              },
+              fte: {
+                1741: 0,
+                1742: 1,
+                1243: 2
+              }
             }
-          }
-          ],
+          ]
+        },
         years: ['1741', '1742', '1743']
       }
     });
@@ -538,11 +540,9 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  data: {
-                    1741: { hours: '', rate: '' },
-                    1742: { hours: 20, rate: 22 },
-                    1743: { hours: 25, rate: 27 }
-                  }
+                  1741: { hours: '', rate: '' },
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
                 },
                 years: {
                   1741: 0,
@@ -621,20 +621,22 @@ describe('APD reducer', () => {
             }
           }
         },
-        keyPersonnel: [
-          {
-            costs: {
-              1741: 0,
-              1742: 1,
-              1243: 2
-            },
-            fte: {
-              1741: 0,
-              1742: 1,
-              1243: 2
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1741: 0,
+                1742: 1,
+                1243: 2
+              },
+              fte: {
+                1741: 0,
+                1742: 1,
+                1243: 2
+              }
             }
-          }
-        ],
+          ]
+        },
         years: ['1741', '1742', '1743']
       }
     };
@@ -656,10 +658,8 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  data: {
-                    1742: { hours: 20, rate: 22 },
-                    1743: { hours: 25, rate: 27 }
-                  }
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
                 },
                 years: {
                   1742: 0,
@@ -709,18 +709,20 @@ describe('APD reducer', () => {
             }
           }
         },
-        keyPersonnel: [
-          {
-            costs: {
-              1742: 1,
-              1243: 2
-            },
-            fte: {
-              1742: 1,
-              1243: 2
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1742: 1,
+                1243: 2
+              },
+              fte: {
+                1742: 1,
+                1243: 2
+              }
             }
-          }
-        ],
+          ]
+        },
         years: ['1742', '1743']
       }
     });
@@ -741,7 +743,7 @@ describe('APD reducer', () => {
     it('should add a new primary key personnel', () => {
       const state = {
         data: {
-          keyPersonnel: [],
+          keyStatePersonnel: { keyPersonnel: [] },
           years: ['1', '2']
         }
       };
@@ -1172,12 +1174,12 @@ describe('APD reducer helper methods', () => {
       expect(
         getPatchesForAddingItem(
           { data: { years: ['1', '2'] } },
-          '/keyPersonnel/-'
+          '/keyStatePersonnel/keyPersonnel/-'
         )
       ).toEqual([
         {
           op: 'add',
-          path: '/keyPersonnel/-',
+          path: '/keyStatePersonnel/keyPersonnel/-',
           value: {
             costs: { 1: 0, 2: 0 },
             email: '',
@@ -1207,7 +1209,7 @@ describe('APD reducer helper methods', () => {
       ).toEqual([
         {
           op: 'add',
-          path: '/keyPersonnel/-',
+          path: '/keyStatePersonnel/keyPersonnel/-',
           value: {
             costs: { 1: 0, 2: 0 },
             email: '',
