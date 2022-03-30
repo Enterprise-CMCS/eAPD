@@ -3,23 +3,23 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import Instruction from '../../../../components/Instruction';
+import Instruction from '../../../../../components/Instruction';
 
 import {
   setCostAllocationFFPOtherFunding,
   setCostAllocationOtherFunding
-} from '../../../../actions/editActivity';
+} from '../../../../../actions/editActivity';
 
-import DollarField from '../../../../components/DollarField';
-import Dollars from '../../../../components/Dollars';
+import DollarField from '../../../../../components/DollarField';
+import Dollars from '../../../../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
   selectActivityCostSummary,
   selectActivityByIndex
-} from '../../../../reducers/activities.selectors';
+} from '../../../../../reducers/activities.selectors';
 
-import { t } from '../../../../i18n';
-import RichText from '../../../../components/RichText';
+import { t } from '../../../../../i18n';
+import RichText from '../../../../../components/RichText';
 
 const OtherFunding = ({
   activityIndex,
