@@ -145,6 +145,7 @@ workflows:
               only: /.*/
           requires:
             - install dependencies
+            - yaml test
       - frontend test:
           filters:
             tags:
@@ -484,8 +485,8 @@ jobs:
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16
-            nvm alias default 16
+            nvm install 16.13.2
+            nvm alias default 16.13.2
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -525,8 +526,8 @@ jobs:
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16
-            nvm alias default 16
+            nvm install 16.13.2
+            nvm alias default 16.13.2
             ./unit-test.sh
       - run:
           name: report coverage
