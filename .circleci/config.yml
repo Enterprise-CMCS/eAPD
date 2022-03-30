@@ -279,7 +279,7 @@ jobs:
             - cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: install dependencies
-          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+          command: yarn install --frozen-lockfile
       - run:
           name: setup nvm
           command: |
@@ -295,9 +295,9 @@ jobs:
           name: save yarn package cache
           key: cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - ~/node_modules
       - persist_to_workspace:
-          root: ~/project
+          root: ~/node_modules
           paths:
             - api/node_modules
             - web/node_modules
