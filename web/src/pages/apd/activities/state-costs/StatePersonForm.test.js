@@ -6,9 +6,7 @@ import {
   mapDispatchToProps
 } from './StatePersonForm';
 
-import {
-  savePersonnel as actualSavePersonnel
-} from '../../../actions/editActivity';
+import { savePersonnel as actualSavePersonnel } from '../../../../actions/editActivity';
 
 describe('the StatePersonForm component', () => {
   const savePersonnel = jest.fn();

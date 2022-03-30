@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Dollars from '../../../components/Dollars';
-import Review from '../../../components/Review';
+import Dollars from '../../../../components/Dollars';
+import Review from '../../../../components/Review';
 
 const NonPersonnelCostReview = ({
   item: { category, description, years },

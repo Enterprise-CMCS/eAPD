@@ -2,23 +2,19 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import FormAndReviewList from '../../components/FormAndReviewList';
-import {
-  NonPersonnelCostForm,
-  NonPersonnelCostReview
-} from './NonPersonnelCost';
+import FormAndReviewList from '../../../../components/FormAndReviewList';
+import { NonPersonnelCostForm } from './NonPersonnelCostForm';
+import { NonPersonnelCostReview } from './NonPersonnelCostReview';
 
-import {
-  removeNonPersonnelCost
-} from '../../actions/editActivity';
+import { removeNonPersonnelCost } from '../../../../actions/editActivity';
 
-import { newExpense } from '../../reducers/activities';
+import { newExpense } from '../../../../reducers/activities';
 
-import { selectApdYears } from '../../reducers/apd.selectors';
+import { selectApdYears } from '../../../../reducers/apd.selectors';
 
-import { selectActivityNonPersonnelCosts } from '../../reducers/activities.selectors';
-import Instruction from '../../components/Instruction';
-import { t } from '../../i18n';
+import { selectActivityNonPersonnelCosts } from '../../../../reducers/activities.selectors';
+import Instruction from '../../../../components/Instruction';
+import { t } from '../../../../i18n';
 
 const NonPersonnelCosts = ({
   activityIndex,
@@ -29,18 +25,18 @@ const NonPersonnelCosts = ({
   const [localList, setLocalList] = useState(expenses);
 
   useEffect(() => {
-    setLocalList(expenses)
-  }, [expenses])
-  
+    setLocalList(expenses);
+  }, [expenses]);
+
   const handleAdd = () => {
     const newListItem = newExpense(years);
     setLocalList([...localList, newListItem]);
   };
-  
+
   const handleDelete = index => {
     removeExpense(activityIndex, index);
   };
-  
+
   const onCancel = () => {
     setLocalList(expenses);
   };

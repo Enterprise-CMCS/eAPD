@@ -2,39 +2,34 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import Instruction from '../../components/Instruction';
-import { t } from '../../i18n';
+import Instruction from '../../../../components/Instruction';
+import { t } from '../../../../i18n';
 
-import FormAndReviewList from '../../components/FormAndReviewList';
-import { StatePersonForm, StatePersonReview } from './StatePerson';
+import FormAndReviewList from '../../../../components/FormAndReviewList';
+import { StatePersonForm } from './StatePersonForm';
+import { StatePersonReview } from './StatePersonReview';
 
-import { selectActivityStatePersonnel } from '../../reducers/activities.selectors';
-import { selectApdYears } from '../../reducers/apd.selectors';
-import { newStatePerson } from '../../reducers/activities';
-import { removePersonnel } from '../../actions/editActivity';
+import { selectActivityStatePersonnel } from '../../../../reducers/activities.selectors';
+import { selectApdYears } from '../../../../reducers/apd.selectors';
+import { newStatePerson } from '../../../../reducers/activities';
+import { removePersonnel } from '../../../../actions/editActivity';
 
-const StatePersonnel = ({ 
-  activityIndex, 
-  personnel, 
-  remove,
-  years
-}) => {
-  
+const StatePersonnel = ({ activityIndex, personnel, remove, years }) => {
   const [localList, setLocalList] = useState(personnel);
-          
+
   useEffect(() => {
-    setLocalList(personnel)
-  }, [personnel])
-  
+    setLocalList(personnel);
+  }, [personnel]);
+
   const handleAdd = () => {
     const newListItem = newStatePerson(years);
     setLocalList([...localList, newListItem]);
   };
-  
+
   const handleDelete = index => {
     remove(activityIndex, index);
   };
-  
+
   const onCancel = () => setLocalList(personnel);
 
   return (

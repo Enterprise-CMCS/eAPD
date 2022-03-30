@@ -4,8 +4,8 @@ import React from 'react';
 import { titleCase } from 'title-case';
 import Expenses from './NonPersonnelCosts';
 import StatePersonnel from './StatePersonnel';
-import { Subsection } from '../../components/Section';
-import { t } from '../../i18n';
+import { Subsection } from '../../../../components/Section';
+import { t } from '../../../../i18n';
 
 const Costs = ({ activityIndex }) => (
   <Subsection
