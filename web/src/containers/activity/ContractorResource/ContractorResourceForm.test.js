@@ -114,12 +114,10 @@ describe('the ContractorResourceForm component', () => {
       item: {
         ...defaultProps.item,
         hourly: {
-          data: {
-            1066: { hours: 20, rate: 100 },
-            1067: { hours: 15, rate: 200 }
-          },
-          useHourly: true
+          1066: { hours: 20, rate: 100 },
+          1067: { hours: 15, rate: 200 }
         },
+        useHourly: true,
         years: {
           1066: 2000,
           1067: 3000
@@ -163,7 +161,7 @@ describe('the ContractorResourceForm component', () => {
   test('renders errors when fields are empty', async () => {
     await setup({
       ...defaultProps,
-      item: { hourly: { useHourly: null }, years: { 1066: null, 1067: null } }
+      item: { useHourly: null, years: { 1066: null, 1067: null } }
     });
 
     // name
@@ -399,7 +397,7 @@ describe('the ContractorResourceForm component', () => {
       ...defaultProps,
       item: {
         ...defaultProps.item,
-        hourly: { ...defaultProps.item.hourly, useHourly: null }
+        useHourly: null
       }
     });
 
@@ -433,12 +431,10 @@ describe('the ContractorResourceForm component', () => {
       item: {
         ...defaultProps.item,
         hourly: {
-          data: {
-            1066: { hours: null, rate: null },
-            1067: { hours: null, rate: null }
-          },
-          useHourly: null
-        }
+          1066: { hours: null, rate: null },
+          1067: { hours: null, rate: null }
+        },
+        useHourly: null
       }
     });
 
@@ -473,10 +469,7 @@ describe('the ContractorResourceForm component', () => {
       ...defaultProps,
       item: {
         ...defaultProps.item,
-        hourly: {
-          ...defaultProps.item.hourly,
-          useHourly: null
-        },
+        useHourly: null,
         years: {
           1066: null,
           1067: null

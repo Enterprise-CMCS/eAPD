@@ -418,7 +418,7 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  1741: { hours: 0, rate: 0 },
+                  1741: { hours: null, rate: null },
                   1742: { hours: 20, rate: 22 },
                   1743: { hours: 25, rate: 27 }
                 },
@@ -911,9 +911,10 @@ describe('APD reducer', () => {
                   end: '',
                   files: [],
                   hourly: {
-                    1403: { hours: 0, rate: 0 },
-                    1404: { hours: 0, rate: 0 }
+                    1403: { hours: null, rate: null },
+                    1404: { hours: null, rate: null }
                   },
+                  useHourly: null,
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   name: '',
                   start: '',

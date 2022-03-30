@@ -421,9 +421,9 @@ const ContractorResourceForm = forwardRef(
             />
           )}
         />
-        {state.hourly.useHourly === null ||
-        state.hourly.useHourly === true ||
-        state.hourly.useHourly === 'yes' ? (
+        {state.useHourly === null ||
+        state.useHourly === true ||
+        state.useHourly === 'yes' ? (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <div key={ffy}>

@@ -42,7 +42,7 @@ export const newContractor = years => ({
   files: [],
   totalCost: null,
   years: arrToObj(years, contractorDefaultYear()),
-  useHourly: false,
+  useHourly: null,
   hourly: arrToObj(years, contractorDefaultHourly())
 });
 
