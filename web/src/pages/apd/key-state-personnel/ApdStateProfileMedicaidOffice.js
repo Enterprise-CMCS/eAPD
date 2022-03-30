@@ -32,8 +32,9 @@ const ApdStateProfile = ({
   setCity,
   setState,
   setZip,
-  stateProfile
+  keyStatePersonnel
 }) => {
+<<<<<<< HEAD:web/src/pages/apd/key-state-personnel/ApdStateProfileMedicaidOffice.js
   const { medicaidDirector, medicaidOffice } = stateProfile;
 
   const handleChange =
@@ -41,6 +42,13 @@ const ApdStateProfile = ({
     ({ target: { value } }) => {
       action(value);
     };
+=======
+  const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
+  
+  const handleChange = action => ({ target: { value } }) => {
+    action(value);
+  };
+>>>>>>> 5ea25047303d454ecafe03d8ad8c0249b2cfa059:web/src/containers/ApdStateProfileMedicaidOffice.js
 
   return (
     <Fragment>
@@ -129,15 +137,16 @@ ApdStateProfile.propTypes = {
   setCity: PropTypes.func.isRequired,
   setState: PropTypes.func.isRequired,
   setZip: PropTypes.func.isRequired,
-  stateProfile: PropTypes.shape({
+  keyStatePersonnel: PropTypes.shape({
     medicaidDirector: PropTypes.object,
-    medicaidOffice: PropTypes.object
+    medicaidOffice: PropTypes.object,
+    keyPersonnel: PropTypes.array
   }).isRequired
 };
 
 const mapStateToProps = state => ({
   defaultStateID: selectState(state).id,
-  stateProfile: selectStateProfile(state)
+  keyStatePersonnel: selectKeyStatePersonnel(state)
 });
 
 const mapDispatchToProps = {
