@@ -881,7 +881,7 @@ jobs:
 #          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
       - run:
           name: Persist Build URL to Workspace
-          command: curl -H "Circle-Token: ${CIRCLE_TOKEN}" https://circleci.com/api/v2/project/gh/CMSgov/eAPD/${CIRCLE_BUILD_NUM}/artifacts |grep -o 'https://[^"]*' |grep backend.zip > build-url.txt
+          command: curl -H 'Circle-Token: ${CIRCLE_TOKEN}' https://circleci.com/api/v2/project/gh/CMSgov/eAPD/${CIRCLE_BUILD_NUM}/artifacts |grep -o 'https://[^"]*' |grep backend.zip > build-url.txt
       - persist_to_workspace:
           root: ~/project
           paths:
