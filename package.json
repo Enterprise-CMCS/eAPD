@@ -69,12 +69,14 @@
     "e2e"
   ],
   "nohoist": [
-    "**/css-loader",
-    "**/postcss-loader",
-    "**/sass-loader",
-    "**/@uppy/core",
-    "**/@uppy/react",
-    "**/@uppy/xhr-upload",
+    "**/webpack",
+    "**/webpack/**",
+    "**/webpack-dev-server",
+    "**/webpack-dev-server/**",
+    "**/@webpack-cli",
+    "**/@webpack-cli/**",
+    "**/webpack-cli",
+    "**/webpack-cli/**",
     "**/ajv"
   ],
   "dependencies": {
