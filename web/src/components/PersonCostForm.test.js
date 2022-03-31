@@ -3,9 +3,7 @@ import {
   renderWithConnection,
   act,
   screen,
-  within,
-  waitFor,
-  prettyDOM
+  waitFor
 } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
