@@ -72,6 +72,9 @@
     "**/css-loader",
     "**/postcss-loader",
     "**/sass-loader",
+    "**/@uppy/core",
+    "**/@uppy/react",
+    "**/@uppy/xhr-upload",
     "**/ajv"
   ],
   "dependencies": {
