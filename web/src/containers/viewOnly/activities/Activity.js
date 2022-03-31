@@ -18,7 +18,7 @@ const Activity = ({ activity, activityIndex }) => {
           {outcome.outcome || 'Outcome not specified'}
         </p>
         <div className="ds-u-margin-top--2">
-          <ul className="ds-c-list--bare">
+          <ul className="ds-c-list--bare subform__container">
             <strong>Metrics: </strong>
             {outcome.metrics.map(({ metric }, index) => (
               <li key={uuidv4()} className="ds-u-margin-bottom--2">
@@ -120,15 +120,17 @@ const Activity = ({ activity, activityIndex }) => {
             <Dollars>{contractor.totalCost}</Dollars>
           </li>
           {Object.entries(contractor.years).map(([year, cost]) => (
-            <li key={year}>
+            <li className='ds-u-margin-top--1' key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
               {contractor.useHourly === true && (
                 <Fragment key={uuidv4()}>
-                  <p>Number of hours: {contractor.hourly[year].hours}</p>
-                  <p>
-                    Hourly rate:{' '}
-                    <Dollars>{contractor.hourly[year].rate}</Dollars>
-                  </p>
+                  <div className='subform__container'>
+                    <p>Number of hours: {contractor.hourly[year].hours}</p>
+                    <p>
+                      Hourly rate:{' '}
+                      <Dollars>{contractor.hourly[year].rate}</Dollars>
+                    </p>
+                  </div>
                 </Fragment>
               )}
             </li>
@@ -193,20 +195,22 @@ const Activity = ({ activity, activityIndex }) => {
         </p>
       )}
 
-      <p>
-        <strong>
-          This activity does not support the Medicaid standards and conditions
-          from 42 CFR 433.112.
-        </strong>
-      </p>
-      {activity.standardsAndConditions.doesNotSupport ? (
-        <p>{activity.standardsAndConditions.doesNotSupport}</p>
-      ) : (
+      <div className='subform__container'>
         <p>
-          No response was provided for how this activity will support the
-          Medicaid standards and conditions.
+          <strong>
+            This activity does not support the Medicaid standards and conditions
+            from 42 CFR 433.112.
+          </strong>
         </p>
-      )}
+        {activity.standardsAndConditions.doesNotSupport ? (
+          <p>{activity.standardsAndConditions.doesNotSupport}</p>
+        ) : (
+          <p>
+            No response was provided for how this activity will support the
+            Medicaid standards and conditions.
+          </p>
+        )}
+      </div>
 
       <h3 className="viewonly-activity-header">
         <small>
@@ -262,7 +266,7 @@ const Activity = ({ activity, activityIndex }) => {
         Cost Allocation
       </h3>
       <h4>Description of Cost Allocation Methodology</h4>
-      <div
+      <div className='subform__container'
         dangerouslySetInnerHTML={{
           __html: activity.costAllocationNarrative.methodology
         }}
@@ -275,14 +279,14 @@ const Activity = ({ activity, activityIndex }) => {
         .map(([year, narrative]) => (
           <Fragment key={uuidv4()}>
             <h3>FFY {year}</h3>
-            <h4>Other Funding Description</h4>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: narrative.otherSources
-              }}
-            />
-            <div>
-              <strong>Other Funding Amount: </strong>
+            <div className='subform__container'>
+              <h4>Other Funding Description</h4>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: narrative.otherSources
+                }}
+              />
+              <h4>Other Funding Amount: </h4>
               <Dollars>
                 {
                   (activity.costAllocation[year.toString()] || { other: 0 })
