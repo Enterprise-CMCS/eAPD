@@ -29,13 +29,6 @@ workflows:
     jobs:
       - install dependencies
       - dependency vulnerability scan:
-          name: backend dependency vulnerability scan
-          path: api
-          requires:
-            - install dependencies
-      - dependency vulnerability scan:
-          name: frontend dependency vulnerability scan
-          path: web
           requires:
             - install dependencies
 
@@ -47,6 +40,12 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - dependency vulnerability scan:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - install dependencies
       - owasp zap scan:
           filters:
             tags:
@@ -69,8 +68,7 @@ workflows:
           requires:
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend test
             - backend unit test
             - backend api endpoint test
@@ -80,14 +78,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-          requires:
-            - install dependencies
-      - dependency vulnerability scan:
-          filters:
-            tags:
-              only: /.*/
-          name: backend dependency vulnerability scan
-          path: api
           requires:
             - install dependencies
       - backend lint:
@@ -110,9 +100,9 @@ workflows:
               only:
                 - main
           requires:
+            - dependency vulnerability scan
             - store artifacts staging
             - backend api endpoint test
-            - backend dependency vulnerability scan
             - backend lint
             - backend unit test
       - backend deploy:
@@ -124,21 +114,13 @@ workflows:
             tags:
               only: /^v.*/
           requires:
+            - dependency vulnerability scan
             - store artifacts prod
             - backend api endpoint test
-            - backend dependency vulnerability scan
             - backend lint
             - backend unit test
 
       # frontend jobs
-      - dependency vulnerability scan:
-          filters:
-            tags:
-              only: /.*/
-          name: frontend dependency vulnerability scan
-          path: web
-          requires:
-            - install dependencies
       - frontend lint:
           filters:
             tags:
@@ -165,8 +147,7 @@ workflows:
             - owasp zap scan
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend test
             - yaml test
             - backend unit test
@@ -181,7 +162,7 @@ workflows:
             tags:
               only: /^v.*/
           requires:
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
       - frontend build:
           name: frontend build staging
           env: STAGING
@@ -190,7 +171,7 @@ workflows:
               only:
                 - main
           requires:
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
       - frontend deploy:
           name: frontend deploy staging
           env: STAGING
@@ -200,7 +181,7 @@ workflows:
                 - main
           requires:
             - frontend build staging
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend lint
             - frontend test
             - yaml test
@@ -216,7 +197,7 @@ workflows:
               only: /^v.*/
           requires:
             - frontend build prod
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend lint
             - frontend test
             - yaml test
@@ -242,7 +223,7 @@ workflows:
               only:
                 - main
           requires:
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend build staging
 
       - store artifacts:
@@ -253,7 +234,7 @@ workflows:
             tags:
               only: /^v.*/
           requires:
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend build prod
 
 jobs:
@@ -615,10 +596,6 @@ jobs:
 
   # Uses audit-ci to scan the installed dependencies for known vulnerabilities.
   dependency vulnerability scan:
-    parameters:
-      path:
-        description: The path to test
-        type: string
     docker:
       - image: cimg/node:16.13.2
         auth:
@@ -630,7 +607,6 @@ jobs:
           at: ~/project
       - run:
           name: vulnerability scan
-          working_directory: ~/project/<< parameters.path >>
           command: |
             yarn run audit
 
