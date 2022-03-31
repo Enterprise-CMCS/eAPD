@@ -225,7 +225,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               costLabel="Cost with benefits"
               fteLabel="FTE Allocation"
               hint="For example: 0.5 = 0.5 FTE = 50% time"
-              items={
+              setCost={[Function]}
+              setFTE={[Function]}
+              setFormValid={[Function]}
+              value={
                 Object {
                   "1992": Object {
                     "amt": 100,
@@ -237,8 +240,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                   },
                 }
               }
-              setCost={[Function]}
-              setFTE={[Function]}
             />,
             "label": "Yes",
             "value": "yes",
@@ -287,7 +288,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 costLabel="Cost with benefits"
                 fteLabel="FTE Allocation"
                 hint="For example: 0.5 = 0.5 FTE = 50% time"
-                items={
+                setCost={[Function]}
+                setFTE={[Function]}
+                setFormValid={[Function]}
+                value={
                   Object {
                     "1992": Object {
                       "amt": 100,
@@ -299,8 +303,6 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                     },
                   }
                 }
-                setCost={[Function]}
-                setFTE={[Function]}
               />
             }
             inputClassName=""
@@ -442,7 +444,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             costLabel="Cost with benefits"
             fteLabel="FTE Allocation"
             hint="For example: 0.5 = 0.5 FTE = 50% time"
-            items={
+            setCost={[Function]}
+            setFTE={[Function]}
+            setFormValid={[Function]}
+            value={
               Object {
                 "1992": Object {
                   "amt": 100,
@@ -454,8 +459,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
                 },
               }
             }
-            setCost={[Function]}
-            setFTE={[Function]}
           />,
           "label": "Yes",
           "value": "yes",
@@ -525,7 +528,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             costLabel="Cost with benefits"
             fteLabel="FTE Allocation"
             hint="For example: 0.5 = 0.5 FTE = 50% time"
-            items={
+            setCost={[Function]}
+            setFTE={[Function]}
+            setFormValid={[Function]}
+            value={
               Object {
                 "1992": Object {
                   "amt": 100,
@@ -537,8 +543,6 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
                 },
               }
             }
-            setCost={[Function]}
-            setFTE={[Function]}
           />,
           "label": "Yes",
           "value": "yes",

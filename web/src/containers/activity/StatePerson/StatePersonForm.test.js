@@ -19,11 +19,11 @@ const defaultProps = {
     description: "Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.",
     years: {
       2022: {
-        amt: 100000,
+        amt: 100,
         perc: 1
       },
       2023: {
-        amt: 125000,
+        amt: 125,
         perc: 2
       }
     },
@@ -50,18 +50,114 @@ describe('the ContractorResourceForm component', () => {
     await setup();
     expect(screen.getByLabelText(/Personnel title/i)).toHaveValue(defaultProps.item.title);
     expect(screen.getByLabelText(/Description/i)).toHaveValue(defaultProps.item.description);
-    // Object.keys(defaultProps.item.years).forEach(year => {
-    //   expect(screen.getByLabelText(`FFY ${year} Cost`)).toHaveValue(`FFY ${year} Cost`);
-    // })
+    expect(screen.getAllByLabelText(`Cost with benefits`)[0]).toHaveValue(`${defaultProps.item.years[2022].amt}`);
+    expect(screen.getAllByLabelText(`Number of FTEs`)[0]).toHaveValue(`${defaultProps.item.years[2022].perc}`);
+    expect(screen.getAllByLabelText(`Cost with benefits`)[1]).toHaveValue(`${defaultProps.item.years[2023].amt}`);
+    expect(screen.getAllByLabelText(`Number of FTEs`)[1]).toHaveValue(`${defaultProps.item.years[2023].perc}`);
   });
   
-  // renders error when no title is provided
+  test('renders error when no title is provided', async () => {
+    await setup({});
+    
+    const input = screen.getByRole('textbox', { name: /title/i });
+    
+    userEvent.clear(input);
+    await waitFor(() => {
+      expect(input).toHaveFocus();
+    });
+    userEvent.tab();
+    
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    
+    const error = await screen.findByText(
+      /Provide a personnel title./i
+    );
+    expect(error).toBeInTheDocument();
+  });
   
-  // renders error when no description is provided
+  test('renders error when no description is provided', async () => {
+    await setup({});
+    
+    const input = screen.getByRole('textbox', { name: /description/i });
+    
+    userEvent.clear(input);
+    await waitFor(() => {
+      expect(input).toHaveFocus();
+    });
+    userEvent.tab();
+    
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    
+    const error = await screen.findByText(
+      /Provide a personnel description./i
+    );
+    expect(error).toBeInTheDocument();
+  });  
   
-  // renders error when no number is provided for cost
+  test('renders error when no number is provided for cost', async () => {
+    await setup({});
+    
+    const input = screen.getAllByLabelText(`Cost with benefits`);
+    
+    userEvent.clear(input[0]);
+    await waitFor(() => {
+      expect(input[0]).toHaveFocus();
+    });
+    userEvent.tab();
+    
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    
+    const error = await screen.findByText('Please provide a FTE cost greater than or equal to $0.');
+    expect(error).toBeInTheDocument();
+  });
   
-  // renders error when a negative number is provided for cost
+  test('renders error when a negative number is provided for cost', async () => {
+    await setup({});
+    
+    const input = screen.getAllByLabelText(`Number of FTEs`);
+    
+    userEvent.clear(input[0]);
+    await waitFor(() => {
+      expect(input[0]).toHaveFocus();
+    });
+    userEvent.type(input, {target: {value: '-1'}})
+    userEvent.tab();
+    
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    
+    const error = await screen.findByText('Provide a FTE number greater than or equal to 0.');
+    expect(error).toBeInTheDocument();
+  });
   
-  // renders error when no number of FTEs is provided
+  test('renders error when no number of FTEs is provided', async () => {
+    await setup({});
+    
+    const input = screen.getAllByLabelText(`Number of FTEs`);
+    
+    userEvent.clear(input[0]);
+    await waitFor(() => {
+      expect(input[0]).toHaveFocus();
+    });
+    userEvent.tab();
+    
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    
+    const error = await screen.findByText('Provide a FTE number greater than or equal to 0.');
+    expect(error).toBeInTheDocument();
+  });
 });
