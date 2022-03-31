@@ -57,7 +57,6 @@ echo __BUILDURL__ |tee /home/ec2-user/buildurl.txt
 curl -o backend.zip -L __BUILDURL__ |tee /home/ec2-user/backenddownload.txt
 unzip backend.zip
 #rm backend.zip
-
 cd api
 yarn install --frozen-lockfile --production=true
 # There are some platform-dependent binaries that need to be rebuilt before
