@@ -68,6 +68,11 @@
     "web",
     "e2e"
   ],
+  "nohoist": [
+    "**/css-loader",
+    "**/postcss-loader",
+    "**/ajv"
+  ],
   "dependencies": {
     "@snyk/protect": "1.866.0"
   },
