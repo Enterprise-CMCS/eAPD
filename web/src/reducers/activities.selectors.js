@@ -58,7 +58,7 @@ export const selectActivityCostSummary = createSelector(
     // Program Administration. For other activities, just returns empty arrays.
     {
       apd: {
-        data: { 
+        data: {
           keyStatePersonnel: { keyPersonnel },
           years
         }
@@ -101,9 +101,13 @@ export const selectActivityCostSummary = createSelector(
               c.name || 'Private Contractor or Vendor Name not specified',
             totalCost: c.years[year],
             unitCost: c.hourly.useHourly ? c.hourly.data[year].rate : null,
+            unitCost:
+              c.useHourly === true || c.useHourly === 'yes'
+                ? c.hourly[year].rate
+                : null,
             units:
-              c.hourly.useHourly === true || c.hourly.useHourly === 'yes'
-                ? `${c.hourly.data[year].hours} hours`
+              c.useHourly === true || c.useHourly === 'yes'
+                ? `${c.hourly[year].hours} hours`
                 : null
           })),
           contractorResourcesTotal: activity.contractorResources.reduce(
