@@ -57,6 +57,7 @@ echo __BUILDURL__ |tee /home/ec2-user/buildurl.txt
 curl -o backend.zip -L __BUILDURL__ |tee /home/ec2-user/backenddownload.txt
 unzip backend.zip
 #rm backend.zip
+
 cd api
 yarn install --frozen-lockfile --production=true
 # There are some platform-dependent binaries that need to be rebuilt before
@@ -87,3 +88,4 @@ systemctl start newrelic-infra
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.13.2/bin /home/ec2-user/.nvm/versions/node/v16.13.2/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'
+
