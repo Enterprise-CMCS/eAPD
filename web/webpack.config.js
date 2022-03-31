@@ -3,9 +3,12 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const config = {
   mode: 'production',
+  externalsPresets: { node: true },
+  externals: [nodeExternals()],
   entry: {
     app: [path.join(__dirname, 'src/app.js')]
   },
