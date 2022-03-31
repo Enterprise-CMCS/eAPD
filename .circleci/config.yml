@@ -876,9 +876,12 @@ jobs:
           working_directory: ~/project
           command: |
             zip -r /tmp/frontend.zip web/dist/*
+#      - run:
+#          name: persist build URL to workspace
+#          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
       - run:
-          name: persist build URL to workspace
-          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
+          name: Persist Build URL to Workspace
+          command: curl -H "${CIRCLE_HEADER}" https://circleci.com/api/v2/project/gh/CMSgov/eAPD/${CIRCLE_BUILD_NUM}/artifacts |grep -o 'https://[^"]*' |grep backend.zip > build-url.txt
       - persist_to_workspace:
           root: ~/project
           paths:
