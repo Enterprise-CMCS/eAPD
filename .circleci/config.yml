@@ -327,8 +327,8 @@ jobs:
     parallelism: 5
     steps:
       - checkout
-      # - attach_workspace:
-      #     at: ~/project
+      - attach_workspace:
+          at: ~/project
       - run:
           name: set up node
           working_directory: ~/project
@@ -369,7 +369,7 @@ jobs:
             nvm alias default 16.13.2
             nvm use 16.13.2
 
-            yarn install --frozen-lockfile
+            # yarn install --frozen-lockfile
             npx cypress install --force
             npx cypress verify
       - run:
@@ -851,9 +851,9 @@ jobs:
           working_directory: ~/project
           command: |
             zip -r /tmp/frontend.zip web/dist/*
-#      - run:
-#          name: persist build URL to workspace
-#          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
+      #      - run:
+      #          name: persist build URL to workspace
+      #          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
       - run:
           name: Persist Build URL to Workspace
           command: curl -H \"${CIRCLE_TOKEN}\" -L https://circleci.com/api/v2/project/gh/CMSgov/eAPD/${CIRCLE_BUILD_NUM}/artifacts |grep -o 'https://[^"]*' |grep backend.zip > build-url.txt
