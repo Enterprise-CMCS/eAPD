@@ -69,14 +69,6 @@
     "e2e"
   ],
   "nohoist": [
-    "**/webpack",
-    "**/webpack/**",
-    "**/webpack-dev-server",
-    "**/webpack-dev-server/**",
-    "**/@webpack-cli",
-    "**/@webpack-cli/**",
-    "**/webpack-cli",
-    "**/webpack-cli/**",
     "**/ajv"
   ],
   "dependencies": {
