@@ -50,7 +50,7 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              import: true
+              import: false
             }
           },
 
