@@ -43,7 +43,7 @@ const config = {
           // Converts the local disk paths from css-loader into their final
           // paths relative to the dist directory, then pulls everything
           // together
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
 
           // Interprets any url() and @import statements and resolves them to
           // their full path on the local disk.
