@@ -1,6 +1,8 @@
 import { TextField, ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useReducer } from 'react';
+import React, { forwardRef, useEffect, useReducer } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
@@ -8,12 +10,73 @@ import { t } from '../../i18n';
 
 import PersonCostForm from '../../components/PersonCostForm';
 
+import Joi from 'joi';
 import { saveKeyPersonnel } from '../../actions/editApd';
+
+const getCheckedValue = value => {
+  if (value !== null) {
+    return value ? 'yes' : 'no';
+  }
+  return null;
+};
+
+const keyPersonSchema = Joi.object({
+  name: Joi.string().required().messages({
+    'string.base': 'Name is required',
+    'string.empty': 'Name is required'
+  }),
+  email: Joi.string().required().messages({
+    'string.base': 'Email is required',
+    'string.empty': 'Email is required'
+  }),
+  position: Joi.string().required().messages({
+    'string.base': 'Position is required',
+    'string.empty': 'Position is required'
+  }),
+  // costs: Joi.alternatives().conditional('hasCosts', {
+  //   is: 'yes',
+  //   then: 
+  // })
+})
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
-const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
+const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid }, ref) => {
   PersonForm.displayName = 'PersonForm';
+  const {
+    handleSubmit,
+    control,
+    formState: { errors, isValid, isValidating },
+    getValues
+  } = useForm({
+    defaultValues: {
+      name: item.name,
+      email: item.email,
+      position: item.position,
+      hasCosts: getCheckedValue(item.hasCosts),
+      costs: item.costs
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(keyPersonSchema)
+  });
+
+  useEffect(() => {
+    console.log('isValid changed');
+    console.log({ isValid });
+    setFormValid(isValid);
+  }, [isValid]);
+
+  useEffect(() => {
+    console.log('errors changed');
+    console.log({ errors });
+  }, [errors]);
+
+  useEffect(() => {
+    console.log('isValidating changed');
+    const { error, value } = keyPersonSchema.validate(getValues());
+    console.log({ value, errors, isValidating });
+  }, [isValidating, errors]);
 
   const initialState = item;
 
@@ -49,9 +112,20 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    savePerson(index, state);
+  const handleNameChange = e => {
+    dispatch({
+      type: 'updateField',
+      field: 'name',
+      payload: e.target.value
+    });
+  };
+
+  const handleEmailChange = e => {
+    dispatch({
+      type: 'updateField',
+      field: 'email',
+      payload: e.target.value
+    })
   };
 
   const setCostForYear = (year, value) => {
@@ -70,10 +144,16 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
     });
   };
 
+  const onSubmit = e => {
+    e.preventDefault();
+    savePerson(index, state);
+    handleSubmit(e);
+  };
+
   const primary = index === 0;
 
   return (
-    <form index={index} onSubmit={handleSubmit}>
+    <form index={index} onSubmit={onSubmit} aria-label="form">
       <h4 className="ds-h4">
         {primary
           ? titleCase(t(`${tRoot}.labels.titlePrimary`))
@@ -84,29 +164,39 @@ const PersonForm = forwardRef(({ index, item, savePerson, years }, ref) => {
           ? t(`${tRoot}.labels.notePrimary`)
           : t(`${tRoot}.labels.noteSecondary`)}
       </p>
-      <TextField
-        name={`apd-state-profile-pocname${index}`}
-        label={t(`${tRoot}.labels.name`)}
-        value={state.name}
-        onChange={e =>
-          dispatch({
-            type: 'updateField',
-            field: 'name',
-            payload: e.target.value
-          })
-        }
+      <Controller
+        name="name"
+        control={control}
+        render={({ field: { onChange, ...props } }) => (
+          <TextField
+            {...props}
+            id={`apd-state-profile-pocname${index}`}
+            label={t(`${tRoot}.labels.name`)}
+            onChange={e => {
+              handleNameChange(e);
+              onChange(e);
+            }}
+            errorMessage={errors?.name?.message}
+            errorPlacement="bottom"
+          />
+        )}
       />
-      <TextField
-        name={`apd-state-profile-pocemail${index}`}
-        label={t(`${tRoot}.labels.email`)}
-        value={state.email}
-        onChange={e =>
-          dispatch({
-            type: 'updateField',
-            field: 'email',
-            payload: e.target.value
-          })
-        }
+      <Controller
+        name="email"
+        control={control}
+        render={({ field: { onChange, ...props } }) => (
+          <TextField
+            {...props}
+            id={`apd-state-profile-pocemail${index}`}
+            label={t(`${tRoot}.labels.email`)}
+            onChange={e => {
+              handleEmailChange(e);
+              onChange(e);
+            }}
+            errorMessage={errors?.email?.message}
+            errorPlacement="bottom"
+          />
+        )}
       />
       <TextField
         name={`apd-state-profile-pocposition${index}`}
