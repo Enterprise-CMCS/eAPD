@@ -69,6 +69,7 @@ export const addMMISActivity = years => {
       }).should('exist');
 
       fillOutActivityPage.fillStateStaffAndExpenses(
+        years,
         activityData.staff,
         activityData.expenses
       );

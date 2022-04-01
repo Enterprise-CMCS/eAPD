@@ -581,29 +581,41 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           total: 0
         }))
       });
-
-      cy.findByRole('button', { name: /Save/i }).click();
-
-      cy.waitForSave();
-
-      cy.get('.form-and-review-list')
-        .eq(0)
-        .findAllByRole('button', { name: /Edit/i })
-        .click();
-
-      cy.findByLabelText('Personnel title').type('Test cancel');
-
-      cy.get('.form-and-review-list')
-        .eq(0)
-        .findByRole('button', { name: /Cancel/i })
-        .click();
-
-      activityPage.checkStateStaffOutput({
-        name: 'Personnel title not specified',
-        years,
-        cost: 0,
-        fte: 0
-      });
+      
+      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+      
+      cy.findByRole('button', { name: /Cancel/i }).click();
+      
+      const staffList = [
+        {
+          title: 'Robot Doctor',
+          description: 'A doctor of robotics and also a robot.',
+          costs: [100,200],
+          ftes: [1,2]
+        }
+      ];
+      
+      fillOutActivityPage.fillStateStaffAndExpenses(years, staffList, [], true);
+      
+// Todo: update this to check for form errors, or remove it and check for form errors somewhere else
+//       cy.get('.form-and-review-list')
+//         .eq(0)
+//         .findAllByRole('button', { name: /Edit/i })
+//         .click();
+// 
+//       cy.findByLabelText('Personnel title').type('Test cancel');
+// 
+//       cy.get('.form-and-review-list')
+//         .eq(0)
+//         .findByRole('button', { name: /Cancel/i })
+//         .click();
+// 
+//       activityPage.checkStateStaffOutput({
+//         name: 'Personnel title not specified',
+//         years,
+//         cost: 0,
+//         fte: 0
+//       });
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
 

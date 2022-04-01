@@ -73,7 +73,7 @@ class FillOutActivityPage {
     }
   };
 
-  fillStateStaffAndExpenses = (staffList, expenseList, testDelete = false) => {
+  fillStateStaffAndExpenses = (years, staffList, expenseList, testDelete = false) => {
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
@@ -82,6 +82,7 @@ class FillOutActivityPage {
     _.forEach(staffList, (staff, i) => {
       staffExpensesPage.addStaff();
       staffExpensesPage.fillStaff(
+        years,
         i,
         staff.title,
         staff.description,

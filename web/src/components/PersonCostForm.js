@@ -23,7 +23,8 @@ const PersonCostForm = ({
   const {
     control,
     formState: { errors, isValid },
-    setValue
+    setValue,
+    watch
   } = useForm({
     defaultValues: {
       ...value
@@ -32,6 +33,8 @@ const PersonCostForm = ({
     reValidateMode: 'onBlur',
     resolver: joiResolver(personCostSchema)
   });
+  
+  const formValues = watch();
   
   const handleCostChange =
     year =>
@@ -53,7 +56,7 @@ const PersonCostForm = ({
   
   return (
     <div>
-      {Object.entries(value).map(([year, { amt, perc }]) => (
+      {Object.entries(formValues).map(([year, { amt, perc }]) => (
         <Fragment key={year}>
           <h5 className="ds-h5">FFY {year} Cost</h5>
           <div className="ds-c-choice__checkedChild ds-u-padding-y--0">

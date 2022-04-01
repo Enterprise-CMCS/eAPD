@@ -67,6 +67,7 @@ export const addHITActivity = years => {
       }).should('exist');
 
       fillOutActivityPage.fillStateStaffAndExpenses(
+        years,
         activityData.staff,
         activityData.expenses,
         true // Test delete flag
