@@ -879,7 +879,7 @@ jobs:
       - run:
           name: Persist Build URL to Workspace
           working_directory: ~/project
-          command: sh bin/buildurl.sh CIRCLE_TOKEN=${CIRCLE_TOKEN} CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} > ./build-url.txt
+          command: sh bin/prod-deploy/buildurl.sh CIRCLE_TOKEN=${CIRCLE_TOKEN} CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} > ./build-url.txt
       - persist_to_workspace:
           root: ~/project
           paths:
