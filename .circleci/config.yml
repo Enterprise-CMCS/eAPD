@@ -876,9 +876,6 @@ jobs:
           working_directory: ~/project
           command: |
             zip -r /tmp/frontend.zip web/dist/*
-#      - run:
-#          name: persist build URL to workspace
-#          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
       - run:
           name: Persist Build URL to Workspace
           working_directory: ~/project
