@@ -48,16 +48,23 @@ npm i -g yarn@1.22.17
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
+cd eAPD
 yarn install --frozen-lockfile --production=true
-cd eAPD/web
+
+cd web
 # yarn add webpack@5.70.0 webpack-cli@4.9.2
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 mv dist/* /app/web
-cd ~
+
+# move over node modules
+cd ~/eAPD
+mkdir -p /app/node_modules
+mv ~/eAPD/node_modules/* /app/node_modules
+
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
 cd /app/api
-# yarn install --frozen-lockfile --production=true
+
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate
 NODE_ENV=development DEV_DB_HOST=localhost yarn run seed
