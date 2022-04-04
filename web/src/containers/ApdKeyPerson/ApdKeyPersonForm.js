@@ -1,6 +1,12 @@
 import { TextField, ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { forwardRef, useEffect, useReducer } from 'react';
+import React, { 
+  forwardRef,
+  Fragment,
+  useEffect, 
+  useMemo,
+  useReducer
+} from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -9,6 +15,9 @@ import { titleCase } from 'title-case';
 import { t } from '../../i18n';
 
 import PersonCostForm from '../../components/PersonCostForm';
+import DollarField from '../../components/DollarField';
+import Dollars from '../../components/Dollars';
+import NumberField from '../../components/NumberField';
 
 import Joi from 'joi';
 import { saveKeyPersonnel } from '../../actions/editApd';
@@ -30,18 +39,38 @@ const keyPersonSchema = Joi.object({
     'string.empty': 'Email is required'
   }),
   position: Joi.string().required().messages({
-    'string.base': 'Position is required',
-    'string.empty': 'Position is required'
+    'string.base': 'Role is required',
+    'string.empty': 'Role is required'
   }),
-  // costs: Joi.alternatives().conditional('hasCosts', {
-  //   is: 'yes',
-  //   then: 
-  // })
+  costs: Joi.alternatives().conditional('hasCosts', {
+    is: 'yes',
+    then: Joi.object().pattern(
+      /\d{4}/,
+      Joi.number().positive().required().messages({
+        'number.base': 'Provide a contract cost.',
+        'number.empty': 'Provide a contract cost.',
+        'number.format': 'Provide a contract cost greater than or equal to $0.',
+        'number.positive': 'Provide a contract cost greater than or equal to $0.'
+      })),
+    otherwise: Joi.any()
+  }),
+  fte: Joi.alternatives().conditional('hasCosts', {
+    is: 'yes',
+    then: Joi.object().pattern(
+      /\d{4}/,
+      Joi.number().positive().required().messages({
+        'number.base': 'Provide a contract cost.',
+        'number.empty': 'Provide a contract cost.',
+        'number.format': 'Provide a contract cost greater than or equal to $0.',
+        'number.positive': 'Provide a contract cost greater than or equal to $0.'
+      })),
+    otherwise: Joi.any()
+  })
 })
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
-const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid }, ref) => {
+const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, costLabel }, ref) => {
   PersonForm.displayName = 'PersonForm';
   const {
     handleSubmit,
@@ -54,7 +83,8 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid },
       email: item.email,
       position: item.position,
       hasCosts: getCheckedValue(item.hasCosts),
-      costs: item.costs
+      costs: item.costs,
+      fte: item.fte
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -62,6 +92,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid },
   });
 
   useEffect(() => {
+    console.log({yearCostsFTE})
     console.log('isValid changed');
     console.log({ isValid });
     setFormValid(isValid);
@@ -79,6 +110,17 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid },
   }, [isValidating, errors]);
 
   const initialState = item;
+
+  const yearCostsFTE = useMemo(() => years.reduce(
+    (o, year) => ({
+      ...o,
+      [year]: {
+        amt: item.costs[year],
+        perc: item.fte[year]
+      }
+    }),
+    {}
+  ))
 
   function reducer(state, action) {
     switch (action.type) {
@@ -125,8 +167,32 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid },
       type: 'updateField',
       field: 'email',
       payload: e.target.value
-    })
+    });
   };
+
+  const handlePositionChange = e => {
+    dispatch({
+      type: 'updateField',
+      field: 'position',
+      payload: e.target.value
+    });
+  };
+
+  const getEditCostForYear = (year, value) => dispatch({ type: 'updateCosts', year, value });
+
+  const getEditFTEForYear = (year, value) => dispatch({ type: 'updateFte', year, value });
+
+  const handleCostChange =
+    year =>
+    ({ target: { value } }) => {
+      getEditCostForYear(year, value);
+    };
+
+  const handleFTEChange =
+    year =>
+    ({ target: { value } }) => {
+      getEditFTEForYear(year, value);
+    };
 
   const setCostForYear = (year, value) => {
     dispatch({ type: 'updateCosts', field: 'costs', year, value });
@@ -198,55 +264,110 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid },
           />
         )}
       />
-      <TextField
-        name={`apd-state-profile-pocposition${index}`}
-        label={t(`${tRoot}.labels.position`)}
-        value={state.position}
-        onChange={e =>
-          dispatch({
-            type: 'updateField',
-            field: 'position',
-            payload: e.target.value
-          })
-        }
+      <Controller
+        name="position"
+        control={control}
+        render={({ field: { onChange, ...props } }) => (
+          <TextField
+            {...props}
+            id={`apd-state-profile-pocposition${index}`}
+            label={t(`${tRoot}.labels.position`)}
+            onChange={e => {
+              handlePositionChange(e);
+              onChange(e);
+            }}
+            errorMessage={errors?.position?.message}
+            errorPlacement="bottom"
+          />
+        )}
       />
-      <ChoiceList
-        label={t(`${tRoot}.labels.hasCosts`)}
-        name={`apd-state-profile-hascosts${index}`}
-        choices={[
-          {
-            label: 'Yes',
-            value: 'yes',
-            checked: state.hasCosts === 'yes',
-            checkedChildren: (
-              <PersonCostForm
-                items={years.reduce(
-                  (o, year) => ({
-                    ...o,
-                    [year]: {
-                      amt: state.costs[year],
-                      perc: state.fte[year]
-                    }
-                  }),
-                  {}
-                )}
-                fteLabel="FTE Allocation"
-                hint="For example: 0.5 = 0.5 FTE = 50% time"
-                setCost={setCostForYear}
-                setFTE={setFTEForYear}
-              />
-            )
-          },
-          {
-            label: 'No',
-            value: 'no',
-            checked: state.hasCosts === 'no'
-          }
-        ]}
-        type="radio"
-        onChange={e => {
-          handleHasCostsChange(e);
-        }}
+      <Controller
+        name="hasCosts"
+        control={control}
+        render={({
+          field: { name, onChange, onBlur: hasCostsOnBlur, value }
+        }) => (
+          <ChoiceList
+            label={t(`${tRoot}.labels.hasCosts`)}
+            id={`apd-state-profile-hascosts${index}`}
+            name={name}
+            choices={[
+              {
+                label: 'Yes',
+                value: 'yes',
+                checked: value === 'yes',
+                checkedChildren: (
+                  <div>
+                    {Object.entries(yearCostsFTE).map(([year, { amt, perc }]) => (
+                      <Fragment key={year}>
+                        <h5 className="ds-h5">FFY {year} Cost</h5>
+                        <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
+                          <div>
+                            <Controller
+                              key={`${year}-cost`}
+                              name={`costs.${year}`}
+                              control={control}
+                              render={({
+                                field: { onChange: costOnChange, ...props }
+                              }) => (
+                                <DollarField
+                                  {...props}
+                                  label="Cost with benefits"
+                                  size="medium"
+                                  value={amt}
+                                  onChange={ e => {
+                                    handleCostChange(year, e);
+                                    costOnChange(e)
+                                  }}
+                                />
+                              )}
+                            />
+                          </div>
+                          <NumberField
+                            label="FTE Allocation"
+                            name="ftes"
+                            size="medium"
+                            min={0}
+                            hint="For example: 0.5 = 0.5 FTE = 50% time"
+                            value={perc}
+                            onChange={handleFTEChange(year)}
+                          />
+                          <p>
+                            <strong>Total: </strong>
+                            <Dollars>{amt * perc}</Dollars>
+                          </p>
+                          <div>
+                            <Fragment>
+                              {errors?.costs && errors.costs[year] && (
+                                <span
+                                  className="ds-c-inline-error ds-c-field__error-message"
+                                  role="alert"
+                                >
+                                  {errors.costs[year].message}
+                                </span>
+                              )}
+                            </Fragment>
+                          </div>
+                        </div>
+
+                      </Fragment>
+                    ))}
+                  </div>
+                )
+              },
+              {
+                label: 'No',
+                value: 'no',
+                checked: state.hasCosts === 'no'
+              }
+            ]}
+            type="radio"
+            onChange={e => {
+              handleHasCostsChange(e);
+              onChange(e);
+            }}
+          />
+        )}
       />
       <input
         className="ds-u-visibility--hidden"
