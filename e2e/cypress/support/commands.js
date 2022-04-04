@@ -63,7 +63,7 @@ Cypress.Commands.add('login', (username, password) => {
     expiry: EXPIRY_DATE
   });
   cy.visit('/');
-  cy.waitForReact();
+  cy.waitForReact(1000, '#app', '../node_modules/resq/dist/index.js');
   cy.findByLabelText('EUA ID').type(username);
   cy.findByLabelText('Password').type(password, {
     log: false
@@ -98,7 +98,7 @@ Cypress.Commands.add('useJwtUser', (username, url) => {
     }
   );
   cy.visit(url || '/');
-  cy.waitForReact();
+  cy.waitForReact(1000, '#app', '../node_modules/resq/dist/index.js');
 });
 
 Cypress.Commands.add('useSysAdmin', url => {
