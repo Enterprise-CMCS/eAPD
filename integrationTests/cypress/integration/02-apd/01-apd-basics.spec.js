@@ -410,9 +410,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
-        cy.get(`[data-cy='outcome-${index}']`).click().should('have.value', '');
-        //   .blur()
-        //   .should('have.class', 'ds-c-field--error');
+        cy.get(`[data-cy='outcome-${index}']`)
+          .click()
+          .should('have.value', '')
+          .blur()
+          .should('have.class', 'ds-c-field--error');
 
         // cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
