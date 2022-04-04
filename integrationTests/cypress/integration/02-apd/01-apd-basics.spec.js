@@ -410,13 +410,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
-        cy.get(`[data-cy='outcome-${index}']`)
-          .click()
-          .should('have.value', '')
-          .blur()
-          .should('have.class', 'ds-c-field--error');
-
-        // cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+        cy.get(`[data-cy='outcome-${index}']`).click().should('have.value', '');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -440,10 +434,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
               .should('have.value', '');
-            //   .blur()
-            //   .should('have.class', 'ds-c-field--error');
-
-            // cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
@@ -503,10 +493,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
 
         cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '');
-        //   .blur()
-        //   .should('have.class', 'ds-c-field--error');
-
-        // cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -679,11 +665,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       );
 
       activityPage.checkTinyMCE('contractor-description-field-0', '');
-      // cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      // cy.get('[id="contractor-description-field-0"]').focus().blur();
-      // cy.contains(
-      //   'Provide a procurement methodology and description of services.'
-      // ).should('exist');
 
       activityPage.checkDate('Contract start date');
       cy.contains('Contract start date')
