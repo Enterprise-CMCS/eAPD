@@ -422,15 +422,15 @@ class ExportPage {
 
     years.forEach((year, i) => {
       cy.contains('h3', `FFY ${year}`)
-        .next()
-        .should('contain', 'Other Funding Description')
+        .next().as('parent')
+      cy.get('@parent')
+        .contains('Other Funding Description')
         .next()
         .should('have.text', costAllocation.FFYdescriptions[i])
         .next()
-        .should(
-          'contain',
-          `Other Funding Amount: $${addCommas(costAllocation.costs[i])}`
-        );
+        .should('contain', 'Other Funding Amount:')
+        .next()
+        .should('contain', `$${addCommas(costAllocation.costs[i])}`);
     });
   };
 
