@@ -876,6 +876,12 @@ jobs:
           working_directory: ~/project
           command: |
             zip -r /tmp/frontend.zip web/dist/*
+      - store_artifacts:
+          path: /tmp/backend.zip
+          destination: backend.zip
+      - store_artifacts:
+          path: /tmp/frontend.zip
+          destination: frontend.zip
       - run:
           name: Persist Build URL to Workspace
           working_directory: ~/project
@@ -884,9 +890,4 @@ jobs:
           root: ~/project
           paths:
             - ./build-url.txt
-      - store_artifacts:
-          path: /tmp/backend.zip
-          destination: backend.zip
-      - store_artifacts:
-          path: /tmp/frontend.zip
-          destination: frontend.zip
+            
