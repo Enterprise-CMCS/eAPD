@@ -69,9 +69,6 @@
     "e2e"
   ],
   "nohoist": [
-    "**/css-loader",
-    "**/postcss-loader",
-    "**/sass-loader",
     "**/ajv"
   ],
   "dependencies": {

@@ -43,11 +43,16 @@ const config = {
           // Converts the local disk paths from css-loader into their final
           // paths relative to the dist directory, then pulls everything
           // together
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
 
           // Interprets any url() and @import statements and resolves them to
           // their full path on the local disk.
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              import: false
+            }
+          },
 
           // Add browser prefixes and minify CSS.
           {
@@ -66,7 +71,14 @@ const config = {
             }
           },
           // Load the SCSS/SASS
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: [path.resolve(__dirname, '../node_modules')]
+              }
+            }
+          }
         ]
       },
       {
