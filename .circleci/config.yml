@@ -687,7 +687,7 @@ jobs:
               --AWS_SECURITY_GROUP "${<< parameters.env >>_API_AWS_SECURITY_GROUP}" \
               --AWS_SUBNET "${<< parameters.env >>_API_AWS_SUBNET}" \
               --AWS_TARGET_GROUP "${<< parameters.env >>_API_AWS_TARGET_GROUP}" \
-              --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \
+              --BUILD_URL "$(cat ../../build-url.txt)" \
               --ENVIRONMENT "$(echo '<< parameters.env >>' | tr '[:upper:]' '[:lower:]')" \
               --OKTA_DOMAIN "${<< parameters.env >>_OKTA_DOMAIN}" \
               --OKTA_SERVER_ID "${<< parameters.env >>_OKTA_SERVER_ID}" \
@@ -851,19 +851,17 @@ jobs:
           working_directory: ~/project
           command: |
             zip -r /tmp/frontend.zip web/dist/*
-      #      - run:
-      #          name: persist build URL to workspace
-      #          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
-      - run:
-          name: Persist Build URL to Workspace
-          command: curl -H \"${CIRCLE_TOKEN}\" -L https://circleci.com/api/v2/project/gh/CMSgov/eAPD/${CIRCLE_BUILD_NUM}/artifacts |grep -o 'https://[^"]*' |grep backend.zip > build-url.txt
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - ./build-url.txt
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip
       - store_artifacts:
           path: /tmp/frontend.zip
           destination: frontend.zip
+      - run:
+          name: Persist Build URL to Workspace
+          working_directory: ~/project
+          command: sh bin/prod-deploy/buildurl.sh CIRCLE_TOKEN=${CIRCLE_TOKEN} CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} > ./build-url.txt
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ./build-url.txt
