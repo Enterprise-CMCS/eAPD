@@ -20,6 +20,7 @@ import regLinks from '../data/assurancesAndCompliance.yaml';
 import { t } from '../i18n';
 import { selectFederalCitations } from '../reducers/apd.selectors';
 import AlertMissingFFY from '../components/AlertMissingFFY';
+import { ChoiceList } from '@cmsgov/design-system';
 
 const namify = (name, title) =>
   `explanation-${name}-${title}`.replace(/\s/g, '_');
@@ -33,6 +34,10 @@ const LinkOrText = ({ link, title }) => {
     </a>
   );
 };
+
+// const handleRadioChange = e => {
+
+// }
 
 LinkOrText.propTypes = {
   link: PropTypes.string,
@@ -54,37 +59,38 @@ const AssurancesAndCompliance = ({
   justificationForSecurity,
   justificationForSoftwareRights
 }) => {
-  const handleCheckChange = (section, index, newValue) => () => {
+  const handleCheckChange = (section, index, e) => () => {
+    console.log('BEFORE ALL TIME');
     switch (section) {
       case 'procurement':
-        return complyingWithProcurement(index, newValue);
+        return complyingWithProcurement(index, e.taget.value);
       case 'recordsAccess':
-        return complyingWithRecordsAccess(index, newValue);
+        return complyingWithRecordsAccess(index, e.target.value);
       case 'security':
-        return complyingWithSecurity(index, newValue);
+        return complyingWithSecurity(index, e.target.value);
       case 'softwareRights':
-        return complyingWithSoftwareRights(index, newValue);
+        return complyingWithSoftwareRights(index, e.target.value);
       default:
         return null;
     }
   };
 
-  const handleExplanationChange = (section, index) => ({
-    target: { value }
-  }) => {
-    switch (section) {
-      case 'procurement':
-        return justificationForProcurement(index, value);
-      case 'recordsAccess':
-        return justificationForRecordsAccess(index, value);
-      case 'security':
-        return justificationForSecurity(index, value);
-      case 'softwareRights':
-        return justificationForSoftwareRights(index, value);
-      default:
-        return null;
-    }
-  };
+  const handleExplanationChange =
+    (section, index) =>
+    ({ target: { value } }) => {
+      switch (section) {
+        case 'procurement':
+          return justificationForProcurement(index, value);
+        case 'recordsAccess':
+          return justificationForRecordsAccess(index, value);
+        case 'security':
+          return justificationForSecurity(index, value);
+        case 'softwareRights':
+          return justificationForSoftwareRights(index, value);
+        default:
+          return null;
+      }
+    };
 
   return (
     <React.Fragment>
@@ -100,44 +106,77 @@ const AssurancesAndCompliance = ({
                 {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
               </h4>
               {citations[name].map(({ title, checked, explanation }, index) => (
-                <fieldset key={title} className="ds-u-margin-top--2">
-                  <legend className="ds-c-label">
-                    Are you complying with{' '}
-                    <strong>
-                      <LinkOrText link={regulations[title]} title={title} />
-                    </strong>
-                    ?
-                  </legend>
-                  <Choice
-                    checked={checked === true}
-                    label="Yes"
-                    name={`apd-assurances-yes-${namify(name, title)}`}
-                    onChange={handleCheckChange(name, index, true)}
-                    size="small"
-                    type="radio"
-                    value="yes"
-                  />
-                  <Choice
-                    checked={checked === false}
-                    label="No"
-                    name={`apd-assurances-no-${namify(name, title)}`}
-                    onChange={handleCheckChange(name, index, false)}
-                    size="small"
-                    type="radio"
-                    value="no"
-                    checkedChildren={
-                      <div className="ds-c-choice__checkedChild">
-                        <TextArea
-                          label="Please explain"
-                          name={namify(name, title)}
-                          value={explanation}
-                          onChange={handleExplanationChange(name, index)}
-                          rows={5}
-                        />
-                      </div>
+                // <fieldset key={title} className="ds-u-margin-top--2">
+                //   <legend className="ds-c-label">
+                //     Are you complying with{' '}
+                //     <strong>
+                //       <LinkOrText link={regulations[title]} title={title} />
+                //     </strong>
+                //     ?
+                //   </legend>
+                //   <Choice
+                //     checked={checked === true}
+                //     label="Yes"
+                //     name={`apd-assurances-yes-${namify(name, title)}`}
+                //     onChange={handleCheckChange(name, index, true)}
+                //     size="small"
+                //     type="radio"
+                //     value="yes"
+                //   />
+                //   <Choice
+                //     checked={checked === false}
+                //     label="No"
+                //     name={`apd-assurances-no-${namify(name, title)}`}
+                //     onChange={handleCheckChange(name, index, false)}
+                //     size="small"
+                //     type="radio"
+                //     value="no"
+                //     checkedChildren={
+                //       <div className="ds-c-choice__checkedChild">
+                //         <TextArea
+                //           label="Please explain"
+                //           name={namify(name, title)}
+                //           value={explanation}
+                //           onChange={handleExplanationChange(name, index)}
+                //           rows={5}
+                //         />
+                //       </div>
+                //     }
+                //   />
+                // </fieldset>
+                <ChoiceList
+                  key={title}
+                  label={'Are you complying with yada yada2'}
+                  name={`apd-assurances-${namify(name, title)}`}
+                  choices={[
+                    {
+                      label: 'Yes',
+                      value: 'yes',
+                      checked: checked === true
+                    },
+                    {
+                      label: 'No',
+                      value: 'no',
+                      checked: checked === false,
+                      checkedChildren: (
+                        <div className="ds-c-choice__checkedChild">
+                          <TextArea
+                            label="Please explain"
+                            name={namify(name, title)}
+                            value={explanation}
+                            onChange={handleExplanationChange(name, index)}
+                            rows={5}
+                          />
+                        </div>
+                      )
                     }
-                  />
-                </fieldset>
+                  ]}
+                  type="radio"
+                  size="small"
+                  onChange={e => {
+                    handleCheckChange(name, index, e);
+                  }}
+                />
               ))}
             </div>
           ))}
