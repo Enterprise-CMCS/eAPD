@@ -5,6 +5,8 @@ sudo yum install -y gcc-c++
 su ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
+cd ~
+# Prepare the environment
 export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
@@ -18,9 +20,10 @@ export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
 export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
 export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
 export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
-export DATABASE_URL="__DATABASE_URL"
+export DATABASE_URL="__DATABASE_URL__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
-cd ~
+
+# Create app logs and directories
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
 touch /app/api/logs/eAPD-API-out-0.log
