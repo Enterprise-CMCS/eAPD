@@ -27,15 +27,14 @@ class ActivitiesStateStaffExpensesPage {
   };
 
   // Open the indexth staff edit page, fill info, then click done.
-  fillStaff = (years, staffIndex, title, desc, costs, ftes) => {
-    cy.log("FILLING STUFF OUT");
+  fillStaff = (years, staffIndex, title, description, costs, ftes) => {
     const staffNumber = staffIndex + 1;
-    
+  
     // Lower default typing delays for long titles/descriptions
     cy.get('[name="title"]').clear().type(title, { delay: 1 });
-
-    cy.get('[name="description"]').clear().type(desc, { delay: 1 });
-    
+  
+    cy.get('[name="description"]').clear().type(description, { delay: 1 });
+  
     // There are multiple years to fill in for cost/FTE
     _.forEach(years, (year, index) => {
       cy.get(`[name="[${year}].amt"`).clear().type(costs[index], { delay: 1});
@@ -43,7 +42,7 @@ class ActivitiesStateStaffExpensesPage {
     });
     
     cy.focused().blur();
-
+  
     // Verify that Total = Cost with Benefits * Number of FTEs
     cy.findByRole('heading', { name: `Personnel ${staffNumber}:` })
       .parent()
@@ -57,7 +56,7 @@ class ActivitiesStateStaffExpensesPage {
             cy.wrap(total).should('eq', costs[index] * ftes[index]);
           });
       });
-
+  
     cy.findByRole('button', { name: /Save/i }).click();
   };
 

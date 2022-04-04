@@ -588,34 +588,45 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       
       const staffList = [
         {
-          title: 'Robot Doctor',
-          description: 'A doctor of robotics and also a robot.',
-          costs: [100,200],
-          ftes: [1,2]
+          title: 'Test State Staff',
+          description: 'Director of staffing and organizing staff for staffing needs and roles.',
+          costs: [100000,100000],
+          ftes: [1,1]
         }
       ];
       
-      fillOutActivityPage.fillStateStaffAndExpenses(years, staffList, [], true);
+      fillOutActivityPage.fillStateStaff(years, staffList);
       
-// Todo: update this to check for form errors, or remove it and check for form errors somewhere else
-//       cy.get('.form-and-review-list')
-//         .eq(0)
-//         .findAllByRole('button', { name: /Edit/i })
-//         .click();
-// 
-//       cy.findByLabelText('Personnel title').type('Test cancel');
-// 
-//       cy.get('.form-and-review-list')
-//         .eq(0)
-//         .findByRole('button', { name: /Cancel/i })
-//         .click();
-// 
-//       activityPage.checkStateStaffOutput({
-//         name: 'Personnel title not specified',
-//         years,
-//         cost: 0,
-//         fte: 0
-//       });
+      cy.get('.form-and-review-list')
+        .eq(0)
+        .findAllByRole('button', { name: /Edit/i })
+        .click();
+
+      cy.findByLabelText('Personnel title').clear().blur();
+      cy.contains('Provide a personnel title.').should('exist');
+      
+      cy.findByLabelText('Description').clear().blur();
+      cy.contains('Provide a personnel description.').should('exist');
+      
+      years.forEach((year, index) => {
+        cy.get(`[name="[${year}].amt"`).clear().blur();
+        cy.contains('Please provide a FTE cost greater than or equal to $0.').should('exist');
+        cy.get(`[name="[${year}].perc"`).clear().blur();
+        cy.contains('Provide a FTE number greater than or equal to 0.').should('exist');
+      })
+      
+
+      cy.get('.form-and-review-list')
+        .eq(0)
+        .findByRole('button', { name: /Cancel/i })
+        .click();
+        
+      activityPage.checkStateStaffOutput({
+        name: 'Test State Staff',
+        years,
+        cost: 100000,
+        fte: 1
+      });
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
 
@@ -814,7 +825,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   'Not specified (APD Key Personnel)$0×0 FTE=$0'
                 )
                 .next()
-                .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
+                .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000')
                 .next()
                 .next()
                 .next()
@@ -872,7 +883,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Personnel title not specified$0×0 FTE=$0');
+            .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -958,13 +969,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         name: /Activity 1: Program AdministrationState staff/i
       })
         .next()
-        .should('have.text', '1. Personnel title not specified')
+        .should('have.text', '1. Test State Staff')
         .next()
         .next()
         .should(
           'have.text',
           years
-            .map(year => `FFY ${year} Cost: $0 | FTEs: 0 | Total: $0`)
+            .map(year => `FFY ${year} Cost: $100,000 | FTEs: 1 | Total: $100,000`)
             .join('')
         );
 
@@ -1022,7 +1033,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   'Not specified (APD Key Personnel)$0×0 FTE=$0'
                 )
                 .next()
-                .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
+                .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000')
                 .next()
                 .next()
                 .next()
@@ -1073,7 +1084,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Personnel title not specified$0×0 FTE=$0');
+            .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -1159,7 +1170,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkDeleteButton(
         'State staff have not been added for this activity.',
         'Delete State Staff Expenses?',
-        'Personnel title not specified'
+        'Test State Staff'
       );
 
       activityPage.checkDeleteButton(
