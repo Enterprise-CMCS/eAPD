@@ -56,14 +56,13 @@ cd /app
 echo __BUILDURL__ |tee /home/ec2-user/buildurl.txt
 curl -o backend.zip -L __BUILDURL__ |tee /home/ec2-user/backenddownload.txt
 unzip backend.zip
-rm backend.zip
+#rm backend.zip
 cd api
 yarn install --frozen-lockfile --production=true
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
-#yarn rebuild knex ### TODO use when yarn is updated
-yarn add --force knex
-yarn add newrelic
+yarn rebuild knex
+npm i -g newrelic
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
@@ -88,3 +87,4 @@ systemctl start newrelic-infra
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.13.2/bin /home/ec2-user/.nvm/versions/node/v16.13.2/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'
+

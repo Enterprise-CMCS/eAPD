@@ -876,6 +876,14 @@ jobs:
           working_directory: ~/project
           command: |
             zip -r /tmp/frontend.zip web/dist/*
+      - run:
+          name: Persist Build URL to Workspace
+          working_directory: ~/project
+          command: sh bin/prod-deploy/buildurl.sh CIRCLE_TOKEN=${CIRCLE_TOKEN} CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} > ./build-url.txt
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ./build-url.txt
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip
