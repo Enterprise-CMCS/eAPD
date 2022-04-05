@@ -1,37 +1,62 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useReducer, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { connect } from 'react-redux';
 
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+
 import DateField from '../../../components/DateField';
+
+import milestonesSchema from '../../../static/schemas/milestones';
 
 import { saveMilestone as actualSaveMilestone } from '../../../actions/editActivity';
 
 const MilestoneForm = forwardRef(
-  ({ activityIndex, index, item, saveMilestone }, ref) => {
+  ({ activityIndex, index, item, saveMilestone, setFormValid }, ref) => {
     MilestoneForm.displayName = 'MilestoneForm';
 
-    function reducer(state, action) {
-      switch (action.type) {
-        case 'updateField':
-          return {
-            ...state,
-            [action.field]: action.value
-          };
-        default:
-          throw new Error(
-            'Unrecognized action type provided to OutcomesAndMetricForm reducer'
-          );
-      }
-    }
+    const {
+      control,
+      formState: { errors, isValid },
+      getValues,
+      setValue
+    } = useForm({
+      defaultValues: {
+        ...item
+      },
+      mode: 'onBlur',
+      reValidateMode: 'onBlur',
+      resolver: joiResolver(statePersonnelSchema)
+    });
+    
+    // function reducer(state, action) {
+    //   switch (action.type) {
+    //     case 'updateField':
+    //       return {
+    //         ...state,
+    //         [action.field]: action.value
+    //       };
+    //     default:
+    //       throw new Error(
+    //         'Unrecognized action type provided to OutcomesAndMetricForm reducer'
+    //       );
+    //   }
+    // }
 
-    const [state, dispatch] = useReducer(reducer, item);
-
+    // const [state, dispatch] = useReducer(reducer, item);
+    
+    const [subFormValid, setSubFormValid] = useState(false);
+    
     const changeDate = (_, dateStr) =>
       dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
 
     const changeName = ({ target: { value } }) =>
       dispatch({ type: 'updateField', field: 'milestone', value });
+
+    useEffect(() => {
+      setFormValid(isValid);
+    }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleSubmit = e => {
       e.preventDefault();
