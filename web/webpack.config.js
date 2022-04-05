@@ -45,10 +45,7 @@ const config = {
           // Interprets any url() and @import statements and resolves them to
           // their full path on the local disk.
           {
-            loader: 'css-loader',
-            options: {
-              import: false
-            }
+            loader: 'css-loader'
           },
 
           // Add browser prefixes and minify CSS.
