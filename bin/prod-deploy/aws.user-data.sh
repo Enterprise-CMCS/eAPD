@@ -51,14 +51,15 @@ nvm alias default 16.13.2
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
 npm i -g yarn@1.22.17
+
 # Get the built API code
 cd /app
 echo __BUILDURL__ |tee /home/ec2-user/buildurl.txt
 curl -o backend.zip -L __BUILDURL__ |tee /home/ec2-user/backenddownload.txt
 unzip backend.zip
 #rm backend.zip
-cd api
 yarn install --frozen-lockfile --production=true
+
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
 yarn rebuild knex
