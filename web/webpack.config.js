@@ -3,12 +3,10 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const nodeExternals = require('webpack-node-externals');
 
 const config = {
   mode: 'production',
   externalsPresets: { node: true },
-  externals: [nodeExternals()],
   entry: {
     app: [path.join(__dirname, 'src/app.js')]
   },
@@ -32,7 +30,10 @@ const config = {
       {
         test: /\.m?js$/,
         exclude: /node_modules\/(?!(d3-array|d3-format|d3-geo)\/)/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
+        options: {
+          rootMode: 'upward'
+        }
       },
       {
         test: /\.scss$/,
