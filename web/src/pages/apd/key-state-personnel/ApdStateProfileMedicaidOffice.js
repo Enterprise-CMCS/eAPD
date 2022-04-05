@@ -13,11 +13,11 @@ import {
   setMedicaidOfficeCity,
   setMedicaidOfficeState,
   setMedicaidOfficeZip
-} from '../actions/editApd';
-import { t } from '../i18n';
-import { selectKeyStatePersonnel } from '../reducers/apd.selectors';
-import { selectState } from '../reducers/user';
-import { STATES } from '../util';
+} from '../../../actions/editApd';
+import { t } from '../../../i18n';
+import { selectKeyStatePersonnel } from '../../../reducers/apd.selectors';
+import { selectState } from '../../../reducers/user';
+import { STATES } from '../../../util';
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';
@@ -35,10 +35,12 @@ const ApdStateProfile = ({
   keyStatePersonnel
 }) => {
   const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
-  
-  const handleChange = action => ({ target: { value } }) => {
-    action(value);
-  };
+
+  const handleChange =
+    action =>
+    ({ target: { value } }) => {
+      action(value);
+    };
 
   return (
     <Fragment>

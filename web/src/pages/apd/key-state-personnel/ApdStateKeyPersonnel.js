@@ -2,31 +2,34 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { ApdKeyPersonForm, ApdKeyPersonReview } from './ApdKeyPerson';
-import FormAndReviewList from '../components/FormAndReviewList';
-import { selectApdYears, selectKeyPersonnel } from '../reducers/apd.selectors';
+import ApdKeyPersonForm from './ApdKeyPersonForm';
+import ApdKeyPersonReview from './ApdKeyPersonReview';
+import FormAndReviewList from '../../../components/FormAndReviewList';
+import {
+  selectApdYears,
+  selectKeyPersonnel
+} from '../../../reducers/apd.selectors';
 
-import { removeKeyPersonnel } from '../actions/editApd';
-import { getKeyPersonnel } from '../reducers/apd';
+import { removeKeyPersonnel } from '../../../actions/editApd';
+import { getKeyPersonnel } from '../../../reducers/apd';
 
 const ApdStateKeyPersonnel = ({ remove, list, years }) => {
-
   const [localList, setLocalList] = useState(list);
 
   useEffect(() => {
-    setLocalList(list)
-  }, [list])
+    setLocalList(list);
+  }, [list]);
 
   const addClick = () => {
     const isPrimary = list.length === 0;
     const newListItem = getKeyPersonnel(years, isPrimary);
     setLocalList([...localList, newListItem]);
   };
-  
+
   const onCancel = () => {
     setLocalList(list);
   };
-    
+
   return (
     <FormAndReviewList
       addButtonText={
