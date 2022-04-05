@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ApdStateKeyPersonnel';
-import { removeKeyPersonnel } from '../actions/editApd';
+import { removeKeyPersonnel } from '../../../actions/editApd';
 
 describe('apd state profile, Medicaid office component', () => {
   const props = {
@@ -58,7 +58,9 @@ describe('apd state profile, Medicaid office component', () => {
       mapStateToProps({
         apd: {
           data: {
-            keyPersonnel: 'these are my people',
+            keyStatePersonnel: {
+              keyPersonnel: 'these are my people'
+            },
             years: 'and these are my years'
           }
         }

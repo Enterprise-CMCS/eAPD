@@ -16,12 +16,12 @@ import {
   setMedicaidOfficeCity,
   setMedicaidOfficeState,
   setMedicaidOfficeZip
-} from '../actions/editApd';
+} from '../../../actions/editApd';
 
 describe('apd state profile, Medicaid office component', () => {
   const props = {
     defaultStateID: 'mn',
-    stateProfile: {
+    keyStatePersonnel: {
       medicaidDirector: {
         name: 'name',
         email: 'email',
@@ -119,7 +119,7 @@ describe('apd state profile, Medicaid office component', () => {
       mapStateToProps({
         apd: {
           data: {
-            stateProfile: 'this is the state, from the side'
+            keyStatePersonnel: 'this is the state, from the side'
           }
         },
         user: {
@@ -130,7 +130,7 @@ describe('apd state profile, Medicaid office component', () => {
       })
     ).toEqual({
       defaultStateID: 'mn',
-      stateProfile: 'this is the state, from the side'
+      keyStatePersonnel: 'this is the state, from the side'
     });
   });
 

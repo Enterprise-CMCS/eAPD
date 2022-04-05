@@ -19,13 +19,13 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         // values so that if the states table info is missing any fields,
         // we preserve the defaults
 
-        apd.stateProfile.medicaidDirector = {
-          ...apd.stateProfile.medicaidDirector,
+        apd.keyStatePersonnel.medicaidDirector = {
+          ...apd.keyStatePersonnel.medicaidDirector,
           ...stateProfile.medicaidDirector
         };
 
-        apd.stateProfile.medicaidOffice = {
-          ...apd.stateProfile.medicaidOffice,
+        apd.keyStatePersonnel.medicaidOffice = {
+          ...apd.keyStatePersonnel.medicaidOffice,
           ...stateProfile.medicaidOffice
         };
       }

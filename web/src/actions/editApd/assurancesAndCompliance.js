@@ -8,7 +8,7 @@ import { EDIT_APD } from './symbols';
  */
 export const setComplyingWithProcurement = (index, complying) => ({
   type: EDIT_APD,
-  path: `/federalCitations/procurement/${index}/checked`,
+  path: `/assurancesAndCompliances/procurement/${index}/checked`,
   value: complying
 });
 
@@ -20,7 +20,7 @@ export const setComplyingWithProcurement = (index, complying) => ({
  */
 export const setJustificationForProcurement = (index, justification) => ({
   type: EDIT_APD,
-  path: `/federalCitations/procurement/${index}/explanation`,
+  path: `/assurancesAndCompliances/procurement/${index}/explanation`,
   value: justification
 });
 
@@ -32,7 +32,7 @@ export const setJustificationForProcurement = (index, justification) => ({
  */
 export const setComplyingWithRecordsAccess = (index, complying) => ({
   type: EDIT_APD,
-  path: `/federalCitations/recordsAccess/${index}/checked`,
+  path: `/assurancesAndCompliances/recordsAccess/${index}/checked`,
   value: complying
 });
 
@@ -44,7 +44,7 @@ export const setComplyingWithRecordsAccess = (index, complying) => ({
  */
 export const setJustificationForRecordsAccess = (index, justification) => ({
   type: EDIT_APD,
-  path: `/federalCitations/recordsAccess/${index}/explanation`,
+  path: `/assurancesAndCompliances/recordsAccess/${index}/explanation`,
   value: justification
 });
 
@@ -56,7 +56,7 @@ export const setJustificationForRecordsAccess = (index, justification) => ({
  */
 export const setComplyingWithSecurity = (index, complying) => ({
   type: EDIT_APD,
-  path: `/federalCitations/security/${index}/checked`,
+  path: `/assurancesAndCompliances/security/${index}/checked`,
   value: complying
 });
 
@@ -68,7 +68,7 @@ export const setComplyingWithSecurity = (index, complying) => ({
  */
 export const setJustificationForSecurity = (index, justification) => ({
   type: EDIT_APD,
-  path: `/federalCitations/security/${index}/explanation`,
+  path: `/assurancesAndCompliances/security/${index}/explanation`,
   value: justification
 });
 
@@ -80,7 +80,7 @@ export const setJustificationForSecurity = (index, justification) => ({
  */
 export const setComplyingWithSoftwareRights = (index, complying) => ({
   type: EDIT_APD,
-  path: `/federalCitations/softwareRights/${index}/checked`,
+  path: `/assurancesAndCompliances/softwareRights/${index}/checked`,
   value: complying
 });
 
@@ -92,6 +92,6 @@ export const setComplyingWithSoftwareRights = (index, complying) => ({
  */
 export const setJustificationForSoftwareRights = (index, justification) => ({
   type: EDIT_APD,
-  path: `/federalCitations/softwareRights/${index}/explanation`,
+  path: `/assurancesAndCompliances/softwareRights/${index}/explanation`,
   value: justification
 });

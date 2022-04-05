@@ -104,7 +104,8 @@ const buildBudget = incomingBigState => {
   // Get a shell of our new state object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
   // to have a bunch of code checking for it.
-  const { keyPersonnel, years } = bigState.apd.data;
+  const { years } = bigState.apd.data;
+  const { keyPersonnel } = bigState.apd.data.keyStatePersonnel;
   const newState = initialState(years);
 
   /**
