@@ -62,7 +62,7 @@ mkdir -p /app/node_modules
 mv ~/eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
-mv eAPD/api/* /app/api
+mv ~/eAPD/api/* /app/api
 cd /app/api
 
 # Build and seed the database
