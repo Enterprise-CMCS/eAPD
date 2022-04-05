@@ -4,11 +4,11 @@ import React, { forwardRef, useReducer } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import { t } from '../../i18n';
+import { t } from '../../../i18n';
 
-import PersonCostForm from '../../components/PersonCostForm';
+import PersonCostForm from '../../../components/PersonCostForm';
 
-import { saveKeyPersonnel } from '../../actions/editApd';
+import { saveKeyPersonnel } from '../../../actions/editApd';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
