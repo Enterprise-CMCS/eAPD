@@ -186,7 +186,7 @@ describe('assurances and compliance component', () => {
       mapStateToProps({
         apd: {
           data: {
-            federalCitations: 'this gets mapped over'
+            assurancesAndCompliances: 'this gets mapped over'
           }
         }
       })

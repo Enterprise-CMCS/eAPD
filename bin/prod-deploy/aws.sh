@@ -116,6 +116,50 @@ function deployAPItoEC2() {
 function addBuildUrlToUserData() {
   sed -i'.backup' -e "s|__BUILDURL__|`echo $BUILD_URL`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__GIT_BRANCH__|\"`echo $BRANCH`\"|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__PBKDF2_ITERATIONS__|`echo $API_PBKDF2_ITERATIONS`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__OKTA_DOMAIN__|`echo $OKTA_DOMAIN`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__OKTA_API_KEY__|`echo $OKTA_API_KEY`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__OKTA_CLIENT_ID__|`echo $OKTA_CLIENT_ID`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__OKTA_SERVER_ID__|`echo $OKTA_SERVER_ID`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_INITDB_ROOT_USERNAME__|`echo $MONGO_INITDB_ROOT_USERNAME`|g" aws.user-data.sh
+  
+  sed -i'.backup' -e "s|__MONGO_INITDB_ROOT_PASSWORD__|`echo $MONGO_INITDB_ROOT_PASSWORD`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_INITDB_DATABASE__|`echo $MONGO_INITDB_DATABASE`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_DATABASE_USERNAME__|`echo $MONGO_DATABASE_USERNAME`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_DATABASE_PASSWORD__|`echo $MONGO_DATABASE_PASSWORD`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__JWT_SECRET__|`echo $JWT_SECRET`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_DATABASE__|`echo $MONGO_DATABASE`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_URL__|`echo $MONGO_URL`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_ADMIN_URL__|`echo $MONGO_ADMIN_URL`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__NEW_RELIC_LICENSE_KEY__|`echo $NEW_RELIC_LICENSE_KEY`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_INITDB_ROOT_USERNAME__|`echo $MONGO_INITDB_ROOT_USERNAME`|g" aws.user-data.sh
+  
+  sed -i'.backup' -e "s|__MONGO_INITDB_ROOT_PASSWORD__|`echo $MONGO_INITDB_ROOT_PASSWORD`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_INITDB_DATABASE__|`echo $MONGO_INITDB_DATABASE`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_DATABASE_USERNAME__|`echo $MONGO_DATABASE_USERNAME`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__MONGO_DATABASE_PASSWORD__|`echo $MONGO_DATABASE_PASSWORD`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__DATABASE_URL__|`echo $DATABASE_URL`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 
@@ -246,7 +290,7 @@ function createNewInstance() {
     --security-group-ids $AWS_SECURITY_GROUP \
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
-    --key-name tforkner_eapd \
+    --key-name eapd_bbrooks \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT},{Key=cms-cloud-exempt:open-sg,Value=CLDSPT-5877}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'

@@ -12,9 +12,9 @@ import { selectApdData } from '../../reducers/apd.selectors';
 import { selectBudget } from '../../reducers/budget.selectors';
 import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
-import KeyStatePersonnel from './key-state-personnel/KeyStatePersonnel';
+import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from '../../containers/viewOnly/ApdSummary';
-import PreviousActivities from './previous-activities/PreviousActivities';
+import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import Activities from '../../containers/viewOnly/activities/All';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
 import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
@@ -106,10 +106,7 @@ const ApdViewOnly = ({
       <hr className="section-rule" />
       <ApdSummary />
       <hr className="section-rule" />
-      <KeyStatePersonnel
-        stateProfile={apd.stateProfile}
-        keyPersonnel={apd.keyPersonnel}
-      />
+      <ApdStateProfile keyStatePersonnel={apd.keyStatePersonnel} />
       <hr className="section-rule" />
       <PreviousActivities />
       <hr className="section-rule" />

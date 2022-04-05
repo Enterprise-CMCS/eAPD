@@ -77,7 +77,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = [
         {
           op: 'replace',
-          path: '/stateProfile/medicaidDirector/name',
+          path: '/keyStatePersonnel/medicaidDirector/name',
           value: 'Bob the Builder'
         },
         { op: 'replace', path: '/name', value: 'new APD name' },
@@ -157,7 +157,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = [
         {
           op: 'replace',
-          path: '/stateProfile/medicaidDirector/name',
+          path: '/keyStatePersonnel/medicaidDirector/name',
           value: 'Bob the Builder'
         },
         { op: 'replace', path: '/status', value: 'submitted' },

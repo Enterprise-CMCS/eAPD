@@ -24,18 +24,28 @@ jobs:
           arguments: -syntax-only
           working_directory: packer
           target: plat-ami.pkr.hcl
-      # build artifact
       - name: Build Artifact 🧱
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
           arguments: "-color=false -on-error=abort"
           working_directory: packer
-          target: plat-ami.pkr.hcl
+          target: preview-ami.pkr.hcl
         env:
           PACKER_LOG: 1
           PKR_VAR_ami_name: ${{ secrets.PACKER_AMI_NAME }}
           PKR_VAR_subnet_id: ${{ secrets.PACKER_SUBNET_ID }}
           PKR_VAR_vpc_id: ${{ secrets.PACKER_VPC_ID }}
           PKR_VAR_gold_owner: ${{ secrets.PACKER_GOLD_OWNER }}
+          PKR_VAR_preview_mongo_database: ${{ secrets.PREVIEW_MONGO_DATABASE }}
+          PKR_VAR_preview_mongo_initdb_root_username: ${{ secrets.PREVIEW_MONGO_INITDB_ROOT_USERNAME }}
+          PKR_VAR_preview_mongo_initdb_root_password: ${{ secrets.PREVIEW_MONGO_INITDB_ROOT_PASSWORD }}
+          PKR_VAR_preview_mongo_initdb_database: ${{ secrets.PREVIEW_MONGO_INITDB_DATABASE }}
+          PKR_VAR_preview_mongo_database_username: ${{ secrets.PREVIEW_MONGO_DATABASE_USERNAME }}
+          PKR_VAR_preview_mongo_database_password: ${{ secrets.PREVIEW_MONGO_DATABASE_PASSWORD }}
+          PKR_VAR_preview_mongo_admin_url: ${{ secrets.PREVIEW_MONGO_ADMIN_URL }}
+          PKR_VAR_preview_database_url: ${{ secrets.PREVIEW_DATABASE_URL }}
+          PKR_VAR_preview_okta_domain: ${{ secrets.PREVIEW_OKTA_DOMAIN }}
+          PKR_VAR_preview_okta_api_key: ${{ secrets.PREVIEW_OKTA_API_KEY }}
+          PKR_VAR_preview_environment: ${{ secrets.PREVIEW_ENVIRONMENT }}
           
