@@ -229,7 +229,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
-            - e2e test
+
 
       - store artifacts:
           name: store artifacts staging
