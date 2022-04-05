@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -27,58 +27,57 @@ const MilestoneForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(statePersonnelSchema)
+      resolver: joiResolver(milestonesSchema)
     });
-    
-    // function reducer(state, action) {
-    //   switch (action.type) {
-    //     case 'updateField':
-    //       return {
-    //         ...state,
-    //         [action.field]: action.value
-    //       };
-    //     default:
-    //       throw new Error(
-    //         'Unrecognized action type provided to OutcomesAndMetricForm reducer'
-    //       );
-    //   }
-    // }
 
-    // const [state, dispatch] = useReducer(reducer, item);
-    
     const [subFormValid, setSubFormValid] = useState(false);
-    
+
     const changeDate = (_, dateStr) =>
-      dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
+      setValue(`endDate`, dateStr);
+      // dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
 
     const changeName = ({ target: { value } }) =>
-      dispatch({ type: 'updateField', field: 'milestone', value });
+      setValue(`milestone`, value);
+      // dispatch({ type: 'updateField', field: 'milestone', value });
 
     useEffect(() => {
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const handleSubmit = e => {
+    const onSubmit = e => {
       e.preventDefault();
-      saveMilestone(activityIndex, index, state);
+      saveMilestone(activityIndex, index, getValues());
     };
 
     return (
-      <form index={index} onSubmit={handleSubmit}>
+      <form index={index} onSubmit={onSubmit}>
         <h6 className="ds-h4">Milestone {index + 1}:</h6>
-        <TextField
-          data-cy={`milestone-${index}`}
-          label="Name"
-          name="name"
-          value={state.milestone}
-          className="remove-clearfix textfield__container"
-          onChange={changeName}
+        <Controller
+          control={control}
+          name="milestone"
+          render={({ field: { onChange, value, ...props } }) => (
+            <TextField
+              data-cy={`milestone-${index}`}
+              label="Name"
+              name="milestone"
+              value={value}
+              className="remove-clearfix textfield__container"
+              onChange={changeName}
+            />
+          )} 
         />
-        <DateField
-          label="Target completion date"
-          hint=""
-          value={state.endDate}
-          onChange={changeDate}
+        <Controller
+          control={control}
+          name="endDate"
+          render={({ field: { onChange, value, ...props } }) => (
+            <DateField
+              label="Target completion date"
+              hint=""
+              name="endDate"
+              value={value}
+              onChange={changeDate}
+            />
+          )}
         />
         <input
           className="ds-u-visibility--hidden"
