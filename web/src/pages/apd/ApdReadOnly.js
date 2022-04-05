@@ -12,7 +12,7 @@ import { selectApdData } from '../../reducers/apd.selectors';
 import { selectBudget } from '../../reducers/budget.selectors';
 import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
-import ApdStateProfile from '../../containers/viewOnly/ApdStateProfile';
+import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from '../../containers/viewOnly/ApdSummary';
 import PreviousActivities from '../../containers/viewOnly/PreviousActivities';
 import Activities from '../../containers/viewOnly/activities/All';
@@ -107,8 +107,7 @@ const ApdViewOnly = ({
       <ApdSummary />
       <hr className="section-rule" />
       <ApdStateProfile
-        stateProfile={apd.stateProfile}
-        keyPersonnel={apd.keyPersonnel}
+        keyStatePersonnel={apd.keyStatePersonnel}
       />
       <hr className="section-rule" />
       <PreviousActivities />

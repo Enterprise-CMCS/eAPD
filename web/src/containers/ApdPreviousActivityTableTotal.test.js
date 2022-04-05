@@ -10,44 +10,46 @@ describe('apd previous activity table, grand total component', () => {
   const state = {
     apd: {
       data: {
-        previousActivityExpenses: {
-          1: {
-            hithie: {
-              federalActual: 1000,
-              totalApproved: 2000
-            },
-            mmis: {
-              90: {
-                federalActual: 10,
-                totalApproved: 20
+        previousActivities: {
+          actualExpenditures: {
+            1: {
+              hithie: {
+                federalActual: 1000,
+                totalApproved: 2000
               },
-              75: {
-                federalActual: 30,
-                totalApproved: 40
-              },
-              50: {
-                federalActual: 50,
-                totalApproved: 60
+              mmis: {
+                90: {
+                  federalActual: 10,
+                  totalApproved: 20
+                },
+                75: {
+                  federalActual: 30,
+                  totalApproved: 40
+                },
+                50: {
+                  federalActual: 50,
+                  totalApproved: 60
+                }
               }
-            }
-          },
-          2: {
-            hithie: {
-              federalActual: 3000,
-              totalApproved: 4000
             },
-            mmis: {
-              90: {
-                federalActual: 100,
-                totalApproved: 200
+            2: {
+              hithie: {
+                federalActual: 3000,
+                totalApproved: 4000
               },
-              75: {
-                federalActual: 300,
-                totalApproved: 400
-              },
-              50: {
-                federalActual: 500,
-                totalApproved: 600
+              mmis: {
+                90: {
+                  federalActual: 100,
+                  totalApproved: 200
+                },
+                75: {
+                  federalActual: 300,
+                  totalApproved: 400
+                },
+                50: {
+                  federalActual: 500,
+                  totalApproved: 600
+                }
               }
             }
           }
