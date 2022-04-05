@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Section, Subsection } from './Section';
-import MedicaidOffice from '../containers/ApdStateProfileMedicaidOffice';
-import KeyPersonnel from '../containers/ApdStateKeyPersonnel';
-import Waypoint from '../containers/ConnectedWaypoint';
-import AlertMissingFFY from './AlertMissingFFY';
+import { Section, Subsection } from '../../../components/Section';
+import MedicaidOffice from './ApdStateProfileMedicaidOffice';
+import KeyPersonnel from './ApdStateKeyPersonnel';
+import Waypoint from '../../../containers/ConnectedWaypoint';
+import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
-const ApdStateProfile = () => (
+const KeyStatePersonnel = () => (
   <React.Fragment>
     <Waypoint />
-    <AlertMissingFFY/>
+    <AlertMissingFFY />
     <Section resource="apd.stateProfile">
       <Waypoint id="apd-state-profile-office" />
       <Subsection
@@ -30,4 +30,4 @@ const ApdStateProfile = () => (
   </React.Fragment>
 );
 
-export default ApdStateProfile;
+export default KeyStatePersonnel;
