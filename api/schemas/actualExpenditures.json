@@ -1,9 +1,9 @@
 {
-  "$id": "previousActivityExpenses.json",
+  "$id": "actualExpenditures.json",
   "type": "object",
   "patternProperties": {
     "^[0-9]{4}$": {
-      "$id": "#/properties/previousActivityExpenses/year",
+      "$id": "#/properties/actualExpenditures/year",
       "type": "object",
       "required": [
         "hithie",
@@ -11,7 +11,7 @@
       ],
       "properties": {
         "hithie": {
-          "$id": "#/properties/previousActivityExpenses/year/hithie",
+          "$id": "#/properties/actualExpenditures/year/hithie",
           "type": "object",
           "required": [
             "federalActual",
@@ -19,17 +19,17 @@
           ],
           "properties": {
             "federalActual": {
-              "$id": "#/properties/previousActivityExpenses/year/hithie/federalActual",
+              "$id": "#/properties/actualExpenditures/year/hithie/federalActual",
               "type": "number"
             },
             "totalApproved": {
-              "$id": "#/properties/previousActivityExpenses/year/hithie/totalApproved",
+              "$id": "#/properties/actualExpenditures/year/hithie/totalApproved",
               "type": "number"
             }
           }
         },
         "mmis": {
-          "$id": "#/properties/previousActivityExpenses/year/mmis",
+          "$id": "#/properties/actualExpenditures/year/mmis",
           "type": "object",
           "required": [
             "50",
@@ -38,7 +38,7 @@
           ],
           "properties": {
             "50": {
-              "$id": "#/properties/previousActivityExpenses/year/mmis/50",
+              "$id": "#/properties/actualExpenditures/year/mmis/50",
               "type": "object",
               "required": [
                 "federalActual",
@@ -46,17 +46,17 @@
               ],
               "properties": {
                 "federalActual": {
-                  "$id": "#/properties/previousActivityExpenses/year/mmis/50/federalActaul",
+                  "$id": "#/properties/actualExpenditures/year/mmis/50/federalActaul",
                   "type": "number"
                 },
                 "totalApproved": {
-                  "$id": "#/properties/previousActivityExpenses/year/mmis/50/totalApproved",
+                  "$id": "#/properties/actualExpenditures/year/mmis/50/totalApproved",
                   "type": "number"
                 }
               }
             },
             "75": {
-              "$id": "#/properties/previousActivityExpenses/year/mmis/75",
+              "$id": "#/properties/actualExpenditures/year/mmis/75",
               "type": "object",
               "required": [
                 "federalActual",
@@ -64,17 +64,17 @@
               ],
               "properties": {
                 "federalActual": {
-                  "$id": "#/properties/previousActivityExpenses/year/mmis/75/federalActual",
+                  "$id": "#/properties/actualExpenditures/year/mmis/75/federalActual",
                   "type": "number"
                 },
                 "totalApproved": {
-                  "$id": "#/properties/previousActivityExpenses/year/mmis/75/totalApproved",
+                  "$id": "#/properties/actualExpenditures/year/mmis/75/totalApproved",
                   "type": "number"
                 }
               }
             },
             "90": {
-              "$id": "#/properties/previousActivityExpenses/year/mmis/90",
+              "$id": "#/properties/actualExpenditures/year/mmis/90",
               "type": "object",
               "required": [
                 "federalActual",
@@ -82,11 +82,11 @@
               ],
               "properties": {
                 "federalActual": {
-                  "$id": "#/properties/previousActivityExpenses/year/mmis/90/federalActual",
+                  "$id": "#/properties/actualExpenditures/year/mmis/90/federalActual",
                   "type": "number"
                 },
                 "totalApproved": {
-                  "$id": "#/properties/previousActivityExpenses/year/mmis/90/totalApproved",
+                  "$id": "#/properties/actualExpenditures/year/mmis/90/totalApproved",
                   "type": "number"
                 }
               }

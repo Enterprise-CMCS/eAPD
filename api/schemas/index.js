@@ -4,18 +4,21 @@ const Ajv = require('ajv').default;
 // all schemas, except the base apd document schema
 const schemas = [
   'definitions.json',
+  'apdOverview.json',
   'activity.json',
   'contractorResource.json',
   'costAllocation.json',
   'costAllocationNarrative.json',
   'expense.json',
-  'federalCitations.json',
+  'assurancesAndCompliances.json',
+  'proposedBudget.json',
+  'previousActivities.json',
   'incentivePayments.json',
+  'keyStatePersonnel.json',
   'keyPersonnel.json',
   'outcome.json',
   'person.json',
-  'previousActivityExpenses.json',
-  'stateProfile.json'
+  'actualExpenditures.json'
 ].map(schema => require(`./${schema}`));
 
 const apdSchema = require('./apd.json');
