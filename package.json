@@ -69,7 +69,8 @@
     "e2e"
   ],
   "nohoist": [
-    "**/ajv"
+    "**/ajv",
+    "**/tinymce"
   ],
   "dependencies": {
     "@snyk/protect": "1.866.0"
