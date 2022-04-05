@@ -14,7 +14,7 @@ import AssurancesAndCompliance from '../../containers/AssurancesAndCompliance';
 import Export from '../../containers/ApdExport';
 import ApdOverview from './apd-overview/ApdOverview';
 import ExecutiveSummary from '../../containers/ExecutiveSummary';
-import PreviousActivities from '../../containers/PreviousActivities';
+import PreviousActivities from './previous-activities/PreviousActivities';
 import ProposedBudget from '../../containers/ProposedBudget';
 import ScheduleSummary from '../../containers/ScheduleSummary';
 import KeyStatePersonnel from './key-state-personnel/KeyStatePersonnel';
