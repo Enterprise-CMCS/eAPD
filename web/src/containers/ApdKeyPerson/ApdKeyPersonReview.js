@@ -20,7 +20,7 @@ const ApdStateKeyPerson = ({
   const costByYear = useMemo(
     () => (
       <div className="ds-u-margin-top--2">
-        {hasCosts ? (
+        {hasCosts === true ? (
           Object.keys(costs).map(year => (
             <div key={year}>
               <strong>FFY {year} Cost: </strong>

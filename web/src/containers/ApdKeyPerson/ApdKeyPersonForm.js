@@ -24,7 +24,9 @@ import { saveKeyPersonnel } from '../../actions/editApd';
 
 const getCheckedValue = value => {
   if (value !== null) {
-    return value ? 'yes' : 'no';
+    if (value === true) return 'yes';
+    if (value === false) return 'no';
+    return value;
   }
   return null;
 };
@@ -41,6 +43,10 @@ const keyPersonSchema = Joi.object({
   position: Joi.string().required().messages({
     'string.base': 'Role is required',
     'string.empty': 'Role is required'
+  }),
+  hasCosts: Joi.string().required().messages({
+    'string.base': 'Must select hourly or yearly.',
+    'string.empty': 'Must select hourly or yearly.'
   }),
   costs: Joi.alternatives().conditional('hasCosts', {
     is: 'yes',
@@ -93,6 +99,8 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
     reValidateMode: 'onBlur',
     resolver: joiResolver(keyPersonSchema)
   });
+
+  console.log({item})
 
   useEffect(() => {
     console.log({yearCostsFTE})
