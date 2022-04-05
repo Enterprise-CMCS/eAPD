@@ -30,10 +30,7 @@ const config = {
       {
         test: /\.m?js$/,
         exclude: /node_modules\/(?!(d3-array|d3-format|d3-geo)\/)/,
-        use: ['babel-loader'],
-        options: {
-          rootMode: 'upward'
-        }
+        loader: ['babel-loader']
       },
       {
         test: /\.scss$/,
