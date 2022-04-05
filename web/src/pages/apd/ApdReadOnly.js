@@ -14,7 +14,7 @@ import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from '../../containers/viewOnly/ApdSummary';
-import PreviousActivities from './previous-activities/PreviousActivities';
+import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import Activities from '../../containers/viewOnly/activities/All';
 import ScheduleSummary from '../../containers/viewOnly/ScheduleSummary';
 import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
