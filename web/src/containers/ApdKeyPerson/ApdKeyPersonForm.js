@@ -47,11 +47,12 @@ const keyPersonSchema = Joi.object({
     then: Joi.object().pattern(
       /\d{4}/,
       Joi.number().positive().required().messages({
-        'number.base': 'Provide a contract cost.',
-        'number.empty': 'Provide a contract cost.',
-        'number.format': 'Provide a contract cost greater than or equal to $0.',
-        'number.positive': 'Provide a contract cost greater than or equal to $0.'
-      })),
+        'number.base': 'Provide a cost with benefits.',
+        'number.empty': 'Provide a cost with benefits.',
+        'number.format': 'Provide a cost with benefits greater than $0.',
+        'number.positive': 'Provide a cost with benefits greater than $0.'
+      })
+    ),
     otherwise: Joi.any()
   }),
   fte: Joi.alternatives().conditional('hasCosts', {
@@ -59,11 +60,12 @@ const keyPersonSchema = Joi.object({
     then: Joi.object().pattern(
       /\d{4}/,
       Joi.number().positive().required().messages({
-        'number.base': 'Provide a contract cost.',
-        'number.empty': 'Provide a contract cost.',
-        'number.format': 'Provide a contract cost greater than or equal to $0.',
-        'number.positive': 'Provide a contract cost greater than or equal to $0.'
-      })),
+        'number.base': 'Provide an FTE.',
+        'number.empty': 'Provide an FTE.',
+        'number.format': 'Provide an FTE greater than or equal to .01.',
+        'number.positive': 'Provide an FTE greater than or equal to .01.'
+      })
+    ),
     otherwise: Joi.any()
   })
 })
@@ -76,7 +78,8 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
     handleSubmit,
     control,
     formState: { errors, isValid, isValidating },
-    getValues
+    getValues,
+    resetField: resetFieldErrors
   } = useForm({
     defaultValues: {
       name: item.name,
@@ -177,22 +180,6 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
       payload: e.target.value
     });
   };
-
-  const getEditCostForYear = (year, value) => dispatch({ type: 'updateCosts', year, value });
-
-  const getEditFTEForYear = (year, value) => dispatch({ type: 'updateFte', year, value });
-
-  const handleCostChange =
-    year =>
-    ({ target: { value } }) => {
-      getEditCostForYear(year, value);
-    };
-
-  const handleFTEChange =
-    year =>
-    ({ target: { value } }) => {
-      getEditFTEForYear(year, value);
-    };
 
   const setCostForYear = (year, value) => {
     dispatch({ type: 'updateCosts', field: 'costs', year, value });
@@ -317,25 +304,13 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
                                   value={amt}
                                   onChange={ e => {
                                     handleCostChange(year, e);
-                                    costOnChange(e)
+                                    setCostForYear(year, value);
+                                    costOnChange(e);
                                   }}
                                 />
                               )}
                             />
                           </div>
-                          <NumberField
-                            label="FTE Allocation"
-                            name="ftes"
-                            size="medium"
-                            min={0}
-                            hint="For example: 0.5 = 0.5 FTE = 50% time"
-                            value={perc}
-                            onChange={handleFTEChange(year)}
-                          />
-                          <p>
-                            <strong>Total: </strong>
-                            <Dollars>{amt * perc}</Dollars>
-                          </p>
                           <div>
                             <Fragment>
                               {errors?.costs && errors.costs[year] && (
@@ -348,6 +323,46 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
                               )}
                             </Fragment>
                           </div>
+                          <div>
+                            <Controller
+                              key={`${year}-fte`}
+                              name={`fte.${year}`}
+                              control={control}
+                              render={({
+                                field: { onChange: fteOnChange, ...props }
+                              }) => (
+                                <NumberField
+                                  {...props}
+                                  label="FTE Allocation"
+                                  size="medium"
+                                  min={0}
+                                  hint="For example: 0.5 = 0.5 FTE = 50% time"
+                                  value={perc}
+                                  onChange={ e => {
+                                    handleFTEChange(year, e);
+                                    setFTEForYear(year, value);
+                                    fteOnChange(e);
+                                  }}
+                                />
+                              )}
+                            />
+                          </div>
+                          <div>
+                            <Fragment>
+                              {errors?.fte && errors.fte[year] && (
+                                <span
+                                  className="ds-c-inline-error ds-c-field__error-message"
+                                  role="alert"
+                                >
+                                  {errors.fte[year].message}
+                                </span>
+                              )}
+                            </Fragment>
+                          </div>
+                          <p>
+                            <strong>Total: </strong>
+                            <Dollars>{amt * perc}</Dollars>
+                          </p>
                         </div>
 
                       </Fragment>
@@ -358,14 +373,20 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
               {
                 label: 'No',
                 value: 'no',
-                checked: state.hasCosts === 'no'
+                checked: value === 'no'
               }
             ]}
             type="radio"
             onChange={e => {
+              // resetFieldErrors('costs');
+              // resetFieldErrors('fte');
               handleHasCostsChange(e);
               onChange(e);
             }}
+            onBlur={hasCostsOnBlur}
+            onComponentBlur={hasCostsOnBlur}
+            errorMessage={errors?.hasCosts?.message}
+            errorPlacement="bottom"
           />
         )}
       />
