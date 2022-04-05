@@ -386,8 +386,8 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
             ]}
             type="radio"
             onChange={e => {
-              // resetFieldErrors('costs');
-              // resetFieldErrors('fte');
+              resetFieldErrors('costs');
+              resetFieldErrors('fte');
               handleHasCostsChange(e);
               onChange(e);
             }}
