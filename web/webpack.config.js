@@ -6,7 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   mode: 'production',
-  externalsPresets: { node: true },
   entry: {
     app: [path.join(__dirname, 'src/app.js')]
   },
@@ -30,7 +29,7 @@ const config = {
       {
         test: /\.m?js$/,
         exclude: /node_modules\/(?!(d3-array|d3-format|d3-geo)\/)/,
-        loader: ['babel-loader']
+        use: ['babel-loader']
       },
       {
         test: /\.scss$/,
@@ -41,7 +40,7 @@ const config = {
           // Converts the local disk paths from css-loader into their final
           // paths relative to the dist directory, then pulls everything
           // together
-          // MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
 
           // Interprets any url() and @import statements and resolves them to
           // their full path on the local disk.
