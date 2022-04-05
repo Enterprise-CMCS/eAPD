@@ -113,7 +113,7 @@ const createUsersToAdd = async (knex, oktaClient) => {
       id: 1001, // manually set id for testing
       user_id: stateAdmin.id,
       state_id: 'ak',
-      role_id: stateAdminRoleId,
+      role_id: stateStaffRoleId,
       status: 'approved',
       username: stateAdmin.profile.login,
       expires_at: format(
