@@ -42,7 +42,9 @@ const MilestoneForm = forwardRef(
 
     useEffect(() => {
       setFormValid(isValid);
-    }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
+      console.log("getValues", getValues())
+      console.log("errors", errors)
+    }, [isValid, errors]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = e => {
       e.preventDefault();
@@ -57,12 +59,15 @@ const MilestoneForm = forwardRef(
           name="milestone"
           render={({ field: { onChange, value, ...props } }) => (
             <TextField
+              {...props}
               data-cy={`milestone-${index}`}
               label="Name"
               name="milestone"
               value={value}
               className="remove-clearfix textfield__container"
               onChange={changeName}
+              errorMessage={errors?.milestone?.message}
+              errorPlacement="bottom"
             />
           )} 
         />
@@ -71,11 +76,14 @@ const MilestoneForm = forwardRef(
           name="endDate"
           render={({ field: { onChange, value, ...props } }) => (
             <DateField
+              {...props}
               label="Target completion date"
               hint=""
               name="endDate"
               value={value}
               onChange={changeDate}
+              errorMessage={errors?.endDate?.message}
+              errorPlacement="bottom"
             />
           )}
         />
@@ -97,7 +105,8 @@ MilestoneForm.propTypes = {
     endDate: PropTypes.string.isRequired,
     milestone: PropTypes.string.isRequired
   }).isRequired,
-  saveMilestone: PropTypes.func.isRequired
+  saveMilestone: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {

@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 const milestonesSchema = Joi.object({
+  key: Joi.any(),
   milestone: Joi.string().required().messages({
     'string.base': 'Milestone is required.',
     'string.empty': 'Milestone is required.'
