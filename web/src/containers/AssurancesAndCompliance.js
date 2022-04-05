@@ -35,10 +35,6 @@ const LinkOrText = ({ link, title }) => {
   );
 };
 
-// const handleRadioChange = e => {
-
-// }
-
 LinkOrText.propTypes = {
   link: PropTypes.string,
   title: PropTypes.string.isRequired
@@ -146,7 +142,15 @@ const AssurancesAndCompliance = ({
                 // </fieldset>
                 <ChoiceList
                   key={title}
-                  label={'Are you complying with yada yada2'}
+                  label={
+                    <legend className="ds-c-label">
+                      Are you complying with{' '}
+                      <strong>
+                        <LinkOrText link={regulations[title]} title={title} />
+                      </strong>
+                      ?
+                    </legend>
+                  }
                   name={`apd-assurances-${namify(name, title)}`}
                   choices={[
                     {
