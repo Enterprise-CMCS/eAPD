@@ -68,8 +68,7 @@ workflows:
           requires:
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
 
       # backend jobs
       - backend api endpoint test:
