@@ -18,7 +18,7 @@ import PreviousActivities from './previous-activities/PreviousActivities';
 import Activities from '../../containers/viewOnly/activities/All';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
 import ProposedBudget from './proposed-budget/ProposedBudget';
-import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
+import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
 import ExecutiveSummary from './executive-summary/ExecutiveSummary';
 import ExportInstructions from '../../containers/viewOnly/Export';
 import Loading from '../../components/Loading';
