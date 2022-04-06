@@ -100,8 +100,6 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
     resolver: joiResolver(keyPersonSchema)
   });
 
-  console.log({item})
-
   useEffect(() => {
     console.log('isValid changed');
     console.log({ isValid });
@@ -206,6 +204,11 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
     savePerson(index, state);
     handleSubmit(e);
   };
+
+  const totalCostFte = year => {
+    let total = state.costs[year] * state.fte[year];
+    return total;
+  }
 
   const primary = index === 0;
 
@@ -347,6 +350,8 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
                               )}
                             </Fragment>
                           </div>
+                          <strong>Total: </strong>
+                            <Dollars>{totalCostFte(year)}</Dollars>
                         </div>
                       </Fragment>
                     ))}
