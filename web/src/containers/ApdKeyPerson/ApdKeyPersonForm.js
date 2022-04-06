@@ -103,7 +103,6 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
   console.log({item})
 
   useEffect(() => {
-    console.log({yearCostsFTE})
     console.log('isValid changed');
     console.log({ isValid });
     setFormValid(isValid);
@@ -121,17 +120,6 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
   }, [isValidating, errors]);
 
   const initialState = item;
-
-  const yearCostsFTE = useMemo(() => years.reduce(
-    (o, year) => ({
-      ...o,
-      [year]: {
-        amt: item.costs[year],
-        perc: item.fte[year]
-      }
-    }),
-    {}
-  ))
 
   function reducer(state, action) {
     switch (action.type) {
@@ -189,14 +177,6 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
     });
   };
 
-  const setCostForYear = (year, value) => {
-    dispatch({ type: 'updateCosts', field: 'costs', year, value });
-  };
-
-  const setFTEForYear = (year, value) => {
-    dispatch({ type: 'updateFte', field: 'fte', year, value: +value });
-  };
-
   const handleHasCostsChange = e => {
     dispatch({
       type: 'updateField',
@@ -204,6 +184,22 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
       payload: e.target.value
     });
   };
+
+  const handleCostChange = (year, e) => {
+    dispatch({
+      type: 'updateCosts',
+      year: year,
+      value: e.target.value
+    });
+  };
+
+  const handleFteChange = (year, e) => {
+    dispatch({
+      type: 'updateFte',
+      year: year,
+      value: e.target.value
+    })
+  }
 
   const onSubmit = e => {
     e.preventDefault();
@@ -288,91 +284,70 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
             name={name}
             choices={[
               {
-                label: 'Yes',
-                value: 'yes',
-                checked: value === 'yes',
+                label: "Yes",
+                value: "yes",
+                checked: value === "yes",
                 checkedChildren: (
                   <div>
-                    {Object.entries(yearCostsFTE).map(([year, { amt, perc }]) => (
+                    {years.map(year => (
                       <Fragment key={year}>
                         <h5 className="ds-h5">FFY {year} Cost</h5>
                         <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
-                          <div>
-                            <Controller
-                              key={`${year}-cost`}
-                              name={`costs.${year}`}
-                              control={control}
-                              render={({
-                                field: { onChange: costOnChange, ...props }
-                              }) => (
-                                <DollarField
-                                  {...props}
-                                  label="Cost with benefits"
-                                  size="medium"
-                                  value={amt}
-                                  onChange={ e => {
-                                    handleCostChange(year, e);
-                                    setCostForYear(year, value);
-                                    costOnChange(e);
-                                  }}
-                                />
-                              )}
-                            />
-                          </div>
+                          <Controller
+                            key={`${year}-cost`}
+                            name={`costs.${year}`}
+                            control={control}
+                            render={({ field: { onChange: costOnChange, ...props } }) => (
+                              <DollarField
+                                {...props}
+                                label="Cost with benefits"
+                                size="medium"
+                                onChange={e => {
+                                  handleCostChange(year, e);
+                                  costOnChange(e);
+                                }}
+                              />
+                            )}
+                          />
                           <div>
                             <Fragment>
                               {errors?.costs && errors.costs[year] && (
-                                <span
-                                  className="ds-c-inline-error ds-c-field__error-message"
-                                  role="alert"
-                                >
-                                  {errors.costs[year].message}
+                                <span className="ds-c-inline-error ds-c-field__error-message"
+                                role="alert">
+                                  {errors.costs[year]?.message}
                                 </span>
                               )}
                             </Fragment>
                           </div>
-                          <div>
-                            <Controller
-                              key={`${year}-fte`}
-                              name={`fte.${year}`}
-                              control={control}
-                              render={({
-                                field: { onChange: fteOnChange, ...props }
-                              }) => (
-                                <NumberField
-                                  {...props}
-                                  label="FTE Allocation"
-                                  size="medium"
-                                  min={0}
-                                  hint="For example: 0.5 = 0.5 FTE = 50% time"
-                                  value={perc}
-                                  onChange={ e => {
-                                    handleFTEChange(year, e);
-                                    setFTEForYear(year, value);
-                                    fteOnChange(e);
-                                  }}
-                                />
-                              )}
-                            />
-                          </div>
+                          <Controller
+                            key={`${year}-fte`}
+                            name={`fte.${year}`}
+                            control={control}
+                            render={({ field: { onChange: fteOnChange, ...props } }) => (
+                              <NumberField
+                                {...props}
+                                label="FTE Allocation"
+                                size="medium"
+                                min={0}
+                                hint="For example: 0.5 = 0.5 FTE = 50% time"
+                                onChange={e => {
+                                  handleFteChange(year, e);
+                                  fteOnChange(e);
+                                }}
+                              />
+                            )}
+                          />
                           <div>
                             <Fragment>
                               {errors?.fte && errors.fte[year] && (
-                                <span
-                                  className="ds-c-inline-error ds-c-field__error-message"
-                                  role="alert"
-                                >
-                                  {errors.fte[year].message}
+                                <span className="ds-c-inline-error ds-c-field__error-message"
+                                role="alert">
+                                  {errors.fte[year]?.message}
                                 </span>
                               )}
                             </Fragment>
                           </div>
-                          <p>
-                            <strong>Total: </strong>
-                            <Dollars>{amt * perc}</Dollars>
-                          </p>
                         </div>
-
                       </Fragment>
                     ))}
                   </div>
