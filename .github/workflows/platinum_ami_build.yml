@@ -23,7 +23,7 @@ jobs:
           command: validate
           arguments: -syntax-only
           working_directory: packer
-          target: plat-ami.pkr.hcl
+          target: preview-ami.pkr.hcl
       - name: Build Artifact 🧱
         uses: hashicorp/packer-github-actions@master
         with:
