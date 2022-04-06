@@ -16,7 +16,7 @@ import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from '../../containers/viewOnly/ApdSummary';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import Activities from '../../containers/viewOnly/activities/All';
-import ScheduleSummary from '../../containers/viewOnly/ScheduleSummary';
+import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
 import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
 import AssuranceAndCompliance from '../../containers/viewOnly/AssurancesAndCompliance';
 import ExecutiveSummary from '../../containers/viewOnly/ExecutiveSummary';
