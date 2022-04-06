@@ -70,7 +70,8 @@
   ],
   "nohoist": [
     "**/ajv",
-    "**/tinymce"
+    "**/tinymce",
+    "**/@tinymce/tinymce-react"
   ],
   "dependencies": {
     "@snyk/protect": "1.866.0"
