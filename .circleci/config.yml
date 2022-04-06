@@ -482,7 +482,7 @@ jobs:
           at: ~/project
       - run:
           name: run linter
-          working_directory: ~/project/packages/pi
+          working_directory: ~/project/packages/api
           command: yarn lint
 
   # Runs backend unit tests and reports coverage to codecov.io.
