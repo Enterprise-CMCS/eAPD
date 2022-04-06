@@ -541,7 +541,7 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths:
-            - web/dist
+            - packages/web/dist
       - run:
           name: persist build URL to workspace
           command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
@@ -746,7 +746,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project
+          at: ~/project/packages
       - run:
           name: sync to s3
           command: |

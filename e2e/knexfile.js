@@ -8,6 +8,6 @@ module.exports = {
       password: 'cms',
       port: 54325
     },
-    seeds: { directory: './seeds/development' }
-  },
+    seeds: { directory: '../packages/api/seeds/development' }
+  }
 };
