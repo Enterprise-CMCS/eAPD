@@ -1,0 +1,2410 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for app/seeds/development/apds.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">app/seeds/development</a> apds.js</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>3/3</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>3/3</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input oninput="onInput()" type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a>
+<a name='L159'></a><a href='#L159'>159</a>
+<a name='L160'></a><a href='#L160'>160</a>
+<a name='L161'></a><a href='#L161'>161</a>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a>
+<a name='L208'></a><a href='#L208'>208</a>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a>
+<a name='L223'></a><a href='#L223'>223</a>
+<a name='L224'></a><a href='#L224'>224</a>
+<a name='L225'></a><a href='#L225'>225</a>
+<a name='L226'></a><a href='#L226'>226</a>
+<a name='L227'></a><a href='#L227'>227</a>
+<a name='L228'></a><a href='#L228'>228</a>
+<a name='L229'></a><a href='#L229'>229</a>
+<a name='L230'></a><a href='#L230'>230</a>
+<a name='L231'></a><a href='#L231'>231</a>
+<a name='L232'></a><a href='#L232'>232</a>
+<a name='L233'></a><a href='#L233'>233</a>
+<a name='L234'></a><a href='#L234'>234</a>
+<a name='L235'></a><a href='#L235'>235</a>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a>
+<a name='L241'></a><a href='#L241'>241</a>
+<a name='L242'></a><a href='#L242'>242</a>
+<a name='L243'></a><a href='#L243'>243</a>
+<a name='L244'></a><a href='#L244'>244</a>
+<a name='L245'></a><a href='#L245'>245</a>
+<a name='L246'></a><a href='#L246'>246</a>
+<a name='L247'></a><a href='#L247'>247</a>
+<a name='L248'></a><a href='#L248'>248</a>
+<a name='L249'></a><a href='#L249'>249</a>
+<a name='L250'></a><a href='#L250'>250</a>
+<a name='L251'></a><a href='#L251'>251</a>
+<a name='L252'></a><a href='#L252'>252</a>
+<a name='L253'></a><a href='#L253'>253</a>
+<a name='L254'></a><a href='#L254'>254</a>
+<a name='L255'></a><a href='#L255'>255</a>
+<a name='L256'></a><a href='#L256'>256</a>
+<a name='L257'></a><a href='#L257'>257</a>
+<a name='L258'></a><a href='#L258'>258</a>
+<a name='L259'></a><a href='#L259'>259</a>
+<a name='L260'></a><a href='#L260'>260</a>
+<a name='L261'></a><a href='#L261'>261</a>
+<a name='L262'></a><a href='#L262'>262</a>
+<a name='L263'></a><a href='#L263'>263</a>
+<a name='L264'></a><a href='#L264'>264</a>
+<a name='L265'></a><a href='#L265'>265</a>
+<a name='L266'></a><a href='#L266'>266</a>
+<a name='L267'></a><a href='#L267'>267</a>
+<a name='L268'></a><a href='#L268'>268</a>
+<a name='L269'></a><a href='#L269'>269</a>
+<a name='L270'></a><a href='#L270'>270</a>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a>
+<a name='L278'></a><a href='#L278'>278</a>
+<a name='L279'></a><a href='#L279'>279</a>
+<a name='L280'></a><a href='#L280'>280</a>
+<a name='L281'></a><a href='#L281'>281</a>
+<a name='L282'></a><a href='#L282'>282</a>
+<a name='L283'></a><a href='#L283'>283</a>
+<a name='L284'></a><a href='#L284'>284</a>
+<a name='L285'></a><a href='#L285'>285</a>
+<a name='L286'></a><a href='#L286'>286</a>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a>
+<a name='L317'></a><a href='#L317'>317</a>
+<a name='L318'></a><a href='#L318'>318</a>
+<a name='L319'></a><a href='#L319'>319</a>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a>
+<a name='L325'></a><a href='#L325'>325</a>
+<a name='L326'></a><a href='#L326'>326</a>
+<a name='L327'></a><a href='#L327'>327</a>
+<a name='L328'></a><a href='#L328'>328</a>
+<a name='L329'></a><a href='#L329'>329</a>
+<a name='L330'></a><a href='#L330'>330</a>
+<a name='L331'></a><a href='#L331'>331</a>
+<a name='L332'></a><a href='#L332'>332</a>
+<a name='L333'></a><a href='#L333'>333</a>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a>
+<a name='L336'></a><a href='#L336'>336</a>
+<a name='L337'></a><a href='#L337'>337</a>
+<a name='L338'></a><a href='#L338'>338</a>
+<a name='L339'></a><a href='#L339'>339</a>
+<a name='L340'></a><a href='#L340'>340</a>
+<a name='L341'></a><a href='#L341'>341</a>
+<a name='L342'></a><a href='#L342'>342</a>
+<a name='L343'></a><a href='#L343'>343</a>
+<a name='L344'></a><a href='#L344'>344</a>
+<a name='L345'></a><a href='#L345'>345</a>
+<a name='L346'></a><a href='#L346'>346</a>
+<a name='L347'></a><a href='#L347'>347</a>
+<a name='L348'></a><a href='#L348'>348</a>
+<a name='L349'></a><a href='#L349'>349</a>
+<a name='L350'></a><a href='#L350'>350</a>
+<a name='L351'></a><a href='#L351'>351</a>
+<a name='L352'></a><a href='#L352'>352</a>
+<a name='L353'></a><a href='#L353'>353</a>
+<a name='L354'></a><a href='#L354'>354</a>
+<a name='L355'></a><a href='#L355'>355</a>
+<a name='L356'></a><a href='#L356'>356</a>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a>
+<a name='L368'></a><a href='#L368'>368</a>
+<a name='L369'></a><a href='#L369'>369</a>
+<a name='L370'></a><a href='#L370'>370</a>
+<a name='L371'></a><a href='#L371'>371</a>
+<a name='L372'></a><a href='#L372'>372</a>
+<a name='L373'></a><a href='#L373'>373</a>
+<a name='L374'></a><a href='#L374'>374</a>
+<a name='L375'></a><a href='#L375'>375</a>
+<a name='L376'></a><a href='#L376'>376</a>
+<a name='L377'></a><a href='#L377'>377</a>
+<a name='L378'></a><a href='#L378'>378</a>
+<a name='L379'></a><a href='#L379'>379</a>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a>
+<a name='L385'></a><a href='#L385'>385</a>
+<a name='L386'></a><a href='#L386'>386</a>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a>
+<a name='L409'></a><a href='#L409'>409</a>
+<a name='L410'></a><a href='#L410'>410</a>
+<a name='L411'></a><a href='#L411'>411</a>
+<a name='L412'></a><a href='#L412'>412</a>
+<a name='L413'></a><a href='#L413'>413</a>
+<a name='L414'></a><a href='#L414'>414</a>
+<a name='L415'></a><a href='#L415'>415</a>
+<a name='L416'></a><a href='#L416'>416</a>
+<a name='L417'></a><a href='#L417'>417</a>
+<a name='L418'></a><a href='#L418'>418</a>
+<a name='L419'></a><a href='#L419'>419</a>
+<a name='L420'></a><a href='#L420'>420</a>
+<a name='L421'></a><a href='#L421'>421</a>
+<a name='L422'></a><a href='#L422'>422</a>
+<a name='L423'></a><a href='#L423'>423</a>
+<a name='L424'></a><a href='#L424'>424</a>
+<a name='L425'></a><a href='#L425'>425</a>
+<a name='L426'></a><a href='#L426'>426</a>
+<a name='L427'></a><a href='#L427'>427</a>
+<a name='L428'></a><a href='#L428'>428</a>
+<a name='L429'></a><a href='#L429'>429</a>
+<a name='L430'></a><a href='#L430'>430</a>
+<a name='L431'></a><a href='#L431'>431</a>
+<a name='L432'></a><a href='#L432'>432</a>
+<a name='L433'></a><a href='#L433'>433</a>
+<a name='L434'></a><a href='#L434'>434</a>
+<a name='L435'></a><a href='#L435'>435</a>
+<a name='L436'></a><a href='#L436'>436</a>
+<a name='L437'></a><a href='#L437'>437</a>
+<a name='L438'></a><a href='#L438'>438</a>
+<a name='L439'></a><a href='#L439'>439</a>
+<a name='L440'></a><a href='#L440'>440</a>
+<a name='L441'></a><a href='#L441'>441</a>
+<a name='L442'></a><a href='#L442'>442</a>
+<a name='L443'></a><a href='#L443'>443</a>
+<a name='L444'></a><a href='#L444'>444</a>
+<a name='L445'></a><a href='#L445'>445</a>
+<a name='L446'></a><a href='#L446'>446</a>
+<a name='L447'></a><a href='#L447'>447</a>
+<a name='L448'></a><a href='#L448'>448</a>
+<a name='L449'></a><a href='#L449'>449</a>
+<a name='L450'></a><a href='#L450'>450</a>
+<a name='L451'></a><a href='#L451'>451</a>
+<a name='L452'></a><a href='#L452'>452</a>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a>
+<a name='L457'></a><a href='#L457'>457</a>
+<a name='L458'></a><a href='#L458'>458</a>
+<a name='L459'></a><a href='#L459'>459</a>
+<a name='L460'></a><a href='#L460'>460</a>
+<a name='L461'></a><a href='#L461'>461</a>
+<a name='L462'></a><a href='#L462'>462</a>
+<a name='L463'></a><a href='#L463'>463</a>
+<a name='L464'></a><a href='#L464'>464</a>
+<a name='L465'></a><a href='#L465'>465</a>
+<a name='L466'></a><a href='#L466'>466</a>
+<a name='L467'></a><a href='#L467'>467</a>
+<a name='L468'></a><a href='#L468'>468</a>
+<a name='L469'></a><a href='#L469'>469</a>
+<a name='L470'></a><a href='#L470'>470</a>
+<a name='L471'></a><a href='#L471'>471</a>
+<a name='L472'></a><a href='#L472'>472</a>
+<a name='L473'></a><a href='#L473'>473</a>
+<a name='L474'></a><a href='#L474'>474</a>
+<a name='L475'></a><a href='#L475'>475</a>
+<a name='L476'></a><a href='#L476'>476</a>
+<a name='L477'></a><a href='#L477'>477</a>
+<a name='L478'></a><a href='#L478'>478</a>
+<a name='L479'></a><a href='#L479'>479</a>
+<a name='L480'></a><a href='#L480'>480</a>
+<a name='L481'></a><a href='#L481'>481</a>
+<a name='L482'></a><a href='#L482'>482</a>
+<a name='L483'></a><a href='#L483'>483</a>
+<a name='L484'></a><a href='#L484'>484</a>
+<a name='L485'></a><a href='#L485'>485</a>
+<a name='L486'></a><a href='#L486'>486</a>
+<a name='L487'></a><a href='#L487'>487</a>
+<a name='L488'></a><a href='#L488'>488</a>
+<a name='L489'></a><a href='#L489'>489</a>
+<a name='L490'></a><a href='#L490'>490</a>
+<a name='L491'></a><a href='#L491'>491</a>
+<a name='L492'></a><a href='#L492'>492</a>
+<a name='L493'></a><a href='#L493'>493</a>
+<a name='L494'></a><a href='#L494'>494</a>
+<a name='L495'></a><a href='#L495'>495</a>
+<a name='L496'></a><a href='#L496'>496</a>
+<a name='L497'></a><a href='#L497'>497</a>
+<a name='L498'></a><a href='#L498'>498</a>
+<a name='L499'></a><a href='#L499'>499</a>
+<a name='L500'></a><a href='#L500'>500</a>
+<a name='L501'></a><a href='#L501'>501</a>
+<a name='L502'></a><a href='#L502'>502</a>
+<a name='L503'></a><a href='#L503'>503</a>
+<a name='L504'></a><a href='#L504'>504</a>
+<a name='L505'></a><a href='#L505'>505</a>
+<a name='L506'></a><a href='#L506'>506</a>
+<a name='L507'></a><a href='#L507'>507</a>
+<a name='L508'></a><a href='#L508'>508</a>
+<a name='L509'></a><a href='#L509'>509</a>
+<a name='L510'></a><a href='#L510'>510</a>
+<a name='L511'></a><a href='#L511'>511</a>
+<a name='L512'></a><a href='#L512'>512</a>
+<a name='L513'></a><a href='#L513'>513</a>
+<a name='L514'></a><a href='#L514'>514</a>
+<a name='L515'></a><a href='#L515'>515</a>
+<a name='L516'></a><a href='#L516'>516</a>
+<a name='L517'></a><a href='#L517'>517</a>
+<a name='L518'></a><a href='#L518'>518</a>
+<a name='L519'></a><a href='#L519'>519</a>
+<a name='L520'></a><a href='#L520'>520</a>
+<a name='L521'></a><a href='#L521'>521</a>
+<a name='L522'></a><a href='#L522'>522</a>
+<a name='L523'></a><a href='#L523'>523</a>
+<a name='L524'></a><a href='#L524'>524</a>
+<a name='L525'></a><a href='#L525'>525</a>
+<a name='L526'></a><a href='#L526'>526</a>
+<a name='L527'></a><a href='#L527'>527</a>
+<a name='L528'></a><a href='#L528'>528</a>
+<a name='L529'></a><a href='#L529'>529</a>
+<a name='L530'></a><a href='#L530'>530</a>
+<a name='L531'></a><a href='#L531'>531</a>
+<a name='L532'></a><a href='#L532'>532</a>
+<a name='L533'></a><a href='#L533'>533</a>
+<a name='L534'></a><a href='#L534'>534</a>
+<a name='L535'></a><a href='#L535'>535</a>
+<a name='L536'></a><a href='#L536'>536</a>
+<a name='L537'></a><a href='#L537'>537</a>
+<a name='L538'></a><a href='#L538'>538</a>
+<a name='L539'></a><a href='#L539'>539</a>
+<a name='L540'></a><a href='#L540'>540</a>
+<a name='L541'></a><a href='#L541'>541</a>
+<a name='L542'></a><a href='#L542'>542</a>
+<a name='L543'></a><a href='#L543'>543</a>
+<a name='L544'></a><a href='#L544'>544</a>
+<a name='L545'></a><a href='#L545'>545</a>
+<a name='L546'></a><a href='#L546'>546</a>
+<a name='L547'></a><a href='#L547'>547</a>
+<a name='L548'></a><a href='#L548'>548</a>
+<a name='L549'></a><a href='#L549'>549</a>
+<a name='L550'></a><a href='#L550'>550</a>
+<a name='L551'></a><a href='#L551'>551</a>
+<a name='L552'></a><a href='#L552'>552</a>
+<a name='L553'></a><a href='#L553'>553</a>
+<a name='L554'></a><a href='#L554'>554</a>
+<a name='L555'></a><a href='#L555'>555</a>
+<a name='L556'></a><a href='#L556'>556</a>
+<a name='L557'></a><a href='#L557'>557</a>
+<a name='L558'></a><a href='#L558'>558</a>
+<a name='L559'></a><a href='#L559'>559</a>
+<a name='L560'></a><a href='#L560'>560</a>
+<a name='L561'></a><a href='#L561'>561</a>
+<a name='L562'></a><a href='#L562'>562</a>
+<a name='L563'></a><a href='#L563'>563</a>
+<a name='L564'></a><a href='#L564'>564</a>
+<a name='L565'></a><a href='#L565'>565</a>
+<a name='L566'></a><a href='#L566'>566</a>
+<a name='L567'></a><a href='#L567'>567</a>
+<a name='L568'></a><a href='#L568'>568</a>
+<a name='L569'></a><a href='#L569'>569</a>
+<a name='L570'></a><a href='#L570'>570</a>
+<a name='L571'></a><a href='#L571'>571</a>
+<a name='L572'></a><a href='#L572'>572</a>
+<a name='L573'></a><a href='#L573'>573</a>
+<a name='L574'></a><a href='#L574'>574</a>
+<a name='L575'></a><a href='#L575'>575</a>
+<a name='L576'></a><a href='#L576'>576</a>
+<a name='L577'></a><a href='#L577'>577</a>
+<a name='L578'></a><a href='#L578'>578</a>
+<a name='L579'></a><a href='#L579'>579</a>
+<a name='L580'></a><a href='#L580'>580</a>
+<a name='L581'></a><a href='#L581'>581</a>
+<a name='L582'></a><a href='#L582'>582</a>
+<a name='L583'></a><a href='#L583'>583</a>
+<a name='L584'></a><a href='#L584'>584</a>
+<a name='L585'></a><a href='#L585'>585</a>
+<a name='L586'></a><a href='#L586'>586</a>
+<a name='L587'></a><a href='#L587'>587</a>
+<a name='L588'></a><a href='#L588'>588</a>
+<a name='L589'></a><a href='#L589'>589</a>
+<a name='L590'></a><a href='#L590'>590</a>
+<a name='L591'></a><a href='#L591'>591</a>
+<a name='L592'></a><a href='#L592'>592</a>
+<a name='L593'></a><a href='#L593'>593</a>
+<a name='L594'></a><a href='#L594'>594</a>
+<a name='L595'></a><a href='#L595'>595</a>
+<a name='L596'></a><a href='#L596'>596</a>
+<a name='L597'></a><a href='#L597'>597</a>
+<a name='L598'></a><a href='#L598'>598</a>
+<a name='L599'></a><a href='#L599'>599</a>
+<a name='L600'></a><a href='#L600'>600</a>
+<a name='L601'></a><a href='#L601'>601</a>
+<a name='L602'></a><a href='#L602'>602</a>
+<a name='L603'></a><a href='#L603'>603</a>
+<a name='L604'></a><a href='#L604'>604</a>
+<a name='L605'></a><a href='#L605'>605</a>
+<a name='L606'></a><a href='#L606'>606</a>
+<a name='L607'></a><a href='#L607'>607</a>
+<a name='L608'></a><a href='#L608'>608</a>
+<a name='L609'></a><a href='#L609'>609</a>
+<a name='L610'></a><a href='#L610'>610</a>
+<a name='L611'></a><a href='#L611'>611</a>
+<a name='L612'></a><a href='#L612'>612</a>
+<a name='L613'></a><a href='#L613'>613</a>
+<a name='L614'></a><a href='#L614'>614</a>
+<a name='L615'></a><a href='#L615'>615</a>
+<a name='L616'></a><a href='#L616'>616</a>
+<a name='L617'></a><a href='#L617'>617</a>
+<a name='L618'></a><a href='#L618'>618</a>
+<a name='L619'></a><a href='#L619'>619</a>
+<a name='L620'></a><a href='#L620'>620</a>
+<a name='L621'></a><a href='#L621'>621</a>
+<a name='L622'></a><a href='#L622'>622</a>
+<a name='L623'></a><a href='#L623'>623</a>
+<a name='L624'></a><a href='#L624'>624</a>
+<a name='L625'></a><a href='#L625'>625</a>
+<a name='L626'></a><a href='#L626'>626</a>
+<a name='L627'></a><a href='#L627'>627</a>
+<a name='L628'></a><a href='#L628'>628</a>
+<a name='L629'></a><a href='#L629'>629</a>
+<a name='L630'></a><a href='#L630'>630</a>
+<a name='L631'></a><a href='#L631'>631</a>
+<a name='L632'></a><a href='#L632'>632</a>
+<a name='L633'></a><a href='#L633'>633</a>
+<a name='L634'></a><a href='#L634'>634</a>
+<a name='L635'></a><a href='#L635'>635</a>
+<a name='L636'></a><a href='#L636'>636</a>
+<a name='L637'></a><a href='#L637'>637</a>
+<a name='L638'></a><a href='#L638'>638</a>
+<a name='L639'></a><a href='#L639'>639</a>
+<a name='L640'></a><a href='#L640'>640</a>
+<a name='L641'></a><a href='#L641'>641</a>
+<a name='L642'></a><a href='#L642'>642</a>
+<a name='L643'></a><a href='#L643'>643</a>
+<a name='L644'></a><a href='#L644'>644</a>
+<a name='L645'></a><a href='#L645'>645</a>
+<a name='L646'></a><a href='#L646'>646</a>
+<a name='L647'></a><a href='#L647'>647</a>
+<a name='L648'></a><a href='#L648'>648</a>
+<a name='L649'></a><a href='#L649'>649</a>
+<a name='L650'></a><a href='#L650'>650</a>
+<a name='L651'></a><a href='#L651'>651</a>
+<a name='L652'></a><a href='#L652'>652</a>
+<a name='L653'></a><a href='#L653'>653</a>
+<a name='L654'></a><a href='#L654'>654</a>
+<a name='L655'></a><a href='#L655'>655</a>
+<a name='L656'></a><a href='#L656'>656</a>
+<a name='L657'></a><a href='#L657'>657</a>
+<a name='L658'></a><a href='#L658'>658</a>
+<a name='L659'></a><a href='#L659'>659</a>
+<a name='L660'></a><a href='#L660'>660</a>
+<a name='L661'></a><a href='#L661'>661</a>
+<a name='L662'></a><a href='#L662'>662</a>
+<a name='L663'></a><a href='#L663'>663</a>
+<a name='L664'></a><a href='#L664'>664</a>
+<a name='L665'></a><a href='#L665'>665</a>
+<a name='L666'></a><a href='#L666'>666</a>
+<a name='L667'></a><a href='#L667'>667</a>
+<a name='L668'></a><a href='#L668'>668</a>
+<a name='L669'></a><a href='#L669'>669</a>
+<a name='L670'></a><a href='#L670'>670</a>
+<a name='L671'></a><a href='#L671'>671</a>
+<a name='L672'></a><a href='#L672'>672</a>
+<a name='L673'></a><a href='#L673'>673</a>
+<a name='L674'></a><a href='#L674'>674</a>
+<a name='L675'></a><a href='#L675'>675</a>
+<a name='L676'></a><a href='#L676'>676</a>
+<a name='L677'></a><a href='#L677'>677</a>
+<a name='L678'></a><a href='#L678'>678</a>
+<a name='L679'></a><a href='#L679'>679</a>
+<a name='L680'></a><a href='#L680'>680</a>
+<a name='L681'></a><a href='#L681'>681</a>
+<a name='L682'></a><a href='#L682'>682</a>
+<a name='L683'></a><a href='#L683'>683</a>
+<a name='L684'></a><a href='#L684'>684</a>
+<a name='L685'></a><a href='#L685'>685</a>
+<a name='L686'></a><a href='#L686'>686</a>
+<a name='L687'></a><a href='#L687'>687</a>
+<a name='L688'></a><a href='#L688'>688</a>
+<a name='L689'></a><a href='#L689'>689</a>
+<a name='L690'></a><a href='#L690'>690</a>
+<a name='L691'></a><a href='#L691'>691</a>
+<a name='L692'></a><a href='#L692'>692</a>
+<a name='L693'></a><a href='#L693'>693</a>
+<a name='L694'></a><a href='#L694'>694</a>
+<a name='L695'></a><a href='#L695'>695</a>
+<a name='L696'></a><a href='#L696'>696</a>
+<a name='L697'></a><a href='#L697'>697</a>
+<a name='L698'></a><a href='#L698'>698</a>
+<a name='L699'></a><a href='#L699'>699</a>
+<a name='L700'></a><a href='#L700'>700</a>
+<a name='L701'></a><a href='#L701'>701</a>
+<a name='L702'></a><a href='#L702'>702</a>
+<a name='L703'></a><a href='#L703'>703</a>
+<a name='L704'></a><a href='#L704'>704</a>
+<a name='L705'></a><a href='#L705'>705</a>
+<a name='L706'></a><a href='#L706'>706</a>
+<a name='L707'></a><a href='#L707'>707</a>
+<a name='L708'></a><a href='#L708'>708</a>
+<a name='L709'></a><a href='#L709'>709</a>
+<a name='L710'></a><a href='#L710'>710</a>
+<a name='L711'></a><a href='#L711'>711</a>
+<a name='L712'></a><a href='#L712'>712</a>
+<a name='L713'></a><a href='#L713'>713</a>
+<a name='L714'></a><a href='#L714'>714</a>
+<a name='L715'></a><a href='#L715'>715</a>
+<a name='L716'></a><a href='#L716'>716</a>
+<a name='L717'></a><a href='#L717'>717</a>
+<a name='L718'></a><a href='#L718'>718</a>
+<a name='L719'></a><a href='#L719'>719</a>
+<a name='L720'></a><a href='#L720'>720</a>
+<a name='L721'></a><a href='#L721'>721</a>
+<a name='L722'></a><a href='#L722'>722</a>
+<a name='L723'></a><a href='#L723'>723</a>
+<a name='L724'></a><a href='#L724'>724</a>
+<a name='L725'></a><a href='#L725'>725</a>
+<a name='L726'></a><a href='#L726'>726</a>
+<a name='L727'></a><a href='#L727'>727</a>
+<a name='L728'></a><a href='#L728'>728</a>
+<a name='L729'></a><a href='#L729'>729</a>
+<a name='L730'></a><a href='#L730'>730</a>
+<a name='L731'></a><a href='#L731'>731</a>
+<a name='L732'></a><a href='#L732'>732</a>
+<a name='L733'></a><a href='#L733'>733</a>
+<a name='L734'></a><a href='#L734'>734</a>
+<a name='L735'></a><a href='#L735'>735</a>
+<a name='L736'></a><a href='#L736'>736</a>
+<a name='L737'></a><a href='#L737'>737</a>
+<a name='L738'></a><a href='#L738'>738</a>
+<a name='L739'></a><a href='#L739'>739</a>
+<a name='L740'></a><a href='#L740'>740</a>
+<a name='L741'></a><a href='#L741'>741</a>
+<a name='L742'></a><a href='#L742'>742</a>
+<a name='L743'></a><a href='#L743'>743</a>
+<a name='L744'></a><a href='#L744'>744</a>
+<a name='L745'></a><a href='#L745'>745</a>
+<a name='L746'></a><a href='#L746'>746</a>
+<a name='L747'></a><a href='#L747'>747</a>
+<a name='L748'></a><a href='#L748'>748</a>
+<a name='L749'></a><a href='#L749'>749</a>
+<a name='L750'></a><a href='#L750'>750</a>
+<a name='L751'></a><a href='#L751'>751</a>
+<a name='L752'></a><a href='#L752'>752</a>
+<a name='L753'></a><a href='#L753'>753</a>
+<a name='L754'></a><a href='#L754'>754</a>
+<a name='L755'></a><a href='#L755'>755</a>
+<a name='L756'></a><a href='#L756'>756</a>
+<a name='L757'></a><a href='#L757'>757</a>
+<a name='L758'></a><a href='#L758'>758</a>
+<a name='L759'></a><a href='#L759'>759</a>
+<a name='L760'></a><a href='#L760'>760</a>
+<a name='L761'></a><a href='#L761'>761</a>
+<a name='L762'></a><a href='#L762'>762</a>
+<a name='L763'></a><a href='#L763'>763</a>
+<a name='L764'></a><a href='#L764'>764</a>
+<a name='L765'></a><a href='#L765'>765</a>
+<a name='L766'></a><a href='#L766'>766</a>
+<a name='L767'></a><a href='#L767'>767</a>
+<a name='L768'></a><a href='#L768'>768</a>
+<a name='L769'></a><a href='#L769'>769</a>
+<a name='L770'></a><a href='#L770'>770</a>
+<a name='L771'></a><a href='#L771'>771</a>
+<a name='L772'></a><a href='#L772'>772</a>
+<a name='L773'></a><a href='#L773'>773</a>
+<a name='L774'></a><a href='#L774'>774</a>
+<a name='L775'></a><a href='#L775'>775</a>
+<a name='L776'></a><a href='#L776'>776</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const apd = {
+  name: 'HITECH IAPD',
+  years: ['2022', '2023'],
+  apdOverview: {
+    programOverview: "&lt;p&gt;The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.&lt;/p&gt;\n&lt;p&gt;The original IAPD request supported the first phase of the Station''s participation in the development and expansion of the use of EHR and collaboration among state entities in a Health Information Exchange (HIE) network. In the first phase, Tycho implemented the system changes necessary to support the Tycho EHR Provider Incentive Payment Program as well as the administrative supports necessary for implementation and operation of this program.&amp;nbsp;&lt;/p&gt;\n&lt;ol&gt;\n&lt;li&gt;The first IAPDU requested additional support for the EHR Provider Incentive Payment Program and additional project support.&lt;/li&gt;\n&lt;li&gt;The second IAPDU requested funding for the Division of Senior and Disabilities Services (DSDS) Automated Service Plan (ASP) system, supporting expanded use of EHRs.&lt;/li&gt;\n&lt;li&gt;The third IAPDU requested additional and continued support of HIT initiatives.&lt;/li&gt;\n&lt;/ol&gt;\n&lt;p&gt;Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.&lt;/p&gt;\n&lt;p&gt;This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&amp;nbsp;&lt;/p&gt;",
+    narrativeHIT: '&lt;p&gt;&lt;span style="font-size: 18px;"&gt;&lt;strong&gt;&lt;ins&gt;Continued Operations of the Medicaid EHR Incentive Payment Program&lt;/ins&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;\n&lt;p&gt;&lt;span style="font-size: 18px;"&gt;Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).&lt;/span&gt;&lt;/p&gt;',
+    narrativeHIE: "&lt;p&gt;Tycho''s existing health information infrastructure consists of various organizations operating at the enterprise, local, regional and state levels, and includes:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Health systems, affiliated providers, and ancillary services;&lt;/li&gt;\n&lt;li&gt;State agencies health data repositories;&lt;/li&gt;\n&lt;li&gt;Specialized participants that operate for specific purposes including, but not limited to, laboratory services, radiology, public health, research and quality assessment;&lt;/li&gt;\n&lt;li&gt;Information and service providers that operate in vertical markets such as e-Prescribing, State registries, Medicaid and Medicare;&lt;/li&gt;\n&lt;li&gt;Private payers and clearinghouses that transmit administrative data for claims purposes and for pay for performance programs.&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;The Tycho HIE has planned to implement a robust public health modernization plan which includes the development of specialized registries and interfaces to the HIE to significantly increase the ability for EPs and EHs to achieve meaningful use. Additionally, plans to collect CQM data and the creation of a Personal Health Record (PHR) has been identified as activities to complete.&lt;/p&gt;\n&lt;p&gt;&lt;/p&gt;\n&lt;p&gt;Payers/Providers must complete a participation agreement form and possible addendum to participate in the HIE and other services. Governance for the HIE has been defined by the State statute, any related regulations and by the HIE board of directors.&lt;/p&gt;\n&lt;p&gt;&lt;/p&gt;\n&lt;p&gt;Appropriate cost allocation is a fundamental principle of the federal FFP program to ensure that private sector beneficiaries of public investments are covering the incremental cost of their use. A sustainability plan for proportional investments by other payers/providers than Medicaid was developed in concert with the Tycho HIE Board of Directors and a broad cross-section of stakeholders under the leadership of the Tycho HIE Executive Director and State HIT Coordinator. The Tycho HIEâs fee structure and detailed participation agreements can be viewed at: tychoMedicaid.com&lt;/p&gt;",
+    narrativeMMIS: "&lt;p&gt;&lt;strong&gt;&lt;ins&gt;Medicaid Claims Data Feed to the HIE&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;Currently, Tycho does not have an All-Payersâ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.&lt;/p&gt;"
+  },
+  keyStatePersonnel: {
+    medicaidDirector: {
+      name: 'Cornelius Fudge',
+      email: 'c.fudge@ministry.magic',
+      phone: '5551234567'
+    },
+    medicaidOffice: {
+      address1: '100 Round Sq',
+      address2: '',
+      city: 'Cityville',
+      state: 'AK',
+      zip: '12345'
+    },
+    keyPersonnel: [
+      {
+        name: 'James Holden',
+        position: 'HIT Coordinator',
+        email: 'JimPushesButtons@tycho.com',
+        isPrimary: true,
+        fte: { 2022: 1, 2023: 1 },
+        hasCosts: true,
+        costs: { 2022: 100000, 2023: 100000 }
+      },
+      {
+        name: 'Fred Johnson',
+        position: 'Project Management Office Director',
+        email: 'FJohnson@tycho.com',
+        isPrimary: false,
+        fte: { 2022: 0.3, 2023: 0.3 },
+        hasCosts: false,
+        costs: { 2022: 0, 2023: 0 }
+      }
+    ]
+  },
+  previousActivities: {
+    previousActivitySummary: '&lt;p&gt;&lt;span style="font-size: 18px;"&gt;&lt;strong&gt;&lt;ins&gt;EHR Incentive Payment Program&lt;/ins&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;\n&lt;p&gt;As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.&lt;/p&gt;\n&lt;p&gt;&lt;/p&gt;\n&lt;p&gt;Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the Stateâs audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the stateâs accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.&lt;/p&gt;\n&lt;p&gt;&lt;/p&gt;\n&lt;p&gt;IAPD Funding Milestones and Expenditures&lt;/p&gt;\n&lt;p&gt;The first IAPDU which was approved by CMS in October 2012 requested funding for HIT initiatives. The primary focus of the activities in the IAPDU # 2, which was approved in April 2013 was support of MU Stage 1, preparation for MU Stage 2, and the ongoing administration of the EHR Incentive Payment program. Subsequent IAPD submissions requested continued funding to support program operations and modernization of enterprise systems.&lt;/p&gt;\n&lt;p&gt;&lt;/p&gt;\n&lt;p&gt;Tycho recently transitioned to a new state-wide financial system and it would be overly burdensome and a manual process to detail expenses out in the method done in previous HITECH IAPD submissions. Tycho has elected to report expenditures based on the CMS-64 line reporting for HITECH as this will be the most audible method due to the stateâs transition to a new financial system.&lt;/p&gt;\n&lt;p&gt;Detailed List of Expenditure Types:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;State personnel&lt;/li&gt;\n&lt;li&gt;Travel and conferences: CMS Regional Meeting, attendance at local/Anchorage-based conferences to support EHR Incentive Program and Meaningful Use, and other HIT/HIE related conferences such as StateHealth IT Connect, IT Solutions Management (ISM) annual conference&lt;/li&gt;\n&lt;li&gt;Contract payments for State Level Registry solution&lt;/li&gt;\n&lt;li&gt;Contract payments for post-payment audits for the Medicaid EHR Incentive Program&lt;/li&gt;\n&lt;li&gt;Contract payments for Technical Assistance for EHR Incentive Program and other HITECH activities identified in HITECH IAPD&lt;/li&gt;\n&lt;li&gt;Contract payments for MITA 3.0 COTS solution as outlined in HITECH IAPD to support the development of a HITECH MITA 3.0 State Self-Assessment&lt;/li&gt;\n&lt;li&gt;Administrative costs: copy paper, office supplies&lt;/li&gt;\n&lt;/ul&gt;',
+    actualExpenditures: {
+      2019: {
+        hithie: { federalActual: 140000, totalApproved: 280000 },
+        mmis: {
+          50: { federalActual: 23445, totalApproved: 82545 },
+          75: { federalActual: 23440, totalApproved: 75340 },
+          90: { federalActual: 235720, totalApproved: 262460 }
+        }
+      },
+      2020: {
+        hithie: { federalActual: 146346, totalApproved: 234526 },
+        mmis: {
+          50: { federalActual: 129387, totalApproved: 375445 },
+          75: { federalActual: 413246, totalApproved: 654455 },
+          90: { federalActual: 614544, totalApproved: 863455 }
+        }
+      },
+      2021: {
+        hithie: { federalActual: 320000, totalApproved: 540000 },
+        mmis: {
+          50: { federalActual: 0, totalApproved: 0 },
+          75: { federalActual: 0, totalApproved: 0 },
+          90: { federalActual: 0, totalApproved: 0 }
+        }
+      }
+    }
+  },
+  activities: [
+    {
+      alternatives:
+        '&lt;p&gt;Modifications to State Level Registry (SLR)&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Minimize Modifications&lt;/li&gt;\n&lt;li&gt;Minimize cost&lt;/li&gt;\n&lt;li&gt;Decreased implementation time.&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;The 2015-2017 rule changes are significant and wide ranging; minimally accommodating the new attestations will be problematic for the remainder of the program. Program benefits will potentially not be maximized. To be prepared for Stage 3 and to properly implement all 2015-2017 rule changes; Tycho plans to implement all necessary modifications.&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Modifications to State Level Registry (SLR)&lt;/li&gt;\n&lt;li&gt;Implement the changes as outlined&lt;/li&gt;\n&lt;li&gt;The EHR Incentive Program will have the ability to be fully supported.&lt;/li&gt;\n&lt;li&gt;Support of electronic submission of CQMs, enhancing the support of the emphasis on interoperability.&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;There are no significant disadvantages to this option.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;Implementing the changes as outlined provide the optimal opportunity to maximize the benefits of the EHR program and its impact on the delivery of health care with improved quality and outcomes.&lt;/p&gt;',
+      contractorResources: [
+        {
+          description: 'Maintain SLR',
+          end: '',
+          hourly: {
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
+          },
+          useHourly: false,
+          name: 'Super SLR Incorporated',
+          start: '',
+          totalCost: 32423,
+          years: { 2022: 999756, 2023: 342444 }
+        },
+        {
+          description: 'Technology consulting and planning services.',
+          end: '',
+          hourly: {
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
+          },
+          useHourly: false,
+          name: 'Tech Consulting Inc.',
+          start: '',
+          totalCost: 473573,
+          years: { 2022: 333000, 2023: 200000 }
+        }
+      ],
+      costAllocation: {
+        2022: { ffp: { federal: 90, state: 10 }, other: 105000 },
+        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
+      },
+      costAllocationNarrative: {
+        years: {
+          2022: {
+            otherSources:
+              '&lt;p&gt;No other funding is provided for this activity for FFY 2022.&lt;/p&gt;'
+          },
+          2023: {
+            otherSources:
+              '&lt;p&gt;No other funding is provided for this activity for FFY 2023.&lt;/p&gt;'
+          }
+        },
+        methodology: '&lt;p&gt;No cost allocation is necessary for this activity.&lt;/p&gt;'
+      },
+      description:
+        '&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.A.1: Modifications to the State Level Repository&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program. The modifications of the SLR for CMS program rule changes and guidance changes (Stage 3, IPPS, and OPPS) will require extensive development and implementation efforts and is essential to the effective administration of the Medicaid EHR Incentive Program. Modifications to the SLR are done in phases depending on how CMS rule changes occur. The implementation of the design elements will require provider onboarding activities to be initiated and completed including outreach and training for all program participants. The SLR will increase the efficiency with which Tycho Medicaid administers the program; allow for increased oversight and assure that the program is operated in accordance with the complex and evolving program rules and requirements.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;Additionally, Tycho Medicaid is seeking funding to complete a security risk assessment for the State Level Repository to ensure the SLR meets the required system security standards for HIPAA, MARSe, NIST and other state and federal security requirements for information technology.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.B.1 Administrative and Technical Support Consulting&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;The DHSS is requesting funding to support activities under the Medicaid EHR Incentive Payment Program to provide technical assistance for statewide activities and implementations. Activities of this initiative will include support of the activities included in this IAPDU, SMPHU development, eCQM implementation, project management services, and assistance with the public health expansion modernization initiative.&lt;/p&gt;',
+      expenses: [
+        {
+          description: '',
+          category: 'Training and outreach',
+          years: { 2022: 40000, 2023: 40000 }
+        },
+        {
+          description: '',
+          category: 'Travel',
+          years: { 2022: 35000, 2023: 35000 }
+        },
+        {
+          description: '',
+          category: 'Hardware, software, and licensing',
+          years: { 2022: 700000, 2023: 0 }
+        }
+      ],
+      fundingSource: 'HIT',
+      outcomes: [
+        {
+          outcome:
+            'Accept attestations for 2022, and modify SLR to meet new spec sheets released by CMS.',
+          metrics: [
+            { metric: 'Complete SLR modifications by 11/1/21' },
+            { metric: 'Accept attestations through 4/30/22.' }
+          ]
+        },
+        {
+          outcome:
+            'Provide support to EPs and EHs through attestation process.',
+          metrics: [
+            { metric: "Guidance available on Tycho''s websites" },
+            { metric: 'Office hours availble for EPs and EHs' },
+            { metric: 'Site visits, as needed, for EPs and EHs' }
+          ]
+        }
+      ],
+      name: 'Program Administration',
+      plannedEndDate: '2023-09-30',
+      plannedStartDate: '2017-10-01',
+      schedule: [
+        {
+          endDate: '2020-09-07',
+          milestone:
+            'Implementation of Final Rule and Stage 3 System Developments'
+        },
+        {
+          endDate: '2019-12-31',
+          milestone: 'Environmental Scan Completion'
+        },
+        {
+          endDate: '2022-05-30',
+          milestone: 'HIT Roadmap Development'
+        }
+      ],
+      standardsAndConditions: {
+        doesNotSupport: '',
+        supports:
+          '&lt;p class="p1"&gt;&lt;span class="s1"&gt;We will comply with standards and conditions&lt;/span&gt;&lt;/p&gt;'
+      },
+      statePersonnel: [
+        {
+          title: 'Project Assistant',
+          description:
+            'Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.',
+          years: {
+            2022: { amt: 86000, perc: 1 },
+            2023: { amt: 88000, perc: 1 }
+          }
+        },
+        {
+          title:
+            'EHR Incentive Program Meaningful Use Coordinator (Research Analyst III)',
+          description:
+            'Develop and monitor reports, assist data users in developing and managing queries.',
+          years: {
+            2022: { amt: 101115, perc: 1 },
+            2023: { amt: 102111, perc: 1 }
+          }
+        },
+        {
+          title: 'IT Liaison',
+          description:
+            'Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.',
+          years: {
+            2022: { amt: 101000, perc: 1 },
+            2023: { amt: 104000, perc: 1 }
+          }
+        },
+        {
+          title: 'Accountant III',
+          description:
+            'Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.',
+          years: {
+            2022: { amt: 101000, perc: 3 },
+            2023: { amt: 109000, perc: 3 }
+          }
+        },
+        {
+          title: 'Public Information Officer',
+          description:
+            'Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program',
+          years: {
+            2022: { amt: 165000, perc: 0.5 },
+            2023: { amt: 170000, perc: 0.5 }
+          }
+        },
+        {
+          title: 'Systems Chief',
+          description:
+            'Coordinate office resources, manage staff, budget, and resource assignments, and report program status.',
+          years: {
+            2022: { amt: 135000, perc: 0.5 },
+            2023: { amt: 140000, perc: 0.5 }
+          }
+        },
+        {
+          title:
+            'Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)',
+          description:
+            'Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.',
+          years: {
+            2022: { amt: 110012, perc: 1 },
+            2023: { amt: 111102, perc: 1 }
+          }
+        },
+        {
+          title: 'System Analyst (Analyst Programmer IV)',
+          description:
+            'Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.',
+          years: {
+            2022: { amt: 98987, perc: 4 },
+            2023: { amt: 99897, perc: 4 }
+          }
+        }
+      ],
+      summary:
+        'Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.',
+      quarterlyFFP: {
+        2022: {
+          1: { combined: 25, contractors: 25, inHouse: 25 },
+          2: { combined: 25, contractors: 25, inHouse: 25 },
+          3: { combined: 25, contractors: 25, inHouse: 25 },
+          4: { combined: 25, contractors: 25, inHouse: 25 }
+        },
+        2023: {
+          1: { combined: 25, contractors: 25, inHouse: 25 },
+          2: { combined: 25, contractors: 25, inHouse: 25 },
+          3: { combined: 25, contractors: 25, inHouse: 25 },
+          4: { combined: 25, contractors: 25, inHouse: 25 }
+        }
+      }
+    },
+    {
+      alternatives:
+        "&lt;p&gt;Medicaid Claims Data Feed to the HIE&lt;/p&gt;\n&lt;p&gt;Periodic Uploads of Medicaid Claims Data from MMIS to the HIE&lt;/p&gt;\n&lt;p&gt;The HIE could consume Medicaid claims data from periodic uploads of an extract/export from the MMIS&lt;/p&gt;\n&lt;p&gt;Increase of administrative burden on development staff.&lt;/p&gt;\n&lt;p&gt;Short term cost savings, with a higher long-term cost. No real-time data.&lt;/p&gt;\n&lt;p&gt;The periodic MMIS uploads would not provide real time data. Therefore, Tycho plans to use a Medicaid claims data feed&lt;/p&gt;\n&lt;p&gt;Medicaid Claims Data Feed to the HIE&lt;/p&gt;\n&lt;p&gt;Create a Medicaid Claims Data Feed to the HIE&lt;/p&gt;\n&lt;p&gt;Implementing a Medicaid Claims Data Feed to the HIE would provide information regarding Medicaid claims to participating providers, Hospitals, and patients&lt;/p&gt;\n&lt;p&gt;Data regarding medications prescribed, tests performed, and the resulting diagnosis would improve care coordination&lt;/p&gt;\n&lt;p&gt;There are no significant disadvantages to this option&lt;/p&gt;\n&lt;p&gt;Implementing a Medicaid Claims data feed to the HIE provides updated claims data in real-time to improve care coordination and increase MU. Because data is updated in real-time, a data feed meets Tycho''s needs&lt;/p&gt;",
+      contractorResources: [
+        {
+          description: 'Hosting and development support.',
+          end: '',
+          hourly: {
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
+          },
+          useHourly: false,
+          name: 'Interface Vendor Inc.',
+          start: '',
+          totalCost: 26453574,
+          years: { 2022: 650000, 2023: 750000 }
+        },
+        {
+          description: 'Interface M&amp;O contractor.',
+          end: '',
+          hourly: {
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
+          },
+          useHourly: false,
+          name: 'TBD',
+          start: '',
+          totalCost: 7398,
+          years: { 2022: 0, 2023: 1000000 }
+        }
+      ],
+      costAllocation: {
+        2022: { ffp: { federal: 90, state: 10 }, other: 0 },
+        2023: { ffp: { federal: 75, state: 25 }, other: 0 }
+      },
+      costAllocationNarrative: {
+        years: {
+          2022: {
+            otherSources:
+              '&lt;p&gt;No other funding is provided for this activity for FFY 2022.&lt;/p&gt;'
+          },
+          2023: {
+            otherSources:
+              '&lt;p&gt;No other funding is provided for this activity for FFY 2023.&lt;/p&gt;\n'
+          }
+        },
+        methodology:
+          '&lt;p&gt;No cost allocation is necessary for this activity.&lt;/p&gt;\n'
+      },
+      description:
+        "&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.B.3 Medicaid Claims Data Feed to the HIE&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;Currently, Tycho does not have an All-Payers&amp;rsquo; Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;",
+      expenses: [
+        {
+          description: '',
+          category: 'Travel',
+          years: { 2022: 0, 2023: 0 }
+        }
+      ],
+      fundingSource: 'MMIS',
+      outcomes: [
+        {
+          outcome:
+            'Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.',
+          metrics: [
+            {
+              metric:
+                'Hire contracted support to build an open API for the DW that the HIE and PHR can consume.'
+            },
+            { metric: 'Provide support for using open API for DW' }
+          ]
+        }
+      ],
+      name: 'Claims Data Analytics',
+      plannedEndDate: '2022-09-30',
+      plannedStartDate: '2019-10-01',
+      schedule: [
+        {
+          endDate: '2022-12-31',
+          milestone: 'Implement MMIS-HIE Interface'
+        },
+        {
+          endDate: '2022-12-31',
+          milestone: 'Develop MMIS-HIE Interface Requirements'
+        }
+      ],
+      standardsAndConditions: {
+        doesNotSupport: 'We will comply with standards and conditions',
+        supports:
+          '&lt;p class="p1"&gt;&lt;span class="s1"&gt;We will comply with standards and conditions&lt;/span&gt;&lt;/p&gt;'
+      },
+      statePersonnel: [
+        {
+          title: 'Project Assistant',
+          description: 'Assist with stuff',
+          years: {
+            2022: { amt: 98000, perc: 1 },
+            2023: { amt: 99000, perc: 1 }
+          }
+        },
+        {
+          title: 'MMIS Project Manager',
+          description:
+            'This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info',
+          years: {
+            2022: { amt: 140000, perc: 1 },
+            2023: { amt: 144000, perc: 1 }
+          }
+        },
+        {
+          title: 'MMIS Trainer',
+          description:
+            'Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System',
+          years: {
+            2022: { amt: 115000, perc: 1 },
+            2023: { amt: 115000, perc: 1 }
+          }
+        },
+        {
+          title: 'Programmer IV',
+          description:
+            'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
+          years: {
+            2022: { amt: 140000, perc: 1 },
+            2023: { amt: 145000, perc: 1 }
+          }
+        },
+        {
+          title: 'Security IT',
+          description: 'Make sure its secure.',
+          years: {
+            2022: { amt: 115000, perc: 1 },
+            2023: { amt: 120000, perc: 1 }
+          }
+        },
+        {
+          title: 'Operations Specialist',
+          description: 'Run the day to day.',
+          years: {
+            2022: { amt: 125000, perc: 1 },
+            2023: { amt: 130000, perc: 1 }
+          }
+        },
+        {
+          title: 'Programmer V',
+          description:
+            'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
+          years: {
+            2022: { amt: 150000, perc: 2 },
+            2023: { amt: 155000, perc: 3 }
+          }
+        },
+        {
+          title: 'Programmer III',
+          description:
+            'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
+          years: {
+            2022: { amt: 120000, perc: 1 },
+            2023: { amt: 125000, perc: 1 }
+          }
+        }
+      ],
+      summary:
+        'To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. ',
+      quarterlyFFP: {
+        2022: {
+          1: { combined: 25, contractors: 25, inHouse: 25 },
+          2: { combined: 25, contractors: 25, inHouse: 25 },
+          3: { combined: 25, contractors: 25, inHouse: 25 },
+          4: { combined: 25, contractors: 25, inHouse: 25 }
+        },
+        2023: {
+          1: { combined: 25, contractors: 25, inHouse: 25 },
+          2: { combined: 25, contractors: 25, inHouse: 25 },
+          3: { combined: 25, contractors: 25, inHouse: 25 },
+          4: { combined: 25, contractors: 25, inHouse: 25 }
+        }
+      }
+    },
+    {
+      alternatives:
+        '&lt;p&gt;Health Information Exchange&lt;/p&gt;\n&lt;p&gt;Maintain existing system.&lt;/p&gt;\n&lt;p&gt;The existing system has a few benefits. The current EDI process while dated still forms the backbone of the Division&amp;rsquo;s data sharing needs. The technology works in the fashion that it always has.&lt;/p&gt;\n&lt;p&gt;The drawbacks of this approach are significant. While the current Edi process affords behavioral health agencies to submit their data to the state, it does not allow for sharing the same data to other providers in either the primary care or behavioral health treatment contexts.&lt;/p&gt;\n&lt;p&gt;There are more disadvantages than advantages in pursuing this approach. The drawbacks are substantial, such as absence of data normalization, difficulties with aligning the user interface and application design with industry best practices, inconsistencies in design, and difficulties with support and maintenance, making this approach less favorable than the other two alternatives considered.&lt;/p&gt;\n&lt;p&gt;Health Information Exchange&lt;/p&gt;\n&lt;p&gt;Update and Enhance Existing System(s), connecting AKAIMS to the Health Information Exchange&lt;/p&gt;\n&lt;p&gt;Connecting AKAIMS to the Health Information Exchange will provide for the sending and receiving of data across healthcare disciplines. This data sharing is thought to enhance and provide for better care outcomes for patients who are participating in care across multiple providers. This solution future proofs AKAIMS as it will integrate current technologies and leverages those technologies for a more feature rich process.&lt;/p&gt;\n&lt;p&gt;Training and integration of this updated technology will require some effort and outreach. Newly on-boarded agencies will need to adjust to new data collection protocols.&lt;/p&gt;\n&lt;p&gt;Full participation in the Health Information Exchange will reduce double data entry at all levels (reducing costs). It is anticipated that efficiencies gained with simplification of data collection and reporting will greatly enhance patient care outcomes.&lt;/p&gt;\n&lt;p&gt;HIE Platform&lt;/p&gt;\n&lt;p&gt;Upgrade HIE to the Audacious Inquiry (Ai) platform&lt;/p&gt;\n&lt;p&gt;Ai offers a strong foundation on which additional functionality can be built. Transitioning to the Ai platform has the potential to minimize the effort required to modernize the HIE, while delivering additional services to users.&lt;/p&gt;\n&lt;p&gt;Transitioning to Ai means that the State will be leaving the current HIE platform. There is potential risk in adoption and migration of services and data.&lt;/p&gt;\n&lt;p&gt;The HIE platform will be transitioned to Ai to offer additional services, contain costs on enhancements, and maximize the scalability and flexibility of the HIE to support modernization across the enterprise.&lt;/p&gt;\n&lt;p&gt;HIE Platform&lt;/p&gt;\n&lt;p&gt;Keep platform as it is without upgrade.&lt;/p&gt;\n&lt;p&gt;Keeping the platform as it is without upgrade would allow focus to remain on onboarding.&lt;/p&gt;\n&lt;p&gt;Functionality supported by existing HIE is not adequate to support future applications. The value delivered by the service as it is could be improved with additional functionality. Potential to ingest different critical types of data is limited without a platform upgrade.&lt;/p&gt;\n&lt;p&gt;Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;HIE Platform&lt;/p&gt;\n&lt;p&gt;Partner with another state HIE for services ranging from sharing the platform itself, to specific services or commonly-developed interfaces.&lt;/p&gt;\n&lt;p&gt;Sharing with another state offers the potential to&lt;/p&gt;\n&lt;p&gt;&amp;bull; decrease costs&lt;/p&gt;\n&lt;p&gt;&amp;bull; Increase speed of onboarding&lt;/p&gt;\n&lt;p&gt;&amp;bull; Increase functionality&lt;/p&gt;\n&lt;p&gt;&amp;bull; Provide for greater sustainability&lt;/p&gt;\n&lt;p&gt;&amp;bull; Address the needs of our partners faster or better&lt;/p&gt;\n&lt;p&gt;No states currently share HIE services entirely, due to perceived legal constraints; this option presents multiple factors to consider ranging from legal to technical. Potential for cost savings is limited because pricing models are usually based on volume. There is a possibility for significant disruption to service during a transition of this type; significant issues with legal arrangements complying with other states.&lt;/p&gt;\n&lt;p&gt;Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.&lt;/p&gt;\n&lt;p&gt;HIE Tools for Care Coordination&lt;/p&gt;\n&lt;p&gt;Add functional tools to support care coordination, referrals and analytics through other module developers or collaborators&lt;/p&gt;\n&lt;p&gt;Sharing with another state or regional HIE to develop or utilize HIE tools offers the potential to&lt;/p&gt;\n&lt;p&gt;&amp;bull; decrease costs&lt;/p&gt;\n&lt;p&gt;&amp;bull; Increase speed of onboarding&lt;/p&gt;\n&lt;p&gt;&amp;bull; Increase functionality&lt;/p&gt;\n&lt;p&gt;&amp;bull; Provide for greater sustainability&lt;/p&gt;\n&lt;p&gt;&amp;bull; Address the needs of our partners faster or better&lt;/p&gt;\n&lt;p&gt;If another commercial developer is selected to offer these modules, there is some likelihood that integrating into the HIE platform will be more difficult without the transition to Ai.&lt;/p&gt;\n&lt;p&gt;Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.&lt;/p&gt;\n&lt;p&gt;HIE Functionality&lt;/p&gt;\n&lt;p&gt;Enhancing functionality for participating hospitals&lt;/p&gt;\n&lt;p&gt;Hospitals are critical stakeholders in the HIE. Providing functionality to assist hospitals in meeting MU3 and in evaluating ER patients are two areas where HIE could provide valuable information.&lt;/p&gt;\n&lt;p&gt;Hospital focus is based on patient safety. Thus far, there has been little incentive for using HIE data for patient safety.&lt;/p&gt;\n&lt;p&gt;DHSS is actively pursuing additional functionality for hospitals. This involves hospital stakeholder meetings, vendor discussions, board review and clinical workgroup input.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;HIE Functionality&lt;/p&gt;\n&lt;p&gt;Implement connections with high-value state and federal data sources (Corrections, DJJ, SSA, DoD)&lt;/p&gt;\n&lt;p&gt;Including health data from correctional facilities (ADT, ORU and/or CCD files) will help provide better more coordinated care for this vulnerable population, many of whom are also Medicaid-eligible.&lt;/p&gt;\n&lt;p&gt;Aside from the need to allocate staff time across projects, there are no significant drawbacks to this option.&lt;/p&gt;\n&lt;p&gt;This project should proceed.&lt;/p&gt;\n&lt;p&gt;HIE Functionality&lt;/p&gt;\n&lt;p&gt;Keep health information exchange functionality substantially the same regarding state and federal data source connections&lt;/p&gt;\n&lt;p&gt;Less work for the HIE team, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules.&lt;/p&gt;\n&lt;p&gt;Leaving the information gap among these agencies open will lead to continued delays in needed services.&lt;/p&gt;\n&lt;p&gt;This option is not preferred.&lt;/p&gt;\n&lt;p&gt;HIE Functionality&lt;/p&gt;\n&lt;p&gt;Keep health information exchange functionality substantially the same regarding emergency department information exchange&lt;/p&gt;\n&lt;p&gt;Giving providers better tools to coordinate care for high-risk, high-utilizer members of the population has the potential to substantially reduce spending and improve outcomes for this vulnerable population.&lt;/p&gt;\n&lt;p&gt;Aside from the need to allocate staff time across projects, there are no significant drawbacks to this option.&lt;/p&gt;\n&lt;p&gt;This project should proceed.&lt;/p&gt;\n&lt;p&gt;HIE Functionality&lt;/p&gt;\n&lt;p&gt;Keep health information exchange functionality substantially the same regarding prescription information&lt;/p&gt;\n&lt;p&gt;Less work for the HIE, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules&lt;/p&gt;\n&lt;p&gt;A continuing information gap around prescriptions filled will limit the potential to improve care coordination for Tycho citizens and heighten patient safety.&lt;/p&gt;\n&lt;p&gt;This project should proceed.&lt;/p&gt;\n&lt;p&gt;HIE Functionality&lt;/p&gt;\n&lt;p&gt;Keep health information exchange functionality substantially the same regarding image exchange&lt;/p&gt;\n&lt;p&gt;Less work for the HIE, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules&lt;/p&gt;\n&lt;p&gt;The lack of simple diagnostic image exchange presents a significant barrier to widespread health information exchange. Without these technologies, patients often hand-carry their films or electronic files with them, which can present a high risk of lost images and inefficiency.&lt;/p&gt;\n&lt;p&gt;This option is not preferred at this time.&lt;/p&gt;',
+      contractorResources: [
+        {
+          description: 'Creates materials for training ',
+          end: '2022-05-31',
+          hourly: {
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
+          },
+          useHourly: false,
+          name: 'Sample Training Contractor Name',
+          start: '2022-01-01',
+          totalCost: 20000,
+          years: { 2022: 0, 2023: 0 }
+        }
+      ],
+      costAllocation: {
+        2022: { ffp: { federal: 90, state: 10 }, other: 0 },
+        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
+      },
+      costAllocationNarrative: {
+        years: {
+          2022: { otherSources: '' },
+          2023: { otherSources: '' }
+        },
+        methodology: ''
+      },
+      description:
+        "&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;img style=\"float: none; height: auto; width: auto;\" src=\"/api/apds/1/files/622a24569b39c8f67d684882c8abe55dbebf98d0a9813df3aa8f07a509c10f29\" alt=\"undefined\" /&gt;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.D. Statewide HIE Enhancement, Onboarding, and Support of Statewide HIE Operational Strategic Plan&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;DHSS is requesting funding to support the continued enhancement and provider onboarding activities to the statewide HIE. The success of the statewide HIE is critical for improving data exchange, coordination of care, and modernizing healthcare across Tycho. The following funding requests are for projects that will provide enhanced technical capabilities to providers, support providers in onboarding, support modernizations required for Medicaid redesign, and ensure sustainability beyond State of Tycho and CMS funding. The projects have been designed to meet the following goals and desires for the statewide HIE:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;&amp;bull; Support the HIE&amp;rsquo;s operational needs, including staffing, contract resources, administrative expenses, and technology expenses to support operations and ongoing maintenance of the HIE&lt;/li&gt;\n&lt;li&gt;&amp;bull; Provide technical assistance to support HIE onboarding and implementation within provider organizations who are meaningful use-eligible and who refer directly with tribal organizations&lt;/li&gt;\n&lt;li&gt;&amp;bull; Develop tools and HIE interfaces that support enhanced care coordination services, and increase HIE value to ensure sustainability beyond current funding streams&lt;/li&gt;\n&lt;li&gt;All initiatives described below are funded at 90/10 funds and do not require cost allocation. All projects below support the onboarding and connection for Medicaid providers, EPs, EHs, and additional providers supported by SMD #16-003. Section VII. Cost Allocation Plan and Appendix D of this IAPD further describes the cost allocation methodology.&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.D.1 Behavioral Health Onboarding &amp;amp; Care Coordination&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;The Department recognizes the need to increase Behavioral Health (BH) data capacity and sharing to achieve its goals and outcomes related to care coordination. This includes promoting effective communication to coordinate care and enhancing the ability for providers to share and gain access to Protected Class Patient Data where appropriate. To support the capacity of data sharing and improving coordination of care, funding is requested to support Behavioral Health provider connectivity through the onboarding program by the development and implementation of a Behavioral Health-centric Unified Landing Page Application. The Behavioral Health Unified Landing Page Application will improve the quality and completeness of behavioral health data and thus, support the ability for providers to achieve MU.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;In addition to the Unified Landing Page, funding is requested to support behavioral health provider onboarding to the HIE. The HIE onboarding program will provide funds to offset expenses required for behavioral health providers to adequately participate in statewide health information exchange. The onboarding program will support Tycho''s HIE vision of increasing onboarding Medicaid providers and care coordination to help Tycho providers demonstrate MU. This program relates to the guidance provided by CMS in the SMD 16-003 letter dated February 2016 and will assist with covering costs associated with connectivity including but not limited to the following activities:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;&amp;bull; Legal activities including establishment of user agreements&lt;/li&gt;\n&lt;li&gt;&amp;bull; Configuration and technical development activities&lt;/li&gt;\n&lt;li&gt;&amp;bull; Testing of connection&lt;/li&gt;\n&lt;li&gt;&amp;bull; Workflow integration&lt;/li&gt;\n&lt;li&gt;&amp;bull; Implementation support and user training&lt;/li&gt;\n&lt;li&gt;&amp;bull; Post production support&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;The goal is for the onboarding program to support 40 provider organizations across the State. The initial phase of the program will be focused on Medicaid behavioral health providers with additional provider types potentially targeted in later phases of the initiative. Administrative offset funding will be on-time funding only and will be issued as pass-through funding through healtheConnect (Tycho''s HIE organization). The funding will be distributed in 2 parts: 75% upon onboarding initialization (participation/contract signed) and the remaining 25% upon the HIE connection being live or in production.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.D.2 HIE Strategic Planning&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;Having a robust HIE is a critical component of Tycho''s HIT landscape and will continue to play a role in enhancing Tycho''s EPs and EHs ability to achieve MU. As part of the Department&amp;rsquo;s responsibility for administration of the EHR Incentive Program and in an effort to enhance the maturity of HIE in Tycho, the Department is requesting funds to support a health information exchange assessment using CMS&amp;rsquo; standards of the HIE Maturity Model and MITA and a Strategic Plan to enhance platform functionality and initial steps necessary to establish a long-term vision of HIE in Tycho''s HIT landscape. This work will further ensure that the Department&amp;rsquo;s goals and target state (To-Be vision) aligns with CMS guidelines as specified under 42 CFR 495.338, as well as the HIE Maturity Model, MITA and the Seven Standards and Conditions.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;The Department is requesting funds to support the statewide HIE in conducting an HIE Assessment using the CMS HIE Maturity Model and MITA standards. The information gathered in the assessment will help clearly articulate the long-term HIE vision for Tycho, define a governance model, and establish a robust sustainability plan built on the framework of the HIE Maturity Model and MITA standards. This information will also be used to identify areas where the statewide HIE can provide services and make connections with the Medicaid enterprise of systems to support health information exchange requirements and sustainability of the HIE.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.D.3 Integration of Social Determinants of Health&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;To further drive Tycho''s goals around improved health outcomes through HIE, the Department is seeking funds to support the integration of the Social Determinants of Health into the statewide HIE system which will improve coordination of care and information exchange across the state.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;This is an important and practical step to help the healthcare delivery system build effective, coordinated, data-driven healthcare services into communities hit hardest by social structures and economic systems. The integration of social determinants of health data will provide support for addressing social determinants of health drivers in Tycho and will identify ways to improve intervention using Social Determinants of Health as part of a comprehensive coordinated care model impacting payment, incentivizing purposeful intervention in the specific needs of their patients and populations to improve health outcomes.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;To complete the scope of work, the HIE will integrate a limited CDR and interface to the network as well as provide onboarding services to connect Medicaid providers. The integration of the Social Determinates of Health project will support Medicaid providers ability to achieve meaningful use by allowing providers to incorporate summary of care information from other providers into their EHR using the functions of CEHRT through the HIE.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.D.4 Staff Augmentation for Adoption and Utilization&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;DHSS seeks to support onboarding efforts to connect Medicaid Meaningful Use eligible providers and providers supporting eligible providers to the HIE. The provider onboarding program will fund staffing outreach/educational support and technical services to Medicaid EPs that have adopted EHRs but not made HIE use part of day to day operations, not made use of new HIE capabilities, not yet connected, or were unable to take advantage of the ONC Regional Extension Center (REC) services because they were not eligible.&lt;/p&gt;\n&lt;p&gt;Onboarding will include efforts to provide outreach/educational support and technical services. The Provider Onboarding Program includes the following outcomes:&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Provide staff for outreach, education, training, and organization change management to targeted provider groups to assist with interfacing and connecting to the HIE to support ongoing utilization of the HIE services&lt;/li&gt;\n&lt;li&gt;Meet milestones established by the HIE and the Department for provider connectivity to the HIE&lt;/li&gt;\n&lt;li&gt;Cover the onboarding costs (personnel and technical) for connecting Medicaid providers and hospitals to the statewide HIE and integrating HIE use into the provider workflow&lt;/li&gt;\n&lt;/ul&gt;\n&lt;p&gt;The funds requested in this IAPD-U will be used to establish provider groups for onboarding support, establish onboarding benchmarks, and specifically implement training and technical assistance services. Funds will be used to assess barriers to onboarding and adoption of the HIE services, strategies for work flow analysis, and other ways to reduce Medicaid provider burden to onboard to the HIE. The proposed solution shall provide support services that coordinate with HIE processes to onboard and improve participant interoperability (e.g., clinic readiness assessments, bi-directional connection builds development and deployment of bi-directional interface with Medicaid) through utilization of the HIE system.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;The adoption and utilization program will continue to expand outreach efforts and technical services to Medicaid providers and continue to boost MU numbers and milestones in Tycho to enhance the HIT vision outlined in the SMHP. In addition to AIU and MU education and technical services, the program will also seek to assist providers in meeting MU Stages 2 and 3 through onboarding provider interfaces and providing the capabilities to automatically meet several MU measures through the enhanced functionality of the HIE.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.D.5 Trauma Registry&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;DHSS recognizes the need for a trauma registry as an essential component of information exchange. The trauma registry is necessary to drive an efficient and effective performance improvement program for the care of injured enrollees. Furthermore, as published recently by SAMHSA, there are a range of evidence-based treatments that are effective in helping children and youth who have experienced trauma. Through the HIE, health providers will share and gain access to trauma information to drive an efficient and effective performance improvement program for the care of injured enrollees. The trauma register information will interoperate with the Behavioral Health Unified Landing Page Application to promote evidence-based treatments that are effective in helping enrollees who have experienced trauma. The trauma registry will be recognized as a specialized registry by the State to support MU and data exchange.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.D.6 Air Medical Resource Location&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;Tycho is currently struggling with tracking and maintaining the location and availability of air medical resources within the state. This information is critical to the timely delivery of care given the remote nature of Tycho''s geography and unique dependence on air transportation. Currently, Tycho''s air medical resources are using out of state dispatch centers who do not clearly understand the geography of Tycho or time needed to travel within the state. To address this gap in services and mitigate potential life-threatening delays in air medical resources, the Department would like to request funds to support the integration of the LifeMed application into the HIE. This application will allow healthcare entities: Public Health, hospitals, primary care providers, EMS, and all other authorized provider types to track all air medical resources in the state. The LifeMed application allows for tracking of specific tail numbers on planes and locations/timing for air resources.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;The HIE will integrate with the LifeMed application so that Tycho providers and healthcare entities are able to seamlessly track all air medical resources in the state, thus greatly improve coordination and transition of care. The ability to track this information through the HIE will further support providers ability to enhance care coordination by accurately tracking patient location and improves health information exchange by giving providers access to information on patient&amp;rsquo;s location to submit summary of care records through the HIE to other provider EHR systems. Funds will be used to support the LifeMed software costs, provider training and implementation services.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.D.7 AURORA-HIE Integration&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;AURORA is a Public Health online patient care reporting system for EMS developed by Image Trend. The Department is requesting funds to support the connection of the AURORA system to the HIE. This activity would activate the HIE integration with the Image Trend solution to allow for Medicaid providers to send patient information to the AURORA system through the HIE. Upon delivery of the patient to the hospital the patient&amp;rsquo;s health data from EMS would be transmitted via the HIE to the hospital&amp;rsquo;s EHR system, and when the patient is discharge the ADT feed from the hospital would be transmitted back to EMS to the AURORA system.&lt;/p&gt;\n&lt;p&gt;DHSS is seeking funds to integrate the AURORA Public Health online patient care reporting system for EMS to the HIE to help support Medicaid providers ability to achieve Meaningful Use by meeting outcomes and measures pertaining to Health Information Exchange, Coordination of Care, and Public Health Reporting. Funds will be used to develop interfaces between the HIE and 10 hospitals and provider training and technical onboarding assistance to providers to connect to the HIE and AURORA system.&lt;/p&gt;",
+      expenses: [
+        {
+          description:
+            'Training materials creation and software for compliance',
+          category: 'Hardware, software, and licensing',
+          years: { 2022: 10000, 2023: 10000 }
+        }
+      ],
+      fundingSource: 'HIE',
+      outcomes: [
+        {
+          outcome: 'Onboard 100 providers.',
+          metrics: [{ metric: '100 providers onboarded.' }]
+        }
+      ],
+      name: 'HIE Enhancement and Onboarding',
+      plannedEndDate: '2023-09-30',
+      plannedStartDate: '2018-01-01',
+      schedule: [
+        {
+          endDate: '2022-09-30',
+          milestone: 'Onboard providers to assistance program'
+        },
+        { endDate: '2022-12-31', milestone: 'Development of Roadmap' },
+        {
+          endDate: '2023-01-01',
+          milestone: 'HIE Staff Augmentation'
+        },
+        {
+          endDate: '2022-01-01',
+          milestone: 'Modules for Care Coordination'
+        },
+        {
+          endDate: '2023-09-30',
+          milestone: 'Provider Onboarding'
+        },
+        {
+          endDate: '2022-10-01',
+          milestone: 'EDIE System Implementation'
+        },
+        {
+          endDate: '2022-12-31',
+          milestone: 'Develop myAlaska HIE Authentication Requirements'
+        },
+        {
+          endDate: '2022-03-31',
+          milestone:
+            'Completion of requirements gathering to prepare to receive ELR'
+        },
+        {
+          endDate: '2022-12-31',
+          milestone:
+            'Configuration of internal BizTalk HL7 processes to translate the HL7 messages to PRISM'
+        },
+        { endDate: '2022-09-30', milestone: 'Onboard Lab Providers' },
+        {
+          endDate: '2018-12-31',
+          milestone:
+            'Establishment of program requirements and outreach strategy'
+        }
+      ],
+      standardsAndConditions: {
+        doesNotSupport: '',
+        supports:
+          '&lt;p class="p1"&gt;&lt;span class="s1"&gt;We will comply with standards and conditions&lt;/span&gt;&lt;/p&gt;'
+      },
+      statePersonnel: [
+        {
+          title:
+            'Services Integration Architect/ Programmer (Analyst Programmer V)',
+          description:
+            'Lead technical architecture design and development efforts for designing, implementing and maintaining services integrations leveraging resources such as the MCI, MPI and state HIE along with other DHSS Business Systems.',
+          years: {
+            2022: { amt: 115000, perc: 4 },
+            2023: { amt: 119000, perc: 4 }
+          }
+        }
+      ],
+      summary: 'Statewide HIE enhancement and onboarding.',
+      quarterlyFFP: {
+        2022: {
+          1: { combined: 25, contractors: 25, inHouse: 25 },
+          2: { combined: 25, contractors: 25, inHouse: 25 },
+          3: { combined: 25, contractors: 25, inHouse: 25 },
+          4: { combined: 25, contractors: 25, inHouse: 25 }
+        },
+        2023: {
+          1: { combined: 25, contractors: 25, inHouse: 25 },
+          2: { combined: 25, contractors: 25, inHouse: 25 },
+          3: { combined: 25, contractors: 25, inHouse: 25 },
+          4: { combined: 25, contractors: 25, inHouse: 25 }
+        }
+      }
+    },
+    {
+      alternatives:
+        '&lt;p&gt;Medicaid PHR/Blue Button&lt;/p&gt;\n&lt;p&gt;Integrate MMIS DW into the HIE with Blue Button download&lt;/p&gt;\n&lt;p&gt;Allows Medicaid recipients to view their Medicaid claims information in a portal and access it through a Blue Button download&lt;/p&gt;\n&lt;p&gt;Assists providers in achieving MU by helping them meet the VDT requirements&lt;/p&gt;\n&lt;p&gt;Supports the MU CQMs including EP Core Measure:Electronic Copy of health information&lt;/p&gt;\n&lt;p&gt;Alaskans will be able to access their PHRs&lt;/p&gt;\n&lt;p&gt;User friendly, easy to use technology helps ensure access&lt;/p&gt;\n&lt;p&gt;There are no significant negatives to this approach&lt;/p&gt;\n&lt;p&gt;Implement Medicaid PHR/Blue Button&lt;/p&gt;',
+      contractorResources: [
+        {
+          description: '',
+          end: '',
+          hourly: {
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
+          },
+          useHourly: false,
+          name: 'RFP Planning Vendor Inc.',
+          start: '',
+          totalCost: 68734,
+          years: { 2022: 50000, 2023: 5000 }
+        },
+        {
+          description: '',
+          end: '',
+          hourly: {
+            2022: { hours: '', rate: '' },
+            2023: { hours: '', rate: '' }
+          },
+          useHourly: false,
+          name: 'Blue Button Builder Inc.',
+          start: '',
+          totalCost: 1235246,
+          years: { 2022: 735246, 2023: 500000 }
+        }
+      ],
+      costAllocation: {
+        2022: { ffp: { federal: 90, state: 10 }, other: 15000 },
+        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
+      },
+      costAllocationNarrative: {
+        years: {
+          2022: {
+            otherSources: '&lt;p&gt;Sample Grant Related to Blue Button $15000&lt;/p&gt;'
+          },
+          2023: { otherSources: '' }
+        },
+        methodology: ''
+      },
+      description:
+        '&lt;p&gt;&lt;strong&gt;&lt;ins&gt;III.C.1 Medicaid Personal Health Record (PHR)/Blue Button Initiative&lt;/ins&gt;&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE. The requested funds will be utilized to enhance the ability of patients to access their own health care data in an electronic format that supports MU CQMs including EP Core Measure: Electronic copy of health information. Medicaid PHR/Blue Button (or similar) implementation supports this functionality.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;The PHR will not collect CQMs or interface to public health registries. However, it will provide short and long-term value to providers by assisting them in achieving MU.&lt;/p&gt;\n&lt;p&gt;Alaska plans to integrate the MMIS DW into the HIE, allowing Medicaid recipients to view their Medicaid claims information in a portal and access it through a Blue Button (or similar) download. Additionally, this initiative will benefit providers by assisting them in achieving MU by helping them meet View, Download, and Transmit (VDT) requirements.&lt;/p&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;This Medicaid PHR/Blue Button (or similar) approach allows providers to meet VDT requirements without having to create individual patient portals. This supports providers in achieving MU. Medicaid Eligible population will benefit by being able to obtain their Medicaid claim information, along with access to their PHRs. See further cost allocation details in Section VIII and Appendix D.&lt;/p&gt;',
+      expenses: [
+        {
+          description: '',
+          category: 'Hardware, software, and licensing',
+          years: { 2022: 0, 2023: 0 }
+        }
+      ],
+      fundingSource: 'HIE',
+      outcomes: [
+        {
+          outcome: 'Build blue button.',
+          metrics: [{ metric: 'Test blue button with 10 providers.' }]
+        }
+      ],
+      name: 'Medicaid Blue Button',
+      plannedEndDate: '2022-09-30',
+      plannedStartDate: '2018-06-01',
+      schedule: [
+        { endDate: '2022-04-01', milestone: 'PHR/Blue Button HIE Build' },
+        {
+          endDate: '2022-12-31',
+          milestone: 'Blue Button Implementation'
+        },
+        {
+          endDate: '2022-12-31',
+          milestone: 'On-Boarding of PHR/Blue Button Participants'
+        }
+      ],
+      standardsAndConditions: { doesNotSupport: '', supports: '' },
+      statePersonnel: [
+        {
+          title: '',
+          description: '',
+          years: { 2022: { amt: 0, perc: 0 }, 2023: { amt: 0, perc: 0 } }
+        }
+      ],
+      summary:
+        'DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE.',
+      quarterlyFFP: {
+        2022: {
+          1: { combined: 25, contractors: 25, inHouse: 25 },
+          2: { combined: 25, contractors: 25, inHouse: 25 },
+          3: { combined: 25, contractors: 25, inHouse: 25 },
+          4: { combined: 25, contractors: 25, inHouse: 25 }
+        },
+        2023: {
+          1: { combined: 25, contractors: 25, inHouse: 25 },
+          2: { combined: 25, contractors: 25, inHouse: 25 },
+          3: { combined: 25, contractors: 25, inHouse: 25 },
+          4: { combined: 25, contractors: 25, inHouse: 25 }
+        }
+      }
+    }
+  ],
+  proposedBudget: {
+    incentivePayments: {
+      ehAmt: {
+        2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
+        2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      ehCt: {
+        2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
+        2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      epAmt: {
+        2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
+        2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      epCt: {
+        2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
+        2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      }
+    }  
+  },
+  assurancesAndCompliances: {
+    procurement: [
+      {
+        title: '42 CFR Part 495.348',
+        checked: true,
+        explanation: ''
+      },
+      { title: 'SMM Section 11267', checked: true, explanation: '' },
+      {
+        title: '45 CFR 95.613',
+        checked: true,
+        explanation: ''
+      },
+      { title: '45 CFR 75.326', checked: true, explanation: '' }
+    ],
+    recordsAccess: [
+      {
+        title: '42 CFR Part 495.350',
+        checked: true,
+        explanation: ''
+      },
+      { title: '42 CFR Part 495.352', checked: true, explanation: '' },
+      {
+        title: '42 CFR Part 495.346',
+        checked: true,
+        explanation: ''
+      },
+      {
+        title: '42 CFR 433.112(b)',
+        checked: true,
+        explanation: ''
+      },
+      { title: '45 CFR Part 95.615', checked: true, explanation: '' },
+      {
+        title: 'SMM Section 11267',
+        checked: true,
+        explanation: ''
+      }
+    ],
+    softwareRights: [
+      {
+        title: '42 CFR 495.360',
+        checked: false,
+        explanation:
+          'We were able to get better pricing if we allowed the vendor to maintain ownership of the product they developed.'
+      },
+      { title: '45 CFR 95.617', checked: true, explanation: '' },
+      {
+        title: '42 CFR Part 431.300',
+        checked: true,
+        explanation: ''
+      },
+      { title: '42 CFR Part 433.112', checked: true, explanation: '' }
+    ],
+    security: [
+      {
+        title: '45 CFR 164 Security and Privacy',
+        checked: true,
+        explanation: ''
+      }
+    ] 
+  }
+};
+&nbsp;
+const data = [
+  {
+    stateId: 'ak',
+    status: 'draft',
+    ...apd
+  }
+];
+&nbsp;
+module.exports = {
+  data,
+  apd
+};
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at Wed Apr 06 2022 19:16:29 GMT+0000 (Coordinated Universal Time)
+            </div>
+        <script src="../../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
+    </body>
+</html>
+    

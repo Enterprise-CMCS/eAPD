@@ -35,7 +35,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: ./web/Dockerfile
+      dockerfile: ./packages/web/Dockerfile
     image: cms-eapd/web
     environment:
       - API_URL=http://localhost:8081
@@ -44,7 +44,7 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
     volumes:
       - type: bind
-        source: ./web
+        source: ./packages/web
         target: /app
         consistency: delegated
       - /app/node_modules
@@ -55,7 +55,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: ./api/Dockerfile
+      dockerfile: ./packages/api/Dockerfile
     image: cms-eapd/api
     depends_on:
       - db
@@ -77,7 +77,7 @@ services:
       - MONGO_AUTH_SOURCE=${MONGO_AUTH_SOURCE:-admin}
     volumes:
       - type: bind
-        source: ./api
+        source: ./packages/api
         target: /app
         consistency: delegated
       - /app/node_modules
