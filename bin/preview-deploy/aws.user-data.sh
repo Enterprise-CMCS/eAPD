@@ -51,7 +51,7 @@ git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 cd eAPD
 yarn install --frozen-lockfile --production=true
 
-cd web
+cd packages/web
 # yarn add webpack@5.70.0 webpack-cli@4.9.2
 API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 mv dist/* /app/web
@@ -62,7 +62,7 @@ mkdir -p /app/node_modules
 mv ~/eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
-mv ~/eAPD/api/* /app/api
+mv ~/eAPD/packages/api/* /app/api
 cd /app/api
 
 # Build and seed the database

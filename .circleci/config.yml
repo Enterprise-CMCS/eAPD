@@ -292,7 +292,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: save OpenAPI JSON
-          command: node -e "console.log(JSON.stringify(require('./api/routes/openAPI/index.js')))" > openapi.json
+          command: node -e "console.log(JSON.stringify(require('./packages/api/routes/openAPI/index.js')))" > openapi.json
       - run:
           name: validate
           command: |
@@ -314,7 +314,7 @@ jobs:
       - run: npm i glob
       - run: npm i js-yaml
       - run:
-          working_directory: ~/project/web
+          working_directory: ~/project/packages/web
           command: node yaml-tests.js
 
   e2e test:
@@ -356,7 +356,7 @@ jobs:
           command: |
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
-            cp ../api/seeds/test/tokens.json ./tokens.json
+            cp ../packages/api/seeds/test/tokens.json ./tokens.json
 
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
@@ -457,10 +457,10 @@ jobs:
           working_directory: ~/project/
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api -f ./api/Dockerfile ./
+            docker build -t cms-eapd/api -f ./packages/api/Dockerfile ./
       - run:
           name: run tests
-          working_directory: ~/project/api
+          working_directory: ~/project/packages/api
           command: |
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
@@ -482,7 +482,7 @@ jobs:
           at: ~/project
       - run:
           name: run linter
-          working_directory: ~/project/api
+          working_directory: ~/project/packages/pi
           command: yarn lint
 
   # Runs backend unit tests and reports coverage to codecov.io.
@@ -498,10 +498,10 @@ jobs:
           working_directory: ~/project/
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api -f ./api/Dockerfile ./
+            docker build -t cms-eapd/api -f ./packages/api/Dockerfile ./
       - run:
           name: run tests
-          working_directory: ~/project/api
+          working_directory: ~/project/packages/api
           command: |
             # Switch to Node 16.
             export NVM_DIR="/opt/circleci/.nvm"
@@ -512,7 +512,7 @@ jobs:
       - run:
           name: report coverage
           when: always
-          working_directory: ~/project/api
+          working_directory: ~/project/packages/api
           command: bash <(curl -s https://codecov.io/bash)
 
   # ===== Frontend jobs =====
@@ -536,7 +536,7 @@ jobs:
           at: ~/project
       - run:
           name: build the web app
-          working_directory: ~/project/web
+          working_directory: ~/project/packages/web
           command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
@@ -563,7 +563,7 @@ jobs:
           at: ~/project
       - run:
           name: run linter
-          working_directory: ~/project/web
+          working_directory: ~/project/packages/web
           command: yarn lint
 
   # Runs frontend tests and reports coverage to codecov.io.
@@ -579,12 +579,12 @@ jobs:
           at: ~/project
       - run:
           name: run tests
-          working_directory: ~/project/web
+          working_directory: ~/project/packages/web
           command: yarn test -- --runInBand
       - run:
           name: report coverage
           when: always
-          working_directory: ~/project/web
+          working_directory: ~/project/packages/web
           command: bash <(curl -s https://codecov.io/bash)
 
   # ===== Shared jobs =====
@@ -618,10 +618,10 @@ jobs:
           working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api -f ./api/Dockerfile ./
+            docker build -t cms-eapd/api -f ./packages/api/Dockerfile ./
       - run:
           name: start everything up
-          working_directory: ~/project/api
+          working_directory: ~/project/packages/api
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml up -d
@@ -838,10 +838,8 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install zip -y
-            cd api
             yarn install --frozen-lockfile --production=true
-            cd ..
-            zip -r /tmp/backend.zip api/*
+            zip -r /tmp/backend.zip packages/api/* yarn.lock package.json
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip

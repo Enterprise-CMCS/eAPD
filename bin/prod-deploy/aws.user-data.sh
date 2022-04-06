@@ -66,8 +66,8 @@ yarn install --frozen-lockfile --production=true
 #yarn rebuild knex ### TODO use when yarn is updated
 yarn add --force knex
 yarn add newrelic
-cp node_modules/newrelic/newrelic.js api/newrelic.js
-cd api
+cp node_modules/newrelic/newrelic.js packages/api/newrelic.js
+cd packages/api
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
