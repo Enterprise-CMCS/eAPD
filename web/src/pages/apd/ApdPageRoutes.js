@@ -13,7 +13,7 @@ import EntryPage from '../../containers/activity/EntryPage';
 import AssurancesAndCompliance from '../../containers/AssurancesAndCompliance';
 import Export from '../../containers/ApdExport';
 import ApdOverview from './apd-overview/ApdOverview';
-import ExecutiveSummary from '../../containers/ExecutiveSummary';
+import ExecutiveSummary from './executive-summary/ExecutiveSummary';
 import PreviousActivities from './previous-activities/PreviousActivities';
 import ProposedBudget from '../../containers/ProposedBudget';
 import ScheduleSummary from './schedule-summary/ScheduleSummary';
