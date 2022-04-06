@@ -15,7 +15,7 @@ import {
   setMedicaidOfficeZip
 } from '../../../actions/editApd';
 import { t } from '../../../i18n';
-import { selectStateProfile } from '../../../reducers/apd.selectors';
+import { selectKeyStatePersonnel } from '../../../reducers/apd.selectors';
 import { selectState } from '../../../reducers/user';
 import { STATES } from '../../../util';
 
@@ -34,7 +34,7 @@ const ApdStateProfile = ({
   setZip,
   keyStatePersonnel
 }) => {
-  const { medicaidDirector, medicaidOffice } = stateProfile;
+  const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
 
   const handleChange =
     action =>
