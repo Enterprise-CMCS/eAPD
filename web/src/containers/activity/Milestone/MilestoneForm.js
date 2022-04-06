@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -30,8 +30,6 @@ const MilestoneForm = forwardRef(
       resolver: joiResolver(milestonesSchema)
     });
 
-    const [subFormValid, setSubFormValid] = useState(false);
-
     const changeDate = (_, dateStr) =>
       setValue(`endDate`, dateStr);
       // dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
@@ -42,8 +40,6 @@ const MilestoneForm = forwardRef(
 
     useEffect(() => {
       setFormValid(isValid);
-      console.log("getValues", getValues())
-      console.log("errors", errors)
     }, [isValid, errors]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSubmit = e => {
@@ -57,7 +53,7 @@ const MilestoneForm = forwardRef(
         <Controller
           control={control}
           name="milestone"
-          render={({ field: { onChange, value, ...props } }) => (
+          render={({ field: { value, ...props } }) => (
             <TextField
               {...props}
               data-cy={`milestone-${index}`}
@@ -74,7 +70,7 @@ const MilestoneForm = forwardRef(
         <Controller
           control={control}
           name="endDate"
-          render={({ field: { onChange, value, ...props } }) => (
+          render={({ field: { value, ...props } }) => (
             <DateField
               {...props}
               label="Target completion date"

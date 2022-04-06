@@ -7,9 +7,9 @@ const milestonesSchema = Joi.object({
     'string.empty': 'Milestone is required.'
   }),
   endDate: Joi.date().iso().required().messages({
-    'date.base': 'Provide and end date.',
-    'date.empty': 'Provide and end date.',
-    'date.format': 'Provide and end date.'
+    'date.base': 'Provide a completion date.',
+    'date.empty': 'Provide a completion date.',
+    'date.format': 'Provide a completion date.'
   })
 });
 

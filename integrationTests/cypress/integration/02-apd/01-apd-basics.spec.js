@@ -502,11 +502,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.wrap(milestones).each((element, index) => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
 
-        cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '');
-        //   .blur()
-        //   .should('have.class', 'ds-c-field--error');
+        cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '')
+          .blur()
+          .should('have.class', 'ds-c-field--error');
 
-        // cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+        cy.get(`input[name=year]`).click().should('have.value', '')
+          .blur()
+          .should('have.class', 'ds-c-field--error');
+
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -530,7 +534,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
         cy.get(`.ds-c-field--year`)
           .click()
-          .type(element.dateYear);
+          .type(element.dateYear)
+          .blur();
 
         cy.findByRole('button', { name: /Save/i })
           .click();
@@ -608,7 +613,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByLabelText('Description').clear().blur();
       cy.contains('Provide a personnel description.').should('exist');
       
-      years.forEach((year, index) => {
+      years.forEach((year) => {
         cy.get(`[name="[${year}].amt"`).clear().blur();
         cy.contains('Please provide a FTE cost greater than or equal to $0.').should('exist');
         cy.get(`[name="[${year}].perc"`).clear().blur();
