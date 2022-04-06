@@ -14,7 +14,7 @@ import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from '../../containers/viewOnly/ApdSummary';
-import PreviousActivities from '../../containers/viewOnly/PreviousActivities';
+import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import Activities from '../../containers/viewOnly/activities/All';
 import ScheduleSummary from '../../containers/viewOnly/ScheduleSummary';
 import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
@@ -106,9 +106,7 @@ const ApdViewOnly = ({
       <hr className="section-rule" />
       <ApdSummary />
       <hr className="section-rule" />
-      <ApdStateProfile
-        keyStatePersonnel={apd.keyStatePersonnel}
-      />
+      <ApdStateProfile keyStatePersonnel={apd.keyStatePersonnel} />
       <hr className="section-rule" />
       <PreviousActivities />
       <hr className="section-rule" />
