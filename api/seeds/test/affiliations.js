@@ -1,20 +1,28 @@
-const { roles } = require('./roles');
+const { getAllActiveRoles } = require('../../db/roles');
 const { states } = require('../../util/states');
 
-// affiliate 'all-permissions' user with all states
-const { id: adminRoleId } = roles.find(role => role.name === 'eAPD Admin');
-const { id: fedAdminRoleId } = roles.find(
-  role => role.name === 'eAPD Federal Admin'
-);
-const { id: stateAdminRoleId } = roles.find(
-  role => role.name === 'eAPD State Admin'
-);
-const { id: stateStaffRoleId } = roles.find(
-  role => role.name === 'eAPD State Staff'
-);
-const adminAffiliations = states
-  .filter(state => state.id !== 'ak')
-  .map(state => ({
+exports.seed = async knex => {
+  const [{ id: noPermissionsId }] = await getAllActiveRoles(
+    ['eAPD No Permissions'],
+    { db: knex }
+  );
+  const [{ id: adminRoleId }] = await getAllActiveRoles(['eAPD Tester'], {
+    db: knex
+  });
+  const [{ id: fedAdminRoleId }] = await getAllActiveRoles(
+    ['eAPD Federal Admin'],
+    { db: knex }
+  );
+  const [{ id: stateAdminRoleId }] = await getAllActiveRoles(
+    ['eAPD State Admin'],
+    { db: knex }
+  );
+  const [{ id: stateStaffRoleId }] = await getAllActiveRoles(
+    ['eAPD State Staff'],
+    { db: knex }
+  );
+
+  const adminAffiliations = states.map(state => ({
     user_id: 'all-permissions',
     state_id: state.id,
     role_id: adminRoleId,
@@ -22,7 +30,6 @@ const adminAffiliations = states
     expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
   }));
 
-exports.seed = async knex => {
   await knex('auth_affiliations').insert(adminAffiliations);
   await knex('auth_affiliations').insert([
     {
@@ -35,15 +42,7 @@ exports.seed = async knex => {
       id: 4001,
       user_id: 2020,
       state_id: 'md',
-      role_id: '1107',
-      status: 'approved',
-      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
-    },
-    {
-      id: 4002,
-      user_id: 'all-permissions',
-      state_id: 'ak',
-      role_id: adminRoleId,
+      role_id: stateStaffRoleId,
       status: 'approved',
       expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     },
@@ -75,6 +74,14 @@ exports.seed = async knex => {
       user_id: 'state-admin',
       state_id: 'md',
       role_id: stateStaffRoleId,
+      status: 'approved',
+      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
+    },
+    {
+      id: 4007,
+      user_id: 'no-permissions',
+      state_id: 'wy',
+      role_id: noPermissionsId,
       status: 'approved',
       expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
     }

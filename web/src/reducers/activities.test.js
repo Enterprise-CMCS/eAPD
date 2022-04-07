@@ -23,12 +23,10 @@ describe('activities reducer helpers', () => {
       files: [],
       totalCost: 0,
       years: { 1991: 0, 1992: 0 },
+      useHourly: false,
       hourly: {
-        useHourly: false,
-        data: {
-          1991: { hours: 0, rate: 0 },
-          1992: { hours: 0, rate: 0 }
-        }
+        1991: { hours: 0, rate: 0 },
+        1992: { hours: 0, rate: 0 }
       }
     });
   });
