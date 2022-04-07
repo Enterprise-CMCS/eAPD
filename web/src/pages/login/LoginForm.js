@@ -33,7 +33,7 @@ const LoginForm = ({
           <div className="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6">
             <div className="ds-u-display--flex ds-u-flex-direction--column ds-u-justify-content--center ds-u-align-items--center">
               <img
-                src="static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
+                src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
                 alt="eAPD Logo"
               />
               <h1 className="ds-h1 ds-u-margin-top--2">

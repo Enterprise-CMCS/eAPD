@@ -102,7 +102,7 @@ source ~/.bashrc
 nvm install 16
 nvm alias default 16
 
-git clone --single-branch -b tforkner/3100-move-apds-to-mongodb https://github.com/CMSgov/eAPD.git
+git clone --single-branch https://github.com/CMSgov/eAPD.git
 cd ~/eAPD/api
 yarn install --frozen-lockfile
 
