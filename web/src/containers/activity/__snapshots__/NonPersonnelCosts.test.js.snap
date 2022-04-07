@@ -51,7 +51,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
         },
       ]
     }
-    noDataMessage="Other state expenses have not been added for this activity."
+    noDataMessage="Add other state expense(s) for this activity."
     onAddClick={[Function]}
     onCancelClick={[Function]}
     onDeleteClick={[Function]}

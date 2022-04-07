@@ -67,7 +67,7 @@ describe('the ContractorResourceForm component', () => {
 
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
-    const error = await screen.findByText('Provide an expense category.');
+    const error = await screen.findByText('Select a category.');
     expect(error).toBeInTheDocument();
   });
   
@@ -88,7 +88,7 @@ describe('the ContractorResourceForm component', () => {
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
     
     const error = await screen.findByText(
-      /Provide an expense description./i
+      /Provide a description of the selected non-personal category./i
     );
     expect(error).toBeInTheDocument();
   });

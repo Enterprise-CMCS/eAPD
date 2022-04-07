@@ -30,8 +30,7 @@ const NonPersonnelCostForm = forwardRef(
   const {
     control,
     formState: { errors, isValid },
-    getValues,
-    setValue
+    getValues
   } = useForm({
     defaultValues: {
       ...item

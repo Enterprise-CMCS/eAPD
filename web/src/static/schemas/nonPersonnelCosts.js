@@ -5,12 +5,12 @@ const nonPersonnelCostsSchema = Joi.object({
 	category: Joi.string()
 		.valid('Hardware, software, and licensing', 'Equipment and supplies', 'Training and outreach', 'Travel', 'Administrative operations', 'Miscellaneous expenses for the project')
 		.messages({
-			'any.only': 'Provide an expense category.',
+			'any.only': 'Select a category.',
 		}),
 	description: Joi.string()
 		.required()
 		.messages({
-			'string.empty': 'Provide an expense description.',
+			'string.empty': 'Provide a description of the selected non-personal category.',
 		}),
 	years: Joi.object().pattern(
 		/\d{4}/,

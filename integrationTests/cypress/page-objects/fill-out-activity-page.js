@@ -126,7 +126,7 @@ class FillOutActivityPage {
     }
   };
   
-  fillStateExpenses = (expenseList, testDelete = false) => {
+  fillStateExpenses = (years, expenseList, testDelete = false) => {
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
@@ -135,6 +135,7 @@ class FillOutActivityPage {
     _.forEach(expenseList, (expense, i) => {
       staffExpensesPage.addExpense();
       staffExpensesPage.fillExpense(
+        years,
         i,
         expense.category,
         expense.costs,
@@ -163,13 +164,15 @@ class FillOutActivityPage {
       // If there are just two delete buttons, then an expense has been deleted;
       // the other delete button is from the remaining staff.
       cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 2);
-    
-      staffExpensesPage.verifyExpense(
-        0,
-        expenseList[1].category,
-        expenseList[1].costs,
-        expenseList[1].description
-      );
+      
+      if(expenseList > 0) {
+        staffExpensesPage.verifyExpense(
+          0,
+          expenseList[1].category,
+          expenseList[1].costs,
+          expenseList[1].description
+        );      
+      }
     }
   }
 
