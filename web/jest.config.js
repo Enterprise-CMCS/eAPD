@@ -5,7 +5,8 @@ module.exports = {
   setupFilesAfterEnv: ['../setup.rtl.test.js'],
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
-    '^apd-(.*)-library$': '<rootDir>/shared/apd-$1-library.js'
+    '^apd-(.*)-library$': '<rootDir>/shared/apd-$1-library.js',
+    '\\.(css|less)$': '<rootDir>/../styleMock.js'
   },
   testEnvironment: 'jsdom',
   snapshotSerializers: ['enzyme-to-json/serializer'],

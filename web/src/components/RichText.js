@@ -9,13 +9,7 @@ import 'tinymce/themes/silver';
 import 'tinymce/icons/default';
 
 // Editor styles
-import 'tinymce/skins/content/default/content.min.css';
-import 'tinymce/skins/ui/oxide/content.inline.min.css';
-import 'tinymce/skins/ui/oxide/content.min.css';
-import 'tinymce/skins/ui/oxide/content.mobile.min.css';
-import 'tinymce/skins/ui/oxide/skin.min.css';
-import 'tinymce/skins/ui/oxide/skin.mobile.min.css';
-import 'tinymce/skins/ui/oxide/skin.shadowdom.min.css';
+import 'tinymce/skins/ui/oxide/skin.css';
 
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
@@ -25,6 +19,10 @@ import 'tinymce/plugins/image';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
 import 'tinymce/plugins/link';
+
+/* Import content css */
+import contentUiCss from 'tinymce/skins/ui/oxide/content.css';
+import contentCss from 'tinymce/skins/content/default/content.css';
 
 import { uploadFile } from '../actions/editApd';
 import { generateKey } from '../util';
@@ -212,7 +210,11 @@ class RichText extends Component {
             link_assume_external_targets: true,
             default_link_target: '_blank',
             toolbar_mode: 'wrap',
-            selector: 'textarea'
+            selector: 'textarea',
+            skin: false,
+            content_css: false,
+            content_style:
+              contentUiCss.toString() + '\n' + contentCss.toString()
           }}
           value={content}
           onEditorChange={this.onEditorChange}
