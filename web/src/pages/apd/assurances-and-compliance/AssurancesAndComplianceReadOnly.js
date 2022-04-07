@@ -3,10 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import regLinks from '../../data/assurancesAndCompliance.yaml';
-import { selectFederalCitations } from '../../reducers/apd.selectors';
-import { t } from '../../i18n';
-import { LinkOrText } from '../AssurancesAndCompliance';
+import regLinks from '../../../data/assurancesAndCompliance.yaml';
+import { selectFederalCitations } from '../../../reducers/apd.selectors';
+import { t } from '../../../i18n';
+import { LinkOrText } from './AssurancesAndCompliance';
 
 const AssurancesAndCompliance = ({ citations }) => {
   return (
