@@ -8,6 +8,15 @@ import { Editor } from '@tinymce/tinymce-react';
 import 'tinymce/themes/silver';
 import 'tinymce/icons/default';
 
+// Editor styles
+import 'tinymce/skins/content/default/content.min.css';
+import 'tinymce/skins/ui/oxide/content.inline.min.css';
+import 'tinymce/skins/ui/oxide/content.min.css';
+import 'tinymce/skins/ui/oxide/content.mobile.min.css';
+import 'tinymce/skins/ui/oxide/skin.min.css';
+import 'tinymce/skins/ui/oxide/skin.mobile.min.css';
+import 'tinymce/skins/ui/oxide/skin.shadowdom.min.css';
+
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/autoresize';
