@@ -7,17 +7,17 @@ import {
   setIncentiveEPCount,
   setIncentiveEHPayment,
   setIncentiveEPPayment
-} from '../actions/editApd';
-import DollarField from '../components/DollarField';
-import Dollars from '../components/Dollars';
-import NumberField from '../components/NumberField';
-import { t } from '../i18n';
+} from '../../../actions/editApd';
+import DollarField from '../../../components/DollarField';
+import Dollars from '../../../components/Dollars';
+import NumberField from '../../../components/NumberField';
+import { t } from '../../../i18n';
 import {
   selectApdYears,
   selectIncentivePayments,
   selectIncentivePaymentTotals
-} from '../reducers/apd.selectors';
-import { formatNum } from '../util/formats';
+} from '../../../reducers/apd.selectors';
+import { formatNum } from '../../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];
 
