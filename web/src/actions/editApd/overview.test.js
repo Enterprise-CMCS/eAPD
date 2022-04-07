@@ -57,7 +57,7 @@ describe('APD edit actions for APD overview and HIE/HIT/MMIS narratives', () => 
   it('dispatches an action for setting the program overview', () => {
     expect(setProgramOverview('overview')).toEqual({
       type: EDIT_APD,
-      path: '/programOverview',
+      path: '/apdOverview/programOverview',
       value: 'overview'
     });
   });
@@ -65,7 +65,7 @@ describe('APD edit actions for APD overview and HIE/HIT/MMIS narratives', () => 
   it('dispatches an action for setting the HIT narrative', () => {
     expect(setNarrativeForHIT('narrative')).toEqual({
       type: EDIT_APD,
-      path: '/narrativeHIT',
+      path: '/apdOverview/narrativeHIT',
       value: 'narrative'
     });
   });
@@ -73,7 +73,7 @@ describe('APD edit actions for APD overview and HIE/HIT/MMIS narratives', () => 
   it('dispatches an action for setting the HIE narrative', () => {
     expect(setNarrativeForHIE('narrative')).toEqual({
       type: EDIT_APD,
-      path: '/narrativeHIE',
+      path: '/apdOverview/narrativeHIE',
       value: 'narrative'
     });
   });
@@ -81,7 +81,7 @@ describe('APD edit actions for APD overview and HIE/HIT/MMIS narratives', () => 
   it('dispatches an action for setting the MMIS narrative', () => {
     expect(setNarrativeForMMIS('narrative')).toEqual({
       type: EDIT_APD,
-      path: '/narrativeMMIS',
+      path: '/apdOverview/narrativeMMIS',
       value: 'narrative'
     });
   });

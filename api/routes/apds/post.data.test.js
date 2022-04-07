@@ -21,6 +21,14 @@ tap.test('APD data initializer', async test => {
   // new properties being added to the getNewApd return.  If we use
   // a "match" test, new properties will fall through the cracks.
   test.same(output, {
+    name: 'HITECH IAPD',
+    years: ['1997', '1998'],
+    apdOverview: {
+      programOverview: '',
+      narrativeHIE: '',
+      narrativeHIT: '',
+      narrativeMMIS: ''
+    },
     activities: [
       {
         alternatives: '',
@@ -66,7 +74,7 @@ tap.test('APD data initializer', async test => {
         }
       }
     ],
-    federalCitations: {
+    assurancesAndCompliances: {
       procurement: [
         { title: '42 CFR Part 495.348', checked: null, explanation: '' },
         { title: 'SMM Section 11267', checked: null, explanation: '' },
@@ -95,67 +103,27 @@ tap.test('APD data initializer', async test => {
         }
       ]
     },
-    incentivePayments: {
-      ehAmt: {
-        1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
-      },
-      ehCt: {
-        1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
-      },
-      epAmt: {
-        1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
-      },
-      epCt: {
-        1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
-      }
+    proposedBudget: {
+      incentivePayments: {
+        ehAmt: {
+          1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
+          1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
+        },
+        ehCt: {
+          1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
+          1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
+        },
+        epAmt: {
+          1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
+          1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
+        },
+        epCt: {
+          1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
+          1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
+        }
+      }      
     },
-    keyPersonnel: [],
-    name: 'HITECH IAPD',
-    narrativeHIE: '',
-    narrativeHIT: '',
-    narrativeMMIS: '',
-    previousActivityExpenses: {
-      1997: {
-        hithie: {
-          federalActual: 0,
-          totalApproved: 0
-        },
-        mmis: {
-          90: { federalActual: 0, totalApproved: 0 },
-          75: { federalActual: 0, totalApproved: 0 },
-          50: { federalActual: 0, totalApproved: 0 }
-        }
-      },
-      1996: {
-        hithie: {
-          federalActual: 0,
-          totalApproved: 0
-        },
-        mmis: {
-          90: { federalActual: 0, totalApproved: 0 },
-          75: { federalActual: 0, totalApproved: 0 },
-          50: { federalActual: 0, totalApproved: 0 }
-        }
-      },
-      1995: {
-        hithie: {
-          federalActual: 0,
-          totalApproved: 0
-        },
-        mmis: {
-          90: { federalActual: 0, totalApproved: 0 },
-          75: { federalActual: 0, totalApproved: 0 },
-          50: { federalActual: 0, totalApproved: 0 }
-        }
-      }
-    },
-    previousActivitySummary: '',
-    programOverview: '',
-    stateProfile: {
+    keyStatePersonnel: {
       medicaidDirector: {
         email: '',
         name: '',
@@ -167,8 +135,46 @@ tap.test('APD data initializer', async test => {
         city: '',
         state: '',
         zip: ''
-      }
+      },
+      keyPersonnel: [],      
     },
-    years: ['1997', '1998']
+    previousActivities: {
+      previousActivitySummary: '',
+      actualExpenditures: {
+        1997: {
+          hithie: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          mmis: {
+            90: { federalActual: 0, totalApproved: 0 },
+            75: { federalActual: 0, totalApproved: 0 },
+            50: { federalActual: 0, totalApproved: 0 }
+          }
+        },
+        1996: {
+          hithie: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          mmis: {
+            90: { federalActual: 0, totalApproved: 0 },
+            75: { federalActual: 0, totalApproved: 0 },
+            50: { federalActual: 0, totalApproved: 0 }
+          }
+        },
+        1995: {
+          hithie: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          mmis: {
+            90: { federalActual: 0, totalApproved: 0 },
+            75: { federalActual: 0, totalApproved: 0 },
+            50: { federalActual: 0, totalApproved: 0 }
+          }
+        }
+      }      
+    }
   });
 });

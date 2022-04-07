@@ -7,12 +7,8 @@ const {
   mockVerifyJWT
 } = require('./mockedOktaAuth');
 
-const {
-  OKTA_DOMAIN,
-  OKTA_SERVER_ID,
-  OKTA_CLIENT_ID,
-  OKTA_API_KEY
-} = process.env;
+const { OKTA_DOMAIN, OKTA_SERVER_ID, OKTA_CLIENT_ID, OKTA_API_KEY } =
+  process.env;
 const OKTA_ISSUER = `${OKTA_DOMAIN}/oauth2/${OKTA_SERVER_ID}`;
 
 /**
