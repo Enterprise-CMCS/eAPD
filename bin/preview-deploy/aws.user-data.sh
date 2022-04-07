@@ -57,17 +57,17 @@ API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" O
 mv dist/* /app/web
 
 # move over node modules
-cd ~/eAPD
+cd ~
 mkdir -p /app/node_modules
-mv node_modules/* /app/node_modules
+mv eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
-mv packages/api/* /app/api
+mv eAPD/packages/api/* /app/api
 cd /app/api
 
 # Build and seed the database
-NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate
-NODE_ENV=development DEV_DB_HOST=localhost yarn run seed
+# NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate
+# NODE_ENV=development DEV_DB_HOST=localhost yarn run seed
 
 # Setting Up New Relic Application Monitor
 yarn add newrelic --save
@@ -114,7 +114,7 @@ echo "module.exports = {
 # Start it up
 pm2 start ecosystem.config.js
 
-NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
+NODE_ENV=production MONGO_URL=$MONGO_URL MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
 #cd ~
 #mongo -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
 E_USER
