@@ -2,7 +2,6 @@ import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, forwardRef } from 'react';
 import { connect } from 'react-redux';
-
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 

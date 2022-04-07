@@ -1,10 +1,14 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useReducer, forwardRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 import DollarField from '../../../components/DollarField';
 import TextArea from '../../../components/TextArea';
+
+import nonPersonnelCostsSchema from '../../../static/schemas/nonPersonnelCosts';
 
 import {
   saveNonPersonnelCost as actualSaveNonPersonnelCost
@@ -16,46 +20,52 @@ const NonPersonnelCostForm = forwardRef(
       activityIndex,
       index,
       item,
-      saveNonPersonnelCost
+      saveNonPersonnelCost,
+      setFormValid
     },
     ref
 ) => {
   NonPersonnelCostForm.displayName = 'NonPersonnelCostForm';
-
-  function reducer(state, action) {
-    switch (action.type) {
-      case 'updateField':
-        return {
-          ...state,
-          [action.field]: action.value
-        }
-      case 'updateCosts':
-        return {
-          ...state,
-          years: {
-            ...state.years,
-            [action.year]: action.value
-          }
-        }
-      default:
-        throw new Error(
-          'Unrecognized action type provided to OutcomesAndMetricForm reducer'
-        );
-    }
-  }
   
-  const [state, dispatch] = useReducer(reducer, item);
+  const {
+    control,
+    formState: { errors, isValid },
+    getValues,
+    setValue
+  } = useForm({
+    defaultValues: {
+      ...item
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(nonPersonnelCostsSchema)
+  });
   
-  const handleSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
-    saveNonPersonnelCost(activityIndex, index, state);
+    saveNonPersonnelCost(activityIndex, index, getValues());
   };
   
-  const editCategory = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'category', value });
+  const editCategory = ({ target: { value } }) => {
+    setValue('category', value)
+    // dispatch({ type: 'updateField', field: 'category', value });
+  }
 
-  const editDesc = ({ target: { value } }) => dispatch({ type: 'updateField', field: 'description', value })
+  const editDesc = ({ target: { value } }) => {
+    setValue('description', value)
+    // dispatch({ type: 'updateField', field: 'description', value })
+  }
 
-  const getEditCostForYear = year => ({ target: { value } }) => dispatch({ type: 'updateCosts', year, value });
+  const getEditCostForYear = year => ({ target: { value } }) => {
+    setValue(`years[${year}]`, value)
+    // dispatch({ type: 'updateCosts', year, value });
+  }
+  
+  useEffect(() => {
+    console.log("errors", errors)
+    console.log("values", getValues())
+    setFormValid(isValid);
+  }, [isValid, errors, setValue]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const categories = [
     'Hardware, software, and licensing',
@@ -67,34 +77,74 @@ const NonPersonnelCostForm = forwardRef(
   ].map(category => ({ label: category, value: category }));
   categories.unshift({label:'Select an option', value:''})
   return (
-    <form index={index} onSubmit={handleSubmit}>
+    <form index={index} onSubmit={onSubmit}>
       <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
       {/* eslint-disable jsx-a11y/no-autofocus */}
-      <Dropdown
-        autoFocus
-        label="Category"
+      <Controller
+        control={control}
         name="category"
-        options={categories}
-        value={state.category}
-        onChange={editCategory}
+        render={({
+          field: { onChange, value, ...props }
+        }) => (
+          <Dropdown
+            {...props}
+            autoFocus
+            label="Category"
+            name="category"
+            options={categories}
+            value={value}
+            onChange={editCategory}
+            errorMessage={
+              errors?.category?.message
+            }
+            errorPlacement="bottom"
+          />
+        )}
+      />
+      
+      <Controller
+        control={control}
+        name="description"
+        render={({
+          field: { onChange, value, ...props }
+        }) => (
+          <TextArea
+            {...props}
+            label="Description"
+            rows={5}
+            name="description"
+            value={value}
+            onChange={editDesc}
+            errorMessage={
+              errors?.description?.message
+            }
+            errorPlacement="bottom"
+          />
+        )}
       />
 
-      <TextArea
-        label="Description"
-        rows={5}
-        name="desc"
-        value={state.description}
-        onChange={editDesc}
-      />
-
-      {Object.entries(state.years).map(([year, cost]) => (
-        <DollarField
+      {Object.entries(item.years).map(([year, cost]) => (
+        <Controller
           key={year}
-          label={`FFY ${year} Cost`}
-          name="cost"
-          size="medium"
-          value={cost}
-          onChange={getEditCostForYear(year)}
+          control={control}
+          name={`years[${year}]`}
+          render={({
+            field: { onChange, value, ...props }
+          }) => (
+            <DollarField
+              {...props}
+              key={year}
+              label={`FFY ${year} Cost`}
+              name={`years[${year}]`}
+              size="medium"
+              value={value}
+              onChange={getEditCostForYear(year)}
+              errorMessage={
+                errors && errors.years && errors?.years[`${year}`]?.message
+              }
+              errorPlacement="bottom"
+            />
+          )}
         />
       ))}
       <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
@@ -111,7 +161,8 @@ NonPersonnelCostForm.propTypes = {
     description: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired,
-  saveNonPersonnelCost: PropTypes.func.isRequired
+  saveNonPersonnelCost: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
