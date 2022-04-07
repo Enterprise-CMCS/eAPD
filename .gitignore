@@ -17,15 +17,6 @@ notes.md
 schema.sql
 Makefile
 
-api/seeds/test/tokens.json
-api/test-data/files
-api/.env
-api/.nyc_output
-api/coverage
-api/hitech_api*.log*
-api/endpoint-data.json
-api/endpoint-tests/endpoint-data.json
-
 e2e/cypress.env.json
 */cypress.env.json
 e2e/cypress/screenshots/*
@@ -34,18 +25,27 @@ e2e/tokens.json
 */tokens.json
 tokens.json
 
-web/dist
-web/coverage
-web/.jest-test-results.json
-web/storybook-static/*
+packages/api/seeds/test/tokens.json
+packages/api/test-data/files
+packages/api/.env
+packages/api/.nyc_output
+packages/api/coverage
+packages/api/hitech_api*.log*
+packages/api/endpoint-data.json
+packages/api/endpoint-tests/endpoint-data.json
+
+packages/web/dist
+packages/web/coverage
+packages/web/.jest-test-results.json
+packages/web/storybook-static/*
 
 # stryker temp files
-web/.stryker-tmp
-web/reports
+packages/web/.stryker-tmp
+packages/web/reports
 
 # use yarn to manage packages, not npm
-api/package-lock.json
-web/package-lock.json
+packages/api/package-lock.json
+packages/web/package-lock.json
 e2e/package-lock.json
 docs-build
 
