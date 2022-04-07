@@ -24,7 +24,7 @@ services:
       - MONGO_DATABASE=eapd
     volumes:
       - mongodata:/mongodata
-      - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+      - ./packages/api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
 
     command: [--auth]
     expose:
