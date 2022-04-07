@@ -9,7 +9,7 @@ import 'tinymce/themes/silver';
 import 'tinymce/icons/default';
 
 // Editor styles
-import 'tinymce/skins/ui/oxide/skin.css';
+import 'tinymce/skins/ui/oxide/skin.min.css';
 
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
