@@ -27,7 +27,7 @@ const config = {
       // In dev, load our styles directly into the generated JS. That way
       // we got hot reloading on our Sass as well.
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',

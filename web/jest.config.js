@@ -6,7 +6,7 @@ module.exports = {
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
     '^apd-(.*)-library$': '<rootDir>/shared/apd-$1-library.js',
-    '\\.(css|less)$': '<rootDir>/../styleMock.js'
+    '\\.(css|scss)$': '<rootDir>/../styleMock.js'
   },
   testEnvironment: 'jsdom',
   snapshotSerializers: ['enzyme-to-json/serializer'],
