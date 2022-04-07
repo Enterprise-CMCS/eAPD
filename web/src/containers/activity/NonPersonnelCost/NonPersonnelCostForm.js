@@ -46,26 +46,9 @@ const NonPersonnelCostForm = forwardRef(
     saveNonPersonnelCost(activityIndex, index, getValues());
   };
   
-  const editCategory = ({ target: { value } }) => {
-    setValue('category', value)
-    // dispatch({ type: 'updateField', field: 'category', value });
-  }
-
-  const editDesc = ({ target: { value } }) => {
-    setValue('description', value)
-    // dispatch({ type: 'updateField', field: 'description', value })
-  }
-
-  const getEditCostForYear = year => ({ target: { value } }) => {
-    setValue(`years[${year}]`, value)
-    // dispatch({ type: 'updateCosts', year, value });
-  }
-  
   useEffect(() => {
-    console.log("errors", errors)
-    console.log("values", getValues())
     setFormValid(isValid);
-  }, [isValid, errors, setValue]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const categories = [
     'Hardware, software, and licensing',
@@ -93,7 +76,7 @@ const NonPersonnelCostForm = forwardRef(
             name="category"
             options={categories}
             value={value}
-            onChange={editCategory}
+            onChange={onChange}
             errorMessage={
               errors?.category?.message
             }
@@ -114,7 +97,7 @@ const NonPersonnelCostForm = forwardRef(
             rows={5}
             name="description"
             value={value}
-            onChange={editDesc}
+            onChange={onChange}
             errorMessage={
               errors?.description?.message
             }
@@ -122,8 +105,8 @@ const NonPersonnelCostForm = forwardRef(
           />
         )}
       />
-
-      {Object.entries(item.years).map(([year, cost]) => (
+      
+      {Object.entries(item.years).map(([year]) => (
         <Controller
           key={year}
           control={control}
@@ -138,7 +121,7 @@ const NonPersonnelCostForm = forwardRef(
               name={`years[${year}]`}
               size="medium"
               value={value}
-              onChange={getEditCostForYear(year)}
+              onChange={onChange}
               errorMessage={
                 errors && errors.years && errors?.years[`${year}`]?.message
               }
