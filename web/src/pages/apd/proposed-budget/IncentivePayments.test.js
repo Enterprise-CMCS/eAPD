@@ -12,7 +12,7 @@ import {
   setIncentiveEPCount,
   setIncentiveEHPayment,
   setIncentiveEPPayment
-} from '../actions/editApd';
+} from '../../../actions/editApd';
 
 describe('incentive payments component', () => {
   const props = {

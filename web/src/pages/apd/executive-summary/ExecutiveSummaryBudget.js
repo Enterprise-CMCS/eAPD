@@ -3,8 +3,8 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import Dollars from '../components/Dollars';
-import { t } from '../i18n';
+import Dollars from '../../../components/Dollars';
+import { t } from '../../../i18n';
 
 const thId = (program, share) =>
   `program-budget-table-${program}${share ? `-${share}` : ''}`;
