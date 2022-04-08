@@ -6,8 +6,7 @@ const {
   getAffiliationByState: actualGetAffiliationsByState,
   getUserPermissionsForStates: actualGetUserPermissionsForStates,
   getRolesAndActivities: actualGetRolesAndActivities,
-  auditUserLogin: actualAuditUserLogin,
-  getAuthRoleByName: actualGetAuthRoleByName
+  auditUserLogin: actualAuditUserLogin
 } = require('./auth');
 const {
   updateAuthAffiliation: actualUpdateAuthAffiliation
@@ -70,8 +69,7 @@ const populateUserRole = async (
     updateAuthAffiliation = actualUpdateAuthAffiliation,
     getRolesAndActivities = actualGetRolesAndActivities,
     getStateById = actualGetStateById,
-    getUserPermissionsForStates = actualGetUserPermissionsForStates,
-    getAuthRoleByName = actualGetAuthRoleByName
+    getUserPermissionsForStates = actualGetUserPermissionsForStates
   } = {}
 ) => {
   if (user) {
@@ -83,12 +81,8 @@ const populateUserRole = async (
       const selectedState = stateId || Object.keys(states)[0];
       affiliation = await getAffiliationByState(user.id, selectedState);
       if (affiliation) {
-        const { id: stateAdminId = 0 } = await getAuthRoleByName(
-          'eAPD State Admin'
-        );
         if (
           affiliation.status === 'approved' &&
-          affiliation.role_id === stateAdminId &&
           isPast(new Date(affiliation.expires_at))
         ) {
           await updateAuthAffiliation({
