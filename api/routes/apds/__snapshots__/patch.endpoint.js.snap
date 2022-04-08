@@ -29,21 +29,19 @@ Object {
             "description": "Maintain SLR",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Super SLR Incorporated",
             "start": null,
             "totalCost": 32423,
+            "useHourly": false,
             "years": Object {
               "2019": 999756,
               "2020": 342444,
@@ -53,21 +51,19 @@ Object {
             "description": "Technology consulting and planning services.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 473573,
+            "useHourly": false,
             "years": Object {
               "2019": 333000,
               "2020": 200000,
@@ -368,21 +364,19 @@ Object {
             "description": "Hosting and development support.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Interface Vendor Inc.",
             "start": null,
             "totalCost": 26453574,
+            "useHourly": false,
             "years": Object {
               "2019": 650000,
               "2020": 750000,
@@ -392,21 +386,19 @@ Object {
             "description": "Interface M&O contractor.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 7398,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1000000,
@@ -741,21 +733,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "",
             "start": null,
             "totalCost": 3496874,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 0,
@@ -1013,21 +1003,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "RFP Planning Vendor Inc.",
             "start": null,
             "totalCost": 4368734,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -1037,21 +1025,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Blue Button Builder Inc.",
             "start": null,
             "totalCost": 35246,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 2000000,
@@ -1212,21 +1198,19 @@ Object {
             "description": "Gateway Implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 246477,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1500000,
@@ -1236,21 +1220,19 @@ Object {
             "description": "Gateway Development Planning and RFP",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Gateway Vendor Inc.",
             "start": null,
             "totalCost": 7473747,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -1444,21 +1426,19 @@ Object {
             "description": "Research for and RFP development for MITA 3.0 SSA",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 264574,
+            "useHourly": false,
             "years": Object {
               "2019": 450000,
               "2020": 150000,
@@ -1468,21 +1448,19 @@ Object {
             "description": "MITA 3.0 implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 64574,
+            "useHourly": false,
             "years": Object {
               "2019": 200000,
               "2020": 500000,
@@ -1622,8 +1600,13 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
-    "created": "1865-12-06T00:00:00.000Z",
-    "federalCitations": Object {
+    "apdOverview": Object {
+      "narrativeHIE": "",
+      "narrativeHIT": "",
+      "narrativeMMIS": "",
+      "programOverview": "",
+    },
+    "assurancesAndCompliances": Object {
       "procurement": Array [
         Object {
           "checked": null,
@@ -1708,188 +1691,38 @@ Object {
         },
       ],
     },
+    "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "incentivePayments": Object {
-      "ehAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "ehCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-    },
-    "keyPersonnel": Array [
-      Object {
-        "costs": Object {
-          "2019": 100000,
-          "2020": 100000,
-        },
-        "email": "JimPushesButtons@tycho.com",
-        "fte": Object {
-          "2019": 1,
-          "2020": 1,
-        },
-        "hasCosts": true,
-        "isPrimary": true,
-        "name": "James Holden",
-        "position": "HIT Coordinator",
-      },
-      Object {
-        "costs": Object {},
-        "email": "FJohnson@tycho.com",
-        "fte": Object {
-          "2019": 0.3,
-          "2020": 0.3,
-        },
-        "hasCosts": false,
-        "isPrimary": false,
-        "name": "Fred Johnson",
-        "position": "State Medicaid Director",
-      },
-    ],
-    "name": "new APD name",
-    "narrativeHIE": "",
-    "narrativeHIT": "",
-    "narrativeMMIS": "",
-    "previousActivityExpenses": Object {
-      "2016": Object {
-        "hithie": Object {
-          "federalActual": 320000,
-          "totalApproved": 540000,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
+            "2019": 100000,
+            "2020": 100000,
           },
-          "75": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+          "email": "JimPushesButtons@tycho.com",
+          "fte": Object {
+            "2019": 1,
+            "2020": 1,
           },
-          "90": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
+          "hasCosts": true,
+          "isPrimary": true,
+          "name": "James Holden",
+          "position": "HIT Coordinator",
         },
-      },
-      "2017": Object {
-        "hithie": Object {
-          "federalActual": 140000,
-          "totalApproved": 280000,
+        Object {
+          "costs": Object {},
+          "email": "FJohnson@tycho.com",
+          "fte": Object {
+            "2019": 0.3,
+            "2020": 0.3,
+          },
+          "hasCosts": false,
+          "isPrimary": false,
+          "name": "Fred Johnson",
+          "position": "State Medicaid Director",
         },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 23445,
-            "totalApproved": 82545,
-          },
-          "75": Object {
-            "federalActual": 23440,
-            "totalApproved": 75340,
-          },
-          "90": Object {
-            "federalActual": 235720,
-            "totalApproved": 262460,
-          },
-        },
-      },
-      "2018": Object {
-        "hithie": Object {
-          "federalActual": 146346,
-          "totalApproved": 234526,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 129387,
-            "totalApproved": 375445,
-          },
-          "75": Object {
-            "federalActual": 413246,
-            "totalApproved": 654455,
-          },
-          "90": Object {
-            "federalActual": 614544,
-            "totalApproved": 863455,
-          },
-        },
-      },
-    },
-    "previousActivitySummary": "",
-    "programOverview": "",
-    "state": "ak",
-    "stateProfile": Object {
+      ],
       "medicaidDirector": Object {
         "email": "",
         "name": "Bob the Builder",
@@ -1903,6 +1736,157 @@ Object {
         "zip": "",
       },
     },
+    "name": "new APD name",
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2016": Object {
+          "hithie": Object {
+            "federalActual": 320000,
+            "totalApproved": 540000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "75": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "90": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+          },
+        },
+        "2017": Object {
+          "hithie": Object {
+            "federalActual": 140000,
+            "totalApproved": 280000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 23445,
+              "totalApproved": 82545,
+            },
+            "75": Object {
+              "federalActual": 23440,
+              "totalApproved": 75340,
+            },
+            "90": Object {
+              "federalActual": 235720,
+              "totalApproved": 262460,
+            },
+          },
+        },
+        "2018": Object {
+          "hithie": Object {
+            "federalActual": 146346,
+            "totalApproved": 234526,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 129387,
+              "totalApproved": 375445,
+            },
+            "75": Object {
+              "federalActual": 413246,
+              "totalApproved": 654455,
+            },
+            "90": Object {
+              "federalActual": 614544,
+              "totalApproved": 863455,
+            },
+          },
+        },
+      },
+      "previousActivitySummary": "",
+    },
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "ehCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+      },
+    },
+    "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
     "years": Array [
@@ -1954,21 +1938,19 @@ Object {
             "description": "Maintain SLR",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Super SLR Incorporated",
             "start": null,
             "totalCost": 32423,
+            "useHourly": false,
             "years": Object {
               "2019": 999756,
               "2020": 342444,
@@ -1978,21 +1960,19 @@ Object {
             "description": "Technology consulting and planning services.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 473573,
+            "useHourly": false,
             "years": Object {
               "2019": 333000,
               "2020": 200000,
@@ -2293,21 +2273,19 @@ Object {
             "description": "Hosting and development support.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Interface Vendor Inc.",
             "start": null,
             "totalCost": 26453574,
+            "useHourly": false,
             "years": Object {
               "2019": 650000,
               "2020": 750000,
@@ -2317,21 +2295,19 @@ Object {
             "description": "Interface M&O contractor.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 7398,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1000000,
@@ -2666,21 +2642,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "",
             "start": null,
             "totalCost": 3496874,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 0,
@@ -2938,21 +2912,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "RFP Planning Vendor Inc.",
             "start": null,
             "totalCost": 4368734,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -2962,21 +2934,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Blue Button Builder Inc.",
             "start": null,
             "totalCost": 35246,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 2000000,
@@ -3137,21 +3107,19 @@ Object {
             "description": "Gateway Implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 246477,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1500000,
@@ -3161,21 +3129,19 @@ Object {
             "description": "Gateway Development Planning and RFP",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Gateway Vendor Inc.",
             "start": null,
             "totalCost": 7473747,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -3369,21 +3335,19 @@ Object {
             "description": "Research for and RFP development for MITA 3.0 SSA",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 264574,
+            "useHourly": false,
             "years": Object {
               "2019": 450000,
               "2020": 150000,
@@ -3393,21 +3357,19 @@ Object {
             "description": "MITA 3.0 implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 64574,
+            "useHourly": false,
             "years": Object {
               "2019": 200000,
               "2020": 500000,
@@ -3547,8 +3509,13 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
-    "created": "1865-12-06T00:00:00.000Z",
-    "federalCitations": Object {
+    "apdOverview": Object {
+      "narrativeHIE": "",
+      "narrativeHIT": "",
+      "narrativeMMIS": "",
+      "programOverview": "<a>XSS</a>",
+    },
+    "assurancesAndCompliances": Object {
       "procurement": Array [
         Object {
           "checked": null,
@@ -3633,188 +3600,38 @@ Object {
         },
       ],
     },
+    "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "incentivePayments": Object {
-      "ehAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "ehCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-    },
-    "keyPersonnel": Array [
-      Object {
-        "costs": Object {
-          "2019": 100000,
-          "2020": 100000,
-        },
-        "email": "JimPushesButtons@tycho.com",
-        "fte": Object {
-          "2019": 1,
-          "2020": 1,
-        },
-        "hasCosts": true,
-        "isPrimary": true,
-        "name": "James Holden",
-        "position": "HIT Coordinator",
-      },
-      Object {
-        "costs": Object {},
-        "email": "FJohnson@tycho.com",
-        "fte": Object {
-          "2019": 0.3,
-          "2020": 0.3,
-        },
-        "hasCosts": false,
-        "isPrimary": false,
-        "name": "Fred Johnson",
-        "position": "State Medicaid Director",
-      },
-    ],
-    "name": "new APD name",
-    "narrativeHIE": "",
-    "narrativeHIT": "",
-    "narrativeMMIS": "",
-    "previousActivityExpenses": Object {
-      "2016": Object {
-        "hithie": Object {
-          "federalActual": 320000,
-          "totalApproved": 540000,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
+            "2019": 100000,
+            "2020": 100000,
           },
-          "75": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+          "email": "JimPushesButtons@tycho.com",
+          "fte": Object {
+            "2019": 1,
+            "2020": 1,
           },
-          "90": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
+          "hasCosts": true,
+          "isPrimary": true,
+          "name": "James Holden",
+          "position": "HIT Coordinator",
         },
-      },
-      "2017": Object {
-        "hithie": Object {
-          "federalActual": 140000,
-          "totalApproved": 280000,
+        Object {
+          "costs": Object {},
+          "email": "FJohnson@tycho.com",
+          "fte": Object {
+            "2019": 0.3,
+            "2020": 0.3,
+          },
+          "hasCosts": false,
+          "isPrimary": false,
+          "name": "Fred Johnson",
+          "position": "State Medicaid Director",
         },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 23445,
-            "totalApproved": 82545,
-          },
-          "75": Object {
-            "federalActual": 23440,
-            "totalApproved": 75340,
-          },
-          "90": Object {
-            "federalActual": 235720,
-            "totalApproved": 262460,
-          },
-        },
-      },
-      "2018": Object {
-        "hithie": Object {
-          "federalActual": 146346,
-          "totalApproved": 234526,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 129387,
-            "totalApproved": 375445,
-          },
-          "75": Object {
-            "federalActual": 413246,
-            "totalApproved": 654455,
-          },
-          "90": Object {
-            "federalActual": 614544,
-            "totalApproved": 863455,
-          },
-        },
-      },
-    },
-    "previousActivitySummary": "",
-    "programOverview": "<a>XSS</a>",
-    "state": "ak",
-    "stateProfile": Object {
+      ],
       "medicaidDirector": Object {
         "email": "",
         "name": "Bob the Builder",
@@ -3828,6 +3645,157 @@ Object {
         "zip": "",
       },
     },
+    "name": "new APD name",
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2016": Object {
+          "hithie": Object {
+            "federalActual": 320000,
+            "totalApproved": 540000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "75": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "90": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+          },
+        },
+        "2017": Object {
+          "hithie": Object {
+            "federalActual": 140000,
+            "totalApproved": 280000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 23445,
+              "totalApproved": 82545,
+            },
+            "75": Object {
+              "federalActual": 23440,
+              "totalApproved": 75340,
+            },
+            "90": Object {
+              "federalActual": 235720,
+              "totalApproved": 262460,
+            },
+          },
+        },
+        "2018": Object {
+          "hithie": Object {
+            "federalActual": 146346,
+            "totalApproved": 234526,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 129387,
+              "totalApproved": 375445,
+            },
+            "75": Object {
+              "federalActual": 413246,
+              "totalApproved": 654455,
+            },
+            "90": Object {
+              "federalActual": 614544,
+              "totalApproved": 863455,
+            },
+          },
+        },
+      },
+      "previousActivitySummary": "",
+    },
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "ehCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+      },
+    },
+    "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
     "years": Array [
@@ -3872,21 +3840,19 @@ Object {
             "description": "Maintain SLR",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Super SLR Incorporated",
             "start": null,
             "totalCost": 32423,
+            "useHourly": false,
             "years": Object {
               "2019": 999756,
               "2020": 342444,
@@ -3896,21 +3862,19 @@ Object {
             "description": "Technology consulting and planning services.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 473573,
+            "useHourly": false,
             "years": Object {
               "2019": 333000,
               "2020": 200000,
@@ -4211,21 +4175,19 @@ Object {
             "description": "Hosting and development support.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Interface Vendor Inc.",
             "start": null,
             "totalCost": 26453574,
+            "useHourly": false,
             "years": Object {
               "2019": 650000,
               "2020": 750000,
@@ -4235,21 +4197,19 @@ Object {
             "description": "Interface M&O contractor.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 7398,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1000000,
@@ -4584,21 +4544,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "",
             "start": null,
             "totalCost": 3496874,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 0,
@@ -4856,21 +4814,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "RFP Planning Vendor Inc.",
             "start": null,
             "totalCost": 4368734,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -4880,21 +4836,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Blue Button Builder Inc.",
             "start": null,
             "totalCost": 35246,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 2000000,
@@ -5055,21 +5009,19 @@ Object {
             "description": "Gateway Implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 246477,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1500000,
@@ -5079,21 +5031,19 @@ Object {
             "description": "Gateway Development Planning and RFP",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Gateway Vendor Inc.",
             "start": null,
             "totalCost": 7473747,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -5287,21 +5237,19 @@ Object {
             "description": "Research for and RFP development for MITA 3.0 SSA",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 264574,
+            "useHourly": false,
             "years": Object {
               "2019": 450000,
               "2020": 150000,
@@ -5311,21 +5259,19 @@ Object {
             "description": "MITA 3.0 implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 64574,
+            "useHourly": false,
             "years": Object {
               "2019": 200000,
               "2020": 500000,
@@ -5465,8 +5411,13 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
-    "created": "1865-12-06T00:00:00.000Z",
-    "federalCitations": Object {
+    "apdOverview": Object {
+      "narrativeHIE": "",
+      "narrativeHIT": "",
+      "narrativeMMIS": "",
+      "programOverview": "",
+    },
+    "assurancesAndCompliances": Object {
       "procurement": Array [
         Object {
           "checked": null,
@@ -5551,188 +5502,38 @@ Object {
         },
       ],
     },
+    "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "incentivePayments": Object {
-      "ehAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "ehCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-    },
-    "keyPersonnel": Array [
-      Object {
-        "costs": Object {
-          "2019": 100000,
-          "2020": 100000,
-        },
-        "email": "JimPushesButtons@tycho.com",
-        "fte": Object {
-          "2019": 1,
-          "2020": 1,
-        },
-        "hasCosts": true,
-        "isPrimary": true,
-        "name": "James Holden",
-        "position": "HIT Coordinator",
-      },
-      Object {
-        "costs": Object {},
-        "email": "FJohnson@tycho.com",
-        "fte": Object {
-          "2019": 0.3,
-          "2020": 0.3,
-        },
-        "hasCosts": false,
-        "isPrimary": false,
-        "name": "Fred Johnson",
-        "position": "State Medicaid Director",
-      },
-    ],
-    "name": "AZ-1921-07-11-HITECH-APD",
-    "narrativeHIE": "",
-    "narrativeHIT": "",
-    "narrativeMMIS": "",
-    "previousActivityExpenses": Object {
-      "2016": Object {
-        "hithie": Object {
-          "federalActual": 320000,
-          "totalApproved": 540000,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
+            "2019": 100000,
+            "2020": 100000,
           },
-          "75": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+          "email": "JimPushesButtons@tycho.com",
+          "fte": Object {
+            "2019": 1,
+            "2020": 1,
           },
-          "90": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
+          "hasCosts": true,
+          "isPrimary": true,
+          "name": "James Holden",
+          "position": "HIT Coordinator",
         },
-      },
-      "2017": Object {
-        "hithie": Object {
-          "federalActual": 140000,
-          "totalApproved": 280000,
+        Object {
+          "costs": Object {},
+          "email": "FJohnson@tycho.com",
+          "fte": Object {
+            "2019": 0.3,
+            "2020": 0.3,
+          },
+          "hasCosts": false,
+          "isPrimary": false,
+          "name": "Fred Johnson",
+          "position": "State Medicaid Director",
         },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 23445,
-            "totalApproved": 82545,
-          },
-          "75": Object {
-            "federalActual": 23440,
-            "totalApproved": 75340,
-          },
-          "90": Object {
-            "federalActual": 235720,
-            "totalApproved": 262460,
-          },
-        },
-      },
-      "2018": Object {
-        "hithie": Object {
-          "federalActual": 146346,
-          "totalApproved": 234526,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 129387,
-            "totalApproved": 375445,
-          },
-          "75": Object {
-            "federalActual": 413246,
-            "totalApproved": 654455,
-          },
-          "90": Object {
-            "federalActual": 614544,
-            "totalApproved": 863455,
-          },
-        },
-      },
-    },
-    "previousActivitySummary": "",
-    "programOverview": "",
-    "state": "ak",
-    "stateProfile": Object {
+      ],
       "medicaidDirector": Object {
         "email": "",
         "name": "",
@@ -5746,6 +5547,157 @@ Object {
         "zip": "",
       },
     },
+    "name": "AZ-1921-07-11-HITECH-APD",
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2016": Object {
+          "hithie": Object {
+            "federalActual": 320000,
+            "totalApproved": 540000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "75": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "90": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+          },
+        },
+        "2017": Object {
+          "hithie": Object {
+            "federalActual": 140000,
+            "totalApproved": 280000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 23445,
+              "totalApproved": 82545,
+            },
+            "75": Object {
+              "federalActual": 23440,
+              "totalApproved": 75340,
+            },
+            "90": Object {
+              "federalActual": 235720,
+              "totalApproved": 262460,
+            },
+          },
+        },
+        "2018": Object {
+          "hithie": Object {
+            "federalActual": 146346,
+            "totalApproved": 234526,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 129387,
+              "totalApproved": 375445,
+            },
+            "75": Object {
+              "federalActual": 413246,
+              "totalApproved": 654455,
+            },
+            "90": Object {
+              "federalActual": 614544,
+              "totalApproved": 863455,
+            },
+          },
+        },
+      },
+      "previousActivitySummary": "",
+    },
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "ehCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+      },
+    },
+    "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
     "years": Array [
@@ -5797,21 +5749,19 @@ Object {
             "description": "Maintain SLR",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Super SLR Incorporated",
             "start": null,
             "totalCost": 32423,
+            "useHourly": false,
             "years": Object {
               "2019": 999756,
               "2020": 342444,
@@ -5821,21 +5771,19 @@ Object {
             "description": "Technology consulting and planning services.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 473573,
+            "useHourly": false,
             "years": Object {
               "2019": 333000,
               "2020": 200000,
@@ -6136,21 +6084,19 @@ Object {
             "description": "Hosting and development support.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Interface Vendor Inc.",
             "start": null,
             "totalCost": 26453574,
+            "useHourly": false,
             "years": Object {
               "2019": 650000,
               "2020": 750000,
@@ -6160,21 +6106,19 @@ Object {
             "description": "Interface M&O contractor.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 7398,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1000000,
@@ -6509,21 +6453,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "",
             "start": null,
             "totalCost": 3496874,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 0,
@@ -6781,21 +6723,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "RFP Planning Vendor Inc.",
             "start": null,
             "totalCost": 4368734,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -6805,21 +6745,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Blue Button Builder Inc.",
             "start": null,
             "totalCost": 35246,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 2000000,
@@ -6980,21 +6918,19 @@ Object {
             "description": "Gateway Implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 246477,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1500000,
@@ -7004,21 +6940,19 @@ Object {
             "description": "Gateway Development Planning and RFP",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Gateway Vendor Inc.",
             "start": null,
             "totalCost": 7473747,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -7212,21 +7146,19 @@ Object {
             "description": "Research for and RFP development for MITA 3.0 SSA",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 264574,
+            "useHourly": false,
             "years": Object {
               "2019": 450000,
               "2020": 150000,
@@ -7236,21 +7168,19 @@ Object {
             "description": "MITA 3.0 implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 64574,
+            "useHourly": false,
             "years": Object {
               "2019": 200000,
               "2020": 500000,
@@ -7390,8 +7320,13 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
-    "created": "1865-12-06T00:00:00.000Z",
-    "federalCitations": Object {
+    "apdOverview": Object {
+      "narrativeHIE": "",
+      "narrativeHIT": "",
+      "narrativeMMIS": "",
+      "programOverview": "",
+    },
+    "assurancesAndCompliances": Object {
       "procurement": Array [
         Object {
           "checked": null,
@@ -7476,188 +7411,38 @@ Object {
         },
       ],
     },
+    "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "incentivePayments": Object {
-      "ehAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "ehCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-    },
-    "keyPersonnel": Array [
-      Object {
-        "costs": Object {
-          "2019": 100000,
-          "2020": 100000,
-        },
-        "email": "JimPushesButtons@tycho.com",
-        "fte": Object {
-          "2019": 1,
-          "2020": 1,
-        },
-        "hasCosts": true,
-        "isPrimary": true,
-        "name": "James Holden",
-        "position": "HIT Coordinator",
-      },
-      Object {
-        "costs": Object {},
-        "email": "FJohnson@tycho.com",
-        "fte": Object {
-          "2019": 0.3,
-          "2020": 0.3,
-        },
-        "hasCosts": false,
-        "isPrimary": false,
-        "name": "Fred Johnson",
-        "position": "State Medicaid Director",
-      },
-    ],
-    "name": "new APD name",
-    "narrativeHIE": "",
-    "narrativeHIT": "",
-    "narrativeMMIS": "",
-    "previousActivityExpenses": Object {
-      "2016": Object {
-        "hithie": Object {
-          "federalActual": 320000,
-          "totalApproved": 540000,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
+            "2019": 100000,
+            "2020": 100000,
           },
-          "75": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+          "email": "JimPushesButtons@tycho.com",
+          "fte": Object {
+            "2019": 1,
+            "2020": 1,
           },
-          "90": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
+          "hasCosts": true,
+          "isPrimary": true,
+          "name": "James Holden",
+          "position": "HIT Coordinator",
         },
-      },
-      "2017": Object {
-        "hithie": Object {
-          "federalActual": 140000,
-          "totalApproved": 280000,
+        Object {
+          "costs": Object {},
+          "email": "FJohnson@tycho.com",
+          "fte": Object {
+            "2019": 0.3,
+            "2020": 0.3,
+          },
+          "hasCosts": false,
+          "isPrimary": false,
+          "name": "Fred Johnson",
+          "position": "State Medicaid Director",
         },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 23445,
-            "totalApproved": 82545,
-          },
-          "75": Object {
-            "federalActual": 23440,
-            "totalApproved": 75340,
-          },
-          "90": Object {
-            "federalActual": 235720,
-            "totalApproved": 262460,
-          },
-        },
-      },
-      "2018": Object {
-        "hithie": Object {
-          "federalActual": 146346,
-          "totalApproved": 234526,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 129387,
-            "totalApproved": 375445,
-          },
-          "75": Object {
-            "federalActual": 413246,
-            "totalApproved": 654455,
-          },
-          "90": Object {
-            "federalActual": 614544,
-            "totalApproved": 863455,
-          },
-        },
-      },
-    },
-    "previousActivitySummary": "",
-    "programOverview": "",
-    "state": "ak",
-    "stateProfile": Object {
+      ],
       "medicaidDirector": Object {
         "email": "",
         "name": "Bob the Builder",
@@ -7671,6 +7456,157 @@ Object {
         "zip": "",
       },
     },
+    "name": "new APD name",
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2016": Object {
+          "hithie": Object {
+            "federalActual": 320000,
+            "totalApproved": 540000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "75": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "90": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+          },
+        },
+        "2017": Object {
+          "hithie": Object {
+            "federalActual": 140000,
+            "totalApproved": 280000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 23445,
+              "totalApproved": 82545,
+            },
+            "75": Object {
+              "federalActual": 23440,
+              "totalApproved": 75340,
+            },
+            "90": Object {
+              "federalActual": 235720,
+              "totalApproved": 262460,
+            },
+          },
+        },
+        "2018": Object {
+          "hithie": Object {
+            "federalActual": 146346,
+            "totalApproved": 234526,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 129387,
+              "totalApproved": 375445,
+            },
+            "75": Object {
+              "federalActual": 413246,
+              "totalApproved": 654455,
+            },
+            "90": Object {
+              "federalActual": 614544,
+              "totalApproved": 863455,
+            },
+          },
+        },
+      },
+      "previousActivitySummary": "",
+    },
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "ehCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+      },
+    },
+    "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
     "years": Array [
@@ -7711,21 +7647,19 @@ Object {
             "description": "Maintain SLR",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Super SLR Incorporated",
             "start": null,
             "totalCost": 32423,
+            "useHourly": false,
             "years": Object {
               "2019": 999756,
               "2020": 342444,
@@ -7735,21 +7669,19 @@ Object {
             "description": "Technology consulting and planning services.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 473573,
+            "useHourly": false,
             "years": Object {
               "2019": 333000,
               "2020": 200000,
@@ -8050,21 +7982,19 @@ Object {
             "description": "Hosting and development support.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Interface Vendor Inc.",
             "start": null,
             "totalCost": 26453574,
+            "useHourly": false,
             "years": Object {
               "2019": 650000,
               "2020": 750000,
@@ -8074,21 +8004,19 @@ Object {
             "description": "Interface M&O contractor.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 7398,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1000000,
@@ -8423,21 +8351,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "",
             "start": null,
             "totalCost": 3496874,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 0,
@@ -8695,21 +8621,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "RFP Planning Vendor Inc.",
             "start": null,
             "totalCost": 4368734,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -8719,21 +8643,19 @@ Object {
             "description": "",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Blue Button Builder Inc.",
             "start": null,
             "totalCost": 35246,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 2000000,
@@ -8894,21 +8816,19 @@ Object {
             "description": "Gateway Implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 246477,
+            "useHourly": false,
             "years": Object {
               "2019": 0,
               "2020": 1500000,
@@ -8918,21 +8838,19 @@ Object {
             "description": "Gateway Development Planning and RFP",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Gateway Vendor Inc.",
             "start": null,
             "totalCost": 7473747,
+            "useHourly": false,
             "years": Object {
               "2019": 500000,
               "2020": 0,
@@ -9126,21 +9044,19 @@ Object {
             "description": "Research for and RFP development for MITA 3.0 SSA",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "Tech Consulting Inc.",
             "start": null,
             "totalCost": 264574,
+            "useHourly": false,
             "years": Object {
               "2019": 450000,
               "2020": 150000,
@@ -9150,21 +9066,19 @@ Object {
             "description": "MITA 3.0 implementation.",
             "end": null,
             "hourly": Object {
-              "data": Object {
-                "2019": Object {
-                  "hours": null,
-                  "rate": null,
-                },
-                "2020": Object {
-                  "hours": null,
-                  "rate": null,
-                },
+              "2019": Object {
+                "hours": null,
+                "rate": null,
               },
-              "useHourly": false,
+              "2020": Object {
+                "hours": null,
+                "rate": null,
+              },
             },
             "name": "TBD",
             "start": null,
             "totalCost": 64574,
+            "useHourly": false,
             "years": Object {
               "2019": 200000,
               "2020": 500000,
@@ -9304,8 +9218,13 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
-    "created": "1865-12-06T00:00:00.000Z",
-    "federalCitations": Object {
+    "apdOverview": Object {
+      "narrativeHIE": "",
+      "narrativeHIT": "",
+      "narrativeMMIS": "",
+      "programOverview": "<a>XSS</a>",
+    },
+    "assurancesAndCompliances": Object {
       "procurement": Array [
         Object {
           "checked": null,
@@ -9390,188 +9309,38 @@ Object {
         },
       ],
     },
+    "created": "1865-12-06T00:00:00.000Z",
     "id": "eeac3c9865059f26eccb0600",
-    "incentivePayments": Object {
-      "ehAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "ehCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epAmt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epCt": Object {
-        "2018": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2019": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2020": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-    },
-    "keyPersonnel": Array [
-      Object {
-        "costs": Object {
-          "2019": 100000,
-          "2020": 100000,
-        },
-        "email": "JimPushesButtons@tycho.com",
-        "fte": Object {
-          "2019": 1,
-          "2020": 1,
-        },
-        "hasCosts": true,
-        "isPrimary": true,
-        "name": "James Holden",
-        "position": "HIT Coordinator",
-      },
-      Object {
-        "costs": Object {},
-        "email": "FJohnson@tycho.com",
-        "fte": Object {
-          "2019": 0.3,
-          "2020": 0.3,
-        },
-        "hasCosts": false,
-        "isPrimary": false,
-        "name": "Fred Johnson",
-        "position": "State Medicaid Director",
-      },
-    ],
-    "name": "new APD name",
-    "narrativeHIE": "",
-    "narrativeHIT": "",
-    "narrativeMMIS": "",
-    "previousActivityExpenses": Object {
-      "2016": Object {
-        "hithie": Object {
-          "federalActual": 320000,
-          "totalApproved": 540000,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+    "keyStatePersonnel": Object {
+      "keyPersonnel": Array [
+        Object {
+          "costs": Object {
+            "2019": 100000,
+            "2020": 100000,
           },
-          "75": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
+          "email": "JimPushesButtons@tycho.com",
+          "fte": Object {
+            "2019": 1,
+            "2020": 1,
           },
-          "90": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
+          "hasCosts": true,
+          "isPrimary": true,
+          "name": "James Holden",
+          "position": "HIT Coordinator",
         },
-      },
-      "2017": Object {
-        "hithie": Object {
-          "federalActual": 140000,
-          "totalApproved": 280000,
+        Object {
+          "costs": Object {},
+          "email": "FJohnson@tycho.com",
+          "fte": Object {
+            "2019": 0.3,
+            "2020": 0.3,
+          },
+          "hasCosts": false,
+          "isPrimary": false,
+          "name": "Fred Johnson",
+          "position": "State Medicaid Director",
         },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 23445,
-            "totalApproved": 82545,
-          },
-          "75": Object {
-            "federalActual": 23440,
-            "totalApproved": 75340,
-          },
-          "90": Object {
-            "federalActual": 235720,
-            "totalApproved": 262460,
-          },
-        },
-      },
-      "2018": Object {
-        "hithie": Object {
-          "federalActual": 146346,
-          "totalApproved": 234526,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 129387,
-            "totalApproved": 375445,
-          },
-          "75": Object {
-            "federalActual": 413246,
-            "totalApproved": 654455,
-          },
-          "90": Object {
-            "federalActual": 614544,
-            "totalApproved": 863455,
-          },
-        },
-      },
-    },
-    "previousActivitySummary": "",
-    "programOverview": "<a>XSS</a>",
-    "state": "ak",
-    "stateProfile": Object {
+      ],
       "medicaidDirector": Object {
         "email": "",
         "name": "Bob the Builder",
@@ -9585,6 +9354,157 @@ Object {
         "zip": "",
       },
     },
+    "name": "new APD name",
+    "previousActivities": Object {
+      "actualExpenditures": Object {
+        "2016": Object {
+          "hithie": Object {
+            "federalActual": 320000,
+            "totalApproved": 540000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "75": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+            "90": Object {
+              "federalActual": 0,
+              "totalApproved": 0,
+            },
+          },
+        },
+        "2017": Object {
+          "hithie": Object {
+            "federalActual": 140000,
+            "totalApproved": 280000,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 23445,
+              "totalApproved": 82545,
+            },
+            "75": Object {
+              "federalActual": 23440,
+              "totalApproved": 75340,
+            },
+            "90": Object {
+              "federalActual": 235720,
+              "totalApproved": 262460,
+            },
+          },
+        },
+        "2018": Object {
+          "hithie": Object {
+            "federalActual": 146346,
+            "totalApproved": 234526,
+          },
+          "mmis": Object {
+            "50": Object {
+              "federalActual": 129387,
+              "totalApproved": 375445,
+            },
+            "75": Object {
+              "federalActual": 413246,
+              "totalApproved": 654455,
+            },
+            "90": Object {
+              "federalActual": 614544,
+              "totalApproved": 863455,
+            },
+          },
+        },
+      },
+      "previousActivitySummary": "",
+    },
+    "proposedBudget": Object {
+      "incentivePayments": Object {
+        "ehAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "ehCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epAmt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+        "epCt": Object {
+          "2018": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2019": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+          "2020": Object {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+          },
+        },
+      },
+    },
+    "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
     "years": Array [

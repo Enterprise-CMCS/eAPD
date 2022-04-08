@@ -43,7 +43,7 @@ export const removeYear = year => (dispatch, getState) => {
  */
 export const setNarrativeForHIE = text => ({
   type: EDIT_APD,
-  path: '/narrativeHIE',
+  path: '/apdOverview/narrativeHIE',
   value: text
 });
 
@@ -53,7 +53,7 @@ export const setNarrativeForHIE = text => ({
  */
 export const setNarrativeForHIT = text => ({
   type: EDIT_APD,
-  path: '/narrativeHIT',
+  path: '/apdOverview/narrativeHIT',
   value: text
 });
 
@@ -63,7 +63,7 @@ export const setNarrativeForHIT = text => ({
  */
 export const setNarrativeForMMIS = text => ({
   type: EDIT_APD,
-  path: '/narrativeMMIS',
+  path: '/apdOverview/narrativeMMIS',
   value: text
 });
 
@@ -73,6 +73,6 @@ export const setNarrativeForMMIS = text => ({
  */
 export const setProgramOverview = text => ({
   type: EDIT_APD,
-  path: '/programOverview',
+  path: '/apdOverview/programOverview',
   value: text
 });

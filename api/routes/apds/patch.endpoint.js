@@ -77,7 +77,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = [
         {
           op: 'replace',
-          path: '/stateProfile/medicaidDirector/name',
+          path: '/keyStatePersonnel/medicaidDirector/name',
           value: 'Bob the Builder'
         },
         { op: 'replace', path: '/name', value: 'new APD name' },
@@ -133,14 +133,14 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = [
         {
           op: 'replace',
-          path: `/programOverview`,
+          path: `/apdOverview/programOverview`,
           value:
             '<svg><a xlink:href="javascript:alert(document.domain)"><text x="20" y="20">XSS</text></a>'
         }
       ];
 
       const response = await api.patch(url(akAPDId), data);
-      const { apd: { programOverview } = {} } = response.data;
+      const { apd: { apdOverview: { programOverview } } = {} } = response.data;
 
       expect(response.status).toEqual(200);
       expect(programOverview).toEqual('<a>XSS</a>');
@@ -157,7 +157,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = [
         {
           op: 'replace',
-          path: '/stateProfile/medicaidDirector/name',
+          path: '/keyStatePersonnel/medicaidDirector/name',
           value: 'Bob the Builder'
         },
         { op: 'replace', path: '/status', value: 'submitted' },

@@ -20,9 +20,14 @@ describe('auth roles endpoint get endpoint', () => {
     it('when authenticated', async () => {
       const api = login('state-admin');
       const response = await api.get(url);
+      const roles = response.data.map(r => ({
+        activities: r.activities,
+        name: r.name,
+        isActive: r.isActive
+      }));
 
       expect(response.status).toEqual(200);
-      expect(response.data).toMatchSnapshot();
+      expect(roles).toMatchSnapshot();
     });
   });
 });
