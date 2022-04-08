@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import DollarField from '../components/DollarField';
-import Dollars from '../components/Dollars';
+import DollarField from '../../../components/DollarField';
+import Dollars from '../../../components/Dollars';
 import {
   setPreviousActivityApprovedExpenseForHITandHIE,
   setPreviousActivityFederalActualExpenseForHITandHIE
-} from '../actions/editApd';
-import { TABLE_HEADERS } from '../constants';
+} from '../../../actions/editApd';
+import { TABLE_HEADERS } from '../../../constants';
 
-import { selectPreviousHITHIEActivities } from '../reducers/apd.selectors';
+import { selectPreviousHITHIEActivities } from '../../../reducers/apd.selectors';
 
 const ApdPreviousActivityTable = ({
   isViewOnly,
@@ -20,13 +20,17 @@ const ApdPreviousActivityTable = ({
 }) => {
   const years = Object.keys(previousActivityExpenses);
 
-  const getActualsHandler = year => ({ target: { value } }) => {
-    setActual(year, value);
-  };
+  const getActualsHandler =
+    year =>
+    ({ target: { value } }) => {
+      setActual(year, value);
+    };
 
-  const getApprovedHandler = year => ({ target: { value } }) => {
-    setApproved(year, value);
-  };
+  const getApprovedHandler =
+    year =>
+    ({ target: { value } }) => {
+      setApproved(year, value);
+    };
 
   return (
     <table className="budget-table">

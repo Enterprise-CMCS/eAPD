@@ -3,7 +3,7 @@ import React from 'react';
 
 import { plain as KeyPersonForm, mapDispatchToProps } from './ApdKeyPersonForm';
 
-import { saveKeyPersonnel } from '../../actions/editApd';
+import { saveKeyPersonnel } from '../../../actions/editApd';
 
 describe('the ApdKeyPersonForm component', () => {
   const props = {
@@ -53,9 +53,7 @@ describe('the ApdKeyPersonForm component', () => {
 
   describe('events', () => {
     it('handles submitting the form', () => {
-      component
-        .find('form')
-        .simulate('submit');
+      component.find('form').simulate('submit');
 
       expect(props.savePerson).toHaveBeenCalled();
     });

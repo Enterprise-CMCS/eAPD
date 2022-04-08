@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Dollars from '../../components/Dollars';
+import Dollars from '../../../components/Dollars';
 
 const ApdStateProfile = ({ keyStatePersonnel }) => {
   const { keyPersonnel } = keyStatePersonnel;

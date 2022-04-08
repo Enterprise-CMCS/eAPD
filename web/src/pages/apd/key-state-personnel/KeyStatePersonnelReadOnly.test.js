@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from 'apd-testing-library';
 
-import ApdStateProfile from './ApdStateProfile';
+import ApdStateProfile from './KeyStatePersonnelReadOnly';
 
 describe('APD Summary/viewOnly component', () => {
   test('renders the correct message when no key personnel are provided', () => {
