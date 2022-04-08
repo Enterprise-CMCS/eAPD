@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Dollars from '../components/Dollars';
-import { t } from '../i18n';
+import Dollars from '../../../components/Dollars';
+import { t } from '../../../i18n';
 
 const FUNDING_SOURCES = [
   ['hitAndHie', 'HIT and HIE'],
