@@ -15,7 +15,7 @@ describe('APD edit actions for previous activities', () => {
   it('dispatches an action for setting the previous activity summary', () => {
     expect(setPreviousActivitySummary('summary')).toEqual({
       type: EDIT_APD,
-      path: '/previousActivitySummary',
+      path: '/previousActivities/previousActivitySummary',
       value: 'summary'
     });
   });
@@ -25,7 +25,7 @@ describe('APD edit actions for previous activities', () => {
       setPreviousActivityApprovedExpenseForHITandHIE('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
-      path: '/previousActivityExpenses/year/hithie/totalApproved',
+      path: '/previousActivities/actualExpenditures/year/hithie/totalApproved',
       value: 'expense'
     });
   });
@@ -35,7 +35,7 @@ describe('APD edit actions for previous activities', () => {
       setPreviousActivityApprovedExpenseforMMIS50FFP('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
-      path: '/previousActivityExpenses/year/mmis/50/totalApproved',
+      path: '/previousActivities/actualExpenditures/year/mmis/50/totalApproved',
       value: 'expense'
     });
   });
@@ -45,7 +45,7 @@ describe('APD edit actions for previous activities', () => {
       setPreviousActivityApprovedExpenseforMMIS75FFP('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
-      path: '/previousActivityExpenses/year/mmis/75/totalApproved',
+      path: '/previousActivities/actualExpenditures/year/mmis/75/totalApproved',
       value: 'expense'
     });
   });
@@ -55,7 +55,7 @@ describe('APD edit actions for previous activities', () => {
       setPreviousActivityApprovedExpenseforMMIS90FFP('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
-      path: '/previousActivityExpenses/year/mmis/90/totalApproved',
+      path: '/previousActivities/actualExpenditures/year/mmis/90/totalApproved',
       value: 'expense'
     });
   });
@@ -65,7 +65,7 @@ describe('APD edit actions for previous activities', () => {
       setPreviousActivityFederalActualExpenseForHITandHIE('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
-      path: '/previousActivityExpenses/year/hithie/federalActual',
+      path: '/previousActivities/actualExpenditures/year/hithie/federalActual',
       value: 'expense'
     });
   });
@@ -75,7 +75,7 @@ describe('APD edit actions for previous activities', () => {
       setPreviousActivityFederalActualExpenseforMMIS50FFP('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
-      path: '/previousActivityExpenses/year/mmis/50/federalActual',
+      path: '/previousActivities/actualExpenditures/year/mmis/50/federalActual',
       value: 'expense'
     });
   });
@@ -85,7 +85,7 @@ describe('APD edit actions for previous activities', () => {
       setPreviousActivityFederalActualExpenseforMMIS75FFP('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
-      path: '/previousActivityExpenses/year/mmis/75/federalActual',
+      path: '/previousActivities/actualExpenditures/year/mmis/75/federalActual',
       value: 'expense'
     });
   });
@@ -95,7 +95,7 @@ describe('APD edit actions for previous activities', () => {
       setPreviousActivityFederalActualExpenseforMMIS90FFP('year', 'expense')
     ).toEqual({
       type: EDIT_APD,
-      path: '/previousActivityExpenses/year/mmis/90/federalActual',
+      path: '/previousActivities/actualExpenditures/year/mmis/90/federalActual',
       value: 'expense'
     });
   });

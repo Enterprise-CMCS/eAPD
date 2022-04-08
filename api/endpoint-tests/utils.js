@@ -2,7 +2,6 @@ const axios = require('axios');
 const FormData = require('form-data');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
-// const { setup: setupMongo, teardown: teardownMongo } = require('../db/mongodb');
 const logger = require('../logger')('endpoint-utils');
 
 const { API_HOST, API_PORT, PORT } = process.env;

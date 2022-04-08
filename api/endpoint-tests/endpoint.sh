@@ -16,7 +16,7 @@ docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn ru
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
 docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run test-endpoints $@
 EXIT_CODE=$?
-echo $EXIT_CODE
+
 docker-compose -f docker-compose.endpoint-tests.yml down
 
 mv endpoint-data.json ./endpoint-tests

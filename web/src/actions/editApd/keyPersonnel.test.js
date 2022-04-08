@@ -16,7 +16,9 @@ describe('APD edit actions for APD key personnel', () => {
     const state = {
       apd: {
         data: {
-          keyPersonnel: []
+          keyStatePersonnel: {
+            keyPersonnel: []            
+          }
         }
       }
     };
@@ -27,12 +29,12 @@ describe('APD edit actions for APD key personnel', () => {
     expect(store.getActions()).toEqual([
       {
         type: ADD_APD_ITEM,
-        path: '/keyPersonnel/-',
+        path: '/keyStatePersonnel/keyPersonnel/-',
         state
       },
       {
         type: EDIT_APD,
-        path: '/keyPersonnel/0',
+        path: '/keyStatePersonnel/keyPersonnel/0',
         value: {}
       },
       { type: UPDATE_BUDGET, state }
@@ -48,7 +50,7 @@ describe('APD edit actions for APD key personnel', () => {
     expect(store.getActions()).toEqual([
       {
         type: REMOVE_APD_ITEM,
-        path: '/keyPersonnel/17'
+        path: '/keyStatePersonnel/keyPersonnel/17'
       },
       {
         type: UPDATE_BUDGET,
@@ -61,9 +63,11 @@ describe('APD edit actions for APD key personnel', () => {
     const state = {
       apd: {
         data: {
-          keyPersonnel: [
-            { name: "Test Personnel" }
-          ]
+          keyStatePersonnel: {
+            keyPersonnel: [
+              { name: "Test Personnel" }
+            ]            
+          }
         }
       }
     };
@@ -77,7 +81,7 @@ describe('APD edit actions for APD key personnel', () => {
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,
-        path: '/keyPersonnel/0',
+        path: '/keyStatePersonnel/keyPersonnel/0',
         value: personnel
       },
       { type: UPDATE_BUDGET, state }
