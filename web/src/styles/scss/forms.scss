@@ -183,3 +183,9 @@ div.form--computed-value__input-aligned {
   color: $color-error;
   font-weight: 700;
 }
+
+.subform__container {
+  border-left: 3px $color-primary solid;
+  margin-left: 22px;
+  padding-left: 18px;
+}

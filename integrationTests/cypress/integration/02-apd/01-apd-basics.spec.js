@@ -5,6 +5,7 @@ import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
 
+
 /// <reference types="cypress" />
 
 // Tests performing basic APD tasks
@@ -374,6 +375,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         );
       });
 
+      cy.log("Done")
+
       cy.get('@personnelVals2').contains('Delete').should('exist');
       cy.get('@personnelVals2').contains('Edit').should('exist');
 
@@ -411,10 +414,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
         cy.get(`[data-cy='outcome-${index}']`).click().should('have.value', '');
-        //   .blur()
-        //   .should('have.class', 'ds-c-field--error');
-
-        // cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -439,10 +438,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
               .should('have.value', '');
-            //   .blur()
-            //   .should('have.class', 'ds-c-field--error');
-
-            // cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
@@ -502,15 +497,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.wrap(milestones).each((element, index) => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
 
-        cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '')
-          .blur()
-          .should('have.class', 'ds-c-field--error');
-
-        cy.get(`input[name=year]`).click().should('have.value', '')
-          .blur()
-          .should('have.class', 'ds-c-field--error');
-
-        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+        cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -699,11 +686,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       );
 
       activityPage.checkTinyMCE('contractor-description-field-0', '');
-      // cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      // cy.get('[id="contractor-description-field-0"]').focus().blur();
-      // cy.contains(
-      //   'Provide a procurement methodology and description of services.'
-      // ).should('exist');
 
       activityPage.checkDate('Contract start date');
       cy.contains('Contract start date')
@@ -945,8 +927,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       // Create string to check for personnel who is chargeable for the project for certain years.
       let str = '3. Key Personnel name not specifiedRole not specifiedEmail: ';
       str += years
-        .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
-        .join('');
+              .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
+              .join('');
+
+      cy.log(JSON.stringify(years));
 
       cy.get('@personnel')
         .findByRole('heading', {
