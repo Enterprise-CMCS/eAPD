@@ -259,7 +259,18 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       fillOutActivityPage = new FillOutActivityPage();
     });
 
-    it('should handle entering data', () => {
+    it.only('should handle entering data', () => {
+      const keyPersons = [{
+        name: 'Jean Luc Picard',
+        email: 'jpicard@gmail.com',
+        position: 'Captain'
+      },
+      {
+        name: 'William Riker',
+        email: 'riker@gmail.com',
+        position: 'First Mate'
+      }]
+
       cy.log('Key State Personnel');
       cy.goToKeyStatePersonnel();
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
@@ -272,6 +283,12 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .should('exist');
 
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+
+      cy.get('[data-cy="key-person-0__name"]').type(keyPersons[0].name);
+      cy.get('[data-cy="key-person-0__email"]').type(keyPersons[0].email);
+      cy.get('[data-cy="key-person-0__position"]').type(keyPersons[0].position);
+      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+
       cy.findByRole('button', { name: /Save/i }).click();
 
       // Get div for the element containing user data as an alias
@@ -282,16 +299,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .as('primaryContactVals');
       // Check for default values
       cy.get('@primaryContactVals')
-        .findByRole('heading', {
-          name: /Primary Point of Contact name not specified/i
-        })
+        .contains(`${keyPersons[0].name}`)
         .should('exist');
       cy.get('@primaryContactVals')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(2);
           expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
-          expect($lis.eq(1)).to.contain('Role not specified');
+          expect($lis.eq(1)).to.contain(`${keyPersons[0].position}`);
         });
       // Protects against edge case of having '$' in name or role
       cy.get('@primaryContactVals')

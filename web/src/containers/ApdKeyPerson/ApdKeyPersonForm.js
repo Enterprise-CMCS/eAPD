@@ -213,7 +213,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
   const primary = index === 0;
 
   return (
-    <form index={index} onSubmit={onSubmit} aria-label="form">
+    <form index={index} onSubmit={onSubmit} aria-label="form" data-cy={`key-person-${index}__form`}>
       <h4 className="ds-h4">
         {primary
           ? titleCase(t(`${tRoot}.labels.titlePrimary`))
@@ -232,6 +232,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
             {...props}
             id={`apd-state-profile-pocname${index}`}
             label={t(`${tRoot}.labels.name`)}
+            data-cy={`key-person-${index}__name`}
             onChange={e => {
               handleNameChange(e);
               onChange(e);
@@ -249,6 +250,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
             {...props}
             id={`apd-state-profile-pocemail${index}`}
             label={t(`${tRoot}.labels.email`)}
+            data-cy={`key-person-${index}__email`}
             onChange={e => {
               handleEmailChange(e);
               onChange(e);
@@ -266,6 +268,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
             {...props}
             id={`apd-state-profile-pocposition${index}`}
             label={t(`${tRoot}.labels.position`)}
+            data-cy={`key-person-${index}__position`}
             onChange={e => {
               handlePositionChange(e);
               onChange(e);
@@ -305,6 +308,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
                                 {...props}
                                 label="Cost with benefits"
                                 size="medium"
+                                data-cy={`key-person-${index}_${year}__cost`}
                                 onChange={e => {
                                   handleCostChange(year, e);
                                   costOnChange(e);
@@ -333,6 +337,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
                                 size="medium"
                                 min={0}
                                 hint="For example: 0.5 = 0.5 FTE = 50% time"
+                                data-cy={`key-person-${index}_${year}__fte`}
                                 onChange={e => {
                                   handleFteChange(year, e);
                                   fteOnChange(e);
