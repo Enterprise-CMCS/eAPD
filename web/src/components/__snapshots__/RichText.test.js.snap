@@ -12,9 +12,6 @@ exports[`RichText component renders as expected 1`] = `
         "a11y_advanced_options": true,
         "autoresize_bottom_margin": 0,
         "browser_spellcheck": true,
-        "content_css": false,
-        "content_style": "[object Object]
-[object Object]",
         "default_link_target": "_blank",
         "encoding": "xml",
         "file_picker_types": "image",
