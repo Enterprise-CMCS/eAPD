@@ -96,7 +96,7 @@ const AffiliationStatus = ({ state, approvalStatus }) => {
                   data-testid="eAPDlogo"
                 >
                   <img
-                    src="static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
+                    src="/static/img/eAPDLogoSVG_ICO/SVG/eAPDColVarSVG.svg"
                     alt="eAPD Logo"
                   />
                 </div>

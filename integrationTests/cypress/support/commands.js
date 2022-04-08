@@ -71,6 +71,15 @@ Cypress.Commands.add('login', (username, password) => {
   cy.findByRole('button', { name: /Log in/i }).click();
 });
 
+Cypress.Commands.add('logout', () => {
+  cy.get(
+    '[class="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"]'
+  ).click();
+  cy.get('a[href*="/logout"]').click();
+  cy.clearAuthCookies();
+  cy.findByText(/You have securely logged out/).should('be.visible');
+});
+
 Cypress.Commands.add('loginWithEnv', username => {
   cy.login(Cypress.env(username), Cypress.env(`${username}_pw`));
 });

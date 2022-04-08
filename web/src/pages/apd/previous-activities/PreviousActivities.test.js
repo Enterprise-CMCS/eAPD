@@ -11,7 +11,9 @@ import { setPreviousActivitySummary } from '../../../actions/editApd';
 
 describe('previous activities component', () => {
   const props = {
-    previousActivitySummary: 'bob',
+    previousActivities: {
+      previousActivitySummary: 'bob'      
+    },
     setSummary: jest.fn()
   };
 
@@ -33,7 +35,7 @@ describe('previous activities component', () => {
 
   it('maps state to props', () => {
     expect(
-      mapStateToProps({ apd: { data: { previousActivitySummary: 'summary' } } })
+      mapStateToProps({ apd: { data: { previousActivities: { previousActivitySummary: 'summary' } } } })
     ).toEqual({ previousActivitySummary: 'summary' });
   });
 

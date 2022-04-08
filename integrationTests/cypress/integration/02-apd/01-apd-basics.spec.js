@@ -4,6 +4,7 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 
+
 /// <reference types="cypress" />
 
 // Tests performing basic APD tasks
@@ -30,7 +31,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.useStateStaff();
 
     cy.findByRole('button', { name: /Create new/i }).click();
-    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+    cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
     });
@@ -370,6 +371,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`
         );
       });
+
+      cy.log("Done")
 
       cy.get('@personnelVals2').contains('Delete').should('exist');
       cy.get('@personnelVals2').contains('Edit').should('exist');
@@ -882,8 +885,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       // Create string to check for personnel who is chargeable for the project for certain years.
       let str = '3. Key Personnel name not specifiedRole not specifiedEmail: ';
       str += years
-        .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
-        .join('');
+              .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
+              .join('');
+
+      cy.log(JSON.stringify(years));
 
       cy.get('@personnel')
         .findByRole('heading', {
