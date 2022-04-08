@@ -20,10 +20,6 @@ import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
 import 'tinymce/plugins/link';
 
-/* Import content css */
-import contentUiCss from 'tinymce/skins/ui/oxide/content.css';
-import contentCss from 'tinymce/skins/content/default/content.css';
-
 import { uploadFile } from '../actions/editApd';
 import { generateKey } from '../util';
 import '../file-loader';
@@ -211,10 +207,7 @@ class RichText extends Component {
             default_link_target: '_blank',
             toolbar_mode: 'wrap',
             selector: 'textarea',
-            skin: false,
-            content_css: false,
-            content_style:
-              contentUiCss.toString() + '\n' + contentCss.toString()
+            skin: false
           }}
           value={content}
           onEditorChange={this.onEditorChange}
