@@ -89,13 +89,13 @@ const affiliationSchema = {
     role_id,
     status,
     created_at,
-    updated_at,
+    updated_at
   }
 };
 
 const tags = ['Affiliations'];
 
-const getAffiliationsByState = {
+const getAffiliationByState = {
   get: {
     tags,
     description: 'Get a list of all user affiliations for a US State',
@@ -161,7 +161,6 @@ const getAffiliation = {
   }
 };
 
-
 const patchAffiliation = {
   patch: {
     tags,
@@ -191,16 +190,15 @@ const patchAffiliation = {
   }
 };
 
-
 const affiliationRoutes = {
   '/states/{stateId}/affiliations': {
-    ...getAffiliationsByState,
+    ...getAffiliationByState,
     ...postAffiliations
   },
   '/states/{stateId}/affiliations/{id}': {
     ...getAffiliation,
     ...patchAffiliation
-  },
+  }
 };
 
 module.exports = affiliationRoutes;

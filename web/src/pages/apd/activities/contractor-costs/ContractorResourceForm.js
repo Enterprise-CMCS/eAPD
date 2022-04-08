@@ -28,24 +28,16 @@ const ContractorResourceForm = forwardRef(
         case 'setHourly':
           return {
             ...state,
-            hourly: {
-              useHourly: action.value,
-              data: {
-                ...state.hourly.data
-              }
-            }
+            useHourly: action.value
           };
         case 'updateHourlyHours':
           return {
             ...state,
             hourly: {
               ...state.hourly,
-              data: {
-                ...state.hourly.data,
-                [action.year]: {
-                  ...state.hourly.data[action.year],
-                  hours: action.value
-                }
+              [action.year]: {
+                ...state.hourly[action.year],
+                hours: action.value
               }
             }
           };
@@ -54,12 +46,9 @@ const ContractorResourceForm = forwardRef(
             ...state,
             hourly: {
               ...state.hourly,
-              data: {
-                ...state.hourly.data,
-                [action.year]: {
-                  ...state.hourly.data[action.year],
-                  rate: action.value
-                }
+              [action.year]: {
+                ...state.hourly[action.year],
+                rate: action.value
               }
             }
           };
@@ -104,7 +93,7 @@ const ContractorResourceForm = forwardRef(
         dispatch({
           type: 'updateYearCost',
           year,
-          value: value * state.hourly.data[year].rate
+          value: value * state.hourly[year].rate
         });
       };
 
@@ -115,7 +104,7 @@ const ContractorResourceForm = forwardRef(
         dispatch({
           type: 'updateYearCost',
           year,
-          value: state.hourly.data[year].hours * value
+          value: state.hourly[year].hours * value
         });
       };
 
@@ -194,7 +183,7 @@ const ContractorResourceForm = forwardRef(
         <fieldset className="ds-c-fieldset">
           <legend className="ds-c-label">This is an hourly resource</legend>
           <Choice
-            checked={!state.hourly.useHourly}
+            checked={!state.useHourly}
             label="No"
             name={`apd-activity-contractor-hourly-${state.key}-no`}
             onChange={() => dispatch({ type: 'setHourly', value: false })}
@@ -202,7 +191,7 @@ const ContractorResourceForm = forwardRef(
             value="no"
           />
           <Choice
-            checked={state.hourly.useHourly}
+            checked={state.useHourly}
             label="Yes"
             name={`apd-activity-contractor-hourly-${state.key}-yes`}
             onChange={() => dispatch({ type: 'setHourly', value: true })}
@@ -219,7 +208,7 @@ const ContractorResourceForm = forwardRef(
                         name={`contractor-num-hours-ffy-${ffy}`}
                         labelClassName="ds-u-margin-top--1"
                         size="medium"
-                        value={state.hourly.data[ffy].hours}
+                        value={state.hourly[ffy].hours}
                         onChange={getHandlerForYearlyHours(ffy)}
                       />
                       <DollarField
@@ -228,7 +217,7 @@ const ContractorResourceForm = forwardRef(
                         name={`contractor-hourly-rate-ffy-${ffy}`}
                         labelClassName="ds-u-margin-top--1"
                         size="medium"
-                        value={state.hourly.data[ffy].rate}
+                        value={state.hourly[ffy].rate}
                         onChange={getHandlerForYearlyHourlyRate(ffy)}
                       />
                     </div>
@@ -238,7 +227,7 @@ const ContractorResourceForm = forwardRef(
             }
           />
         </fieldset>
-        {state.hourly.useHourly ? (
+        {state.useHourly ? (
           <p className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <Fragment key={ffy}>
@@ -253,7 +242,7 @@ const ContractorResourceForm = forwardRef(
               key={ffy}
               label={`FFY ${ffy} Cost`}
               name={`contractor-cost-ffy-${ffy}`}
-              disabled={state.hourly.useHourly}
+              disabled={state.useHourly}
               size="medium"
               value={state.years[ffy]}
               onChange={getHandlerForYearlyCost(ffy)}
@@ -278,6 +267,7 @@ ContractorResourceForm.propTypes = {
     description: PropTypes.string,
     end: PropTypes.string,
     hourly: PropTypes.object,
+    useHourly: PropTypes.bool,
     key: PropTypes.string,
     name: PropTypes.string,
     start: PropTypes.string,
