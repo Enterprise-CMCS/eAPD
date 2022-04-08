@@ -50,8 +50,8 @@ describe('application-level actions', () => {
       const apd = {
         id: 'apd-id',
         activities: [],
-        federalCitations: { already: 'exist' },
-        keyPersonnel: []
+        assurancesAndCompliances: { already: 'exist' },
+        keyStatePersonnel: {}
       };
 
       fetchMock.onGet('/apds/bloop').reply(200, apd);
@@ -317,7 +317,7 @@ describe('application-level actions', () => {
         activities,
         id: 'apd-id',
         selected: 'apd goes here',
-        federalCitations: { already: 'exists' }
+        assurancesAndCompliances: { already: 'exists' }
       };
       fetchMock.onGet('/apds/apd-id').reply(200, apd);
 
@@ -369,7 +369,7 @@ describe('application-level actions', () => {
         activities,
         id: 'apd-id',
         selected: 'apd goes here',
-        federalCitations: {}
+        assurancesAndCompliances: {}
       };
       fetchMock.onGet('/apds/apd-id').reply(200, apd);
 
@@ -389,7 +389,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
-        { type: EDIT_APD, path: '/federalCitations', value: regulations },
+        { type: EDIT_APD, path: '/assurancesAndCompliances', value: regulations },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
