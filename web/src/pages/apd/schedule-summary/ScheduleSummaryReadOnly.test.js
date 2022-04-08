@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as ScheduleSummary } from './ScheduleSummary';
+import { plain as ScheduleSummary } from './ScheduleSummaryReadOnly';
 
 const activities = [
   {

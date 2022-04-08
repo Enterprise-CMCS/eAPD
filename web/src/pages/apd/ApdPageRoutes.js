@@ -10,13 +10,13 @@ import {
 import ApdHeader from '../../layout/header/ApdHeader';
 import Activities from '../../containers/activity/All';
 import EntryPage from '../../containers/activity/EntryPage';
-import AssurancesAndCompliance from '../../containers/AssurancesAndCompliance';
-import Export from '../../containers/ApdExport';
+import AssurancesAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
+import Export from './export/ApdExport';
 import ApdOverview from './apd-overview/ApdOverview';
-import ExecutiveSummary from '../../containers/ExecutiveSummary';
+import ExecutiveSummary from './executive-summary/ExecutiveSummary';
 import PreviousActivities from './previous-activities/PreviousActivities';
-import ProposedBudget from '../../containers/ProposedBudget';
-import ScheduleSummary from '../../containers/ScheduleSummary';
+import ProposedBudget from './proposed-budget/ProposedBudget';
+import ScheduleSummary from './schedule-summary/ScheduleSummary';
 import KeyStatePersonnel from './key-state-personnel/KeyStatePersonnel';
 
 const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
