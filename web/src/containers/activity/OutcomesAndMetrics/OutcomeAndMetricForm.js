@@ -65,9 +65,6 @@ const OutcomeAndMetricForm = forwardRef(
         }
         case 'updateMetrics': {
           const metricsCopy = [...state.metrics];
-          console.log({ metricsCopy });
-          console.log(action.metricIndex);
-          console.log(action.value);
           metricsCopy[action.metricIndex].metric = action.value;
 
           return {
@@ -144,7 +141,6 @@ const OutcomeAndMetricForm = forwardRef(
           )}
         />
         {fields.map((metric, i) => {
-          console.log({ metric, index });
           return (
             <Review
               key={metric.key}
