@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Fragment, useMemo } from 'react';
-import Dollars from '../../components/Dollars';
-import Review from '../../components/Review';
+import Dollars from '../../../components/Dollars';
+import Review from '../../../components/Review';
 
 const ApdStateKeyPerson = ({
   expand,

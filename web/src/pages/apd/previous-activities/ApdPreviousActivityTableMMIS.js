@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import DollarField from '../components/DollarField';
-import Dollars from '../components/Dollars';
+import DollarField from '../../../components/DollarField';
+import Dollars from '../../../components/Dollars';
 import {
   setPreviousActivityApprovedExpenseforMMIS50FFP,
   setPreviousActivityApprovedExpenseforMMIS75FFP,
@@ -11,9 +11,9 @@ import {
   setPreviousActivityFederalActualExpenseforMMIS50FFP,
   setPreviousActivityFederalActualExpenseforMMIS75FFP,
   setPreviousActivityFederalActualExpenseforMMIS90FFP
-} from '../actions/editApd';
-import { TABLE_HEADERS } from '../constants';
-import { selectPreviousMMISActivities } from '../reducers/apd.selectors';
+} from '../../../actions/editApd';
+import { TABLE_HEADERS } from '../../../constants';
+import { selectPreviousMMISActivities } from '../../../reducers/apd.selectors';
 
 const ApdPreviousActivityTableMMIS = ({
   isViewOnly,

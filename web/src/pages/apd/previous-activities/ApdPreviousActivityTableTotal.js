@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Dollars from '../components/Dollars';
-import { TABLE_HEADERS } from '../constants';
-import { selectPreviousActivityExpensesTotals } from '../reducers/apd.selectors';
+import Dollars from '../../../components/Dollars';
+import { TABLE_HEADERS } from '../../../constants';
+import { selectPreviousActivityExpensesTotals } from '../../../reducers/apd.selectors';
 
 const ApdPreviousActivityTableMMIS = ({ totals }) => {
   const years = Object.keys(totals);

@@ -22,7 +22,9 @@ import { saveContractor as actualSaveContractor } from '../../../actions/editAct
 
 const getCheckedValue = value => {
   if (value !== null) {
-    return value ? 'yes' : 'no';
+    if (value === true) return 'yes';
+    if (value === false) return 'no';
+    return value;
   }
   return null;
 };

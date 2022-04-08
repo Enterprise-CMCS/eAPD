@@ -15,7 +15,8 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
     className="ds-u-margin-top--2"
   >
     <strong>
-      Outcome:
+      2
+      . Outcome:
     </strong>
      
     outcome description
@@ -24,7 +25,7 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
     className="ds-u-margin-top--2"
   >
     <ul
-      className="ds-c-list--bare"
+      className="ds-c-list--bare subform__container"
     >
       <strong>
         Metrics:
