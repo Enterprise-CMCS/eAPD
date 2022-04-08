@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../../../components/DeleteModal';
+
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+
+import apdOverviewSchema from '../../../static/schemas/apdOverview';
 
 import {
   addYear,
@@ -37,6 +42,24 @@ const ApdOverview = ({
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
 
+  const {
+    control,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      programOverview
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(apdOverviewSchema)
+  });
+  
+  useEffect(() => {
+    console.log("errors", errors)
+    console.log("isValid", isValid)
+    console.log("ok", programOverview)
+  }, [isValid, errors])
+  
   const changeName = ({ target: { value } }) => {
     setName(value);
   };
@@ -123,11 +146,19 @@ const ApdOverview = ({
           labelFor="program-introduction-field"
           source="apd.introduction.instruction"
         />
-        <RichText
-          id="program-introduction-field"
-          content={programOverview}
-          onSync={syncRichText(setOverview)}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="programOverview"
+          control={control}
+          render={({ field: { onChange, ...props } }) => (
+            <RichText
+              {...props}
+              id="program-introduction-field"
+              content={programOverview}
+              onSync={syncRichText(setOverview)}
+              editorClassName="rte-textarea-l"
+              error="Error"
+            />
+          )}
         />
       </div>
       <div className="ds-u-margin-bottom--3">
