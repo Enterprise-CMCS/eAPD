@@ -5,7 +5,6 @@ import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
 
-
 /// <reference types="cypress" />
 
 // Tests performing basic APD tasks
@@ -375,7 +374,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         );
       });
 
-      cy.log("Done")
+      cy.log('Done');
 
       cy.get('@personnelVals2').contains('Delete').should('exist');
       cy.get('@personnelVals2').contains('Edit').should('exist');
@@ -798,6 +797,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         start: privateContractor.start,
         end: privateContractor.end,
         totalCosts: privateContractor.totalCosts,
+        hourly: privateContractor.hourly,
         years,
         FFYcosts: privateContractor.FFYcosts
       });
@@ -978,8 +978,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       // Create string to check for personnel who is chargeable for the project for certain years.
       let str = '3. Key Personnel name not specifiedRole not specifiedEmail: ';
       str += years
-              .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
-              .join('');
+        .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
+        .join('');
 
       cy.log(JSON.stringify(years));
 
