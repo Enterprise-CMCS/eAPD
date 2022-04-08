@@ -6,6 +6,7 @@
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
     "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
+    "copy-schemas": "cp -r ../schemas src/static",
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "build": "yarn run copy-schemas && yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
     "lint": "eslint 'src/**/*.js'",
@@ -121,7 +122,7 @@
     "react-countdown": "2.3.2",
     "react-dom": "17.0.2",
     "react-gtm-module": "2.0.11",
-    "react-hook-form": "^7.28.1",
+    "react-hook-form": "^7.27.1",
     "react-redux": "7.2.6",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
