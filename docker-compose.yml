@@ -46,7 +46,7 @@ services:
       - type: bind
         source: ./web
         target: /app
-        consistency: delegated
+        consistency: cached
       - /app/node_modules
 
     ports:
@@ -79,7 +79,7 @@ services:
       - type: bind
         source: ./api
         target: /app
-        consistency: delegated
+        consistency: cached
       - /app/node_modules
     ports:
       - 8081:8000
