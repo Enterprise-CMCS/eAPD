@@ -16,7 +16,7 @@ import ApdOverview from './apd-overview/ApdOverview';
 import ExecutiveSummary from '../../containers/ExecutiveSummary';
 import PreviousActivities from './previous-activities/PreviousActivities';
 import ProposedBudget from '../../containers/ProposedBudget';
-import ScheduleSummary from '../../containers/ScheduleSummary';
+import ScheduleSummary from './schedule-summary/ScheduleSummary';
 import KeyStatePersonnel from './key-state-personnel/KeyStatePersonnel';
 
 const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
