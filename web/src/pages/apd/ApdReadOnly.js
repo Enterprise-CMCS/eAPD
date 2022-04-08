@@ -18,9 +18,9 @@ import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly
 import Activities from '../../containers/viewOnly/activities/All';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
 import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
-import AssuranceAndCompliance from '../../containers/viewOnly/AssurancesAndCompliance';
+import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
 import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
-import ExportInstructions from '../../containers/viewOnly/Export';
+import ExportInstructions from './export/ExportReadOnly';
 import Loading from '../../components/Loading';
 
 const ApdViewOnly = ({
