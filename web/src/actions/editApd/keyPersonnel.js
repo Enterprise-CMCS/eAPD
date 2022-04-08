@@ -11,18 +11,18 @@ export const saveKeyPersonnel = (index, data) => (dispatch, getState) => {
 
   let indexCalculated = index;
   
-  if(previousState.apd.data.keyPersonnel[index] === undefined) {
-    indexCalculated = previousState.apd.data.keyPersonnel.length;
+  if(previousState.apd.data.keyStatePersonnel.keyPersonnel[index] === undefined) {
+    indexCalculated = previousState.apd.data.keyStatePersonnel.keyPersonnel.length;
     dispatch({
       type: ADD_APD_ITEM,
-      path: '/keyPersonnel/-',
+      path: '/keyStatePersonnel/keyPersonnel/-',
       state: getState()
     });
   }
   
   dispatch({
     type: EDIT_APD,
-    path: `/keyPersonnel/${indexCalculated}`,
+    path: `/keyStatePersonnel/keyPersonnel/${indexCalculated}`,
     value: data
   });
   
@@ -37,7 +37,7 @@ export const saveKeyPersonnel = (index, data) => (dispatch, getState) => {
 export const removeKeyPersonnel = index => dispatch => {
   dispatch({
     type: REMOVE_APD_ITEM,
-    path: `/keyPersonnel/${index}`
+    path: `/keyStatePersonnel/keyPersonnel/${index}`
   });
   dispatch(updateBudget());
 };

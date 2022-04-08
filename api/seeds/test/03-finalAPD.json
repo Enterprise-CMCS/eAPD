@@ -1,29 +1,39 @@
 {
   "name": "MN-1936-08-03-HITECH-APD",
-  "activities": [],
-  "federalCitations": {},
-  "incentivePayments": {
-    "ehAmt": {},
-    "ehCt": {},
-    "epAmt": {},
-    "epCt": {}
+  "years": [],
+  "apdOverview": {
+    "programOverview": "",
+    "narrativeHIE": "",
+    "narrativeHIT": "",
+    "narrativeMMIS": ""
   },
-  "keyPersonnel": [],
-  "narrativeHIE": "",
-  "narrativeHIT": "",
-  "narrativeMMIS": "",
-  "previousActivityExpenses": {},
-  "previousActivitySummary": "",
-  "programOverview": "",
-  "stateProfile": {
-    "medicaidDirector": { "name": "", "email": "", "phone": "" },
+  "keyStatePersonnel": {
+    "medicaidDirector": { 
+      "name": "", 
+      "email": "", 
+      "phone": "" 
+    },
     "medicaidOffice": {
       "address1": "",
       "address2": "",
       "city": "",
       "state": "",
       "zip": ""
-    }
+    },
+    "keyPersonnel": []
   },
-  "years": []
+  "previousActivities": {
+    "previousActivitySummary": "",
+    "actualExpenditures": {}
+  },
+  "activities": [],
+  "proposedBudget": {
+    "incentivePayments": {
+      "ehAmt": {},
+      "ehCt": {},
+      "epAmt": {},
+      "epCt": {}
+    }    
+  },
+  "assurancesAndCompliances": {}
 }

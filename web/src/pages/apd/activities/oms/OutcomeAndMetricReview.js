@@ -3,6 +3,7 @@ import React from 'react';
 import Review from '../../../../components/Review';
 
 const OutcomeAndMetricReview = ({
+  index,
   item: { metrics, outcome },
   expand,
   onDeleteClick
@@ -14,11 +15,11 @@ const OutcomeAndMetricReview = ({
     objType="Outcome and Metrics"
   >
     <p className="ds-u-margin-top--2">
-      <strong>Outcome:</strong> {outcome || 'Outcome not specified'}
+      <strong>{index + 1}. Outcome:</strong> {outcome || 'Outcome not specified'}
     </p>
     {metrics.length > 0 ? (
       <p className="ds-u-margin-top--2">
-        <ul className="ds-c-list--bare">
+        <ul className="ds-c-list--bare subform__container">
           <strong>Metrics:</strong>
           {metrics.map(({ key, metric }, index) => (
             <li key={key} className="ds-u-margin-bottom--2">
@@ -32,6 +33,7 @@ const OutcomeAndMetricReview = ({
 );
 
 OutcomeAndMetricReview.propTypes = {
+  index: PropTypes.number.isRequired,
   expand: PropTypes.func.isRequired,
   item: PropTypes.shape({
     metrics: PropTypes.array,
