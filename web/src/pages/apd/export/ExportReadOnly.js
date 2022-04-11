@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from '@cmsgov/design-system';
-import { Envelope, PDFFile } from '../../components/Icons';
-import { printApd, saveApdEvent } from '../../actions/app';
-import { APD_EVENTS } from '../../constants';
+import { Envelope, PDFFile } from '../../../components/Icons';
+import { printApd, saveApdEvent } from '../../../actions/app';
+import { APD_EVENTS } from '../../../constants';
 
 const ExportInstructions = ({ printApd: print, saveApdEvent: log }) => {
   const sendMail = email => {

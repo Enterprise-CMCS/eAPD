@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import Instruction from '../components/Instruction';
+import Instruction from '../../../components/Instruction';
 import SummaryActivityBreakdownTable from './SummaryActivityBreakdown';
-import Dollars from '../components/Dollars';
+import Dollars from '../../../components/Dollars';
 
 const categories = [
   { category: 'statePersonnel', title: 'State Staff Total' },

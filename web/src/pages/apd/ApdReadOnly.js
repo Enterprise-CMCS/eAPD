@@ -17,10 +17,10 @@ import ApdSummary from '../../containers/viewOnly/ApdSummary';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
 import Activities from '../../containers/viewOnly/activities/All';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
-import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
-import AssuranceAndCompliance from '../../containers/viewOnly/AssurancesAndCompliance';
-import ExecutiveSummary from '../../containers/viewOnly/ExecutiveSummary';
-import ExportInstructions from '../../containers/viewOnly/Export';
+import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
+import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
+import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
+import ExportInstructions from './export/ExportReadOnly';
 import Loading from '../../components/Loading';
 
 const ApdViewOnly = ({

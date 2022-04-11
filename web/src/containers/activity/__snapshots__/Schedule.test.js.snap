@@ -15,6 +15,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       label="Start date"
       onBlur={[Function]}
       onChange={[Function]}
+      onComponentBlur={[Function]}
       value="1944-10-02"
     />
     <DateField
@@ -22,6 +23,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       label="End date"
       onBlur={[Function]}
       onChange={[Function]}
+      onComponentBlur={[Function]}
       value="1944-11-08"
     />
   </div>

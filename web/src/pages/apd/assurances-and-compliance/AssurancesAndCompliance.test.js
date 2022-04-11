@@ -17,7 +17,7 @@ import {
   setJustificationForRecordsAccess,
   setJustificationForSecurity,
   setJustificationForSoftwareRights
-} from '../actions/editApd';
+} from '../../../actions/editApd';
 
 describe('assurances and compliance component', () => {
   describe('main component', () => {

@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 
-import { Section, Subsection } from '../components/Section';
-import Waypoint from './ConnectedWaypoint';
-import AlertMissingFFY from '../components/AlertMissingFFY';
-import { selectApdYears } from '../reducers/apd.selectors';
+import { Section, Subsection } from '../../../components/Section';
+import Waypoint from '../../../containers/ConnectedWaypoint';
+import AlertMissingFFY from '../../../components/AlertMissingFFY';
+import { selectApdYears } from '../../../reducers/apd.selectors';
 
 const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
   const paramApdId = useParams().apdId;
