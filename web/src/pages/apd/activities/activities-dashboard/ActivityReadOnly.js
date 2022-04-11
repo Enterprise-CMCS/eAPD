@@ -2,10 +2,10 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Dollars from '../../../components/Dollars';
+import Dollars from '../../../../components/Dollars';
 
-import CostAllocateFFP from '../../activity/CostAllocateFFP';
-import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../util';
+import CostAllocateFFP from '../../../../containers/activity/CostAllocateFFP';
+import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
 
 const isYear = value => !!value.match(/^[0-9]{4}$/);
 

@@ -89,9 +89,9 @@ exports[`the MilestoneForm component renders correctly 1`] = `
       errorMessage=""
       hint=""
       label="Target completion date"
-      onBlur={[Function]}
+      onBlur={null}
       onChange={[Function]}
-      onComponentBlur={[Function]}
+      onComponentBlur={null}
       value="1942-8-16"
     >
       <DateField

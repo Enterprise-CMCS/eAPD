@@ -1,7 +1,7 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import { formatISO } from 'date-fns';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { isNumeric } from '../util/formats';
 
 const dateParts = value => {
@@ -36,6 +36,13 @@ const DateField = ({
     yearInvalid: false
   });
 
+  useEffect(() => {
+    setErrorInfo({
+      ...errorInfo,
+      errorMessage
+    });
+  }, [errorMessage]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const [dateObj] = useState(dateParts(value));
 
   const dateStr = dateObject => {
@@ -57,32 +64,38 @@ const DateField = ({
         dayInvalid: true,
         monthInvalid: true,
         yearInvalid: true,
-        errorMessage: errorMessage || 'Date is required'
+        errorMessage:
+          errorMessage && errorMessage !== ''
+            ? errorMessage
+            : 'Date is required'
       });
-      return;
     } else {
       const errors = {
         dayInvalid: false,
         monthInvalid: false,
         yearInvalid: false,
-        errorMessage: ''
+        errorMessage: errorMessage || ''
       };
 
       // Validation for parsing & the date
       if (!isNumeric(year) || year < 1900 || year > 2100) {
         errors.yearInvalid = true;
-        errors.errorMessage = errorMessage || 'Must have a valid year';
+        errors.errorMessage = errors.errorMessage || 'Must have a valid year';
       }
 
       if (!isNumeric(month) || month < 1 || month > 12) {
         errors.monthInvalid = true;
-        errors.errorMessage = errorMessage || 'Must have a valid month';
+        errors.errorMessage = errors.errorMessage || 'Must have a valid month';
       }
 
       var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
       if (!isNumeric(day) || day < 1 || day > lastDayOfMonth.getDate() + 1) {
         errors.dayInvalid = true;
-        errors.errorMessage = errorMessage || 'Must have a valid day';
+        errors.errorMessage = errors.errorMessage || 'Must have a valid day';
+      }
+
+      if (errorMessage && errorMessage !== '' && errors.errorMessage === '') {
+        errors.errorMessage = errorMessage;
       }
 
       setErrorInfo(errors);
@@ -97,12 +110,18 @@ const DateField = ({
       monthDefaultValue={dateObj.month}
       yearDefaultValue={dateObj.year}
       onBlur={(_, dateObject) => {
-        getErrorMsg(dateObject);
-        if (onBlur) onBlur();
+        if (onBlur) {
+          console.log('onBlur');
+          getErrorMsg(dateObject);
+          onBlur();
+        }
       }}
       onComponentBlur={(_, dateObject) => {
-        getErrorMsg(dateObject);
-        if (onComponentBlur) onComponentBlur();
+        if (onComponentBlur) {
+          console.log('onComponentBlur');
+          getErrorMsg(dateObject);
+          onComponentBlur();
+        }
       }}
       onChange={(_, dateObject) => {
         onChange(_, dateStr(dateObject));
@@ -121,8 +140,8 @@ DateField.propTypes = {
 };
 
 DateField.defaultProps = {
-  onBlur: () => {},
-  onComponentBlur: () => {},
+  onBlur: null,
+  onComponentBlur: null,
   value: null,
   errorMessage: ''
 };
