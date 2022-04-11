@@ -1,9 +1,9 @@
 import React from 'react';
 
-import SummaryBudgetByActivity from '../SummaryBudgetByActivity';
-import BudgetSummary from '../BudgetSummary';
-import IncentivePayments from '../IncentivePayments';
-import QuarterlyBudgetSummary from '../QuarterlyBudgetSummary';
+import SummaryBudgetByActivity from './SummaryBudgetByActivity';
+import BudgetSummary from './BudgetSummary';
+import IncentivePayments from './IncentivePayments';
+import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
 
 const ProposedBudget = () => (
   <div>

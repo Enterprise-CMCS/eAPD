@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import {
   selectActivityCostSummary,
   selectActivityByIndex
-} from '../reducers/activities.selectors';
-import CostAllocationRows from './activity/CostAllocationRows';
+} from '../../../reducers/activities.selectors';
+import CostAllocationRows from '../../../containers/activity/CostAllocationRows';
 
 const SummaryActivityBreakdownTable = ({
   ffy,

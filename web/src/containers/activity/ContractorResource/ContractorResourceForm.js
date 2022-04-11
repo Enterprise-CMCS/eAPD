@@ -54,6 +54,7 @@ const ContractorResourceForm = forwardRef(
     });
 
     useEffect(() => {
+      console.log({ isValid });
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 

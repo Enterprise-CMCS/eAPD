@@ -12,14 +12,14 @@ import {
   setJustificationForRecordsAccess,
   setJustificationForSecurity,
   setJustificationForSoftwareRights
-} from '../actions/editApd';
-import Choice from '../components/Choice';
-import { Section, Subsection } from '../components/Section';
-import TextArea from '../components/TextArea';
-import regLinks from '../data/assurancesAndCompliance.yaml';
-import { t } from '../i18n';
-import { selectFederalCitations } from '../reducers/apd.selectors';
-import AlertMissingFFY from '../components/AlertMissingFFY';
+} from '../../../actions/editApd';
+import Choice from '../../../components/Choice';
+import { Section, Subsection } from '../../../components/Section';
+import TextArea from '../../../components/TextArea';
+import regLinks from '../../../data/assurancesAndCompliance.yaml';
+import { t } from '../../../i18n';
+import { selectFederalCitations } from '../../../reducers/apd.selectors';
+import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const namify = (name, title) =>
   `explanation-${name}-${title}`.replace(/\s/g, '_');
@@ -69,22 +69,22 @@ const AssurancesAndCompliance = ({
     }
   };
 
-  const handleExplanationChange = (section, index) => ({
-    target: { value }
-  }) => {
-    switch (section) {
-      case 'procurement':
-        return justificationForProcurement(index, value);
-      case 'recordsAccess':
-        return justificationForRecordsAccess(index, value);
-      case 'security':
-        return justificationForSecurity(index, value);
-      case 'softwareRights':
-        return justificationForSoftwareRights(index, value);
-      default:
-        return null;
-    }
-  };
+  const handleExplanationChange =
+    (section, index) =>
+    ({ target: { value } }) => {
+      switch (section) {
+        case 'procurement':
+          return justificationForProcurement(index, value);
+        case 'recordsAccess':
+          return justificationForRecordsAccess(index, value);
+        case 'security':
+          return justificationForSecurity(index, value);
+        case 'softwareRights':
+          return justificationForSoftwareRights(index, value);
+        default:
+          return null;
+      }
+    };
 
   return (
     <React.Fragment>

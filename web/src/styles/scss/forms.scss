@@ -66,6 +66,12 @@ div.form--with-reviews {
 
 .form-and-review-list--item__expanded {
   border-bottom: 2px solid $border-color;
+  padding-bottom: $spacer-1;
+  padding-top: $spacer-1;
+}
+
+.form-and-review-list--item__collapsed:not(:last-of-type) {
+  border-bottom: 2px solid $border-color;
   padding-bottom: $spacer-3;
   padding-top: $spacer-2;
 }
