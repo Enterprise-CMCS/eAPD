@@ -26,7 +26,9 @@ describe('the ApdKeyPersonForm component', () => {
 
     savePerson: jest.fn(),
 
-    years: ['1992', '1993']
+    years: ['1992', '1993'],
+
+    setFormValid: jest.fn()
   };
 
   const component = mount(<KeyPersonForm {...props} />);
