@@ -783,7 +783,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalShareAmount: 8,
                 stateSharePercentage: 0.25,
                 stateShareAmount: 2,
-                totalComputableMedicaidCost: 10
+                totalComputableMedicaidCost: 50010
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
@@ -793,7 +793,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalShareAmount: 5,
                 stateSharePercentage: 0.5,
                 stateShareAmount: 5,
-                totalComputableMedicaidCost: 10
+                totalComputableMedicaidCost: 50010
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
@@ -803,7 +803,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalShareAmount: 9,
                 stateSharePercentage: 0.1,
                 stateShareAmount: 1,
-                totalComputableMedicaidCost: 10
+                totalComputableMedicaidCost: 50010
               });
             });
         });
@@ -817,13 +817,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.contains('State Staff')
                 .parent()
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should('have.text', `${keyPersons[0].name} (APD Key Personnel)$0`)
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should('have.text', `${keyPersons[1].name} (APD Key Personnel)$0`)
                 .next()
                 .should(
                   'have.text',
-                  'Not specified (APD Key Personnel)$0×0 FTE=$0'
+                  `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
                 )
                 .next()
                 .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
@@ -872,15 +872,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .as('stateStaff');
           cy.get('@stateStaff')
             .eq(0)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', `${keyPersons[0].name} (APD Key Personnel)$0`);
           cy.get('@stateStaff')
             .eq(1)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', `${keyPersons[1].name} (APD Key Personnel)$0`);
           cy.get('@stateStaff')
             .eq(2)
             .should(
               'have.text',
-              'Not specified (APD Key Personnel)$0×0 FTE=$0'
+              `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
             );
           cy.get('@stateStaff')
             .eq(3)
@@ -923,25 +923,25 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .first()
         .should(
           'have.text',
-          '1. Primary Point of Contact name not specified' +
+          `1. ${keyPersons[0].name}` +
             'Primary APD Point of Contact' +
-            'Role not specified' +
-            'Email: ' +
+            `${keyPersons[0].position}` +
+            `Email: ${keyPersons[0].email}` +
             'Total cost: $0'
         )
         .next()
         .should(
           'have.text',
-          '2. Key Personnel name not specified' +
-            'Role not specified' +
-            'Email: ' +
+          `2. ${keyPersons[1].name}` +
+          `${keyPersons[1].position}` +
+          `Email: ${keyPersons[1].email}` +
             'Total cost: $0'
         );
 
       // Create string to check for personnel who is chargeable for the project for certain years.
-      let str = '3. Key Personnel name not specifiedRole not specifiedEmail: ';
+      let str = `3. ${keyPersons[2].name}${keyPersons[2].position}Email: ${keyPersons[2].email}`;
       str += years
-        .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
+        .map(year => `FFY ${year} Cost: $100,000 | FTE: 0.5 | Total: $50,000`)
         .join('');
 
       cy.log(JSON.stringify(years));
@@ -1027,13 +1027,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.contains('State Staff')
                 .parent()
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should('have.text', `${keyPersons[0].name} (APD Key Personnel)$0`)
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should('have.text', `${keyPersons[1].name} (APD Key Personnel)$0`)
                 .next()
                 .should(
                   'have.text',
-                  'Not specified (APD Key Personnel)$0×0 FTE=$0'
+                  `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
                 )
                 .next()
                 .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
@@ -1075,15 +1075,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .as('stateStaff');
           cy.get('@stateStaff')
             .eq(0)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', `${keyPersons[0].name} (APD Key Personnel)$0`);
           cy.get('@stateStaff')
             .eq(1)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', `${keyPersons[1].name} (APD Key Personnel)$0`);
           cy.get('@stateStaff')
             .eq(2)
             .should(
               'have.text',
-              'Not specified (APD Key Personnel)$0×0 FTE=$0'
+              `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
             );
           cy.get('@stateStaff')
             .eq(3)
