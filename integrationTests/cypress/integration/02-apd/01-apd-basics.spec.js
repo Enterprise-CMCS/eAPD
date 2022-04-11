@@ -377,8 +377,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('input[type="radio"][value="yes"]').check({ force: true });
       cy.get('[data-cy="key-person-2-0__cost"]').type('100000');
       cy.get('[data-cy="key-person-2-0__fte"]').type('0.5');
-      cy.get('[data-cy="key-person-2-1__cost"]').type('200000');
-      cy.get('[data-cy="key-person-2-1__fte"]').type('0.6').blur();
+      cy.get('[data-cy="key-person-2-1__cost"]').type('100000');
+      cy.get('[data-cy="key-person-2-1__fte"]').type('0.5').blur();
 
       cy.findByRole('button', { name: /Save/i }).click();
 
@@ -402,7 +402,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       years.forEach(year => {
         cy.get('@personnelVals2').should(
           'contain',
-          `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`
+          `FFY ${year} Cost: $100,000 | FTE: 0.5 | Total: $50,000`
         );
       });
 
