@@ -6,15 +6,15 @@ import {
   useRouteMatch as actualUseRouteMatch
 } from 'react-router-dom';
 
-import ContractorResources from './ContractorResources';
-import CostAllocation from './CostAllocation';
-import FFP from './CostAllocateFFP';
-import Costs from './Costs';
-import Milestones from './Milestones';
-import Overview from './Overview';
-import Outcomes from './Outcomes';
-import StandardsAndConditions from './StandardsAndConditions';
-import { Section } from '../../components/Section';
+import ContractorResources from '../../../containers/activity/ContractorResources';
+import CostAllocation from '../../../containers/activity/CostAllocation';
+import FFP from '../../../containers/activity/CostAllocateFFP';
+import Costs from '../../../containers/activity/Costs';
+import Milestones from '../../../containers/activity/Milestones';
+import Overview from '../../../containers/activity/Overview';
+import Outcomes from '../../../containers/activity/Outcomes';
+import StandardsAndConditions from '../../../containers/activity/StandardsAndConditions';
+import { Section } from '../../../components/Section';
 
 const ActivityRoutes = ({ activityIndex, useRouteMatch }) => {
   const { path } = useRouteMatch();
