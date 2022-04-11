@@ -14,12 +14,12 @@ import { connect } from 'react-redux';
 import { titleCase } from 'title-case';
 import { t } from '../../../i18n';
 
-import DollarField from '../../components/DollarField';
-import Dollars from '../../components/Dollars';
-import NumberField from '../../components/NumberField';
+import DollarField from '../../../components/DollarField';
+import Dollars from '../../../components/Dollars';
+import NumberField from '../../../components/NumberField';
 
 import Joi from 'joi';
-import { saveKeyPersonnel } from '../../actions/editApd';
+import { saveKeyPersonnel } from '../../../actions/editApd';
 
 const getCheckedValue = value => {
   if (value !== null) {
@@ -100,21 +100,8 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
   });
 
   useEffect(() => {
-    console.log('isValid changed');
-    console.log({ isValid });
     setFormValid(isValid);
   }, [isValid]);
-
-  useEffect(() => {
-    console.log('errors changed');
-    console.log({ errors });
-  }, [errors]);
-
-  useEffect(() => {
-    console.log('isValidating changed');
-    const { error, value } = keyPersonSchema.validate(getValues());
-    console.log({ value, errors, isValidating });
-  }, [isValidating, errors]);
 
   const initialState = item;
 
@@ -212,7 +199,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
   const primary = index === 0;
 
   return (
-    <form index={index} onSubmit={onSubmit} aria-label="form" data-cy={`key-person-${index}__form`}>
+    <form index={index} onSubmit={onSubmit} aria-label="form">
       <h4 className="ds-h4">
         {primary
           ? titleCase(t(`${tRoot}.labels.titlePrimary`))
@@ -294,7 +281,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
                 checked: value === "yes",
                 checkedChildren: (
                   <div>
-                    {years.map(year => (
+                    {years.map((year, i) => (
                       <Fragment key={year}>
                         <h5 className="ds-h5">FFY {year} Cost</h5>
                         <div className="ds-c-choice__checkedChild ds-u-padding-y--0">
@@ -307,7 +294,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
                                 {...props}
                                 label="Cost with benefits"
                                 size="medium"
-                                data-cy={`key-person-${index}_${year}__cost`}
+                                data-cy={`key-person-${index}-${i}__cost`}
                                 onChange={e => {
                                   handleCostChange(year, e);
                                   costOnChange(e);
@@ -336,7 +323,7 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
                                 size="medium"
                                 min={0}
                                 hint="For example: 0.5 = 0.5 FTE = 50% time"
-                                data-cy={`key-person-${index}_${year}__fte`}
+                                data-cy={`key-person-${index}-${i}__fte`}
                                 onChange={e => {
                                   handleFteChange(year, e);
                                   fteOnChange(e);

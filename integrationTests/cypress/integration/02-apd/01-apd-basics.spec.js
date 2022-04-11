@@ -259,7 +259,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       fillOutActivityPage = new FillOutActivityPage();
     });
 
-    it.only('should handle entering data', () => {
+    it('should handle entering data', () => {
       const keyPersons = [{
         name: 'Jean Luc Picard',
         email: 'jpicard@gmail.com',
@@ -268,7 +268,12 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       {
         name: 'William Riker',
         email: 'riker@gmail.com',
-        position: 'First Mate'
+        position: 'First Officer'
+      },
+      {
+        name: 'Data Soong',
+        email: 'data@gmail.com',
+        position: 'Second Officer'
       }]
 
       cy.log('Key State Personnel');
@@ -299,14 +304,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .as('primaryContactVals');
       // Check for default values
       cy.get('@primaryContactVals')
-        .contains(`${keyPersons[0].name}`)
+        .contains(keyPersons[0].name)
         .should('exist');
       cy.get('@primaryContactVals')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(2);
           expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
-          expect($lis.eq(1)).to.contain(`${keyPersons[0].position}`);
+          expect($lis.eq(1)).to.contain(keyPersons[0].position);
         });
       // Protects against edge case of having '$' in name or role
       cy.get('@primaryContactVals')
@@ -318,6 +323,12 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@primaryContactVals').contains('Edit').should('exist');
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+
+      cy.get('[data-cy="key-person-1__name"]').type(keyPersons[1].name);
+      cy.get('[data-cy="key-person-1__email"]').type(keyPersons[1].email);
+      cy.get('[data-cy="key-person-1__position"]').type(keyPersons[1].position);
+      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+
       cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
@@ -327,13 +338,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .parent()
         .as('personnelVals1');
       cy.get('@personnelVals1')
-        .findByRole('heading', { name: /Key Personnel name not specified/i })
+        .contains(keyPersons[1].name)
         .should('exist');
       cy.get('@personnelVals1')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(1);
-          expect($lis.eq(0)).to.contain('Role not specified');
+          expect($lis.eq(0)).to.contain(keyPersons[1].position);
         });
       cy.get('@personnelVals1')
         .contains('Total cost:')
@@ -348,21 +359,27 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .eq(1)
         .click();
 
-      cy.get('input[name="apd-state-profile-pocname1"]').type('Test cancel');
+      cy.get('[data-cy="key-person-1__name"]').type('Test cancel');
 
       cy.get('.form-and-review-list')
         .findByRole('button', { name: /Cancel/i })
         .click();
 
       cy.get('.ds-c-review__heading')
-        .contains('2. Key Personnel name not specified')
+        .contains(keyPersons[1].name)
         .should('exist');
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+      cy.get('[data-cy="key-person-2__name"]').type(keyPersons[2].name);
+      cy.get('[data-cy="key-person-2__email"]').type(keyPersons[2].email);
+      cy.get('[data-cy="key-person-2__position"]').type(keyPersons[2].position);
       // Have to force check; cypress does not think radio buttons are visible
-      cy.get('input[type="radio"][value="yes"]')
-        .scrollIntoView()
-        .check({ force: true });
+      cy.get('input[type="radio"][value="yes"]').check({ force: true });
+      cy.get('[data-cy="key-person-2-0__cost"]').type('100000');
+      cy.get('[data-cy="key-person-2-0__fte"]').type('0.5');
+      cy.get('[data-cy="key-person-2-1__cost"]').type('200000');
+      cy.get('[data-cy="key-person-2-1__fte"]').type('0.6').blur();
+
       cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
@@ -372,13 +389,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .parent()
         .as('personnelVals2');
       cy.get('@personnelVals2')
-        .findByRole('heading', { name: /Key Personnel name not specified/i })
+        .contains(keyPersons[2].name)
         .should('exist');
       cy.get('@personnelVals2')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(1);
-          expect($lis.eq(0)).to.contain('Role not specified');
+          expect($lis.eq(0)).to.contain([keyPersons.position]);
         });
 
       // Check that FFY, FTE, and Total cost for each applicable year is 0.
