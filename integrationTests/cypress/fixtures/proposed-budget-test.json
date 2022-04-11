@@ -181,7 +181,7 @@
   "populatedCombinedActivityCost": [
     {
       "programTypes": {
-        "HIT Total": ["$363,000"],
+        "HIT Total": ["$413,000"],
         "HIE Total": ["$270,512"],
         "MMIS Total": ["$243,662"]
       },
@@ -263,7 +263,7 @@
           "State Staff": ["$74,721", "$224,163", "$298,883"],  
           "Other State Expenses": ["$8,631", "$25,893", "$34,525"],
           "Private Contractor": ["$7,398", "$22,194", "$29,592"],
-          "Subtotal": ["$90,750", "$272,250", "$363,000"]  
+          "Subtotal": ["$90,750", "$272,250", "$413,000"]  
         },
         "HIE": {
           "State Staff": ["$94,853", "$94,853", "$189,707"],  
