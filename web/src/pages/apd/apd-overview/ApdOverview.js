@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../../../components/DeleteModal';
@@ -44,9 +44,8 @@ const ApdOverview = ({
 
   const {
     control,
-    formState: { errors, isValid },
-    setValue,
-    getValue
+    formState: { errors },
+    setValue
   } = useForm({
     defaultValues: {
       programOverview
@@ -55,13 +54,7 @@ const ApdOverview = ({
     reValidateMode: 'onBlur',
     resolver: joiResolver(apdOverviewSchema)
   });
-  
-  useEffect(() => {
-    console.log("errors", errors)
-    console.log("isValid", isValid)
-    console.log("ok", programOverview)
-  }, [isValid, errors])
-  
+    
   const changeName = ({ target: { value } }) => {
     setName(value);
   };

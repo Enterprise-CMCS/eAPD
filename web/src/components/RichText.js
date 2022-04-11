@@ -232,14 +232,16 @@ RichText.propTypes = {
   id: PropTypes.string,
   onSync: PropTypes.func,
   onBlur: PropTypes.func,
-  uploadFile: PropTypes.func.isRequired
+  uploadFile: PropTypes.func.isRequired,
+  error: PropTypes.string
 };
 
 RichText.defaultProps = {
   content: '',
   id: '',
   onSync: () => {},
-  onBlur: () => {}
+  onBlur: () => {},
+  error: ''
 };
 
 const mapDispatchToProps = { uploadFile };
