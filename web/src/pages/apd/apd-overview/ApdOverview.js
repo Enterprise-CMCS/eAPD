@@ -45,6 +45,8 @@ const ApdOverview = ({
   const {
     control,
     formState: { errors, isValid },
+    setValue,
+    getValue
   } = useForm({
     defaultValues: {
       programOverview
@@ -98,6 +100,11 @@ const ApdOverview = ({
   const syncRichText = action => html => {
     action(html);
   };
+  
+  const handleProgramOverview = html => {
+    setOverview(html);
+    setValue('programOverview', html);
+  };
 
   const yearChoices = yearOptions.map(year => ({
     defaultChecked: years.includes(year),
@@ -149,14 +156,14 @@ const ApdOverview = ({
         <Controller
           name="programOverview"
           control={control}
-          render={({ field: { onChange, ...props } }) => (
+          render={({ field: { ...props } }) => (
             <RichText
               {...props}
               id="program-introduction-field"
               content={programOverview}
-              onSync={syncRichText(setOverview)}
+              onSync={handleProgramOverview}
               editorClassName="rte-textarea-l"
-              error="Error"
+              error={errors?.programOverview?.message}
             />
           )}
         />
