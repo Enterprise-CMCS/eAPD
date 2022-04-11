@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import React, { 
   forwardRef,
   Fragment,
-  useEffect, 
-  useMemo,
+  useEffect,
   useReducer
 } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -77,13 +76,12 @@ const keyPersonSchema = Joi.object({
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
-const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, costLabel }, ref) => {
+const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid }, ref) => {
   PersonForm.displayName = 'PersonForm';
   const {
     handleSubmit,
     control,
-    formState: { errors, isValid, isValidating },
-    getValues,
+    formState: { errors, isValid },
     resetField: resetFieldErrors
   } = useForm({
     defaultValues: {
@@ -390,7 +388,8 @@ PersonForm.propTypes = {
     position: PropTypes.string.isRequired
   }).isRequired,
   years: PropTypes.array.isRequired,
-  savePerson: PropTypes.func.isRequired
+  savePerson: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
