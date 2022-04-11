@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import Activity from './Activity';
+import Activity from './ActivityReadOnly';
 
 const activity = {
   alternatives: '<p>This is a list of alternatives</p>\n',
