@@ -162,10 +162,11 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid, c
   };
 
   const handleHasCostsChange = e => {
+    let value = e.target.value === "yes" ? true : false;
     dispatch({
       type: 'updateField',
       field: 'hasCosts',
-      payload: e.target.value
+      payload: value
     });
   };
 
