@@ -53,7 +53,7 @@ const config = {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: [path.resolve(__dirname, '../node_modules')]
+                includePaths: ['node_modules']
               }
             }
           }
