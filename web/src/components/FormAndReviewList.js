@@ -1,5 +1,5 @@
 import { Alert, Button } from '@cmsgov/design-system';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const FormAndReviewItem = ({
@@ -9,6 +9,7 @@ const FormAndReviewItem = ({
   initialExpanded,
   item,
   onCancelClick,
+  setShowAddButton,
   ...rest
 }) => {
   const container = useRef(null);
@@ -29,6 +30,7 @@ const FormAndReviewItem = ({
   const handleCancel = () => {
     onCancelClick();
     collapse();
+    setShowAddButton(true);
   }
   
   if (collapsed) {
@@ -50,6 +52,7 @@ const FormAndReviewItem = ({
         variation="primary"
         onClick={() => {
           collapse();
+          setShowAddButton(true);
           formRef.current.click();
           }
         }
@@ -93,6 +96,7 @@ const FormAndReviewList = ({
 }) => {
 
   const [hasAdded, setHasAdded] = useState(false);
+  const [showAddButton, setShowAdd] = useState(true);
   
   const combinedClassName = useMemo(
     () => ['form-and-review-list', className].join(' '),
@@ -103,8 +107,15 @@ const FormAndReviewList = ({
 
   const addClick = () => {
     setHasAdded(true);
+    setShowAdd(false);
     onAddClick();
   };
+  
+  useEffect(() => {
+    console.log("list", list);
+  }, [list])
+  
+  const setShowAddButton = state => setShowAdd(state);
 
   return (
     <div className={combinedClassName}>
@@ -126,6 +137,7 @@ const FormAndReviewList = ({
             expandedComponent={expanded}
             index={index}
             initialExpanded={hasAdded && index === list.length - 1}
+            setShowAddButton={setShowAddButton}
             item={item}
             onDeleteClick={
               list.length > 1 || allowDeleteAll
@@ -137,7 +149,7 @@ const FormAndReviewList = ({
           />
         ))
       )}
-      {onAddClick && (
+      {onAddClick && showAddButton && (
         <Button className="visibility--screen" onClick={addClick}>
           {addButtonText || 'Add another'}
         </Button>
