@@ -1,7 +1,7 @@
 {
   "dryRunTimeoutMinutes": 30,
   "timeoutMS": 500000,
-  "mutate": ["src/components/DateField.js"],
+  "mutate": ["src/pages/apd/executive-summary/ExecutiveSummary.js"],
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "testRunner": "jest",
   "reporters": [

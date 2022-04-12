@@ -144,7 +144,7 @@ exports[`executive summary component renders correctly 1`] = `
             Activity 
             2
             : 
-            activity 2
+            Untitled
           </React.Fragment>
         }
         headingLevel="4"
