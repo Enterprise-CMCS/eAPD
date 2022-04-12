@@ -1,351 +1,112 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DateField wrapper component handles invalid dates day and year are not set 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={1}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={3}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={2001}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates day is a leap day but not a leap year 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={1}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={3}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={2019}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates day is invalid for month and year 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={NaN}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={NaN}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={NaN}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates day is not set 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={1}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={3}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={2000}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates empty date 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue=""
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue=""
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue=""
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates month and day are not set 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={1}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={1}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={2000}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates month and year are not set 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={1}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={3}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={2001}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates month is not set 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={NaN}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={NaN}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={NaN}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates month is out of range 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={NaN}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={NaN}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={NaN}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates year is 3 digits 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={3}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={3}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={200}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates year is 5 digits 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={3}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={3}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={20000}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component handles invalid dates year is not set 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={3}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={3}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={2001}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
 exports[`DateField wrapper component passes other props along to design system component 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={17}
-  dayInvalid={false}
-  dayLabel="THE DAY"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint=""
-  label="Date"
-  monthDefaultValue={9}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={1944}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
-`;
-
-exports[`DateField wrapper component renders properly with defaults 1`] = `
-<DateField
-  dateFormatter={[Function]}
-  dayDefaultValue={6}
-  dayInvalid={false}
-  dayLabel="Day"
-  dayName="day"
-  errorMessage=""
-  errorPlacement="bottom"
-  hint="For example: 4 / 28 / 1986"
-  label="Date"
-  monthDefaultValue={6}
-  monthInvalid={false}
-  monthLabel="Month"
-  monthName="month"
-  onBlur={[Function]}
-  onChange={[Function]}
-  onComponentBlur={[Function]}
-  yearDefaultValue={1944}
-  yearInvalid={false}
-  yearLabel="Year"
-  yearName="year"
-/>
+<div>
+  <fieldset
+    class="ds-c-fieldset"
+  >
+    <legend
+      class="ds-c-label"
+      id="field_53-label"
+    >
+      <span
+        class=""
+      >
+        Date
+      </span>
+    </legend>
+    <div
+      class="ds-c-datefield__container ds-l-form-row"
+    >
+      <div
+        class="ds-u-clearfix ds-l-col--auto"
+      >
+        <label
+          class="ds-c-label ds-c-datefield__label"
+          for="field_54"
+          id="field_54-label"
+        >
+          <span
+            class=""
+          >
+            Month
+          </span>
+        </label>
+        <input
+          aria-describedby="field_53-label"
+          aria-invalid="false"
+          class="ds-c-field ds-c-field--month"
+          id="field_54"
+          inputmode="numeric"
+          name="month"
+          pattern="[0-9]*"
+          type="text"
+          value="9"
+        />
+      </div>
+      <span
+        class="ds-c-datefield__separator"
+      >
+        /
+      </span>
+      <div
+        class="ds-u-clearfix ds-l-col--auto"
+      >
+        <label
+          class="ds-c-label ds-c-datefield__label"
+          for="field_55"
+          id="field_55-label"
+        >
+          <span
+            class=""
+          >
+            THE DAY
+          </span>
+        </label>
+        <input
+          aria-describedby="field_53-label"
+          aria-invalid="false"
+          class="ds-c-field ds-c-field--day"
+          id="field_55"
+          inputmode="numeric"
+          name="day"
+          pattern="[0-9]*"
+          type="text"
+          value="17"
+        />
+      </div>
+      <span
+        class="ds-c-datefield__separator"
+      >
+        /
+      </span>
+      <div
+        class="ds-u-clearfix ds-l-col--auto"
+      >
+        <label
+          class="ds-c-label ds-c-datefield__label"
+          for="field_56"
+          id="field_56-label"
+        >
+          <span
+            class=""
+          >
+            Year
+          </span>
+        </label>
+        <input
+          aria-describedby="field_53-label"
+          aria-invalid="false"
+          class="ds-c-field ds-c-field--year"
+          id="field_56"
+          inputmode="numeric"
+          name="year"
+          pattern="[0-9]*"
+          type="text"
+          value="1944"
+        />
+      </div>
+    </div>
+  </fieldset>
+</div>
 `;

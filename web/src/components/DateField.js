@@ -1,25 +1,8 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
 import { formatISO } from 'date-fns';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { isNumeric } from '../util/formats';
-
-const dateParts = value => {
-  if (!value || value === '') {
-    return {
-      day: '',
-      month: '',
-      year: ''
-    };
-  } else {
-    const newDate = new Date(value);
-    return {
-      day: newDate.getUTCDate(),
-      month: newDate.getUTCMonth() + 1,
-      year: newDate.getUTCFullYear()
-    };
-  }
-};
 
 const DateField = ({
   value,
@@ -43,7 +26,17 @@ const DateField = ({
     });
   }, [errorMessage]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const [dateObj] = useState(dateParts(value));
+  const dateParts = useMemo(() => {
+    if (!value) {
+      return {
+        day: '',
+        month: '',
+        year: ''
+      };
+    }
+    const [year, month, day] = value.trim().slice(0, 10).split('-');
+    return { day: +day || '', month: +month || '', year: +year || '' };
+  }, [value]);
 
   const dateStr = dateObject => {
     const year = dateObject.year;
@@ -95,7 +88,7 @@ const DateField = ({
       }
 
       if (errorMessage && errorMessage !== '' && errors.errorMessage === '') {
-        errors.errorMessage = errorMessage;
+        errors.errorMessage = errorMessage || 'Date is required';
       }
 
       setErrorInfo(errors);
@@ -106,20 +99,18 @@ const DateField = ({
     <DSDateField
       {...rest}
       {...errorInfo}
-      dayDefaultValue={dateObj.day}
-      monthDefaultValue={dateObj.month}
-      yearDefaultValue={dateObj.year}
+      dayDefaultValue={dateParts.day}
+      monthDefaultValue={dateParts.month}
+      yearDefaultValue={dateParts.year}
       onBlur={(_, dateObject) => {
+        getErrorMsg(dateObject);
         if (onBlur) {
-          console.log('onBlur');
-          getErrorMsg(dateObject);
           onBlur();
         }
       }}
       onComponentBlur={(_, dateObject) => {
+        getErrorMsg(dateObject);
         if (onComponentBlur) {
-          console.log('onComponentBlur');
-          getErrorMsg(dateObject);
           onComponentBlur();
         }
       }}
