@@ -15,7 +15,7 @@ import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from '../../containers/viewOnly/ApdSummary';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
-import Activities from '../../containers/viewOnly/activities/All';
+import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
 import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
 import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
