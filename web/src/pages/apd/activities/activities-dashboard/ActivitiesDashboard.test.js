@@ -1,13 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { addActivity } from '../../actions/editActivity';
+import { addActivity } from '../../../../actions/editActivity';
 
 import {
   plain as Activities,
   mapStateToProps,
   mapDispatchToProps
-} from './All';
+} from './ActivitiesDashboard';
 
 const initialProps = {
   addActivity: () => {},

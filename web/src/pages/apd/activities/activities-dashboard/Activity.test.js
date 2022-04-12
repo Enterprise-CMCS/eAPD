@@ -1,13 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { removeActivity } from '../../actions/editActivity';
+import { removeActivity } from '../../../../actions/editActivity';
 
 import {
   plain as EntryDetails,
   mapStateToProps,
   mapDispatchToProps
-} from './EntryDetails';
+} from './Activity';
 
 const mockPush = jest.fn();
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { renderWithConnection, within } from 'apd-testing-library';
-import Activities from './All';
-import apd, { activities } from '../../../fixtures/mo-hitech-apd';
-import budget from '../../../fixtures/mo-hitech-budget';
+import Activities from './ActivitiesDashboardReadOnly';
+import apd, { activities } from '../../../../fixtures/mo-hitech-apd';
+import budget from '../../../../fixtures/mo-hitech-budget';
 
 let props;
 let renderUtils;
@@ -28,7 +28,9 @@ describe('viewOnly <Activities />', () => {
     activities.forEach((activity, index) => {
       expect(
         getByTextWithin(
-          `${index + 1}. ${activity.name || "Untitled"} | ${activity.fundingSource}`
+          `${index + 1}. ${activity.name || 'Untitled'} | ${
+            activity.fundingSource
+          }`
         )
       ).toBeTruthy();
     });
