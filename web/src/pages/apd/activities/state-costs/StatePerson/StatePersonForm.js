@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import React, { useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
-import TextArea from '../../../../components/TextArea';
-import PersonCostForm from '../../../../components/PersonCostForm';
+import TextArea from '../../../../../components/TextArea';
+import PersonCostForm from '../../../../../components/PersonCostForm';
 
-import { savePersonnel as actualSavePersonnel } from '../../../../actions/editActivity';
+import { savePersonnel as actualSavePersonnel } from '../../../../../actions/editActivity';
 
 const StatePersonForm = forwardRef(
   ({ activityIndex, item, index, savePersonnel }, ref) => {

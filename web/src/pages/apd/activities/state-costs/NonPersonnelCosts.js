@@ -3,8 +3,10 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import FormAndReviewList from '../../../../components/FormAndReviewList';
-import { NonPersonnelCostForm } from './NonPersonnelCostForm';
-import { NonPersonnelCostReview } from './NonPersonnelCostReview';
+import {
+  NonPersonnelCostForm,
+  NonPersonnelCostReview
+} from './NonPersonnelCost';
 
 import { removeNonPersonnelCost } from '../../../../actions/editActivity';
 
