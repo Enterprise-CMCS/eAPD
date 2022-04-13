@@ -102,6 +102,19 @@
     "costs": [5000, 8000]
   },
 
+  "costAllocationActivityTotalCostTables": [
+    [
+      ["$418,000"],
+      ["Other Funding", "-", "$5,000"],
+      ["Total Computable Medicaid Cost", "$413,000"]
+    ],
+    [
+      ["$442,000"],
+      ["Other Funding", "-", "$8,000"],
+      ["Total Computable Medicaid Cost", "$434,000"]
+    ]
+  ],
+
   "splitConstants": [
     {
       "split": "75-25",
@@ -135,62 +148,62 @@
       [
         [],
         ["Ervin Howell (APD Key Personnel)", "", "", "", "", "$0"],
-        ["Clementine Bauch (APD Key Personnel)", "$0", "×", "0 FTE", "=", "$0"],
+        ["Patricia Lebsack (APD Key Personnel)", "$100,000", "×", "0.5 FTE", "=", "$50,000"],
         ["Accountant III", "$101,000", "×", "3 FTE", "=", "$303,000"],
-        ["Other Funding Amount", "-", "$4,117"],
-        ["State Staff Subtotal", "$298,883"],
+        ["Other Funding Amount", "-", "$4,222"],
+        ["State Staff Subtotal", "$348,778"],
         [],
         ["Travel", "", "", "", "", "$35,000"],
-        ["Other Funding Amount", "-", "$475"],
-        ["Other State Expenses Subtotal", "$34,525"],
+        ["Other Funding Amount", "-", "$419"],
+        ["Other State Expenses Subtotal", "$34,581"],
         [],
         ["Bob the Builder", "", "", "", "", "$30,000"],
-        ["Other Funding Amount", "-", "$408"],
-        ["Private Contractor Subtotal", "$29,592"],
-        ["Activity 1 Total Computable Medicaid Cost", "$363,000"]
+        ["Other Funding Amount", "-", "$359"],
+        ["Private Contractor Subtotal", "$29,641"],
+        ["Activity 1 Total Computable Medicaid Cost", "$413,000"]
       ],
       [
         [],
         ["Ervin Howell (APD Key Personnel)", "", "", "", "", "$0"],
-        ["Clementine Bauch (APD Key Personnel)", "$0", "×", "0 FTE", "=", "$0"],
+        ["Patricia Lebsack (APD Key Personnel)", "$100,000", "×", "0.5 FTE", "=", "$50,000"],
         ["Accountant III", "$109,000", "×", "3 FTE", "=", "$327,000"],
-        ["Other Funding Amount", "-", "$6,674"],
-        ["State Staff Subtotal", "$320,326"],
+        ["Other Funding Amount", "-", "$6,824"],
+        ["State Staff Subtotal", "$370,176"],
         [],
         ["Travel", "", "", "", "", "$35,000"],
-        ["Other Funding Amount", "-", "$714"],
-        ["Other State Expenses Subtotal", "$34,286"],
+        ["Other Funding Amount", "-", "$633"],
+        ["Other State Expenses Subtotal", "$34,367"],
         [],
         ["Bob the Builder", "", "", "", "", "$30,000"],
-        ["Other Funding Amount", "-", "$612"],
-        ["Private Contractor Subtotal", "$29,388"],
-        ["Activity 1 Total Computable Medicaid Cost", "$384,000"]
+        ["Other Funding Amount", "-", "$543"],
+        ["Private Contractor Subtotal", "$29,457"],
+        ["Activity 1 Total Computable Medicaid Cost", "$434,000"]
       ]
     ],
 
     "activityTotalCostTable": [
       [
-        ["$434,000"],
+        ["$418,000"],
         ["Other Funding", "-", "$5,000"],
-        ["Activity Total Computable Medicaid Cost", "$363,000"]
+        ["Activity Total Computable Medicaid Cost", "$413,000"]
       ],
       [
-        ["$392,000"],
+        ["$442,000"],
         ["Other Funding", "-", "$8,000"],
-        ["Activity Total Computable Medicaid Cost", "$384,000"]
+        ["Activity Total Computable Medicaid Cost", "$434,000"]
       ]
     ],
 
     "activityFedSplitTable": [
       [
-        ["$363,000"],
-        ["Federal Share", "$363,000", "×", "75%", "=", "$272,250"],
-        ["State Share", "$363,000", "×", "25%", "=", "$90,750"]
+        ["$413,000"],
+        ["Federal Share", "$413,000", "×", "75%", "=", "$309,750"],
+        ["State Share", "$413,000", "×", "25%", "=", "$103,250"]
       ],
       [
-        ["$384,000"],
-        ["Federal Share", "$384,000", "×", "50%", "=", "$192,000"],
-        ["State Share", "$384,000", "×", "50%", "=", "$192,000"]
+        ["$434,000"],
+        ["Federal Share", "$434,000", "×", "50%", "=", "$217,000"],
+        ["State Share", "$434,000", "×", "50%", "=", "$217,000"]
       ]
     ],
 
@@ -201,41 +214,41 @@
 
     "activityEstQuarterlyExpenditure": [
       [
-        ["$62,515", "$62,514", "$62,514", "$62,513", "$250,056"],
-        ["$5,549", "$5,549", "$5,548", "$5,548", "$22,194"],
-        ["$68,064", "$68,063", "$68,062", "$68,061", "$272,250"]
+        ["$71,880", "$71,880", "$71,880", "$71,879", "$287,519"],
+        ["$5,558", "$5,558", "$5,558", "$5,557", "$22,231"],
+        ["$77,438", "$77,438", "$77,438", "$77,436", "$309,750"]
       ],
       [
-        ["$44,327", "$44,327", "$44,327", "$44,325", "$177,306"],
-        ["$3,674", "$3,674", "$3,673", "$3,673", "$14,694"],
-        ["$48,001", "$48,001", "$48,000", "$47,998", "$192,000"]
+        ["$50,568", "$50,568", "$50,568", "$50,567", "$202,271"],
+        ["$3,683", "$3,682", "$3,682", "$3,682", "$14,729"],
+        ["$54,251", "$54,250", "$54,250", "$54,249", "$217,000"]
       ]
     ],
 
     "activityTotalCostTableExportView": [
       [
-        ["$434,000"],
+        ["$418,000"],
         ["Other Funding", "", "-", "$5,000"],
-        ["Activity Total Computable Medicaid Cost", "", "$363,000"],
-        ["Federal Share", "$363,000", "×", "75%", "=", "$272,250"],
-        ["State Share", "$363,000", "×",  "25%", "=", "$90,750"]
+        ["Activity Total Computable Medicaid Cost", "", "$413,000"],
+        ["Federal Share", "$413,000", "×", "75%", "=", "$309,750"],
+        ["State Share", "$413,000", "×",  "25%", "=", "$103,250"]
       ],
       [
-        ["$392,000"],
+        ["$442,000"],
         ["Other Funding", "", "-", "$8,000"],
-        ["Activity Total Computable Medicaid Cost", "", "$384,000"],
-        ["Federal Share", "$384,000", "×", "50%", "=", "$192,000"],
-        ["State Share", "$384,000", "×", "50%", "=", "$192,000"]
+        ["Activity Total Computable Medicaid Cost", "", "$434,000"],
+        ["Federal Share", "$434,000", "×", "50%", "=", "$217,000"],
+        ["State Share", "$434,000", "×", "50%", "=", "$217,000"]
       ]
     ]
   },
 
   "FFYTotalDescription":
   {
-    "totalCost": 760000,
+    "totalCost": 860000,
     "totalOtherFunding": 13000,
-    "totalTotalMedicaidCost": 747000,
-    "totalFederalShare": 464250,
-    "totalStateShare": 282750
+    "totalTotalMedicaidCost": 847000,
+    "totalFederalShare": 526750,
+    "totalStateShare": 320250
   }
 }

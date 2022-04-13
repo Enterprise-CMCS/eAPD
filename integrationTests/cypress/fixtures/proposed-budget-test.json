@@ -185,15 +185,15 @@
         "HIE Total": ["$270,512"],
         "MMIS Total": ["$243,662"]
       },
-      "totalComputableMedicaidCost": 877174
+      "totalComputableMedicaidCost": 927174
     },
     {
       "programTypes": {
-        "HIT Total": ["$384,000"],
+        "HIT Total": ["$434,000"],
         "HIE Total": ["$268,802"],
         "MMIS Total": ["$329,318"]
       },
-      "totalComputableMedicaidCost": 982120
+      "totalComputableMedicaidCost": 1032120
     }
   ],
 
@@ -202,11 +202,11 @@
       "activities": [
         {
           "expenses": {
-            "State Staff Subtotal": 298883,
-            "Other State Expenses Subtotal": 34524,
-            "Private Contractor Subtotal": 29592
+            "State Staff Subtotal": 348778,
+            "Other State Expenses Subtotal": 34581,
+            "Private Contractor Subtotal": 29641
           },
-          "totalComputableMedicaidCost": 363000
+          "totalComputableMedicaidCost": 413000
         },
         {
           "expenses": {
@@ -230,11 +230,11 @@
       "activities": [
         {
           "expenses": {
-            "State Staff Subtotal": 320327,
-            "Other State Expenses Subtotal": 34286,
-            "Private Contractor Subtotal": 29388
+            "State Staff Subtotal": 370176,
+            "Other State Expenses Subtotal": 34367,
+            "Private Contractor Subtotal": 29457
           },
-          "totalComputableMedicaidCost": 384000
+          "totalComputableMedicaidCost": 434000
         },
         {
           "expenses": {
@@ -260,10 +260,10 @@
     {
       "programTypes": {
         "HIT": {
-          "State Staff": ["$74,721", "$224,163", "$298,883"],  
-          "Other State Expenses": ["$8,631", "$25,893", "$34,525"],
-          "Private Contractor": ["$7,398", "$22,194", "$29,592"],
-          "Subtotal": ["$90,750", "$272,250", "$413,000"]  
+          "State Staff": ["$87,195", "$261,583", "$348,778"],  
+          "Other State Expenses": ["$8,645", "$25,936", "$34,581"],
+          "Private Contractor": ["$7,410", "$22,231", "$29,641"],
+          "Subtotal": ["$103,250", "$309,750", "$413,000"]  
         },
         "HIE": {
           "State Staff": ["$94,853", "$94,853", "$189,707"],  
@@ -282,10 +282,10 @@
     {
       "programTypes": {
         "HIT": {
-          "State Staff": ["$160,163", "$160,163", "$320,326"],  
-          "Other State Expenses": ["$17,143", "$17,143", "$34,286"],
-          "Private Contractor": ["$14,694", "$14,694", "$29,388"],
-          "Subtotal": ["$192,000", "$192,000", "$384,000"]  
+          "State Staff": ["$185,088", "$185,088", "$370,176"],  
+          "Other State Expenses": ["$17,183", "$17,183", "$34,367"],
+          "Private Contractor": ["$14,729", "$14,729", "$29,457"],
+          "Subtotal": ["$217,000", "$217,000", "$434,000"]  
         },
         "HIE": {
           "State Staff": ["$18,975", "$170,774", "$189,749"],  
@@ -304,10 +304,10 @@
     {
       "programTypes": {
         "HIT": {
-          "State Staff": ["$234,884", "$384,326", "$619,209"],  
-          "Other State Expenses": ["$25,774", "$43,036", "$68,811"],
-          "Private Contractor": ["$22,092", "$36,888", "$58,980"],
-          "Subtotal": ["$282,750", "$464,250", "$747,000"]  
+          "State Staff": ["$272,283", "$446,671", "$718,954"],  
+          "Other State Expenses": ["$25,828", "$43,119", "$68,948"],
+          "Private Contractor": ["$22,139", "$36,960", "$59,098"],
+          "Subtotal": ["$320,250", "$526,750", "$847,000"]  
         },
         "HIE": {
           "State Staff": ["$113,828", "$265,627", "$379,456"],  
@@ -326,18 +326,18 @@
   ],
 
   "populatedSummaryBudgetTotals": {
-    "FFY 2022": ["$250,372", "$626,802", "$877,174"],
-    "FFY 2023": ["$383,539", "$598,581", "$982,120"],
-    "Total": ["$633,911", "$1,225,383", "$1,859,294"] 
+    "FFY 2022": ["$262,872", "$664,302", "$927,174"],
+    "FFY 2023": ["$408,539", "$623,581", "$1,032,120"],
+    "Total": ["$671,411", "$1,287,883", "$1,959,294"] 
   },
 
   "populatedQFSByActivity": [
     {
       "programTypes": {
         "HIT and HIE": {
-          "In-House Costs": ["$91,218", "$91,216", "$91,216", "$91,214", "$364,864"],
-          "Private Contractor Costs": ["$10,661", "$10,661", "$10,660", "$10,660", "$42,642"],
-          "Total Enhanced FFP": ["$101,879", "$101,877", "$101,876", "$101,874", "$407,506"]
+          "In-House Costs": ["$100,583", "$100,582", "$100,582", "$100,580", "$402,327"],
+          "Private Contractor Costs": ["$10,670", "$10,670", "$10,670", "$10,669", "$42,679"],
+          "Total Enhanced FFP": ["$111,253", "$111,252", "$111,252", "$111,249", "$445,006"]
         },
         "MMIS": {
           "In-House Costs": ["$47,519", "$47,519", "$47,519", "$47,518", "$190,075"],
@@ -349,9 +349,9 @@
     {
       "programTypes": {
         "HIT and HIE": {
-          "In-House Costs": ["$95,773", "$95,773", "$95,772", "$95,770", "$383,088"],
-          "Private Contractor Costs": ["$12,709", "$12,709", "$12,708", "$12,708", "$50,834"],
-          "Total Enhanced FFP": ["$108,482", "$108,482", "$108,480", "$108,478", "$433,922"]
+          "In-House Costs": ["$102,014", "$102,014", "$102,013", "$102,012", "$408,053"],
+          "Private Contractor Costs": ["$12,718", "$12,717", "$12,717", "$12,717", "$50,869"],
+          "Total Enhanced FFP": ["$114,732", "$114,731", "$114,730", "$114,729", "$458,922"]
         },
         "MMIS": {
           "In-House Costs": ["$36,663", "$36,663", "$36,663", "$36,662", "$146,651"],
@@ -363,9 +363,9 @@
   ],
 
   "populatedHITandHIETotal": {
-    "In-House Costs": ["$747,952"],
-    "Private Contractor Costs": ["$93,476"],
-    "Total Enhanced FFP": ["$841,428"]
+    "In-House Costs": ["$810,380"],
+    "Private Contractor Costs": ["$93,548"],
+    "Total Enhanced FFP": ["$903,928"]
   },
 
   "populatedMMISTotal": {

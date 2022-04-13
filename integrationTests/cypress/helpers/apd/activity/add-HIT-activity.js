@@ -96,28 +96,35 @@ export const addHITActivity = years => {
         years
       );
 
-      const staff = activityData.staff[1];
-      const expense = activityData.expenses[1];
-      const contractor = activityData.privateContractors[1];
-
       _.forEach(years, (year, i) => {
-        const staffTotal = staff.costs[i] * staff.ftes[i];
-
-        const expenseTotal = expense.costs[i];
-
-        const contractorTotal = contractor.FFYcosts[i];
-
-        const activityTotalCosts = staffTotal + expenseTotal + contractorTotal;
-
-        const otherFunding = activityData.costAllocation.costs[i];
-
-        budgetPage.checkActivityTotalCostTable({
-          activityTotalCosts,
-          otherFunding,
-          totalComputableMedicaidCost: activityTotalCosts - otherFunding,
+        budgetPage.checkActivityTotalCostTableNew({
+          expectedTable: activityData.costAllocationActivityTotalCostTables[i],
           index: i
         });
       });
+
+      // const staff = activityData.staff[1];
+      // const expense = activityData.expenses[1];
+      // const contractor = activityData.privateContractors[1];
+
+      // _.forEach(years, (year, i) => {
+      //   const staffTotal = staff.costs[i] * staff.ftes[i];
+
+      //   const expenseTotal = expense.costs[i];
+
+      //   const contractorTotal = contractor.FFYcosts[i];
+
+      //   const activityTotalCosts = staffTotal + expenseTotal + contractorTotal;
+
+      //   const otherFunding = activityData.costAllocation.costs[i];
+
+      //   budgetPage.checkActivityTotalCostTable({
+      //     activityTotalCosts,
+      //     otherFunding,
+      //     totalComputableMedicaidCost: activityTotalCosts - otherFunding,
+      //     index: i
+      //   });
+      // });
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();

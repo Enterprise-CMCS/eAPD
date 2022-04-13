@@ -1,19 +1,19 @@
 { 
   "activitySummaries": [
     {
-      "activityTotalCosts": 760000,
-      "totalComputableMedicaidCost": 747000,
-      "federalShareAmount": 464250,
+      "activityTotalCosts": 860000,
+      "totalComputableMedicaidCost": 847000,
+      "federalShareAmount": 526750,
       "ffys": [
         {
-          "activityTotalCosts": 442000,
-          "totalComputableMedicaidCost": 363000,
-          "federalShareAmount": 272250
+          "activityTotalCosts": 418000,
+          "totalComputableMedicaidCost": 413000,
+          "federalShareAmount": 309750
         },
         {
-          "activityTotalCosts": 392000,
-          "totalComputableMedicaidCost": 384000,
-          "federalShareAmount": 192000
+          "activityTotalCosts": 442000,
+          "totalComputableMedicaidCost": 434000,
+          "federalShareAmount": 217000
         }
       ]
     },
@@ -53,27 +53,27 @@
     }
   ],
   "totalCostSummary": {
-    "totalCost": 1898294,
-    "totalTotalMedicaidCost": 1859294,
-    "totalFederalShare": 1225383,
+    "totalCost": 1998294,
+    "totalTotalMedicaidCost": 1959294,
+    "totalFederalShare": 1287883,
     "ffys": [
       {
-        "activityTotalCosts": 890174,
-        "totalComputableMedicaidCost": 877174,
-        "federalShareAmount": 626802
+        "activityTotalCosts": 940174,
+        "totalComputableMedicaidCost": 927174,
+        "federalShareAmount": 664302
       },
       {
-        "activityTotalCosts": 1008120,
-        "totalComputableMedicaidCost": 982120,
-        "federalShareAmount": 598581
+        "activityTotalCosts": 1058120,
+        "totalComputableMedicaidCost": 1032120,
+        "federalShareAmount": 623581
       }
     ]
   },
   "programBudgetTables": {
     "hitAndHie": [
-      [272250, 90750, 135256, 135256, 407506, 226006, 633512],
-      [192000, 192000, 241922, 26880, 433922, 218880, 652802],
-      [464250, 282750, 377178, 162136, 841428, 444886, 1286314]
+      [309750, 103250, 135256, 135256, 445006, 238506, 683512],
+      [217000, 217000, 241922, 26880, 458992, 243880, 702802],
+      [526750, 320250, 377178, 162136, 903928, 482386, 1386314]
     ],
     "mmis": [
       [219296, 24366, 0, 0, 0, 0, 219296, 24366, 243662],
