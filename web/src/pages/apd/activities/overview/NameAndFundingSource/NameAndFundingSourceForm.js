@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {
   setActivityName,
   setActivityFundingSource
-} from '../../../actions/editActivity';
+} from '../../../../../actions/editActivity';
 
 const NameAndFundingSourceForm = ({
   index,

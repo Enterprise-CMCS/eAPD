@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import AlertMissingFFY from '../../components/AlertMissingFFY';
-import ActivityRoutes from '../../pages/apd/activities/ActivityRoutes';
+import AlertMissingFFY from '../../../../components/AlertMissingFFY';
+import ActivityRoutes from '../ActivityRoutes';
 
 const EntryPage = ({ activityNames }) => {
   const activityIndex = +useParams().activityIndex;

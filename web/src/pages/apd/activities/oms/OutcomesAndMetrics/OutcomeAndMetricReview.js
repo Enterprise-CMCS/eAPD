@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Review from '../../../components/Review';
+import Review from '../../../../../components/Review';
 
 const OutcomeAndMetricReview = ({
   index,
@@ -15,7 +15,8 @@ const OutcomeAndMetricReview = ({
     objType="Outcome and Metrics"
   >
     <p className="ds-u-margin-top--2">
-      <strong>{index + 1}. Outcome:</strong> {outcome || 'Outcome not specified'}
+      <strong>{index + 1}. Outcome:</strong>{' '}
+      {outcome || 'Outcome not specified'}
     </p>
     {metrics.length > 0 ? (
       <p className="ds-u-margin-top--2">

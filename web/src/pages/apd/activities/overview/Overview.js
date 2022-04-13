@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import { t } from '../../i18n';
+import { t } from '../../../../i18n';
 import {
   setActivityAlternatives,
   setActivityDescription,
   setActivityOverview
-} from '../../actions/editActivity';
-import RichText from '../../components/RichText';
-import Instruction from '../../components/Instruction';
-import { Subsection } from '../../components/Section';
-import { NameAndFundingSourceForm } from './NameAndFundingSource';
-import { selectActivityByIndex } from '../../reducers/activities.selectors';
+} from '../../../../actions/editActivity';
+import RichText from '../../../../components/RichText';
+import Instruction from '../../../../components/Instruction';
+import { Subsection } from '../../../../components/Section';
+import { NameAndFundingSourceForm } from './NameAndFundingSource/';
+import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
 import Schedule from './Schedule';
 
 const ActivityOverview = ({

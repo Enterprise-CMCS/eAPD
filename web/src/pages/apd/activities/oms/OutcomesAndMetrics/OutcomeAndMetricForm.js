@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import React, { forwardRef, useReducer } from 'react';
 import { connect } from 'react-redux';
 
-import Icon, { faPlusCircle } from '../../../components/Icons';
-import Review from '../../../components/Review';
+import Icon, { faPlusCircle } from '../../../../../components/Icons';
+import Review from '../../../../../components/Review';
 
-import { saveOutcome as actualSaveOutcome } from '../../../actions/editActivity';
+import { saveOutcome as actualSaveOutcome } from '../../../../../actions/editActivity';
 
-import { newOutcomeMetric } from '../../../reducers/activities';
+import { validateText } from '../../../../../helpers/textValidation';
+
+import { newOutcomeMetric } from '../../../../../reducers/activities';
 
 const OutcomeAndMetricForm = forwardRef(
   ({ activityIndex, item, index, saveOutcome }, ref) => {
@@ -97,6 +99,8 @@ const OutcomeAndMetricForm = forwardRef(
               value: e.target.value
             })
           }
+          onBlur={validateText}
+          onKeyUp={validateText}
         />
         {state.metrics.map(({ key, metric }, i) => (
           <Review
@@ -110,6 +114,8 @@ const OutcomeAndMetricForm = forwardRef(
             skipConfirmation
             ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
             objType="Metric"
+            onBlur={validateText}
+            onKeyUp={validateText}
           >
             <div
               key={key}
@@ -126,6 +132,8 @@ const OutcomeAndMetricForm = forwardRef(
                 multiline
                 rows="4"
                 onChange={changeMetric(i)}
+                onBlur={validateText}
+                onKeyUp={validateText}
               />
             </div>
           </Review>
