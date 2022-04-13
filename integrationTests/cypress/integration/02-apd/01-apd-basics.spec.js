@@ -289,12 +289,27 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
 
+      cy.get('[data-cy="key-person-0__name"]').focus().blur();
+      cy.contains('Name is required').should('exist');
+      cy.get('[data-cy="key-person-0__email"]').focus().blur();
+      cy.contains('Email is required').should('exist');
+      cy.get('[data-cy="key-person-0__position"]').focus().blur();
+      cy.contains('Role is required').should('exist');
+
+      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
       cy.get('[data-cy="key-person-0__name"]').type(keyPersons[0].name);
+
+      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
       cy.get('[data-cy="key-person-0__email"]').type(keyPersons[0].email);
       cy.get('[data-cy="key-person-0__position"]').type(keyPersons[0].position);
+
+      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
       cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
 
-      cy.findByRole('button', { name: /Save/i }).click();
+      cy.findByRole('button', { name: /Save/i }).should('not.be.disabled').click();
 
       // Get div for the element containing user data as an alias
       cy.get('.form-and-review-list')
@@ -375,6 +390,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('[data-cy="key-person-2__position"]').type(keyPersons[2].position);
       // Have to force check; cypress does not think radio buttons are visible
       cy.get('input[type="radio"][value="yes"]').check({ force: true });
+      
       cy.get('[data-cy="key-person-2-0__cost"]').type('100000');
       cy.get('[data-cy="key-person-2-0__fte"]').type('0.5');
       cy.get('[data-cy="key-person-2-1__cost"]').type('100000');

@@ -53,8 +53,8 @@ const keyPersonSchema = Joi.object({
       Joi.number().positive().required().messages({
         'number.base': 'Provide a cost with benefits.',
         'number.empty': 'Provide a cost with benefits.',
-        'number.format': 'Provide a cost with benefits greater than $0.',
-        'number.positive': 'Provide a cost with benefits greater than $0.'
+        'number.format': 'Costs with Benefits should not be less than 0.',
+        'number.positive': 'Costs with Benefits should not be less than 0.'
       })
     ),
     otherwise: Joi.any()
@@ -66,8 +66,8 @@ const keyPersonSchema = Joi.object({
       Joi.number().positive().required().messages({
         'number.base': 'Provide an FTE.',
         'number.empty': 'Provide an FTE.',
-        'number.format': 'Provide an FTE greater than or equal to .01.',
-        'number.positive': 'Provide an FTE greater than or equal to .01.'
+        'number.format': 'FTE should not be less than 0.',
+        'number.positive': 'FTE should not be less than 0.'
       })
     ),
     otherwise: Joi.any()
