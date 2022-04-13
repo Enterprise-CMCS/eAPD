@@ -6,9 +6,7 @@ import {
   mapDispatchToProps
 } from './NonPersonnelCostForm';
 
-import {
-  saveNonPersonnelCost as actualSaveNonPersonnelCost
-} from '../../../actions/editActivity';
+import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../actions/editActivity';
 
 describe('the NonPersonnelCostForm component', () => {
   const saveNonPersonnelCost = jest.fn();
@@ -33,23 +31,20 @@ describe('the NonPersonnelCostForm component', () => {
     saveNonPersonnelCost.mockClear();
   });
 
-  it('matches the snapshot', () =>{
-    expect(component).toMatchSnapshot()
-  })
+  it('matches the snapshot', () => {
+    expect(component).toMatchSnapshot();
+  });
 
   describe('events', () => {
     test('handles saving the non personnel cost', () => {
-      component
-        .find('form')
-        .simulate('submit');
+      component.find('form').simulate('submit');
       expect(saveNonPersonnelCost).toHaveBeenCalled();
     });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      saveNonPersonnelCost: actualSaveNonPersonnelCost,
+      saveNonPersonnelCost: actualSaveNonPersonnelCost
     });
   });
-
 });
