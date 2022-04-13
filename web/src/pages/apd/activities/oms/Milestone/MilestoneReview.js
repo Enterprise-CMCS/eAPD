@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
-import Review from '../../../components/Review';
-import { stateDateToDisplay } from '../../../util';
+import Review from '../../../../../components/Review';
+import { stateDateToDisplay } from '../../../../../util';
 
 const MilestoneReview = ({
   index,

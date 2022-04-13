@@ -9,7 +9,7 @@ import {
 
 import ApdHeader from '../../layout/header/ApdHeader';
 import Activities from './activities/activities-dashboard/ActivitiesDashboard';
-import EntryPage from '../../containers/activity/EntryPage';
+import EntryPage from './activities/overview/ActivityOverview';
 import AssurancesAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
 import Export from './export/ApdExport';
 import ApdOverview from './apd-overview/ApdOverview';
