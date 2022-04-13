@@ -3,9 +3,7 @@ import React from 'react';
 
 import { plain as MilestoneForm, mapDispatchToProps } from './MilestoneForm';
 
-import {
-  saveMilestone as actualSaveMilestone
-} from '../../../actions/editActivity';
+import { saveMilestone as actualSaveMilestone } from '../../../../../actions/editActivity';
 
 describe('the MilestoneForm component', () => {
   const saveMilestone = jest.fn();
@@ -35,9 +33,7 @@ describe('the MilestoneForm component', () => {
 
   describe('events', () => {
     test('handles saving the milestone', () => {
-      component
-        .find('form')
-        .simulate('submit');
+      component.find('form').simulate('submit');
       expect(saveMilestone).toHaveBeenCalled();
     });
   });

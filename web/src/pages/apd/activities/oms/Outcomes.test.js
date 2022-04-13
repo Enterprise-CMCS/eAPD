@@ -6,9 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './Outcomes';
-import {
-  removeOutcome
-} from '../../actions/editActivity';
+import { removeOutcome } from '../../../../actions/editActivity';
 
 describe('activity Outcomes and Metrics component', () => {
   const activityIndex = 0;
@@ -42,7 +40,7 @@ describe('activity Outcomes and Metrics component', () => {
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      remove: removeOutcome,
+      remove: removeOutcome
     });
   });
 
