@@ -16,7 +16,24 @@ exports[`the Milestones component renders correctly 1`] = `
       addButtonText="Add Milestone"
       allowDeleteAll={true}
       className={null}
+      collapsed={[Function]}
       errorCheck={false}
+      expanded={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "WrappedComponent": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "propTypes": Object {
+              "activityIndex": [Function],
+              "index": [Function],
+              "item": [Function],
+              "saveMilestone": [Function],
+            },
+            "render": [Function],
+          },
+          "render": [Function],
+        }
+      }
       list={
         Array [
           Object {
