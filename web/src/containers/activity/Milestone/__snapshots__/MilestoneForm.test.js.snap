@@ -89,9 +89,8 @@ exports[`the MilestoneForm component renders correctly 1`] = `
       errorMessage=""
       hint=""
       label="Target completion date"
-      onBlur={null}
       onChange={[Function]}
-      onComponentBlur={null}
+      onComponentBlur={[Function]}
       value="1942-8-16"
     >
       <DateField
@@ -108,7 +107,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         monthInvalid={false}
         monthLabel="Month"
         monthName="month"
-        onBlur={[Function]}
         onChange={[Function]}
         onComponentBlur={[Function]}
         yearDefaultValue={1942}
@@ -157,7 +155,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
               monthInvalid={false}
               monthLabel="Month"
               monthName="month"
-              onBlur={[Function]}
               onChange={[Function]}
               onComponentBlur={[Function]}
               yearDefaultValue={1942}

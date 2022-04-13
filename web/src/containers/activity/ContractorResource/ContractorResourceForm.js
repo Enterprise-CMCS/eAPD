@@ -35,6 +35,8 @@ const ContractorResourceForm = forwardRef(
     const {
       handleSubmit,
       control,
+      getFieldState,
+      trigger,
       formState: { errors, isValid },
       resetField: resetFieldErrors
     } = useForm({
@@ -54,13 +56,8 @@ const ContractorResourceForm = forwardRef(
     });
 
     useEffect(() => {
-      console.log({ isValid });
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-      console.log({ errors });
-    }, [errors, errors.start, errors.end]);
 
     const initialState = item;
 
@@ -259,16 +256,19 @@ const ContractorResourceForm = forwardRef(
           <Controller
             name="start"
             control={control}
-            render={({ field: { onChange, onBlur, name, value } }) => (
+            render={({ field: { onBlur, onChange, name, value } }) => (
               <DateField
                 name={name}
                 label="Contract start date"
                 value={value}
                 onChange={(e, dateStr) => {
                   handleDateChange('start', dateStr);
-                  onChange(e);
+                  onChange(dateStr);
                 }}
-                onComponentBlur={() => onBlur()}
+                onComponentBlur={(e, dateStr) => {
+                  if (getFieldState('end').isTouched) trigger('end');
+                  onBlur(dateStr);
+                }}
                 errorMessage={errors?.start?.message}
               />
             )}
@@ -276,7 +276,7 @@ const ContractorResourceForm = forwardRef(
           <Controller
             name="end"
             control={control}
-            render={({ field: { onChange, onBlur, name, value } }) => {
+            render={({ field: { onBlur, onChange, name, value } }) => {
               return (
                 <DateField
                   name={name}
@@ -284,9 +284,12 @@ const ContractorResourceForm = forwardRef(
                   value={value}
                   onChange={(e, dateStr) => {
                     handleDateChange('end', dateStr);
-                    onChange(e);
+                    onChange(dateStr);
                   }}
-                  onComponentBlur={() => onBlur()}
+                  onComponentBlur={(e, dateStr) => {
+                    if (getFieldState('start').isTouched) trigger('start');
+                    onBlur(dateStr);
+                  }}
                   errorMessage={errors?.end?.message}
                 />
               );
