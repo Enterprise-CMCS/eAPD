@@ -86,6 +86,7 @@ EOF
 checkmodule -M -m -o mongodb_cgroup_memory.mod mongodb_cgroup_memory.te
 semodule_package -o mongodb_cgroup_memory.pp -m mongodb_cgroup_memory.mod
 sudo semodule -i mongodb_cgroup_memory.pp
+rm mongodb_cgroup_memory.te
 
 # Start & Enable Mongo
 systemctl daemon-reload
