@@ -7,7 +7,6 @@ import { isNumeric } from '../util/formats';
 const DateField = ({
   value,
   onChange,
-  onBlur,
   onComponentBlur,
   errorMessage,
   ...rest
@@ -49,25 +48,22 @@ const DateField = ({
     return date;
   };
 
-  const getErrorMsg = dateObject => {
+  const getErrorMsg = (dateObject, cb) => {
     const { day = '', month = '', year = '' } = dateObject || {};
 
     if (day === '' && month === '' && year === '') {
       setErrorInfo({
+        ...errorInfo,
         dayInvalid: true,
         monthInvalid: true,
-        yearInvalid: true,
-        errorMessage:
-          errorMessage && errorMessage !== ''
-            ? errorMessage
-            : 'Date is required'
+        yearInvalid: true
       });
     } else {
       const errors = {
         dayInvalid: false,
         monthInvalid: false,
         yearInvalid: false,
-        errorMessage: errorMessage || ''
+        errorMessage: ''
       };
 
       // Validation for parsing & the date
@@ -87,11 +83,7 @@ const DateField = ({
         errors.errorMessage = errors.errorMessage || 'Must have a valid day';
       }
 
-      if (errorMessage && errorMessage !== '' && errors.errorMessage === '') {
-        errors.errorMessage = errorMessage || 'Date is required';
-      }
-
-      setErrorInfo(errors);
+      setErrorInfo(...errorInfo, ...errors);
     }
   };
 
@@ -102,17 +94,9 @@ const DateField = ({
       dayDefaultValue={dateParts.day}
       monthDefaultValue={dateParts.month}
       yearDefaultValue={dateParts.year}
-      onBlur={(_, dateObject) => {
-        getErrorMsg(dateObject);
-        if (onBlur) {
-          onBlur();
-        }
-      }}
       onComponentBlur={(_, dateObject) => {
+        onComponentBlur();
         getErrorMsg(dateObject);
-        if (onComponentBlur) {
-          onComponentBlur();
-        }
       }}
       onChange={(_, dateObject) => {
         onChange(_, dateStr(dateObject));
@@ -125,14 +109,12 @@ const DateField = ({
 DateField.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
   onComponentBlur: PropTypes.func,
   errorMessage: PropTypes.string
 };
 
 DateField.defaultProps = {
-  onBlur: null,
-  onComponentBlur: null,
+  onComponentBlur: () => {},
   value: null,
   errorMessage: ''
 };

@@ -54,8 +54,13 @@ const ContractorResourceForm = forwardRef(
     });
 
     useEffect(() => {
+      console.log({ isValid });
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+      console.log({ errors });
+    }, [errors, errors.start, errors.end]);
 
     const initialState = item;
 
@@ -263,7 +268,7 @@ const ContractorResourceForm = forwardRef(
                   handleDateChange('start', dateStr);
                   onChange(e);
                 }}
-                onComponentBlur={onBlur}
+                onComponentBlur={() => onBlur()}
                 errorMessage={errors?.start?.message}
               />
             )}
@@ -281,7 +286,7 @@ const ContractorResourceForm = forwardRef(
                     handleDateChange('end', dateStr);
                     onChange(e);
                   }}
-                  onComponentBlur={onBlur}
+                  onComponentBlur={() => onBlur()}
                   errorMessage={errors?.end?.message}
                 />
               );
