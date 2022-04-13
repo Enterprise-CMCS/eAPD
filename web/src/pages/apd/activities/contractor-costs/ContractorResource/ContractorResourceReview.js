@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
-import Dollars from '../../../../components/Dollars';
-import Review from '../../../../components/Review';
-import { stateDateRangeToDisplay } from '../../../../util';
+import Dollars from '../../../../../components/Dollars';
+import Review from '../../../../../components/Review';
+import { stateDateRangeToDisplay } from '../../../../../util';
 
 const ContractorResourceReview = ({
   index,
@@ -46,22 +46,25 @@ const ContractorResourceReview = ({
         <li>
           <strong>Total Contract Cost:</strong> <Dollars>{totalCost}</Dollars>
         </li>
-        {apdFFYs.map(ffy => useHourly === false ? 
+        {apdFFYs.map(ffy =>
+          useHourly === false ? (
             <li key={ffy}>
               <strong>FFY {ffy} Cost:</strong> <Dollars>{years[ffy]}</Dollars>
             </li>
-          :
-            <li key={ffy} className='ds-u-margin-left--3'>
+          ) : (
+            <li key={ffy} className="ds-u-margin-left--3">
               <strong>FFY {ffy} Cost:</strong>
-              <div className='subform__container ds-u-margin-y--1'>
-                <div className='ds-u-margin-y--1'>
+              <div className="subform__container ds-u-margin-y--1">
+                <div className="ds-u-margin-y--1">
                   <strong>Number of Hours:</strong> {hourly[ffy].hours}
                 </div>
-                <div className='ds-u-margin-y--1'>
-                  <strong>Hourly Rate:</strong> <Dollars>{hourly[ffy].rate}</Dollars>/hour
+                <div className="ds-u-margin-y--1">
+                  <strong>Hourly Rate:</strong>{' '}
+                  <Dollars>{hourly[ffy].rate}</Dollars>/hour
                 </div>
               </div>
             </li>
+          )
         )}
       </ul>
     </Review>

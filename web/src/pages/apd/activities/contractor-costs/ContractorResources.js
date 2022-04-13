@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 
 import { t } from '../../../../i18n';
 
-import { ContractorResourceForm } from './ContractorResourceForm';
-import { ContractorResourceReview } from './ContractorResourceReview';
+import {
+  ContractorResourceForm,
+  ContractorResourceReview
+} from './ContractorResource';
 import FormAndReviewList from '../../../../components/FormAndReviewList';
 import { Subsection } from '../../../../components/Section';
 
