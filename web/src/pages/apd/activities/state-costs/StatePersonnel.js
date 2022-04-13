@@ -6,8 +6,7 @@ import Instruction from '../../../../components/Instruction';
 import { t } from '../../../../i18n';
 
 import FormAndReviewList from '../../../../components/FormAndReviewList';
-import { StatePersonForm } from './StatePersonForm';
-import { StatePersonReview } from './StatePersonReview';
+import { StatePersonForm, StatePersonReview } from './StatePerson';
 
 import { selectActivityStatePersonnel } from '../../../../reducers/activities.selectors';
 import { selectApdYears } from '../../../../reducers/apd.selectors';

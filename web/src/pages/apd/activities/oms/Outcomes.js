@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { OutcomeAndMetricForm } from './OutcomeAndMetricForm';
-import { OutcomeAndMetricReview } from './OutcomeAndMetricReview';
+import {
+  OutcomeAndMetricForm,
+  OutcomeAndMetricReview
+} from './OutcomesAndMetrics';
 import FormAndReviewList from '../../../../components/FormAndReviewList';
 import { removeOutcome } from '../../../../actions/editActivity';
 import { Subsection } from '../../../../components/Section';

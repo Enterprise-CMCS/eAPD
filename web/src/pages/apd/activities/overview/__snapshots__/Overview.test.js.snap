@@ -7,7 +7,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
   nested={false}
   resource="activities.overview"
 >
-  <Component
+  <Connect(NameAndFundingSourceForm)
     index={37}
     item={
       Object {

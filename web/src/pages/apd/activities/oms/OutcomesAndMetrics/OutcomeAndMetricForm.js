@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import React, { forwardRef, useReducer } from 'react';
 import { connect } from 'react-redux';
 
-import Icon, { faPlusCircle } from '../../../../components/Icons';
-import Review from '../../../../components/Review';
+import Icon, { faPlusCircle } from '../../../../../components/Icons';
+import Review from '../../../../../components/Review';
 
-import { saveOutcome as actualSaveOutcome } from '../../../../actions/editActivity';
+import { saveOutcome as actualSaveOutcome } from '../../../../../actions/editActivity';
 
-import { validateText } from '../../../../helpers/textValidation';
+import { validateText } from '../../../../../helpers/textValidation';
 
-import { newOutcomeMetric } from '../../../../reducers/activities';
+import { newOutcomeMetric } from '../../../../../reducers/activities';
 
 const OutcomeAndMetricForm = forwardRef(
   ({ activityIndex, item, index, saveOutcome }, ref) => {

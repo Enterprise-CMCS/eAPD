@@ -19,7 +19,24 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
     addButtonText="Add State Staff"
     allowDeleteAll={true}
     className={null}
+    collapsed={[Function]}
     errorCheck={false}
+    expanded={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "WrappedComponent": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "activityIndex": [Function],
+            "index": [Function],
+            "item": [Function],
+            "savePersonnel": [Function],
+          },
+          "render": [Function],
+        },
+        "render": [Function],
+      }
+    }
     list={
       Array [
         Object {

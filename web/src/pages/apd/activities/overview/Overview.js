@@ -12,7 +12,7 @@ import {
 import RichText from '../../../../components/RichText';
 import Instruction from '../../../../components/Instruction';
 import { Subsection } from '../../../../components/Section';
-import { NameAndFundingSourceForm } from './NameAndFundingSourceForm';
+import { NameAndFundingSourceForm } from './NameAndFundingSource/';
 import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
 import Schedule from './Schedule';
 
