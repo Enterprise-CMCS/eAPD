@@ -34,7 +34,7 @@ const DateField = ({
   }, [value]);
 
   const formatDate = dateObject => {
-    const { day = '', month = '', year = '' } = dateObject;
+    const { day = '', month = '', year = '' } = dateObject || {};
     return [year, month, day].join('-');
   };
 
