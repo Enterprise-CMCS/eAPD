@@ -9,7 +9,7 @@ import {
 import ContractorResources from '../../../containers/activity/ContractorResources';
 import CostAllocation from '../../../containers/activity/CostAllocation';
 import FFP from '../../../containers/activity/CostAllocateFFP';
-import Costs from '../../../containers/activity/Costs';
+import Costs from './state-costs/Costs';
 import Milestones from './oms/Milestones';
 import Overview from './overview/Overview';
 import Outcomes from './oms/Outcomes';
