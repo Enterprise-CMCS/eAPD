@@ -148,6 +148,8 @@ cat <<MONGOUSERSEED > mongo-user.sh
 mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 sh ~/mongo-user.sh
+rm /home/ec2-user/mongo-user.sh
+rm /home/ec2-user/mongo-init.sh
 E_USER
 
 # Harden & Restart Mongo
@@ -155,8 +157,6 @@ sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 sed -i 's|bindIp:.*|bindIp: 0.0.0.0|g' /etc/mongod.conf
 systemctl restart mongod
-rm /home/ec2-user/mongo-user.sh
-rm /home/ec2-user/mongo-init.sh
 
 # Configure CloudWatch Agent
 mkdir -p /opt/aws/amazon-cloudwatch-agent/doc/
