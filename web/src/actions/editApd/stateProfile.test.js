@@ -14,7 +14,7 @@ describe('APD edit actions for Medicaid director and office', () => {
   it('dispatches an action for setting the Medicaid director email', () => {
     expect(setMedicaidDirectorEmail('email address')).toEqual({
       type: EDIT_APD,
-      path: '/stateProfile/medicaidDirector/email',
+      path: '/keyStatePersonnel/medicaidDirector/email',
       value: 'email address'
     });
   });
@@ -22,7 +22,7 @@ describe('APD edit actions for Medicaid director and office', () => {
   it('dispatches an action for setting the Medicaid director name', () => {
     expect(setMedicaidDirectorName('name')).toEqual({
       type: EDIT_APD,
-      path: '/stateProfile/medicaidDirector/name',
+      path: '/keyStatePersonnel/medicaidDirector/name',
       value: 'name'
     });
   });
@@ -30,7 +30,7 @@ describe('APD edit actions for Medicaid director and office', () => {
   it('dispatches an action for setting the Medicaid director phone number', () => {
     expect(setMedicaidDirectorPhoneNumber('phone number')).toEqual({
       type: EDIT_APD,
-      path: '/stateProfile/medicaidDirector/phone',
+      path: '/keyStatePersonnel/medicaidDirector/phone',
       value: 'phone number'
     });
   });
@@ -38,7 +38,7 @@ describe('APD edit actions for Medicaid director and office', () => {
   it('dispatches an action for setting the Medicaid office address line 1', () => {
     expect(setMedicaidOfficeAddress1('address 1')).toEqual({
       type: EDIT_APD,
-      path: '/stateProfile/medicaidOffice/address1',
+      path: '/keyStatePersonnel/medicaidOffice/address1',
       value: 'address 1'
     });
   });
@@ -46,7 +46,7 @@ describe('APD edit actions for Medicaid director and office', () => {
   it('dispatches an action for setting the Medicaid office address line 2', () => {
     expect(setMedicaidOfficeAddress2('address 2')).toEqual({
       type: EDIT_APD,
-      path: '/stateProfile/medicaidOffice/address2',
+      path: '/keyStatePersonnel/medicaidOffice/address2',
       value: 'address 2'
     });
   });
@@ -54,7 +54,7 @@ describe('APD edit actions for Medicaid director and office', () => {
   it('dispatches an action for setting the Medicaid office city', () => {
     expect(setMedicaidOfficeCity('city')).toEqual({
       type: EDIT_APD,
-      path: '/stateProfile/medicaidOffice/city',
+      path: '/keyStatePersonnel/medicaidOffice/city',
       value: 'city'
     });
   });
@@ -62,7 +62,7 @@ describe('APD edit actions for Medicaid director and office', () => {
   it('dispatches an action for setting the Medicaid office state', () => {
     expect(setMedicaidOfficeState('state')).toEqual({
       type: EDIT_APD,
-      path: '/stateProfile/medicaidOffice/state',
+      path: '/keyStatePersonnel/medicaidOffice/state',
       value: 'state'
     });
   });
@@ -70,7 +70,7 @@ describe('APD edit actions for Medicaid director and office', () => {
   it('dispatches an action for setting the Medicaid office zip code', () => {
     expect(setMedicaidOfficeZip('zip code')).toEqual({
       type: EDIT_APD,
-      path: '/stateProfile/medicaidOffice/zip',
+      path: '/keyStatePersonnel/medicaidOffice/zip',
       value: 'zip code'
     });
   });

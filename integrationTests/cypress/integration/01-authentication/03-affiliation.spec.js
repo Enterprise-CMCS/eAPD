@@ -136,9 +136,8 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
   });
 
   describe('New user selecting multiple affiliation the first time', () => {
-    before(() => cy.task('db:resetnorole'));
-
     it('should allow a new user to select multiple affiliations the first time', () => {
+      cy.task('db:resetnorole');
       cy.loginWithEnv('norole');
 
       cy.findByLabelText(/Select your State Affiliation/i)
@@ -170,9 +169,8 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('button', { name: 'Submit' }).click();
 
       cy.findByRole('heading', { name: /Alabama APDs/ }).should('exist');
-    });
+      cy.logout();
 
-    it('should allow the user to select one of those affiliations when they log in again', () => {
       cy.loginWithEnv('norole');
 
       cy.findByLabelText(/Alaska/).should('exist');
@@ -186,9 +184,8 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
   });
 
   describe('New user selecting affiliation the first time and the requesting multiple additional affiliations', () => {
-    before(() => cy.task('db:resetnorole'));
-
     it('should handle a user selecting one affiliation and then requesting multiple additional affiliations', () => {
+      cy.task('db:resetnorole');
       cy.loginWithEnv('norole');
 
       cy.findByLabelText(/Select your State Affiliation/i, { timeout: 30000 })

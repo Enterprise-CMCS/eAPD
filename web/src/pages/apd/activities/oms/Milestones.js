@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import { t } from '../../../../i18n';
 
 import FormAndReviewList from '../../../../components/FormAndReviewList';
-import { MilestoneForm } from './MilestoneForm';
-import { MilestoneReview } from './MilestoneReview';
+import { MilestoneForm, MilestoneReview } from './Milestone';
 import { Subsection } from '../../../../components/Section';
 
 import { selectActivityByIndex } from '../../../../reducers/activities.selectors';

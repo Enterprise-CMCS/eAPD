@@ -12,7 +12,24 @@ exports[`the ContractorResources component renders correctly 1`] = `
     addButtonText="Add Contractor"
     allowDeleteAll={true}
     className={null}
+    collapsed={[Function]}
     errorCheck={false}
+    expanded={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "WrappedComponent": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "activityIndex": [Function],
+            "index": [Function],
+            "item": [Function],
+            "saveContractor": [Function],
+          },
+          "render": [Function],
+        },
+        "render": [Function],
+      }
+    }
     noDataMessage="Private contractors have not been added for this activity."
     onAddClick={[Function]}
     onCancelClick={[Function]}

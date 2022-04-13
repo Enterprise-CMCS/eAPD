@@ -54,6 +54,14 @@ const getNewApd = () => {
   });
 
   return {
+    name: 'HITECH IAPD',
+    years,
+    apdOverview: {
+      narrativeHIE: '',
+      narrativeHIT: '',
+      narrativeMMIS: '',
+      programOverview: ''
+    },
     activities: [
       {
         alternatives: '',
@@ -88,35 +96,16 @@ const getNewApd = () => {
         })
       }
     ],
-    federalCitations: regsGenerator(),
-    incentivePayments: {
-      ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-      ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-      epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-      epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
+    assurancesAndCompliances: regsGenerator(),
+    proposedBudget: {
+      incentivePayments: {
+        ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
+      }      
     },
-    keyPersonnel: [],
-    name: 'HITECH IAPD',
-    narrativeHIE: '',
-    narrativeHIT: '',
-    narrativeMMIS: '',
-    previousActivityExpenses: forAllYears(
-      {
-        hithie: {
-          federalActual: 0,
-          totalApproved: 0
-        },
-        mmis: {
-          90: { federalActual: 0, totalApproved: 0 },
-          75: { federalActual: 0, totalApproved: 0 },
-          50: { federalActual: 0, totalApproved: 0 }
-        }
-      },
-      [0, 1, 2].map(past => yearOptions[0] - past)
-    ),
-    previousActivitySummary: '',
-    programOverview: '',
-    stateProfile: {
+    keyStatePersonnel: {
       medicaidDirector: {
         email: '',
         name: '',
@@ -128,9 +117,26 @@ const getNewApd = () => {
         city: '',
         state: '',
         zip: ''
-      }
+      },
+      keyPersonnel: []
     },
-    years
+    previousActivities: {
+      previousActivitySummary: '',
+      actualExpenditures: forAllYears(
+        {
+          hithie: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          mmis: {
+            90: { federalActual: 0, totalApproved: 0 },
+            75: { federalActual: 0, totalApproved: 0 },
+            50: { federalActual: 0, totalApproved: 0 }
+          }
+        },
+        [0, 1, 2].map(past => yearOptions[0] - past)
+      )      
+    }
   };
 };
 
