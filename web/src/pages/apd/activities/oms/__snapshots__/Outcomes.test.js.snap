@@ -15,7 +15,24 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
     addButtonText="Add Outcome"
     allowDeleteAll={true}
     className={null}
+    collapsed={[Function]}
     errorCheck={false}
+    expanded={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "WrappedComponent": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "activityIndex": [Function],
+            "index": [Function],
+            "item": [Function],
+            "saveOutcome": [Function],
+          },
+          "render": [Function],
+        },
+        "render": [Function],
+      }
+    }
     list={
       Array [
         Object {

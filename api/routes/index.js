@@ -1,4 +1,4 @@
-// const swaggerUi = require('swagger-ui-express');
+const swaggerUi = require('swagger-ui-express');
 const logger = require('../logger')('routes index');
 const affiliations = require('./affiliations');
 const apds = require('./apds');
@@ -58,7 +58,6 @@ module.exports = (
     res.send(openAPIdoc);
   });
 
-  // TODO: Commenting out swagger until they patch vulnerability 1006767
-  // logger.debug('setting out route for API docs');
-  // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openAPIdoc));
+  logger.debug('setting out route for API docs');
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openAPIdoc));
 };

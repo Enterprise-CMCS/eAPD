@@ -27,7 +27,8 @@ const jwtMiddleware = async (
     if (!claims) return next();
     req.user = claims;
   } catch (err) {
-    logger.error(`error message: ${err.message}`);
+    logger.error(`error message: ${err.message || err.error}`);
+    return next(err);
   }
   return next();
 };

@@ -127,10 +127,10 @@ const updateAPDDocument = async (
 
     // Determine if state profile needs to be updated in postgres
     const stateUpdated = patch.find(({ path }) =>
-      path.includes('/stateProfile')
+      path.includes('/keyStatePersonnel')
     );
     if (stateUpdated) {
-      await updateProfile(stateId, updatedDoc.stateProfile);
+      await updateProfile(stateId, updatedDoc.keyStatePersonnel);
     }
 
     // Will probably eventually switch to apd.validate
