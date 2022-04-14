@@ -18,7 +18,7 @@ import {
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
 import CostAllocationRows, {
   CostSummaryRows
-} from '../../pages//apd/activities/cost-allocation/CostAllocationRows';
+} from '../../pages/apd/activities/cost-allocation/CostAllocationRows';
 import { t } from '../../i18n';
 
 const AllFFYsSummaryNarrative = ({
