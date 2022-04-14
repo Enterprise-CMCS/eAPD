@@ -60,8 +60,8 @@ if (browserIsRed) {
     ReactDOM.render(<Component {...props} />, document.getElementById('app'));
   };
 
-  module.hot.accept('./components/Root.js', () => {
-    const HotRoot = require('./components/Root').default; // eslint-disable-line global-require
+  module.hot.accept('./containers/Root.js', () => {
+    const HotRoot = require('./containers/Root').default; // eslint-disable-line global-require
     render(HotRoot, { history, store });
   });
 
