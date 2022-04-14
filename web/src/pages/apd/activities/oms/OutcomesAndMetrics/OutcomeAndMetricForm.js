@@ -9,10 +9,8 @@ import { connect } from 'react-redux';
 import Icon, { faPlusCircle } from '../../../../../components/Icons';
 import Review from '../../../../../components/Review';
 
-import validationSchema from '../../../static/schemas/outcomeMetric';
-import { saveOutcome as actualSaveOutcome } from '../../../actions/editActivity';
-
-import { validateText } from '../../../../../helpers/textValidation';
+import validationSchema from '../../../../../static/schemas/outcomeMetric';
+import { saveOutcome as actualSaveOutcome } from '../../../../../actions/editApd';
 
 import { newOutcomeMetric } from '../../../../../reducers/activities';
 
