@@ -17,6 +17,7 @@ import Dollars from '../../../../../components/Dollars';
 import NumberField from '../../../../../components/NumberField';
 import RichText from '../../../../../components/RichText';
 
+import validationSchema from '../../../../../static/schemas/privateContractor';
 import { saveContractor as actualSaveContractor } from '../../../../../actions/editActivity';
 
 const getCheckedValue = value => {

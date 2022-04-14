@@ -10,7 +10,7 @@ import Icon, { faPlusCircle } from '../../../../../components/Icons';
 import Review from '../../../../../components/Review';
 
 import validationSchema from '../../../../../static/schemas/outcomeMetric';
-import { saveOutcome as actualSaveOutcome } from '../../../../../actions/editApd';
+import { saveOutcome as actualSaveOutcome } from '../../../../../actions/editActivity';
 
 import { newOutcomeMetric } from '../../../../../reducers/activities';
 
