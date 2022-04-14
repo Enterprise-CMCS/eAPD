@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './CostAllocate';
-import { setCostAllocationMethodology } from '../../../actions/editActivity/costAllocate';
+import { setCostAllocationMethodology } from '../../../../../actions/editActivity/costAllocate';
 
 describe('<CostAllocate />', () => {
   const props = {
