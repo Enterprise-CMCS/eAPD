@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import Dollars from '../../components/Dollars';
+import Dollars from '../../../../components/Dollars';
 
 export const CostSummaryRows = ({ items }) =>
   items.map(({ description, totalCost, unitCost, units }) => (

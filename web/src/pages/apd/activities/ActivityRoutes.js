@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import ContractorResources from './contractor-costs/ContractorResources';
-import CostAllocation from '../../../containers/activity/CostAllocation';
+import CostAllocation from './cost-allocation/CostAllocation';
 import FFP from '../../../containers/activity/CostAllocateFFP';
 import Costs from './state-costs/Costs';
 import Milestones from './oms/Milestones';

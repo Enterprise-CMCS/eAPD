@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
 import Instruction from '../../components/Instruction';
-import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
+import CostAllocateFFPQuarterly from '../../pages//apd/activities/cost-allocation/CostAllocateFFPQuarterly';
 
 import { setCostAllocationFFPFundingSplit } from '../../actions/editActivity';
 import Dollars from '../../components/Dollars';
@@ -16,7 +16,9 @@ import {
   selectActivityTotalForBudgetByActivityIndex
 } from '../../reducers/activities.selectors';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
-import CostAllocationRows, { CostSummaryRows } from './CostAllocationRows';
+import CostAllocationRows, {
+  CostSummaryRows
+} from '../../pages//apd/activities/cost-allocation/CostAllocationRows';
 import { t } from '../../i18n';
 
 const AllFFYsSummaryNarrative = ({
