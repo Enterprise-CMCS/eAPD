@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './CostAllocateFFP';
-import { setCostAllocationFFPFundingSplit } from '../../actions/editActivity';
+import { setCostAllocationFFPFundingSplit } from '../../../../actions/editActivity';
 
 describe('the CostAllocateFFP component', () => {
   const props = {

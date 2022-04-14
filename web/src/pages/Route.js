@@ -3,7 +3,7 @@ import { Route as PublicRoute, Switch } from 'react-router-dom';
 
 import routes from './routes';
 import AdminRoute from './admin/AdminRoute';
-import PrivateRoute from '../containers/PrivateRoute';
+import PrivateRoute from '../components/PrivateRoute';
 
 const Routes = () => (
   <Switch>
