@@ -169,7 +169,7 @@ describe('the ContractorResourceForm component', () => {
     await waitFor(() => {
       expect(nameInput).toHaveFocus();
     });
-
+    
     // description doesn't load in tests
 
     // start date - month, day, year
