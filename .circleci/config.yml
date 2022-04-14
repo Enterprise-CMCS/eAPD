@@ -71,9 +71,6 @@ workflows:
             - backend lint
             - frontend dependency vulnerability scan
             - backend dependency vulnerability scan
-            - frontend test
-            - backend unit test
-            - backend api endpoint test
 
       # backend jobs
       - backend api endpoint test:
@@ -232,7 +229,7 @@ workflows:
           requires:
             - frontend build preview
             - yaml test
-            - e2e test
+
 
       - store artifacts:
           name: store artifacts staging
@@ -712,7 +709,7 @@ jobs:
               --AWS_SECURITY_GROUP "${<< parameters.env >>_API_AWS_SECURITY_GROUP}" \
               --AWS_SUBNET "${<< parameters.env >>_API_AWS_SUBNET}" \
               --AWS_TARGET_GROUP "${<< parameters.env >>_API_AWS_TARGET_GROUP}" \
-              --BUILD_URL "$(cat ../../build-url.txt)/backend.zip" \
+              --BUILD_URL "$(cat ../../build-url.txt)" \
               --ENVIRONMENT "$(echo '<< parameters.env >>' | tr '[:upper:]' '[:lower:]')" \
               --OKTA_DOMAIN "${<< parameters.env >>_OKTA_DOMAIN}" \
               --OKTA_SERVER_ID "${<< parameters.env >>_OKTA_SERVER_ID}" \
@@ -871,21 +868,14 @@ jobs:
             yarn install --frozen-lockfile --production=true
             cd ..
             zip -r /tmp/backend.zip api/*
+      - store_artifacts:
+          path: /tmp/backend.zip
+          destination: backend.zip
       - run:
-          name: Create Frontend Build Artifact Zip
+          name: Persist Build URL to Workspace
           working_directory: ~/project
-          command: |
-            zip -r /tmp/frontend.zip web/dist/*
-      - run:
-          name: persist build URL to workspace
-          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
+          command: sh bin/prod-deploy/buildurl.sh CIRCLE_TOKEN=${CIRCLE_TOKEN} CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} > ./build-url.txt
       - persist_to_workspace:
           root: ~/project
           paths:
             - ./build-url.txt
-      - store_artifacts:
-          path: /tmp/backend.zip
-          destination: backend.zip
-      - store_artifacts:
-          path: /tmp/frontend.zip
-          destination: frontend.zip

@@ -8,16 +8,16 @@ import {
 } from 'react-router-dom';
 
 import ApdHeader from '../../layout/header/ApdHeader';
-import Activities from '../../containers/activity/All';
-import EntryPage from '../../containers/activity/EntryPage';
-import AssurancesAndCompliance from '../../containers/AssurancesAndCompliance';
-import Export from '../../containers/ApdExport';
+import Activities from './activities/activities-dashboard/ActivitiesDashboard';
+import EntryPage from './activities/overview/ActivityOverview';
+import AssurancesAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
+import Export from './export/ApdExport';
 import ApdOverview from './apd-overview/ApdOverview';
-import ExecutiveSummary from '../../containers/ExecutiveSummary';
-import PreviousActivities from '../../containers/PreviousActivities';
-import ProposedBudget from '../../containers/ProposedBudget';
-import ScheduleSummary from '../../containers/ScheduleSummary';
-import StateProfile from '../../components/ApdStateProfile';
+import ExecutiveSummary from './executive-summary/ExecutiveSummary';
+import PreviousActivities from './previous-activities/PreviousActivities';
+import ProposedBudget from './proposed-budget/ProposedBudget';
+import ScheduleSummary from './schedule-summary/ScheduleSummary';
+import KeyStatePersonnel from './key-state-personnel/KeyStatePersonnel';
 
 const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
   const { path } = useRouteMatch();
@@ -36,7 +36,7 @@ const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
         </Route>
 
         <Route path={`${path}/state-profile`}>
-          <StateProfile />
+          <KeyStatePersonnel />
         </Route>
 
         <Route path={`${path}/apd-overview`}>

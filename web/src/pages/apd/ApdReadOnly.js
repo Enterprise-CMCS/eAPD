@@ -12,15 +12,15 @@ import { selectApdData } from '../../reducers/apd.selectors';
 import { selectBudget } from '../../reducers/budget.selectors';
 import { getAPDYearRange } from '../../reducers/apd';
 import { getUserStateOrTerritory } from '../../reducers/user.selector';
-import ApdStateProfile from '../../containers/viewOnly/ApdStateProfile';
-import ApdSummary from '../../containers/viewOnly/ApdSummary';
-import PreviousActivities from '../../containers/viewOnly/PreviousActivities';
-import Activities from '../../containers/viewOnly/activities/All';
-import ScheduleSummary from '../../containers/viewOnly/ScheduleSummary';
-import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
-import AssuranceAndCompliance from '../../containers/viewOnly/AssurancesAndCompliance';
-import ExecutiveSummary from '../../containers/viewOnly/ExecutiveSummary';
-import ExportInstructions from '../../containers/viewOnly/Export';
+import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
+import ApdSummary from './export/ReadOnlyApd';
+import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
+import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
+import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
+import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
+import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
+import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
+import ExportInstructions from './export/ExportReadOnly';
 import Loading from '../../components/Loading';
 
 const ApdViewOnly = ({
@@ -106,9 +106,7 @@ const ApdViewOnly = ({
       <hr className="section-rule" />
       <ApdSummary />
       <hr className="section-rule" />
-      <ApdStateProfile
-        keyStatePersonnel={apd.keyStatePersonnel}
-      />
+      <ApdStateProfile keyStatePersonnel={apd.keyStatePersonnel} />
       <hr className="section-rule" />
       <PreviousActivities />
       <hr className="section-rule" />

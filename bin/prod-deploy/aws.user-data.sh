@@ -26,22 +26,6 @@ cd ~
 # Add New Relic License Key to Infra Monitor config
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 
-# Setup the environment
-export OKTA_DOMAIN="__OKTA_DOMAIN__"
-export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
-export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
-export OKTA_API_KEY="__OKTA_API_KEY__"
-export JWT_SECRET="__JWT_SECRET__"
-export MONGO_DATABASE="__MONGO_DATABASE__"
-export MONGO_URL="__MONGO_URL__"
-export MONGO_ADMIN_URL="__MONGO_ADMIN_URL__"
-export MONGO_INITDB_ROOT_USERNAME="__MONGO_INITDB_ROOT_USERNAME__"
-export MONGO_INITDB_ROOT_PASSWORD="__MONGO_INITDB_ROOT_PASSWORD__"
-export MONGO_INITDB_DATABASE="__MONGO_INITDB_DATABASE__"
-export MONGO_DATABASE_USERNAME="__MONGO_DATABASE_USERNAME__"
-export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
-export DATABASE_URL="__DATABASE_URL__"
-
 # Create application logs
 mkdir -p /app/api/logs
 touch /app/api/logs/eAPD-API-error-0.log
@@ -68,19 +52,18 @@ nvm alias default 16.13.2
 npm i -g pm2
 npm i -g yarn@1.22.17
 # Get the built API code
-###cd /app
-###echo __BUILDURL__ |tee /home/ec2-user/buildurl.txt
-###curl -o backend.zip -L __BUILDURL__ |tee /home/ec2-user/backenddownload.txt
-###unzip backend.zip
-### rm backend.zip
-git clone --single-branch -b main https://github.com/CMSgov/eAPD.git
-mv eAPD/api/* /app/api
+cd /app
+echo __BUILDURL__ |tee /home/ec2-user/buildurl.txt
+curl -o backend.zip -L __BUILDURL__ |tee /home/ec2-user/backenddownload.txt
+unzip backend.zip
+rm backend.zip
 cd api
 yarn install --frozen-lockfile --production=true
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
-yarn rebuild knex
-npm i -g newrelic
+#yarn rebuild knex ### TODO use when yarn is updated
+yarn add --force knex
+yarn add newrelic
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
@@ -105,4 +88,3 @@ systemctl start newrelic-infra
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.13.2/bin /home/ec2-user/.nvm/versions/node/v16.13.2/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'
-
