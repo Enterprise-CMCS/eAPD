@@ -11,14 +11,13 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import DateField from '../../../components/DateField';
-import DollarField from '../../../components/DollarField';
-import Dollars from '../../../components/Dollars';
-import NumberField from '../../../components/NumberField';
-import RichText from '../../../components/RichText';
+import DateField from '../../../../../components/DateField';
+import DollarField from '../../../../../components/DollarField';
+import Dollars from '../../../../../components/Dollars';
+import NumberField from '../../../../../components/NumberField';
+import RichText from '../../../../../components/RichText';
 
-import validationSchema from '../../../static/schemas/privateContractor';
-import { saveContractor as actualSaveContractor } from '../../../actions/editActivity';
+import { saveContractor as actualSaveContractor } from '../../../../../actions/editActivity';
 
 const getCheckedValue = value => {
   if (value !== null) {

@@ -2,35 +2,33 @@ import { shallow } from 'enzyme';
 import React from 'react';
 
 import {
-  plain as NonPersonnelCosts,
+  plain as StatePersonnel,
   mapStateToProps,
   mapDispatchToProps
-} from './NonPersonnelCosts';
+} from './StatePersonnel';
 
-import {
-  removeNonPersonnelCost
-} from '../../actions/editActivity';
+import { removePersonnel } from '../../../../actions/editActivity';
 
-describe('activity non-personnel costs subsection', () => {
+describe('activity state personnel costs subsection', () => {
   const props = {
-    activityIndex: 58,
-    expenses: [
+    activityIndex: 72,
+    personnel: [
       {
         category: 'test category',
         desc: 'test desc',
-        key: 'cost key',
+        key: 'personnel key',
         years: {
           2027: 34355,
           2028: 48833
         }
       }
     ],
-    removeExpense: jest.fn()
+    remove: jest.fn()
   };
-  const component = shallow(<NonPersonnelCosts {...props} />);
+  const component = shallow(<StatePersonnel {...props} />);
 
   beforeEach(() => {
-    props.removeExpense.mockClear();
+    props.remove.mockClear();
   });
 
   it('renders correctly', () => {
@@ -40,9 +38,9 @@ describe('activity non-personnel costs subsection', () => {
   describe('events', () => {
     const list = component.find('FormAndReviewList');
 
-    it('handles deleting a cost', () => {
+    it('handles deleting a state person', () => {
       list.prop('onDeleteClick')(0);
-      expect(props.removeExpense).toHaveBeenCalledWith(58, 0);
+      expect(props.remove).toHaveBeenCalledWith(72, 0);
     });
   });
 
@@ -54,26 +52,21 @@ describe('activity non-personnel costs subsection', () => {
             data: {
               activities: [
                 {
-                  expenses: 'these are wrong expenses'
+                  statePersonnel: 'these are personnel'
                 },
-                {
-                  expenses: 'these are wrong expenses'
-                },
-                {
-                  expenses: 'these are expenses'
-                }
+                {}
               ]
             }
           }
         },
-        { activityIndex: 2 }
+        { activityIndex: 0 }
       )
-    ).toEqual({ expenses: 'these are expenses' });
+    ).toEqual({ personnel: 'these are personnel' });
   });
 
   it('maps dispatch actions to props', () => {
     expect(mapDispatchToProps).toEqual({
-      removeExpense: removeNonPersonnelCost
+      remove: removePersonnel
     });
   });
 });

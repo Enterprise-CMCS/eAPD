@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
-import Dollars from '../../../components/Dollars';
-import Review from '../../../components/Review';
-import { stateDateRangeToDisplay } from '../../../util';
+import Dollars from '../../../../../components/Dollars';
+import Review from '../../../../../components/Review';
+import { stateDateRangeToDisplay } from '../../../../../util';
 
 const ContractorResourceReview = ({
   index,
