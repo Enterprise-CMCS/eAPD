@@ -8,8 +8,8 @@ import {
 } from 'react-router-dom';
 
 import ApdHeader from '../../layout/header/ApdHeader';
-import Activities from '../../containers/activity/All';
-import EntryPage from '../../containers/activity/EntryPage';
+import Activities from './activities/activities-dashboard/ActivitiesDashboard';
+import EntryPage from './activities/overview/ActivityOverview';
 import AssurancesAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
 import Export from './export/ApdExport';
 import ApdOverview from './apd-overview/ApdOverview';
