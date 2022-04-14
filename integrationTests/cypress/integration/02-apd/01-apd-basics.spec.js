@@ -259,7 +259,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       fillOutActivityPage = new FillOutActivityPage();
     });
 
-    it('should handle entering data', () => {
+    it.only('should handle entering data', () => {
       cy.log('Key State Personnel');
       cy.goToKeyStatePersonnel();
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
