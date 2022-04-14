@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { getIsFederal } from '../reducers/user.selector';
-import FederalDashboard from '../pages/dashboard/fed-dashboard/FederalDashboard';
-import StateDashboard from '../pages/dashboard/state-dashboard/StateDashboard';
+import { getIsFederal } from '../../reducers/user.selector';
+import FederalDashboard from './fed-dashboard/FederalDashboard';
+import StateDashboard from './state-dashboard/StateDashboard';
 
 const Dashboard = ({ isFederal, ...rest }) =>
   isFederal ? <FederalDashboard {...rest} /> : <StateDashboard {...rest} />;
