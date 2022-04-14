@@ -1,5 +1,5 @@
 import { Alert, Button } from '@cmsgov/design-system';
-import React, { useEffect, useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const FormAndReviewItem = ({
@@ -72,7 +72,8 @@ FormAndReviewItem.propTypes = {
   index: PropTypes.number.isRequired,
   initialExpanded: PropTypes.bool,
   onCancelClick: PropTypes.func,
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  setShowAddButton: PropTypes.func.isRequired
 };
 
 FormAndReviewItem.defaultProps = {
@@ -110,10 +111,6 @@ const FormAndReviewList = ({
     setShowAdd(false);
     onAddClick();
   };
-  
-  useEffect(() => {
-    console.log("list", list);
-  }, [list])
   
   const setShowAddButton = state => setShowAdd(state);
 
