@@ -344,7 +344,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .should('exist');
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-      cy.findByRole('button', { name: /Add Key Personnel/i }).should('not.exit');
+      cy.findByRole('button', { name: /Add Key Personnel/i }).should('not.exist');
       
       // Have to force check; cypress does not think radio buttons are visible
       cy.get('input[type="radio"][value="yes"]')
@@ -441,7 +441,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         if (Array.isArray(element.metrics)) {
           cy.wrap(element.metrics).each((metric, i) => {
             cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
-            cy.findByRole('button', { name: /Add Metric to Outcome/i }).should('not.exist');
 
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
