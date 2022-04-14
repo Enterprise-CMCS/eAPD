@@ -133,15 +133,9 @@ export const stateDateToDisplay = date => {
     return 'Date not specified';
   }
 
-  console.log({date})
+  const m = moment(date).format('l');
 
-  const m = moment(date.slice(0, 10), 'YYYY-MM-DD', true);
-
-  console.log({m})
-  if (m.isValid()) {
-    return m.format('M/D/YYYY');
-  }
-  return 'Invalid date';
+  return m;
 };
 
 /**
