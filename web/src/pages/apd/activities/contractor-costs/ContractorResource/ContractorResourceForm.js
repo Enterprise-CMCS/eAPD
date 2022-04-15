@@ -50,25 +50,16 @@ const ContractorResourceForm = forwardRef(
     });
 
     useEffect(() => {
-      console.log("errors", errors);
-      console.log("item", item);
-      console.log("getValues", getValues());
       console.log("isValid", isValid);
+      console.log("errors", errors);
+      console.log("getValues", getValues());
       setFormValid(isValid);
     }, [isValid, errors]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const apdFFYs = Object.keys(getValues('years'));
 
-    const handleNameChange = e => {
-      setValue('name', e.target.value);
-    };
-
     const handleDescriptionChange = value => {
       setValue('description', value);
-    };
-
-    const handleTotalCostChange = e => {
-      setValue('totalCost', e.target.value);
     };
 
     const handleStartDateChange = value => setValue('start', value);
@@ -85,7 +76,7 @@ const ContractorResourceForm = forwardRef(
 
     const handleHourlyRateChange = (ffy, e) => {
       setValue(`hourly[${ffy}].rate`, e.target.value);
-      setValue(`years[${ffy}]`, getValues(`hourly[${ffy}]`) * e.target.value);
+      setValue(`years[${ffy}]`, e.target.value * getValues(`hourly[${ffy}].rate`));
     };
 
     const handleYearCostChange = (ffy, e) => {
@@ -111,9 +102,7 @@ const ContractorResourceForm = forwardRef(
               hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
               labelClassName="full-width-label"
               className="remove-clearfix"
-              onChange={e => {
-                handleNameChange(e);
-              }}
+              onChange={onChange}
               errorMessage={errors?.name?.message}
               errorPlacement="bottom"
             />
@@ -210,9 +199,7 @@ const ContractorResourceForm = forwardRef(
               labelClassName="full-width-label"
               value={value}
               onBlur={onBlur}
-              onChange={e => {
-                handleTotalCostChange(e);
-              }}
+              onChange={onChange}
               errorMessage={errors?.totalCost?.message}
               errorPlacement="bottom"
             />
@@ -231,7 +218,7 @@ const ContractorResourceForm = forwardRef(
                 {
                   label: 'Yes',
                   value: 'yes',
-                  checked: value,
+                  checked: value === 'yes',
                   checkedChildren: (
                     <div className="ds-c-choice__checkedChild">
                       {apdFFYs.map(ffy => (
