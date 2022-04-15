@@ -14,7 +14,7 @@ import thunk from 'redux-thunk';
 import saveMiddleware from './saveMiddleware';
 import { initI18n } from './i18n';
 import reducer from './reducers';
-import Root from './components/Root';
+import Root from './containers/Root';
 import { browserIsRed } from './util/browser';
 import { html as browserHtml } from './components/UpgradeBrowser';
 import cookieHtml from './components/EnableCookies';
@@ -60,8 +60,8 @@ if (browserIsRed) {
     ReactDOM.render(<Component {...props} />, document.getElementById('app'));
   };
 
-  module.hot.accept('./components/Root.js', () => {
-    const HotRoot = require('./components/Root').default; // eslint-disable-line global-require
+  module.hot.accept('./containers/Root.js', () => {
+    const HotRoot = require('./containers/Root').default; // eslint-disable-line global-require
     render(HotRoot, { history, store });
   });
 
