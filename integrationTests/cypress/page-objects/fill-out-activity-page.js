@@ -110,8 +110,6 @@ class FillOutActivityPage {
           }
         });
   
-      // cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 1);
-  
       // Check that the first staff on the page (index 0) has the second
       // staff's info
       if(staffList.length > 1) {
