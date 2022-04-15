@@ -65,8 +65,8 @@ const ContractorResourceForm = forwardRef(
       setValue('description', value);
     };
 
-    const changeStartDate = (_, value) => setValue('start', value);
-    const changeEndDate = (_, value) => setValue('end', value);
+    const changeStartDate = value => setValue('start', value);
+    const changeEndDate = value => setValue('end', value);
 
     const handleUseHourlyChange = e => {
       setValue('useHourly', e.target.value);
@@ -154,12 +154,11 @@ const ContractorResourceForm = forwardRef(
                 label="Contract start date"
                 value={value}
                 onChange={(e, dateStr) => {
-                  handleStartDateChange(dateStr);
+                  changeStartDate(dateStr);
                 }}
-                // onComponentBlur={(e, dateStr) => {
-                //   if (getFieldState('end').isTouched) trigger('end');
-                //   onBlur(dateStr);
-                // }}
+                onComponentBlur={(e, dateStr) => {
+                  trigger('start');
+                }}
                 errorMessage={errors?.start?.message}
               />
             )}
@@ -175,12 +174,11 @@ const ContractorResourceForm = forwardRef(
                   label="Contract end date"
                   value={value}
                   onChange={(e, dateStr) => {
-                    handleEndDateChange(dateStr);
+                    changeEndDate(dateStr);
                   }}
-                  // onComponentBlur={(e, dateStr) => {
-                  //   if (getFieldState('start').isTouched) trigger('start');
-                  //   onBlur(dateStr);
-                  // }}
+                  onComponentBlur={(e, dateStr) => {
+                    trigger('end');
+                  }}
                   errorMessage={errors?.end?.message}
                 />
               );

@@ -19,7 +19,7 @@ const schemas = Joi.object({
   start: Joi.date().format('YYYY-MM-DD').iso().required().messages({
     'date.base': 'Provide a start date.',
     'date.empty': 'Provide a start date.',
-    'date.format': 'Provide a start date.'
+    'date.format': 'the format is wrong' //update this after fixing conflict with custom formatting
   }),
   end: Joi.date()
     .format('YYYY-MM-DD')
@@ -29,7 +29,7 @@ const schemas = Joi.object({
     .messages({
       'date.base': 'Provide an end date.',
       'date.empty': 'Provide an end date.',
-      'date.format': 'Provide an end date.',
+      'date.format': 'the format is wrong', //update this after fixing conflict with custom formatting
       'date.min': 'Provide an end date that is after the start date.',
       'any.ref': 'Provide an end date that is after the start date.'
     }),
