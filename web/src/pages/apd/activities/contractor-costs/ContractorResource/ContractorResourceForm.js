@@ -320,16 +320,16 @@ const ContractorResourceForm = forwardRef(
         {getValues('useHourly') === null ||
         getValues('useHourly') === true ||
         getValues('useHourly') === 'yes' ? (
-          <p className="ds-u-margin-bottom--0">
+          <div className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <div key={ffy}>
                 <FormLabel>FFY {ffy} Cost</FormLabel>
                 <Dollars>{getValues(`years[${ffy}]`)}</Dollars>
               </div>
             ))}
-          </p>
+          </div>
         ) : (
-          <p className="ds-u-margin-bottom--0">
+          <div className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <Controller
                 key={ffy}
@@ -352,7 +352,7 @@ const ContractorResourceForm = forwardRef(
                 )}
               />
             ))}
-          </p>
+          </div>
         )}
         <input
           className="ds-u-visibility--hidden"
