@@ -38,7 +38,8 @@ const ContractorResourceForm = forwardRef(
       formState: { errors, isValid },
       resetField: resetFieldErrors,
       setValue,
-      getValues
+      getValues,
+      watch
     } = useForm({
       defaultValues: {
         ...item,
@@ -49,12 +50,14 @@ const ContractorResourceForm = forwardRef(
       resolver: joiResolver(validationSchema)
     });
 
+    const formValues = watch();
+    
     useEffect(() => {
       console.log("isValid", isValid);
       console.log("errors", errors);
       console.log("getValues", getValues());
       setFormValid(isValid);
-    }, [isValid, errors]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [isValid, errors, formValues]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const apdFFYs = Object.keys(getValues('years'));
 
@@ -62,8 +65,8 @@ const ContractorResourceForm = forwardRef(
       setValue('description', value);
     };
 
-    const handleStartDateChange = value => setValue('start', value);
-    const handleEndDateChange = value => setValue('end', value);
+    const changeStartDate = (_, value) => setValue('start', value);
+    const changeEndDate = (_, value) => setValue('end', value);
 
     const handleUseHourlyChange = e => {
       setValue('useHourly', e.target.value);
@@ -96,7 +99,6 @@ const ContractorResourceForm = forwardRef(
           render={({ field: { onChange, value, ...props } }) => (
             <TextField
               {...props}
-              name="name"
               value={value}
               label="Private Contractor or Vendor Name"
               hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
@@ -125,7 +127,6 @@ const ContractorResourceForm = forwardRef(
           render={({ field: { onChange, onBlur, value, ...props }}) => (
             <RichText
               {...props}
-              name="description"
               id={`contractor-description-field-${index}`}
               content={value}
               onSync={html => {
@@ -153,12 +154,12 @@ const ContractorResourceForm = forwardRef(
                 label="Contract start date"
                 value={value}
                 onChange={(e, dateStr) => {
-                  handleStartDateChange('start', dateStr);
+                  handleStartDateChange(dateStr);
                 }}
-                onComponentBlur={(e, dateStr) => {
-                  if (getFieldState('end').isTouched) trigger('end');
-                  onBlur(dateStr);
-                }}
+                // onComponentBlur={(e, dateStr) => {
+                //   if (getFieldState('end').isTouched) trigger('end');
+                //   onBlur(dateStr);
+                // }}
                 errorMessage={errors?.start?.message}
               />
             )}
@@ -174,12 +175,12 @@ const ContractorResourceForm = forwardRef(
                   label="Contract end date"
                   value={value}
                   onChange={(e, dateStr) => {
-                    handleEndDateChange('end', dateStr);
+                    handleEndDateChange(dateStr);
                   }}
-                  onComponentBlur={(e, dateStr) => {
-                    if (getFieldState('start').isTouched) trigger('start');
-                    onBlur(dateStr);
-                  }}
+                  // onComponentBlur={(e, dateStr) => {
+                  //   if (getFieldState('start').isTouched) trigger('start');
+                  //   onBlur(dateStr);
+                  // }}
                   errorMessage={errors?.end?.message}
                 />
               );
@@ -192,7 +193,6 @@ const ContractorResourceForm = forwardRef(
           render={({ field: { onChange, onBlur, name, value, ...props } }) => (
             <DollarField
               {...props}
-              name={name}
               label="Total Contract Cost"
               size="medium"
               hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."
@@ -259,7 +259,6 @@ const ContractorResourceForm = forwardRef(
                               }) => (
                                 <DollarField
                                   {...props}
-                                  name={name}
                                   value={value}
                                   className="ds-u-margin-left--1"
                                   label="Hourly rate"
@@ -338,7 +337,6 @@ const ContractorResourceForm = forwardRef(
                 render={({ field: { onChange, onBlur, name, value, ...props } }) => (
                   <DollarField
                     {...props}
-                    name={name}
                     value={value}
                     label={`FFY ${ffy} Cost`}
                     size="medium"
