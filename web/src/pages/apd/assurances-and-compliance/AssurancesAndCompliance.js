@@ -55,7 +55,6 @@ const AssurancesAndCompliance = ({
   justificationForSoftwareRights
 }) => {
   function handleCheckChange(section, index, newValue) {
-    console.log('BEFORE ALL TIME');
     switch (section) {
       case 'procurement':
         return complyingWithProcurement(index, newValue);

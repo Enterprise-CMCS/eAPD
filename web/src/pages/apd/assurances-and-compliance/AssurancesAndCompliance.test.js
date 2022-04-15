@@ -99,10 +99,18 @@ describe('assurances and compliance component', () => {
       //   Software rights: 20/21
       //   Security: 28/29
 
-      component.find('ChoiceComponent').at(0).simulate('change');
-      component.find('ChoiceComponent').at(9).simulate('change');
-      component.find('ChoiceComponent').at(21).simulate('change');
-      component.find('ChoiceComponent').at(28).simulate('change');
+      component.find('ChoiceList').at(0).prop('onChange')({
+        target: { value: 'yes' }
+      });
+      component.find('ChoiceList').at(4).prop('onChange')({
+        target: { value: 'no' }
+      });
+      component.find('ChoiceList').at(10).prop('onChange')({
+        target: { value: 'no' }
+      });
+      component.find('ChoiceList').at(14).prop('onChange')({
+        target: { value: 'yes' }
+      });
 
       expect(props.complyingWithProcurement).toHaveBeenCalledWith(0, true);
       expect(props.complyingWithRecordsAccess).toHaveBeenCalledWith(0, false);
@@ -124,7 +132,7 @@ describe('assurances and compliance component', () => {
 
       shallow(
         component
-          .find('ChoiceComponent')
+          .find('ChoiceList')
           .at(1)
 
           .prop('checkedChildren')
