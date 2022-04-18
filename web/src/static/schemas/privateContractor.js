@@ -79,8 +79,7 @@ const schemas = Joi.object({
       })
     ),
     otherwise: Joi.any()
-  }),
-  files: Joi.any()
+  })
 });
 
 export default schemas;

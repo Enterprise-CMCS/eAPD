@@ -48,6 +48,11 @@ const ContractorResourceForm = forwardRef(
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+      console.log({ isValid, errors });
+      console.log(`getValues ${JSON.stringify(getValues(), null, 2)}`);
+    }, [isValid, errors, getValues()]); // eslint-disable-line react-hooks/exhaustive-deps
+
     const apdFFYs = Object.keys(getValues('years'));
 
     const onSubmit = e => {
