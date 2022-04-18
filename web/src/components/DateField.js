@@ -33,9 +33,15 @@ const DateField = ({
     return { day: +day || '', month: +month || '', year: +year || '' };
   }, [value]);
 
-  const formatDate = dateObject => {
-    const { day = '', month = '', year = '' } = dateObject || {};
-    return [year, month, day].join('-');
+  const formatDate = ({ day = '', month = '', year = '' } = {}) => {
+    if (day === '' && month === '' && year === '') {
+      return '';
+    }
+
+    // Make sure it's an ISO-8601 date, which uses 2-digit month and day
+    return `${year}-${month < 10 ? `0${month}` : month}-${
+      day < 10 ? `0${day}` : day
+    }`;
   };
 
   const validate = dateObject => {
