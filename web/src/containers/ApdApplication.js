@@ -10,7 +10,7 @@ import {
 import TagManager from 'react-gtm-module';
 
 import Sidebar from '../layout/nav/Sidebar';
-import UnexpectedError from './UnexpectedError';
+import UnexpectedError from '../components/UnexpectedError';
 import { setApdToSelectOnLoad, selectApd } from '../actions/app';
 
 import ApdPageRoutes from '../pages/apd/ApdPageRoutes';

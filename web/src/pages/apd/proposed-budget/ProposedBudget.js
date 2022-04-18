@@ -3,7 +3,7 @@ import React from 'react';
 import { Section, Subsection } from '../../../components/Section';
 import SummaryBudgetByActivity from './SummaryBudgetByActivity';
 import BudgetSummary from './BudgetSummary';
-import Waypoint from '../../../containers/ConnectedWaypoint';
+import Waypoint from '../../../components/ConnectedWaypoint';
 import IncentivePayments from './IncentivePayments';
 import QuarterlyBudgetSummary from './QuarterlyBudgetSummary';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
