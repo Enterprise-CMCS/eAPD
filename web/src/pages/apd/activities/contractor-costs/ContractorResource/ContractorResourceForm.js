@@ -1,11 +1,6 @@
 import { FormLabel, TextField, ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, {
-  Fragment,
-  forwardRef,
-  useMemo,
-  useEffect
-} from 'react';
+import React, { Fragment, forwardRef, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -33,13 +28,12 @@ const ContractorResourceForm = forwardRef(
     ContractorResourceForm.displayName = 'ContractorResourceForm';
     const {
       control,
-      getFieldState,
-      trigger,
       formState: { errors, isValid },
       resetField: resetFieldErrors,
+      getFieldState,
+      trigger,
       setValue,
-      getValues,
-      watch
+      getValues
     } = useForm({
       defaultValues: {
         ...item,
@@ -50,41 +44,11 @@ const ContractorResourceForm = forwardRef(
       resolver: joiResolver(validationSchema)
     });
 
-    const formValues = watch();
-    
     useEffect(() => {
-      console.log("isValid", isValid);
-      console.log("errors", errors);
-      console.log("getValues", getValues());
       setFormValid(isValid);
-    }, [isValid, errors, formValues]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const apdFFYs = Object.keys(getValues('years'));
-
-    const handleDescriptionChange = value => {
-      setValue('description', value);
-    };
-
-    const changeStartDate = value => setValue('start', value);
-    const changeEndDate = value => setValue('end', value);
-
-    const handleUseHourlyChange = e => {
-      setValue('useHourly', e.target.value);
-    };
-
-    const handleHourlyHoursChange = (ffy, e) => {
-      setValue(`hourly[${ffy}].hours`, e.target.value);
-      setValue(`years[${ffy}]`, e.target.value * getValues(`hourly[${ffy}].rate`));
-    };
-
-    const handleHourlyRateChange = (ffy, e) => {
-      setValue(`hourly[${ffy}].rate`, e.target.value);
-      setValue(`years[${ffy}]`, e.target.value * getValues(`hourly[${ffy}].rate`));
-    };
-
-    const handleYearCostChange = (ffy, e) => {
-      setValue(`years[${ffy}]`, e.target.value);
-    };
 
     const onSubmit = e => {
       e.preventDefault();
@@ -96,15 +60,13 @@ const ContractorResourceForm = forwardRef(
         <Controller
           name="name"
           control={control}
-          render={({ field: { onChange, value, ...props } }) => (
+          render={({ field: { ...props } }) => (
             <TextField
               {...props}
-              value={value}
               label="Private Contractor or Vendor Name"
               hint="Provide the name of the private contractor or vendor. For planned procurements, generalize by resource name. For example, Computer Resources/TBD."
               labelClassName="full-width-label"
               className="remove-clearfix"
-              onChange={onChange}
               errorMessage={errors?.name?.message}
               errorPlacement="bottom"
             />
@@ -124,15 +86,14 @@ const ContractorResourceForm = forwardRef(
         <Controller
           name="description"
           control={control}
-          render={({ field: { onChange, onBlur, value, ...props }}) => (
+          render={({ field: { onChange, value, ...props } }) => (
             <RichText
               {...props}
               id={`contractor-description-field-${index}`}
               content={value}
               onSync={html => {
-                handleDescriptionChange(html);
+                onChange(html);
               }}
-              onBlur={onBlur}
               editorClassName="rte-textarea-1"
               error={errors?.description?.message}
             />
@@ -147,17 +108,17 @@ const ContractorResourceForm = forwardRef(
           <Controller
             name="start"
             control={control}
-            render={({ field: { onBlur, onChange, name, value, ...props } }) => (
+            render={({ field: { onChange, onBlur, ...props } }) => (
               <DateField
                 {...props}
-                name={name}
                 label="Contract start date"
-                value={value}
-                onChange={(e, dateStr) => {
-                  changeStartDate(dateStr);
-                }}
-                onComponentBlur={(e, dateStr) => {
-                  trigger('start');
+                onChange={(_, dateStr) => onChange(dateStr)}
+                onBlur={() => {}}
+                onComponentBlur={() => {
+                  onBlur();
+                  if (getFieldState('end').isTouched) {
+                    trigger('end');
+                  }
                 }}
                 errorMessage={errors?.start?.message}
               />
@@ -166,18 +127,18 @@ const ContractorResourceForm = forwardRef(
           <Controller
             name="end"
             control={control}
-            render={({ field: { onBlur, onChange, name, value, ...props } }) => {
+            render={({ field: { onChange, onBlur, ...props } }) => {
               return (
                 <DateField
                   {...props}
-                  name={name}
                   label="Contract end date"
-                  value={value}
-                  onChange={(e, dateStr) => {
-                    changeEndDate(dateStr);
-                  }}
-                  onComponentBlur={(e, dateStr) => {
-                    trigger('end');
+                  onChange={(_, dateStr) => onChange(dateStr)}
+                  onBlur={() => {}}
+                  onComponentBlur={() => {
+                    onBlur();
+                    if (getFieldState('start').isTouched) {
+                      trigger('start');
+                    }
                   }}
                   errorMessage={errors?.end?.message}
                 />
@@ -188,16 +149,13 @@ const ContractorResourceForm = forwardRef(
         <Controller
           name="totalCost"
           control={control}
-          render={({ field: { onChange, onBlur, name, value, ...props } }) => (
+          render={({ field: { ...props } }) => (
             <DollarField
               {...props}
               label="Total Contract Cost"
               size="medium"
               hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."
               labelClassName="full-width-label"
-              value={value}
-              onBlur={onBlur}
-              onChange={onChange}
               errorMessage={errors?.totalCost?.message}
               errorPlacement="bottom"
             />
@@ -207,7 +165,12 @@ const ContractorResourceForm = forwardRef(
           name="useHourly"
           control={control}
           render={({
-            field: { name, onChange, onBlur: useHourlyOnBlur, value, ...props }
+            field: {
+              name,
+              onChange: radioHourlyOnChange,
+              onBlur: radioHourlyOnBlur,
+              value
+            }
           }) => (
             <ChoiceList
               label="This is an hourly resource"
@@ -228,16 +191,20 @@ const ContractorResourceForm = forwardRef(
                               name={`hourly[${ffy}].hours`}
                               control={control}
                               render={({
-                                field: { onChange, value, ...props }
+                                field: { onChange: hoursOnChange, ...props }
                               }) => (
                                 <NumberField
                                   {...props}
                                   label="Number of hours"
                                   labelClassName="ds-u-margin-top--1"
                                   size="medium"
-                                  value={value}
                                   onChange={e => {
-                                    handleHourlyHoursChange(ffy, e);
+                                    hoursOnChange(e);
+                                    setValue(
+                                      `years[${ffy}]`,
+                                      e.target.value *
+                                        getValues(`hourly[${ffy}].rate`)
+                                    );
                                   }}
                                 />
                               )}
@@ -247,24 +214,21 @@ const ContractorResourceForm = forwardRef(
                               name={`hourly.${ffy}.rate`}
                               control={control}
                               render={({
-                                field: {
-                                  onChange: rateOnChange,
-                                  onBlur: rateOnBlur,
-                                  name,
-                                  value,
-                                  ...props
-                                }
+                                field: { onChange: rateOnChange, ...props }
                               }) => (
                                 <DollarField
                                   {...props}
-                                  value={value}
                                   className="ds-u-margin-left--1"
                                   label="Hourly rate"
                                   labelClassName="ds-u-margin-top--1"
                                   size="medium"
-                                  onBlur={rateOnBlur}
                                   onChange={e => {
-                                    handleHourlyRateChange(ffy, e);
+                                    rateOnChange(e);
+                                    setValue(
+                                      `years[${ffy}]`,
+                                      e.target.value *
+                                        getValues(`hourly[${ffy}].hours`)
+                                    );
                                   }}
                                 />
                               )}
@@ -303,12 +267,12 @@ const ContractorResourceForm = forwardRef(
               ]}
               type="radio"
               onChange={e => {
+                radioHourlyOnChange(e);
                 resetFieldErrors('hourly');
                 resetFieldErrors('years');
-                handleUseHourlyChange(e);
               }}
-              onBlur={useHourlyOnBlur}
-              onComponentBlur={useHourlyOnBlur}
+              onBlur={radioHourlyOnBlur}
+              onComponentBlur={radioHourlyOnBlur}
               errorMessage={errors?.useHourly?.message}
               errorPlacement="bottom"
             />
@@ -332,16 +296,11 @@ const ContractorResourceForm = forwardRef(
                 key={ffy}
                 name={`years.${ffy}`}
                 control={control}
-                render={({ field: { onChange, onBlur, name, value, ...props } }) => (
+                render={({ field: { ...props } }) => (
                   <DollarField
                     {...props}
-                    value={value}
                     label={`FFY ${ffy} Cost`}
                     size="medium"
-                    onBlur={onBlur}
-                    onChange={e => {
-                      handleYearCostChange(ffy, e);
-                    }}
                     errorMessage={errors?.years?.[ffy]?.message}
                     errorPlacement="bottom"
                   />
@@ -371,7 +330,7 @@ ContractorResourceForm.propTypes = {
     start: PropTypes.string,
     end: PropTypes.string,
     totalCost: PropTypes.number,
-    useHourly: PropTypes.bool,
+    useHourly: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
     hourly: PropTypes.object,
     years: PropTypes.object
   }).isRequired,
