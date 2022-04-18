@@ -1,7 +1,7 @@
 import React from 'react';
-import { renderWithConnection, screen } from 'apd-testing-library'
+import { renderWithConnection, screen } from 'apd-testing-library';
 
-import ApdSummary from './ApdSummary';
+import ApdSummary from './ReadOnlyApd';
 
 describe('APD Summary/viewOnly component', () => {
   test('renders the correct message when there was nothing entered', () => {

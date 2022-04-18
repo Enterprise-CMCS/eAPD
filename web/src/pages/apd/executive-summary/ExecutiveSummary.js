@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import ExecutiveSummaryBudget from './ExecutiveSummaryBudget';
-import Waypoint from '../../../containers/ConnectedWaypoint';
+import Waypoint from '../../../components/ConnectedWaypoint';
 import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 import { Section, Subsection } from '../../../components/Section';

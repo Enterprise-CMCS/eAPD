@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import Header from '../layout/header/Header';
 import Footer from '../layout/footer/Footer';
 import routes from '../pages/routes';
-import SessionEndingAlert from '../containers/SessionEndingAlert';
+import SessionEndingAlert from './SessionEndingAlert';
 
 const cardRoutes = routes.filter(r => r.isCard).map(r => r.path);
 

@@ -4,22 +4,22 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import Instruction from '../../components/Instruction';
-import CostAllocateFFPQuarterly from '../../pages//apd/activities/cost-allocation/CostAllocateFFPQuarterly';
+import Instruction from '../../../../components/Instruction';
+import CostAllocateFFPQuarterly from '../cost-allocation/CostAllocateFFPQuarterly';
 
-import { setCostAllocationFFPFundingSplit } from '../../actions/editActivity';
-import Dollars from '../../components/Dollars';
+import { setCostAllocationFFPFundingSplit } from '../../../../actions/editActivity';
+import Dollars from '../../../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
   selectActivityCostSummary,
   selectActivityByIndex,
   selectActivityTotalForBudgetByActivityIndex
-} from '../../reducers/activities.selectors';
-import { getUserStateOrTerritory } from '../../reducers/user.selector';
+} from '../../../../reducers/activities.selectors';
+import { getUserStateOrTerritory } from '../../../../reducers/user.selector';
 import CostAllocationRows, {
   CostSummaryRows
-} from '../../pages//apd/activities/cost-allocation/CostAllocationRows';
-import { t } from '../../i18n';
+} from '../cost-allocation/CostAllocationRows';
+import { t } from '../../../../i18n';
 
 const AllFFYsSummaryNarrative = ({
   activityName,

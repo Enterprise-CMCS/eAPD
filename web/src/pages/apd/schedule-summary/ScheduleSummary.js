@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { t } from '../../../i18n';
 import { Section, Subsection } from '../../../components/Section';
 import { selectActivitySchedule } from '../../../reducers/activities.selectors';
-import Waypoint from '../../../containers/ConnectedWaypoint';
+import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const ScheduleSummary = ({ activities }) => (

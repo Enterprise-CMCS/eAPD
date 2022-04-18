@@ -6,7 +6,7 @@ import Countdown, { zeroPad } from 'react-countdown';
 import { v4 as uuidv4 } from 'uuid';
 import { useHistory } from 'react-router-dom';
 
-import Icon, { Spinner, faExclamationTriangle } from '../components/Icons';
+import Icon, { Spinner, faExclamationTriangle } from './Icons';
 
 import { extendSession, logout } from '../actions/auth';
 
@@ -28,7 +28,7 @@ const SessionEndingAlert = ({
     return (
       <span>
         Your session will end in {zeroPad(minutes)}:{zeroPad(seconds)} minutes.
-        If you’d like to keep working, select <br/> <em>stay signed in</em>.
+        If you’d like to keep working, select <br /> <em>stay signed in</em>.
       </span>
     );
   };
