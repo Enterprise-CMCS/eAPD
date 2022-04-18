@@ -1,5 +1,5 @@
 import NoMatch from '../components/NoMatch';
-import Dashboard from '../containers/Dashboard';
+import Dashboard from './dashboard/Dashboard';
 import ApdApplication from '../containers/ApdApplication';
 import ApdViewOnly from './apd/ApdReadOnly';
 import LoginApplication from '../containers/LoginApplication';
