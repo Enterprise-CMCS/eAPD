@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-// import { render } from '@testing-library/react';
 
 import {
   plain as AssurancesAndCompliance,
@@ -93,12 +92,11 @@ describe('assurances and compliance component', () => {
       const component = shallow(<AssurancesAndCompliance {...props} />);
 
       // Based on the state above, there are four sections to test. We need
-      // to target one radio button in each section. There are two per
-      // assurance item, so the indices we need to target are:
-      //   Procurement: 0/1 (yes/no)
-      //   Records access: 8/9
-      //   Software rights: 20/21
-      //   Security: 28/29
+      // to target one choice list in each section. The indices are as follows:
+      //   Procurement: 0
+      //   Records access: 4
+      //   Software rights: 10
+      //   Security: 14
 
       component.find('ChoiceList').at(0).prop('onChange')({
         target: { value: 'yes' }
