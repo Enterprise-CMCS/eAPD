@@ -5,22 +5,11 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import Joi from 'joi';
+import nameSourceSchema from '../../../static/schemas/nameAndFundingSource';
 import {
   setActivityName,
   setActivityFundingSource
 } from '../../../actions/editActivity';
-
-const schema = Joi.object({
-  name: Joi.string().required().messages({
-    'string.base': 'Activity Name is required.',
-    'string.empty': 'Activity Name is required.'
-  }),
-  fundingSource: Joi.string().required().messages({
-    'string.base': 'Must select program type.',
-    'string.empty': 'Must select program type.'
-  })
-})
 
 const NameAndFundingSourceForm = forwardRef(
   ({ 
@@ -41,7 +30,7 @@ const NameAndFundingSourceForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(schema)
+      resolver: joiResolver(nameSourceSchema)
     });
 
     try {
