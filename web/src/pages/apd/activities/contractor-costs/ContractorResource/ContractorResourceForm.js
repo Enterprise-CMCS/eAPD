@@ -51,7 +51,11 @@ const ContractorResourceForm = forwardRef(
       console.log({ isValid, errors });
       console.log(`getValues ${JSON.stringify(getValues(), null, 2)}`);
       console.log(
-        `validation ${JSON.stringify(validationSchema.validate(getValues()))}`
+        `validation ${JSON.stringify(
+          validationSchema.validate(getValues()),
+          null,
+          2
+        )}`
       );
     }, [isValid, errors, getValues()]); // eslint-disable-line react-hooks/exhaustive-deps
 
