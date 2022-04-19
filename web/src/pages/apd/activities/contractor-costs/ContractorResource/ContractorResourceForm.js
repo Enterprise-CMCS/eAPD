@@ -50,6 +50,9 @@ const ContractorResourceForm = forwardRef(
     useEffect(() => {
       console.log({ isValid, errors });
       console.log(`getValues ${JSON.stringify(getValues(), null, 2)}`);
+      console.log(
+        `validation ${JSON.stringify(validationSchema.validate(getValues()))}`
+      );
     }, [isValid, errors, getValues()]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const apdFFYs = Object.keys(getValues('years'));
