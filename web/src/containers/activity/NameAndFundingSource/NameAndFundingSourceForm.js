@@ -45,8 +45,7 @@ const NameAndFundingSourceForm = forwardRef(
     });
 
     try {
-      schema.validateAsync({fundingSource, name})
-      console.log({fundingSource, name});
+      schema.validateAsync({fundingSource, name});
     } catch(err) {
       console.log(err);
     }
