@@ -8,7 +8,7 @@ import EntryDetails from './Activity';
 import { addActivity as actualAddActivity } from '../../../../actions/editActivity';
 import { Section } from '../../../../components/Section';
 import { selectAllActivities } from '../../../../reducers/activities.selectors';
-import Waypoint from '../../../../containers/ConnectedWaypoint';
+import Waypoint from '../../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../../components/AlertMissingFFY';
 
 const All = ({ addActivity, activities }) => {
