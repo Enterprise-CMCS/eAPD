@@ -29,7 +29,6 @@ const ContractorResourceForm = forwardRef(
     const {
       control,
       formState: { errors, isValid },
-      resetField: resetFieldErrors,
       getFieldState,
       trigger,
       setValue,
@@ -210,6 +209,7 @@ const ContractorResourceForm = forwardRef(
                                       e.target.value *
                                         getValues(`hourly[${ffy}].rate`)
                                     );
+                                    trigger(`years[${ffy}]`);
                                   }}
                                 />
                               )}
@@ -234,6 +234,7 @@ const ContractorResourceForm = forwardRef(
                                       e.target.value *
                                         getValues(`hourly[${ffy}].hours`)
                                     );
+                                    trigger(`years[${ffy}]`);
                                   }}
                                 />
                               )}
@@ -273,8 +274,8 @@ const ContractorResourceForm = forwardRef(
               type="radio"
               onChange={e => {
                 radioHourlyOnChange(e);
-                resetFieldErrors('hourly');
-                resetFieldErrors('years');
+                if (getFieldState('hourly').isTouched) trigger('hourly');
+                if (getFieldState('years').isTouched) trigger('years');
               }}
               onBlur={radioHourlyOnBlur}
               onComponentBlur={radioHourlyOnBlur}
@@ -283,9 +284,9 @@ const ContractorResourceForm = forwardRef(
             />
           )}
         />
-        {getValues('useHourly') === null ||
+        {getValues('useHourly') === 'yes' ||
         getValues('useHourly') === true ||
-        getValues('useHourly') === 'yes' ? (
+        getValues('useHourly') === null ? (
           <div className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <div key={ffy}>
