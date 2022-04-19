@@ -13,8 +13,12 @@ import {
 
 const schema = Joi.object({
   name: Joi.string().required().messages({
-    'string.base': 'Activity Name is required',
-    'string.empty': 'Activity Name is required'
+    'string.base': 'Activity Name is required.',
+    'string.empty': 'Activity Name is required.'
+  }),
+  fundingSource: Joi.string().required().messages({
+    'string.base': 'Must select program type.',
+    'string.empty': 'Must select program type.'
   })
 })
 
@@ -22,15 +26,14 @@ const NameAndFundingSourceForm = forwardRef(
   ({ 
     index, 
     item: { fundingSource, name }, 
-    setFundingSource, 
-    setFormValid, 
+    setFundingSource,
     setName 
   }, ref) => {
     NameAndFundingSourceForm.displayName = 'NameAndFundingSourceForm';
 
     const {
       control,
-      formState: { errors, isValid, isValidating }
+      formState: { errors }
     } = useForm({
       defaultValues: {
         name: name,
@@ -42,7 +45,7 @@ const NameAndFundingSourceForm = forwardRef(
     });
 
     try {
-      schema.validateAsync({name})
+      schema.validateAsync({fundingSource, name})
       console.log({fundingSource, name});
     } catch(err) {
       console.log(err);
@@ -88,13 +91,24 @@ const NameAndFundingSourceForm = forwardRef(
             />
           )}
         />
-        <ChoiceList
-          choices={choices}
-          label="Program type"
-          labelClassName="ds-u-margin-bottom--1"
-          name="program-type"
-          onChange={changeFundingSource}
-          type="radio"
+        <Controller
+          name="fundingSource"
+          control={control}
+          render={({ field: {onChange, ...props} }) => (
+            <ChoiceList
+              {...props}
+              choices={choices}
+              label="Program type"
+              labelClassName="ds-u-margin-bottom--1"
+              onChange={e => {
+                changeFundingSource(e);
+                onChange(e);
+              }}
+              type="radio"
+              errorMessage={errors?.fundingSource?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
       </Fragment>
     );
