@@ -146,7 +146,10 @@ const Activity = ({ activity, activityIndex }) => {
       <h2>
         Activity {activityIndex + 1}: {activity.name || 'Untitled'}
       </h2>
-      <strong>Provide a short overview of the activity:</strong>
+      <strong>Provide a short overview of the activity: </strong>
+      {!activity.summary && (
+        <span>No response was provided.</span>
+      )}
       <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
       <p>
         <strong>Start date: </strong>
@@ -167,7 +170,7 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Statement of Alternative Considerations and Supporting Justification
       </h3>
-      <div dangerouslySetInnerHTML={{ __html: activity.alternatives }} />
+      <div dangerouslySetInnerHTML={{ __html: activity.alternatives || "No response was provided." }} />
 
       <h3 className="viewonly-activity-header">
         <small>
