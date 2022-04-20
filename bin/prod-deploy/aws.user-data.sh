@@ -1,4 +1,55 @@
 #!/bin/bash
+# Configure CloudWatch Agent
+touch /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
+cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
+{
+	"agent": {
+		"metrics_collection_interval": 60,
+		"run_as_user": "cwagent"
+	},
+	"metrics": {
+		"aggregation_dimensions": [
+			[
+				"InstanceId"
+			]
+		],
+		"append_dimensions": {
+			"AutoScalingGroupName": "${aws:AutoScalingGroupName}",
+			"ImageId": "${aws:ImageId}",
+			"InstanceId": "${aws:InstanceId}",
+			"InstanceType": "${aws:InstanceType}"
+		},
+		"metrics_collected": {
+			"collectd": {
+				"metrics_aggregation_interval": 60
+			},
+			"disk": {
+				"measurement": [
+					"used_percent"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"*"
+				]
+			},
+			"mem": {
+				"measurement": [
+					"mem_used_percent"
+				],
+				"metrics_collection_interval": 60
+			},
+			"statsd": {
+				"metrics_aggregation_interval": 60,
+				"metrics_collection_interval": 10,
+				"service_address": ":8125"
+			}
+		}
+	}
+}
+
+CWAGENTCONFIG
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
 # Add a user group for the default user, and make it the owner of the /app
 # directory, then give the directory group write permission
