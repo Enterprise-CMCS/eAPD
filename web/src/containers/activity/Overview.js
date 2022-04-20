@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import Joi from 'joi';
+import overviewSchema from '../../static/schemas/activityOverview';
 import { t } from '../../i18n';
 import {
   setActivityAlternatives,
@@ -19,7 +19,6 @@ import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import Schedule from './Schedule';
 
-import overviewSchema from '../../static/schemas/activityOverview';
 
 const ActivityOverview = forwardRef(({
   activity,

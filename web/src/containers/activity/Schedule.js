@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { forwardRef, Fragment, useCallback } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
+import Joi from 'joi';
 import {
   setActivityEndDate,
   setActivityStartDate
@@ -11,7 +14,37 @@ import DateField from '../../components/DateField';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import { stateDateToDisplay } from '../../util';
 
-const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
+const scheduleSchema = Joi.object({
+  start: Joi.date().iso().required().messages({
+    'date.base': 'Provide a start date.',
+    'date.empty': 'Provide a start date.',
+    'date.format': 'Provide a start date.'
+  }),
+  end: Joi.date().iso().min(Joi.ref('start')).required().messages({
+    'date.base': 'Provide an end date.',
+    'date.empty': 'Provide an end date.',
+    'date.format': 'Provide an end date.',
+    'date.min': 'Provide an end date that is after the start date.'
+  })
+});
+
+const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate }, ref) => {
+  const { start, end } = activity;
+
+  const {
+    control,
+    formState: {errors},
+    resetField: resetFieldErrors
+  } = useForm({
+    defaultValues: {
+      start: start,
+      end: end
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(scheduleSchema)
+  });
+
   const handleActivityStartChange = useCallback(
     (_, dateStr) => {
       setStartDate(activityIndex, dateStr);
@@ -30,15 +63,41 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
     <Subsection resource="activities.schedule">
       <Fragment>
         <div className="ds-u-padding-y--0 visibility--screen">
-          <DateField
-            label="Start date"
-            value={activity.plannedStartDate}
-            onChange={handleActivityStartChange}
+          <Controller
+            name="start"
+            control={control}
+            render={({ onChange, onBlur, name }) => (
+              <DateField
+                name={name}
+                label="Start date"
+                value={activity.plannedStartDate}
+                onChange={(e, dateStr) => {
+                  handleActivityStartChange(e, dateStr);
+                  onChange(e);
+                }}
+                onBlur={onBlur}
+                onComponentBlur={onBlur}
+                errorMessage={errors?.start?.message}
+              />
+            )}
           />
-          <DateField
-            label="End date"
-            value={activity.plannedEndDate}
-            onChange={handleActivityEndChange}
+          <Controller
+            name="end"
+            control={control}
+            render={({ field: { onChange, onBlur, name, value } }) => (
+              <DateField
+                name={name}
+                label="End date"
+                value={value}
+                onChange={(e, dateStr) => {
+                  handleActivityEndChange(e, dateStr);
+                  onChange(e);
+                }}
+                onBlur={onBlur}
+                onComponentBlur={onBlur}
+                errorMessage={errors?.end?.message}
+              />
+            )}
           />
         </div>
         <div className="visibility--print">
@@ -55,7 +114,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
       </Fragment>
     </Subsection>
   );
-};
+});
 
 Schedule.propTypes = {
   activity: PropTypes.object.isRequired,
