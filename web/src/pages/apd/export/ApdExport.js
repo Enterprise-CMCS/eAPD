@@ -6,7 +6,7 @@ import { push } from 'connected-react-router';
 import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 
 import { Section, Subsection } from '../../../components/Section';
-import Waypoint from '../../../containers/ConnectedWaypoint';
+import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 import { selectApdYears } from '../../../reducers/apd.selectors';
 
