@@ -24,7 +24,12 @@ const overviewSchema = Joi.object({
     'string.base': 'Provide a short overview of the activity.',
     'string.empty': 'Provide a short overview of the activity.',
     'string.min': 'Provide a short overview of the activity.'
-  })
+  }),
+  description: Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide details to explain this activity.',
+    'string.empty': 'Provide details to explain this activity.',
+    'string.min': 'Provide details to explain this activity.'
+  }),
 });
 
 const ActivityOverview = forwardRef(({
@@ -41,7 +46,8 @@ const ActivityOverview = forwardRef(({
     formState: { errors }
   } = useForm({
     defaultValues: {
-      summary: summary
+      summary: summary,
+      description: description
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -50,7 +56,6 @@ const ActivityOverview = forwardRef(({
 
   try {
     overviewSchema.validateAsync({summary});
-    console.log({summary});
   } catch(err) {
     console.log(err);
     console.log({errors});
@@ -196,12 +201,31 @@ const ActivityOverview = forwardRef(({
         {activity.fundingSource === 'HIE' && (
           <Instruction source="activities.overview.activityDescriptionInput.hie" />
         )}
-        <RichText
-          id="activity-description-field"
-          content={description}
-          onSync={syncDescription}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="description"
+          control={control}
+          render={({ field: { onChange, onBlur } }) => (
+            <RichText
+              id="activity-description-field"
+              content={description}
+              onSync={html => {
+                syncDescription(html);
+                onChange(html);
+              }}
+              onBlur={onBlur}
+              editorClassName="rte-textarea-l"
+            />
+          )}
         />
+
+        {errors?.description && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            {errors.description.message}
+          </span>
+        )}
       </div>
 
       <div className="data-entry-box">
