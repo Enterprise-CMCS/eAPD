@@ -154,7 +154,7 @@ const openAPI = {
                 })
               },
               {
-                type: 'null',
+                type: 'string',
                 description:
                   'If the requested patch failed for unknown reasons, nothing will be returned'
               }
