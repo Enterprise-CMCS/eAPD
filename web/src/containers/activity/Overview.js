@@ -1,8 +1,11 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, useCallback } from 'react';
+import React, { forwardRef, Fragment, useMemo, useCallback } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
+import Joi from 'joi';
 import { t } from '../../i18n';
 import {
   setActivityAlternatives,
@@ -16,14 +19,42 @@ import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import { selectActivityByIndex } from '../../reducers/activities.selectors';
 import Schedule from './Schedule';
 
-const ActivityOverview = ({
+const overviewSchema = Joi.object({
+  summary: Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide a short overview of the activity.',
+    'string.empty': 'Provide a short overview of the activity.',
+    'string.min': 'Provide a short overview of the activity.'
+  })
+});
+
+const ActivityOverview = forwardRef(({
   activity,
   activityIndex,
   setAlternatives,
   setDescription,
   setOverview
-}) => {
+}, ref) => {
   const { alternatives, description, summary } = activity;
+
+  const {
+    control,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      summary: summary
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(overviewSchema)
+  })
+
+  try {
+    overviewSchema.validateAsync({summary});
+    console.log({summary});
+  } catch(err) {
+    console.log(err);
+    console.log({errors});
+  }
 
   const overviewLabel = useMemo(
     () =>
@@ -126,12 +157,30 @@ const ActivityOverview = ({
         >
           {overviewLabel}
         </FormLabel>
-        <RichText
-          id="activity-short-overview-field"
-          content={summary}
-          onSync={syncOverview}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="summary"
+          control={control}
+          render={({ field: { onChange, onBlur } }) => (
+            <RichText
+              id="activity-short-overview-field"
+              content={summary}
+              onSync={html => {
+                syncOverview(html);
+                onChange(html);
+              }}
+              editorClassName="rte-textarea-l"
+              onBlur={onBlur}
+            />
+          )}
         />
+        {errors?.summary && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            {errors.summary.message}
+          </span>
+        )}
       </div>
 
       <Schedule activityIndex={activityIndex} />
@@ -174,7 +223,7 @@ const ActivityOverview = ({
       <hr />
     </Subsection>
   );
-};
+});
 
 ActivityOverview.propTypes = {
   activity: PropTypes.object.isRequired,

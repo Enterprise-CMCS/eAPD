@@ -1,7 +1,7 @@
 import { ChoiceList, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { forwardRef, Fragment, useCallback, useEffect, useReducer } from 'react';
-import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import React, { forwardRef, Fragment, useCallback } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
@@ -34,7 +34,7 @@ const NameAndFundingSourceForm = forwardRef(
     });
 
     try {
-      schema.validateAsync({fundingSource, name});
+      nameSourceSchema.validateAsync({fundingSource, name});
     } catch(err) {
       console.log(err);
     }
