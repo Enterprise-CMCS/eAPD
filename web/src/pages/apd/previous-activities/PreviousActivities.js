@@ -6,7 +6,7 @@ import { titleCase } from 'title-case';
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
 import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
 import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
-import Waypoint from '../../../containers/ConnectedWaypoint';
+import Waypoint from '../../../components/ConnectedWaypoint';
 import { setPreviousActivitySummary } from '../../../actions/editApd';
 import RichText from '../../../components/RichText';
 import { Section, Subsection } from '../../../components/Section';

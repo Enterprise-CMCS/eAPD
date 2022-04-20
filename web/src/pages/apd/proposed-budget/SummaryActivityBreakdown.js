@@ -5,7 +5,7 @@ import {
   selectActivityCostSummary,
   selectActivityByIndex
 } from '../../../reducers/activities.selectors';
-import CostAllocationRows from '../../../containers/activity/CostAllocationRows';
+import CostAllocationRows from '../activities/cost-allocation/CostAllocationRows';
 
 const SummaryActivityBreakdownTable = ({
   ffy,

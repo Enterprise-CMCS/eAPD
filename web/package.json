@@ -85,6 +85,7 @@
     "@fortawesome/free-solid-svg-icons": "5.15.4",
     "@fortawesome/react-fontawesome": "0.1.17",
     "@hookform/resolvers": "2.8.8",
+    "@joi/date": "^2.1.0",
     "@okta/okta-auth-js": "6.0.0",
     "@snyk/protect": "1.866.0",
     "@tinymce/tinymce-react": "3.13.1",
@@ -112,7 +113,7 @@
     "jwt-decode": "3.1.2",
     "markdown-it": "12.3.2",
     "mini-css-extract-plugin": "2.6.0",
-    "moment": "2.29.2",
+    "moment": "^2.29.2",
     "postcss": "8.4.8",
     "postcss-cli": "9.1.0",
     "postcss-loader": "6.2.1",
@@ -149,18 +150,14 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "6.4.19",
-    "@storybook/addon-actions": "6.4.19",
-    "@storybook/addon-controls": "6.4.19",
-    "@storybook/addon-docs": "6.4.19",
-    "@storybook/addon-essentials": "6.4.19",
-    "@storybook/addon-jest": "6.4.19",
-    "@storybook/addon-links": "6.4.19",
-    "@storybook/addon-queryparams": "6.2.9",
-    "@storybook/builder-webpack5": "6.4.19",
-    "@storybook/manager-webpack5": "6.4.19",
-    "@storybook/react": "6.4.19",
-    "@storybook/source-loader": "6.4.19",
+    "@storybook/addon-a11y": "6.4.21",
+    "@storybook/addon-docs": "6.4.21",
+    "@storybook/addon-essentials": "6.4.21",
+    "@storybook/addon-jest": "6.4.21",
+    "@storybook/addon-links": "6.4.21",
+    "@storybook/builder-webpack5": "6.4.21",
+    "@storybook/manager-webpack5": "6.4.21",
+    "@storybook/react": "6.4.21",
     "@stryker-mutator/core": "5.6.1",
     "@stryker-mutator/jest-runner": "5.6.1",
     "@testing-library/dom": "8.11.3",
@@ -182,7 +179,7 @@
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.29.3",
     "eslint-plugin-react-hooks": "4.3.0",
-    "eslint-plugin-storybook": "0.5.7",
+    "eslint-plugin-storybook": "0.5.8",
     "eslint-plugin-testing-library": "5.1.0",
     "jest": "27.5.1",
     "jest-axe": "5.0.1",
@@ -195,7 +192,7 @@
     "redux-mock-store": "1.5.4",
     "storybook-addon-designs": "6.2.1",
     "stream-browserify": "3.0.0",
-    "webpack-dev-server": "4.7.4",
+    "webpack-dev-server": "4.8.1",
     "yaml-jest": "1.2.0"
   },
   "updateRestrictions": {
@@ -204,8 +201,10 @@
     "history": "can't upgrade to 17 react-router v6"
   },
   "resolutions": {
-    "minimist": "1.2.6",
-    "node-forge": "1.3.0"
+    "minimist": ">=1.2.6",
+    "node-forge": ">=1.3.0",
+    "glob-parent": ">=5.1.2",
+    "async": ">=3.2.2"
   },
   "packageManager": "yarn@1.22.15"
 }
