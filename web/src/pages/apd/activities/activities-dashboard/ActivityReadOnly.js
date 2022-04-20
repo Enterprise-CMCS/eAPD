@@ -222,6 +222,7 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Outcomes and Metrics
       </h3>
+      {activity.outcomes.length === 0 && "No outcome(s) and corresponding metrics were provided."}
       <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       {activity.outcomes.map(buildOutcome)}
 
