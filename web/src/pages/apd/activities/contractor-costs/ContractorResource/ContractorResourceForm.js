@@ -1,6 +1,6 @@
 import { FormLabel, TextField, ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, forwardRef, useEffect } from 'react';
+import React, { Fragment, forwardRef, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -42,6 +42,7 @@ const ContractorResourceForm = forwardRef(
       reValidateMode: 'onBlur',
       resolver: joiResolver(validationSchema)
     });
+    const [useHourly, setUseHourly] = useState(getCheckedValue(item.useHourly));
 
     useEffect(() => {
       setFormValid(isValid);
@@ -268,6 +269,7 @@ const ContractorResourceForm = forwardRef(
               ]}
               type="radio"
               onChange={e => {
+                setUseHourly(e.target.value);
                 radioHourlyOnChange(e);
                 if (getFieldState('hourly').isTouched) trigger('hourly');
                 if (getFieldState('years').isTouched) trigger('years');
@@ -279,9 +281,7 @@ const ContractorResourceForm = forwardRef(
             />
           )}
         />
-        {getValues('useHourly') === 'yes' ||
-        getValues('useHourly') === true ||
-        getValues('useHourly') === null ? (
+        {useHourly === 'yes' || useHourly === true || useHourly === null ? (
           <div className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <div key={ffy}>
