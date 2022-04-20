@@ -32,7 +32,7 @@ const config = {
         use: ['babel-loader']
       },
       {
-        test: /\.s?css$/,
+        test: /\.scss$/,
 
         // Remember that these run in reverse, so start at the last item in the
         // array and read up to understand what's going on.
@@ -69,6 +69,27 @@ const config = {
               sassOptions: {
                 includePaths: ['node_modules']
               }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+
+        // Remember that these run in reverse, so start at the last item in the
+        // array and read up to understand what's going on.
+        use: [
+          // Converts the local disk paths from css-loader into their final
+          // paths relative to the dist directory, then pulls everything
+          // together
+          MiniCssExtractPlugin.loader,
+
+          // Interprets any url() and @import statements and resolves them to
+          // their full path on the local disk.
+          {
+            loader: 'css-loader',
+            options: {
+              import: true
             }
           }
         ]

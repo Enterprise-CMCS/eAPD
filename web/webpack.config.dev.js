@@ -27,7 +27,7 @@ const config = {
       // In dev, load our styles directly into the generated JS. That way
       // we got hot reloading on our Sass as well.
       {
-        test: /\.s?css$/,
+        test: /\.scss$/,
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',
@@ -55,6 +55,20 @@ const config = {
               sassOptions: {
                 includePaths: ['node_modules']
               }
+            }
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          {
+            loader: 'css-loader',
+            options: {
+              import: true
             }
           }
         ]
