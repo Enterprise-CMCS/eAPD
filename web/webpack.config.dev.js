@@ -33,21 +33,6 @@ const config = {
           'style-loader',
           // Translates CSS into CommonJS
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [
-                  [
-                    'postcss-preset-env',
-                    {
-                      browsers: 'last 2 versions'
-                    }
-                  ]
-                ]
-              }
-            }
-          },
           // Compiles Sass to CSS
           {
             loader: 'sass-loader',

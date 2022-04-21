@@ -8,11 +8,6 @@ import { Editor } from '@tinymce/tinymce-react';
 import 'tinymce/themes/silver';
 import 'tinymce/icons/default';
 
-// Editor styles
-// import 'tinymce/skins/ui/oxide/skin.min.css';
-// import 'tinymce/skins/ui/oxide/content.css';
-// import 'tinymce/skins/content/default/content.css';
-
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/autoresize';
@@ -208,8 +203,7 @@ class RichText extends Component {
             link_assume_external_targets: true,
             default_link_target: '_blank',
             toolbar_mode: 'wrap',
-            selector: 'textarea',
-            skin: false
+            selector: 'textarea'
           }}
           value={content}
           onEditorChange={this.onEditorChange}
