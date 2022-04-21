@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Dollars from '../../../../components/Dollars';
 
-import CostAllocateFFP from '../../../../containers/activity/CostAllocateFFP';
+import CostAllocateFFP from '../ffp/CostAllocateFFP';
 import { stateDateToDisplay, stateDateRangeToDisplay } from '../../../../util';
 
 const isYear = value => !!value.match(/^[0-9]{4}$/);

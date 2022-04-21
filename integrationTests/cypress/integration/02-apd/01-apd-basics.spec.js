@@ -460,7 +460,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
-        cy.get(`[data-cy='outcome-${index}']`).click().should('have.value', '');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -473,6 +472,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.get(`[data-cy='outcome-${index}']`)
           .click()
           .type(`${element.outcome}`)
+          .blur()
           .should('not.have.class', 'ds-c-field--error');
 
         cy.findByRole('button', { name: /Save/i }).should('not.be.disabled');
@@ -488,6 +488,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             cy.get(`[data-cy=metric-${index}-${i}]`)
               .click()
               .type(`${metric}`)
+              .blur()
               .should('not.have.class', 'ds-c-field--error');
 
             cy.findByRole('button', { name: /Save/i }).should(
@@ -554,29 +555,21 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
         cy.get(`[data-cy=milestone-${index}]`)
           .click()
-          .type(element.milestoneName)
-          .should('not.have.class', 'ds-c-field--error');
+          .type(element.milestoneName);
 
         cy.get(`.ds-c-field--month`)
           .click()
-          .type(element.dateMonth)
-          .blur()
-          .should('not.have.class', 'ds-c-field--error');
+          .type(element.dateMonth);
 
         cy.get(`.ds-c-field--day`)
           .click()
-          .type(element.dateDay)
-          .blur()
-          .should('not.have.class', 'ds-c-field--error');
+          .type(element.dateDay);
 
         cy.get(`.ds-c-field--year`)
           .click()
-          .type(element.dateYear)
-          .blur()
-          .should('not.have.class', 'ds-c-field--error');
+          .type(element.dateYear);
 
         cy.findByRole('button', { name: /Save/i })
-          .should('not.be.disabled')
           .click();
 
         cy.waitForSave();

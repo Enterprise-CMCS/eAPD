@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
@@ -184,35 +184,45 @@ class RichText extends Component {
     ].join(' | ');
 
     return (
-      <div className="rte--wrapper">
-        <Editor
-          id={id}
-          init={{
-            toolbar,
-            plugins,
-            setup: setupTinyMCE(upload, onBlur),
-            autoresize_bottom_margin: 0,
-            browser_spellcheck: true,
-            file_picker_types: 'image',
-            images_upload_handler: this.uploadImage(),
-            images_file_types: VALID_FILE_TYPES.join(','),
-            paste_data_images: true, // true adds drag and drop support
-            a11y_advanced_options: true,
-            menubar: '',
-            relative_urls: false,
-            encoding: 'xml',
-            forced_root_block: 'p',
-            invalid_elements: 'script',
-            remove_trailing_brs: true,
-            link_assume_external_targets: true,
-            default_link_target: '_blank',
-            toolbar_mode: 'wrap',
-            selector: 'textarea'
-          }}
-          value={content}
-          onEditorChange={this.onEditorChange}
-        />
-      </div>
+      <Fragment>
+        <div className={this.props.error ? 'rte--wrapper ds-c-field--error ds-u-radius' : 'rte--wrapper'}>
+          <Editor
+            id={id}
+            init={{
+              toolbar,
+              plugins,
+              setup: setupTinyMCE(upload, onBlur),
+              autoresize_bottom_margin: 0,
+              browser_spellcheck: true,
+              file_picker_types: 'image',
+              images_upload_handler: this.uploadImage(),
+              images_file_types: VALID_FILE_TYPES.join(','),
+              paste_data_images: true, // true adds drag and drop support
+              a11y_advanced_options: true,
+              menubar: '',
+              relative_urls: false,
+              encoding: 'xml',
+              forced_root_block: 'p',
+              invalid_elements: 'script',
+              remove_trailing_brs: true,
+              link_assume_external_targets: true,
+              default_link_target: '_blank',
+              toolbar_mode: 'wrap',
+              selector: 'textarea'
+            }}
+            value={content}
+            onEditorChange={this.onEditorChange}
+          />
+        </div>
+        {this.props.error && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
+            role="alert"
+          >
+            {this.props.error}
+          </span>
+        )}
+      </Fragment>
     );
   }
 }
@@ -222,14 +232,16 @@ RichText.propTypes = {
   id: PropTypes.string,
   onSync: PropTypes.func,
   onBlur: PropTypes.func,
-  uploadFile: PropTypes.func.isRequired
+  uploadFile: PropTypes.func.isRequired,
+  error: PropTypes.string
 };
 
 RichText.defaultProps = {
   content: '',
   id: '',
   onSync: () => {},
-  onBlur: () => {}
+  onBlur: () => {},
+  error: ''
 };
 
 const mapDispatchToProps = { uploadFile };
