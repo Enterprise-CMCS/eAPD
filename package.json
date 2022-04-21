@@ -63,16 +63,19 @@
     "Nichole Weems",
     "Nicole Zonnenberg"
   ],
-  "workspaces": [
-    "api",
-    "web",
-    "e2e"
-  ],
-  "nohoist": [
-    "**/ajv",
-    "**/tinymce",
-    "**/@tinymce/tinymce-react"
-  ],
+  "workspaces": {
+    "packages": [
+      "api",
+      "web",
+      "e2e"
+    ],
+    "nohoist": [
+      "**/ajv",
+      "**/tinymce",
+      "**/@tinymce/tinymce-react",
+      "**/@cmsgov/design-system"
+    ]
+  },
   "dependencies": {
     "@snyk/protect": "1.866.0"
   },
