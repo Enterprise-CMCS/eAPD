@@ -32,7 +32,7 @@ const config = {
         use: ['babel-loader']
       },
       {
-        test: /\.s?css$/,
+        test: /\.scss$/,
 
         // Remember that these run in reverse, so start at the last item in the
         // array and read up to understand what's going on.
