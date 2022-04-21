@@ -35,7 +35,6 @@ exports[`RichText component renders as expected 1`] = `
         "remove_trailing_brs": true,
         "selector": "textarea",
         "setup": [Function],
-        "skin": false,
         "toolbar": "undo redo | style | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatselect | link | eapdImageUpload | help",
         "toolbar_mode": "wrap",
       }
