@@ -14,8 +14,8 @@ const schemas = Joi.object({
     'string.empty': 'Role is required'
   }),
   hasCosts: Joi.string().required().messages({
-    'string.base': 'Must select hourly or yearly.',
-    'string.empty': 'Must select hourly or yearly.'
+    'string.base': 'Indicate whether or not this person has costs.',
+    'string.empty': 'Indicate whether or not this person has costs.'
   }),
   costs: Joi.alternatives().conditional('hasCosts', {
     is: 'yes',
