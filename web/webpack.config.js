@@ -74,27 +74,6 @@ const config = {
         ]
       },
       {
-        test: /\.css$/,
-
-        // Remember that these run in reverse, so start at the last item in the
-        // array and read up to understand what's going on.
-        use: [
-          // Converts the local disk paths from css-loader into their final
-          // paths relative to the dist directory, then pulls everything
-          // together
-          MiniCssExtractPlugin.loader,
-
-          // Interprets any url() and @import statements and resolves them to
-          // their full path on the local disk.
-          {
-            loader: 'css-loader',
-            options: {
-              import: true
-            }
-          }
-        ]
-      },
-      {
         test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
         type: 'asset/resource',
         generator: {
