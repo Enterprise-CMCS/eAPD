@@ -60,20 +60,6 @@ const config = {
         ]
       },
       {
-        test: /\.css$/,
-        use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
-          {
-            loader: 'css-loader',
-            options: {
-              import: true
-            }
-          }
-        ]
-      },
-      {
         test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
         type: 'asset/resource',
         generator: {
