@@ -32,7 +32,7 @@ const config = {
         use: ['babel-loader']
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
 
         // Remember that these run in reverse, so start at the last item in the
         // array and read up to understand what's going on.
@@ -44,12 +44,8 @@ const config = {
 
           // Interprets any url() and @import statements and resolves them to
           // their full path on the local disk.
-          {
-            loader: 'css-loader',
-            options: {
-              import: true
-            }
-          },
+          'css-loader',
+
           // Add browser prefixes and minify CSS.
           {
             loader: 'postcss-loader',
@@ -71,7 +67,7 @@ const config = {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: ['node_modules']
+                includePaths: [path.resolve(__dirname, '../node_modules')]
               }
             }
           }
