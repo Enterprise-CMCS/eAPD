@@ -12,7 +12,7 @@ variable "mongo_admin_url" {}
 variable "database_url" {}
 variable "okta_domain" {}
 variable "okta_api_key" {}
-variable "security_group_ids" {}
+#variable "security_group_ids" {}
 variable "environment" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
@@ -36,7 +36,7 @@ source "amazon-ebs" "Golden_Image" {
     associate_public_ip_address = true
     vpc_id = var.vpc_id
     subnet_id = var.subnet_id
-    security_group_ids = var.security_group_ids
+
 }
 
 build {
