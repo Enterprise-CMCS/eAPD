@@ -5,6 +5,15 @@ import { connect } from 'react-redux';
 import { t } from '../../../i18n';
 import { selectActivitySchedule } from '../../../reducers/activities.selectors';
 
+const activityTitle = (activityName, milestones) => {
+  if (!activityName && milestones.length === 0) {
+    return "Untitled | No milestones were provided."
+  }
+  if (!activityName && milestones.length > 0) {
+    return "Untitled Milestones"
+  }
+  return `${activityName} Milestones`;
+}
 const ScheduleSummary = ({ activities }) => (
   <div>
     <h2>Activity Schedule Summary</h2>
@@ -27,7 +36,7 @@ const ScheduleSummary = ({ activities }) => (
           </tr>
         </thead>
         <tbody>
-          {activities.map(({ name: activityName, dateRange }, i) => (
+          {activities.map(({ name: activityName, dateRange, milestones }, i) => (
             <tr
               key={activityName}
               className="summary-table--gray_row__highlight"
@@ -36,10 +45,10 @@ const ScheduleSummary = ({ activities }) => (
                 className="ds-u-font-weight--bold ds-u-border-right--0"
                 style={{ width: '70%' }}
               >
-                Activity {i + 1}: {activityName || 'Untitled'} Milestones
+                Activity {i + 1}: {activityTitle(activityName, milestones)}
               </td>
               <td className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
-                {dateRange}
+                {dateRange === "Date not specified - Date not specified" ? "Dates not specified" : dateRange}
               </td>
             </tr>
           ))}
@@ -72,18 +81,23 @@ const ScheduleSummary = ({ activities }) => (
                 className="ds-u-font-weight--bold ds-u-border-right--0"
                 colSpan={2}
               >
-                Activity {i + 1}: {activityName || 'Untitled'} Milestones
+                Activity {i + 1}: {activityTitle(activityName, milestones)}
               </th>
             </tr>
           </thead>
           <tbody key={`${activityName}-body`}>
+            {milestones.length === 0 && (
+              <tr>
+                <td className="ds-u-border-right--0">No milestones to display.</td>
+              </tr>
+            )}
             {milestones.map(({ end: milestoneEnd, name: milestoneName }) => (
               <tr key={milestoneName}>
                 <td className="ds-u-border-right--0">
-                  {milestoneName || 'Milestone not specified'}
+                  {milestoneName || 'Milestone not specified.'}
                 </td>
                 <td className="ds-u-border-left--0 ds-u-text-align--left">
-                  {milestoneEnd}
+                  {milestoneEnd || 'Date not specified.'}
                 </td>
               </tr>
             ))}

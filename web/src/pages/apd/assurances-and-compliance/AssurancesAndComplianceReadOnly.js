@@ -43,14 +43,14 @@ const AssurancesAndCompliance = ({ citations }) => {
                           whiteSpace: 'pre-wrap'
                         }}
                       >
-                        {explanation || <em>No response was provided</em>}
+                        {explanation || <em>No response was provided.</em>}
                       </div>
                     </div>
                   </div>
                 )}
                 {checked === null && (
                   <div>
-                    <strong>No response was provided</strong>
+                    <strong>No response was provided.</strong>
                   </div>
                 )}
                 <br />
