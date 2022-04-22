@@ -336,11 +336,7 @@ jobs:
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY          
-            packer build --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var production_mongo_database=$PRODUCTION_MONGO_DATABASE \
-              --var production_mongo_initdb_root_username=$PRODUCTION_MONGO_INITDB_ROOT_USERNAME --var production_mongo_initdb_root_password=$PRODUCTION_MONGO_INITDB_ROOT_PASSWORD \
-              --var production_mongo_initdb_database=$PRODUCTION_MONGO_INITDB_DATABASE --var production_mongo_database_username=$PRODUCTION_MONGO_DATABASE \
-              --var production_mongo_database_password=$PRODUCTION_MONGO_DATABASE_PASSWORD --var production_mongo_admin_url=$PRODUCTION_MONGO_ADMIN_URL --var production_database_url=$PRODUCTION_DATABASE_URL \
-              --var production_okta_domain=$PRODUCTION_OKTA_DOMAIN --var production_okta_api_key=$PRODUCTION_OKTA_API_KEY --var production_environment=Production \
+            packer build --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var production_environment=Production \
               prod-ami.pkr.hcl
   cleanup preview ami:
     docker:
