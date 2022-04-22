@@ -54,7 +54,7 @@ build {
             "DATABASE_URL=${var.preview_database_url}",
             "OKTA_DOMAIN=${var.preview_okta_domain}",
             "OKTA_API_KEY=${var.preview_okta_api_key}",
-            "ENVIRONMENT=${var.preview_environment}"
+            "ENVIRONMENT=${var.environment}"
         ]        
         script = "./bootstrap202202171243.sh"
     }
