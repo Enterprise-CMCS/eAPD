@@ -61,7 +61,7 @@ workflows:
               only:         # Remove me
                 - bbrooks/3999-Packer-to-CircleCI   # Remove me          
           requires:
-            - build preview ami        
+            - build preview ami
       - cleanup production staging ami:
           name: Cleanup Old/Unused Production/Staging AMIs
           filters:          # Remove me
