@@ -318,7 +318,7 @@ jobs:
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           sudo apt-get update && sudo apt-get install packer
-        name: Packer Build Preview AMI
+        name: Packer Build Production AMI
         working_directory: ~/project/packer
         command: |
           packer build --var vpc_id=$PRODUCTION_VPC_ID --var subnet_id=$PRODUCTION_SUBNET_ID --var gold_owner=$GOLD_OWNER --var production_mongo_database=$PRODUCTION_MONGO_DATABASE \
