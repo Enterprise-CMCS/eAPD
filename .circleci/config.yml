@@ -349,7 +349,7 @@ jobs:
           command: |
             ./aws.preview-ami-cleanup.sh 
 
-  cleanup production/staging ami:
+  cleanup production staging ami:
     docker:
       - image: cimg/base:2021.04
         auth:
