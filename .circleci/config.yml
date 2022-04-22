@@ -62,6 +62,7 @@ workflows:
             branches:
               only:
                 - main
+    jobs:
       - cleanup preview ami:
           name: Cleanup Old/Unused Preview AMIs
       - cleanup production/staging ami:
