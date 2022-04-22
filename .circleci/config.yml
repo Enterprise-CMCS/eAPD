@@ -39,7 +39,8 @@ workflows:
           requires:
             - install dependencies
 
-  build aws amis:
+  # Workflow to build new AMIs based on the latest gold images weekly
+  weekly aws ami builds:
     triggers:
       - schedule:
         cron: '0 0 * * 1'  # Mondays at midnight
@@ -53,7 +54,7 @@ workflows:
       - build production/staging ami:
         name: Build Prod/Staging AMI
 
-  cleanup aws amis:
+  weekly aws ami cleanup:
     triggers:
       - schedule:
         cron: '0 1 * * 2'  # Tuesdays at 1 am
