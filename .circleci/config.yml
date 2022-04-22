@@ -53,9 +53,9 @@ workflows:
       - build preview ami:
           name: Build Preview AMI
       - build production staging ami:
-          name: Build Prod/Staging AMI
+          name: Build Prod Staging AMI
       - cleanup preview ami:
-          name: Cleanup Old/Unused Preview AMIs
+          name: Cleanup Old Unused Preview AMIs
           filters:          # Remove me
             branches:       # Remove me
               only:         # Remove me
@@ -63,7 +63,7 @@ workflows:
           requires:
             - build preview ami
       - cleanup production staging ami:
-          name: Cleanup Old/Unused Production/Staging AMIs
+          name: Cleanup Old Unused Production/Staging AMIs
           filters:          # Remove me
             branches:       # Remove me
               only:         # Remove me
@@ -353,7 +353,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Cleanup Old/Unused Preview AMIs
+          name: Cleanup Old Unused Preview AMIs
           working_directory: ~/project/bin/preview-deploy
           command: |
             export AWS_REGION=$AWS_REGION
