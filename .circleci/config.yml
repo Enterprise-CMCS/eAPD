@@ -39,6 +39,29 @@ workflows:
           requires:
             - install dependencies
 
+  build aws amis:
+    triggers:
+      - schedule:
+        cron: '0 0 * * 1'  # Mondays at midnight
+        filters:
+          branches:
+            only:
+              - main
+    jobs:
+      - build preview ami:
+        name: Build Preview AMI
+      - build production/staging ami:
+        name: Build Prod/Staging AMI
+
+  cleanup aws amis:
+    triggers:
+      - schedule:
+        cron: '0 1 * * 2'  # Tuesdays at 1 am
+      - cleanup preview ami:
+        name: Cleanup Old/Unused Preview AMIs
+      - cleanup production/staging ami:
+        name: Cleanup Old/Unused Production/Staging AMIs
+
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
     jobs:
@@ -257,6 +280,80 @@ jobs:
   # These jobs don't rely on anything else having happened first, and cut
   # across both backend and frontend.
 
+  # Creates the AWS AMIs that we use to build our app on based on the provided Golden Images
+  build preview ami:
+    docker:
+      - image: cimg/base:2021.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+        name: Install Packer
+        command: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install packer
+        name: Packer Build Preview AMI
+        working_directory: ~/project/packer
+        command: |
+          packer build --var vpc_id=$PREVIEW_VPC_ID --var subnet_id=$PREVIEW_SUBNET_ID --var gold_owner=$GOLD_OWNER --var preview_mongo_database=$PREVIEW_MONGO_DATABASE \
+            --var preview_mongo_initdb_root_username=$PREVIEW_MONGO_INITDB_ROOT_USERNAME --var preview_mongo_initdb_root_password=$PREVIEW_MONGO_INITDB_ROOT_PASSWORD \
+            --var preview_mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE \
+            --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
+            --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var preview_environment=Preview \
+            preview-ami.pkr.hcl
+  build production/staging ami:
+    docker:
+      - image: cimg/base:2021.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+        name: Install Packer
+        command: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install packer
+        name: Packer Build Preview AMI
+        working_directory: ~/project/packer
+        command: |
+          packer build --var vpc_id=$PRODUCTION_VPC_ID --var subnet_id=$PRODUCTION_SUBNET_ID --var gold_owner=$GOLD_OWNER --var production_mongo_database=$PRODUCTION_MONGO_DATABASE \
+            --var production_mongo_initdb_root_username=$PRODUCTION_MONGO_INITDB_ROOT_USERNAME --var production_mongo_initdb_root_password=$PRODUCTION_MONGO_INITDB_ROOT_PASSWORD \
+            --var production_mongo_initdb_database=$PRODUCTION_MONGO_INITDB_DATABASE --var production_mongo_database_username=$PRODUCTION_MONGO_DATABASE \
+            --var production_mongo_database_password=$PRODUCTION_MONGO_DATABASE_PASSWORD --var production_mongo_admin_url=$PRODUCTION_MONGO_ADMIN_URL --var production_database_url=$PRODUCTION_DATABASE_URL \
+            --var production_okta_domain=$PRODUCTION_OKTA_DOMAIN --var production_okta_api_key=$PRODUCTION_OKTA_API_KEY --var production_environment=Production \
+            prod-ami.pkr.hcl      
+  cleanup preview ami:
+    docker:
+      - image: cimg/base:2021.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+        name: Cleanup Old/Unused Preview AMIs
+        working_directory: ~/project/bin/preview-deploy
+        command: |
+          ./aws.preview-ami-cleanup.sh 
+
+  cleanup production/staging ami:
+    docker:
+      - image: cimg/base:2021.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+        name: Cleanup Old/Unused Production/Staging AMIs
+        command: |
+          ./aws.prod-ami-cleanup.sh
+        
   # Installs yarn dependencies for the frontend and backend pieces, then saves
   # those in the workflow workspace. Save the yarn cache to CircleCI cache to
   # speed up subsequent builds, but don't save the dependencies to cache

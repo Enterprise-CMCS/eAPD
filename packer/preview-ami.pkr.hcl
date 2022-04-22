@@ -1,6 +1,6 @@
 variable "vpc_id" {}
 variable "subnet_id" {}
-variable "ami_name" {}
+#variable "ami_name" {}
 variable "gold_owner" {}
 variable "preview_mongo_database" {}
 variable "preview_mongo_initdb_root_username" {}
