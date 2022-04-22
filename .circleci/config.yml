@@ -41,32 +41,49 @@ workflows:
 
   # Workflow to build new AMIs based on the latest gold images weekly
   weekly aws ami builds:
-    triggers:
-      - schedule:
-          cron: '0 0 * * 1'  # Mondays at midnight
-          filters:
-            branches:
-              only:
-                - main
+#    triggers:
+#      - schedule:
+#          cron: '0 0 * * 1'  # Mondays at midnight
+#          filters:
+#            branches:
+#              only:
+#                - main
+
     jobs:
       - build preview ami:
           name: Build Preview AMI
+          filters:          # Remove me
+            branches:       # Remove me
+              only:         # Remove me
+                - bbrooks/3999-Packer-to-CircleCI   # Remove me
       - build production staging ami:
           name: Build Prod/Staging AMI
+          filters:          # Remove me
+            branches:       # Remove me
+              only:         # Remove me
+                - bbrooks/3999-Packer-to-CircleCI   # Remove me
 
   weekly aws ami cleanup:
-    triggers:
-      - schedule:
-          cron: '0 1 * * 2'  # Tuesdays at 1 am
-          filters:
-            branches:
-              only:
-                - main
+#    triggers:
+#      - schedule:
+#          cron: '0 1 * * 2'  # Tuesdays at 1 am
+#          filters:
+#            branches:
+#              only:
+#                - main
     jobs:
       - cleanup preview ami:
           name: Cleanup Old/Unused Preview AMIs
+          filters:          # Remove me
+            branches:       # Remove me
+              only:         # Remove me
+                - bbrooks/3999-Packer-to-CircleCI   # Remove me          
       - cleanup production staging ami:
           name: Cleanup Old/Unused Production/Staging AMIs
+          filters:          # Remove me
+            branches:       # Remove me
+              only:         # Remove me
+                - bbrooks/3999-Packer-to-CircleCI   # Remove me          
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
