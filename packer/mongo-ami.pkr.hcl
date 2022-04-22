@@ -12,7 +12,6 @@ variable "mongo_admin_url" {}
 variable "database_url" {}
 variable "okta_domain" {}
 variable "okta_api_key" {}
-#variable "security_group_ids" {}
 variable "environment" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
