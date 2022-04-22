@@ -12,7 +12,7 @@ variable "preview_mongo_admin_url" {}
 variable "preview_database_url" {}
 variable "preview_okta_domain" {}
 variable "preview_okta_api_key" {}
-variable "preview_environment" {}
+variable "environment" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
