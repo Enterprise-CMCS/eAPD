@@ -65,7 +65,7 @@ workflows:
     jobs:
       - cleanup preview ami:
           name: Cleanup Old/Unused Preview AMIs
-      - cleanup production/staging ami:
+      - cleanup production staging ami:
           name: Cleanup Old/Unused Production/Staging AMIs
 
   # Workflow to test, build, and deploy the backend and frontend
