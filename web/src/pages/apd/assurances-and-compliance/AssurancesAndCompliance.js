@@ -13,7 +13,7 @@ import {
   setJustificationForSecurity,
   setJustificationForSoftwareRights
 } from '../../../actions/editApd';
-import Choice from '../../../components/Choice';
+import { ChoiceList } from '@cmsgov/design-system';
 import { Section, Subsection } from '../../../components/Section';
 import TextArea from '../../../components/TextArea';
 import regLinks from '../../../data/assurancesAndCompliance.yaml';
@@ -54,7 +54,7 @@ const AssurancesAndCompliance = ({
   justificationForSecurity,
   justificationForSoftwareRights
 }) => {
-  const handleCheckChange = (section, index, newValue) => () => {
+  function handleCheckChange(section, index, newValue) {
     switch (section) {
       case 'procurement':
         return complyingWithProcurement(index, newValue);
@@ -67,7 +67,7 @@ const AssurancesAndCompliance = ({
       default:
         return null;
     }
-  };
+  }
 
   const handleExplanationChange =
     (section, index) =>
@@ -100,44 +100,49 @@ const AssurancesAndCompliance = ({
                 {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
               </h4>
               {citations[name].map(({ title, checked, explanation }, index) => (
-                <fieldset key={title} className="ds-u-margin-top--2">
-                  <legend className="ds-c-label">
-                    Are you complying with{' '}
-                    <strong>
-                      <LinkOrText link={regulations[title]} title={title} />
-                    </strong>
-                    ?
-                  </legend>
-                  <Choice
-                    checked={checked === true}
-                    label="Yes"
-                    name={`apd-assurances-yes-${namify(name, title)}`}
-                    onChange={handleCheckChange(name, index, true)}
-                    size="small"
-                    type="radio"
-                    value="yes"
-                  />
-                  <Choice
-                    checked={checked === false}
-                    label="No"
-                    name={`apd-assurances-no-${namify(name, title)}`}
-                    onChange={handleCheckChange(name, index, false)}
-                    size="small"
-                    type="radio"
-                    value="no"
-                    checkedChildren={
-                      <div className="ds-c-choice__checkedChild">
-                        <TextArea
-                          label="Please explain"
-                          name={namify(name, title)}
-                          value={explanation}
-                          onChange={handleExplanationChange(name, index)}
-                          rows={5}
-                        />
-                      </div>
+                <ChoiceList
+                  key={title}
+                  label={
+                    <legend className="ds-c-label">
+                      Are you complying with{' '}
+                      <strong>
+                        <LinkOrText link={regulations[title]} title={title} />
+                      </strong>
+                      ?
+                    </legend>
+                  }
+                  name={`apd-assurances-${namify(name, title)}`}
+                  choices={[
+                    {
+                      label: 'Yes',
+                      value: 'yes',
+                      checked: checked === true
+                    },
+                    {
+                      label: 'No',
+                      value: 'no',
+                      checked: checked === false,
+                      checkedChildren: (
+                        <div className="ds-c-choice__checkedChild">
+                          <TextArea
+                            label="Please explain"
+                            name={namify(name, title)}
+                            value={explanation}
+                            onChange={handleExplanationChange(name, index)}
+                            rows={5}
+                          />
+                        </div>
+                      )
                     }
-                  />
-                </fieldset>
+                  ]}
+                  type="radio"
+                  size="small"
+                  onChange={e => {
+                    e.target.value === 'yes'
+                      ? handleCheckChange(name, index, true)
+                      : handleCheckChange(name, index, false);
+                  }}
+                />
               ))}
             </div>
           ))}
