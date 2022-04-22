@@ -52,16 +52,8 @@ workflows:
     jobs:
       - build preview ami:
           name: Build Preview AMI
-          filters:          # Remove me
-            branches:       # Remove me
-              only:         # Remove me
-                - bbrooks/3999-Packer-to-CircleCI   # Remove me
       - build production staging ami:
           name: Build Prod/Staging AMI
-          filters:          # Remove me
-            branches:       # Remove me
-              only:         # Remove me
-                - bbrooks/3999-Packer-to-CircleCI   # Remove me
 
   weekly aws ami cleanup:
 #    triggers:
@@ -78,12 +70,16 @@ workflows:
             branches:       # Remove me
               only:         # Remove me
                 - bbrooks/3999-Packer-to-CircleCI   # Remove me          
+          requires:
+            - build preview ami                
       - cleanup production staging ami:
           name: Cleanup Old/Unused Production/Staging AMIs
           filters:          # Remove me
             branches:       # Remove me
               only:         # Remove me
                 - bbrooks/3999-Packer-to-CircleCI   # Remove me          
+          requires:
+            - build production staging ami                
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
