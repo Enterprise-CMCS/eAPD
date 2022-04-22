@@ -32,11 +32,9 @@ const MilestoneForm = forwardRef(
 
     const changeDate = (_, dateStr) =>
       setValue(`endDate`, dateStr);
-      // dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
 
     const changeName = ({ target: { value } }) =>
       setValue(`milestone`, value);
-      // dispatch({ type: 'updateField', field: 'milestone', value });
 
     useEffect(() => {
       setFormValid(isValid);
