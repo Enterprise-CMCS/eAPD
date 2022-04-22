@@ -27,7 +27,7 @@ class ActivitiesStateStaffExpensesPage {
   };
 
   // Open the indexth staff edit page, fill info, then click done.
-  fillStaff = (years, staffIndex, title, description, costs, ftes) => {
+  fillStaff = ({years, staffIndex, title, description, costs, ftes}) => {
     const staffNumber = staffIndex + 1;
   
     // Lower default typing delays for long titles/descriptions

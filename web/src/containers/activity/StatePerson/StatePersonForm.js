@@ -68,7 +68,6 @@ const StatePersonForm = forwardRef(
   };
   
   const handleSubForm = value => {
-    console.log("subForm valid:", value);
     setSubFormValid(value);
   }  
   
