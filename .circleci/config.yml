@@ -43,11 +43,11 @@ workflows:
   weekly aws ami builds:
     triggers:
       - schedule:
-        cron: '0 0 * * 1'  # Mondays at midnight
-        filters:
-          branches:
-            only:
-              - main
+          cron: '0 0 * * 1'  # Mondays at midnight
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - build preview ami:
         name: Build Preview AMI
@@ -57,7 +57,11 @@ workflows:
   weekly aws ami cleanup:
     triggers:
       - schedule:
-        cron: '0 1 * * 2'  # Tuesdays at 1 am
+          cron: '0 1 * * 2'  # Tuesdays at 1 am
+          filters:
+            branches:
+              only:
+                - main
       - cleanup preview ami:
         name: Cleanup Old/Unused Preview AMIs
       - cleanup production/staging ami:
