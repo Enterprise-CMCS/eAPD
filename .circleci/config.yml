@@ -41,13 +41,13 @@ workflows:
 
   # Workflow to build new AMIs based on the latest gold images weekly
   weekly aws ami builds:
-#    triggers:
-#      - schedule:
-#          cron: '0 0 * * 1'  # Mondays at midnight
-#          filters:
-#            branches:
-#              only:
-#                - main
+    #    triggers:
+    #      - schedule:
+    #          cron: '0 0 * * 1'  # Mondays at midnight
+    #          filters:
+    #            branches:
+    #              only:
+    #                - main
     jobs:
       - build preview ami:
           name: Build Preview AMI
@@ -55,18 +55,18 @@ workflows:
           name: Build Prod Staging AMI
       - cleanup preview ami:
           name: Cleanup Old Unused Preview AMIs
-          filters:          # Remove me
-            branches:       # Remove me
-              only:         # Remove me
-                - bbrooks/3999-Packer-to-CircleCI   # Remove me          
+          filters: # Remove me
+            branches: # Remove me
+              only: # Remove me
+                - bbrooks/3999-Packer-to-CircleCI # Remove me
           requires:
             - build preview ami
       - cleanup production staging ami:
           name: Cleanup Old Unused Production/Staging AMIs
-          filters:          # Remove me
-            branches:       # Remove me
-              only:         # Remove me
-                - bbrooks/3999-Packer-to-CircleCI   # Remove me          
+          filters: # Remove me
+            branches: # Remove me
+              only: # Remove me
+                - bbrooks/3999-Packer-to-CircleCI # Remove me
           requires:
             - build production staging ami
 
@@ -261,7 +261,6 @@ workflows:
             - frontend build preview
             - yaml test
 
-
       - store artifacts:
           name: store artifacts staging
           filters:
@@ -342,7 +341,7 @@ jobs:
               --var production_mongo_initdb_database=$PRODUCTION_MONGO_INITDB_DATABASE --var production_mongo_database_username=$PRODUCTION_MONGO_DATABASE \
               --var production_mongo_database_password=$PRODUCTION_MONGO_DATABASE_PASSWORD --var production_mongo_admin_url=$PRODUCTION_MONGO_ADMIN_URL --var production_database_url=$PRODUCTION_DATABASE_URL \
               --var production_okta_domain=$PRODUCTION_OKTA_DOMAIN --var production_okta_api_key=$PRODUCTION_OKTA_API_KEY --var production_environment=Production \
-              prod-ami.pkr.hcl      
+              prod-ami.pkr.hcl
   cleanup preview ami:
     docker:
       - image: cimg/base:2021.04
@@ -358,7 +357,7 @@ jobs:
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY          
-            ./aws.preview-ami-cleanup.sh 
+            ./aws.preview-ami-cleanup.sh
 
   cleanup production staging ami:
     docker:
@@ -375,7 +374,7 @@ jobs:
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY          
             ./aws.prod-ami-cleanup.sh
-        
+
   # Installs yarn dependencies for the frontend and backend pieces, then saves
   # those in the workflow workspace. Save the yarn cache to CircleCI cache to
   # speed up subsequent builds, but don't save the dependencies to cache
@@ -688,7 +687,7 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths:
-            - ./build-url.txt                      
+            - ./build-url.txt
 
   # Lints the frontend code.
   frontend lint:
