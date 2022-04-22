@@ -50,9 +50,9 @@ workflows:
                 - main
     jobs:
       - build preview ami:
-        name: Build Preview AMI
+          name: Build Preview AMI
       - build production/staging ami:
-        name: Build Prod/Staging AMI
+          name: Build Prod/Staging AMI
 
   weekly aws ami cleanup:
     triggers:
@@ -63,9 +63,9 @@ workflows:
               only:
                 - main
       - cleanup preview ami:
-        name: Cleanup Old/Unused Preview AMIs
+          name: Cleanup Old/Unused Preview AMIs
       - cleanup production/staging ami:
-        name: Cleanup Old/Unused Production/Staging AMIs
+          name: Cleanup Old/Unused Production/Staging AMIs
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
