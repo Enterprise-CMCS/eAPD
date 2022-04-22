@@ -61,7 +61,7 @@ workflows:
               only:         # Remove me
                 - bbrooks/3999-Packer-to-CircleCI   # Remove me          
           requires:
-            - build preview ami                
+            - build preview ami        
       - cleanup production staging ami:
           name: Cleanup Old/Unused Production/Staging AMIs
           filters:          # Remove me
@@ -69,7 +69,7 @@ workflows:
               only:         # Remove me
                 - bbrooks/3999-Packer-to-CircleCI   # Remove me          
           requires:
-            - build production staging ami                
+            - build production staging ami
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
