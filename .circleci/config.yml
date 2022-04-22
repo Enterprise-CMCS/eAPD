@@ -54,16 +54,6 @@ workflows:
           name: Build Preview AMI
       - build production staging ami:
           name: Build Prod/Staging AMI
-
-  weekly aws ami cleanup:
-#    triggers:
-#      - schedule:
-#          cron: '0 1 * * 2'  # Tuesdays at 1 am
-#          filters:
-#            branches:
-#              only:
-#                - main
-    jobs:
       - cleanup preview ami:
           name: Cleanup Old/Unused Preview AMIs
           filters:          # Remove me
