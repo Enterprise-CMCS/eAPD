@@ -628,41 +628,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       activityPage.checkInputField('Description', '');
       activityPage.checkFFYinputCostFields({
         years,
