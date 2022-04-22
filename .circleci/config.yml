@@ -290,7 +290,7 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install Packer
+        name: Install Packer for Preview
         command: |
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
@@ -313,7 +313,7 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install Packer
+        name: Install Packer for Prod
         command: |
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
