@@ -51,7 +51,7 @@ workflows:
     jobs:
       - build preview ami:
           name: Build Preview AMI
-      - build production/staging ami:
+      - build production staging ami:
           name: Build Prod/Staging AMI
 
   weekly aws ami cleanup:
@@ -311,7 +311,7 @@ jobs:
               --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var preview_environment=Preview \
               preview-ami.pkr.hcl
-  build production/staging ami:
+  build production staging ami:
     docker:
       - image: cimg/base:2021.04
         auth:
