@@ -295,6 +295,7 @@ jobs:
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           sudo apt-get update && sudo apt-get install packer
+      - run:
         name: Packer Build Preview AMI
         working_directory: ~/project/packer
         command: |
@@ -318,6 +319,7 @@ jobs:
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
           sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
           sudo apt-get update && sudo apt-get install packer
+      - run:
         name: Packer Build Production AMI
         working_directory: ~/project/packer
         command: |
