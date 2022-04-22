@@ -17,8 +17,6 @@ const ApdStateKeyPerson = ({
       : 'Key Personnel name not specified';
   }
 
-  console.log({hasCosts})
-
   const costByYear = useMemo(
     () => (
       <div className="ds-u-margin-top--2">

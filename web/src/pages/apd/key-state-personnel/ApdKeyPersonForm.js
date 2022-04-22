@@ -53,7 +53,6 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid },
   });
 
   useEffect(() => {
-    console.log({ isValid });
     setFormValid(isValid);
   }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
