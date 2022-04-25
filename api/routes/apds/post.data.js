@@ -67,7 +67,7 @@ const getNewApd = () => {
         alternatives: '',
         contractorResources: [],
         costAllocation: forAllYears({
-          ffp: { federal: 90, state: 10 },
+          ffp: { federal: 0, state: 100 },
           other: 0
         }),
         costAllocationNarrative: {
