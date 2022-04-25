@@ -34,8 +34,8 @@ tap.test('APD data initializer', async test => {
         alternatives: '',
         contractorResources: [],
         costAllocation: {
-          1997: { ffp: { federal: 90, state: 10 }, other: 0 },
-          1998: { ffp: { federal: 90, state: 10 }, other: 0 }
+          1997: { ffp: { federal: 0, state: 100 }, other: 0 },
+          1998: { ffp: { federal: 0, state: 100 }, other: 0 }
         },
         costAllocationNarrative: {
           methodology: '',
