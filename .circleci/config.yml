@@ -304,6 +304,7 @@ jobs:
             sudo apt-get update && sudo apt-get install packer
       - run:
           name: Packer Build Preview AMI
+          no_output_timeout: 30m
           working_directory: ~/project/packer
           command: |
             export AWS_REGION=$AWS_REGION
@@ -331,6 +332,7 @@ jobs:
             sudo apt-get update && sudo apt-get install packer
       - run:
           name: Packer Build Production AMI
+          no_output_timeout: 30m
           working_directory: ~/project/packer
           command: |
             export AWS_REGION=$AWS_REGION
