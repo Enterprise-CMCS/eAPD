@@ -1,25 +1,7 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
-import { formatISO } from 'date-fns';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { isNumeric } from '../util/formats';
-
-const dateParts = value => {
-  if (!value || value === '') {
-    return {
-      day: '',
-      month: '',
-      year: ''
-    };
-  } else {
-    const newDate = new Date(value);
-    return {
-      day: newDate.getUTCDate(),
-      month: newDate.getUTCMonth() + 1,
-      year: newDate.getUTCFullYear()
-    };
-  }
-};
 
 const DateField = ({
   value,
@@ -36,20 +18,34 @@ const DateField = ({
     yearInvalid: false
   });
 
-  const [dateObj] = useState(dateParts(value));
+  useEffect(() => {
+    setErrorInfo({ ...errorInfo, errorMessage });
+  }, [errorMessage]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const dateStr = dateObject => {
-    const year = dateObject.year;
-    const month = dateObject.month - 1;
-    const day = dateObject.day;
+  const dateParts = useMemo(() => {
+    if (!value) {
+      return {
+        day: '',
+        month: '',
+        year: ''
+      };
+    }
+    const [year, month, day] = value.trim().slice(0, 10).split('-');
+    return { day: +day || '', month: +month || '', year: +year || '' };
+  }, [value]);
 
-    const date = formatISO(new Date(year, month, day), {
-      representation: 'date'
-    });
-    return date;
+  const formatDate = ({ day = '', month = '', year = '' } = {}) => {
+    if (day === '' && month === '' && year === '') {
+      return '';
+    }
+
+    // Make sure it's an ISO-8601 date, which uses 2-digit month and day
+    return `${year}-${month < 10 ? `0${month}` : month}-${
+      day < 10 ? `0${day}` : day
+    }`;
   };
 
-  const getErrorMsg = dateObject => {
+  const validate = dateObject => {
     const { day = '', month = '', year = '' } = dateObject || {};
 
     if (day === '' && month === '' && year === '') {
@@ -57,9 +53,8 @@ const DateField = ({
         dayInvalid: true,
         monthInvalid: true,
         yearInvalid: true,
-        errorMessage: errorMessage || 'Date is required'
+        errorMessage: ''
       });
-      return;
     } else {
       const errors = {
         dayInvalid: false,
@@ -69,20 +64,20 @@ const DateField = ({
       };
 
       // Validation for parsing & the date
-      if (!isNumeric(year) || year < 1900 || year > 2100) {
+      if (!isNumeric(year) || +year < 1900 || +year > 2100) {
         errors.yearInvalid = true;
-        errors.errorMessage = errorMessage || 'Must have a valid year';
+        errors.errorMessage = errors.errorMessage || 'Must have a valid year';
       }
 
-      if (!isNumeric(month) || month < 1 || month > 12) {
+      if (!isNumeric(month) || +month < 1 || +month > 12) {
         errors.monthInvalid = true;
-        errors.errorMessage = errorMessage || 'Must have a valid month';
+        errors.errorMessage = errors.errorMessage || 'Must have a valid month';
       }
 
       var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
-      if (!isNumeric(day) || day < 1 || day > lastDayOfMonth.getDate() + 1) {
+      if (!isNumeric(day) || +day < 1 || +day > lastDayOfMonth.getDate() + 1) {
         errors.dayInvalid = true;
-        errors.errorMessage = errorMessage || 'Must have a valid day';
+        errors.errorMessage = errors.errorMessage || 'Must have a valid day';
       }
 
       setErrorInfo(errors);
@@ -93,19 +88,19 @@ const DateField = ({
     <DSDateField
       {...rest}
       {...errorInfo}
-      dayDefaultValue={dateObj.day}
-      monthDefaultValue={dateObj.month}
-      yearDefaultValue={dateObj.year}
-      onBlur={(_, dateObject) => {
-        getErrorMsg(dateObject);
-        if (onBlur) onBlur();
+      dayDefaultValue={dateParts.day}
+      monthDefaultValue={dateParts.month}
+      yearDefaultValue={dateParts.year}
+      onBlur={(e, dateObject) => {
+        validate(dateObject);
+        onBlur(e, formatDate(dateObject));
       }}
-      onComponentBlur={(_, dateObject) => {
-        getErrorMsg(dateObject);
-        if (onComponentBlur) onComponentBlur();
+      onComponentBlur={(e, dateObject) => {
+        validate(dateObject);
+        onComponentBlur(e, formatDate(dateObject));
       }}
-      onChange={(_, dateObject) => {
-        onChange(_, dateStr(dateObject));
+      onChange={(e, dateObject) => {
+        onChange(e, formatDate(dateObject));
       }}
       errorPlacement="bottom"
     />
@@ -115,7 +110,7 @@ const DateField = ({
 DateField.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
+  onBlur: PropTypes.func.isRequired,
   onComponentBlur: PropTypes.func,
   errorMessage: PropTypes.string
 };

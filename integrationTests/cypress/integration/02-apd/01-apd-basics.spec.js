@@ -412,7 +412,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
-        cy.get(`[data-cy='outcome-${index}']`).click().should('have.value', '');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
 

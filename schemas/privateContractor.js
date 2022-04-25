@@ -1,6 +1,7 @@
-import Joi from 'joi';
+const Joi = require('joi').extend(require('@joi/date'));
 
 const schemas = Joi.object({
+  key: Joi.any(),
   name: Joi.string().trim().min(1).required().messages({
     'string.base': 'Provide a private contractor or vendor name.',
     'string.empty': 'Provide a private contractor or vendor name.',
@@ -15,17 +16,23 @@ const schemas = Joi.object({
     'string.min':
       'Provide a procurement methodology and description of services.'
   }),
-  start: Joi.date().iso().required().messages({
+  start: Joi.date().format('YYYY-MM-DD').iso().required().messages({
     'date.base': 'Provide a start date.',
     'date.empty': 'Provide a start date.',
     'date.format': 'Provide a start date.'
   }),
-  end: Joi.date().iso().min(Joi.ref('start')).required().messages({
-    'date.base': 'Provide an end date.',
-    'date.empty': 'Provide an end date.',
-    'date.format': 'Provide an end date.',
-    'date.min': 'Provide an end date that is after the start date.'
-  }),
+  end: Joi.date()
+    .format('YYYY-MM-DD')
+    .min(Joi.ref('start'))
+    .iso()
+    .required()
+    .messages({
+      'date.base': 'Provide an end date.',
+      'date.empty': 'Provide an end date.',
+      'date.format': 'Provide an end date.',
+      'date.min': 'Provide an end date that is after the start date.',
+      'any.ref': 'Provide an end date that is after the start date.'
+    }),
   totalCost: Joi.number().positive().required().messages({
     'number.base': 'Provide a contract cost.',
     'number.empty': 'Provide a contract cost.',
@@ -72,7 +79,8 @@ const schemas = Joi.object({
       })
     ),
     otherwise: Joi.any()
-  })
+  }),
+  files: Joi.any()
 });
 
 export default schemas;
