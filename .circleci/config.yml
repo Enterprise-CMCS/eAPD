@@ -41,13 +41,13 @@ workflows:
 
   # Workflow to build new AMIs based on the latest gold images weekly
   weekly aws ami builds:
-    #    triggers:
-    #      - schedule:
-    #          cron: '0 0 * * 1'  # Mondays at midnight
-    #          filters:
-    #            branches:
-    #              only:
-    #                - main
+        triggers:
+          - schedule:
+              cron: '0 0 * * 1'  # Mondays at midnight
+              filters:
+                branches:
+                  only:
+                    - main
     jobs:
       - build preview ami:
           name: Build Preview AMI
@@ -55,18 +55,10 @@ workflows:
           name: Build Prod Staging AMI
       - cleanup preview ami:
           name: Cleanup Old Unused Preview AMIs
-          filters: # Remove me
-            branches: # Remove me
-              only: # Remove me
-                - bbrooks/3999-Packer-to-CircleCI # Remove me
           requires:
             - Build Preview AMI
       - cleanup production staging ami:
           name: Cleanup Old Unused Production/Staging AMIs
-          filters: # Remove me
-            branches: # Remove me
-              only: # Remove me
-                - bbrooks/3999-Packer-to-CircleCI # Remove me
           requires:
             - Build Prod Staging AMI
 
