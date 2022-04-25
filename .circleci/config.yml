@@ -41,13 +41,13 @@ workflows:
 
   # Workflow to build new AMIs based on the latest gold images weekly
   weekly aws ami builds:
-        triggers:
-          - schedule:
-              cron: '0 0 * * 1'  # Mondays at midnight
-              filters:
-                branches:
-                  only:
-                    - main
+    triggers:
+      - schedule:
+          cron: '0 0 * * 1'  # Mondays at midnight
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - build preview ami:
           name: Build Preview AMI
