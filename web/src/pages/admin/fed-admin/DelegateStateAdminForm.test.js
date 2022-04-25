@@ -1,49 +1,76 @@
 import React from 'react';
-// import {
-// renderWithConnection,
-// act
-// screen,
-// within,
-// waitFor
-// } from 'apd-testing-library';
-// import userEvent from '@testing-library/user-event';
-import { renderWithConnection } from 'apd-testing-library';
+import {
+  // act
+  screen
+  // within,
+  // waitFor
+} from 'apd-testing-library';
+import userEvent from '@testing-library/user-event';
+import { render } from '@testing-library/react';
+import { setCookie } from '../../../util/auth';
+import * as mockAuth from '../../../util/auth';
 
-import { plain as DelegateStateAdminForm } from './DelegateStateAdminForm';
+import DelegateStateAdminForm from './DelegateStateAdminForm';
 
 const defaultProps = {
-  item: {
-    ffy: 2022,
-    name: 'Walter White',
-    email: 'walter@white.com',
-    phone: '9876543210',
-    state: 'New Mexico',
-    fileUrl: ''
-  },
-  id: 'state admin delegate 1',
-  key: 'key 1'
+  ffy: 2022,
+  name: 'Walter White',
+  email: 'walter@white.com',
+  phone: '9876543210',
+  state: 'nm',
+  fileUrl: ''
 };
+
+// USER EVENT .UPLOAD TO UPLOAD!!!!!!
 
 const setup = (props = {}) => {
-  renderWithConnection(<DelegateStateAdminForm {...defaultProps} {...props} />);
+  render(<DelegateStateAdminForm {...defaultProps} {...props} />);
 };
 
-// const setup = async (props = {}) => {
-//   const renderUtils = await act(async () => {
-//     renderWithConnection(
-//       <DelegateStateAdminForm {...defaultProps} {...props} />
-//     );
-//   });
-//   return renderUtils;
-// };
-
-xdescribe('the DelegateStateAdminForm component', () => {
+describe('the DelegateStateAdminForm component', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    // jest.resetAllMocks();
+    setCookie(mockAuth);
   });
 
-  test('renders correctly', async () => {
-    await setup();
-    // expect(screen.getByTestId('email').toHaveValue(defaultProps.item.email));
+  test('handles entering data', async () => {
+    setup();
+    userEvent.click(screen.getByRole('radio', { name: 'FFY 2022' }));
+
+    userEvent.type(
+      screen.getByRole('textbox', {
+        name: 'Name of State employee to be delegated as eAPD State Adminstrator Cannot be a contractor'
+      }),
+      defaultProps.name
+    );
+    userEvent.type(
+      screen.getByLabelText('State employee email address'),
+      defaultProps.email
+    );
+
+    userEvent.type(
+      screen.getByLabelText('State employee phone number'),
+      defaultProps.phone
+    );
+
+    userEvent.selectOptions(screen.getByRole('combobox'), 'New Mexico');
+
+    expect(screen.getByRole('radio', { name: 'FFY 2022' })).toBeChecked();
+
+    expect(screen.getByLabelText('State employee email address')).toHaveValue(
+      defaultProps.email
+    );
+
+    expect(screen.getByLabelText('State employee email address')).toHaveValue(
+      defaultProps.email
+    );
+
+    expect(
+      screen.getByRole('textbox', {
+        name: 'Name of State employee to be delegated as eAPD State Adminstrator Cannot be a contractor'
+      })
+    ).toHaveValue(defaultProps.name);
+
+    expect(screen.getByRole('combobox')).toHaveValue(defaultProps.state);
   });
 });
