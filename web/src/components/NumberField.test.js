@@ -40,9 +40,15 @@ describe('NumberField component', () => {
   });
 
   it('blanks the input value when selected if value is zero', () => {
-    const { input } = setup({ value: '0' });
+    const { input } = setup({ value: null });
     fireEvent.focus(input);
     expect(input.value).toBe('');
+  });
+
+  it('does not blank the input value when selected if value is zero', () => {
+    const { input } = setup({ value: '0' });
+    fireEvent.focus(input);
+    expect(input.value).toBe('0');
   });
 
   it('does not blank the input value when selected if value is not zero', () => {
@@ -54,7 +60,7 @@ describe('NumberField component', () => {
   it('sets the input value to zero on blur if the value is blank', () => {
     const { input } = setup({ value: '' });
     fireEvent.blur(input);
-    expect(input.value).toBe('0');
+    expect(input.value).toBe('');
   });
 
   it('does not change the input value on blur if the value is not zero', () => {

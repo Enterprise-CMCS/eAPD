@@ -3,7 +3,7 @@ import React from 'react';
 import { Section, Subsection } from '../../../components/Section';
 import MedicaidOffice from './ApdStateProfileMedicaidOffice';
 import KeyPersonnel from './ApdStateKeyPersonnel';
-import Waypoint from '../../../containers/ConnectedWaypoint';
+import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const KeyStatePersonnel = () => (
