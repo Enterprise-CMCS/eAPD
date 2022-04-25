@@ -23,6 +23,14 @@ resource "aws_security_group" "eapd-staging-mongo-ec2" {
     security_groups = ["sg-0f3c6bfa62fcefa4a"]
   }
 
+  ingress {
+    description = "Mongo Traffic from Staging Instance"
+    from_port   = 27017
+    to_port     = 27019
+    protocol    = "tcp"
+    security_groups = ["sg-01e01435dbbe6ce32"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
