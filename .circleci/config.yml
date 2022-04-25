@@ -365,6 +365,7 @@ jobs:
       - checkout
       - run:
           name: Cleanup Old/Unused Production/Staging AMIs
+          working_directory: ~/project/bin/prod-deploy          
           command: |
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
