@@ -61,8 +61,8 @@ const Activity = ({ activity, activityIndex }) => {
           {Object.entries(person.years).map(([year, { amt, perc }]) => (
             <li key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{amt}</Dollars> |{' '}
-              <strong>FTEs:</strong> {perc === '' ? '0' : perc} |{' '}
-              <strong>Total:</strong> <Dollars>{perc * amt}</Dollars>
+              <strong>FTEs:</strong> {perc === '' || perc === null ? '0' : perc}{' '}
+              | <strong>Total:</strong> <Dollars>{perc * amt}</Dollars>
             </li>
           ))}
         </ul>
@@ -121,12 +121,12 @@ const Activity = ({ activity, activityIndex }) => {
             <Dollars>{contractor.totalCost}</Dollars>
           </li>
           {Object.entries(contractor.years).map(([year, cost]) => (
-            <li className='ds-u-margin-top--1' key={year}>
+            <li className="ds-u-margin-top--1" key={year}>
               <strong>FFY {year} Cost:</strong> <Dollars>{cost}</Dollars>
               {(contractor.useHourly === true ||
                 contractor.useHourly === 'yes') && (
                 <Fragment key={uuidv4()}>
-                  <div className='subform__container'>
+                  <div className="subform__container">
                     <p>Number of hours: {contractor.hourly[year].hours}</p>
                     <p>
                       Hourly rate:{' '}
@@ -197,7 +197,7 @@ const Activity = ({ activity, activityIndex }) => {
         </p>
       )}
 
-      <div className='subform__container'>
+      <div className="subform__container">
         <p>
           <strong>
             This activity does not support the Medicaid standards and conditions
@@ -268,7 +268,8 @@ const Activity = ({ activity, activityIndex }) => {
         Cost Allocation
       </h3>
       <h4>Description of Cost Allocation Methodology</h4>
-      <div className='subform__container'
+      <div
+        className="subform__container"
         dangerouslySetInnerHTML={{
           __html: activity.costAllocationNarrative.methodology
         }}
@@ -281,7 +282,7 @@ const Activity = ({ activity, activityIndex }) => {
         .map(([year, narrative]) => (
           <Fragment key={uuidv4()}>
             <h3>FFY {year}</h3>
-            <div className='subform__container'>
+            <div className="subform__container">
               <h4>Other Funding Description</h4>
               <div
                 dangerouslySetInnerHTML={{

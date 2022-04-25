@@ -1,6 +1,6 @@
 import { TextField, unmaskValue, maskValue } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const NumberField = ({
   onBlur,
@@ -34,29 +34,32 @@ const NumberField = ({
     return Number(number.toFixed(4));
   };
 
-  const blurHandler = useCallback(
-    e => {
+  const blurHandler = e => {
+    const number = stringToNumber(e.target.value);
+    setLocal(`${number !== null ? number : ''}`);
+
+    if (onChange) {
+      onChange({
+        target: { value: number }
+      });
+    }
+
+    if (onBlur) {
+      onBlur({
+        target: { value: number }
+      });
+    }
+  };
+
+  const changeHandler = e => {
+    setLocal(e.target.value);
+    if (onChange) {
       const number = stringToNumber(e.target.value);
-      setLocal(`${number !== null ? number : ''}`);
-
-      onChange({ target: { value: number } });
-
-      onBlur({ target: { value: number } });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [onBlur, onChange]
-  );
-
-  const changeHandler = useCallback(
-    e => {
-      const number = stringToNumber(e.target.value);
-      setLocal(`${number !== null ? number : ''}`);
-
-      onChange({ target: { value: number } });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [onChange]
-  );
+      onChange({
+        target: { value: number }
+      });
+    }
+  };
 
   return (
     <TextField

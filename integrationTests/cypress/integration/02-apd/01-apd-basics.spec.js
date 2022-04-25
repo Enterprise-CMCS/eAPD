@@ -509,20 +509,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .click()
           .type(element.milestoneName);
 
-        cy.get(`.ds-c-field--month`)
-          .click()
-          .type(element.dateMonth);
+        cy.get(`.ds-c-field--month`).click().type(element.dateMonth);
 
-        cy.get(`.ds-c-field--day`)
-          .click()
-          .type(element.dateDay);
+        cy.get(`.ds-c-field--day`).click().type(element.dateDay);
 
-        cy.get(`.ds-c-field--year`)
-          .click()
-          .type(element.dateYear);
+        cy.get(`.ds-c-field--year`).click().type(element.dateYear);
 
-        cy.findByRole('button', { name: /Save/i })
-          .click();
+        cy.findByRole('button', { name: /Save/i }).click();
 
         cy.waitForSave();
 
@@ -635,9 +628,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         description: 'Test description',
         start: [1, 1, 2020],
         end: [1, 2, 2023],
-        totalCosts: 20,
+        totalCosts: 0,
         hourly: false,
-        FFYcosts: [10, 10]
+        FFYcosts: [0, 0]
       };
 
       cy.log('Private Contractor Costs');
@@ -741,30 +734,30 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.75,
-                federalShareAmount: 8,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.25,
-                stateShareAmount: 2,
-                totalComputableMedicaidCost: 10
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.5,
-                federalShareAmount: 5,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.5,
-                stateShareAmount: 5,
-                totalComputableMedicaidCost: 10
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.9,
-                federalShareAmount: 9,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.1,
-                stateShareAmount: 1,
-                totalComputableMedicaidCost: 10
+                stateShareAmount: 0,
+                totalComputableMedicaidCost: 0
               });
             });
         });
@@ -787,7 +780,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   'Not specified (APD Key Personnel)$0×0 FTE=$0'
                 )
                 .next()
-                .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
+                .should('have.text', 'Personnel title not specified$0')
                 .next()
                 .next()
                 .next()
@@ -797,7 +790,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should('have.text', 'Test Private Contractor$10');
+                .should('have.text', 'Test Private Contractor$0');
             });
         });
       });
@@ -845,7 +838,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Personnel title not specified$0×0 FTE=$0');
+            .should('have.text', 'Personnel title not specified$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -863,7 +856,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Private Contractor'
             })
             .eq(0)
-            .should('have.text', 'Test Private Contractor$10');
+            .should('have.text', 'Test Private Contractor$0');
         });
       });
 
@@ -956,7 +949,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         );
 
       const privateContractorCosts = years
-        .map(year => `FFY ${year} Cost: $10`)
+        .map(year => `FFY ${year} Cost: $0`)
         .join('');
       cy.findByRole('heading', {
         name: /Activity 1: Program AdministrationPrivate Contractor Costs/i
@@ -977,7 +970,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             '/'
           )} - ${privateContractor.end.join(
             '/'
-          )}Total Contract Cost: $20${privateContractorCosts}`
+          )}Total Contract Cost: $0${privateContractorCosts}`
         );
 
       cy.then(() => {
@@ -997,7 +990,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   'Not specified (APD Key Personnel)$0×0 FTE=$0'
                 )
                 .next()
-                .should('have.text', 'Personnel title not specified$0×0 FTE=$0')
+                .should('have.text', 'Personnel title not specified$0')
                 .next()
                 .next()
                 .next()
@@ -1007,7 +1000,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should('have.text', 'Test Private Contractor$10');
+                .should('have.text', 'Test Private Contractor$0');
             });
         });
       });
@@ -1048,7 +1041,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Personnel title not specified$0×0 FTE=$0');
+            .should('have.text', 'Personnel title not specified$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -1066,7 +1059,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Private Contractor'
             })
             .eq(0)
-            .should('have.text', 'Test Private Contractor$10');
+            .should('have.text', 'Test Private Contractor$0');
         });
       });
     });
