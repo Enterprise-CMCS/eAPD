@@ -34,202 +34,194 @@ exports[`assurances and compliance component main component renders correctly 1`
         >
           Procurement Standards (Competition / Sole Source)
         </h4>
-        <fieldset
-          className="ds-u-margin-top--2"
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-procurement-42_CFR_Part_495.348"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="42 CFR Part 495.348"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=60f02a079c6f091871999372387e5750&mc=true&node=se42.5.495_1348&rgn=div8"
-                title="42 CFR Part 495.348"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-procurement-42_CFR_Part_495.348"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-procurement-42_CFR_Part_495.348"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=60f02a079c6f091871999372387e5750&mc=true&node=se42.5.495_1348&rgn=div8"
+                  title="42 CFR Part 495.348"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-procurement-42_CFR_Part_495.348"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-procurement-42_CFR_Part_495.348"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-procurement-SMM_Section_11267"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="SMM Section 11267"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
-                title="SMM Section 11267"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-procurement-SMM_Section_11267"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-procurement-SMM_Section_11267"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
+                  title="SMM Section 11267"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-procurement-SMM_Section_11267"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-procurement-SMM_Section_11267"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": false,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-procurement-45_CFR_95.613"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="45 CFR 95.613"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&SID=6d93b829c0db163a0124bfeae1704e42&ty=HTML&h=L&mc=true&r=SECTION&n=se45.1.95_1613"
-                title="45 CFR 95.613"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={false}
-            label="Yes"
-            name="apd-assurances-yes-explanation-procurement-45_CFR_95.613"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-procurement-45_CFR_95.613"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&SID=6d93b829c0db163a0124bfeae1704e42&ty=HTML&h=L&mc=true&r=SECTION&n=se45.1.95_1613"
+                  title="45 CFR 95.613"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-procurement-45_CFR_95.613"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-procurement-45_CFR_95.613"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": false,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": true,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-procurement-45_CFR_Part_75.326"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="45 CFR Part 75.326"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link={null}
-                title="45 CFR Part 75.326"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={false}
-            label="Yes"
-            name="apd-assurances-yes-explanation-procurement-45_CFR_Part_75.326"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={true}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-procurement-45_CFR_Part_75.326"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link={null}
+                  title="45 CFR Part 75.326"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-procurement-45_CFR_Part_75.326"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-procurement-45_CFR_Part_75.326"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
       </div>
       <div
         className="ds-u-margin-bottom--3"
@@ -240,300 +232,288 @@ exports[`assurances and compliance component main component renders correctly 1`
         >
           Access to Records, Reporting and Agency Attestations
         </h4>
-        <fieldset
-          className="ds-u-margin-top--2"
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": false,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": true,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-recordsAccess-42_CFR_Part_495.350"
+                    onChange={[Function]}
+                    rows={5}
+                    value="some words"
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="42 CFR Part 495.350"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1350&rgn=div8"
-                title="42 CFR Part 495.350"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={false}
-            label="Yes"
-            name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.350"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={true}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-recordsAccess-42_CFR_Part_495.350"
-                  onChange={[Function]}
-                  rows={5}
-                  value="some words"
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1350&rgn=div8"
+                  title="42 CFR Part 495.350"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.350"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-recordsAccess-42_CFR_Part_495.350"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-recordsAccess-42_CFR_Part_495.352"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="42 CFR Part 495.352"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1352&rgn=div8"
-                title="42 CFR Part 495.352"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.352"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-recordsAccess-42_CFR_Part_495.352"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1352&rgn=div8"
+                  title="42 CFR Part 495.352"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.352"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-recordsAccess-42_CFR_Part_495.352"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-recordsAccess-42_CFR_Part_495.346"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="42 CFR Part 495.346"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1346&rgn=div8"
-                title="42 CFR Part 495.346"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-recordsAccess-42_CFR_Part_495.346"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-recordsAccess-42_CFR_Part_495.346"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.5.495_1346&rgn=div8"
+                  title="42 CFR Part 495.346"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-recordsAccess-42_CFR_Part_495.346"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-recordsAccess-42_CFR_Part_495.346"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-recordsAccess-42_CFR_433.112(b)"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="42 CFR 433.112(b)"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
-                title="42 CFR 433.112(b)"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-recordsAccess-42_CFR_433.112(b)"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-recordsAccess-42_CFR_433.112(b)"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
+                  title="42 CFR 433.112(b)"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-recordsAccess-42_CFR_433.112(b)"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-recordsAccess-42_CFR_433.112(b)"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-recordsAccess-45_CFR_Part_95.615"
+                    onChange={[Function]}
+                    rows={5}
+                    value="other words"
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="45 CFR Part 95.615"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
-                title="45 CFR Part 95.615"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-recordsAccess-45_CFR_Part_95.615"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-recordsAccess-45_CFR_Part_95.615"
-                  onChange={[Function]}
-                  rows={5}
-                  value="other words"
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&node=se45.1.95_1615&rgn=div8"
+                  title="45 CFR Part 95.615"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-recordsAccess-45_CFR_Part_95.615"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-recordsAccess-45_CFR_Part_95.615"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-recordsAccess-SMM_Section_11267"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="SMM Section 11267"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
-                title="SMM Section 11267"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-recordsAccess-SMM_Section_11267"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-recordsAccess-SMM_Section_11267"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.cms.gov/Regulations-and-Guidance/Guidance/Manuals/Paper-Based-Manuals-Items/CMS021927.html"
+                  title="SMM Section 11267"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-recordsAccess-SMM_Section_11267"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-recordsAccess-SMM_Section_11267"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
       </div>
       <div
         className="ds-u-margin-bottom--3"
@@ -544,202 +524,194 @@ exports[`assurances and compliance component main component renders correctly 1`
         >
           Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports
         </h4>
-        <fieldset
-          className="ds-u-margin-top--2"
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-softwareRights-42_CFR_Part_495.360"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="42 CFR Part 495.360"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link={null}
-                title="42 CFR Part 495.360"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_495.360"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-softwareRights-42_CFR_Part_495.360"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link={null}
+                  title="42 CFR Part 495.360"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_495.360"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-softwareRights-42_CFR_Part_495.360"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-softwareRights-45_CFR_Part_95.617"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="45 CFR Part 95.617"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link={null}
-                title="45 CFR Part 95.617"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-softwareRights-45_CFR_Part_95.617"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-softwareRights-45_CFR_Part_95.617"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link={null}
+                  title="45 CFR Part 95.617"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-softwareRights-45_CFR_Part_95.617"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-softwareRights-45_CFR_Part_95.617"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": false,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": true,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-softwareRights-42_CFR_Part_431.300"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="42 CFR Part 431.300"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.431_1300&rgn=div8"
-                title="42 CFR Part 431.300"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={false}
-            label="Yes"
-            name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_431.300"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={true}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-softwareRights-42_CFR_Part_431.300"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.431_1300&rgn=div8"
+                  title="42 CFR Part 431.300"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_431.300"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
-        <fieldset
-          className="ds-u-margin-top--2"
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-softwareRights-42_CFR_Part_431.300"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": true,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": false,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-softwareRights-42_CFR_Part_433.112"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="42 CFR Part 433.112"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
-                title="42 CFR Part 433.112"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={true}
-            label="Yes"
-            name="apd-assurances-yes-explanation-softwareRights-42_CFR_Part_433.112"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={false}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-softwareRights-42_CFR_Part_433.112"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=8c677ad13ab6c202c5ae1ee1c1c0b487&mc=true&node=se42.4.433_1112&rgn=div8"
+                  title="42 CFR Part 433.112"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-softwareRights-42_CFR_Part_433.112"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-softwareRights-42_CFR_Part_433.112"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
       </div>
       <div
         className="ds-u-margin-bottom--3"
@@ -750,55 +722,53 @@ exports[`assurances and compliance component main component renders correctly 1`
         >
           Security and Interface Requirements to Be Employed for All State HIT Systems
         </h4>
-        <fieldset
-          className="ds-u-margin-top--2"
+        <ChoiceList
+          choices={
+            Array [
+              Object {
+                "checked": false,
+                "label": "Yes",
+                "value": "yes",
+              },
+              Object {
+                "checked": true,
+                "checkedChildren": <div
+                  className="ds-c-choice__checkedChild"
+                >
+                  <TextArea
+                    label="Please explain"
+                    name="explanation-security-45_CFR_164_Security_and_Privacy"
+                    onChange={[Function]}
+                    rows={5}
+                    value=""
+                  />
+                </div>,
+                "label": "No",
+                "value": "no",
+              },
+            ]
+          }
           key="45 CFR 164 Security and Privacy"
-        >
-          <legend
-            className="ds-c-label"
-          >
-            Are you complying with
-             
-            <strong>
-              <LinkOrText
-                link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&tpl=/ecfrbrowse/Title45/45cfr164_main_02.tpl"
-                title="45 CFR 164 Security and Privacy"
-              />
-            </strong>
-            ?
-          </legend>
-          <ChoiceComponent
-            checked={false}
-            label="Yes"
-            name="apd-assurances-yes-explanation-security-45_CFR_164_Security_and_Privacy"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="yes"
-          />
-          <ChoiceComponent
-            checked={true}
-            checkedChildren={
-              <div
-                className="ds-c-choice__checkedChild"
-              >
-                <TextArea
-                  label="Please explain"
-                  name="explanation-security-45_CFR_164_Security_and_Privacy"
-                  onChange={[Function]}
-                  rows={5}
-                  value=""
+          label={
+            <legend
+              className="ds-c-label"
+            >
+              Are you complying with
+               
+              <strong>
+                <LinkOrText
+                  link="https://www.ecfr.gov/cgi-bin/text-idx?SID=2cfd59b6ec7c0a6adf749237ebbd1ba1&mc=true&tpl=/ecfrbrowse/Title45/45cfr164_main_02.tpl"
+                  title="45 CFR 164 Security and Privacy"
                 />
-              </div>
-            }
-            label="No"
-            name="apd-assurances-no-explanation-security-45_CFR_164_Security_and_Privacy"
-            onChange={[Function]}
-            size="small"
-            type="radio"
-            value="no"
-          />
-        </fieldset>
+              </strong>
+              ?
+            </legend>
+          }
+          name="apd-assurances-explanation-security-45_CFR_164_Security_and_Privacy"
+          onChange={[Function]}
+          size="small"
+          type="radio"
+        />
       </div>
     </Subsection>
   </Section>
