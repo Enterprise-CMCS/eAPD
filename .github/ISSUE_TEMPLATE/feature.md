@@ -1,9 +1,10 @@
 ---
 name: Feature
 about: Feature Issue Template
-title: '[Feature]'
+title: "[Feature]"
 labels: development
 assignees: ''
+
 ---
 
 **Title should be User Story or Short Description of Task -** e.g.
