@@ -1,4 +1,4 @@
-import Joi from 'joi';
+const Joi = require('joi')
 
 const schemas = Joi.object({
   outcome: Joi.string().required().messages({
