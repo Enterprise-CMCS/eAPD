@@ -33,7 +33,7 @@ const setup = async (props = {}) => {
   return renderUtils;
 };
 
-describe('the ContractorResourceForm component', () => {
+describe('the PersonCostForm component', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
