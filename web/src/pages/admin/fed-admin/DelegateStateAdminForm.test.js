@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  // act
-  screen
-  // within,
-  // waitFor
-} from 'apd-testing-library';
+import { screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { setCookie } from '../../../util/auth';
 import * as mockAuth from '../../../util/auth';
 
@@ -21,15 +16,12 @@ const defaultProps = {
   fileUrl: ''
 };
 
-// USER EVENT .UPLOAD TO UPLOAD!!!!!!
-
 const setup = (props = {}) => {
   render(<DelegateStateAdminForm {...defaultProps} {...props} />);
 };
 
 describe('the DelegateStateAdminForm component', () => {
   beforeEach(() => {
-    // jest.resetAllMocks();
     setCookie(mockAuth);
   });
 
@@ -43,6 +35,9 @@ describe('the DelegateStateAdminForm component', () => {
       }),
       defaultProps.name
     );
+
+    userEvent.selectOptions(screen.getByLabelText('State'), 'New Mexico');
+
     userEvent.type(
       screen.getByLabelText('State employee email address'),
       defaultProps.email
@@ -53,17 +48,7 @@ describe('the DelegateStateAdminForm component', () => {
       defaultProps.phone
     );
 
-    userEvent.selectOptions(screen.getByRole('combobox'), 'New Mexico');
-
     expect(screen.getByRole('radio', { name: 'FFY 2022' })).toBeChecked();
-
-    expect(screen.getByLabelText('State employee email address')).toHaveValue(
-      defaultProps.email
-    );
-
-    expect(screen.getByLabelText('State employee email address')).toHaveValue(
-      defaultProps.email
-    );
 
     expect(
       screen.getByRole('textbox', {
@@ -71,6 +56,29 @@ describe('the DelegateStateAdminForm component', () => {
       })
     ).toHaveValue(defaultProps.name);
 
-    expect(screen.getByRole('combobox')).toHaveValue(defaultProps.state);
+    expect(screen.getByLabelText('State')).toHaveValue(defaultProps.state);
+
+    expect(screen.getByLabelText('State employee email address')).toHaveValue(
+      defaultProps.email
+    );
+
+    expect(screen.getByLabelText('State employee phone number')).toHaveValue(
+      defaultProps.phone
+    );
+
+    const file = new File(['hello'], 'hello.pdf', { type: 'pdf' });
+    const upload = screen.getByRole('button', {
+      name: 'Drag files here or choose from folder'
+    });
+
+    fireEvent.drop(upload, {
+      dataTransfer: {
+        files: [file]
+      }
+    });
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Add State Admin Letter' })
+    );
   });
 });

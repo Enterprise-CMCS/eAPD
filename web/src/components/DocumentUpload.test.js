@@ -1,13 +1,10 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { setCookie } from '../util/auth';
 import * as mockAuth from '../util/auth';
+import { screen } from 'apd-testing-library';
 
 import DocumentUpload from './DocumentUpload';
-
-// const defaultHandleFileChange = fileUrl => {
-//   dispatch({ type: 'update', field: 'fileUrl', payload: fileUrl });
-// };
 
 const defaultProps = {
   endpoint: 'placeholder',
@@ -26,5 +23,16 @@ describe('the DocumentUpload component', () => {
 
   it('should upload a file', () => {
     setup();
+
+    const file = new File(['hello'], 'hello.doc', { type: 'doc' });
+    const upload = screen.getByRole('button', {
+      name: 'Drag files here or choose from folder'
+    });
+
+    fireEvent.drop(upload, {
+      dataTransfer: {
+        files: [file]
+      }
+    });
   });
 });
