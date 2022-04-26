@@ -46,7 +46,7 @@ export const newContractor = years => ({
   hourly: arrToObj(years, contractorDefaultHourly())
 });
 
-export const expenseDefaultYear = () => '';
+export const expenseDefaultYear = () => null;
 
 export const newExpense = years => ({
   key: generateKey(),
