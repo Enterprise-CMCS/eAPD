@@ -20,10 +20,14 @@ const NumberField = ({
   const stringToNumber = stringValue => {
     // use ParseFloat rather than "+" because it won't throw an error and
     // will return partial number if non-numeric characters are present
-    if (stringValue === '') {
+    if (stringValue === '' || stringValue === null) {
       return null;
     }
+
     const number = parseFloat(unmaskValue(stringValue, mask));
+    if (isNaN(number)) {
+      return stringValue;
+    }
     if (min !== null && number < min) {
       return min;
     }
@@ -36,7 +40,7 @@ const NumberField = ({
 
   const blurHandler = e => {
     const number = stringToNumber(e.target.value);
-    setLocal(`${number !== null ? number : ''}`);
+    setLocal(`${maskValue(number !== null ? number.toString() : '', mask)}`);
 
     if (onChange) {
       onChange({
@@ -51,23 +55,13 @@ const NumberField = ({
     }
   };
 
-  const changeHandler = e => {
-    setLocal(e.target.value);
-    if (onChange) {
-      const number = stringToNumber(e.target.value);
-      onChange({
-        target: { value: number }
-      });
-    }
-  };
-
   return (
     <TextField
       {...props}
       mask={mask}
       value={local}
       onBlur={blurHandler}
-      onChange={changeHandler}
+      onChange={e => setLocal(e.target.value)}
     />
   );
 };
@@ -84,8 +78,8 @@ NumberField.propTypes = {
 NumberField.defaultProps = {
   mask: null,
   min: null,
-  onBlur: () => {},
-  onChange: () => {},
+  onBlur: null,
+  onChange: null,
   round: false,
   value: ''
 };
