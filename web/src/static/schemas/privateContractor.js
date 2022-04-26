@@ -34,8 +34,8 @@ const schemas = Joi.object({
       'any.ref': 'Provide an end date that is after the start date.'
     }),
   totalCost: Joi.number().positive().allow(0).required().messages({
-    'number.base': 'Provide a contract cost.',
-    'number.empty': 'Provide a contract cost.',
+    'number.base': 'Provide a contract cost greater than or equal to $0.',
+    'number.empty': 'Provide a contract cost greater than or equal to $0.',
     'number.format': 'Provide a contract cost greater than or equal to $0.',
     'number.positive': 'Provide a contract cost greater than or equal to $0.',
     'number.allow': 'Provide a contract cost greater than or equal to $0.'
@@ -52,13 +52,13 @@ const schemas = Joi.object({
         hours: Joi.number().positive().allow(0).required().messages({
           'number.base':
             'Provide a number of hours greater than or equal to 0.',
-          'number.format': 'Provide a valid number of hours.',
           'number.positive':
             'Provide a number of hours greater than or equal to 0.',
           'number.allow':
             'Provide a number of hours greater than or equal to 0.',
           'number.empty':
-            'Provide a number of hours greater than or equal to 0.'
+            'Provide a number of hours greater than or equal to 0.',
+          'number.format': 'Provide a valid number of hours.'
         }),
         rate: Joi.number().positive().allow(0).required().messages({
           'number.base': 'Provide an hourly rate greater than or equal to $0.',

@@ -6,7 +6,6 @@ import { isNumeric } from '../util/formats';
 const DateField = ({
   value,
   onChange,
-  onBlur,
   onComponentBlur,
   errorMessage,
   ...rest
@@ -91,10 +90,6 @@ const DateField = ({
       dayDefaultValue={dateParts.day}
       monthDefaultValue={dateParts.month}
       yearDefaultValue={dateParts.year}
-      onBlur={(e, dateObject) => {
-        validate(dateObject);
-        onBlur(e, formatDate(dateObject));
-      }}
       onComponentBlur={(e, dateObject) => {
         validate(dateObject);
         onComponentBlur(e, formatDate(dateObject));
@@ -110,13 +105,11 @@ const DateField = ({
 DateField.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
   onComponentBlur: PropTypes.func,
   errorMessage: PropTypes.string
 };
 
 DateField.defaultProps = {
-  onBlur: () => {},
   onComponentBlur: () => {},
   value: null,
   errorMessage: ''

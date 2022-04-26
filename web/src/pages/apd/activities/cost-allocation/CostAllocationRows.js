@@ -3,22 +3,25 @@ import React, { Fragment } from 'react';
 import Dollars from '../../../../components/Dollars';
 
 export const CostSummaryRows = ({ items }) =>
-  items.map(({ description, totalCost, unitCost, units }) => (
-    <tr key={description || 'notSelected'}>
-      <td className="title">{description || 'Category Not Selected'}</td>
-      <td className="budget-table--number">
-        {unitCost !== null && <Dollars>{unitCost}</Dollars>}
-      </td>
-      <td className="budget-table--number ds-u-padding--0">
-        {unitCost !== null && '×'}
-      </td>
-      <td className="budget-table--number ds-u-text-align--left">{units}</td>
-      <td className="budget-table--number">{unitCost !== null && '='}</td>
-      <td className="budget-table--number">
-        <Dollars>{totalCost}</Dollars>
-      </td>
-    </tr>
-  ));
+  items.map(({ description, totalCost, unitCost, units }) => {
+    console.log({ description, totalCost, unitCost, units });
+    return (
+      <tr key={description || 'notSelected'}>
+        <td className="title">{description || 'Category Not Selected'}</td>
+        <td className="budget-table--number">
+          {unitCost !== null && <Dollars>{unitCost}</Dollars>}
+        </td>
+        <td className="budget-table--number ds-u-padding--0">
+          {unitCost !== null && '×'}
+        </td>
+        <td className="budget-table--number ds-u-text-align--left">{units}</td>
+        <td className="budget-table--number">{unitCost !== null && '='}</td>
+        <td className="budget-table--number">
+          <Dollars>{totalCost}</Dollars>
+        </td>
+      </tr>
+    );
+  });
 
 CostSummaryRows.propTypes = {
   items: PropTypes.array.isRequired

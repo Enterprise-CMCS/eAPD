@@ -133,7 +133,7 @@ export const selectActivityCostSummary = createSelector(
             description: p.title || 'Personnel title not specified',
             totalCost: p.years[year].amt * p.years[year].perc,
             unitCost: p.years[year].amt,
-            units: `${p.years[year].perc} FTE`
+            units: p.years[year].perc ? `${p.years[year].perc} FTE` : null
           })),
           statePersonnelTotal:
             activity.statePersonnel.reduce(
