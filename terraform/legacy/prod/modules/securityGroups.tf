@@ -23,6 +23,14 @@ resource "aws_security_group" "eapd-production-mongo-ec2" {
     security_groups = ["sg-0f3c6bfa62fcefa4a"]
   }
 
+  ingress {
+    description = "Mongo Traffic from Production Instance"
+    from_port   = 27017
+    to_port     = 27019
+    protocol    = "tcp"
+    security_groups = ["sg-0293d2860afa7fd89"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
