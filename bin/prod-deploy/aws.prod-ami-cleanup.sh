@@ -7,17 +7,17 @@
 set -e
 
 # Deploys a preview instance to EC2 with a fully self-contained environment.
-function cleanupPlatinumAMI() {
+function cleanupProductionAMI() {
   # Configure AWS CLI with defaults
   configureAWS
   
   printf "• Finding state of AWS environment\n"
   waitForAtRest
-  printf "• Finding available Platinum AMIs\n"
+  printf "• Finding available Production AMIs\n"
   getAvailableAMIs
-  printf "• Checking for Platinum AMIs currently in use\n"
+  printf "• Checking for Production AMIs currently in use\n"
   checkAMIForUsage
-  printf "• Checking for the most recently created Platinum AMI\n"
+  printf "• Checking for the most recently created Production AMI\n"
   getMostRecentAMI
   printf "• AMI actions being taken\n"
   deregisterIfNotUsed
@@ -27,11 +27,11 @@ function configureAWS() {
   aws configure set default.region $AWS_REGION
 }
 
-# Finds all existing platinum AMIs
+# Finds all existing Production AMIs
 function getAvailableAMIs() {
   aws ec2 describe-images \
     --owner self \
-    --filter 'Name=name,Values=eAPD Platinum AMI - *' \
+    --filter 'Name=name,Values=eAPD Production AMI - *' \
     | jq -rc '.Images[].ImageId' 
 }
 
@@ -48,7 +48,7 @@ function checkAMIForUsage() {
 function getMostRecentAMI() {
   aws ec2 describe-images \
     --owners self \
-    --filters "Name=name,Values=eAPD Platinum AMI - *" \
+    --filters "Name=name,Values=eAPD Production AMI - *" \
     --query 'sort_by(Images, &CreationDate)[-1].ImageId' \
     --output text
 }
@@ -88,4 +88,4 @@ function waitForAtRest() {
   printf "There are no Instances in motion\n"
 }
 
-cleanupPlatinumAMI
+cleanupProductionAMI
