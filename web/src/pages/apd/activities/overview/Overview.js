@@ -18,6 +18,8 @@ import { NameAndFundingSourceForm } from './NameAndFundingSource/';
 import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
 import Schedule from './Schedule';
 
+import overviewSchema from '../../../../static/schemas/activityOverview';
+
 
 const ActivityOverview = forwardRef(({
   activity,

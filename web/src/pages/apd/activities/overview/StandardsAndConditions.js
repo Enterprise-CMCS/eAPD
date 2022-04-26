@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { forwardRef, Fragment } from 'react';
+import React, { forwardRef, Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -14,18 +14,39 @@ import RichText from '../../../../components/RichText';
 import TextArea from '../../../../components/TextArea';
 import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
 
-const standardsConditionsSchema = Joi.object({
-  supports: Joi.alternatives().conditional('doesNotSupport', { 
-    is: Joi.any().valid(null, ""), 
-    then: Joi.string().trim().min(1).required().messages({
+const standardsConditionsSchema = Joi.alternatives().try(
+	Joi.object({
+  	supports: Joi.string().trim().min(1).required().messages({
       'string.base': 'Provide a description about how this activity will support the Medicaid standards and conditions.',
       'string.empty': 'Provide a description about how this activity will support the Medicaid standards and conditions.',
       'string.min': 'Provide a description about how this activity will support the Medicaid standards and conditions.'
     }),
-    otherwise: Joi.any()
+    doesNotSupport: Joi.string().allow('')
   }),
-  doesNotSupport: Joi.any()
-});
+  Joi.object({
+  	supports: Joi.string().allow(''),
+    doesNotSupport: Joi.string().required().messages({
+      'string.base': 'If this activity does not support the Medicaid standards and conditions, please explain.',
+      'string.empty': 'If this activity does not support the Medicaid standards and conditions, please explain.',
+      'string.min': 'If this activity does not support the Medicaid standards and conditions, please explain.'
+    })
+  })
+)
+  // {
+  // supports: Joi.alternatives().conditional('doesNotSupport', {
+  //   is: Joi.exist(),
+  //   then: Joi.string().trim().min(1).required().messages({
+  //     'string.base': 'Provide a description about how this activity will support the Medicaid standards and conditions.',
+  //     'string.empty': 'Provide a description about how this activity will support the Medicaid standards and conditions.',
+  //     'string.min': 'Provide a description about how this activity will support the Medicaid standards and conditions.'
+  //   }),
+  //   otherwise: Joi.any()
+  // }),
+  // doesNotSupport: Joi.string().required().messages({
+  //   'string.base': 'If this activity does not support the Medicaid standards and conditions, please explain.',
+  //   'string.empty': 'If this activity does not support the Medicaid standards and conditions, please explain.',
+  //   'string.min': 'If this activity does not support the Medicaid standards and conditions, please explain.'
+  // })
 
 const StandardsAndConditions = forwardRef(
   ({
@@ -35,7 +56,7 @@ const StandardsAndConditions = forwardRef(
     setSupport
   }, ref) => {
 
-    const {doesNotSupport, supports} = activity;
+    const {doesNotSupport, supports} = activity.standardsAndConditions;
 
     const {
       control,
@@ -50,7 +71,10 @@ const StandardsAndConditions = forwardRef(
       resolver: joiResolver(standardsConditionsSchema)
     });
 
-    console.log({doesNotSupport, supports})
+    useEffect(() => {
+      console.log('errors changed');
+      console.log({ errors })
+    }, [errors]);
 
     return (
       <Fragment>

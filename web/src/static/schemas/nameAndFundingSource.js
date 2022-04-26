@@ -9,6 +9,6 @@ const schemas = Joi.object({
     'string.base': 'Must select program type.',
     'string.empty': 'Must select program type.'
   })
-})
+});
 
 export default schemas;
