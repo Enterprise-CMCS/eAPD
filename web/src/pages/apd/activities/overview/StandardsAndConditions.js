@@ -15,9 +15,7 @@ import TextArea from '../../../../components/TextArea';
 import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
 
 const standardsConditionsSchema = Joi.object({
-  supports: Joi.string().empty(['', null]).trim().min(1).messages({
-    
-  }),
+  supports: Joi.string().empty(['', null]).trim().min(1),
   doesNotSupport: Joi.string().empty(['', null])
 }).or("supports", "doesNotSupport")
 
@@ -33,7 +31,8 @@ const StandardsAndConditions = forwardRef(
 
     const {
       control,
-      formState: { errors }
+      formState: { errors, isValid, isValidating },
+      getValues
     } = useForm({
       defaultValues: {
         supports: supports,
@@ -45,9 +44,20 @@ const StandardsAndConditions = forwardRef(
     });
 
     useEffect(() => {
-      console.log('errors changed');
-      console.log({ errors })
-    }, [errors]);
+      const { value } = standardsConditionsSchema.validate(getValues());
+      const keysPresent = Object.keys(value).length !== 0;
+
+      if (!keysPresent) {
+        const needSupport = "Provide a description about how this activity will support the Medicaid standards and conditions.";
+        const needExplaination = "If this activity does not support the Medicaid standards and conditions, please explain.";
+
+        errors['supports'] = needSupport;
+        errors['doesNotSupport'] = needExplaination;
+      } else {
+        errors['supports'] = '';
+        errors['doesNotSupport'] = '';
+      }
+    });
 
     return (
       <Fragment>
@@ -86,7 +96,7 @@ const StandardsAndConditions = forwardRef(
             className="ds-c-inline-error ds-c-field__error-message"
             role="alert"
           >
-            {errors.supports.message}
+            {errors.supports}
           </span>
         )}
 
@@ -105,7 +115,7 @@ const StandardsAndConditions = forwardRef(
                   rows={6}
                   style={{ maxWidth: 'initial' }}
                   value={activity.standardsAndConditions.doesNotSupport}
-                  errorMessage={errors?.doesNotSupport?.message}
+                  errorMessage={errors?.doesNotSupport}
                   errorPlacement="bottom"
                 />
               )}
