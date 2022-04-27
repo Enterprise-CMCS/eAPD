@@ -432,7 +432,7 @@ describe('APD reducer', () => {
             expenses: [
               {
                 years: {
-                  1741: 0,
+                  1741: null,
                   1742: 0,
                   1743: 0
                 }
@@ -467,7 +467,7 @@ describe('APD reducer', () => {
             statePersonnel: [
               {
                 years: {
-                  1741: { amt: 0, perc: 0 },
+                  1741: { amt: null, perc: null },
                   1742: 0,
                   1743: 0
                 }
@@ -1039,8 +1039,8 @@ describe('APD reducer', () => {
                   description: '',
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   years: {
-                    1403: 0,
-                    1404: 0
+                    1403: null,
+                    1404: null
                   }
                 }
               ]
@@ -1074,8 +1074,8 @@ describe('APD reducer', () => {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   title: '',
                   years: {
-                    1403: { amt: 0, perc: 0 },
-                    1404: { amt: 0, perc: 0 }
+                    1403: { amt: null, perc: null },
+                    1404: { amt: null, perc: null }
                   }
                 }
               ]

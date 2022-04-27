@@ -4,7 +4,8 @@ import {
   act,
   screen,
   within,
-  waitFor
+  waitFor,
+  fireEvent
 } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
@@ -41,17 +42,21 @@ const defaultProps = {
   setFormValid: jest.fn()
 };
 
-const setup = async (props = {}) =>
+const setup = async (props = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  await act(async () => {
-    renderWithConnection(<ContractorForm {...defaultProps} {...props} />);
-  });
+  const utils = await act(async () =>
+    renderWithConnection(<ContractorForm {...defaultProps} {...props} />)
+  );
+  await waitFor(() => screen.findByText(/Private Contractor or Vendor Name/i));
+  return utils;
+};
 
 const verifyDateField = (text, expectValue) => {
   const fieldset = within(screen.getByText(text).closest('fieldset')); // eslint-disable-line testing-library/no-node-access
   expect(fieldset.getByLabelText('Month')).toHaveValue(expectValue.month);
   expect(fieldset.getByLabelText('Day')).toHaveValue(expectValue.day);
   expect(fieldset.getByLabelText('Year')).toHaveValue(expectValue.year);
+  fireEvent.blur(screen.getByText(text).closest('fieldset')); // eslint-disable-line testing-library/no-node-access
 };
 
 const verifyHourlyField = expectValue => {
@@ -66,6 +71,10 @@ const verifyHourlyField = expectValue => {
     expect(fieldset.getByLabelText('Yes')).not.toBeChecked();
     expect(fieldset.getByLabelText('No')).toBeChecked();
   }
+  fireEvent.blur(
+    // eslint-disable-next-line testing-library/no-node-access
+    screen.getByText(/This is an hourly resource/i).closest('fieldset')
+  );
 };
 
 describe('the ContractorResourceForm component', () => {
@@ -78,11 +87,17 @@ describe('the ContractorResourceForm component', () => {
     expect(
       screen.getByLabelText(/Private Contractor or Vendor Name/i)
     ).toHaveValue(defaultProps.item.name);
+    fireEvent.blur(screen.getByLabelText(/Private Contractor or Vendor Name/i));
     expect(
       screen.getByLabelText(
         /Procurement Methodology and Description of Services/i
       )
     ).toHaveValue(defaultProps.item.description);
+    fireEvent.blur(
+      screen.getByLabelText(
+        /Procurement Methodology and Description of Services/i
+      )
+    );
     verifyDateField('Contract start date', {
       month: '10',
       day: '14',
@@ -94,11 +109,14 @@ describe('the ContractorResourceForm component', () => {
       year: '1066'
     });
     expect(screen.getByLabelText(/Total Contract Cost/i)).toHaveValue('12,345');
+    fireEvent.blur(screen.getByLabelText(/Total Contract Cost/i));
     verifyHourlyField('no');
     expect(screen.queryByLabelText(/^FFY 1066$/i)).toBeNull();
     expect(screen.queryByLabelText(/^FFY 1067$/i)).toBeNull();
     expect(screen.getByLabelText(/FFY 1066 Cost/i)).toHaveValue('300');
+    fireEvent.blur(screen.getByLabelText(/FFY 1066 Cost/i));
     expect(screen.getByLabelText(/FFY 1067 Cost/i)).toHaveValue('400');
+    fireEvent.blur(screen.getByLabelText(/FFY 1067 Cost/i));
 
     await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
     await waitFor(async () => {
@@ -279,9 +297,9 @@ describe('the ContractorResourceForm component', () => {
     await waitFor(() => {
       expect(startFieldset.getByLabelText('Month')).toHaveFocus();
     });
-    userEvent.tab(); // day
-    userEvent.tab(); // year
-    userEvent.tab(); // tab out of the field
+    userEvent.tab(); // tab to day
+    userEvent.tab(); // tab to year
+    userEvent.tab(); // tab out of component
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
@@ -382,10 +400,10 @@ describe('the ContractorResourceForm component', () => {
     const input = screen.getByLabelText(/Total Contract Cost/i);
 
     userEvent.clear(input);
-    userEvent.type(input, '-1');
     await waitFor(() => {
       expect(input).toHaveFocus();
     });
+    fireEvent.change(input, { target: { value: '-1' } });
     userEvent.tab();
 
     await waitFor(() => {
@@ -470,10 +488,10 @@ describe('the ContractorResourceForm component', () => {
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
     expect(
-      await screen.findAllByText(/number of hours greater than or equal to/i)
+      await screen.findAllByText(/number of hours greater than or equal/i)
     ).toHaveLength(2);
     expect(
-      await screen.findAllByText(/hourly rate greater than/i)
+      await screen.findAllByText(/hourly rate greater than or equal/i)
     ).toHaveLength(2);
   });
 

@@ -23,6 +23,12 @@ const getCheckedValue = value => {
   return null;
 };
 
+const getBooleanValue = value => {
+  if (value === 'yes') return true;
+  if (value === 'no') return false;
+  return null;
+};
+
 const ContractorResourceForm = forwardRef(
   ({ activityIndex, index, item, saveContractor, setFormValid }, ref) => {
     ContractorResourceForm.displayName = 'ContractorResourceForm';
@@ -52,7 +58,10 @@ const ContractorResourceForm = forwardRef(
 
     const onSubmit = e => {
       e.preventDefault();
-      saveContractor(activityIndex, index, getValues());
+      saveContractor(activityIndex, index, {
+        ...getValues(),
+        useHourly: getBooleanValue(getValues('useHourly'))
+      });
     };
 
     return (
@@ -113,9 +122,8 @@ const ContractorResourceForm = forwardRef(
                 {...props}
                 label="Contract start date"
                 onChange={(_, dateStr) => onChange(dateStr)}
-                onBlur={() => {}}
-                onComponentBlur={() => {
-                  onBlur();
+                onComponentBlur={(_, dateStr) => {
+                  onBlur(dateStr);
                   if (getFieldState('end').isTouched) {
                     trigger('end');
                   }
@@ -133,9 +141,8 @@ const ContractorResourceForm = forwardRef(
                   {...props}
                   label="Contract end date"
                   onChange={(_, dateStr) => onChange(dateStr)}
-                  onBlur={() => {}}
-                  onComponentBlur={() => {
-                    onBlur();
+                  onComponentBlur={(_, dateStr) => {
+                    onBlur(dateStr);
                     if (getFieldState('start').isTouched) {
                       trigger('start');
                     }
@@ -149,9 +156,12 @@ const ContractorResourceForm = forwardRef(
         <Controller
           name="totalCost"
           control={control}
-          render={({ field: { ...props } }) => (
+          render={({ field: { onChange, onBlur, value, ...props } }) => (
             <DollarField
               {...props}
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
               label="Total Contract Cost"
               size="medium"
               hint="Provide the total not to exceed amounts of the contract, including costs for the option years. This is not the amount you are requesting for the FFYs and will not be added to your FFY requests."

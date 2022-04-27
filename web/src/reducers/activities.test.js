@@ -36,7 +36,7 @@ describe('activities reducer helpers', () => {
       key: '--- key ---',
       category: '',
       description: '',
-      years: { 1472: 0 }
+      years: { 1472: null }
     });
   });
 
@@ -68,7 +68,7 @@ describe('activities reducer helpers', () => {
       key: '--- key ---',
       title: '',
       description: '',
-      years: { 8732: { amt: 0, perc: 0 }, bob: { amt: 0, perc: 0 } }
+      years: { 8732: { amt: null, perc: null }, bob: { amt: null, perc: null } }
     });
   });
 
