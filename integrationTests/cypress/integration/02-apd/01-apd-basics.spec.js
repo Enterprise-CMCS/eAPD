@@ -784,8 +784,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalSharePercentage: 0.75,
                 federalShareAmount: 0,
                 stateSharePercentage: 0.25,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
+                stateShareAmount: 2,
+                totalComputableMedicaidCost: 50010
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
@@ -794,8 +794,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalSharePercentage: 0.5,
                 federalShareAmount: 0,
                 stateSharePercentage: 0.5,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
+                stateShareAmount: 5,
+                totalComputableMedicaidCost: 50010
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
@@ -804,8 +804,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalSharePercentage: 0.9,
                 federalShareAmount: 0,
                 stateSharePercentage: 0.1,
-                stateShareAmount: 0,
-                totalComputableMedicaidCost: 0
+                stateShareAmount: 1,
+                totalComputableMedicaidCost: 50010
               });
             });
         });
