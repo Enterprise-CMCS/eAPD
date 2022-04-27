@@ -6,23 +6,19 @@ labels: development, bug
 assignees: ''
 ---
 
-**Description-**
+### Description
 
-**Type of Bug-**
+### Steps to reproduce
 
-- [ ] Accessibility
-- [ ] Functional
-- [ ] Usability
-- [ ] API
-- [ ] Regression
+1.
+2.
+3.
 
-**Steps to reproduce-**
+**Expected results-**
 
-1. Step
-2. Step
-3. Step
+**Actual results-**
 
-**Role Affected-**
+### Role Affected
 
 - [ ] All
 - [ ] Federal Admin
@@ -31,31 +27,22 @@ assignees: ''
 - [ ] State Contractor
 - [ ] System Admin
 
-**Environment-**
+### Environment
 
 - [ ] All
 - [ ] PR #\_\_\_\_
 - [ ] Staging
 - [ ] Production
 
-**Browser-**
+### Browser
 
+- [ ] All
 - [ ] Firefox
 - [ ] Chrome
 - [ ] IE
-
-**Expected results-**
-
-**Actual results-**
 
 **Related user story/bug-** (if applicable)
 
 **Additional information-** (optional)
 
 **Logs or error output/Screenshot/Video-** (at least 1 of these)
-
----
-
-Add additional labels (design, dev, compliance, BUG, etc) and size before submitting.
-
-If the issue is needed to complete prioritized work for the CURRENT SPRINT, add it to the "This Sprint" pipeline. Otherwise, all other issues will be automatically added to the _unprioritized pipeline_ for prioritization in backlog refinement or sprint planning with Product.
