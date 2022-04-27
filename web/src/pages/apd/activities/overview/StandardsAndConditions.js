@@ -14,39 +14,12 @@ import RichText from '../../../../components/RichText';
 import TextArea from '../../../../components/TextArea';
 import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
 
-const standardsConditionsSchema = Joi.alternatives().try(
-	Joi.object({
-  	supports: Joi.string().trim().min(1).required().messages({
-      'string.base': 'Provide a description about how this activity will support the Medicaid standards and conditions.',
-      'string.empty': 'Provide a description about how this activity will support the Medicaid standards and conditions.',
-      'string.min': 'Provide a description about how this activity will support the Medicaid standards and conditions.'
-    }),
-    doesNotSupport: Joi.string().allow('')
+const standardsConditionsSchema = Joi.object({
+  supports: Joi.string().empty(['', null]).trim().min(1).messages({
+    
   }),
-  Joi.object({
-  	supports: Joi.string().allow(''),
-    doesNotSupport: Joi.string().required().messages({
-      'string.base': 'If this activity does not support the Medicaid standards and conditions, please explain.',
-      'string.empty': 'If this activity does not support the Medicaid standards and conditions, please explain.',
-      'string.min': 'If this activity does not support the Medicaid standards and conditions, please explain.'
-    })
-  })
-)
-  // {
-  // supports: Joi.alternatives().conditional('doesNotSupport', {
-  //   is: Joi.exist(),
-  //   then: Joi.string().trim().min(1).required().messages({
-  //     'string.base': 'Provide a description about how this activity will support the Medicaid standards and conditions.',
-  //     'string.empty': 'Provide a description about how this activity will support the Medicaid standards and conditions.',
-  //     'string.min': 'Provide a description about how this activity will support the Medicaid standards and conditions.'
-  //   }),
-  //   otherwise: Joi.any()
-  // }),
-  // doesNotSupport: Joi.string().required().messages({
-  //   'string.base': 'If this activity does not support the Medicaid standards and conditions, please explain.',
-  //   'string.empty': 'If this activity does not support the Medicaid standards and conditions, please explain.',
-  //   'string.min': 'If this activity does not support the Medicaid standards and conditions, please explain.'
-  // })
+  doesNotSupport: Joi.string().empty(['', null])
+}).or("supports", "doesNotSupport")
 
 const StandardsAndConditions = forwardRef(
   ({
