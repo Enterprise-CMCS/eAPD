@@ -28,8 +28,7 @@ const DateField = ({
   value,
   onChange,
   onComponentBlur,
-  error,
-  isTouched
+  error
 }) => {
   const initialState = {
     dayInvalid: false,
@@ -41,11 +40,13 @@ const DateField = ({
   
   function reducer(state, action) {
     switch (action.type) {
-      case 'setErrorMessage':
+      case 'setErrorMessage': {
+        console.log("hey");
         return {
          ...state,
          errorMessage: action.value
-        };
+        };        
+      }
       case 'setAllInvalid':
         return {
           ...state,
@@ -71,6 +72,8 @@ const DateField = ({
           ...state,
           dateObject: dateParts(action.value)
         }
+      // Add cases for setYear, setMonth, setDay
+      
     }
   }
         
@@ -78,7 +81,6 @@ const DateField = ({
   
   // Ask Tif: why do I have to do this? I don't understand exactly why the reducer isn't updating the error
   useEffect(() => {
-    console.log("isTouched", isTouched)
     if(error) {
       dispatch({type: 'setErrorMessage', value: error});
       dispatch({type: 'setAllInvalid'});
@@ -87,7 +89,7 @@ const DateField = ({
       dispatch({type: 'setAllValid'});      
     }
   },[error]);
-  
+
   useEffect(() => {
     dispatch({type: 'updateDateObject', value: value})
   },[value])
@@ -99,22 +101,22 @@ const DateField = ({
     
     if (!isNumeric(year) || +year < 1900 || +year > 2100) {
       dispatch({type: 'setDatePartValid', field: 'yearInvalid', value: true});
-      datePartErrors.push('Bad year');
+      datePartErrors.push('year');
     }
     
     if (!isNumeric(month) || +month < 1 || +month > 12) {
       dispatch({type: 'setDatePartValid', field: 'monthInvalid', value: true});
-      datePartErrors.push('Bad month');
+      datePartErrors.push('month');
     }
     
     var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
     if (!isNumeric(day) || +day < 1 || +day > lastDayOfMonth.getDate() + 1) {
       dispatch({type: 'setDatePartValid', field: 'yearInvalid', value: true});
-      datePartErrors.push('Bad day');
+      datePartErrors.push('day');
     }
     console.log("datePartErrors", datePartErrors.join(', '));
     
-    dispatch({type: 'setErrorMessage', value: datePartErrors.join(', ')});
+    dispatch({type: 'setErrorMessage', value: `Must have a valid ${datePartErrors.join(', ')}`});
   };
   
   return (
@@ -130,6 +132,9 @@ const DateField = ({
         onComponentBlur()
         validateDateParts(state.dateObject)
       }} // Trigger parent component for component-level (ie. the whole date, not individual fields)
+      onBlur={(e, dateObject) => {
+        console.log("onBlur Called")
+      }}
       errorMessage={state.errorMessage}
       dayInvalid={state.dayInvalid}
       monthInvalid={state.monthInvalid}
