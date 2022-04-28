@@ -218,7 +218,6 @@ const PersonForm = forwardRef(({ index, item, savePerson, years, setFormValid },
           />
         )}
       />
-      
       <Controller
         name="hasCosts"
         control={control}

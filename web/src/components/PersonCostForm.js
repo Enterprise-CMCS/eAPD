@@ -11,7 +11,7 @@ import Dollars from './Dollars';
 import NumberField from './NumberField';
 
 const PersonCostForm = ({
-  value,
+  items,
   costLabel,
   fteLabel,
   setCost,
@@ -27,7 +27,7 @@ const PersonCostForm = ({
     watch
   } = useForm({
     defaultValues: {
-      ...value
+      ...items
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
