@@ -23,9 +23,8 @@ describe('the ApdKeyPersonForm component', () => {
       },
       position: 'The Builder'
     },
-
     savePerson: jest.fn(),
-
+    setFormValid: jest.fn(),
     years: ['1992', '1993']
   };
 

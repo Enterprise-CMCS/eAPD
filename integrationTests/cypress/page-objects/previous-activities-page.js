@@ -54,7 +54,8 @@ class PreviousActivitiesPage {
         .type(expenditures.mmis50.approved[i]);
       cy.get(`[name='actual-federal-mmis50-${year}']`)
         .clear()
-        .type(expenditures.mmis50.actual[i]);
+        .type(expenditures.mmis50.actual[i])
+        .blur();
     });
   }
 
