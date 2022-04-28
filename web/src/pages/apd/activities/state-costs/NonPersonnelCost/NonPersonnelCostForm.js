@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import DollarField from '../../../../../components/DollarField';
 import TextArea from '../../../../../components/TextArea';
 
-import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../actions/editActivity';
+import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../redux/actions/editActivity';
 
 const NonPersonnelCostForm = forwardRef(
   ({ activityIndex, index, item, saveNonPersonnelCost }, ref) => {

@@ -3,7 +3,7 @@ import React from 'react';
 
 import { plain as KeyPersonForm, mapDispatchToProps } from './ApdKeyPersonForm';
 
-import { saveKeyPersonnel } from '../../../actions/editApd';
+import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 describe('the ApdKeyPersonForm component', () => {
   const props = {

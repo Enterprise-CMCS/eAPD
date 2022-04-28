@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { t } from '../../../i18n';
 import { Section, Subsection } from '../../../components/Section';
-import { selectActivitySchedule } from '../../../reducers/activities.selectors';
+import { selectActivitySchedule } from '../../../redux/selectors/activities.selectors';
 import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 

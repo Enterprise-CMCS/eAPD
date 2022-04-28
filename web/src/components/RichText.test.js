@@ -7,7 +7,7 @@ import {
   mapDispatchToProps,
   setupTinyMCE
 } from './RichText';
-import { uploadFile } from '../actions/editApd';
+import { uploadFile } from '../redux/actions/editApd';
 
 describe('RichText component', () => {
   test('renders as expected', () => {

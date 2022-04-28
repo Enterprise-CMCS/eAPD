@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import TagManager from 'react-gtm-module';
-import { setLatestActivity } from '../actions/auth';
+import { setLatestActivity } from '../redux/actions/auth';
 
 import App from './App';
 

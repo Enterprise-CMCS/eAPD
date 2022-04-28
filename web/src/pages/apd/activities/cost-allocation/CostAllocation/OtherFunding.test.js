@@ -5,7 +5,7 @@ import { plain as OtherFunding, mapDispatchToProps } from './OtherFunding';
 import {
   setCostAllocationFFPOtherFunding,
   setCostAllocationOtherFunding
-} from '../../../../../actions/editActivity';
+} from '../../../../../redux/actions/editActivity';
 
 describe('<OtherFunding />', () => {
   const props = {

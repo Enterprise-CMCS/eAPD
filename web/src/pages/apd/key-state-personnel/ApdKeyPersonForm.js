@@ -8,7 +8,7 @@ import { t } from '../../../i18n';
 
 import PersonCostForm from '../../../components/PersonCostForm';
 
-import { saveKeyPersonnel } from '../../../actions/editApd';
+import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 const tRoot = 'apd.stateProfile.keyPersonnel';
 

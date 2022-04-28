@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 
 import * as actions from './admin';
 
-import axios from '../util/api';
+import axios from '../../util/api';
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
