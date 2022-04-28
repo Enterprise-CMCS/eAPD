@@ -101,8 +101,6 @@ su - postgres << PG_USER
 # Prepare PostGres test database
 psql -c "CREATE DATABASE hitech_apd;"
 psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
-#sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
-#sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 PG_USER
 R_USER
 
