@@ -25,13 +25,6 @@ const formatDate = ({ day = '', month = '', year = '' } = {}) => {
   }`;
 };
 
-const validateYear = year => !isNumeric(year) || +year < 1900 || +year > 2100;
-const validateMonth = month => !isNumeric(month) || +month < 1 || +month > 12;
-const validateDate = ({ day, month, year }) => {
-  var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
-  return !isNumeric(day) || +day < 1 || +day > lastDayOfMonth.getDate() + 1;
-};
-
 const DateField = ({ value, onChange, onComponentBlur, errorMessage }) => {
   const initialState = {
     invalidObject: {
@@ -76,7 +69,7 @@ const DateField = ({ value, onChange, onComponentBlur, errorMessage }) => {
           ...state,
           invalidObject: {
             ...state.invalidObject,
-            yearInvalid: validateYear(year)
+            yearInvalid: !isNumeric(year) || +year < 1900 || +year > 2100
           }
         };
       }
@@ -86,19 +79,20 @@ const DateField = ({ value, onChange, onComponentBlur, errorMessage }) => {
           ...state,
           invalidObject: {
             ...state.invalidObject,
-            monthInvalid: validateMonth(month)
+            monthInvalid: !isNumeric(month) || +month < 1 || +month > 12
           }
         };
       }
       case 'dayValidate': {
         const { value: day } = action;
         const { month, year } = state.dateObject;
-
+        const lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
         return {
           ...state,
           invalidObject: {
             ...state.invalidObject,
-            dayInvalid: validateDate({ day, month, year })
+            dayInvalid:
+              !isNumeric(day) || +day < 1 || +day > lastDayOfMonth.getDate() + 1
           }
         };
       }
@@ -146,11 +140,11 @@ const DateField = ({ value, onChange, onComponentBlur, errorMessage }) => {
         });
         onChange(e, formatDate(dateObject)); // Pass value to parent component
       }}
-      onComponentBlur={onComponentBlur}
       onBlur={(e, dateObject) => {
         const { name } = e.target;
         dispatch({ type: `${name}Validate`, value: dateObject[name] });
       }}
+      onComponentBlur={onComponentBlur}
       errorMessage={localErrorMessage}
       dayInvalid={state.invalidObject.dayInvalid}
       monthInvalid={state.invalidObject.monthInvalid}
