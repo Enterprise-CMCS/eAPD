@@ -12,7 +12,6 @@ const dateParts = value => {
     };
   }
   const [year, month, day] = value.trim().slice(0, 10).split('-');
-  console.log({year, month, day})
   return { day: +day || '', month: +month || '', year: +year || '' };
 };
 
@@ -21,124 +20,141 @@ const formatDate = ({ day = '', month = '', year = '' } = {}) => {
     return '';
   }
   // Make sure it's an ISO-8601 date, which uses 2-digit month and day
-  return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
+  return `${year}-${month < 10 ? `0${month}` : month}-${
+    day < 10 ? `0${day}` : day
+  }`;
 };
 
-const DateField = ({
-  value,
-  onChange,
-  onComponentBlur,
-  error
-}) => {
+const validateYear = year => !isNumeric(year) || +year < 1900 || +year > 2100;
+const validateMonth = month => !isNumeric(month) || +month < 1 || +month > 12;
+const validateDate = ({ day, month, year }) => {
+  var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
+  return !isNumeric(day) || +day < 1 || +day > lastDayOfMonth.getDate() + 1;
+};
+
+const DateField = ({ value, onChange, onComponentBlur, errorMessage }) => {
   const initialState = {
-    dayInvalid: false,
-    monthInvalid: false,
-    yearInvalid: false,
-    errorMessage: error === undefined ? '' : error,
+    invalidObject: {
+      dayInvalid: false,
+      monthInvalid: false,
+      yearInvalid: false
+    },
     dateObject: dateParts(value)
   };
-  
+
   function reducer(state, action) {
     switch (action.type) {
-      case 'setErrorMessage': {
-        console.log("hey");
-        return {
-         ...state,
-         errorMessage: action.value
-        };        
-      }
       case 'setAllInvalid':
         return {
           ...state,
-          dayInvalid: true,
-          monthInvalid: true,
-          yearInvalid: true
+          invalidObject: {
+            dayInvalid: true,
+            monthInvalid: true,
+            yearInvalid: true
+          }
         };
       case 'setAllValid':
         return {
           ...state,
-          dayInvalid: false,
-          monthInvalid: false,
-          yearInvalid: false,
-          errorMessage: ''
+          invalidObject: {
+            dayInvalid: false,
+            monthInvalid: false,
+            yearInvalid: false
+          }
         };
-      case 'setDatePartValid':
+      case 'updateDatePart':
         return {
           ...state,
-          [action.field]: action.value
-        }
-      case 'updateDateObject':
+          dateObject: {
+            ...state.dateObject,
+            [action.field]: action.value
+          }
+        };
+      case 'yearValidate': {
+        const { value: year } = action;
         return {
           ...state,
-          dateObject: dateParts(action.value)
-        }
+          invalidObject: {
+            ...state.invalidObject,
+            yearInvalid: validateYear(year)
+          }
+        };
+      }
+      case 'monthValidate': {
+        const { value: month } = action;
+        return {
+          ...state,
+          invalidObject: {
+            ...state.invalidObject,
+            monthInvalid: validateMonth(month)
+          }
+        };
+      }
+      case 'dayValidate': {
+        const { value: day } = action;
+        const { month, year } = state.dateObject;
+
+        return {
+          ...state,
+          invalidObject: {
+            ...state.invalidObject,
+            dayInvalid: validateDate({ day, month, year })
+          }
+        };
+      }
       // Add cases for setYear, setMonth, setDay
-      
     }
   }
-        
+
   const [state, dispatch] = useReducer(reducer, initialState);
-  
+
   // Ask Tif: why do I have to do this? I don't understand exactly why the reducer isn't updating the error
   useEffect(() => {
-    if(error) {
-      dispatch({type: 'setErrorMessage', value: error});
-      dispatch({type: 'setAllInvalid'});
+    if (errorMessage) {
+      dispatch({ type: 'setAllInvalid' });
     }
-    if(!error) {
-      dispatch({type: 'setAllValid'});      
+    if (!errorMessage) {
+      dispatch({ type: 'setAllValid' });
     }
-  },[error]);
+  }, [errorMessage]);
 
-  useEffect(() => {
-    dispatch({type: 'updateDateObject', value: value})
-  },[value])
-  
-  const validateDateParts = dateObject => {
-    const { day = '', month = '', year = '' } = dateObject || {};
-    
-    const datePartErrors = [];
-    
-    if (!isNumeric(year) || +year < 1900 || +year > 2100) {
-      dispatch({type: 'setDatePartValid', field: 'yearInvalid', value: true});
-      datePartErrors.push('year');
+  const localErrorMessage = useMemo(() => {
+    const { invalidObject } = state;
+    const partErrors = Object.keys(invalidObject)
+      .filter(key => invalidObject[key] === true)
+      .map(key => key.replace('Invalid', ''));
+    if (partErrors.length > 0 && partErrors.length < 3) {
+      return `Please enter a valid ${partErrors.join(' and ')}`;
     }
-    
-    if (!isNumeric(month) || +month < 1 || +month > 12) {
-      dispatch({type: 'setDatePartValid', field: 'monthInvalid', value: true});
-      datePartErrors.push('month');
+    if (partErrors.length === 3 && !errorMessage) {
+      return '';
     }
-    
-    var lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
-    if (!isNumeric(day) || +day < 1 || +day > lastDayOfMonth.getDate() + 1) {
-      dispatch({type: 'setDatePartValid', field: 'yearInvalid', value: true});
-      datePartErrors.push('day');
-    }
-    console.log("datePartErrors", datePartErrors.join(', '));
-    
-    dispatch({type: 'setErrorMessage', value: `Must have a valid ${datePartErrors.join(', ')}`});
-  };
-  
+    return errorMessage;
+  }, [errorMessage, state.invalidObject]);
+
   return (
     <DSDateField
       dayValue={state.dateObject.day}
       monthValue={state.dateObject.month}
       yearValue={state.dateObject.year}
       onChange={(e, dateObject) => {
-        // Check if this formatDate is used in current main branch. might be better to do the formatting when it comes down vs. passing it up
+        const { name } = e.target;
+        dispatch({
+          type: 'updateDatePart',
+          field: name,
+          value: dateObject[name]
+        });
         onChange(e, formatDate(dateObject)); // Pass value to parent component
       }}
-      onComponentBlur={() => {
-        onComponentBlur()
-        validateDateParts(state.dateObject)
-      }} // Trigger parent component for component-level (ie. the whole date, not individual fields)
+      onComponentBlur={onComponentBlur}
       onBlur={(e, dateObject) => {
-        console.log("onBlur Called")
+        const { name } = e.target;
+        dispatch({ type: `${name}Validate`, value: dateObject[name] });
       }}
-      errorMessage={state.errorMessage}
-      dayInvalid={state.dayInvalid}
-      monthInvalid={state.monthInvalid}
-      yearInvalid={state.yearInvalid}
+      errorMessage={localErrorMessage}
+      dayInvalid={state.invalidObject.dayInvalid}
+      monthInvalid={state.invalidObject.monthInvalid}
+      yearInvalid={state.invalidObject.yearInvalid}
       errorPlacement="bottom"
     />
   );

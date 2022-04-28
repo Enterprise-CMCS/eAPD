@@ -117,19 +117,22 @@ const ContractorResourceForm = forwardRef(
           <Controller
             name="start"
             control={control}
-            render={({ field: { onChange, onBlur, ...props }, formState: { isTouched } }) => (
+            render={({
+              field: { onChange, onBlur, ...props },
+              formState: { isTouched }
+            }) => (
               <DateField
                 {...props}
                 isTouched={isTouched}
                 label="Contract start date"
                 onChange={(_, dateStr) => onChange(dateStr)}
-                onComponentBlur={(_, dateStr) => {
-                  trigger('start');
+                onComponentBlur={() => {
+                  onBlur();
                   if (getFieldState('end').isTouched) {
                     trigger('end');
                   }
                 }}
-                error={errors?.start?.message}
+                errorMessage={errors?.start?.message}
               />
             )}
           />
@@ -142,13 +145,13 @@ const ContractorResourceForm = forwardRef(
                   {...props}
                   label="Contract end date"
                   onChange={(_, dateStr) => onChange(dateStr)}
-                  onComponentBlur={(_, dateStr) => {
-                    trigger('end');
+                  onComponentBlur={() => {
+                    onBlur();
                     if (getFieldState('start').isTouched) {
                       trigger('start');
                     }
                   }}
-                  error={errors?.end?.message}
+                  errorMessage={errors?.end?.message}
                 />
               );
             }}

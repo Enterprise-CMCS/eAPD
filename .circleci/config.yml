@@ -43,7 +43,7 @@ workflows:
   weekly aws ami builds:
     triggers:
       - schedule:
-          cron: '0 0 * * 1'  # Mondays at midnight
+          cron: '0 0 * * 1' # Mondays at midnight
           filters:
             branches:
               only:
@@ -308,7 +308,8 @@ jobs:
             packer build --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var preview_mongo_database=$PREVIEW_MONGO_DATABASE \
               --var preview_mongo_initdb_root_username=$PREVIEW_MONGO_INITDB_ROOT_USERNAME --var preview_mongo_initdb_root_password=$PREVIEW_MONGO_INITDB_ROOT_PASSWORD \
               --var preview_mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE \
-              --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
+              --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD --var preview_mongo_url=$PREVIEW_MONGO_URL \
+              --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
               preview-ami.pkr.hcl
   build production staging ami:
@@ -365,7 +366,7 @@ jobs:
       - checkout
       - run:
           name: Cleanup Old/Unused Production/Staging AMIs
-          working_directory: ~/project/bin/prod-deploy          
+          working_directory: ~/project/bin/prod-deploy
           command: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
