@@ -310,6 +310,7 @@ const ContractorResourceForm = forwardRef(
                 render={({ field: { ...props } }) => (
                   <DollarField
                     {...props}
+                    data-cy={`ffy-${ffy}-cost`}
                     label={`FFY ${ffy} Cost`}
                     size="medium"
                     errorMessage={errors?.years?.[ffy]?.message}
