@@ -23,7 +23,7 @@ export const newOutcome = () => ({
   metrics: []
 });
 
-export const statePersonDefaultYear = () => ({ amt: 0, perc: 0 });
+export const statePersonDefaultYear = () => ({ amt: null, perc: null });
 export const newStatePerson = years => ({
   key: generateKey(),
   title: '',
@@ -46,7 +46,7 @@ export const newContractor = years => ({
   hourly: arrToObj(years, contractorDefaultHourly())
 });
 
-export const expenseDefaultYear = () => 0;
+export const expenseDefaultYear = () => null;
 
 export const newExpense = years => ({
   key: generateKey(),

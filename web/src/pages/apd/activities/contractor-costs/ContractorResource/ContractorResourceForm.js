@@ -23,6 +23,12 @@ const getCheckedValue = value => {
   return null;
 };
 
+const getBooleanValue = value => {
+  if (value === 'yes') return true;
+  if (value === 'no') return false;
+  return null;
+};
+
 const ContractorResourceForm = forwardRef(
   ({ activityIndex, index, item, saveContractor, setFormValid }, ref) => {
     ContractorResourceForm.displayName = 'ContractorResourceForm';
@@ -52,7 +58,10 @@ const ContractorResourceForm = forwardRef(
 
     const onSubmit = e => {
       e.preventDefault();
-      saveContractor(activityIndex, index, getValues());
+      saveContractor(activityIndex, index, {
+        ...getValues(),
+        useHourly: getBooleanValue(getValues('useHourly'))
+      });
     };
 
     return (
@@ -112,7 +121,7 @@ const ContractorResourceForm = forwardRef(
               <DateField
                 {...props}
                 label="Contract start date"
-                onChange={onChange}
+                onChange={(_, dateStr) => onChange(dateStr)}
                 onComponentBlur={(_, dateStr) => {
                   onBlur(dateStr);
                   if (getFieldState('end').isTouched) {
