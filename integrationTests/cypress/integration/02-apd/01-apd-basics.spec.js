@@ -31,7 +31,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.useStateStaff();
 
     cy.findByRole('button', { name: /Create new/i }).click();
-    cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
+    cy.findByRole(
+      'heading',
+      { name: /APD Overview/i },
+      { timeout: 100000 }
+    ).should('exist');
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
     });
@@ -260,21 +264,23 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
 
     it('should handle entering data', () => {
-      const keyPersons = [{
-        name: 'Jean Luc Picard',
-        email: 'jpicard@gmail.com',
-        position: 'Captain'
-      },
-      {
-        name: 'William Riker',
-        email: 'riker@gmail.com',
-        position: 'First Officer'
-      },
-      {
-        name: 'Data Soong',
-        email: 'data@gmail.com',
-        position: 'Second Officer'
-      }]
+      const keyPersons = [
+        {
+          name: 'Jean Luc Picard',
+          email: 'jpicard@gmail.com',
+          position: 'Captain'
+        },
+        {
+          name: 'William Riker',
+          email: 'riker@gmail.com',
+          position: 'First Officer'
+        },
+        {
+          name: 'Data Soong',
+          email: 'data@gmail.com',
+          position: 'Second Officer'
+        }
+      ];
 
       cy.log('Key State Personnel');
       cy.goToKeyStatePersonnel();
@@ -309,7 +315,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
 
-      cy.findByRole('button', { name: /Save/i }).should('not.be.disabled').click();
+      cy.findByRole('button', { name: /Save/i })
+        .should('not.be.disabled')
+        .click();
 
       // Get div for the element containing user data as an alias
       cy.get('.form-and-review-list')
@@ -352,9 +360,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .parent()
         .parent()
         .as('personnelVals1');
-      cy.get('@personnelVals1')
-        .contains(keyPersons[1].name)
-        .should('exist');
+      cy.get('@personnelVals1').contains(keyPersons[1].name).should('exist');
       cy.get('@personnelVals1')
         .find('li')
         .should($lis => {
@@ -390,7 +396,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('[data-cy="key-person-2__position"]').type(keyPersons[2].position);
       // Have to force check; cypress does not think radio buttons are visible
       cy.get('input[type="radio"][value="yes"]').check({ force: true });
-      
+
       cy.get('[data-cy="key-person-2-0__cost"]').type('100000');
       cy.get('[data-cy="key-person-2-0__fte"]').type('0.5');
       cy.get('[data-cy="key-person-2-1__cost"]').type('100000');
@@ -404,9 +410,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .parent()
         .parent()
         .as('personnelVals2');
-      cy.get('@personnelVals2')
-        .contains(keyPersons[2].name)
-        .should('exist');
+      cy.get('@personnelVals2').contains(keyPersons[2].name).should('exist');
       cy.get('@personnelVals2')
         .find('li')
         .should($lis => {
@@ -819,9 +823,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.contains('State Staff')
                 .parent()
                 .next()
-                .should('have.text', `${keyPersons[0].name} (APD Key Personnel)$0`)
+                .should(
+                  'have.text',
+                  `${keyPersons[0].name} (APD Key Personnel)$0`
+                )
                 .next()
-                .should('have.text', `${keyPersons[1].name} (APD Key Personnel)$0`)
+                .should(
+                  'have.text',
+                  `${keyPersons[1].name} (APD Key Personnel)$0`
+                )
                 .next()
                 .should(
                   'have.text',
@@ -935,8 +945,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .should(
           'have.text',
           `2. ${keyPersons[1].name}` +
-          `${keyPersons[1].position}` +
-          `Email: ${keyPersons[1].email}` +
+            `${keyPersons[1].position}` +
+            `Email: ${keyPersons[1].email}` +
             'Total cost: $0'
         );
 
@@ -1029,9 +1039,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.contains('State Staff')
                 .parent()
                 .next()
-                .should('have.text', `${keyPersons[0].name} (APD Key Personnel)$0`)
+                .should(
+                  'have.text',
+                  `${keyPersons[0].name} (APD Key Personnel)$0`
+                )
                 .next()
-                .should('have.text', `${keyPersons[1].name} (APD Key Personnel)$0`)
+                .should(
+                  'have.text',
+                  `${keyPersons[1].name} (APD Key Personnel)$0`
+                )
                 .next()
                 .should(
                   'have.text',

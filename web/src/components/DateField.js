@@ -25,7 +25,13 @@ const formatDate = ({ day = '', month = '', year = '' } = {}) => {
   }`;
 };
 
-const DateField = ({ value, onChange, onComponentBlur, errorMessage }) => {
+const DateField = ({
+  value,
+  onChange,
+  onComponentBlur,
+  errorMessage,
+  ...rest
+}) => {
   const initialState = {
     invalidObject: {
       dayInvalid: false,
@@ -128,6 +134,7 @@ const DateField = ({ value, onChange, onComponentBlur, errorMessage }) => {
 
   return (
     <DSDateField
+      {...rest}
       dayValue={state.dateObject.day}
       monthValue={state.dateObject.month}
       yearValue={state.dateObject.year}
