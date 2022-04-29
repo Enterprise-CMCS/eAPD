@@ -133,6 +133,7 @@ source ~/.bashrc
 # We're using Node 16.15.0, we care about minor/patch versions
 nvm install 16.15.0
 nvm alias default 16.15.0
+nvm use 16.15.0
 npm i -g yarn@1.22.18
 
 # Install pm2: https://www.npmjs.com/package/pm2

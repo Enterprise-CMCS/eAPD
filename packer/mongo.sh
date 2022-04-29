@@ -104,6 +104,7 @@ source ~/.bashrc
 # get the latest.
 nvm install 16.15.0
 nvm alias default 16.15.0
+nvm use 16.15.0
 npm i -g yarn@1.22.18
 
 git clone --single-branch https://github.com/CMSgov/eAPD.git
