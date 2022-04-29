@@ -102,13 +102,11 @@ const DateField = ({
           }
         };
       }
-      // Add cases for setYear, setMonth, setDay
     }
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Ask Tif: why do I have to do this? I don't understand exactly why the reducer isn't updating the error
   useEffect(() => {
     if (errorMessage) {
       dispatch({ type: 'setAllInvalid' });
