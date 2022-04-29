@@ -71,7 +71,7 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "engines": {
-    "node": "16.13.2"
+    "node": "16.15.0"
   },
   "dependencies": {
     "@babel/core": "7.17.5",
@@ -204,5 +204,5 @@
     "glob-parent": ">=5.1.2",
     "async": ">=3.2.2"
   },
-  "packageManager": "yarn@1.22.15"
+  "packageManager": "yarn@1.22.18"
 }
