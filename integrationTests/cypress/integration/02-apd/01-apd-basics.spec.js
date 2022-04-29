@@ -4,7 +4,6 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
-import { get } from 'cypress/types/lodash';
 
 /// <reference types="cypress" />
 
