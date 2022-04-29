@@ -101,8 +101,8 @@ exports[`the MilestoneForm component renders correctly 1`] = `
         dayValue={16}
         errorMessage=""
         errorPlacement="bottom"
-        hint="For example: 4 / 28 / 1986"
-        label="Date"
+        hint=""
+        label="Target completion date"
         monthInvalid={false}
         monthLabel="Month"
         monthName="month"
@@ -119,8 +119,8 @@ exports[`the MilestoneForm component renders correctly 1`] = `
           component="fieldset"
           errorMessage=""
           errorPlacement="bottom"
-          hint="For example: 4 / 28 / 1986"
-          label="Date"
+          hint=""
+          label="Target completion date"
           labelComponent="legend"
           render={[Function]}
         >
@@ -131,7 +131,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
               component="legend"
               errorId="field_2-error"
               errorMessage=""
-              hint="For example: 4 / 28 / 1986"
+              hint=""
               id="field_2-label"
             >
               <legend
@@ -141,12 +141,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                 <span
                   className=""
                 >
-                  Date
-                </span>
-                <span
-                  className="ds-c-field__hint"
-                >
-                  For example: 4 / 28 / 1986
+                  Target completion date
                 </span>
               </legend>
             </FormLabel>
