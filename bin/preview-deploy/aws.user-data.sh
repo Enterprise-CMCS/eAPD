@@ -54,7 +54,7 @@ CWAGENTCONFIG
 sudo yum install -y gcc-c++
 
 # Test to see the command that is getting built for pulling the Git Branch
-su ec2-user <<E_USER
+sudo su - $(whoami) <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
@@ -91,10 +91,9 @@ touch /app/api/logs/cms-hitech-apd-api.logs
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16.13.2, we care about minor/patch versions
+# We're using Node 16.15.0, we care about minor/patch versions
 nvm install 16.13.2
 nvm alias default 16.13.2
-
 npm i -g yarn@1.22.17
 
 # Clone from Github
@@ -160,8 +159,6 @@ echo "module.exports = {
 pm2 start ecosystem.config.js
 
 NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
-#cd ~
-#mongo -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
 E_USER
 
 sudo yum remove -y gcc-c++
