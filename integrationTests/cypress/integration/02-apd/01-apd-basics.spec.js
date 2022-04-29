@@ -888,8 +888,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
         .join('');
 
-      cy.log(JSON.stringify(years));
-
       cy.get('@personnel')
         .findByRole('heading', {
           name: /Key Personnel and Program Management/i
