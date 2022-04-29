@@ -23,7 +23,7 @@
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout --reporter=spec ${TESTS:-'{,!(node_modules)/**/}*.test.js'}",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --lines=75 --functions=60 --branches=50 --statements=75  --no-browser --reporter=spec '{,!(node_modules)/**/}*.test.js'",
-    "test-endpoints": "jest --detectOpenHandles --forceExit 'endpoint'",
+    "test-endpoints": "jest -u --detectOpenHandles --forceExit 'endpoint'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec --lines=0 --functions=0 --branches=0 --statements=0",
     "prettier": "prettier --config \"../.prettierrc\" --write \"**/*.js\"",
     "fullTest": "./unit-test.sh",
@@ -78,7 +78,7 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "engines": {
-    "node": "16.13.2"
+    "node": "16.15.0"
   },
   "dependencies": {
     "@okta/jwt-verifier": "2.3.0",
@@ -145,5 +145,5 @@
   "resolutions": {
     "minimist": "1.2.6"
   },
-  "packageManager": "yarn@1.22.15"
+  "packageManager": "yarn@1.22.18"
 }
