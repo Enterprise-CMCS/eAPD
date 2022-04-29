@@ -6,6 +6,7 @@
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
     "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
+    "copy-schemas": "cp -r ../schemas src/static",
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "build": "yarn run copy-schemas && yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
     "lint": "eslint 'src/**/*.js'",
