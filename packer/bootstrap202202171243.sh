@@ -130,9 +130,10 @@ export TERM="xterm"
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16.13.2, we care about minor/patch versions
-nvm install 16.13.2
-nvm alias default 16.13.2
+# We're using Node 16.15.0, we care about minor/patch versions
+nvm install 16.15.0
+nvm alias default 16.15.0
+npm i -g yarn@1.22.18
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
@@ -145,14 +146,12 @@ cat <<MONGOROOTUSERSEED > mongo-init.sh
 mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : '$MONGO_INITDB_DATABASE'}]});"
 MONGOROOTUSERSEED
 sh ~/mongo-init.sh
-
 cat <<MONGOUSERSEED > mongo-user.sh
-mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
+mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 sh ~/mongo-user.sh
-
-rm ~/mongo-user.sh
 rm ~/mongo-init.sh
+rm ~/mongo-user.sh
 E_USER
 
 sudo su <<R_USER

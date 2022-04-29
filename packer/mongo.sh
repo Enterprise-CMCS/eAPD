@@ -100,11 +100,11 @@ PG_USER
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 14, and we don't care about minor/patch versions, so always
+# We're using Node 16, and we don't care about minor/patch versions, so always
 # get the latest.
-nvm install 16
-nvm alias default 16
-npm i -g yarn@1.22.17
+nvm install 16.15.0
+nvm alias default 16.15.0
+npm i -g yarn@1.22.18
 
 git clone --single-branch https://github.com/CMSgov/eAPD.git
 cd ~/eAPD/api
