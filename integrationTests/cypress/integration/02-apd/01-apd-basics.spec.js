@@ -4,6 +4,7 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
+import { get } from 'cypress/types/lodash';
 
 /// <reference types="cypress" />
 
@@ -427,11 +428,21 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@personnelVals2').contains('Delete').should('exist');
       cy.get('@personnelVals2').contains('Edit').should('exist');
 
+      // Testing Activity Overview Missing Fields
+      cy.goToActivityDashboard();
+      
+      cy.contains('Add Activity').click();
+      cy.contains('Activity 2').should('exist');
+      cy.get('[class="activity--body activity--body__notfirst"]')
+      .contains('Edit').click();
+      cy.contains('Activity Overview').should('exist');
+
+      cy.get('input[name="name"]').focus().blur();
+      cy.contains('Activity Name is required.').should('exist');
+
+      // Testing Delete activity button
       cy.log('Activity Dashboard');
       cy.goToActivityDashboard();
-
-      // Testing add activity button at end of Activitiy
-      cy.contains('Add Activity').click();
       cy.contains('Activity 2').should('exist');
       cy.contains('Delete').should('exist');
       cy.contains('Delete').click();
