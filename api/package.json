@@ -78,7 +78,7 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "engines": {
-    "node": "16.13.2"
+    "node": "16.15.0"
   },
   "dependencies": {
     "@okta/jwt-verifier": "2.3.0",
@@ -145,5 +145,5 @@
   "resolutions": {
     "minimist": "1.2.6"
   },
-  "packageManager": "yarn@1.22.15"
+  "packageManager": "yarn@1.22.18"
 }
