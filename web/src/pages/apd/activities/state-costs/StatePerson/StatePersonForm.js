@@ -125,7 +125,7 @@ const StatePersonForm = forwardRef(
           }) => (
             <PersonCostForm
               {...props}
-              value={value}
+              items={value}
               setCost={getEditCostForYear}
               setFTE={getEditFTEForYear}
               setFormValid={handleSubForm}

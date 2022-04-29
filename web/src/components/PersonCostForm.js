@@ -114,7 +114,7 @@ const PersonCostForm = ({
 };
 
 PersonCostForm.propTypes = {
-  value: PropTypes.object.isRequired,
+  items: PropTypes.object.isRequired,
   costLabel: PropTypes.string,
   fteLabel: PropTypes.string,
   setCost: PropTypes.func.isRequired,
