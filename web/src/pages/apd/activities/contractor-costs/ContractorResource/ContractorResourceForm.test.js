@@ -254,8 +254,7 @@ describe('the ContractorResourceForm component', () => {
     userEvent.tab();
 
     await waitFor(async () => {
-      // TODO not actually finding all of the errors, should have 5, date errors aren't showing up
-      expect(await screen.findAllByRole('alert')).toHaveLength(3);
+      expect(await screen.findAllByRole('alert')).toHaveLength(5);
     });
   });
 

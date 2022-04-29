@@ -43,7 +43,7 @@ workflows:
   weekly aws ami builds:
     triggers:
       - schedule:
-          cron: '0 0 * * 1'  # Mondays at midnight
+          cron: '0 0 * * 1' # Mondays at midnight
           filters:
             branches:
               only:
@@ -94,9 +94,6 @@ workflows:
             - backend lint
             - frontend dependency vulnerability scan
             - backend dependency vulnerability scan
-            - frontend test
-            - backend unit test
-            - backend api endpoint test
 
       # backend jobs
       - backend api endpoint test:
@@ -365,7 +362,7 @@ jobs:
       - checkout
       - run:
           name: Cleanup Old/Unused Production/Staging AMIs
-          working_directory: ~/project/bin/prod-deploy          
+          working_directory: ~/project/bin/prod-deploy
           command: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
@@ -986,25 +983,9 @@ jobs:
             yarn install --frozen-lockfile --production=true
             cd ..
             zip -r /tmp/backend.zip api/*
-      - run:
-          name: Create Frontend Build Artifact Zip
-          working_directory: ~/project
-          command: |
-            zip -r /tmp/frontend.zip web/dist/*
-      - run:
-          name: Persist Build URL to Workspace
-          working_directory: ~/project
-          command: sh bin/prod-deploy/buildurl.sh CIRCLE_TOKEN=${CIRCLE_TOKEN} CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} > ./build-url.txt
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - ./build-url.txt
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip
-      - store_artifacts:
-          path: /tmp/frontend.zip
-          destination: frontend.zip
       - run:
           name: Persist Build URL to Workspace
           working_directory: ~/project
