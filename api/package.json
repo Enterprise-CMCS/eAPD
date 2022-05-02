@@ -143,7 +143,7 @@
     "testTimeout": 30000
   },
   "resolutions": {
-    "minimist": "1.2.6"
+    "minimist": ">=1.2.6"
   },
   "packageManager": "yarn@1.22.18"
 }
