@@ -30,6 +30,10 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
       apdId = apdUrl.split('/').pop();
       cy.log({ apdId });
     });
+
+    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+      years.push(list[index].value)
+    );
   });
 
   beforeEach(() => {
@@ -51,9 +55,6 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
 
       it('should have two checked years', () => {
         cy.get('[type="checkbox"][checked]').should('have.length', 2);
-        cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-          years.push(list[index].value)
-        );
       });
     });
 

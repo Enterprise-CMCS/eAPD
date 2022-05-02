@@ -125,7 +125,7 @@ const ContractorResourceForm = forwardRef(
                 {...props}
                 isTouched={isTouched}
                 label="Contract start date"
-                onChange={(_, dateStr) => onChange(dateStr)}
+                onChange={(e, dateStr) => onChange(dateStr)}
                 onComponentBlur={() => {
                   onBlur();
                   if (getFieldState('end').isTouched) {
@@ -144,7 +144,7 @@ const ContractorResourceForm = forwardRef(
                 <DateField
                   {...props}
                   label="Contract end date"
-                  onChange={(_, dateStr) => onChange(dateStr)}
+                  onChange={(e, dateStr) => onChange(dateStr)}
                   onComponentBlur={() => {
                     onBlur();
                     if (getFieldState('start').isTouched) {

@@ -39,6 +39,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
     });
+
+    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+      years.push(list[index].value)
+    );
   });
 
   beforeEach(() => {
@@ -90,9 +94,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get('#apd-title-input').contains(`${title2}`);
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
-      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-        years.push(list[index].value)
-      );
     });
   });
 
