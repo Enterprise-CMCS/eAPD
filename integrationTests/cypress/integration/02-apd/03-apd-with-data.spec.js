@@ -26,6 +26,10 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       apdUrl = pathname.replace('/apd-overview', '');
       apdId = apdUrl.split('/').pop();
     });
+
+    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+      years.push(list[index].value)
+    );
   });
 
   beforeEach(() => {
@@ -42,9 +46,6 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
 
       it('should have two checked years', () => {
         cy.get('[type="checkbox"][checked]').should('have.length', 2);
-        cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-          years.push(list[index].value)
-        );
       });
     });
 
