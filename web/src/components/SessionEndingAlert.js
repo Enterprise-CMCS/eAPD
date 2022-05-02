@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 import Icon, { Spinner, faExclamationTriangle } from './Icons';
 
-import { extendSession, logout } from '../actions/auth';
+import { extendSession, logout } from '../redux/actions/auth';
 
 const SessionEndingAlert = ({
   isSessionEnding,

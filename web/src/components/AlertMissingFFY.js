@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert } from '@cmsgov/design-system';
-import { selectApdYears } from '../reducers/apd.selectors';
+import { selectApdYears } from '../redux/selectors/apd.selectors';
 
 const AlertMissingFFY = ({ years, apdId }) => {
   if (years.length > 0) {

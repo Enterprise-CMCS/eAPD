@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 import Icon, { faExclamationTriangle, Spinner } from '../components/Icons';
 
-import { saveApd } from '../actions/app';
-import { selectHasError, selectIsSaving } from '../reducers/saving';
+import { saveApd } from '../redux/actions/app';
+import { selectHasError, selectIsSaving } from '../redux/reducers/saving';
 
 const UnexpectedError = ({ hasError, isSaving, save }) => {
   const closeErrorAlert = () => {

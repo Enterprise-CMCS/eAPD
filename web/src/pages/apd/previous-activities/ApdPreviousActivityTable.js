@@ -7,10 +7,10 @@ import Dollars from '../../../components/Dollars';
 import {
   setPreviousActivityApprovedExpenseForHITandHIE,
   setPreviousActivityFederalActualExpenseForHITandHIE
-} from '../../../actions/editApd';
+} from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
 
-import { selectPreviousHITHIEActivities } from '../../../reducers/apd.selectors';
+import { selectPreviousHITHIEActivities } from '../../../redux/selectors/apd.selectors';
 
 const ApdPreviousActivityTable = ({
   isViewOnly,

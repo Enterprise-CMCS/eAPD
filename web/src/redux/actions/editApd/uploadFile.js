@@ -4,8 +4,8 @@ import {
   UPLOAD_FILE_SUCCESS
 } from './symbols';
 
-import { selectApdData } from '../../reducers/apd.selectors';
-import axios, { apiUrl } from '../../util/api';
+import { selectApdData } from '../../../redux/selectors/apd.selectors';
+import axios, { apiUrl } from '../../../util/api';
 
 export const uploadFile = file => async (dispatch, getState) => {
   dispatch({ type: UPLOAD_FILE_REQUEST });

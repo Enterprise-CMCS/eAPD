@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { render as rtlRender } from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import reducer from '../reducers';
+import reducer from '../redux/reducers';
 
 /**
  * Use this render method instead of the plain render if you are testing a connected component that uses a router.

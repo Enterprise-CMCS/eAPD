@@ -5,7 +5,7 @@ import {
   setActivityAlternatives,
   setActivityDescription,
   setActivityOverview
-} from '../../../../actions/editActivity';
+} from '../../../../redux/actions/editActivity';
 
 import {
   plain as ActivityOverview,
