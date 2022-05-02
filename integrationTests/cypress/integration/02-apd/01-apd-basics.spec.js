@@ -4,7 +4,6 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 
-
 /// <reference types="cypress" />
 
 // Tests performing basic APD tasks
@@ -35,6 +34,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
     });
+
+    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+      years.push(list[index].value)
+    );
   });
 
   beforeEach(() => {
@@ -86,9 +89,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get('#apd-title-input').contains(`${title2}`);
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
-      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-        years.push(list[index].value)
-      );
     });
   });
 
@@ -376,7 +376,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         );
       });
 
-      cy.log("Done")
+      cy.log('Done');
 
       cy.get('@personnelVals2').contains('Delete').should('exist');
       cy.get('@personnelVals2').contains('Edit').should('exist');
@@ -894,10 +894,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       // Create string to check for personnel who is chargeable for the project for certain years.
       let str = '3. Key Personnel name not specifiedRole not specifiedEmail: ';
       str += years
-              .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
-              .join('');
-
-      cy.log(JSON.stringify(years));
+        .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
+        .join('');
 
       cy.get('@personnel')
         .findByRole('heading', {
