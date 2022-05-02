@@ -132,9 +132,9 @@ export TERM="xterm"
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16.13.2, we care about minor/patch versions
-nvm install 16.13.2
-nvm alias default 16.13.2
+# We're using Node 16.15.0, we care about minor/patch versions
+nvm install 16.15.0
+nvm alias default 16.15.0
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make

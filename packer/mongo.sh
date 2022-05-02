@@ -100,8 +100,8 @@ source ~/.bashrc
 
 # We're using Node 14, and we don't care about minor/patch versions, so always
 # get the latest.
-nvm install 16
-nvm alias default 16
+nvm install 16.15.0
+nvm alias default 16.15.0
 
 git clone --single-branch https://github.com/CMSgov/eAPD.git
 cd ~/eAPD/api
