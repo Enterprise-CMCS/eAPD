@@ -303,176 +303,90 @@ Object {
             },
             "type": "array",
           },
+          "apdOverview": Object {
+            "description": "APD Overview section",
+            "properties": Object {
+              "narrativeHIE": Object {
+                "description": "Brief description of HIE-funded activities contained in this APD",
+                "type": "string",
+              },
+              "narrativeHIT": Object {
+                "description": "Brief description of HIT-funded activities contained in this APD",
+                "type": "string",
+              },
+              "narrativeMMIS": Object {
+                "description": "Brief description of MMIS-funded activities contained in this APD",
+                "type": "string",
+              },
+              "programOverview": Object {
+                "description": "An overview of the overall program",
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "assurancesAndCompliances": Object {
+            "description": "Federal citations that states must assert compliance with. This is a free-form object.",
+            "type": "object",
+          },
           "created": Object {
             "description": "Timestamp of when this APD was created",
             "format": "date-time",
             "type": "string",
           },
-          "federalCitations": Object {
-            "description": "Federal citations that states must assert compliance with. This is a free-form object.",
-            "type": "object",
-          },
           "id": Object {
             "description": "APD ID",
             "type": "number",
           },
-          "incentivePayments": Object {
-            "description": "APD incentive payments",
-            "type": "object",
-            "x-patternProperties": Object {
-              "^e[hc](Amt|Ct)$": Object {
-                "type": "object",
-                "x-patternProperties": Object {
-                  "^[0-9]{4}$": Object {
-                    "type": "object",
-                    "x-patternProperties": Object {
-                      "^[1-4]$": Object {
-                        "description": "EH or EC payment or count for the given federal fiscal year and quarter",
-                        "type": "number",
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          "keyPersonnel": Object {
-            "items": Object {
-              "properties": Object {
-                "costs": Object {
-                  "type": "object",
-                  "x-patternProperties": Object {
-                    "^[0-9]{4}$": Object {
-                      "description": "Person's cost for the year described by the property name",
-                      "type": "number",
-                    },
-                  },
-                },
-                "email": Object {
-                  "description": "Person's email address",
-                  "type": "string",
-                },
-                "fte": Object {
-                  "type": "object",
-                  "x-patternProperties": Object {
-                    "^[0-9]{0,2}": Object {
-                      "description": "FTE equivalent of this person's time dedicated to the project",
-                      "type": "number",
-                    },
-                  },
-                },
-                "hasCosts": Object {
-                  "description": "Whether the person has costs attributable to the project",
-                  "type": "boolean",
-                },
-                "isPrimary": Object {
-                  "description": "Whether the person is the primary point of contact for the APD",
-                  "type": "boolean",
-                },
-                "name": Object {
-                  "description": "Person's name",
-                  "type": "string",
-                },
-                "position": Object {
-                  "description": "Person's position",
-                  "type": "string",
-                },
-              },
-              "type": "object",
-            },
-            "type": "array",
-          },
-          "name": Object {
-            "description": "The APD document name, following SEA naming conventions",
-            "type": "string",
-          },
-          "narrativeHIE": Object {
-            "description": "Brief description of HIE-funded activities contained in this APD",
-            "type": "string",
-          },
-          "narrativeHIT": Object {
-            "description": "Brief description of HIT-funded activities contained in this APD",
-            "type": "string",
-          },
-          "narrativeMMIS": Object {
-            "description": "Brief description of MMIS-funded activities contained in this APD",
-            "type": "string",
-          },
-          "previousActivityExpenses": Object {
-            "type": "object",
-            "x-patternProperties": Object {
-              "^[0-9]{4}$": Object {
-                "properties": Object {
-                  "hithie": Object {
-                    "description": "HIT- and HIE-funded expenses",
-                    "properties": Object {
-                      "federalActual": Object {
-                        "description": "Total federal share actually spent",
-                        "type": "number",
-                      },
-                      "totalApproved": Object {
-                        "description": "Total approved in the previous APD",
-                        "type": "number",
-                      },
-                    },
-                    "type": "object",
-                  },
-                  "mmis": Object {
-                    "description": "HIT-funded expenses",
-                    "properties": Object {
-                      "50": Object {
-                        "federalActual": Object {
-                          "description": "Total federal share actually spent",
-                          "type": "number",
-                        },
-                        "totalApproved": Object {
-                          "description": "Total approved in the previous APD",
-                          "type": "number",
-                        },
-                      },
-                      "75": Object {
-                        "federalActual": Object {
-                          "description": "Total federal share actually spent",
-                          "type": "number",
-                        },
-                        "totalApproved": Object {
-                          "description": "Total approved in the previous APD",
-                          "type": "number",
-                        },
-                      },
-                      "90": Object {
-                        "federalActual": Object {
-                          "description": "Total federal share actually spent",
-                          "type": "number",
-                        },
-                        "totalApproved": Object {
-                          "description": "Total approved in the previous APD",
-                          "type": "number",
-                        },
-                      },
-                    },
-                    "type": "object",
-                  },
-                },
-                "type": "object",
-              },
-            },
-          },
-          "previousActivitySummary": Object {
-            "description": "High-level outline of activities approved in previous APD",
-            "type": "string",
-          },
-          "programOverview": Object {
-            "description": "An overview of the overall program",
-            "type": "string",
-          },
-          "state": Object {
-            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase",
-            "type": "string",
-          },
-          "stateProfile": Object {
-            "description": "The state profile for this specific APD",
+          "keyStatePersonnel": Object {
+            "description": "Key State Personnel section",
             "properties": Object {
+              "keyPersonnel": Object {
+                "items": Object {
+                  "properties": Object {
+                    "costs": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{4}$": Object {
+                          "description": "Person's cost for the year described by the property name",
+                          "type": "number",
+                        },
+                      },
+                    },
+                    "email": Object {
+                      "description": "Person's email address",
+                      "type": "string",
+                    },
+                    "fte": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[0-9]{0,2}": Object {
+                          "description": "FTE equivalent of this person's time dedicated to the project",
+                          "type": "number",
+                        },
+                      },
+                    },
+                    "hasCosts": Object {
+                      "description": "Whether the person has costs attributable to the project",
+                      "type": "boolean",
+                    },
+                    "isPrimary": Object {
+                      "description": "Whether the person is the primary point of contact for the APD",
+                      "type": "boolean",
+                    },
+                    "name": Object {
+                      "description": "Person's name",
+                      "type": "string",
+                    },
+                    "position": Object {
+                      "description": "Person's position",
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "type": "array",
+              },
               "medicaidDirector": Object {
                 "properties": Object {
                   "email": Object {
@@ -517,6 +431,110 @@ Object {
               },
             },
             "type": "object",
+          },
+          "name": Object {
+            "description": "The APD document name, following SEA naming conventions",
+            "type": "string",
+          },
+          "previousActivities": Object {
+            "description": "Previous Activities section",
+            "properties": Object {
+              "actualExpenditures": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9]{4}$": Object {
+                    "properties": Object {
+                      "hithie": Object {
+                        "description": "HIT- and HIE-funded expenses",
+                        "properties": Object {
+                          "federalActual": Object {
+                            "description": "Total federal share actually spent",
+                            "type": "number",
+                          },
+                          "totalApproved": Object {
+                            "description": "Total approved in the previous APD",
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "mmis": Object {
+                        "description": "HIT-funded expenses",
+                        "properties": Object {
+                          "50": Object {
+                            "federalActual": Object {
+                              "description": "Total federal share actually spent",
+                              "type": "number",
+                            },
+                            "totalApproved": Object {
+                              "description": "Total approved in the previous APD",
+                              "type": "number",
+                            },
+                          },
+                          "75": Object {
+                            "federalActual": Object {
+                              "description": "Total federal share actually spent",
+                              "type": "number",
+                            },
+                            "totalApproved": Object {
+                              "description": "Total approved in the previous APD",
+                              "type": "number",
+                            },
+                          },
+                          "90": Object {
+                            "federalActual": Object {
+                              "description": "Total federal share actually spent",
+                              "type": "number",
+                            },
+                            "totalApproved": Object {
+                              "description": "Total approved in the previous APD",
+                              "type": "number",
+                            },
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "previousActivitySummary": Object {
+                "description": "High-level outline of activities approved in previous APD",
+                "type": "string",
+              },
+            },
+            "type": "object",
+          },
+          "proposedBudget": Object {
+            "description": "Proposed budget section",
+            "properties": Object {
+              "incentivePayments": Object {
+                "description": "APD incentive payments",
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^e[hc](Amt|Ct)$": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[1-4]$": Object {
+                            "description": "EH or EC payment or count for the given federal fiscal year and quarter",
+                            "type": "number",
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            "type": "object",
+          },
+          "state": Object {
+            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase",
+            "type": "string",
           },
           "status": Object {
             "description": "Status",

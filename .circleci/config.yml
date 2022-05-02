@@ -43,7 +43,7 @@ workflows:
   weekly aws ami builds:
     triggers:
       - schedule:
-          cron: '0 0 * * 1'  # Mondays at midnight
+          cron: '0 0 * * 1' # Mondays at midnight
           filters:
             branches:
               only:
@@ -362,7 +362,7 @@ jobs:
       - checkout
       - run:
           name: Cleanup Old/Unused Production/Staging AMIs
-          working_directory: ~/project/bin/prod-deploy          
+          working_directory: ~/project/bin/prod-deploy
           command: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
@@ -378,7 +378,7 @@ jobs:
   # because "yarn install --frozen-lockfile" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -401,8 +401,8 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-            nvm install 16
-            nvm alias default 16
+            nvm install 16.15.0
+            nvm alias default 16.15.0
             echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - save_cache:
@@ -419,7 +419,7 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -433,7 +433,7 @@ jobs:
           name: validate
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker create -v /openapi --name openapi cimg/node:16.13.2 /bin/true
+            docker create -v /openapi --name openapi cimg/node:16.15.0 /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator:0.2.0 openapi.json
 
@@ -441,7 +441,7 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -494,12 +494,12 @@ jobs:
             echo $CYPRESS_ENV >> ./cypress.env.json
             cp ../api/seeds/test/tokens.json ./tokens.json
 
-            # Switch to Node 16.
+            # Switch to Node 16.15.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.13.2
-            nvm alias default 16.13.2
-            nvm use 16.13.2
+            nvm install 16.15.0
+            nvm alias default 16.15.0
+            nvm use 16.15.0
 
             yarn install --frozen-lockfile
             npx cypress install --force
@@ -509,7 +509,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.spec.js"; fi
@@ -518,7 +518,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.spec.js"; fi
@@ -527,7 +527,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.spec.js"; fi
@@ -536,7 +536,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.spec.js"; fi
@@ -545,7 +545,7 @@ jobs:
           working_directory: ~/project/integrationTests
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.13.2; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
@@ -571,12 +571,12 @@ jobs:
   #        name: run tests
   #        working_directory: ~/project/api
   #        command: |
-  #          # Switch to Node 16.13.2.
+  #          # Switch to Node 16.15.0.
   #          sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs yarn
   #          export NVM_DIR="/opt/circleci/.nvm"
   #          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  #          nvm install 16.13.2
-  #          nvm alias default 16.13.2
+  #          nvm install 16.15.0
+  #          nvm alias default 16.15.0
   #          nvm i
   #          ./endpoint-tests/endpoint.sh
 
@@ -598,17 +598,17 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 16.
+            # Switch to Node 16.15.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16
-            nvm alias default 16
+            nvm install 16.15.0
+            nvm alias default 16.15.0
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
   backend lint:
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -639,11 +639,11 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 16.
+            # Switch to Node 16.15.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16
-            nvm alias default 16
+            nvm install 16.15.0
+            nvm alias default 16.15.0
             ./unit-test.sh
       - run:
           name: report coverage
@@ -662,7 +662,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -689,7 +689,7 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -705,7 +705,7 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -733,7 +733,7 @@ jobs:
         description: The path to test
         type: string
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -965,7 +965,7 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: cimg/node:16.13.2
+      - image: cimg/node:16.15.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
