@@ -11,7 +11,7 @@ import {
   setActivityFundingSource
 } from '../../../../../actions/editActivity';
 
-const schema = Joi.object({
+const nameFundingSourceSchema = Joi.object({
   name: Joi.string().required().messages({
     'string.base': 'Activity Name is required.',
     'string.empty': 'Activity Name is required.'
@@ -41,12 +41,11 @@ const NameAndFundingSourceForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(schema)
+      resolver: joiResolver(nameFundingSourceSchema)
     });
 
     try {
-      schema.validateAsync({fundingSource, name})
-      console.log({fundingSource, name});
+      nameFundingSourceSchema.validateAsync({fundingSource, name})
     } catch(err) {
       console.log(err);
     }
