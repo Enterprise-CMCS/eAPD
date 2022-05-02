@@ -1,107 +1,59 @@
 import { ChoiceList, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { forwardRef, Fragment, useCallback } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { joiResolver } from '@hookform/resolvers/joi';
+import React, { Fragment, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import nameSourceSchema from '../../../../../static/schemas/nameAndFundingSource';
 import {
   setActivityName,
   setActivityFundingSource
 } from '../../../../../actions/editActivity';
 
-const NameAndFundingSourceForm = forwardRef(
-  ({ 
-    index, 
-    item: { fundingSource, name }, 
-    setFundingSource,
-    setName 
-  }, ref) => {
-    NameAndFundingSourceForm.displayName = 'NameAndFundingSourceForm';
+const NameAndFundingSourceForm = ({
+  index,
+  item: { fundingSource, name },
+  setFundingSource,
+  setName
+}) => {
+  const changeName = useCallback(
+    ({ target: { value } }) => {
+      setName(index, value);
+    },
+    [index, setName]
+  );
 
-    const {
-      control,
-      formState: { errors }
-    } = useForm({
-      defaultValues: {
-        name: name,
-        fundingSource: fundingSource
-      },
-      mode: 'onBlur',
-      reValidateMode: 'onBlur',
-      resolver: joiResolver(nameSourceSchema)
-    });
+  const changeFundingSource = useCallback(
+    ({ target: { value } }) => {
+      setFundingSource(index, value);
+    },
+    [index, setFundingSource]
+  );
 
-    try {
-      nameSourceSchema.validateAsync({fundingSource, name});
-    } catch(err) {
-      console.log(err);
-    }
+  const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
+    checked: fundingSource === choice,
+    label: choice,
+    value: choice
+  }));
 
-    const changeName = useCallback(
-      ({ target: { value } }) => {
-        setName(index, value);
-      },
-      [index, setName]
-    );
-
-    const changeFundingSource = useCallback(
-      ({ target: { value } }) => {
-        setFundingSource(index, value);
-      },
-      [index, setFundingSource]
-    );
-
-    const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
-      checked: fundingSource === choice,
-      label: choice,
-      value: choice
-    }));
-
-    return (
-      <Fragment>
-        <Controller
-          name="name"
-          control={control}
-          render={({ field: {onChange, ...props} }) => (
-            <TextField
-              {...props}
-              label="Activity name"
-              value={name}
-              onChange={e => {
-                changeName(e);
-                onChange(e);
-              }}
-              className="remove-clearfix"
-              errorMessage={errors?.name?.message}
-              errorPlacement="bottom"
-            />
-          )}
-        />
-        <Controller
-          name="fundingSource"
-          control={control}
-          render={({ field: {onChange, ...props} }) => (
-            <ChoiceList
-              {...props}
-              choices={choices}
-              label="Program type"
-              labelClassName="ds-u-margin-bottom--1"
-              onChange={e => {
-                changeFundingSource(e);
-                onChange(e);
-              }}
-              type="radio"
-              errorMessage={errors?.fundingSource?.message}
-              errorPlacement="bottom"
-            />
-          )}
-        />
-      </Fragment>
-    );
-  }
-);
+  return (
+    <Fragment>
+      <TextField
+        label="Activity name"
+        name="activity-name"
+        value={name}
+        onChange={changeName}
+        className="remove-clearfix"
+      />
+      <ChoiceList
+        choices={choices}
+        label="Program type"
+        labelClassName="ds-u-margin-bottom--1"
+        name="program-type"
+        onChange={changeFundingSource}
+        type="radio"
+      />
+    </Fragment>
+  );
+};
 
 NameAndFundingSourceForm.propTypes = {
   index: PropTypes.number.isRequired,
