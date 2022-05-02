@@ -193,9 +193,11 @@ const ActivityOverview = forwardRef(({
         <Controller
           name="description"
           control={control}
-          render={({ field: { onChange, onBlur } }) => (
+          render={({ field: { onChange, onBlur, props } }) => (
             <RichText
+              {...props}
               id="activity-description-field"
+              data-cy="activity-description"
               content={description}
               onSync={html => {
                 syncDescription(html);

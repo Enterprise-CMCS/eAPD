@@ -443,6 +443,18 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('input[name="name"]').focus().blur();
       cy.contains('Activity Name is required.').should('exist');
 
+      cy.get('[class="ds-c-choice"]').eq(0).focus().blur();
+      cy.contains('Must select program type.').should('exist');
+
+      cy.get('input[name="name"]')
+        .focus()
+        .type('My Activity')
+        .blur();
+      cy.contains('Activity Name is required.').should('not.exist');
+
+      cy.get('input[type="radio"][value="HIE"]').check({ force: true }).blur()
+      cy.contains('Must select program type.').should('not.exist');
+
       // Testing Delete activity button
       cy.log('Activity Dashboard');
       cy.goToActivityDashboard();
