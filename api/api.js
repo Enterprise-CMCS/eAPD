@@ -15,7 +15,8 @@ const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
 
-const { setup: mongoSetup } = require('./db/mongodb');
+const { setup: mongoSetup, getConnectionStatus } = require('./db/mongodb');
+const knex = require('./db/knex');
 const me = require('./routes/me/index');
 
 try {
@@ -95,9 +96,29 @@ api.use(bodyParser.json({ limit: '5mb' }));
 // This endpoint doesn't do anything, but lets us verify that the api is
 // online without triggering any other processing - e.g., no authentication,
 // no cookie/token processing, etc.
-logger.debug('setting up heartbeat endpoint');
+logger.debug('setting up heartbeat endpoints');
 api.get('/heartbeat', (_, res) => {
   res.status(204).end();
+});
+
+api.get('/heartbeat-db', (_, res) => {
+  knex
+    .raw('SELECT 1')
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch(() => {
+      res.status(503).json({ status: 'disconnected' }).end();
+    });
+});
+
+api.get('/heartbeat-mongo', (_, res) => {
+  const status = getConnectionStatus();
+  if (status === 'connected') {
+    res.status(204).end();
+  } else {
+    res.status(503).json({ status }).end();
+  }
 });
 
 // Registers Passport, related handlers, and
