@@ -5,16 +5,23 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 
+import { toggleAdminCheck } from '../../../actions/app/apd';
+
 import { Section, Subsection } from '../../../components/Section';
 import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 import { selectApdYears } from '../../../reducers/apd.selectors';
 
-const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
+const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, useParams, years }) => {
   const paramApdId = useParams().apdId;
 
   if (!paramApdId) {
     return <Redirect to="/apd" />;
+  }
+  
+  const handleAdminCheck = () => {
+    console.log("admin check enabled");
+    toggleAdmin(true);
   }
 
   return (
@@ -22,6 +29,17 @@ const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
       <AlertMissingFFY />
       <Section resource="exportAndSubmit">
+        <Subsection resource="adminCheck">
+          <p>Choose Run Administrative Check to see a list of required fields which are missing content. Providing content will help ensure that your APD is administratively complete and ready for submission to CMS. Missing content from these sections could delay a decision by CMS and result in additional review cycles for this APD.</p>
+          <Button 
+            onClick={handleAdminCheck}
+            size="big"
+            variation="primary"
+            className="ds-u-margin-bottom--2"
+          >
+            Run Administrative Check
+          </Button>
+        </Subsection>
         <Subsection resource="reviewAndDownload">
           <p>
             On the next page, you will be able to review and download a copy of
@@ -47,7 +65,8 @@ const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
 ExportAndSubmit.propTypes = {
   push: PropTypes.func.isRequired,
   useParams: PropTypes.func,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  toggleAdminCheck: PropTypes.func.isRequired
 };
 
 ExportAndSubmit.defaultProps = {
@@ -58,7 +77,10 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
-const mapDispatchToProps = { push };
+const mapDispatchToProps = { 
+  push,
+  toggleAdminCheck
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExportAndSubmit);
 

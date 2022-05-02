@@ -15,6 +15,7 @@ import { setApdToSelectOnLoad, selectApd } from '../actions/app';
 
 import ApdPageRoutes from '../pages/apd/ApdPageRoutes';
 import Loading from '../components/Loading';
+import AdminCheckPanel from '../components/AdminCheckPanel';
 
 import { getAPDId } from '../reducers/apd';
 
@@ -97,6 +98,7 @@ const ApdApplication = ({
             <ApdPageRoutes apdId={paramApdId} />
           </div>
         </main>
+        <AdminCheckPanel />
       </div>
     </div>
   );
