@@ -76,14 +76,15 @@ export DATABASE_URL="__DATABASE_URL__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 
 # Create app logs and directories
-mkdir -p /app/api/logs
-touch /app/api/logs/eAPD-API-error-0.log
-touch /app/api/logs/eAPD-API-out-0.log
-touch /app/api/logs/Database-migration-error.log
-touch /app/api/logs/Database-migration-out.log
-touch /app/api/logs/Database-seeding-error.log
-touch /app/api/logs/Database-seeding-out.log
-touch /app/api/logs/cms-hitech-apd-api.logs
+# These have been moved to bootstrap script
+#mkdir -p /app/api/logs
+#touch /app/api/logs/eAPD-API-error-0.log
+#touch /app/api/logs/eAPD-API-out-0.log
+#touch /app/api/logs/Database-migration-error.log
+#touch /app/api/logs/Database-migration-out.log
+#touch /app/api/logs/Database-seeding-error.log
+#touch /app/api/logs/Database-seeding-out.log
+#touch /app/api/logs/cms-hitech-apd-api.logs
 
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and

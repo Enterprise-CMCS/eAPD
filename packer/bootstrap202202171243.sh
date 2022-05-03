@@ -17,6 +17,16 @@ mkdir /app
 mkdir /app/api
 mkdir /app/web
 
+# Create app logs and directories
+mkdir -p /app/api/logs
+touch /app/api/logs/eAPD-API-error-0.log
+touch /app/api/logs/eAPD-API-out-0.log
+touch /app/api/logs/Database-migration-error.log
+touch /app/api/logs/Database-migration-out.log
+touch /app/api/logs/Database-seeding-error.log
+touch /app/api/logs/Database-seeding-out.log
+touch /app/api/logs/cms-hitech-apd-api.logs
+
 chown -R :eapd /app
 chmod -R g+w /app
 
