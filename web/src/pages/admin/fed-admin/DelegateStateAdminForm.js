@@ -8,6 +8,8 @@ import { twoYears } from '../../../util';
 import { STATES } from '../../../util/states';
 import NumberField from '../../../components/NumberField';
 import DocumentUpload from '../../../components/DocumentUpload';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const dropdownOptions = STATES.map(item => {
   return {
@@ -22,17 +24,17 @@ const yearChoices = twoYears.map(year => ({
   value: year
 }));
 
-const DelegateStateAdminForm = () => {
+const DelegateStateAdminForm = populatedState => {
   const history = useHistory();
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   const initialState = {
-    ffy: '',
-    name: '',
-    email: '',
-    phone: '',
-    state: '',
-    fileUrl: ''
+    ffy: '' || populatedState.ffy,
+    name: '' || populatedState.name,
+    email: '' || populatedState.email,
+    phone: '' || populatedState.phone,
+    state: '' || populatedState.state,
+    fileUrl: '' || populatedState.fileUrl
   };
 
   function reducer(state, action) {
@@ -117,6 +119,7 @@ const DelegateStateAdminForm = () => {
               payload: e.target.value
             })
           }
+          value={state.state}
         />
         <TextField
           label="State employee email address"
@@ -175,4 +178,14 @@ const DelegateStateAdminForm = () => {
   );
 };
 
-export default DelegateStateAdminForm;
+DelegateStateAdminForm.PropTypes = {
+  populatedState: PropTypes.object
+};
+
+const mapStateToProps = state => ({
+  populatedState: state
+});
+
+export default connect(mapStateToProps)(DelegateStateAdminForm);
+
+export { DelegateStateAdminForm as plain, mapStateToProps };

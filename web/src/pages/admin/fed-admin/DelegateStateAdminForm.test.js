@@ -4,21 +4,28 @@ import userEvent from '@testing-library/user-event';
 import { render, fireEvent } from '@testing-library/react';
 import { setCookie } from '../../../util/auth';
 import * as mockAuth from '../../../util/auth';
+import axios from '../../../util/api';
+import MockAdapter from 'axios-mock-adapter';
 
-import DelegateStateAdminForm from './DelegateStateAdminForm';
+import { plain as DelegateStateAdminForm } from './DelegateStateAdminForm';
 
 const defaultProps = {
-  ffy: 2022,
+  ffy: '2022',
   name: 'Walter White',
   email: 'walter@white.com',
-  phone: '9876543210',
+  phone: '987-654-3210',
   state: 'nm',
   fileUrl: ''
 };
 
-const setup = (props = {}) => {
-  render(<DelegateStateAdminForm {...defaultProps} {...props} />);
+const setup = (props = {}, options = {}) => {
+  return render(
+    <DelegateStateAdminForm {...defaultProps} {...props} />,
+    options
+  );
 };
+
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 describe('the DelegateStateAdminForm component', () => {
   beforeEach(() => {
@@ -27,26 +34,9 @@ describe('the DelegateStateAdminForm component', () => {
 
   test('handles entering data', async () => {
     setup();
+    fetchMock.onPost('/auth/certifications').reply(200);
+
     userEvent.click(screen.getByRole('radio', { name: 'FFY 2022' }));
-
-    userEvent.type(
-      screen.getByRole('textbox', {
-        name: 'Name of State employee to be delegated as eAPD State Adminstrator Cannot be a contractor'
-      }),
-      defaultProps.name
-    );
-
-    userEvent.selectOptions(screen.getByLabelText('State'), 'New Mexico');
-
-    userEvent.type(
-      screen.getByLabelText('State employee email address'),
-      defaultProps.email
-    );
-
-    userEvent.type(
-      screen.getByLabelText('State employee phone number'),
-      defaultProps.phone
-    );
 
     expect(screen.getByRole('radio', { name: 'FFY 2022' })).toBeChecked();
 
