@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import {
   setActivityStandardAndConditionDoesNotSupportExplanation,
   setActivityStandardAndConditionSupportExplanation
-} from '../../../../actions/editActivity';
+} from '../../../../redux/actions/editActivity';
 
 import RichText from '../../../../components/RichText';
 import TextArea from '../../../../components/TextArea';
-import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
+import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 
 const StandardsAndConditions = ({
   activity,

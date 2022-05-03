@@ -36,8 +36,8 @@ import {
   SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD
 } from '../actions/app';
-import { defaultAPDYearOptions, generateKey } from '../util';
-import initialAssurances from '../util/regulations';
+import { defaultAPDYearOptions, generateKey } from '../../util';
+import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
@@ -280,7 +280,8 @@ export const getPatchesForAddingItem = (state, path) => {
           path,
           value: getKeyPersonnel(
             state.data.years,
-            !state.data.keyStatePersonnel?.keyPersonnel || state.data.keyStatePersonnel.keyPersonnel.length === 0
+            !state.data.keyStatePersonnel?.keyPersonnel ||
+              state.data.keyStatePersonnel.keyPersonnel.length === 0
           )
         }
       ];
@@ -353,20 +354,20 @@ const reducer = (state = initialState, action) => {
         ])
       };
     }
-    
+
     case EDIT_APD_NAME: {
       return {
-       ...state,
-       byId: {
-         ...state.byId,
-         [action.id]: {
-           ...state.byId[action.id],
-           name: action.name
-         }
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.id]: {
+            ...state.byId[action.id],
+            name: action.name
+          }
         }
       };
     }
-    
+
     case REMOVE_APD_ITEM: {
       return {
         ...state,
@@ -480,12 +481,14 @@ const reducer = (state = initialState, action) => {
               key: generateKey()
             })
           ),
-          assurancesAndCompliances: getAssurancesAndCompliances(action.apd.assurancesAndCompliances),
+          assurancesAndCompliances: getAssurancesAndCompliances(
+            action.apd.assurancesAndCompliances
+          ),
           keyStatePersonnel: {
             ...action.apd.keyStatePersonnel,
             keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
-            ...kp,
-            key: generateKey()
+              ...kp,
+              key: generateKey()
             }))
           },
           created: getHumanDatestamp(action.apd.created),

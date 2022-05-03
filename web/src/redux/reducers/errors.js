@@ -10,7 +10,7 @@ import {
   ADMIN_EDIT_ME_REQUEST
 } from '../actions/admin';
 
-import { t } from '../i18n';
+import { t } from '../../i18n';
 
 /**
  * Gets an error message from resource files, based on raw API message

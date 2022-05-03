@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { selectAllActivities } from './activities.selectors';
-import { ACTIVITY_FUNDING_SOURCES, stateDateRangeToDisplay } from '../util';
+import { ACTIVITY_FUNDING_SOURCES, stateDateRangeToDisplay } from '../../util';
 
 export const selectBudget = ({ budget }) => budget;
 

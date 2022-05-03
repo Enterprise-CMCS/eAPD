@@ -6,7 +6,7 @@ import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
 import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
 import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
 
-import { selectPreviousActivitySummary } from '../../../reducers/apd.selectors';
+import { selectPreviousActivitySummary } from '../../../redux/selectors/apd.selectors';
 
 const PreviousActivities = ({ previousActivitySummary }) => {
   /* eslint-disable react/no-danger */
