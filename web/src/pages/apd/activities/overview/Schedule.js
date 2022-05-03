@@ -16,31 +16,29 @@ import { stateDateToDisplay } from '../../../../util';
 const Joi = require('joi').extend(require('@joi/date'));
 
 const scheduleSchema = Joi.object({
-  start: Joi.date()
-            .format('YYYY-MM-DD')
-            .iso()
-            .required()
-            .messages({
-              'date.base': 'Provide a start date.',
-              'date.empty': 'Provide a start date.',
-              'date.format': 'Provide a start date.'
-            }),
+  start: Joi.date().format('YYYY-MM-DD').iso().required().messages({
+      'date.required': 'Provide a start date.',
+      'date.base': 'Provide a start date.',
+      'date.empty': 'Provide a start date.',
+      'date.format': 'Provide a start date.'
+    }),
   end: Joi.date()
-          .format('YYYY-MM-DD')
-          .iso()
-          .min(Joi.ref('start'))
-          .required()
-          .messages({
-            'date.base': 'Provide an end date.',
-            'date.empty': 'Provide an end date.',
-            'date.format': 'Provide an end date.',
-            'date.min': 'Provide an end date that is after the start date.',
-            'any.ref': 'Provide an end date that is after the start date.'
-          })
+    .format('YYYY-MM-DD')
+    .iso()
+    .min(Joi.ref('start'))
+    .required()
+    .messages({
+      'date.required': 'Provide an end date.',
+      'date.base': 'Provide an end date.',
+      'date.empty': 'Provide an end date.',
+      'date.format': 'Provide an end date.',
+      'date.min': 'Provide an end date that is after the start date.',
+      'any.ref': 'Provide an end date that is after the start date.'
+    })
 });
 
 const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate }, ref) => {
-  const { start, end } = activity;
+  const { plannedStartDate, plannedEndDate } = activity;
 
   const {
     control,
@@ -51,8 +49,8 @@ const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate
     getValues
   } = useForm({
     defaultValues: {
-      start: start,
-      end: end
+      start: plannedStartDate || "",
+      end: plannedEndDate || ""
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -73,6 +71,8 @@ const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate
     [activityIndex, setEndDate]
   );
 
+  console.log({plannedStartDate});
+
   return (
     <Subsection resource="activities.schedule">
       <Fragment>
@@ -81,12 +81,13 @@ const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate
             name="start"
             control={control}
             render={({ 
-              field: { onChange, onBlur, ...props },
-              formState: { isTouched } }) => (
+              field: { onChange, onBlur, ...props } ,
+              formState: { isTouched }
+            }) => (
               <DateField
                 {...props}
+                isTouched={isTouched}
                 label="Start date"
-                value={activity.plannedStartDate}
                 onChange={(e, dateStr) => {
                   handleActivityStartChange(e, dateStr);
                   onChange(dateStr);
@@ -104,23 +105,25 @@ const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate
           <Controller
             name="end"
             control={control}
-            render={({ field: { onChange, onBlur, ...props } }) => (
-              <DateField
-                {...props}
-                label="End date"
-                onChange={(e, dateStr) => {
-                  handleActivityEndChange(e, dateStr);
-                  onChange(e);
-                }}
-                onComponentBlur={() => {
-                  onBlur();
-                  if (getFieldState('start').isTouched) {
-                    trigger('start');
-                  }
-                }}
-                errorMessage={errors?.end?.message}
-              />
-            )}
+            render={({ field: { onChange, onBlur, ...props } }) => {
+              return (
+                <DateField
+                  {...props}
+                  label="End date"
+                  onChange={(e, dateStr) => {
+                    handleActivityEndChange(e, dateStr);
+                    onChange(e);
+                  }}
+                  onComponentBlur={() => {
+                    onBlur();
+                    if (getFieldState('start').isTouched) {
+                      trigger('start');
+                    }
+                  }}
+                  errorMessage={errors?.end?.message}
+                />
+              );
+            }}
           />
         </div>
         <div className="visibility--print">
