@@ -21,7 +21,7 @@ const {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } = require('../actions/editApd');
-const regulations = require('../util/regulations').default;
+const regulations = require('../../util/regulations').default;
 
 describe('APD reducer', () => {
   afterAll(() => {

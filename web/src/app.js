@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 
 import saveMiddleware from './saveMiddleware';
 import { initI18n } from './i18n';
-import reducer from './reducers';
+import reducer from './redux/reducers';
 import Root from './containers/Root';
 import { browserIsRed } from './util/browser';
 import { html as browserHtml } from './components/UpgradeBrowser';

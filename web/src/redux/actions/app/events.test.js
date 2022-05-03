@@ -1,8 +1,8 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { APD_EVENTS } from '../../constants';
-import axios from '../../util/api';
+import { APD_EVENTS } from '../../../constants';
+import axios from '../../../util/api';
 
 import { saveApdEvent } from './events';
 

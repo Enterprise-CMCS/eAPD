@@ -17,7 +17,7 @@ import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
 import 'tinymce/plugins/link';
 
-import { uploadFile } from '../actions/editApd';
+import { uploadFile } from '../redux/actions/editApd';
 import { generateKey } from '../util';
 import '../file-loader';
 

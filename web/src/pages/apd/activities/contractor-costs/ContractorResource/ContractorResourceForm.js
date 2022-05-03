@@ -12,7 +12,7 @@ import NumberField from '../../../../../components/NumberField';
 import RichText from '../../../../../components/RichText';
 
 import validationSchema from '../../../../../static/schemas/privateContractor';
-import { saveContractor as actualSaveContractor } from '../../../../../actions/editActivity';
+import { saveContractor as actualSaveContractor } from '../../../../../redux/actions/editActivity';
 
 const getCheckedValue = value => {
   if (value !== null) {

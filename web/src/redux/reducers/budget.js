@@ -1,7 +1,7 @@
 import { RESET } from '../actions/app';
 import { UPDATE_BUDGET } from '../actions/budget';
-import { arrToObj } from '../util';
-import roundedPercents from '../util/roundedPercents';
+import { arrToObj } from '../../util';
+import roundedPercents from '../../util/roundedPercents';
 
 const fixNum = (value, digits = 2) => {
   const mult = 10 ** digits;

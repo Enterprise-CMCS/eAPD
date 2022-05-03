@@ -7,12 +7,12 @@ import {
   OutcomeAndMetricReview
 } from './OutcomesAndMetrics';
 import FormAndReviewList from '../../../../components/FormAndReviewList';
-import { removeOutcome } from '../../../../actions/editActivity';
+import { removeOutcome } from '../../../../redux/actions/editActivity';
 import { Subsection } from '../../../../components/Section';
 import { t } from '../../../../i18n';
-import { selectOMsByActivityIndex } from '../../../../reducers/activities.selectors';
+import { selectOMsByActivityIndex } from '../../../../redux/selectors/activities.selectors';
 
-import { newOutcome } from '../../../../reducers/activities';
+import { newOutcome } from '../../../../redux/reducers/activities';
 
 const Outcomes = ({ activityIndex, outcomes, remove }) => {
   const [localList, setLocalList] = useState(outcomes);

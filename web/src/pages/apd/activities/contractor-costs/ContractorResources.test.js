@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ContractorResources';
-import { removeContractor } from '../../../../actions/editActivity';
+import { removeContractor } from '../../../../redux/actions/editActivity';
 
 describe('the ContractorResources component', () => {
   const activityIndex = 0;

@@ -10,9 +10,9 @@ import Icon, { faPlusCircle } from '../../../../../components/Icons';
 import Review from '../../../../../components/Review';
 
 import validationSchema from '../../../../../static/schemas/outcomeMetric';
-import { saveOutcome as actualSaveOutcome } from '../../../../../actions/editActivity';
+import { saveOutcome as actualSaveOutcome } from '../../../../../redux/actions/editActivity';
 
-import { newOutcomeMetric } from '../../../../../reducers/activities';
+import { newOutcomeMetric } from '../../../../../redux/reducers/activities';
 
 const OutcomeAndMetricForm = forwardRef(
   ({ activityIndex, item, index, saveOutcome, setFormValid }, ref) => {
