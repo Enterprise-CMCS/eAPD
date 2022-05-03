@@ -17,6 +17,7 @@ exports[`FormAndReviewList component add button calls add event 1`] = `
     key="item 1"
     onCancelClick={null}
     onDeleteClick={[Function]}
+    setShowAddButton={[Function]}
   />
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
@@ -31,15 +32,8 @@ exports[`FormAndReviewList component add button calls add event 1`] = `
     key="item2"
     onCancelClick={null}
     onDeleteClick={[Function]}
+    setShowAddButton={[Function]}
   />
-  <Button
-    className="visibility--screen"
-    component="button"
-    onClick={[Function]}
-    type="button"
-  >
-    text for adding a new button
-  </Button>
 </div>
 `;
 
@@ -172,6 +166,7 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
     key="one"
     onCancelClick={null}
     onDeleteClick={[Function]}
+    setShowAddButton={[Function]}
   />
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
@@ -187,6 +182,7 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
     key="two"
     onCancelClick={null}
     onDeleteClick={[Function]}
+    setShowAddButton={[Function]}
   />
   <Button
     className="visibility--screen"
@@ -216,6 +212,7 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
     key="one"
     onCancelClick={null}
     onDeleteClick={null}
+    setShowAddButton={[Function]}
   />
   <Button
     className="visibility--screen"
@@ -245,6 +242,7 @@ exports[`FormAndReviewList component renders properly with just one item and all
     key="one"
     onCancelClick={null}
     onDeleteClick={[Function]}
+    setShowAddButton={[Function]}
   />
   <Button
     className="visibility--screen"
@@ -275,6 +273,7 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
     key="one"
     onCancelClick={null}
     onDeleteClick={[Function]}
+    setShowAddButton={[Function]}
   />
   <FormAndReviewItem
     collapsedComponent={[MockFunction]}
@@ -290,6 +289,7 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
     key="two"
     onCancelClick={null}
     onDeleteClick={[Function]}
+    setShowAddButton={[Function]}
   />
   <Button
     className="visibility--screen"
