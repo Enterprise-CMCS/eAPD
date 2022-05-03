@@ -16,14 +16,11 @@ const schemas = Joi.object({
     'string.min':
       'Provide a procurement methodology and description of services.'
   }),
-  start: Joi.date()
-    .format('YYYY-MM-DD')
-    .iso()
-    .required()
-    .messages({
-      'date.base': 'Provide a start date.',
-      'date.empty': 'Provide a start date.',
-      'date.format': 'Provide a start date.'
+  start: Joi.date().format('YYYY-MM-DD').iso().required().messages({
+    'date.required': 'Provide a start date.',
+    'date.base': 'Provide a start date.',
+    'date.empty': 'Provide a start date.',
+    'date.format': 'Provide a start date.'
   }),
   end: Joi.date()
     .format('YYYY-MM-DD')
@@ -31,6 +28,7 @@ const schemas = Joi.object({
     .min(Joi.ref('start'))
     .required()
     .messages({
+      'date.required': 'Provide an end date.',
       'date.base': 'Provide an end date.',
       'date.empty': 'Provide an end date.',
       'date.format': 'Provide an end date.',
