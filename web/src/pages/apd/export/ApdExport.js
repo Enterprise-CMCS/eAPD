@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 
-import { toggleAdminCheck } from '../../../actions/app/apd';
+import { toggleAdminCheck } from '../../../redux/actions/app/apd';
 
 import { Section, Subsection } from '../../../components/Section';
 import Waypoint from '../../../components/ConnectedWaypoint';
