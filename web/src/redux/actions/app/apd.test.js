@@ -29,10 +29,10 @@ import {
 } from './symbols';
 import { ARIA_ANNOUNCE_CHANGE } from '../aria';
 import { UPDATE_BUDGET } from '../budget';
-import axios from '../../util/api';
-import regulations from '../../util/regulations';
+import axios from '../../../util/api';
+import regulations from '../../../util/regulations';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
-import { t } from '../../i18n';
+import { t } from '../../../i18n';
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
@@ -389,7 +389,11 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
-        { type: EDIT_APD, path: '/assurancesAndCompliances', value: regulations },
+        {
+          type: EDIT_APD,
+          path: '/assurancesAndCompliances',
+          value: regulations
+        },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {

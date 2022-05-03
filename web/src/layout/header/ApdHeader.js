@@ -7,8 +7,8 @@ import {
   getAPDCreation,
   getAPDName,
   getAPDYearRange
-} from '../../reducers/apd';
-import { setApdName } from '../../actions/editApd';
+} from '../../redux/reducers/apd';
+import { setApdName } from '../../redux/actions/editApd';
 
 import Icon, { faEdit } from '../../components/Icons';
 

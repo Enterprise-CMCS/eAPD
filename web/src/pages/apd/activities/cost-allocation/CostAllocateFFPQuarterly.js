@@ -6,12 +6,12 @@ import { titleCase } from 'title-case';
 import {
   setFFPForContractorCostsForFiscalQuarter,
   setFFPForInHouseCostsForFiscalQuarter
-} from '../../../../actions/editActivity';
-import { ariaAnnounceFFPQuarterly } from '../../../../actions/aria';
+} from '../../../../redux/actions/editActivity';
+import { ariaAnnounceFFPQuarterly } from '../../../../redux/actions/aria';
 import Dollars from '../../../../components/Dollars';
 import PercentField from '../../../../components/PercentField';
 import { t } from '../../../../i18n';
-import { makeSelectCostAllocateFFPBudget } from '../../../../reducers/activities.selectors';
+import { makeSelectCostAllocateFFPBudget } from '../../../../redux/selectors/activities.selectors';
 import { formatPerc } from '../../../../util/formats';
 
 const QUARTERS = [1, 2, 3, 4];

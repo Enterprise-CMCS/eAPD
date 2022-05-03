@@ -20,7 +20,7 @@ import {
   login,
   loginOtp,
   logout
-} from '../actions/auth';
+} from '../redux/actions/auth';
 
 const LoginApplication = ({
   authenticated,

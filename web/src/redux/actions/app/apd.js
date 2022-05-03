@@ -25,17 +25,20 @@ import {
   ariaAnnounceApdLoading,
   ariaAnnounceApdLoadingFailure
 } from '../aria';
-import { t } from '../../i18n';
+import { t } from '../../../i18n';
 
-import { selectApdData } from '../../reducers/apd.selectors';
+import { selectApdData } from '../../selectors/apd.selectors';
 import {
   selectHasChanges,
   selectPatches
-} from '../../reducers/patch.selectors';
-import { getIsFedAdmin, getCanUserEditAPD } from '../../reducers/user.selector';
+} from '../../selectors/patch.selectors';
+import {
+  getIsFedAdmin,
+  getCanUserEditAPD
+} from '../../selectors/user.selector';
 
-import axios from '../../util/api';
-import initialAssurances from '../../util/regulations';
+import axios from '../../../util/api';
+import initialAssurances from '../../../util/regulations';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 

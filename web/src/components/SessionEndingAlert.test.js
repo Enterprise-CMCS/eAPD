@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './SessionEndingAlert';
-import { extendSession, logout } from '../actions/auth';
+import { extendSession, logout } from '../redux/actions/auth';
 
 const mockPush = jest.fn();
 
