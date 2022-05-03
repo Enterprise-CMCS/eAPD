@@ -7,7 +7,7 @@ import {
   mapDispatchToProps
 } from './StatePersonnel';
 
-import { removePersonnel } from '../../../../actions/editActivity';
+import { removePersonnel } from '../../../../redux/actions/editActivity';
 
 describe('activity state personnel costs subsection', () => {
   const props = {

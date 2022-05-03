@@ -7,7 +7,7 @@ import {
   mapDispatchToProps
 } from './NonPersonnelCosts';
 
-import { removeNonPersonnelCost } from '../../../../actions/editActivity';
+import { removeNonPersonnelCost } from '../../../../redux/actions/editActivity';
 
 describe('activity non-personnel costs subsection', () => {
   const props = {

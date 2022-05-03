@@ -3,7 +3,7 @@ import React from 'react';
 
 import { plain as MilestoneForm, mapDispatchToProps } from './MilestoneForm';
 
-import { saveMilestone as actualSaveMilestone } from '../../../../../actions/editActivity';
+import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actions/editActivity';
 
 describe('the MilestoneForm component', () => {
   const saveMilestone = jest.fn();

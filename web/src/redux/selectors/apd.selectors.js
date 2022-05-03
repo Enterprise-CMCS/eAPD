@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { INCENTIVE_ENTRIES } from '../util';
+import { INCENTIVE_ENTRIES } from '../../util';
 
 export const selectApds = ({ apd }) => apd;
 
@@ -18,7 +18,7 @@ export const selectSummary = ({
       years,
       yearOptions,
       apdOverview: {
-        programOverview,        
+        programOverview,
         narrativeHIE,
         narrativeHIT,
         narrativeMMIS
@@ -35,8 +35,10 @@ export const selectSummary = ({
   yearOptions
 });
 
-export const selectKeyPersonnel = state => state.apd.data.keyStatePersonnel.keyPersonnel;
-export const selectKeyStatePersonnel = state => state.apd.data.keyStatePersonnel;
+export const selectKeyPersonnel = state =>
+  state.apd.data.keyStatePersonnel.keyPersonnel;
+export const selectKeyStatePersonnel = state =>
+  state.apd.data.keyStatePersonnel;
 
 export const selectPreviousActivitySummary = state =>
   state.apd.data.previousActivities.previousActivitySummary;
@@ -94,16 +96,15 @@ export const selectPreviousActivityExpensesTotals = createSelector(
     )
 );
 
-export const selectFederalCitations = state => state.apd.data.assurancesAndCompliances;
+export const selectFederalCitations = state =>
+  state.apd.data.assurancesAndCompliances;
 
 const addObjVals = obj => Object.values(obj).reduce((a, b) => +a + +b, 0);
 
 export const selectIncentivePayments = ({
   apd: {
-    data: { 
-      proposedBudget: {
-        incentivePayments
-      }  
+    data: {
+      proposedBudget: { incentivePayments }
     }
   }
 }) => incentivePayments;
@@ -136,5 +137,3 @@ export const selectApdDashboard = createSelector([selectApds], ({ byId }) =>
 );
 
 export const selectLastSavedTimestamp = state => state.apd.data.updated;
-
-

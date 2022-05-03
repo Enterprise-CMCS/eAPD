@@ -12,12 +12,12 @@ import {
   setNarrativeForHIT,
   setNarrativeForMMIS,
   setProgramOverview
-} from '../../../actions/editApd';
+} from '../../../redux/actions/editApd';
 import RichText from '../../../components/RichText';
 import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
-import { selectSummary } from '../../../reducers/apd.selectors';
+import { selectSummary } from '../../../redux/selectors/apd.selectors';
 
 const ApdOverview = ({
   addApdYear,

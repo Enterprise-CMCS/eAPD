@@ -7,15 +7,15 @@ import { titleCase } from 'title-case';
 import Instruction from '../../../../components/Instruction';
 import CostAllocateFFPQuarterly from '../cost-allocation/CostAllocateFFPQuarterly';
 
-import { setCostAllocationFFPFundingSplit } from '../../../../actions/editActivity';
+import { setCostAllocationFFPFundingSplit } from '../../../../redux/actions/editActivity';
 import Dollars from '../../../../components/Dollars';
 import {
   selectCostAllocationForActivityByIndex,
   selectActivityCostSummary,
   selectActivityByIndex,
   selectActivityTotalForBudgetByActivityIndex
-} from '../../../../reducers/activities.selectors';
-import { getUserStateOrTerritory } from '../../../../reducers/user.selector';
+} from '../../../../redux/selectors/activities.selectors';
+import { getUserStateOrTerritory } from '../../../../redux/selectors/user.selector';
 import CostAllocationRows, {
   CostSummaryRows
 } from '../cost-allocation/CostAllocationRows';

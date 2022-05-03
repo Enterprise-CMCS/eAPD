@@ -10,7 +10,7 @@ import Dollars from '../../../../../components/Dollars';
 import NumberField from '../../../../../components/NumberField';
 import RichText from '../../../../../components/RichText';
 
-import { saveContractor as actualSaveContractor } from '../../../../../actions/editActivity';
+import { saveContractor as actualSaveContractor } from '../../../../../redux/actions/editActivity';
 
 const ContractorResourceForm = forwardRef(
   ({ activityIndex, index, item, saveContractor }, ref) => {

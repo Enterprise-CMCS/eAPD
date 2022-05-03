@@ -3,9 +3,9 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import * as actions from './auth';
-import axios from '../util/api';
-import * as mockAuth from '../util/auth';
-import { MFA_FACTOR_TYPES } from '../constants';
+import axios from '../../util/api';
+import * as mockAuth from '../../util/auth';
+import { MFA_FACTOR_TYPES } from '../../constants';
 
 jest.mock('./app', () => {
   return {
@@ -948,7 +948,7 @@ describe('auth actions', () => {
 
       const expectedActions = [
         {
-          type: actions.LATEST_ACTIVITY,
+          type: actions.LATEST_ACTIVITY
         },
         {
           type: actions.UPDATE_USER_INFO,

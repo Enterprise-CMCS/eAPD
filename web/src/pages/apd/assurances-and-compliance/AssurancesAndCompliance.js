@@ -12,13 +12,13 @@ import {
   setJustificationForRecordsAccess,
   setJustificationForSecurity,
   setJustificationForSoftwareRights
-} from '../../../actions/editApd';
+} from '../../../redux/actions/editApd';
 import { ChoiceList } from '@cmsgov/design-system';
 import { Section, Subsection } from '../../../components/Section';
 import TextArea from '../../../components/TextArea';
 import regLinks from '../../../data/assurancesAndCompliance.yaml';
 import { t } from '../../../i18n';
-import { selectFederalCitations } from '../../../reducers/apd.selectors';
+import { selectFederalCitations } from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const namify = (name, title) =>

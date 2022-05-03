@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { removeActivity } from '../../../../actions/editActivity';
+import { removeActivity } from '../../../../redux/actions/editActivity';
 
 import {
   plain as EntryDetails,

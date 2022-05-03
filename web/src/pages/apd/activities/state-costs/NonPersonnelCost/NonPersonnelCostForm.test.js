@@ -6,7 +6,7 @@ import {
   mapDispatchToProps
 } from './NonPersonnelCostForm';
 
-import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../actions/editActivity';
+import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../redux/actions/editActivity';
 
 describe('the NonPersonnelCostForm component', () => {
   const saveNonPersonnelCost = jest.fn();

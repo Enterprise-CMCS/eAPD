@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getAriaAnnouncement } from '../reducers/aria';
+import { getAriaAnnouncement } from '../redux/reducers/aria';
 
 const AriaAnnounce = props => {
   const { ariaMessage } = props;

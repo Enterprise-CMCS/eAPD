@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { selectApdData, selectApdYears } from './apd.selectors';
-import { stateDateRangeToDisplay, stateDateToDisplay } from '../util';
+import { stateDateRangeToDisplay, stateDateToDisplay } from '../../util';
 
 export const selectActivityCount = state => state.apd.data.activities.length;
 
@@ -58,7 +58,7 @@ export const selectActivityCostSummary = createSelector(
     // Program Administration. For other activities, just returns empty arrays.
     {
       apd: {
-        data: { 
+        data: {
           keyStatePersonnel: { keyPersonnel },
           years
         }
@@ -101,9 +101,7 @@ export const selectActivityCostSummary = createSelector(
               c.name || 'Private Contractor or Vendor Name not specified',
             totalCost: c.years[year],
             unitCost: c.useHourly ? c.hourly[year].rate : null,
-            units: c.useHourly
-              ? `${c.hourly[year].hours} hours`
-              : null
+            units: c.useHourly ? `${c.hourly[year].hours} hours` : null
           })),
           contractorResourcesTotal: activity.contractorResources.reduce(
             (sum, contractor) => sum + contractor.years[year],
