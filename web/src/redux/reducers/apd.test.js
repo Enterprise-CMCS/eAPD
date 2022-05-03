@@ -21,7 +21,7 @@ const {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } = require('../actions/editApd');
-const regulations = require('../util/regulations').default;
+const regulations = require('../../util/regulations').default;
 
 describe('APD reducer', () => {
   afterAll(() => {
@@ -235,7 +235,7 @@ describe('APD reducer', () => {
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 name: 'key person 1'
               }
-            ]            
+            ]
           },
           value: `hurr hurr i'm a burr`,
           updated: 'May 23, 1618, 10:30 AM GMT',
@@ -246,7 +246,7 @@ describe('APD reducer', () => {
 
     it('sets keys and preserves the federal citations if they are defined', () => {
       action.apd.assurancesAndCompliances = { key: 'value' };
-      
+
       expect(apd(initialState, action)).toEqual({
         ...initialState,
         data: {
@@ -294,7 +294,7 @@ describe('APD reducer', () => {
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
                 name: 'key person 1'
               }
-            ]            
+            ]
           },
           value: `hurr hurr i'm a burr`,
           updated: 'May 23, 1618, 10:30 AM GMT',
@@ -379,7 +379,7 @@ describe('APD reducer', () => {
               1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
               1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
             }
-          }          
+          }
         },
         keyStatePersonnel: {
           keyPersonnel: [
@@ -393,7 +393,7 @@ describe('APD reducer', () => {
                 1243: 2
               }
             }
-          ]          
+          ]
         },
         years: ['1742', '1743']
       }
@@ -497,7 +497,7 @@ describe('APD reducer', () => {
               1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
               1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
             }
-          }          
+          }
         },
         keyStatePersonnel: {
           keyPersonnel: [
@@ -513,7 +513,7 @@ describe('APD reducer', () => {
                 1243: 2
               }
             }
-          ]          
+          ]
         },
         years: ['1741', '1742', '1743']
       }
@@ -619,7 +619,7 @@ describe('APD reducer', () => {
               1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
               1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
             }
-          }          
+          }
         },
         keyStatePersonnel: {
           keyPersonnel: [
@@ -635,7 +635,7 @@ describe('APD reducer', () => {
                 1243: 2
               }
             }
-          ]          
+          ]
         },
         years: ['1741', '1742', '1743']
       }
@@ -707,7 +707,7 @@ describe('APD reducer', () => {
               1742: { 1: 7, 2: 7, 3: 7, 4: 7 },
               1743: { 1: 8, 2: 8, 3: 8, 4: 8 }
             }
-          }          
+          }
         },
         keyStatePersonnel: {
           keyPersonnel: [
@@ -721,7 +721,7 @@ describe('APD reducer', () => {
                 1243: 2
               }
             }
-          ]          
+          ]
         },
         years: ['1742', '1743']
       }
@@ -748,7 +748,10 @@ describe('APD reducer', () => {
         }
       };
       expect(
-        apd(state, { type: ADD_APD_ITEM, path: '/keyStatePersonnel/keyPersonnel/-' })
+        apd(state, {
+          type: ADD_APD_ITEM,
+          path: '/keyStatePersonnel/keyPersonnel/-'
+        })
       ).toEqual({
         data: {
           keyStatePersonnel: {
@@ -764,7 +767,7 @@ describe('APD reducer', () => {
                 position: '',
                 key: expect.stringMatching(/^[a-f0-9]{8}$/)
               }
-            ]            
+            ]
           },
           years: ['1', '2']
         }
@@ -787,13 +790,16 @@ describe('APD reducer', () => {
                 position: '',
                 key: 'primary'
               }
-            ]            
+            ]
           },
           years: ['1', '2']
         }
       };
       expect(
-        apd(state, { type: ADD_APD_ITEM, path: '/keyStatePersonnel/keyPersonnel/-' })
+        apd(state, {
+          type: ADD_APD_ITEM,
+          path: '/keyStatePersonnel/keyPersonnel/-'
+        })
       ).toEqual({
         data: {
           keyStatePersonnel: {
@@ -820,7 +826,7 @@ describe('APD reducer', () => {
                 position: '',
                 key: expect.stringMatching(/^[a-f0-9]{8}$/)
               }
-            ]            
+            ]
           },
           years: ['1', '2']
         }
@@ -1192,7 +1198,12 @@ describe('APD reducer helper methods', () => {
     it('gets patches for adding a key personnel', () => {
       expect(
         getPatchesForAddingItem(
-          { data: { years: ['1', '2'], keyStatePersonnel: { keyPersonnel: [{ isPrimary: true }] } } },
+          {
+            data: {
+              years: ['1', '2'],
+              keyStatePersonnel: { keyPersonnel: [{ isPrimary: true }] }
+            }
+          },
           '/keyStatePersonnel/keyPersonnel/-'
         )
       ).toEqual([

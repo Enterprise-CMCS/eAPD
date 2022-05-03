@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import FederalAdmin from '../../admin/fed-admin/FederalAdmin';
 import { ApprovalStatus } from '../state-dashboard/AffiliationStatus';
 
-import { getUserStateOrTerritoryStatus } from '../../../reducers/user.selector';
+import { getUserStateOrTerritoryStatus } from '../../../redux/selectors/user.selector';
 import { AFFILIATION_STATUSES } from '../../../constants';
 
 const FederalDashboard = ({ approvalStatus }) => {

@@ -9,7 +9,7 @@ import {
 } from './symbols';
 import { uploadFile } from './uploadFile';
 
-import axios from '../../util/api';
+import axios from '../../../util/api';
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });

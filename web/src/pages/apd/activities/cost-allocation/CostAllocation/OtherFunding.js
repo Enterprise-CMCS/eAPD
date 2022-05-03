@@ -8,7 +8,7 @@ import Instruction from '../../../../../components/Instruction';
 import {
   setCostAllocationFFPOtherFunding,
   setCostAllocationOtherFunding
-} from '../../../../../actions/editActivity';
+} from '../../../../../redux/actions/editActivity';
 
 import DollarField from '../../../../../components/DollarField';
 import Dollars from '../../../../../components/Dollars';
@@ -16,7 +16,7 @@ import {
   selectCostAllocationForActivityByIndex,
   selectActivityCostSummary,
   selectActivityByIndex
-} from '../../../../../reducers/activities.selectors';
+} from '../../../../../redux/selectors/activities.selectors';
 
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';

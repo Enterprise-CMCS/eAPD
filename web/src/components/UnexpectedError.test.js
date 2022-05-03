@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './UnexpectedError';
-import { saveApd } from '../actions/app';
+import { saveApd } from '../redux/actions/app';
 
 describe('the unexpected error alert component', () => {
   it('renders as expected if there is no error and not saving', () => {

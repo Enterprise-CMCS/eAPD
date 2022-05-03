@@ -10,7 +10,7 @@ import {
 import {
   setPreviousActivityApprovedExpenseForHITandHIE,
   setPreviousActivityFederalActualExpenseForHITandHIE
-} from '../../../actions/editApd';
+} from '../../../redux/actions/editApd';
 
 describe('apd previous activity table, mmis component', () => {
   const props = {
@@ -78,7 +78,7 @@ describe('apd previous activity table, mmis component', () => {
                     more: 'garbage'
                   }
                 }
-              }              
+              }
             }
           }
         }

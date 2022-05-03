@@ -5,7 +5,7 @@ import TagManager from 'react-gtm-module';
 
 import ApdList from './ApdList';
 import AffiliationStatus from './AffiliationStatus';
-import { getUserStateOrTerritoryStatus } from '../../../reducers/user.selector';
+import { getUserStateOrTerritoryStatus } from '../../../redux/selectors/user.selector';
 import { AFFILIATION_STATUSES } from '../../../constants';
 
 const StateDashboard = ({ state, role, approvalStatus }) => {
