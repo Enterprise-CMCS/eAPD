@@ -1,12 +1,19 @@
+const ft = require('file-type');
+
 const { loggedIn } = require('../../../../middleware/auth');
 const { can } = require('../../../../middleware');
 const logger = require('../../../../logger')('auth certifications get');
 
 const { getFile: get } = require('../../../../files');
 
-const { generateFileName: generateName } = require('../../../../util/fileUtils');
+const {
+  generateFileName: generateName
+} = require('../../../../util/fileUtils');
 
-module.exports = (app, { getFile = get, generateFileName = generateName } = {}) => {
+module.exports = (
+  app,
+  { getFile = get, generateFileName = generateName } = {}
+) => {
   logger.silly('setting up GET /auth/certifications/files/:fileID route');
 
   app.get(
@@ -17,9 +24,15 @@ module.exports = (app, { getFile = get, generateFileName = generateName } = {}) 
       try {
         const file = await getFile(req.params.fileID);
         if (file) {
-          // Generate filename
-          const fileName = await generateFileName(file, req.params.fileID);
-          
+          let fileName;
+          try {
+            // Generate filename
+            fileName = await generateFileName(file, req.params.fileID);
+          } catch (e) {
+            const { ext = null } = await ft.fromBuffer(file);
+            fileName = `untitled.${ext}`;
+          }
+
           res.setHeader('Content-Type', 'application/octet-stream');
           res.setHeader(
             'Content-Disposition',

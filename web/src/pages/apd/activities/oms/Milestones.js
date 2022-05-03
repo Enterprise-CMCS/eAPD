@@ -8,9 +8,9 @@ import FormAndReviewList from '../../../../components/FormAndReviewList';
 import { MilestoneForm, MilestoneReview } from './Milestone';
 import { Subsection } from '../../../../components/Section';
 
-import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
-import { removeMilestone } from '../../../../actions/editActivity';
-import { newMilestone } from '../../../../reducers/activities';
+import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
+import { removeMilestone } from '../../../../redux/actions/editActivity';
+import { newMilestone } from '../../../../redux/reducers/activities';
 
 const Milestone = ({ activity, activityIndex, remove }) => {
   const [localList, setLocalList] = useState(activity.schedule);

@@ -7,7 +7,7 @@ import {
   EDIT_APD,
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
-} from './actions/editApd';
+} from './redux/actions/editApd';
 import saveMiddleware from './saveMiddleware';
 
 const mockStore = configureStore([thunk]);

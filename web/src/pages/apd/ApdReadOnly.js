@@ -7,11 +7,11 @@ import {
   useHistory as actualUseHistory
 } from 'react-router-dom';
 
-import { selectApd } from '../../actions/app';
-import { selectApdData } from '../../reducers/apd.selectors';
-import { selectBudget } from '../../reducers/budget.selectors';
-import { getAPDYearRange } from '../../reducers/apd';
-import { getUserStateOrTerritory } from '../../reducers/user.selector';
+import { selectApd } from '../../redux/actions/app';
+import { selectApdData } from '../../redux/selectors/apd.selectors';
+import { selectBudget } from '../../redux/selectors/budget.selectors';
+import { getAPDYearRange } from '../../redux/reducers/apd';
+import { getUserStateOrTerritory } from '../../redux/selectors/user.selector';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
 import ApdSummary from './export/ReadOnlyApd';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';

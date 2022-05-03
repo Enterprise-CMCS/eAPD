@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import TextArea from '../../../../../components/TextArea';
 import PersonCostForm from '../../../../../components/PersonCostForm';
 
-import { savePersonnel as actualSavePersonnel } from '../../../../../actions/editActivity';
+import { savePersonnel as actualSavePersonnel } from '../../../../../redux/actions/editActivity';
 
 const StatePersonForm = forwardRef(
   ({ activityIndex, item, index, savePersonnel }, ref) => {

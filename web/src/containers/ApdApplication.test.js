@@ -5,7 +5,7 @@ import ApdApplication, {
   mapStateToProps,
   mapDispatchToProps
 } from './ApdApplication';
-import { setApdToSelectOnLoad, selectApd } from '../actions/app';
+import { setApdToSelectOnLoad, selectApd } from '../redux/actions/app';
 import apd from '../fixtures/ak-apd.json';
 import budget from '../fixtures/ak-budget.json';
 

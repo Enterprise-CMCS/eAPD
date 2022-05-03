@@ -11,9 +11,9 @@ import {
   setPreviousActivityFederalActualExpenseforMMIS50FFP,
   setPreviousActivityFederalActualExpenseforMMIS75FFP,
   setPreviousActivityFederalActualExpenseforMMIS90FFP
-} from '../../../actions/editApd';
+} from '../../../redux/actions/editApd';
 import { TABLE_HEADERS } from '../../../constants';
-import { selectPreviousMMISActivities } from '../../../reducers/apd.selectors';
+import { selectPreviousMMISActivities } from '../../../redux/selectors/apd.selectors';
 
 const ApdPreviousActivityTableMMIS = ({
   isViewOnly,

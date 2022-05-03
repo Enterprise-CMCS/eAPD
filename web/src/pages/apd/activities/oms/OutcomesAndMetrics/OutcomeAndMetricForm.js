@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 import Icon, { faPlusCircle } from '../../../../../components/Icons';
 import Review from '../../../../../components/Review';
 
-import { saveOutcome as actualSaveOutcome } from '../../../../../actions/editActivity';
+import { saveOutcome as actualSaveOutcome } from '../../../../../redux/actions/editActivity';
 
 import { validateText } from '../../../../../helpers/textValidation';
 
-import { newOutcomeMetric } from '../../../../../reducers/activities';
+import { newOutcomeMetric } from '../../../../../redux/reducers/activities';
 
 const OutcomeAndMetricForm = forwardRef(
   ({ activityIndex, item, index, saveOutcome }, ref) => {

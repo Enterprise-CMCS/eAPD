@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import EntryDetails from './Activity';
-import { addActivity as actualAddActivity } from '../../../../actions/editActivity';
+import { addActivity as actualAddActivity } from '../../../../redux/actions/editActivity';
 import { Section } from '../../../../components/Section';
-import { selectAllActivities } from '../../../../reducers/activities.selectors';
+import { selectAllActivities } from '../../../../redux/selectors/activities.selectors';
 import Waypoint from '../../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../../components/AlertMissingFFY';
 

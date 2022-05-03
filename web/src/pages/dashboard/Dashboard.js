@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { getIsFederal } from '../../reducers/user.selector';
+import { getIsFederal } from '../../redux/selectors/user.selector';
 import FederalDashboard from './fed-dashboard/FederalDashboard';
 import StateDashboard from './state-dashboard/StateDashboard';
 

@@ -9,11 +9,11 @@ import Dollars from '../../../components/Dollars';
 import Review from '../../../components/Review';
 import { Section, Subsection } from '../../../components/Section';
 
-import { selectApdYears } from '../../../reducers/apd.selectors';
+import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 import {
   selectBudgetExecutiveSummary,
   selectBudgetGrandTotal
-} from '../../../reducers/budget.selectors';
+} from '../../../redux/selectors/budget.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const ExecutiveSummary = ({ data, total, years }) => {

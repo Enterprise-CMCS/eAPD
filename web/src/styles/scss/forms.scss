@@ -64,6 +64,10 @@ div.form--with-reviews {
   }
 }
 
+.form-and-review-list div:last-child {
+  border-bottom: none;
+}
+
 .form-and-review-list--item__expanded {
   border-bottom: 2px solid $border-color;
   padding-bottom: $spacer-3;

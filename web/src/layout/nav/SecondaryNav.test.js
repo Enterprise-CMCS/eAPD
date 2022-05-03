@@ -5,7 +5,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './SecondaryNav';
-import { addActivity } from '../../actions/editActivity';
+import { addActivity } from '../../redux/actions/editActivity';
 
 const defaultProps = {
   activityCount: 2,

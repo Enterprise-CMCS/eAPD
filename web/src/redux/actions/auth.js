@@ -1,7 +1,7 @@
 // eslint-disable-next-line camelcase
 import jwtDecode from 'jwt-decode';
 
-import axios from '../util/api';
+import axios from '../../util/api';
 
 import { fetchAllApds } from './app';
 import {
@@ -17,9 +17,9 @@ import {
   renewTokens,
   logoutAndClearTokens,
   isUserActive
-} from '../util/auth';
-import { MFA_FACTOR_TYPES } from '../constants';
-import { API_COOKIE_NAME } from '../cookie-constants';
+} from '../../util/auth';
+import { MFA_FACTOR_TYPES } from '../../constants';
+import { API_COOKIE_NAME } from '../../cookie-constants';
 
 export const AUTH_CHECK_REQUEST = 'AUTH_CHECK_REQUEST';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';

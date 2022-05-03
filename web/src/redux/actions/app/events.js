@@ -1,5 +1,5 @@
-import axios from '../../util/api';
-import { selectApdData } from '../../reducers/apd.selectors';
+import axios from '../../../util/api';
+import { selectApdData } from '../../selectors/apd.selectors';
 
 export const saveApdEvent =
   (eventType, metadata = null) =>

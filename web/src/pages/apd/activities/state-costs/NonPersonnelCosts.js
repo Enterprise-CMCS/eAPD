@@ -8,13 +8,13 @@ import {
   NonPersonnelCostReview
 } from './NonPersonnelCost';
 
-import { removeNonPersonnelCost } from '../../../../actions/editActivity';
+import { removeNonPersonnelCost } from '../../../../redux/actions/editActivity';
 
-import { newExpense } from '../../../../reducers/activities';
+import { newExpense } from '../../../../redux/reducers/activities';
 
-import { selectApdYears } from '../../../../reducers/apd.selectors';
+import { selectApdYears } from '../../../../redux/selectors/apd.selectors';
 
-import { selectActivityNonPersonnelCosts } from '../../../../reducers/activities.selectors';
+import { selectActivityNonPersonnelCosts } from '../../../../redux/selectors/activities.selectors';
 import Instruction from '../../../../components/Instruction';
 import { t } from '../../../../i18n';
 
