@@ -1,5 +1,11 @@
 title: Private Contractor Costs
-noDataNotice: Private contractors have not been added for this activity.
+instruction:
+  detail: Outline contracts by contract or vendor name.
+  helpText: >-
+    Itemize federal fiscal year (FFY) costs per contract. If the 
+    vendor or contractor name is unknown, generalize by resource
+    name. (For example, computer resources/TBD)
+noDataNotice: Add private contractor(s) for this activity.
 delete:
   text: ✗
   confirm:

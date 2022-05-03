@@ -1,5 +1,8 @@
 # dependencies
 node_modules
+web/node_modules
+api/node_modules
+integrationTests/node_modules
 
 # misc
 .DS_Store
@@ -8,6 +11,9 @@ node_modules
 .nova
 .idea
 .dccache
+.yarnrc.yml
+.editorconfig
+.yarn
 
 npm-debug.log*
 pgdata/*

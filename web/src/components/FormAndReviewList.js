@@ -14,8 +14,9 @@ const FormAndReviewItem = ({
 }) => {
   const container = useRef(null);
   const formRef = useRef(null);
-  
+
   const [collapsed, setCollapsed] = useState(!initialExpanded);
+  const [isFormValid, setFormValid] = useState(true);
   const collapse = useCallback(() => {
     const { top } = container.current.getBoundingClientRect();
     if (top < 0 || top > window.innerHeight) {
@@ -24,15 +25,15 @@ const FormAndReviewItem = ({
     }
     setCollapsed(true);
   }, []);
-  
+
   const expand = useCallback(() => setCollapsed(false), []);
-  
+
   const handleCancel = () => {
     onCancelClick();
     collapse();
     setShowAddButton(true);
-  }
-  
+  };
+
   if (collapsed) {
     return (
       <div ref={container} className="form-and-review-list--item__collapsed">
@@ -43,19 +44,26 @@ const FormAndReviewItem = ({
 
   return (
     <div ref={container} className="form-and-review-list--item__expanded">
-      <Expanded index={index} ref={formRef} item={item} {...rest} collapse={collapse} />
+      <Expanded
+        index={index}
+        ref={formRef}
+        item={item}
+        {...rest}
+        collapse={collapse}
+        setFormValid={setFormValid}
+      />
       <Button onClick={() => handleCancel()} className="ds-u-margin-right--2">
         Cancel
       </Button>
       <Button
         id="form-and-review-list--done-btn"
         variation="primary"
+        disabled={!isFormValid}
         onClick={() => {
           collapse();
           setShowAddButton(true);
           formRef.current.click();
-          }
-        }
+        }}
       >
         Save
       </Button>
@@ -95,15 +103,14 @@ const FormAndReviewList = ({
   onDeleteClick,
   ...rest
 }) => {
-
   const [hasAdded, setHasAdded] = useState(false);
   const [showAddButton, setShowAdd] = useState(true);
-  
+
   const combinedClassName = useMemo(
     () => ['form-and-review-list', className].join(' '),
     [className]
   );
-  
+
   const noDataOptions = noDataMessage || 'This list is empty';
 
   const addClick = () => {
@@ -111,7 +118,7 @@ const FormAndReviewList = ({
     setShowAdd(false);
     onAddClick();
   };
-  
+
   const setShowAddButton = state => setShowAdd(state);
 
   return (
@@ -121,9 +128,7 @@ const FormAndReviewList = ({
           {errorCheck === true ? (
             <Alert variation="error">{noDataOptions}</Alert>
           ) : (
-            <p className="ds-u-margin-top--4">
-              {noDataOptions}
-            </p>
+            <p className="ds-u-margin-top--4">{noDataOptions}</p>
           )}
         </div>
       ) : (

@@ -55,12 +55,12 @@ const incentivePayment = new mongoose.Schema(
 const apdSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
     required: true
   },
   updatedAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
     required: true
   },
   status: {
@@ -212,8 +212,7 @@ const apdSchema = new mongoose.Schema({
           name: String,
           start: Date,
           totalCost: {
-            type: Number,
-            default: 0
+            type: Number
           },
           years: {
             type: Map,
@@ -356,7 +355,7 @@ const apdSchema = new mongoose.Schema({
         type: Map,
         of: incentivePayment
       }
-    } 
+    }
   },
   assurancesAndCompliances: {
     procurement: [federalCitation],

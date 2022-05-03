@@ -21,12 +21,12 @@ describe('activities reducer helpers', () => {
       start: '',
       end: '',
       files: [],
-      totalCost: 0,
-      years: { 1991: 0, 1992: 0 },
-      useHourly: false,
+      totalCost: null,
+      years: { 1991: null, 1992: null },
+      useHourly: null,
       hourly: {
-        1991: { hours: 0, rate: 0 },
-        1992: { hours: 0, rate: 0 }
+        1991: { hours: null, rate: null },
+        1992: { hours: null, rate: null }
       }
     });
   });
@@ -36,7 +36,7 @@ describe('activities reducer helpers', () => {
       key: '--- key ---',
       category: '',
       description: '',
-      years: { 1472: 0 }
+      years: { 1472: null }
     });
   });
 
@@ -68,7 +68,7 @@ describe('activities reducer helpers', () => {
       key: '--- key ---',
       title: '',
       description: '',
-      years: { 8732: { amt: 0, perc: 0 }, bob: { amt: 0, perc: 0 } }
+      years: { 8732: { amt: null, perc: null }, bob: { amt: null, perc: null } }
     });
   });
 

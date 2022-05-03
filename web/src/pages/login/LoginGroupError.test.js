@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, axe } from 'apd-testing-library';
+import { renderWithConnection, axe, screen } from 'apd-testing-library';
 import LoginGroupError from './LoginGroupError';
 
 const defaultProps = {
@@ -17,21 +17,21 @@ describe('<LoginGroupError />', () => {
   });
 
   test('title renders', () => {
-    const { getByText } = setup();
-    expect(getByText(/Job Code Missing/)).toBeTruthy();
+    setup();
+    expect(screen.getByText(/Job Code Missing/)).toBeTruthy();
   });
 
   test('contact message renders', () => {
-    const { getByText } = setup();
+    setup();
     expect(
-      getByText(
+      screen.getByText(
         /You don’t have the correct job code to access the eAPD system./
       )
     ).toBeTruthy();
   });
 
   test('cancel button renders', () => {
-    const { getByRole } = setup();
-    expect(getByRole('button', { name: 'Cancel' })).toBeTruthy();
+    setup();
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeTruthy();
   });
 });
