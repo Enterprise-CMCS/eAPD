@@ -1,26 +1,15 @@
 import { ChoiceList, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { forwardRef, Fragment, useCallback, useEffect, useReducer } from 'react';
-import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import React, { forwardRef, Fragment, useCallback } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import Joi from 'joi';
+import nameFundingSourceSchema from '../../../../../static/schemas/nameAndFundingSource';
 import {
   setActivityName,
   setActivityFundingSource
 } from '../../../../../actions/editActivity';
-
-const nameFundingSourceSchema = Joi.object({
-  name: Joi.string().required().messages({
-    'string.base': 'Activity Name is required.',
-    'string.empty': 'Activity Name is required.'
-  }),
-  fundingSource: Joi.string().required().messages({
-    'string.base': 'Must select program type.',
-    'string.empty': 'Must select program type.'
-  })
-})
 
 const NameAndFundingSourceForm = forwardRef(
   ({ 
