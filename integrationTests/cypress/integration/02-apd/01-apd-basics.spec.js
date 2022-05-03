@@ -447,6 +447,18 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('[class="ds-c-choice"]').eq(0).focus().blur();
       cy.contains('Must select program type.').should('exist');
 
+      cy.contains('Start date')
+        .parent()
+        .next('div')
+        .within(() => cy.findByLabelText('Month').focus().blur());
+      cy.contains('Provide a start date.').should('exist');
+
+      cy.contains('End date')
+        .parent()
+        .next('div')
+        .within(() => cy.findByLabelText('Year').focus().blur());
+      cy.contains('Provide an end date.').should('exist');
+
       cy.get('input[name="name"]')
         .focus()
         .type('My Activity')
