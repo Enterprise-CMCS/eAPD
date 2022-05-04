@@ -33,11 +33,11 @@ const setup = async (props = {}) => {
 };
 
 const verifyDateField = (text, expectValue) => {
-  const fieldset = within(screen.getByText(text).closest('fieldset'));
+  const fieldset = within(screen.getByText(text).closest('fieldset')); // eslint-disable-line testing-library/no-node-access
   expect(fieldset.getByLabelText('Month')).toHaveValue(expectValue.month);
   expect(fieldset.getByLabelText('Day')).toHaveValue(expectValue.day);
   expect(fieldset.getByLabelText('Year')).toHaveValue(expectValue.year);
-  fireEvent.blur(screen.getByText(text).closest('fieldset'));
+  fireEvent.blur(screen.getByText(text).closest('fieldset')); // eslint-disable-line testing-library/no-node-access
 };
 
 describe('the Schedule component', () => {
