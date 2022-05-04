@@ -22,8 +22,7 @@ const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate
     control,
     formState: {errors},
     getFieldState,
-    trigger,
-    resetField: resetFieldErrors
+    trigger
   } = useForm({
     defaultValues: {
       start: plannedStartDate || "",
