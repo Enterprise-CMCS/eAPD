@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import DateField from '../../../components/DateField';
+import DateField from '../../../../../components/DateField';
 
-import milestonesSchema from '../../../static/schemas/milestones';
+import milestonesSchema from '../../../../../static/schemas/milestones';
 
-import { saveMilestone as actualSaveMilestone } from '../../../actions/editActivity';
+import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actions/editActivity';
 
 const MilestoneForm = forwardRef(
   ({ activityIndex, index, item, saveMilestone, setFormValid }, ref) => {
