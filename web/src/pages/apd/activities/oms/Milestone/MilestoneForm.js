@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useEffect, useReducer, forwardRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -20,8 +20,8 @@ const MilestoneForm = forwardRef(
       control,
       formState: { errors, isValid },
       getFieldState,
-      getValues,
-      setValue
+      trigger,
+      getValues
     } = useForm({
       defaultValues: {
         ...item
@@ -30,12 +30,6 @@ const MilestoneForm = forwardRef(
       reValidateMode: 'onBlur',
       resolver: joiResolver(milestonesSchema)
     });
-
-    const changeDate = (_, dateStr) =>
-      setValue(`endDate`, dateStr);
-
-    const changeName = ({ target: { value } }) =>
-      setValue(`milestone`, value);
 
     useEffect(() => {
       console.log("something changed")
@@ -61,7 +55,6 @@ const MilestoneForm = forwardRef(
               name="milestone"
               value={value}
               className="remove-clearfix textfield__container"
-              onChange={changeName}
               errorMessage={errors?.milestone?.message}
               errorPlacement="bottom"
             />
