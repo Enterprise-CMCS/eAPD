@@ -25,13 +25,13 @@ const StandardsAndConditions = forwardRef(
     activityIndex,
     setDoesNotSupport,
     setSupport
-  }, ref) => {
+  }) => {
 
     const {doesNotSupport, supports} = activity.standardsAndConditions;
 
     const {
       control,
-      formState: { errors, isValid, isValidating },
+      formState: { errors },
       getValues
     } = useForm({
       defaultValues: {

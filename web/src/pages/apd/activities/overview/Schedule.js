@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { forwardRef, Fragment, useCallback, useEffect } from 'react';
+import React, { forwardRef, Fragment, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -23,8 +23,7 @@ const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate
     formState: {errors},
     getFieldState,
     trigger,
-    resetField: resetFieldErrors,
-    getValues
+    resetField: resetFieldErrors
   } = useForm({
     defaultValues: {
       start: plannedStartDate || "",

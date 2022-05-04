@@ -24,15 +24,6 @@ const getCheckedValue = value => {
   return null;
 };
 
-const getCheckedValue = value => {
-  if (value !== null) {
-    if (value === true) return 'yes';
-    if (value === false) return 'no';
-    return value;
-  }
-  return null;
-};
-
 const tRoot = 'apd.stateProfile.keyPersonnel';
 
 const PersonForm = forwardRef(
