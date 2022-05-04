@@ -19,18 +19,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.15.0'
-      - name: Install and Build
+      - name: Install dependencies
         working-directory: ./web
-        run: |
-          yarn install
-          yarn build:storybook
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.8
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: docs-build # The folder that the build:storybook script generates files.
-          clean: true # Automatically remove deleted files from the deploy branch
-        # 👇 Adds Chromatic as a step in the workflow
+        run: yarn
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         # Chromatic GitHub Action options
@@ -38,6 +29,13 @@ jobs:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GH_TOKEN }}
+          buildScriptName: build:storybook
           workingDir: ./web
           storybookBuildDir: ./docs-build
           allowConsoleErrors: true
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.8
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs-build # The folder that the build:storybook script generates files.
+          clean: true # Automatically remove deleted files from the deploy branch

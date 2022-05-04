@@ -87,6 +87,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - gh-pages
             tags:
               ignore: ignore-e2e
           requires:
@@ -247,6 +248,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - gh-pages
             tags:
               ignore: /^noinfra.*/
           requires:
