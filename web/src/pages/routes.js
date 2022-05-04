@@ -1,43 +1,44 @@
-import NoMatch from '../components/NoMatch';
-import Dashboard from './dashboard/Dashboard';
-import ApdApplication from '../containers/ApdApplication';
-import ApdViewOnly from './apd/ApdReadOnly';
-import LoginApplication from '../containers/LoginApplication';
-import ManageAccount from './admin/state-admin/ManageAccount';
-import StateAdmin from './admin/state-admin/StateAdmin';
-import DelegateStateAdminForm from './admin/fed-admin/DelegateStateAdminForm';
-import SelectAffiliation from './login/SelectAffiliation';
-import Logout from './login/Logout';
+import React, { useEffect } from 'react';
+import { Route as PublicRoute, Switch, useLocation } from 'react-router-dom';
 
-const routes = [
-  { path: '/', component: Dashboard, exact: true, isPublic: false },
-  {
-    path: '/apd/:apdId',
-    component: ApdApplication,
-    exact: false,
-    isPublic: false
-  },
-  {
-    path: '/print/:apdId',
-    component: ApdViewOnly,
-    exact: true,
-    isPublic: false
-  },
-  { path: '/login', component: LoginApplication, isPublic: true, isCard: true },
-  { path: '/logout', component: Logout, isPublic: true },
-  { path: '/manage-account', component: ManageAccount, isPublic: false },
-  {
-    path: '/select-affiliation',
-    component: SelectAffiliation,
-    isPublic: false
-  },
-  { path: '/state-admin', component: StateAdmin, isPublic: false },
-  {
-    path: '/delegate-state-admin',
-    component: DelegateStateAdminForm,
-    isAdmin: true
-  },
-  { component: NoMatch, isPublic: true }
-];
+import routes from './routesList';
+import AdminRoute from './admin/AdminRoute';
+import PrivateRoute from '../components/PrivateRoute';
+import { pageView } from '../util/analytics';
 
-export default routes;
+const Routes = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    pageView(location.pathname);
+  }, [location, location.pathname]);
+
+  return (
+    <Switch>
+      {routes.map(({ isAdmin, isPublic, children, path, ...routeProps }) => {
+        const key = path || 'no-match';
+        if (isPublic) {
+          return (
+            <PublicRoute key={key} path={path} {...routeProps}>
+              {children}
+            </PublicRoute>
+          );
+        }
+        if (isAdmin) {
+          return (
+            <AdminRoute key={key} path={path} {...routeProps}>
+              {children}
+            </AdminRoute>
+          );
+        }
+        return (
+          <PrivateRoute key={key} path={path} {...routeProps}>
+            {children}
+          </PrivateRoute>
+        );
+      })}
+    </Switch>
+  );
+};
+
+export default Routes;

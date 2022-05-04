@@ -6,9 +6,6 @@ export default {
   component: Dollars,
   parameters: {
     jest: ['Dollars.test.js']
-  },
-  argTypes: {
-    amt: { control: 'text' }
   }
 };
 

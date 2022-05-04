@@ -103,7 +103,7 @@ git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 cd eAPD/web
 yarn add webpack@5.70.0 webpack-cli@4.9.2
 yarn install --frozen-lockfile
-API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
+API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up

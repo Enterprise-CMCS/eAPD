@@ -9,17 +9,31 @@ on:
 
 # List of jobs
 jobs:
-  test:
+  chromatic:
     # Operating System
     runs-on: ubuntu-18.04
+    environment: Preview
+    timeout-minutes: 60
     # Job steps
     steps:
-      - uses: actions/checkout@v1
-      - run: yarn
-        #👇 Adds Chromatic as a step in the workflow
-      - uses: chromaui/action@v1
-        # Options required for Chromatic's GitHub Action
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
         with:
-          #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/en/deploy/ to obtain it
+          persist-credentials: false
+          fetch-depth: 0 # 👈 Required to retrieve git history
+      - name: Node Version
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.15.0'
+      - name: Install
+        run: |
+          cd web
+          yarn install
+        # 👇 Adds Chromatic as a step in the workflow
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        # Chromatic GitHub Action options
+        with:
+          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GH_TOKEN }}

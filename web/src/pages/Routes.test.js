@@ -1,11 +1,11 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { renderWithConnection } from 'apd-testing-library';
 
-import Routes from './Route';
+import Routes from './Routes';
 
 describe('Routes component', () => {
   test('renders correctly', () => {
-    const component = shallow(<Routes />);
-    expect(component).toMatchSnapshot();
+    const { container } = renderWithConnection(<Routes />);
+    expect(container).toMatchSnapshot();
   });
 });

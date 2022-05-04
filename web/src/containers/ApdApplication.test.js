@@ -150,8 +150,7 @@ describe('apd (application) component', () => {
       apdId: '0123456789abcdef01234567',
       isAdmin: true,
       isEditor: true,
-      place: 'place',
-      userRole: 'eAPD Federal Admin'
+      place: 'place'
     });
 
     state.apd.data.id = null;
@@ -162,8 +161,7 @@ describe('apd (application) component', () => {
       apdId: null,
       isAdmin: false,
       isEditor: true,
-      place: 'place',
-      userRole: 'test role'
+      place: 'place'
     });
   });
 
