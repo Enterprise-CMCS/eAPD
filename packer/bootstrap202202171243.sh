@@ -290,7 +290,7 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
           },
           {
             "file_path": "/var/log/mongodb/mongod.log*",
-            "log_group_name": "$ENVIRONMENT/var/log/mongodb/mongod.log"
+            "log_group_name": "preview/var/log/mongodb/mongod.log"
           }                    
         ]
       }
@@ -308,15 +308,15 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
         "collect_list": [
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent.log*",
-            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_agent.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent-err.log*",
-            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_agent-err.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent-err.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_am.log*",
-            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_am.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_am.log"
           }
         ]
       }

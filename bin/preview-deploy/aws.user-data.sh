@@ -77,6 +77,7 @@ sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra
 
 # Create app logs and directories
 # These have been moved to bootstrap script
+chown ec2-user:eapd
 #mkdir -p /app/api/logs
 #touch /app/api/logs/eAPD-API-error-0.log
 #touch /app/api/logs/eAPD-API-out-0.log
@@ -108,6 +109,7 @@ mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
+chown -R ec2-user:eapd /app
 cd /app/api
 yarn install --frozen-lockfile --production=true
 # Build and seed the database
