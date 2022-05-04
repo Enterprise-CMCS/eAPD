@@ -11,11 +11,11 @@ import {
 import FormAndReviewList from '../../../../components/FormAndReviewList';
 import { Subsection } from '../../../../components/Section';
 
-import { selectContractorsByActivityIndex } from '../../../../reducers/activities.selectors';
-import { selectApdYears } from '../../../../reducers/apd.selectors';
+import { selectContractorsByActivityIndex } from '../../../../redux/selectors/activities.selectors';
+import { selectApdYears } from '../../../../redux/selectors/apd.selectors';
 
-import { removeContractor as removeAction } from '../../../../actions/editActivity';
-import { newContractor } from '../../../../reducers/activities';
+import { removeContractor as removeAction } from '../../../../redux/actions/editActivity';
+import { newContractor } from '../../../../redux/reducers/activities';
 
 const ContractorResources = ({
   activityIndex,

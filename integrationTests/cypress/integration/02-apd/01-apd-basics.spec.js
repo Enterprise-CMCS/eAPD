@@ -286,6 +286,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.log('Key State Personnel');
       cy.goToKeyStatePersonnel();
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+      cy.findByRole('button', { name: /Add Primary Contact/i }).should(
+        'not.exist'
+      );
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.get('.form-and-review-list')
@@ -500,6 +503,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
 
+        cy.findByRole('button', { name: /Add Outcome/i }).should('not.exist');
+        cy.get(`[data-cy='outcome-${index}']`)
+          .click()
+          .should('have.value', '')
+          .blur()
+          .should('have.class', 'ds-c-field--error');
+
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
         cy.findByRole('button', { name: /Cancel/i }).click();
 
         cy.get('.form-and-review-list')
@@ -581,6 +593,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.wrap(milestones).each((element, index) => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
+        cy.findByRole('button', { name: /Add Milestone/i }).should('not.exist');
 
         cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '');
 
@@ -631,6 +644,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.goToStateStaffAndExpenses(0);
 
       cy.findByRole('button', { name: /Add State Staff/i }).click();
+      cy.findByRole('button', { name: /Add State Staff/i }).should('not.exist');
 
       cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -675,6 +689,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       });
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
+      cy.findByRole('button', { name: /Add State Expense/i }).should(
+        'not.exist'
+      );
 
       cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -724,6 +741,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.goToPrivateContractorCosts(0);
 
       cy.findByRole('button', { name: /Add Contractor/i }).click();
+      cy.findByRole('button', { name: /Add Contractor/i }).should('not.exist');
 
       cy.findByRole('button', { name: /Cancel/i }).click();
 

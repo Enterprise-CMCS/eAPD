@@ -9,7 +9,7 @@ import nameFundingSourceSchema from '../../../../../static/schemas/nameAndFundin
 import {
   setActivityName,
   setActivityFundingSource
-} from '../../../../../actions/editActivity';
+} from '../../../../../redux/actions/editActivity';
 
 const NameAndFundingSourceForm = forwardRef(
   ({ 

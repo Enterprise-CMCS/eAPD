@@ -8,7 +8,7 @@ import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 import { Section, Subsection } from '../../../components/Section';
 import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
-import { selectApdYears } from '../../../reducers/apd.selectors';
+import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 
 const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
   const paramApdId = useParams().apdId;

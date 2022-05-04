@@ -10,12 +10,12 @@ import {
   setActivityAlternatives,
   setActivityDescription,
   setActivityOverview
-} from '../../../../actions/editActivity';
+} from '../../../../redux/actions/editActivity';
 import RichText from '../../../../components/RichText';
 import Instruction from '../../../../components/Instruction';
 import { Subsection } from '../../../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource/';
-import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
+import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import Schedule from './Schedule';
 
 import overviewSchema from '../../../../static/schemas/activityOverview';

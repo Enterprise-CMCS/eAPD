@@ -5,15 +5,18 @@ changelog:
     - title: 🚀 Exciting New Features
       labels:
         - feature
-    - title: ✅ Tests
+    - title: 📚 Content Updates
       labels:
-        - tests
-    - title: 🐛 Bugs fixed
+        - content
+    - title: 🐛 Bugs Fixed
       labels:
         - bug
-    - title: 🔧 Refactor
+    - title: ✅ Tests Added
+      labels:
+        - tests
+    - title: 🔧 Refactors Made
       labels:
         - refactor
-    - title: ⚙️ Behind the scenes
+    - title: ⚙️ Behind the Scenes
       labels:
-        - "*"
+        - '*'

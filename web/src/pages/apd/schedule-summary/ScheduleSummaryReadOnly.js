@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { t } from '../../../i18n';
-import { selectActivitySchedule } from '../../../reducers/activities.selectors';
+import { selectActivitySchedule } from '../../../redux/selectors/activities.selectors';
 
 const ScheduleSummary = ({ activities }) => (
   <div>

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import DateField from '../../../../../components/DateField';
 
-import { saveMilestone as actualSaveMilestone } from '../../../../../actions/editActivity';
+import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actions/editActivity';
 
 const MilestoneForm = forwardRef(
   ({ activityIndex, index, item, saveMilestone }, ref) => {

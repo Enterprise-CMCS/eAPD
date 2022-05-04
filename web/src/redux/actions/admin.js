@@ -1,4 +1,4 @@
-import axios from '../util/api';
+import axios from '../../util/api';
 
 export const ADMIN_GET_USERS_REQUEST = 'ADMIN_GET_USERS_REQUEST';
 export const ADMIN_GET_USERS_SUCCESS = 'ADMIN_GET_USERS_SUCCESS';

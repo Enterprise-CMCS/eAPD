@@ -6,7 +6,7 @@ import {
   selectError,
   selectIsSaving,
   selectLastSaved
-} from '../../reducers/saving';
+} from '../../redux/reducers/saving';
 
 import SaveMessage from '../../components/SaveMessage';
 

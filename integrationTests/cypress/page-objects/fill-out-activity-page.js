@@ -212,10 +212,8 @@ class FillOutActivityPage {
         );
       });
     } else {
-      cy.log("HELLO")
       cy.get('[type="radio"].ds-c-choice').eq(1).check({ force: true });
       _.forEach(years, (year, index) => {
-        cy.log("DARREN")
         populatePage.fillTextField(
           'ds-c-field ds-c-field--currency ds-c-field--medium',
           contractor.FFYcosts[index],
