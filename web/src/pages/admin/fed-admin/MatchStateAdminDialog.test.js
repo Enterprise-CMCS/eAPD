@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderWithConnection } from 'apd-testing-library';
-// import MockAdapter from 'axios-mock-adapter';
-// import axios from '../../../util/api';
+import MockAdapter from 'axios-mock-adapter';
+import axios from '../../../util/api';
 
 import MatchStateAdminDialog from './MatchStateAdminDialog';
 
@@ -19,12 +19,16 @@ const defaultProps = {
 
 // const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 const setup = (props = {}) => {
-  renderWithConnection(<MatchStateAdminDialog {...defaultProps} {...props} />);
+  return renderWithConnection(
+    <MatchStateAdminDialog {...defaultProps} {...props} />
+  );
 };
 
 describe('<MatchStateAdminDialog />', () => {
   test('renders correctly', () => {
     setup();
-    // need to use renderWithConnection for 22-31?
+    // fetchMock
+    //   .onGet(`/states/${defaultProps.state}/affiliations?matches=true`)
+    //   .reply(200);
   });
 });

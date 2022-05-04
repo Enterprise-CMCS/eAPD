@@ -1,14 +1,38 @@
-import React from 'react';
-import { renderWithConnection } from 'apd-testing-library';
+const mongoose = require('mongoose');
 
-import ApdReadOnly from './ApdReadOnly';
+import React from 'react';
+import { renderWithConnection, screen } from 'apd-testing-library';
+
+const { apd } = require('../../../../api/seeds/development/apds');
+const mongo = require('../../../../api/db/mongodb');
+
+import ApdViewOnly from './ApdReadOnly';
+
+let newApd;
+let APD;
 
 const setup = () => {
-  renderWithConnection(<ApdReadOnly />);
+  renderWithConnection(<ApdViewOnly {...newApd} />);
 };
 
-describe('<ApdReadOnly/>', () => {
+describe('<ApdViewOnly/>', () => {
+  jest.before(async () => {
+    await mongo.setup();
+    APD = mongoose.model('APD');
+  });
+
+  jest.beforeEach(async () => {
+    newApd = new APD({
+      status: 'draft',
+      stateId: 'md',
+      id: 46,
+      ...apd
+    });
+    newApd = await newApd.save();
+  });
+
   test('renders correctly', () => {
     setup();
+    // screen.getByText('Export');
   });
 });
