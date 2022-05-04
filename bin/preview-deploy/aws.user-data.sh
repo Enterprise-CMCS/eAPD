@@ -109,7 +109,6 @@ mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up
 mv eAPD/api/* /app/api
-chown -R ec2-user:eapd /app
 cd /app/api
 yarn install --frozen-lockfile --production=true
 # Build and seed the database
@@ -122,6 +121,8 @@ cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
+
+chown -R ec2-user:eapd /apps
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
@@ -161,7 +162,7 @@ echo "module.exports = {
 # Start it up
 pm2 start ecosystem.config.js
 
-NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
+NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
 E_USER
 
 sudo yum remove -y gcc-c++
