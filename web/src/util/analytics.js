@@ -1,5 +1,5 @@
 import { matchPath } from 'react-router-dom';
-import mainRoutes from '../pages/routesList';
+import mainRoutes from '../pages/mainRoutesList';
 import apdRoutes from '../pages/apd/apdRoutesList';
 import activityRoutesCreator from '../pages/apd/activities/activityRoutesList';
 import loginRoutesCreator from '../pages/login/loginRoutesList';
