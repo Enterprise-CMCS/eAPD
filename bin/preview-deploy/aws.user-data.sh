@@ -122,7 +122,7 @@ sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
 
-chown -R ec2-user:eapd /apps
+sudo chown -R ec2-user:eapd /apps
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
