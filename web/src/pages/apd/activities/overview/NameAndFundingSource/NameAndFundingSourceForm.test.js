@@ -20,6 +20,7 @@ const defaultProps = {
 };
 
 const setup = async (props = {}) => {
+  // eslint-disable-next-line testing-library/no-unnecessary-act
   const utils = await act(async () => 
     renderWithConnection(<NameAndFundingSourceForm {...defaultProps} {...props} />)
   );
