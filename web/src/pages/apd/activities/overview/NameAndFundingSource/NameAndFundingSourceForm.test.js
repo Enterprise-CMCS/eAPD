@@ -1,62 +1,41 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-
 import {
-  plain as NameAndFundingSource,
-  mapDispatchToProps
-} from './NameAndFundingSourceForm';
+  renderWithConnection,
+  act,
+  screen,
+  waitFor
+} from 'apd-testing-library';
 
-import {
-  setActivityName,
-  setActivityFundingSource
-} from '../../../../../redux/actions/editActivity';
+import { plain as NameAndFundingSourceForm } from './NameAndFundingSourceForm';
 
-describe('the activity name and funding source component', () => {
-  const props = {
-    index: 1,
-    item: {
-      fundingSource: 'Uncle Scrooge',
-      key: 'key 1',
-      name: 'Buying bikes for Huey, Dewey, and Louie'
-    },
-    setFundingSource: jest.fn(),
-    setName: jest.fn()
-  };
+const defaultProps = {
+  index: 1,
+  item: {
+    fundingSource: 'Uncle Scrooge',
+    key: 'key 1',
+    name: 'Buying bikes for Huey, Dewey, and Louie'
+  },
+  setFundingSource: jest.fn(),
+  setName: jest.fn()
+};
 
+const setup = async (props = {}) => {
+  const utils = await act(async () => 
+    renderWithConnection(<NameAndFundingSourceForm {...defaultProps} {...props} />)
+  );
+  await waitFor(() => screen.findByText(/Activity Name/i));
+  return utils;
+};
+
+describe('the NameAndFundingSourceForm component', () => {
   beforeEach(() => {
-    props.setFundingSource.mockClear();
-    props.setName.mockClear();
+    jest.resetAllMocks();
   });
 
-  it('renders correctly', () => {
-    const component = shallow(<NameAndFundingSource {...props} />);
-    expect(component).toMatchSnapshot();
+  test('it renders correctly', async () => {
+    await setup();
+    expect(
+      screen.getByLabelText(/Activity name/i)
+    ).toHaveValue(defaultProps.item.name)
   });
-
-  it('handles changing the activity name', () => {
-    const component = shallow(<NameAndFundingSource {...props} />);
-
-    component.find('TextField').prop('onChange')({
-      target: { value: 'new value' }
-    });
-
-    expect(props.setName).toHaveBeenCalledWith(1, 'new value');
-  });
-
-  it('handles changing the funding source/program type', () => {
-    const component = shallow(<NameAndFundingSource {...props} />);
-
-    component.find('ChoiceList').prop('onChange')({
-      target: { value: 'new value' }
-    });
-
-    expect(props.setFundingSource).toHaveBeenCalledWith(1, 'new value');
-  });
-
-  it('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      setFundingSource: setActivityFundingSource,
-      setName: setActivityName
-    });
-  });
-});
+})
