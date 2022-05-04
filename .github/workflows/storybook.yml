@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.15.0'
-      - name: Install dependencies
+      - name: Install Dependencies and Build Storybook
         working-directory: ./web
         run: |
           yarn install --frozen-lockfile
