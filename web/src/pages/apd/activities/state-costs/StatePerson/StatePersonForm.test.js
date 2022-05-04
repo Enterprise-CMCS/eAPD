@@ -9,8 +9,6 @@ import userEvent from '@testing-library/user-event';
 
 import { plain as StatePersonForm } from './StatePersonForm';
 
-import { savePersonnel as actualSavePersonnel } from '../../../../../redux/actions/editActivity';
-
 const defaultProps = {
   activityIndex: 42,
   index: 1,

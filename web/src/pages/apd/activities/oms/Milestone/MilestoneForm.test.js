@@ -24,8 +24,6 @@ const defaultProps = {
   setFormValid: jest.fn()
 };
 
-import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actions/editActivity';
-
 const setup = async (props = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
   const renderUtils = await act(async () => {
