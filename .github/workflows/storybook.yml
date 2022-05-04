@@ -7,9 +7,6 @@ on:
 jobs:
   storybook-deploy:
     runs-on: ubuntu-18.04
-    defaults:
-      run:
-        working-directory: web
     environment: Preview
     timeout-minutes: 60
     steps:
@@ -23,8 +20,8 @@ jobs:
         with:
           node-version: '16.15.0'
       - name: Install and Build
+        working-directory: ./web
         run: |
-          cd web
           yarn install
           yarn build:storybook
       - name: Deploy 🚀
@@ -41,5 +38,6 @@ jobs:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GH_TOKEN }}
-          storybookBuildDir: docs-build
+          workingDir: ./web
+          storybookBuildDir: ./docs-build
           allowConsoleErrors: true
