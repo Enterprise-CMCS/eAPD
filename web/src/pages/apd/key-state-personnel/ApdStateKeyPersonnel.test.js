@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './ApdStateKeyPersonnel';
-import { removeKeyPersonnel } from '../../../actions/editApd';
+import { removeKeyPersonnel } from '../../../redux/actions/editApd';
 
 describe('apd state profile, Medicaid office component', () => {
   const props = {

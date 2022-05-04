@@ -15,7 +15,7 @@ import {
   getAffiliations,
   updateAffiliation,
   getRoleTypes
-} from '../../../actions/admin';
+} from '../../../redux/actions/admin';
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 

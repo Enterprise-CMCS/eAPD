@@ -31,10 +31,18 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.useStateStaff();
 
     cy.findByRole('button', { name: /Create new/i }).click();
-    cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
+    cy.findByRole(
+      'heading',
+      { name: /APD Overview/i },
+      { timeout: 100000 }
+    ).should('exist');
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
     });
+
+    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+      years.push(list[index].value)
+    );
   });
 
   beforeEach(() => {
@@ -86,9 +94,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get('#apd-title-input').contains(`${title2}`);
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
-      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-        years.push(list[index].value)
-      );
     });
   });
 
@@ -260,9 +265,30 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
 
     it('should handle entering data', () => {
+      const keyPersons = [
+        {
+          name: 'Jean Luc Picard',
+          email: 'jpicard@gmail.com',
+          position: 'Captain'
+        },
+        {
+          name: 'William Riker',
+          email: 'riker@gmail.com',
+          position: 'First Officer'
+        },
+        {
+          name: 'Data Soong',
+          email: 'data@gmail.com',
+          position: 'Second Officer'
+        }
+      ];
+
       cy.log('Key State Personnel');
       cy.goToKeyStatePersonnel();
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+      cy.findByRole('button', { name: /Add Primary Contact/i }).should(
+        'not.exist'
+      );
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.get('.form-and-review-list')
@@ -272,7 +298,30 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .should('exist');
 
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.get('[data-cy="key-person-0__name"]').focus().blur();
+      cy.contains('Name is required').should('exist');
+      cy.get('[data-cy="key-person-0__email"]').focus().blur();
+      cy.contains('Email is required').should('exist');
+      cy.get('[data-cy="key-person-0__position"]').focus().blur();
+      cy.contains('Role is required').should('exist');
+
+      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
+      cy.get('[data-cy="key-person-0__name"]').type(keyPersons[0].name);
+
+      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
+      cy.get('[data-cy="key-person-0__email"]').type(keyPersons[0].email);
+      cy.get('[data-cy="key-person-0__position"]').type(keyPersons[0].position);
+
+      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+
+      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+
+      cy.findByRole('button', { name: /Save/i })
+        .should('not.be.disabled')
+        .click();
 
       // Get div for the element containing user data as an alias
       cy.get('.form-and-review-list')
@@ -282,16 +331,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .as('primaryContactVals');
       // Check for default values
       cy.get('@primaryContactVals')
-        .findByRole('heading', {
-          name: /Primary Point of Contact name not specified/i
-        })
+        .contains(keyPersons[0].name)
         .should('exist');
       cy.get('@primaryContactVals')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(2);
           expect($lis.eq(0)).to.contain('Primary APD Point of Contact');
-          expect($lis.eq(1)).to.contain('Role not specified');
+          expect($lis.eq(1)).to.contain(keyPersons[0].position);
         });
       // Protects against edge case of having '$' in name or role
       cy.get('@primaryContactVals')
@@ -303,6 +350,12 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@primaryContactVals').contains('Edit').should('exist');
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+
+      cy.get('[data-cy="key-person-1__name"]').type(keyPersons[1].name);
+      cy.get('[data-cy="key-person-1__email"]').type(keyPersons[1].email);
+      cy.get('[data-cy="key-person-1__position"]').type(keyPersons[1].position);
+      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+
       cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
@@ -311,14 +364,12 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .parent()
         .parent()
         .as('personnelVals1');
-      cy.get('@personnelVals1')
-        .findByRole('heading', { name: /Key Personnel name not specified/i })
-        .should('exist');
+      cy.get('@personnelVals1').contains(keyPersons[1].name).should('exist');
       cy.get('@personnelVals1')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(1);
-          expect($lis.eq(0)).to.contain('Role not specified');
+          expect($lis.eq(0)).to.contain(keyPersons[1].position);
         });
       cy.get('@personnelVals1')
         .contains('Total cost:')
@@ -333,21 +384,28 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .eq(1)
         .click();
 
-      cy.get('input[name="apd-state-profile-pocname1"]').type('Test cancel');
+      cy.get('[data-cy="key-person-1__name"]').type('Test cancel');
 
       cy.get('.form-and-review-list')
         .findByRole('button', { name: /Cancel/i })
         .click();
 
       cy.get('.ds-c-review__heading')
-        .contains('2. Key Personnel name not specified')
+        .contains(keyPersons[1].name)
         .should('exist');
 
       cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+      cy.get('[data-cy="key-person-2__name"]').type(keyPersons[2].name);
+      cy.get('[data-cy="key-person-2__email"]').type(keyPersons[2].email);
+      cy.get('[data-cy="key-person-2__position"]').type(keyPersons[2].position);
       // Have to force check; cypress does not think radio buttons are visible
-      cy.get('input[type="radio"][value="yes"]')
-        .scrollIntoView()
-        .check({ force: true });
+      cy.get('input[type="radio"][value="yes"]').check({ force: true });
+
+      cy.get('[data-cy="key-person-2-0__cost"]').type('100000');
+      cy.get('[data-cy="key-person-2-0__fte"]').type('0.5');
+      cy.get('[data-cy="key-person-2-1__cost"]').type('100000');
+      cy.get('[data-cy="key-person-2-1__fte"]').type('0.5').blur();
+
       cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
@@ -356,21 +414,19 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .parent()
         .parent()
         .as('personnelVals2');
-      cy.get('@personnelVals2')
-        .findByRole('heading', { name: /Key Personnel name not specified/i })
-        .should('exist');
+      cy.get('@personnelVals2').contains(keyPersons[2].name).should('exist');
       cy.get('@personnelVals2')
         .find('li')
         .should($lis => {
           expect($lis).to.have.length(1);
-          expect($lis.eq(0)).to.contain('Role not specified');
+          expect($lis.eq(0)).to.contain([keyPersons.position]);
         });
 
       // Check that FFY, FTE, and Total cost for each applicable year is 0.
       years.forEach(year => {
         cy.get('@personnelVals2').should(
           'contain',
-          `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`
+          `FFY ${year} Cost: $100,000 | FTE: 0.5 | Total: $50,000`
         );
       });
 
@@ -412,7 +468,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
-        cy.get(`[data-cy='outcome-${index}']`).click().should('have.value', '');
+
+        cy.findByRole('button', { name: /Add Outcome/i }).should('not.exist');
+        cy.get(`[data-cy='outcome-${index}']`)
+          .click()
+          .should('have.value', '')
+          .blur()
+          .should('have.class', 'ds-c-field--error');
+
+        cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
         cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -495,6 +559,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.wrap(milestones).each((element, index) => {
         cy.findByRole('button', { name: /Add Milestone/i }).click();
+        cy.findByRole('button', { name: /Add Milestone/i }).should('not.exist');
 
         cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '');
 
@@ -510,20 +575,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .click()
           .type(element.milestoneName);
 
-        cy.get(`.ds-c-field--month`)
-          .click()
-          .type(element.dateMonth);
+        cy.get(`.ds-c-field--month`).click().type(element.dateMonth);
 
-        cy.get(`.ds-c-field--day`)
-          .click()
-          .type(element.dateDay);
+        cy.get(`.ds-c-field--day`).click().type(element.dateDay);
 
-        cy.get(`.ds-c-field--year`)
-          .click()
-          .type(element.dateYear);
+        cy.get(`.ds-c-field--year`).click().type(element.dateYear);
 
-        cy.findByRole('button', { name: /Save/i })
-          .click();
+        cy.findByRole('button', { name: /Save/i }).click();
 
         cy.waitForSave();
 
@@ -552,6 +610,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.goToStateStaffAndExpenses(0);
 
       cy.findByRole('button', { name: /Add State Staff/i }).click();
+      cy.findByRole('button', { name: /Add State Staff/i }).should('not.exist');
 
       cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -619,6 +678,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       });
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
+      cy.findByRole('button', { name: /Add State Expense/i }).should(
+        'not.exist'
+      );
 
       cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -676,15 +738,16 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         description: 'Test description',
         start: [1, 1, 2020],
         end: [1, 2, 2023],
-        totalCosts: 20,
+        totalCosts: 0,
         hourly: false,
-        FFYcosts: [10, 10]
+        FFYcosts: [0, 0]
       };
 
       cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);
 
       cy.findByRole('button', { name: /Add Contractor/i }).click();
+      cy.findByRole('button', { name: /Add Contractor/i }).should('not.exist');
 
       cy.findByRole('button', { name: /Cancel/i }).click();
 
@@ -782,30 +845,30 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.75,
-                federalShareAmount: 8,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.25,
                 stateShareAmount: 2,
-                totalComputableMedicaidCost: 10
+                totalComputableMedicaidCost: 150000
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.5,
-                federalShareAmount: 5,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.5,
                 stateShareAmount: 5,
-                totalComputableMedicaidCost: 10
+                totalComputableMedicaidCost: 150000
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.9,
-                federalShareAmount: 9,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.1,
                 stateShareAmount: 1,
-                totalComputableMedicaidCost: 10
+                totalComputableMedicaidCost: 150000
               });
             });
         });
@@ -819,13 +882,19 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.contains('State Staff')
                 .parent()
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
-                .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should(
+                  'have.text',
+                  `${keyPersons[0].name} (APD Key Personnel)$0`
+                )
                 .next()
                 .should(
                   'have.text',
-                  'Not specified (APD Key Personnel)$0×0 FTE=$0'
+                  `${keyPersons[1].name} (APD Key Personnel)$0`
+                )
+                .next()
+                .should(
+                  'have.text',
+                  `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
                 )
                 .next()
                 .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000')
@@ -838,7 +907,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should('have.text', 'Test Private Contractor$10');
+                .should('have.text', 'Test Private Contractor$0');
             });
         });
       });
@@ -874,15 +943,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .as('stateStaff');
           cy.get('@stateStaff')
             .eq(0)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', `${keyPersons[0].name} (APD Key Personnel)$0`);
           cy.get('@stateStaff')
             .eq(1)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', `${keyPersons[1].name} (APD Key Personnel)$0`);
           cy.get('@stateStaff')
             .eq(2)
             .should(
               'have.text',
-              'Not specified (APD Key Personnel)$0×0 FTE=$0'
+              `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
             );
           cy.get('@stateStaff')
             .eq(3)
@@ -904,7 +973,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Private Contractor'
             })
             .eq(0)
-            .should('have.text', 'Test Private Contractor$10');
+            .should('have.text', 'Test Private Contractor$0');
         });
       });
 
@@ -925,25 +994,25 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .first()
         .should(
           'have.text',
-          '1. Primary Point of Contact name not specified' +
+          `1. ${keyPersons[0].name}` +
             'Primary APD Point of Contact' +
-            'Role not specified' +
-            'Email: ' +
+            `${keyPersons[0].position}` +
+            `Email: ${keyPersons[0].email}` +
             'Total cost: $0'
         )
         .next()
         .should(
           'have.text',
-          '2. Key Personnel name not specified' +
-            'Role not specified' +
-            'Email: ' +
+          `2. ${keyPersons[1].name}` +
+            `${keyPersons[1].position}` +
+            `Email: ${keyPersons[1].email}` +
             'Total cost: $0'
         );
 
       // Create string to check for personnel who is chargeable for the project for certain years.
-      let str = '3. Key Personnel name not specifiedRole not specifiedEmail: ';
+      let str = `3. ${keyPersons[2].name}${keyPersons[2].position}Email: ${keyPersons[2].email}`;
       str += years
-        .map(year => `FFY ${year} Cost: $0 | FTE: 0 | Total: $0`)
+        .map(year => `FFY ${year} Cost: $100,000 | FTE: 0.5 | Total: $50,000`)
         .join('');
 
       cy.log(JSON.stringify(years));
@@ -997,7 +1066,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         );
 
       const privateContractorCosts = years
-        .map(year => `FFY ${year} Cost: $10`)
+        .map(year => `FFY ${year} Cost: $0`)
         .join('');
       cy.findByRole('heading', {
         name: /Activity 1: Program AdministrationPrivate Contractor Costs/i
@@ -1018,7 +1087,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             '/'
           )} - ${privateContractor.end.join(
             '/'
-          )}Total Contract Cost: $20${privateContractorCosts}`
+          )}Total Contract Cost: $0${privateContractorCosts}`
         );
 
       cy.then(() => {
@@ -1029,13 +1098,19 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.contains('State Staff')
                 .parent()
                 .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
-                .next()
-                .should('have.text', 'Not specified (APD Key Personnel)$0')
+                .should(
+                  'have.text',
+                  `${keyPersons[0].name} (APD Key Personnel)$0`
+                )
                 .next()
                 .should(
                   'have.text',
-                  'Not specified (APD Key Personnel)$0×0 FTE=$0'
+                  `${keyPersons[1].name} (APD Key Personnel)$0`
+                )
+                .next()
+                .should(
+                  'have.text',
+                  `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
                 )
                 .next()
                 .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000')
@@ -1048,7 +1123,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should('have.text', 'Test Private Contractor$10');
+                .should('have.text', 'Test Private Contractor$0');
             });
         });
       });
@@ -1077,15 +1152,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .as('stateStaff');
           cy.get('@stateStaff')
             .eq(0)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', `${keyPersons[0].name} (APD Key Personnel)$0`);
           cy.get('@stateStaff')
             .eq(1)
-            .should('have.text', 'Not specified (APD Key Personnel)$0');
+            .should('have.text', `${keyPersons[1].name} (APD Key Personnel)$0`);
           cy.get('@stateStaff')
             .eq(2)
             .should(
               'have.text',
-              'Not specified (APD Key Personnel)$0×0 FTE=$0'
+              `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
             );
           cy.get('@stateStaff')
             .eq(3)
@@ -1107,7 +1182,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Private Contractor'
             })
             .eq(0)
-            .should('have.text', 'Test Private Contractor$10');
+            .should('have.text', 'Test Private Contractor$0');
         });
       });
     });

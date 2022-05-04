@@ -16,7 +16,7 @@ import {
   setMedicaidOfficeCity,
   setMedicaidOfficeState,
   setMedicaidOfficeZip
-} from '../../../actions/editApd';
+} from '../../../redux/actions/editApd';
 
 describe('apd state profile, Medicaid office component', () => {
   const props = {

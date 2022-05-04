@@ -19,13 +19,21 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
     cy.useStateStaff();
 
     cy.findByRole('button', { name: /Create new/i }).click();
-    cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
+    cy.findByRole(
+      'heading',
+      { name: /APD Overview/i },
+      { timeout: 100000 }
+    ).should('exist');
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
       cy.log({ apdUrl });
       apdId = apdUrl.split('/').pop();
       cy.log({ apdId });
     });
+
+    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+      years.push(list[index].value)
+    );
   });
 
   beforeEach(() => {
@@ -47,9 +55,6 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
 
       it('should have two checked years', () => {
         cy.get('[type="checkbox"][checked]').should('have.length', 2);
-        cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-          years.push(list[index].value)
-        );
       });
     });
 

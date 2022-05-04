@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { logout as dispatchLogout } from '../../actions/auth';
+import { logout as dispatchLogout } from '../../redux/actions/auth';
 
 const Logout = ({ authenticated, logout }) => {
   const history = useHistory();

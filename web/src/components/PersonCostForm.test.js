@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event';
 import PersonCostForm from './PersonCostForm';
 
 const defaultProps = {
-  value: {
+  items: {
     2022: {
       amt: 100,
       perc: 1
@@ -33,17 +33,17 @@ const setup = async (props = {}) => {
   return renderUtils;
 };
 
-describe('the ContractorResourceForm component', () => {
+describe('the PersonCostForm component', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
   
   test('renders correctly with default props', async () => {
     await setup();
-    expect(screen.getAllByLabelText(`Cost with benefits`)[0]).toHaveValue(`${defaultProps.value[2022].amt}`);
-    expect(screen.getAllByLabelText(`Number of FTEs`)[0]).toHaveValue(`${defaultProps.value[2022].perc}`);
-    expect(screen.getAllByLabelText(`Cost with benefits`)[1]).toHaveValue(`${defaultProps.value[2023].amt}`);
-    expect(screen.getAllByLabelText(`Number of FTEs`)[1]).toHaveValue(`${defaultProps.value[2023].perc}`);
+    expect(screen.getAllByLabelText(`Cost with benefits`)[0]).toHaveValue(`${defaultProps.items[2022].amt}`);
+    expect(screen.getAllByLabelText(`Number of FTEs`)[0]).toHaveValue(`${defaultProps.items[2022].perc}`);
+    expect(screen.getAllByLabelText(`Cost with benefits`)[1]).toHaveValue(`${defaultProps.items[2023].amt}`);
+    expect(screen.getAllByLabelText(`Number of FTEs`)[1]).toHaveValue(`${defaultProps.items[2023].perc}`);
   });
   
   test('renders error when no number is provided for cost', async () => {

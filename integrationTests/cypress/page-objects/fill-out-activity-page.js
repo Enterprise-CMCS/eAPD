@@ -81,14 +81,14 @@ class FillOutActivityPage {
   
     _.forEach(staffList, (staff, i) => {
       staffExpensesPage.addStaff();
-      staffExpensesPage.fillStaff(
+      staffExpensesPage.fillStaff({
         years,
-        i,
-        staff.title,
-        staff.description,
-        staff.costs,
-        staff.ftes
-      );
+        staffIndex: i,
+        title: staff.title,
+        description: staff.description,
+        costs: staff.costs,
+        ftes: staff.ftes
+      });
       staffExpensesPage.verifyStaff(
         i,
         staff.title,
@@ -109,8 +109,6 @@ class FillOutActivityPage {
             staffExpensesPage.deleteStaff(0);
           }
         });
-  
-      // cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 1);
   
       // Check that the first staff on the page (index 0) has the second
       // staff's info
