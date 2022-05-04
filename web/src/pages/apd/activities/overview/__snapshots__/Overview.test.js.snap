@@ -7,7 +7,7 @@ exports[`activity overview/summary section (in the activity body) renders correc
   nested={false}
   resource="activities.overview"
 >
-  <Connect(NameAndFundingSourceForm)
+  <Connect(Component)
     index={37}
     item={
       Object {
@@ -27,13 +27,96 @@ exports[`activity overview/summary section (in the activity body) renders correc
     >
       Provide a short overview of the activity.
     </FormLabel>
-    <Connect(RichText)
-      editorClassName="rte-textarea-l"
-      id="activity-short-overview-field"
-      onSync={[Function]}
+    <Component
+      control={
+        Object {
+          "_defaultValues": Object {
+            "description": undefined,
+            "summary": undefined,
+          },
+          "_executeSchema": [Function],
+          "_fields": Object {},
+          "_formState": Object {
+            "dirtyFields": Object {},
+            "errors": Object {},
+            "isDirty": false,
+            "isSubmitSuccessful": false,
+            "isSubmitted": false,
+            "isSubmitting": false,
+            "isValid": false,
+            "isValidating": false,
+            "submitCount": 0,
+            "touchedFields": Object {},
+          },
+          "_formValues": Object {
+            "description": undefined,
+            "summary": undefined,
+          },
+          "_getDirty": [Function],
+          "_getFieldArray": [Function],
+          "_getWatch": [Function],
+          "_names": Object {
+            "array": Set {},
+            "mount": Set {},
+            "unMount": Set {},
+            "watch": Set {},
+          },
+          "_options": Object {
+            "defaultValues": Object {
+              "description": undefined,
+              "summary": undefined,
+            },
+            "mode": "onBlur",
+            "reValidateMode": "onBlur",
+            "resolver": [Function],
+            "shouldFocusError": true,
+          },
+          "_proxyFormState": Object {
+            "dirtyFields": false,
+            "errors": "all",
+            "isDirty": false,
+            "isValid": false,
+            "isValidating": false,
+            "touchedFields": false,
+          },
+          "_removeUnmounted": [Function],
+          "_stateFlags": Object {
+            "action": false,
+            "mount": false,
+            "watch": false,
+          },
+          "_subjects": Object {
+            "array": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "state": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "watch": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+          },
+          "_updateFieldArray": [Function],
+          "_updateValid": [Function],
+          "getFieldState": [Function],
+          "register": [Function],
+          "unregister": [Function],
+        }
+      }
+      name="summary"
+      render={[Function]}
     />
   </div>
-  <Connect(Schedule)
+  <Connect(Component)
     activityIndex={37}
   />
   <div
@@ -47,10 +130,93 @@ exports[`activity overview/summary section (in the activity body) renders correc
     >
       Include as much detail as is necessary to explain the activity.
     </FormLabel>
-    <Connect(RichText)
-      editorClassName="rte-textarea-l"
-      id="activity-description-field"
-      onSync={[Function]}
+    <Component
+      control={
+        Object {
+          "_defaultValues": Object {
+            "description": undefined,
+            "summary": undefined,
+          },
+          "_executeSchema": [Function],
+          "_fields": Object {},
+          "_formState": Object {
+            "dirtyFields": Object {},
+            "errors": Object {},
+            "isDirty": false,
+            "isSubmitSuccessful": false,
+            "isSubmitted": false,
+            "isSubmitting": false,
+            "isValid": false,
+            "isValidating": false,
+            "submitCount": 0,
+            "touchedFields": Object {},
+          },
+          "_formValues": Object {
+            "description": undefined,
+            "summary": undefined,
+          },
+          "_getDirty": [Function],
+          "_getFieldArray": [Function],
+          "_getWatch": [Function],
+          "_names": Object {
+            "array": Set {},
+            "mount": Set {},
+            "unMount": Set {},
+            "watch": Set {},
+          },
+          "_options": Object {
+            "defaultValues": Object {
+              "description": undefined,
+              "summary": undefined,
+            },
+            "mode": "onBlur",
+            "reValidateMode": "onBlur",
+            "resolver": [Function],
+            "shouldFocusError": true,
+          },
+          "_proxyFormState": Object {
+            "dirtyFields": false,
+            "errors": "all",
+            "isDirty": false,
+            "isValid": false,
+            "isValidating": false,
+            "touchedFields": false,
+          },
+          "_removeUnmounted": [Function],
+          "_stateFlags": Object {
+            "action": false,
+            "mount": false,
+            "watch": false,
+          },
+          "_subjects": Object {
+            "array": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "state": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "watch": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+          },
+          "_updateFieldArray": [Function],
+          "_updateValid": [Function],
+          "getFieldState": [Function],
+          "register": [Function],
+          "unregister": [Function],
+        }
+      }
+      name="description"
+      render={[Function]}
     />
   </div>
   <div

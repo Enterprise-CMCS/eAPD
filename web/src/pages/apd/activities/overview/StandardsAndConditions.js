@@ -105,7 +105,7 @@ const StandardsAndConditions = forwardRef(
             <Controller
               name="doesNotSupport"
               control={control}
-              render={({ field: { onChange, ...props } }) => (
+              render={({ field: { ...props } }) => (
                 <TextArea
                   {...props}
                   label="If this activity does not support the Medicaid standards and conditions, please explain."

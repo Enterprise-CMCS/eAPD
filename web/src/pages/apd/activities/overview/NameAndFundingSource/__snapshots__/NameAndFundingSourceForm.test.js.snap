@@ -2,39 +2,181 @@
 
 exports[`the activity name and funding source component renders correctly 1`] = `
 <Fragment>
-  <TextField
-    className="remove-clearfix"
-    label="Activity name"
-    name="activity-name"
-    onChange={[Function]}
-    type="text"
-    value="Buying bikes for Huey, Dewey, and Louie"
-  />
-  <ChoiceList
-    choices={
-      Array [
-        Object {
-          "checked": false,
-          "label": "HIT",
-          "value": "HIT",
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "fundingSource": "Uncle Scrooge",
+          "name": "Buying bikes for Huey, Dewey, and Louie",
         },
-        Object {
-          "checked": false,
-          "label": "HIE",
-          "value": "HIE",
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
         },
-        Object {
-          "checked": false,
-          "label": "MMIS",
-          "value": "MMIS",
+        "_formValues": Object {
+          "fundingSource": "Uncle Scrooge",
+          "name": "Buying bikes for Huey, Dewey, and Louie",
         },
-      ]
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "fundingSource": "Uncle Scrooge",
+            "name": "Buying bikes for Huey, Dewey, and Louie",
+          },
+          "mode": "onBlur",
+          "reValidateMode": "onBlur",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": false,
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
     }
-    label="Program type"
-    labelClassName="ds-u-margin-bottom--1"
-    name="program-type"
-    onChange={[Function]}
-    type="radio"
+    name="name"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "fundingSource": "Uncle Scrooge",
+          "name": "Buying bikes for Huey, Dewey, and Louie",
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "fundingSource": "Uncle Scrooge",
+          "name": "Buying bikes for Huey, Dewey, and Louie",
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "fundingSource": "Uncle Scrooge",
+            "name": "Buying bikes for Huey, Dewey, and Louie",
+          },
+          "mode": "onBlur",
+          "reValidateMode": "onBlur",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": false,
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="fundingSource"
+    render={[Function]}
   />
 </Fragment>
 `;

@@ -17,8 +17,7 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     <p
       className="ds-u-margin-bottom--3"
     >
-      Include a description about how this activity will support the Medicaid standards and conditions
-       
+      Include a description about how this activity will support the Medicaid standards and conditions 
       <a
         href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112"
         rel="noreferrer"
@@ -28,26 +27,184 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
       </a>
       .
     </p>
-    <Connect(RichText)
-      content="support"
-      editorClassName="rte-textarea-1"
-      id="standards-and-conditions-supports-field"
-      onSync={[Function]}
+    <Component
+      control={
+        Object {
+          "_defaultValues": Object {
+            "doesNotSupport": "does not support",
+            "supports": "support",
+          },
+          "_executeSchema": [Function],
+          "_fields": Object {},
+          "_formState": Object {
+            "dirtyFields": Object {},
+            "errors": Object {},
+            "isDirty": false,
+            "isSubmitSuccessful": false,
+            "isSubmitted": false,
+            "isSubmitting": false,
+            "isValid": false,
+            "isValidating": false,
+            "submitCount": 0,
+            "touchedFields": Object {},
+          },
+          "_formValues": Object {
+            "doesNotSupport": "does not support",
+            "supports": "support",
+          },
+          "_getDirty": [Function],
+          "_getFieldArray": [Function],
+          "_getWatch": [Function],
+          "_names": Object {
+            "array": Set {},
+            "mount": Set {},
+            "unMount": Set {},
+            "watch": Set {},
+          },
+          "_options": Object {
+            "defaultValues": Object {
+              "doesNotSupport": "does not support",
+              "supports": "support",
+            },
+            "mode": "onBlur",
+            "reValidateMode": "onBlur",
+            "resolver": [Function],
+            "shouldFocusError": true,
+          },
+          "_proxyFormState": Object {
+            "dirtyFields": false,
+            "errors": "all",
+            "isDirty": false,
+            "isValid": false,
+            "isValidating": false,
+            "touchedFields": false,
+          },
+          "_removeUnmounted": [Function],
+          "_stateFlags": Object {
+            "action": false,
+            "mount": false,
+            "watch": false,
+          },
+          "_subjects": Object {
+            "array": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "state": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "watch": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+          },
+          "_updateFieldArray": [Function],
+          "_updateValid": [Function],
+          "getFieldState": [Function],
+          "register": [Function],
+          "unregister": [Function],
+        }
+      }
+      name="supports"
+      render={[Function]}
     />
     <div
       className="ds-c-choice__checkedChild ds-u-margin-top--3"
     >
-      <TextArea
-        label="If this activity does not support the Medicaid standards and conditions, please explain."
-        name="activity-set-standards-and-conditions-non-support"
-        onChange={[Function]}
-        rows={6}
-        style={
+      <Component
+        control={
           Object {
-            "maxWidth": "initial",
+            "_defaultValues": Object {
+              "doesNotSupport": "does not support",
+              "supports": "support",
+            },
+            "_executeSchema": [Function],
+            "_fields": Object {},
+            "_formState": Object {
+              "dirtyFields": Object {},
+              "errors": Object {},
+              "isDirty": false,
+              "isSubmitSuccessful": false,
+              "isSubmitted": false,
+              "isSubmitting": false,
+              "isValid": false,
+              "isValidating": false,
+              "submitCount": 0,
+              "touchedFields": Object {},
+            },
+            "_formValues": Object {
+              "doesNotSupport": "does not support",
+              "supports": "support",
+            },
+            "_getDirty": [Function],
+            "_getFieldArray": [Function],
+            "_getWatch": [Function],
+            "_names": Object {
+              "array": Set {},
+              "mount": Set {},
+              "unMount": Set {},
+              "watch": Set {},
+            },
+            "_options": Object {
+              "defaultValues": Object {
+                "doesNotSupport": "does not support",
+                "supports": "support",
+              },
+              "mode": "onBlur",
+              "reValidateMode": "onBlur",
+              "resolver": [Function],
+              "shouldFocusError": true,
+            },
+            "_proxyFormState": Object {
+              "dirtyFields": false,
+              "errors": "all",
+              "isDirty": false,
+              "isValid": false,
+              "isValidating": false,
+              "touchedFields": false,
+            },
+            "_removeUnmounted": [Function],
+            "_stateFlags": Object {
+              "action": false,
+              "mount": false,
+              "watch": false,
+            },
+            "_subjects": Object {
+              "array": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "state": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "watch": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+            },
+            "_updateFieldArray": [Function],
+            "_updateValid": [Function],
+            "getFieldState": [Function],
+            "register": [Function],
+            "unregister": [Function],
           }
         }
-        value="does not support"
+        name="doesNotSupport"
+        render={[Function]}
       />
     </div>
   </div>

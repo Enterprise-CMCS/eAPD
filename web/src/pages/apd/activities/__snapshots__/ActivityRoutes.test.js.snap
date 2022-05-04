@@ -70,10 +70,10 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
       id={null}
       resource={null}
     >
-      <Connect(ActivityOverview)
+      <Connect(Component)
         activityIndex={3}
       />
-      <Connect(StandardsAndConditions)
+      <Connect(Component)
         activityIndex={3}
       />
     </Section>
