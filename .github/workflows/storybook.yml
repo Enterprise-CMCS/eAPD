@@ -21,7 +21,9 @@ jobs:
           node-version: '16.15.0'
       - name: Install dependencies
         working-directory: ./web
-        run: yarn
+        run: |
+          yarn install --frozen-lockfile
+          yarn build:storybook
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         # Chromatic GitHub Action options
@@ -29,9 +31,7 @@ jobs:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GH_TOKEN }}
-          buildScriptName: build:storybook
-          workingDir: ./web
-          # storybookBuildDir: ./docs-build
+          storybookBuildDir: docs-build
           allowConsoleErrors: true
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.8
