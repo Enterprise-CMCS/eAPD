@@ -1,6 +1,6 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useEffect, forwardRef } from 'react';
+import React, { useEffect, useReducer, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -19,6 +19,7 @@ const MilestoneForm = forwardRef(
     const {
       control,
       formState: { errors, isValid },
+      getFieldState,
       getValues,
       setValue
     } = useForm({
@@ -37,6 +38,7 @@ const MilestoneForm = forwardRef(
       setValue(`milestone`, value);
 
     useEffect(() => {
+      console.log("something changed")
       setFormValid(isValid);
     }, [isValid, errors]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -66,16 +68,23 @@ const MilestoneForm = forwardRef(
           )} 
         />
         <Controller
-          control={control}
           name="endDate"
-          render={({ field: { value, ...props } }) => (
+          control={control}
+          render={({
+            field: { onChange, onBlur, ...props },
+            formState: { isTouched }
+          }) => (
             <DateField
               {...props}
+              isTouched={isTouched}
               label="Target completion date"
-              hint=""
-              name="endDate"
-              value={value}
-              onChange={changeDate}
+              onChange={(e, dateStr) => onChange(dateStr)}
+              onComponentBlur={() => {
+                onBlur();
+                if (getFieldState('end').isTouched) {
+                  trigger('end');
+                }
+              }}
               errorMessage={errors?.endDate?.message}
               errorPlacement="bottom"
             />
