@@ -31,7 +31,6 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
             "index": [Function],
             "item": [Function],
             "saveNonPersonnelCost": [Function],
-            "setFormValid": [Function],
           },
           "render": [Function],
         },
