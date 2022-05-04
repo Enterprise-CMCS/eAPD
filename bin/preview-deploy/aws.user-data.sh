@@ -77,7 +77,6 @@ sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra
 
 # Create app logs and directories
 # These have been moved to bootstrap script
-chown ec2-user:eapd
 #mkdir -p /app/api/logs
 #touch /app/api/logs/eAPD-API-error-0.log
 #touch /app/api/logs/eAPD-API-out-0.log
@@ -122,7 +121,7 @@ sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
 
-sudo chown -R ec2-user:eapd /apps
+sudo chown -R ec2-user:eapd /app
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
@@ -161,6 +160,7 @@ echo "module.exports = {
 };" > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
+pm2 save
 
 NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
 E_USER
