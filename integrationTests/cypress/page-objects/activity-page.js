@@ -133,6 +133,17 @@ class ActivityPage {
     });
   };
 
+  checkHourlyCosts = ({ years, FFYcosts }) => {
+    cy.then(() => {
+      years.forEach((year, i) => {
+        const convert = addCommas(FFYcosts[i][1]);
+        cy.contains(
+          `FFY ${year} Cost:Number of Hours:${FFYcosts[i][0]}Hourly Rate: $${convert}/hour`
+        ).should('exist');
+      });
+    });
+  };
+
   checkOtherStateExpensesOutput = ({ category, years, FFYcosts }) => {
     cy.contains(category).should('exist');
     this.checkFFYcosts({ years, FFYcosts });
@@ -145,7 +156,8 @@ class ActivityPage {
     end,
     totalCosts,
     years,
-    FFYcosts
+    FFYcosts,
+    hourly
   }) => {
     const dateRange = getDateRange(start, end);
 
@@ -155,7 +167,11 @@ class ActivityPage {
     cy.contains(`Total Contract Cost: $${addCommas(totalCosts)}`).should(
       'exist'
     );
-    this.checkFFYcosts({ years, FFYcosts });
+    if (hourly) {
+      this.checkHourlyCosts({ years, FFYcosts });
+    } else {
+      this.checkFFYcosts({ years, FFYcosts });
+    }
   };
 }
 

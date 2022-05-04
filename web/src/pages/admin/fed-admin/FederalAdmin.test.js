@@ -3,9 +3,9 @@ import React from 'react';
 import {
   renderWithConnection,
   screen,
-  waitFor,
   waitForElementToBeRemoved,
-  fireEvent
+  fireEvent,
+  within
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -108,6 +108,18 @@ const mockPendingAffiliation = {
   ]
 };
 
+const setup = (props = {}, options = {}) =>
+  renderWithConnection(<FederalAdmin {...props} />, options);
+
+const loadTab = async tab => {
+  fireEvent.click(screen.getByRole('tab', { name: tab }));
+  await waitForElementToBeRemoved(() =>
+    within(screen.getByRole('tabpanel', { name: tab })).queryByText(
+      'Loading...'
+    )
+  );
+};
+
 describe('<FederalAdmin />', () => {
   beforeEach(() => {
     fetchMock.resetHistory();
@@ -118,20 +130,29 @@ describe('<FederalAdmin />', () => {
   describe('with no affiliations', () => {
     beforeEach(async () => {
       fetchMock.onGet(`/states/fd/affiliations?status=pending`).reply(200, []);
-      renderWithConnection(<FederalAdmin />, {
-        initialState
-      });
-      fireEvent.click(screen.getByRole('tab', { name: 'Requests' }));
-      await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
     });
 
     it('should render no results message', async () => {
+      setup(
+        {},
+        {
+          initialState
+        }
+      );
+      await loadTab('Requests');
       expect(
         screen.getAllByText('No users on this tab at this time')
       ).toBeTruthy();
     });
 
     it('should render correct tabs', async () => {
+      setup(
+        {},
+        {
+          initialState
+        }
+      );
+      await loadTab('Requests');
       expect(screen.getByText('Requests')).toBeTruthy();
       expect(screen.getByText('Active')).toBeTruthy();
       expect(screen.getByText('Inactive')).toBeTruthy();
@@ -143,18 +164,27 @@ describe('<FederalAdmin />', () => {
       fetchMock
         .onGet(`/states/fd/affiliations?status=pending`)
         .reply(200, [mockPendingAffiliation]);
-      renderWithConnection(<FederalAdmin />, {
-        initialState
-      });
-      fireEvent.click(screen.getByRole('tab', { name: 'Requests' }));
-      await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
     });
 
-    it('renders the user in the affiliation table', () => {
+    it('renders the user in the affiliation table', async () => {
+      setup(
+        {},
+        {
+          initialState
+        }
+      );
+      await loadTab('Requests');
       expect(screen.getByText(mockPendingAffiliation.displayName)).toBeTruthy();
     });
 
     xit('shows edit role dialog when clicking approve', async () => {
+      setup(
+        {},
+        {
+          initialState
+        }
+      );
+      await loadTab('Requests');
       fireEvent.click(screen.getByText('Approve'));
       expect(screen.getByRole('heading', { name: 'Edit Role' })).toBeTruthy();
       fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
@@ -162,6 +192,13 @@ describe('<FederalAdmin />', () => {
     });
 
     xit('shows confirmation dialog when clicking deny', async () => {
+      setup(
+        {},
+        {
+          initialState
+        }
+      );
+      await loadTab('Requests');
       fireEvent.click(screen.getByText('Deny'));
       expect(screen.getByRole('heading', { name: 'Deny' })).toBeTruthy();
       fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
@@ -175,20 +212,29 @@ describe('<FederalAdmin />', () => {
       fetchMock
         .onGet(`/states/fd/affiliations?status=active`)
         .reply(200, [mockSingleAffiliation]);
-      renderWithConnection(<FederalAdmin />, {
-        initialState
-      });
-      fireEvent.click(screen.getByRole('tab', { name: 'Active' }));
-      await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
     });
 
     it('renders the affiliation in the active tab', async () => {
+      setup(
+        {},
+        {
+          initialState
+        }
+      );
+      await loadTab('Active');
       expect(
-        screen.queryAllByText(mockSingleAffiliation.displayName)
+        screen.getAllByText(mockSingleAffiliation.displayName)
       ).toBeTruthy();
     });
 
     it('renders sub affiliation state', async () => {
+      setup(
+        {},
+        {
+          initialState
+        }
+      );
+      await loadTab('Active');
       expect(screen.getAllByText('LA')).toBeTruthy();
     });
   });
@@ -199,25 +245,32 @@ describe('<FederalAdmin />', () => {
       fetchMock
         .onGet(`/states/fd/affiliations?status=active`)
         .reply(200, [mockSingleAffiliation, mockMultiAffiliation]);
-      renderWithConnection(<FederalAdmin />, {
-        initialState
-      });
-      fireEvent.click(screen.getByRole('tab', { name: 'Active' }));
-      await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
     });
 
     it('renders both users', async () => {
-      await waitFor(() =>
-        expect(
-          screen.queryAllByText(mockSingleAffiliation.displayName)
-        ).toBeTruthy()
+      setup(
+        {},
+        {
+          initialState
+        }
       );
+      await loadTab('Active');
       expect(
-        screen.queryAllByText(mockMultiAffiliation.displayName)
+        await screen.findAllByText(mockSingleAffiliation.displayName)
+      ).toBeTruthy();
+      expect(
+        screen.getAllByText(mockMultiAffiliation.displayName)
       ).toBeTruthy();
     });
 
     it('renders sub affiliations state', async () => {
+      setup(
+        {},
+        {
+          initialState
+        }
+      );
+      await loadTab('Active');
       expect(screen.getAllByText('LA')).toHaveLength(2);
     });
   });

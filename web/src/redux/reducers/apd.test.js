@@ -418,12 +418,12 @@ describe('APD reducer', () => {
             contractorResources: [
               {
                 hourly: {
-                  1741: { hours: 0, rate: 0 },
+                  1741: { hours: null, rate: null },
                   1742: { hours: 20, rate: 22 },
                   1743: { hours: 25, rate: 27 }
                 },
                 years: {
-                  1741: 0,
+                  1741: null,
                   1742: 0,
                   1743: 0
                 }
@@ -432,7 +432,7 @@ describe('APD reducer', () => {
             expenses: [
               {
                 years: {
-                  1741: 0,
+                  1741: null,
                   1742: 0,
                   1743: 0
                 }
@@ -467,7 +467,7 @@ describe('APD reducer', () => {
             statePersonnel: [
               {
                 years: {
-                  1741: { amt: 0, perc: 0 },
+                  1741: { amt: null, perc: null },
                   1742: 0,
                   1743: 0
                 }
@@ -913,17 +913,17 @@ describe('APD reducer', () => {
                   end: '',
                   files: [],
                   hourly: {
-                    1403: { hours: 0, rate: 0 },
-                    1404: { hours: 0, rate: 0 }
+                    1403: { hours: null, rate: null },
+                    1404: { hours: null, rate: null }
                   },
-                  useHourly: false,
+                  useHourly: null,
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   name: '',
                   start: '',
-                  totalCost: 0,
+                  totalCost: null,
                   years: {
-                    1403: 0,
-                    1404: 0
+                    1403: null,
+                    1404: null
                   }
                 }
               ]
@@ -1039,8 +1039,8 @@ describe('APD reducer', () => {
                   description: '',
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   years: {
-                    1403: 0,
-                    1404: 0
+                    1403: null,
+                    1404: null
                   }
                 }
               ]
@@ -1074,8 +1074,8 @@ describe('APD reducer', () => {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   title: '',
                   years: {
-                    1403: { amt: 0, perc: 0 },
-                    1404: { amt: 0, perc: 0 }
+                    1403: { amt: null, perc: null },
+                    1404: { amt: null, perc: null }
                   }
                 }
               ]

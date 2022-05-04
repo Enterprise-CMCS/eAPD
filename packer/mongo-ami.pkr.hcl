@@ -8,6 +8,7 @@ variable "mongo_initdb_database" {}
 variable "mongo_database_username"{}
 variable "mongo_database_password" {}
 variable "mongo_admin_url" {}
+variable "mongo_url" {}
 variable "database_url" {}
 variable "okta_domain" {}
 variable "okta_api_key" {}
@@ -51,6 +52,7 @@ build {
             "MONGO_DATABASE_USERNAME=${var.mongo_database_username}",
             "MONGO_DATABASE_PASSWORD=${var.mongo_database_password}",
             "MONGO_ADMIN_URL=${var.mongo_admin_url}",
+            "MONGO_URL=${var.mongo_url}",
             "DATABASE_URL=${var.database_url}",
             "OKTA_DOMAIN=${var.okta_domain}",
             "OKTA_API_KEY=${var.okta_api_key}",

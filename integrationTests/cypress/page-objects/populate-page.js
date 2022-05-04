@@ -19,9 +19,9 @@ class PopulatePage {
 
   fillTextField = (className, string, index) => {
     if (Number.isInteger(index)) {
-      cy.get(`[class="${className}"]`).eq(index).type(string);
+      cy.get(`[class="${className}"]`).eq(index).type(string).blur();
     } else {
-      cy.get(`[class="${className}"]`).clear().type(string);
+      cy.get(`[class="${className}"]`).clear().type(string).blur();
     }
   };
 
