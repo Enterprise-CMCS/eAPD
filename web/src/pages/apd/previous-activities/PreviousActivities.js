@@ -6,12 +6,12 @@ import { titleCase } from 'title-case';
 import ApdPreviousActivityTableHI from './ApdPreviousActivityTable';
 import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
 import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
-import Waypoint from '../../../containers/ConnectedWaypoint';
-import { setPreviousActivitySummary } from '../../../actions/editApd';
+import Waypoint from '../../../components/ConnectedWaypoint';
+import { setPreviousActivitySummary } from '../../../redux/actions/editApd';
 import RichText from '../../../components/RichText';
 import { Section, Subsection } from '../../../components/Section';
 import { t } from '../../../i18n';
-import { selectPreviousActivitySummary } from '../../../reducers/apd.selectors';
+import { selectPreviousActivitySummary } from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const PreviousActivities = ({ previousActivitySummary, setSummary }) => {

@@ -27,7 +27,7 @@ class ActivitiesStateStaffExpensesPage {
   };
 
   // Open the indexth staff edit page, fill info, then click done.
-  fillStaff = (years, staffIndex, title, description, costs, ftes) => {
+  fillStaff = ({years, staffIndex, title, description, costs, ftes}) => {
     const staffNumber = staffIndex + 1;
   
     // Lower default typing delays for long titles/descriptions
@@ -143,7 +143,7 @@ class ActivitiesStateStaffExpensesPage {
 
     cy.get('[name="category"]').select(category);
 
-    cy.get('[name="desc"]').clear().type(desc, { delay: 1 });
+    cy.get('[name="desc"]').clear().type(desc);
 
     // There are multiple years to fill in for cost/FTE
     cy.get('[name="cost"]').each(($el, index) => {

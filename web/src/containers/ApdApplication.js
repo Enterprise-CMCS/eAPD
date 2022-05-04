@@ -10,19 +10,19 @@ import {
 import TagManager from 'react-gtm-module';
 
 import Sidebar from '../layout/nav/Sidebar';
-import UnexpectedError from './UnexpectedError';
-import { setApdToSelectOnLoad, selectApd } from '../actions/app';
+import UnexpectedError from '../components/UnexpectedError';
+import { setApdToSelectOnLoad, selectApd } from '../redux/actions/app';
 
 import ApdPageRoutes from '../pages/apd/ApdPageRoutes';
 import Loading from '../components/Loading';
 
-import { getAPDId } from '../reducers/apd';
+import { getAPDId } from '../redux/reducers/apd';
 
 import {
   getIsFedAdmin,
   getUserStateOrTerritory,
   getCanUserEditAPD
-} from '../reducers/user.selector';
+} from '../redux/selectors/user.selector';
 
 const ApdApplication = ({
   isAdmin,

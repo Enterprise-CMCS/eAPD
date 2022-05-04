@@ -7,20 +7,20 @@ import {
   useHistory as actualUseHistory
 } from 'react-router-dom';
 
-import { selectApd } from '../../actions/app';
-import { selectApdData } from '../../reducers/apd.selectors';
-import { selectBudget } from '../../reducers/budget.selectors';
-import { getAPDYearRange } from '../../reducers/apd';
-import { getUserStateOrTerritory } from '../../reducers/user.selector';
+import { selectApd } from '../../redux/actions/app';
+import { selectApdData } from '../../redux/selectors/apd.selectors';
+import { selectBudget } from '../../redux/selectors/budget.selectors';
+import { getAPDYearRange } from '../../redux/reducers/apd';
+import { getUserStateOrTerritory } from '../../redux/selectors/user.selector';
 import ApdStateProfile from './key-state-personnel/KeyStatePersonnelReadOnly';
-import ApdSummary from '../../containers/viewOnly/ApdSummary';
+import ApdSummary from './export/ReadOnlyApd';
 import PreviousActivities from './previous-activities/PreviousActivitiesReadOnly';
-import Activities from '../../containers/viewOnly/activities/All';
+import Activities from './activities/activities-dashboard/ActivitiesDashboardReadOnly';
 import ScheduleSummary from './schedule-summary/ScheduleSummaryReadOnly';
-import ProposedBudget from '../../containers/viewOnly/ProposedBudget';
-import AssuranceAndCompliance from '../../containers/viewOnly/AssurancesAndCompliance';
-import ExecutiveSummary from '../../containers/viewOnly/ExecutiveSummary';
-import ExportInstructions from '../../containers/viewOnly/Export';
+import ProposedBudget from './proposed-budget/ProposedBudgetReadOnly';
+import AssuranceAndCompliance from './assurances-and-compliance/AssurancesAndComplianceReadOnly';
+import ExecutiveSummary from './executive-summary/ExecutiveSummaryReadOnly';
+import ExportInstructions from './export/ExportReadOnly';
 import Loading from '../../components/Loading';
 
 const ApdViewOnly = ({

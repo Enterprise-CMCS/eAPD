@@ -290,7 +290,7 @@ function createNewInstance() {
     --security-group-ids $AWS_SECURITY_GROUP \
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
-    --key-name eapd_bbrooks \
+    --key-name tforkner_eapd \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT},{Key=cms-cloud-exempt:open-sg,Value=CLDSPT-5877}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'
@@ -301,7 +301,7 @@ function findAMI() {
   aws ec2 describe-images \
     --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
     --filter 'Name=is-public,Values=false' \
-    --filter 'Name=name,Values=EAST-RH 7-*Gold*(HVM)*' \
+    --filter 'Name=name,Values=eAPD Production AMI - *' \
     | jq -r -c 'sort_by(.date)|last|.id'
 }
 

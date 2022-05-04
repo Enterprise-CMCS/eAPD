@@ -17,11 +17,11 @@ module.exports = {
         transcludeMarkdown: true
       }
     },
-    '@storybook/addon-controls',
-    '@storybook/addon-links',
     '@storybook/addon-a11y',
-    '@storybook/addon-queryparams',
+    '@storybook/addon-actions',
+    '@storybook/addon-controls',
     '@storybook/addon-jest',
+    '@storybook/addon-links',
     'storybook-addon-designs'
   ],
   staticDirs: [{ from: '../src/static', to: '/static' }],

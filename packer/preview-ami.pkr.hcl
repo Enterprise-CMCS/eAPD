@@ -1,6 +1,6 @@
 variable "vpc_id" {}
 variable "subnet_id" {}
-variable "ami_name" {}
+#variable "ami_name" {}
 variable "gold_owner" {}
 variable "preview_mongo_database" {}
 variable "preview_mongo_initdb_root_username" {}
@@ -9,10 +9,11 @@ variable "preview_mongo_initdb_database" {}
 variable "preview_mongo_database_username" {}
 variable "preview_mongo_database_password" {}
 variable "preview_mongo_admin_url" {}
+variable "preview_mongo_url" {}
 variable "preview_database_url" {}
 variable "preview_okta_domain" {}
 variable "preview_okta_api_key" {}
-variable "preview_environment" {}
+variable "environment" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -51,10 +52,11 @@ build {
             "MONGO_DATABASE_USERNAME=${var.preview_mongo_database_username}",
             "MONGO_DATABASE_PASSWORD=${var.preview_mongo_database_password}",
             "MONGO_ADMIN_URL=${var.preview_mongo_admin_url}",
+            "MONGO_URL=${var.preview_mongo_url}",
             "DATABASE_URL=${var.preview_database_url}",
             "OKTA_DOMAIN=${var.preview_okta_domain}",
             "OKTA_API_KEY=${var.preview_okta_api_key}",
-            "ENVIRONMENT=${var.preview_environment}"
+            "ENVIRONMENT=${var.environment}"
         ]        
         script = "./bootstrap202202171243.sh"
     }

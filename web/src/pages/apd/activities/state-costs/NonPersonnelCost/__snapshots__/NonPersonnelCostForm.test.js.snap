@@ -1,0 +1,485 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the NonPersonnelCostForm component matches the snapshot 1`] = `
+<NonPersonnelCostForm
+  activityIndex={44}
+  index={83}
+  item={
+    Object {
+      "category": "cost category",
+      "description": "cost desc",
+      "years": Object {
+        "7473": 2398235,
+        "7474": 72323,
+      },
+    }
+  }
+  saveNonPersonnelCost={[MockFunction]}
+>
+  <form
+    index={83}
+    onSubmit={[Function]}
+  >
+    <h6
+      className="ds-h4"
+    >
+      Non-Personnel Cost 
+      84
+      :
+    </h6>
+    <Dropdown
+      autoFocus={true}
+      label="Category"
+      name="category"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Select an option",
+            "value": "",
+          },
+          Object {
+            "label": "Hardware, software, and licensing",
+            "value": "Hardware, software, and licensing",
+          },
+          Object {
+            "label": "Equipment and supplies",
+            "value": "Equipment and supplies",
+          },
+          Object {
+            "label": "Training and outreach",
+            "value": "Training and outreach",
+          },
+          Object {
+            "label": "Travel",
+            "value": "Travel",
+          },
+          Object {
+            "label": "Administrative operations",
+            "value": "Administrative operations",
+          },
+          Object {
+            "label": "Miscellaneous expenses for the project",
+            "value": "Miscellaneous expenses for the project",
+          },
+        ]
+      }
+      value="cost category"
+    >
+      <FormControl
+        component="div"
+        label="Category"
+        labelComponent="label"
+        render={[Function]}
+      >
+        <div
+          className=""
+        >
+          <FormLabel
+            component="label"
+            errorId="field_1-error"
+            fieldId="field_1"
+            id="field_1-label"
+          >
+            <label
+              className="ds-c-label"
+              htmlFor="field_1"
+              id="field_1-label"
+            >
+              <span
+                className=""
+              >
+                Category
+              </span>
+            </label>
+          </FormLabel>
+          <Select
+            autoFocus={true}
+            errorId="field_1-error"
+            errorPlacement="top"
+            id="field_1"
+            name="category"
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "label": "Select an option",
+                  "value": "",
+                },
+                Object {
+                  "label": "Hardware, software, and licensing",
+                  "value": "Hardware, software, and licensing",
+                },
+                Object {
+                  "label": "Equipment and supplies",
+                  "value": "Equipment and supplies",
+                },
+                Object {
+                  "label": "Training and outreach",
+                  "value": "Training and outreach",
+                },
+                Object {
+                  "label": "Travel",
+                  "value": "Travel",
+                },
+                Object {
+                  "label": "Administrative operations",
+                  "value": "Administrative operations",
+                },
+                Object {
+                  "label": "Miscellaneous expenses for the project",
+                  "value": "Miscellaneous expenses for the project",
+                },
+              ]
+            }
+            setRef={[Function]}
+            value="cost category"
+          >
+            <select
+              aria-invalid={false}
+              autoFocus={true}
+              className="ds-c-field"
+              id="field_1"
+              name="category"
+              onChange={[Function]}
+              value="cost category"
+            >
+              <option
+                key=""
+                value=""
+              >
+                Select an option
+              </option>
+              <option
+                key="Hardware, software, and licensing"
+                value="Hardware, software, and licensing"
+              >
+                Hardware, software, and licensing
+              </option>
+              <option
+                key="Equipment and supplies"
+                value="Equipment and supplies"
+              >
+                Equipment and supplies
+              </option>
+              <option
+                key="Training and outreach"
+                value="Training and outreach"
+              >
+                Training and outreach
+              </option>
+              <option
+                key="Travel"
+                value="Travel"
+              >
+                Travel
+              </option>
+              <option
+                key="Administrative operations"
+                value="Administrative operations"
+              >
+                Administrative operations
+              </option>
+              <option
+                key="Miscellaneous expenses for the project"
+                value="Miscellaneous expenses for the project"
+              >
+                Miscellaneous expenses for the project
+              </option>
+            </select>
+          </Select>
+        </div>
+      </FormControl>
+    </Dropdown>
+    <TextArea
+      label="Description"
+      name="desc"
+      onChange={[Function]}
+      rows={5}
+      value="cost desc"
+    >
+      <TextField
+        fieldClassName="visibility--screen"
+        label="Description"
+        multiline={true}
+        name="desc"
+        onChange={[Function]}
+        rows={5}
+        type="text"
+        value="cost desc"
+      >
+        <FormControl
+          className="ds-u-clearfix"
+          component="div"
+          label="Description"
+          labelComponent="label"
+          render={[Function]}
+        >
+          <div
+            className="ds-u-clearfix"
+          >
+            <FormLabel
+              component="label"
+              errorId="field_2-error"
+              fieldId="field_2"
+              id="field_2-label"
+            >
+              <label
+                className="ds-c-label"
+                htmlFor="field_2"
+                id="field_2-label"
+              >
+                <span
+                  className=""
+                >
+                  Description
+                </span>
+              </label>
+            </FormLabel>
+            <TextInput
+              errorId="field_2-error"
+              errorPlacement="top"
+              fieldClassName="visibility--screen"
+              id="field_2"
+              multiline={true}
+              name="desc"
+              onChange={[Function]}
+              rows={5}
+              setRef={[Function]}
+              type="text"
+              value="cost desc"
+            >
+              <textarea
+                aria-invalid={false}
+                className="ds-c-field visibility--screen"
+                id="field_2"
+                name="desc"
+                onChange={[Function]}
+                rows={5}
+                value="cost desc"
+              />
+            </TextInput>
+          </div>
+        </FormControl>
+      </TextField>
+      <div
+        className="visibility--print"
+      >
+        <span
+          key="cost desc"
+        >
+          cost desc
+          <br />
+        </span>
+      </div>
+    </TextArea>
+    <DollarField
+      key="7473"
+      label="FFY 7473 Cost"
+      name="cost"
+      onChange={[Function]}
+      size="medium"
+      value={2398235}
+    >
+      <NumberField
+        label="FFY 7473 Cost"
+        mask="currency"
+        min={null}
+        name="cost"
+        onBlur={null}
+        onChange={[Function]}
+        round={true}
+        size="medium"
+        value={2398235}
+      >
+        <TextField
+          label="FFY 7473 Cost"
+          mask="currency"
+          name="cost"
+          onBlur={[Function]}
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value="2,398,235"
+        >
+          <FormControl
+            className="ds-u-clearfix"
+            component="div"
+            label="FFY 7473 Cost"
+            labelComponent="label"
+            render={[Function]}
+          >
+            <div
+              className="ds-u-clearfix"
+            >
+              <FormLabel
+                component="label"
+                errorId="field_3-error"
+                fieldId="field_3"
+                id="field_3-label"
+              >
+                <label
+                  className="ds-c-label"
+                  htmlFor="field_3"
+                  id="field_3-label"
+                >
+                  <span
+                    className=""
+                  >
+                    FFY 7473 Cost
+                  </span>
+                </label>
+              </FormLabel>
+              <TextInput
+                errorId="field_3-error"
+                errorPlacement="top"
+                id="field_3"
+                mask="currency"
+                name="cost"
+                onBlur={[Function]}
+                onChange={[Function]}
+                setRef={[Function]}
+                size="medium"
+                type="text"
+                value="2,398,235"
+              >
+                <Mask
+                  mask="currency"
+                >
+                  <div
+                    className="ds-c-field-mask ds-c-field-mask--currency"
+                  >
+                    <div
+                      className="ds-c-field__before ds-c-field__before--currency"
+                    >
+                      $
+                    </div>
+                    <input
+                      aria-invalid={false}
+                      className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                      id="field_3"
+                      inputMode="numeric"
+                      name="cost"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      pattern="[0-9.,-]*"
+                      type="text"
+                      value="2,398,235"
+                    />
+                  </div>
+                </Mask>
+              </TextInput>
+            </div>
+          </FormControl>
+        </TextField>
+      </NumberField>
+    </DollarField>
+    <DollarField
+      key="7474"
+      label="FFY 7474 Cost"
+      name="cost"
+      onChange={[Function]}
+      size="medium"
+      value={72323}
+    >
+      <NumberField
+        label="FFY 7474 Cost"
+        mask="currency"
+        min={null}
+        name="cost"
+        onBlur={null}
+        onChange={[Function]}
+        round={true}
+        size="medium"
+        value={72323}
+      >
+        <TextField
+          label="FFY 7474 Cost"
+          mask="currency"
+          name="cost"
+          onBlur={[Function]}
+          onChange={[Function]}
+          size="medium"
+          type="text"
+          value="72,323"
+        >
+          <FormControl
+            className="ds-u-clearfix"
+            component="div"
+            label="FFY 7474 Cost"
+            labelComponent="label"
+            render={[Function]}
+          >
+            <div
+              className="ds-u-clearfix"
+            >
+              <FormLabel
+                component="label"
+                errorId="field_4-error"
+                fieldId="field_4"
+                id="field_4-label"
+              >
+                <label
+                  className="ds-c-label"
+                  htmlFor="field_4"
+                  id="field_4-label"
+                >
+                  <span
+                    className=""
+                  >
+                    FFY 7474 Cost
+                  </span>
+                </label>
+              </FormLabel>
+              <TextInput
+                errorId="field_4-error"
+                errorPlacement="top"
+                id="field_4"
+                mask="currency"
+                name="cost"
+                onBlur={[Function]}
+                onChange={[Function]}
+                setRef={[Function]}
+                size="medium"
+                type="text"
+                value="72,323"
+              >
+                <Mask
+                  mask="currency"
+                >
+                  <div
+                    className="ds-c-field-mask ds-c-field-mask--currency"
+                  >
+                    <div
+                      className="ds-c-field__before ds-c-field__before--currency"
+                    >
+                      $
+                    </div>
+                    <input
+                      aria-invalid={false}
+                      className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                      id="field_4"
+                      inputMode="numeric"
+                      name="cost"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      pattern="[0-9.,-]*"
+                      type="text"
+                      value="72,323"
+                    />
+                  </div>
+                </Mask>
+              </TextInput>
+            </div>
+          </FormControl>
+        </TextField>
+      </NumberField>
+    </DollarField>
+    <input
+      className="ds-u-visibility--hidden"
+      hidden={true}
+      type="submit"
+    />
+  </form>
+</NonPersonnelCostForm>
+`;

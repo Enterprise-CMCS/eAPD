@@ -4,9 +4,9 @@ import {
   EDIT_APD,
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
-} from './actions/editApd';
-import { saveApd } from './actions/app';
-import { setLatestActivity } from './actions/auth';
+} from './redux/actions/editApd';
+import { saveApd } from './redux/actions/app';
+import { setLatestActivity } from './redux/actions/auth';
 
 const saveMiddleware = (
   store,

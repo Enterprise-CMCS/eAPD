@@ -9,7 +9,7 @@ import CardForm from '../../components/CardForm';
 import { STATES } from '../../util/states';
 import axios from '../../util/api';
 
-import { selectAffiliation } from '../../actions/auth';
+import { selectAffiliation } from '../../redux/actions/auth';
 
 const statesWithFederal = [...STATES, { id: 'fd', name: 'Federal' }];
 

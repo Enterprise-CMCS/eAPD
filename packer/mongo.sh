@@ -79,6 +79,7 @@ export MONGO_INITDB_DATABASE="$MONGO_INITDB_DATABASE"
 export MONGO_DATABASE_USERNAME="$MONGO_DATABASE_USERNAME"
 export MONGO_DATABASE_PASSWORD="$MONGO_DATABASE_PASSWORD"
 export MONGO_ADMIN_URL="$MONGO_ADMIN_URL"
+export MONGO_URL="$MONGO_URL"
 export DATABASE_URL="$DATABASE_URL"
 export OKTA_DOMAIN="$OKTA_DOMAIN"
 export OKTA_API_KEY="$OKTA_API_KEY"
@@ -99,8 +100,8 @@ source ~/.bashrc
 
 # We're using Node 14, and we don't care about minor/patch versions, so always
 # get the latest.
-nvm install 16
-nvm alias default 16
+nvm install 16.15.0
+nvm alias default 16.15.0
 
 git clone --single-branch https://github.com/CMSgov/eAPD.git
 cd ~/eAPD/api
@@ -111,14 +112,13 @@ cd ~
 cat <<MONGOROOTUSERSEED > mongo-init.sh
 mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : '$MONGO_INITDB_DATABASE'}]});"
 MONGOROOTUSERSEED
-cd ~/eAPD/api
 sh ~/mongo-init.sh
-NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
-cd ~
 cat <<MONGOUSERSEED > mongo-user.sh
 mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 sh ~/mongo-user.sh
+cd ~/eAPD/api
+NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
 E_USER
 
 # Harden & Restart Mongo
