@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { INCENTIVE_ENTRIES } from '../../util';
+import { stringToNumber } from '../../util/formats';
 
 export const selectApds = ({ apd }) => apd;
 
@@ -80,14 +81,16 @@ export const selectPreviousActivityExpensesTotals = createSelector(
           actual:
             expenses.hithie.federalActual +
             [90, 75, 50].reduce(
-              (sum, ffp) => sum + expenses.mmis[ffp].federalActual,
+              (sum, ffp) =>
+                sum + stringToNumber(expenses.mmis[ffp].federalActual),
               0
             ),
           approved:
             expenses.hithie.totalApproved * 0.9 +
             [90, 75, 50].reduce(
               (sum, ffp) =>
-                sum + (expenses.mmis[ffp].totalApproved * ffp) / 100,
+                sum +
+                (stringToNumber(expenses.mmis[ffp].totalApproved) * ffp) / 100,
               0
             )
         }

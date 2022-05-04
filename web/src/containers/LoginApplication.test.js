@@ -1,11 +1,16 @@
 import React from 'react';
-import { renderWithConnection, waitFor, fireEvent } from 'apd-testing-library';
+import {
+  renderWithConnection,
+  waitFor,
+  fireEvent,
+  screen
+} from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../util/api';
 import LoginApplication from './LoginApplication';
 import * as mockAuth from '../util/auth';
 
-const props = {
+const defaultProps = {
   mfaConfig: jest.fn(),
   mfaAddPhone: jest.fn(),
   mfaActivate: jest.fn(),
@@ -30,6 +35,12 @@ const initialAuth = {
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
+const setup = (props = {}, options = {}) =>
+  renderWithConnection(
+    <LoginApplication {...defaultProps} {...props} />,
+    options
+  );
+
 describe('Login Application', () => {
   beforeEach(() => {
     fetchMock.reset();
@@ -45,9 +56,11 @@ describe('Login Application', () => {
     });
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
     jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => '1234567890');
-    props.authCheck.mockImplementation(() => Promise.resolve('/dashboard'));
-    const { getByText } = renderWithConnection(
-      <LoginApplication {...props} />,
+    defaultProps.authCheck.mockImplementation(() =>
+      Promise.resolve('/dashboard')
+    );
+    setup(
+      {},
       {
         initialState: {
           auth: {
@@ -59,91 +72,102 @@ describe('Login Application', () => {
     );
     // have to use waitFor because there is an async method in useEffect
     await waitFor(() => {
-      expect(getByText(/Validating your session/i)).toBeTruthy();
+      expect(screen.getByText(/Validating your session/i)).toBeTruthy();
     });
   });
 
   it('should show the consent banner if the user does not have a cookie', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => false);
     jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => null);
-    const { getByRole } = renderWithConnection(
-      <LoginApplication {...props} />,
+    setup(
+      {},
       {
         initialState: {
           auth: initialAuth
         }
       }
     );
-    expect(getByRole('button', { name: /Agree and continue/i })).toBeTruthy();
+    expect(
+      screen.getByRole('button', { name: /Agree and continue/i })
+    ).toBeTruthy();
   });
 
   it('should hide the consent banner if the user clicks agree', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => false);
     jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => null);
-    const { getByRole } = renderWithConnection(
-      <LoginApplication {...props} />,
+    setup(
+      {},
       {
         initialState: {
           auth: initialAuth
         }
       }
     );
-    expect(getByRole('button', { name: /Agree and continue/i })).toBeTruthy();
-    fireEvent.click(getByRole('button', { name: /Agree and continue/i }));
-    expect(getByRole('button', { name: /Log in/i })).toBeTruthy();
+    expect(
+      screen.getByRole('button', { name: /Agree and continue/i })
+    ).toBeTruthy();
+    fireEvent.click(
+      screen.getByRole('button', { name: /Agree and continue/i })
+    );
+    expect(screen.getByRole('button', { name: /Log in/i })).toBeTruthy();
   });
 
   it('displays an MFA authentication error message', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
-    const { getByText } = renderWithConnection(
-      <LoginApplication {...props} />,
+    setup(
+      {},
       {
         initialState: { auth: { ...initialAuth, error: 'MFA_AUTH_FAILED' } }
       }
     );
-    expect(getByText(/one-time password .* incorrect/i)).toBeTruthy();
+    expect(screen.getByText(/one-time password .* incorrect/i)).toBeTruthy();
   });
 
   it('displays an expired password error message', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
-    const { getByText } = renderWithConnection(
-      <LoginApplication {...props} />,
+    setup(
+      {},
       {
         initialState: { auth: { ...initialAuth, error: 'PASSWORD_EXPIRED' } }
       }
     );
-    expect(getByText(/password has expired/i)).toBeTruthy();
+    expect(screen.getByText(/password has expired/i)).toBeTruthy();
   });
 
   it('displays authentication error message', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
-    const { getAllByText } = renderWithConnection(
-      <LoginApplication {...props} />,
+    setup(
+      {},
       {
         initialState: { auth: { ...initialAuth, error: 'AUTH_FAILED' } }
       }
     );
-    expect(getAllByText(/is incorrect/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/is incorrect/i).length).toBeGreaterThan(0);
   });
 
   it('displays generic error message', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
-    const { getAllByText } = renderWithConnection(
-      <LoginApplication {...props} />,
+    setup(
+      {},
       {
         initialState: { auth: { ...initialAuth, error: 'generic error' } }
       }
     );
-    expect(getAllByText(/Something went wrong/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Something went wrong/i).length).toBeGreaterThan(
+      0
+    );
   });
 
   it('should redirect to root if authenticated', () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
-    const { history } = renderWithConnection(<LoginApplication {...props} />, {
-      initialState: {
-        auth: { ...initialAuth, authenticated: true }
+    const { history } = setup(
+      {},
+      {
+        initialState: {
+          auth: { ...initialAuth, authenticated: true }
+        }
       }
-    });
+    );
     expect(history.location.pathname).toEqual('/');
   });
 
@@ -157,26 +181,29 @@ describe('Login Application', () => {
     jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => '1234567890');
     const {
       history: { entries, index }
-    } = renderWithConnection(<LoginApplication {...props} />, {
-      initialHistory: [
-        { pathname: '/', state: { from: { pathname: '/dashboard' } } }
-      ],
-      initialState: {
-        auth: { ...initialAuth, authenticated: true, initialCheck: true }
+    } = setup(
+      {},
+      {
+        initialHistory: [
+          { pathname: '/', state: { from: { pathname: '/dashboard' } } }
+        ],
+        initialState: {
+          auth: { ...initialAuth, authenticated: true, initialCheck: true }
+        }
       }
-    });
+    );
     expect(entries[index - 1].pathname).toEqual('/dashboard');
   });
 
   it('should show the LoginApplication if user is not logged in but has consented', async () => {
     jest.spyOn(mockAuth, 'hasConsented').mockImplementation(() => true);
     jest.spyOn(mockAuth, 'getIdToken').mockImplementation(() => null);
-    const { getByRole } = renderWithConnection(
-      <LoginApplication {...props} />,
+    setup(
+      {},
       {
         initialState: { auth: initialAuth }
       }
     );
-    expect(getByRole('button', { name: /Log in/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Log in/i })).toBeTruthy();
   });
 });

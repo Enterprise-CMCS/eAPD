@@ -38,17 +38,12 @@ const FederalAdmin = ({
   const [limitedRoleTypes, setLimitedRoleTypes] = useState(roleTypes);
 
   useEffect(() => {
-    const controller = new AbortController();
     (async () => {
       if (activeTab !== 'letters') {
         setIsFetching(true);
-        await affiliations(currentState.id, activeTab, {
-          signal: controller.signal
-        });
+        await affiliations(currentState.id, activeTab);
         setIsFetching(false);
       }
-
-      return () => controller?.abort();
     })();
   }, [activeTab, currentState.id, affiliations]);
 

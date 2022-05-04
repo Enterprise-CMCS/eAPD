@@ -24,13 +24,14 @@ exports[`the ContractorResources component renders correctly 1`] = `
             "index": [Function],
             "item": [Function],
             "saveContractor": [Function],
+            "setFormValid": [Function],
           },
           "render": [Function],
         },
         "render": [Function],
       }
     }
-    noDataMessage="Private contractors have not been added for this activity."
+    noDataMessage="Add private contractor(s) for this activity."
     onAddClick={[Function]}
     onCancelClick={[Function]}
     onDeleteClick={[Function]}

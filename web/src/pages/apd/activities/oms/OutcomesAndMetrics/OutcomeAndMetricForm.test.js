@@ -10,7 +10,8 @@ import { saveOutcome as actualSaveOutcome } from '../../../../../redux/actions/e
 
 describe('the OutcomeAndMetricForm component', () => {
   const saveOutcome = jest.fn();
-
+  const setFormValid = jest.fn();
+  
   const component = shallow(
     <OutcomeAndMetricForm
       activityIndex={93}
@@ -30,6 +31,7 @@ describe('the OutcomeAndMetricForm component', () => {
         ]
       }}
       saveOutcome={saveOutcome}
+      setFormValid={setFormValid}
     />
   );
 
@@ -62,6 +64,7 @@ describe('the OutcomeAndMetricForm component', () => {
             ]
           }}
           saveOutcome={saveOutcome}
+          setFormValid={setFormValid}
         />
       )
         .find('form')

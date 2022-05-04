@@ -25,6 +25,7 @@ describe('card form wrapper', () => {
   test('renders with the provided id on the container if id prop is set', () => {
     setup({ id: 'my-custom-id' });
 
+    // eslint-disable-next-line testing-library/no-node-access
     expect(document.querySelector('#my-custom-id')).toBeTruthy();
     expect(screen.getByText('hello world')).toBeTruthy();
   });

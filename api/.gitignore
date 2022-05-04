@@ -5,3 +5,4 @@ hitech_api*.log*
 
 endpoint-data.json
 endpoint-tests/endpoint-data.json
+node_modules

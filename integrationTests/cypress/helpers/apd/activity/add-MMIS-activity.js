@@ -82,7 +82,7 @@ export const addMMISActivity = years => {
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillPrivateContactors(
+      fillOutActivityPage.addPrivateContractors(
         activityData.privateContractors,
         years
       );
