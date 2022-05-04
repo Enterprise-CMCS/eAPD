@@ -26,6 +26,7 @@ const StandardsAndConditions = forwardRef(
     setDoesNotSupport,
     setSupport
   }) => {
+    StandardsAndConditions.displayName = 'StandardsAndConditions';
 
     const {doesNotSupport, supports} = activity.standardsAndConditions;
 

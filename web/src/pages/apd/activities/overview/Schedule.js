@@ -16,6 +16,8 @@ import { stateDateToDisplay } from '../../../../util';
 import scheduleSchema from '../../../../static/schemas/plannedActivityShedule';
 
 const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate }) => {
+  Schedule.displayName = 'Schedule';
+
   const { plannedStartDate, plannedEndDate } = activity;
 
   const {
