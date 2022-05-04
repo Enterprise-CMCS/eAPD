@@ -10,10 +10,7 @@ import TextArea from '../../../../../components/TextArea';
 import PersonCostForm from '../../../../../components/PersonCostForm';
 
 import statePersonnelSchema from '../../../../../static/schemas/statePersonnel';
-
-import {
-  savePersonnel as actualSavePersonnel
-} from '../../../../../actions/editActivity';
+import { savePersonnel as actualSavePersonnel } from '../../../../../redux/actions/editActivity';
 
 const StatePersonForm = forwardRef(
   (

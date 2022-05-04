@@ -7,9 +7,9 @@ import {
   getRoleTypes,
   getAffiliations,
   updateAffiliation
-} from '../../../actions/admin';
+} from '../../../redux/actions/admin';
 
-import { getUserStateOrTerritory } from '../../../reducers/user.selector';
+import { getUserStateOrTerritory } from '../../../redux/selectors/user.selector';
 
 import ManageRoleDialog from '../ManageRoleDialog';
 import ConfirmationDialog from '../ConfirmationDialog';

@@ -14,7 +14,7 @@ import {
   setPreviousActivityFederalActualExpenseforMMIS50FFP,
   setPreviousActivityFederalActualExpenseforMMIS75FFP,
   setPreviousActivityFederalActualExpenseforMMIS90FFP
-} from '../../../actions/editApd';
+} from '../../../redux/actions/editApd';
 
 describe('apd previous activity table, mmis component', () => {
   const props = {
@@ -142,7 +142,7 @@ describe('apd previous activity table, mmis component', () => {
                     finders: 'keepers'
                   }
                 }
-              }              
+              }
             }
           }
         }

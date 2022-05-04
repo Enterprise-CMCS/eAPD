@@ -7,12 +7,12 @@ import { useHistory } from 'react-router-dom';
 import {
   createAccessRequest as actualCreateAccessRequest,
   completeAccessRequest as actualCompleteAccessRequest
-} from '../../../actions/auth';
+} from '../../../redux/actions/auth';
 
 import StateAccessRequest from '../../login/StateAccessRequest';
 import StateAccessRequestConfirmation from '../../login/StateAccessRequestConfirmation';
-import { getIsFedAdmin } from '../../../reducers/user.selector';
-import { goToDashboard } from '../../../actions/app';
+import { getIsFedAdmin } from '../../../redux/selectors/user.selector';
+import { goToDashboard } from '../../../redux/actions/app';
 import axios from '../../../util/api';
 
 const ManageAccount = ({

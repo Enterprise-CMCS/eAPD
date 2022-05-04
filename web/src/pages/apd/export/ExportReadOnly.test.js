@@ -5,7 +5,7 @@ import {
   plain as ExportInstructions,
   mapDispatchToProps
 } from './ExportReadOnly';
-import { printApd, saveApdEvent } from '../../../actions/app';
+import { printApd, saveApdEvent } from '../../../redux/actions/app';
 
 describe('apd export component', () => {
   test('renders correctly', () => {

@@ -4,8 +4,8 @@ import React, { useMemo, useRef, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
-import { selectActivityByIndex } from '../../../../reducers/activities.selectors';
-import { removeActivity } from '../../../../actions/editActivity';
+import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
+import { removeActivity } from '../../../../redux/actions/editActivity';
 import NavLink from '../../../../layout/nav/NavLink';
 
 import { t } from '../../../../i18n';

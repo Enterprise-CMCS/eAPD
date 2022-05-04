@@ -6,7 +6,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from './Outcomes';
-import { removeOutcome } from '../../../../actions/editActivity';
+import { removeOutcome } from '../../../../redux/actions/editActivity';
 
 describe('activity Outcomes and Metrics component', () => {
   const activityIndex = 0;
