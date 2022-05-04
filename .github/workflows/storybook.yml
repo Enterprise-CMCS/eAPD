@@ -31,7 +31,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           buildScriptName: build:storybook
           workingDir: ./web
-          storybookBuildDir: ./docs-build
+          # storybookBuildDir: ./docs-build
           allowConsoleErrors: true
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.8
