@@ -6,6 +6,11 @@ export default {
   component: Dollars,
   parameters: {
     jest: ['Dollars.test.js']
+  },
+  argTypes: {
+    children: {
+      control: { type: 'text' }
+    }
   }
 };
 
