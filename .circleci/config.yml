@@ -576,11 +576,12 @@ jobs:
     working_directory: ~/project/web
     steps:
       - checkout
+      - restore_cache:
+          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
       - run:
-          name: Install dependencies
+          name: Install Web Dependencies
           working_directory: ~/project/web
           command: yarn install --frozen-lockfile
-        # 👇 Runs the Chromatic CLI
       - run:
           name: Deploy to Chromatic
           working_directory: ~/project/web
