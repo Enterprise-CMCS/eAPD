@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JSON patch reducer adds a new year to the APD 1`] = `
+Array [
+  Object {
+    "op": "replace",
+    "path": "/years",
+    "value": Array [
+      "2019",
+    ],
+  },
+  Object {
+    "op": "add",
+    "path": "/proposedBudget/incentivePayments/ehAmt/2019",
+    "value": Object {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/proposedBudget/incentivePayments/ehCt/2019",
+    "value": Object {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/proposedBudget/incentivePayments/epAmt/2019",
+    "value": Object {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/proposedBudget/incentivePayments/epCt/2019",
+    "value": Object {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/activities/0/contractorResources/0/hourly/2019",
+    "value": Object {
+      "hours": null,
+      "rate": null,
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/activities/0/contractorResources/0/years/2019",
+    "value": null,
+  },
+  Object {
+    "op": "add",
+    "path": "/activities/0/expenses/0/years/2019",
+    "value": null,
+  },
+  Object {
+    "op": "add",
+    "path": "/activities/0/statePersonnel/0/years/2019",
+    "value": Object {
+      "amt": null,
+      "perc": null,
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/activities/0/costAllocation/2019",
+    "value": Object {
+      "ffp": Object {
+        "federal": 0,
+        "state": 100,
+      },
+      "other": 0,
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/activities/0/costAllocationNarrative/years/2019",
+    "value": Object {
+      "otherSources": "",
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/activities/0/quarterlyFFP/2019",
+    "value": Object {
+      "1": Object {
+        "combined": 25,
+        "contractors": 25,
+        "inHouse": 25,
+      },
+      "2": Object {
+        "combined": 25,
+        "contractors": 25,
+        "inHouse": 25,
+      },
+      "3": Object {
+        "combined": 25,
+        "contractors": 25,
+        "inHouse": 25,
+      },
+      "4": Object {
+        "combined": 25,
+        "contractors": 25,
+        "inHouse": 25,
+      },
+    },
+  },
+  Object {
+    "op": "add",
+    "path": "/keyStatePersonnel/keyPersonnel/0/costs/2019",
+    "value": 0,
+  },
+  Object {
+    "op": "add",
+    "path": "/keyStatePersonnel/keyPersonnel/0/fte/2019",
+    "value": 0,
+  },
+]
+`;
+
+exports[`JSON patch reducer removes a year from the APD 1`] = `
+Array [
+  Object {
+    "op": "remove",
+    "path": "/years/0",
+  },
+  Object {
+    "op": "remove",
+    "path": "/proposedBudget/incentivePayments/ehAmt/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/proposedBudget/incentivePayments/ehCt/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/proposedBudget/incentivePayments/epAmt/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/proposedBudget/incentivePayments/epCt/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/activities/0/contractorResources/0/hourly/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/activities/0/contractorResources/0/years/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/activities/0/expenses/0/years/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/activities/0/statePersonnel/0/years/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/activities/0/costAllocation/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/activities/0/costAllocationNarrative/years/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/activities/0/quarterlyFFP/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/keyStatePersonnel/keyPersonnel/0/costs/2019",
+  },
+  Object {
+    "op": "remove",
+    "path": "/keyStatePersonnel/keyPersonnel/0/fte/2019",
+  },
+]
+`;

@@ -1,5 +1,10 @@
 import React from 'react';
-import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
+import {
+  renderWithConnection,
+  fireEvent,
+  axe,
+  screen
+} from 'apd-testing-library';
 import LoginMFAVerifyAuthApp from './LoginMFAVerifyAuthApp';
 
 const defaultProps = {
@@ -22,27 +27,29 @@ describe('<LoginMFAVerifyAuthApp />', () => {
   });
 
   test('title renders', () => {
-    const { getByText } = setup();
-    expect(getByText(/Configure Multi-Factor Authentication/)).toBeTruthy();
+    setup();
+    expect(
+      screen.getByText(/Configure Multi-Factor Authentication/)
+    ).toBeTruthy();
   });
 
   test('qr code renders', () => {
-    const { getByAltText } = setup();
-    expect(getByAltText('QR Code')).toBeTruthy();
+    setup();
+    expect(screen.getByAltText('QR Code')).toBeTruthy();
   });
 
   test('secret renders', () => {
-    const { getByText } = setup();
-    expect(getByText(/A1234/)).toBeTruthy();
+    setup();
+    expect(screen.getByText(/A1234/)).toBeTruthy();
   });
 
   test('user enters otp', () => {
-    const { getByRole, getByTestId } = setup();
-    expect(getByRole('button', { name: 'Submit' }));
-    fireEvent.change(getByTestId('input-otp-code'), {
+    setup();
+    expect(screen.getByRole('button', { name: 'Submit' }));
+    fireEvent.change(screen.getByTestId('input-otp-code'), {
       target: { value: 'testotp' }
     });
-    fireEvent.click(getByRole('button', { name: 'Submit' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
     expect(defaultProps.handleVerificationCode).toHaveBeenCalledWith('testotp');
   });
 });

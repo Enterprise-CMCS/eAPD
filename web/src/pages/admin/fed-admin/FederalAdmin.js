@@ -7,9 +7,9 @@ import {
   getRoleTypes,
   getAffiliations,
   updateAffiliation
-} from '../../../actions/admin';
+} from '../../../redux/actions/admin';
 
-import { getUserStateOrTerritory } from '../../../reducers/user.selector';
+import { getUserStateOrTerritory } from '../../../redux/selectors/user.selector';
 
 import ManageRoleDialog from '../ManageRoleDialog';
 import ConfirmationDialog from '../ConfirmationDialog';
@@ -38,17 +38,12 @@ const FederalAdmin = ({
   const [limitedRoleTypes, setLimitedRoleTypes] = useState(roleTypes);
 
   useEffect(() => {
-    const controller = new AbortController();
     (async () => {
       if (activeTab !== 'letters') {
         setIsFetching(true);
-        await affiliations(currentState.id, activeTab, {
-          signal: controller.signal
-        });
+        await affiliations(currentState.id, activeTab);
         setIsFetching(false);
       }
-
-      return () => controller?.abort();
     })();
   }, [activeTab, currentState.id, affiliations]);
 

@@ -178,64 +178,6 @@ Object {
       },
     ],
   },
-  "incentivePayments": Object {
-    "ehAmt": Object {
-      "2022": Object {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-      },
-      "2023": Object {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-      },
-    },
-    "ehCt": Object {
-      "2022": Object {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-      },
-      "2023": Object {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-      },
-    },
-    "epAmt": Object {
-      "2022": Object {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-      },
-      "2023": Object {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-      },
-    },
-    "epCt": Object {
-      "2022": Object {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-      },
-      "2023": Object {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-      },
-    },
-  },
   "keyStatePersonnel": Object {
     "keyPersonnel": Array [],
     "medicaidDirector": Object {
@@ -316,6 +258,66 @@ Object {
       },
     },
     "previousActivitySummary": "",
+  },
+  "proposedBudget": Object {
+    "incentivePayments": Object {
+      "ehAmt": Object {
+        "2022": Object {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+        },
+        "2023": Object {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+        },
+      },
+      "ehCt": Object {
+        "2022": Object {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+        },
+        "2023": Object {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+        },
+      },
+      "epAmt": Object {
+        "2022": Object {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+        },
+        "2023": Object {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+        },
+      },
+      "epCt": Object {
+        "2022": Object {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+        },
+        "2023": Object {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+        },
+      },
+    },
   },
   "years": Array [
     "2022",

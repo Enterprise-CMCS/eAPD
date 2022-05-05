@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "engines": {
-    "node": "16.13.2"
+    "node": "16.15.0"
   },
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",

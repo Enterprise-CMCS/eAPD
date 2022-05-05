@@ -13,10 +13,10 @@ import {
   setMedicaidOfficeCity,
   setMedicaidOfficeState,
   setMedicaidOfficeZip
-} from '../../../actions/editApd';
+} from '../../../redux/actions/editApd';
 import { t } from '../../../i18n';
-import { selectKeyStatePersonnel } from '../../../reducers/apd.selectors';
-import { selectState } from '../../../reducers/user';
+import { selectKeyStatePersonnel } from '../../../redux/selectors/apd.selectors';
+import { selectState } from '../../../redux/reducers/user';
 import { STATES } from '../../../util';
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';

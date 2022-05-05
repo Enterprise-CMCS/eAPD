@@ -3,7 +3,7 @@ import React from 'react';
 
 import { plain as KeyPersonForm, mapDispatchToProps } from './ApdKeyPersonForm';
 
-import { saveKeyPersonnel } from '../../../actions/editApd';
+import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 describe('the ApdKeyPersonForm component', () => {
   const props = {
@@ -23,9 +23,8 @@ describe('the ApdKeyPersonForm component', () => {
       },
       position: 'The Builder'
     },
-
     savePerson: jest.fn(),
-
+    setFormValid: jest.fn(),
     years: ['1992', '1993']
   };
 

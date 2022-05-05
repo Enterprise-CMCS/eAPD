@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, fireEvent, axe } from 'apd-testing-library';
+import { renderWithConnection, fireEvent, axe, screen } from 'apd-testing-library';
 import LoginMFA from './LoginMFA';
 
 const defaultProps = {
@@ -22,27 +22,27 @@ describe('<LoginMFA />', () => {
   });
 
   test('user enters otp', () => {
-    const { getByLabelText, getByRole } = setup();
+    setup();
     expect(
-      getByLabelText(
+      screen.getByLabelText(
         'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
       )
     ).toBeTruthy();
-    expect(getByRole('button', { name: 'Verify Identity' }));
+    expect(screen.getByRole('button', { name: 'Verify Identity' }));
     fireEvent.change(
-      getByLabelText(
+      screen.getByLabelText(
         'Enter the verification code provided to you via call, text, email, or your chosen authenticator app.'
       ),
       {
         target: { value: 'testotp' }
       }
     );
-    fireEvent.click(getByRole('button', { name: 'Verify Identity' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Verify Identity' }));
     expect(defaultProps.saveAction).toHaveBeenCalledWith('testotp');
   });
 
   test('Back to Login button renders', () => {
-    const { getByText } = setup();
-    expect(getByText(/Back to Login/i)).toBeTruthy();
+    setup();
+    expect(screen.getByText(/Back to Login/i)).toBeTruthy();
   });
 });

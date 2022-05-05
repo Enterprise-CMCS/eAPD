@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
@@ -17,7 +17,7 @@ import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
 import 'tinymce/plugins/link';
 
-import { uploadFile } from '../actions/editApd';
+import { uploadFile } from '../redux/actions/editApd';
 import { generateKey } from '../util';
 import '../file-loader';
 
@@ -86,7 +86,7 @@ const fileButtonOnClick = (button, editor, upload) => () => {
 };
 
 // sets up the image button
-const setupTinyMCE = upload => editor => {
+const setupTinyMCE = (upload, onBlur) => editor => {
   editor.on('init', () => {
     const { id } = editor;
     const event = new CustomEvent(`tinymceLoaded.${id}`, {
@@ -94,6 +94,10 @@ const setupTinyMCE = upload => editor => {
       editor: this
     });
     document.dispatchEvent(event);
+  });
+
+  editor.on('blur', () => {
+    onBlur();
   });
 
   editor.ui.registry.addButton('eapdImageUpload', {
@@ -151,7 +155,7 @@ class RichText extends Component {
   };
 
   render() {
-    const { uploadFile: upload, content } = this.props;
+    const { uploadFile: upload, content, onBlur } = this.props;
     const { id } = this.state;
 
     // https://www.tiny.cloud/docs/plugins/
@@ -180,35 +184,45 @@ class RichText extends Component {
     ].join(' | ');
 
     return (
-      <div className="rte--wrapper">
-        <Editor
-          id={id}
-          init={{
-            toolbar,
-            plugins,
-            setup: setupTinyMCE(upload),
-            autoresize_bottom_margin: 0,
-            browser_spellcheck: true,
-            file_picker_types: 'image',
-            images_upload_handler: this.uploadImage(),
-            images_file_types: VALID_FILE_TYPES.join(','),
-            paste_data_images: true, // true adds drag and drop support
-            a11y_advanced_options: true,
-            menubar: '',
-            relative_urls: false,
-            encoding: 'xml',
-            forced_root_block: 'p',
-            invalid_elements: 'script',
-            remove_trailing_brs: true,
-            link_assume_external_targets: true,
-            default_link_target: '_blank',
-            toolbar_mode: 'wrap',
-            selector: 'textarea'
-          }}
-          value={content}
-          onEditorChange={this.onEditorChange}
-        />
-      </div>
+      <Fragment>
+        <div className={this.props.error ? 'rte--wrapper ds-c-field--error ds-u-radius' : 'rte--wrapper'}>
+          <Editor
+            id={id}
+            init={{
+              toolbar,
+              plugins,
+              setup: setupTinyMCE(upload, onBlur),
+              autoresize_bottom_margin: 0,
+              browser_spellcheck: true,
+              file_picker_types: 'image',
+              images_upload_handler: this.uploadImage(),
+              images_file_types: VALID_FILE_TYPES.join(','),
+              paste_data_images: true, // true adds drag and drop support
+              a11y_advanced_options: true,
+              menubar: '',
+              relative_urls: false,
+              encoding: 'xml',
+              forced_root_block: 'p',
+              invalid_elements: 'script',
+              remove_trailing_brs: true,
+              link_assume_external_targets: true,
+              default_link_target: '_blank',
+              toolbar_mode: 'wrap',
+              selector: 'textarea'
+            }}
+            value={content}
+            onEditorChange={this.onEditorChange}
+          />
+        </div>
+        {this.props.error && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
+            role="alert"
+          >
+            {this.props.error}
+          </span>
+        )}
+      </Fragment>
     );
   }
 }
@@ -217,13 +231,17 @@ RichText.propTypes = {
   content: PropTypes.string,
   id: PropTypes.string,
   onSync: PropTypes.func,
-  uploadFile: PropTypes.func.isRequired
+  onBlur: PropTypes.func,
+  uploadFile: PropTypes.func.isRequired,
+  error: PropTypes.string
 };
 
 RichText.defaultProps = {
   content: '',
   id: '',
-  onSync: () => {}
+  onSync: () => {},
+  onBlur: () => {},
+  error: ''
 };
 
 const mapDispatchToProps = { uploadFile };

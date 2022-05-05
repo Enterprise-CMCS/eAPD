@@ -8,10 +8,10 @@ import { t } from '../../../../i18n';
 import FormAndReviewList from '../../../../components/FormAndReviewList';
 import { StatePersonForm, StatePersonReview } from './StatePerson';
 
-import { selectActivityStatePersonnel } from '../../../../reducers/activities.selectors';
-import { selectApdYears } from '../../../../reducers/apd.selectors';
-import { newStatePerson } from '../../../../reducers/activities';
-import { removePersonnel } from '../../../../actions/editActivity';
+import { selectActivityStatePersonnel } from '../../../../redux/selectors/activities.selectors';
+import { selectApdYears } from '../../../../redux/selectors/apd.selectors';
+import { newStatePerson } from '../../../../redux/reducers/activities';
+import { removePersonnel } from '../../../../redux/actions/editActivity';
 
 const StatePersonnel = ({ activityIndex, personnel, remove, years }) => {
   const [localList, setLocalList] = useState(personnel);

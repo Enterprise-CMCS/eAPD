@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { selectSummary } from '../../../reducers/apd.selectors';
+import { selectSummary } from '../../../redux/selectors/apd.selectors';
 
 const ApdSummary = ({
   narrativeHIE,

@@ -1,14 +1,10 @@
 {
   "dryRunTimeoutMinutes": 30,
   "timeoutMS": 500000,
-  "mutate": ["src/actions/app/events.js"],
+  "mutate": ["src/redux/actions/app/events.js"],
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "testRunner": "jest",
-  "reporters": [
-    "progress",
-    "clear-text",
-    "html"
-  ],
+  "reporters": ["progress", "clear-text", "html"],
   "coverageAnalysis": "off",
   "jest": {
     "projectType": "custom",

@@ -16,11 +16,11 @@ const EXPIRY_DATE = Math.ceil(
 
 const convertDollarStrToNum = string => {
   if (!string || string === '') {
-    return 0;
+    return '';
   }
   const numString = string.replace(/[^0-9.-]+/g, '');
   if (Number.isNaN(numString)) {
-    return 0;
+    return '';
   }
   return Number(numString);
 };

@@ -93,15 +93,15 @@ touch /app/api/logs/cms-hitech-apd-api.logs
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16, we care about minor/patch versions
-nvm install 16.13.2
-nvm alias default 16.13.2
+# We're using Node 16.15.0, we care about minor/patch versions
+nvm install 16.15.0
+nvm alias default 16.15.0
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
-npm i -g yarn@1.22.17
+npm i -g yarn@1.22.18
 
 # Get the built API code
 cd /app
@@ -139,6 +139,6 @@ systemctl start newrelic-infra
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
-su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.13.2/bin /home/ec2-user/.nvm/versions/node/v16.13.2/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
+su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.15.0/bin /home/ec2-user/.nvm/versions/node/v16.15.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'

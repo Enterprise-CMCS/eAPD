@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
 import regLinks from '../../../data/assurancesAndCompliance.yaml';
-import { selectFederalCitations } from '../../../reducers/apd.selectors';
+import { selectFederalCitations } from '../../../redux/selectors/apd.selectors';
 import { t } from '../../../i18n';
 import { LinkOrText } from './AssurancesAndCompliance';
 
