@@ -699,14 +699,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
       
       cy.findByLabelText('Category').select('').blur();
-      cy.contains('Provide an expense category.').should('exist');
+      cy.contains('Select a category.').should('exist');
       
       cy.findByLabelText('Description').click().blur();
-      cy.contains('Provide an expense description.').should('exist');
+      cy.contains('Provide a description of the selected non-personal category.').should('exist');
       
       years.forEach(year => {
         cy.findByLabelText(`FFY ${year} Cost`).click().blur();
-        cy.contains('Provide an annual cost greater than $0.').should('exist');
+        cy.contains('Provide an annual cost.').should('exist');
       })
       
       cy.findByRole('button', { name: /Cancel/i }).click();
