@@ -1,8 +1,17 @@
 name: Deploy Storybook
 on:
   pull_request:
-    branches:
-      - main
+    types:
+      - closed
+    paths:
+      [
+        'web/.storybook/**',
+        'web/src/stories/**',
+        'web/src/**/*.story.js',
+        'web/src/**/*.story.mdx',
+        'web/src/components/**',
+        'web/src/containers/**'
+      ]
 
 jobs:
   storybook-deploy:

@@ -86,7 +86,18 @@ workflows:
           filters:
             branches:
               ignore:
-                - main
+                - gh-pages
+            tags:
+              ignore: ignore-e2e
+          requires:
+            - frontend lint
+            - backend lint
+            - frontend dependency vulnerability scan
+            - backend dependency vulnerability scan
+      - chromatic-deployment:
+          filters:
+            branches:
+              ignore:
                 - gh-pages
             tags:
               ignore: ignore-e2e
@@ -225,6 +236,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
+            - chromatic-deployment
 
       - frontend deploy:
           name: frontend deploy production
@@ -241,6 +253,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
+            - chromatic-deployment
 
       # joint jobs
       - preview deploy:
@@ -551,6 +564,22 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
+
+  chromatic-deployment:
+    yaml test:
+    docker:
+      - image: cimg/node:16.15.0
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    working_directory: ~/project/web
+    steps:
+      - checkout
+      - restore_cache:
+          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
+      - run: yarn install
+        # 👇 Runs the Chromatic CLI
+      - run: yarn chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
