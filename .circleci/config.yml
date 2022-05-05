@@ -573,18 +573,15 @@ jobs:
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
-    working_directory: ~/project/web
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project
+          at: ~/project/web
       - run:
           name: Install Web Dependencies
-          working_directory: ~/project/web
           command: yarn install --frozen-lockfile
       - run:
           name: Deploy to Chromatic
-          working_directory: ~/project/web
           command: yarn chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
   # ===== Backend jobs =====
