@@ -7,6 +7,7 @@ import {
   useHistory as actualUseHistory,
   useLocation as actualUseLocation
 } from 'react-router-dom';
+import TagManager from 'react-gtm-module';
 
 import Sidebar from '../layout/nav/Sidebar';
 import UnexpectedError from '../components/UnexpectedError';
@@ -30,6 +31,7 @@ const ApdApplication = ({
   apdId,
   selectApd: dispatchSelectApd,
   setApdToSelectOnLoad: dispatchSelectApdOnLoad,
+  userRole,
   useParams,
   useHistory,
   useLocation
@@ -77,6 +79,14 @@ const ApdApplication = ({
     );
   }
 
+  TagManager.dataLayer({
+    dataLayer: {
+      stateId: place.id,
+      eAPDIdHash: apdId,
+      userRole
+    }
+  });
+
   return (
     <div className="site-body ds-l-container">
       <div className="ds-u-margin--0">
@@ -99,6 +109,7 @@ ApdApplication.propTypes = {
   apdId: PropTypes.string,
   selectApd: PropTypes.func.isRequired,
   setApdToSelectOnLoad: PropTypes.func.isRequired,
+  userRole: PropTypes.string.isRequired,
   useParams: PropTypes.func,
   useHistory: PropTypes.func,
   useLocation: PropTypes.func
@@ -115,7 +126,8 @@ const mapStateToProps = state => ({
   isAdmin: getIsFedAdmin(state),
   isEditor: getCanUserEditAPD(state),
   place: getUserStateOrTerritory(state),
-  apdId: getAPDId(state)
+  apdId: getAPDId(state),
+  userRole: state.user.data.role || 'Pending Role'
 });
 
 const mapDispatchToProps = { setApdToSelectOnLoad, selectApd };
