@@ -160,7 +160,8 @@
             "doesNotSupport": "",
             "supports": ""
           },
-          "description": "2 Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.",
+          "summary": "2 Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.",
+          "description": "Testing a theory.",
           "quarterlyFFP": {
             "2020": {
               "1": {
