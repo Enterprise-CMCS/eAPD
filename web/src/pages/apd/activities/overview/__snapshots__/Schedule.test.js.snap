@@ -13,15 +13,15 @@ exports[`the Schedule (milestones) component renders correctly 1`] = `
     <DateField
       errorMessage=""
       label="Start date"
-      onBlur={[Function]}
       onChange={[Function]}
+      onComponentBlur={[Function]}
       value="1944-10-02"
     />
     <DateField
       errorMessage=""
       label="End date"
-      onBlur={[Function]}
       onChange={[Function]}
+      onComponentBlur={[Function]}
       value="1944-11-08"
     />
   </div>

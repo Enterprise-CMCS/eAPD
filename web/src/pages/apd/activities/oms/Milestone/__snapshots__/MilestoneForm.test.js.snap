@@ -89,30 +89,31 @@ exports[`the MilestoneForm component renders correctly 1`] = `
       errorMessage=""
       hint=""
       label="Target completion date"
-      onBlur={[Function]}
       onChange={[Function]}
+      onComponentBlur={[Function]}
       value="1942-8-16"
     >
       <DateField
         dateFormatter={[Function]}
-        dayDefaultValue={16}
         dayInvalid={false}
         dayLabel="Day"
         dayName="day"
+        dayValue={16}
         errorMessage=""
         errorPlacement="bottom"
         hint=""
         label="Target completion date"
-        monthDefaultValue={8}
         monthInvalid={false}
         monthLabel="Month"
         monthName="month"
+        monthValue={8}
+        onBlur={[Function]}
         onChange={[Function]}
         onComponentBlur={[Function]}
-        yearDefaultValue={1942}
         yearInvalid={false}
         yearLabel="Year"
         yearName="year"
+        yearValue={1942}
       >
         <FormControl
           component="fieldset"
@@ -146,21 +147,22 @@ exports[`the MilestoneForm component renders correctly 1`] = `
             </FormLabel>
             <DateInput
               dateFormatter={[Function]}
-              dayDefaultValue={16}
               dayInvalid={false}
               dayLabel="Day"
               dayName="day"
+              dayValue={16}
               labelId="field_2-label"
-              monthDefaultValue={8}
               monthInvalid={false}
               monthLabel="Month"
               monthName="month"
+              monthValue={8}
+              onBlur={[Function]}
               onChange={[Function]}
               onComponentBlur={[Function]}
-              yearDefaultValue={1942}
               yearInvalid={false}
               yearLabel="Year"
               yearName="year"
+              yearValue={1942}
             >
               <div
                 className="ds-c-datefield__container ds-l-form-row"
@@ -169,7 +171,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   aria-describedby="field_2-label"
                   aria-invalid={false}
                   className="ds-l-col--auto"
-                  defaultValue={8}
                   fieldClassName="ds-c-field--month"
                   inputRef={[Function]}
                   label="Month"
@@ -179,6 +180,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
+                  value={8}
                 >
                   <FormControl
                     className="ds-u-clearfix ds-l-col--auto"
@@ -214,7 +216,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                       <TextInput
                         aria-describedby="field_2-label"
                         aria-invalid={false}
-                        defaultValue={8}
                         errorId="field_3-error"
                         errorPlacement="top"
                         fieldClassName="ds-c-field--month"
@@ -225,12 +226,12 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                         onChange={[Function]}
                         setRef={[Function]}
                         type="text"
+                        value={8}
                       >
                         <input
                           aria-describedby="field_2-label"
                           aria-invalid={false}
                           className="ds-c-field ds-c-field--month"
-                          defaultValue={8}
                           id="field_3"
                           inputMode="numeric"
                           name="month"
@@ -238,6 +239,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                           onChange={[Function]}
                           pattern="[0-9]*"
                           type="text"
+                          value={8}
                         />
                       </TextInput>
                     </div>
@@ -252,7 +254,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   aria-describedby="field_2-label"
                   aria-invalid={false}
                   className="ds-l-col--auto"
-                  defaultValue={16}
                   fieldClassName="ds-c-field--day"
                   inputRef={[Function]}
                   label="Day"
@@ -262,6 +263,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
+                  value={16}
                 >
                   <FormControl
                     className="ds-u-clearfix ds-l-col--auto"
@@ -297,7 +299,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                       <TextInput
                         aria-describedby="field_2-label"
                         aria-invalid={false}
-                        defaultValue={16}
                         errorId="field_4-error"
                         errorPlacement="top"
                         fieldClassName="ds-c-field--day"
@@ -308,12 +309,12 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                         onChange={[Function]}
                         setRef={[Function]}
                         type="text"
+                        value={16}
                       >
                         <input
                           aria-describedby="field_2-label"
                           aria-invalid={false}
                           className="ds-c-field ds-c-field--day"
-                          defaultValue={16}
                           id="field_4"
                           inputMode="numeric"
                           name="day"
@@ -321,6 +322,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                           onChange={[Function]}
                           pattern="[0-9]*"
                           type="text"
+                          value={16}
                         />
                       </TextInput>
                     </div>
@@ -335,7 +337,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   aria-describedby="field_2-label"
                   aria-invalid={false}
                   className="ds-l-col--auto"
-                  defaultValue={1942}
                   fieldClassName="ds-c-field--year"
                   inputRef={[Function]}
                   label="Year"
@@ -345,6 +346,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
+                  value={1942}
                 >
                   <FormControl
                     className="ds-u-clearfix ds-l-col--auto"
@@ -380,7 +382,6 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                       <TextInput
                         aria-describedby="field_2-label"
                         aria-invalid={false}
-                        defaultValue={1942}
                         errorId="field_5-error"
                         errorPlacement="top"
                         fieldClassName="ds-c-field--year"
@@ -391,12 +392,12 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                         onChange={[Function]}
                         setRef={[Function]}
                         type="text"
+                        value={1942}
                       >
                         <input
                           aria-describedby="field_2-label"
                           aria-invalid={false}
                           className="ds-c-field ds-c-field--year"
-                          defaultValue={1942}
                           id="field_5"
                           inputMode="numeric"
                           name="year"
@@ -404,6 +405,7 @@ exports[`the MilestoneForm component renders correctly 1`] = `
                           onChange={[Function]}
                           pattern="[0-9]*"
                           type="text"
+                          value={1942}
                         />
                       </TextInput>
                     </div>
