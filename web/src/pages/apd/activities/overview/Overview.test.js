@@ -3,9 +3,7 @@ import {
   renderWithConnection,
   act,
   screen,
-  within,
-  waitFor,
-  fireEvent
+  waitFor
 } from 'apd-testing-library';
 
 import { plain as ActivityOverview } from './Overview';
@@ -19,6 +17,7 @@ const defaultProps = {
 }
 
 const setup = async (props = {}) => {
+  // eslint-disable-next-line testing-library/no-unnecessary-act
   const utils = await act(async () => 
     renderWithConnection(<ActivityOverview {...defaultProps} {...props} />)
   );

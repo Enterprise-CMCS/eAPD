@@ -2,8 +2,7 @@ import React from 'react';
 import {
   renderWithConnection,
   act,
-  screen,
-  waitFor
+  screen
 } from 'apd-testing-library';
 
 import { plain as StandardsAndConditions } from './StandardsAndConditions';
