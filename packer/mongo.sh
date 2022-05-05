@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Become root user to perform installation and configuration
 sudo su <<R_USER
 #!/bin/bash
@@ -7,7 +6,7 @@ sudo su <<R_USER
 # Install New Relic Infrastructure Monitor
 curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
 yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
-yum install newrelic-infra -y
+yum -y install newrelic-infra
 
 # Setup PostGres for Mongo Migraton
 yum -y install postgresql-server
@@ -84,11 +83,14 @@ export DATABASE_URL="$DATABASE_URL"
 export OKTA_DOMAIN="$OKTA_DOMAIN"
 export OKTA_API_KEY="$OKTA_API_KEY"
 export ENVIRONMENT="$ENVIRONMENT"
+export TERM="xterm"
 
 #!/bin/bash
 # Prepare PostGres test database
-sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
-sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
+su - postgres << PG_USER
+psql -c "CREATE DATABASE hitech_apd;"
+psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
+PG_USER
 
 #Migrate from PostGres
 # Seed eAPD Mongo Database
@@ -98,14 +100,16 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 14, and we don't care about minor/patch versions, so always
+# We're using Node 16, and we don't care about minor/patch versions, so always
 # get the latest.
 nvm install 16.15.0
 nvm alias default 16.15.0
+nvm use 16.15.0
+npm i -g yarn@1.22.18
 
 git clone --single-branch https://github.com/CMSgov/eAPD.git
 cd ~/eAPD/api
-yarn install --frozen-lockfile
+yarn install --frozen-lockfile --production=true
 
 #Preparing Mongo DB Users
 cd ~
