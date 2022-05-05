@@ -576,9 +576,15 @@ jobs:
     working_directory: ~/project/web
     steps:
       - checkout
-      - run: yarn install --frozen-lockfile
+      - run:
+          name: Install dependencies
+          working_directory: ~/project/web
+          command: yarn install --frozen-lockfile
         # 👇 Runs the Chromatic CLI
-      - run: yarn chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
+      - run:
+          name: Deploy to Chromatic
+          working_directory: ~/project/web
+          command: yarn chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
