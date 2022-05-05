@@ -144,13 +144,6 @@ describe('APD endpoint | PATCH /apds/:id', () => {
 
       expect(response.status).toEqual(200);
       expect(programOverview).toEqual('<a>XSS</a>');
-      expect(response.data).toMatchSnapshot({
-        apd: {
-          updated: expect.stringMatching(
-            /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-          )
-        }
-      });
     });
 
     it('with a valid patch that also attempts to update a readonly property', async () => {

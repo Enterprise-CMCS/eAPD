@@ -1,6 +1,8 @@
 /* eslint-disable radix */
 import { addCommas } from './helper';
 
+const { _ } = Cypress;
+
 class BudgetPage {
   checkActivityTotalCostTable = ({
     activityTotalCosts,
@@ -20,6 +22,23 @@ class BudgetPage {
         cy.contains('Total Computable Medicaid Cost')
           .parent()
           .should('contain', `$${addCommas(totalComputableMedicaidCost)}`);
+      });
+  };
+
+  checkActivityTotalCostTableNew = ({ expectedTable, index } = {}) => {
+    cy.log(JSON.stringify(expectedTable));
+    cy.get('[class="budget-table activity-budget-table"]')
+      .eq(index)
+      .then(table => {
+        cy.get(table)
+          .getActivityTable()
+          .then(tableData => {
+            _.forEach(expectedTable, row => {
+              expect(tableData).to.deep.include(row);
+            });
+            // cy.log(JSON.stringify(tableData));
+            // expect(tableData).to.deep.include(expectedTable);
+          });
       });
   };
 

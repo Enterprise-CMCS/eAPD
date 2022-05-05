@@ -7,7 +7,7 @@ import {
   getIsFedAdmin,
   getUserStateOrTerritory,
   getCanUserViewStateAdmin
-} from '../../reducers/user.selector';
+} from '../../redux/selectors/user.selector';
 import { t } from '../../i18n';
 
 import DashboardButton from './DashboardButton';

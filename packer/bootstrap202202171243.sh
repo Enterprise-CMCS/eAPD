@@ -17,6 +17,16 @@ mkdir /app
 mkdir /app/api
 mkdir /app/web
 
+# Create app logs and directories
+mkdir -p /app/api/logs
+touch /app/api/logs/eAPD-API-error-0.log
+touch /app/api/logs/eAPD-API-out-0.log
+touch /app/api/logs/Database-migration-error.log
+touch /app/api/logs/Database-migration-out.log
+touch /app/api/logs/Database-seeding-error.log
+touch /app/api/logs/Database-seeding-out.log
+touch /app/api/logs/cms-hitech-apd-api.logs
+
 chown -R :eapd /app
 chmod -R g+w /app
 
@@ -86,6 +96,7 @@ EOF
 checkmodule -M -m -o mongodb_cgroup_memory.mod mongodb_cgroup_memory.te
 semodule_package -o mongodb_cgroup_memory.pp -m mongodb_cgroup_memory.mod
 sudo semodule -i mongodb_cgroup_memory.pp
+rm mongodb_cgroup_memory.te
 
 # Start & Enable Mongo
 systemctl daemon-reload
@@ -96,8 +107,15 @@ systemctl start mongod
 systemctl enable nginx
 systemctl restart nginx
 
+su - postgres << PG_USER
+# Prepare PostGres test database
+psql -c "CREATE DATABASE hitech_apd;"
+psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
+PG_USER
+R_USER
+
 # Test to see the command that is getting built for pulling the Git Branch
-su ec2-user <<E_USER
+sudo su - $(whoami) <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
@@ -112,10 +130,7 @@ export DATABASE_URL="$DATABASE_URL"
 export OKTA_DOMAIN="$OKTA_DOMAIN"
 export OKTA_API_KEY="$OKTA_API_KEY"
 export ENVIRONMENT="$ENVIRONMENT"
-
-# Prepare PostGres test database
-sudo -u postgres psql -c "CREATE DATABASE hitech_apd;"
-sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
+export TERM="xterm"
 
 #Migrate from PostGres
 # Seed eAPD Mongo Database
@@ -125,9 +140,11 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'cms';"
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16.13.2, we care about minor/patch versions
-nvm install 16.13.2
-nvm alias default 16.13.2
+# We're using Node 16.15.0, we care about minor/patch versions
+nvm install 16.15.0
+nvm alias default 16.15.0
+nvm use 16.15.0
+npm i -g yarn@1.22.18
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
@@ -139,100 +156,26 @@ cd ~
 cat <<MONGOROOTUSERSEED > mongo-init.sh
 mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_INITDB_ROOT_USERNAME','pwd' : '$MONGO_INITDB_ROOT_PASSWORD', 'roles' : [{'role' : 'root','db' : '$MONGO_INITDB_DATABASE'}]});"
 MONGOROOTUSERSEED
-cd ~/eAPD/api
 sh ~/mongo-init.sh
-#NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
-cd ~
 cat <<MONGOUSERSEED > mongo-user.sh
-mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
+mongo $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role' : 'dbOwner', 'db' :'$MONGO_DATABASE'}]});"
 MONGOUSERSEED
 sh ~/mongo-user.sh
+rm ~/mongo-init.sh
+rm ~/mongo-user.sh
 E_USER
 
+sudo su <<R_USER
 # Harden & Restart Mongo
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
 sed -i 's|bindIp:.*|bindIp: 0.0.0.0|g' /etc/mongod.conf
 systemctl restart mongod
-rm /home/ec2-user/mongo-user.sh
-rm /home/ec2-user/mongo-init.sh
 
 # Configure CloudWatch Agent
 mkdir -p /opt/aws/amazon-cloudwatch-agent/doc/
-touch /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
-cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
-
-{
-        "agent": {
-                "metrics_collection_interval": 60,
-                "run_as_user": "cwagent"
-        },
-        "metrics": {
-                "append_dimensions": {
-                        "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
-                        "ImageId": "${aws:ImageId}",
-                        "InstanceId": "${aws:InstanceId}",
-                        "InstanceType": "${aws:InstanceType}"
-                },
-                "metrics_collected": {
-                        "collectd": {
-                                "metrics_aggregation_interval": 60
-                        },
-                        "cpu": {
-                                "measurement": [
-                                        "cpu_usage_idle",
-                                        "cpu_usage_iowait",
-                                        "cpu_usage_user",
-                                        "cpu_usage_system"
-                                ],
-                                "metrics_collection_interval": 60,
-                                "totalcpu": false
-                        },
-                        "disk": {
-                                "measurement": [
-                                        "used_percent",
-                                        "inodes_free"
-                                ],
-                                "metrics_collection_interval": 60,
-                                "resources": [
-                                        "*"
-                                ]
-                        },
-                        "diskio": {
-                                "measurement": [
-                                        "io_time"
-                                ],
-                                "metrics_collection_interval": 60,
-                                "resources": [
-                                        "*"
-                                ]
-                        },
-                        "mem": {
-                                "measurement": [
-                                        "mem_used_percent"
-                                ],
-                                "metrics_collection_interval": 60
-                        },
-                        "statsd": {
-                                "metrics_aggregation_interval": 60,
-                                "metrics_collection_interval": 60,
-                                "service_address": ":8125"
-                        },
-                        "swap": {
-                                "measurement": [
-                                        "swap_used_percent"
-                                ],
-                                "metrics_collection_interval": 60
-                        }
-                }
-        }
-}
-
-CWAGENTCONFIG
-
 touch /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
-
 {
   "logs": {
     "logs_collected": {
@@ -347,7 +290,7 @@ cat <<CWVARLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-log.json
           },
           {
             "file_path": "/var/log/mongodb/mongod.log*",
-            "log_group_name": "$ENVIRONMENT/var/log/mongodb/mongod.log"
+            "log_group_name": "preview/var/log/mongodb/mongod.log"
           }                    
         ]
       }
@@ -365,15 +308,15 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
         "collect_list": [
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent.log*",
-            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_agent.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_agent-err.log*",
-            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_agent-err.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_agent-err.log"
           },
           {
             "file_path": "/var/opt/ds_agent/diag/ds_am.log*",
-            "log_group_name": "$ENVIRONMENT/var/opt/ds_agent/diag/ds_am.log"
+            "log_group_name": "preview/var/opt/ds_agent/diag/ds_am.log"
           }
         ]
       }
@@ -382,8 +325,6 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 }
 
 CWVAROPTCONFIG
-
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 

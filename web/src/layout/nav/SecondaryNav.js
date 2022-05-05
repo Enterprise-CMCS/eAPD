@@ -7,8 +7,8 @@ import ContinuePreviousButtons from '../../components/ContinuePreviousButtons';
 import {
   selectActivitiesSidebar,
   selectActivityCount
-} from '../../reducers/activities.selectors';
-import { addActivity as actualAddActivity } from '../../actions/editActivity';
+} from '../../redux/selectors/activities.selectors';
+import { addActivity as actualAddActivity } from '../../redux/actions/editActivity';
 
 const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
   const { activityIndex } = useParams();
