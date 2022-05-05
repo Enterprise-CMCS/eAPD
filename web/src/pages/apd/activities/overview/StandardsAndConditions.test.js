@@ -1,43 +1,79 @@
+import { shallow } from 'enzyme';
 import React from 'react';
+
 import {
-  renderWithConnection,
-  act,
-  screen,
-  waitFor
-} from 'apd-testing-library';
+  plain as StandardsAndConditions,
+  mapStateToProps,
+  mapDispatchToProps
+} from './StandardsAndConditions';
 
-import { plain as StandardsAndConditions } from './StandardsAndConditions';
+import {
+  setActivityStandardAndConditionDoesNotSupportExplanation,
+  setActivityStandardAndConditionSupportExplanation
+} from '../../../../redux/actions/editActivity';
 
-const defaultProps = {
-  activity: {
-    standardsAndConditions: {
-      doesNotSupport: 'does not support',
-      supports: 'support'
-    }
-  },
-  activityIndex: 7,
-  setDoesNotSupport: jest.fn(),
-  setSupport: jest.fn()
-};
+describe('the Schedule (milestones) component', () => {
+  const props = {
+    activity: {
+      standardsAndConditions: {
+        doesNotSupport: 'does not support',
+        supports: 'support'
+      }
+    },
+    activityIndex: 7,
+    setDoesNotSupport: jest.fn(),
+    setSupport: jest.fn()
+  };
 
-const setup = async (props = {}) => {
-  // eslint-disable-next-line testing-library/no-unnecessary-act
-  const utils = await act(async () =>
-    renderWithConnection(<StandardsAndConditions {...defaultProps} {...props} />)
-  );
-  await waitFor(() => screen.findByText(/Standards and Conditions/i));
-  return utils;
-};
+  const component = shallow(<StandardsAndConditions {...props} />);
 
-describe('the StandardsAndConditions component', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    props.setDoesNotSupport.mockClear();
+    props.setSupport.mockClear();
   });
 
-  test('renders correctly', async () => {
-    await setup();
-    expect(
-      screen.getByLabelText(/Standards and Conditions/i)
-    ).toHaveValue(defaultProps.item.supports);
+  it('renders correctly', () => {
+    expect(component).toMatchSnapshot();
+  });
+
+  describe('events', () => {
+    it('updates explanation for not supporting standards and conditions', () => {
+      component.find('TextArea').prop('onChange')({
+        target: { value: 'new not support' }
+      });
+      expect(props.setDoesNotSupport).toHaveBeenCalledWith(
+        7,
+        'new not support'
+      );
+    });
+
+    it('updates description of supporting standards and conditions', () => {
+      component.find('Connect(RichText)').prop('onSync')('new support');
+      expect(props.setSupport).toHaveBeenCalledWith(7, 'new support');
+    });
+  });
+
+  describe('redux', () => {
+    it('map state to props', () => {
+      const state = {
+        apd: {
+          data: {
+            activities: ['activity 1', 'activity 2', 'activity 3']
+          }
+        }
+      };
+
+      expect(mapStateToProps(state, { activityIndex: 2 })).toEqual({
+        activity: 'activity 3'
+      });
+    });
+
+    it('map dispatch to props', () => {
+      expect(mapDispatchToProps).toEqual({
+        setDoesNotSupport:
+          setActivityStandardAndConditionDoesNotSupportExplanation,
+        setSupport: setActivityStandardAndConditionSupportExplanation
+      });
+    });
   });
 });
