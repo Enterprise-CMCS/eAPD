@@ -608,18 +608,17 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.log('State Staff and Expenses');
       cy.goToStateStaffAndExpenses(0);
-
+      
       cy.findByRole('button', { name: /Add State Staff/i }).click();
-      cy.findByRole('button', { name: /Add State Staff/i }).should('not.exist');
-
+      
       cy.findByRole('button', { name: /Cancel/i }).click();
-
+      
       cy.get('.form-and-review-list')
         .contains('State staff have not been added for this activity.')
         .should('exist');
-
+      
       cy.findByRole('button', { name: /Add State Staff/i }).click();
-
+      
       activityPage.checkInputField('Personnel title', '');
       activityPage.checkInputField('Description', '');
       activityPage.checkStateStaffFFY({
@@ -650,7 +649,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .eq(0)
         .findAllByRole('button', { name: /Edit/i })
         .click();
-
+      
       cy.findByLabelText('Personnel title').clear().blur();
       cy.contains('Provide a personnel title.').should('exist');
       
@@ -664,7 +663,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.contains('Provide a FTE number greater than or equal to 0.').should('exist');
       })
       
-
+      
       cy.get('.form-and-review-list')
         .eq(0)
         .findByRole('button', { name: /Cancel/i })
@@ -676,20 +675,17 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cost: 100000,
         fte: 1
       });
-
+      
       cy.findByRole('button', { name: /Add State Expense/i }).click();
-      cy.findByRole('button', { name: /Add State Expense/i }).should(
-        'not.exist'
-      );
-
+      
       cy.findByRole('button', { name: /Cancel/i }).click();
-
+      
       cy.get('.form-and-review-list')
         .contains('Add other state expense(s) for this activity.')
         .should('exist');
-
+      
       cy.findByRole('button', { name: /Add State Expense/i }).click();
-
+      
       activityPage.checkInputField('Description', '');
       activityPage.checkFFYinputCostFields({
         years,
@@ -699,14 +695,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
       
       cy.findByLabelText('Category').select('').blur();
-      cy.contains('Select a category.').should('exist');
+      cy.contains('Provide an expense category.').should('exist');
       
       cy.findByLabelText('Description').click().blur();
-      cy.contains('Provide a description of the selected non-personal category.').should('exist');
+      cy.contains('Provide an expense description.').should('exist');
       
       years.forEach(year => {
         cy.findByLabelText(`FFY ${year} Cost`).click().blur();
-        cy.contains('Provide an annual cost.').should('exist');
+        cy.contains('Provide an annual cost greater than $0.').should('exist');
       })
       
       cy.findByRole('button', { name: /Cancel/i }).click();
@@ -720,28 +716,18 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       ];
       
       fillOutActivityPage.fillStateExpenses(years, stateExpenses);
-
+      
       cy.get('.form-and-review-list')
         .eq(1)
         .findAllByRole('button', { name: /Edit/i })
         .click();
-
+      
       cy.findByLabelText('Description').type('Test cancel');
-
+      
       cy.get('.form-and-review-list')
         .eq(1)
         .findByRole('button', { name: /Cancel/i })
         .click();
-
-      const privateContractor = {
-        name: 'Test Private Contractor',
-        description: 'Test description',
-        start: [1, 1, 2020],
-        end: [1, 2, 2023],
-        totalCosts: 0,
-        hourly: false,
-        FFYcosts: [0, 0]
-      };
 
       cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);

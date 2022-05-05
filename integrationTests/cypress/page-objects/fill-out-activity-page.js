@@ -73,15 +73,16 @@ class FillOutActivityPage {
     }
   };
 
-  fillStateStaffAndExpenses = (staffList, expenseList, testDelete = false) => {
+  fillStateStaff = (years, staffList, testDelete = false) => {
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
     }).should('exist');
-
+  
     _.forEach(staffList, (staff, i) => {
       staffExpensesPage.addStaff();
       staffExpensesPage.fillStaff(
+        years,
         i,
         staff.title,
         staff.description,
@@ -96,7 +97,7 @@ class FillOutActivityPage {
         staff.ftes
       );
     });
-
+  
     if (testDelete) {
       // Tests deleting State Staff
       cy.findByRole('heading', { name: /^State Staff$/i })
@@ -108,23 +109,33 @@ class FillOutActivityPage {
             staffExpensesPage.deleteStaff(0);
           }
         });
-
-      cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 1);
-
+  
+      // cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 1);
+  
       // Check that the first staff on the page (index 0) has the second
       // staff's info
-      staffExpensesPage.verifyStaff(
-        0,
-        staffList[1].title,
-        staffList[1].description,
-        staffList[1].costs,
-        staffList[1].ftes
-      );
+      if(staffList.length > 1) {
+        staffExpensesPage.verifyStaff(
+          0,
+          staffList[1].title,
+          staffList[1].description,
+          staffList[1].costs,
+          staffList[1].ftes
+        );        
+      }
     }
-
+  };
+  
+  fillStateExpenses = (years, expenseList, testDelete = false) => {
+    cy.findByRole('heading', {
+      name: /State Staff and Expenses/i,
+      level: 3
+    }).should('exist');
+    
     _.forEach(expenseList, (expense, i) => {
       staffExpensesPage.addExpense();
       staffExpensesPage.fillExpense(
+        years,
         i,
         expense.category,
         expense.costs,
@@ -137,7 +148,7 @@ class FillOutActivityPage {
         expense.description
       );
     });
-
+    
     if (testDelete) {
       // Test deleting other state expense
       cy.findByRole('heading', { name: /^Other State Expenses$/i })
@@ -149,19 +160,21 @@ class FillOutActivityPage {
             staffExpensesPage.deleteExpense(0);
           }
         });
-
+    
       // If there are just two delete buttons, then an expense has been deleted;
       // the other delete button is from the remaining staff.
       cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 2);
-
-      staffExpensesPage.verifyExpense(
-        0,
-        expenseList[1].category,
-        expenseList[1].costs,
-        expenseList[1].description
-      );
+      
+      if(expenseList > 0) {
+        staffExpensesPage.verifyExpense(
+          0,
+          expenseList[1].category,
+          expenseList[1].costs,
+          expenseList[1].description
+        );      
+      }
     }
-  };
+  }
 
   addPrivateContractors = (contractorList, years, testDelete = false) => {
     cy.findByRole('heading', {
