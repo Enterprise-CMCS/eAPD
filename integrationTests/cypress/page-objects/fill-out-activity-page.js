@@ -81,14 +81,14 @@ class FillOutActivityPage {
   
     _.forEach(staffList, (staff, i) => {
       staffExpensesPage.addStaff();
-      staffExpensesPage.fillStaff(
+      staffExpensesPage.fillStaff({
         years,
-        i,
-        staff.title,
-        staff.description,
-        staff.costs,
-        staff.ftes
-      );
+        staffIndex: i,
+        title: staff.title,
+        description: staff.description,
+        costs: staff.costs,
+        ftes: staff.ftes
+      });
       staffExpensesPage.verifyStaff(
         i,
         staff.title,
@@ -134,13 +134,13 @@ class FillOutActivityPage {
     
     _.forEach(expenseList, (expense, i) => {
       staffExpensesPage.addExpense();
-      staffExpensesPage.fillExpense(
+      staffExpensesPage.fillExpense({
         years,
-        i,
-        expense.category,
-        expense.costs,
-        expense.description
-      );
+        expenseIndex: i,
+        category: expense.category,
+        costs: expense.costs,
+        desc: expense.description
+      });
       staffExpensesPage.verifyExpense(
         i,
         expense.category,

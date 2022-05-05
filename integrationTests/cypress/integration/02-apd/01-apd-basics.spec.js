@@ -695,14 +695,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
       
       cy.findByLabelText('Category').select('').blur();
-      cy.contains('Provide an expense category.').should('exist');
+      cy.contains('Select a category.').should('exist');
       
       cy.findByLabelText('Description').click().blur();
-      cy.contains('Provide an expense description.').should('exist');
+      cy.contains('Provide a description of the selected non-personal category.').should('exist');
       
       years.forEach(year => {
         cy.findByLabelText(`FFY ${year} Cost`).click().blur();
-        cy.contains('Provide an annual cost greater than $0.').should('exist');
+        cy.contains('Provide an annual cost.').should('exist');
       })
       
       cy.findByRole('button', { name: /Cancel/i }).click();
@@ -728,7 +728,17 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .eq(1)
         .findByRole('button', { name: /Cancel/i })
         .click();
-
+        
+      const privateContractor = {
+        name: 'Test Private Contractor',
+        description: 'Test description',
+        start: [1, 1, 2020],
+        end: [1, 2, 2023],
+        totalCosts: 0,
+        hourly: false,
+        FFYcosts: [0, 0]
+      };
+        
       cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);
 
