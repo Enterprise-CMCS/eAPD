@@ -584,6 +584,7 @@ jobs:
       - run:
           name: Deploy to Chromatic
           working_directory: ~/project/web
+          no_output_timeout: 60m
           command: yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
   # ===== Backend jobs =====
