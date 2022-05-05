@@ -2320,17 +2320,10 @@ cypress-timings@1.0.0:
   resolved "https://registry.yarnpkg.com/cypress-timings/-/cypress-timings-1.0.0.tgz#334dd23a28acb8edb85faea6f7db7ca69d7a4765"
   integrity sha512-gs86Nu5HcwRK4DEvvj3j/Dk9JfJ8Ik9CFhEr3ruhdSUm4dfS6hYiaaPHtsOJf4VQgsurFwHefCeXCO4sbyXdZQ==
 
-<<<<<<< HEAD
-cypress@9.5.3:
-  version "9.5.3"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-9.5.3.tgz#7c56b50fc1f1aa69ef10b271d895aeb4a1d7999e"
-  integrity sha512-ItelIVmqMTnKYbo1JrErhsGgQGjWOxCpHT1TfMvwnIXKXN/OSlPjEK7rbCLYDZhejQL99PmUqul7XORI24Ik0A==
-=======
 cypress@9.6.0:
   version "9.6.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-9.6.0.tgz#84473b3362255fa8f5e627a596e58575c9e5320f"
   integrity sha512-nNwt9eBQmSENamwa8LxvggXksfyzpyYaQ7lNBLgks3XZ6dPE/6BCQFBzeAyAPt/bNXfH3tKPkAyhiAZPYkWoEg==
->>>>>>> main
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
