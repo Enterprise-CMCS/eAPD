@@ -576,8 +576,8 @@ jobs:
     working_directory: ~/project/web
     steps:
       - checkout
-      - restore_cache:
-          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Install Web Dependencies
           working_directory: ~/project/web
