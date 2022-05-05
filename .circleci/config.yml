@@ -580,11 +580,7 @@ jobs:
       - run:
           name: Install Web Dependencies
           working_directory: ~/project/web
-          command: |
-            pwd
-            ls
-            yarn install --frozen-lockfile
-            yarn run
+          command: yarn install --frozen-lockfile
       - run:
           name: Deploy to Chromatic
           working_directory: ~/project/web
