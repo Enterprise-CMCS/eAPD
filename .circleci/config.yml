@@ -579,11 +579,15 @@ jobs:
           at: ~/project/web
       - run:
           name: Install Web Dependencies
+          working_directory: ~/project/web
           command: |
+            pwd
+            ls
             yarn install --frozen-lockfile
             yarn run
       - run:
           name: Deploy to Chromatic
+          working_directory: ~/project/web
           command: yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
   # ===== Backend jobs =====
