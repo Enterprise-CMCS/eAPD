@@ -504,6 +504,7 @@ jobs:
       - run:
           name: set up cypress
           working_directory: ~/project/integrationTests
+          no_output_timeout: 30m
           command: |
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
