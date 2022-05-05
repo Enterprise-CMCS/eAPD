@@ -21,19 +21,6 @@ describe('RichText component', () => {
       )
     ).toMatchSnapshot();
   });
-  
-  test('renders as expected with an error message', () => {
-    expect(
-      shallow(
-        <RichText
-          id="test-id"
-          content="initial rich text value"
-          uploadFile={jest.fn()}
-          error="test error msg"
-        />
-      )
-    ).toMatchSnapshot();
-  });
 
   test('calls the change handler when the content changes', () => {
     const onSync = jest.fn();

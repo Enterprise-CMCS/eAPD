@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderWithConnection, within, screen } from 'apd-testing-library';
-
 import Activities from './ActivitiesDashboardReadOnly';
 import apd, { activities } from '../../../../fixtures/mo-hitech-apd';
 import budget from '../../../../fixtures/mo-hitech-budget';

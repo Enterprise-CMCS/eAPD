@@ -104,7 +104,6 @@ const FormAndReviewList = ({
   ...rest
 }) => {
   const [hasAdded, setHasAdded] = useState(false);
-
   const [showAddButton, setShowAdd] = useState(true);
 
   const combinedClassName = useMemo(
