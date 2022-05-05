@@ -24,7 +24,6 @@ const setup = async (props = {}) => {
   const utils = await act(async () =>
     renderWithConnection(<StandardsAndConditions {...defaultProps} {...props} />)
   );
-  // await waitFor(() => screen.findByText(/Standards and Conditions/i));
   return utils;
 };
 
