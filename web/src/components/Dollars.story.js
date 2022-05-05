@@ -9,4 +9,4 @@ export default {
   }
 };
 
-export const Basic = (amt, ...args) => <Dollars {...args}>{amt}</Dollars>;
+export const Basic = amt => <Dollars>{amt}</Dollars>;
