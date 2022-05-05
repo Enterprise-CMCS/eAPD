@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 
-const { apd } = require('../../../../api/seeds/development/apds');
+const { apd } = require('../../../../api/seeds/development/apds'); //dont use this, use ak-apd.json instead
 const mongo = require('../../../../api/db/mongodb');
 
 import ApdViewOnly from './ApdReadOnly';
