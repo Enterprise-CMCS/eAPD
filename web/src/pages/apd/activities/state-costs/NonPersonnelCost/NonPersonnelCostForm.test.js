@@ -109,7 +109,7 @@ import React from 'react';
      });
      expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
-     const error = await screen.findByText('Provide an annual cost greater than $0.');
+     const error = await screen.findByText('Provide an annual cost.');
      expect(error).toBeInTheDocument();
    });
 
@@ -129,7 +129,7 @@ import React from 'react';
      });
      expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
-     const error = await screen.findByText('Provide an annual cost greater than $0.');
+     const error = await screen.findByText('Provide an annual cost.');
      expect(error).toBeInTheDocument();
    });
  });
