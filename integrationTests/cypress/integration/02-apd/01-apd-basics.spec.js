@@ -94,9 +94,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get('#apd-title-input').contains(`${title2}`);
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
-      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-        years.push(list[index].value)
-      );
       
       cy.get('[id="program-introduction-field"]').should('have.value', '');
     });
@@ -810,7 +807,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.75,
-                federalShareAmount: 8,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.25,
                 stateShareAmount: 2,
                 totalComputableMedicaidCost: 50000
@@ -820,7 +817,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.5,
-                federalShareAmount: 5,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.5,
                 stateShareAmount: 5,
                 totalComputableMedicaidCost: 50000
@@ -830,7 +827,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.9,
-                federalShareAmount: 9,
+                federalShareAmount: 0,
                 stateSharePercentage: 0.1,
                 stateShareAmount: 1,
                 totalComputableMedicaidCost: 50000
@@ -1031,7 +1028,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         );
 
       const privateContractorCosts = years
-        .map(year => `FFY ${year} Cost: $10`)
+        .map(year => `FFY ${year} Cost: $0`)
         .join('');
       cy.findByRole('heading', {
         name: /Activity 1: Program AdministrationPrivate Contractor Costs/i
