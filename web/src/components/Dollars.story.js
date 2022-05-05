@@ -9,4 +9,6 @@ export default {
   }
 };
 
-export const Basic = amt => <Dollars>{amt}</Dollars>;
+const Template = args => <Dollars {...args} />;
+
+export const Basic = Template.bind({});
