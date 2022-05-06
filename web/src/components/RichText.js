@@ -146,8 +146,7 @@ class RichText extends Component {
     try {
       const url = await upload(blob.blob());
       success(url);
-      /* global tinyMCE */
-      // ☝️ lets eslint know that tinyMCE is defined. Once we've told Tiny the
+      // Once we've told Tiny the
       // URL of the uploaded image, it'll update the content of the textbox,
       // but it does NOT call the change event. That means that dropped images
       // aren't saved as IMG tags unless the user makes additional changes to
@@ -207,9 +206,8 @@ class RichText extends Component {
             id={id}
             init={{
               skin: false,
-              skin: false,
               content_css: false,
-              content_style: [contentCss, contentUiCss].join('\n'),
+              // content_style: [contentCss, contentUiCss].join('\n'),
               toolbar,
               plugins,
               setup: setupTinyMCE(upload, onBlur),
