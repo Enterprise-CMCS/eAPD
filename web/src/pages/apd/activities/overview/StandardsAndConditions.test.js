@@ -34,8 +34,8 @@ describe('the StandardsAndConditions component', () => {
 
   test('renders correctly', async () => {
     await setup();
-    expect(
-      screen.getById('standards-and-conditions-supports-field_ifr')
-    ).toHaveValue(defaultProps.item.name);
+    const richText = screen.getByTestId('standards-and-conditions-supports');
+
+    console.log(richText);
   });
 });

@@ -27,7 +27,7 @@ const ActivityOverview = forwardRef(({
   setAlternatives,
   setDescription,
   setOverview
-}, ref) => {
+}) => {
   ActivityOverview.displayName = 'ActivityOverview';
 
   const { alternatives, description, summary } = activity;

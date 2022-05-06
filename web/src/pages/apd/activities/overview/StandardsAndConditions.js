@@ -25,7 +25,7 @@ const StandardsAndConditions = forwardRef(
     activityIndex,
     setDoesNotSupport,
     setSupport
-  }, ref) => {
+  }) => {
     StandardsAndConditions.displayName = 'StandardsAndConditions';
 
     const {doesNotSupport, supports} = activity.standardsAndConditions;
@@ -81,6 +81,7 @@ const StandardsAndConditions = forwardRef(
             render={({ field: { onChange, onBlur } }) => (
               <RichText
                 id="standards-and-conditions-supports-field"
+                data-testid="standards-and-conditions-supports"
                 content={activity.standardsAndConditions.supports}
                 onSync={html => {
                   setSupport(activityIndex, html);
