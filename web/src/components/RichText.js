@@ -1,21 +1,32 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
 
-// A theme is required
+// TinyMCE so the global var exists
+// eslint-disable-next-line no-unused-vars
+import tinymce from 'tinymce/tinymce';
+
+// Theme
 import 'tinymce/themes/silver';
+// Toolbar icons
 import 'tinymce/icons/default';
+// Editor styles
+import 'tinymce/skins/ui/oxide/skin.min.css';
+
+// Content styles, including inline UI like fake cursors
+/* eslint import/no-webpack-loader-syntax: off */
+import 'tinymce/skins/content/default/content.min.css';
+import 'tinymce/skins/ui/oxide/content.min.css';
 
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
-import 'tinymce/plugins/autoresize';
-import 'tinymce/plugins/lists';
+import 'tinymce/plugins/link';
 import 'tinymce/plugins/image';
+import 'tinymce/plugins/lists';
+import 'tinymce/plugins/autoresize';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
-import 'tinymce/plugins/link';
 
 import { uploadFile } from '../redux/actions/editApd';
 import { generateKey } from '../util';
@@ -142,7 +153,7 @@ class RichText extends Component {
       // aren't saved as IMG tags unless the user makes additional changes to
       // the textbox content. To get around that, we can get a reference to
       // the editor, pull the content, and manually trigger the event.
-      const editor = tinyMCE.get(id);
+      const editor = tinymce.get(id);
       onSync(editor.getContent());
     } catch (e) {
       failure('Unable to upload file');
@@ -185,10 +196,20 @@ class RichText extends Component {
 
     return (
       <Fragment>
-        <div className={this.props.error ? 'rte--wrapper ds-c-field--error ds-u-radius' : 'rte--wrapper'}>
+        <div
+          className={
+            this.props.error
+              ? 'rte--wrapper ds-c-field--error ds-u-radius'
+              : 'rte--wrapper'
+          }
+        >
           <Editor
             id={id}
             init={{
+              skin: false,
+              skin: false,
+              content_css: false,
+              content_style: [contentCss, contentUiCss].join('\n'),
               toolbar,
               plugins,
               setup: setupTinyMCE(upload, onBlur),
