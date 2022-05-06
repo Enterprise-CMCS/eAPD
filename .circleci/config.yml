@@ -84,7 +84,7 @@ workflows:
               only: /.*/
       - e2e test:
           filters:
-            branches:
+#            branches:
 #              ignore:    # Commenting out to add e2e to Staging builds, leaving until confirmed working as intended TODO: REMOVE
 #                - main
             tags:
