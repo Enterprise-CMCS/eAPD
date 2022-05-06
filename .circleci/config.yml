@@ -85,8 +85,8 @@ workflows:
       - e2e test:
           filters:
             branches:
-              ignore:
-                - main
+#              ignore:    # Commenting out to add e2e to Staging builds, leaving until confirmed working as intended TODO: REMOVE
+#                - main
             tags:
               ignore: ignore-e2e
           requires:
