@@ -59,7 +59,7 @@ const config = {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: [path.resolve(__dirname, '/node_modules')]
+                includePaths: [path.resolve(__dirname, '../node_modules')]
               }
             }
           }
@@ -72,7 +72,23 @@ const config = {
         // they will be a part of our compilation either way.
         // So, no need for ExtractTextPlugin here.
         test: /\.css$/,
-        include: /node_modules/,
+        include: [
+          path.join(__dirname, 'src'),
+          path.join(__dirname, 'node_modules/@uppy/core/dist/style.css'),
+          path.join(__dirname, 'node_modules/@uppy/drag-drop/dist/style.css'),
+          path.join(
+            __dirname,
+            'node_modules/tinymce/skins/ui/oxide/skin.min.css'
+          ),
+          path.join(
+            __dirname,
+            'node_modules/tinymce/skins/content/default/content.min.css'
+          ),
+          path.join(
+            __dirname,
+            'node_modules/tinymce/skins/ui/oxide/content.min.css'
+          )
+        ],
         use: ['style-loader', 'css-loader']
       },
       {
