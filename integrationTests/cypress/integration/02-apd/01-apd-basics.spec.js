@@ -435,45 +435,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('@personnelVals2').contains('Delete').should('exist');
       cy.get('@personnelVals2').contains('Edit').should('exist');
 
-      // Testing Activity Overview Missing Fields
-      cy.goToActivityDashboard();
-      
-      cy.contains('Add Activity').click();
-      cy.contains('Activity 2').should('exist');
-      cy.get('[class="activity--body activity--body__notfirst"]')
-      .contains('Edit').click();
-      cy.contains('Activity Overview').should('exist');
-
-      cy.get('input[name="name"]').focus().blur();
-      cy.contains('Activity Name is required.').should('exist');
-
-      cy.get('[class="ds-c-choice"]').eq(0).focus().blur();
-      cy.contains('Must select program type.').should('exist');
-
-      cy.contains('Start date')
-        .parent()
-        .next('div')
-        .within(() => cy.findByLabelText('Month').focus().blur());
-      cy.contains('Provide a start date.').should('exist');
-
-      cy.contains('End date')
-        .parent()
-        .next('div')
-        .within(() => cy.findByLabelText('Year').focus().blur());
-      cy.contains('Provide an end date.').should('exist');
-
-      cy.get('input[name="name"]')
-        .focus()
-        .type('My Activity')
-        .blur();
-      cy.contains('Activity Name is required.').should('not.exist');
-
-      cy.get('input[type="radio"][value="HIE"]').check({ force: true }).blur()
-      cy.contains('Must select program type.').should('not.exist');
-
-      // Testing Delete activity button
       cy.log('Activity Dashboard');
       cy.goToActivityDashboard();
+
+      // Testing add activity button at end of Activitiy
+      cy.contains('Add Activity').click();
       cy.contains('Activity 2').should('exist');
       cy.contains('Delete').should('exist');
       cy.contains('Delete').click();
@@ -613,10 +579,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
         cy.get(`.ds-c-field--day`).click().type(element.dateDay);
 
-        cy.get(`.ds-c-field--year`)
-          .click()
-          .type(element.dateYear)
-          .blur();
+        cy.get(`.ds-c-field--year`).click().type(element.dateYear);
 
         cy.findByRole('button', { name: /Save/i }).click();
 
@@ -667,51 +630,28 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           total: 0
         }))
       });
-      
-      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
-      
-      cy.findByRole('button', { name: /Cancel/i }).click();
-      
-      const staffList = [
-        {
-          title: 'Test State Staff',
-          description: 'Director of staffing and organizing staff for staffing needs and roles.',
-          costs: [100000,100000],
-          ftes: [1,1]
-        }
-      ];
-      
-      fillOutActivityPage.fillStateStaff(years, staffList);
-      
+
+      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.waitForSave();
+
       cy.get('.form-and-review-list')
         .eq(0)
         .findAllByRole('button', { name: /Edit/i })
         .click();
 
-      cy.findByLabelText('Personnel title').clear().blur();
-      cy.contains('Provide a personnel title.').should('exist');
-      
-      cy.findByLabelText('Description').clear().blur();
-      cy.contains('Provide a personnel description.').should('exist');
-      
-      years.forEach((year) => {
-        cy.get(`[name="[${year}].amt"`).clear().blur();
-        cy.contains('Please provide a FTE cost greater than or equal to $0.').should('exist');
-        cy.get(`[name="[${year}].perc"`).clear().blur();
-        cy.contains('Provide a FTE number greater than or equal to 0.').should('exist');
-      })
-      
+      cy.findByLabelText('Personnel title').type('Test cancel');
 
       cy.get('.form-and-review-list')
         .eq(0)
         .findByRole('button', { name: /Cancel/i })
         .click();
-        
+
       activityPage.checkStateStaffOutput({
-        name: 'Test State Staff',
+        name: 'Personnel title not specified',
         years,
-        cost: 100000,
-        fte: 1
+        cost: 0,
+        fte: 0
       });
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
@@ -868,7 +808,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalShareAmount: 0,
                 stateSharePercentage: 0.25,
                 stateShareAmount: 2,
-                totalComputableMedicaidCost: 150000
+                totalComputableMedicaidCost: 50000
               });
 
               cy.get('[class="ds-c-field"]').select('50-50');
@@ -878,7 +818,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalShareAmount: 0,
                 stateSharePercentage: 0.5,
                 stateShareAmount: 5,
-                totalComputableMedicaidCost: 150000
+                totalComputableMedicaidCost: 50000
               });
 
               cy.get('[class="ds-c-field"]').select('90-10');
@@ -888,7 +828,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 federalShareAmount: 0,
                 stateSharePercentage: 0.1,
                 stateShareAmount: 1,
-                totalComputableMedicaidCost: 150000
+                totalComputableMedicaidCost: 50000
               });
             });
         });
@@ -917,7 +857,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
                 )
                 .next()
-                .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000')
+                .should('have.text', 'Personnel title not specified$0')
                 .next()
                 .next()
                 .next()
@@ -975,7 +915,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000');
+            .should('have.text', 'Personnel title not specified$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -1063,13 +1003,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         name: /Activity 1: Program AdministrationState staff/i
       })
         .next()
-        .should('have.text', '1. Test State Staff')
+        .should('have.text', '1. Personnel title not specified')
         .next()
         .next()
         .should(
           'have.text',
           years
-            .map(year => `FFY ${year} Cost: $100,000 | FTEs: 1 | Total: $100,000`)
+            .map(year => `FFY ${year} Cost: $0 | FTEs: 0 | Total: $0`)
             .join('')
         );
 
@@ -1133,7 +1073,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                   `${keyPersons[2].name} (APD Key Personnel)$100,000×0.5 FTE=$50,000`
                 )
                 .next()
-                .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000')
+                .should('have.text', 'Personnel title not specified$0')
                 .next()
                 .next()
                 .next()
@@ -1184,7 +1124,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             );
           cy.get('@stateStaff')
             .eq(3)
-            .should('have.text', 'Test State Staff$100,000×1 FTE=$100,000');
+            .should('have.text', 'Personnel title not specified$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -1270,7 +1210,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       activityPage.checkDeleteButton(
         'State staff have not been added for this activity.',
         'Delete State Staff Expenses?',
-        'Test State Staff'
+        'Personnel title not specified'
       );
 
       activityPage.checkDeleteButton(

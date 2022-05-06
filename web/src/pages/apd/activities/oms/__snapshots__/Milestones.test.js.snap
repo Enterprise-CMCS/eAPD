@@ -28,7 +28,6 @@ exports[`the Milestones component renders correctly 1`] = `
               "index": [Function],
               "item": [Function],
               "saveMilestone": [Function],
-              "setFormValid": [Function],
             },
             "render": [Function],
           },

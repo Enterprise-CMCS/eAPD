@@ -17,7 +17,7 @@ const NameAndFundingSourceForm = forwardRef(
     item: { fundingSource, name }, 
     setFundingSource,
     setName 
-  }) => {
+  }, ref) => {
     NameAndFundingSourceForm.displayName = 'NameAndFundingSourceForm';
 
     const {
