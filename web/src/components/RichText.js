@@ -5,7 +5,7 @@ import { Editor } from '@tinymce/tinymce-react';
 
 // TinyMCE so the global var exists
 // eslint-disable-next-line no-unused-vars
-import tinymce from 'tinymce/tinymce';
+import 'tinymce/tinymce';
 
 // Theme
 import 'tinymce/themes/silver';
@@ -146,13 +146,14 @@ class RichText extends Component {
     try {
       const url = await upload(blob.blob());
       success(url);
-      // Once we've told Tiny the
+      /* global tinyMCE */
+      // ☝️ lets eslint know that tinyMCE is defined. Once we've told Tiny the
       // URL of the uploaded image, it'll update the content of the textbox,
       // but it does NOT call the change event. That means that dropped images
       // aren't saved as IMG tags unless the user makes additional changes to
       // the textbox content. To get around that, we can get a reference to
       // the editor, pull the content, and manually trigger the event.
-      const editor = tinymce.get(id);
+      const editor = tinyMCE.get(id);
       onSync(editor.getContent());
     } catch (e) {
       failure('Unable to upload file');
