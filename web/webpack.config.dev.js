@@ -74,17 +74,20 @@ const config = {
         test: /\.css$/,
         include: [
           path.join(__dirname, 'src'),
-          path.join(__dirname, 'node_modules/@uppy/core/dist/style.css'),
-          path.join(__dirname, 'node_modules/@uppy/drag-drop/dist/style.css'),
-          path.join(
+          path.resolve(__dirname, 'node_modules/@uppy/core/dist/style.min.css'),
+          path.resolve(
+            __dirname,
+            'node_modules/@uppy/drag-drop/dist/style.min.css'
+          ),
+          path.resolve(
             __dirname,
             'node_modules/tinymce/skins/ui/oxide/skin.min.css'
           ),
-          path.join(
+          path.resolve(
             __dirname,
             'node_modules/tinymce/skins/content/default/content.min.css'
           ),
-          path.join(
+          path.resolve(
             __dirname,
             'node_modules/tinymce/skins/ui/oxide/content.min.css'
           )

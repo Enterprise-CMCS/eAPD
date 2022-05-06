@@ -138,6 +138,7 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-plugin-storybook": "0.5.8",
     "eslint-plugin-testing-library": "5.1.0",
+    "html-webpack-link-type-plugin": "1.1.1",
     "jest": "27.5.1",
     "jest-axe": "5.0.1",
     "jest-environment-jsdom": "27.5.1",

@@ -3,6 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const LinkTypePlugin =
+  require('html-webpack-link-type-plugin').HtmlWebpackLinkTypePlugin;
 
 const config = {
   mode: 'production',
@@ -32,8 +34,7 @@ const config = {
         use: ['babel-loader']
       },
       {
-        test: /\.s?css$/,
-        exclude: /node_modules\/(?!(@uppy|tinymce|@tinymce)\/)/,
+        test: /\.scss$/,
 
         // Remember that these run in reverse, so start at the last item in the
         // array and read up to understand what's going on.
@@ -43,6 +44,8 @@ const config = {
           // together
           MiniCssExtractPlugin.loader,
 
+          // Creates `style` nodes from JS strings
+          'style-loader',
           // Interprets any url() and @import statements and resolves them to
           // their full path on the local disk.
           {
@@ -80,6 +83,64 @@ const config = {
         ]
       },
       {
+        // Do not transform vendor's CSS with CSS-modules
+        // The point is that they remain in global scope.
+        // Since we require these CSS files in our JS or CSS files,
+        // they will be a part of our compilation either way.
+        // So, no need for ExtractTextPlugin here.
+        test: /\.css$/,
+        include: [
+          path.join(__dirname, 'src'),
+          path.resolve(__dirname, 'node_modules/@uppy/core/dist/style.min.css'),
+          path.resolve(
+            __dirname,
+            'node_modules/@uppy/drag-drop/dist/style.min.css'
+          ),
+          path.resolve(
+            __dirname,
+            'node_modules/tinymce/skins/ui/oxide/skin.min.css'
+          ),
+          path.resolve(
+            __dirname,
+            'node_modules/tinymce/skins/content/default/content.min.css'
+          ),
+          path.resolve(
+            __dirname,
+            'node_modules/tinymce/skins/ui/oxide/content.min.css'
+          )
+        ],
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        // Do not transform vendor's CSS with CSS-modules
+        // The point is that they remain in global scope.
+        // Since we require these CSS files in our JS or CSS files,
+        // they will be a part of our compilation either way.
+        // So, no need for ExtractTextPlugin here.
+        test: /\.css$/,
+        include: [
+          path.join(__dirname, 'src'),
+          path.join(__dirname, 'node_modules/@uppy/core/dist/style.min.css'),
+          path.join(
+            __dirname,
+            'node_modules/@uppy/drag-drop/dist/style.min.css'
+          ),
+          path.join(
+            __dirname,
+            'node_modules/tinymce/skins/ui/oxide/skin.min.css'
+          ),
+          path.join(
+            __dirname,
+            'node_modules/tinymce/skins/content/default/content.min.css'
+          ),
+          path.join(
+            __dirname,
+            'node_modules/tinymce/skins/ui/oxide/content.min.css'
+          )
+        ],
+        use: ['style-loader', 'css-loader']
+      },
+      {
         test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
         type: 'asset/resource',
         generator: {
@@ -108,6 +169,10 @@ const config = {
     new HtmlWebpackPlugin({
       minify: { removeComments: true },
       template: 'src/index.html'
+    }),
+
+    new LinkTypePlugin({
+      '*.css': 'text/css'
     })
   ],
   stats: {
