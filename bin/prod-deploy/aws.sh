@@ -68,7 +68,7 @@ function deployAPItoEC2() {
   echo "• Found previous instances: $PREV_INSTANCE_INFOS"
 
   AMI_ID=$(findAMI)
-  echo "• Using most recent EAST-RH AMI: $AMI_ID"
+  echo "• Using most recent eAPD Production AMI: $AMI_ID"
 
   # Create new EC2 instance
   INSTANCE_ID=$(createNewInstance $AMI_ID)
