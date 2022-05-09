@@ -2,6 +2,7 @@
 
 exports[`admin route component renders correctly if logged in and admin 1`] = `
 <Route
+  component={[Function]}
   location={
     Object {
       "from": "over there",
@@ -11,21 +12,11 @@ exports[`admin route component renders correctly if logged in and admin 1`] = `
 />
 `;
 
-exports[`admin route component renders correctly if logged in and admin 2`] = `
-<component
-  authenticated={true}
-  component={[Function]}
-  isAdmin={true}
-  location={
-    Object {
-      "from": "over there",
-    }
-  }
-/>
-`;
+exports[`admin route component renders correctly if logged in and admin 2`] = `<React.Fragment />`;
 
 exports[`admin route component renders correctly if logged in but not admin 1`] = `
 <Route
+  component={[Function]}
   location={
     Object {
       "from": "over there",
@@ -39,6 +30,7 @@ exports[`admin route component renders correctly if logged in but not admin 2`] 
 
 exports[`admin route component renders correctly if logged out 1`] = `
 <Route
+  component={[Function]}
   location={
     Object {
       "from": "over there",
