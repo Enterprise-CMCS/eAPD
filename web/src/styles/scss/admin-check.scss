@@ -1,4 +1,25 @@
-.eapd-admin-check {
+.eapd-admin-check__drawer {
   z-index: 999;
   top: 60.5px;
+  box-shadow: none;
+  background: none;
+}
+
+.eapd-admin-check__divider {
+  border: none;
+  border-bottom: 3px solid $color-primary;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.eapd-admin-check__drawer .ds-c-drawer__header {
+  padding: 24px 16px;
+}
+
+.eapd-admin-check__drawer .ds-c-drawer__window {
+  height: auto;
+}
+
+.eapd-admin-check__drawer .ds-c-drawer__body {
+  background: #ffffff;
 }
