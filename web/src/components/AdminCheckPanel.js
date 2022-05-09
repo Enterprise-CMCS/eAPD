@@ -18,10 +18,10 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
     <Fragment>
       {showAdminCheck && (
         <Drawer
-          footerTitle="Footer Title"
-          footerBody={<p className="ds-text ds-u-margin--0">Footer content</p>}
+          footerBody={<p className="ds-text ds-u-margin--0"><a onClick={handleClose}>Stop Check</a> <br/> APDs cannot be submitted until all required fields are complete. Exiting the required fields review will pause the review until you choose to restart the review or complete all required fields.</p>}
           heading="Administrative Check"
           onCloseClick={handleClose}
+          className="eapd-admin-check"
         >
           <p>
             Review the list below for any required fields in this APD which are missing content. These fields must be completed before submission to CMS.

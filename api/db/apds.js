@@ -21,14 +21,11 @@ const adminCheck = apd => {
             description: "please include a name"
           },
           {
-            name: ""
+            name: "HIE Overview",
+            description: "please include hie overview"
           }
         ]
-     },
-     activities: [
-       // { incomplete: <number>, link: <string>, fields: [] },
-       // { incomplete: <number>, link: <string>, fields: [] }
-     ]
+     }
     },
     recents: ""
   };
@@ -94,8 +91,10 @@ const adminCheck = apd => {
 
 const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
   let newApd = new APD(apd);
-
-  newApd = await newApd.save();
+  
+  newApd.metadata = adminCheck(newApd);
+  
+  newApd = await newApd.save({ validateBeforeSave: false });
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
@@ -132,13 +131,21 @@ const patchAPD = async (
   const apdJSON = JSON.parse(JSON.stringify(apdDoc));
   // apply the patches to the apd
   const { newDocument } = applyPatch(apdJSON, patch);
+  
+  // check for new validation errors
+  // only way I could think of is to cast newDocument as a mongoose document
+  // so we could perform the validation manually
+  const newDocForValidation = new APD(newDocument);
+  
+  newDocForValidation.metadata = adminCheck(newDocForValidation); 
+  
   // update the apd in the database
-  await APD.replaceOne({ _id: id, stateId }, newDocument, {
+  await APD.replaceOne({ _id: id, stateId }, newDocForValidation, {
     multipleCastError: true,
-    runValidators: true
+    runValidators: false
   });
   // return the updated apd
-  return newDocument;
+  return newDocForValidation;
 };
 
 const updateAPDDocument = async (
