@@ -34,8 +34,10 @@ describe('the StandardsAndConditions component', () => {
 
   test('renders correctly', async () => {
     await setup();
-    const richText = screen.getByTestId('standards-and-conditions-supports');
-    // testing getByTestId
-    console.log(richText);
+    expect(
+      screen.getByLabelText(
+        /Standards and Conditions/i
+      )
+    ).toHaveValue(defaultProps.activity.standardsAndConditions.supports);
   });
 });

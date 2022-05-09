@@ -1,3 +1,4 @@
+import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { forwardRef, Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -62,36 +63,36 @@ const StandardsAndConditions = forwardRef(
 
     return (
       <Fragment>
-        <label htmlFor="standards-and-conditions-supports-field">
-          <h4 className="ds-h4">Standards and Conditions</h4>
-        </label>
-
-        <div className="ds-u-margin-bottom--6 ds-u-margin-top--3">
-          <p className="ds-u-margin-bottom--3">
-            Include a description about how this activity will support the Medicaid
-            standards and conditions <a
+        <FormLabel
+          className='full-width-label'
+          fieldId='standards-and-conditions-supports-field'
+        >
+          Standards and Conditions
+          <span className="ds-c-field__hint ds-u-margin--0">
+            Include a description about how this activity will support the Medicaid standards and conditions <a
               href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112"
               rel="noreferrer"
               target="_blank"
             >42 CFR 433.112</a>.
-          </p>
-          <Controller
-            name="supports"
-            control={control}
-            render={({ field: { onChange, onBlur } }) => (
-              <RichText
-                id="standards-and-conditions-supports-field"
-                data-testid="standards-and-conditions-supports"
-                content={activity.standardsAndConditions.supports}
-                onSync={html => {
-                  setSupport(activityIndex, html);
-                  onChange(html);
-                }}
-                editorClassName="rte-textarea-1"
-                onBlur={onBlur}
-              />
-            )}
-          />
+          </span>
+        </FormLabel>
+        <Controller
+          name="supports"
+          control={control}
+          render={({ field: { onChange, onBlur } }) => (
+            <RichText
+              id="standards-and-conditions-supports-field"
+              data-testid="standards-and-conditions-supports"
+              content={activity.standardsAndConditions.supports}
+              onSync={html => {
+                setSupport(activityIndex, html);
+                onChange(html);
+              }}
+              editorClassName="rte-textarea-1"
+              onBlur={onBlur}
+            />
+          )}
+        />
 
         {errors?.supports && (
           <span
@@ -123,7 +124,6 @@ const StandardsAndConditions = forwardRef(
               )}
             />
           </div>
-        </div>
       </Fragment>
     );
   }
