@@ -15,8 +15,8 @@ import 'tinymce/icons/default';
 import 'tinymce/skins/ui/oxide/skin.min.css';
 
 /* Import content css */
-import contentUiCss from 'tinymce/skins/ui/oxide/content.css';
-import contentCss from 'tinymce/skins/content/default/content.css';
+import contentUiCss from 'tinymce/skins/ui/oxide/content.min.css';
+import contentCss from 'tinymce/skins/content/default/content.min.css';
 
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
