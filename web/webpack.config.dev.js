@@ -70,6 +70,10 @@ const config = {
         use: ['style-loader', 'css-loader']
       },
       {
+        test: /style\.min\.css$/i,
+        use: ['style-loader', 'css-loader']
+      },
+      {
         test: /content\.min\.css$/i,
         use: ['css-loader']
       },

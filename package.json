@@ -71,7 +71,7 @@
     ],
     "nohoist": [
       "api/ajv",
-      "web/@uppy/**",
+      "web/@uppy",
       "web/tinymce",
       "web/@tinymce/tinymce-react",
       "web/@cmsgov/design-system"
