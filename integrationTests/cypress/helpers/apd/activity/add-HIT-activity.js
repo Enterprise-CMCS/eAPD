@@ -66,10 +66,15 @@ export const addHITActivity = years => {
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillStateStaffAndExpenses(
+      fillOutActivityPage.fillStateStaff(
+        years,
         activityData.staff,
+        true
+      );
+      
+      fillOutActivityPage.fillStateExpenses(
         activityData.expenses,
-        true // Test delete flag
+        true
       );
 
       cy.waitForSave();

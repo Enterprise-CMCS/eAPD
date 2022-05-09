@@ -1,5 +1,7 @@
 /* eslint class-methods-use-this: "off" */
 
+const { _ } = Cypress;
+
 // Extract just the numbers from an input string and decimals
 const extractNumber = str => {
   return parseFloat(str.replace(/[^0-9.]/g, ''));
@@ -8,7 +10,6 @@ const extractNumber = str => {
 class ActivitiesStateStaffExpensesPage {
   addStaff = () => {
     cy.findByRole('button', { name: /^Add State Staff$/i }).click();
-    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   deleteStaff = index => {
@@ -26,30 +27,22 @@ class ActivitiesStateStaffExpensesPage {
   };
 
   // Open the indexth staff edit page, fill info, then click done.
-  fillStaff = (staffIndex, title, desc, costs, ftes) => {
+  fillStaff = ({years, staffIndex, title, description, costs, ftes}) => {
     const staffNumber = staffIndex + 1;
-
-    cy.findByRole('heading', { name: /^State Staff$/i })
-      .next()
-      .next()
-      .findAllByRole('button', { name: /^Edit/i })
-      .eq(staffIndex)
-      .click();
-
+  
     // Lower default typing delays for long titles/descriptions
     cy.get('[name="title"]').clear().type(title, { delay: 1 });
-
-    cy.get('[name="desc"]').clear().type(desc, { delay: 1 });
-
+  
+    cy.get('[name="description"]').clear().type(description, { delay: 1 });
+  
     // There are multiple years to fill in for cost/FTE
-    cy.get('[name="cost"]').each(($el, index) => {
-      cy.wrap($el).clear().type(costs[index]);
+    _.forEach(years, (year, index) => {
+      cy.get(`[name="[${year}].amt"`).clear().type(costs[index], { delay: 1});
+      cy.get(`[name="[${year}].perc"`).clear().type(ftes[index], { delay: 1});
     });
-
-    cy.get('[name="ftes"]').each(($el, index) => {
-      cy.wrap($el).clear().type(ftes[index]);
-    });
-
+    
+    cy.focused().blur();
+  
     // Verify that Total = Cost with Benefits * Number of FTEs
     cy.findByRole('heading', { name: `Personnel ${staffNumber}:` })
       .parent()
@@ -63,7 +56,7 @@ class ActivitiesStateStaffExpensesPage {
             cy.wrap(total).should('eq', costs[index] * ftes[index]);
           });
       });
-
+  
     cy.findByRole('button', { name: /Save/i }).click();
   };
 
