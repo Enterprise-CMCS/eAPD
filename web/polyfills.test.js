@@ -10,3 +10,7 @@ global.requestAnimationFrame = callback => {
 global.cancelAnimationFrame = callback => {
   setTimeout(callback, 0);
 };
+
+global.utag = {
+  view: () => {}
+};

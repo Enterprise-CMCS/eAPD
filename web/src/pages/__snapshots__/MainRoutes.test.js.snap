@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Routes component renders correctly 1`] = `
+<div>
+  <main
+    id="start-main-content"
+  >
+    <div
+      class="card--container ds-u-margin-top--7"
+    >
+      <div
+        class="ds-l-container"
+      >
+        <div
+          class="ds-l-row card"
+        >
+          <div
+            class="ds-l-col--1 ds-u-margin-left--auto"
+          />
+          <div
+            class="ds-l-col--12 ds-l-sm-col--10 ds-l-lg-col--6"
+          >
+            <p>
+              This is a U.S. government service. Your use indicates your consent to monitoring, recording, and no expectation of privacy. Misuse is subject to criminal and civil penalties.
+              <button
+                class="ds-c-button ds-c-button--transparent ds-c-button--small"
+                type="button"
+              >
+                Read more details
+              </button>
+            </p>
+            <div
+              class="ds-u-text-align--center"
+            >
+              <button
+                class="ds-c-button ds-c-button--primary"
+                type="button"
+              >
+                Agree and continue
+              </button>
+            </div>
+          </div>
+          <div
+            class="ds-l-col--1 ds-u-margin-right--auto"
+          />
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+`;

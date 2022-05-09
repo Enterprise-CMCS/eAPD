@@ -114,13 +114,19 @@ const config = {
       API_URL: null,
       OKTA_DOMAIN: '',
       OKTA_SERVER_ID: '',
-      OKTA_CLIENT_ID: ''
+      OKTA_CLIENT_ID: '',
+      ENV: process.env.ENV === 'PRODUCTION' ? 'prod' : 'impl'
     }),
 
     // Inject our app scripts into our HTML kickstarter
     new HtmlWebpackPlugin({
       minify: { removeComments: true },
-      template: 'src/index.html'
+      template: 'src/index.html',
+
+      // Tealium
+      tealiumUrl: `https://tags.tiqcdn.com/utag/cmsgov/cms-eapd/${process.env.TEALIUM_TAG}/utag.sync.js`,
+      tealiumProfile: 'cms-eapd',
+      environment: process.env.ENV === 'PRODUCTION' ? 'prod' : 'impl'
     })
   ],
   stats: {
