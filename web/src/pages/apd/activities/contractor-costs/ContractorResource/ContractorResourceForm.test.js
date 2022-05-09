@@ -83,6 +83,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders correctly with yearly', async () => {
+    jest.setTimeout(30000);
     await setup();
     expect(
       screen.getByLabelText(/Private Contractor or Vendor Name/i)
@@ -127,6 +128,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders correctly with hourly', async () => {
+    jest.setTimeout(30000);
     await setup({
       ...defaultProps,
       item: {
@@ -182,6 +184,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders errors when fields are empty', async () => {
+    jest.setTimeout(30000);
     await setup({
       ...defaultProps,
       item: { useHourly: null, years: { 1066: null, 1067: null } }

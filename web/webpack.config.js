@@ -20,7 +20,13 @@ const config = {
     // By default, grabs everything in node_modules and puts it into a
     // vendored chunk.
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      cacheGroups: {
+        tinymceVendor: {
+          test: /[\\/]node_modules[\\/](tinymce)[\\/](.*js|.*skin.css)|[\\/]plugins[\\/]/,
+          name: 'tinymce'
+        }
+      }
     },
     moduleIds: 'deterministic'
   },
@@ -32,8 +38,7 @@ const config = {
         use: ['babel-loader']
       },
       {
-        test: /\.s?css$/,
-        exclude: /node_modules\/(?!(@uppy|tinymce|@tinymce)\/)/,
+        test: /\.scss$/,
 
         // Remember that these run in reverse, so start at the last item in the
         // array and read up to understand what's going on.
@@ -78,6 +83,14 @@ const config = {
             }
           }
         ]
+      },
+      {
+        test: /skin\.min\.css$/i,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /content\.css$/i,
+        use: ['css-loader']
       },
       {
         test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,

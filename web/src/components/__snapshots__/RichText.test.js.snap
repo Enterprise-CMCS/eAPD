@@ -14,7 +14,8 @@ exports[`RichText component renders as expected 1`] = `
           "autoresize_bottom_margin": 0,
           "browser_spellcheck": true,
           "content_css": false,
-          "content_style": "body { font-family: \\"Open Sans\\", Helvetica, sans-serif; line-height: 1.4; }",
+          "content_style": "[object Object]
+[object Object]",
           "default_link_target": "_blank",
           "encoding": "xml",
           "file_picker_types": "image",
