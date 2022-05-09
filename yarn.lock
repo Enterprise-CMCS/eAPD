@@ -10129,13 +10129,6 @@ html-void-elements@^1.0.0:
   resolved "https://registry.yarnpkg.com/html-void-elements/-/html-void-elements-1.0.5.tgz#ce9159494e86d95e45795b166c2021c2cfca4483"
   integrity sha512-uE/TxKuyNIcx44cIWnjr/rfIATDH7ZaOMmstu0CwhFG1Dunhlp4OC6/NMbhiwoq5BpW0ubi303qnEk/PZj614w==
 
-html-webpack-link-type-plugin@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/html-webpack-link-type-plugin/-/html-webpack-link-type-plugin-1.1.1.tgz#ad9ffbf5ab50a5fd3d1d66125c3223951c9f6525"
-  integrity sha512-s7rcMvcpX6mz4CezXC63vcgEqmhhyuEjVcA17jE60gN9Hpp0CZlHyKOq4uDBa2J0PhV8pFQi1xPmtsMwCPN1zg==
-  dependencies:
-    minimatch "3.0.4"
-
 html-webpack-plugin@5.5.0, html-webpack-plugin@^5.0.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-5.5.0.tgz#c3911936f57681c1f9f4d8b68c158cd9dfe52f50"
@@ -12976,13 +12969,6 @@ minimalistic-crypto-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
   integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
-
-minimatch@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
-  integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
-  dependencies:
-    brace-expansion "^1.1.7"
 
 minimatch@4.2.1:
   version "4.2.1"

@@ -14,6 +14,13 @@ import 'tinymce/icons/default';
 // Editor styles
 import 'tinymce/skins/ui/oxide/skin.min.css';
 
+// Content styles, including inline UI like fake cursors
+/* eslint import/no-webpack-loader-syntax: off */
+import contentCss from 'tinymce/skins/content/default/content.min.css';
+import contentUiCss from 'tinymce/skins/ui/oxide/content.min.css';
+
+console.log({ contentUiCss, contentCss });
+
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/link';
@@ -201,8 +208,11 @@ class RichText extends Component {
           <Editor
             id={id}
             init={{
+              skin: false,
+              content_css: false,
+              // content_style: [contentCss, contentUiCss].join('\n'),
               content_style:
-                'body { font-family:Source Sans Pro, Arial, Helvetica, sans-serif; }',
+                'body { font-family: "Open Sans", Helvetica, sans-serif; line-height: 1.4; }',
               toolbar,
               plugins,
               setup: setupTinyMCE(upload, onBlur),

@@ -27,7 +27,7 @@ const config = {
       // In dev, load our styles directly into the generated JS. That way
       // we got hot reloading on our Sass as well.
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',
@@ -65,42 +65,39 @@ const config = {
           }
         ]
       },
-      {
-        // Do not transform vendor's CSS with CSS-modules
-        // The point is that they remain in global scope.
-        // Since we require these CSS files in our JS or CSS files,
-        // they will be a part of our compilation either way.
-        // So, no need for ExtractTextPlugin here.
-        test: /\.css$/,
-        include: [
-          path.join(__dirname, 'src'),
-          path.resolve(__dirname, 'node_modules/@uppy/core/dist/style.min.css'),
-          path.resolve(
-            __dirname,
-            'node_modules/@uppy/drag-drop/dist/style.min.css'
-          ),
-          path.resolve(
-            __dirname,
-            'node_modules/tinymce/skins/ui/oxide/skin.min.css'
-          ),
-          path.resolve(
-            __dirname,
-            'node_modules/tinymce/skins/content/default/content.min.css'
-          ),
-          path.resolve(
-            __dirname,
-            'node_modules/tinymce/skins/ui/oxide/content.min.css'
-          )
-        ],
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'static/[hash][ext][query]'
-        }
-      },
+      // {
+      //   // Do not transform vendor's CSS with CSS-modules
+      //   // The point is that they remain in global scope.
+      //   // Since we require these CSS files in our JS or CSS files,
+      //   // they will be a part of our compilation either way.
+      //   // So, no need for ExtractTextPlugin here.
+      //   test: /\.css$/,
+      //   include: [
+      //     path.join(__dirname, 'src'),
+      //     path.join(__dirname, 'node_modules/@uppy/core/dist/style.css'),
+      //     path.join(__dirname, 'node_modules/@uppy/drag-drop/dist/style.css'),
+      //     path.join(
+      //       __dirname,
+      //       'node_modules/tinymce/skins/ui/oxide/skin.min.css'
+      //     ),
+      //     path.join(
+      //       __dirname,
+      //       'node_modules/tinymce/skins/content/default/content.min.css'
+      //     ),
+      //     path.join(
+      //       __dirname,
+      //       'node_modules/tinymce/skins/ui/oxide/content.min.css'
+      //     )
+      //   ],
+      //   use: ['style-loader', 'css-loader']
+      // },
+      // {
+      //   test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+      //   type: 'asset/resource',
+      //   generator: {
+      //     filename: 'static/[hash][ext][query]'
+      //   }
+      // },
       {
         test: /\.yaml$/,
         use: ['json-loader', 'yaml-loader']
