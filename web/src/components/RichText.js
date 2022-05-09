@@ -208,8 +208,6 @@ class RichText extends Component {
               skin: false,
               content_css: false,
               content_style: [contentCss, contentUiCss].join('\n'),
-              // content_style:
-              //   'body { font-family: "Open Sans", Helvetica, sans-serif; line-height: 1.4; }',
               toolbar,
               plugins,
               setup: setupTinyMCE(upload, onBlur),
