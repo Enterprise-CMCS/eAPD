@@ -43,6 +43,6 @@ const schemas = Joi.object({
     ),
     otherwise: Joi.any()
   })
-});
+})
 
 export default schemas;
