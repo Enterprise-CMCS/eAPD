@@ -68,7 +68,7 @@ function deployAPItoEC2() {
   echo "• Found previous instances: $PREV_INSTANCE_INFOS"
 
   AMI_ID=$(findAMI)
-  echo "• Using most recent EAST-RH AMI: $AMI_ID"
+  echo "• Using most recent eAPD Production AMI: $AMI_ID"
 
   # Create new EC2 instance
   INSTANCE_ID=$(createNewInstance $AMI_ID)
@@ -290,7 +290,7 @@ function createNewInstance() {
     --security-group-ids $AWS_SECURITY_GROUP \
     --subnet-id $AWS_SUBNET \
     --ebs-optimized \
-    --key-name eapd_bbrooks \
+    --key-name tforkner_eapd \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD $ENVIRONMENT},{Key=environment,Value=$ENVIRONMENT},{Key=cms-cloud-exempt:open-sg,Value=CLDSPT-5877}]" \
     --user-data file://aws.user-data.sh \
     | jq -r -c '.Instances[0].InstanceId'

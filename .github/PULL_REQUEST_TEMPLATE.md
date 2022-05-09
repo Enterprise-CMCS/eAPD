@@ -15,6 +15,7 @@ Resolves #
 ### This pull request is ready to review when
 
 - [ ] Automated tests are updated (and all tests are passing)
+- [ ] Pull request has been labeled, if applicable with feature, content, bug, tests, refactor
 - [ ] Associated OpenAPI documentation has been updated
 - [ ] The experience passes a basic manual accessibility audit (keyboard nav, screenreader, text scaling) OR an exemption is documented
 

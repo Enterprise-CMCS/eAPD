@@ -9,7 +9,7 @@ import {
 import {
   setActivityEndDate,
   setActivityStartDate
-} from '../../../../actions/editActivity';
+} from '../../../../redux/actions/editActivity';
 
 describe('the Schedule (milestones) component', () => {
   const props = {

@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setCostAllocationMethodology } from '../../../../../actions/editActivity';
+import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity';
 import Instruction from '../../../../../components/Instruction';
 import RichText from '../../../../../components/RichText';
-import { selectActivityByIndex } from '../../../../../reducers/activities.selectors';
+import { selectActivityByIndex } from '../../../../../redux/selectors/activities.selectors';
 import { Subsection } from '../../../../../components/Section';
 
 const CostAllocate = ({ activity, activityIndex, setMethodology }) => {

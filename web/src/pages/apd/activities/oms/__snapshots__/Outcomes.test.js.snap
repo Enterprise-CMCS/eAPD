@@ -27,6 +27,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
             "index": [Function],
             "item": [Function],
             "saveOutcome": [Function],
+            "setFormValid": [Function],
           },
           "render": [Function],
         },

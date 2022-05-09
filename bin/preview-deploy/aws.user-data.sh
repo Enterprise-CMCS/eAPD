@@ -54,7 +54,7 @@ CWAGENTCONFIG
 sudo yum install -y gcc-c++
 
 # Test to see the command that is getting built for pulling the Git Branch
-su ec2-user <<E_USER
+sudo su - ec2-user <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
@@ -76,14 +76,15 @@ export DATABASE_URL="__DATABASE_URL__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 
 # Create app logs and directories
-mkdir -p /app/api/logs
-touch /app/api/logs/eAPD-API-error-0.log
-touch /app/api/logs/eAPD-API-out-0.log
-touch /app/api/logs/Database-migration-error.log
-touch /app/api/logs/Database-migration-out.log
-touch /app/api/logs/Database-seeding-error.log
-touch /app/api/logs/Database-seeding-out.log
-touch /app/api/logs/cms-hitech-apd-api.logs
+# These have been moved to bootstrap script
+#mkdir -p /app/api/logs
+#touch /app/api/logs/eAPD-API-error-0.log
+#touch /app/api/logs/eAPD-API-out-0.log
+#touch /app/api/logs/Database-migration-error.log
+#touch /app/api/logs/Database-migration-out.log
+#touch /app/api/logs/Database-seeding-error.log
+#touch /app/api/logs/Database-seeding-out.log
+#touch /app/api/logs/cms-hitech-apd-api.logs
 
 # Install nvm.  Do it inside the ec2-user home directory so that user will have
 # access to it forever, just in case we need to get into the machine and
@@ -94,7 +95,6 @@ source ~/.bashrc
 # We're using Node 16.15.0, we care about minor/patch versions
 nvm install 16.15.0
 nvm alias default 16.15.0
-
 npm i -g yarn@1.22.18
 
 # Clone from Github
@@ -103,7 +103,7 @@ git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 cd eAPD/web
 yarn add webpack@5.70.0 webpack-cli@4.9.2
 yarn install --frozen-lockfile
-API_URL=/api OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
+API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 mv dist/* /app/web
 cd ~
 # Move the API code into place, then go set it up
@@ -120,6 +120,8 @@ cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
+
+sudo chown -R ec2-user:eapd /app
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
@@ -158,10 +160,9 @@ echo "module.exports = {
 };" > ecosystem.config.js
 # Start it up
 pm2 start ecosystem.config.js
+pm2 save
 
-NODE_ENV=production MONGO_ADMIN_URL=$MONGO_ADMIN_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
-#cd ~
-#mongo -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD $MONGO_INITDB_DATABASE --eval "db.runCommand({'createUser' : '$MONGO_DATABASE_USERNAME','pwd' : '$MONGO_DATABASE_PASSWORD', 'roles' : [{'role':'readWrite', 'db': '$MONGO_DATABASE'}, {'role' : 'dbAdmin', 'db' :'$MONGO_DATABASE'}]});"
+NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
 E_USER
 
 sudo yum remove -y gcc-c++

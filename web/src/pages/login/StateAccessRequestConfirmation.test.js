@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, axe } from 'apd-testing-library';
+import { render, fireEvent, axe, screen } from 'apd-testing-library';
 import StateAccessRequestConfirmation from './StateAccessRequestConfirmation';
 
 const defaultProps = {
@@ -17,17 +17,17 @@ describe('<StateAccessRequestConfirmation />', () => {
   });
 
   it('displays the confirmation message', () => {
-    const { getByText } = setup();
+    setup();
     expect(
-      getByText(
+      screen.getByText(
         /An administrator will verify your affiliation and credentials./i
       )
     ).toBeTruthy();
   });
 
   it('handles clicking the ok button', () => {
-    const { getByRole } = setup();
-    fireEvent.click(getByRole('button', { name: 'Ok' }));
+    setup();
+    fireEvent.click(screen.getByRole('button', { name: 'Ok' }));
     expect(defaultProps.action).toHaveBeenCalled();
   });
 });

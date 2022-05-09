@@ -1,23 +1,18 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getIsFedAdmin } from '../../reducers/user.selector';
+import { getIsFedAdmin } from '../../redux/selectors/user.selector';
 import NoMatch from '../../components/NoMatch';
 
-const AdminRoute = ({
-  authenticated,
-  component: Component,
-  isAdmin,
-  ...rest
-}) => {
+const AdminRoute = ({ authenticated, children, isAdmin, ...rest }) => {
   return (
     <Route
       {...rest}
       render={props => {
         if (authenticated) {
           if (isAdmin) {
-            return <Component {...props} />;
+            return <Fragment>{children}</Fragment>;
           }
 
           // If they're logged in but not an admin, display the equivalent of
@@ -36,7 +31,7 @@ const AdminRoute = ({
 
 AdminRoute.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  component: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired
 };

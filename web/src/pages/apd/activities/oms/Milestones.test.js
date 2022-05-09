@@ -7,7 +7,7 @@ import {
   mapStateToProps
 } from './Milestones';
 
-import { removeMilestone } from '../../../../actions/editActivity';
+import { removeMilestone } from '../../../../redux/actions/editActivity';
 
 describe('the Milestones component', () => {
   const props = {

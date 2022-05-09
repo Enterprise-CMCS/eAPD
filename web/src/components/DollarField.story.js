@@ -6,9 +6,6 @@ export default {
   component: DollarField,
   parameters: {
     jest: ['DollarField.test.js']
-  },
-  argTypes: {
-    value: { control: 'text' }
   }
 };
 

@@ -4,6 +4,7 @@
     "eslint:recommended",
     "plugin:import/recommended",
     "plugin:react/recommended",
+    "plugin:testing-library/react",
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/strict",
     "prettier"
@@ -56,6 +57,10 @@
     "browser": true,
     "node": true,
     "commonjs": true
+  },
+  "globals": {
+    "window": true,
+    "utag": true
   },
   "overrides": [
     {

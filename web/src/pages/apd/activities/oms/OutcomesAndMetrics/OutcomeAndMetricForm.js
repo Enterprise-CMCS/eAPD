@@ -1,21 +1,46 @@
 import { TextField, Button } from '@cmsgov/design-system';
 
 import PropTypes from 'prop-types';
-import React, { forwardRef, useReducer } from 'react';
+import React, { forwardRef, useReducer, useEffect } from 'react';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import Icon, { faPlusCircle } from '../../../../../components/Icons';
 import Review from '../../../../../components/Review';
 
-import { saveOutcome as actualSaveOutcome } from '../../../../../actions/editActivity';
+import validationSchema from '../../../../../static/schemas/outcomeMetric';
+import { saveOutcome as actualSaveOutcome } from '../../../../../redux/actions/editActivity';
 
-import { validateText } from '../../../../../helpers/textValidation';
-
-import { newOutcomeMetric } from '../../../../../reducers/activities';
+import { newOutcomeMetric } from '../../../../../redux/reducers/activities';
 
 const OutcomeAndMetricForm = forwardRef(
-  ({ activityIndex, item, index, saveOutcome }, ref) => {
+  ({ activityIndex, item, index, saveOutcome, setFormValid }, ref) => {
     OutcomeAndMetricForm.displayName = 'OutcomeAndMetricForm';
+    const {
+      handleSubmit,
+      control,
+      formState: { errors, isValid }
+    } = useForm({
+      defaultValues: {
+        outcome: item.outcome,
+        metrics: item.metrics
+      },
+      mode: 'onBlur',
+      reValidateMode: 'onBlur',
+      resolver: joiResolver(validationSchema)
+    });
+
+    const { fields, append, remove } = useFieldArray({
+      control,
+      name: 'metrics'
+    });
+
+    useEffect(() => {
+      setFormValid(isValid);
+    }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const initialState = item;
 
     function reducer(state, action) {
       switch (action.type) {
@@ -25,10 +50,9 @@ const OutcomeAndMetricForm = forwardRef(
             [action.field]: action.value
           };
         case 'addMetric': {
-          const newMetric = newOutcomeMetric();
           return {
             ...state,
-            metrics: [...state.metrics, newMetric]
+            metrics: [...state.metrics, action.metric]
           };
         }
         case 'removeMetric': {
@@ -55,89 +79,114 @@ const OutcomeAndMetricForm = forwardRef(
       }
     }
 
-    const [state, dispatch] = useReducer(reducer, item);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
-    const handleSubmit = e => {
-      e.preventDefault();
-      saveOutcome(activityIndex, index, state);
+    const handleOutcomeChange = e => {
+      dispatch({
+        type: 'updateField',
+        field: 'outcome',
+        value: e.target.value
+      });
     };
 
-    const handleAddMetric = () => {
-      dispatch({ type: 'addMetric' });
+    const onSubmit = e => {
+      e.preventDefault();
+      saveOutcome(activityIndex, index, state);
+      handleSubmit(e);
+    };
+
+    const handleAddMetric = newMetric => {
+      dispatch({ type: 'addMetric', metric: newMetric });
     };
 
     const handleDeleteMetric = (outcomeIndex, metricIndex) => {
       dispatch({ type: 'removeMetric', index: metricIndex });
     };
 
-    const changeMetric =
-      i =>
-      ({ target: { value } }) => {
-        dispatch({ type: 'updateMetrics', metricIndex: i, value });
-      };
+    const handleMetricChange = (e, i) => {
+      dispatch({
+        type: 'updateMetrics',
+        metricIndex: i,
+        value: e.target.value
+      });
+    };
 
     return (
       <form
         index={index}
         key={`activity${activityIndex}-index${index}-form`}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       >
-        <TextField
+        <Controller
           key={`activity${activityIndex}-index${index}`}
           data-cy={`outcome-${index}`}
           name="outcome"
-          label="Outcome"
-          className="remove-clearfix"
-          hint="Describe a distinct and measurable improvement for this system."
-          value={state.outcome}
-          multiline
-          rows="4"
-          onChange={e =>
-            dispatch({
-              type: 'updateField',
-              field: 'outcome',
-              value: e.target.value
-            })
-          }
-          onBlur={validateText}
-          onKeyUp={validateText}
+          control={control}
+          render={({ field: { onChange, ...props } }) => (
+            <TextField
+              {...props}
+              data-cy={`outcome-${index}`}
+              label="Outcome"
+              className="remove-clearfix"
+              hint="Describe a distinct and measurable improvement for this system."
+              multiline
+              rows="4"
+              onChange={e => {
+                handleOutcomeChange(e);
+                onChange(e);
+              }}
+              errorMessage={errors?.outcome?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
-        {state.metrics.map(({ key, metric }, i) => (
-          <Review
-            key={key}
-            onDeleteClick={
-              state.metrics.length === 1 && metric === ''
-                ? null
-                : () => handleDeleteMetric(index, i)
-            }
-            onDeleteLabel="Remove"
-            skipConfirmation
-            ariaLabel={`${i + 1}. ${metric || 'Metric not specified'}`}
-            objType="Metric"
-            onBlur={validateText}
-            onKeyUp={validateText}
-          >
-            <div
-              key={key}
-              className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+        {fields.map((metric, i) => {
+          return (
+            <Review
+              key={metric.key}
+              onDeleteClick={() => {
+                remove(i);
+                handleDeleteMetric(index, i);
+              }}
+              onDeleteLabel="Remove"
+              skipConfirmation
+              ariaLabel={`${i + 1}. ${metric.metric || 'Metric not specified'}`}
+              objType="Metric"
             >
-              <TextField
-                id={`${activityIndex}-metric${i}`}
-                name="metric"
-                data-cy={`metric-${index}-${i}`}
-                label="Metric"
-                className="remove-clearfix"
-                hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
-                value={metric}
-                multiline
-                rows="4"
-                onChange={changeMetric(i)}
-                onBlur={validateText}
-                onKeyUp={validateText}
-              />
-            </div>
-          </Review>
-        ))}
+              <div
+                key={metric.key}
+                className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
+              >
+                <Controller
+                  name={`metrics[${i}].metric`}
+                  control={control}
+                  defaultValue={metric.metric}
+                  render={({ field: { onChange, ...props } }) => (
+                    <TextField
+                      {...props}
+                      id={`${activityIndex}-metric${i}`}
+                      name={`metrics[${i}]`}
+                      data-cy={`metric-${index}-${i}`}
+                      label="Metric"
+                      className="remove-clearfix"
+                      hint="Describe a measure that would demonstrate whether this system is meeting this outcome."
+                      multiline
+                      rows="4"
+                      onChange={e => {
+                        handleMetricChange(e, i);
+                        onChange(e);
+                      }}
+                      errorMessage={
+                        errors?.metrics && errors?.metrics[i]?.metric.message
+                      }
+                      errorPlacement="bottom"
+                    />
+                  )}
+                />
+              </div>
+            </Review>
+          );
+        })}
         <div
           className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2"
           style={{ width: 485 }}
@@ -145,7 +194,11 @@ const OutcomeAndMetricForm = forwardRef(
           <Button
             key={`activity${activityIndex}-index${index}-add-metric`}
             className="ds-c-button ds-c-button--transparent"
-            onClick={handleAddMetric}
+            onClick={() => {
+              const newMetric = newOutcomeMetric();
+              append(newMetric);
+              handleAddMetric(newMetric);
+            }}
           >
             <Icon icon={faPlusCircle} className="ds-u-margin-right--1" />
             Add Metric to Outcome
@@ -169,7 +222,8 @@ OutcomeAndMetricForm.propTypes = {
     metrics: PropTypes.array,
     outcome: PropTypes.string
   }).isRequired,
-  saveOutcome: PropTypes.func.isRequired
+  saveOutcome: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {

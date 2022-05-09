@@ -1,104 +1,175 @@
 import { DateField as DSDateField } from '@cmsgov/design-system';
-import { formatISO } from 'date-fns';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useReducer, useEffect, useMemo } from 'react';
+import { isNumeric } from '../util/formats';
 
-const dateParts = (value) => {
+const dateParts = value => {
   if (!value) {
     return {
       day: '',
       month: '',
       year: ''
     };
-  } else {
-    const newDate = new Date(value);    
-    return {
-      day: newDate.getUTCDate(),
-      month: newDate.getUTCMonth() + 1,
-      year: newDate.getUTCFullYear()
-    }
-
   }
+  const [year, month, day] = value.trim().slice(0, 10).split('-');
+  return { day: +day || '', month: +month || '', year: +year || '' };
 };
 
-const DateField = ({ value, onChange, ...rest }) => {
-  const [errorInfo, setErrorInfo] = useState({
-    errorMessage: [],
-    dayInvalid: false,
-    monthInvalid: false,
-    yearInvalid: false
-  });
-
-  const [dateObj] = useState(dateParts(value));
-
-  const dateStr = (dateObject) => {
-    const year = dateObject.year;
-    const month = dateObject.month - 1;
-    const day = dateObject.day;
-
-    const date = formatISO(new Date(year, month, day), { representation: 'date' })
-    return date;
+const formatDate = ({ day = '', month = '', year = '' } = {}) => {
+  if (day === '' && month === '' && year === '') {
+    return '';
   }
+  // Make sure it's an ISO-8601 date, which uses 2-digit month and day
+  return `${year}-${month < 10 ? `0${month}` : month}-${
+    day < 10 ? `0${day}` : day
+  }`;
+};
 
-  const getErrorMsg = (dateObject) => {
-    const dayVal = dateObject.day;
-    const monthVal = dateObject.month;
-    const yearVal = dateObject.year;
+const DateField = ({
+  value,
+  onChange,
+  onComponentBlur,
+  errorMessage,
+  ...rest
+}) => {
+  const initialState = {
+    invalidObject: {
+      dayInvalid: false,
+      monthInvalid: false,
+      yearInvalid: false
+    },
+    dateObject: dateParts(value)
+  };
 
-    const message = [];
-    let dayInvalid = false;
-    let monthInvalid = false;
-    let yearInvalid = false;
-
-    // Validation for parsing & the date
-
-    if (!dayVal || dayVal > 31 || dayVal < 0 ||
-        !monthVal || monthVal > 12 || monthVal < 0 ||
-        yearVal.length !== 4) {
-      message.push('Please enter a valid date.')
-
-      if (!dayVal || dayVal > 31 || dayVal < 0) {
-        dayInvalid = true;
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'setAllInvalid':
+        return {
+          ...state,
+          invalidObject: {
+            dayInvalid: true,
+            monthInvalid: true,
+            yearInvalid: true
+          }
+        };
+      case 'setAllValid':
+        return {
+          ...state,
+          invalidObject: {
+            dayInvalid: false,
+            monthInvalid: false,
+            yearInvalid: false
+          }
+        };
+      case 'updateDatePart':
+        return {
+          ...state,
+          dateObject: {
+            ...state.dateObject,
+            [action.field]: action.value
+          }
+        };
+      case 'yearValidate': {
+        const { value: year } = action;
+        return {
+          ...state,
+          invalidObject: {
+            ...state.invalidObject,
+            yearInvalid: !isNumeric(year) || +year < 1900 || +year > 2100
+          }
+        };
       }
-
-      if (!monthVal || monthVal > 12 || monthVal < 0) {
-        monthInvalid = true;
+      case 'monthValidate': {
+        const { value: month } = action;
+        return {
+          ...state,
+          invalidObject: {
+            ...state.invalidObject,
+            monthInvalid: !isNumeric(month) || +month < 1 || +month > 12
+          }
+        };
       }
-
-      if (!yearVal || yearVal.length) {
-        yearInvalid = true;
+      case 'dayValidate': {
+        const { value: day } = action;
+        const { month, year } = state.dateObject;
+        const lastDayOfMonth = new Date(year, parseInt(month) - 1, 0);
+        return {
+          ...state,
+          invalidObject: {
+            ...state.invalidObject,
+            dayInvalid:
+              !isNumeric(day) || +day < 1 || +day > lastDayOfMonth.getDate() + 1
+          }
+        };
       }
     }
+  }
 
-    setErrorInfo({
-      errorMessage: message.join(' '),
-      dayInvalid,
-      monthInvalid,
-      yearInvalid
-    });
-  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (errorMessage) {
+      dispatch({ type: 'setAllInvalid' });
+    }
+    if (!errorMessage) {
+      dispatch({ type: 'setAllValid' });
+    }
+  }, [errorMessage]);
+
+  const localErrorMessage = useMemo(() => {
+    const { invalidObject } = state;
+    const partErrors = Object.keys(invalidObject)
+      .filter(key => invalidObject[key] === true)
+      .map(key => key.replace('Invalid', ''));
+    if (partErrors.length > 0 && partErrors.length < 3) {
+      return `Please enter a valid ${partErrors.join(' and ')}`;
+    }
+    if (partErrors.length === 3 && !errorMessage) {
+      return '';
+    }
+    return errorMessage;
+  }, [errorMessage, state]);
 
   return (
     <DSDateField
       {...rest}
-      {...errorInfo}
-      dayDefaultValue={dateObj.day}
-      monthDefaultValue={dateObj.month}
-      yearDefaultValue={dateObj.year}
-      onComponentBlur={(_, dateObject) => {
-        getErrorMsg(dateObject);
+      dayValue={state.dateObject.day}
+      monthValue={state.dateObject.month}
+      yearValue={state.dateObject.year}
+      onChange={(e, dateObject) => {
+        const { name } = e.target;
+        dispatch({
+          type: 'updateDatePart',
+          field: name,
+          value: dateObject[name]
+        });
+        onChange(e, formatDate(dateObject)); // Pass value to parent component
       }}
-      onChange={(_, dateObject) => {
-        onChange(_, dateStr(dateObject));
+      onBlur={(e, dateObject) => {
+        const { name } = e.target;
+        dispatch({ type: `${name}Validate`, value: dateObject[name] });
       }}
-      errorPlacement='bottom'
+      onComponentBlur={onComponentBlur}
+      errorMessage={localErrorMessage}
+      dayInvalid={state.invalidObject.dayInvalid}
+      monthInvalid={state.invalidObject.monthInvalid}
+      yearInvalid={state.invalidObject.yearInvalid}
+      errorPlacement="bottom"
     />
   );
 };
 
 DateField.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onComponentBlur: PropTypes.func,
+  errorMessage: PropTypes.string
+};
+
+DateField.defaultProps = {
+  onComponentBlur: () => {},
+  value: null,
+  errorMessage: ''
 };
 
 export default DateField;

@@ -2,6 +2,7 @@
 
 exports[`private route component renders correctly if logged in 1`] = `
 <Route
+  component={[Function]}
   location={
     Object {
       "from": "over there",
@@ -11,20 +12,11 @@ exports[`private route component renders correctly if logged in 1`] = `
 />
 `;
 
-exports[`private route component renders correctly if logged in 2`] = `
-<component
-  authenticated={true}
-  component={[Function]}
-  location={
-    Object {
-      "from": "over there",
-    }
-  }
-/>
-`;
+exports[`private route component renders correctly if logged in 2`] = `<React.Fragment />`;
 
 exports[`private route component renders correctly if logged out 1`] = `
 <Route
+  component={[Function]}
   location={
     Object {
       "from": "over there",

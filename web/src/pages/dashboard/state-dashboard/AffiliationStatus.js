@@ -6,7 +6,7 @@ import Instruction from '../../../components/Instruction';
 import {
   getUserStateOrTerritory,
   getUserStateOrTerritoryStatus
-} from '../../../reducers/user.selector';
+} from '../../../redux/selectors/user.selector';
 import { AFFILIATION_STATUSES } from '../../../constants';
 import UpgradeBrowser from '../../../components/UpgradeBrowser';
 import axios from '../../../util/api';

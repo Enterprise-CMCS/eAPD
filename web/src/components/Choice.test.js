@@ -76,6 +76,7 @@ describe('Choice wrapper component', () => {
       </Choice>
     );
 
+    // eslint-disable-next-line testing-library/render-result-naming-convention
     const child = component.find('.ds-c-choice__checkedChild').render();
     expect(child[0].attribs['aria-live']).toBeFalsy();
   });

@@ -8,8 +8,12 @@ export default {
     jest: ['Dollars.test.js']
   },
   argTypes: {
-    amt: { control: 'text' }
+    children: {
+      control: { type: 'text' }
+    }
   }
 };
 
-export const Basic = (amt, ...args) => <Dollars {...args}>{amt}</Dollars>;
+const Template = args => <Dollars {...args} />;
+
+export const Basic = Template.bind({});

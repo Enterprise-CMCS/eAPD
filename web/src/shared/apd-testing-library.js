@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { render as rtlRender } from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import reducer from '../reducers';
+import reducer from '../redux/reducers';
 
 /**
  * Use this render method instead of the plain render if you are testing a connected component that uses a router.
@@ -29,20 +29,20 @@ const renderWithConnection = (ui, renderOptions = {}) => {
     store = createStore(reducer(history), initialState, enhancer),
     ...options
   } = renderOptions;
-  const wrappedNode = rtlRender(
+  const utils = rtlRender(
     <Provider store={store}>
       <ConnectedRouter history={history}>{ui}</ConnectedRouter>
     </Provider>,
     options
   );
   return {
-    ...wrappedNode,
+    ...utils,
     rerender: (updatedUi, updatedOptions) =>
       rtlRender(
         <Provider store={store}>
           <ConnectedRouter history={history}>{updatedUi}</ConnectedRouter>
         </Provider>,
-        { container: wrappedNode.container, ...updatedOptions }
+        { container: utils.container, ...updatedOptions }
       ),
     store,
     history
@@ -64,16 +64,16 @@ const renderWithRouter = (ui, renderOptions = {}) => {
     history = createMemoryHistory({ initialEntries: initialHistory }),
     ...options
   } = renderOptions;
-  const wrappedNode = rtlRender(
+  const utils = rtlRender(
     <ConnectedRouter history={history}>{ui}</ConnectedRouter>,
     options
   );
   return {
-    ...wrappedNode,
+    ...utils,
     rerender: (updatedUi, updatedOptions) =>
       rtlRender(
         <ConnectedRouter history={history}>{updatedUi}</ConnectedRouter>,
-        { container: wrappedNode.container, ...updatedOptions }
+        { container: utils.container, ...updatedOptions }
       ),
     history
   };

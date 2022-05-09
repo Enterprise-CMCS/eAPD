@@ -7,4 +7,4 @@ docker-compose exec api yarn run seed
 
 cp ../api/seeds/test/tokens.json ./tokens.json
 
-npx cypress $1 $2 $3
+TZ=utc npx cypress $1 $2 $3 --browser chrome
