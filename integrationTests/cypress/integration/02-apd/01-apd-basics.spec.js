@@ -660,7 +660,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByLabelText('Description').clear().blur();
       cy.contains('Provide a personnel description.').should('exist');
       
-      years.forEach((year) => {
+      years.forEach((year, index) => {
         cy.get(`[name="[${year}].amt"`).clear().blur();
         cy.contains('Please provide a FTE cost greater than or equal to $0.').should('exist');
         cy.get(`[name="[${year}].perc"`).clear().blur();

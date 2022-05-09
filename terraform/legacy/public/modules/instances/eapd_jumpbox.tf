@@ -1,11 +1,3 @@
-variable "eapd_jumpbox_ami" {}
-variable "eapd_jumpbox_instance_type" {}
-variable "eapd_jumpbox_key_name_bb" {}
-variable "eapd_jumpbox_key_name_tf" {}
-variable "eapd_jumpbox_vpc_security_group_ids" {}
-variable "eapd_jumpbox_subnet_id" {}
-variable "eapd_jumpbox_associate_public_ip_address" {}
-
 data "aws_ami" "latest_silver_image" {
     most_recent = true
     owners = ["582599238767"]
@@ -83,4 +75,3 @@ resource "aws_instance" "eapd_jumpbox_nz" {
         Terraform = "True"
     }
 }
-
