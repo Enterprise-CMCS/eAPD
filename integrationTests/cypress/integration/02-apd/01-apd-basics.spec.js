@@ -649,7 +649,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .eq(0)
         .findAllByRole('button', { name: /Edit/i })
         .click();
-      
+
       cy.findByLabelText('Personnel title').clear().blur();
       cy.contains('Provide a personnel title.').should('exist');
       
@@ -662,8 +662,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.get(`[name="[${year}].perc"`).clear().blur();
         cy.contains('Provide a FTE number greater than or equal to 0.').should('exist');
       })
-      
-      
+
       cy.get('.form-and-review-list')
         .eq(0)
         .findByRole('button', { name: /Cancel/i })
