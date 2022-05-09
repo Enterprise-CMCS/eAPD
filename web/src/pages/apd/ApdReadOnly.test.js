@@ -1,38 +1,55 @@
-const mongoose = require('mongoose');
-
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
-
-const { apd } = require('../../../../api/seeds/development/apds'); //dont use this, use ak-apd.json instead
-const mongo = require('../../../../api/db/mongodb');
+import userEvent from '@testing-library/user-event';
 
 import ApdViewOnly from './ApdReadOnly';
 
-let newApd;
-let APD;
+import apd from '../../fixtures/ak-apd.json';
+import budget from '../../fixtures/ak-budget.json';
 
-const setup = () => {
-  renderWithConnection(<ApdViewOnly {...newApd} />);
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn().mockReturnValue({ apdId: 1 })
+}));
+
+const setup = (props = {}, options = {}) => {
+  return renderWithConnection(<ApdViewOnly {...props} />, options);
 };
 
 describe('<ApdViewOnly/>', () => {
-  jest.before(async () => {
-    await mongo.setup();
-    APD = mongoose.model('APD');
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  jest.beforeEach(async () => {
-    newApd = new APD({
-      status: 'draft',
-      stateId: 'md',
-      id: 46,
-      ...apd
+  test('renders correctly and tests Back to APD button', () => {
+    setup(null, {
+      initialState: {
+        ...apd,
+        ...budget
+      },
+      initialHistory: ['/apd/1']
     });
-    newApd = await newApd.save();
+    expect(screen.getByText('HITECH IAPD')).toBeTruthy();
+    expect(screen.getByText('2020-2021 APD')).toBeTruthy();
+
+    userEvent.click(screen.getByRole('button', { name: '< Back to APD' }));
+    expect(history.length).toEqual(1);
   });
 
-  test('renders correctly', () => {
-    setup();
-    // screen.getByText('Export');
+  test('correct path with no apd preloaded', () => {
+    setup(null, {
+      initialHistory: ['/apd/1']
+    });
+
+    expect(screen.getByText('Loading your APD')).toBeTruthy();
+  });
+
+  test('Loads with apd but no budget', () => {
+    setup(null, {
+      initialState: {
+        ...apd
+      },
+      initialHistory: ['/apd/1']
+    });
   });
 });
