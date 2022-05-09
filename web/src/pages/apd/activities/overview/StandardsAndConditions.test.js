@@ -2,10 +2,13 @@ import React from 'react';
 import {
   renderWithConnection,
   act,
-  screen
+  screen,
+  waitFor,
+  fireEvent
 } from 'apd-testing-library';
 
 import { plain as StandardsAndConditions } from './StandardsAndConditions';
+import { wait } from '@testing-library/user-event/dist/utils';
 
 const defaultProps = {
   activity: {
@@ -34,10 +37,20 @@ describe('the StandardsAndConditions component', () => {
 
   test('renders correctly', async () => {
     await setup();
-    expect(
-      screen.getByLabelText(
-        /Standards and Conditions/i
-      )
-    ).toHaveValue(defaultProps.activity.standardsAndConditions.supports);
+    await waitFor(() => {
+      expect(
+        screen.getByLabelText(
+          'Standards and Conditions'
+        )
+      ).toHaveValue(defaultProps.activity.standardsAndConditions.supports);
+    })
+
+    await waitFor(() => {
+      fireEvent.blur(
+        screen.getByLabelText(
+          'Standards and Conditions'
+        )
+      );
+    })
   });
 });

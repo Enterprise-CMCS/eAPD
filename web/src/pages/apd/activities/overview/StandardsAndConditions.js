@@ -20,8 +20,7 @@ const standardsConditionsSchema = Joi.object({
   doesNotSupport: Joi.string().empty(['', null])
 }).or("supports", "doesNotSupport")
 
-const StandardsAndConditions = forwardRef(
-  ({
+const StandardsAndConditions = ({
     activity,
     activityIndex,
     setDoesNotSupport,
@@ -64,18 +63,18 @@ const StandardsAndConditions = forwardRef(
     return (
       <Fragment>
         <FormLabel
-          className='full-width-label'
-          fieldId='standards-and-conditions-supports-field'
+          className="ds-c-label full-width-label"
+          htmlFor="standards-and-conditions-supports-field"
         >
           Standards and Conditions
-          <span className="ds-c-field__hint ds-u-margin--0">
-            Include a description about how this activity will support the Medicaid standards and conditions <a
-              href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112"
-              rel="noreferrer"
-              target="_blank"
-            >42 CFR 433.112</a>.
-          </span>
         </FormLabel>
+        <span className="ds-c-field__hint ds-u-margin--0">
+          Include a description about how this activity will support the Medicaid standards and conditions <a
+            href="https://www.ecfr.gov/cgi-bin/text-idx?node=se42.4.433_1112"
+            rel="noreferrer"
+            target="_blank"
+          >42 CFR 433.112</a>.
+        </span>
         <Controller
           name="supports"
           control={control}
@@ -126,8 +125,7 @@ const StandardsAndConditions = forwardRef(
           </div>
       </Fragment>
     );
-  }
-);
+  };
 
 StandardsAndConditions.propTypes = {
   activity: PropTypes.object.isRequired,
