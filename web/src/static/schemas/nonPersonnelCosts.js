@@ -16,14 +16,15 @@ const nonPersonnelCostsSchema = Joi.object({
 		/\d{4}/,
 		Joi.number()
 			.positive()
-			.greater(0)
+			.allow(0)
 			.required()
 			.messages({
 				'number.base': 'Provide an annual cost.',
 				'number.empty': 'Provide an annual cost.',
-				'number.format': 'Provide a valid dollar value.',
-				'number.positive': 'Provide an annual cost greater than $0.',
-				'number.greater': 'Provide an annual cost greater than $0.',
+				'number.format': 'Provide an annual cost greater than or equal to $0.',
+				'number.positive': 'Provide an annual cost greater than or equal to $0.',
+				'number.greater': 'Provide an annual cost greater than or equal to $0.',
+				'number.allow': 'Provide an annual cost greater than or equal to $0.'
 			})
 	),
 });

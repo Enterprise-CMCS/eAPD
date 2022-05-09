@@ -711,7 +711,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         {
           category: 'Hardware, software, and licensing',
           description: 'Hardware and software items.',
-          costs: [100, 100]
+          costs: [0, 0]
         }
       ];
       
@@ -898,7 +898,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should('have.text', 'Hardware, software, and licensing$100')
+                .should('have.text', 'Hardware, software, and licensing$0')
                 .next()
                 .next()
                 .next()
@@ -960,7 +960,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Other State Expenses'
             })
             .eq(0)
-            .should('have.text', 'Hardware, software, and licensing$100');
+            .should('have.text', 'Hardware, software, and licensing$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -1058,7 +1058,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .next()
         .should(
           'have.text',
-          years.map(year => `FFY ${year} Cost: $100`).join('')
+          years.map(year => `FFY ${year} Cost: $0`).join('')
         );
 
       const privateContractorCosts = years
@@ -1114,7 +1114,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should('have.text', 'Hardware, software, and licensing$100')
+                .should('have.text', 'Hardware, software, and licensing$0')
                 .next()
                 .next()
                 .next()
@@ -1169,7 +1169,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Other State Expenses'
             })
             .eq(0)
-            .should('have.text', 'Hardware, software, and licensing$100');
+            .should('have.text', 'Hardware, software, and licensing$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
