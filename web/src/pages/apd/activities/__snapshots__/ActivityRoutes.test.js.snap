@@ -3,7 +3,12 @@
 exports[`<ActivityRoutes /> component renders as expected 1`] = `
 <Switch>
   <Route
-    path="/your/current/path/oms"
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/oms"
+    pageName="Outcomes and Metrics"
+    path="/apd/:apdId/activity/:activityIndex/oms"
+    siteSection="APD - Activity"
   >
     <Section
       id={null}
@@ -18,7 +23,12 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
     </Section>
   </Route>
   <Route
-    path="/your/current/path/state-costs"
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/state-costs"
+    pageName="State Staff and Expenses"
+    path="/apd/:apdId/activity/:activityIndex/state-costs"
+    siteSection="APD - Activity"
   >
     <Section
       id={null}
@@ -30,7 +40,12 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
     </Section>
   </Route>
   <Route
-    path="/your/current/path/contractor-costs"
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/contractor-costs"
+    pageName="Private Contractor Costs"
+    path="/apd/:apdId/activity/:activityIndex/contractor-costs"
+    siteSection="APD - Activity"
   >
     <Section
       id={null}
@@ -42,7 +57,12 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
     </Section>
   </Route>
   <Route
-    path="/your/current/path/cost-allocation"
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/cost-allocation"
+    pageName="Cost Allocation and Other Funding"
+    path="/apd/:apdId/activity/:activityIndex/cost-allocation"
+    siteSection="APD - Activity"
   >
     <Section
       id={null}
@@ -54,7 +74,12 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
     </Section>
   </Route>
   <Route
-    path="/your/current/path/ffp"
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/ffp"
+    pageName="Budget and FFP"
+    path="/apd/:apdId/activity/:activityIndex/ffp"
+    siteSection="APD - Activity"
   >
     <Section
       id={null}
@@ -65,7 +90,14 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
       />
     </Section>
   </Route>
-  <Route>
+  <Route
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/overview"
+    pageName="Overview"
+    path="/apd/:apdId/activity/:activityIndex/overview"
+    siteSection="APD - Activity"
+  >
     <Section
       id={null}
       resource={null}
