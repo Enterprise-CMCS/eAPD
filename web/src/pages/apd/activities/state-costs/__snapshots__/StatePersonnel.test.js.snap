@@ -31,6 +31,7 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
             "index": [Function],
             "item": [Function],
             "savePersonnel": [Function],
+            "setFormValid": [Function],
           },
           "render": [Function],
         },
