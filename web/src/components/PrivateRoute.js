@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const PrivateRoute = ({ authenticated, component: Component, ...rest }) => (
+const PrivateRoute = ({ authenticated, children, ...rest }) => (
   <Route
     {...rest}
     render={props =>
       authenticated ? (
-        <Component {...props} />
+        <Fragment>{children}</Fragment>
       ) : (
         <Redirect
           to={{
@@ -23,7 +23,7 @@ const PrivateRoute = ({ authenticated, component: Component, ...rest }) => (
 
 PrivateRoute.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  component: PropTypes.elementType.isRequired,
+  children: PropTypes.elementType.isRequired,
   location: PropTypes.object.isRequired
 };
 

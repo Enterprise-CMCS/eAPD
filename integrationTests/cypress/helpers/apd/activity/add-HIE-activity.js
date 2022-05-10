@@ -68,8 +68,12 @@ export const addHIEActivity = years => {
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillStateStaffAndExpenses(
-        activityData.staff,
+      fillOutActivityPage.fillStateStaff(
+        years,
+        activityData.staff
+      );
+      
+      fillOutActivityPage.fillStateExpenses(
         activityData.expenses
       );
 
