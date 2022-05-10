@@ -27,7 +27,11 @@ const config = {
       // In dev, load our styles directly into the generated JS. That way
       // we got hot reloading on our Sass as well.
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
+        include: [
+          path.resolve(__dirname, 'src/styles'),
+          path.resolve(__dirname, 'node_modules/@uppy')
+        ],
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',
@@ -59,7 +63,7 @@ const config = {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: [path.resolve(__dirname, '../node_modules')]
+                includePaths: ['node_modules']
               }
             }
           }
@@ -67,10 +71,6 @@ const config = {
       },
       {
         test: /skin\.min\.css$/i,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /style\.min\.css$/i,
         use: ['style-loader', 'css-loader']
       },
       {

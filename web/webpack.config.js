@@ -89,7 +89,7 @@ const config = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /style\.min\.css$/i,
+        test: /style\.css$/i,
         use: ['style-loader', 'css-loader']
       },
       {
