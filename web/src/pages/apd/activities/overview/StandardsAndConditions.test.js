@@ -8,7 +8,6 @@ import {
 } from 'apd-testing-library';
 
 import { plain as StandardsAndConditions } from './StandardsAndConditions';
-import { wait } from '@testing-library/user-event/dist/utils';
 
 const defaultProps = {
   activity: {
@@ -45,12 +44,10 @@ describe('the StandardsAndConditions component', () => {
       ).toHaveValue(defaultProps.activity.standardsAndConditions.supports);
     })
 
-    await waitFor(() => {
-      fireEvent.blur(
-        screen.getByLabelText(
-          'Standards and Conditions'
-        )
-      );
-    })
+    fireEvent.blur(
+      screen.getByLabelText(
+        'Standards and Conditions'
+      )
+    );
   });
 });
