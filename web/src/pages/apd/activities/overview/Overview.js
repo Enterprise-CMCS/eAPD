@@ -21,7 +21,7 @@ import Schedule from './Schedule';
 import overviewSchema from '../../../../static/schemas/activityOverview';
 
 
-const ActivityOverview = forwardRef(({
+const ActivityOverview = ({
   activity,
   activityIndex,
   setAlternatives,
@@ -240,7 +240,7 @@ const ActivityOverview = forwardRef(({
       <hr />
     </Subsection>
   );
-});
+};
 
 ActivityOverview.propTypes = {
   activity: PropTypes.object.isRequired,

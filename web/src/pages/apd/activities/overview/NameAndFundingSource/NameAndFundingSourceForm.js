@@ -11,8 +11,7 @@ import {
   setActivityFundingSource
 } from '../../../../../redux/actions/editActivity';
 
-const NameAndFundingSourceForm = forwardRef(
-  ({ 
+const NameAndFundingSourceForm = ({ 
     index, 
     item: { fundingSource, name }, 
     setFundingSource,
@@ -100,8 +99,7 @@ const NameAndFundingSourceForm = forwardRef(
         />
       </Fragment>
     );
-  }
-);
+  };
 
 NameAndFundingSourceForm.propTypes = {
   index: PropTypes.number.isRequired,

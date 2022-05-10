@@ -102,7 +102,7 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
       id={null}
       resource={null}
     >
-      <Connect(Component)
+      <Connect(ActivityOverview)
         activityIndex={3}
       />
       <Connect(StandardsAndConditions)
