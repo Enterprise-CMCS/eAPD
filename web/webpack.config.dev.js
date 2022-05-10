@@ -27,19 +27,20 @@ const config = {
       // In dev, load our styles directly into the generated JS. That way
       // we got hot reloading on our Sass as well.
       {
-        test: /\.s?css$/,
-        include: [
-          path.resolve(__dirname, 'src/styles'),
-          path.resolve(__dirname, 'node_modules/@uppy')
-        ],
+        test: /\.scss$/,
+
+        // Remember that these run in reverse, so start at the last item in the
+        // array and read up to understand what's going on.
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',
-          // Translates CSS into CommonJS
+
+          // Interprets any url() and @import statements and resolves them to
+          // their full path on the local disk. Translates CSS into CommonJS
           {
             loader: 'css-loader',
             options: {
-              import: false
+              import: true
             }
           },
           // Add browser prefixes and minify CSS.
@@ -58,15 +59,9 @@ const config = {
               }
             }
           },
+
           // Compiles Sass to CSS
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                includePaths: ['node_modules']
-              }
-            }
-          }
+          'sass-loader'
         ]
       },
       {

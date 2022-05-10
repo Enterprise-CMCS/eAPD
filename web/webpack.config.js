@@ -49,11 +49,11 @@ const config = {
           MiniCssExtractPlugin.loader,
 
           // Interprets any url() and @import statements and resolves them to
-          // their full path on the local disk.
+          // their full path on the local disk. Translates CSS into CommonJS
           {
             loader: 'css-loader',
             options: {
-              import: false
+              import: true
             }
           },
 
@@ -73,23 +73,13 @@ const config = {
               }
             }
           },
+
           // Load the SCSS/SASS
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                includePaths: [path.resolve(__dirname, '../node_modules')]
-              }
-            }
-          }
+          'sass-loader'
         ]
       },
       {
         test: /skin\.min\.css$/i,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /style\.css$/i,
         use: ['style-loader', 'css-loader']
       },
       {
