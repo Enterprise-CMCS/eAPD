@@ -86,7 +86,6 @@ workflows:
             branches:
               ignore:
                 - main
-                - tforkner/3874-yarn-workspaces-pre-packages
                 - gh-pages
             tags:
               ignore: ignore-e2e

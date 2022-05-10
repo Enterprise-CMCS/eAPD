@@ -1,7 +1,7 @@
 {
   "name": "cms-eapd",
   "private": true,
-  "version": "4.0.3",
+  "version": "4.2.0",
   "description": "APD app for CMS HITECH program",
   "license": "CC0-1.0",
   "repository": {
@@ -70,6 +70,7 @@
       "e2e"
     ],
     "nohoist": [
+      "knex",
       "api/ajv",
       "web/@uppy",
       "web/tinymce",
@@ -78,7 +79,7 @@
     ]
   },
   "dependencies": {
-    "@snyk/protect": "1.866.0"
+    "@snyk/protect": "1.925.0"
   },
   "resolutions": {
     "yargs-parser": ">=5.0.1",

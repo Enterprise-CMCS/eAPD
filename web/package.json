@@ -1,6 +1,6 @@
 {
   "name": "@cms-eapd/web",
-  "version": "4.0.3",
+  "version": "0.0.1",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
   "scripts": {
@@ -20,9 +20,7 @@
     "storybook": "start-storybook -p 6006",
     "deploy-chromatic": "chromatic",
     "npm-check": "npx npm-check-updates",
-    "stryker": "TZ=utc stryker run",
-    "prepare": "yarn run snyk-protect",
-    "snyk-protect": "snyk-protect"
+    "stryker": "TZ=utc stryker run"
   },
   "repository": {
     "type": "git",
