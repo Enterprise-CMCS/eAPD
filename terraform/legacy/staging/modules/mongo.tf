@@ -17,7 +17,6 @@ resource "aws_instance" "eapd_mongo" {
     vpc_security_group_ids      = ["sg-01e01435dbbe6ce32", aws_security_group.eapd-staging-mongo-ec2.id]
     subnet_id                   = "subnet-07e1b9ed6ed5fb8c7"
     key_name                    = "eapd_bbrooks"
-#    user_data                   = "../../../bin/prod-deploy/aws.user-data.sh"
     tags = {
         Name = var.instance_name
         Environment = "staging"
@@ -28,8 +27,17 @@ resource "aws_instance" "eapd_mongo" {
     }
     depends_on = [aws_security_group.eapd-staging-mongo-ec2]
     disable_api_termination = false # True in Prod
-    user_data = <<-EOL
-    #!/bin/bash -xe
-    sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
-    EOL    
+
+    connection {
+        type = "ssh"
+        user = var.ssh_user
+        private_key = file(var.ssh_key)
+        host = self.public_ip
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "sudo sh -c 'echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml'",
+        ]
+    }
 }
