@@ -58,7 +58,7 @@ const config = {
       OKTA_DOMAIN: '',
       OKTA_SERVER_ID: '',
       OKTA_CLIENT_ID: '',
-      ENV: 'dev'
+      WEB_ENV: 'dev'
     }),
     // Plugin for hot module replacement
     new webpack.HotModuleReplacementPlugin(),
