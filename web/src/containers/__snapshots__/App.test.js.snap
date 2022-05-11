@@ -5,6 +5,6 @@ exports[`App component renders correctly 1`] = `
   <Connect(AriaAnnounce) />
   <Broadcast />
   <Connect(AutoScrollToElement) />
-  <Routes />
+  <MainRoutes />
 </withRouter(Wrapper)>
 `;

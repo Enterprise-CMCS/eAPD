@@ -11,6 +11,10 @@
     "node": true,
     "es6": true
   },
+  "globals": {
+    "window": true,
+    "utag": true
+  },
   "overrides": [
     {
       "files": ["**/*.test.js", "**/*.endpoint.js", "endpoint-tests/utils.js"],
