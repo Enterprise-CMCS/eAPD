@@ -11,9 +11,10 @@ import { plain as StandardsAndConditions } from './StandardsAndConditions';
 
 const defaultProps = {
   activity: {
+    description: 'description',
     standardsAndConditions: {
       doesNotSupport: 'does not support',
-      supports: 'support'
+      supports: 'support',
     }
   },
   activityIndex: 7,

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { forwardRef, Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -15,7 +15,7 @@ import { stateDateToDisplay } from '../../../../util';
 
 import scheduleSchema from '../../../../static/schemas/plannedActivityShedule';
 
-const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate }) => {
+const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
   Schedule.displayName = 'Schedule';
 
   const { plannedStartDate, plannedEndDate } = activity;
@@ -116,7 +116,7 @@ const Schedule = forwardRef(({ activity, activityIndex, setEndDate, setStartDate
       </Fragment>
     </Subsection>
   );
-});
+};
 
 Schedule.propTypes = {
   activity: PropTypes.object.isRequired,

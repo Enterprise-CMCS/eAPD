@@ -149,7 +149,7 @@ const ActivityOverview = ({
         <FormLabel
           className="ds-c-label--full-width"
           hint={overviewHint}
-          fieldId="activity-short-overview-field"
+          htmlFor="activity-short-overview-field"
         >
           {overviewLabel}
         </FormLabel>
@@ -185,7 +185,7 @@ const ActivityOverview = ({
         <FormLabel
           className="ds-c-label--full-width"
           hint={descriptionHint}
-          fieldId="activity-description-field"
+          htmlFor="activity-description-field"
         >
           {descriptionLabel}
         </FormLabel>
@@ -225,7 +225,7 @@ const ActivityOverview = ({
         <FormLabel
           className="ds-c-label--full-width"
           hint={alternativesHint}
-          fieldId="activity-alternatives-field"
+          htmlFor="activity-alternatives-field"
         >
           {alternativesLabel}
         </FormLabel>
