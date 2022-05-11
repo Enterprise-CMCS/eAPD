@@ -1,6 +1,6 @@
 import { ChoiceList, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useCallback, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -32,11 +32,9 @@ const NameAndFundingSourceForm = ({
       resolver: joiResolver(nameFundingSourceSchema)
     });
 
-    try {
+    useEffect(() => {
       nameFundingSourceSchema.validateAsync({fundingSource, name})
-    } catch(err) {
-      console.log(err);
-    }
+    });
 
     const changeName = useCallback(
       ({ target: { value } }) => {
