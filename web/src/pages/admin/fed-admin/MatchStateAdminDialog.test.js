@@ -7,7 +7,7 @@ import MatchStateAdminDialog from './MatchStateAdminDialog';
 
 const defaultProps = {
   certification: {
-    state: 'AK',
+    state: 'ak',
     name: 'Sally Shire',
     phone: '431-231-5548',
     email: 'sally@shire.com',
@@ -17,7 +17,7 @@ const defaultProps = {
   hideModal: jest.fn()
 };
 
-// const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 const setup = (props = {}) => {
   return renderWithConnection(
     <MatchStateAdminDialog {...defaultProps} {...props} />
@@ -27,8 +27,8 @@ const setup = (props = {}) => {
 describe('<MatchStateAdminDialog />', () => {
   test('renders correctly', () => {
     setup();
-    // fetchMock
-    //   .onGet(`/states/${defaultProps.state}/affiliations?matches=true`)
-    //   .reply(200);
+    fetchMock
+      .onGet('/states/ak/affiliations?matches=true')
+      .reply(200, [{ email: 'sally@shire.com', displayName: 'Sally Shire' }]);
   });
 });

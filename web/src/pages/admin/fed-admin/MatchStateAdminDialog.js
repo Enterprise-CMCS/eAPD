@@ -17,7 +17,6 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
         const state = certification.state.toLowerCase();
 
         const affiliations = await axios.get(
-          // How to mock this?
           `/states/${state}/affiliations?matches=true`
         );
         setStateAffiliations(affiliations.data);
