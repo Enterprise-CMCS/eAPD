@@ -1,6 +1,6 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, useCallback } from 'react';
+import React, { Fragment, useMemo, useCallback, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -30,27 +30,26 @@ const ActivityOverview = ({
 }) => {
   ActivityOverview.displayName = 'ActivityOverview';
 
-  const { alternatives, description, summary } = activity;
+  // const { alternatives, description, summary } = activity;
 
   const {
     control,
     formState: { errors }
   } = useForm({
     defaultValues: {
-      summary: summary,
-      description: description
+      alternatives: activity.alternatives,
+      description: activity.description,
+      summary: activity.summary
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: joiResolver(overviewSchema)
   })
 
-  try {
+
+  useEffect(() => {
     overviewSchema.validateAsync({summary});
-  } catch(err) {
-    console.log(err);
-    console.log({errors});
-  }
+  });
 
   const overviewLabel = useMemo(
     () =>
