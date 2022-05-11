@@ -10,14 +10,13 @@ import Icon, { faExclamationTriangle } from '../components/Icons';
 
 const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmin}) => {
 
-  console.log("toggle state", showAdminCheck);
-
   const handleClose = () => {
     toggleAdmin(false);
   };
   
   const handleStopCheck = () => {
     alert("this isn't built yet...");
+    toggleAdmin(false);
   };
 
   return (
@@ -26,7 +25,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
         <Drawer
           footerBody={
             <p className="ds-text ds-u-margin--0">
-              <Icon icon={faExclamationTriangle} />
+              <Icon className="ds-u-color--error ds-u-margin-right--1" icon={faExclamationTriangle} />
               <a onClick={handleStopCheck} className="ds-u-color--error">Stop Administrative Check</a> 
               <br/> 
               APDs cannot be submitted until all required fields are complete. Exiting the required fields review will pause the review until you choose to restart the review or complete all required fields.

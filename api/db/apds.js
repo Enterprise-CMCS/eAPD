@@ -6,85 +6,46 @@ const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
 
 const adminCheck = apd => {
-  // const validate = apd.validateSync();
-
+  // Currently we are hard-coding this return object for prototyping with
+  // the front end. Next steps would likely be to extract this function
+  // to it's own module and using joi validations to build this object
   const metadata = {
     incomplete: 6,
     todo: {
       overview: {
         name: "APD Overview",
-        incomplete: 2,
-        link: "/apd-overview",
+        incomplete: 1,
+        link: "apd-overview",
         fields: [
           { 
             name: "APD Name",
             description: "please include a name"
-          },
-          {
-            name: "HIE Overview",
-            description: "please include hie overview"
           }
         ]
-     }
+      },
+      keyStatePersonnel: {
+        name: "Key State Personnel",
+        incomplete: 1,
+        link: "state-profile",
+        fields: [
+          {
+            name: "Phone Number",
+            description: "Provide the phone number of the Medicaid Director"
+          }
+        ]
+      }
     },
-    recents: ""
+    recents: [
+      {
+        page: "Activity 1- State Costs",
+        link: "activity/0/state-costs"
+      },
+      {
+        page: "Private Contractor Costs",
+        link: "activity/0/contractor-costs"
+      }
+    ]
   };
-// This code is from the prototype where we were using mongoose validation
-//   // Total validation errors added to metadata
-//   metadata.incomplete = Object.keys(validate.errors).length;
-// 
-//   const todoList = [];
-// 
-//   // Switch this to Object.keys and use an array iterator
-//   for (let index in sections) {
-//     if (!sections.hasOwnProperty(index)) {
-//       continue;
-//     }
-//     let section = {
-//       [index]: {
-//         name: sections[index].title,
-//         link: sections[index].link,
-//         incomplete: 0,
-//         fields: [
-// 
-//         ]
-//       }
-//     }
-// 
-//     const fieldErrors = Object.keys(validate.errors).map(key => {
-//       return {
-//         key,
-//         name: validate.errors[key].path,
-//         description: validate.errors[key].message
-//       }
-//     });
-// 
-//     // Go through each section and manually add errors to fields based on their keys
-//     // For the demo only do programOverview, an activity, and key state personnel
-//     // Need to figure out how we can make this more programmatic 
-//     const programOverview = fieldErrors.filter(err => err.key === 'programOverview' || err.key === 'narrativeHIE');
-//     const keyPersonnel = fieldErrors.filter(err => err.key.startsWith('keyPersonnel'));
-//     const activities = fieldErrors.filter(err => err.key.startsWith('activities'));
-// 
-//     if(index === 'overview') {
-//       section[index].fields = programOverview;
-//       section[index].incomplete = programOverview.length;
-//     }
-// 
-//     if(index === 'keyStatePersonnel') {
-//       section[index].fields = keyPersonnel;
-//       section[index].incomplete = keyPersonnel.length;
-//     }
-// 
-//     if(index === 'activities') {
-//       section[index].fields = activities;
-//       section[index].incomplete = activities.length;
-//     }
-// 
-//     todoList.push(section);    
-//   }
-
-  // metadata.todo = todoList;
   
   return metadata;
 }

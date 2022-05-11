@@ -7,6 +7,8 @@ import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 
 import { toggleAdminCheck } from '../../../redux/actions/app/apd';
 
+import Icon, { faClipboardCheck } from '../../../components/Icons';
+
 import { Section, Subsection } from '../../../components/Section';
 import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
@@ -20,7 +22,6 @@ const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, usePa
   }
   
   const handleAdminCheck = () => {
-    console.log("admin check enabled");
     toggleAdmin(true);
   }
 
@@ -37,7 +38,7 @@ const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, usePa
             variation="primary"
             className="ds-u-margin-bottom--2"
           >
-            Run Administrative Check
+            <span className="ds-u-margin-right--1">Run Administrative Check</span> <Icon icon={faClipboardCheck} />
           </Button>
         </Subsection>
         <Subsection resource="reviewAndDownload">

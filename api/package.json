@@ -98,6 +98,7 @@
     "file-type": "16.5.3",
     "form-data": "4.0.0",
     "helmet": "5.0.2",
+    "joi": "^17.6.0",
     "jsonpatch": "3.1.0",
     "jsonpatch-to-mongodb": "1.0.0",
     "jsonpointer": "5.0.0",
