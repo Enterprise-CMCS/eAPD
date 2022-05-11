@@ -50,7 +50,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   describe('Create APD', () => {
-    it('creates a default new APD and handles changing the name', () => {
+    it('creates a default new APD and handles changing the name and summary', () => {
       const options = { month: 'long', day: 'numeric', year: 'numeric' };
       const today = new Date();
 
@@ -94,6 +94,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get('#apd-title-input').contains(`${title2}`);
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
+      
+      cy.get('[id="program-introduction-field"]').should('have.value', '');
     });
   });
 
