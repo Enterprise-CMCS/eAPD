@@ -93,11 +93,11 @@ function deployAPItoEC2() {
 
   echo "• Checking availability of Frontend"
   if [[ $ENVIRONMENT == "production" ]]; then
-    while [[ "$(curl -s -o /dev/null -w %{http_code} https://eapd.cms.gov)" != "200" ]]; 
+    while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://eapd.cms.gov)" != "200" ]]; 
       do echo "• • Frontend currently unavailable" && sleep 60; 
     done
   elif [[ $ENVIRONMENT == "staging" ]]; then
-    while [[ "$(curl -s -o /dev/null -w %{http_code} https://staging-eapd.cms.gov)" != "200" ]]; 
+    while [[ "$(curl -k -s -o /dev/null -w %{http_code} https://staging-eapd.cms.gov)" != "200" ]]; 
       do echo "• • Frontend currently unavailable" && sleep 60; 
     done
   else
