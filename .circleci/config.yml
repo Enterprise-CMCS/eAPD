@@ -693,7 +693,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: ENV="${<< parameters.env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: WEB_ENV="${<< parameters.env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:

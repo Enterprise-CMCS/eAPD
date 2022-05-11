@@ -5,7 +5,7 @@ import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dep
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
-import tokens from '../../tokens.json';
+import tokens from '@cms-eapd/api/seeds/test/tokens.json';
 
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';

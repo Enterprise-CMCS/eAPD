@@ -7,7 +7,7 @@ import DeleteModal from '../../../components/DeleteModal';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import apdOverviewSchema from '../../../static/schemas/apdOverview';
+import apdOverviewSchema from '@cms-eapd/common/schemas/apdOverview';
 
 import {
   addYear,
@@ -54,7 +54,7 @@ const ApdOverview = ({
     reValidateMode: 'onBlur',
     resolver: joiResolver(apdOverviewSchema)
   });
-    
+
   const changeName = ({ target: { value } }) => {
     setName(value);
   };
@@ -93,7 +93,7 @@ const ApdOverview = ({
   const syncRichText = action => html => {
     action(html);
   };
-  
+
   const handleProgramOverview = html => {
     setOverview(html);
     setValue('programOverview', html);

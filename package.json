@@ -67,6 +67,7 @@
     "packages": [
       "api",
       "web",
+      "common",
       "e2e"
     ],
     "nohoist": [
