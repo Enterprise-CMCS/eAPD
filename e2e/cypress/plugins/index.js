@@ -16,6 +16,8 @@ const { lighthouse, pa11y, prepareAudit } = require('cypress-audit'); // eslint-
 const browserify = require('@cypress/browserify-preprocessor'); // eslint-disable-line import/no-extraneous-dependencies
 const knex = require('@cms-eapd/api/db/knex');
 
+console.log({ knex });
+
 /**
  * @type {Cypress.PluginConfig}
  */
