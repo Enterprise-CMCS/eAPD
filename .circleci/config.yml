@@ -994,9 +994,7 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install zip -y
-            cd api
             yarn install --frozen-lockfile --production=true
-            cd ..
             zip -r /tmp/backend.zip api/*
       - store_artifacts:
           path: /tmp/backend.zip

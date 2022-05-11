@@ -23,9 +23,6 @@
     "@foreachbe/cypress-tinymce": "1.0.0",
     "react": "17.0.2",
     "tinymce": "5.10.3",
-    "knex": "1.0.2",
-    "mocha": "9.2.2",
-    "pg": "8.7.3",
     "@cms-eapd/api": "^0.0.1"
   },
   "devDependencies": {

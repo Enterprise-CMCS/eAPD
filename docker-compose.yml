@@ -47,7 +47,11 @@ services:
     volumes:
       - type: bind
         source: ./web
-        target: /app
+        target: /app/web
+        consistency: cached
+      - type: bind
+        source: ./common
+        target: /app/common
         consistency: cached
       - /app/node_modules
 
@@ -80,7 +84,11 @@ services:
     volumes:
       - type: bind
         source: ./api
-        target: /app
+        target: /app/api
+        consistency: cached
+      - type: bind
+        source: ./common
+        target: /app/common
         consistency: cached
       - /app/node_modules
     ports:

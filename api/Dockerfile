@@ -3,11 +3,14 @@ FROM node:16.15.0-alpine3.15
 RUN mkdir /app
 WORKDIR /app
 
-ADD ./api/package.json .
-ADD ./yarn.lock .
+ADD package.json .
+ADD yarn.lock .
+ADD api/package.json ./api/
+ADD common/package.json ./common/
 
 RUN chown -R node:node /app
 USER node:node
 RUN yarn install --frozen-lockfile
 
+WORKDIR /app/api
 CMD yarn run start-dev
