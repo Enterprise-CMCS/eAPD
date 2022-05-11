@@ -2,32 +2,16 @@ import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../util/api';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 
 import ManageAccount from './ManageAccount';
 
 const regularUser = {
-  user: {
-    data: {
-      state: {
-        id: 'ak',
-        name: 'Alaska',
-        medicaid_office: {
-          medicaidDirector: {
-            name: 'Cornelius Fudge',
-            email: 'c.fudge@ministry.magic',
-            phone: '5551234567'
-          },
-          medicaidOffice: {
-            address1: '100 Round Sq',
-            address2: '',
-            city: 'Cityville',
-            state: 'AK',
-            zip: '12345'
-          }
-        }
-      },
-      activities: ['edit-document']
+  data: {
+    role: 'eAPD State Staff',
+    state: {
+      id: 'ak',
+      name: 'Alaska'
     }
   }
 };
@@ -36,22 +20,8 @@ const adminUser = {
   data: {
     role: 'eAPD State Admin',
     state: {
-      id: 'md',
-      name: 'Maryland',
-      medicaid_office: {
-        medicaidDirector: {
-          name: 'Cornelius Fudge',
-          email: 'c.fudge@ministry.magic',
-          phone: '5551234567'
-        },
-        medicaidOffice: {
-          address1: '100 Round Sq',
-          address2: '',
-          city: 'Cityville',
-          state: 'AK',
-          zip: '12345'
-        }
-      }
+      id: 'al',
+      name: 'Alabama'
     }
   }
 };
@@ -70,13 +40,18 @@ describe('<ManageAccount />', () => {
     const props = {
       createAccessRequest: jest.fn(),
       completeAccessRequest: jest.fn(),
-      error: 'This is an error',
-      isAdmin: false,
-      currentUser: regularUser,
       dashboard: jest.fn()
     };
 
-    setup(props, { initialHistory: ['/'] });
+    setup(props, {
+      initialState: {
+        user: regularUser,
+        isAdmin: false,
+        data: { state: { name: 'Alaska', id: 'ak' } }
+      },
+      initialHistory: ['/']
+    });
+
     fetchMock.onGet('/affiliations/me').reply(200, []);
 
     expect(
@@ -84,18 +59,18 @@ describe('<ManageAccount />', () => {
     ).toBeTruthy();
   });
 
-  test('renders correctly for admin user', () => {
+  test('renders correctly for admin user, requests a new affiliation', () => {
     const props = {
       createAccessRequest: jest.fn(),
       completeAccessRequest: jest.fn(),
-      error: 'This is an error',
       dashboard: jest.fn()
     };
 
     setup(props, {
       initialState: {
         user: adminUser,
-        isAdmin: true
+        isAdmin: true,
+        data: { state: { name: 'Alabama', id: 'al' } }
       },
       initialHistory: ['/']
     });
@@ -104,6 +79,14 @@ describe('<ManageAccount />', () => {
     expect(
       screen.getByRole('heading', { name: 'Select your State Affiliation' })
     ).toBeTruthy();
-    // screen.getByRole('bla');
+
+    userEvent.type(
+      screen.getByRole('combobox', { name: 'Select your State Affiliation' }),
+      '{arrowdown}{enter}'
+    );
+
+    expect(screen.getByText('Alabama')).toBeTruthy();
+    userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    fetchMock.onPost('/states/al/affiliations').reply(200);
   });
 });
