@@ -789,7 +789,7 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            docker build -t cms-eapd/api -f ./api/Dockerfile ./
+            docker build -t cms-eapd/api -f ./api/Dockerfile .
       - run:
           name: start everything up
           working_directory: ~/project
@@ -797,28 +797,6 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
-      - run:
-          name: pull owasp zap docker image
-          command: |
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            export COMPOSE_PROJECT_NAME=api
-            docker pull owasp/zap2docker-stable:2.11.1
-      - run:
-          name: run owasp zap
-          working_directory: ~/project/api
-          command: |
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            export COMPOSE_PROJECT_NAME=api
-            docker run \
-              --network api_default \
-              -v "$(pwd)/owasp":/zap/wrk \
-              owasp/zap2docker-stable:2.11.1 \
-              zap-api-scan.py \
-              -c api-scan.conf \
-              -t http://api-for-testing:8000/open-api \
-              -f openapi
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
