@@ -30,26 +30,25 @@ const ActivityOverview = ({
 }) => {
   ActivityOverview.displayName = 'ActivityOverview';
 
-  // const { alternatives, description, summary } = activity;
+  const { alternatives, description, summary } = activity;
 
   const {
     control,
     formState: { errors }
   } = useForm({
     defaultValues: {
-      alternatives: activity.alternatives,
-      description: activity.description,
-      summary: activity.summary
+      alternatives: alternatives,
+      description: description,
+      summary: summary
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: joiResolver(overviewSchema)
   })
 
-
   useEffect(() => {
-    overviewSchema.validateAsync({summary});
-  });
+    overviewSchema.validateAsync({summary, description});
+  }, [summary, description]);
 
   const overviewLabel = useMemo(
     () =>
@@ -145,13 +144,11 @@ const ActivityOverview = ({
       )}
 
       <div className="data-entry-box">
-        <FormLabel
+        <label
           className="ds-c-label--full-width"
           hint={overviewHint}
-          htmlFor="activity-short-overview-field"
-        >
-          {overviewLabel}
-        </FormLabel>
+          for="activity-short-overview-field"
+        >{overviewLabel}</label>
         <Controller
           name="summary"
           control={control}
