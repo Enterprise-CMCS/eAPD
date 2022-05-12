@@ -178,7 +178,7 @@ workflows:
                 - main
           requires:
             - validate openapi
-            # - owasp zap scan
+            - owasp zap scan
             - frontend lint
             - backend lint
             - dependency vulnerability scan
@@ -793,9 +793,19 @@ jobs:
           no_output_timeout: 30m
           working_directory: ~/project
           command: |
+            export NODE_ENV=development
+            export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
+            export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
+            export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
+            export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
+            export JWT_SECRET="$PREVIEW_JWT_SECRET"
+            export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
+            export WEB_ENV="test"
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f docker-compose.endpoint-tests.yml build
-            docker-compose -f docker-compose.endpoint-tests.yml up -d
+            docker-compose up -d
+            docker-compose exec api yarn run migrate
+            docker-compose exec api yarn run seed
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
