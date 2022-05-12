@@ -136,7 +136,8 @@ const getNewApd = () => {
         },
         [0, 1, 2].map(past => yearOptions[0] - past)
       )      
-    }
+    },
+    metadata: {}
   };
 };
 

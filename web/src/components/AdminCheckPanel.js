@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { toggleAdminCheck } from '../redux/actions/app/apd';
 
-import { Drawer } from '@cmsgov/design-system';
+import { Drawer, Accordion, AccordionItem } from '@cmsgov/design-system';
 
 import Icon, { faExclamationTriangle } from '../components/Icons';
 
@@ -13,24 +13,12 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
   const handleClose = () => {
     toggleAdmin(false);
   };
-  
-  const handleStopCheck = () => {
-    alert("this isn't built yet...");
-    toggleAdmin(false);
-  };
 
   return (
     <Fragment>
       {showAdminCheck && (
         <Drawer
-          footerBody={
-            <p className="ds-text ds-u-margin--0">
-              <Icon className="ds-u-color--error ds-u-margin-right--1" icon={faExclamationTriangle} />
-              <a onClick={handleStopCheck} className="ds-u-color--error">Stop Administrative Check</a> 
-              <br/> 
-              APDs cannot be submitted until all required fields are complete. Exiting the required fields review will pause the review until you choose to restart the review or complete all required fields.
-            </p>
-          }
+          footerBody={null}
           heading="Administrative Check"
           headingLevel={2}
           onCloseClick={handleClose}
@@ -45,24 +33,26 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
               <span class="ds-u-fill--error ds-u-color--white ds-u-radius ds-u-padding-x--3 ds-u-padding-y--2 ds-u-font-size--2xl ds-u-font-weight--bold">{metadata.incomplete}</span>
             </div>
             <hr className="eapd-admin-check__divider" />
-            {metadata.todo.map((todo, index) => (
-              <div>
-              <h3>To Do</h3>
-              {todo[Object.keys(todo)].incomplete > 0 && (
-                <div className="ds-u-padding-bottom--2">
-                  <strong>{todo[Object.keys(todo)].name}</strong>
-                  <p className="ds-u-margin--0">Incomplete: {todo[Object.keys(todo)].incomplete}</p>
-                  {todo[Object.keys(todo)].fields.map(item => (
-                    <div className="ds-u-padding-bottom--2">
-                      <div><strong>Field name:</strong> {item.name}</div>
-                      <div><strong>Field description:</strong> {item.description}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              <h3>Recently Completed</h3>
-              </div>
+            <h3>To Do</h3>
+            {Object.keys(metadata.todo).map((key, index) => (
+              <Accordion bordered>
+                <AccordionItem
+                  heading="Controlled accordion"
+                  defaultOpen
+                  isControlledOpen={true}
+                  onChange={() => handleClose}
+                >
+                  <p>
+                    In a controlled accordion, the accordion panel&apos;s open state is controlled by the
+                    application, by passing <code>isControlledOpen</code> and <code>onChange</code>
+                    props. The <code>isControlledOpen</code> boolean flag sets the panel to an open or
+                    close state.
+                  </p>
+                </AccordionItem>
+              </Accordion>
             ))}
+            <h3>Recently Completed</h3>
+            <p>No sections recently completed</p>
           </div>
         </Drawer>
       )}

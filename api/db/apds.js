@@ -46,7 +46,6 @@ const adminCheck = apd => {
       }
     ]
   };
-  
   return metadata;
 }
 

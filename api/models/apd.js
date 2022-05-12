@@ -65,7 +65,7 @@ const apdSchema = new mongoose.Schema({
   },
   metadata: {
     incomplete: Number,
-    todo: [],
+    todo: {},
     recents: []
   },
   status: {
