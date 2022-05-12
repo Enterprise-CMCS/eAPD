@@ -773,17 +773,17 @@ jobs:
           name: build API image
           working_directory: ~/project/api
           command: |
-            export COMPOSE_PROJECT_NAME=api
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api ./
       - run:
           name: start everything up
-          working_directory: ~/project/api
+          working_directory: ~/project
           command: |
+            export COMPOSE_PROJECT_NAME=api
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f docker-compose.endpoint-tests.yml --project-name api up -d
-            docker-compose -f docker-compose.endpoint-tests.yml --project-name api exec api-for-testing yarn run migrate
-            docker-compose -f docker-compose.endpoint-tests.yml --project-name api exec api-for-testing yarn run seed
+            docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
           command: |
@@ -791,6 +791,7 @@ jobs:
             docker pull owasp/zap2docker-stable:2.11.1
       - run:
           name: run owasp zap
+          working_directory: ~/project/api
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker run \
