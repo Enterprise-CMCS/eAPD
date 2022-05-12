@@ -774,7 +774,7 @@ jobs:
           working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api ./api/Dockerfile
+            docker build -t cms-eapd/api -f api/Dockerfile .
       - run:
           name: start everything up
           working_directory: ~/project
