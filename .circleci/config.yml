@@ -777,6 +777,8 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2004:202104-01
+    resource_limits:
+      memory: 512m
     steps:
       - checkout
       - attach_workspace:
@@ -795,8 +797,8 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
+            # docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
+            # docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
           command: |
