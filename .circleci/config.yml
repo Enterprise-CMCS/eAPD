@@ -796,9 +796,9 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
+            docker-compose -f docker-compose.endpoint-tests.yml up -d
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
