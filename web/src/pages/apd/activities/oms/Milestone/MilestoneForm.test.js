@@ -1,46 +1,107 @@
-import { mount } from 'enzyme';
 import React from 'react';
+import {
+  renderWithConnection,
+  act,
+  screen,
+  within,
+  waitFor
+} from 'apd-testing-library';
+import userEvent from '@testing-library/user-event';
 
-import { plain as MilestoneForm, mapDispatchToProps } from './MilestoneForm';
+import { plain as MilestoneForm } from './MilestoneForm';
 
-import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actions/editActivity';
+const defaultProps = {
+  activityIndex: 42,
+  index: 1,
+  item: {
+    // On 1 September 1939, Germany invaded Poland after having staged 
+    // several false flag border incidents as a pretext to initiate the 
+    // invasion.
+    endDate: '1939-9-01',
+    milestone: 'Milestone name'
+  },
+  saveMilestone: jest.fn(),
+  setFormValid: jest.fn()
+};
 
-describe('the MilestoneForm component', () => {
-  const saveMilestone = jest.fn();
+const setup = async (props = {}) => {
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  const renderUtils = await act(async () => {
+    renderWithConnection(<MilestoneForm {...defaultProps} {...props} />);
+  });
+  return renderUtils;
+};
 
-  const component = mount(
-    <MilestoneForm
-      activityIndex={225}
-      index={3252}
-      item={{
-        // Operation Torch, the Allied invasion of North Africa, is launched
-        // to relieve pressure on Egypt and provide an invasion route into
-        // southern Europe,
-        endDate: '1942-8-16',
-        milestone: 'Milestone name'
-      }}
-      saveMilestone={saveMilestone}
-    />
-  );
+const verifyDateField = (text, expectValue) => {
+  const fieldset = within(screen.getByText(text).closest('fieldset')); // eslint-disable-line testing-library/no-node-access
+  expect(fieldset.getByLabelText('Month')).toHaveValue(expectValue.month);
+  expect(fieldset.getByLabelText('Day')).toHaveValue(expectValue.day);
+  expect(fieldset.getByLabelText('Year')).toHaveValue(expectValue.year);
+};
 
+describe('the ContractorResourceForm component', () => {
   beforeEach(() => {
-    saveMilestone.mockClear();
+    jest.resetAllMocks();
   });
-
-  test('renders correctly', () => {
-    expect(component).toMatchSnapshot();
+  
+  test('renders correctly with default props', async () => {
+    await setup();
+    expect(screen.getByLabelText(/Name/i)).toHaveValue(defaultProps.item.milestone);
+    verifyDateField('Target completion date', {
+       month: '9',
+       day: '1',
+       year: '1939'
+     });
   });
-
-  describe('events', () => {
-    test('handles saving the milestone', () => {
-      component.find('form').simulate('submit');
-      expect(saveMilestone).toHaveBeenCalled();
+  
+  test('renders error when no name is provided', async () => {
+    await setup({});
+    
+    const input = screen.getByLabelText(/Name/i);
+    
+    userEvent.clear(input);
+    await waitFor(() => {
+      expect(input).toHaveFocus();
     });
+    userEvent.tab();
+    
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    
+    const error = await screen.findByText(
+      /Milestone is required./i
+    );
+    expect(error).toBeInTheDocument();
   });
-
-  it('maps dispatch actions to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      saveMilestone: actualSaveMilestone
+  
+  test('renders error when no date is provided', async () => {
+    await setup({});
+    
+    // start date - month, day, year
+    const endFieldset = within(
+     // eslint-disable-next-line testing-library/no-node-access
+     screen.getByText(/Target completion date/i).closest('fieldset')
+    );
+    
+    // first tab to skip over the name
+    userEvent.tab();
+    
+    userEvent.tab();
+    await waitFor(() => {
+     expect(endFieldset.getByLabelText('Month')).toHaveFocus();
     });
+    userEvent.tab();
+    await waitFor(() => {
+     expect(endFieldset.getByLabelText('Day')).toHaveFocus();
+    });
+    userEvent.tab();
+    await waitFor(() => {
+     expect(endFieldset.getByLabelText('Year')).toHaveFocus();
+    });
+    userEvent.tab();
+    
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    
+    const error = await screen.findByRole('alert', 'Provide a completion date.');
+    expect(error).toBeInTheDocument();
   });
 });

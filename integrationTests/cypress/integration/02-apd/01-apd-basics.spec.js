@@ -581,7 +581,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
         cy.get(`.ds-c-field--day`).click().type(element.dateDay);
 
-        cy.get(`.ds-c-field--year`).click().type(element.dateYear);
+        cy.get(`.ds-c-field--year`)
+          .click()
+          .type(element.dateYear)
+          .blur();
 
         cy.findByRole('button', { name: /Save/i }).click();
 
