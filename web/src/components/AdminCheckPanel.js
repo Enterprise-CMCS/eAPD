@@ -9,7 +9,7 @@ import { Drawer, Accordion, AccordionItem } from '@cmsgov/design-system';
 import Icon, { faExclamationTriangle } from '../components/Icons';
 
 const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmin}) => {
-
+  
   const handleClose = () => {
     toggleAdmin(false);
   };
@@ -30,29 +30,47 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
           <div className="ds-u-border--2 ds-u-padding--2">
             <div className="ds-u-display--flex ds-u-justify-content--end ds-u-text-align--right ds-u-align-items--center">
               <span className="ds-u-color--error ds-u-font-weight--bold ds-u-margin-right--2">Incomplete <br /> Required Fields</span>
-              <span class="ds-u-fill--error ds-u-color--white ds-u-radius ds-u-padding-x--3 ds-u-padding-y--2 ds-u-font-size--2xl ds-u-font-weight--bold">{metadata.incomplete}</span>
+              <span className="ds-u-fill--error ds-u-color--white ds-u-radius ds-u-padding-x--3 ds-u-padding-y--2 ds-u-font-size--2xl ds-u-font-weight--bold">{metadata.incomplete}</span>
             </div>
             <hr className="eapd-admin-check__divider" />
             <h3>To Do</h3>
-            {Object.keys(metadata.todo).map((key, index) => (
-              <Accordion bordered>
-                <AccordionItem
-                  heading="Controlled accordion"
-                  defaultOpen
-                  isControlledOpen={true}
-                  onChange={() => handleClose}
-                >
-                  <p>
-                    In a controlled accordion, the accordion panel&apos;s open state is controlled by the
-                    application, by passing <code>isControlledOpen</code> and <code>onChange</code>
-                    props. The <code>isControlledOpen</code> boolean flag sets the panel to an open or
-                    close state.
-                  </p>
-                </AccordionItem>
-              </Accordion>
-            ))}
+            <Accordion bordered>
+              {Object.keys(metadata.todo).map((key, index) => (
+                  <AccordionItem
+                    heading={
+                      <Fragment>
+                        <h3 className="ds-u-margin--0">{metadata.todo[key].name}: <span className="ds-u-font-weight--normal">{metadata.todo[key].incomplete} field(s) to complete</span></h3>
+                        
+                        <a href={metadata.todo[key].link}>Go to the {metadata.todo[key].name} page.</a>
+                      </Fragment>
+                    }
+                    defaultOpen={false}
+                  >
+                  <ol>
+                    {metadata.todo[key].fields.map((field, index) => (
+                      <li className="ds-h5">
+                        {field.name} <br />
+                        <span className="ds-u-font-weight--normal">{field.description}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  </AccordionItem>
+              ))}
+            </Accordion>
             <h3>Recently Completed</h3>
-            <p>No sections recently completed</p>
+            {metadata.recents.length > 0 && (
+              <div>
+              {metadata.recents.map((item, index) => (
+                <div className="ds-u-border--1 ds-u-margin-bottom--2">
+                  {item.page} <br />
+                  <a>{item.link}</a>
+                </div>
+              ))}
+              </div>
+            )}
+            {metadata.recents.length === 0 && (
+              <p>No sections recently completed</p>
+            )}
           </div>
         </Drawer>
       )}
