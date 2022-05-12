@@ -145,10 +145,13 @@ const ActivityOverview = ({
 
       <div className="data-entry-box">
         <label
+          id="label-for-summary"
           className="ds-c-label--full-width"
           hint={overviewHint}
-          for="activity-short-overview-field"
-        >{overviewLabel}</label>
+          htmlFor="activity-short-overview-field"
+        >
+          {overviewLabel}
+        </label>
         <Controller
           name="summary"
           control={control}

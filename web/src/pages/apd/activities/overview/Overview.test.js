@@ -1,8 +1,7 @@
 import React from 'react';
 import {
   renderWithConnection,
-  screen,
-  waitFor
+  screen
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
