@@ -782,21 +782,26 @@ jobs:
     environment:
       MAX_HEAP_SIZE: 4096m
       HEAP_NEWSIZE: 1024m
+      COMPOSE_PROJECT_NAME: api
     resource_class: large
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
       - run:
+          name: build API image
+          working_directory: ~/project/api
+          command: |
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            docker-compose -f docker-compose.endpoint-tests.yml build
+      - run:
           name: start everything up
           no_output_timeout: 30m
           working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            export COMPOSE_PROJECT_NAME=api
-            docker-compose -f docker-compose.endpoint-tests.yml -p api build
-            docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml up -d
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
