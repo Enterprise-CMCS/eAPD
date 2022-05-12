@@ -790,14 +790,14 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            docker compose build
+            docker-compose build
       - run:
           name: start everything up
           working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            docker compose -f docker-compose.endpoint-tests.yml up -d
+            docker-compose -f docker-compose.endpoint-tests.yml up -d
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
