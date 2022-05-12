@@ -9,15 +9,15 @@ unset DEV_DB_NAME
 
 echo "[]" > endpoint-data.json
 
-docker-compose -f docker-compose.endpoint-tests.yml up -d
+docker-compose -f ../docker-compose.endpoint-tests.yml up -d
 sleep 3
 docker cp ./ api-for-testing:/app/ 
-docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
-docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
-docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run test-endpoints $@
+docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
+docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
+docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run test-endpoints $@
 EXIT_CODE=$?
 
-docker-compose -f docker-compose.endpoint-tests.yml down
+docker-compose -f ../docker-compose.endpoint-tests.yml down
 
 mv endpoint-data.json ./endpoint-tests
 
