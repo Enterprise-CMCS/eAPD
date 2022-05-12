@@ -5,6 +5,7 @@ docs-build/
 documentation/
 e2e/
 mongodata/
+node_modules/
 owasp/
 packer/
 postman/
