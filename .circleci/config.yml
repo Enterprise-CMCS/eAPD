@@ -471,6 +471,7 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb
       - run:
           name: set up environment
+          no_output_timeout: 30m
           working_directory: ~/project
           command: |
             export NODE_ENV=development
@@ -777,6 +778,7 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2004:202104-01
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
