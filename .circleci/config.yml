@@ -777,8 +777,6 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2004:202104-01
-    resource_limits:
-      memory: 512m
     steps:
       - checkout
       - attach_workspace:
