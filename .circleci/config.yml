@@ -488,6 +488,7 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb
       - run:
           name: set up environment
+          no_output_timeout: 30m
           working_directory: ~/project
           command: |
             export NODE_ENV=development
