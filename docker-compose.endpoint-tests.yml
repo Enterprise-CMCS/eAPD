@@ -20,13 +20,15 @@ services:
       - MONGO_DATABASE_PASSWORD=cms-test
       - MONGO_DATABASE=eapd-test
     volumes:
-      - ./db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+      - ./api/db/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
     command: [--auth]
     ports:
       - 27018:27017
 
   api-for-testing:
-    build: .
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
     image: cms-eapd/api
     depends_on:
       - db

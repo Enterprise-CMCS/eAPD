@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 export NODE_ENV=test
+export COMPOSE_PROJECT_NAME=api
 
 docker-compose -f ../docker-compose.endpoint-tests.yml up -d
 sleep 3
@@ -15,4 +16,5 @@ EXIT_CODE=$?
 
 docker-compose -f ../docker-compose.endpoint-tests.yml down
 
+unset COMPOSE_PROJECT_NAME
 exit $EXIT_CODE

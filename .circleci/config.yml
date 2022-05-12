@@ -777,12 +777,12 @@ jobs:
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: start everything up
-          working_directory: ~/project/api
+          working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f ../docker-compose.endpoint-tests.yml up -d
-            docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
-            docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
+            docker-compose -f docker-compose.endpoint-tests.yml --project-name api up -d
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
           command: |

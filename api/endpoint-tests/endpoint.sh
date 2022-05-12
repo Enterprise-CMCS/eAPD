@@ -4,6 +4,7 @@ rm ./endpoint-tests/endpoint-data.json
 
 export NODE_ENV=test
 export API_URL=http://localhost:8081
+export COMPOSE_PROJECT_NAME=api
 
 unset DEV_DB_NAME
 
@@ -22,4 +23,6 @@ docker-compose -f ../docker-compose.endpoint-tests.yml down
 mv endpoint-data.json ./endpoint-tests
 
 node endpoint-tests/endpoint-coverage.js
+
+unset COMPOSE_PROJECT_NAME
 exit $EXIT_CODE
