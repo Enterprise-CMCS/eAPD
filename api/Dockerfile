@@ -5,8 +5,6 @@ WORKDIR /app
 
 ADD package.json .
 ADD yarn.lock .
-ADD api/package.json ./api/
-ADD common/package.json ./common/
 
 RUN chown -R node:node /app
 USER node:node

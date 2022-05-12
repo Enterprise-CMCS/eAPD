@@ -65,10 +65,7 @@ services:
       - mongo
     environment:
       - PORT=8000
-      - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
-      - TEST_DB_NAME=${TEST_DB_NAME:-hitech_apd_test}
       - NODE_ENV=development
-      - DISABLE_SAME_SITE=yes
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
@@ -78,6 +75,9 @@ services:
       - MONGO_URL=${MONGO_URL:-mongodb://mongo:cms@mongo:27017/eapd?authSource=admin}
       - MONGO_DATABASE=${MONGO_DATABASE:-eapd}
       - MONGO_AUTH_SOURCE=${MONGO_AUTH_SOURCE:-admin}
+      - DISABLE_SAME_SITE=yes
+      - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
+      - TEST_DB_NAME=${TEST_DB_NAME:-hitech_apd_test}
     volumes:
       - type: bind
         source: ./api
