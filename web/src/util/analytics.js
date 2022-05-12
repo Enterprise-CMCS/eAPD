@@ -26,7 +26,7 @@ export const pageView = pathname => {
         page_name: `${siteSection}: ${pageName}`,
         page_path: pathname,
         site_domain: window.location.origin,
-        site_environment: process.env.ENV,
+        site_environment: process.env.WEB_ENV,
         site_section: '', // Which tool or area did this take place in? e.g. "app 3.0", "window shop", "my account"
         logged_in: !isPublic
       });
