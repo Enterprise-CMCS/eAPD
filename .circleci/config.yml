@@ -507,7 +507,7 @@ jobs:
             npx cypress verify
       - run:
           name: run e2e tests authentication
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.15.0; fi
@@ -518,7 +518,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.spec.js"; fi
       - run:
           name: run e2e tests apd - basics
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.15.0; fi
@@ -529,7 +529,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.spec.js"; fi
       - run:
           name: run e2e tests apd - default
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.15.0; fi
@@ -540,7 +540,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.spec.js"; fi
       - run:
           name: run e2e tests apd - data
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.15.0; fi
@@ -551,7 +551,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.spec.js"; fi
       - run:
           name: run e2e tests admin
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.15.0; fi
@@ -784,11 +784,11 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project
+          working_directory: ~/project/api
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            docker build -t cms-eapd/api -f api/Dockerfile .
+            docker build -t cms-eapd/api ./
       - run:
           name: start everything up
           working_directory: ~/project
