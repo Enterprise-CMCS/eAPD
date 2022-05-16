@@ -780,27 +780,23 @@ jobs:
     machine:
       image: ubuntu-2004:202104-01
     resource_class: large
-    environment:
-      NODE_ENV: development
-      OKTA_DOMAIN: '$PREVIEW_OKTA_DOMAIN'
-      OKTA_API_KEY: '$PREVIEW_OKTA_API_KEY'
-      OKTA_SERVER_ID: '$PREVIEW_OKTA_SERVER_ID'
-      OKTA_CLIENT_ID: '$PREVIEW_OKTA_CLIENT_ID'
-      JWT_SECRET: '$PREVIEW_JWT_SECRET'
-      TEALIUM_TAG: '$PREVIEW_TEALIUM_TAG'
-      WEB_ENV: 'test'
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
       - run:
+          name: build API image
+          working_directory: ~/project/
+          command: |
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            docker build -t cms-eapd/api -f ./api/Dockerfile ./
+      - run:
           name: start everything up
-          no_output_timeout: 30m
           working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
