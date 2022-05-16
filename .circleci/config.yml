@@ -800,7 +800,7 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            sleep 20
+            sleep 5
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
 
   # ===== Deployment jobs =====
