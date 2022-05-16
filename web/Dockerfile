@@ -10,7 +10,7 @@ ADD common/package.json ./common/
 
 RUN chown -R node:node /app
 USER node:node
-RUN yarn install --frozen-lockfile
+RUN yarn install --pure-lockfile --non-interactive
 
 WORKDIR /app/web
 CMD yarn run start
