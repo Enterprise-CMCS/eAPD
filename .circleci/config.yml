@@ -788,14 +788,30 @@ jobs:
           name: build API image
           working_directory: ~/project/
           command: |
+            export NODE_ENV="development"
+            export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
+            export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
+            export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
+            export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
+            export JWT_SECRET="$PREVIEW_JWT_SECRET"
+            export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
+            export WEB_ENV="test"
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: start everything up
           working_directory: ~/project
           command: |
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export NODE_ENV="development"
+            export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
+            export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
+            export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
+            export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
+            export JWT_SECRET="$PREVIEW_JWT_SECRET"
+            export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
+            export WEB_ENV="test"
             export COMPOSE_PROJECT_NAME=api
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
 
   # ===== Deployment jobs =====
