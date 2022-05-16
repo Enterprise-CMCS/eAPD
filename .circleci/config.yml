@@ -813,10 +813,6 @@ jobs:
             export COMPOSE_PROJECT_NAME=api
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-      - run:
-          name: seed db
-          working_directory: ~/project
-          command: |
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
 
   # ===== Deployment jobs =====
