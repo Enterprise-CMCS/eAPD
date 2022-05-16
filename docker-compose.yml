@@ -42,6 +42,7 @@ services:
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - WEB_ENV=${WEB_ENV}
+      - COMPOSE_HTTP_TIMEOUT=720
     volumes:
       - type: bind
         source: ./web
