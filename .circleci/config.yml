@@ -803,9 +803,11 @@ jobs:
       - run:
           name: start everything up
           working_directory: ~/project/api
+          no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f docker-compose.endpoint-tests.yml up -d
+            docker-compose -f docker-compose.endpoint-tests.yml build
+            COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
       - run:
