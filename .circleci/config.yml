@@ -831,7 +831,7 @@ jobs:
               -v "$(pwd)/owasp":/zap/wrk \
               owasp/zap2docker-stable:2.11.1 \
               zap-api-scan.py \
-              -c api-scan.conf \
+              -c ../api-scan.conf \
               -t http://api-for-testing:8000/open-api \
               -f openapi
 
