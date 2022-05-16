@@ -780,6 +780,16 @@ jobs:
     machine:
       image: ubuntu-2004:202104-01
     resource_class: large
+    environment:
+      COMPOSE_PROJECT_NAME: api
+      NODE_ENV: development
+      OKTA_DOMAIN: '$PREVIEW_OKTA_DOMAIN'
+      OKTA_API_KEY: '$PREVIEW_OKTA_API_KEY'
+      OKTA_SERVER_ID: '$PREVIEW_OKTA_SERVER_ID'
+      OKTA_CLIENT_ID: '$PREVIEW_OKTA_CLIENT_ID'
+      JWT_SECRET: '$PREVIEW_JWT_SECRET'
+      TEALIUM_TAG: '$PREVIEW_TEALIUM_TAG'
+      WEB_ENV: 'test'
     steps:
       - checkout
       - attach_workspace:
@@ -789,15 +799,6 @@ jobs:
           no_output_timeout: 30m
           working_directory: ~/project
           command: |
-            export NODE_ENV=development
-            export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
-            export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
-            export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
-            export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
-            export JWT_SECRET="$PREVIEW_JWT_SECRET"
-            export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
-            export WEB_ENV="test"
-
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
             sleep 20
