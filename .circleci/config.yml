@@ -816,6 +816,7 @@ jobs:
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
       - run:
           name: pull owasp zap docker image
+          working_directory: ~/project/api
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
