@@ -787,12 +787,6 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: build API image
-          working_directory: ~/project/
-          command: |
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f docker-compose.endpoint-tests.yml -p api build
-      - run:
           name: start everything up
           no_output_timeout: 30m
           working_directory: ~/project
@@ -808,6 +802,7 @@ jobs:
 
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
+            sleep 20
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn migrate $@
             echo $?
 
