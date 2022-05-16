@@ -802,8 +802,6 @@ jobs:
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d $@
             echo $?
             sleep 20
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn migrate $@
-            echo $?
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
