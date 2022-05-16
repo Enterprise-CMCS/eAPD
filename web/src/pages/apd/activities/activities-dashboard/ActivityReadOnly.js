@@ -20,6 +20,9 @@ const Activity = ({ activity, activityIndex }) => {
         <div className="ds-u-margin-top--2">
           <ul className="ds-c-list--bare subform__container">
             <strong>Metrics: </strong>
+            {outcome.metrics.length === 0 && (
+              'No metrics were specified for this outcome.'
+            )}
             {outcome.metrics.map(({ metric }, index) => (
               <li key={uuidv4()} className="ds-u-margin-bottom--2">
                 {index + 1}. {metric || 'No metrics were specified for this outcome.'}
