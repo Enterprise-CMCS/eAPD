@@ -808,7 +808,8 @@ jobs:
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
             export WEB_ENV="test"
 
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin $@
+            echo $?
             docker-compose -f docker-compose.endpoint-tests.yml -p api up -d $@
             echo $?
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api yarn run migrate $@
