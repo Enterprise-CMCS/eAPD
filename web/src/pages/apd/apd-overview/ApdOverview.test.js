@@ -1,8 +1,12 @@
 import React from 'react';
-import { renderWithConnection, screen } from 'apd-testing-library';
+import {
+  renderWithConnection,
+  act,
+  screen
+} from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
-import ApdSummary from './ApdOverview';
+import { plain as ApdOverview } from './ApdOverview';
 
 jest.mock('../../../util/api', () => ({
   get: jest.fn(),
@@ -13,160 +17,80 @@ jest.mock('../../../util/api', () => ({
 
 const defaultProps = {
   addApdYear: jest.fn(),
+  name: 'apd #1',
+  narrativeHIE: 'narrative HIE',
+  narrativeHIT: 'narrative HIT',
+  narrativeMMIS: 'narrative MMIS',
+  programOverview: '',
   removeApdYear: jest.fn(),
   setHIE: jest.fn(),
   setHIT: jest.fn(),
   setMMIS: jest.fn(),
-  setOverview: jest.fn()
+  setName: jest.fn(),
+  setOverview: jest.fn(),
+  years: ['2022','2023'],
+  yearOptions: ['2022','2023','2024']
 };
 
-const setup = (props = {}) => {
-  return renderWithConnection(<ApdSummary {...defaultProps} {...props} />, {
-    initialState: {
-      apd: {
-        data: {
-          id: 123,
-          name: 'Test APD',
-          activities: [],
-          keyPersonnel: [],
-          incentivePayments: {
-            ehAmt: {
-              2020: {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0
-              },
-              2021: {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0
-              }
-            },
-            ehCt: {
-              2020: {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0
-              },
-              2021: {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0
-              }
-            },
-            epAmt: {
-              2020: {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0
-              },
-              2021: {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0
-              }
-            },
-            epCt: {
-              2020: {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0
-              },
-              2021: {
-                1: 0,
-                2: 0,
-                3: 0,
-                4: 0
-              }
-            }
-          },
-          previousActivityExpenses: {
-            2020: {
-              hithie: {
-                federalActual: 0,
-                totalApproved: 0
-              },
-              mmis: {
-                90: { federalActual: 0, totalApproved: 0 },
-                75: { federalActual: 0, totalApproved: 0 },
-                50: { federalActual: 0, totalApproved: 0 }
-              }
-            },
-            2021: {
-              hithie: {
-                federalActual: 0,
-                totalApproved: 0
-              },
-              mmis: {
-                90: { federalActual: 0, totalApproved: 0 },
-                75: { federalActual: 0, totalApproved: 0 },
-                50: { federalActual: 0, totalApproved: 0 }
-              }
-            }
-          },
-          narrativeHIE: 'about hie',
-          narrativeHIT: 'about hit',
-          narrativeMMIS: 'about mmis',
-          programOverview: 'about the program',
-          years: ['2020', '2021'],
-          yearOptions: ['2020', '2021', '2022']
-        },
-        byId: {
-          123: {
-            name: 'Test APD'
+const setup = async (props = {}) => {
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  const renderUtils = await act(async () => {
+    renderWithConnection(<ApdOverview {...defaultProps} {...props} />, {
+      initialState: {
+        apd: {
+          data: {
+            activities: []
           }
         }
       }
-    }
+    });
   });
+  return renderUtils;
 };
 
-xdescribe('APD overview component', () => {
-  test('dispatches on text change', () => {
-    setup();
+describe('APD overview component', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+  
+  test('dispatches on text change', async () => {
+    await setup();
 
-    userEvent.type(screen.getByLabelText('Introduction'), ' it is really cool');
+    userEvent.type(screen.getByLabelText('Introduction'), 'it is really cool');
     expect(screen.getByLabelText('Introduction')).toHaveValue(
-      'about the program it is really cool'
+      'it is really cool'
     );
   });
 
-  test('user can add a year', () => {
-    setup();
-    expect(screen.getByLabelText('2020')).toBeChecked();
-    expect(screen.getByLabelText('2021')).toBeChecked();
-    expect(screen.getByLabelText('2022')).not.toBeChecked();
-
-    userEvent.click(screen.getByLabelText('2022'));
+  test('user can add a year', async () => {
+    await setup();
     expect(screen.getByLabelText('2022')).toBeChecked();
+    expect(screen.getByLabelText('2023')).toBeChecked();
+    expect(screen.getByLabelText('2024')).not.toBeChecked();
+
+    userEvent.click(screen.getByLabelText('2024'));
+    expect(screen.getByLabelText('2024')).toBeChecked();
   });
 
   test('user can attempt to delete a year and cancel', async () => {
-    setup();
-    expect(screen.getByLabelText('2021')).toBeChecked();
-    userEvent.click(screen.getByLabelText('2021'));
+    await setup();
+    expect(screen.getByLabelText('2022')).toBeChecked();
+    userEvent.click(screen.getByLabelText('2022'));
 
     await screen.findByRole('alertdialog');
     userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
 
-    expect(screen.getByLabelText('2021')).toBeChecked();
+    expect(screen.getByLabelText('2022')).toBeChecked();
   });
 
   test('user can delete a year', async () => {
-    setup();
-    expect(screen.getByLabelText('2021')).toBeChecked();
-    userEvent.click(screen.getByLabelText('2021'));
+    await setup();
+    expect(screen.getByLabelText('2022')).toBeChecked();
+    userEvent.click(screen.getByLabelText('2022'));
 
     await screen.findByRole('alertdialog');
     userEvent.click(screen.getByRole('button', { name: 'Delete FFY' }));
 
-    expect(screen.getByLabelText('2021')).not.toBeChecked();
+    expect(screen.getByLabelText('2022')).not.toBeChecked();
   });
 });

@@ -84,9 +84,9 @@ workflows:
               only: /.*/
       - e2e test:
           filters:
-#            branches:
-#              ignore:    # Commenting out to add e2e to Staging builds, leaving until confirmed working as intended TODO: REMOVE
-#                - main
+            branches:
+              ignore:
+                - gh-pages
             tags:
               ignore: ignore-e2e
           requires:
@@ -94,6 +94,18 @@ workflows:
             - backend lint
             - frontend dependency vulnerability scan
             - backend dependency vulnerability scan
+      # - chromatic deployment:
+      #     filters:
+      #       branches:
+      #         ignore:
+      #           - gh-pages
+      #       tags:
+      #         ignore: ignore-e2e
+      #     requires:
+      #       - frontend lint
+      #       - backend lint
+      #       - frontend dependency vulnerability scan
+      #       - backend dependency vulnerability scan
 
       # backend jobs
       - backend api endpoint test:
@@ -224,6 +236,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
+            # - chromatic deployment
 
       - frontend deploy:
           name: frontend deploy production
@@ -240,6 +253,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
+            # - chromatic deployment
 
       # joint jobs
       - preview deploy:
@@ -247,6 +261,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - gh-pages
             tags:
               ignore: /^noinfra.*/
           requires:
@@ -551,6 +566,27 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
 
+  # chromatic deployment:
+  #   yaml test:
+  #   docker:
+  #     - image: cimg/node:16.15.0
+  #       auth:
+  #         username: $DOCKER_EAPD_UN
+  #         password: $DOCKER_EAPD_PW
+  #   steps:
+  #     - checkout
+  #     - attach_workspace:
+  #         at: ~/project/web
+  #     - run:
+  #         name: Install Web Dependencies
+  #         working_directory: ~/project/web
+  #         command: yarn install --frozen-lockfile
+  #     - run:
+  #         name: Deploy to Chromatic
+  #         working_directory: ~/project/web
+  #         no_output_timeout: 60m
+  #         command: yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} -b build:storybook --ci --exit-once-uploaded --exit-zero-on-changes
+
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
 
@@ -674,7 +710,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: WEB_ENV="${<< parameters.env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
