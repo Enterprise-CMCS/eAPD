@@ -58,6 +58,10 @@
     "node": true,
     "commonjs": true
   },
+  "globals": {
+    "window": true,
+    "utag": true
+  },
   "overrides": [
     {
       "files": ["**/*.test.js", "**/*.story.js"],

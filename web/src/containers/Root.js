@@ -14,10 +14,6 @@ const tagManagerArgs = {
 TagManager.initialize(tagManagerArgs);
 
 const Root = ({ history, store }) => {
-  window.dataLayer.push({
-    event: 'pageview'
-  });
-
   // Create listener for location changing to track activity
   history.listen(() => {
     store.dispatch(setLatestActivity());

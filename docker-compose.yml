@@ -37,9 +37,11 @@ services:
     image: cms-eapd/web
     environment:
       - API_URL=http://localhost:8081
+      - TEALIUM_TAG=${TEALIUM_TAG}
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
+      - WEB_ENV=${WEB_ENV}
     volumes:
       - type: bind
         source: ./web

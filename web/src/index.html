@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- This tells Tealium to not treat the initial page load as a page view,
+    since you will send a utag.view call on each page -->
+    <script>
+      window.utag_cfg_ovrd = { noview: true };
+    </script>
+    <!-- Tealium Tag Manager - SYNC -->
+    <script src="<%= htmlWebpackPlugin.options.tealiumUrl %>"></script>
     <style>
       * {
         box-sizing: border-box;
@@ -21,6 +28,23 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- Tealium Tag Manager - ASYNC -->
+    <script>
+      (function (t, e, a, l, i, u, m) {
+        t = 'cmsgov/<%= htmlWebpackPlugin.options.tealiumProfile %>';
+        e = '<%= htmlWebpackPlugin.options.environment %>';
+        a = '/' + t + '/' + e + '/utag.js';
+        l = '//tags.tiqcdn.com/utag' + a;
+        i = document;
+        u = 'script';
+        m = i.createElement(u);
+        m.src = l;
+        m.type = 'text/java' + u;
+        m.async = true;
+        l = i.getElementsByTagName(u)[0];
+        l.parentNode.insertBefore(m, l);
+      })();
+    </script>
     <div id="app"></div>
   </body>
 </html>

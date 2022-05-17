@@ -128,7 +128,7 @@ const DateField = ({
       return '';
     }
     return errorMessage;
-  }, [errorMessage, state.invalidObject]);
+  }, [errorMessage, state]);
 
   return (
     <DSDateField

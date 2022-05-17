@@ -1,59 +1,87 @@
 import { TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useReducer, forwardRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
 
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+
 import DateField from '../../../../../components/DateField';
+
+import milestonesSchema from '../../../../../static/schemas/milestones';
 
 import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actions/editActivity';
 
 const MilestoneForm = forwardRef(
-  ({ activityIndex, index, item, saveMilestone }, ref) => {
+  ({ activityIndex, index, item, saveMilestone, setFormValid }, ref) => {
     MilestoneForm.displayName = 'MilestoneForm';
 
-    function reducer(state, action) {
-      switch (action.type) {
-        case 'updateField':
-          return {
-            ...state,
-            [action.field]: action.value
-          };
-        default:
-          throw new Error(
-            'Unrecognized action type provided to OutcomesAndMetricForm reducer'
-          );
-      }
-    }
+    const {
+      control,
+      formState: { errors, isValid },
+      getFieldState,
+      trigger,
+      getValues
+    } = useForm({
+      defaultValues: {
+        ...item
+      },
+      mode: 'onBlur',
+      reValidateMode: 'onBlur',
+      resolver: joiResolver(milestonesSchema)
+    });
 
-    const [state, dispatch] = useReducer(reducer, item);
+    useEffect(() => {
+      console.log("something changed")
+      setFormValid(isValid);
+    }, [isValid, errors]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const changeDate = (_, dateStr) =>
-      dispatch({ type: 'updateField', field: 'endDate', value: dateStr });
-
-    const changeName = ({ target: { value } }) =>
-      dispatch({ type: 'updateField', field: 'milestone', value });
-
-    const handleSubmit = e => {
+    const onSubmit = e => {
       e.preventDefault();
-      saveMilestone(activityIndex, index, state);
+      saveMilestone(activityIndex, index, getValues());
     };
 
     return (
-      <form index={index} onSubmit={handleSubmit}>
+      <form index={index} onSubmit={onSubmit}>
         <h6 className="ds-h4">Milestone {index + 1}:</h6>
-        <TextField
-          data-cy={`milestone-${index}`}
-          label="Name"
-          name="name"
-          value={state.milestone}
-          className="remove-clearfix textfield__container"
-          onChange={changeName}
+        <Controller
+          control={control}
+          name="milestone"
+          render={({ field: { value, ...props } }) => (
+            <TextField
+              {...props}
+              data-cy={`milestone-${index}`}
+              label="Name"
+              name="milestone"
+              value={value}
+              className="remove-clearfix textfield__container"
+              errorMessage={errors?.milestone?.message}
+              errorPlacement="bottom"
+            />
+          )} 
         />
-        <DateField
-          label="Target completion date"
-          hint=""
-          value={state.endDate}
-          onChange={changeDate}
+        <Controller
+          name="endDate"
+          control={control}
+          render={({
+            field: { onChange, onBlur, ...props },
+            formState: { isTouched }
+          }) => (
+            <DateField
+              {...props}
+              isTouched={isTouched}
+              label="Target completion date"
+              onChange={(e, dateStr) => onChange(dateStr)}
+              onComponentBlur={() => {
+                onBlur();
+                if (getFieldState('end').isTouched) {
+                  trigger('end');
+                }
+              }}
+              errorMessage={errors?.endDate?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
         <input
           className="ds-u-visibility--hidden"
@@ -73,7 +101,8 @@ MilestoneForm.propTypes = {
     endDate: PropTypes.string.isRequired,
     milestone: PropTypes.string.isRequired
   }).isRequired,
-  saveMilestone: PropTypes.func.isRequired
+  saveMilestone: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
