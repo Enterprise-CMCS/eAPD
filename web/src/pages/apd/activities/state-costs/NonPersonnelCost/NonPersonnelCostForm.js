@@ -30,7 +30,9 @@ const NonPersonnelCostForm = forwardRef(
   const {
     control,
     formState: { errors, isValid },
-    getValues
+    getValues,
+    setValue,
+    trigger
   } = useForm({
     defaultValues: {
       ...item
@@ -43,6 +45,15 @@ const NonPersonnelCostForm = forwardRef(
   const onSubmit = e => {
     e.preventDefault();
     saveNonPersonnelCost(activityIndex, index, getValues());
+  };
+  
+  const handleDropdownBlur = e => {
+    trigger('category');
+  };
+  
+  const handleDropdownChange = e => {
+    setValue('category', e.target.value)
+    trigger('category')
   };
   
   useEffect(() => {
@@ -75,7 +86,8 @@ const NonPersonnelCostForm = forwardRef(
             name="category"
             options={categories}
             value={value}
-            onChange={onChange}
+            onChange={handleDropdownChange}
+            onBlur={handleDropdownBlur}
             errorMessage={
               errors?.category?.message
             }
