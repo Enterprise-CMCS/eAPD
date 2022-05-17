@@ -47,15 +47,6 @@ const NonPersonnelCostForm = forwardRef(
     saveNonPersonnelCost(activityIndex, index, getValues());
   };
   
-  const handleDropdownBlur = e => {
-    trigger('category');
-  };
-  
-  const handleDropdownChange = e => {
-    setValue('category', e.target.value)
-    trigger('category')
-  };
-  
   useEffect(() => {
     setFormValid(isValid);
   }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -77,7 +68,7 @@ const NonPersonnelCostForm = forwardRef(
         control={control}
         name="category"
         render={({
-          field: { onChange, value, ...props }
+          field: { value, ...props }
         }) => (
           <Dropdown
             {...props}
@@ -86,8 +77,11 @@ const NonPersonnelCostForm = forwardRef(
             name="category"
             options={categories}
             value={value}
-            onChange={handleDropdownChange}
-            onBlur={handleDropdownBlur}
+            onChange={() => {trigger('category')}}
+            onBlur={(e) => {
+              setValue('category', e.target.value);
+              trigger('category');
+            }}
             errorMessage={
               errors?.category?.message
             }
