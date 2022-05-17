@@ -69,10 +69,10 @@ workflows:
               only: /.*/
           requires:
             - install dependencies
-      - owasp zap scan:
-          filters:
-            tags:
-              ignore: ignore-owasp
+      # - owasp zap scan:
+      #     filters:
+      #       tags:
+      #         ignore: ignore-owasp
       - validate openapi:
           filters:
             tags:
@@ -178,7 +178,7 @@ workflows:
                 - main
           requires:
             - validate openapi
-            - owasp zap scan
+            # - owasp zap scan
             - frontend lint
             - backend lint
             - dependency vulnerability scan
