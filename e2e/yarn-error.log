@@ -1,5 +1,5 @@
 Arguments: 
-  /home/bbrooks/.nvm/versions/node/v16.15.0/bin/node /home/bbrooks/.node/corepack/yarn/1.22.15/bin/yarn.js install
+  /home/bbrooks/.nvm/versions/node/v16.15.0/bin/node /home/bbrooks/.node/corepack/yarn/1.22.15/bin/yarn.js install --frozen-lockfile
 
 PATH: 
   /home/bbrooks/.nvm/versions/node/v16.15.0/bin:/home/bbrooks/bin:/usr/local/bin:/home/bbrooks/.local/:/home/bbrooks/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/BillBrooks/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/BillBrooks/AppData/Local/hyper/app-3.0.2/resources/bin:/mnt/c/Users/BillBrooks/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/BillBrooks/AppData/Local/Keybase/
