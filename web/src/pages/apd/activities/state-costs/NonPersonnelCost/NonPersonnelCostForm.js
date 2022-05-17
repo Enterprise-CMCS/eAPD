@@ -77,11 +77,11 @@ const NonPersonnelCostForm = forwardRef(
             name="category"
             options={categories}
             value={value}
-            onChange={() => {trigger('category')}}
-            onBlur={(e) => {
+            onChange={(e) => {
               setValue('category', e.target.value);
               trigger('category');
             }}
+            onBlur={() => {trigger('category')}}
             errorMessage={
               errors?.category?.message
             }
