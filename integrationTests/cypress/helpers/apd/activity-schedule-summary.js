@@ -93,7 +93,7 @@ export const testDefaultActivityScheduleSummary = () => {
 
     exportPage
       .getActivityScheduleOverviewDates(0)
-      .should('eq', 'Date not specified - Date not specified');
+      .should('eq', 'Dates not specified');
 
     // Milestones
     exportPage.getAllActivityScheduleMilestoneTables().should('have.length', 1);
@@ -102,7 +102,7 @@ export const testDefaultActivityScheduleSummary = () => {
       .getActivityScheduleMilestoneTableName(0)
       .should('eq', 'Activity 1: Program Administration Milestones');
 
-    exportPage.getAllActivityScheduleMilestones(0).should('not.exist');
+    exportPage.getAllActivityScheduleMilestones(0).should('contain', 'No milestones to display.');
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
