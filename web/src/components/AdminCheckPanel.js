@@ -62,7 +62,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
               <div>
               {metadata.recents.map((item, index) => (
                 <div className="ds-u-border--1 ds-u-margin-bottom--2">
-                  {item.page} <br />
+                  <h3 className="ds-u-padding-x--2">{item.page}</h3> <br />
                   <a>{item.link}</a>
                 </div>
               ))}
