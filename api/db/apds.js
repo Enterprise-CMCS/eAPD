@@ -10,7 +10,7 @@ const adminCheck = apd => {
   // the front end. Next steps would likely be to extract this function
   // to it's own module and using joi validations to build this object
   const metadata = {
-    incomplete: 6,
+    incomplete: 2,
     todo: {
       overview: {
         name: "APD Overview",
@@ -38,10 +38,12 @@ const adminCheck = apd => {
     recents: [
       {
         page: "Activity 1- State Costs",
+        section: "State Costs",
         link: "activity/0/state-costs"
       },
       {
         page: "Private Contractor Costs",
+        section: "Private Contractor Costs",
         link: "activity/0/contractor-costs"
       }
     ]
