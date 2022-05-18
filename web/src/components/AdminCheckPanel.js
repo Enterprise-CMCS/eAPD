@@ -6,9 +6,7 @@ import { toggleAdminCheck } from '../redux/actions/app/apd';
 
 import { Drawer, Accordion, AccordionItem } from '@cmsgov/design-system';
 
-import Icon, { faExclamationTriangle } from '../components/Icons';
-
-const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmin}) => {
+const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
   
   const handleClose = () => {
     toggleAdmin(false);
@@ -35,10 +33,11 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
             <hr className="eapd-admin-check__divider" />
             <h3>To Do</h3>
             <Accordion bordered>
-              {Object.keys(metadata.todo).map((key, index) => (
+              {Object.keys(metadata.todo).map((key) => (
                   <AccordionItem
+                    key={key}
                     heading={
-                      <Fragment>
+                      <Fragment key={key}>
                         <h3 className="ds-u-margin--0">{metadata.todo[key].name}: <span className="ds-u-font-weight--normal">{metadata.todo[key].incomplete} field(s) to complete</span></h3>
                         
                         <a href={metadata.todo[key].link}>Go to the {metadata.todo[key].name} page.</a>
@@ -47,8 +46,8 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
                     defaultOpen={false}
                   >
                   <ol>
-                    {metadata.todo[key].fields.map((field, index) => (
-                      <li className="ds-h5">
+                    {metadata.todo[key].fields.map((field) => (
+                      <li key={field.name} className="ds-h5">
                         {field.name} <br />
                         <span className="ds-u-font-weight--normal">{field.description}</span>
                       </li>
@@ -60,8 +59,8 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
             <h3>Recently Completed</h3>
             {metadata.recents.length > 0 && (
               <div>
-              {metadata.recents.map((item, index) => (
-                <div className="ds-u-border--1 ds-u-margin-bottom--2 ds-u-padding--2">
+              {metadata.recents.map((item) => (
+                <div key={item.section} className="ds-u-border--1 ds-u-margin-bottom--2 ds-u-padding--2">
                   <h3 className="ds-u-margin--0">{item.page}</h3>
                   <a href={item.link}>Go to the {item.section} page.</a>
                 </div>
@@ -79,7 +78,9 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdminCheck: toggleAdmi
 };
 
 AdminCheckPanel.propTypes = {
-  toggleAdminCheck: PropTypes.func.isRequired
+  toggleAdmin: PropTypes.func.isRequired,
+  showAdminCheck: PropTypes.bool.isRequired,
+  metadata: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -88,7 +89,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  toggleAdminCheck
+  toggleAdmin: toggleAdminCheck
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminCheckPanel);

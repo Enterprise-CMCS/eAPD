@@ -193,6 +193,45 @@ Object {
       "zip": "",
     },
   },
+  "metadata": Object {
+    "incomplete": 2,
+    "recents": Array [
+      Object {
+        "link": "activity/0/state-costs",
+        "page": "Activity 1- State Costs",
+        "section": "State Costs",
+      },
+      Object {
+        "link": "activity/0/contractor-costs",
+        "page": "Private Contractor Costs",
+        "section": "Private Contractor Costs",
+      },
+    ],
+    "todo": Object {
+      "keyStatePersonnel": Object {
+        "fields": Array [
+          Object {
+            "description": "Provide the phone number of the Medicaid Director",
+            "name": "Phone Number",
+          },
+        ],
+        "incomplete": 1,
+        "link": "state-profile",
+        "name": "Key State Personnel",
+      },
+      "overview": Object {
+        "fields": Array [
+          Object {
+            "description": "please include a name",
+            "name": "APD Name",
+          },
+        ],
+        "incomplete": 1,
+        "link": "apd-overview",
+        "name": "APD Overview",
+      },
+    },
+  },
   "name": "HITECH IAPD",
   "previousActivities": Object {
     "actualExpenditures": Object {

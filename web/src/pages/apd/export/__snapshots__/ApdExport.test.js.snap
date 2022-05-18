@@ -13,6 +13,62 @@ exports[`apd export component renders correctly 1`] = `
       headerClassName={null}
       id={null}
       nested={false}
+      resource="adminCheck"
+    >
+      <p>
+        Choose Run Administrative Check to see a list of required fields which are missing content. Providing content will help ensure that your APD is administratively complete and ready for submission to CMS. Missing content from these sections could delay a decision by CMS and result in additional review cycles for this APD.
+      </p>
+      <Button
+        className="ds-u-margin-bottom--2"
+        component="button"
+        onClick={[Function]}
+        size="big"
+        type="button"
+        variation="primary"
+      >
+        <span
+          className="ds-u-margin-right--1"
+        >
+          Run Administrative Check
+        </span>
+         
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Object {
+              "icon": Array [
+                384,
+                512,
+                Array [],
+                "f46c",
+                "M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM192 40c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm121.2 231.8l-143 141.8c-4.7 4.7-12.3 4.6-17-.1l-82.6-83.3c-4.7-4.7-4.6-12.3.1-17L99.1 285c4.7-4.7 12.3-4.6 17 .1l46 46.4 106-105.2c4.7-4.7 12.3-4.6 17 .1l28.2 28.4c4.7 4.8 4.6 12.3-.1 17z",
+              ],
+              "iconName": "clipboard-check",
+              "prefix": "fas",
+            }
+          }
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+      </Button>
+    </Subsection>
+    <Subsection
+      headerClassName={null}
+      id={null}
+      nested={false}
       resource="reviewAndDownload"
     >
       <p>
