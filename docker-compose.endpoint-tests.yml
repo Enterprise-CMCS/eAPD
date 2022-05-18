@@ -57,3 +57,7 @@ services:
       - api:/app/api
       - common:/app/common
       - /app/node_modules
+
+volumes:
+  api:
+  common:
