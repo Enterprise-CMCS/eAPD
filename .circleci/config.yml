@@ -779,7 +779,6 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2004:202104-01
-    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -812,7 +811,7 @@ jobs:
               -v "$(pwd)/owasp":/zap/wrk \
               owasp/zap2docker-stable:2.11.1 \
               zap-api-scan.py \
-              -c api-scan.conf \
+              -c ../api-scan.conf \
               -t http://api-for-testing:8000/open-api \
               -f openapi
 
