@@ -5,58 +5,10 @@ const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
 
-const adminCheck = apd => {
-  // Currently we are hard-coding this return object for prototyping with
-  // the front end. Next steps would likely be to extract this function
-  // to it's own module and using joi validations to build this object
-  const metadata = {
-    incomplete: 2,
-    todo: {
-      overview: {
-        name: "APD Overview",
-        incomplete: 1,
-        link: "apd-overview",
-        fields: [
-          { 
-            name: "APD Name",
-            description: "please include a name"
-          }
-        ]
-      },
-      keyStatePersonnel: {
-        name: "Key State Personnel",
-        incomplete: 1,
-        link: "state-profile",
-        fields: [
-          {
-            name: "Phone Number",
-            description: "Provide the phone number of the Medicaid Director"
-          }
-        ]
-      }
-    },
-    recents: [
-      {
-        page: "Activity 1- State Costs",
-        section: "State Costs",
-        link: "activity/0/state-costs"
-      },
-      {
-        page: "Private Contractor Costs",
-        section: "Private Contractor Costs",
-        link: "activity/0/contractor-costs"
-      }
-    ]
-  };
-  return metadata;
-}
-
 const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
   let newApd = new APD(apd);
-  
-  newApd.metadata = adminCheck(newApd);
-  
-  newApd = await newApd.save({ validateBeforeSave: false });
+
+  newApd = await newApd.save();
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
@@ -93,21 +45,13 @@ const patchAPD = async (
   const apdJSON = JSON.parse(JSON.stringify(apdDoc));
   // apply the patches to the apd
   const { newDocument } = applyPatch(apdJSON, patch);
-  
-  // check for new validation errors
-  // only way I could think of is to cast newDocument as a mongoose document
-  // so we could perform the validation manually
-  const newDocForValidation = new APD(newDocument);
-  
-  newDocForValidation.metadata = adminCheck(newDocForValidation); 
-  
   // update the apd in the database
-  await APD.replaceOne({ _id: id, stateId }, newDocForValidation, {
+  await APD.replaceOne({ _id: id, stateId }, newDocument, {
     multipleCastError: true,
-    runValidators: false
+    runValidators: true
   });
   // return the updated apd
-  return newDocForValidation;
+  return newDocument;
 };
 
 const updateAPDDocument = async (

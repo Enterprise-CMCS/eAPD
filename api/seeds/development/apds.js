@@ -758,6 +758,46 @@ const apd = {
         explanation: ''
       }
     ] 
+  },
+  // Mocked metadata for admin panel demo
+  metadata: {
+    incomplete: 2,
+    todo: {
+      overview: {
+        name: 'APD Overview',
+        incomplete: 1,
+        link: 'apd-overview',
+        fields: [
+          { 
+            name: 'APD Name',
+            description: 'please include a name'
+          }
+        ]
+      },
+      keyStatePersonnel: {
+        name: 'Key State Personnel',
+        incomplete: 1,
+        link: 'state-profile',
+        fields: [
+          {
+            name: 'Phone Number',
+            description: 'Provide the phone number of the Medicaid Director'
+          }
+        ]
+      }
+    },
+    recents: [
+      {
+        page: 'Activity 1- State Costs',
+        section: 'State Costs',
+        link: 'activity/0/state-costs'
+      },
+      {
+        page: 'Private Contractor Costs',
+        section: 'Private Contractor Costs',
+        link: 'activity/0/contractor-costs'
+      }
+    ]
   }
 };
 
