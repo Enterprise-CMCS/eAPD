@@ -2,7 +2,6 @@ import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useCallback } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import Joi from 'joi';
@@ -93,11 +92,9 @@ const StandardsAndConditions = ({
 
   const {
     control,
-    formState: { errors, isValid },
+    formState: { errors },
     getFieldState,
-    trigger,
-    setError,
-    clearErrors
+    trigger
   } = useForm({
     defaultValues: {
       supports: supports,
