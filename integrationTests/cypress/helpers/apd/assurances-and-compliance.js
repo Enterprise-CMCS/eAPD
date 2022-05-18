@@ -63,7 +63,7 @@ export const testDefaultAssurancesAndCompliance = () => {
         // Check that no response is reported
         exportPage
           .assurancesComplianceResponse(category, regulation)
-          .should('eq', 'No response was provided');
+          .should('eq', 'No response was provided.');
       });
     });
 

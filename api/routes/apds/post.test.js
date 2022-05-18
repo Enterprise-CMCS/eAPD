@@ -86,8 +86,8 @@ tap.test('apds POST endpoint', async endpointTest => {
             alternatives: '',
             contractorResources: [],
             costAllocation: {
-              2004: { ffp: { federal: 90, state: 10 }, other: 0 },
-              2005: { ffp: { federal: 90, state: 10 }, other: 0 }
+              2004: { ffp: { federal: 0, state: 100 }, other: 0 },
+              2005: { ffp: { federal: 0, state: 100 }, other: 0 }
             },
             costAllocationNarrative: {
               methodology: '',
