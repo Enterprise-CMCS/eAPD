@@ -786,14 +786,14 @@ jobs:
           at: ~/project
       - run:
           name: start everything up
-          working_directory: ~/project/api
+          working_directory: ~/project
           no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f ../docker-compose.yml build
-            COMPOSE_HTTP_TIMEOUT=200 docker-compose -f ../docker-compose.yml up -d
-            docker-compose -f ../docker-compose.yml exec api-for-testing yarn run migrate
-            docker-compose -f ../docker-compose.yml exec api-for-testing yarn run seed
+            export COMPOSE_PROJECT_NAME=api
+            COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
           working_directory: ~/project/api
