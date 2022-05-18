@@ -22,32 +22,18 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
 
   const {
     control,
-    formState: {errors},
+    formState: { errors },
     getFieldState,
     trigger
   } = useForm({
     defaultValues: {
-      start: plannedStartDate || "",
-      end: plannedEndDate || ""
+      start: plannedStartDate || '',
+      end: plannedEndDate || ''
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: joiResolver(scheduleSchema)
   });
-
-  const handleActivityStartChange = useCallback(
-    (_, dateStr) => {
-      setStartDate(activityIndex, dateStr);
-    },
-    [activityIndex, setStartDate]
-  );
-
-  const handleActivityEndChange = useCallback(
-    (_, dateStr) => {
-      setEndDate(activityIndex, dateStr);
-    },
-    [activityIndex, setEndDate]
-  );
 
   return (
     <Subsection resource="activities.schedule">
@@ -56,16 +42,16 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
           <Controller
             name="start"
             control={control}
-            render={({ 
-              field: { onChange, onBlur, ...props } ,
+            render={({
+              field: { onChange, onBlur, ...props },
               formState: { isTouched }
             }) => (
               <DateField
                 {...props}
                 isTouched={isTouched}
                 label="Start date"
-                onChange={(e, dateStr) => {
-                  handleActivityStartChange(e, dateStr);
+                onChange={(_, dateStr) => {
+                  setStartDate(activityIndex, dateStr);
                   onChange(dateStr);
                 }}
                 onComponentBlur={() => {
@@ -86,9 +72,9 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
                 <DateField
                   {...props}
                   label="End date"
-                  onChange={(e, dateStr) => {
-                    handleActivityEndChange(e, dateStr);
-                    onChange(e);
+                  onChange={(_, dateStr) => {
+                    setEndDate(activityIndex, dateStr);
+                    onChange(dateStr);
                   }}
                   onComponentBlur={() => {
                     onBlur();

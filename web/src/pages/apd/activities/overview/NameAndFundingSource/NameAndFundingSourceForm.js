@@ -11,93 +11,76 @@ import {
   setActivityFundingSource
 } from '../../../../../redux/actions/editActivity';
 
-const NameAndFundingSourceForm = ({ 
-    index, 
-    item: { fundingSource, name }, 
-    setFundingSource,
-    setName 
-  }) => {
-    NameAndFundingSourceForm.displayName = 'NameAndFundingSourceForm';
+const NameAndFundingSourceForm = ({
+  index,
+  item: { fundingSource, name },
+  setFundingSource,
+  setName
+}) => {
+  NameAndFundingSourceForm.displayName = 'NameAndFundingSourceForm';
 
-    const {
-      control,
-      formState: { errors }
-    } = useForm({
-      defaultValues: {
-        name: name,
-        fundingSource: fundingSource
-      },
-      mode: 'onBlur',
-      reValidateMode: 'onBlur',
-      resolver: joiResolver(nameFundingSourceSchema)
-    });
+  const {
+    control,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      name: name,
+      fundingSource: fundingSource
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(nameFundingSourceSchema)
+  });
 
-    useEffect(() => {
-      nameFundingSourceSchema.validateAsync({fundingSource, name})
-    });
+  const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
+    checked: fundingSource === choice,
+    label: choice,
+    value: choice
+  }));
 
-    const changeName = useCallback(
-      ({ target: { value } }) => {
-        setName(index, value);
-      },
-      [index, setName]
-    );
-
-    const changeFundingSource = useCallback(
-      ({ target: { value } }) => {
-        setFundingSource(index, value);
-      },
-      [index, setFundingSource]
-    );
-
-    const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
-      checked: fundingSource === choice,
-      label: choice,
-      value: choice
-    }));
-
-    return (
-      <Fragment>
-        <Controller
-          name="name"
-          control={control}
-          render={({ field: {onChange, ...props} }) => (
-            <TextField
-              {...props}
-              label="Activity name"
-              value={name}
-              onChange={e => {
-                changeName(e);
-                onChange(e);
-              }}
-              className="remove-clearfix"
-              errorMessage={errors?.name?.message}
-              errorPlacement="bottom"
-            />
-          )}
-        />
-        <Controller
-          name="fundingSource"
-          control={control}
-          render={({ field: {onChange, ...props} }) => (
-            <ChoiceList
-              {...props}
-              choices={choices}
-              label="Program type"
-              labelClassName="ds-u-margin-bottom--1"
-              onChange={e => {
-                changeFundingSource(e);
-                onChange(e);
-              }}
-              type="radio"
-              errorMessage={errors?.fundingSource?.message}
-              errorPlacement="bottom"
-            />
-          )}
-        />
-      </Fragment>
-    );
-  };
+  return (
+    <Fragment>
+      <Controller
+        name="name"
+        control={control}
+        render={({ field: { onChange, onBlur, ...props } }) => (
+          <TextField
+            {...props}
+            label="Activity name"
+            onBlur={onBlur}
+            onChange={({ target: { value } }) => {
+              onChange(value);
+              setName(index, value);
+            }}
+            className="remove-clearfix"
+            errorMessage={errors?.name?.message}
+            errorPlacement="bottom"
+          />
+        )}
+      />
+      <Controller
+        name="fundingSource"
+        control={control}
+        render={({ field: { onChange, onBlur, ...props } }) => (
+          <ChoiceList
+            {...props}
+            choices={choices}
+            label="Program type"
+            labelClassName="ds-u-margin-bottom--1"
+            onComponentBlur={onBlur}
+            onChange={({ target: { value } }) => {
+              onChange(value);
+              setFundingSource(index, value);
+            }}
+            type="radio"
+            errorMessage={errors?.fundingSource?.message}
+            errorPlacement="bottom"
+          />
+        )}
+      />
+    </Fragment>
+  );
+};
 
 NameAndFundingSourceForm.propTypes = {
   index: PropTypes.number.isRequired,
