@@ -68,14 +68,9 @@ export const addHIEActivity = years => {
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillStateStaff(
-        years,
-        activityData.staff
-      );
-      
-      fillOutActivityPage.fillStateExpenses(
-        activityData.expenses
-      );
+      fillOutActivityPage.fillStateStaff(years, activityData.staff);
+
+      fillOutActivityPage.fillStateExpenses(years, activityData.expenses);
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();

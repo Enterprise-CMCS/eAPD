@@ -1,106 +1,144 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useReducer, forwardRef } from 'react';
+import React, { useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 import DollarField from '../../../../../components/DollarField';
 import TextArea from '../../../../../components/TextArea';
 
-import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../redux/actions/editActivity';
+import nonPersonnelCostsSchema from '../../../../../static/schemas/nonPersonnelCosts';
+
+import {
+  saveNonPersonnelCost as actualSaveNonPersonnelCost
+} from '../../../../../redux/actions/editActivity';
 
 const NonPersonnelCostForm = forwardRef(
-  ({ activityIndex, index, item, saveNonPersonnelCost }, ref) => {
-    NonPersonnelCostForm.displayName = 'NonPersonnelCostForm';
+  (
+    {
+      activityIndex,
+      index,
+      item,
+      saveNonPersonnelCost,
+      setFormValid
+    },
+    ref
+) => {
+  NonPersonnelCostForm.displayName = 'NonPersonnelCostForm';
+  
+  const {
+    control,
+    formState: { errors, isValid },
+    getValues,
+    setValue,
+    trigger
+  } = useForm({
+    defaultValues: {
+      ...item
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(nonPersonnelCostsSchema)
+  });
+  
+  const onSubmit = e => {
+    e.preventDefault();
+    saveNonPersonnelCost(activityIndex, index, getValues());
+  };
+  
+  useEffect(() => {
+    setFormValid(isValid);
+  }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    function reducer(state, action) {
-      switch (action.type) {
-        case 'updateField':
-          return {
-            ...state,
-            [action.field]: action.value
-          };
-        case 'updateCosts':
-          return {
-            ...state,
-            years: {
-              ...state.years,
-              [action.year]: action.value
+  const categories = [
+    'Hardware, software, and licensing',
+    'Equipment and supplies',
+    'Training and outreach',
+    'Travel',
+    'Administrative operations',
+    'Miscellaneous expenses for the project'
+  ].map(category => ({ label: category, value: category }));
+  categories.unshift({label:'Select an option', value:''})
+  return (
+    <form index={index} onSubmit={onSubmit}>
+      <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
+      {/* eslint-disable jsx-a11y/no-autofocus */}
+      <Controller
+        control={control}
+        name="category"
+        render={({
+          field: { value, ...props }
+        }) => (
+          <Dropdown
+            {...props}
+            autoFocus
+            label="Category"
+            name="category"
+            options={categories}
+            value={value}
+            onChange={(e) => {
+              setValue('category', e.target.value);
+              trigger('category');
+            }}
+            onBlur={() => {trigger('category')}}
+            errorMessage={
+              errors?.category?.message
             }
-          };
-        default:
-          throw new Error(
-            'Unrecognized action type provided to OutcomesAndMetricForm reducer'
-          );
-      }
-    }
-
-    const [state, dispatch] = useReducer(reducer, item);
-
-    const handleSubmit = e => {
-      e.preventDefault();
-      saveNonPersonnelCost(activityIndex, index, state);
-    };
-
-    const editCategory = ({ target: { value } }) =>
-      dispatch({ type: 'updateField', field: 'category', value });
-
-    const editDesc = ({ target: { value } }) =>
-      dispatch({ type: 'updateField', field: 'description', value });
-
-    const getEditCostForYear =
-      year =>
-      ({ target: { value } }) =>
-        dispatch({ type: 'updateCosts', year, value });
-
-    const categories = [
-      'Hardware, software, and licensing',
-      'Equipment and supplies',
-      'Training and outreach',
-      'Travel',
-      'Administrative operations',
-      'Miscellaneous expenses for the project'
-    ].map(category => ({ label: category, value: category }));
-    categories.unshift({ label: 'Select an option', value: '' });
-    return (
-      <form index={index} onSubmit={handleSubmit}>
-        <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
-        {/* eslint-disable jsx-a11y/no-autofocus */}
-        <Dropdown
-          autoFocus
-          label="Category"
-          name="category"
-          options={categories}
-          value={state.category}
-          onChange={editCategory}
-        />
-
-        <TextArea
-          label="Description"
-          rows={5}
-          name="desc"
-          value={state.description}
-          onChange={editDesc}
-        />
-
-        {Object.entries(state.years).map(([year, cost]) => (
-          <DollarField
-            key={year}
-            label={`FFY ${year} Cost`}
-            name="cost"
-            size="medium"
-            value={cost}
-            onChange={getEditCostForYear(year)}
+            errorPlacement="bottom"
           />
-        ))}
-        <input
-          className="ds-u-visibility--hidden"
-          type="submit"
-          ref={ref}
-          hidden
+        )}
+      />
+      
+      <Controller
+        control={control}
+        name="description"
+        render={({
+          field: { onChange, value, ...props }
+        }) => (
+          <TextArea
+            {...props}
+            label="Description"
+            rows={5}
+            name="description"
+            value={value}
+            onChange={onChange}
+            errorMessage={
+              errors?.description?.message
+            }
+            errorPlacement="bottom"
+          />
+        )}
+      />
+      
+      {Object.entries(item.years).map(([year]) => (
+        <Controller
+          key={year}
+          control={control}
+          name={`years[${year}]`}
+          render={({
+            field: { onChange, value, ...props }
+          }) => (
+            <DollarField
+              {...props}
+              key={year}
+              label={`FFY ${year} Cost`}
+              name={`years[${year}]`}
+              size="medium"
+              value={value}
+              onChange={onChange}
+              errorMessage={
+                errors && errors.years && errors?.years[`${year}`]?.message
+              }
+              errorPlacement="bottom"
+            />
+          )}
         />
-      </form>
-    );
-  }
+      ))}
+      <input className="ds-u-visibility--hidden" type="submit" ref={ref} hidden />
+    </form>
+  );
+}
 );
 
 NonPersonnelCostForm.propTypes = {
@@ -111,7 +149,8 @@ NonPersonnelCostForm.propTypes = {
     description: PropTypes.string.isRequired,
     years: PropTypes.object.isRequired
   }).isRequired,
-  saveNonPersonnelCost: PropTypes.func.isRequired
+  saveNonPersonnelCost: PropTypes.func.isRequired,
+  setFormValid: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = {
