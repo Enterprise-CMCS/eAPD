@@ -1,8 +1,9 @@
 import { Dropdown, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
-
 import { titleCase } from 'title-case';
 import {
   setMedicaidDirectorEmail,
@@ -19,8 +20,45 @@ import { selectKeyStatePersonnel } from '../../../redux/selectors/apd.selectors'
 import { selectState } from '../../../redux/reducers/user';
 import { STATES } from '../../../util';
 
+import Joi from 'joi';
+
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';
+
+const stateProfileSchema = Joi.object({
+  apdStateProfileName: Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide the name of the State Medicaid Director.',
+    'string.empty': 'Provide the name of the State Medicaid Director.',
+    'string.min': 'Provide the name of the State Medicaid Director.'
+  }),
+  apdStateProfileEmail: Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide the email address of the State Medicaid Director.',
+    'string.empty': 'Provide the email address of the State Medicaid Director.',
+    'string.min': 'Provide the email address of the State Medicaid Director.'
+  }),
+  apdStateProfilePhone: Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide a valid phone number for the State Medicaid Director.',
+    'string.empty': 'Provide a valid phone number for the State Medicaid Director.',
+    'string.min': 'Provide a valid phone number for the State Medicaid Director.'
+  }),
+  apdStateProfileAddr1: Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide a mailing street address for the Medicaid office.',
+    'string.empty': 'Provide a mailing street address for the Medicaid office.',
+    'string.min': 'Provide a mailing street address for the Medicaid office.'
+  }),
+  apdStateProfileAddr2: Joi.any(),
+  apdStateProfileCity: Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide a city name.',
+    'string.empty': 'Provide a city name.',
+    'string.min': 'Provide a city name.'
+  }),
+  apdStateProfileState: Joi.any(),
+  apdStateProfileZip: Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide a zip code.',
+    'string.empty': 'Provide a zip code.',
+    'string.min': 'Provide a zip code.'
+  })
+})
 
 const ApdStateProfile = ({
   defaultStateID,
@@ -34,7 +72,10 @@ const ApdStateProfile = ({
   setZip,
   keyStatePersonnel
 }) => {
+  ApdStateProfile.displayName = 'ApdStateProfile';
+
   const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
+
 
   const handleChange =
     action =>
@@ -49,19 +90,19 @@ const ApdStateProfile = ({
           {titleCase(t(`${dirTRoot}.title`))}
         </legend>
         <TextField
-          name="apd-state-profile-mdname"
+          name="apdStateProfileName"
           label={t(`${dirTRoot}.labels.name`)}
           value={medicaidDirector.name}
           onChange={handleChange(setName)}
         />
         <TextField
-          name="apd-state-profile-mdemail"
+          name="apdStateProfileEmail"
           label={t(`${dirTRoot}.labels.email`)}
           value={medicaidDirector.email}
           onChange={handleChange(setEmail)}
         />
         <TextField
-          name="apd-state-profile-mdphone"
+          name="apdStateProfilePhone"
           label={t(`${dirTRoot}.labels.phone`)}
           value={medicaidDirector.phone}
           onChange={handleChange(setPhone)}
@@ -73,13 +114,13 @@ const ApdStateProfile = ({
           {titleCase(t(`${offTRoot}.title`))}
         </legend>
         <TextField
-          name="apd-state-profile-addr1"
+          name="apdStateProfileAddr1"
           label={t(`${offTRoot}.labels.address1`)}
           value={medicaidOffice.address1}
           onChange={handleChange(setAddress1)}
         />
         <TextField
-          name="apd-state-profile-addr2"
+          name="apdStateProfileAddr2"
           label={t(`${offTRoot}.labels.address2`)}
           hint="Optional"
           value={medicaidOffice.address2}
@@ -87,7 +128,7 @@ const ApdStateProfile = ({
         />
         <div className="ds-l-row">
           <TextField
-            name="apd-state-profile-city"
+            name="apdStateProfileCity"
             label={t(`${offTRoot}.labels.city`)}
             value={medicaidOffice.city}
             className="ds-l-col--6"
@@ -108,7 +149,7 @@ const ApdStateProfile = ({
           </div>
         </div>
         <TextField
-          name="apd-state-profile-zip"
+          name="apdStateProfileZip"
           label={t(`${offTRoot}.labels.zip`)}
           value={medicaidOffice.zip}
           mask="zip"
