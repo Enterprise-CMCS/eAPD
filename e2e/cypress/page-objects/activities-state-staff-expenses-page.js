@@ -119,7 +119,6 @@ class ActivitiesStateStaffExpensesPage {
 
   addExpense = () => {
     cy.findByRole('button', { name: /^Add State Expense$/i }).click();
-    cy.findByRole('button', { name: /Save/i }).click();
   };
 
   deleteExpense = index => {
@@ -133,22 +132,17 @@ class ActivitiesStateStaffExpensesPage {
     cy.get('.ds-c-button--danger').click();
   };
 
-  fillExpense = (expenseIndex, category, costs, desc) => {
-    cy.findByRole('heading', { name: /^Other State Expenses$/i })
-      .next()
-      .next()
-      .findAllByRole('button', { name: /^Edit/i })
-      .eq(expenseIndex)
-      .click();
-
-    cy.get('[name="category"]').select(category);
-
-    cy.get('[name="desc"]').clear().type(desc);
-
+  fillExpense = ({years, expenseIndex, category, costs, desc}) => {
+    cy.get('[name="category"]').select(category, { delay: 1 });
+    
+    cy.get('[name="description"]').clear().type(desc, { delay: 1 });
+    
     // There are multiple years to fill in for cost/FTE
-    cy.get('[name="cost"]').each(($el, index) => {
-      cy.wrap($el).clear().type(costs[index]);
+    _.forEach(years, (year, index) => {
+      cy.get(`[name="years[${year}]"`).clear().type(costs[index], { delay: 1});
     });
+    
+    cy.focused().blur();
 
     cy.findByRole('button', { name: /Save/i }).click();
   };
