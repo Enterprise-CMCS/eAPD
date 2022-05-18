@@ -20,9 +20,12 @@ const Activity = ({ activity, activityIndex }) => {
         <div className="ds-u-margin-top--2">
           <ul className="ds-c-list--bare subform__container">
             <strong>Metrics: </strong>
+            {outcome.metrics.length === 0 && (
+              'No metrics were specified for this outcome.'
+            )}
             {outcome.metrics.map(({ metric }, index) => (
               <li key={uuidv4()} className="ds-u-margin-bottom--2">
-                {index + 1}. {metric || 'Metric not specified'}
+                {index + 1}. {metric || 'No metrics were specified for this outcome.'}
               </li>
             ))}
           </ul>
@@ -148,7 +151,10 @@ const Activity = ({ activity, activityIndex }) => {
       <h2>
         Activity {activityIndex + 1}: {activity.name || 'Untitled'}
       </h2>
-      <strong>Provide a short overview of the activity:</strong>
+      <strong>Provide a short overview of the activity: </strong>
+      {!activity.summary && (
+        <span>No response was provided.</span>
+      )}
       <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
       <p>
         <strong>Start date: </strong>
@@ -169,7 +175,7 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Statement of Alternative Considerations and Supporting Justification
       </h3>
-      <div dangerouslySetInnerHTML={{ __html: activity.alternatives }} />
+      <div dangerouslySetInnerHTML={{ __html: activity.alternatives || "No response was provided." }} />
 
       <h3 className="viewonly-activity-header">
         <small>
@@ -221,10 +227,12 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Outcomes and Metrics
       </h3>
+      {activity.outcomes.length === 0 && 'No outcome(s) and/or corresponding metric(s) were provided.'}
       <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       {activity.outcomes.map(buildOutcome)}
 
       <h3>Milestones</h3>
+      {activity.schedule.length === 0 && 'No milestones were provided.'}
       {activity.schedule.map((milestone, index) =>
         buildMilestone(milestone, index)
       )}
@@ -236,6 +244,7 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         State staff
       </h3>
+      {activity.statePersonnel.length === 0 && 'State staff not specified.'}
       {activity.statePersonnel.map((person, index) =>
         buildPerson(person, index)
       )}
@@ -247,6 +256,7 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Other state expenses
       </h3>
+      {activity.expenses.length === 0 && 'Other state expenses not specified.'}
       {activity.expenses.map((expense, index) => buildExpense(expense, index))}
 
       <h3 className="viewonly-activity-header">
@@ -256,6 +266,7 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Private Contractor Costs
       </h3>
+      {activity.contractorResources.length === 0 && 'Private contractor(s) not specified.'}
       {activity.contractorResources.map((contractor, index) =>
         buildContractor(contractor, index)
       )}
@@ -271,7 +282,7 @@ const Activity = ({ activity, activityIndex }) => {
       <div
         className="subform__container"
         dangerouslySetInnerHTML={{
-          __html: activity.costAllocationNarrative.methodology
+          __html: activity.costAllocationNarrative.methodology || 'No cost allocation methodology was provided.'
         }}
       />
 
@@ -286,7 +297,7 @@ const Activity = ({ activity, activityIndex }) => {
               <h4>Other Funding Description</h4>
               <div
                 dangerouslySetInnerHTML={{
-                  __html: narrative.otherSources
+                  __html: narrative.otherSources || 'No response was provided.'
                 }}
               />
               <h4>Other Funding Amount: </h4>

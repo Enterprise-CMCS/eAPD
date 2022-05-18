@@ -50,7 +50,7 @@ class BudgetPage {
 
     cy.get('[class="ds-c-field"]')
       .find(':selected')
-      .should('have.value', '90-10');
+      .should('have.value', '0-100');
   };
 
   checkCostSplitTable = ({

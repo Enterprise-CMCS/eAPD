@@ -66,16 +66,9 @@ export const addHITActivity = years => {
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillStateStaff(
-        years,
-        activityData.staff,
-        true
-      );
-      
-      fillOutActivityPage.fillStateExpenses(
-        activityData.expenses,
-        true
-      );
+      fillOutActivityPage.fillStateStaff(years, activityData.staff, true);
+
+      fillOutActivityPage.fillStateExpenses(years, activityData.expenses, true);
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
