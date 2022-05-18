@@ -1,6 +1,6 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, useCallback, useEffect } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -19,7 +19,6 @@ import { selectActivityByIndex } from '../../../../redux/selectors/activities.se
 import Schedule from './Schedule';
 
 import overviewSchema from '../../../../static/schemas/activityOverview';
-
 
 const ActivityOverview = ({
   activity,
@@ -44,11 +43,7 @@ const ActivityOverview = ({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: joiResolver(overviewSchema)
-  })
-
-  useEffect(() => {
-    overviewSchema.validateAsync({summary, description});
-  }, [summary, description]);
+  });
 
   const overviewLabel = useMemo(
     () =>
@@ -57,19 +52,13 @@ const ActivityOverview = ({
       }),
     []
   );
+
   const overviewHint = useMemo(
     () =>
       t('activities.overview.activityOverviewInput.hint', {
         defaultValue: ''
       }),
     []
-  );
-
-  const syncOverview = useCallback(
-    html => {
-      setOverview(activityIndex, html);
-    },
-    [activityIndex, setOverview]
   );
 
   const descriptionLabel = useMemo(
@@ -97,12 +86,6 @@ const ActivityOverview = ({
       ),
     [activity.fundingSource]
   );
-  const syncDescription = useCallback(
-    html => {
-      setDescription(activityIndex, html);
-    },
-    [activityIndex, setDescription]
-  );
 
   const alternativesLabel = useMemo(
     () =>
@@ -111,18 +94,13 @@ const ActivityOverview = ({
       }),
     []
   );
+
   const alternativesHint = useMemo(
     () =>
       t('activities.overview.activityAlternativesInput.hint', {
         defaultValue: ''
       }),
     []
-  );
-  const syncAlternatives = useCallback(
-    html => {
-      setAlternatives(activityIndex, html);
-    },
-    [activityIndex, setAlternatives]
   );
 
   return (
@@ -160,7 +138,7 @@ const ActivityOverview = ({
               id="activity-short-overview-field"
               content={summary}
               onSync={html => {
-                syncOverview(html);
+                setOverview(activityIndex, html);
                 onChange(html);
               }}
               editorClassName="rte-textarea-l"
@@ -201,7 +179,7 @@ const ActivityOverview = ({
               data-cy="activity-description"
               content={description}
               onSync={html => {
-                syncDescription(html);
+                setDescription(activityIndex, html);
                 onChange(html);
               }}
               onBlur={onBlur}
@@ -232,7 +210,9 @@ const ActivityOverview = ({
         <RichText
           id="activity-alternatives-field"
           content={alternatives}
-          onSync={syncAlternatives}
+          onSync={html => {
+            setAlternatives(activityIndex, html);
+          }}
           editorClassName="rte-textarea-l"
         />
       </div>

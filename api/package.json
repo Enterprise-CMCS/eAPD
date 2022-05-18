@@ -26,6 +26,7 @@
     "test-endpoints": "jest --detectOpenHandles --forceExit 'endpoint'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec --lines=0 --functions=0 --branches=0 --statements=0",
     "prettier": "prettier --config \"../.prettierrc\" --write \"**/*.js\"",
+    "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh",
     "npm-check": "npx npm-check-updates"
   },
@@ -110,7 +111,7 @@
     "newrelic": "^8.9.1",
     "pg": "8.7.3",
     "sanitize-html": "2.7.0",
-    "sharp": "0.30.2",
+    "sharp": "0.30.4",
     "swagger-ui-express": "4.3.0",
     "uuid": "8.3.2",
     "winston": "3.6.0",
