@@ -7,5 +7,5 @@ instruction:
     “Miscellaneous expenses” is one of the options in the drop-down menu. It includes
     materials and supplies, communications‐related expenses, printing costs and
     facilities expenses.
-noDataNotice: Other state expenses have not been added for this activity.
+noDataNotice: Add other state expense(s) for this activity.
 addButtonText: Add State Expense
