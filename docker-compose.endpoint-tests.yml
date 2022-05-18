@@ -47,7 +47,7 @@ services:
       - MONGO_AUTH_SOURCE=admin
       - ENDPOINT_COVERAGE_CAPTURE=true
       - FILE_STORE=local
-      - FILE_PATH=./api/test-data/files
+      - FILE_PATH=test-data/files
       - API_PORT=8000
       - API_HOST=api-for-testing
     command: yarn start
