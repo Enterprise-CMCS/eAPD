@@ -982,7 +982,8 @@ jobs:
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
                 --MONGO_URL "$PREVIEW_MONGO_URL" \
                 --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
-                --DATABASE_URL "$PREVIEW_DATABASE_URL"
+                --DATABASE_URL "$PREVIEW_DATABASE_URL" \
+                --TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else

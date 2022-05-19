@@ -151,6 +151,8 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__DATABASE_URL__|`echo $DATABASE_URL`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__TEALIUM_TAG__|`echo $TEALIUM_TAG`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 

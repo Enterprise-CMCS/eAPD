@@ -105,7 +105,7 @@ yarn install --frozen-lockfile --production=true
 
 cd web
 # yarn add webpack@5.70.0 webpack-cli@4.9.2
-API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
+WEB_ENV="dev" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 
 mv dist/* /app/web
 
