@@ -808,7 +808,7 @@ jobs:
             export COMPOSE_PROJECT_NAME=api
             docker run \
               --network api_default \
-              -v "$(pwd)/owasp":/zap/wrk \
+              -v $(pwd)/owasp:/zap/wrk:rw \
               owasp/zap2docker-stable:2.11.1 \
               zap-api-scan.py \
               -c api-scan.conf \
