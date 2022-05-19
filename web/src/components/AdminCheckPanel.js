@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 
 import { toggleAdminCheck } from '../redux/actions/app/apd';
 
-import { Drawer, Accordion, AccordionItem } from '@cmsgov/design-system';
+import { Accordion, AccordionItem, Drawer } from '@cmsgov/design-system';
+
+import Icon, { faExclamationTriangle } from '../components/Icons';
 
 const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
   
@@ -17,7 +19,17 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
     <Fragment>
       {showAdminCheck && (
         <Drawer
-          footerBody={null}
+          footerBody={
+            <Fragment>
+              <div className="ds-u-padding-bottom--1">
+                <Icon className="ds-u-color--error ds-u-margin-right--1" icon={faExclamationTriangle} size="lg" />
+                <button onClick={handleClose} className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent ds-u-color--error ds-u-font-size--lg">Stop Administrative Check</button> 
+              </div>
+              <p className="ds-u-margin--0">
+                APDs cannot be submitted until all required fields are complete. Exiting the required fields review will pause the review until you choose to restart the review or complete all required fields.
+              </p>
+            </Fragment>
+          }
           heading="Administrative Check"
           headingLevel="2"
           onCloseClick={handleClose}

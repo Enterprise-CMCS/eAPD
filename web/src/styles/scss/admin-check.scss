@@ -25,7 +25,12 @@
 }
 
 .eapd-admin-check__drawer .ds-c-drawer__footer {
-  display: none;
+  // display: none;
+  padding: 24px 30px;
+}
+
+.eapd-admin-check__drawer .ds-c-drawer__footer a {
+  text-decoration-color: currentColor;
 }
 
 .eapd-admin-check__drawer .ds-c-accordion__content {
