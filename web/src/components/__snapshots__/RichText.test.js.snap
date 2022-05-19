@@ -6,7 +6,7 @@ exports[`RichText component renders as expected 1`] = `
     className="rte--wrapper"
   >
     <Editor
-      cloudChannel="5"
+      cloudChannel="6"
       id="test-id"
       init={
         Object {
