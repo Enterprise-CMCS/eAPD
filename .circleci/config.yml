@@ -590,6 +590,7 @@ jobs:
           no_output_timeout: 60m
           command: |
             cd web
+            yarn pre-build-storybook
             STORYBOOK_BUILD_TIMEOUT=1200000 yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --ci --auto-accept-changes --exit-once-uploaded --exit-zero-on-changes --debug
 
   # ===== Backend jobs =====
