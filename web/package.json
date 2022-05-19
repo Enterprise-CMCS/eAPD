@@ -139,7 +139,7 @@
     "sass-loader": "12.6.0",
     "stickybits": "3.7.9",
     "style-loader": "3.3.1",
-    "tinymce": "6.0.2",
+    "tinymce": "5.10.4",
     "title-case": "3.0.3",
     "topojson-client": "3.1.0",
     "updeep": "1.2.1",
