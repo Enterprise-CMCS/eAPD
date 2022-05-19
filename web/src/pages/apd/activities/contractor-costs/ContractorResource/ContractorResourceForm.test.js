@@ -195,6 +195,7 @@ describe('the ContractorResourceForm component', () => {
     await waitFor(() => {
       expect(nameInput).toHaveFocus();
     });
+    userEvent.tab();
 
     // description doesn't load in tests
 
