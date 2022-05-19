@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { toggleAdminCheck } from '../redux/actions/app/apd';
 
@@ -18,7 +19,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
         <Drawer
           footerBody={null}
           heading="Administrative Check"
-          headingLevel={2}
+          headingLevel="2"
           onCloseClick={handleClose}
           className="eapd-admin-check__drawer"
         >
@@ -39,8 +40,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
                     heading={
                       <Fragment key={key}>
                         <h3 className="ds-u-margin--0">{metadata.todo[key].name}: <span className="ds-u-font-weight--normal">{metadata.todo[key].incomplete} field(s) to complete</span></h3>
-                        
-                        <a href={metadata.todo[key].link}>Go to the {metadata.todo[key].name} page.</a>
+                        <Link to={metadata.todo[key].link}>Go to the {metadata.todo[key].name} page.</Link>
                       </Fragment>
                     }
                     defaultOpen={false}
@@ -62,7 +62,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
               {metadata.recents.map((item) => (
                 <div key={item.section} className="ds-u-border--1 ds-u-margin-bottom--2 ds-u-padding--2">
                   <h3 className="ds-u-margin--0">{item.page}</h3>
-                  <a href={item.link}>Go to the {item.section} page.</a>
+                  <Link to={item.link}>Go to the {item.section} page.</Link>
                 </div>
               ))}
               </div>
