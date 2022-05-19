@@ -586,9 +586,11 @@ jobs:
           command: yarn install --frozen-lockfile
       - run:
           name: Deploy to Chromatic
-          working_directory: ~/project/web
+          working_directory: ~/project
           no_output_timeout: 60m
-          command: yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} -b build:storybook --ci --exit-once-uploaded --exit-zero-on-changes
+          command: |
+            cd web
+            STORYBOOK_BUILD_TIMEOUT=1200000 yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} -b build:storybook --ci --exit-once-uploaded --exit-zero-on-changes --debug
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
