@@ -15,6 +15,7 @@ describe('RichText component', () => {
       shallow(
         <RichText
           id="test-id"
+          cloudChannel="test-cloud-channel"
           content="initial rich text value"
           uploadFile={jest.fn()}
         />
