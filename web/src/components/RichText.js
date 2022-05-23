@@ -185,9 +185,16 @@ class RichText extends Component {
 
     return (
       <Fragment>
-        <div className={this.props.error ? 'rte--wrapper ds-c-field--error ds-u-radius' : 'rte--wrapper'}>
+        <div
+          className={
+            this.props.error
+              ? 'rte--wrapper ds-c-field--error ds-u-radius'
+              : 'rte--wrapper'
+          }
+        >
           <Editor
             id={id}
+            cloudChannel="community"
             init={{
               toolbar,
               plugins,

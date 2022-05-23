@@ -21,21 +21,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     }
   }
   savePerson={[MockFunction]}
-  setFormValid={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          false,
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
+  setFormValid={[MockFunction]}
   years={
     Array [
       "1992",
