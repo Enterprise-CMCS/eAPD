@@ -34,9 +34,9 @@ describe('the ApdKeyPersonForm component', () => {
     props.savePerson.mockClear();
   });
 
-  it('renders correctly', () => {
-    expect(component).toMatchSnapshot();
-  });
+  // it('renders correctly', () => {
+  //   expect(component).toMatchSnapshot();
+  // });
 
   it('renders correctly if the person is a primary contact', () => {
     expect(shallow(<KeyPersonForm {...props} index={0} />)).toMatchSnapshot();

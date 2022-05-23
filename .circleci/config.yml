@@ -41,7 +41,7 @@ workflows:
 
   # Workflow to build new AMIs based on the latest gold images weekly
   weekly aws ami builds:
-    triggers:    
+    triggers:
       - schedule:
           cron: '0 0 * * 1' # Mondays at midnight
           filters:
@@ -589,7 +589,6 @@ jobs:
           working_directory: ~/project/web
           no_output_timeout: 60m
           command: |
-            yarn pre-build-storybook
             STORYBOOK_BUILD_TIMEOUT=1200000 yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --ci --auto-accept-changes --exit-once-uploaded --exit-zero-on-changes --debug
 
   # ===== Backend jobs =====
