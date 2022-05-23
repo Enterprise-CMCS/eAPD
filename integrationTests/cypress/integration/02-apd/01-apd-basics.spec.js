@@ -613,18 +613,17 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.log('State Staff and Expenses');
       cy.goToStateStaffAndExpenses(0);
-
+      
       cy.findByRole('button', { name: /Add State Staff/i }).click();
-      cy.findByRole('button', { name: /Add State Staff/i }).should('not.exist');
-
+      
       cy.findByRole('button', { name: /Cancel/i }).click();
-
+      
       cy.get('.form-and-review-list')
         .contains('State staff have not been added for this activity.')
         .should('exist');
-
+      
       cy.findByRole('button', { name: /Add State Staff/i }).click();
-
+      
       activityPage.checkInputField('Personnel title', '');
       activityPage.checkInputField('Description', '');
       activityPage.checkStateStaffFFY({
@@ -668,7 +667,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cy.get(`[name="[${year}].perc"`).clear().blur();
         cy.contains('Provide a FTE number greater than or equal to 0.').should('exist');
       })
-      
 
       cy.get('.form-and-review-list')
         .eq(0)
@@ -681,46 +679,60 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         cost: 100000,
         fte: 1
       });
-
+      
       cy.findByRole('button', { name: /Add State Expense/i }).click();
-      cy.findByRole('button', { name: /Add State Expense/i }).should(
-        'not.exist'
-      );
-
+      
       cy.findByRole('button', { name: /Cancel/i }).click();
-
+      
       cy.get('.form-and-review-list')
-        .contains('Other state expenses have not been added for this activity.')
+        .contains('Add other state expense(s) for this activity.')
         .should('exist');
-
+      
       cy.findByRole('button', { name: /Add State Expense/i }).click();
-
+      
       activityPage.checkInputField('Description', '');
       activityPage.checkFFYinputCostFields({
         years,
         FFYcosts: years.map(() => '')
       });
-
-      cy.findByRole('button', { name: /Save/i }).click();
-
+      
+      cy.findByRole('button', { name: /Save/i }).should('be.disabled');
+      
+      cy.findByLabelText('Category').select('').blur();
+      cy.contains('Select a category.').should('exist');
+      
+      cy.findByLabelText('Description').click().blur();
+      cy.contains('Provide a description of the selected non-personal category.').should('exist');
+      
+      years.forEach(year => {
+        cy.findByLabelText(`FFY ${year} Cost`).click().blur();
+        cy.contains('Provide an annual cost.').should('exist');
+      })
+      
+      cy.findByRole('button', { name: /Cancel/i }).click();
+      
+      const stateExpenses = [
+        {
+          category: 'Hardware, software, and licensing',
+          description: 'Hardware and software items.',
+          costs: [0, 0]
+        }
+      ];
+      
+      fillOutActivityPage.fillStateExpenses(years, stateExpenses);
+      
       cy.get('.form-and-review-list')
         .eq(1)
         .findAllByRole('button', { name: /Edit/i })
         .click();
-
+      
       cy.findByLabelText('Description').type('Test cancel');
-
+      
       cy.get('.form-and-review-list')
         .eq(1)
         .findByRole('button', { name: /Cancel/i })
         .click();
-
-      activityPage.checkOtherStateExpensesOutput({
-        category: 'Category not specified',
-        years,
-        FFYcosts: [0, 0]
-      });
-
+        
       const privateContractor = {
         name: 'Test Private Contractor',
         description: 'Test description',
@@ -730,7 +742,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         hourly: false,
         FFYcosts: [0, 0]
       };
-
+        
       cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);
 
@@ -890,7 +902,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should('have.text', 'Category Not Selected$0')
+                .should('have.text', 'Hardware, software, and licensing$0')
                 .next()
                 .next()
                 .next()
@@ -952,7 +964,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Other State Expenses'
             })
             .eq(0)
-            .should('have.text', 'Category Not Selected$0');
+            .should('have.text', 'Hardware, software, and licensing$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -1045,7 +1057,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         name: /Activity 1: Program AdministrationOther state expenses/i
       })
         .next()
-        .should('have.text', '1. Category Not Selected')
+        .should('have.text', '1. Hardware, software, and licensing')
         .next()
         .next()
         .should(
@@ -1106,7 +1118,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 .next()
                 .next()
                 .next()
-                .should('have.text', 'Category Not Selected$0')
+                .should('have.text', 'Hardware, software, and licensing$0')
                 .next()
                 .next()
                 .next()
@@ -1161,7 +1173,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
               expense: 'Other State Expenses'
             })
             .eq(0)
-            .should('have.text', 'Category Not Selected$0');
+            .should('have.text', 'Hardware, software, and licensing$0');
 
           proposedBudgetPage
             .getBreakdownByFFYAndActivityAndExpense({
@@ -1242,9 +1254,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       );
 
       activityPage.checkDeleteButton(
-        'Other state expenses have not been added for this activity.',
+        'Add other state expense(s) for this activity.',
         'Delete Other State Expense?',
-        'Category not specified'
+        'Hardware, software, and licensing'
       );
 
       cy.goToPrivateContractorCosts(0);

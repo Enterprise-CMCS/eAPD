@@ -9,15 +9,15 @@ Object {
       "costAllocation": Object {
         "2022": Object {
           "ffp": Object {
-            "federal": 90,
-            "state": 10,
+            "federal": 0,
+            "state": 100,
           },
           "other": 0,
         },
         "2023": Object {
           "ffp": Object {
-            "federal": 90,
-            "state": 10,
+            "federal": 0,
+            "state": 100,
           },
           "other": 0,
         },

@@ -4,18 +4,18 @@
   "activityOverview": {
     "name": "Program Administration",
     "fundingType": "HIT",
-    "shortOverview": "",
+    "shortOverview": "No response was provided.",
     "startDate": "Date not specified",
     "endDate": "Date not specified",
     "detailedDescription": "",
-    "supportingJustifications": "",
+    "supportingJustifications": "No response was provided.",
     "supportsMedicaid": "No response was provided for how this activity will support the Medicaid standards and conditions.",
     "doesNotSupportsMedicaid": "No response was provided for how this activity will support the Medicaid standards and conditions."
   },
 
   "costAllocation": {
-    "description": "",
-    "FFYdescriptions": ["",""],
+    "description": "No cost allocation methodology was provided.",
+    "FFYdescriptions": ["No response was provided.","No response was provided."],
     "costs": [0, 0]
   },
 
