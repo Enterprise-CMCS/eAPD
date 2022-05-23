@@ -116,7 +116,7 @@ exports[`assurances and compliance component main component renders correctly 1`
               }
             >
               <em>
-                No response was provided
+                No response was provided.
               </em>
             </div>
           </div>
@@ -386,7 +386,7 @@ exports[`assurances and compliance component main component renders correctly 1`
               }
             >
               <em>
-                No response was provided
+                No response was provided.
               </em>
             </div>
           </div>
@@ -410,7 +410,7 @@ exports[`assurances and compliance component main component renders correctly 1`
         </div>
         <div>
           <strong>
-            No response was provided
+            No response was provided.
           </strong>
         </div>
         <br />
@@ -467,7 +467,7 @@ exports[`assurances and compliance component main component renders correctly 1`
               }
             >
               <em>
-                No response was provided
+                No response was provided.
               </em>
             </div>
           </div>
