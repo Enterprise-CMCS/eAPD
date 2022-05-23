@@ -99,14 +99,6 @@ const ApdStateProfile = ({
     resolver: joiResolver(keyStatePersonnelSchema)
   });
 
-  const handleChange =
-    action =>
-    ({ target: { value } }) => {
-      action(value);
-    };
-
-  console.log({errors})
-
   return (
     <Fragment>
       <fieldset>
