@@ -19,16 +19,16 @@ const OutcomeAndMetricReview = ({
       {outcome || 'Outcome not specified'}
     </p>
     {metrics.length > 0 ? (
-      <p className="ds-u-margin-top--2">
-        <ul className="ds-c-list--bare subform__container">
+      <ul className="ds-c-list--bare subform__container">
+        <p className="ds-u-margin-top--2">
           <strong>Metrics:</strong>
           {metrics.map(({ key, metric }, index) => (
             <li key={key} className="ds-u-margin-bottom--2">
               {index + 1}. {metric || 'Metric not specified'}
             </li>
           ))}
-        </ul>
-      </p>
+        </p>
+      </ul>
     ) : null}
   </Review>
 );
