@@ -15,7 +15,7 @@
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc yarn run test:generate-output -- --watch",
     "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\"",
-    "prebuild-storybook": "yarn run scaffold && yarn run test:generate-output",
+    "pre-build-storybook": "yarn run scaffold && yarn run test:generate-output",
     "build-storybook": "build-storybook -o docs-build",
     "deploy-storybook": "storybook-to-ghpages --out=docs-build",
     "storybook": "start-storybook -p 6006",
