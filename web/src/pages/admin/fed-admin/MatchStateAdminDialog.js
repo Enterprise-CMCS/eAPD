@@ -5,6 +5,7 @@ import { Dialog, Dropdown, Button } from '@cmsgov/design-system';
 
 import axios from '../../../util/api';
 import { STATES } from '../../../util/states';
+import PropTypes from 'prop-types';
 
 const MatchStateAdminDialog = ({ certification, hideModal }) => {
   const [stateAffiliations, setStateAffiliations] = useState([]);
@@ -144,6 +145,11 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
       </div>
     </Dialog>
   );
+};
+
+MatchStateAdminDialog.propTypes = {
+  certification: PropTypes.object.isRequired,
+  hideModal: PropTypes.func.isRequired
 };
 
 export default MatchStateAdminDialog;
