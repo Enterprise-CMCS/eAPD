@@ -30,10 +30,10 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
               </p>
             </Fragment>
           }
-          heading="Administrative Check"
-          headingLevel="2"
-          onCloseClick={handleClose}
-          className="eapd-admin-check__drawer"
+          heading={null}
+          headingId="cms-help-panel-heading"
+          className="eapd-admin-check"
+          isFooterSticky={true}
         >
           <p>
             Review the list below for any required fields in this APD which are missing content. These fields must be completed before submission to CMS.
