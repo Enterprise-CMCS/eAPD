@@ -590,7 +590,7 @@ jobs:
           no_output_timeout: 60m
           command: |
             touch .jest-test-results.json
-            STORYBOOK_BUILD_TIMEOUT=1200000 yarn build-storybook --debug
+            STORYBOOK_BUILD_TIMEOUT=1200000 yarn build-storybook
             yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --ci --debug
 
   # ===== Backend jobs =====
