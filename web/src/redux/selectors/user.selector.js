@@ -31,11 +31,13 @@ export const getUserStateOrTerritory = ({
 export const getUserAffiliationForCurrentState = ({
   user: { data: { state: { id = null } = {}, states = [] } = {} } = {}
 }) => {
-  return {status: states[id]};
+  return { status: states[id] };
 };
 
 export const getUserStateOrTerritoryStatus = state => {
+  console.log({ state });
   const { status = null } = getUserAffiliationForCurrentState(state) || {};
+  console.log({ status });
   return status;
 };
 
