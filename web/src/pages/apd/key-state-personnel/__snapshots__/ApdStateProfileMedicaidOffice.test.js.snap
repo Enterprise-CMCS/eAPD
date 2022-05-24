@@ -8,45 +8,489 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
     >
       Medicaid Director
     </legend>
-    <TextField
-      label="Name"
-      name="apd-state-profile-mdname"
-      onChange={[Function]}
-      type="text"
-      value="name"
+    <Component
+      control={
+        Object {
+          "_defaultValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_executeSchema": [Function],
+          "_fields": Object {},
+          "_formState": Object {
+            "dirtyFields": Object {},
+            "errors": Object {},
+            "isDirty": false,
+            "isSubmitSuccessful": false,
+            "isSubmitted": false,
+            "isSubmitting": false,
+            "isValid": false,
+            "isValidating": false,
+            "submitCount": 0,
+            "touchedFields": Object {},
+          },
+          "_formValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_getDirty": [Function],
+          "_getFieldArray": [Function],
+          "_getWatch": [Function],
+          "_names": Object {
+            "array": Set {},
+            "mount": Set {},
+            "unMount": Set {},
+            "watch": Set {},
+          },
+          "_options": Object {
+            "defaultValues": Object {
+              "medicaidDirector": Object {
+                "email": "email",
+                "name": "name",
+                "phone": "phone",
+              },
+              "medicaidOffice": Object {
+                "address1": "address 1",
+                "address2": "address 2",
+                "city": "city",
+                "state": "state",
+                "zip": "zip",
+              },
+            },
+            "mode": "onBlur",
+            "reValidateMode": "onBlur",
+            "resolver": [Function],
+            "shouldFocusError": true,
+          },
+          "_proxyFormState": Object {
+            "dirtyFields": false,
+            "errors": "all",
+            "isDirty": false,
+            "isValid": false,
+            "isValidating": false,
+            "touchedFields": false,
+          },
+          "_removeUnmounted": [Function],
+          "_stateFlags": Object {
+            "action": false,
+            "mount": false,
+            "watch": false,
+          },
+          "_subjects": Object {
+            "array": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "state": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "watch": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+          },
+          "_updateFieldArray": [Function],
+          "_updateValid": [Function],
+          "getFieldState": [Function],
+          "register": [Function],
+          "unregister": [Function],
+        }
+      }
+      name="medicaidDirector.name"
+      render={[Function]}
     />
-    <TextField
-      label="Email address"
-      name="apd-state-profile-mdemail"
-      onChange={[Function]}
-      type="text"
-      value="email"
+    <Component
+      control={
+        Object {
+          "_defaultValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_executeSchema": [Function],
+          "_fields": Object {},
+          "_formState": Object {
+            "dirtyFields": Object {},
+            "errors": Object {},
+            "isDirty": false,
+            "isSubmitSuccessful": false,
+            "isSubmitted": false,
+            "isSubmitting": false,
+            "isValid": false,
+            "isValidating": false,
+            "submitCount": 0,
+            "touchedFields": Object {},
+          },
+          "_formValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_getDirty": [Function],
+          "_getFieldArray": [Function],
+          "_getWatch": [Function],
+          "_names": Object {
+            "array": Set {},
+            "mount": Set {},
+            "unMount": Set {},
+            "watch": Set {},
+          },
+          "_options": Object {
+            "defaultValues": Object {
+              "medicaidDirector": Object {
+                "email": "email",
+                "name": "name",
+                "phone": "phone",
+              },
+              "medicaidOffice": Object {
+                "address1": "address 1",
+                "address2": "address 2",
+                "city": "city",
+                "state": "state",
+                "zip": "zip",
+              },
+            },
+            "mode": "onBlur",
+            "reValidateMode": "onBlur",
+            "resolver": [Function],
+            "shouldFocusError": true,
+          },
+          "_proxyFormState": Object {
+            "dirtyFields": false,
+            "errors": "all",
+            "isDirty": false,
+            "isValid": false,
+            "isValidating": false,
+            "touchedFields": false,
+          },
+          "_removeUnmounted": [Function],
+          "_stateFlags": Object {
+            "action": false,
+            "mount": false,
+            "watch": false,
+          },
+          "_subjects": Object {
+            "array": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "state": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "watch": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+          },
+          "_updateFieldArray": [Function],
+          "_updateValid": [Function],
+          "getFieldState": [Function],
+          "register": [Function],
+          "unregister": [Function],
+        }
+      }
+      name="medicaidDirector.email"
+      render={[Function]}
     />
-    <TextField
-      label="Phone number"
-      name="apd-state-profile-mdphone"
-      onChange={[Function]}
-      type="text"
-      value="phone"
+    <Component
+      control={
+        Object {
+          "_defaultValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_executeSchema": [Function],
+          "_fields": Object {},
+          "_formState": Object {
+            "dirtyFields": Object {},
+            "errors": Object {},
+            "isDirty": false,
+            "isSubmitSuccessful": false,
+            "isSubmitted": false,
+            "isSubmitting": false,
+            "isValid": false,
+            "isValidating": false,
+            "submitCount": 0,
+            "touchedFields": Object {},
+          },
+          "_formValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_getDirty": [Function],
+          "_getFieldArray": [Function],
+          "_getWatch": [Function],
+          "_names": Object {
+            "array": Set {},
+            "mount": Set {},
+            "unMount": Set {},
+            "watch": Set {},
+          },
+          "_options": Object {
+            "defaultValues": Object {
+              "medicaidDirector": Object {
+                "email": "email",
+                "name": "name",
+                "phone": "phone",
+              },
+              "medicaidOffice": Object {
+                "address1": "address 1",
+                "address2": "address 2",
+                "city": "city",
+                "state": "state",
+                "zip": "zip",
+              },
+            },
+            "mode": "onBlur",
+            "reValidateMode": "onBlur",
+            "resolver": [Function],
+            "shouldFocusError": true,
+          },
+          "_proxyFormState": Object {
+            "dirtyFields": false,
+            "errors": "all",
+            "isDirty": false,
+            "isValid": false,
+            "isValidating": false,
+            "touchedFields": false,
+          },
+          "_removeUnmounted": [Function],
+          "_stateFlags": Object {
+            "action": false,
+            "mount": false,
+            "watch": false,
+          },
+          "_subjects": Object {
+            "array": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "state": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "watch": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+          },
+          "_updateFieldArray": [Function],
+          "_updateValid": [Function],
+          "getFieldState": [Function],
+          "register": [Function],
+          "unregister": [Function],
+        }
+      }
+      name="medicaidDirector.phone"
+      render={[Function]}
     />
   </fieldset>
   <fieldset>
     <legend
-      className="ds-u-padding-bottom--1"
+      className="ds-u-padding-y--1"
     >
       Medicaid Office
     </legend>
-    <TextField
-      label="Address"
-      name="apd-state-profile-addr1"
-      onChange={[Function]}
-      type="text"
-      value="address 1"
+    <Component
+      control={
+        Object {
+          "_defaultValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_executeSchema": [Function],
+          "_fields": Object {},
+          "_formState": Object {
+            "dirtyFields": Object {},
+            "errors": Object {},
+            "isDirty": false,
+            "isSubmitSuccessful": false,
+            "isSubmitted": false,
+            "isSubmitting": false,
+            "isValid": false,
+            "isValidating": false,
+            "submitCount": 0,
+            "touchedFields": Object {},
+          },
+          "_formValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_getDirty": [Function],
+          "_getFieldArray": [Function],
+          "_getWatch": [Function],
+          "_names": Object {
+            "array": Set {},
+            "mount": Set {},
+            "unMount": Set {},
+            "watch": Set {},
+          },
+          "_options": Object {
+            "defaultValues": Object {
+              "medicaidDirector": Object {
+                "email": "email",
+                "name": "name",
+                "phone": "phone",
+              },
+              "medicaidOffice": Object {
+                "address1": "address 1",
+                "address2": "address 2",
+                "city": "city",
+                "state": "state",
+                "zip": "zip",
+              },
+            },
+            "mode": "onBlur",
+            "reValidateMode": "onBlur",
+            "resolver": [Function],
+            "shouldFocusError": true,
+          },
+          "_proxyFormState": Object {
+            "dirtyFields": false,
+            "errors": "all",
+            "isDirty": false,
+            "isValid": false,
+            "isValidating": false,
+            "touchedFields": false,
+          },
+          "_removeUnmounted": [Function],
+          "_stateFlags": Object {
+            "action": false,
+            "mount": false,
+            "watch": false,
+          },
+          "_subjects": Object {
+            "array": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "state": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "watch": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+          },
+          "_updateFieldArray": [Function],
+          "_updateValid": [Function],
+          "getFieldState": [Function],
+          "register": [Function],
+          "unregister": [Function],
+        }
+      }
+      name="medicaidOffice.address1"
+      render={[Function]}
     />
     <TextField
       hint="Optional"
       label="Address continued"
-      name="apd-state-profile-addr2"
+      name="medicaidOffice.address2"
       onChange={[Function]}
       type="text"
       value="address 2"
@@ -54,13 +498,123 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
     <div
       className="ds-l-row"
     >
-      <TextField
-        className="ds-l-col--6"
-        label="City"
-        name="apd-state-profile-city"
-        onChange={[Function]}
-        type="text"
-        value="city"
+      <Component
+        control={
+          Object {
+            "_defaultValues": Object {
+              "medicaidDirector": Object {
+                "email": "email",
+                "name": "name",
+                "phone": "phone",
+              },
+              "medicaidOffice": Object {
+                "address1": "address 1",
+                "address2": "address 2",
+                "city": "city",
+                "state": "state",
+                "zip": "zip",
+              },
+            },
+            "_executeSchema": [Function],
+            "_fields": Object {},
+            "_formState": Object {
+              "dirtyFields": Object {},
+              "errors": Object {},
+              "isDirty": false,
+              "isSubmitSuccessful": false,
+              "isSubmitted": false,
+              "isSubmitting": false,
+              "isValid": false,
+              "isValidating": false,
+              "submitCount": 0,
+              "touchedFields": Object {},
+            },
+            "_formValues": Object {
+              "medicaidDirector": Object {
+                "email": "email",
+                "name": "name",
+                "phone": "phone",
+              },
+              "medicaidOffice": Object {
+                "address1": "address 1",
+                "address2": "address 2",
+                "city": "city",
+                "state": "state",
+                "zip": "zip",
+              },
+            },
+            "_getDirty": [Function],
+            "_getFieldArray": [Function],
+            "_getWatch": [Function],
+            "_names": Object {
+              "array": Set {},
+              "mount": Set {},
+              "unMount": Set {},
+              "watch": Set {},
+            },
+            "_options": Object {
+              "defaultValues": Object {
+                "medicaidDirector": Object {
+                  "email": "email",
+                  "name": "name",
+                  "phone": "phone",
+                },
+                "medicaidOffice": Object {
+                  "address1": "address 1",
+                  "address2": "address 2",
+                  "city": "city",
+                  "state": "state",
+                  "zip": "zip",
+                },
+              },
+              "mode": "onBlur",
+              "reValidateMode": "onBlur",
+              "resolver": [Function],
+              "shouldFocusError": true,
+            },
+            "_proxyFormState": Object {
+              "dirtyFields": false,
+              "errors": "all",
+              "isDirty": false,
+              "isValid": false,
+              "isValidating": false,
+              "touchedFields": false,
+            },
+            "_removeUnmounted": [Function],
+            "_stateFlags": Object {
+              "action": false,
+              "mount": false,
+              "watch": false,
+            },
+            "_subjects": Object {
+              "array": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "state": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "watch": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+            },
+            "_updateFieldArray": [Function],
+            "_updateValid": [Function],
+            "getFieldState": [Function],
+            "register": [Function],
+            "unregister": [Function],
+          }
+        }
+        name="medicaidOffice.city"
+        render={[Function]}
       />
       <div
         className="ds-u-clearfix ds-l-col--6"
@@ -68,7 +622,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
         <Dropdown
           id="apd-state-profile-state"
           label="State"
-          name="apd-state-profile-state"
+          name="medicaidOffice.state"
           onChange={[Function]}
           options={
             Array [
@@ -302,13 +856,123 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
         />
       </div>
     </div>
-    <TextField
-      label="ZIP Code"
-      mask="zip"
-      name="apd-state-profile-zip"
-      onChange={[Function]}
-      type="text"
-      value="zip"
+    <Component
+      control={
+        Object {
+          "_defaultValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_executeSchema": [Function],
+          "_fields": Object {},
+          "_formState": Object {
+            "dirtyFields": Object {},
+            "errors": Object {},
+            "isDirty": false,
+            "isSubmitSuccessful": false,
+            "isSubmitted": false,
+            "isSubmitting": false,
+            "isValid": false,
+            "isValidating": false,
+            "submitCount": 0,
+            "touchedFields": Object {},
+          },
+          "_formValues": Object {
+            "medicaidDirector": Object {
+              "email": "email",
+              "name": "name",
+              "phone": "phone",
+            },
+            "medicaidOffice": Object {
+              "address1": "address 1",
+              "address2": "address 2",
+              "city": "city",
+              "state": "state",
+              "zip": "zip",
+            },
+          },
+          "_getDirty": [Function],
+          "_getFieldArray": [Function],
+          "_getWatch": [Function],
+          "_names": Object {
+            "array": Set {},
+            "mount": Set {},
+            "unMount": Set {},
+            "watch": Set {},
+          },
+          "_options": Object {
+            "defaultValues": Object {
+              "medicaidDirector": Object {
+                "email": "email",
+                "name": "name",
+                "phone": "phone",
+              },
+              "medicaidOffice": Object {
+                "address1": "address 1",
+                "address2": "address 2",
+                "city": "city",
+                "state": "state",
+                "zip": "zip",
+              },
+            },
+            "mode": "onBlur",
+            "reValidateMode": "onBlur",
+            "resolver": [Function],
+            "shouldFocusError": true,
+          },
+          "_proxyFormState": Object {
+            "dirtyFields": false,
+            "errors": "all",
+            "isDirty": false,
+            "isValid": false,
+            "isValidating": false,
+            "touchedFields": false,
+          },
+          "_removeUnmounted": [Function],
+          "_stateFlags": Object {
+            "action": false,
+            "mount": false,
+            "watch": false,
+          },
+          "_subjects": Object {
+            "array": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "state": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+            "watch": Object {
+              "next": [Function],
+              "observers": Array [],
+              "subscribe": [Function],
+              "unsubscribe": [Function],
+            },
+          },
+          "_updateFieldArray": [Function],
+          "_updateValid": [Function],
+          "getFieldState": [Function],
+          "register": [Function],
+          "unregister": [Function],
+        }
+      }
+      name="medicaidOffice.zip"
+      render={[Function]}
     />
   </fieldset>
 </Fragment>
