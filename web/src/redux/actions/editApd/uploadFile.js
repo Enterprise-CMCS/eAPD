@@ -27,9 +27,9 @@ export const uploadFile = file => async (dispatch, getState) => {
             dispatch({ type: UPLOAD_FILE_SUCCESS, url: req.data.url });
             resolve(`${apiUrl}${req.data.url}`);
           })
-          .catch(() => {
+          .catch(err => {
             dispatch({ type: UPLOAD_FILE_FAILURE });
-            reject();
+            reject(err);
           });
       });
 

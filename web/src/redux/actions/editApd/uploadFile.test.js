@@ -40,7 +40,7 @@ describe('APD edit actions for uploading files', () => {
       .onPost('/apds/apd id/files')
       .reply(200, { url: '/this-is-the-new-url' });
 
-    store
+    await store
       .dispatch(uploadFile(new Blob(['asdf'], { type: 'text/html' })))
       .then(url => {
         expect(store.getActions()).toEqual([
@@ -51,15 +51,16 @@ describe('APD edit actions for uploading files', () => {
         ]);
 
         expect(url).toMatch('/this-is-the-new-url');
-        expect(reader.addEventListener).toHaveBeenCalledTimes(1);
-      });
+      })
+      .catch(err => console.log({ err }));
   });
 
   it('rejects if the upload is not successful', async () => {
     fetchMock.onPost('/apds/apd id/files').reply(500);
 
-    store
+    await store
       .dispatch(uploadFile(new Blob(['asdf'], { type: 'text/html' })))
+      .then()
       .catch(() => {
         expect(store.getActions()).toEqual([
           {
@@ -67,7 +68,6 @@ describe('APD edit actions for uploading files', () => {
           },
           { type: UPLOAD_FILE_FAILURE }
         ]);
-        expect(reader.addEventListener).toHaveBeenCalledTimes(1);
       });
   });
 });
