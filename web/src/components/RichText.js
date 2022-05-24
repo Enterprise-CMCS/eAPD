@@ -204,6 +204,7 @@ class RichText extends Component {
         >
           <Editor
             id={id}
+            cloudChannel="community"
             init={{
               skin: false,
               content_css: false,

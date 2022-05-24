@@ -22,7 +22,7 @@
   "dependencies": {
     "@foreachbe/cypress-tinymce": "1.0.0",
     "react": "17.0.2",
-    "tinymce": "5.10.3",
+    "tinymce": "5.10.4",
     "@cms-eapd/api": "^0.0.1"
   },
   "devDependencies": {
