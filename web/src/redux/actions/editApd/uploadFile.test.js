@@ -40,16 +40,18 @@ describe('APD edit actions for uploading files', () => {
       .onPost('/apds/apd id/files')
       .reply(200, { url: '/this-is-the-new-url' });
 
-    const test = store.dispatch(uploadFile('asdf')).then(url => {
-      expect(store.getActions()).toEqual([
-        {
-          type: UPLOAD_FILE_REQUEST
-        },
-        { type: UPLOAD_FILE_SUCCESS, url: '/this-is-the-new-url' }
-      ]);
+    const test = store
+      .dispatch(uploadFile(new Blob(['asdf'], { type: 'text/html' })))
+      .then(url => {
+        expect(store.getActions()).toEqual([
+          {
+            type: UPLOAD_FILE_REQUEST
+          },
+          { type: UPLOAD_FILE_SUCCESS, url: '/this-is-the-new-url' }
+        ]);
 
-      expect(url).toMatch('/this-is-the-new-url');
-    });
+        expect(url).toMatch('/this-is-the-new-url');
+      });
 
     await reader.addEventListener.mock.calls[0][1]();
     await test;
@@ -58,14 +60,16 @@ describe('APD edit actions for uploading files', () => {
   it('rejects if the upload is not successful', async () => {
     fetchMock.onPost('/apds/apd id/files').reply(500);
 
-    const test = store.dispatch(uploadFile('asdf')).catch(() => {
-      expect(store.getActions()).toEqual([
-        {
-          type: UPLOAD_FILE_REQUEST
-        },
-        { type: UPLOAD_FILE_FAILURE }
-      ]);
-    });
+    const test = store
+      .dispatch(uploadFile(new Blob(['asdf'], { type: 'text/html' })))
+      .catch(() => {
+        expect(store.getActions()).toEqual([
+          {
+            type: UPLOAD_FILE_REQUEST
+          },
+          { type: UPLOAD_FILE_FAILURE }
+        ]);
+      });
 
     await reader.addEventListener.mock.calls[0][1]();
     await test;
