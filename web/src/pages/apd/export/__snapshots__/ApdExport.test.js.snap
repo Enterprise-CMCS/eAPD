@@ -26,15 +26,10 @@ exports[`apd export component renders correctly 1`] = `
         type="button"
         variation="primary"
       >
-        <span
-          className="ds-u-margin-right--1"
-        >
-          Run Administrative Check
-        </span>
-         
+        Run Administrative Check
         <FontAwesomeIcon
           border={false}
-          className=""
+          className="ds-u-padding-left--1"
           fixedWidth={false}
           flip={null}
           icon={

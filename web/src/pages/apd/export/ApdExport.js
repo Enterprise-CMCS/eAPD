@@ -38,7 +38,8 @@ const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, usePa
             variation="primary"
             className="ds-u-margin-bottom--2"
           >
-            <span className="ds-u-margin-right--1">Run Administrative Check</span> <Icon icon={faClipboardCheck} />
+            Run Administrative Check
+            <Icon className="ds-u-padding-left--1" icon={faClipboardCheck} />
           </Button>
         </Subsection>
         <Subsection resource="reviewAndDownload">
