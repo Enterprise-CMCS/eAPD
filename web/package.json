@@ -11,7 +11,7 @@
     "build": "yarn run copy-schemas && yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
     "lint": "eslint 'src/**/*.js'",
     "start": "yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
-    "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json -i --forceExit",
+    "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json",
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc yarn run test:generate-output -- --watch",
     "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\"",
