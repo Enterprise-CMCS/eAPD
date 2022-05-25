@@ -1,7 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { plain as ExecutiveSummary, mapStateToProps } from './ExecutiveSummary';
+import {
+  plain as ExecutiveSummaryReadOnly,
+  mapStateToProps
+} from './ExecutiveSummaryReadOnly';
 
 const mockPush = jest.fn();
 
@@ -80,7 +83,7 @@ describe('executive summary component', () => {
   };
 
   it('renders correctly', () => {
-    const component = shallow(<ExecutiveSummary {...props} />);
+    const component = shallow(<ExecutiveSummaryReadOnly {...props} />);
     expect(component).toMatchSnapshot();
   });
 
