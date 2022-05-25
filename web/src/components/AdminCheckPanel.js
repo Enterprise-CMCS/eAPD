@@ -69,7 +69,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
               {isComplete && (
                 <Fragment>
                   <p>Well Done! The Administrative Check is complete.</p>
-                  <p>Return to the <a href="#">Export and Submit page.</a></p>
+                  <p>Return to the <Link to="export">Export and Submit page.</Link></p>
                 </Fragment>
               )}
               {!isComplete && (
@@ -88,14 +88,12 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
                   </Button>
                 </Fragment>
               )}
-              <a className="ds-u-font-size--small" onClick={toggleComplete}> [Demo: Toggle Complete]</a>
+              <button onClick={toggleComplete} className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent">[Demo: Toggle Complete]</button>
             </div>
           )}
           {miniCheck === false && (
             <Fragment>
-              <p>
-                Review the list below for any required fields in this APD which are missing content. These fields must be completed before submission to CMS. <a className="ds-u-font-size--small" onClick={toggleComplete}> [Demo: Toggle Complete]</a>
-              </p>
+              <p>Review the list below for any required fields in this APD which are missing content. These fields must be completed before submission to CMS.</p>
               <div className="ds-u-border--2 ds-u-padding--2">
                 <div className="ds-u-display--flex ds-u-justify-content--end ds-u-text-align--right ds-u-align-items--center">
                   <span className={`${isComplete ? "ds-u-color--success" : "ds-u-color--error"} ds-u-font-weight--bold ds-u-margin-right--2`}>Incomplete<br/>Required Fields</span>
@@ -105,10 +103,10 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
                 {isComplete && (
                   <Fragment>
                     <h3 className="ds-u-text-align--center ds-text-heading--2xl ds-u-font-weight--normal ds-u-margin-top--1">Administrative Check is Complete</h3>
-                    <p className="ds-u-text-align--center ds-h4 ds-u-margin-top--1 ds-u-font-weight--normal">Return to the <a href="#">export and submit</a> page.</p>
+                    <p className="ds-u-text-align--center ds-h4 ds-u-margin-top--1 ds-u-font-weight--normal">Return to the <Link to="export">export and submit</Link> page.</p>
                     <div className="ds-u-display--flex ds-u-justify-content--center ds-u-padding--5">
                       <svg id="complete-check" width="168" height="140" viewBox="0 0 168 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M161.993 5.00315L57.072 136.621L4.22056 15.7833L55.6805 62.9824L56.478 63.7139L57.4237 63.1877L161.993 5.00315Z" stroke="#FDB124" stroke-width="3"/>
+                      <path d="M161.993 5.00315L57.072 136.621L4.22056 15.7833L55.6805 62.9824L56.478 63.7139L57.4237 63.1877L161.993 5.00315Z" stroke="#FDB124" strokeWidth="3"/>
                       </svg>
                     </div>
                   </Fragment>
@@ -144,7 +142,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
                       <div>
                       {metadata.recents.map((item) => (
                         <div key={item.section} className="ds-u-border--1 ds-u-margin-bottom--2 ds-u-padding--2">
-                          <h3 className="ds-u-margin--0">{item.page}</h3>
+                          <h3 className="ds-u-margin--0 ds-u-font-weight--normal">{item.page}</h3>
                           <Link to={item.link}>Go to the {item.section} page.</Link>
                         </div>
                       ))}
@@ -156,6 +154,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
                   </Fragment>
                 )}
               </div>
+              <button onClick={toggleComplete} className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent">[Demo: Toggle Complete]</button>
             </Fragment>
           )}
         </Drawer>
