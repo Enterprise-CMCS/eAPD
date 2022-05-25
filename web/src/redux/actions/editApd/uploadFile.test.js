@@ -30,8 +30,8 @@ describe('APD edit actions for uploading files', () => {
 
   beforeEach(() => {
     fetchMock.reset();
-    reader.addEventListener.mockReset();
-    reader.readAsArrayBuffer.mockReset();
+    reader.addEventListener.mockClear();
+    reader.readAsArrayBuffer.mockClear();
     store.clearActions();
   });
 
