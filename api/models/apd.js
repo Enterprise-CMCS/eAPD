@@ -63,11 +63,6 @@ const apdSchema = new mongoose.Schema({
     default: Date.now,
     required: true
   },
-  metadata: {
-    incomplete: Number,
-    todo: {},
-    recents: []
-  },
   status: {
     type: String,
     enum: ['draft', 'archived', 'submitted', 'approved'],
