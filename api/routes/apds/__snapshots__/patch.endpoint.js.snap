@@ -1736,9 +1736,6 @@ Object {
         "zip": "",
       },
     },
-    "metadata": Object {
-      "recents": Array [],
-    },
     "name": "new APD name",
     "previousActivities": Object {
       "actualExpenditures": Object {
@@ -3652,9 +3649,6 @@ Object {
         "zip": "",
       },
     },
-    "metadata": Object {
-      "recents": Array [],
-    },
     "name": "AZ-1921-07-11-HITECH-APD",
     "previousActivities": Object {
       "actualExpenditures": Object {
@@ -5564,9 +5558,6 @@ Object {
         "zip": "",
       },
     },
-    "metadata": Object {
-      "recents": Array [],
-    },
     "name": "new APD name",
     "previousActivities": Object {
       "actualExpenditures": Object {
@@ -7464,9 +7455,6 @@ Object {
         "state": "",
         "zip": "",
       },
-    },
-    "metadata": Object {
-      "recents": Array [],
     },
     "name": "new APD name",
     "previousActivities": Object {

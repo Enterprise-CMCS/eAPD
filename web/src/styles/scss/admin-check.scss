@@ -95,3 +95,15 @@
     opacity: 1;
   }
 }
+
+#complete-check {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  pointer-events: none;
+  animation: firstAnimation 1s linear forwards 1;
+}
+@keyframes firstAnimation {
+  to {
+      stroke-dashoffset: 0;
+  }
+}
