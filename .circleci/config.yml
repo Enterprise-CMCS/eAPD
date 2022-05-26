@@ -87,7 +87,6 @@ workflows:
             branches:
               ignore:
                 - gh-pages
-                - tforkner/4045-storybook-updates
             tags:
               ignore: ignore-e2e
           requires:
