@@ -19,7 +19,7 @@
     "build-storybook": "build-storybook -o docs-build",
     "deploy-storybook": "storybook-to-ghpages --out=docs-build",
     "storybook": "start-storybook -p 6006",
-    "deploy-chromatic": "chromatic --exit-zero-on-changes --debug",
+    "deploy-chromatic": "chromatic --exit-zero-on-changes",
     "npm-check": "npx npm-check-updates",
     "stryker": "TZ=utc stryker run",
     "prepare": "yarn run snyk-protect",

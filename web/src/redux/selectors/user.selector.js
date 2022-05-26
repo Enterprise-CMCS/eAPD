@@ -35,9 +35,7 @@ export const getUserAffiliationForCurrentState = ({
 };
 
 export const getUserStateOrTerritoryStatus = state => {
-  console.log({ state });
   const { status = null } = getUserAffiliationForCurrentState(state) || {};
-  console.log({ status });
   return status;
 };
 
