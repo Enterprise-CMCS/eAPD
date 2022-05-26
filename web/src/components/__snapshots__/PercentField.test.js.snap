@@ -11,7 +11,7 @@ exports[`PercentField component renders correctly 1`] = `
 >
   <NumberField
     className="stuff"
-    fieldRef={
+    fieldref={
       Object {
         "current": null,
       }
@@ -28,7 +28,7 @@ exports[`PercentField component renders correctly 1`] = `
   >
     <TextField
       className="stuff"
-      fieldRef={
+      fieldref={
         Object {
           "current": null,
         }
@@ -73,7 +73,7 @@ exports[`PercentField component renders correctly 1`] = `
           <TextInput
             errorId="field_1-error"
             errorPlacement="top"
-            fieldRef={
+            fieldref={
               Object {
                 "current": null,
               }
@@ -91,7 +91,7 @@ exports[`PercentField component renders correctly 1`] = `
             <input
               aria-invalid={false}
               className="ds-c-field ds-c-field--medium"
-              fieldRef={
+              fieldref={
                 Object {
                   "current": null,
                 }
