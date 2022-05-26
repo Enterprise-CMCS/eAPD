@@ -9,8 +9,7 @@ import { t } from '../../../../i18n';
 import {
   setActivityAlternatives,
   setActivityDescription,
-  setActivityOverview,
-  toggleAdmin
+  setActivityOverview
 } from '../../../../redux/actions/editActivity';
 import RichText from '../../../../components/RichText';
 import Instruction from '../../../../components/Instruction';
