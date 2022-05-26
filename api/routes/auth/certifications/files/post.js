@@ -20,7 +20,6 @@ module.exports = (
     async (req, res, next) => {
       try {
         const { data = null } = req.files.file;
-
         const fileId = crypto.createHash('sha256').update(data).digest('hex');
 
         const { error = null } = await validateDoc(data);

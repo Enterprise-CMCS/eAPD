@@ -49,7 +49,7 @@ const jwtExtractor = req => {
     if (accessTokenObj) {
       // eslint-disable-next-line no-unused-vars
       const value = accessTokenObj.split('=')[1]; // get the value
-      const valueObj = JSON.parse(decodeURI(value)); // the value is an encoded string, convert it to a json object
+      const valueObj = JSON.parse(decodeURIComponent(value)); // the value is an encoded string, convert it to a json object
       return valueObj.accessToken; // return the access token
     }
   }
