@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Redirect, useParams as actualUseParams } from 'react-router-dom';
 
-import { toggleAdminCheck } from '../../../redux/actions/check';
+import { toggleAdminCheck } from '../../../redux/actions/app/apd';
 
 import Icon, { faClipboardCheck } from '../../../components/Icons';
 
