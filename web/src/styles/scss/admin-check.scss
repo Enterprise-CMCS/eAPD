@@ -90,7 +90,6 @@
   padding: 0px 16px 16px 16px;
   background-color: $color-gray-lightest;
 }
-
 @keyframes FadeIn {
   0% {
     opacity: 0;
@@ -108,6 +107,6 @@
 }
 @keyframes firstAnimation {
   to {
-      stroke-dashoffset: 0;
+    stroke-dashoffset: 0;
   }
 }
