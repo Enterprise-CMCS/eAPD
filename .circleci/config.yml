@@ -106,7 +106,6 @@ workflows:
             - backend lint
             - frontend dependency vulnerability scan
             - backend dependency vulnerability scan
-            - e2e test
 
       # backend jobs
       - backend api endpoint test:
@@ -577,6 +576,7 @@ jobs:
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
