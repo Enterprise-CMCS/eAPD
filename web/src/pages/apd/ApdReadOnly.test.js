@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
+import Router from 'react-router-dom';
 
 import ApdViewOnly from './ApdReadOnly';
 
@@ -9,10 +10,11 @@ import budget from '../../fixtures/ak-budget.json';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useParams: jest.fn().mockReturnValue({ apdId: 1 })
+  useParams: jest.fn()
 }));
 
 const setup = (props = {}, options = {}) => {
+  jest.spyOn(Router, 'useParams').mockReturnValue({ apdId: 1 });
   return renderWithConnection(<ApdViewOnly {...props} />, options);
 };
 

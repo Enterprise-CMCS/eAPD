@@ -96,7 +96,7 @@ const config = {
       template: 'src/index.html',
 
       // Tealium
-      tealiumUrl: `https://tags.tiqcdn.com/utag/cmsgov/cms-eapd/${process.env.TEALIUM_TAG}/utag.sync.js`,
+      tealiumUrl: `https://tags.tiqcdn.com/utag/cmsgov/cms-eapd/dev/utag.sync.js`,
       tealiumProfile: 'cms-eapd',
       environment: 'dev'
     })

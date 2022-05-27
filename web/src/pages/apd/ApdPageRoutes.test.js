@@ -3,23 +3,23 @@ import { renderWithConnection, screen } from 'apd-testing-library';
 import ApdPageRoutes from './ApdPageRoutes';
 import apd from '../../fixtures/ak-apd.json';
 import budget from '../../fixtures/ak-budget.json';
+import Router from 'react-router-dom';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useParams: jest
-    .fn()
-    .mockReturnValue({ apdId: '0123456789abcdef01234567', activityIndex: 0 })
+  useParams: jest.fn(),
+  useRouteMatch: jest.fn()
 }));
 
 const setup = (options = {}) => {
-  const useRouteMatch = jest
-    .fn()
+  jest
+    .spyOn(Router, 'useRouteMatch')
     .mockReturnValue({ path: '/apd/0123456789abcdef01234567' });
+  jest
+    .spyOn(Router, 'useParams')
+    .mockReturnValue({ apdId: '0123456789abcdef01234567', activityIndex: 0 });
   return renderWithConnection(
-    <ApdPageRoutes
-      useRouteMatch={useRouteMatch}
-      apdId="0123456789abcdef01234567"
-    />,
+    <ApdPageRoutes apdId="0123456789abcdef01234567" />,
     {
       initialState: {
         user: {

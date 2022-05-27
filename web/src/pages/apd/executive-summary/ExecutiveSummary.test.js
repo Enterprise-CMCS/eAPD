@@ -1,17 +1,17 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import Router from 'react-router-dom';
 
 import { plain as ExecutiveSummary, mapStateToProps } from './ExecutiveSummary';
 
 const mockPush = jest.fn();
 
-jest.mock('react-router-dom', () => {
-  return {
-    useHistory: jest.fn().mockReturnValue({ push: () => mockPush() }),
-    useRouteMatch: jest.fn().mockReturnValue({ path: '---path---' }),
-    useParams: jest.fn().mockReturnValue({ apdId: '0123456789abcdef01234560' })
-  };
-});
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: jest.fn(),
+  useRouteMatch: jest.fn(),
+  useParams: jest.fn()
+}));
 
 describe('executive summary component', () => {
   const props = {
@@ -80,6 +80,13 @@ describe('executive summary component', () => {
   };
 
   it('renders correctly', () => {
+    jest
+      .spyOn(Router, 'useHistory')
+      .mockReturnValue({ push: () => mockPush() });
+    jest.spyOn(Router, 'useRouteMatch').mockReturnValue({ path: '---path---' });
+    jest
+      .spyOn(Router, 'useParams')
+      .mockReturnValue({ apdId: '0123456789abcdef01234560' });
     const component = shallow(<ExecutiveSummary {...props} />);
     expect(component).toMatchSnapshot();
   });

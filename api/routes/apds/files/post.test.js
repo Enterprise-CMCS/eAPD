@@ -61,9 +61,11 @@ tap.only('apds files endpoints', async endpointTest => {
       di.validateFile.resolves({
         error: 'User is trying to upload a text-based file'
       });
-      req.file = {
-        buffer: 'text file buffer',
-        size: 1234
+      req.files = {
+        file: {
+          data: 'text file buffer',
+          size: 1234
+        }
       };
 
       await handler(req, res, next);
@@ -81,9 +83,11 @@ tap.only('apds files endpoints', async endpointTest => {
       di.validateFile.resolves({
         error: 'User is trying to upload a file type of application/pdf'
       });
-      req.file = {
-        buffer: 'pdf file buffer',
-        size: 1234
+      req.files = {
+        file: {
+          data: 'pdf file buffer',
+          size: 1234
+        }
       };
 
       await handler(req, res, next);
@@ -99,9 +103,11 @@ tap.only('apds files endpoints', async endpointTest => {
     tests.test(
       'there is an unexpected error creating the file in the database',
       async test => {
-        req.file = {
-          buffer: 'image file buffer',
-          size: 1234
+        req.files = {
+          file: {
+            data: 'image file buffer',
+            size: 1234
+          }
         };
 
         di.validateFile.resolves({ image: 'image file buffer' });
@@ -129,9 +135,11 @@ tap.only('apds files endpoints', async endpointTest => {
       'there is an unexpected error putting the file in storage',
       async test => {
         di.validateFile.resolves({ image: 'image file buffer' });
-        req.file = {
-          buffer: 'image file buffer',
-          size: 1234
+        req.files = {
+          file: {
+            data: 'image file buffer',
+            size: 1234
+          }
         };
         di.createNewFileForAPD.resolves('new file ID');
         di.putFile.rejects(new Error('some other error'));
@@ -164,9 +172,11 @@ tap.only('apds files endpoints', async endpointTest => {
 
     tests.test('the file is created and stored correctly', async test => {
       di.validateFile.resolves({ image: 'image file buffer' });
-      req.file = {
-        buffer: 'image file buffer',
-        size: 1234
+      req.files = {
+        file: {
+          data: 'image file buffer',
+          size: 1234
+        }
       };
       di.createNewFileForAPD.resolves('new file ID');
       di.putFile.resolves();

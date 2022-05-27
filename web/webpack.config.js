@@ -109,7 +109,7 @@ const config = {
       OKTA_DOMAIN: '',
       OKTA_SERVER_ID: '',
       OKTA_CLIENT_ID: '',
-      WEB_ENV: process.env.WEB_ENV == 'PRODUCTION' ? 'prod' : 'impl'
+      WEB_ENV: process.env.WEB_ENV == 'PRODUCTION' ? 'prod' : 'qa'
     }),
 
     // Inject our app scripts into our HTML kickstarter
@@ -118,9 +118,11 @@ const config = {
       template: 'src/index.html',
 
       // Tealium
-      tealiumUrl: `https://tags.tiqcdn.com/utag/cmsgov/cms-eapd/${process.env.TEALIUM_TAG}/utag.sync.js`,
+      tealiumUrl: `https://tags.tiqcdn.com/utag/cmsgov/cms-eapd/${
+        process.env.WEB_ENV == 'PRODUCTION' ? 'prod' : 'qa'
+      }/utag.sync.js`,
       tealiumProfile: 'cms-eapd',
-      environment: process.env.WEB_ENV == 'PRODUCTION' ? 'prod' : 'impl'
+      environment: process.env.WEB_ENV == 'PRODUCTION' ? 'prod' : 'qa'
     })
   ],
   stats: {
