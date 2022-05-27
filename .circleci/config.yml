@@ -489,6 +489,7 @@ jobs:
       - run:
           name: set up environment
           working_directory: ~/project
+          no_output_timeout: 30m
           command: |
             export NODE_ENV=development
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
@@ -500,7 +501,7 @@ jobs:
             export WEB_ENV="test"
 
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose up -d
+            COMPOSE_HTTP_TIMEOUT=120 docker-compose up -d
             docker-compose exec api yarn run migrate
             docker-compose exec api yarn run seed
       - run:
@@ -803,9 +804,10 @@ jobs:
       - run:
           name: start everything up
           working_directory: ~/project/api
+          no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f docker-compose.endpoint-tests.yml up -d
+            COMPOSE_HTTP_TIMEOUT=120 docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
       - run:
