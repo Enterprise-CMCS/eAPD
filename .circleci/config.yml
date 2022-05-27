@@ -590,7 +590,8 @@ jobs:
           working_directory: ~/project/web
           no_output_timeout: 60m
           command: |
-            STORYBOOK_BUILD_TIMEOUT=1200000 yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
+            STORYBOOK_BUILD_TIMEOUT=1200000 yarn build:storybook
+            yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
