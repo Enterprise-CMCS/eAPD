@@ -230,18 +230,16 @@ export const removeTokenListeners = () => {
 };
 
 // Log out methods
-export const logoutAndClearTokens = () =>
-  oktaAuth
-    .revokeAccessToken()
-    .then(() => {
-      oktaAuth
-        .closeSession()
-        .then(() => {
-          removeCookie();
-        })
-        .catch(() => {});
-    })
-    .catch(() => {});
+export const logoutAndClearTokens = async () => {
+  try {
+    await oktaAuth.revokeAccessToken();
+    await oktaAuth.closeSession();
+  } catch (e) {
+    console.log(e);
+  } finally {
+    removeCookie();
+  }
+};
 
 export const isUserActive = latestActivity => {
   const now = new Date().getTime();

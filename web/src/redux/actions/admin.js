@@ -172,7 +172,6 @@ export const getAffiliations =
         dispatch({ type: ADMIN_GET_AFFILIATIONS_SUCCESS, data: res.data });
       })
       .catch(e => {
-        console.log({ e });
         let error = null;
         if (e.response.data) {
           ({ error } = e.response.data);

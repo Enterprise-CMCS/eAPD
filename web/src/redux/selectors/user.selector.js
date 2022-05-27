@@ -31,7 +31,7 @@ export const getUserStateOrTerritory = ({
 export const getUserAffiliationForCurrentState = ({
   user: { data: { state: { id = null } = {}, states = [] } = {} } = {}
 }) => {
-  return {status: states[id]};
+  return { status: states[id] };
 };
 
 export const getUserStateOrTerritoryStatus = state => {

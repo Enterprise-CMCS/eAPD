@@ -16,23 +16,27 @@ export const uploadFile = file => async (dispatch, getState) => {
   const reader = new FileReader();
 
   return new Promise((resolve, reject) => {
-    reader.addEventListener('load', () => {
-      const form = new FormData();
-      form.append('file', new Blob([reader.result]));
+    try {
+      reader.addEventListener('load', () => {
+        const form = new FormData();
+        form.append('file', new Blob([reader.result]));
 
-      return axios
-        .post(`/apds/${apdID}/files`, form)
-        .then(req => {
-          dispatch({ type: UPLOAD_FILE_SUCCESS, url: req.data.url });
-          resolve(`${apiUrl}${req.data.url}`);
-        })
-        .catch(() => {
-          dispatch({ type: UPLOAD_FILE_FAILURE });
-          reject();
-        });
-    });
+        return axios
+          .post(`/apds/${apdID}/files`, form)
+          .then(req => {
+            dispatch({ type: UPLOAD_FILE_SUCCESS, url: req.data.url });
+            resolve(`${apiUrl}${req.data.url}`);
+          })
+          .catch(err => {
+            dispatch({ type: UPLOAD_FILE_FAILURE });
+            reject(err);
+          });
+      });
 
-    reader.readAsArrayBuffer(file);
+      reader.readAsArrayBuffer(file);
+    } catch (err) {
+      reject();
+    }
   });
 };
 

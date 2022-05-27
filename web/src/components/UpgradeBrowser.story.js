@@ -6,7 +6,15 @@ export default {
   component: UpgradeBrowser,
   parameters: {
     jest: ['UpgradeBrowser.test.js']
+  },
+  argTypes: {
+    show: { type: 'boolean' }
   }
 };
 
-export const Basic = args => <UpgradeBrowser {...args} />;
+const Template = args => <UpgradeBrowser {...args} />;
+
+export const Basic = Template.bind({});
+Basic.args = {
+  show: true
+};

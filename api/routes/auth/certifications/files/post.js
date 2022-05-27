@@ -1,4 +1,3 @@
-const multer = require('multer');
 const nodeCrypto = require('crypto');
 
 const { loggedIn } = require('../../../../middleware/auth');
@@ -18,21 +17,19 @@ module.exports = (
     '/auth/certifications/files',
     loggedIn,
     can('edit-state-certifications'),
-    multer().single('file'),
     async (req, res, next) => {
       try {
-        const { buffer = null } = req.file;
+        const { data = null } = req.files.file;
+        const fileId = crypto.createHash('sha256').update(data).digest('hex');
 
-        const fileId = crypto.createHash('sha256').update(buffer).digest('hex');
-
-        const { error = null } = await validateDoc(buffer);
+        const { error = null } = await validateDoc(data);
         if (error) {
           res.status(415).json({ error }).end();
           return;
         }
 
         try {
-          await putFile(fileId, buffer);
+          await putFile(fileId, data);
         } catch (e) {
           logger.error(`Error persisting file`);
           throw e;

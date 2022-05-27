@@ -27,10 +27,7 @@ const validateImage = async buffer => {
       const config = { fit: 'inside' };
       if (width > MAX_WIDTH) config.width = MAX_WIDTH;
       if (height > MAX_HEIGHT) config.height = MAX_HEIGHT;
-      const data = await image
-        .resize(config)
-        .png()
-        .toBuffer();
+      const data = await image.resize(config).png().toBuffer();
       return { image: data };
     })
     .catch(err => {
@@ -40,19 +37,15 @@ const validateImage = async buffer => {
 
 const validateDoc = async buffer => {
   try {
-    const { ext = null } = await ft.fromBuffer(buffer); 
-    if (
-      ext !== 'doc' &&
-      ext !== 'docx' &&
-      ext !== 'pdf'
-    ) {
+    const { ext = null } = await ft.fromBuffer(buffer);
+    if (ext !== 'doc' && ext !== 'docx' && ext !== 'pdf') {
       return { error: 'Unsupported file format' };
     }
-    return {};    
+    return {};
   } catch (e) {
     return { error: 'Unsupported file format' };
-  }  
-}
+  }
+};
 
 module.exports = {
   validateFile: validateImage,

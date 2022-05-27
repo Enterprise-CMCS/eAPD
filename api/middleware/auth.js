@@ -37,26 +37,24 @@ const can = activity =>
       });
       // First check if they're logged in
       module.exports.loggedIn(req, res, () => {
-
-        if (Array.isArray(activity) ){
-          const hasActivity = activity.every((action) => {
-            return req.user.activities.includes(action)
-          })
+        if (Array.isArray(activity)) {
+          const hasActivity = activity.every(action => {
+            return req.user.activities.includes(action);
+          });
           if (hasActivity) {
-              logger.verbose({
-                id: req.id,
-                message: `user has the [${activity}] activity`
-              });
-              next();
-          }
-          else {
+            logger.verbose({
+              id: req.id,
+              message: `user has the [${activity}] activity`
+            });
+            next();
+          } else {
             logger.info({
               id: req.id,
               message: `user does not have the [${activity}] activity`
             });
             res.status(403).end();
           }
-          return
+          return;
         }
         // Then check if they have the activity
         if (req.user.activities.includes(activity)) {
@@ -72,7 +70,6 @@ const can = activity =>
           });
           res.status(403).end();
         }
-
       });
     };
   });
@@ -92,7 +89,7 @@ const validForState = paramName =>
   cache(['validForState', paramName], () => {
     return (req, res, next) => {
       // This has to be how the param is named for this middleware
-      const stateId = req.params[paramName]
+      const stateId = req.params[paramName];
       logger.debug({
         id: req.id,
         message: `got a validForState middleware request for [${stateId}]`
@@ -107,13 +104,13 @@ const validForState = paramName =>
           });
           next();
           // or if they have the fed admin role
-        } else if ( req.user.role === 'eAPD Federal Admin'){
+        } else if (req.user.role === 'eAPD Federal Admin') {
           logger.verbose({
             id: req.id,
             message: `user is a fed admin is valid for ${stateId}`
           });
-          next()
-        }else {
+          next();
+        } else {
           logger.info({
             id: req.id,
             message: `user does not have the [${stateId}] state`
@@ -124,7 +121,5 @@ const validForState = paramName =>
     };
   });
 
-
-
 module.exports.can = can;
-module.exports.validForState = validForState
+module.exports.validForState = validForState;

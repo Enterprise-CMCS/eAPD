@@ -4,10 +4,10 @@ require('./env');
 
 const express = require('express');
 const cors = require('cors');
-const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const { v4: uuidv4 } = require('uuid');
+const fileUpload = require('express-fileupload');
 const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
@@ -27,7 +27,6 @@ try {
 
 // deepcode ignore UseCsurfForExpress: we need a larger ticket to implement csurf
 const api = express();
-api.use(helmet());
 
 // Turn off the X-Powered-By header that reveals information about the api
 // architecture. No need just giving away all the information, though this
@@ -92,6 +91,7 @@ api.use(cors({ credentials: true, origin: true }));
 api.use(compression());
 api.use(express.urlencoded({ extended: true }));
 api.use(bodyParser.json({ limit: '5mb' }));
+api.use(fileUpload());
 
 // This endpoint doesn't do anything, but lets us verify that the api is
 // online without triggering any other processing - e.g., no authentication,
