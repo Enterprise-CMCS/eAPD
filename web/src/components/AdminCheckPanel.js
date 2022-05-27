@@ -35,7 +35,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
           className={`eapd-admin-check ${miniCheck ? " eapd-admin-check--collapsed" : ""}`}
           heading={null}
           onCloseClick={null}
-          // isFooterSticky={true}
+          isFooterSticky={true}
           footerBody={
             miniCheck === false && (
               <Fragment>
