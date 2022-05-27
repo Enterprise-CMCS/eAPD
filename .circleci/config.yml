@@ -106,18 +106,6 @@ workflows:
             - backend lint
             - dependency vulnerability scan
 
-      - chromatic deployment:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-            tags:
-              ignore: ignore-e2e
-          requires:
-            - frontend lint
-            - backend lint
-            - dependency vulnerability scan
-
       # backend jobs
       - backend api endpoint test:
           filters:
