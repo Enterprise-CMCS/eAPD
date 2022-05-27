@@ -26,7 +26,6 @@ const ActivityOverview = ({
   setAlternatives,
   setDescription,
   setOverview,
-  toggleAdmin,
   adminCheck
 }) => {
   ActivityOverview.displayName = 'ActivityOverview';
@@ -50,7 +49,7 @@ const ActivityOverview = ({
     if (adminCheck) {
       trigger();
     };
-  });
+  }, []);
 
   const overviewLabel = useMemo(
     () =>

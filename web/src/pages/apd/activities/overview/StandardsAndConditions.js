@@ -83,7 +83,8 @@ const StandardsAndConditions = ({
   activity,
   activityIndex,
   setDoesNotSupport,
-  setSupport
+  setSupport,
+  adminCheck
 }) => {
   StandardsAndConditions.displayName = 'StandardsAndConditions';
 
@@ -100,17 +101,12 @@ const StandardsAndConditions = ({
       supports: supports,
       doesNotSupport: doesNotSupport
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
     resolver: useJoiResolver(standardsConditionsSchema)
   });
 
   useEffect(() => {
-    if (supports) {
-      trigger('supports');
-    }
-    if (doesNotSupport) {
-      trigger('doesNotSupport');
+    if(adminCheck) {
+      trigger(["supports", "doesNotSupport"]);
     }
   }, []);
 
@@ -137,7 +133,7 @@ const StandardsAndConditions = ({
       <Controller
         name="supports"
         control={control}
-        render={({ field: { onChange, onBlur } }) => (
+        render={({ field: { onChange } }) => (
           <RichText
             id="standards-and-conditions-supports-field"
             data-testid="standards-and-conditions-supports"
@@ -147,16 +143,6 @@ const StandardsAndConditions = ({
               onChange(html);
             }}
             editorClassName="rte-textarea-1"
-            onBlur={() => {
-              if (
-                getFieldState('doesNotSupport').isTouched ||
-                getFieldState('doesNotSupport').isDirty
-              ) {
-                trigger(['supports', 'doesNotSupport']);
-              } else {
-                onBlur();
-              }
-            }}
             error={errors?.supports?.message}
           />
         )}
@@ -166,7 +152,7 @@ const StandardsAndConditions = ({
         <Controller
           name="doesNotSupport"
           control={control}
-          render={({ field: { onChange, onBlur, ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <TextArea
               {...props}
               label="If this activity does not support the Medicaid standards and conditions, please explain."
@@ -174,16 +160,6 @@ const StandardsAndConditions = ({
               onChange={({ target: { value } }) => {
                 setDoesNotSupport(activityIndex, value);
                 onChange(value);
-              }}
-              onBlur={() => {
-                if (
-                  getFieldState('supports').isTouched ||
-                  getFieldState('supports').isDirty
-                ) {
-                  trigger(['supports', 'doesNotSupport']);
-                } else {
-                  onBlur();
-                }
               }}
               rows={6}
               style={{ maxWidth: 'initial' }}
@@ -206,7 +182,8 @@ StandardsAndConditions.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  activity: selectActivityByIndex(state, props)
+  activity: selectActivityByIndex(state, props),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
