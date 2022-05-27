@@ -1,32 +1,6 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": [
-    "*|@storybook/addon-docs>@mdx-js/mdx>remark-parse>trim",
-    "*|@storybook/addon-docs>@mdx-js/mdx>remark-mdx>remark-parse>trim",
-    "*|@storybook/addon-docs>@mdx-js/loader>@mdx-js/mdx>remark-mdx>remark-parse>trim",
-    "*|@storybook/addon-essentials>@storybook/addon-docs>@mdx-js/loader>@mdx-js/mdx>remark-mdx>remark-parse>trim",
-    "*|@storybook/addon-docs>@storybook/core>@storybook/core-server>@storybook/csf-tools>@mdx-js/mdx>remark-mdx>remark-parse>trim",
-    "*|@storybook/addon-essentials>@storybook/addon-docs>@storybook/core>@storybook/core-server>@storybook/csf-tools>@mdx-js/mdx>remark-mdx>remark-parse>trim"
-  ],
-  "_comment": {
-    "trim": {
-      "advisory": "https://github.com/advisories/GHSA-w5p7-h5w8-2hfq",
-      "module": "trim",
-      "affects": ["@storybook/addon-docs@6.4.18 - storybook"]
-    },
-    "glob-parent": {
-      "advisory": "https://github.com/advisories/GHSA-ww39-953v-wcq6",
-      "module": "glob-parent",
-      "affects": [
-        "@storybook/addon-docs@6.4.18 - storybook",
-        "@storybook/react@6.4.18 - storybook"
-      ]
-    },
-    "1059359": {
-      "advisory": "https://github.com/advisories/GHSA-3949-f494-cm99",
-      "module": "prismjs",
-      "affects": ["@storybook/addon-a11y@6.4.18 - storybook"]
-    }
-  }
+  "allowlist": [],
+  "_comment": {}
 }

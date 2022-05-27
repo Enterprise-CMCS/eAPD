@@ -39,7 +39,6 @@ tap.test('state certifications files endpoints', async endpointTest => {
         '/auth/certifications/files',
         loggedIn,
         can('edit-state-certifications'),
-        sinon.match.func,
         sinon.match.func
       ),
       '/auth/certifications/files POST endpoint is setup'
@@ -50,7 +49,7 @@ tap.test('state certifications files endpoints', async endpointTest => {
     'POST endpoint for uploading a state certification letter/file',
     async tests => {
       let handler;
-      const buffer = 'buff';
+      const data = 'buff';
       const req = {};
 
       tests.beforeEach(async () => {
@@ -59,7 +58,7 @@ tap.test('state certifications files endpoints', async endpointTest => {
           .find(args => args[0] === '/auth/certifications/files')
           .pop();
         di.crypto.createHash.withArgs('sha256').returnsThis();
-        di.crypto.update.withArgs(buffer).returnsThis();
+        di.crypto.update.withArgs(data).returnsThis();
         di.crypto.digest.withArgs('hex').returns('123');
       });
 
@@ -67,9 +66,11 @@ tap.test('state certifications files endpoints', async endpointTest => {
         di.validateDoc.resolves({
           error: 'Unsupported file format'
         });
-        req.file = {
-          buffer,
-          size: 1234
+        req.files = {
+          file: {
+            data,
+            size: 1234
+          }
         };
 
         await handler(req, res, next);
@@ -87,9 +88,11 @@ tap.test('state certifications files endpoints', async endpointTest => {
         'with a valid doc the file is saved to storage provider',
         async test => {
           di.validateDoc.returns({});
-          req.file = {
-            buffer,
-            size: 1234
+          req.files = {
+            file: {
+              data,
+              size: 1234
+            }
           };
           di.putFile.resolves();
 
@@ -107,9 +110,11 @@ tap.test('state certifications files endpoints', async endpointTest => {
         'error persisting file to local or remote storage',
         async test => {
           di.validateDoc.returns({});
-          req.file = {
-            buffer,
-            size: 1234
+          req.files = {
+            file: {
+              data,
+              size: 1234
+            }
           };
           di.putFile.rejects();
 

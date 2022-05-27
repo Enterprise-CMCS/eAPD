@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { browserIsYellow } from '../util/browser';
 
 const browsers = [
@@ -45,9 +46,9 @@ const html = `<div class="ds-c-alert__body">
   </div>
 </div>`;
 
-const UpgradeBrowser = () => {
+const UpgradeBrowser = ({ show = browserIsYellow }) => {
   /* eslint-disable react/no-danger */
-  return browserIsYellow ? (
+  return show ? (
     <div
       className="ds-c-alert ds-c-alert--warn"
       dangerouslySetInnerHTML={{ __html: html }}
@@ -56,5 +57,9 @@ const UpgradeBrowser = () => {
 };
 
 export default UpgradeBrowser;
+
+UpgradeBrowser.propTypes = {
+  show: PropTypes.bool
+};
 
 export { html };
