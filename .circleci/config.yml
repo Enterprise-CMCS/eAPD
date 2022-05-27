@@ -106,6 +106,7 @@ workflows:
             - backend lint
             - frontend dependency vulnerability scan
             - backend dependency vulnerability scan
+            - e2e test
 
       # backend jobs
       - backend api endpoint test:
@@ -501,7 +502,7 @@ jobs:
             export WEB_ENV="test"
 
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            COMPOSE_HTTP_TIMEOUT=120 docker-compose up -d
+            COMPOSE_HTTP_TIMEOUT=150 docker-compose up -d
             docker-compose exec api yarn run migrate
             docker-compose exec api yarn run seed
       - run:
@@ -807,7 +808,7 @@ jobs:
           no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            COMPOSE_HTTP_TIMEOUT=120 docker-compose -f docker-compose.endpoint-tests.yml up -d
+            COMPOSE_HTTP_TIMEOUT=150 docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
       - run:
