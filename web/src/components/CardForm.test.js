@@ -1,21 +1,24 @@
 import React from 'react';
 import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
+import Router from 'react-router-dom';
 
 import CardForm from './CardForm';
 
 const mockGoBack = jest.fn();
 
-jest.mock('react-router-dom', () => {
-  return {
-    useHistory: jest.fn().mockReturnValue({ goBack: () => mockGoBack() })
-  };
-});
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: jest.fn()
+}));
 
 const defaultProps = {
   title: 'test'
 };
 
 const setup = (props = {}) => {
+  jest
+    .spyOn(Router, 'useHistory')
+    .mockReturnValue({ goBack: () => mockGoBack() });
   return renderWithConnection(
     <CardForm {...defaultProps} {...props}>
       hello world
@@ -26,6 +29,10 @@ const setup = (props = {}) => {
 describe('card form wrapper', () => {
   beforeEach(() => {
     mockGoBack.mockReset();
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
   });
 
   test('renders without an id on the container if id prop is null', () => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
+import Router from 'react-router-dom';
 
 import ApdApplication, {
   mapStateToProps,
@@ -11,7 +12,7 @@ import budget from '../fixtures/ak-budget.json';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useParams: jest.fn().mockReturnValue({ apdId: '0123456789abcdef01234567' })
+  useParams: jest.fn()
 }));
 
 const user = {
@@ -41,6 +42,9 @@ const user = {
 };
 
 const setup = (props = {}, options = {}) => {
+  jest
+    .spyOn(Router, 'useParams')
+    .mockReturnValue({ apdId: '0123456789abcdef01234567' });
   return renderWithConnection(<ApdApplication {...props} />, options);
 };
 
