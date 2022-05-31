@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import Router from 'react-router-dom';
 
 import { addActivity } from '../../../../redux/actions/editActivity';
 
@@ -19,10 +20,16 @@ const initialProps = {
 };
 
 jest.mock('react-router-dom', () => ({
-  useParams: jest.fn().mockReturnValue({ apdId: '0123456789abcdef01234560' })
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn()
 }));
 
-const setup = props => shallow(<Activities {...initialProps} {...props} />);
+const setup = props => {
+  jest
+    .spyOn(Router, 'useParams')
+    .mockReturnValue({ apdId: '0123456789abcdef01234560' });
+  return shallow(<Activities {...initialProps} {...props} />);
+};
 
 describe('the Activities component', () => {
   it('renders correctly', () => {

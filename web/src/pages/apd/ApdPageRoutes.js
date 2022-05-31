@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Switch,
-  Route,
-  Redirect,
-  useRouteMatch as actualUseRouteMatch
-} from 'react-router-dom';
+import { Switch, Route, Redirect, useRouteMatch } from 'react-router-dom';
 
 import ApdHeader from '../../layout/header/ApdHeader';
 import EntryPage from './activities/overview/ActivityOverview';
 import routes from './apdRoutesList';
 
-const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
+const ApdPageRoutes = ({ apdId }) => {
   const { path } = useRouteMatch();
 
   return (
@@ -38,13 +33,11 @@ const ApdPageRoutes = ({ apdId, useRouteMatch }) => {
 };
 
 ApdPageRoutes.propTypes = {
-  apdId: PropTypes.string,
-  useRouteMatch: PropTypes.func
+  apdId: PropTypes.string
 };
 
 ApdPageRoutes.defaultProps = {
-  apdId: null,
-  useRouteMatch: actualUseRouteMatch
+  apdId: null
 };
 
 export default ApdPageRoutes;
