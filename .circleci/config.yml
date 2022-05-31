@@ -279,7 +279,7 @@ workflows:
                 - main
           requires:
             - backend dependency vulnerability scan
-            - export WEB_ENV="test" staging
+            - frontend build staging
 
       - store artifacts:
           name: store artifacts prod
