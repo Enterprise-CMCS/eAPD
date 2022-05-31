@@ -82,8 +82,6 @@
   "dependencies": {
     "@snyk/protect": "1.925.0"
   },
-  "resolutions": {
-    "yargs-parser": "5.0.1"
-  },
+  "resolutions": {},
   "packageManager": "yarn@1.22.19"
 }
