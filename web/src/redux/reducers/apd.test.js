@@ -29,6 +29,7 @@ describe('APD reducer', () => {
   });
 
   const initialState = {
+    adminCheck: false,
     byId: {},
     data: {},
     fetching: false,
@@ -62,6 +63,7 @@ describe('APD reducer', () => {
         }
       })
     ).toEqual({
+      adminCheck: false,
       byId: {
         'apd-id': {
           id: 'apd-id',
@@ -82,6 +84,7 @@ describe('APD reducer', () => {
 
   it('should handle a request to get all APDs', () => {
     expect(apd(initialState, { type: FETCH_ALL_APDS_REQUEST })).toEqual({
+      adminCheck: false,
       byId: {},
       data: { ...initialState.data },
       fetching: true,
@@ -113,6 +116,7 @@ describe('APD reducer', () => {
     ];
 
     const expected = {
+      adminCheck: false,
       byId: {
         'apd-id-1': {
           id: 'apd-id-1',
@@ -146,6 +150,7 @@ describe('APD reducer', () => {
     expect(
       apd(initialState, { type: FETCH_ALL_APDS_FAILURE, error: 'some error' })
     ).toEqual({
+      adminCheck: false,
       byId: {},
       data: { ...initialState.data },
       fetching: false,
