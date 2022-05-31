@@ -14,10 +14,8 @@ import {
   setMedicaidOfficeAddress2,
   setMedicaidOfficeCity,
   setMedicaidOfficeState,
-  setMedicaidOfficeZip,
-  toggleAdmin
+  setMedicaidOfficeZip
 } from '../../../redux/actions/editApd';
-import { toggleAdminCheck } from '../../../redux/actions/app';
 import { t } from '../../../i18n';
 import { selectKeyStatePersonnel } from '../../../redux/selectors/apd.selectors';
 import { selectState } from '../../../redux/reducers/user';
@@ -39,7 +37,6 @@ const ApdStateProfile = ({
   setState,
   setZip,
   keyStatePersonnel,
-  toggleAdmin,
   adminCheck
 }) => {
   const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
@@ -65,10 +62,6 @@ const ApdStateProfile = ({
     },
     resolver: joiResolver(medicaidDirectorSchema)
   });
-
-  useEffect(() => {
-    toggleAdmin(false);
-  }, []);
 
   useEffect(() => {
     if(adminCheck) {
@@ -233,8 +226,7 @@ ApdStateProfile.propTypes = {
     medicaidDirector: PropTypes.object,
     medicaidOffice: PropTypes.object,
     keyPersonnel: PropTypes.array
-  }).isRequired,
-  toggleAdmin: PropTypes.func.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = state => ({
@@ -251,8 +243,7 @@ const mapDispatchToProps = {
   setAddress2: setMedicaidOfficeAddress2,
   setCity: setMedicaidOfficeCity,
   setState: setMedicaidOfficeState,
-  setZip: setMedicaidOfficeZip,
-  toggleAdmin: toggleAdminCheck
+  setZip: setMedicaidOfficeZip
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdStateProfile);
