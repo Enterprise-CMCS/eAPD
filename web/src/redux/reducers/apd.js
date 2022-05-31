@@ -325,7 +325,7 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+  adminCheck: process.env.WEB_ENV !== 'production'
 };
 
 // eslint-disable-next-line default-param-last
