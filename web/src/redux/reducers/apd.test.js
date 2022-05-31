@@ -35,7 +35,9 @@ describe('APD reducer', () => {
     loaded: false,
     error: '',
     selectAPDOnLoad: false,
-    adminCheck: false
+    adminCheck: false,
+    adminCheckMini: false,
+    adminCheckComplete: false
   };
 
   it('should handle initial state', () => {

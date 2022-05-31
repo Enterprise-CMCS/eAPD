@@ -1,43 +1,46 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { toggleAdminCheck } from '../redux/actions/app/apd';
+import { toggleAdminCheck, toggleMiniCheck, toggleAdminCheckComplete } from '../redux/actions/app/apd';
 
 import { Accordion, AccordionItem, Badge, Button, Drawer } from '@cmsgov/design-system';
 
 import Icon, { faExclamationTriangle, faArrowRight } from '../components/Icons';
 
-const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
-  
-  const [miniCheck, setMiniReview] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
+const AdminCheckPanel = ({
+  adminCheckEnabled,
+  adminCheckMini,
+  adminCheckComplete,
+  metadata,
+  toggleAdmin,
+  toggleAdminMini,
+  toggleAdminComplete
+}) => {
   
   const handleClose = () => {
     toggleAdmin(false);
   };
   
   const toggleCollapse = () => {
-    console.log("collapse the panel");
-    miniCheck ? setMiniReview(false) : setMiniReview(true);
-    // toggleAdminCollapse(true);
+    adminCheckMini ? toggleAdminMini(false) : toggleAdminMini(true);
   };
   
   const toggleComplete = () => {
-    isComplete ? setIsComplete(false) : setIsComplete(true);
+    adminCheckComplete ? toggleAdminComplete(false) : toggleAdminComplete(true);
   };
 
   return (
     <Fragment>
-      {showAdminCheck && (
+      {adminCheckEnabled && (
         <Drawer
-          className={`eapd-admin-check ${miniCheck ? " eapd-admin-check--collapsed" : ""}`}
-          heading={null}
-          onCloseClick={null}
+          className={`eapd-admin-check ${adminCheckMini ? " eapd-admin-check--collapsed" : ""}`}
+          heading={""}
+          onCloseClick={() => {}}
           isFooterSticky={true}
           footerBody={
-            miniCheck === false && (
+            !adminCheckMini && (
               <Fragment>
                 <div className="ds-u-padding-bottom--1">
                   <Icon className="ds-u-color--error ds-u-margin-right--1" icon={faExclamationTriangle} size="lg" />
@@ -53,26 +56,26 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
         >
           <div className="eapd-admin-check__header">
             <h2 className="ds-c-drawer__header-heading">Administrative Check</h2> {/* need to make this have a tabindex=0 at some point, the linter doesn't like it but we need it for initial focus */}
-            {!isComplete && (
-              <Button variation="transparent" onClick={toggleCollapse}>{miniCheck ? "Expand" : "Collapse"}</Button>
+            {!adminCheckComplete && (
+              <Button variation="transparent" onClick={toggleCollapse}>{adminCheckMini ? "Expand" : "Collapse"}</Button>
             )}
-            {isComplete && (
+            {adminCheckComplete && (
               <Button variation="transparent" onClick={handleClose} aria-label="Close help drawer">Close</Button>
             )}
           </div>
-          {miniCheck && (
+          {adminCheckMini && (
             <div className="eapd-admin-mini">
               <div className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center">
-                <Badge size="big" variation={`${isComplete ? "success" : "alert"}`}>{isComplete ? "0" : "3"}</Badge>
-                <span className={`ds-h4 ds-u-margin-y--1 ds-u-padding-left--1 ${isComplete ? "ds-u-color--success" : "ds-u-color--error"}`}>Incomplete Required Fields Total</span>
+                <Badge size="big" variation={`${adminCheckComplete ? "success" : "alert"}`}>{adminCheckComplete ? "0" : "3"}</Badge>
+                <span className={`ds-h4 ds-u-margin-y--1 ds-u-padding-left--1 ${adminCheckComplete ? "ds-u-color--success" : "ds-u-color--error"}`}>Incomplete Required Fields Total</span>
               </div>
-              {isComplete && (
+              {adminCheckComplete && (
                 <Fragment>
                   <p>Well Done! The Administrative Check is complete.</p>
                   <p>Return to the <Link to="export">Export and Submit page.</Link></p>
                 </Fragment>
               )}
-              {!isComplete && (
+              {!adminCheckComplete && (
                 <Fragment>
                   <h3 className="ds-u-font-size--base">
                     <strong>Key State Personnel: </strong> 
@@ -91,16 +94,16 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
               <button onClick={toggleComplete} className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent">[Demo: Toggle Complete]</button>
             </div>
           )}
-          {miniCheck === false && (
+          {!adminCheckMini && (
             <Fragment>
               <p>Review the list below for any required fields in this APD which are missing content. These fields must be completed before submission to CMS.</p>
               <div className="ds-u-border--2 ds-u-padding--2">
                 <div className="ds-u-display--flex ds-u-justify-content--end ds-u-text-align--right ds-u-align-items--center">
-                  <span className={`${isComplete ? "ds-u-color--success" : "ds-u-color--error"} ds-u-font-weight--bold ds-u-margin-right--2`}>Incomplete<br/>Required Fields</span>
-                  <span className={`${isComplete ? "ds-u-fill--success" : "ds-u-fill--error"} ds-u-color--white ds-u-radius ds-u-padding-x--3 ds-u-padding-y--2 ds-u-font-size--2xl ds-u-font-weight--bold`}>{isComplete ? "0" : metadata.incomplete}</span>
+                  <span className={`${adminCheckComplete ? "ds-u-color--success" : "ds-u-color--error"} ds-u-font-weight--bold ds-u-margin-right--2`}>Incomplete<br/>Required Fields</span>
+                  <span className={`${adminCheckComplete ? "ds-u-fill--success" : "ds-u-fill--error"} ds-u-color--white ds-u-radius ds-u-padding-x--3 ds-u-padding-y--2 ds-u-font-size--2xl ds-u-font-weight--bold`}>{adminCheckComplete ? "0" : metadata.incomplete}</span>
                 </div>
                 <hr className="eapd-admin-check__divider" />
-                {isComplete && (
+                {adminCheckComplete && (
                   <Fragment>
                     <h3 className="ds-u-text-align--center ds-text-heading--2xl ds-u-font-weight--normal ds-u-margin-top--1">Administrative Check is Complete</h3>
                     <p className="ds-u-text-align--center ds-h4 ds-u-margin-top--1 ds-u-font-weight--normal">Return to the <Link to="export">export and submit</Link> page.</p>
@@ -111,7 +114,7 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
                     </div>
                   </Fragment>
                 )}
-                {!isComplete && (
+                {!adminCheckComplete && (
                   <Fragment>
                     <h3>To Do</h3>
                     <Accordion bordered>
@@ -165,17 +168,25 @@ const AdminCheckPanel = ({showAdminCheck, metadata, toggleAdmin}) => {
 
 AdminCheckPanel.propTypes = {
   toggleAdmin: PropTypes.func.isRequired,
-  showAdminCheck: PropTypes.bool.isRequired,
+  toggleAdminMini: PropTypes.func.isRequired,
+  toggleAdminComplete: PropTypes.func.isRequired,
+  adminCheckEnabled: PropTypes.bool.isRequired,
+  adminCheckMini: PropTypes.bool.isRequired,
+  adminCheckComplete: PropTypes.bool.isRequired,
   metadata: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  showAdminCheck: state.apd.adminCheck,
+  adminCheckEnabled: state.apd.adminCheck,
+  adminCheckMini: state.apd.adminCheckMini,
+  adminCheckComplete: state.apd.adminCheckComplete,
   metadata: state.apd.data.metadata
 });
 
 const mapDispatchToProps = {
-  toggleAdmin: toggleAdminCheck
+  toggleAdmin: toggleAdminCheck,
+  toggleAdminMini: toggleMiniCheck,
+  toggleAdminComplete: toggleAdminCheckComplete
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminCheckPanel);

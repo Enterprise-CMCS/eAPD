@@ -4,6 +4,11 @@
   box-shadow: -2px 2px 3px 1px #8484848c;
 }
 
+.eapd-admin-check a:visited {
+  color: $color-primary;
+  text-decoration-color: $color-primary;
+}
+
 .eapd-admin-check--collapsed {
   height: auto;
   bottom: auto;

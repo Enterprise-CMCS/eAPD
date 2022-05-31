@@ -35,7 +35,9 @@ import {
   SELECT_APD_SUCCESS,
   SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD,
-  ADMIN_CHECK_TOGGLE
+  ADMIN_CHECK_TOGGLE,
+  ADMIN_CHECK_MINI_TOGGLE,
+  ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
 import { defaultAPDYearOptions, generateKey } from '../../util';
 import initialAssurances from '../../util/regulations';
@@ -325,7 +327,9 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: false
+  adminCheck: false,
+  adminCheckMini: false,
+  adminCheckComplete: false
 };
 
 // eslint-disable-next-line default-param-last
@@ -391,6 +395,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         adminCheck: action.data
+      }
+    }
+    
+    case ADMIN_CHECK_MINI_TOGGLE: {
+      return {
+        ...state,
+        adminCheckMini: action.data
+      }
+    }
+    
+    case ADMIN_CHECK_COMPLETE_TOGGLE: {
+      return {
+        ...state,
+        adminCheckComplete: action.data
       }
     }
 

@@ -17,7 +17,9 @@ import {
   SELECT_APD_REQUEST,
   SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD,
-  ADMIN_CHECK_TOGGLE
+  ADMIN_CHECK_TOGGLE,
+  ADMIN_CHECK_MINI_TOGGLE,
+  ADMIN_CHECK_COMPLETE_TOGGLE
 } from './symbols';
 import { updateBudget } from '../budget';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
@@ -208,5 +210,15 @@ export const deleteApd =
 
 export const toggleAdminCheck = value => dispatch => {
   dispatch({ type: ADMIN_CHECK_TOGGLE, data: value})
+  return null;
+}
+
+export const toggleMiniCheck = value => dispatch => {
+  dispatch({ type: ADMIN_CHECK_MINI_TOGGLE, data: value})
+  return null;
+}
+
+export const toggleAdminCheckComplete = value => dispatch => {
+  dispatch({ type: ADMIN_CHECK_COMPLETE_TOGGLE, data: value})
   return null;
 }
