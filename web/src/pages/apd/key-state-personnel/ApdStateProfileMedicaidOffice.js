@@ -226,7 +226,8 @@ ApdStateProfile.propTypes = {
     medicaidDirector: PropTypes.object,
     medicaidOffice: PropTypes.object,
     keyPersonnel: PropTypes.array
-  }).isRequired
+  }).isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
