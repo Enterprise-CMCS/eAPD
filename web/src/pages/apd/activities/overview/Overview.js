@@ -244,7 +244,7 @@ const mapStateToProps = (state, { activityIndex }) => {
 const mapDispatchToProps = {
   setAlternatives: setActivityAlternatives,
   setDescription: setActivityDescription,
-  setOverview: setActivityOverview,
+  setOverview: setActivityOverview
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityOverview);
