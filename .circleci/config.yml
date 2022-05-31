@@ -187,6 +187,7 @@ workflows:
       - frontend build:
           name: frontend build preview
           env: PRODUCTION
+          web_env: development
           filters:
             branches:
               ignore:
@@ -206,6 +207,7 @@ workflows:
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
+          web_env: production
           filters:
             branches:
               ignore: /.*/
@@ -216,6 +218,7 @@ workflows:
       - frontend build:
           name: frontend build staging
           env: STAGING
+          web_env: staging
           filters:
             branches:
               only:
@@ -589,6 +592,7 @@ jobs:
           working_directory: ~/project/web
           no_output_timeout: 60m
           command: |
+            export WEB_ENV="test"
             STORYBOOK_BUILD_TIMEOUT=1200000 yarn build:storybook
             yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
@@ -703,6 +707,9 @@ jobs:
       env:
         description: The environment being deployed
         type: string
+      web_env:
+        description: The type of environment being deployed
+        type: string
     docker:
       - image: cimg/node:16.15.0
         auth:
@@ -715,7 +722,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: WEB_ENV="${<< parameters.env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: WEB_ENV="${<< parameters.web_env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -758,7 +765,9 @@ jobs:
       - run:
           name: run tests
           working_directory: ~/project/web
-          command: yarn test -- --runInBand
+          command: |
+            export WEB_ENV="test"
+            yarn test -- --runInBand
       - run:
           name: report coverage
           when: always
