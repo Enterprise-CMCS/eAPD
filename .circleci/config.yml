@@ -41,7 +41,7 @@ workflows:
 
   # Workflow to build new AMIs based on the latest gold images weekly
   weekly aws ami builds:
-    triggers:    
+    triggers:
       - schedule:
           cron: '0 0 * * 1' # Mondays at midnight
           filters:
@@ -94,18 +94,18 @@ workflows:
             - backend lint
             - frontend dependency vulnerability scan
             - backend dependency vulnerability scan
-      # - chromatic deployment:
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - gh-pages
-      #       tags:
-      #         ignore: ignore-e2e
-      #     requires:
-      #       - frontend lint
-      #       - backend lint
-      #       - frontend dependency vulnerability scan
-      #       - backend dependency vulnerability scan
+      - chromatic deployment:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+            tags:
+              ignore: ignore-e2e
+          requires:
+            - frontend lint
+            - backend lint
+            - frontend dependency vulnerability scan
+            - backend dependency vulnerability scan
 
       # backend jobs
       - backend api endpoint test:
@@ -236,7 +236,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
-            # - chromatic deployment
+            - chromatic deployment
 
       - frontend deploy:
           name: frontend deploy production
@@ -253,7 +253,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
-            # - chromatic deployment
+            - chromatic deployment
 
       # joint jobs
       - preview deploy:
@@ -319,7 +319,7 @@ jobs:
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             packer build --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var preview_mongo_database=$PREVIEW_MONGO_DATABASE \
               --var preview_mongo_initdb_root_username=$PREVIEW_MONGO_INITDB_ROOT_USERNAME --var preview_mongo_initdb_root_password=$PREVIEW_MONGO_INITDB_ROOT_PASSWORD \
-              --var preview_mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE \
+              --var preview_mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME \
               --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
               preview-ami.pkr.hcl
@@ -489,6 +489,7 @@ jobs:
       - run:
           name: set up environment
           working_directory: ~/project
+          no_output_timeout: 30m
           command: |
             export NODE_ENV=development
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
@@ -500,7 +501,7 @@ jobs:
             export WEB_ENV="test"
 
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose up -d
+            COMPOSE_HTTP_TIMEOUT=150 docker-compose up -d
             docker-compose exec api yarn run migrate
             docker-compose exec api yarn run seed
       - run:
@@ -568,26 +569,29 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
 
-  # chromatic deployment:
-  #   yaml test:
-  #   docker:
-  #     - image: cimg/node:16.15.0
-  #       auth:
-  #         username: $DOCKER_EAPD_UN
-  #         password: $DOCKER_EAPD_PW
-  #   steps:
-  #     - checkout
-  #     - attach_workspace:
-  #         at: ~/project/web
-  #     - run:
-  #         name: Install Web Dependencies
-  #         working_directory: ~/project/web
-  #         command: yarn install --frozen-lockfile
-  #     - run:
-  #         name: Deploy to Chromatic
-  #         working_directory: ~/project/web
-  #         no_output_timeout: 60m
-  #         command: yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} -b build:storybook --ci --exit-once-uploaded --exit-zero-on-changes
+  chromatic deployment:
+    yaml test:
+    docker:
+      - image: cimg/node:16.15.0
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    resource_class: large
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project/web
+      - run:
+          name: Install Web Dependencies
+          working_directory: ~/project/web
+          command: yarn install --frozen-lockfile
+      - run:
+          name: Deploy to Chromatic
+          working_directory: ~/project/web
+          no_output_timeout: 60m
+          command: |
+            STORYBOOK_BUILD_TIMEOUT=1200000 yarn build:storybook
+            yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
   # ===== Backend jobs =====
   # These all depend on "install dependencies" running first.
@@ -802,9 +806,10 @@ jobs:
       - run:
           name: start everything up
           working_directory: ~/project/api
+          no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker-compose -f docker-compose.endpoint-tests.yml up -d
+            COMPOSE_HTTP_TIMEOUT=150 docker-compose -f docker-compose.endpoint-tests.yml up -d
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
       - run:

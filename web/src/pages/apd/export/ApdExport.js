@@ -3,7 +3,7 @@ import { Button } from '@cmsgov/design-system';
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { Redirect, useParams as actualUseParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 
 import { toggleAdminCheck } from '../../../redux/actions/app/apd';
 
@@ -14,7 +14,7 @@ import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 
-const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, useParams, years }) => {
+const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, years }) => {
   const paramApdId = useParams().apdId;
 
   if (!paramApdId) {
@@ -66,13 +66,8 @@ const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, usePa
 
 ExportAndSubmit.propTypes = {
   push: PropTypes.func.isRequired,
-  useParams: PropTypes.func,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
   toggleAdminCheck: PropTypes.func.isRequired
-};
-
-ExportAndSubmit.defaultProps = {
-  useParams: actualUseParams
 };
 
 const mapStateToProps = state => ({

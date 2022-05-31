@@ -1,5 +1,9 @@
+import MockAdapter from 'axios-mock-adapter';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, renderWithConnection, screen } from 'apd-testing-library';
+import axios from '../../../util/api';
+
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 import {
   plain as AffiliationStatus,
@@ -9,6 +13,17 @@ import { AFFILIATION_STATUSES } from '../../../constants';
 
 const { DENIED, REQUESTED, REVOKED } = AFFILIATION_STATUSES;
 
+fetchMock.onGet('/states/ak').reply(200, {
+  stateAdmins: [
+    {
+      email: 'a@email.com'
+    },
+    {
+      email: 'b@email.com'
+    }
+  ]
+});
+
 const initialProps = {
   state: {
     id: 'ak'
@@ -16,42 +31,64 @@ const initialProps = {
   approvalStatus: REQUESTED
 };
 
-// mock useEffect so we don't make an API call
-jest.spyOn(React, 'useEffect').mockImplementation(() => {});
-
-const setup = (props = {}) =>
-  render(<AffiliationStatus {...initialProps} {...props} />);
+const setupAffiliationStatus = ({ approvalStatus = REQUESTED } = {}) =>
+  renderWithConnection(
+    <AffiliationStatus {...initialProps} approvalStatus={approvalStatus} />,
+    {
+      initialState: {
+        user: {
+          data: {
+            state: {
+              id: 'ak'
+            },
+            states: {
+              ak: approvalStatus
+            }
+          }
+        }
+      }
+    }
+  );
 
 describe('<AffiliationStatus />', () => {
   it('displays the eAPD Logo', () => {
-    setup();
+    setupAffiliationStatus();
     expect(screen.getByAltText('eAPD Logo')).toBeInTheDocument();
   });
 
   it('displays the introduction text', () => {
-    setup();
+    setupAffiliationStatus();
     const text = 'The eAPD is designed to help you';
     expect(screen.getByText(text, { exact: false })).toBeInTheDocument();
   });
 
   it('displays the pending message when approvalStatus is REQUESTED', () => {
-    setup();
+    setupAffiliationStatus();
     const text = 'Approval Pending From State Administrator';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
 
   it('displays the denied message when approvalStatus is DENIED', () => {
-    setup({ approvalStatus: DENIED });
+    setupAffiliationStatus({ approvalStatus: DENIED });
     const text = 'Approval Has Been Denied';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
 
   it('displays the revoked message when approvalStatus is REVOKED', () => {
-    setup({ approvalStatus: REVOKED });
+    setupAffiliationStatus({ approvalStatus: REVOKED });
     const text = 'Approval Permissions Revoked';
     expect(screen.getByText(text)).toBeInTheDocument();
   });
 });
+
+const setupApprovalStatus = () =>
+  render(
+    <ApprovalStatus
+      status={REQUESTED}
+      mailTo="em@il.com,admin@mo.gov"
+      administratorType="State"
+    />
+  );
 
 describe('<ApprovalStatus />', () => {
   const requestedStatusOptions = {
@@ -62,26 +99,14 @@ describe('<ApprovalStatus />', () => {
   };
 
   it('displays a mailto link', () => {
-    render(
-      <ApprovalStatus
-        status={REQUESTED}
-        mailTo="em@il.com,admin@mo.gov"
-        administratorType="State"
-      />
-    );
+    setupApprovalStatus();
     const aTag = screen.getByText('State Administrator', { selector: 'a' });
     expect(aTag).toBeInTheDocument();
     expect(aTag.href).toBe('mailto:em@il.com,admin@mo.gov');
   });
 
   it('displays the status text', () => {
-    render(
-      <ApprovalStatus
-        status={REQUESTED}
-        mailTo="em@il.com,admin@mo.gov"
-        administratorType="State"
-      />
-    );
+    setupApprovalStatus();
     const statusText = screen.getByText(requestedStatusOptions.status, {
       selector: 'h3'
     });
@@ -89,13 +114,7 @@ describe('<ApprovalStatus />', () => {
   });
 
   it('displays the img correctly', () => {
-    render(
-      <ApprovalStatus
-        status={REQUESTED}
-        mailTo="em@il.com,admin@mo.gov"
-        administratorType="State"
-      />
-    );
+    setupApprovalStatus();
     const img = screen.getByAltText(requestedStatusOptions.alt);
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute('src', requestedStatusOptions.src);
