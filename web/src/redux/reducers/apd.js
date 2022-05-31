@@ -325,7 +325,7 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: false
+  adminCheck: process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
 };
 
 // eslint-disable-next-line default-param-last
