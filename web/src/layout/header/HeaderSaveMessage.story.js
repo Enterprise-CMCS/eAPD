@@ -9,6 +9,8 @@ export default {
   }
 };
 
+const date = new Date(2020, 0, 1);
+
 const Template = args => <HeaderSaveMessage {...args} />;
 
 export const Saving = Template.bind({});
@@ -20,11 +22,11 @@ Saving.args = {
 export const JustSaved = Template.bind({});
 JustSaved.args = {
   isSaving: false,
-  lastSaved: new Date().toLocaleString()
+  lastSaved: date.toLocaleString()
 };
 
 export const PreviouslySaved = Template.bind({});
 PreviouslySaved.args = {
   isSaving: false,
-  lastSaved: new Date(Date.now() - 1000 * 60 * 3).toLocaleString()
+  lastSaved: new Date(date - 1000 * 60 * 3).toLocaleString()
 };

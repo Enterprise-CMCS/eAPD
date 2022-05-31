@@ -33,7 +33,7 @@ const jwtExtractor = req => {
   const cookieStr = req.headers.cookie || req.get('Cookie');
   // eslint-disable-next-line prefer-regex-literals
   const regex = new RegExp(
-    /(^\/apds\/(\d+)\/files)|(^\/api\/apds\/(\d+)\/files)|(^\/auth\/certifications\/files\/.*)/i
+    /(^\/apds\/([A-Fa-f0-9]+)\/files)|(^\/apds\/([A-Fa-f0-9]+)\/files\/.*)|(^\/auth\/certifications\/files\/.*)/i
   );
 
   if (url && regex.test(url) && cookieStr) {
@@ -49,7 +49,7 @@ const jwtExtractor = req => {
     if (accessTokenObj) {
       // eslint-disable-next-line no-unused-vars
       const value = accessTokenObj.split('=')[1]; // get the value
-      const valueObj = JSON.parse(unescape(value)); // the value is an encoded string, convert it to a json object
+      const valueObj = JSON.parse(decodeURIComponent(value)); // the value is an encoded string, convert it to a json object
       return valueObj.accessToken; // return the access token
     }
   }

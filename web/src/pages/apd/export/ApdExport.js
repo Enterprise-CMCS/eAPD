@@ -3,14 +3,14 @@ import { Button } from '@cmsgov/design-system';
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { Redirect, useParams as actualUseParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 
 import { Section, Subsection } from '../../../components/Section';
 import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 
-const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
+const ExportAndSubmit = ({ push: pushRoute, years }) => {
   const paramApdId = useParams().apdId;
 
   if (!paramApdId) {
@@ -46,12 +46,7 @@ const ExportAndSubmit = ({ push: pushRoute, useParams, years }) => {
 
 ExportAndSubmit.propTypes = {
   push: PropTypes.func.isRequired,
-  useParams: PropTypes.func,
   years: PropTypes.arrayOf(PropTypes.string).isRequired
-};
-
-ExportAndSubmit.defaultProps = {
-  useParams: actualUseParams
 };
 
 const mapStateToProps = state => ({

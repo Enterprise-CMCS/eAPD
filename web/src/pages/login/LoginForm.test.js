@@ -5,22 +5,25 @@ import {
   fireEvent,
   axe
 } from 'apd-testing-library';
+import Router from 'react-router-dom';
 
 import LoginForm from './LoginForm';
 
 const mockGoBack = jest.fn();
 
-jest.mock('react-router-dom', () => {
-  return {
-    useHistory: jest.fn().mockReturnValue({ goBack: () => mockGoBack() })
-  };
-});
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: jest.fn()
+}));
 
 const defaultProps = {
   title: 'test'
 };
 
 const setup = (props = {}) => {
+  jest
+    .spyOn(Router, 'useHistory')
+    .mockReturnValue({ goBack: () => mockGoBack() });
   return renderWithConnection(
     <LoginForm {...defaultProps} {...props}>
       hello world

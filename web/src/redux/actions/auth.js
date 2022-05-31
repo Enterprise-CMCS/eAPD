@@ -123,13 +123,14 @@ const getCurrentUser =
     return response ? response.data : null;
   };
 
-export const logout = () => dispatch => {
-  dispatch(requestLogout());
-  logoutAndClearTokens()
-    .then(() => {
-      dispatch(completeLogout());
-    })
-    .catch(() => {});
+export const logout = () => async dispatch => {
+  try {
+    dispatch(requestLogout());
+    await logoutAndClearTokens();
+    dispatch(completeLogout());
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const extendSession = () => async dispatch => {
