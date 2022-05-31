@@ -101,7 +101,7 @@ nvm alias default 16.15.0
 # This is what'll manage running the API Node app. It'll keep it alive and make
 # sure it's running when the EC2 instance restarts.
 npm i -g pm2
-npm i -g yarn@1.22.18
+npm i -g yarn@1.22.19
 
 # Get the built API code
 cd /app

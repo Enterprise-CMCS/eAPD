@@ -5,11 +5,12 @@ WORKDIR /app
 
 ADD package.json .
 ADD yarn.lock .
-ADD web/package.json ./web/
-ADD common/package.json ./common/
+ADD web ./web
+ADD common ./common
 
 RUN chown -R node:node /app
 USER node:node
+
 RUN yarn install --pure-lockfile --non-interactive
 
 WORKDIR /app/web

@@ -95,7 +95,7 @@ source ~/.bashrc
 # We're using Node 16.15.0, we care about minor/patch versions
 nvm install 16.15.0
 nvm alias default 16.15.0
-npm i -g yarn@1.22.18
+npm i -g yarn@1.22.19
 
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git

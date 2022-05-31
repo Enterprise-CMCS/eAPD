@@ -18,5 +18,5 @@
   "dependencies": {
     "joi": "17.6.0"
   },
-  "packageManager": "yarn@1.22.18"
+  "packageManager": "yarn@1.22.19"
 }
