@@ -55,8 +55,11 @@ describe('<ApdStateProfileMedicaidOffice />', () => {
 
   describe('apd state profile, Medicaid office component', () => {
     it('renders correctly', async () => {
-      console.log = jest.fn();
-        log('lol')
-      });
+      setup(
+        {
+          initialState
+        }
+      );
     })
+  })
 })
