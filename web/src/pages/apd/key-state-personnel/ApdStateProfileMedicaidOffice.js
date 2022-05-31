@@ -1,6 +1,6 @@
 import { Dropdown, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -14,8 +14,10 @@ import {
   setMedicaidOfficeAddress2,
   setMedicaidOfficeCity,
   setMedicaidOfficeState,
-  setMedicaidOfficeZip
+  setMedicaidOfficeZip,
+  toggleAdmin
 } from '../../../redux/actions/editApd';
+import { toggleAdminCheck } from '../../../redux/actions/app';
 import { t } from '../../../i18n';
 import { selectKeyStatePersonnel } from '../../../redux/selectors/apd.selectors';
 import { selectState } from '../../../redux/reducers/user';
@@ -72,12 +74,15 @@ const ApdStateProfile = ({
   setCity,
   setState,
   setZip,
-  keyStatePersonnel
+  keyStatePersonnel,
+  toggleAdmin,
+  adminCheck
 }) => {
   const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
 
   const {
     control,
+    trigger,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -94,10 +99,18 @@ const ApdStateProfile = ({
         zip: medicaidOffice.zip
       }
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
     resolver: joiResolver(keyStatePersonnelSchema)
   });
+
+  useEffect(() => {
+    toggleAdmin(false);
+  }, []);
+
+  useEffect(() => {
+    if(adminCheck) {
+      trigger();
+    }
+  }, []);
 
   return (
     <Fragment>
@@ -108,11 +121,10 @@ const ApdStateProfile = ({
         <Controller
           name='medicaidDirector.name'
           control={control}
-          render={({ field: { onChange, onBlur, ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
               label={t(`${dirTRoot}.labels.name`)}
-              onBlur={onBlur}
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setName(value);
@@ -125,11 +137,10 @@ const ApdStateProfile = ({
         <Controller
           name='medicaidDirector.email'
           control={control}
-          render={({ field: { onChange, onBlur, ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
               label={t(`${dirTRoot}.labels.email`)}
-              onBlur={onBlur}
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setEmail(value);
@@ -142,11 +153,10 @@ const ApdStateProfile = ({
         <Controller
           name='medicaidDirector.phone'
           control={control}
-          render={({ field: { onChange, onBlur, ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
               label={t(`${dirTRoot}.labels.phone`)}
-              onBlur={onBlur}
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setPhone(value);
@@ -165,11 +175,10 @@ const ApdStateProfile = ({
         <Controller
           name='medicaidOffice.address1'
           control={control}
-          render={({ field: { onChange, onBlur, ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
               label={t(`${offTRoot}.labels.address1`)}
-              onBlur={onBlur}
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setAddress1(value);
@@ -192,11 +201,10 @@ const ApdStateProfile = ({
           <Controller
             name='medicaidOffice.city'
             control={control}
-            render={({ field: { onChange, onBlur, ...props } }) => (
+            render={({ field: { onChange, ...props } }) => (
               <TextField
                 {...props}
                 label={t(`${offTRoot}.labels.city`)}
-                onBlur={onBlur}
                 value={medicaidOffice.city}
                 className="ds-l-col--6"
                 onChange={({ target: { value } }) => {
@@ -227,11 +235,10 @@ const ApdStateProfile = ({
         <Controller
           name='medicaidOffice.zip'
           control={control}
-          render={({ field: { onChange, onBlur, ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
               label={t(`${offTRoot}.labels.zip`)}
-              onBlur={onBlur}
               value={medicaidOffice.zip}
               mask="zip"
               onChange={({ target: { value } }) => {
@@ -262,12 +269,14 @@ ApdStateProfile.propTypes = {
     medicaidDirector: PropTypes.object,
     medicaidOffice: PropTypes.object,
     keyPersonnel: PropTypes.array
-  }).isRequired
+  }).isRequired,
+  toggleAdmin: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   defaultStateID: selectState(state).id,
-  keyStatePersonnel: selectKeyStatePersonnel(state)
+  keyStatePersonnel: selectKeyStatePersonnel(state),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
@@ -278,7 +287,8 @@ const mapDispatchToProps = {
   setAddress2: setMedicaidOfficeAddress2,
   setCity: setMedicaidOfficeCity,
   setState: setMedicaidOfficeState,
-  setZip: setMedicaidOfficeZip
+  setZip: setMedicaidOfficeZip,
+  toggleAdmin: toggleAdminCheck
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdStateProfile);
