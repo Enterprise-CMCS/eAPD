@@ -93,7 +93,8 @@ NameAndFundingSourceForm.propTypes = {
     name: PropTypes.string.isRequired
   }).isRequired,
   setFundingSource: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired
+  setName: PropTypes.func.isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

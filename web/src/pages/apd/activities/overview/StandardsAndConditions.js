@@ -94,7 +94,6 @@ const StandardsAndConditions = ({
   const {
     control,
     formState: { errors },
-    getFieldState,
     trigger
   } = useForm({
     defaultValues: {
@@ -178,7 +177,8 @@ StandardsAndConditions.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
   setSupport: PropTypes.func.isRequired,
-  setDoesNotSupport: PropTypes.func.isRequired
+  setDoesNotSupport: PropTypes.func.isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, props) => ({
