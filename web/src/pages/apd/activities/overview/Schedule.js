@@ -76,7 +76,10 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
                   onChange={(_, dateStr) => {
                     setEndDate(activityIndex, dateStr);
                     onChange(dateStr);
-                    trigger();
+
+                    if (adminCheck) {
+                      trigger();
+                    }
                   }}
                   onComponentBlur={() => {
                     onBlur();

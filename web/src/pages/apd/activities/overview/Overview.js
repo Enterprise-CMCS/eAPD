@@ -146,7 +146,10 @@ const ActivityOverview = ({
               onSync={html => {
                 setOverview(activityIndex, html);
                 onChange(html);
-                trigger();
+
+                if (adminCheck) {
+                  trigger();
+                }
               }}
               editorClassName="rte-textarea-l"
             />
@@ -187,7 +190,10 @@ const ActivityOverview = ({
               onSync={html => {
                 setDescription(activityIndex, html);
                 onChange(html);
-                trigger();
+
+                if (adminCheck) {
+                  trigger();
+                }
               }}
               editorClassName="rte-textarea-l"
             />
