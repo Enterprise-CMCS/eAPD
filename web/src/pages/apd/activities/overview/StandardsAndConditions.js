@@ -88,7 +88,7 @@ const StandardsAndConditions = ({
 }) => {
   StandardsAndConditions.displayName = 'StandardsAndConditions';
 
-  const { doesNotSupport = null, supports = null } =
+  const { doesNotSupport = '', supports = '' } =
     activity.standardsAndConditions;
 
   const {
@@ -155,12 +155,13 @@ const StandardsAndConditions = ({
         <Controller
           name="doesNotSupport"
           control={control}
-          render={({ field: { onChange, ...props } }) => (
+          value={activity.standardsAndConditions.doesNotSupport}
+          render={({ field: { onChange, value, ...props }}) => (
             <TextArea
               {...props}
               label="If this activity does not support the Medicaid standards and conditions, please explain."
               id="activity-set-standards-and-conditions-non-support"
-              onChange={({ target: { value } }) => {
+              onChange={(value) => {
                 setDoesNotSupport(activityIndex, value);
                 onChange(value);
 
@@ -170,7 +171,6 @@ const StandardsAndConditions = ({
               }}
               rows={6}
               style={{ maxWidth: 'initial' }}
-              value={activity.standardsAndConditions.doesNotSupport}
               errorMessage={errors?.doesNotSupport?.message}
               errorPlacement="bottom"
             />
