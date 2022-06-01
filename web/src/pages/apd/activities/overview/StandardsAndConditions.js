@@ -140,6 +140,7 @@ const StandardsAndConditions = ({
             onSync={html => {
               setSupport(activityIndex, html);
               onChange(html);
+              trigger();
             }}
             editorClassName="rte-textarea-1"
             error={errors?.supports?.message}
@@ -159,6 +160,7 @@ const StandardsAndConditions = ({
               onChange={({ target: { value } }) => {
                 setDoesNotSupport(activityIndex, value);
                 onChange(value);
+                trigger();
               }}
               rows={6}
               style={{ maxWidth: 'initial' }}

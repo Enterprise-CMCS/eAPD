@@ -56,6 +56,7 @@ const NameAndFundingSourceForm = ({
             onChange={({ target: { value } }) => {
               onChange(value);
               setName(index, value);
+              trigger();
             }}
             className="remove-clearfix"
             errorMessage={errors?.name?.message}
@@ -75,6 +76,7 @@ const NameAndFundingSourceForm = ({
             onChange={({ target: { value } }) => {
               onChange(value);
               setFundingSource(index, value);
+              trigger();
             }}
             type="radio"
             errorMessage={errors?.fundingSource?.message}

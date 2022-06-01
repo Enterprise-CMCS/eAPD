@@ -53,6 +53,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
                 onChange={(_, dateStr) => {
                   setStartDate(activityIndex, dateStr);
                   onChange(dateStr);
+                  trigger();
                 }}
                 onComponentBlur={() => {
                   onBlur();
@@ -75,6 +76,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
                   onChange={(_, dateStr) => {
                     setEndDate(activityIndex, dateStr);
                     onChange(dateStr);
+                    trigger();
                   }}
                   onComponentBlur={() => {
                     onBlur();
