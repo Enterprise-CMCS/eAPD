@@ -132,11 +132,11 @@ const StandardsAndConditions = ({
       <Controller
         name="supports"
         control={control}
-        render={({ field: { onChange } }) => (
+        render={({ field: { onChange, value } }) => (
           <RichText
             id="standards-and-conditions-supports-field"
             data-testid="standards-and-conditions-supports"
-            content={activity.standardsAndConditions.supports}
+            content={value}
             onSync={html => {
               setSupport(activityIndex, html);
               onChange(html);
@@ -161,7 +161,7 @@ const StandardsAndConditions = ({
               {...props}
               label="If this activity does not support the Medicaid standards and conditions, please explain."
               id="activity-set-standards-and-conditions-non-support"
-              onChange={(value) => {
+              onChange={({ target: { value } }) => {
                 setDoesNotSupport(activityIndex, value);
                 onChange(value);
 
@@ -169,6 +169,7 @@ const StandardsAndConditions = ({
                   trigger();
                 }
               }}
+              value={value}
               rows={6}
               style={{ maxWidth: 'initial' }}
               errorMessage={errors?.doesNotSupport?.message}
