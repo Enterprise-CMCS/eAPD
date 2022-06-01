@@ -5,35 +5,35 @@ export const testDefaultKeyStatePersonnel = () => {
     cy.url().should('contain', '/state-profile');
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
 
-    cy.get('input[name="apd-state-profile-mdname"]')
+    cy.get('input[name="medicaidDirector.name"]')
       .clear()
       .should('have.text', '');
 
-    cy.get('input[name="apd-state-profile-mdemail"]')
+    cy.get('input[name="medicaidDirector.email"]')
       .clear()
       .should('have.text', '');
 
-    cy.get('input[name="apd-state-profile-mdphone"]')
+    cy.get('input[name="medicaidDirector.phone"]')
       .clear()
       .should('have.text', '');
 
-    cy.get('input[name="apd-state-profile-addr1"]')
+    cy.get('input[name="medicaidOffice.address1"]')
       .clear()
       .should('have.text', '');
 
-    cy.get('input[name="apd-state-profile-addr2"]')
+    cy.get('input[name="medicaidOffice.address2"]')
       .clear()
       .should('have.text', '');
 
-    cy.get('input[name="apd-state-profile-city"]')
+    cy.get('input[name="medicaidOffice.city"]')
       .clear()
       .should('have.text', '');
 
-    cy.get('input[name="apd-state-profile-zip"]')
+    cy.get('input[name="medicaidOffice.zip"]')
       .clear()
       .should('have.text', '');
 
-    cy.get('select[name="apd-state-profile-state"]')
+    cy.get('select[name="medicaidOffice.state"]')
       .invoke('val', '')
       .trigger('change');
 
@@ -75,35 +75,35 @@ export const testKeyStatePersonnelWithData = years => {
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
 
     cy.fixture('users').then(userData => {
-      cy.get('input[name="apd-state-profile-mdname"]')
+      cy.get('input[name="medicaidDirector.name"]')
         .clear()
         .type(userData[0].name);
 
-      cy.get('input[name="apd-state-profile-mdemail"]')
+      cy.get('input[name="medicaidDirector.email"]')
         .clear()
         .type(userData[0].email);
 
-      cy.get('input[name="apd-state-profile-mdphone"]')
+      cy.get('input[name="medicaidDirector.phone"]')
         .clear()
         .type(userData[0].phone);
 
-      cy.get('input[name="apd-state-profile-addr1"]')
+      cy.get('input[name="medicaidOffice.address1"]')
         .clear()
         .type(userData[0].address.street);
 
-      cy.get('input[name="apd-state-profile-addr2"]')
+      cy.get('input[name="medicaidOffice.address2"]')
         .clear()
         .type(userData[0].address.suite);
 
-      cy.get('input[name="apd-state-profile-city"]')
+      cy.get('input[name="medicaidOffice.city"]')
         .clear()
         .type(userData[0].address.city);
 
-      cy.get('input[name="apd-state-profile-zip"]')
+      cy.get('input[name="medicaidOffice.zip"]')
         .clear()
         .type(userData[0].address.zipcode);
 
-      cy.get('select[name="apd-state-profile-state"]')
+      cy.get('input[name="medicaidOffice.state"]')
         .invoke('val', 'AL')
         .trigger('change');
 
