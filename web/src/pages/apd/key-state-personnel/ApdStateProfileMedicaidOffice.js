@@ -85,6 +85,10 @@ const ApdStateProfile = ({
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setName(value);
+
+                if(adminCheck) {
+                  trigger();
+                }
               }}
               errorMessage={errors?.medicaidDirector?.name?.message}
               errorPlacement="bottom"
@@ -101,6 +105,10 @@ const ApdStateProfile = ({
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setEmail(value);
+
+                if(adminCheck) {
+                  trigger();
+                }
               }}
               errorMessage={errors?.medicaidDirector?.email?.message}
               errorPlacement="bottom"
@@ -117,6 +125,10 @@ const ApdStateProfile = ({
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setPhone(value);
+
+                if(adminCheck) {
+                  trigger();
+                }
               }}
               errorMessage={errors?.medicaidDirector?.phone?.message}
               errorPlacement="bottom"
@@ -139,6 +151,10 @@ const ApdStateProfile = ({
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setAddress1(value);
+
+                if(adminCheck) {
+                  trigger();
+                }
               }}
               errorMessage={errors?.medicaidOffice?.address1?.message}
               errorPlacement="bottom"
@@ -165,8 +181,12 @@ const ApdStateProfile = ({
                 value={medicaidOffice.city}
                 className="ds-l-col--6"
                 onChange={({ target: { value } }) => {
-                  onChange(value)
+                  onChange(value);
                   setCity(value);
+
+                  if(adminCheck) {
+                    trigger();
+                  }
                 }}
                 errorMessage={errors?.medicaidOffice?.city?.message}
                 errorPlacement="bottom"
@@ -181,6 +201,10 @@ const ApdStateProfile = ({
               value={medicaidOffice.state || defaultStateID}
               onChange={({ target: value }) => {
                 setState(value)
+
+                if(adminCheck) {
+                  trigger();
+                }
               }}
               options={STATES.map(({ id, name }) => ({
                 label: name,
@@ -201,6 +225,10 @@ const ApdStateProfile = ({
               onChange={({ target: { value } }) => {
                 onChange(value);
                 setZip(value);
+
+                if(adminCheck) {
+                  trigger();
+                }
               }}
               errorMessage={errors?.medicaidOffice?.zip?.message}
               errorPlacement="bottom"
