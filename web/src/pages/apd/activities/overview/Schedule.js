@@ -15,7 +15,13 @@ import { stateDateToDisplay } from '../../../../util';
 
 import scheduleSchema from '../../../../static/schemas/plannedActivityShedule';
 
-const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
+const Schedule = ({ 
+    activity,
+    activityIndex,
+    setEndDate,
+    setStartDate,
+    adminCheck
+  }) => {
   Schedule.displayName = 'Schedule';
 
   const { plannedStartDate, plannedEndDate } = activity;
@@ -53,6 +59,7 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
                 onChange={(_, dateStr) => {
                   setStartDate(activityIndex, dateStr);
                   onChange(dateStr);
+                  trigger();
                 }}
                 onComponentBlur={() => {
                   onBlur();
@@ -75,6 +82,10 @@ const Schedule = ({ activity, activityIndex, setEndDate, setStartDate }) => {
                   onChange={(_, dateStr) => {
                     setEndDate(activityIndex, dateStr);
                     onChange(dateStr);
+
+                    if (adminCheck) {
+                      trigger();
+                    }
                   }}
                   onComponentBlur={() => {
                     onBlur();
@@ -108,11 +119,13 @@ Schedule.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
   setEndDate: PropTypes.func.isRequired,
-  setStartDate: PropTypes.func.isRequired
+  setStartDate: PropTypes.func.isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  activity: selectActivityByIndex(state, { activityIndex })
+  activity: selectActivityByIndex(state, { activityIndex }),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {

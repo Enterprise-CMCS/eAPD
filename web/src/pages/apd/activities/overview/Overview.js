@@ -1,6 +1,6 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment, useEffect, useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -25,7 +25,8 @@ const ActivityOverview = ({
   activityIndex,
   setAlternatives,
   setDescription,
-  setOverview
+  setOverview,
+  adminCheck
 }) => {
   ActivityOverview.displayName = 'ActivityOverview';
 
@@ -33,6 +34,7 @@ const ActivityOverview = ({
 
   const {
     control,
+    trigger,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -40,10 +42,14 @@ const ActivityOverview = ({
       description: description,
       summary: summary
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
     resolver: joiResolver(overviewSchema)
   });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    };
+  }, []);
 
   const overviewLabel = useMemo(
     () =>
@@ -133,16 +139,19 @@ const ActivityOverview = ({
         <Controller
           name="summary"
           control={control}
-          render={({ field: { onChange, onBlur } }) => (
+          render={({ field: { onChange } }) => (
             <RichText
               id="activity-short-overview-field"
               content={summary}
               onSync={html => {
                 setOverview(activityIndex, html);
                 onChange(html);
+
+                if (adminCheck) {
+                  trigger();
+                }
               }}
               editorClassName="rte-textarea-l"
-              onBlur={onBlur}
             />
           )}
         />
@@ -172,7 +181,7 @@ const ActivityOverview = ({
         <Controller
           name="description"
           control={control}
-          render={({ field: { onChange, onBlur, props } }) => (
+          render={({ field: { onChange, props } }) => (
             <RichText
               {...props}
               id="activity-description-field"
@@ -181,8 +190,11 @@ const ActivityOverview = ({
               onSync={html => {
                 setDescription(activityIndex, html);
                 onChange(html);
+
+                if (adminCheck) {
+                  trigger();
+                }
               }}
-              onBlur={onBlur}
               editorClassName="rte-textarea-l"
             />
           )}
@@ -226,12 +238,14 @@ ActivityOverview.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   setAlternatives: PropTypes.func.isRequired,
   setDescription: PropTypes.func.isRequired,
-  setOverview: PropTypes.func.isRequired
+  setOverview: PropTypes.func.isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => {
   return {
-    activity: selectActivityByIndex(state, { activityIndex })
+    activity: selectActivityByIndex(state, { activityIndex }),
+    adminCheck: state.apd.adminCheck
   };
 };
 

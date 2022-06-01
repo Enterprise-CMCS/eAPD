@@ -325,7 +325,7 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: false
+  adminCheck: process.env.WEB_ENV !== 'production'
 };
 
 // eslint-disable-next-line default-param-last
@@ -385,6 +385,13 @@ const reducer = (state = initialState, action) => {
     case REMOVE_APD_YEAR: {
       const patches = getPatchesToRemoveYear(state, action.value);
       return { ...state, data: applyPatch(state.data, patches) };
+    }
+    
+    case ADMIN_CHECK_TOGGLE: {
+      return {
+        ...state,
+        adminCheck: action.data
+      }
     }
 
     case ADMIN_CHECK_TOGGLE: {

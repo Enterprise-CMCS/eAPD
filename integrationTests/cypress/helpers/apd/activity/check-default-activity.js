@@ -61,7 +61,7 @@ export const checkDefaultActivity = years => {
       activityPage.checkTinyMCE('activity-description-field', '');
       activityPage.checkTinyMCE('activity-alternatives-field', '');
       activityPage.checkTinyMCE('standards-and-conditions-supports-field', '');
-      activityPage.checkTextField('ds-c-field visibility--screen', '');
+      activityPage.checkTextField('ds-c-field ds-c-field--error visibility--screen', '');
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
