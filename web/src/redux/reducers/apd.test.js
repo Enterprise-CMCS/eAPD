@@ -80,7 +80,9 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: false,
+      adminCheckMini: false,
+      adminCheckComplete: false
     });
   });
 
@@ -92,7 +94,9 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: false,
+      adminCheckMini: false,
+      adminCheckComplete: false
     });
   });
 
@@ -137,7 +141,9 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: true,
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: false,
+      adminCheckMini: false,
+      adminCheckComplete: false
     };
 
     expect(
@@ -158,7 +164,9 @@ describe('APD reducer', () => {
       loaded: false,
       error: 'some error',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: false,
+      adminCheckMini: false,
+      adminCheckComplete: false
     });
   });
 
