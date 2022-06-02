@@ -103,7 +103,7 @@ export const testKeyStatePersonnelWithData = years => {
         .clear()
         .type(userData[0].address.zipcode);
 
-      cy.get('input[name="medicaidOffice.state"]')
+      cy.get('select[name="medicaidOffice.state"]')
         .invoke('val', 'AL')
         .trigger('change');
 
