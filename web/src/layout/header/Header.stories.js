@@ -2,7 +2,7 @@ import React from 'react';
 import { plain as Header } from './Header';
 
 export default {
-  title: 'Header',
+  title: 'Layout/Header/Header',
   component: Header,
   parameters: {
     jest: ['Header.test.js']

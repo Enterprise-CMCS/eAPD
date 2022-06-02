@@ -2,7 +2,7 @@ import React from 'react';
 import LoginGroupError from './LoginGroupError';
 
 export default {
-  title: 'LoginGroupError',
+  title: 'Pages/Login/LoginGroupError',
   component: LoginGroupError,
   parameters: {
     jest: ['LoginGroupError.test.js']

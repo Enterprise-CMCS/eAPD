@@ -3,7 +3,7 @@ import React from 'react';
 import { ApprovalStatus } from './AffiliationStatus';
 
 export default {
-  title: 'Affiliation Status',
+  title: 'Pages/Dashboard/Affiliation Status',
   component: ApprovalStatus,
   parameters: {
     jest: ['AffiliationStatus.test.js']

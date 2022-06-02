@@ -1,9 +1,9 @@
 import React from 'react';
 import LoginForm from './LoginForm';
-import * as CardFormStory from '../../components/CardForm.story';
+import * as CardFormStory from '../../components/CardForm.stories';
 
 export default {
-  title: 'LoginForm',
+  title: 'Pages/Login/LoginForm',
   component: LoginForm,
   decorators: CardFormStory.decorators,
   parameters: {

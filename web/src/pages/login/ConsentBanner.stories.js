@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import ConsentBanner from './ConsentBanner';
 
 export default {
-  title: 'ConsentBanner',
+  title: 'Pages/Login/ConsentBanner',
   component: ConsentBanner,
   parameters: {
     jest: ['ConsentBanner.test.js']

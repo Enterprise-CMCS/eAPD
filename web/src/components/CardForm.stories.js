@@ -16,10 +16,10 @@ export const { history, decorators } = decoratorWithProviderAndRouter({
 });
 
 export default {
-  title: 'CardForm',
+  title: 'Components/CardForm',
   component: CardForm,
   decorators,
-  excludeStories: ['Form', 'Footer', 'history', 'decorators'],
+  includeStories: /.*Story$/,
   parameters: {
     jest: ['CardForm.test.js']
   }
@@ -49,9 +49,14 @@ export const Footer = () => (
   <p className="ds-u-padding-top--2">This is a footer</p>
 );
 
-export const Basic = args => <CardForm {...args} />;
+const Template = args => (
+  <CardForm {...args}>
+    <Form />
+  </CardForm>
+);
 
-Basic.args = {
+export const BasicFormStory = Template.bind({});
+BasicFormStory.args = {
   cancelable: true,
   canSubmit: true,
   success: false,
@@ -63,19 +68,8 @@ Basic.args = {
   onSave: action('onSave')
 };
 
-const Template = args => (
-  <CardForm {...args}>
-    <Form />
-  </CardForm>
-);
-
-export const TextField = Template.bind({});
-TextField.args = {
-  ...Basic.args
-};
-
-export const TextFieldWithFooter = Template.bind({});
-TextFieldWithFooter.args = {
-  ...Basic.args,
+export const FormWithFooterStory = Template.bind({});
+FormWithFooterStory.args = {
+  ...BasicFormStory.args,
   footer: <Footer />
 };

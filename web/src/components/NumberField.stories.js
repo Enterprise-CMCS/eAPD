@@ -4,8 +4,9 @@ import { action } from '@storybook/addon-actions';
 import NumberField from './NumberField';
 
 export default {
-  title: 'NumberField',
+  title: 'Components/NumberField',
   components: NumberField,
+  includeStories: /.*Story$/,
   parameters: {
     jest: ['NumberField.test.js']
   },
@@ -18,8 +19,8 @@ export default {
 
 const Template = args => <NumberField {...args} />;
 
-export const Basic = Template.bind({});
-Basic.args = {
+export const DefaultStory = Template.bind({});
+DefaultStory.args = {
   mask: null,
   min: null,
   round: false,
@@ -28,31 +29,31 @@ Basic.args = {
   onChange: action('onChange')
 };
 
-export const Currency = Template.bind({});
-Currency.args = {
-  ...Basic.args,
+export const CurrencyStory = Template.bind({});
+CurrencyStory.args = {
+  ...DefaultStory.args,
   mask: 'currency',
   min: 0,
   value: '100'
 };
 
-export const Phone = Template.bind({});
-Phone.args = {
-  ...Basic.args,
+export const PhoneStory = Template.bind({});
+PhoneStory.args = {
+  ...DefaultStory.args,
   mask: 'phone',
   value: '5555555555'
 };
 
-export const SSN = Template.bind({});
-SSN.args = {
-  ...Basic.args,
+export const SSNStory = Template.bind({});
+SSNStory.args = {
+  ...DefaultStory.args,
   mask: 'ssn',
   value: '123456789'
 };
 
-export const Zip = Template.bind({});
-Zip.args = {
-  ...Basic.args,
+export const ZipStory = Template.bind({});
+ZipStory.args = {
+  ...DefaultStory.args,
   mask: 'zip',
   value: '123456789'
 };

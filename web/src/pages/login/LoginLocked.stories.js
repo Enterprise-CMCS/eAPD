@@ -2,7 +2,7 @@ import React from 'react';
 import LoginLocked from './LoginLocked';
 
 export default {
-  title: 'LoginLocked',
+  title: 'Pages/Login/LoginLocked',
   component: LoginLocked,
   parameters: {
     jest: ['LoginLocked.test.js']

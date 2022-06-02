@@ -1,9 +1,9 @@
 import React from 'react';
 import AuthenticationForm from './AuthenticationForm';
-import * as CardFormStory from '../../components/CardForm.story';
+import * as CardFormStory from '../../components/CardForm.stories';
 
 export default {
-  title: 'AuthenticationForm',
+  title: 'Pages/Login/AuthenticationForm',
   component: AuthenticationForm,
   decorators: CardFormStory.decorators,
   parameters: {

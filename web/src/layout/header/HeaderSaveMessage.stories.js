@@ -2,7 +2,7 @@ import React from 'react';
 import { plain as HeaderSaveMessage } from './HeaderSaveMessage';
 
 export default {
-  title: 'Header Save Message',
+  title: 'Layout/Header/Header Save Message',
   component: HeaderSaveMessage,
   parameters: {
     jest: ['HeaderSaveMessage.test.js']

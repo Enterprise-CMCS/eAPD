@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import ManageRoleDialog from './ManageRoleDialog';
 
 export default {
-  title: 'ManageRoleDialog',
+  title: 'Pages/Admin/ManageRoleDialog',
   component: ManageRoleDialog,
   parameters: {
     jest: ['ManageRoleDialog.test.js']

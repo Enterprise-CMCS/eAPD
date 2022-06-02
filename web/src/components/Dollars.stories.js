@@ -2,8 +2,9 @@ import React from 'react';
 import Dollars from './Dollars';
 
 export default {
-  title: 'Dollars',
+  title: 'Components/Dollars',
   component: Dollars,
+  includeStories: /.*Story$/,
   parameters: {
     jest: ['Dollars.test.js']
   },
@@ -16,4 +17,5 @@ export default {
 
 const Template = args => <Dollars {...args} />;
 
-export const Basic = Template.bind({});
+export const DefaultStory = Template.bind({});
+DefaultStory.args = {};
