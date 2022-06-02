@@ -40,7 +40,7 @@ services:
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
-      - WEB_ENV=${WEB_ENV:-dev}
+      - WEB_ENV=${WEB_ENV:-development}
     volumes:
       - type: bind
         source: ./web
