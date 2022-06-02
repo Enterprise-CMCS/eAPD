@@ -41,8 +41,6 @@ source "amazon-ebs" "Golden_Image" {
 build {
     sources = ["source.amazon-ebs.Golden_Image"]
 
-
-
     provisioner "shell" {
         environment_vars = [
             "MONGO_DATABASE=${var.mongo_database}",
