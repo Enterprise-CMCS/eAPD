@@ -13,6 +13,23 @@ export default {
 
 export const Template = args => <Header {...args} />;
 
+// auth: {
+//   authenticated: false,
+//   error: null,
+//   fetching: false,
+//   initialCheck: true,
+//   hasEverLoggedOn: true,
+//   factorsList: [],
+//   mfaPhoneNumber: '',
+//   mfaEnrollType: '',
+//   verifyData: {},
+//   latestActivity: null,
+//   isLoggingOut: false,
+//   isSessionEnding: false,
+//   isExtendingSession: false,
+//   expiresAt: null
+// }
+
 export const UnauthenticatedUserStory = Template.bind({});
 UnauthenticatedUserStory.decorators = [
   story =>
@@ -21,7 +38,19 @@ UnauthenticatedUserStory.decorators = [
         auth: {
           authenticated: false
         },
-        user: null,
+        user: {
+          data: {
+            id: '',
+            email: '',
+            name: '',
+            position: '',
+            phone: '',
+            state: ''
+          },
+          fetching: false,
+          loaded: false,
+          error: false
+        },
         router: {
           location: {
             pathname: '/'
