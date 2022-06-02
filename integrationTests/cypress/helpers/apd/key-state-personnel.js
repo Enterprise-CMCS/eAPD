@@ -104,7 +104,7 @@ export const testKeyStatePersonnelWithData = years => {
         .type(userData[0].address.zipcode);
 
       cy.get('select[name="medicaidOffice.state"]')
-        .invoke('val', 'AL')
+        .select('AL')
         .trigger('change');
 
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
