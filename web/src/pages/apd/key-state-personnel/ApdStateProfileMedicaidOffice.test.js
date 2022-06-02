@@ -1,26 +1,11 @@
 import React from 'react';
 import {
   renderWithConnection,
-  act,
-  screen,
-  within,
-  waitFor,
-  fireEvent
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
 import axios from '../../../util/api';
 import ApdStateProfileMedicaidOffice from './ApdStateProfileMedicaidOffice';
-import {
-  setMedicaidDirectorEmail,
-  setMedicaidDirectorName,
-  setMedicaidDirectorPhoneNumber,
-  setMedicaidOfficeAddress1,
-  setMedicaidOfficeAddress2,
-  setMedicaidOfficeCity,
-  setMedicaidOfficeState,
-  setMedicaidOfficeZip
-} from '../../../redux/actions/editApd';
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
