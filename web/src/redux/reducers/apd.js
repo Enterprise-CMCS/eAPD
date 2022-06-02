@@ -394,13 +394,6 @@ const reducer = (state = initialState, action) => {
       }
     }
 
-    case ADMIN_CHECK_TOGGLE: {
-      return {
-        ...state,
-        adminCheck: action.data
-      }
-    }
-
     case CREATE_APD_SUCCESS:
       return u(
         {
