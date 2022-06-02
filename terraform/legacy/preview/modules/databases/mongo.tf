@@ -17,8 +17,9 @@ resource "aws_instance" "eapd_mongo" {
     vpc_security_group_ids      = ["sg-0bc99618daf4cd5da"]
     subnet_id                   = var.subnet_id
     key_name                    = "eapd_bbrooks"
-#    user_data                   = "../../../bin/prod-deploy/aws.user-data.sh"
-    associate_public_ip_address = true #This is a preview resource, should be moved to preview Terraform
+    associate_public_ip_address = true # False in Staging & Prod
+    disable_api_termination = false # True in Prod
+
     tags = {
         Name = var.instance_name
         Environment = "Preview"
@@ -27,7 +28,6 @@ resource "aws_instance" "eapd_mongo" {
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
         Terraform = "True"
     }
-    disable_api_termination = false # True in Prod
 
     connection {
         type = "ssh"
