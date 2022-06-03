@@ -76,7 +76,7 @@ const ApdStateProfile = ({
           {titleCase(t(`${dirTRoot}.title`))}
         </legend>
         <Controller
-          name='medicaidDirector.name'
+          name='medicaidDirector-name'
           control={control}
           render={({ field: { onChange, ...props } }) => (
             <TextField
@@ -96,7 +96,7 @@ const ApdStateProfile = ({
           )}
         />
         <Controller
-          name='medicaidDirector.email'
+          name='medicaidDirector-email'
           control={control}
           render={({ field: { onChange, ...props } }) => (
             <TextField
@@ -116,7 +116,7 @@ const ApdStateProfile = ({
           )}
         />
         <Controller
-          name='medicaidDirector.phone'
+          name='medicaidDirector-phone'
           control={control}
           render={({ field: { onChange, ...props } }) => (
             <TextField
@@ -142,7 +142,7 @@ const ApdStateProfile = ({
           {titleCase(t(`${offTRoot}.title`))}
         </legend>
         <Controller
-          name='medicaidOffice.address1'
+          name='medicaidOffice-address1'
           control={control}
           render={({ field: { onChange, ...props } }) => (
             <TextField
@@ -162,7 +162,7 @@ const ApdStateProfile = ({
           )}
         />
         <TextField
-          name='medicaidOffice.address2'
+          name='medicaidOffice-address2'
           label={t(`${offTRoot}.labels.address2`)}
           hint="Optional"
           value={medicaidOffice.address2}
@@ -172,7 +172,7 @@ const ApdStateProfile = ({
         />
         <div className="ds-l-row">
           <Controller
-            name='medicaidOffice.city'
+            name='medicaidOffice-city'
             control={control}
             render={({ field: { onChange, ...props } }) => (
               <TextField
@@ -196,9 +196,9 @@ const ApdStateProfile = ({
           <div className="ds-u-clearfix ds-l-col--6">
             <Dropdown
               id="apd-state-profile-state"
-              name='medicaidOffice.state'
+              name='medicaidOffice-state'
               label={t(`${offTRoot}.labels.state`)}
-              value={medicaidOffice.state || defaultStateID}
+              value={medicaidOffice.state}
               onChange={({ target: value }) => {
                 setState(value)
 
@@ -214,7 +214,7 @@ const ApdStateProfile = ({
           </div>
         </div>
         <Controller
-          name='medicaidOffice.zip'
+          name='medicaidOffice-zip'
           control={control}
           render={({ field: { onChange, ...props } }) => (
             <TextField
