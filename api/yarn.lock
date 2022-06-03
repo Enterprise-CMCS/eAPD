@@ -371,7 +371,7 @@
     "@grpc/proto-loader" "^0.6.4"
     "@types/node" ">=12.12.47"
 
-"@grpc/proto-loader@^0.6.12", "@grpc/proto-loader@^0.6.4":
+"@grpc/proto-loader@^0.6.4", "@grpc/proto-loader@^0.6.9":
   version "0.6.12"
   resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.6.12.tgz#459b619b8b9b67794bf0d1cb819653a38c63e164"
   integrity sha512-filTVbETFnxb9CyRX98zN18ilChTuf/C5scZ2xyaOTp0EHGq0/ufX8rjqXUcSb1Gpv7eZq4M2jDvbh9BogKnrg==
@@ -648,10 +648,10 @@
   resolved "https://registry.yarnpkg.com/@newrelic/koa/-/koa-6.1.2.tgz#98e8e24ea0bee97197f02030e3ad09912dadacf2"
   integrity sha512-nmjr5hv+nRDC2NaRF4+iex41K6iJ/UCujgnj8oyht1grazJXQHq0dJZdMxUVNMMO+m4ukTeisSlI4d/H/W9JUw==
 
-"@newrelic/native-metrics@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-8.0.0.tgz#6f5d31b57301ad97cbfa047e65ed7cb6c62a1aec"
-  integrity sha512-df/V1P6dxpX09PaA6Jx9pmkPbRrue5hDyRCc4w3bnqMbnybvwVwS+q1/QEPvjBPQJ5abTRlBcJ7UZ3sfGW1hzg==
+"@newrelic/native-metrics@^7.1.1":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-7.1.2.tgz#e18af9447894d3f637c85bca19474cb81dc71d99"
+  integrity sha512-Ay0iLiwb/TIlbxxuWqxhrW1FxOSokKS09NKcRi1VXsMCMmvJiVhq6wvJcFvpoGLzvkTLLMFrJAHP0eJBKUpZfQ==
   dependencies:
     https-proxy-agent "^5.0.0"
     nan "^2.15.0"
@@ -2694,7 +2694,7 @@ expect@^27.5.1:
     jest-matcher-utils "^27.5.1"
     jest-message-util "^27.5.1"
 
-express-fileupload@^1.4.0:
+express-fileupload@1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/express-fileupload/-/express-fileupload-1.4.0.tgz#be9d70a881d6c2b1ce668df86e4f89ddbf238ec7"
   integrity sha512-RjzLCHxkv3umDeZKeFeMg8w7qe0V09w3B7oGZprr/oO2H/ISCgNzuqzn7gV3HRWb37GjRk429CCpSLS2KNTqMQ==
@@ -4691,7 +4691,7 @@ micromatch@^4.0.4:
     braces "^3.0.2"
     picomatch "^2.3.1"
 
-migrate-mongoose@^4.0.0:
+migrate-mongoose@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/migrate-mongoose/-/migrate-mongoose-4.0.0.tgz#a78a1eaff2b65c0483b2b9a817c36683adf220ac"
   integrity sha512-Zf4Jk+CvBZUrZx4q/vvYr2pRGYAo7RO4BJx/3aTAR9VhNa34/iV0Rhqj87Tflk0n14SgwZpqvixyJzEpmSAikg==
@@ -4887,13 +4887,13 @@ negotiator@0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-newrelic@^8.9.1:
-  version "8.13.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-8.13.0.tgz#a7beabfc10d915f75d74721adeb87dfa1eeb8e81"
-  integrity sha512-nWthu+uhAl3S0Ia8DSBuiv3feEunSJM2soJP/JZ1xPwbwrTH9E7Vp1mOAykWfCqgup0NKUS83NSFlJutx2yHUg==
+newrelic@8.9.1:
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-8.9.1.tgz#64c0afa05e9e8e21915b13659de288e08a2d912f"
+  integrity sha512-t11Maq7kCdn5DziSS84m9+OcTeWKHImk/942FC1/8gbcQwLrkiFLdAI6pRkSi+RXZ5JsnZ+iEiL4ungiEVO71A==
   dependencies:
     "@grpc/grpc-js" "^1.5.5"
-    "@grpc/proto-loader" "^0.6.12"
+    "@grpc/proto-loader" "^0.6.9"
     "@newrelic/aws-sdk" "^4.1.1"
     "@newrelic/koa" "^6.1.1"
     "@newrelic/superagent" "^5.1.0"
@@ -4904,9 +4904,8 @@ newrelic@^8.9.1:
     json-stringify-safe "^5.0.0"
     readable-stream "^3.6.0"
     semver "^5.3.0"
-    winston-transport "^4.5.0"
   optionalDependencies:
-    "@newrelic/native-metrics" "^8.0.0"
+    "@newrelic/native-metrics" "^7.1.1"
 
 nise@^5.1.1:
   version "5.1.1"
