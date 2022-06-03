@@ -15,76 +15,6 @@ rm ./amazon-cloudwatch-agent.rpm
 
 # Configure CloudWatch Agent
 mkdir -p /opt/aws/amazon-cloudwatch-agent/doc/
-touch /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
-cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
-
-{
-        "agent": {
-                "metrics_collection_interval": 60,
-                "run_as_user": "cwagent"
-        },
-        "metrics": {
-                "append_dimensions": {
-                        "AutoScalingGroupName": "${aws:AutoScalingGroupName}",
-                        "ImageId": "${aws:ImageId}",
-                        "InstanceId": "${aws:InstanceId}",
-                        "InstanceType": "${aws:InstanceType}"
-                },
-                "metrics_collected": {
-                        "collectd": {
-                                "metrics_aggregation_interval": 60
-                        },
-                        "cpu": {
-                                "measurement": [
-                                        "cpu_usage_idle",
-                                        "cpu_usage_iowait",
-                                        "cpu_usage_user",
-                                        "cpu_usage_system"
-                                ],
-                                "metrics_collection_interval": 60,
-                                "totalcpu": false
-                        },
-                        "disk": {
-                                "measurement": [
-                                        "used_percent",
-                                        "inodes_free"
-                                ],
-                                "metrics_collection_interval": 60,
-                                "resources": [
-                                        "*"
-                                ]
-                        },
-                        "diskio": {
-                                "measurement": [
-                                        "io_time"
-                                ],
-                                "metrics_collection_interval": 60,
-                                "resources": [
-                                        "*"
-                                ]
-                        },
-                        "mem": {
-                                "measurement": [
-                                        "mem_used_percent"
-                                ],
-                                "metrics_collection_interval": 60
-                        },
-                        "statsd": {
-                                "metrics_aggregation_interval": 60,
-                                "metrics_collection_interval": 60,
-                                "service_address": ":8125"
-                        },
-                        "swap": {
-                                "measurement": [
-                                        "swap_used_percent"
-                                ],
-                                "metrics_collection_interval": 60
-                        }
-                }
-        }
-}
-
-CWAGENTCONFIG
 
 touch /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 cat <<CWAPPLOGCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
@@ -238,8 +168,6 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 }
 
 CWVAROPTCONFIG
-
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 
