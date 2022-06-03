@@ -3,7 +3,7 @@ import { renderWithProviderAndRouter } from 'apd-storybook-library';
 import ContinuePreviousButtons from './ContinuePreviousButtons';
 
 export default {
-  title: 'Components/ContinuePreviousButtons',
+  title: 'Components/ContinuePreviousButtons (Redux)',
   component: ContinuePreviousButtons,
   includedStories: /.*Story$/,
   // decorators,

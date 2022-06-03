@@ -13,8 +13,8 @@ export default {
   }
 };
 
-export const DefaultStory = args => <DateField {...args} />;
-DefaultStory.args = {
+export const ValidDateStory = args => <DateField {...args} />;
+ValidDateStory.args = {
   value: '2020-01-01'
 };
 

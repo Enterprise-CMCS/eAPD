@@ -15,7 +15,7 @@ export default {
 
 const Template = args => <UpgradeBrowser {...args} />;
 
-export const DefaultStory = Template.bind({});
-DefaultStory.args = {
+export const UpgradeBrowserStory = Template.bind({});
+UpgradeBrowserStory.args = {
   show: true
 };

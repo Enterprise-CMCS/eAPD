@@ -19,8 +19,8 @@ export default {
 
 const Template = args => <NumberField {...args} />;
 
-export const DefaultStory = Template.bind({});
-DefaultStory.args = {
+export const NoMaskStory = Template.bind({});
+NoMaskStory.args = {
   mask: null,
   min: null,
   round: false,
@@ -31,7 +31,7 @@ DefaultStory.args = {
 
 export const CurrencyStory = Template.bind({});
 CurrencyStory.args = {
-  ...DefaultStory.args,
+  ...NoMaskStory.args,
   mask: 'currency',
   min: 0,
   value: '100'
@@ -39,21 +39,21 @@ CurrencyStory.args = {
 
 export const PhoneStory = Template.bind({});
 PhoneStory.args = {
-  ...DefaultStory.args,
+  ...NoMaskStory.args,
   mask: 'phone',
   value: '5555555555'
 };
 
 export const SSNStory = Template.bind({});
 SSNStory.args = {
-  ...DefaultStory.args,
+  ...NoMaskStory.args,
   mask: 'ssn',
   value: '123456789'
 };
 
 export const ZipStory = Template.bind({});
 ZipStory.args = {
-  ...DefaultStory.args,
+  ...NoMaskStory.args,
   mask: 'zip',
   value: '123456789'
 };

@@ -7,30 +7,19 @@ export default {
   component: Header,
   includeStories: /.*Story$/,
   parameters: {
-    jest: ['Header.test.js']
+    jest: ['Header.test.js'],
+    controls: {
+      include: ['showSiteTitle']
+    }
   }
 };
 
 export const Template = args => <Header {...args} />;
 
-// auth: {
-//   authenticated: false,
-//   error: null,
-//   fetching: false,
-//   initialCheck: true,
-//   hasEverLoggedOn: true,
-//   factorsList: [],
-//   mfaPhoneNumber: '',
-//   mfaEnrollType: '',
-//   verifyData: {},
-//   latestActivity: null,
-//   isLoggingOut: false,
-//   isSessionEnding: false,
-//   isExtendingSession: false,
-//   expiresAt: null
-// }
-
 export const UnauthenticatedUserStory = Template.bind({});
+UnauthenticatedUserStory.args = {
+  showSiteTitle: false
+};
 UnauthenticatedUserStory.decorators = [
   story =>
     renderWithProviderAndRouter({
@@ -61,13 +50,135 @@ UnauthenticatedUserStory.decorators = [
     })
 ];
 
-// Basic.args = {
-//   ariaExpanded: false,
-//   showSiteTile: true,
-//   authenticated: false,
-//   currentUser: { username: 'User', displayName: 'Test User' },
-//   isAdmin: false,
-//   currentState: { id: 'AK' },
-//   canViewStateAdmin: false,
-//   pathname: '/'
-// };
+export const StateStaffUserStory = Template.bind({});
+StateStaffUserStory.args = {
+  showSiteTitle: true
+};
+StateStaffUserStory.decorators = [
+  story =>
+    renderWithProviderAndRouter({
+      initialState: {
+        auth: {
+          authenticated: true
+        },
+        user: {
+          data: {
+            activities: [
+              'create-draft',
+              'view-document',
+              'edit-document',
+              'export-document'
+            ],
+            affiliation: {
+              id: 399,
+              user_id: '123',
+              state_id: 'ak',
+              role_id: 58,
+              status: 'approved',
+              username: 'statestaff'
+            },
+            id: '123',
+            name: 'State Staff',
+            permissions: [
+              {
+                ak: [
+                  'create-draft',
+                  'view-document',
+                  'edit-document',
+                  'export-document'
+                ]
+              }
+            ],
+            phone: '5555555555',
+            role: 'eAPD State Staff',
+            state: {
+              id: 'ak',
+              name: 'Alaska'
+            },
+            states: {
+              ak: 'approved'
+            },
+            username: 'statestaff'
+          },
+          fetching: false,
+          loaded: true,
+          error: false
+        },
+        router: {
+          location: {
+            pathname: '/'
+          }
+        }
+      },
+      story
+    })
+];
+
+export const StateAdminUserStory = Template.bind({});
+StateAdminUserStory.args = {
+  showSiteTitle: true
+};
+StateAdminUserStory.decorators = [
+  story =>
+    renderWithProviderAndRouter({
+      initialState: {
+        auth: {
+          authenticated: true
+        },
+        user: {
+          data: {
+            activities: [
+              'view-roles',
+              'view-affiliations',
+              'edit-affiliations',
+              'create-draft',
+              'view-document',
+              'edit-document',
+              'export-document'
+            ],
+            affiliation: {
+              id: 396,
+              user_id: '123',
+              state_id: 'ak',
+              status: 'approved',
+              username: 'stateadmin'
+            },
+            id: '123',
+            name: 'State Staff',
+            permissions: [
+              {
+                ak: [
+                  'view-roles',
+                  'view-affiliations',
+                  'edit-affiliations',
+                  'create-draft',
+                  'view-document',
+                  'edit-document',
+                  'export-document'
+                ]
+              }
+            ],
+            phone: '5555555555',
+            role: 'eAPD State Admin',
+            state: {
+              id: 'ak',
+              name: 'Alaska'
+            },
+            states: {
+              ak: 'approved'
+            },
+            username: 'stateadmin'
+          },
+          fetching: false,
+          loaded: true,
+          error: false
+        },
+        router: {
+          location: {
+            pathname: '/'
+          }
+        }
+      },
+      story
+    })
+];

@@ -17,5 +17,5 @@ export default {
 
 const Template = args => <Dollars {...args} />;
 
-export const DefaultStory = Template.bind({});
-DefaultStory.args = {};
+export const DollarStory = Template.bind({});
+DollarStory.args = {};

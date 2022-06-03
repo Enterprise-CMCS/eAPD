@@ -6,16 +6,18 @@ import ConsentBanner from './ConsentBanner';
 export default {
   title: 'Pages/Login/ConsentBanner',
   component: ConsentBanner,
+  includeStories: /.*Story$/,
   parameters: {
-    jest: ['ConsentBanner.test.js']
-  },
-  argTypes: {
-    onAgree: () => {}
+    jest: ['ConsentBanner.test.js'],
+    controls: {
+      exclude: ['onAgree'],
+      hideNoControlsWarning: true
+    }
   }
 };
 
-export const Basic = args => <ConsentBanner {...args} />;
+export const ConsentBannerStory = args => <ConsentBanner {...args} />;
 
-Basic.args = {
+ConsentBannerStory.args = {
   onAgree: action('agreed')
 };

@@ -16,11 +16,6 @@ export default {
 
 const Template = args => <DeleteModal {...args} />;
 
-export const DefaultStory = Template.bind({});
-DefaultStory.args = {
-  objType: 'Foo'
-};
-
 export const APDStory = Template.bind({});
 APDStory.args = {
   objType: 'APD'
@@ -79,4 +74,9 @@ PrivateContractorStory.args = {
 export const CertificationStory = Template.bind({});
 CertificationStory.args = {
   objType: 'Certification'
+};
+
+export const DefaultStory = Template.bind({});
+DefaultStory.args = {
+  objType: 'Foo'
 };

@@ -16,7 +16,7 @@ export const { history, decorators } = decoratorWithProviderAndRouter({
 });
 
 export default {
-  title: 'Components/CardForm',
+  title: 'Components/CardForm (Redux)',
   component: CardForm,
   decorators,
   includeStories: /.*Story$/,

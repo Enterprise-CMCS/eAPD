@@ -1,34 +1,51 @@
 import React from 'react';
 import LoginForm from './LoginForm';
-import * as CardFormStory from '../../components/CardForm.stories';
+import * as CardFormStories from '../../components/CardForm.stories';
 
 export default {
   title: 'Pages/Login/LoginForm',
   component: LoginForm,
-  decorators: CardFormStory.decorators,
+  includeStories: /.*Story$/,
+  argTypes: {
+    success: { control: 'text' },
+    error: { control: 'text' },
+    cancelable: { control: 'boolean' }
+  },
+  decorators: CardFormStories.decorators,
   parameters: {
-    jest: ['LoginForm.test.js']
+    jest: ['LoginForm.test.js'],
+    controls: {
+      exclude: [
+        'children',
+        'onSave',
+        'onCancel',
+        'footer',
+        'id',
+        'legend',
+        'hasEverLoggedOn'
+      ]
+    }
   }
-};
-
-export const Basic = args => <LoginForm {...args} />;
-Basic.args = {
-  ...CardFormStory.Basic.args
 };
 
 const Template = args => (
   <LoginForm {...args}>
-    <CardFormStory.Form />
+    <CardFormStories.Form />
   </LoginForm>
 );
 
-export const TextField = Template.bind({});
-TextField.args = {
-  ...Basic.args
+export const EmptyFormStory = Template.bind({});
+EmptyFormStory.args = {
+  ...CardFormStories.BasicFormStory.args
 };
 
-export const TextFieldWithFooter = Template.bind({});
-TextFieldWithFooter.args = {
-  ...Basic.args,
-  footer: <CardFormStory.Footer />
+export const FormStory = Template.bind({});
+FormStory.args = {
+  ...EmptyFormStory.args
+};
+
+export const FormWithFooterStory = Template.bind({});
+FormWithFooterStory.args = {
+  ...EmptyFormStory.args,
+  footer: <CardFormStories.Footer />
 };

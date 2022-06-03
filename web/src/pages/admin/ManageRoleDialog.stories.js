@@ -7,6 +7,7 @@ import ManageRoleDialog from './ManageRoleDialog';
 export default {
   title: 'Pages/Admin/ManageRoleDialog',
   component: ManageRoleDialog,
+  includeStories: /.*Story$/,
   parameters: {
     jest: ['ManageRoleDialog.test.js']
   }
@@ -14,8 +15,8 @@ export default {
 
 const Template = args => <ManageRoleDialog {...args} />;
 
-export const Example = Template.bind({});
-Example.args = {
+export const ManageRoleStory = Template.bind({});
+ManageRoleStory.args = {
   roleTypes: [
     { id: 1, name: 'eAPD State Staff' },
     { id: 2, name: 'eAPD State Contractor' }

@@ -1,34 +1,81 @@
 import React from 'react';
-
-import { ApprovalStatus } from './AffiliationStatus';
+import { renderWithProvider } from 'apd-storybook-library';
+import AffiliationStatus from './AffiliationStatus';
 
 export default {
-  title: 'Pages/Dashboard/Affiliation Status',
-  component: ApprovalStatus,
+  title: 'Pages/Dashboard/Affiliation Status (Redux)',
+  component: AffiliationStatus,
+  includeStories: /.*Story$/,
   parameters: {
-    jest: ['AffiliationStatus.test.js']
+    jest: ['AffiliationStatus.test.js'],
+    controls: {
+      exclude: /.*$/,
+      hideNoControlsWarning: true
+    }
   }
 };
 
-const Template = args => <ApprovalStatus {...args} />;
+const Template = args => <AffiliationStatus {...args} />;
 
-export const Requested = Template.bind({});
-Requested.args = {
-  status: 'requested',
-  mailTo: 'mail@mail.com',
-  administratorType: 'State'
-};
+export const RequestedStory = Template.bind({});
+RequestedStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        user: {
+          data: {
+            state: {
+              id: 'ak',
+              state: 'Alaska'
+            },
+            states: {
+              ak: 'requested'
+            }
+          }
+        }
+      },
+      story
+    })
+];
 
-export const Denied = Template.bind({});
-Denied.args = {
-  status: 'denied',
-  mailTo: 'mail@mail.com',
-  administratorType: 'State'
-};
+export const DeniedStory = Template.bind({});
+DeniedStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        user: {
+          data: {
+            state: {
+              id: 'ak',
+              state: 'Alaska'
+            },
+            states: {
+              ak: 'denied'
+            }
+          }
+        }
+      },
+      story
+    })
+];
 
-export const Revoked = Template.bind({});
-Revoked.args = {
-  status: 'revoked',
-  mailTo: 'mail@mail.com',
-  administratorType: 'State'
-};
+export const RevokedStory = Template.bind({});
+RevokedStory.decorators = [
+  story =>
+    renderWithProvider({
+      initialState: {
+        user: {
+          data: {
+            state: {
+              id: 'ak',
+              state: 'Alaska'
+            },
+            states: {
+              ak: 'revoked'
+            }
+          }
+        }
+      },
+      story
+    })
+];

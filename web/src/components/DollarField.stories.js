@@ -13,4 +13,6 @@ export default {
   }
 };
 
-export const DefaultStory = args => <DollarField {...args} />;
+const Template = args => <DollarField {...args} />;
+
+export const EmptyDollarStory = Template.bind({});

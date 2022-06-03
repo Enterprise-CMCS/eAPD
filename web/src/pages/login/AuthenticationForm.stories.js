@@ -1,35 +1,43 @@
 import React from 'react';
 import AuthenticationForm from './AuthenticationForm';
-import * as CardFormStory from '../../components/CardForm.stories';
+import * as CardFormStories from '../../components/CardForm.stories';
 
 export default {
   title: 'Pages/Login/AuthenticationForm',
   component: AuthenticationForm,
-  decorators: CardFormStory.decorators,
+  includeStories: /.*Story$/,
+  argTypes: {
+    success: { control: 'text' },
+    error: { control: 'text' },
+    cancelable: { control: 'boolean' }
+  },
   parameters: {
-    jest: ['AuthenticationForm.test.js']
+    jest: ['AuthenticationForm.test.js'],
+    controls: {
+      exclude: ['children', 'onSave', 'onCancel', 'footer', 'id', 'legend']
+    }
   }
-};
-
-export const Basic = args => <AuthenticationForm {...args} />;
-
-Basic.args = {
-  ...CardFormStory.Basic.args
 };
 
 const Template = args => (
   <AuthenticationForm {...args}>
-    <CardFormStory.Form />
+    <CardFormStories.Form />
   </AuthenticationForm>
 );
 
-export const TextField = Template.bind({});
-TextField.args = {
-  ...Basic.args
+export const EmptyFormStory = Template.bind({});
+EmptyFormStory.args = {
+  ...CardFormStories.BasicFormStory.args,
+  onCancel: null
 };
 
-export const TextFieldWithFooter = Template.bind({});
-TextFieldWithFooter.args = {
-  ...Basic.args,
-  footer: <CardFormStory.Footer />
+export const FormStory = Template.bind({});
+FormStory.args = {
+  ...EmptyFormStory.args
+};
+
+export const FormWithFooterStory = Template.bind({});
+FormWithFooterStory.args = {
+  ...EmptyFormStory.args,
+  footer: <CardFormStories.Footer />
 };

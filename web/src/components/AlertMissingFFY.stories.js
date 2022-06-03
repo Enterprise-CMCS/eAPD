@@ -18,7 +18,7 @@ export const { decorators } = decoratorWithProvider({
 });
 
 export default {
-  title: 'Components/AlertMissingFFY',
+  title: 'Components/AlertMissingFFY (Redux)',
   component: AlertMissingFFY,
   decorators,
   includeStories: /.*Story$/,
@@ -33,4 +33,4 @@ export default {
 
 const Template = args => <AlertMissingFFY {...args} />;
 
-export const DefaultStory = Template.bind({});
+export const NoFFYsStory = Template.bind({});
