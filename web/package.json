@@ -88,7 +88,7 @@
     "@hookform/resolvers": "2.8.8",
     "@joi/date": "2.1.0",
     "@okta/okta-auth-js": "6.5.1",
-    "@snyk/protect": "1.928.0",
+    "@snyk/protect": "1.931.0",
     "@tinymce/tinymce-react": "3.14.0",
     "@uppy/core": "2.1.10",
     "@uppy/react": "2.1.2",
