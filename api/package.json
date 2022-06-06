@@ -28,7 +28,8 @@
     "prettier": "prettier --config \"../.prettierrc\" --write \"**/*.js\"",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh",
-    "npm-check": "npx npm-check-updates"
+    "npm-check": "npx npm-check-updates",
+    "create:route": "npx hygen routes new route"
   },
   "repository": {
     "type": "git",
