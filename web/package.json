@@ -1,72 +1,28 @@
 {
-  "name": "cms-hitech-apd-webapp",
-  "version": "1.0.0",
+  "name": "@cms-eapd/web",
+  "version": "0.0.1",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
   "scripts": {
-    "audit": "npx audit-ci --config ./audit-ci.json",
-    "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
-    "copy-schemas": "cp -r ../schemas src/static",
-    "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
-    "build": "yarn run copy-schemas && yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
     "lint": "eslint 'src/**/*.js'",
+    "build": "yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
     "start": "yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
+    "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
+    "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json -i --silent",
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc yarn run test:generate-output -- --watch",
-    "prettier": "prettier --config \"../.prettierrc\" --write \"src/**/*.js\"",
     "prebuild:storybook": "yarn run scaffold && yarn run test:generate-output",
     "build:storybook": "build-storybook -o docs-build",
     "deploy-storybook": "storybook-to-ghpages --out=docs-build",
     "storybook": "start-storybook -p 6006",
     "deploy-chromatic": "chromatic --storybook-build-dir docs-build --exit-zero-on-changes --debug",
-    "npm-check": "npx npm-check-updates",
-    "stryker": "TZ=utc stryker run",
-    "prepare": "yarn run snyk-protect",
-    "snyk-protect": "snyk-protect"
+    "stryker": "TZ=utc stryker run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CMSgov/eAPD.git"
   },
-  "keywords": [
-    "cms",
-    "medicaid",
-    "hitech",
-    "emr",
-    "apd"
-  ],
-  "contributors": [
-    "Akua Amponsah",
-    "Nicolas Aretakis",
-    "Heather Battaglia",
-    "Ty Bolt",
-    "Ronald Bronson",
-    "Bill Brooks",
-    "Richard Davis",
-    "Jenn Downs",
-    "Nicole Fenton",
-    "Tiffany Forkner",
-    "Eghosa Guobadia",
-    "Austin Hernandez",
-    "James Hupp",
-    "Jesse James",
-    "Meghana Khandekar",
-    "Jerome Lee",
-    "Nikki Lee",
-    "Christopher (CM) Lubinksi",
-    "Chris Miraflor",
-    "Darren Mirano",
-    "Aviva Oskow",
-    "Paul Phillips",
-    "Laura Poncé",
-    "Brendan Sudol",
-    "Caryn Swartz",
-    "Jen Thibault",
-    "Greg Walker",
-    "Nichole Weems",
-    "Nicole Zonnenberg"
-  ],
   "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/CMSgov/eAPD/issues"
@@ -81,6 +37,7 @@
     "@babel/preset-env": "7.16.11",
     "@babel/preset-react": "7.16.7",
     "@cmsgov/design-system": "2.13.0",
+    "@cms-eapd/common": "^0.0.1",
     "@fortawesome/fontawesome-svg-core": "1.3.0",
     "@fortawesome/free-regular-svg-icons": "5.15.4",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
@@ -197,11 +154,6 @@
     "webpack-dev-server": "4.8.1",
     "yaml-jest": "1.2.0"
   },
-  "updateRestrictions": {
-    "react-router": "can't upgrade to v6 because our system requires routes to be connected to redux",
-    "react-router-dom": "can't upgrade to v6 because our system requires routes to be connected to redux",
-    "history": "can't upgrade to 17 react-router v6"
-  },
   "resolutions": {
     "async": ">=3.2.2",
     "glob-parent": ">=5.1.2",
@@ -210,5 +162,9 @@
     "trim": "0.0.3",
     "trim-newlines": "3.0.1"
   },
-  "packageManager": "yarn@1.22.18"
+  "updateRestrictions": {
+    "react-router": "can't upgrade to v6 because our system requires routes to be connected to redux",
+    "react-router-dom": "can't upgrade to v6 because our system requires routes to be connected to redux",
+    "history": "can't upgrade to 17 react-router v6"
+  }
 }

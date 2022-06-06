@@ -1,5 +1,7 @@
 # Ignore artifacts:
 bin
 api/coverage
+api/test-data/files
 web/coverage
 web/dist
+web/_dev

@@ -28,21 +28,49 @@ const config = {
       // we got hot reloading on our Sass as well.
       {
         test: /\.scss$/,
+
+        // Remember that these run in reverse, so start at the last item in the
+        // array and read up to understand what's going on.
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',
-          // Translates CSS into CommonJS
-          'css-loader',
+
+          // Interprets any url() and @import statements and resolves them to
+          // their full path on the local disk. Translates CSS into CommonJS
+          {
+            loader: 'css-loader',
+            options: {
+              import: true
+            }
+          },
+          // Add browser prefixes and minify CSS.
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      browsers: 'last 2 versions'
+                    }
+                  ]
+                ]
+              }
+            }
+          },
+
           // Compiles Sass to CSS
           'sass-loader'
         ]
       },
       {
-        test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'static/[hash][ext][query]'
-        }
+        test: /skin\.min\.css$/i,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /content\.min\.css$/i,
+        use: ['css-loader']
       },
       {
         test: /\.yaml$/,

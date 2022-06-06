@@ -32,7 +32,6 @@ const MilestoneForm = forwardRef(
     });
 
     useEffect(() => {
-      console.log("something changed")
       setFormValid(isValid);
     }, [isValid, errors]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -58,7 +57,7 @@ const MilestoneForm = forwardRef(
               errorMessage={errors?.milestone?.message}
               errorPlacement="bottom"
             />
-          )} 
+          )}
         />
         <Controller
           name="endDate"
