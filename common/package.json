@@ -1,0 +1,22 @@
+{
+  "name": "@cms-eapd/common",
+  "version": "0.0.1",
+  "description": "APD app for CMS HITECH program",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMSgov/eAPD.git"
+  },
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/CMSgov/eAPD/issues"
+  },
+  "homepage": "https://github.com/CMSgov/eAPD#readme",
+  "engines": {
+    "node": "16.15.0"
+  },
+  "dependencies": {
+    "joi": "17.6.0"
+  },
+  "packageManager": "yarn@1.22.19"
+}
