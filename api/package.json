@@ -1,12 +1,13 @@
 {
-  "name": "cms-hitech-apd-api",
-  "version": "1.0.0",
+  "name": "@cms-eapd/api",
+  "version": "0.0.1",
   "description": "APD api for CMS HITECH program",
   "main": "main.js",
   "scripts": {
-    "audit": "npx audit-ci --config ./audit-ci.json",
-    "knex-console": "node --experimental-repl-await knexrepl.js",
     "lint": "eslint '**/*.js'",
+    "start": "node main.js",
+    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 ./main.js -e js",
+    "knex-console": "node --experimental-repl-await knexrepl.js",
     "knex-make-migrate": "knex migrate:make",
     "knex-migrate": "knex migrate:latest",
     "knex-migrate-rollback": "knex migrate:rollback",
@@ -18,61 +19,18 @@
     "seed": "knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "knex seed:run --specific=base-users.js",
-    "start": "node main.js",
-    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 ./main.js -e js",
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout --reporter=spec ${TESTS:-'{,!(node_modules)/**/}*.test.js'}",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --lines=75 --functions=60 --branches=50 --statements=75  --no-browser --reporter=spec '{,!(node_modules)/**/}*.test.js'",
     "test-endpoints": "jest --detectOpenHandles --forceExit 'endpoint'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec --lines=0 --functions=0 --branches=0 --statements=0",
-    "prettier": "prettier --config \"../.prettierrc\" --write \"**/*.js\"",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
-    "fullTest": "./unit-test.sh",
-    "npm-check": "npx npm-check-updates"
+    "fullTest": "./unit-test.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CMSgov/eAPD.git"
   },
-  "keywords": [
-    "cms",
-    "medicaid",
-    "hitech",
-    "emr",
-    "apd"
-  ],
-  "contributors": [
-    "Nicolas Aretakis",
-    "Akua Amponsah",
-    "Heather Battaglia",
-    "Ty Bolt",
-    "Ronald Bronson",
-    "Bill Brooks",
-    "Richard Davis",
-    "Jenn Downs",
-    "Nicole Fenton",
-    "Tiffany Forkner",
-    "Eghosa Guobadia",
-    "Austin Hernandez",
-    "James Hupp",
-    "Jesse James",
-    "Meghana Khandekar",
-    "Michael Knoll",
-    "Jerome Lee",
-    "Nikki Lee",
-    "Christopher (CM) Lubinksi",
-    "Chris Miraflor",
-    "Darren Mirano",
-    "Aviva Oskow",
-    "Paul Phillips",
-    "Laura Poncé",
-    "Brendan Sudol",
-    "Caryn Swartz",
-    "Jen Thibault",
-    "Greg Walker",
-    "Nichole Weems",
-    "Nicole Zonnenberg"
-  ],
   "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/CMSgov/eAPD/issues"
@@ -94,7 +52,7 @@
     "date-fns": "2.28.0",
     "dotenv": "15.0.0",
     "express": "4.17.3",
-    "express-fileupload": "^1.4.0",
+    "express-fileupload": "1.4.0",
     "express-validator": "6.14.0",
     "fast-json-patch": "3.1.0",
     "file-type": "16.5.3",
@@ -104,10 +62,10 @@
     "jsonpointer": "5.0.0",
     "jsonwebtoken": "8.5.1",
     "knex": "1.0.3",
-    "migrate-mongoose": "^4.0.0",
+    "migrate-mongoose": "4.0.0",
     "mongoose": "5.13.14",
     "morgan": "1.10.0",
-    "newrelic": "^8.9.1",
+    "newrelic": "8.9.1",
     "pg": "8.7.3",
     "sanitize-html": "2.7.0",
     "sharp": "0.30.5",
@@ -143,8 +101,6 @@
     "testTimeout": 30000
   },
   "resolutions": {
-    "minimist": ">=1.2.6",
-    "yargs-parser": ">=5.0.1"
-  },
-  "packageManager": "yarn@1.22.18"
+    "minimist": ">=1.2.6"
+  }
 }
