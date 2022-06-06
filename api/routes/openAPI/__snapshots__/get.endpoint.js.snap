@@ -566,7 +566,7 @@ Object {
   "info": Object {
     "description": "The API for the CMS HITECH APD app.",
     "title": "CMS HITECH APD API",
-    "version": "1.0.0",
+    "version": "0.0.1",
   },
   "openapi": "3.0.0",
   "paths": Object {

@@ -144,7 +144,7 @@ source ~/.bashrc
 nvm install 16.15.0
 nvm alias default 16.15.0
 nvm use 16.15.0
-npm i -g yarn@1.22.18
+npm i -g yarn@1.22.19
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
