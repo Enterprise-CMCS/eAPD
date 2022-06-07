@@ -21,7 +21,40 @@ import { selectKeyStatePersonnel } from '../../../redux/selectors/apd.selectors'
 import { selectState } from '../../../redux/reducers/user';
 import { STATES } from '../../../util';
 
-import medicaidDirectorSchema from '../../../static/schemas/medicaidDirector';
+import Joi from 'joi';
+
+const keyMedicaidSchema = Joi.object({
+  medicaidDirector: Joi.object().keys({
+    name: Joi.string().required().messages({
+      'string.base': 'Provide the name of the State Medicaid Director.',
+      'string.empty': 'Provide the name of the State Medicaid Director.',
+      'string.min': 'Provide the name of the State Medicaid Director.',
+      'string.required': 'Provide the name of the State Medicaid Director.'
+    }),
+    email: Joi.string().required().messages({
+      'string.base': 'Provide the email address of the State Medicaid Director.',
+      'string.empty': 'Provide the email address of the State Medicaid Director.'
+    }),
+    phone: Joi.string().required().messages({
+      'string.base': 'Provide a valid phone number for the State Medicaid Director.',
+      'string.empty': 'Provide a valid phone number for the State Medicaid Director.'
+    })
+  }),
+  medicaidOffice: Joi.object({
+    address1: Joi.string().min(1).required().messages({
+      'string.base': 'Provide a mailing street address for the Medicaid office.',
+      'string.empty': 'Provide a mailing street address for the Medicaid office.'
+    }),
+    city: Joi.string().min(1).required().messages({
+      'string.base': 'Provide a city name.',
+      'string.empty': 'Provide a city name.'
+    }),
+    zip: Joi.string().required().messages({
+      'string.base': 'Provide a zip code.',
+      'string.empty': 'Provide a zip code.'
+    })
+  })
+});
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';
@@ -45,7 +78,7 @@ const ApdStateProfile = ({
     control,
     trigger,
     formState: { errors }
-  } = useForm({
+  } = useForm ({
     defaultValues: {
       medicaidDirector: {
         name: medicaidDirector.name,
@@ -56,18 +89,23 @@ const ApdStateProfile = ({
         address1: medicaidOffice.address1,
         address2: medicaidOffice.address2,
         city: medicaidOffice.city,
-        state: medicaidOffice.state || defaultStateID,
         zip: medicaidOffice.zip
       }
     },
-    resolver: joiResolver(medicaidDirectorSchema)
+    resolver: joiResolver(keyMedicaidSchema)
   });
 
   useEffect(() => {
-    if(adminCheck) {
+    if (adminCheck) {
       trigger();
-    }
+    };
   }, []);
+
+  const handleChange =
+    action =>
+    ({ target: { value } }) => {
+      action(value);
+    };
 
   return (
     <Fragment>
@@ -76,17 +114,19 @@ const ApdStateProfile = ({
           {titleCase(t(`${dirTRoot}.title`))}
         </legend>
         <Controller
-          name='medicaidDirector-name'
+          name={`medicaidDirector.name`}
           control={control}
+          value={medicaidDirector.name}
           render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
+              id="apd-state-profile-mdname"
               label={t(`${dirTRoot}.labels.name`)}
               onChange={({ target: { value } }) => {
-                onChange(value);
                 setName(value);
+                onChange(value);
 
-                if(adminCheck) {
+                if (adminCheck) {
                   trigger();
                 }
               }}
@@ -96,17 +136,19 @@ const ApdStateProfile = ({
           )}
         />
         <Controller
-          name='medicaidDirector-email'
+          name={`medicaidDirector.email`}
           control={control}
+          value={medicaidDirector.email}
           render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
+              id="apd-state-profile-mdemail"
               label={t(`${dirTRoot}.labels.email`)}
               onChange={({ target: { value } }) => {
-                onChange(value);
                 setEmail(value);
+                onChange(value);
 
-                if(adminCheck) {
+                if (adminCheck) {
                   trigger();
                 }
               }}
@@ -116,43 +158,47 @@ const ApdStateProfile = ({
           )}
         />
         <Controller
-          name='medicaidDirector-phone'
+          name={`medicaidDirector.phone`}
           control={control}
+          value={medicaidDirector.phone}
           render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
+              id="apd-state-profile-mdphone"
               label={t(`${dirTRoot}.labels.phone`)}
               onChange={({ target: { value } }) => {
-                onChange(value);
                 setPhone(value);
+                onChange(value);
 
-                if(adminCheck) {
+                if (adminCheck) {
                   trigger();
                 }
               }}
               errorMessage={errors?.medicaidDirector?.phone?.message}
               errorPlacement="bottom"
-            />
+              />
           )}
         />
       </fieldset>
 
       <fieldset>
-        <legend className="ds-u-padding-y--1">
+        <legend className="ds-u-padding-bottom--1">
           {titleCase(t(`${offTRoot}.title`))}
         </legend>
         <Controller
-          name='medicaidOffice-address1'
+          name={`medicaidOffice.address1`}
           control={control}
+          value={medicaidOffice.address1}
           render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
+              id="apd-state-profile-addr1"
               label={t(`${offTRoot}.labels.address1`)}
               onChange={({ target: { value } }) => {
-                onChange(value);
                 setAddress1(value);
+                onChange(value);
 
-                if(adminCheck) {
+                if (adminCheck) {
                   trigger();
                 }
               }}
@@ -162,29 +208,28 @@ const ApdStateProfile = ({
           )}
         />
         <TextField
-          name='medicaidOffice-address2'
+          name="apd-state-profile-addr2"
           label={t(`${offTRoot}.labels.address2`)}
           hint="Optional"
           value={medicaidOffice.address2}
           onChange={({ target: { value } }) => {
-            setAddress2(value)
+            setAddress2(value);
           }}
         />
         <div className="ds-l-row">
           <Controller
-            name='medicaidOffice-city'
+            name={`medicaidOffice.city`}
             control={control}
+            value={medicaidOffice.city}
             render={({ field: { onChange, ...props } }) => (
               <TextField
-                {...props}
                 label={t(`${offTRoot}.labels.city`)}
-                value={medicaidOffice.city}
                 className="ds-l-col--6"
                 onChange={({ target: { value } }) => {
-                  onChange(value);
                   setCity(value);
+                  onChange(value);
 
-                  if(adminCheck) {
+                  if (adminCheck) {
                     trigger();
                   }
                 }}
@@ -196,15 +241,11 @@ const ApdStateProfile = ({
           <div className="ds-u-clearfix ds-l-col--6">
             <Dropdown
               id="apd-state-profile-state"
-              name='medicaidOffice-state'
+              name={`medicaidOffice.state`}
               label={t(`${offTRoot}.labels.state`)}
-              value={medicaidOffice.state}
-              onChange={({ target: value }) => {
-                setState(value)
-
-                if(adminCheck) {
-                  trigger();
-                }
+              value={medicaidOffice.state || defaultStateID}
+              onChange={({ target: { value } }) => {
+                setState(value);
               }}
               options={STATES.map(({ id, name }) => ({
                 label: name,
@@ -214,19 +255,19 @@ const ApdStateProfile = ({
           </div>
         </div>
         <Controller
-          name='medicaidOffice-zip'
+          name={`medicaidOffice.zip`}
           control={control}
+          value={medicaidOffice.zip}
           render={({ field: { onChange, ...props } }) => (
             <TextField
               {...props}
               label={t(`${offTRoot}.labels.zip`)}
-              value={medicaidOffice.zip}
               mask="zip"
               onChange={({ target: { value } }) => {
-                onChange(value);
                 setZip(value);
+                onChange(value);
 
-                if(adminCheck) {
+                if (adminCheck) {
                   trigger();
                 }
               }}
