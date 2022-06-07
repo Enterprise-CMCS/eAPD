@@ -85,5 +85,5 @@
   "resolutions": {
     "yargs-parser": ">=18.1.1"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.18"
 }
