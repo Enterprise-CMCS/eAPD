@@ -101,12 +101,6 @@ const ApdStateProfile = ({
     };
   }, []);
 
-  const handleChange =
-    action =>
-    ({ target: { value } }) => {
-      action(value);
-    };
-
   return (
     <Fragment>
       <fieldset>
@@ -223,6 +217,7 @@ const ApdStateProfile = ({
             value={medicaidOffice.city}
             render={({ field: { onChange, ...props } }) => (
               <TextField
+                {...props}
                 label={t(`${offTRoot}.labels.city`)}
                 className="ds-l-col--6"
                 onChange={({ target: { value } }) => {
