@@ -110,7 +110,8 @@ curl -o backend.zip -L __BUILDURL__ |tee /home/ec2-user/backenddownload.txt
 unzip backend.zip
 rm backend.zip
 
-yarn install --frozen-lockfile --non-interactive --production=true
+yarn cache clean
+yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000
 
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.

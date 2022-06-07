@@ -80,8 +80,10 @@ sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
 cd eAPD
-echo yarn --version > yarn-version.log
-yarn install --frozen-lockfile --non-interactive --production=true > yarn-install.log
+
+npm i -g yarn@1.22.18
+yarn cache clean
+yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
 
 cd web
 # yarn add webpack@5.70.0 webpack-cli@4.9.2
