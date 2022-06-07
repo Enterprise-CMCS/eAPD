@@ -29,7 +29,6 @@ const Schedule = ({
   const {
     control,
     formState: { errors },
-    getFieldState,
     trigger
   } = useForm({
     defaultValues: {
