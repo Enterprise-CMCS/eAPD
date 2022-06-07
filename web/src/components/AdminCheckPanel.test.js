@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
 
+// eslint-disable-next-line import/no-named-as-default
 import AdminCheckPanel from './AdminCheckPanel';
 
 // Note: this data is mocked in the app as well until the backend is
