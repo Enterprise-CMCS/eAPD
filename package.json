@@ -20,7 +20,9 @@
     "prettier": "prettier --config \".prettierrc\" --write \"**/*.js\"",
     "npm-check": "npx npm-check-updates",
     "prepare": "yarn run snyk-protect",
-    "snyk-protect": "snyk-protect"
+    "snyk-protect": "snyk-protect",
+    "create:route": "npx hygen routes new route",
+    "create:story": "npx hygen stories new story"
   },
   "keywords": [
     "cms",
