@@ -1,11 +1,26 @@
 {
-  "name": "cms-hitech-apd-webapp",
-  "version": "1.0.0",
+  "name": "cms-eapd",
+  "private": true,
+  "version": "4.2.0",
   "description": "APD app for CMS HITECH program",
-  "main": "app.js",
+  "license": "CC0-1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CMSgov/eAPD.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CMSgov/eAPD/issues"
+  },
+  "homepage": "https://github.com/CMSgov/eAPD#readme",
+  "engines": {
+    "node": "16.15.0"
+  },
+  "scripts": {
+    "audit": "npx audit-ci --config ./audit-ci.json",
+    "prettier": "prettier --config \".prettierrc\" --write \"**/*.js\"",
+    "npm-check": "npx npm-check-updates",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "keywords": [
     "cms",
@@ -30,11 +45,14 @@
     "James Hupp",
     "Jesse James",
     "Meghana Khandekar",
+    "Michael Knoll",
     "Jerome Lee",
     "Nikki Lee",
+    "Aricka Lewis",
     "Christopher (CM) Lubinksi",
     "Chris Miraflor",
     "Darren Mirano",
+    "Dio Obijiaku",
     "Aviva Oskow",
     "Paul Phillips",
     "Laura Poncé",
@@ -45,12 +63,27 @@
     "Nichole Weems",
     "Nicole Zonnenberg"
   ],
-  "license": "CC0-1.0",
-  "bugs": {
-    "url": "https://github.com/CMSgov/eAPD/issues"
+  "workspaces": {
+    "packages": [
+      "api",
+      "web",
+      "common",
+      "e2e"
+    ],
+    "nohoist": [
+      "knex",
+      "api/ajv",
+      "web/@uppy",
+      "web/tinymce",
+      "web/@tinymce/tinymce-react",
+      "web/@cmsgov/design-system"
+    ]
   },
-  "homepage": "https://github.com/CMSgov/eAPD#readme",
-  "engines": {
-    "node": "16.15.0"
-  }
+  "dependencies": {
+    "@snyk/protect": "1.925.0"
+  },
+  "resolutions": {
+    "yargs-parser": ">=18.1.1"
+  },
+  "packageManager": "yarn@1.22.18"
 }

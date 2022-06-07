@@ -62,7 +62,6 @@ tap.test('database wrappers / users', async usersTests => {
   let getRolesAndActivities;
   let updateAuthAffiliation;
   let auditUserLogin;
-  let getAuthRoleByName;
 
   usersTests.beforeEach(async () => {
     sandbox.resetBehavior();
@@ -94,7 +93,6 @@ tap.test('database wrappers / users', async usersTests => {
     getRolesAndActivities = sandbox.stub();
     updateAuthAffiliation = sandbox.stub();
     auditUserLogin = sandbox.stub();
-    getAuthRoleByName = sandbox.stub();
 
     getAffiliationByState.withArgs(unsanitizedUser.id, 'state1').resolves({
       id: 'affiliation',
@@ -315,15 +313,13 @@ tap.test('database wrappers / users', async usersTests => {
         state2: 'approved',
         exp: 'approved'
       });
-      getAuthRoleByName.resolves({ id: 'role id', name: 'eAPD State Admin' });
       await populateUserRole(unsanitizedUser, 'exp', {
         getUserAffiliatedStates,
         getAffiliationByState,
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation,
-        getAuthRoleByName
+        updateAuthAffiliation
       });
       test.ok(getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'exp'));
       test.ok(updateAuthAffiliation.calledOnce);
