@@ -5,7 +5,7 @@ import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dep
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 
-import tokens from '../../tokens.json';
+import tokens from '@cms-eapd/api/seeds/test/tokens.json';
 
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
@@ -63,7 +63,7 @@ Cypress.Commands.add('login', (username, password) => {
     expiry: EXPIRY_DATE
   });
   cy.visit('/');
-  cy.waitForReact();
+  cy.waitForReact(1000, '#app', '../node_modules/resq/dist/index.js');
   cy.findByLabelText('EUA ID').type(username);
   cy.findByLabelText('Password').type(password, {
     log: false
@@ -98,7 +98,7 @@ Cypress.Commands.add('useJwtUser', (username, url) => {
     }
   );
   cy.visit(url || '/');
-  cy.waitForReact();
+  cy.waitForReact(1000, '#app', '../node_modules/resq/dist/index.js');
 });
 
 Cypress.Commands.add('useSysAdmin', url => {

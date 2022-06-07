@@ -1,0 +1,89 @@
+{
+  "name": "cms-eapd",
+  "private": true,
+  "version": "4.2.0",
+  "description": "APD app for CMS HITECH program",
+  "license": "CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMSgov/eAPD.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CMSgov/eAPD/issues"
+  },
+  "homepage": "https://github.com/CMSgov/eAPD#readme",
+  "engines": {
+    "node": "16.15.0"
+  },
+  "scripts": {
+    "audit": "npx audit-ci --config ./audit-ci.json",
+    "prettier": "prettier --config \".prettierrc\" --write \"**/*.js\"",
+    "npm-check": "npx npm-check-updates",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
+  },
+  "keywords": [
+    "cms",
+    "medicaid",
+    "hitech",
+    "emr",
+    "apd"
+  ],
+  "contributors": [
+    "Akua Amponsah",
+    "Nicolas Aretakis",
+    "Heather Battaglia",
+    "Ty Bolt",
+    "Ronald Bronson",
+    "Bill Brooks",
+    "Richard Davis",
+    "Jenn Downs",
+    "Nicole Fenton",
+    "Tiffany Forkner",
+    "Eghosa Guobadia",
+    "Austin Hernandez",
+    "James Hupp",
+    "Jesse James",
+    "Meghana Khandekar",
+    "Michael Knoll",
+    "Jerome Lee",
+    "Nikki Lee",
+    "Aricka Lewis",
+    "Christopher (CM) Lubinksi",
+    "Chris Miraflor",
+    "Darren Mirano",
+    "Dio Obijiaku",
+    "Aviva Oskow",
+    "Paul Phillips",
+    "Laura Poncé",
+    "Brendan Sudol",
+    "Caryn Swartz",
+    "Jen Thibault",
+    "Greg Walker",
+    "Nichole Weems",
+    "Nicole Zonnenberg"
+  ],
+  "workspaces": {
+    "packages": [
+      "api",
+      "web",
+      "common",
+      "e2e"
+    ],
+    "nohoist": [
+      "knex",
+      "api/ajv",
+      "web/@uppy",
+      "web/tinymce",
+      "web/@tinymce/tinymce-react",
+      "web/@cmsgov/design-system"
+    ]
+  },
+  "dependencies": {
+    "@snyk/protect": "1.925.0"
+  },
+  "resolutions": {
+    "yargs-parser": ">=18.1.1"
+  },
+  "packageManager": "yarn@1.22.18"
+}

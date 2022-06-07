@@ -11,11 +11,8 @@ const scheduleSchema = Joi.object({
     .format('YYYY-MM-DD')
     .iso()
     .min(Joi.ref('start'))
-    .required()
+    .valid('', null)
     .messages({
-      'date.required': 'Provide an end date.',
-      'date.base': 'Provide an end date.',
-      'date.empty': 'Provide an end date.',
       'date.format': 'Provide an end date.',
       'date.min': 'Provide an end date that is after the start date.',
       'any.ref': 'Provide an end date that is after the start date.'
