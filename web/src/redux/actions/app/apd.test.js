@@ -8,7 +8,10 @@ import {
   fetchAllApds,
   saveApd,
   selectApd,
-  setApdToSelectOnLoad
+  setApdToSelectOnLoad,
+  toggleAdminCheck,
+  toggleMiniCheck,
+  toggleAdminCheckComplete
 } from './apd';
 import {
   CREATE_APD_FAILURE,
@@ -25,7 +28,10 @@ import {
   SAVE_APD_SUCCESS,
   SELECT_APD_SUCCESS,
   SELECT_APD_REQUEST,
-  SET_APD_TO_SELECT_ON_LOAD
+  SET_APD_TO_SELECT_ON_LOAD,
+  ADMIN_CHECK_TOGGLE,
+  ADMIN_CHECK_MINI_TOGGLE,
+  ADMIN_CHECK_COMPLETE_TOGGLE
 } from './symbols';
 import { ARIA_ANNOUNCE_CHANGE } from '../aria';
 import { UPDATE_BUDGET } from '../budget';
@@ -439,6 +445,84 @@ describe('application-level actions', () => {
       await store.dispatch(setApdToSelectOnLoad());
 
       expect(store.getActions()).toEqual([]);
+    });
+  });
+
+  describe('controls the admin panel', () => {
+    it('toggles the admin check on', async () => {
+      const store = mockStore({
+        apd: { adminCheck: false }
+      });
+
+      await store.dispatch(toggleAdminCheck(true));
+
+      const expectedActions = [{ type: ADMIN_CHECK_TOGGLE, data: true }];
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('toggles the admin check off', async () => {
+      const store = mockStore({
+        apd: { adminCheck: true }
+      });
+
+      await store.dispatch(toggleAdminCheck(false));
+
+      const expectedActions = [{ type: ADMIN_CHECK_TOGGLE, data: false }];
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('toggles the admin check mini on', async () => {
+      const store = mockStore({
+        apd: { adminCheckMini: false }
+      });
+
+      await store.dispatch(toggleMiniCheck(true));
+
+      const expectedActions = [{ type: ADMIN_CHECK_MINI_TOGGLE, data: true }];
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('toggles the admin check mini off', async () => {
+      const store = mockStore({
+        apd: { adminCheckMini: true }
+      });
+
+      await store.dispatch(toggleMiniCheck(false));
+
+      const expectedActions = [{ type: ADMIN_CHECK_MINI_TOGGLE, data: false }];
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('toggles the admin check complete on', async () => {
+      const store = mockStore({
+        apd: { adminCheckComplete: false }
+      });
+
+      await store.dispatch(toggleAdminCheckComplete(true));
+
+      const expectedActions = [
+        { type: ADMIN_CHECK_COMPLETE_TOGGLE, data: true }
+      ];
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+
+    it('toggles the admin check complete off', async () => {
+      const store = mockStore({
+        apd: { adminCheckComplete: true }
+      });
+
+      await store.dispatch(toggleAdminCheckComplete(false));
+
+      const expectedActions = [
+        { type: ADMIN_CHECK_COMPLETE_TOGGLE, data: false }
+      ];
+
+      expect(store.getActions()).toEqual(expectedActions);
     });
   });
 });

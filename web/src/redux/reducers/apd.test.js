@@ -12,7 +12,10 @@ const {
   FETCH_ALL_APDS_REQUEST,
   FETCH_ALL_APDS_SUCCESS,
   SAVE_APD_SUCCESS,
-  SET_APD_TO_SELECT_ON_LOAD
+  SET_APD_TO_SELECT_ON_LOAD,
+  ADMIN_CHECK_TOGGLE,
+  ADMIN_CHECK_MINI_TOGGLE,
+  ADMIN_CHECK_COMPLETE_TOGGLE
 } = require('../actions/app');
 const {
   ADD_APD_ITEM,
@@ -1174,6 +1177,50 @@ describe('APD reducer', () => {
       },
       { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
     );
+  });
+
+  describe('admin check panel toggles', () => {
+    it('should handle turning the admin check on', () => {
+      expect(
+        apd(initialState, {
+          type: ADMIN_CHECK_TOGGLE,
+          data: true
+        })
+      ).toEqual({
+        ...initialState,
+        adminCheck: true,
+        adminCheckMini: false,
+        adminCheckComplete: false
+      });
+    });
+
+    it('should handle turning the admin check mini on', () => {
+      expect(
+        apd(initialState, {
+          type: ADMIN_CHECK_MINI_TOGGLE,
+          data: true
+        })
+      ).toEqual({
+        ...initialState,
+        adminCheck: false,
+        adminCheckMini: true,
+        adminCheckComplete: false
+      });
+    });
+
+    it('should handle turning the admin check mini on', () => {
+      expect(
+        apd(initialState, {
+          type: ADMIN_CHECK_COMPLETE_TOGGLE,
+          data: true
+        })
+      ).toEqual({
+        ...initialState,
+        adminCheck: false,
+        adminCheckMini: false,
+        adminCheckComplete: true
+      });
+    });
   });
 });
 
