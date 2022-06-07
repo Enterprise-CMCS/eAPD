@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -36,10 +36,22 @@ const Schedule = ({
       start: plannedStartDate || '',
       end: plannedEndDate || ''
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
     resolver: joiResolver(scheduleSchema)
   });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger(['start']);
+    }
+  }, []);
+
+  const triggerDates = () => {
+    if (adminCheck && plannedEndDate) {
+      trigger();
+    } else if (adminCheck && !plannedEndDate) {
+      trigger('start');
+    }
+  };
 
   return (
     <Subsection resource="activities.schedule">
@@ -49,7 +61,7 @@ const Schedule = ({
             name="start"
             control={control}
             render={({
-              field: { onChange, onBlur, ...props },
+              field: { onChange, ...props },
               formState: { isTouched }
             }) => (
               <DateField
@@ -59,22 +71,18 @@ const Schedule = ({
                 onChange={(_, dateStr) => {
                   setStartDate(activityIndex, dateStr);
                   onChange(dateStr);
-                  trigger();
-                }}
-                onComponentBlur={() => {
-                  onBlur();
-                  if (getFieldState('end').isTouched) {
-                    trigger('end');
-                  }
+
+                  triggerDates();
                 }}
                 errorMessage={errors?.start?.message}
+                errorPlacement="bottom"
               />
             )}
           />
           <Controller
             name="end"
             control={control}
-            render={({ field: { onChange, onBlur, ...props } }) => {
+            render={({ field: { onChange, ...props } }) => {
               return (
                 <DateField
                   {...props}
@@ -83,17 +91,10 @@ const Schedule = ({
                     setEndDate(activityIndex, dateStr);
                     onChange(dateStr);
 
-                    if (adminCheck) {
-                      trigger();
-                    }
-                  }}
-                  onComponentBlur={() => {
-                    onBlur();
-                    if (getFieldState('start').isTouched) {
-                      trigger('start');
-                    }
+                    triggerDates();
                   }}
                   errorMessage={errors?.end?.message}
+                  errorPlacement="bottom"
                 />
               );
             }}
