@@ -316,4 +316,4 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminCheckPanel);
 
-export { mapDispatchToProps, AdminCheckPanel, mapStateToProps };
+export { AdminCheckPanel as plain, mapDispatchToProps, mapStateToProps };
