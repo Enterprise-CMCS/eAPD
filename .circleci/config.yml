@@ -1026,7 +1026,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install zip -y
             yarn install --frozen-lockfile --production=true
-            zip -r /tmp/backend.zip api/*
+            zip -r /tmp/backend.zip api package.json yarn.lock common
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip
