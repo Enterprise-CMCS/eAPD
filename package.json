@@ -22,7 +22,8 @@
     "prepare": "yarn run snyk-protect",
     "snyk-protect": "snyk-protect",
     "create:route": "npx hygen routes new route",
-    "create:story": "npx hygen stories new story"
+    "create:story": "npx hygen stories new story",
+    "create:component": "npx hygen components new component"
   },
   "keywords": [
     "cms",
