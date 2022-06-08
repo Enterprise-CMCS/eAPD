@@ -16,8 +16,6 @@ terraform {
 provider "aws" {
     region = "us-east-1"
     profile = ""
-    access_key = ""
-    secret_key = ""
 }
 
 data "aws_vpc" "eapd-vpc-east-test" {
@@ -42,15 +40,6 @@ resource "aws_security_group" "eapd-pr-sg-east-test" {
     description = "Insecure Web Traffic from Internet"
     from_port   = 80
     to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "SSH Access from Internet"
-    from_port   = 22
-    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["0.0.0.0/0"]

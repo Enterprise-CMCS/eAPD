@@ -14,11 +14,10 @@ terraform {
 provider "aws" {
     region = "us-east-1"
     profile = ""
-    access_key = ""
-    secret_key = ""
 }
 
 module "eAPD" {
     source = "./modules"
     instance_name = var.instance_name
+    newrelic_liscense_key = var.newrelic_liscense_key
 }
