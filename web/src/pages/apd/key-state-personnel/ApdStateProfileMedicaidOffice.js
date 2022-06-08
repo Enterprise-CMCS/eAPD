@@ -95,6 +95,8 @@ const ApdStateProfile = ({
     resolver: joiResolver(keyMedicaidSchema)
   });
 
+  console.log({adminCheck});
+
   useEffect(() => {
     if (adminCheck) {
       trigger();
@@ -202,7 +204,8 @@ const ApdStateProfile = ({
           )}
         />
         <TextField
-          name="apd-state-profile-addr2"
+          name={`medicaidOffice.address2`}
+          id="apd-state-profile-addr2"
           label={t(`${offTRoot}.labels.address2`)}
           hint="Optional"
           value={medicaidOffice.address2}

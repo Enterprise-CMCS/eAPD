@@ -5,6 +5,7 @@ import {
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
+import Joi from 'joi';
 import axios from '../../../util/api';
 import ApdStateProfileMedicaidOffice from './ApdStateProfileMedicaidOffice';
 
@@ -51,8 +52,6 @@ describe('<ApdStateProfileMedicaidOffice />', () => {
   describe('sets up Key State Medicaid Director and Office', () => {
     it('renders successfully', async () => {
       setup({}, { initialState });
-
-      expect(screen.getByText('Provide the name of the State Medicaid Director.')).toBeTruthy()
     })
   });
 });
