@@ -14,16 +14,20 @@ import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 
-const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, years }) => {
+const ExportAndSubmit = ({
+  push: pushRoute,
+  toggleAdminCheck: toggleAdmin,
+  years
+}) => {
   const paramApdId = useParams().apdId;
 
   if (!paramApdId) {
     return <Redirect to="/apd" />;
   }
-  
+
   const handleAdminCheck = () => {
     toggleAdmin(true);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -31,8 +35,14 @@ const ExportAndSubmit = ({ push: pushRoute, toggleAdminCheck: toggleAdmin, years
       <AlertMissingFFY />
       <Section resource="exportAndSubmit">
         <Subsection resource="adminCheck">
-          <p>Choose Run Administrative Check to see a list of required fields which are missing content. Providing content will help ensure that your APD is administratively complete and ready for submission to CMS. Missing content from these sections could delay a decision by CMS and result in additional review cycles for this APD.</p>
-          <Button 
+          <p>
+            Choose Run Administrative Check to see a list of required fields
+            which are missing content. Providing content will help ensure that
+            your APD is administratively complete and ready for submission to
+            CMS. Missing content from these sections could delay a decision by
+            CMS and result in additional review cycles for this APD.
+          </p>
+          <Button
             onClick={handleAdminCheck}
             size="big"
             variation="primary"
@@ -74,7 +84,7 @@ const mapStateToProps = state => ({
   years: selectApdYears(state)
 });
 
-const mapDispatchToProps = { 
+const mapDispatchToProps = {
   push,
   toggleAdminCheck
 };
