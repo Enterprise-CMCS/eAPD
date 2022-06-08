@@ -1,35 +1,45 @@
 import React from 'react';
 import {
   renderWithConnection,
+  screen
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
 import axios from '../../../util/api';
 import ApdStateProfileMedicaidOffice from './ApdStateProfileMedicaidOffice';
 
-const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException'});
 
 const initialState = {
-  adminCheck: false,
   apd: {
     data: {
       keyStatePersonnel: {
         medicaidDirector: {
-          name: 'name',
-          email: 'email',
-          phone: 'phone'
+          email: '',
+          name: '',
+          phone: ''
         },
         medicaidOffice: {
-          address1: 'address 1',
-          address2: 'address 2',
-          city: 'city',
-          state: 'state',
-          zip: 'zip'
-        }
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          zip: ''
+        },
+        keyPersonnel: []
+      }
+    },
+    adminCheck: true
+  },
+  user: {
+    data: {
+      state: {
+        id:"ak",
+        name:"Alaska"
       }
     }
   }
-};
+}
 
 const setup = (props = {}, options = {}) => renderWithConnection(<ApdStateProfileMedicaidOffice {...props} />, options);
 
@@ -38,13 +48,11 @@ describe('<ApdStateProfileMedicaidOffice />', () => {
     fetchMock.reset();
   });
 
-  describe('apd state profile, Medicaid office component', () => {
-    it('renders correctly', async () => {
-      setup(
-        {
-          initialState
-        }
-      );
+  describe('sets up Key State Medicaid Director and Office', () => {
+    it('renders successfully', async () => {
+      setup({}, { initialState });
+
+      expect(screen.getByText('Provide the name of the State Medicaid Director.')).toBeTruthy()
     })
-  })
-})
+  });
+});

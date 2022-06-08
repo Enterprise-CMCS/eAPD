@@ -291,7 +291,7 @@ ApdStateProfile.propTypes = {
     medicaidOffice: PropTypes.object,
     keyPersonnel: PropTypes.array
   }).isRequired,
-  adminCheck: PropTypes.func.isRequired
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
