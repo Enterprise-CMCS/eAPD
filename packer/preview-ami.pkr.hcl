@@ -56,7 +56,7 @@ build {
             "OKTA_API_KEY=${var.preview_okta_api_key}",
             "ENVIRONMENT=${var.environment}"
         ]        
-        script = "./bootstrap202202171243.sh"
+        script = "./preview20220608.sh"
     }
     provisioner "file" {
         source = "nginx.conf.tpl"
