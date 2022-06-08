@@ -715,6 +715,10 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
+          name: Prepare Yarn for Web App Build
+          working_directory: ~/project
+          command: yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
+      - run:
           name: build the web app
           working_directory: ~/project/web
           command: WEB_ENV="${<< parameters.web_env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
@@ -1021,8 +1025,8 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install zip -y
-            yarn install --frozen-lockfile --production=true
-            zip -r /tmp/backend.zip api/*
+            yarn install --frozen-lockfile --production=true --network-timeout 1000000
+            zip -r /tmp/backend.zip api/* package.json yarn.lock common/*
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip
