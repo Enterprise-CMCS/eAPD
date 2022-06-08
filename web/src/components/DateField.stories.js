@@ -13,12 +13,14 @@ export default {
   }
 };
 
-export const ValidDateStory = args => <DateField {...args} />;
+const Template = args => <DateField {...args} />;
+
+export const ValidDateStory = Template.bind({});
 ValidDateStory.args = {
   value: '2020-01-01'
 };
 
-export const ErrorStory = args => <DateField {...args} />;
+export const ErrorStory = Template.bind({});
 ErrorStory.args = {
   value: '1-1-1',
   errorMessage: 'Please enter a valid date'

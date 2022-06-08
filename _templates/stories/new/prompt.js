@@ -2,7 +2,7 @@ module.exports = [
   {
     type: 'input',
     name: 'componentName',
-    message: 'What is the name of the component?'
+    message: 'What is the name of the component? (case sensitive)'
   },
   {
     type: 'input',

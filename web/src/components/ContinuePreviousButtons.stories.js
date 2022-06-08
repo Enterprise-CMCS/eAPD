@@ -6,7 +6,6 @@ export default {
   title: 'Components/ContinuePreviousButtons (Redux)',
   component: ContinuePreviousButtons,
   includedStories: /.*Story$/,
-  // decorators,
   parameters: {
     jest: ['ContinuePreviousButtons.test.js'],
     layout: 'padded'
