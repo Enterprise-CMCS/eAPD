@@ -15,7 +15,7 @@ import { setApdToSelectOnLoad, selectApd } from '../redux/actions/app';
 
 import ApdPageRoutes from '../pages/apd/ApdPageRoutes';
 import Loading from '../components/Loading';
-import { plain as AdminCheckPanel } from '../components/AdminCheckPanel';
+import AdminCheckPanel from '../components/AdminCheckPanel';
 
 import { getAPDId } from '../redux/reducers/apd';
 
