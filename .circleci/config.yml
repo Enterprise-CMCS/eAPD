@@ -1025,8 +1025,8 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install zip -y
-            yarn install --frozen-lockfile --production=true
-            zip -r /tmp/backend.zip api package.json yarn.lock common
+            yarn install --frozen-lockfile --production=true --network-timeout 1000000
+            zip -r /tmp/backend.zip api/* package.json yarn.lock common/*
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip
