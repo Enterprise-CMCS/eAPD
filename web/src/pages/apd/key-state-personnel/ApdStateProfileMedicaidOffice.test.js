@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  renderWithConnection,
-  screen
+  renderWithConnection
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
-import Joi from 'joi';
 import axios from '../../../util/api';
 import ApdStateProfileMedicaidOffice from './ApdStateProfileMedicaidOffice';
 
@@ -30,7 +28,7 @@ const initialState = {
         keyPersonnel: []
       }
     },
-    adminCheck: true
+    adminCheck: false
   },
   user: {
     data: {
