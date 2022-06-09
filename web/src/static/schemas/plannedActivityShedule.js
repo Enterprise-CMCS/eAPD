@@ -1,7 +1,11 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
 const scheduleSchema = Joi.object({
-  start: Joi.date().format('YYYY-MM-DD').iso().required().messages({
+  start: Joi.date()
+    .format('YYYY-MM-DD')
+    .iso()
+    .required()
+    .messages({
       'date.required': 'Provide a start date.',
       'date.base': 'Provide a start date.',
       'date.empty': 'Provide a start date.',
@@ -11,7 +15,6 @@ const scheduleSchema = Joi.object({
     .format('YYYY-MM-DD')
     .iso()
     .min(Joi.ref('start'))
-    .valid('', null)
     .messages({
       'date.format': 'Provide an end date.',
       'date.min': 'Provide an end date that is after the start date.',

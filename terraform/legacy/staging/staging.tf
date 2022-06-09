@@ -19,4 +19,5 @@ provider "aws" {
 module "eAPD" {
     source = "./modules"
     instance_name = var.instance_name
+    newrelic_liscense_key = var.newrelic_liscense_key
 }
