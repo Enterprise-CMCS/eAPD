@@ -1269,6 +1269,44 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
+  describe.only('Rich text field functionality', () => {
+    it('tests uploading an image', () => {
+      cy.useStateStaff();
+
+      cy.get(`a[href='${apdUrl}']`).click();
+
+      // cy.fixture('eAPD_Logo.jpg').as('image').then(() => {
+      //   cy.setTinyMceContent('hit-overview-field', this.image)
+      // })
+
+      cy.fixture('eAPD_Logo.jpg').then((logo) => {
+        cy.get('[class="tox-sidebar-wrap"]').eq(1).trigger('drop', {
+          dataTransfer: {
+            files: [logo]
+          }
+        });
+      });
+
+      // cy.fixture('eAPD_Logo.jpg')
+      // .then(Cypress.Blob.base64StringToBlob)
+      // .then(fileContent => {
+      //   const file = new File([fileContent], 'eAPD_Logo.jpg', {
+      //     type: 'jpg'
+      //   });
+
+        // cy.setTinyMceContent('hit-overview-field', "Drag and Drop here");
+
+        // cy.get('[class="tox-sidebar-wrap"]')
+
+        // cy.get('[class="tox-sidebar-wrap"]').eq(1).trigger('drop', {
+        //   dataTransfer: {
+        //     files: [file]
+        //   }
+        // });
+      // });
+    })
+  })
+
   describe('Delete APD', () => {
     it('deletes the APD', () => {
       cy.useStateStaff();
