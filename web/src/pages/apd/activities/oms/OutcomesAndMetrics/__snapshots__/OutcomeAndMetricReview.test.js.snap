@@ -21,7 +21,7 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
      
     outcome description
   </p>
-  <p
+  <div
     className="ds-u-margin-top--2"
   >
     <ul
@@ -47,6 +47,6 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
         second metric
       </li>
     </ul>
-  </p>
+  </div>
 </Review>
 `;
