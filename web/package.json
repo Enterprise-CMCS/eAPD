@@ -74,7 +74,7 @@
     "postcss": "8.4.13",
     "postcss-cli": "9.1.0",
     "postcss-loader": "6.2.1",
-    "postcss-preset-env": "7.4.2",
+    "postcss-preset-env": "7.6.0",
     "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-countdown": "2.3.2",
