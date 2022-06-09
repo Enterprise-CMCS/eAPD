@@ -17,7 +17,7 @@ resource "aws_instance" "eapd_mongo" {
     vpc_security_group_ids      = ["sg-01e01435dbbe6ce32", aws_security_group.eapd-staging-mongo-ec2.id]
     subnet_id                   = "subnet-07e1b9ed6ed5fb8c7"
     key_name                    = "eapd_bbrooks"
-#    user_data                   = "../../../bin/prod-deploy/aws.user-data.sh"
+
     tags = {
         Name = var.instance_name
         Environment = "staging"
