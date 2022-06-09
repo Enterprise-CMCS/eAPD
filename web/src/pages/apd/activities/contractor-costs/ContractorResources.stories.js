@@ -13,10 +13,6 @@ export default {
     controls: {
       exclude: /.*$/,
       hideNoControlsWarning: true
-    },
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/file/6eVvo7JjvXiovGTR4BoVgK/CMS-eAPD-2022?node-id=3023%3A0'
     }
   },
   args: {
@@ -27,6 +23,12 @@ export default {
 const Template = args => <ContractorResources {...args} />;
 
 export const NoContractorStory = Template.bind({});
+NoContractorStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/6eVvo7JjvXiovGTR4BoVgK/CMS-eAPD-2022?node-id=3023%3A0'
+  }
+};
 NoContractorStory.decorators = [
   story =>
     renderWithProvider({
@@ -47,6 +49,12 @@ NoContractorStory.decorators = [
 ];
 
 export const SingleContractorStory = Template.bind({});
+SingleContractorStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/6eVvo7JjvXiovGTR4BoVgK/CMS-eAPD-2022?node-id=3024%3A24376'
+  }
+};
 SingleContractorStory.decorators = [
   story =>
     renderWithProvider({
@@ -91,6 +99,12 @@ SingleContractorStory.decorators = [
 ];
 
 export const MultipleContractorsStory = Template.bind({});
+MultipleContractorsStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/6eVvo7JjvXiovGTR4BoVgK/CMS-eAPD-2022?node-id=3030%3A4'
+  }
+};
 MultipleContractorsStory.decorators = [
   story =>
     renderWithProvider({
