@@ -466,8 +466,12 @@ const reducer = (state = initialState, action) => {
                 ...expense,
                 key: generateKey()
               })),
-              outcomes: outcomes.map(outcome => ({
-                ...outcome,
+              outcomes: outcomes.map(outcomeObj => ({
+                outcome: outcomeObj.outcome,
+                metrics: outcomeObj.metrics.map(metric => ({
+                  ...metric,
+                  key: generateKey()
+                })),
                 key: generateKey()
               })),
               schedule: schedule.map(milestone => ({
