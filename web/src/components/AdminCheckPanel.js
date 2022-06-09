@@ -117,7 +117,9 @@ const AdminCheckPanel = ({
               </div>
               {adminCheckComplete && (
                 <Fragment>
-                  <p>Well Done! The Administrative Check is complete.</p>
+                  <p role="alert">
+                    Well Done! The Administrative Check is complete.
+                  </p>
                   <p>
                     Return to the{' '}
                     <Link to="export">Export and Submit page.</Link>
@@ -192,7 +194,10 @@ const AdminCheckPanel = ({
                 <hr className="eapd-admin-check__divider" />
                 {adminCheckComplete && (
                   <Fragment>
-                    <h3 className="ds-u-text-align--center ds-text-heading--2xl ds-u-font-weight--normal ds-u-margin-top--1">
+                    <h3
+                      role="alert"
+                      className="ds-u-text-align--center ds-text-heading--2xl ds-u-font-weight--normal ds-u-margin-top--1"
+                    >
                       Administrative Check is Complete
                     </h3>
                     <p className="ds-u-text-align--center ds-h4 ds-u-margin-top--1 ds-u-font-weight--normal">
