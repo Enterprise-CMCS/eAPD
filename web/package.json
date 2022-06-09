@@ -42,7 +42,7 @@
     "@fortawesome/free-regular-svg-icons": "5.15.4",
     "@fortawesome/free-solid-svg-icons": "5.15.4",
     "@fortawesome/react-fontawesome": "0.1.17",
-    "@hookform/resolvers": "2.8.8",
+    "@hookform/resolvers": "2.8.10",
     "@joi/date": "2.1.0",
     "@okta/okta-auth-js": "6.5.1",
     "@tinymce/tinymce-react": "3.14.0",
