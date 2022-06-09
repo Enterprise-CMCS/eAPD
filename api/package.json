@@ -61,7 +61,7 @@
     "jsonpatch-to-mongodb": "1.0.0",
     "jsonpointer": "5.0.0",
     "jsonwebtoken": "8.5.1",
-    "knex": "1.0.3",
+    "knex": "1.0.7",
     "migrate-mongoose": "4.0.0",
     "mongoose": "5.13.14",
     "morgan": "1.10.0",
