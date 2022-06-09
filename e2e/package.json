@@ -1,15 +1,14 @@
 {
-  "name": "cypress_tests",
-  "version": "1.0.0",
+  "name": "@cms-eapd/e2e",
+  "version": "0.0.1",
   "description": "Cypress tests for the EAPD tool",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint 'cypress/**/*.js'",
     "audit": "npx audit-ci --config ./audit-ci.json",
     "cy:open": "./cypress-setup.sh open --config numTestsKeptInMemory=50",
     "cy:run": "./cypress-setup.sh run",
-    "cy:run:ci": "cypress run -C cypress.json --headless --browser chrome",
-    "lint": "eslint 'cypress/**/*.js'",
-    "npm-check": "npx npm-check-updates"
+    "cy:run:ci": "cypress run -C cypress.json --headless --browser chrome "
   },
   "repository": {
     "type": "git",
@@ -21,6 +20,7 @@
     "node": "16.15.0"
   },
   "dependencies": {
+    "@cms-eapd/api": "0.0.1",
     "@foreachbe/cypress-tinymce": "1.0.0",
     "react": "17.0.2",
     "tinymce": "5.10.4"
@@ -43,11 +43,9 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.29.4",
-    "eslint-plugin-react-hooks": "4.3.0",
-    "knex": "1.0.2",
-    "mocha": "9.2.2",
-    "pg": "8.7.3"
+    "eslint-plugin-react-hooks": "4.3.0"
   },
+  "resolutions": {},
   "jest": {
     "setupFiles": [
       "./polyfills.test.js"

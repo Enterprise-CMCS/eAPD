@@ -29,13 +29,6 @@ workflows:
     jobs:
       - install dependencies
       - dependency vulnerability scan:
-          name: backend dependency vulnerability scan
-          path: api
-          requires:
-            - install dependencies
-      - dependency vulnerability scan:
-          name: frontend dependency vulnerability scan
-          path: web
           requires:
             - install dependencies
 
@@ -70,6 +63,12 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - dependency vulnerability scan:
+          filters:
+            tags:
+              only: /.*/
+          requires:
+            - install dependencies
       - owasp zap scan:
           filters:
             tags:
@@ -86,14 +85,15 @@ workflows:
           filters:
             branches:
               ignore:
+                - main
                 - gh-pages
             tags:
               ignore: ignore-e2e
           requires:
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
+
       - chromatic deployment:
           filters:
             branches:
@@ -104,22 +104,13 @@ workflows:
           requires:
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
 
       # backend jobs
       - backend api endpoint test:
           filters:
             tags:
               only: /.*/
-          requires:
-            - install dependencies
-      - dependency vulnerability scan:
-          filters:
-            tags:
-              only: /.*/
-          name: backend dependency vulnerability scan
-          path: api
           requires:
             - install dependencies
       - backend lint:
@@ -142,9 +133,9 @@ workflows:
               only:
                 - main
           requires:
+            - dependency vulnerability scan
             - store artifacts staging
             - backend api endpoint test
-            - backend dependency vulnerability scan
             - backend lint
             - backend unit test
       - backend deploy:
@@ -156,27 +147,20 @@ workflows:
             tags:
               only: /^v.*/
           requires:
+            - dependency vulnerability scan
             - store artifacts prod
             - backend api endpoint test
-            - backend dependency vulnerability scan
             - backend lint
             - backend unit test
 
       # frontend jobs
-      - dependency vulnerability scan:
-          filters:
-            tags:
-              only: /.*/
-          name: frontend dependency vulnerability scan
-          path: web
-          requires:
-            - install dependencies
       - frontend lint:
           filters:
             tags:
               only: /.*/
           requires:
             - install dependencies
+            - yaml test
       - frontend test:
           filters:
             tags:
@@ -187,6 +171,7 @@ workflows:
       - frontend build:
           name: frontend build preview
           env: PRODUCTION
+          web_env: development
           filters:
             branches:
               ignore:
@@ -196,8 +181,7 @@ workflows:
             - owasp zap scan
             - frontend lint
             - backend lint
-            - frontend dependency vulnerability scan
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend test
             - yaml test
             - backend unit test
@@ -206,22 +190,24 @@ workflows:
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
+          web_env: production
           filters:
             branches:
               ignore: /.*/
             tags:
               only: /^v.*/
           requires:
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
       - frontend build:
           name: frontend build staging
           env: STAGING
+          web_env: staging
           filters:
             branches:
               only:
                 - main
           requires:
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
       - frontend deploy:
           name: frontend deploy staging
           env: STAGING
@@ -231,7 +217,7 @@ workflows:
                 - main
           requires:
             - frontend build staging
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend lint
             - frontend test
             - yaml test
@@ -248,7 +234,7 @@ workflows:
               only: /^v.*/
           requires:
             - frontend build prod
-            - frontend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend lint
             - frontend test
             - yaml test
@@ -275,7 +261,7 @@ workflows:
               only:
                 - main
           requires:
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend build staging
 
       - store artifacts:
@@ -286,7 +272,7 @@ workflows:
             tags:
               only: /^v.*/
           requires:
-            - backend dependency vulnerability scan
+            - dependency vulnerability scan
             - frontend build prod
 
 jobs:
@@ -319,8 +305,9 @@ jobs:
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             packer build --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var preview_mongo_database=$PREVIEW_MONGO_DATABASE \
               --var preview_mongo_initdb_root_username=$PREVIEW_MONGO_INITDB_ROOT_USERNAME --var preview_mongo_initdb_root_password=$PREVIEW_MONGO_INITDB_ROOT_PASSWORD \
-              --var preview_mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME \
-              --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
+              --var preview_mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE \
+              --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
+              --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
               preview-ami.pkr.hcl
   build production staging ami:
@@ -400,15 +387,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
+          name: restore yarn package cache
+          keys:
+            - cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: install web dependencies
-          working_directory: ~/project/web
-          command: yarn install --frozen-lockfile
-      - run:
-          name: install api dependencies
-          working_directory: ~/project/api
-          command: yarn install --frozen-lockfile
+          name: install dependencies
+          working_directory: ~/project
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
       - run:
           name: setup nvm
           command: |
@@ -421,12 +406,14 @@ jobs:
             echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - save_cache:
-          key: cms-hitech-apd-yarn-{{ checksum "web/yarn.lock" }}-{{ checksum "api/yarn.lock" }}
+          name: save yarn package cache
+          key: cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - /root/.yarnrc
+            - ~/.cache/yarn
       - persist_to_workspace:
           root: ~/project
           paths:
+            - node_modules
             - api/node_modules
             - web/node_modules
 
@@ -462,8 +449,8 @@ jobs:
           password: $DOCKER_EAPD_PW
     steps:
       - checkout
-      - run: yarn add glob
-      - run: yarn add js-yaml
+      - run: npm i glob
+      - run: npm i js-yaml
       - run:
           working_directory: ~/project/web
           command: node yaml-tests.js
@@ -488,8 +475,8 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb
       - run:
           name: set up environment
-          working_directory: ~/project
           no_output_timeout: 30m
+          working_directory: ~/project
           command: |
             export NODE_ENV=development
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
@@ -506,7 +493,7 @@ jobs:
             docker-compose exec api yarn run seed
       - run:
           name: set up cypress
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 30m
           command: |
             export NODE_ENV=development
@@ -520,52 +507,62 @@ jobs:
             nvm alias default 16.15.0
             nvm use 16.15.0
 
-            yarn install --frozen-lockfile
+            # yarn install --frozen-lockfile
             npx cypress install --force
             npx cypress verify
       - run:
           name: run e2e tests authentication
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.spec.js"; fi
       - run:
           name: run e2e tests apd - basics
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.spec.js"; fi
       - run:
           name: run e2e tests apd - default
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.spec.js"; fi
       - run:
           name: run e2e tests apd - data
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.spec.js"; fi
       - run:
           name: run e2e tests admin
-          working_directory: ~/project/integrationTests
+          working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.15.0; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
 
@@ -590,6 +587,7 @@ jobs:
           working_directory: ~/project/web
           no_output_timeout: 60m
           command: |
+            export WEB_ENV="test"
             STORYBOOK_BUILD_TIMEOUT=1200000 yarn build:storybook
             yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
@@ -633,10 +631,10 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project/api
+          working_directory: ~/project/
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api ./
+            docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: run tests
           working_directory: ~/project/api
@@ -674,10 +672,10 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project/api
+          working_directory: ~/project/
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api ./
+            docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: run tests
           working_directory: ~/project/api
@@ -704,6 +702,9 @@ jobs:
       env:
         description: The environment being deployed
         type: string
+      web_env:
+        description: The type of environment being deployed
+        type: string
     docker:
       - image: cimg/node:16.15.0
         auth:
@@ -714,9 +715,13 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
+          name: Prepare Yarn for Web App Build
+          working_directory: ~/project
+          command: yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
+      - run:
           name: build the web app
           working_directory: ~/project/web
-          command: WEB_ENV="${<< parameters.env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: WEB_ENV="${<< parameters.web_env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -759,7 +764,9 @@ jobs:
       - run:
           name: run tests
           working_directory: ~/project/web
-          command: yarn test -- --runInBand
+          command: |
+            export WEB_ENV="test"
+            yarn test --runInBand
       - run:
           name: report coverage
           when: always
@@ -771,10 +778,6 @@ jobs:
 
   # Uses audit-ci to scan the installed dependencies for known vulnerabilities.
   dependency vulnerability scan:
-    parameters:
-      path:
-        description: The path to test
-        type: string
     docker:
       - image: cimg/node:16.15.0
         auth:
@@ -786,7 +789,6 @@ jobs:
           at: ~/project
       - run:
           name: vulnerability scan
-          working_directory: ~/project/<< parameters.path >>
           command: |
             yarn run audit
 
@@ -798,32 +800,31 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: build API image
-          working_directory: ~/project/api
-          command: |
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api ./
-      - run:
           name: start everything up
-          working_directory: ~/project/api
+          working_directory: ~/project
           no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            COMPOSE_HTTP_TIMEOUT=150 docker-compose -f docker-compose.endpoint-tests.yml up -d
-            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
-            docker-compose -f docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
+            export COMPOSE_PROJECT_NAME=api
+            COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
+          working_directory: ~/project/api
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api
             docker pull owasp/zap2docker-stable:2.11.1
       - run:
           name: run owasp zap
+          working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api
             docker run \
               --network api_default \
-              -v "$(pwd)/owasp":/zap/wrk \
+              -v $(pwd)/owasp:/zap/wrk:rw \
               owasp/zap2docker-stable:2.11.1 \
               zap-api-scan.py \
               -c api-scan.conf \
@@ -998,7 +999,8 @@ jobs:
                 --MONGO_DATABASE "$PREVIEW_MONGO_DATABASE" \
                 --MONGO_URL "$PREVIEW_MONGO_URL" \
                 --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
-                --DATABASE_URL "$PREVIEW_DATABASE_URL"
+                --DATABASE_URL "$PREVIEW_DATABASE_URL" \
+                --TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
@@ -1023,10 +1025,8 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install zip -y
-            cd api
-            yarn install --frozen-lockfile --production=true
-            cd ..
-            zip -r /tmp/backend.zip api/*
+            yarn install --frozen-lockfile --production=true --network-timeout 1000000
+            zip -r /tmp/backend.zip api/* package.json yarn.lock common/*
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip

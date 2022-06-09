@@ -1,21 +1,31 @@
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import 'tinymce/tinymce';
 import { Editor } from '@tinymce/tinymce-react';
 
-// A theme is required
+// TinyMCE so the global var exists
+// eslint-disable-next-line no-unused-vars
+import 'tinymce/tinymce';
+
+// Theme
 import 'tinymce/themes/silver';
+// Toolbar icons
 import 'tinymce/icons/default';
+// Editor styles
+import 'tinymce/skins/ui/oxide/skin.min.css';
+
+/* Import content css */
+import contentUiCss from 'tinymce/skins/ui/oxide/content.min.css';
+import contentCss from 'tinymce/skins/content/default/content.min.css';
 
 // Any plugins you want to use have to be imported
 import 'tinymce/plugins/advlist';
-import 'tinymce/plugins/autoresize';
-import 'tinymce/plugins/lists';
+import 'tinymce/plugins/link';
 import 'tinymce/plugins/image';
+import 'tinymce/plugins/lists';
+import 'tinymce/plugins/autoresize';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
-import 'tinymce/plugins/link';
 
 import { uploadFile } from '../redux/actions/editApd';
 import { generateKey } from '../util';
@@ -196,6 +206,9 @@ class RichText extends Component {
             id={id}
             cloudChannel="community"
             init={{
+              skin: false,
+              content_css: false,
+              content_style: [contentCss, contentUiCss].join('\n'),
               toolbar,
               plugins,
               setup: setupTinyMCE(upload, onBlur),

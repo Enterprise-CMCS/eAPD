@@ -108,8 +108,8 @@ nvm use 16.15.0
 npm i -g yarn@1.22.18
 
 git clone --single-branch https://github.com/CMSgov/eAPD.git
-cd ~/eAPD/api
-yarn install --frozen-lockfile --production=true
+cd ~/eAPD
+yarn install --frozen-lockfile --non-interactive --production=true
 
 #Preparing Mongo DB Users
 cd ~
