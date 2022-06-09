@@ -50,6 +50,7 @@ web/reports
 api/package-lock.json
 web/package-lock.json
 e2e/package-lock.json
+package-lock.json
 docs-build
 
 # Terraform ignores
