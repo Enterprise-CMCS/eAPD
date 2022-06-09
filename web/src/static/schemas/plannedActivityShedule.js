@@ -14,6 +14,7 @@ const scheduleSchema = Joi.object({
   end: Joi.date()
     .format('YYYY-MM-DD')
     .iso()
+    .allow('')
     .min(Joi.ref('start'))
     .messages({
       'date.format': 'Provide an end date.',
