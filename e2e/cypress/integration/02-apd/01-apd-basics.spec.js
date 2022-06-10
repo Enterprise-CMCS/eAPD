@@ -94,7 +94,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get('#apd-title-input').contains(`${title2}`);
       cy.get('[type="checkbox"][checked]').should('have.length', 2);
-      
+
       cy.get('[id="program-introduction-field"]').should('have.value', '');
     });
   });
@@ -581,10 +581,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
         cy.get(`.ds-c-field--day`).click().type(element.dateDay);
 
-        cy.get(`.ds-c-field--year`)
-          .click()
-          .type(element.dateYear)
-          .blur();
+        cy.get(`.ds-c-field--year`).click().type(element.dateYear).blur();
 
         cy.findByRole('button', { name: /Save/i }).click();
 
@@ -613,17 +610,17 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.log('State Staff and Expenses');
       cy.goToStateStaffAndExpenses(0);
-      
+
       cy.findByRole('button', { name: /Add State Staff/i }).click();
-      
+
       cy.findByRole('button', { name: /Cancel/i }).click();
-      
+
       cy.get('.form-and-review-list')
         .contains('State staff have not been added for this activity.')
         .should('exist');
-      
+
       cy.findByRole('button', { name: /Add State Staff/i }).click();
-      
+
       activityPage.checkInputField('Personnel title', '');
       activityPage.checkInputField('Description', '');
       activityPage.checkStateStaffFFY({
@@ -634,22 +631,23 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           total: 0
         }))
       });
-      
+
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
-      
+
       cy.findByRole('button', { name: /Cancel/i }).click();
-      
+
       const staffList = [
         {
           title: 'Test State Staff',
-          description: 'Director of staffing and organizing staff for staffing needs and roles.',
-          costs: [100000,100000],
-          ftes: [1,1]
+          description:
+            'Director of staffing and organizing staff for staffing needs and roles.',
+          costs: [100000, 100000],
+          ftes: [1, 1]
         }
       ];
-      
+
       fillOutActivityPage.fillStateStaff(years, staffList);
-      
+
       cy.get('.form-and-review-list')
         .eq(0)
         .findAllByRole('button', { name: /Edit/i })
@@ -657,60 +655,66 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.findByLabelText('Personnel title').clear().blur();
       cy.contains('Provide a personnel title.').should('exist');
-      
+
       cy.findByLabelText('Description').clear().blur();
       cy.contains('Provide a personnel description.').should('exist');
-      
+
       years.forEach((year, index) => {
         cy.get(`[name="[${year}].amt"`).clear().blur();
-        cy.contains('Please provide a FTE cost greater than or equal to $0.').should('exist');
+        cy.contains(
+          'Please provide a FTE cost greater than or equal to $0.'
+        ).should('exist');
         cy.get(`[name="[${year}].perc"`).clear().blur();
-        cy.contains('Provide a FTE number greater than or equal to 0.').should('exist');
-      })
+        cy.contains('Provide a FTE number greater than or equal to 0.').should(
+          'exist'
+        );
+      });
 
       cy.get('.form-and-review-list')
         .eq(0)
         .findByRole('button', { name: /Cancel/i })
         .click();
-        
+
       activityPage.checkStateStaffOutput({
         name: 'Test State Staff',
         years,
         cost: 100000,
         fte: 1
       });
-      
+
       cy.findByRole('button', { name: /Add State Expense/i }).click();
-      
+
       cy.findByRole('button', { name: /Cancel/i }).click();
-      
+
       cy.get('.form-and-review-list')
         .contains('Add other state expense(s) for this activity.')
         .should('exist');
-      
+
       cy.findByRole('button', { name: /Add State Expense/i }).click();
-      
+
       activityPage.checkInputField('Description', '');
       activityPage.checkFFYinputCostFields({
         years,
         FFYcosts: years.map(() => '')
       });
-      
+
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
-      
+
       cy.findByLabelText('Category').select('').blur();
       cy.contains('Select a category.').should('exist');
-      
+
       cy.findByLabelText('Description').click().blur();
-      cy.contains('Provide a description of the selected non-personal category.').should('exist');
-      
+      cy.contains(
+        'Provide a description of the selected non-personal category.'
+      ).should('exist');
+
       years.forEach(year => {
         cy.findByLabelText(`FFY ${year} Cost`).click().blur();
         cy.contains('Provide an annual cost.').should('exist');
-      })
-      
+      });
+
       cy.findByRole('button', { name: /Cancel/i }).click();
-      
+
       const stateExpenses = [
         {
           category: 'Hardware, software, and licensing',
@@ -718,21 +722,21 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           costs: [0, 0]
         }
       ];
-      
+
       fillOutActivityPage.fillStateExpenses(years, stateExpenses);
-      
+
       cy.get('.form-and-review-list')
         .eq(1)
         .findAllByRole('button', { name: /Edit/i })
         .click();
-      
+
       cy.findByLabelText('Description').type('Test cancel');
-      
+
       cy.get('.form-and-review-list')
         .eq(1)
         .findByRole('button', { name: /Cancel/i })
         .click();
-        
+
       const privateContractor = {
         name: 'Test Private Contractor',
         description: 'Test description',
@@ -742,7 +746,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         hourly: false,
         FFYcosts: [0, 0]
       };
-        
+
       cy.log('Private Contractor Costs');
       cy.goToPrivateContractorCosts(0);
 
@@ -1049,7 +1053,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .should(
           'have.text',
           years
-            .map(year => `FFY ${year} Cost: $100,000 | FTEs: 1 | Total: $100,000`)
+            .map(
+              year => `FFY ${year} Cost: $100,000 | FTEs: 1 | Total: $100,000`
+            )
             .join('')
         );
 
@@ -1275,37 +1281,56 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get(`a[href='${apdUrl}']`).click();
 
-      // cy.fixture('eAPD_Logo.jpg').as('image').then(() => {
-      //   cy.setTinyMceContent('hit-overview-field', this.image)
-      // })
+      cy.get('[class="tox-edit-area"]').eq(3).scrollIntoView();
 
-      cy.fixture('eAPD_Logo.jpg').then((logo) => {
-        cy.get('[class="tox-sidebar-wrap"]').eq(1).trigger('drop', {
-          dataTransfer: {
-            files: [logo]
-          }
-        });
-      });
+      // cy.get('class="tox-edit-area"]')
+      //   .eq(3)
+      //   .attachFile('eAPD_Logo.jpg', { subjectType: 'drag-n-drop' });
 
-      // cy.fixture('eAPD_Logo.jpg')
-      // .then(Cypress.Blob.base64StringToBlob)
+      // cy.get('iframe[id="mmis-overview-field_ifr"]').within(iframe => {
+      //   cy.get('body[id="tinymce"]').within(body => {
+      //     cy.get(body).attachFile('eAPD_Logo.jpg', {
+      //       subjectType: 'drag-n-drop'
+      //     });
+      //   });
+      // });
+
+      // cy.fixture('test.pdf', 'binary')
+      // .then(Cypress.Blob.binaryStringToBlob)
       // .then(fileContent => {
-      //   const file = new File([fileContent], 'eAPD_Logo.jpg', {
-      //     type: 'jpg'
+      //   const file = new File([fileContent], 'test.pdf', {
+      //     type: 'application/pdf'
       //   });
 
-        // cy.setTinyMceContent('hit-overview-field', "Drag and Drop here");
-
-        // cy.get('[class="tox-sidebar-wrap"]')
-
-        // cy.get('[class="tox-sidebar-wrap"]').eq(1).trigger('drop', {
-        //   dataTransfer: {
-        //     files: [file]
-        //   }
-        // });
+      //   cy.get('#file-input').trigger('drop', {
+      //     dataTransfer: {
+      //       files: [file]
+      //     }
+      //   });
       // });
-    })
-  })
+
+      // cy.get('[class="tox-edit-area"]')
+      //   .eq(3)
+      //   .trigger('drop', {
+      //     dataTransfer: {
+      //       files: 'eAPD_Logo.jpg' //actually load the file somehow
+      //     }
+      //   });
+
+      cy.fixture('eAPD_Logo.png').as('logo'); //the string to be decoded is not correctly encoded
+      cy.get('[class="tox-edit-area"]')
+        .eq(3)
+        .then(edit => {
+          const blob = Cypress.Blob.base64StringToBlob(
+            cy.fixture('eAPD_Logo.png'),
+            'image/png'
+          );
+          cy.get(edit).trigger('drop', {
+            files: [blob]
+          });
+        });
+    });
+  });
 
   describe('Delete APD', () => {
     it('deletes the APD', () => {
