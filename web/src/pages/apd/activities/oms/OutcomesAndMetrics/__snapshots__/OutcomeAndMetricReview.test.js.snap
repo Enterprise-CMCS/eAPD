@@ -21,15 +21,15 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
      
     outcome description
   </p>
-  <ul
-    className="ds-c-list--bare subform__container"
+  <div
+    className="subform__container ds-u-margin-top--2"
   >
-    <p
-      className="ds-u-margin-top--2"
+    <strong>
+      Metrics:
+    </strong>
+    <ul
+      className="ds-c-list--bare"
     >
-      <strong>
-        Metrics:
-      </strong>
       <li
         className="ds-u-margin-bottom--2"
         key="om 1"
@@ -46,7 +46,7 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
         . 
         second metric
       </li>
-    </p>
-  </ul>
+    </ul>
+  </div>
 </Review>
 `;
