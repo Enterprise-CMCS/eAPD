@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  renderWithConnection
+  renderWithConnection,
+  screen
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -14,16 +15,16 @@ const initialState = {
     data: {
       keyStatePersonnel: {
         medicaidDirector: {
-          email: '',
-          name: '',
-          phone: ''
+          email: 'ashby@gmail.com',
+          name: 'Ashby',
+          phone: '1111'
         },
         medicaidOffice: {
-          address1: '',
+          address1: '123 Wayfarer Way',
           address2: '',
-          city: '',
+          city: 'Space',
           state: '',
-          zip: ''
+          zip: '12345'
         },
         keyPersonnel: []
       }
@@ -33,7 +34,7 @@ const initialState = {
   user: {
     data: {
       state: {
-        id:"ak",
+        id:"al",
         name:"Alaska"
       }
     }
@@ -50,6 +51,34 @@ describe('<ApdStateProfileMedicaidOffice />', () => {
   describe('sets up Key State Medicaid Director and Office', () => {
     it('renders successfully', async () => {
       setup({}, { initialState });
+
+      expect(
+        screen.getByLabelText('Name')
+      ).toHaveValue('Ashby');
+
+      expect(
+        screen.getByLabelText('Email address')
+      ).toHaveValue('ashby@gmail.com');
+
+      expect(
+        screen.getByLabelText('Phone number')
+      ).toHaveValue('1111');
+
+      expect(
+        screen.getByLabelText('Address')
+      ).toHaveValue('123 Wayfarer Way');
+
+      expect(
+        screen.getByLabelText('City')
+      ).toHaveValue('Space');
+
+      expect(
+        screen.getByLabelText('State')
+      ).toHaveValue('AL');
+
+      expect(
+        screen.getByLabelText('ZIP Code')
+      ).toHaveValue('12345')
     })
   });
 });
