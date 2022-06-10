@@ -48,7 +48,10 @@ const ApdOverview = ({
     setValue
   } = useForm({
     defaultValues: {
-      programOverview
+      programOverview,
+      narrativeHIE,
+      narrativeHIT,
+      narrativeMMIS
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -97,6 +100,21 @@ const ApdOverview = ({
   const handleProgramOverview = html => {
     setOverview(html);
     setValue('programOverview', html);
+  };
+
+  const handleHIEOverview = html => {
+    setHIE(html);
+    setValue('narrativeHIE', html);
+  };
+
+  const handleHITOverview = html => {
+    setHIT(html);
+    setValue('narrativeHIT', html);
+  };
+
+  const handleMMISOverview = html => {
+    setMMIS(html);
+    setValue('narrativeMMIS', html);
   };
 
   const yearChoices = yearOptions.map(year => ({
@@ -166,11 +184,19 @@ const ApdOverview = ({
           labelFor="hit-overview-field"
           source="apd.hit.instruction"
         />
-        <RichText
-          id="hit-overview-field"
-          content={narrativeHIT}
-          onSync={syncRichText(setHIT)}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="narrativeHIT"
+          control={control}
+          render={({ field: { ...props } }) => (
+            <RichText
+              {...props}
+              id="hit-overview-field"
+              content={narrativeHIT}
+              onSync={handleHITOverview}
+              editorClassName="rte-textarea-l"
+              error={errors?.narrativeHIT?.message}
+            />
+          )}
         />
       </div>
       <div className="ds-u-margin-bottom--3">
@@ -178,11 +204,19 @@ const ApdOverview = ({
           labelFor="hie-overview-field"
           source="apd.hie.instruction"
         />
-        <RichText
-          id="hie-overview-field"
-          content={narrativeHIE}
-          onSync={syncRichText(setHIE)}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="narrativeHIE"
+          control={control}
+          render={({ field: { ...props } }) => (
+            <RichText
+              {...props}
+              id="hie-overview-field"
+              content={narrativeHIE}
+              onSync={handleHIEOverview}
+              editorClassName="rte-textarea-l"
+              error={errors?.narrativeHIE?.message}
+            />
+          )}
         />
       </div>
       <div>
@@ -190,11 +224,19 @@ const ApdOverview = ({
           labelFor="mmis-overview-field"
           source="apd.mmis.instruction"
         />
-        <RichText
-          id="mmis-overview-field"
-          content={narrativeMMIS}
-          onSync={syncRichText(setMMIS)}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="narrativeMMIS"
+          control={control}
+          render={({ field: { ...props } }) => (
+            <RichText
+              {...props}
+              id="mmis-overview-field"
+              content={narrativeMMIS}
+              onSync={handleMMISOverview}
+              editorClassName="rte-textarea-l"
+              error={errors?.narrativeMMIS?.message}
+            />
+          )}
         />
       </div>
       {elementDeleteFFY && (
