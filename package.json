@@ -79,7 +79,7 @@
       "web/@cmsgov/design-system"
     ]
   },
-  "dependencies": {
+  "devDependencies": {
     "@snyk/protect": "1.931.0"
   },
   "resolutions": {
