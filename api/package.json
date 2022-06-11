@@ -43,7 +43,7 @@
     "@okta/jwt-verifier": "2.3.0",
     "@okta/okta-sdk-nodejs": "6.4.0",
     "ajv": "8.10.0",
-    "aws-sdk": "2.1138.0",
+    "aws-sdk": "2.1140.0",
     "axios": "0.27.2",
     "body-parser": "1.19.2",
     "chalk": "4.1.2",
