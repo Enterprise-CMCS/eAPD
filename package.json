@@ -80,7 +80,7 @@
     ]
   },
   "devDependencies": {
-    "@snyk/protect": "1.931.0"
+    "@snyk/protect": "1.949.0"
   },
   "resolutions": {
     "yargs-parser": ">=18.1.1"
