@@ -4,6 +4,7 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
+import { logDOM } from '@testing-library/dom';
 
 /// <reference types="cypress" />
 
@@ -46,7 +47,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
-    cy.visit(apdUrl);
+    // cy.visit(apdUrl);
+    cy.contains('AK APD Home').click();
+    cy.contains('Test this one').click();
   });
 
   describe('Create APD', () => {
@@ -1279,9 +1282,24 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     it('tests uploading an image', () => {
       cy.useStateStaff();
 
-      cy.get(`a[href='${apdUrl}']`).click();
+      // cy.get(`a[href='${apdUrl}']`).click();
+      cy.contains('Test this one').click();
 
       cy.get('[class="tox-edit-area"]').eq(3).scrollIntoView();
+
+      cy.setTinyMceContent(
+        'mmis-overview-field',
+        "<img src='http://localhost:8081/apds/62a757529fd0f30029cfcec2/files/963d0316f487d49e9e0e8306682daa96720535acf195fb31973f2d0936d97eb1'></img>"
+      ); // THIS ONE WORKSSSSSSSSSSSSSSSSSSSSS
+
+      // cy.setTinyMceContent(
+      //   'mmis-overview-field',
+      //   cy
+      //     .getTinyMce('mmis-overview-field')
+      //     .attachFile('cms-logo.png', { subjectType: 'drag-n-drop' })
+      // );
+
+      // cy.setTinyMceContent('mmis-overview-field', cy.fixture('cms-logo.png'));
 
       // cy.get('class="tox-edit-area"]')
       //   .eq(3)
@@ -1317,18 +1335,40 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       //     }
       //   });
 
-      cy.fixture('eAPD_Logo.png').as('logo'); //the string to be decoded is not correctly encoded
-      cy.get('[class="tox-edit-area"]')
-        .eq(3)
-        .then(edit => {
-          const blob = Cypress.Blob.base64StringToBlob(
-            cy.fixture('eAPD_Logo.png'),
-            'image/png'
-          );
-          cy.get(edit).trigger('drop', {
-            files: [blob]
-          });
-        });
+      // cy.fixture('cms-logo.png').then(fileContent => {
+      //   cy.get('[id="mmis-overview-field"]').then(edit => {
+      //     const blob = Cypress.Blob.base64StringToBlob(
+      //       fileContent.toString(),
+      //       'image/png'
+      //     );
+      //     cy.log(JSON.stringify(blob));
+      //     // cy.get(edit).trigger('drop', {
+      //     //   files: blob
+      //     // });
+      //     cy.fixture('cms-logo.png').then(fileContent => {
+      //       cy.get('[id="mmis-overview-field"]').attachFile(
+      //         {
+      //           fileContent: Cypress.Blob.base64StringToBlob(
+      //             fileContent.toString()
+      //           ),
+      //           fileName: 'cms-logo.png'
+      //         },
+      //         { subjectType: 'drag-n-drop' }
+      //       );
+      //     });
+      //   });
+      // });
+      // cy.get('[class="tox-edit-area"]')
+      //   .eq(3)
+      //   .then(edit => {
+      //     const blob = Cypress.Blob.base64StringToBlob(
+      //       cy.fixture('cms-logo.png'),
+      //       'image/png'
+      //     );
+      //     cy.get(edit).trigger('drop', {
+      //       files: [blob]
+      //     });
+      //   });
     });
   });
 
