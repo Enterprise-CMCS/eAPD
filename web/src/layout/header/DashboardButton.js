@@ -13,7 +13,7 @@ const DashboardButton = ({ children, dashboard }) => {
 };
 
 DashboardButton.propTypes = {
-  children: PropTypes.elementType.isRequired,
+  children: PropTypes.oneOfType([PropTypes.elementType, PropTypes.array]),
   dashboard: PropTypes.func.isRequired
 };
 
