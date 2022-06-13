@@ -195,7 +195,7 @@ Header.propTypes = {
   ariaExpanded: PropTypes.bool,
   authenticated: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
-  currentState: PropTypes.object,
+  currentState: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   isFedAdmin: PropTypes.bool.isRequired,
   canViewStateAdmin: PropTypes.bool,
   showSiteTitle: PropTypes.bool.isRequired,
