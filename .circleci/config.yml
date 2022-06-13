@@ -248,6 +248,7 @@ workflows:
               ignore:
                 - main
                 - gh-pages
+                - snyk-upgrade-*
             tags:
               ignore: /^noinfra.*/
           requires:
