@@ -12,7 +12,7 @@ const PercentField = ({ ...props }) => {
     }
   }, []);
 
-  return <NumberField {...props} fieldRef={ref} />;
+  return <NumberField {...props} fieldref={ref} />;
 };
 
 export default PercentField;

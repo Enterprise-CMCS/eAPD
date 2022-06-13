@@ -74,7 +74,7 @@ const config = {
       },
       {
         test: /\.yaml$/,
-        use: ['json-loader', 'yaml-loader']
+        use: ['yaml-loader']
       }
     ]
   },
