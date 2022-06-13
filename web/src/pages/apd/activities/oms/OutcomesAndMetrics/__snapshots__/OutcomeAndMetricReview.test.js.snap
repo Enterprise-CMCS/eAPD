@@ -22,14 +22,14 @@ exports[`the OutcomeAndMetricReview component renders correctly 1`] = `
     outcome description
   </p>
   <div
-    className="ds-u-margin-top--2"
+    className="subform__container ds-u-margin-top--2"
   >
+    <strong>
+      Metrics:
+    </strong>
     <ul
-      className="ds-c-list--bare subform__container"
+      className="ds-c-list--bare"
     >
-      <strong>
-        Metrics:
-      </strong>
       <li
         className="ds-u-margin-bottom--2"
         key="om 1"
