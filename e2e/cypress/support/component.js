@@ -16,7 +16,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no-extraneous-dependencies
-// import '../../../web/src/styles/index.scss';
+import '../../../web/src/styles/index.scss';
 
 import React from 'react';
 import { mount } from 'cypress/react'; // eslint-disable-line import/no-extraneous-dependencies
