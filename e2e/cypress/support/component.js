@@ -23,8 +23,7 @@ import { mount } from 'cypress/react'; // eslint-disable-line import/no-extraneo
 import { Provider } from 'react-redux';
 import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import { createMemoryHistory } from 'history';
-import { applyMiddleware } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import reducer from '../../../web/src/redux/reducers';
@@ -37,11 +36,7 @@ Cypress.Commands.add('mountWithConnected', (component, options = {}) => {
     history = createMemoryHistory({ initialEntries: initialHistory }),
     initialState = undefined,
     enhancer = applyMiddleware(routerMiddleware(history), thunk),
-    store = configureStore({
-      reducer: reducer(history),
-      preloadedState: initialState,
-      enhancers: enhancer
-    }),
+    store = createStore(reducer(history), initialState, enhancer),
     ...mountOptions
   } = options;
 

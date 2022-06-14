@@ -56,12 +56,12 @@
     "es6": true,
     "browser": true,
     "node": true,
-    "commonjs": true,
-    "cypress": true
+    "commonjs": true
   },
   "globals": {
     "window": true,
-    "utag": true
+    "utag": true,
+    "cy": true
   },
   "overrides": [
     {

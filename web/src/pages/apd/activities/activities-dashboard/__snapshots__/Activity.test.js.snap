@@ -16,14 +16,12 @@ exports[`the (Activity) EntryDetails component does not render the delete button
           component={[Function]}
           href="/apd/0123456789abcdef01234567/activity/0/overview"
           size="small"
-          type="button"
           variation="transparent"
         >
           Edit
         </Button>
       </div>
     }
-    editText="Edit"
     heading="Activity 1: Activity 1 Name (Money Pit)"
     headingLevel="4"
   />
@@ -46,7 +44,6 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
           component={[Function]}
           href="/apd/0123456789abcdef01234567/activity/2/overview"
           size="small"
-          type="button"
           variation="transparent"
         >
           Edit
@@ -58,10 +55,8 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
           <Button
             aria-label="Delete: Activity 3: Activity Name"
             className="ds-u-color--error"
-            component="button"
             onClick={[Function]}
             size="small"
-            type="button"
             variation="transparent"
           >
             Delete
@@ -69,7 +64,6 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         </React.Fragment>
       </div>
     }
-    editText="Edit"
     heading="Activity 3: Activity Name"
     headingLevel="4"
   />
@@ -92,7 +86,6 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
           component={[Function]}
           href="/apd/0123456789abcdef01234567/activity/2/overview"
           size="small"
-          type="button"
           variation="transparent"
         >
           Edit
@@ -104,10 +97,8 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
           <Button
             aria-label="Delete: Activity 3: Untitled (Money Pit)"
             className="ds-u-color--error"
-            component="button"
             onClick={[Function]}
             size="small"
-            type="button"
             variation="transparent"
           >
             Delete
@@ -115,7 +106,6 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         </React.Fragment>
       </div>
     }
-    editText="Edit"
     heading="Activity 3: Untitled (Money Pit)"
     headingLevel="4"
   />
@@ -138,7 +128,6 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
           component={[Function]}
           href="/apd/0123456789abcdef01234567/activity/2/overview"
           size="small"
-          type="button"
           variation="transparent"
         >
           Edit
@@ -150,10 +139,8 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
           <Button
             aria-label="Delete: Activity 3: Untitled"
             className="ds-u-color--error"
-            component="button"
             onClick={[Function]}
             size="small"
-            type="button"
             variation="transparent"
           >
             Delete
@@ -161,7 +148,6 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         </React.Fragment>
       </div>
     }
-    editText="Edit"
     heading="Activity 3: Untitled"
     headingLevel="4"
   />

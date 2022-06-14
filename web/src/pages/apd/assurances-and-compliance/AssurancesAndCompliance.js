@@ -69,22 +69,20 @@ const AssurancesAndCompliance = ({
     }
   }
 
-  const handleExplanationChange =
-    (section, index) =>
-    ({ target: { value } }) => {
-      switch (section) {
-        case 'procurement':
-          return justificationForProcurement(index, value);
-        case 'recordsAccess':
-          return justificationForRecordsAccess(index, value);
-        case 'security':
-          return justificationForSecurity(index, value);
-        case 'softwareRights':
-          return justificationForSoftwareRights(index, value);
-        default:
-          return null;
-      }
-    };
+  const handleExplanationChange = (section, index, value) => {
+    switch (section) {
+      case 'procurement':
+        return justificationForProcurement(index, value);
+      case 'recordsAccess':
+        return justificationForRecordsAccess(index, value);
+      case 'security':
+        return justificationForSecurity(index, value);
+      case 'softwareRights':
+        return justificationForSoftwareRights(index, value);
+      default:
+        return null;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -128,7 +126,9 @@ const AssurancesAndCompliance = ({
                             label="Please explain"
                             name={namify(name, title)}
                             value={explanation}
-                            onChange={handleExplanationChange(name, index)}
+                            onChange={({ target: { value } }) =>
+                              handleExplanationChange(name, index, value)
+                            }
                             rows={5}
                           />
                         </div>
