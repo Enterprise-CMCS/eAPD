@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const medicaidDirectorSchema = Joi.object({
+const schemas = Joi.object({
   medicaidDirector: Joi.object().keys({
     name: Joi.string().required().messages({
       'string.base': 'Provide the name of the State Medicaid Director.',
@@ -31,6 +31,6 @@ const medicaidDirectorSchema = Joi.object({
       'string.empty': 'Provide a zip code.'
     })
   })
-})
+});
 
-export default medicaidDirectorSchema;
+export default schemas;
