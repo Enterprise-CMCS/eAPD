@@ -1,7 +1,12 @@
 const { defineConfig } = require('cypress'); // eslint-disable-line import/no-extraneous-dependencies
+const webpackConfig = require('../web/webpack.config');
+const setupNodeEvents = require('./cypress/plugins/index');
 
 module.exports = defineConfig({
   e2e: {
+    setupNodeEvents,
+    environment: 'development',
+    specPattern: 'cypress/integration/**/*.cy.js',
     projectId: 'j7o2hw',
     baseUrl: 'http://localhost:8080/',
     viewportWidth: 1000,
@@ -43,6 +48,23 @@ module.exports = defineConfig({
     retries: {
       runMode: 1,
       openMode: 1
+    }
+  },
+
+  component: {
+    setupNodeEvents,
+    environment: 'development',
+    specPattern: '../web/src/**/*.cy.{js,ts,jsx,tsx}',
+    devServer: {
+      framework: 'react',
+      bundler: 'webpack',
+      webpackConfig: {
+        ...webpackConfig,
+        resolve: {
+          ...webpackConfig.resolve,
+          modules: ['node_modules', '../web/src/shared']
+        }
+      }
     }
   }
 });

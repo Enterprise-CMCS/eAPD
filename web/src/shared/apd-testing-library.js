@@ -2,7 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import { createMemoryHistory } from 'history';
-import { createStore, applyMiddleware } from 'redux';
+import { applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import { render as rtlRender } from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
 
@@ -26,7 +27,11 @@ const renderWithConnection = (ui, renderOptions = {}) => {
     history = createMemoryHistory({ initialEntries: initialHistory }),
     initialState = undefined,
     enhancer = applyMiddleware(routerMiddleware(history), thunk),
-    store = createStore(reducer(history), initialState, enhancer),
+    store = configureStore({
+      reducer: reducer(history),
+      preloadedState: initialState,
+      enhancers: enhancer
+    }),
     ...options
   } = renderOptions;
   const utils = rtlRender(
