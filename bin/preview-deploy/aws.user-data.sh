@@ -75,19 +75,29 @@ export MONGO_DATABASE_PASSWORD="__MONGO_DATABASE_PASSWORD__"
 export DATABASE_URL="__DATABASE_URL__"
 sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra.yml"
 
+
 # Clone from Github
 git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 # Build the web app and move it into place
-cd eAPD/web
-yarn add webpack@5.70.0 webpack-cli@4.9.2
-yarn install --frozen-lockfile
-API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
-mv dist/* /app/web
-cd ~
+cd eAPD
+npm i -g yarn@1.22.18
+yarn cache clean
+yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
+
+cd web
+WEB_ENV="dev" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
+
+cp -r dist/* /app/web
+
+# move over node modules
+cd ~/eAPD
+mkdir -p /app/node_modules
+cp -r ~/eAPD/node_modules/* /app/node_modules
+
 # Move the API code into place, then go set it up
-mv eAPD/api/* /app/api
+cp -r ~/eAPD/api/* /app/api
 cd /app/api
-yarn install --frozen-lockfile --production=true
+
 # Build and seed the database
 NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate
 NODE_ENV=development DEV_DB_HOST=localhost yarn run seed

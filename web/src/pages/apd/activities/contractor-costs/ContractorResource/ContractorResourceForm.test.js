@@ -83,6 +83,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders correctly with yearly', async () => {
+    jest.setTimeout(30000);
     await setup();
     expect(
       screen.getByLabelText(/Private Contractor or Vendor Name/i)
@@ -119,14 +120,15 @@ describe('the ContractorResourceForm component', () => {
     fireEvent.blur(screen.getByLabelText(/FFY 1067 Cost/i));
 
     await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
+    // TODO: not sure why this is failing
     // await waitFor(async () => {
-    //   expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
+    //   expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
     // });
-    // // TODO should be true
-    // expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    // expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
   });
 
   test('renders correctly with hourly', async () => {
+    jest.setTimeout(30000);
     await setup({
       ...defaultProps,
       item: {
@@ -174,11 +176,11 @@ describe('the ContractorResourceForm component', () => {
     expect(screen.queryByLabelText(/^FFY 1067$/i)).toBeNull();
 
     await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
+    // TODO: not sure why this is failing
     // await waitFor(() => {
-    //   expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
+    //   expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
     // });
-    // // TODO should be true
-    // expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    // expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
   });
 
   // TODO: these tests are too long running, need to figure out a way to make them quicker

@@ -12,7 +12,7 @@ import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import NumberField from '../../../components/NumberField';
 
-import validationSchema from '../../../static/schemas/keyPerson';
+import validationSchema from '@cms-eapd/common/schemas/keyPerson';
 import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 const getCheckedValue = value => {
@@ -342,7 +342,7 @@ PersonForm.propTypes = {
   item: PropTypes.shape({
     costs: PropTypes.object.isRequired,
     email: PropTypes.string.isRequired,
-    hasCosts: PropTypes.bool.isRequired,
+    hasCosts: PropTypes.bool,
     name: PropTypes.string.isRequired,
     fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired

@@ -128,7 +128,7 @@ const DateField = ({
       return '';
     }
     return errorMessage;
-  }, [errorMessage, state]);
+  }, [errorMessage, state, state.invalidObject]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <DSDateField

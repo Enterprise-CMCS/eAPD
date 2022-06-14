@@ -20,7 +20,13 @@ const config = {
     // By default, grabs everything in node_modules and puts it into a
     // vendored chunk.
     splitChunks: {
-      chunks: 'all'
+      chunks: 'all',
+      cacheGroups: {
+        tinymceVendor: {
+          test: /[\\/]node_modules[\\/](tinymce)[\\/](.*js|.*skin.css)|[\\/]plugins[\\/]/,
+          name: 'tinymce'
+        }
+      }
     },
     moduleIds: 'deterministic'
   },
@@ -43,8 +49,13 @@ const config = {
           MiniCssExtractPlugin.loader,
 
           // Interprets any url() and @import statements and resolves them to
-          // their full path on the local disk.
-          'css-loader',
+          // their full path on the local disk. Translates CSS into CommonJS
+          {
+            loader: 'css-loader',
+            options: {
+              import: true
+            }
+          },
 
           // Add browser prefixes and minify CSS.
           {
@@ -62,9 +73,18 @@ const config = {
               }
             }
           },
+
           // Load the SCSS/SASS
           'sass-loader'
         ]
+      },
+      {
+        test: /skin\.min\.css$/i,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /content\.min\.css$/i,
+        use: ['css-loader']
       },
       {
         test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
@@ -75,7 +95,7 @@ const config = {
       },
       {
         test: /\.yaml$/,
-        use: ['json-loader', 'yaml-loader']
+        use: ['yaml-loader']
       }
     ]
   },
@@ -89,7 +109,7 @@ const config = {
       OKTA_DOMAIN: '',
       OKTA_SERVER_ID: '',
       OKTA_CLIENT_ID: '',
-      WEB_ENV: process.env.WEB_ENV == 'PRODUCTION' ? 'prod' : 'qa'
+      WEB_ENV: process.env.WEB_ENV == 'production' ? 'prod' : 'qa'
     }),
 
     // Inject our app scripts into our HTML kickstarter
@@ -99,10 +119,10 @@ const config = {
 
       // Tealium
       tealiumUrl: `https://tags.tiqcdn.com/utag/cmsgov/cms-eapd/${
-        process.env.WEB_ENV == 'PRODUCTION' ? 'prod' : 'qa'
+        process.env.WEB_ENV == 'production' ? 'prod' : 'qa'
       }/utag.sync.js`,
       tealiumProfile: 'cms-eapd',
-      environment: process.env.WEB_ENV == 'PRODUCTION' ? 'prod' : 'qa'
+      environment: process.env.WEB_ENV == 'production' ? 'prod' : 'qa'
     })
   ],
   stats: {

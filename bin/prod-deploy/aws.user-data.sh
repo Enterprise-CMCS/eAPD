@@ -64,14 +64,17 @@ echo __BUILDURL__ |tee /home/ec2-user/buildurl.txt
 curl -o backend.zip -L __BUILDURL__ |tee /home/ec2-user/backenddownload.txt
 unzip backend.zip
 rm backend.zip
-cd api
-yarn install --frozen-lockfile --production=true
+
+yarn cache clean
+yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000
+
 # There are some platform-dependent binaries that need to be rebuilt before
 # the knex CLI will work correctly.
 #yarn rebuild knex ### TODO use when yarn is updated
 yarn add --force knex
 yarn add newrelic
-cp node_modules/newrelic/newrelic.js ./newrelic.js
+cp node_modules/newrelic/newrelic.js api/newrelic.js
+cd api
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
