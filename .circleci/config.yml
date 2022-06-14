@@ -451,8 +451,8 @@ jobs:
     steps:
       - checkout
       - run: yarn install --frozen-lockfile
-      - run: yarn install glob
-      - run: yarn install js-yaml
+      - run: yarn add glob
+      - run: yarn add js-yaml
       - run:
           working_directory: ~/project/web
           command: node yaml-tests.js
