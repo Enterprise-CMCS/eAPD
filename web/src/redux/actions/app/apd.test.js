@@ -82,6 +82,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
+        { type: ADMIN_CHECK_TOGGLE, data: false },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: '/apd/bloop' },
         {
@@ -343,6 +344,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
+        { type: ADMIN_CHECK_TOGGLE, data: false },
         { type: UPDATE_BUDGET, state },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
@@ -395,6 +397,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
+        { type: ADMIN_CHECK_TOGGLE, data: false },
         {
           type: EDIT_APD,
           path: '/assurancesAndCompliances',

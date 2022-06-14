@@ -99,6 +99,7 @@ export const selectApd =
           type: APD_ACTIVITIES_CHANGE,
           activities: req.data.activities
         });
+        dispatch({ type: ADMIN_CHECK_TOGGLE, data: false });
 
         // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
         // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
@@ -209,16 +210,16 @@ export const deleteApd =
   };
 
 export const toggleAdminCheck = value => dispatch => {
-  dispatch({ type: ADMIN_CHECK_TOGGLE, data: value})
+  dispatch({ type: ADMIN_CHECK_TOGGLE, data: value });
   return null;
-}
+};
 
 export const toggleMiniCheck = value => dispatch => {
-  dispatch({ type: ADMIN_CHECK_MINI_TOGGLE, data: value})
+  dispatch({ type: ADMIN_CHECK_MINI_TOGGLE, data: value });
   return null;
-}
+};
 
 export const toggleAdminCheckComplete = value => dispatch => {
-  dispatch({ type: ADMIN_CHECK_COMPLETE_TOGGLE, data: value})
+  dispatch({ type: ADMIN_CHECK_COMPLETE_TOGGLE, data: value });
   return null;
-}
+};
