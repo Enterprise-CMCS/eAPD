@@ -15,14 +15,55 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
-import { mount } from 'cypress/react'; // eslint-disable-line import/no-extraneous-dependencies
 import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no-extraneous-dependencies
+// import '../../../web/src/styles/index.scss';
+
+import React from 'react';
+import { mount } from 'cypress/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { Provider } from 'react-redux';
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { createMemoryHistory } from 'history';
+import { applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
+
+import reducer from '../../../web/src/redux/reducers';
 
 Cypress.Commands.add('mount', mount);
 
-// Example use:
-// cy.mount(<MyComponent />)
+Cypress.Commands.add('mountWithConnected', (component, options = {}) => {
+  const {
+    initialHistory = ['/'],
+    history = createMemoryHistory({ initialEntries: initialHistory }),
+    initialState = undefined,
+    enhancer = applyMiddleware(routerMiddleware(history), thunk),
+    store = configureStore({
+      reducer: reducer(history),
+      preloadedState: initialState,
+      enhancers: enhancer
+    }),
+    ...mountOptions
+  } = options;
+
+  const wrapped = (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>{component}</ConnectedRouter>
+    </Provider>
+  );
+
+  return mount(wrapped, mountOptions);
+});
+
+Cypress.Commands.add('mountWithRouter', (component, options = {}) => {
+  const {
+    initialHistory = ['/'],
+    history = createMemoryHistory({ initialEntries: initialHistory }),
+    ...mountOptions
+  } = options;
+
+  const wrapped = (
+    <ConnectedRouter history={history}>{component}</ConnectedRouter>
+  );
+
+  return mount(wrapped, mountOptions);
+});
