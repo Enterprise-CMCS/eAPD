@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity';
@@ -8,11 +10,29 @@ import RichText from '../../../../../components/RichText';
 import { selectActivityByIndex } from '../../../../../redux/selectors/activities.selectors';
 import { Subsection } from '../../../../../components/Section';
 
-const CostAllocate = ({ activity, activityIndex, setMethodology }) => {
+import Joi from 'joi';
+
+const CostAllocate = ({ 
+  activity,
+  activityIndex,
+  setMethodology,
+  adminCheck
+}) => {
   const {
     costAllocationNarrative: { methodology }
   } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
+
+  const {
+    control,
+    trigger,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      methodology: methodology,
+    },
+    resolver: joiResolver()
+  })
 
   return (
     <Subsection
@@ -42,12 +62,14 @@ const CostAllocate = ({ activity, activityIndex, setMethodology }) => {
 CostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
-  setMethodology: PropTypes.func.isRequired
+  setMethodology: PropTypes.func.isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 export const mapStateToProps = (state, { activityIndex }) => {
   return {
-    activity: selectActivityByIndex(state, { activityIndex })
+    activity: selectActivityByIndex(state, { activityIndex }),
+    adminCheck: state.apd.adminCheck
   };
 };
 
