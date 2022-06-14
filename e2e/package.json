@@ -67,7 +67,9 @@
     "url-loader": "4.1.1",
     "yaml-loader": "0.8.0"
   },
-  "resolutions": {},
+  "resolutions": {
+    "react": "17.0.2"
+  },
   "jest": {
     "setupFiles": [
       "./polyfills.test.js"
