@@ -37,7 +37,7 @@
     "@babel/preset-env": "7.18.2",
     "@babel/preset-react": "7.17.12",
     "@cms-eapd/common": "0.0.1",
-    "@cmsgov/design-system": "2.13.0",
+    "@cmsgov/design-system": "3.4.0",
     "@fortawesome/fontawesome-svg-core": "6.1.1",
     "@fortawesome/free-regular-svg-icons": "6.1.1",
     "@fortawesome/free-solid-svg-icons": "6.1.1",

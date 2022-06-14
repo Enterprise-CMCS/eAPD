@@ -31,7 +31,7 @@
     "@babel/eslint-parser": "7.18.2",
     "@babel/preset-env": "7.18.2",
     "@babel/preset-react": "7.17.12",
-    "@cmsgov/design-system": "2.13.0",
+    "@cmsgov/design-system": "3.4.0",
     "@cypress/browserify-preprocessor": "3.0.2",
     "@cypress/react": "6.0.0",
     "@reduxjs/toolkit": "1.8.2",

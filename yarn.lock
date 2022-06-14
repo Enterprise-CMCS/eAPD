@@ -1224,10 +1224,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cmsgov/design-system@2.13.0":
-  version "2.13.0"
-  resolved "https://registry.yarnpkg.com/@cmsgov/design-system/-/design-system-2.13.0.tgz#8a7c02daac5308422f5683feb84c11789995f8bb"
-  integrity sha512-5/rNspXZvMXOov3PqTgksZPOKV5dnh0WpyuFtSOW6ulNXa9eWNIa1Tq26eL1fD5uJsf7Lz8LqKrsZi1Mr8NbMw==
+"@cmsgov/design-system@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@cmsgov/design-system/-/design-system-3.4.0.tgz#f9af48df5a1a4b1f3ebc4bbbf489d75a030bb067"
+  integrity sha512-h7G0ClAUUaWVOkXjrX+gAdDBHKTlOKUziQxFQnGTVoPUOGfZnx4qCJ7Z94Xo5Wdu/rHKFxnpK5AFu6ubZ4eiMg==
   dependencies:
     "@popperjs/core" "^2.4.4"
     "@types/react" "^17.0.10"
@@ -1235,7 +1235,7 @@
     classnames "^2.2.5"
     core-js "^3.6.5"
     downshift "^3.2.10"
-    ev-emitter "^1.1.1"
+    ev-emitter "^2.1.2"
     focus-trap-react "^6.0.0"
     lodash "^4.17.21"
     prop-types "^15.7.2"
@@ -8338,10 +8338,10 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
 
-ev-emitter@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
-  integrity sha512-ipiDYhdQSCZ4hSbX4rMW+XzNKMD1prg/sTvoVmSLkuQ1MVlwjJQQA+sW8tMYR3BLUr9KjodFV4pvzunvRhd33Q==
+ev-emitter@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-2.1.2.tgz#91737a2deae9fa95453e7e86cfae976f8c3ced38"
+  integrity sha512-jQ5Ql18hdCQ4qS+RCrbLfz1n+Pags27q5TwMKvZyhp5hh2UULUYZUy1keqj6k6SYsdqIYjnmz7xyyEY0V67B8Q==
 
 eventemitter2@^6.4.3:
   version "6.4.5"
