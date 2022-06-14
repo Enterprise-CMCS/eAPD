@@ -31,7 +31,7 @@
     "@babel/eslint-parser": "7.18.2",
     "@babel/preset-env": "7.18.2",
     "@babel/preset-react": "7.17.12",
-    "@cmsgov/design-system": "3.4.0",
+    "@cmsgov/design-system": "2.13.0",
     "@cypress/browserify-preprocessor": "3.0.2",
     "@cypress/react": "6.0.0",
     "@reduxjs/toolkit": "1.8.2",
@@ -67,9 +67,7 @@
     "url-loader": "4.1.1",
     "yaml-loader": "0.8.0"
   },
-  "resolutions": {
-    "react": "17.0.2"
-  },
+  "resolutions": {},
   "jest": {
     "setupFiles": [
       "./polyfills.test.js"
