@@ -1,6 +1,6 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect, useCallback } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -33,7 +33,8 @@ const StandardsAndConditions = ({
     trigger
   } = useForm({
     defaultValues: {
-      supports: supports
+      supports: supports,
+      doesNotSupport: doesNotSupport
     },
     resolver: joiResolver(standardsConditionsSchema)
   });
@@ -94,11 +95,6 @@ const StandardsAndConditions = ({
           id="activity-set-standards-and-conditions-non-support"
           onChange={({ target: { value } }) => {
             setDoesNotSupport(activityIndex, value);
-            onChange(value);
-
-            if (adminCheck) {
-              trigger();
-            }
           }}
           rows={6}
           style={{ maxWidth: 'initial' }}
