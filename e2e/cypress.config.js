@@ -1,5 +1,5 @@
 const { defineConfig } = require('cypress'); // eslint-disable-line import/no-extraneous-dependencies
-const webpackConfig = require('../web/webpack.config');
+const webpackConfig = require('../web/webpack.config.dev');
 const setupNodeEvents = require('./cypress/plugins/index');
 
 module.exports = defineConfig({

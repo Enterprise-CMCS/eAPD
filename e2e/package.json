@@ -6,8 +6,10 @@
   "scripts": {
     "lint": "eslint 'cypress/**/*.js'",
     "cy:open": "./cypress-setup.sh open --config numTestsKeptInMemory=50",
-    "cy:run": "./cypress-setup.sh run --e2e",
-    "cy:run:ci": "cypress run -C cypress.config.json --e2e --headless --browser chrome "
+    "cy:run:e2e": "./cypress-setup.sh run --e2e",
+    "cy:run:component": "NODE_ENV=development DEV_DB_HOST=localhost DEV_DB_PORT=54325 cypress run --component",
+    "cy:run:ci": "cypress run -C cypress.config.json --e2e --headless --browser chrome ",
+    "cy:run:component-ci": "cypress run -C cypress.config.json --component --headless --browser chrome "
   },
   "repository": {
     "type": "git",
