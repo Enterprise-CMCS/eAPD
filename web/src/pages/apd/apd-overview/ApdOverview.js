@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../../../components/DeleteModal';
@@ -22,7 +22,9 @@ import RichText from '../../../components/RichText';
 import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
+
 import { selectSummary } from '../../../redux/selectors/apd.selectors';
+import { getAllFundingSources } from '../../../redux/selectors/activities.selectors';
 
 const ApdOverview = ({
   addApdYear,
@@ -38,7 +40,9 @@ const ApdOverview = ({
   setName,
   setOverview,
   years,
-  yearOptions
+  yearOptions,
+  fundingSources,
+  adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
 
@@ -55,8 +59,14 @@ const ApdOverview = ({
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: joiResolver(apdOverviewSchema)
+    resolver: joiResolver(apdOverviewSchema(fundingSources))
   });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    }
+  }, []);
 
   const changeName = ({ target: { value } }) => {
     setName(value);
@@ -91,10 +101,6 @@ const ApdOverview = ({
       addApdYear(year);
       e.target.checked = true;
     }
-  };
-
-  const syncRichText = action => html => {
-    action(html);
   };
 
   const handleProgramOverview = html => {
@@ -260,10 +266,21 @@ ApdOverview.propTypes = {
   setName: PropTypes.func.isRequired,
   setOverview: PropTypes.func.isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
-  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired
+  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  fundingSources: PropTypes.array,
+  adminCheck: PropTypes.bool
 };
 
-const mapStateToProps = selectSummary;
+ApdOverview.defaultProps = {
+  fundingSources: ['HIT'],
+  adminCheck: false
+};
+
+const mapStateToProps = state => ({
+  fundingSources: getAllFundingSources(state),
+  adminCheck: state.apd.adminCheck,
+  ...selectSummary(state)
+});
 
 const mapDispatchToProps = {
   addApdYear: addYear,
