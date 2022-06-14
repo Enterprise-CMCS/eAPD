@@ -450,8 +450,9 @@ jobs:
           password: $DOCKER_EAPD_PW
     steps:
       - checkout
-      - run: npm i glob
-      - run: npm i js-yaml
+      - run: yarn install --frozen-lockfile
+      - run: yarn install glob
+      - run: yarn install js-yaml
       - run:
           working_directory: ~/project/web
           command: node yaml-tests.js
