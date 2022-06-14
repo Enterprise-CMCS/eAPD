@@ -12,6 +12,17 @@ import { Subsection } from '../../../../../components/Section';
 
 import Joi from 'joi';
 
+const costMethodSchema = Joi.object({
+  methodology: Joi.string().trim().min(1).required().messages({
+    'string.base':
+      'Provide a description of the cost allocation methodology.',
+    'string.empty':
+      'Provide a description of the cost allocation methodology.',
+    'string.min':
+      'Provide a description of the cost allocation methodology.'
+  })
+})
+
 const CostAllocate = ({ 
   activity,
   activityIndex,
@@ -21,7 +32,6 @@ const CostAllocate = ({
   const {
     costAllocationNarrative: { methodology }
   } = activity;
-  const syncMethodology = html => setMethodology(activityIndex, html);
 
   const {
     control,
@@ -31,8 +41,14 @@ const CostAllocate = ({
     defaultValues: {
       methodology: methodology,
     },
-    resolver: joiResolver()
+    resolver: joiResolver(costMethodSchema)
   })
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    }
+  });
 
   return (
     <Subsection
@@ -48,11 +64,26 @@ const CostAllocate = ({
             className: 'ds-h5'
           }}
         />
-        <RichText
-          id="cost-allocation-methodology-field"
-          content={methodology}
-          onSync={syncMethodology}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="methodology"
+          control={control}
+          render={({ field: { onChange, value, ...props } }) => (
+            <RichText
+              {...props}
+              id="cost-allocation-methodology-field"
+              content={value}
+              onSync={html => {
+                setMethodology(activityIndex, html);
+                onChange(html);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              editorClassName="rte-textarea-l"
+              error={errors?.methodology?.message}
+            />
+          )}
         />
       </div>
     </Subsection>
@@ -63,7 +94,7 @@ CostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
   setMethodology: PropTypes.func.isRequired,
-  adminCheck: PropTypes.func.isRequired
+  adminCheck: PropTypes.bool.isRequired
 };
 
 export const mapStateToProps = (state, { activityIndex }) => {
