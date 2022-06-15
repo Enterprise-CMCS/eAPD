@@ -20,9 +20,14 @@ const defaultProps = {
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 const setup = (props = {}) => {
-  return renderWithConnection(
+  const utils = renderWithConnection(
     <MatchStateAdminDialog {...defaultProps} {...props} />
   );
+  const user = userEvent.setup();
+  return {
+    utils,
+    user
+  };
 };
 
 describe('<MatchStateAdminDialog />', () => {
@@ -33,18 +38,5 @@ describe('<MatchStateAdminDialog />', () => {
       .reply(200, [{ email: 'sally@shire.com', displayName: 'Sally Shire' }]);
 
     expect(screen.getByText('Match State Admin Letter to User')).toBeTruthy();
-  });
-  test('Matches state admin letter to user', () => {
-    setup();
-    fetchMock
-      .onGet('/states/ak/affiliations?matches=true')
-      .reply(200, [{ email: 'sally@shire.com', displayName: 'Sally Shire' }]);
-
-    userEvent.click(
-      screen.getByRole('button', { name: 'Match and Approve Access' })
-    );
-    fetchMock.onPut('/auth/certifications').reply(200);
-
-    expect(screen.getByText('Sally Shire')).toBeTruthy();
   });
 });
