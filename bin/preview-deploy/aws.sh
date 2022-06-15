@@ -181,7 +181,7 @@ function findAMI() {
   aws ec2 describe-images \
     --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
     --filter 'Name=is-public,Values=false' \
-    --filter 'Name=name,Values=eAPD Pre-Preview AMI - *' \
+    --filter 'Name=name,Values=eAPD Preview AMI - *' \
     | jq -r -c 'sort_by(.date)|last|.id'
 }
 
