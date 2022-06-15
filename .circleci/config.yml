@@ -501,7 +501,6 @@ jobs:
           command: |
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
-            cp ../api/seeds/test/tokens.json ./tokens.json
 
             # Switch to Node 16.15.0.
             export NVM_DIR="/opt/circleci/.nvm"
@@ -511,7 +510,7 @@ jobs:
             nvm use 16.15.0
 
             # yarn install --frozen-lockfile
-            npx cypress install --force
+            npx cypress@10.1.0 install --force
             npx cypress verify
       - run:
           name: run e2e tests authentication
