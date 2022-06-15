@@ -4,6 +4,7 @@ import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no
 import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dependencies
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
+import 'cypress-iframe';
 
 import tokens from '@cms-eapd/api/seeds/test/tokens.json';
 
