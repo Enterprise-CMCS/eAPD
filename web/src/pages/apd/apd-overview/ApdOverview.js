@@ -45,13 +45,14 @@ const ApdOverview = ({
   adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
-
+  console.log('fundingSources', fundingSources);
   const {
     control,
     formState: { errors },
     setValue
   } = useForm({
     defaultValues: {
+      fundingSources,
       programOverview,
       narrativeHIE,
       narrativeHIT,
@@ -59,7 +60,7 @@ const ApdOverview = ({
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: joiResolver(apdOverviewSchema(fundingSources))
+    resolver: joiResolver(apdOverviewSchema())
   });
 
   useEffect(() => {
