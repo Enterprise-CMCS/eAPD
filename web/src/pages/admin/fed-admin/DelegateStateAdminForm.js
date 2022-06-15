@@ -178,7 +178,7 @@ const DelegateStateAdminForm = populatedState => {
   );
 };
 
-DelegateStateAdminForm.PropTypes = {
+DelegateStateAdminForm.propTypes = {
   populatedState: PropTypes.object
 };
 

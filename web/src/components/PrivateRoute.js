@@ -23,7 +23,7 @@ const PrivateRoute = ({ authenticated, children, ...rest }) => (
 
 PrivateRoute.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  children: PropTypes.elementType.isRequired,
+  children: PropTypes.oneOfType([PropTypes.elementType, PropTypes.object]),
   location: PropTypes.object.isRequired
 };
 

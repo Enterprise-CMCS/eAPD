@@ -127,7 +127,7 @@ const ApdViewOnly = ({
 ApdViewOnly.propTypes = {
   apd: PropTypes.object.isRequired,
   budget: PropTypes.object.isRequired,
-  place: PropTypes.string.isRequired,
+  place: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   year: PropTypes.string.isRequired,
   goToApd: PropTypes.func.isRequired,
   useParams: PropTypes.func,

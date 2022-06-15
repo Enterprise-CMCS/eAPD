@@ -164,7 +164,7 @@ describe('APD reducer', () => {
             name: 'activity 1',
             contractorResources: [{ name: 'contractor 1' }],
             expenses: [{ name: 'expense 1' }],
-            outcomes: [{ name: 'outcome 1' }],
+            outcomes: [{ name: 'outcome 1', metrics: [{ name: 'metric 1' }] }],
             schedule: [{ name: 'schedule 1' }],
             statePersonnel: [{ name: 'person 1' }]
           }
@@ -210,7 +210,13 @@ describe('APD reducer', () => {
               outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'outcome 1'
+                  name: 'outcome 1',
+                  metrics: [
+                    {
+                      key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                      name: 'metric 1'
+                    }
+                  ]
                 }
               ],
               schedule: [
@@ -269,7 +275,13 @@ describe('APD reducer', () => {
               outcomes: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'outcome 1'
+                  name: 'outcome 1',
+                  metrics: [
+                    {
+                      key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                      name: 'metric 1'
+                    }
+                  ]
                 }
               ],
               schedule: [

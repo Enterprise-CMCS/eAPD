@@ -33,6 +33,6 @@ build {
         environment_vars = [
             "ENVIRONMENT=${var.environment}"
         ]        
-        script = "./prodlogging.sh"
+        script = "./backend20220608.sh"
     }
 }
