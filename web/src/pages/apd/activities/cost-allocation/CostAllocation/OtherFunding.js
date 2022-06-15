@@ -27,8 +27,7 @@ const OtherFunding = ({
   costAllocation,
   costSummary,
   setOtherFunding,
-  syncOtherFunding,
-  adminCheck
+  syncOtherFunding
 }) => {
   const { costAllocationNarrative } = activity;
   const { years } = costSummary;
@@ -117,8 +116,7 @@ OtherFunding.propTypes = {
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
   setOtherFunding: PropTypes.func.isRequired,
-  syncOtherFunding: PropTypes.func.isRequired,
-  adminCheck: PropTypes.bool.isRequired
+  syncOtherFunding: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (
@@ -134,8 +132,7 @@ const mapStateToProps = (
   return {
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
-    costSummary: getCostSummary(state, { activityIndex }),
-    adminCheck: state.apd.adminCheck
+    costSummary: getCostSummary(state, { activityIndex })
   };
 };
 
