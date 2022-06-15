@@ -2,16 +2,16 @@ import Joi from 'joi';
 
 const schemas = Joi.object({
   name: Joi.string().required().messages({
-    'string.base': 'Name is required',
-    'string.empty': 'Name is required'
+    'string.base': 'Provide a name for the point of contact.',
+    'string.empty': 'Provide a name for the point of contact.'
   }),
   email: Joi.string().required().messages({
-    'string.base': 'Email is required',
-    'string.empty': 'Email is required'
+    'string.base': 'Provide an email address for the point of contact.',
+    'string.empty': 'Provide an email address for the point of contact.'
   }),
   position: Joi.string().required().messages({
-    'string.base': 'Role is required',
-    'string.empty': 'Role is required'
+    'string.base': 'Provide a role for the point of contact.',
+    'string.empty': 'Provide a role for the point of contact.'
   }),
   hasCosts: Joi.string().required().messages({
     'string.base': 'Indicate whether or not this person has costs.',
@@ -24,8 +24,8 @@ const schemas = Joi.object({
       Joi.number().positive().required().messages({
         'number.base': 'Provide a cost with benefits.',
         'number.empty': 'Provide a cost with benefits.',
-        'number.format': 'Costs with Benefits should not be less than 0.',
-        'number.positive': 'Costs with Benefits should not be less than 0.'
+        'number.format': 'Provide a cost greater than or equal to $0.',
+        'number.positive': 'Provide a cost greater than or equal to $0.'
       })
     ),
     otherwise: Joi.any()
@@ -37,8 +37,8 @@ const schemas = Joi.object({
       Joi.number().positive().required().messages({
         'number.base': 'Provide an FTE.',
         'number.empty': 'Provide an FTE.',
-        'number.format': 'FTE should not be less than 0.',
-        'number.positive': 'FTE should not be less than 0.'
+        'number.format': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001.',
+        'number.positive': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001.'
       })
     ),
     otherwise: Joi.any()
