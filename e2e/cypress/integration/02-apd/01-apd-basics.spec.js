@@ -323,7 +323,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.findByRole('button', { name: /Save/i })
         .should('not.be.disabled')
-        .click({ force: true });
+        .click();
 
       // Get div for the element containing user data as an alias
       cy.get('.form-and-review-list')
@@ -358,7 +358,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('[data-cy="key-person-1__position"]').type(keyPersons[1].position);
       cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
 
-      cy.findByRole('button', { name: /Save/i }).click({ force: true });
+      cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
       cy.get('.form-and-review-list')
@@ -408,7 +408,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('[data-cy="key-person-2-1__cost"]').type('100000');
       cy.get('[data-cy="key-person-2-1__fte"]').type('0.5').blur();
 
-      cy.findByRole('button', { name: /Save/i }).click({ force: true });
+      cy.findByRole('button', { name: /Save/i }).click();
 
       // Check for default values
       cy.get('.form-and-review-list')
