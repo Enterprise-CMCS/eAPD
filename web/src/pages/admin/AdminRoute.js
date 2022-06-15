@@ -31,7 +31,7 @@ const AdminRoute = ({ authenticated, children, isAdmin, ...rest }) => {
 
 AdminRoute.propTypes = {
   authenticated: PropTypes.bool.isRequired,
-  children: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType(PropTypes.func, PropTypes.object),
   isAdmin: PropTypes.bool.isRequired,
   location: PropTypes.object.isRequired
 };

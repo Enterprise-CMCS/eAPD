@@ -18,7 +18,7 @@ variable "environment" {}
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
 source "amazon-ebs" "Golden_Image" {
-    ami_name      = "eAPD Pre-Preview AMI - ${local.timestamp}"
+    ami_name      = "eAPD Preview AMI - ${local.timestamp}"
     instance_type = "t3.medium"
     access_key    = ""
     secret_key    = ""
@@ -56,7 +56,7 @@ build {
             "OKTA_API_KEY=${var.preview_okta_api_key}",
             "ENVIRONMENT=${var.environment}"
         ]        
-        script = "./bootstrap202202171243.sh"
+        script = "./preview20220608.sh"
     }
     provisioner "file" {
         source = "nginx.conf.tpl"
