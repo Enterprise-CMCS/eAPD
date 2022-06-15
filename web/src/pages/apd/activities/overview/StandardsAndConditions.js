@@ -98,8 +98,6 @@ const StandardsAndConditions = ({
           }}
           rows={6}
           style={{ maxWidth: 'initial' }}
-          errorMessage={errors?.doesNotSupport?.message}
-          errorPlacement="bottom"
         />
       </div>
     </Fragment>
