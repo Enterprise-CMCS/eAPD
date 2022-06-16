@@ -23,7 +23,11 @@ module.exports = {
     '!**/*.stories.{js,jsx}',
     '!**/*.test.{js,jsx}',
     '!**/node_modules/**',
-    'src/shared'
+    '!**/__snapshots__/**',
+    '!**/fixtures/**',
+    '!**/i18n/**',
+    '!**/shared/**',
+    '!**/static/**'
   ],
   coverageThreshold: {
     global: {
