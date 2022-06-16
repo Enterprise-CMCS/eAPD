@@ -1,10 +1,11 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect, useCallback } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import Joi from 'joi';
+import standardsConditionsSchema from '../../../../../../common/schemas/standardsAndConditions';
 import {
   setActivityStandardAndConditionDoesNotSupportExplanation,
   setActivityStandardAndConditionSupportExplanation
@@ -13,71 +14,6 @@ import {
 import RichText from '../../../../components/RichText';
 import TextArea from '../../../../components/TextArea';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
-
-const standardsConditionsSchema = Joi.object({
-  supports: Joi.string().empty('').trim().min(1),
-  doesNotSupport: Joi.string().empty('').trim().min(1)
-}).xor('supports', 'doesNotSupport');
-
-const useJoiResolver = validationSchema =>
-  useCallback(
-    async data => {
-      try {
-        const values = await validationSchema.validateAsync(data);
-
-        return {
-          values,
-          errors: {}
-        };
-      } catch (errors) {
-        const emptyRegex = new RegExp(/must contain at least one of/i);
-        const multipleRegex = new RegExp(
-          /contains a conflict between exclusive peers/i
-        );
-        if (multipleRegex.test(errors.message)) {
-          return {
-            values: data,
-            errors: {
-              supports: {
-                type: 'xor.multiple',
-                message:
-                  'Cannot have descriptions that support and not support Medicaid standards and conditions.'
-              },
-
-              doesNotSupport: {
-                type: 'xor.multiple',
-                message:
-                  'Cannot have descriptions that support and not support Medicaid standards and conditions.'
-              }
-            }
-          };
-        }
-        if (emptyRegex.test(errors.message)) {
-          return {
-            values: data,
-            errors: {
-              supports: {
-                type: 'xor.empty',
-                message:
-                  'Provide a description about how this activity will support the Medicaid standards and conditions.'
-              },
-
-              doesNotSupport: {
-                type: 'xor.empty',
-                message:
-                  'Provide a description about how this activity does not support the Medicaid standards and conditions.'
-              }
-            }
-          };
-        }
-        return {
-          values: data,
-          errors
-        };
-      }
-    },
-    [validationSchema]
-  );
 
 const StandardsAndConditions = ({
   activity,
@@ -100,12 +36,12 @@ const StandardsAndConditions = ({
       supports: supports,
       doesNotSupport: doesNotSupport
     },
-    resolver: useJoiResolver(standardsConditionsSchema)
+    resolver: joiResolver(standardsConditionsSchema)
   });
 
   useEffect(() => {
     if(adminCheck) {
-      trigger(["supports", "doesNotSupport"]);
+      trigger(["supports"]);
     }
   }, []);
 
@@ -132,11 +68,12 @@ const StandardsAndConditions = ({
       <Controller
         name="supports"
         control={control}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, ...props } }) => (
           <RichText
+            {...props}
             id="standards-and-conditions-supports-field"
             data-testid="standards-and-conditions-supports"
-            content={value}
+            content={supports}
             onSync={html => {
               setSupport(activityIndex, html);
               onChange(html);
@@ -152,30 +89,16 @@ const StandardsAndConditions = ({
       />
 
       <div className="ds-c-choice__checkedChild ds-u-margin-top--3">
-        <Controller
+        <TextArea
           name="doesNotSupport"
-          control={control}
           value={activity.standardsAndConditions.doesNotSupport}
-          render={({ field: { onChange, value, ...props }}) => (
-            <TextArea
-              {...props}
-              label="If this activity does not support the Medicaid standards and conditions, please explain."
-              id="activity-set-standards-and-conditions-non-support"
-              onChange={({ target: { value } }) => {
-                setDoesNotSupport(activityIndex, value);
-                onChange(value);
-
-                if (adminCheck) {
-                  trigger();
-                }
-              }}
-              value={value}
-              rows={6}
-              style={{ maxWidth: 'initial' }}
-              errorMessage={errors?.doesNotSupport?.message}
-              errorPlacement="bottom"
-            />
-          )}
+          label="If this activity does not support the Medicaid standards and conditions, please explain."
+          id="activity-set-standards-and-conditions-non-support"
+          onChange={({ target: { value } }) => {
+            setDoesNotSupport(activityIndex, value);
+          }}
+          rows={6}
+          style={{ maxWidth: 'initial' }}
         />
       </div>
     </Fragment>
