@@ -780,8 +780,8 @@ jobs:
             export WEB_ENV="test"
             yarn test --runInBand
       - codecov/upload
-          when: always
-          flag: web
+          when: "always"
+          flag: "web"
       # - run:
       #     name: report coverage
       #     when: always
