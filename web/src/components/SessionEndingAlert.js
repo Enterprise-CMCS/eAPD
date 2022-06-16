@@ -97,7 +97,7 @@ SessionEndingAlert.propTypes = {
   isSessionEnding: PropTypes.bool.isRequired,
   isExtendingSession: PropTypes.bool.isRequired,
   isLoggingOut: PropTypes.bool.isRequired,
-  expiresAt: PropTypes.number.isRequired,
+  expiresAt: PropTypes.number,
   extend: PropTypes.func.isRequired,
   logoutAction: PropTypes.func.isRequired
 };
