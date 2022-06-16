@@ -1,5 +1,5 @@
 codecov:
-  require_ci_to_pass: true
+  require_ci_to_pass: false
 
 comment:
   behavior: default
@@ -36,6 +36,11 @@ ignore:
   - 'web/**/*.stories.js'
   - 'web/**/*.test.js'
   - 'web/src/shared/**'
+  - 'web/src/fixtures/**'
+  - 'web/src/i18n/**'
+  - 'web/src/lazy/**'
+  - 'web/src/shared/**'
+  - 'web/src/static/**'
   - 'api/**/*.test.js'
   - 'api/**/*.endpoint.js'
   - 'api/**/index.js'
