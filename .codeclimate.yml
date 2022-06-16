@@ -1,9 +1,13 @@
 engines:
   duplication:
     enabled: false
+    config:
+      languages:
+        - javascript:
+
   eslint:
     enabled: true
-    channel: 'eslint-4'
+    channel: 'eslint-8'
   csslint:
     enabled: false
 
