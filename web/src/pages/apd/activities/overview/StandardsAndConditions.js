@@ -68,11 +68,11 @@ const StandardsAndConditions = ({
       <Controller
         name="supports"
         control={control}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange } }) => (
           <RichText
             id="standards-and-conditions-supports-field"
             data-testid="standards-and-conditions-supports"
-            content={value}
+            content={supports}
             onSync={html => {
               setSupport(activityIndex, html);
               onChange(html);
