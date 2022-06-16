@@ -77,7 +77,7 @@ ApdStateKeyPerson.propTypes = {
   item: PropTypes.shape({
     costs: PropTypes.object.isRequired,
     email: PropTypes.string.isRequired,
-    hasCosts: PropTypes.bool.isRequired,
+    hasCosts: PropTypes.bool,
     name: PropTypes.string.isRequired,
     fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired
