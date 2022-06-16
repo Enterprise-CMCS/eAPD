@@ -68,8 +68,9 @@ const StandardsAndConditions = ({
       <Controller
         name="supports"
         control={control}
-        render={({ field: { onChange } }) => (
+        render={({ field: { onChange, ...props } }) => (
           <RichText
+            {...props}
             id="standards-and-conditions-supports-field"
             data-testid="standards-and-conditions-supports"
             content={supports}

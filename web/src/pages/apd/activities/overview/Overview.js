@@ -181,7 +181,7 @@ const ActivityOverview = ({
         <Controller
           name="description"
           control={control}
-          render={({ field: { onChange, props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <RichText
               {...props}
               id="activity-description-field"
@@ -196,18 +196,10 @@ const ActivityOverview = ({
                 }
               }}
               editorClassName="rte-textarea-l"
+              error={errors?.description?.message}
             />
           )}
         />
-
-        {errors?.description && (
-          <span
-            className="ds-c-inline-error ds-c-field__error-message"
-            role="alert"
-          >
-            {errors.description.message}
-          </span>
-        )}
       </div>
 
       <div className="data-entry-box">
