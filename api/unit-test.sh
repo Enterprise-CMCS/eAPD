@@ -14,7 +14,7 @@ docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn
 docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run test $@
 EXIT_CODE=$?
 
-docker-compose -f ../docker-compose.endpoint-tests.yml down
+# docker-compose -f ../docker-compose.endpoint-tests.yml down
 
 unset COMPOSE_PROJECT_NAME
 exit $EXIT_CODE

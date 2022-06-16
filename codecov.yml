@@ -1,0 +1,58 @@
+codecov:
+  require_ci_to_pass: true
+
+comment:
+  behavior: default
+  layout: 'reach,diff,flags,tree,reach,files,footer'
+  require_changes: false
+  show_carryforward_flags: false
+
+github_checks:
+  annotations: true
+
+coverage:
+  precision: 2
+  round: down
+  range: '70.0...100.0'
+  status:
+    changes: false
+    default_rules:
+      flag_coverage_not_uploaded_behavior: include
+    patch: true
+    project: true
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+ignore:
+  - '**/node_modules/**'
+  - '**/__snapshots__/**'
+  - 'web/**/*.story.js'
+  - 'web/**/*.stories.js'
+  - 'web/**/*.test.js'
+  - 'web/src/shared/**'
+  - 'api/**/*.test.js'
+  - 'api/**/*.endpoint.js'
+  - 'api/**/index.js'
+  - 'api/**/migrations/**'
+  - 'api/**/mongo-migrations/**'
+  - 'api/**/openAPI.js'
+  - 'api/**/schemas/**'
+  - 'api/**/seeds/**'
+  - 'api/**/migrations/**'
+  - 'api/**/test-data/*'
+  - '_templates/**'
+  - '.circleci/**'
+  - '.github/**'
+  - 'bin/**'
+  - 'documentation/**'
+  - 'e2e/**'
+  - 'owasp/**'
+  - 'packer/**'
+  - 'postman/**'
+  - 'terraform/**'

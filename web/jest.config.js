@@ -16,5 +16,20 @@ module.exports = {
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
   transformIgnorePatterns: ['node_modules/(?!(d3-format|d3-geo|d3-array)/)'],
-  moduleFileExtensions: ['js', 'yaml']
+  moduleFileExtensions: ['js', 'yaml'],
+  collectCoverageFrom: [
+    '**/*.{js,jsx}',
+    '!**/*.story.{js,jsx}',
+    '!**/*.stories.{js,jsx}',
+    '!**/*.test.{js,jsx}',
+    '!**/node_modules/**',
+    'src/shared'
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 75,
+      functions: 80,
+      lines: 80
+    }
+  }
 };
