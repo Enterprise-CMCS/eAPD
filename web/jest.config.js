@@ -1,5 +1,5 @@
 module.exports = {
-  coverageDirectory: '../coverage',
+  coverageDirectory: './coverage/',
   rootDir: 'src',
   setupFiles: ['../polyfills.test.js', '../setup.enzyme.test.js'],
   setupFilesAfterEnv: ['../setup.rtl.test.js'],

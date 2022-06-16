@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  codecov: codecov/codecov@3.2.3
-
 workflows:
   version: 2
 
@@ -694,15 +691,11 @@ jobs:
             nvm install 16.15.0
             nvm alias default 16.15.0
             ./unit-test.sh
-      # - codecov/upload:
-      #     when: always
-      #     file:
-      #     flags: api-unit
-      # - run:
-      #     name: report coverage
-      #     when: always
-      #     working_directory: ~/project/api
-      #     command: bash <(curl -s https://codecov.io/bash)
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/api
+          command: bash <(curl -s https://codecov.io/bash)
 
   # ===== Frontend jobs =====
   # These all depend on "install dependencies" running first.
@@ -779,14 +772,11 @@ jobs:
           command: |
             export WEB_ENV="test"
             yarn test --runInBand
-      - codecov/upload:
+      - run:
+          name: report coverage
           when: always
-          flag: web
-      # - run:
-      #     name: report coverage
-      #     when: always
-      #     working_directory: ~/project/web
-      #     command: bash <(curl -s https://codecov.io/bash)
+          working_directory: ~/project/web
+          command: bash <(curl -s https://codecov.io/bash)
 
   # ===== Shared jobs =====
   # These all depend on "install dependencies" running first.

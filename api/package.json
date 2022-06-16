@@ -92,6 +92,7 @@
     "mongoose": "we aren't upgrading to 6.x yet because it's not highly supported by other packages"
   },
   "jest": {
+    "coverageDirectory": "./coverage/",
     "globalSetup": "./jest.setup.js",
     "globalTeardown": "./jest.teardown.js",
     "testMatch": [
