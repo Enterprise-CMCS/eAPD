@@ -1,5 +1,6 @@
-import { connect } from 'react-redux';
 import React from 'react';
+
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Alert } from '@cmsgov/design-system';
 import { selectApdYears } from '../redux/selectors/apd.selectors';
