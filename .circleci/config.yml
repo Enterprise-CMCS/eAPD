@@ -105,7 +105,8 @@ workflows:
             - frontend lint
             - backend lint
             - dependency vulnerability scan
-            - frontend deploy
+            - yaml test
+            - e2e test
 
       # backend jobs
       - backend api endpoint test:
@@ -223,6 +224,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
+            - chromatic deployment
 
       - frontend deploy:
           name: frontend deploy production
@@ -239,6 +241,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
+            - chromatic deployment
 
       # joint jobs
       - preview deploy:
