@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import { createMemoryHistory } from 'history';
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { render as rtlRender } from '@testing-library/react'; // eslint-disable-line import/no-extraneous-dependencies
