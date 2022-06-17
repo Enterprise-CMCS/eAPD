@@ -22,6 +22,7 @@ module.exports = {
     '!**/*.story.{js,jsx}',
     '!**/*.stories.{js,jsx}',
     '!**/*.test.{js,jsx}',
+    '!**/*.cy.{js,jsx}',
     '!**/node_modules/**',
     '!**/__snapshots__/**',
     '!**/fixtures/**',

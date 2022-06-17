@@ -646,10 +646,6 @@ jobs:
             nvm install 16.15.0
             nvm alias default 16.15.0
             ./endpoint-tests/endpoint.sh
-      # - codecov/upload:
-      #     when: always
-      #     file: ./endpoint-tests/endpoint-data.json
-      #     flag: api-endpoints
 
   # Lints the backend code.
   backend lint:
