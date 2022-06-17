@@ -44,6 +44,7 @@ ignore:
   - 'web/src/file-loader.js'
   - 'web/src/app.dev.js'
   - 'web/src/app.js'
+  - 'web/src/components/EnableCookies.js'
   - 'api/**/*.test.js'
   - 'api/**/*.endpoint.js'
   - 'api/**/index.js'
