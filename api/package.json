@@ -22,7 +22,7 @@
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout --reporter=spec ${TESTS:-'{,!(node_modules)/**/}*.test.js'}",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --no-browser --reporter=spec '{,!(node_modules)/**/}*.test.js'",
-    "test-endpoints": "jest --detectOpenHandles --forceExit 'endpoint'",
+    "test-endpoints": "jest --detectOpenHandles --forceExit --runInBand 'endpoint'",
     "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
