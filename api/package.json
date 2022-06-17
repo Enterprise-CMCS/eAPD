@@ -119,7 +119,7 @@
       "--exclude=./**/*.endpoint.js",
       "--exclude=./**/index.js",
       "--exclude=./**/openAPI.js",
-      "--exclude=./**/mockedOktaAuth.js",
+      "--exclude=./**/mock*.js",
       "--exclude=./**/migrations/**",
       "--exclude=./**/mongo-migrations/**",
       "--exclude=./**/node_modules/**",
