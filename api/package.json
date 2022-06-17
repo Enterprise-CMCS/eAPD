@@ -21,9 +21,9 @@
     "seed-users": "knex seed:run --specific=base-users.js",
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout",
-    "test": "NODE_ENV=test tap -J --cov --coverage-report=text --no-browser",
+    "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
     "test-endpoints": "jest --detectOpenHandles --forceExit --runInBand",
-    "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser",
+    "test-specific": "NODE_ENV=test tap --cov --coverage-report=text --coverage-report=lcov --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
   },
@@ -92,7 +92,7 @@
     "mongoose": "we aren't upgrading to 6.x yet because it's not highly supported by other packages"
   },
   "jest": {
-    "coverageDirectory": "./coverage/",
+    "coverageDirectory": "./coverage-endpoint/",
     "rootDir": "./",
     "globalSetup": "./jest.setup.js",
     "globalTeardown": "./jest.teardown.js",
