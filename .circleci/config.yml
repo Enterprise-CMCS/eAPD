@@ -499,7 +499,6 @@ jobs:
           command: |
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
-            cp ../api/seeds/test/tokens.json ./tokens.json
 
             # Switch to Node 16.15.0.
             export NVM_DIR="/opt/circleci/.nvm"
