@@ -12,6 +12,8 @@ docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run test $@
 EXIT_CODE=$?
 
+docker cp -R api_api-for-testing_1:/app/api/coverage ./coverage
+
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 
 exit $EXIT_CODE
