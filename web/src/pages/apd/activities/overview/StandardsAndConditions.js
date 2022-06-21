@@ -1,7 +1,11 @@
+import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
+import standardsConditionsSchema from '@cms-eapd/common/schemas/standardsAndConditions';
 import {
   setActivityStandardAndConditionDoesNotSupportExplanation,
   setActivityStandardAndConditionSupportExplanation
@@ -15,15 +19,41 @@ const StandardsAndConditions = ({
   activity,
   activityIndex,
   setDoesNotSupport,
-  setSupport
-}) => (
-  <Fragment>
-    <label htmlFor="standards-and-conditions-supports-field">
-      <h4 className="ds-h4">Standards and Conditions</h4>
-    </label>
+  setSupport,
+  adminCheck
+}) => {
+  StandardsAndConditions.displayName = 'StandardsAndConditions';
 
-    <div className="ds-u-margin-bottom--6 ds-u-margin-top--3">
-      <p className="ds-u-margin-bottom--3">
+  const { doesNotSupport = '', supports = '' } =
+    activity.standardsAndConditions;
+
+  const {
+    control,
+    formState: { errors },
+    trigger
+  } = useForm({
+    defaultValues: {
+      supports: supports,
+      doesNotSupport: doesNotSupport
+    },
+    resolver: joiResolver(standardsConditionsSchema)
+  });
+
+  useEffect(() => {
+    if(adminCheck) {
+      trigger(["supports"]);
+    }
+  }, []);
+
+  return (
+    <Fragment>
+      <FormLabel
+        className="ds-c-label full-width-label"
+        htmlFor="standards-and-conditions-supports-field"
+      >
+        Standards and Conditions
+      </FormLabel>
+      <span className="ds-c-field__hint ds-u-margin--0">
         Include a description about how this activity will support the Medicaid
         standards and conditions{' '}
         <a
@@ -34,40 +64,58 @@ const StandardsAndConditions = ({
           42 CFR 433.112
         </a>
         .
-      </p>
+      </span>
+      <Controller
+        name="supports"
+        control={control}
+        render={({ field: { onChange, ...props } }) => (
+          <RichText
+            {...props}
+            id="standards-and-conditions-supports-field"
+            data-testid="standards-and-conditions-supports"
+            content={supports}
+            onSync={html => {
+              setSupport(activityIndex, html);
+              onChange(html);
 
-      <RichText
-        id="standards-and-conditions-supports-field"
-        content={activity.standardsAndConditions.supports}
-        onSync={html => setSupport(activityIndex, html)}
-        editorClassName="rte-textarea-1"
+              if (adminCheck) {
+                trigger();
+              }
+            }}
+            editorClassName="rte-textarea-1"
+            error={errors?.supports?.message}
+          />
+        )}
       />
 
       <div className="ds-c-choice__checkedChild ds-u-margin-top--3">
         <TextArea
+          name="doesNotSupport"
+          value={activity.standardsAndConditions.doesNotSupport}
           label="If this activity does not support the Medicaid standards and conditions, please explain."
-          name="activity-set-standards-and-conditions-non-support"
-          onChange={({ target: { value } }) =>
-            setDoesNotSupport(activityIndex, value)
-          }
+          id="activity-set-standards-and-conditions-non-support"
+          onChange={({ target: { value } }) => {
+            setDoesNotSupport(activityIndex, value);
+          }}
           rows={6}
           style={{ maxWidth: 'initial' }}
-          value={activity.standardsAndConditions.doesNotSupport}
         />
       </div>
-    </div>
-  </Fragment>
-);
+    </Fragment>
+  );
+};
 
 StandardsAndConditions.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
   setSupport: PropTypes.func.isRequired,
-  setDoesNotSupport: PropTypes.func.isRequired
+  setDoesNotSupport: PropTypes.func.isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, props) => ({
-  activity: selectActivityByIndex(state, props)
+  activity: selectActivityByIndex(state, props),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
