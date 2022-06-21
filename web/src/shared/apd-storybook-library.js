@@ -5,8 +5,8 @@ import { ConnectedRouter } from 'connected-react-router';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
-const decoratorWithProvider = ({ initialState = {} } = {}) => {
-  const store = {
+export const createMockStore = (initialState = {}) => {
+  return {
     getState: () => {
       return initialState;
     },
@@ -14,13 +14,22 @@ const decoratorWithProvider = ({ initialState = {} } = {}) => {
     unsubscribe: () => 0,
     dispatch: action('dispatch')
   };
+};
+
+export const renderWithProvider = ({ initialState = {}, story }) => {
+  const store = createMockStore(initialState);
+  return <Provider store={store}>{story()}</Provider>;
+};
+
+export const decoratorWithProvider = ({ initialState = {} } = {}) => {
+  const store = createMockStore(initialState);
   return {
     decorators: [story => <Provider store={store}>{story()}</Provider>],
     store
   };
 };
 
-const decoratorWithRouter = ({ initialHistory = ['/'] } = {}) => {
+export const decoratorWithRouter = ({ initialHistory = ['/'] } = {}) => {
   const history = createMemoryHistory({ initialEntries: initialHistory });
   return {
     decorators: [
@@ -30,17 +39,25 @@ const decoratorWithRouter = ({ initialHistory = ['/'] } = {}) => {
   };
 };
 
-const decoratorWithProviderAndRouter = ({
+export const renderWithProviderAndRouter = ({
+  initialState = {},
+  initialHistory = ['/'],
+  story
+}) => {
+  const store = createMockStore(initialState);
+  const history = createMemoryHistory({ initialEntries: initialHistory });
+  return (
+    <Provider store={store}>
+      <ConnectedRouter history={history}>{story()}</ConnectedRouter>
+    </Provider>
+  );
+};
+
+export const decoratorWithProviderAndRouter = ({
   initialState = {},
   initialHistory = ['/']
 } = {}) => {
-  const store = {
-    getState: () => {
-      return initialState;
-    },
-    subscribe: () => 0,
-    dispatch: action('dispatch')
-  };
+  const store = createMockStore(initialState);
   const history = createMemoryHistory({ initialEntries: initialHistory });
   return {
     decorators: [
@@ -53,10 +70,4 @@ const decoratorWithProviderAndRouter = ({
     store,
     history
   };
-};
-
-export {
-  decoratorWithProvider,
-  decoratorWithRouter,
-  decoratorWithProviderAndRouter
 };
