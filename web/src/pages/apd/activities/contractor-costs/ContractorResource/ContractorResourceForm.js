@@ -33,6 +33,16 @@ const ContractorResourceForm = forwardRef(
   ({ activityIndex, index, item, saveContractor, setFormValid }, ref) => {
     ContractorResourceForm.displayName = 'ContractorResourceForm';
     const {
+      name,
+      description,
+      start,
+      end,
+      totalCost,
+      useHourly: useHourlyProp,
+      hourly,
+      years
+    } = JSON.parse(JSON.stringify({ ...item }));
+    const {
       control,
       formState: { errors, isValid },
       getFieldState,
@@ -41,8 +51,14 @@ const ContractorResourceForm = forwardRef(
       getValues
     } = useForm({
       defaultValues: {
-        ...item,
-        useHourly: getCheckedValue(item.useHourly)
+        name,
+        description,
+        start,
+        end,
+        totalCost,
+        useHourly: getCheckedValue(useHourlyProp),
+        hourly,
+        years
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
@@ -59,6 +75,7 @@ const ContractorResourceForm = forwardRef(
     const onSubmit = e => {
       e.preventDefault();
       saveContractor(activityIndex, index, {
+        ...item,
         ...getValues(),
         useHourly: getBooleanValue(getValues('useHourly'))
       });
