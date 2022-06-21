@@ -22,10 +22,10 @@ const oktaAuth =
       })
     : null;
 
-oktaAuth.authStateManager.subscribe(() => {});
-if (!oktaAuth.isLoginRedirect()) {
+oktaAuth?.authStateManager?.subscribe(() => {});
+if (!oktaAuth?.isLoginRedirect()) {
   // Trigger an initial authState change event when the app startup
-  oktaAuth.authStateManager.updateAuthState();
+  oktaAuth?.authStateManager?.updateAuthState();
 }
 
 export default oktaAuth;
