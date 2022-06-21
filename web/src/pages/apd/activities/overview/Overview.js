@@ -18,7 +18,7 @@ import { NameAndFundingSourceForm } from './NameAndFundingSource/';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import Schedule from './Schedule';
 
-import overviewSchema from '../../../../../../common/schemas/activityOverview';
+import overviewSchema from '@cms-eapd/common/schemas/activityOverview';
 
 const ActivityOverview = ({
   activity,
