@@ -29,7 +29,7 @@
     "@cypress/browserify-preprocessor": "3.0.2",
     "@testing-library/cypress": "8.0.2",
     "axios": "0.25.0",
-    "cypress": "9.6.0",
+    "cypress": "9.6.1",
     "cypress-audit": "1.1.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-grep": "2.13.1",

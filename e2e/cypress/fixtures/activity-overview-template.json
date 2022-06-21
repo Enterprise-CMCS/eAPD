@@ -6,6 +6,7 @@
       "name": "Program Administration",
       "fundingType": "HIT",
       "shortOverview": "Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.",
+      "description": "Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program.",
       "startDate": [7, 14, 2021],
       "endDate": [3, 12, 2024],
       "detailedDescription": "Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program. The modifications of the SLR for CMS program rule changes and guidance changes (Stage 3, IPPS, and OPPS) will require extensive development and implementation efforts and is essential to the effective administration of the Medicaid EHR Incentive Program. Modifications to the SLR are done in phases depending on how CMS rule changes occur. The implementation of the design elements will require provider onboarding activities to be initiated and completed including outreach and training for all program participants. The SLR will increase the efficiency with which Tycho Medicaid administers the program; allow for increased oversight and assure that the program is operated in accordance with the complex and evolving program rules and requirements.",
@@ -15,7 +16,7 @@
     {
       "name": "Claims Data Analytics",
       "fundingType": "HIE",
-      "shortOverview": "To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
+      "description": "To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
       "startDate": [2, 24, 2032],
       "endDate": [8, 28, 2034],
       "detailedDescription": "Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the HIT Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required HIT changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.",
@@ -25,7 +26,7 @@
     {
       "name": "Robust Market Strategy",
       "fundingType": "MMIS",
-      "shortOverview": "The Robust Market Strategy activity has a short overview and this is it.",
+      "description": "The Robust Market Strategy activity has a short overview and this is it.",
       "startDate": [3, 1, 2023],
       "endDate": [8, 11, 2025],
       "detailedDescription": "This is a very long and winded detailed description of the new activity named Robust Market Strategy",
