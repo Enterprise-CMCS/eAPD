@@ -34,24 +34,26 @@ const ExportAndSubmit = ({
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
       <AlertMissingFFY />
       <Section resource="exportAndSubmit">
-        <Subsection resource="adminCheck">
-          <p>
-            Choose Run Administrative Check to see a list of required fields
-            which are missing content. Providing content will help ensure that
-            your APD is administratively complete and ready for submission to
-            CMS. Missing content from these sections could delay a decision by
-            CMS and result in additional review cycles for this APD.
-          </p>
-          <Button
-            onClick={handleAdminCheck}
-            size="big"
-            variation="primary"
-            className="ds-u-margin-bottom--2"
-          >
-            Run Administrative Check
-            <Icon className="ds-u-padding-left--1" icon={faClipboardCheck} />
-          </Button>
-        </Subsection>
+        {process.env.WEB_ENV !== 'production' && (
+          <Subsection resource="adminCheck">
+            <p>
+              Choose Run Administrative Check to see a list of required fields
+              which are missing content. Providing content will help ensure that
+              your APD is administratively complete and ready for submission to
+              CMS. Missing content from these sections could delay a decision by
+              CMS and result in additional review cycles for this APD.
+            </p>
+            <Button
+              onClick={handleAdminCheck}
+              size="big"
+              variation="primary"
+              className="ds-u-margin-bottom--2"
+            >
+              Run Administrative Check
+              <Icon className="ds-u-padding-left--1" icon={faClipboardCheck} />
+            </Button>
+          </Subsection>
+        )}
         <Subsection resource="reviewAndDownload">
           <p>
             On the next page, you will be able to review and download a copy of
