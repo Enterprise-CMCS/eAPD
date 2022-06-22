@@ -15,7 +15,7 @@ import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actio
 const MilestoneForm = forwardRef(
   ({ activityIndex, index, item, saveMilestone, setFormValid }, ref) => {
     MilestoneForm.displayName = 'MilestoneForm';
-
+    const { milestone, endDate } = JSON.parse(JSON.stringify({ ...item }));
     const {
       control,
       formState: { errors, isValid },
@@ -24,7 +24,8 @@ const MilestoneForm = forwardRef(
       getValues
     } = useForm({
       defaultValues: {
-        ...item
+        milestone,
+        endDate
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
@@ -37,7 +38,10 @@ const MilestoneForm = forwardRef(
 
     const onSubmit = e => {
       e.preventDefault();
-      saveMilestone(activityIndex, index, getValues());
+      saveMilestone(activityIndex, index, {
+        ...item,
+        ...getValues()
+      });
     };
 
     return (

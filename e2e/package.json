@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint 'cypress/**/*.js'",
-    "audit": "npx audit-ci --config ./audit-ci.json",
     "cy:open": "./cypress-setup.sh open --config numTestsKeptInMemory=50",
     "cy:run": "./cypress-setup.sh run",
     "cy:run:ci": "cypress run -C cypress.json --headless --browser chrome "

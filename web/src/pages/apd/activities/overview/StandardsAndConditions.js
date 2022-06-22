@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import standardsConditionsSchema from '../../../../../../common/schemas/standardsAndConditions';
+import standardsConditionsSchema from '@cms-eapd/common/schemas/standardsAndConditions';
 import {
   setActivityStandardAndConditionDoesNotSupportExplanation,
   setActivityStandardAndConditionSupportExplanation
