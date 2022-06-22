@@ -13,7 +13,7 @@ import DateField from '../../../../components/DateField';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import { stateDateToDisplay } from '../../../../util';
 
-import scheduleSchema from '../../../../static/schemas/plannedActivityShedule';
+import scheduleSchema from '@cms-eapd/common/schemas/plannedActivityShedule';
 
 const Schedule = ({ 
     activity,

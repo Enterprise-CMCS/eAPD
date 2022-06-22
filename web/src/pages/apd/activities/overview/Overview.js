@@ -18,7 +18,7 @@ import { NameAndFundingSourceForm } from './NameAndFundingSource/';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import Schedule from './Schedule';
 
-import overviewSchema from '../../../../static/schemas/activityOverview';
+import overviewSchema from '@cms-eapd/common/schemas/activityOverview';
 
 const ActivityOverview = ({
   activity,
@@ -181,7 +181,7 @@ const ActivityOverview = ({
         <Controller
           name="description"
           control={control}
-          render={({ field: { onChange, props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <RichText
               {...props}
               id="activity-description-field"
@@ -196,6 +196,7 @@ const ActivityOverview = ({
                 }
               }}
               editorClassName="rte-textarea-l"
+              error={errors?.description?.message}
             />
           )}
         />

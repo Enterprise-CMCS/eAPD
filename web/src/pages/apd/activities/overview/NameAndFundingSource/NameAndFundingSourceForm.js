@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import nameFundingSourceSchema from '../../../../../../../common/schemas/nameAndFundingSource';
+import nameFundingSourceSchema from '@cms-eapd/common/schemas/nameAndFundingSource';
 import {
   setActivityName,
   setActivityFundingSource

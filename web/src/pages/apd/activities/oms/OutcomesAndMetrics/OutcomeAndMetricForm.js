@@ -17,14 +17,15 @@ import { newOutcomeMetric } from '../../../../../redux/reducers/activities';
 const OutcomeAndMetricForm = forwardRef(
   ({ activityIndex, item, index, saveOutcome, setFormValid }, ref) => {
     OutcomeAndMetricForm.displayName = 'OutcomeAndMetricForm';
+    const { outcome, metrics } = JSON.parse(JSON.stringify({ ...item }));
     const {
       handleSubmit,
       control,
       formState: { errors, isValid }
     } = useForm({
       defaultValues: {
-        outcome: item.outcome,
-        metrics: item.metrics
+        outcome,
+        metrics
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
@@ -40,7 +41,10 @@ const OutcomeAndMetricForm = forwardRef(
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const initialState = item;
+    const initialState = {
+      outcome,
+      metrics
+    };
 
     function reducer(state, action) {
       switch (action.type) {
@@ -91,7 +95,10 @@ const OutcomeAndMetricForm = forwardRef(
 
     const onSubmit = e => {
       e.preventDefault();
-      saveOutcome(activityIndex, index, state);
+      saveOutcome(activityIndex, index, {
+        ...item,
+        ...state
+      });
       handleSubmit(e);
     };
 

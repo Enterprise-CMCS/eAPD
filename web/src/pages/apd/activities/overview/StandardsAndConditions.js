@@ -1,10 +1,11 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect, useCallback } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import Joi from 'joi';
+import standardsConditionsSchema from '@cms-eapd/common/schemas/standardsAndConditions';
 import {
   setActivityStandardAndConditionDoesNotSupportExplanation,
   setActivityStandardAndConditionSupportExplanation
@@ -100,12 +101,12 @@ const StandardsAndConditions = ({
       supports: supports,
       doesNotSupport: doesNotSupport
     },
-    resolver: useJoiResolver(standardsConditionsSchema)
+    resolver: joiResolver(standardsConditionsSchema)
   });
 
   useEffect(() => {
     if(adminCheck) {
-      trigger(["supports", "doesNotSupport"]);
+      trigger(["supports"]);
     }
   }, []);
 
@@ -132,11 +133,12 @@ const StandardsAndConditions = ({
       <Controller
         name="supports"
         control={control}
-        render={({ field: { onChange, value } }) => (
+        render={({ field: { onChange, ...props } }) => (
           <RichText
+            {...props}
             id="standards-and-conditions-supports-field"
             data-testid="standards-and-conditions-supports"
-            content={value}
+            content={supports}
             onSync={html => {
               setSupport(activityIndex, html);
               onChange(html);
@@ -152,30 +154,16 @@ const StandardsAndConditions = ({
       />
 
       <div className="ds-c-choice__checkedChild ds-u-margin-top--3">
-        <Controller
+        <TextArea
           name="doesNotSupport"
-          control={control}
           value={activity.standardsAndConditions.doesNotSupport}
-          render={({ field: { onChange, value, ...props }}) => (
-            <TextArea
-              {...props}
-              label="If this activity does not support the Medicaid standards and conditions, please explain."
-              id="activity-set-standards-and-conditions-non-support"
-              onChange={({ target: { value } }) => {
-                setDoesNotSupport(activityIndex, value);
-                onChange(value);
-
-                if (adminCheck) {
-                  trigger();
-                }
-              }}
-              value={value}
-              rows={6}
-              style={{ maxWidth: 'initial' }}
-              errorMessage={errors?.doesNotSupport?.message}
-              errorPlacement="bottom"
-            />
-          )}
+          label="If this activity does not support the Medicaid standards and conditions, please explain."
+          id="activity-set-standards-and-conditions-non-support"
+          onChange={({ target: { value } }) => {
+            setDoesNotSupport(activityIndex, value);
+          }}
+          rows={6}
+          style={{ maxWidth: 'initial' }}
         />
       </div>
     </Fragment>
