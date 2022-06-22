@@ -6,8 +6,6 @@ import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 import 'cypress-file-upload';
 
-import tokens from '@cms-eapd/api/seeds/test/tokens.json';
-
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
