@@ -21,7 +21,7 @@ const schemas = Joi.object({
     is: 'yes',
     then: Joi.object().pattern(
       /\d{4}/,
-      Joi.number().positive().required().messages({
+      Joi.number().positive().allow(0).required().messages({
         'number.base': 'Provide a cost with benefits.',
         'number.empty': 'Provide a cost with benefits.',
         'number.format': 'Provide a cost greater than or equal to $0.',
