@@ -37,8 +37,8 @@ const schemas = Joi.object({
       Joi.number().positive().required().messages({
         'number.base': 'Provide an FTE.',
         'number.empty': 'Provide an FTE.',
-        'number.format': 'Provide a number greater than or equal to 0.0001.',
-        'number.positive': 'Provide a number greater than or equal to 0.0001.'
+        'number.format': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001',
+        'number.positive': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001'
       })
     ),
     otherwise: Joi.any()
