@@ -38,7 +38,7 @@ describe('APD reducer', () => {
     loaded: false,
     error: '',
     selectAPDOnLoad: false,
-    adminCheck: false,
+    adminCheck: true,
     adminCheckMini: false,
     adminCheckComplete: false
   };
@@ -83,7 +83,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false,
+      adminCheck: true,
       adminCheckMini: false,
       adminCheckComplete: false
     });
@@ -97,7 +97,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false,
+      adminCheck: true,
       adminCheckMini: false,
       adminCheckComplete: false
     });
@@ -144,7 +144,7 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: true,
       selectAPDOnLoad: false,
-      adminCheck: false,
+      adminCheck: true,
       adminCheckMini: false,
       adminCheckComplete: false
     };
@@ -167,7 +167,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: 'some error',
       selectAPDOnLoad: false,
-      adminCheck: false,
+      adminCheck: true,
       adminCheckMini: false,
       adminCheckComplete: false
     });
@@ -1214,7 +1214,7 @@ describe('APD reducer', () => {
         })
       ).toEqual({
         ...initialState,
-        adminCheck: false,
+        adminCheck: true,
         adminCheckMini: true,
         adminCheckComplete: false
       });
@@ -1228,7 +1228,7 @@ describe('APD reducer', () => {
         })
       ).toEqual({
         ...initialState,
-        adminCheck: false,
+        adminCheck: true,
         adminCheckMini: false,
         adminCheckComplete: true
       });

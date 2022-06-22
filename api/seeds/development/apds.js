@@ -263,7 +263,7 @@ const apd = {
         }
       ],
       summary:
-        'Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.',
+        '1 Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.',
       quarterlyFFP: {
         2022: {
           1: { combined: 25, contractors: 25, inHouse: 25 },

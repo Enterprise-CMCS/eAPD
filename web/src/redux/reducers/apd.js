@@ -327,7 +327,7 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: false,
+  adminCheck: process.env.WEB_ENV !== 'production',
   adminCheckMini: false,
   adminCheckComplete: false
 };
@@ -390,26 +390,26 @@ const reducer = (state = initialState, action) => {
       const patches = getPatchesToRemoveYear(state, action.value);
       return { ...state, data: applyPatch(state.data, patches) };
     }
-    
+
     case ADMIN_CHECK_TOGGLE: {
       return {
         ...state,
         adminCheck: action.data
-      }
+      };
     }
-    
+
     case ADMIN_CHECK_MINI_TOGGLE: {
       return {
         ...state,
         adminCheckMini: action.data
-      }
+      };
     }
-    
+
     case ADMIN_CHECK_COMPLETE_TOGGLE: {
       return {
         ...state,
         adminCheckComplete: action.data
-      }
+      };
     }
 
     case CREATE_APD_SUCCESS:
