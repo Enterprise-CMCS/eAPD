@@ -45,7 +45,6 @@ const CostAllocate = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
-      console.log({errors})
     };
   }, []);
 
@@ -93,7 +92,7 @@ CostAllocate.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
   setMethodology: PropTypes.func.isRequired,
-  adminCheck: PropTypes.func.isRequired
+  adminCheck: PropTypes.bool.isRequired
 };
 
 export const mapStateToProps = (state, { activityIndex }) => {

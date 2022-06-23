@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
@@ -21,16 +23,46 @@ import {
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
 
+import Joi from 'joi';
+
+const otherFundingSchema = Joi.object({
+  otherSources: Joi.object().pattern(
+    /\d{4}/,
+    Joi.string().trim().min(1).required().messages({
+    'string.base': 'Provide a description of the cost allocation methodology.',
+    'string.empty': 'Provide a description of the cost allocation methodology.',
+    'string.min': 'Provide a description of the cost allocation methodology.'
+  }))
+});
+
 const OtherFunding = ({
   activityIndex,
   activity,
   costAllocation,
   costSummary,
   setOtherFunding,
-  syncOtherFunding
+  syncOtherFunding,
+  adminCheck
 }) => {
   const { costAllocationNarrative } = activity;
   const { years } = costSummary;
+
+  const {
+    control,
+    trigger,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      years
+    },
+    resolver: joiResolver(otherFundingSchema)
+  })
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    };
+  }, []);
 
   const setOther = year => e => {
     setOtherFunding(activityIndex, year, e.target.value);
@@ -56,11 +88,22 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
-            <RichText
-              id={`cost-allocation-narrative-${ffy}-other-sources-field`}
-              content={costAllocationNarrative.years[ffy].otherSources}
-              onSync={syncOther(ffy)}
-              editorClassName="rte-textarea-l"
+            <Controller
+              name={`otherSources.${ffy}`}
+              control={control}
+              render={({ field: { onChange, ...props } }) => (
+                <RichText
+                  {...props}
+                  id={`cost-allocation-narrative-${ffy}-other-sources-field`}
+                  content={costAllocationNarrative.years[ffy].otherSources}
+                  onSync={html => {
+                    syncOther(ffy);
+                    onChange(html);
+                  }}
+                  editorClassName="rte-textarea-l"
+                  error={errors?.otherSources?.message}
+                />
+              )}
             />
           </div>
 
@@ -116,7 +159,8 @@ OtherFunding.propTypes = {
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
   setOtherFunding: PropTypes.func.isRequired,
-  syncOtherFunding: PropTypes.func.isRequired
+  syncOtherFunding: PropTypes.func.isRequired,
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (
@@ -132,7 +176,8 @@ const mapStateToProps = (
   return {
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
-    costSummary: getCostSummary(state, { activityIndex })
+    costSummary: getCostSummary(state, { activityIndex }),
+    adminCheck: state.apd.adminCheck
   };
 };
 
