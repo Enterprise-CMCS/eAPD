@@ -6,6 +6,16 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
   key="activity93-index1-form"
   onSubmit={[Function]}
 >
+  <button
+    aria-hidden="true"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
   <Component
     control={
       Object {

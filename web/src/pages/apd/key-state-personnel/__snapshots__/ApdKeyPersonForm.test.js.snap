@@ -48,6 +48,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     index={1}
     onSubmit={[Function]}
   >
+    <button
+      aria-hidden="true"
+      disabled={true}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      type="submit"
+    />
     <h4
       className="ds-h4"
     >
@@ -68957,6 +68967,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
   index={1}
   onSubmit={[Function]}
 >
+  <button
+    aria-hidden="true"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
   <h4
     className="ds-h4"
   >
@@ -69453,6 +69473,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
   index={0}
   onSubmit={[Function]}
 >
+  <button
+    aria-hidden="true"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
   <h4
     className="ds-h4"
   >
