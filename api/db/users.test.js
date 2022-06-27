@@ -118,12 +118,12 @@ tap.test('database wrappers / users', async usersTests => {
       id: 'affiliation',
       user_id: unsanitizedUser.id,
       state_id: 'exp',
-      role_id: 'role id',
+      role_id: '123',
       status: 'approved',
       username: unsanitizedUser.login,
       expires_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 365)
     });
-    getAuthRoleByName.resolves({ id: 'role id', name: 'role' });
+    getAuthRoleByName.resolves({ id: '123', name: 'role' });
     getStateById.withArgs('state1').resolves({
       id: 'state1',
       address1: 'New Address 1',
