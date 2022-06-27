@@ -207,7 +207,8 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation
+        updateAuthAffiliation,
+        getAuthRoleByName
       });
 
       test.equal(user, null);
@@ -221,7 +222,8 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation
+        updateAuthAffiliation,
+        getAuthRoleByName
       });
       test.same(user, {
         ...unsanitizedUser,
@@ -242,7 +244,8 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation
+        updateAuthAffiliation,
+        getAuthRoleByName
       });
       test.same(user, {
         ...unsanitizedUser,
@@ -264,7 +267,8 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation
+        updateAuthAffiliation,
+        getAuthRoleByName
       });
       test.ok(
         getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state1')
@@ -283,7 +287,8 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation
+        updateAuthAffiliation,
+        getAuthRoleByName
       });
       test.ok(
         getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state1')
@@ -302,7 +307,8 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation
+        updateAuthAffiliation,
+        getAuthRoleByName
       });
       test.ok(
         getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'state2')
@@ -322,7 +328,8 @@ tap.test('database wrappers / users', async usersTests => {
         getStateById,
         getUserPermissionsForStates,
         getRolesAndActivities,
-        updateAuthAffiliation
+        updateAuthAffiliation,
+        getAuthRoleByName
       });
       test.ok(getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'exp'));
       test.ok(updateAuthAffiliation.calledOnce);
