@@ -1,8 +1,11 @@
 import { ChoiceList, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
+import nameFundingSourceSchema from '@cms-eapd/common/schemas/nameAndFundingSource';
 import {
   setActivityName,
   setActivityFundingSource
@@ -12,21 +15,28 @@ const NameAndFundingSourceForm = ({
   index,
   item: { fundingSource, name },
   setFundingSource,
-  setName
+  setName,
+  adminCheck
 }) => {
-  const changeName = useCallback(
-    ({ target: { value } }) => {
-      setName(index, value);
-    },
-    [index, setName]
-  );
+  NameAndFundingSourceForm.displayName = 'NameAndFundingSourceForm';
 
-  const changeFundingSource = useCallback(
-    ({ target: { value } }) => {
-      setFundingSource(index, value);
+  const {
+    control,
+    trigger,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      name: name,
+      fundingSource: fundingSource
     },
-    [index, setFundingSource]
-  );
+    resolver: joiResolver(nameFundingSourceSchema)
+  });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger(["name", "fundingSource"]);
+    };
+  }, [])
 
   const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
     checked: fundingSource === choice,
@@ -36,20 +46,49 @@ const NameAndFundingSourceForm = ({
 
   return (
     <Fragment>
-      <TextField
-        label="Activity name"
-        name="activity-name"
-        value={name}
-        onChange={changeName}
-        className="remove-clearfix"
+      <Controller
+        name="name"
+        control={control}
+        render={({ field: { onChange, ...props } }) => (
+          <TextField
+            {...props}
+            label="Activity name"
+            onChange={({ target: { value } }) => {
+              onChange(value);
+              setName(index, value);
+
+              if (adminCheck) {
+                trigger();
+              }
+            }}
+            className="remove-clearfix"
+            errorMessage={errors?.name?.message}
+            errorPlacement="bottom"
+          />
+        )}
       />
-      <ChoiceList
-        choices={choices}
-        label="Program type"
-        labelClassName="ds-u-margin-bottom--1"
-        name="program-type"
-        onChange={changeFundingSource}
-        type="radio"
+      <Controller
+        name="fundingSource"
+        control={control}
+        render={({ field: { onChange, ...props } }) => (
+          <ChoiceList
+            {...props}
+            choices={choices}
+            label="Program type"
+            labelClassName="ds-u-margin-bottom--1"
+            onChange={({ target: { value } }) => {
+              onChange(value);
+              setFundingSource(index, value);
+
+              if (adminCheck) {
+                trigger();
+              }
+            }}
+            type="radio"
+            errorMessage={errors?.fundingSource?.message}
+            errorPlacement="bottom"
+          />
+        )}
       />
     </Fragment>
   );
@@ -62,14 +101,21 @@ NameAndFundingSourceForm.propTypes = {
     name: PropTypes.string.isRequired
   }).isRequired,
   setFundingSource: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired
+  setName: PropTypes.func.isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
+
+const mapStateToProps = state => {
+  return {
+    adminCheck: state.apd.adminCheck
+  }
+}
 
 const mapDispatchToProps = {
   setFundingSource: setActivityFundingSource,
   setName: setActivityName
 };
 
-export default connect(null, mapDispatchToProps)(NameAndFundingSourceForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NameAndFundingSourceForm);
 
-export { NameAndFundingSourceForm as plain, mapDispatchToProps };
+export { NameAndFundingSourceForm as plain, mapStateToProps, mapDispatchToProps };
