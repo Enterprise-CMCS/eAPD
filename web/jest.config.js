@@ -12,10 +12,14 @@ module.exports = {
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
     '\\.[jt]sx?$': 'babel-jest',
+    '\\.[jt]s?$': 'babel-jest',
     '\\.yaml$': 'yaml-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
-  transformIgnorePatterns: ['node_modules/(?!(d3-format|d3-geo|d3-array)/)'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(d3-format|d3-geo|d3-array)/)',
+    '\\.cy\\.js$'
+  ],
   moduleFileExtensions: ['js', 'yaml'],
   collectCoverageFrom: [
     '**/*.{js,jsx}',
@@ -31,13 +35,13 @@ module.exports = {
     '!**/lazy/**',
     '!**/shared/**',
     '!**/static/**',
-    '!web/src/file-loader.js',
-    '!web/src/app.dev.js',
-    '!web/src/app.js',
-    '!web/src/constants.js',
-    '!web/src/components/EnableCookies.js',
-    '!web/src/util/analytics.js',
-    '!web/src/util/oktaAuth.js'
+    '!**/file-loader.js',
+    '!**/app.dev.js',
+    '!**/app.js',
+    '!**/constants.js',
+    '!**/components/EnableCookies.js',
+    '!**/util/analytics.js',
+    '!**/util/oktaAuth.js'
   ],
   coverageThreshold: {
     global: {

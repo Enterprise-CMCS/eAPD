@@ -46,6 +46,9 @@ const getStates = {
         200: {
           description: 'List of US States and Territories',
           content: jsonResponse(arrayOf(stateSchema))
+        },
+        400: {
+          description: 'Invalid US State or Territory ID'
         }
       }
     }
@@ -72,9 +75,6 @@ const getState = {
         200: {
           description: 'US State or Territory',
           content: jsonResponse(fullStateSchema)
-        },
-        400: {
-          description: 'Invalid US State or Territory ID'
         },
         403: {
           description:

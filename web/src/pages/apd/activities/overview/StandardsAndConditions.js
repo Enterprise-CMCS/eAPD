@@ -40,10 +40,10 @@ const StandardsAndConditions = ({
   });
 
   useEffect(() => {
-    if(adminCheck) {
-      trigger(["supports"]);
+    if (adminCheck) {
+      trigger(['supports']);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>

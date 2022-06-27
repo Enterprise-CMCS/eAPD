@@ -452,11 +452,13 @@ jobs:
           password: $DOCKER_EAPD_PW
     steps:
       - checkout
-      - run: npm i glob
-      - run: npm i js-yaml
       - run:
           working_directory: ~/project/web
-          command: node yaml-tests.js
+          command: |
+            yarn install --frozen-lockfile
+            yarn add glob
+            yarn add js-yaml
+            node yaml-tests.js
 
   e2e test:
     machine:
@@ -500,7 +502,6 @@ jobs:
           command: |
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
-            cp ../api/seeds/test/tokens.json ./tokens.json
 
             # Switch to Node 16.15.0.
             export NVM_DIR="/opt/circleci/.nvm"
@@ -510,7 +511,7 @@ jobs:
             nvm use 16.15.0
 
             # yarn install --frozen-lockfile
-            npx cypress install --force
+            npx cypress@10.1.0 install --force
             npx cypress verify
       - run:
           name: run e2e tests authentication
@@ -522,7 +523,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.spec.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.cy.js"; fi
       - run:
           name: run e2e tests apd - basics
           working_directory: ~/project/e2e
@@ -533,7 +534,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.spec.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.cy.js"; fi
       - run:
           name: run e2e tests apd - default
           working_directory: ~/project/e2e
@@ -544,7 +545,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.spec.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.cy.js"; fi
       - run:
           name: run e2e tests apd - data
           working_directory: ~/project/e2e
@@ -555,7 +556,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.spec.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.cy.js"; fi
       - run:
           name: run e2e tests admin
           working_directory: ~/project/e2e
@@ -566,7 +567,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.spec.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.cy.js"; fi
 
   chromatic deployment:
     yaml test:
