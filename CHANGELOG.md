@@ -1,6 +1,6 @@
 ### 3.2.0 (2021-09-07)
 
-##### Build System / Dependencies
+#### Build System / Dependencies
 
 - Move Changelog to Wiki [[#3426](https://github.com/CMSgov/eAPD/issues/3426)]
 - changelog generator [[#3453](https://github.com/CMSgov/eAPD/issues/3453)] ([df63684c](https://github.com/CMSgov/eAPD/commit/df63684cf69d53642154cf90f07fadcd47c77623))

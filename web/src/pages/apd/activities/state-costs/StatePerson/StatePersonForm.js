@@ -14,7 +14,9 @@ import { savePersonnel as actualSavePersonnel } from '../../../../../redux/actio
 const StatePersonForm = forwardRef(
   ({ activityIndex, item, index, savePersonnel, setFormValid }, ref) => {
     StatePersonForm.displayName = 'StatePersonForm';
-
+    const { title, description, years } = JSON.parse(
+      JSON.stringify({ ...item })
+    );
     const {
       control,
       formState: { errors, isValid },
@@ -22,7 +24,9 @@ const StatePersonForm = forwardRef(
       setValue
     } = useForm({
       defaultValues: {
-        ...item
+        title,
+        description,
+        years
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
@@ -51,7 +55,10 @@ const StatePersonForm = forwardRef(
 
     const onSubmit = e => {
       e.preventDefault();
-      savePersonnel(activityIndex, index, getValues());
+      savePersonnel(activityIndex, index, {
+        ...item,
+        ...getValues()
+      });
     };
 
     const handleSubForm = value => {
