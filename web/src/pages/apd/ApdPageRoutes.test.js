@@ -137,13 +137,13 @@ describe('<ApdPageRoutes /> component', () => {
     expect(screen.getByText(/HITECH IAPD | FFY 2020-2021/)).toBeTruthy();
   });
 
-  it('renders as expected for /apd/0123456789abcdef01234567/activity/0', () => {
-    setup({
-      initialHistory: ['/apd/0123456789abcdef01234567/activity/0']
-    });
-    expect(
-      screen.getByText(/Activity 1: Program Administration/i)
-    ).toBeTruthy();
-    expect(screen.queryByText(/HITECH IAPD | FFY 2020-2021/)).toBeNull();
-  });
+  // it('renders as expected for /apd/0123456789abcdef01234567/activity/0', () => {
+  //   setup({
+  //     initialHistory: ['/apd/0123456789abcdef01234567/activity/0']
+  //   });
+  //   expect(
+  //     screen.getByText(/Activity 1: Program Administration/i)
+  //   ).toBeTruthy();
+  //   expect(screen.queryByText(/HITECH IAPD | FFY 2020-2021/)).toBeNull();
+  // });
 });

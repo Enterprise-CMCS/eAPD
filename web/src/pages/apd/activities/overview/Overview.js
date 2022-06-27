@@ -1,6 +1,8 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useMemo, useCallback } from 'react';
+import React, { Fragment, useEffect, useMemo } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import { t } from '../../../../i18n';
@@ -16,14 +18,38 @@ import { NameAndFundingSourceForm } from './NameAndFundingSource/';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import Schedule from './Schedule';
 
+import overviewSchema from '@cms-eapd/common/schemas/activityOverview';
+
 const ActivityOverview = ({
   activity,
   activityIndex,
   setAlternatives,
   setDescription,
-  setOverview
+  setOverview,
+  adminCheck
 }) => {
+  ActivityOverview.displayName = 'ActivityOverview';
+
   const { alternatives, description, summary } = activity;
+
+  const {
+    control,
+    trigger,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      alternatives: alternatives,
+      description: description,
+      summary: summary
+    },
+    resolver: joiResolver(overviewSchema)
+  });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    };
+  }, []);
 
   const overviewLabel = useMemo(
     () =>
@@ -32,19 +58,13 @@ const ActivityOverview = ({
       }),
     []
   );
+
   const overviewHint = useMemo(
     () =>
       t('activities.overview.activityOverviewInput.hint', {
         defaultValue: ''
       }),
     []
-  );
-
-  const syncOverview = useCallback(
-    html => {
-      setOverview(activityIndex, html);
-    },
-    [activityIndex, setOverview]
   );
 
   const descriptionLabel = useMemo(
@@ -72,12 +92,6 @@ const ActivityOverview = ({
       ),
     [activity.fundingSource]
   );
-  const syncDescription = useCallback(
-    html => {
-      setDescription(activityIndex, html);
-    },
-    [activityIndex, setDescription]
-  );
 
   const alternativesLabel = useMemo(
     () =>
@@ -86,18 +100,13 @@ const ActivityOverview = ({
       }),
     []
   );
+
   const alternativesHint = useMemo(
     () =>
       t('activities.overview.activityAlternativesInput.hint', {
         defaultValue: ''
       }),
     []
-  );
-  const syncAlternatives = useCallback(
-    html => {
-      setAlternatives(activityIndex, html);
-    },
-    [activityIndex, setAlternatives]
   );
 
   return (
@@ -119,19 +128,41 @@ const ActivityOverview = ({
       )}
 
       <div className="data-entry-box">
-        <FormLabel
+        <label
+          id="label-for-summary"
           className="ds-c-label--full-width"
           hint={overviewHint}
-          fieldId="activity-short-overview-field"
+          htmlFor="activity-short-overview-field"
         >
           {overviewLabel}
-        </FormLabel>
-        <RichText
-          id="activity-short-overview-field"
-          content={summary}
-          onSync={syncOverview}
-          editorClassName="rte-textarea-l"
+        </label>
+        <Controller
+          name="summary"
+          control={control}
+          render={({ field: { onChange } }) => (
+            <RichText
+              id="activity-short-overview-field"
+              content={summary}
+              onSync={html => {
+                setOverview(activityIndex, html);
+                onChange(html);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              editorClassName="rte-textarea-l"
+            />
+          )}
         />
+        {errors?.summary && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            {errors.summary.message}
+          </span>
+        )}
       </div>
 
       <Schedule activityIndex={activityIndex} />
@@ -140,18 +171,34 @@ const ActivityOverview = ({
         <FormLabel
           className="ds-c-label--full-width"
           hint={descriptionHint}
-          fieldId="activity-description-field"
+          htmlFor="activity-description-field"
         >
           {descriptionLabel}
         </FormLabel>
         {activity.fundingSource === 'HIE' && (
           <Instruction source="activities.overview.activityDescriptionInput.hie" />
         )}
-        <RichText
-          id="activity-description-field"
-          content={description}
-          onSync={syncDescription}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="description"
+          control={control}
+          render={({ field: { onChange, ...props } }) => (
+            <RichText
+              {...props}
+              id="activity-description-field"
+              data-cy="activity-description"
+              content={description}
+              onSync={html => {
+                setDescription(activityIndex, html);
+                onChange(html);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              editorClassName="rte-textarea-l"
+              error={errors?.description?.message}
+            />
+          )}
         />
       </div>
 
@@ -159,7 +206,7 @@ const ActivityOverview = ({
         <FormLabel
           className="ds-c-label--full-width"
           hint={alternativesHint}
-          fieldId="activity-alternatives-field"
+          htmlFor="activity-alternatives-field"
         >
           {alternativesLabel}
         </FormLabel>
@@ -167,7 +214,9 @@ const ActivityOverview = ({
         <RichText
           id="activity-alternatives-field"
           content={alternatives}
-          onSync={syncAlternatives}
+          onSync={html => {
+            setAlternatives(activityIndex, html);
+          }}
           editorClassName="rte-textarea-l"
         />
       </div>
@@ -181,12 +230,14 @@ ActivityOverview.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   setAlternatives: PropTypes.func.isRequired,
   setDescription: PropTypes.func.isRequired,
-  setOverview: PropTypes.func.isRequired
+  setOverview: PropTypes.func.isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => {
   return {
-    activity: selectActivityByIndex(state, { activityIndex })
+    activity: selectActivityByIndex(state, { activityIndex }),
+    adminCheck: state.apd.adminCheck
   };
 };
 

@@ -3,7 +3,7 @@ import '../src/styles/index.scss';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { addDecorator, addParameters } from '@storybook/react';
 import { withTests } from '@storybook/addon-jest';
-import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
+import { DocsPage, DocsContainer } from '@storybook/addon-docs';
 
 import results from '../.jest-test-results.json';
 
