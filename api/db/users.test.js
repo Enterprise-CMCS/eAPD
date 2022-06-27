@@ -62,6 +62,7 @@ tap.test('database wrappers / users', async usersTests => {
   let getRolesAndActivities;
   let updateAuthAffiliation;
   let auditUserLogin;
+  let getAuthRoleByName;
 
   usersTests.beforeEach(async () => {
     sandbox.resetBehavior();
@@ -93,6 +94,7 @@ tap.test('database wrappers / users', async usersTests => {
     getRolesAndActivities = sandbox.stub();
     updateAuthAffiliation = sandbox.stub();
     auditUserLogin = sandbox.stub();
+    getAuthRoleByName = sandbox.stub();
 
     getAffiliationByState.withArgs(unsanitizedUser.id, 'state1').resolves({
       id: 'affiliation',
@@ -121,6 +123,7 @@ tap.test('database wrappers / users', async usersTests => {
       username: unsanitizedUser.login,
       expires_at: new Date(Date.now() - 1000 * 60 * 60 * 24 * 365)
     });
+    getAuthRoleByName.resolves({ id: 'role id', name: 'role' });
     getStateById.withArgs('state1').resolves({
       id: 'state1',
       address1: 'New Address 1',
