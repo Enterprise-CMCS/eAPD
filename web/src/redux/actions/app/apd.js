@@ -207,7 +207,8 @@ export const deleteApd =
       });
   };
 
+// eslint-disable-next-line react/display-name
 export const toggleAdminCheck = value => dispatch => {
-  dispatch({ type: ADMIN_CHECK_TOGGLE, data: value})
+  dispatch({ type: ADMIN_CHECK_TOGGLE, data: value });
   return null;
-}
+};
