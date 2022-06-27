@@ -1,5 +1,5 @@
 module.exports = {
-  coverageDirectory: './coverage/',
+  coverageDirectory: '../coverage/',
   rootDir: 'src',
   setupFiles: ['../polyfills.test.js', '../setup.enzyme.test.js'],
   setupFilesAfterEnv: ['../setup.rtl.test.js'],
@@ -25,10 +25,19 @@ module.exports = {
     '!**/*.cy.{js,jsx}',
     '!**/node_modules/**',
     '!**/__snapshots__/**',
+    '!**/shared/**',
     '!**/fixtures/**',
     '!**/i18n/**',
+    '!**/lazy/**',
     '!**/shared/**',
-    '!**/static/**'
+    '!**/static/**',
+    '!web/src/file-loader.js',
+    '!web/src/app.dev.js',
+    '!web/src/app.js',
+    '!web/src/constants.js',
+    '!web/src/components/EnableCookies.js',
+    '!web/src/util/analytics.js',
+    '!web/src/util/oktaAuth.js'
   ],
   coverageThreshold: {
     global: {

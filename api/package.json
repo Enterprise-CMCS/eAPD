@@ -118,15 +118,19 @@
       "--reporter-dir=./coverage/",
       "--exclude=./**/*.endpoint.js",
       "--exclude=./**/index.js",
-      "--exclude=./**/openAPI.js",
-      "--exclude=./**/mock*.js",
       "--exclude=./**/migrations/**",
       "--exclude=./**/mongo-migrations/**",
-      "--exclude=./**/node_modules/**",
-      "--exclude=./**/__snapshots__/**",
+      "--exclude=./**/openAPI.js",
       "--exclude=./**/schemas/**",
       "--exclude=./**/seeds/**",
-      "--exclude=./**/test-data/**"
+      "--exclude=./**/test-data/**",
+      "--exclude=./**/node_modules/**",
+      "--exclude=./**/__snapshots__/**",
+      "--exclude=./api/audit.js",
+      "--exclude=./api/auth/mockedOktaAuth.js",
+      "--exclude=./api/db/knex.js",
+      "--exclude=./api/db/mongodb.js",
+      "--exclude=./api/seeds/development/apds.js"
     ]
   },
   "resolutions": {

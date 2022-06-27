@@ -18,7 +18,6 @@ coverage:
     changes: false
     default_rules:
       flag_coverage_not_uploaded_behavior: include
-    patch: true
     project: true
 
 parsers:
@@ -35,6 +34,7 @@ ignore:
   - 'web/**/*.story.js'
   - 'web/**/*.stories.js'
   - 'web/**/*.test.js'
+  - 'web/**/*.cy.js'
   - 'web/src/shared/**'
   - 'web/src/fixtures/**'
   - 'web/src/i18n/**'
@@ -44,7 +44,10 @@ ignore:
   - 'web/src/file-loader.js'
   - 'web/src/app.dev.js'
   - 'web/src/app.js'
+  - 'web/src/constants.js'
   - 'web/src/components/EnableCookies.js'
+  - 'web/src/util/analytics.js'
+  - 'web/src/util/oktaAuth.js'
   - 'api/**/*.test.js'
   - 'api/**/*.endpoint.js'
   - 'api/**/index.js'
@@ -53,8 +56,12 @@ ignore:
   - 'api/**/openAPI.js'
   - 'api/**/schemas/**'
   - 'api/**/seeds/**'
-  - 'api/**/migrations/**'
   - 'api/**/test-data/*'
+  - 'api/audit.js'
+  - 'api/auth/mockedOktaAuth.js'
+  - 'api/db/knex.js'
+  - 'api/db/mongodb.js'
+  - 'api/seeds/development/apds.js'
   - '_templates/**'
   - '.circleci/**'
   - '.github/**'

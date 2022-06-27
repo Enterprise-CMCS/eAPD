@@ -73,6 +73,9 @@ const getState = {
           description: 'US State or Territory',
           content: jsonResponse(fullStateSchema)
         },
+        400: {
+          description: 'Invalid US State or Territory ID'
+        },
         403: {
           description:
             'Unauthorized, the user does not have permission to access this state.  ' +
