@@ -65,7 +65,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.test.js", "**/*.story.js", "**/*.cy.js"],
+      "files": ["**/*.test.js", "**/*.stories.js", "**/*.cy.js"],
       "env": {
         "jest": true
       },
