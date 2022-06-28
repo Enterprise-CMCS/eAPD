@@ -29,6 +29,8 @@ const tRoot = 'apd.stateProfile.keyPersonnel';
 const PersonForm = forwardRef(
   ({ index, item, savePerson, years, setFormValid }, ref) => {
     PersonForm.displayName = 'PersonForm';
+    const { name, email, position, hasCosts, isPrimary, costs, fte } =
+      JSON.parse(JSON.stringify({ ...item }));
     const {
       handleSubmit,
       control,
@@ -36,12 +38,12 @@ const PersonForm = forwardRef(
       resetField: resetFieldErrors
     } = useForm({
       defaultValues: {
-        name: item.name,
-        email: item.email,
-        position: item.position,
-        hasCosts: getCheckedValue(item.hasCosts),
-        costs: item.costs,
-        fte: item.fte
+        name,
+        email,
+        position,
+        hasCosts: getCheckedValue(hasCosts),
+        costs,
+        fte
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
@@ -52,7 +54,15 @@ const PersonForm = forwardRef(
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const initialState = item;
+    const initialState = {
+      name,
+      email,
+      position,
+      hasCosts,
+      isPrimary,
+      costs,
+      fte
+    };
 
     function reducer(state, action) {
       switch (action.type) {
@@ -137,7 +147,10 @@ const PersonForm = forwardRef(
 
     const onSubmit = e => {
       e.preventDefault();
-      savePerson(index, state);
+      savePerson(index, {
+        ...item,
+        ...state
+      });
       handleSubmit(e);
     };
 

@@ -121,10 +121,10 @@ describe('the ContractorResourceForm component', () => {
 
     await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
     // TODO: not sure why this is failing
-    // await waitFor(async () => {
-    //   expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
-    // });
-    // expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
+    await waitFor(async () => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
   });
 
   test('renders correctly with hourly', async () => {
@@ -177,10 +177,10 @@ describe('the ContractorResourceForm component', () => {
 
     await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
     // TODO: not sure why this is failing
-    // await waitFor(() => {
-    //   expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
-    // });
-    // expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
   });
 
   // TODO: these tests are too long running, need to figure out a way to make them quicker
@@ -273,7 +273,7 @@ describe('the ContractorResourceForm component', () => {
     userEvent.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -388,7 +388,7 @@ describe('the ContractorResourceForm component', () => {
     userEvent.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -409,7 +409,7 @@ describe('the ContractorResourceForm component', () => {
     userEvent.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 

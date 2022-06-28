@@ -2,7 +2,7 @@ Resolves #
 
 ### Description
 
-### Signifcant changes or possible side effects
+### Significant changes or possible side effects
 
 ### Automated test cases written
 

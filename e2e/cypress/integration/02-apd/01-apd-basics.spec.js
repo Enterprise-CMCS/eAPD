@@ -531,6 +531,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .clear()
           .type(`Test cancel`);
 
+        cy.findByRole('button', { name: /Add Metric to Outcome/i }).click();
+
+        cy.get(`[data-cy=metric-${index}-0]`).click().type('do not save this');
+
         cy.get('.form-and-review-list')
           .eq(0)
           .findByRole('button', { name: /Cancel/i })
@@ -662,7 +666,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByLabelText('Description').clear().blur();
       cy.contains('Provide a personnel description.').should('exist');
 
-      years.forEach((year, index) => {
+      years.forEach(year => {
         cy.get(`[name="[${year}].amt"`).clear().blur();
         cy.contains(
           'Please provide a FTE cost greater than or equal to $0.'
