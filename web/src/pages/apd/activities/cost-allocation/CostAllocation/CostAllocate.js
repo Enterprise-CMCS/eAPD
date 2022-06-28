@@ -46,7 +46,7 @@ const CostAllocate = ({
     if (adminCheck) {
       trigger();
     };
-  }, []);
+  }, [adminCheck]);
 
   return (
     <Subsection

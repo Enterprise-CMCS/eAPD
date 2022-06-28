@@ -29,7 +29,11 @@ const otherCostsSchema = Joi.object().pattern(
   /\d{4}/,
   Joi.object({
     otherCosts: Joi.number().positive().allow(0).required().messages({
-      'number.base': ''
+      'number.base': 'Provide an other funding amount greater than or equal to $0.',
+      'number.positive': 'Provide an other funding amount greater than or equal to $0.',
+      'number.allow': 'Provide an other funding amount greater than or equal to $0.',
+      'number.empty': 'Provide an other funding amount greater than or equal to $0.',
+      'number.format': 'Provide an other funding amount greater than or equal to $0.'
     })
   })
 );
@@ -40,10 +44,31 @@ const OtherFunding = ({
   costAllocation,
   costSummary,
   setOtherFunding,
-  syncOtherFunding
+  syncOtherFunding,
+  adminCheck
 }) => {
   const { costAllocationNarrative } = activity;
   const { years } = costSummary;
+
+  const {
+    control,
+    trigger,
+    setValue,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      ...costAllocationNarrative
+    },
+    resolver: joiResolver(otherCostsSchema)
+  })
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    };
+
+    console.log({errors})
+  }, [adminCheck]);
 
   const setOther = year => e => {
     setOtherFunding(activityIndex, year, e.target.value);
@@ -69,11 +94,27 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
-            <RichText
-              id={`cost-allocation-narrative-${ffy}-other-sources-field`}
-              content={costAllocationNarrative.years[ffy].otherSources}
-              onSync={syncOther(ffy)}
-              editorClassName="rte-textarea-l"
+            <Controller
+              key={`${ffy}-otherSources`}
+              name={`years[${ffy}].otherSources`}
+              control={control}
+              render={({
+                field: { onChange: syncOther, ...props }
+              }) => (
+                <RichText
+                  {...props}
+                  id={`cost-allocation-narrative-${ffy}-other-sources-field`}
+                  content={costAllocationNarrative.years[ffy].otherSources}
+                  onSync={html => {
+                    syncOther(ffy)
+
+                    if (adminCheck) {
+                      trigger();
+                    }
+                  }}
+                  editorClassName="rte-textarea-l"
+                />
+              )}
             />
           </div>
 
@@ -129,7 +170,8 @@ OtherFunding.propTypes = {
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
   setOtherFunding: PropTypes.func.isRequired,
-  syncOtherFunding: PropTypes.func.isRequired
+  syncOtherFunding: PropTypes.func.isRequired,
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (
@@ -145,7 +187,8 @@ const mapStateToProps = (
   return {
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
-    costSummary: getCostSummary(state, { activityIndex })
+    costSummary: getCostSummary(state, { activityIndex }),
+    adminCheck: state.apd.adminCheck
   };
 };
 
