@@ -4211,12 +4211,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "shouldFocusError": true,
           },
           "_proxyFormState": Object {
-            "dirtyFields": false,
+            "dirtyFields": true,
             "errors": "all",
             "isDirty": false,
             "isValid": "all",
             "isValidating": false,
-            "touchedFields": false,
+            "touchedFields": true,
           },
           "_removeUnmounted": [Function],
           "_stateFlags": Object {
@@ -8529,12 +8529,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "shouldFocusError": true,
           },
           "_proxyFormState": Object {
-            "dirtyFields": false,
+            "dirtyFields": true,
             "errors": "all",
             "isDirty": false,
             "isValid": "all",
             "isValidating": false,
-            "touchedFields": false,
+            "touchedFields": true,
           },
           "_removeUnmounted": [Function],
           "_stateFlags": Object {
@@ -12847,12 +12847,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "shouldFocusError": true,
           },
           "_proxyFormState": Object {
-            "dirtyFields": false,
+            "dirtyFields": true,
             "errors": "all",
             "isDirty": false,
             "isValid": "all",
             "isValidating": false,
-            "touchedFields": false,
+            "touchedFields": true,
           },
           "_removeUnmounted": [Function],
           "_stateFlags": Object {
@@ -17165,12 +17165,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "shouldFocusError": true,
           },
           "_proxyFormState": Object {
-            "dirtyFields": false,
+            "dirtyFields": true,
             "errors": "all",
             "isDirty": false,
             "isValid": "all",
             "isValidating": false,
-            "touchedFields": false,
+            "touchedFields": true,
           },
           "_removeUnmounted": [Function],
           "_stateFlags": Object {
@@ -21431,12 +21431,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "shouldFocusError": true,
                           },
                           "_proxyFormState": Object {
-                            "dirtyFields": false,
+                            "dirtyFields": true,
                             "errors": "all",
                             "isDirty": false,
                             "isValid": "all",
                             "isValidating": false,
-                            "touchedFields": false,
+                            "touchedFields": true,
                           },
                           "_removeUnmounted": [Function],
                           "_stateFlags": Object {
@@ -25683,12 +25683,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "shouldFocusError": true,
                           },
                           "_proxyFormState": Object {
-                            "dirtyFields": false,
+                            "dirtyFields": true,
                             "errors": "all",
                             "isDirty": false,
                             "isValid": "all",
                             "isValidating": false,
-                            "touchedFields": false,
+                            "touchedFields": true,
                           },
                           "_removeUnmounted": [Function],
                           "_stateFlags": Object {
@@ -29954,12 +29954,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "shouldFocusError": true,
                           },
                           "_proxyFormState": Object {
-                            "dirtyFields": false,
+                            "dirtyFields": true,
                             "errors": "all",
                             "isDirty": false,
                             "isValid": "all",
                             "isValidating": false,
-                            "touchedFields": false,
+                            "touchedFields": true,
                           },
                           "_removeUnmounted": [Function],
                           "_stateFlags": Object {
@@ -34206,12 +34206,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "shouldFocusError": true,
                           },
                           "_proxyFormState": Object {
-                            "dirtyFields": false,
+                            "dirtyFields": true,
                             "errors": "all",
                             "isDirty": false,
                             "isValid": "all",
                             "isValidating": false,
-                            "touchedFields": false,
+                            "touchedFields": true,
                           },
                           "_removeUnmounted": [Function],
                           "_stateFlags": Object {
@@ -38528,12 +38528,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "shouldFocusError": true,
                             },
                             "_proxyFormState": Object {
-                              "dirtyFields": false,
+                              "dirtyFields": true,
                               "errors": "all",
                               "isDirty": false,
                               "isValid": "all",
                               "isValidating": false,
-                              "touchedFields": false,
+                              "touchedFields": true,
                             },
                             "_removeUnmounted": [Function],
                             "_stateFlags": Object {
@@ -42780,12 +42780,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "shouldFocusError": true,
                             },
                             "_proxyFormState": Object {
-                              "dirtyFields": false,
+                              "dirtyFields": true,
                               "errors": "all",
                               "isDirty": false,
                               "isValid": "all",
                               "isValidating": false,
-                              "touchedFields": false,
+                              "touchedFields": true,
                             },
                             "_removeUnmounted": [Function],
                             "_stateFlags": Object {
@@ -47051,12 +47051,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "shouldFocusError": true,
                             },
                             "_proxyFormState": Object {
-                              "dirtyFields": false,
+                              "dirtyFields": true,
                               "errors": "all",
                               "isDirty": false,
                               "isValid": "all",
                               "isValidating": false,
-                              "touchedFields": false,
+                              "touchedFields": true,
                             },
                             "_removeUnmounted": [Function],
                             "_stateFlags": Object {
@@ -51303,12 +51303,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "shouldFocusError": true,
                             },
                             "_proxyFormState": Object {
-                              "dirtyFields": false,
+                              "dirtyFields": true,
                               "errors": "all",
                               "isDirty": false,
                               "isValid": "all",
                               "isValidating": false,
-                              "touchedFields": false,
+                              "touchedFields": true,
                             },
                             "_removeUnmounted": [Function],
                             "_stateFlags": Object {
@@ -55616,12 +55616,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "shouldFocusError": true,
                           },
                           "_proxyFormState": Object {
-                            "dirtyFields": false,
+                            "dirtyFields": true,
                             "errors": "all",
                             "isDirty": false,
                             "isValid": "all",
                             "isValidating": false,
-                            "touchedFields": false,
+                            "touchedFields": true,
                           },
                           "_removeUnmounted": [Function],
                           "_stateFlags": Object {
@@ -59974,12 +59974,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "shouldFocusError": true,
                           },
                           "_proxyFormState": Object {
-                            "dirtyFields": false,
+                            "dirtyFields": true,
                             "errors": "all",
                             "isDirty": false,
                             "isValid": "all",
                             "isValidating": false,
-                            "touchedFields": false,
+                            "touchedFields": true,
                           },
                           "_removeUnmounted": [Function],
                           "_stateFlags": Object {
@@ -64335,12 +64335,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "shouldFocusError": true,
                           },
                           "_proxyFormState": Object {
-                            "dirtyFields": false,
+                            "dirtyFields": true,
                             "errors": "all",
                             "isDirty": false,
                             "isValid": "all",
                             "isValidating": false,
-                            "touchedFields": false,
+                            "touchedFields": true,
                           },
                           "_removeUnmounted": [Function],
                           "_stateFlags": Object {
@@ -68693,12 +68693,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "shouldFocusError": true,
                           },
                           "_proxyFormState": Object {
-                            "dirtyFields": false,
+                            "dirtyFields": true,
                             "errors": "all",
                             "isDirty": false,
                             "isValid": "all",
                             "isValidating": false,
-                            "touchedFields": false,
+                            "touchedFields": true,
                           },
                           "_removeUnmounted": [Function],
                           "_stateFlags": Object {
