@@ -4,6 +4,7 @@ import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no
 import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dependencies
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
+import 'cypress-iframe';
 import 'cypress-file-upload'; // eslint-disable-line import/no-extraneous-dependencies
 
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
