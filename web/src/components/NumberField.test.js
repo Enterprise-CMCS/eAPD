@@ -219,10 +219,4 @@ describe('NumberField component', () => {
     userEvent.type(input, '0.00');
     expect(input.value).toEqual('0.00');
   });
-
-  it('does not alter the input when entering a 1/1000th decimal', () => {
-    const { input } = setup({ value: null });
-    userEvent.type(input, '0.000');
-    expect(input.value).toEqual('0.000');
-  });
 });
