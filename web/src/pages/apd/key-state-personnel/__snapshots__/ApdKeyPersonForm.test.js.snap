@@ -51427,35 +51427,31 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 aria-live="polite"
                 aria-relevant="additions text"
               >
-                <div
-                  className="ds-c-choice-wrapper"
+                <input
+                  checked={true}
+                  className="ds-c-choice"
+                  id="radio_hasCosts_1"
+                  name="hasCosts"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="radio"
+                  value="yes"
+                />
+                <FormLabel
+                  component="label"
+                  fieldId="radio_hasCosts_1"
                 >
-                  <input
-                    checked={true}
-                    className="ds-c-choice"
-                    id="radio_hasCosts_1"
-                    name="hasCosts"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="radio"
-                    value="yes"
-                  />
-                  <FormLabel
-                    component="label"
-                    fieldId="radio_hasCosts_1"
+                  <label
+                    className="ds-c-label"
+                    htmlFor="radio_hasCosts_1"
                   >
-                    <label
-                      className="ds-c-label"
-                      htmlFor="radio_hasCosts_1"
+                    <span
+                      className=""
                     >
-                      <span
-                        className=""
-                      >
-                        Yes
-                      </span>
-                    </label>
-                  </FormLabel>
-                </div>
+                      Yes
+                    </span>
+                  </label>
+                </FormLabel>
                 <div>
                   <h5
                     className="ds-h5"
@@ -68915,35 +68911,31 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 aria-live={null}
                 aria-relevant={null}
               >
-                <div
-                  className="ds-c-choice-wrapper"
+                <input
+                  checked={false}
+                  className="ds-c-choice"
+                  id="radio_hasCosts_6"
+                  name="hasCosts"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="radio"
+                  value="no"
+                />
+                <FormLabel
+                  component="label"
+                  fieldId="radio_hasCosts_6"
                 >
-                  <input
-                    checked={false}
-                    className="ds-c-choice"
-                    id="radio_hasCosts_6"
-                    name="hasCosts"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="radio"
-                    value="no"
-                  />
-                  <FormLabel
-                    component="label"
-                    fieldId="radio_hasCosts_6"
+                  <label
+                    className="ds-c-label"
+                    htmlFor="radio_hasCosts_6"
                   >
-                    <label
-                      className="ds-c-label"
-                      htmlFor="radio_hasCosts_6"
+                    <span
+                      className=""
                     >
-                      <span
-                        className=""
-                      >
-                        No
-                      </span>
-                    </label>
-                  </FormLabel>
-                </div>
+                      No
+                    </span>
+                  </label>
+                </FormLabel>
               </div>
             </Choice>
           </fieldset>
