@@ -4,7 +4,7 @@
  * Re-generate by setting TAP_SNAPSHOT=1 and running tests.
  * Make sure to inspect the output below.  Do not ignore changes!
  */
-'use strict'
+
 exports[`auth/jwtUtils.test.js TAP > output 1`] = `
 Object {
   "algorithm": "HS256",
@@ -13,4 +13,4 @@ Object {
   "issuer": "eAPD",
   "notBefore": "0",
 }
-`
+`;
