@@ -1,14 +1,14 @@
 import roundedPercents from './roundedPercents';
 import { arrToObj, convertToNumber } from './formatting';
 
-export const expenseTypeNames = [
+export const EXPENSE_TYPE_NAMES = [
   'statePersonnel',
   'contractors',
   'expenses',
   'combined'
 ];
 
-const FFPOptions = new Set(['90-10', '75-25', '50-50', '0-100']);
+export const FFP_OPTIONS = new Set(['90-10', '75-25', '50-50', '0-100']);
 
 /**
  * Rounds a number to the given number of decimal places.
@@ -26,7 +26,7 @@ const fixNum = (value, digits = 2) => {
  * @param {Array} years
  * @returns the Funding Source object
  */
-const getFundingSourcesByYear = years => ({
+const getDefaultFundingSourcesByYear = years => ({
   ...years.reduce(
     (o, year) => ({
       ...o,
@@ -53,11 +53,11 @@ const getFundingSourcesByYear = years => ({
  * @param {Array} names
  * @returns the Expense object
  */
-const expenseTypes = (years, names = expenseTypeNames) =>
+const expenseTypes = (years, names = EXPENSE_TYPE_NAMES) =>
   names.reduce(
     (o, name) => ({
       ...o,
-      [name]: getFundingSourcesByYear(years)
+      [name]: getDefaultFundingSourcesByYear(years)
     }),
     {}
   );
@@ -105,7 +105,7 @@ const defaultFederalShare = years =>
  */
 export const defaultBudget = years => ({
   activities: {},
-  combined: getFundingSourcesByYear(years),
+  combined: getDefaultFundingSourcesByYear(years),
   federalShareByFFYQuarter: {
     hitAndHie: defaultFederalShare(years),
     mmis: defaultFederalShare(years)
@@ -114,21 +114,25 @@ export const defaultBudget = years => ({
   hit: expenseTypes(years),
   mmis: expenseTypes(years),
   hitAndHie: expenseTypes(years),
-  mmisByFFP: expenseTypes(years, [...FFPOptions, 'combined']),
+  mmisByFFP: expenseTypes(years, [...FFP_OPTIONS, 'combined']),
   activityTotals: [],
   years
 });
 
-export const updateBudget = incomingBigState => {
+export const updateBudget = apd => {
   // Clone the incoming state, so we don't accidentally change anything.
-  const bigState = JSON.parse(JSON.stringify({ apd: incomingBigState.apd }));
+  const {
+    data: {
+      years,
+      activities,
+      keyStatePersonnel: { keyPersonnel }
+    }
+  } = JSON.parse(JSON.stringify(apd));
 
-  // Get a shell of our new state object.  This essentially guarantees
+  // Create a default budget object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
   // to have a bunch of code checking for it.
-  const { years } = bigState.apd.data;
-  const { keyPersonnel } = bigState.apd.data.keyStatePersonnel;
-  const newState = defaultBudget(years);
+  const newBudget = defaultBudget(years);
 
   /**
    * Adds a given cost to the budget running totals.
@@ -142,17 +146,17 @@ export const updateBudget = incomingBigState => {
     // we can't capture program-specific funding numbers.
     if (fundingSource) {
       // Add this value to the running budget totals, as appropriate.
-      newState[fundingSource][prop][year].total += cost;
-      newState[fundingSource][prop].total.total += cost;
-      newState[fundingSource].combined[year].total += cost;
-      newState[fundingSource].combined.total.total += cost;
+      newBudget[fundingSource][prop][year].total += cost;
+      newBudget[fundingSource][prop].total.total += cost;
+      newBudget[fundingSource].combined[year].total += cost;
+      newBudget[fundingSource].combined.total.total += cost;
     }
 
     // Because HIT and HIE sources have already added to the grand
     // totals, don't also do it for the combined source.
     if (fundingSource !== 'hitAndHie') {
-      newState.combined[year].total += cost;
-      newState.combined.total.total += cost;
+      newBudget.combined[year].total += cost;
+      newBudget.combined.total.total += cost;
     }
 
     // HIT and HIE are rolled up into a single combined source for
@@ -164,7 +168,7 @@ export const updateBudget = incomingBigState => {
 
   // Since all of our expenses are tied up in activities, we'll start
   // by looking at all of them and doing Magic Math™. (It's not magic.)
-  bigState.apd.data.activities.forEach(activity => {
+  activities.forEach(activity => {
     // If this is the Program Administration activity, add the APD key
     // personnel to it so they get included in downstream calculations.
     // TODO: Don't rely on the activity name. Instead, this should always be
@@ -196,7 +200,7 @@ export const updateBudget = incomingBigState => {
 
     // We also compute quarterly FFP per activity, so we go ahead and
     // create that object here.  We'll fill it in later.
-    newState.activities[activity.key] = {
+    newBudget.activities[activity.key] = {
       costsByFFY: {
         ...arrToObj(years, () => ({
           federal: 0,
@@ -254,7 +258,7 @@ export const updateBudget = incomingBigState => {
         statePersonnel: { ...arrToObj(years, 0), total: 0 }
       }
     };
-    newState.activityTotals.push(activityTotals);
+    newBudget.activityTotals.push(activityTotals);
 
     /**
      * Get the state and federal share of costs for an amount for
@@ -296,6 +300,7 @@ export const updateBudget = incomingBigState => {
     activity.contractorResources.forEach(contractor => {
       Object.entries(contractor.years).forEach(([year, cost]) => {
         addCostToTotals(fundingSource, year, 'contractors', cost);
+
         activityTotalByCategory[year].contractors += cost;
 
         activityTotals.data.contractors[year] += cost;
@@ -308,6 +313,7 @@ export const updateBudget = incomingBigState => {
     activity.expenses.forEach(expense => {
       Object.entries(expense.years).forEach(([year, cost]) => {
         addCostToTotals(fundingSource, year, 'expenses', cost);
+
         activityTotalByCategory[year].expenses += cost;
 
         activityTotals.data.expenses[year] += cost;
@@ -321,6 +327,7 @@ export const updateBudget = incomingBigState => {
       Object.entries(person.years).forEach(([year, { amt, perc }]) => {
         const cost = convertToNumber(amt) * convertToNumber(perc);
         addCostToTotals(fundingSource, year, 'statePersonnel', cost);
+
         activityTotalByCategory[year].statePersonnel += cost;
 
         activityTotals.data.statePersonnel[year] += cost;
@@ -341,7 +348,7 @@ export const updateBudget = incomingBigState => {
     // of all the costs.
     years.forEach(year => {
       const totalOtherFunding = convertToNumber(allocation[year].other);
-      const activityCostByFFY = newState.activities[activity.key].costsByFFY;
+      const activityCostByFFY = newBudget.activities[activity.key].costsByFFY;
       const totalCost = activityTotals.data.combined[year];
       const totalMedicaidShare = totalCost - totalOtherFunding;
 
@@ -444,26 +451,26 @@ export const updateBudget = incomingBigState => {
       const updateCosts = fs => {
         // Update the three cost categories...
         ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
-          newState[fs][prop][year].federal += fedShare[prop];
-          newState[fs][prop].total.federal += fedShare[prop];
+          newBudget[fs][prop][year].federal += fedShare[prop];
+          newBudget[fs][prop].total.federal += fedShare[prop];
 
-          newState[fs][prop][year].state += stateShare[prop];
-          newState[fs][prop].total.state += stateShare[prop];
+          newBudget[fs][prop][year].state += stateShare[prop];
+          newBudget[fs][prop].total.state += stateShare[prop];
 
-          newState[fs][prop][year].medicaid += medicaidShare[prop];
-          newState[fs][prop].total.medicaid += medicaidShare[prop];
+          newBudget[fs][prop][year].medicaid += medicaidShare[prop];
+          newBudget[fs][prop].total.medicaid += medicaidShare[prop];
         });
 
         // Plus the subtotals for the cost categories (i.e., the
         // Medicaid share)
-        newState[fs].combined[year].federal += costShares.fedShare;
-        newState[fs].combined.total.federal += costShares.fedShare;
+        newBudget[fs].combined[year].federal += costShares.fedShare;
+        newBudget[fs].combined.total.federal += costShares.fedShare;
 
-        newState[fs].combined[year].state += costShares.stateShare;
-        newState[fs].combined.total.state += costShares.stateShare;
+        newBudget[fs].combined[year].state += costShares.stateShare;
+        newBudget[fs].combined.total.state += costShares.stateShare;
 
-        newState[fs].combined[year].medicaid += totalMedicaidShare;
-        newState[fs].combined.total.medicaid += totalMedicaidShare;
+        newBudget[fs].combined[year].medicaid += totalMedicaidShare;
+        newBudget[fs].combined.total.medicaid += totalMedicaidShare;
       };
 
       // New activities don't have a funding program by default, so don't
@@ -472,12 +479,12 @@ export const updateBudget = incomingBigState => {
         updateCosts(fundingSource);
       }
 
-      newState.combined[year].federal += costShares.fedShare;
-      newState.combined.total.federal += costShares.fedShare;
-      newState.combined[year].state += costShares.stateShare;
-      newState.combined.total.state += costShares.stateShare;
-      newState.combined[year].medicaid += totalMedicaidShare;
-      newState.combined.total.medicaid += totalMedicaidShare;
+      newBudget.combined[year].federal += costShares.fedShare;
+      newBudget.combined.total.federal += costShares.fedShare;
+      newBudget.combined[year].state += costShares.stateShare;
+      newBudget.combined.total.state += costShares.stateShare;
+      newBudget.combined[year].medicaid += totalMedicaidShare;
+      newBudget.combined.total.medicaid += totalMedicaidShare;
 
       if (fundingSource === 'hie' || fundingSource === 'hit') {
         // We need to track HIE and HIT combined, so we have a funding source
@@ -494,17 +501,17 @@ export const updateBudget = incomingBigState => {
         // Then do basically the same as updateCosts() above, but we only
         // need to track subtotals, not individual cost categories
         [ffpLevel, 'combined'].forEach(prop => {
-          newState.mmisByFFP[prop][year].federal += costShares.fedShare;
-          newState.mmisByFFP[prop].total.federal += costShares.fedShare;
+          newBudget.mmisByFFP[prop][year].federal += costShares.fedShare;
+          newBudget.mmisByFFP[prop].total.federal += costShares.fedShare;
 
-          newState.mmisByFFP[prop][year].state += costShares.stateShare;
-          newState.mmisByFFP[prop].total.state += costShares.stateShare;
+          newBudget.mmisByFFP[prop][year].state += costShares.stateShare;
+          newBudget.mmisByFFP[prop].total.state += costShares.stateShare;
 
-          newState.mmisByFFP[prop][year].medicaid += totalMedicaidShare;
-          newState.mmisByFFP[prop].total.medicaid += totalMedicaidShare;
+          newBudget.mmisByFFP[prop][year].medicaid += totalMedicaidShare;
+          newBudget.mmisByFFP[prop].total.medicaid += totalMedicaidShare;
 
-          newState.mmisByFFP[prop][year].total += totalCost;
-          newState.mmisByFFP[prop].total.total += totalCost;
+          newBudget.mmisByFFP[prop][year].total += totalCost;
+          newBudget.mmisByFFP[prop].total.total += totalCost;
         });
       }
 
@@ -512,8 +519,8 @@ export const updateBudget = incomingBigState => {
       // this activity.
       const ffp = activity.quarterlyFFP[year];
       const ffpSource = fundingSource === 'mmis' ? 'mmis' : 'hitAndHie';
-      const activityFFP = newState.activities[activity.key].quarterlyFFP;
-      const quarterlyFFP = newState.federalShareByFFYQuarter[ffpSource];
+      const activityFFP = newBudget.activities[activity.key].quarterlyFFP;
+      const quarterlyFFP = newBudget.federalShareByFFYQuarter[ffpSource];
 
       ['contractors', 'expenses', 'statePersonnel'].forEach(prop => {
         const ffpType = prop === 'contractors' ? 'contractors' : 'inHouse';
@@ -619,7 +626,7 @@ export const updateBudget = incomingBigState => {
       }
     });
   };
-  roundProps(newState);
+  roundProps(newBudget);
 
-  return newState;
+  return newBudget;
 };

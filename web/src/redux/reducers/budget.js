@@ -8,7 +8,7 @@ const reducer = (state = defaultBudget([]), action) => {
     case RESET:
       return {};
     case UPDATE_BUDGET:
-      return updateBudget(action.state);
+      return updateBudget(action.state.apd);
     default:
       return state;
   }
