@@ -34,10 +34,11 @@ const schemas = Joi.object({
     is: 'yes',
     then: Joi.object().pattern(
       /\d{4}/,
-      Joi.number().positive().required().messages({
-        'number.base': 'Provide an FTE.',
-        'number.empty': 'Provide an FTE.',
+      Joi.number().positive().max(1).required().messages({
+        'number.base': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001',
+        'number.empty': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001',
         'number.format': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001',
+        'number.max': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001',
         'number.positive': 'Provide a number less than or equal to 1. Provide a number greater than or equal to 0.0001'
       })
     ),
