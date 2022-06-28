@@ -15,7 +15,7 @@ const {
 const insertAndGetIDs = async (knex, tableName, values) => {
   // Get a list of existing names
   const alreadyExisting = (await knex(tableName).select('name')).map(e => {
-    logger.info(
+    logger.verbose(
       `${chalk.cyan(e.name)} already in the ${chalk.cyan(tableName)}`
     );
     return e.name;
@@ -26,7 +26,7 @@ const insertAndGetIDs = async (knex, tableName, values) => {
   const insert = Object.keys(values)
     .filter(name => !alreadyExisting.includes(name))
     .map(name => {
-      logger.info(
+      logger.verbose(
         `adding ${chalk.cyan(name)} into the ${chalk.cyan(tableName)} table`
       );
       return { name };
@@ -34,9 +34,9 @@ const insertAndGetIDs = async (knex, tableName, values) => {
 
   if (insert && insert.length) {
     await knex(tableName).insert(insert);
-    logger.info(`Completed seeding the ${chalk.cyan(tableName)} table`);
+    logger.verbose(`Completed seeding the ${chalk.cyan(tableName)} table`);
   } else {
-    logger.info(`Nothing to seed for the ${chalk.cyan(tableName)} table`);
+    logger.verbose(`Nothing to seed for the ${chalk.cyan(tableName)} table`);
   }
 
   const asInserted = await knex(tableName).select('*');
@@ -64,7 +64,7 @@ const setupMappings = async (
     mappings[role].forEach(activity => {
       const activityID = activityIDs[activity];
       inserts.push({ role_id: roleID, activity_id: activityID });
-      logger.info(
+      logger.verbose(
         `adding ${chalk.cyan(role)} <--> ${chalk.cyan(
           activity
         )} mapping into the ${chalk.cyan(tableName)} table`
@@ -74,15 +74,15 @@ const setupMappings = async (
 
   // insert mappings
   await table.insert(inserts);
-  logger.info(`Completed seeding ${chalk.cyan(tableName)} table`);
+  logger.verbose(`Completed seeding ${chalk.cyan(tableName)} table`);
 };
 
 exports.seed = async knex => {
-  logger.info('Beginning to seed the roles, activities, and mapping tables');
+  logger.verbose('Beginning to seed the roles, activities, and mapping tables');
 
   // drop current mappings for mapping table, must be done before auth_activities because of foreign key constraints
   await knex('auth_role_activity_mapping').del();
-  logger.info(
+  logger.verbose(
     `deleted all of the rows from the ${chalk.cyan(
       'auth_role_activity_mapping'
     )} table`
@@ -90,7 +90,7 @@ exports.seed = async knex => {
 
   // drop current mappings for auth_activities
   await knex('auth_activities').del();
-  logger.info(
+  logger.verbose(
     `deleted all of the rows from the ${chalk.cyan('auth_activities')} table`
   );
 
@@ -111,5 +111,5 @@ exports.seed = async knex => {
   await knex('auth_roles')
     .whereIn('name', activeRoles)
     .update({ isActive: true });
-  logger.info('Updated active status for roles');
+  logger.verbose('Updated active status for roles');
 };

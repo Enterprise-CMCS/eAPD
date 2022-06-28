@@ -27,6 +27,8 @@ api/seeds/test/tokens.json
 api/test-data/files
 api/.env
 api/.nyc_output
+api/coverage-endpoint
+api/coverage-unit
 api/coverage
 api/hitech_api*.log*
 api/endpoint-data.json

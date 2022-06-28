@@ -29,9 +29,7 @@ exports[`the Activities component renders correctly 1`] = `
     />
     <Button
       className="ds-u-margin-top--4"
-      component="button"
       onClick={[Function]}
-      type="button"
     >
       Add Activity
     </Button>

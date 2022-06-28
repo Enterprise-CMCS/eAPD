@@ -34,9 +34,9 @@ const NameAndFundingSourceForm = ({
 
   useEffect(() => {
     if (adminCheck) {
-      trigger(["name", "fundingSource"]);
-    };
-  }, [])
+      trigger(['name', 'fundingSource']);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
     checked: fundingSource === choice,
@@ -108,14 +108,21 @@ NameAndFundingSourceForm.propTypes = {
 const mapStateToProps = state => {
   return {
     adminCheck: state.apd.adminCheck
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   setFundingSource: setActivityFundingSource,
   setName: setActivityName
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NameAndFundingSourceForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NameAndFundingSourceForm);
 
-export { NameAndFundingSourceForm as plain, mapStateToProps, mapDispatchToProps };
+export {
+  NameAndFundingSourceForm as plain,
+  mapStateToProps,
+  mapDispatchToProps
+};

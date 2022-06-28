@@ -90,9 +90,7 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
     </Expanded>
     <Button
       className="ds-u-margin-right--2"
-      component="button"
       onClick={[Function]}
-      type="button"
     >
       <button
         className="ds-c-button ds-u-margin-right--2"
@@ -103,11 +101,9 @@ exports[`FormAndReviewList component expands and collapses items 2`] = `
       </button>
     </Button>
     <Button
-      component="button"
       disabled={false}
       id="form-and-review-list--done-btn"
       onClick={[Function]}
-      type="button"
       variation="primary"
     >
       <button
@@ -189,9 +185,7 @@ exports[`FormAndReviewList component renders properly with a custom class name 1
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
-    type="button"
   >
     text for adding a new button
   </Button>
@@ -219,9 +213,7 @@ exports[`FormAndReviewList component renders properly with just one item 1`] = `
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
-    type="button"
   >
     text for adding a new button
   </Button>
@@ -249,9 +241,7 @@ exports[`FormAndReviewList component renders properly with just one item and all
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
-    type="button"
   >
     text for adding a new button
   </Button>
@@ -296,9 +286,7 @@ exports[`FormAndReviewList component renders properly with multiple items 1`] = 
   />
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
-    type="button"
   >
     text for adding a new button
   </Button>
@@ -318,9 +306,7 @@ exports[`FormAndReviewList component renders properly with no items 1`] = `
   </div>
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
-    type="button"
   >
     text for adding a new button
   </Button>
@@ -333,9 +319,7 @@ exports[`FormAndReviewList component renders properly with no items and noDataMe
 >
   <Button
     className="visibility--screen"
-    component="button"
     onClick={[Function]}
-    type="button"
   >
     text for adding a new button
   </Button>

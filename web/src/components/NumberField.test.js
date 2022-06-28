@@ -17,9 +17,11 @@ const defaultProps = {
 const setup = (props = {}) => {
   const utils = render(<NumberField {...defaultProps} {...props} />);
   const input = screen.getByLabelText('test-label');
+  const user = userEvent.setup();
   return {
     input,
-    ...utils
+    user,
+    utils
   };
 };
 
@@ -71,18 +73,18 @@ describe('NumberField component', () => {
     });
   });
 
-  it('passes back numeric values on change', () => {
-    const { input } = setup({ value: null });
-    userEvent.type(input, '456,123');
+  it('passes back numeric values on change', async () => {
+    const { input, user } = setup({ value: null });
+    await user.type(input, '456,123');
     expect(defaultProps.onChange).toHaveBeenCalledWith({
       target: { value: 456 }
     });
   });
 
-  it('passes back rounded numeric values on change, but still renders with mask', () => {
-    const { input } = setup({ mask: 'currency' });
-    userEvent.type(input, '123456.78999');
-    userEvent.tab();
+  it('passes back rounded numeric values on change, but still renders with mask', async () => {
+    const { input, user } = setup({ mask: 'currency' });
+    await user.type(input, '123456.78999');
+    await user.tab();
     expect(defaultProps.onChange).toHaveBeenCalledTimes(12);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: 123456.78 }
@@ -92,96 +94,96 @@ describe('NumberField component', () => {
     });
   });
 
-  it('rounds numbers when the component loses focus', () => {
-    const { input } = setup({ value: '456.78', round: true });
-    userEvent.click(input);
-    userEvent.tab();
+  it('rounds numbers when the component loses focus', async () => {
+    const { input, user } = setup({ value: '456.78', round: true });
+    await user.click(input);
+    await user.tab();
     expect(defaultProps.onBlur).toHaveBeenCalledWith({
       target: { value: 457 }
     });
   });
 
-  it('does not round numbers if the round setting is not set', () => {
-    const { input } = setup();
-    userEvent.type(input, '456.78');
+  it('does not round numbers if the round setting is not set', async () => {
+    const { input, user } = setup();
+    await user.type(input, '456.78');
     expect(defaultProps.onChange).toHaveBeenCalledTimes(5);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: 456.78 }
     });
   });
 
-  it('calls onChange with a number rounded to 4 decimal places, by default', () => {
-    const { input } = setup();
-    userEvent.type(input, '456.783129');
+  it('calls onChange with a number rounded to 4 decimal places, by default', async () => {
+    const { input, user } = setup();
+    await user.type(input, '456.783129');
     expect(defaultProps.onChange).toHaveBeenCalledTimes(9);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: 456.783129 }
     });
-    userEvent.tab();
+    await user.tab();
     expect(defaultProps.onChange).toHaveBeenCalledTimes(10);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: 456.7831 }
     });
   });
 
-  it('calls onChange with rounded value when { round: true }', () => {
-    const { input } = setup({ round: true });
-    userEvent.type(input, '456.783389');
+  it('calls onChange with rounded value when { round: true }', async () => {
+    const { input, user } = setup({ round: true });
+    await user.type(input, '456.783389');
     expect(defaultProps.onChange).toHaveBeenCalledTimes(9);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: 456.783389 }
     });
-    userEvent.tab();
+    await user.tab();
     expect(defaultProps.onChange).toHaveBeenCalledTimes(10);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: 457 }
     });
   });
 
-  it('calls onChange with a partial number if non-numerics are entered', () => {
-    const { input } = setup();
-    userEvent.type(input, '123rgft');
+  it('calls onChange with a partial number if non-numerics are entered', async () => {
+    const { input, user } = setup();
+    await user.type(input, '123rgft');
     expect(defaultProps.onChange).toHaveBeenCalledTimes(7);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: 123 }
     });
   });
 
-  it('calls onChange with the min value, if value is less than min', () => {
-    const { input } = setup({ min: -5 });
-    userEvent.type(input, '-10');
+  it('calls onChange with the min value, if value is less than min', async () => {
+    const { input, user } = setup({ min: -5 });
+    await user.type(input, '-10');
     expect(defaultProps.onChange).toHaveBeenCalledTimes(2);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: -10 }
     });
-    userEvent.tab();
+    await user.tab();
     expect(defaultProps.onChange).toHaveBeenCalledTimes(3);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: -5 }
     });
   });
 
-  it('handles typing negative values', () => {
-    const { input } = setup({ value: null });
-    userEvent.type(input, '-123');
+  it('handles typing negative values', async () => {
+    const { input, user } = setup({ value: null });
+    await user.type(input, '-123');
     expect(defaultProps.onChange).toHaveBeenCalledTimes(3);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: -123 }
     });
   });
 
-  it('handles typing all non-numeric characters', () => {
-    const { input } = setup({ value: null });
-    userEvent.type(input, 'ased@#$');
+  it('handles typing all non-numeric characters', async () => {
+    const { input, user } = setup({ value: null });
+    await user.type(input, 'ased@#$');
     expect(defaultProps.onChange).toHaveBeenCalledTimes(7);
     expect(defaultProps.onChange).toHaveBeenLastCalledWith({
       target: { value: null }
     });
   });
 
-  it('handles typing the a negative float', () => {
-    const { input } = setup({ value: null });
-    userEvent.type(input, '-1.2');
+  it('handles typing the a negative float', async () => {
+    const { input, user } = setup({ value: null });
+    await user.type(input, '-1.2');
     expect(defaultProps.onChange).toHaveBeenNthCalledWith(1, {
       target: { value: -1 }
     });

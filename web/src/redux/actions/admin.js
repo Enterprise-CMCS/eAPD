@@ -82,6 +82,7 @@ export const ADMIN_EDIT_ACCOUNT_REQUEST = 'ADMIN_EDIT_ACCOUNT_REQUEST';
 export const ADMIN_EDIT_ACCOUNT_SUCCESS = 'ADMIN_EDIT_ACCOUNT_SUCCESS';
 export const ADMIN_EDIT_ACCOUNT_ERROR = 'ADMIN_EDIT_ACCOUNT_ERROR';
 
+// eslint-disable-next-line react/display-name
 export const editAccount = (user, changingPassword) => dispatch => {
   dispatch({ type: ADMIN_EDIT_ACCOUNT_REQUEST });
 
@@ -128,6 +129,7 @@ export const ADMIN_EDIT_ME_REQUEST = 'ADMIN_EDIT_ME_REQUEST';
 export const ADMIN_EDIT_ME_SUCCESS = 'ADMIN_EDIT_ME_SUCCESS';
 export const ADMIN_EDIT_ME_ERROR = 'ADMIN_EDIT_ME_ERROR';
 
+// eslint-disable-next-line react/display-name
 export const editSelf = (user, changingPassword) => dispatch => {
   dispatch({ type: ADMIN_EDIT_ME_REQUEST });
 
