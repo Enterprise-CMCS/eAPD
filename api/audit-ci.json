@@ -1,7 +1,10 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": ["*|migrate-mongoose>yargs>yargs-parser"],
+  "allowlist": [
+    "*|migrate-mongoose>yargs>yargs-parser",
+    "*|multer>busboy>dicer"
+  ],
   "_comment": {
     "yargs-parser": {
       "advisory": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
@@ -9,6 +12,14 @@
       "cvss-score": "5.3 moderate",
       "affects": [
         "migrate-mongoose@4.0.0 - used during migration process, but not active in production"
+      ]
+    },
+    "dicer": {
+      "advisory": "https://github.com/advisories/GHSA-wm7h-9275-46v2",
+      "modules": "dicer",
+      "cvss-score": "7.5 high",
+      "affects": [
+        "this is used by multer for handling file uploads. currently no fix available, but we have replaced multer in an upcoming release"
       ]
     }
   }
