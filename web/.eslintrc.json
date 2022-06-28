@@ -60,11 +60,12 @@
   },
   "globals": {
     "window": true,
-    "utag": true
+    "utag": true,
+    "cy": true
   },
   "overrides": [
     {
-      "files": ["**/*.test.js", "**/*.stories.js"],
+      "files": ["**/*.test.js", "**/*.stories.js", "**/*.cy.js"],
       "env": {
         "jest": true
       },

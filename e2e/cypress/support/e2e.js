@@ -1,5 +1,5 @@
 // ***********************************************************
-// This example support/index.js is processed and
+// This example support/e2e.js is processed and
 // loaded automatically before your test files.
 //
 // This is a great place to put global configuration and
@@ -13,12 +13,12 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
 // TODO: reenable cypress axe
 // import 'cypress-axe-core'; // eslint-disable-line import/no-extraneous-dependencies
 import 'cypress-react-selector'; // eslint-disable-line import/no-extraneous-dependencies
 import { commandTimings } from 'cypress-timings'; // eslint-disable-line import/no-extraneous-dependencies
 
+// Import commands.js using ES2015 syntax:
 import './commands';
 
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
