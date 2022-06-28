@@ -43,7 +43,7 @@ describe('the session ending alert component', () => {
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
     const countdown = component.childAt(1).dive().dive();
-    const aside = countdown.find('aside');
+    const aside = countdown.find('main').childAt(1);
     expect(aside.childAt(0).dive().text()).toEqual('Sign out');
     expect(aside.childAt(1).dive().text()).toEqual('Stay signed in');
   });
@@ -60,7 +60,7 @@ describe('the session ending alert component', () => {
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
     const countdown = component.childAt(1).dive().dive();
-    const aside = countdown.find('aside');
+    const aside = countdown.find('main').childAt(1);
     expect(aside.childAt(1).dive().text()).toEqual('<Spinner /> Signing in');
     expect(aside.childAt(0).dive().text()).toEqual('Sign out');
   });
@@ -77,7 +77,7 @@ describe('the session ending alert component', () => {
     const component = shallow(<SessionEndingAlert {...props} />);
     expect(component.childAt(1)).toBeTruthy();
     const countdown = component.childAt(1).dive().dive();
-    const aside = countdown.find('aside');
+    const aside = countdown.find('main').childAt(1);
     expect(aside.childAt(1).dive().text()).toEqual('Stay signed in');
     expect(aside.childAt(0).dive().text()).toEqual('<Spinner /> Signing out');
   });
