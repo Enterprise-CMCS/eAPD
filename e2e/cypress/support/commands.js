@@ -7,6 +7,8 @@ import 'tinymce/tinymce';
 import 'cypress-iframe';
 import 'cypress-file-upload'; // eslint-disable-line import/no-extraneous-dependencies
 
+import tokens from '@cms-eapd/api/seeds/test/tokens.json';
+
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
 
