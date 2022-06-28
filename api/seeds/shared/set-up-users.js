@@ -1,4 +1,4 @@
-const { addYears, format } = require('date-fns');
+const { format } = require('date-fns');
 const logger = require('../../logger')('user seeder');
 const { states } = require('../../util/states');
 
@@ -80,7 +80,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
         state_id: state.id,
         role_id: sysAdminRoleId,
         status: 'approved',
-        expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
         username: 'sysadmin'
       });
     });
@@ -92,7 +91,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: 'em@il.com'
     });
     oktaUsers.push(formatOktaUser(regularUser));
@@ -103,7 +101,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'fd',
       role_id: fedAdminRoleId,
       status: 'approved',
-      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: fedAdmin.profile.login
     });
     oktaUsers.push(formatOktaUser(fedAdmin));
@@ -171,7 +168,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
-      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: stateStaff.profile.login
     });
     oktaUsers.push(formatOktaUser(stateStaff));
@@ -182,7 +178,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateContractorRoleId,
       status: 'approved',
-      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: stateContractor.profile.login
     });
     oktaUsers.push(formatOktaUser(stateContractor));
@@ -194,7 +189,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateStaffRoleId,
       status: 'approved',
-      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: resetmfa.profile.login
     });
     oktaUsers.push(formatOktaUser(resetmfa));
@@ -205,7 +199,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       user_id: requestedRole.id,
       state_id: 'ak',
       status: 'requested',
-      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: requestedRole.profile.login
     });
 
@@ -216,7 +209,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       user_id: deniedRole.id,
       state_id: 'ak',
       status: 'denied',
-      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: deniedRole.profile.login
     });
     oktaUsers.push(formatOktaUser(deniedRole));
@@ -226,7 +218,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       user_id: revokedRole.id,
       state_id: 'ak',
       status: 'revoked',
-      expires_at: format(addYears(new Date(), 1), PostgresDateFormat),
       username: revokedRole.profile.login
     });
 
