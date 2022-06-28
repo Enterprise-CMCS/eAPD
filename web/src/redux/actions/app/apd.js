@@ -43,6 +43,7 @@ import initialAssurances from '../../../util/regulations';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
+// eslint-disable-next-line react/display-name
 export const saveApd = () => (dispatch, getState) => {
   const state = getState();
   const canEdit = getCanUserEditAPD(state);
@@ -206,7 +207,8 @@ export const deleteApd =
       });
   };
 
+// eslint-disable-next-line react/display-name
 export const toggleAdminCheck = value => dispatch => {
-  dispatch({ type: ADMIN_CHECK_TOGGLE, data: value})
+  dispatch({ type: ADMIN_CHECK_TOGGLE, data: value });
   return null;
-}
+};

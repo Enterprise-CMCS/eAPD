@@ -5,6 +5,7 @@ import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dep
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
 import 'cypress-iframe';
+import 'cypress-file-upload'; // eslint-disable-line import/no-extraneous-dependencies
 
 import tokens from '@cms-eapd/api/seeds/test/tokens.json';
 

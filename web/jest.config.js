@@ -12,9 +12,13 @@ module.exports = {
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
     '\\.[jt]sx?$': 'babel-jest',
+    '\\.[jt]s?$': 'babel-jest',
     '\\.yaml$': 'yaml-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
-  transformIgnorePatterns: ['node_modules/(?!(d3-format|d3-geo|d3-array)/)'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(d3-format|d3-geo|d3-array)/)',
+    '\\.cy\\.js$'
+  ],
   moduleFileExtensions: ['js', 'yaml']
 };
