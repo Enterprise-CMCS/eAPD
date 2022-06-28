@@ -52,7 +52,7 @@ const setupDB = async db => {
 
 const teardownDB = async db => {
   await db.destroy();
-  logger.info('Database teardown complete.');
+  logger.verbose('Database teardown complete.');
 };
 
 const buildForm = data => {

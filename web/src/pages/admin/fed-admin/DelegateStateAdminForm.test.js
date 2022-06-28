@@ -19,10 +19,15 @@ const defaultProps = {
 };
 
 const setup = (props = {}, options = {}) => {
-  return render(
+  const utils = render(
     <DelegateStateAdminForm {...defaultProps} {...props} />,
     options
   );
+  const user = userEvent.setup();
+  return {
+    utils,
+    user
+  };
 };
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
@@ -33,10 +38,10 @@ describe('the DelegateStateAdminForm component', () => {
   });
 
   test('handles entering data', async () => {
-    setup();
+    const { user } = setup();
     fetchMock.onPost('/auth/certifications').reply(200);
 
-    userEvent.click(screen.getByRole('radio', { name: 'FFY 2022' }));
+    await user.click(screen.getByRole('radio', { name: 'FFY 2022' }));
 
     expect(screen.getByRole('radio', { name: 'FFY 2022' })).toBeChecked();
 

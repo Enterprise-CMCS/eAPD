@@ -5,8 +5,6 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 
-
-
 exports[`auth/jwtUtils.test.js --silent TAP > output 1`] = `
 Object {
   "algorithm": "HS256",
@@ -15,4 +13,4 @@ Object {
   "issuer": "eAPD",
   "notBefore": "0",
 }
-`
+`;

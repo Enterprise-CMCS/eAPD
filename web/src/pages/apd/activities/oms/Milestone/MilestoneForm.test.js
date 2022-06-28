@@ -14,8 +14,8 @@ const defaultProps = {
   activityIndex: 42,
   index: 1,
   item: {
-    // On 1 September 1939, Germany invaded Poland after having staged 
-    // several false flag border incidents as a pretext to initiate the 
+    // On 1 September 1939, Germany invaded Poland after having staged
+    // several false flag border incidents as a pretext to initiate the
     // invasion.
     endDate: '1939-9-01',
     milestone: 'Milestone name'
@@ -25,11 +25,18 @@ const defaultProps = {
 };
 
 const setup = async (props = {}) => {
+  let utils;
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  const renderUtils = await act(async () => {
-    renderWithConnection(<MilestoneForm {...defaultProps} {...props} />);
+  await act(async () => {
+    utils = renderWithConnection(
+      <MilestoneForm {...defaultProps} {...props} />
+    );
   });
-  return renderUtils;
+  const user = userEvent.setup();
+  return {
+    utils,
+    user
+  };
 };
 
 const verifyDateField = (text, expectValue) => {
@@ -43,65 +50,68 @@ describe('the ContractorResourceForm component', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
-  
+
   test('renders correctly with default props', async () => {
     await setup();
-    expect(screen.getByLabelText(/Name/i)).toHaveValue(defaultProps.item.milestone);
+    expect(screen.getByLabelText(/Name/i)).toHaveValue(
+      defaultProps.item.milestone
+    );
     verifyDateField('Target completion date', {
-       month: '9',
-       day: '1',
-       year: '1939'
-     });
+      month: '9',
+      day: '1',
+      year: '1939'
+    });
   });
-  
+
   test('renders error when no name is provided', async () => {
-    await setup({});
-    
+    const { user } = await setup({});
+
     const input = screen.getByLabelText(/Name/i);
-    
-    userEvent.clear(input);
+
+    await user.clear(input);
     await waitFor(() => {
       expect(input).toHaveFocus();
     });
-    userEvent.tab();
-    
+    await user.tab();
+
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
-    
-    const error = await screen.findByText(
-      /Milestone is required./i
-    );
+
+    const error = await screen.findByText(/Milestone is required./i);
     expect(error).toBeInTheDocument();
   });
-  
+
   test('renders error when no date is provided', async () => {
-    await setup({});
-    
+    const { user } = await setup({});
+
     // start date - month, day, year
     const endFieldset = within(
-     // eslint-disable-next-line testing-library/no-node-access
-     screen.getByText(/Target completion date/i).closest('fieldset')
+      // eslint-disable-next-line testing-library/no-node-access
+      screen.getByText(/Target completion date/i).closest('fieldset')
     );
-    
+
     // first tab to skip over the name
-    userEvent.tab();
-    
-    userEvent.tab();
+    await user.tab();
+
+    await user.tab();
     await waitFor(() => {
-     expect(endFieldset.getByLabelText('Month')).toHaveFocus();
+      expect(endFieldset.getByLabelText('Month')).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
-     expect(endFieldset.getByLabelText('Day')).toHaveFocus();
+      expect(endFieldset.getByLabelText('Day')).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
-     expect(endFieldset.getByLabelText('Year')).toHaveFocus();
+      expect(endFieldset.getByLabelText('Year')).toHaveFocus();
     });
-    userEvent.tab();
-    
+    await user.tab();
+
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
-    
-    const error = await screen.findByRole('alert', 'Provide a completion date.');
+
+    const error = await screen.findByRole(
+      'alert',
+      'Provide a completion date.'
+    );
     expect(error).toBeInTheDocument();
   });
 });
