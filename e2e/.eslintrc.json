@@ -1,17 +1,31 @@
 {
   "parser": "@babel/eslint-parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:react/recommended",
+    "plugin:cypress/recommended",
+    "plugin:jsx-a11y/strict",
+    "prettier"
+  ],
+  "plugins": ["react"],
   "parserOptions": {
     "ecmaVersion": 8,
-    "requireConfigFile": false
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
-  "extends": [
-    "airbnb",
-    "prettier",
-    "plugin:jsx-a11y/strict",
-    "plugin:cypress/recommended"
-  ],
+  "settings": {
+    "react": {
+      "fragment": "Fragment", // Fragment to use (may be a property of <pragma>), default to "Fragment"
+      "version": "detect" // React version. "detect" automatically picks the version you have installed.
+    }
+  },
   "rules": {
     "arrow-body-style": "off",
+    "no-param-reassign": [2, { "props": false }],
+
     "jsx-a11y/anchor-is-valid": [
       2,
       {
@@ -30,7 +44,6 @@
     "jsx-a11y/label-has-associated-control": ["error", { "assert": "either" }],
 
     "class-methods-use-this": "off",
-    "no-param-reassign": [2, { "props": false }],
 
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-filename-extension": 0,
@@ -39,12 +52,15 @@
     "react/no-array-index-key": "warn"
   },
   "env": {
+    "es6": true,
     "browser": true,
-    "es6": true
+    "node": true,
+    "commonjs": true,
+    "cypress": true
   },
   "overrides": [
     {
-      "files": ["**/*.test.js", "**/*.story.js"],
+      "files": ["**/*.test.js", "**/*.stories.js"],
       "env": {
         "jest": true
       },

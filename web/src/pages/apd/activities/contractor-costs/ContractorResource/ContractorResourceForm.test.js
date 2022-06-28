@@ -44,11 +44,19 @@ const defaultProps = {
 
 const setup = async (props = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  const utils = await act(async () =>
-    renderWithConnection(<ContractorForm {...defaultProps} {...props} />)
+  let utils;
+  await act(
+    async () =>
+      (utils = renderWithConnection(
+        <ContractorForm {...defaultProps} {...props} />
+      ))
   );
   await waitFor(() => screen.findByText(/Private Contractor or Vendor Name/i));
-  return utils;
+  const user = userEvent.setup();
+  return {
+    utils,
+    user
+  };
 };
 
 const verifyDateField = (text, expectValue) => {
@@ -121,10 +129,10 @@ describe('the ContractorResourceForm component', () => {
 
     await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
     // TODO: not sure why this is failing
-    // await waitFor(async () => {
-    //   expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
-    // });
-    // expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
+    await waitFor(async () => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
   });
 
   test('renders correctly with hourly', async () => {
@@ -177,15 +185,15 @@ describe('the ContractorResourceForm component', () => {
 
     await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
     // TODO: not sure why this is failing
-    // await waitFor(() => {
-    //   expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
-    // });
-    // expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
+    });
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
   });
 
   // TODO: these tests are too long running, need to figure out a way to make them quicker
-  xtest('renders errors when fields are empty', async () => {
-    await setup({
+  test('renders errors when fields are empty', async () => {
+    const { user } = await setup({
       ...defaultProps,
       item: { useHourly: null, years: { 1066: null, 1067: null } }
     });
@@ -194,7 +202,7 @@ describe('the ContractorResourceForm component', () => {
     const nameInput = screen.getByLabelText(
       /Private Contractor or Vendor Name/i
     );
-    userEvent.click(nameInput);
+    await user.click(nameInput);
     await waitFor(() => {
       expect(nameInput).toHaveFocus();
     });
@@ -206,15 +214,15 @@ describe('the ContractorResourceForm component', () => {
       // eslint-disable-next-line testing-library/no-node-access
       screen.getByText(/Contract start date/i).closest('fieldset')
     );
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
       expect(startFieldset.getByLabelText('Month')).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
       expect(startFieldset.getByLabelText('Day')).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
       expect(startFieldset.getByLabelText('Year')).toHaveFocus();
     });
@@ -224,27 +232,27 @@ describe('the ContractorResourceForm component', () => {
       // eslint-disable-next-line testing-library/no-node-access
       screen.getByText(/Contract end date/i).closest('fieldset')
     );
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
       expect(endFieldset.getByLabelText('Month')).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
       expect(endFieldset.getByLabelText('Day')).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
       expect(endFieldset.getByLabelText('Year')).toHaveFocus();
     });
 
     // total contract cost
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
       expect(screen.getByLabelText(/Total Contract Cost/i)).toHaveFocus();
     });
 
     // useHourly
-    userEvent.tab();
+    await user.tab();
     const fieldset = within(
       // eslint-disable-next-line testing-library/no-node-access
       screen.getByText(/This is an hourly resource/i).closest('fieldset')
@@ -254,7 +262,7 @@ describe('the ContractorResourceForm component', () => {
     });
 
     // cancel
-    userEvent.tab();
+    await user.tab();
 
     await waitFor(async () => {
       expect(await screen.findAllByRole('alert')).toHaveLength(5);
@@ -262,18 +270,18 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when name is null', async () => {
-    await setup({});
+    const { user } = await setup({});
 
     const input = screen.getByRole('textbox', { name: /name/i });
 
-    userEvent.clear(input);
+    await user.clear(input);
     await waitFor(() => {
       expect(input).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -284,7 +292,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when start date is null', async () => {
-    await setup({
+    const { user } = await setup({
       ...defaultProps,
       item: { ...defaultProps.item, start: '' }
     });
@@ -294,14 +302,14 @@ describe('the ContractorResourceForm component', () => {
       screen.getByText(/Contract start date/i).closest('fieldset')
     );
 
-    // userEvent.type(startFieldset.getByLabelText('Month'), '-1');
-    userEvent.click(startFieldset.getByLabelText('Month'));
+    // await user.type(startFieldset.getByLabelText('Month'), '-1');
+    await user.click(startFieldset.getByLabelText('Month'));
     await waitFor(() => {
       expect(startFieldset.getByLabelText('Month')).toHaveFocus();
     });
-    userEvent.tab(); // tab to day
-    userEvent.tab(); // tab to year
-    userEvent.tab(); // tab out of component
+    await user.tab(); // tab to day
+    await user.tab(); // tab to year
+    await user.tab(); // tab out of component
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
@@ -314,7 +322,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when end date is null', async () => {
-    await setup({
+    const { user } = await setup({
       ...defaultProps,
       item: { ...defaultProps.item, end: '' }
     });
@@ -324,14 +332,14 @@ describe('the ContractorResourceForm component', () => {
       screen.getByText(/Contract end date/i).closest('fieldset')
     );
 
-    // userEvent.type(endFieldset.getByLabelText('Month'), '-1');
-    userEvent.click(endFieldset.getByLabelText('Month'));
+    // await user.type(endFieldset.getByLabelText('Month'), '-1');
+    await user.click(endFieldset.getByLabelText('Month'));
     await waitFor(() => {
       expect(endFieldset.getByLabelText('Month')).toHaveFocus();
     });
-    userEvent.tab(); // day
-    userEvent.tab(); // year
-    userEvent.tab(); // tab out of the field
+    await user.tab(); // day
+    await user.tab(); // year
+    await user.tab(); // tab out of the field
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
@@ -346,7 +354,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when end date is before start date', async () => {
-    await setup({
+    const { user } = await setup({
       ...defaultProps,
       item: { ...defaultProps.item, end: '1066-10-10' }
     });
@@ -356,13 +364,13 @@ describe('the ContractorResourceForm component', () => {
       screen.getByText(/Contract end date/i).closest('fieldset')
     );
 
-    userEvent.click(endFieldset.getByLabelText('Month'));
+    await user.click(endFieldset.getByLabelText('Month'));
     await waitFor(() => {
       expect(endFieldset.getByLabelText('Month')).toHaveFocus();
     });
-    userEvent.tab(); // day
-    userEvent.tab(); // year
-    userEvent.tab(); // tab out of the field
+    await user.tab(); // day
+    await user.tab(); // year
+    await user.tab(); // tab out of the field
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
@@ -377,18 +385,18 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when total cost is null', async () => {
-    await setup({});
+    const { user } = await setup({});
 
     const input = screen.getByLabelText(/Total Contract Cost/i);
 
-    userEvent.clear(input);
+    await user.clear(input);
     await waitFor(() => {
       expect(input).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -397,19 +405,19 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when total cost is -1', async () => {
-    await setup({});
+    const { user } = await setup({});
 
     const input = screen.getByLabelText(/Total Contract Cost/i);
 
-    userEvent.clear(input);
+    await user.clear(input);
     await waitFor(() => {
       expect(input).toHaveFocus();
     });
     fireEvent.change(input, { target: { value: '-1' } });
-    userEvent.tab();
+    await user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -421,7 +429,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when useHourly is null', async () => {
-    await setup({
+    const { user } = await setup({
       ...defaultProps,
       item: {
         ...defaultProps.item,
@@ -434,12 +442,12 @@ describe('the ContractorResourceForm component', () => {
       // eslint-disable-next-line testing-library/no-node-access
       .closest('fieldset');
 
-    userEvent.click(screen.getByLabelText(/Total Contract Cost/i));
-    userEvent.tab();
+    await user.click(screen.getByLabelText(/Total Contract Cost/i));
+    await user.tab();
     await waitFor(() => {
       expect(within(input).getByLabelText('Yes')).toHaveFocus();
     });
-    userEvent.tab();
+    await user.tab();
     await waitFor(() => {
       expect(within(input).getByLabelText('Yes')).not.toHaveFocus();
     });
@@ -454,7 +462,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when useHourly is yes and hours and rates are null', async () => {
-    await setup({
+    const { user } = await setup({
       ...defaultProps,
       item: {
         ...defaultProps.item,
@@ -471,18 +479,18 @@ describe('the ContractorResourceForm component', () => {
       // eslint-disable-next-line testing-library/no-node-access
       .closest('fieldset');
 
-    userEvent.click(within(input).getByLabelText('Yes'));
+    await user.click(within(input).getByLabelText('Yes'));
     // you need to go back up so that the fields appear and it doesn't just tab to cancel
-    userEvent.click(screen.getByLabelText(/Total Contract Cost/i));
+    await user.click(screen.getByLabelText(/Total Contract Cost/i));
     await waitFor(() => {
       expect(screen.getByLabelText(/Total Contract Cost/i)).toHaveFocus();
     });
-    userEvent.tab(); // hourly resource radio button
-    userEvent.tab(); // hours 1066
-    userEvent.tab(); // rates 1066
-    userEvent.tab(); // hours 1067
-    userEvent.tab(); // rates 1067
-    userEvent.tab(); // out of hourly costs
+    await user.tab(); // hourly resource radio button
+    await user.tab(); // hours 1066
+    await user.tab(); // rates 1066
+    await user.tab(); // hours 1067
+    await user.tab(); // rates 1067
+    await user.tab(); // out of hourly costs
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
@@ -498,7 +506,7 @@ describe('the ContractorResourceForm component', () => {
   });
 
   test('renders error when useHourly is no and yearly costs are null', async () => {
-    await setup({
+    const { user } = await setup({
       ...defaultProps,
       item: {
         ...defaultProps.item,
@@ -515,16 +523,16 @@ describe('the ContractorResourceForm component', () => {
       // eslint-disable-next-line testing-library/no-node-access
       .closest('fieldset');
 
-    userEvent.click(within(input).getByLabelText('No'));
+    await user.click(within(input).getByLabelText('No'));
     // you need to go back up so that the fields appear and it doesn't just tab to cancel
-    userEvent.click(screen.getByLabelText(/Total Contract Cost/i));
+    await user.click(screen.getByLabelText(/Total Contract Cost/i));
     await waitFor(() => {
       expect(screen.getByLabelText(/Total Contract Cost/i)).toHaveFocus();
     });
-    userEvent.tab(); // hourly resource radio button
-    userEvent.tab(); // cost 1066
-    userEvent.tab(); // cost 1067
-    userEvent.tab(); // out of yearly costs
+    await user.tab(); // hourly resource radio button
+    await user.tab(); // cost 1066
+    await user.tab(); // cost 1067
+    await user.tab(); // out of yearly costs
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);

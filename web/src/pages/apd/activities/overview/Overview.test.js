@@ -1,81 +1,66 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-
 import {
-  setActivityAlternatives,
-  setActivityDescription,
-  setActivityOverview
-} from '../../../../redux/actions/editActivity';
+  renderWithConnection,
+  screen
+} from 'apd-testing-library';
+import MockAdapter from 'axios-mock-adapter';
 
-import {
-  plain as ActivityOverview,
-  mapStateToProps,
-  mapDispatchToProps
-} from './Overview';
+import axios from '../../../../util/api';
+import Overview from './Overview'
 
-describe('activity overview/summary section (in the activity body)', () => {
-  const props = {
-    activity: {},
-    activityIndex: 37,
-    setAlternatives: jest.fn(),
-    setDescription: jest.fn(),
-    setOverview: jest.fn()
-  };
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
+const initialState = {
+  apd: {
+    data: {
+      activities: [
+        {
+          name: 'Our Flag Means Death',
+          fundingSource: 'HBO',
+          alternatives: 'Pirates of the Caribbean is also a Pirate movie.',
+          description: 'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.',
+          summary: 'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
+        }
+      ]
+    }
+  }
+}
+
+const setup = (props = {}, options = {}) => renderWithConnection(<Overview {...props} />, options);
+
+describe('<Overview />', () => {
   beforeEach(() => {
-    props.setAlternatives.mockClear();
-    props.setDescription.mockClear();
-    props.setOverview.mockClear();
+    fetchMock.reset();
   });
 
-  it('renders correctly', () => {
-    expect(shallow(<ActivityOverview {...props} />)).toMatchSnapshot();
-  });
+  describe('create new Activity', () => {
+    it('on success, adds new Activity and switches to it', async () => {
+      setup(
+        {
+          activityIndex: '0'
+        },
+        {
+          initialState
+        }
+      );
 
-  it('handles changing the activity overview/summary', () => {
-    const component = shallow(<ActivityOverview {...props} />);
-    component
-      .find('Connect(RichText)')
-      .at(0) // makes an assumption about what order these components appear in
-      .prop('onSync')('new overview');
+      expect(
+        screen.getByLabelText(
+          'Provide a short overview of the activity.'
+        )
+      ).toHaveValue('Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.');
 
-    expect(props.setOverview).toHaveBeenCalledWith(37, 'new overview');
-  });
+      expect(
+        screen.getByLabelText(
+          'Include as much detail as is necessary to explain the activity.'
+        )
+      ).toHaveValue('Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.');
 
-  it('handles changing the activity description', () => {
-    const component = shallow(<ActivityOverview {...props} />);
-    component
-      .find('Connect(RichText)')
-      .at(1) // makes an assumption about what order these components appear in
-      .prop('onSync')('new description');
-
-    expect(props.setDescription).toHaveBeenCalledWith(37, 'new description');
-  });
-
-  it('handles changing the activity statement of alternatives', () => {
-    const component = shallow(<ActivityOverview {...props} />);
-    component
-      .find('Connect(RichText)')
-      .at(2) // makes an assumption about what order these components appear in
-      .prop('onSync')('new alternatives');
-
-    expect(props.setAlternatives).toHaveBeenCalledWith(37, 'new alternatives');
-  });
-
-  it('maps state to props', () => {
-    const state = {
-      apd: { data: { activities: ['activity 1', 'activity 2'] } }
-    };
-    expect(mapStateToProps(state, { activityIndex: 1 })).toEqual({
-      activity: 'activity 2'
-    });
-  });
-
-  it('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      setAlternatives: setActivityAlternatives,
-      setDescription: setActivityDescription,
-      setOverview: setActivityOverview
-    });
-  });
+      expect(
+        screen.getByLabelText(
+          'Statement of alternative considerations and supporting justification'
+        )
+      ).toHaveValue('Pirates of the Caribbean is also a Pirate movie.');
+    })
+  })
 });

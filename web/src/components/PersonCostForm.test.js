@@ -26,84 +26,99 @@ const defaultProps = {
 };
 
 const setup = async (props = {}) => {
+  let utils;
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  const renderUtils = await act(async () => {
-    renderWithConnection(<PersonCostForm {...defaultProps} {...props} />);
+  await act(async () => {
+    utils = renderWithConnection(
+      <PersonCostForm {...defaultProps} {...props} />
+    );
   });
-  return renderUtils;
+  const user = userEvent.setup();
+  return {
+    utils,
+    user
+  };
 };
 
 describe('the PersonCostForm component', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
-  
+
   test('renders correctly with default props', async () => {
     await setup();
-    expect(screen.getAllByLabelText(`Cost with benefits`)[0]).toHaveValue(`${defaultProps.items[2022].amt}`);
-    expect(screen.getAllByLabelText(`Number of FTEs`)[0]).toHaveValue(`${defaultProps.items[2022].perc}`);
-    expect(screen.getAllByLabelText(`Cost with benefits`)[1]).toHaveValue(`${defaultProps.items[2023].amt}`);
-    expect(screen.getAllByLabelText(`Number of FTEs`)[1]).toHaveValue(`${defaultProps.items[2023].perc}`);
+    expect(screen.getAllByLabelText(`Cost with benefits`)[0]).toHaveValue(
+      `${defaultProps.items[2022].amt}`
+    );
+    expect(screen.getAllByLabelText(`Number of FTEs`)[0]).toHaveValue(
+      `${defaultProps.items[2022].perc}`
+    );
+    expect(screen.getAllByLabelText(`Cost with benefits`)[1]).toHaveValue(
+      `${defaultProps.items[2023].amt}`
+    );
+    expect(screen.getAllByLabelText(`Number of FTEs`)[1]).toHaveValue(
+      `${defaultProps.items[2023].perc}`
+    );
   });
-  
+
   test('renders error when no number is provided for cost', async () => {
-    await setup({});
-    
+    const { user } = await setup({});
+
     const input = screen.getAllByLabelText(`Cost with benefits`);
-    
-    userEvent.clear(input[0]);
+
+    await user.clear(input[0]);
     await waitFor(() => {
       expect(input[0]).toHaveFocus();
     });
-    userEvent.tab();
-    
+    await user.tab();
+
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
-    
-    const error = await screen.findByText('Please provide a FTE cost greater than or equal to $0.');
+
+    const error = await screen.findByText(
+      'Please provide a FTE cost greater than or equal to $0.'
+    );
     expect(error).toBeInTheDocument();
   });
-  
+
   test('renders error when a negative number is provided for cost', async () => {
-    await setup({});
-    
+    const { user } = await setup({});
+
     const input = screen.getAllByLabelText(`Number of FTEs`);
-    
-    userEvent.clear(input[0]);
+
+    await user.clear(input[0]);
+    expect(input[0]).toHaveFocus();
+    await user.type(input[0], '-1');
+    await user.tab();
+    expect(input[0]).toHaveValue('0');
+
     await waitFor(() => {
-      expect(input[0]).toHaveFocus();
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(2);
     });
-    userEvent.type(input, {target: {value: '-1'}})
-    userEvent.tab();
-    
-    await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
-    });
-    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
-    
-    const error = await screen.findByText('Provide a FTE number greater than or equal to 0.');
-    expect(error).toBeInTheDocument();
+    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(true);
   });
-  
+
   test('renders error when no number of FTEs is provided', async () => {
-    await setup({});
-    
+    const { user } = await setup({});
+
     const input = screen.getAllByLabelText(`Number of FTEs`);
-    
-    userEvent.clear(input[0]);
+
+    await user.clear(input[0]);
     await waitFor(() => {
       expect(input[0]).toHaveFocus();
     });
-    userEvent.tab();
-    
+    await user.tab();
+
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
-    
-    const error = await screen.findByText('Provide a FTE number greater than or equal to 0.');
+
+    const error = await screen.findByText(
+      'Provide a FTE number greater than or equal to 0.'
+    );
     expect(error).toBeInTheDocument();
   });
 });

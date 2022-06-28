@@ -1,4 +1,5 @@
 import React from 'react';
+import PropType from 'prop-types';
 import { connect } from 'react-redux';
 
 const AutoScrollToElement = ({ location, action }) => {
@@ -17,7 +18,14 @@ const AutoScrollToElement = ({ location, action }) => {
   return null;
 };
 
-const mapStateToProps = ({ router: { location, action } }) => ({
+AutoScrollToElement.propTypes = {
+  location: PropType.shape({
+    hash: PropType.string
+  }).isRequired,
+  action: PropType.string.isRequired
+};
+
+const mapStateToProps = ({ router: { location = {}, action = '' } }) => ({
   location,
   action
 });
