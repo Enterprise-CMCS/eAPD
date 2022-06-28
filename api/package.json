@@ -144,7 +144,8 @@
   },
   "resolutions": {
     "minimist": ">=1.2.6",
-    "protobufjs": ">=6.11.3"
+    "protobufjs": ">=6.11.3",
+    "got": ">=12.1.0"
   },
   "packageManager": "yarn@1.22.18"
 }

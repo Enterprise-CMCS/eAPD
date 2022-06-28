@@ -1,7 +1,10 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": ["*|migrate-mongoose>yargs>yargs-parser", "multer>busboy>dicer"],
+  "allowlist": [
+    "*|migrate-mongoose>yargs>yargs-parser",
+    "*|multer>busboy>dicer"
+  ],
   "_comment": {
     "yargs-parser": {
       "advisory": "https://github.com/advisories/GHSA-p9pc-299p-vxgp",
