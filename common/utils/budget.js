@@ -119,6 +119,23 @@ export const defaultBudget = years => ({
   years
 });
 
+/**
+ * Adds a given cost to the budget running totals.
+ * @param {String} fundingSource The CMS funding program of the cost
+ * @param {String} year As a four-character year string (e.g., '2018')
+ * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
+ * @param {Number} cost The cost value.
+ */
+const addCostsToFundingSource = (budget, fundingSource, year, prop, cost) => {
+  // adding cost to the existing totals
+  const budgetUpdates = JSON.parse(JSON.stringify(budget));
+  budgetUpdates[fundingSource][prop][year].total += cost;
+  budgetUpdates[fundingSource][prop].total.total += cost;
+  budgetUpdates[fundingSource].combined[year].total += cost;
+  budgetUpdates[fundingSource].combined.total.total += cost;
+  return budgetUpdates;
+};
+
 export const updateBudget = apd => {
   // Clone the incoming state, so we don't accidentally change anything.
   const {
@@ -145,11 +162,15 @@ export const updateBudget = apd => {
     // New activities don't have a funding program by default, so in that case,
     // we can't capture program-specific funding numbers.
     if (fundingSource) {
-      // Add this value to the running budget totals, as appropriate.
-      newBudget[fundingSource][prop][year].total += cost;
-      newBudget[fundingSource][prop].total.total += cost;
-      newBudget[fundingSource].combined[year].total += cost;
-      newBudget[fundingSource].combined.total.total += cost;
+      const updates = addCostsToFundingSource(
+        newBudget,
+        fundingSource,
+        year,
+        prop,
+        cost
+      );
+      newBudget[fundingSource] = updates[fundingSource];
+      newBudget.combined = updates.combined;
     }
 
     // Because HIT and HIE sources have already added to the grand
@@ -162,7 +183,15 @@ export const updateBudget = apd => {
     // HIT and HIE are rolled up into a single combined source for
     // some of the budget data, so for those, just run again.
     if (fundingSource === 'hie' || fundingSource === 'hit') {
-      addCostToTotals('hitAndHie', year, prop, cost);
+      const updates = addCostsToFundingSource(
+        newBudget,
+        'hitAndHie',
+        year,
+        prop,
+        cost
+      );
+      newBudget.hitAndHie = updates.hitAndHie;
+      newBudget.combined = updates.combined;
     }
   };
 
