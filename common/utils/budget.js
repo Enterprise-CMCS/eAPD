@@ -127,7 +127,12 @@ export const defaultBudget = years => ({
  * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
  * @param {Number} cost The cost value.
  */
-const addCostsToFundingSource = (fundingSourceBudget, year, prop, cost) => {
+export const addCostsToFundingSource = (
+  fundingSourceBudget,
+  year,
+  prop,
+  cost
+) => {
   // adding cost to the existing totals
   return {
     ...fundingSourceBudget,
@@ -158,12 +163,13 @@ const addCostsToFundingSource = (fundingSourceBudget, year, prop, cost) => {
 
 /**
  * Adds a given cost to the budget running totals.
+ * @param {Object} budget The existing budget
  * @param {String} fundingSource The CMS funding program of the cost
  * @param {String} year As a four-character year string (e.g., '2018')
  * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
  * @param {Number} cost The cost value.
  */
-const addCostToTotals = (budget, fundingSource, year, prop, cost) => {
+export const addCostToTotals = (budget, fundingSource, year, prop, cost) => {
   const updates = {};
 
   // New activities don't have a funding program by default, so in that case,
@@ -206,6 +212,95 @@ const addCostToTotals = (budget, fundingSource, year, prop, cost) => {
   return updates;
 };
 
+/**
+ * Get the state and federal share of costs for an amount for
+ * a given year of the current activity.
+ * @param {Object} activity The activity budget object
+ * @param {String} year As a four-character year string (e.g., '2018')
+ * @param {Number} amount The amount to allocate over state and federal shares
+ * @returns {{fedShare:Number, stateShare:Number other stuff}} The state and federal share
+ */
+export const getAllocation = (activity, year, amount) => {
+  const [fedShare, stateShare] = roundedPercents(convertToNumber(amount), [
+    activity.costAllocation[year].ffp.federal / 100,
+    activity.costAllocation[year].ffp.state / 100
+  ]);
+  return { fedShare, stateShare };
+};
+
+/**
+ * Updates the state personnel list and adds the key personnel with costs
+ * to the list if the activity is a Program Administration activity.
+ * @param {String} name Activity name
+ * @param {Array} statePersonnel List of state personnel for the activity
+ * @param {Array} keyPersonnel List of key personnel for the APD
+ * @returns
+ */
+export const updateStatePersonnel = (name, statePersonnel, keyPersonnel) => {
+  const updatedStatePersonnel = [...statePersonnel];
+  // If this is the Program Administration activity, add the APD key
+  // personnel to it so they get included in downstream calculations.
+  // TODO: Don't rely on the activity name. Instead, this should always be
+  // activity index 0. However, that will require some tweaks to the tests.
+  if (name === 'Program Administration') {
+    updatedStatePersonnel.push(
+      ...keyPersonnel
+        .filter(kp => kp.hasCosts)
+        .map(({ costs, fte }) => ({
+          years: Object.keys(costs).reduce(
+            (o, ffy) => ({
+              ...o,
+              [ffy]: { amt: costs[ffy], perc: fte[ffy] }
+            }),
+            {}
+          )
+        }))
+    );
+  }
+  return updatedStatePersonnel;
+};
+
+/**
+ * Compute quarterly FFP per activity
+ * @param {Array} years
+ * @returns the default quarterly FFP per activity
+ */
+export const defaultQuarterlyFFPperActivity = years => ({
+  costsByFFY: {
+    ...arrToObj(years, () => ({
+      federal: 0,
+      medicaidShare: 0,
+      state: 0,
+      total: 0
+    })),
+    total: {
+      federal: 0,
+      medicaidShare: 0,
+      state: 0,
+      total: 0
+    }
+  },
+  quarterlyFFP: {
+    ...arrToObj(years, () => ({
+      ...arrToObj(['1', '2', '3', '4'], () => ({
+        combined: { dollars: 0, percent: 0 },
+        contractors: { dollars: 0, percent: 0 },
+        inHouse: { dollars: 0, percent: 0 }
+      })),
+      subtotal: {
+        combined: { dollars: 0, percent: 0 },
+        contractors: { dollars: 0, percent: 0 },
+        inHouse: { dollars: 0, percent: 0 }
+      }
+    })),
+    total: {
+      combined: 0,
+      contractors: 0,
+      inHouse: 0
+    }
+  }
+});
+
 export const updateBudget = apd => {
   // Clone the incoming state, so we don't accidentally change anything.
   const {
@@ -224,25 +319,11 @@ export const updateBudget = apd => {
   // Since all of our expenses are tied up in activities, we'll start
   // by looking at all of them and doing Magic Math™. (It's not magic.)
   activities.forEach(activity => {
-    // If this is the Program Administration activity, add the APD key
-    // personnel to it so they get included in downstream calculations.
-    // TODO: Don't rely on the activity name. Instead, this should always be
-    // activity index 0. However, that will require some tweaks to the tests.
-    if (activity.name === 'Program Administration') {
-      activity.statePersonnel.push(
-        ...keyPersonnel
-          .filter(kp => kp.hasCosts)
-          .map(({ costs, fte }) => ({
-            years: Object.keys(costs).reduce(
-              (o, ffy) => ({
-                ...o,
-                [ffy]: { amt: costs[ffy], perc: fte[ffy] }
-              }),
-              {}
-            )
-          }))
-      );
-    }
+    activity.statePersonnel = updateStatePersonnel(
+      activity.name,
+      activity.statePersonnel,
+      keyPersonnel
+    );
 
     // We need to know the funding source so we know where to apply
     // this data in the big rollup budget.
@@ -255,41 +336,7 @@ export const updateBudget = apd => {
 
     // We also compute quarterly FFP per activity, so we go ahead and
     // create that object here.  We'll fill it in later.
-    newBudget.activities[activity.key] = {
-      costsByFFY: {
-        ...arrToObj(years, () => ({
-          federal: 0,
-          medicaidShare: 0,
-          state: 0,
-          total: 0
-        })),
-        total: {
-          federal: 0,
-          medicaidShare: 0,
-          state: 0,
-          total: 0
-        }
-      },
-      quarterlyFFP: {
-        ...arrToObj(years, () => ({
-          ...arrToObj(['1', '2', '3', '4'], () => ({
-            combined: { dollars: 0, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 0, percent: 0 }
-          })),
-          subtotal: {
-            combined: { dollars: 0, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 0, percent: 0 }
-          }
-        })),
-        total: {
-          combined: 0,
-          contractors: 0,
-          inHouse: 0
-        }
-      }
-    };
+    newBudget.activities[activity.key] = defaultQuarterlyFFPperActivity(years);
 
     // We need to sum up the total cost of each cost category per
     // fiscal year for the activity as well, so let's make an object
@@ -313,22 +360,8 @@ export const updateBudget = apd => {
         statePersonnel: { ...arrToObj(years, 0), total: 0 }
       }
     };
-    newBudget.activityTotals.push(activityTotals);
 
-    /**
-     * Get the state and federal share of costs for an amount for
-     * a given year of the current activity.
-     * @param {String} year As a four-character year string (e.g., '2018')
-     * @param {Number} amount The amount to allocate over state and federal shares
-     * @returns {{fedShare:Number, stateShare:Number other stuff}} The state and federal share
-     */
-    const getAllocation = (year, amount) => {
-      const [fedShare, stateShare] = roundedPercents(convertToNumber(amount), [
-        activity.costAllocation[year].ffp.federal / 100,
-        activity.costAllocation[year].ffp.state / 100
-      ]);
-      return { fedShare, stateShare };
-    };
+    newBudget.activityTotals.push(activityTotals);
 
     // For each activity, we need to independently track the
     // total cost for each category, per fiscal year.  This isn't
@@ -427,7 +460,7 @@ export const updateBudget = apd => {
       const totalMedicaidShare = totalCost - totalOtherFunding;
 
       // This is the Medicaid total share broken into state and federal shares
-      const costShares = getAllocation(year, totalMedicaidShare);
+      const costShares = getAllocation(activity, year, totalMedicaidShare);
 
       // This represents the percentage each cost category contributes to the
       // total activity cost.  This is useful for distributing the total
