@@ -1,6 +1,7 @@
+import { apply_patch as applyPatch } from 'jsonpatch';
+// import u from 'updeep';
 import roundedPercents from './roundedPercents';
 import { arrToObj, convertToNumber } from './formatting';
-import { deepCopy } from './utils';
 
 export const EXPENSE_TYPE_NAMES = [
   'statePersonnel',
@@ -127,38 +128,36 @@ export const defaultBudget = years => ({
  * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
  * @param {Number} cost The cost value.
  */
-export const addCostsToFundingSource = (
-  fundingSourceBudget,
+export const patchCostsToFundingSource = ({
+  budget,
+  fundingSource,
   year,
   prop,
   cost
-) => {
-  // adding cost to the existing totals
-  return {
-    ...fundingSourceBudget,
-    [prop]: {
-      ...fundingSourceBudget[prop],
-      [year]: {
-        ...fundingSourceBudget[prop][year],
-        total: fundingSourceBudget[prop][year].total + cost
-      },
-      total: {
-        ...fundingSourceBudget[prop].total,
-        total: fundingSourceBudget[prop].total.total + cost
-      }
+}) => {
+  console.log({ fundingSource, prop, year });
+  return [
+    {
+      op: 'replace',
+      path: `/${fundingSource}/${prop}/${year}/total`,
+      value: budget[fundingSource][prop][year].total + cost
     },
-    combined: {
-      ...fundingSourceBudget.combined,
-      [year]: {
-        ...fundingSourceBudget.combined[year],
-        total: fundingSourceBudget.combined[year].total + cost
-      },
-      total: {
-        ...fundingSourceBudget.combined.total,
-        total: fundingSourceBudget.combined.total.total + cost
-      }
+    {
+      op: 'replace',
+      path: `/${fundingSource}/${prop}/total/total`,
+      value: budget[fundingSource][prop].total.total + cost
+    },
+    {
+      op: 'replace',
+      path: `/${fundingSource}/combined/${year}/total`,
+      value: budget[fundingSource].combined[year].total + cost
+    },
+    {
+      op: 'replace',
+      path: `/${fundingSource}/combined/total/total`,
+      value: budget[fundingSource].combined.total.total + cost
     }
-  };
+  ];
 };
 
 /**
@@ -169,47 +168,115 @@ export const addCostsToFundingSource = (
  * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
  * @param {Number} cost The cost value.
  */
-export const addCostToTotals = (budget, fundingSource, year, prop, cost) => {
-  const updates = {};
-
+export const patchCostToTotals = ({
+  budget,
+  fundingSource,
+  year,
+  prop,
+  cost
+}) => {
+  let patches = [];
   // New activities don't have a funding program by default, so in that case,
   // we can't capture program-specific funding numbers.
   if (fundingSource) {
-    updates.fundingSourceUpdates = addCostsToFundingSource(
-      budget[fundingSource],
-      year,
-      prop,
-      cost
+    patches = patches.concat(
+      patchCostsToFundingSource({ budget, fundingSource, year, prop, cost })
     );
   }
 
   // Because HIT and HIE sources have already added to the grand
   // totals, don't also do it for the combined source.
   if (fundingSource !== 'hitAndHie') {
-    updates.combinedUpdates = {
-      ...budget.combined,
-      [year]: {
-        ...budget.combined[year],
-        total: budget.combined[year].total + cost
+    patches = patches.concat([
+      {
+        op: 'replace',
+        path: `/combined/${year}/total`,
+        value: budget.combined[year].total + cost
       },
-      total: {
-        ...budget.combined.total,
-        total: budget.combined.total.total + cost
+      {
+        op: 'replace',
+        path: '/combined/total/total',
+        value: budget.combined.total.total + cost
       }
-    };
+    ]);
   }
 
   // HIT and HIE are rolled up into a single combined source for
   // some of the budget data, so for those, just run again.
   if (fundingSource === 'hie' || fundingSource === 'hit') {
-    updates.hitAndHieUpdates = addCostsToFundingSource(
-      budget['hitAndHie'],
-      year,
-      prop,
-      cost
+    patches = patches.concat(
+      patchCostsToFundingSource({
+        budget,
+        fundingSource: 'hitAndHie',
+        year,
+        prop,
+        cost
+      })
     );
   }
-  return updates;
+  return patches;
+};
+
+/**
+ *
+ * @param {Object} budget The existing budget
+ * @param {String} activityTotals The activity total object
+ * @param {String} fundingSource The CMS funding program of the cost
+ * @param {String} year As a four-character year string (e.g., '2018')
+ * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
+ * @param {Number} cost The cost value.
+ */
+export const addActivityTotalCosts = ({
+  budget,
+  activityTotals,
+  activityTotalByCategory,
+  fundingSource,
+  year,
+  prop,
+  cost
+}) => {
+  const updatedBudget = applyPatch(
+    budget,
+    patchCostToTotals({ budget, fundingSource, year, prop, cost })
+  );
+  console.log({ updatedBudget });
+
+  const updatedActivityTotalByCategory = applyPatch(activityTotalByCategory, [
+    {
+      op: 'replace',
+      path: `/${year}/${prop}`,
+      value: activityTotalByCategory[year][prop] + cost
+    }
+  ]);
+
+  const updatedActivityTotals = applyPatch(activityTotals, [
+    {
+      op: 'replace',
+      path: `/data/${prop}/${year}`,
+      value: activityTotals.data[prop][year] + cost
+    },
+    {
+      op: 'replace',
+      path: `/data/${prop}/total`,
+      value: activityTotals.data[prop].total + cost
+    },
+    {
+      op: 'replace',
+      path: `/data/combined/${year}`,
+      value: activityTotals.data.combined[year] + cost
+    },
+    {
+      op: 'replace',
+      path: '/data/combined/total',
+      value: activityTotals.data.combined.total + cost
+    }
+  ]);
+
+  return {
+    updatedBudget,
+    updatedActivityTotalByCategory,
+    updatedActivityTotals
+  };
 };
 
 /**
@@ -301,10 +368,18 @@ export const defaultQuarterlyFFPperActivity = years => ({
   }
 });
 
+/**
+ * Create default Activity Totals object
+ * @param {Integer} id Activity id
+ * @param {String} name Activity name
+ * @param {String} fundingSource The CMS funding program of the cost
+ * @param {Array} years As a four-character year string (e.g., '2018')
+ * @returns activity totals object
+ */
 export const defaultActivityTotals = (id, name, fundingSource, years) => ({
-  fundingSource,
   id,
   name,
+  fundingSource,
   data: {
     combined: { ...arrToObj(years, 0), total: 0 },
     contractors: { ...arrToObj(years, 0), total: 0 },
@@ -334,7 +409,7 @@ export const updateBudget = apd => {
   // Create a default budget object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
   // to have a bunch of code checking for it.
-  const newBudget = defaultBudget(years);
+  let newBudget = defaultBudget(years);
 
   // Since all of our expenses are tied up in activities, we'll start
   // by looking at all of them and doing Magic Math™. (It's not magic.)
@@ -361,7 +436,7 @@ export const updateBudget = apd => {
     // We need to sum up the total cost of each cost category per
     // fiscal year for the activity as well, so let's make an object
     // for tracking that and go ahead and push it into the budget data.
-    const activityTotals = defaultActivityTotals(
+    let activityTotals = defaultActivityTotals(
       activity.id,
       activity.name,
       activity.fundingSource,
@@ -377,7 +452,7 @@ export const updateBudget = apd => {
     // but the object structure is different.  Rather than munge
     // that object into this shape later, we'll just capture both
     // at the same time.  That's more straightforward.
-    const activityTotalByCategory = arrToObj(years, () => ({
+    let activityTotalByCategory = arrToObj(years, () => ({
       contractors: 0,
       expenses: 0,
       statePersonnel: 0
@@ -394,60 +469,87 @@ export const updateBudget = apd => {
     // other after the fact.
     activity.contractorResources.forEach(contractor => {
       Object.entries(contractor.years).forEach(([year, cost]) => {
-        const { fundingSourceUpdates, combinedUpdates, hitAndHieUpdates } =
-          addCostToTotals(newBudget, fundingSource, year, 'contractors', cost);
-        newBudget[fundingSource] = fundingSourceUpdates;
-        newBudget.combined = combinedUpdates;
-        if (hitAndHieUpdates) newBudget['hitAndHie'] = hitAndHieUpdates;
+        const prop = 'contractors';
+        const {
+          updatedBudget,
+          updatedActivityTotalByCategory,
+          updatedActivityTotals
+        } = addActivityTotalCosts({
+          budget: newBudget,
+          activityTotals,
+          activityTotalByCategory,
+          fundingSource,
+          year,
+          prop,
+          cost
+        });
 
-        activityTotalByCategory[year].contractors += cost;
+        newBudget[fundingSource] = updatedBudget[fundingSource];
+        newBudget.hitAndHie = updatedBudget.hitAndHie;
+        newBudget.combined = updatedBudget.combined;
 
-        activityTotals.data.contractors[year] += cost;
-        activityTotals.data.contractors.total += cost;
-        activityTotals.data.combined[year] += cost;
-        activityTotals.data.combined.total += cost;
+        activityTotalByCategory[year][prop] =
+          updatedActivityTotalByCategory[year][prop];
+
+        activityTotals.data = updatedActivityTotals.data;
       });
     });
 
     activity.expenses.forEach(expense => {
       Object.entries(expense.years).forEach(([year, cost]) => {
-        const { fundingSourceUpdates, combinedUpdates, hitAndHieUpdates } =
-          addCostToTotals(newBudget, fundingSource, year, 'expenses', cost);
-        newBudget[fundingSource] = fundingSourceUpdates;
-        newBudget.combined = combinedUpdates;
-        if (hitAndHieUpdates) newBudget['hitAndHie'] = hitAndHieUpdates;
+        const prop = 'expenses';
+        const {
+          updatedBudget,
+          updatedActivityTotalByCategory,
+          updatedActivityTotals
+        } = addActivityTotalCosts({
+          budget: newBudget,
+          activityTotals,
+          activityTotalByCategory,
+          fundingSource,
+          year,
+          prop,
+          cost
+        });
 
-        activityTotalByCategory[year].expenses += cost;
+        newBudget[fundingSource] = updatedBudget[fundingSource];
+        newBudget.hitAndHie = updatedBudget.hitAndHie;
+        newBudget.combined = updatedBudget.combined;
 
-        activityTotals.data.expenses[year] += cost;
-        activityTotals.data.expenses.total += cost;
-        activityTotals.data.combined[year] += cost;
-        activityTotals.data.combined.total += cost;
+        activityTotalByCategory[year][prop] =
+          updatedActivityTotalByCategory[year][prop];
+
+        activityTotals.data = updatedActivityTotals.data;
       });
     });
 
     activity.statePersonnel.forEach(person => {
       Object.entries(person.years).forEach(([year, { amt, perc }]) => {
         const cost = convertToNumber(amt) * convertToNumber(perc);
+        const prop = 'statePersonnel';
 
-        const { fundingSourceUpdates, combinedUpdates, hitAndHieUpdates } =
-          addCostToTotals(
-            newBudget,
-            fundingSource,
-            year,
-            'statePersonnel',
-            cost
-          );
-        newBudget[fundingSource] = fundingSourceUpdates;
-        newBudget.combined = combinedUpdates;
-        if (hitAndHieUpdates) newBudget['hitAndHie'] = hitAndHieUpdates;
+        const {
+          updatedBudget,
+          updatedActivityTotalByCategory,
+          updatedActivityTotals
+        } = addActivityTotalCosts({
+          budget: newBudget,
+          activityTotals,
+          activityTotalByCategory,
+          fundingSource,
+          year,
+          prop,
+          cost
+        });
 
-        activityTotalByCategory[year].statePersonnel += cost;
+        newBudget[fundingSource] = updatedBudget[fundingSource];
+        newBudget.hitAndHie = updatedBudget.hitAndHie;
+        newBudget.combined = updatedBudget.combined;
 
-        activityTotals.data.statePersonnel[year] += cost;
-        activityTotals.data.statePersonnel.total += cost;
-        activityTotals.data.combined[year] += cost;
-        activityTotals.data.combined.total += cost;
+        activityTotalByCategory[year][prop] =
+          updatedActivityTotalByCategory[year][prop];
+
+        activityTotals.data = updatedActivityTotals.data;
       });
     });
 

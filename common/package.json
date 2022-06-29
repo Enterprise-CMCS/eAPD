@@ -16,7 +16,9 @@
     "node": "16.15.0"
   },
   "dependencies": {
-    "joi": "17.6.0"
+    "joi": "17.6.0",
+    "jsonpatch": "3.1.0",
+    "updeep": "1.2.1"
   },
   "packageManager": "yarn@1.22.18"
 }
