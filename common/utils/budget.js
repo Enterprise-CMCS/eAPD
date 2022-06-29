@@ -301,6 +301,26 @@ export const defaultQuarterlyFFPperActivity = years => ({
   }
 });
 
+export const defaultActivityTotals = (id, name, fundingSource, years) => ({
+  fundingSource,
+  id,
+  name,
+  data: {
+    combined: { ...arrToObj(years, 0), total: 0 },
+    contractors: { ...arrToObj(years, 0), total: 0 },
+    expenses: { ...arrToObj(years, 0), total: 0 },
+    otherFunding: {
+      ...arrToObj(years, () => ({
+        contractors: 0,
+        expenses: 0,
+        statePersonnel: 0,
+        total: 0
+      }))
+    },
+    statePersonnel: { ...arrToObj(years, 0), total: 0 }
+  }
+});
+
 export const updateBudget = apd => {
   // Clone the incoming state, so we don't accidentally change anything.
   const {
@@ -341,25 +361,12 @@ export const updateBudget = apd => {
     // We need to sum up the total cost of each cost category per
     // fiscal year for the activity as well, so let's make an object
     // for tracking that and go ahead and push it into the budget data.
-    const activityTotals = {
-      fundingSource: activity.fundingSource,
-      id: activity.id,
-      name: activity.name,
-      data: {
-        combined: { ...arrToObj(years, 0), total: 0 },
-        contractors: { ...arrToObj(years, 0), total: 0 },
-        expenses: { ...arrToObj(years, 0), total: 0 },
-        otherFunding: {
-          ...arrToObj(years, () => ({
-            contractors: 0,
-            expenses: 0,
-            statePersonnel: 0,
-            total: 0
-          }))
-        },
-        statePersonnel: { ...arrToObj(years, 0), total: 0 }
-      }
-    };
+    const activityTotals = defaultActivityTotals(
+      activity.id,
+      activity.name,
+      activity.fundingSource,
+      years
+    );
 
     newBudget.activityTotals.push(activityTotals);
 
