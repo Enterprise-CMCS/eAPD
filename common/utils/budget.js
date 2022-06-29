@@ -1,5 +1,6 @@
 import roundedPercents from './roundedPercents';
 import { arrToObj, convertToNumber } from './formatting';
+import { deepCopy } from './utils';
 
 export const EXPENSE_TYPE_NAMES = [
   'statePersonnel',
@@ -121,21 +122,88 @@ export const defaultBudget = years => ({
 
 /**
  * Adds a given cost to the budget running totals.
- * @param {String} fundingSource The CMS funding program of the cost
+ * @param {String} fundingSourceBudget The existing budget for a funding source
  * @param {String} year As a four-character year string (e.g., '2018')
  * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
  * @param {Number} cost The cost value.
  */
 const addCostsToFundingSource = (fundingSourceBudget, year, prop, cost) => {
   // adding cost to the existing totals
-  const fundingSourceBudgetUpdates = JSON.parse(
-    JSON.stringify(fundingSourceBudget)
-  );
-  fundingSourceBudgetUpdates[prop][year].total += cost;
-  fundingSourceBudgetUpdates[prop].total.total += cost;
-  fundingSourceBudgetUpdates.combined[year].total += cost;
-  fundingSourceBudgetUpdates.combined.total.total += cost;
-  return fundingSourceBudgetUpdates;
+  return {
+    ...fundingSourceBudget,
+    [prop]: {
+      ...fundingSourceBudget[prop],
+      [year]: {
+        ...fundingSourceBudget[prop][year],
+        total: fundingSourceBudget[prop][year].total + cost
+      },
+      total: {
+        ...fundingSourceBudget[prop].total,
+        total: fundingSourceBudget[prop].total.total + cost
+      }
+    },
+    combined: {
+      ...fundingSourceBudget.combined,
+      [year]: {
+        ...fundingSourceBudget.combined[year],
+        total: fundingSourceBudget.combined[year].total + cost
+      },
+      total: {
+        ...fundingSourceBudget.combined.total,
+        total: fundingSourceBudget.combined.total.total + cost
+      }
+    }
+  };
+};
+
+/**
+ * Adds a given cost to the budget running totals.
+ * @param {String} fundingSource The CMS funding program of the cost
+ * @param {String} year As a four-character year string (e.g., '2018')
+ * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
+ * @param {Number} cost The cost value.
+ */
+const addCostToTotals = (budget, fundingSource, year, prop, cost) => {
+  const updates = {};
+
+  // New activities don't have a funding program by default, so in that case,
+  // we can't capture program-specific funding numbers.
+  if (fundingSource) {
+    updates.fundingSourceUpdates = addCostsToFundingSource(
+      budget[fundingSource],
+      year,
+      prop,
+      cost
+    );
+  }
+
+  // Because HIT and HIE sources have already added to the grand
+  // totals, don't also do it for the combined source.
+  if (fundingSource !== 'hitAndHie') {
+    updates.combinedUpdates = {
+      ...budget.combined,
+      [year]: {
+        ...budget.combined[year],
+        total: budget.combined[year].total + cost
+      },
+      total: {
+        ...budget.combined.total,
+        total: budget.combined.total.total + cost
+      }
+    };
+  }
+
+  // HIT and HIE are rolled up into a single combined source for
+  // some of the budget data, so for those, just run again.
+  if (fundingSource === 'hie' || fundingSource === 'hit') {
+    updates.hitAndHieUpdates = addCostsToFundingSource(
+      budget['hitAndHie'],
+      year,
+      prop,
+      cost
+    );
+  }
+  return updates;
 };
 
 export const updateBudget = apd => {
@@ -152,44 +220,6 @@ export const updateBudget = apd => {
   // that all of the properties and stuff will exist, so we don't have
   // to have a bunch of code checking for it.
   const newBudget = defaultBudget(years);
-
-  /**
-   * Adds a given cost to the budget running totals.
-   * @param {String} fundingSource The CMS funding program of the cost
-   * @param {String} year As a four-character year string (e.g., '2018')
-   * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
-   * @param {Number} cost The cost value.
-   */
-  const addCostToTotals = (fundingSource, year, prop, cost) => {
-    // New activities don't have a funding program by default, so in that case,
-    // we can't capture program-specific funding numbers.
-    if (fundingSource) {
-      newBudget[fundingSource] = addCostsToFundingSource(
-        newBudget[fundingSource],
-        year,
-        prop,
-        cost
-      );
-    }
-
-    // Because HIT and HIE sources have already added to the grand
-    // totals, don't also do it for the combined source.
-    if (fundingSource !== 'hitAndHie') {
-      newBudget.combined[year].total += cost;
-      newBudget.combined.total.total += cost;
-    }
-
-    // HIT and HIE are rolled up into a single combined source for
-    // some of the budget data, so for those, just run again.
-    if (fundingSource === 'hie' || fundingSource === 'hit') {
-      newBudget['hitAndHie'] = addCostsToFundingSource(
-        newBudget['hitAndHie'],
-        year,
-        prop,
-        cost
-      );
-    }
-  };
 
   // Since all of our expenses are tied up in activities, we'll start
   // by looking at all of them and doing Magic Math™. (It's not magic.)
@@ -324,7 +354,11 @@ export const updateBudget = apd => {
     // other after the fact.
     activity.contractorResources.forEach(contractor => {
       Object.entries(contractor.years).forEach(([year, cost]) => {
-        addCostToTotals(fundingSource, year, 'contractors', cost);
+        const { fundingSourceUpdates, combinedUpdates, hitAndHieUpdates } =
+          addCostToTotals(newBudget, fundingSource, year, 'contractors', cost);
+        newBudget[fundingSource] = fundingSourceUpdates;
+        newBudget.combined = combinedUpdates;
+        if (hitAndHieUpdates) newBudget['hitAndHie'] = hitAndHieUpdates;
 
         activityTotalByCategory[year].contractors += cost;
 
@@ -337,7 +371,11 @@ export const updateBudget = apd => {
 
     activity.expenses.forEach(expense => {
       Object.entries(expense.years).forEach(([year, cost]) => {
-        addCostToTotals(fundingSource, year, 'expenses', cost);
+        const { fundingSourceUpdates, combinedUpdates, hitAndHieUpdates } =
+          addCostToTotals(newBudget, fundingSource, year, 'expenses', cost);
+        newBudget[fundingSource] = fundingSourceUpdates;
+        newBudget.combined = combinedUpdates;
+        if (hitAndHieUpdates) newBudget['hitAndHie'] = hitAndHieUpdates;
 
         activityTotalByCategory[year].expenses += cost;
 
@@ -351,7 +389,18 @@ export const updateBudget = apd => {
     activity.statePersonnel.forEach(person => {
       Object.entries(person.years).forEach(([year, { amt, perc }]) => {
         const cost = convertToNumber(amt) * convertToNumber(perc);
-        addCostToTotals(fundingSource, year, 'statePersonnel', cost);
+
+        const { fundingSourceUpdates, combinedUpdates, hitAndHieUpdates } =
+          addCostToTotals(
+            newBudget,
+            fundingSource,
+            year,
+            'statePersonnel',
+            cost
+          );
+        newBudget[fundingSource] = fundingSourceUpdates;
+        newBudget.combined = combinedUpdates;
+        if (hitAndHieUpdates) newBudget['hitAndHie'] = hitAndHieUpdates;
 
         activityTotalByCategory[year].statePersonnel += cost;
 
