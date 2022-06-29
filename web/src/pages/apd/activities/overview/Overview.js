@@ -48,8 +48,8 @@ const ActivityOverview = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
-    };
-  }, []);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const overviewLabel = useMemo(
     () =>

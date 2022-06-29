@@ -65,7 +65,7 @@ const NumberField = ({
 
   const changeHandler = e => {
     const { value: valueStr } = e.target;
-    if (/^-$|-?(\d|,)*\.$/.test(valueStr)) {
+    if (/^-$|-?(\d|,)*\.(0|00)?$/.test(valueStr)) {
       // this number appears to be in process of being entered
       // skip calling onChange
       setLocal(valueStr);

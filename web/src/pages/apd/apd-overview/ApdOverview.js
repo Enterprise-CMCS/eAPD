@@ -159,14 +159,16 @@ const ApdOverview = ({
         onBlur={onBlur}
         value={name}
       />
-      <ChoiceList
-        choices={yearChoices}
-        label={getLabelElement()}
-        labelClassName="ds-u-margin-bottom--1"
-        name="apd-years"
-        onChange={handleYears}
-        type="checkbox"
-      />
+      <div className="ds-u-margin-y--3">
+        <ChoiceList
+          choices={yearChoices}
+          label={getLabelElement()}
+          labelClassName="ds-u-margin-bottom--1"
+          name="apd-years"
+          onChange={handleYears}
+          type="checkbox"
+        />
+      </div>
       <div className="ds-u-margin-y--3">
         <Instruction
           labelFor="program-introduction-field"
