@@ -1,0 +1,74 @@
+codecov:
+  require_ci_to_pass: false
+
+comment:
+  behavior: default
+  layout: 'reach,diff,flags,tree,reach,files,footer'
+  require_changes: false
+  show_carryforward_flags: false
+
+github_checks:
+  annotations: true
+
+coverage:
+  precision: 2
+  round: down
+  range: '70.0...100.0'
+  status:
+    changes: false
+    default_rules:
+      flag_coverage_not_uploaded_behavior: include
+    project: true
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+ignore:
+  - '**/node_modules/**'
+  - '**/__snapshots__/**'
+  - 'web/**/*.story.js'
+  - 'web/**/*.stories.js'
+  - 'web/**/*.test.js'
+  - 'web/**/*.cy.js'
+  - 'web/src/shared/**'
+  - 'web/src/fixtures/**'
+  - 'web/src/i18n/**'
+  - 'web/src/lazy/**'
+  - 'web/src/shared/**'
+  - 'web/src/static/**'
+  - 'web/src/file-loader.js'
+  - 'web/src/app.dev.js'
+  - 'web/src/app.js'
+  - 'web/src/constants.js'
+  - 'web/src/components/EnableCookies.js'
+  - 'web/src/util/analytics.js'
+  - 'web/src/util/oktaAuth.js'
+  - 'api/**/*.test.js'
+  - 'api/**/*.endpoint.js'
+  - 'api/**/index.js'
+  - 'api/**/migrations/**'
+  - 'api/**/mongo-migrations/**'
+  - 'api/**/openAPI.js'
+  - 'api/**/schemas/**'
+  - 'api/**/seeds/**'
+  - 'api/**/test-data/*'
+  - 'api/audit.js'
+  - 'api/auth/mockedOktaAuth.js'
+  - 'api/db/knex.js'
+  - 'api/db/mongodb.js'
+  - 'api/seeds/development/apds.js'
+  - '_templates/**'
+  - '.circleci/**'
+  - '.github/**'
+  - 'bin/**'
+  - 'documentation/**'
+  - 'e2e/**'
+  - 'owasp/**'
+  - 'packer/**'
+  - 'postman/**'
+  - 'terraform/**'

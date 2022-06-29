@@ -15,7 +15,12 @@ jest.mock('react-router-dom', () => ({
 
 const setup = (props = {}, options = {}) => {
   jest.spyOn(Router, 'useParams').mockReturnValue({ apdId: 1 });
-  return renderWithConnection(<ApdViewOnly {...props} />, options);
+  const utils = renderWithConnection(<ApdViewOnly {...props} />, options);
+  const user = userEvent.setup();
+  return {
+    utils,
+    user
+  };
 };
 
 describe('<ApdViewOnly/>', () => {
@@ -23,8 +28,8 @@ describe('<ApdViewOnly/>', () => {
     jest.clearAllMocks();
   });
 
-  test('renders correctly and tests Back to APD button', () => {
-    setup(null, {
+  test('renders correctly and tests Back to APD button', async () => {
+    const { user } = setup(null, {
       initialState: {
         ...apd,
         ...budget
@@ -34,7 +39,7 @@ describe('<ApdViewOnly/>', () => {
     expect(screen.getByText('HITECH IAPD')).toBeTruthy();
     expect(screen.getByText('2020-2021 APD')).toBeTruthy();
 
-    userEvent.click(screen.getByRole('button', { name: '< Back to APD' }));
+    await user.click(screen.getByRole('button', { name: '< Back to APD' }));
     expect(history.length).toEqual(1);
   });
 

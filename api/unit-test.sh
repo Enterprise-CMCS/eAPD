@@ -1,20 +1,19 @@
 #!/usr/bin/env sh
 
 export NODE_ENV=test
-export COMPOSE_PROJECT_NAME=api
 
-docker-compose -f ../docker-compose.endpoint-tests.yml up -d
-sleep 3
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
 
-docker-compose -f ../docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "DROP DATABASE IF EXISTS hitech_apd_test;"'
-docker-compose -f ../docker-compose.endpoint-tests.yml exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "CREATE DATABASE hitech_apd_test;"'
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "DROP DATABASE IF EXISTS hitech_apd_test;"'
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "CREATE DATABASE hitech_apd_test;"'
 
-docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run migrate
-docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run seed
-docker-compose -f ../docker-compose.endpoint-tests.yml exec api-for-testing yarn run test $@
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run test $@
 EXIT_CODE=$?
 
-docker-compose -f ../docker-compose.endpoint-tests.yml down
+docker cp api_api-for-testing_1:/app/api/coverage ./coverage
 
-unset COMPOSE_PROJECT_NAME
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
+
 exit $EXIT_CODE

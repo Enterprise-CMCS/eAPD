@@ -20,10 +20,10 @@
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "knex seed:run --specific=base-users.js",
     "jest": "NODE_ENV=test jest",
-    "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout --reporter=spec ${TESTS:-'{,!(node_modules)/**/}*.test.js'}",
-    "test": "NODE_ENV=test tap -J --cov --coverage-report=lcov --lines=75 --functions=60 --branches=50 --statements=75  --no-browser --reporter=spec '{,!(node_modules)/**/}*.test.js'",
-    "test-endpoints": "jest --detectOpenHandles --forceExit 'endpoint'",
-    "test-specific": "NODE_ENV=test tap --cov --coverage-report=lcov --no-browser --reporter=spec --lines=0 --functions=0 --branches=0 --statements=0",
+    "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout",
+    "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
+    "test-endpoints": "jest --detectOpenHandles --forceExit --runInBand",
+    "test-specific": "NODE_ENV=test tap --cov --coverage-report=text-lcov --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
   },
@@ -41,9 +41,9 @@
   },
   "dependencies": {
     "@okta/jwt-verifier": "2.3.0",
-    "@okta/okta-sdk-nodejs": "6.4.0",
+    "@okta/okta-sdk-nodejs": "6.5.0",
     "ajv": "8.11.0",
-    "aws-sdk": "2.1140.0",
+    "aws-sdk": "2.1155.0",
     "axios": "0.27.2",
     "body-parser": "1.20.0",
     "chalk": "4.1.2",
@@ -53,7 +53,7 @@
     "dotenv": "15.0.1",
     "express": "4.18.1",
     "express-fileupload": "1.4.0",
-    "express-validator": "6.14.0",
+    "express-validator": "6.14.1",
     "fast-json-patch": "3.1.1",
     "file-type": "16.5.3",
     "form-data": "4.0.0",
@@ -65,40 +65,72 @@
     "migrate-mongoose": "4.0.0",
     "mongoose": "5.13.14",
     "morgan": "1.10.0",
-    "newrelic": "8.11.1",
+    "newrelic": "8.14.1",
     "pg": "8.7.3",
     "sanitize-html": "2.7.0",
-    "sharp": "0.30.5",
-    "swagger-ui-express": "4.3.0",
+    "sharp": "0.30.6",
+    "swagger-ui-express": "4.4.0",
     "uuid": "8.3.2",
     "winston": "3.7.2",
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
     "colors": "1.4.0",
-    "eslint": "8.10.0",
+    "eslint": "8.17.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-import": "2.25.4",
-    "jest": "27.5.1",
-    "nodemon": "2.0.15",
-    "prettier": "2.5.1",
-    "sinon": "13.0.1",
-    "supertest": "6.2.2",
-    "tap": "15.1.6"
+    "eslint-plugin-import": "2.26.0",
+    "jest": "28.1.1",
+    "nodemon": "2.0.16",
+    "sinon": "14.0.0",
+    "supertest": "6.2.3",
+    "tap": "16.2.0"
   },
   "updateRestrictions": {
     "file-type": "can't upgrade to 17 because it requires babel",
     "mongoose": "we aren't upgrading to 6.x yet because it's not highly supported by other packages"
   },
   "jest": {
+    "coverageDirectory": "./coverage-endpoint/",
+    "rootDir": "./",
     "globalSetup": "./jest.setup.js",
     "globalTeardown": "./jest.teardown.js",
     "testMatch": [
-      "**/?(*.)+(spec|test|endpoint).js?(x)"
+      "**/*.endpoint.{js,jsx}"
     ],
     "testEnvironment": "node",
-    "testTimeout": 30000
+    "testTimeout": 30000,
+    "collectCoverageFrom": [
+      "routes/**/*.{js,jsx}",
+      "!**/*.test.js",
+      "!**/__snapshots__/**",
+      "!**/openAPI.js"
+    ]
+  },
+  "tap": {
+    "files": "./**/*.test.js",
+    "lines": 75,
+    "functions": 60,
+    "branches": 50,
+    "statements": 75,
+    "nyc-arg": [
+      "--reporter-dir=./coverage/",
+      "--exclude=./**/*.endpoint.js",
+      "--exclude=./**/index.js",
+      "--exclude=./**/migrations/**",
+      "--exclude=./**/mongo-migrations/**",
+      "--exclude=./**/openAPI.js",
+      "--exclude=./**/schemas/**",
+      "--exclude=./**/seeds/**",
+      "--exclude=./**/test-data/**",
+      "--exclude=./**/node_modules/**",
+      "--exclude=./**/__snapshots__/**",
+      "--exclude=./api/audit.js",
+      "--exclude=./api/auth/mockedOktaAuth.js",
+      "--exclude=./api/db/knex.js",
+      "--exclude=./api/db/mongodb.js",
+      "--exclude=./api/seeds/development/apds.js"
+    ]
   },
   "resolutions": {
     "minimist": ">=1.2.6"
