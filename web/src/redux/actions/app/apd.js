@@ -215,12 +215,12 @@ export const toggleAdminCheck = value => dispatch => {
   dispatch({ type: ADMIN_CHECK_TOGGLE, data: value });
   return null;
 };
-
+// eslint-disable-next-line react/display-name
 export const toggleMiniCheck = value => dispatch => {
   dispatch({ type: ADMIN_CHECK_MINI_TOGGLE, data: value });
   return null;
 };
-
+// eslint-disable-next-line react/display-name
 export const toggleAdminCheckComplete = value => dispatch => {
   dispatch({ type: ADMIN_CHECK_COMPLETE_TOGGLE, data: value });
   return null;
