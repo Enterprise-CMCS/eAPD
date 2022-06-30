@@ -168,7 +168,7 @@ export const patchCostsToFundingSource = ({
  * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
  * @param {Number} cost The cost value.
  */
-export const patchCostToTotals = ({
+export const addCostToTotals = ({
   budget,
   fundingSource,
   year,
@@ -214,7 +214,7 @@ export const patchCostToTotals = ({
       })
     );
   }
-  return patches;
+  return applyPatch(budget, patches);
 };
 
 /**
@@ -235,11 +235,13 @@ export const addActivityTotalCosts = ({
   prop,
   cost
 }) => {
-  const updatedBudget = applyPatch(
+  const updatedBudget = addCostToTotals({
     budget,
-    patchCostToTotals({ budget, fundingSource, year, prop, cost })
-  );
-  console.log({ updatedBudget });
+    fundingSource,
+    year,
+    prop,
+    cost
+  });
 
   const updatedActivityTotalByCategory = applyPatch(activityTotalByCategory, [
     {
@@ -484,13 +486,8 @@ export const updateBudget = apd => {
           cost
         });
 
-        newBudget[fundingSource] = updatedBudget[fundingSource];
-        newBudget.hitAndHie = updatedBudget.hitAndHie;
-        newBudget.combined = updatedBudget.combined;
-
-        activityTotalByCategory[year][prop] =
-          updatedActivityTotalByCategory[year][prop];
-
+        newBudget = updatedBudget;
+        activityTotalByCategory = updatedActivityTotalByCategory;
         activityTotals.data = updatedActivityTotals.data;
       });
     });
@@ -512,13 +509,8 @@ export const updateBudget = apd => {
           cost
         });
 
-        newBudget[fundingSource] = updatedBudget[fundingSource];
-        newBudget.hitAndHie = updatedBudget.hitAndHie;
-        newBudget.combined = updatedBudget.combined;
-
-        activityTotalByCategory[year][prop] =
-          updatedActivityTotalByCategory[year][prop];
-
+        newBudget = updatedBudget;
+        activityTotalByCategory = updatedActivityTotalByCategory;
         activityTotals.data = updatedActivityTotals.data;
       });
     });
@@ -542,13 +534,8 @@ export const updateBudget = apd => {
           cost
         });
 
-        newBudget[fundingSource] = updatedBudget[fundingSource];
-        newBudget.hitAndHie = updatedBudget.hitAndHie;
-        newBudget.combined = updatedBudget.combined;
-
-        activityTotalByCategory[year][prop] =
-          updatedActivityTotalByCategory[year][prop];
-
+        newBudget = updatedBudget;
+        activityTotalByCategory = updatedActivityTotalByCategory;
         activityTotals.data = updatedActivityTotals.data;
       });
     });
@@ -564,9 +551,9 @@ export const updateBudget = apd => {
     // of all the costs.
     years.forEach(year => {
       const totalOtherFunding = convertToNumber(allocation[year].other);
-      const activityCostByFFY = newBudget.activities[activity.key].costsByFFY;
       const totalCost = activityTotals.data.combined[year];
       const totalMedicaidShare = totalCost - totalOtherFunding;
+      const activityCostByFFY = newBudget.activities[activity.key].costsByFFY;
 
       // This is the Medicaid total share broken into state and federal shares
       const costShares = getAllocation(activity, year, totalMedicaidShare);
