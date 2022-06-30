@@ -28,7 +28,12 @@ const adminUser = {
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 const setup = (props = {}, options = {}) => {
-  return renderWithConnection(<ManageAccount {...props} />, options);
+  const user = userEvent.setup();
+  const utils = renderWithConnection(<ManageAccount {...props} />, options);
+  return {
+    user,
+    utils
+  };
 };
 
 describe('<ManageAccount />', () => {
@@ -59,14 +64,14 @@ describe('<ManageAccount />', () => {
     ).toBeTruthy();
   });
 
-  test('renders correctly for admin user, requests a new affiliation', () => {
+  test('renders correctly for admin user, requests a new affiliation', async () => {
     const props = {
       createAccessRequest: jest.fn(),
       completeAccessRequest: jest.fn(),
       dashboard: jest.fn()
     };
 
-    setup(props, {
+    const { user } = setup(props, {
       initialState: {
         user: adminUser,
         isAdmin: true,
@@ -75,18 +80,18 @@ describe('<ManageAccount />', () => {
       initialHistory: ['/']
     });
     fetchMock.onGet('/affiliations/me').reply(200, []);
+    fetchMock.onPost('/states/al/affiliations').reply(200);
 
     expect(
       screen.getByRole('heading', { name: 'Select your State Affiliation' })
     ).toBeTruthy();
 
-    userEvent.type(
+    await user.type(
       screen.getByRole('combobox', { name: 'Select your State Affiliation' }),
       '{arrowdown}{enter}'
     );
 
     expect(screen.getByText('Alabama')).toBeTruthy();
-    userEvent.click(screen.getByRole('button', { name: 'Submit' }));
-    fetchMock.onPost('/states/al/affiliations').reply(200);
+    await user.click(screen.getByRole('button', { name: 'Submit' }));
   });
 });

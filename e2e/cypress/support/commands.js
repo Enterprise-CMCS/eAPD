@@ -4,7 +4,10 @@ import '@testing-library/cypress/add-commands'; // eslint-disable-line import/no
 import 'cypress-audit/commands'; // eslint-disable-line import/no-extraneous-dependencies
 import '@foreachbe/cypress-tinymce';
 import 'tinymce/tinymce';
-import 'cypress-file-upload';
+import 'cypress-iframe';
+import 'cypress-file-upload'; // eslint-disable-line import/no-extraneous-dependencies
+
+import tokens from '@cms-eapd/api/seeds/test/tokens.json';
 
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';

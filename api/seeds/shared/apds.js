@@ -40,7 +40,7 @@ const populate = async ({ model, data }) => {
 // Connect to MongoDB via Mongoose
 exports.seed = async () => {
   try {
-    logger.info(`Connecting to MongoDB to seed data`);
+    logger.verbose(`Connecting to MongoDB to seed data`);
     await setup();
     logger.verbose(
       `Dropping collections for ${models
