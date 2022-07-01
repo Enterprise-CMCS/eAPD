@@ -7,6 +7,6 @@ exports.up = async knex => {
   );
 };
 
-exports.down = async knex => {
+exports.down = () => {
   // Can't reverse this since postgres will fail if there are already unique certifications
 };
