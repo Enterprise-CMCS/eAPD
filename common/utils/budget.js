@@ -1,7 +1,8 @@
-import { apply_patch as applyPatch } from 'jsonpatch';
+// import { apply_patch as applyPatch } from 'jsonpatch';
 // import u from 'updeep';
 import roundedPercents from './roundedPercents';
 import { arrToObj, convertToNumber } from './formatting';
+import { deepCopy } from './utils';
 
 export const EXPENSE_TYPE_NAMES = [
   'statePersonnel',
@@ -122,214 +123,6 @@ export const defaultBudget = years => ({
 });
 
 /**
- * Adds a given cost to the budget running totals.
- * @param {String} fundingSourceBudget The existing budget for a funding source
- * @param {String} year As a four-character year string (e.g., '2018')
- * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
- * @param {Number} cost The cost value.
- */
-export const patchCostsToFundingSource = ({
-  budget,
-  fundingSource,
-  year,
-  prop,
-  cost
-}) => {
-  console.log({ fundingSource, prop, year });
-  return [
-    {
-      op: 'replace',
-      path: `/${fundingSource}/${prop}/${year}/total`,
-      value: budget[fundingSource][prop][year].total + cost
-    },
-    {
-      op: 'replace',
-      path: `/${fundingSource}/${prop}/total/total`,
-      value: budget[fundingSource][prop].total.total + cost
-    },
-    {
-      op: 'replace',
-      path: `/${fundingSource}/combined/${year}/total`,
-      value: budget[fundingSource].combined[year].total + cost
-    },
-    {
-      op: 'replace',
-      path: `/${fundingSource}/combined/total/total`,
-      value: budget[fundingSource].combined.total.total + cost
-    }
-  ];
-};
-
-/**
- * Adds a given cost to the budget running totals.
- * @param {Object} budget The existing budget
- * @param {String} fundingSource The CMS funding program of the cost
- * @param {String} year As a four-character year string (e.g., '2018')
- * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
- * @param {Number} cost The cost value.
- */
-export const addCostToTotals = ({
-  budget,
-  fundingSource,
-  year,
-  prop,
-  cost
-}) => {
-  let patches = [];
-  // New activities don't have a funding program by default, so in that case,
-  // we can't capture program-specific funding numbers.
-  if (fundingSource) {
-    patches = patches.concat(
-      patchCostsToFundingSource({ budget, fundingSource, year, prop, cost })
-    );
-  }
-
-  // Because HIT and HIE sources have already added to the grand
-  // totals, don't also do it for the combined source.
-  if (fundingSource !== 'hitAndHie') {
-    patches = patches.concat([
-      {
-        op: 'replace',
-        path: `/combined/${year}/total`,
-        value: budget.combined[year].total + cost
-      },
-      {
-        op: 'replace',
-        path: '/combined/total/total',
-        value: budget.combined.total.total + cost
-      }
-    ]);
-  }
-
-  // HIT and HIE are rolled up into a single combined source for
-  // some of the budget data, so for those, just run again.
-  if (fundingSource === 'hie' || fundingSource === 'hit') {
-    patches = patches.concat(
-      patchCostsToFundingSource({
-        budget,
-        fundingSource: 'hitAndHie',
-        year,
-        prop,
-        cost
-      })
-    );
-  }
-  return applyPatch(budget, patches);
-};
-
-/**
- *
- * @param {Object} budget The existing budget
- * @param {String} activityTotals The activity total object
- * @param {String} fundingSource The CMS funding program of the cost
- * @param {String} year As a four-character year string (e.g., '2018')
- * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
- * @param {Number} cost The cost value.
- */
-export const addActivityTotalCosts = ({
-  budget,
-  activityTotals,
-  activityTotalByCategory,
-  fundingSource,
-  year,
-  prop,
-  cost
-}) => {
-  const updatedBudget = addCostToTotals({
-    budget,
-    fundingSource,
-    year,
-    prop,
-    cost
-  });
-
-  const updatedActivityTotalByCategory = applyPatch(activityTotalByCategory, [
-    {
-      op: 'replace',
-      path: `/${year}/${prop}`,
-      value: activityTotalByCategory[year][prop] + cost
-    }
-  ]);
-
-  const updatedActivityTotals = applyPatch(activityTotals, [
-    {
-      op: 'replace',
-      path: `/data/${prop}/${year}`,
-      value: activityTotals.data[prop][year] + cost
-    },
-    {
-      op: 'replace',
-      path: `/data/${prop}/total`,
-      value: activityTotals.data[prop].total + cost
-    },
-    {
-      op: 'replace',
-      path: `/data/combined/${year}`,
-      value: activityTotals.data.combined[year] + cost
-    },
-    {
-      op: 'replace',
-      path: '/data/combined/total',
-      value: activityTotals.data.combined.total + cost
-    }
-  ]);
-
-  return {
-    updatedBudget,
-    updatedActivityTotalByCategory,
-    updatedActivityTotals
-  };
-};
-
-/**
- * Get the state and federal share of costs for an amount for
- * a given year of the current activity.
- * @param {Object} activity The activity budget object
- * @param {String} year As a four-character year string (e.g., '2018')
- * @param {Number} amount The amount to allocate over state and federal shares
- * @returns {{fedShare:Number, stateShare:Number other stuff}} The state and federal share
- */
-export const getAllocation = (activity, year, amount) => {
-  const [fedShare, stateShare] = roundedPercents(convertToNumber(amount), [
-    activity.costAllocation[year].ffp.federal / 100,
-    activity.costAllocation[year].ffp.state / 100
-  ]);
-  return { fedShare, stateShare };
-};
-
-/**
- * Updates the state personnel list and adds the key personnel with costs
- * to the list if the activity is a Program Administration activity.
- * @param {String} name Activity name
- * @param {Array} statePersonnel List of state personnel for the activity
- * @param {Array} keyPersonnel List of key personnel for the APD
- * @returns
- */
-export const updateStatePersonnel = (name, statePersonnel, keyPersonnel) => {
-  const updatedStatePersonnel = [...statePersonnel];
-  // If this is the Program Administration activity, add the APD key
-  // personnel to it so they get included in downstream calculations.
-  // TODO: Don't rely on the activity name. Instead, this should always be
-  // activity index 0. However, that will require some tweaks to the tests.
-  if (name === 'Program Administration') {
-    updatedStatePersonnel.push(
-      ...keyPersonnel
-        .filter(kp => kp.hasCosts)
-        .map(({ costs, fte }) => ({
-          years: Object.keys(costs).reduce(
-            (o, ffy) => ({
-              ...o,
-              [ffy]: { amt: costs[ffy], perc: fte[ffy] }
-            }),
-            {}
-          )
-        }))
-    );
-  }
-  return updatedStatePersonnel;
-};
-
-/**
  * Compute quarterly FFP per activity
  * @param {Array} years
  * @returns the default quarterly FFP per activity
@@ -398,6 +191,418 @@ export const defaultActivityTotals = (id, name, fundingSource, years) => ({
   }
 });
 
+/**
+ * Get the state and federal share of costs for an amount for
+ * a given year of the current activity.
+ * @param {Object} activity The activity budget object
+ * @param {String} year As a four-character year string (e.g., '2018')
+ * @param {Number} amount The amount to allocate over state and federal shares
+ * @returns {{fedShare:Number, stateShare:Number other stuff}} The state and federal share
+ */
+export const getAllocation = (activity, year, amount) => {
+  const [fedShare, stateShare] = roundedPercents(convertToNumber(amount), [
+    activity.costAllocation[year].ffp.federal / 100,
+    activity.costAllocation[year].ffp.state / 100
+  ]);
+  return { fedShare, stateShare };
+};
+
+/**
+ * Updates the state personnel list and adds the key personnel with costs
+ * to the list if the activity is a Program Administration activity.
+ * @param {String} name Activity name
+ * @param {Array} statePersonnel List of state personnel for the activity
+ * @param {Array} keyPersonnel List of key personnel for the APD
+ * @returns
+ */
+export const updateStatePersonnel = (name, statePersonnel, keyPersonnel) => {
+  const updatedStatePersonnel = [...statePersonnel];
+  // If this is the Program Administration activity, add the APD key
+  // personnel to it so they get included in downstream calculations.
+  // TODO: Don't rely on the activity name. Instead, this should always be
+  // activity index 0. However, that will require some tweaks to the tests.
+  if (name === 'Program Administration') {
+    updatedStatePersonnel.push(
+      ...keyPersonnel
+        .filter(kp => kp.hasCosts)
+        .map(({ costs, fte }) => ({
+          years: Object.keys(costs).reduce(
+            (o, ffy) => ({
+              ...o,
+              [ffy]: { amt: costs[ffy], perc: fte[ffy] }
+            }),
+            {}
+          )
+        }))
+    );
+  }
+  return updatedStatePersonnel;
+};
+
+// Return the cost from the item by year for the prop.
+// statePersonnel is a special case, because it's years don't have a
+// number value, but an object with amount and percent
+const getCostFromItemByYear = (item, year) =>
+  typeof item.years[year] === 'object'
+    ? convertToNumber(item.years[year].amt) *
+      convertToNumber(item.years[year].perc)
+    : item.years[year];
+
+/**
+ * Sums up the costs for each prop type and adds them to the budget totals.
+ * @param {Object} activityTotals The activity total object
+ * @param {*} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
+ * @param {Array} items The list of items of the prop type in the activity
+ * @returns {Object} the updated activity total object
+ */
+export const calculateActivityTotalByProp = (activityTotals, prop, items) => {
+  let updatedActivityTotals = deepCopy(activityTotals);
+  items.forEach(item => {
+    updatedActivityTotals = Object.keys(item.years).reduce((totals, year) => {
+      const cost = getCostFromItemByYear(item, year);
+      totals.data[prop][year] += cost;
+      totals.data[prop].total += cost;
+      totals.data.combined[year] += cost;
+      totals.data.combined.total += cost;
+      return totals;
+    }, updatedActivityTotals);
+  });
+  return updatedActivityTotals;
+};
+
+/**
+ * Sum up the total cost of each cost category per fiscal year
+ * for the activity as well.
+ * @param {Object} activity The APD activity
+ * @param {Array} years The list of years in the APD
+ * @returns {Object} the activity total object
+ */
+export const calculateActivityTotals = (activity, years) => {
+  let activityTotals = defaultActivityTotals(
+    activity.id,
+    activity.name,
+    activity.fundingSource,
+    years
+  );
+  activityTotals = calculateActivityTotalByProp(
+    activityTotals,
+    'contractors',
+    activity.contractorResources
+  );
+  activityTotals = calculateActivityTotalByProp(
+    activityTotals,
+    'expenses',
+    activity.expenses
+  );
+  activityTotals = calculateActivityTotalByProp(
+    activityTotals,
+    'statePersonnel',
+    activity.statePersonnel
+  );
+  return activityTotals;
+};
+
+/**
+ * Sums up the costs for each prop type and adds them to the budget totals.
+ * @param {Object} activityTotals The activity total object
+ * @param {*} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
+ * @param {Array} items The list of items of the prop type in the activity
+ * @returns {Object} the updated activity total object
+ */
+export const calculateActivityTotalByCategoryByProp = (
+  activityTotalByCategory,
+  prop,
+  items
+) => {
+  let updatedActivityTotalByCategory = deepCopy(activityTotalByCategory);
+  items.forEach(item => {
+    updatedActivityTotalByCategory = Object.keys(item.years).reduce(
+      (totals, year) => {
+        const cost = getCostFromItemByYear(item, year);
+        totals[year][prop] += cost;
+        return totals;
+      },
+      updatedActivityTotalByCategory
+    );
+  });
+  return updatedActivityTotalByCategory;
+};
+
+/**
+ * Sum up the total cost of each cost category per fiscal year
+ * for the activity as well.
+ * @param {Object} activity The APD activity
+ * @param {Array} years The list of years in the APD
+ * @returns {Object} the activity total object
+ */
+export const calculateActivityTotalByCategory = (activity, years) => {
+  let activityTotalByCategory = arrToObj(years, () => ({
+    contractors: 0,
+    expenses: 0,
+    statePersonnel: 0
+  }));
+  activityTotalByCategory = calculateActivityTotalByCategoryByProp(
+    activityTotalByCategory,
+    'contractors',
+    activity.contractorResources
+  );
+  activityTotalByCategory = calculateActivityTotalByCategoryByProp(
+    activityTotalByCategory,
+    'expenses',
+    activity.expenses
+  );
+  activityTotalByCategory = calculateActivityTotalByCategoryByProp(
+    activityTotalByCategory,
+    'statePersonnel',
+    activity.statePersonnel
+  );
+  return activityTotalByCategory;
+};
+
+/**
+ * Adds a costs to the budget running totals.
+ * @param {Object} budget The current budget object
+ * @param {String} fundingSource The funding source for the Activity
+ * @param {String} prop The property this cost comes from (e.g., "contractors", "statePersonnel")
+ * @param {Array} items The list of items of the prop type in the budget
+ * @return {Object} The budget object with the totals updated
+ */
+export const calculateCostsForFundingSourceByProp = (
+  budget,
+  fundingSource,
+  prop,
+  items
+) => {
+  let updatedBudget = deepCopy(budget);
+  items.forEach(item => {
+    updatedBudget = Object.keys(item.years).reduce((totals, year) => {
+      const cost = getCostFromItemByYear(item, year);
+      // New activities don't have a funding program by default, so in that case,
+      // we can't capture program-specific funding numbers.
+      if (fundingSource) {
+        totals[fundingSource][prop][year].total += cost;
+        totals[fundingSource][prop].total.total += cost;
+        totals[fundingSource].combined[year].total += cost;
+        totals[fundingSource].combined.total.total += cost;
+
+        if (fundingSource === 'hie' || fundingSource === 'hit') {
+          totals.hitAndHie[prop][year].total += cost;
+          totals.hitAndHie[prop].total.total += cost;
+          totals.hitAndHie.combined[year].total += cost;
+          totals.hitAndHie.combined.total.total += cost;
+        }
+      }
+
+      // Because HIT and HIE sources have already added to the grand
+      // totals, don't also do it for the combined source.
+      // should include costs for items that don't have fundingSources
+      if (fundingSource !== 'hitAndHie') {
+        totals.combined[year].total += cost;
+        totals.combined.total.total += cost;
+      }
+
+      return totals;
+    }, updatedBudget);
+  });
+  return updatedBudget;
+};
+
+/**
+ * Sum up the costs for activity
+ * @param {Object} activity The APD activity
+ * @param {String} fundingSource the funding source for the activity
+ * @param {Array} years The list of years in the APD
+ * @return {Object} the updated budget object
+ */
+export const calculateTotalCostsByCategory = (
+  budget,
+  activity,
+  fundingSource
+) => {
+  let updatedBudget = deepCopy(budget);
+  updatedBudget = calculateCostsForFundingSourceByProp(
+    updatedBudget,
+    fundingSource,
+    'contractors',
+    activity.contractorResources
+  );
+  updatedBudget = calculateCostsForFundingSourceByProp(
+    updatedBudget,
+    fundingSource,
+    'expenses',
+    activity.expenses
+  );
+  updatedBudget = calculateCostsForFundingSourceByProp(
+    updatedBudget,
+    fundingSource,
+    'statePersonnel',
+    activity.statePersonnel
+  );
+  return updatedBudget;
+};
+
+/**
+ * This represents the percentage each cost category contributes to the
+ * total activity cost.  This is useful for distributing the total
+ * in a way that we get whole numbers and preserve sums.
+ * @param {Object} activityTotals The activity total object
+ * @param {Integer} year The year to get the percentages for
+ */
+export const calculateCostCategoryPercentages = (activityTotals, year) => {
+  const totalCost = activityTotals.data.combined[year];
+  return [
+    activityTotals.data.contractors[year] / totalCost || 0,
+    activityTotals.data.expenses[year] / totalCost || 0,
+    activityTotals.data.statePersonnel[year] / totalCost || 0
+  ];
+};
+
+/**
+ * Calcuates the other funding amounts for the activity and year
+ * @param {Object} activityTotals The activity total object
+ * @param {Integer} totalOtherFunding The total amount of other funding
+ * @param {Array} costCategoryPercentages The array of percentages for each cost category
+ * @param {Integer} year The year to calculate other funding for
+ * @returns
+ */
+export const calculateOtherFundingByYear = (
+  activityTotals,
+  totalOtherFunding,
+  costCategoryPercentages,
+  year
+) => {
+  const updatedActivityTotals = deepCopy(activityTotals);
+
+  // Calculate how much of the activity's other funding for the current
+  // federal fiscal year is applied to each cost category.
+  updatedActivityTotals.data.otherFunding[year].total = totalOtherFunding;
+  [
+    updatedActivityTotals.data.otherFunding[year].contractors,
+    updatedActivityTotals.data.otherFunding[year].expenses,
+    updatedActivityTotals.data.otherFunding[year].statePersonnel
+  ] = roundedPercents(totalOtherFunding, costCategoryPercentages);
+
+  return updatedActivityTotals;
+};
+
+/**
+ * Compute the state and federal share for each cost category, based on
+ * the federal and state shares and the percentages calculated above.
+ * @param {Object} costShares The percentages of the split between state and federal shares
+ * @param {Integer} totalMedicaidShare The total amount to be paid by medicaid
+ * @param {Array} costCategoryPercentages The array of percentages for each cost category
+ * @return {Object} the amount to be paid by state, federal, and medicaid
+ */
+export const calculatePayeeShares = (
+  costShares,
+  totalMedicaidShare,
+  costCategoryPercentages
+) => {
+  // Converts an array where the values correspond to contractors,
+  // expenses, and state personnel values, respectively.
+  const costShareReducer = (acc, value, i) => ({
+    ...acc,
+    [['contractors', 'expenses', 'statePersonnel'][i]]: value
+  });
+
+  // Compute the state and federal share for each cost category, based on
+  // the federal and state shares and the percentages calculated above.
+  const fedShare = roundedPercents(
+    costShares.fedShare,
+    costCategoryPercentages
+  ).reduce(costShareReducer, {});
+  const stateShare = roundedPercents(
+    costShares.stateShare,
+    costCategoryPercentages
+  ).reduce(costShareReducer, {});
+  const medicaidShare = roundedPercents(
+    totalMedicaidShare,
+    costCategoryPercentages
+  ).reduce(costShareReducer, {});
+
+  /* ☝  What is that all about?
+      We need to display the "Medicaid share" of all of these costs, broken
+      down by state and federal share.  The Medicaid share is the total cost
+      minus any "other funding" that the user entered into the cost
+      allocation section.  The federal and state shares are dictated by which
+      allocation the user selected - 90/10, 75/25, or 50/50 (federal/state).
+
+      When the user is inputting data, the activity costs they enter combine
+      to create the absolute total cost.  Thus, the state personnel,
+      contractor, and non-personnel expense costs that we have available to
+      us each include some portion of the "other funding."  We can't just
+      use the values the user gave us.
+
+      Instead, we compute how much of the absolute total cost each of those
+      cost categories contribute.  Then we use those percentages to
+      distribute the Medicaid share across the cost categories.  Here's
+      an example:
+
+      User Input:
+        State personnel:  $400
+        Contractors:      $500
+        Non-personnel:    $100
+        Other funding:    $200
+        Cost allocation:  90/10
+      
+      Computed:
+        Absolute total:   $1000:  sum of all costs
+        Medicaid share:    $800:  Absolute total - other funding
+        Federal share:     $720:  90% of Medicaid share
+          State personnel: $288:  40% of federal share
+          Contractors:     $360:  50% of federal share
+          Non-personnel:    $72:  10% of federal share
+        State share:        $80:  10% of Medicaid share
+          State personnel:  $32:  40% of state share
+          Contractors:      $40:  50% of state share
+          Non-personnel:     $8:  10% of state share
+  */
+
+  return {
+    fedShare,
+    stateShare,
+    medicaidShare
+  };
+};
+
+/**
+ * Record these costs for each FFY of the activity. These are used in
+ * the cost allocation display, so the user can see at an activity
+ * level their total costs and cost distributions.
+ * @param {Object} budget The existing budget
+ * @param {String} activityKey The activity key
+ * @param {Integer} year The FFY
+ * @param {Integer} totalCost the total cost of the activity
+ * @param {Object} costSharing an object of fedShare and stateShare
+ * @params {Integer} totalMedicaidShare the total medicaid share of the activity
+ * @returns the updated costsByFFY
+ */
+export const calculateCostsByFFY = ({
+  budget,
+  activityKey,
+  year,
+  totalCost,
+  costShares,
+  totalMedicaidShare
+}) => {
+  const { costsByFFY } = budget.activities[activityKey];
+  return {
+    ...costsByFFY,
+    [year]: {
+      federal: costShares.fedShare,
+      medicaidShare: totalMedicaidShare,
+      state: costShares.stateShare,
+      total: totalCost
+    },
+    total: {
+      federal: costsByFFY.total.federal + costShares.fedShare,
+      medicaidShare: costsByFFY.total.medicaidShare + totalMedicaidShare,
+      state: costsByFFY.total.state + costShares.stateShare,
+      total: costsByFFY.total.total + totalCost
+    }
+  };
+};
+
 export const updateBudget = apd => {
   // Clone the incoming state, so we don't accidentally change anything.
   const {
@@ -406,7 +611,7 @@ export const updateBudget = apd => {
       activities,
       keyStatePersonnel: { keyPersonnel }
     }
-  } = JSON.parse(JSON.stringify(apd));
+  } = deepCopy(apd);
 
   // Create a default budget object.  This essentially guarantees
   // that all of the properties and stuff will exist, so we don't have
@@ -438,14 +643,7 @@ export const updateBudget = apd => {
     // We need to sum up the total cost of each cost category per
     // fiscal year for the activity as well, so let's make an object
     // for tracking that and go ahead and push it into the budget data.
-    let activityTotals = defaultActivityTotals(
-      activity.id,
-      activity.name,
-      activity.fundingSource,
-      years
-    );
-
-    newBudget.activityTotals.push(activityTotals);
+    let activityTotals = calculateActivityTotals(activity, years);
 
     // For each activity, we need to independently track the
     // total cost for each category, per fiscal year.  This isn't
@@ -454,11 +652,11 @@ export const updateBudget = apd => {
     // but the object structure is different.  Rather than munge
     // that object into this shape later, we'll just capture both
     // at the same time.  That's more straightforward.
-    let activityTotalByCategory = arrToObj(years, () => ({
-      contractors: 0,
-      expenses: 0,
-      statePersonnel: 0
-    }));
+    const activityTotalByCategory = calculateActivityTotalByCategory(
+      activity,
+      years
+    );
+    console.log({ fundingSource, activityTotalByCategory });
 
     // First compute the total of each cost category both within
     // fiscal years and across them, for all cost categories.  We
@@ -466,86 +664,12 @@ export const updateBudget = apd => {
     // each cost category contributes to the total cost, further down.
     // While we're here, also compute the cost category totals
     // per activity.  The data is structured differently than the
-    // "activityTotalByCategory" and it seems cleaner to just
-    // do them simultaneously than to munge one object into the
-    // other after the fact.
-    activity.contractorResources.forEach(contractor => {
-      Object.entries(contractor.years).forEach(([year, cost]) => {
-        const prop = 'contractors';
-        const {
-          updatedBudget,
-          updatedActivityTotalByCategory,
-          updatedActivityTotals
-        } = addActivityTotalCosts({
-          budget: newBudget,
-          activityTotals,
-          activityTotalByCategory,
-          fundingSource,
-          year,
-          prop,
-          cost
-        });
-
-        newBudget = updatedBudget;
-        activityTotalByCategory = updatedActivityTotalByCategory;
-        activityTotals.data = updatedActivityTotals.data;
-      });
-    });
-
-    activity.expenses.forEach(expense => {
-      Object.entries(expense.years).forEach(([year, cost]) => {
-        const prop = 'expenses';
-        const {
-          updatedBudget,
-          updatedActivityTotalByCategory,
-          updatedActivityTotals
-        } = addActivityTotalCosts({
-          budget: newBudget,
-          activityTotals,
-          activityTotalByCategory,
-          fundingSource,
-          year,
-          prop,
-          cost
-        });
-
-        newBudget = updatedBudget;
-        activityTotalByCategory = updatedActivityTotalByCategory;
-        activityTotals.data = updatedActivityTotals.data;
-      });
-    });
-
-    activity.statePersonnel.forEach(person => {
-      Object.entries(person.years).forEach(([year, { amt, perc }]) => {
-        const cost = convertToNumber(amt) * convertToNumber(perc);
-        const prop = 'statePersonnel';
-
-        const {
-          updatedBudget,
-          updatedActivityTotalByCategory,
-          updatedActivityTotals
-        } = addActivityTotalCosts({
-          budget: newBudget,
-          activityTotals,
-          activityTotalByCategory,
-          fundingSource,
-          year,
-          prop,
-          cost
-        });
-
-        newBudget = updatedBudget;
-        activityTotalByCategory = updatedActivityTotalByCategory;
-        activityTotals.data = updatedActivityTotals.data;
-      });
-    });
-
-    // Converts an array where the values correspond to contractors,
-    // expenses, and state personnel values, respectively.
-    const costShareReducer = (acc, value, i) => ({
-      ...acc,
-      [['contractors', 'expenses', 'statePersonnel'][i]]: value
-    });
+    // "activityTotalByCategory".
+    newBudget = calculateTotalCostsByCategory(
+      newBudget,
+      activity,
+      fundingSource
+    );
 
     // Now loop back over the years and compute state and federal shares
     // of all the costs.
@@ -553,7 +677,6 @@ export const updateBudget = apd => {
       const totalOtherFunding = convertToNumber(allocation[year].other);
       const totalCost = activityTotals.data.combined[year];
       const totalMedicaidShare = totalCost - totalOtherFunding;
-      const activityCostByFFY = newBudget.activities[activity.key].costsByFFY;
 
       // This is the Medicaid total share broken into state and federal shares
       const costShares = getAllocation(activity, year, totalMedicaidShare);
@@ -561,90 +684,38 @@ export const updateBudget = apd => {
       // This represents the percentage each cost category contributes to the
       // total activity cost.  This is useful for distributing the total
       // in a way that we get whole numbers and preserve sums.
-      const costCategoryPercentages = [
-        activityTotals.data.contractors[year] / totalCost || 0,
-        activityTotals.data.expenses[year] / totalCost || 0,
-        activityTotals.data.statePersonnel[year] / totalCost || 0
-      ];
-
-      // Calculate how much of the activity's other funding for the current
-      // federal fiscal year is applied to each cost category.
-      activityTotals.data.otherFunding[year].total = totalOtherFunding;
-      const otherFunderPerCostCategory = roundedPercents(
-        totalOtherFunding,
-        costCategoryPercentages
+      const costCategoryPercentages = calculateCostCategoryPercentages(
+        activityTotals,
+        year
       );
-      [
-        activityTotals.data.otherFunding[year].contractors,
-        activityTotals.data.otherFunding[year].expenses,
-        activityTotals.data.otherFunding[year].statePersonnel
-      ] = otherFunderPerCostCategory;
+
+      // Add the other funding amounts for the activity and year
+      activityTotals = calculateOtherFundingByYear(
+        activityTotals,
+        totalOtherFunding,
+        costCategoryPercentages,
+        year
+      );
 
       // Compute the state and federal share for each cost category, based on
       // the federal and state shares and the percentages calculated above.
-      const fedShare = roundedPercents(
-        costShares.fedShare,
-        costCategoryPercentages
-      ).reduce(costShareReducer, {});
-      const stateShare = roundedPercents(
-        costShares.stateShare,
-        costCategoryPercentages
-      ).reduce(costShareReducer, {});
-      const medicaidShare = roundedPercents(
+      const { fedShare, stateShare, medicaidShare } = calculatePayeeShares(
+        costShares,
         totalMedicaidShare,
         costCategoryPercentages
-      ).reduce(costShareReducer, {});
-
-      /* ☝  What is that all about?
-           We need to display the "Medicaid share" of all of these costs, broken
-           down by state and federal share.  The Medicaid share is the total cost
-           minus any "other funding" that the user entered into the cost
-           allocation section.  The federal and state shares are dictated by which
-           allocation the user selected - 90/10, 75/25, or 50/50 (federal/state).
-  
-           When the user is inputting data, the activity costs they enter combine
-           to create the absolute total cost.  Thus, the state personnel,
-           contractor, and non-personnel expense costs that we have available to
-           us each include some portion of the "other funding."  We can't just
-           use the values the user gave us.
-  
-           Instead, we compute how much of the absolute total cost each of those
-           cost categories contribute.  Then we use those percentages to
-           distribute the Medicaid share across the cost categories.  Here's
-           an example:
-  
-           User Input:
-              State personnel:  $400
-              Contractors:      $500
-              Non-personnel:    $100
-              Other funding:    $200
-              Cost allocation:  90/10
-            
-            Computed:
-              Absolute total:   $1000:  sum of all costs
-              Medicaid share:    $800:  Absolute total - other funding
-              Federal share:     $720:  90% of Medicaid share
-                State personnel: $288:  40% of federal share
-                Contractors:     $360:  50% of federal share
-                Non-personnel:    $72:  10% of federal share
-              State share:        $80:  10% of Medicaid share
-                State personnel:  $32:  40% of state share
-                Contractors:      $40:  50% of state share
-                Non-personnel:     $8:  10% of state share
-        */
+      );
 
       // Record these costs for each FFY of the activity. These are used in
       // the cost allocation display, so the user can see at an activity
       // level their total costs and cost distributions.
-      activityCostByFFY[year].total = totalCost;
-      activityCostByFFY[year].federal = costShares.fedShare;
-      activityCostByFFY[year].state = costShares.stateShare;
-      activityCostByFFY[year].medicaidShare = totalMedicaidShare;
-
-      activityCostByFFY.total.total += totalCost;
-      activityCostByFFY.total.federal += costShares.fedShare;
-      activityCostByFFY.total.state += costShares.stateShare;
-      activityCostByFFY.total.medicaidShare += totalMedicaidShare;
+      newBudget.activities[activity.key].costsByFFY = calculateCostsByFFY({
+        budget: newBudget,
+        activityKey: activity.key,
+        year,
+        totalCost,
+        costShares,
+        totalMedicaidShare
+      });
 
       /**
        * Update the running totals for the various cost categories, subtotals,
@@ -816,6 +887,9 @@ export const updateBudget = apd => {
         });
       });
     });
+
+    // Add the updated activity totals for the activity to the budget
+    newBudget.activityTotals.push(activityTotals);
   });
 
   const roundProps = o => {
