@@ -46,6 +46,13 @@ const MilestoneForm = forwardRef(
 
     return (
       <form index={index} onSubmit={onSubmit}>
+        {/* Prevent implicit submission of the form. */}
+        <button
+          type="submit"
+          disabled
+          style={{ display: 'none' }}
+          aria-hidden="true"
+        />
         <h6 className="ds-h4">Milestone {index + 1}:</h6>
         <Controller
           control={control}
