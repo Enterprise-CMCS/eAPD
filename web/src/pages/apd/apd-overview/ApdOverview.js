@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../../../components/DeleteModal';
@@ -22,7 +22,9 @@ import RichText from '../../../components/RichText';
 import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
+
 import { selectSummary } from '../../../redux/selectors/apd.selectors';
+import { getAllFundingSources } from '../../../redux/selectors/activities.selectors';
 
 const ApdOverview = ({
   addApdYear,
@@ -38,22 +40,35 @@ const ApdOverview = ({
   setName,
   setOverview,
   years,
-  yearOptions
+  yearOptions,
+  fundingSources,
+  adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
 
   const {
     control,
     formState: { errors },
-    setValue
+    setValue,
+    trigger
   } = useForm({
     defaultValues: {
-      programOverview
+      fundingSources,
+      programOverview,
+      narrativeHIT,
+      narrativeHIE,
+      narrativeMMIS
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: joiResolver(apdOverviewSchema)
   });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const changeName = ({ target: { value } }) => {
     setName(value);
@@ -90,13 +105,24 @@ const ApdOverview = ({
     }
   };
 
-  const syncRichText = action => html => {
-    action(html);
-  };
-
   const handleProgramOverview = html => {
     setOverview(html);
     setValue('programOverview', html);
+  };
+
+  const handleHIEOverview = html => {
+    setHIE(html);
+    setValue('narrativeHIE', html);
+  };
+
+  const handleHITOverview = html => {
+    setHIT(html);
+    setValue('narrativeHIT', html);
+  };
+
+  const handleMMISOverview = html => {
+    setMMIS(html);
+    setValue('narrativeMMIS', html);
   };
 
   const yearChoices = yearOptions.map(year => ({
@@ -168,11 +194,19 @@ const ApdOverview = ({
           labelFor="hit-overview-field"
           source="apd.hit.instruction"
         />
-        <RichText
-          id="hit-overview-field"
-          content={narrativeHIT}
-          onSync={syncRichText(setHIT)}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="narrativeHIT"
+          control={control}
+          render={({ field: { ...props } }) => (
+            <RichText
+              {...props}
+              id="hit-overview-field"
+              content={narrativeHIT}
+              onSync={handleHITOverview}
+              editorClassName="rte-textarea-l"
+              error={errors?.narrativeHIT?.message}
+            />
+          )}
         />
       </div>
       <div className="ds-u-margin-bottom--3">
@@ -180,11 +214,19 @@ const ApdOverview = ({
           labelFor="hie-overview-field"
           source="apd.hie.instruction"
         />
-        <RichText
-          id="hie-overview-field"
-          content={narrativeHIE}
-          onSync={syncRichText(setHIE)}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="narrativeHIE"
+          control={control}
+          render={({ field: { ...props } }) => (
+            <RichText
+              {...props}
+              id="hie-overview-field"
+              content={narrativeHIE}
+              onSync={handleHIEOverview}
+              editorClassName="rte-textarea-l"
+              error={errors?.narrativeHIE?.message}
+            />
+          )}
         />
       </div>
       <div>
@@ -192,11 +234,19 @@ const ApdOverview = ({
           labelFor="mmis-overview-field"
           source="apd.mmis.instruction"
         />
-        <RichText
-          id="mmis-overview-field"
-          content={narrativeMMIS}
-          onSync={syncRichText(setMMIS)}
-          editorClassName="rte-textarea-l"
+        <Controller
+          name="narrativeMMIS"
+          control={control}
+          render={({ field: { ...props } }) => (
+            <RichText
+              {...props}
+              id="mmis-overview-field"
+              content={narrativeMMIS}
+              onSync={handleMMISOverview}
+              editorClassName="rte-textarea-l"
+              error={errors?.narrativeMMIS?.message}
+            />
+          )}
         />
       </div>
       {elementDeleteFFY && (
@@ -220,10 +270,21 @@ ApdOverview.propTypes = {
   setName: PropTypes.func.isRequired,
   setOverview: PropTypes.func.isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
-  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired
+  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  fundingSources: PropTypes.array,
+  adminCheck: PropTypes.bool
 };
 
-const mapStateToProps = selectSummary;
+ApdOverview.defaultProps = {
+  fundingSources: ['HIT'],
+  adminCheck: false
+};
+
+const mapStateToProps = state => ({
+  fundingSources: getAllFundingSources(state),
+  adminCheck: state.apd.adminCheck,
+  ...selectSummary(state)
+});
 
 const mapDispatchToProps = {
   addApdYear: addYear,
