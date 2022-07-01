@@ -210,6 +210,32 @@ describe(
         cy.wait('@submitForm', { timeout: 30000 });
 
         cy.contains(userData[0].name).should('be.visible');
+
+        cy.intercept('GET', `${Cypress.env('API')}/auth/certifications`).as(
+          'loadCertifications'
+        );
+        cy.intercept('DELETE', `${Cypress.env('API')}/auth/certifications`).as(
+          'deleteCertification'
+        );
+
+        cy.visit('/');
+        cy.wait('@loadCertifications');
+
+        cy.findByRole('heading', { name: /Federal Administrator Portal/i });
+
+        cy.fixture('users').then(userData => {
+          cy.contains(userData[0].name)
+            .parent('tr')
+            .within(() => {
+              // all searches are automatically rooted to the found tr element
+              cy.get('td').eq(6).contains('button', 'Delete').click();
+            });
+
+          cy.get('#react-aria-modal-dialog').within(() => {
+            cy.contains('Delete Certification?').should('be.visible');
+            cy.get('button').contains('Delete').click({ force: true });
+          });
+        });
       });
     });
   }
