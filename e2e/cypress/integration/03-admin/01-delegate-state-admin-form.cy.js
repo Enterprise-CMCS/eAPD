@@ -156,5 +156,61 @@ describe(
         });
       });
     });
+
+    it('allows a letter previously deleted to be added again', () => {
+      cy.intercept(
+        'POST',
+        `${Cypress.env('API')}/auth/certifications/files`
+      ).as('uploadFile');
+
+      cy.intercept('POST', `${Cypress.env('API')}/auth/certifications`).as(
+        'submitForm'
+      );
+
+      // Check that submit button starts disabled
+      cy.findByRole('button', { name: 'Add State Admin Letter' }).should(
+        'be.disabled'
+      );
+
+      cy.get('input[type=radio]').first().check({ force: true });
+
+      cy.fixture('users').then(userData => {
+        getInputByLabel(
+          'Name of State employee to be delegated as eAPD State Adminstrator'
+        ).type(userData[0].name);
+        cy.get('select').select('Maryland');
+        getInputByLabel('State employee email address').type(userData[0].email);
+        getInputByLabel('State employee phone number').type(userData[0].phone);
+
+        cy.fixture('test.pdf', 'binary')
+          .then(Cypress.Blob.binaryStringToBlob)
+          .then(fileContent => {
+            const file = new File([fileContent], 'test.pdf', {
+              type: 'application/pdf'
+            });
+
+            cy.get('#file-input').trigger('drop', {
+              dataTransfer: {
+                files: [file]
+              }
+            });
+          });
+
+        cy.wait('@uploadFile', { timeout: 30000 });
+
+        cy.get('[alt="PDF document icon"]').should('be.visible');
+        cy.get('a').contains('test.pdf').should('be.visible');
+
+        // When filled out form submit button should be enabled
+        cy.get('button')
+          .contains('Add State Admin Letter')
+          .should('not.be.disabled');
+
+        cy.contains('Add State Admin Letter').click();
+        cy.wait('@submitForm', { timeout: 30000 });
+
+        cy.contains(userData[0].name).should('be.visible');
+      });
+    });
   }
 );
