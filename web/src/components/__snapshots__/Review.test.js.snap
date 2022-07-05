@@ -10,10 +10,8 @@ exports[`Review wrapper component renders properly if a delete handler is provid
         <Button
           aria-label="Delete"
           className="ds-u-color--error"
-          component="button"
           onClick={[Function]}
           size="small"
-          type="button"
           variation="transparent"
         >
           Delete
@@ -21,7 +19,6 @@ exports[`Review wrapper component renders properly if a delete handler is provid
       </React.Fragment>
     </div>
   }
-  editText="Edit"
   headingLevel="3"
 >
   Hello
@@ -36,17 +33,14 @@ exports[`Review wrapper component renders properly if an edit handler is supplie
     >
       <Button
         aria-label="Edit"
-        component="button"
         onClick={[Function]}
         size="small"
-        type="button"
         variation="transparent"
       >
         Edit
       </Button>
     </div>
   }
-  editText="Edit"
   headingLevel="3"
 >
   Hello
@@ -60,7 +54,6 @@ exports[`Review wrapper component renders properly if only the required props ar
       className="nowrap visibility--screen ds-u-margin-top--2"
     />
   }
-  editText="Edit"
   headingLevel="3"
 >
   Hello
@@ -74,7 +67,6 @@ exports[`Review wrapper component renders properly if the edit link and edit han
       className="nowrap visibility--screen ds-u-margin-top--2"
     />
   }
-  editText="Edit"
   headingLevel="3"
 >
   Hello
@@ -89,10 +81,8 @@ exports[`Review wrapper component renders properly if the edit link is set 1`] =
     >
       <Button
         aria-label="Edit"
-        component="button"
         onClick={[Function]}
         size="small"
-        type="button"
         variation="transparent"
       >
         <Link
@@ -103,7 +93,6 @@ exports[`Review wrapper component renders properly if the edit link is set 1`] =
       </Button>
     </div>
   }
-  editText="Edit"
   headingLevel="3"
 >
   Hello

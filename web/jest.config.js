@@ -1,5 +1,5 @@
 module.exports = {
-  coverageDirectory: '../coverage',
+  coverageDirectory: '../coverage/',
   rootDir: 'src',
   setupFiles: ['../polyfills.test.js', '../setup.enzyme.test.js'],
   setupFilesAfterEnv: ['../setup.rtl.test.js'],
@@ -12,9 +12,42 @@ module.exports = {
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
     '\\.[jt]sx?$': 'babel-jest',
+    '\\.[jt]s?$': 'babel-jest',
     '\\.yaml$': 'yaml-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
-  transformIgnorePatterns: ['node_modules/(?!(d3-format|d3-geo|d3-array)/)'],
-  moduleFileExtensions: ['js', 'yaml']
+  transformIgnorePatterns: [
+    'node_modules/(?!(d3-format|d3-geo|d3-array)/)',
+    '\\.cy\\.js$'
+  ],
+  moduleFileExtensions: ['js', 'yaml'],
+  collectCoverageFrom: [
+    '**/*.{js,jsx}',
+    '!**/*.story.{js,jsx}',
+    '!**/*.stories.{js,jsx}',
+    '!**/*.test.{js,jsx}',
+    '!**/*.cy.{js,jsx}',
+    '!**/node_modules/**',
+    '!**/__snapshots__/**',
+    '!**/shared/**',
+    '!**/fixtures/**',
+    '!**/i18n/**',
+    '!**/lazy/**',
+    '!**/shared/**',
+    '!**/static/**',
+    '!**/file-loader.js',
+    '!**/app.dev.js',
+    '!**/app.js',
+    '!**/constants.js',
+    '!**/components/EnableCookies.js',
+    '!**/util/analytics.js',
+    '!**/util/oktaAuth.js'
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 74,
+      functions: 80,
+      lines: 80
+    }
+  }
 };

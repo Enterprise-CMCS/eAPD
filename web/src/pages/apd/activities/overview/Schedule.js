@@ -15,13 +15,13 @@ import { stateDateToDisplay } from '../../../../util';
 
 import scheduleSchema from '@cms-eapd/common/schemas/plannedActivityShedule';
 
-const Schedule = ({ 
-    activity,
-    activityIndex,
-    setEndDate,
-    setStartDate,
-    adminCheck
-  }) => {
+const Schedule = ({
+  activity,
+  activityIndex,
+  setEndDate,
+  setStartDate,
+  adminCheck
+}) => {
   Schedule.displayName = 'Schedule';
 
   const { plannedStartDate, plannedEndDate } = activity;
@@ -42,7 +42,7 @@ const Schedule = ({
     if (adminCheck) {
       trigger(['start']);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const triggerDates = () => {
     if (adminCheck && plannedEndDate) {
