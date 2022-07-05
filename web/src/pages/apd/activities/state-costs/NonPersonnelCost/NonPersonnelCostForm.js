@@ -36,6 +36,7 @@ const NonPersonnelCostForm = forwardRef(
     });
 
     const onSubmit = e => {
+      console.log('onSubmit called', e);
       e.preventDefault();
       saveNonPersonnelCost(activityIndex, index, {
         ...item,
@@ -58,6 +59,13 @@ const NonPersonnelCostForm = forwardRef(
     categories.unshift({ label: 'Select an option', value: '' });
     return (
       <form index={index} onSubmit={onSubmit}>
+        {/* Prevent implicit submission of the form. */}
+        <button
+          type="submit"
+          disabled
+          style={{ display: 'none' }}
+          aria-hidden="true"
+        />
         <h6 className="ds-h4">Non-Personnel Cost {index + 1}:</h6>
         {/* eslint-disable jsx-a11y/no-autofocus */}
         <Controller

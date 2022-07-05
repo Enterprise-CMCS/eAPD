@@ -83,6 +83,13 @@ const ContractorResourceForm = forwardRef(
 
     return (
       <form index={index} onSubmit={onSubmit} aria-label="form">
+        {/* Prevent implicit submission of the form. */}
+        <button
+          type="submit"
+          disabled
+          style={{ display: 'none' }}
+          aria-hidden="true"
+        />
         <Controller
           name="name"
           control={control}

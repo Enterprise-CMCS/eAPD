@@ -203,4 +203,22 @@ describe('NumberField component', () => {
     fireEvent.blur(input);
     expect(defaultProps.onChange).not.toHaveBeenCalled();
   });
+
+  it('does not alter the input when entering zero then a decimal', async () => {
+    const { input, user } = setup({ value: null });
+    await user.type(input, '0.');
+    expect(input.value).toEqual('0.');
+  });
+
+  it('does not alter the input when entering a 1/10th decimal', async () => {
+    const { input, user } = setup({ value: null });
+    await user.type(input, '0.0');
+    expect(input.value).toEqual('0.0');
+  });
+
+  it('does not alter the input when entering a 1/100th decimal', async () => {
+    const { input, user } = setup({ value: null });
+    await user.type(input, '0.00');
+    expect(input.value).toEqual('0.00');
+  });
 });
