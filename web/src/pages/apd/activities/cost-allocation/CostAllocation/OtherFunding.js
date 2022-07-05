@@ -25,18 +25,22 @@ import RichText from '../../../../../components/RichText';
 
 import Joi from 'joi';
 
-const otherCostsSchema = Joi.object().pattern(
-  /\d{4}/,
-  Joi.object({
-    otherCosts: Joi.number().positive().allow(0).required().messages({
-      'number.base': 'Provide an other funding amount greater than or equal to $0.',
-      'number.positive': 'Provide an other funding amount greater than or equal to $0.',
-      'number.allow': 'Provide an other funding amount greater than or equal to $0.',
-      'number.empty': 'Provide an other funding amount greater than or equal to $0.',
-      'number.format': 'Provide an other funding amount greater than or equal to $0.'
+const otherSourcesSchema = Joi.object().pattern(
+    /\d{4}/,
+    Joi.object({
+      other: Joi.number().positive().allow(0).required().messages({
+        'number.base':
+          'Provide a number of hours greater than or equal to 0.',
+        'number.positive':
+          'Provide a number of hours greater than or equal to 0.',
+        'number.allow':
+          'Provide a number of hours greater than or equal to 0.',
+        'number.empty':
+          'Provide a number of hours greater than or equal to 0.',
+        'number.format': 'Provide a valid number of hours.'
+      })
     })
-  })
-);
+  )
 
 const OtherFunding = ({
   activityIndex,
@@ -53,28 +57,29 @@ const OtherFunding = ({
   const {
     control,
     trigger,
-    setValue,
-    formState: { errors }
+    formState: { errors, isValid, isValidating }
   } = useForm({
     defaultValues: {
-      ...costAllocationNarrative
+      costAllocation,
+      costAllocationNarrative
     },
-    resolver: joiResolver(otherCostsSchema)
-  })
+    resolver: joiResolver(otherSourcesSchema)
+  });
 
-  useEffect(() => {
-    if (adminCheck) {
-      trigger();
-    };
-
-    console.log({errors})
-  }, [adminCheck]);
-
+  
   const setOther = year => e => {
     setOtherFunding(activityIndex, year, e.target.value);
   };
   const syncOther = year => html => syncOtherFunding(activityIndex, year, html);
 
+  useEffect(() => {
+    if (adminCheck) {
+      trigger([costAllocation]);
+      console.log({errors})
+      console.log(costAllocation)
+    };
+  }, [])
+  
   return (
     <Fragment>
       <h2 className="ds-u-margin-bottom--0">
@@ -94,27 +99,11 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
-            <Controller
-              key={`${ffy}-otherSources`}
-              name={`years[${ffy}].otherSources`}
-              control={control}
-              render={({
-                field: { onChange: syncOther, ...props }
-              }) => (
-                <RichText
-                  {...props}
-                  id={`cost-allocation-narrative-${ffy}-other-sources-field`}
-                  content={costAllocationNarrative.years[ffy].otherSources}
-                  onSync={html => {
-                    syncOther(ffy)
-
-                    if (adminCheck) {
-                      trigger();
-                    }
-                  }}
-                  editorClassName="rte-textarea-l"
-                />
-              )}
+            <RichText
+              id={`cost-allocation-narrative-${ffy}-other-sources-field`}
+              content={costAllocationNarrative.years[ffy].otherSources}
+              onSync={syncOther(ffy)}
+              editorClassName="rte-textarea-l"
             />
           </div>
 
@@ -126,12 +115,29 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
-            <DollarField
-              name={`ffy-${ffy}`}
-              label={`FFY ${ffy}`}
-              labelClassName="sr-only"
+            <Controller
+              name={`${ffy}.other`}
+              control={control}
               value={costAllocation[ffy].other || '0'}
-              onChange={setOther(ffy)}
+              render={({ 
+                field: { onChange, value, ...props }
+              }) => (
+                <DollarField
+                  {...props}
+                  label={`FFY ${ffy}`}
+                  labelClassName="sr-only"
+                  onChange={e => {
+                    setOtherFunding(activityIndex, ffy, value);;
+                    onChange(e);
+
+                    if (adminCheck) {
+                      trigger();
+                      console.log({errors})
+                      console.log({value})
+                    }
+                  }}
+                />
+              )}
             />
           </div>
 
