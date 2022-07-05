@@ -231,7 +231,7 @@ const AdminCheckPanel = ({
                           key={key}
                           heading={
                             <Fragment key={key}>
-                              <div class="ds-u-display--flex ds-u-flex-direction--column">
+                              <div className="ds-u-display--flex ds-u-flex-direction--column">
                                 <h3 className="ds-u-margin--0">
                                   {metadata.todo[key].name}:{' '}
                                   <span className="ds-u-font-weight--normal">
