@@ -118,24 +118,26 @@ const OtherFunding = ({
             <Controller
               name={`${ffy}.other`}
               control={control}
-              value={costAllocation[ffy].other || '0'}
               render={({ 
                 field: { onChange, value, ...props }
               }) => (
                 <DollarField
                   {...props}
+                  value={costAllocation[ffy].other || '0'}
                   label={`FFY ${ffy}`}
                   labelClassName="sr-only"
                   onChange={e => {
-                    setOtherFunding(activityIndex, ffy, value);;
+                    setOtherFunding(activityIndex, ffy, e.target.value);;
                     onChange(e);
 
                     if (adminCheck) {
                       trigger();
                       console.log({errors})
                       console.log({value})
+                      console.log(errors?.ffy?.other?.message)
                     }
                   }}
+                  error={errors?.ffy && errors?.ffy?.other?.message}
                 />
               )}
             />
