@@ -268,3 +268,9 @@ export const selectActivityTotalForBudgetByActivityIndex = (
   { budget },
   { activityIndex }
 ) => budget.activityTotals[activityIndex] || null;
+
+export const getAllFundingSources = state => {
+  return state.apd.data.activities.map(activity => {
+    return activity.fundingSource;
+  });
+};
