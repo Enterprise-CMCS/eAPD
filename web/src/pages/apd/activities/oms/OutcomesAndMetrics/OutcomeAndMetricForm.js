@@ -124,6 +124,13 @@ const OutcomeAndMetricForm = forwardRef(
         key={`activity${activityIndex}-index${index}-form`}
         onSubmit={onSubmit}
       >
+        {/* Prevent implicit submission of the form. */}
+        <button
+          type="submit"
+          disabled
+          style={{ display: 'none' }}
+          aria-hidden="true"
+        />
         <Controller
           key={`activity${activityIndex}-index${index}`}
           data-cy={`outcome-${index}`}
