@@ -53,6 +53,7 @@ const OtherFunding = ({
 }) => {
   const { costAllocationNarrative } = activity;
   const { years } = costSummary;
+  const yearsArray = Object.keys(years);
 
   const {
     control,
@@ -74,7 +75,7 @@ const OtherFunding = ({
 
   useEffect(() => {
     if (adminCheck) {
-      trigger([costAllocation]);
+      trigger();
       console.log({errors})
       console.log(costAllocation)
     };
@@ -85,7 +86,7 @@ const OtherFunding = ({
       <h2 className="ds-u-margin-bottom--0">
         {titleCase(t('activities.otherFunding.title'))}
       </h2>
-      {Object.keys(years).map(ffy => (
+      {yearsArray.map(ffy => (
         <div key={ffy}>
           <h3 className="heading-ffy ds-u-padding-top--4">
             <span>FFY {ffy}</span>
@@ -119,7 +120,7 @@ const OtherFunding = ({
               name={`${ffy}.other`}
               control={control}
               render={({ 
-                field: { onChange, value, ...props }
+                field: { onChange, ...props }
               }) => (
                 <DollarField
                   {...props}
@@ -133,11 +134,9 @@ const OtherFunding = ({
                     if (adminCheck) {
                       trigger();
                       console.log({errors})
-                      console.log({value})
-                      console.log(errors?.ffy?.other?.message)
+                      console.log(errors.costAllocation[ffy])
                     }
                   }}
-                  error={errors?.ffy && errors?.ffy?.other?.message}
                 />
               )}
             />
