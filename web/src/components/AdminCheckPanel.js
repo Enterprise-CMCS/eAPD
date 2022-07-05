@@ -231,16 +231,18 @@ const AdminCheckPanel = ({
                           key={key}
                           heading={
                             <Fragment key={key}>
-                              <h3 className="ds-u-margin--0">
-                                {metadata.todo[key].name}:{' '}
-                                <span className="ds-u-font-weight--normal">
-                                  {metadata.todo[key].incomplete} field(s) to
-                                  complete
-                                </span>
-                              </h3>
-                              <Link to={metadata.todo[key].link}>
-                                Go to the {metadata.todo[key].name} page.
-                              </Link>
+                              <div class="ds-u-display--flex ds-u-flex-direction--column">
+                                <h3 className="ds-u-margin--0">
+                                  {metadata.todo[key].name}:{' '}
+                                  <span className="ds-u-font-weight--normal">
+                                    {metadata.todo[key].incomplete} field(s) to
+                                    complete
+                                  </span>
+                                </h3>
+                                <Link to={metadata.todo[key].link}>
+                                  Go to the {metadata.todo[key].name} page.
+                                </Link>
+                              </div>
                             </Fragment>
                           }
                           defaultOpen={false}
