@@ -48,6 +48,10 @@ module.exports = defineConfig({
     retries: {
       runMode: 1,
       openMode: 1
+    },
+    setupNodeEvents(on, config) {
+      require('@cypress/code-coverage/task')(on, config);
+      return config;
     }
   },
 
