@@ -1,6 +1,9 @@
 const { defineConfig } = require('cypress'); // eslint-disable-line import/no-extraneous-dependencies
 const webpackConfig = require('../web/webpack.config.dev');
 const setupNodeEvents = require('./cypress/plugins/index');
+const { lighthouse, pa11y, prepareAudit } = require('cypress-audit'); // eslint-disable-line import/no-extraneous-dependencies
+const knex = require('@cms-eapd/api/db/knex');
+const browserify = require('@cypress/browserify-preprocessor'); // eslint-disable-line import/no-extraneous-dependencies
 
 module.exports = defineConfig({
   e2e: {
@@ -51,6 +54,90 @@ module.exports = defineConfig({
     },
     setupNodeEvents(on, config) {
       require('@cypress/code-coverage/task')(on, config);
+
+      on('before:browser:launch', (browser = {}, launchOptions) => {
+        prepareAudit(launchOptions);
+
+        if (browser.name === 'chrome') {
+          launchOptions.args.push('--disable-dev-shm-usage');
+        } else if (browser.name === 'electron') {
+          launchOptions.args['disable-dev-shm-usage'] = true;
+        } else if (browser.family === 'chromium') {
+          launchOptions.args.push('--disable-dev-shm-usage');
+        }
+
+        return launchOptions;
+      });
+
+      on(
+        'file:preprocessor',
+        browserify({
+          parser: '@babel/eslint-parser'
+        })
+      );
+
+      on('task', {
+        'db:resetnorole': () => {
+          return knex('okta_users')
+            .where('login', 'norole')
+            .first()
+            .then(oktaUser => {
+              if (oktaUser) {
+                return knex('auth_affiliations')
+                  .where('user_id', oktaUser.user_id)
+                  .delete()
+                  .then(() => ({ success: true }))
+                  .catch(error => ({ success: false, error }));
+              }
+              return { success: false, error: 'User not found' };
+            })
+            .catch(error => ({ success: false, error }));
+        },
+        'db:resetcertification': ({ email }) => {
+          return knex('state_admin_certifications')
+            .where('email', email)
+            .first()
+            .then(cert => {
+              if (cert) {
+                return knex('state_admin_certifications_audit')
+                  .where('certificationId', cert.id)
+                  .delete()
+                  .then(() => {
+                    return knex('state_admin_certifications')
+                      .where('email', email)
+                      .delete()
+                      .then(() => ({ success: true }))
+                      .catch(error => ({ success: false, error }));
+                  })
+                  .catch(error => ({ success: false, error }));
+              }
+              return { success: false, error: 'no certificate found' };
+            })
+            .catch(error => ({ success: false, error }));
+        },
+        'db:resetcertificationmatch': () => {
+          return knex('state_admin_certifications_audit')
+            .where('certificationId', 1002)
+            .delete()
+            .then(() => {
+              return knex('state_admin_certifications')
+                .where('id', 1002)
+                .update({ affiliationId: null })
+                .then(() => {
+                  return knex('auth_affiliations')
+                    .where('id', 1001)
+                    .update({ role_id: null, status: 'requested' })
+                    .then(() => ({ success: true }))
+                    .catch(error => ({ success: false, error }));
+                })
+                .catch(error => ({ success: false, error }));
+            })
+            .catch(error => ({ success: false, error }));
+        },
+        lighthouse: lighthouse(), // calling the function is important
+        pa11y: pa11y() // calling the function is important
+      });
+
       return config;
     }
   },
