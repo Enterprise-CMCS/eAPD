@@ -34,6 +34,7 @@ const PersonForm = forwardRef(
     const {
       handleSubmit,
       control,
+      trigger,
       formState: { errors, isValid },
       resetField: resetFieldErrors
     } = useForm({
@@ -193,6 +194,7 @@ const PersonForm = forwardRef(
                 handleNameChange(e);
                 onChange(e);
               }}
+              onBlur={e => {trigger("name")}}
               errorMessage={errors?.name?.message}
               errorPlacement="bottom"
             />
@@ -211,6 +213,7 @@ const PersonForm = forwardRef(
                 handleEmailChange(e);
                 onChange(e);
               }}
+              onBlur={e => {trigger("email")}}
               errorMessage={errors?.email?.message}
               errorPlacement="bottom"
             />
@@ -229,6 +232,7 @@ const PersonForm = forwardRef(
                 handlePositionChange(e);
                 onChange(e);
               }}
+              onBlur={e => {trigger("position")}}
               errorMessage={errors?.position?.message}
               errorPlacement="bottom"
             />
