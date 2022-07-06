@@ -248,6 +248,7 @@ const PersonForm = forwardRef(
               label={t(`${tRoot}.labels.hasCosts`)}
               id={`apd-state-profile-hascosts${index}`}
               name={name}
+              onBlur={() => trigger("hasCosts")}
               choices={[
                 {
                   label: 'Yes',
