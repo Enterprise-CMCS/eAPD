@@ -43,7 +43,7 @@ echo "
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
-" > /var/lib/pgsql/data/pg_hba.conf
+" > /var/lib/pgsql/10/data/pg_hba.conf
 systemctl enable postgresql-10
 systemctl start postgresql-10
 
