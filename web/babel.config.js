@@ -9,7 +9,7 @@ const presets = [
   ],
   ['@babel/preset-react']
 ];
-const plugins = [];
+const plugins = ['istanbul'];
 
 module.exports = {
   presets,
