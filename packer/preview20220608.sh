@@ -33,7 +33,7 @@ chmod -R g+w /app
 mkdir /app/tls
 
 # Setup PostGres for Mongo Migraton
-yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+rpm -Uvh https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 yum install -y postgresql10-server
 
 #postgresql-setup initdb
