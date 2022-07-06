@@ -25,7 +25,8 @@ import RichText from '../../../../../components/RichText';
 
 import Joi from 'joi';
 
-const otherSourcesSchema = Joi.object().pattern(
+const otherSourcesSchema = Joi.object({
+  costAllocation: Joi.object().pattern(
     /\d{4}/,
     Joi.object({
       other: Joi.number().positive().allow(0).required().messages({
@@ -41,17 +42,17 @@ const otherSourcesSchema = Joi.object().pattern(
       })
     })
   )
+})
 
 const OtherFunding = ({
   activityIndex,
   activity,
-  costAllocation,
   costSummary,
   setOtherFunding,
   syncOtherFunding,
   adminCheck
 }) => {
-  const { costAllocationNarrative } = activity;
+  const { costAllocationNarrative, costAllocation } = activity;
   const { years } = costSummary;
   const yearsArray = Object.keys(years);
 
@@ -64,6 +65,8 @@ const OtherFunding = ({
       costAllocation,
       costAllocationNarrative
     },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
     resolver: joiResolver(otherSourcesSchema)
   });
 
@@ -77,7 +80,7 @@ const OtherFunding = ({
     if (adminCheck) {
       trigger();
       console.log({errors})
-      console.log(costAllocation)
+      console.log({costAllocation})
     };
   }, [])
   
@@ -117,7 +120,7 @@ const OtherFunding = ({
               }}
             />
             <Controller
-              name={`${ffy}.other`}
+              name={`costAllocation.${ffy}.other`}
               control={control}
               render={({ 
                 field: { onChange, ...props }
@@ -134,9 +137,11 @@ const OtherFunding = ({
                     if (adminCheck) {
                       trigger();
                       console.log({errors})
-                      console.log(errors.costAllocation[ffy])
+                      console.log(errors.costAllocation[ffy].other.message)
                     }
                   }}
+                  errorPlacement="bottom"
+                  errorMessage={errors?.costAllocation && errors?.costAllocation[ffy]?.other?.message}
                 />
               )}
             />
