@@ -45,8 +45,8 @@ const PersonForm = forwardRef(
         costs,
         fte
       },
-      mode: 'all',
-      reValidateMode: 'all',
+      mode: 'onChange',
+      reValidateMode: 'onChange',
       resolver: joiResolver(validationSchema)
     });
 
