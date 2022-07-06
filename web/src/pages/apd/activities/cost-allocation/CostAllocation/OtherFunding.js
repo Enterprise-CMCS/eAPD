@@ -80,7 +80,7 @@ const OtherFunding = ({
     if (adminCheck) {
       trigger();
       console.log({errors})
-      console.log({costAllocation})
+      console.log({costAllocationNarrative})
     };
   }, [])
   
@@ -122,22 +122,21 @@ const OtherFunding = ({
             <Controller
               name={`costAllocation.${ffy}.other`}
               control={control}
+              value={costAllocation[ffy].other || '0'}
               render={({ 
-                field: { onChange, ...props }
+                field: { onChange, value, ...props }
               }) => (
                 <DollarField
                   {...props}
-                  value={costAllocation[ffy].other || '0'}
+                  value={value}
                   label={`FFY ${ffy}`}
                   labelClassName="sr-only"
                   onChange={e => {
-                    setOtherFunding(activityIndex, ffy, e.target.value);;
+                    setOtherFunding(activityIndex, ffy, value);;
                     onChange(e);
 
                     if (adminCheck) {
                       trigger();
-                      console.log({errors})
-                      console.log(errors.costAllocation[ffy].other.message)
                     }
                   }}
                   errorPlacement="bottom"
