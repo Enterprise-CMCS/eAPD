@@ -310,6 +310,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.contains('Provide an email address for the point of contact.').should('exist');
       cy.get('[data-cy="key-person-0__position"]').focus().blur();
       cy.contains('Provide a role for the point of contact.').should('exist');
+      cy.get('input[type="radio"][value="no"]').focus().blur();
+      cy.contains('Indicate whether or not this person has costs.').should('exist');
 
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
