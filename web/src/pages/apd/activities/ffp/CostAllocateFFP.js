@@ -1,6 +1,8 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
@@ -20,6 +22,8 @@ import CostAllocationRows, {
   CostSummaryRows
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
+
+import costAllocationFFPSchema from '@cms-eapd/common/schemas/costAllocationFFP';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -107,9 +111,32 @@ const CostAllocateFFP = ({
   setFundingSplit,
   stateName
 }) => {
+  const {
+    control,
+    formState: { errors, isValid },
+    trigger,
+    getValues,
+    setValue
+  } = useForm({
+    defaultValues: {
+      costAllocation
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(costAllocationFFPSchema)
+  });
+
+  useEffect(() => {
+    trigger();
+    console.log('setting fed-state split', costAllocation);
+    console.log('joi errors:', errors);
+    console.log('joi values', getValues());
+  }, [costAllocation]);
+
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
+    trigger();
   };
 
   const { years } = costSummary;
@@ -229,21 +256,33 @@ const CostAllocateFFP = ({
                     className: 'ds-h4'
                   }}
                 />
-                <Dropdown
-                  name={`ffp-${ffy}`}
-                  label="federal-state split"
-                  labelClassName="sr-only"
-                  options={[
-                    { label: 'Select an option', value: '0-100' },
-                    { label: '90-10', value: '90-10' },
-                    { label: '75-25', value: '75-25' },
-                    { label: '50-50', value: '50-50' }
-                  ]}
-                  value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
-                  onChange={setFederalStateSplit(ffy)}
+                <Controller
+                  name={`costAllocation`}
+                  control={control}
+                  render={({ field: { ...props } }) => (
+                    <Dropdown
+                      {...props}
+                      label="federal-state split"
+                      labelClassName="sr-only"
+                      options={[
+                        { label: 'Select an option', value: '0-100' },
+                        { label: '90-10', value: '90-10' },
+                        { label: '75-25', value: '75-25' },
+                        { label: '50-50', value: '50-50' }
+                      ]}
+                      value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
+                      onChange={setFederalStateSplit(ffy)}
+                      errorMessage={
+                        errors &&
+                        errors.costAllocation &&
+                        errors.costAllocation[`${ffy}`] &&
+                        errors.costAllocation[`${ffy}`].ffp?.federal?.message
+                      }
+                      errorPlacement="bottom"
+                    />
+                  )}
                 />
               </div>
-
               <table
                 className="budget-table activity-budget-table"
                 data-cy="FFPFedStateSplitTable"

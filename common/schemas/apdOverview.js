@@ -1,6 +1,8 @@
 import Joi from 'joi';
 
 const apdOverviewSchema = Joi.object({
+  // Funding sources is not a user input but we use this as a dependency for
+  // conditionally validating the narratives below
   fundingSources: Joi.array().items(Joi.string()).required(),
   programOverview: Joi.string().messages({
     'string.empty': 'Provide a brief introduction to the state program.'
