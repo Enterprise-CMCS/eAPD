@@ -41,7 +41,25 @@ const otherSourcesSchema = Joi.object({
         'number.format': 'Provide a valid number of hours.'
       })
     })
-  )
+  ),
+  costAllocationNarrative: Joi.object({
+    years: Joi.alternatives().conditional('other', {
+      is: Joi.number().greater(0),
+      then: Joi.object().pattern(
+        /\d{4}/,
+        Joi.object({
+          otherSources: Joi.string().trim().min(1).required().messages({
+            'string.base':
+              'Provide a description of other funding.',
+            'string.empty':
+              'Provide a description of other funding.',
+            'string.min':
+              'Provide a description of other funding.'
+          })
+        })
+      )
+    })
+  })
 })
 
 const OtherFunding = ({
@@ -59,7 +77,7 @@ const OtherFunding = ({
   const {
     control,
     trigger,
-    formState: { errors, isValid, isValidating }
+    formState: { errors }
   } = useForm({
     defaultValues: {
       costAllocation,
@@ -70,10 +88,6 @@ const OtherFunding = ({
     resolver: joiResolver(otherSourcesSchema)
   });
 
-  
-  const setOther = year => e => {
-    setOtherFunding(activityIndex, year, e.target.value);
-  };
   const syncOther = year => html => syncOtherFunding(activityIndex, year, html);
 
   useEffect(() => {
