@@ -163,6 +163,13 @@ const PersonForm = forwardRef(
 
     return (
       <form index={index} onSubmit={onSubmit} aria-label="form">
+        {/* Prevent implicit submission of the form. */}
+        <button
+          type="submit"
+          disabled
+          style={{ display: 'none' }}
+          aria-hidden="true"
+        />
         <h4 className="ds-h4">
           {primary
             ? titleCase(t(`${tRoot}.labels.titlePrimary`))
