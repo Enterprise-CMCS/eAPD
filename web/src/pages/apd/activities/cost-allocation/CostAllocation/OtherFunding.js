@@ -117,6 +117,15 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
+            <Controller
+              name={`costAllocationNarration.years.${ffy}.otherSources`}
+              control={control}
+              render={({ 
+                field: onChange, value, ...props 
+              }) => {
+                
+              }}
+            />
             <RichText
               id={`cost-allocation-narrative-${ffy}-other-sources-field`}
               content={costAllocationNarrative.years[ffy].otherSources}
