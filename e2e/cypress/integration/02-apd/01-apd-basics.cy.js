@@ -325,6 +325,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
       cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+      cy.get('[data-cy="key-person-0__name"]').focus().blur();
 
       cy.findByRole('button', { name: /Save/i })
         .should('not.be.disabled')
