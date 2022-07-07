@@ -305,11 +305,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
 
       cy.get('[data-cy="key-person-0__name"]').focus().blur();
-      cy.contains('Name is required').should('exist');
+      cy.contains('Provide a name for the point of contact.').should('exist');
       cy.get('[data-cy="key-person-0__email"]').focus().blur();
-      cy.contains('Email is required').should('exist');
+      cy.contains('Provide an email address for the point of contact.').should('exist');
       cy.get('[data-cy="key-person-0__position"]').focus().blur();
-      cy.contains('Role is required').should('exist');
+      cy.contains('Provide a role for the point of contact.').should('exist');
+      cy.get('input[type="radio"][value="no"]').focus().blur();
+      cy.contains('Indicate whether or not this person has costs.').should('exist');
 
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
@@ -323,6 +325,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
       cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+      cy.get('[data-cy="key-person-0__name"]').focus().blur();
 
       cy.findByRole('button', { name: /Save/i })
         .should('not.be.disabled')
