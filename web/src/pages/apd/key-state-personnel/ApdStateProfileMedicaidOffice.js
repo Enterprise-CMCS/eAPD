@@ -1,6 +1,8 @@
 import { Dropdown, TextField } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
@@ -19,6 +21,8 @@ import { selectKeyStatePersonnel } from '../../../redux/selectors/apd.selectors'
 import { selectState } from '../../../redux/reducers/user';
 import { STATES } from '../../../util';
 
+import keyMedicaidSchema from '../../../../../common/schemas/keyMedicaid';
+
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';
 
@@ -32,15 +36,37 @@ const ApdStateProfile = ({
   setCity,
   setState,
   setZip,
-  keyStatePersonnel
+  keyStatePersonnel,
+  adminCheck
 }) => {
   const { medicaidDirector, medicaidOffice } = keyStatePersonnel;
 
-  const handleChange =
-    action =>
-    ({ target: { value } }) => {
-      action(value);
+  const {
+    control,
+    trigger,
+    formState: { errors }
+  } = useForm ({
+    defaultValues: {
+      medicaidDirector: {
+        name: medicaidDirector.name,
+        email: medicaidDirector.email,
+        phone: medicaidDirector.phone
+      },
+      medicaidOffice: {
+        address1: medicaidOffice.address1,
+        address2: medicaidOffice.address2,
+        city: medicaidOffice.city,
+        zip: medicaidOffice.zip
+      }
+    },
+    resolver: joiResolver(keyMedicaidSchema)
+  });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
     };
+  }, []);
 
   return (
     <Fragment>
@@ -48,23 +74,71 @@ const ApdStateProfile = ({
         <legend className="ds-u-padding-bottom--1">
           {titleCase(t(`${dirTRoot}.title`))}
         </legend>
-        <TextField
-          name="apd-state-profile-mdname"
-          label={t(`${dirTRoot}.labels.name`)}
+        <Controller
+          name={`medicaidDirector.name`}
+          control={control}
           value={medicaidDirector.name}
-          onChange={handleChange(setName)}
+          render={({ field: { onChange, ...props } }) => (
+            <TextField
+              {...props}
+              id="apd-state-profile-mdname"
+              label={t(`${dirTRoot}.labels.name`)}
+              onChange={({ target: { value } }) => {
+                setName(value);
+                onChange(value);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              errorMessage={errors?.medicaidDirector?.name?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
-        <TextField
-          name="apd-state-profile-mdemail"
-          label={t(`${dirTRoot}.labels.email`)}
+        <Controller
+          name={`medicaidDirector.email`}
+          control={control}
           value={medicaidDirector.email}
-          onChange={handleChange(setEmail)}
+          render={({ field: { onChange, ...props } }) => (
+            <TextField
+              {...props}
+              id="apd-state-profile-mdemail"
+              label={t(`${dirTRoot}.labels.email`)}
+              onChange={({ target: { value } }) => {
+                setEmail(value);
+                onChange(value);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              errorMessage={errors?.medicaidDirector?.email?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
-        <TextField
-          name="apd-state-profile-mdphone"
-          label={t(`${dirTRoot}.labels.phone`)}
+        <Controller
+          name={`medicaidDirector.phone`}
+          control={control}
           value={medicaidDirector.phone}
-          onChange={handleChange(setPhone)}
+          render={({ field: { onChange, ...props } }) => (
+            <TextField
+              {...props}
+              id="apd-state-profile-mdphone"
+              label={t(`${dirTRoot}.labels.phone`)}
+              onChange={({ target: { value } }) => {
+                setPhone(value);
+                onChange(value);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              errorMessage={errors?.medicaidDirector?.phone?.message}
+              errorPlacement="bottom"
+              />
+          )}
         />
       </fieldset>
 
@@ -72,34 +146,70 @@ const ApdStateProfile = ({
         <legend className="ds-u-padding-bottom--1">
           {titleCase(t(`${offTRoot}.title`))}
         </legend>
-        <TextField
-          name="apd-state-profile-addr1"
-          label={t(`${offTRoot}.labels.address1`)}
+        <Controller
+          name={`medicaidOffice.address1`}
+          control={control}
           value={medicaidOffice.address1}
-          onChange={handleChange(setAddress1)}
+          render={({ field: { onChange, ...props } }) => (
+            <TextField
+              {...props}
+              id="apd-state-profile-addr1"
+              label={t(`${offTRoot}.labels.address1`)}
+              onChange={({ target: { value } }) => {
+                setAddress1(value);
+                onChange(value);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              errorMessage={errors?.medicaidOffice?.address1?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
         <TextField
-          name="apd-state-profile-addr2"
+          name={`medicaidOffice.address2`}
+          id="apd-state-profile-addr2"
           label={t(`${offTRoot}.labels.address2`)}
           hint="Optional"
           value={medicaidOffice.address2}
-          onChange={handleChange(setAddress2)}
+          onChange={({ target: { value } }) => {
+            setAddress2(value);
+          }}
         />
         <div className="ds-l-row">
-          <TextField
-            name="apd-state-profile-city"
-            label={t(`${offTRoot}.labels.city`)}
+          <Controller
+            name={`medicaidOffice.city`}
+            control={control}
             value={medicaidOffice.city}
-            className="ds-l-col--6"
-            onChange={handleChange(setCity)}
+            render={({ field: { onChange, ...props } }) => (
+              <TextField
+                {...props}
+                label={t(`${offTRoot}.labels.city`)}
+                className="ds-l-col--6"
+                onChange={({ target: { value } }) => {
+                  setCity(value);
+                  onChange(value);
+
+                  if (adminCheck) {
+                    trigger();
+                  }
+                }}
+                errorMessage={errors?.medicaidOffice?.city?.message}
+                errorPlacement="bottom"
+              />
+            )}
           />
           <div className="ds-u-clearfix ds-l-col--6">
             <Dropdown
               id="apd-state-profile-state"
-              name="apd-state-profile-state"
+              name={`medicaidOffice.state`}
               label={t(`${offTRoot}.labels.state`)}
               value={medicaidOffice.state || defaultStateID}
-              onChange={handleChange(setState)}
+              onChange={({ target: { value } }) => {
+                setState(value);
+              }}
               options={STATES.map(({ id, name }) => ({
                 label: name,
                 value: id.toUpperCase()
@@ -107,12 +217,27 @@ const ApdStateProfile = ({
             />
           </div>
         </div>
-        <TextField
-          name="apd-state-profile-zip"
-          label={t(`${offTRoot}.labels.zip`)}
+        <Controller
+          name={`medicaidOffice.zip`}
+          control={control}
           value={medicaidOffice.zip}
-          mask="zip"
-          onChange={handleChange(setZip)}
+          render={({ field: { onChange, ...props } }) => (
+            <TextField
+              {...props}
+              label={t(`${offTRoot}.labels.zip`)}
+              mask="zip"
+              onChange={({ target: { value } }) => {
+                setZip(value);
+                onChange(value);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              errorMessage={errors?.medicaidOffice?.zip?.message}
+              errorPlacement="bottom"
+            />
+          )}
         />
       </fieldset>
     </Fragment>
@@ -133,12 +258,14 @@ ApdStateProfile.propTypes = {
     medicaidDirector: PropTypes.object,
     medicaidOffice: PropTypes.object,
     keyPersonnel: PropTypes.array
-  }).isRequired
+  }).isRequired,
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   defaultStateID: selectState(state).id,
-  keyStatePersonnel: selectKeyStatePersonnel(state)
+  keyStatePersonnel: selectKeyStatePersonnel(state),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
