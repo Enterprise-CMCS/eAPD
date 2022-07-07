@@ -12,7 +12,6 @@ const schemas = Joi.object({
       'Provide a procurement methodology and description of services.',
     'string.empty':
       'Provide a procurement methodology and description of services.',
-
     'string.min':
       'Provide a procurement methodology and description of services.'
   }),

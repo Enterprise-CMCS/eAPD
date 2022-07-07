@@ -29,6 +29,7 @@ const otherSourcesSchema = Joi.object({
   costAllocation: Joi.object().pattern(
     /\d{4}/,
     Joi.object({
+      ffp: Joi.any(),
       other: Joi.number().positive().allow(0).required().messages({
         'number.base':
           'Provide a number of hours greater than or equal to 0.',
@@ -43,9 +44,8 @@ const otherSourcesSchema = Joi.object({
     })
   ),
   costAllocationNarrative: Joi.object({
-    years: Joi.alternatives().conditional('other', {
-      is: Joi.number().greater(0),
-      then: Joi.object().pattern(
+    methodology: Joi.any(),
+    years: Joi.object().pattern(
         /\d{4}/,
         Joi.object({
           otherSources: Joi.string().trim().min(1).required().messages({
@@ -60,7 +60,6 @@ const otherSourcesSchema = Joi.object({
       )
     })
   })
-})
 
 const OtherFunding = ({
   activityIndex,
@@ -88,15 +87,11 @@ const OtherFunding = ({
     resolver: joiResolver(otherSourcesSchema)
   });
 
-  const syncOther = year => html => syncOtherFunding(activityIndex, year, html);
-
   useEffect(() => {
     if (adminCheck) {
       trigger();
-      console.log({errors})
-      console.log({costAllocationNarrative})
     };
-  }, [])
+  }, [adminCheck])
   
   return (
     <Fragment>
@@ -118,20 +113,35 @@ const OtherFunding = ({
               }}
             />
             <Controller
-              name={`costAllocationNarration.years.${ffy}.otherSources`}
+              name={`costAllocationNarrative.years.${ffy}.otherSources`}
               control={control}
-              render={({ 
-                field: onChange, value, ...props 
-              }) => {
-                
-              }}
+              render={({ field: { onChange, ...props } }) => (
+                <RichText
+                  {...props}
+                  id={`cost-allocation-narrative-${ffy}-other-sources-field`}
+                  content={costAllocationNarrative.years[ffy].otherSources}
+                  onSync={html => {
+                    syncOtherFunding(activityIndex, ffy, html);
+                    onChange(html);
+
+                    if (adminCheck) {
+                      trigger();
+                      console.log({errors})
+                    }
+                  }}
+                  editorClassName="rte-textarea-l"
+                />
+              )}
             />
-            <RichText
-              id={`cost-allocation-narrative-${ffy}-other-sources-field`}
-              content={costAllocationNarrative.years[ffy].otherSources}
-              onSync={syncOther(ffy)}
-              editorClassName="rte-textarea-l"
-            />
+            <div>
+              {errors?.costAllocationNarrative && errors?.costAllocationNarrative?.years && (
+              <span
+                className="ds-c-inline-error ds-c-field__error-message"
+                role="alert"
+              >
+              {errors?.costAllocationNarrative?.years[ffy]?.otherSources?.message}
+              </span>)}
+            </div>
           </div>
 
           <div className="data-entry-box ds-u-margin-bottom--5">
@@ -160,6 +170,7 @@ const OtherFunding = ({
 
                     if (adminCheck) {
                       trigger();
+                      console.log({errors})
                     }
                   }}
                   errorPlacement="bottom"
