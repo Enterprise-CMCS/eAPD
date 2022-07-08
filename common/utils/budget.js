@@ -427,11 +427,11 @@ export const calculateActivityTotalByCategories = (
  * @param {Array} years The list of years in the APD
  * @returns {Object} the activity total object
  */
-export const calculateActivityTotals = (activity, years) => {
+export const calculateActivityTotals = (activity = {}, years = []) => {
   let activityTotals = {
-    id: activity.id,
-    name: activity.name,
-    fundingSource: activity.fundingSource,
+    id: activity?.id || '',
+    name: activity?.name || '',
+    fundingSource: activity?.fundingSource || '',
     data: {}
   };
   activityTotals.data = defaultActivityTotalsDataObject(years);

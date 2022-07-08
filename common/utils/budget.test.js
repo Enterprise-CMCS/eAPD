@@ -9,7 +9,8 @@ import {
   updateStatePersonnel,
   getCostFromItemByYear,
   getPropCostType,
-  calculateActivityTotalByCategories
+  calculateActivityTotalByCategories,
+  calculateActivityTotals
 } from './budget';
 
 describe('budget methods', () => {
@@ -1043,6 +1044,45 @@ describe('budget methods', () => {
         },
         'contractors'
       );
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('calculateActivityTotals', () => {
+    test('with default values', () => {
+      const expected = {
+        id: '',
+        name: '',
+        fundingSource: '',
+        data: {
+          combined: { total: 0 },
+          contractors: { total: 0 },
+          expenses: { total: 0 },
+          otherFunding: {},
+          statePersonnel: { total: 0 }
+        }
+      };
+      const actual = calculateActivityTotals();
+      expect(actual).toEqual(expected);
+    });
+    test('with an activity and default years', () => {
+      const expected = {
+        id: '123456',
+        name: 'Program Administration',
+        fundingSource: 'MMIS',
+        data: {
+          combined: { total: 0 },
+          contractors: { total: 0 },
+          expenses: { total: 0 },
+          otherFunding: {},
+          statePersonnel: { total: 0 }
+        }
+      };
+      const actual = calculateActivityTotals({
+        id: '123456',
+        name: 'Program Administration',
+        fundingSource: 'MMIS'
+      });
       expect(actual).toEqual(expected);
     });
   });
