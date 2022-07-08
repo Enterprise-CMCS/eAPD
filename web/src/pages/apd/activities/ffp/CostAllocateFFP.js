@@ -23,7 +23,7 @@ import CostAllocationRows, {
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
 
-import costAllocationFFPSchema from '@cms-eapd/common/schemas/costAllocationFFP';
+import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocateFFP';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -123,20 +123,17 @@ const CostAllocateFFP = ({
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: joiResolver(costAllocationFFPSchema)
+    resolver: joiResolver(costAllocateFFPSchema)
   });
 
   useEffect(() => {
+    setValue('costAllocation', costAllocation);
     trigger();
-    console.log('setting fed-state split', costAllocation);
-    console.log('joi errors:', errors);
-    console.log('joi values', getValues());
   }, [costAllocation]);
 
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
-    trigger();
   };
 
   const { years } = costSummary;
@@ -247,7 +244,6 @@ const CostAllocateFFP = ({
                   </tr>
                 </tbody>
               </table>
-
               <div className="data-entry-box ds-u-margin-bottom--5">
                 <Instruction
                   source="activities.costAllocate.ffp.federalStateSplitInstruction"
@@ -273,10 +269,7 @@ const CostAllocateFFP = ({
                       value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
                       onChange={setFederalStateSplit(ffy)}
                       errorMessage={
-                        errors &&
-                        errors.costAllocation &&
-                        errors.costAllocation[`${ffy}`] &&
-                        errors.costAllocation[`${ffy}`].ffp?.federal?.message
+                        errors.costAllocation?.[ffy]?.ffp?.state?.message
                       }
                       errorPlacement="bottom"
                     />
