@@ -91,7 +91,11 @@ const createUsersToAdd = async (knex, oktaClient) => {
       state_id: 'ak',
       role_id: stateAdminRoleId,
       status: 'approved',
-      username: 'em@il.com'
+      username: 'em@il.com',
+      expires_at: format(
+        new Date(new Date().getFullYear() + 1, '06', '30'),
+        PostgresDateFormat
+      )
     });
     oktaUsers.push(formatOktaUser(regularUser));
   }
