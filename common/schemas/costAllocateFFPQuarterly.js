@@ -10,6 +10,8 @@ const costAllocateFFPQuarterlySchema = Joi.object({
     contractors: Joi.object({
       dollars: Joi.any(),
       percent: Joi.number().min(0).max(1).messages({
+        'number.min':
+          'Update the quarterly percentages so that the subtotal does not exceed 100%.',
         'number.max':
           'Update the quarterly percentages so that the subtotal does not exceed 100%.'
       })
@@ -17,6 +19,8 @@ const costAllocateFFPQuarterlySchema = Joi.object({
     inHouse: Joi.object({
       dollars: Joi.any(),
       percent: Joi.number().min(0).max(1).messages({
+        'number.min':
+          'Update the quarterly percentages so that the subtotal does not exceed 100%.',
         'number.max':
           'Update the quarterly percentages so that the subtotal does not exceed 100%.'
       })

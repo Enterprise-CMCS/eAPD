@@ -33,15 +33,24 @@ const CostAllocateFFPQuarterly = ({
   setInHouseFFP,
   year
 }) => {
-  const [validationError, setValidationError] = useState('');
+  const [validationResults, setValidationResults] = useState();
 
   useEffect(() => {
     const customValidation = async () => {
-      const { values, error } = await costAllocateFFPQuarterlySchema.validate(
-        quarterlyFFP[year]
+      const { error } = await costAllocateFFPQuarterlySchema.validate(
+        quarterlyFFP[year],
+        { abortEarly: false }
       );
-      console.log('error.details', error.details);
-      setValidationError(error ? error.details[0].message : '');
+      if (error) {
+        const errorList = error.details.reduce((obj, error) => {
+          obj[error.path[1]] = error.message;
+          return obj;
+        }, {});
+        setValidationResults(errorList);
+      }
+      if (!error) {
+        setValidationResults({});
+      }
     };
     customValidation();
   }, [quarterlyFFP]);
@@ -121,7 +130,13 @@ const CostAllocateFFPQuarterly = ({
                 )}
               </td>
             ))}
-            <td className="budget-table--number budget-table--subtotal">
+            <td
+              className={`budget-table--number budget-table--subtotal ${
+                validationResults?.inHouse
+                  ? 'ds-u-border--2 ds-u-border--error'
+                  : ''
+              }`}
+            >
               {formatPerc(quarterlyFFP[year].subtotal.inHouse.percent)}
             </td>
           </tr>
@@ -164,7 +179,13 @@ const CostAllocateFFPQuarterly = ({
                 )}
               </td>
             ))}
-            <td className="budget-table--number budget-table--subtotal">
+            <td
+              className={`budget-table--number budget-table--subtotal ${
+                validationResults?.contractors
+                  ? 'ds-u-border--2 ds-u-border--error'
+                  : ''
+              }`}
+            >
               {formatPerc(quarterlyFFP[year].subtotal.contractors.percent)}
             </td>
           </tr>
@@ -207,12 +228,12 @@ const CostAllocateFFPQuarterly = ({
         </tbody>
       </table>
       <div>
-        {validationError && (
+        {validationResults && Object.keys(validationResults).length > 0 && (
           <span
             className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
             role="alert"
           >
-            {validationError}
+            {validationResults?.contractors || validationResults?.inHouse}
           </span>
         )}
       </div>

@@ -113,9 +113,8 @@ const CostAllocateFFP = ({
 }) => {
   const {
     control,
-    formState: { errors, isValid },
+    formState: { errors },
     trigger,
-    getValues,
     setValue
   } = useForm({
     defaultValues: {
