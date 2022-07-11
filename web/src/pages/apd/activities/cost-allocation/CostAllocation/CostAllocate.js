@@ -57,9 +57,11 @@ const CostAllocate = ({
         <Controller
           name="methodology"
           control={control}
-          render={({ field: { onChange, ...props } }) => (
+          render={({ field: { onChange, name, ...props } }) => (
             <RichText
               {...props}
+              name={name}
+              role="methodology"
               id="cost-allocation-methodology-field"
               content={methodology}
               onSync={html => {

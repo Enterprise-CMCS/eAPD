@@ -1,5 +1,9 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import {
+  renderWithConnection,
+  querySelector,
+  screen
+} from 'apd-testing-library';
 
 import {
   plain as CostAllocate,
@@ -8,60 +12,22 @@ import {
 } from './CostAllocate';
 import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
 
-describe('<CostAllocate />', () => {
-  const props = {
-    activityIndex: 1,
-    activity: {
-      key: 'activity key',
-      costAllocationNarrative: {
-        methodology: 'cost allocation',
-        otherSources: 'other funding'
-      }
-    },
-    setMethodology: jest.fn()
-  };
+const initialState = {
+  activityIndex: 1,
+  activity: {
+    key: 'activity key',
+    costAllocationNarrative: {
+      methodology: 'cost allocation'
+    }
+  },
+  setMethodology: jest.fn()
+};
 
-  beforeEach(() => {
-    props.setMethodology.mockClear();
-  });
+const setup = (props = {}, options = {}) => renderWithConnection(<setCostAllocationMethodology {...props} />, options);
 
-  test('renders correctly', () => {
-    const component = shallow(<CostAllocate {...props} />);
-    expect(component).toMatchSnapshot();
-  });
-
-  test('updates activity when text is changed', () => {
-    const component = shallow(<CostAllocate {...props} />);
-
-    component
-      .find('Connect(RichText)')
-      .filterWhere(n => n.props().content === 'cost allocation')
-      .prop('onSync')('bloop');
-    expect(props.setMethodology).toHaveBeenCalledWith(1, 'bloop');
-  });
-
-  test('maps redux state to component props', () => {
-    const state = {
-      apd: {
-        data: {
-          activities: [
-            {
-              key: 'activity key'
-            }
-          ]
-        }
-      }
-    };
-    expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
-      activity: {
-        key: 'activity key'
-      }
-    });
-  });
-
-  test('maps dispatch actions to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      setMethodology: setCostAllocationMethodology
-    });
+describe('<setCostAllocationMethodology />', () => {
+  it('renders successfully', async () => {
+    const container = setup();
+    expect(container).toMatchSnapshot();
   });
 });
