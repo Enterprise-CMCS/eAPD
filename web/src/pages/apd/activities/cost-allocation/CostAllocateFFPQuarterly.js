@@ -37,16 +37,36 @@ const CostAllocateFFPQuarterly = ({
 }) => {
   const {
     control,
-    formState: { errors, isValid },
+    formState: { errors, isValid, touchedFields },
     setValue,
-    watch
+    getValues,
+    watch,
+    // criteriaMode: all,
+    trigger
   } = useForm({
     defaultValues: {
-      quarterlyFFP: quarterlyFFP[year]
+      quarterlyFFP
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: joiResolver(costAllocateFFPQuarterlySchema)
+    // resolver: joiResolver(costAllocateFFPQuarterlySchema)
+    resolver: async (data, context, options) => {
+      // you can debug your validation schema here
+      console.log('formData', data);
+      console.log(
+        'validation result',
+        await joiResolver(costAllocateFFPQuarterlySchema)(
+          data,
+          context,
+          options
+        )
+      );
+      return await joiResolver(costAllocateFFPQuarterlySchema)(
+        data,
+        context,
+        options
+      );
+    }
   });
 
   const [validationResults, setValidationResults] = useState();
@@ -69,13 +89,18 @@ const CostAllocateFFPQuarterly = ({
   };
 
   useEffect(() => {
-    // customValidation();
-  }, [quarterlyFFP]);
+    // trigger();
+    console.log('errors from validation', errors);
+  }, [errors]);
 
   const setInHouse =
     quarter =>
     ({ target: { value } }) => {
       setInHouseFFP(activityIndex, year, quarter, value);
+      setValue(
+        `quarterlyFFP[${year}][${quarter}].inHouse.percent`,
+        value / 100
+      );
       announce(aKey, year, quarter, 'inHouse');
     };
 
@@ -83,6 +108,10 @@ const CostAllocateFFPQuarterly = ({
     quarter =>
     ({ target: { value } }) => {
       setContractorFFP(activityIndex, year, quarter, value);
+      setValue(
+        `quarterlyFFP[${year}][${quarter}].contractors.percent`,
+        value / 100
+      );
       announce(aKey, year, quarter, 'contractors');
     };
 
@@ -136,8 +165,8 @@ const CostAllocateFFPQuarterly = ({
                 ) : (
                   <Controller
                     control={control}
-                    name={`${quarterlyFFP[year][q].inHouse.percent}`}
-                    render={({ field: { onBlur, value, ...props } }) => (
+                    name={`quarterlyFFP[${year}][${q}].inHouse.percent`}
+                    render={({ field: { onBlur, ...props } }) => (
                       <PercentField
                         {...props}
                         className="budget-table--input-holder"
@@ -145,6 +174,7 @@ const CostAllocateFFPQuarterly = ({
                         label={`federal share for ffy ${year}, quarter ${q}, state`}
                         labelClassName="sr-only"
                         onChange={setInHouse(q)}
+                        onBlur={onBlur}
                         round
                         value={quarterlyFFP[year][q].inHouse.percent * 100}
                       />
@@ -189,15 +219,22 @@ const CostAllocateFFPQuarterly = ({
                     {quarterlyFFP[year][q].contractors.percent * 100} %
                   </p>
                 ) : (
-                  <PercentField
-                    className="budget-table--input-holder"
-                    fieldClassName="budget-table--input__number"
-                    label={`federal share for ffy ${year}, quarter ${q}, contractors`}
-                    labelClassName="sr-only"
-                    name={`ffp-${activityIndex}-${year}-${q}-contractors`}
-                    onChange={setContractor(q)}
-                    round
-                    value={quarterlyFFP[year][q].contractors.percent * 100}
+                  <Controller
+                    control={control}
+                    name={`quarterlyFFP[${year}][${q}].contractors.percent`}
+                    render={({ field: { onBlur, ...props } }) => (
+                      <PercentField
+                        {...props}
+                        className="budget-table--input-holder"
+                        fieldClassName="budget-table--input__number"
+                        label={`federal share for ffy ${year}, quarter ${q}, contractors`}
+                        labelClassName="sr-only"
+                        onChange={setContractor(q)}
+                        onBlur={onBlur}
+                        round
+                        value={quarterlyFFP[year][q].contractors.percent * 100}
+                      />
+                    )}
                   />
                 )}
               </td>
@@ -251,12 +288,12 @@ const CostAllocateFFPQuarterly = ({
         </tbody>
       </table>
       <div>
-        {validationResults && Object.keys(validationResults).length > 0 && (
+        {errors && (
           <span
             className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
             role="alert"
           >
-            {validationResults?.contractors || validationResults?.inHouse}
+            <div>{errors?.quarterlyFFP?.total?.message}</div>
           </span>
         )}
       </div>
