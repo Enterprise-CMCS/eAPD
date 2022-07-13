@@ -38,5 +38,3 @@ module "instances" {
     eapd_jumpbox_vpc_security_group_ids       = var.eapd_jumpbox_vpc_security_group_ids
     eapd_jumpbox_subnet_id                    = var.eapd_jumpbox_subnet_id
 }
-
-# The return of the testing comment, more testing
