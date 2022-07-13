@@ -23,7 +23,7 @@ const verifyRole = (name, role) => {
     });
 };
 
-describe.skip('tests state admin portal', () => {
+describe('tests state admin portal', () => {
   before(() => cy.task('db:resetnorole'));
 
   it('tests state admin portal', { tags: ['@state', '@admin'] }, () => {
