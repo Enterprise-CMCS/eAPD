@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 import { titleCase } from 'title-case';
 import {
@@ -33,26 +35,41 @@ const CostAllocateFFPQuarterly = ({
   setInHouseFFP,
   year
 }) => {
+  const {
+    control,
+    formState: { errors, isValid },
+    setValue,
+    watch
+  } = useForm({
+    defaultValues: {
+      quarterlyFFP: quarterlyFFP[year]
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(costAllocateFFPQuarterlySchema)
+  });
+
   const [validationResults, setValidationResults] = useState();
 
+  const customValidation = async () => {
+    const { error } = await costAllocateFFPQuarterlySchema.validate(
+      quarterlyFFP[year],
+      { abortEarly: false }
+    );
+    if (error) {
+      const errorList = error.details.reduce((obj, error) => {
+        obj[error.path[1]] = error.message;
+        return obj;
+      }, {});
+      setValidationResults(errorList);
+    }
+    if (!error) {
+      setValidationResults({});
+    }
+  };
+
   useEffect(() => {
-    const customValidation = async () => {
-      const { error } = await costAllocateFFPQuarterlySchema.validate(
-        quarterlyFFP[year],
-        { abortEarly: false }
-      );
-      if (error) {
-        const errorList = error.details.reduce((obj, error) => {
-          obj[error.path[1]] = error.message;
-          return obj;
-        }, {});
-        setValidationResults(errorList);
-      }
-      if (!error) {
-        setValidationResults({});
-      }
-    };
-    customValidation();
+    // customValidation();
   }, [quarterlyFFP]);
 
   const setInHouse =
@@ -117,15 +134,21 @@ const CostAllocateFFPQuarterly = ({
                     {quarterlyFFP[year][q].inHouse.percent * 100} %
                   </p>
                 ) : (
-                  <PercentField
-                    className="budget-table--input-holder"
-                    fieldClassName="budget-table--input__number"
-                    label={`federal share for ffy ${year}, quarter ${q}, state`}
-                    labelClassName="sr-only"
-                    name={`ffp-${activityIndex}-${year}-${q}-state`}
-                    onChange={setInHouse(q)}
-                    round
-                    value={quarterlyFFP[year][q].inHouse.percent * 100}
+                  <Controller
+                    control={control}
+                    name={`${quarterlyFFP[year][q].inHouse.percent}`}
+                    render={({ field: { onBlur, value, ...props } }) => (
+                      <PercentField
+                        {...props}
+                        className="budget-table--input-holder"
+                        fieldClassName="budget-table--input__number"
+                        label={`federal share for ffy ${year}, quarter ${q}, state`}
+                        labelClassName="sr-only"
+                        onChange={setInHouse(q)}
+                        round
+                        value={quarterlyFFP[year][q].inHouse.percent * 100}
+                      />
+                    )}
                   />
                 )}
               </td>
