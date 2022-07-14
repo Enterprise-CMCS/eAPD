@@ -40,4 +40,3 @@ module "instances" {
 }
 
 # REreturn of the testing comment
-# Added AWS creds to Atlantis backend
