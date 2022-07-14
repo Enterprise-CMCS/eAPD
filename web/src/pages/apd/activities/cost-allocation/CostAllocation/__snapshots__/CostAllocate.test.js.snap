@@ -5,11 +5,15 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <setcostallocationmethodology />
+      <setcostallocationmethodology
+        initialstate="[object Object]"
+      />
     </div>
   </body>,
   "container": <div>
-    <setcostallocationmethodology />
+    <setcostallocationmethodology
+      initialstate="[object Object]"
+    />
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -52,7 +56,7 @@ Object {
     "entries": Array [
       Object {
         "hash": "",
-        "key": "6t1myz",
+        "key": "0ryfg9",
         "pathname": "/",
         "search": "",
         "state": undefined,
@@ -66,7 +70,7 @@ Object {
     "listen": [Function],
     "location": Object {
       "hash": "",
-      "key": "6t1myz",
+      "key": "0ryfg9",
       "pathname": "/",
       "search": "",
       "state": undefined,

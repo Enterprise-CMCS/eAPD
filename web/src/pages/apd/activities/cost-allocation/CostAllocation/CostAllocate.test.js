@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-  renderWithConnection,
-  querySelector,
-  screen
+  renderWithConnection
 } from 'apd-testing-library';
 
 import {
@@ -23,7 +21,7 @@ const initialState = {
   setMethodology: jest.fn()
 };
 
-const setup = (props = {}, options = {}) => renderWithConnection(<setCostAllocationMethodology {...props} />, options);
+const setup = (props = {initialState}, options = {}) => renderWithConnection(<setCostAllocationMethodology {...props} />, options);
 
 describe('<setCostAllocationMethodology />', () => {
   it('renders successfully', async () => {
