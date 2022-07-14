@@ -42,50 +42,8 @@ const otherSourcesSchema = Joi.object({
         'number.format': 'Provide a valid number of hours.'
       })
     })
-  ),
-  // costAllocationNarrative: Joi.object({
-  //   methodology: Joi.any(),
-  //   years: Joi.object({
-  //     2022: Joi.alternatives().conditional('....costAllocation.2022.other', {
-        // is: Joi.number().greater(0),
-        // then: Joi.object({
-        //   otherSources: Joi.string().trim().min(1).required().messages({
-        //     'string.base': 'Provide a description of other funding.',
-        //     'string.empty': 'Provide a description of other funding.',
-        //     'string.min': 'Provide a description of other funding.'
-        //   })
-        // }),
-        // otherwise: Joi.object({
-        //   otherSources: Joi.any()
-        // })
-  //     }),
-  //     2023: Joi.any()
-  //   })
-  // })
+  )
 })
-
-const sourcesSchema = Joi.object().pattern(
-  /\d{4}/,
-  Joi.object({
-    ffp: Joi.any(),
-    other: Joi.number().positive().allow(0).required().messages({
-      'number.base': 'Provide a number of hours greater than or equal to 0.',
-      'number.positive': 'Provide a number of hours greater than or equal to 0.',
-      'number.allow': 'Provide a number of hours greater than or equal to 0.',
-      'number.empty': 'Provide a number of hours greater than or equal to 0.',
-      'number.format': 'Provide a valid number of hours.'
-    }),
-    otherSources: Joi.alternatives().conditional('other', {
-      is: Joi.number().greater(0),
-      then: Joi.string().trim().min(1).required().messages({
-        'string.base': 'Provide a description of other funding.',
-        'string.empty': 'Provide a description of other funding.',
-        'string.min': 'Provide a description of other funding.'
-      }),
-      otherwise: Joi.any()
-    })
-  })
-)
 
 const OtherFunding = ({
   activityIndex,
@@ -95,9 +53,9 @@ const OtherFunding = ({
   syncOtherFunding,
   adminCheck
 }) => {
-  const { costAllocationNarrative, costAllocation } = activity;
-  const { years } = costSummary;
-  const yearsArray = Object.keys(years);
+  const { costAllocationNarrative, costAllocation } = activity,
+        { years } = costSummary,
+        yearsArray = Object.keys(years);
 
   const {
     control,
@@ -110,38 +68,14 @@ const OtherFunding = ({
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: async (data) => {
-      let newData = await dataMassager(data);
-      console.log(sourcesSchema.validate(newData))
-      return sourcesSchema.validate(newData);
-    }
+    resolver: joiResolver(otherSourcesSchema)
   });
 
   useEffect(() => {
     if (adminCheck) {
-      trigger();
+      trigger()
     };
   }, [adminCheck])
-
-  const dataMassager = data => {
-    let dataUpdate = {}
-
-    for (var key in data) {
-      if (key === 'costAllocation') {
-        for (var subKey in data[key]) {
-          dataUpdate[subKey] = data[key][subKey]
-        }
-      } else if (key === 'costAllocationNarrative') {
-        for (var subKey in data[key]) {
-          for (var year in data[key][subKey]) {
-            dataUpdate[year].otherSources = data[key][subKey][year]
-          }
-        }
-      }
-    }
-
-    return dataUpdate;
-  }
 
   return (
     <Fragment>
@@ -162,36 +96,34 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
-            <Controller
+            <RichText
               name={`costAllocationNarrative.years.${ffy}.otherSources`}
-              control={control}
-              render={({ field: { onChange, ...props } }) => (
-                <RichText
-                  {...props}
-                  id={`cost-allocation-narrative-${ffy}-other-sources-field`}
-                  content={costAllocationNarrative.years[ffy].otherSources}
-                  onSync={html => {
-                    syncOtherFunding(activityIndex, ffy, html);
-                    onChange(html);
+              id={`cost-allocation-narrative-${ffy}-other-sources-field`}
+              content={costAllocationNarrative.years[ffy].otherSources}
+              onSync={html => {
+                syncOtherFunding(activityIndex, ffy, html);
+                onChange(html);
 
-                    if (adminCheck) {
-                      trigger();
-                      console.log({errors})
-                    }
-                  }}
-                  editorClassName="rte-textarea-l"
-                />
-              )}
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
+              editorClassName="rte-textarea-l"
             />
-            <div>
-              {errors?.costAllocationNarrative && errors?.costAllocationNarrative?.years && (
-              <span
-                className="ds-c-inline-error ds-c-field__error-message"
-                role="alert"
-              >
-              {errors?.costAllocationNarrative?.years[ffy]?.otherSources?.message}
-              </span>)}
-            </div>
+          <div>
+            { adminCheck 
+              && costAllocation[ffy].other > 0 
+              && !costAllocationNarrative.years[ffy].otherSources 
+              && (
+                <span
+                  className="ds-c-inline-error ds-c-field__error-message"
+                  role="alert"
+                >
+                  Provide a description of other funding.
+                </span>
+              )
+            }
+          </div>
           </div>
 
           <div className="data-entry-box ds-u-margin-bottom--5">
@@ -220,7 +152,6 @@ const OtherFunding = ({
 
                     if (adminCheck) {
                       trigger();
-                      console.log({errors})
                     }
                   }}
                   errorPlacement="bottom"
