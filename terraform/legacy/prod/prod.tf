@@ -11,6 +11,7 @@ terraform {
     #dynamodb_table = "terraform-up-and-running-locks"
     #encrypt        = true
   }
+  required_version = "~> 1.2.4"
 }
 
 provider "aws" {
@@ -21,4 +22,5 @@ provider "aws" {
 module "eAPD" {
     source = "./modules"
     instance_name = var.instance_name
+    newrelic_liscense_key = var.newrelic_liscense_key
 }
