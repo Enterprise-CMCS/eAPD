@@ -35,40 +35,42 @@ const CostAllocateFFPQuarterly = ({
   setInHouseFFP,
   year
 }) => {
+  // const formData = { ...quarterlyFFP[year] };
   const {
     control,
     formState: { errors, isValid, touchedFields },
     setValue,
     getValues,
     watch,
+    getFieldState,
     // criteriaMode: all,
     trigger
   } = useForm({
     defaultValues: {
-      quarterlyFFP
+      formData: { ...quarterlyFFP[year] }
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    // resolver: joiResolver(costAllocateFFPQuarterlySchema)
-    resolver: async (data, context, options) => {
-      // you can debug your validation schema here
-      console.log('formData', data);
-      console.log(
-        'validation result',
-        await joiResolver(costAllocateFFPQuarterlySchema)(
-          data,
-          context,
-          options
-        )
-      );
-      return await joiResolver(costAllocateFFPQuarterlySchema)(
-        data,
-        context,
-        options
-      );
-    }
+    resolver: joiResolver(costAllocateFFPQuarterlySchema)
+    // resolver: async (data, context, options) => {
+    //   // you can debug your validation schema here
+    //   console.log('formData', data);
+    //   console.log(
+    //     'validation result',
+    //     await joiResolver(costAllocateFFPQuarterlySchema)(
+    //       data,
+    //       context,
+    //       options
+    //     )
+    //   );
+    //   return joiResolver(costAllocateFFPQuarterlySchema)(
+    //     data,
+    //     context,
+    //     options
+    //   );
+    // }
   });
-
+  // tif notes: make helper function to pass in field name to check if it has been touched or has value or is dirty
   const [validationResults, setValidationResults] = useState();
 
   const customValidation = async () => {
@@ -89,29 +91,23 @@ const CostAllocateFFPQuarterly = ({
   };
 
   useEffect(() => {
-    // trigger();
-    console.log('errors from validation', errors);
-  }, [errors]);
+    setValue('formData.subtotal', quarterlyFFP[year].subtotal);
+    trigger();
+  }, [quarterlyFFP[year]]);
 
   const setInHouse =
     quarter =>
     ({ target: { value } }) => {
+      setValue(`formData[${quarter}].inHouse.percent`, value / 100);
       setInHouseFFP(activityIndex, year, quarter, value);
-      setValue(
-        `quarterlyFFP[${year}][${quarter}].inHouse.percent`,
-        value / 100
-      );
       announce(aKey, year, quarter, 'inHouse');
     };
 
   const setContractor =
     quarter =>
     ({ target: { value } }) => {
+      setValue(`formData[${quarter}].contractors.percent`, 111);
       setContractorFFP(activityIndex, year, quarter, value);
-      setValue(
-        `quarterlyFFP[${year}][${quarter}].contractors.percent`,
-        value / 100
-      );
       announce(aKey, year, quarter, 'contractors');
     };
 
@@ -165,8 +161,8 @@ const CostAllocateFFPQuarterly = ({
                 ) : (
                   <Controller
                     control={control}
-                    name={`quarterlyFFP[${year}][${q}].inHouse.percent`}
-                    render={({ field: { onBlur, ...props } }) => (
+                    name={`formData[${q}].inHouse.percent`}
+                    render={({ field: { onBlur, onChange, ...props } }) => (
                       <PercentField
                         {...props}
                         className="budget-table--input-holder"
@@ -221,7 +217,7 @@ const CostAllocateFFPQuarterly = ({
                 ) : (
                   <Controller
                     control={control}
-                    name={`quarterlyFFP[${year}][${q}].contractors.percent`}
+                    name={`formData[${q}].contractors.percent`}
                     render={({ field: { onBlur, ...props } }) => (
                       <PercentField
                         {...props}
@@ -293,7 +289,7 @@ const CostAllocateFFPQuarterly = ({
             className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
             role="alert"
           >
-            <div>{errors?.quarterlyFFP?.total?.message}</div>
+            <div>{errors?.formData?.subtotal?.inHouse?.percent?.message}</div>
           </span>
         )}
       </div>
