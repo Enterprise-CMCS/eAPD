@@ -43,26 +43,49 @@ const otherSourcesSchema = Joi.object({
       })
     })
   ),
-  costAllocationNarrative: Joi.object({
-    methodology: Joi.any(),
-    years: Joi.object({
-      2022: Joi.alternatives().conditional('....costAllocation.2022.other', {
-        is: Joi.number().greater(0),
-        then: Joi.object({
-          otherSources: Joi.string().trim().min(1).required().messages({
-            'string.base': 'Provide a description of other funding.',
-            'string.empty': 'Provide a description of other funding.',
-            'string.min': 'Provide a description of other funding.'
-          })
-        }),
-        otherwise: Joi.object({
-          otherSources: Joi.any()
-        })
+  // costAllocationNarrative: Joi.object({
+  //   methodology: Joi.any(),
+  //   years: Joi.object({
+  //     2022: Joi.alternatives().conditional('....costAllocation.2022.other', {
+        // is: Joi.number().greater(0),
+        // then: Joi.object({
+        //   otherSources: Joi.string().trim().min(1).required().messages({
+        //     'string.base': 'Provide a description of other funding.',
+        //     'string.empty': 'Provide a description of other funding.',
+        //     'string.min': 'Provide a description of other funding.'
+        //   })
+        // }),
+        // otherwise: Joi.object({
+        //   otherSources: Joi.any()
+        // })
+  //     }),
+  //     2023: Joi.any()
+  //   })
+  // })
+})
+
+const sourcesSchema = Joi.object().pattern(
+  /\d{4}/,
+  Joi.object({
+    ffp: Joi.any(),
+    other: Joi.number().positive().allow(0).required().messages({
+      'number.base': 'Provide a number of hours greater than or equal to 0.',
+      'number.positive': 'Provide a number of hours greater than or equal to 0.',
+      'number.allow': 'Provide a number of hours greater than or equal to 0.',
+      'number.empty': 'Provide a number of hours greater than or equal to 0.',
+      'number.format': 'Provide a valid number of hours.'
+    }),
+    otherSources: Joi.alternatives().conditional('other', {
+      is: Joi.number().greater(0),
+      then: Joi.string().trim().min(1).required().messages({
+        'string.base': 'Provide a description of other funding.',
+        'string.empty': 'Provide a description of other funding.',
+        'string.min': 'Provide a description of other funding.'
       }),
-      2023: Joi.any()
+      otherwise: Joi.any()
     })
   })
-})
+)
 
 const OtherFunding = ({
   activityIndex,
@@ -87,7 +110,11 @@ const OtherFunding = ({
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: joiResolver(otherSourcesSchema)
+    resolver: async (data) => {
+      let newData = await dataMassager(data);
+      console.log(sourcesSchema.validate(newData))
+      return sourcesSchema.validate(newData);
+    }
   });
 
   useEffect(() => {
@@ -95,7 +122,27 @@ const OtherFunding = ({
       trigger();
     };
   }, [adminCheck])
-  
+
+  const dataMassager = data => {
+    let dataUpdate = {}
+
+    for (var key in data) {
+      if (key === 'costAllocation') {
+        for (var subKey in data[key]) {
+          dataUpdate[subKey] = data[key][subKey]
+        }
+      } else if (key === 'costAllocationNarrative') {
+        for (var subKey in data[key]) {
+          for (var year in data[key][subKey]) {
+            dataUpdate[year].otherSources = data[key][subKey][year]
+          }
+        }
+      }
+    }
+
+    return dataUpdate;
+  }
+
   return (
     <Fragment>
       <h2 className="ds-u-margin-bottom--0">
