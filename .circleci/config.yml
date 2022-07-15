@@ -286,7 +286,7 @@ jobs:
   # Creates the AWS AMIs that we use to build our app on based on the provided Golden Images
   build preview ami:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/base:2022.06-22.04
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -315,7 +315,7 @@ jobs:
               preview-ami.pkr.hcl
   build production staging ami:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/base:2022.06-22.04
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -339,7 +339,7 @@ jobs:
               backend-ami.pkr.hcl
   cleanup preview ami:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/base:2022.06-22.04
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -359,7 +359,7 @@ jobs:
 
   cleanup production staging ami:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/base:2022.06-22.04
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -627,7 +627,7 @@ jobs:
   ############### Rewrite of Backend API Tests
   backend api endpoint test:
     machine:
-      image: ubuntu-2004:202104-01
+      image: ubuntu-2204:2022.04.2
     steps:
       - checkout
       - attach_workspace:
@@ -668,7 +668,7 @@ jobs:
   # Runs backend unit tests and reports coverage to codecov.io.
   backend unit test:
     machine:
-      image: ubuntu-2004:202104-01
+      image: ubuntu-2204:2022.04.2
     steps:
       - checkout
       - attach_workspace:
@@ -797,7 +797,7 @@ jobs:
 
   owasp zap scan:
     machine:
-      image: ubuntu-2004:202104-01
+      image: ubuntu-2204:2022.04.2
     steps:
       - checkout
       - attach_workspace:
@@ -845,7 +845,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/python:3.10.1
+      - image: cimg/python:3.10.4
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -928,7 +928,7 @@ jobs:
         description: The environment being deployed
         type: string
     docker:
-      - image: cimg/python:3.10.1
+      - image: cimg/python:3.10.4
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -967,7 +967,7 @@ jobs:
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
     docker:
-      - image: cimg/python:3.10.1
+      - image: cimg/python:3.10.4
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
