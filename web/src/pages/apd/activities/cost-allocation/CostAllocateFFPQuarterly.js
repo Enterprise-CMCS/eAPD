@@ -43,7 +43,6 @@ const CostAllocateFFPQuarterly = ({
     getValues,
     watch,
     getFieldState,
-    // criteriaMode: all,
     trigger
   } = useForm({
     defaultValues: {
@@ -70,30 +69,54 @@ const CostAllocateFFPQuarterly = ({
     //   );
     // }
   });
-  // tif notes: make helper function to pass in field name to check if it has been touched or has value or is dirty
-  const [validationResults, setValidationResults] = useState();
-
-  const customValidation = async () => {
-    const { error } = await costAllocateFFPQuarterlySchema.validate(
-      quarterlyFFP[year],
-      { abortEarly: false }
-    );
-    if (error) {
-      const errorList = error.details.reduce((obj, error) => {
-        obj[error.path[1]] = error.message;
-        return obj;
-      }, {});
-      setValidationResults(errorList);
+  const allQuarterFieldsTouched = (touchedFields, rowName) => {
+    if (touchedFields?.formData?.length > 0) {
+      const countFields = touchedFields.formData.filter(
+        item => item[`${rowName}`]
+      ).length;
+      if (countFields === 4) {
+        return true;
+      }
+      return false;
     }
-    if (!error) {
-      setValidationResults({});
-    }
+    return false;
   };
 
+  //   const [validationResults, setValidationResults] = useState();
+  //
+  //   const customValidation = async () => {
+  //     const { error } = await costAllocateFFPQuarterlySchema.validate(
+  //       quarterlyFFP[year],
+  //       { abortEarly: false }
+  //     );
+  //     if (error) {
+  //       const errorList = error.details.reduce((obj, error) => {
+  //         obj[error.path[1]] = error.message;
+  //         return obj;
+  //       }, {});
+  //       setValidationResults(errorList);
+  //     }
+  //     if (!error) {
+  //       setValidationResults({});
+  //     }
+  //   };
+
   useEffect(() => {
-    setValue('formData.subtotal', quarterlyFFP[year].subtotal);
-    trigger();
-  }, [quarterlyFFP[year]]);
+    setValue('formData.subtotal.inHouse', quarterlyFFP[year].subtotal.inHouse);
+    if (allQuarterFieldsTouched(touchedFields, 'inHouse')) {
+      trigger('formData.subtotal.inHouse');
+    }
+  }, [quarterlyFFP[year].subtotal.inHouse]);
+
+  useEffect(() => {
+    setValue(
+      'formData.subtotal.contractors',
+      quarterlyFFP[year].subtotal.contractors
+    );
+    if (allQuarterFieldsTouched(touchedFields, 'contractors')) {
+      trigger('formData.subtotal.contractors');
+    }
+  }, [quarterlyFFP[year].subtotal.contractors]);
 
   const setInHouse =
     quarter =>
@@ -106,7 +129,7 @@ const CostAllocateFFPQuarterly = ({
   const setContractor =
     quarter =>
     ({ target: { value } }) => {
-      setValue(`formData[${quarter}].contractors.percent`, 111);
+      setValue(`formData[${quarter}].contractors.percent`, value / 100);
       setContractorFFP(activityIndex, year, quarter, value);
       announce(aKey, year, quarter, 'contractors');
     };
@@ -181,7 +204,7 @@ const CostAllocateFFPQuarterly = ({
             ))}
             <td
               className={`budget-table--number budget-table--subtotal ${
-                validationResults?.inHouse
+                errors?.formData?.subtotal?.inHouse?.percent
                   ? 'ds-u-border--2 ds-u-border--error'
                   : ''
               }`}
@@ -237,7 +260,7 @@ const CostAllocateFFPQuarterly = ({
             ))}
             <td
               className={`budget-table--number budget-table--subtotal ${
-                validationResults?.contractors
+                errors?.formData?.subtotal?.contractors?.percent
                   ? 'ds-u-border--2 ds-u-border--error'
                   : ''
               }`}
@@ -289,7 +312,14 @@ const CostAllocateFFPQuarterly = ({
             className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
             role="alert"
           >
-            <div>{errors?.formData?.subtotal?.inHouse?.percent?.message}</div>
+            <div>
+              <p className="ds-u-margin--0">
+                {errors?.formData?.subtotal?.inHouse?.percent?.message}
+              </p>
+              <p className="ds-u-margin--0">
+                {errors?.formData?.subtotal?.contractors?.percent?.message}
+              </p>
+            </div>
           </span>
         )}
       </div>
