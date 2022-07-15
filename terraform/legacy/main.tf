@@ -12,6 +12,7 @@ terraform {
     #dynamodb_table = "terraform-up-and-running-locks"
     #encrypt        = true
   }
+  required_version = "~> 1.2.4"
 }
 
 provider "aws" {
