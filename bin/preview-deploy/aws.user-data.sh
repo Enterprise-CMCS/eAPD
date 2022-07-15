@@ -1,6 +1,8 @@
 #!/bin/bash
 # Configure CloudWatch Agent
-export AWS_REGION=us-east-1
+export AWS_REGION=$AWS_REGION
+export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY    
 touch /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 {
