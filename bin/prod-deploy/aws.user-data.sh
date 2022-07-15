@@ -1,6 +1,5 @@
 #!/bin/bash
 # Configure CloudWatch Agent
-export AWS_REGION=us-east-1
 touch /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 {

@@ -1,8 +1,5 @@
 #!/bin/bash
 # Configure CloudWatch Agent
-export AWS_REGION=$AWS_REGION
-export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY    
 touch /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 {
@@ -52,7 +49,7 @@ cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
 CWAGENTCONFIG
 
-/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 
 sudo yum install -y gcc-c++
 
