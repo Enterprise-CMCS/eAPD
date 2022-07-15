@@ -169,7 +169,13 @@ const CostAllocateFFPQuarterly = ({
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr
+            className={`${
+              errors?.formData?.subtotal?.inHouse?.percent
+                ? 'table-error-border-no-bottom'
+                : ''
+            }`}
+          >
             <th rowSpan="2" scope="row">
               {titleCase(
                 t('activities.costAllocate.quarterly.expenseNames.state')
@@ -202,17 +208,17 @@ const CostAllocateFFPQuarterly = ({
                 )}
               </td>
             ))}
-            <td
-              className={`budget-table--number budget-table--subtotal ${
-                errors?.formData?.subtotal?.inHouse?.percent
-                  ? 'ds-u-border--2 ds-u-border--error'
-                  : ''
-              }`}
-            >
+            <td className={`budget-table--number budget-table--subtotal`}>
               {formatPerc(quarterlyFFP[year].subtotal.inHouse.percent)}
             </td>
           </tr>
-          <tr>
+          <tr
+            className={`${
+              errors?.formData?.subtotal?.inHouse?.percent
+                ? 'table-error-border-no-top'
+                : ''
+            }`}
+          >
             <Fragment key={year}>
               {QUARTERS.map(q => (
                 <td className="budget-table--number" key={q} data-cy="subtotal">
@@ -225,7 +231,13 @@ const CostAllocateFFPQuarterly = ({
             </Fragment>
           </tr>
 
-          <tr>
+          <tr
+            className={`${
+              errors?.formData?.subtotal?.contractors?.percent
+                ? 'table-error-border-no-bottom'
+                : ''
+            }`}
+          >
             <th rowSpan="2" scope="row">
               {titleCase(
                 t('activities.costAllocate.quarterly.expenseNames.contractor')
@@ -258,17 +270,17 @@ const CostAllocateFFPQuarterly = ({
                 )}
               </td>
             ))}
-            <td
-              className={`budget-table--number budget-table--subtotal ${
-                errors?.formData?.subtotal?.contractors?.percent
-                  ? 'ds-u-border--2 ds-u-border--error'
-                  : ''
-              }`}
-            >
+            <td className={`budget-table--number budget-table--subtotal`}>
               {formatPerc(quarterlyFFP[year].subtotal.contractors.percent)}
             </td>
           </tr>
-          <tr>
+          <tr
+            className={`${
+              errors?.formData?.subtotal?.contractors?.percent
+                ? 'table-error-border-no-top'
+                : ''
+            }`}
+          >
             <Fragment key={year}>
               {QUARTERS.map(q => (
                 <td className="budget-table--number" key={q} data-cy="subtotal">
