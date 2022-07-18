@@ -2,15 +2,18 @@ import React from 'react';
 import {
   renderWithConnection,
   act,
-  waitFor,
-  screen
+  // waitFor,
+  // screen
 } from 'apd-testing-library';
-import { plain as OtherFunding, mapDispatchToProps } from './OtherFunding';
-import {
-  setCostAllocationFFPOtherFunding,
-  setCostAllocationOtherFunding
-} from '../../../../../redux/actions/editActivity';
-import { render } from 'react-dom';
+import { plain as 
+  OtherFunding, 
+  // mapDispatchToProps 
+} from './OtherFunding';
+// import {
+//   setCostAllocationFFPOtherFunding,
+//   setCostAllocationOtherFunding
+// } from '../../../../../redux/actions/editActivity';
+// import { render } from 'react-dom';
 
 const initialState = {
   activityIndex: 1,

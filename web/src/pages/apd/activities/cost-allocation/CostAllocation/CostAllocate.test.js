@@ -3,12 +3,12 @@ import {
   renderWithConnection
 } from 'apd-testing-library';
 
-import {
-  plain as CostAllocate,
-  mapStateToProps,
-  mapDispatchToProps
-} from './CostAllocate';
-import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
+// import {
+//   plain as CostAllocate,
+//   mapStateToProps,
+//   mapDispatchToProps
+// } from './CostAllocate';
+// import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
 
 const initialState = {
   activityIndex: 1,
