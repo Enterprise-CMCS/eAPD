@@ -1,6 +1,6 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": [],
+  "allowlist": [1081522],
   "_comment": {}
 }

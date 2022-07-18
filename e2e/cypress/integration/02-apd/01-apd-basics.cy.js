@@ -4,6 +4,7 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
+import { logDOM } from '@testing-library/dom';
 
 /// <reference types="cypress" />
 
@@ -14,6 +15,7 @@ import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
 
 describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   let apdUrl;
+  let apdId;
   const years = [];
   const pageTitles = [
     'APD Overview',
@@ -38,6 +40,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     ).should('exist');
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
+      apdId = apdUrl.split('/').pop();
     });
 
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
@@ -302,11 +305,13 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
 
       cy.get('[data-cy="key-person-0__name"]').focus().blur();
-      cy.contains('Name is required').should('exist');
+      cy.contains('Provide a name for the point of contact.').should('exist');
       cy.get('[data-cy="key-person-0__email"]').focus().blur();
-      cy.contains('Email is required').should('exist');
+      cy.contains('Provide an email address for the point of contact.').should('exist');
       cy.get('[data-cy="key-person-0__position"]').focus().blur();
-      cy.contains('Role is required').should('exist');
+      cy.contains('Provide a role for the point of contact.').should('exist');
+      cy.get('input[type="radio"][value="no"]').focus().blur();
+      cy.contains('Indicate whether or not this person has costs.').should('exist');
 
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
@@ -320,6 +325,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
       cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+      cy.get('[data-cy="key-person-0__name"]').focus().blur();
 
       cy.findByRole('button', { name: /Save/i })
         .should('not.be.disabled')
@@ -1276,6 +1282,56 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         'Delete Private Contractor?',
         'Test Private Contractor'
       );
+    });
+  });
+
+  describe('tests rich text field functionality', () => {
+    it('tests uploading an image', () => {
+      cy.intercept('POST', `${Cypress.env('API')}/apds/${apdId}/files`).as(
+        'uploadImage'
+      );
+      cy.intercept(
+        'GET',
+        `${Cypress.env(
+          'API'
+        )}/apds/${apdId}/files/963d0316f487d49e9e0e8306682daa96720535acf195fb31973f2d0936d97eb1`
+      ).as('loadImage');
+
+      cy.get('[class="tox-edit-area"]').eq(3).scrollIntoView();
+
+      // Uploads cms-logo.png from /fixtures/
+      cy.setTinyMceContent('mmis-overview-field', 'Drag and Drop here');
+
+      cy.enter('iframe[id="mmis-overview-field_ifr"]').then(getBody => {
+        cy.fixture('cms-logo.png', 'binary')
+          .then(Cypress.Blob.binaryStringToBlob)
+          .then(fileContent => {
+            const file = new File([fileContent], 'cms-logo.png', {
+              type: 'image/png'
+            });
+
+            getBody()
+              .contains('Drag and Drop here')
+              .trigger('drop', {
+                dataTransfer: {
+                  files: [file]
+                }
+              });
+          });
+      });
+
+      cy.wait('@uploadImage', { timeout: 30000 });
+
+      cy.waitForSave();
+      cy.contains('AK APD Home').click();
+      cy.wait(5000); // Gives time to load the APD dashboard
+
+      cy.visit(apdUrl);
+      cy.wait('@loadImage', { timeout: 30000 });
+
+      cy.contains('Export and Submit').click();
+      cy.findByRole('button', { name: 'Continue to Review' }).click();
+      cy.wait('@loadImage', { timeout: 30000 });
     });
   });
 

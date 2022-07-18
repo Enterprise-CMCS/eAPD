@@ -33,33 +33,35 @@ chmod -R g+w /app
 mkdir /app/tls
 
 # Setup PostGres for Mongo Migraton
-yum -y install postgresql-server
+rpm -Uvh https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+yum install -y postgresql10-server
 
-postgresql-setup initdb
+#postgresql-setup initdb
+/usr/pgsql-10/bin/postgresql-10-setup initdb
 echo "
 # TYPE    DATABASE    USER    ADDRESS         METHODS
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
-" > /var/lib/pgsql/data/pg_hba.conf
-systemctl start postgresql
-systemctl enable postgresql
+" > /var/lib/pgsql/10/data/pg_hba.conf
+systemctl enable postgresql-10
+systemctl start postgresql-10
 
 # Setup Mongo Repo
-touch /etc/yum.repos.d/mongodb-org-4.4.repo
+touch /etc/yum.repos.d/mongodb-org-5.0.repo
 echo "
-[mongodb-org-4.4]
+[mongodb-org-5.0]
 name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/7/mongodb-org/4.4/x86_64/
+baseurl=https://repo.mongodb.org/yum/redhat/7/mongodb-org/5.0/x86_64/
 gpgcheck=1
 enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
-" > /etc/yum.repos.d/mongodb-org-4.4.repo
+gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
+" > /etc/yum.repos.d/mongodb-org-5.0.repo
 
 # Install packages
 yum -y install git
-yum -y install nginx
-yum -y install mongodb-org checkpolicy
+yum -y install nginx-1.20.1-9.el7
+yum -y install mongodb-org-5.0.3-1.el7 checkpolicy
 
 # Install CloudWatch Agent
 curl -O https://s3.amazonaws.com/amazoncloudwatch-agent/redhat/amd64/latest/amazon-cloudwatch-agent.rpm
@@ -325,6 +327,8 @@ cat <<CWVAROPTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/var-opt.json
 }
 
 CWVAROPTCONFIG
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/app-logs.json
 
 /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a append-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/doc/var-log.json
 

@@ -34,6 +34,7 @@ const PersonForm = forwardRef(
     const {
       handleSubmit,
       control,
+      trigger,
       formState: { errors, isValid },
       resetField: resetFieldErrors
     } = useForm({
@@ -45,8 +46,8 @@ const PersonForm = forwardRef(
         costs,
         fte
       },
-      mode: 'onBlur',
-      reValidateMode: 'onBlur',
+      mode: 'onChange',
+      reValidateMode: 'onChange',
       resolver: joiResolver(validationSchema)
     });
 
@@ -163,6 +164,13 @@ const PersonForm = forwardRef(
 
     return (
       <form index={index} onSubmit={onSubmit} aria-label="form">
+        {/* Prevent implicit submission of the form. */}
+        <button
+          type="submit"
+          disabled
+          style={{ display: 'none' }}
+          aria-hidden="true"
+        />
         <h4 className="ds-h4">
           {primary
             ? titleCase(t(`${tRoot}.labels.titlePrimary`))
@@ -186,6 +194,7 @@ const PersonForm = forwardRef(
                 handleNameChange(e);
                 onChange(e);
               }}
+              onBlur={() => {trigger("name")}}
               errorMessage={errors?.name?.message}
               errorPlacement="bottom"
             />
@@ -204,6 +213,7 @@ const PersonForm = forwardRef(
                 handleEmailChange(e);
                 onChange(e);
               }}
+              onBlur={() => {trigger("email")}}
               errorMessage={errors?.email?.message}
               errorPlacement="bottom"
             />
@@ -222,6 +232,7 @@ const PersonForm = forwardRef(
                 handlePositionChange(e);
                 onChange(e);
               }}
+              onBlur={() => {trigger("position")}}
               errorMessage={errors?.position?.message}
               errorPlacement="bottom"
             />
@@ -333,7 +344,9 @@ const PersonForm = forwardRef(
                 handleHasCostsChange(e);
                 onChange(e);
               }}
-              onBlur={hasCostsOnBlur}
+              onBlur={() => {
+                trigger("hasCosts")
+              }}
               onComponentBlur={hasCostsOnBlur}
               errorMessage={errors?.hasCosts?.message}
               errorPlacement="bottom"

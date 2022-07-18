@@ -48,6 +48,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
     index={1}
     onSubmit={[Function]}
   >
+    <button
+      aria-hidden="true"
+      disabled={true}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      type="submit"
+    />
     <h4
       className="ds-h4"
     >
@@ -4205,8 +4215,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "name": "Bob the Builder",
               "position": "The Builder",
             },
-            "mode": "onBlur",
-            "reValidateMode": "onBlur",
+            "mode": "onChange",
+            "reValidateMode": "onChange",
             "resolver": [Function],
             "shouldFocusError": true,
           },
@@ -8523,8 +8533,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "name": "Bob the Builder",
               "position": "The Builder",
             },
-            "mode": "onBlur",
-            "reValidateMode": "onBlur",
+            "mode": "onChange",
+            "reValidateMode": "onChange",
             "resolver": [Function],
             "shouldFocusError": true,
           },
@@ -12841,8 +12851,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "name": "Bob the Builder",
               "position": "The Builder",
             },
-            "mode": "onBlur",
-            "reValidateMode": "onBlur",
+            "mode": "onChange",
+            "reValidateMode": "onChange",
             "resolver": [Function],
             "shouldFocusError": true,
           },
@@ -17159,8 +17169,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "name": "Bob the Builder",
               "position": "The Builder",
             },
-            "mode": "onBlur",
-            "reValidateMode": "onBlur",
+            "mode": "onChange",
+            "reValidateMode": "onChange",
             "resolver": [Function],
             "shouldFocusError": true,
           },
@@ -21425,8 +21435,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "name": "Bob the Builder",
                               "position": "The Builder",
                             },
-                            "mode": "onBlur",
-                            "reValidateMode": "onBlur",
+                            "mode": "onChange",
+                            "reValidateMode": "onChange",
                             "resolver": [Function],
                             "shouldFocusError": true,
                           },
@@ -25677,8 +25687,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "name": "Bob the Builder",
                               "position": "The Builder",
                             },
-                            "mode": "onBlur",
-                            "reValidateMode": "onBlur",
+                            "mode": "onChange",
+                            "reValidateMode": "onChange",
                             "resolver": [Function],
                             "shouldFocusError": true,
                           },
@@ -29948,8 +29958,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "name": "Bob the Builder",
                               "position": "The Builder",
                             },
-                            "mode": "onBlur",
-                            "reValidateMode": "onBlur",
+                            "mode": "onChange",
+                            "reValidateMode": "onChange",
                             "resolver": [Function],
                             "shouldFocusError": true,
                           },
@@ -34200,8 +34210,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "name": "Bob the Builder",
                               "position": "The Builder",
                             },
-                            "mode": "onBlur",
-                            "reValidateMode": "onBlur",
+                            "mode": "onChange",
+                            "reValidateMode": "onChange",
                             "resolver": [Function],
                             "shouldFocusError": true,
                           },
@@ -38522,8 +38532,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
                               },
-                              "mode": "onBlur",
-                              "reValidateMode": "onBlur",
+                              "mode": "onChange",
+                              "reValidateMode": "onChange",
                               "resolver": [Function],
                               "shouldFocusError": true,
                             },
@@ -42774,8 +42784,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
                               },
-                              "mode": "onBlur",
-                              "reValidateMode": "onBlur",
+                              "mode": "onChange",
+                              "reValidateMode": "onChange",
                               "resolver": [Function],
                               "shouldFocusError": true,
                             },
@@ -47045,8 +47055,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
                               },
-                              "mode": "onBlur",
-                              "reValidateMode": "onBlur",
+                              "mode": "onChange",
+                              "reValidateMode": "onChange",
                               "resolver": [Function],
                               "shouldFocusError": true,
                             },
@@ -51297,8 +51307,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
                               },
-                              "mode": "onBlur",
-                              "reValidateMode": "onBlur",
+                              "mode": "onChange",
+                              "reValidateMode": "onChange",
                               "resolver": [Function],
                               "shouldFocusError": true,
                             },
@@ -55614,8 +55624,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "name": "Bob the Builder",
                               "position": "The Builder",
                             },
-                            "mode": "onBlur",
-                            "reValidateMode": "onBlur",
+                            "mode": "onChange",
+                            "reValidateMode": "onChange",
                             "resolver": [Function],
                             "shouldFocusError": true,
                           },
@@ -59972,8 +59982,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "name": "Bob the Builder",
                               "position": "The Builder",
                             },
-                            "mode": "onBlur",
-                            "reValidateMode": "onBlur",
+                            "mode": "onChange",
+                            "reValidateMode": "onChange",
                             "resolver": [Function],
                             "shouldFocusError": true,
                           },
@@ -64333,8 +64343,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "name": "Bob the Builder",
                               "position": "The Builder",
                             },
-                            "mode": "onBlur",
-                            "reValidateMode": "onBlur",
+                            "mode": "onChange",
+                            "reValidateMode": "onChange",
                             "resolver": [Function],
                             "shouldFocusError": true,
                           },
@@ -68691,8 +68701,8 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "name": "Bob the Builder",
                               "position": "The Builder",
                             },
-                            "mode": "onBlur",
-                            "reValidateMode": "onBlur",
+                            "mode": "onChange",
+                            "reValidateMode": "onChange",
                             "resolver": [Function],
                             "shouldFocusError": true,
                           },
@@ -68965,6 +68975,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
   index={1}
   onSubmit={[Function]}
 >
+  <button
+    aria-hidden="true"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
   <h4
     className="ds-h4"
   >
@@ -69044,8 +69064,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "name": "Bob the Builder",
             "position": "The Builder",
           },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
+          "mode": "onChange",
+          "reValidateMode": "onChange",
           "resolver": [Function],
           "shouldFocusError": true,
         },
@@ -69162,8 +69182,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "name": "Bob the Builder",
             "position": "The Builder",
           },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
+          "mode": "onChange",
+          "reValidateMode": "onChange",
           "resolver": [Function],
           "shouldFocusError": true,
         },
@@ -69280,8 +69300,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "name": "Bob the Builder",
             "position": "The Builder",
           },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
+          "mode": "onChange",
+          "reValidateMode": "onChange",
           "resolver": [Function],
           "shouldFocusError": true,
         },
@@ -69398,8 +69418,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "name": "Bob the Builder",
             "position": "The Builder",
           },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
+          "mode": "onChange",
+          "reValidateMode": "onChange",
           "resolver": [Function],
           "shouldFocusError": true,
         },
@@ -69461,6 +69481,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
   index={0}
   onSubmit={[Function]}
 >
+  <button
+    aria-hidden="true"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
   <h4
     className="ds-h4"
   >
@@ -69540,8 +69570,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "name": "Bob the Builder",
             "position": "The Builder",
           },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
+          "mode": "onChange",
+          "reValidateMode": "onChange",
           "resolver": [Function],
           "shouldFocusError": true,
         },
@@ -69658,8 +69688,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "name": "Bob the Builder",
             "position": "The Builder",
           },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
+          "mode": "onChange",
+          "reValidateMode": "onChange",
           "resolver": [Function],
           "shouldFocusError": true,
         },
@@ -69776,8 +69806,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "name": "Bob the Builder",
             "position": "The Builder",
           },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
+          "mode": "onChange",
+          "reValidateMode": "onChange",
           "resolver": [Function],
           "shouldFocusError": true,
         },
@@ -69894,8 +69924,8 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "name": "Bob the Builder",
             "position": "The Builder",
           },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
+          "mode": "onChange",
+          "reValidateMode": "onChange",
           "resolver": [Function],
           "shouldFocusError": true,
         },

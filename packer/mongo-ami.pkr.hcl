@@ -56,6 +56,6 @@ build {
             "OKTA_API_KEY=${var.okta_api_key}",
             "ENVIRONMENT=${var.environment}"
         ]
-        script = "./mongo.sh"
+        script = "./mongo20220708.sh"
     }
 }
