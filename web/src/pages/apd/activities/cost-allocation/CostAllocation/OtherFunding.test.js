@@ -59,10 +59,6 @@ return utils;
 }
 
 describe('<OtherFunding />', () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
   it('renders correctly', async () => {
     await setup();
   });
