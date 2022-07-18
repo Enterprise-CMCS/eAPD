@@ -137,7 +137,7 @@ const OtherFunding = ({
             <Controller
               name={`costAllocation.${ffy}.other`}
               control={control}
-              value={costAllocation[ffy].other || '0'}
+              value={costAllocation[ffy]?.other || '0'}
               render={({ 
                 field: { onChange, value, ...props }
               }) => (

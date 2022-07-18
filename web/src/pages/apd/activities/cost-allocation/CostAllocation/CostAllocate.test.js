@@ -1,14 +1,18 @@
 import React from 'react';
 import {
-  renderWithConnection
+  renderWithConnection,
+  act,
+  waitFor,
+  screen
 } from 'apd-testing-library';
 
-// import {
-//   plain as CostAllocate,
-//   mapStateToProps,
-//   mapDispatchToProps
-// } from './CostAllocate';
-// import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
+import {
+  plain as CostAllocate,
+  // mapStateToProps,
+  // mapDispatchToProps
+} from './CostAllocate';
+import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
+import { render } from 'react-dom';
 
 const initialState = {
   activityIndex: 1,
@@ -18,14 +22,27 @@ const initialState = {
       methodology: 'cost allocation'
     }
   },
-  setMethodology: jest.fn()
+  setMethodology: jest.fn(),
+  setCostAllocationMethodology: jest.fn()
 };
 
-const setup = (props = {initialState}, options = {}) => renderWithConnection(<setCostAllocationMethodology {...props} />, options);
+const setup = async (props = {}) => {
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  const utils = await act(async () => renderWithConnection(<CostAllocate {...initialState} {...props} />));
+  return utils;
+}
 
 describe('<setCostAllocationMethodology />', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('renders successfully', async () => {
-    const container = setup();
-    expect(container).toMatchSnapshot();
+    await setup();
+    await waitFor(() => {
+      expect(
+        screen.getByLabelText('Description of Cost Allocation Methodology')
+      ).toHaveValue(initialState.activity.costAllocationNarrative.methodology);
+    })
   });
 });

@@ -57,6 +57,7 @@ const CostAllocate = ({
         <Controller
           name="methodology"
           control={control}
+          data-testid="methodology"
           render={({ field: { onChange, name, ...props } }) => (
             <RichText
               {...props}
