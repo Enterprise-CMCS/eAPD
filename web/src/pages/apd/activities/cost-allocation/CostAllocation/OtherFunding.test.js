@@ -2,20 +2,22 @@ import React from 'react';
 import {
   renderWithConnection,
   act,
-  // waitFor,
-  // screen
+  waitFor,
+  screen
 } from 'apd-testing-library';
 import { plain as 
   OtherFunding, 
   // mapDispatchToProps 
 } from './OtherFunding';
-// import {
-//   setCostAllocationFFPOtherFunding,
-//   setCostAllocationOtherFunding
-// } from '../../../../../redux/actions/editActivity';
+import {
+  setCostAllocationFFPOtherFunding,
+  setCostAllocationOtherFunding
+} from '../../../../../redux/actions/editActivity';
+import { init } from 'tinymce';
 // import { render } from 'react-dom';
 
 const initialState = {
+  adminCheck: true,
   activityIndex: 1,
   activity: {
     key: 'activity key',
@@ -49,6 +51,8 @@ const initialState = {
       }
     }
   },
+  setCostAllocationFFPOtherFunding: jest.fn(),
+  setCostAllocationOtherFunding: jest.fn(),
   setOtherFunding: jest.fn(),
   syncOtherFunding: jest.fn()
 };
@@ -62,7 +66,16 @@ return utils;
 }
 
 describe('<OtherFunding />', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('renders correctly', async () => {
     await setup();
+    await waitFor(() => {
+      expect(
+        screen.getAllByLabelText('Other Funding Description')[0]
+      ).toHaveValue(initialState.activity.costAllocationNarrative.years[1066].otherSources)
+    })
   });
 });

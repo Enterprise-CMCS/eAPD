@@ -112,8 +112,8 @@ const OtherFunding = ({
             />
           <div>
             { adminCheck 
-              && costAllocation[ffy].other > 0 
-              && !costAllocationNarrative.years[ffy].otherSources 
+              && costAllocation[ffy]?.other > 0 
+              && !costAllocationNarrative?.years[ffy]?.otherSources 
               && (
                 <span
                   className="ds-c-inline-error ds-c-field__error-message"
