@@ -1,6 +1,9 @@
 import React from 'react';
 import {
-  renderWithConnection
+  renderWithConnection,
+  act,
+  waitFor,
+  screen
 } from 'apd-testing-library';
 import { plain as OtherFunding, mapDispatchToProps } from './OtherFunding';
 import {
@@ -47,11 +50,20 @@ const initialState = {
   syncOtherFunding: jest.fn()
 };
 
-const setup = (props = {initialState}, options = {}) => renderWithConnection(<OtherFunding {...props} />, options);
+const setup = async (props = {}) => {
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  const utils = await act(async () =>
+  renderWithConnection(<OtherFunding {...initialState} {...props} />)
+);
+return utils;
+}
 
-describe('<setOtherFunding />', () => {
-  it('renders successfully', async () => {
-    const container = setup();
-    expect(container).toMatchSnapshot();
+describe('<OtherFunding />', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it('renders correctly', async () => {
+    await setup();
   });
 });

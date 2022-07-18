@@ -53,7 +53,7 @@ const OtherFunding = ({
   syncOtherFunding,
   adminCheck
 }) => {
-  const { costAllocationNarrative, costAllocation } = activity,
+  const { costAllocationNarrative = '', costAllocation = '' } = activity,
         { years } = costSummary,
         yearsArray = Object.keys(years);
 
@@ -98,11 +98,11 @@ const OtherFunding = ({
             />
             <RichText
               name={`costAllocationNarrative.years.${ffy}.otherSources`}
+              data-testid={`other-sources-${ffy}`}
               id={`cost-allocation-narrative-${ffy}-other-sources-field`}
               content={costAllocationNarrative.years[ffy].otherSources}
               onSync={html => {
                 syncOtherFunding(activityIndex, ffy, html);
-                onChange(html);
 
                 if (adminCheck) {
                   trigger();
