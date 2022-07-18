@@ -11,8 +11,8 @@ import {
   // mapStateToProps,
   // mapDispatchToProps
 } from './CostAllocate';
-import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
-import { render } from 'react-dom';
+// import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
+// import { render } from 'react-dom';
 
 const initialState = {
   activityIndex: 1,

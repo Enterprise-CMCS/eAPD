@@ -9,11 +9,10 @@ import { plain as
   OtherFunding, 
   // mapDispatchToProps 
 } from './OtherFunding';
-import {
-  setCostAllocationFFPOtherFunding,
-  setCostAllocationOtherFunding
-} from '../../../../../redux/actions/editActivity';
-import { init } from 'tinymce';
+// import {
+//   setCostAllocationFFPOtherFunding,
+//   setCostAllocationOtherFunding
+// } from '../../../../../redux/actions/editActivity';
 // import { render } from 'react-dom';
 
 const initialState = {
