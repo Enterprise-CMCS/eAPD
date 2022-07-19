@@ -7,14 +7,14 @@ const otherSourcesSchema = Joi.object({
       ffp: Joi.any(),
       other: Joi.number().positive().allow(0).required().messages({
         'number.base':
-          'Provide a number of hours greater than or equal to 0.',
+          'Provide an other funding amount greater than or equal to $0.',
         'number.positive':
-          'Provide a number of hours greater than or equal to 0.',
+          'Provide an other funding amount greater than or equal to $0.',
         'number.allow':
-          'Provide a number of hours greater than or equal to 0.',
+          'Provide an other funding amount greater than or equal to $0.',
         'number.empty':
-          'Provide a number of hours greater than or equal to 0.',
-        'number.format': 'Provide a valid number of hours.'
+          'Provide an other funding amount greater than or equal to $0.',
+        'number.format': 'Provide a valid funding amount.'
       })
     })
   )
