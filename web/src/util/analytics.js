@@ -4,6 +4,13 @@ import apdRoutes from '../pages/apd/apdRoutesList';
 import activityRoutesCreator from '../pages/apd/activities/activityRoutesList';
 import loginRoutesCreator from '../pages/login/loginRoutesList';
 
+const siteEnvironment = {
+  test: 'test',
+  dev: 'dev',
+  qa: 'imp',
+  prod: 'production'
+};
+
 export const pageView = pathname => {
   if (global.utag) {
     const activityRoutes = activityRoutesCreator(0);
@@ -26,8 +33,8 @@ export const pageView = pathname => {
         page_name: `${siteSection}: ${pageName}`,
         page_path: pathname,
         site_domain: window.location.origin,
-        site_environment: process.env.WEB_ENV,
-        site_section: '', // Which tool or area did this take place in? e.g. "app 3.0", "window shop", "my account"
+        site_environment: siteEnvironment[process.env.WEB_ENV],
+        site_section: siteSection, // Which tool or area did this take place in? e.g. "app 3.0", "window shop", "my account"
         logged_in: !isPublic
       });
     }
