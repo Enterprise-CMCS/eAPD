@@ -23,27 +23,7 @@ import {
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
 
-import Joi from 'joi';
-
-const otherSourcesSchema = Joi.object({
-  costAllocation: Joi.object().pattern(
-    /\d{4}/,
-    Joi.object({
-      ffp: Joi.any(),
-      other: Joi.number().positive().allow(0).required().messages({
-        'number.base':
-          'Provide a number of hours greater than or equal to 0.',
-        'number.positive':
-          'Provide a number of hours greater than or equal to 0.',
-        'number.allow':
-          'Provide a number of hours greater than or equal to 0.',
-        'number.empty':
-          'Provide a number of hours greater than or equal to 0.',
-        'number.format': 'Provide a valid number of hours.'
-      })
-    })
-  )
-})
+import otherSourcesSchema from '@cms-eapd/common/schemas/otherSources';
 
 const OtherFunding = ({
   activityIndex,
@@ -155,7 +135,7 @@ const OtherFunding = ({
                     }
                   }}
                   errorPlacement="bottom"
-                  errorMessage={errors?.costAllocation && errors?.costAllocation[ffy]?.other?.message}
+                  errorMessage={errors?.costAllocation[ffy]?.other?.message}
                 />
               )}
             />

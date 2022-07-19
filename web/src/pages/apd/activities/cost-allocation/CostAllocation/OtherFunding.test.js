@@ -13,7 +13,6 @@ import {
   setCostAllocationFFPOtherFunding,
   setCostAllocationOtherFunding
 } from '../../../../../redux/actions/editActivity';
-// import { render } from 'react-dom';
 
 const initialState = {
   adminCheck: true,
