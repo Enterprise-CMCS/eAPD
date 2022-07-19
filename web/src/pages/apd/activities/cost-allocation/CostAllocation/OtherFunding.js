@@ -135,7 +135,7 @@ const OtherFunding = ({
                     }
                   }}
                   errorPlacement="bottom"
-                  errorMessage={errors?.costAllocation[ffy]?.other?.message}
+                  errorMessage={errors?.costAllocation && errors?.costAllocation[ffy]?.other?.message}
                 />
               )}
             />
