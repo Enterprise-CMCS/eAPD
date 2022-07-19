@@ -1,38 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the Activities component renders correctly 1`] = `
-<Fragment>
-  <Connect(ConnectedWaypoint) />
-   
-  <Connect(AlertMissingFFY) />
-  <Section
-    id="activities"
-    resource="activities"
-  >
-    <hr
-      className="custom-hr"
-    />
-    <Connect(EntryDetails)
-      activityIndex={0}
-      apdId="0123456789abcdef01234560"
-      key="key1"
-    />
-    <Connect(EntryDetails)
-      activityIndex={1}
-      apdId="0123456789abcdef01234560"
-      key="key2"
-    />
-    <Connect(EntryDetails)
-      activityIndex={2}
-      apdId="0123456789abcdef01234560"
-      key="key3"
-    />
-    <Button
-      className="ds-u-margin-top--4"
-      onClick={[Function]}
-    >
-      Add Activity
-    </Button>
-  </Section>
-</Fragment>
+exports[`ActivitiesDashboard component should render correctly 1`] = `
+Object {
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "logTestingPlaygroundURL": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+}
 `;

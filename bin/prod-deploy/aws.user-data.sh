@@ -1,5 +1,6 @@
 #!/bin/bash
 # Configure CloudWatch Agent
+export ENVIRONMENT=$ENVIRONMENT
 touch /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 cat <<CWAGENTCONFIG > /opt/aws/amazon-cloudwatch-agent/doc/cwagent.json
 {
