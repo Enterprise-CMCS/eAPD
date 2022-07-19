@@ -44,6 +44,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | b
 source ~/.bashrc
 
 # We're using Node 16.15.0, we care about minor/patch versions
+export TERM="xterm"
 nvm install 16.15.0
 nvm alias default 16.15.0
 
