@@ -8,11 +8,10 @@ import {
 
 import {
   plain as CostAllocate,
-  // mapStateToProps,
-  // mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 } from './CostAllocate';
-// import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
-// import { render } from 'react-dom';
+import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
 
 const initialState = {
   activityIndex: 1,
@@ -44,5 +43,30 @@ describe('<setCostAllocationMethodology />', () => {
         screen.getByLabelText('Description of Cost Allocation Methodology')
       ).toHaveValue(initialState.activity.costAllocationNarrative.methodology);
     })
+  });
+
+  test('maps redux state to component props', () => {
+    const state = {
+      apd: {
+        data: {
+          activities: [
+            {
+              key: 'activity key'
+            }
+          ]
+        }
+      }
+    };
+    expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
+      activity: {
+        key: 'activity key'
+      }
+    });
+  });
+
+  test('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setMethodology: setCostAllocationMethodology
+    });
   });
 });

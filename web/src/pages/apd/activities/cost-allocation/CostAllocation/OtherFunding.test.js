@@ -7,12 +7,12 @@ import {
 } from 'apd-testing-library';
 import { plain as 
   OtherFunding, 
-  // mapDispatchToProps 
+  mapDispatchToProps
 } from './OtherFunding';
-// import {
-//   setCostAllocationFFPOtherFunding,
-//   setCostAllocationOtherFunding
-// } from '../../../../../redux/actions/editActivity';
+import {
+  setCostAllocationFFPOtherFunding,
+  setCostAllocationOtherFunding
+} from '../../../../../redux/actions/editActivity';
 // import { render } from 'react-dom';
 
 const initialState = {
@@ -76,5 +76,12 @@ describe('<OtherFunding />', () => {
         screen.getAllByLabelText('Other Funding Description')[0]
       ).toHaveValue(initialState.activity.costAllocationNarrative.years[1066].otherSources)
     })
+  });
+
+  it('maps dispatch actions to props', () => {
+    expect(mapDispatchToProps).toEqual({
+      setOtherFunding: setCostAllocationFFPOtherFunding,
+      syncOtherFunding: setCostAllocationOtherFunding
+    });
   });
 });

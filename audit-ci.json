@@ -3,5 +3,10 @@
   "medium": true,
   "package-manager": "yarn",
   "allowlist": ["GHSA-cj88-88mr-972w"],
-  "_comment": {}
+  "_comment": {
+    "1081522": {
+      "module": "glob-parent",
+      "affects": "@cms-eapd/web"
+    }
+  }
 }
