@@ -1,6 +1,5 @@
 {
   "low": true,
-  "medium": true,
   "package-manager": "yarn",
   "allowlist": ["GHSA-cj88-88mr-972w"],
   "_comment": {
