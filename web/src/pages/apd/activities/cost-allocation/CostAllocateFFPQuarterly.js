@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -33,16 +33,13 @@ const CostAllocateFFPQuarterly = ({
   quarterlyFFP,
   setContractorFFP,
   setInHouseFFP,
-  year
+  year,
+  adminCheck
 }) => {
-  // const formData = { ...quarterlyFFP[year] };
   const {
     control,
-    formState: { errors, isValid, touchedFields },
+    formState: { errors },
     setValue,
-    getValues,
-    watch,
-    getFieldState,
     trigger
   } = useForm({
     defaultValues: {
@@ -51,72 +48,24 @@ const CostAllocateFFPQuarterly = ({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: joiResolver(costAllocateFFPQuarterlySchema)
-    // resolver: async (data, context, options) => {
-    //   // you can debug your validation schema here
-    //   console.log('formData', data);
-    //   console.log(
-    //     'validation result',
-    //     await joiResolver(costAllocateFFPQuarterlySchema)(
-    //       data,
-    //       context,
-    //       options
-    //     )
-    //   );
-    //   return joiResolver(costAllocateFFPQuarterlySchema)(
-    //     data,
-    //     context,
-    //     options
-    //   );
-    // }
   });
-  const allQuarterFieldsTouched = (touchedFields, rowName) => {
-    if (touchedFields?.formData?.length > 0) {
-      const countFields = touchedFields.formData.filter(
-        item => item[`${rowName}`]
-      ).length;
-      if (countFields === 4) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  };
-
-  //   const [validationResults, setValidationResults] = useState();
-  //
-  //   const customValidation = async () => {
-  //     const { error } = await costAllocateFFPQuarterlySchema.validate(
-  //       quarterlyFFP[year],
-  //       { abortEarly: false }
-  //     );
-  //     if (error) {
-  //       const errorList = error.details.reduce((obj, error) => {
-  //         obj[error.path[1]] = error.message;
-  //         return obj;
-  //       }, {});
-  //       setValidationResults(errorList);
-  //     }
-  //     if (!error) {
-  //       setValidationResults({});
-  //     }
-  //   };
 
   useEffect(() => {
     setValue('formData.subtotal.inHouse', quarterlyFFP[year].subtotal.inHouse);
-    if (allQuarterFieldsTouched(touchedFields, 'inHouse')) {
+    if (adminCheck) {
       trigger('formData.subtotal.inHouse');
     }
-  }, [quarterlyFFP[year].subtotal.inHouse]);
+  }, [quarterlyFFP[year].subtotal.inHouse]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setValue(
       'formData.subtotal.contractors',
       quarterlyFFP[year].subtotal.contractors
     );
-    if (allQuarterFieldsTouched(touchedFields, 'contractors')) {
+    if (adminCheck) {
       trigger('formData.subtotal.contractors');
     }
-  }, [quarterlyFFP[year].subtotal.contractors]);
+  }, [quarterlyFFP[year].subtotal.contractors]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setInHouse =
     quarter =>
@@ -191,7 +140,7 @@ const CostAllocateFFPQuarterly = ({
                   <Controller
                     control={control}
                     name={`formData[${q}].inHouse.percent`}
-                    render={({ field: { onBlur, onChange, ...props } }) => (
+                    render={({ field: { onBlur, ...props } }) => (
                       <PercentField
                         {...props}
                         className="budget-table--input-holder"
@@ -347,11 +296,13 @@ CostAllocateFFPQuarterly.propTypes = {
   quarterlyFFP: PropTypes.object,
   setContractorFFP: PropTypes.func.isRequired,
   setInHouseFFP: PropTypes.func.isRequired,
-  year: PropTypes.string.isRequired
+  year: PropTypes.string.isRequired,
+  adminCheck: PropTypes.bool
 };
 
 CostAllocateFFPQuarterly.defaultProps = {
-  quarterlyFFP: null
+  quarterlyFFP: null,
+  adminCheck: false
 };
 
 const makeMapStateToProps = () => {

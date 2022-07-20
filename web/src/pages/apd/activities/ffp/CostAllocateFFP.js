@@ -128,7 +128,7 @@ const CostAllocateFFP = ({
   useEffect(() => {
     setValue('costAllocation', costAllocation);
     trigger();
-  }, [costAllocation]);
+  }, [costAllocation]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
