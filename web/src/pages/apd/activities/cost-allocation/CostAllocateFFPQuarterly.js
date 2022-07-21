@@ -36,6 +36,7 @@ const CostAllocateFFPQuarterly = ({
   year,
   adminCheck
 }) => {
+  console.log('adminCheck', adminCheck);
   // Wait until the budget is ready
   if (!quarterlyFFP) {
     return null;
@@ -307,8 +308,12 @@ CostAllocateFFPQuarterly.defaultProps = {
 
 const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
-  const mapStateToProps = (state, props) =>
-    selectCostAllocateFFPBudget(state, props);
+  const mapStateToProps = (state, props) => {
+    return {
+      adminCheck: state.apd.adminCheck,
+      ...selectCostAllocateFFPBudget(state, props)
+    };
+  };
   return mapStateToProps;
 };
 
