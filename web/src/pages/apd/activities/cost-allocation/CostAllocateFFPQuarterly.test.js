@@ -95,7 +95,7 @@ describe('the cost allocation quarterly FFP component', () => {
     setInHouseFFP.mockClear();
   });
 
-  it('gracefully falls back if the quarterly FFP is not ready', () => {
+  xit('gracefully falls back if the quarterly FFP is not ready', () => {
     expect(
       shallow(
         <CostAllocateFFPQuarterly
