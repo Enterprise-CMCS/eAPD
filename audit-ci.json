@@ -1,6 +1,11 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": [],
+  "allowlist": [
+    "1081522|@cms-eapd/web>postcss-cli>chokidar>glob-parent",
+    "1081522|@cms-eapd/web>postcss-cli>globby>fast-glob>glob-parent",
+    "GHSA-cj88-88mr-972w|@cms-eapd/web>postcss-cli>chokidar>glob-parent",
+    "GHSA-cj88-88mr-972w|@cms-eapd/web>postcss-cli>globby>fast-glob>glob-parent"
+  ],
   "_comment": {}
 }
