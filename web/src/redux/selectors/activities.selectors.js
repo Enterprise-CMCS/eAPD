@@ -171,7 +171,8 @@ export const selectActivityCostSummary = createSelector(
 export const makeSelectCostAllocateFFPBudget = () =>
   createSelector([selectApdData, selectBudgetForActivity], (apd, budget) => ({
     quarterlyFFP: budget ? budget.quarterlyFFP : null,
-    years: apd.years
+    years: apd.years,
+    adminCheck: apd.adminCheck
   }));
 
 export const selectActivitySchedule = createSelector(
