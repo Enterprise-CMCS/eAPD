@@ -85,7 +85,7 @@ yarn cache clean
 yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
 
 cd web
-WEB_ENV="test" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
+WEB_ENV="dev" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 
 cp -r dist/* /app/web
 
