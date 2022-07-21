@@ -109,7 +109,8 @@ const CostAllocateFFP = ({
   aKey,
   isViewOnly,
   setFundingSplit,
-  stateName
+  stateName,
+  adminCheck
 }) => {
   const {
     control,
@@ -127,7 +128,9 @@ const CostAllocateFFP = ({
 
   useEffect(() => {
     setValue('costAllocation', costAllocation);
-    trigger();
+    if (adminCheck) {
+      trigger();
+    }
   }, [costAllocation]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setFederalStateSplit = year => e => {
@@ -360,11 +363,13 @@ CostAllocateFFP.propTypes = {
   otherFunding: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
-  stateName: PropTypes.string.isRequired
+  stateName: PropTypes.string.isRequired,
+  adminCheck: PropTypes.bool
 };
 
 CostAllocateFFP.defaultProps = {
-  isViewOnly: false
+  isViewOnly: false,
+  adminCheck: false
 };
 
 const mapStateToProps = (
@@ -387,7 +392,8 @@ const mapStateToProps = (
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,
-    otherFunding: activityTotal.data.otherFunding
+    otherFunding: activityTotal.data.otherFunding,
+    adminCheck: state.apd.adminCheck
   };
 };
 

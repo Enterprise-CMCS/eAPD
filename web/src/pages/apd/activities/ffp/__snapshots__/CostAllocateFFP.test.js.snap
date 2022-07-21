@@ -222,32 +222,135 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         reverse={false}
         source="activities.costAllocate.ffp.federalStateSplitInstruction"
       />
-      <Dropdown
-        label="federal-state split"
-        labelClassName="sr-only"
-        name="ffp-1990"
-        onChange={[Function]}
-        options={
-          Array [
-            Object {
-              "label": "Select an option",
-              "value": "0-100",
+      <Component
+        control={
+          Object {
+            "_defaultValues": Object {
+              "costAllocation": Object {
+                "1990": Object {
+                  "ffp": Object {
+                    "federal": "90",
+                    "state": "10",
+                  },
+                  "other": 100,
+                },
+                "1991": Object {
+                  "ffp": Object {
+                    "federal": "50",
+                    "state": "50",
+                  },
+                  "other": 200,
+                },
+              },
             },
-            Object {
-              "label": "90-10",
-              "value": "90-10",
+            "_executeSchema": [Function],
+            "_fields": Object {},
+            "_formState": Object {
+              "dirtyFields": Object {},
+              "errors": Object {},
+              "isDirty": false,
+              "isSubmitSuccessful": false,
+              "isSubmitted": false,
+              "isSubmitting": false,
+              "isValid": false,
+              "isValidating": false,
+              "submitCount": 0,
+              "touchedFields": Object {},
             },
-            Object {
-              "label": "75-25",
-              "value": "75-25",
+            "_formValues": Object {
+              "costAllocation": Object {
+                "1990": Object {
+                  "ffp": Object {
+                    "federal": "90",
+                    "state": "10",
+                  },
+                  "other": 100,
+                },
+                "1991": Object {
+                  "ffp": Object {
+                    "federal": "50",
+                    "state": "50",
+                  },
+                  "other": 200,
+                },
+              },
             },
-            Object {
-              "label": "50-50",
-              "value": "50-50",
+            "_getDirty": [Function],
+            "_getFieldArray": [Function],
+            "_getWatch": [Function],
+            "_names": Object {
+              "array": Set {},
+              "mount": Set {},
+              "unMount": Set {},
+              "watch": Set {},
             },
-          ]
+            "_options": Object {
+              "defaultValues": Object {
+                "costAllocation": Object {
+                  "1990": Object {
+                    "ffp": Object {
+                      "federal": "90",
+                      "state": "10",
+                    },
+                    "other": 100,
+                  },
+                  "1991": Object {
+                    "ffp": Object {
+                      "federal": "50",
+                      "state": "50",
+                    },
+                    "other": 200,
+                  },
+                },
+              },
+              "mode": "onBlur",
+              "reValidateMode": "onBlur",
+              "resolver": [Function],
+              "shouldFocusError": true,
+            },
+            "_proxyFormState": Object {
+              "dirtyFields": false,
+              "errors": "all",
+              "isDirty": false,
+              "isValid": false,
+              "isValidating": false,
+              "touchedFields": false,
+            },
+            "_removeUnmounted": [Function],
+            "_stateFlags": Object {
+              "action": false,
+              "mount": false,
+              "watch": false,
+            },
+            "_subjects": Object {
+              "array": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "state": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "watch": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+            },
+            "_updateFieldArray": [Function],
+            "_updateValid": [Function],
+            "getFieldState": [Function],
+            "register": [Function],
+            "unregister": [Function],
+          }
         }
-        value="90-10"
+        name="costAllocation"
+        render={[Function]}
       />
     </div>
     <table
@@ -529,32 +632,135 @@ exports[`the CostAllocateFFP component renders correctly renders correctly in ed
         reverse={false}
         source="activities.costAllocate.ffp.federalStateSplitInstruction"
       />
-      <Dropdown
-        label="federal-state split"
-        labelClassName="sr-only"
-        name="ffp-1991"
-        onChange={[Function]}
-        options={
-          Array [
-            Object {
-              "label": "Select an option",
-              "value": "0-100",
+      <Component
+        control={
+          Object {
+            "_defaultValues": Object {
+              "costAllocation": Object {
+                "1990": Object {
+                  "ffp": Object {
+                    "federal": "90",
+                    "state": "10",
+                  },
+                  "other": 100,
+                },
+                "1991": Object {
+                  "ffp": Object {
+                    "federal": "50",
+                    "state": "50",
+                  },
+                  "other": 200,
+                },
+              },
             },
-            Object {
-              "label": "90-10",
-              "value": "90-10",
+            "_executeSchema": [Function],
+            "_fields": Object {},
+            "_formState": Object {
+              "dirtyFields": Object {},
+              "errors": Object {},
+              "isDirty": false,
+              "isSubmitSuccessful": false,
+              "isSubmitted": false,
+              "isSubmitting": false,
+              "isValid": false,
+              "isValidating": false,
+              "submitCount": 0,
+              "touchedFields": Object {},
             },
-            Object {
-              "label": "75-25",
-              "value": "75-25",
+            "_formValues": Object {
+              "costAllocation": Object {
+                "1990": Object {
+                  "ffp": Object {
+                    "federal": "90",
+                    "state": "10",
+                  },
+                  "other": 100,
+                },
+                "1991": Object {
+                  "ffp": Object {
+                    "federal": "50",
+                    "state": "50",
+                  },
+                  "other": 200,
+                },
+              },
             },
-            Object {
-              "label": "50-50",
-              "value": "50-50",
+            "_getDirty": [Function],
+            "_getFieldArray": [Function],
+            "_getWatch": [Function],
+            "_names": Object {
+              "array": Set {},
+              "mount": Set {},
+              "unMount": Set {},
+              "watch": Set {},
             },
-          ]
+            "_options": Object {
+              "defaultValues": Object {
+                "costAllocation": Object {
+                  "1990": Object {
+                    "ffp": Object {
+                      "federal": "90",
+                      "state": "10",
+                    },
+                    "other": 100,
+                  },
+                  "1991": Object {
+                    "ffp": Object {
+                      "federal": "50",
+                      "state": "50",
+                    },
+                    "other": 200,
+                  },
+                },
+              },
+              "mode": "onBlur",
+              "reValidateMode": "onBlur",
+              "resolver": [Function],
+              "shouldFocusError": true,
+            },
+            "_proxyFormState": Object {
+              "dirtyFields": false,
+              "errors": "all",
+              "isDirty": false,
+              "isValid": false,
+              "isValidating": false,
+              "touchedFields": false,
+            },
+            "_removeUnmounted": [Function],
+            "_stateFlags": Object {
+              "action": false,
+              "mount": false,
+              "watch": false,
+            },
+            "_subjects": Object {
+              "array": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "state": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+              "watch": Object {
+                "next": [Function],
+                "observers": Array [],
+                "subscribe": [Function],
+                "unsubscribe": [Function],
+              },
+            },
+            "_updateFieldArray": [Function],
+            "_updateValid": [Function],
+            "getFieldState": [Function],
+            "register": [Function],
+            "unregister": [Function],
+          }
         }
-        value="50-50"
+        name="costAllocation"
+        render={[Function]}
       />
     </div>
     <table

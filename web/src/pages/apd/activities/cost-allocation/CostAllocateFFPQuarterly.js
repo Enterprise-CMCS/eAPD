@@ -36,6 +36,11 @@ const CostAllocateFFPQuarterly = ({
   year,
   adminCheck
 }) => {
+  // Wait until the budget is ready
+  if (!quarterlyFFP) {
+    return null;
+  }
+
   const {
     control,
     formState: { errors },
@@ -82,11 +87,6 @@ const CostAllocateFFPQuarterly = ({
       setContractorFFP(activityIndex, year, quarter, value);
       announce(aKey, year, quarter, 'contractors');
     };
-
-  // Wait until the budget is ready
-  if (!quarterlyFFP) {
-    return null;
-  }
 
   return (
     <Fragment>
