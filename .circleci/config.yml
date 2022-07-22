@@ -1000,8 +1000,8 @@ jobs:
                 --MONGO_URL "$PREVIEW_MONGO_URL" \
                 --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
                 --DATABASE_URL "$PREVIEW_DATABASE_URL" \
-                --TEALIUM_TAG="$PREVIEW_TEALIUM_TAG" \
-                --TEALIUM_ENV="$PREVIEW_TEALIUM_ENV"
+                --TEALIUM_TAG "$PREVIEW_TEALIUM_TAG" \
+                --TEALIUM_ENV "$PREVIEW_TEALIUM_ENV"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
