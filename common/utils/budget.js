@@ -1,6 +1,6 @@
 import roundedPercents from './roundedPercents';
 import { arrToObj, convertToNumber } from './formatting';
-import { deepCopy, roundValues } from './utils';
+import { deepCopy, roundObjectValues } from './utils';
 
 export const CATEGORY_NAMES = [
   'statePersonnel',
@@ -13,7 +13,7 @@ export const FFP_OPTIONS = new Set(['90-10', '75-25', '50-50', '0-100']);
 
 /**
  * Creates a default Funding Source object with years and total.
- * @param {Array} years
+ * @param {Array} years The list of years in the APD
  * @returns the default Funding Source object
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
@@ -47,7 +47,7 @@ export const getDefaultFundingSourceObject = (years = []) => ({
 /**
  * Creates a default Expense object with Funding Source objects for each
  * expense type
- * @param {Array} years
+ * @param {Array} years The list of years in the APD
  * @param {Array} names
  * @returns the Expense object
  * e.g. for years: [2022, 2023, 2024] and default names the object would look like
@@ -77,7 +77,7 @@ export const getDefaultFundingSourceByCategoryObject = (
 
 /**
  * Creates a default Federal Share object by year and total.
- * @param {Array} years The FFYs
+ * @param {Array} years The list of years in the APD
  * @returns the default Federal Share object
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
@@ -126,7 +126,7 @@ export const defaultFederalShareByFFYQuarterObject = (years = []) =>
 
 /**
  * Creates a default Budget object by years
- * @param {Array} years
+ * @param {Array} years The list of years in the APD
  * @returns the default Budget object
  * e.g, for years: [2022, 2023, 2024] the object would look like
  * {
@@ -190,7 +190,7 @@ export const defaultBudgetObject = (years = []) => ({
 
 /**
  * Creates a default quarterly FFP object by FFYs
- * @param {Array} years The FFYs
+ * @param {Array} years The list of years in the APD
  * @returns the default quarterly FFP
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
@@ -256,7 +256,7 @@ export const defaultQuarterlyFFPObject = (years = []) => ({
 
 /**
  * Creates a default Activity Totals data object
- * @param {Array} years As a four-character year string (e.g., '2018')
+ * @param {Array} years The list of years in the APD
  * @returns the default activity totals object
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
@@ -339,6 +339,8 @@ export const updateStatePersonnel = ({
     // personnel to it so they get included in downstream calculations.
     // TODO: Don't rely on the activity name. Instead, this should always be
     // activity index 0. However, that will require some tweaks to the tests.
+    // Program Administration is the only activity that needs the key personnel
+    // because it deals with the project overhead and is only used in HITECH APDs.
     if (name === 'Program Administration' && Array.isArray(keyPersonnel)) {
       updatedStatePersonnel.push(
         ...keyPersonnel
@@ -705,7 +707,7 @@ export const sumShareCostsForFundingSource = ({
 };
 
 /**
- * Sums the MMIS totals for each categories and total of all the categories
+ * Sums the MMIS totals for each category and total of all the categories
  * for each year and the total costs for each year.
  * @param {Object} budget The budget object
  * @param {Number} year The FFY
@@ -1306,5 +1308,5 @@ export const calculateBudget = apd => {
     });
   }
 
-  return roundValues(newBudget);
+  return roundObjectValues(newBudget);
 };

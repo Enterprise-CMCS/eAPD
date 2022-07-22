@@ -17,13 +17,13 @@ export const fixNum = (value, digits = 2) => {
  * @param {Integer} digits The number of digits to round to, defaults to 2
  * @returns {Object} the object with rounded values
  */
-export const roundValues = (o, digits = 2) => {
+export const roundObjectValues = (o, digits = 2) => {
   Object.entries(o).forEach(([key, value]) => {
     if (value) {
       if (typeof value === 'number') {
         o[key] = fixNum(value, digits);
       } else if (typeof value === 'object') {
-        roundValues(value, digits);
+        roundObjectValues(value, digits);
       }
     }
   });
