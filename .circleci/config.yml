@@ -173,7 +173,7 @@ workflows:
       - frontend build:
           name: frontend build preview
           env: PRODUCTION
-          web_env: development
+          web_env: dev
           filters:
             branches:
               ignore:
@@ -192,7 +192,7 @@ workflows:
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
-          web_env: production
+          web_env: prod
           filters:
             branches:
               ignore: /.*/
@@ -203,7 +203,7 @@ workflows:
       - frontend build:
           name: frontend build staging
           env: STAGING
-          web_env: staging
+          web_env: qa
           filters:
             branches:
               only:
