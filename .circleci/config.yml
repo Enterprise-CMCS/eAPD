@@ -173,7 +173,6 @@ workflows:
       - frontend build:
           name: frontend build preview
           env: PRODUCTION
-          web_env: dev
           filters:
             branches:
               ignore:
@@ -192,7 +191,6 @@ workflows:
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
-          web_env: prod
           filters:
             branches:
               ignore: /.*/
@@ -203,7 +201,6 @@ workflows:
       - frontend build:
           name: frontend build staging
           env: STAGING
-          web_env: qa
           filters:
             branches:
               only:
@@ -312,6 +309,7 @@ jobs:
               --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
+              --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
               preview-ami.pkr.hcl
   build production staging ami:
     docker:
@@ -490,7 +488,7 @@ jobs:
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
-            export WEB_ENV="test"
+            export TEALIUM_ENV="test"
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             COMPOSE_HTTP_TIMEOUT=150 docker-compose up -d
             docker-compose exec api yarn run migrate
@@ -590,7 +588,7 @@ jobs:
           working_directory: ~/project/web
           no_output_timeout: 60m
           command: |
-            export WEB_ENV="test"
+            export TEALIUM_ENV="test"
             STORYBOOK_BUILD_TIMEOUT=1200000 yarn build:storybook
             yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
@@ -705,9 +703,6 @@ jobs:
       env:
         description: The environment being deployed
         type: string
-      web_env:
-        description: The type of environment being deployed
-        type: string
     docker:
       - image: cimg/node:16.15.0
         auth:
@@ -724,7 +719,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: WEB_ENV="${<< parameters.web_env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -768,7 +763,7 @@ jobs:
           name: run tests
           working_directory: ~/project/web
           command: |
-            export WEB_ENV="test"
+            export TEALIUM_ENV="test"
             yarn test --runInBand
       - run:
           name: report coverage
@@ -881,7 +876,9 @@ jobs:
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
               --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
-              --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}"
+              --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}" \
+              --TEALIUM_TAG "${<< parameters.env >>_PREVIEW_TEALIUM_TAG}" \
+              --TEALIUM_ENV "${<< parameters.env >>_PREVIEW_TEALIUM_ENV}"
 
       - run:
           when: on_fail
@@ -1003,7 +1000,8 @@ jobs:
                 --MONGO_URL "$PREVIEW_MONGO_URL" \
                 --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
                 --DATABASE_URL "$PREVIEW_DATABASE_URL" \
-                --TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
+                --TEALIUM_TAG="$PREVIEW_TEALIUM_TAG" \
+                --TEALIUM_ENV="$PREVIEW_TEALIUM_ENV"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
