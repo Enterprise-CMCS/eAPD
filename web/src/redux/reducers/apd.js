@@ -327,7 +327,7 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: process.env.WEB_ENV !== 'prod',
+  adminCheck: process.env.TEALIUM_ENV !== 'prod',
   adminCheckMini: false,
   adminCheckComplete: false
 };
