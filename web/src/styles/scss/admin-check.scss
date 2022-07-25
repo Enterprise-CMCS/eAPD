@@ -2,6 +2,7 @@
   z-index: 2;
   top: 60.5px;
   box-shadow: -2px 2px 3px 1px #8484848c;
+  max-width: 60ex;
 }
 
 .eapd-admin-check a:visited {
@@ -33,7 +34,7 @@
 }
 
 .eapd-admin-check .ds-c-drawer__footer {
-  padding: 24px 30px;
+  padding: 16px;
 }
 
 .eapd-admin-check .ds-c-drawer__footer a {

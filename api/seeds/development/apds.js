@@ -766,7 +766,7 @@ const apd = {
   },
   // Mocked metadata for admin panel demo
   metadata: {
-    incomplete: 2,
+    incomplete: 5,
     todo: {
       overview: {
         name: 'APD Overview',
@@ -775,18 +775,44 @@ const apd = {
         fields: [
           {
             name: 'APD Name',
-            description: 'please include a name'
+            description: 'Please fill out name'
           }
         ]
       },
       keyStatePersonnel: {
         name: 'Key State Personnel',
-        incomplete: 1,
+        incomplete: 2,
         link: 'state-profile',
         fields: [
           {
+            name: 'Email Address',
+            description: 'Provide the email address of the Medicaid Director'
+          },
+          {
             name: 'Phone Number',
             description: 'Provide the phone number of the Medicaid Director'
+          }
+        ]
+      },
+      activity1: {
+        name: 'Activity 1',
+        incomplete: 1,
+        link: 'activity/0/overview',
+        fields: [
+          {
+            name: 'Overview',
+            description: 'Provide a short overview of the Activity'
+          }
+        ]
+      },
+      activity2: {
+        name: 'Activity 2',
+        incomplete: 1,
+        link: 'activity/1/overview',
+        fields: [
+          {
+            name: 'Outcomes and Metrics',
+            description: 'Add at least one outcome for this activity'
           }
         ]
       }

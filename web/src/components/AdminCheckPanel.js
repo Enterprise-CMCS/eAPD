@@ -55,13 +55,13 @@ const AdminCheckPanel = ({
               <Fragment>
                 <div className="ds-u-padding-bottom--1">
                   <Icon
-                    className="ds-u-color--error ds-u-margin-right--1"
+                    className="ds-u-margin-right--1"
                     icon={faExclamationTriangle}
                     size="lg"
                   />
                   <button
                     onClick={handleClose}
-                    className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent ds-u-color--error ds-u-font-size--lg"
+                    className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent ds-u-font-size--lg"
                   >
                     Stop Administrative Check
                   </button>
@@ -156,7 +156,7 @@ const AdminCheckPanel = ({
                   <Fragment>
                     <h3
                       role="alert"
-                      className="ds-u-text-align--center ds-text-heading--2xl ds-u-font-weight--normal ds-u-margin-top--1"
+                      className="ds-u-text-align--center ds-text-heading--2xl ds-u-font-weight--normal ds-u-margin-top--4"
                     >
                       Administrative Check is Complete
                     </h3>
@@ -192,11 +192,19 @@ const AdminCheckPanel = ({
                               key={field.name}
                               className="ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1"
                             >
-                              <div class="ds-u-display--flex ds-u-justify-content--between">
-                                <Link to={metadata.todo[key].link}>
-                                  {metadata.todo[key].name}
+                              <div className="ds-u-display--flex ds-u-justify-content--between">
+                                <Link
+                                  to={metadata.todo[key].link}
+                                  className="ds-u-text-decoration--none ds-text-heading--lg ds-u-margin--0"
+                                >
+                                  {metadata.todo[key].name}{' '}
+                                  {(key === 'activity1' ||
+                                    key === 'activity2') &&
+                                    field.name}
                                 </Link>
-                                <a href="">Edit</a>
+                                <a href="" className="ds-u-font-weight--normal">
+                                  Edit
+                                </a>
                               </div>
                               <div className="ds-u-font-weight--normal">
                                 {field.description}
@@ -206,41 +214,6 @@ const AdminCheckPanel = ({
                         </Fragment>
                       ))}
                     </ol>
-                    {/* <Accordion bordered>
-                      {Object.keys(metadata.todo).map(key => (
-                        <AccordionItem
-                          key={key}
-                          heading={
-                            <Fragment key={key}>
-                              <div className="ds-u-display--flex ds-u-flex-direction--column">
-                                <h3 className="ds-u-margin--0">
-                                  {metadata.todo[key].name}:{' '}
-                                  <span className="ds-u-font-weight--normal">
-                                    {metadata.todo[key].incomplete} field(s) to
-                                    complete
-                                  </span>
-                                </h3>
-                                <Link to={metadata.todo[key].link}>
-                                  Go to the {metadata.todo[key].name} page.
-                                </Link>
-                              </div>
-                            </Fragment>
-                          }
-                          defaultOpen={false}
-                        >
-                          <ol>
-                            {metadata.todo[key].fields.map(field => (
-                              <li key={field.name} className="ds-h5">
-                                {field.name} <br />
-                                <span className="ds-u-font-weight--normal">
-                                  {field.description}
-                                </span>
-                              </li>
-                            ))}
-                          </ol>
-                        </AccordionItem>
-                      ))}
-                    </Accordion> */}
                   </Fragment>
                 )}
               </div>
@@ -248,7 +221,7 @@ const AdminCheckPanel = ({
                 onClick={toggleComplete}
                 className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
               >
-                [Demo: Toggle Complete]
+                [Demo: Toggle All Complete]
               </button>
             </Fragment>
           )}
