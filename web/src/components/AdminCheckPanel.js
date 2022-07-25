@@ -115,44 +115,6 @@ const AdminCheckPanel = ({
                   Incomplete Required Fields Total
                 </span>
               </div>
-              {adminCheckComplete && (
-                <Fragment>
-                  <p role="alert">
-                    Well Done! The Administrative Check is complete.
-                  </p>
-                  <p>
-                    Return to the{' '}
-                    <Link to="export">Export and Submit page.</Link>
-                  </p>
-                </Fragment>
-              )}
-              {!adminCheckComplete && (
-                <Fragment>
-                  <h3 className="ds-u-font-size--base">
-                    <strong>Key State Personnel: </strong>
-                    <span className="ds-u-font-weight--normal">
-                      2 field(s) to complete on page
-                    </span>
-                  </h3>
-                  <ol className="ds-u-padding-top--0 ds-u-padding-bottom--1 ds-c-list">
-                    <li>
-                      <strong>Email address: </strong>Provide the email address
-                      of the Medicaid Director.
-                    </li>
-                    <li>
-                      <strong>Phone number: </strong>Provide a valid phone
-                      number for the Medicaid Director.
-                    </li>
-                  </ol>
-                  <Button size="big" variation="primary">
-                    Continue to Results of Previous Activities
-                    <Icon
-                      className="ds-u-padding-left--1"
-                      icon={faArrowRight}
-                    />
-                  </Button>
-                </Fragment>
-              )}
               <button
                 onClick={toggleComplete}
                 className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent"
@@ -168,27 +130,25 @@ const AdminCheckPanel = ({
                 are missing content. These fields must be completed before
                 submission to CMS.
               </p>
-              <div className="ds-u-border--2 ds-u-padding--2">
-                <div className="ds-u-display--flex ds-u-justify-content--end ds-u-text-align--right ds-u-align-items--center">
-                  <span
-                    className={`${
-                      adminCheckComplete
-                        ? 'ds-u-color--success'
-                        : 'ds-u-color--error'
-                    } ds-u-font-weight--bold ds-u-margin-right--2`}
-                  >
-                    Incomplete
-                    <br />
-                    Required Fields
-                  </span>
+              <div className="eapd-admin-check-list">
+                <div className="ds-u-display--flex ds-u-justify-content--start ds-u-text-align--right ds-u-align-items--center">
                   <span
                     className={`${
                       adminCheckComplete
                         ? 'ds-u-fill--success'
                         : 'ds-u-fill--error'
-                    } ds-u-color--white ds-u-radius ds-u-padding-x--3 ds-u-padding-y--2 ds-u-font-size--2xl ds-u-font-weight--bold`}
+                    } ds-u-color--white ds-u-radius ds-u-padding-x--1 ds-u-padding-y--0 ds-u-font-weight--bold`}
                   >
                     {adminCheckComplete ? '0' : metadata.incomplete}
+                  </span>
+                  <span
+                    className={`${
+                      adminCheckComplete
+                        ? 'ds-u-color--success'
+                        : 'ds-u-color--error'
+                    } ds-u-font-weight--bold ds-u-padding-left--1`}
+                  >
+                    Incomplete Required Fields
                   </span>
                 </div>
                 <hr className="eapd-admin-check__divider" />
@@ -224,8 +184,29 @@ const AdminCheckPanel = ({
                 )}
                 {!adminCheckComplete && (
                   <Fragment>
-                    <h3>To Do</h3>
-                    <Accordion bordered>
+                    <ol className="ds-u-margin-y--1">
+                      {Object.keys(metadata.todo).map(key => (
+                        <Fragment>
+                          {metadata.todo[key].fields.map(field => (
+                            <li
+                              key={field.name}
+                              className="ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1"
+                            >
+                              <div class="ds-u-display--flex ds-u-justify-content--between">
+                                <Link to={metadata.todo[key].link}>
+                                  {metadata.todo[key].name}
+                                </Link>
+                                <a href="">Edit</a>
+                              </div>
+                              <div className="ds-u-font-weight--normal">
+                                {field.description}
+                              </div>
+                            </li>
+                          ))}
+                        </Fragment>
+                      ))}
+                    </ol>
+                    {/* <Accordion bordered>
                       {Object.keys(metadata.todo).map(key => (
                         <AccordionItem
                           key={key}
@@ -259,34 +240,13 @@ const AdminCheckPanel = ({
                           </ol>
                         </AccordionItem>
                       ))}
-                    </Accordion>
-                    <h3>Recently Completed</h3>
-                    {metadata.recents.length > 0 && (
-                      <div>
-                        {metadata.recents.map(item => (
-                          <div
-                            key={item.section}
-                            className="ds-u-border--1 ds-u-margin-bottom--2 ds-u-padding--2"
-                          >
-                            <h3 className="ds-u-margin--0 ds-u-font-weight--normal">
-                              {item.page}
-                            </h3>
-                            <Link to={item.link}>
-                              Go to the {item.section} page.
-                            </Link>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {metadata.recents.length === 0 && (
-                      <p>No sections recently completed</p>
-                    )}
+                    </Accordion> */}
                   </Fragment>
                 )}
               </div>
               <button
                 onClick={toggleComplete}
-                className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent"
+                className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
               >
                 [Demo: Toggle Complete]
               </button>

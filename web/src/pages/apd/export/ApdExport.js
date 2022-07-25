@@ -34,7 +34,7 @@ const ExportAndSubmit = ({
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
       <AlertMissingFFY />
       <Section resource="exportAndSubmit">
-        {process.env.WEB_ENV !== 'production' && (
+        {'replace this with the check for environment' && (
           <Subsection resource="adminCheck">
             <p>
               Choose Run Administrative Check to see a list of required fields
