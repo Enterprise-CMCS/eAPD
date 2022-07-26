@@ -134,6 +134,7 @@
     ]
   },
   "resolutions": {
+    "ansi-regex": "3.0.1",
     "minimist": ">=1.2.6",
     "glob-parent": ">=6.0.1"
   }
