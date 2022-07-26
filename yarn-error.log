@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/tif/.nvm/versions/node/v16.16.0/bin/node /Users/tif/.nvm/versions/node/v16.15.0/bin/yarn install
+  /Users/tif/.nvm/versions/node/v16.16.0/bin/node /Users/tif/.nvm/versions/node/v16.16.0/bin/yarn install
 
 PATH: 
-  /Users/tif/.nvm/versions/node/v16.16.0/bin:/Users/tif/.nvm/versions/node/v16.16.0/bin:/Users/tif/.rvm/gems/ruby-3.1.1/bin:/Users/tif/.rvm/gems/ruby-3.1.1@global/bin:/Users/tif/.rvm/rubies/ruby-3.1.1/bin:/Users/tif/.nvm/versions/node/v16.15.0/bin:/Users/tif/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/tif/.rvm/gems/ruby-3.1.1/bin:/Users/tif/.rvm/gems/ruby-3.1.1@global/bin:/Users/tif/.rvm/rubies/ruby-3.1.1/bin:/Users/tif/.nvm/versions/node/v16.15.0/bin:/Users/tif/bin:/Users/tif/.rvm/bin:/Users/tif/.rvm/bin
+  /Users/tif/.nvm/versions/node/v16.16.0/bin:/Users/tif/.nvm/versions/node/v16.16.0/bin:/Users/tif/.rvm/gems/ruby-3.1.1/bin:/Users/tif/.rvm/gems/ruby-3.1.1@global/bin:/Users/tif/.rvm/rubies/ruby-3.1.1/bin:/Users/tif/.nvm/versions/node/v16.16.0/bin:/Users/tif/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/tif/.rvm/gems/ruby-3.1.1/bin:/Users/tif/.rvm/gems/ruby-3.1.1@global/bin:/Users/tif/.rvm/rubies/ruby-3.1.1/bin:/Users/tif/.nvm/versions/node/v16.15.0/bin:/Users/tif/bin:/Users/tif/.rvm/bin:/Users/tif/.rvm/bin
 
 Yarn version: 
   1.22.18

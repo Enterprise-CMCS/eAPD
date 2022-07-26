@@ -60,33 +60,35 @@ exports[`DollarField component renders correctly 1`] = `
               </span>
             </label>
           </FormLabel>
-          <TextInput
-            errorId="field_1-error"
-            errorPlacement="top"
-            id="field_1"
+          <Mask
             mask="currency"
-            name="test name"
-            onBlur={[Function]}
-            onChange={[Function]}
-            setRef={[Function]}
-            size="medium"
-            type="text"
-            value="123"
           >
-            <Mask
-              mask="currency"
+            <div
+              className="ds-c-field-mask ds-c-field-mask--currency"
             >
               <div
-                className="ds-c-field-mask ds-c-field-mask--currency"
+                className="ds-c-field__before ds-c-field__before--currency"
               >
-                <div
-                  className="ds-c-field__before ds-c-field__before--currency"
-                >
-                  $
-                </div>
+                $
+              </div>
+              <TextInput
+                errorId="field_1-error"
+                errorPlacement="top"
+                fieldClassName="ds-c-field--currency"
+                id="field_1"
+                inputMode="numeric"
+                name="test name"
+                onBlur={[Function]}
+                onChange={[Function]}
+                pattern="[0-9.,-]*"
+                setRef={[Function]}
+                size="medium"
+                type="text"
+                value="123"
+              >
                 <input
                   aria-invalid={false}
-                  className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                  className="ds-c-field ds-c-field--medium ds-c-field--currency"
                   id="field_1"
                   inputMode="numeric"
                   name="test name"
@@ -96,9 +98,9 @@ exports[`DollarField component renders correctly 1`] = `
                   type="text"
                   value="123"
                 />
-              </div>
-            </Mask>
-          </TextInput>
+              </TextInput>
+            </div>
+          </Mask>
         </div>
       </FormControl>
     </TextField>
