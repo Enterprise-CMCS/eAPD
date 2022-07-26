@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
+  "scripts": {
+    "npm-check": "npx npm-check-updates"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CMSgov/eAPD.git"

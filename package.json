@@ -83,8 +83,8 @@
     ]
   },
   "devDependencies": {
-    "@snyk/protect": "1.951.0",
-    "prettier": "2.7.0"
+    "@snyk/protect": "1.981.0",
+    "prettier": "2.7.1"
   },
   "resolutions": {
     "yargs-parser": ">=18.1.1"
