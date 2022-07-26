@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,11 @@ import {
   Drawer
 } from '@cmsgov/design-system';
 
-import Icon, { faExclamationTriangle, faArrowRight } from '../components/Icons';
+import Icon, {
+  faExclamationTriangle,
+  faArrowRight,
+  Check
+} from '../components/Icons';
 
 const AdminCheckPanel = ({
   adminCheckEnabled,
@@ -28,6 +32,10 @@ const AdminCheckPanel = ({
   toggleAdminMini,
   toggleAdminComplete
 }) => {
+  /* making a local var just to easily modify its properties for prototyping */
+  const [localMetadata, setLocalMetadata] = useState(metadata);
+  const [localCompleteDemo, setLocalCompleteDemo] = useState(false);
+
   const handleClose = () => {
     toggleAdmin(false);
   };
@@ -38,6 +46,55 @@ const AdminCheckPanel = ({
 
   const toggleComplete = () => {
     adminCheckComplete ? toggleAdminComplete(false) : toggleAdminComplete(true);
+  };
+
+  const demoToggleComplete = () => {
+    if (localMetadata.todo.overview.fields.length > 0) {
+      setLocalMetadata({
+        ...localMetadata,
+        incomplete: 4,
+        todo: {
+          ...localMetadata.todo,
+          overview: {
+            ...localMetadata.todo.overview,
+            fields: []
+          }
+        }
+      });
+    }
+    if (localMetadata.todo.overview.fields.length === 0) {
+      setLocalMetadata(metadata);
+    }
+  };
+
+  const demoToggleCompleteAlt = () => {
+    localCompleteDemo
+      ? setLocalCompleteDemo(false)
+      : setLocalCompleteDemo(true);
+  };
+
+  const demoToggleClear = () => {
+    if (
+      localMetadata.todo.keyStatePersonnel.fields[0].name !== 'Phone Number'
+    ) {
+      const filtered = localMetadata.todo.keyStatePersonnel.fields.filter(
+        (item, index) => item.name !== 'Email Address'
+      );
+      const object = {
+        ...localMetadata,
+        todo: {
+          ...localMetadata.todo,
+          keyStatePersonnel: {
+            ...localMetadata.todo.keyStatePersonnel,
+            fields: filtered
+          }
+        }
+      };
+      setLocalMetadata(object);
+    }
+    if (localMetadata.todo.keyStatePersonnel.fields[0].name == 'Phone Number') {
+      setLocalMetadata(metadata);
+    }
   };
 
   return (
@@ -139,7 +196,7 @@ const AdminCheckPanel = ({
                         : 'ds-u-fill--error'
                     } ds-u-color--white ds-u-radius ds-u-padding-x--1 ds-u-padding-y--0 ds-u-font-weight--bold`}
                   >
-                    {adminCheckComplete ? '0' : metadata.incomplete}
+                    {adminCheckComplete ? '0' : localMetadata.incomplete}
                   </span>
                   <span
                     className={`${
@@ -185,37 +242,89 @@ const AdminCheckPanel = ({
                 {!adminCheckComplete && (
                   <Fragment>
                     <ol className="ds-u-margin-y--1">
-                      {Object.keys(metadata.todo).map(key => (
+                      {Object.keys(localMetadata.todo).map((key, index) => (
                         <Fragment>
-                          {metadata.todo[key].fields.map(field => (
-                            <li
-                              key={field.name}
-                              className="ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1"
-                            >
-                              <div className="ds-u-display--flex ds-u-justify-content--between">
-                                <Link
-                                  to={metadata.todo[key].link}
-                                  className="ds-u-text-decoration--none ds-text-heading--lg ds-u-margin--0"
-                                >
-                                  {metadata.todo[key].name}{' '}
-                                  {(key === 'activity1' ||
-                                    key === 'activity2') &&
-                                    field.name}
-                                </Link>
-                                <a href="" className="ds-u-font-weight--normal">
-                                  Edit
-                                </a>
-                              </div>
-                              <div className="ds-u-font-weight--normal">
-                                {field.description}
-                              </div>
-                            </li>
-                          ))}
+                          {localMetadata.todo[key].fields.map(
+                            (field, subindex) => (
+                              <li
+                                key={field.name}
+                                className={`ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1 ${
+                                  localCompleteDemo &&
+                                  index == 1 &&
+                                  field.name == 'Email Address'
+                                    ? 'democheck'
+                                    : ''
+                                }`}
+                              >
+                                <div className="ds-u-display--flex ds-u-justify-content--between">
+                                  {localCompleteDemo &&
+                                  index == 1 &&
+                                  field.name == 'Email Address' ? (
+                                    <Fragment>
+                                      <Link
+                                        to={localMetadata.todo[key].link}
+                                        className="ds-u-text-decoration--none ds-text-heading--lg ds-u-color--gray ds-u-margin--0"
+                                      >
+                                        {localMetadata.todo[key].name}{' '}
+                                        {(key === 'activity1' ||
+                                          key === 'activity2') &&
+                                          field.name}
+                                      </Link>
+                                      <div className="ds-u-color--success ds-u-font-weight--normal">
+                                        <Check /> Completed
+                                      </div>
+                                    </Fragment>
+                                  ) : (
+                                    <Fragment>
+                                      <Link
+                                        to={localMetadata.todo[key].link}
+                                        className="ds-u-text-decoration--none ds-text-heading--lg ds-u-margin--0"
+                                      >
+                                        {localMetadata.todo[key].name}{' '}
+                                        {(key === 'activity1' ||
+                                          key === 'activity2') &&
+                                          field.name}
+                                      </Link>
+                                      <Link
+                                        to={localMetadata.todo[key].link}
+                                        className="ds-u-font-weight--normal"
+                                      >
+                                        Edit
+                                      </Link>
+                                    </Fragment>
+                                  )}
+                                </div>
+                                <div className="ds-u-font-weight--normal">
+                                  {field.description}
+                                </div>
+                              </li>
+                            )
+                          )}
                         </Fragment>
                       ))}
                     </ol>
                   </Fragment>
                 )}
+              </div>
+              <button
+                onClick={demoToggleComplete}
+                className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
+              >
+                [Demo: Toggle Completed Field #1]
+              </button>
+              <div>
+                <button
+                  onClick={demoToggleCompleteAlt}
+                  className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
+                >
+                  [Demo: Toggle Completed Field #2]
+                </button>
+                <button
+                  onClick={demoToggleClear}
+                  className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
+                >
+                  [Demo: Toggle Clear Completed]
+                </button>
               </div>
               <button
                 onClick={toggleComplete}

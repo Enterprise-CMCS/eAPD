@@ -126,6 +126,10 @@
   float: left;
 }
 
+.eapd-admin-check-list ol > li.democheck:before {
+  background: $color-gray;
+}
+
 .eapd-admin-mini {
   animation: FadeIn 0.3s ease-in-out both;
   padding-top: 10px;
