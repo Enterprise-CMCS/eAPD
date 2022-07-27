@@ -1,4 +1,4 @@
-FROM node:16.15.0-alpine3.15
+FROM node:16.16.0-alpine3.15
 RUN apk add --no-cache python3 g++ make
 
 RUN mkdir /app
