@@ -109,17 +109,7 @@ describe('admin check panel', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Collapse' }));
 
-    // Todo: update this when we have live data for the mini check
-    expect(
-      screen.getByText('Continue to Results of Previous Activities')
-    ).toBeTruthy();
-
-    fireEvent.click(screen.getByRole('button', { name: 'Expand' }));
-
-    // Todo: update this when we have live data for the mini check
-    expect(
-      screen.queryByText('Continue to Results of Previous Activities')
-    ).not.toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Expand' })).toBeTruthy();
   });
 
   test('renders the completed message', () => {
@@ -154,7 +144,7 @@ describe('admin check panel', () => {
     });
 
     expect(
-      screen.getByText('Well Done! The Administrative Check is complete.')
+      screen.getAllByRole('button', { name: 'Close help drawer' })
     ).toBeTruthy();
   });
 });

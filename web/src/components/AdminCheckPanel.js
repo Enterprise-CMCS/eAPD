@@ -9,19 +9,9 @@ import {
   toggleAdminCheckComplete
 } from '../redux/actions/app/apd';
 
-import {
-  Accordion,
-  AccordionItem,
-  Badge,
-  Button,
-  Drawer
-} from '@cmsgov/design-system';
+import { Badge, Button, Drawer } from '@cmsgov/design-system';
 
-import Icon, {
-  faExclamationTriangle,
-  faArrowRight,
-  Check
-} from '../components/Icons';
+import Icon, { faExclamationTriangle, Check } from '../components/Icons';
 
 const AdminCheckPanel = ({
   adminCheckEnabled,
@@ -78,7 +68,7 @@ const AdminCheckPanel = ({
       localMetadata.todo.keyStatePersonnel.fields[0].name !== 'Phone Number'
     ) {
       const filtered = localMetadata.todo.keyStatePersonnel.fields.filter(
-        (item, index) => item.name !== 'Email Address'
+        item => item.name !== 'Email Address'
       );
       const object = {
         ...localMetadata,
@@ -243,63 +233,61 @@ const AdminCheckPanel = ({
                   <Fragment>
                     <ol className="ds-u-margin-y--1">
                       {Object.keys(localMetadata.todo).map((key, index) => (
-                        <Fragment>
-                          {localMetadata.todo[key].fields.map(
-                            (field, subindex) => (
-                              <li
-                                key={field.name}
-                                className={`ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1 ${
-                                  localCompleteDemo &&
-                                  index == 1 &&
-                                  field.name == 'Email Address'
-                                    ? 'democheck'
-                                    : ''
-                                }`}
-                              >
-                                <div className="ds-u-display--flex ds-u-justify-content--between">
-                                  {localCompleteDemo &&
-                                  index == 1 &&
-                                  field.name == 'Email Address' ? (
-                                    <Fragment>
-                                      <Link
-                                        to={localMetadata.todo[key].link}
-                                        className="ds-u-text-decoration--none ds-text-heading--lg ds-u-color--gray ds-u-margin--0"
-                                      >
-                                        {localMetadata.todo[key].name}{' '}
-                                        {(key === 'activity1' ||
-                                          key === 'activity2') &&
-                                          field.name}
-                                      </Link>
-                                      <div className="ds-u-color--success ds-u-font-weight--normal">
-                                        <Check /> Completed
-                                      </div>
-                                    </Fragment>
-                                  ) : (
-                                    <Fragment>
-                                      <Link
-                                        to={localMetadata.todo[key].link}
-                                        className="ds-u-text-decoration--none ds-text-heading--lg ds-u-margin--0"
-                                      >
-                                        {localMetadata.todo[key].name}{' '}
-                                        {(key === 'activity1' ||
-                                          key === 'activity2') &&
-                                          field.name}
-                                      </Link>
-                                      <Link
-                                        to={localMetadata.todo[key].link}
-                                        className="ds-u-font-weight--normal"
-                                      >
-                                        Edit
-                                      </Link>
-                                    </Fragment>
-                                  )}
-                                </div>
-                                <div className="ds-u-font-weight--normal">
-                                  {field.description}
-                                </div>
-                              </li>
-                            )
-                          )}
+                        <Fragment key={key}>
+                          {localMetadata.todo[key].fields.map(field => (
+                            <li
+                              key={field.name}
+                              className={`ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1 ${
+                                localCompleteDemo &&
+                                index == 1 &&
+                                field.name == 'Email Address'
+                                  ? 'democheck'
+                                  : ''
+                              }`}
+                            >
+                              <div className="ds-u-display--flex ds-u-justify-content--between">
+                                {localCompleteDemo &&
+                                index == 1 &&
+                                field.name == 'Email Address' ? (
+                                  <Fragment>
+                                    <Link
+                                      to={localMetadata.todo[key].link}
+                                      className="ds-u-text-decoration--none ds-text-heading--lg ds-u-color--gray ds-u-margin--0"
+                                    >
+                                      {localMetadata.todo[key].name}{' '}
+                                      {(key === 'activity1' ||
+                                        key === 'activity2') &&
+                                        field.name}
+                                    </Link>
+                                    <div className="ds-u-color--success ds-u-font-weight--normal">
+                                      <Check /> Completed
+                                    </div>
+                                  </Fragment>
+                                ) : (
+                                  <Fragment>
+                                    <Link
+                                      to={localMetadata.todo[key].link}
+                                      className="ds-u-text-decoration--none ds-text-heading--lg ds-u-margin--0"
+                                    >
+                                      {localMetadata.todo[key].name}{' '}
+                                      {(key === 'activity1' ||
+                                        key === 'activity2') &&
+                                        field.name}
+                                    </Link>
+                                    <Link
+                                      to={localMetadata.todo[key].link}
+                                      className="ds-u-font-weight--normal"
+                                    >
+                                      Edit
+                                    </Link>
+                                  </Fragment>
+                                )}
+                              </div>
+                              <div className="ds-u-font-weight--normal">
+                                {field.description}
+                              </div>
+                            </li>
+                          ))}
                         </Fragment>
                       ))}
                     </ol>
