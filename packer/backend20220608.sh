@@ -4,6 +4,12 @@
 sudo su <<R_USER
 #!/bin/bash
 
+# Update Logrotate Configuration
+# Logs are offloaded to CloudWatch & Splunk
+sed -i 's|weekly|daily|g' /etc/logrotate.conf
+sed -i 's|rotate 12|rotate 5|g' /etc/logrotate.conf
+systemctl restart rsyslog
+
 # Add a user group for the default user, and make it the owner of the /app
 # directory, then give the directory group write permission
 groupadd eapd
