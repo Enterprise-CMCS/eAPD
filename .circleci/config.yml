@@ -571,7 +571,7 @@ jobs:
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then nvm use 16.15.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then nvm use 16.16.0; fi
             if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_PORT=54325; fi
