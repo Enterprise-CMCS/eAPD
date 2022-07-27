@@ -3,6 +3,12 @@
 sudo su <<R_USER
 #!/bin/bash
 
+# Update Logrotate Configuration
+# Logs are offloaded to CloudWatch & Splunk
+sed -i 's|weekly|daily|g' /etc/logrotate.conf
+sed -i 's|rotate 12|rotate 5|g' /etc/logrotate.conf
+systemctl restart rsyslog
+
 # Install New Relic Infrastructure Monitor
 curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
 yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
