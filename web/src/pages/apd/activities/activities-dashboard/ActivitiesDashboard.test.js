@@ -1,67 +1,103 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import Router from 'react-router-dom';
+import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
 
-import { addActivity } from '../../../../redux/actions/editActivity';
+import ActivitiesDashboard from './ActivitiesDashboard';
 
-import {
-  plain as Activities,
-  mapStateToProps,
-  mapDispatchToProps
-} from './ActivitiesDashboard';
-
-const initialProps = {
-  addActivity: () => {},
-  activities: [
-    { key: 'key1', first: 'activity' },
-    { key: 'key2', second: 'activity' },
-    { key: 'key3', third: 'activity' }
-  ]
+const initialState = {
+  nav: {
+    items: [
+      {
+        label: 'Activities',
+        url: '/apd/1234asdf/activities',
+        selected: false,
+        items: [
+          {
+            label: 'Our Flag Means Death',
+            url: '/apd/1234asdf/activity-1',
+            selected: false
+          }
+        ]
+      }
+    ]
+  },
+  apd: {
+    data: {
+      keyStatePersonnel: {},
+      years: ['2023'],
+      activities: [
+        {
+          contractorResources: [
+            {
+              hourly: {
+                2023: { hours: '', rate: '' }
+              },
+              years: {}
+            }
+          ],
+          costAllocation: {
+            2023: { ffp: { federal: 75, state: 25 }, other: 0 }
+          },
+          quarterlyFFP: {
+            2023: {
+              1: {},
+              2: {},
+              3: {},
+              4: {}
+            }
+          },
+          expenses: [],
+          statePersonnel: [],
+          name: 'Our Flag Means Death',
+          alternatives: 'Pirates of the Caribbean is also a Pirate movie.',
+          description:
+            'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.',
+          summary:
+            'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
+        }
+      ]
+    }
+  }
 };
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useParams: jest.fn()
-}));
+const setup = (props = {}, options = {}) =>
+  renderWithConnection(<ActivitiesDashboard {...props} />, options);
 
-const setup = props => {
-  jest
-    .spyOn(Router, 'useParams')
-    .mockReturnValue({ apdId: '0123456789abcdef01234560' });
-  return shallow(<Activities {...initialProps} {...props} />);
-};
-
-describe('the Activities component', () => {
-  it('renders correctly', () => {
-    const component = setup();
-    expect(component).toMatchSnapshot();
+describe('ActivitiesDashboard component', () => {
+  it('should render correctly', async () => {
+    setup({}, { initialState });
+    expect(screen).toMatchSnapshot();
   });
 
-  it('calls addActivity when the button component is clicked', () => {
-    const mockAddActivity = jest.fn();
-    const component = setup({ addActivity: mockAddActivity });
-    expect(mockAddActivity).not.toHaveBeenCalled();
-    component.find('Button').simulate('click');
-    expect(mockAddActivity).toHaveBeenCalled();
+  it('should render activity name', async () => {
+    setup({}, { initialState });
+    expect(
+      screen.getByText('Activity 1: Our Flag Means Death')
+    ).toBeInTheDocument();
   });
 
-  it('maps state to props', () => {
-    const state = {
-      apd: {
-        data: {
-          activities: [{ key: 'key1' }, { key: 'key2' }, { key: 'key3' }]
+  it('should render error message when there are no activities', async () => {
+    setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022', '2023'],
+              activities: []
+            }
+          }
         }
       }
-    };
-
-    expect(mapStateToProps(state)).toEqual({
-      activities: [{ key: 'key1' }, { key: 'key2' }, { key: 'key3' }]
-    });
+    );
+    expect(
+      screen.getByText('Activities have not been added for this APD.')
+    ).toBeInTheDocument();
   });
 
-  it('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      addActivity
-    });
+  // calls addActivity when the button component is clicked
+  it('should add a new activity when Add Activity button is clicked', async () => {
+    setup({}, { initialState });
+    await fireEvent.click(screen.getByRole('button', { name: 'Add Activity' }));
+    expect(screen.getByText('Activity 2: Untitled')).toBeInTheDocument();
   });
 });

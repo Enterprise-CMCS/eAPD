@@ -79,7 +79,6 @@ exports[`PercentField component renders correctly 1`] = `
               }
             }
             id="field_1"
-            mask={null}
             name="test name"
             onBlur={[Function]}
             onChange={[Function]}

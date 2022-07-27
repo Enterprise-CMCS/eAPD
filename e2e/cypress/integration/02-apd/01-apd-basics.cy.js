@@ -307,11 +307,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get('[data-cy="key-person-0__name"]').focus().blur();
       cy.contains('Provide a name for the point of contact.').should('exist');
       cy.get('[data-cy="key-person-0__email"]').focus().blur();
-      cy.contains('Provide an email address for the point of contact.').should('exist');
+      cy.contains('Provide an email address for the point of contact.').should(
+        'exist'
+      );
       cy.get('[data-cy="key-person-0__position"]').focus().blur();
       cy.contains('Provide a role for the point of contact.').should('exist');
       cy.get('input[type="radio"][value="no"]').focus().blur();
-      cy.contains('Indicate whether or not this person has costs.').should('exist');
+      cy.contains('Indicate whether or not this person has costs.').should(
+        'exist'
+      );
 
       cy.findByRole('button', { name: /Save/i }).should('be.disabled');
 
@@ -1332,6 +1336,18 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.contains('Export and Submit').click();
       cy.findByRole('button', { name: 'Continue to Review' }).click();
       cy.wait('@loadImage', { timeout: 30000 });
+    });
+  });
+
+  describe('tests an APD with no activities', () => {
+    it.only('shows message', () => {
+      cy.visit('/');
+      cy.findByRole('link', { name: /HITECH IAPD No Activities/i }).click();
+      cy.goToActivityDashboard();
+      cy.findByText('Add at least one activity.').should('exist');
+      cy.findByText('Activities have not been added for this APD.').should(
+        'exist'
+      );
     });
   });
 

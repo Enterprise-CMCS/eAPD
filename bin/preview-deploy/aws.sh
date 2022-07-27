@@ -153,6 +153,8 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__TEALIUM_TAG__|`echo $TEALIUM_TAG`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__TEALIUM_ENV__|`echo $TEALIUM_ENV`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 
@@ -172,7 +174,7 @@ function createNewInstance() {
     --subnet-id "$AWS_SUBNET" \
     --tag-specification "ResourceType=instance,Tags=[{Key=Name,Value=eAPD PR $PR_NUM},{Key=environment,Value=preview},{Key=github-pr,Value=${PR_NUM}},{Key=cms-cloud-exempt:open-sg,Value=CLDSPT-5877}]" \
     --user-data file://aws.user-data.sh \
-    --key-name eapd_bbrooks \
+    --key-name tforkner_eapd \
     | jq -r -c '.Instances[0].InstanceId'
 }
 
