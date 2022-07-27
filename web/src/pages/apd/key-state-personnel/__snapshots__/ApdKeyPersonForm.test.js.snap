@@ -51443,7 +51443,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                   <input
                     checked={true}
                     className="ds-c-choice"
-                    id="radio_hasCosts_1"
+                    id="radio_hasCosts_5"
                     name="hasCosts"
                     onBlur={[Function]}
                     onChange={[Function]}
@@ -51452,11 +51452,11 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                   />
                   <FormLabel
                     component="label"
-                    fieldId="radio_hasCosts_1"
+                    fieldId="radio_hasCosts_5"
                   >
                     <label
                       className="ds-c-label"
-                      htmlFor="radio_hasCosts_1"
+                      htmlFor="radio_hasCosts_5"
                     >
                       <span
                         className=""
@@ -55771,14 +55771,14 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               >
                                 <FormLabel
                                   component="label"
-                                  errorId="field_2-error"
-                                  fieldId="field_2"
-                                  id="field_2-label"
+                                  errorId="field_6-error"
+                                  fieldId="field_6"
+                                  id="field_6-label"
                                 >
                                   <label
                                     className="ds-c-label"
-                                    htmlFor="field_2"
-                                    id="field_2-label"
+                                    htmlFor="field_6"
+                                    id="field_6-label"
                                   >
                                     <span
                                       className=""
@@ -55787,36 +55787,38 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                     </span>
                                   </label>
                                 </FormLabel>
-                                <TextInput
-                                  data-cy="key-person-1-0__cost"
-                                  errorId="field_2-error"
-                                  errorPlacement="top"
-                                  id="field_2"
+                                <Mask
                                   mask="currency"
-                                  name="costs.1992"
-                                  onBlur={[Function]}
-                                  onChange={[Function]}
-                                  setRef={[Function]}
-                                  size="medium"
-                                  type="text"
-                                  value="100"
                                 >
-                                  <Mask
-                                    mask="currency"
+                                  <div
+                                    className="ds-c-field-mask ds-c-field-mask--currency"
                                   >
                                     <div
-                                      className="ds-c-field-mask ds-c-field-mask--currency"
+                                      className="ds-c-field__before ds-c-field__before--currency"
                                     >
-                                      <div
-                                        className="ds-c-field__before ds-c-field__before--currency"
-                                      >
-                                        $
-                                      </div>
+                                      $
+                                    </div>
+                                    <TextInput
+                                      data-cy="key-person-1-0__cost"
+                                      errorId="field_6-error"
+                                      errorPlacement="top"
+                                      fieldClassName="ds-c-field--currency"
+                                      id="field_6"
+                                      inputMode="numeric"
+                                      name="costs.1992"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      pattern="[0-9.,-]*"
+                                      setRef={[Function]}
+                                      size="medium"
+                                      type="text"
+                                      value="100"
+                                    >
                                       <input
                                         aria-invalid={false}
-                                        className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                                        className="ds-c-field ds-c-field--medium ds-c-field--currency"
                                         data-cy="key-person-1-0__cost"
-                                        id="field_2"
+                                        id="field_6"
                                         inputMode="numeric"
                                         name="costs.1992"
                                         onBlur={[Function]}
@@ -55825,9 +55827,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                         type="text"
                                         value="100"
                                       />
-                                    </div>
-                                  </Mask>
-                                </TextInput>
+                                    </TextInput>
+                                  </div>
+                                </Mask>
                               </div>
                             </FormControl>
                           </TextField>
@@ -60123,15 +60125,15 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             >
                               <FormLabel
                                 component="label"
-                                errorId="field_3-error"
-                                fieldId="field_3"
+                                errorId="field_7-error"
+                                fieldId="field_7"
                                 hint="For example: 0.5 = 0.5 FTE = 50% time"
-                                id="field_3-label"
+                                id="field_7-label"
                               >
                                 <label
                                   className="ds-c-label"
-                                  htmlFor="field_3"
-                                  id="field_3-label"
+                                  htmlFor="field_7"
+                                  id="field_7-label"
                                 >
                                   <span
                                     className=""
@@ -60147,10 +60149,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               </FormLabel>
                               <TextInput
                                 data-cy="key-person-1-0__fte"
-                                errorId="field_3-error"
+                                errorId="field_7-error"
                                 errorPlacement="top"
-                                id="field_3"
-                                mask={null}
+                                id="field_7"
                                 name="fte.1992"
                                 onBlur={[Function]}
                                 onChange={[Function]}
@@ -60163,7 +60164,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   aria-invalid={false}
                                   className="ds-c-field ds-c-field--medium"
                                   data-cy="key-person-1-0__fte"
-                                  id="field_3"
+                                  id="field_7"
                                   name="fte.1992"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -64490,14 +64491,14 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               >
                                 <FormLabel
                                   component="label"
-                                  errorId="field_4-error"
-                                  fieldId="field_4"
-                                  id="field_4-label"
+                                  errorId="field_8-error"
+                                  fieldId="field_8"
+                                  id="field_8-label"
                                 >
                                   <label
                                     className="ds-c-label"
-                                    htmlFor="field_4"
-                                    id="field_4-label"
+                                    htmlFor="field_8"
+                                    id="field_8-label"
                                   >
                                     <span
                                       className=""
@@ -64506,36 +64507,38 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                     </span>
                                   </label>
                                 </FormLabel>
-                                <TextInput
-                                  data-cy="key-person-1-1__cost"
-                                  errorId="field_4-error"
-                                  errorPlacement="top"
-                                  id="field_4"
+                                <Mask
                                   mask="currency"
-                                  name="costs.1993"
-                                  onBlur={[Function]}
-                                  onChange={[Function]}
-                                  setRef={[Function]}
-                                  size="medium"
-                                  type="text"
-                                  value="300"
                                 >
-                                  <Mask
-                                    mask="currency"
+                                  <div
+                                    className="ds-c-field-mask ds-c-field-mask--currency"
                                   >
                                     <div
-                                      className="ds-c-field-mask ds-c-field-mask--currency"
+                                      className="ds-c-field__before ds-c-field__before--currency"
                                     >
-                                      <div
-                                        className="ds-c-field__before ds-c-field__before--currency"
-                                      >
-                                        $
-                                      </div>
+                                      $
+                                    </div>
+                                    <TextInput
+                                      data-cy="key-person-1-1__cost"
+                                      errorId="field_8-error"
+                                      errorPlacement="top"
+                                      fieldClassName="ds-c-field--currency"
+                                      id="field_8"
+                                      inputMode="numeric"
+                                      name="costs.1993"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      pattern="[0-9.,-]*"
+                                      setRef={[Function]}
+                                      size="medium"
+                                      type="text"
+                                      value="300"
+                                    >
                                       <input
                                         aria-invalid={false}
-                                        className="ds-c-field ds-c-field--currency ds-c-field--medium"
+                                        className="ds-c-field ds-c-field--medium ds-c-field--currency"
                                         data-cy="key-person-1-1__cost"
-                                        id="field_4"
+                                        id="field_8"
                                         inputMode="numeric"
                                         name="costs.1993"
                                         onBlur={[Function]}
@@ -64544,9 +64547,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                         type="text"
                                         value="300"
                                       />
-                                    </div>
-                                  </Mask>
-                                </TextInput>
+                                    </TextInput>
+                                  </div>
+                                </Mask>
                               </div>
                             </FormControl>
                           </TextField>
@@ -68842,15 +68845,15 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             >
                               <FormLabel
                                 component="label"
-                                errorId="field_5-error"
-                                fieldId="field_5"
+                                errorId="field_9-error"
+                                fieldId="field_9"
                                 hint="For example: 0.5 = 0.5 FTE = 50% time"
-                                id="field_5-label"
+                                id="field_9-label"
                               >
                                 <label
                                   className="ds-c-label"
-                                  htmlFor="field_5"
-                                  id="field_5-label"
+                                  htmlFor="field_9"
+                                  id="field_9-label"
                                 >
                                   <span
                                     className=""
@@ -68866,10 +68869,9 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               </FormLabel>
                               <TextInput
                                 data-cy="key-person-1-1__fte"
-                                errorId="field_5-error"
+                                errorId="field_9-error"
                                 errorPlacement="top"
-                                id="field_5"
-                                mask={null}
+                                id="field_9"
                                 name="fte.1993"
                                 onBlur={[Function]}
                                 onChange={[Function]}
@@ -68882,7 +68884,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   aria-invalid={false}
                                   className="ds-c-field ds-c-field--medium"
                                   data-cy="key-person-1-1__fte"
-                                  id="field_5"
+                                  id="field_9"
                                   name="fte.1993"
                                   onBlur={[Function]}
                                   onChange={[Function]}
@@ -68931,7 +68933,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                   <input
                     checked={false}
                     className="ds-c-choice"
-                    id="radio_hasCosts_6"
+                    id="radio_hasCosts_10"
                     name="hasCosts"
                     onBlur={[Function]}
                     onChange={[Function]}
@@ -68940,11 +68942,11 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                   />
                   <FormLabel
                     component="label"
-                    fieldId="radio_hasCosts_6"
+                    fieldId="radio_hasCosts_10"
                   >
                     <label
                       className="ds-c-label"
-                      htmlFor="radio_hasCosts_6"
+                      htmlFor="radio_hasCosts_10"
                     >
                       <span
                         className=""
