@@ -325,7 +325,7 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: process.env.TEALIUM_ENV !== 'prod'
+  adminCheck: false
 };
 
 // eslint-disable-next-line default-param-last
