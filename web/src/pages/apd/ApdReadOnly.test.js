@@ -36,8 +36,8 @@ describe('<ApdViewOnly/>', () => {
       },
       initialHistory: ['/apd/1']
     });
-    expect(screen.getByText('HITECH IAPD')).toBeTruthy();
-    expect(screen.getByText('2020-2021 APD')).toBeTruthy();
+    expect(await screen.findByText('HITECH IAPD')).toBeTruthy();
+    expect(await screen.findByText('2020-2021 APD')).toBeTruthy();
 
     await user.click(screen.getByRole('button', { name: '< Back to APD' }));
     expect(history.length).toEqual(1);
