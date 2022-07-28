@@ -373,7 +373,7 @@ describe('budget reducer', () => {
                 fte: { 1931: 0, 1932: 0.3, 1933: 1 },
                 hasCosts: true
               }
-            ]            
+            ]
           },
           years: ['1931', '1932', '1933']
         }
