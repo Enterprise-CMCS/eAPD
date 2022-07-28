@@ -252,22 +252,19 @@ const AdminCheckPanel = ({
                                   <Fragment>
                                     <Link
                                       to={localMetadata.todo[key].link}
-                                      className="ds-u-text-decoration--none ds-text-heading--lg ds-u-color--gray ds-u-margin--0"
+                                      className="ds-text-heading--lg ds-u-color--gray ds-u-margin--0"
                                     >
                                       {localMetadata.todo[key].name}{' '}
                                       {(key === 'activity1' ||
                                         key === 'activity2') &&
                                         field.name}
                                     </Link>
-                                    <div className="ds-u-color--success ds-u-font-weight--normal">
-                                      <Check /> Completed
-                                    </div>
                                   </Fragment>
                                 ) : (
                                   <Fragment>
                                     <Link
                                       to={localMetadata.todo[key].link}
-                                      className="ds-u-text-decoration--none ds-text-heading--lg ds-u-margin--0"
+                                      className="ds-text-heading--lg ds-u-margin--0"
                                     >
                                       {localMetadata.todo[key].name}{' '}
                                       {(key === 'activity1' ||
