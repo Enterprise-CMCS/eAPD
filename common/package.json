@@ -6,7 +6,8 @@
   "scripts": {
     "stryker": "TZ=utc stryker run",
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest",
-    "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch"
+    "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch",
+    "npm-check": "npx npm-check-updates"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,7 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "engines": {
-    "node": "16.15.0"
+    "node": "16.16.0"
   },
   "dependencies": {
     "joi": "17.6.0"
