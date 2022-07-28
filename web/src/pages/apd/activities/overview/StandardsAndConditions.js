@@ -110,7 +110,7 @@ StandardsAndConditions.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   setSupport: PropTypes.func.isRequired,
   setDoesNotSupport: PropTypes.func.isRequired,
-  adminCheck: PropTypes.func.isRequired
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, props) => ({
