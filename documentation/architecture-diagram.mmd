@@ -1,0 +1,34 @@
+flowchart LR
+%% @config(../.vscode/settings.json)
+    subgraph web [Web App using React/Redux]
+        direction LR
+        apdForm(APD Form)
+        dashboard(State Dashboard)
+        state(State User\n Administration)
+        fed(Federal User\n Administraion)
+        profile(UserProfile Management)
+    end
+    subgraph auth [JWT middleware authentication]
+        direction LR
+    
+
+        subgraph api [API App using \nNode/Express]
+            direction TB
+            apd(APDs)
+            states(States)
+            users(User Admin)
+            me(Profile)
+
+        end
+    end
+    subgraph data [Databases]
+        id1[(MongoDB)]
+        id2[(PostgreSQL)]
+    end
+
+    user((Client)) --> web 
+    web <-- axios --> auth
+    web <-- okta-auth-js --> okta{Okta Service}
+    apd <-- mongoose --> id1
+    api <-- knex --> id2
+    me -->|okta-sdk-nodejs|okta
