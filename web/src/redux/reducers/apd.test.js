@@ -35,7 +35,7 @@ describe('APD reducer', () => {
     loaded: false,
     error: '',
     selectAPDOnLoad: false,
-    adminCheck: false
+    adminCheck: true
   };
 
   it('should handle initial state', () => {
@@ -78,7 +78,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: true
     });
   });
 
@@ -90,7 +90,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: true
     });
   });
 
@@ -135,7 +135,7 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: true,
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: true
     };
 
     expect(
@@ -156,7 +156,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: 'some error',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: true
     });
   });
 

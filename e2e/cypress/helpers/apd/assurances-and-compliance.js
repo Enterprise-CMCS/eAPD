@@ -114,10 +114,7 @@ export const testAssurancesAndComplianceWithData = () => {
       });
     });
 
-    cy.queryAllByText('Select yes or no', {
-      selector: 'span',
-      ignore: 'div'
-    }).should('have.length', 0);
+    cy.contains('Select yes or no').should('not.exist');
 
     cy.waitForSave();
   });
