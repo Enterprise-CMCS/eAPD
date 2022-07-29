@@ -53,6 +53,7 @@ const setup = async (props = {}, options = {}) => {
   };
 };
 
+jest.setTimeout(300000);
 describe('assurances and compliance component', () => {
   describe('main component', () => {
     beforeEach(() => {
@@ -182,7 +183,6 @@ describe('assurances and compliance component', () => {
     });
 
     test('dispatches when a citation is toggled yes/no', async () => {
-      jest.setTimeout(30000);
       const { user } = await setup(
         {},
         {
@@ -283,6 +283,14 @@ describe('assurances and compliance component', () => {
           }
         }
       );
+
+      // Does not show error messages if adminCheck is false
+      expect(
+        screen.queryAllByText('Select yes or no', {
+          selector: 'span',
+          ignore: 'div'
+        })
+      ).toHaveLength(0);
 
       // Based on the state above, there are four sections to test. We need
       // to target one choice list in each section. The indices are as follows:
