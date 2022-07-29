@@ -40,4 +40,4 @@ module "instances" {
     eapd_jumpbox_subnet_id                    = var.eapd_jumpbox_subnet_id
 }
 
-# REreturn of the testing comment
+# REreturn of the testing comment  -var-file-allowlist
