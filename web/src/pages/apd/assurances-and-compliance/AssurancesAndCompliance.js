@@ -24,9 +24,6 @@ import { t } from '../../../i18n';
 import { selectFederalCitations } from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
-// const namify = (name, title) =>
-//   `explanation-${name}-${title}`.replace(/\s/g, '_');
-
 const LinkOrText = ({ link, title }) => {
   if (!link) return title;
 
@@ -65,8 +62,7 @@ const AssurancesAndCompliance = ({
   const {
     control,
     trigger,
-    formState: { errors },
-    getValues
+    formState: { errors }
   } = useForm({
     defaultValues: {
       procurement,
@@ -74,19 +70,10 @@ const AssurancesAndCompliance = ({
       softwareRights,
       security
     },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
     resolver: joiResolver(validationSchema)
   });
-  console.log('citations', citations);
-  console.log({ adminCheck });
-
-  useEffect(() => {
-    console.log('form values', getValues());
-    const formErrors = validationSchema.validate(getValues());
-    const validationErrors = validationSchema.validate(citations);
-    console.log({ errors });
-    console.log({ formErrors });
-    console.log({ validationErrors });
-  }, [citations]);
 
   useEffect(() => {
     if (adminCheck) {
@@ -140,11 +127,9 @@ const AssurancesAndCompliance = ({
               {citations[name].map(({ title, checked, explanation }, index) => (
                 <Controller
                   key={title}
-                  name={`${name}.${index}`}
+                  name={`${name}.${index}.checked`}
                   control={control}
-                  render={({
-                    field: { onChange: radioOnChange, onBlur: radioOnBlur }
-                  }) => (
+                  render={({ field: { onChange: radioOnChange } }) => (
                     <ChoiceList
                       label={
                         <legend className="ds-c-label">
@@ -176,12 +161,22 @@ const AssurancesAndCompliance = ({
                                 name={`${name}.${index}.explanation`}
                                 control={control}
                                 render={({
-                                  field: { onChange: textOnChange, ...props }
+                                  field: {
+                                    onChange: textOnChange,
+                                    onBlur: textOnBlur,
+                                    ...props
+                                  }
                                 }) => (
                                   <TextArea
                                     {...props}
                                     label="Please explain"
                                     value={explanation}
+                                    onBlur={() => {
+                                      textOnBlur();
+                                      if (adminCheck) {
+                                        trigger(`${name}.${index}.explanation`);
+                                      }
+                                    }}
                                     onChange={({ target: { value } }) => {
                                       textOnChange(value);
                                       handleExplanationChange(
@@ -205,12 +200,16 @@ const AssurancesAndCompliance = ({
                       ]}
                       type="radio"
                       size="small"
-                      onBlur={radioOnBlur}
-                      onChange={({ target: { value } }) => {
-                        const boolValue = value === 'yes';
-                        console.log(`${name}.${index}.checked ${boolValue}`);
+                      onChange={e => {
+                        const boolValue = e.target.value === 'yes';
                         radioOnChange(boolValue);
                         handleCheckChange(name, index, boolValue);
+                        if (adminCheck) {
+                          trigger(`${name}.${index}.checked`);
+                          if (boolValue === false) {
+                            trigger(`${name}.${index}.explanation`);
+                          }
+                        }
                       }}
                       errorMessage={errors?.[name]?.[index]?.checked?.message}
                       errorPlacement="bottom"
