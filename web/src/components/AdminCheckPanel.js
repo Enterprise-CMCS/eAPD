@@ -171,7 +171,11 @@ const AdminCheckPanel = ({
                     <ol className="ds-u-margin-y--1">
                       {adminCheckData.map((item, index) => (
                         <li
-                          className={`ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1`}
+                          className={`ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1 ${
+                            item.complete
+                              ? 'eapd-admin-check--completed-item'
+                              : ''
+                          }`}
                         >
                           <div className="ds-u-display--flex ds-u-justify-content--between">
                             <Fragment>

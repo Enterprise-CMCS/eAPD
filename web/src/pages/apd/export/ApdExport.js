@@ -34,7 +34,7 @@ const ExportAndSubmit = ({
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
       <AlertMissingFFY />
       <Section resource="exportAndSubmit">
-        {'replace this with the check for environment' && (
+        {process.env.TEALIUM_ENV !== 'prod' && (
           <Subsection resource="adminCheck">
             <p>
               Choose Run Administrative Check to see a list of required fields

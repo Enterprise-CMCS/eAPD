@@ -77,6 +77,10 @@
   float: left;
 }
 
+.eapd-admin-check-list .eapd-admin-check--completed-item:before {
+  background: $color-gray;
+}
+
 .eapd-admin-check-list ol > li.democheck:before {
   background: $color-gray;
 }
@@ -92,6 +96,15 @@
 
 .eapd-admin-check--collapsed .ds-c-drawer__footer {
   display: none;
+}
+
+.eapd-admin-check--completed-item > div > a {
+  color: $color-gray;
+}
+
+.eapd-admin-check--completed-item > div > a:visited {
+  color: $color-gray;
+  text-decoration-color: $color-gray;
 }
 
 #complete-check {
