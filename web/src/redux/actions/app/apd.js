@@ -18,7 +18,7 @@ import {
   SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE,
-  ADMIN_CHECK_MINI_TOGGLE,
+  ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from './symbols';
 import { updateBudget } from '../budget';
@@ -217,7 +217,7 @@ export const toggleAdminCheck = value => dispatch => {
 };
 // eslint-disable-next-line react/display-name
 export const toggleMiniCheck = value => dispatch => {
-  dispatch({ type: ADMIN_CHECK_MINI_TOGGLE, data: value });
+  dispatch({ type: ADMIN_CHECK_COLLAPSE_TOGGLE, data: value });
   return null;
 };
 // eslint-disable-next-line react/display-name

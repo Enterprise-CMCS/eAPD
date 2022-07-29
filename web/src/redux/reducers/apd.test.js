@@ -14,7 +14,7 @@ const {
   SAVE_APD_SUCCESS,
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE,
-  ADMIN_CHECK_MINI_TOGGLE,
+  ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } = require('../actions/app');
 const {
@@ -39,7 +39,7 @@ describe('APD reducer', () => {
     error: '',
     selectAPDOnLoad: false,
     adminCheck: false,
-    adminCheckMini: false,
+    adminCheckCollapsed: false,
     adminCheckComplete: false
   };
 
@@ -84,7 +84,7 @@ describe('APD reducer', () => {
       error: '',
       selectAPDOnLoad: false,
       adminCheck: false,
-      adminCheckMini: false,
+      adminCheckCollapsed: false,
       adminCheckComplete: false
     });
   });
@@ -98,7 +98,7 @@ describe('APD reducer', () => {
       error: '',
       selectAPDOnLoad: false,
       adminCheck: false,
-      adminCheckMini: false,
+      adminCheckCollapsed: false,
       adminCheckComplete: false
     });
   });
@@ -145,7 +145,7 @@ describe('APD reducer', () => {
       loaded: true,
       selectAPDOnLoad: false,
       adminCheck: false,
-      adminCheckMini: false,
+      adminCheckCollapsed: false,
       adminCheckComplete: false
     };
 
@@ -168,7 +168,7 @@ describe('APD reducer', () => {
       error: 'some error',
       selectAPDOnLoad: false,
       adminCheck: false,
-      adminCheckMini: false,
+      adminCheckCollapsed: false,
       adminCheckComplete: false
     });
   });
@@ -1201,7 +1201,7 @@ describe('APD reducer', () => {
       ).toEqual({
         ...initialState,
         adminCheck: true,
-        adminCheckMini: false,
+        adminCheckCollapsed: false,
         adminCheckComplete: false
       });
     });
@@ -1209,13 +1209,13 @@ describe('APD reducer', () => {
     it('should handle turning the admin check mini on', () => {
       expect(
         apd(initialState, {
-          type: ADMIN_CHECK_MINI_TOGGLE,
+          type: ADMIN_CHECK_COLLAPSE_TOGGLE,
           data: true
         })
       ).toEqual({
         ...initialState,
         adminCheck: false,
-        adminCheckMini: true,
+        adminCheckCollapsed: true,
         adminCheckComplete: false
       });
     });
@@ -1229,7 +1229,7 @@ describe('APD reducer', () => {
       ).toEqual({
         ...initialState,
         adminCheck: false,
-        adminCheckMini: false,
+        adminCheckCollapsed: false,
         adminCheckComplete: true
       });
     });

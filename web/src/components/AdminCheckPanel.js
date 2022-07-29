@@ -11,80 +11,48 @@ import {
 
 import { Badge, Button, Drawer } from '@cmsgov/design-system';
 
-import Icon, { faExclamationTriangle, Check } from '../components/Icons';
+import Icon, { faExclamationTriangle } from '../components/Icons';
+
+const RequiredFieldsComponent = ({ adminCheckData, adminCheckComplete }) => (
+  <Fragment>
+    <div className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center">
+      <span
+        className={`${
+          adminCheckComplete ? 'ds-u-fill--success' : 'ds-u-fill--error'
+        } ds-u-color--white ds-u-radius ds-u-padding-x--1 ds-u-padding-y--0 ds-u-font-weight--bold`}
+      >
+        {adminCheckComplete ? '0' : adminCheckData.length}
+      </span>
+      <span
+        className={`${
+          adminCheckComplete ? 'ds-u-color--success' : 'ds-u-color--error'
+        } ds-u-font-weight--bold ds-u-padding-left--1`}
+      >
+        Incomplete Required Fields
+      </span>
+    </div>
+  </Fragment>
+);
 
 const AdminCheckPanel = ({
   adminCheckEnabled,
-  adminCheckMini,
+  adminCheckCollapsed,
   adminCheckComplete,
-  metadata,
+  adminCheckData,
   toggleAdmin,
-  toggleAdminMini,
+  toggleCollapsed,
   toggleAdminComplete
 }) => {
-  /* making a local var just to easily modify its properties for prototyping */
-  const [localMetadata, setLocalMetadata] = useState(metadata);
-  const [localCompleteDemo, setLocalCompleteDemo] = useState(false);
-
   const handleClose = () => {
     toggleAdmin(false);
   };
 
   const toggleCollapse = () => {
-    adminCheckMini ? toggleAdminMini(false) : toggleAdminMini(true);
+    adminCheckCollapsed ? toggleCollapsed(false) : toggleCollapsed(true);
   };
 
   const toggleComplete = () => {
     adminCheckComplete ? toggleAdminComplete(false) : toggleAdminComplete(true);
-  };
-
-  const demoToggleComplete = () => {
-    if (localMetadata.todo.overview.fields.length > 0) {
-      setLocalMetadata({
-        ...localMetadata,
-        incomplete: 4,
-        todo: {
-          ...localMetadata.todo,
-          overview: {
-            ...localMetadata.todo.overview,
-            fields: []
-          }
-        }
-      });
-    }
-    if (localMetadata.todo.overview.fields.length === 0) {
-      setLocalMetadata(metadata);
-    }
-  };
-
-  const demoToggleCompleteAlt = () => {
-    localCompleteDemo
-      ? setLocalCompleteDemo(false)
-      : setLocalCompleteDemo(true);
-  };
-
-  const demoToggleClear = () => {
-    if (
-      localMetadata.todo.keyStatePersonnel.fields[0].name !== 'Phone Number'
-    ) {
-      const filtered = localMetadata.todo.keyStatePersonnel.fields.filter(
-        item => item.name !== 'Email Address'
-      );
-      const object = {
-        ...localMetadata,
-        todo: {
-          ...localMetadata.todo,
-          keyStatePersonnel: {
-            ...localMetadata.todo.keyStatePersonnel,
-            fields: filtered
-          }
-        }
-      };
-      setLocalMetadata(object);
-    }
-    if (localMetadata.todo.keyStatePersonnel.fields[0].name == 'Phone Number') {
-      setLocalMetadata(metadata);
-    }
   };
 
   return (
@@ -92,13 +60,13 @@ const AdminCheckPanel = ({
       {adminCheckEnabled && (
         <Drawer
           className={`eapd-admin-check ${
-            adminCheckMini ? ' eapd-admin-check--collapsed' : ''
+            adminCheckCollapsed ? ' eapd-admin-check--collapsed' : ''
           }`}
           heading={''}
           onCloseClick={() => {}}
           isFooterSticky={true}
           footerBody={
-            !adminCheckMini && (
+            !adminCheckCollapsed && (
               <Fragment>
                 <div className="ds-u-padding-bottom--1">
                   <Icon
@@ -129,8 +97,12 @@ const AdminCheckPanel = ({
             </h2>{' '}
             {/* need to make this have a tabindex=0 at some point, the linter doesn't like it but we need it for initial focus */}
             {!adminCheckComplete && (
-              <Button variation="transparent" onClick={toggleCollapse}>
-                {adminCheckMini ? 'Expand' : 'Collapse'}
+              <Button
+                variation="transparent"
+                onClick={toggleCollapse}
+                aria-label="Expand or collapse the administrative check"
+              >
+                {adminCheckCollapsed ? 'Expand' : 'Collapse'}
               </Button>
             )}
             {adminCheckComplete && (
@@ -143,34 +115,15 @@ const AdminCheckPanel = ({
               </Button>
             )}
           </div>
-          {adminCheckMini && (
-            <div className="eapd-admin-mini">
-              <div className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center">
-                <Badge
-                  size="big"
-                  variation={`${adminCheckComplete ? 'success' : 'alert'}`}
-                >
-                  {adminCheckComplete ? '0' : '3'}
-                </Badge>
-                <span
-                  className={`ds-h4 ds-u-margin-y--1 ds-u-padding-left--1 ${
-                    adminCheckComplete
-                      ? 'ds-u-color--success'
-                      : 'ds-u-color--error'
-                  }`}
-                >
-                  Incomplete Required Fields Total
-                </span>
-              </div>
-              <button
-                onClick={toggleComplete}
-                className="cursor-pointer ds-u-padding-left--0 ds-c-button--transparent"
-              >
-                [Demo: Toggle Complete]
-              </button>
+          {adminCheckCollapsed && (
+            <div className="eapd-admin-check--collapsed_content">
+              <RequiredFieldsComponent
+                adminCheckData={adminCheckData}
+                adminCheckComplete={adminCheckComplete}
+              />
             </div>
           )}
-          {!adminCheckMini && (
+          {!adminCheckCollapsed && (
             <Fragment>
               <p>
                 Review the list below for any required fields in this APD which
@@ -178,26 +131,10 @@ const AdminCheckPanel = ({
                 submission to CMS.
               </p>
               <div className="eapd-admin-check-list">
-                <div className="ds-u-display--flex ds-u-justify-content--start ds-u-text-align--right ds-u-align-items--center">
-                  <span
-                    className={`${
-                      adminCheckComplete
-                        ? 'ds-u-fill--success'
-                        : 'ds-u-fill--error'
-                    } ds-u-color--white ds-u-radius ds-u-padding-x--1 ds-u-padding-y--0 ds-u-font-weight--bold`}
-                  >
-                    {adminCheckComplete ? '0' : localMetadata.incomplete}
-                  </span>
-                  <span
-                    className={`${
-                      adminCheckComplete
-                        ? 'ds-u-color--success'
-                        : 'ds-u-color--error'
-                    } ds-u-font-weight--bold ds-u-padding-left--1`}
-                  >
-                    Incomplete Required Fields
-                  </span>
-                </div>
+                <RequiredFieldsComponent
+                  adminCheckData={adminCheckData}
+                  adminCheckComplete={adminCheckComplete}
+                />
                 <hr className="eapd-admin-check__divider" />
                 {adminCheckComplete && (
                   <Fragment>
@@ -232,84 +169,34 @@ const AdminCheckPanel = ({
                 {!adminCheckComplete && (
                   <Fragment>
                     <ol className="ds-u-margin-y--1">
-                      {Object.keys(localMetadata.todo).map((key, index) => (
-                        <Fragment key={key}>
-                          {localMetadata.todo[key].fields.map(field => (
-                            <li
-                              key={field.name}
-                              className={`ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1 ${
-                                localCompleteDemo &&
-                                index == 1 &&
-                                field.name == 'Email Address'
-                                  ? 'democheck'
-                                  : ''
-                              }`}
-                            >
-                              <div className="ds-u-display--flex ds-u-justify-content--between">
-                                {localCompleteDemo &&
-                                index == 1 &&
-                                field.name == 'Email Address' ? (
-                                  <Fragment>
-                                    <Link
-                                      to={localMetadata.todo[key].link}
-                                      className="ds-text-heading--lg ds-u-color--gray ds-u-margin--0"
-                                    >
-                                      {localMetadata.todo[key].name}{' '}
-                                      {(key === 'activity1' ||
-                                        key === 'activity2') &&
-                                        field.name}
-                                    </Link>
-                                  </Fragment>
-                                ) : (
-                                  <Fragment>
-                                    <Link
-                                      to={localMetadata.todo[key].link}
-                                      className="ds-text-heading--lg ds-u-margin--0"
-                                    >
-                                      {localMetadata.todo[key].name}{' '}
-                                      {(key === 'activity1' ||
-                                        key === 'activity2') &&
-                                        field.name}
-                                    </Link>
-                                    <Link
-                                      to={localMetadata.todo[key].link}
-                                      className="ds-u-font-weight--normal"
-                                    >
-                                      Edit
-                                    </Link>
-                                  </Fragment>
-                                )}
-                              </div>
-                              <div className="ds-u-font-weight--normal">
-                                {field.description}
-                              </div>
-                            </li>
-                          ))}
-                        </Fragment>
+                      {adminCheckData.map((item, index) => (
+                        <li
+                          className={`ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1`}
+                        >
+                          <div className="ds-u-display--flex ds-u-justify-content--between">
+                            <Fragment>
+                              <Link
+                                to={item.link}
+                                className="ds-text-heading--lg ds-u-margin--0"
+                              >
+                                {item.section} {item.subSection}
+                              </Link>
+                              <Link
+                                to={item.link}
+                                className="ds-u-font-weight--normal"
+                              >
+                                Edit
+                              </Link>
+                            </Fragment>
+                          </div>
+                          <div className="ds-u-font-weight--normal">
+                            {item.fieldDescription}
+                          </div>
+                        </li>
                       ))}
                     </ol>
                   </Fragment>
                 )}
-              </div>
-              <button
-                onClick={demoToggleComplete}
-                className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
-              >
-                [Demo: Toggle Completed Field #1]
-              </button>
-              <div>
-                <button
-                  onClick={demoToggleCompleteAlt}
-                  className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
-                >
-                  [Demo: Toggle Completed Field #2]
-                </button>
-                <button
-                  onClick={demoToggleClear}
-                  className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
-                >
-                  [Demo: Toggle Clear Completed]
-                </button>
               </div>
               <button
                 onClick={toggleComplete}
@@ -327,24 +214,24 @@ const AdminCheckPanel = ({
 
 AdminCheckPanel.propTypes = {
   toggleAdmin: PropTypes.func.isRequired,
-  toggleAdminMini: PropTypes.func.isRequired,
+  toggleCollapsed: PropTypes.func.isRequired,
   toggleAdminComplete: PropTypes.func.isRequired,
   adminCheckEnabled: PropTypes.bool.isRequired,
-  adminCheckMini: PropTypes.bool.isRequired,
+  adminCheckCollapsed: PropTypes.bool.isRequired,
   adminCheckComplete: PropTypes.bool.isRequired,
-  metadata: PropTypes.object.isRequired
+  adminCheck: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   adminCheckEnabled: state.apd.adminCheck,
-  adminCheckMini: state.apd.adminCheckMini,
+  adminCheckCollapsed: state.apd.adminCheckCollapsed,
   adminCheckComplete: state.apd.adminCheckComplete,
-  metadata: state.apd.data.metadata
+  adminCheckData: state.apd.data.adminCheck
 });
 
 const mapDispatchToProps = {
   toggleAdmin: toggleAdminCheck,
-  toggleAdminMini: toggleMiniCheck,
+  toggleCollapsed: toggleMiniCheck,
   toggleAdminComplete: toggleAdminCheckComplete
 };
 

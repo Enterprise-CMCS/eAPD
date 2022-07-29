@@ -30,7 +30,7 @@ import {
   SELECT_APD_REQUEST,
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE,
-  ADMIN_CHECK_MINI_TOGGLE,
+  ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from './symbols';
 import { ARIA_ANNOUNCE_CHANGE } from '../aria';
@@ -478,24 +478,24 @@ describe('application-level actions', () => {
 
     it('toggles the admin check mini on', async () => {
       const store = mockStore({
-        apd: { adminCheckMini: false }
+        apd: { adminCheckCollapsed: false }
       });
 
       await store.dispatch(toggleMiniCheck(true));
 
-      const expectedActions = [{ type: ADMIN_CHECK_MINI_TOGGLE, data: true }];
+      const expectedActions = [{ type: ADMIN_CHECK_COLLAPSE_TOGGLE, data: true }];
 
       expect(store.getActions()).toEqual(expectedActions);
     });
 
     it('toggles the admin check mini off', async () => {
       const store = mockStore({
-        apd: { adminCheckMini: true }
+        apd: { adminCheckCollapsed: true }
       });
 
       await store.dispatch(toggleMiniCheck(false));
 
-      const expectedActions = [{ type: ADMIN_CHECK_MINI_TOGGLE, data: false }];
+      const expectedActions = [{ type: ADMIN_CHECK_COLLAPSE_TOGGLE, data: false }];
 
       expect(store.getActions()).toEqual(expectedActions);
     });

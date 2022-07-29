@@ -765,71 +765,38 @@ const apd = {
     ]
   },
   // Mocked metadata for admin panel demo
-  metadata: {
-    incomplete: 5,
-    todo: {
-      overview: {
-        name: 'APD Overview',
-        incomplete: 1,
-        link: 'apd-overview',
-        fields: [
-          {
-            name: 'APD Name',
-            description: 'Please fill out name'
-          }
-        ]
-      },
-      keyStatePersonnel: {
-        name: 'Key State Personnel',
-        incomplete: 2,
-        link: 'state-profile',
-        fields: [
-          {
-            name: 'Email Address',
-            description: 'Provide the email address of the Medicaid Director'
-          },
-          {
-            name: 'Phone Number',
-            description: 'Provide the phone number of the Medicaid Director'
-          }
-        ]
-      },
-      activity1: {
-        name: 'Activity 1',
-        incomplete: 1,
-        link: 'activity/0/overview',
-        fields: [
-          {
-            name: 'Overview',
-            description: 'Provide a short overview of the Activity'
-          }
-        ]
-      },
-      activity2: {
-        name: 'Activity 2',
-        incomplete: 1,
-        link: 'activity/1/overview',
-        fields: [
-          {
-            name: 'Outcomes and Metrics',
-            description: 'Add at least one outcome for this activity'
-          }
-        ]
-      }
+  adminCheck: [
+    {
+      section: 'APD Overview',
+      subSection: null,
+      link: 'apd-overview',
+      fieldDescription: 'Please fill out name'
     },
-    recents: [
-      {
-        page: 'Activity 1- State Costs',
-        section: 'State Costs',
-        link: 'activity/0/state-costs'
-      },
-      {
-        page: 'Private Contractor Costs',
-        section: 'Private Contractor Costs',
-        link: 'activity/0/contractor-costs'
-      }
-    ]
-  }
+    {
+      section: 'Key State Personnel',
+      subSection: null,
+      link: 'state-profile',
+      fieldDescription: 'Provide the email address of the Medicaid Director'
+    },
+    {
+      section: 'Key State Personnel',
+      subSection: null,
+      link: 'state-profile',
+      fieldDescription: 'Provide the phone number of the Medicaid Director'
+    },
+    {
+      section: 'Activity 1',
+      subSection: 'Overview',
+      link: 'activity/0/overview',
+      fieldDescription: 'Provide a short overview of the Activity'
+    },
+    {
+      section: 'Activity 2',
+      subSection: 'Outcomes and Metrics',
+      link: 'activity/1/oms',
+      fieldDescription: 'Add at least one outcome for this activity'
+    }
+  ]
 };
 
 const apdNoActivities = {

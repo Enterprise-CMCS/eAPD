@@ -36,7 +36,7 @@ import {
   SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE,
-  ADMIN_CHECK_MINI_TOGGLE,
+  ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
 import { defaultAPDYearOptions, generateKey } from '../../util';
@@ -328,7 +328,7 @@ const initialState = {
   error: '',
   selectAPDOnLoad: false,
   adminCheck: false,
-  adminCheckMini: false,
+  adminCheckCollapsed: false,
   adminCheckComplete: false
 };
 
@@ -398,10 +398,10 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case ADMIN_CHECK_MINI_TOGGLE: {
+    case ADMIN_CHECK_COLLAPSE_TOGGLE: {
       return {
         ...state,
-        adminCheckMini: action.data
+        adminCheckCollapsed: action.data
       };
     }
 

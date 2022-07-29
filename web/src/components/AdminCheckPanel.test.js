@@ -60,7 +60,7 @@ describe('admin check panel', () => {
       initialState: {
         apd: {
           adminCheck: true,
-          adminCheckMini: false,
+          adminCheckCollapsed: false,
           adminCheckComplete: false,
           data: {
             metadata: mockedMetadata
@@ -77,7 +77,7 @@ describe('admin check panel', () => {
       initialState: {
         apd: {
           adminCheck: true,
-          adminCheckMini: false,
+          adminCheckCollapsed: false,
           adminCheckComplete: false,
           data: {
             metadata: mockedMetadata
@@ -98,7 +98,7 @@ describe('admin check panel', () => {
       initialState: {
         apd: {
           adminCheck: true,
-          adminCheckMini: false,
+          adminCheckCollapsed: false,
           adminCheckComplete: false,
           data: {
             metadata: mockedMetadata
@@ -117,7 +117,7 @@ describe('admin check panel', () => {
       initialState: {
         apd: {
           adminCheck: true,
-          adminCheckMini: false,
+          adminCheckCollapsed: false,
           adminCheckComplete: true,
           data: {
             metadata: mockedMetadata
@@ -134,7 +134,7 @@ describe('admin check panel', () => {
       initialState: {
         apd: {
           adminCheck: true,
-          adminCheckMini: true,
+          adminCheckCollapsed: true,
           adminCheckComplete: true,
           data: {
             metadata: mockedMetadata

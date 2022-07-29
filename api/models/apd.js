@@ -363,7 +363,7 @@ const apdSchema = new mongoose.Schema({
     softwareRights: [federalCitation],
     security: [federalCitation]
   },
-  metadata: {}
+  adminCheck: []
 });
 
 const APD = mongoose.model('APD', apdSchema);
