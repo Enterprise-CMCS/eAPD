@@ -461,7 +461,7 @@ jobs:
   e2e test:
     machine:
       image: ubuntu-2004:202104-01
-    parallelism: 5
+    parallelism: 6
     steps:
       - checkout
       - attach_workspace:
@@ -566,6 +566,17 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.cy.js"; fi
+      - run:
+          name: run e2e bug tests
+          working_directory: ~/project/e2e
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then nvm use 16.16.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_PORT=54325; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
 
   chromatic deployment:
     yaml test:
