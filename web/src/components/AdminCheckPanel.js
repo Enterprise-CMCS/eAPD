@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import {
   toggleAdminCheckComplete
 } from '../redux/actions/app/apd';
 
-import { Badge, Button, Drawer } from '@cmsgov/design-system';
+import { Button, Drawer } from '@cmsgov/design-system';
 
 import Icon, { faExclamationTriangle } from '../components/Icons';
 
@@ -33,6 +33,11 @@ const RequiredFieldsComponent = ({ adminCheckData, adminCheckComplete }) => (
     </div>
   </Fragment>
 );
+
+RequiredFieldsComponent.propTypes = {
+  adminCheckData: PropTypes.array.isRequired,
+  adminCheckComplete: PropTypes.bool.isRequired
+};
 
 const AdminCheckPanel = ({
   adminCheckEnabled,
@@ -169,8 +174,9 @@ const AdminCheckPanel = ({
                 {!adminCheckComplete && (
                   <Fragment>
                     <ol className="ds-u-margin-y--1">
-                      {adminCheckData.map((item, index) => (
+                      {adminCheckData.map(item => (
                         <li
+                          key={item.name}
                           className={`ds-h5 ds-u-margin--0 ds-u-padding-y--3 ds-u-border-bottom--1 ${
                             item.complete
                               ? 'eapd-admin-check--completed-item'
@@ -220,6 +226,7 @@ AdminCheckPanel.propTypes = {
   toggleAdmin: PropTypes.func.isRequired,
   toggleCollapsed: PropTypes.func.isRequired,
   toggleAdminComplete: PropTypes.func.isRequired,
+  adminCheckData: PropTypes.array.isRequired,
   adminCheckEnabled: PropTypes.bool.isRequired,
   adminCheckCollapsed: PropTypes.bool.isRequired,
   adminCheckComplete: PropTypes.bool.isRequired,

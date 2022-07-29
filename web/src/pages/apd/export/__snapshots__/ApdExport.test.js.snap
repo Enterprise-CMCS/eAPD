@@ -33,7 +33,7 @@ exports[`apd export component renders correctly 1`] = `
           className="ds-u-padding-left--1"
           fade={false}
           fixedWidth={false}
-          flip={null}
+          flip={false}
           icon={
             Object {
               "icon": Array [
@@ -57,6 +57,8 @@ exports[`apd export component renders correctly 1`] = `
           shake={false}
           size={null}
           spin={false}
+          spinPulse={false}
+          spinReverse={false}
           swapOpacity={false}
           symbol={false}
           title=""
