@@ -7,7 +7,6 @@ import {
   useHistory as actualUseHistory,
   useLocation as actualUseLocation
 } from 'react-router-dom';
-import TagManager from 'react-gtm-module';
 
 import Sidebar from '../layout/nav/Sidebar';
 import UnexpectedError from '../components/UnexpectedError';
@@ -31,7 +30,6 @@ const ApdApplication = ({
   apdId,
   selectApd: dispatchSelectApd,
   setApdToSelectOnLoad: dispatchSelectApdOnLoad,
-  userRole,
   useParams,
   useHistory,
   useLocation
@@ -78,14 +76,6 @@ const ApdApplication = ({
       </div>
     );
   }
-
-  TagManager.dataLayer({
-    dataLayer: {
-      stateId: place.id,
-      eAPDIdHash: apdId,
-      userRole
-    }
-  });
 
   return (
     <div className="site-body ds-l-container">
