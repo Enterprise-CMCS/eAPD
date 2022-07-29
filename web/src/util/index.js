@@ -181,12 +181,6 @@ export const toSentenceCase = str =>
     // words will be lower-cased.
     .replace(/ ([A-Z])([a-z]| )/g, start => start.toLowerCase());
 
-export const arrToObj = (array = [], initialValue = 0) => {
-  const init =
-    typeof initialValue === 'function' ? initialValue : () => initialValue;
-  return Object.assign({}, ...array.map(a => ({ [a]: init() })));
-};
-
 export const applyToNumbers = (obj, fn) => {
   const o = { ...obj };
   Object.keys(o).forEach(k => {

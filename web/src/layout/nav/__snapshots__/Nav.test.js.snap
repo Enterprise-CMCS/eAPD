@@ -334,6 +334,7 @@ exports[`<Nav /> component renders correctly 1`] = `
                           <svg
                             aria-hidden={true}
                             className="ds-c-icon ds-c-icon--arrow ds-c-icon--arrow-up"
+                            direction="up"
                             focusable={false}
                             id="icon-2"
                             viewBox="0 0 320 512"

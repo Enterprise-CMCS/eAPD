@@ -22,6 +22,7 @@ Resolves #
 ### This pull request can be merged when
 
 - [ ] Code has been reviewed by someone other than the original author
-- [ ] QA has verified the accessibility and functionality related to the change
+- [ ] QA has verified the functionality related to the change
+- [ ] QA has verified the accesibility using tools such as screen readers and WAVE (accessibility evaluation tool)
 - [ ] Design has approved the experience
 - [ ] Product has approved the experience

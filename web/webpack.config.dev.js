@@ -86,7 +86,7 @@ const config = {
       OKTA_DOMAIN: '',
       OKTA_SERVER_ID: '',
       OKTA_CLIENT_ID: '',
-      WEB_ENV: 'dev'
+      TEALIUM_ENV: ''
     }),
     // Plugin for hot module replacement
     new webpack.HotModuleReplacementPlugin(),
@@ -96,9 +96,9 @@ const config = {
       template: 'src/index.html',
 
       // Tealium
-      tealiumUrl: `https://tags.tiqcdn.com/utag/cmsgov/cms-eapd/dev/utag.sync.js`,
+      tealiumUrl: `https://tags.tiqcdn.com/utag/cmsgov/cms-eapd/${process.env.TEALIUM_ENV}/utag.sync.js`,
       tealiumProfile: 'cms-eapd',
-      environment: 'dev'
+      environment: process.env.TEALIUM_ENV
     })
   ],
   devtool: 'eval-source-map',
