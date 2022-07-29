@@ -40,4 +40,4 @@ module "instances" {
     eapd_jumpbox_subnet_id                    = var.eapd_jumpbox_subnet_id
 }
 
-# REreturn of the testing   
+# REreturn of the testing   Fixed typo in Atlanis confi
