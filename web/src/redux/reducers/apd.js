@@ -390,7 +390,7 @@ const reducer = (state = initialState, action) => {
     case ADMIN_CHECK_TOGGLE: {
       return {
         ...state,
-        adminCheck: action.data
+        adminCheck: process.env.TEALIUM_ENV !== 'prod'
       };
     }
 
