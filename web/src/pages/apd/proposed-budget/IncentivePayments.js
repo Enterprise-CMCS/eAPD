@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import {
@@ -19,6 +21,8 @@ import {
 } from '../../../redux/selectors/apd.selectors';
 import { formatNum } from '../../../util/formats';
 
+import Joi from 'joi';
+
 const QUARTERS = [1, 2, 3, 4];
 
 const IncentivePayments = ({
@@ -29,8 +33,26 @@ const IncentivePayments = ({
   setEPPayment,
   totals,
   isViewOnly,
-  years
+  years,
+  adminCheck
 }) => {
+
+  const {
+    control,
+    trigger,
+    formState: {errors}
+  } = useForm({
+    defaultValues: {
+      ...data
+    },
+    resolver: joiResolver()
+  });
+
+  useEffect(() => {
+    if (adminCheck) {
+    }
+  }, []);
+
   const updateEHPayment =
     (year, quarter) =>
     ({ target: { value } }) => {
@@ -232,7 +254,8 @@ IncentivePayments.propTypes = {
   setEPPayment: PropTypes.func.isRequired,
   totals: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  adminCheck: PropTypes.func.isRequired
 };
 
 IncentivePayments.defaultProps = { isViewOnly: false };
@@ -240,7 +263,8 @@ IncentivePayments.defaultProps = { isViewOnly: false };
 const mapStateToProps = state => ({
   data: selectIncentivePayments(state),
   totals: selectIncentivePaymentTotals(state),
-  years: selectApdYears(state)
+  years: selectApdYears(state),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
