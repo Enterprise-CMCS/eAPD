@@ -3,6 +3,12 @@
 sudo su <<R_USER
 #!/bin/bash
 
+# Update Logrotate Configuration
+# Logs are offloaded to CloudWatch & Splunk
+sed -i 's|weekly|daily|g' /etc/logrotate.conf
+sed -i 's|rotate 12|rotate 5|g' /etc/logrotate.conf
+systemctl restart rsyslog
+
 # Install New Relic Infrastructure Monitor
 curl -o /etc/yum.repos.d/newrelic-infra.repo https://download.newrelic.com/infrastructure_agent/linux/yum/el/7/x86_64/newrelic-infra.repo
 yum -q makecache -y --disablerepo='*' --enablerepo='newrelic-infra'
@@ -104,9 +110,9 @@ source ~/.bashrc
 
 # We're using Node 16, and we don't care about minor/patch versions, so always
 # get the latest.
-nvm install 16.15.0
-nvm alias default 16.15.0
-nvm use 16.15.0
+nvm install 16.16.0
+nvm alias default 16.16.0
+nvm use 16.16.0
 npm i -g yarn@1.22.18
 
 git clone --single-branch https://github.com/CMSgov/eAPD.git

@@ -1,0 +1,22 @@
+classDiagram
+%% @config(../.vscode/settings.json)
+class apds {
+  +integer id
+  +json keyStatePersonnel
+  +json proposedBudget
+  +array years
+  +varchar stateId
+  +varchar status
+  +varchar name
+  +json apdOverview
+  +array activities
+  +json assurancesAndCompliances
+  +timestamp createdAt
+  +timestamp updatedAt
+}
+class migrations {
+  +integer _id
+  +varchar state
+  +varchar name
+  +timestamp createdAt
+}
