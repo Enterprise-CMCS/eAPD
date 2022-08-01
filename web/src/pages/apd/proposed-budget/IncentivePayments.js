@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { joiResolver } from '@hookform/resolvers/joi';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
