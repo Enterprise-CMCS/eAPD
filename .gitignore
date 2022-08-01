@@ -47,6 +47,8 @@ web/storybook-static/*
 # stryker temp files
 web/.stryker-tmp
 web/reports
+common/.stryker-tmp
+common/reports
 
 # use yarn to manage packages, not npm
 api/package-lock.json

@@ -3,6 +3,12 @@
   "version": "0.0.1",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
+  "scripts": {
+    "stryker": "TZ=utc stryker run",
+    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest",
+    "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch",
+    "npm-check": "npx npm-check-updates"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CMSgov/eAPD.git"
@@ -13,10 +19,15 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "engines": {
-    "node": "16.15.0"
+    "node": "16.16.0"
   },
   "dependencies": {
     "joi": "17.6.0"
+  },
+  "devDependencies": {
+    "@stryker-mutator/core": "6.0.2",
+    "@stryker-mutator/jest-runner": "6.0.2",
+    "jest": "^28.1.2"
   },
   "packageManager": "yarn@1.22.18"
 }

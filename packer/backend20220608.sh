@@ -4,6 +4,12 @@
 sudo su <<R_USER
 #!/bin/bash
 
+# Update Logrotate Configuration
+# Logs are offloaded to CloudWatch & Splunk
+sed -i 's|weekly|daily|g' /etc/logrotate.conf
+sed -i 's|rotate 12|rotate 5|g' /etc/logrotate.conf
+systemctl restart rsyslog
+
 # Add a user group for the default user, and make it the owner of the /app
 # directory, then give the directory group write permission
 groupadd eapd
@@ -43,10 +49,10 @@ touch /app/api/logs/cms-hitech-apd-api.logs
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16.15.0, we care about minor/patch versions
+# We're using Node 16.16.0, we care about minor/patch versions
 export TERM="xterm"
-nvm install 16.15.0
-nvm alias default 16.15.0
+nvm install 16.16.0
+nvm alias default 16.16.0
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make
