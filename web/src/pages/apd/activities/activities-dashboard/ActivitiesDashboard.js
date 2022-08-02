@@ -17,6 +17,7 @@ const All = ({ addActivity, activities, adminCheck }) => {
   const { apdId } = useParams();
 
   const validate = activitiesDashboardSchema.validate(activities);
+  console.log('validate', adminCheck);
 
   return (
     <React.Fragment>
@@ -57,7 +58,7 @@ All.defaultProps = {
 
 const mapStateToProps = state => ({
   activities: selectAllActivities(state),
-  adminCheck: false
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
