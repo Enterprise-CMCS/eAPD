@@ -325,7 +325,7 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: false
+  adminCheck: process.env.TEALIUM_ENV !== 'prod'
 };
 
 // eslint-disable-next-line default-param-last
@@ -390,7 +390,7 @@ const reducer = (state = initialState, action) => {
     case ADMIN_CHECK_TOGGLE: {
       return {
         ...state,
-        adminCheck: process.env.TEALIUM_ENV !== 'prod'
+        adminCheck: action.data
       };
     }
 
