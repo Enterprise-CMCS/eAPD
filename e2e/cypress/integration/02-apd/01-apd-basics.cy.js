@@ -797,15 +797,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .within(() => cy.findByLabelText('Year').focus().blur());
       cy.contains('Provide an end date.').should('exist');
 
-      activityPage.checkTextField(
-        'ds-c-field ds-c-field--currency ds-c-field--medium',
-        '',
-        0
-      );
-      cy.get('[class="ds-c-field ds-c-field--currency ds-c-field--medium"]')
-        .eq(0)
-        .focus()
-        .blur();
+      cy.get('[name="totalCost"]').should('have.value', '');
+      cy.get('[name="totalCost"]').focus().blur();
+
       cy.contains(
         'Provide a contract cost greater than or equal to $0.'
       ).should('exist');
