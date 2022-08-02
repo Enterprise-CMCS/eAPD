@@ -1340,14 +1340,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   describe('tests an APD with no activities', () => {
-    it.only('shows message', () => {
+    it('shows message', () => {
       cy.visit('/');
       cy.findByRole('link', { name: /HITECH IAPD No Activities/i }).click();
       cy.goToActivityDashboard();
       cy.findByText('Add at least one activity.').should('exist');
-      cy.findByText('Activities have not been added for this APD.').should(
-        'exist'
-      );
     });
   });
 

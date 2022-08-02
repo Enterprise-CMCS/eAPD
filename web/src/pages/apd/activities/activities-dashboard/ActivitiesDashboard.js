@@ -24,6 +24,7 @@ const All = ({ addActivity, activities, adminCheck }) => {
       <AlertMissingFFY />
       <Section id="activities" resource="activities">
         <hr className="custom-hr" />
+        {activities.length == 0 && <p>Add at least one activity.</p>}
         {adminCheck && validate.error && (
           <Fragment>
             <Alert variation="error">{validate.error?.message}</Alert>
@@ -56,7 +57,7 @@ All.defaultProps = {
 
 const mapStateToProps = state => ({
   activities: selectAllActivities(state),
-  adminCheck: state.apd.adminCheck
+  adminCheck: false
 });
 
 const mapDispatchToProps = {
