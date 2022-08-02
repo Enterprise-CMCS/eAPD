@@ -64,7 +64,7 @@
     "jsonwebtoken": "8.5.1",
     "knex": "1.0.7",
     "migrate-mongoose": "4.0.0",
-    "mongoose": "5.13.14",
+    "mongoose": "6.5.0",
     "morgan": "1.10.0",
     "newrelic": "8.16.0",
     "pg": "8.7.3",
@@ -132,10 +132,5 @@
       "--exclude=./api/db/mongodb.js",
       "--exclude=./api/seeds/development/apds.js"
     ]
-  },
-  "resolutions": {
-    "ansi-regex": "3.0.1",
-    "minimist": ">=1.2.6",
-    "glob-parent": ">=6.0.1"
   }
 }
