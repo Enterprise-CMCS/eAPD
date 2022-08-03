@@ -9,11 +9,11 @@ docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec db sh -c 'PGP
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
-# docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run test $@
-# EXIT_CODE=$?
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run test $@
+EXIT_CODE=$?
 
-# docker cp api_api-for-testing_1:/app/api/coverage ./coverage
+docker cp api_api-for-testing_1:/app/api/coverage ./coverage
 
-# docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 
-# exit $EXIT_CODE
+exit $EXIT_CODE
