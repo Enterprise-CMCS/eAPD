@@ -30,6 +30,7 @@ tap.test('database wrappers / apds', async apdsTests => {
   });
 
   apdsTests.beforeEach(async () => {
+    // eslint-disable-next-line no-console
     console.log(`connection status ${getConnectionStatus()}`);
     id = await createAPD({
       stateId: 'co',

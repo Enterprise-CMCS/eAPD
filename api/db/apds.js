@@ -14,7 +14,6 @@ const createAPD = async apd => {
   const { actualExpenditures = {} } = JSON.parse(
     JSON.stringify(apd.previousActivities || {})
   );
-  console.log(`adding APD id=${apd.id} _id=${apd._id}`);
   let newApd = new APD({
     ...apd,
     previousActivities: {
@@ -22,7 +21,6 @@ const createAPD = async apd => {
       actualExpenditures: undefined // remove the deeply nested object causing issues
     }
   });
-  logger.verbose(`Creating APD: ${newApd._id}`);
   newApd = await newApd.save();
 
   // update the record with the deeply nested object using their full paths
