@@ -41,6 +41,7 @@
     "node": "16.16.0"
   },
   "dependencies": {
+    "@cms-eapd/common": "0.0.1",
     "@okta/jwt-verifier": "2.6.0",
     "@okta/okta-sdk-nodejs": "6.5.0",
     "ajv": "8.11.0",
@@ -110,6 +111,8 @@
   },
   "tap": {
     "files": "./**/*.test.js",
+    "before": "./tap.setup.js",
+    "after": "./tap.teardown.js",
     "lines": 75,
     "functions": 60,
     "branches": 50,

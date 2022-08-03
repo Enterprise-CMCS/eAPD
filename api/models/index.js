@@ -1,1 +1,3 @@
-require('./apd');
+const APD = require('./apd');
+
+module.exports = { APD };

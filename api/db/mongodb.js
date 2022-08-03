@@ -1,46 +1,41 @@
 const mongoose = require('mongoose');
 const logger = require('../logger')('mongoose');
 
+const getConnectionString = () =>
+  process.env.MONGO_URL ||
+  'mongodb://mongo:cms@mongo:27017/eapd?authSource=admin';
+
+const getDBName = () => process.env.MONGO_DATABASE || 'eapd';
+
 const connect = async () => {
   logger.verbose('Setting up MongoDB connection');
-  const connectionString =
-    process.env.MONGO_URL ||
-    'mongodb://mongo:cms@mongo:27017/eapd?authSource=admin';
-  const dbName = process.env.MONGO_DATABASE || 'eapd';
+  const connectionString = getConnectionString();
+  const dbName = getDBName();
 
   try {
-    await mongoose
-      .connect(connectionString, {
-        dbName,
-        keepAlive: true,
-        keepAliveInitialDelay: 300000
-      })
-      .then(() => {
-        logger.verbose('MongoDB connected');
-      })
-      .catch(err => {
-        logger.error(`Error in MongoDB connection: ${err}`);
-      });
+    await mongoose.connect(connectionString, {
+      dbName,
+      keepAlive: true,
+      keepAliveInitialDelay: 300000
+    });
+    logger.verbose('MongoDB connected');
+    return null;
   } catch (err) {
     logger.error(`Error in MongoDB connection: ${err}`);
+    return null;
   }
 };
 
 const setup = async () => {
   await connect();
+  // eslint-disable-next-line global-require
   require('../models'); // import all of the mongo models
 };
 
 const teardown = async () => {
   try {
-    await mongoose.connection
-      .close()
-      .then(() => {
-        logger.verbose('MongoDB disconnected');
-      })
-      .catch(err => {
-        logger.error(`Error disconnecting to MongoDB: ${err}`);
-      });
+    await mongoose.connection.close();
+    logger.verbose('MongoDB disconnected');
   } catch (err) {
     logger.error(`Error disconnecting to MongoDB: ${err}`);
   }

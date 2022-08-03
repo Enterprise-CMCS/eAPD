@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const tap = require('tap');
 
-const mongo = require('./mongodb');
+const { setup, teardown } = require('./mongodb');
 
 const STATE = {
   disconnected: 0,
@@ -12,14 +12,14 @@ const STATE = {
 
 tap.test('mongo', async mongoTests => {
   mongoTests.test('setup/teardown', async setupTest => {
-    await mongo.setup();
+    await setup();
     setupTest.equal(
       mongoose.connection.readyState,
       STATE.connected,
       'Mongoose is connected'
     );
 
-    await mongo.teardown();
+    await teardown();
     setupTest.equal(
       mongoose.connection.readyState,
       STATE.disconnected,
