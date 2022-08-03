@@ -111,8 +111,6 @@
   },
   "tap": {
     "files": "./**/*.test.js",
-    "before": "./tap.setup.js",
-    "after": "./tap.teardown.js",
     "lines": 75,
     "functions": 60,
     "branches": 50,
