@@ -17,7 +17,7 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
         const state = certification.state.toLowerCase();
 
         const affiliations = await axios.get(
-          `/states/${state}/affiliations?matches=true`
+          `/states/${state}/affiliations` // Removed ?matches=true such that we list all affiliations per state
         );
         setStateAffiliations(affiliations.data);
         /* Compare the certification email/name to the affiliations and make 
