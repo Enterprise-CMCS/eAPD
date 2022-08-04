@@ -20,10 +20,7 @@ const knex = require('./db/knex');
 const me = require('./routes/me/index');
 
 try {
-  mongoSetup({
-    keepAlive: true,
-    keepAliveInitialDelay: 300000
-  });
+  mongoSetup();
 } catch (err) {
   logger.error(`Error setting up MongoDB: ${err}`);
 }

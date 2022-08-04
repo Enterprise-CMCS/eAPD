@@ -5,3 +5,4 @@ api/test-data/files
 web/coverage
 web/dist
 web/_dev
+.circleci/config.yml
