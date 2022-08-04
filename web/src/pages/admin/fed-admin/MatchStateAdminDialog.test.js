@@ -34,7 +34,7 @@ describe('<MatchStateAdminDialog />', () => {
   test('renders correctly', () => {
     setup();
     fetchMock
-      .onGet('/states/ak/affiliations?matches=true')
+      .onGet('/states/ak/affiliations')
       .reply(200, [{ email: 'sally@shire.com', displayName: 'Sally Shire' }]);
 
     expect(screen.getByText('Match State Admin Letter to User')).toBeTruthy();
