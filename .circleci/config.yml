@@ -431,7 +431,10 @@ jobs:
       - setup_remote_docker
       - run:
           name: save OpenAPI JSON
-          command: node -e "console.log(JSON.stringify(require('./api/routes/openAPI/index.js')))" > openapi.json
+          command:
+            node -e
+            "console.log(JSON.stringify(require('./api/routes/openAPI/index.js')))"
+            > openapi.json
       - run:
           name: validate
           command: |
@@ -579,7 +582,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "5" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
 
   chromatic deployment:
-    yaml test:
+    ? yaml test
     docker:
       - image: cimg/node:16.16.0
         auth:
@@ -726,18 +729,32 @@ jobs:
       - run:
           name: Prepare Yarn for Web App Build
           working_directory: ~/project
-          command: yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
+          command:
+            yarn install --frozen-lockfile --non-interactive --production
+            --network-timeout 1000000 > yarn-install.log
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command:
+            TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<<
+            parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env
+            >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}"
+            OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}"
+            OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}"
+            JWT_SECRET="${<< parameters.env >>_JWT_SECRET}"
+            MONGO_INITDB_DATABASE="${<< parameters.env
+            >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env
+            >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
             - web/dist
       - run:
           name: persist build URL to workspace
-          command: echo "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0" > build-url.txt
+          command:
+            echo
+            "https://${CIRCLE_BUILD_NUM}-${GH_REPO_ID}-gh.circle-artifacts.com/0"
+            > build-url.txt
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -828,6 +845,7 @@ jobs:
       - run:
           name: run owasp zap
           working_directory: ~/project
+          no_output_timeout: 60m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
@@ -1045,7 +1063,9 @@ jobs:
       - run:
           name: Persist Build URL to Workspace
           working_directory: ~/project
-          command: sh bin/prod-deploy/buildurl.sh CIRCLE_TOKEN=${CIRCLE_TOKEN} CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} > ./build-url.txt
+          command:
+            sh bin/prod-deploy/buildurl.sh CIRCLE_TOKEN=${CIRCLE_TOKEN}
+            CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM} > ./build-url.txt
       - persist_to_workspace:
           root: ~/project
           paths:
