@@ -82,9 +82,14 @@ const getStateAdminCertifications = ({ db = knex } = {}) => {
     ])
     .leftOuterJoin('auth_roles', 'auth_roles.id', 'auth_affiliations.role_id')
     .where('auth_roles.name', '=', 'eAPD State Staff')
-    .whereNot('auth_roles.name', '=', 'eAPD Federal Admin')
     .orWhere('auth_affiliations.status', '=', 'requested')
-    .orWhere('auth_affiliations.status', '=', 'approved')
+    .orWhere(function () {
+      this.where('auth_affiliations.status', '=', 'approved').andWhere(
+        'auth_roles.name',
+        '=',
+        'eAPD State Admin'
+      );
+    })
     .as('affiliations');
 
   return db('state_admin_certifications')
