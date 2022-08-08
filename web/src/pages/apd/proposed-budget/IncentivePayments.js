@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -29,8 +29,16 @@ const IncentivePayments = ({
   setEPPayment,
   totals,
   isViewOnly,
-  years
+  years,
+  adminCheck
 }) => {
+
+  useEffect(() => {
+    if(adminCheck) {
+      console.log({data});
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const updateEHPayment =
     (year, quarter) =>
     ({ target: { value } }) => {
@@ -106,7 +114,7 @@ const IncentivePayments = ({
                           label={`ehAmt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`ehAmt-payments-${year}-q${q}`}
-                          value={data.ehAmt[year][q] || ''}
+                          value={data.ehAmt[year][q] || '0'}
                           onChange={updateEHPayment(year, q)}
                         />
                       )}
@@ -161,7 +169,7 @@ const IncentivePayments = ({
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
                       {isViewOnly ? (
-                        <Dollars>{data.epAmt[year][q] || ''}</Dollars>
+                        <Dollars>{data.epAmt[year][q] || '0'}</Dollars>
                       ) : (
                         <DollarField
                           className="budget-table--input-holder"
@@ -170,7 +178,7 @@ const IncentivePayments = ({
                           label={`epAmt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
                           name={`epAmt-payments-${year}-q${q}`}
-                          value={data.epAmt[year][q] || ''}
+                          value={data.epAmt[year][q] || '0'}
                           onChange={updateEPPayment(year, q)}
                         />
                       )}
@@ -232,7 +240,8 @@ IncentivePayments.propTypes = {
   setEPPayment: PropTypes.func.isRequired,
   totals: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  adminCheck: PropTypes.bool
 };
 
 IncentivePayments.defaultProps = { isViewOnly: false };
@@ -240,7 +249,8 @@ IncentivePayments.defaultProps = { isViewOnly: false };
 const mapStateToProps = state => ({
   data: selectIncentivePayments(state),
   totals: selectIncentivePaymentTotals(state),
-  years: selectApdYears(state)
+  years: selectApdYears(state),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
