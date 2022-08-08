@@ -52,6 +52,7 @@ const AUTH_AFFILIATIONS = {
 tap.test('certifications query tests', async sacQueryTest => {
   let stateStaffRoleId;
   let fedAdminRoleId;
+  let stateAdminRoleId;
 
   sacQueryTest.before(async () => {
     stateStaffRoleId = await knex('auth_roles')
@@ -291,7 +292,7 @@ tap.test('certifications query tests', async sacQueryTest => {
 
       const results = await getStateAdminCertifications();
       t.same(results.length, 1);
-      t.same(results[0].potentialMatches, 1);
+      t.same(results[0].potentialMatches, 0);
     }
   );
 
