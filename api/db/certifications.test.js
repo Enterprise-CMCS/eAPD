@@ -292,7 +292,7 @@ tap.test('certifications query tests', async sacQueryTest => {
 
       const results = await getStateAdminCertifications();
       t.same(results.length, 1);
-      t.same(results[0].potentialMatches, 0);
+      t.same(results[0].potentialMatches, 1);
     }
   );
 
