@@ -2,6 +2,28 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+const Joi = require('joi')
+
+const incentivePaySchema = Joi.object({
+  data: Joi.object().pattern(
+    /ehAmt|epAmt/,
+    Joi.object().pattern(
+      /\d{4}/,
+      Joi.object().pattern(
+        /[1-4]{1}/,
+        Joi.number().integer().positive().allow(0).required().messages({
+          'number.base': 'Provide a number greater than or equal to $0.',
+          'number.empty': 'Provide a number greater than or equal to $0.',
+          'number.format': 'Provide a number greater than or equal to $0.',
+          'number.positive': 'Provide a number greater than or equal to $0.'
+        })
+      )
+    )
+  )
+});
+
 import {
   setIncentiveEHCount,
   setIncentiveEPCount,
@@ -33,17 +55,30 @@ const IncentivePayments = ({
   adminCheck
 }) => {
 
+  const {
+    control,
+    formState: { errors },
+    trigger
+  } = useForm({
+    defaultValues: {
+      data
+    },
+    resolver: joiResolver(incentivePaySchema)
+  })
+
   useEffect(() => {
     if(adminCheck) {
-      console.log({data});
+      console.log({ data });
+      trigger();
+      console.log({errors});
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const updateEHPayment =
-    (year, quarter) =>
-    ({ target: { value } }) => {
-      setEHPayment(year, quarter, value);
-    };
+  const dollar_error = (v) => {
+    if(adminCheck) {
+      return (v >= 0 && v%1 == 0) ? false : true;
+    }
+  }
 
   const updateEHCount =
     (year, quarter) =>
@@ -107,15 +142,30 @@ const IncentivePayments = ({
                       {isViewOnly ? (
                         <Dollars>{data.ehAmt[year][q] || ''}</Dollars>
                       ) : (
-                        <DollarField
-                          className="budget-table--input-holder"
-                          fieldClassName="budget-table--input__number"
-                          aria-labelledby={`q${q} eh-payments`}
-                          label={`ehAmt payments for ${year}, quarter ${q}`}
-                          labelClassName="sr-only"
-                          name={`ehAmt-payments-${year}-q${q}`}
-                          value={data.ehAmt[year][q] || '0'}
-                          onChange={updateEHPayment(year, q)}
+                        <Controller
+                          name={`data.ehAmt.${year}.${q}`}
+                          control={control}
+                          render={({ field: { onChange, name, ...props } }) => (
+                            <DollarField
+                              {...props}
+                              name={name}
+                              className="budget-table--input-holder"
+                              fieldClassName={dollar_error(data.ehAmt[year][q]) ? 'budget-table--input__number-error' : 'budget-table--input__number'}
+                              aria-labelledby={`q${q} eh-payments`}
+                              label={`ehAmt payments for ${year}, quarter ${q}`}
+                              labelClassName="sr-only"
+                              value={data.ehAmt[year][q] || '0'}
+                              onChange={({ target: { value } }) => {
+                                setEHPayment(year, q, value);
+                                onChange(value);
+
+                                if (adminCheck) {
+                                  trigger();
+                                  console.log({errors})
+                                }
+                              }}
+                            />
+                          )}
                         />
                       )}
                     </td>
@@ -173,7 +223,7 @@ const IncentivePayments = ({
                       ) : (
                         <DollarField
                           className="budget-table--input-holder"
-                          fieldClassName="budget-table--input__number"
+                          fieldClassName={dollar_error(data.epAmt[year][q]) ? 'budget-table--input__number-error' : 'budget-table--input__number'}
                           aria-labelledby={`q${q} ep-payments`}
                           label={`epAmt payments for ${year}, quarter ${q}`}
                           labelClassName="sr-only"
