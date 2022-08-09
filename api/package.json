@@ -7,7 +7,7 @@
     "lint": "eslint '**/*.js'",
     "build": "babel . --ignore node_modules,dist,coverage-endpoint -d ./dist -s",
     "start": "npm run build && node dist/main.js",
-    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node main.js -e js",
+    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
     "npm-check": "npx npm-check-updates",
     "knex-console": "node --experimental-repl-await knexrepl.js",
     "knex-make-migrate": "knex migrate:make",
@@ -78,14 +78,21 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
+    "@babel/core": "7.18.9",
+    "@babel/eslint-parser": "7.18.9",
+    "@babel/preset-env": "7.18.9",
+    "@babel/preset-react": "7.18.6",
     "@babel/node": "7.18.10",
     "@babel/polyfill": "^7.12.1",
     "@babel/register": "^7.18.9",
+    "babel-jest": "28.1.3",
     "colors": "1.4.0",
+    "core-js": "3.24.1",
     "eslint": "8.20.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
+    "jest": "28.1.3",
     "nodemon": "2.0.19",
     "sinon": "14.0.0",
     "supertest": "6.2.4",
@@ -128,11 +135,6 @@
   },
   "tap": {
     "files": "./**/*.test.js",
-    "test-ignore": [
-      "./node_modules/",
-      "./dist/",
-      "./coverage-endpoint/"
-    ],
     "lines": 75,
     "functions": 60,
     "branches": 50,

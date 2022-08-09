@@ -29,6 +29,7 @@ describe('<ApdViewOnly/>', () => {
   });
 
   test('renders correctly and tests Back to APD button', async () => {
+    jest.setTimeout(30000);
     const { user } = setup(null, {
       initialState: {
         ...apd,
