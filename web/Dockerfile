@@ -4,10 +4,11 @@ RUN apk add --no-cache python3 g++ make
 RUN mkdir /app
 WORKDIR /app
 
-ADD package.json .
-ADD yarn.lock .
-ADD web ./web
-ADD common ./common
+COPY package.json .
+COPY babel.config.js .
+COPY yarn.lock .
+COPY web ./web
+COPY common ./common
 
 RUN chown -R node:node /app
 USER node:node

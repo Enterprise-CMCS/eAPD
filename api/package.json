@@ -5,8 +5,9 @@
   "main": "main.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "start": "node main.js",
-    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 ./main.js -e js",
+    "build": "babel . --ignore node_modules,dist,coverage-endpoint -d ./dist -s",
+    "start": "npm run build && node dist/main.js",
+    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node main.js -e js",
     "npm-check": "npx npm-check-updates",
     "knex-console": "node --experimental-repl-await knexrepl.js",
     "knex-make-migrate": "knex migrate:make",
@@ -41,6 +42,7 @@
     "node": "16.16.0"
   },
   "dependencies": {
+    "@cms-eapd/common": "0.0.1",
     "@okta/jwt-verifier": "2.6.0",
     "@okta/okta-sdk-nodejs": "6.5.0",
     "ajv": "8.11.0",
@@ -76,12 +78,14 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
+    "@babel/node": "7.18.10",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/register": "^7.18.9",
     "colors": "1.4.0",
     "eslint": "8.20.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
-    "jest": "28.1.3",
     "nodemon": "2.0.19",
     "sinon": "14.0.0",
     "supertest": "6.2.4",
@@ -94,15 +98,29 @@
   "jest": {
     "coverageDirectory": "./coverage-endpoint/",
     "rootDir": "./",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/coverage-endpoint/"
+    ],
     "globalSetup": "./jest.setup.js",
     "globalTeardown": "./jest.teardown.js",
-    "testMatch": [
-      "**/*.endpoint.{js,jsx}"
-    ],
+    "testRegex": ".*.endpoint.(j|t)s[x]?$",
     "testEnvironment": "node",
     "testTimeout": 30000,
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@cms-eapd/common|file-type)"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
     "collectCoverageFrom": [
       "routes/**/*.{js,jsx}",
+      "!/dist/**/*.{js,jsx}",
       "!**/*.test.js",
       "!**/__snapshots__/**",
       "!**/openAPI.js"
@@ -110,6 +128,11 @@
   },
   "tap": {
     "files": "./**/*.test.js",
+    "test-ignore": [
+      "./node_modules/",
+      "./dist/",
+      "./coverage-endpoint/"
+    ],
     "lines": 75,
     "functions": 60,
     "branches": 50,
@@ -132,10 +155,5 @@
       "--exclude=./api/db/mongodb.js",
       "--exclude=./api/seeds/development/apds.js"
     ]
-  },
-  "resolutions": {
-    "ansi-regex": "3.0.1",
-    "minimist": ">=1.2.6",
-    "glob-parent": ">=6.0.1"
   }
 }

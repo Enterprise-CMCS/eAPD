@@ -28,10 +28,6 @@
     "tinymce": "5.10.4"
   },
   "devDependencies": {
-    "@babel/core": "7.18.9",
-    "@babel/eslint-parser": "7.18.9",
-    "@babel/preset-env": "7.18.9",
-    "@babel/preset-react": "7.18.6",
     "@cmsgov/design-system": "3.7.0",
     "@cypress/browserify-preprocessor": "3.0.2",
     "@cypress/react": "6.0.0",
@@ -39,7 +35,6 @@
     "@storybook/testing-react": "1.3.0",
     "@testing-library/cypress": "8.0.3",
     "axios": "0.27.2",
-    "babel-loader": "8.2.5",
     "connected-react-router": "6.9.3",
     "css-loader": "6.7.1",
     "cypress": "10.3.1",
@@ -69,7 +64,6 @@
     "url-loader": "4.1.1",
     "yaml-loader": "0.8.0"
   },
-  "resolutions": {},
   "jest": {
     "setupFiles": [
       "./polyfills.test.js"

@@ -23,6 +23,7 @@ notes.md
 schema.sql
 Makefile
 
+api/dist
 api/seeds/test/tokens.json
 api/test-data/files
 api/.env
