@@ -13,6 +13,8 @@ variable "preview_database_url" {}
 variable "preview_okta_domain" {}
 variable "preview_okta_api_key" {}
 variable "environment" {}
+variable "preview_tealium_tag" {}
+variable "preview_tealium_env" {}
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -53,7 +55,9 @@ build {
             "DATABASE_URL=${var.preview_database_url}",
             "OKTA_DOMAIN=${var.preview_okta_domain}",
             "OKTA_API_KEY=${var.preview_okta_api_key}",
-            "ENVIRONMENT=${var.environment}"
+            "ENVIRONMENT=${var.environment}",
+            "PREVIEW_TEALIUM_TAG"=${var.preview_tealium_tag},
+            "PREVIEW_TEALIUM_ENV"=${var.preview_tealium_env}
         ]        
         script = "./preview20220608.sh"
     }
