@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint '**/*.js'",
     "scaffold": "rm -rf dist && mkdir dist && cp package.json dist/ && cp -r schemas dist/schemas/",
-    "scaffold-test": "cp seeds/test/*.json dist/seeds/test/",
+    "scaffold-test": "mkdir -p dist/seeds/test && mkdir -p dist/test-data &&  cp -r seeds/test/*.json dist/seeds/test/ && cp -r test-data/ dist/test-data",
     "build": "yarn scaffold && babel . --ignore node_modules,dist,coverage-endpoint -d ./dist -s",
     "start": "npm run build && node dist/main.js",
     "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
@@ -24,10 +24,10 @@
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "knex seed:run --specific=base-users.js",
     "jest": "NODE_ENV=test jest",
-    "tap": "yarn scaffold-test && NODE_ENV=test tap --node-arg=--require=@babel/register -J --no-browser --no-coverage --no-timeout",
-    "test": "yarn scaffold-test && NODE_ENV=test tap --node-arg=--require=@babel/register -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
+    "tap": "yarn scaffold-test && NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout",
+    "test": "yarn scaffold-test && NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
     "test-endpoints": "yarn scaffold-test && jest --detectOpenHandles --forceExit --runInBand",
-    "test-specific": "yarn scaffold-test && NODE_ENV=test tap --node-arg=--require=@babel/register --cov --coverage-report=text-lcov --no-browser",
+    "test-specific": "yarn scaffold-test && NODE_ENV=test tap --cov --coverage-report=text-lcov --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
   },
@@ -83,11 +83,11 @@
     "@babel/core": "7.18.9",
     "@babel/eslint-parser": "7.18.9",
     "@babel/preset-env": "7.18.9",
-    "@babel/preset-react": "7.18.6",
     "@babel/node": "7.18.10",
     "@babel/polyfill": "^7.12.1",
     "@babel/register": "^7.18.9",
     "babel-jest": "28.1.3",
+    "babel-plugin-istanbul": "6.1.1",
     "colors": "1.4.0",
     "core-js": "3.24.1",
     "eslint": "8.20.0",
@@ -136,13 +136,28 @@
     ]
   },
   "tap": {
-    "files": "./**/*.test.js",
+    "files": [
+      "./api.test.js",
+      "./env.test.js",
+      "./auth/**/*.test.js",
+      "./db/**/*.test.js",
+      "./files/**/*.test.js",
+      "./middleware/**/*.test.js",
+      "./models/**/*.test.js",
+      "./routes/**/*.test.js",
+      "./seeds/**/*.test.js",
+      "./util/**/*.test.js"
+    ],
     "lines": 75,
     "functions": 60,
     "branches": 50,
     "statements": 75,
     "nyc-arg": [
+      "--require=@babel/register",
+      "--sourceMap=false",
+      "--instrument=false",
       "--reporter-dir=./coverage/",
+      "--exclude=./dist/*",
       "--exclude=./**/*.endpoint.js",
       "--exclude=./**/index.js",
       "--exclude=./**/migrations/**",
@@ -153,11 +168,11 @@
       "--exclude=./**/test-data/**",
       "--exclude=./**/node_modules/**",
       "--exclude=./**/__snapshots__/**",
-      "--exclude=./api/audit.js",
-      "--exclude=./api/auth/mockedOktaAuth.js",
-      "--exclude=./api/db/knex.js",
-      "--exclude=./api/db/mongodb.js",
-      "--exclude=./api/seeds/development/apds.js"
+      "--exclude=./**/audit.js",
+      "--exclude=./**/auth/mockedOktaAuth.js",
+      "--exclude=./**/db/knex.js",
+      "--exclude=./**/db/mongodb.js",
+      "--exclude=./**/seeds/development/apds.js"
     ]
   }
 }
