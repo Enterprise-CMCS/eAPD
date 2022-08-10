@@ -293,7 +293,7 @@ jobs:
       - run:
           name: Install Packer for Preview
           command: |
-            curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-packer.gpg > /dev/null
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
             yes '' | sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
       - run:
@@ -323,7 +323,7 @@ jobs:
       - run:
           name: Install Packer for Prod
           command: |
-            curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-packer.gpg > /dev/null
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
             yes '' | sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
       - run:
