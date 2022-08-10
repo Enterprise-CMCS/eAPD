@@ -34,13 +34,14 @@ workflows:
 
   # Workflow to build new AMIs based on the latest gold images weekly
   weekly aws ami builds:
-    triggers:
-      - schedule:
-          cron: '0 0 * * 1' # Mondays at midnight
-          filters:
-            branches:
-              only:
-                - main
+#    triggers:
+#      - schedule:
+#          cron: '0 0 * * 1' # Mondays at midnight
+#          filters:
+#            branches:
+#              only:
+#                - main
+
     jobs:
       - build preview ami:
           name: Build Preview AMI
@@ -293,7 +294,7 @@ jobs:
           name: Install Packer for Preview
           command: |
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-            sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            yes '' | sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
       - run:
           name: Packer Build Preview AMI
@@ -323,7 +324,7 @@ jobs:
           name: Install Packer for Prod
           command: |
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-            sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            yes '' | sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
       - run:
           name: Packer Build Production AMI
