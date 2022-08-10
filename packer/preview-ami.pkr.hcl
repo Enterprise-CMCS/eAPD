@@ -56,8 +56,8 @@ build {
             "OKTA_DOMAIN=${var.preview_okta_domain}",
             "OKTA_API_KEY=${var.preview_okta_api_key}",
             "ENVIRONMENT=${var.environment}",
-            "PREVIEW_TEALIUM_TAG"=${var.preview_tealium_tag},
-            "PREVIEW_TEALIUM_ENV"=${var.preview_tealium_env}
+            "PREVIEW_TEALIUM_TAG=${var.preview_tealium_tag}",
+            "PREVIEW_TEALIUM_ENV=${var.preview_tealium_env}"
         ]        
         script = "./preview20220608.sh"
     }
