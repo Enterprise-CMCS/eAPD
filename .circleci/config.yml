@@ -726,7 +726,7 @@ jobs:
       - run:
           name: Prepare Yarn for Web App Build
           working_directory: ~/project
-          command: yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
+          command: yarn install --frozen-lockfile --non-interactive --network-timeout 1000000 > yarn-install.log
       - run:
           name: build the web app
           working_directory: ~/project/web
