@@ -91,11 +91,10 @@
     "@babel/plugin-transform-modules-commonjs": "7.18.6",
     "@babel/preset-env": "7.18.10",
     "@babel/preset-react": "7.18.6",
-    "@snyk/protect": "1.984.0",
+    "@snyk/protect": "1.986.0",
     "babel-jest": "28.1.3",
     "babel-plugin-dynamic-import-node": "2.3.3",
     "jest": "28.1.3",
-    "jest-environment-jsdom": "28.1.3",
     "prettier": "2.7.1"
   },
   "resolutions": {

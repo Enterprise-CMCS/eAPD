@@ -25,8 +25,8 @@
     "joi": "17.6.0"
   },
   "devDependencies": {
-    "@stryker-mutator/core": "6.0.2",
-    "@stryker-mutator/jest-runner": "6.0.2"
+    "@stryker-mutator/core": "6.1.2",
+    "@stryker-mutator/jest-runner": "6.1.2"
   },
   "packageManager": "yarn@1.22.18"
 }
