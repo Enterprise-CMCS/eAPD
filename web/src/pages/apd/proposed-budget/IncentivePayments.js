@@ -7,21 +7,36 @@ import { joiResolver } from '@hookform/resolvers/joi';
 const Joi = require('joi')
 
 const incentivePaySchema = Joi.object({
-  data: Joi.object().pattern(
-    /ehAmt|epAmt/,
-    Joi.object().pattern(
+  data: Joi.object({
+    ehCt: Joi.any(),
+    epCt: Joi.any(),
+    ehAmt: Joi.object().pattern(
+        /\d{4}/,
+        Joi.object().pattern(
+          /[1-4]{1}/,
+          Joi.number().integer().positive().allow(0).required().messages({
+            'number.base': 'Provide a number greater than or equal to $0.',
+            'number.empty': 'Provide a number greater than or equal to $0.',
+            'number.integer': 'Use only whole numbers when providing counts',
+            'number.format': 'Provide a number greater than or equal to $0.',
+            'number.positive': 'Provide a number greater than or equal to $0.'
+          })
+        )
+      ),
+    epAmt: Joi.object().pattern(
       /\d{4}/,
       Joi.object().pattern(
         /[1-4]{1}/,
         Joi.number().integer().positive().allow(0).required().messages({
           'number.base': 'Provide a number greater than or equal to $0.',
           'number.empty': 'Provide a number greater than or equal to $0.',
+          'number.integer': 'Use only whole numbers when providing counts',
           'number.format': 'Provide a number greater than or equal to $0.',
           'number.positive': 'Provide a number greater than or equal to $0.'
         })
       )
     )
-  )
+  })
 });
 
 import {
@@ -63,20 +78,20 @@ const IncentivePayments = ({
     defaultValues: {
       data
     },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: joiResolver(incentivePaySchema)
   })
 
   useEffect(() => {
-    if(adminCheck) {
-      console.log({ data });
+    if (adminCheck) {
       trigger();
-      console.log({errors});
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
 
   const dollar_error = (v) => {
     if(adminCheck) {
-      return (v >= 0 && v%1 == 0) ? false : true;
+      return (v >= 0 && v%1 == 0 && !isNaN(parseInt(v))) ? false : true;
     }
   }
 
@@ -221,15 +236,30 @@ const IncentivePayments = ({
                       {isViewOnly ? (
                         <Dollars>{data.epAmt[year][q] || '0'}</Dollars>
                       ) : (
-                        <DollarField
-                          className="budget-table--input-holder"
-                          fieldClassName={dollar_error(data.epAmt[year][q]) ? 'budget-table--input__number-error' : 'budget-table--input__number'}
-                          aria-labelledby={`q${q} ep-payments`}
-                          label={`epAmt payments for ${year}, quarter ${q}`}
-                          labelClassName="sr-only"
-                          name={`epAmt-payments-${year}-q${q}`}
-                          value={data.epAmt[year][q] || '0'}
-                          onChange={updateEPPayment(year, q)}
+                        <Controller
+                          name={`data.epAmt.${year}.${q}`}
+                          control={control}
+                          render={({ field: { onChange, name, ...props } }) => (
+                            <DollarField
+                              {...props}
+                              name={name}
+                              className="budget-table--input-holder"
+                              fieldClassName={dollar_error(data.epAmt[year][q]) ? 'budget-table--input__number-error' : 'budget-table--input__number'}
+                              aria-labelledby={`q${q} ep-payments`}
+                              label={`epAmt payments for ${year}, quarter ${q}`}
+                              labelClassName="sr-only"
+                              value={data.epAmt[year][q] || '0'}
+                              onChange={({ target: { value } }) => {
+                                setEPPayment(year, q, value);
+                                onChange(value);
+
+                                if (adminCheck) {
+                                  trigger();
+                                  console.log({errors})
+                                }
+                              }}
+                            />
+                          )}
                         />
                       )}
                     </td>
@@ -278,6 +308,16 @@ const IncentivePayments = ({
           </table>
         </Fragment>
       ))}
+      <div>
+        {errors?.data && (
+          <span
+            className="ds-u-margin-top--2 ds-u-font-size--sm ds-u-font-weight--bold ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            Provide a number greater than or equal to $0.
+          </span>
+        )}
+      </div>
     </Fragment>
   );
 };
