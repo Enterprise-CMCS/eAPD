@@ -1,4 +1,5 @@
-const { jwtExtractor, verifyEAPDToken } = require('./jwtUtils');
+import { jwtExtractor, verifyEAPDToken } from './jwtUtils';
+
 const logger = require('../logger')('jwt middleware');
 
 /**
@@ -33,4 +34,4 @@ const jwtMiddleware = async (
   return next();
 };
 
-module.exports = jwtMiddleware;
+export default jwtMiddleware;
