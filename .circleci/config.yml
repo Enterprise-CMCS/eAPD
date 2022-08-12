@@ -509,7 +509,7 @@ jobs:
             nvm use 16.16.0
 
             # yarn install --frozen-lockfile
-            npx cypress@10.3.1 install --force
+            npx cypress@10.4.0 install --force
             npx cypress verify
       - run:
           name: run e2e tests authentication

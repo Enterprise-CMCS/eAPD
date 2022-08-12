@@ -2,11 +2,11 @@
   "name": "@cms-eapd/api",
   "version": "0.0.1",
   "description": "APD api for CMS HITECH program",
-  "main": "main.js",
+  "main": "dist/main.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
     "scaffold": "rm -rf dist/db/* && rm -rf dist/migrations/* && rm -rf dist && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
-    "build": "yarn scaffold && babel . --ignore node_modules,dist,coverage-endpoint -d ./dist -s",
+    "build": "yarn scaffold && babel . --ignore \"node_modules/!file-type/**\",\"dist\",\"coverage-endpoint\" -d ./dist -s",
     "start": "npm run build && node dist/main.js",
     "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
     "npm-check": "npx npm-check-updates",

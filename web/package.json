@@ -5,11 +5,11 @@
   "main": "app.js",
   "scripts": {
     "lint": "eslint 'src/**/*.js'",
+    "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "build": "yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
     "start": "yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
     "npm-check": "npx npm-check-updates",
     "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
-    "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json -i --silent",
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc yarn run test:generate-output -- --watch",

@@ -17,6 +17,7 @@
   },
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
+    "build": "yarn workspaces run build",
     "prettier": "prettier --config \".prettierrc\" --write \"**/*.js\"",
     "npm-check": "npx npm-check-updates",
     "prepare": "yarn run snyk-protect",

@@ -35,6 +35,8 @@ api/hitech_api*.log*
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
 
+common/dist
+
 e2e/cypress.env.json
 e2e/cypress/screenshots/*
 e2e/cypress/videos/*
