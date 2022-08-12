@@ -1,8 +1,5 @@
 // Sets up dotenv, sets default environment
 // variables if not defined
-// eslint-disable-next-line import/no-import-module-exports
-import jsonWebTokenMiddleware from './auth/jwtMiddleware';
-
 require('./env');
 
 const express = require('express');
@@ -13,6 +10,7 @@ const { v4: uuidv4 } = require('uuid');
 const fileUpload = require('express-fileupload');
 const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
+const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
 const routes = require('./routes');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
