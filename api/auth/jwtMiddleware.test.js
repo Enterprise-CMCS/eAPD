@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
-const tap = require('tap');
-const sinon = require('sinon');
-const jwtMiddleware = require('./jwtMiddleware');
+import tap from 'tap';
+import sinon from 'sinon';
+import jwtMiddleware from './jwtMiddleware';
 
 const sandbox = sinon.createSandbox();
 
