@@ -2,108 +2,100 @@ import React from 'react';
 import { renderWithConnection, act, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
-import {
-  plain as CostAllocateFFPQuarterly,
-  makeMapStateToProps,
-  mapDispatchToProps
-} from './CostAllocateFFPQuarterly';
-
-import {
-  setFFPForInHouseCostsForFiscalQuarter,
-  setFFPForContractorCostsForFiscalQuarter
-} from '../../../../redux/actions/editActivity';
-import { ariaAnnounceFFPQuarterly } from '../../../../redux/actions/aria';
+import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
 const quarterlyFFP = {
-  2013: {
+  2022: {
     1: {
-      combined: { dollars: 35769 },
-      contractors: { dollars: 7392, percent: 0.85 },
-      inHouse: { dollars: 9384, percent: 0.37 }
+      combined: {
+        dollars: 753714,
+        percent: 0
+      },
+      contractors: {
+        dollars: 290757,
+        percent: 0.25
+      },
+      inHouse: {
+        dollars: 462957,
+        percent: 0.25
+      }
     },
     2: {
-      combined: { dollars: 5298 },
-      contractors: { dollars: 4258, percent: 0.35 },
-      inHouse: { dollars: 25, percent: 0.83 }
+      combined: {
+        dollars: 753712,
+        percent: 0
+      },
+      contractors: {
+        dollars: 290757,
+        percent: 0.25
+      },
+      inHouse: {
+        dollars: 462955,
+        percent: 0.25
+      }
     },
     3: {
-      combined: { dollars: 952863 },
-      contractors: { dollars: 72533522, percent: 0.19 },
-      inHouse: { dollars: 278, percent: 0.27 }
+      combined: {
+        dollars: 753711,
+        percent: 0
+      },
+      contractors: {
+        dollars: 290756,
+        percent: 0.25
+      },
+      inHouse: {
+        dollars: 462955,
+        percent: 0.25
+      }
     },
     4: {
-      combined: { dollars: 953638 },
-      contractors: { dollars: 9275, percent: 0.99 },
-      inHouse: { dollars: 2357, percent: 0.72 }
+      combined: {
+        dollars: 753711,
+        percent: 0
+      },
+      contractors: {
+        dollars: 290756,
+        percent: 0.25
+      },
+      inHouse: {
+        dollars: 462955,
+        percent: 0.25
+      }
     },
     subtotal: {
-      combined: { dollars: 3475 },
-      contractors: { dollars: 972465, percent: 0.99 },
-      inHouse: { dollars: 47939, percent: 0.72 }
-    }
-  },
-  2014: {
-    1: {
-      combined: { dollars: 846 },
-      contractors: { dollars: 3457, percent: 0.85 },
-      inHouse: { dollars: 2753, percent: 0.37 }
-    },
-    2: {
-      combined: { dollars: 4856 },
-      contractors: { dollars: 2345, percent: 0.35 },
-      inHouse: { dollars: 3754, percent: 0.83 }
-    },
-    3: {
-      combined: { dollars: 4976 },
-      contractors: { dollars: 26, percent: 0.19 },
-      inHouse: { dollars: 2754, percent: 0.27 }
-    },
-    4: {
-      combined: { dollars: 4976 },
-      contractors: { dollars: 2458, percent: 0.99 },
-      inHouse: { dollars: 3865, percent: 0.72 }
-    },
-    subtotal: {
-      combined: { dollars: 27364 },
-      contractors: { dollars: 457, percent: 0.99 },
-      inHouse: { dollars: 987125, percent: 0.72 }
+      combined: {
+        dollars: 3014848,
+        percent: 0
+      },
+      contractors: {
+        dollars: 1163026,
+        percent: 1
+      },
+      inHouse: {
+        dollars: 1851822,
+        percent: 1
+      }
     }
   }
 };
 
 const defaultProps = {
   activityIndex: 0,
-  aKey: 'key',
+  aKey: '6ea6b4a2',
   announce: jest.fn(),
   isViewOnly: false,
   setContractorFFP: jest.fn(),
   setInHouseFFP: jest.fn(),
-  year: '2013'
+  year: '2022'
 };
 
-const setup = async (props = {}) => {
+const setup = async (props = {}, options = {}) => {
   let util;
   // eslint-disable-next-line testing-library/no-unnecessary-act
   await act(async () => {
     util = renderWithConnection(
       <CostAllocateFFPQuarterly {...defaultProps} {...props} />,
-      {
-        initialState: {
-          apd: {
-            data: {
-              years: ['2013', '2014']
-            },
-            adminCheck: false
-          },
-          budget: {
-            activities: {
-              ['key']: {
-                quarterlyFFP: { ...quarterlyFFP }
-              }
-            }
-          }
-        }
-      }
+      options
     );
   });
   const user = userEvent.setup();
@@ -115,15 +107,125 @@ const setup = async (props = {}) => {
 
 describe('the cost allocation quarterly FFP component', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    // jest.resetAllMocks();
   });
 
-  test('shows something', async () => {
-    const { util } = await setup();
-
-    expect(screen.getByLabelText('Introduction')).toHaveValue(
-      'it is really cool'
+  it('renders as expected', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: quarterlyFFP
+              }
+            }
+          }
+        }
+      }
     );
+
+    expect(screen).toMatchSnapshot();
+  });
+
+  it('renders table header of correct year', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: quarterlyFFP
+              }
+            }
+          }
+        }
+      }
+    );
+
+    expect(screen.getByText(`FFY ${defaultProps.year}`)).toBeInTheDocument();
+  });
+
+  it('gracefully falls back if the quarterly FFP is not ready', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: null
+              }
+            }
+          }
+        }
+      }
+    );
+
+    expect(screen).toMatchSnapshot();
+  });
+
+  it.only('handles changes to in-house quarterly FFP', async () => {
+    const { user } = await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: quarterlyFFP
+              }
+            }
+          }
+        }
+      }
+    );
+
+    await user.clear(
+      screen.getByRole('textbox', {
+        name: 'federal share for ffy 2022, quarter 1, state'
+      })
+    );
+    await user.type(
+      screen.getByRole('textbox', {
+        name: 'federal share for ffy 2022, quarter 1, state'
+      }),
+      '5'
+    );
+
+    expect(
+      screen.getByRole('textbox', {
+        name: 'federal share for ffy 2022, quarter 1, state'
+      })
+    ).toHaveValue('5');
+    screen.debug();
+    // expect(screen).toMatchSnapshot();
   });
 
   // it('gracefully falls back if the quarterly FFP is not ready', () => {
