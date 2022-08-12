@@ -48,6 +48,7 @@
     "@uppy/react": "2.2.2",
     "@uppy/xhr-upload": "2.1.2",
     "axios": "0.27.2",
+    "babel-loader": "8.2.5",
     "connected-react-router": "6.9.3",
     "core-js": "3.24.1",
     "css-loader": "6.7.1",
@@ -102,10 +103,6 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "@babel/core": "7.18.10",
-    "@babel/eslint-parser": "7.18.9",
-    "@babel/preset-env": "7.18.10",
-    "@babel/preset-react": "7.18.6",
     "@storybook/addon-a11y": "6.5.10",
     "@storybook/addon-docs": "6.5.10",
     "@storybook/addon-essentials": "6.5.10",
@@ -125,7 +122,6 @@
     "axe-core": "4.4.3",
     "axios-mock-adapter": "1.21.2",
     "babel-jest": "27.5.1",
-    "babel-loader": "8.2.5",
     "chromatic": "6.7.4",
     "crypto-browserify": "3.12.0",
     "enzyme": "3.11.0",

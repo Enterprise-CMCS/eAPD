@@ -82,18 +82,21 @@
       "web/@cmsgov/design-system"
     ]
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "7.18.10",
     "@babel/core": "7.18.10",
     "@babel/eslint-parser": "7.18.9",
+    "@babel/node": "7.18.10",
     "@babel/plugin-proposal-class-properties": "7.18.6",
     "@babel/plugin-proposal-object-rest-spread": "7.18.9",
     "@babel/plugin-transform-modules-commonjs": "7.18.6",
     "@babel/preset-env": "7.18.10",
     "@babel/preset-react": "7.18.6",
+    "babel-plugin-dynamic-import-node": "2.3.3"
+  },
+  "devDependencies": {
     "@snyk/protect": "1.986.0",
     "babel-jest": "27.5.1",
-    "babel-plugin-dynamic-import-node": "2.3.3",
     "jest": "27.5.1",
     "prettier": "2.7.1"
   },
