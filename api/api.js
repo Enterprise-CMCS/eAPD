@@ -1,7 +1,7 @@
 // Sets up dotenv, sets default environment
 // variables if not defined
 // eslint-disable-next-line import/no-import-module-exports
-import jsonWebTokenMiddleware from './auth/jwtMiddleware';
+import jsonWebTokenMiddleware from './auth/jwtMiddleware.mjs'; // eslint-disable-line import/extensions
 
 require('./env');
 

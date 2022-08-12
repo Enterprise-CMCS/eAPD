@@ -128,7 +128,7 @@
     ]
   },
   "tap": {
-    "files": "!(node_modules|dist|coverage)/**/*.test.js",
+    "files": "!(node_modules|dist|coverage)/**/*.test.{mjs,js}",
     "lines": 75,
     "functions": 60,
     "branches": 49,
