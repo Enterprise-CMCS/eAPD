@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import tap from 'tap'; // eslint-disable-line import/no-extraneous-dependencies
 import sinon from 'sinon'; // eslint-disable-line import/no-extraneous-dependencies
-import jwtMiddleware from './jwtMiddleware.mjs'; // eslint-disable-line import/extensions
+import jwtMiddleware from './jwtMiddleware';
 
 const sandbox = sinon.createSandbox();
 

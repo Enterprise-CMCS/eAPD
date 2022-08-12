@@ -121,21 +121,21 @@
     ],
     "collectCoverageFrom": [
       "routes/**/*.{js,jsx}",
-      "!/dist/**/*.{js,jsx}",
+      "!/dist/**",
       "!**/*.test.js",
       "!**/__snapshots__/**",
       "!**/openAPI.js"
     ]
   },
   "tap": {
-    "files": "!(node_modules|dist|coverage)/**/*.test.{mjs,js}",
+    "files": "!(node_modules|dist|coverage)/**/*.test.js",
     "lines": 75,
     "functions": 60,
     "branches": 49,
     "statements": 75,
     "nyc-arg": [
       "--reporter-dir=./coverage/",
-      "--exclude=./dist/**/*.js",
+      "--exclude=./dist/**",
       "--exclude=./**/*.endpoint.js",
       "--exclude=./**/index.js",
       "--exclude=./**/migrations/**",
