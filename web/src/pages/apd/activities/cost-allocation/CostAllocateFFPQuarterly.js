@@ -267,23 +267,16 @@ const CostAllocateFFPQuarterly = ({
           </tr>
         </tbody>
       </table>
-      <div>
-        {errors && (
-          <span
-            className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
-            role="alert"
-          >
-            <div>
-              <p className="ds-u-margin--0">
-                {errors?.formData?.subtotal?.inHouse?.percent?.message}
-              </p>
-              <p className="ds-u-margin--0">
-                {errors?.formData?.subtotal?.contractors?.percent?.message}
-              </p>
-            </div>
-          </span>
-        )}
-      </div>
+      {errors && (
+        <div
+          className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
+          role="alert"
+          aria-label="Error message for Estimated Quarterly Expenditure table"
+        >
+          {errors?.formData?.subtotal?.inHouse?.percent?.message} <br />
+          {errors?.formData?.subtotal?.contractors?.percent?.message}
+        </div>
+      )}
     </Fragment>
   );
 };
@@ -309,7 +302,7 @@ const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
   const mapStateToProps = (state, props) => {
     return {
-      adminCheck: state.apd.adminCheck,
+      adminCheck: true,
       ...selectCostAllocateFFPBudget(state, props)
     };
   };
