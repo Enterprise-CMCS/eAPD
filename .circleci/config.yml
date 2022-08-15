@@ -293,7 +293,7 @@ jobs:
           name: Install Packer for Preview
           command: |
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-            sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
       - run:
           name: Packer Build Preview AMI
@@ -323,7 +323,7 @@ jobs:
           name: Install Packer for Prod
           command: |
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-            sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
       - run:
           name: Packer Build Production AMI
@@ -828,6 +828,7 @@ jobs:
       - run:
           name: run owasp zap
           working_directory: ~/project
+          no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
