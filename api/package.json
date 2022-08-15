@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "APD api for CMS HITECH program",
   "main": "dist/main.js",
+  "module": "dist/main.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
     "scaffold": "rm -rf dist/db/* && rm -rf dist/migrations/* && rm -rf dist && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
