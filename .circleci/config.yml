@@ -497,6 +497,8 @@ jobs:
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
             export TEALIUM_ENV="test"
 
+            nvm use 16.16.0
+            yarn install --frozen-lockfile
             yarn build
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker compose up -d
@@ -509,7 +511,7 @@ jobs:
           command: |
             echo $CYPRESS_ENV >> ./cypress.env.json
 
-            # yarn install --frozen-lockfile
+            nvm use 16.16.0
             npx cypress@10.4.0 install --force
             npx cypress verify
       - run:
