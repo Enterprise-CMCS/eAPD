@@ -35,6 +35,8 @@ module "instances" {
     eapd_jumpbox_ami                          = data.aws_ami.latest_golden_image
     eapd_jumpbox_key_name_bb                  = var.eapd_jumpbox_key_name_bb
     eapd_jumpbox_key_name_tf                  = var.eapd_jumpbox_key_name_tf
+    eapd_jumpbox_key_name_tb                  = var.eapd_jumpbox_key_name_tb
     eapd_jumpbox_vpc_security_group_ids       = var.eapd_jumpbox_vpc_security_group_ids
     eapd_jumpbox_subnet_id                    = var.eapd_jumpbox_subnet_id
 }
+
