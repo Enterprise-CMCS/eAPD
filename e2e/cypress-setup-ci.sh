@@ -11,3 +11,5 @@ sleep 5
 docker-compose exec api yarn run migrate
 docker-compose exec api yarn run seed
 sleep 5
+
+yarn workspace @cms-eapd/api build
