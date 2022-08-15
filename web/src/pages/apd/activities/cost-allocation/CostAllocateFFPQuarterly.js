@@ -25,6 +25,7 @@ const EXPENSE_NAME_DISPLAY = {
   combined: t('activities.costAllocate.quarterly.expenseNames.combined')
 };
 
+/* eslint-disable  react-hooks/rules-of-hooks */
 const CostAllocateFFPQuarterly = ({
   activityIndex,
   aKey,

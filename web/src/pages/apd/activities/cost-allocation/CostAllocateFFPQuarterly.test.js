@@ -282,8 +282,6 @@ describe('the cost allocation quarterly FFP component', () => {
       }
     );
 
-    screen.debug();
-
     expect(
       screen.getByRole('alert', {
         name: 'Error message for Estimated Quarterly Expenditure table'
@@ -327,8 +325,6 @@ describe('the cost allocation quarterly FFP component', () => {
       }),
       '5'
     );
-
-    screen.debug();
 
     expect(
       screen.getByRole('textbox', {
