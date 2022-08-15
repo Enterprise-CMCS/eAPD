@@ -101,12 +101,6 @@ const IncentivePayments = ({
       setEHCount(year, quarter, value);
     };
 
-  const updateEPPayment =
-    (year, quarter) =>
-    ({ target: { value } }) => {
-      setEPPayment(year, quarter, value);
-    };
-
   const updateEPCount =
     (year, quarter) =>
     ({ target: { value } }) => {
