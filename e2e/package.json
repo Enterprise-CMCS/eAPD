@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint 'cypress/**/*.js'",
+    "build": "echo 'skipping build'",
     "npm-check": "npx npm-check-updates",
     "cy:open": "./cypress-setup.sh open --config numTestsKeptInMemory=50",
     "cy:run:e2e": "./cypress-setup.sh run --e2e",
