@@ -14,6 +14,7 @@ RUN chown -R node:node /app
 USER node:node
 
 RUN yarn install --frozen-lockfile --non-interactive
+RUN yarn build
 
 WORKDIR /app/web
 CMD yarn run start
