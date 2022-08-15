@@ -476,6 +476,13 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb || true
             sudo apt-get -f install
             sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+             # Switch to Node 16.16.0.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.16.0
+            nvm alias default 16.16.0
+            nvm use 16.16.0
       - run:
           name: build images
           no_output_timeout: 30m
@@ -489,24 +496,18 @@ jobs:
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
             export TEALIUM_ENV="test"
+
+            yarn build
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api -f ./api/Dockerfile ./
-            docker build -t cms-eapd/web -f ./web/Dockerfile ./
+            docker compose up -d
+            docker-compose exec api yarn run migrate
+            docker-compose exec api yarn run seed
       - run:
           name: set up cypress
           working_directory: ~/project/e2e
           no_output_timeout: 30m
           command: |
-            export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
-
-            # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
-            nvm use 16.16.0
-            ./cypress-setup-ci.sh
 
             # yarn install --frozen-lockfile
             npx cypress@10.4.0 install --force
