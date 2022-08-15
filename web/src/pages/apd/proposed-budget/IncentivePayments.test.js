@@ -1,5 +1,12 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import {
+  renderWithConnection,
+  act,
+  screen,
+  within,
+  waitFor,
+  fireEvent
+} from 'apd-testing-library';
 
 import {
   plain as IncentivePayments,
@@ -14,102 +21,76 @@ import {
   setIncentiveEPPayment
 } from '../../../redux/actions/editApd';
 
-describe('incentive payments component', () => {
-  const props = {
-    data: {
-      ehAmt: { 1: [1, 2, 3, 4], 2: [5, 6, 7, 8] },
-      ehCt: { 1: [9, 10, 11, 12], 2: [13, 14, 15, 16] },
-      epAmt: { 1: [17, 18, 19, 20], 2: [21, 22, 23, 24] },
-      epCt: { 1: [25, 26, 27, 28], 2: [29, 30, 31, 32] }
-    },
-    totals: {
-      ehAmt: { allYears: 36, byYear: { 1: 10, 2: 26 } },
-      ehCt: { allYears: 100, byYear: { 1: 42, 2: 58 } },
-      epAmt: { allYears: 164, byYear: { 1: 74, 2: 90 } },
-      epCt: { allYears: 228, byYear: { 1: 106, 2: 122 } }
-    },
-    years: ['1', '2'],
-    setEHCount: jest.fn(),
-    setEPCount: jest.fn(),
-    setEHPayment: jest.fn(),
-    setEPPayment: jest.fn()
-  };
+const defaultProps = {
+  data: {
+    ehAmt: { 2022: [1, 2, 3, 4], 2023: [5, 6, 7, 8] },
+    ehCt: { 2022: [9, 10, 11, 12], 2023: [13, 14, 15, 16] },
+    epAmt: { 2022: [17, 18, 19, 20], 2023: [21, 22, 23, 24] },
+    epCt: { 2022: [25, 26, 27, 28], 2023: [29, 30, 31, 32] }
+  },
+  totals: {
+    ehAmt: { allYears: 36, byYear: { 1: 10, 2: 26 } },
+    ehCt: { allYears: 100, byYear: { 1: 42, 2: 58 } },
+    epAmt: { allYears: 164, byYear: { 1: 74, 2: 90 } },
+    epCt: { allYears: 228, byYear: { 1: 106, 2: 122 } }
+  },
+  years: ['2022', '2023'],
+  setEHCount: jest.fn(),
+  setEPCount: jest.fn(),
+  setEHPayment: jest.fn(),
+  setEPPayment: jest.fn()
+}
 
+const setup = (props = {}) => {
+  renderWithConnection(<IncentivePayments {...defaultProps} {...props} />);
+};
+
+describe('<IncentivePayments />', () =>{
   beforeEach(() => {
-    props.setEHCount.mockClear();
-    props.setEPCount.mockClear();
-    props.setEHPayment.mockClear();
-    props.setEPPayment.mockClear();
+    jest.resetAllMocks();
   });
 
-  it('renders correctly', () => {
-    const component = shallow(<IncentivePayments {...props} />);
-    expect(component).toMatchSnapshot();
-  });
+  test('renders correctly', async () => {
+    await setup();
 
-  it('handles changes', () => {
-    const component = shallow(<IncentivePayments {...props} />);
+    expect(<IncentivePayments />).toMatchSnapshot();
+  })
 
-    const actions = [
-      props.setEHPayment,
-      props.setEHCount,
-      props.setEPPayment,
-      props.setEPCount
-    ];
-
-    [
-      // The first pair of dollar/number fields will be for the EH things
-      // for the first year, and the first quarter
-      component.find('DollarField').at(0),
-      component.find('NumberField').at(0),
-      // We do all quarters of EH for a year before switching over to EP,
-      // so the 5th (index 4) pair will be for EP, first year, first quarter
-      component.find('DollarField').at(4),
-      component.find('NumberField').at(4)
-    ].forEach((c, i) => {
-      c.simulate('change', { target: { value: 99 } });
-
-      const action = actions[Math.floor(i / 4) % actions.length];
-
-      expect(action).toHaveBeenCalledWith('1', 1, 99);
-    });
-  });
-
-  it('maps state to props', () => {
+  test('maps state to props', () => {
     expect(
       mapStateToProps({
         apd: {
           data: {
             proposedBudget: {
               incentivePayments: {
-                ehAmt: { 1: [1, 2, 3, 4], 2: [5, 6, 7, 8] },
-                ehCt: { 1: [9, 10, 11, 12], 2: [13, 14, 15, 16] },
-                epAmt: { 1: [17, 18, 19, 20], 2: [21, 22, 23, 24] },
-                epCt: { 1: [25, 26, 27, 28], 2: [29, 30, 31, 32] }
+                ehAmt: { 2022: [1, 2, 3, 4], 2023: [5, 6, 7, 8] },
+                ehCt: { 2022: [9, 10, 11, 12], 2023: [13, 14, 15, 16] },
+                epAmt: { 2022: [17, 18, 19, 20], 2023: [21, 22, 23, 24] },
+                epCt: { 2022: [25, 26, 27, 28], 2023: [29, 30, 31, 32] }
               }
             },
-            years: ['1', '2']
+            years: ['2022', '2023']
           }
         }
       })
     ).toEqual({
       data: {
-        ehAmt: { 1: [1, 2, 3, 4], 2: [5, 6, 7, 8] },
-        ehCt: { 1: [9, 10, 11, 12], 2: [13, 14, 15, 16] },
-        epAmt: { 1: [17, 18, 19, 20], 2: [21, 22, 23, 24] },
-        epCt: { 1: [25, 26, 27, 28], 2: [29, 30, 31, 32] }
+        ehAmt: { 2022: [1, 2, 3, 4], 2023: [5, 6, 7, 8] },
+        ehCt: { 2022: [9, 10, 11, 12], 2023: [13, 14, 15, 16] },
+        epAmt: { 2022: [17, 18, 19, 20], 2023: [21, 22, 23, 24] },
+        epCt: { 2022: [25, 26, 27, 28], 2023: [29, 30, 31, 32] }
       },
       totals: {
-        ehAmt: { allYears: 36, byYear: { 1: 10, 2: 26 } },
-        ehCt: { allYears: 100, byYear: { 1: 42, 2: 58 } },
-        epAmt: { allYears: 164, byYear: { 1: 74, 2: 90 } },
-        epCt: { allYears: 228, byYear: { 1: 106, 2: 122 } }
+        ehAmt: { allYears: 36, byYear: { 2022: 10, 2023: 26 } },
+        ehCt: { allYears: 100, byYear: { 2022: 42, 2023: 58 } },
+        epAmt: { allYears: 164, byYear: { 2022: 74, 2023: 90 } },
+        epCt: { allYears: 228, byYear: { 2022: 106, 2023: 122 } }
       },
-      years: ['1', '2']
+      years: ['2022', '2023']
     });
   });
 
-  it('maps dispatch to props', () => {
+  test('maps dispatch to props', () => {
     expect(mapDispatchToProps).toEqual({
       setEHCount: setIncentiveEHCount,
       setEPCount: setIncentiveEPCount,
