@@ -12,7 +12,6 @@ const siteEnvironment = {
 };
 
 export const pageView = pathname => {
-  console.log('pageView', pathname);
   const activityRoutes = activityRoutesCreator(0);
   const loginRoutes = loginRoutesCreator();
   // main has to go last because we want
@@ -27,7 +26,7 @@ export const pageView = pathname => {
 
   if (found) {
     const { isPublic, contentType, siteSection, pageName } = found;
-    utag.view({
+    global?.utag?.view({
       content_language: 'en',
       content_type: contentType,
       page_name: `${siteSection}: ${pageName}`,

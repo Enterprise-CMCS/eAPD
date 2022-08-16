@@ -512,7 +512,7 @@ jobs:
             echo $CYPRESS_ENV >> ./cypress.env.json
 
             nvm use 16.16.0
-            npx cypress@10.4.0 install --force
+            npx cypress@10.5.0 install --force
             npx cypress verify
       - run:
           name: run e2e tests authentication
