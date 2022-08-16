@@ -87,9 +87,15 @@ cp package.json /app
 cp yarn.lock /app
 cp babel.config.js /app
 
-cd web
-TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
+# move the common folder into place
+cd ~/eAPD/common
+yarn build
+mkdir -p /app/common
+cp -r ~/eAPD/common/* /app/common
 
+# move the web app into place
+cd ~/eAPD/web
+TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
 cp -r dist/* /app/web
 
 # move over node modules
