@@ -1,5 +1,10 @@
 import React from 'react';
-import { renderWithConnection, act, screen } from 'apd-testing-library';
+import {
+  renderWithConnection,
+  act,
+  screen,
+  waitFor
+} from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
@@ -182,10 +187,10 @@ const setup = async (props = {}, options = {}) => {
 
 describe('the cost allocation quarterly FFP component', () => {
   beforeEach(() => {
-    // jest.resetAllMocks();
+    jest.resetAllMocks();
   });
 
-  it('renders as expected', async () => {
+  it('gracefully falls back if the quarterly FFP is not ready', async () => {
     await setup(
       {},
       {
@@ -199,7 +204,7 @@ describe('the cost allocation quarterly FFP component', () => {
           budget: {
             activities: {
               '6ea6b4a2': {
-                quarterlyFFP: quarterlyFFP
+                quarterlyFFP: null
               }
             }
           }
@@ -207,7 +212,7 @@ describe('the cost allocation quarterly FFP component', () => {
       }
     );
 
-    expect(screen).toMatchSnapshot();
+    expect(screen.queryByText(`FFY ${defaultProps.year}`)).toBeNull();
   });
 
   it('renders table header of correct year', async () => {
@@ -233,31 +238,6 @@ describe('the cost allocation quarterly FFP component', () => {
     );
 
     expect(screen.getByText(`FFY ${defaultProps.year}`)).toBeInTheDocument();
-  });
-
-  it('gracefully falls back if the quarterly FFP is not ready', async () => {
-    await setup(
-      {},
-      {
-        initialState: {
-          apd: {
-            data: {
-              years: ['2022']
-            },
-            adminCheck: false
-          },
-          budget: {
-            activities: {
-              '6ea6b4a2': {
-                quarterlyFFP: null
-              }
-            }
-          }
-        }
-      }
-    );
-
-    expect(screen).toMatchSnapshot();
   });
 
   it('shows error messages with invalid percentages', async () => {
@@ -291,7 +271,122 @@ describe('the cost allocation quarterly FFP component', () => {
     );
   });
 
-  // Todo: revisit this and figure out how to get user events to work
+  it('renders table role correctly', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: quarterlyFFP
+              }
+            }
+          }
+        }
+      }
+    );
+
+    expect(
+      screen.getByRole('table', {
+        name: `Enter the federal fiscal year ${defaultProps.year} quarterly breakdown by percentage.`
+      })
+    ).toBeInTheDocument();
+  });
+
+  it('renders subtotals percent', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: quarterlyFFP
+              }
+            }
+          }
+        }
+      }
+    );
+
+    expect(
+      screen.getAllByRole('cell', {
+        name: `+100%`
+      })
+    ).toHaveLength(2);
+  });
+
+  it('renders state staff and expenses subtotal', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: quarterlyFFP
+              }
+            }
+          }
+        }
+      }
+    );
+
+    expect(
+      screen.getByRole('cell', {
+        name: `$1,851,822`
+      })
+    ).toBeInTheDocument();
+  });
+
+  it('renders private contractor costs subtotal', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: quarterlyFFP
+              }
+            }
+          }
+        }
+      }
+    );
+
+    expect(
+      screen.getByRole('cell', {
+        name: `$1,163,026`
+      })
+    ).toBeInTheDocument();
+  });
+
   xit('handles changes to in-house quarterly FFP', async () => {
     const { user } = await setup(
       {},
@@ -314,17 +409,19 @@ describe('the cost allocation quarterly FFP component', () => {
       }
     );
 
-    await user.clear(
-      screen.getByRole('textbox', {
-        name: 'federal share for ffy 2022, quarter 1, state'
-      })
-    );
-    await user.type(
-      screen.getByRole('textbox', {
-        name: 'federal share for ffy 2022, quarter 1, state'
-      }),
-      '5'
-    );
+    await waitFor(() => {
+      user.clear(
+        screen.getByRole('textbox', {
+          name: 'federal share for ffy 2022, quarter 1, state'
+        })
+      );
+      user.type(
+        screen.getByRole('textbox', {
+          name: 'federal share for ffy 2022, quarter 1, state'
+        }),
+        '5'
+      );
+    });
 
     expect(
       screen.getByRole('textbox', {
