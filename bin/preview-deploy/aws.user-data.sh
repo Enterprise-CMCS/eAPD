@@ -89,13 +89,12 @@ cp babel.config.js /app
 
 # move the common folder into place
 cd ~/eAPD/common
-yarn build
-mkdir -p /app/common
+yarn build > common-build.log
 cp -r ~/eAPD/common/* /app/common
 
 # move the web app into place
 cd ~/eAPD/web
-TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
+TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build > web-build.log
 cp -r dist/* /app/web
 
 # move over node modules
@@ -105,13 +104,14 @@ cp -r ~/eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
 cd ~/eAPD/api
-yarn build
+yarn build > api-build.log
 cp -r ~/eAPD/api/* /app/api
+
 cd /app/api
 
 # Build and seed the database
-NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate
-NODE_ENV=development DEV_DB_HOST=localhost yarn run seed
+NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate > migrate.log
+NODE_ENV=development DEV_DB_HOST=localhost yarn run seed > seed.log
 
 # Setting Up New Relic Application Monitor
 yarn add newrelic --save
@@ -161,7 +161,7 @@ echo "module.exports = {
 pm2 start ecosystem.config.js
 pm2 save
 
-NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
+NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate > production-migrate.log
 E_USER
 
 sudo yum remove -y gcc-c++

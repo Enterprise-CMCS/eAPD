@@ -1042,7 +1042,9 @@ jobs:
             sudo apt-get update
             sudo apt-get install zip -y
             yarn install --frozen-lockfile --production=true --network-timeout 1000000
-            zip -r /tmp/backend.zip api/* package.json yarn.lock common/*
+            yarn workspace @cms-eapd/common build
+            yarn workspace @cms-eapd/api build
+            zip -r /tmp/backend.zip api/* common/* package.json yarn.lock babel.config.js
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip
