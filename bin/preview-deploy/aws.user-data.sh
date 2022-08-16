@@ -83,6 +83,9 @@ cd eAPD
 npm i -g yarn@1.22.18
 yarn cache clean
 yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
+cp package.json /app
+cp yarn.lock /app
+cp babel.config.js /app
 
 cd web
 TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
@@ -95,6 +98,8 @@ mkdir -p /app/node_modules
 cp -r ~/eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
+cd ~/eAPD/api
+yarn build
 cp -r ~/eAPD/api/* /app/api
 cd /app/api
 
@@ -118,7 +123,7 @@ sudo chown -R ec2-user:eapd /app
 echo "module.exports = {
   apps : [{
     name: 'eAPD API',
-    script: 'main.js',
+    script: 'dist/main.js',
     instances: 1,
     autorestart: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
