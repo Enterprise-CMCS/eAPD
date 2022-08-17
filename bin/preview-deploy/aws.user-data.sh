@@ -162,7 +162,7 @@ echo "module.exports = {
 pm2 start ecosystem.config.js
 pm2 save
 
-NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate 2>&1 | tee production-migrate.log
+# NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate 2>&1 | tee production-migrate.log
 E_USER
 
 sudo yum remove -y gcc-c++
