@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import incentivePaySchema from '@cms-eapd/common/schemas/incentivePaySchema';
+import incentivePaySchema from '@cms-eapd/common/schemas/incentivePayments';
 
 import {
   setIncentiveEHCount,
@@ -129,6 +129,7 @@ const IncentivePayments = ({
                               fieldClassName={dollar_error(data.ehAmt[year][q]) ? 'budget-table--input__number-error' : 'budget-table--input__number'}
                               aria-labelledby={`q${q} eh-payments`}
                               label={`ehAmt payments for ${year}, quarter ${q}`}
+                              data-testid={`ehAmt ${year} ${q}`}
                               labelClassName="sr-only"
                               value={data.ehAmt[year][q] || '0'}
                               onChange={({ target: { value } }) => {
