@@ -369,7 +369,7 @@ CostAllocateFFP.propTypes = {
 
 CostAllocateFFP.defaultProps = {
   isViewOnly: false,
-  adminCheck: true
+  adminCheck: false
 };
 
 const mapStateToProps = (

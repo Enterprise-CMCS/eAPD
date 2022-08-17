@@ -303,7 +303,7 @@ const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
   const mapStateToProps = (state, props) => {
     return {
-      adminCheck: state.apd.adminCheck,
+      adminCheck: true,
       ...selectCostAllocateFFPBudget(state, props)
     };
   };
