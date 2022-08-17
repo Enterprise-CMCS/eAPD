@@ -89,6 +89,7 @@ cp babel.config.js /app
 
 # move the common folder into place
 cd ~/eAPD/common
+mkdir -p /app/common
 yarn build 2>&1 | tee common-build.log
 cp -r ~/eAPD/common/* /app/common
 
