@@ -210,6 +210,7 @@ const IncentivePayments = ({
                               label={`epAmt payments for ${year}, quarter ${q}`}
                               labelClassName="sr-only"
                               value={data.epAmt[year][q] || '0'}
+                              data-testid={`epAmt ${year} ${q}`}
                               onChange={({ target: { value } }) => {
                                 setEPPayment(year, q, value);
                                 onChange(value);
