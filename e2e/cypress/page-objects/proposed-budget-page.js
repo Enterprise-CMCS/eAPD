@@ -16,7 +16,6 @@ class ProposedBudgetPage {
           cy.get(table)
             .getEAPDTable()
             .then(tableData => {
-              cy.log(JSON.stringify(tableData));
               expect(tableData).to.deep.include(programTypes);
             });
           cy.get(table).within(() => {

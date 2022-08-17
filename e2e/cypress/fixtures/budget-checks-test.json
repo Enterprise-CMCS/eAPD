@@ -1,0 +1,85 @@
+{
+  "afterKeyPersonnelNoCosts": {
+    "budgetAndFFP": ["State Staff Subtotal", "$0"],
+    "CACTable": ["HIT Total", "$0"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterKeyPersonnelWithCosts": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterStatePersonnelHIT": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterStateExpenseHIT": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterContractorHIT": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterStatePersonnelHIE": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterStateExpenseHIE": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterContractorHIE": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterStatePersonnelMMIS": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterStateExpenseMMIS": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterContractorMMIS": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterStatePersonnelNoFFP": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterStateExpenseNoFFP": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  },
+
+  "afterContractorNoFFP": {
+    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
+    "CACTable": ["HIT Total", "$50,000"],
+    "FFPActivitiesTable": []
+  }
+}
