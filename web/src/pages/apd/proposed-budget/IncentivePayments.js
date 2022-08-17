@@ -137,7 +137,6 @@ const IncentivePayments = ({
 
                                 if (adminCheck) {
                                   trigger();
-                                  console.log({errors})
                                 }
                               }}
                             />
@@ -216,7 +215,6 @@ const IncentivePayments = ({
 
                                 if (adminCheck) {
                                   trigger();
-                                  console.log({errors})
                                 }
                               }}
                             />
