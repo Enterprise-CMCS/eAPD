@@ -45,6 +45,7 @@
     "node": "16.16.0"
   },
   "dependencies": {
+    "@babel/node": "7.18.10",
     "@cms-eapd/common": "0.0.1",
     "@okta/jwt-verifier": "2.6.0",
     "@okta/okta-sdk-nodejs": "6.5.0",
