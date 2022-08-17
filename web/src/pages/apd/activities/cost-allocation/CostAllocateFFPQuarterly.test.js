@@ -387,6 +387,9 @@ describe('the cost allocation quarterly FFP component', () => {
     ).toBeInTheDocument();
   });
 
+  // Todo: Revisit this. It seems that the component is trying
+  // to call deeply nested functions. Unsure what a workaround
+  // would be. Perhaps the component should be refactored.
   xit('handles changes to in-house quarterly FFP', async () => {
     const { user } = await setup(
       {},
