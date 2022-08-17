@@ -1,47 +1,44 @@
 {
   "activityName": "Robust Market Strategy",
 
-  "activityOverview": 
-    {
-      "name": "Robust Market Strategy",
-      "fundingType": "MMIS",
-      "shortOverview": "The Robust Market Strategy activity has a short overview and this is it.",
-      "startDate": [3, 1, 2023],
-      "endDate": [8, 11, 2025],
-      "detailedDescription": "This is a very long and winded detailed description of the new activity named Robust Market Strategy",
-      "supportingJustifications": "The Robust Market Strategy activity provides supporting justification here.",
-      "supportsMedicaid": "This activity support the medicaid standards and conditions."
-    },
+  "activityOverview": {
+    "name": "Robust Market Strategy",
+    "fundingType": "MMIS",
+    "shortOverview": "The Robust Market Strategy activity has a short overview and this is it.",
+    "startDate": [3, 1, 2023],
+    "endDate": [8, 11, 2025],
+    "detailedDescription": "This is a very long and winded detailed description of the new activity named Robust Market Strategy",
+    "supportingJustifications": "The Robust Market Strategy activity provides supporting justification here.",
+    "supportsMedicaid": "This activity support the medicaid standards and conditions."
+  },
 
-  "outcomes":
-    {
-      "names": [
-        "Accept measures for quality assurance until 2023, and modify FCR to meet new spec sheets released by the Third Quarter.",
-        "Provide airline suggesstions to AEIs and PLEs through Big Brand processes."
+  "outcomes": {
+    "names": [
+      "Accept measures for quality assurance until 2023, and modify FCR to meet new spec sheets released by the Third Quarter.",
+      "Provide airline suggesstions to AEIs and PLEs through Big Brand processes."
+    ],
+    "metrics": [
+      [
+        "Complete FCR modifications by 2/18/23",
+        "Provide suggestions up until 7/22/24"
       ],
-      "metrics": [
-        [
-          "Complete FCR modifications by 2/18/23",
-          "Provide suggestions up until 7/22/24"
-        ],
-        [
-          "Guidance can be viewed on Tyrone's alumni websites",
-          "Office hours availble only on Wednesdays and Fridays"
-        ]
+      [
+        "Guidance can be viewed on Tyrone's alumni websites",
+        "Office hours availble only on Wednesdays and Fridays"
       ]
-    },
+    ]
+  },
 
-  "milestones":
-    {
-      "names": [
-        "Begin development of the final chapter in Quarted four",
-        "Environmental Acusation Funds"
-      ],
-      "dates": [
-        [5, 8, 2023],
-        [11, 4, 2024]
-      ]
-    },
+  "milestones": {
+    "names": [
+      "Begin development of the final chapter in Quarted four",
+      "Environmental Acusation Funds"
+    ],
+    "dates": [
+      [5, 8, 2023],
+      [11, 4, 2024]
+    ]
+  },
 
   "staff": [
     {
@@ -95,15 +92,14 @@
     }
   ],
 
-  "costAllocation":
-    {
-      "description": "Activity 3 description for overall cost allocation.",
-      "FFYdescriptions": [
-        "This is the Other Funding description for Activity 3 - FFY 2022",
-        "This is the Other Funding description for Activity 3 - FFY 2023"
-      ],
-      "costs": [4000, 9000]
-    },
+  "costAllocation": {
+    "description": "Activity 3 description for overall cost allocation.",
+    "FFYdescriptions": [
+      "This is the Other Funding description for Activity 3 - FFY 2022",
+      "This is the Other Funding description for Activity 3 - FFY 2023"
+    ],
+    "costs": [4000, 9000]
+  },
 
   "splitConstants": [
     {
@@ -137,8 +133,22 @@
     "activityBudgetTable": [
       [
         [],
-        ["Private Security Trainer", "$215,000", "×", "0.25 FTE", "=", "$53,750"],
-        ["Professional Office Manager (Office Administrator III)", "$169,824", "×", "0.5 FTE", "=", "$84,912"],
+        [
+          "Private Security Trainer",
+          "$215,000",
+          "×",
+          "0.25 FTE",
+          "=",
+          "$53,750"
+        ],
+        [
+          "Professional Office Manager (Office Administrator III)",
+          "$169,824",
+          "×",
+          "0.5 FTE",
+          "=",
+          "$84,912"
+        ],
         ["Other Funding Amount", "-", "$2,240"],
         ["State Staff Subtotal", "$136,422"],
         [],
@@ -155,8 +165,22 @@
       ],
       [
         [],
-        ["Private Security Trainer", "$107,000", "×", "0.25 FTE", "=", "$26,750"],
-        ["Professional Office Manager (Office Administrator III)", "$114,712", "×", "1.5 FTE", "=", "$172,068"],
+        [
+          "Private Security Trainer",
+          "$107,000",
+          "×",
+          "0.25 FTE",
+          "=",
+          "$26,750"
+        ],
+        [
+          "Professional Office Manager (Office Administrator III)",
+          "$114,712",
+          "×",
+          "1.5 FTE",
+          "=",
+          "$172,068"
+        ],
         ["Other Funding Amount", "-", "$5,289"],
         ["State Staff Subtotal", "$193,529"],
         [],
@@ -235,8 +259,7 @@
     ]
   },
 
-  "FFYTotalDescription":
-  {
+  "FFYTotalDescription": {
     "totalCost": 585980,
     "totalOtherFunding": 13000,
     "totalTotalMedicaidCost": 572980,

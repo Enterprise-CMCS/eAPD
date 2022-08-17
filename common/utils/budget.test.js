@@ -4008,7 +4008,6 @@ describe('budget calculate methods', () => {
           stateShare: { contractors: 60, expenses: 53, statePersonnel: 38 },
           medicaidShare: { contractors: 120, expenses: 105, statePersonnel: 75 }
         }
-  
       });
       expect(actual).toEqual(expected);
     });

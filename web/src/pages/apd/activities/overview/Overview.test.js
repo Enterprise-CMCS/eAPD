@@ -1,12 +1,9 @@
 import React from 'react';
-import {
-  renderWithConnection,
-  screen
-} from 'apd-testing-library';
+import { renderWithConnection, screen } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
 import axios from '../../../../util/api';
-import Overview from './Overview'
+import Overview from './Overview';
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
@@ -18,15 +15,18 @@ const initialState = {
           name: 'Our Flag Means Death',
           fundingSource: 'HBO',
           alternatives: 'Pirates of the Caribbean is also a Pirate movie.',
-          description: 'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.',
-          summary: 'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
+          description:
+            'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.',
+          summary:
+            'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
         }
       ]
     }
   }
-}
+};
 
-const setup = (props = {}, options = {}) => renderWithConnection(<Overview {...props} />, options);
+const setup = (props = {}, options = {}) =>
+  renderWithConnection(<Overview {...props} />, options);
 
 describe('<Overview />', () => {
   beforeEach(() => {
@@ -45,22 +45,24 @@ describe('<Overview />', () => {
       );
 
       expect(
-        screen.getByLabelText(
-          'Provide a short overview of the activity.'
-        )
-      ).toHaveValue('Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.');
+        screen.getByLabelText('Provide a short overview of the activity.')
+      ).toHaveValue(
+        'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
+      );
 
       expect(
         screen.getByLabelText(
           'Include as much detail as is necessary to explain the activity.'
         )
-      ).toHaveValue('Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.');
+      ).toHaveValue(
+        'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.'
+      );
 
       expect(
         screen.getByLabelText(
           'Statement of alternative considerations and supporting justification'
         )
       ).toHaveValue('Pirates of the Caribbean is also a Pirate movie.');
-    })
-  })
+    });
+  });
 });

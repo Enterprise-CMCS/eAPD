@@ -45,7 +45,7 @@ const ApdStateProfile = ({
     control,
     trigger,
     formState: { errors }
-  } = useForm ({
+  } = useForm({
     defaultValues: {
       medicaidDirector: {
         name: medicaidDirector.name,
@@ -65,7 +65,7 @@ const ApdStateProfile = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
-    };
+    }
   }, []);
 
   return (
@@ -137,7 +137,7 @@ const ApdStateProfile = ({
               }}
               errorMessage={errors?.medicaidDirector?.phone?.message}
               errorPlacement="bottom"
-              />
+            />
           )}
         />
       </fieldset>

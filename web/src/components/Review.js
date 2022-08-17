@@ -40,14 +40,14 @@ const Review = ({
     onDeleteClick();
     setShowDeleteModal(false);
   };
-  
+
   const handleDeleteClick = () => {
-    if(skipConfirmation) {
+    if (skipConfirmation) {
       onDeleteClick();
     } else {
-      setShowDeleteModal(true);      
+      setShowDeleteModal(true);
     }
-  }
+  };
 
   return (
     <ReviewSummary
@@ -85,7 +85,7 @@ const Review = ({
                 onClick={handleDeleteClick}
                 aria-label={`Delete${ariaLabel ? ` ${ariaLabel}` : ''}`}
                 className="ds-u-color--error"
-              >               
+              >
                 {onDeleteLabel || 'Delete'}
               </Button>
             </Fragment>
