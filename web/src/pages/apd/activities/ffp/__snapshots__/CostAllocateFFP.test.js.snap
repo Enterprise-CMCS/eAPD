@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the CostAllocateFFP component renders tbale correctly 1`] = `
+<table
+  class="budget-table activity-budget-table"
+  data-cy="FFPActivityTable"
+  id="activity0-ffy2022"
+>
+  <caption
+    class="ds-h3"
+  >
+    Activity 
+    1
+     Budget for FFY 
+    2022
+  </caption>
+  <tbody>
+    <tr
+      class="budget-table--row__header"
+    >
+      <th
+        scope="col"
+      >
+        State Staff
+      </th>
+      <th
+        colspan="2"
+        scope="col"
+      >
+        <span
+          class="sr-only"
+        >
+          unit cost
+        </span>
+      </th>
+      <th
+        colspan="2"
+        scope="col"
+      >
+        <span
+          class="sr-only"
+        >
+          units
+        </span>
+      </th>
+      <th
+        scope="col"
+      >
+        Total cost
+      </th>
+    </tr>
+    <tr
+      class="budget-table--subtotal budget-table--row__highlight"
+    >
+      <td
+        class="title"
+        colspan="5"
+      >
+        State Staff Subtotal
+      </td>
+      <td
+        class="budget-table--number"
+        data-cy="subtotal"
+      >
+        <span>
+          $0
+        </span>
+      </td>
+    </tr>
+    <tr
+      class="budget-table--row__header"
+    >
+      <th
+        colspan="6"
+        scope="col"
+      >
+        Other State Expenses
+      </th>
+    </tr>
+    <tr
+      class="budget-table--subtotal budget-table--row__highlight"
+    >
+      <td
+        class="title"
+        colspan="5"
+      >
+        Other State Expenses Subtotal
+      </td>
+      <td
+        class="budget-table--number"
+        data-cy="subtotal"
+      >
+        <span>
+          $0
+        </span>
+      </td>
+    </tr>
+    <tr
+      class="budget-table--row__header"
+    >
+      <th
+        colspan="6"
+        scope="col"
+      >
+        Private Contractor
+      </th>
+    </tr>
+    <tr
+      class="budget-table--subtotal budget-table--row__highlight"
+    >
+      <td
+        class="title"
+        colspan="5"
+      >
+        Private Contractor Subtotal
+      </td>
+      <td
+        class="budget-table--number"
+        data-cy="subtotal"
+      >
+        <span>
+          $0
+        </span>
+      </td>
+    </tr>
+    <tr
+      class="budget-table--subtotal budget-table--row__header"
+    >
+      <td
+        colspan="5"
+      >
+        Activity 
+        1
+         Total Computable Medicaid Cost
+      </td>
+      <td
+        class="budget-table--number"
+        data-cy="subtotal"
+      >
+        <span>
+          $300
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
