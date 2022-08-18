@@ -100,7 +100,9 @@
     "@snyk/protect": "1.986.0",
     "babel-jest": "27.5.1",
     "jest": "27.5.1",
-    "prettier": "2.7.1"
+    "husky": "8.0.1",
+    "prettier": "2.7.1",
+    "pretty-quick": "3.1.3"
   },
   "resolutions": {
     "ansi-regex": "3.0.1",
