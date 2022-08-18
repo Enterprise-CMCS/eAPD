@@ -9,7 +9,7 @@ import {
 } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
-import { plain as ContractorForm } from './ContractorResourceForm';
+import ContractorForm from './ContractorResourceForm';
 
 const defaultProps = {
   activityIndex: 43,
