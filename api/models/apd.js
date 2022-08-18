@@ -52,6 +52,8 @@ const incentivePayment = new mongoose.Schema(
   { _id: false }
 );
 
+const budget = new mongoose.Schema({});
+
 const apdSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
@@ -362,7 +364,8 @@ const apdSchema = new mongoose.Schema({
     recordsAccess: [federalCitation],
     softwareRights: [federalCitation],
     security: [federalCitation]
-  }
+  },
+  budget
 });
 
 const APD = mongoose.model('APD', apdSchema);

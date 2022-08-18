@@ -12,10 +12,6 @@ const stateAffiliations = require('./states/affilitations');
 const users = require('./users');
 const openAPI = require('./openAPI');
 
-const postApdsBudget = require('./apds/budget/post');
-
-const patchApdsBudget = require('./apds/budget/patch');
-
 // ############### ROUTE IMPORT INSERTION POINT #######################
 module.exports = (
   app,
@@ -53,12 +49,6 @@ module.exports = (
   stateAffiliationEndpoint(app);
   logger.debug('setting up routes for users');
   usersEndpoint(app);
-
-  logger.debug('setting up routes for post apds/budget');
-  postApdsBudget(app);
-
-  logger.debug('setting up routes for patch apds/budget');
-  patchApdsBudget(app);
 
   // ############### ROUTE REGISTRATION INSERTION POINT #######################
   logger.debug('setting up route for OpenAPI');

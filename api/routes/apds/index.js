@@ -5,6 +5,7 @@ const patch = require('./patch');
 const post = require('./post');
 const files = require('./files');
 const events = require('./events');
+const budget = require('./budget');
 
 module.exports = (
   app,
@@ -12,6 +13,7 @@ module.exports = (
     deleteEndpoint = del,
     filesEndpoints = files,
     eventsEndpoints = events,
+    budgetEndpoints = budget,
     getEndpoint = get,
     patchEndpoint = patch,
     postEndpoint = post
@@ -31,4 +33,7 @@ module.exports = (
 
   logger.debug('setting up APD events endpoints');
   eventsEndpoints(app);
+
+  logger.debug('setting up APD budget endpoints');
+  budgetEndpoints(app);
 };

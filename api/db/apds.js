@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
-const { deepCopy } = require('@cms-eapd/common');
+const { deepCopy, calculateBudget } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
@@ -53,6 +53,26 @@ const patchAPD = async (
   });
   // return the updated apd
   return newDocument;
+};
+
+const updateAPDBudget = async (
+  id,
+  stateId,
+  patch,
+  { APD = mongoose.model('APD') }
+) => {
+  let updatedBudget;
+  let errors;
+
+  try {
+    const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
+    const updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
+    updatedBudget = calculateBudget(updatedDoc);
+  } catch (e) {
+    errors = e;
+  }
+
+  return { updatedBudget, errors };
 };
 
 const updateAPDDocument = async (
@@ -171,5 +191,6 @@ module.exports = {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
+  updateAPDBudget,
   updateAPDDocument
 };
