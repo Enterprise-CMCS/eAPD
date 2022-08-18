@@ -228,7 +228,8 @@ class RichText extends Component {
               link_assume_external_targets: true,
               default_link_target: '_blank',
               toolbar_mode: 'wrap',
-              selector: 'textarea'
+              selector: 'textarea',
+              iframe_aria_text: this.props.iframe_aria_text
             }}
             value={content}
             onEditorChange={this.onEditorChange}

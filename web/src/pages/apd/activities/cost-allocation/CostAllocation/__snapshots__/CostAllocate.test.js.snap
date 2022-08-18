@@ -26,6 +26,7 @@ exports[`<CostAllocate /> renders correctly 1`] = `
       content="cost allocation"
       editorClassName="rte-textarea-l"
       id="cost-allocation-methodology-field"
+      iframe_aria_text="Description of Cost Allocation Methodology Summary Text Area"
       onSync={[Function]}
     />
   </div>

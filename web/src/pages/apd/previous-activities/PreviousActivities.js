@@ -34,6 +34,7 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
           </label>
           <RichText
             id="previous-activity-summary-field"
+            iframe_aria_text="Previous Activities Summary Text Area"
             content={previousActivitySummary}
             onSync={onChange}
             editorClassName="rte-textarea-l"

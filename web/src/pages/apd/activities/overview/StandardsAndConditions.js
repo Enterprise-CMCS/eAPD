@@ -72,6 +72,7 @@ const StandardsAndConditions = ({
           <RichText
             {...props}
             id="standards-and-conditions-supports-field"
+            iframe_aria_text="Standards and Conditions Text Area"
             data-testid="standards-and-conditions-supports"
             content={supports}
             onSync={html => {

@@ -58,6 +58,7 @@ const OtherFunding = ({
             />
             <RichText
               id={`cost-allocation-narrative-${ffy}-other-sources-field`}
+              iframe_aria_text="Other Funding Description Text Area"
               content={costAllocationNarrative.years[ffy].otherSources}
               onSync={syncOther(ffy)}
               editorClassName="rte-textarea-l"
