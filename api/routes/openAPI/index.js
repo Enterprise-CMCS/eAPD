@@ -16,10 +16,6 @@ const states = require('../states/openAPI');
 const statesAffiliations = require('../states/affilitations/openAPI');
 const users = require('../users/openAPI');
 
-const postApdsBudget = require('../apds/budget/postOpenApi');
-
-const patchApdsBudget = require('../apds/budget/patchOpenApi');
-
 // ############## OPENAPI IMPORT INSERTION POINT ######################
 const { arrayOf } = require('./helpers').schema;
 
@@ -46,10 +42,6 @@ module.exports = {
     ...states,
     ...statesAffiliations,
     ...users,
-
-    ...postApdsBudget,
-
-    ...patchApdsBudget,
 
     // ############## OPENAPI PATH INSERTION POINT ######################
     '/open-api': {
