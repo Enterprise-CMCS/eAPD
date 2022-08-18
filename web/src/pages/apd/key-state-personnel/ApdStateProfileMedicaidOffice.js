@@ -66,7 +66,7 @@ const ApdStateProfile = ({
     if (adminCheck) {
       trigger();
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>
