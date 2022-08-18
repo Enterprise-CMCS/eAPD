@@ -1,6 +1,10 @@
+import { ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
+import validationSchema from '@cms-eapd/common/schemas/assurancesAndCompliance';
 
 import { titleCase } from 'title-case';
 import {
@@ -13,16 +17,12 @@ import {
   setJustificationForSecurity,
   setJustificationForSoftwareRights
 } from '../../../redux/actions/editApd';
-import { ChoiceList } from '@cmsgov/design-system';
 import { Section, Subsection } from '../../../components/Section';
 import TextArea from '../../../components/TextArea';
 import regLinks from '../../../data/assurancesAndCompliance.yaml';
 import { t } from '../../../i18n';
 import { selectFederalCitations } from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
-
-const namify = (name, title) =>
-  `explanation-${name}-${title}`.replace(/\s/g, '_');
 
 const LinkOrText = ({ link, title }) => {
   if (!link) return title;
@@ -52,8 +52,35 @@ const AssurancesAndCompliance = ({
   justificationForProcurement,
   justificationForRecordsAccess,
   justificationForSecurity,
-  justificationForSoftwareRights
+  justificationForSoftwareRights,
+  adminCheck
 }) => {
+  AssurancesAndCompliance.displayName = 'AssurancesAndCompliance';
+
+  const { procurement, recordsAccess, softwareRights, security } = citations;
+
+  const {
+    control,
+    trigger,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      procurement,
+      recordsAccess,
+      softwareRights,
+      security
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(validationSchema)
+  });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   function handleCheckChange(section, index, newValue) {
     switch (section) {
       case 'procurement':
@@ -98,50 +125,96 @@ const AssurancesAndCompliance = ({
                 {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
               </h4>
               {citations[name].map(({ title, checked, explanation }, index) => (
-                <ChoiceList
+                <Controller
                   key={title}
-                  label={
-                    <legend className="ds-c-label">
-                      Are you complying with{' '}
-                      <strong>
-                        <LinkOrText link={regulations[title]} title={title} />
-                      </strong>
-                      ?
-                    </legend>
-                  }
-                  name={`apd-assurances-${namify(name, title)}`}
-                  choices={[
-                    {
-                      label: 'Yes',
-                      value: 'yes',
-                      checked: checked === true
-                    },
-                    {
-                      label: 'No',
-                      value: 'no',
-                      checked: checked === false,
-                      checkedChildren: (
-                        <div className="ds-c-choice__checkedChild">
-                          <TextArea
-                            label="Please explain"
-                            name={namify(name, title)}
-                            value={explanation}
-                            onChange={({ target: { value } }) =>
-                              handleExplanationChange(name, index, value)
-                            }
-                            rows={5}
-                          />
-                        </div>
-                      )
-                    }
-                  ]}
-                  type="radio"
-                  size="small"
-                  onChange={e => {
-                    e.target.value === 'yes'
-                      ? handleCheckChange(name, index, true)
-                      : handleCheckChange(name, index, false);
-                  }}
+                  name={`${name}.${index}.checked`}
+                  control={control}
+                  render={({ field: { onChange: radioOnChange } }) => (
+                    <ChoiceList
+                      label={
+                        <legend className="ds-c-label">
+                          Are you complying with{' '}
+                          <strong>
+                            <LinkOrText
+                              link={regulations[title]}
+                              title={title}
+                            />
+                          </strong>
+                          ?
+                        </legend>
+                      }
+                      name={`${name}.${index}.checked`}
+                      value={checked}
+                      choices={[
+                        {
+                          label: 'Yes',
+                          value: 'yes',
+                          checked: checked === true
+                        },
+                        {
+                          label: 'No',
+                          value: 'no',
+                          checked: checked === false,
+                          checkedChildren: (
+                            <div className="ds-c-choice__checkedChild">
+                              <Controller
+                                name={`${name}.${index}.explanation`}
+                                control={control}
+                                render={({
+                                  field: {
+                                    onChange: textOnChange,
+                                    onBlur: textOnBlur,
+                                    ...props
+                                  }
+                                }) => (
+                                  <TextArea
+                                    {...props}
+                                    label="Please explain"
+                                    value={explanation}
+                                    onBlur={() => {
+                                      textOnBlur();
+                                      if (adminCheck) {
+                                        trigger(`${name}.${index}.explanation`);
+                                      }
+                                    }}
+                                    onChange={({ target: { value } }) => {
+                                      textOnChange(value);
+                                      handleExplanationChange(
+                                        name,
+                                        index,
+                                        value
+                                      );
+                                    }}
+                                    errorMessage={
+                                      errors?.[name]?.[index]?.explanation
+                                        ?.message
+                                    }
+                                    errorPlacement="bottom"
+                                    rows={5}
+                                  />
+                                )}
+                              />
+                            </div>
+                          )
+                        }
+                      ]}
+                      type="radio"
+                      size="small"
+                      onChange={e => {
+                        const boolValue = e.target.value === 'yes';
+                        radioOnChange(boolValue);
+                        handleCheckChange(name, index, boolValue);
+                        if (adminCheck) {
+                          trigger(`${name}.${index}.checked`);
+                          if (boolValue === false) {
+                            trigger(`${name}.${index}.explanation`);
+                          }
+                        }
+                      }}
+                      errorMessage={errors?.[name]?.[index]?.checked?.message}
+                      errorPlacement="bottom"
+                    />
+                  )}
                 />
               ))}
             </div>
@@ -161,10 +234,14 @@ AssurancesAndCompliance.propTypes = {
   justificationForProcurement: PropTypes.func.isRequired,
   justificationForRecordsAccess: PropTypes.func.isRequired,
   justificationForSecurity: PropTypes.func.isRequired,
-  justificationForSoftwareRights: PropTypes.func.isRequired
+  justificationForSoftwareRights: PropTypes.func.isRequired,
+  adminCheck: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = state => ({ citations: selectFederalCitations(state) });
+const mapStateToProps = state => ({
+  citations: selectFederalCitations(state),
+  adminCheck: state.apd.adminCheck
+});
 
 const mapDispatchToProps = {
   complyingWithProcurement: setComplyingWithProcurement,
