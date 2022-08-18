@@ -5,8 +5,12 @@ common/node_modules
 e2e/node_modules
 web/node_modules
 
+# misc
+mongodata/*
+pgdata/*
 .DS_Store
 .dccache
+.circleci
 .editorconfig
 .env
 .idea
@@ -14,11 +18,8 @@ web/node_modules
 .vscode
 .yarn
 .yarnrc.yml
-
 Makefile
-mongodata/*
 npm-debug.log*
-pgdata/*
 schema.sql
 
 api/.env
@@ -45,3 +46,5 @@ web/.jest-test-results.json
 web/coverage
 web/dist
 web/_dev
+web/docs-build
+web/reports

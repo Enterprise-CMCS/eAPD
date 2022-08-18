@@ -6,43 +6,43 @@ e2e/node_modules
 web/node_modules
 
 # misc
+__files
+mongodata/*
+pgdata/*
 .DS_Store
-.env
-.vscode
-.nova
-.idea
 .dccache
-.yarnrc.yml
 .editorconfig
+.env
+.idea
+.nova
+.vscode
 .yarn
-
+.yarnrc.yml
+Makefile
 notes.md
 npm-debug.log*
 schema.sql
-Makefile
-__files
-pgdata/*
-mongodata/*
 
 api/.env
 api/.nyc_output
 api/coverage
 api/coverage-endpoint
 api/coverage-unit
-api/seeds/test/tokens.json
-api/test-data/files
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
+api/hitech_api*.log*
+api/seeds/test/tokens.json
+api/test-data/files
 
-common/dist
 common/coverage
+common/dist
 
 docs-build
 
 e2e/cypress.env.json
-e2e/tokens.json
 e2e/cypress/screenshots/*
 e2e/cypress/videos/*
+e2e/tokens.json
 
 web/.jest-test-results.json
 web/coverage
