@@ -22,24 +22,46 @@ export const checkBudgetAndFFP = (years, budget, activityIndex) => {
   });
 };
 
-export const checkProposedBudget = (years, budget, activityIndex) => {
+export const checkProposedBudget = (
+  years,
+  budget,
+  totalComputableMedicaidCost,
+  type
+) => {
   cy.goToProposedBudget();
 
   _.forEach(years, (ffy, index) => {
     cy.get('[data-cy="CACTable"]')
       .eq(index)
       .then(table => {
-        const { programTypes, totalComputableMedicaidCost } = expected[index];
         cy.get(table)
           .getEAPDTable()
           .then(tableData => {
-            expect(tableData).to.deep.include(programTypes);
+            expect(tableData).to.deep.include(budget.CACTable);
           });
         cy.get(table).within(() => {
-          this.getTotalComputableMedicaidCostByFFY({ ffy }).shouldBeCloseTo(
-            totalComputableMedicaidCost
-          );
+          cy.contains(`FFY ${ffy} Total Computable Medicaid Cost`)
+            .next()
+            .shouldBeCloseTo(totalComputableMedicaidCost);
         });
       });
+
+    cy.get(`[data-cy="summaryBudget${type}"]`)
+      .eq(index)
+      .then(table => {
+        cy.get(table)
+          .getEAPDTable()
+          .then(tableData => {
+            expect(tableData).to.deep.include(budget.FFPActivitiesTable);
+          });
+      });
+
+    cy.get('[data-cy="summaryBudgetTotals"]').then(table => {
+      cy.get(table)
+        .getEAPDTable()
+        .then(tableData => {
+          expect(tableData).to.deep.include(budget.summaryBudgetTotals);
+        });
+    });
   });
 };

@@ -1,14 +1,24 @@
 {
   "afterKeyPersonnelNoCosts": {
     "budgetAndFFP": ["State Staff Subtotal", "$0"],
-    "CACTable": ["HIT Total", "$0"],
-    "FFPActivitiesTable": []
+    "CACTable": {"HIT Total": ["$0"]},
+    "FFPActivitiesTable": {"State Staff": ["$0", "$0", "$0"]},
+    "summaryBudgetTotals": {
+      "FFY 2022": ["$0", "$0", "$0"],
+      "FFY 2023": ["$0", "$0", "$0"],
+      "Total": ["$0", "$0", "$0"]
+    }
   },
 
   "afterKeyPersonnelWithCosts": {
     "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": ["HIT Total", "$50,000"],
-    "FFPActivitiesTable": []
+    "CACTable": {"HIT Total": ["$50,000"]},
+    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "summaryBudgetTotals": {
+      "FFY 2022": ["$50,000", "$0", "$50,000"],
+      "FFY 2023": ["$50,000", "$0", "$50,000"],
+      "Total": ["$100,000", "$0", "$100,000"]
+    }
   },
 
   "afterStatePersonnelHIT": {

@@ -4,7 +4,10 @@ import { testProposedBudgetWithData } from '../../helpers/apd/proposed-budget';
 import { addHITActivity } from '../../helpers/apd/activity/add-HIT-activity';
 import { addHIEActivity } from '../../helpers/apd/activity/add-HIE-activity';
 import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
-import { checkBudgetAndFFP } from '../../helpers/apd/budget-checks';
+import {
+  checkBudgetAndFFP,
+  checkProposedBudget
+} from '../../helpers/apd/budget-checks';
 
 // Tests an APD by adding data and checking the results
 describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
@@ -46,7 +49,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   // });
 
   describe('Budget Checks', () => {
-    it.only('Checks Key State Personnel', () => {
+    it.only('Checks Key State Personnel Budgets', () => {
       cy.goToKeyStatePersonnel();
       cy.url().should('include', '/state-profile');
 
@@ -68,6 +71,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       });
 
       checkBudgetAndFFP(years, budgetData.afterKeyPersonnelNoCosts, 0);
+      checkProposedBudget(years, budgetData.afterKeyPersonnelNoCosts, 0, 'HIT');
 
       cy.goToKeyStatePersonnel();
       cy.url().should('include', '/state-profile');
@@ -98,31 +102,12 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       });
 
       checkBudgetAndFFP(years, budgetData.afterKeyPersonnelWithCosts, 0);
+      checkProposedBudget(
+        years,
+        budgetData.afterKeyPersonnelWithCosts,
+        50000,
+        'HIT'
+      );
     });
-
-    // describe('Activities', () => {
-    //   describe('Add HIT Activity', () => {
-    //     addHITActivity(years);
-    //   });
-
-    //   describe('Add HIE Activity', () => {
-    //     addHIEActivity(years);
-    //   });
-
-    //   describe('Add MMIS Activity', () => {
-    //     addMMISActivity(years);
-    //   });
-    // });
-
-    // describe('Proposed Budget', () => {
-    //   testProposedBudgetWithData(years);
-    // });
   });
 });
-
-/* Notes:
-dont reuse exact functions, but take code from them
-just check subtotals in budget and ffp, check more subtotlas in proposed budget
-command for navigating to the budget and ffp page? and proposed budget?
-one function is add activity, choose funding type, choose fed state split
-*/
