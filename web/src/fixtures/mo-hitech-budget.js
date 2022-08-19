@@ -4,19 +4,19 @@ const budget = {
       costsByFFY: {
         2020: {
           federal: 3109348,
-          medicaidShare: 3454831,
+          medicaid: 3454831,
           state: 345483,
           total: 3454831
         },
         2021: {
           federal: 1803821,
-          medicaidShare: 2004245,
+          medicaid: 2004245,
           state: 200424,
           total: 2004245
         },
         total: {
           federal: 4913169,
-          medicaidShare: 5459076,
+          medicaid: 5459076,
           state: 545907,
           total: 5459076
         }
@@ -177,19 +177,19 @@ const budget = {
       costsByFFY: {
         2020: {
           federal: 1622700,
-          medicaidShare: 1803000,
+          medicaid: 1803000,
           state: 180300,
           total: 1803000
         },
         2021: {
           federal: 2319750,
-          medicaidShare: 3093000,
+          medicaid: 3093000,
           state: 773250,
           total: 3093000
         },
         total: {
           federal: 3942450,
-          medicaidShare: 4896000,
+          medicaid: 4896000,
           state: 953550,
           total: 4896000
         }
@@ -350,19 +350,19 @@ const budget = {
       costsByFFY: {
         2020: {
           federal: 414000,
-          medicaidShare: 460000,
+          medicaid: 460000,
           state: 46000,
           total: 460000
         },
         2021: {
           federal: 428400,
-          medicaidShare: 476000,
+          medicaid: 476000,
           state: 47600,
           total: 476000
         },
         total: {
           federal: 842400,
-          medicaidShare: 936000,
+          medicaid: 936000,
           state: 93600,
           total: 936000
         }
@@ -523,19 +523,19 @@ const budget = {
       costsByFFY: {
         2020: {
           federal: 450000,
-          medicaidShare: 500000,
+          medicaid: 500000,
           state: 50000,
           total: 500000
         },
         2021: {
           federal: 1800000,
-          medicaidShare: 2000000,
+          medicaid: 2000000,
           state: 200000,
           total: 2000000
         },
         total: {
           federal: 2250000,
-          medicaidShare: 2500000,
+          medicaid: 2500000,
           state: 250000,
           total: 2500000
         }
@@ -696,19 +696,19 @@ const budget = {
       costsByFFY: {
         2020: {
           federal: 450000,
-          medicaidShare: 500000,
+          medicaid: 500000,
           state: 50000,
           total: 500000
         },
         2021: {
           federal: 1350000,
-          medicaidShare: 1500000,
+          medicaid: 1500000,
           state: 150000,
           total: 1500000
         },
         total: {
           federal: 1800000,
-          medicaidShare: 2000000,
+          medicaid: 2000000,
           state: 200000,
           total: 2000000
         }
@@ -869,19 +869,19 @@ const budget = {
       costsByFFY: {
         2020: {
           federal: 362500,
-          medicaidShare: 725000,
+          medicaid: 725000,
           state: 362500,
           total: 725000
         },
         2021: {
           federal: 697500,
-          medicaidShare: 775000,
+          medicaid: 775000,
           state: 77500,
           total: 775000
         },
         total: {
           federal: 1060000,
-          medicaidShare: 1500000,
+          medicaid: 1500000,
           state: 440000,
           total: 1500000
         }

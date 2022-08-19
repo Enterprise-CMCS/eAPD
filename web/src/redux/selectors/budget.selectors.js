@@ -35,7 +35,7 @@ export const selectBudgetExecutiveSummary = createSelector(
           summary,
           combined: total.total,
           federal: total.federal,
-          medicaid: total.medicaidShare,
+          medicaid: total.medicaid,
           ffys: { ...ffyCosts }
         };
       }

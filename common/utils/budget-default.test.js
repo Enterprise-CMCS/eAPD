@@ -404,7 +404,7 @@ describe('budget getDefault methods', () => {
     test('with no years', () => {
       const expected = {
         costsByFFY: {
-          total: { federal: 0, medicaidShare: 0, state: 0, total: 0 }
+          total: { federal: 0, medicaid: 0, state: 0, total: 0 }
         },
         quarterlyFFP: {
           total: { combined: 0, contractors: 0, inHouse: 0 }
@@ -417,9 +417,9 @@ describe('budget getDefault methods', () => {
     test('with years', () => {
       const expected = {
         costsByFFY: {
-          2017: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
-          2018: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
-          total: { federal: 0, medicaidShare: 0, state: 0, total: 0 }
+          2017: { federal: 0, medicaid: 0, state: 0, total: 0 },
+          2018: { federal: 0, medicaid: 0, state: 0, total: 0 },
+          total: { federal: 0, medicaid: 0, state: 0, total: 0 }
         },
         quarterlyFFP: {
           2017: {

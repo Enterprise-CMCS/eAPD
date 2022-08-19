@@ -4088,24 +4088,24 @@ describe('budget calculate methods', () => {
               1931: {
                 federal: 4860,
                 state: 540,
-                medicaidShare: 5400,
+                medicaid: 5400,
                 total: 5400
               },
               1932: {
                 federal: 4680,
                 state: 520,
-                medicaidShare: 5200,
+                medicaid: 5200,
                 total: 5200
               },
               1933: {
                 federal: 4230,
                 state: 470,
-                medicaidShare: 4700,
+                medicaid: 4700,
                 total: 4700
               },
               total: {
                 federal: 13770,
-                medicaidShare: 15300,
+                medicaid: 15300,
                 state: 1530,
                 total: 15300
               }
@@ -4200,25 +4200,25 @@ describe('budget calculate methods', () => {
               1931: {
                 federal: 2700,
                 state: 300,
-                medicaidShare: 3000,
+                medicaid: 3000,
                 total: 3000
               },
               1932: {
                 federal: 2700,
                 state: 300,
-                medicaidShare: 3000,
+                medicaid: 3000,
                 total: 3000
               },
               1933: {
                 federal: 2700,
                 state: 300,
-                medicaidShare: 3000,
+                medicaid: 3000,
                 total: 3000
               },
               total: {
                 federal: 8100,
                 state: 900,
-                medicaidShare: 9000,
+                medicaid: 9000,
                 total: 9000
               }
             },
@@ -4314,25 +4314,25 @@ describe('budget calculate methods', () => {
               1931: {
                 federal: 2700,
                 state: 300,
-                medicaidShare: 3000,
+                medicaid: 3000,
                 total: 3000
               },
               1932: {
                 federal: 3105,
                 state: 345,
-                medicaidShare: 3450,
+                medicaid: 3450,
                 total: 3450
               },
               1933: {
                 federal: 15300,
                 state: 1700,
-                medicaidShare: 17000,
+                medicaid: 17000,
                 total: 18000
               },
               total: {
                 federal: 21105,
                 state: 2345,
-                medicaidShare: 23450,
+                medicaid: 23450,
                 total: 24450
               }
             },
@@ -4432,25 +4432,25 @@ describe('budget calculate methods', () => {
               1931: {
                 federal: 750,
                 state: 750,
-                medicaidShare: 1500,
+                medicaid: 1500,
                 total: 2500
               },
               1932: {
                 federal: 1500,
                 state: 500,
-                medicaidShare: 2000,
+                medicaid: 2000,
                 total: 3000
               },
               1933: {
                 federal: 1890,
                 state: 210,
-                medicaidShare: 2100,
+                medicaid: 2100,
                 total: 2100
               },
               total: {
                 federal: 4140,
                 state: 1460,
-                medicaidShare: 5600,
+                medicaid: 5600,
                 total: 7600
               }
             },
@@ -4547,10 +4547,10 @@ describe('budget calculate methods', () => {
           },
           5: {
             costsByFFY: {
-              1931: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
-              1932: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
-              1933: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
-              total: { federal: 0, medicaidShare: 0, state: 0, total: 0 }
+              1931: { federal: 0, medicaid: 0, state: 0, total: 0 },
+              1932: { federal: 0, medicaid: 0, state: 0, total: 0 },
+              1933: { federal: 0, medicaid: 0, state: 0, total: 0 },
+              total: { federal: 0, medicaid: 0, state: 0, total: 0 }
             },
             quarterlyFFP: {
               1931: {
@@ -4646,24 +4646,24 @@ describe('budget calculate methods', () => {
               1931: {
                 federal: 150,
                 state: 150,
-                medicaidShare: 300,
+                medicaid: 300,
                 total: 300
               },
               1932: {
                 federal: 225,
                 state: 75,
-                medicaidShare: 300,
+                medicaid: 300,
                 total: 300
               },
               1933: {
                 federal: 270,
                 state: 30,
-                medicaidShare: 300,
+                medicaid: 300,
                 total: 300
               },
               total: {
                 federal: 645,
-                medicaidShare: 900,
+                medicaid: 900,
                 state: 255,
                 total: 900
               }

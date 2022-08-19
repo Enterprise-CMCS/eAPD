@@ -71,7 +71,9 @@ exports[`executive summary component renders correctly 1`] = `
           Total Computable Medicaid Cost:
         </strong>
          
-        <Dollars />
+        <Dollars>
+          23626
+        </Dollars>
          (
         <Dollars>
           2883
@@ -98,7 +100,9 @@ exports[`executive summary component renders correctly 1`] = `
           Total Computable Medicaid Cost:
         </strong>
          
-        <Dollars />
+        <Dollars>
+          2468252
+        </Dollars>
          (
         <Dollars>
           826
@@ -187,7 +191,8 @@ exports[`executive summary component renders correctly 1`] = `
         <Dollars>
           2883
         </Dollars>
-         Federal share)
+         
+        Federal share)
       </li>
       <li
         className=""
@@ -215,7 +220,8 @@ exports[`executive summary component renders correctly 1`] = `
         <Dollars>
           826
         </Dollars>
-         Federal share)
+         
+        Federal share)
       </li>
     </ul>
   </Review>
@@ -298,7 +304,8 @@ exports[`executive summary component renders correctly 1`] = `
         <Dollars>
           2356
         </Dollars>
-         Federal share)
+         
+        Federal share)
       </li>
       <li
         className=""
@@ -326,7 +333,8 @@ exports[`executive summary component renders correctly 1`] = `
         <Dollars>
           643
         </Dollars>
-         Federal share)
+         
+        Federal share)
       </li>
     </ul>
   </Review>

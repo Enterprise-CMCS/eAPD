@@ -3542,13 +3542,13 @@ describe('budget summing methods', () => {
       const expected = {
         2017: {
           federal: 270,
-          medicaidShare: 300,
+          medicaid: 300,
           state: 30,
           total: 500
         },
         total: {
           federal: 270,
-          medicaidShare: 300,
+          medicaid: 300,
           state: 30,
           total: 500
         }
@@ -3557,7 +3557,7 @@ describe('budget summing methods', () => {
         costsByFFY: {
           total: {
             federal: 0,
-            medicaidShare: 0,
+            medicaid: 0,
             state: 0,
             total: 0
           }
@@ -3574,19 +3574,19 @@ describe('budget summing methods', () => {
       const expected = {
         2017: {
           federal: 270,
-          medicaidShare: 300,
+          medicaid: 300,
           state: 30,
           total: 500
         },
         2018: {
           federal: 300,
-          medicaidShare: 400,
+          medicaid: 400,
           state: 100,
           total: 800
         },
         total: {
           federal: 570,
-          medicaidShare: 700,
+          medicaid: 700,
           state: 130,
           total: 1300
         }
@@ -3595,13 +3595,13 @@ describe('budget summing methods', () => {
         costsByFFY: {
           2017: {
             federal: 270,
-            medicaidShare: 300,
+            medicaid: 300,
             state: 30,
             total: 500
           },
           total: {
             federal: 270,
-            medicaidShare: 300,
+            medicaid: 300,
             state: 30,
             total: 500
           }

@@ -195,10 +195,10 @@ export const defaultBudgetObject = (years = []) => ({
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
  *   costsByFFY: {
- *     2022: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
- *     2023: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
- *     2024: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
- *     total: { federal: 0, medicaidShare: 0, state: 0, total: 0 },
+ *     2022: { federal: 0, medicaid: 0, state: 0, total: 0 },
+ *     2023: { federal: 0, medicaid: 0, state: 0, total: 0 },
+ *     2024: { federal: 0, medicaid: 0, state: 0, total: 0 },
+ *     total: { federal: 0, medicaid: 0, state: 0, total: 0 },
  *   },
  *   quarterlyFFP: {
  *     2022: {
@@ -222,13 +222,13 @@ export const defaultQuarterlyFFPObject = (years = []) => ({
   costsByFFY: {
     ...arrToObj(years, () => ({
       federal: 0,
-      medicaidShare: 0,
+      medicaid: 0,
       state: 0,
       total: 0
     })),
     total: {
       federal: 0,
-      medicaidShare: 0,
+      medicaid: 0,
       state: 0,
       total: 0
     }
@@ -596,10 +596,10 @@ export const sumTotalCostsByCategory = ({
  * @returns the updated costsByFFY, e.g. if the fed split is 90/10 and
  * the total cost is $1000 and the total medicaid costs is $800, then
  * {
- *   '1931': { federal: 360, medicaidShare: 400, state: 40, total: 500 },
- *   '1932': { federal: 180, medicaidShare: 200, state: 20, total: 250 },
- *   '1933': { federal: 180, medicaidShare: 200, state: 20, total: 250 },
- *   total: { federal: 720, medicaidShare: 800, state: 80, total: 1000 }
+ *   '1931': { federal: 360, medicaid: 400, state: 40, total: 500 },
+ *   '1932': { federal: 180, medicaid: 200, state: 20, total: 250 },
+ *   '1933': { federal: 180, medicaid: 200, state: 20, total: 250 },
+ *   total: { federal: 720, medicaid: 800, state: 80, total: 1000 }
  * }
  */
 export const sumCostsByFFY = ({
@@ -618,15 +618,14 @@ export const sumCostsByFFY = ({
       ...updatedCostsByFFY,
       [year]: {
         federal: totalMedicaidCostShares.fedShare,
-        medicaidShare: totalMedicaidCost,
+        medicaid: totalMedicaidCost,
         state: totalMedicaidCostShares.stateShare,
         total: totalCost
       },
       total: {
         federal:
           updatedCostsByFFY.total.federal + totalMedicaidCostShares.fedShare,
-        medicaidShare:
-          updatedCostsByFFY.total.medicaidShare + totalMedicaidCost,
+        medicaid: updatedCostsByFFY.total.medicaid + totalMedicaidCost,
         state:
           updatedCostsByFFY.total.state + totalMedicaidCostShares.stateShare,
         total: updatedCostsByFFY.total.total + totalCost
