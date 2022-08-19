@@ -234,7 +234,7 @@ ActivityOverview.propTypes = {
   setAlternatives: PropTypes.func.isRequired,
   setDescription: PropTypes.func.isRequired,
   setOverview: PropTypes.func.isRequired,
-  adminCheck: PropTypes.func.isRequired
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => {

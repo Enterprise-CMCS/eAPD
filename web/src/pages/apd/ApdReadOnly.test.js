@@ -23,6 +23,7 @@ const setup = (props = {}, options = {}) => {
   };
 };
 
+jest.setTimeout(300000);
 describe('<ApdViewOnly/>', () => {
   beforeEach(() => {
     jest.clearAllMocks();
