@@ -109,5 +109,51 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
         'HIT'
       );
     });
+
+    it('Checks State Staff Budget'),
+      () => {
+        // ADD STATE STAFF TO HIT
+
+        checkBudgetAndFFP(years, budgetData.afterStateStaffHIT, 0);
+        checkProposedBudget(
+          years,
+          budgetData.afterKeyPersonnelNoCosts,
+          0,
+          'HIT'
+        );
+
+        // ADD HIE ACTIVITY
+        // ADD STATE STAFF TO HIE
+
+        checkBudgetAndFFP(years, budgetData.afterStateStaffHIE, 1);
+        checkProposedBudget(
+          years,
+          budgetData.afterKeyPersonnelNoCosts,
+          0,
+          'HIE'
+        );
+
+        // ADD MMIS ACTIVITY
+        // ADD STATE STAFF TO MMIS
+
+        checkBudgetAndFFP(years, budgetData.afterStateStaffMMIS, 2);
+        checkProposedBudget(
+          years,
+          budgetData.afterKeyPersonnelNoCosts,
+          0,
+          'MMIS'
+        );
+
+        // ADD NO FFP ACTIVITY
+        // ADD STATE STAFF TO NO FFP
+
+        checkBudgetAndFFP(years, budgetData.afterStateStaffNoFFP, 3);
+        checkProposedBudget(
+          years,
+          budgetData.afterKeyPersonnelNoCosts,
+          0,
+          'MMIS'
+        );
+      };
   });
 });
