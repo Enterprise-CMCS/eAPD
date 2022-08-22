@@ -11,7 +11,7 @@ const jwtObjectSchema = {
       description: 'a JWT'
     }
   }
-}
+};
 
 const stateId = {
   type: 'string',
@@ -19,7 +19,6 @@ const stateId = {
 };
 
 const openAPI = {
-
   '/auth/state/{stateId}': {
     get: {
       tags: ['Authentication and authorization'],
@@ -34,19 +33,19 @@ const openAPI = {
           }
         }
       ],
-      summary: 'Exchanges a user\'s token from one state to another.' ,
-      description: 'Switch from using one state to another, with updated and accurate permissions.',
+      summary: "Exchanges a user's token from one state to another.",
+      description:
+        'Switch from using one state to another, with updated and accurate permissions.',
       responses: {
         200: {
           description: 'A JWT containing the new claims',
           content: jsonResponse(jwtObjectSchema)
-          },
+        },
         401: {
-          description: 'The user is not logged in',
-
+          description: 'The user is not logged in'
         },
         403: {
-          description: 'The user can not switch to this state',
+          description: 'The user can not switch to this state'
         }
       }
     }

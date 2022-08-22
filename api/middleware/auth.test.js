@@ -100,7 +100,6 @@ tap.test('"can" middleware', async canMiddlewareTest => {
     }
   );
 
-
   canMiddlewareTest.test(
     'rejects if the user has one of the expected activities',
     async invalidTest => {
@@ -130,7 +129,11 @@ tap.test('"can" middleware', async canMiddlewareTest => {
   canMiddlewareTest.test(
     'rejects if the user does not have the expected activity',
     async invalidTest => {
-      can(['activity', 'quidditch'])({ user: { activities: ['foo', 'bar', 'baz', 'qux'] } }, res, next);
+      can(['activity', 'quidditch'])(
+        { user: { activities: ['foo', 'bar', 'baz', 'qux'] } },
+        res,
+        next
+      );
 
       invalidTest.ok(
         res.status.calledWith(403),
@@ -151,7 +154,7 @@ tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
   validForStateMiddlewareTest.test(
     'rejects if the user is not logged in',
     async invalidTest => {
-      validForState('activity')({params: { stateId: 'no'}}, res, next);
+      validForState('activity')({ params: { stateId: 'no' } }, res, next);
 
       invalidTest.ok(
         res.status.calledWith(401),
@@ -168,13 +171,19 @@ tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
   validForStateMiddlewareTest.test(
     'rejects if the user does not have the expected state',
     async invalidTest => {
-      validForState('stateId')({
-          user: { state: { id: 'YES'}, role: 'eAPD State Admin' },
-        params: { stateId: 'NO' } },
+      validForState('stateId')(
+        {
+          user: { state: { id: 'YES' }, role: 'eAPD State Admin' },
+          params: { stateId: 'NO' }
+        },
         res,
-        next);
+        next
+      );
 
-      invalidTest.ok(res.status.calledWith(403), 'HTTP status set to 403 Forbidden.');
+      invalidTest.ok(
+        res.status.calledWith(403),
+        'HTTP status set to 403 Forbidden.'
+      );
       invalidTest.ok(res.end.called, 'response is  terminated');
       invalidTest.ok(next.notCalled, 'endpoint handling chain was continued');
     }
@@ -183,11 +192,14 @@ tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
   validForStateMiddlewareTest.test(
     'continues if the user does not have the expected state, but is a federal admin',
     async validTest => {
-      validForState('stateId')({
-        user: { state: { id: 'YES'}, role:'eAPD Federal Admin' },
-        params: { stateId: 'NO' } },
+      validForState('stateId')(
+        {
+          user: { state: { id: 'YES' }, role: 'eAPD Federal Admin' },
+          params: { stateId: 'NO' }
+        },
         res,
-        next);
+        next
+      );
 
       validTest.ok(res.send.notCalled, 'no body is sent');
       validTest.ok(res.status.notCalled, 'HTTP status not set');
@@ -196,16 +208,17 @@ tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
     }
   );
 
-
-
   validForStateMiddlewareTest.test(
     'continues if the user has the expected state',
     async validTest => {
-      validForState('stateId')({
-        user: { state: { id: 'yes'}, role: '' },
-        params: { stateId: 'yes'} },
+      validForState('stateId')(
+        {
+          user: { state: { id: 'yes' }, role: '' },
+          params: { stateId: 'yes' }
+        },
         res,
-        next);
+        next
+      );
 
       validTest.ok(res.send.notCalled, 'no body is sent');
       validTest.ok(res.status.notCalled, 'HTTP status not set');

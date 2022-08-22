@@ -17,10 +17,9 @@
   },
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
-    "build": "yarn workspaces run build",
-    "prettier": "prettier --config \".prettierrc\" --write \"**/*.js\"",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\" --config \".prettierrc\"",
     "npm-check": "npx npm-check-updates",
-    "prepare": "yarn run snyk-protect",
+    "prepare": "yarn run snyk-protect && husky install",
     "snyk-protect": "snyk-protect",
     "create:route": "npx hygen routes new route",
     "create:story": "npx hygen stories new story",
@@ -99,8 +98,10 @@
   "devDependencies": {
     "@snyk/protect": "1.986.0",
     "babel-jest": "27.5.1",
+    "husky": "^8.0.0",
     "jest": "27.5.1",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "pretty-quick": "^3.1.3"
   },
   "resolutions": {
     "ansi-regex": "3.0.1",

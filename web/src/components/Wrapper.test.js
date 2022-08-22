@@ -31,7 +31,7 @@ describe('Wrapper component', () => {
     expect(component).toMatchSnapshot();
   });
 
-  describe('sets the appropriate CSS class if we are on a "gray" path', () => {  
+  describe('sets the appropriate CSS class if we are on a "gray" path', () => {
     test(`renders correctly for the /login path`, () => {
       const component = shallow(
         <Wrapper isDev={false} location={{ pathname: '/login' }}>

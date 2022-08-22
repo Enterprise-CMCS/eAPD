@@ -8,8 +8,7 @@ const getStateCertificationFile = {
     get: {
       tags: ['files'],
       summary: 'Get a state admin certification letter',
-      description:
-        'Returns a state admin certification letter',
+      description: 'Returns a state admin certification letter',
       parameters: [
         {
           name: 'fileID',
@@ -39,8 +38,7 @@ const postStateCertificationFile = {
     post: {
       tags: ['files'],
       summary: 'Upload a state admin certification file',
-      description:
-        'Uploads a state admin certification letter.',
+      description: 'Uploads a state admin certification letter.',
       requestBody: {
         content: {
           'multipart/form-data': {
@@ -73,11 +71,11 @@ const postStateCertificationFile = {
           })
         },
         400: {
-          description:
-            'Invalid request'
+          description: 'Invalid request'
         },
         403: {
-          description: 'The user does not have sufficient authorization to upload certification letters'
+          description:
+            'The user does not have sufficient authorization to upload certification letters'
         },
         415: {
           description: 'The file is not a valid format'
@@ -87,8 +85,7 @@ const postStateCertificationFile = {
   }
 };
 
-
 module.exports = {
   ...requiresAuth(getStateCertificationFile),
-  ...requiresAuth(postStateCertificationFile),
+  ...requiresAuth(postStateCertificationFile)
 };

@@ -10,7 +10,13 @@ tap.test('auth endpoint setup', async endpointTest => {
   const statesEndpoint = sinon.spy();
   const certificationsEndpoint = sinon.spy();
 
-  apdsIndex(app, activitiesEndpoint, rolesEndpoint, statesEndpoint, certificationsEndpoint);
+  apdsIndex(
+    app,
+    activitiesEndpoint,
+    rolesEndpoint,
+    statesEndpoint,
+    certificationsEndpoint
+  );
 
   endpointTest.ok(
     activitiesEndpoint.calledWith(app),
