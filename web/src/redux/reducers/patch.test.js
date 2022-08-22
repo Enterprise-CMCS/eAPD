@@ -143,7 +143,7 @@ describe('JSON patch reducer', () => {
                     costs: { 2019: 'this gets deleted' },
                     fte: { 2019: 'this gets deleted' }
                   }
-                ]                
+                ]
               },
               years: ['2019']
             }

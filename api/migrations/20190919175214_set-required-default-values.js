@@ -25,9 +25,7 @@ exports.up = async knex => {
         document.stateProfile.medicaidOffice.address2 = '';
       }
 
-      return knex('apds')
-        .where({ id: apd.id })
-        .update('document', document);
+      return knex('apds').where({ id: apd.id }).update('document', document);
     })
   );
 };

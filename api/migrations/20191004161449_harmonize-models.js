@@ -149,16 +149,17 @@ exports.up = async knex => {
         kp.percentTime = `${kp.percentTime * 100}`;
       });
 
-      document.previousActivityExpenses = document.previousActivityExpenses.reduce(
-        (previous, year) => ({
-          ...previous,
-          [year.year]: {
-            hithie: year.hithie,
-            mmis: year.mmis
-          }
-        }),
-        {}
-      );
+      document.previousActivityExpenses =
+        document.previousActivityExpenses.reduce(
+          (previous, year) => ({
+            ...previous,
+            [year.year]: {
+              hithie: year.hithie,
+              mmis: year.mmis
+            }
+          }),
+          {}
+        );
 
       document.years = document.years.map(y => `${y}`);
 
