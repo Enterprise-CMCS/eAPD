@@ -78,7 +78,7 @@ const IncentivePayments = ({
     <Fragment>
       {years.map(year => (
         <Fragment key={year}>
-          <table className="budget-table" data-cy="EQIPTable">
+          <table name={`EQIPTable ${year}`} className="budget-table" data-cy="EQIPTable">
             <caption className="ds-u-visibility--screen-reader">
               {t('ffy', { year })} Incentive Payments by Quarter
             </caption>
@@ -149,6 +149,7 @@ const IncentivePayments = ({
                   <td
                     className="budget-table--number budget-table--col__highlight budget-table--subtotal"
                     data-cy="subtotal"
+                    data-testid={`ehAmt ${year} total`}
                   >
                     <Dollars>{totals.ehAmt.byYear[year]}</Dollars>
                   </td>
@@ -228,6 +229,7 @@ const IncentivePayments = ({
                   <td
                     className="budget-table--number budget-table--col__highlight budget-table--subtotal"
                     data-cy="subtotal"
+                    data-testid={`epAmt ${year} total`}
                   >
                     <Dollars>{totals.epAmt.byYear[year]}</Dollars>
                   </td>
