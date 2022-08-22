@@ -194,7 +194,9 @@ const PersonForm = forwardRef(
                 handleNameChange(e);
                 onChange(e);
               }}
-              onBlur={() => {trigger("name")}}
+              onBlur={() => {
+                trigger('name');
+              }}
               errorMessage={errors?.name?.message}
               errorPlacement="bottom"
             />
@@ -213,7 +215,9 @@ const PersonForm = forwardRef(
                 handleEmailChange(e);
                 onChange(e);
               }}
-              onBlur={() => {trigger("email")}}
+              onBlur={() => {
+                trigger('email');
+              }}
               errorMessage={errors?.email?.message}
               errorPlacement="bottom"
             />
@@ -232,7 +236,9 @@ const PersonForm = forwardRef(
                 handlePositionChange(e);
                 onChange(e);
               }}
-              onBlur={() => {trigger("position")}}
+              onBlur={() => {
+                trigger('position');
+              }}
               errorMessage={errors?.position?.message}
               errorPlacement="bottom"
             />
@@ -345,7 +351,7 @@ const PersonForm = forwardRef(
                 onChange(e);
               }}
               onBlur={() => {
-                trigger("hasCosts")
+                trigger('hasCosts');
               }}
               onComponentBlur={hasCostsOnBlur}
               errorMessage={errors?.hasCosts?.message}

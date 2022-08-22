@@ -196,7 +196,10 @@ tap.test('database wrappers / apds', async apdsTests => {
     updateAPDDocumentTests.test('with a valid patch', async test => {
       const {
         errors,
-        apd: { updatedAt, apdOverview: { programOverview } }
+        apd: {
+          updatedAt,
+          apdOverview: { programOverview }
+        }
       } = await updateAPDDocument(id, 'co', [
         {
           op: 'replace',

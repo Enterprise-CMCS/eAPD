@@ -34,7 +34,7 @@ const openAPI = {
         }
       }
     }
-  },
+  }
 };
 
 module.exports = requiresAuth(openAPI);
