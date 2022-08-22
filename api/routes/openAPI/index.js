@@ -3,7 +3,7 @@ const pkg = require('../../package.json');
 const affiliations = require('../affiliations/openAPI');
 const apds = require('../apds/openAPI');
 const apdsEvents = require('../apds/events/openAPI');
-const apdsFiles= require('../apds/files/openAPI');
+const apdsFiles = require('../apds/files/openAPI');
 const authActivities = require('../auth/activities/openAPI');
 const authRoles = require('../auth/roles/openAPI');
 const authStates = require('../auth/states/openAPI');
@@ -423,7 +423,7 @@ module.exports = {
                     }
                   }
                 }
-              }              
+              }
             }
           },
           keyStatePersonnel: {
@@ -484,7 +484,10 @@ module.exports = {
                       }
                     }
                   },
-                  email: { type: 'string', description: `Person's email address` },
+                  email: {
+                    type: 'string',
+                    description: `Person's email address`
+                  },
                   hasCosts: {
                     type: 'boolean',
                     description:
@@ -578,7 +581,7 @@ module.exports = {
                     }
                   }
                 }
-              }              
+              }
             }
           },
           state: {
