@@ -12,6 +12,6 @@ exports.seed = async knex => {
       uploadedOn: new Date(),
       affiliationId: null,
       status: 'active'
-    },
+    }
   ]);
 };

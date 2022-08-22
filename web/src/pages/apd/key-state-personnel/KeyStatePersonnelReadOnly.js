@@ -5,7 +5,7 @@ import Dollars from '../../../components/Dollars';
 
 const ApdStateProfile = ({ keyStatePersonnel }) => {
   const { keyPersonnel } = keyStatePersonnel;
-  
+
   const costByYear = person =>
     person.hasCosts ? (
       <div>
@@ -121,7 +121,7 @@ ApdStateProfile.propTypes = {
     }).isRequired,
     medicaidDirector: PropTypes.object.isRequired,
     keyPersonnel: PropTypes.array.isRequired
-  }).isRequired,
+  }).isRequired
 };
 
 export default ApdStateProfile;
