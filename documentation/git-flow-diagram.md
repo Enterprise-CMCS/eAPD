@@ -11,7 +11,7 @@ flowchart LR
   end
 
   subgraph Hotfix [Hotfix]
-    BD --> HA([Hotfix Branch Start]) --> HB([Hotfix Branch Finish]) --> BF    
+    BD --> HA([Hotfix Branch Start]) --> HB([Hotfix Branch Finish]) --> BF
   end
 
   subgraph Feature1 [Feature 1]

@@ -18,9 +18,7 @@ exports.up = async knex => {
         });
       });
 
-      return knex('apds')
-        .where({ id })
-        .update('document', document);
+      return knex('apds').where({ id }).update('document', document);
     })
   );
 };

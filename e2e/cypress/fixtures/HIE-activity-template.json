@@ -1,44 +1,35 @@
 {
   "activityName": "Claims Data Analytics",
 
-  "activityOverview": 
-    {
-      "name": "Claims Data Analytics",
-      "fundingType": "HIE",
-      "shortOverview": "To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
-      "startDate": [2, 24, 2032],
-      "endDate": [8, 28, 2034],
-      "detailedDescription": "Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the HIT Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required HIT changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.",
-      "supportingJustifications": "Medicaid Claims Data Feed to the HIE",
-      "supportsMedicaid": "This activity does support the medicaid standards and conditions."
-    },
+  "activityOverview": {
+    "name": "Claims Data Analytics",
+    "fundingType": "HIE",
+    "shortOverview": "To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
+    "startDate": [2, 24, 2032],
+    "endDate": [8, 28, 2034],
+    "detailedDescription": "Currently, Tycho does not have an All-Payers’ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the HIT Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required HIT changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.",
+    "supportingJustifications": "Medicaid Claims Data Feed to the HIE",
+    "supportsMedicaid": "This activity does support the medicaid standards and conditions."
+  },
 
-  "outcomes":
-    {
-      "names": [
-        "Supplies driven across the continent",
-        "Free community cooking lessons"
-      ],
-      "metrics": [
-        ["Provides supplies across the U.S.", "Must be completed by due date"],
-        [
-          "Gives opporunity to cook cheap meals",
-          "Provides recepie save feature"
-        ]
-      ]
-    },
+  "outcomes": {
+    "names": [
+      "Supplies driven across the continent",
+      "Free community cooking lessons"
+    ],
+    "metrics": [
+      ["Provides supplies across the U.S.", "Must be completed by due date"],
+      ["Gives opporunity to cook cheap meals", "Provides recepie save feature"]
+    ]
+  },
 
-  "milestones":
-    {
-      "names": [
-        "Completion by the due date",
-        "Follows the 3 guiding principles"
-      ],
-      "dates": [
-        [12, 6, 2022],
-        [3, 5, 2023]
-      ]
-    },
+  "milestones": {
+    "names": ["Completion by the due date", "Follows the 3 guiding principles"],
+    "dates": [
+      [12, 6, 2022],
+      [3, 5, 2023]
+    ]
+  },
 
   "staff": [
     {
@@ -92,8 +83,7 @@
     }
   ],
 
-  "costAllocation":
-  {
+  "costAllocation": {
     "description": "Activity 2 description for overall cost allocation.",
     "FFYdescriptions": [
       "This is the Other Funding description for Activity 2 - FFY 2021",
@@ -134,8 +124,22 @@
     "activityBudgetTable": [
       [
         [],
-        ["Public Information Officer", "$165,000", "×", "0.5 FTE", "=", "$82,500"],
-        ["Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)", "$110,012", "×", "1 FTE", "=", "$110,012"],
+        [
+          "Public Information Officer",
+          "$165,000",
+          "×",
+          "0.5 FTE",
+          "=",
+          "$82,500"
+        ],
+        [
+          "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
+          "$110,012",
+          "×",
+          "1 FTE",
+          "=",
+          "$110,012"
+        ],
         ["Other Funding Amount", "-", "$2,805"],
         ["State Staff Subtotal", "$189,707"],
         [],
@@ -152,8 +156,22 @@
       ],
       [
         [],
-        ["Public Information Officer", "$170,000", "×", "0.5 FTE", "=", "$85,000"],
-        ["Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)", "$111,102", "×", "1 FTE", "=", "$111,102"],
+        [
+          "Public Information Officer",
+          "$170,000",
+          "×",
+          "0.5 FTE",
+          "=",
+          "$85,000"
+        ],
+        [
+          "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
+          "$111,102",
+          "×",
+          "1 FTE",
+          "=",
+          "$111,102"
+        ],
         ["Other Funding Amount", "-", "$6,353"],
         ["State Staff Subtotal", "$189,749"],
         [],
@@ -232,8 +250,7 @@
     ]
   },
 
-  "FFYTotalDescription":
-  {
+  "FFYTotalDescription": {
     "totalCost": 552314,
     "totalOtherFunding": 13000,
     "totalTotalMedicaidCost": 539314,

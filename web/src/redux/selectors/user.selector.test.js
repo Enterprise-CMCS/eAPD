@@ -6,7 +6,6 @@ import {
 } from './user.selector';
 
 describe('user state selectors', () => {
-
   describe('getIsFedAdmin selector', () => {
     it('returns true if the user has role eAPD Federal Admin', () => {
       expect(
