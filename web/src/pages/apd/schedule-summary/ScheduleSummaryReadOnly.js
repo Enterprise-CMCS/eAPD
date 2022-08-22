@@ -7,13 +7,13 @@ import { selectActivitySchedule } from '../../../redux/selectors/activities.sele
 
 const activityTitle = (activityName, milestones) => {
   if (!activityName && milestones.length === 0) {
-    return "Untitled | No milestones were provided."
+    return 'Untitled | No milestones were provided.';
   }
   if (!activityName && milestones.length > 0) {
-    return "Untitled Milestones"
+    return 'Untitled Milestones';
   }
   return `${activityName} Milestones`;
-}
+};
 const ScheduleSummary = ({ activities }) => (
   <div>
     <h2>Activity Schedule Summary</h2>
@@ -36,22 +36,26 @@ const ScheduleSummary = ({ activities }) => (
           </tr>
         </thead>
         <tbody>
-          {activities.map(({ name: activityName, dateRange, milestones }, i) => (
-            <tr
-              key={activityName}
-              className="summary-table--gray_row__highlight"
-            >
-              <td
-                className="ds-u-font-weight--bold ds-u-border-right--0"
-                style={{ width: '70%' }}
+          {activities.map(
+            ({ name: activityName, dateRange, milestones }, i) => (
+              <tr
+                key={activityName}
+                className="summary-table--gray_row__highlight"
               >
-                Activity {i + 1}: {activityTitle(activityName, milestones)}
-              </td>
-              <td className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
-                {dateRange === "Date not specified - Date not specified" ? "Dates not specified" : dateRange}
-              </td>
-            </tr>
-          ))}
+                <td
+                  className="ds-u-font-weight--bold ds-u-border-right--0"
+                  style={{ width: '70%' }}
+                >
+                  Activity {i + 1}: {activityTitle(activityName, milestones)}
+                </td>
+                <td className="ds-u-font-weight--bold ds-u-padding-right--3 ds-u-text-align--left ds-u-border-left--0 budget-table--cell__nowrap">
+                  {dateRange === 'Date not specified - Date not specified'
+                    ? 'Dates not specified'
+                    : dateRange}
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </table>
     )}
@@ -88,7 +92,9 @@ const ScheduleSummary = ({ activities }) => (
           <tbody key={`${activityName}-body`}>
             {milestones.length === 0 && (
               <tr>
-                <td className="ds-u-border-right--0">No milestones to display.</td>
+                <td className="ds-u-border-right--0">
+                  No milestones to display.
+                </td>
               </tr>
             )}
             {milestones.map(({ end: milestoneEnd, name: milestoneName }) => (
