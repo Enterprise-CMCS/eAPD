@@ -8,10 +8,7 @@ const createNewFileForAPD = async (
   size = 0,
   { db = knex, crypto = nodeCrypto } = {}
 ) => {
-  const id = crypto
-    .createHash('sha256')
-    .update(fileBuffer)
-    .digest('hex');
+  const id = crypto.createHash('sha256').update(fileBuffer).digest('hex');
 
   const [{ count }] = await db('apd_files')
     .count()
@@ -29,14 +26,10 @@ const createNewFileForAPD = async (
 };
 
 const deleteFileByID = async (id, { db = knex } = {}) =>
-  db('apd_files')
-    .where('id', id)
-    .delete();
+  db('apd_files').where('id', id).delete();
 
 const fileBelongsToAPD = async (id, apdID, { db = knex } = {}) => {
-  const c = await db('apd_files')
-    .where({ id, apd_id: apdID })
-    .count();
+  const c = await db('apd_files').where({ id, apd_id: apdID }).count();
   return +c[0].count === 1;
 };
 

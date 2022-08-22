@@ -1,11 +1,7 @@
 {
   "$id": "expense.json",
   "type": "object",
-  "required": [
-    "description",
-    "category",
-    "years"
-  ],
+  "required": ["description", "category", "years"],
   "properties": {
     "description": {
       "$id": "#/properties/activities/items/properties/expenses/items/properties/description",

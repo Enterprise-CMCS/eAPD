@@ -6,26 +6,32 @@ import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
  * @param {Number} outcomeIndex Index of the outcome
  * @param {Object} data payload of the outcome to be saved
  */
-export const saveOutcome = (activityIndex, outcomeIndex, data) => (dispatch, getState) => {
-  const previousState = getState();
+export const saveOutcome =
+  (activityIndex, outcomeIndex, data) => (dispatch, getState) => {
+    const previousState = getState();
 
-  let indexCalculated = outcomeIndex;
+    let indexCalculated = outcomeIndex;
 
-  if(previousState.apd.data.activities[activityIndex].outcomes[outcomeIndex] === undefined) {
-    indexCalculated = previousState.apd.data.activities[activityIndex].outcomes.length;
+    if (
+      previousState.apd.data.activities[activityIndex].outcomes[
+        outcomeIndex
+      ] === undefined
+    ) {
+      indexCalculated =
+        previousState.apd.data.activities[activityIndex].outcomes.length;
+      dispatch({
+        type: ADD_APD_ITEM,
+        path: `/activities/${activityIndex}/outcomes/-`,
+        state: getState()
+      });
+    }
+
     dispatch({
-      type: ADD_APD_ITEM,
-      path: `/activities/${activityIndex}/outcomes/-`,
-      state: getState()
+      type: EDIT_APD,
+      path: `/activities/${activityIndex}/outcomes/${indexCalculated}`,
+      value: data
     });
-  }
-  
-  dispatch({
-    type: EDIT_APD,
-    path: `/activities/${activityIndex}/outcomes/${indexCalculated}`,
-    value: data
-  });
-}
+  };
 
 /**
  * Remove an outcome resource from an activity

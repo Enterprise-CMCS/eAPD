@@ -15,9 +15,7 @@ exports.up = async knex => {
       delete activity.costAllocationNarrative.otherSources;
     });
 
-    knex('apds')
-      .where('id', id)
-      .update({ document });
+    knex('apds').where('id', id).update({ document });
   });
 };
 
