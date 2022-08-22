@@ -8,16 +8,20 @@ import {
   checkBudgetAndFFP,
   checkProposedBudget
 } from '../../helpers/apd/budget-checks';
+import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
 
 // Tests an APD by adding data and checking the results
 describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   let apdUrl;
   let apdId;
   let budgetData;
+  let fillOutActivityPage;
   const years = [];
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
+    fillOutActivityPage = new FillOutActivityPage();
+
     cy.useStateStaff();
 
     cy.findByRole('button', { name: /Create new/i }).click();
@@ -49,7 +53,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   // });
 
   describe('Budget Checks', () => {
-    it.only('Checks Key State Personnel Budgets', () => {
+    it('Checks Key State Personnel Budgets', () => {
       cy.goToKeyStatePersonnel();
       cy.url().should('include', '/state-profile');
 
@@ -110,50 +114,85 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
     });
 
-    it('Checks State Staff Budget'),
-      () => {
-        // ADD STATE STAFF TO HIT
+    it.only('Checks State Staff Budget', () => {
+      // Adds state staff to HIT activity
+      cy.goToActivityDashboard();
+      cy.contains('Activity 1:').click();
+      cy.contains('State Staff and Expenses').click();
 
-        checkBudgetAndFFP(years, budgetData.afterStateStaffHIT, 0);
-        checkProposedBudget(
-          years,
-          budgetData.afterKeyPersonnelNoCosts,
-          0,
-          'HIT'
-        );
+      cy.fixture('HIT-activity-template.json').then(data => {
+        fillOutActivityPage.fillStateStaff(years, data.staff, true);
+      });
 
-        // ADD HIE ACTIVITY
-        // ADD STATE STAFF TO HIE
+      // checkBudgetAndFFP(years, budgetData.afterStateStaffHIT, 0);
+      // checkProposedBudget(
+      //   years,
+      //   budgetData.afterStateStaffHIT,
+      //   0,
+      //   'HIT'
+      // );
 
-        checkBudgetAndFFP(years, budgetData.afterStateStaffHIE, 1);
-        checkProposedBudget(
-          years,
-          budgetData.afterKeyPersonnelNoCosts,
-          0,
-          'HIE'
-        );
+      // Adds state staff to HIE activity
+      cy.goToActivityDashboard();
+      cy.findByRole('button', { name: 'Add Activity' }).click();
+      cy.get('#activities').findAllByText('Edit').eq(1).click();
 
-        // ADD MMIS ACTIVITY
-        // ADD STATE STAFF TO MMIS
+      cy.findByRole('radio', { name: /HIE/i }).check({ force: true });
+      cy.get('[id="continue-button"]').click();
+      cy.get('[id="continue-button"]').click();
 
-        checkBudgetAndFFP(years, budgetData.afterStateStaffMMIS, 2);
-        checkProposedBudget(
-          years,
-          budgetData.afterKeyPersonnelNoCosts,
-          0,
-          'MMIS'
-        );
+      cy.fixture('HIE-activity-template.json').then(data => {
+        fillOutActivityPage.fillStateStaff(years, data.staff, true);
+      });
 
-        // ADD NO FFP ACTIVITY
-        // ADD STATE STAFF TO NO FFP
+      // checkBudgetAndFFP(years, budgetData.afterStateStaffHIE, 1);
+      // checkProposedBudget(
+      //   years,
+      //   budgetData.afterStateStaffHIE,
+      //   0,
+      //   'HIE'
+      // );
 
-        checkBudgetAndFFP(years, budgetData.afterStateStaffNoFFP, 3);
-        checkProposedBudget(
-          years,
-          budgetData.afterKeyPersonnelNoCosts,
-          0,
-          'MMIS'
-        );
-      };
+      // Adds state staff to MMIS activity
+      cy.goToActivityDashboard();
+      cy.findByRole('button', { name: 'Add Activity' }).click();
+      cy.get('#activities').findAllByText('Edit').eq(2).click();
+
+      cy.findByRole('radio', { name: /MMIS/i }).check({ force: true });
+      cy.get('[id="continue-button"]').click();
+      cy.get('[id="continue-button"]').click();
+
+      cy.fixture('MMIS-activity-template.json').then(data => {
+        fillOutActivityPage.fillStateStaff(years, data.staff, true);
+      });
+
+      // checkBudgetAndFFP(years, budgetData.afterStateStaffMMIS, 2);
+      // checkProposedBudget(
+      //   years,
+      //   budgetData.afterStateStaffMMIS,
+      //   0,
+      //   'MMIS'
+      // );
+
+      // Adds state staff to a no FFP activity
+      cy.goToActivityDashboard();
+      cy.findByRole('button', { name: 'Add Activity' }).click();
+      cy.get('#activities').findAllByText('Edit').eq(3).click();
+
+      cy.get('[id="continue-button"]').click();
+      cy.get('[id="continue-button"]').click();
+
+      cy.fixture('HIT-activity-template.json').then(data => {
+        fillOutActivityPage.fillStateStaff(years, data.staff, true);
+      });
+
+      // checkBudgetAndFFP(years, budgetData.afterStateStaffNoFFP, 3);
+      // checkProposedBudget(
+      //   years,
+      //   budgetData.afterStateStaffNoFFP,
+      //   0,
+      //   'MMIS' // THIS SHOULD BE NO FFP
+      // );
+    });
   });
 });
