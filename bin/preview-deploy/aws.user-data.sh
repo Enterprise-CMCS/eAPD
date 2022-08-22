@@ -108,6 +108,8 @@ cd ~/eAPD/api
 yarn build 2>&1 | tee api-build.log
 cp -r ~/eAPD/api/* /app/api
 
+cd /app
+yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000
 cd /app/api
 
 # Build and seed the database
