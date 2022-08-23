@@ -13,13 +13,13 @@
   },
   "homepage": "https://github.com/CMSgov/eAPD#readme",
   "engines": {
-    "node": "16.15.0"
+    "node": "16.16.0"
   },
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
-    "prettier": "prettier --config \".prettierrc\" --write \"**/*.js\"",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\" --config \".prettierrc\"",
     "npm-check": "npx npm-check-updates",
-    "prepare": "yarn run snyk-protect",
+    "prepare": "yarn run snyk-protect && husky install",
     "snyk-protect": "snyk-protect",
     "create:route": "npx hygen routes new route",
     "create:story": "npx hygen stories new story",
@@ -83,8 +83,10 @@
     ]
   },
   "devDependencies": {
-    "@snyk/protect": "1.951.0",
-    "prettier": "2.7.0"
+    "@snyk/protect": "1.981.0",
+    "husky": "^8.0.0",
+    "prettier": "2.7.1",
+    "pretty-quick": "^3.1.3"
   },
   "resolutions": {
     "yargs-parser": ">=18.1.1"

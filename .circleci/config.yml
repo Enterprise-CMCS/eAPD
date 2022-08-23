@@ -173,7 +173,6 @@ workflows:
       - frontend build:
           name: frontend build preview
           env: PRODUCTION
-          web_env: development
           filters:
             branches:
               ignore:
@@ -192,7 +191,6 @@ workflows:
       - frontend build:
           name: frontend build prod
           env: PRODUCTION
-          web_env: production
           filters:
             branches:
               ignore: /.*/
@@ -203,7 +201,6 @@ workflows:
       - frontend build:
           name: frontend build staging
           env: STAGING
-          web_env: staging
           filters:
             branches:
               only:
@@ -296,7 +293,7 @@ jobs:
           name: Install Packer for Preview
           command: |
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-            sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
       - run:
           name: Packer Build Preview AMI
@@ -312,6 +309,7 @@ jobs:
               --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
+              --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
               preview-ami.pkr.hcl
   build production staging ami:
     docker:
@@ -325,7 +323,7 @@ jobs:
           name: Install Packer for Prod
           command: |
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-            sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
       - run:
           name: Packer Build Production AMI
@@ -383,7 +381,7 @@ jobs:
   # because "yarn install --frozen-lockfile" deletes the node_modules folder anyway so it's pointless.
   install dependencies:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -404,8 +402,8 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-            nvm install 16.15.0
-            nvm alias default 16.15.0
+            nvm install 16.16.0
+            nvm alias default 16.16.0
             echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - save_cache:
@@ -424,7 +422,7 @@ jobs:
   # it's a valid OpenAPI document.
   validate openapi:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -438,7 +436,7 @@ jobs:
           name: validate
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker create -v /openapi --name openapi cimg/node:16.15.0 /bin/true
+            docker create -v /openapi --name openapi cimg/node:16.16.0 /bin/true
             docker cp ./openapi.json openapi:/openapi
             docker run --volumes-from openapi -w /openapi usabillabv/openapi3-validator:0.2.0 openapi.json
 
@@ -446,7 +444,7 @@ jobs:
   # enforce a schema either - strictly checks that the files are valid YAML.
   yaml test:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -463,7 +461,7 @@ jobs:
   e2e test:
     machine:
       image: ubuntu-2004:202104-01
-    parallelism: 5
+    parallelism: 6
     steps:
       - checkout
       - attach_workspace:
@@ -490,7 +488,7 @@ jobs:
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
-            export WEB_ENV="test"
+            export TEALIUM_ENV="test"
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             COMPOSE_HTTP_TIMEOUT=150 docker-compose up -d
             docker-compose exec api yarn run migrate
@@ -503,22 +501,22 @@ jobs:
             export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
 
-            # Switch to Node 16.15.0.
+            # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.15.0
-            nvm alias default 16.15.0
-            nvm use 16.15.0
+            nvm install 16.16.0
+            nvm alias default 16.16.0
+            nvm use 16.16.0
 
             # yarn install --frozen-lockfile
-            npx cypress@10.2.0 install --force
+            npx cypress@10.3.1 install --force
             npx cypress verify
       - run:
           name: run e2e tests authentication
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.15.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.16.0; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_PORT=54325; fi
@@ -529,7 +527,7 @@ jobs:
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.15.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.16.0; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_PORT=54325; fi
@@ -540,7 +538,7 @@ jobs:
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.15.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.16.0; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_PORT=54325; fi
@@ -551,7 +549,7 @@ jobs:
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.15.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.16.0; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_PORT=54325; fi
@@ -562,17 +560,28 @@ jobs:
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.15.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.16.0; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.cy.js"; fi
+      - run:
+          name: run e2e bug tests
+          working_directory: ~/project/e2e
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then nvm use 16.16.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_PORT=54325; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
 
   chromatic deployment:
     yaml test:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -590,7 +599,7 @@ jobs:
           working_directory: ~/project/web
           no_output_timeout: 60m
           command: |
-            export WEB_ENV="test"
+            export TEALIUM_ENV="test"
             STORYBOOK_BUILD_TIMEOUT=1200000 yarn build:storybook
             yarn deploy-chromatic --project-token=${CHROMATIC_PROJECT_TOKEN}
 
@@ -615,12 +624,12 @@ jobs:
   #        name: run tests
   #        working_directory: ~/project/api
   #        command: |
-  #          # Switch to Node 16.15.0.
+  #          # Switch to Node 16.16.0.
   #          sudo apt-get purge nodejs -y && sudo apt-get install -y nodejs yarn
   #          export NVM_DIR="/opt/circleci/.nvm"
   #          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  #          nvm install 16.15.0
-  #          nvm alias default 16.15.0
+  #          nvm install 16.16.0
+  #          nvm alias default 16.16.0
   #          nvm i
   #          ./endpoint-tests/endpoint.sh
 
@@ -642,17 +651,17 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 16.15.0.
+            # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.15.0
-            nvm alias default 16.15.0
+            nvm install 16.16.0
+            nvm alias default 16.16.0
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
   backend lint:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -683,11 +692,11 @@ jobs:
           name: run tests
           working_directory: ~/project/api
           command: |
-            # Switch to Node 16.15.0.
+            # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.15.0
-            nvm alias default 16.15.0
+            nvm install 16.16.0
+            nvm alias default 16.16.0
             ./unit-test.sh
       - run:
           name: report coverage
@@ -705,11 +714,8 @@ jobs:
       env:
         description: The environment being deployed
         type: string
-      web_env:
-        description: The type of environment being deployed
-        type: string
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -724,7 +730,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: WEB_ENV="${<< parameters.web_env >>}" API_URL="${<< parameters.env >>_WEB_API_URL}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -740,7 +746,7 @@ jobs:
   # Lints the frontend code.
   frontend lint:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -756,7 +762,7 @@ jobs:
   # Runs frontend tests and reports coverage to codecov.io.
   frontend test:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -768,7 +774,7 @@ jobs:
           name: run tests
           working_directory: ~/project/web
           command: |
-            export WEB_ENV="test"
+            export TEALIUM_ENV="test"
             yarn test --runInBand
       - run:
           name: report coverage
@@ -782,7 +788,7 @@ jobs:
   # Uses audit-ci to scan the installed dependencies for known vulnerabilities.
   dependency vulnerability scan:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -822,6 +828,7 @@ jobs:
       - run:
           name: run owasp zap
           working_directory: ~/project
+          no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
@@ -881,7 +888,9 @@ jobs:
               --JWT_SECRET "${<< parameters.env >>_JWT_SECRET}" \
               --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
-              --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}"
+              --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}" \
+              --TEALIUM_TAG "${<< parameters.env >>_PREVIEW_TEALIUM_TAG}" \
+              --TEALIUM_ENV "${<< parameters.env >>_PREVIEW_TEALIUM_ENV}"
 
       - run:
           when: on_fail
@@ -1003,7 +1012,8 @@ jobs:
                 --MONGO_URL "$PREVIEW_MONGO_URL" \
                 --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
                 --DATABASE_URL "$PREVIEW_DATABASE_URL" \
-                --TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
+                --TEALIUM_TAG "$PREVIEW_TEALIUM_TAG" \
+                --TEALIUM_ENV "$PREVIEW_TEALIUM_ENV"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
@@ -1014,7 +1024,7 @@ jobs:
   # CircleCI artifact downloads.
   store artifacts:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW

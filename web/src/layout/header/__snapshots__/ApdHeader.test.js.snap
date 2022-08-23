@@ -41,7 +41,7 @@ exports[`APD header renders correctly 1`] = `
         className=""
         fade={false}
         fixedWidth={false}
-        flip={null}
+        flip={false}
         icon={
           Object {
             "icon": Array [
@@ -67,6 +67,8 @@ exports[`APD header renders correctly 1`] = `
         shake={false}
         size={null}
         spin={false}
+        spinPulse={false}
+        spinReverse={false}
         style={
           Object {
             "width": "14px",

@@ -7,7 +7,9 @@ export const testDefaultKeyStatePersonnel = () => {
 
     cy.contains('Provide the name of the State Medicaid Director.');
     cy.contains('Provide the email address of the State Medicaid Director.');
-    cy.contains('Provide a valid phone number for the State Medicaid Director.');
+    cy.contains(
+      'Provide a valid phone number for the State Medicaid Director.'
+    );
     cy.contains('Provide a mailing street address for the Medicaid office.');
     cy.contains('Provide a city name.');
     cy.contains('Provide a zip code.');
@@ -18,7 +20,7 @@ export const testDefaultKeyStatePersonnel = () => {
 
     cy.get('input[name="medicaidDirector.email"]')
       .clear()
-      .should('have.text', '')
+      .should('have.text', '');
 
     cy.get('input[name="medicaidDirector.phone"]')
       .clear()
@@ -32,13 +34,9 @@ export const testDefaultKeyStatePersonnel = () => {
       .clear()
       .should('have.text', '');
 
-    cy.get('input[name="medicaidOffice.city"]')
-      .clear()
-      .should('have.text', '');
+    cy.get('input[name="medicaidOffice.city"]').clear().should('have.text', '');
 
-    cy.get('input[name="medicaidOffice.zip"]')
-      .clear()
-      .should('have.text', '');
+    cy.get('input[name="medicaidOffice.zip"]').clear().should('have.text', '');
 
     cy.get('select[name="medicaidOffice.state"]')
       .invoke('val', '')
@@ -116,13 +114,9 @@ export const testKeyStatePersonnelWithData = years => {
 
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
 
-      cy.get('[data-cy="key-person-0__name"]')
-        .clear()
-        .type(userData[1].name);
+      cy.get('[data-cy="key-person-0__name"]').clear().type(userData[1].name);
 
-      cy.get('[data-cy="key-person-0__email"]')
-        .clear()
-        .type(userData[1].email);
+      cy.get('[data-cy="key-person-0__email"]').clear().type(userData[1].email);
 
       cy.get('[data-cy="key-person-0__position"]')
         .clear()
@@ -144,7 +138,7 @@ export const testKeyStatePersonnelWithData = years => {
         });
       cy.get('.form-and-review-list')
         .findAllByRole('button', { name: /Edit/i })
-        .click()
+        .click();
 
       // Toggle to see if the FFY cost prompts appear/disappear
       cy.get('input[type="radio"][value="yes"]').check({ force: true });
@@ -164,13 +158,9 @@ export const testKeyStatePersonnelWithData = years => {
     cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
     cy.fixture('users').then(userData => {
-      cy.get('[data-cy="key-person-1__name"]')
-        .clear()
-        .type(userData[2].name);
+      cy.get('[data-cy="key-person-1__name"]').clear().type(userData[2].name);
 
-      cy.get('[data-cy="key-person-1__email"]')
-        .clear()
-        .type(userData[2].email);
+      cy.get('[data-cy="key-person-1__email"]').clear().type(userData[2].email);
 
       cy.get('[data-cy="key-person-1__position"]')
         .clear()
@@ -198,13 +188,9 @@ export const testKeyStatePersonnelWithData = years => {
     cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
     cy.fixture('users').then(userData => {
-      cy.get('[data-cy="key-person-2__name"]')
-        .clear()
-        .type(userData[3].name);
+      cy.get('[data-cy="key-person-2__name"]').clear().type(userData[3].name);
 
-      cy.get('[data-cy="key-person-2__email"]')
-        .clear()
-        .type(userData[3].email);
+      cy.get('[data-cy="key-person-2__email"]').clear().type(userData[3].email);
 
       cy.get('[data-cy="key-person-2__position"]')
         .clear()

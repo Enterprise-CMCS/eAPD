@@ -102,7 +102,9 @@ export const testDefaultActivityScheduleSummary = () => {
       .getActivityScheduleMilestoneTableName(0)
       .should('eq', 'Activity 1: Program Administration Milestones');
 
-    exportPage.getAllActivityScheduleMilestones(0).should('contain', 'No milestones to display.');
+    exportPage
+      .getAllActivityScheduleMilestones(0)
+      .should('contain', 'No milestones to display.');
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });

@@ -34,7 +34,9 @@ citing the work, you should not imply endorsement by the author or the affirmer.
 
 ### Files licensed under the Creative Commons by 4.0 License
 
-The icons in this project are from [Font Awesome Free](https://fontawesome.com/icons), and licensed under the [CC BY 4.0 License](https://fontawesome.com/license/free). Icons used include:
+The icons in this project are from
+[Font Awesome Free](https://fontawesome.com/icons), and licensed under the
+[CC BY 4.0 License](https://fontawesome.com/license/free). Icons used include:
 
 - [arrow-right](https://fontawesome.com/icons/arrow-right?style=solid)
 - [check-circle](https://fontawesome.com/icons/check-circle?style=solid)

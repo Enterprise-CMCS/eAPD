@@ -25,10 +25,7 @@
         "^[0-9]{4}$": {
           "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year",
           "type": "object",
-          "required": [
-            "hours",
-            "rate"
-          ],
+          "required": ["hours", "rate"],
           "properties": {
             "hours": {
               "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/hours",

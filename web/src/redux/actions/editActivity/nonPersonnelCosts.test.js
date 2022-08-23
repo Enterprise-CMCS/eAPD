@@ -18,16 +18,16 @@ describe('APD activity edit actions for non-personnel section', () => {
       apd: {
         data: {
           activities: [
-           {
-             expenses: []
-           } 
+            {
+              expenses: []
+            }
           ]
         }
       }
     };
-    
+
     const store = mockStore(state);
-    
+
     store.dispatch(saveNonPersonnelCost(0, 0, {}));
 
     expect(store.getActions()).toEqual([
@@ -47,7 +47,7 @@ describe('APD activity edit actions for non-personnel section', () => {
 
   it('dispatches an action for removing a non-personnel expense if approved', () => {
     const store = mockStore('test state');
-    
+
     const global = {
       confirm: jest.fn()
     };
@@ -63,26 +63,24 @@ describe('APD activity edit actions for non-personnel section', () => {
       { type: UPDATE_BUDGET, state: 'test state' }
     ]);
   });
-  
+
   it('dispatches an action for updating an existing non-personnel expense', () => {
     const state = {
       apd: {
         data: {
           activities: [
-           {
-             expenses: [
-               { category: "training" }
-             ]
-           } 
+            {
+              expenses: [{ category: 'training' }]
+            }
           ]
         }
       }
     };
-    
-    const store = mockStore(state);    
-    const expense = {key: '123', category: 'test category updated'};    
+
+    const store = mockStore(state);
+    const expense = { key: '123', category: 'test category updated' };
     store.dispatch(saveNonPersonnelCost(0, 0, expense));
-      
+
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,
@@ -92,5 +90,4 @@ describe('APD activity edit actions for non-personnel section', () => {
       { type: UPDATE_BUDGET, state }
     ]);
   });
-
 });
