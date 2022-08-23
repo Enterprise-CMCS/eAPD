@@ -138,22 +138,26 @@ exports[`<Nav /> component renders correctly 1`] = `
                     url="/"
                   >
                     <NavLink
+                      aria-current={false}
                       className="ds-c-vertical-nav__label"
                       href="/"
                       onClick={[Function]}
                     >
                       <Link
+                        aria-current={false}
                         className="ds-c-vertical-nav__label"
                         onClick={[Function]}
                         to="/"
                       >
                         <LinkAnchor
+                          aria-current={false}
                           className="ds-c-vertical-nav__label"
                           href="/"
                           navigate={[Function]}
                           onClick={[Function]}
                         >
                           <a
+                            aria-current={false}
                             className="ds-c-vertical-nav__label"
                             href="/"
                             onClick={[Function]}
@@ -193,22 +197,26 @@ exports[`<Nav /> component renders correctly 1`] = `
                     url="/apd"
                   >
                     <NavLink
+                      aria-current={true}
                       className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                       href="/apd"
                       onClick={[Function]}
                     >
                       <Link
+                        aria-current={true}
                         className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                         onClick={[Function]}
                         to="/apd"
                       >
                         <LinkAnchor
+                          aria-current={true}
                           className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                           href="/apd"
                           navigate={[Function]}
                           onClick={[Function]}
                         >
                           <a
+                            aria-current={true}
                             className="ds-c-vertical-nav__label ds-c-vertical-nav__label--current"
                             href="/apd"
                             onClick={[Function]}
@@ -247,22 +255,26 @@ exports[`<Nav /> component renders correctly 1`] = `
                     url="/search"
                   >
                     <NavLink
+                      aria-current={false}
                       className="ds-c-vertical-nav__label"
                       href="/search"
                       onClick={[Function]}
                     >
                       <Link
+                        aria-current={false}
                         className="ds-c-vertical-nav__label"
                         onClick={[Function]}
                         to="/search"
                       >
                         <LinkAnchor
+                          aria-current={false}
                           className="ds-c-vertical-nav__label"
                           href="/search"
                           navigate={[Function]}
                           onClick={[Function]}
                         >
                           <a
+                            aria-current={false}
                             className="ds-c-vertical-nav__label"
                             href="/search"
                             onClick={[Function]}
@@ -400,22 +412,26 @@ exports[`<Nav /> component renders correctly 1`] = `
                               url="/me"
                             >
                               <NavLink
+                                aria-current={false}
                                 className="ds-c-vertical-nav__label"
                                 href="/me"
                                 onClick={[Function]}
                               >
                                 <Link
+                                  aria-current={false}
                                   className="ds-c-vertical-nav__label"
                                   onClick={[Function]}
                                   to="/me"
                                 >
                                   <LinkAnchor
+                                    aria-current={false}
                                     className="ds-c-vertical-nav__label"
                                     href="/me"
                                     navigate={[Function]}
                                     onClick={[Function]}
                                   >
                                     <a
+                                      aria-current={false}
                                       className="ds-c-vertical-nav__label"
                                       href="/me"
                                       onClick={[Function]}
@@ -454,22 +470,26 @@ exports[`<Nav /> component renders correctly 1`] = `
                               url="/logout"
                             >
                               <NavLink
+                                aria-current={false}
                                 className="ds-c-vertical-nav__label"
                                 href="/logout"
                                 onClick={[Function]}
                               >
                                 <Link
+                                  aria-current={false}
                                   className="ds-c-vertical-nav__label"
                                   onClick={[Function]}
                                   to="/logout"
                                 >
                                   <LinkAnchor
+                                    aria-current={false}
                                     className="ds-c-vertical-nav__label"
                                     href="/logout"
                                     navigate={[Function]}
                                     onClick={[Function]}
                                   >
                                     <a
+                                      aria-current={false}
                                       className="ds-c-vertical-nav__label"
                                       href="/logout"
                                       onClick={[Function]}
