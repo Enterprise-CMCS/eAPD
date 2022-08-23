@@ -17,29 +17,25 @@ export const FFP_OPTIONS = new Set(['90-10', '75-25', '50-50', '0-100']);
  * @returns the default Funding Source object
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
- *   years: {
- *     2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *     2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *     2024: { total: 0, federal: 0, medicaid: 0, state: 0 }
- *   },
+ *   2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *   2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *   2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
  *   total: { total: 0, federal: 0, medicaid: 0, state: 0 }
  * }
  */
 export const getDefaultFundingSourceObject = (years = []) => ({
-  years: {
-    ...years.reduce(
-      (o, year) => ({
-        ...o,
-        [year]: {
-          total: 0,
-          federal: 0,
-          medicaid: 0,
-          state: 0
-        }
-      }),
-      {}
-    )
-  },
+  ...years.reduce(
+    (o, year) => ({
+      ...o,
+      [year]: {
+        total: 0,
+        federal: 0,
+        medicaid: 0,
+        state: 0
+      }
+    }),
+    {}
+  ),
   total: {
     total: 0,
     federal: 0,
@@ -57,11 +53,9 @@ export const getDefaultFundingSourceObject = (years = []) => ({
  * e.g. for years: [2022, 2023, 2024] and default names the object would look like
  * {
  *   statePersonnel: {
- *     years: {
- *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 }
- *     },
+ *     2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
  *     total: { total: 0, federal: 0, medicaid: 0, state: 0 }
  *   },
  *   contractors: {...}, // same as statePersonnel
@@ -88,12 +82,10 @@ export const getDefaultFundingSourceByCategoryObject = (
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
  *   2022: {
- *     years: {
- *       1: { inHouse: 0, contractors: 0, combined: 0 },
- *       2: { inHouse: 0, contractors: 0, combined: 0 },
- *       3: { inHouse: 0, contractors: 0, combined: 0 },
- *       4: { inHouse: 0, contractors: 0, combined: 0 }
- *     },
+ *     1: { inHouse: 0, contractors: 0, combined: 0 },
+ *     2: { inHouse: 0, contractors: 0, combined: 0 },
+ *     3: { inHouse: 0, contractors: 0, combined: 0 },
+ *     4: { inHouse: 0, contractors: 0, combined: 0 },
  *     subtotal: { inHouse: 0, contractors: 0, combined: 0 }
  *   },
  *   2023: {...}, // same as 2022
@@ -105,29 +97,25 @@ export const defaultFederalShareByFFYQuarterObject = (years = []) =>
   years.reduce(
     (o, year) => ({
       ...o,
-      years: {
-        ...o.years,
-        [year]: [1, 2, 3, 4].reduce(
-          (q, quarter) => ({
-            ...q,
-            [quarter]: {
-              inHouse: 0,
-              contractors: 0,
-              combined: 0
-            }
-          }),
-          {
-            subtotal: {
-              inHouse: 0,
-              contractors: 0,
-              combined: 0
-            }
+      [year]: [1, 2, 3, 4].reduce(
+        (q, quarter) => ({
+          ...q,
+          [quarter]: {
+            inHouse: 0,
+            contractors: 0,
+            combined: 0
           }
-        )
-      }
+        }),
+        {
+          subtotal: {
+            inHouse: 0,
+            contractors: 0,
+            combined: 0
+          }
+        }
+      )
     }),
     {
-      years: {},
       total: {
         inHouse: 0,
         contractors: 0,
@@ -144,10 +132,7 @@ export const defaultFederalShareByFFYQuarterObject = (years = []) =>
  * {
  *   federalShareByFFYQuarter: {
  *     hitAndHie: {
- *       years: {
- *         2022: {...}, 2023: {...}, 2024: {...}
- *       },
- *       total: {...}
+ *       2022: {...}, 2023: {...}, 2024: {...}, total: {...}
  *       // see defaultFederalShareByFFYQuarterObject for details
  *     },
  *     mmis: {...} // same as hitAndHie
@@ -161,11 +146,9 @@ export const defaultFederalShareByFFYQuarterObject = (years = []) =>
  *   hitAndHie: {...}, // same as hie
  *   mmisByFFP: {
  *     '90-10': {
- *       years: {
- *         2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *         2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *         2024: { total: 0, federal: 0, medicaid: 0, state: 0 }
- *       },
+ *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
  *       total: { total: 0, federal: 0, medicaid: 0, state: 0 }
  *       // see getDefaultFundingSourceObject for details
  *     },
@@ -175,11 +158,9 @@ export const defaultFederalShareByFFYQuarterObject = (years = []) =>
  *     combined: {...} // same as '90-10'
  *   },
  *   combined: {
- *     years: {
- *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
- *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 }
- *     },
+ *     2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
  *     total: { total: 0, federal: 0, medicaid: 0, state: 0 }
  *     // see getDefaultFundingSourceObject for details
  *   },
@@ -214,43 +195,37 @@ export const defaultBudgetObject = (years = []) => ({
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
  *   costsByFFY: {
- *     years: {
- *       2022: { federal: 0, medicaid: 0, state: 0, total: 0 },
- *       2023: { federal: 0, medicaid: 0, state: 0, total: 0 },
- *       2024: { federal: 0, medicaid: 0, state: 0, total: 0 }
- *     },
+ *     2022: { federal: 0, medicaid: 0, state: 0, total: 0 },
+ *     2023: { federal: 0, medicaid: 0, state: 0, total: 0 },
+ *     2024: { federal: 0, medicaid: 0, state: 0, total: 0 },
  *     total: { federal: 0, medicaid: 0, state: 0, total: 0 },
  *   },
  *   quarterlyFFP: {
- *     years: {
- *       2022: {
- *         1: {
- *           combined: { dollars: 0, percent: 0 },
- *           contractors: { dollars: 0, percent: 0 },
- *           inHouse: { dollars: 0, percent: 0 }
- *         },
- *         2: {...}, // same as 1
- *         3: {...}, // same as 1
- *         4: {...}, // same as 1
- *         subtotal: {...} // same as 1
+ *     2022: {
+ *       1: {
+ *         combined: { dollars: 0, percent: 0 },
+ *         contractors: { dollars: 0, percent: 0 },
+ *         inHouse: { dollars: 0, percent: 0 }
  *       },
- *       2023: {...}, // same as 2022
- *       2024: {...}, // same as 2022
+ *       2: {...}, // same as 1
+ *       3: {...}, // same as 1
+ *       4: {...}, // same as 1
+ *       subtotal: {...} // same as 1
  *     },
+ *     2023: {...}, // same as 2022
+ *     2024: {...}, // same as 2022
  *     total: { combined: 0, contractors: 0, inHouse: 0 }
  *   }
  * }
  */
 export const defaultQuarterlyFFPObject = (years = []) => ({
   costsByFFY: {
-    years: {
-      ...arrToObj(years, () => ({
-        federal: 0,
-        medicaid: 0,
-        state: 0,
-        total: 0
-      }))
-    },
+    ...arrToObj(years, () => ({
+      federal: 0,
+      medicaid: 0,
+      state: 0,
+      total: 0
+    })),
     total: {
       federal: 0,
       medicaid: 0,
@@ -259,20 +234,18 @@ export const defaultQuarterlyFFPObject = (years = []) => ({
     }
   },
   quarterlyFFP: {
-    years: {
-      ...arrToObj(years, () => ({
-        ...arrToObj(['1', '2', '3', '4'], () => ({
-          combined: { dollars: 0, percent: 0 },
-          contractors: { dollars: 0, percent: 0 },
-          inHouse: { dollars: 0, percent: 0 }
-        })),
-        subtotal: {
-          combined: { dollars: 0, percent: 0 },
-          contractors: { dollars: 0, percent: 0 },
-          inHouse: { dollars: 0, percent: 0 }
-        }
-      }))
-    },
+    ...arrToObj(years, () => ({
+      ...arrToObj(['1', '2', '3', '4'], () => ({
+        combined: { dollars: 0, percent: 0 },
+        contractors: { dollars: 0, percent: 0 },
+        inHouse: { dollars: 0, percent: 0 }
+      })),
+      subtotal: {
+        combined: { dollars: 0, percent: 0 },
+        contractors: { dollars: 0, percent: 0 },
+        inHouse: { dollars: 0, percent: 0 }
+      }
+    })),
     total: {
       combined: 0,
       contractors: 0,
@@ -287,21 +260,21 @@ export const defaultQuarterlyFFPObject = (years = []) => ({
  * @returns the default activity totals object
  * e.g. for years: [2022, 2023, 2024] the object would look like
  * {
- *   combined: { years: { 2022: 0, 2023: 0, 2024: 0 }, total: 0 },
- *   contractors: { years: { 2022: 0, 2023: 0, 2024: 0 }, total: 0 },
- *   expenses: { years: { 2022: 0, 2023: 0, 2024: 0 }, total: 0 },
+ *   combined: { 2022: 0, 2023: 0, 2024: 0, total: 0 },
+ *   contractors: { 2022: 0, 2023: 0, 2024: 0, total: 0 },
+ *   expenses: { 2022: 0, 2023: 0, 2024: 0, total: 0 },
  *   otherFunding: {
  *     2022: { contractors: 0, expenses: 0, statePersonnel: 0, total: 0 },
  *     2023: { ... }, // same as 2022
  *     2024: { ... }, // same as 2022
  *   },
- *   statePersonnel: { years: { 2022: 0, 2023: 0, 2024: 0 }, total: 0 }
+ *   statePersonnel: { 2022: 0, 2023: 0, 2024: 0, total: 0 }
  * }
  */
 export const defaultActivityTotalsDataObject = (years = []) => ({
-  combined: { years: { ...arrToObj(years, 0) }, total: 0 },
-  contractors: { years: { ...arrToObj(years, 0) }, total: 0 },
-  expenses: { years: { ...arrToObj(years, 0) }, total: 0 },
+  combined: { ...arrToObj(years, 0), total: 0 },
+  contractors: { ...arrToObj(years, 0), total: 0 },
+  expenses: { ...arrToObj(years, 0), total: 0 },
   otherFunding: {
     ...arrToObj(years, () => ({
       contractors: 0,
@@ -310,7 +283,7 @@ export const defaultActivityTotalsDataObject = (years = []) => ({
       total: 0
     }))
   },
-  statePersonnel: { years: { ...arrToObj(years, 0) }, total: 0 }
+  statePersonnel: { ...arrToObj(years, 0), total: 0 }
 });
 
 /**
@@ -438,15 +411,15 @@ export const sumActivityTotalByCategories = ({
           (totals, year) => {
             const cost = getCostFromItemByYear(item, year) || 0;
             if (category) {
-              if (totals?.data?.[category]?.years?.[year] !== undefined) {
-                totals.data[category].years[year] += cost;
+              if (totals?.data?.[category]?.[year] !== undefined) {
+                totals.data[category][year] += cost;
               }
               if (totals?.data?.[category]?.total !== undefined) {
                 totals.data[category].total += cost;
               }
             }
-            if (totals?.data?.combined?.years?.[year] !== undefined) {
-              totals.data.combined.years[year] += cost;
+            if (totals?.data?.combined?.[year] !== undefined) {
+              totals.data.combined[year] += cost;
             }
             if (totals?.data?.combined?.total !== undefined) {
               totals.data.combined.total += cost;
@@ -527,10 +500,9 @@ export const sumCostsForFundingSourceByCategory = ({
           // we can't capture program-specific funding numbers.
           if (fundingSource) {
             if (
-              totals?.[fundingSource]?.[category]?.years?.[year]?.total !==
-              undefined
+              totals?.[fundingSource]?.[category]?.[year]?.total !== undefined
             ) {
-              totals[fundingSource][category].years[year].total += cost;
+              totals[fundingSource][category][year].total += cost;
             }
             if (
               totals?.[fundingSource]?.[category]?.total?.total !== undefined
@@ -538,29 +510,23 @@ export const sumCostsForFundingSourceByCategory = ({
               totals[fundingSource][category].total.total += cost;
             }
             if (
-              totals?.[fundingSource]?.combined?.years?.[year]?.total !==
-              undefined
+              totals?.[fundingSource]?.combined?.[year]?.total !== undefined
             ) {
-              totals[fundingSource].combined.years[year].total += cost;
+              totals[fundingSource].combined[year].total += cost;
             }
             if (totals?.[fundingSource]?.combined?.total?.total !== undefined) {
               totals[fundingSource].combined.total.total += cost;
             }
 
             if (fundingSource === 'hie' || fundingSource === 'hit') {
-              if (
-                totals?.hitAndHie?.[category]?.years?.[year]?.total !==
-                undefined
-              ) {
-                totals.hitAndHie[category].years[year].total += cost;
+              if (totals?.hitAndHie?.[category]?.[year]?.total !== undefined) {
+                totals.hitAndHie[category][year].total += cost;
               }
               if (totals?.hitAndHie?.[category]?.total?.total !== undefined) {
                 totals.hitAndHie[category].total.total += cost;
               }
-              if (
-                totals?.hitAndHie?.combined?.years?.[year]?.total !== undefined
-              ) {
-                totals.hitAndHie.combined.years[year].total += cost;
+              if (totals?.hitAndHie?.combined?.[year]?.total !== undefined) {
+                totals.hitAndHie.combined[year].total += cost;
               }
               if (totals?.hitAndHie?.combined?.total?.total !== undefined) {
                 totals.hitAndHie.combined.total.total += cost;
@@ -568,8 +534,8 @@ export const sumCostsForFundingSourceByCategory = ({
             }
           }
 
-          if (totals?.combined?.years?.[year]?.total !== undefined) {
-            totals.combined.years[year].total += cost;
+          if (totals?.combined?.[year]?.total !== undefined) {
+            totals.combined[year].total += cost;
           }
           if (totals?.combined?.total?.total !== undefined) {
             totals.combined.total.total += cost;
@@ -630,11 +596,9 @@ export const sumTotalCostsByCategory = ({
  * @returns the updated costsByFFY, e.g. if the fed split is 90/10 and
  * the total cost is $1000 and the total medicaid costs is $800, then
  * {
- *   years: {
- *     '1931': { federal: 360, medicaid: 400, state: 40, total: 500 },
- *     '1932': { federal: 180, medicaid: 200, state: 20, total: 250 },
- *     '1933': { federal: 180, medicaid: 200, state: 20, total: 250 }
- *   },
+ *   '1931': { federal: 360, medicaid: 400, state: 40, total: 500 },
+ *   '1932': { federal: 180, medicaid: 200, state: 20, total: 250 },
+ *   '1933': { federal: 180, medicaid: 200, state: 20, total: 250 },
  *   total: { federal: 720, medicaid: 800, state: 80, total: 1000 }
  * }
  */
@@ -652,14 +616,11 @@ export const sumCostsByFFY = ({
   if (costsByFFY && year && totalCost && totalMedicaidCostShares) {
     return {
       ...updatedCostsByFFY,
-      years: {
-        ...updatedCostsByFFY.years,
-        [year]: {
-          federal: totalMedicaidCostShares.fedShare,
-          medicaid: totalMedicaidCost,
-          state: totalMedicaidCostShares.stateShare,
-          total: totalCost
-        }
+      [year]: {
+        federal: totalMedicaidCostShares.fedShare,
+        medicaid: totalMedicaidCost,
+        state: totalMedicaidCostShares.stateShare,
+        total: totalCost
       },
       total: {
         federal:
@@ -701,45 +662,42 @@ export const sumShareCostsForFundingSource = ({
     // Update the three cost categories for the funding source
     if (fundingSource) {
       ['contractors', 'expenses', 'statePersonnel'].forEach(category => {
-        updatedBudget[fundingSource][category].years[year].federal +=
+        updatedBudget[fundingSource][category][year].federal +=
           costCategoryShare.fedShare[category];
         updatedBudget[fundingSource][category].total.federal +=
           costCategoryShare.fedShare[category];
 
-        updatedBudget[fundingSource][category].years[year].state +=
+        updatedBudget[fundingSource][category][year].state +=
           costCategoryShare.stateShare[category];
         updatedBudget[fundingSource][category].total.state +=
           costCategoryShare.stateShare[category];
 
-        updatedBudget[fundingSource][category].years[year].medicaid +=
+        updatedBudget[fundingSource][category][year].medicaid +=
           costCategoryShare.medicaidShare[category];
         updatedBudget[fundingSource][category].total.medicaid +=
           costCategoryShare.medicaidShare[category];
       });
 
       // Plus the subtotals for the cost categories (i.e., the Medicaid share)
-      updatedBudget[fundingSource].combined.years[year].federal +=
+      updatedBudget[fundingSource].combined[year].federal +=
         totalMedicaidCostShares.fedShare;
       updatedBudget[fundingSource].combined.total.federal +=
         totalMedicaidCostShares.fedShare;
 
-      updatedBudget[fundingSource].combined.years[year].state +=
+      updatedBudget[fundingSource].combined[year].state +=
         totalMedicaidCostShares.stateShare;
       updatedBudget[fundingSource].combined.total.state +=
         totalMedicaidCostShares.stateShare;
 
-      updatedBudget[fundingSource].combined.years[year].medicaid +=
-        totalMedicaidCost;
+      updatedBudget[fundingSource].combined[year].medicaid += totalMedicaidCost;
       updatedBudget[fundingSource].combined.total.medicaid += totalMedicaidCost;
     }
     if (fundingSource !== 'hitAndHie') {
-      updatedBudget.combined.years[year].federal +=
-        totalMedicaidCostShares.fedShare;
+      updatedBudget.combined[year].federal += totalMedicaidCostShares.fedShare;
       updatedBudget.combined.total.federal += totalMedicaidCostShares.fedShare;
-      updatedBudget.combined.years[year].state +=
-        totalMedicaidCostShares.stateShare;
+      updatedBudget.combined[year].state += totalMedicaidCostShares.stateShare;
       updatedBudget.combined.total.state += totalMedicaidCostShares.stateShare;
-      updatedBudget.combined.years[year].medicaid += totalMedicaidCost;
+      updatedBudget.combined[year].medicaid += totalMedicaidCost;
       updatedBudget.combined.total.medicaid += totalMedicaidCost;
     }
   }
@@ -778,21 +736,20 @@ export const sumMMISbyFFP = ({
     // Then do basically the same as updateCosts() above, but we only
     // need to track subtotals, not individual cost categories
     [ffpLevel, 'combined'].forEach(category => {
-      updatedBudget.mmisByFFP[category].years[year].federal +=
+      updatedBudget.mmisByFFP[category][year].federal +=
         totalMedicaidCostShares.fedShare;
       updatedBudget.mmisByFFP[category].total.federal +=
         totalMedicaidCostShares.fedShare;
 
-      updatedBudget.mmisByFFP[category].years[year].state +=
+      updatedBudget.mmisByFFP[category][year].state +=
         totalMedicaidCostShares.stateShare;
       updatedBudget.mmisByFFP[category].total.state +=
         totalMedicaidCostShares.stateShare;
 
-      updatedBudget.mmisByFFP[category].years[year].medicaid +=
-        totalMedicaidCost;
+      updatedBudget.mmisByFFP[category][year].medicaid += totalMedicaidCost;
       updatedBudget.mmisByFFP[category].total.medicaid += totalMedicaidCost;
 
-      updatedBudget.mmisByFFP[category].years[year].total += totalCost;
+      updatedBudget.mmisByFFP[category][year].total += totalCost;
       updatedBudget.mmisByFFP[category].total.total += totalCost;
     });
   }
@@ -896,9 +853,9 @@ export const sumActivityQuarterlyFFP = ({
     // this here so these values aren't affected by the percentages input
     // by the state. These totals are based only on the federal share
     // computed from the activity total costs.
-    updatedActivityFFP.years[year].subtotal[categoryCostType].dollars +=
+    updatedActivityFFP[year].subtotal[categoryCostType].dollars +=
       fedShareAmount;
-    updatedActivityFFP.years[year].subtotal.combined.dollars += fedShareAmount;
+    updatedActivityFFP[year].subtotal.combined.dollars += fedShareAmount;
 
     // Note that the grand activity total categories are just numbers, not
     // objects - we drop the percentage altogether.
@@ -915,20 +872,19 @@ export const sumActivityQuarterlyFFP = ({
       // sum the percent here because there are two categories being
       // merged into one - if we summed, the "state" percents would
       // all be doubled.
-      updatedActivityFFP.years[year][q + 1][categoryCostType].dollars += qFFP;
-      updatedActivityFFP.years[year][q + 1][categoryCostType].percent =
-        federalPct;
+      updatedActivityFFP[year][q + 1][categoryCostType].dollars += qFFP;
+      updatedActivityFFP[year][q + 1][categoryCostType].percent = federalPct;
 
       // Then the quarterly combined dollars.  We don't bother
       // with percent for combined because it doesn't make sense.
-      updatedActivityFFP.years[year][q + 1].combined.dollars += qFFP;
+      updatedActivityFFP[year][q + 1].combined.dollars += qFFP;
 
       // Fiscal year percentage. Because "expense" and "statePersonnel"
       // are combined into the "inHouse" property, we need to be careful
       // about not adding the percent multiple times.  So, only
       // add the percent if this is not an "expense" type.
       if (category !== 'expenses') {
-        updatedActivityFFP.years[year].subtotal[categoryCostType].percent +=
+        updatedActivityFFP[year].subtotal[categoryCostType].percent +=
           federalPct;
       }
     });
@@ -966,12 +922,11 @@ export const sumQuarterlyFFP = ({
     if (fundingSource) {
       // For the expense type, add the federal share for the
       // quarter and the fiscal year subtotal.
-      updatedQuarterlyFFP.years[year].subtotal[categoryCostType] +=
-        fedShareAmount;
+      updatedQuarterlyFFP[year].subtotal[categoryCostType] += fedShareAmount;
 
       // Also add the federal share to the cross-expense
       // quarterly subtotal and fiscal year subtotal
-      updatedQuarterlyFFP.years[year].subtotal.combined += fedShareAmount;
+      updatedQuarterlyFFP[year].subtotal.combined += fedShareAmount;
 
       // And finally, add it to the expense type grand
       // total and the federal share grand total
@@ -989,10 +944,10 @@ export const sumQuarterlyFFP = ({
       // program-level roll-ups.
       if (fundingSource) {
         // For the expense type, add the federal share for the quarter.
-        updatedQuarterlyFFP.years[year][q + 1][categoryCostType] += qFFP;
+        updatedQuarterlyFFP[year][q + 1][categoryCostType] += qFFP;
 
         // Also add the federal share to the cross-expense quarterly subtotal
-        updatedQuarterlyFFP.years[year][q + 1].combined += qFFP;
+        updatedQuarterlyFFP[year][q + 1].combined += qFFP;
       }
     });
   }
@@ -1009,14 +964,12 @@ export const calculateCategoryPercentages = ({ activityTotals, year } = {}) => {
   // This represents the percentage each cost category contributes to the
   // total activity cost.  This is useful for distributing the total
   // in a way that we get whole numbers and preserve sums.
-  if (activityTotals && year && activityTotals?.data?.combined?.years?.[year]) {
-    const totalCost = activityTotals?.data?.combined?.years?.[year];
+  if (activityTotals && year && activityTotals?.data?.combined?.[year]) {
+    const totalCost = activityTotals?.data?.combined?.[year];
     return [
-      (activityTotals?.data?.contractors?.years?.[year] || 0) /
-        (totalCost || 0),
-      (activityTotals?.data?.expenses?.years?.[year] || 0) / (totalCost || 0),
-      (activityTotals?.data?.statePersonnel?.years?.[year] || 0) /
-        (totalCost || 0)
+      (activityTotals?.data?.contractors?.[year] || 0) / (totalCost || 0),
+      (activityTotals?.data?.expenses?.[year] || 0) / (totalCost || 0),
+      (activityTotals?.data?.statePersonnel?.[year] || 0) / (totalCost || 0)
     ];
   }
   return [0, 0, 0];
@@ -1282,7 +1235,7 @@ export const calculateBudget = apd => {
       // of all the costs.
       years.forEach(year => {
         const totalOtherFunding = convertToNumber(allocation[year].other);
-        const totalCost = activityTotals.data.combined.years[year];
+        const totalCost = activityTotals.data.combined[year];
         const totalMedicaidCost = totalCost - totalOtherFunding;
 
         // This is the total medicaid costs broken into state and federal shares

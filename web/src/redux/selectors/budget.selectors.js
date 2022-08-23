@@ -26,7 +26,7 @@ export const selectBudgetExecutiveSummary = createSelector(
   (activities, budget) => {
     const data = activities.map(
       ({ key, name, plannedEndDate, plannedStartDate, summary }) => {
-        const { total, ...ffyCosts } = budget.activities[key].costsByFFY;
+        const { total, years } = budget.activities[key].costsByFFY;
 
         return {
           key,
@@ -36,7 +36,7 @@ export const selectBudgetExecutiveSummary = createSelector(
           combined: total.total,
           federal: total.federal,
           medicaid: total.medicaid,
-          ffys: { ...ffyCosts }
+          ffys: years
         };
       }
     );
@@ -50,12 +50,12 @@ export const selectBudgetGrandTotal = createSelector(
   ({
     combined: {
       total: { federal, medicaid, total },
-      ...ffyCosts
+      years
     }
   }) => ({
     combined: total,
     federal,
     medicaid,
-    ffys: { ...ffyCosts }
+    ffys: { ...years }
   })
 );

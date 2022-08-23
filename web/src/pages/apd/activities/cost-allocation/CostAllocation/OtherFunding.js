@@ -99,7 +99,7 @@ const OtherFunding = ({
               <tr className="budget-table--subtotal budget-table--row__highlight">
                 <td className="title">Total Computable Medicaid Cost</td>
                 <td colSpan="2" className="budget-table--number">
-                  <Dollars>{years[ffy].medicaidShare}</Dollars>
+                  <Dollars>{years[ffy].medicaid}</Dollars>
                 </td>
               </tr>
             </tbody>

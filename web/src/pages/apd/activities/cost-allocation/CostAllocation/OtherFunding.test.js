@@ -33,12 +33,12 @@ describe('<OtherFunding />', () => {
         1066: {
           totalCost: 5459076,
           otherFunding: 4322,
-          medicaidShare: 3450509
+          medicaid: 3450509
         },
         1067: {
           totalCost: 5459077,
           otherFunding: 4323,
-          medicaidShare: 3450510
+          medicaid: 3450510
         }
       }
     },

@@ -33,32 +33,20 @@ const fedStateSplit = new mongoose.Schema(
 const fedStateSplitByCost = new mongoose.Schema(
   {
     statePersonnel: {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
+      type: Map,
+      of: fedStateSplit
     },
     contractors: {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
+      type: Map,
+      of: fedStateSplit
     },
     expenses: {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
+      type: Map,
+      of: fedStateSplit
     },
     combined: {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
+      type: Map,
+      of: fedStateSplit
     }
   },
   { _id: false }
@@ -95,11 +83,8 @@ const costPercentByCostTypeByQuarter = new mongoose.Schema(
 
 const activities = new mongoose.Schema({
   costsByFFY: {
-    years: {
-      type: Map,
-      of: fedStateSplit
-    },
-    total: fedStateSplit
+    type: Map,
+    of: fedStateSplit
   },
   quarterlyFFP: {
     years: {
@@ -113,14 +98,14 @@ const activities = new mongoose.Schema({
 const budgetSchema = new mongoose.Schema({
   federalShareByFFYQuarter: {
     hitAndHie: {
-      year: {
+      years: {
         type: Map,
         of: shareByCostTypeByQuarter
       },
       total: shareByCostType
     },
     mmis: {
-      year: {
+      years: {
         type: Map,
         of: shareByCostTypeByQuarter
       },
@@ -133,47 +118,29 @@ const budgetSchema = new mongoose.Schema({
   hitAndHie: fedStateSplitByCost,
   mmisByFFP: {
     '90-10': {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
-    },
-    '75-25': {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
-    },
-    '50-50': {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
-    },
-    '0-100': {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
-    },
-    combined: {
-      years: {
-        type: Map,
-        of: fedStateSplit
-      },
-      total: fedStateSplit
-    }
-  },
-  combined: {
-    years: {
       type: Map,
       of: fedStateSplit
     },
-    total: fedStateSplit
+    '75-25': {
+      type: Map,
+      of: fedStateSplit
+    },
+    '50-50': {
+      type: Map,
+      of: fedStateSplit
+    },
+    '0-100': {
+      type: Map,
+      of: fedStateSplit
+    },
+    combined: {
+      type: Map,
+      of: fedStateSplit
+    }
+  },
+  combined: {
+    type: Map,
+    of: fedStateSplit
   },
   activityTotals: [
     {
@@ -185,32 +152,20 @@ const budgetSchema = new mongoose.Schema({
       },
       data: {
         combined: {
-          years: {
-            type: Map,
-            of: Number
-          },
-          total: Number
+          type: Map,
+          of: Number
         },
         contractors: {
-          years: {
-            type: Map,
-            of: Number
-          },
-          total: Number
+          type: Map,
+          of: Number
         },
         expenses: {
-          years: {
-            type: Map,
-            of: Number
-          },
-          total: Number
+          type: Map,
+          of: Number
         },
         statePersonnel: {
-          years: {
-            type: Map,
-            of: Number
-          },
-          total: Number
+          type: Map,
+          of: Number
         },
         otherFunding: {
           type: Map,

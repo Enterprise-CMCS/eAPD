@@ -114,22 +114,28 @@ describe('executive summary component', () => {
         activities: {
           a1: {
             costsByFFY: {
-              1: 'a1 ffy 1 costs',
-              2: 'a1 ffy 2 costs',
+              years: {
+                1: 'a1 ffy 1 costs',
+                2: 'a1 ffy 2 costs'
+              },
               total: { federal: 1050, medicaid: 1150, total: 950 }
             }
           },
           a2: {
             costsByFFY: {
-              1: 'a2 ffy 1 costs',
-              2: 'a2 ffy 2 costs',
+              years: {
+                1: 'a2 ffy 1 costs',
+                2: 'a2 ffy 2 costs'
+              },
               total: { federal: 410, medicaid: 510, total: 310 }
             }
           }
         },
         combined: {
-          1: 'ffy 1 combined costs',
-          2: 'ffy 2 combined costs',
+          years: {
+            1: 'ffy 1 combined costs',
+            2: 'ffy 2 combined costs'
+          },
           total: { federal: 1360, medicaid: 1460, total: 1260 }
         }
       }

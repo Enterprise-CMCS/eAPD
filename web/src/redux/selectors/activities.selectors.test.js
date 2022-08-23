@@ -161,13 +161,13 @@ describe('activities state selectors', () => {
             costsByFFY: {
               1990: {
                 federal: 0,
-                medicaidShare: 0,
+                medicaid: 0,
                 state: 0,
                 total: 0
               },
               1991: {
                 federal: 0,
-                medicaidShare: 0,
+                medicaid: 0,
                 state: 0,
                 total: 0
               }
@@ -177,13 +177,13 @@ describe('activities state selectors', () => {
             costsByFFY: {
               1990: {
                 federal: 2222,
-                medicaidShare: 3333,
+                medicaid: 3333,
                 state: 4444,
                 total: 5555
               },
               1991: {
                 federal: 6666,
-                medicaidShare: 7777,
+                medicaid: 7777,
                 state: 8888,
                 total: 9999
               }

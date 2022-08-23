@@ -5,12 +5,8 @@ common/node_modules
 e2e/node_modules
 web/node_modules
 
-# misc
-mongodata/*
-pgdata/*
 .DS_Store
 .dccache
-.circleci
 .editorconfig
 .env
 .idea
@@ -18,15 +14,19 @@ pgdata/*
 .vscode
 .yarn
 .yarnrc.yml
+
 Makefile
 npm-debug.log*
 schema.sql
+mongodata/*
+pgdata/*
 
 api/.env
 api/.nyc_output
 api/coverage
 api/coverage-endpoint
 api/coverage-unit
+api/dist
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
 api/hitech_api*.log*
@@ -45,6 +45,7 @@ e2e/cypress/videos/*
 web/.jest-test-results.json
 web/coverage
 web/dist
-web/_dev
 web/docs-build
+web/storybook-static/*
 web/reports
+
