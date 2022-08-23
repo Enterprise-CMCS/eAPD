@@ -1,155 +1,169 @@
 {
   "afterKeyPersonnelNoCosts": {
-    "budgetAndFFP": ["State Staff Subtotal", "$0"],
-    "CACTable": {"HIT Total": ["$0"]},
-    "FFPActivitiesTable": {"State Staff": ["$0", "$0", "$0"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$0"], ["State Staff Subtotal", "$0"]],
+    "CACTable": [{"HIT Total": ["$0"]}, {"HIT Total": ["$0"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$0", "$0", "$0"]}, {"State Staff": ["$0", "$0", "$0"]}],
     "summaryBudgetTotals": {
       "FFY 2022": ["$0", "$0", "$0"],
       "FFY 2023": ["$0", "$0", "$0"],
       "Total": ["$0", "$0", "$0"]
-    }
+    },
+    "noFFP": false
   },
 
   "afterKeyPersonnelWithCosts": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$50,000"], ["State Staff Subtotal", "$50,000"]],
+    "CACTable": [{"HIT Total": ["$50,000"]}, {"HIT Total": ["$50,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$50,000", "$0", "$50,000"]}, {"State Staff": ["$50,000", "$0", "$50,000"]}],
     "summaryBudgetTotals": {
       "FFY 2022": ["$50,000", "$0", "$50,000"],
       "FFY 2023": ["$50,000", "$0", "$50,000"],
       "Total": ["$100,000", "$0", "$100,000"]
-    }
+    },
+    "noFFP": false
   },
 
   "afterStateStaffHIT": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": false
   },
 
   "afterStateExpenseHIT": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": false
   },
 
   "afterContractorHIT": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": false
   },
 
   "afterStateStaffHIE": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$110,012"], ["State Staff Subtotal", "$111,102"]],
+    "CACTable": [{"HIE Total": ["$110,012"]}, {"HIE Total": ["$111,102"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$110,012", "$0", "$110,012"]}, {"State Staff": ["$111,102", "$0", "$111,102"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$463,012", "$0", "$463,012"],
+      "FFY 2023": ["$488,102", "$0", "$488,102"],
+      "Total": ["$951,114", "$0", "$951,114"]
+    },
+    "noFFP": false
   },
 
   "afterStateExpenseHIE": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": false
   },
 
   "afterContractorHIE": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": false
   },
 
   "afterStateStaffMMIS": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$84,912"], ["State Staff Subtotal", "$172,068"]],
+    "CACTable": [{"MMIS Total": ["$84,912"]}, {"MMIS Total": ["$172,068"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$84,912", "$0", "$84,912"]}, {"State Staff": ["$172,068", "$0", "$172,068"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$547,924", "$0", "$547,924"],
+      "FFY 2023": ["$660,170", "$0", "$660,170"],
+      "Total": ["$1,208,094", "$0", "$1,208,094"]
+    },
+    "noFFP": false
   },
 
   "afterStateExpenseMMIS": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": false
   },
 
   "afterContractorMMIS": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": false
   },
 
   "afterStateStaffNoFFP": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$303,000"], ["State Staff Subtotal", "$327,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$850,924", "$0", "$850,924"],
+      "FFY 2023": ["$987,170", "$0", "$987,170"],
+      "Total": ["$1,838,094", "$0", "$1,838,094"]
+    },
+    "noFFP": true
   },
 
   "afterStateExpenseNoFFP": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": true
   },
 
   "afterContractorNoFFP": {
-    "budgetAndFFP": ["State Staff Subtotal", "$50,000"],
-    "CACTable": {"HIT Total": ["$50,000"]},
-    "FFPActivitiesTable": {"State Staff": ["$50,000", "$0", "$50,000"]},
+    "budgetAndFFP": [["State Staff Subtotal", "$353,000"], ["State Staff Subtotal", "$377,000"]],
+    "CACTable": [{"HIT Total": ["$353,000"]}, {"HIT Total": ["$377,000"]}],
+    "FFPActivitiesTable": [{"State Staff": ["$353,000", "$0", "$353,000"]}, {"State Staff": ["$377,000", "$0", "$377,000"]}],
     "summaryBudgetTotals": {
-      "FFY 2022": ["$50,000", "$0", "$50,000"],
-      "FFY 2023": ["$50,000", "$0", "$50,000"],
-      "Total": ["$100,000", "$0", "$100,000"]
-    }
+      "FFY 2022": ["$353,000", "$0", "$353,000"],
+      "FFY 2023": ["$377,000", "$0", "$377,000"],
+      "Total": ["$730,000", "$0", "$730,000"]
+    },
+    "noFFP": true
   }
 }
