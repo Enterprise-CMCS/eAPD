@@ -5,7 +5,7 @@ import Header from '../layout/header/Header';
 import Footer from '../layout/footer/Footer';
 import routes from '../pages/mainRoutesList';
 import SessionEndingAlert from './SessionEndingAlert';
-import { pageView } from '../util/analytics'; 
+import { pageView } from '../util/analytics';
 
 const cardRoutes = routes.filter(r => r.isCard).map(r => r.path);
 
