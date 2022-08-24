@@ -18,11 +18,11 @@ web/node_modules
 
 Makefile
 __files
-npm-debug.log*
-schema.sql
-pgdata/*
 mongodata/*
 notes.md
+npm-debug.log*
+pgdata/*
+schema.sql
 
 api/.env
 api/.nyc_output
@@ -32,9 +32,10 @@ api/coverage-unit
 api/dist
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
-api/hitech_api*.log*
 api/seeds/test/tokens.json
 api/test-data/files
+
+bin
 
 common/coverage
 common/dist
@@ -48,6 +49,7 @@ e2e/tokens.json
 
 web/.jest-test-results.json
 web/coverage
+web/_dev
 web/dist
 web/docs-build
 web/storybook-static/*
