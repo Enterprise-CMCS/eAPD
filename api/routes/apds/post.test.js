@@ -173,7 +173,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
               2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
             }
-          }          
+          }
         },
         keyStatePersonnel: {
           medicaidDirector: {

@@ -61,5 +61,5 @@ module.exports.states = [
   { id: 'vi', name: 'U.S. Virgin Islands' },
 
   // Federal
-  { id: 'fd', name: 'Federal'}
+  { id: 'fd', name: 'Federal' }
 ];

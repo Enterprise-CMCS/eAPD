@@ -9,18 +9,24 @@ const schemas = Joi.object({
       'string.required': 'Provide the name of the State Medicaid Director.'
     }),
     email: Joi.string().required().messages({
-      'string.base': 'Provide the email address of the State Medicaid Director.',
-      'string.empty': 'Provide the email address of the State Medicaid Director.'
+      'string.base':
+        'Provide the email address of the State Medicaid Director.',
+      'string.empty':
+        'Provide the email address of the State Medicaid Director.'
     }),
     phone: Joi.string().required().messages({
-      'string.base': 'Provide a valid phone number for the State Medicaid Director.',
-      'string.empty': 'Provide a valid phone number for the State Medicaid Director.'
+      'string.base':
+        'Provide a valid phone number for the State Medicaid Director.',
+      'string.empty':
+        'Provide a valid phone number for the State Medicaid Director.'
     })
   }),
   medicaidOffice: Joi.object({
     address1: Joi.string().min(1).required().messages({
-      'string.base': 'Provide a mailing street address for the Medicaid office.',
-      'string.empty': 'Provide a mailing street address for the Medicaid office.'
+      'string.base':
+        'Provide a mailing street address for the Medicaid office.',
+      'string.empty':
+        'Provide a mailing street address for the Medicaid office.'
     }),
     city: Joi.string().min(1).required().messages({
       'string.base': 'Provide a city name.',

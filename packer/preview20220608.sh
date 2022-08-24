@@ -22,6 +22,7 @@ gpasswd -a ec2-user eapd
 mkdir /app
 mkdir /app/api
 mkdir /app/web
+mkdir /app/common
 
 # Create app logs and directories
 mkdir -p /app/api/logs

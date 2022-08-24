@@ -121,7 +121,7 @@ tap.test('APD data initializer', async test => {
           1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
           1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
         }
-      }      
+      }
     },
     keyStatePersonnel: {
       medicaidDirector: {
@@ -136,7 +136,7 @@ tap.test('APD data initializer', async test => {
         state: '',
         zip: ''
       },
-      keyPersonnel: [],      
+      keyPersonnel: []
     },
     previousActivities: {
       previousActivitySummary: '',

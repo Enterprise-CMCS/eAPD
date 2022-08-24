@@ -38,6 +38,11 @@ export const testDefaultAssurancesAndCompliance = () => {
       });
     });
 
+    cy.findAllByText('Select yes or no', {
+      selector: 'span',
+      ignore: 'div'
+    }).should('have.length', 15);
+
     cy.waitForSave();
   });
 
@@ -89,6 +94,11 @@ export const testAssurancesAndComplianceWithData = () => {
       .parent()
       .as('assurancesComplianceDiv');
 
+    cy.findAllByText('Select yes or no', {
+      selector: 'span',
+      ignore: 'div'
+    }).should('have.length', 15);
+
     categories.forEach(category => {
       const val = assurancesAndCompliance[category];
 
@@ -103,6 +113,9 @@ export const testAssurancesAndComplianceWithData = () => {
         );
       });
     });
+
+    cy.contains('Select yes or no').should('not.exist');
+
     cy.waitForSave();
   });
 
