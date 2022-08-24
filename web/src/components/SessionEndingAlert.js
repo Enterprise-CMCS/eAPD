@@ -1,6 +1,6 @@
 import { Dialog, Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import Countdown, { zeroPad } from 'react-countdown';
 import { v4 as uuidv4 } from 'uuid';
@@ -25,10 +25,18 @@ const SessionEndingAlert = ({
 
   /* eslint-disable react/prop-types */
   const createTimer = ({ minutes, seconds }) => {
+    if (minutes <= 1) {
+      return (
+        <span id="session-timeout" aria-live="polite">
+          Your session will end in less than 1 minute. If you’d like to keep
+          working, select <em>stay signed in</em>.
+        </span>
+      );
+    }
     return (
-      <span>
-        Your session will end in {zeroPad(minutes)}:{zeroPad(seconds)} minutes.
-        If you’d like to keep working, select <br /> <em>stay signed in</em>.
+      <span id="session-timeout" aria-live="polite">
+        Your session will end in {zeroPad(minutes)} minutes. If you’d like to
+        keep working, select <em>stay signed in</em>.
       </span>
     );
   };
@@ -41,7 +49,7 @@ const SessionEndingAlert = ({
   return (
     <div
       aria-hidden={!isSessionEnding}
-      aria-live="polite"
+      // aria-live="polite"
       className={`alert--session-expiring ${className}`}
     >
       <div id="session-ending-modal" />
@@ -105,7 +113,7 @@ SessionEndingAlert.propTypes = {
 const mapStateToProps = ({
   auth: { isSessionEnding, isExtendingSession, isLoggingOut, expiresAt }
 }) => ({
-  isSessionEnding,
+  isSessionEnding: true,
   isExtendingSession,
   isLoggingOut,
   expiresAt
