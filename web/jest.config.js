@@ -11,8 +11,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   snapshotSerializers: ['enzyme-to-json/serializer'],
   transform: {
-    '\\.[jt]sx?$': 'babel-jest',
-    '\\.[jt]s?$': 'babel-jest',
+    '^.+\\.jsx?$': 'babel-jest',
     '\\.yaml$': 'yaml-jest',
     '^.+\\.mdx$': '@storybook/addon-docs/jest-transform-mdx'
   },
@@ -20,7 +19,7 @@ module.exports = {
     'node_modules/(?!(d3-format|d3-geo|d3-array)/)',
     '\\.cy\\.js$'
   ],
-  moduleFileExtensions: ['js', 'yaml'],
+  moduleFileExtensions: ['js', 'jsx', 'yaml'],
   collectCoverageFrom: [
     '**/*.{js,jsx}',
     '!**/*.story.{js,jsx}',
