@@ -1,6 +1,5 @@
-const { presets, plugins } = require('../web/babel.config');
+const defaultConfigs = require('../babel.config');
 
 module.exports = {
-  presets,
-  plugins
+  ...defaultConfigs
 };
