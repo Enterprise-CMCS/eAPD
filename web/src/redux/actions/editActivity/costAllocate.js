@@ -42,7 +42,7 @@ export const setFFPForInHouseCostsForFiscalQuarter =
   (activityIndex, year, quarter, ffpPercent) => dispatch => {
     dispatch({
       type: EDIT_APD,
-      path: `/activities/${activityIndex}/quarterlyFFP/${year}/${quarter}/inHouse`,
+      path: `/activities/${activityIndex}/quarterlyFFP/years/${year}/${quarter}/inHouse`,
       value: ffpPercent
     });
     dispatch(updateBudget());
@@ -52,7 +52,7 @@ export const setFFPForContractorCostsForFiscalQuarter =
   (activityIndex, year, quarter, ffpPercent) => dispatch => {
     dispatch({
       type: EDIT_APD,
-      path: `/activities/${activityIndex}/quarterlyFFP/${year}/${quarter}/contractors`,
+      path: `/activities/${activityIndex}/quarterlyFFP/years/${year}/${quarter}/contractors`,
       value: ffpPercent
     });
     dispatch(updateBudget());

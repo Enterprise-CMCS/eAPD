@@ -97,25 +97,29 @@ export const defaultFederalShareByFFYQuarterObject = (years = []) =>
   years.reduce(
     (o, year) => ({
       ...o,
-      [year]: [1, 2, 3, 4].reduce(
-        (q, quarter) => ({
-          ...q,
-          [quarter]: {
-            inHouse: 0,
-            contractors: 0,
-            combined: 0
+      years: {
+        ...o.years,
+        [year]: [1, 2, 3, 4].reduce(
+          (q, quarter) => ({
+            ...q,
+            [quarter]: {
+              inHouse: 0,
+              contractors: 0,
+              combined: 0
+            }
+          }),
+          {
+            subtotal: {
+              inHouse: 0,
+              contractors: 0,
+              combined: 0
+            }
           }
-        }),
-        {
-          subtotal: {
-            inHouse: 0,
-            contractors: 0,
-            combined: 0
-          }
-        }
-      )
+        )
+      }
     }),
     {
+      years: {},
       total: {
         inHouse: 0,
         contractors: 0,
@@ -132,7 +136,9 @@ export const defaultFederalShareByFFYQuarterObject = (years = []) =>
  * {
  *   federalShareByFFYQuarter: {
  *     hitAndHie: {
- *       2022: {...}, 2023: {...}, 2024: {...}, total: {...}
+ *       years: {
+ *         2022: {...}, 2023: {...}, 2024: {...}, total: {...}
+ *       }
  *       // see defaultFederalShareByFFYQuarterObject for details
  *     },
  *     mmis: {...} // same as hitAndHie
@@ -201,16 +207,18 @@ export const defaultBudgetObject = (years = []) => ({
  *     total: { federal: 0, medicaid: 0, state: 0, total: 0 },
  *   },
  *   quarterlyFFP: {
- *     2022: {
- *       1: {
- *         combined: { dollars: 0, percent: 0 },
- *         contractors: { dollars: 0, percent: 0 },
- *         inHouse: { dollars: 0, percent: 0 }
- *       },
- *       2: {...}, // same as 1
- *       3: {...}, // same as 1
- *       4: {...}, // same as 1
- *       subtotal: {...} // same as 1
+ *     years:  {
+ *       2022: {
+ *         1: {
+ *           combined: { dollars: 0, percent: 0 },
+ *           contractors: { dollars: 0, percent: 0 },
+ *           inHouse: { dollars: 0, percent: 0 }
+ *         },
+ *         2: {...}, // same as 1
+ *         3: {...}, // same as 1
+ *         4: {...}, // same as 1
+ *         subtotal: {...} // same as 1
+ *       }
  *     },
  *     2023: {...}, // same as 2022
  *     2024: {...}, // same as 2022
@@ -234,18 +242,20 @@ export const defaultQuarterlyFFPObject = (years = []) => ({
     }
   },
   quarterlyFFP: {
-    ...arrToObj(years, () => ({
-      ...arrToObj(['1', '2', '3', '4'], () => ({
-        combined: { dollars: 0, percent: 0 },
-        contractors: { dollars: 0, percent: 0 },
-        inHouse: { dollars: 0, percent: 0 }
-      })),
-      subtotal: {
-        combined: { dollars: 0, percent: 0 },
-        contractors: { dollars: 0, percent: 0 },
-        inHouse: { dollars: 0, percent: 0 }
-      }
-    })),
+    years: {
+      ...arrToObj(years, () => ({
+        ...arrToObj(['1', '2', '3', '4'], () => ({
+          combined: { dollars: 0, percent: 0 },
+          contractors: { dollars: 0, percent: 0 },
+          inHouse: { dollars: 0, percent: 0 }
+        })),
+        subtotal: {
+          combined: { dollars: 0, percent: 0 },
+          contractors: { dollars: 0, percent: 0 },
+          inHouse: { dollars: 0, percent: 0 }
+        }
+      }))
+    },
     total: {
       combined: 0,
       contractors: 0,
@@ -853,9 +863,9 @@ export const sumActivityQuarterlyFFP = ({
     // this here so these values aren't affected by the percentages input
     // by the state. These totals are based only on the federal share
     // computed from the activity total costs.
-    updatedActivityFFP[year].subtotal[categoryCostType].dollars +=
+    updatedActivityFFP.years[year].subtotal[categoryCostType].dollars +=
       fedShareAmount;
-    updatedActivityFFP[year].subtotal.combined.dollars += fedShareAmount;
+    updatedActivityFFP.years[year].subtotal.combined.dollars += fedShareAmount;
 
     // Note that the grand activity total categories are just numbers, not
     // objects - we drop the percentage altogether.
@@ -872,19 +882,20 @@ export const sumActivityQuarterlyFFP = ({
       // sum the percent here because there are two categories being
       // merged into one - if we summed, the "state" percents would
       // all be doubled.
-      updatedActivityFFP[year][q + 1][categoryCostType].dollars += qFFP;
-      updatedActivityFFP[year][q + 1][categoryCostType].percent = federalPct;
+      updatedActivityFFP.years[year][q + 1][categoryCostType].dollars += qFFP;
+      updatedActivityFFP.years[year][q + 1][categoryCostType].percent =
+        federalPct;
 
       // Then the quarterly combined dollars.  We don't bother
       // with percent for combined because it doesn't make sense.
-      updatedActivityFFP[year][q + 1].combined.dollars += qFFP;
+      updatedActivityFFP.years[year][q + 1].combined.dollars += qFFP;
 
       // Fiscal year percentage. Because "expense" and "statePersonnel"
       // are combined into the "inHouse" property, we need to be careful
       // about not adding the percent multiple times.  So, only
       // add the percent if this is not an "expense" type.
       if (category !== 'expenses') {
-        updatedActivityFFP[year].subtotal[categoryCostType].percent +=
+        updatedActivityFFP.years[year].subtotal[categoryCostType].percent +=
           federalPct;
       }
     });
@@ -922,11 +933,12 @@ export const sumQuarterlyFFP = ({
     if (fundingSource) {
       // For the expense type, add the federal share for the
       // quarter and the fiscal year subtotal.
-      updatedQuarterlyFFP[year].subtotal[categoryCostType] += fedShareAmount;
+      updatedQuarterlyFFP.years[year].subtotal[categoryCostType] +=
+        fedShareAmount;
 
       // Also add the federal share to the cross-expense
       // quarterly subtotal and fiscal year subtotal
-      updatedQuarterlyFFP[year].subtotal.combined += fedShareAmount;
+      updatedQuarterlyFFP.years[year].subtotal.combined += fedShareAmount;
 
       // And finally, add it to the expense type grand
       // total and the federal share grand total
@@ -944,10 +956,10 @@ export const sumQuarterlyFFP = ({
       // program-level roll-ups.
       if (fundingSource) {
         // For the expense type, add the federal share for the quarter.
-        updatedQuarterlyFFP[year][q + 1][categoryCostType] += qFFP;
+        updatedQuarterlyFFP.years[year][q + 1][categoryCostType] += qFFP;
 
         // Also add the federal share to the cross-expense quarterly subtotal
-        updatedQuarterlyFFP[year][q + 1].combined += qFFP;
+        updatedQuarterlyFFP.years[year][q + 1].combined += qFFP;
       }
     });
   }

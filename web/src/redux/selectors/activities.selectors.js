@@ -116,7 +116,7 @@ export const selectActivityCostSummary = createSelector(
           federalPercent: 0,
           federalShare: budget.costsByFFY[year].federal,
           keyPersonnel: keyPersonnel[year],
-          medicaidShare: budget.costsByFFY[year].medicaidShare,
+          medicaidShare: budget.costsByFFY[year].medicaid,
           nonPersonnel: activity.expenses.map(e => ({
             description: e.category,
             totalCost: e.years[year],
@@ -170,7 +170,7 @@ export const selectActivityCostSummary = createSelector(
 
 export const makeSelectCostAllocateFFPBudget = () =>
   createSelector([selectApdData, selectBudgetForActivity], (apd, budget) => ({
-    quarterlyFFP: budget ? budget.quarterlyFFP : null,
+    quarterlyFFP: budget ? budget?.quarterlyFFP?.years : null,
     years: apd.years
   }));
 

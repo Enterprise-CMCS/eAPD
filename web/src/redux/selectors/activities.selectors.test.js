@@ -361,7 +361,9 @@ describe('activities state selectors', () => {
           apd: { data: { years: ['1991', '1992'] } },
           budget: {
             activities: {
-              'activity key': { quarterlyFFP: 'quarterly ffp budget' }
+              'activity key': {
+                quarterlyFFP: { years: 'quarterly ffp budget' }
+              }
             }
           }
         },

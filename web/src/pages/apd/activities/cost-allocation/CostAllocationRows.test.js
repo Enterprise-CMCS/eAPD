@@ -31,7 +31,7 @@ const props = {
           units: '100% time'
         }
       ],
-      medicaid: 1003,
+      medicaidShare: 1003,
       nonPersonnel: [
         {
           description: 'costly costs',
@@ -81,7 +81,7 @@ const props = {
           units: '100% time'
         }
       ],
-      medicaid: 7003,
+      medicaidShare: 7003,
       nonPersonnel: [
         {
           description: 'costly costs',

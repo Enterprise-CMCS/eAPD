@@ -119,7 +119,11 @@ describe('the cost allocation quarterly FFP component', () => {
   it('maps state to props', () => {
     const state = {
       apd: { data: { years } },
-      budget: { activities: { 'activity key': { quarterlyFFP } } }
+      budget: {
+        activities: {
+          'activity key': { quarterlyFFP: { years: quarterlyFFP } }
+        }
+      }
     };
 
     const mapStateToProps = makeMapStateToProps();

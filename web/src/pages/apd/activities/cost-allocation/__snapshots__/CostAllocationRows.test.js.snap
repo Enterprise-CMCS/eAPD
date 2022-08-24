@@ -50,7 +50,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
                 "units": "100% time",
               },
             ],
-            "medicaid": 1003,
+            "medicaidShare": 1003,
             "nonPersonnel": Array [
               Object {
                 "description": "costly costs",
@@ -100,7 +100,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
                 "units": "100% time",
               },
             ],
-            "medicaid": 7003,
+            "medicaidShare": 7003,
             "nonPersonnel": Array [
               Object {
                 "description": "costly costs",
@@ -571,7 +571,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
                 "units": "100% time",
               },
             ],
-            "medicaid": 1003,
+            "medicaidShare": 1003,
             "nonPersonnel": Array [
               Object {
                 "description": "costly costs",
@@ -621,7 +621,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
                 "units": "100% time",
               },
             ],
-            "medicaid": 7003,
+            "medicaidShare": 7003,
             "nonPersonnel": Array [
               Object {
                 "description": "costly costs",

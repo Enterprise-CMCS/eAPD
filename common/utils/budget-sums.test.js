@@ -393,50 +393,54 @@ describe('budget summing methods', () => {
       const expected = {
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           }
@@ -591,50 +595,54 @@ describe('budget summing methods', () => {
         budget: {
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             }
@@ -803,50 +811,54 @@ describe('budget summing methods', () => {
       const expected = {
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           }
@@ -1001,50 +1013,54 @@ describe('budget summing methods', () => {
         budget: {
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             }
@@ -1213,50 +1229,54 @@ describe('budget summing methods', () => {
       const expected = {
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           }
@@ -1411,50 +1431,54 @@ describe('budget summing methods', () => {
         budget: {
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             }
@@ -1631,50 +1655,54 @@ describe('budget summing methods', () => {
       const expected = {
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           }
@@ -1829,50 +1857,54 @@ describe('budget summing methods', () => {
         budget: {
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             }
@@ -2052,50 +2084,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -2287,50 +2323,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -2485,50 +2525,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -2705,50 +2749,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -2903,50 +2951,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -3123,50 +3175,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -3321,50 +3377,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -3672,50 +3732,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -3870,50 +3934,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -4093,50 +4161,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -4291,50 +4363,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -4514,50 +4590,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -4712,50 +4792,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -4935,50 +5019,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -5133,50 +5221,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -5357,50 +5449,54 @@ describe('budget summing methods', () => {
       const expected = {
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           }
@@ -5555,50 +5651,54 @@ describe('budget summing methods', () => {
         budget: {
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             }
@@ -5766,50 +5866,54 @@ describe('budget summing methods', () => {
       const expected = {
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { inHouse: 0, contractors: 0, combined: 0 }
           }
@@ -5964,50 +6068,54 @@ describe('budget summing methods', () => {
         budget: {
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { inHouse: 0, contractors: 0, combined: 0 }
             }
@@ -6190,50 +6298,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -6388,50 +6500,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -6617,50 +6733,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -6815,50 +6935,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -7044,50 +7168,54 @@ describe('budget summing methods', () => {
         },
         federalShareByFFYQuarter: {
           hitAndHie: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           },
           mmis: {
-            2017: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2018: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-            },
-            2019: {
-              1: { inHouse: 0, contractors: 0, combined: 0 },
-              2: { inHouse: 0, contractors: 0, combined: 0 },
-              3: { inHouse: 0, contractors: 0, combined: 0 },
-              4: { inHouse: 0, contractors: 0, combined: 0 },
-              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
             },
             total: { contractors: 0, inHouse: 0, combined: 0 }
           }
@@ -7242,50 +7370,54 @@ describe('budget summing methods', () => {
           },
           federalShareByFFYQuarter: {
             hitAndHie: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             },
             mmis: {
-              2017: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2018: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-              },
-              2019: {
-                1: { inHouse: 0, contractors: 0, combined: 0 },
-                2: { inHouse: 0, contractors: 0, combined: 0 },
-                3: { inHouse: 0, contractors: 0, combined: 0 },
-                4: { inHouse: 0, contractors: 0, combined: 0 },
-                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
               },
               total: { contractors: 0, inHouse: 0, combined: 0 }
             }
@@ -7470,191 +7602,8 @@ describe('budget summing methods', () => {
 
     test('contracts for 2017, no previous values', () => {
       const expected = {
-        2017: {
-          1: {
-            combined: { dollars: 800, percent: 0 },
-            contractors: { dollars: 800, percent: 0.4 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          2: {
-            combined: { dollars: 400, percent: 0 },
-            contractors: { dollars: 400, percent: 0.2 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          3: {
-            combined: { dollars: 600, percent: 0 },
-            contractors: { dollars: 600, percent: 0.3 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          4: {
-            combined: { dollars: 200, percent: 0 },
-            contractors: { dollars: 200, percent: 0.1 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          subtotal: {
-            combined: { dollars: 2000, percent: 0 },
-            contractors: { dollars: 2000, percent: 1.0000000000000002 },
-            inHouse: { dollars: 0, percent: 0 }
-          }
-        },
-        2018: {
-          1: {
-            combined: { dollars: 0, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          2: {
-            combined: { dollars: 0, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          3: {
-            combined: { dollars: 0, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          4: {
-            combined: { dollars: 0, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          subtotal: {
-            combined: { dollars: 0, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 0, percent: 0 }
-          }
-        },
-        total: { combined: 2000, contractors: 2000, inHouse: 0 }
-      };
-      const actual = sumActivityQuarterlyFFP({
-        activityFFP: {
-          2017: {
-            1: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            },
-            2: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            },
-            3: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            },
-            4: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            },
-            subtotal: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            }
-          },
-          2018: {
-            1: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            },
-            2: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            },
-            3: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            },
-            4: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            },
-            subtotal: {
-              combined: { dollars: 0, percent: 0 },
-              contractors: { dollars: 0, percent: 0 },
-              inHouse: { dollars: 0, percent: 0 }
-            }
-          },
-          total: { combined: 0, contractors: 0, inHouse: 0 }
-        },
-        fedShareAmount: 2000,
-        category: 'contractors',
-        year: 2017,
-        quarterlyInfo: {
-          federalPcts: [0.4, 0.2, 0.3, 0.1],
-          qFFPs: [800, 400, 600, 200]
-        }
-      });
-      expect(actual).toEqual(expected);
-    });
-
-    test('expenses for 2018 with 2017 contractors values', () => {
-      const expected = {
-        2017: {
-          1: {
-            combined: { dollars: 800, percent: 0 },
-            contractors: { dollars: 800, percent: 0.4 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          2: {
-            combined: { dollars: 400, percent: 0 },
-            contractors: { dollars: 400, percent: 0.2 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          3: {
-            combined: { dollars: 600, percent: 0 },
-            contractors: { dollars: 600, percent: 0.3 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          4: {
-            combined: { dollars: 200, percent: 0 },
-            contractors: { dollars: 200, percent: 0.1 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          subtotal: {
-            combined: { dollars: 2000, percent: 0 },
-            contractors: { dollars: 2000, percent: 1.0000000000000002 },
-            inHouse: { dollars: 0, percent: 0 }
-          }
-        },
-        2018: {
-          1: {
-            combined: { dollars: 250, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 250, percent: 0.25 }
-          },
-          2: {
-            combined: { dollars: 250, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 250, percent: 0.25 }
-          },
-          3: {
-            combined: { dollars: 250, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 250, percent: 0.25 }
-          },
-          4: {
-            combined: { dollars: 250, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 250, percent: 0.25 }
-          },
-          subtotal: {
-            combined: { dollars: 1000, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 1000, percent: 0 } // code skips adding percent for expenses
-          }
-        },
-        total: { combined: 3000, contractors: 2000, inHouse: 1000 }
-      };
-      const actual = sumActivityQuarterlyFFP({
-        activityFFP: {
+        total: { combined: 2000, contractors: 2000, inHouse: 0 },
+        years: {
           2017: {
             1: {
               combined: { dollars: 800, percent: 0 },
@@ -7708,80 +7657,83 @@ describe('budget summing methods', () => {
               contractors: { dollars: 0, percent: 0 },
               inHouse: { dollars: 0, percent: 0 }
             }
-          },
-          total: { combined: 2000, contractors: 2000, inHouse: 0 }
+          }
+        }
+      };
+      const actual = sumActivityQuarterlyFFP({
+        activityFFP: {
+          total: { combined: 0, contractors: 0, inHouse: 0 },
+          years: {
+            2017: {
+              1: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              2: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              3: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              4: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              subtotal: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              }
+            },
+            2018: {
+              1: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              2: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              3: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              4: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              subtotal: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              }
+            }
+          }
         },
-        fedShareAmount: 1000,
-        category: 'expenses',
-        year: 2018,
+        fedShareAmount: 2000,
+        category: 'contractors',
+        year: 2017,
         quarterlyInfo: {
-          federalPcts: [0.25, 0.25, 0.25, 0.25],
-          qFFPs: [250, 250, 250, 250]
+          federalPcts: [0.4, 0.2, 0.3, 0.1],
+          qFFPs: [800, 400, 600, 200]
         }
       });
       expect(actual).toEqual(expected);
     });
 
-    test('statePersonnel for 2018 with 2018 expenses and 2017 contractors values', () => {
+    test('expenses for 2018 with 2017 contractors values', () => {
       const expected = {
-        2017: {
-          1: {
-            combined: { dollars: 800, percent: 0 },
-            contractors: { dollars: 800, percent: 0.4 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          2: {
-            combined: { dollars: 400, percent: 0 },
-            contractors: { dollars: 400, percent: 0.2 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          3: {
-            combined: { dollars: 600, percent: 0 },
-            contractors: { dollars: 600, percent: 0.3 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          4: {
-            combined: { dollars: 200, percent: 0 },
-            contractors: { dollars: 200, percent: 0.1 },
-            inHouse: { dollars: 0, percent: 0 }
-          },
-          subtotal: {
-            combined: { dollars: 2000, percent: 0 },
-            contractors: { dollars: 2000, percent: 1.0000000000000002 },
-            inHouse: { dollars: 0, percent: 0 }
-          }
-        },
-        2018: {
-          1: {
-            combined: { dollars: 550, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 550, percent: 0.33 }
-          },
-          2: {
-            combined: { dollars: 550, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 550, percent: 0.33 }
-          },
-          3: {
-            combined: { dollars: 550, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 550, percent: 0.33 }
-          },
-          4: {
-            combined: { dollars: 250, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 250, percent: 0 }
-          },
-          subtotal: {
-            combined: { dollars: 1900, percent: 0 },
-            contractors: { dollars: 0, percent: 0 },
-            inHouse: { dollars: 1900, percent: 0.99 } // code skips adding percent for expenses
-          }
-        },
-        total: { combined: 3900, contractors: 2000, inHouse: 1900 }
-      };
-      const actual = sumActivityQuarterlyFFP({
-        activityFFP: {
+        years: {
           2017: {
             1: {
               combined: { dollars: 800, percent: 0 },
@@ -7835,6 +7787,198 @@ describe('budget summing methods', () => {
               contractors: { dollars: 0, percent: 0 },
               inHouse: { dollars: 1000, percent: 0 } // code skips adding percent for expenses
             }
+          }
+        },
+        total: { combined: 3000, contractors: 2000, inHouse: 1000 }
+      };
+      const actual = sumActivityQuarterlyFFP({
+        activityFFP: {
+          years: {
+            2017: {
+              1: {
+                combined: { dollars: 800, percent: 0 },
+                contractors: { dollars: 800, percent: 0.4 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              2: {
+                combined: { dollars: 400, percent: 0 },
+                contractors: { dollars: 400, percent: 0.2 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              3: {
+                combined: { dollars: 600, percent: 0 },
+                contractors: { dollars: 600, percent: 0.3 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              4: {
+                combined: { dollars: 200, percent: 0 },
+                contractors: { dollars: 200, percent: 0.1 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              subtotal: {
+                combined: { dollars: 2000, percent: 0 },
+                contractors: { dollars: 2000, percent: 1.0000000000000002 },
+                inHouse: { dollars: 0, percent: 0 }
+              }
+            },
+            2018: {
+              1: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              2: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              3: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              4: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              subtotal: {
+                combined: { dollars: 0, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 0, percent: 0 }
+              }
+            }
+          },
+          total: { combined: 2000, contractors: 2000, inHouse: 0 }
+        },
+        fedShareAmount: 1000,
+        category: 'expenses',
+        year: 2018,
+        quarterlyInfo: {
+          federalPcts: [0.25, 0.25, 0.25, 0.25],
+          qFFPs: [250, 250, 250, 250]
+        }
+      });
+      expect(actual).toEqual(expected);
+    });
+
+    test('statePersonnel for 2018 with 2018 expenses and 2017 contractors values', () => {
+      const expected = {
+        years: {
+          2017: {
+            1: {
+              combined: { dollars: 800, percent: 0 },
+              contractors: { dollars: 800, percent: 0.4 },
+              inHouse: { dollars: 0, percent: 0 }
+            },
+            2: {
+              combined: { dollars: 400, percent: 0 },
+              contractors: { dollars: 400, percent: 0.2 },
+              inHouse: { dollars: 0, percent: 0 }
+            },
+            3: {
+              combined: { dollars: 600, percent: 0 },
+              contractors: { dollars: 600, percent: 0.3 },
+              inHouse: { dollars: 0, percent: 0 }
+            },
+            4: {
+              combined: { dollars: 200, percent: 0 },
+              contractors: { dollars: 200, percent: 0.1 },
+              inHouse: { dollars: 0, percent: 0 }
+            },
+            subtotal: {
+              combined: { dollars: 2000, percent: 0 },
+              contractors: { dollars: 2000, percent: 1.0000000000000002 },
+              inHouse: { dollars: 0, percent: 0 }
+            }
+          },
+          2018: {
+            1: {
+              combined: { dollars: 550, percent: 0 },
+              contractors: { dollars: 0, percent: 0 },
+              inHouse: { dollars: 550, percent: 0.33 }
+            },
+            2: {
+              combined: { dollars: 550, percent: 0 },
+              contractors: { dollars: 0, percent: 0 },
+              inHouse: { dollars: 550, percent: 0.33 }
+            },
+            3: {
+              combined: { dollars: 550, percent: 0 },
+              contractors: { dollars: 0, percent: 0 },
+              inHouse: { dollars: 550, percent: 0.33 }
+            },
+            4: {
+              combined: { dollars: 250, percent: 0 },
+              contractors: { dollars: 0, percent: 0 },
+              inHouse: { dollars: 250, percent: 0 }
+            },
+            subtotal: {
+              combined: { dollars: 1900, percent: 0 },
+              contractors: { dollars: 0, percent: 0 },
+              inHouse: { dollars: 1900, percent: 0.99 } // code skips adding percent for expenses
+            }
+          }
+        },
+        total: { combined: 3900, contractors: 2000, inHouse: 1900 }
+      };
+      const actual = sumActivityQuarterlyFFP({
+        activityFFP: {
+          years: {
+            2017: {
+              1: {
+                combined: { dollars: 800, percent: 0 },
+                contractors: { dollars: 800, percent: 0.4 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              2: {
+                combined: { dollars: 400, percent: 0 },
+                contractors: { dollars: 400, percent: 0.2 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              3: {
+                combined: { dollars: 600, percent: 0 },
+                contractors: { dollars: 600, percent: 0.3 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              4: {
+                combined: { dollars: 200, percent: 0 },
+                contractors: { dollars: 200, percent: 0.1 },
+                inHouse: { dollars: 0, percent: 0 }
+              },
+              subtotal: {
+                combined: { dollars: 2000, percent: 0 },
+                contractors: { dollars: 2000, percent: 1.0000000000000002 },
+                inHouse: { dollars: 0, percent: 0 }
+              }
+            },
+            2018: {
+              1: {
+                combined: { dollars: 250, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 250, percent: 0.25 }
+              },
+              2: {
+                combined: { dollars: 250, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 250, percent: 0.25 }
+              },
+              3: {
+                combined: { dollars: 250, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 250, percent: 0.25 }
+              },
+              4: {
+                combined: { dollars: 250, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 250, percent: 0.25 }
+              },
+              subtotal: {
+                combined: { dollars: 1000, percent: 0 },
+                contractors: { dollars: 0, percent: 0 },
+                inHouse: { dollars: 1000, percent: 0 } // code skips adding percent for expenses
+              }
+            }
           },
           total: { combined: 3000, contractors: 2000, inHouse: 1000 }
         },
@@ -7859,37 +8003,14 @@ describe('budget summing methods', () => {
 
     test('HIT contractors for 2017, no previous values', () => {
       const expected = {
-        2017: {
-          1: { inHouse: 0, contractors: 800, combined: 800 },
-          2: { inHouse: 0, contractors: 400, combined: 400 },
-          3: { inHouse: 0, contractors: 600, combined: 600 },
-          4: { inHouse: 0, contractors: 200, combined: 200 },
-          subtotal: { inHouse: 0, contractors: 2000, combined: 2000 }
-        },
-        2018: {
-          1: { inHouse: 0, contractors: 0, combined: 0 },
-          2: { inHouse: 0, contractors: 0, combined: 0 },
-          3: { inHouse: 0, contractors: 0, combined: 0 },
-          4: { inHouse: 0, contractors: 0, combined: 0 },
-          subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-        },
-        2019: {
-          1: { inHouse: 0, contractors: 0, combined: 0 },
-          2: { inHouse: 0, contractors: 0, combined: 0 },
-          3: { inHouse: 0, contractors: 0, combined: 0 },
-          4: { inHouse: 0, contractors: 0, combined: 0 },
-          subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-        },
-        total: { inHouse: 0, contractors: 2000, combined: 2000 }
-      };
-      const actual = sumQuarterlyFFP({
-        quarterlyFFP: {
+        total: { inHouse: 0, contractors: 2000, combined: 2000 },
+        years: {
           2017: {
-            1: { inHouse: 0, contractors: 0, combined: 0 },
-            2: { inHouse: 0, contractors: 0, combined: 0 },
-            3: { inHouse: 0, contractors: 0, combined: 0 },
-            4: { inHouse: 0, contractors: 0, combined: 0 },
-            subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            1: { inHouse: 0, contractors: 800, combined: 800 },
+            2: { inHouse: 0, contractors: 400, combined: 400 },
+            3: { inHouse: 0, contractors: 600, combined: 600 },
+            4: { inHouse: 0, contractors: 200, combined: 200 },
+            subtotal: { inHouse: 0, contractors: 2000, combined: 2000 }
           },
           2018: {
             1: { inHouse: 0, contractors: 0, combined: 0 },
@@ -7904,8 +8025,35 @@ describe('budget summing methods', () => {
             3: { inHouse: 0, contractors: 0, combined: 0 },
             4: { inHouse: 0, contractors: 0, combined: 0 },
             subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-          },
-          total: { inHouse: 0, contractors: 0, combined: 0 }
+          }
+        }
+      };
+      const actual = sumQuarterlyFFP({
+        quarterlyFFP: {
+          total: { inHouse: 0, contractors: 0, combined: 0 },
+          years: {
+            2017: {
+              1: { inHouse: 0, contractors: 0, combined: 0 },
+              2: { inHouse: 0, contractors: 0, combined: 0 },
+              3: { inHouse: 0, contractors: 0, combined: 0 },
+              4: { inHouse: 0, contractors: 0, combined: 0 },
+              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            },
+            2018: {
+              1: { inHouse: 0, contractors: 0, combined: 0 },
+              2: { inHouse: 0, contractors: 0, combined: 0 },
+              3: { inHouse: 0, contractors: 0, combined: 0 },
+              4: { inHouse: 0, contractors: 0, combined: 0 },
+              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            },
+            2019: {
+              1: { inHouse: 0, contractors: 0, combined: 0 },
+              2: { inHouse: 0, contractors: 0, combined: 0 },
+              3: { inHouse: 0, contractors: 0, combined: 0 },
+              4: { inHouse: 0, contractors: 0, combined: 0 },
+              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            }
+          }
         },
         fundingSource: 'hit',
         fedShareAmount: 2000,
@@ -7921,31 +8069,73 @@ describe('budget summing methods', () => {
 
     test('HIE statePersonnel for 2017 for 2018 expenses and 2017 contractors values', () => {
       const expected = {
-        2017: {
-          1: { inHouse: 300, contractors: 800, combined: 1100 },
-          2: { inHouse: 300, contractors: 400, combined: 700 },
-          3: { inHouse: 300, contractors: 600, combined: 900 },
-          4: { inHouse: 0, contractors: 200, combined: 200 },
-          subtotal: { inHouse: 900, contractors: 2000, combined: 2900 }
-        },
-        2018: {
-          1: { inHouse: 250, contractors: 0, combined: 250 },
-          2: { inHouse: 250, contractors: 0, combined: 250 },
-          3: { inHouse: 250, contractors: 0, combined: 250 },
-          4: { inHouse: 250, contractors: 0, combined: 250 },
-          subtotal: { inHouse: 1000, contractors: 0, combined: 1000 }
-        },
-        2019: {
-          1: { inHouse: 0, contractors: 0, combined: 0 },
-          2: { inHouse: 0, contractors: 0, combined: 0 },
-          3: { inHouse: 0, contractors: 0, combined: 0 },
-          4: { inHouse: 0, contractors: 0, combined: 0 },
-          subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+        years: {
+          2017: {
+            1: { inHouse: 300, contractors: 800, combined: 1100 },
+            2: { inHouse: 300, contractors: 400, combined: 700 },
+            3: { inHouse: 300, contractors: 600, combined: 900 },
+            4: { inHouse: 0, contractors: 200, combined: 200 },
+            subtotal: { inHouse: 900, contractors: 2000, combined: 2900 }
+          },
+          2018: {
+            1: { inHouse: 250, contractors: 0, combined: 250 },
+            2: { inHouse: 250, contractors: 0, combined: 250 },
+            3: { inHouse: 250, contractors: 0, combined: 250 },
+            4: { inHouse: 250, contractors: 0, combined: 250 },
+            subtotal: { inHouse: 1000, contractors: 0, combined: 1000 }
+          },
+          2019: {
+            1: { inHouse: 0, contractors: 0, combined: 0 },
+            2: { inHouse: 0, contractors: 0, combined: 0 },
+            3: { inHouse: 0, contractors: 0, combined: 0 },
+            4: { inHouse: 0, contractors: 0, combined: 0 },
+            subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+          }
         },
         total: { inHouse: 1900, contractors: 2000, combined: 3900 }
       };
       const actual = sumQuarterlyFFP({
         quarterlyFFP: {
+          years: {
+            2017: {
+              1: { inHouse: 0, contractors: 800, combined: 800 },
+              2: { inHouse: 0, contractors: 400, combined: 400 },
+              3: { inHouse: 0, contractors: 600, combined: 600 },
+              4: { inHouse: 0, contractors: 200, combined: 200 },
+              subtotal: { inHouse: 0, contractors: 2000, combined: 2000 }
+            },
+            2018: {
+              1: { inHouse: 250, contractors: 0, combined: 250 },
+              2: { inHouse: 250, contractors: 0, combined: 250 },
+              3: { inHouse: 250, contractors: 0, combined: 250 },
+              4: { inHouse: 250, contractors: 0, combined: 250 },
+              subtotal: { inHouse: 1000, contractors: 0, combined: 1000 }
+            },
+            2019: {
+              1: { inHouse: 0, contractors: 0, combined: 0 },
+              2: { inHouse: 0, contractors: 0, combined: 0 },
+              3: { inHouse: 0, contractors: 0, combined: 0 },
+              4: { inHouse: 0, contractors: 0, combined: 0 },
+              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            }
+          },
+          total: { inHouse: 1000, contractors: 2000, combined: 3000 }
+        },
+        fundingSource: 'hie',
+        fedShareAmount: 900,
+        category: 'statePersonnel',
+        year: 2017,
+        quarterlyInfo: {
+          federalPcts: [0.33, 0.33, 0.33, 0],
+          qFFPs: [300, 300, 300, 0]
+        }
+      });
+      expect(actual).toEqual(expected);
+    });
+
+    test('MMIS expenses for 2018 for 2017 contractors values', () => {
+      const expected = {
+        years: {
           2017: {
             1: { inHouse: 0, contractors: 800, combined: 800 },
             2: { inHouse: 0, contractors: 400, combined: 400 },
@@ -7966,68 +8156,34 @@ describe('budget summing methods', () => {
             3: { inHouse: 0, contractors: 0, combined: 0 },
             4: { inHouse: 0, contractors: 0, combined: 0 },
             subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-          },
-          total: { inHouse: 1000, contractors: 2000, combined: 3000 }
-        },
-        fundingSource: 'hie',
-        fedShareAmount: 900,
-        category: 'statePersonnel',
-        year: 2017,
-        quarterlyInfo: {
-          federalPcts: [0.33, 0.33, 0.33, 0],
-          qFFPs: [300, 300, 300, 0]
-        }
-      });
-      expect(actual).toEqual(expected);
-    });
-
-    test('MMIS expenses for 2018 for 2017 contractors values', () => {
-      const expected = {
-        2017: {
-          1: { inHouse: 0, contractors: 800, combined: 800 },
-          2: { inHouse: 0, contractors: 400, combined: 400 },
-          3: { inHouse: 0, contractors: 600, combined: 600 },
-          4: { inHouse: 0, contractors: 200, combined: 200 },
-          subtotal: { inHouse: 0, contractors: 2000, combined: 2000 }
-        },
-        2018: {
-          1: { inHouse: 250, contractors: 0, combined: 250 },
-          2: { inHouse: 250, contractors: 0, combined: 250 },
-          3: { inHouse: 250, contractors: 0, combined: 250 },
-          4: { inHouse: 250, contractors: 0, combined: 250 },
-          subtotal: { inHouse: 1000, contractors: 0, combined: 1000 }
-        },
-        2019: {
-          1: { inHouse: 0, contractors: 0, combined: 0 },
-          2: { inHouse: 0, contractors: 0, combined: 0 },
-          3: { inHouse: 0, contractors: 0, combined: 0 },
-          4: { inHouse: 0, contractors: 0, combined: 0 },
-          subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+          }
         },
         total: { inHouse: 1000, contractors: 2000, combined: 3000 }
       };
       const actual = sumQuarterlyFFP({
         quarterlyFFP: {
-          2017: {
-            1: { inHouse: 0, contractors: 800, combined: 800 },
-            2: { inHouse: 0, contractors: 400, combined: 400 },
-            3: { inHouse: 0, contractors: 600, combined: 600 },
-            4: { inHouse: 0, contractors: 200, combined: 200 },
-            subtotal: { inHouse: 0, contractors: 2000, combined: 2000 }
-          },
-          2018: {
-            1: { inHouse: 0, contractors: 0, combined: 0 },
-            2: { inHouse: 0, contractors: 0, combined: 0 },
-            3: { inHouse: 0, contractors: 0, combined: 0 },
-            4: { inHouse: 0, contractors: 0, combined: 0 },
-            subtotal: { inHouse: 0, contractors: 0, combined: 0 }
-          },
-          2019: {
-            1: { inHouse: 0, contractors: 0, combined: 0 },
-            2: { inHouse: 0, contractors: 0, combined: 0 },
-            3: { inHouse: 0, contractors: 0, combined: 0 },
-            4: { inHouse: 0, contractors: 0, combined: 0 },
-            subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+          years: {
+            2017: {
+              1: { inHouse: 0, contractors: 800, combined: 800 },
+              2: { inHouse: 0, contractors: 400, combined: 400 },
+              3: { inHouse: 0, contractors: 600, combined: 600 },
+              4: { inHouse: 0, contractors: 200, combined: 200 },
+              subtotal: { inHouse: 0, contractors: 2000, combined: 2000 }
+            },
+            2018: {
+              1: { inHouse: 0, contractors: 0, combined: 0 },
+              2: { inHouse: 0, contractors: 0, combined: 0 },
+              3: { inHouse: 0, contractors: 0, combined: 0 },
+              4: { inHouse: 0, contractors: 0, combined: 0 },
+              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            },
+            2019: {
+              1: { inHouse: 0, contractors: 0, combined: 0 },
+              2: { inHouse: 0, contractors: 0, combined: 0 },
+              3: { inHouse: 0, contractors: 0, combined: 0 },
+              4: { inHouse: 0, contractors: 0, combined: 0 },
+              subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+            }
           },
           total: { inHouse: 0, contractors: 2000, combined: 2000 }
         },

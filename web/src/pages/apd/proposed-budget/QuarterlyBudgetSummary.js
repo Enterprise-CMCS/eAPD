@@ -71,11 +71,11 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                       <th scope="row">{EXPENSE_NAME_DISPLAY[name]}</th>
                       {QUARTERS.map(q => (
                         <td className="budget-table--number" key={q}>
-                          <Dollars>{data[year][q][name]}</Dollars>
+                          <Dollars>{data.years[year][q][name]}</Dollars>
                         </td>
                       ))}
                       <td className="budget-table--number budget-table--subtotal">
-                        <Dollars>{data[year].subtotal[name]}</Dollars>
+                        <Dollars>{data.years[year].subtotal[name]}</Dollars>
                       </td>
                     </tr>
                   ))}
