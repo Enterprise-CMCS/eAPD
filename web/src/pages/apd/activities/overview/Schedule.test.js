@@ -21,7 +21,7 @@ const defaultProps = {
   activityIndex: 7,
   setEndDate: jest.fn(),
   setStartDate: jest.fn()
-}
+};
 
 const setup = async (props = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
@@ -50,7 +50,7 @@ describe('the Schedule component', () => {
     verifyDateField('Start date', {
       month: '10',
       day: '2',
-      year: '1944' 
+      year: '1944'
     });
     verifyDateField('End date', {
       month: '11',

@@ -17,9 +17,9 @@
   },
   "scripts": {
     "audit": "npx audit-ci --config ./audit-ci.json",
-    "prettier": "prettier --config \".prettierrc\" --write \"**/*.js\"",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\" --config \".prettierrc\"",
     "npm-check": "npx npm-check-updates",
-    "prepare": "yarn run snyk-protect",
+    "prepare": "yarn run snyk-protect && husky install",
     "snyk-protect": "snyk-protect",
     "create:route": "npx hygen routes new route",
     "create:story": "npx hygen stories new story",
@@ -76,34 +76,34 @@
     "nohoist": [
       "knex",
       "api/ajv",
+      "api/@babel/node",
       "web/@uppy",
       "web/tinymce",
       "web/@tinymce/tinymce-react",
       "web/@cmsgov/design-system"
     ]
   },
+  "dependencies": {
+    "@babel/cli": "7.18.10",
+    "@babel/core": "7.18.13",
+    "@babel/eslint-parser": "7.18.9",
+    "@babel/node": "7.18.10",
+    "@babel/plugin-proposal-class-properties": "7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "7.18.9",
+    "@babel/plugin-transform-modules-commonjs": "7.18.6",
+    "@babel/preset-env": "7.18.10",
+    "@babel/preset-react": "7.18.6",
+    "babel-plugin-dynamic-import-node": "2.3.3"
+  },
   "devDependencies": {
-    "@snyk/protect": "1.981.0",
-    "prettier": "2.7.1"
+    "@snyk/protect": "1.991.0",
+    "babel-jest": "27.5.1",
+    "husky": "8.0.1",
+    "jest": "27.5.1",
+    "prettier": "2.7.1",
+    "pretty-quick": "^3.1.3"
   },
   "resolutions": {
-    "api/eslint/**/ansi-regex": "5.0.1",
-    "api/jest/**/ansi-regex": "5.0.1",
-    "api/migrate-mongoose/**/ansi-regex": "3.0.1",
-    "api/tap/ink/**/ansi-regex": "5.0.1",
-    "api/tap/treport/**/ansi-regex": "3.0.1",
-    "web/@storybook/react/**/ansi-regex": "3.0.1",
-    "web/@stryker-mutator/core/**/ansi-regex": "6.0.1",
-    "web/@testing-library/dom/**/ansi-regex": "5.0.1",
-    "web/@testing-library/jest-dom/**/ansi-regex": "5.0.1",
-    "web/treport/**/ansi-regex": "3.0.1",
-    "async": ">=3.2.2",
-    "glob-parent": ">=6.0.1",
-    "minimist": ">=1.2.6",
-    "api/node-fetch": "3.2.10",
-    "node-forge": ">=1.3.0",
-    "trim": "0.0.3",
-    "trim-newlines": "3.0.1",
     "yargs-parser": ">=18.1.1"
   },
   "packageManager": "yarn@1.22.18"

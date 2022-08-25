@@ -1,5 +1,6 @@
 const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
+const { deepCopy } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
@@ -63,7 +64,7 @@ const getAPDByIDAndState = (id, stateId) =>
 // Apply the patches to the APD document
 const patchAPD = async (id, stateId, apdDoc, patch) => {
   // duplicate the apdDoc so that dates will be converted to strings
-  const apdJSON = JSON.parse(JSON.stringify(apdDoc));
+  const apdJSON = deepCopy(apdDoc);
   // apply the patches to the apd
   const { newDocument } = applyPatch(apdJSON, patch);
   // update the apd in the database
@@ -152,7 +153,7 @@ const updateAPDDocument = async (
 
     // Will probably eventually switch to apd.validate
     const validationErrors = {};
-    const valid = validate(JSON.parse(JSON.stringify(updatedDoc)));
+    const valid = validate(deepCopy(updatedDoc));
     if (!valid) {
       // Rather than send back the full error from the validator, pull out just the relevant bits
       // and fetch the value that's causing the error.

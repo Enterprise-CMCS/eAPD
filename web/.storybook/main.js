@@ -3,7 +3,7 @@ const custom = require('../webpack.config.dev.js');
 
 module.exports = {
   core: {
-    builder: 'webpack5'
+    builder: '@storybook/builder-webpack5'
   },
   stories: ['../src/**/*.stories.@(mdx|js|jsx|ts|tsx)'],
   addons: [

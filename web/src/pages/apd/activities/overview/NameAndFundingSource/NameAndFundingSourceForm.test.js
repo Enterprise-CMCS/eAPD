@@ -21,8 +21,10 @@ const defaultProps = {
 
 const setup = async (props = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  const utils = await act(async () => 
-    renderWithConnection(<NameAndFundingSourceForm {...defaultProps} {...props} />)
+  const utils = await act(async () =>
+    renderWithConnection(
+      <NameAndFundingSourceForm {...defaultProps} {...props} />
+    )
   );
   await waitFor(() => screen.findByText(/Activity Name/i));
   return utils;
@@ -35,8 +37,8 @@ describe('the NameAndFundingSourceForm component', () => {
 
   test('it renders correctly', async () => {
     await setup();
-    expect(
-      screen.getByLabelText(/Activity name/i)
-    ).toHaveValue(defaultProps.item.name)
+    expect(screen.getByLabelText(/Activity name/i)).toHaveValue(
+      defaultProps.item.name
+    );
   });
-})
+});
