@@ -27,6 +27,7 @@ jest.setTimeout(300000);
 describe('<ApdViewOnly/>', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    jest.setTimeout(30000);
   });
 
   test('renders correctly and tests Back to APD button', async () => {
