@@ -29,6 +29,7 @@ services:
     build:
       context: .
       dockerfile: ./api/Dockerfile
+    container_name: api-for-testing
     image: cms-eapd/api
     depends_on:
       - db

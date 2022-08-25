@@ -10,7 +10,7 @@ const overviewSchema = Joi.object({
     'string.base': 'Provide details to explain this activity.',
     'string.empty': 'Provide details to explain this activity.',
     'string.min': 'Provide details to explain this activity.'
-  }),
+  })
 });
 
 export default overviewSchema;
