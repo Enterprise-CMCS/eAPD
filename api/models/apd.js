@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('./budget');
 
 const quarterlyFFP = new mongoose.Schema(
   {
@@ -365,7 +366,8 @@ const apdSchema = new mongoose.Schema({
   },
   budget: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Budget'
+    ref: 'Budget',
+    default: null
   }
 });
 

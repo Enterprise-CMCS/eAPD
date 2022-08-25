@@ -1200,8 +1200,11 @@ export const calculateQuarterlyCosts = ({
 export const calculateBudget = apd => {
   // Clone the incoming state, so we don't accidentally change anything.
   const {
-    data: { years, activities, keyStatePersonnel: { keyPersonnel } = {} } = {}
+    years,
+    activities,
+    keyStatePersonnel: { keyPersonnel } = {}
   } = deepCopy(apd);
+  console.log({ years, keyPersonnel });
 
   // Create a default budget object so that all of the properties and stuff
   // will exist, so we don't have to have a bunch of code checking for it.

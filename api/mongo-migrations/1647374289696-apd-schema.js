@@ -1,13 +1,14 @@
 const logger = require('../logger')('mongoose-migrate/migrate-apd-schema');
+const { setup, teardown } = require('../db/mongodb');
+const { APD } = require('../models');
 
 /**
  * Update the APD schema to more closely match the front end nav/page sections
  */
 async function up() {
-  require('../models/apd'); // eslint-disable-line global-require
-
   // Grab all APDs
-  const apds = await this('APD').find({}).lean();
+  await setup();
+  const apds = await APD.find({}).lean();
 
   const convertContractorResources = contractorResources =>
     contractorResources.map(contractorResource => {
@@ -66,6 +67,7 @@ async function up() {
   ).catch(err => {
     logger.error(err);
   });
+  await teardown();
 }
 
 /**
