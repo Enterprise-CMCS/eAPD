@@ -348,7 +348,10 @@ const StateAdminLetters = () => {
                   }
                   if (cell.column.id === 'actions') {
                     return (
-                      <TableCell {...cell.getCellProps()}>
+                      <TableCell
+                        {...cell.getCellProps()}
+                        key={`cell-${cell.getCellProps().key}`}
+                      >
                         {cell.row.values.matchStatus !== 'Matched' && (
                           <Button
                             variation="transparent"

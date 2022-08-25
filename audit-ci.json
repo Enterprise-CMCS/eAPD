@@ -1,7 +1,14 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": ["1082040", "GHSA-f825-f98c-gj3g"],
+  "allowlist": [
+    "1082040|@cms-eapd/api>mongoose",
+    "1082040|@cms-eapd/api>migrate-mongoose>mongoose",
+    "1082040|@cms-eapd/e2e>@cms-eapd/api>migrate-mongoose>mongoose",
+    "GHSA-f825-f98c-gj3g|@cms-eapd/api>mongoose",
+    "GHSA-f825-f98c-gj3g|@cms-eapd/api>migrate-mongoose>mongoose",
+    "GHSA-f825-f98c-gj3g|@cms-eapd/e2e>@cms-eapd/api>migrate-mongoose>mongoose"
+  ],
   "_comment": {
     "1082040|GHSA-f825-f98c-gj3g": {
       "module": "mongoose",

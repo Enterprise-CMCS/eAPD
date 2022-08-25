@@ -30,9 +30,8 @@ export const getIdToken = () => oktaAuth.getIdToken();
 const getConfig = () => {
   let config;
   if (
-    process.env.API_URL &&
     // eslint-disable-next-line prefer-regex-literals
-    process.env.API_URL.match(new RegExp(/cms.gov$/))
+    process.env.API_URL?.match(new RegExp(/cms.gov$/))
   ) {
     config = {
       domain: '.cms.gov',
@@ -40,8 +39,13 @@ const getConfig = () => {
       sameSite: 'lax'
     };
   } else {
-    config = { sameSite: 'strict' };
+    config = {
+      sameSite: 'strict',
+      allowSpecialUseDomain: true,
+      rejectPublicSuffixes: false
+    };
   }
+  console.log({ config });
   return config;
 };
 const COOKIE_CONFIG = getConfig();
