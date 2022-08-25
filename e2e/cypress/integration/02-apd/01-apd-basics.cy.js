@@ -797,15 +797,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .within(() => cy.findByLabelText('Year').focus().blur());
       cy.contains('Provide an end date.').should('exist');
 
-      activityPage.checkTextField(
-        'ds-c-field ds-c-field--currency ds-c-field--medium',
-        '',
-        0
-      );
-      cy.get('[class="ds-c-field ds-c-field--currency ds-c-field--medium"]')
-        .eq(0)
-        .focus()
-        .blur();
+      cy.get('[name="totalCost"]').should('have.value', '');
+      cy.get('[name="totalCost"]').focus().blur();
+
       cy.contains(
         'Provide a contract cost greater than or equal to $0.'
       ).should('exist');
@@ -1340,14 +1334,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   describe('tests an APD with no activities', () => {
-    it.only('shows message', () => {
+    it('shows message', () => {
       cy.visit('/');
       cy.findByRole('link', { name: /HITECH IAPD No Activities/i }).click();
       cy.goToActivityDashboard();
       cy.findByText('Add at least one activity.').should('exist');
-      cy.findByText('Activities have not been added for this APD.').should(
-        'exist'
-      );
     });
   });
 
