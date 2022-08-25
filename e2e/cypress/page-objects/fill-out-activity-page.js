@@ -73,7 +73,12 @@ class FillOutActivityPage {
     }
   };
 
-  fillStateStaff = (years, staffList, testDelete = false) => {
+  fillStateStaff = (
+    years,
+    staffList,
+    testDelete = false,
+    testBudget = false
+  ) => {
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
@@ -89,13 +94,15 @@ class FillOutActivityPage {
         costs: staff.costs,
         ftes: staff.ftes
       });
-      staffExpensesPage.verifyStaff(
-        i,
-        staff.title,
-        staff.description,
-        staff.costs,
-        staff.ftes
-      );
+      if (!testBudget) {
+        staffExpensesPage.verifyStaff(
+          i,
+          staff.title,
+          staff.description,
+          staff.costs,
+          staff.ftes
+        );
+      }
     });
 
     if (testDelete) {
@@ -107,12 +114,13 @@ class FillOutActivityPage {
         .then(children => {
           if (children.length > 1) {
             staffExpensesPage.deleteStaff(0);
+            cy.waitForSave();
           }
         });
 
       // Check that the first staff on the page (index 0) has the second
       // staff's info
-      if (staffList.length > 1) {
+      if (staffList.length > 1 && !testBudget) {
         staffExpensesPage.verifyStaff(
           0,
           staffList[1].title,
@@ -124,7 +132,12 @@ class FillOutActivityPage {
     }
   };
 
-  fillStateExpenses = (years, expenseList, testDelete = false) => {
+  fillStateExpenses = (
+    years,
+    expenseList,
+    testDelete = false,
+    testBudget = false
+  ) => {
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
@@ -139,12 +152,14 @@ class FillOutActivityPage {
         costs: expense.costs,
         desc: expense.description
       });
-      staffExpensesPage.verifyExpense(
-        i,
-        expense.category,
-        expense.costs,
-        expense.description
-      );
+      if (!testBudget) {
+        staffExpensesPage.verifyExpense(
+          i,
+          expense.category,
+          expense.costs,
+          expense.description
+        );
+      }
     });
 
     if (testDelete) {
@@ -162,8 +177,9 @@ class FillOutActivityPage {
       // If there are just two delete buttons, then an expense has been deleted;
       // the other delete button is from the remaining staff.
       cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 2);
+      cy.waitForSave();
 
-      if (expenseList > 0) {
+      if (expenseList > 0 && !testBudget) {
         staffExpensesPage.verifyExpense(
           0,
           expenseList[1].category,

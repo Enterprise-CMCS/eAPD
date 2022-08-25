@@ -1,9 +1,4 @@
 // <reference types="cypress" />
-import { testKeyStatePersonnelWithData } from '../../helpers/apd/key-state-personnel';
-import { testProposedBudgetWithData } from '../../helpers/apd/proposed-budget';
-import { addHITActivity } from '../../helpers/apd/activity/add-HIT-activity';
-import { addHIEActivity } from '../../helpers/apd/activity/add-HIE-activity';
-import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity';
 import {
   checkBudgetAndFFP,
   checkProposedBudget
@@ -72,6 +67,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
 
         cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
         cy.findByRole('button', { name: /Save/i }).click();
+        cy.waitForSave();
       });
 
       checkBudgetAndFFP(years, budgetData.afterKeyPersonnelNoCosts, 0);
@@ -108,6 +104,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
         cy.get('[data-cy="key-person-1-1__fte"]').type('0.5').blur();
 
         cy.findByRole('button', { name: /Save/i }).click();
+        cy.waitForSave();
       });
 
       checkBudgetAndFFP(years, budgetData.afterKeyPersonnelWithCosts, 0);
@@ -126,7 +123,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(0).click();
 
       cy.fixture('HIT-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, true);
+        fillOutActivityPage.fillStateStaff(years, data.staff, true, true);
       });
 
       checkBudgetAndFFP(years, budgetData.afterStateStaffHIT, 0);
@@ -146,7 +143,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(1).click();
 
       cy.fixture('HIE-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, true);
+        fillOutActivityPage.fillStateStaff(years, data.staff, true, true);
       });
 
       checkBudgetAndFFP(years, budgetData.afterStateStaffHIE, 1);
@@ -166,7 +163,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(2).click();
 
       cy.fixture('MMIS-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, true);
+        fillOutActivityPage.fillStateStaff(years, data.staff, true, true);
       });
 
       checkBudgetAndFFP(years, budgetData.afterStateStaffMMIS, 2);
@@ -185,7 +182,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(3).click();
 
       cy.fixture('HIT-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, true);
+        fillOutActivityPage.fillStateStaff(years, data.staff, true, true);
       });
 
       checkBudgetAndFFP(years, budgetData.afterStateStaffNoFFP, 3);
@@ -193,6 +190,162 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
         years,
         budgetData.afterStateStaffNoFFP,
         [850924, 987170],
+        'noFFP'
+      );
+    });
+
+    it('Checks Other State Expense Budget', () => {
+      // Adds Other State Expense to HIT activity
+      cy.goToActivityDashboard();
+      cy.get('#activities').findAllByText('Edit').eq(0).click();
+      cy.findAllByText('State Staff and Expenses').eq(0).click();
+
+      cy.fixture('HIT-activity-template.json').then(data => {
+        fillOutActivityPage.fillStateExpenses(years, data.expenses, true, true);
+      });
+
+      checkBudgetAndFFP(years, budgetData.afterStateExpenseHIT, 0);
+      checkProposedBudget(
+        years,
+        budgetData.afterStateExpenseHIT,
+        [885924, 1022170],
+        'HIT'
+      );
+
+      // Adds Other State Expense to HIE activity
+      cy.goToActivityDashboard();
+      cy.get('#activities').findAllByText('Edit').eq(1).click();
+      cy.findAllByText('State Staff and Expenses').eq(1).click();
+
+      cy.fixture('HIE-activity-template.json').then(data => {
+        fillOutActivityPage.fillStateExpenses(years, data.expenses, true, true);
+      });
+
+      checkBudgetAndFFP(years, budgetData.afterStateExpenseHIE, 1);
+      checkProposedBudget(
+        years,
+        budgetData.afterStateExpenseHIE,
+        [886424, 1022370],
+        'HIE'
+      );
+
+      // Adds Other State Expense to MMIS activity
+      cy.goToActivityDashboard();
+      cy.get('#activities').findAllByText('Edit').eq(2).click();
+      cy.findAllByText('State Staff and Expenses').eq(2).click();
+
+      cy.fixture('MMIS-activity-template.json').then(data => {
+        fillOutActivityPage.fillStateExpenses(years, data.expenses, true, true);
+      });
+
+      checkBudgetAndFFP(years, budgetData.afterStateExpenseMMIS, 2);
+      checkProposedBudget(
+        years,
+        budgetData.afterStateExpenseMMIS,
+        [887424, 1024870],
+        'MMIS'
+      );
+
+      // Adds Other State Expense to a no FFP activity
+      cy.goToActivityDashboard();
+      cy.get('#activities').findAllByText('Edit').eq(3).click();
+      cy.findAllByText('State Staff and Expenses').eq(3).click();
+
+      cy.fixture('HIT-activity-template.json').then(data => {
+        fillOutActivityPage.fillStateExpenses(years, data.expenses, true, true);
+      });
+
+      checkBudgetAndFFP(years, budgetData.afterStateExpenseNoFFP, 3);
+      checkProposedBudget(
+        years,
+        budgetData.afterStateExpenseNoFFP,
+        [922424, 1059870],
+        'noFFP'
+      );
+    });
+
+    it('Checks Private Contractors Budget', () => {
+      // Adds Private Contractor to HIT activity
+      cy.goToActivityDashboard();
+      cy.get('#activities').findAllByText('Edit').eq(0).click();
+      cy.findAllByText('Private Contractor Costs').eq(0).click();
+
+      cy.fixture('HIT-activity-template.json').then(data => {
+        fillOutActivityPage.addPrivateContractors(
+          data.privateContractors,
+          years,
+          true
+        );
+      });
+
+      checkBudgetAndFFP(years, budgetData.afterContractorHIT, 0);
+      checkProposedBudget(
+        years,
+        budgetData.afterContractorHIT,
+        [952424, 1089870],
+        'HIT'
+      );
+
+      // Adds Private Contractor to HIE activity
+      cy.goToActivityDashboard();
+      cy.get('#activities').findAllByText('Edit').eq(1).click();
+      cy.findAllByText('Private Contractor Costs').eq(1).click();
+
+      cy.fixture('HIE-activity-template.json').then(data => {
+        fillOutActivityPage.addPrivateContractors(
+          data.privateContractors,
+          years,
+          true
+        );
+      });
+
+      checkBudgetAndFFP(years, budgetData.afterContractorHIE, 1);
+      checkProposedBudget(
+        years,
+        budgetData.afterContractorHIE,
+        [953924, 1091370],
+        'HIE'
+      );
+
+      // Adds Private Contractor to MMIS activity
+      cy.goToActivityDashboard();
+      cy.get('#activities').findAllByText('Edit').eq(2).click();
+      cy.findAllByText('Private Contractor Costs').eq(2).click();
+
+      cy.fixture('MMIS-activity-template.json').then(data => {
+        fillOutActivityPage.addPrivateContractors(
+          data.privateContractors,
+          years,
+          true
+        );
+      });
+
+      checkBudgetAndFFP(years, budgetData.afterContractorMMIS, 2);
+      checkProposedBudget(
+        years,
+        budgetData.afterContractorMMIS,
+        [956924, 1093370],
+        'MMIS'
+      );
+
+      // Adds Private Contractor to a no FFP activity
+      cy.goToActivityDashboard();
+      cy.get('#activities').findAllByText('Edit').eq(3).click();
+      cy.findAllByText('Private Contractor Costs').eq(3).click();
+
+      cy.fixture('HIT-activity-template.json').then(data => {
+        fillOutActivityPage.addPrivateContractors(
+          data.privateContractors,
+          years,
+          true
+        );
+      });
+
+      checkBudgetAndFFP(years, budgetData.afterContractorNoFFP, 3);
+      checkProposedBudget(
+        years,
+        budgetData.afterContractorNoFFP,
+        [986924, 1123370],
         'noFFP'
       );
     });
