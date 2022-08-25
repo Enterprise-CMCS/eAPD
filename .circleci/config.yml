@@ -208,6 +208,9 @@ workflows:
             branches:
               only:
                 - main
+            tags:
+              only:
+                - /^rc.*/                
           requires:
             - dependency vulnerability scan
       - frontend deploy:
@@ -217,6 +220,9 @@ workflows:
             branches:
               only:
                 - main
+            tags:
+              only:
+                - /^rc.*/                
           requires:
             - frontend build staging
             - dependency vulnerability scan
