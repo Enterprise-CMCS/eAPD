@@ -1,5 +1,4 @@
 const { setup, teardown } = require('../../db/mongodb');
-const { createAPD } = require('../../db/apds');
 
 const { data: apdData } = require(`../${process.env.NODE_ENV}/apds`); // eslint-disable-line import/no-dynamic-require
 
@@ -24,7 +23,7 @@ const dropCollections = async () => {
   }
 };
 
-const populate = async ({ model, data, create }) => {
+const populate = async ({ model, data }) => {
   const count = await model.countDocuments().exec();
   await model.createIndexes();
 
@@ -32,11 +31,7 @@ const populate = async ({ model, data, create }) => {
     logger.verbose(
       `Seeding ${model.collection.name} with ${data.length} records`
     );
-    if (Array.isArray(data) && data.length > 0) {
-      const promises = data.map(record => create(record));
-      return Promise.all(promises);
-    }
-    return create(data);
+    await model.create(data);
   }
   logger.verbose(
     `Skipping ${model.collection.name} population, ${count} documents found`
@@ -56,7 +51,7 @@ exports.seed = async () => {
     );
     await dropCollections();
     logger.verbose('Populating collections');
-    await populate({ model: APD, data: apdData, create: createAPD });
+    await populate({ model: APD, data: apdData });
     logger.verbose('Disconnecting from MongoDB');
     await teardown();
   } catch (err) {

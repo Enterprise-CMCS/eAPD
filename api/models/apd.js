@@ -52,92 +52,102 @@ const incentivePayment = new mongoose.Schema(
   { _id: false }
 );
 
-const apdSchema = new mongoose.Schema(
-  {
-    createdAt: {
-      type: Date,
-      default: Date.now,
-      required: true
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
-      required: true
-    },
-    status: {
+const apdSchema = new mongoose.Schema({
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    required: true
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+    required: true
+  },
+  status: {
+    type: String,
+    enum: ['draft', 'archived', 'submitted', 'approved'],
+    required: true
+  },
+  stateId: {
+    type: String,
+    required: true
+  },
+  name: String,
+  years: [
+    {
+      _id: false,
       type: String,
-      enum: ['draft', 'archived', 'submitted', 'approved'],
-      required: true
+      validate: {
+        validator: v => {
+          const re = /^[0-9]{4}$/;
+          return v == null || re.test(v);
+        },
+        message: 'Provided year is invalid.'
+      }
+    }
+  ],
+  apdOverview: {
+    programOverview: String,
+    narrativeHIT: String,
+    narrativeHIE: String,
+    narrativeMMIS: String
+  },
+  keyStatePersonnel: {
+    medicaidDirector: {
+      name: String,
+      email: String,
+      phone: String
     },
-    stateId: {
-      type: String,
-      required: true
+    medicaidOffice: {
+      address1: String,
+      address2: String,
+      city: String,
+      state: String,
+      zip: String
     },
-    name: String,
-    years: [
+    keyPersonnel: [
       {
         _id: false,
-        type: String,
-        validate: {
-          validator: v => {
-            const re = /^[0-9]{4}$/;
-            return v == null || re.test(v);
-          },
-          message: 'Provided year is invalid.'
-        }
-      }
-    ],
-    apdOverview: {
-      programOverview: String,
-      narrativeHIT: String,
-      narrativeHIE: String,
-      narrativeMMIS: String
-    },
-    keyStatePersonnel: {
-      medicaidDirector: {
         name: String,
+        position: String,
         email: String,
-        phone: String
-      },
-      medicaidOffice: {
-        address1: String,
-        address2: String,
-        city: String,
-        state: String,
-        zip: String
-      },
-      keyPersonnel: [
-        {
-          _id: false,
-          name: String,
-          position: String,
-          email: String,
-          isPrimary: Boolean,
-          fte: {
-            type: Map,
-            of: {
-              type: Number,
-              default: 0
-            }
-          },
-          hasCosts: Boolean,
-          costs: {
-            type: Map,
-            of: {
-              type: Number,
-              default: 0
-            }
+        isPrimary: Boolean,
+        fte: {
+          type: Map,
+          of: {
+            type: Number,
+            default: 0
+          }
+        },
+        hasCosts: Boolean,
+        costs: {
+          type: Map,
+          of: {
+            type: Number,
+            default: 0
           }
         }
-      ]
-    },
-    previousActivities: {
-      previousActivitySummary: String,
-      actualExpenditures: {
-        type: Map,
-        of: new mongoose.Schema(
-          {
-            hithie: {
+      }
+    ]
+  },
+  previousActivities: {
+    previousActivitySummary: String,
+    actualExpenditures: {
+      type: Map,
+      of: new mongoose.Schema(
+        {
+          hithie: {
+            federalActual: {
+              type: Number,
+              default: 0
+            },
+            totalApproved: {
+              type: Number,
+              default: 0
+            }
+          },
+          mmis: {
+            50: {
               federalActual: {
                 type: Number,
                 default: 0
@@ -147,230 +157,213 @@ const apdSchema = new mongoose.Schema(
                 default: 0
               }
             },
-            mmis: {
-              50: {
-                federalActual: {
-                  type: Number,
-                  default: 0
-                },
-                totalApproved: {
-                  type: Number,
-                  default: 0
-                }
+            75: {
+              federalActual: {
+                type: Number,
+                default: 0
               },
-              75: {
-                federalActual: {
-                  type: Number,
-                  default: 0
-                },
-                totalApproved: {
-                  type: Number,
-                  default: 0
-                }
-              },
-              90: {
-                federalActual: {
-                  type: Number,
-                  default: 0
-                },
-                totalApproved: {
-                  type: Number,
-                  default: 0
-                }
-              }
-            }
-          },
-          { _id: false }
-        )
-      }
-    },
-    activities: [
-      {
-        _id: false,
-        alternatives: String,
-        contractorResources: [
-          {
-            _id: false,
-            description: String,
-            end: Date,
-            hourly: {
-              type: Map,
-              of: new mongoose.Schema(
-                {
-                  hours: {
-                    type: Number,
-                    default: 0
-                  },
-                  rate: {
-                    type: Number,
-                    default: 0
-                  }
-                },
-                { _id: false }
-              )
-            },
-            useHourly: Boolean,
-            name: String,
-            start: Date,
-            totalCost: {
-              type: Number
-            },
-            years: {
-              type: Map,
-              of: Number
-            }
-          }
-        ],
-        costAllocation: {
-          type: Map,
-          of: new mongoose.Schema(
-            {
-              ffp: {
-                federal: {
-                  type: Number,
-                  default: 0
-                },
-                state: {
-                  type: Number,
-                  default: 0
-                }
-              },
-              other: {
+              totalApproved: {
                 type: Number,
                 default: 0
               }
             },
-            { _id: false }
-          )
+            90: {
+              federalActual: {
+                type: Number,
+                default: 0
+              },
+              totalApproved: {
+                type: Number,
+                default: 0
+              }
+            }
+          }
         },
-        costAllocationNarrative: {
-          methodology: String,
-          years: {
+        { _id: false }
+      )
+    }
+  },
+  activities: [
+    {
+      _id: false,
+      alternatives: String,
+      contractorResources: [
+        {
+          _id: false,
+          description: String,
+          end: Date,
+          hourly: {
             type: Map,
             of: new mongoose.Schema(
               {
-                otherSources: String
+                hours: {
+                  type: Number,
+                  default: 0
+                },
+                rate: {
+                  type: Number,
+                  default: 0
+                }
               },
               { _id: false }
             )
+          },
+          useHourly: Boolean,
+          name: String,
+          start: Date,
+          totalCost: {
+            type: Number
+          },
+          years: {
+            type: Map,
+            of: Number
           }
-        },
-        description: String,
-        expenses: [
+        }
+      ],
+      costAllocation: {
+        type: Map,
+        of: new mongoose.Schema(
           {
-            _id: false,
-            description: String,
-            category: String,
-            years: {
-              type: Map,
-              of: Number
-            }
-          }
-        ],
-        fundingSource: {
-          type: String,
-          enum: ['HIE', 'HIT', 'MMIS', null]
-        },
-        name: String,
-        outcomes: [
-          {
-            _id: false,
-            outcome: String,
-            metrics: [
-              {
-                _id: false,
-                metric: String
+            ffp: {
+              federal: {
+                type: Number,
+                default: 0
+              },
+              state: {
+                type: Number,
+                default: 0
               }
-            ]
-          }
-        ],
-        plannedEndDate: Date,
-        plannedStartDate: Date,
-        schedule: [
-          {
-            _id: false,
-            endDate: Date,
-            milestone: String
-          }
-        ],
-        standardsAndConditions: {
-          doesNotSupport: String,
-          supports: String
-        },
-        statePersonnel: [
-          {
-            _id: false,
-            title: String,
-            description: String,
-            years: {
-              type: Map,
-              of: new mongoose.Schema(
-                {
-                  amt: {
-                    type: Number,
-                    default: 0
-                  },
-                  perc: {
-                    type: Number,
-                    default: 0
-                  }
-                },
-                { _id: false }
-              )
+            },
+            other: {
+              type: Number,
+              default: 0
             }
-          }
-        ],
-        summary: String,
-        quarterlyFFP: {
+          },
+          { _id: false }
+        )
+      },
+      costAllocationNarrative: {
+        methodology: String,
+        years: {
           type: Map,
           of: new mongoose.Schema(
             {
-              1: quarterlyFFP,
-              2: quarterlyFFP,
-              3: quarterlyFFP,
-              4: quarterlyFFP
+              otherSources: String
             },
             { _id: false }
           )
         }
-      }
-    ],
-    // Currently there are no inputs in activity schedule summary
-    // but this should be used to follow the sections pattern
-    // activityScheduleSummary: {},
-    proposedBudget: {
-      incentivePayments: {
-        ehAmt: {
-          type: Map,
-          of: incentivePayment
-        },
-        ehCt: {
-          type: Map,
-          of: incentivePayment
-        },
-        epAmt: {
-          type: Map,
-          of: incentivePayment
-        },
-        epCt: {
-          type: Map,
-          of: incentivePayment
+      },
+      description: String,
+      expenses: [
+        {
+          _id: false,
+          description: String,
+          category: String,
+          years: {
+            type: Map,
+            of: Number
+          }
         }
+      ],
+      fundingSource: {
+        type: String,
+        enum: ['HIE', 'HIT', 'MMIS', null]
+      },
+      name: String,
+      outcomes: [
+        {
+          _id: false,
+          outcome: String,
+          metrics: [
+            {
+              _id: false,
+              metric: String
+            }
+          ]
+        }
+      ],
+      plannedEndDate: Date,
+      plannedStartDate: Date,
+      schedule: [
+        {
+          _id: false,
+          endDate: Date,
+          milestone: String
+        }
+      ],
+      standardsAndConditions: {
+        doesNotSupport: String,
+        supports: String
+      },
+      statePersonnel: [
+        {
+          _id: false,
+          title: String,
+          description: String,
+          years: {
+            type: Map,
+            of: new mongoose.Schema(
+              {
+                amt: {
+                  type: Number,
+                  default: 0
+                },
+                perc: {
+                  type: Number,
+                  default: 0
+                }
+              },
+              { _id: false }
+            )
+          }
+        }
+      ],
+      summary: String,
+      quarterlyFFP: {
+        type: Map,
+        of: new mongoose.Schema(
+          {
+            1: quarterlyFFP,
+            2: quarterlyFFP,
+            3: quarterlyFFP,
+            4: quarterlyFFP
+          },
+          { _id: false }
+        )
       }
-    },
-    assurancesAndCompliances: {
-      procurement: [federalCitation],
-      recordsAccess: [federalCitation],
-      softwareRights: [federalCitation],
-      security: [federalCitation]
+    }
+  ],
+  // Currently there are no inputs in activity schedule summary
+  // but this should be used to follow the sections pattern
+  // activityScheduleSummary: {},
+  proposedBudget: {
+    incentivePayments: {
+      ehAmt: {
+        type: Map,
+        of: incentivePayment
+      },
+      ehCt: {
+        type: Map,
+        of: incentivePayment
+      },
+      epAmt: {
+        type: Map,
+        of: incentivePayment
+      },
+      epCt: {
+        type: Map,
+        of: incentivePayment
+      }
     }
   },
-  {
-    autoCreate: true
+  assurancesAndCompliances: {
+    procurement: [federalCitation],
+    recordsAccess: [federalCitation],
+    softwareRights: [federalCitation],
+    security: [federalCitation]
   }
-);
-
-apdSchema.set('validateBeforeSave', false);
+});
 
 const APD = mongoose.model('APD', apdSchema);
 

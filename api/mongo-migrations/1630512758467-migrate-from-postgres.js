@@ -1,7 +1,7 @@
 const knex = require('../db/knex');
 const logger = require('../logger')('mongoose-migrate/migrate-from-postgres');
 const { setup, teardown } = require('../db/mongodb');
-const { APD } = require('../models');
+const { APD } = require('../models/index');
 
 /**
  * Copy the APDs that exist in the postgres database to the mongo database

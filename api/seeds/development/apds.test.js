@@ -2,7 +2,7 @@ const tap = require('tap');
 const { data } = require('./apds');
 const { createAPD } = require('../../db/apds');
 const { setup, teardown } = require('../../db/mongodb');
-const { APD } = require('../../models');
+const { APD } = require('../../models/index');
 
 tap.test('development APD seed document', async t => {
   await setup();

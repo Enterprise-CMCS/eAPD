@@ -45,7 +45,6 @@ const getConfig = () => {
       rejectPublicSuffixes: false
     };
   }
-  console.log({ config });
   return config;
 };
 const COOKIE_CONFIG = getConfig();

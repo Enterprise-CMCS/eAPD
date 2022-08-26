@@ -1,6 +1,6 @@
 const logger = require('../logger')('mongoose-migrate/migrate-apd-schema');
 const { setup, teardown } = require('../db/mongodb');
-const { APD } = require('../models');
+const { APD } = require('../models/index');
 
 /**
  * Update the APD schema to more closely match the front end nav/page sections
@@ -62,7 +62,7 @@ async function up() {
   // Update them into the database
   await Promise.all(
     updatedApds.map(async apd => {
-      await this('APD').replaceOne({ _id: apd.id }, { ...apd });
+      await APD.replaceOne({ _id: apd.id }, { ...apd });
     })
   ).catch(err => {
     logger.error(err);

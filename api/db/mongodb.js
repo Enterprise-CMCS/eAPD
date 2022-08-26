@@ -29,7 +29,7 @@ const connect = async () => {
 const setup = async () => {
   await connect();
   // eslint-disable-next-line global-require
-  require('../models'); // import all of the mongo models
+  require('../models/index'); // import all of the mongo models
 };
 
 const teardown = async () => {
