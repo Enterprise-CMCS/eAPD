@@ -1,15 +1,12 @@
-const mongoose = require('mongoose');
 const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
 const { deepCopy } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
-const { getConnectionStatus } = require('./mongodb');
 const { validateApd } = require('../schemas');
 const { APD } = require('../models/index');
 
 const createAPD = async apd => {
-  console.log(`Connection Status: ${getConnectionStatus()}`);
   const newApd = await APD.create(apd);
 
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
