@@ -560,6 +560,17 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.cy.js"; fi
       - run:
+          name: run e2e tests apd - budget
+          working_directory: ~/project/e2e
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.16.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_PORT=54325; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd budget" --spec "cypress/integration/02-apd/03-apd-budget-checks.cy.js"; fi
+      - run:
           name: run e2e tests admin
           working_directory: ~/project/e2e
           no_output_timeout: 60m

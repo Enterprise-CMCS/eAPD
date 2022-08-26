@@ -84,26 +84,48 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
-    _.forEach(staffList, (staff, i) => {
+    for (let i = 0; i < staffList.length; i++) {
       staffExpensesPage.addStaff();
       staffExpensesPage.fillStaff({
         years,
         staffIndex: i,
-        title: staff.title,
-        description: staff.description,
-        costs: staff.costs,
-        ftes: staff.ftes
+        title: staffList[i].title,
+        description: staffList[i].description,
+        costs: staffList[i].costs,
+        ftes: staffList[i].ftes
       });
-      if (!testBudget) {
-        staffExpensesPage.verifyStaff(
-          i,
-          staff.title,
-          staff.description,
-          staff.costs,
-          staff.ftes
-        );
+      if (testBudget) {
+        break;
       }
-    });
+      staffExpensesPage.verifyStaff(
+        i,
+        staffList[i].title,
+        staffList[i].description,
+        staffList[i].costs,
+        staffList[i].ftes
+      );
+    }
+
+    // _.forEach(staffList, (staff, i) => {
+    //   staffExpensesPage.addStaff();
+    //   staffExpensesPage.fillStaff({
+    //     years,
+    //     staffIndex: i,
+    //     title: staff.title,
+    //     description: staff.description,
+    //     costs: staff.costs,
+    //     ftes: staff.ftes
+    //   });
+    //   if (!testBudget) {
+    //     staffExpensesPage.verifyStaff(
+    //       i,
+    //       staff.title,
+    //       staff.description,
+    //       staff.costs,
+    //       staff.ftes
+    //     );
+    //   }
+    // });
 
     if (testDelete) {
       // Tests deleting State Staff
@@ -120,7 +142,7 @@ class FillOutActivityPage {
 
       // Check that the first staff on the page (index 0) has the second
       // staff's info
-      if (staffList.length > 1 && !testBudget) {
+      if (staffList.length > 1) {
         staffExpensesPage.verifyStaff(
           0,
           staffList[1].title,
@@ -143,24 +165,44 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
-    _.forEach(expenseList, (expense, i) => {
+    for (let i = 0; i < expenseList.length; i++) {
       staffExpensesPage.addExpense();
       staffExpensesPage.fillExpense({
         years,
         expenseIndex: i,
-        category: expense.category,
-        costs: expense.costs,
-        desc: expense.description
+        category: expenseList[i].category,
+        costs: expenseList[i].costs,
+        desc: expenseList[i].description
       });
-      if (!testBudget) {
-        staffExpensesPage.verifyExpense(
-          i,
-          expense.category,
-          expense.costs,
-          expense.description
-        );
+      if (testBudget) {
+        break;
       }
-    });
+      staffExpensesPage.verifyExpense(
+        i,
+        expenseList[i].category,
+        expenseList[i].costs,
+        expenseList[i].description
+      );
+    }
+
+    // _.forEach(expenseList, (expense, i) => {
+    //   staffExpensesPage.addExpense();
+    //   staffExpensesPage.fillExpense({
+    //     years,
+    //     expenseIndex: i,
+    //     category: expense.category,
+    //     costs: expense.costs,
+    //     desc: expense.description
+    //   });
+    //   if (!testBudget) {
+    //     staffExpensesPage.verifyExpense(
+    //       i,
+    //       expense.category,
+    //       expense.costs,
+    //       expense.description
+    //     );
+    //   }
+    // });
 
     if (testDelete) {
       // Test deleting other state expense
@@ -179,7 +221,7 @@ class FillOutActivityPage {
       cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 2);
       cy.waitForSave();
 
-      if (expenseList > 0 && !testBudget) {
+      if (expenseList > 0) {
         staffExpensesPage.verifyExpense(
           0,
           expenseList[1].category,
@@ -190,19 +232,36 @@ class FillOutActivityPage {
     }
   };
 
-  addPrivateContractors = (contractorList, years, testDelete = false) => {
+  addPrivateContractors = (
+    contractorList,
+    years,
+    testDelete = false,
+    testBudget = false
+  ) => {
     cy.findByRole('heading', {
       name: /Private Contractor Costs/i,
       level: 3
     }).should('exist');
 
-    _.forEach(contractorList, (contractor, i) => {
+    // _.forEach(contractorList, (contractor, i) => {
+    //   cy.findByRole('button', { name: /Add Contractor/i }).click();
+
+    //   this.fillPrivateContactor(contractor, i, years);
+
+    //   cy.findByRole('button', { name: /Save/i }).click();
+    // });
+
+    for (let i = 0; i < contractorList.length; i++) {
       cy.findByRole('button', { name: /Add Contractor/i }).click();
 
-      this.fillPrivateContactor(contractor, i, years);
+      this.fillPrivateContactor(contractorList[i], i, years);
 
       cy.findByRole('button', { name: /Save/i }).click();
-    });
+
+      if (testBudget) {
+        break;
+      }
+    }
 
     if (testDelete) {
       cy.findAllByText('Delete').eq(0).click();
