@@ -14,6 +14,8 @@ const connect = async () => {
 
   try {
     await mongoose.connect(connectionString, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
       dbName,
       keepAlive: true,
       keepAliveInitialDelay: 300000

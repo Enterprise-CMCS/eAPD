@@ -9,7 +9,7 @@
     "scaffold": "rm -rf dist/db/* && rm -rf dist/migrations/* && rm -rf dist && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
     "build": "yarn scaffold && babel . --ignore \"node_modules/!file-type/**\",\"dist\",\"coverage-endpoint\" -d ./dist -s",
     "start": "yarn build && node dist/main.js",
-    "start-dev": "yarn workspace @cms-eapd/common build && NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
+    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
     "npm-check": "npx npm-check-updates",
     "knex": "babel-node node_modules/.bin/knex",
     "knex-console": "node --experimental-repl-await knexrepl.js",

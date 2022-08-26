@@ -29,8 +29,8 @@ services:
     build:
       context: .
       dockerfile: ./api/Dockerfile
-    container_name: api-for-testing
     image: cms-eapd/api
+    container_name: api-container
     depends_on:
       - db
       - mongo
