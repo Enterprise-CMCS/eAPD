@@ -1,48 +1,16 @@
+const mongoose = require('mongoose');
 const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
 const { deepCopy } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
+const { getConnectionStatus } = require('./mongodb');
 const { validateApd } = require('../schemas');
-const { APD } = require('../models');
+const { APD } = require('../models/index');
 
 const createAPD = async apd => {
-  // There is an update to mongoose for a prototype polution vulnerability.
-  // Resolving the vulnerability causes some issues with deeply nested objects
-  // in the model. The way to resolve this issue is to remove the deeply nested
-  // object from the model before saving and then set it using and update with
-  // the full path values.
-  const { actualExpenditures = {} } = JSON.parse(
-    JSON.stringify(apd.previousActivities || {})
-  );
-  let newApd = new APD({
-    ...apd,
-    previousActivities: {
-      ...apd.previousActivities,
-      actualExpenditures: undefined // remove the deeply nested object causing issues
-    }
-  });
-  newApd = await newApd.save();
-
-  // update the record with the deeply nested object using their full paths
-  const set = {};
-  Object.keys(actualExpenditures).forEach(year => {
-    set[`previousActivities.actualExpenditures.${year}.hithie`] =
-      actualExpenditures[year].hithie;
-    set[`previousActivities.actualExpenditures.${year}.mmis.50`] =
-      actualExpenditures[year].mmis['50'];
-    set[`previousActivities.actualExpenditures.${year}.mmis.75`] =
-      actualExpenditures[year].mmis['75'];
-    set[`previousActivities.actualExpenditures.${year}.mmis.90`] =
-      actualExpenditures[year].mmis['90'];
-  });
-  await APD.updateOne(
-    // eslint-disable-next-line no-underscore-dangle
-    { _id: newApd._id },
-    {
-      $set: set
-    }
-  );
+  console.log(`Connection Status: ${getConnectionStatus()}`);
+  const newApd = await APD.create(apd);
 
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
