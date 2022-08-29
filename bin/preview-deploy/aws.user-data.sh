@@ -113,8 +113,8 @@ yarn install --frozen-lockfile --non-interactive --production --network-timeout 
 cd /app/api
 
 # Build and seed the database
-NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate 2>&1 | tee migrate.log
-NODE_ENV=development DEV_DB_HOST=localhost yarn run seed 2>&1 | tee seed.log
+LOG_LEVEL=verbose NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate 2>&1 | tee migrate.log
+LOG_LEVEL=verbose NODE_ENV=development DEV_DB_HOST=localhost yarn run seed 2>&1 | tee seed.log
 
 # Setting Up New Relic Application Monitor
 yarn add newrelic --save
@@ -164,8 +164,8 @@ echo "module.exports = {
 pm2 start ecosystem.config.js
 pm2 save
 
-NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate 2>&1 | tee production-migrate.log
-NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run seed 2>&1 | tee production-seed.log
+LOG_LEVEL=verbose NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate 2>&1 | tee production-migrate.log
+LOG_LEVEL=verbose NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run seed 2>&1 | tee production-seed.log
 E_USER
 
 sudo yum remove -y gcc-c++

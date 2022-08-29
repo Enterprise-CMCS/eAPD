@@ -35,8 +35,6 @@ api/endpoint-tests/endpoint-data.json
 api/seeds/test/tokens.json
 api/test-data/files
 
-bin
-
 common/coverage
 common/dist
 
