@@ -3,9 +3,9 @@ const { setup, teardown } = require('../../db/mongodb');
 const { data: apdData } = require(`../${process.env.NODE_ENV}/apds`); // eslint-disable-line import/no-dynamic-require
 
 const logger = require('../../logger')('mongoose APD seeder');
-const APD = require('../../models/apd');
+const { APD, Budget } = require('../../models/index');
 
-const models = [APD];
+const models = [APD, Budget];
 
 const dropCollections = async () => {
   const dropPromises = models.map(model => model.collection.drop());

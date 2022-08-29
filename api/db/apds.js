@@ -1,47 +1,36 @@
-const mongoose = require('mongoose');
 const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
 const { deepCopy, calculateBudget } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
+const { Budget, APD } = require('../models/index');
 
-const createAPD = async (apd, { APD = mongoose.model('APD') } = {}) => {
+const createAPD = async apd => {
+  const newBudget = calculateBudget(apd);
   let newApd = new APD(apd);
+  newApd.budget = newBudget;
 
   newApd = await newApd.save();
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
-const deleteAPDByID = async (id, { APD = mongoose.model('APD') } = {}) =>
+const deleteAPDByID = async id =>
   APD.updateOne({ _id: id }, { status: 'archived' }).exec();
 
-const getAllAPDsByState = async (
-  stateId,
-  { APD = mongoose.model('APD') } = {}
-) =>
+const getAllAPDsByState = async stateId =>
   APD.find(
     { stateId, status: 'draft' },
     '_id id createdAt updatedAt stateId status name years'
   ).lean();
 
-const getAPDByID = async (id, { APD = mongoose.model('APD') } = {}) =>
-  APD.findById(id).lean();
+const getAPDByID = async id => APD.findById(id).lean().populate('budget');
 
-const getAPDByIDAndState = (
-  id,
-  stateId,
-  { APD = mongoose.model('APD') } = {}
-) => APD.findOne({ _id: id, stateId }).lean();
+const getAPDByIDAndState = (id, stateId) =>
+  APD.findOne({ _id: id, stateId }).lean().populate('budget');
 
 // Apply the patches to the APD document
-const patchAPD = async (
-  id,
-  stateId,
-  apdDoc,
-  patch,
-  { APD = mongoose.model('APD') }
-) => {
+const patchAPD = async (id, stateId, apdDoc, patch) => {
   // duplicate the apdDoc so that dates will be converted to strings
   const apdJSON = deepCopy(apdDoc);
   // apply the patches to the apd
@@ -55,12 +44,7 @@ const patchAPD = async (
   return newDocument;
 };
 
-const updateAPDBudget = async (
-  id,
-  stateId,
-  patch,
-  { APD = mongoose.model('APD') }
-) => {
+const updateAPDBudget = async (id, stateId, patch) => {
   let updatedBudget;
   let errors;
 
@@ -68,6 +52,10 @@ const updateAPDBudget = async (
     const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
     const updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
     updatedBudget = calculateBudget(updatedDoc);
+    await Budget.replaceOne({ apdId: id, stateId }, updatedBudget, {
+      multipleCastError: true,
+      runValidators: true
+    });
   } catch (e) {
     errors = e;
   }
@@ -79,11 +67,7 @@ const updateAPDDocument = async (
   id,
   stateId,
   patch,
-  {
-    APD = mongoose.model('APD'),
-    updateProfile = updateStateProfile,
-    validate = validateApd
-  } = {}
+  { updateProfile = updateStateProfile, validate = validateApd } = {}
 ) => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
@@ -98,7 +82,7 @@ const updateAPDDocument = async (
       value: new Date().toISOString()
     });
     try {
-      updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
+      updatedDoc = await patchAPD(id, stateId, apdDoc, patch);
     } catch (err) {
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
 
