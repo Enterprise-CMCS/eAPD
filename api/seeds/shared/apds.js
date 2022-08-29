@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { setup, teardown } = require('../../db/mongodb');
 
 const { data: apdData } = require(`../${process.env.NODE_ENV}/apds`); // eslint-disable-line import/no-dynamic-require
@@ -8,7 +9,20 @@ const { APD } = require('../../models');
 const models = [APD];
 
 const dropCollections = async () => {
-  const dropPromises = models.map(model => model.collection.drop());
+  const collectionNames = Object.keys(mongoose.connection.collections);
+
+  const dropPromises = models
+    .map(model => {
+      if (collectionNames.includes(model.collection.name)) {
+        logger.verbose(
+          `Dropping collection for model ${model.collection.name}`
+        );
+        return model.collection.drop();
+      }
+      logger.verbose(`${model.collection.name} does not exist in the database`);
+      return null;
+    })
+    .filter(promise => promise !== null);
 
   try {
     return Promise.all(dropPromises);
