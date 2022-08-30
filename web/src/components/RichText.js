@@ -228,7 +228,8 @@ class RichText extends Component {
               link_assume_external_targets: true,
               default_link_target: '_blank',
               toolbar_mode: 'wrap',
-              selector: 'textarea'
+              selector: 'textarea',
+              iframe_aria_text: this.props.iframe_aria_text
             }}
             value={content}
             onEditorChange={this.onEditorChange}
@@ -250,6 +251,7 @@ class RichText extends Component {
 RichText.propTypes = {
   content: PropTypes.string,
   id: PropTypes.string,
+  iframe_aria_text: PropTypes.string,
   onSync: PropTypes.func,
   onBlur: PropTypes.func,
   uploadFile: PropTypes.func.isRequired,
@@ -259,6 +261,7 @@ RichText.propTypes = {
 RichText.defaultProps = {
   content: '',
   id: '',
+  iframe_aria_text: '',
   onSync: () => {},
   onBlur: () => {},
   error: ''

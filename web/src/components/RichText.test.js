@@ -15,6 +15,7 @@ describe('RichText component', () => {
       shallow(
         <RichText
           id="test-id"
+          iframe_aria_text="aria text title"
           content="initial rich text value"
           uploadFile={jest.fn()}
         />

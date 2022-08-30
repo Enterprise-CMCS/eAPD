@@ -37,6 +37,7 @@ exports[`<OtherFunding /> renders correctly 1`] = `
         content="other funding for FFY 1066"
         editorClassName="rte-textarea-l"
         id="cost-allocation-narrative-1066-other-sources-field"
+        iframe_aria_text="Other Funding Description Text Area"
         onSync={[Function]}
       />
     </div>
@@ -150,6 +151,7 @@ exports[`<OtherFunding /> renders correctly 1`] = `
         content="other funding for FFY 1067"
         editorClassName="rte-textarea-l"
         id="cost-allocation-narrative-1067-other-sources-field"
+        iframe_aria_text="Other Funding Description Text Area"
         onSync={[Function]}
       />
     </div>
