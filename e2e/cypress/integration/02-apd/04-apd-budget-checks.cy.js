@@ -45,9 +45,9 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     cy.visit(apdUrl);
   });
 
-  // after(() => {
-  //   cy.deleteAPD(apdId);
-  // });
+  after(() => {
+    cy.deleteAPD(apdId);
+  });
 
   describe('Budget Checks', () => {
     it('Creates activities and sets fed state split on each one', () => {

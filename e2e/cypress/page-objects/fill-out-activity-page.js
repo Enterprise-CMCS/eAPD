@@ -106,27 +106,6 @@ class FillOutActivityPage {
       );
     }
 
-    // _.forEach(staffList, (staff, i) => {
-    //   staffExpensesPage.addStaff();
-    //   staffExpensesPage.fillStaff({
-    //     years,
-    //     staffIndex: i,
-    //     title: staff.title,
-    //     description: staff.description,
-    //     costs: staff.costs,
-    //     ftes: staff.ftes
-    //   });
-    //   if (!testBudget) {
-    //     staffExpensesPage.verifyStaff(
-    //       i,
-    //       staff.title,
-    //       staff.description,
-    //       staff.costs,
-    //       staff.ftes
-    //     );
-    //   }
-    // });
-
     if (testDelete) {
       // Tests deleting State Staff
       cy.findByRole('heading', { name: /^State Staff$/i })
@@ -185,25 +164,6 @@ class FillOutActivityPage {
       );
     }
 
-    // _.forEach(expenseList, (expense, i) => {
-    //   staffExpensesPage.addExpense();
-    //   staffExpensesPage.fillExpense({
-    //     years,
-    //     expenseIndex: i,
-    //     category: expense.category,
-    //     costs: expense.costs,
-    //     desc: expense.description
-    //   });
-    //   if (!testBudget) {
-    //     staffExpensesPage.verifyExpense(
-    //       i,
-    //       expense.category,
-    //       expense.costs,
-    //       expense.description
-    //     );
-    //   }
-    // });
-
     if (testDelete) {
       // Test deleting other state expense
       cy.findByRole('heading', { name: /^Other State Expenses$/i })
@@ -242,14 +202,6 @@ class FillOutActivityPage {
       name: /Private Contractor Costs/i,
       level: 3
     }).should('exist');
-
-    // _.forEach(contractorList, (contractor, i) => {
-    //   cy.findByRole('button', { name: /Add Contractor/i }).click();
-
-    //   this.fillPrivateContactor(contractor, i, years);
-
-    //   cy.findByRole('button', { name: /Save/i }).click();
-    // });
 
     for (let i = 0; i < contractorList.length; i++) {
       cy.findByRole('button', { name: /Add Contractor/i }).click();
