@@ -1,39 +1,35 @@
-const mongoose = require('mongoose');
 const tap = require('tap');
 const toMongodb = require('jsonpatch-to-mongodb');
 
-const mongo = require('../db/mongodb');
-
+const { setup, teardown } = require('../db/mongodb');
+const { APD } = require('./index');
 const { apd } = require('../seeds/development/apds');
 
-let newApd;
-let APD;
+let apdId;
 
 tap.test('APD model test', async t => {
   t.before(async () => {
-    await mongo.setup();
-    APD = mongoose.model('APD');
+    await setup();
   });
 
   t.beforeEach(async () => {
-    newApd = new APD({
+    const { _id } = await APD.create({
       status: 'draft',
       stateId: 'md',
       ...apd
     });
-    newApd = await newApd.save();
+    apdId = _id.toString();
   });
 
   t.test('get APD', async test => {
-    const found = await APD.findOne({ _id: newApd._id }); // eslint-disable-line no-underscore-dangle
+    const found = await APD.findOne({ _id: apdId }); // eslint-disable-line no-underscore-dangle
 
     test.ok(!!found, 'Found the APD that was just added');
   });
 
   t.test('patch APD', async test => {
-    const id = newApd._id; // eslint-disable-line no-underscore-dangle
     await APD.updateOne(
-      { _id: id },
+      { _id: apdId },
       toMongodb([
         {
           op: 'replace',
@@ -43,7 +39,7 @@ tap.test('APD model test', async t => {
       ])
     );
 
-    const updatedApd = await APD.findOne({ _id: id }).exec();
+    const updatedApd = await APD.findOne({ _id: apdId }).exec();
 
     test.equal(
       updatedApd.activities[0].outcomes[1].metrics[1].metric,
@@ -53,10 +49,10 @@ tap.test('APD model test', async t => {
   });
 
   t.afterEach(async () => {
-    await newApd.remove();
+    await APD.deleteOne({ _id: apdId });
   });
 
   t.teardown(async () => {
-    await mongo.teardown();
+    await teardown();
   });
 });

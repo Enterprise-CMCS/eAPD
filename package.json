@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "@babel/cli": "7.18.10",
-    "@babel/core": "7.18.10",
+    "@babel/core": "7.18.13",
     "@babel/eslint-parser": "7.18.9",
     "@babel/node": "7.18.10",
     "@babel/plugin-proposal-class-properties": "7.18.6",
@@ -96,21 +96,14 @@
     "babel-plugin-dynamic-import-node": "2.3.3"
   },
   "devDependencies": {
-    "@snyk/protect": "1.986.0",
+    "@snyk/protect": "1.991.0",
     "babel-jest": "27.5.1",
-    "husky": "^8.0.0",
+    "husky": "8.0.1",
     "jest": "27.5.1",
     "prettier": "2.7.1",
     "pretty-quick": "^3.1.3"
   },
   "resolutions": {
-    "ansi-regex": "3.0.1",
-    "async": ">=3.2.2",
-    "glob-parent": ">=6.0.1",
-    "minimist": ">=1.2.6",
-    "node-forge": ">=1.3.0",
-    "trim": "0.0.3",
-    "trim-newlines": "3.0.1",
     "yargs-parser": ">=18.1.1"
   },
   "packageManager": "yarn@1.22.18"
