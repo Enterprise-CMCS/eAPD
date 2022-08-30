@@ -124,6 +124,7 @@ const ContractorResourceForm = forwardRef(
             <RichText
               {...props}
               id={`contractor-description-field-${index}`}
+              iframe_aria_text="Procurement Methodology and Description of Services Text Area"
               content={value}
               onSync={html => {
                 onChange(html);
