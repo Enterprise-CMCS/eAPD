@@ -181,6 +181,7 @@ const ApdOverview = ({
             <RichText
               {...props}
               id="program-introduction-field"
+              iframe_aria_text="Program Introduction Text Area"
               content={programOverview}
               onSync={handleProgramOverview}
               editorClassName="rte-textarea-l"
@@ -201,6 +202,7 @@ const ApdOverview = ({
             <RichText
               {...props}
               id="hit-overview-field"
+              iframe_aria_text="HIT Overview Text Area"
               content={narrativeHIT}
               onSync={handleHITOverview}
               editorClassName="rte-textarea-l"
@@ -221,6 +223,7 @@ const ApdOverview = ({
             <RichText
               {...props}
               id="hie-overview-field"
+              iframe_aria_text="HIE Overview Text Area"
               content={narrativeHIE}
               onSync={handleHIEOverview}
               editorClassName="rte-textarea-l"
@@ -241,6 +244,7 @@ const ApdOverview = ({
             <RichText
               {...props}
               id="mmis-overview-field"
+              iframe_aria_text="MMIS Overview Text Area"
               content={narrativeMMIS}
               onSync={handleMMISOverview}
               editorClassName="rte-textarea-l"

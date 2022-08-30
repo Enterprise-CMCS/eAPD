@@ -30,6 +30,7 @@ exports[`previous activities component renders correctly 1`] = `
       <Connect(RichText)
         editorClassName="rte-textarea-l"
         id="previous-activity-summary-field"
+        iframe_aria_text="Previous Activities Summary Text Area"
         onSync={[Function]}
       />
     </Subsection>
