@@ -1,12 +1,12 @@
 const knex = require('../db/knex');
 const logger = require('../logger')('mongoose-migrate/migrate-from-postgres');
+const { setup, teardown } = require('../db/mongodb');
+const { APD } = require('../models/index');
 
 /**
  * Copy the APDs that exist in the postgres database to the mongo database
  */
 async function up() {
-  require('../models/apd'); // eslint-disable-line global-require
-
   // eslint-disable-next-line no-restricted-globals
   const normalizeDate = date => (isNaN(Date.parse(date)) ? null : date);
   const normalizeNarrativeYears = narrativeYears =>
@@ -79,8 +79,10 @@ async function up() {
 
   try {
     // insert the converted APDs into the mongo database
-    const res = await this('APD').create(apds);
+    await setup();
+    const res = await APD.create(apds);
     logger.info(`${res.length} APDs migrated`);
+    await teardown();
   } catch (error) {
     logger.error(error);
   }
