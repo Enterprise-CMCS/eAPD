@@ -1,3 +1,5 @@
+const ObjectId = require('mongoose').Types.ObjectId;
+
 const apd = {
   name: 'HITECH IAPD',
   years: ['2022', '2023'],
@@ -928,13 +930,18 @@ const apdNoActivities = {
   }
 };
 
+const apdId = '630e19943071ed0cd1b118fb';
+const apdNoActivitiesId = '630e19943071ed0cd1b118fc';
+
 const data = [
   {
+    _id: ObjectId(apdId),
     stateId: 'ak',
     status: 'draft',
     ...apd
   },
   {
+    _id: ObjectId(apdNoActivitiesId),
     stateId: 'ak',
     status: 'draft',
     ...apdNoActivities
@@ -943,5 +950,8 @@ const data = [
 
 module.exports = {
   data,
-  apd
+  apd,
+  apdId,
+  apdNoActivities,
+  apdNoActivitiesId
 };

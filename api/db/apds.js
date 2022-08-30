@@ -7,11 +7,20 @@ const { validateApd } = require('../schemas');
 const { Budget, APD } = require('../models/index');
 
 const createAPD = async apd => {
-  const newBudget = calculateBudget(apd);
-  let newApd = new APD(apd);
-  newApd.budget = newBudget;
+  const newApd = await APD.create(apd);
+  console.log(`new APD Id ${newApd._id}`); // eslint-disable-line no-underscore-dangle
 
-  newApd = await newApd.save();
+  const budget = calculateBudget(apd);
+  const newBudget = await Budget.create({
+    apdId: newApd._id, // eslint-disable-line no-underscore-dangle
+    status: newApd.status,
+    stateId: newApd.stateId,
+    ...budget
+  });
+  console.log(`new budget ${newBudget._id}`); // eslint-disable-line no-underscore-dangle
+
+  await APD.updateOne({ _id: newApd._id }, { budget: newBudget }); // eslint-disable-line no-underscore-dangle
+
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 

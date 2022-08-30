@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const { setup, teardown } = require('../../db/mongodb');
+const { createAPD } = require('../../db/apds');
 
 const { data: apdData } = require(`../${process.env.NODE_ENV}/apds`); // eslint-disable-line import/no-dynamic-require
 
 const logger = require('../../logger')('mongoose APD seeder');
-const { APD, Budget } = require('../../models/index');
+const { APD } = require('../../models/index');
 
-const models = [APD, Budget];
+const models = [APD];
 
 const emptyCollections = async () => {
   const collectionNames = Object.keys(mongoose.connection.collections);
@@ -35,7 +36,7 @@ const emptyCollections = async () => {
   }
 };
 
-const populate = async ({ model, data }) => {
+const populate = async ({ model, data, create }) => {
   const count = await model.countDocuments().exec();
   await model.createIndexes();
 
@@ -43,7 +44,10 @@ const populate = async ({ model, data }) => {
     logger.verbose(
       `Seeding ${model.collection.name} with ${data.length} records`
     );
-    await model.create(data);
+    if (Array.isArray(data)) {
+      return Promise.all(data.map(item => create(item)));
+    }
+    return create(data);
   }
   logger.verbose(
     `Skipping ${model.collection.name} population, ${count} documents found`
@@ -63,7 +67,7 @@ exports.seed = async () => {
     );
     await emptyCollections();
     logger.verbose('Populating collections');
-    await populate({ model: APD, data: apdData });
+    await populate({ model: APD, data: apdData, create: createAPD });
     logger.verbose('Disconnecting from MongoDB');
     await teardown();
   } catch (err) {
