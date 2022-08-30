@@ -10,12 +10,14 @@ unset DEV_DB_NAME
 echo "[]" > endpoint-data.json
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
+sleep 5
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
+sleep 5
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e ENDPOINT_COVERAGE_CAPTURE=true api-for-testing yarn run test-endpoints $@
 EXIT_CODE=$?
-docker cp api_api-for-testing_1:/app/api/endpoint-data.json endpoint-data.json
+docker cp api-for-testing:/app/api/endpoint-data.json endpoint-data.json
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 

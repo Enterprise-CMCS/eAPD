@@ -8,7 +8,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import DollarField from '../../../../../components/DollarField';
 import TextArea from '../../../../../components/TextArea';
 
-import nonPersonnelCostsSchema from '../../../../../static/schemas/nonPersonnelCosts';
+import nonPersonnelCostsSchema from '@cms-eapd/common/schemas/nonPersonnelCosts';
 
 import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../redux/actions/editActivity';
 

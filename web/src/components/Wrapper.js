@@ -5,10 +5,12 @@ import Header from '../layout/header/Header';
 import Footer from '../layout/footer/Footer';
 import routes from '../pages/mainRoutesList';
 import SessionEndingAlert from './SessionEndingAlert';
+import { pageView } from '../util/analytics';
 
 const cardRoutes = routes.filter(r => r.isCard).map(r => r.path);
 
 const Wrapper = ({ children, location: { pathname } }) => {
+  pageView(pathname);
   const isGray = cardRoutes.indexOf(pathname) >= 0;
   const showSiteTitle = pathname === '/';
 

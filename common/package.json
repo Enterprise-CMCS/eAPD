@@ -2,8 +2,11 @@
   "name": "@cms-eapd/common",
   "version": "0.0.1",
   "description": "APD app for CMS HITECH program",
-  "main": "app.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "scripts": {
+    "scaffold": "rm -rf dist && mkdir dist",
+    "build": "yarn scaffold && babel . --ignore \"node_modules\",\"dist\" -d ./dist -s",
     "stryker": "TZ=utc stryker run",
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch",
@@ -22,12 +25,12 @@
     "node": "16.16.0"
   },
   "dependencies": {
+    "@joi/date": "2.1.0",
     "joi": "17.6.0"
   },
   "devDependencies": {
-    "@stryker-mutator/core": "6.0.2",
-    "@stryker-mutator/jest-runner": "6.0.2",
-    "jest": "^28.1.2"
+    "@stryker-mutator/core": "6.1.2",
+    "@stryker-mutator/jest-runner": "6.1.2"
   },
   "packageManager": "yarn@1.22.18"
 }

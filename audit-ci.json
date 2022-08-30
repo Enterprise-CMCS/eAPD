@@ -2,7 +2,6 @@
   "low": true,
   "package-manager": "yarn",
   "allowlist": [
-    "GHSA-cj88-88mr-972w|@cms-eapd/web>postcss-cli>globby>fast-glob>glob-parent",
     "1081927|@cms-eapd/api>mongoose",
     "1081927|@cms-eapd/api>migrate-mongoose>mongoose",
     "1081927|@cms-eapd/e2e>@cms-eapd/api>migrate-mongoose>mongoose",

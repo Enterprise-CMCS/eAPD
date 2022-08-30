@@ -52,6 +52,7 @@ const setup = async (props = {}) => {
 describe('APD overview component', () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    jest.setTimeout(30000);
   });
 
   test('dispatches on text change', async () => {

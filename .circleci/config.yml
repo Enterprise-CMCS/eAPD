@@ -488,8 +488,15 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb || true
             sudo apt-get -f install
             sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+             # Switch to Node 16.16.0.
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.16.0
+            nvm alias default 16.16.0
+            nvm use 16.16.0
       - run:
-          name: set up environment
+          name: build images
           no_output_timeout: 30m
           working_directory: ~/project
           command: |
@@ -501,8 +508,13 @@ jobs:
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
             export TEALIUM_ENV="test"
+
+            nvm use 16.16.0
+            yarn install --frozen-lockfile
+            yarn workspace @cms-eapd/common build
+            yarn workspace @cms-eapd/api build
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            COMPOSE_HTTP_TIMEOUT=150 docker-compose up -d
+            docker-compose up -d
             docker-compose exec api yarn run migrate
             docker-compose exec api yarn run seed
       - run:
@@ -510,18 +522,10 @@ jobs:
           working_directory: ~/project/e2e
           no_output_timeout: 30m
           command: |
-            export NODE_ENV=development
             echo $CYPRESS_ENV >> ./cypress.env.json
 
-            # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
             nvm use 16.16.0
-
-            # yarn install --frozen-lockfile
-            npx cypress@10.3.1 install --force
+            npx cypress@10.5.0 install --force
             npx cypress verify
       - run:
           name: run e2e tests authentication
@@ -738,7 +742,7 @@ jobs:
       - run:
           name: Prepare Yarn for Web App Build
           working_directory: ~/project
-          command: yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
+          command: yarn install --frozen-lockfile --production --non-interactive --network-timeout 1000000 > yarn-install.log
       - run:
           name: build the web app
           working_directory: ~/project/web
@@ -828,8 +832,9 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
-            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
+            sleep 5
+            docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
+            docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
           working_directory: ~/project/api
@@ -1051,7 +1056,9 @@ jobs:
             sudo apt-get update
             sudo apt-get install zip -y
             yarn install --frozen-lockfile --production=true --network-timeout 1000000
-            zip -r /tmp/backend.zip api/* package.json yarn.lock common/*
+            yarn workspace @cms-eapd/common build
+            yarn workspace @cms-eapd/api build
+            zip -r /tmp/backend.zip api/* common/* package.json yarn.lock babel.config.js
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip

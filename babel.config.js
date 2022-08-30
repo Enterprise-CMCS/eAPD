@@ -1,16 +1,18 @@
-const presets = [
-  [
-    '@babel/preset-env',
-    {
-      targets: {
-        node: 'current'
-      }
-    }
-  ]
-];
-const plugins = [];
-
 module.exports = {
-  presets,
-  plugins
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current'
+        }
+      }
+    ],
+    ['@babel/preset-react']
+  ],
+  plugins: [
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-object-rest-spread',
+    'babel-plugin-dynamic-import-node'
+  ]
 };
