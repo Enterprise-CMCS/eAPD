@@ -17,7 +17,7 @@ docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=
 sleep 5
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e ENDPOINT_COVERAGE_CAPTURE=true api-for-testing yarn run test-endpoints $@
 EXIT_CODE=$?
-docker cp api-for-testing:/app/api/endpoint-data.json endpoint-data.json
+docker cp api-container:/app/api/endpoint-data.json endpoint-data.json
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 

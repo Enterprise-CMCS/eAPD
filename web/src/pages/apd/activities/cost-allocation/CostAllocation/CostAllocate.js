@@ -30,6 +30,7 @@ const CostAllocate = ({ activity, activityIndex, setMethodology }) => {
         />
         <RichText
           id="cost-allocation-methodology-field"
+          iframe_aria_text="Description of Cost Allocation Methodology Summary Text Area"
           content={methodology}
           onSync={syncMethodology}
           editorClassName="rte-textarea-l"

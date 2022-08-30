@@ -62,7 +62,7 @@ async function up() {
   // Update them into the database
   await Promise.all(
     updatedApds.map(async apd => {
-      await this('APD').replaceOne({ _id: apd.id }, { ...apd });
+      await APD.replaceOne({ _id: apd.id }, { ...apd });
     })
   ).catch(err => {
     logger.error(err);

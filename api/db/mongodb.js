@@ -14,6 +14,8 @@ const connect = async () => {
 
   try {
     await mongoose.connect(connectionString, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
       dbName,
       keepAlive: true,
       keepAliveInitialDelay: 300000
@@ -22,14 +24,14 @@ const connect = async () => {
     return null;
   } catch (err) {
     logger.error(`Error in MongoDB connection: ${err}`);
-    return null;
+    return false;
   }
 };
 
 const setup = async () => {
   await connect();
   // eslint-disable-next-line global-require
-  require('../models'); // import all of the mongo models
+  require('../models/index'); // import all of the mongo models
 };
 
 const teardown = async () => {

@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { setup, teardown } = require('../../db/mongodb');
 
 const { data: apdData } = require(`../${process.env.NODE_ENV}/apds`); // eslint-disable-line import/no-dynamic-require
@@ -7,11 +8,22 @@ const { APD, Budget } = require('../../models/index');
 
 const models = [APD, Budget];
 
-const dropCollections = async () => {
-  const dropPromises = models.map(model => model.collection.drop());
+const emptyCollections = async () => {
+  const collectionNames = Object.keys(mongoose.connection.collections);
+
+  const dropPromises = models
+    .map(model => {
+      if (collectionNames.includes(model.collection.name)) {
+        logger.verbose(`${model.collection.name} exists in the database`);
+        return model.deleteMany();
+      }
+      logger.verbose(`${model.collection.name} does not exist in the database`);
+      return null;
+    })
+    .filter(promise => promise !== null);
 
   try {
-    await Promise.all(dropPromises);
+    return Promise.all(dropPromises);
   } catch (e) {
     if (e.code === 26) {
       // eslint-disable-next-line no-console
@@ -19,17 +31,19 @@ const dropCollections = async () => {
     } else {
       throw e;
     }
+    return false;
   }
 };
 
 const populate = async ({ model, data }) => {
   const count = await model.countDocuments().exec();
+  await model.createIndexes();
 
   if (count === 0) {
     logger.verbose(
       `Seeding ${model.collection.name} with ${data.length} records`
     );
-    return model.create(data);
+    await model.create(data);
   }
   logger.verbose(
     `Skipping ${model.collection.name} population, ${count} documents found`
@@ -43,11 +57,11 @@ exports.seed = async () => {
     logger.verbose(`Connecting to MongoDB to seed data`);
     await setup();
     logger.verbose(
-      `Dropping collections for ${models
+      `Emptying collections for ${models
         .map(model => model.collection.name)
         .join(', ')}`
     );
-    await dropCollections();
+    await emptyCollections();
     logger.verbose('Populating collections');
     await populate({ model: APD, data: apdData });
     logger.verbose('Disconnecting from MongoDB');
@@ -61,11 +75,11 @@ exports.drop = async () => {
   try {
     await setup();
     logger.verbose(
-      `Dropping collections for ${models
+      `Emptying collections for ${models
         .map(model => model.collection.name)
         .join(', ')}`
     );
-    await dropCollections();
+    await emptyCollections();
     logger.verbose('Disconnecting from MongoDB');
     await teardown();
   } catch (err) {
