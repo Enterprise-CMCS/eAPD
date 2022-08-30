@@ -8,16 +8,14 @@ const { APD } = require('../../models');
 
 const models = [APD];
 
-const dropCollections = async () => {
+const emptyCollections = async () => {
   const collectionNames = Object.keys(mongoose.connection.collections);
 
   const dropPromises = models
     .map(model => {
       if (collectionNames.includes(model.collection.name)) {
-        logger.verbose(
-          `Dropping collection for model ${model.collection.name}`
-        );
-        return model.collection.drop();
+        logger.verbose(`${model.collection.name} exists in the database`);
+        return model.deleteMany();
       }
       logger.verbose(`${model.collection.name} does not exist in the database`);
       return null;
@@ -59,11 +57,11 @@ exports.seed = async () => {
     logger.verbose(`Connecting to MongoDB to seed data`);
     await setup();
     logger.verbose(
-      `Dropping collections for ${models
+      `Emptying collections for ${models
         .map(model => model.collection.name)
         .join(', ')}`
     );
-    await dropCollections();
+    await emptyCollections();
     logger.verbose('Populating collections');
     await populate({ model: APD, data: apdData });
     logger.verbose('Disconnecting from MongoDB');
@@ -77,11 +75,11 @@ exports.drop = async () => {
   try {
     await setup();
     logger.verbose(
-      `Dropping collections for ${models
+      `Emptying collections for ${models
         .map(model => model.collection.name)
         .join(', ')}`
     );
-    await dropCollections();
+    await emptyCollections();
     logger.verbose('Disconnecting from MongoDB');
     await teardown();
   } catch (err) {
