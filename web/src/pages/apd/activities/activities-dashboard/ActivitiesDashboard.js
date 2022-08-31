@@ -13,7 +13,7 @@ import AlertMissingFFY from '../../../../components/AlertMissingFFY';
 
 import activitiesDashboardSchema from '@cms-eapd/common/schemas/activitiesDashboard';
 
-const All = ({ addActivity, activities }) => {
+const All = ({ addActivity, activities, adminCheck }) => {
   const { apdId } = useParams();
 
   const validate = activitiesDashboardSchema.validate(activities);
@@ -24,12 +24,10 @@ const All = ({ addActivity, activities }) => {
       <AlertMissingFFY />
       <Section id="activities" resource="activities">
         <hr className="custom-hr" />
-        {validate.error && (
+        {activities.length == 0 && <p>Add at least one activity.</p>}
+        {adminCheck && validate.error && (
           <Fragment>
-            <p>Add at least one activity.</p>
-            <Alert variation="error">
-              Activities have not been added for this APD.
-            </Alert>
+            <Alert variation="error">{validate.error?.message}</Alert>
           </Fragment>
         )}
         {activities.map((activity, index) => (
@@ -49,11 +47,17 @@ const All = ({ addActivity, activities }) => {
 
 All.propTypes = {
   addActivity: PropTypes.func.isRequired,
-  activities: PropTypes.arrayOf(PropTypes.object).isRequired
+  activities: PropTypes.arrayOf(PropTypes.object).isRequired,
+  adminCheck: PropTypes.bool
+};
+
+All.defaultProps = {
+  adminCheck: false
 };
 
 const mapStateToProps = state => ({
-  activities: selectAllActivities(state)
+  activities: selectAllActivities(state),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
