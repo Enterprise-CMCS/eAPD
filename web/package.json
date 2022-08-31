@@ -17,7 +17,7 @@
     "build:storybook": "build-storybook -o docs-build",
     "deploy-storybook": "storybook-to-ghpages --out=docs-build",
     "storybook": "start-storybook -p 6006",
-    "deploy-chromatic": "chromatic --storybook-build-dir docs-build --exit-zero-on-changes --debug",
+    "deploy-chromatic": "chromatic --storybook-build-dir docs-build --no-interactive",
     "stryker": "TZ=utc stryker run"
   },
   "repository": {
