@@ -624,7 +624,7 @@ jobs:
       - run:
           name: Deploy to Chromatic
           working_directory: ~/project/web
-          no_output_timeout: 60m
+          no_output_timeout: 90m
           command: |
             export TEALIUM_ENV="test"
             STORYBOOK_BUILD_TIMEOUT=1200000 yarn build:storybook
