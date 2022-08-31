@@ -1325,7 +1325,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.wait(5000); // Gives time to load the APD dashboard
 
       cy.visit(apdUrl);
-      cy.wait('@loadImage', { timeout: 30000 });
+      cy.wait('@loadImage', { timeout: 60000 });
 
       cy.contains('Export and Submit').click();
       cy.findByRole('button', { name: 'Continue to Review' }).click();

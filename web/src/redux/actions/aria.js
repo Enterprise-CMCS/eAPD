@@ -4,9 +4,9 @@ export const ariaAnnounceFFPQuarterly =
   (aKey, year, q, name) => (dispatch, getState) => {
     dispatch({
       type: ARIA_ANNOUNCE_CHANGE,
-      message:
-        getState().budget.activities[aKey].quarterlyFFP.years[year][q][name]
-          .dollars
+      message: `${
+        getState().budget.activities[aKey].quarterlyFFP[year][q][name].dollars
+      } dollars`
     });
   };
 

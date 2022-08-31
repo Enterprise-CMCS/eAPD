@@ -1,5 +1,10 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import {
+  renderWithConnection,
+  act,
+  waitFor,
+  screen
+} from 'apd-testing-library';
 
 import {
   plain as CostAllocate,
@@ -8,36 +13,38 @@ import {
 } from './CostAllocate';
 import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
 
-describe('<CostAllocate />', () => {
-  const props = {
-    activityIndex: 1,
-    activity: {
-      key: 'activity key',
-      costAllocationNarrative: {
-        methodology: 'cost allocation',
-        otherSources: 'other funding'
-      }
-    },
-    setMethodology: jest.fn()
-  };
+const initialState = {
+  activityIndex: 1,
+  activity: {
+    key: 'activity key',
+    costAllocationNarrative: {
+      methodology: 'cost allocation'
+    }
+  },
+  setMethodology: jest.fn(),
+  setCostAllocationMethodology: jest.fn()
+};
 
+const setup = async (props = {}) => {
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  const utils = await act(async () =>
+    renderWithConnection(<CostAllocate {...initialState} {...props} />)
+  );
+  return utils;
+};
+
+describe('<setCostAllocationMethodology />', () => {
   beforeEach(() => {
-    props.setMethodology.mockClear();
+    jest.resetAllMocks();
   });
 
-  test('renders correctly', () => {
-    const component = shallow(<CostAllocate {...props} />);
-    expect(component).toMatchSnapshot();
-  });
-
-  test('updates activity when text is changed', () => {
-    const component = shallow(<CostAllocate {...props} />);
-
-    component
-      .find('Connect(RichText)')
-      .filterWhere(n => n.props().content === 'cost allocation')
-      .prop('onSync')('bloop');
-    expect(props.setMethodology).toHaveBeenCalledWith(1, 'bloop');
+  it('renders successfully', async () => {
+    await setup();
+    await waitFor(() => {
+      expect(
+        screen.getByLabelText('Description of Cost Allocation Methodology')
+      ).toHaveValue(initialState.activity.costAllocationNarrative.methodology);
+    });
   });
 
   test('maps redux state to component props', () => {
