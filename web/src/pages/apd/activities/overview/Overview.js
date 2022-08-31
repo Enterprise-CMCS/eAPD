@@ -202,6 +202,15 @@ const ActivityOverview = ({
             />
           )}
         />
+
+        {errors?.description && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            {errors.description.message}
+          </span>
+        )}
       </div>
 
       <div className="data-entry-box">
