@@ -142,6 +142,7 @@ const ActivityOverview = ({
           render={({ field: { onChange } }) => (
             <RichText
               id="activity-short-overview-field"
+              role={summary}
               content={summary}
               onSync={html => {
                 setOverview(activityIndex, html);
