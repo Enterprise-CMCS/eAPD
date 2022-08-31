@@ -34,8 +34,8 @@ const OtherFunding = ({
   adminCheck
 }) => {
   const { costAllocationNarrative = '', costAllocation = '' } = activity,
-        { years } = costSummary,
-        yearsArray = Object.keys(years);
+    { years } = costSummary,
+    yearsArray = Object.keys(years);
 
   const {
     control,
@@ -53,9 +53,9 @@ const OtherFunding = ({
 
   useEffect(() => {
     if (adminCheck) {
-      trigger()
-    };
-  }, [adminCheck])
+      trigger();
+    }
+  }, [adminCheck]);
 
   return (
     <Fragment>
@@ -80,6 +80,7 @@ const OtherFunding = ({
               name={`costAllocationNarrative.years.${ffy}.otherSources`}
               data-testid={`other-sources-${ffy}`}
               id={`cost-allocation-narrative-${ffy}-other-sources-field`}
+              iframe_aria_text="Other Funding Description Text Area"
               content={costAllocationNarrative.years[ffy].otherSources}
               onSync={html => {
                 syncOtherFunding(activityIndex, ffy, html);
@@ -90,20 +91,18 @@ const OtherFunding = ({
               }}
               editorClassName="rte-textarea-l"
             />
-          <div>
-            { adminCheck 
-              && costAllocation[ffy]?.other > 0 
-              && !costAllocationNarrative?.years[ffy]?.otherSources 
-              && (
-                <span
-                  className="ds-c-inline-error ds-c-field__error-message"
-                  role="alert"
-                >
-                  Provide a description of other funding.
-                </span>
-              )
-            }
-          </div>
+            <div>
+              {adminCheck &&
+                costAllocation[ffy]?.other > 0 &&
+                !costAllocationNarrative?.years[ffy]?.otherSources && (
+                  <span
+                    className="ds-c-inline-error ds-c-field__error-message"
+                    role="alert"
+                  >
+                    Provide a description of other funding.
+                  </span>
+                )}
+            </div>
           </div>
 
           <div className="data-entry-box ds-u-margin-bottom--5">
@@ -118,16 +117,14 @@ const OtherFunding = ({
               name={`costAllocation.${ffy}.other`}
               control={control}
               value={costAllocation[ffy]?.other || '0'}
-              render={({ 
-                field: { onChange, value, ...props }
-              }) => (
+              render={({ field: { onChange, value, ...props } }) => (
                 <DollarField
                   {...props}
                   value={value}
                   label={`FFY ${ffy}`}
                   labelClassName="sr-only"
                   onChange={e => {
-                    setOtherFunding(activityIndex, ffy, value);;
+                    setOtherFunding(activityIndex, ffy, value);
                     onChange(e);
 
                     if (adminCheck) {

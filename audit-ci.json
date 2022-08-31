@@ -1,22 +1,11 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": [
-    "1081927|@cms-eapd/api>mongoose",
-    "1081927|@cms-eapd/api>migrate-mongoose>mongoose",
-    "1081927|@cms-eapd/e2e>@cms-eapd/api>migrate-mongoose>mongoose",
-    "GHSA-f825-f98c-gj3g|@cms-eapd/api>mongoose",
-    "GHSA-f825-f98c-gj3g|@cms-eapd/api>migrate-mongoose>mongoose",
-    "GHSA-f825-f98c-gj3g|@cms-eapd/e2e>@cms-eapd/api>migrate-mongoose>mongoose"
-  ],
+  "allowlist": [],
   "_comment": {
-    "1081522|GHSA-cj88-88mr-972w": {
-      "module": "glob-parent",
-      "affects": "postcss-cli@10.0.0 - only used during packaging"
-    },
-    "1081927|GHSA-f825-f98c-gj3g": {
-      "module": "mongoose",
-      "affects": "everything - high severity but there is a bug that doesn't work with our code right now"
+    "[advisory id]": {
+      "module": "",
+      "affects": ""
     }
   }
 }
