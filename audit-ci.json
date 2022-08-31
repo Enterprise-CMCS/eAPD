@@ -1,11 +1,11 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": ["1082040", "GHSA-f825-f98c-gj3g"],
+  "allowlist": [],
   "_comment": {
-    "1082040|GHSA-f825-f98c-gj3g": {
-      "module": "mongoose",
-      "comment": "our version of mongoose is patched but audit isn't counting it, temporarily allowlisting"
+    "[advisory id]": {
+      "module": "",
+      "affects": ""
     }
   }
 }
