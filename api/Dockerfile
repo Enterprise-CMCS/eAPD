@@ -7,8 +7,8 @@ WORKDIR /app
 COPY package.json .
 COPY babel.config.js .
 COPY yarn.lock .
-COPY api ./api
 COPY common ./common
+COPY api ./api
 
 RUN chown -R node:node /app
 USER node:node
