@@ -84,6 +84,7 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
+    // Can't use break; in a forEach loop.
     for (let i = 0; i < staffList.length; i++) {
       staffExpensesPage.addStaff();
       staffExpensesPage.fillStaff({
@@ -144,6 +145,7 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
+    // Can't use break; in a forEach loop.
     for (let i = 0; i < expenseList.length; i++) {
       staffExpensesPage.addExpense();
       staffExpensesPage.fillExpense({
@@ -203,6 +205,7 @@ class FillOutActivityPage {
       level: 3
     }).should('exist');
 
+    // Can't use break; in a forEach loop.
     for (let i = 0; i < contractorList.length; i++) {
       cy.findByRole('button', { name: /Add Contractor/i }).click();
 
