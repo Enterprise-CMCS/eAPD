@@ -1,47 +1,47 @@
-require('../models'); // import all of the mongo models
-
 const mongoose = require('mongoose');
 const logger = require('../logger')('mongoose');
 
-const setup = () =>
-  new Promise((resolve, reject) => {
-    logger.verbose('Setting up MongoDB connection');
-    const connectionString =
-      process.env.MONGO_URL ||
-      'mongodb://mongo:cms@mongo:27017/eapd?authSource=admin';
-    const dbName = process.env.MONGO_DATABASE || 'eapd';
+const getConnectionString = () =>
+  process.env.MONGO_URL ||
+  'mongodb://mongo:cms@mongo:27017/eapd?authSource=admin';
 
-    mongoose.connection.on('connected', () => {
-      logger.verbose('MongoDB connected');
-      resolve();
+const getDBName = () => process.env.MONGO_DATABASE || 'eapd';
+
+const connect = async () => {
+  logger.verbose('Setting up MongoDB connection');
+  const connectionString = getConnectionString();
+  const dbName = getDBName();
+
+  try {
+    await mongoose.connect(connectionString, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName,
+      keepAlive: true,
+      keepAliveInitialDelay: 300000
     });
+    logger.verbose('MongoDB connected');
+    return null;
+  } catch (err) {
+    logger.error(`Error in MongoDB connection: ${err}`);
+    return null;
+  }
+};
 
-    try {
-      mongoose.connect(connectionString, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        dbName
-      });
-    } catch (err) {
-      logger.error(`Error in MongoDB connection: ${err}`);
-      reject(err);
-    }
-  });
+const setup = async () => {
+  await connect();
+  // eslint-disable-next-line global-require
+  require('../models/index'); // import all of the mongo models
+};
 
-const teardown = () =>
-  new Promise((resolve, reject) => {
-    mongoose.connection.on('disconnected', () => {
-      logger.verbose('MongoDB disconnected');
-      resolve();
-    });
-
-    try {
-      mongoose.connection.close().then(resolve);
-    } catch (err) {
-      logger.error(`Error disconnecting to MongoDB: ${err}`);
-      reject(err);
-    }
-  });
+const teardown = async () => {
+  try {
+    await mongoose.connection.close();
+    logger.verbose('MongoDB disconnected');
+  } catch (err) {
+    logger.error(`Error disconnecting to MongoDB: ${err}`);
+  }
+};
 
 const getConnectionStatus = () => {
   const status = mongoose.connection.readyState;
@@ -60,4 +60,4 @@ const getConnectionStatus = () => {
   return 'unknown';
 };
 
-module.exports = { setup, teardown, getConnectionStatus };
+module.exports = { connect, setup, teardown, getConnectionStatus };

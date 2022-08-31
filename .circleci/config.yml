@@ -134,6 +134,9 @@ workflows:
             branches:
               only:
                 - main
+            tags:
+              only:
+                - /^rc.*/
           requires:
             - dependency vulnerability scan
             - store artifacts staging
@@ -205,6 +208,9 @@ workflows:
             branches:
               only:
                 - main
+            tags:
+              only:
+                - /^rc.*/                
           requires:
             - dependency vulnerability scan
       - frontend deploy:
@@ -214,6 +220,9 @@ workflows:
             branches:
               only:
                 - main
+            tags:
+              only:
+                - /^rc.*/                
           requires:
             - frontend build staging
             - dependency vulnerability scan
@@ -260,6 +269,9 @@ workflows:
             branches:
               only:
                 - main
+            tags:
+              only:
+                - /^rc.*/                  
           requires:
             - dependency vulnerability scan
             - frontend build staging
@@ -844,7 +856,7 @@ jobs:
       - run:
           name: run owasp zap
           working_directory: ~/project
-          no_output_timeout: 30m
+          no_output_timeout: 60m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
