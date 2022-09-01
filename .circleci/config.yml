@@ -473,7 +473,7 @@ jobs:
   e2e test:
     machine:
       image: ubuntu-2004:202104-01
-    parallelism: 6
+    parallelism: 7
     steps:
       - checkout
       - attach_workspace:
@@ -572,7 +572,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.cy.js"; fi
       - run:
-          name: run e2e tests admin
+          name: run e2e tests apd - budget
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
@@ -581,9 +581,9 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.cy.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd budget" --spec "cypress/integration/02-apd/04-apd-budget-checks.cy.js"; fi
       - run:
-          name: run e2e bug tests
+          name: run e2e tests admin
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
@@ -592,7 +592,18 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_HOST=localhost; fi
             if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
+            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.cy.js"; fi
+      - run:
+          name: run e2e bug tests
+          working_directory: ~/project/e2e
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then nvm use 16.16.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_PORT=54325; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
 
   chromatic deployment:
     yaml test:
@@ -613,7 +624,7 @@ jobs:
       - run:
           name: Deploy to Chromatic
           working_directory: ~/project/web
-          no_output_timeout: 60m
+          no_output_timeout: 90m
           command: |
             export TEALIUM_ENV="test"
             STORYBOOK_BUILD_TIMEOUT=1200000 yarn build:storybook
