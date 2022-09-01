@@ -45,7 +45,11 @@ const LoginForm = ({
                 {title}
               </h1>
             </div>
-            {!!success && <div className="ds-u-margin-top--3">{success}</div>}
+            {!!success && (
+              <p className="ds-u-margin-top--3" role="alert">
+                {success}
+              </p>
+            )}
 
             {!!error && (
               <div className="ds-u-margin-top--3 ds-u-color--error">

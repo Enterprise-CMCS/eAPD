@@ -113,7 +113,7 @@ SessionEndingAlert.propTypes = {
 const mapStateToProps = ({
   auth: { isSessionEnding, isExtendingSession, isLoggingOut, expiresAt }
 }) => ({
-  isSessionEnding: true,
+  isSessionEnding,
   isExtendingSession,
   isLoggingOut,
   expiresAt
