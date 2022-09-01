@@ -274,6 +274,7 @@ const CostAllocateFFP = ({
                         errors.costAllocation?.[ffy]?.ffp?.state?.message
                       }
                       errorPlacement="bottom"
+                      data-cy="cost-allocation-dropdown"
                     />
                   )}
                 />
