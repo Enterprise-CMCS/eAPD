@@ -269,7 +269,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       fillOutActivityPage = new FillOutActivityPage();
     });
 
-    it.only('should handle entering data', () => {
+    it('should handle entering data', () => {
       const keyPersons = [
         {
           name: 'Jean Luc Picard',
