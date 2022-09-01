@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
@@ -21,28 +23,46 @@ import {
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
 
+import otherSourcesSchema from '@cms-eapd/common/schemas/otherSources';
+
 const OtherFunding = ({
   activityIndex,
   activity,
-  costAllocation,
   costSummary,
   setOtherFunding,
-  syncOtherFunding
+  syncOtherFunding,
+  adminCheck
 }) => {
-  const { costAllocationNarrative } = activity;
-  const { years } = costSummary;
+  const { costAllocationNarrative = '', costAllocation = '' } = activity,
+    { years } = costSummary,
+    yearsArray = Object.keys(years);
 
-  const setOther = year => e => {
-    setOtherFunding(activityIndex, year, e.target.value);
-  };
-  const syncOther = year => html => syncOtherFunding(activityIndex, year, html);
+  const {
+    control,
+    trigger,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      costAllocation,
+      costAllocationNarrative
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(otherSourcesSchema)
+  });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    }
+  }, [adminCheck]);
 
   return (
     <Fragment>
       <h2 className="ds-u-margin-bottom--0">
         {titleCase(t('activities.otherFunding.title'))}
       </h2>
-      {Object.keys(years).map(ffy => (
+      {yearsArray.map(ffy => (
         <div key={ffy}>
           <h3 className="heading-ffy ds-u-padding-top--4">
             <span>FFY {ffy}</span>
@@ -57,12 +77,32 @@ const OtherFunding = ({
               }}
             />
             <RichText
+              name={`costAllocationNarrative.years.${ffy}.otherSources`}
+              data-testid={`other-sources-${ffy}`}
               id={`cost-allocation-narrative-${ffy}-other-sources-field`}
               iframe_aria_text="Other Funding Description Text Area"
               content={costAllocationNarrative.years[ffy].otherSources}
-              onSync={syncOther(ffy)}
+              onSync={html => {
+                syncOtherFunding(activityIndex, ffy, html);
+
+                if (adminCheck) {
+                  trigger();
+                }
+              }}
               editorClassName="rte-textarea-l"
             />
+            <div>
+              {adminCheck &&
+                costAllocation[ffy]?.other > 0 &&
+                !costAllocationNarrative?.years[ffy]?.otherSources && (
+                  <span
+                    className="ds-c-inline-error ds-c-field__error-message"
+                    role="alert"
+                  >
+                    Provide a description of other funding.
+                  </span>
+                )}
+            </div>
           </div>
 
           <div className="data-entry-box ds-u-margin-bottom--5">
@@ -73,12 +113,28 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
-            <DollarField
-              name={`ffy-${ffy}`}
-              label={`FFY ${ffy}`}
-              labelClassName="sr-only"
-              value={costAllocation[ffy].other || '0'}
-              onChange={setOther(ffy)}
+            <Controller
+              name={`costAllocation.${ffy}.other`}
+              control={control}
+              value={costAllocation[ffy]?.other || '0'}
+              render={({ field: { onChange, value, ...props } }) => (
+                <DollarField
+                  {...props}
+                  value={value}
+                  label={`FFY ${ffy}`}
+                  labelClassName="sr-only"
+                  onChange={e => {
+                    setOtherFunding(activityIndex, ffy, value);
+                    onChange(e);
+
+                    if (adminCheck) {
+                      trigger();
+                    }
+                  }}
+                  errorPlacement="bottom"
+                  errorMessage={errors?.costAllocation?.[ffy]?.other?.message}
+                />
+              )}
             />
           </div>
 
@@ -117,7 +173,8 @@ OtherFunding.propTypes = {
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
   setOtherFunding: PropTypes.func.isRequired,
-  syncOtherFunding: PropTypes.func.isRequired
+  syncOtherFunding: PropTypes.func.isRequired,
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (
@@ -133,7 +190,8 @@ const mapStateToProps = (
   return {
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
-    costSummary: getCostSummary(state, { activityIndex })
+    costSummary: getCostSummary(state, { activityIndex }),
+    adminCheck: state.apd.adminCheck
   };
 };
 
