@@ -4,7 +4,50 @@ import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import incentivePaySchema from '@cms-eapd/common/schemas/incentivePayments';
+import Joi from 'joi';
+
+const incentivePaySchema = Joi.object({
+  data: Joi.object({
+    ehCt: Joi.any(),
+    epCt: Joi.any(),
+    ehAmt: Joi.object().pattern(
+      /\d{4}/,
+      Joi.object().pattern(
+        /[1-4]{1}/,
+        Joi.number().integer().positive().allow(0).required().messages({
+          'number.base':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."',
+          'number.empty':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."',
+          'number.integer':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."',
+          'number.format':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."',
+          'number.positive':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."'
+        })
+      )
+    ),
+    epAmt: Joi.object().pattern(
+      /\d{4}/,
+      Joi.object().pattern(
+        /[1-4]{1}/,
+        Joi.number().integer().positive().allow(0).required().messages({
+          'number.base':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."',
+          'number.empty':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."',
+          'number.integer':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."',
+          'number.format':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."',
+          'number.positive':
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number."'
+        })
+      )
+    )
+  })
+});
 
 import {
   setIncentiveEHCount,
@@ -36,7 +79,6 @@ const IncentivePayments = ({
   years,
   adminCheck
 }) => {
-
   const {
     control,
     formState: { errors },
@@ -48,19 +90,19 @@ const IncentivePayments = ({
     mode: 'onChange',
     reValidateMode: 'onChange',
     resolver: joiResolver(incentivePaySchema)
-  })
+  });
 
   useEffect(() => {
     if (adminCheck) {
       trigger();
     }
-  }, [])
+  }, []);
 
-  const dollar_error = (v) => {
-    if(adminCheck) {
-      return (v >= 0 && v%1 == 0 && !isNaN(parseInt(v))) ? false : true;
+  const dollar_error = v => {
+    if (adminCheck) {
+      return v >= 0 && v % 1 == 0 && !isNaN(parseInt(v)) ? false : true;
     }
-  }
+  };
 
   const updateEHCount =
     (year, quarter) =>
@@ -78,7 +120,11 @@ const IncentivePayments = ({
     <Fragment>
       {years.map(year => (
         <Fragment key={year}>
-          <table name={`EQIPTable ${year}`} className="budget-table" data-cy="EQIPTable">
+          <table
+            name={`EQIPTable ${year}`}
+            className="budget-table"
+            data-cy="EQIPTable"
+          >
             <caption className="ds-u-visibility--screen-reader">
               {t('ffy', { year })} Incentive Payments by Quarter
             </caption>
@@ -126,7 +172,11 @@ const IncentivePayments = ({
                               {...props}
                               name={name}
                               className="budget-table--input-holder"
-                              fieldClassName={dollar_error(data.ehAmt[year][q]) ? 'budget-table--input__number-error' : 'budget-table--input__number'}
+                              fieldClassName={
+                                dollar_error(data.ehAmt[year][q])
+                                  ? 'budget-table--input__number-error'
+                                  : 'budget-table--input__number'
+                              }
                               aria-labelledby={`q${q} eh-payments`}
                               label={`ehAmt payments for ${year}, quarter ${q}`}
                               data-testid={`ehAmt ${year} ${q}`}
@@ -206,7 +256,11 @@ const IncentivePayments = ({
                               {...props}
                               name={name}
                               className="budget-table--input-holder"
-                              fieldClassName={dollar_error(data.epAmt[year][q]) ? 'budget-table--input__number-error' : 'budget-table--input__number'}
+                              fieldClassName={
+                                dollar_error(data.epAmt[year][q])
+                                  ? 'budget-table--input__number-error'
+                                  : 'budget-table--input__number'
+                              }
                               aria-labelledby={`q${q} ep-payments`}
                               label={`epAmt payments for ${year}, quarter ${q}`}
                               labelClassName="sr-only"
@@ -277,7 +331,8 @@ const IncentivePayments = ({
             className="ds-u-margin-top--2 ds-u-font-size--sm ds-u-font-weight--bold ds-c-inline-error ds-c-field__error-message"
             role="alert"
           >
-            Provide a number greater than or equal to $0.
+            Provide a whole number greater than or equal to $0. Decimals will be
+            rounded to the closest number.
           </span>
         )}
       </div>
