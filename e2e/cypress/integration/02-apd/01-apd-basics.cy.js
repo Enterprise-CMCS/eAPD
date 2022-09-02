@@ -853,7 +853,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .within(() => {
               budgetPage.checkSplitFunctionality();
 
-              cy.get('[class="ds-c-field"]').select('75-25');
+              cy.get('[data-cy="cost-allocation-dropdown"]').select('75-25');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.75,
@@ -863,7 +863,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 totalComputableMedicaidCost: 150000
               });
 
-              cy.get('[class="ds-c-field"]').select('50-50');
+              cy.get('[data-cy="cost-allocation-dropdown"]').select('50-50');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.5,
@@ -873,7 +873,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 totalComputableMedicaidCost: 150000
               });
 
-              cy.get('[class="ds-c-field"]').select('90-10');
+              cy.get('[data-cy="cost-allocation-dropdown"]').select('90-10');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.9,
