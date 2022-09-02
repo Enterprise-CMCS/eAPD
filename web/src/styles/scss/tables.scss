@@ -170,3 +170,16 @@ tr.budget-table--row__primary-header {
 .indent-title {
   padding-left: 3em;
 }
+
+/* Custom borders to support highlighted rows for validation */
+.table-error-border-no-bottom {
+  border-top: 2px solid $color-error !important;
+  border-left: 2px solid $color-error;
+  border-right: 2px solid $color-error;
+}
+
+.table-error-border-no-top {
+  border-bottom: 2px solid $color-error !important;
+  border-left: 2px solid $color-error;
+  border-right: 2px solid $color-error;
+}

@@ -1,6 +1,8 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import { titleCase } from 'title-case';
@@ -20,6 +22,8 @@ import CostAllocationRows, {
   CostSummaryRows
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
+
+import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocateFFP';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -105,8 +109,30 @@ const CostAllocateFFP = ({
   aKey,
   isViewOnly,
   setFundingSplit,
-  stateName
+  stateName,
+  adminCheck
 }) => {
+  const {
+    control,
+    formState: { errors },
+    trigger,
+    setValue
+  } = useForm({
+    defaultValues: {
+      costAllocation
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: joiResolver(costAllocateFFPSchema)
+  });
+
+  useEffect(() => {
+    setValue('costAllocation', costAllocation);
+    if (adminCheck) {
+      trigger();
+    }
+  }, [costAllocation]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
@@ -220,7 +246,6 @@ const CostAllocateFFP = ({
                   </tr>
                 </tbody>
               </table>
-
               <div className="data-entry-box ds-u-margin-bottom--5">
                 <Instruction
                   source="activities.costAllocate.ffp.federalStateSplitInstruction"
@@ -229,21 +254,31 @@ const CostAllocateFFP = ({
                     className: 'ds-h4'
                   }}
                 />
-                <Dropdown
-                  name={`ffp-${ffy}`}
-                  label="federal-state split"
-                  labelClassName="sr-only"
-                  options={[
-                    { label: 'Select an option', value: '0-100' },
-                    { label: '90-10', value: '90-10' },
-                    { label: '75-25', value: '75-25' },
-                    { label: '50-50', value: '50-50' }
-                  ]}
-                  value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
-                  onChange={setFederalStateSplit(ffy)}
+                <Controller
+                  name={`costAllocation`}
+                  control={control}
+                  render={({ field: { ...props } }) => (
+                    <Dropdown
+                      {...props}
+                      label="federal-state split"
+                      labelClassName="sr-only"
+                      options={[
+                        { label: 'Select an option', value: '0-100' },
+                        { label: '90-10', value: '90-10' },
+                        { label: '75-25', value: '75-25' },
+                        { label: '50-50', value: '50-50' }
+                      ]}
+                      value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
+                      onChange={setFederalStateSplit(ffy)}
+                      errorMessage={
+                        errors.costAllocation?.[ffy]?.ffp?.state?.message
+                      }
+                      errorPlacement="bottom"
+                      data-cy="cost-allocation-dropdown"
+                    />
+                  )}
                 />
               </div>
-
               <table
                 className="budget-table activity-budget-table"
                 data-cy="FFPFedStateSplitTable"
@@ -329,11 +364,13 @@ CostAllocateFFP.propTypes = {
   otherFunding: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
-  stateName: PropTypes.string.isRequired
+  stateName: PropTypes.string.isRequired,
+  adminCheck: PropTypes.bool
 };
 
 CostAllocateFFP.defaultProps = {
-  isViewOnly: false
+  isViewOnly: false,
+  adminCheck: false
 };
 
 const mapStateToProps = (
@@ -356,7 +393,8 @@ const mapStateToProps = (
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,
-    otherFunding: activityTotal.data.otherFunding
+    otherFunding: activityTotal.data.otherFunding,
+    adminCheck: state.apd.adminCheck
   };
 };
 
