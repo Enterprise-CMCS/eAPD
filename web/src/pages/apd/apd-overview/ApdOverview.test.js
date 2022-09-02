@@ -52,9 +52,11 @@ const setup = async (props = {}) => {
 describe('APD overview component', () => {
   beforeEach(() => {
     jest.resetAllMocks();
+    jest.setTimeout(30000);
   });
 
   test('dispatches on text change', async () => {
+    jest.setTimeout(30000);
     const { user } = await setup();
 
     await user.type(screen.getByLabelText('Introduction'), 'it is really cool');
@@ -74,6 +76,7 @@ describe('APD overview component', () => {
   });
 
   test('user can attempt to delete a year and cancel', async () => {
+    jest.setTimeout(30000);
     const { user } = await setup();
     expect(screen.getByLabelText('2022')).toBeChecked();
     await user.click(screen.getByLabelText('2022'));
@@ -85,6 +88,7 @@ describe('APD overview component', () => {
   });
 
   test('user can delete a year', async () => {
+    jest.setTimeout(30000);
     const { user } = await setup();
     expect(screen.getByLabelText('2022')).toBeChecked();
     await user.click(screen.getByLabelText('2022'));

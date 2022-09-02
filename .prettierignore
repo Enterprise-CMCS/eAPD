@@ -5,6 +5,7 @@ common/node_modules
 e2e/node_modules
 web/node_modules
 
+.circleci/config.yml
 .DS_Store
 .dccache
 .editorconfig
@@ -16,22 +17,25 @@ web/node_modules
 .yarnrc.yml
 
 Makefile
-mongodata/*
 npm-debug.log*
-pgdata/*
 schema.sql
+mongodata/*
+pgdata/*
 
 api/.env
 api/.nyc_output
 api/coverage
 api/coverage-endpoint
 api/coverage-unit
+api/dist
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
+api/seed/test/tokens.json
 api/hitech_api*.log*
 
 bin
 
+common/.stryker-tmp
 common/coverage
 common/dist
 common/reports
@@ -42,7 +46,9 @@ e2e/cypress/screenshots/*
 e2e/cypress/videos/*
 
 web/.jest-test-results.json
+web/.stryker-tmp
 web/coverage
+web/_dev
 web/dist
 web/docs-build
 web/storybook-static/*

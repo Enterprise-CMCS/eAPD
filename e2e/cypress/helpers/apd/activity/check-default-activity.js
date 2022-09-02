@@ -149,7 +149,7 @@ export const checkDefaultActivity = years => {
 
       // Check Federal State Split Functionality
       defaultData.splits.forEach(split => {
-        cy.get('[class="ds-c-field"]').eq(0).select(split);
+        cy.get('[data-cy="cost-allocation-dropdown"]').eq(0).select(split);
 
         cy.get('[data-cy="FFPFedStateSplitTable"]')
           .eq(0)

@@ -1,17 +1,5 @@
-const presets = [
-  [
-    '@babel/preset-env',
-    {
-      targets: {
-        node: 'current'
-      }
-    }
-  ],
-  ['@babel/preset-react']
-];
-const plugins = [];
+const defaultConfigs = require('../babel.config');
 
 module.exports = {
-  presets,
-  plugins
+  ...defaultConfigs
 };

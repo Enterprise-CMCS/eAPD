@@ -59,7 +59,7 @@ describe('aria actions', () => {
     expect(store.getActions()).toEqual([
       {
         type: ARIA_ANNOUNCE_CHANGE,
-        message: '700'
+        message: '700 dollars'
       }
     ]);
   });

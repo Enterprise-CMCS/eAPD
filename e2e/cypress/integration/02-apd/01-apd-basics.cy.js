@@ -797,15 +797,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .within(() => cy.findByLabelText('Year').focus().blur());
       cy.contains('Provide an end date.').should('exist');
 
-      activityPage.checkTextField(
-        'ds-c-field ds-c-field--currency ds-c-field--medium',
-        '',
-        0
-      );
-      cy.get('[class="ds-c-field ds-c-field--currency ds-c-field--medium"]')
-        .eq(0)
-        .focus()
-        .blur();
+      cy.get('[name="totalCost"]').should('have.value', '');
+      cy.get('[name="totalCost"]').focus().blur();
+
       cy.contains(
         'Provide a contract cost greater than or equal to $0.'
       ).should('exist');
@@ -859,7 +853,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
             .within(() => {
               budgetPage.checkSplitFunctionality();
 
-              cy.get('[class="ds-c-field"]').select('75-25');
+              cy.get('[data-cy="cost-allocation-dropdown"]').select('75-25');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.75,
@@ -869,7 +863,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 totalComputableMedicaidCost: 150000
               });
 
-              cy.get('[class="ds-c-field"]').select('50-50');
+              cy.get('[data-cy="cost-allocation-dropdown"]').select('50-50');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.5,
@@ -879,7 +873,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
                 totalComputableMedicaidCost: 150000
               });
 
-              cy.get('[class="ds-c-field"]').select('90-10');
+              cy.get('[data-cy="cost-allocation-dropdown"]').select('90-10');
               cy.waitForSave();
               budgetPage.checkCostSplitTable({
                 federalSharePercentage: 0.9,
@@ -1331,7 +1325,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.wait(5000); // Gives time to load the APD dashboard
 
       cy.visit(apdUrl);
-      cy.wait('@loadImage', { timeout: 30000 });
+      cy.wait('@loadImage', { timeout: 60000 });
 
       cy.contains('Export and Submit').click();
       cy.findByRole('button', { name: 'Continue to Review' }).click();
@@ -1340,14 +1334,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   describe('tests an APD with no activities', () => {
-    it.only('shows message', () => {
+    it('shows message', () => {
       cy.visit('/');
       cy.findByRole('link', { name: /HITECH IAPD No Activities/i }).click();
       cy.goToActivityDashboard();
       cy.findByText('Add at least one activity.').should('exist');
-      cy.findByText('Activities have not been added for this APD.').should(
-        'exist'
-      );
     });
   });
 

@@ -17,21 +17,21 @@ web/node_modules
 .yarnrc.yml
 
 Makefile
-__files
-mongodata/*
 notes.md
 npm-debug.log*
-pgdata/*
 schema.sql
+__files
+mongodata/*
+pgdata/*
 
 api/.env
 api/.nyc_output
 api/coverage
 api/coverage-endpoint
 api/coverage-unit
+api/dist
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
-api/hitech_api*.log*
 api/seeds/test/tokens.json
 api/test-data/files
 
@@ -47,6 +47,7 @@ e2e/tokens.json
 
 web/.jest-test-results.json
 web/coverage
+web/_dev
 web/dist
 web/docs-build
 web/storybook-static/*
