@@ -46,7 +46,7 @@ const LoginForm = ({
               </h1>
             </div>
             {!!success && (
-              <p className="ds-u-margin-top--3" role="alert">
+              <p className="ds-u-margin-top--3" role="alert" aria-live="polite">
                 {success}
               </p>
             )}

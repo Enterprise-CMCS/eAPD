@@ -35,8 +35,8 @@ const SessionEndingAlert = ({
     }
     return (
       <span id="session-timeout" aria-live="polite">
-        Your session will end in {zeroPad(minutes)} minutes. If you’d like to
-        keep working, select <em>stay signed in</em>.
+        Your session will end in {minutes} minutes. If you’d like to keep
+        working, select <em>stay signed in</em>.
       </span>
     );
   };
