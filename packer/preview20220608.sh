@@ -41,7 +41,7 @@ mkdir /app/tls
 
 # Setup PostGres for Mongo Migraton
 rpm -Uvh https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-yum install -y postgresql13-server
+yum install -y postgresql13-server-13.4-1PGDG.rhel7
 
 #postgresql-setup initdb
 /usr/pgsql-13/bin/postgresql-13-setup initdb
