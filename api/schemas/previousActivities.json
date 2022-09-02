@@ -1,11 +1,8 @@
 {
   "$id": "previousActivities.json",
   "type": "object",
-  "required": [
-    "previousActivitySummary",
-    "actualExpenditures"
-  ],
-  "properties": {   
+  "required": ["previousActivitySummary", "actualExpenditures"],
+  "properties": {
     "previousActivitySummary": { "type": "string" },
     "actualExpenditures": { "$ref": "actualExpenditures.json" }
   },

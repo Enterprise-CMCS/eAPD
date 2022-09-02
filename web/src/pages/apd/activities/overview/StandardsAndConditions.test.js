@@ -14,7 +14,7 @@ const defaultProps = {
     description: 'description',
     standardsAndConditions: {
       doesNotSupport: 'does not support',
-      supports: 'support',
+      supports: 'support'
     }
   },
   activityIndex: 7,
@@ -25,7 +25,9 @@ const defaultProps = {
 const setup = async (props = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
   const utils = await act(async () =>
-    renderWithConnection(<StandardsAndConditions {...defaultProps} {...props} />)
+    renderWithConnection(
+      <StandardsAndConditions {...defaultProps} {...props} />
+    )
   );
   return utils;
 };
@@ -38,17 +40,11 @@ describe('the StandardsAndConditions component', () => {
   test('renders correctly', async () => {
     await setup();
     await waitFor(() => {
-      expect(
-        screen.getByLabelText(
-          'Standards and Conditions'
-        )
-      ).toHaveValue(defaultProps.activity.standardsAndConditions.supports);
-    })
+      expect(screen.getByLabelText('Standards and Conditions')).toHaveValue(
+        defaultProps.activity.standardsAndConditions.supports
+      );
+    });
 
-    fireEvent.blur(
-      screen.getByLabelText(
-        'Standards and Conditions'
-      )
-    );
+    fireEvent.blur(screen.getByLabelText('Standards and Conditions'));
   });
 });

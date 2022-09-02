@@ -8,7 +8,7 @@ exports.up = async knex => {
 
     table.string('changed_by');
 
-    table.string('user_id')
+    table.string('user_id');
 
     table.integer('original_role_id');
 

@@ -1,7 +1,7 @@
 const logger = require('../../logger')('auth route index');
 const activities = require('./activities');
 const roles = require('./roles');
-const states = require ('./states');
+const states = require('./states');
 const certifications = require('./certifications');
 
 module.exports = (

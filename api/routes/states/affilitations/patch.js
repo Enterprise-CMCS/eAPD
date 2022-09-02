@@ -1,7 +1,7 @@
 const auditor = require('../../../audit');
 const logger = require('../../../logger')('affiliations');
 const { can, validForState } = require('../../../middleware');
-const { updateAuthAffiliation } = require('../../../db/affiliations')
+const { updateAuthAffiliation } = require('../../../db/affiliations');
 
 const { DISABLE_ACCOUNT, ENABLE_ACCOUNT, MODIFY_ACCOUNT } = auditor.actions;
 
@@ -19,7 +19,10 @@ const statusToAction = status => {
   }
 };
 
-module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) => {
+module.exports = (
+  app,
+  { updateAuthAffiliation_ = updateAuthAffiliation } = {}
+) => {
   app.patch(
     '/states/:stateId/affiliations/:id',
     can('edit-affiliations'),
@@ -27,7 +30,7 @@ module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) 
     async (request, response, next) => {
       const userId = request.user.id;
       const { stateId, id } = request.params;
-      const { status, roleId } = request.body
+      const { status, roleId } = request.body;
 
       if (!request.body || !status || !roleId) {
         logger.error({
@@ -49,8 +52,8 @@ module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) 
           newStatus: status,
           changedBy: userId,
           affiliationId: id
-        })
-      } catch(e) {
+        });
+      } catch (e) {
         logger.error({ id: request.id, message: e });
         return next(e);
       }
@@ -60,9 +63,9 @@ module.exports = (app, { updateAuthAffiliation_ = updateAuthAffiliation } = {}) 
         stateId,
         roleId,
         status
-      })
-      audit.log()
-      return response.status(200).end()
+      });
+      audit.log();
+      return response.status(200).end();
     }
   );
 };

@@ -1,10 +1,5 @@
 const sinon = require('sinon');
 const tap = require('tap');
-const mongoose = require('mongoose');
-
-const dbMock = require('./dbMock.test');
-const mongo = require('./mongodb');
-const { apd } = require('../seeds/development/apds');
 
 const {
   createAPD,
@@ -14,78 +9,69 @@ const {
   getAPDByIDAndState,
   updateAPDDocument
 } = require('./apds');
+const { setup, teardown } = require('./mongodb');
+const { getConnectionStatus } = require('./mongodb');
+const APD = require('../models/apd');
+const { apd } = require('../seeds/development/apds');
 
 const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
 let clock;
 let clockStub;
 let id;
 
-let APD;
+const deleteAPD = async apdId => APD.findOneAndDelete({ _id: apdId }).exec();
 
 tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.before(async () => {
-    id = null;
     // Trisha Elric, Edward and Alfonse's mother, dies of complications from
     // a plague, kicking off the Elric brothers' quest for human transmutation.
     clockStub = sinon.stub(Date, 'now').returns(nowDate);
-    await mongo.setup();
-    APD = mongoose.model('APD');
+    await setup();
   });
-  const deleteAPD = async apdId => APD.deleteOne({ _id: apdId });
 
   apdsTests.beforeEach(async () => {
-    dbMock.reset();
-    if (id) {
-      await deleteAPD(id);
-    }
-    id = await createAPD(
-      {
-        stateId: 'co',
-        status: 'draft',
-        ...apd
-      },
-      { APD }
-    );
+    // eslint-disable-next-line no-console
+    console.log(`connection status ${getConnectionStatus()}`);
+    id = await createAPD({
+      stateId: 'co',
+      status: 'draft',
+      ...apd
+    });
+  });
+
+  apdsTests.afterEach(async () => {
+    await deleteAPD(id);
   });
 
   apdsTests.test('creating an APD', async test => {
-    const newId = await createAPD(
-      {
-        stateId: 'md',
-        status: 'draft',
-        ...apd
-      },
-      { APD }
-    );
+    const newId = await createAPD({
+      stateId: 'md',
+      status: 'draft',
+      ...apd
+    });
     test.ok(newId, 'APD was created');
     await deleteAPD(newId);
   });
 
   apdsTests.test('deleting an APD', async test => {
-    const result = await deleteAPDByID(id, { APD });
+    const result = await deleteAPDByID(id);
     test.equal(result.n, 1, 'one APD was found');
     test.equal(result.nModified, 1, 'one APD was updated');
   });
 
   apdsTests.test('getting all APDs for a state', async test => {
-    const approvedId = await createAPD(
-      {
-        stateId: 'co',
-        status: 'approved',
-        ...apd
-      },
-      { APD }
-    );
-    const mnId = await createAPD(
-      {
-        stateId: 'mn',
-        status: 'approved',
-        ...apd
-      },
-      { APD }
-    );
+    const approvedId = await createAPD({
+      stateId: 'co',
+      status: 'approved',
+      ...apd
+    });
+    const mnId = await createAPD({
+      stateId: 'mn',
+      status: 'approved',
+      ...apd
+    });
 
-    const apds = await getAllAPDsByState('co', { APD });
+    const apds = await getAllAPDsByState('co');
 
     test.ok(apds.length === 1, '1 APD was found');
     test.equal(apds[0]._id.toString(), id, 'the APD was found'); // eslint-disable-line no-underscore-dangle
@@ -94,13 +80,13 @@ tap.test('database wrappers / apds', async apdsTests => {
   });
 
   apdsTests.test('getting a single APD by ID', async test => {
-    const found = await getAPDByID(id, { APD });
+    const found = await getAPDByID(id);
 
     test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
   });
 
   apdsTests.test('getting a single APD by ID for a state', async test => {
-    const found = await getAPDByIDAndState(id, 'co', { APD });
+    const found = await getAPDByIDAndState(id, 'co');
 
     test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
   });
@@ -196,7 +182,10 @@ tap.test('database wrappers / apds', async apdsTests => {
     updateAPDDocumentTests.test('with a valid patch', async test => {
       const {
         errors,
-        apd: { updatedAt, apdOverview: { programOverview } }
+        apd: {
+          updatedAt,
+          apdOverview: { programOverview }
+        }
       } = await updateAPDDocument(id, 'co', [
         {
           op: 'replace',
@@ -283,7 +272,7 @@ tap.test('database wrappers / apds', async apdsTests => {
     if (id) {
       await deleteAPD(id);
     }
-    await mongo.teardown();
+    await teardown();
     clockStub.restore();
   });
 });

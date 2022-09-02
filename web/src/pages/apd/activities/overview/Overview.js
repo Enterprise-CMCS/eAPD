@@ -142,6 +142,7 @@ const ActivityOverview = ({
           render={({ field: { onChange } }) => (
             <RichText
               id="activity-short-overview-field"
+              iframe_aria_text="Provide a short overview of the activity Text Area"
               role={summary}
               content={summary}
               onSync={html => {
@@ -186,6 +187,7 @@ const ActivityOverview = ({
             <RichText
               {...props}
               id="activity-description-field"
+              iframe_aria_text="Include as much detail as is necessary to explain the activity Text Area"
               data-cy="activity-description"
               content={description}
               onSync={html => {
@@ -201,6 +203,15 @@ const ActivityOverview = ({
             />
           )}
         />
+
+        {errors?.description && (
+          <span
+            className="ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            {errors.description.message}
+          </span>
+        )}
       </div>
 
       <div className="data-entry-box">
@@ -214,6 +225,7 @@ const ActivityOverview = ({
         <Instruction source="activities.overview.activityAlternativesInput" />
         <RichText
           id="activity-alternatives-field"
+          iframe_aria_text="Statement of alternative considerations and supporting justification Text Area"
           content={alternatives}
           onSync={html => {
             setAlternatives(activityIndex, html);
@@ -232,7 +244,7 @@ ActivityOverview.propTypes = {
   setAlternatives: PropTypes.func.isRequired,
   setDescription: PropTypes.func.isRequired,
   setOverview: PropTypes.func.isRequired,
-  adminCheck: PropTypes.func.isRequired
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => {

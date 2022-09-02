@@ -41,3 +41,7 @@ jest.mock('./src/util/oktaAuth', () => {
     }
   };
 });
+
+Object.defineProperty(window.document, 'cookie', {
+  writable: true
+});

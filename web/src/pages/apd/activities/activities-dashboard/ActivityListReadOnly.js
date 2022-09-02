@@ -7,8 +7,8 @@ const ActivityList = ({ activities }) => {
     return (
       <li key={uuidv4()}>
         <h3>
-          {index + 1}. {activity.name || "Untitled"}
-          {activity.fundingSource ? ` | ${activity.fundingSource}` : ""}
+          {index + 1}. {activity.name || 'Untitled'}
+          {activity.fundingSource ? ` | ${activity.fundingSource}` : ''}
         </h3>
       </li>
     );

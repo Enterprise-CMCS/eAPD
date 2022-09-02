@@ -5,10 +5,7 @@ import { UPDATE_BUDGET } from '../budget';
 
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
-import {
-  savePersonnel,
-  removePersonnel
-} from './statePersonnel';
+import { savePersonnel, removePersonnel } from './statePersonnel';
 
 const mockStore = configureStore([thunk]);
 
@@ -24,7 +21,7 @@ describe('APD activity edit actions for state personnel section', () => {
       }
     }
   };
-  
+
   const store = mockStore(state);
 
   beforeEach(() => {
@@ -65,17 +62,23 @@ describe('APD activity edit actions for state personnel section', () => {
       { type: UPDATE_BUDGET, state }
     ]);
   });
-  
+
   it('dispatches an action for updating an existing state personnel', () => {
     const stateWithResource = state;
-    stateWithResource.apd.data.activities[0].statePersonnel.push({ key: '123', name: 'test state personnel' });
-    
+    stateWithResource.apd.data.activities[0].statePersonnel.push({
+      key: '123',
+      name: 'test state personnel'
+    });
+
     const storeWithResource = mockStore(stateWithResource);
-    
-    const statePersonnel = {key: '123', statePersonnel: 'test state personnel updated'};
-    
+
+    const statePersonnel = {
+      key: '123',
+      statePersonnel: 'test state personnel updated'
+    };
+
     storeWithResource.dispatch(savePersonnel(0, 0, statePersonnel));
-    
+
     expect(storeWithResource.getActions()).toEqual([
       {
         type: EDIT_APD,
@@ -85,5 +88,4 @@ describe('APD activity edit actions for state personnel section', () => {
       { type: UPDATE_BUDGET, state }
     ]);
   });
-  
 });

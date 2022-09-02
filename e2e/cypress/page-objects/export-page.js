@@ -421,8 +421,7 @@ class ExportPage {
       .should('have.text', costAllocation.description);
 
     years.forEach((year, i) => {
-      cy.contains('h3', `FFY ${year}`)
-        .next().as('parent')
+      cy.contains('h3', `FFY ${year}`).next().as('parent');
       cy.get('@parent')
         .contains('Other Funding Description')
         .next()

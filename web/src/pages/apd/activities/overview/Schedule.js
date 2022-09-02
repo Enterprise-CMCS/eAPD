@@ -120,7 +120,7 @@ Schedule.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   setEndDate: PropTypes.func.isRequired,
   setStartDate: PropTypes.func.isRequired,
-  adminCheck: PropTypes.func.isRequired
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({

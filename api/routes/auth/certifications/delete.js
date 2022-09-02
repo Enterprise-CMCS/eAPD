@@ -2,13 +2,13 @@ const { loggedIn } = require('../../../middleware/auth');
 const { can } = require('../../../middleware');
 const logger = require('../../../logger')('auth certifications delete');
 
-const { archiveStateAdminCertification: archiveCertification } = require('../../../db/certifications');
+const {
+  archiveStateAdminCertification: archiveCertification
+} = require('../../../db/certifications');
 
 module.exports = (
   app,
-  {
-    archiveStateAdminCertification = archiveCertification
-  } = {}
+  { archiveStateAdminCertification = archiveCertification } = {}
 ) => {
   logger.silly('setting up DELETE /auth/certifications route');
 
@@ -24,13 +24,16 @@ module.exports = (
         });
         if (error) {
           res.send(400, `error deleting certification: ${error}`);
-        };
-        res.send(200);        
+        }
+        res.send(200);
       } catch (e) {
-        logger.error({ id: req.id, message: 'error deleting/archiving State Admin Certification' });
+        logger.error({
+          id: req.id,
+          message: 'error deleting/archiving State Admin Certification'
+        });
         logger.error({ id: req.id, message: e });
         next(e);
       }
     }
-  )
-}
+  );
+};

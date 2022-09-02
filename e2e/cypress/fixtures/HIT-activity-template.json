@@ -1,8 +1,7 @@
 {
   "activityName": "Program Administration",
 
-  "activityOverview": 
-  {
+  "activityOverview": {
     "name": "Program Administration",
     "fundingType": "HIT",
     "shortOverview": "Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.",
@@ -13,35 +12,33 @@
     "supportsMedicaid": "This activity support the medicaid standards and conditions."
   },
 
-  "outcomes":
-    {
-      "names": [
-        "Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.",
-        "Provide support to EPs and EHs through attestation process."
+  "outcomes": {
+    "names": [
+      "Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.",
+      "Provide support to EPs and EHs through attestation process."
+    ],
+    "metrics": [
+      [
+        "Complete SLR modifications by 11/1/21",
+        "Accept attestations through 4/30/22"
       ],
-      "metrics": [
-        [
-          "Complete SLR modifications by 11/1/21",
-          "Accept attestations through 4/30/22"
-        ],
-        [
-          "Guidance available on Tycho''s websites",
-          "Office hours availble for EPs and EHs"
-        ]
+      [
+        "Guidance available on Tycho''s websites",
+        "Office hours availble for EPs and EHs"
       ]
-    },
+    ]
+  },
 
-  "milestones":
-    {
-      "names": [
-        "Implementation of Final Rule and Stage 3 System Developments",
-        "Environmental Scan Completion"
-      ],
-      "dates": [
-        [10, 5, 2021],
-        [3, 2, 2022]
-      ]
-    },
+  "milestones": {
+    "names": [
+      "Implementation of Final Rule and Stage 3 System Developments",
+      "Environmental Scan Completion"
+    ],
+    "dates": [
+      [10, 5, 2021],
+      [3, 2, 2022]
+    ]
+  },
 
   "staff": [
     {
@@ -92,8 +89,7 @@
     }
   ],
 
-  "costAllocation":
-  {
+  "costAllocation": {
     "description": "Activity 1 description for overall cost allocation.",
     "FFYdescriptions": [
       "This is the Other Funding description for Activity 1 - FFY 2021",
@@ -148,7 +144,14 @@
       [
         [],
         ["Ervin Howell (APD Key Personnel)", "", "", "", "", "$0"],
-        ["Patricia Lebsack (APD Key Personnel)", "$100,000", "×", "0.5 FTE", "=", "$50,000"],
+        [
+          "Patricia Lebsack (APD Key Personnel)",
+          "$100,000",
+          "×",
+          "0.5 FTE",
+          "=",
+          "$50,000"
+        ],
         ["Accountant III", "$101,000", "×", "3 FTE", "=", "$303,000"],
         ["Other Funding Amount", "-", "$4,222"],
         ["State Staff Subtotal", "$348,778"],
@@ -165,7 +168,14 @@
       [
         [],
         ["Ervin Howell (APD Key Personnel)", "", "", "", "", "$0"],
-        ["Patricia Lebsack (APD Key Personnel)", "$100,000", "×", "0.5 FTE", "=", "$50,000"],
+        [
+          "Patricia Lebsack (APD Key Personnel)",
+          "$100,000",
+          "×",
+          "0.5 FTE",
+          "=",
+          "$50,000"
+        ],
         ["Accountant III", "$109,000", "×", "3 FTE", "=", "$327,000"],
         ["Other Funding Amount", "-", "$6,824"],
         ["State Staff Subtotal", "$370,176"],
@@ -231,7 +241,7 @@
         ["Other Funding", "", "-", "$5,000"],
         ["Activity Total Computable Medicaid Cost", "", "$413,000"],
         ["Federal Share", "$413,000", "×", "75%", "=", "$309,750"],
-        ["State Share", "$413,000", "×",  "25%", "=", "$103,250"]
+        ["State Share", "$413,000", "×", "25%", "=", "$103,250"]
       ],
       [
         ["$442,000"],
@@ -243,8 +253,7 @@
     ]
   },
 
-  "FFYTotalDescription":
-  {
+  "FFYTotalDescription": {
     "totalCost": 860000,
     "totalOtherFunding": 13000,
     "totalTotalMedicaidCost": 847000,

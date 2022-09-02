@@ -3,10 +3,7 @@ const knex = require('./knex');
 
 const { updateAuthAffiliation } = require('./affiliations');
 
-const addStateAdminCertification = (
-  data,
-  { db = knex } = {}
-) => {
+const addStateAdminCertification = (data, { db = knex } = {}) => {
   return db('state_admin_certifications')
     .insert({ ...data }, ['id'])
     .then(ids => {
@@ -19,29 +16,29 @@ const addStateAdminCertification = (
     });
 };
 
-const archiveStateAdminCertification = async (
-  data,
-  { db = knex } = {}
-) => {
-  const record = await db('state_admin_certifications').select('status', 'affiliationId').where('id', data.id).first();
-  if ( record.affiliationId !== null ) {
-    return { error: 'certification is already matched'};
+const archiveStateAdminCertification = async (data, { db = knex } = {}) => {
+  const record = await db('state_admin_certifications')
+    .select('status', 'affiliationId')
+    .where('id', data.id)
+    .first();
+  if (record.affiliationId !== null) {
+    return { error: 'certification is already matched' };
   }
-  if ( record.status === 'archived' ) {
+  if (record.status === 'archived') {
     return { error: 'certification is already archived' };
   }
   return db('state_admin_certifications')
-    .where('id', data.id).first()
-    .update({ 'status': 'archived' })
+    .where('id', data.id)
+    .first()
+    .update({ status: 'archived' })
     .then(() => {
-      return db('state_admin_certifications_audit')
-        .insert({
-          changeDate: new Date(),
-          changedBy: data.archived_by,
-          changeType: 'remove',
-          certificationId: data.id
-        })
-    })
+      return db('state_admin_certifications_audit').insert({
+        changeDate: new Date(),
+        changedBy: data.archived_by,
+        changeType: 'remove',
+        certificationId: data.id
+      });
+    });
 };
 
 // Update the state admin certification and the associated auth affiliation
@@ -63,7 +60,7 @@ const matchStateAdminCertification = async (
       certificationId: data.certificationId
     });
 
-    await updateAffiliation({...data, transaction });
+    await updateAffiliation({ ...data, transaction });
 
     await transaction.commit();
     return { error: null };
@@ -86,6 +83,13 @@ const getStateAdminCertifications = ({ db = knex } = {}) => {
     .leftOuterJoin('auth_roles', 'auth_roles.id', 'auth_affiliations.role_id')
     .where('auth_roles.name', '=', 'eAPD State Staff')
     .orWhere('auth_affiliations.status', '=', 'requested')
+    .orWhere(function () {
+      this.where('auth_affiliations.status', '=', 'approved').andWhere(
+        'auth_roles.name',
+        '=',
+        'eAPD State Admin'
+      );
+    })
     .as('affiliations');
 
   return db('state_admin_certifications')

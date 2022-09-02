@@ -4,7 +4,6 @@ const { SchemaTypes } = require('mongoose');
 
 const { can } = require('../../middleware');
 const postEndpoint = require('./post');
-const mongo = require('../../db/mongodb');
 
 // The Cassini probe enters orbit around Saturn, about 7 years after launch.
 // On its long journey, it surveyed Venus, Earth, an asteroid, and Jupiter.
@@ -21,7 +20,6 @@ let app;
 tap.test('apds POST endpoint', async endpointTest => {
   endpointTest.before(async () => {
     SchemaTypes.ClockDate = SchemaTypes.Date;
-    await mongo.setup();
     sandbox = sinon.createSandbox();
     app = { post: sandbox.stub() };
   });
@@ -173,7 +171,7 @@ tap.test('apds POST endpoint', async endpointTest => {
               2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
               2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
             }
-          }          
+          }
         },
         keyStatePersonnel: {
           medicaidDirector: {
@@ -228,8 +226,8 @@ tap.test('apds POST endpoint', async endpointTest => {
                 50: { federalActual: 0, totalApproved: 0 }
               }
             }
-          }          
-        },
+          }
+        }
       };
 
       getStateProfile.resolves({
@@ -265,7 +263,6 @@ tap.test('apds POST endpoint', async endpointTest => {
   });
 
   endpointTest.teardown(async () => {
-    await mongo.teardown();
     mockClock.restore();
   });
 });

@@ -1,14 +1,11 @@
 import React from 'react';
-import {
-  renderWithConnection,
-  screen
-} from 'apd-testing-library';
+import { renderWithConnection, screen } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
 import axios from '../../../util/api';
 import ApdStateProfileMedicaidOffice from './ApdStateProfileMedicaidOffice';
 
-const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException'});
+const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 const initialState = {
   apd: {
@@ -34,14 +31,15 @@ const initialState = {
   user: {
     data: {
       state: {
-        id:"al",
-        name:"Alaska"
+        id: 'al',
+        name: 'Alaska'
       }
     }
   }
-}
+};
 
-const setup = (props = {}, options = {}) => renderWithConnection(<ApdStateProfileMedicaidOffice {...props} />, options);
+const setup = (props = {}, options = {}) =>
+  renderWithConnection(<ApdStateProfileMedicaidOffice {...props} />, options);
 
 describe('<ApdStateProfileMedicaidOffice />', () => {
   beforeEach(() => {
@@ -52,33 +50,21 @@ describe('<ApdStateProfileMedicaidOffice />', () => {
     it('renders successfully', async () => {
       setup({}, { initialState });
 
-      expect(
-        screen.getByLabelText('Name')
-      ).toHaveValue('Ashby');
+      expect(screen.getByLabelText('Name')).toHaveValue('Ashby');
 
-      expect(
-        screen.getByLabelText('Email address')
-      ).toHaveValue('ashby@gmail.com');
+      expect(screen.getByLabelText('Email address')).toHaveValue(
+        'ashby@gmail.com'
+      );
 
-      expect(
-        screen.getByLabelText('Phone number')
-      ).toHaveValue('1111');
+      expect(screen.getByLabelText('Phone number')).toHaveValue('1111');
 
-      expect(
-        screen.getByLabelText('Address')
-      ).toHaveValue('123 Wayfarer Way');
+      expect(screen.getByLabelText('Address')).toHaveValue('123 Wayfarer Way');
 
-      expect(
-        screen.getByLabelText('City')
-      ).toHaveValue('Space');
+      expect(screen.getByLabelText('City')).toHaveValue('Space');
 
-      expect(
-        screen.getByLabelText('State')
-      ).toHaveValue('AL');
+      expect(screen.getByLabelText('State')).toHaveValue('AL');
 
-      expect(
-        screen.getByLabelText('ZIP Code')
-      ).toHaveValue('12345')
-    })
+      expect(screen.getByLabelText('ZIP Code')).toHaveValue('12345');
+    });
   });
 });

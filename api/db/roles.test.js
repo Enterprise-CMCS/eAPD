@@ -41,23 +41,27 @@ const requestedRolesExpected = [
 
 tap.test('database wrappers / roles', async rolesTests => {
   const db = dbMock('auth_roles');
-  
 
   rolesTests.beforeEach(async () => {
-    dbMock.reset();        
+    dbMock.reset();
   });
-  
-  rolesTests.test('gets all roles when no specific roles requested', async test => {        
+
+  rolesTests.test(
+    'gets all roles when no specific roles requested',
+    async test => {
+      db.select.withArgs('id', 'name').returnsThis();
+      db.where.withArgs({ isActive: true }).resolves(allRoles);
+      const response = await getAllActiveRoles(null, { db });
+      test.same(response, allRoles);
+    }
+  );
+
+  rolesTests.test('returns specific roles if requested', async test => {
     db.select.withArgs('id', 'name').returnsThis();
-    db.where.withArgs({isActive: true}).resolves(allRoles);
-    const response = await getAllActiveRoles(null, { db });
-    test.same(response, allRoles);
-  });
-  
-  rolesTests.test('returns specific roles if requested', async test => {   
-    db.select.withArgs('id', 'name').returnsThis();
-    db.where.withArgs({isActive: true}).returnsThis();
-    db.whereIn.withArgs('name', requestedRoles ).resolves(requestedRolesExpected);
+    db.where.withArgs({ isActive: true }).returnsThis();
+    db.whereIn
+      .withArgs('name', requestedRoles)
+      .resolves(requestedRolesExpected);
 
     const response = await getAllActiveRoles(requestedRoles, { db });
     test.same(response, requestedRolesExpected);

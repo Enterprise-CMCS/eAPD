@@ -1,47 +1,55 @@
 # dependencies
 node_modules
-web/node_modules
 api/node_modules
-integrationTests/node_modules
+common/node_modules
+e2e/node_modules
+web/node_modules
 
 # misc
 .DS_Store
-.env
-.vscode
-.nova
-.idea
 .dccache
-.yarnrc.yml
 .editorconfig
+.env
+.idea
+.nova
+.vscode
 .yarn
+.yarnrc.yml
 
-npm-debug.log*
-pgdata/*
-mongodata/*
-__files
-notes.md
-schema.sql
 Makefile
+notes.md
+npm-debug.log*
+schema.sql
+__files
+mongodata/*
+pgdata/*
 
-api/seeds/test/tokens.json
-api/test-data/files
 api/.env
 api/.nyc_output
+api/coverage
 api/coverage-endpoint
 api/coverage-unit
-api/coverage
-api/hitech_api*.log*
+api/dist
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
+api/seeds/test/tokens.json
+api/test-data/files
+
+common/coverage
+common/dist
+
+docs-build
 
 e2e/cypress.env.json
 e2e/cypress/screenshots/*
 e2e/cypress/videos/*
 e2e/tokens.json
 
-web/dist
-web/coverage
 web/.jest-test-results.json
+web/coverage
+web/_dev
+web/dist
+web/docs-build
 web/storybook-static/*
 
 # stryker temp files
@@ -55,7 +63,6 @@ api/package-lock.json
 web/package-lock.json
 e2e/package-lock.json
 package-lock.json
-docs-build
 
 # Terraform ignores
 *.terraform

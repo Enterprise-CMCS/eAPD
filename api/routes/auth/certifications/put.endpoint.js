@@ -12,14 +12,14 @@ describe('auth/certifications put endpoint', () => {
     const db = getDB();
     beforeAll(() => setupDB(db));
     afterAll(() => teardownDB(db));
-    
+
     const url = '/auth/certifications';
 
     const payload = {
-      "certificationId": "5004",
-      "affiliationId": "4004",
-      "stateId": "ak",
-      "certificationFfy": "2022"
+      certificationId: '5004',
+      affiliationId: '4004',
+      stateId: 'ak',
+      certificationFfy: '2022'
     };
 
     unauthenticatedTest('put', url);
@@ -39,7 +39,7 @@ describe('auth/certifications put endpoint', () => {
 
       it('with a valid request body', async () => {
         const response = await api.put(url, payload);
-        
+
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
       });

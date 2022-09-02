@@ -3,10 +3,7 @@ import thunk from 'redux-thunk';
 
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
-import {
-  saveMilestone,
-  removeMilestone,
-} from './scheduleAndMilestones';
+import { saveMilestone, removeMilestone } from './scheduleAndMilestones';
 
 const mockStore = configureStore([thunk]);
 
@@ -15,14 +12,14 @@ describe('APD activity edit actions for activity schedule and milestones section
     apd: {
       data: {
         activities: [
-         {
-           schedule: []
-         } 
+          {
+            schedule: []
+          }
         ]
       }
     }
   };
-  
+
   const store = mockStore(state);
 
   beforeEach(() => {
@@ -61,24 +58,22 @@ describe('APD activity edit actions for activity schedule and milestones section
       }
     ]);
   });
-  
-  it('dispatches an action for updating an existing milestone', () => {    
+
+  it('dispatches an action for updating an existing milestone', () => {
     const storeWithMilestone = mockStore({
-        apd: {
-          data: {
-            activities: [
-             {
-               schedule: [
-                 { milestone: 'milestone' }
-               ]
-             } 
-            ]
-          }
+      apd: {
+        data: {
+          activities: [
+            {
+              schedule: [{ milestone: 'milestone' }]
+            }
+          ]
         }
-      });
-    const milestone = {key: '123', milestone: 'test milestone updated'};
+      }
+    });
+    const milestone = { key: '123', milestone: 'test milestone updated' };
     storeWithMilestone.dispatch(saveMilestone(0, 0, milestone));
-      
+
     expect(storeWithMilestone.getActions()).toEqual([
       {
         type: EDIT_APD,

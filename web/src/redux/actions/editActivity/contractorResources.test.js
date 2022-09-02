@@ -5,10 +5,7 @@ import { UPDATE_BUDGET } from '../budget';
 
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
-import {
-  saveContractor,
-  removeContractor,
-} from './contractorResources';
+import { saveContractor, removeContractor } from './contractorResources';
 
 const mockStore = configureStore([thunk]);
 
@@ -68,14 +65,17 @@ describe('APD activity edit actions for contractor resources section', () => {
 
   it('dispatches an action for updating an existing contractor', () => {
     const stateWithResource = state;
-    stateWithResource.apd.data.activities[0].contractorResources.push({ key: '123', name: 'test contractor' });
-    
+    stateWithResource.apd.data.activities[0].contractorResources.push({
+      key: '123',
+      name: 'test contractor'
+    });
+
     const storeWithResource = mockStore(stateWithResource);
-    
-    const contractor = {key: '123', contractor: 'test contractor updated'};
-    
+
+    const contractor = { key: '123', contractor: 'test contractor updated' };
+
     storeWithResource.dispatch(saveContractor(0, 0, contractor));
-    
+
     expect(storeWithResource.getActions()).toEqual([
       {
         type: EDIT_APD,

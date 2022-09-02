@@ -5,8 +5,15 @@ const put = require('./put');
 const get = require('./get');
 const del = require('./delete');
 
-module.exports = (app, 
-  { filesEndpoint = files, postEndpoint = post, putEndpoint = put, getEndpoint = get, deleteEndpoint = del } = {}
+module.exports = (
+  app,
+  {
+    filesEndpoint = files,
+    postEndpoint = post,
+    putEndpoint = put,
+    getEndpoint = get,
+    deleteEndpoint = del
+  } = {}
 ) => {
   logger.debug('setting up state admin certifications endpoint');
   filesEndpoint(app);

@@ -19,7 +19,7 @@ describe('the ContractorResourceReview component', () => {
         1067: {
           hours: 20,
           rate: 200
-        },
+        }
       },
       id: 'contractor 1',
       key: 'key 1',

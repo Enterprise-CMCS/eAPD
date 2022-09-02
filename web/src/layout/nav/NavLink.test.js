@@ -7,8 +7,7 @@ describe('<NavLink /> (for use within @cms-gov/ds components)', () => {
   it('renders props and children', () => {
     const props = {
       id: 'executive-summary-summary-nav',
-      href:
-        '/apd/0123456789abcdef01234567/executive-summary#executive-summary-summary',
+      href: '/apd/0123456789abcdef01234567/executive-summary#executive-summary-summary',
       otherThing: true
     };
     const component = shallow(<NavLink {...props}>Activities Summary</NavLink>);

@@ -5,18 +5,12 @@
     "^[0-9]{4}$": {
       "$id": "#/properties/actualExpenditures/year",
       "type": "object",
-      "required": [
-        "hithie",
-        "mmis"
-      ],
+      "required": ["hithie", "mmis"],
       "properties": {
         "hithie": {
           "$id": "#/properties/actualExpenditures/year/hithie",
           "type": "object",
-          "required": [
-            "federalActual",
-            "totalApproved"
-          ],
+          "required": ["federalActual", "totalApproved"],
           "properties": {
             "federalActual": {
               "$id": "#/properties/actualExpenditures/year/hithie/federalActual",
@@ -31,19 +25,12 @@
         "mmis": {
           "$id": "#/properties/actualExpenditures/year/mmis",
           "type": "object",
-          "required": [
-            "50",
-            "75",
-            "90"
-          ],
+          "required": ["50", "75", "90"],
           "properties": {
             "50": {
               "$id": "#/properties/actualExpenditures/year/mmis/50",
               "type": "object",
-              "required": [
-                "federalActual",
-                "totalApproved"
-              ],
+              "required": ["federalActual", "totalApproved"],
               "properties": {
                 "federalActual": {
                   "$id": "#/properties/actualExpenditures/year/mmis/50/federalActaul",
@@ -58,10 +45,7 @@
             "75": {
               "$id": "#/properties/actualExpenditures/year/mmis/75",
               "type": "object",
-              "required": [
-                "federalActual",
-                "totalApproved"
-              ],
+              "required": ["federalActual", "totalApproved"],
               "properties": {
                 "federalActual": {
                   "$id": "#/properties/actualExpenditures/year/mmis/75/federalActual",
@@ -76,10 +60,7 @@
             "90": {
               "$id": "#/properties/actualExpenditures/year/mmis/90",
               "type": "object",
-              "required": [
-                "federalActual",
-                "totalApproved"
-              ],
+              "required": ["federalActual", "totalApproved"],
               "properties": {
                 "federalActual": {
                   "$id": "#/properties/actualExpenditures/year/mmis/90/federalActual",

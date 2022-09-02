@@ -8,10 +8,10 @@
     "narrativeMMIS": ""
   },
   "keyStatePersonnel": {
-    "medicaidDirector": { 
-      "name": "", 
-      "email": "", 
-      "phone": "" 
+    "medicaidDirector": {
+      "name": "",
+      "email": "",
+      "phone": ""
     },
     "medicaidOffice": {
       "address1": "",
@@ -33,7 +33,7 @@
       "ehCt": {},
       "epAmt": {},
       "epCt": {}
-    }    
+    }
   },
   "assurancesAndCompliances": {}
 }

@@ -20,12 +20,12 @@ const Activity = ({ activity, activityIndex }) => {
         <div className="ds-u-margin-top--2">
           <ul className="ds-c-list--bare subform__container">
             <strong>Metrics: </strong>
-            {outcome.metrics.length === 0 && (
-              'No metrics were specified for this outcome.'
-            )}
+            {outcome.metrics.length === 0 &&
+              'No metrics were specified for this outcome.'}
             {outcome.metrics.map(({ metric }, index) => (
               <li key={uuidv4()} className="ds-u-margin-bottom--2">
-                {index + 1}. {metric || 'No metrics were specified for this outcome.'}
+                {index + 1}.{' '}
+                {metric || 'No metrics were specified for this outcome.'}
               </li>
             ))}
           </ul>
@@ -152,9 +152,7 @@ const Activity = ({ activity, activityIndex }) => {
         Activity {activityIndex + 1}: {activity.name || 'Untitled'}
       </h2>
       <strong>Provide a short overview of the activity: </strong>
-      {!activity.summary && (
-        <span>No response was provided.</span>
-      )}
+      {!activity.summary && <span>No response was provided.</span>}
       <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
       <p>
         <strong>Start date: </strong>
@@ -175,7 +173,11 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Statement of Alternative Considerations and Supporting Justification
       </h3>
-      <div dangerouslySetInnerHTML={{ __html: activity.alternatives || "No response was provided." }} />
+      <div
+        dangerouslySetInnerHTML={{
+          __html: activity.alternatives || 'No response was provided.'
+        }}
+      />
 
       <h3 className="viewonly-activity-header">
         <small>
@@ -227,7 +229,8 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Outcomes and Metrics
       </h3>
-      {activity.outcomes.length === 0 && 'No outcome(s) and/or corresponding metric(s) were provided.'}
+      {activity.outcomes.length === 0 &&
+        'No outcome(s) and/or corresponding metric(s) were provided.'}
       <hr className="subsection-rule ds-u-margin-bottom--1 ds-u-margin-top--1" />
       {activity.outcomes.map(buildOutcome)}
 
@@ -266,7 +269,8 @@ const Activity = ({ activity, activityIndex }) => {
         <br />
         Private Contractor Costs
       </h3>
-      {activity.contractorResources.length === 0 && 'Private contractor(s) not specified.'}
+      {activity.contractorResources.length === 0 &&
+        'Private contractor(s) not specified.'}
       {activity.contractorResources.map((contractor, index) =>
         buildContractor(contractor, index)
       )}
@@ -282,7 +286,9 @@ const Activity = ({ activity, activityIndex }) => {
       <div
         className="subform__container"
         dangerouslySetInnerHTML={{
-          __html: activity.costAllocationNarrative.methodology || 'No cost allocation methodology was provided.'
+          __html:
+            activity.costAllocationNarrative.methodology ||
+            'No cost allocation methodology was provided.'
         }}
       />
 

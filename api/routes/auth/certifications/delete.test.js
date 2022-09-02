@@ -38,51 +38,53 @@ tap.test('state certifications delete endpoint', async deleteTest => {
     );
   });
 
-  deleteTest.test('DELETE endpoint for returning the list of state admin certifications', async tests => {
-    let handler;
+  deleteTest.test(
+    'DELETE endpoint for returning the list of state admin certifications',
+    async tests => {
+      let handler;
 
-    tests.beforeEach(async () => {
-      deleteEndpoint(app, { ...di });
-      handler = app.delete.args.find(
-        args => args[0] === '/auth/certifications'
-      ).pop();
-    });
+      tests.beforeEach(async () => {
+        deleteEndpoint(app, { ...di });
+        handler = app.delete.args
+          .find(args => args[0] === '/auth/certifications')
+          .pop();
+      });
 
-    tests.test('the db fails to save', async test => {
-      const req = {
-        body: {
-          certificationId: '1234'
-        },
-        user: {
-          id: '123'
-        }
-      };
+      tests.test('the db fails to save', async test => {
+        const req = {
+          body: {
+            certificationId: '1234'
+          },
+          user: {
+            id: '123'
+          }
+        };
 
-      const err = { error: "cant save" }
-      di.archiveStateAdminCertification.throws(err)
+        const err = { error: 'cant save' };
+        di.archiveStateAdminCertification.throws(err);
 
-      await handler(req, res, next);
+        await handler(req, res, next);
 
-      test.ok(next.called, 'next is called')
-      test.ok(next.calledWith(err), 'pass error to middleware');
-    });
+        test.ok(next.called, 'next is called');
+        test.ok(next.calledWith(err), 'pass error to middleware');
+      });
 
-    tests.test('with valid request', async test => {
-      const req = {
-        body: {
-          certificationId: '1234'
-        },
-        user: {
-          id: '123'
-        }
-      };
+      tests.test('with valid request', async test => {
+        const req = {
+          body: {
+            certificationId: '1234'
+          },
+          user: {
+            id: '123'
+          }
+        };
 
-      di.archiveStateAdminCertification.resolves({error: null});
+        di.archiveStateAdminCertification.resolves({ error: null });
 
-      await handler(req, res, next);
+        await handler(req, res, next);
 
-      test.ok(res.send.calledWith(200), 'sends a 200 success response');
-    });
-
-  })
-})
+        test.ok(res.send.calledWith(200), 'sends a 200 success response');
+      });
+    }
+  );
+});

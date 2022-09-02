@@ -72,6 +72,7 @@ const StandardsAndConditions = ({
           <RichText
             {...props}
             id="standards-and-conditions-supports-field"
+            iframe_aria_text="Standards and Conditions Text Area"
             data-testid="standards-and-conditions-supports"
             content={supports}
             onSync={html => {
@@ -110,7 +111,7 @@ StandardsAndConditions.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   setSupport: PropTypes.func.isRequired,
   setDoesNotSupport: PropTypes.func.isRequired,
-  adminCheck: PropTypes.func.isRequired
+  adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, props) => ({

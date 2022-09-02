@@ -7,7 +7,7 @@
     "narrativeHIT",
     "narrativeMMIS"
   ],
-  "properties": {   
+  "properties": {
     "programOverview": { "type": "string" },
     "narrativeHIE": { "type": "string" },
     "narrativeHIT": { "type": "string" },

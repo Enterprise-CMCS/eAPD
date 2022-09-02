@@ -19,8 +19,8 @@ const defaultProps = {
 };
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
-const setup = (props = {}) => {
-  const utils = renderWithConnection(
+const setup = async (props = {}) => {
+  const utils = await renderWithConnection(
     <MatchStateAdminDialog {...defaultProps} {...props} />
   );
   const user = userEvent.setup();
@@ -31,12 +31,31 @@ const setup = (props = {}) => {
 };
 
 describe('<MatchStateAdminDialog />', () => {
-  test('renders correctly', () => {
+  it('renders correctly', () => {
     setup();
-    fetchMock
-      .onGet('/states/ak/affiliations?matches=true')
-      .reply(200, [{ email: 'sally@shire.com', displayName: 'Sally Shire' }]);
-
+    fetchMock.onGet('/states/ak/affiliations').reply(200, [
+      {
+        id: 322,
+        stateId: 'ak',
+        displayName: 'Sally Shire',
+        email: 'sally@shire.com'
+      }
+    ]);
     expect(screen.getByText('Match State Admin Letter to User')).toBeTruthy();
+  });
+
+  it('renders select dropdown', () => {
+    setup();
+    fetchMock.onGet('/states/ak/affiliations').reply(200, [
+      {
+        id: 322,
+        stateId: 'ak',
+        displayName: 'Sally Shire',
+        email: 'sally@shire.com'
+      }
+    ]);
+    expect(
+      screen.getByRole('combobox', { name: 'Select User' })
+    ).toBeInTheDocument();
   });
 });

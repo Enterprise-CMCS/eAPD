@@ -11,13 +11,7 @@ module.exports = app => {
 
   app.get('/states/:id', validForState('id'), (request, response, next) => {
     const { id } = request.params;
-    Promise.all([
-      db
-        .raw('states')
-        .where({ id })
-        .first(),
-      db.getStateAdmins(id)
-    ])
+    Promise.all([db.raw('states').where({ id }).first(), db.getStateAdmins(id)])
       .then(([row, stateAdmins]) => {
         if (row) {
           response.status(200).json({ ...row, stateAdmins });

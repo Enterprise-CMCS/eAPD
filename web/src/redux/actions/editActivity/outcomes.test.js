@@ -3,10 +3,7 @@ import thunk from 'redux-thunk';
 
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
-import {
-  saveOutcome,
-  removeOutcome,
-} from './outcomes';
+import { saveOutcome, removeOutcome } from './outcomes';
 
 const mockStore = configureStore([thunk]);
 
@@ -21,8 +18,8 @@ describe('APD activity edit actions for outcomes and metrics section', () => {
         ]
       }
     }
-  }
-  
+  };
+
   const store = mockStore(mockState);
 
   beforeEach(() => {
@@ -30,7 +27,6 @@ describe('APD activity edit actions for outcomes and metrics section', () => {
   });
 
   it('dispatches an action for adding a new outcome', () => {
-    
     store.dispatch(saveOutcome(0, null, {}));
 
     expect(store.getActions()).toEqual([
@@ -46,17 +42,20 @@ describe('APD activity edit actions for outcomes and metrics section', () => {
       }
     ]);
   });
-  
+
   it('dispatches an action for editing an existing outcome', () => {
     const stateWithOutcome = mockState;
-    stateWithOutcome.apd.data.activities[0].outcomes.push({ key: '123', outcome: 'test outcome' });
-    
+    stateWithOutcome.apd.data.activities[0].outcomes.push({
+      key: '123',
+      outcome: 'test outcome'
+    });
+
     const storeWithOutcome = mockStore(stateWithOutcome);
-    
-    const outcome = {key: '123', outcome: 'test outcome updated'};
-    
+
+    const outcome = { key: '123', outcome: 'test outcome updated' };
+
     storeWithOutcome.dispatch(saveOutcome(0, 0, outcome));
-    
+
     expect(storeWithOutcome.getActions()).toEqual([
       {
         type: EDIT_APD,

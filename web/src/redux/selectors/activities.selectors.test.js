@@ -150,7 +150,7 @@ describe('activities state selectors', () => {
                 name: 'key person',
                 fte: { 1990: 1.0, 1991: 0.75 }
               }
-            ]            
+            ]
           },
           years: ['1990', '1991']
         }

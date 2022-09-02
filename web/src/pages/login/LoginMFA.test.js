@@ -1,5 +1,10 @@
 import React from 'react';
-import { renderWithConnection, fireEvent, axe, screen } from 'apd-testing-library';
+import {
+  renderWithConnection,
+  fireEvent,
+  axe,
+  screen
+} from 'apd-testing-library';
 import LoginMFA from './LoginMFA';
 
 const defaultProps = {

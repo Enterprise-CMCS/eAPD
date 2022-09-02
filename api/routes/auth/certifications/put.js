@@ -2,7 +2,9 @@ const { loggedIn } = require('../../../middleware/auth');
 const { can } = require('../../../middleware');
 const logger = require('../../../logger')('auth certifications put');
 
-const { matchStateAdminCertification: matchCertification } = require('../../../db/certifications');
+const {
+  matchStateAdminCertification: matchCertification
+} = require('../../../db/certifications');
 const { getAllActiveRoles: getActiveRoles } = require('../../../db/roles');
 
 module.exports = (
@@ -19,17 +21,14 @@ module.exports = (
     loggedIn,
     can('edit-state-certifications'),
     async (req, res, next) => {
-
       const allRoleIds = await getAllActiveRoles();
-      const stateAdminId = allRoleIds.find(role => role.name === 'eAPD State Admin').id;
-      
-      const {
-        certificationId,
-        certificationFfy,
-        affiliationId,
-        stateId
-      } = req.body;
-      
+      const stateAdminId = allRoleIds.find(
+        role => role.name === 'eAPD State Admin'
+      ).id;
+
+      const { certificationId, certificationFfy, affiliationId, stateId } =
+        req.body;
+
       try {
         const { error = null } = await matchStateAdminCertification({
           certificationId,
@@ -42,14 +41,22 @@ module.exports = (
         });
 
         if (error) {
-          return res.status(400).send({ message: 'Unable to complete state admin certification' }).end();
+          return res
+            .status(400)
+            .send({ message: 'Unable to complete state admin certification' })
+            .end();
         }
-        
-        return res.status(200).end();     
+
+        return res.status(200).end();
       } catch (e) {
-        logger.error({ id: req.id, message: 'error updating state admin certification' });
+        logger.error({
+          id: req.id,
+          message: 'error updating state admin certification'
+        });
         logger.error({ id: req.id, message: e });
-        return next({ message: 'Unable to complete state admin certification' });
+        return next({
+          message: 'Unable to complete state admin certification'
+        });
       }
     }
   );

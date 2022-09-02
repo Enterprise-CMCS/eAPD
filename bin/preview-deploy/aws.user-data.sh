@@ -82,11 +82,20 @@ git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
 cd eAPD
 npm i -g yarn@1.22.18
 yarn cache clean
-yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 > yarn-install.log
+yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 2>&1 | tee yarn-install.log
+cp package.json /app
+cp yarn.lock /app
+cp babel.config.js /app
 
-cd web
-TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build
+# move the common folder into place
+cd ~/eAPD/common
+mkdir -p /app/common
+yarn build 2>&1 | tee common-build.log
+cp -r ~/eAPD/common/* /app/common
 
+# move the web app into place
+cd ~/eAPD/web
+TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build 2>&1 | tee web-build.log
 cp -r dist/* /app/web
 
 # move over node modules
@@ -95,12 +104,17 @@ mkdir -p /app/node_modules
 cp -r ~/eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
+cd ~/eAPD/api
+yarn build 2>&1 | tee api-build.log
 cp -r ~/eAPD/api/* /app/api
+
+cd /app
+yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000
 cd /app/api
 
 # Build and seed the database
-NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate
-NODE_ENV=development DEV_DB_HOST=localhost yarn run seed
+LOG_LEVEL=verbose NODE_ENV=development DEV_DB_HOST=localhost yarn run migrate 2>&1 | tee migrate.log
+LOG_LEVEL=verbose NODE_ENV=development DEV_DB_HOST=localhost yarn run seed 2>&1 | tee seed.log
 
 # Setting Up New Relic Application Monitor
 yarn add newrelic --save
@@ -118,7 +132,7 @@ sudo chown -R ec2-user:eapd /app
 echo "module.exports = {
   apps : [{
     name: 'eAPD API',
-    script: 'main.js',
+    script: 'dist/main.js',
     instances: 1,
     autorestart: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
@@ -150,7 +164,6 @@ echo "module.exports = {
 pm2 start ecosystem.config.js
 pm2 save
 
-NODE_ENV=production MONGO_URL=$MONGO_URL DATABASE_URL=$DATABASE_URL OKTA_DOMAIN=$OKTA_DOMAIN OKTA_API_KEY=$OKTA_API_KEY yarn run migrate
 E_USER
 
 sudo yum remove -y gcc-c++

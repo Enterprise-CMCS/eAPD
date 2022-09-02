@@ -15,7 +15,10 @@
 
   "costAllocation": {
     "description": "No cost allocation methodology was provided.",
-    "FFYdescriptions": ["No response was provided.","No response was provided."],
+    "FFYdescriptions": [
+      "No response was provided.",
+      "No response was provided."
+    ],
     "costs": [0, 0]
   },
 
@@ -137,8 +140,7 @@
     ]
   },
 
-  "FFYTotalDescription":
-  {
+  "FFYTotalDescription": {
     "totalCost": 0,
     "totalOtherFunding": 0,
     "totalTotalMedicaidCost": 0,

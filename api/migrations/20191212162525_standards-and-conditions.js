@@ -104,9 +104,7 @@ exports.up = async knex => {
           .reduce((arr, actions) => [...arr, ...actions], [])
       );
 
-      await knex('apds')
-        .where('id', apd.id)
-        .update('document', newDoc);
+      await knex('apds').where('id', apd.id).update('document', newDoc);
     })
   );
 };

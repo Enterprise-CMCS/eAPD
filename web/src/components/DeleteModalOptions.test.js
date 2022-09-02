@@ -14,20 +14,19 @@ describe('DeleteModalOptions function', () => {
     'Metric',
     'State Staff Expenses',
     'Funding Source'
-
-  ]
+  ];
   it('returns consistent values', () => {
-    objectTypes.forEach(objType =>{
-      const bodyOptions = getDeleteModalOptions(objType)
-      expect(bodyOptions).toMatchSnapshot()
-      expect(bodyOptions.body()).toMatchSnapshot()
-    })
-  })
+    objectTypes.forEach(objType => {
+      const bodyOptions = getDeleteModalOptions(objType);
+      expect(bodyOptions).toMatchSnapshot();
+      expect(bodyOptions.body()).toMatchSnapshot();
+    });
+  });
 
   it('has the correct body text', () => {
-    objectTypes.forEach(objType =>{
-      const bodyOptions = getDeleteModalOptions(objType)
-      expect(bodyOptions.body()).toMatchSnapshot()
-    })
-  })
-})
+    objectTypes.forEach(objType => {
+      const bodyOptions = getDeleteModalOptions(objType);
+      expect(bodyOptions.body()).toMatchSnapshot();
+    });
+  });
+});

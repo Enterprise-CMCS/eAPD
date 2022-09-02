@@ -213,9 +213,9 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     }
   );
 
-  // These tests no longer work since we are using a grouped knex query and 
-  // there isn't a way to mock a grouped query. They should be updated when 
-  // we are no longer mocking the database. 
+  // These tests no longer work since we are using a grouped knex query and
+  // there isn't a way to mock a grouped query. They should be updated when
+  // we are no longer mocking the database.
   /*
   affiliationsTests.test('get all Affiliations', async test => {
     db.leftJoin

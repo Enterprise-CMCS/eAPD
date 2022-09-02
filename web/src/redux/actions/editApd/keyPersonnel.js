@@ -10,22 +10,25 @@ export const saveKeyPersonnel = (index, data) => (dispatch, getState) => {
   const previousState = getState();
 
   let indexCalculated = index;
-  
-  if(previousState.apd.data.keyStatePersonnel.keyPersonnel[index] === undefined) {
-    indexCalculated = previousState.apd.data.keyStatePersonnel.keyPersonnel.length;
+
+  if (
+    previousState.apd.data.keyStatePersonnel.keyPersonnel[index] === undefined
+  ) {
+    indexCalculated =
+      previousState.apd.data.keyStatePersonnel.keyPersonnel.length;
     dispatch({
       type: ADD_APD_ITEM,
       path: '/keyStatePersonnel/keyPersonnel/-',
       state: getState()
     });
   }
-  
+
   dispatch({
     type: EDIT_APD,
     path: `/keyStatePersonnel/keyPersonnel/${indexCalculated}`,
     value: data
   });
-  
+
   dispatch(updateBudget());
 };
 

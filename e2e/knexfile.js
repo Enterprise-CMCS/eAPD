@@ -9,5 +9,5 @@ module.exports = {
       port: 54325
     },
     seeds: { directory: './seeds/development' }
-  },
+  }
 };

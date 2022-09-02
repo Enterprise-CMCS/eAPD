@@ -4,10 +4,7 @@ import thunk from 'redux-thunk';
 import { UPDATE_BUDGET } from '../budget';
 
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from './symbols';
-import {
-  saveKeyPersonnel,
-  removeKeyPersonnel,
-} from './keyPersonnel';
+import { saveKeyPersonnel, removeKeyPersonnel } from './keyPersonnel';
 
 const mockStore = configureStore([thunk]);
 
@@ -17,12 +14,12 @@ describe('APD edit actions for APD key personnel', () => {
       apd: {
         data: {
           keyStatePersonnel: {
-            keyPersonnel: []            
+            keyPersonnel: []
           }
         }
       }
     };
-    
+
     const store = mockStore(state);
     store.dispatch(saveKeyPersonnel(null, {}));
 
@@ -58,26 +55,24 @@ describe('APD edit actions for APD key personnel', () => {
       }
     ]);
   });
-  
+
   it('dispatches an action for updating an existing contractor', () => {
     const state = {
       apd: {
         data: {
           keyStatePersonnel: {
-            keyPersonnel: [
-              { name: "Test Personnel" }
-            ]            
+            keyPersonnel: [{ name: 'Test Personnel' }]
           }
         }
       }
     };
-    
+
     const store = mockStore(state);
-    
-    const personnel = {key: '123', name: 'test personnel updated'};
-    
+
+    const personnel = { key: '123', name: 'test personnel updated' };
+
     store.dispatch(saveKeyPersonnel(0, personnel));
-    
+
     expect(store.getActions()).toEqual([
       {
         type: EDIT_APD,

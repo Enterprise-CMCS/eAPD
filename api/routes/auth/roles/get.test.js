@@ -27,7 +27,6 @@ tap.test('auth roles GET endpoint', async endpointTest => {
       app.get.calledWith('/auth/roles', can('view-roles'), sinon.match.func),
       'roles GET endpoint is registered'
     );
-
   });
 
   endpointTest.test('get roles handler', async handlerTest => {

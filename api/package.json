@@ -2,24 +2,28 @@
   "name": "@cms-eapd/api",
   "version": "0.0.1",
   "description": "APD api for CMS HITECH program",
-  "main": "main.js",
+  "main": "dist/main.js",
+  "module": "dist/main.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "start": "node main.js",
-    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 ./main.js -e js",
+    "scaffold": "rm -rf dist/db/* && rm -rf dist/migrations/* && rm -rf dist && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
+    "build": "yarn scaffold && babel . --ignore \"node_modules/!file-type/**\",\"dist\",\"coverage-endpoint\" -d ./dist -s",
+    "start": "yarn build && node dist/main.js",
+    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
     "npm-check": "npx npm-check-updates",
+    "knex": "babel-node node_modules/.bin/knex",
     "knex-console": "node --experimental-repl-await knexrepl.js",
-    "knex-make-migrate": "knex migrate:make",
-    "knex-migrate": "knex migrate:latest",
-    "knex-migrate-rollback": "knex migrate:rollback",
-    "knex-migrate-down": "knex migrate:down",
+    "knex-make-migrate": "yarn knex migrate:make",
+    "knex-migrate": "yarn knex migrate:latest",
+    "knex-migrate-rollback": "yarn knex migrate:rollback",
+    "knex-migrate-down": "yarn knex migrate:down",
     "mongoose-make-migrate": "migrate --config mongo-migrate.js create",
     "mongoose-migrate": "migrate --config mongo-migrate.js --autosync up",
     "mongoose-migrate-down": "migrate --config mongo-migrate.js down",
-    "migrate": "yarn run knex-migrate && yarn run mongoose-migrate",
-    "seed": "knex seed:run --specific=main.js",
+    "migrate": "yarn knex-migrate && yarn mongoose-migrate",
+    "seed": "yarn workspace @cms-eapd/common build && yarn knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
-    "seed-users": "knex seed:run --specific=base-users.js",
+    "seed-users": "yarn knex seed:run --specific=base-users.js",
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
@@ -41,16 +45,18 @@
     "node": "16.16.0"
   },
   "dependencies": {
+    "@babel/node": "7.18.10",
+    "@cms-eapd/common": "0.0.1",
     "@okta/jwt-verifier": "2.6.0",
     "@okta/okta-sdk-nodejs": "6.5.0",
     "ajv": "8.11.0",
-    "aws-sdk": "2.1181.0",
+    "aws-sdk": "2.1202.0",
     "axios": "0.27.2",
     "body-parser": "1.20.0",
     "chalk": "4.1.2",
     "compression": "1.7.4",
     "cors": "2.8.5",
-    "date-fns": "2.29.1",
+    "date-fns": "2.29.2",
     "dotenv": "15.0.1",
     "express": "4.18.1",
     "express-fileupload": "1.4.0",
@@ -64,10 +70,10 @@
     "jsonwebtoken": "8.5.1",
     "knex": "1.0.7",
     "migrate-mongoose": "4.0.0",
-    "mongoose": "5.13.14",
+    "mongoose": "5.13.15",
     "morgan": "1.10.0",
     "newrelic": "8.16.0",
-    "pg": "8.7.3",
+    "pg": "8.8.0",
     "sanitize-html": "2.7.1",
     "sharp": "0.30.7",
     "swagger-ui-express": "4.5.0",
@@ -76,12 +82,14 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
+    "babel-jest": "27.5.1",
     "colors": "1.4.0",
-    "eslint": "8.20.0",
+    "core-js": "3.25.0",
+    "eslint": "8.22.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
-    "jest": "28.1.3",
+    "jest": "27.5.1",
     "nodemon": "2.0.19",
     "sinon": "14.0.0",
     "supertest": "6.2.4",
@@ -94,48 +102,59 @@
   "jest": {
     "coverageDirectory": "./coverage-endpoint/",
     "rootDir": "./",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/coverage-endpoint/"
+    ],
     "globalSetup": "./jest.setup.js",
     "globalTeardown": "./jest.teardown.js",
-    "testMatch": [
-      "**/*.endpoint.{js,jsx}"
-    ],
+    "testRegex": ".*.endpoint.(j|t)s[x]?$",
     "testEnvironment": "node",
     "testTimeout": 30000,
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!@cms-eapd/common|file-type)"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
     "collectCoverageFrom": [
       "routes/**/*.{js,jsx}",
+      "!/dist/**",
       "!**/*.test.js",
       "!**/__snapshots__/**",
       "!**/openAPI.js"
     ]
   },
   "tap": {
-    "files": "./**/*.test.js",
+    "files": "!(node_modules|dist|coverage)/**/*.test.js",
     "lines": 75,
     "functions": 60,
-    "branches": 50,
+    "branches": 49,
     "statements": 75,
     "nyc-arg": [
       "--reporter-dir=./coverage/",
+      "--exclude=./dist/**",
       "--exclude=./**/*.endpoint.js",
       "--exclude=./**/index.js",
       "--exclude=./**/migrations/**",
       "--exclude=./**/mongo-migrations/**",
       "--exclude=./**/openAPI.js",
+      "--exclude=./**/routes/**/index.js",
       "--exclude=./**/schemas/**",
       "--exclude=./**/seeds/**",
       "--exclude=./**/test-data/**",
       "--exclude=./**/node_modules/**",
       "--exclude=./**/__snapshots__/**",
-      "--exclude=./api/audit.js",
-      "--exclude=./api/auth/mockedOktaAuth.js",
-      "--exclude=./api/db/knex.js",
-      "--exclude=./api/db/mongodb.js",
-      "--exclude=./api/seeds/development/apds.js"
+      "--exclude=./**/audit.js",
+      "--exclude=./**/auth/mockedOktaAuth.js",
+      "--exclude=./**/db/knex.js",
+      "--exclude=./**/db/mongodb.js",
+      "--exclude=./**/seeds/development/apds.js"
     ]
-  },
-  "resolutions": {
-    "ansi-regex": "3.0.1",
-    "minimist": ">=1.2.6",
-    "glob-parent": ">=6.0.1"
   }
 }

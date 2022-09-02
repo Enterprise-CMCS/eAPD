@@ -52,7 +52,7 @@ const affiliationSchema = {
     role_id,
     status,
     created_at,
-    updated_at,
+    updated_at
   }
 };
 
@@ -68,7 +68,7 @@ const getMyAffiliations = {
         description: 'A list of affiliations for the logged in user',
         content: jsonResponse(arrayOf(affiliationSchema))
       },
-      401: {...responses.unauthed[401]}
+      401: { ...responses.unauthed[401] }
     },
     security: [{ bearerAuth: [] }]
   }

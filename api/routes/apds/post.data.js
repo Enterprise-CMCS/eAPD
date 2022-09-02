@@ -103,7 +103,7 @@ const getNewApd = () => {
         ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
         epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
         epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
-      }      
+      }
     },
     keyStatePersonnel: {
       medicaidDirector: {
@@ -135,7 +135,7 @@ const getNewApd = () => {
           }
         },
         [0, 1, 2].map(past => yearOptions[0] - past)
-      )      
+      )
     }
   };
 };

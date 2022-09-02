@@ -7,28 +7,34 @@ import { updateBudget } from '../budget';
  * @param {Number} personnelIndex Index of the personnel
  * @param {Object} data payload of the personnel to be saved
  */
-export const savePersonnel = (activityIndex, personnelIndex, data) => (dispatch, getState) => {
-  const previousState = getState();
+export const savePersonnel =
+  (activityIndex, personnelIndex, data) => (dispatch, getState) => {
+    const previousState = getState();
 
-  let indexCalculated = personnelIndex;
+    let indexCalculated = personnelIndex;
 
-  if(previousState.apd.data.activities[activityIndex].statePersonnel[personnelIndex] === undefined) {
-    indexCalculated = previousState.apd.data.activities[activityIndex].statePersonnel.length;
+    if (
+      previousState.apd.data.activities[activityIndex].statePersonnel[
+        personnelIndex
+      ] === undefined
+    ) {
+      indexCalculated =
+        previousState.apd.data.activities[activityIndex].statePersonnel.length;
+      dispatch({
+        type: ADD_APD_ITEM,
+        path: `/activities/${activityIndex}/statePersonnel/-`,
+        state: getState()
+      });
+    }
+
     dispatch({
-      type: ADD_APD_ITEM,
-      path: `/activities/${activityIndex}/statePersonnel/-`,
-      state: getState()
+      type: EDIT_APD,
+      path: `/activities/${activityIndex}/statePersonnel/${indexCalculated}`,
+      value: data
     });
-  }
-  
-  dispatch({
-    type: EDIT_APD,
-    path: `/activities/${activityIndex}/statePersonnel/${indexCalculated}`,
-    value: data
-  });
-  
-  dispatch(updateBudget());
-};
+
+    dispatch(updateBudget());
+  };
 
 /**
  * Remove a personnel resource from an activity
