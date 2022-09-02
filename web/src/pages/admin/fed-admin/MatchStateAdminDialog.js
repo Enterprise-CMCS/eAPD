@@ -16,9 +16,7 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
       (async () => {
         const state = certification.state.toLowerCase();
 
-        const affiliations = await axios.get(
-          `/states/${state}/affiliations?matches=true`
-        );
+        const affiliations = await axios.get(`/states/${state}/affiliations`);
         setStateAffiliations(affiliations.data);
         /* Compare the certification email/name to the affiliations and make 
           it the default one selected in the dropdown */

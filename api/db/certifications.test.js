@@ -52,6 +52,7 @@ const AUTH_AFFILIATIONS = {
 tap.test('certifications query tests', async sacQueryTest => {
   let stateStaffRoleId;
   let fedAdminRoleId;
+  let stateAdminRoleId;
 
   sacQueryTest.before(async () => {
     stateStaffRoleId = await knex('auth_roles')
@@ -61,6 +62,11 @@ tap.test('certifications query tests', async sacQueryTest => {
 
     fedAdminRoleId = await knex('auth_roles')
       .where({ name: 'eAPD Federal Admin' })
+      .first()
+      .then(role => role.id);
+
+    stateAdminRoleId = await knex('auth_roles')
+      .where({ name: 'eAPD State Admin' })
       .first()
       .then(role => role.id);
   });
@@ -257,6 +263,36 @@ tap.test('certifications query tests', async sacQueryTest => {
       const results = await getStateAdminCertifications();
       t.same(results.length, 1);
       t.same(results[0].potentialMatches, 0);
+    }
+  );
+
+  sacQueryTest.test(
+    'finds existing approved state admins as a potentialMatch',
+    async t => {
+      // insert a state admin certification
+      const certifications = {
+        email: 'matchme@email.com',
+        name: 'Cant match me Flynn',
+        state: 'ak',
+        fileUrl: '/auth/certifications/files/whatever.pdf',
+        phone: '4438675309',
+        uploadedBy: 'unitTest',
+        uploadedOn: new Date(),
+        ffy: 2022,
+        status: 'active'
+      };
+      const oktaUsers = OKTA_USERS.emailMatch;
+
+      const authAffiliations = {
+        role_id: stateAdminRoleId,
+        ...AUTH_AFFILIATIONS.emailMatch
+      };
+
+      await setupDB(certifications, oktaUsers, authAffiliations);
+
+      const results = await getStateAdminCertifications();
+      t.same(results.length, 1);
+      t.same(results[0].potentialMatches, 1);
     }
   );
 
