@@ -7,23 +7,17 @@ const { validateApd } = require('../schemas');
 const { Budget, APD } = require('../models/index');
 
 const createAPD = async apd => {
-  const newApd = new APD(apd);
-
-  const budget = calculateBudget(apd);
-  const newBudget = await Budget.create({
-    apdId: newApd._id, // eslint-disable-line no-underscore-dangle
-    status: newApd.status,
-    stateId: newApd.stateId,
-    ...budget
+  const newBudget = await Budget.create(calculateBudget(apd));
+  const newApd = await APD.create({
+    ...apd,
+    budget: newBudget
   });
-  newApd.budget = newBudget;
-  await newApd.save();
 
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
 const deleteAPDByID = async id =>
-  APD.updateOne({ _id: id }, { status: 'archived' }).exec();
+  APD.updateOne({ _id: id }, { status: 'archived' });
 
 const getAllAPDsByState = async stateId =>
   APD.find(
@@ -49,25 +43,6 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
   });
   // return the updated apd
   return newDocument;
-};
-
-const updateAPDBudget = async (id, stateId, patch) => {
-  let updatedBudget;
-  let errors;
-
-  try {
-    const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
-    const updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
-    updatedBudget = calculateBudget(updatedDoc);
-    await Budget.replaceOne({ apdId: id, stateId }, updatedBudget, {
-      multipleCastError: true,
-      runValidators: true
-    });
-  } catch (e) {
-    errors = e;
-  }
-
-  return { updatedBudget, errors };
 };
 
 const updateAPDDocument = async (
@@ -147,7 +122,9 @@ const updateAPDDocument = async (
 
     // Will probably eventually switch to apd.validate
     const validationErrors = {};
-    const valid = validate(deepCopy(updatedDoc));
+    const validationCopy = deepCopy(updatedDoc);
+    delete validationCopy.budget; // remove budget because it shouldn't be validated
+    const valid = validate(validationCopy);
     if (!valid) {
       // Rather than send back the full error from the validator, pull out just the relevant bits
       // and fetch the value that's causing the error.
@@ -176,12 +153,31 @@ const updateAPDDocument = async (
   };
 };
 
+const updateAPDBudget = async (id, stateId) => {
+  let updatedBudget;
+  let errors = {};
+
+  try {
+    const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
+    updatedBudget = calculateBudget(apdDoc);
+    await Budget.replaceOne({ _id: apdDoc.budget, stateId }, updatedBudget, {
+      multipleCastError: true,
+      runValidators: true
+    });
+  } catch (e) {
+    logger.error(`Error updating budget for APD ${id}: ${JSON.stringify(e)}`);
+    errors = e;
+  }
+
+  return { updatedBudget, errors };
+};
+
 module.exports = {
   createAPD,
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDBudget,
-  updateAPDDocument
+  updateAPDDocument,
+  updateAPDBudget
 };

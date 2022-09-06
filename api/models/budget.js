@@ -96,15 +96,6 @@ const activities = new mongoose.Schema({
 });
 
 const budgetSchema = new mongoose.Schema({
-  apdId: mongoose.Schema.Types.ObjectId,
-  status: {
-    type: String,
-    required: true
-  },
-  stateId: {
-    type: String,
-    required: true
-  },
   years: [
     {
       _id: false,

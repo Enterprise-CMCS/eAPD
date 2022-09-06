@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 require('./budget');
+const mongoose = require('mongoose');
 
 const quarterlyFFP = new mongoose.Schema(
   {

@@ -7,11 +7,11 @@ const {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument
+  updateAPDDocument,
+  updateAPDBudget
 } = require('./apds');
 const { setup, teardown } = require('./mongodb');
-const { getConnectionStatus } = require('./mongodb');
-const APD = require('../models/apd');
+const { APD, Budget } = require('../models/index');
 const { apd } = require('../seeds/development/apds');
 
 const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
@@ -19,7 +19,14 @@ let clock;
 let clockStub;
 let id;
 
-const deleteAPD = async apdId => APD.findOneAndDelete({ _id: apdId }).exec();
+const deleteAPD = async apdId => {
+  const { budget = null } =
+    (await APD.findOne({ _id: apdId }, 'budget').lean()) || {};
+  await APD.findOneAndDelete({ _id: apdId });
+  if (budget) {
+    await Budget.findOneAndDelete({ _id: budget });
+  }
+};
 
 tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.before(async () => {
@@ -30,8 +37,10 @@ tap.test('database wrappers / apds', async apdsTests => {
   });
 
   apdsTests.beforeEach(async () => {
-    // eslint-disable-next-line no-console
-    console.log(`connection status ${getConnectionStatus()}`);
+    if (id) {
+      await deleteAPD(id);
+      id = null;
+    }
     id = await createAPD({
       stateId: 'co',
       status: 'draft',
@@ -83,12 +92,14 @@ tap.test('database wrappers / apds', async apdsTests => {
     const found = await getAPDByID(id);
 
     test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
+    test.ok(!!found.budget, 'Budget was populated');
   });
 
   apdsTests.test('getting a single APD by ID for a state', async test => {
     const found = await getAPDByIDAndState(id, 'co');
 
     test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
+    test.ok(!!found.budget, 'Budget was populated');
   });
 
   apdsTests.test('updating an APD', async updateAPDDocumentTests => {
@@ -263,14 +274,52 @@ tap.test('database wrappers / apds', async apdsTests => {
       test.ok(stateUpdated, 'state was updated');
     });
 
-    updateAPDDocumentTests.afterEach(() => {
+    updateAPDDocumentTests.afterEach(async () => {
       clock.restore();
+    });
+  });
+
+  apdsTests.test('updating Budget', async updateBudgetDocumentTests => {
+    updateBudgetDocumentTests.test('with APD changes', async test => {
+      const { budget: initialBudget } = await APD.findOne({ _id: id })
+        .lean()
+        .populate('budget');
+
+      await updateAPDDocument(id, 'co', [
+        {
+          op: 'add',
+          path: '/activities/0/expenses/-',
+          value: {
+            key: '4dcd4f7d',
+            category: '',
+            description: '',
+            years: { 2022: null, 2023: null }
+          }
+        },
+        {
+          op: 'replace',
+          path: '/activities/0/expenses/3',
+          value: {
+            key: '413f62c9',
+            category: 'Travel',
+            description: 'traveling to something',
+            years: { 2022: 1000, 2023: 12000 }
+          }
+        }
+      ]);
+
+      // eslint-disable-next-line no-underscore-dangle
+      const { updatedBudget, errors } = await updateAPDBudget(id, 'co');
+
+      test.equal(Object.keys(errors).length, 0, 'no errors');
+      test.notSame(initialBudget, updatedBudget, 'Budget has been updated');
     });
   });
 
   apdsTests.teardown(async () => {
     if (id) {
       await deleteAPD(id);
+      id = null;
     }
     await teardown();
     clockStub.restore();

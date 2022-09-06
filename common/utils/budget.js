@@ -1204,7 +1204,6 @@ export const calculateBudget = apd => {
     activities,
     keyStatePersonnel: { keyPersonnel } = {}
   } = deepCopy(apd);
-  console.log({ years, keyPersonnel });
 
   // Create a default budget object so that all of the properties and stuff
   // will exist, so we don't have to have a bunch of code checking for it.
