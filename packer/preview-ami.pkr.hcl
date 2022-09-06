@@ -19,7 +19,7 @@ variable "preview_tealium_env" {}
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
 source "amazon-ebs" "Golden_Image" {
-    ami_name      = "Pre-eAPD Preview AMI - ${local.timestamp}"
+    ami_name      = "eAPD Preview AMI - ${local.timestamp}"
     instance_type = "t3.medium"
     access_key    = ""
     secret_key    = ""
