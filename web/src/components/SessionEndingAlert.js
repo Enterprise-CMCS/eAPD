@@ -49,7 +49,6 @@ const SessionEndingAlert = ({
   return (
     <div
       aria-hidden={!isSessionEnding}
-      // aria-live="polite"
       className={`alert--session-expiring ${className}`}
     >
       <div id="session-ending-modal" />
