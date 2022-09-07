@@ -1,8 +1,8 @@
 import { Dialog, Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import Countdown, { zeroPad } from 'react-countdown';
+import Countdown from 'react-countdown';
 import { v4 as uuidv4 } from 'uuid';
 import { useHistory } from 'react-router-dom';
 
@@ -24,8 +24,8 @@ const SessionEndingAlert = ({
     : 'alert--session-expiring__inactive';
 
   /* eslint-disable react/prop-types */
-  const createTimer = ({ minutes, seconds }) => {
-    if (minutes <= 1) {
+  const createTimer = ({ minutes }) => {
+    if (minutes == 1) {
       return (
         <span id="session-timeout" aria-live="polite">
           Your session will end in less than 1 minute. If you’d like to keep
@@ -94,6 +94,7 @@ const SessionEndingAlert = ({
             renderer={createTimer}
             onComplete={logoutAndRedirect}
             onStop={extend}
+            intervalDelay={60000}
           />
         </Dialog>
       )}
