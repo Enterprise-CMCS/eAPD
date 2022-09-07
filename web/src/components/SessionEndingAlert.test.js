@@ -82,6 +82,44 @@ describe('the session ending alert component', () => {
     expect(aside.childAt(0).dive().text()).toEqual('<Spinner /> Signing out');
   });
 
+  it('renders correct message with 5 minutes remaining', async () => {
+    const expires = new Date().getTime() + 305000;
+    console.log('expires', expires);
+    const props = {
+      isSessionEnding: true,
+      isExtendingSession: false,
+      isLoggingOut: false,
+      expiresAt: expires,
+      extend: jest.fn(),
+      logoutAction: jest.fn()
+    };
+    const component = shallow(<SessionEndingAlert {...props} />);
+    const countdown = component.childAt(1).dive().dive();
+    const countdownMessage = countdown.find('main').childAt(0);
+    expect(countdownMessage.childAt(0).dive().text()).toEqual(
+      'Your session will end in 5 minutes. If you’d like to keep working, select stay signed in.'
+    );
+  });
+
+  it('renders correct message with 5 minutes remaining', async () => {
+    const expires = new Date().getTime() + 65000;
+    console.log('expires', expires);
+    const props = {
+      isSessionEnding: true,
+      isExtendingSession: false,
+      isLoggingOut: false,
+      expiresAt: expires,
+      extend: jest.fn(),
+      logoutAction: jest.fn()
+    };
+    const component = shallow(<SessionEndingAlert {...props} />);
+    const countdown = component.childAt(1).dive().dive();
+    const countdownMessage = countdown.find('main').childAt(0);
+    expect(countdownMessage.childAt(0).dive().text()).toEqual(
+      'Your session will end in less than 1 minute. If you’d like to keep working, select stay signed in.'
+    );
+  });
+
   it('maps redux state to component props', () => {
     const expiresAt = new Date().getTime + 60000;
     expect(
