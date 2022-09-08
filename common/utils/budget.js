@@ -455,7 +455,7 @@ export const sumActivityTotalByCategories = ({
  */
 export const sumActivityTotals = ({ activity, years } = {}) => {
   let activityTotals = {
-    id: activity?.id || '',
+    id: activity?.key?.toString() || '',
     name: activity?.name || '',
     fundingSource: activity?.fundingSource || null,
     data: {}

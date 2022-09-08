@@ -7,11 +7,10 @@ const { validateApd } = require('../schemas');
 const { Budget, APD } = require('../models/index');
 
 const createAPD = async apd => {
-  const newBudget = await Budget.create(calculateBudget(apd));
-  const newApd = await APD.create({
-    ...apd,
-    budget: newBudget
-  });
+  const newApd = await APD.create(apd);
+  const newBudget = await Budget.create(calculateBudget(newApd));
+  newApd.budget = newBudget;
+  await newApd.save();
 
   return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
 };
@@ -169,7 +168,7 @@ const updateAPDBudget = async (id, stateId) => {
     errors = e;
   }
 
-  return { updatedBudget, errors };
+  return { budget: updatedBudget, errors };
 };
 
 module.exports = {

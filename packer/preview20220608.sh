@@ -40,19 +40,19 @@ chmod -R g+w /app
 mkdir /app/tls
 
 # Setup PostGres for Mongo Migraton
-rpm -Uvh https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-yum install -y postgresql10-server
+rpm -Uvh https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+yum install -y postgresql13-server-13.4-1PGDG.rhel7
 
 #postgresql-setup initdb
-/usr/pgsql-10/bin/postgresql-10-setup initdb
+/usr/pgsql-13/bin/postgresql-13-setup initdb
 echo "
 # TYPE    DATABASE    USER    ADDRESS         METHODS
 local     all         all                     peer
 host      all         all     127.0.0.1/32    password
 host      all         all     ::1/128         password
-" > /var/lib/pgsql/10/data/pg_hba.conf
-systemctl enable postgresql-10
-systemctl start postgresql-10
+" > /var/lib/pgsql/13/data/pg_hba.conf
+systemctl enable postgresql-13
+systemctl start postgresql-13
 
 # Setup Mongo Repo
 touch /etc/yum.repos.d/mongodb-org-5.0.repo

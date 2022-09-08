@@ -150,6 +150,7 @@ const budgetSchema = new mongoose.Schema({
   },
   activityTotals: [
     {
+      _id: false,
       id: String,
       name: String,
       fundingSource: {

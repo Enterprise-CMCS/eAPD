@@ -1,26 +1,53 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-
 import {
-  plain as IncentivePayments,
-  mapStateToProps,
-  mapDispatchToProps
-} from './IncentivePayments';
+  renderWithConnection,
+  screen,
+  act,
+  waitFor
+} from 'apd-testing-library';
 
-import {
-  setIncentiveEHCount,
-  setIncentiveEPCount,
-  setIncentiveEHPayment,
-  setIncentiveEPPayment
-} from '../../../redux/actions/editApd';
+import IncentivePayments from './IncentivePayments';
 
-describe('incentive payments component', () => {
-  const props = {
+const defaultProps = {
+  ehAmt: { 2022: { 1: 1, 2: 2, 3: 3, 4: 4 }, 2023: { 1: 5, 2: 6, 3: 7, 4: 8 } },
+  ehCt: {
+    2022: { 1: 9, 2: 10, 3: 11, 4: 12 },
+    2023: { 1: 13, 2: 14, 3: 15, 4: 16 }
+  },
+  epAmt: {
+    2022: { 1: 17, 2: 18, 3: 19, 4: 20 },
+    2023: { 1: 21, 2: 22, 3: 23, 4: 24 }
+  },
+  epCt: {
+    2022: { 1: 25, 2: 26, 3: 27, 4: 28 },
+    2023: { 1: 29, 2: 30, 3: 31, 4: 32 }
+  },
+  years: ['2022', '2023'],
+  setEHCount: jest.fn(),
+  setEPCount: jest.fn(),
+  setEHPayment: jest.fn(),
+  setEPPayment: jest.fn()
+};
+
+const initialState = {
+  apd: {
     data: {
-      ehAmt: { 1: [1, 2, 3, 4], 2: [5, 6, 7, 8] },
-      ehCt: { 1: [9, 10, 11, 12], 2: [13, 14, 15, 16] },
-      epAmt: { 1: [17, 18, 19, 20], 2: [21, 22, 23, 24] },
-      epCt: { 1: [25, 26, 27, 28], 2: [29, 30, 31, 32] }
+      ehAmt: {
+        2022: { 1: 1, 2: 2, 3: 3, 4: 4 },
+        2023: { 1: 5, 2: 6, 3: 7, 4: 8 }
+      },
+      ehCt: {
+        2022: { 1: 9, 2: 10, 3: 11, 4: 12 },
+        2023: { 1: 13, 2: 14, 3: 15, 4: 16 }
+      },
+      epAmt: {
+        2022: { 1: 17, 2: 18, 3: 19, 4: 20 },
+        2023: { 1: 21, 2: 22, 3: 23, 4: 24 }
+      },
+      epCt: {
+        2022: { 1: 25, 2: 26, 3: 27, 4: 28 },
+        2023: { 1: 29, 2: 30, 3: 31, 4: 32 }
+      }
     },
     totals: {
       ehAmt: { allYears: 36, byYear: { 1: 10, 2: 26 } },
@@ -28,93 +55,157 @@ describe('incentive payments component', () => {
       epAmt: { allYears: 164, byYear: { 1: 74, 2: 90 } },
       epCt: { allYears: 228, byYear: { 1: 106, 2: 122 } }
     },
-    years: ['1', '2'],
-    setEHCount: jest.fn(),
-    setEPCount: jest.fn(),
-    setEHPayment: jest.fn(),
-    setEPPayment: jest.fn()
-  };
+    years: ['2022', '2023'],
+    adminCheck: false
+  }
+};
 
-  beforeEach(() => {
-    props.setEHCount.mockClear();
-    props.setEPCount.mockClear();
-    props.setEHPayment.mockClear();
-    props.setEPPayment.mockClear();
-  });
-
-  it('renders correctly', () => {
-    const component = shallow(<IncentivePayments {...props} />);
-    expect(component).toMatchSnapshot();
-  });
-
-  it('handles changes', () => {
-    const component = shallow(<IncentivePayments {...props} />);
-
-    const actions = [
-      props.setEHPayment,
-      props.setEHCount,
-      props.setEPPayment,
-      props.setEPCount
-    ];
-
-    [
-      // The first pair of dollar/number fields will be for the EH things
-      // for the first year, and the first quarter
-      component.find('DollarField').at(0),
-      component.find('NumberField').at(0),
-      // We do all quarters of EH for a year before switching over to EP,
-      // so the 5th (index 4) pair will be for EP, first year, first quarter
-      component.find('DollarField').at(4),
-      component.find('NumberField').at(4)
-    ].forEach((c, i) => {
-      c.simulate('change', { target: { value: 99 } });
-
-      const action = actions[Math.floor(i / 4) % actions.length];
-
-      expect(action).toHaveBeenCalledWith('1', 1, 99);
-    });
-  });
-
-  it('maps state to props', () => {
-    expect(
-      mapStateToProps({
-        apd: {
-          data: {
-            proposedBudget: {
-              incentivePayments: {
-                ehAmt: { 1: [1, 2, 3, 4], 2: [5, 6, 7, 8] },
-                ehCt: { 1: [9, 10, 11, 12], 2: [13, 14, 15, 16] },
-                epAmt: { 1: [17, 18, 19, 20], 2: [21, 22, 23, 24] },
-                epCt: { 1: [25, 26, 27, 28], 2: [29, 30, 31, 32] }
-              }
-            },
-            years: ['1', '2']
+const setup = async (props = {}) => {
+  let utils;
+  // eslint-disable-next-line testing-library/no-unnecessary-act
+  await act(async () => {
+    utils = renderWithConnection(
+      <IncentivePayments {...defaultProps} {...props} />,
+      {
+        initialState: {
+          apd: {
+            data: {
+              proposedBudget: {
+                incentivePayments: {
+                  ehAmt: {
+                    2022: { 1: 1, 2: 2, 3: 3, 4: 4 },
+                    2023: { 1: 5, 2: 6, 3: 7, 4: 8 }
+                  },
+                  ehCt: {
+                    2022: { 1: 9, 2: 10, 3: 11, 4: 12 },
+                    2023: { 1: 13, 2: 14, 3: 15, 4: 16 }
+                  },
+                  epAmt: {
+                    2022: { 1: 17, 2: 18, 3: 19, 4: 20 },
+                    2023: { 1: 21, 2: 22, 3: 23, 4: 24 }
+                  },
+                  epCt: {
+                    2022: { 1: 25, 2: 26, 3: 27, 4: 28 },
+                    2023: { 1: 29, 2: 30, 3: 31, 4: 32 }
+                  }
+                }
+              },
+              years: ['2022', '2023']
+            }
           }
         }
-      })
-    ).toEqual({
-      data: {
-        ehAmt: { 1: [1, 2, 3, 4], 2: [5, 6, 7, 8] },
-        ehCt: { 1: [9, 10, 11, 12], 2: [13, 14, 15, 16] },
-        epAmt: { 1: [17, 18, 19, 20], 2: [21, 22, 23, 24] },
-        epCt: { 1: [25, 26, 27, 28], 2: [29, 30, 31, 32] }
-      },
-      totals: {
-        ehAmt: { allYears: 36, byYear: { 1: 10, 2: 26 } },
-        ehCt: { allYears: 100, byYear: { 1: 42, 2: 58 } },
-        epAmt: { allYears: 164, byYear: { 1: 74, 2: 90 } },
-        epCt: { allYears: 228, byYear: { 1: 106, 2: 122 } }
-      },
-      years: ['1', '2']
+      }
+    );
+  });
+  return {
+    utils
+  };
+};
+
+describe('<IncentivePayments />', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  test('renders correctly', async () => {
+    await setup({}, { initialState: initialState });
+
+    var data = [
+        {
+          name: 'ehAmt',
+          yearOne: 2022,
+          yearOneValues: [1, 2, 3, 4],
+          yearTwo: 2023,
+          yearTwoValues: [5, 6, 7, 8]
+        },
+        {
+          name: 'epAmt',
+          yearOne: 2022,
+          yearOneValues: [17, 18, 19, 20],
+          yearTwo: 2023,
+          yearTwoValues: [21, 22, 23, 24]
+        }
+      ],
+      quarters = ['1', '2', '3', '4'];
+
+    data.forEach(d => {
+      var name = d.name,
+        firstYear = d.yearOne,
+        firstValues = d.yearOneValues,
+        secondYear = d.yearTwo,
+        secondValues = d.yearTwoValues;
+
+      quarters.forEach(q => {
+        var index = q - 1;
+
+        expect(screen.getByTestId(`${name} ${firstYear} ${q}`)).toHaveValue(
+          `${firstValues[index]}`
+        );
+        expect(screen.getByTestId(`${name} ${secondYear} ${q}`)).toHaveValue(
+          `${secondValues[index]}`
+        );
+      });
     });
   });
 
-  it('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({
-      setEHCount: setIncentiveEHCount,
-      setEPCount: setIncentiveEPCount,
-      setEHPayment: setIncentiveEHPayment,
-      setEPPayment: setIncentiveEPPayment
-    });
+  test('renders incentive payments subtotal', async () => {
+    await setup({}, { initialState: initialState });
+
+    var ehAmtYearOneTotal = [1, 2, 3, 4].reduce(
+        (partialSum, a) => partialSum + a,
+        0
+      ),
+      ehAmtYearTwoTotal = [5, 6, 7, 8].reduce(
+        (partialSum, a) => partialSum + a,
+        0
+      ),
+      epAmtYearOneTotal = [17, 18, 19, 20].reduce(
+        (partialSum, a) => partialSum + a,
+        0
+      ),
+      epAmtYearTwoTotal = [21, 22, 23, 24].reduce(
+        (partialSum, a) => partialSum + a,
+        0
+      );
+
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('ehAmt 2022 total')
+          .innerHTML.replace(/<(.|\n)*?>/g, '')
+      ).toHaveValue(`$${ehAmtYearOneTotal}`);
+    })
+      .then(() => console.log('Found!'))
+      .catch(err => console.log(err));
+
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('epAmt 2022 total')
+          .innerHTML.replace(/<(.|\n)*?>/g, '')
+      ).toHaveValue(`$${epAmtYearOneTotal}`);
+    })
+      .then(() => console.log('Found!'))
+      .catch(err => console.log(err));
+
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('ehAmt 2023 total')
+          .innerHTML.replace(/<(.|\n)*?>/g, '')
+      ).toHaveValue(`$${ehAmtYearTwoTotal}`);
+    })
+      .then(() => console.log('Found!'))
+      .catch(err => console.log(err));
+
+    waitFor(() => {
+      expect(
+        screen
+          .getByTestId('epAmt 2023 total')
+          .innerHTML.replace(/<(.|\n)*?>/g, '')
+      ).toHaveValue(`$${epAmtYearTwoTotal}`);
+    })
+      .then(() => console.log('Found!'))
+      .catch(err => console.log(err));
   });
 });

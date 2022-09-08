@@ -187,6 +187,12 @@ const apdSchema = new mongoose.Schema({
   activities: [
     {
       _id: false,
+      key: {
+        type: mongoose.Schema.Types.ObjectId,
+        index: false,
+        required: true,
+        auto: true
+      },
       alternatives: String,
       contractorResources: [
         {
