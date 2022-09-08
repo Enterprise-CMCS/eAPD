@@ -138,6 +138,11 @@ td {
   white-space: nowrap;
 }
 
+.budget-table--input__number-error {
+  border: 3px solid #e31c3d;
+  border-radius: 5px;
+}
+
 /* override our default rule that causes tables to be 100% of parent container */
 .table-fit-contents {
   width: auto;
@@ -164,4 +169,17 @@ tr.budget-table--row__primary-header {
 
 .indent-title {
   padding-left: 3em;
+}
+
+/* Custom borders to support highlighted rows for validation */
+.table-error-border-no-bottom {
+  border-top: 2px solid $color-error !important;
+  border-left: 2px solid $color-error;
+  border-right: 2px solid $color-error;
+}
+
+.table-error-border-no-top {
+  border-bottom: 2px solid $color-error !important;
+  border-left: 2px solid $color-error;
+  border-right: 2px solid $color-error;
 }
