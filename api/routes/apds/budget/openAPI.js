@@ -24,7 +24,7 @@ const openAPI = {
       responses: {
         200: {
           description: 'The updated budget',
-          content: jsonResponse({ $ref: '#/components/schemas/budget' })
+          content: jsonResponse({ $ref: '#/components/schemas/apd/budget' })
         },
         400: {
           description: 'The updated failed due to a problem'
