@@ -188,7 +188,7 @@ const ActivityOverview = ({
               {...props}
               id="activity-description-field"
               iframe_aria_text="Include as much detail as is necessary to explain the activity Text Area"
-              data-cy="activity-description"
+              role={description}
               content={description}
               onSync={html => {
                 setDescription(activityIndex, html);
@@ -198,6 +198,7 @@ const ActivityOverview = ({
                   trigger();
                 }
               }}
+              data-cy="activity-description"
               editorClassName="rte-textarea-l"
               error={errors?.description?.message}
             />
