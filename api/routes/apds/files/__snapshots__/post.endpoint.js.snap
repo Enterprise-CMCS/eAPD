@@ -22,4 +22,8 @@ Object {
 
 exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with an APD in a state other than the user's state 1`] = `""`;
 
-exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with an APD that is not in draft 1`] = `""`;
+exports[`APD files endpoints Upload a file associated with an APD | POST /apds/:id/files when authenticated as a user with permission with an APD that is not in draft 1`] = `
+Object {
+  "error": "invalid Token",
+}
+`;
