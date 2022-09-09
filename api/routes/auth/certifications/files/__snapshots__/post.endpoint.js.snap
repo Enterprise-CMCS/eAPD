@@ -2,7 +2,7 @@
 
 exports[`auth/certifications/files endpoints Upload a state certification letter/file | POST /auth/certifications/files when authenticated as a user with permission with a non-existant apd ID 1`] = `
 Object {
-  "error": "invalid Token",
+  "error": "Unable to upload file",
 }
 `;
 

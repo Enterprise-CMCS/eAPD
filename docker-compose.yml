@@ -34,6 +34,7 @@ services:
       context: .
       dockerfile: ./web/Dockerfile
     image: cms-eapd/web
+    restart: unless-stopped
     environment:
       - API_URL=http://localhost:8081
       - TEALIUM_TAG=${TEALIUM_TAG}
@@ -60,6 +61,7 @@ services:
       context: .
       dockerfile: ./api/Dockerfile
     image: cms-eapd/api
+    restart: unless-stopped
     depends_on:
       - db
       - mongo

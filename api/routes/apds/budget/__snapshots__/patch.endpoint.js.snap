@@ -1,0 +1,1896 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APD budget endpoint | PATCH /apds/:id/budget when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
+
+exports[`APD budget endpoint | PATCH /apds/:id/budget when authenticated as a user with permission with a valid apd ID 1`] = `
+Object {
+  "budget": Object {
+    "__v": 0,
+    "activities": Object {
+      "631b3f6f49f28f022b1d70d6": Object {
+        "costsByFFY": Object {
+          "2019": Object {
+            "federal": 3109348,
+            "medicaid": 3454831,
+            "state": 345483,
+            "total": 3454831,
+          },
+          "2020": Object {
+            "federal": 1803821,
+            "medicaid": 2004245,
+            "state": 200424,
+            "total": 2004245,
+          },
+          "total": Object {
+            "federal": 4913169,
+            "medicaid": 5459076,
+            "state": 545907,
+            "total": 5459076,
+          },
+        },
+        "quarterlyFFP": Object {
+          "total": Object {
+            "combined": 4913169,
+            "contractors": 1687680,
+            "inHouse": 3225489,
+          },
+          "years": Object {
+            "2019": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 777337,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 299870,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 477467,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 777337,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 299870,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 477467,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 777337,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 299870,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 477467,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 777337,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 299870,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 477467,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 3109348,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 1199480,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 1909868,
+                  "percent": 1,
+                },
+              },
+            },
+            "2020": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 450956,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 122050,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 328906,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 450955,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 122050,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 328905,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 450955,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 122050,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 328905,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 450955,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 122050,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 328905,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 1803821,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 488200,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 1315621,
+                  "percent": 1,
+                },
+              },
+            },
+          },
+        },
+      },
+      "631b3f6f49f28f022b1d70d7": Object {
+        "costsByFFY": Object {
+          "2019": Object {
+            "federal": 1622700,
+            "medicaid": 1803000,
+            "state": 180300,
+            "total": 1803000,
+          },
+          "2020": Object {
+            "federal": 2319750,
+            "medicaid": 3093000,
+            "state": 773250,
+            "total": 3093000,
+          },
+          "total": Object {
+            "federal": 3942450,
+            "medicaid": 4896000,
+            "state": 953550,
+            "total": 4896000,
+          },
+        },
+        "quarterlyFFP": Object {
+          "total": Object {
+            "combined": 3942450,
+            "contractors": 1897500,
+            "inHouse": 2044950,
+          },
+          "years": Object {
+            "2019": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 405675,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 146250,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 259425,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 405675,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 146250,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 259425,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 405675,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 146250,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 259425,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 405675,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 146250,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 259425,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 1622700,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 585000,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 1037700,
+                  "percent": 1,
+                },
+              },
+            },
+            "2020": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 579938,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 328125,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 251813,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 579938,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 328125,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 251813,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 579937,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 328125,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 251812,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 579937,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 328125,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 251812,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 2319750,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 1312500,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 1007250,
+                  "percent": 1,
+                },
+              },
+            },
+          },
+        },
+      },
+      "631b3f6f49f28f022b1d70d8": Object {
+        "costsByFFY": Object {
+          "2019": Object {
+            "federal": 414000,
+            "medicaid": 460000,
+            "state": 46000,
+            "total": 460000,
+          },
+          "2020": Object {
+            "federal": 428400,
+            "medicaid": 476000,
+            "state": 47600,
+            "total": 476000,
+          },
+          "total": Object {
+            "federal": 842400,
+            "medicaid": 936000,
+            "state": 93600,
+            "total": 936000,
+          },
+        },
+        "quarterlyFFP": Object {
+          "total": Object {
+            "combined": 842400,
+            "contractors": 0,
+            "inHouse": 842400,
+          },
+          "years": Object {
+            "2019": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 103500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 103500,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 103500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 103500,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 103500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 103500,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 103500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 103500,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 414000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 414000,
+                  "percent": 1,
+                },
+              },
+            },
+            "2020": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 107100,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 107100,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 107100,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 107100,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 107100,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 107100,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 107100,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 107100,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 428400,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 0,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 428400,
+                  "percent": 1,
+                },
+              },
+            },
+          },
+        },
+      },
+      "631b3f6f49f28f022b1d70d9": Object {
+        "costsByFFY": Object {
+          "2019": Object {
+            "federal": 450000,
+            "medicaid": 500000,
+            "state": 50000,
+            "total": 500000,
+          },
+          "2020": Object {
+            "federal": 1800000,
+            "medicaid": 2000000,
+            "state": 200000,
+            "total": 2000000,
+          },
+          "total": Object {
+            "federal": 2250000,
+            "medicaid": 2500000,
+            "state": 250000,
+            "total": 2500000,
+          },
+        },
+        "quarterlyFFP": Object {
+          "total": Object {
+            "combined": 2250000,
+            "contractors": 2250000,
+            "inHouse": 0,
+          },
+          "years": Object {
+            "2019": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 112500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 112500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 112500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 112500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 112500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 112500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 112500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 112500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 450000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 450000,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 1,
+                },
+              },
+            },
+            "2020": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 450000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 450000,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 450000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 450000,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 450000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 450000,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 450000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 450000,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 1800000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 1800000,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 1,
+                },
+              },
+            },
+          },
+        },
+      },
+      "631b3f6f49f28f022b1d70da": Object {
+        "costsByFFY": Object {
+          "2019": Object {
+            "federal": 450000,
+            "medicaid": 500000,
+            "state": 50000,
+            "total": 500000,
+          },
+          "2020": Object {
+            "federal": 1350000,
+            "medicaid": 1500000,
+            "state": 150000,
+            "total": 1500000,
+          },
+          "total": Object {
+            "federal": 1800000,
+            "medicaid": 2000000,
+            "state": 200000,
+            "total": 2000000,
+          },
+        },
+        "quarterlyFFP": Object {
+          "total": Object {
+            "combined": 1800000,
+            "contractors": 1800000,
+            "inHouse": 0,
+          },
+          "years": Object {
+            "2019": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 112500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 112500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 112500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 112500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 112500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 112500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 112500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 112500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 450000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 450000,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 1,
+                },
+              },
+            },
+            "2020": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 337500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 337500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 337500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 337500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 337500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 337500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 337500,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 337500,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 1350000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 1350000,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 0,
+                  "percent": 1,
+                },
+              },
+            },
+          },
+        },
+      },
+      "631b3f6f49f28f022b1d70db": Object {
+        "costsByFFY": Object {
+          "2019": Object {
+            "federal": 300000,
+            "medicaid": 600000,
+            "state": 300000,
+            "total": 725000,
+          },
+          "2020": Object {
+            "federal": 585000,
+            "medicaid": 650000,
+            "state": 65000,
+            "total": 775000,
+          },
+          "total": Object {
+            "federal": 885000,
+            "medicaid": 1250000,
+            "state": 365000,
+            "total": 1500000,
+          },
+        },
+        "quarterlyFFP": Object {
+          "total": Object {
+            "combined": 885000,
+            "contractors": 759610,
+            "inHouse": 125390,
+          },
+          "years": Object {
+            "2019": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 75002,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 67242,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 7760,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 75000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 67241,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 7759,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 74999,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 67241,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 7758,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 74999,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 67241,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 7758,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 300000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 268965,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 31035,
+                  "percent": 1,
+                },
+              },
+            },
+            "2020": Object {
+              "1": Object {
+                "combined": Object {
+                  "dollars": 146251,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 122662,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 23589,
+                  "percent": 0.25,
+                },
+              },
+              "2": Object {
+                "combined": Object {
+                  "dollars": 146250,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 122661,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 23589,
+                  "percent": 0.25,
+                },
+              },
+              "3": Object {
+                "combined": Object {
+                  "dollars": 146250,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 122661,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 23589,
+                  "percent": 0.25,
+                },
+              },
+              "4": Object {
+                "combined": Object {
+                  "dollars": 146249,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 122661,
+                  "percent": 0.25,
+                },
+                "inHouse": Object {
+                  "dollars": 23588,
+                  "percent": 0.25,
+                },
+              },
+              "subtotal": Object {
+                "combined": Object {
+                  "dollars": 585000,
+                  "percent": 0,
+                },
+                "contractors": Object {
+                  "dollars": 490645,
+                  "percent": 1,
+                },
+                "inHouse": Object {
+                  "dollars": 94355,
+                  "percent": 1,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "activityTotals": Array [
+      Object {
+        "data": Object {
+          "combined": Object {
+            "2019": 3454831,
+            "2020": 2004245,
+            "total": 5459076,
+          },
+          "contractors": Object {
+            "2019": 1332756,
+            "2020": 542444,
+            "total": 1875200,
+          },
+          "expenses": Object {
+            "2019": 775000,
+            "2020": 75000,
+            "total": 850000,
+          },
+          "otherFunding": Object {
+            "2019": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          },
+          "statePersonnel": Object {
+            "2019": 1347075,
+            "2020": 1386801,
+            "total": 2733876,
+          },
+        },
+        "fundingSource": "HIT",
+        "id": "631b3f6f49f28f022b1d70d6",
+        "name": "Program Administration",
+      },
+      Object {
+        "data": Object {
+          "combined": Object {
+            "2019": 1803000,
+            "2020": 3093000,
+            "total": 4896000,
+          },
+          "contractors": Object {
+            "2019": 650000,
+            "2020": 1750000,
+            "total": 2400000,
+          },
+          "expenses": Object {
+            "2019": 0,
+            "2020": 0,
+            "total": 0,
+          },
+          "otherFunding": Object {
+            "2019": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          },
+          "statePersonnel": Object {
+            "2019": 1153000,
+            "2020": 1343000,
+            "total": 2496000,
+          },
+        },
+        "fundingSource": "MMIS",
+        "id": "631b3f6f49f28f022b1d70d7",
+        "name": "HIE Claims Data Analytics",
+      },
+      Object {
+        "data": Object {
+          "combined": Object {
+            "2019": 460000,
+            "2020": 476000,
+            "total": 936000,
+          },
+          "contractors": Object {
+            "2019": 0,
+            "2020": 0,
+            "total": 0,
+          },
+          "expenses": Object {
+            "2019": 0,
+            "2020": 0,
+            "total": 0,
+          },
+          "otherFunding": Object {
+            "2019": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          },
+          "statePersonnel": Object {
+            "2019": 460000,
+            "2020": 476000,
+            "total": 936000,
+          },
+        },
+        "fundingSource": "HIE",
+        "id": "631b3f6f49f28f022b1d70d8",
+        "name": "HIE Enhancement and Onboarding",
+      },
+      Object {
+        "data": Object {
+          "combined": Object {
+            "2019": 500000,
+            "2020": 2000000,
+            "total": 2500000,
+          },
+          "contractors": Object {
+            "2019": 500000,
+            "2020": 2000000,
+            "total": 2500000,
+          },
+          "expenses": Object {
+            "2019": 0,
+            "2020": 0,
+            "total": 0,
+          },
+          "otherFunding": Object {
+            "2019": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          },
+          "statePersonnel": Object {
+            "2019": 0,
+            "2020": 0,
+            "total": 0,
+          },
+        },
+        "fundingSource": "HIE",
+        "id": "631b3f6f49f28f022b1d70d9",
+        "name": "Medicaid Blue Button",
+      },
+      Object {
+        "data": Object {
+          "combined": Object {
+            "2019": 500000,
+            "2020": 1500000,
+            "total": 2000000,
+          },
+          "contractors": Object {
+            "2019": 500000,
+            "2020": 1500000,
+            "total": 2000000,
+          },
+          "expenses": Object {
+            "2019": 0,
+            "2020": 0,
+            "total": 0,
+          },
+          "otherFunding": Object {
+            "2019": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+            "2020": Object {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0,
+            },
+          },
+          "statePersonnel": Object {
+            "2019": 0,
+            "2020": 0,
+            "total": 0,
+          },
+        },
+        "fundingSource": "HIE",
+        "id": "631b3f6f49f28f022b1d70da",
+        "name": "Public Health System Modernization",
+      },
+      Object {
+        "data": Object {
+          "combined": Object {
+            "2019": 725000,
+            "2020": 775000,
+            "total": 1500000,
+          },
+          "contractors": Object {
+            "2019": 650000,
+            "2020": 650000,
+            "total": 1300000,
+          },
+          "expenses": Object {
+            "2019": 25000,
+            "2020": 25000,
+            "total": 50000,
+          },
+          "otherFunding": Object {
+            "2019": Object {
+              "contractors": 112069,
+              "expenses": 4310,
+              "statePersonnel": 8621,
+              "total": 125000,
+            },
+            "2020": Object {
+              "contractors": 104839,
+              "expenses": 4032,
+              "statePersonnel": 16129,
+              "total": 125000,
+            },
+          },
+          "statePersonnel": Object {
+            "2019": 50000,
+            "2020": 100000,
+            "total": 150000,
+          },
+        },
+        "fundingSource": "HIT",
+        "id": "631b3f6f49f28f022b1d70db",
+        "name": "MITA 3.0 Assessment",
+      },
+    ],
+    "combined": Object {
+      "2019": Object {
+        "federal": 6346048,
+        "medicaid": 7317831,
+        "state": 971783,
+        "total": 7442831,
+      },
+      "2020": Object {
+        "federal": 8286971,
+        "medicaid": 9723245,
+        "state": 1436274,
+        "total": 9848245,
+      },
+      "total": Object {
+        "federal": 14633019,
+        "medicaid": 17041076,
+        "state": 2408057,
+        "total": 17291076,
+      },
+    },
+    "federalShareByFFYQuarter": Object {
+      "hitAndHie": Object {
+        "total": Object {
+          "combined": 10690569,
+          "contractors": 6497290,
+          "inHouse": 4193279,
+        },
+        "years": Object {
+          "2019": Object {
+            "1": Object {
+              "combined": 1180839,
+              "contractors": 592112,
+              "inHouse": 588727,
+            },
+            "2": Object {
+              "combined": 1180837,
+              "contractors": 592111,
+              "inHouse": 588726,
+            },
+            "3": Object {
+              "combined": 1180836,
+              "contractors": 592111,
+              "inHouse": 588725,
+            },
+            "4": Object {
+              "combined": 1180836,
+              "contractors": 592111,
+              "inHouse": 588725,
+            },
+            "subtotal": Object {
+              "combined": 4723348,
+              "contractors": 2368445,
+              "inHouse": 2354903,
+            },
+          },
+          "2020": Object {
+            "1": Object {
+              "combined": 1491807,
+              "contractors": 1032212,
+              "inHouse": 459595,
+            },
+            "2": Object {
+              "combined": 1491805,
+              "contractors": 1032211,
+              "inHouse": 459594,
+            },
+            "3": Object {
+              "combined": 1491805,
+              "contractors": 1032211,
+              "inHouse": 459594,
+            },
+            "4": Object {
+              "combined": 1491804,
+              "contractors": 1032211,
+              "inHouse": 459593,
+            },
+            "subtotal": Object {
+              "combined": 5967221,
+              "contractors": 4128845,
+              "inHouse": 1838376,
+            },
+          },
+        },
+      },
+      "mmis": Object {
+        "total": Object {
+          "combined": 3942450,
+          "contractors": 1897500,
+          "inHouse": 2044950,
+        },
+        "years": Object {
+          "2019": Object {
+            "1": Object {
+              "combined": 405675,
+              "contractors": 146250,
+              "inHouse": 259425,
+            },
+            "2": Object {
+              "combined": 405675,
+              "contractors": 146250,
+              "inHouse": 259425,
+            },
+            "3": Object {
+              "combined": 405675,
+              "contractors": 146250,
+              "inHouse": 259425,
+            },
+            "4": Object {
+              "combined": 405675,
+              "contractors": 146250,
+              "inHouse": 259425,
+            },
+            "subtotal": Object {
+              "combined": 1622700,
+              "contractors": 585000,
+              "inHouse": 1037700,
+            },
+          },
+          "2020": Object {
+            "1": Object {
+              "combined": 579938,
+              "contractors": 328125,
+              "inHouse": 251813,
+            },
+            "2": Object {
+              "combined": 579938,
+              "contractors": 328125,
+              "inHouse": 251813,
+            },
+            "3": Object {
+              "combined": 579937,
+              "contractors": 328125,
+              "inHouse": 251812,
+            },
+            "4": Object {
+              "combined": 579937,
+              "contractors": 328125,
+              "inHouse": 251812,
+            },
+            "subtotal": Object {
+              "combined": 2319750,
+              "contractors": 1312500,
+              "inHouse": 1007250,
+            },
+          },
+        },
+      },
+    },
+    "hie": Object {
+      "combined": Object {
+        "2019": Object {
+          "federal": 1314000,
+          "medicaid": 1460000,
+          "state": 146000,
+          "total": 1460000,
+        },
+        "2020": Object {
+          "federal": 3578400,
+          "medicaid": 3976000,
+          "state": 397600,
+          "total": 3976000,
+        },
+        "total": Object {
+          "federal": 4892400,
+          "medicaid": 5436000,
+          "state": 543600,
+          "total": 5436000,
+        },
+      },
+      "contractors": Object {
+        "2019": Object {
+          "federal": 900000,
+          "medicaid": 1000000,
+          "state": 100000,
+          "total": 1000000,
+        },
+        "2020": Object {
+          "federal": 3150000,
+          "medicaid": 3500000,
+          "state": 350000,
+          "total": 3500000,
+        },
+        "total": Object {
+          "federal": 4050000,
+          "medicaid": 4500000,
+          "state": 450000,
+          "total": 4500000,
+        },
+      },
+      "expenses": Object {
+        "2019": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "2020": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "total": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+      },
+      "statePersonnel": Object {
+        "2019": Object {
+          "federal": 414000,
+          "medicaid": 460000,
+          "state": 46000,
+          "total": 460000,
+        },
+        "2020": Object {
+          "federal": 428400,
+          "medicaid": 476000,
+          "state": 47600,
+          "total": 476000,
+        },
+        "total": Object {
+          "federal": 842400,
+          "medicaid": 936000,
+          "state": 93600,
+          "total": 936000,
+        },
+      },
+    },
+    "hit": Object {
+      "combined": Object {
+        "2019": Object {
+          "federal": 3409348,
+          "medicaid": 4054831,
+          "state": 645483,
+          "total": 4179831,
+        },
+        "2020": Object {
+          "federal": 2388821,
+          "medicaid": 2654245,
+          "state": 265424,
+          "total": 2779245,
+        },
+        "total": Object {
+          "federal": 5798169,
+          "medicaid": 6709076,
+          "state": 910907,
+          "total": 6959076,
+        },
+      },
+      "contractors": Object {
+        "2019": Object {
+          "federal": 1468445,
+          "medicaid": 1870687,
+          "state": 402241,
+          "total": 1982756,
+        },
+        "2020": Object {
+          "federal": 978845,
+          "medicaid": 1087605,
+          "state": 108760,
+          "total": 1192444,
+        },
+        "total": Object {
+          "federal": 2447290,
+          "medicaid": 2958292,
+          "state": 511001,
+          "total": 3175200,
+        },
+      },
+      "expenses": Object {
+        "2019": Object {
+          "federal": 707845,
+          "medicaid": 795690,
+          "state": 87845,
+          "total": 800000,
+        },
+        "2020": Object {
+          "federal": 86371,
+          "medicaid": 95968,
+          "state": 9597,
+          "total": 100000,
+        },
+        "total": Object {
+          "federal": 794216,
+          "medicaid": 891658,
+          "state": 97442,
+          "total": 900000,
+        },
+      },
+      "statePersonnel": Object {
+        "2019": Object {
+          "federal": 1233058,
+          "medicaid": 1388454,
+          "state": 155397,
+          "total": 1397075,
+        },
+        "2020": Object {
+          "federal": 1323605,
+          "medicaid": 1470672,
+          "state": 147067,
+          "total": 1486801,
+        },
+        "total": Object {
+          "federal": 2556663,
+          "medicaid": 2859126,
+          "state": 302464,
+          "total": 2883876,
+        },
+      },
+    },
+    "hitAndHie": Object {
+      "combined": Object {
+        "2019": Object {
+          "federal": 4723348,
+          "medicaid": 5514831,
+          "state": 791483,
+          "total": 5639831,
+        },
+        "2020": Object {
+          "federal": 5967221,
+          "medicaid": 6630245,
+          "state": 663024,
+          "total": 6755245,
+        },
+        "total": Object {
+          "federal": 10690569,
+          "medicaid": 12145076,
+          "state": 1454507,
+          "total": 12395076,
+        },
+      },
+      "contractors": Object {
+        "2019": Object {
+          "federal": 2368445,
+          "medicaid": 2870687,
+          "state": 502241,
+          "total": 2982756,
+        },
+        "2020": Object {
+          "federal": 4128845,
+          "medicaid": 4587605,
+          "state": 458760,
+          "total": 4692444,
+        },
+        "total": Object {
+          "federal": 6497290,
+          "medicaid": 7458292,
+          "state": 961001,
+          "total": 7675200,
+        },
+      },
+      "expenses": Object {
+        "2019": Object {
+          "federal": 707845,
+          "medicaid": 795690,
+          "state": 87845,
+          "total": 800000,
+        },
+        "2020": Object {
+          "federal": 86371,
+          "medicaid": 95968,
+          "state": 9597,
+          "total": 100000,
+        },
+        "total": Object {
+          "federal": 794216,
+          "medicaid": 891658,
+          "state": 97442,
+          "total": 900000,
+        },
+      },
+      "statePersonnel": Object {
+        "2019": Object {
+          "federal": 1647058,
+          "medicaid": 1848454,
+          "state": 201397,
+          "total": 1857075,
+        },
+        "2020": Object {
+          "federal": 1752005,
+          "medicaid": 1946672,
+          "state": 194667,
+          "total": 1962801,
+        },
+        "total": Object {
+          "federal": 3399063,
+          "medicaid": 3795126,
+          "state": 396064,
+          "total": 3819876,
+        },
+      },
+    },
+    "mmis": Object {
+      "combined": Object {
+        "2019": Object {
+          "federal": 1622700,
+          "medicaid": 1803000,
+          "state": 180300,
+          "total": 1803000,
+        },
+        "2020": Object {
+          "federal": 2319750,
+          "medicaid": 3093000,
+          "state": 773250,
+          "total": 3093000,
+        },
+        "total": Object {
+          "federal": 3942450,
+          "medicaid": 4896000,
+          "state": 953550,
+          "total": 4896000,
+        },
+      },
+      "contractors": Object {
+        "2019": Object {
+          "federal": 585000,
+          "medicaid": 650000,
+          "state": 65000,
+          "total": 650000,
+        },
+        "2020": Object {
+          "federal": 1312500,
+          "medicaid": 1750000,
+          "state": 437500,
+          "total": 1750000,
+        },
+        "total": Object {
+          "federal": 1897500,
+          "medicaid": 2400000,
+          "state": 502500,
+          "total": 2400000,
+        },
+      },
+      "expenses": Object {
+        "2019": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "2020": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "total": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+      },
+      "statePersonnel": Object {
+        "2019": Object {
+          "federal": 1037700,
+          "medicaid": 1153000,
+          "state": 115300,
+          "total": 1153000,
+        },
+        "2020": Object {
+          "federal": 1007250,
+          "medicaid": 1343000,
+          "state": 335750,
+          "total": 1343000,
+        },
+        "total": Object {
+          "federal": 2044950,
+          "medicaid": 2496000,
+          "state": 451050,
+          "total": 2496000,
+        },
+      },
+    },
+    "mmisByFFP": Object {
+      "0-100": Object {
+        "2019": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "2020": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "total": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+      },
+      "50-50": Object {
+        "2019": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "2020": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "total": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+      },
+      "75-25": Object {
+        "2019": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "2020": Object {
+          "federal": 2319750,
+          "medicaid": 3093000,
+          "state": 773250,
+          "total": 3093000,
+        },
+        "total": Object {
+          "federal": 2319750,
+          "medicaid": 3093000,
+          "state": 773250,
+          "total": 3093000,
+        },
+      },
+      "90-10": Object {
+        "2019": Object {
+          "federal": 1622700,
+          "medicaid": 1803000,
+          "state": 180300,
+          "total": 1803000,
+        },
+        "2020": Object {
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0,
+          "total": 0,
+        },
+        "total": Object {
+          "federal": 1622700,
+          "medicaid": 1803000,
+          "state": 180300,
+          "total": 1803000,
+        },
+      },
+      "combined": Object {
+        "2019": Object {
+          "federal": 1622700,
+          "medicaid": 1803000,
+          "state": 180300,
+          "total": 1803000,
+        },
+        "2020": Object {
+          "federal": 2319750,
+          "medicaid": 3093000,
+          "state": 773250,
+          "total": 3093000,
+        },
+        "total": Object {
+          "federal": 3942450,
+          "medicaid": 4896000,
+          "state": 953550,
+          "total": 4896000,
+        },
+      },
+    },
+    "years": Array [
+      "2019",
+      "2020",
+    ],
+  },
+  "errors": Object {},
+}
+`;
+
+exports[`APD budget endpoint | PATCH /apds/:id/budget when authenticated as a user with permission with an APD in a state other than the user's state 1`] = `""`;
