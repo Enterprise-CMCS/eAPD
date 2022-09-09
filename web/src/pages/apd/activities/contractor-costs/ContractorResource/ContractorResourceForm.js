@@ -42,6 +42,7 @@ const ContractorResourceForm = forwardRef(
       hourly,
       years
     } = JSON.parse(JSON.stringify({ ...item }));
+
     const {
       control,
       formState: { errors, isValid },

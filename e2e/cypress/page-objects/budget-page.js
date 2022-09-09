@@ -43,14 +43,26 @@ class BudgetPage {
   };
 
   checkSplitFunctionality = () => {
-    cy.get('[class="ds-c-field"]').parent().click();
+    cy.get('[data-cy="cost-allocation-dropdown"]').parent().click();
+    cy.contains('Select an option').should('exist');
+
     cy.contains('90-10').should('exist');
     cy.contains('75-25').should('exist');
     cy.contains('50-50').should('exist');
 
-    cy.get('[class="ds-c-field"]')
+    cy.get('[data-cy="cost-allocation-dropdown"]')
       .find(':selected')
       .should('have.value', '0-100');
+
+    cy.get('[data-cy="cost-allocation-dropdown"]').blur();
+
+    cy.get('[data-cy="cost-allocation-dropdown"]').next();
+    cy.contains('Select a federal-state split.').should('exist');
+
+    cy.get('[data-cy="cost-allocation-dropdown"]').select('90-10');
+    cy.get('[data-cy="cost-allocation-dropdown"]').blur();
+
+    cy.contains('Select a federal-state split.').should('not.exist');
   };
 
   checkCostSplitTable = ({

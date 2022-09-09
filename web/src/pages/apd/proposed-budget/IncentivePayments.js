@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import incentivePaySchema from '@cms-eapd/common/schemas/incentivePayments';
 
 import {
   setIncentiveEHCount,
@@ -29,24 +33,38 @@ const IncentivePayments = ({
   setEPPayment,
   totals,
   isViewOnly,
-  years
+  years,
+  adminCheck
 }) => {
-  const updateEHPayment =
-    (year, quarter) =>
-    ({ target: { value } }) => {
-      setEHPayment(year, quarter, value);
-    };
+  const {
+    control,
+    formState: { errors },
+    trigger
+  } = useForm({
+    defaultValues: {
+      data
+    },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    resolver: joiResolver(incentivePaySchema)
+  });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    }
+  }, []);
+
+  const dollar_error = v => {
+    if (adminCheck) {
+      return v >= 0 && v % 1 == 0 && !isNaN(parseInt(v)) ? false : true;
+    }
+  };
 
   const updateEHCount =
     (year, quarter) =>
     ({ target: { value } }) => {
       setEHCount(year, quarter, value);
-    };
-
-  const updateEPPayment =
-    (year, quarter) =>
-    ({ target: { value } }) => {
-      setEPPayment(year, quarter, value);
     };
 
   const updateEPCount =
@@ -59,7 +77,11 @@ const IncentivePayments = ({
     <Fragment>
       {years.map(year => (
         <Fragment key={year}>
-          <table className="budget-table" data-cy="EQIPTable">
+          <table
+            name={`EQIPTable ${year}`}
+            className="budget-table"
+            data-cy="EQIPTable"
+          >
             <caption className="ds-u-visibility--screen-reader">
               {t('ffy', { year })} Incentive Payments by Quarter
             </caption>
@@ -99,15 +121,34 @@ const IncentivePayments = ({
                       {isViewOnly ? (
                         <Dollars>{data.ehAmt[year][q] || ''}</Dollars>
                       ) : (
-                        <DollarField
-                          className="budget-table--input-holder"
-                          fieldClassName="budget-table--input__number"
-                          aria-labelledby={`q${q} eh-payments`}
-                          label={`ehAmt payments for ${year}, quarter ${q}`}
-                          labelClassName="sr-only"
-                          name={`ehAmt-payments-${year}-q${q}`}
-                          value={data.ehAmt[year][q] || ''}
-                          onChange={updateEHPayment(year, q)}
+                        <Controller
+                          name={`data.ehAmt.${year}.${q}`}
+                          control={control}
+                          render={({ field: { onChange, name, ...props } }) => (
+                            <DollarField
+                              {...props}
+                              name={name}
+                              className="budget-table--input-holder"
+                              fieldClassName={
+                                dollar_error(data.ehAmt[year][q])
+                                  ? 'budget-table--input__number-error'
+                                  : 'budget-table--input__number'
+                              }
+                              aria-labelledby={`q${q} eh-payments`}
+                              label={`ehAmt payments for ${year}, quarter ${q}`}
+                              data-testid={`ehAmt ${year} ${q}`}
+                              labelClassName="sr-only"
+                              value={data.ehAmt[year][q] || '0'}
+                              onChange={({ target: { value } }) => {
+                                setEHPayment(year, q, value);
+                                onChange(value);
+
+                                if (adminCheck) {
+                                  trigger();
+                                }
+                              }}
+                            />
+                          )}
                         />
                       )}
                     </td>
@@ -115,6 +156,7 @@ const IncentivePayments = ({
                   <td
                     className="budget-table--number budget-table--col__highlight budget-table--subtotal"
                     data-cy="subtotal"
+                    data-testid={`ehAmt ${year} total`}
                   >
                     <Dollars>{totals.ehAmt.byYear[year]}</Dollars>
                   </td>
@@ -161,17 +203,36 @@ const IncentivePayments = ({
                   {QUARTERS.map(q => (
                     <td key={q} className="budget-table--number">
                       {isViewOnly ? (
-                        <Dollars>{data.epAmt[year][q] || ''}</Dollars>
+                        <Dollars>{data.epAmt[year][q] || '0'}</Dollars>
                       ) : (
-                        <DollarField
-                          className="budget-table--input-holder"
-                          fieldClassName="budget-table--input__number"
-                          aria-labelledby={`q${q} ep-payments`}
-                          label={`epAmt payments for ${year}, quarter ${q}`}
-                          labelClassName="sr-only"
-                          name={`epAmt-payments-${year}-q${q}`}
-                          value={data.epAmt[year][q] || ''}
-                          onChange={updateEPPayment(year, q)}
+                        <Controller
+                          name={`data.epAmt.${year}.${q}`}
+                          control={control}
+                          render={({ field: { onChange, name, ...props } }) => (
+                            <DollarField
+                              {...props}
+                              name={name}
+                              className="budget-table--input-holder"
+                              fieldClassName={
+                                dollar_error(data.epAmt[year][q])
+                                  ? 'budget-table--input__number-error'
+                                  : 'budget-table--input__number'
+                              }
+                              aria-labelledby={`q${q} ep-payments`}
+                              label={`epAmt payments for ${year}, quarter ${q}`}
+                              labelClassName="sr-only"
+                              value={data.epAmt[year][q] || '0'}
+                              data-testid={`epAmt ${year} ${q}`}
+                              onChange={({ target: { value } }) => {
+                                setEPPayment(year, q, value);
+                                onChange(value);
+
+                                if (adminCheck) {
+                                  trigger();
+                                }
+                              }}
+                            />
+                          )}
                         />
                       )}
                     </td>
@@ -179,6 +240,7 @@ const IncentivePayments = ({
                   <td
                     className="budget-table--number budget-table--col__highlight budget-table--subtotal"
                     data-cy="subtotal"
+                    data-testid={`epAmt ${year} total`}
                   >
                     <Dollars>{totals.epAmt.byYear[year]}</Dollars>
                   </td>
@@ -220,6 +282,17 @@ const IncentivePayments = ({
           </table>
         </Fragment>
       ))}
+      <div>
+        {errors?.data && (
+          <span
+            className="ds-u-margin-top--2 ds-u-font-size--sm ds-u-font-weight--bold ds-c-inline-error ds-c-field__error-message"
+            role="alert"
+          >
+            Provide a whole number greater than or equal to $0. Decimals will be
+            rounded to the closest number.
+          </span>
+        )}
+      </div>
     </Fragment>
   );
 };
@@ -232,7 +305,8 @@ IncentivePayments.propTypes = {
   setEPPayment: PropTypes.func.isRequired,
   totals: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  adminCheck: PropTypes.bool
 };
 
 IncentivePayments.defaultProps = { isViewOnly: false };
@@ -240,7 +314,8 @@ IncentivePayments.defaultProps = { isViewOnly: false };
 const mapStateToProps = state => ({
   data: selectIncentivePayments(state),
   totals: selectIncentivePaymentTotals(state),
-  years: selectApdYears(state)
+  years: selectApdYears(state),
+  adminCheck: state.apd.adminCheck
 });
 
 const mapDispatchToProps = {
