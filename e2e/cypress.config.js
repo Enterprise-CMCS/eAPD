@@ -7,7 +7,7 @@ module.exports = defineConfig({
     setupNodeEvents,
     environment: 'development',
     specPattern: 'cypress/integration/**/*.cy.js',
-    projectId: 'j7o2hw',
+    projectId: 'qmwrhg',
     baseUrl: 'http://localhost:8080/',
     viewportWidth: 1000,
     viewportHeight: 1000,
