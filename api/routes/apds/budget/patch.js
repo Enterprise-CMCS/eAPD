@@ -11,8 +11,18 @@ module.exports = (app, { updateAPDBudget = ub } = {}) => {
     async (req, res, next) => {
       logger.silly({
         id: req.id,
-        message: 'handling PATCH /apds/:id/bduget route'
+        message: 'handling PATCH /apds/:id/budget route'
       });
+
+      if (!req?.params?.id) {
+        logger.error({ id: req.id, message: 'must have an APD id' });
+        return res.status(400).end();
+      }
+
+      if (!req?.user?.state?.id) {
+        logger.error({ id: req.id, message: 'must have a state id' });
+        return res.status(400).end();
+      }
 
       logger.silly({
         id: req.id,
@@ -20,17 +30,12 @@ module.exports = (app, { updateAPDBudget = ub } = {}) => {
       });
 
       try {
-        const { errors, budget } = await updateAPDBudget(
-          req.params.id,
-          req.user.state.id
+        const budget = await updateAPDBudget(
+          req?.params?.id || null,
+          req?.user?.state?.id || null
         );
 
-        if (errors) {
-          logger.error({ id: req.id, message: errors });
-        }
-
         return res.send({
-          errors,
           budget
         });
       } catch (e) {

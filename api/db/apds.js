@@ -154,7 +154,6 @@ const updateAPDDocument = async (
 
 const updateAPDBudget = async (id, stateId) => {
   let updatedBudget;
-  let errors = {};
 
   try {
     const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
@@ -165,10 +164,10 @@ const updateAPDBudget = async (id, stateId) => {
     });
   } catch (e) {
     logger.error(`Error updating budget for APD ${id}: ${JSON.stringify(e)}`);
-    errors = e;
+    throw e;
   }
 
-  return { budget: updatedBudget, errors };
+  return updatedBudget;
 };
 
 module.exports = {
