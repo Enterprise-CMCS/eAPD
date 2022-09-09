@@ -1,2 +1,3 @@
-Added more env vars to CircleC
-Figuring out working with a forked repoI
+Added more env vars to CircleCI
+Figuring out working with a forked repo
+Added more env vars
