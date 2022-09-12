@@ -12,16 +12,16 @@ import { Subsection } from '../../../../../components/Section';
 
 import costAllocateSchema from '@cms-eapd/common/schemas/costAllocation';
 
-const CostAllocate = ({ 
+const CostAllocate = ({
   activity,
-  activityIndex, 
+  activityIndex,
   setMethodology,
-  adminCheck }) => {
+  adminCheck
+}) => {
   const {
     costAllocationNarrative: { methodology }
   } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
-
 
   const {
     control,
@@ -37,7 +37,7 @@ const CostAllocate = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
-    };
+    }
   }, [adminCheck]);
 
   return (
@@ -65,7 +65,7 @@ const CostAllocate = ({
               id="cost-allocation-methodology-field"
               content={methodology}
               onSync={html => {
-                syncMethodology(html)
+                syncMethodology(html);
                 onChange(html);
 
                 if (adminCheck) {
