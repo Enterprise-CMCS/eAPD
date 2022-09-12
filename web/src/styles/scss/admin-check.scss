@@ -1,6 +1,6 @@
 .eapd-admin-check {
   z-index: 2;
-  top: 60.5px;
+  top: 60px;
   box-shadow: -2px 2px 3px 1px #8484848c;
   max-width: 60ex;
 }
@@ -26,6 +26,7 @@
 
 .eapd-admin-check .ds-c-drawer__footer {
   padding: 16px;
+  margin-bottom: 60px;
 }
 
 .eapd-admin-check .ds-c-drawer__footer a {
