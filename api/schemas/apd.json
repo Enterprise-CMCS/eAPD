@@ -33,7 +33,7 @@
     },
     "proposedBudget": { "$ref": "proposedBudget.json" },
     "assurancesAndCompliances": { "$ref": "assurancesAndCompliances.json" },
-    "metadata": { "type": "object" }
+    "adminCheck": { "type": "array" }
   },
   "additionalProperties": false
 }

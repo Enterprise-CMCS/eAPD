@@ -87,6 +87,43 @@ Object {
       "summary": "",
     },
   ],
+  "adminCheck": Array [
+    Object {
+      "complete": false,
+      "fieldDescription": "Please fill out name",
+      "link": "apd-overview",
+      "section": "APD Overview",
+      "subSection": null,
+    },
+    Object {
+      "complete": false,
+      "fieldDescription": "Provide the email address of the Medicaid Director",
+      "link": "state-profile",
+      "section": "Key State Personnel",
+      "subSection": null,
+    },
+    Object {
+      "complete": false,
+      "fieldDescription": "Provide the phone number of the Medicaid Director",
+      "link": "state-profile",
+      "section": "Key State Personnel",
+      "subSection": null,
+    },
+    Object {
+      "complete": false,
+      "fieldDescription": "Provide a short overview of the Activity",
+      "link": "activity/0/overview",
+      "section": "Activity 1",
+      "subSection": "Overview",
+    },
+    Object {
+      "complete": false,
+      "fieldDescription": "Add at least one outcome for this activity",
+      "link": "activity/1/oms",
+      "section": "Activity 2",
+      "subSection": "Outcomes and Metrics",
+    },
+  ],
   "apdOverview": Object {
     "narrativeHIE": "",
     "narrativeHIT": "",
@@ -191,45 +228,6 @@ Object {
       "city": "",
       "state": "",
       "zip": "",
-    },
-  },
-  "metadata": Object {
-    "incomplete": 2,
-    "recents": Array [
-      Object {
-        "link": "activity/0/state-costs",
-        "page": "Activity 1- State Costs",
-        "section": "State Costs",
-      },
-      Object {
-        "link": "activity/0/contractor-costs",
-        "page": "Private Contractor Costs",
-        "section": "Private Contractor Costs",
-      },
-    ],
-    "todo": Object {
-      "keyStatePersonnel": Object {
-        "fields": Array [
-          Object {
-            "description": "Provide the phone number of the Medicaid Director",
-            "name": "Phone Number",
-          },
-        ],
-        "incomplete": 1,
-        "link": "state-profile",
-        "name": "Key State Personnel",
-      },
-      "overview": Object {
-        "fields": Array [
-          Object {
-            "description": "please include a name",
-            "name": "APD Name",
-          },
-        ],
-        "incomplete": 1,
-        "link": "apd-overview",
-        "name": "APD Overview",
-      },
     },
   },
   "name": "HITECH IAPD",

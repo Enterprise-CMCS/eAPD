@@ -226,47 +226,47 @@ tap.test('apds POST endpoint', async endpointTest => {
                 50: { federalActual: 0, totalApproved: 0 }
               }
             }
-          }          
+          }
         },
-        metadata: {
-          incomplete: 2,
-          todo: {
-            overview: {
-              name: 'APD Overview',
-              incomplete: 1,
-              link: 'apd-overview',
-              fields: [
-                { 
-                  name: 'APD Name',
-                  description: 'please include a name'
-                }
-              ]
-            },
-            keyStatePersonnel: {
-              name: 'Key State Personnel',
-              incomplete: 1,
-              link: 'state-profile',
-              fields: [
-                {
-                  name: 'Phone Number',
-                  description: 'Provide the phone number of the Medicaid Director'
-                }
-              ]
-            }
+        adminCheck: [
+          {
+            section: 'APD Overview',
+            subSection: null,
+            link: 'apd-overview',
+            fieldDescription: 'Please fill out name',
+            complete: false
           },
-          recents: [
-            {
-              page: 'Activity 1- State Costs',
-              section: 'State Costs',
-              link: 'activity/0/state-costs'
-            },
-            {
-              page: 'Private Contractor Costs',
-              section: 'Private Contractor Costs',
-              link: 'activity/0/contractor-costs'
-            }
-          ]
-        }
+          {
+            section: 'Key State Personnel',
+            subSection: null,
+            link: 'state-profile',
+            fieldDescription:
+              'Provide the email address of the Medicaid Director',
+            complete: false
+          },
+          {
+            section: 'Key State Personnel',
+            subSection: null,
+            link: 'state-profile',
+            fieldDescription:
+              'Provide the phone number of the Medicaid Director',
+            complete: false
+          },
+          {
+            section: 'Activity 1',
+            subSection: 'Overview',
+            link: 'activity/0/overview',
+            fieldDescription: 'Provide a short overview of the Activity',
+            complete: false
+          },
+          {
+            section: 'Activity 2',
+            subSection: 'Outcomes and Metrics',
+            link: 'activity/1/oms',
+            fieldDescription: 'Add at least one outcome for this activity',
+            complete: false
+          }
+        ]
       };
 
       getStateProfile.resolves({

@@ -6,16 +6,12 @@ const milestonesSchema = Joi.object({
     'string.base': 'Milestone is required.',
     'string.empty': 'Milestone is required.'
   }),
-  endDate: Joi.date()
-    .format('YYYY-MM-DD')
-    .iso()
-    .required()
-    .messages({
-      'date.required': 'Provide a completion date.',
-      'date.base': 'Provide a completion date.',
-      'date.empty': 'Provide a completion date.',
-      'date.format': 'Provide a completion date.'
-    })
+  endDate: Joi.date().format('YYYY-MM-DD').iso().required().messages({
+    'date.required': 'Provide a completion date.',
+    'date.base': 'Provide a completion date.',
+    'date.empty': 'Provide a completion date.',
+    'date.format': 'Provide a completion date.'
+  })
 });
 
 export default milestonesSchema;

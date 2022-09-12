@@ -1600,6 +1600,7 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
+    "adminCheck": Array [],
     "apdOverview": Object {
       "narrativeHIE": "",
       "narrativeHIT": "",
@@ -3513,6 +3514,7 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
+    "adminCheck": Array [],
     "apdOverview": Object {
       "narrativeHIE": "",
       "narrativeHIT": "",
@@ -5422,6 +5424,7 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
+    "adminCheck": Array [],
     "apdOverview": Object {
       "narrativeHIE": "",
       "narrativeHIT": "",
@@ -7320,6 +7323,7 @@ Object {
         "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       },
     ],
+    "adminCheck": Array [],
     "apdOverview": Object {
       "narrativeHIE": "",
       "narrativeHIT": "",
