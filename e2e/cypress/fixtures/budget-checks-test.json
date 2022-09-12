@@ -1,8 +1,14 @@
 {
   "afterKeyPersonnelNoCosts": {
-    "budgetAndFFP": [["State Staff Subtotal", "$0"], ["State Staff Subtotal", "$0"]],
-    "CACTable": [{"HIT Total": ["$0"]}, {"HIT Total": ["$0"]}],
-    "FFPActivitiesTable": [{"State Staff": ["$0", "$0", "$0"]}, {"State Staff": ["$0", "$0", "$0"]}],
+    "budgetAndFFP": [
+      ["State Staff Subtotal", "$0"],
+      ["State Staff Subtotal", "$0"]
+    ],
+    "CACTable": [{ "HIT Total": ["$0"] }, { "HIT Total": ["$0"] }],
+    "FFPActivitiesTable": [
+      { "State Staff": ["$0", "$0", "$0"] },
+      { "State Staff": ["$0", "$0", "$0"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$0", "$0", "$0"],
       "FFY 2023": ["$0", "$0", "$0"],
@@ -12,9 +18,15 @@
   },
 
   "afterKeyPersonnelWithCosts": {
-    "budgetAndFFP": [["State Staff Subtotal", "$50,000"], ["State Staff Subtotal", "$50,000"]],
-    "CACTable": [{"HIT Total": ["$50,000"]}, {"HIT Total": ["$50,000"]}],
-    "FFPActivitiesTable": [{"State Staff": ["$25,000", "$25,000", "$50,000"]}, {"State Staff": ["$5,000", "$45,000", "$50,000"]}],
+    "budgetAndFFP": [
+      ["State Staff Subtotal", "$50,000"],
+      ["State Staff Subtotal", "$50,000"]
+    ],
+    "CACTable": [{ "HIT Total": ["$50,000"] }, { "HIT Total": ["$50,000"] }],
+    "FFPActivitiesTable": [
+      { "State Staff": ["$25,000", "$25,000", "$50,000"] },
+      { "State Staff": ["$5,000", "$45,000", "$50,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$25,000", "$25,000", "$50,000"],
       "FFY 2023": ["$5,000", "$45,000", "$50,000"],
@@ -24,9 +36,15 @@
   },
 
   "afterStateStaffHIT": {
-    "budgetAndFFP": [["State Staff Subtotal", "$136,000"], ["State Staff Subtotal", "$138,000"]],
-    "CACTable": [{"HIT Total": ["$136,000"]}, {"HIT Total": ["$138,000"]}],
-    "FFPActivitiesTable": [{"State Staff": ["$68,000", "$68,000", "$136,000"]}, {"State Staff": ["$13,800", "$124,200", "$138,000"]}],
+    "budgetAndFFP": [
+      ["State Staff Subtotal", "$136,000"],
+      ["State Staff Subtotal", "$138,000"]
+    ],
+    "CACTable": [{ "HIT Total": ["$136,000"] }, { "HIT Total": ["$138,000"] }],
+    "FFPActivitiesTable": [
+      { "State Staff": ["$68,000", "$68,000", "$136,000"] },
+      { "State Staff": ["$13,800", "$124,200", "$138,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$68,000", "$68,000", "$136,000"],
       "FFY 2023": ["$13,800", "$124,200", "$138,000"],
@@ -36,9 +54,15 @@
   },
 
   "afterStateExpenseHIT": {
-    "budgetAndFFP": [["Other State Expenses Subtotal", "$40,000"], ["Other State Expenses Subtotal", "$40,000"]],
-    "CACTable": [{"HIT Total": ["$176,000"]}, {"HIT Total": ["$178,000"]}],
-    "FFPActivitiesTable": [{"Other State Expenses": ["$20,000", "$20,000", "$40,000"]}, {"Other State Expenses": ["$4,000", "$36,000", "$40,000"]}],
+    "budgetAndFFP": [
+      ["Other State Expenses Subtotal", "$40,000"],
+      ["Other State Expenses Subtotal", "$40,000"]
+    ],
+    "CACTable": [{ "HIT Total": ["$176,000"] }, { "HIT Total": ["$178,000"] }],
+    "FFPActivitiesTable": [
+      { "Other State Expenses": ["$20,000", "$20,000", "$40,000"] },
+      { "Other State Expenses": ["$4,000", "$36,000", "$40,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$178,500", "$219,750", "$398,250"],
       "FFY 2023": ["$110,987", "$266,763", "$377,750"],
@@ -48,9 +72,15 @@
   },
 
   "afterContractorHIT": {
-    "budgetAndFFP": [["Private Contractor Subtotal", "$25,000"], ["Private Contractor Subtotal", "$25,000"]],
-    "CACTable": [{"HIT Total": ["$201,000"]}, {"HIT Total": ["$203,000"]}],
-    "FFPActivitiesTable": [{"Private Contractor": ["$12,500", "$12,500", "$25,000"]}, {"Private Contractor": ["$2,500", "$22,500", "$25,000"]}],
+    "budgetAndFFP": [
+      ["Private Contractor Subtotal", "$25,000"],
+      ["Private Contractor Subtotal", "$25,000"]
+    ],
+    "CACTable": [{ "HIT Total": ["$201,000"] }, { "HIT Total": ["$203,000"] }],
+    "FFPActivitiesTable": [
+      { "Private Contractor": ["$12,500", "$12,500", "$25,000"] },
+      { "Private Contractor": ["$2,500", "$22,500", "$25,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$258,500", "$319,750", "$578,250"],
       "FFY 2023": ["$178,487", "$404,263", "$582,750"],
@@ -60,9 +90,15 @@
   },
 
   "afterStateStaffHIE": {
-    "budgetAndFFP": [["State Staff Subtotal", "$82,500"], ["State Staff Subtotal", "$85,000"]],
-    "CACTable": [{"HIE Total": ["$82,500"]}, {"HIE Total": ["$85,000"]}],
-    "FFPActivitiesTable": [{"State Staff": ["$20,625", "$61,875", "$82,500"]}, {"State Staff": ["$42,500", "$42,500", "$85,000"]}],
+    "budgetAndFFP": [
+      ["State Staff Subtotal", "$82,500"],
+      ["State Staff Subtotal", "$85,000"]
+    ],
+    "CACTable": [{ "HIE Total": ["$82,500"] }, { "HIE Total": ["$85,000"] }],
+    "FFPActivitiesTable": [
+      { "State Staff": ["$20,625", "$61,875", "$82,500"] },
+      { "State Staff": ["$42,500", "$42,500", "$85,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$88,625", "$129,875", "$218,500"],
       "FFY 2023": ["$56,300", "$166,700", "$223,000"],
@@ -72,9 +108,15 @@
   },
 
   "afterStateExpenseHIE": {
-    "budgetAndFFP": [["Other State Expenses Subtotal", "$40,000"], ["Other State Expenses Subtotal", "$40,000"]],
-    "CACTable": [{"HIE Total": ["$122,500"]}, {"HIE Total": ["$125,000"]}],
-    "FFPActivitiesTable": [{"Other State Expenses": ["$10,000", "$30,000", "$40,000"]}, {"Other State Expenses": ["$20,000", "$20,000", "$40,000"]}],
+    "budgetAndFFP": [
+      ["Other State Expenses Subtotal", "$40,000"],
+      ["Other State Expenses Subtotal", "$40,000"]
+    ],
+    "CACTable": [{ "HIE Total": ["$122,500"] }, { "HIE Total": ["$125,000"] }],
+    "FFPActivitiesTable": [
+      { "Other State Expenses": ["$10,000", "$30,000", "$40,000"] },
+      { "Other State Expenses": ["$20,000", "$20,000", "$40,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$188,500", "$249,750", "$438,250"],
       "FFY 2023": ["$130,987", "$286,763", "$417,750"],
@@ -84,9 +126,15 @@
   },
 
   "afterContractorHIE": {
-    "budgetAndFFP": [["Private Contractor Subtotal", "$40,000"], ["Private Contractor Subtotal", "$40,000"]],
-    "CACTable": [{"HIE Total": ["$162,500"]}, {"HIE Total": ["$165,000"]}],
-    "FFPActivitiesTable": [{"Private Contractor": ["$10,000", "$30,000", "$40,000"]}, {"Private Contractor": ["$20,000", "$20,000", "$40,000"]}],
+    "budgetAndFFP": [
+      ["Private Contractor Subtotal", "$40,000"],
+      ["Private Contractor Subtotal", "$40,000"]
+    ],
+    "CACTable": [{ "HIE Total": ["$162,500"] }, { "HIE Total": ["$165,000"] }],
+    "FFPActivitiesTable": [
+      { "Private Contractor": ["$10,000", "$30,000", "$40,000"] },
+      { "Private Contractor": ["$20,000", "$20,000", "$40,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$268,500", "$349,750", "$618,250"],
       "FFY 2023": ["$198,487", "$424,263", "$622,750"],
@@ -96,9 +144,15 @@
   },
 
   "afterStateStaffMMIS": {
-    "budgetAndFFP": [["State Staff Subtotal", "$53,750"], ["State Staff Subtotal", "$26,750"]],
-    "CACTable": [{"MMIS Total": ["$53,750"]}, {"MMIS Total": ["$26,750"]}],
-    "FFPActivitiesTable": [{"State Staff": ["$26,875", "$26,875", "$53,750"]}, {"State Staff": ["$6,687", "$20,063", "$26,750"]}],
+    "budgetAndFFP": [
+      ["State Staff Subtotal", "$53,750"],
+      ["State Staff Subtotal", "$26,750"]
+    ],
+    "CACTable": [{ "MMIS Total": ["$53,750"] }, { "MMIS Total": ["$26,750"] }],
+    "FFPActivitiesTable": [
+      { "State Staff": ["$26,875", "$26,875", "$53,750"] },
+      { "State Staff": ["$6,687", "$20,063", "$26,750"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$115,500", "$156,750", "$272,250"],
       "FFY 2023": ["$62,987", "$186,763", "$249,750"],
@@ -108,9 +162,18 @@
   },
 
   "afterStateExpenseMMIS": {
-    "budgetAndFFP": [["Other State Expenses Subtotal", "$75,000"], ["Other State Expenses Subtotal", "$100,000"]],
-    "CACTable": [{"MMIS Total": ["$128,750"]}, {"MMIS Total": ["$126,750"]}],
-    "FFPActivitiesTable": [{"Other State Expenses": ["$37,500", "$37,500", "$75,000"]}, {"Other State Expenses": ["$25,000", "$75,000", "$100,000"]}],
+    "budgetAndFFP": [
+      ["Other State Expenses Subtotal", "$75,000"],
+      ["Other State Expenses Subtotal", "$100,000"]
+    ],
+    "CACTable": [
+      { "MMIS Total": ["$128,750"] },
+      { "MMIS Total": ["$126,750"] }
+    ],
+    "FFPActivitiesTable": [
+      { "Other State Expenses": ["$37,500", "$37,500", "$75,000"] },
+      { "Other State Expenses": ["$25,000", "$75,000", "$100,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$226,000", "$287,250", "$513,250"],
       "FFY 2023": ["$155,987", "$361,763", "$517,750"],
@@ -120,9 +183,18 @@
   },
 
   "afterContractorMMIS": {
-    "budgetAndFFP": [["Private Contractor Subtotal", "$30,000"], ["Private Contractor Subtotal", "$35,000"]],
-    "CACTable": [{"MMIS Total": ["$158,750"]}, {"MMIS Total": ["$161,750"]}],
-    "FFPActivitiesTable": [{"Private Contractor": ["$15,000", "$15,000", "$30,000"]}, {"Private Contractor": ["$8,750", "$26,250", "$35,000"]}],
+    "budgetAndFFP": [
+      ["Private Contractor Subtotal", "$30,000"],
+      ["Private Contractor Subtotal", "$35,000"]
+    ],
+    "CACTable": [
+      { "MMIS Total": ["$158,750"] },
+      { "MMIS Total": ["$161,750"] }
+    ],
+    "FFPActivitiesTable": [
+      { "Private Contractor": ["$15,000", "$15,000", "$30,000"] },
+      { "Private Contractor": ["$8,750", "$26,250", "$35,000"] }
+    ],
     "summaryBudgetTotals": {
       "FFY 2022": ["$283,500", "$364,750", "$648,250"],
       "FFY 2023": ["$207,237", "$450,513", "$657,750"],
@@ -132,7 +204,10 @@
   },
 
   "afterStateStaffNoFFP": {
-    "budgetAndFFP": [["State Staff Subtotal", "$86,000"], ["State Staff Subtotal", "$88,000"]],
+    "budgetAndFFP": [
+      ["State Staff Subtotal", "$86,000"],
+      ["State Staff Subtotal", "$88,000"]
+    ],
     "CACTable": [],
     "FFPActivitiesTable": [],
     "summaryBudgetTotals": {
@@ -144,7 +219,10 @@
   },
 
   "afterStateExpenseNoFFP": {
-    "budgetAndFFP": [["Other State Expenses Subtotal", "$40,000"], ["Other State Expenses Subtotal", "$40,000"]],
+    "budgetAndFFP": [
+      ["Other State Expenses Subtotal", "$40,000"],
+      ["Other State Expenses Subtotal", "$40,000"]
+    ],
     "CACTable": [],
     "FFPActivitiesTable": [],
     "summaryBudgetTotals": {
@@ -156,7 +234,10 @@
   },
 
   "afterContractorNoFFP": {
-    "budgetAndFFP": [["Private Contractor Subtotal", "$25,000"], ["Private Contractor Subtotal", "$25,000"]],
+    "budgetAndFFP": [
+      ["Private Contractor Subtotal", "$25,000"],
+      ["Private Contractor Subtotal", "$25,000"]
+    ],
     "CACTable": [],
     "FFPActivitiesTable": [],
     "summaryBudgetTotals": {
