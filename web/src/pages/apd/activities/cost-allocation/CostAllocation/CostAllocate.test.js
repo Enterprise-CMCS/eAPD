@@ -27,9 +27,11 @@ const initialState = {
 
 const setup = async (props = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  const utils = await act(async () => renderWithConnection(<CostAllocate {...initialState} {...props} />));
+  const utils = await act(async () =>
+    renderWithConnection(<CostAllocate {...initialState} {...props} />)
+  );
   return utils;
-}
+};
 
 describe('<setCostAllocationMethodology />', () => {
   beforeEach(() => {
@@ -42,7 +44,7 @@ describe('<setCostAllocationMethodology />', () => {
       expect(
         screen.getByLabelText('Description of Cost Allocation Methodology')
       ).toHaveValue(initialState.activity.costAllocationNarrative.methodology);
-    })
+    });
   });
 
   test('maps redux state to component props', () => {
