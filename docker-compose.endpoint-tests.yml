@@ -55,7 +55,10 @@ services:
     expose:
       - 8000
     volumes:
-      - api:/app/api
+      - type: bind
+        source: ./api
+        target: /app/api
+        consistency: cached
       - common:/app/common
       - /app/node_modules
 
