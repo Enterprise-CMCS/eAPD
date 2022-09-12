@@ -10,24 +10,15 @@ const budget = require('./budget');
 module.exports = (
   app,
   {
-    deleteEndpoint = del,
     filesEndpoints = files,
     eventsEndpoints = events,
     budgetEndpoints = budget,
+    deleteEndpoint = del,
     getEndpoint = get,
     patchEndpoint = patch,
     postEndpoint = post
   } = {}
 ) => {
-  logger.debug('setting up DELETE endpoint');
-  deleteEndpoint(app);
-  logger.debug('setting up GET endpoint');
-  getEndpoint(app);
-  logger.debug('setting up PATCH endpoint');
-  patchEndpoint(app);
-  logger.debug('setting up POST endpoint');
-  postEndpoint(app);
-
   logger.debug('setting up APD image endpoints');
   filesEndpoints(app);
 
@@ -36,4 +27,13 @@ module.exports = (
 
   logger.debug('setting up APD budget endpoints');
   budgetEndpoints(app);
+
+  logger.debug('setting up DELETE endpoint');
+  deleteEndpoint(app);
+  logger.debug('setting up GET endpoint');
+  getEndpoint(app);
+  logger.debug('setting up PATCH endpoint');
+  patchEndpoint(app);
+  logger.debug('setting up POST endpoint');
+  postEndpoint(app);
 };

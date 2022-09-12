@@ -308,10 +308,15 @@ tap.test('database wrappers / apds', async apdsTests => {
         }
       ]);
 
-      // eslint-disable-next-line no-underscore-dangle
-      const { updatedBudget, errors } = await updateAPDBudget(id, 'co');
+      let errors = null;
+      let updatedBudget;
+      try {
+        updatedBudget = await updateAPDBudget(id, 'co');
+      } catch (e) {
+        errors = e;
+      }
 
-      test.equal(Object.keys(errors).length, 0, 'no errors');
+      test.equal(errors, null, 'no errors');
       test.notSame(initialBudget, updatedBudget, 'Budget has been updated');
     });
   });

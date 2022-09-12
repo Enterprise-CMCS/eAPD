@@ -9,7 +9,7 @@ tap.test('apds budget PATCH endpoint', async tests => {
   let handler;
 
   const app = {
-    patch: sandbox.spy()
+    patch: sandbox.stub()
   };
 
   const updateAPDBudget = sandbox.stub();
