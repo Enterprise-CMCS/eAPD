@@ -5,10 +5,7 @@ import {
   waitFor,
   screen
 } from 'apd-testing-library';
-import { plain as 
-  OtherFunding, 
-  mapDispatchToProps
-} from './OtherFunding';
+import { plain as OtherFunding, mapDispatchToProps } from './OtherFunding';
 import {
   setCostAllocationFFPOtherFunding,
   setCostAllocationOtherFunding
@@ -58,10 +55,10 @@ const initialState = {
 const setup = async (props = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
   const utils = await act(async () =>
-  renderWithConnection(<OtherFunding {...initialState} {...props} />)
-);
-return utils;
-}
+    renderWithConnection(<OtherFunding {...initialState} {...props} />)
+  );
+  return utils;
+};
 
 describe('<OtherFunding />', () => {
   beforeEach(() => {
@@ -73,8 +70,10 @@ describe('<OtherFunding />', () => {
     await waitFor(() => {
       expect(
         screen.getAllByLabelText('Other Funding Description')[0]
-      ).toHaveValue(initialState.activity.costAllocationNarrative.years[1066].otherSources)
-    })
+      ).toHaveValue(
+        initialState.activity.costAllocationNarrative.years[1066].otherSources
+      );
+    });
   });
 
   it('maps dispatch actions to props', () => {
