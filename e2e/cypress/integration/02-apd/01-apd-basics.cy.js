@@ -102,7 +102,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
-  describe('Navigation', () => {
+  describe.only('Navigation', () => {
     it('confirms navigation', () => {
       cy.log('Click through Continue buttons');
       cy.wrap([...pageTitles]).each((title, index, titles) => {
@@ -114,141 +114,146 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           cy.get('#continue-button').click();
           cy.get('.ds-h2').should('contain', titles[index + 1]);
         }
+
+        cy.wait(10000);
+        cy.injectAxeForA11y();
+        cy.checkA11y();
+        cy.pause();
       });
 
-      cy.log('Click through Previous buttons');
-      cy.wrap([...pageTitles].reverse()).each((title, index, reverseTitles) => {
-        cy.get('.ds-c-vertical-nav__item').contains(title).click();
-        cy.get('.ds-h2').should('contain', title);
+      // cy.log('Click through Previous buttons');
+      // cy.wrap([...pageTitles].reverse()).each((title, index, reverseTitles) => {
+      //   cy.get('.ds-c-vertical-nav__item').contains(title).click();
+      //   cy.get('.ds-h2').should('contain', title);
 
-        if (index < reverseTitles.length - 1) {
-          cy.get('#previous-button').click();
-          cy.get('.ds-h2').should('contain', reverseTitles[index + 1]);
-        }
-      });
+      //   if (index < reverseTitles.length - 1) {
+      //     cy.get('#previous-button').click();
+      //     cy.get('.ds-h2').should('contain', reverseTitles[index + 1]);
+      //   }
+      // });
 
-      cy.log('confirms side nav buttons redirect to correct sections');
-      const pages = [
-        { parent: 'APD Overview', label: '' },
-        {
-          parent: 'Key State Personnel',
-          label: 'Key Personnel and Program Management'
-        },
-        {
-          parent: 'Results of Previous Activities',
-          label: 'Results of Previous Activities'
-        },
-        { parent: 'Activities', label: '' },
-        { parent: 'Activity Schedule Summary', label: '' },
-        { parent: 'Proposed Budget', label: 'Proposed Budget' },
-        { parent: 'Assurances and Compliance', label: '' },
-        { parent: 'Executive Summary', label: 'Executive Summary' },
-        { parent: 'Export and Submit', label: '' }
-      ];
+      // cy.log('confirms side nav buttons redirect to correct sections');
+      // const pages = [
+      //   { parent: 'APD Overview', label: '' },
+      //   {
+      //     parent: 'Key State Personnel',
+      //     label: 'Key Personnel and Program Management'
+      //   },
+      //   {
+      //     parent: 'Results of Previous Activities',
+      //     label: 'Results of Previous Activities'
+      //   },
+      //   { parent: 'Activities', label: '' },
+      //   { parent: 'Activity Schedule Summary', label: '' },
+      //   { parent: 'Proposed Budget', label: 'Proposed Budget' },
+      //   { parent: 'Assurances and Compliance', label: '' },
+      //   { parent: 'Executive Summary', label: 'Executive Summary' },
+      //   { parent: 'Export and Submit', label: '' }
+      // ];
 
-      cy.wrap(pages).each(index => {
-        if (index.label !== '') {
-          // Expand nav menu option
-          cy.get('.ds-c-vertical-nav__label--parent')
-            .contains(index.parent)
-            .then($el => {
-              if ($el.attr('aria-expanded') === 'false') {
-                // if it's not expanded, expand it
-                cy.wrap($el).click();
-              }
+      // cy.wrap(pages).each(index => {
+      //   if (index.label !== '') {
+      //     // Expand nav menu option
+      //     cy.get('.ds-c-vertical-nav__label--parent')
+      //       .contains(index.parent)
+      //       .then($el => {
+      //         if ($el.attr('aria-expanded') === 'false') {
+      //           // if it's not expanded, expand it
+      //           cy.wrap($el).click();
+      //         }
 
-              // Click on nav submenu button
-              cy.get('a.ds-c-vertical-nav__label')
-                .contains(index.label)
-                .click();
-            });
-        } else {
-          cy.get('a.ds-c-vertical-nav__label').contains(index.parent).click();
-        }
+      //         // Click on nav submenu button
+      //         cy.get('a.ds-c-vertical-nav__label')
+      //           .contains(index.label)
+      //           .click();
+      //       });
+      //   } else {
+      //     cy.get('a.ds-c-vertical-nav__label').contains(index.parent).click();
+      //   }
 
-        cy.get('.ds-h2').should('contain', index.parent);
-      });
+      //   cy.get('.ds-h2').should('contain', index.parent);
+      // });
 
-      cy.log('confirms anchor links redirect to correct sections');
-      const pageWithAnchors = [
-        {
-          parent: 'Key State Personnel',
-          label: 'Key Personnel and Program Management',
-          subnav: '#apd-state-profile-key-personnel'
-        },
-        {
-          parent: 'Results of Previous Activities',
-          label: 'Prior Activities Overview',
-          subnav: ['#prev-activities-outline', '#prev-activities-table']
-        },
-        {
-          parent: 'Proposed Budget',
-          label: 'Summary Budget by Activity',
-          subnav: [
-            '#summary-schedule-by-activity-table',
-            '#budget-summary-table',
-            '#budget-federal-by-quarter',
-            '#budget-incentive-by-quarter'
-          ]
-        },
-        {
-          parent: 'Executive Summary',
-          label: 'Activities Summary',
-          subnav: [
-            '#executive-summary-summary',
-            '#executive-summary-budget-table'
-          ]
-        }
-      ];
+      // cy.log('confirms anchor links redirect to correct sections');
+      // const pageWithAnchors = [
+      //   {
+      //     parent: 'Key State Personnel',
+      //     label: 'Key Personnel and Program Management',
+      //     subnav: '#apd-state-profile-key-personnel'
+      //   },
+      //   {
+      //     parent: 'Results of Previous Activities',
+      //     label: 'Prior Activities Overview',
+      //     subnav: ['#prev-activities-outline', '#prev-activities-table']
+      //   },
+      //   {
+      //     parent: 'Proposed Budget',
+      //     label: 'Summary Budget by Activity',
+      //     subnav: [
+      //       '#summary-schedule-by-activity-table',
+      //       '#budget-summary-table',
+      //       '#budget-federal-by-quarter',
+      //       '#budget-incentive-by-quarter'
+      //     ]
+      //   },
+      //   {
+      //     parent: 'Executive Summary',
+      //     label: 'Activities Summary',
+      //     subnav: [
+      //       '#executive-summary-summary',
+      //       '#executive-summary-budget-table'
+      //     ]
+      //   }
+      // ];
 
-      cy.wrap(pageWithAnchors).each(index => {
-        const { subnav } = index;
+      // cy.wrap(pageWithAnchors).each(index => {
+      //   const { subnav } = index;
 
-        cy.get('.ds-c-vertical-nav__label--parent')
-          .contains(index.parent)
-          .then($el => {
-            if ($el.attr('aria-expanded') === 'false') {
-              // if it's not expanded, expand it
-              cy.wrap($el).click();
-            }
+      //   cy.get('.ds-c-vertical-nav__label--parent')
+      //     .contains(index.parent)
+      //     .then($el => {
+      //       if ($el.attr('aria-expanded') === 'false') {
+      //         // if it's not expanded, expand it
+      //         cy.wrap($el).click();
+      //       }
 
-            // Click on anchor link
-            cy.get('a.ds-c-vertical-nav__label').contains(index.label).click();
-          });
+      //       // Click on anchor link
+      //       cy.get('a.ds-c-vertical-nav__label').contains(index.label).click();
+      //     });
 
-        if (Array.isArray(subnav)) {
-          cy.wrap(subnav).each(sub => {
-            cy.get(sub)
-              .then(element => element[0].offsetTop)
-              .then(() => cy.window().its('scrollY').should('be.gt', 0))
-              .then(offset => cy.window().its('scrollY').should('eq', offset));
-          });
-        } else {
-          cy.get(subnav)
-            .then(element => element[0].offsetTop)
-            .then(() => cy.window().its('scrollY').should('be.gt', 0))
-            .then(offset => cy.window().its('scrollY').should('eq', offset));
-        }
-      });
+      //   if (Array.isArray(subnav)) {
+      //     cy.wrap(subnav).each(sub => {
+      //       cy.get(sub)
+      //         .then(element => element[0].offsetTop)
+      //         .then(() => cy.window().its('scrollY').should('be.gt', 0))
+      //         .then(offset => cy.window().its('scrollY').should('eq', offset));
+      //     });
+      //   } else {
+      //     cy.get(subnav)
+      //       .then(element => element[0].offsetTop)
+      //       .then(() => cy.window().its('scrollY').should('be.gt', 0))
+      //       .then(offset => cy.window().its('scrollY').should('eq', offset));
+      //   }
+      // });
 
-      cy.log(
-        'should go to the Activity Overview page when edit is clicked in Executive Summary'
-      );
-      cy.goToExecutiveSummary();
+      // cy.log(
+      //   'should go to the Activity Overview page when edit is clicked in Executive Summary'
+      // );
+      // cy.goToExecutiveSummary();
 
-      cy.get('#executive-summary-summary')
-        .parent()
-        .contains('div', 'Activity 1: Program Administration')
-        .parent()
-        .parent()
-        .findByRole('button', { name: 'Edit' })
-        .click();
+      // cy.get('#executive-summary-summary')
+      //   .parent()
+      //   .contains('div', 'Activity 1: Program Administration')
+      //   .parent()
+      //   .parent()
+      //   .findByRole('button', { name: 'Edit' })
+      //   .click();
 
-      cy.findByRole('heading', {
-        name: /^Activity 1:/i,
-        level: 2
-      }).should('exist');
-      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
+      // cy.findByRole('heading', {
+      //   name: /^Activity 1:/i,
+      //   level: 2
+      // }).should('exist');
+      // cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
     });
   });
 
