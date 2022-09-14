@@ -1,6 +1,6 @@
 import { Dialog, Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Countdown from 'react-countdown';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,8 +23,12 @@ const SessionEndingAlert = ({
     ? 'alert--session-expiring__active'
     : 'alert--session-expiring__inactive';
 
+  useEffect(() => {
+    console.log('expiresAt', expiresAt);
+  }, [expiresAt, isSessionEnding]);
   /* eslint-disable react/prop-types */
   const createTimer = ({ minutes }) => {
+    console.log('minutes...', minutes);
     if (minutes == 1) {
       return (
         <span id="session-timeout" aria-live="polite">
