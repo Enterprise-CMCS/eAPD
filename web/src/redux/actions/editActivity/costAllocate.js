@@ -1,5 +1,4 @@
 import { EDIT_APD } from '../editApd';
-import { updateBudget } from '../budget';
 
 export const setCostAllocationMethodology = (index, methodology) => ({
   type: EDIT_APD,
@@ -25,7 +24,6 @@ export const setCostAllocationFFPFundingSplit =
       path: `/activities/${index}/costAllocation/${year}/ffp/state`,
       value: state
     });
-    dispatch(updateBudget());
   };
 
 export const setCostAllocationFFPOtherFunding =
@@ -35,7 +33,6 @@ export const setCostAllocationFFPOtherFunding =
       path: `/activities/${index}/costAllocation/${year}/other`,
       value: otherFunding
     });
-    dispatch(updateBudget());
   };
 
 export const setFFPForInHouseCostsForFiscalQuarter =
@@ -45,7 +42,6 @@ export const setFFPForInHouseCostsForFiscalQuarter =
       path: `/activities/${activityIndex}/quarterlyFFP/years/${year}/${quarter}/inHouse`,
       value: ffpPercent
     });
-    dispatch(updateBudget());
   };
 
 export const setFFPForContractorCostsForFiscalQuarter =
@@ -55,5 +51,4 @@ export const setFFPForContractorCostsForFiscalQuarter =
       path: `/activities/${activityIndex}/quarterlyFFP/years/${year}/${quarter}/contractors`,
       value: ffpPercent
     });
-    dispatch(updateBudget());
   };

@@ -455,7 +455,7 @@ export const sumActivityTotalByCategories = ({
  */
 export const sumActivityTotals = ({ activity, years } = {}) => {
   let activityTotals = {
-    id: activity?.key?.toString() || '',
+    id: activity?.activityId?.toString() || '',
     name: activity?.name || '',
     fundingSource: activity?.fundingSource || null,
     data: {}
@@ -1171,9 +1171,10 @@ export const calculateQuarterlyCosts = ({
         quarterlyInfo.federalPcts
       );
 
-      updatedBudget.activities[activity.key].quarterlyFFP =
+      updatedBudget.activities[activity.activityId].quarterlyFFP =
         sumActivityQuarterlyFFP({
-          activityFFP: updatedBudget.activities[activity.key].quarterlyFFP,
+          activityFFP:
+            updatedBudget.activities[activity.activityId].quarterlyFFP,
           fedShareAmount,
           category,
           year,
@@ -1229,7 +1230,8 @@ export const calculateBudget = apd => {
 
       // Create a default quarterly FFP per activity object,
       // so that all of the properties and stuff will exist
-      newBudget.activities[activity.key] = defaultQuarterlyFFPObject(years);
+      newBudget.activities[activity.activityId] =
+        defaultQuarterlyFFPObject(years);
 
       // Sum up the total cost of each cost category per fiscal year for the activity
       let activityTotals = sumActivityTotals({ activity, years });
@@ -1284,8 +1286,8 @@ export const calculateBudget = apd => {
         });
 
         // Record these costs for each FFY of the activity
-        newBudget.activities[activity.key].costsByFFY = sumCostsByFFY({
-          costsByFFY: newBudget.activities[activity.key].costsByFFY,
+        newBudget.activities[activity.activityId].costsByFFY = sumCostsByFFY({
+          costsByFFY: newBudget.activities[activity.activityId].costsByFFY,
           year,
           totalCost,
           totalMedicaidCostShares,

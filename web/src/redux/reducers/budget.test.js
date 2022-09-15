@@ -69,322 +69,64 @@ describe('budget reducer', () => {
     ).toEqual({});
   });
 
-  it('computes new budget data from state', () => {
+  it('updates the budget state', () => {
     const state = {
-      apd: {
-        data: {
-          activities: [
-            {
-              id: 1,
-              key: '1',
-              name: 'hieOne',
-              fundingSource: 'HIE',
-              years: ['1931', '1932', '1933'],
-              costAllocation: {
-                1931: { ffp: { federal: 90, state: 10 }, other: 0 },
-                1932: { ffp: { federal: 90, state: 10 }, other: 0 },
-                1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-              },
-              contractorResources: [
-                { years: { 1931: 1000, 1932: 1000, 1933: 1000 } },
-                { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-              ],
-              expenses: [
-                { years: { 1931: 1000, 1932: 1000, 1933: 1000 } },
-                { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-              ],
-              statePersonnel: [
-                {
-                  years: {
-                    1931: { amt: 1000, perc: 1 },
-                    1932: { amt: 1000, perc: 0.7 },
-                    1933: { amt: 1000, perc: 0.4 }
-                  }
-                },
-                {
-                  years: {
-                    1931: { amt: 1000, perc: 0.4 },
-                    1932: { amt: 1000, perc: 0.5 },
-                    1933: { amt: 1000, perc: 0.3 }
-                  }
-                }
-              ],
-              quarterlyFFP: {
-                1931: {
-                  1: { inHouse: 30, contractors: 40 },
-                  2: { inHouse: 20, contractors: 20 },
-                  3: { inHouse: 40, contractors: 30 },
-                  4: { inHouse: 10, contractors: 10 }
-                },
-                1932: {
-                  1: { inHouse: 25, contractors: 50 },
-                  2: { inHouse: 25, contractors: 20 },
-                  3: { inHouse: 25, contractors: 20 },
-                  4: { inHouse: 25, contractors: 10 }
-                },
-                1933: {
-                  1: { inHouse: 10, contractors: 40 },
-                  2: { inHouse: 20, contractors: 30 },
-                  3: { inHouse: 30, contractors: 20 },
-                  4: { inHouse: 40, contractors: 10 }
-                }
-              }
-            },
-            {
-              id: 2,
-              key: '2',
-              name: 'hieTwo',
-              fundingSource: 'HIE',
-              years: ['1931', '1932', '1933'],
-              costAllocation: {
-                1931: { ffp: { federal: 90, state: 10 }, other: 0 },
-                1932: { ffp: { federal: 90, state: 10 }, other: 0 },
-                1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-              },
-              contractorResources: [
-                { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-              ],
-              expenses: [{ years: { 1931: 1000, 1932: 1000, 1933: 1000 } }],
-              statePersonnel: [
-                {
-                  years: {
-                    1931: { amt: 1000, perc: 1 },
-                    1932: { amt: 1000, perc: 1 },
-                    1933: { amt: 1000, perc: 1 }
-                  }
-                }
-              ],
-              quarterlyFFP: {
-                1931: {
-                  1: { inHouse: 25, contractors: 50 },
-                  2: { inHouse: 25, contractors: 20 },
-                  3: { inHouse: 25, contractors: 20 },
-                  4: { inHouse: 25, contractors: 10 }
-                },
-                1932: {
-                  1: { inHouse: 30, contractors: 40 },
-                  2: { inHouse: 20, contractors: 20 },
-                  3: { inHouse: 40, contractors: 30 },
-                  4: { inHouse: 10, contractors: 10 }
-                },
-                1933: {
-                  1: { inHouse: 10, contractors: 40 },
-                  2: { inHouse: 20, contractors: 30 },
-                  3: { inHouse: 30, contractors: 20 },
-                  4: { inHouse: 40, contractors: 10 }
-                }
-              }
-            },
-            {
-              id: 3,
-              key: '3',
-              name: 'Program Administration',
-              fundingSource: 'HIT',
-              years: ['1931', '1932', '1933'],
-              costAllocation: {
-                1931: { ffp: { federal: 90, state: 10 }, other: 0 },
-                1932: { ffp: { federal: 90, state: 10 }, other: 0 },
-                1933: { ffp: { federal: 90, state: 10 }, other: 1000 }
-              },
-              contractorResources: [
-                { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-              ],
-              expenses: [{ years: { 1931: 1000, 1932: 1000, 1933: 1000 } }],
-              statePersonnel: [
-                {
-                  years: {
-                    1931: { amt: 1000, perc: 1 },
-                    1932: { amt: 1000, perc: 1 },
-                    1933: { amt: 1000, perc: 1 }
-                  }
-                }
-              ],
-              quarterlyFFP: {
-                1931: {
-                  1: { inHouse: 10, contractors: 40 },
-                  2: { inHouse: 20, contractors: 30 },
-                  3: { inHouse: 30, contractors: 20 },
-                  4: { inHouse: 40, contractors: 10 }
-                },
-                1932: {
-                  1: { inHouse: 25, contractors: 50 },
-                  2: { inHouse: 25, contractors: 20 },
-                  3: { inHouse: 25, contractors: 20 },
-                  4: { inHouse: 25, contractors: 10 }
-                },
-                1933: {
-                  // Contractor percent is 120%
-                  1: { inHouse: 30, contractors: 40 },
-                  2: { inHouse: 20, contractors: 20 },
-                  3: { inHouse: 40, contractors: 30 },
-                  4: { inHouse: 10, contractors: 30 }
-                }
-              }
-            },
-            {
-              id: 4,
-              key: '4',
-              name: 'mmisOne',
-              fundingSource: 'MMIS',
-              years: ['1931', '1932', '1933'],
-              costAllocation: {
-                1931: { ffp: { federal: 50, state: 50 }, other: 1000 },
-                1932: { ffp: { federal: 75, state: 25 }, other: 1000 },
-                1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-              },
-              contractorResources: [
-                { years: { 1931: 1000, 1932: 1000, 1933: 1000 } }
-              ],
-              expenses: [{ years: { 1931: 1000, 1932: 1000, 1933: 1000 } }],
-              statePersonnel: [
-                {
-                  years: {
-                    1931: { amt: 1000, perc: 0.5 },
-                    1932: { amt: 1000, perc: 1 },
-                    1933: { amt: 1000, perc: 0.1 }
-                  }
-                }
-              ],
-              quarterlyFFP: {
-                1931: {
-                  1: { inHouse: 10, contractors: 40 },
-                  2: { inHouse: 20, contractors: 30 },
-                  3: { inHouse: 30, contractors: 20 },
-                  4: { inHouse: 40, contractors: 10 }
-                },
-                1932: {
-                  // Contractor percent is 120%
-                  1: { inHouse: 30, contractors: 40 },
-                  2: { inHouse: 20, contractors: 20 },
-                  3: { inHouse: 40, contractors: 30 },
-                  4: { inHouse: 10, contractors: 30 }
-                },
-                1933: {
-                  1: { inHouse: 25, contractors: 50 },
-                  2: { inHouse: 25, contractors: 20 },
-                  3: { inHouse: 25, contractors: 20 },
-                  4: { inHouse: 25, contractors: 10 }
-                }
-              }
-            },
-            {
-              // This activity is to represent the case where an activity's
-              // total costs are zero, because that was causing budget math
-              // errors. https://github.com/CMSgov/eAPD/issues/1740
-              id: 5,
-              key: '5',
-              name: 'zero total',
-              fundingSource: 'MMIS',
-              years: ['1931', '1932', '1933'],
-              costAllocation: {
-                1931: { ffp: { federal: 50, state: 50 }, other: 0 },
-                1932: { ffp: { federal: 75, state: 25 }, other: 0 },
-                1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-              },
-              contractorResources: [{ years: { 1931: 0, 1932: 0, 1933: 0 } }],
-              expenses: [{ years: { 1931: 0, 1932: 0, 1933: 0 } }],
-              statePersonnel: [
-                {
-                  years: {
-                    1931: { amt: 0, perc: 0 },
-                    1932: { amt: 0, perc: 0 },
-                    1933: { amt: 0, perc: 0 }
-                  }
-                }
-              ],
-              quarterlyFFP: {
-                1931: {
-                  1: { inHouse: 0, contractors: 0 },
-                  2: { inHouse: 0, contractors: 0 },
-                  3: { inHouse: 0, contractors: 0 },
-                  4: { inHouse: 0, contractors: 0 }
-                },
-                1932: {
-                  1: { inHouse: 0, contractors: 0 },
-                  2: { inHouse: 0, contractors: 0 },
-                  3: { inHouse: 0, contractors: 0 },
-                  4: { inHouse: 0, contractors: 0 }
-                },
-                1933: {
-                  1: { inHouse: 0, contractors: 0 },
-                  2: { inHouse: 0, contractors: 0 },
-                  3: { inHouse: 0, contractors: 0 },
-                  4: { inHouse: 0, contractors: 0 }
-                }
-              }
-            },
-            {
-              // This activity is to represent the case where an activity
-              // does not have a funding program yet. New activities do not
-              // get a funding program by default.
-              // https://github.com/CMSgov/eAPD/issues/2059
-              id: 6,
-              key: '6',
-              name: 'no funding program',
-              fundingSource: null,
-              years: ['1931', '1932', '1933'],
-              costAllocation: {
-                1931: { ffp: { federal: 50, state: 50 }, other: 0 },
-                1932: { ffp: { federal: 75, state: 25 }, other: 0 },
-                1933: { ffp: { federal: 90, state: 10 }, other: 0 }
-              },
-              contractorResources: [
-                { years: { 1931: 100, 1932: 100, 1933: 100 } }
-              ],
-              expenses: [{ years: { 1931: 100, 1932: 100, 1933: 100 } }],
-              statePersonnel: [
-                {
-                  years: {
-                    1931: { amt: 100, perc: 1 },
-                    1932: { amt: 100, perc: 1 },
-                    1933: { amt: 100, perc: 1 }
-                  }
-                }
-              ],
-              quarterlyFFP: {
-                1931: {
-                  1: { inHouse: 25, contractors: 25 },
-                  2: { inHouse: 25, contractors: 25 },
-                  3: { inHouse: 25, contractors: 25 },
-                  4: { inHouse: 25, contractors: 25 }
-                },
-                1932: {
-                  1: { inHouse: 25, contractors: 25 },
-                  2: { inHouse: 25, contractors: 25 },
-                  3: { inHouse: 25, contractors: 25 },
-                  4: { inHouse: 25, contractors: 25 }
-                },
-                1933: {
-                  1: { inHouse: 25, contractors: 25 },
-                  2: { inHouse: 25, contractors: 25 },
-                  3: { inHouse: 25, contractors: 25 },
-                  4: { inHouse: 25, contractors: 25 }
-                }
-              }
-            }
-          ],
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                costs: { 1931: 150, 1932: 151, 1933: 152 },
-                fte: { 1931: 0, 1932: 0.5, 1933: 1 },
-                hasCosts: false
-              },
-              {
-                costs: { 1931: 150, 1932: 1500, 1933: 15000 },
-                fte: { 1931: 0, 1932: 0.3, 1933: 1 },
-                hasCosts: true
-              }
-            ]
-          },
-          years: ['1931', '1932', '1933']
+      activities: {},
+      combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+      federalShareByFFYQuarter: {
+        hitAndHie: {
+          years: {},
+          total: { contractors: 0, inHouse: 0, combined: 0 }
+        },
+        mmis: {
+          years: {},
+          total: { contractors: 0, inHouse: 0, combined: 0 }
         }
-      }
+      },
+      hie: {
+        combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        statePersonnel: {
+          total: { total: 0, medicaid: 0, federal: 0, state: 0 }
+        }
+      },
+      hit: {
+        combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        statePersonnel: {
+          total: { total: 0, medicaid: 0, federal: 0, state: 0 }
+        }
+      },
+      mmis: {
+        combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
+        statePersonnel: {
+          total: { total: 0, medicaid: 0, federal: 0, state: 0 }
+        }
+      },
+      hitAndHie: {
+        combined: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+        contractors: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+        expenses: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+        statePersonnel: {
+          total: { medicaid: 0, federal: 0, state: 0, total: 0 }
+        }
+      },
+      mmisByFFP: {
+        '50-50': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+        '75-25': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+        '90-10': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+        '0-100': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
+        combined: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } }
+      },
+      activityTotals: [],
+      years: []
     };
 
-    const originalState = JSON.parse(JSON.stringify(state));
-
-    expect(budget(null, { type: UPDATE_BUDGET, state })).toEqual({
+    const budgetState = {
       activities: {
         1: {
           costsByFFY: {
@@ -1602,9 +1344,10 @@ describe('budget reducer', () => {
         }
       ],
       years: ['1931', '1932', '1933']
-    });
+    };
 
-    // Verify that the big state wasn't changed
-    expect(originalState).toEqual(state);
+    expect(budget(state, { type: UPDATE_BUDGET, budget: budgetState })).toEqual(
+      budgetState
+    );
   });
 });

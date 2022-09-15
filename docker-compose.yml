@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
     environment:
       - API_URL=http://localhost:8081
-      - TEALIUM_TAG=${TEALIUM_TAG}
+      - TEALIUM_TAG=${TEALIUM_TAG:-default}
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}

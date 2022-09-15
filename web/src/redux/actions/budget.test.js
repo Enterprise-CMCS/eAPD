@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { updateBudget, UPDATE_BUDGET } from './budget';
+import { updateBudget, loadBudget, UPDATE_BUDGET } from './budget';
 
 const mockStore = configureStore([thunk]);
 

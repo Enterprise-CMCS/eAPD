@@ -19,15 +19,6 @@ module.exports = (
     postEndpoint = post
   } = {}
 ) => {
-  logger.debug('setting up APD image endpoints');
-  filesEndpoints(app);
-
-  logger.debug('setting up APD events endpoints');
-  eventsEndpoints(app);
-
-  logger.debug('setting up APD budget endpoints');
-  budgetEndpoints(app);
-
   logger.debug('setting up DELETE endpoint');
   deleteEndpoint(app);
   logger.debug('setting up GET endpoint');
@@ -36,4 +27,13 @@ module.exports = (
   patchEndpoint(app);
   logger.debug('setting up POST endpoint');
   postEndpoint(app);
+
+  logger.debug('setting up APD image endpoints');
+  filesEndpoints(app);
+
+  logger.debug('setting up APD events endpoints');
+  eventsEndpoints(app);
+
+  logger.debug('setting up APD budget endpoints');
+  budgetEndpoints(app);
 };

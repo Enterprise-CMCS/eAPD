@@ -5,7 +5,8 @@ export const ariaAnnounceFFPQuarterly =
     dispatch({
       type: ARIA_ANNOUNCE_CHANGE,
       message: `${
-        getState().budget.activities[aKey].quarterlyFFP[year][q][name].dollars
+        getState().budget.activities[aKey].quarterlyFFP.years[year][q][name]
+          .dollars
       } dollars`
     });
   };

@@ -1,4 +1,5 @@
 import { push } from 'connected-react-router';
+import { deepCopy } from '@cms-eapd/common';
 
 import {
   CREATE_APD_FAILURE,
@@ -19,7 +20,7 @@ import {
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE
 } from './symbols';
-import { updateBudget } from '../budget';
+import { updateBudget, loadBudget } from '../budget';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import {
   ariaAnnounceApdLoaded,
@@ -93,6 +94,10 @@ export const selectApd =
     return axios
       .get(`/apds/${id}`)
       .then(req => {
+        const budget = deepCopy(req.data.budget);
+        console.log({ budget });
+        delete req.data.budget;
+
         dispatch({ type: SELECT_APD_SUCCESS, apd: req.data });
         dispatch({
           type: APD_ACTIVITIES_CHANGE,
@@ -110,7 +115,7 @@ export const selectApd =
           });
         }
 
-        dispatch(updateBudget());
+        dispatch(loadBudget(budget));
         dispatch(pushRoute(route));
         dispatch(ariaAnnounceApdLoaded());
 

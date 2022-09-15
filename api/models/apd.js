@@ -1,4 +1,5 @@
 require('./budget');
+// const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 
 const quarterlyFFP = new mongoose.Schema(
@@ -187,11 +188,9 @@ const apdSchema = new mongoose.Schema({
   activities: [
     {
       _id: false,
-      key: {
-        type: mongoose.Schema.Types.ObjectId,
-        index: false,
-        required: true,
-        auto: true
+      activityId: {
+        type: String,
+        default: () => new mongoose.Types.ObjectId().toHexString()
       },
       alternatives: String,
       contractorResources: [

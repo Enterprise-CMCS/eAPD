@@ -1,9 +1,6 @@
 import { RESET } from '../actions/app';
 import { UPDATE_BUDGET } from '../actions/budget';
-import {
-  defaultBudgetObject,
-  calculateBudget
-} from '@cms-eapd/common/utils/budget';
+import { defaultBudgetObject } from '@cms-eapd/common/utils/budget';
 
 // eslint-disable-next-line default-param-last
 const reducer = (state = defaultBudgetObject([]), action) => {
@@ -11,7 +8,7 @@ const reducer = (state = defaultBudgetObject([]), action) => {
     case RESET:
       return {};
     case UPDATE_BUDGET:
-      return calculateBudget(action.state.apd);
+      return action.budget;
     default:
       return state;
   }
