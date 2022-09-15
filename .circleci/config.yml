@@ -1,7 +1,7 @@
 version: 2.1
 
 
-"Just testing to see if this pulls update"
+
 
 workflows:
   version: 2
@@ -30,7 +30,7 @@ workflows:
           filters:
             branches:
               only:
-                - main 
+                - Dio/4008-create-validation
                 - 
     jobs:
       - install dependencies
