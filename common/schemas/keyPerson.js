@@ -30,6 +30,7 @@ const schemas = Joi.object({
     ),
     otherwise: Joi.any()
   }),
+  isPrimary: Joi.any(),
   fte: Joi.alternatives().conditional('hasCosts', {
     is: 'yes',
     then: Joi.object().pattern(

@@ -13,7 +13,7 @@ export { default as nameAndFundingSource } from './nameAndFundingSource';
 export { default as nonPersonnelCosts } from './nonPersonnelCosts';
 export { default as otherSources } from './otherSources';
 export { default as outcomeMetric } from './outcomeMetric';
-export { default as perconCost } from './personCost';
+export { default as personCost } from './personCost';
 export { default as plannedActivitySchedule } from './plannedActivityShedule';
 export { default as privateContractor } from './privateContractor';
 export { default as standardsAndConditions } from './standardsAndConditions';

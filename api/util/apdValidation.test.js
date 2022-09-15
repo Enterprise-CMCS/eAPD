@@ -26,9 +26,9 @@ const mockApd = {
         name: 'James Holden',
         position: 'HIT Coordinator',
         email: 'JimPushesButtons@tycho.com',
-        isPrimary: true,
+        isPrimary: 'true',
         fte: { 2022: 1, 2023: 1 },
-        hasCosts: true,
+        hasCosts: 'true',
         costs: { 2022: 100000, 2023: 100000 }
       }
     ]
@@ -68,27 +68,27 @@ const mockApd = {
       contractorResources: [
         {
           description: 'Maintain SLR',
-          end: '',
+          end: '2021-01-15',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
-          useHourly: false,
+          useHourly: 'false',
           name: 'Super SLR Incorporated',
-          start: '',
+          start: '2020-01-15',
           totalCost: 32423,
           years: { 2022: 999756, 2023: 342444 }
         },
         {
           description: 'Technology consulting and planning services.',
-          end: '',
+          end: '2023-01-15',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
-          useHourly: false,
+          useHourly: 'false',
           name: 'Tech Consulting Inc.',
-          start: '',
+          start: '2021-01-15',
           totalCost: 473573,
           years: { 2022: 333000, 2023: 200000 }
         }
@@ -113,17 +113,17 @@ const mockApd = {
       description: 'abc',
       expenses: [
         {
-          description: '',
+          description: 'abc',
           category: 'Training and outreach',
           years: { 2022: 40000, 2023: 40000 }
         },
         {
-          description: '',
+          description: 'abc',
           category: 'Travel',
           years: { 2022: 35000, 2023: 35000 }
         },
         {
-          description: '',
+          description: 'abc',
           category: 'Hardware, software, and licensing',
           years: { 2022: 700000, 2023: 0 }
         }
@@ -150,7 +150,7 @@ const mockApd = {
       ],
       name: 'Program Administration',
       plannedEndDate: '2023-09-30',
-      plannedStartDate: '2017-10-01',
+      plannedStartDate: '2021-09-30',
       schedule: [
         {
           endDate: '2020-09-07',
