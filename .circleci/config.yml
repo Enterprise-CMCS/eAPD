@@ -18,6 +18,21 @@ workflows:
   #      - cleanup preview deploys
 
   # Workflow to scan dependencies for vulnerabilities every night
+
+
+  Packer validation Test Dio:
+    riggers:
+      - schedule:
+          cron: '0 0 * * *'
+          filters:
+            branches:
+              only:
+                - main 
+                - 
+    jobs:
+      - install dependencies
+      -
+
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
