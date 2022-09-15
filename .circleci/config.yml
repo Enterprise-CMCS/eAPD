@@ -1,5 +1,8 @@
 version: 2.1
 
+
+"Just testing to see if this pulls update"
+
 workflows:
   version: 2
 
@@ -21,7 +24,7 @@ workflows:
 
 
   Packer validation Test Dio:
-    riggers:
+    triggers:
       - schedule:
           cron: '0 0 * * *'
           filters:
