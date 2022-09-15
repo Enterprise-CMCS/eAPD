@@ -31,10 +31,10 @@ workflows:
             branches:
               only:
                 - Dio/4008-create-validation
-                - 
+                
     jobs:
       - install dependencies
-      -
+      
 
   nightly dependency vulnerability scan:
     triggers:
