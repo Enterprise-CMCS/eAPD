@@ -437,15 +437,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.data.id]: {
-            ...state.byId[action.data.id],
-            updated: getHumanTimestamp(action.data.updated)
+          [action.apd.id]: {
+            ...state.byId[action.apd.id],
+            updated: getHumanTimestamp(action.apd.updated)
           }
         },
         data: {
           ...state.data,
-          created: getHumanDatestamp(action.data.created),
-          updated: getHumanTimestamp(action.data.updated)
+          activities: action.apd.activities.map(({ activityId }, index) => ({
+            activityId,
+            ...state.data.activities[index]
+          })),
+          created: getHumanDatestamp(action.apd.created),
+          updated: getHumanTimestamp(action.apd.updated)
         }
       };
 

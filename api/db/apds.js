@@ -40,8 +40,9 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
     multipleCastError: true,
     runValidators: true
   });
+
   // return the updated apd
-  return newDocument;
+  return APD.findOne({ _id: id, stateId }).lean();
 };
 
 const updateAPDDocument = async (
