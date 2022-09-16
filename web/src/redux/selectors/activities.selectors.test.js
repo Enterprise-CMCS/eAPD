@@ -92,14 +92,14 @@ describe('activities state selectors', () => {
         data: {
           activities: [
             {
-              key: 'activity one',
+              activityId: 'activity one',
               contractorResources: [],
               costAllocation: { 1990: { other: 0 }, 1991: { other: 0 } },
               expenses: [],
               statePersonnel: []
             },
             {
-              key: 'activity two',
+              activityId: 'activity two',
               contractorResources: [
                 {
                   name: 'contractor 2.1',
@@ -358,19 +358,28 @@ describe('activities state selectors', () => {
     expect(
       selector(
         {
-          apd: { data: { years: ['1991', '1992'] } },
+          apd: {
+            data: { years: ['1991', '1992'] },
+            activities: [{ activityId: 'activity key' }]
+          },
           budget: {
             activities: {
               'activity key': {
-                quarterlyFFP: { years: 'quarterly ffp budget' }
+                quarterlyFFP: {
+                  years: { 1990: 'quarterly ffp budget' },
+                  total: 'total ffp budget'
+                }
               }
             }
           }
         },
-        { aKey: 'activity key' }
+        { activityId: 'activity key' }
       )
     ).toEqual({
-      quarterlyFFP: 'quarterly ffp budget',
+      quarterlyFFP: {
+        1990: 'quarterly ffp budget',
+        total: 'total ffp budget'
+      },
       years: ['1991', '1992']
     });
   });

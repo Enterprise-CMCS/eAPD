@@ -155,7 +155,7 @@ const budgetSchema = new mongoose.Schema({
       name: String,
       fundingSource: {
         type: String,
-        enum: ['HIT', 'HIE', 'MMIS']
+        enum: ['HIT', 'HIE', 'MMIS', null]
       },
       data: {
         combined: {

@@ -30,7 +30,7 @@ const ExecutiveSummary = ({ data, total, years }) => {
         >
           {data.map((activity, i) => (
             <Review
-              key={activity.key}
+              key={activity.activityId}
               heading={
                 <Fragment>
                   Activity {i + 1}: {activity.name || 'Untitled'}

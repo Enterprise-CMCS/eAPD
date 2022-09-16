@@ -18,7 +18,7 @@ describe('executive summary component', () => {
     apdId: '0123456789abcdef01234567',
     data: [
       {
-        key: 'a1',
+        activityId: 'a1',
         name: 'activity 1',
         summary: 'first activity',
         combined: 950,
@@ -38,7 +38,7 @@ describe('executive summary component', () => {
         }
       },
       {
-        key: 'a2',
+        activityId: 'a2',
         name: '',
         summary: 'second activity',
         combined: 310,
@@ -97,7 +97,7 @@ describe('executive summary component', () => {
         data: {
           activities: [
             {
-              key: 'a1',
+              activityId: 'a1',
               name: 'activity 1',
               // Hiram Revels is seated to the United States Senate
               plannedEndDate: '1870-02-25',
@@ -106,7 +106,7 @@ describe('executive summary component', () => {
               summary: 'first activity'
             },
             {
-              key: 'a2',
+              activityId: 'a2',
               name: '',
               summary: 'second activity'
             }
@@ -142,7 +142,7 @@ describe('executive summary component', () => {
     expect(mapStateToProps(state)).toEqual({
       data: [
         {
-          key: 'a1',
+          activityId: 'a1',
           dateRange: '1/3/1969 - 2/25/1870',
           name: 'activity 1',
           summary: 'first activity',
@@ -155,7 +155,7 @@ describe('executive summary component', () => {
           }
         },
         {
-          key: 'a2',
+          activityId: 'a2',
           dateRange: 'Date not specified - Date not specified',
           name: '',
           summary: 'second activity',

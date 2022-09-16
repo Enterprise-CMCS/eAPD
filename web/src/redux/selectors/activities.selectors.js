@@ -29,8 +29,8 @@ export const selectAllActivities = ({
   }
 }) => activities;
 
-const selectBudgetForActivity = ({ budget }, { aKey }) =>
-  budget.activities[aKey];
+const selectBudgetForActivity = ({ budget }, { activityId }) =>
+  budget.activities[activityId];
 
 export const selectCostAllocationForActivityByIndex = createSelector(
   selectActivityByIndex,
@@ -173,13 +173,24 @@ export const selectActivityCostSummary = createSelector(
 );
 
 export const makeSelectCostAllocateFFPBudget = () =>
-  createSelector([selectApdData, selectBudgetForActivity], (apd, budget) => ({
-    quarterlyFFP: {
-      ...budget?.quarterlyFFP?.years,
-      total: budget?.quarterlyFFP?.total
-    },
-    years: apd.years
-  }));
+  createSelector(
+    [selectApdData, selectBudgetForActivity],
+    (apd, budget = {}) => {
+      if (budget?.quarterlyFFP) {
+        return {
+          quarterlyFFP: {
+            ...budget.quarterlyFFP.years,
+            total: budget.quarterlyFFP.total
+          },
+          years: apd.years
+        };
+      }
+      return {
+        quarterlyFFP: null,
+        years: apd.years
+      };
+    }
+  );
 
 export const selectActivitySchedule = createSelector(
   [selectAllActivities],

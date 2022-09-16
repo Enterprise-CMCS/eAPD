@@ -1,22 +1,66 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { updateBudget, loadBudget, UPDATE_BUDGET } from './budget';
+import {
+  updateBudget,
+  loadBudget,
+  UPDATE_BUDGET,
+  UPDATE_BUDGET_FAILURE
+} from './budget';
+import axios from '../../util/api';
+
+let spy;
 
 const mockStore = configureStore([thunk]);
+const apdID = '12345';
+const state = {
+  apd: {
+    data: { id: apdID }
+  }
+};
+const budget = {};
 
-describe('apd actions', () => {
-  const store = mockStore('old state');
+const store = mockStore(state);
 
+describe('budget actions', () => {
   beforeEach(() => {
     store.clearActions();
+    jest.clearAllMocks();
   });
 
-  it('updateBudget should create UPDATE_BUDGET action', () => {
-    const expectedActions = [{ type: UPDATE_BUDGET, state: 'old state' }];
+  it('on success, updateBudget should create UPDATE_BUDGET action', async () => {
+    spy = jest
+      .spyOn(axios, 'patch')
+      .mockImplementation(() =>
+        Promise.resolve({ status: 200, data: { budget: {} } })
+      );
 
-    store.dispatch(updateBudget());
+    await store.dispatch(updateBudget(apdID));
 
-    expect(store.getActions()).toEqual(expectedActions);
+    expect(spy).toHaveBeenCalledWith(`/apds/${apdID}/budget`);
+    expect(store.getActions()).toEqual([{ type: UPDATE_BUDGET, budget }]);
+  });
+
+  it('on error, updateBudget should create UPDATE_BUDGET_FAILURE action', async () => {
+    spy = jest
+      .spyOn(axios, 'patch')
+      .mockImplementation(() => Promise.reject({ status: 400, error: {} }));
+
+    await store.dispatch(updateBudget('bad id'));
+
+    expect(spy).toHaveBeenCalledWith(`/apds/bad id/budget`);
+    expect(store.getActions()).toEqual([
+      {
+        type: UPDATE_BUDGET_FAILURE,
+        data: 'There was an error updating the budget'
+      }
+    ]);
+  });
+
+  it('load budget should create UPDATE_BUDGET action', async () => {
+    const budget = { id: 'updated budget' };
+    await store.dispatch(loadBudget(budget));
+
+    expect(store.getActions()).toEqual([{ type: UPDATE_BUDGET, budget }]);
   });
 });

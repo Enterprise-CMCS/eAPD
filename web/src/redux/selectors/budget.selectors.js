@@ -24,12 +24,15 @@ export const selectBudgetActivitiesByFundingSource = createSelector(
 export const selectBudgetExecutiveSummary = createSelector(
   [selectAllActivities, selectBudget],
   (activities, budget) => {
+    console.log({ activities });
     const data = activities.map(
-      ({ key, name, plannedEndDate, plannedStartDate, summary }) => {
-        const { total, ...ffyCosts } = budget.activities[key].costsByFFY;
+      ({ activityId, name, plannedEndDate, plannedStartDate, summary }) => {
+        console.log({ activityId });
+        console.log({ budget });
+        const { total, ...ffyCosts } = budget.activities[activityId].costsByFFY;
 
         return {
-          key,
+          activityId,
           dateRange: stateDateRangeToDisplay(plannedStartDate, plannedEndDate),
           name,
           summary,

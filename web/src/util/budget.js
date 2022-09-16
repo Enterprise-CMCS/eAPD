@@ -32,7 +32,7 @@ const budgetPaths = [
   /^\/activities\/\d+\/expenses\/(-|\d+)$/,
   /^\/activities\/\d+\/statePersonnel\/(-|\d+)$/,
   /^\/activities\/\d+\/costAllocation\/\d{4}\/(ffp\/federal|ffp\/state|other)$/,
-  /^\/activities\/\d+\/quarterlyFFP\/years\/\d{4}\/[1-4]\/(inHouse|contractors)$/
+  /^\/activities\/\d+\/quarterlyFFP\/\d{4}\/[1-4]\/(inHouse|contractors)$/
 ];
 
 // iterating using some will short circuit when it finds a match

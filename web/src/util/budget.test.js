@@ -1,7 +1,21 @@
 import { hasBudgetUpdate } from './budget';
 
 describe('hasBudgetUpdate', () => {
-  test('no budget updates', () => {});
+  test('no budget updates', () => {
+    const result = hasBudgetUpdate([
+      {
+        op: 'add',
+        path: '/activities/0/outcomes/-',
+        value: { key: '32a3af97', outcome: '', metrics: [] }
+      },
+      {
+        op: 'replace',
+        path: '/activities/0/outcomes/2',
+        value: { key: '625edcc0', outcome: 'asdfasd', metrics: [] }
+      }
+    ]);
+    expect(result).toBeFalsy();
+  });
 
   test('add year', () => {
     const result = hasBudgetUpdate([
@@ -488,82 +502,246 @@ describe('hasBudgetUpdate', () => {
   });
 
   test('remove activity', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([{ op: 'remove', path: '/activities/0' }]);
     expect(result).toBeTruthy();
   });
 
   test('set activity fundingSource', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      { op: 'replace', path: '/activities/0/fundingSource', value: 'HIE' }
+    ]);
     expect(result).toBeTruthy();
   });
 
-  test('updated federal costAllocation', () => {
-    const result = hasBudgetUpdate();
-    expect(result).toBeTruthy();
-  });
-
-  test('updated state costAllocation', () => {
-    const result = hasBudgetUpdate();
+  test('updated federal and state costAllocation', () => {
+    const result = hasBudgetUpdate([
+      {
+        op: 'replace',
+        path: '/activities/0/costAllocation/2022/ffp/federal',
+        value: 75
+      },
+      {
+        op: 'replace',
+        path: '/activities/0/costAllocation/2022/ffp/state',
+        value: 25
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('updated other costAllocation', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'replace',
+        path: '/activities/0/costAllocation/2022/other',
+        value: 125000
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('updated inHouse quarterlyFFP', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'replace',
+        path: '/activities/0/quarterlyFFP/2022/4/inHouse',
+        value: 15
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('updated contractors quarterlyFFP', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'replace',
+        path: '/activities/0/quarterlyFFP/2022/3/contractors',
+        value: 35
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('add statePersonnel', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'add',
+        path: '/activities/0/statePersonnel/-',
+        value: {
+          key: '4f859ce1',
+          title: '',
+          description: '',
+          years: {
+            2022: { amt: null, perc: null },
+            2023: { amt: null, perc: null }
+          }
+        }
+      },
+      {
+        op: 'replace',
+        path: '/activities/0/statePersonnel/8',
+        value: {
+          key: '171c31da',
+          title: 'Test',
+          description: 'Test',
+          years: {
+            2022: { amt: 1231, perc: 12 },
+            2023: { amt: 12312, perc: 12 }
+          }
+        }
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('update statePersonnel', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'replace',
+        path: '/activities/0/statePersonnel/8',
+        value: {
+          key: '171c31da',
+          title: 'Test',
+          description: 'Test Change',
+          years: {
+            2022: { amt: 1231, perc: 12 },
+            2023: { amt: 12312, perc: 12 }
+          }
+        }
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('remove statePersonnel', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      { op: 'remove', path: '/activities/0/statePersonnel/8' }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('add expenses', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'add',
+        path: '/activities/0/expenses/-',
+        value: {
+          key: 'b8eea4f7',
+          category: '',
+          description: '',
+          years: { 2022: null, 2023: null }
+        }
+      },
+      {
+        op: 'replace',
+        path: '/activities/0/expenses/3',
+        value: {
+          key: '52cde0d7',
+          category: 'Hardware, software, and licensing',
+          description: 'testing',
+          years: { 2022: 31423, 2023: 24312 }
+        }
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('update expenses', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'replace',
+        path: '/activities/0/expenses/3',
+        value: {
+          key: '52cde0d7',
+          category: 'Hardware, software, and licensing',
+          description: 'testing testing',
+          years: { 2022: 31423, 2023: 24312 }
+        }
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('remove expenses', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      { op: 'remove', path: '/activities/0/expenses/3' }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('add contractorResources', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'add',
+        path: '/activities/0/contractorResources/-',
+        value: {
+          key: '8a71cf6b',
+          name: '',
+          description: '',
+          start: '',
+          end: '',
+          files: [],
+          totalCost: null,
+          years: { 2022: null, 2023: null },
+          useHourly: null,
+          hourly: {
+            2022: { hours: null, rate: null },
+            2023: { hours: null, rate: null }
+          }
+        }
+      },
+      {
+        op: 'replace',
+        path: '/activities/0/contractorResources/2',
+        value: {
+          key: '4f55aa39',
+          name: 'Testing',
+          description: '<p>testing</p>',
+          start: '2020-12-12',
+          end: '2022-12-12',
+          files: [],
+          totalCost: 1234123,
+          years: { 2022: 2342, 2023: 23423 },
+          useHourly: false,
+          hourly: {
+            2022: { hours: null, rate: null },
+            2023: { hours: null, rate: null }
+          }
+        }
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('update contractorResources', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      {
+        op: 'replace',
+        path: '/activities/0/contractorResources/2',
+        value: {
+          key: '4f55aa39',
+          name: 'Testing',
+          description: '<p>testing testing</p>',
+          start: '2020-12-12',
+          end: '2022-12-12',
+          files: [],
+          totalCost: 1234123,
+          years: { 2022: 2342, 2023: 23423 },
+          useHourly: false,
+          hourly: {
+            2022: { hours: null, rate: null },
+            2023: { hours: null, rate: null }
+          }
+        }
+      }
+    ]);
     expect(result).toBeTruthy();
   });
 
   test('remove contractorResources', () => {
-    const result = hasBudgetUpdate();
+    const result = hasBudgetUpdate([
+      { op: 'remove', path: '/activities/0/contractorResources/2' }
+    ]);
     expect(result).toBeTruthy();
   });
 });

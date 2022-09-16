@@ -77,7 +77,8 @@ const initialState = {
           contractorResources: [],
           expenses: [],
           statePersonnel: [],
-          key: 'key123'
+          key: 'key123',
+          activityId: 'key123'
         }
       ],
       keyStatePersonnel: {

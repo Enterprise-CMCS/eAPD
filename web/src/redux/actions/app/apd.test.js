@@ -76,7 +76,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
-        { type: UPDATE_BUDGET, state },
+        { type: UPDATE_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: '/apd/bloop' },
         {
           type: ARIA_ANNOUNCE_CHANGE,
@@ -291,6 +291,7 @@ describe('application-level actions', () => {
     });
 
     it('saves and does all the good things', () => {
+      state.patch = [{ path: 'test path' }];
       const updatedApd = {};
       const store = mockStore(state);
 
@@ -337,7 +338,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
-        { type: UPDATE_BUDGET, state },
+        { type: UPDATE_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
           type: ARIA_ANNOUNCE_CHANGE,
@@ -394,7 +395,7 @@ describe('application-level actions', () => {
           path: '/assurancesAndCompliances',
           value: regulations
         },
-        { type: UPDATE_BUDGET, state },
+        { type: UPDATE_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
           type: ARIA_ANNOUNCE_CHANGE,

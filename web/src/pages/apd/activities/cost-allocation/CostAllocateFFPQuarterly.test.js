@@ -160,7 +160,7 @@ const quarterlyFFPWithErrors = {
 
 const defaultProps = {
   activityIndex: 0,
-  aKey: '6ea6b4a2',
+  activityId: '6ea6b4a2',
   announce: jest.fn(),
   isViewOnly: false,
   setContractorFFP: jest.fn(),

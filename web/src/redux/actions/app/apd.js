@@ -39,6 +39,7 @@ import {
   getCanUserEditAPD
 } from '../../selectors/user.selector';
 
+import { hasBudgetUpdate } from '../../../util/budget';
 import axios from '../../../util/api';
 import initialAssurances from '../../../util/regulations';
 
@@ -64,6 +65,9 @@ export const saveApd = () => (dispatch, getState) => {
       .patch(`/apds/${apdID}`, patches)
       .then(res => {
         dispatch({ type: SAVE_APD_SUCCESS, data: res.data.apd });
+        if (hasBudgetUpdate(patches)) {
+          dispatch(updateBudget(apdID));
+        }
         return res.data.apd;
       })
       .catch(error => {
@@ -95,7 +99,6 @@ export const selectApd =
       .get(`/apds/${id}`)
       .then(req => {
         const budget = deepCopy(req.data.budget);
-        console.log({ budget });
         delete req.data.budget;
 
         dispatch({ type: SELECT_APD_SUCCESS, apd: req.data });
