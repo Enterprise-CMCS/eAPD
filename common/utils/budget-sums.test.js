@@ -315,7 +315,7 @@ describe('budget summing methods', () => {
       };
       const actual = sumActivityTotals({
         activity: {
-          id: '123456',
+          activityId: '123456',
           name: 'Program Administration',
           fundingSource: 'MMIS'
         }
@@ -342,7 +342,7 @@ describe('budget summing methods', () => {
       };
       const actual = sumActivityTotals({
         activity: {
-          id: '123456',
+          activityId: '123456',
           name: 'Program Administration',
           fundingSource: 'MMIS',
           contractorResources: [
@@ -2280,6 +2280,7 @@ describe('budget summing methods', () => {
         activity: {
           id: 1,
           key: '1',
+          activityId: '1',
           name: 'hieOne',
           fundingSource: 'HIE',
           contractorResources: [
@@ -2719,6 +2720,7 @@ describe('budget summing methods', () => {
         activity: {
           id: 2,
           key: '2',
+          activityId: '2',
           name: 'hitOne',
           fundingSource: 'HIT',
           contractorResources: [{ years: { 2017: 850, 2018: 900, 2019: 650 } }],
@@ -3145,6 +3147,7 @@ describe('budget summing methods', () => {
         activity: {
           id: 3,
           key: '3',
+          activityId: '3',
           name: 'mmisOne',
           fundingSource: 'MMIS',
           contractorResources: [{ years: { 2017: 775, 2018: 665, 2019: 555 } }],
@@ -3571,6 +3574,7 @@ describe('budget summing methods', () => {
         activity: {
           id: 4,
           key: '4',
+          activityId: '4',
           name: 'nullOne',
           fundingSource: null,
           contractorResources: [{ years: { 2017: 100, 2018: 100, 2019: 100 } }],

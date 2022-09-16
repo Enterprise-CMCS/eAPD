@@ -299,7 +299,7 @@ describe('application-level actions', () => {
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
-        { type: SAVE_APD_SUCCESS, data: updatedApd }
+        { type: SAVE_APD_SUCCESS, apd: updatedApd }
       ];
 
       return store.dispatch(saveApd()).then(() => {

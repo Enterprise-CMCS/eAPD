@@ -878,6 +878,7 @@ describe('APD reducer', () => {
                 expenses: [],
                 fundingSource: null,
                 key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                activityId: expect.stringMatching(/^[a-f0-9]{8}$/),
                 meta: { expanded: false },
                 name: '',
                 outcomes: [],
@@ -1147,7 +1148,7 @@ describe('APD reducer', () => {
         },
         {
           type: SAVE_APD_SUCCESS,
-          data: {
+          apd: {
             id: 'apdID',
             // Medicare and Medicaid are created, 546 years to the day after
             // the First Defenestration of Prague.

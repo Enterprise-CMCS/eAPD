@@ -116,7 +116,8 @@
       "^.+\\.jsx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!@cms-eapd/common|file-type)"
+      "node_modules/(?!@cms-eapd/common|file-type)",
+      "dist"
     ],
     "moduleFileExtensions": [
       "js",

@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import { deepCopy } from '@cms-eapd/common';
+import { deepCopy } from '@cms-eapd/common/utils/utils';
 
 import {
   CREATE_APD_FAILURE,

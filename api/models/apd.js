@@ -1,5 +1,6 @@
 require('./budget');
 const mongoose = require('mongoose');
+const { generateKey } = require('@cms-eapd/common');
 
 const quarterlyFFP = new mongoose.Schema(
   {
@@ -189,7 +190,7 @@ const apdSchema = new mongoose.Schema({
       _id: false,
       activityId: {
         type: String,
-        default: () => new mongoose.Types.ObjectId().toHexString()
+        default: () => generateKey()
       },
       alternatives: String,
       contractorResources: [

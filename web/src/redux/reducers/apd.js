@@ -37,7 +37,8 @@ import {
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE
 } from '../actions/app';
-import { defaultAPDYearOptions, generateKey } from '../../util';
+import { defaultAPDYearOptions } from '../../util';
+import { generateKey } from '@cms-eapd/common/utils/utils';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
@@ -444,10 +445,6 @@ const reducer = (state = initialState, action) => {
         },
         data: {
           ...state.data,
-          activities: action.apd.activities.map(({ activityId }, index) => ({
-            activityId,
-            ...state.data.activities[index]
-          })),
           created: getHumanDatestamp(action.apd.created),
           updated: getHumanTimestamp(action.apd.updated)
         }
