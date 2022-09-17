@@ -32,15 +32,15 @@ const Schedule = ({
     trigger
   } = useForm({
     defaultValues: {
-      start: plannedStartDate || '',
-      end: plannedEndDate || ''
+      plannedStartDate,
+      plannedEndDate
     },
     resolver: joiResolver(scheduleSchema)
   });
 
   useEffect(() => {
     if (adminCheck) {
-      trigger(['start']);
+      trigger(['plannedStartDate']);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -48,7 +48,7 @@ const Schedule = ({
     if (adminCheck && plannedEndDate) {
       trigger();
     } else if (adminCheck && !plannedEndDate) {
-      trigger('start');
+      trigger('plannedStartDate');
     }
   };
 
@@ -57,7 +57,7 @@ const Schedule = ({
       <Fragment>
         <div className="ds-u-padding-y--0 visibility--screen">
           <Controller
-            name="start"
+            name="plannedStartDate"
             control={control}
             render={({
               field: { onChange, ...props },
@@ -73,13 +73,13 @@ const Schedule = ({
 
                   triggerDates();
                 }}
-                errorMessage={errors?.start?.message}
+                errorMessage={errors?.plannedStartDate?.message}
                 errorPlacement="bottom"
               />
             )}
           />
           <Controller
-            name="end"
+            name="plannedEndDate"
             control={control}
             render={({ field: { onChange, ...props } }) => {
               return (
@@ -92,7 +92,7 @@ const Schedule = ({
 
                     triggerDates();
                   }}
-                  errorMessage={errors?.end?.message}
+                  errorMessage={errors?.plannedEndDate?.message}
                   errorPlacement="bottom"
                 />
               );
