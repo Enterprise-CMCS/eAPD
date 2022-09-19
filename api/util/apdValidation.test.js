@@ -94,7 +94,7 @@ const mockApd = {
         }
       ],
       costAllocation: {
-        2022: { ffp: { federal: 90, state: 10 }, other: 105000 },
+        2022: { ffp: { federal: 90, state: 10 }, other: 0 },
         2023: { ffp: { federal: 90, state: 10 }, other: 0 }
       },
       costAllocationNarrative: {

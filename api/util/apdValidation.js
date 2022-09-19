@@ -5,18 +5,26 @@ const {
   activitySummary, // modified schema to export individual fields
   activityDescription, // modified schema to export individual fields
 
-  apdOverview, // used, added hack to workaround fundingSources
+  apdOverview, // used, added hack to workaround fundingSources needing to be passed in
   assurancesAndCompliance, // used
-  costAllocateFFP, // used, updated schema + frontend
+
+  // costAllocateFFP,
+  // otherSources,
+  activityCostAllocationFFP, // modified schema to export individual fields
+  activityCostAllocationOther, // modified schema to export individual fields
+
   costAllocateFFPQuarterly, // skipped, problematic
   costAllocation, // used, updated schema
-  incentivePayments, // skipped, need to refactor schema + frontend
+
+  // incentivePayments,
+  proposedBudgetEhAmt, // modified schema to export individual fields
+  proposedBudgetEpAmt, // modified schema to export individual fields
 
   // keyMedicaid,
   medicaidDirector, // modified schema to export individual fields
   medicaidOffice, // modified schema to export individual fields
 
-  keyPerson, // skipped, validation expecting strings but initial values seem to be booleans?
+  keyPerson, // used, issue with bool/string
   milestones, // used
 
   // nameAndFundingSource,
@@ -24,7 +32,6 @@ const {
   activityFundingSource, // modified schema to export individual fields
 
   nonPersonnelCosts, // used
-  otherSources, // skipped, need to integrate/update existing schema
   outcomeMetric, // used
   personCost, // used, added via .keys joi method to statePersonnel
 
@@ -32,7 +39,7 @@ const {
   activityStartDate, // modified schema to export individual fields, refactored frontend
   activityEndDate, // modified schema to export individual fields, refactored frontend
 
-  privateContractor, // used, issue with useHourly being a bool and validation expecting string
+  privateContractor, // used, issue with bool/string
   standardsAndConditions, // used, updated schema
   statePersonnel // used, added personCost to it
 } = require('@cms-eapd/common');
@@ -55,7 +62,7 @@ const validateAPDDoc = apd => {
     keyStatePersonnel: Joi.object({
       medicaidDirector: medicaidDirector,
       medicaidOffice: medicaidOffice,
-      keyPersonnel: Joi.array().items(Joi.any())
+      keyPersonnel: Joi.array().items(keyPerson)
     }),
     previousActivities: Joi.any(),
     // activities schema copied from schemas/activitiesDashboard.js
@@ -67,7 +74,13 @@ const validateAPDDoc = apd => {
       .items({
         alternatives: Joi.any(),
         contractorResources: Joi.array().items(privateContractor),
-        costAllocation: costAllocateFFP,
+        costAllocation: Joi.object().pattern(
+          /\d{4}/,
+          Joi.object({
+            ffp: activityCostAllocationFFP,
+            other: activityCostAllocationOther
+          })
+        ),
         costAllocationNarrative: costAllocation,
         summary: activitySummary,
         description: activityDescription,
@@ -87,7 +100,12 @@ const validateAPDDoc = apd => {
         quarterlyFFP: Joi.any()
       }),
     proposedBudget: Joi.object({
-      incentivePayments: Joi.any()
+      incentivePayments: Joi.object({
+        ehCt: Joi.any(),
+        epCt: Joi.any(),
+        ehAmt: proposedBudgetEhAmt,
+        epAmt: proposedBudgetEpAmt
+      })
     }),
     assurancesAndCompliances: assurancesAndCompliance
   });

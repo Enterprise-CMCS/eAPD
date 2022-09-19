@@ -23,7 +23,7 @@ import CostAllocationRows, {
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
 
-import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocateFFP';
+import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocationFFP';
 
 const AllFFYsSummaryNarrative = ({
   activityName,

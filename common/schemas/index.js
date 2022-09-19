@@ -6,10 +6,21 @@ export {
 } from './activityOverview';
 export { default as apdOverview } from './apdOverview';
 export { default as assurancesAndCompliance } from './assurancesAndCompliance';
-export { default as costAllocateFFP } from './costAllocateFFP';
+export {
+  default as costAllocationFFP,
+  activityCostAllocationFFP
+} from './costAllocationFFP';
+export {
+  default as costAllocationOther,
+  activityCostAllocationOther
+} from './costAllocationOther';
 export { default as costAllocateFFPQuarterly } from './costAllocateFFPQuarterly';
 export { default as costAllocation } from './costAllocation';
-export { default as incentivePayments } from './incentivePayments';
+export {
+  default as incentivePayments,
+  proposedBudgetEhAmt,
+  proposedBudgetEpAmt
+} from './incentivePayments';
 export {
   default as keyMedicaid,
   medicaidDirector,
@@ -23,7 +34,6 @@ export {
   activityFundingSource
 } from './nameAndFundingSource';
 export { default as nonPersonnelCosts } from './nonPersonnelCosts';
-export { default as otherSources, costAllocationOther } from './otherSources';
 export { default as outcomeMetric } from './outcomeMetric';
 export { default as personCost } from './personCost';
 export {

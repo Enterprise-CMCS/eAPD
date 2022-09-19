@@ -43,6 +43,7 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
 
 const validateAPDDocument = async () => {
   // Get the updated apd json
+  // Stringify it to match how the front-end is validating
   // Call validation from util
   // Return results
 };
