@@ -379,11 +379,11 @@ jobs:
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             packer validate --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var mongo_database=$PREVIEW_MONGO_DATABASE \
-            --var mongo_initdb_root_username=$PREVIEW_MONGO_INITDB_ROOT_USERNAME --var mongo_initdb_root_password=$PREVIEW_MONGO_INITDB_ROOT_PASSWORD \
-            --var mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE --var mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
-            --var mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var mongo_url=$PREVIEW_MONGO_URL --var database_url=$PREVIEW_DATABASE_URL \
-            --var okta_domain=$PREVIEW_MONGO_OKTA_DOMAIN --var okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview 
-            mongo-ami.pkr.hcl
+              --var mongo_initdb_root_username=$PREVIEW_MONGO_INITDB_ROOT_USERNAME --var mongo_initdb_root_password=$PREVIEW_MONGO_INITDB_ROOT_PASSWORD \
+              --var mongo_initdb_database=$PREVIEW_MONGO_INITDB_DATABASE --var mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
+              --var mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var mongo_url=$PREVIEW_MONGO_URL --var database_url=$PREVIEW_DATABASE_URL \
+              --var okta_domain=$PREVIEW_MONGO_OKTA_DOMAIN --var okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview 
+              mongo-ami.pkr.hcl
 
   
   build production staging ami:
