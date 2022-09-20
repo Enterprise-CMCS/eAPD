@@ -359,10 +359,10 @@ jobs:
       - run: 
           name: validate
           working_directory: ~/project/packer
-              command: |
-                packer validate backend-ami.pkr.hcl
-                packer validate mongo-ami.pkr.hcl
-                packer validate preview-ami.pkr.hcl
+          command: |
+              packer validate backend-ami.pkr.hcl
+              packer validate mongo-ami.pkr.hcl
+              packer validate preview-ami.pkr.hcl
 
           
   
