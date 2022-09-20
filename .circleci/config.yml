@@ -360,6 +360,7 @@ jobs:
           name: validate
           working_directory: ~/project/packer
           command: |
+            packer build --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var environment=Production \
               packer validate backend-ami.pkr.hcl
               packer validate mongo-ami.pkr.hcl
               packer validate preview-ami.pkr.hcl
