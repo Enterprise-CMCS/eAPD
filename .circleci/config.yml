@@ -27,10 +27,10 @@ workflows:
     triggers:
       #- schedule:
           #cron: '0 0 * * *'
-          filters:
-            branches:
-              only:
-                - Dio/4008-create-validation
+      filters:
+        branches:
+          only:
+            - Dio/4008-create-validation
                 
     jobs:
       - Build preview link
