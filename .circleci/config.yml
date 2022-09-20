@@ -532,12 +532,23 @@ jobs:
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.16.0; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_HOST=localhost; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_PORT=54325; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:e2e-ci --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" fi
+            nvm use 16.16.0;
+            export NODE_ENV=development
+            export DEV_DB_HOST=localhost
+            export DEV_DB_PORT=54325
+            export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
+            yarn run cy:run:e2e-ci --parallel --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH"
+      # - run:
+      #     name: run e2e tests authentication
+      #     working_directory: ~/project/e2e
+      #     no_output_timeout: 60m
+      #     command: |
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.16.0; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_HOST=localhost; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_PORT=54325; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:e2e-ci --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication"  fi
       # - run:
       #     name: run e2e tests apd - basics
       #     working_directory: ~/project/e2e
