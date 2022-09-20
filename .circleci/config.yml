@@ -29,11 +29,10 @@ workflows:
           #cron: '0 0 * * *'
     filters:
       branches:
-        only:
-          - Dio/4008-create-validation
+        only: Dio/4008-create-validation
                 
     jobs:
-      - Build preview link
+        - Build preview link
       
 
   nightly dependency vulnerability scan:
