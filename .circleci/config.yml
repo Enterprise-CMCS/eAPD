@@ -29,13 +29,12 @@ workflows:
           #cron: '0 0 * * *'
                 
     jobs:
-      filters:
-        branches:
-          only: 
-              - Dio/4008-create-validation
-
         - Build preview link:
-            name: Packer vali preview
+          filters:
+            branches:
+              only: 
+                - Dio/4008-create-validation
+          name: Packer vali preview
       
 
   nightly dependency vulnerability scan:
