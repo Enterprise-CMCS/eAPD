@@ -23,18 +23,15 @@ workflows:
   # Workflow to scan dependencies for vulnerabilities every night
 
 
-  Packer validation Test Dio:
-    #triggers:
-      #- schedule:
-          #cron: '0 0 * * *'
-                
+  Packer validation Test Dio:          
     jobs:
       - Build preview link:
-        filters:
-          branches:
-            only: 
-              - Dio/4008-create-validation
-        name: Packer vali preview
+          name: Packer vali preview
+          filters:
+            branches:
+              only: 
+                - Dio/4008-create-validation
+
       
 
   nightly dependency vulnerability scan:
