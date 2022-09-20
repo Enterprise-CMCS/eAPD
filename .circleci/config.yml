@@ -24,7 +24,7 @@ workflows:
 
 
   Packer validation Test Dio:          
-    riggers:
+    triggers:
             schedule:
               cron: '0 0 * * *'
     jobs:
