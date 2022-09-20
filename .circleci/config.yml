@@ -360,8 +360,7 @@ jobs:
           name: validate
           working_directory: ~/project/packer
           command: |
-            packer validate vpc_id=$VPC_ID -var subnet_id=$SUBNET_ID packer-definition.pkr.hcl
-
+            packer validate --var vpc_id=value1 --var subnet_id=value2 packer-definition.pkr.hcl
           
   
   build production staging ami:
