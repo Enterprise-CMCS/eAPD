@@ -32,8 +32,7 @@ workflows:
     - Build preview link:
       filters:
         branches:
-          only: 
-            - Dio/4008-create-validation
+          only: Dio/4008-create-validation
       name: Packer vali preview
       
 
