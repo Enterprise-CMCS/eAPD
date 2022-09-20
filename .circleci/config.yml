@@ -24,12 +24,13 @@ workflows:
 
 
   Packer validation Test Dio:          
+    riggers:
+            schedule:
+              cron: '0 0 * * *'
     jobs:
       - Build preview link:
           name: Packer vali preview
-          triggers:
-            schedule:
-              cron: '0 0 * * * *'
+          
 
       
 
