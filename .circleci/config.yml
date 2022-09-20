@@ -358,9 +358,10 @@ jobs:
 
       - run: 
           name: validate
+          working_directory: ~/project/packer
           command: |
             packer validate preview-ami.pkr.hcl
-            
+
           
   
   build production staging ami:
