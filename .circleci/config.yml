@@ -27,6 +27,10 @@ workflows:
      triggers:
       - schedule:
           cron: '0 0 * * *'
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - Build preview link:
           name: Packer vali preview
