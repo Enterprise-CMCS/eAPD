@@ -143,7 +143,7 @@ tap.test('database wrappers / apds', async apdsTests => {
         'Error in Activity 1 Milestone 2 endDate; it has been set to null'
       );
       test.equal(
-        updatedAt,
+        updatedAt.toJSON(),
         '1904-10-03T00:00:00.000Z',
         'updatedAt was updated'
       );
@@ -183,7 +183,7 @@ tap.test('database wrappers / apds', async apdsTests => {
           'Activity 1, Milestone 1, milestone was updated'
         );
         test.equal(
-          updatedAt,
+          updatedAt.toJSON(),
           '1904-10-03T00:00:00.000Z',
           'updatedAt was updated'
         );
@@ -206,7 +206,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       ]);
 
       test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt, '1904-10-03T00:00:00.000Z');
+      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
       test.equal(
         programOverview,
         'This is the test of a <a>program overview</a>',
@@ -228,7 +228,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       ]);
 
       test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt, '1904-10-03T00:00:00.000Z');
+      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
       test.notOk(stateUpdated, 'state was not updated');
     });
 
@@ -270,7 +270,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       );
 
       test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt, '1904-10-03T00:00:00.000Z');
+      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
       test.ok(stateUpdated, 'state was updated');
     });
 
