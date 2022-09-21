@@ -33,6 +33,15 @@ workflows:
           name: Packer vali preview
           
 
+  Terraform validation test Dio:
+    filters:
+    branches:
+      only:
+       - Dio/4007-create-validate-terraform
+
+    jobs:
+      - Build preview link Terraform:
+          name: Terraform vali preview
 
 
   nightly dependency vulnerability scan:
@@ -397,6 +406,25 @@ jobs:
             backend-ami.pkr.hcl
 
   
+Build preview link Terraform:
+    docker:
+      - image: cimg/base:2022.06-22.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+
+    steps:
+      - checkout
+      - run: 
+          name: Install Terraform for prev validation
+          command: |
+            terraform init 
+
+
+
+
+
+
   build production staging ami:
     docker:
       - image: cimg/base:2022.06-22.04
