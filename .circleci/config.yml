@@ -471,30 +471,16 @@ jobs:
             node yaml-tests.js
 
   e2e test:
-    machine:
-      image: ubuntu-2004:202104-01
+    docker:
+      - image: cypress/base:10
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     parallelism: 7
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
-      - run:
-          name: set up node
-          working_directory: ~/project
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y libgbm-dev wget fonts-liberation xdg-utils
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome-stable_current_amd64.deb || true
-            sudo apt-get -f install
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-             # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
-            nvm use 16.16.0
       - run:
           name: build images
           no_output_timeout: 30m
