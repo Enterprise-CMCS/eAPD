@@ -472,7 +472,7 @@ jobs:
 
   e2e test:
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
