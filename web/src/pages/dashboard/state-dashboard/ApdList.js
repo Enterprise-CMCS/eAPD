@@ -3,6 +3,8 @@ import PropType from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import Icon, { File, faPlusCircle } from '../../../components/Icons';
 import Instruction from '../../../components/Instruction';
 import DeleteModal from '../../../components/DeleteModal';
@@ -80,18 +82,26 @@ const ApdList = ({
                     {state ? state.name : ''} APDs
                   </h2>
                   {canCreateApd && (
-                    <Button
-                      variation="primary"
-                      className="ds-u-float--right"
-                      onClick={createNew}
-                    >
+                    <Link to={'/apd/new'}>
                       Create new{' '}
                       <span className="ds-u-visibility--screen-reader">
                         APD
                       </span>
                       &nbsp;&nbsp;
                       <Icon icon={faPlusCircle} />
-                    </Button>
+                    </Link>
+                    // <Button
+                    //   variation="primary"
+                    //   className="ds-u-float--right"
+                    //   onClick={createNew}
+                    // >
+                    //   Create new{' '}
+                    //   <span className="ds-u-visibility--screen-reader">
+                    //     APD
+                    //   </span>
+                    //   &nbsp;&nbsp;
+                    //   <Icon icon={faPlusCircle} />
+                    // </Button>
                   )}
                 </div>
               </div>
