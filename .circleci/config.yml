@@ -1,8 +1,5 @@
 version: 2.1
 
-
-
-
 workflows:
   version: 2
 
@@ -36,7 +33,7 @@ workflows:
           name: Packer vali preview
           
 
-      
+
 
   nightly dependency vulnerability scan:
     triggers:
@@ -398,8 +395,6 @@ jobs:
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             packer validate --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var environment=Production \
             backend-ami.pkr.hcl
-
-      
 
   
   build production staging ami:
