@@ -13,7 +13,7 @@ module.exports = defineConfig({
     viewportHeight: 1000,
     defaultCommandTimeout: 36000,
     videoUploadOnPasses: false,
-    numTestsKeptInMemory: 0,
+    numTestsKeptInMemory: 50,
     env: {
       'cypress-react-selector': {
         root: '#app'

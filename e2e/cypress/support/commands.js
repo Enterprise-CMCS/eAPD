@@ -568,3 +568,48 @@ Cypress.Commands.add('injectAxeForA11y', () => {
     });
   });
 });
+
+const severityIndicators = {
+  minor: 'S',
+  moderate: 'M',
+  serious: 'L',
+  critical: 'XL'
+};
+
+function callback(violations) {
+  violations.forEach(violation => {
+    const nodes = Cypress.$(violation.nodes.map(node => node.target).join(','));
+
+    Cypress.log({
+      name: `${severityIndicators[violation.impact]} Size A11Y`,
+      consoleProps: () => violation,
+      $el: nodes,
+      message: `[${violation.help}](${violation.helpUrl})`
+    });
+
+    violation.nodes.forEach(({ target }) => {
+      Cypress.log({
+        name: '🔧',
+        consoleProps: () => violation,
+        $el: Cypress.$(target.join(',')),
+        message: target
+      });
+    });
+  });
+}
+
+Cypress.Commands.add('checkPageA11y', () => {
+  cy.wait(2500);
+  cy.injectAxeForA11y();
+  // cy.configureAxe({
+  //   exclude: [['#nav']]
+  // })
+  cy.checkA11y(
+    null,
+    { exclude: [['#program-introduction-field-wrapper']] },
+    callback
+  );
+});
+
+// includedImpacts: ['critical', 'serious']
+// elementRef: {enabled: true}
