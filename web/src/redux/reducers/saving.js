@@ -4,6 +4,11 @@ import {
   SAVE_APD_SUCCESS,
   SELECT_APD_SUCCESS
 } from '../actions/app';
+import {
+  UPDATE_BUDGET_FAILURE,
+  UPDATE_BUDGET_SUCCESS,
+  UPDATE_BUDGET_REQUEST
+} from '../actions/budget';
 
 const initialState = {
   error: false,
@@ -14,10 +19,18 @@ const initialState = {
 // eslint-disable-next-line default-param-last
 export default (state = initialState, action) => {
   switch (action.type) {
+    case UPDATE_BUDGET_FAILURE:
     case SAVE_APD_FAILURE:
       return { ...state, error: action.data || true, saving: false };
+    case UPDATE_BUDGET_REQUEST:
     case SAVE_APD_REQUEST:
       return { ...state, saving: true };
+    case UPDATE_BUDGET_SUCCESS:
+      return {
+        ...state,
+        error: false,
+        saving: false
+      };
     case SAVE_APD_SUCCESS:
       return {
         ...state,

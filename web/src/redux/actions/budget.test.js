@@ -4,7 +4,9 @@ import thunk from 'redux-thunk';
 import {
   updateBudget,
   loadBudget,
-  UPDATE_BUDGET,
+  LOAD_BUDGET,
+  UPDATE_BUDGET_REQUEST,
+  UPDATE_BUDGET_SUCCESS,
   UPDATE_BUDGET_FAILURE
 } from './budget';
 import axios from '../../util/api';
@@ -28,7 +30,7 @@ describe('budget actions', () => {
     jest.clearAllMocks();
   });
 
-  it('on success, updateBudget should create UPDATE_BUDGET action', async () => {
+  it('on success, updateBudget should create UPDATE_BUDGET_SUCESS action', async () => {
     spy = jest
       .spyOn(axios, 'patch')
       .mockImplementation(() =>
@@ -38,7 +40,10 @@ describe('budget actions', () => {
     await store.dispatch(updateBudget(apdID));
 
     expect(spy).toHaveBeenCalledWith(`/apds/${apdID}/budget`);
-    expect(store.getActions()).toEqual([{ type: UPDATE_BUDGET, budget }]);
+    expect(store.getActions()).toEqual([
+      { type: UPDATE_BUDGET_REQUEST },
+      { type: UPDATE_BUDGET_SUCCESS, budget }
+    ]);
   });
 
   it('on error, updateBudget should create UPDATE_BUDGET_FAILURE action', async () => {
@@ -50,6 +55,7 @@ describe('budget actions', () => {
 
     expect(spy).toHaveBeenCalledWith(`/apds/bad id/budget`);
     expect(store.getActions()).toEqual([
+      { type: UPDATE_BUDGET_REQUEST },
       {
         type: UPDATE_BUDGET_FAILURE,
         data: 'There was an error updating the budget'
@@ -57,10 +63,10 @@ describe('budget actions', () => {
     ]);
   });
 
-  it('load budget should create UPDATE_BUDGET action', async () => {
+  it('load budget should create LOAD_BUDGET action', async () => {
     const budget = { id: 'updated budget' };
     await store.dispatch(loadBudget(budget));
 
-    expect(store.getActions()).toEqual([{ type: UPDATE_BUDGET, budget }]);
+    expect(store.getActions()).toEqual([{ type: LOAD_BUDGET, budget }]);
   });
 });

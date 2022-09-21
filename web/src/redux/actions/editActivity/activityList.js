@@ -1,3 +1,4 @@
+import { generateKey } from '@cms-eapd/common/utils/utils';
 import {
   ADD_APD_ITEM,
   APD_ACTIVITIES_CHANGE,
@@ -10,10 +11,12 @@ import {
  */
 
 export const addActivity = () => (dispatch, getState) => {
+  const key = generateKey();
   dispatch({
     type: ADD_APD_ITEM,
     path: '/activities/-',
-    state: getState()
+    state: getState(),
+    key
   });
   dispatch({
     type: APD_ACTIVITIES_CHANGE,

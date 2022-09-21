@@ -159,7 +159,7 @@ const updateAPDBudget = async (id, stateId) => {
   try {
     const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
     updatedBudget = calculateBudget(apdDoc);
-    await Budget.replaceOne({ _id: apdDoc.budget, stateId }, updatedBudget, {
+    await Budget.replaceOne({ _id: apdDoc.budget }, updatedBudget, {
       multipleCastError: true,
       runValidators: true
     });

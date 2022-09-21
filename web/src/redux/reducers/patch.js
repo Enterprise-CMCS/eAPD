@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
     case ADD_APD_ITEM: {
       return [
         ...state,
-        ...getApdPatchesForAddingItem(action.state.apd, action.path)
+        ...getApdPatchesForAddingItem(action.state.apd, action.path, action.key)
       ];
     }
 

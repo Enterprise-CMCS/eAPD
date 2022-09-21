@@ -81,13 +81,13 @@ export const quarterlyFFPEntry = () =>
 export const newActivity = ({
   name = '',
   fundingSource = null,
-  years = []
+  years = [],
+  key = generateKey()
 } = {}) => {
   const costAllocationNarrativeYears = arrToObj(
     years,
     costAllocationNarrative()
   );
-  const key = generateKey();
 
   return {
     alternatives: '',

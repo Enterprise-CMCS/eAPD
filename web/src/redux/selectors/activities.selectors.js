@@ -116,9 +116,9 @@ export const selectActivityCostSummary = createSelector(
             0
           ),
           federalPercent: 0,
-          federalShare: budget.costsByFFY[year].federal,
+          federalShare: budget?.costsByFFY?.[year]?.federal,
           keyPersonnel: keyPersonnel[year],
-          medicaidShare: budget.costsByFFY[year].medicaid,
+          medicaidShare: budget?.costsByFFY?.[year]?.medicaid,
           nonPersonnel: activity.expenses.map(e => ({
             key: e.key,
             description: e.category,
@@ -145,8 +145,8 @@ export const selectActivityCostSummary = createSelector(
                 sum + personnel.years[year].amt * personnel.years[year].perc,
               0
             ) + keyPersonnel[year].reduce((sum, kp) => sum + kp.totalCost, 0),
-          stateShare: budget.costsByFFY[year].state,
-          totalCost: budget.costsByFFY[year].total
+          stateShare: budget?.costsByFFY?.[year]?.state,
+          totalCost: budget?.costsByFFY?.[year]?.total
         }
       }),
       {}

@@ -28,7 +28,7 @@ import {
   SET_APD_TO_SELECT_ON_LOAD
 } from './symbols';
 import { ARIA_ANNOUNCE_CHANGE } from '../aria';
-import { UPDATE_BUDGET } from '../budget';
+import { LOAD_BUDGET } from '../budget';
 import axios from '../../../util/api';
 import regulations from '../../../util/regulations';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
@@ -76,7 +76,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
-        { type: UPDATE_BUDGET, budget: {} },
+        { type: LOAD_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: '/apd/bloop' },
         {
           type: ARIA_ANNOUNCE_CHANGE,
@@ -338,7 +338,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
-        { type: UPDATE_BUDGET, budget: {} },
+        { type: LOAD_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
           type: ARIA_ANNOUNCE_CHANGE,
@@ -395,7 +395,7 @@ describe('application-level actions', () => {
           path: '/assurancesAndCompliances',
           value: regulations
         },
-        { type: UPDATE_BUDGET, budget: {} },
+        { type: LOAD_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
           type: ARIA_ANNOUNCE_CHANGE,
