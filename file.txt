@@ -5,3 +5,4 @@ One more env var?
 Another one
 Triggering CI
 Trying reformatting CYPRESS_ENV
+Updating variables to make sure they are correct
