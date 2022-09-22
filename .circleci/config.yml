@@ -511,6 +511,8 @@ jobs:
             export TEALIUM_ENV="test"
 
             nvm use 16.16.0
+            yarn install
+            yarn build
             yarn install --frozen-lockfile
             yarn workspace @cms-eapd/common build
             yarn workspace @cms-eapd/api build
