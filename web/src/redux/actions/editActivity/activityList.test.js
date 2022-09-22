@@ -38,6 +38,7 @@ describe('APD activity edit actions for overview section', () => {
       {
         type: ADD_APD_ITEM,
         path: '/activities/-',
+        key: expect.stringMatching(/^[a-f0-9]{8}$/),
         state
       },
       { type: APD_ACTIVITIES_CHANGE, activities: [] }
