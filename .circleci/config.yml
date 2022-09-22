@@ -35,7 +35,6 @@ workflows:
           
 
   Terraform validation test Dio:
-
     jobs:
       - Build preview link Terraform:
         filters:
