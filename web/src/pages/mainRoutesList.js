@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ApdNew from './apd/apd-new/ApdNew';
+import ApdNew from './apd/new/ApdNew';
 import NoMatch from '../components/NoMatch';
 import Dashboard from './dashboard/Dashboard';
 import ApdApplication from '../containers/ApdApplication';
