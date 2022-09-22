@@ -196,7 +196,7 @@ class RichText extends Component {
     return (
       <Fragment>
         <div
-          id={`${id}-wrapper`}
+          id={'tinymce-wrapper'}
           className={
             this.props.error
               ? 'rte--wrapper ds-c-field--error ds-u-radius'

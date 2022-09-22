@@ -102,12 +102,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
-  describe.only('Navigation', () => {
+  describe('Navigation', () => {
     it('confirms navigation', () => {
       cy.log('Click through Continue buttons');
       cy.wrap([...pageTitles]).each((title, index, titles) => {
-        // cy.contains('Activity Schedule Summary').click();
-        cy.checkPageA11y();
         cy.get('.ds-c-vertical-nav__item').contains(title).click();
         cy.get('.ds-h2').should('contain', title);
 
@@ -116,7 +114,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           cy.get('#continue-button').click();
           cy.get('.ds-h2').should('contain', titles[index + 1]);
         }
-        // cy.checkPageA11y();
       });
 
       cy.log('Click through Previous buttons');
@@ -1342,6 +1339,62 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('link', { name: /HITECH IAPD No Activities/i }).click();
       cy.goToActivityDashboard();
       cy.findByText('Add at least one activity.').should('exist');
+    });
+  });
+
+  describe.only('Accessibility Tests', () => {
+    it('Runs on APD Builder', () => {
+      cy.wait(5000); // Allows page to load
+
+      cy.checkPageA11y(); // APD Overview
+      cy.contains('Continue').click();
+
+      cy.checkPageA11y(); // Key State Personnel
+      cy.contains('Continue').click();
+
+      // cy.checkPageA11y(); // Results of Previous Activities
+      cy.contains('Continue').click();
+
+      // cy.checkPageA11y(); // Activities Dashboard
+      // cy.findByRole('button', {name: /Add Activity/i}).click(); // Add back for MMIS tests
+      cy.get('#activities').contains('Edit').click();
+
+      cy.checkPageA11y(); // Activity Overview
+      cy.contains('Continue').click();
+
+      // cy.checkPageA11y(); // Outcomes and Milestones
+      // cy.findByRole('button', {name: /Add Outcome/i}).click()
+      // cy.findByRole('button', {name: /Add Milestone/i}).click()
+      cy.contains('Continue').click();
+
+      // cy.checkPageA11y(); // State Staff and Expenses
+      // cy.findByRole('button', {name: /Add State Staff/i}).click()
+      // cy.findByRole('button', {name: /Add State Expense/i}).click()
+      cy.contains('Continue').click();
+
+      cy.checkPageA11y(); // Private Contractor
+      cy.findByRole('button', { name: /Add Contractor/i }).click();
+      cy.contains('Continue').click();
+
+      // cy.checkPageA11y(); // Cost Allocation and Other Funding
+      cy.contains('Continue').click();
+
+      cy.checkPageA11y(); // Budget and FFP
+      cy.contains('Continue').click();
+
+      cy.checkPageA11y(); // Activity Schedule Summary
+      cy.contains('Continue').click();
+
+      // cy.checkPageA11y(); // Proposed Budget
+      cy.contains('Continue').click();
+
+      cy.checkPageA11y(); // Assurances and Compliance
+      cy.contains('Continue').click();
+
+      // cy.checkPageA11y(); // Executive Summary
+      cy.contains('Continue').click();
+
+      cy.checkPageA11y(); // Export and Submit
     });
   });
 

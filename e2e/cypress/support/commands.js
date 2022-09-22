@@ -601,15 +601,7 @@ function callback(violations) {
 Cypress.Commands.add('checkPageA11y', () => {
   cy.wait(2500);
   cy.injectAxeForA11y();
-  // cy.configureAxe({
-  //   exclude: [['#nav']]
-  // })
-  cy.checkA11y(
-    null,
-    { exclude: [['#program-introduction-field-wrapper']] },
-    callback
-  );
+  cy.checkA11y({ exclude: [['#tinymce-wrapper']] }, null, callback);
 });
 
 // includedImpacts: ['critical', 'serious']
-// elementRef: {enabled: true}
