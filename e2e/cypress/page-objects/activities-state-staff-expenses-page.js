@@ -20,7 +20,9 @@ class ActivitiesStateStaffExpensesPage {
       .eq(index)
       .click();
     // Specifically click on the delete button on the modal
-    cy.get('.ds-c-button--danger').click();
+    cy.findByRole('main').within(() => {
+      cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+    });
     cy.findByRole('banner', { name: /Delete State Staff Expenses?/i }).should(
       'not.exist'
     );
@@ -129,7 +131,9 @@ class ActivitiesStateStaffExpensesPage {
       .eq(index)
       .click();
     // Specifically click on the delete button on the modal
-    cy.get('.ds-c-button--danger').click();
+    cy.findByRole('main').within(() => {
+      cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+    });
   };
 
   fillExpense = ({ years, expenseIndex, category, costs, desc }) => {

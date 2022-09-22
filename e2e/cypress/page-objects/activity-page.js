@@ -49,7 +49,10 @@ class ActivityPage {
 
     cy.contains('Delete').click();
     cy.contains(heading).should('exist');
-    cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+    cy.findByRole('main').within(() => {
+      cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+    });
+    cy.waitForSave();
 
     cy.contains(heading).should('not.exist');
     cy.contains(alert).should('exist');

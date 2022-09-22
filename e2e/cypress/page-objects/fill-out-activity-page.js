@@ -47,7 +47,10 @@ class FillOutActivityPage {
       // Tests deleting Outcomes
       cy.contains('Delete').click();
       cy.contains('Delete Outcome and Metrics?').should('exist');
-      cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+      cy.findByRole('main').within(() => {
+        cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+      });
+      cy.waitForSave();
 
       cy.contains(outcomes.names[0]).should('not.exist');
       cy.contains(`Outcome: ${outcomes.names[1]}`).should('exist');
@@ -65,7 +68,10 @@ class FillOutActivityPage {
       // Tests deleting milestone
       cy.findAllByText('Delete').eq(1).click();
       cy.contains('Delete Milestone?').should('exist');
-      cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+      cy.findByRole('main').within(() => {
+        cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+      });
+      cy.waitForSave();
 
       cy.contains('Delete Milestone?').should('not.exist');
       cy.contains(milestones.names[0]).should('not.exist');
@@ -221,7 +227,10 @@ class FillOutActivityPage {
     if (testDelete) {
       cy.findAllByText('Delete').eq(0).click();
       cy.contains('Delete Private Contractor?').should('exist');
-      cy.get('.ds-c-button--danger').click();
+      cy.findByRole('main').within(() => {
+        cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+      });
+      cy.waitForSave();
 
       cy.contains(`1. ${contractorList[0].name}`).should('not.exist');
       cy.contains(`1. ${contractorList[1].name}`).should('exist');
@@ -332,6 +341,7 @@ class FillOutActivityPage {
         } else {
           cy.get('select.ds-c-field').eq(ffyIndex).select(secondSplit);
         }
+        cy.waitForSave();
 
         cy.get('[data-cy="FFPFedStateSplitTable"]')
           .eq(ffyIndex)

@@ -13,25 +13,10 @@ async function up() {
 
   await Promise.all(
     apds.map(async apd => {
-      logger.info(
-        `APD id: ${apd._id}, status: ${apd.status}, stateId: ${apd.stateId}, years: ${apd.years}`
-      );
-      console.log(`APD ${JSON.stringify(apd.toObject(), null, 2)}`);
-      const budgetData = calculateBudget(apd.toObject());
-      console.log(`budgetData: ${JSON.stringify(budgetData, null, 2)}`);
-
-      const budget = new Budget({
-        apdId: apd._id,
-        status: apd.status,
-        stateId: apd.stateId,
-        years: [...apd.years],
-        ...budgetData
-      });
-      console.log(`budget ${JSON.stringify(budget, null, 2)}`);
+      logger.info(`Creating budget for APD Id: ${apd._id}`);
+      const budget = await Budget.create(calculateBudget(apdDoc.toJSON()));
       apd.budget = budget;
-
       await apd.save();
-      await budget.save();
     })
   ).catch(err => {
     logger.error(err);
@@ -42,6 +27,20 @@ async function up() {
 /**
  * Make any changes that UNDO the up function side effects here (if possible)
  */
-async function down() {}
+async function down() {
+  await setup();
+  await Budget.deleteMany();
+  const apds = await APD.find({});
+
+  await Promise.all(
+    apds.map(async apd => {
+      delete apd.budget;
+      await apd.save();
+    })
+  ).catch(err => {
+    logger.error(err);
+  });
+  await teardown();
+}
 
 module.exports = { up, down };
