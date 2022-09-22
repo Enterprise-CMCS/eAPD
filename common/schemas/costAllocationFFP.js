@@ -20,6 +20,7 @@ export const activityCostAllocationFFP = Joi.object({
       ]
     })
     .messages({
+      'alternatives.base': 'Select a federal-state split.',
       'alternatives.any': 'Select a federal-state split.'
     })
 });

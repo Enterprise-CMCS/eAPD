@@ -16,6 +16,7 @@ export const activityEndDate = Joi.date()
   .allow('')
   .min(Joi.ref('plannedStartDate'))
   .messages({
+    'date.base': 'Provide an end date.',
     'date.format': 'Provide an end date.',
     'date.min': 'Provide an end date that is after the start date.',
     'any.ref': 'Provide an end date that is after the start date.'
