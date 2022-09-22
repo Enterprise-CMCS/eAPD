@@ -418,7 +418,7 @@ jobs:
       - run: 
           name: Terraform Init 
           command: |
-            terraform init --input-false
+            terraform init --input=false
 
   build production staging ami:
     docker:
