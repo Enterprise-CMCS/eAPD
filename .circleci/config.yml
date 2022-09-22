@@ -35,14 +35,14 @@ workflows:
           
 
   Terraform validation test Dio:
-    filters:
-      branches:
-        only:
-          - Dio/4007-create-validate-terraform
 
     jobs:
       - Build preview link Terraform:
-          name: Terraform vali preview
+        filters:
+          branches:
+            only:
+              - Dio/4007-create-validate-terraform
+        name: Terraform vali preview
 
 
   nightly dependency vulnerability scan:
@@ -421,11 +421,6 @@ jobs:
           command: |
             terraform init 
 
-
-
-
-
-
   build production staging ami:
     docker:
       - image: cimg/base:2022.06-22.04
@@ -450,6 +445,7 @@ jobs:
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY          
             packer build --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var environment=Production \
               backend-ami.pkr.hcl
+
   cleanup preview ami:
     docker:
       - image: cimg/base:2022.06-22.04
