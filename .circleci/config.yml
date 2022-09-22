@@ -419,6 +419,16 @@ jobs:
           name: Terraform Init 
           command: |
             terraform init --input=false
+      - run: 
+          name: validate main.tf
+          working_directory: ~/project/terraform/legacy/
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            packer validate 
+            
+            main.tf     
 
   build production staging ami:
     docker:
