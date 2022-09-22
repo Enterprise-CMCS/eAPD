@@ -47,7 +47,7 @@ class FillOutActivityPage {
       // Tests deleting Outcomes
       cy.contains('Delete').click();
       cy.contains('Delete Outcome and Metrics?').should('exist');
-      cy.findByRole('main').within(() => {
+      cy.get('.ds-c-dialog__body').within(() => {
         cy.findByRole('button', { name: /Delete/i }).click({ force: true });
       });
       cy.waitForSave();
@@ -68,7 +68,7 @@ class FillOutActivityPage {
       // Tests deleting milestone
       cy.findAllByText('Delete').eq(1).click();
       cy.contains('Delete Milestone?').should('exist');
-      cy.findByRole('main').within(() => {
+      cy.get('.ds-c-dialog__body').within(() => {
         cy.findByRole('button', { name: /Delete/i }).click({ force: true });
       });
       cy.waitForSave();
@@ -227,7 +227,7 @@ class FillOutActivityPage {
     if (testDelete) {
       cy.findAllByText('Delete').eq(0).click();
       cy.contains('Delete Private Contractor?').should('exist');
-      cy.findByRole('main').within(() => {
+      cy.get('.ds-c-dialog__body').within(() => {
         cy.findByRole('button', { name: /Delete/i }).click({ force: true });
       });
       cy.waitForSave();

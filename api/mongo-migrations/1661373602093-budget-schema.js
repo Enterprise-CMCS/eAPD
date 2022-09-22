@@ -1,5 +1,5 @@
 const logger = require('../logger')('migrate-mongoose/migrate-budget-schema');
-const { calculateBudget } = require('@cms-eapd/common');
+const { calculateBudget, generateKey } = require('@cms-eapd/common');
 const { setup, teardown } = require('../db/mongodb');
 const { APD, Budget } = require('../models');
 
@@ -14,7 +14,12 @@ async function up() {
   await Promise.all(
     apds.map(async apd => {
       logger.info(`Creating budget for APD Id: ${apd._id}`);
-      const budget = await Budget.create(calculateBudget(apdDoc.toJSON()));
+      // need to add activityId to all activities
+      apd.activities = apd.toJSON().activities.map(activity => ({
+        ...activity,
+        activityId: generateKey()
+      }));
+      const budget = await Budget.create(calculateBudget(apd.toJSON()));
       apd.budget = budget;
       await apd.save();
     })

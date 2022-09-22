@@ -20,7 +20,7 @@ class ActivitiesStateStaffExpensesPage {
       .eq(index)
       .click();
     // Specifically click on the delete button on the modal
-    cy.findByRole('main').within(() => {
+    cy.get('.ds-c-dialog__body').within(() => {
       cy.findByRole('button', { name: /Delete/i }).click({ force: true });
     });
     cy.findByRole('banner', { name: /Delete State Staff Expenses?/i }).should(
@@ -131,7 +131,7 @@ class ActivitiesStateStaffExpensesPage {
       .eq(index)
       .click();
     // Specifically click on the delete button on the modal
-    cy.findByRole('main').within(() => {
+    cy.get('.ds-c-dialog__body').within(() => {
       cy.findByRole('button', { name: /Delete/i }).click({ force: true });
     });
   };

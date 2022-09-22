@@ -198,7 +198,9 @@ Cypress.Commands.add('deleteAPD', apdId => {
 
       cy.wrap($el).parent().parent().parent().contains('Delete').click();
 
-      cy.get('.ds-c-button--danger').click();
+      cy.get('.ds-c-dialog__body').within(() => {
+        cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+      });
       cy.wait('@delete');
     });
   }
