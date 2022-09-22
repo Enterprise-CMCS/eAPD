@@ -35,9 +35,9 @@ workflows:
 
   Terraform validation test Dio:
     filters:
-    branches:
-      only:
-       - Dio/4007-create-validate-terraform
+      branches:
+        only:
+          - Dio/4007-create-validate-terraform
 
     jobs:
       - Build preview link Terraform:
