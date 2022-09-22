@@ -37,11 +37,11 @@ workflows:
   Terraform validation test Dio:
     jobs:
       - Build preview link Terraform:
-        filters:
-          branches:
-            only:
-              - Dio/4007-create-validate-terraform
-        name: Terraform vali preview
+          filters:
+            branches:
+              only:
+                - Dio/4007-create-validate-terraform
+          name: Terraform vali preview
 
 
   nightly dependency vulnerability scan:
