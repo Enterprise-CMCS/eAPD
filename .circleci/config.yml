@@ -408,7 +408,7 @@ jobs:
   
   Build preview link Terraform:
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light 
+      - image: cimg/base:2022.06-22.04
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
@@ -418,15 +418,15 @@ jobs:
       - run: 
           name: Terraform Init 
           command: |
-            terraform init --input=false
+            terraform init 1.2.4 --input=false
       - run: 
           name: validate main.tf
-          working_directory: ~/project/terraform/legacy
+          working_directory: ~/project/terraform/legacy/main.tf
           command: |
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-            terraform validate main.tf
+            terraform validate
             
                 
 
