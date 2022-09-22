@@ -418,7 +418,7 @@ jobs:
       - run: 
           name: Terraform Init 
           command: |
-            terraform init 1.2.4 --input=false
+            terraform init --input=false
       - run: 
           name: validate main.tf
           working_directory: ~/project/terraform/legacy/main.tf
