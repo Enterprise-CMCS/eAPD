@@ -63,6 +63,7 @@ services:
     depends_on:
       - db
       - mongo
+      - web
     environment:
       - PORT=8000
       - NODE_ENV=development
