@@ -5,7 +5,7 @@ const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
 const { APD } = require('../models/index');
-const { validateAPDDoc } = require('../utils/apdValidation.js');
+const { validateAPDDoc } = require('../util/apdValidation.js');
 
 const createAPD = async apd => {
   const newApd = await APD.create(apd);
@@ -42,7 +42,7 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
   return newDocument;
 };
 
-const validateAPDDocument = async () => {
+const validateAPDDocument = async id => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
   // Stringify it to match how the front-end is validating.

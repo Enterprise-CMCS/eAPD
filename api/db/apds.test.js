@@ -7,7 +7,8 @@ const {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument
+  updateAPDDocument,
+  validateAPDDocument
 } = require('./apds');
 const { setup, teardown } = require('./mongodb');
 const { getConnectionStatus } = require('./mongodb');
@@ -268,6 +269,17 @@ tap.test('database wrappers / apds', async apdsTests => {
     });
   });
 
+  apdsTests.test(
+    'validating an APD for admin check',
+    async validateAPDDocumentTests => {
+      validateAPDDocumentTests.test(
+        'when no errors are expected',
+        async test => {
+          console.log('testing...', validateAPDDocument(id));
+        }
+      );
+    }
+  );
   apdsTests.teardown(async () => {
     if (id) {
       await deleteAPD(id);

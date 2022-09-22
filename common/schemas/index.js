@@ -1,3 +1,6 @@
+// Combined schema is used for validating a full APD object
+export { default as combinedSchemas } from './combined';
+
 export { default as activitiesDashboard } from './activitiesDashboard';
 export {
   default as activityOverview,

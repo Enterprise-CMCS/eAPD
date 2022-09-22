@@ -5,7 +5,8 @@ const apdOverviewSchema = Joi.object({
   // conditionally validating the narratives below
   fundingSources: Joi.array().items(Joi.string()).required(),
   programOverview: Joi.string().messages({
-    'string.empty': 'Provide a brief introduction to the state program.'
+    'string.empty': 'Provide a brief introduction to the state program.',
+    'string.base': 'Do it'
   }),
   narrativeHIT: Joi.when('fundingSources', {
     is: Joi.array().items(Joi.string().valid('HIT').required(), Joi.any()),
