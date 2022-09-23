@@ -275,7 +275,8 @@ tap.test('database wrappers / apds', async apdsTests => {
       validateAPDDocumentTests.test(
         'when no errors are expected',
         async test => {
-          console.log('testing...', validateAPDDocument(id));
+          const { errors } = await validateAPDDocument(id);
+          test.equal(errors, null); // eslint-disable-line no-underscore-dangle
         }
       );
     }

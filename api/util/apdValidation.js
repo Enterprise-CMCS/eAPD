@@ -110,7 +110,7 @@ const validateAPDDoc = apd => {
     return null;
   }
 
-  const errorList = buildErrorList(validationResults, apd._id);
+  const errorList = buildErrorList(validationResults, apd._id); // eslint-disable-line no-underscore-dangle
 
   return errorList;
 };
