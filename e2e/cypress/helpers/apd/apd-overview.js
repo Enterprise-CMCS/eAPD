@@ -85,7 +85,7 @@ export const testAPDOverviewWithData = () => {
 
       cy.contains('Delete FFY?').should('exist');
       cy.wait(500);
-      cy.contains('Cancel').click();
+      cy.get('button[id="dialog-cancel"]').click({ force: true });
 
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(
         'be.checked'

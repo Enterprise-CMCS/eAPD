@@ -379,6 +379,7 @@ class FillOutActivityPage {
                 });
               });
             });
+            cy.waitForSave();
           }
           cy.get(table)
             .getActivityTable()
