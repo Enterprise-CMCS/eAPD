@@ -372,14 +372,17 @@ class FillOutActivityPage {
             cy.get(table).within(() => {
               cy.get('input').then(inputFields => {
                 _.forEach(inputFields, (elem, i) => {
+                  const value = budgetData.quarterVals[ffyIndex][i];
+                  cy.log(`value: ${value}`);
                   cy.get(elem)
                     .clear()
-                    .type(budgetData.quarterVals[ffyIndex][i])
+                    .type(value, { delay: 1 })
+                    .should('have.value', `${value}`)
                     .blur();
+                  cy.waitForSave();
                 });
               });
             });
-            cy.waitForSave();
           }
           cy.get(table)
             .getActivityTable()
