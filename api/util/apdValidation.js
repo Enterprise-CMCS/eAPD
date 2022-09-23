@@ -1,10 +1,10 @@
 const { combinedSchemas } = require('@cms-eapd/common');
 
 /**
- * Builds an error list for use in the admin check panel
+ * Builds an error list for use in the frontend admin check panel
  * @param {Array} validationResults An array of errors
- * @returns an array of errors with section name, url, error message
- * }
+ * @returns an array of errors with section name, url,
+ * error message and completion status
  */
 const buildErrorList = (validationResults, apdId) => {
   const getSectionName = errorPath => {
@@ -80,7 +80,8 @@ const buildErrorList = (validationResults, apdId) => {
 
 /**
  * Validates entire APD object using a combined schema
- * Schemas are shared with the frontend to support inline validation
+ * Schemas are shared with the frontend to support inline
+ * and field-level validation
  * @param {Object} apd The full apd object
  * @returns an array of validation errors
  * }
@@ -88,7 +89,7 @@ const buildErrorList = (validationResults, apdId) => {
 const validateAPDDoc = apd => {
   // apdOverview Schema relies on knowing the funding source(s)
   // to do a conditional validation
-  const getFundingSources = apd.activities.map(activity => {
+  const getFundingSources = apd?.activities?.map(activity => {
     return activity.fundingSource;
   });
 
@@ -110,7 +111,7 @@ const validateAPDDoc = apd => {
   }
 
   const errorList = buildErrorList(validationResults, apd._id);
-  console.log(errorList);
+
   return errorList;
 };
 

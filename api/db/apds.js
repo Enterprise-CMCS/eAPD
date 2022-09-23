@@ -45,7 +45,7 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
 const validateAPDDocument = async id => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
-  // Stringify it to match how the front-end is validating.
+  // Stringify it to match how the front-end is validating
   const apdDocStringified = JSON.parse(JSON.stringify(apdDoc));
   // Call validation from util, pass in apd (may need to also pass in apd ID)
   const validationErrors = validateApdDoc(apdDocStringified);

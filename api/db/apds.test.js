@@ -280,6 +280,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       );
     }
   );
+
   apdsTests.teardown(async () => {
     if (id) {
       await deleteAPD(id);
