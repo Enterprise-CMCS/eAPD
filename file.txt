@@ -1,9 +1,0 @@
-Added more env vars to CircleCI
-Figuring out working with a forked repo
-Added more env vars
-One more env var?
-Another one
-Triggering CI
-Trying reformatting CYPRESS_ENV
-Updating variables to make sure they are correct
-Added Chromatic env var
