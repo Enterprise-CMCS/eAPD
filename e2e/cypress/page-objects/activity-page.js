@@ -49,9 +49,7 @@ class ActivityPage {
 
     cy.contains('Delete').click();
     cy.contains(heading).should('exist');
-    cy.get('.ds-c-dialog__body').within(() => {
-      cy.findByRole('button', { name: /Delete/i }).click({ force: true });
-    });
+    cy.get('button[id="dialog-delete"]').click({ force: true });
     cy.waitForSave();
 
     cy.contains(heading).should('not.exist');

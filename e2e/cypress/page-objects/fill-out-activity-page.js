@@ -47,9 +47,7 @@ class FillOutActivityPage {
       // Tests deleting Outcomes
       cy.contains('Delete').click();
       cy.contains('Delete Outcome and Metrics?').should('exist');
-      cy.get('.ds-c-dialog__body').within(() => {
-        cy.findByRole('button', { name: /Delete/i }).click({ force: true });
-      });
+      cy.get('button[id="dialog-delete"]').click({ force: true });
       cy.waitForSave();
 
       cy.contains(outcomes.names[0]).should('not.exist');
@@ -68,9 +66,7 @@ class FillOutActivityPage {
       // Tests deleting milestone
       cy.findAllByText('Delete').eq(1).click();
       cy.contains('Delete Milestone?').should('exist');
-      cy.get('.ds-c-dialog__body').within(() => {
-        cy.findByRole('button', { name: /Delete/i }).click({ force: true });
-      });
+      cy.get('button[id="dialog-delete"]').click({ force: true });
       cy.waitForSave();
 
       cy.contains('Delete Milestone?').should('not.exist');
@@ -227,9 +223,7 @@ class FillOutActivityPage {
     if (testDelete) {
       cy.findAllByText('Delete').eq(0).click();
       cy.contains('Delete Private Contractor?').should('exist');
-      cy.get('.ds-c-dialog__body').within(() => {
-        cy.findByRole('button', { name: /Delete/i }).click({ force: true });
-      });
+      cy.get('button[id="dialog-delete"]').click({ force: true });
       cy.waitForSave();
 
       cy.contains(`1. ${contractorList[0].name}`).should('not.exist');
@@ -380,7 +374,8 @@ class FillOutActivityPage {
                 _.forEach(inputFields, (elem, i) => {
                   cy.get(elem)
                     .clear()
-                    .type(budgetData.quarterVals[ffyIndex][i]);
+                    .type(budgetData.quarterVals[ffyIndex][i])
+                    .blur();
                 });
               });
             });

@@ -101,9 +101,7 @@ export const testAPDOverviewWithData = () => {
       }).uncheck({
         force: true
       });
-      cy.get('.ds-c-dialog__body').within(() => {
-        cy.findByRole('button', { name: /Delete FFY/i }).click({ force: true });
-      });
+      cy.get('button[id="dialog-delete"]').click({ force: true });
       cy.contains('Delete FFY?').should('not.exist');
 
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(

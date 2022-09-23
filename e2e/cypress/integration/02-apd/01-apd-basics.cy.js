@@ -1357,9 +1357,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .contains('Delete')
         .click();
 
-      cy.get('.ds-c-dialog__body').within(() => {
-        cy.findByRole('button', { name: /Delete/i }).click({ force: true });
-      });
+      cy.get('button[id="dialog-delete"]').click({ force: true });
       cy.waitForSave();
 
       cy.get(`a[href='${apdUrl}']`).should('not.exist');
