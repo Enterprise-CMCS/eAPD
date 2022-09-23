@@ -7,7 +7,13 @@
 
 describe(
   'Logging in with a state staff user (no MFA) with an approved affiliation',
-  { tags: ['@auth'] },
+  {
+    tags: ['@auth'],
+    retries: {
+      runMode: 1,
+      openMode: 1
+    }
+  },
   () => {
     beforeEach(() => {
       cy.clearAuthCookies();
