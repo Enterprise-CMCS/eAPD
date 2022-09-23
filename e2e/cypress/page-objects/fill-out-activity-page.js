@@ -379,10 +379,12 @@ class FillOutActivityPage {
                     .type(value, { delay: 1 })
                     .should('have.value', `${value}`)
                     .blur();
+                  cy.wait(300);
                   cy.waitForSave();
                 });
               });
             });
+            cy.waitForSave();
           }
           cy.get(table)
             .getActivityTable()

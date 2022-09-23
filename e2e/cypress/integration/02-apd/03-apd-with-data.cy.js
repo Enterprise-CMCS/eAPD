@@ -53,42 +53,42 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       });
     });
 
-    // describe('Key State Personnel', () => {
-    //   testKeyStatePersonnelWithData(years);
-    // });
+    describe('Key State Personnel', () => {
+      testKeyStatePersonnelWithData(years);
+    });
 
-    // describe('Results of Previous Activities', () => {
-    //   testResultsOfPreviousActivitiesWithData(years);
-    // });
+    describe('Results of Previous Activities', () => {
+      testResultsOfPreviousActivitiesWithData(years);
+    });
 
     describe('Activities', () => {
-      // describe('Add HIT Activity', () => {
-      //   addHITActivity(years);
-      // });
+      describe('Add HIT Activity', () => {
+        addHITActivity(years);
+      });
 
       describe('Add HIE Activity', () => {
         addHIEActivity(years);
       });
 
-      // describe('Add MMIS Activity', () => {
-      //   addMMISActivity(years);
-      // });
+      describe('Add MMIS Activity', () => {
+        addMMISActivity(years);
+      });
     });
 
-    // describe('Activity Schedule Summary', () => {
-    //   testActivityScheduleSummaryWithData(years);
-    // });
+    describe('Activity Schedule Summary', () => {
+      testActivityScheduleSummaryWithData(years);
+    });
 
-    // describe('Proposed Budget', () => {
-    //   testProposedBudgetWithData(years);
-    // });
+    describe('Proposed Budget', () => {
+      testProposedBudgetWithData(years);
+    });
 
-    // describe('Assurances and Compliance', () => {
-    //   testAssurancesAndComplianceWithData(years);
-    // });
+    describe('Assurances and Compliance', () => {
+      testAssurancesAndComplianceWithData(years);
+    });
 
-    // describe('Executive Summary', () => {
-    //   testExecutiveSummaryWithData(years);
-    // });
+    describe('Executive Summary', () => {
+      testExecutiveSummaryWithData(years);
+    });
   });
 });
