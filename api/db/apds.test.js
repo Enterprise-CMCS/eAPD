@@ -7,8 +7,7 @@ const {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument,
-  updateAPDBudget
+  updateAPDDocument
 } = require('./apds');
 const { setup, teardown } = require('./mongodb');
 const { APD, Budget } = require('../models/index');
@@ -276,48 +275,6 @@ tap.test('database wrappers / apds', async apdsTests => {
 
     updateAPDDocumentTests.afterEach(async () => {
       clock.restore();
-    });
-  });
-
-  apdsTests.test('updating Budget', async updateBudgetDocumentTests => {
-    updateBudgetDocumentTests.test('with APD changes', async test => {
-      const { budget: initialBudget } = await APD.findOne({ _id: id })
-        .lean()
-        .populate('budget');
-
-      await updateAPDDocument(id, 'co', [
-        {
-          op: 'add',
-          path: '/activities/0/expenses/-',
-          value: {
-            key: '4dcd4f7d',
-            category: '',
-            description: '',
-            years: { 2022: null, 2023: null }
-          }
-        },
-        {
-          op: 'replace',
-          path: '/activities/0/expenses/3',
-          value: {
-            key: '413f62c9',
-            category: 'Travel',
-            description: 'traveling to something',
-            years: { 2022: 1000, 2023: 12000 }
-          }
-        }
-      ]);
-
-      let errors = null;
-      let updatedBudget;
-      try {
-        updatedBudget = await updateAPDBudget(id, 'co');
-      } catch (e) {
-        errors = e;
-      }
-
-      test.equal(errors, null, 'no errors');
-      test.notSame(initialBudget, updatedBudget, 'Budget has been updated');
     });
   });
 

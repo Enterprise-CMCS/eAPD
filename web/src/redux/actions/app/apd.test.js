@@ -299,6 +299,24 @@ describe('application-level actions', () => {
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
+        { type: SAVE_APD_SUCCESS, apd: {} }
+        // { type: LOAD_BUDGET, budget: {} } doesn't dispatch this action because the patch isn't in the list of budget update patches
+      ];
+
+      return store.dispatch(saveApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('saves and updates budget when necessary', () => {
+      state.patch = [{ path: '/years' }];
+      const updatedApd = { budget: {} };
+      const store = mockStore(state);
+
+      fetchMock.onPatch('/apds/id-to-update').reply(200, { apd: updatedApd });
+
+      const expectedActions = [
+        { type: SAVE_APD_REQUEST },
         { type: SAVE_APD_SUCCESS, apd: {} },
         { type: LOAD_BUDGET, budget: {} }
       ];

@@ -1727,56 +1727,6 @@ Object {
         ],
       },
     },
-    "/apds/{id}/budget": Object {
-      "patch": Object {
-        "description": "Retrieves the APD from the database and updates the budget for it.",
-        "parameters": Array [
-          Object {
-            "description": "The ID of the apd to update the budget of",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": Object {
-              "type": "number",
-            },
-          },
-        ],
-        "responses": Object {
-          "200": Object {
-            "content": Object {
-              "application/json": Object {
-                "schema": Object {
-                  "$ref": "#/components/schemas/apd/properties/budget",
-                },
-              },
-            },
-            "description": "The updated budget",
-          },
-          "400": Object {
-            "description": "The updated failed due to a problem",
-          },
-          "401": Object {
-            "description": "The user is not logged in",
-          },
-          "403": Object {
-            "description": "The apd ID does not match any known apds for the user",
-          },
-          "404": Object {
-            "description": "The apd does not exist",
-          },
-        },
-        "security": Array [
-          Object {
-            "bearerAuth": Array [],
-          },
-        ],
-        "summary": "Update the budget of an APD",
-        "tags": Array [
-          "APDs",
-          "budget",
-        ],
-      },
-    },
     "/apds/{id}/events": Object {
       "post": Object {
         "description": "Posts an event, associates it with a given APD, and stores any provided metadata.",

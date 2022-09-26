@@ -1916,7 +1916,11 @@ Object {
 }
 `;
 
-exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a body that is not valid 1`] = `""`;
+exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a body that is not valid 1`] = `
+Object {
+  "error": "invalid Token",
+}
+`;
 
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
 
