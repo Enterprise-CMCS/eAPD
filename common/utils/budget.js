@@ -745,7 +745,8 @@ export const sumMMISbyFFP = ({
 
     // Then do basically the same as updateCosts() above, but we only
     // need to track subtotals, not individual cost categories
-    [ffpLevel, 'combined'].forEach(category => {
+    const array = [ffpLevel, 'combined'];
+    array.forEach(category => {
       updatedBudget.mmisByFFP[category][year].federal +=
         totalMedicaidCostShares.fedShare;
       updatedBudget.mmisByFFP[category].total.federal +=
