@@ -43,10 +43,6 @@ module.exports = defineConfig({
       resetmfa: 'resetmfa',
       resetmfa_pw: '',
       lockedoutmfa: 'lockedoutmfa'
-    },
-    retries: {
-      runMode: 1,
-      openMode: 1
     }
   },
 

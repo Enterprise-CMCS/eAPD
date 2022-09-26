@@ -85,7 +85,7 @@ const EntryDetails = ({
       <Review
         className="entry-details--review"
         heading={title}
-        headingLevel="4"
+        headingLevel="3"
         editContent={editContent}
       >
         {

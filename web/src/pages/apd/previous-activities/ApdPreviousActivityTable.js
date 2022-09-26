@@ -41,18 +41,21 @@ const ApdPreviousActivityTable = ({
           <th
             id="prev_act_hithie_total_approved"
             className="ds-u-text-align--right"
+            scope="col"
           >
             {TABLE_HEADERS.approvedTotal}
           </th>
           <th
             id="prev_act_hithie_federal_approved"
             className="ds-u-text-align--right"
+            scope="col"
           >
             {TABLE_HEADERS.approved()}
           </th>
           <th
             id="prev_act_hithie_federal_actual"
             className="ds-u-text-align--right"
+            scope="col"
           >
             {TABLE_HEADERS.actual}
           </th>
@@ -65,15 +68,12 @@ const ApdPreviousActivityTable = ({
 
           return (
             <tr key={year}>
-              <th
-                id={`prev_act_hithie_row_${year}`}
-                headers="prev_act_hit_header_ffy"
-              >
+              <th id={`prev_act_hithie_row_${year}`} scope="row">
                 {TABLE_HEADERS.ffy(year)}
               </th>
 
               <td
-                headers={`prev_act_hithie_row_${year} prev_act_hithie_total prev_act_hithie_total_approved`}
+                headers="prev_act_hithie_total_approved"
                 className={isViewOnly ? 'budget-table--number' : ''}
               >
                 {isViewOnly ? (
@@ -94,14 +94,14 @@ const ApdPreviousActivityTable = ({
               </td>
 
               <td
-                headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_approved`}
+                headers="prev_act_hithie_federal_approved"
                 className="budget-table--number"
               >
                 <Dollars>{federalApproved}</Dollars>
               </td>
 
               <td
-                headers={`prev_act_hithie_row_${year} prev_act_hithie_federal prev_act_hithie_federal_actual`}
+                headers="prev_act_hithie_federal_actual"
                 className={isViewOnly ? 'budget-table--number' : ''}
               >
                 {isViewOnly ? (

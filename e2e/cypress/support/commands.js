@@ -603,5 +603,3 @@ Cypress.Commands.add('checkPageA11y', () => {
   cy.injectAxeForA11y();
   cy.checkA11y({ exclude: [['#tinymce-wrapper']] }, null, callback);
 });
-
-// includedImpacts: ['critical', 'serious']
