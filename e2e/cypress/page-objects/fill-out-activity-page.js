@@ -374,9 +374,10 @@ class FillOutActivityPage {
                 _.forEach(inputFields, (elem, i) => {
                   const value = budgetData.quarterVals[ffyIndex][i];
                   cy.log(`value: ${value}`);
+                  cy.get(elem).clear();
+                  cy.waitForSave();
                   cy.get(elem)
-                    .clear()
-                    .type(value, { delay: 1 })
+                    .type(value)
                     .should('have.value', `${value}`)
                     .blur();
                   cy.wait(300);
