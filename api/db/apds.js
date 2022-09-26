@@ -46,7 +46,7 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
   });
 
   // return the updated apd
-  return APD.findOne({ _id: id, stateId }).lean().populate('budget');
+  return APD.findOne({ _id: id, stateId }).lean();
 };
 
 const updateAPDDocument = async (
@@ -60,8 +60,6 @@ const updateAPDDocument = async (
   if (patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};
-    let updatedBudget;
-    const budgetErrors = {};
     let updated = [...patch];
     // Add updatedAt timestamp to the patch
     patch.push({
@@ -71,7 +69,6 @@ const updateAPDDocument = async (
     });
     try {
       updatedDoc = await patchAPD(id, stateId, apdDoc, patch);
-      updatedBudget = deepCopy(updatedDoc.budget);
     } catch (err) {
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
 
@@ -113,16 +110,18 @@ const updateAPDDocument = async (
       const validPatches = Object.keys(updatedPatch).map(
         key => updatedPatch[key]
       );
-      updatedDoc = await patchAPD(id, stateId, apdDoc, validPatches, { APD });
+      updatedDoc = await patchAPD(id, stateId, apdDoc, validPatches);
 
       // convert updatedPatch map to an array and set it to updated
       updated = Object.keys(updatedPatch).map(key => updatedPatch[key]);
     }
 
-    if (hasBudgetUpdate) {
+    const updatedBudget = calculateBudget(updatedDoc);
+    const budgetErrors = {};
+    if (hasBudgetUpdate(patch)) {
       try {
-        updatedBudget = calculateBudget(updatedDoc.toJSON());
-        await Budget.replaceOne({ _id: apdDoc.budget }, updatedBudget, {
+        // eslint-disable-next-line no-underscore-dangle
+        await Budget.replaceOne({ _id: updatedDoc.budget }, updatedBudget, {
           multipleCastError: true,
           runValidators: true
         });

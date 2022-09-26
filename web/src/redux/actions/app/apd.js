@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import { deepCopy } from '@cms-eapd/common/utils/utils';
+import { deepCopy, hasBudgetUpdate } from '@cms-eapd/common/utils/utils';
 
 import {
   CREATE_APD_FAILURE,
@@ -67,7 +67,9 @@ export const saveApd = () => (dispatch, getState) => {
         delete res.data.apd.budget;
 
         dispatch({ type: SAVE_APD_SUCCESS, apd: res.data.apd });
-        dispatch(loadBudget(budget));
+        if (hasBudgetUpdate(patches)) {
+          dispatch(loadBudget(budget));
+        }
         return res.data.apd;
       })
       .catch(error => {
