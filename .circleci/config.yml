@@ -427,8 +427,10 @@ jobs:
 
       - run: 
           name: validate main.tf
-          working_directory: ~/project/terraform/legacy/
+          working_directory: ~../../../../terraform-aws-notify-slack
           command: |
+            git clone https://github.com/terraform-aws-modules/terraform-aws-notify-slack
+            cd ../../../../terraform-aws-notify-slack
 
             terraform validate
             
