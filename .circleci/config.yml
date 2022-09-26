@@ -417,6 +417,7 @@ jobs:
       - checkout
       - run: 
           name: Terraform Init 
+          working_directory: ~/project/terraform/legacy/
           command: |
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
             sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
