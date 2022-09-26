@@ -15,7 +15,6 @@ tap.test('endpoint setup', async endpointTest => {
   const apdsEndpoint = sinon.spy();
   const apdsEventsEndpoint = sinon.spy();
   const apdsFilesEndpoint = sinon.spy();
-  const apdsBudgetEndpoint = sinon.spy();
   const authEndpoint = sinon.spy();
   const docsEndpoint = sinon.spy();
   const meEndpoint = sinon.spy();
@@ -30,7 +29,6 @@ tap.test('endpoint setup', async endpointTest => {
     apdsEndpoint,
     apdsEventsEndpoint,
     apdsFilesEndpoint,
-    apdsBudgetEndpoint,
     authEndpoint,
     docsEndpoint,
     rolesEndpoint,
@@ -51,10 +49,6 @@ tap.test('endpoint setup', async endpointTest => {
   endpointTest.ok(
     apdsEventsEndpoint.calledWith(app),
     'apds events endpoint is setup with the app'
-  );
-  endpointTest.ok(
-    apdsBudgetEndpoint.calledWith(app),
-    'apds budget endpoint is setup with the app'
   );
 
   endpointTest.ok(

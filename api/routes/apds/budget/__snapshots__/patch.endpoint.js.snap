@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`APD budget endpoint | PATCH /apds/:id/budget when authenticated as a user with permission with a non-existant apd ID 1`] = `""`;
-
-exports[`APD budget endpoint | PATCH /apds/:id/budget when authenticated as a user with permission with an APD in a state other than the user's state 1`] = `""`;

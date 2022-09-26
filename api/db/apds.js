@@ -1,6 +1,10 @@
 const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
-const { deepCopy, calculateBudget } = require('@cms-eapd/common');
+const {
+  deepCopy,
+  calculateBudget,
+  hasBudgetUpdate
+} = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
@@ -42,7 +46,7 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
   });
 
   // return the updated apd
-  return APD.findOne({ _id: id, stateId }).lean();
+  return APD.findOne({ _id: id, stateId }).lean().populate('budget');
 };
 
 const updateAPDDocument = async (
@@ -56,6 +60,8 @@ const updateAPDDocument = async (
   if (patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};
+    let updatedBudget;
+    const budgetErrors = {};
     let updated = [...patch];
     // Add updatedAt timestamp to the patch
     patch.push({
@@ -65,6 +71,7 @@ const updateAPDDocument = async (
     });
     try {
       updatedDoc = await patchAPD(id, stateId, apdDoc, patch);
+      updatedBudget = deepCopy(updatedDoc.budget);
     } catch (err) {
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
 
@@ -112,6 +119,21 @@ const updateAPDDocument = async (
       updated = Object.keys(updatedPatch).map(key => updatedPatch[key]);
     }
 
+    if (hasBudgetUpdate) {
+      try {
+        updatedBudget = calculateBudget(updatedDoc.toJSON());
+        await Budget.replaceOne({ _id: apdDoc.budget }, updatedBudget, {
+          multipleCastError: true,
+          runValidators: true
+        });
+      } catch (e) {
+        logger.error(
+          `Error updating budget for APD ${id}: ${JSON.stringify(e)}`
+        );
+        budgetErrors.error = e;
+      }
+    }
+
     // Determine if state profile needs to be updated in postgres
     const stateUpdated = patch.find(({ path }) =>
       path.includes('/keyStatePersonnel')
@@ -139,7 +161,10 @@ const updateAPDDocument = async (
 
     return {
       errors: { ...updateErrors, ...validationErrors },
-      apd: updatedDoc,
+      apd: {
+        ...updatedDoc,
+        budget: updatedBudget
+      },
       stateUpdated,
       updated
     };
@@ -153,30 +178,11 @@ const updateAPDDocument = async (
   };
 };
 
-const updateAPDBudget = async (id, stateId) => {
-  let updatedBudget;
-
-  try {
-    const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
-    updatedBudget = calculateBudget(apdDoc);
-    await Budget.replaceOne({ _id: apdDoc.budget }, updatedBudget, {
-      multipleCastError: true,
-      runValidators: true
-    });
-  } catch (e) {
-    logger.error(`Error updating budget for APD ${id}: ${JSON.stringify(e)}`);
-    throw e;
-  }
-
-  return updatedBudget;
-};
-
 module.exports = {
   createAPD,
   deleteAPDByID,
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument,
-  updateAPDBudget
+  updateAPDDocument
 };

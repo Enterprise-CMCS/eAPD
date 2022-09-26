@@ -292,14 +292,15 @@ describe('application-level actions', () => {
 
     it('saves and does all the good things', () => {
       state.patch = [{ path: 'test path' }];
-      const updatedApd = {};
+      const updatedApd = { budget: {} };
       const store = mockStore(state);
 
       fetchMock.onPatch('/apds/id-to-update').reply(200, { apd: updatedApd });
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
-        { type: SAVE_APD_SUCCESS, apd: updatedApd }
+        { type: SAVE_APD_SUCCESS, apd: {} },
+        { type: LOAD_BUDGET, budget: {} }
       ];
 
       return store.dispatch(saveApd()).then(() => {

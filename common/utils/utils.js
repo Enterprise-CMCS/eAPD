@@ -55,3 +55,21 @@ export const generateKey = (() => {
     return key;
   };
 })();
+
+const budgetPaths = [
+  /^\/years$/,
+  /^\/years\/\d+$/,
+  /^\/keyStatePersonnel\/keyPersonnel\/(-|\d+)$/,
+  /^\/activities\/(-|\d+)$/,
+  /^\/activities\/\d+\/fundingSource$/,
+  /^\/activities\/\d+\/contractorResources\/(-|\d+)$/,
+  /^\/activities\/\d+\/expenses\/(-|\d+)$/,
+  /^\/activities\/\d+\/statePersonnel\/(-|\d+)$/,
+  /^\/activities\/\d+\/costAllocation\/\d{4}\/(ffp\/federal|ffp\/state|other)$/,
+  /^\/activities\/\d+\/quarterlyFFP\/\d{4}\/[1-4]\/(inHouse|contractors)$/
+];
+
+export const hasBudgetUpdate = patches =>
+  patches.some(({ path }) =>
+    budgetPaths.find(pathRegex => path.match(pathRegex))
+  );

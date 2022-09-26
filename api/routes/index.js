@@ -4,7 +4,6 @@ const affiliations = require('./affiliations');
 const apds = require('./apds');
 const apdsEvents = require('./apds/events');
 const apdsFiles = require('./apds/files');
-const apdsBudget = require('./apds/budget');
 const auth = require('./auth');
 const docs = require('./docs');
 const roles = require('./roles');
@@ -21,7 +20,6 @@ module.exports = (
     apdsEndpoint = apds,
     apdsEventsEndpoint = apdsEvents,
     apdsFilesEndpoint = apdsFiles,
-    apdsBudgetEndpoint = apdsBudget,
     authEndpoint = auth,
     docsEndpoint = docs,
     rolesEndpoint = roles,
@@ -39,8 +37,6 @@ module.exports = (
   apdsEventsEndpoint(app);
   logger.debug('setting up routes for apds/files');
   apdsFilesEndpoint(app);
-  logger.debug('setting up routes for apds/budget');
-  apdsBudgetEndpoint(app);
   logger.debug('setting up routes for auth');
   authEndpoint(app);
   logger.debug('setting up routes for docs');

@@ -20,7 +20,7 @@ import {
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE
 } from './symbols';
-import { updateBudget, loadBudget } from '../budget';
+import { loadBudget } from '../budget';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import {
   ariaAnnounceApdLoaded,
@@ -39,7 +39,6 @@ import {
   getCanUserEditAPD
 } from '../../selectors/user.selector';
 
-import { hasBudgetUpdate } from '../../../util/budget';
 import axios from '../../../util/api';
 import initialAssurances from '../../../util/regulations';
 
@@ -64,11 +63,11 @@ export const saveApd = () => (dispatch, getState) => {
     return axios
       .patch(`/apds/${apdID}`, patches)
       .then(res => {
+        const budget = deepCopy(res.data.apd.budget);
         delete res.data.apd.budget;
+
         dispatch({ type: SAVE_APD_SUCCESS, apd: res.data.apd });
-        if (hasBudgetUpdate(patches)) {
-          dispatch(updateBudget(apdID));
-        }
+        dispatch(loadBudget(budget));
         return res.data.apd;
       })
       .catch(error => {
