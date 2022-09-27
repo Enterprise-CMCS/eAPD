@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
+    "lint": "eslint '**/*.js'",
     "scaffold": "rm -rf dist && mkdir dist",
     "build": "yarn scaffold && babel . --ignore \"node_modules\",\"dist\" -d ./dist -s",
     "stryker": "TZ=utc stryker run",

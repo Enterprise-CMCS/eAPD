@@ -4,7 +4,6 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
-import { logDOM } from '@testing-library/dom';
 
 /// <reference types="cypress" />
 
@@ -1322,6 +1321,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.waitForSave();
       cy.contains('AK APD Home').click();
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(5000); // Gives time to load the APD dashboard
 
       cy.visit(apdUrl);
