@@ -20,7 +20,7 @@ workflows:
   # Workflow to scan dependencies for vulnerabilities every night
 
 
-  Packer validation Test Dio:          
+  packer validation:
     triggers:
       - schedule:
           cron: '0 0 * * *'
@@ -29,8 +29,8 @@ workflows:
               only:
                 - main
     jobs:
-      - Build preview link:
-          name: Packer vali preview
+      - packer validation tests:
+          name: Packer Validation Tests
           
 
 
@@ -341,7 +341,7 @@ jobs:
               --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
               preview-ami.pkr.hcl
   
-  Build preview link:
+  packer validation tests:
     docker:
       - image: cimg/base:2022.06-22.04
         auth:
@@ -351,14 +351,14 @@ jobs:
     steps:
       - checkout
       - run: 
-          name: Install Packer for prev validation
+          name: Install Packer for Validation
           command: |
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
             sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
 
       - run: 
-          name: validate preview ami
+          name: Validate Preview AMI
           working_directory: ~/project/packer
           command: |
             export AWS_REGION=$AWS_REGION
@@ -373,7 +373,7 @@ jobs:
               --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
             preview-ami.pkr.hcl
       - run:
-          name: validate Mongo ami
+          name: Validate Mongo AMI
           working_directory: ~/project/packer
           command: |
             export AWS_REGION=$AWS_REGION
@@ -387,7 +387,7 @@ jobs:
               mongo-ami.pkr.hcl
 
       - run:
-          name: validate Backend ami
+          name: Validate Backend AMI
           working_directory: ~/project/packer
           command: |
             export AWS_REGION=$AWS_REGION
