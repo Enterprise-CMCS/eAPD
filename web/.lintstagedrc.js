@@ -2,5 +2,5 @@ const baseConfig = require('../.lintstagedrc.js');
 
 module.exports = {
   ...baseConfig,
-  '*.js': 'eslint --fix'
+  '*.js': ['prettier --write --config "../.prettierrc"', 'eslint --fix']
 };
