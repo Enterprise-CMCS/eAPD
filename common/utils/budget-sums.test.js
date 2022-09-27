@@ -6282,6 +6282,423 @@ describe('budget summing methods', () => {
       });
       expect(actual).toEqual(expected);
     });
+
+    test('with invalid cost allocation', () => {
+      const expected = {
+        federalShareByFFYQuarter: {
+          hitAndHie: {
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
+            },
+            total: { inHouse: 0, contractors: 0, combined: 0 }
+          },
+          mmis: {
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2019: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
+            },
+            total: { inHouse: 0, contractors: 0, combined: 0 }
+          }
+        },
+        hie: {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        hit: {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        mmis: {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 1250, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 1700, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 2100, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 5050, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 1250, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 1700, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 2100, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 5050, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        hitAndHie: {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        mmisByFFP: {
+          '90-10': {
+            2017: { total: 3000, federal: 2497, medicaid: 2775, state: 278 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 3000, federal: 2497, medicaid: 2775, state: 278 }
+          },
+          '75-25': {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 5000, federal: 3000, medicaid: 4000, state: 1000 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 5000, federal: 3000, medicaid: 4000, state: 1000 }
+          },
+          '50-50': {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          '0-100': {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 3000, federal: 2497, medicaid: 2775, state: 278 },
+            2018: { total: 5000, federal: 3000, medicaid: 4000, state: 1000 },
+            2019: { total: 5000, federal: 3000, medicaid: 4000, state: 1000 },
+            total: { total: 13000, federal: 8497, medicaid: 10775, state: 2278 }
+          }
+        },
+        combined: {
+          2017: { total: 1250, federal: 0, medicaid: 0, state: 0 },
+          2018: { total: 1700, federal: 0, medicaid: 0, state: 0 },
+          2019: { total: 2100, federal: 0, medicaid: 0, state: 0 },
+          total: { total: 5050, federal: 0, medicaid: 0, state: 0 }
+        },
+        activityTotals: [],
+        activities: {},
+        years: [2017, 2018, 2019]
+      };
+      const actual = sumMMISbyFFP({
+        budget: {
+          federalShareByFFYQuarter: {
+            hitAndHie: {
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
+              },
+              total: { inHouse: 0, contractors: 0, combined: 0 }
+            },
+            mmis: {
+              years: {
+                2017: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2018: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                },
+                2019: {
+                  1: { inHouse: 0, contractors: 0, combined: 0 },
+                  2: { inHouse: 0, contractors: 0, combined: 0 },
+                  3: { inHouse: 0, contractors: 0, combined: 0 },
+                  4: { inHouse: 0, contractors: 0, combined: 0 },
+                  subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+                }
+              },
+              total: { inHouse: 0, contractors: 0, combined: 0 }
+            }
+          },
+          hie: {
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
+          },
+          hit: {
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
+          },
+          mmis: {
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 1250, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 1700, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 2100, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 5050, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 1250, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 1700, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 2100, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 5050, federal: 0, medicaid: 0, state: 0 }
+            }
+          },
+          hitAndHie: {
+            statePersonnel: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            contractors: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            expenses: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            }
+          },
+          mmisByFFP: {
+            '90-10': {
+              2017: { total: 3000, federal: 2497, medicaid: 2775, state: 278 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 3000, federal: 2497, medicaid: 2775, state: 278 }
+            },
+            '75-25': {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 5000, federal: 3000, medicaid: 4000, state: 1000 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 5000, federal: 3000, medicaid: 4000, state: 1000 }
+            },
+            '50-50': {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            '0-100': {
+              2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+            },
+            combined: {
+              2017: { total: 3000, federal: 2497, medicaid: 2775, state: 278 },
+              2018: { total: 5000, federal: 3000, medicaid: 4000, state: 1000 },
+              2019: { total: 0, federal: 0, medicaid: 0, state: 0 },
+              total: { total: 8000, federal: 5497, medicaid: 6775, state: 1278 }
+            }
+          },
+          combined: {
+            2017: { total: 1250, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 1700, federal: 0, medicaid: 0, state: 0 },
+            2019: { total: 2100, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 5050, federal: 0, medicaid: 0, state: 0 }
+          },
+          activityTotals: [],
+          activities: {},
+          years: [2017, 2018, 2019]
+        },
+        year: 2019,
+        totalCost: 5000,
+        totalMedicaidCost: 4000,
+        allocation: {
+          2017: { ffp: { federal: 90, state: 10 }, other: 0 },
+          2018: { ffp: { federal: 75, state: 25 }, other: 0 },
+          2019: { ffp: { federal: 40, state: 50 }, other: 0 }
+        },
+        totalMedicaidCostShares: { fedShare: 3000, stateShare: 1000 }
+      });
+      expect(actual).toEqual(expected);
+    });
   });
 
   describe('sumShareCosts', () => {
