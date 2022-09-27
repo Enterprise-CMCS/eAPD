@@ -601,5 +601,9 @@ function callback(violations) {
 Cypress.Commands.add('checkPageA11y', () => {
   cy.wait(2500);
   cy.injectAxeForA11y();
-  cy.checkA11y({ exclude: [['#tinymce-wrapper']] }, null, callback);
+  cy.checkA11y(
+    { exclude: [['#tinymce-wrapper'], ['[aria-label="Main Navigation"]']] },
+    null,
+    callback
+  ); // Remove ignored nav when upgrading cms design system
 });

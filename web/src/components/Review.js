@@ -26,6 +26,7 @@ const Review = ({
       (...args) => {
         if (editHref) {
           anchor.current.click();
+          // window.location=`${editHref}`
         }
         if (onEditClick) {
           onEditClick(...args);
@@ -53,7 +54,7 @@ const Review = ({
     <ReviewSummary
       editContent={
         <div className="nowrap visibility--screen ds-u-margin-top--2">
-          {onEditClick || editHref ? (
+          {onEditClick && (
             <Button
               size="small"
               variation="transparent"
@@ -62,7 +63,12 @@ const Review = ({
             >
               Edit
             </Button>
-          ) : null}
+          )}
+          {editHref && (
+            <Link to={editHref} ref={anchor}>
+              Edit
+            </Link>
+          )}
           {onDeleteClick && (
             // If there's a delete click handler, add a remove button to the
             // header area and wire it up
