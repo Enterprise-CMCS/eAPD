@@ -110,7 +110,7 @@
     "yargs-parser": ">=18.1.1"
   },
   "lint-staged": {
-    "*": "npx pretty-quick --staged && yarn lint"
+    "*": "yarn prettier && yarn lint"
   },
   "packageManager": "yarn@1.22.18"
 }
