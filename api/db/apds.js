@@ -56,11 +56,16 @@ const updateAPDDocument = async (
   { updateProfile = updateStateProfile, validate = validateApd } = {}
 ) => {
   // Get the updated apd json
-  const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
+  const apdDoc = await APD.findOne({ _id: id, stateId })
+    .populate('budget')
+    .lean();
   if (patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};
+    let updatedBudget = deepCopy(apdDoc.budget);
+    const budgetErrors = {};
     let updated = [...patch];
+    let validPatches = [...patch];
     // Add updatedAt timestamp to the patch
     patch.push({
       op: 'replace',
@@ -107,30 +112,25 @@ const updateAPDDocument = async (
       }
 
       // If there are errors, nothing was saved, so we need to try to update again
-      const validPatches = Object.keys(updatedPatch).map(
-        key => updatedPatch[key]
-      );
+      validPatches = Object.keys(updatedPatch).map(key => updatedPatch[key]);
       updatedDoc = await patchAPD(id, stateId, apdDoc, validPatches);
 
       // convert updatedPatch map to an array and set it to updated
       updated = Object.keys(updatedPatch).map(key => updatedPatch[key]);
     }
 
-    const updatedBudget = calculateBudget(updatedDoc);
-    const budgetErrors = {};
-    if (hasBudgetUpdate(patch)) {
-      try {
+    try {
+      if (hasBudgetUpdate(validPatches)) {
+        updatedBudget = calculateBudget(updatedDoc);
         // eslint-disable-next-line no-underscore-dangle
         await Budget.replaceOne({ _id: updatedDoc.budget }, updatedBudget, {
           multipleCastError: true,
           runValidators: true
         });
-      } catch (e) {
-        logger.error(
-          `Error updating budget for APD ${id}: ${JSON.stringify(e)}`
-        );
-        budgetErrors.error = e;
       }
+    } catch (e) {
+      logger.error(`Error updating budget for APD ${id}: ${JSON.stringify(e)}`);
+      budgetErrors.error = e;
     }
 
     // Determine if state profile needs to be updated in postgres

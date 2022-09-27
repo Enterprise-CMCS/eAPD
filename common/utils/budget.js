@@ -747,21 +747,39 @@ export const sumMMISbyFFP = ({
     // need to track subtotals, not individual cost categories
     const array = [ffpLevel, 'combined'];
     array.forEach(category => {
-      updatedBudget.mmisByFFP[category][year].federal +=
-        totalMedicaidCostShares.fedShare;
-      updatedBudget.mmisByFFP[category].total.federal +=
-        totalMedicaidCostShares.fedShare;
+      if (updatedBudget?.mmisByFFP?.[category]?.[year]?.federal !== undefined) {
+        updatedBudget.mmisByFFP[category][year].federal +=
+          totalMedicaidCostShares.fedShare;
+      }
+      if (updatedBudget?.mmisByFFP?.[category]?.total?.federal !== undefined) {
+        updatedBudget.mmisByFFP[category].total.federal +=
+          totalMedicaidCostShares.fedShare;
+      }
 
-      updatedBudget.mmisByFFP[category][year].state +=
-        totalMedicaidCostShares.stateShare;
-      updatedBudget.mmisByFFP[category].total.state +=
-        totalMedicaidCostShares.stateShare;
+      if (updatedBudget?.mmisByFFP?.[category]?.[year]?.state !== undefined) {
+        updatedBudget.mmisByFFP[category][year].state +=
+          totalMedicaidCostShares.stateShare;
+      }
+      if (updatedBudget?.mmisByFFP?.[category]?.total?.state !== undefined) {
+        updatedBudget.mmisByFFP[category].total.state +=
+          totalMedicaidCostShares.stateShare;
+      }
 
-      updatedBudget.mmisByFFP[category][year].medicaid += totalMedicaidCost;
-      updatedBudget.mmisByFFP[category].total.medicaid += totalMedicaidCost;
+      if (
+        updatedBudget?.mmisByFFP?.[category]?.[year]?.medicaid !== undefined
+      ) {
+        updatedBudget.mmisByFFP[category][year].medicaid += totalMedicaidCost;
+      }
+      if (updatedBudget?.mmisByFFP?.[category]?.total?.medicaid !== undefined) {
+        updatedBudget.mmisByFFP[category].total.medicaid += totalMedicaidCost;
+      }
 
-      updatedBudget.mmisByFFP[category][year].total += totalCost;
-      updatedBudget.mmisByFFP[category].total.total += totalCost;
+      if (updatedBudget?.mmisByFFP?.[category]?.[year]?.total !== undefined) {
+        updatedBudget.mmisByFFP[category][year].total += totalCost;
+      }
+      if (updatedBudget?.mmisByFFP?.[category]?.total?.total !== undefined) {
+        updatedBudget.mmisByFFP[category].total.total += totalCost;
+      }
     });
   }
 
