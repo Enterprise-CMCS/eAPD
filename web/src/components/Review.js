@@ -26,7 +26,6 @@ const Review = ({
       (...args) => {
         if (editHref) {
           anchor.current.click();
-          // window.location=`${editHref}`
         }
         if (onEditClick) {
           onEditClick(...args);
