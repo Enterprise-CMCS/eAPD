@@ -241,7 +241,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .contains('div', 'Activity 1: Program Administration')
         .parent()
         .parent()
-        .findByRole('button', { name: 'Edit' })
+        .findByRole('link', { name: 'Edit' })
         .click();
 
       cy.findByRole('heading', {
