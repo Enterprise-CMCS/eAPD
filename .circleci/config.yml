@@ -417,7 +417,7 @@ jobs:
       - checkout
       - run:
           name: cloning AWS notify module
-          working_directory: /home
+          working_directory: ~/
           command: |
             git clone https://github.com/terraform-aws-modules/terraform-aws-notify-slack
            
