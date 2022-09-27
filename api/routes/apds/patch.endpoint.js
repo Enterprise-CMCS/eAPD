@@ -177,7 +177,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         { op: 'replace', path: '/status', value: 'submitted' },
         {
           op: 'replace',
-          path: '/activities/0/costAllocation/2022/ffp/federal',
+          path: '/activities/1/costAllocation/2022/ffp/federal',
           value: 80
         }
       ];
