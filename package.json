@@ -109,8 +109,5 @@
   "resolutions": {
     "yargs-parser": ">=18.1.1"
   },
-  "lint-staged": {
-    "*": "yarn prettier && yarn lint"
-  },
   "packageManager": "yarn@1.22.18"
 }
