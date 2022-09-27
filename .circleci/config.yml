@@ -415,6 +415,13 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: cloning AWS notify module
+          working_directory: /home
+          command: |
+            git clone https://github.com/terraform-aws-modules/terraform-aws-notify-slack
+           
+    
       - run: 
           name: Terraform Init 
           working_directory: ~/project/terraform/legacy/
@@ -423,12 +430,6 @@ jobs:
             sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install terraform
             terraform init 
-      - run:
-          name: cloning AWS notify module
-          working_directory: /home
-          command: |
-            git clone https://github.com/terraform-aws-modules/terraform-aws-notify-slack
-           
 
       - run: 
           name: validate main.tf
