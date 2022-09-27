@@ -82,7 +82,10 @@ const ApdList = ({
                     {state ? state.name : ''} APDs
                   </h2>
                   {canCreateApd && (
-                    <Link to={'/apd/new'}>
+                    <Link
+                      to={'/apd/new'}
+                      className="ds-u-float--right link-button"
+                    >
                       Create new{' '}
                       <span className="ds-u-visibility--screen-reader">
                         APD
