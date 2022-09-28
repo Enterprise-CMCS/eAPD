@@ -79,7 +79,8 @@ const HeaderRow = ({ yr, activity }) => {
 };
 
 HeaderRow.propTypes = {
-  yr: PropTypes.string.isRequired
+  yr: PropTypes.string.isRequired,
+  activity: PropTypes.string.isRequired
 };
 
 const BudgetSummary = ({ activities, data, years }) => (
