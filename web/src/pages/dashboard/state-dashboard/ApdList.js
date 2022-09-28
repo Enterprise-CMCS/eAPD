@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Icon, { File, faPlusCircle } from '../../../components/Icons';
 import Instruction from '../../../components/Instruction';
 import DeleteModal from '../../../components/DeleteModal';
-import { createApd, deleteApd, selectApd } from '../../../redux/actions/app';
+import { deleteApd, selectApd } from '../../../redux/actions/app';
 import { t } from '../../../i18n';
 import {
   selectApdDashboard,
@@ -19,7 +19,6 @@ import Loading from '../../../components/Loading';
 
 const ApdList = ({
   apds,
-  createApd: create,
   deleteApd: del,
   fetching,
   error,
@@ -30,11 +29,6 @@ const ApdList = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-  const createNew = () => {
-    setIsLoading(true);
-    create();
-  };
 
   const open = id => e => {
     setIsLoading(true);
@@ -93,18 +87,6 @@ const ApdList = ({
                       &nbsp;&nbsp;
                       <Icon icon={faPlusCircle} />
                     </Link>
-                    // <Button
-                    //   variation="primary"
-                    //   className="ds-u-float--right"
-                    //   onClick={createNew}
-                    // >
-                    //   Create new{' '}
-                    //   <span className="ds-u-visibility--screen-reader">
-                    //     APD
-                    //   </span>
-                    //   &nbsp;&nbsp;
-                    //   <Icon icon={faPlusCircle} />
-                    // </Button>
                   )}
                 </div>
               </div>
@@ -181,7 +163,6 @@ ApdList.propTypes = {
   error: PropType.string.isRequired,
   route: PropType.string,
   state: PropType.object.isRequired,
-  createApd: PropType.func.isRequired,
   deleteApd: PropType.func.isRequired,
   selectApd: PropType.func.isRequired,
   activities: PropType.array.isRequired
@@ -200,7 +181,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  createApd,
   deleteApd,
   selectApd
 };
