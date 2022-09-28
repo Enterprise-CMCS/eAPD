@@ -1,10 +1,18 @@
 const logger = require('../../logger')('apds route get');
-const { getAllAPDsByState: gas, getAPDByIDAndState: ga } = require('../../db');
+const {
+  getAllAPDsByState: gas,
+  getAPDByIDAndState: ga,
+  validateAPDDocument: validate
+} = require('../../db');
 const { can } = require('../../middleware');
 
 module.exports = (
   app,
-  { getAllAPDsByState = gas, getAPDByIDAndState = ga } = {}
+  {
+    getAllAPDsByState = gas,
+    getAPDByIDAndState = ga,
+    validateAPDDocument = validate
+  } = {}
 ) => {
   logger.silly('setting up GET /apds route');
 
@@ -72,6 +80,8 @@ module.exports = (
         logger.info(`id: ${req.params.id}, state: ${stateId}`);
         const apdFromDB = await getAPDByIDAndState(req.params.id, stateId);
 
+        const validationErrors = await validateAPDDocument(req.params.id);
+
         if (apdFromDB) {
           const {
             _id: id,
@@ -85,7 +95,8 @@ module.exports = (
             id,
             created,
             updated,
-            state
+            state,
+            adminCheck: validationErrors
           };
 
           logger.silly({

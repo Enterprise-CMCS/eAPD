@@ -30,8 +30,13 @@ const Joi = require('joi');
 
 const combinedApdSchema = Joi.object({
   _id: Joi.any(),
+  __v: Joi.any(),
   name: Joi.any(),
   years: Joi.any(),
+  stateId: Joi.any(),
+  status: Joi.any(),
+  createdAt: Joi.any(),
+  updatedAt: Joi.any(),
   apdOverview: apdOverview,
   keyStatePersonnel: Joi.object({
     medicaidDirector: medicaidDirector,

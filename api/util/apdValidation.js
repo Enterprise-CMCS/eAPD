@@ -11,6 +11,7 @@ const buildErrorList = (validationResults, apdId) => {
     const subSectionNameDict = {
       contractorResources: 'Private Contractor Costs',
       costAllocation: 'Cost Allocation',
+      costAllocationNarrative: 'Cost Allocation',
       description: 'Activity Overview',
       expenses: 'State Staff and Expenses',
       outcomes: 'Outcomes and Milestones',
@@ -39,6 +40,7 @@ const buildErrorList = (validationResults, apdId) => {
     const subSectionURLPath = {
       contractorResources: 'contractor-costs',
       costAllocation: 'cost-allocation',
+      costAllocationNarrative: 'cost-allocation',
       description: 'overview',
       expenses: 'state-costs',
       outcomes: 'oms',
@@ -53,9 +55,7 @@ const buildErrorList = (validationResults, apdId) => {
       apdOverview: 'apd-overview',
       keyStatePersonnel: 'state-profile',
       previousActivities: 'previous-activities',
-      activities: `activities/${errorPath[1]}/${
-        subSectionURLPath[errorPath[2]]
-      }`,
+      activities: `activity/${errorPath[1]}/${subSectionURLPath[errorPath[2]]}`,
       proposedBudget: 'proposed-budget',
       assurancesAndCompliances: 'assurances-and-compliance'
     };
@@ -64,14 +64,14 @@ const buildErrorList = (validationResults, apdId) => {
   };
 
   const fullErrorList = validationResults.error.details.map(elem => {
+    console.log('error:', elem);
     const sectionName = getSectionName(elem.path);
     const linkURL = getURLPath(elem.path);
 
     return {
       section: sectionName,
       link: linkURL,
-      fieldDescription: elem.message,
-      complete: false
+      fieldDescription: elem.message
     };
   });
 
