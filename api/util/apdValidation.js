@@ -7,7 +7,7 @@ const { combinedSchemas } = require('@cms-eapd/common');
  * error message and completion status
  */
 const buildErrorList = (validationResults, apdId) => {
-  const getSectionName = errorPath => {
+  const getActivitiesName = errorPath => {
     const subSectionNameDict = {
       contractorResources: 'Private Contractor Costs',
       costAllocation: 'Cost Allocation',
@@ -22,13 +22,19 @@ const buildErrorList = (validationResults, apdId) => {
       statePersonnel: 'State Staff and Expenses',
       summary: 'Activity Overview'
     };
+
+    if (!errorPath[1]) {
+      return `Activities`;
+    }
+    return `Activity ${errorPath[1] + 1} ${subSectionNameDict[errorPath[2]]}`;
+  };
+
+  const getSectionName = errorPath => {
     const sectionNameDict = {
       apdOverview: 'Activity Overview',
       keyStatePersonnel: 'Key State Personnel',
       previousActivities: 'Previous Activities',
-      activities: `Activity ${errorPath[1] + 1} ${
-        subSectionNameDict[errorPath[2]]
-      }`,
+      activities: getActivitiesName(errorPath),
       proposedBudget: 'Proposed Budget',
       assurancesAndCompliances: 'Assurances and Compliance'
     };
@@ -36,7 +42,7 @@ const buildErrorList = (validationResults, apdId) => {
     return `${sectionNameDict[errorPath[0]]}`;
   };
 
-  const getURLPath = errorPath => {
+  const getActivitiesURLPath = errorPath => {
     const subSectionURLPath = {
       contractorResources: 'contractor-costs',
       costAllocation: 'cost-allocation',
@@ -51,11 +57,19 @@ const buildErrorList = (validationResults, apdId) => {
       statePersonnel: 'state-costs',
       summary: 'overview'
     };
+    if (!errorPath[1]) {
+      return `activities/`;
+    }
+
+    return `activity/${errorPath[1]}/${subSectionURLPath[errorPath[2]]}`;
+  };
+
+  const getURLPath = errorPath => {
     const sectionURLPath = {
       apdOverview: 'apd-overview',
       keyStatePersonnel: 'state-profile',
       previousActivities: 'previous-activities',
-      activities: `activity/${errorPath[1]}/${subSectionURLPath[errorPath[2]]}`,
+      activities: getActivitiesURLPath(errorPath),
       proposedBudget: 'proposed-budget',
       assurancesAndCompliances: 'assurances-and-compliance'
     };
