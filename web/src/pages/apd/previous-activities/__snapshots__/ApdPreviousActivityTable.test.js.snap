@@ -43,6 +43,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       key="1"
     >
       <th
+        data-cy="yearRow"
         id="prev_act_hithie_row_1"
         scope="row"
       >
@@ -89,6 +90,7 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       key="2"
     >
       <th
+        data-cy="yearRow"
         id="prev_act_hithie_row_2"
         scope="row"
       >
