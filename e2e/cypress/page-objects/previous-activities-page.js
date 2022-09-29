@@ -14,7 +14,7 @@ class PreviousActivitiesPage {
     if (this.years.length > 0) return;
     cy.contains('HIT + HIE Federal share 90% FFP')
       .parent()
-      .find('[headers="prev_act_hit_header_ffy"]')
+      .find('[data-cy="yearRow"]')
       .each($el => {
         this.years.push($el.text().replace(/\D/g, ''));
       });

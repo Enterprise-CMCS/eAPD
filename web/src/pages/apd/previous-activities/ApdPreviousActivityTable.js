@@ -68,7 +68,11 @@ const ApdPreviousActivityTable = ({
 
           return (
             <tr key={year}>
-              <th id={`prev_act_hithie_row_${year}`} scope="row">
+              <th
+                id={`prev_act_hithie_row_${year}`}
+                scope="row"
+                data-cy="yearRow"
+              >
                 {TABLE_HEADERS.ffy(year)}
               </th>
 
