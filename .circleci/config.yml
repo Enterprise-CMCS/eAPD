@@ -500,6 +500,27 @@ jobs:
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             terraform validate             
+      - run: 
+          name: Terraform Init for staging file
+          working_directory: ~/project/terraform/legacy/staging
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+            sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            sudo apt-get update && sudo apt-get install terraform=1.2.4 
+            terraform init      
+      - run: 
+          name: validate staging.tf
+          working_directory: ~/project/terraform/legacy/staging
+          command: | 
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform validate
+
+
 
   build production staging ami:
     docker:
