@@ -23,7 +23,7 @@ const buildErrorList = (validationResults, apdId) => {
       summary: 'Activity Overview'
     };
 
-    if (!errorPath[1]) {
+    if (typeof errorPath[1] === 'undefined') {
       return `Activities`;
     }
     return `Activity ${errorPath[1] + 1} ${subSectionNameDict[errorPath[2]]}`;
@@ -57,8 +57,9 @@ const buildErrorList = (validationResults, apdId) => {
       statePersonnel: 'state-costs',
       summary: 'overview'
     };
-    if (!errorPath[1]) {
-      return `activities/`;
+
+    if (typeof errorPath[1] === 'undefined') {
+      return `activities`;
     }
 
     return `activity/${errorPath[1]}/${subSectionURLPath[errorPath[2]]}`;
@@ -100,7 +101,7 @@ const buildErrorList = (validationResults, apdId) => {
  * @returns an array of validation errors
  * }
  */
-const validateAPDDoc = apd => {
+const adminCheckApd = apd => {
   // apdOverview Schema relies on knowing the funding source(s)
   // to do a conditional validation
   const getFundingSources = apd?.activities?.map(activity => {
@@ -120,6 +121,7 @@ const validateAPDDoc = apd => {
     abortEarly: false
   });
 
+  // console.log('validationResults', validationResults.error.details);
   if (!validationResults.error) {
     return null;
   }
@@ -130,5 +132,5 @@ const validateAPDDoc = apd => {
 };
 
 module.exports = {
-  validateAPDDoc
+  adminCheckApd
 };
