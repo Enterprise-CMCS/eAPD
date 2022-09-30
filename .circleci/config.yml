@@ -19,19 +19,6 @@ workflows:
   #      - cleanup preview deploys
 
   # Workflow to scan dependencies for vulnerabilities every night
-
-
-  Packer validation Test Dio:          
-    triggers:
-      - schedule:
-          cron: '0 0 * * *'
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - Build preview link:
-          name: Packer vali preview
           
 
   Terraform validation test Dio:
