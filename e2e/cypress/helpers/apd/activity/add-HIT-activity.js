@@ -53,8 +53,7 @@ export const addHITActivity = years => {
 
       fillOutActivityPage.fillOutcomesAndMilestones(
         activityData.outcomes,
-        activityData.milestones,
-        true // Test delete flag
+        activityData.milestones
       );
 
       cy.waitForSave();
@@ -66,9 +65,9 @@ export const addHITActivity = years => {
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillStateStaff(years, activityData.staff, true);
+      fillOutActivityPage.fillStateStaff(years, activityData.staff);
 
-      fillOutActivityPage.fillStateExpenses(years, activityData.expenses, true);
+      fillOutActivityPage.fillStateExpenses(years, activityData.expenses);
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
@@ -81,8 +80,7 @@ export const addHITActivity = years => {
 
       fillOutActivityPage.addPrivateContractors(
         activityData.privateContractors,
-        years,
-        true // Test delete flag
+        years
       );
 
       cy.waitForSave();
