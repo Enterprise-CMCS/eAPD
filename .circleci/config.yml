@@ -22,15 +22,12 @@ workflows:
           
 
   Terraform validation test Dio:
-    triggers:
-      - schedule:
-          cron: '0 0 * * *'
+    jobs:
+      - Build preview link Terraform:
           filters:
             branches:
               only:
-                - mai
-    jobs:
-      - Build preview link Terraform:
+                - Dio/4007-create-validate-terraform
           name: Terraform vali preview
 
 
