@@ -25,9 +25,9 @@ const validKeyStatePersonnel = {
       name: 'James Holden',
       position: 'HIT Coordinator',
       email: 'JimPushesButtons@tycho.com',
-      isPrimary: 'true',
+      isPrimary: true,
       fte: { 2022: 1, 2023: 1 },
-      hasCosts: 'true',
+      hasCosts: true,
       costs: { 2022: 100000, 2023: 100000 }
     }
   ]
@@ -73,7 +73,7 @@ const validActivity = {
         2022: { hours: '', rate: '' },
         2023: { hours: '', rate: '' }
       },
-      useHourly: 'false',
+      useHourly: false,
       name: 'Super SLR Incorporated',
       start: '2020-01-15',
       totalCost: 32423,
@@ -86,7 +86,7 @@ const validActivity = {
         2022: { hours: '', rate: '' },
         2023: { hours: '', rate: '' }
       },
-      useHourly: 'false',
+      useHourly: 'true',
       name: 'Tech Consulting Inc.',
       start: '2021-01-15',
       totalCost: 473573,
@@ -390,7 +390,7 @@ const invalidActivity = {
         2022: { hours: '', rate: '' },
         2023: { hours: '', rate: '' }
       },
-      useHourly: '',
+      useHourly: null,
       name: 'Super SLR Incorporated',
       start: '2020-01-15',
       totalCost: 32423,

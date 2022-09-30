@@ -13,10 +13,14 @@ const schemas = Joi.object({
     'string.base': 'Provide a role for the point of contact.',
     'string.empty': 'Provide a role for the point of contact.'
   }),
-  hasCosts: Joi.string().required().messages({
-    'string.base': 'Indicate whether or not this person has costs.',
-    'string.empty': 'Indicate whether or not this person has costs.'
-  }),
+  hasCosts: Joi.alternatives()
+    .try(Joi.string(), Joi.boolean()) // The frontend validates with 'yes' and 'no' whereas the backend/db uses a boolean
+    .required()
+    .messages({
+      'alternatives.types': 'Indicate whether or not this person has costs.',
+      'string.base': 'Indicate whether or not this person has costs.',
+      'string.empty': 'Indicate whether or not this person has costs.'
+    }),
   costs: Joi.alternatives().conditional('hasCosts', {
     is: 'yes',
     then: Joi.object().pattern(

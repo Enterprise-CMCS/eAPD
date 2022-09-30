@@ -763,45 +763,7 @@ const apd = {
         explanation: ''
       }
     ]
-  },
-  // Mocked metadata for admin panel demo
-  adminCheck: [
-    {
-      section: 'APD Overview',
-      subSection: null,
-      link: 'apd-overview',
-      fieldDescription: 'Please fill out name',
-      complete: false
-    },
-    {
-      section: 'Key State Personnel',
-      subSection: null,
-      link: 'state-profile',
-      fieldDescription: 'Provide the email address of the Medicaid Director',
-      complete: false
-    },
-    {
-      section: 'Key State Personnel',
-      subSection: null,
-      link: 'state-profile',
-      fieldDescription: 'Provide the phone number of the Medicaid Director',
-      complete: false
-    },
-    {
-      section: 'Activity 1',
-      subSection: 'Overview',
-      link: 'activity/0/overview',
-      fieldDescription: 'Provide a short overview of the Activity',
-      complete: false
-    },
-    {
-      section: 'Activity 2',
-      subSection: 'Outcomes and Metrics',
-      link: 'activity/1/oms',
-      fieldDescription: 'Add at least one outcome for this activity',
-      complete: false
-    }
-  ]
+  }
 };
 
 const apdNoActivities = {
@@ -963,45 +925,7 @@ const apdNoActivities = {
         explanation: ''
       }
     ]
-  },
-  // Mocked metadata for admin panel demo
-  adminCheck: [
-    {
-      section: 'APD Overview',
-      subSection: null,
-      link: 'apd-overview',
-      fieldDescription: 'Please fill out name',
-      complete: false
-    },
-    {
-      section: 'Key State Personnel',
-      subSection: null,
-      link: 'state-profile',
-      fieldDescription: 'Provide the email address of the Medicaid Director',
-      complete: false
-    },
-    {
-      section: 'Key State Personnel',
-      subSection: null,
-      link: 'state-profile',
-      fieldDescription: 'Provide the phone number of the Medicaid Director',
-      complete: false
-    },
-    {
-      section: 'Activity 1',
-      subSection: 'Overview',
-      link: 'activity/0/overview',
-      fieldDescription: 'Provide a short overview of the Activity',
-      complete: false
-    },
-    {
-      section: 'Activity 2',
-      subSection: 'Outcomes and Metrics',
-      link: 'activity/1/oms',
-      fieldDescription: 'Add at least one outcome for this activity',
-      complete: false
-    }
-  ]
+  }
 };
 
 const data = [
