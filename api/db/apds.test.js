@@ -8,7 +8,7 @@ const {
   getAPDByID,
   getAPDByIDAndState,
   updateAPDDocument,
-  validateAPDDocument
+  adminCheckAPDDocument
 } = require('./apds');
 const { setup, teardown } = require('./mongodb');
 const { getConnectionStatus } = require('./mongodb');
@@ -271,14 +271,11 @@ tap.test('database wrappers / apds', async apdsTests => {
 
   apdsTests.test(
     'validating an APD for admin check',
-    async validateAPDDocumentTests => {
-      validateAPDDocumentTests.test(
-        'when no errors are expected',
-        async test => {
-          const { errors } = await validateAPDDocument(id);
-          test.equal(errors, null); // eslint-disable-line no-underscore-dangle
-        }
-      );
+    async adminCheckAPDTest => {
+      adminCheckAPDTest.test('when no errors are expected', async test => {
+        const { errors } = await adminCheckAPDDocument(id);
+        test.equal(errors, null); // eslint-disable-line no-underscore-dangle
+      });
     }
   );
 

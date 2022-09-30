@@ -1217,110 +1217,94 @@ const expectedErrorsMockApdRandom = [
   {
     section: 'Activity Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-    fieldDescription: 'Provide a summary of HIT-funded activities.',
-    complete: false
+    fieldDescription: 'Provide a summary of HIT-funded activities.'
   },
   {
     section: 'Key State Personnel',
     link: '/apd/632a0fbc5665670a34b3bbd7/state-profile',
-    fieldDescription: 'Provide the name of the State Medicaid Director.',
-    complete: false
+    fieldDescription: 'Provide the name of the State Medicaid Director.'
   },
   {
     section: 'Key State Personnel',
     link: '/apd/632a0fbc5665670a34b3bbd7/state-profile',
-    fieldDescription: 'Provide a zip code.',
-    complete: false
+    fieldDescription: 'Provide a zip code.'
   },
   {
     section: 'Key State Personnel',
     link: '/apd/632a0fbc5665670a34b3bbd7/state-profile',
-    fieldDescription: 'Provide a role for the point of contact.',
-    complete: false
+    fieldDescription: 'Provide a role for the point of contact.'
   },
   {
     section: 'Activity 1 Private Contractor Costs',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/contractor-costs',
-    fieldDescription: 'Must select hourly or yearly.',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/contractor-costs',
+    fieldDescription: 'Must select hourly or yearly.'
   },
   {
     section: 'Activity 1 Cost Allocation',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/cost-allocation',
-    fieldDescription: 'Select a federal-state split.',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/cost-allocation',
+    fieldDescription: 'Select a federal-state split.'
   },
   {
     section: 'Activity 1 Outcomes and Milestones',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/oms',
-    fieldDescription: 'Metric is required',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/oms',
+    fieldDescription: 'Metric is required'
   },
   {
     section: 'Activity 1 State Staff and Expenses',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/state-costs',
-    fieldDescription: 'Please provide a FTE cost greater than or equal to $0.',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/state-costs',
+    fieldDescription: 'Please provide a FTE cost greater than or equal to $0.'
   },
   {
     section: 'Activity 2 Private Contractor Costs',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/1/contractor-costs',
-    fieldDescription: 'Must select hourly or yearly.',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/contractor-costs',
+    fieldDescription: 'Must select hourly or yearly.'
   },
   {
     section: 'Activity 2 Cost Allocation',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/1/cost-allocation',
-    fieldDescription: 'Select a federal-state split.',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/cost-allocation',
+    fieldDescription: 'Select a federal-state split.'
   },
   {
     section: 'Activity 2 State Staff and Expenses',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/1/state-costs',
-    fieldDescription: 'Provide an annual cost.',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/state-costs',
+    fieldDescription: 'Provide an annual cost.'
   },
   {
     section: 'Activity 2 Outcomes and Milestones',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/1/oms',
-    fieldDescription: 'Metric is required',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/oms',
+    fieldDescription: 'Metric is required'
   },
   {
     section: 'Activity 2 State Staff and Expenses',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activities/1/state-costs',
-    fieldDescription: 'Please provide a FTE cost greater than or equal to $0.',
-    complete: false
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/state-costs',
+    fieldDescription: 'Please provide a FTE cost greater than or equal to $0.'
   },
   {
     section: 'Proposed Budget',
     link: '/apd/632a0fbc5665670a34b3bbd7/proposed-budget',
     fieldDescription:
-      'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.',
-    complete: false
+      'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.'
   },
   {
     section: 'Proposed Budget',
     link: '/apd/632a0fbc5665670a34b3bbd7/proposed-budget',
     fieldDescription:
-      'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.',
-    complete: false
+      'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.'
   },
   {
     section: 'Assurances and Compliance',
     link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-    fieldDescription: 'Select yes or no',
-    complete: false
+    fieldDescription: 'Select yes or no'
   }
 ];
 
-const { validateAPDDoc } = require('./apdValidation');
+const { adminCheckApd } = require('./adminCheck');
 
-tap.test('apd document validation', async apdValidationTests => {
+tap.test('apd document admin check', async apdValidationTests => {
   apdValidationTests.test(
     'test a valid apd document returns no errors',
     async test => {
-      const results = validateAPDDoc({
+      const results = adminCheckApd({
         _id: '632a0fbc5665670a34b3bbd7',
         name: 'Test APD',
         years: ['2022', '2023'],
@@ -1338,7 +1322,7 @@ tap.test('apd document validation', async apdValidationTests => {
   apdValidationTests.test(
     'test an apd with invalid apdOverview',
     async test => {
-      const results = validateAPDDoc({
+      const results = adminCheckApd({
         _id: '632a0fbc5665670a34b3bbd7',
         name: 'Test APD',
         years: ['2022', '2023'],
@@ -1354,15 +1338,12 @@ tap.test('apd document validation', async apdValidationTests => {
         {
           section: 'Activity Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription:
-            'Provide a brief introduction to the state program.',
-          complete: false
+          fieldDescription: 'Provide a brief introduction to the state program.'
         },
         {
           section: 'Activity Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Provide a summary of HIT-funded activities.',
-          complete: false
+          fieldDescription: 'Provide a summary of HIT-funded activities.'
         }
       ]);
     }
@@ -1371,7 +1352,7 @@ tap.test('apd document validation', async apdValidationTests => {
   apdValidationTests.test(
     'test an apd with invalid invalidKeyStatePersonnel',
     async test => {
-      const results = validateAPDDoc({
+      const results = adminCheckApd({
         _id: '632a0fbc5665670a34b3bbd7',
         name: 'Test APD',
         years: ['2022', '2023'],
@@ -1386,21 +1367,19 @@ tap.test('apd document validation', async apdValidationTests => {
         {
           section: 'Key State Personnel',
           link: '/apd/632a0fbc5665670a34b3bbd7/state-profile',
-          fieldDescription: 'Provide the name of the State Medicaid Director.',
-          complete: false
+          fieldDescription: 'Provide the name of the State Medicaid Director.'
         },
         {
           section: 'Key State Personnel',
           link: '/apd/632a0fbc5665670a34b3bbd7/state-profile',
-          fieldDescription: 'Provide a name for the point of contact.',
-          complete: false
+          fieldDescription: 'Provide a name for the point of contact.'
         }
       ]);
     }
   );
 
   apdValidationTests.test('test an apd with invalid activity', async test => {
-    const results = validateAPDDoc({
+    const results = adminCheckApd({
       _id: '632a0fbc5665670a34b3bbd7',
       name: 'Test APD',
       years: ['2022', '2023'],
@@ -1415,39 +1394,33 @@ tap.test('apd document validation', async apdValidationTests => {
       {
         section: 'Activity Overview',
         link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-        fieldDescription: 'Funding sources are required',
-        complete: false
+        fieldDescription: 'Funding sources are required'
       },
       {
         section: 'Activity 1 Private Contractor Costs',
-        link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/contractor-costs',
+        link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/contractor-costs',
         fieldDescription:
-          'Provide a procurement methodology and description of services.',
-        complete: false
+          'Provide a procurement methodology and description of services.'
       },
       {
         section: 'Activity 1 Private Contractor Costs',
-        link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/contractor-costs',
-        fieldDescription: 'Provide an end date.',
-        complete: false
+        link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/contractor-costs',
+        fieldDescription: 'Provide an end date.'
       },
       {
         section: 'Activity 1 Private Contractor Costs',
-        link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/contractor-costs',
-        fieldDescription: 'Must select hourly or yearly.',
-        complete: false
+        link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/contractor-costs',
+        fieldDescription: 'Must select hourly or yearly.'
       },
       {
         section: 'Activity 1 undefined',
-        link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/undefined',
-        fieldDescription: 'Must select program type.',
-        complete: false
+        link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/undefined',
+        fieldDescription: 'Must select program type.'
       },
       {
         section: 'Activity 1 State Staff and Expenses',
-        link: '/apd/632a0fbc5665670a34b3bbd7/activities/0/state-costs',
-        fieldDescription: 'Provide a personnel description.',
-        complete: false
+        link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/state-costs',
+        fieldDescription: 'Provide a personnel description.'
       }
     ]);
   });
@@ -1455,7 +1428,7 @@ tap.test('apd document validation', async apdValidationTests => {
   apdValidationTests.test(
     'test an apd with invalid invalidProposedBudget',
     async test => {
-      const results = validateAPDDoc({
+      const results = adminCheckApd({
         _id: '632a0fbc5665670a34b3bbd7',
         name: 'Test APD',
         years: ['2022', '2023'],
@@ -1471,22 +1444,19 @@ tap.test('apd document validation', async apdValidationTests => {
           section: 'Proposed Budget',
           link: '/apd/632a0fbc5665670a34b3bbd7/proposed-budget',
           fieldDescription:
-            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.',
-          complete: false
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.'
         },
         {
           section: 'Proposed Budget',
           link: '/apd/632a0fbc5665670a34b3bbd7/proposed-budget',
           fieldDescription:
-            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.',
-          complete: false
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.'
         },
         {
           section: 'Proposed Budget',
           link: '/apd/632a0fbc5665670a34b3bbd7/proposed-budget',
           fieldDescription:
-            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.',
-          complete: false
+            'Provide a whole number greater than or equal to $0. Decimals will be rounded to the closest number.'
         }
       ]);
     }
@@ -1495,7 +1465,7 @@ tap.test('apd document validation', async apdValidationTests => {
   apdValidationTests.test(
     'test an apd with invalid invalidAssurancesAndCompliances',
     async test => {
-      const results = validateAPDDoc({
+      const results = adminCheckApd({
         _id: '632a0fbc5665670a34b3bbd7',
         name: 'Test APD',
         years: ['2022', '2023'],
@@ -1510,29 +1480,47 @@ tap.test('apd document validation', async apdValidationTests => {
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Provide an explanation',
-          complete: false
+          fieldDescription: 'Provide an explanation'
         },
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Provide an explanation',
-          complete: false
+          fieldDescription: 'Provide an explanation'
         },
         {
           section: 'Assurances and Compliance',
           link: '/apd/632a0fbc5665670a34b3bbd7/assurances-and-compliance',
-          fieldDescription: 'Select yes or no',
-          complete: false
+          fieldDescription: 'Select yes or no'
         }
       ]);
     }
   );
 
+  apdValidationTests.test('test an apd with no activities', async test => {
+    const results = adminCheckApd({
+      _id: '632a0fbc5665670a34b3bbd7',
+      name: 'Test APD',
+      years: ['2022', '2023'],
+      apdOverview: validApdOverview,
+      keyStatePersonnel: validKeyStatePersonnel,
+      previousActivities: validPreviousActivities,
+      activities: [],
+      proposedBudget: validProposedBudget,
+      assurancesAndCompliances: validAssurancesAndCompliances
+    });
+    test.same(results, [
+      {
+        section: 'Activities',
+        link: '/apd/632a0fbc5665670a34b3bbd7/activities',
+        fieldDescription: 'Activities have not been added for this APD.'
+      }
+    ]);
+  });
+
   apdValidationTests.test(
     'test an invalid apd returns expected errors',
     async test => {
-      const results = validateAPDDoc(mockApdRandomInvalid);
+      const results = adminCheckApd(mockApdRandomInvalid);
       test.same(results, expectedErrorsMockApdRandom);
     }
   );
