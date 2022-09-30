@@ -22,7 +22,7 @@ workflows:
           
 
   Terraform validation test Dio:
-    riggers:
+    triggers:
       - schedule:
           cron: '0 0 * * *'
           filters:
