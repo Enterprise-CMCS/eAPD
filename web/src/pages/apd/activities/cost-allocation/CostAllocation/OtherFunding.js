@@ -40,6 +40,7 @@ const OtherFunding = ({
   const {
     control,
     trigger,
+    clearErrors,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -54,6 +55,8 @@ const OtherFunding = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -76,6 +79,7 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
+
             <RichText
               name={`costAllocationNarrative.years.${ffy}.otherSources`}
               data-testid={`other-sources-${ffy}`}
@@ -90,6 +94,11 @@ const OtherFunding = ({
                 }
               }}
               editorClassName="rte-textarea-l"
+              error={
+                adminCheck &&
+                costAllocation[ffy]?.other > 0 &&
+                !costAllocationNarrative?.years[ffy]?.otherSources
+              }
             />
             <div>
               {adminCheck &&

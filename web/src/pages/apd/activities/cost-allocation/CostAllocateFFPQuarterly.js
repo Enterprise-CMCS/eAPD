@@ -46,7 +46,8 @@ const CostAllocateFFPQuarterly = ({
     control,
     formState: { errors },
     setValue,
-    trigger
+    trigger,
+    clearErrors
   } = useForm({
     defaultValues: {
       formData: { ...quarterlyFFP[year] }
@@ -55,6 +56,14 @@ const CostAllocateFFPQuarterly = ({
     reValidateMode: 'onBlur',
     resolver: joiResolver(costAllocateFFPQuarterlySchema)
   });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    } else {
+      clearErrors();
+    }
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setValue('formData.subtotal.inHouse', quarterlyFFP[year].subtotal.inHouse);

@@ -35,6 +35,7 @@ const ActivityOverview = ({
   const {
     control,
     trigger,
+    clearErrors,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -48,8 +49,10 @@ const ActivityOverview = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const overviewLabel = useMemo(
     () =>
@@ -153,17 +156,10 @@ const ActivityOverview = ({
                 }
               }}
               editorClassName="rte-textarea-l"
+              error={errors?.summary?.message}
             />
           )}
         />
-        {errors?.summary && (
-          <span
-            className="ds-c-inline-error ds-c-field__error-message"
-            role="alert"
-          >
-            {errors.summary.message}
-          </span>
-        )}
       </div>
 
       <Schedule activityIndex={activityIndex} />
@@ -202,15 +198,6 @@ const ActivityOverview = ({
             />
           )}
         />
-
-        {errors?.description && (
-          <span
-            className="ds-c-inline-error ds-c-field__error-message"
-            role="alert"
-          >
-            {errors.description.message}
-          </span>
-        )}
       </div>
 
       <div className="data-entry-box">

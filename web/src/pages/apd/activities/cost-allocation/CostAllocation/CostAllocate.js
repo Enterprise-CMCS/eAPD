@@ -26,6 +26,7 @@ const CostAllocate = ({
   const {
     control,
     trigger,
+    clearErrors,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -37,6 +38,8 @@ const CostAllocate = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -39,7 +39,8 @@ const IncentivePayments = ({
   const {
     control,
     formState: { errors },
-    trigger
+    trigger,
+    clearErrors
   } = useForm({
     defaultValues: {
       data
@@ -52,8 +53,10 @@ const IncentivePayments = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const dollar_error = v => {
     if (adminCheck) {
