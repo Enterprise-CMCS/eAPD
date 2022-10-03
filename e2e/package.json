@@ -73,5 +73,6 @@
       "window": true,
       "utag": true
     }
-  }
+  },
+  "prettier": "../.prettierrc"
 }

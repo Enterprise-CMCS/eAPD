@@ -157,5 +157,6 @@
       "--exclude=./**/db/mongodb.js",
       "--exclude=./**/seeds/development/apds.js"
     ]
-  }
+  },
+  "prettier": "../.prettierrc"
 }
