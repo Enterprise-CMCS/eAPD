@@ -154,5 +154,12 @@
     "react-router-dom": "can't upgrade to v6 because our system requires routes to be connected to redux",
     "history": "can't upgrade to 17 react-router v6"
   },
-  "prettier": "../.prettierrc"
+  "prettier": "../.prettierrc",
+  "lint-staged": {
+    "*.md": "prettier --write",
+    "*.json": "prettier --write",
+    "*.css": "prettier --write",
+    "*.js": ["prettier --write", "eslint"],
+    "*.jsx": ["prettier --write", "eslint"]
+  }
 }
