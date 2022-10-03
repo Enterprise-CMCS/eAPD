@@ -11,34 +11,22 @@ import HitechView from './HitechView';
 import MmisView from './MmisView';
 
 import Joi from 'joi';
+import { joiResolver } from '@hookform/resolvers/joi';
+
+const yearObj = Joi.object().keys({
+  defaultChecked: Joi.boolean().required(),
+  name: Joi.any(),
+  label: Joi.any(),
+  value: Joi.any()
+});
 
 const createApdSchema = Joi.object({
   apdType: Joi.valid('hitech', 'mmis').required(),
   name: Joi.string().min(1).required(),
-  years: Joi.array().min(3).required()
+  years: Joi.array().required()
 });
 
 const ApdNew = () => {
-  ApdNew.displayName = 'ApdNew';
-  const history = useHistory();
-  const [apdType, setApdType] = useState(false);
-  const [{ createApd: create }] = useState(false);
-  const [name, setName] = useState(false);
-  const [setIsLoading] = useState(false);
-
-  const createNew = () => {
-    setIsLoading(true);
-    create();
-  };
-
-  const { control, trigger } = useForm({
-    defaultValues: {
-      apdType
-    },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur'
-  });
-
   const thisFFY = (() => {
     const year = new Date().getFullYear();
 
@@ -61,27 +49,40 @@ const ApdNew = () => {
     value: year
   }));
 
-  const initialState = {
+  ApdNew.displayName = 'ApdNew';
+  const history = useHistory();
+  const [apdType, setApdType] = useState(false);
+  const [data, setData] = useState({
     apdType,
     name,
-    years: years
-  };
+    years
+  });
 
-  const setYears = value => {
-    try {
-      let index = years.indexOf(value);
-      if (index < 0) {
-        let newYears = years.push(value);
-        initialState.years = newYears;
-      } else {
-        years.splice(index);
-      }
-    } catch {
-      err => console.log(err);
+  const {
+    control,
+    trigger,
+    formState: { errors, isDirty, isValid }
+  } = useForm({
+    defaultValues: data,
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    resolver: joiResolver(createApdSchema)
+  });
+
+  function setYears(value) {
+    let index = years.indexOf(value),
+      newData = data;
+    if (index > -1) {
+      // only splice array when item is found
+      years.splice(index, 1); // 2nd parameter means remove one item only
+    } else {
+      years.push(value);
     }
-  };
+    newData.years = years;
+    setData(newData);
+  }
 
-  const validate = createApdSchema.validate(initialState);
+  const disabled = !isValid || !isDirty || (!isValid && isDirty);
 
   return (
     <Fragment>
@@ -130,16 +131,13 @@ const ApdNew = () => {
             <Controller
               name="name"
               control={control}
-              value=""
-              render={({ field: { ...props } }) => (
+              render={({ field: { value, onBlur, ...props } }) => (
                 <TextField
                   {...props}
                   label="APD Name"
                   className="remove-clearfix"
-                  onBlur={e => {
-                    setName(e.target.value);
-                    trigger();
-                  }}
+                  value={value}
+                  onBlur={onBlur}
                 />
               )}
             />
@@ -147,18 +145,20 @@ const ApdNew = () => {
               name="years"
               control={control}
               label="Federal Fiscal Year (FFY)"
-              render={({ field: { onChange, ...props } }) => (
+              render={({ field: { onChange, onBlur } }) => (
                 <ChoiceList
-                  {...props}
                   choices={yearChoices}
                   labelClassName="ds-u-margin-bottom--1"
                   hint="Choose the federal fiscal year(s) this APD covers."
                   type="checkbox"
-                  value=""
                   onChange={e => {
-                    onChange(e);
                     setYears(e.target.value);
+                    onChange(e);
+                    trigger();
+                    console.log({ data });
                   }}
+                  onBlur={onBlur}
+                  onComponentBlur={onBlur}
                 />
               )}
             />
@@ -170,19 +170,13 @@ const ApdNew = () => {
         <Button variation="transparent" onClick={history.goBack}>
           Cancel
         </Button>
-        {validate.error?.message ? (
-          <Button variation="primary" disabled className="ds-u-float--right">
-            Create an APD
-          </Button>
-        ) : (
-          <Button
-            variation="primary"
-            className="ds-u-float--right"
-            onClick={createNew}
-          >
-            Create an APD
-          </Button>
-        )}
+        <Button
+          variation="primary"
+          disabled={disabled}
+          className="ds-u-float--right"
+        >
+          Create an APD
+        </Button>
       </div>
     </Fragment>
   );
@@ -190,8 +184,7 @@ const ApdNew = () => {
 
 ApdNew.PropTypes = {
   createApd: PropType.func.isRequired,
-  years: PropType.arrayOf(PropType.string).isRequired,
-  yearOptions: PropType.arrayOf(PropType.string).isRequired
+  yearChoices: PropType.arrayOf(PropType.string).isRequired
 };
 
 ApdNew.defaultProps = {
