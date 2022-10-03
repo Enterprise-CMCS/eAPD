@@ -1,6 +1,7 @@
 const logger = require('../../logger')('apds route get');
 const { getAllAPDsByState: gas, getAPDByIDAndState: ga } = require('../../db');
 const { can } = require('../../middleware');
+const { ldClient } = require('../../middleware/launchDarkly');
 
 module.exports = (
   app,
@@ -72,6 +73,12 @@ module.exports = (
         logger.info(`id: ${req.params.id}, state: ${stateId}`);
         const apdFromDB = await getAPDByIDAndState(req.params.id, stateId);
 
+        const validation = await ldClient.variation(
+          'validation',
+          { key: 'anonymous', anonymous: true },
+          false
+        );
+
         if (apdFromDB) {
           const {
             _id: id,
@@ -85,7 +92,8 @@ module.exports = (
             id,
             created,
             updated,
-            state
+            state,
+            validation
           };
 
           logger.silly({

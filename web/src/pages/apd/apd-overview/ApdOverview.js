@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
+import { useFlags } from 'launchdarkly-react-client-sdk';
 import DeleteModal from '../../../components/DeleteModal';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -45,6 +46,7 @@ const ApdOverview = ({
   adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
+  const { validation } = useFlags();
 
   const {
     control,
@@ -150,6 +152,7 @@ const ApdOverview = ({
 
   return (
     <Section resource="apd">
+      {validation && <p>VALIDATION ON</p>}
       <hr className="custom-hr" />
       <TextField
         className="remove-clearfix"

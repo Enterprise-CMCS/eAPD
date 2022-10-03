@@ -1,15 +1,30 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { withRouter } from 'react-router';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { useFlags } from 'launchdarkly-react-client-sdk';
+
 import Header from '../layout/header/Header';
 import Footer from '../layout/footer/Footer';
 import routes from '../pages/mainRoutesList';
 import SessionEndingAlert from './SessionEndingAlert';
 import { pageView } from '../util/analytics';
+import { updateFlags } from '../redux/actions/flags';
 
 const cardRoutes = routes.filter(r => r.isCard).map(r => r.path);
 
-const Wrapper = ({ children, location: { pathname } }) => {
+const Wrapper = ({ children, updateFlags }) => {
+  const { pathname } = useLocation();
+
+  // when the app opens, get all of the flags
+  const { validation } = useFlags();
+
+  // use the updateFlags action if a reducer needs to use a flag
+  // then it can listen for the SET_FLAGS type
+  useEffect(() => {
+    updateFlags({ validation });
+  }, [validation]); // eslint-disable-line react-hooks/exhaustive-deps
+
   pageView(pathname);
   const isGray = cardRoutes.indexOf(pathname) >= 0;
   const showSiteTitle = pathname === '/';
@@ -26,11 +41,11 @@ const Wrapper = ({ children, location: { pathname } }) => {
 
 Wrapper.propTypes = {
   children: PropTypes.node.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired
+  updateFlags: PropTypes.func.isRequired
 };
 
-export default withRouter(Wrapper);
+const mapDispatchToProps = { updateFlags };
 
-export { Wrapper as plain };
+export default connect(null, mapDispatchToProps)(Wrapper);
+
+export { Wrapper as plain, mapDispatchToProps };

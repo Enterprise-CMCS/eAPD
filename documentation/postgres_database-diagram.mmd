@@ -1,119 +1,119 @@
-classDiagram
+erDiagram
 %% @config(../.vscode/settings.json)
-class apd_events {
-  +varchar event_id
-  +varchar user_id
-  +integer apd_id
-  +varchar event_type
-  +timestamp event_at
-  +json metadata
+apd_events {
+  varchar event_id
+  varchar user_id
+  integer apd_id
+  varchar event_type
+  timestamp event_at
+  json metadata
 }
-class auth_activities {
-  +integer id
-  +varchar name
+apd_files {
+  varchar id
+  integer apd_id
+  integer size
+  json metadata
 }
-class auth_role_activity_mapping {
-  +integer role_id
-  +integer activity_id
+auth_activities {
+  integer id
+  varchar name
 }
-class auth_roles {
-  +integer id
-  +varchar name
-  +boolean isActive
+auth_affiliations_audit {
+  integer id
+  timestamp created_at
+  timestamp updated_at
+  varchar changed_by
+  varchar user_id
+  integer original_role_id
+  interger new_role_id
+  varchar original_status
+  varchar new_status
 }
-class auth_affiliations {
-  +integer id
-  +varchar user_id
-  +varchar state_id
-  +integer role_id
-  +timestamp created_at
-  +timestamp updated_at
-  +varchar updated_by
+auth_affiliations {
+  integer id
+  varchar user_id
+  varchar state_id
+  integer role_id
+  timestamp created_at
+  timestamp updated_at
+  varchar updated_by
 }
-class auth_affiliations_audit {
-  +integer id
-  +timestamp created_ad
-  +timestamp updated_at
-  +varchar changed_by
-  +varchar user_id
-  +integer original_role_id
-  +interger new_role_id
-  +varchar original_status
-  +varchar new_status
+auth_role_activity_mapping {
+  integer role_id
+  integer activity_id
 }
-class okta_users {
-  from okta
-  +varchar user_id
-  +varchar email
-  +json metadata
-  +varchar displayName
-  +varchar secondEmail
-  +varchar primaryPhone
-  +varchar mobilePhone
-  +varchar login
+auth_roles {
+  integer id
+  varchar name
+  boolean isActive
 }
-class okta_user_audit {
-  +varchar user_id
-  +varchar username
-  +varchar name
-  +varchar state_id
-  +integer role_id
-  +varchar affiliation_status
-  +timestamp logged_in_at
+okta_user_audit {
+  varchar user_id
+  varchar username
+  varchar name
+  varchar state_id
+  integer role_id
+  varchar affiliation_status
+  timestamp logged_in_at
 }
-class state_admin_certifications {
-  +integer id
-  +varchar state
-  +integer ffy
-  +varchar name
-  +varchar email
-  +varchar phone
-  +varchar fileUrl
-  +varchar uploadedBy
-  +timestamp uploadedOn
-  +integer affiliationId
-  +varchar status
+okta_users {
+  varchar user_id
+  varchar email
+  json metadata
+  varchar displayName
+  varchar secondEmail
+  varchar primaryPhone
+  varchar mobilePhone
+  varchar login
 }
-class state_admin_certifications_audit {
-  +integer id
-  +timestamp changeDate
-  +varchar changedBy
-  +varchar changeType
-  +integer certificationId
+state_admin_certifications {
+  integer id
+  varchar state
+  integer ffy
+  varchar name
+  varchar email
+  varchar phone
+  varchar fileUrl
+  varchar uploadedBy
+  timestamp uploadedOn
+  integer affiliationId
+  varchar status
 }
-class states {
-  +varchar id
-  +varchar name
-  +json medicaid_office
+state_admin_certifications_audit {
+  integer id
+  timestamp changeDate
+  varchar changedBy
+  varchar changeType
+  integer certificationId
 }
-class knex_migrations {
-  +integer id
-  +varchar name
-  +integer batch
-  +timestamp migration_time
+states {
+  varchar id
+  varchar name
+  json medicaid_office
 }
-class knex_migrations_lock {
-  +integer index
-  +integer is_locked
+knex_migrations {
+  integer id
+  varchar name
+  integer batch
+  timestamp migration_time
 }
-class apd_files {
-  +varchar id
-  +integer apd_id
-  +integer size
-  +json metadata
+knex_migrations_lock {
+  integer index
+  integer is_locked
 }
-states <|-- state_admin_certifications
-okta_users <|-- state_admin_certifications
-auth_affiliations <|-- state_admin_certifications
-state_admin_certifications <|-- state_admin_certifications_audit
-states <|-- okta_user_audit
-okta_users <|-- okta_user_audit
-auth_roles <|-- auth_affiliations
-states <|-- auth_affiliations
-okta_users <|-- auth_affiliations
-okta_users <|-- apd_events
-auth_roles <|-- auth_affiliations_audit
-okta_users <|-- auth_affiliations_audit
-auth_activities <|-- auth_role_activity_mapping
-auth_roles <|-- auth_role_activity_mapping
+
+state_admin_certifications ||--o{ states : contains
+state_admin_certifications ||--o{ okta_users : contains
+state_admin_certifications ||--o{ auth_affiliations : contains
+state_admin_certifications_audit ||--o{ state_admin_certifications : records
+okta_user_audit ||--o{ states : contains
+okta_user_audit ||--o{ okta_users : contains
+auth_affiliations ||--o{ auth_roles : contains
+auth_affiliations ||--o{ states : contains
+auth_affiliations ||--o{ okta_users : contains
+auth_affiliations_audit ||--o{ auth_roles : contains
+auth_affiliations_audit ||--o{ okta_users : contains
+auth_role_activity_mapping ||--o{ auth_activities : connects
+auth_role_activity_mapping ||--o{ auth_roles : connects
+apd_events ||--o{ okta_users : contains
 

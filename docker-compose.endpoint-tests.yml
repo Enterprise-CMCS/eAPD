@@ -51,6 +51,7 @@ services:
       - FILE_PATH=test-data/files
       - API_PORT=8000
       - API_HOST=api-for-testing
+      - LD_API_KEY=${LD_API_KEY}
     command: yarn start
     expose:
       - 8000
