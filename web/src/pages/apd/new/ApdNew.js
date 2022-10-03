@@ -1,5 +1,5 @@
 import PropType from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -12,13 +12,6 @@ import MmisView from './MmisView';
 
 import Joi from 'joi';
 import { joiResolver } from '@hookform/resolvers/joi';
-
-const yearObj = Joi.object().keys({
-  defaultChecked: Joi.boolean().required(),
-  name: Joi.any(),
-  label: Joi.any(),
-  value: Joi.any()
-});
 
 const createApdSchema = Joi.object({
   apdType: Joi.valid('hitech', 'mmis').required(),
@@ -69,17 +62,25 @@ const ApdNew = () => {
     resolver: joiResolver(createApdSchema)
   });
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   function setYears(value) {
     let index = years.indexOf(value),
+      newYears = years,
       newData = data;
     if (index > -1) {
       // only splice array when item is found
-      years.splice(index, 1); // 2nd parameter means remove one item only
-    } else {
-      years.push(value);
+      newYears.splice(index, 1); // 2nd parameter means remove one item only
+      newData.years = newYears;
+    } else if (index == -1) {
+      newYears.push(value);
+      newData.years = newYears;
     }
-    newData.years = years;
+    console.log({ newData });
     setData(newData);
+    console.log({ data });
   }
 
   const disabled = !isValid || !isDirty || (!isValid && isDirty);
@@ -154,8 +155,6 @@ const ApdNew = () => {
                   onChange={e => {
                     setYears(e.target.value);
                     onChange(e);
-                    trigger();
-                    console.log({ data });
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
