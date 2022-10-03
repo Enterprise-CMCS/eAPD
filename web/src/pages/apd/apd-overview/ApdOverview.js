@@ -152,7 +152,7 @@ const ApdOverview = ({
 
   return (
     <Section resource="apd">
-      {validation && <p>VALIDATION ON</p>}
+      {validation && <p>VALIDATION ON TEST</p>}
       <hr className="custom-hr" />
       <TextField
         className="remove-clearfix"

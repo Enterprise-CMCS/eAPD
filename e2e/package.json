@@ -73,12 +73,5 @@
       "window": true,
       "utag": true
     }
-  },
-  "prettier": "../.prettierrc",
-  "lint-staged": {
-    "*.md": "prettier --write",
-    "*.json": "prettier --write",
-    "*.js": ["prettier --write", "eslint"],
-    "*.jsx": ["prettier --write", "eslint"]
   }
 }
