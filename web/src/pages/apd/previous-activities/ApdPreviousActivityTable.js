@@ -77,7 +77,7 @@ const ApdPreviousActivityTable = ({
               </th>
 
               <td
-                headers="prev_act_hithie_total_approved"
+                headers={`prev_act_hithie_total_approved_${year}`}
                 className={isViewOnly ? 'budget-table--number' : ''}
               >
                 {isViewOnly ? (
@@ -98,7 +98,7 @@ const ApdPreviousActivityTable = ({
               </td>
 
               <td
-                headers="prev_act_hithie_federal_approved"
+                headers={`prev_act_hithie_federal_approved_${year}`}
                 className="budget-table--number"
               >
                 <Dollars>{federalApproved}</Dollars>

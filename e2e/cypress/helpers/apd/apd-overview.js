@@ -83,7 +83,7 @@ export const testAPDOverviewWithData = () => {
         force: true
       });
       cy.contains('Delete FFY?').should('exist');
-      cy.contains('Cancel').click();
+      cy.contains('Cancel').click({ force: true });
 
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(
         'be.checked'
