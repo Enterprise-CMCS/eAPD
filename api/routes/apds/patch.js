@@ -2,7 +2,7 @@ const sanitize = require('../../util/sanitize');
 const logger = require('../../logger')('apds route put');
 const {
   updateAPDDocument: ua,
-  validateAPDDocument: validate
+  adminCheckAPDDocument: validate
 } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
 
@@ -12,7 +12,7 @@ const staticFields = ['/createdAt', '/updatedAt', '/status', '/stateId'];
 
 module.exports = (
   app,
-  { updateAPDDocument = ua, validateAPDDocument = validate } = {}
+  { updateAPDDocument = ua, adminCheckAPDDocument = validate } = {}
 ) => {
   logger.silly('setting up PATCH /apds/:id route');
   app.patch(
@@ -64,7 +64,7 @@ module.exports = (
         }
 
         // Todo: Update this to only validate on the changes
-        const validationErrors = await validateAPDDocument(req.params.id);
+        const validationErrors = await adminCheckAPDDocument(req.params.id);
 
         return res.send({
           errors,
