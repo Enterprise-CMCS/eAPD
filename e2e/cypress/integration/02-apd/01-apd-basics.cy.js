@@ -30,6 +30,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   before(() => {
     cy.useStateStaff();
+    cy.updateFeatureFlags({ validation: true });
 
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.findByRole(

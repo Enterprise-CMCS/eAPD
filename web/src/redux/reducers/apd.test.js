@@ -21,6 +21,7 @@ const {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } = require('../actions/editApd');
+const { FLAGS_UPDATED } = require('../actions/flags');
 const regulations = require('../../util/regulations').default;
 
 describe('APD reducer', () => {
@@ -35,7 +36,7 @@ describe('APD reducer', () => {
     loaded: false,
     error: '',
     selectAPDOnLoad: false,
-    adminCheck: true
+    adminCheck: false
   };
 
   it('should handle initial state', () => {
@@ -78,7 +79,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: true
+      adminCheck: false
     });
   });
 
@@ -90,7 +91,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: true
+      adminCheck: false
     });
   });
 
@@ -135,7 +136,7 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: true,
       selectAPDOnLoad: false,
-      adminCheck: true
+      adminCheck: false
     };
 
     expect(
@@ -156,7 +157,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: 'some error',
       selectAPDOnLoad: false,
-      adminCheck: true
+      adminCheck: false
     });
   });
 
@@ -1176,6 +1177,15 @@ describe('APD reducer', () => {
       },
       { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
     );
+  });
+
+  it('should handle updating flags', () => {
+    expect(
+      apd(initialState, { type: FLAGS_UPDATED, flags: { validation: true } })
+    ).toEqual({
+      ...initialState,
+      adminCheck: true
+    });
   });
 });
 

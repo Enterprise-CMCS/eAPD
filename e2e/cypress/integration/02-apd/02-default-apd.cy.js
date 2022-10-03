@@ -17,6 +17,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     cy.useStateStaff();
+    cy.updateFeatureFlags({ validation: true });
 
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.findByRole(
