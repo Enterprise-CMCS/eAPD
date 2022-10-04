@@ -60,7 +60,7 @@ export const STANDARDS = [
   }
 ];
 
-const thisFFY = (() => {
+export const thisFFY = (() => {
   const year = new Date().getFullYear();
 
   // Federal fiscal year starts October 1,

@@ -268,12 +268,17 @@ tap.test('database wrappers / apds', async apdsTests => {
     });
   });
 
-  //   Todo: Finish these tests
   //   apdsTests.test(
   //     'validating an APD for admin check',
   //     async adminCheckAPDTest => {
   //       adminCheckAPDTest.test('when no errors are expected', async test => {
-  //         const { errors } = await adminCheckAPDDocument(id);
+  //         id = await createAPD({
+  //           stateId: 'co',
+  //           status: 'draft',
+  //           ...apdForAdminCheck
+  //         });
+  //
+  //         const errors = await adminCheckAPDDocument(id);
   //         test.equal(errors, null); // eslint-disable-line no-underscore-dangle
   //       });
   //     }

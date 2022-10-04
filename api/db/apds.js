@@ -45,12 +45,11 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
 const adminCheckAPDDocument = async id => {
   // Get the updated apd json
   const apdDoc = await getAPDByID(id);
-  // Stringify it to match how the front-end is validating
-  const apdDocStringified = JSON.parse(JSON.stringify(apdDoc));
+  console.log('apdDoc', apdDoc.actvities);
   // Call validation from util, pass in apd (may need to also pass in apd ID)
-  const validationErrors = adminCheckApd(apdDocStringified);
+  const adminCheckResults = adminCheckApd(apdDoc);
   // Return results
-  return validationErrors;
+  return adminCheckResults;
 };
 
 const updateAPDDocument = async (
