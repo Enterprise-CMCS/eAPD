@@ -79,7 +79,6 @@ const buildErrorList = (validationResults, apdId) => {
   };
 
   const fullErrorList = validationResults.error.details.map(elem => {
-    console.log('error:', elem);
     const sectionName = getSectionName(elem.path);
     const linkURL = getURLPath(elem.path);
 
@@ -108,7 +107,7 @@ const adminCheckApd = apd => {
     return activity.fundingSource;
   });
 
-  // Inject funding sources into apd object
+  // Inject funding sources into apd object to support conditional validations
   const modifiedApd = {
     ...apd,
     apdOverview: {
@@ -121,9 +120,8 @@ const adminCheckApd = apd => {
     abortEarly: false
   });
 
-  // console.log('validationResults', validationResults.error.details);
   if (!validationResults.error) {
-    return null;
+    return [];
   }
 
   const errorList = buildErrorList(validationResults, apd._id); // eslint-disable-line no-underscore-dangle

@@ -850,27 +850,27 @@ const apdForAdminCheck = {
       contractorResources: [
         {
           description: 'Maintain SLR',
-          end: '2022-01-04',
+          end: '2022-02-22',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Super SLR Incorporated',
-          start: '2021-01-04',
+          start: '2021-02-22',
           totalCost: 32423,
           years: { 2022: 999756, 2023: 342444 }
         },
         {
           description: 'Technology consulting and planning services.',
-          end: '2022-01-04',
+          end: '2022-02-22',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Tech Consulting Inc.',
-          start: '2021-01-04',
+          start: '2021-02-22',
           totalCost: 473573,
           years: { 2022: 333000, 2023: 200000 }
         }
@@ -896,17 +896,17 @@ const apdForAdminCheck = {
         '<p><strong><ins>III.A.1: Modifications to the State Level Repository</ins></strong></p>\n<p>Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program. The modifications of the SLR for CMS program rule changes and guidance changes (Stage 3, IPPS, and OPPS) will require extensive development and implementation efforts and is essential to the effective administration of the Medicaid EHR Incentive Program. Modifications to the SLR are done in phases depending on how CMS rule changes occur. The implementation of the design elements will require provider onboarding activities to be initiated and completed including outreach and training for all program participants. The SLR will increase the efficiency with which Tycho Medicaid administers the program; allow for increased oversight and assure that the program is operated in accordance with the complex and evolving program rules and requirements.</p>\n<p>&nbsp;</p>\n<p>Additionally, Tycho Medicaid is seeking funding to complete a security risk assessment for the State Level Repository to ensure the SLR meets the required system security standards for HIPAA, MARSe, NIST and other state and federal security requirements for information technology.</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.B.1 Administrative and Technical Support Consulting</ins></strong></p>\n<p>The DHSS is requesting funding to support activities under the Medicaid EHR Incentive Payment Program to provide technical assistance for statewide activities and implementations. Activities of this initiative will include support of the activities included in this IAPDU, SMPHU development, eCQM implementation, project management services, and assistance with the public health expansion modernization initiative.</p>',
       expenses: [
         {
-          description: '',
+          description: 'Training purposes',
           category: 'Training and outreach',
           years: { 2022: 40000, 2023: 40000 }
         },
         {
-          description: '',
+          description: 'Travel things',
           category: 'Travel',
           years: { 2022: 35000, 2023: 35000 }
         },
         {
-          description: '',
+          description: 'Computers and such',
           category: 'Hardware, software, and licensing',
           years: { 2022: 700000, 2023: 0 }
         }

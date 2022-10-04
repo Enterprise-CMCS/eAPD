@@ -21,7 +21,7 @@ const RequiredFieldsComponent = ({ adminCheckData, adminCheckComplete }) => (
           adminCheckComplete ? 'ds-u-fill--success' : 'ds-u-fill--error'
         } ds-u-color--white ds-u-radius ds-u-padding-x--1 ds-u-padding-y--0 ds-u-font-weight--bold`}
       >
-        {adminCheckComplete ? '0' : adminCheckData.length}
+        {adminCheckData.length}
       </span>
       <span
         className={`${

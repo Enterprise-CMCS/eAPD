@@ -1315,7 +1315,7 @@ tap.test('apd document admin check', async apdValidationTests => {
         proposedBudget: validProposedBudget,
         assurancesAndCompliances: validAssurancesAndCompliances
       });
-      test.same(results, null);
+      test.same(results, []);
     }
   );
 
