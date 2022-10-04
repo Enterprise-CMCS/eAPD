@@ -439,7 +439,6 @@ jobs:
           command: |
             git clone https://github.com/terraform-aws-modules/terraform-aws-notify-slack
       - run: 
-      - run: 
           name: install terraform
           command: |
             export AWS_REGION=$AWS_REGION
@@ -492,7 +491,7 @@ jobs:
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             terraform init
             terraform validate
-            
+
   cleanup preview ami:
     docker:
       - image: cimg/base:2022.06-22.04
