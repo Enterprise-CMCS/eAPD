@@ -32,12 +32,15 @@ workflows:
           name: Packer Validation Tests
           
   terraform validation:
-    jobs:
-      - terraform validation tests:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *'
           filters:
             branches:
               only:
-                - Dio/4007-create-validate-terraform
+                - main
+    jobs:
+      - terraform validation tests:
           name: Terraform vali preview
 
 # Workflow to scan dependencies for vulnerabilities every night
