@@ -439,8 +439,8 @@ jobs:
           command: |
             git clone https://github.com/terraform-aws-modules/terraform-aws-notify-slack
       - run: 
-          name: Terraform Init 
-          working_directory: ~/project/terraform/legacy/
+      - run: 
+          name: install terraform
           command: |
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
@@ -448,14 +448,13 @@ jobs:
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
             sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install terraform=1.2.4 
-            terraform init 
-      - run: 
           name: validate main.tf
-          working_directory: ~/project/terraform/legacy
+          working_directory: ~/project/terraform/legacy/
           command: |
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init            
             terraform validate
       - run: 
           name: validate preview.tf
@@ -464,6 +463,7 @@ jobs:
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
             terraform validate
       - run: 
           name: validate public.tf
@@ -472,6 +472,7 @@ jobs:
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
             terraform validate
       - run: 
           name: validate staging.tf
@@ -480,6 +481,7 @@ jobs:
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
             terraform validate
       - run: 
           name: validate prod.tf
@@ -488,7 +490,9 @@ jobs:
             export AWS_REGION=$AWS_REGION
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-            terraform validate            
+            terraform init
+            terraform validate
+            
   cleanup preview ami:
     docker:
       - image: cimg/base:2022.06-22.04
