@@ -99,7 +99,7 @@ describe('admin check panel', () => {
           adminCheckCollapsed: false,
           adminCheckComplete: true,
           data: {
-            adminCheck: mockedData
+            adminCheck: []
           }
         }
       }

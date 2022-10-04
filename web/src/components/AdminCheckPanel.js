@@ -57,7 +57,7 @@ const AdminCheckPanel = ({
   };
 
   useEffect(() => {
-    adminCheckData.length === 0
+    adminCheckData?.length === 0
       ? toggleAdminComplete(true)
       : toggleAdminComplete(false);
   }, [adminCheckData]);
