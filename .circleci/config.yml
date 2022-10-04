@@ -17,8 +17,8 @@ workflows:
   #    jobs:
   #      - cleanup preview deploys
 
-  # Workflow to scan dependencies for vulnerabilities every night
-
+  
+# Workflows to validate IaC configurations
   packer validation:
     triggers:
       - schedule:
@@ -40,7 +40,7 @@ workflows:
                 - Dio/4007-create-validate-terraform
           name: Terraform vali preview
 
-
+# Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
@@ -489,7 +489,6 @@ jobs:
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             terraform validate            
-
   cleanup preview ami:
     docker:
       - image: cimg/base:2022.06-22.04
