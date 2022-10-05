@@ -17,9 +17,7 @@ workflows:
   #    jobs:
   #      - cleanup preview deploys
 
-  # Workflow to scan dependencies for vulnerabilities every night
-
-
+# Workflows to validate IaC configurations  
   packer validation:
     triggers:
       - schedule:
@@ -32,9 +30,19 @@ workflows:
       - packer validation tests:
           name: Packer Validation Tests
           
+  terraform validation:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *'
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - terraform validation tests:
+          name: Terraform Validation Tests
 
-
-
+# Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
@@ -396,7 +404,75 @@ jobs:
             packer validate --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var environment=Production \
             backend-ami.pkr.hcl
 
-  
+
+  terraform validation tests:
+    docker:
+      - image: cimg/base:2022.06-22.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+          name: cloning AWS notify module
+          working_directory: ~/
+          command: |
+            git clone https://github.com/terraform-aws-modules/terraform-aws-notify-slack
+      - run: 
+          name: install terraform
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+            sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            sudo apt-get update && sudo apt-get install terraform=1.2.4 
+      - run:
+          name: validate main.tf
+          working_directory: ~/project/terraform/legacy/
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init            
+            terraform validate
+      - run: 
+          name: validate preview.tf
+          working_directory: ~/project/terraform/legacy/preview
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
+            terraform validate
+      - run: 
+          name: validate public.tf
+          working_directory: ~/project/terraform/legacy/public
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
+            terraform validate
+      - run: 
+          name: validate staging.tf
+          working_directory: ~/project/terraform/legacy/staging
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
+            terraform validate
+      - run: 
+          name: validate prod.tf
+          working_directory: ~/project/terraform/legacy/prod
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
+            terraform validate
+
   build production staging ami:
     docker:
       - image: cimg/base:2022.06-22.04
