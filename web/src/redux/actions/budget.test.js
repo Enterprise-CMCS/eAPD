@@ -1,22 +1,28 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { updateBudget, UPDATE_BUDGET } from './budget';
+import { loadBudget, LOAD_BUDGET } from './budget';
 
 const mockStore = configureStore([thunk]);
+const apdID = '12345';
+const state = {
+  apd: {
+    data: { id: apdID }
+  }
+};
 
-describe('apd actions', () => {
-  const store = mockStore('old state');
+const store = mockStore(state);
 
+describe('budget actions', () => {
   beforeEach(() => {
     store.clearActions();
+    jest.clearAllMocks();
   });
 
-  it('updateBudget should create UPDATE_BUDGET action', () => {
-    const expectedActions = [{ type: UPDATE_BUDGET, state: 'old state' }];
+  it('load budget should create LOAD_BUDGET action', async () => {
+    const budget = { id: 'updated budget' };
+    await store.dispatch(loadBudget(budget));
 
-    store.dispatch(updateBudget());
-
-    expect(store.getActions()).toEqual(expectedActions);
+    expect(store.getActions()).toEqual([{ type: LOAD_BUDGET, budget }]);
   });
 });

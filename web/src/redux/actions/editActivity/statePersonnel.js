@@ -1,5 +1,4 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
-import { updateBudget } from '../budget';
 
 /**
  * Adds or updates a personnel resource from an activity
@@ -32,8 +31,6 @@ export const savePersonnel =
       path: `/activities/${activityIndex}/statePersonnel/${indexCalculated}`,
       value: data
     });
-
-    dispatch(updateBudget());
   };
 
 /**
@@ -46,5 +43,4 @@ export const removePersonnel = (activityIndex, personnelIndex) => dispatch => {
     type: REMOVE_APD_ITEM,
     path: `/activities/${activityIndex}/statePersonnel/${personnelIndex}`
   });
-  dispatch(updateBudget());
 };

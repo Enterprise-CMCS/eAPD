@@ -4,7 +4,6 @@ import {
   EDIT_APD_NAME,
   REMOVE_APD_YEAR
 } from './symbols';
-import { updateBudget } from '../budget';
 
 /**
  * Rename an apd
@@ -30,7 +29,6 @@ export const setApdName = name => (dispatch, getState) => {
  */
 export const addYear = year => (dispatch, getState) => {
   dispatch({ type: ADD_APD_YEAR, value: year, state: getState() });
-  dispatch(updateBudget());
 };
 
 /**
@@ -39,7 +37,6 @@ export const addYear = year => (dispatch, getState) => {
  */
 export const removeYear = year => (dispatch, getState) => {
   dispatch({ type: REMOVE_APD_YEAR, value: year, state: getState() });
-  dispatch(updateBudget());
 };
 
 /**

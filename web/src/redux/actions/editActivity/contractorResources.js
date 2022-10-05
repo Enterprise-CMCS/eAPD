@@ -1,5 +1,4 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
-import { updateBudget } from '../budget';
 
 /**
  * Adds or updates a contractor resource from an activity
@@ -33,8 +32,6 @@ export const saveContractor =
       path: `/activities/${activityIndex}/contractorResources/${indexCalculated}`,
       value: data
     });
-
-    dispatch(updateBudget());
   };
 
 /**
@@ -48,5 +45,4 @@ export const removeContractor =
       type: REMOVE_APD_ITEM,
       path: `/activities/${activityIndex}/contractorResources/${contractorIndex}`
     });
-    dispatch(updateBudget());
   };

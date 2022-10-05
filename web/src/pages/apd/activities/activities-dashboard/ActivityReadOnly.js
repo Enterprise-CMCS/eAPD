@@ -326,7 +326,7 @@ const Activity = ({ activity, activityIndex }) => {
         Budget and FFP
       </h3>
       <CostAllocateFFP
-        aKey={activity.key}
+        activityId={activity.activityId}
         activityIndex={activityIndex}
         costAllocation={activity.costAllocation}
         isViewOnly

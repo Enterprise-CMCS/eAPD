@@ -53,7 +53,7 @@ const IncentivePayments = ({
     if (adminCheck) {
       trigger();
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const dollar_error = v => {
     if (adminCheck) {
