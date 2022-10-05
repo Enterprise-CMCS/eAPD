@@ -72,11 +72,6 @@ class PreviousActivitiesPage {
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          cy.log(`This is the expected FFP ${expectedFFP}`);
-          // cy.get(
-          //   `[headers="prev_act_hithie_row_${year} ` +
-          //     `prev_act_hithie_federal_${year} prev_act_hithie_federal_approved_${year}"]`
-          // )
           cy.get(`[headers="prev_act_hithie_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
@@ -94,10 +89,6 @@ class PreviousActivitiesPage {
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          // cy.get(
-          //   `[headers="prev_act_mmis_row_${year} ` +
-          //     `prev_act_mmis90_federal prev_act_mmis90_federal_approved"]`
-          // )
           cy.get(`[headers="prev_act_mmis90_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
@@ -115,10 +106,6 @@ class PreviousActivitiesPage {
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          // cy.get(
-          //   `[headers="prev_act_mmis_row_${year} ` +
-          //     `prev_act_mmis75_federal prev_act_mmis75_federal_approved"]`
-          // )
           cy.get(`[headers="prev_act_mmis75_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
@@ -136,10 +123,6 @@ class PreviousActivitiesPage {
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          // cy.get(
-          //   `[headers="prev_act_mmis_row_${year} ` +
-          //     `prev_act_mmis50_federal prev_act_mmis50_federal_approved"]`
-          // )
           cy.get(`[headers="prev_act_mmis50_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
@@ -156,40 +139,24 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       totals[year] = 0;
 
-      // cy.get(
-      //   `[headers="prev_act_hithie_row_${year} ` +
-      //     `prev_act_hithie_federal prev_act_hithie_federal_approved"]`
-      // )
       cy.get(`[headers="prev_act_hithie_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
           totals[year] += extractNumber(text);
         });
 
-      // cy.get(
-      //   `[headers="prev_act_mmis_row_${year} ` +
-      //     `prev_act_mmis90_federal prev_act_mmis90_federal_approved"]`
-      // )
       cy.get(`[headers="prev_act_mmis90_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
           totals[year] += extractNumber(text);
         });
 
-      // cy.get(
-      //   `[headers="prev_act_mmis_row_${year} ` +
-      //     `prev_act_mmis75_federal prev_act_mmis75_federal_approved"]`
-      // )
       cy.get(`[headers="prev_act_mmis75_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
           totals[year] += extractNumber(text);
         });
 
-      // cy.get(
-      //   `[headers="prev_act_mmis_row_${year} ` +
-      //     `prev_act_mmis50_federal prev_act_mmis50_federal_approved"]`
-      // )
       cy.get(`[headers="prev_act_mmis50_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
