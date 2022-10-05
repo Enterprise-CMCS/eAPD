@@ -41,7 +41,7 @@ workflows:
                 - main
     jobs:
       - terraform validation tests:
-          name: Terraform vali preview
+          name: Terraform Validation Tests
 
 # Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
