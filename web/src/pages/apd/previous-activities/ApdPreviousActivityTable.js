@@ -77,8 +77,9 @@ const ApdPreviousActivityTable = ({
               </th>
 
               <td
-                headers={`prev_act_hithie_total_approved_${year}`}
+                headers={`prev_act_hithie_row_${year}`}
                 className={isViewOnly ? 'budget-table--number' : ''}
+                data-cy={`prev_act_hithie_total_approved_${year}`}
               >
                 {isViewOnly ? (
                   <Dollars>
@@ -98,15 +99,17 @@ const ApdPreviousActivityTable = ({
               </td>
 
               <td
-                headers={`prev_act_hithie_federal_approved_${year}`}
+                headers={`prev_act_hithie_row_${year}`}
                 className="budget-table--number"
+                data-cy={`prev_act_hithie_federal_approved_${year}`}
               >
                 <Dollars>{federalApproved}</Dollars>
               </td>
 
               <td
-                headers="prev_act_hithie_federal_actual"
+                headers={`prev_act_hithie_row_${year}`}
                 className={isViewOnly ? 'budget-table--number' : ''}
+                data-cy="prev_act_hithie_federal_actual"
               >
                 {isViewOnly ? (
                   <Dollars>

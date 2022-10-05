@@ -72,7 +72,7 @@ class PreviousActivitiesPage {
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          cy.get(`[headers="prev_act_hithie_federal_approved_${year}"]`)
+          cy.get(`[data-cy="prev_act_hithie_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
               const FFP = extractNumber(text);
@@ -89,7 +89,7 @@ class PreviousActivitiesPage {
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          cy.get(`[headers="prev_act_mmis90_federal_approved_${year}"]`)
+          cy.get(`[data-cy="prev_act_mmis90_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
               const FFP = extractNumber(text);
@@ -106,7 +106,7 @@ class PreviousActivitiesPage {
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          cy.get(`[headers="prev_act_mmis75_federal_approved_${year}"]`)
+          cy.get(`[data-cy="prev_act_mmis75_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
               const FFP = extractNumber(text);
@@ -123,7 +123,7 @@ class PreviousActivitiesPage {
           const medicaid = extractNumber(val);
           const expectedFFP = Math.round(medicaid * share);
           // Get the ith year's calculated FFP
-          cy.get(`[headers="prev_act_mmis50_federal_approved_${year}"]`)
+          cy.get(`[data-cy="prev_act_mmis50_federal_approved_${year}"]`)
             .invoke('text')
             .then(text => {
               const FFP = extractNumber(text);
@@ -139,25 +139,25 @@ class PreviousActivitiesPage {
     this.years.forEach(year => {
       totals[year] = 0;
 
-      cy.get(`[headers="prev_act_hithie_federal_approved_${year}"]`)
+      cy.get(`[data-cy="prev_act_hithie_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
           totals[year] += extractNumber(text);
         });
 
-      cy.get(`[headers="prev_act_mmis90_federal_approved_${year}"]`)
+      cy.get(`[data-cy="prev_act_mmis90_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
           totals[year] += extractNumber(text);
         });
 
-      cy.get(`[headers="prev_act_mmis75_federal_approved_${year}"]`)
+      cy.get(`[data-cy="prev_act_mmis75_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
           totals[year] += extractNumber(text);
         });
 
-      cy.get(`[headers="prev_act_mmis50_federal_approved_${year}"]`)
+      cy.get(`[data-cy="prev_act_mmis50_federal_approved_${year}"]`)
         .invoke('text')
         .then(text => {
           totals[year] += extractNumber(text);

@@ -116,8 +116,9 @@ const ApdPreviousActivityTableMMIS = ({
                     {TABLE_HEADERS.ffy(year)}
                   </th>
                   <td
-                    headers={`prev_act_mmis${level}_total_approved`}
+                    headers={`prev_act_mmis_row_${year}_${level}`}
                     className={isViewOnly ? 'budget-table--number' : ''}
+                    data-cy={`prev_act_mmis${level}_total_approved`}
                   >
                     {isViewOnly ? (
                       <Dollars>{expenses.totalApproved}</Dollars>
@@ -137,15 +138,17 @@ const ApdPreviousActivityTableMMIS = ({
                   </td>
 
                   <td
-                    headers={`prev_act_mmis${level}_federal_approved_${year}`}
+                    headers={`prev_act_mmis_row_${year}_${level}`}
                     className="budget-table--number"
+                    data-cy={`prev_act_mmis${level}_federal_approved_${year}`}
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>
 
                   <td
-                    headers={`prev_act_mmis${level}_federal_actual`}
+                    headers={`prev_act_mmis_row_${year}_${level}`}
                     className={isViewOnly ? 'budget-table--number' : ''}
+                    data-cy={`prev_act_mmis${level}_federal_actual`}
                   >
                     {isViewOnly ? (
                       <Dollars>{expenses.federalActual}</Dollars>
