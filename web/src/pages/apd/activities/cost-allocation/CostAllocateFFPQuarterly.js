@@ -58,7 +58,7 @@ const CostAllocateFFPQuarterly = ({
   });
 
   useEffect(() => {
-    if (adminCheck) {
+    if (adminCheck && !isViewOnly) {
       trigger();
     } else {
       clearErrors();
@@ -130,7 +130,7 @@ const CostAllocateFFPQuarterly = ({
         <tbody>
           <tr
             className={`${
-              errors?.formData?.subtotal?.inHouse?.percent
+              errors?.formData?.subtotal?.inHouse?.percent && !isViewOnly
                 ? 'table-error-border-no-bottom'
                 : ''
             }`}
@@ -173,7 +173,7 @@ const CostAllocateFFPQuarterly = ({
           </tr>
           <tr
             className={`${
-              errors?.formData?.subtotal?.inHouse?.percent
+              errors?.formData?.subtotal?.inHouse?.percent && !isViewOnly
                 ? 'table-error-border-no-top'
                 : ''
             }`}
@@ -192,7 +192,7 @@ const CostAllocateFFPQuarterly = ({
 
           <tr
             className={`${
-              errors?.formData?.subtotal?.contractors?.percent
+              errors?.formData?.subtotal?.contractors?.percent && !isViewOnly
                 ? 'table-error-border-no-bottom'
                 : ''
             }`}
@@ -235,7 +235,7 @@ const CostAllocateFFPQuarterly = ({
           </tr>
           <tr
             className={`${
-              errors?.formData?.subtotal?.contractors?.percent
+              errors?.formData?.subtotal?.contractors?.percent && !isViewOnly
                 ? 'table-error-border-no-top'
                 : ''
             }`}
@@ -277,7 +277,7 @@ const CostAllocateFFPQuarterly = ({
           </tr>
         </tbody>
       </table>
-      {errors && (
+      {errors && !isViewOnly && (
         <div
           className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
           role="alert"
