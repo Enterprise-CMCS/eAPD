@@ -9,8 +9,10 @@ unset DEV_DB_NAME
 
 echo "[]" > endpoint-data.json
 
+yarn workspace @cms-eapd/common build
+yarn workspace @cms-eapd/api build
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
-sleep 5
+sleep 15
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
