@@ -1,6 +1,6 @@
 const logger = require('../logger')('mongoose-migrate/migrate-apd-schema');
 const { setup, teardown } = require('../db/mongodb');
-const { APD } = require('../models/index');
+const { APD } = require('../models');
 
 /**
  * Update the APD schema to more closely match the front end nav/page sections

@@ -77,7 +77,8 @@ const initialState = {
           contractorResources: [],
           expenses: [],
           statePersonnel: [],
-          key: 'key123'
+          key: 'key123',
+          activityId: 'key123'
         }
       ],
       keyStatePersonnel: {
@@ -100,87 +101,89 @@ const initialState = {
         costsByFFY: {
           2022: {
             federal: 0,
-            medicaidShare: 0,
+            medicaid: 0,
             state: 0,
             total: 300
           },
           total: {
             federal: 0,
-            medicaidShare: 0,
+            medicaid: 0,
             state: 0,
             total: 300
           }
         },
         quarterlyFFP: {
-          2022: {
-            1: {
-              combined: {
-                dollars: 1938674,
-                percent: 0
+          years: {
+            2022: {
+              1: {
+                combined: {
+                  dollars: 1938674,
+                  percent: 0
+                },
+                contractors: {
+                  dollars: 9692,
+                  percent: 0.01
+                },
+                inHouse: {
+                  dollars: 1928982,
+                  percent: 1.25
+                }
               },
-              contractors: {
-                dollars: 9692,
-                percent: 0.01
+              2: {
+                combined: {
+                  dollars: 628093,
+                  percent: 0
+                },
+                contractors: {
+                  dollars: 242297,
+                  percent: 0.25
+                },
+                inHouse: {
+                  dollars: 385796,
+                  percent: 0.25
+                }
               },
-              inHouse: {
-                dollars: 1928982,
-                percent: 1.25
-              }
-            },
-            2: {
-              combined: {
-                dollars: 628093,
-                percent: 0
+              3: {
+                combined: {
+                  dollars: 628093,
+                  percent: 0
+                },
+                contractors: {
+                  dollars: 242297,
+                  percent: 0.25
+                },
+                inHouse: {
+                  dollars: 385796,
+                  percent: 0.25
+                }
               },
-              contractors: {
-                dollars: 242297,
-                percent: 0.25
+              4: {
+                combined: {
+                  dollars: 628093,
+                  percent: 0
+                },
+                contractors: {
+                  dollars: 242297,
+                  percent: 0.25
+                },
+                inHouse: {
+                  dollars: 385796,
+                  percent: 0.25
+                }
               },
-              inHouse: {
-                dollars: 385796,
-                percent: 0.25
-              }
-            },
-            3: {
-              combined: {
-                dollars: 628093,
-                percent: 0
-              },
-              contractors: {
-                dollars: 242297,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 385796,
-                percent: 0.25
-              }
-            },
-            4: {
-              combined: {
-                dollars: 628093,
-                percent: 0
-              },
-              contractors: {
-                dollars: 242297,
-                percent: 0.25
-              },
-              inHouse: {
-                dollars: 385796,
-                percent: 0.25
-              }
-            },
-            subtotal: {
-              combined: {
-                dollars: 2512373,
-                percent: 0
-              },
-              contractors: {
-                dollars: 969188,
-                percent: 0.76
-              },
-              inHouse: {
-                dollars: 1543185,
-                percent: 2
+              subtotal: {
+                combined: {
+                  dollars: 2512373,
+                  percent: 0
+                },
+                contractors: {
+                  dollars: 969188,
+                  percent: 0.76
+                },
+                inHouse: {
+                  dollars: 1543185,
+                  percent: 2
+                }
               }
             }
           },

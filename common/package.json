@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
-    "scaffold": "rm -rf dist && mkdir dist",
-    "build": "yarn scaffold && babel . --ignore \"node_modules\",\"dist\" -d ./dist -s",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "babel . -d ./dist -s --ignore \"node_modules\",\"dist\"",
     "stryker": "TZ=utc stryker run",
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch",

@@ -22,7 +22,7 @@ describe('the (Activity) EntryDetails component', () => {
   const props = {
     apdId: '0123456789abcdef01234567',
     activityIndex: 2,
-    activityKey: 'activity key',
+    activityId: 'activity key',
     fundingSource: 'money pit',
     jumpAction: jest.fn(),
     name: 'activity name',
@@ -57,7 +57,7 @@ describe('the (Activity) EntryDetails component', () => {
     const firstActivityProps = {
       apdId: '0123456789abcdef01234567',
       activityIndex: 0,
-      activityKey: 'activity 1 key',
+      activityId: 'activity 1 key',
       fundingSource: 'money pit',
       jumpAction: jest.fn(),
       name: 'activity 1 name',
@@ -83,22 +83,22 @@ describe('the (Activity) EntryDetails component', () => {
           activities: [
             {
               fundingSource: 'money pit',
-              key: 'key1',
+              activityId: 'key1',
               name: 'that free money guy'
             },
             {
               fundingSource: 'black market kidneys',
-              key: 'key2',
+              activityId: 'key2',
               name: 'scary alley'
             },
             {
               fundingSource: 'appropriations',
-              key: 'key3',
+              activityId: 'key3',
               name: 'Congress Dollars'
             },
             {
               fundingSource: 'blackjack',
-              key: 'key4',
+              activityId: 'key4',
               name: 'Lucky Pete'
             }
           ]
@@ -107,7 +107,7 @@ describe('the (Activity) EntryDetails component', () => {
     };
 
     expect(mapStateToProps(state, { activityIndex: 2 })).toEqual({
-      activityKey: 'key3',
+      activityId: 'key3',
       fundingSource: 'appropriations',
       name: 'Congress Dollars'
     });
