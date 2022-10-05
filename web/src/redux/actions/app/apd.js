@@ -1,4 +1,5 @@
 import { push } from 'connected-react-router';
+import { deepCopy, hasBudgetUpdate } from '@cms-eapd/common/utils/utils';
 
 import {
   CREATE_APD_FAILURE,
@@ -21,7 +22,7 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from './symbols';
-import { updateBudget } from '../budget';
+import { loadBudget } from '../budget';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import {
   ariaAnnounceApdLoaded,
@@ -64,7 +65,13 @@ export const saveApd = () => (dispatch, getState) => {
     return axios
       .patch(`/apds/${apdID}`, patches)
       .then(res => {
-        dispatch({ type: SAVE_APD_SUCCESS, data: res.data.apd });
+        const budget = deepCopy(res.data.apd.budget);
+        delete res.data.apd.budget;
+
+        dispatch({ type: SAVE_APD_SUCCESS, apd: res.data.apd });
+        if (hasBudgetUpdate(patches)) {
+          dispatch(loadBudget(budget));
+        }
         return res.data.apd;
       })
       .catch(error => {
@@ -94,18 +101,21 @@ export const selectApd =
 
     return axios
       .get(`/apds/${id}`)
-      .then(req => {
-        dispatch({ type: SELECT_APD_SUCCESS, apd: req.data });
+      .then(res => {
+        const budget = deepCopy(res.data.budget);
+        delete res.data.budget;
+
+        dispatch({ type: SELECT_APD_SUCCESS, apd: res.data });
         dispatch({
           type: APD_ACTIVITIES_CHANGE,
-          activities: req.data.activities
+          activities: res.data.activities
         });
         dispatch({ type: ADMIN_CHECK_TOGGLE, data: false });
 
         // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
         // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
         // values using an EDIT_APD action. That way the initial values get saved back to the API.
-        if (Object.keys(req.data.assurancesAndCompliances).length === 0) {
+        if (Object.keys(res.data.assurancesAndCompliances).length === 0) {
           dispatch({
             type: EDIT_APD,
             path: '/assurancesAndCompliances',
@@ -113,7 +123,7 @@ export const selectApd =
           });
         }
 
-        dispatch(updateBudget());
+        dispatch(loadBudget(budget));
         dispatch(pushRoute(route));
         dispatch(ariaAnnounceApdLoaded());
 

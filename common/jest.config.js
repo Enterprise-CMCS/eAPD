@@ -8,6 +8,7 @@ module.exports = {
   testEnvironment: 'node',
   testTimeout: 30000,
   collectCoverageFrom: ['**/*.{js,jsx}'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   coverageThreshold: {
     global: {
       branches: 74,
