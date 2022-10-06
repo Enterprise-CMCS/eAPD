@@ -9,14 +9,17 @@ unset DEV_DB_NAME
 
 echo "[]" > endpoint-data.json
 
-yarn workspace @cms-eapd/common build
-yarn workspace @cms-eapd/api build
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
 sleep 15
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
-sleep 5
+echo 'Checking to see if the server is running'
+until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
+    sleep 0.1;
+    echo '.';
+done;
+echo 'Server is running and status is healthy'
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e ENDPOINT_COVERAGE_CAPTURE=true api-for-testing yarn run test-endpoints $@
 EXIT_CODE=$?
 docker cp api-container:/app/api/endpoint-data.json endpoint-data.json

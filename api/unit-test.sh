@@ -10,7 +10,12 @@ docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec db sh -c 'PGP
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
-sleep 15
+echo 'Checking to see if the server is running'
+until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
+    sleep 0.1;
+    echo '.';
+done;
+echo 'Server is running and status is healthy'
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run test $@
 EXIT_CODE=$?
 

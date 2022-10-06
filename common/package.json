@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
-    "prebuild": "ls dist &> /dev/null || mkdir dist",
+    "prebuild": "rm -rf dist && mkdir dist",
     "build": "babel . -d ./dist -s --ignore \"node_modules\",\"dist\"",
     "stryker": "TZ=utc stryker run",
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest",

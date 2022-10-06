@@ -6,10 +6,10 @@
   "module": "dist/main.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "prebuild": "ls dist &> /dev/null || mkdir dist && cp package.json dist/ && cp -r schemas dist/",
+    "prebuild": "yarn workspace @cms-eapd/common build && rm -rf dist/db/* && rm -rf dist/migrations/* && rm -rf dist && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
     "build": "babel . -d ./dist -s --ignore \"node_modules/!file-type/**\",\"dist\",\"coverage-endpoint\"",
     "start": "yarn build && node dist/main.js",
-    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
+    "start-dev": "yarn workspace @cms-eapd/common build && NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
     "npm-check": "npx npm-check-updates",
     "knex": "babel-node node_modules/.bin/knex",
     "knex-console": "node --experimental-repl-await knexrepl.js",
@@ -27,7 +27,7 @@
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
-    "test-endpoints": "jest --detectOpenHandles --forceExit --runInBand",
+    "test-endpoints": "jest -u --detectOpenHandles --forceExit --runInBand",
     "test-specific": "NODE_ENV=test tap --no-coverage --coverage-report=text-lcov --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
