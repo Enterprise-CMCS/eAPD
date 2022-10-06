@@ -748,6 +748,7 @@ jobs:
       - run:
           name: run tests
           working_directory: ~/project/api
+          no_output_timeout: 60m
           command: |
             # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
@@ -789,6 +790,7 @@ jobs:
       - run:
           name: run tests
           working_directory: ~/project/api
+          no_output_timeout: 60m
           command: |
             # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
@@ -913,10 +915,17 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
+            COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api build api-for-testing
+            COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
             sleep 5
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
+            echo 'Checking to see if the server is running'
+            until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
+              sleep 0.1;
+              echo '.';
+            done;
+            echo 'Server is running and status is healthy'
       - run:
           name: pull owasp zap docker image
           working_directory: ~/project/api

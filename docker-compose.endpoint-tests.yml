@@ -31,7 +31,6 @@ services:
       dockerfile: ./api/Dockerfile
     image: cms-eapd/api
     container_name: api-container
-    restart: on-failure
     depends_on:
       - db
       - mongo

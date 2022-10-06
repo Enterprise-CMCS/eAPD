@@ -21,6 +21,7 @@ until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" 
 done;
 echo 'Server is running and status is healthy'
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e ENDPOINT_COVERAGE_CAPTURE=true api-for-testing yarn run test-endpoints $@
+echo $?
 EXIT_CODE=$?
 docker cp api-container:/app/api/endpoint-data.json endpoint-data.json
 
