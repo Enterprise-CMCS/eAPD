@@ -38,7 +38,7 @@ const CostAllocate = ({
     if (adminCheck) {
       trigger();
     }
-  }, [adminCheck]);
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Subsection

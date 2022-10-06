@@ -329,6 +329,812 @@ Object {
             "description": "Federal citations that states must assert compliance with. This is a free-form object.",
             "type": "object",
           },
+          "budget": Object {
+            "properties": Object {
+              "activities": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^[0-9a-zA-Z]{24}$": Object {
+                    "$ref": "activities.json",
+                  },
+                },
+              },
+              "activityTotals": Object {
+                "items": Object {
+                  "properties": Object {
+                    "data": Object {
+                      "properties": Object {
+                        "combined": Object {
+                          "type": "object",
+                          "x-patternProperties": Object {
+                            "^([0-9]{4}|total)$": Object {
+                              "type": "number",
+                            },
+                          },
+                        },
+                        "contractors": Object {
+                          "type": "object",
+                          "x-patternProperties": Object {
+                            "^([0-9]{4}|total)$": Object {
+                              "type": "number",
+                            },
+                          },
+                        },
+                        "expenses": Object {
+                          "type": "object",
+                          "x-patternProperties": Object {
+                            "^([0-9]{4}|total)$": Object {
+                              "type": "number",
+                            },
+                          },
+                        },
+                        "otherFunding": Object {
+                          "type": "object",
+                          "x-patternProperties": Object {
+                            "^[0-9]{4}$": Object {
+                              "properties": Object {
+                                "contractors": Object {
+                                  "type": "number",
+                                },
+                                "expenses": Object {
+                                  "type": "number",
+                                },
+                                "statePersonnel": Object {
+                                  "type": "number",
+                                },
+                                "total": Object {
+                                  "type": "number",
+                                },
+                              },
+                              "type": "object",
+                            },
+                          },
+                        },
+                        "statePersonnel": Object {
+                          "type": "object",
+                          "x-patternProperties": Object {
+                            "^([0-9]{4}|total)$": Object {
+                              "type": "number",
+                            },
+                          },
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "fundingSource": Object {
+                      "type": "string",
+                    },
+                    "id": Object {
+                      "type": "string",
+                    },
+                    "name": Object {
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "type": "array",
+              },
+              "combined": Object {
+                "type": "object",
+                "x-patternProperties": Object {
+                  "^([0-9]{4}|total)$": Object {
+                    "properties": Object {
+                      "federal": Object {
+                        "type": "number",
+                      },
+                      "medicaid": Object {
+                        "type": "number",
+                      },
+                      "state": Object {
+                        "type": "number",
+                      },
+                      "total": Object {
+                        "type": "number",
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+              },
+              "federalShareByFFYQuarter": Object {
+                "properties": Object {
+                  "hitAndHie": Object {
+                    "properties": Object {
+                      "total": Object {
+                        "properties": Object {
+                          "combined": Object {
+                            "type": "number",
+                          },
+                          "contractors": Object {
+                            "type": "number",
+                          },
+                          "inHouse": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "years": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "properties": Object {
+                              "1": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "2": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "3": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "4": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "subtotal": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "mmis": Object {
+                    "properties": Object {
+                      "total": Object {
+                        "properties": Object {
+                          "combined": Object {
+                            "type": "number",
+                          },
+                          "contractors": Object {
+                            "type": "number",
+                          },
+                          "inHouse": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                      "years": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[0-9]{4}$": Object {
+                            "properties": Object {
+                              "1": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "2": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "3": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "4": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                              "subtotal": Object {
+                                "properties": Object {
+                                  "combined": Object {
+                                    "type": "number",
+                                  },
+                                  "contractors": Object {
+                                    "type": "number",
+                                  },
+                                  "inHouse": Object {
+                                    "type": "number",
+                                  },
+                                },
+                                "type": "object",
+                              },
+                            },
+                            "type": "object",
+                          },
+                        },
+                      },
+                    },
+                    "type": "object",
+                  },
+                },
+                "type": "object",
+              },
+              "hie": Object {
+                "properties": Object {
+                  "combined": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "contractors": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "expenses": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "statePersonnel": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                },
+                "type": "object",
+              },
+              "hit": Object {
+                "properties": Object {
+                  "combined": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "contractors": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "expenses": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "statePersonnel": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                },
+                "type": "object",
+              },
+              "hitAndHie": Object {
+                "properties": Object {
+                  "combined": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "contractors": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "expenses": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "statePersonnel": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                },
+                "type": "object",
+              },
+              "mmis": Object {
+                "properties": Object {
+                  "combined": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "contractors": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "expenses": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "statePersonnel": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^[0-9]{4}$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                },
+                "type": "object",
+              },
+              "mmisByFFP": Object {
+                "properties": Object {
+                  "0-100": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^([0-9]{4}|total)$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "50-50": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^([0-9]{4}|total)$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "75-25": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^([0-9]{4}|total)$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "90-10": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^([0-9]{4}|total)$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                  "combined": Object {
+                    "type": "object",
+                    "x-patternProperties": Object {
+                      "^([0-9]{4}|total)$": Object {
+                        "properties": Object {
+                          "federal": Object {
+                            "type": "number",
+                          },
+                          "medicaid": Object {
+                            "type": "number",
+                          },
+                          "state": Object {
+                            "type": "number",
+                          },
+                          "total": Object {
+                            "type": "number",
+                          },
+                        },
+                        "type": "object",
+                      },
+                    },
+                  },
+                },
+              },
+              "years": Object {
+                "items": Object {
+                  "type": "string",
+                },
+                "type": "array",
+              },
+            },
+            "type": "object",
+          },
           "created": Object {
             "description": "Timestamp of when this APD was created",
             "format": "date-time",

@@ -106,7 +106,7 @@ const CostAllocateFFP = ({
   costAllocation,
   costSummary,
   otherFunding,
-  aKey,
+  activityId,
   isViewOnly,
   setFundingSplit,
   stateName,
@@ -334,7 +334,7 @@ const CostAllocateFFP = ({
 
             <CostAllocateFFPQuarterly
               activityIndex={activityIndex}
-              aKey={aKey}
+              activityId={activityId}
               isViewOnly={isViewOnly}
               year={ffy}
             />
@@ -356,7 +356,7 @@ const CostAllocateFFP = ({
 };
 
 CostAllocateFFP.propTypes = {
-  aKey: PropTypes.string.isRequired,
+  activityId: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityName: PropTypes.string.isRequired,
   costAllocation: PropTypes.object.isRequired,
@@ -388,7 +388,7 @@ const mapStateToProps = (
   const activityTotal = getActivityTotal(state, { activityIndex });
 
   return {
-    aKey: activity.key,
+    activityId: activity.activityId,
     activityName: activity.name || 'Untitled',
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),

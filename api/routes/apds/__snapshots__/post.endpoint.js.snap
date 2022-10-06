@@ -7,14 +7,14 @@ Object {
       "alternatives": "",
       "contractorResources": Array [],
       "costAllocation": Object {
-        "2022": Object {
+        "2023": Object {
           "ffp": Object {
             "federal": 0,
             "state": 100,
           },
           "other": 0,
         },
-        "2023": Object {
+        "2024": Object {
           "ffp": Object {
             "federal": 0,
             "state": 100,
@@ -25,10 +25,10 @@ Object {
       "costAllocationNarrative": Object {
         "methodology": "",
         "years": Object {
-          "2022": Object {
+          "2023": Object {
             "otherSources": "",
           },
-          "2023": Object {
+          "2024": Object {
             "otherSources": "",
           },
         },
@@ -41,7 +41,7 @@ Object {
       "plannedEndDate": "",
       "plannedStartDate": "",
       "quarterlyFFP": Object {
-        "2022": Object {
+        "2023": Object {
           "1": Object {
             "contractors": 0,
             "inHouse": 0,
@@ -59,7 +59,7 @@ Object {
             "inHouse": 0,
           },
         },
-        "2023": Object {
+        "2024": Object {
           "1": Object {
             "contractors": 0,
             "inHouse": 0,
@@ -233,26 +233,6 @@ Object {
   "name": "HITECH IAPD",
   "previousActivities": Object {
     "actualExpenditures": Object {
-      "2020": Object {
-        "hithie": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
-        "mmis": Object {
-          "50": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
-          "75": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
-          "90": Object {
-            "federalActual": 0,
-            "totalApproved": 0,
-          },
-        },
-      },
       "2021": Object {
         "hithie": Object {
           "federalActual": 0,
@@ -293,19 +273,39 @@ Object {
           },
         },
       },
+      "2023": Object {
+        "hithie": Object {
+          "federalActual": 0,
+          "totalApproved": 0,
+        },
+        "mmis": Object {
+          "50": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "75": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "90": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+        },
+      },
     },
     "previousActivitySummary": "",
   },
   "proposedBudget": Object {
     "incentivePayments": Object {
       "ehAmt": Object {
-        "2022": Object {
+        "2023": Object {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0,
         },
-        "2023": Object {
+        "2024": Object {
           "1": 0,
           "2": 0,
           "3": 0,
@@ -313,13 +313,13 @@ Object {
         },
       },
       "ehCt": Object {
-        "2022": Object {
+        "2023": Object {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0,
         },
-        "2023": Object {
+        "2024": Object {
           "1": 0,
           "2": 0,
           "3": 0,
@@ -327,13 +327,13 @@ Object {
         },
       },
       "epAmt": Object {
-        "2022": Object {
+        "2023": Object {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0,
         },
-        "2023": Object {
+        "2024": Object {
           "1": 0,
           "2": 0,
           "3": 0,
@@ -341,13 +341,13 @@ Object {
         },
       },
       "epCt": Object {
-        "2022": Object {
+        "2023": Object {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0,
         },
-        "2023": Object {
+        "2024": Object {
           "1": 0,
           "2": 0,
           "3": 0,
@@ -357,8 +357,8 @@ Object {
     },
   },
   "years": Array [
-    "2022",
     "2023",
+    "2024",
   ],
 }
 `;

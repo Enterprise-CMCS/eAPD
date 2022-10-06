@@ -1,4 +1,6 @@
+require('./budget');
 const mongoose = require('mongoose');
+const { generateKey } = require('@cms-eapd/common');
 
 const quarterlyFFP = new mongoose.Schema(
   {
@@ -186,6 +188,10 @@ const apdSchema = new mongoose.Schema({
   activities: [
     {
       _id: false,
+      activityId: {
+        type: String,
+        default: () => generateKey()
+      },
       alternatives: String,
       contractorResources: [
         {
@@ -362,6 +368,11 @@ const apdSchema = new mongoose.Schema({
     recordsAccess: [federalCitation],
     softwareRights: [federalCitation],
     security: [federalCitation]
+  },
+  budget: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Budget',
+    default: null
   }
 });
 

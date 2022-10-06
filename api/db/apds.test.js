@@ -10,8 +10,7 @@ const {
   updateAPDDocument
 } = require('./apds');
 const { setup, teardown } = require('./mongodb');
-const { getConnectionStatus } = require('./mongodb');
-const APD = require('../models/apd');
+const { APD, Budget } = require('../models/index');
 const { apd } = require('../seeds/development/apds');
 
 const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
@@ -19,7 +18,14 @@ let clock;
 let clockStub;
 let id;
 
-const deleteAPD = async apdId => APD.findOneAndDelete({ _id: apdId }).exec();
+const deleteAPD = async apdId => {
+  const { budget = null } =
+    (await APD.findOne({ _id: apdId }, 'budget').lean()) || {};
+  await APD.findOneAndDelete({ _id: apdId });
+  if (budget) {
+    await Budget.findOneAndDelete({ _id: budget });
+  }
+};
 
 tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.before(async () => {
@@ -30,8 +36,10 @@ tap.test('database wrappers / apds', async apdsTests => {
   });
 
   apdsTests.beforeEach(async () => {
-    // eslint-disable-next-line no-console
-    console.log(`connection status ${getConnectionStatus()}`);
+    if (id) {
+      await deleteAPD(id);
+      id = null;
+    }
     id = await createAPD({
       stateId: 'co',
       status: 'draft',
@@ -83,12 +91,14 @@ tap.test('database wrappers / apds', async apdsTests => {
     const found = await getAPDByID(id);
 
     test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
+    test.ok(!!found.budget, 'Budget was populated');
   });
 
   apdsTests.test('getting a single APD by ID for a state', async test => {
     const found = await getAPDByIDAndState(id, 'co');
 
     test.equal(found._id.toString(), id); // eslint-disable-line no-underscore-dangle
+    test.ok(!!found.budget, 'Budget was populated');
   });
 
   apdsTests.test('updating an APD', async updateAPDDocumentTests => {
@@ -132,7 +142,7 @@ tap.test('database wrappers / apds', async apdsTests => {
         'Error in Activity 1 Milestone 2 endDate; it has been set to null'
       );
       test.equal(
-        updatedAt,
+        updatedAt.toJSON(),
         '1904-10-03T00:00:00.000Z',
         'updatedAt was updated'
       );
@@ -172,7 +182,7 @@ tap.test('database wrappers / apds', async apdsTests => {
           'Activity 1, Milestone 1, milestone was updated'
         );
         test.equal(
-          updatedAt,
+          updatedAt.toJSON(),
           '1904-10-03T00:00:00.000Z',
           'updatedAt was updated'
         );
@@ -195,7 +205,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       ]);
 
       test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt, '1904-10-03T00:00:00.000Z');
+      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
       test.equal(
         programOverview,
         'This is the test of a <a>program overview</a>',
@@ -217,7 +227,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       ]);
 
       test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt, '1904-10-03T00:00:00.000Z');
+      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
       test.notOk(stateUpdated, 'state was not updated');
     });
 
@@ -259,11 +269,11 @@ tap.test('database wrappers / apds', async apdsTests => {
       );
 
       test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt, '1904-10-03T00:00:00.000Z');
+      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
       test.ok(stateUpdated, 'state was updated');
     });
 
-    updateAPDDocumentTests.afterEach(() => {
+    updateAPDDocumentTests.afterEach(async () => {
       clock.restore();
     });
   });
@@ -287,6 +297,7 @@ tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.teardown(async () => {
     if (id) {
       await deleteAPD(id);
+      id = null;
     }
     await teardown();
     clockStub.restore();
