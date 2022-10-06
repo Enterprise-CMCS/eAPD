@@ -13,6 +13,8 @@ const buildErrorList = (validationResults, apdId) => {
       costAllocation: 'Cost Allocation',
       costAllocationNarrative: 'Cost Allocation',
       description: 'Activity Overview',
+      name: 'Activity Overview',
+      fundingSource: 'Activity Overview',
       expenses: 'State Staff and Expenses',
       outcomes: 'Outcomes and Milestones',
       plannedEndDate: 'Activity Schedule',
@@ -25,6 +27,16 @@ const buildErrorList = (validationResults, apdId) => {
 
     if (typeof errorPath[1] === 'undefined') {
       return `Activities`;
+    }
+
+    // Edge cases
+    if (
+      ['budget', 'activities', 'quarterlyFFP', 'years', 'percent'].every(val =>
+        errorPath.includes(val)
+      )
+    ) {
+      console.log('matched all paths');
+      return `Activity ${errorPath[1] + 1} Budget and FFP`;
     }
     return `Activity ${errorPath[1] + 1} ${subSectionNameDict[errorPath[2]]}`;
   };
@@ -52,6 +64,8 @@ const buildErrorList = (validationResults, apdId) => {
       outcomes: 'oms',
       plannedEndDate: 'overview',
       plannedStartDate: 'overview',
+      name: 'overview',
+      fundingSource: 'overview',
       schedule: 'oms',
       standardsAndConditions: 'overview',
       statePersonnel: 'state-costs',
@@ -124,8 +138,9 @@ const adminCheckApd = apd => {
     return [];
   }
 
+  console.log('validationResults', validationResults.error.details);
   const errorList = buildErrorList(validationResults, apd._id); // eslint-disable-line no-underscore-dangle
-
+  console.log('errorList', errorList);
   return errorList;
 };
 

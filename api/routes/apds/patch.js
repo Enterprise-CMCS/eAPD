@@ -60,7 +60,6 @@ module.exports = (
           logger.error({ id: req.id, message: errors });
         }
 
-        // Todo: Update this to only validate on the changes
         const validationErrors = await adminCheckAPDDocument(req.params.id);
 
         return res.send({

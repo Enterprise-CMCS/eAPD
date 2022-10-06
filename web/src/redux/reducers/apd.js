@@ -467,9 +467,9 @@ const reducer = (state = initialState, action) => {
         },
         data: {
           ...state.data,
-          adminCheck: action.data.adminCheck,
-          created: getHumanDatestamp(action.data.created),
-          updated: getHumanTimestamp(action.data.updated)
+          adminCheck: action.apd.adminCheck,
+          created: getHumanDatestamp(action.apd.created),
+          updated: getHumanTimestamp(action.apd.updated)
         }
       };
 
