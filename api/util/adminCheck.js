@@ -120,7 +120,6 @@ const adminCheckApd = apd => {
     abortEarly: false
   });
 
-  // console.log('validationResults', validationResults.error.details);
   if (!validationResults.error) {
     return null;
   }
