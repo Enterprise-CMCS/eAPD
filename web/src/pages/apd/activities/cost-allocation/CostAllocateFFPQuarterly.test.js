@@ -1,159 +1,158 @@
 import React from 'react';
-import {
-  renderWithConnection,
-  act,
-  screen,
-  waitFor
-} from 'apd-testing-library';
+import { renderWithConnection, act, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
 import CostAllocateFFPQuarterly from './CostAllocateFFPQuarterly';
 
 const quarterlyFFP = {
-  2022: {
-    1: {
-      combined: {
-        dollars: 753714,
-        percent: 0
+  years: {
+    2022: {
+      1: {
+        combined: {
+          dollars: 753714,
+          percent: 0
+        },
+        contractors: {
+          dollars: 290757,
+          percent: 0.25
+        },
+        inHouse: {
+          dollars: 462957,
+          percent: 0.25
+        }
       },
-      contractors: {
-        dollars: 290757,
-        percent: 0.25
+      2: {
+        combined: {
+          dollars: 753712,
+          percent: 0
+        },
+        contractors: {
+          dollars: 290757,
+          percent: 0.25
+        },
+        inHouse: {
+          dollars: 462955,
+          percent: 0.25
+        }
       },
-      inHouse: {
-        dollars: 462957,
-        percent: 0.25
-      }
-    },
-    2: {
-      combined: {
-        dollars: 753712,
-        percent: 0
+      3: {
+        combined: {
+          dollars: 753711,
+          percent: 0
+        },
+        contractors: {
+          dollars: 290756,
+          percent: 0.25
+        },
+        inHouse: {
+          dollars: 462955,
+          percent: 0.25
+        }
       },
-      contractors: {
-        dollars: 290757,
-        percent: 0.25
+      4: {
+        combined: {
+          dollars: 753711,
+          percent: 0
+        },
+        contractors: {
+          dollars: 290756,
+          percent: 0.25
+        },
+        inHouse: {
+          dollars: 462955,
+          percent: 0.25
+        }
       },
-      inHouse: {
-        dollars: 462955,
-        percent: 0.25
-      }
-    },
-    3: {
-      combined: {
-        dollars: 753711,
-        percent: 0
-      },
-      contractors: {
-        dollars: 290756,
-        percent: 0.25
-      },
-      inHouse: {
-        dollars: 462955,
-        percent: 0.25
-      }
-    },
-    4: {
-      combined: {
-        dollars: 753711,
-        percent: 0
-      },
-      contractors: {
-        dollars: 290756,
-        percent: 0.25
-      },
-      inHouse: {
-        dollars: 462955,
-        percent: 0.25
-      }
-    },
-    subtotal: {
-      combined: {
-        dollars: 3014848,
-        percent: 0
-      },
-      contractors: {
-        dollars: 1163026,
-        percent: 1
-      },
-      inHouse: {
-        dollars: 1851822,
-        percent: 1
+      subtotal: {
+        combined: {
+          dollars: 3014848,
+          percent: 0
+        },
+        contractors: {
+          dollars: 1163026,
+          percent: 1
+        },
+        inHouse: {
+          dollars: 1851822,
+          percent: 1
+        }
       }
     }
   }
 };
 
 const quarterlyFFPWithErrors = {
-  2022: {
-    1: {
-      combined: {
-        dollars: 753714,
-        percent: 0
+  years: {
+    2022: {
+      1: {
+        combined: {
+          dollars: 753714,
+          percent: 0
+        },
+        contractors: {
+          dollars: 290757,
+          percent: 0.5
+        },
+        inHouse: {
+          dollars: 462957,
+          percent: 0.5
+        }
       },
-      contractors: {
-        dollars: 290757,
-        percent: 0.5
+      2: {
+        combined: {
+          dollars: 753712,
+          percent: 0
+        },
+        contractors: {
+          dollars: 290757,
+          percent: 0.25
+        },
+        inHouse: {
+          dollars: 462955,
+          percent: 0.25
+        }
       },
-      inHouse: {
-        dollars: 462957,
-        percent: 0.5
-      }
-    },
-    2: {
-      combined: {
-        dollars: 753712,
-        percent: 0
+      3: {
+        combined: {
+          dollars: 753711,
+          percent: 0
+        },
+        contractors: {
+          dollars: 290756,
+          percent: 0.25
+        },
+        inHouse: {
+          dollars: 462955,
+          percent: 0.25
+        }
       },
-      contractors: {
-        dollars: 290757,
-        percent: 0.25
+      4: {
+        combined: {
+          dollars: 753711,
+          percent: 0
+        },
+        contractors: {
+          dollars: 290756,
+          percent: 0.25
+        },
+        inHouse: {
+          dollars: 462955,
+          percent: 0.25
+        }
       },
-      inHouse: {
-        dollars: 462955,
-        percent: 0.25
-      }
-    },
-    3: {
-      combined: {
-        dollars: 753711,
-        percent: 0
-      },
-      contractors: {
-        dollars: 290756,
-        percent: 0.25
-      },
-      inHouse: {
-        dollars: 462955,
-        percent: 0.25
-      }
-    },
-    4: {
-      combined: {
-        dollars: 753711,
-        percent: 0
-      },
-      contractors: {
-        dollars: 290756,
-        percent: 0.25
-      },
-      inHouse: {
-        dollars: 462955,
-        percent: 0.25
-      }
-    },
-    subtotal: {
-      combined: {
-        dollars: 3014848,
-        percent: 0
-      },
-      contractors: {
-        dollars: 1163026,
-        percent: 1.25
-      },
-      inHouse: {
-        dollars: 1851822,
-        percent: 1.25
+      subtotal: {
+        combined: {
+          dollars: 3014848,
+          percent: 0
+        },
+        contractors: {
+          dollars: 1163026,
+          percent: 1.25
+        },
+        inHouse: {
+          dollars: 1851822,
+          percent: 1.25
+        }
       }
     }
   }
@@ -161,7 +160,7 @@ const quarterlyFFPWithErrors = {
 
 const defaultProps = {
   activityIndex: 0,
-  aKey: '6ea6b4a2',
+  activityId: '6ea6b4a2',
   announce: jest.fn(),
   isViewOnly: false,
   setContractorFFP: jest.fn(),
@@ -412,19 +411,17 @@ describe('the cost allocation quarterly FFP component', () => {
       }
     );
 
-    await waitFor(() => {
-      user.clear(
-        screen.getByRole('textbox', {
-          name: 'federal share for ffy 2022, quarter 1, state'
-        })
-      );
-      user.type(
-        screen.getByRole('textbox', {
-          name: 'federal share for ffy 2022, quarter 1, state'
-        }),
-        '5'
-      );
-    });
+    await user.clear(
+      screen.getByRole('textbox', {
+        name: 'federal share for ffy 2022, quarter 1, state'
+      })
+    );
+    await user.type(
+      screen.getByRole('textbox', {
+        name: 'federal share for ffy 2022, quarter 1, state'
+      }),
+      '5'
+    );
 
     expect(
       screen.getByRole('textbox', {

@@ -68,7 +68,9 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         apd: {
           updated: expect.stringMatching(
             /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-          )
+          ),
+          activities: expect.any(Array),
+          budget: expect.any(Object)
         }
       });
     });
@@ -83,7 +85,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         { op: 'replace', path: '/name', value: 'new APD name' },
         {
           op: 'replace',
-          path: '/activities/0/costAllocation/2019/ffp/federal',
+          path: '/activities/0/costAllocation/2022/ffp/federal',
           value: 75
         }
       ];
@@ -99,7 +101,9 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         apd: {
           updated: expect.stringMatching(
             /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-          )
+          ),
+          activities: expect.any(Array),
+          budget: expect.any(Object)
         }
       });
     });
@@ -110,6 +114,21 @@ describe('APD endpoint | PATCH /apds/:id', () => {
           op: 'replace',
           path: `/activities/0/plannedStartDate`,
           value: '9999-99-99'
+        },
+        {
+          op: 'replace',
+          path: '/keyStatePersonnel/keyPersonnel/2',
+          value: {
+            costs: { 2022: 50, 2023: 45 },
+            email: 'test@email.com',
+            expanded: true,
+            hasCosts: true,
+            isPrimary: false,
+            fte: { 2022: 0.75, 2023: 1 },
+            name: 'Test User',
+            position: 'Tester',
+            key: '1a1abbbb'
+          }
         }
       ];
 
@@ -124,7 +143,9 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         apd: {
           updated: expect.stringMatching(
             /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-          )
+          ),
+          activities: expect.any(Array),
+          budget: expect.any(Object)
         }
       });
     });
@@ -156,7 +177,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         { op: 'replace', path: '/status', value: 'submitted' },
         {
           op: 'replace',
-          path: '/activities/1/costAllocation/2019/ffp/federal',
+          path: '/activities/1/costAllocation/2022/ffp/federal',
           value: 80
         }
       ];
@@ -174,7 +195,9 @@ describe('APD endpoint | PATCH /apds/:id', () => {
         apd: {
           updated: expect.stringMatching(
             /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-          )
+          ),
+          activities: expect.any(Array),
+          budget: expect.any(Object)
         }
       });
     });

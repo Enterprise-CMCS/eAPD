@@ -24,7 +24,7 @@ const connect = async () => {
     return null;
   } catch (err) {
     logger.error(`Error in MongoDB connection: ${err}`);
-    return null;
+    return false;
   }
 };
 

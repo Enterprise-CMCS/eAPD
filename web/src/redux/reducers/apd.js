@@ -39,7 +39,8 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-import { defaultAPDYearOptions, generateKey } from '../../util';
+import { defaultAPDYearOptions } from '../../util';
+import { generateKey } from '@cms-eapd/common/utils/utils';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
@@ -274,7 +275,7 @@ export const getAPDYearRange = ({
     ? `${years[0]}${years.length > 1 ? `-${years[years.length - 1]}` : ''}`
     : '';
 
-export const getPatchesForAddingItem = (state, path) => {
+export const getPatchesForAddingItem = (state, path, key = null) => {
   switch (path) {
     case '/keyStatePersonnel/keyPersonnel/-':
       return [
@@ -290,7 +291,11 @@ export const getPatchesForAddingItem = (state, path) => {
       ];
     case '/activities/-':
       return [
-        { op: 'add', path, value: newActivity({ years: state.data.years }) }
+        {
+          op: 'add',
+          path,
+          value: newActivity({ years: state.data.years, key })
+        }
       ];
     default:
       if (/^\/activities\/\d+\/contractorResources\/-$/.test(path)) {
@@ -336,7 +341,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_APD_ITEM: {
-      const patches = getPatchesForAddingItem(state, action.path);
+      const patches = getPatchesForAddingItem(state, action.path, action.key);
       return {
         ...state,
         data: applyPatch(state.data, patches)
@@ -455,9 +460,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.data.id]: {
-            ...state.byId[action.data.id],
-            updated: getHumanTimestamp(action.data.updated)
+          [action.apd.id]: {
+            ...state.byId[action.apd.id],
+            updated: getHumanTimestamp(action.apd.updated)
           }
         },
         data: {
@@ -478,6 +483,7 @@ const reducer = (state = initialState, action) => {
           ...action.apd,
           activities: action.apd.activities.map(
             ({
+              activityId,
               contractorResources,
               expenses,
               outcomes,
@@ -510,7 +516,8 @@ const reducer = (state = initialState, action) => {
                 ...person,
                 key: generateKey()
               })),
-              key: generateKey()
+              key: activityId,
+              activityId
             })
           ),
           assurancesAndCompliances: getAssurancesAndCompliances(

@@ -1,4 +1,4 @@
-export const UPDATE_BUDGET = 'UPDATE_BUDGET';
+export const LOAD_BUDGET = 'LOAD_BUDGET';
 
-export const updateBudget = () => (dispatch, getState) =>
-  dispatch({ type: UPDATE_BUDGET, state: getState() });
+export const loadBudget = budget => dispatch =>
+  dispatch({ type: LOAD_BUDGET, budget });

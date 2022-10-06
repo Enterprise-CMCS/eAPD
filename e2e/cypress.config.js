@@ -13,7 +13,6 @@ module.exports = defineConfig({
     viewportHeight: 1000,
     defaultCommandTimeout: 36000,
     videoUploadOnPasses: false,
-    numTestsKeptInMemory: 0,
     env: {
       'cypress-react-selector': {
         root: '#app'
@@ -44,10 +43,6 @@ module.exports = defineConfig({
       resetmfa: 'resetmfa',
       resetmfa_pw: '',
       lockedoutmfa: 'lockedoutmfa'
-    },
-    retries: {
-      runMode: 1,
-      openMode: 1
     }
   },
 

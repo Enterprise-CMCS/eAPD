@@ -1,6 +1,6 @@
 {
   "name": "MN-1921-07-11-HITECH-APD",
-  "years": ["2019", "2020"],
+  "years": ["2022", "2023"],
   "apdOverview": {
     "narrativeHIE": "",
     "narrativeHIT": "",
@@ -27,13 +27,13 @@
         "email": "JimPushesButtons@tycho.com",
         "isPrimary": true,
         "fte": {
-          "2019": 1.0,
-          "2020": 1.0
+          "2022": 1.0,
+          "2023": 1.0
         },
         "hasCosts": true,
         "costs": {
-          "2019": 100000,
-          "2020": 100000
+          "2022": 100000,
+          "2023": 100000
         }
       },
       {
@@ -42,8 +42,8 @@
         "email": "FJohnson@tycho.com",
         "isPrimary": false,
         "fte": {
-          "2019": 0.3,
-          "2020": 0.3
+          "2022": 0.3,
+          "2023": 0.3
         },
         "hasCosts": false,
         "costs": {}
@@ -53,7 +53,7 @@
   "previousActivities": {
     "previousActivitySummary": "",
     "actualExpenditures": {
-      "2016": {
+      "2019": {
         "hithie": {
           "federalActual": 320000,
           "totalApproved": 540000
@@ -73,7 +73,7 @@
           }
         }
       },
-      "2017": {
+      "2020": {
         "hithie": {
           "federalActual": 140000,
           "totalApproved": 280000
@@ -93,7 +93,7 @@
           }
         }
       },
-      "2018": {
+      "2021": {
         "hithie": {
           "federalActual": 146346,
           "totalApproved": 234526
@@ -117,17 +117,18 @@
   },
   "activities": [
     {
+      "activityId": "efgh5678",
       "alternatives": "<p>Modifications to State Level Registry (SLR)</p>\n<ul>\n<li>Minimize Modifications</li>\n<li>Minimize cost</li>\n<li>Decreased implementation time.</li>\n</ul>\n<p>The 2015-2017 rule changes are significant and wide ranging; minimally accommodating the new attestations will be problematic for the remainder of the program. Program benefits will potentially not be maximized. To be prepared for Stage 3 and to properly implement all 2015-2017 rule changes; Tycho plans to implement all necessary modifications.</p>\n<ul>\n<li>Modifications to State Level Registry (SLR)</li>\n<li>Implement the changes as outlined</li>\n<li>The EHR Incentive Program will have the ability to be fully supported.</li>\n<li>Support of electronic submission of CQMs, enhancing the support of the emphasis on interoperability.</li>\n</ul>\n<p>There are no significant disadvantages to this option.</p>\n<p></p>\n<p>Implementing the changes as outlined provide the optimal opportunity to maximize the benefits of the EHR program and its impact on the delivery of health care with improved quality and outcomes.</p>\n",
       "contractorResources": [
         {
           "description": "Maintain SLR",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -137,19 +138,19 @@
           "start": "",
           "totalCost": 32423,
           "years": {
-            "2019": 999756,
-            "2020": 342444
+            "2022": 999756,
+            "2023": 342444
           }
         },
         {
           "description": "Technology consulting and planning services.",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -159,20 +160,20 @@
           "start": "",
           "totalCost": 473573,
           "years": {
-            "2019": 333000,
-            "2020": 200000
+            "2022": 333000,
+            "2023": 200000
           }
         }
       ],
       "costAllocation": {
-        "2019": {
+        "2022": {
           "ffp": {
             "federal": 90,
             "state": 10
           },
           "other": 0
         },
-        "2020": {
+        "2023": {
           "ffp": {
             "federal": 90,
             "state": 10
@@ -183,11 +184,11 @@
       "costAllocationNarrative": {
         "methodology": "<p>No cost allocation is necessary for this activity.</p>\n",
         "years": {
-          "2019": {
-            "otherSources": "<p>No other funding is provided for this activity for FFY 2019.</p>\n"
+          "2022": {
+            "otherSources": "<p>No other funding is provided for this activity for FFY 2022.</p>\n"
           },
-          "2020": {
-            "otherSources": "<p>No other funding is provided for this activity for FFY 2020.</p>\n"
+          "2023": {
+            "otherSources": "<p>No other funding is provided for this activity for FFY 2023.</p>\n"
           }
         }
       },
@@ -197,24 +198,24 @@
           "description": "",
           "category": "Training and outreach",
           "years": {
-            "2019": 40000,
-            "2020": 40000
+            "2022": 40000,
+            "2023": 40000
           }
         },
         {
           "description": "",
           "category": "Travel",
           "years": {
-            "2019": 35000,
-            "2020": 35000
+            "2022": 35000,
+            "2023": 35000
           }
         },
         {
           "description": "",
           "category": "Hardware, software, and licensing",
           "years": {
-            "2019": 700000,
-            "2020": 0
+            "2022": 700000,
+            "2023": 0
           }
         }
       ],
@@ -224,7 +225,7 @@
       "plannedStartDate": "",
       "schedule": [
         {
-          "endDate": "2018-09-07",
+          "endDate": "2021-09-07",
           "milestone": "Implementation of Final Rule and Stage 3 System Developments"
         },
         {
@@ -232,7 +233,7 @@
           "milestone": "Environmental Scan Completion"
         },
         {
-          "endDate": "2018-05-30",
+          "endDate": "2021-05-30",
           "milestone": "HIT Roadmap Development"
         }
       ],
@@ -245,11 +246,11 @@
           "title": "Project Assistant",
           "description": "Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 86000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 88000,
               "perc": 1
             }
@@ -259,11 +260,11 @@
           "title": "EHR Incentive Program Meaningful Use Coordinator (Research Analyst III)",
           "description": "Develop and monitor reports, assist data users in developing and managing queries.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 101115,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 102111,
               "perc": 1
             }
@@ -273,11 +274,11 @@
           "title": "IT Liaison",
           "description": "Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 101000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 104000,
               "perc": 1
             }
@@ -287,11 +288,11 @@
           "title": "Accountant III",
           "description": "Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 101000,
               "perc": 3
             },
-            "2020": {
+            "2023": {
               "amt": 109000,
               "perc": 3
             }
@@ -301,11 +302,11 @@
           "title": "Public Information Officer",
           "description": "Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 165000,
               "perc": 0.5
             },
-            "2020": {
+            "2023": {
               "amt": 170000,
               "perc": 0.5
             }
@@ -315,11 +316,11 @@
           "title": "Systems Chief",
           "description": "Coordinate office resources, manage staff, budget, and resource assignments, and report program status.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 135000,
               "perc": 0.5
             },
-            "2020": {
+            "2023": {
               "amt": 140000,
               "perc": 0.5
             }
@@ -329,11 +330,11 @@
           "title": "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
           "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 110012,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 111102,
               "perc": 1
             }
@@ -343,11 +344,11 @@
           "title": "System Analyst (Analyst Programmer IV)",
           "description": "Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 98987,
               "perc": 4
             },
-            "2020": {
+            "2023": {
               "amt": 99897,
               "perc": 4
             }
@@ -356,7 +357,7 @@
       ],
       "summary": "Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.",
       "quarterlyFFP": {
-        "2019": {
+        "2022": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -378,7 +379,7 @@
             "inHouse": 25
           }
         },
-        "2020": {
+        "2023": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -403,7 +404,7 @@
       },
       "outcomes": [
         {
-          "outcome": "Accept attestations for 2018, and modify SLR to meet new spec sheets released by CMS.",
+          "outcome": "Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.",
           "metrics": [
             {
               "metric": "Complete SLR modifications by 11/1/18"
@@ -424,17 +425,18 @@
       ]
     },
     {
+      "activityId": "fghi6789",
       "alternatives": "<p>Medicaid Claims Data Feed to the HIE</p>\n<p>Periodic Uploads of Medicaid Claims Data from MMIS to the HIE</p>\n<p>The HIE could consume Medicaid claims data from periodic uploads of an extract/export from the MMIS</p>\n<p>Increase of administrative burden on development staff.</p>\n<p>Short term cost savings, with a higher long-term cost. No real-time data.</p>\n<p>The periodic MMIS uploads would not provide real time data. Therefore, Tycho plans to use a Medicaid claims data feed</p>\n<p>Medicaid Claims Data Feed to the HIE</p>\n<p>Create a Medicaid Claims Data Feed to the HIE</p>\n<p>Implementing a Medicaid Claims Data Feed to the HIE would provide information regarding Medicaid claims to participating providers, Hospitals, and patients</p>\n<p>Data regarding medications prescribed, tests performed, and the resulting diagnosis would improve care coordination</p>\n<p>There are no significant disadvantages to this option</p>\n<p>Implementing a Medicaid Claims data feed to the HIE provides updated claims data in real-time to improve care coordination and increase MU. Because data is updated in real-time, a data feed meets Tycho's needs</p>\n",
       "contractorResources": [
         {
           "description": "Hosting and development support.",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -444,19 +446,19 @@
           "start": "",
           "totalCost": 26453574,
           "years": {
-            "2019": 650000,
-            "2020": 750000
+            "2022": 650000,
+            "2023": 750000
           }
         },
         {
           "description": "Interface M&O contractor.",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -466,20 +468,20 @@
           "start": "",
           "totalCost": 7398,
           "years": {
-            "2019": 0,
-            "2020": 1000000
+            "2022": 0,
+            "2023": 1000000
           }
         }
       ],
       "costAllocation": {
-        "2019": {
+        "2022": {
           "ffp": {
             "federal": 90,
             "state": 10
           },
           "other": 0
         },
-        "2020": {
+        "2023": {
           "ffp": {
             "federal": 75,
             "state": 25
@@ -490,11 +492,11 @@
       "costAllocationNarrative": {
         "methodology": "<p>No cost allocation is necessary for this activity.</p>\n",
         "years": {
-          "2019": {
-            "otherSources": "<p>No other funding is provided for this activity for FFY 2019.</p>\n"
+          "2022": {
+            "otherSources": "<p>No other funding is provided for this activity for FFY 2022.</p>\n"
           },
-          "2020": {
-            "otherSources": "<p>No other funding is provided for this activity for FFY 2020.</p>\n"
+          "2023": {
+            "otherSources": "<p>No other funding is provided for this activity for FFY 2023.</p>\n"
           }
         }
       },
@@ -504,8 +506,8 @@
           "description": "",
           "category": "Travel",
           "years": {
-            "2019": 0,
-            "2020": 0
+            "2022": 0,
+            "2023": 0
           }
         }
       ],
@@ -515,11 +517,11 @@
       "plannedStartDate": "",
       "schedule": [
         {
-          "endDate": "2018-12-31",
+          "endDate": "2021-12-31",
           "milestone": "Implement MMIS-HIE Interface"
         },
         {
-          "endDate": "2018-12-31",
+          "endDate": "2021-12-31",
           "milestone": "Develop MMIS-HIE Interface Requirements"
         }
       ],
@@ -532,11 +534,11 @@
           "title": "Project Assistant",
           "description": "Assist with stuff",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 98000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 99000,
               "perc": 1
             }
@@ -546,11 +548,11 @@
           "title": "MMIS Project Manager",
           "description": "This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 140000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 144000,
               "perc": 1
             }
@@ -560,11 +562,11 @@
           "title": "MMIS Trainer",
           "description": "Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 115000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 115000,
               "perc": 1
             }
@@ -574,11 +576,11 @@
           "title": "Programmer IV",
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 140000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 145000,
               "perc": 1
             }
@@ -588,11 +590,11 @@
           "title": "Security IT",
           "description": "Make sure its secure.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 115000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 120000,
               "perc": 1
             }
@@ -602,11 +604,11 @@
           "title": "Operations Specialist",
           "description": "Run the day to day.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 125000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 130000,
               "perc": 1
             }
@@ -616,11 +618,11 @@
           "title": "Programmer V",
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 150000,
               "perc": 2
             },
-            "2020": {
+            "2023": {
               "amt": 155000,
               "perc": 3
             }
@@ -630,11 +632,11 @@
           "title": "Programmer III",
           "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 120000,
               "perc": 1
             },
-            "2020": {
+            "2023": {
               "amt": 125000,
               "perc": 1
             }
@@ -643,7 +645,7 @@
       ],
       "summary": "To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. ",
       "quarterlyFFP": {
-        "2019": {
+        "2022": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -665,7 +667,7 @@
             "inHouse": 25
           }
         },
-        "2020": {
+        "2023": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -703,17 +705,18 @@
       ]
     },
     {
+      "activityId": "ghij7890",
       "alternatives": "<p>Health Information Exchange</p>\n<p>Maintain existing system.</p>\n<p>The existing system has a few benefits. The current EDI process while dated still forms the backbone of the Division’s data sharing needs. The technology works in the fashion that it always has.</p>\n<p>The drawbacks of this approach are significant. While the current Edi process affords behavioral health agencies to submit their data to the state, it does not allow for sharing the same data to other providers in either the primary care or behavioral health treatment contexts.</p>\n<p>There are more disadvantages than advantages in pursuing this approach. The drawbacks are substantial, such as absence of data normalization, difficulties with aligning the user interface and application design with industry best practices, inconsistencies in design, and difficulties with support and maintenance, making this approach less favorable than the other two alternatives considered.</p>\n<p>Health Information Exchange</p>\n<p>Update and Enhance Existing System(s), connecting AKAIMS to the Health Information Exchange</p>\n<p>Connecting AKAIMS to the Health Information Exchange will provide for the sending and receiving of data across healthcare disciplines. This data sharing is thought to enhance and provide for better care outcomes for patients who are participating in care across multiple providers. This solution future proofs AKAIMS as it will integrate current technologies and leverages those technologies for a more feature rich process.</p>\n<p>Training and integration of this updated technology will require some effort and outreach. Newly on-boarded agencies will need to adjust to new data collection protocols.</p>\n<p>Full participation in the Health Information Exchange will reduce double data entry at all levels (reducing costs). It is anticipated that efficiencies gained with simplification of data collection and reporting will greatly enhance patient care outcomes.</p>\n<p>HIE Platform</p>\n<p>Upgrade HIE to the Audacious Inquiry (Ai) platform</p>\n<p>Ai offers a strong foundation on which additional functionality can be built. Transitioning to the Ai platform has the potential to minimize the effort required to modernize the HIE, while delivering additional services to users.</p>\n<p>Transitioning to Ai means that the State will be leaving the current HIE platform. There is potential risk in adoption and migration of services and data.</p>\n<p>The HIE platform will be transitioned to Ai to offer additional services, contain costs on enhancements, and maximize the scalability and flexibility of the HIE to support modernization across the enterprise.</p>\n<p>HIE Platform</p>\n<p>Keep platform as it is without upgrade.</p>\n<p>Keeping the platform as it is without upgrade would allow focus to remain on onboarding.</p>\n<p>Functionality supported by existing HIE is not adequate to support future applications. The value delivered by the service as it is could be improved with additional functionality. Potential to ingest different critical types of data is limited without a platform upgrade.</p>\n<p>Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.</p>\n<p></p>\n<p>HIE Platform</p>\n<p>Partner with another state HIE for services ranging from sharing the platform itself, to specific services or commonly-developed interfaces.</p>\n<p>Sharing with another state offers the potential to</p>\n<p>• decrease costs</p>\n<p>• Increase speed of onboarding</p>\n<p>• Increase functionality</p>\n<p>• Provide for greater sustainability</p>\n<p>• Address the needs of our partners faster or better</p>\n<p>No states currently share HIE services entirely, due to perceived legal constraints; this option presents multiple factors to consider ranging from legal to technical. Potential for cost savings is limited because pricing models are usually based on volume. There is a possibility for significant disruption to service during a transition of this type; significant issues with legal arrangements complying with other states.</p>\n<p>Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.</p>\n<p>HIE Tools for Care Coordination</p>\n<p>Add functional tools to support care coordination, referrals and analytics through other module developers or collaborators</p>\n<p>Sharing with another state or regional HIE to develop or utilize HIE tools offers the potential to</p>\n<p>• decrease costs</p>\n<p>• Increase speed of onboarding</p>\n<p>• Increase functionality</p>\n<p>• Provide for greater sustainability</p>\n<p>• Address the needs of our partners faster or better</p>\n<p>If another commercial developer is selected to offer these modules, there is some likelihood that integrating into the HIE platform will be more difficult without the transition to Ai.</p>\n<p>Alternative solutions will leverage existing infrastructure where applicable; will not increase annual maintenance fees, and will follow DHSS purchasing policy.</p>\n<p>HIE Functionality</p>\n<p>Enhancing functionality for participating hospitals</p>\n<p>Hospitals are critical stakeholders in the HIE. Providing functionality to assist hospitals in meeting MU3 and in evaluating ER patients are two areas where HIE could provide valuable information.</p>\n<p>Hospital focus is based on patient safety. Thus far, there has been little incentive for using HIE data for patient safety.</p>\n<p>DHSS is actively pursuing additional functionality for hospitals. This involves hospital stakeholder meetings, vendor discussions, board review and clinical workgroup input.</p>\n<p></p>\n<p>HIE Functionality</p>\n<p>Implement connections with high-value state and federal data sources (Corrections, DJJ, SSA, DoD)</p>\n<p>Including health data from correctional facilities (ADT, ORU and/or CCD files) will help provide better more coordinated care for this vulnerable population, many of whom are also Medicaid-eligible.</p>\n<p>Aside from the need to allocate staff time across projects, there are no significant drawbacks to this option.</p>\n<p>This project should proceed.</p>\n<p>HIE Functionality</p>\n<p>Keep health information exchange functionality substantially the same regarding state and federal data source connections</p>\n<p>Less work for the HIE team, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules.</p>\n<p>Leaving the information gap among these agencies open will lead to continued delays in needed services.</p>\n<p>This option is not preferred.</p>\n<p>HIE Functionality</p>\n<p>Keep health information exchange functionality substantially the same regarding emergency department information exchange</p>\n<p>Giving providers better tools to coordinate care for high-risk, high-utilizer members of the population has the potential to substantially reduce spending and improve outcomes for this vulnerable population.</p>\n<p>Aside from the need to allocate staff time across projects, there are no significant drawbacks to this option.</p>\n<p>This project should proceed.</p>\n<p>HIE Functionality</p>\n<p>Keep health information exchange functionality substantially the same regarding prescription information</p>\n<p>Less work for the HIE, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules</p>\n<p>A continuing information gap around prescriptions filled will limit the potential to improve care coordination for Tycho citizens and heighten patient safety.</p>\n<p>This project should proceed.</p>\n<p>HIE Functionality</p>\n<p>Keep health information exchange functionality substantially the same regarding image exchange</p>\n<p>Less work for the HIE, DHSS and other teams to accomplish, allowing for greater focus on onboarding providers and implementing new technology modules</p>\n<p>The lack of simple diagnostic image exchange presents a significant barrier to widespread health information exchange. Without these technologies, patients often hand-carry their films or electronic files with them, which can present a high risk of lost images and inefficiency.</p>\n<p>This option is not preferred at this time.</p>\n",
       "contractorResources": [
         {
           "description": "",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -723,20 +726,20 @@
           "start": "",
           "totalCost": 3496874,
           "years": {
-            "2019": 0,
-            "2020": 0
+            "2022": 0,
+            "2023": 0
           }
         }
       ],
       "costAllocation": {
-        "2019": {
+        "2022": {
           "ffp": {
             "federal": 90,
             "state": 10
           },
           "other": 0
         },
-        "2020": {
+        "2023": {
           "ffp": {
             "federal": 90,
             "state": 10
@@ -747,10 +750,10 @@
       "costAllocationNarrative": {
         "methodology": "",
         "years": {
-          "2019": {
+          "2022": {
             "otherSources": ""
           },
-          "2020": {
+          "2023": {
             "otherSources": ""
           }
         }
@@ -761,8 +764,8 @@
           "description": "",
           "category": "Hardware, software, and licensing",
           "years": {
-            "2019": 0,
-            "2020": 0
+            "2022": 0,
+            "2023": 0
           }
         }
       ],
@@ -772,47 +775,47 @@
       "plannedStartDate": "",
       "schedule": [
         {
-          "endDate": "2020-09-30",
+          "endDate": "2023-09-30",
           "milestone": "Onboard providers to assistance program"
         },
         {
-          "endDate": "2019-12-31",
+          "endDate": "2022-12-31",
           "milestone": "Development of Roadmap"
         },
         {
-          "endDate": "2019-01-01",
+          "endDate": "2022-01-01",
           "milestone": "HIE Staff Augmentation"
         },
         {
-          "endDate": "2019-01-01",
+          "endDate": "2022-01-01",
           "milestone": "Modules for Care Coordination"
         },
         {
-          "endDate": "2020-09-30",
+          "endDate": "2023-09-30",
           "milestone": "Provider Onboarding"
         },
         {
-          "endDate": "2019-01-01",
+          "endDate": "2022-01-01",
           "milestone": "EDIE System Implementation"
         },
         {
-          "endDate": "2019-12-31",
+          "endDate": "2022-12-31",
           "milestone": "Develop myAlaska HIE Authentication Requirements"
         },
         {
-          "endDate": "2019-03-31",
+          "endDate": "2022-03-31",
           "milestone": "Completion of requirements gathering to prepare to receive ELR"
         },
         {
-          "endDate": "2019-12-31",
+          "endDate": "2022-12-31",
           "milestone": "Configuration of internal BizTalk HL7 processes to translate the HL7 messages to PRISM"
         },
         {
-          "endDate": "2019-09-30",
+          "endDate": "2022-09-30",
           "milestone": "Onboard Lab Providers"
         },
         {
-          "endDate": "2018-12-31",
+          "endDate": "2021-12-31",
           "milestone": "Establishment of program requirements and outreach strategy"
         }
       ],
@@ -825,11 +828,11 @@
           "title": "Services Integration Architect/ Programmer (Analyst Programmer V)",
           "description": "Lead technical architecture design and development efforts for designing, implementing and maintaining services integrations leveraging resources such as the MCI, MPI and state HIE along with other DHSS Business Systems.",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 115000,
               "perc": 4
             },
-            "2020": {
+            "2023": {
               "amt": 119000,
               "perc": 4
             }
@@ -838,7 +841,7 @@
       ],
       "summary": "Statewide HIE enhancement and onboarding.",
       "quarterlyFFP": {
-        "2019": {
+        "2022": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -860,7 +863,7 @@
             "inHouse": 25
           }
         },
-        "2020": {
+        "2023": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -903,17 +906,18 @@
       ]
     },
     {
+      "activityId": "hijk8901",
       "alternatives": "<p>Medicaid PHR/Blue Button</p>\n<p>Integrate MMIS DW into the HIE with Blue Button download</p>\n<p>Allows Medicaid recipients to view their Medicaid claims information in a portal and access it through a Blue Button download</p>\n<p>Assists providers in achieving MU by helping them meet the VDT requirements</p>\n<p>Supports the MU CQMs including EP Core Measure:Electronic Copy of health information</p>\n<p>Alaskans will be able to access their PHRs</p>\n<p>User friendly, easy to use technology helps ensure access</p>\n<p>There are no significant negatives to this approach</p>\n<p>Implement Medicaid PHR/Blue Button</p>\n",
       "contractorResources": [
         {
           "description": "",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -923,19 +927,19 @@
           "start": "",
           "totalCost": 4368734,
           "years": {
-            "2019": 500000,
-            "2020": 0
+            "2022": 500000,
+            "2023": 0
           }
         },
         {
           "description": "",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -945,20 +949,20 @@
           "start": "",
           "totalCost": 35246,
           "years": {
-            "2019": 0,
-            "2020": 2000000
+            "2022": 0,
+            "2023": 2000000
           }
         }
       ],
       "costAllocation": {
-        "2019": {
+        "2022": {
           "ffp": {
             "federal": 90,
             "state": 10
           },
           "other": 0
         },
-        "2020": {
+        "2023": {
           "ffp": {
             "federal": 90,
             "state": 10
@@ -969,10 +973,10 @@
       "costAllocationNarrative": {
         "methodology": "",
         "years": {
-          "2019": {
+          "2022": {
             "otherSources": "none"
           },
-          "2020": {
+          "2023": {
             "otherSources": "none"
           }
         }
@@ -983,8 +987,8 @@
           "description": "",
           "category": "Hardware, software, and licensing",
           "years": {
-            "2019": 0,
-            "2020": 0
+            "2022": 0,
+            "2023": 0
           }
         }
       ],
@@ -994,15 +998,15 @@
       "plannedStartDate": "",
       "schedule": [
         {
-          "endDate": "2019-04-01",
+          "endDate": "2022-04-01",
           "milestone": "PHR/Blue Button HIE Build"
         },
         {
-          "endDate": "2018-12-31",
+          "endDate": "2021-12-31",
           "milestone": "Blue Button Implementation"
         },
         {
-          "endDate": "2018-12-31",
+          "endDate": "2021-12-31",
           "milestone": "On-Boarding of PHR/Blue Button Participants"
         }
       ],
@@ -1015,11 +1019,11 @@
           "title": "",
           "description": "",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 0,
               "perc": 0
             },
-            "2020": {
+            "2023": {
               "amt": 0,
               "perc": 0
             }
@@ -1028,7 +1032,7 @@
       ],
       "summary": "DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE.",
       "quarterlyFFP": {
-        "2019": {
+        "2022": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -1050,7 +1054,7 @@
             "inHouse": 25
           }
         },
-        "2020": {
+        "2023": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -1085,17 +1089,18 @@
       ]
     },
     {
+      "activityId": "ijkl9012",
       "alternatives": "<p>HIE Functionality</p>\n<p>Update and enhance existing system, adding interfaces with PDMP, PRISM, and Special registries via Public Health Modernization</p>\n<p>Connecting these systems to the health information exchange would improve efficiencies for providers and for public health registrars. Reporting to several of these registries is an essential component of meaningful use for EPs and EHs; integrating this function into the HIE helps to reinforce value for the HIE, and will have the benefit of easing reporting.</p>\n<p>Expanding the utility of the Health Information Exchange will reduce double data entry at all levels (reducing costs) and simplify reporting for participating EPs and EHs.</p>\n<p>Training and integration of this updated technology will require some effort and outreach. Newly on-boarded agencies will need to adjust to new data collection protocols, and currently connected providers will need outreach to help them understand the new functionality.</p>\n<p>It is anticipated that efficiencies gained with simplification of data collection and reporting will greatly enhance patient care outcomes, and will assist EPs and EHs in attesting to meaningful use.</p>\n",
       "contractorResources": [
         {
           "description": "Gateway Implementation.",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -1105,19 +1110,19 @@
           "start": "",
           "totalCost": 246477,
           "years": {
-            "2019": 0,
-            "2020": 1500000
+            "2022": 0,
+            "2023": 1500000
           }
         },
         {
           "description": "Gateway Development Planning and RFP",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -1127,20 +1132,20 @@
           "start": "",
           "totalCost": 7473747,
           "years": {
-            "2019": 500000,
-            "2020": 0
+            "2022": 500000,
+            "2023": 0
           }
         }
       ],
       "costAllocation": {
-        "2019": {
+        "2022": {
           "ffp": {
             "federal": 90,
             "state": 10
           },
           "other": 0
         },
-        "2020": {
+        "2023": {
           "ffp": {
             "federal": 90,
             "state": 10
@@ -1151,10 +1156,10 @@
       "costAllocationNarrative": {
         "methodology": "",
         "years": {
-          "2019": {
+          "2022": {
             "otherSources": "none"
           },
-          "2020": {
+          "2023": {
             "otherSources": "none"
           }
         }
@@ -1165,8 +1170,8 @@
           "description": "",
           "category": "Hardware, software, and licensing",
           "years": {
-            "2019": 0,
-            "2020": 0
+            "2022": 0,
+            "2023": 0
           }
         }
       ],
@@ -1180,11 +1185,11 @@
           "milestone": "PH Completion of requirements gathering"
         },
         {
-          "endDate": "2020-09-30",
+          "endDate": "2023-09-30",
           "milestone": "PH Development and implementation of CRM Tool"
         },
         {
-          "endDate": "2020-09-30",
+          "endDate": "2023-09-30",
           "milestone": "PH Connection of Public Health systems to HIE"
         }
       ],
@@ -1197,11 +1202,11 @@
           "title": "",
           "description": "",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 0,
               "perc": 0
             },
-            "2020": {
+            "2023": {
               "amt": 0,
               "perc": 0
             }
@@ -1210,7 +1215,7 @@
       ],
       "summary": "The purpose of PH modernization is to provide Medicaid EPs and EHs with the tools to improve the coordination of care, transition of care and the availability of specialty registries; increasing the number of providers attesting for meaningful use.",
       "quarterlyFFP": {
-        "2019": {
+        "2022": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -1232,7 +1237,7 @@
             "inHouse": 25
           }
         },
-        "2020": {
+        "2023": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -1260,7 +1265,7 @@
           "outcome": "Identifiy PH needs",
           "metrics": [
             {
-              "metric": "Complete a build/implementation plan by Summery 2019"
+              "metric": "Complete a build/implementation plan by Summery 2022"
             }
           ]
         },
@@ -1268,24 +1273,25 @@
           "outcome": "Connect PH systems to HIE",
           "metrics": [
             {
-              "metric": "Connect all 3 PH systems to HIE by Fall 2019"
+              "metric": "Connect all 3 PH systems to HIE by Fall 2022"
             }
           ]
         }
       ]
     },
     {
+      "activityId": "jklm0123",
       "alternatives": "<p>Must do MITA 3.0 because MITA is awesome and gives Tycho a standardized view of their Medicaid IT maturity.&nbsp;</p>\n",
       "contractorResources": [
         {
           "description": "Research for and RFP development for MITA 3.0 SSA",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -1295,19 +1301,19 @@
           "start": "",
           "totalCost": 264574,
           "years": {
-            "2019": 450000,
-            "2020": 150000
+            "2022": 450000,
+            "2023": 150000
           }
         },
         {
           "description": "MITA 3.0 implementation.",
           "end": "",
           "hourly": {
-            "2019": {
+            "2022": {
               "hours": "",
               "rate": ""
             },
-            "2020": {
+            "2023": {
               "hours": "",
               "rate": ""
             }
@@ -1317,20 +1323,20 @@
           "start": "",
           "totalCost": 64574,
           "years": {
-            "2019": 200000,
-            "2020": 500000
+            "2022": 200000,
+            "2023": 500000
           }
         }
       ],
       "costAllocation": {
-        "2019": {
+        "2022": {
           "ffp": {
             "federal": 50,
             "state": 50
           },
           "other": 125000
         },
-        "2020": {
+        "2023": {
           "ffp": {
             "federal": 90,
             "state": 10
@@ -1341,10 +1347,10 @@
       "costAllocationNarrative": {
         "methodology": "",
         "years": {
-          "2019": {
+          "2022": {
             "otherSources": "none"
           },
-          "2020": {
+          "2023": {
             "otherSources": "none"
           }
         }
@@ -1355,8 +1361,8 @@
           "description": "",
           "category": "Equipment and supplies",
           "years": {
-            "2019": 25000,
-            "2020": 25000
+            "2022": 25000,
+            "2023": 25000
           }
         }
       ],
@@ -1366,11 +1372,11 @@
       "plannedStartDate": "",
       "schedule": [
         {
-          "endDate": "2019-02-28",
+          "endDate": "2022-02-28",
           "milestone": "MITA 3.0 SS-A Project"
         },
         {
-          "endDate": "2019-12-31",
+          "endDate": "2022-12-31",
           "milestone": "HITECH SS-A Assessment"
         }
       ],
@@ -1383,11 +1389,11 @@
           "title": "State MITA Person",
           "description": "1",
           "years": {
-            "2019": {
+            "2022": {
               "amt": 100000,
               "perc": 0.5
             },
-            "2020": {
+            "2023": {
               "amt": 100000,
               "perc": 1
             }
@@ -1396,7 +1402,7 @@
       ],
       "summary": "DHSS is requesting funding to support the completion of a MITA 3.0 State Self-Assessment. Initially, funding will be utilized to support the development of a competitive procurement and support of planning efforts for the MITA 3.0 SS-A.",
       "quarterlyFFP": {
-        "2019": {
+        "2022": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -1418,7 +1424,7 @@
             "inHouse": 25
           }
         },
-        "2020": {
+        "2023": {
           "1": {
             "combined": 25,
             "contractors": 25,
@@ -1446,7 +1452,7 @@
           "outcome": "Complete MITA 3.0 HITECH portion.",
           "metrics": [
             {
-              "metric": "Complete MITA 3.0 HITECH portion by July 2019"
+              "metric": "Complete MITA 3.0 HITECH portion by July 2022"
             }
           ]
         }
@@ -1456,19 +1462,19 @@
   "proposedBudget": {
     "incentivePayments": {
       "ehAmt": {
-        "2018": {
+        "2021": {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0
         },
-        "2019": {
+        "2022": {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0
         },
-        "2020": {
+        "2023": {
           "1": 0,
           "2": 0,
           "3": 0,
@@ -1476,19 +1482,19 @@
         }
       },
       "ehCt": {
-        "2018": {
+        "2021": {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0
         },
-        "2019": {
+        "2022": {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0
         },
-        "2020": {
+        "2023": {
           "1": 0,
           "2": 0,
           "3": 0,
@@ -1496,19 +1502,19 @@
         }
       },
       "epAmt": {
-        "2018": {
+        "2021": {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0
         },
-        "2019": {
+        "2022": {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0
         },
-        "2020": {
+        "2023": {
           "1": 0,
           "2": 0,
           "3": 0,
@@ -1516,19 +1522,19 @@
         }
       },
       "epCt": {
-        "2018": {
+        "2021": {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0
         },
-        "2019": {
+        "2022": {
           "1": 0,
           "2": 0,
           "3": 0,
           "4": 0
         },
-        "2020": {
+        "2023": {
           "1": 0,
           "2": 0,
           "3": 0,

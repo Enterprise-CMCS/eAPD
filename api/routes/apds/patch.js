@@ -5,10 +5,7 @@ const {
   adminCheckAPDDocument: validate
 } = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
-
-// This is a list of property paths that cannot be changed with this endpoint.
-// Any patches pointing at these paths will be ignored.
-const staticFields = ['/createdAt', '/updatedAt', '/status', '/stateId'];
+const { staticFields } = require('../../util/apds');
 
 module.exports = (
   app,

@@ -96,32 +96,6 @@ export const getParams = str =>
     }, {});
 
 /**
- * Get an app-unique random 8-hex-digit string. These are suitable for use as
- * property names where you want to maintain insertion order.
- */
-export const generateKey = (() => {
-  const givenKeys = new Set();
-
-  // Object properties returned by Object.keys() or Object.entries() are sorted
-  // two ways: first, any numeric keys are returned in numeric order; second,
-  // string keys are returned in assignment order.  We rely on that creation
-  // ordering in several places, so things get displayed in incorrect order if
-  // any keys generated here are completely numeric.  To prevent that, ensure
-  // that at least one character of the key is a letter.
-
-  return () => {
-    let key = '';
-    do {
-      key = Math.floor(Math.random() * 4026531839 + 268435456).toString(16);
-      // Keep generating until we get a key that is not all digits, and isn't
-      // in our local set of generated keys (for uniqueness)
-    } while (/^\d{8}$/.test(key) || givenKeys.has(key));
-    givenKeys.add(key);
-    return key;
-  };
-})();
-
-/**
  * Convert a YYYY-MM-DD date string from state format into a
  * consistent display format
  *
