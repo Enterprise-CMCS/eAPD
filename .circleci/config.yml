@@ -562,7 +562,7 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb || true
             sudo apt-get -f install
             sudo dpkg -i google-chrome-stable_current_amd64.deb
-             # Switch to Node 16.16.0.
+            # Switch to Node 16.16.0
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 16.16.0
@@ -913,6 +913,12 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
+            # Switch to Node 16.16.0
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.16.0
+            nvm alias default 16.16.0
+            nvm use 16.16.0
             yarn workspace @cms-eapd/common build
             yarn workspace @cms-eapd/api build
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d

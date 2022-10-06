@@ -18,5 +18,4 @@ WORKDIR /app/common
 RUN yarn build
 
 WORKDIR /app/api
-RUN yarn build
 CMD yarn run start-dev
