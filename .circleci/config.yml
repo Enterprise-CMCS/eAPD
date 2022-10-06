@@ -917,6 +917,7 @@ jobs:
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api build api-for-testing
             COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
+            echo 'start up complete'
             sleep 60
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
