@@ -51,7 +51,8 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </th>
       <td
         className=""
-        headers="prev_act_hithie_total_approved"
+        data-cy="prev_act_hithie_total_approved_1"
+        headers="prev_act_hithie_row_1"
       >
         <DollarField
           className="budget-table--input-holder"
@@ -65,7 +66,8 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </td>
       <td
         className="budget-table--number"
-        headers="prev_act_hithie_federal_approved"
+        data-cy="prev_act_hithie_federal_approved_1"
+        headers="prev_act_hithie_row_1"
       >
         <Dollars>
           18
@@ -73,7 +75,8 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </td>
       <td
         className=""
-        headers="prev_act_hithie_federal_actual"
+        data-cy="prev_act_hithie_federal_actual"
+        headers="prev_act_hithie_row_1"
       >
         <DollarField
           className="budget-table--input-holder"
@@ -98,7 +101,8 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </th>
       <td
         className=""
-        headers="prev_act_hithie_total_approved"
+        data-cy="prev_act_hithie_total_approved_2"
+        headers="prev_act_hithie_row_2"
       >
         <DollarField
           className="budget-table--input-holder"
@@ -112,7 +116,8 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </td>
       <td
         className="budget-table--number"
-        headers="prev_act_hithie_federal_approved"
+        data-cy="prev_act_hithie_federal_approved_2"
+        headers="prev_act_hithie_row_2"
       >
         <Dollars>
           180
@@ -120,7 +125,8 @@ exports[`apd previous activity table, mmis component renders correctly 1`] = `
       </td>
       <td
         className=""
-        headers="prev_act_hithie_federal_actual"
+        data-cy="prev_act_hithie_federal_actual"
+        headers="prev_act_hithie_row_2"
       >
         <DollarField
           className="budget-table--input-holder"
