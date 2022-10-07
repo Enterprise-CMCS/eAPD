@@ -57,14 +57,14 @@ services:
         wget --no-verbose --tries=1 --spider
         http://api-for-testing:8000/heartbeat || exit 1
       interval: 60s
-      retries: 50
+      retries: 10
       start_period: 240s
       timeout: 10s
     expose:
       - 8000
     volumes:
-      - ./api:/app/api
-      - ./common:/app/common
+      - api:/app/api
+      - common:/app/common
       - /app/node_modules
 
 volumes:
