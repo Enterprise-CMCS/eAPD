@@ -917,8 +917,7 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api build api-for-testing
-            COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
+            COMPOSE_HTTP_TIMEOUT=1000 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
             echo 'docker containers started'
             echo 'Checking to see if the server is running'
             until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
@@ -926,9 +925,9 @@ jobs:
               echo '.';
             done;
             echo 'Server is running and status is healthy'
-            COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api yarn migrate
+            COMPOSE_HTTP_TIMEOUT=1000 docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             echo 'migration finished'
-            COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api yarn seed
+            COMPOSE_HTTP_TIMEOUT=1000 docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
             echo 'seeding finished'
       - run:
           name: pull owasp zap docker image
