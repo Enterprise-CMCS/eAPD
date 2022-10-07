@@ -111,7 +111,6 @@ workflows:
             - backend lint
             - dependency vulnerability scan
             - yaml test
-            - owasp zap scan
 
       - chromatic deployment:
           filters:
@@ -910,9 +909,7 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            whoami
             sleep 60
-
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
