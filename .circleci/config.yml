@@ -548,7 +548,6 @@ jobs:
     machine:
       image: ubuntu-2204:2022.04.2
     parallelism: 7
-    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -710,7 +709,6 @@ jobs:
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
-    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -925,7 +923,6 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2204:2022.04.2
-    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -937,13 +934,35 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
-          name: run owasp zap
+          name: set up API server
           working_directory: ~/project
           no_output_timeout: 60m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api 
             ./owasp-test.sh
+      - run:
+          name: pull owasp zap docker image
+          working_directory: ~/project
+          command: |
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api
+            docker pull owasp/zap2docker-stable:2.11.1
+      - run:
+          name: run owasp zap
+          working_directory: ~/project
+          no_output_timeout: 60m
+          command: |
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api
+            docker run \
+              --network api_default \
+              -v $(pwd)/owasp:/zap/wrk:rw \
+              owasp/zap2docker-stable:2.11.1 \
+              zap-api-scan.py \
+              -c api-scan.conf \
+              -t http://api-for-testing:8000/open-api \
+              -f openapi
       
       # - run:
       #     name: run owasp zap

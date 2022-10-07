@@ -15,15 +15,3 @@ until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" 
     echo '.';
 done;
 echo 'Server is running and status is healthy'
-
-# run tests
-docker pull owasp/zap2docker-stable:2.11.1
-
-docker run \
-    --network api_default \
-    -v $(pwd)/owasp:/zap/wrk:rw \
-    owasp/zap2docker-stable:2.11.1 \
-    zap-api-scan.py \
-    -c api-scan.conf \
-    -t http://api-for-testing:8000/open-api \
-    -f openapi
