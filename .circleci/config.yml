@@ -926,9 +926,9 @@ jobs:
               echo '.';
             done;
             echo 'Server is running and status is healthy'
-            docker exec -it api-container sh -c "yarn run migrate"
+            COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api yarn migrate
             echo 'migration finished'
-            docker exec -it api-container sh -c "yarn run seed"
+            COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api yarn seed
             echo 'seeding finished'
       - run:
           name: pull owasp zap docker image
