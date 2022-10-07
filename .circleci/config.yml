@@ -546,50 +546,56 @@ jobs:
 
   e2e test:
     machine:
-      image: ubuntu-2004:202104-01
+      image: ubuntu-2204:2022.04.2
     parallelism: 7
-    resource_class: medium+
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
       - run:
-          name: set up node
-          working_directory: ~/project
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y libgbm-dev wget fonts-liberation xdg-utils
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo dpkg -i google-chrome-stable_current_amd64.deb || true
-            sudo apt-get -f install
-            sudo dpkg -i google-chrome-stable_current_amd64.deb
-            # Switch to Node 16.16.0
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
-            nvm use 16.16.0
-      - run:
           name: build images
+          working_directory: ~/project/
+          command: |
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            docker build -t cms-eapd/api -f ./api/Dockerfile ./
+            docker build -t cms-eapd/web -f ./web/Dockerfile ./
+      - run:
+          name: start application
           no_output_timeout: 30m
           working_directory: ~/project
           command: |
-            export NODE_ENV=development
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
             export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
+            export NODE_ENV=development
+            export DEV_DB_HOST=localhost
+            export DEV_DB_PORT=54325
             export TEALIUM_ENV="test"
-            nvm use 16.16.0
-            yarn install --frozen-lockfile
-            yarn workspace @cms-eapd/common build
-            yarn workspace @cms-eapd/api build
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
-            docker-compose exec api yarn run migrate
-            docker-compose exec api yarn run seed
+            docker-compose exec -e LOG_LEVEL=verbose api yarn run migrate
+            docker-compose exec -e LOG_LEVEL=verbose api yarn run seed
+            echo 'Checking to see if the server is running'
+            until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
+                sleep 10;
+                echo '.';
+            done;
+            echo 'Server is running and status is healthy'
+      - run:
+          name: set up node
+          working_directory: ~/project
+          command: |
+            # Switch to Node 16.16.0
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16.16.0
+            nvm alias default 16.16.0
+            nvm use 16.16.0
       - run:
           name: set up cypress
           working_directory: ~/project/e2e
@@ -600,85 +606,105 @@ jobs:
             npx cypress@10.5.0 install --force
             npx cypress verify
       - run:
+          name: set up chrome
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libgbm-dev wget fonts-liberation xdg-utils
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo dpkg -i google-chrome-stable_current_amd64.deb || true
+            sudo apt-get -f install
+            sudo dpkg -i google-chrome-stable_current_amd64.deb
+      - run:
           name: run e2e tests authentication
           working_directory: ~/project/e2e
           no_output_timeout: 60m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.16.0; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_HOST=localhost; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_PORT=54325; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.cy.js"; fi
-      - run:
-          name: run e2e tests apd - basics
-          working_directory: ~/project/e2e
-          no_output_timeout: 60m
-          command: |
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.16.0; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export NODE_ENV=development; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_HOST=localhost; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_PORT=54325; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.cy.js"; fi
-      - run:
-          name: run e2e tests apd - default
-          working_directory: ~/project/e2e
-          no_output_timeout: 60m
-          command: |
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.16.0; fi
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export NODE_ENV=development; fi
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_HOST=localhost; fi
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_PORT=54325; fi
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.cy.js"; fi
-      - run:
-          name: run e2e tests apd - data
-          working_directory: ~/project/e2e
-          no_output_timeout: 60m
-          command: |
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.16.0; fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_HOST=localhost; fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_PORT=54325; fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.cy.js"; fi
-      - run:
-          name: run e2e tests apd - budget
-          working_directory: ~/project/e2e
-          no_output_timeout: 60m
-          command: |
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.16.0; fi
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_HOST=localhost; fi
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_PORT=54325; fi
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd budget" --spec "cypress/integration/02-apd/04-apd-budget-checks.cy.js"; fi
-      - run:
-          name: run e2e tests admin
-          working_directory: ~/project/e2e
-          no_output_timeout: 60m
-          command: |
-            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then nvm use 16.16.0; fi
-            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export NODE_ENV=development; fi
-            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_HOST=localhost; fi
-            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_PORT=54325; fi
-            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "5" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.cy.js"; fi
-      - run:
-          name: run e2e bug tests
-          working_directory: ~/project/e2e
-          no_output_timeout: 60m
-          command: |
-            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then nvm use 16.16.0; fi
-            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export NODE_ENV=development; fi
-            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_HOST=localhost; fi
-            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_PORT=54325; fi
-            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
-            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
+            nvm use 16.16.0
+            export NODE_ENV=development
+            export DEV_DB_HOST=localhost
+            export DEV_DB_PORT=54325
+            export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"
+            yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" 
+      # - run:
+      #     name: run e2e tests authentication
+      #     working_directory: ~/project/e2e
+      #     no_output_timeout: 60m
+      #     command: |
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then nvm use 16.16.0; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export NODE_ENV=development; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_HOST=localhost; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export DEV_DB_PORT=54325; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "0" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests authentication" --spec "cypress/integration/01-authentication/*.cy.js"; fi
+      # - run:
+      #     name: run e2e tests apd - basics
+      #     working_directory: ~/project/e2e
+      #     no_output_timeout: 60m
+      #     command: |
+      #       if [[ $CIRCLE_NODE_INDEX == "1" ]]; then nvm use 16.16.0; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export NODE_ENV=development; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_HOST=localhost; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export DEV_DB_PORT=54325; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "1" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "1" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd basics" --spec "cypress/integration/02-apd/01-apd-basics.cy.js"; fi
+      # - run:
+      #     name: run e2e tests apd - default
+      #     working_directory: ~/project/e2e
+      #     no_output_timeout: 60m
+      #     command: |
+      #       if [[ $CIRCLE_NODE_INDEX == "2" ]]; then nvm use 16.16.0; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export NODE_ENV=development; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_HOST=localhost; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export DEV_DB_PORT=54325; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "2" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "2" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd default" --spec "cypress/integration/02-apd/02-default-apd.cy.js"; fi
+      # - run:
+      #     name: run e2e tests apd - data
+      #     working_directory: ~/project/e2e
+      #     no_output_timeout: 60m
+      #     command: |
+      #       if [[ $CIRCLE_NODE_INDEX == "3" ]]; then nvm use 16.16.0; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export NODE_ENV=development; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_HOST=localhost; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export DEV_DB_PORT=54325; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "3" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "3" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd data" --spec "cypress/integration/02-apd/03-apd-with-data.cy.js"; fi
+      # - run:
+      #     name: run e2e tests apd - budget
+      #     working_directory: ~/project/e2e
+      #     no_output_timeout: 60m
+      #     command: |
+      #       if [[ $CIRCLE_NODE_INDEX == "4" ]]; then nvm use 16.16.0; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export NODE_ENV=development; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_HOST=localhost; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export DEV_DB_PORT=54325; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "4" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "4" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests apd budget" --spec "cypress/integration/02-apd/04-apd-budget-checks.cy.js"; fi
+      # - run:
+      #     name: run e2e tests admin
+      #     working_directory: ~/project/e2e
+      #     no_output_timeout: 60m
+      #     command: |
+      #       if [[ $CIRCLE_NODE_INDEX == "5" ]]; then nvm use 16.16.0; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export NODE_ENV=development; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_HOST=localhost; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export DEV_DB_PORT=54325; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "5" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "5" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e tests admin" --spec "cypress/integration/03-admin/*.cy.js"; fi
+      # - run:
+      #     name: run e2e bug tests
+      #     working_directory: ~/project/e2e
+      #     no_output_timeout: 60m
+      #     command: |
+      #       if [[ $CIRCLE_NODE_INDEX == "6" ]]; then nvm use 16.16.0; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export NODE_ENV=development; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_HOST=localhost; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_PORT=54325; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+      #       if [[ $CIRCLE_NODE_INDEX == "6" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
   
   chromatic deployment:
-    yaml test:
+    # yaml test:
     docker:
       - image: cimg/node:16.16.0
         auth:
@@ -742,7 +768,7 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project/
+          working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
@@ -751,11 +777,8 @@ jobs:
           working_directory: ~/project/api
           no_output_timeout: 60m
           command: |
-            # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api 
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -784,7 +807,7 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project/
+          working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
@@ -793,11 +816,8 @@ jobs:
           working_directory: ~/project/api
           no_output_timeout: 60m
           command: |
-            # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api
             ./unit-test.sh
       - run:
           name: report coverage
@@ -911,46 +931,35 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: start everything up
+          name: build API image
           working_directory: ~/project
-          no_output_timeout: 60m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            export COMPOSE_PROJECT_NAME=api
-            COMPOSE_HTTP_TIMEOUT=1000 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            echo 'docker containers started'
-            echo 'Checking to see if the server is running'
-            until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
-              sleep 10;
-              echo '.';
-            done;
-            echo 'Server is running and status is healthy'
-            COMPOSE_HTTP_TIMEOUT=1000 docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
-            echo 'migration finished'
-            COMPOSE_HTTP_TIMEOUT=1000 docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
-            echo 'seeding finished'
-      - run:
-          name: pull owasp zap docker image
-          working_directory: ~/project/api
-          command: |
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            export COMPOSE_PROJECT_NAME=api
-            docker pull owasp/zap2docker-stable:2.11.1
+            docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: run owasp zap
-          working_directory: ~/project
+          working_directory: ~/project/api
           no_output_timeout: 60m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            export COMPOSE_PROJECT_NAME=api
-            docker run \
-              --network api_default \
-              -v $(pwd)/owasp:/zap/wrk:rw \
-              owasp/zap2docker-stable:2.11.1 \
-              zap-api-scan.py \
-              -c api-scan.conf \
-              -t http://api-for-testing:8000/open-api \
-              -f openapi
+            export COMPOSE_PROJECT_NAME=api 
+            ./owasp-test.sh
+      
+      # - run:
+      #     name: run owasp zap
+      #     working_directory: ~/project
+      #     no_output_timeout: 60m
+      #     command: |
+      #       echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+      #       export COMPOSE_PROJECT_NAME=api
+      #       docker run \
+      #         --network api_default \
+      #         -v $(pwd)/owasp:/zap/wrk:rw \
+      #         owasp/zap2docker-stable:2.11.1 \
+      #         zap-api-scan.py \
+      #         -c api-scan.conf \
+      #         -t http://api-for-testing:8000/open-api \
+      #         -f openapi
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
