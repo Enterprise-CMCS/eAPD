@@ -192,7 +192,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(0).click();
 
       cy.fixture('HIT-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, false, true);
+        fillOutActivityPage.fillStateStaff(years, data.staff, false, true); // DELETE THESE BOOLEANS
         cy.waitForSave();
       });
 
@@ -203,8 +203,6 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
         [353000, 377000],
         'HIT'
       );
-
-      cy.wait(50000);
 
       // Adds state staff to HIE activity
       cy.goToActivityDashboard();
@@ -221,7 +219,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterStateStaffHIE,
-        [218500, 223000],
+        [545512, 573102],
         'HIE'
       );
 
@@ -240,7 +238,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterStateStaffMMIS,
-        [272250, 249750],
+        [684174, 771920],
         'MMIS'
       );
 
@@ -259,12 +257,12 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterStateStaffNoFFP,
-        [358250, 337750],
+        [987174, 1098920],
         'noFFP'
       );
     });
 
-    it.skip('Checks Other State Expense Budget', () => {
+    it('Checks Other State Expense Budget', () => {
       // Adds Other State Expense to HIT activity
       cy.goToActivityDashboard();
       cy.get('#activities').findAllByText('Edit').eq(0).click();
@@ -284,7 +282,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterStateExpenseHIT,
-        [398250, 377750],
+        [1022174, 1133920],
         'HIT'
       );
 
@@ -307,7 +305,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterStateExpenseHIE,
-        [438250, 417750],
+        [1062674, 1174120],
         'HIE'
       );
 
@@ -330,7 +328,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterStateExpenseMMIS,
-        [513250, 517750],
+        [1138674, 1276620],
         'MMIS'
       );
 
@@ -353,7 +351,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterStateExpenseNoFFP,
-        [553250, 557750],
+        [1173674, 1311620],
         'noFFP'
       );
     });
@@ -373,6 +371,8 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
         );
         cy.waitForSave();
       });
+
+      cy.wait(500000);
 
       checkBudgetAndFFP(years, budgetData.afterContractorHIT, 0);
       checkProposedBudget(
