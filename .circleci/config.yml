@@ -110,6 +110,8 @@ workflows:
             - frontend lint
             - backend lint
             - dependency vulnerability scan
+            - yaml test
+            - owasp zap scan
 
       - chromatic deployment:
           filters:
@@ -123,6 +125,7 @@ workflows:
             - backend lint
             - dependency vulnerability scan
             - yaml test
+            - owasp zap scan
             - e2e test
 
       # backend jobs
@@ -928,22 +931,19 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: build API image
+          name: start everything up
           working_directory: ~/project
+          no_output_timeout: 30m
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            docker build -t cms-eapd/api -f ./api/Dockerfile ./
-      - run:
-          name: set up API server
-          working_directory: ~/project
-          no_output_timeout: 60m
-          command: |
-            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-            export COMPOSE_PROJECT_NAME=api 
-            ./owasp-test.sh
+            export COMPOSE_PROJECT_NAME=api
+            COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
+            sleep 5
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
-          working_directory: ~/project
+          working_directory: ~/project/api
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
@@ -963,22 +963,6 @@ jobs:
               -c api-scan.conf \
               -t http://api-for-testing:8000/open-api \
               -f openapi
-      
-      # - run:
-      #     name: run owasp zap
-      #     working_directory: ~/project
-      #     no_output_timeout: 60m
-      #     command: |
-      #       echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
-      #       export COMPOSE_PROJECT_NAME=api
-      #       docker run \
-      #         --network api_default \
-      #         -v $(pwd)/owasp:/zap/wrk:rw \
-      #         owasp/zap2docker-stable:2.11.1 \
-      #         zap-api-scan.py \
-      #         -c api-scan.conf \
-      #         -t http://api-for-testing:8000/open-api \
-      #         -f openapi
 
   # ===== Deployment jobs =====
   # These may have varying prerequisites, but they're grouped here because
