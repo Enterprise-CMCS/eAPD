@@ -920,16 +920,16 @@ jobs:
             COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api build api-for-testing
             COMPOSE_HTTP_TIMEOUT=500 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
             echo 'docker containers started'
-            docker exec -it api-container sh -c "yarn run migrate"
-            echo 'migration finished'
-            docker exec -it api-container sh -c "yarn run seed"
-            echo 'seeding finished'
             echo 'Checking to see if the server is running'
             until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
               sleep 10;
               echo '.';
             done;
             echo 'Server is running and status is healthy'
+            docker exec -it api-container sh -c "yarn run migrate"
+            echo 'migration finished'
+            docker exec -it api-container sh -c "yarn run seed"
+            echo 'seeding finished'
       - run:
           name: pull owasp zap docker image
           working_directory: ~/project/api
