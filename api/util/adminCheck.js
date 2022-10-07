@@ -6,7 +6,7 @@ const { combinedSchemas } = require('@cms-eapd/common');
  * @returns an array of errors with section name, url,
  * error message and completion status
  */
-const buildErrorList = (validationResults, apdId) => {
+const buildErrorList = (validationResults, apdId, activityIndexes) => {
   const getActivitiesName = errorPath => {
     const subSectionNameDict = {
       contractorResources: 'Private Contractor Costs',
@@ -31,11 +31,22 @@ const buildErrorList = (validationResults, apdId) => {
 
     // Edge cases
     if (
-      ['budget', 'activities', 'quarterlyFFP', 'years', 'percent'].every(val =>
+      [
+        'budget',
+        'activities',
+        'quarterlyFFP',
+        'years',
+        'subtotal',
+        'percent'
+      ].every(val => errorPath.includes(val))
+    ) {
+      return `Activity ${activityIndexes[errorPath[2]] + 1} Budget and FFP`;
+    }
+    if (
+      ['activities', 'costAllocation', 'ffp'].every(val =>
         errorPath.includes(val)
       )
     ) {
-      console.log('matched all paths');
       return `Activity ${errorPath[1] + 1} Budget and FFP`;
     }
     return `Activity ${errorPath[1] + 1} ${subSectionNameDict[errorPath[2]]}`;
@@ -43,12 +54,13 @@ const buildErrorList = (validationResults, apdId) => {
 
   const getSectionName = errorPath => {
     const sectionNameDict = {
-      apdOverview: 'Activity Overview',
+      apdOverview: 'APD Overview',
       keyStatePersonnel: 'Key State Personnel',
       previousActivities: 'Previous Activities',
       activities: getActivitiesName(errorPath),
       proposedBudget: 'Proposed Budget',
-      assurancesAndCompliances: 'Assurances and Compliance'
+      assurancesAndCompliances: 'Assurances and Compliance',
+      budget: getActivitiesName(errorPath)
     };
 
     return `${sectionNameDict[errorPath[0]]}`;
@@ -75,7 +87,6 @@ const buildErrorList = (validationResults, apdId) => {
     if (typeof errorPath[1] === 'undefined') {
       return `activities`;
     }
-
     return `activity/${errorPath[1]}/${subSectionURLPath[errorPath[2]]}`;
   };
 
@@ -88,6 +99,28 @@ const buildErrorList = (validationResults, apdId) => {
       proposedBudget: 'proposed-budget',
       assurancesAndCompliances: 'assurances-and-compliance'
     };
+
+    // Edge cases
+    if (
+      [
+        'budget',
+        'activities',
+        'quarterlyFFP',
+        'years',
+        'subtotal',
+        'percent'
+      ].every(val => errorPath.includes(val))
+    ) {
+      return `/apd/${apdId}/activity/${activityIndexes[errorPath[2]]}/ffp`;
+    }
+
+    if (
+      ['activities', 'costAllocation', 'ffp'].every(val =>
+        errorPath.includes(val)
+      )
+    ) {
+      return `/apd/${apdId}/activity/${errorPath[1]}/ffp`;
+    }
 
     return `/apd/${apdId}/${sectionURLPath[errorPath[0]]}`;
   };
@@ -121,6 +154,11 @@ const adminCheckApd = apd => {
     return activity.fundingSource;
   });
 
+  let activityIndexes = {};
+  const getActivityIndexes = apd?.activities?.forEach((activity, index) => {
+    activityIndexes[activity.activityId] = index;
+  });
+
   // Inject funding sources into apd object to support conditional validations
   const modifiedApd = {
     ...apd,
@@ -139,8 +177,8 @@ const adminCheckApd = apd => {
   }
 
   console.log('validationResults', validationResults.error.details);
-  const errorList = buildErrorList(validationResults, apd._id); // eslint-disable-line no-underscore-dangle
-  console.log('errorList', errorList);
+  const errorList = buildErrorList(validationResults, apd._id, activityIndexes); // eslint-disable-line no-underscore-dangle
+  // console.log('errorList', errorList);
   return errorList;
 };
 
