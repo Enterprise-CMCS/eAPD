@@ -900,7 +900,7 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2204:2022.04.2
-    resource_class: large
+    resource_class: xlarge
     steps:
       - checkout
       - attach_workspace:
