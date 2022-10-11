@@ -875,6 +875,7 @@ jobs:
           working_directory: ~/project/web
           command: |
             export TEALIUM_ENV="test"
+            LD_CLIENT_ID=
             yarn test --runInBand
       - run:
           name: report coverage
@@ -919,7 +920,6 @@ jobs:
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
-            export LD_API_KEY=null 
 
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api

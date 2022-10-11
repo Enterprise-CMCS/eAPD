@@ -12,7 +12,7 @@ import App from './App';
 const Root = ({ history, store }) => {
   // when the app opens, get all of the flags
   // update the flags you are watching here
-  const { validation } = useFlags();
+  const { validation = true } = useFlags();
 
   // use the updateFlags action if a reducer needs to use a flag
   // then it can listen for the FLAGS_UPDATED type
@@ -39,11 +39,18 @@ Root.propTypes = {
   store: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
 };
 
-export default withLDProvider({
-  clientSideID: process.env.LD_CLIENT_ID,
-  options: {
-    streamUrl: 'https://clientstream.launchdarkly.us',
-    baseUrl: 'https://clientsdk.launchdarkly.us',
-    eventsUrl: 'https://events.launchdarkly.us'
-  }
-})(Root);
+let component;
+
+if (process.env.LD_CLIENT_ID) {
+  component = withLDProvider({
+    clientSideID: process.env.LD_CLIENT_ID,
+    options: {
+      streamUrl: 'https://clientstream.launchdarkly.us',
+      baseUrl: 'https://clientsdk.launchdarkly.us',
+      eventsUrl: 'https://events.launchdarkly.us'
+    }
+  })(Root);
+} else {
+  component = Root;
+}
+export default component;
