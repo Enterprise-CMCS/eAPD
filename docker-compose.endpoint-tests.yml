@@ -42,7 +42,6 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
-      - LD_API_KEY=
       - MONGO_ADMIN_URL=mongodb://admin-user:admin-password@mongo:27017/admin
       - MONGO_URL=mongodb://mongo-test:cms-test@mongo:27017/eapd-test?authSource=admin
       - MONGO_DATABASE=eapd-test
