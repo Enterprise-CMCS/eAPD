@@ -53,9 +53,7 @@ services:
       - API_HOST=api-for-testing
     command: yarn start
     healthcheck:
-      test:
-        wget --no-verbose --tries=1 --spider
-        http://api-for-testing:8000/heartbeat || exit 1
+      test: wget http://api-for-testing:8000/heartbeat || exit 1
       interval: 60s
       retries: 10
       start_period: 240s
