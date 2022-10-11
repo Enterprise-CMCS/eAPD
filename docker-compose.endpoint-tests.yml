@@ -31,7 +31,6 @@ services:
       dockerfile: ./api/Dockerfile
     image: cms-eapd/api
     container_name: api-container
-    restart: on-failure
     depends_on:
       - db
       - mongo
@@ -52,8 +51,15 @@ services:
       - FILE_PATH=test-data/files
       - API_PORT=8000
       - API_HOST=api-for-testing
-      - LD_API_KEY=${LD_API_KEY}
     command: yarn start
+    healthcheck:
+      test:
+        wget --no-verbose --tries=1 --spider
+        http://api-for-testing:8000/heartbeat || exit 1
+      interval: 60s
+      retries: 10
+      start_period: 240s
+      timeout: 10s
     expose:
       - 8000
     volumes:

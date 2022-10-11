@@ -110,6 +110,7 @@ workflows:
             - frontend lint
             - backend lint
             - dependency vulnerability scan
+            - yaml test
 
       - chromatic deployment:
           filters:
@@ -123,6 +124,7 @@ workflows:
             - backend lint
             - dependency vulnerability scan
             - yaml test
+            - owasp zap scan
             - e2e test
 
       # backend jobs
@@ -583,8 +585,6 @@ jobs:
             export TEALIUM_ENV="test"
             nvm use 16.16.0
             yarn install --frozen-lockfile
-            yarn workspace @cms-eapd/common build
-            yarn workspace @cms-eapd/api build
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
             docker-compose exec api yarn run migrate
@@ -677,13 +677,11 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "6" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
   
   chromatic deployment:
-    yaml test:
     docker:
       - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
-    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -741,19 +739,17 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project/
+          working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: run tests
           working_directory: ~/project/api
+          no_output_timeout: 60m
           command: |
-            # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api 
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -782,19 +778,17 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project/
+          working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: run tests
           working_directory: ~/project/api
+          no_output_timeout: 60m
           command: |
-            # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api
             ./unit-test.sh
       - run:
           name: report coverage
@@ -914,7 +908,7 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            sleep 5
+            sleep 60
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
