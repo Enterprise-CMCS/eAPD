@@ -182,7 +182,7 @@ Cypress.Commands.add('updateFeatureFlags', featureFlags => {
   );
 
   // turn off push (EventSource) updates from LaunchDarkly
-  cy.intercept({ hostname: /.*clientstream.launchdarkly.us/ }, req => {
+  cy.intercept({ hostname: /.*stream.launchdarkly.us/ }, req => {
     req.reply({ body });
   });
 

@@ -42,6 +42,7 @@ services:
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - OKTA_API_KEY=${OKTA_API_KEY}
       - JWT_SECRET=${JWT_SECRET}
+      - LD_API_KEY=${LD_API_KEY}
       - MONGO_ADMIN_URL=mongodb://admin-user:admin-password@mongo:27017/admin
       - MONGO_URL=mongodb://mongo-test:cms-test@mongo:27017/eapd-test?authSource=admin
       - MONGO_DATABASE=eapd-test
@@ -54,11 +55,7 @@ services:
     command: yarn start
     healthcheck:
       test:
-        [
-          'CMD-SHELL',
-          'wget --header="Authorization: Bearer all-permissions"
-          http://api-for-testing:8000/heartbeat || exit 1'
-        ]
+        ['CMD-SHELL', 'wget http://api-for-testing:8000/heartbeat || exit 1']
       interval: 60s
       retries: 10
       start_period: 240s
