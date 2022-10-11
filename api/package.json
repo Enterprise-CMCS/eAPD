@@ -22,7 +22,7 @@
     "mongoose-migrate": "migrate --config mongo-migrate.js --autosync up",
     "mongoose-migrate-down": "migrate --config mongo-migrate.js down",
     "migrate": "yarn knex-migrate && yarn mongoose-migrate",
-    "seed": "yarn workspace @cms-eapd/common build && yarn knex seed:run --specific=main.js",
+    "seed": "yarn knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "yarn knex seed:run --specific=base-users.js",
     "jest": "NODE_ENV=test jest",
