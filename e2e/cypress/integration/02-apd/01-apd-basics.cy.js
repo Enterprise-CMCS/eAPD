@@ -1344,64 +1344,64 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
-  describe('Accessibility Tests', () => {
+  describe.only('Accessibility Tests', () => {
     it('Runs on APD Builder', () => {
       cy.wait(5000); // Allows page to load
 
       cy.checkPageA11y(); // APD Overview
-      cy.contains('Continue').click();
 
+      cy.goToKeyStatePersonnel();
       cy.checkPageA11y(); // Key State Personnel
-      cy.contains('Continue').click();
 
+      cy.goToPreviousActivities();
       cy.checkPageA11y(); // Results of Previous Activities
-      cy.contains('Continue').click();
 
-      cy.findByRole('button', { name: /Add Activity/i }).click(); // Add back for MMIS tests
+      cy.goToActivityDashboard();
+      // cy.findByRole('button', { name: /Add Activity/i }).click(); // Add back for MMIS tests
       cy.checkPageA11y(); // Activities Dashboard
-      cy.get('#activities').contains('Edit').click();
 
+      cy.goToActivityOverview(0);
       cy.checkPageA11y(); // Activity Overview
-      cy.contains('Continue').click();
 
+      cy.goToOutcomesAndMilestones(0);
       cy.findByRole('button', { name: /Add Outcome/i }).click();
       cy.checkPageA11y(); // Outcomes Subform
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.findByRole('button', { name: /Add Milestone/i }).click();
       cy.checkPageA11y(); // Milestones Subform
-      cy.contains('Continue').click();
 
+      cy.goToStateStaffAndExpenses(0);
       cy.findByRole('button', { name: /Add State Staff/i }).click();
       cy.checkPageA11y(); // State Staff Subform
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.findByRole('button', { name: /Add State Expense/i }).click();
       cy.checkPageA11y(); // State Expenses Subform
-      cy.contains('Continue').click();
 
+      cy.goToPrivateContractorCosts(0);
       cy.findByRole('button', { name: /Add Contractor/i }).click();
       cy.checkPageA11y(); // Private Contractor
-      cy.contains('Continue').click();
 
+      cy.goToCostAllocationAndOtherFunding(0);
       cy.checkPageA11y(); // Cost Allocation and Other Funding
-      cy.contains('Continue').click();
 
+      cy.goToBudgetAndFFP(0);
       cy.checkPageA11y(); // Budget and FFP
-      cy.contains('Continue').click();
 
+      cy.goToActivityScheduleSummary();
       cy.checkPageA11y(); // Activity Schedule Summary
-      cy.contains('Continue').click();
 
+      cy.goToProposedBudget();
       cy.checkPageA11y(); // Proposed Budget
-      cy.contains('Continue').click();
 
+      cy.goToAssurancesAndCompliance();
       cy.checkPageA11y(); // Assurances and Compliance
-      cy.contains('Continue').click();
 
+      cy.goToExecutiveSummary();
       cy.checkPageA11y(); // Executive Summary
-      cy.contains('Continue').click();
 
+      cy.contains('Export and Submit').click();
       cy.checkPageA11y(); // Export and Submit
     });
   });
