@@ -12,18 +12,27 @@ const client = LaunchDarkly.init(LD_API_KEY, options);
 const waitForInitialization = async () => {
   // Using "await" instead, within an async function
   try {
-    await client.waitForInitialization();
-    // Initialization complete
+    if (LD_API_KEY) {
+      await client.waitForInitialization();
+      // Initialization complete
+    }
   } catch (err) {
     // Initialization failed
   }
 };
 
+const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
+  if (client) {
+    return client.variation(flagName, user, defaultValue);
+  }
+  return defaultValue;
+};
+
 /**
  * To use the flag:
- * const { ldClient } = require('../../middleware/launchDarkly');
+ * const { getLaunchDarklyFlag } = require('../../middleware/launchDarkly');
  *
- * const shouldValidate = await ldClient.variation(
+ * const shouldValidate = await getLaunchDarklyFlag(
  *   'validation',
  *   { key: 'anonymous', anonymous: true },
  *   false
@@ -32,5 +41,6 @@ const waitForInitialization = async () => {
 
 module.exports = {
   ldClient: client,
-  waitForInitialization
+  waitForInitialization,
+  getLaunchDarklyFlag
 };

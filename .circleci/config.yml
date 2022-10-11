@@ -912,14 +912,15 @@ jobs:
           name: start everything up
           working_directory: ~/project
           no_output_timeout: 30m
+          # setting LD_API_KEY to null so it doesn't connect to LD
           command: |
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
             export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
-            export LD_API_KEY="$PREVIEW_LD_API_KEY"
-            
+            export LD_API_KEY=null 
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
@@ -931,11 +932,7 @@ jobs:
             echo 'Server is running and status is healthy'
 
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
-            echo "health status: `docker inspect -f {{.State.Health.Status}} api-container`"
-            docker logs -f -n 1000 api-container
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
-            echo "health status: `docker inspect -f {{.State.Health.Status}} api-container`"
-            docker logs -f -n 1000 api-container
       - run:
           name: pull owasp zap docker image
           working_directory: ~/project/api
@@ -950,8 +947,6 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
-            echo "health status: `docker inspect -f {{.State.Health.Status}} api-container`"
-            docker logs -f -n 1000 api-container
             docker run \
               --network api_default \
               -v $(pwd)/owasp:/zap/wrk:rw \
