@@ -53,7 +53,7 @@ class ExecutiveSummary extends PureComponent {
         </Review>
         {data.map((activity, i) => (
           <Review
-            key={activity.key}
+            key={activity.activityId}
             heading={titleCase(
               `Activity ${i + 1}: ${activity.name || t('activities.noNameYet')}`
             )}
@@ -79,12 +79,12 @@ class ExecutiveSummary extends PureComponent {
                 <Dollars>{activity.federal}</Dollars> Federal share)
               </li>
               {Object.entries(activity.ffys).map(
-                ([ffy, { medicaidShare, federal, total: ffyTotal }], j) => (
+                ([ffy, { medicaid, federal, total: ffyTotal }], j) => (
                   <li key={ffy} className={j === 0 ? 'ds-u-margin-top--2' : ''}>
                     <strong>FFY {ffy}:</strong> <Dollars>{ffyTotal}</Dollars> |{' '}
                     <strong>Total Computable Medicaid Cost:</strong>{' '}
-                    <Dollars>{medicaidShare}</Dollars> (
-                    <Dollars>{federal}</Dollars> Federal share)
+                    <Dollars>{medicaid}</Dollars> (<Dollars>{federal}</Dollars>{' '}
+                    Federal share)
                   </li>
                 )
               )}

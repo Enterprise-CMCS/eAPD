@@ -27,7 +27,7 @@ const makeTitle = ({ name, fundingSource }, i) => {
 const EntryDetails = ({
   apdId,
   activityIndex,
-  activityKey,
+  activityId,
   fundingSource,
   name,
   remove
@@ -76,7 +76,7 @@ const EntryDetails = ({
 
   return (
     <div
-      id={`activity-${activityKey}`}
+      id={`activity-${activityId}`}
       className={`activity--body activity--body__${
         activityIndex === 0 ? 'first' : 'notfirst'
       }`}
@@ -109,7 +109,7 @@ const EntryDetails = ({
 EntryDetails.propTypes = {
   apdId: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
-  activityKey: PropTypes.string.isRequired,
+  activityId: PropTypes.string.isRequired,
   fundingSource: PropTypes.string,
   name: PropTypes.string,
   remove: PropTypes.func.isRequired
@@ -121,10 +121,10 @@ EntryDetails.defaultProps = {
 };
 
 const mapStateToProps = (state, { activityIndex }) => {
-  const { fundingSource, key, name } = selectActivityByIndex(state, {
+  const { fundingSource, activityId, name } = selectActivityByIndex(state, {
     activityIndex
   });
-  return { activityKey: key, fundingSource, name };
+  return { activityId: activityId, fundingSource, name };
 };
 
 const mapDispatchToProps = {

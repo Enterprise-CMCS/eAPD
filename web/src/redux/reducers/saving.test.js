@@ -45,7 +45,7 @@ describe('saving state reducer and selectors', () => {
             type: SAVE_APD_SUCCESS,
             // March 11, 2020, 10:53 AM CDT: When this test was written. Truly
             // a red-letter day in science.
-            data: { updated: '2020-03-11T10:53:00-0500' }
+            apd: { updated: '2020-03-11T10:53:00-0500' }
           }
         )
       ).toEqual({

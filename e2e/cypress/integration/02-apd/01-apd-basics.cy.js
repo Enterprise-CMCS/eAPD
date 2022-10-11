@@ -1224,7 +1224,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .parent()
           .contains('Delete')
           .click();
-        cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+        cy.findByRole('alertdialog').within(() => {
+          cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+        });
         cy.waitForSave();
         cy.contains('Delete Key Personnel?').should('not.exist');
 
@@ -1417,7 +1419,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .contains('Delete')
         .click();
 
-      cy.get('.ds-c-button--danger').click();
+      cy.get('button[id="dialog-delete"]').click({ force: true });
+      cy.waitForSave();
 
       cy.get(`a[href='${apdUrl}']`).should('not.exist');
     });

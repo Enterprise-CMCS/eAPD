@@ -5,7 +5,7 @@ common/node_modules
 e2e/node_modules
 web/node_modules
 
-.circleci/config.yml
+.circleci
 .DS_Store
 .dccache
 .editorconfig
