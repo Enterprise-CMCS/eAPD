@@ -28,7 +28,7 @@ const EXPENSE_NAME_DISPLAY = {
 /* eslint-disable  react-hooks/rules-of-hooks */
 const CostAllocateFFPQuarterly = ({
   activityIndex,
-  aKey,
+  activityId,
   announce,
   isViewOnly,
   quarterlyFFP,
@@ -50,7 +50,9 @@ const CostAllocateFFPQuarterly = ({
     clearErrors
   } = useForm({
     defaultValues: {
-      formData: { ...quarterlyFFP[year] }
+      formData: {
+        ...quarterlyFFP[year]
+      }
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -87,7 +89,7 @@ const CostAllocateFFPQuarterly = ({
     ({ target: { value } }) => {
       setValue(`formData[${quarter}].inHouse.percent`, value / 100);
       setInHouseFFP(activityIndex, year, quarter, value);
-      announce(aKey, year, quarter, 'inHouse');
+      announce(activityId, year, quarter, 'inHouse');
     };
 
   const setContractor =
@@ -95,7 +97,7 @@ const CostAllocateFFPQuarterly = ({
     ({ target: { value } }) => {
       setValue(`formData[${quarter}].contractors.percent`, value / 100);
       setContractorFFP(activityIndex, year, quarter, value);
-      announce(aKey, year, quarter, 'contractors');
+      announce(activityId, year, quarter, 'contractors');
     };
 
   return (
@@ -293,7 +295,7 @@ const CostAllocateFFPQuarterly = ({
 
 CostAllocateFFPQuarterly.propTypes = {
   activityIndex: PropTypes.number.isRequired,
-  aKey: PropTypes.string.isRequired,
+  activityId: PropTypes.string.isRequired,
   announce: PropTypes.func.isRequired,
   isViewOnly: PropTypes.bool.isRequired,
   quarterlyFFP: PropTypes.object,

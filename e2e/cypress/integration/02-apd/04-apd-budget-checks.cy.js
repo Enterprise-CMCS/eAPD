@@ -55,7 +55,6 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       // HIT Activity
       cy.goToActivityDashboard();
       cy.get('#activities').findAllByText('Edit').eq(0).click();
-
       cy.findAllByText('Budget and FFP').eq(0).click();
 
       _.forEach(years, (years, i) => {
@@ -70,6 +69,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       // HIE Activity
       cy.goToActivityDashboard();
       cy.findByRole('button', { name: 'Add Activity' }).click();
+      cy.waitForSave();
       cy.get('#activities').findAllByText('Edit').eq(1).click();
 
       cy.findByRole('radio', { name: /HIE/i }).check({ force: true });
@@ -87,6 +87,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       // MMIS Activity
       cy.goToActivityDashboard();
       cy.findByRole('button', { name: 'Add Activity' }).click();
+      cy.waitForSave();
       cy.get('#activities').findAllByText('Edit').eq(2).click();
 
       cy.findByRole('radio', { name: /MMIS/i }).check({ force: true });
@@ -104,8 +105,8 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       // No FFP Activity
       cy.goToActivityDashboard();
       cy.findByRole('button', { name: 'Add Activity' }).click();
+      cy.waitForSave();
       cy.get('#activities').findAllByText('Edit').eq(3).click();
-
       cy.findAllByText('Budget and FFP').eq(3).click();
 
       _.forEach(years, (years, i) => {

@@ -42,14 +42,15 @@ class ActivityPage {
     cy.contains(alert).should('not.exist');
     cy.contains('Delete').click();
     cy.contains(heading).should('exist');
-    cy.contains('Cancel').click();
+    cy.get('button[id="dialog-cancel"]').click({ force: true });
     cy.contains(heading).should('not.exist');
     cy.contains(alert).should('not.exist');
     cy.contains(check).should('exist');
 
     cy.contains('Delete').click();
     cy.contains(heading).should('exist');
-    cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+    cy.get('button[id="dialog-delete"]').click({ force: true });
+    cy.waitForSave();
 
     cy.contains(heading).should('not.exist');
     cy.contains(alert).should('exist');

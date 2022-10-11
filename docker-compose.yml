@@ -34,9 +34,10 @@ services:
       context: .
       dockerfile: ./web/Dockerfile
     image: cms-eapd/web
+    restart: unless-stopped
     environment:
       - API_URL=http://localhost:8081
-      - TEALIUM_TAG=${TEALIUM_TAG}
+      - TEALIUM_TAG=${TEALIUM_TAG:-default}
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
@@ -61,6 +62,7 @@ services:
       context: .
       dockerfile: ./api/Dockerfile
     image: cms-eapd/api
+    restart: unless-stopped
     depends_on:
       - db
       - mongo

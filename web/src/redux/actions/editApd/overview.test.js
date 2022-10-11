@@ -1,8 +1,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { UPDATE_BUDGET } from '../budget';
-
 import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from './symbols';
 import {
   addYear,
@@ -26,10 +24,6 @@ describe('APD edit actions for adding or removing APD years', () => {
         type: ADD_APD_YEAR,
         value: '1234',
         state: 'add year state'
-      },
-      {
-        type: UPDATE_BUDGET,
-        state: 'add year state'
       }
     ]);
   });
@@ -43,10 +37,6 @@ describe('APD edit actions for adding or removing APD years', () => {
       {
         type: REMOVE_APD_YEAR,
         value: '1234',
-        state: 'remove year state'
-      },
-      {
-        type: UPDATE_BUDGET,
         state: 'remove year state'
       }
     ]);

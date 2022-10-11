@@ -30,8 +30,8 @@ describe('APD files endpoints', () => {
       return { formData, options };
     };
 
-    unauthenticatedTest('post', url(badAPDId));
-    unauthorizedTest('post', url(badAPDId));
+    unauthenticatedTest('post', url(akAPDId));
+    unauthorizedTest('post', url(akAPDId));
 
     describe('when authenticated as a user with permission', () => {
       let api;

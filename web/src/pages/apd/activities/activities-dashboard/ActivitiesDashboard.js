@@ -41,7 +41,7 @@ const All = ({ addActivity, activities, adminCheck }) => {
           <EntryDetails
             apdId={apdId}
             activityIndex={index}
-            key={activity.key}
+            key={activity.activityId}
           />
         ))}
         <Button className="ds-u-margin-top--4" onClick={addActivity}>

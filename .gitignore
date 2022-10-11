@@ -17,12 +17,12 @@ web/node_modules
 .yarnrc.yml
 
 Makefile
-notes.md
-npm-debug.log*
-schema.sql
 __files
 mongodata/*
+notes.md
+npm-debug.log*
 pgdata/*
+schema.sql
 
 api/.env
 api/.nyc_output

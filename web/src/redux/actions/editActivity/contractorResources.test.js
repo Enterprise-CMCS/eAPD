@@ -1,8 +1,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { UPDATE_BUDGET } from '../budget';
-
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 import { saveContractor, removeContractor } from './contractorResources';
@@ -41,8 +39,7 @@ describe('APD activity edit actions for contractor resources section', () => {
         type: EDIT_APD,
         path: '/activities/0/contractorResources/0',
         value: {}
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 
@@ -58,8 +55,7 @@ describe('APD activity edit actions for contractor resources section', () => {
       {
         type: REMOVE_APD_ITEM,
         path: '/activities/0/contractorResources/0'
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 
@@ -81,8 +77,7 @@ describe('APD activity edit actions for contractor resources section', () => {
         type: EDIT_APD,
         path: '/activities/0/contractorResources/0',
         value: contractor
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 });

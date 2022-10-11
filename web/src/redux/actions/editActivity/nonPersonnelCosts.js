@@ -1,5 +1,4 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
-import { updateBudget } from '../budget';
 
 /**
  * Adds or updates a expense resource from an activity
@@ -32,8 +31,6 @@ export const saveNonPersonnelCost =
       path: `/activities/${activityIndex}/expenses/${indexCalculated}`,
       value: data
     });
-
-    dispatch(updateBudget());
   };
 
 /**
@@ -47,5 +44,4 @@ export const removeNonPersonnelCost =
       type: REMOVE_APD_ITEM,
       path: `/activities/${activityIndex}/expenses/${nonPersonnelIndex}`
     });
-    dispatch(updateBudget());
   };
