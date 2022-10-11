@@ -341,6 +341,7 @@ jobs:
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
               --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
+              --var preview_ld_api_key=$PREVIEW_LD_API_KEY --var preview_ld_client_id=$PREVIEW_LD_CLIENT_ID \
               preview-ami.pkr.hcl
   
   packer validation tests:
@@ -373,6 +374,7 @@ jobs:
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
               --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
+              --var preview_ld_api_key=$PREVIEW_LD_API_KEY --var preview_ld_client_id=$PREVIEW_LD_CLIENT_ID \
             preview-ami.pkr.hcl
       - run:
           name: Validate Mongo AMI
@@ -583,6 +585,8 @@ jobs:
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
             export TEALIUM_ENV="test"
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export LD_CLIENT_ID="$PREVIEW_LD_CLIENT_ID"
             nvm use 16.16.0
             yarn install --frozen-lockfile
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
@@ -822,7 +826,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: LD_CLIENT_ID="${<< parameters.env >>_LD_CLIENT_ID TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -921,8 +925,10 @@ jobs:
 
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             echo "health status: `docker inspect -f {{.State.Health.Status}} api-container`"
+            docker logs -f -n 1000 api-container
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
             echo "health status: `docker inspect -f {{.State.Health.Status}} api-container`"
+            docker logs -f -n 1000 api-container
       - run:
           name: pull owasp zap docker image
           working_directory: ~/project/api
@@ -996,8 +1002,10 @@ jobs:
               --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
               --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}" \
-              --TEALIUM_TAG "${<< parameters.env >>_PREVIEW_TEALIUM_TAG}" \
-              --TEALIUM_ENV "${<< parameters.env >>_PREVIEW_TEALIUM_ENV}"
+              --TEALIUM_TAG "${<< parameters.env >>_TEALIUM_TAG}" \
+              --TEALIUM_ENV "${<< parameters.env >>_TEALIUM_ENV}" \
+              --LD_API_KEY "${<< parameters.env >>_LD_API_KEY}" \
+              --LD_CLIENT_ID "${<< parameters.env >>_LD_CLIENT_ID
 
       - run:
           when: on_fail
@@ -1120,7 +1128,9 @@ jobs:
                 --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
                 --DATABASE_URL "$PREVIEW_DATABASE_URL" \
                 --TEALIUM_TAG "$PREVIEW_TEALIUM_TAG" \
-                --TEALIUM_ENV "$PREVIEW_TEALIUM_ENV"
+                --TEALIUM_ENV "$PREVIEW_TEALIUM_ENV" \
+                --LD_API_KEY "$PREVIEW_LD_API_KEY" \
+                --LD_CLIENT_ID "$PREVIEW_LD_CLIENT_ID"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else
