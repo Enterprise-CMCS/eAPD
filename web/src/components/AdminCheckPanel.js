@@ -230,10 +230,10 @@ AdminCheckPanel.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  adminCheckEnabled: state.apd.adminCheck,
-  adminCheckCollapsed: state.apd.adminCheckCollapsed,
-  adminCheckComplete: state.apd.adminCheckComplete,
-  adminCheckData: state.apd.data.adminCheck
+  adminCheckEnabled: state.apd.adminCheck.enabled,
+  adminCheckCollapsed: state.apd.adminCheck.collapsed,
+  adminCheckComplete: state.apd.adminCheck.complete,
+  adminCheckData: state.apd.adminCheck.errors
 });
 
 const mapDispatchToProps = {

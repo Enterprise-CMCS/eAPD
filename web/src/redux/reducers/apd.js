@@ -332,9 +332,12 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: false,
-  adminCheckCollapsed: false,
-  adminCheckComplete: false
+  adminCheck: {
+    errors: [],
+    enabled: false,
+    collapsed: false,
+    complete: false
+  }
 };
 
 // eslint-disable-next-line default-param-last
@@ -399,21 +402,30 @@ const reducer = (state = initialState, action) => {
     case ADMIN_CHECK_TOGGLE: {
       return {
         ...state,
-        adminCheck: action.data
+        adminCheck: {
+          ...state.adminCheck,
+          enabled: action.data
+        }
       };
     }
 
     case ADMIN_CHECK_COLLAPSE_TOGGLE: {
       return {
         ...state,
-        adminCheckCollapsed: action.data
+        adminCheck: {
+          ...state.adminCheck,
+          collapsed: action.data
+        }
       };
     }
 
     case ADMIN_CHECK_COMPLETE_TOGGLE: {
       return {
         ...state,
-        adminCheckComplete: action.data
+        adminCheck: {
+          ...state.adminCheck,
+          complete: action.data
+        }
       };
     }
 
@@ -460,16 +472,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.apd.id]: {
-            ...state.byId[action.apd.id],
-            updated: getHumanTimestamp(action.apd.updated)
+          [action.data.apd.id]: {
+            ...state.byId[action.data.apd.id],
+            updated: getHumanTimestamp(action.data.apd.updated)
           }
         },
         data: {
           ...state.data,
-          adminCheck: action.apd.adminCheck,
-          created: getHumanDatestamp(action.apd.created),
-          updated: getHumanTimestamp(action.apd.updated)
+          created: getHumanDatestamp(action.data.apd.created),
+          updated: getHumanTimestamp(action.data.apd.updated)
+        },
+        adminCheck: {
+          ...state.adminCheck,
+          errors: action.data.adminCheck.errors
         }
       };
 

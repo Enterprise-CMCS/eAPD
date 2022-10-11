@@ -60,7 +60,7 @@ module.exports = (
           logger.error({ id: req.id, message: errors });
         }
 
-        const validationErrors = await adminCheckAPDDocument(req.params.id);
+        const adminCheck = await adminCheckAPDDocument(req.params.id);
 
         return res.send({
           errors,
@@ -69,9 +69,9 @@ module.exports = (
             id: req.params.id,
             created,
             state,
-            updated,
-            adminCheck: validationErrors
-          }
+            updated
+          },
+          adminCheck
         });
       } catch (e) {
         logger.error({ id: req.id, message: e });

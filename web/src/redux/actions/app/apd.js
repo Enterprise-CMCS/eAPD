@@ -65,10 +65,14 @@ export const saveApd = () => (dispatch, getState) => {
     return axios
       .patch(`/apds/${apdID}`, patches)
       .then(res => {
+        console.log('res', res);
         const budget = deepCopy(res.data.apd.budget);
         delete res.data.apd.budget;
 
-        dispatch({ type: SAVE_APD_SUCCESS, apd: res.data.apd });
+        dispatch({
+          type: SAVE_APD_SUCCESS,
+          data: { apd: res.data.apd, adminCheck: res.data.adminCheck }
+        });
         if (hasBudgetUpdate(patches)) {
           dispatch(loadBudget(budget));
         }
@@ -105,10 +109,14 @@ export const selectApd =
         const budget = deepCopy(res.data.budget);
         delete res.data.budget;
 
-        dispatch({ type: SELECT_APD_SUCCESS, apd: res.data });
+        console.log('res', res);
+        dispatch({
+          type: SAVE_APD_SUCCESS,
+          data: { apd: res.data.apd, adminCheck: res.data.adminCheck }
+        });
         dispatch({
           type: APD_ACTIVITIES_CHANGE,
-          activities: res.data.activities
+          activities: res.data.apd.activities
         });
         dispatch({ type: ADMIN_CHECK_TOGGLE, data: false });
 

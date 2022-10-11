@@ -80,7 +80,7 @@ module.exports = (
         logger.info(`id: ${req.params.id}, state: ${stateId}`);
         const apdFromDB = await getAPDByIDAndState(req.params.id, stateId);
 
-        const validationErrors = await adminCheckAPDDocument(req.params.id);
+        const adminCheck = await adminCheckAPDDocument(req.params.id);
 
         if (apdFromDB) {
           const {
@@ -95,15 +95,14 @@ module.exports = (
             id,
             created,
             updated,
-            state,
-            adminCheck: validationErrors
+            state
           };
 
           logger.silly({
             id: req.id,
             message: `got single apd, id=${apd.id}, name="${apd.name}"`
           });
-          return res.send(apd);
+          return res.send({ apd, adminCheck });
         }
 
         logger.verbose({ id: req.id, message: 'apd does not exist' });

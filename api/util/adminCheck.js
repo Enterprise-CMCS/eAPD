@@ -49,6 +49,7 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
     ) {
       return `Activity ${errorPath[1] + 1} Budget and FFP`;
     }
+
     return `Activity ${errorPath[1] + 1} ${subSectionNameDict[errorPath[2]]}`;
   };
 
@@ -176,9 +177,7 @@ const adminCheckApd = apd => {
     return [];
   }
 
-  console.log('validationResults', validationResults.error.details);
   const errorList = buildErrorList(validationResults, apd._id, activityIndexes); // eslint-disable-line no-underscore-dangle
-  // console.log('errorList', errorList);
   return errorList;
 };
 
