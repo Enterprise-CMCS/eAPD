@@ -8,112 +8,8 @@ import { Alert, Button, ChoiceList, TextField } from '@cmsgov/design-system';
 import TextArea from '../../../components/TextArea';
 import { createApd } from '../../../redux/actions/app';
 
-const businessAreaChoices = [
-  {
-    label: '1115 or Waiver Support Systems',
-    value: 'waiver-support-systems'
-  },
-  {
-    label: 'Asset Verification System',
-    value: 'asset-verification-system'
-  },
-  {
-    label: 'Claims Processing',
-    value: 'claims-processing'
-  },
-  {
-    label: 'Decision Support System & Data Warehouse',
-    value: 'decision-support'
-  },
-  {
-    label: 'Electronic Visit Verification (EVV)',
-    value: 'evv'
-  },
-  {
-    label: 'Encounter Processing System (EPS) & Managed Care System',
-    value: 'eps'
-  },
-  {
-    label: 'Financial Management',
-    value: 'financial-management'
-  },
-  {
-    label: 'Health Information Exchange (HIE)',
-    value: 'hie'
-  },
-  {
-    label: 'Long Term Services & Suports (LTSS)',
-    value: 'ltss'
-  },
-  {
-    label: 'Member Management',
-    value: 'member-management'
-  },
-  {
-    label: 'Pharmacy Beefit Management (PBM) & Point of Sale (POS)',
-    value: 'pbm-pos'
-  },
-  {
-    label: 'Program Integrity',
-    value: 'program-integrity'
-  },
-  {
-    label: 'Provider Management',
-    value: 'provider-management'
-  },
-  {
-    label: 'Third Party Liability (TPL)',
-    value: 'tpl'
-  },
-  {
-    label: 'Other',
-    value: 'other',
-    checkedChildren: (
-      <div className="ds-c-choice__checkedChild">
-        <TextArea
-          label="Other Medicaid Business Area(s)"
-          name="other-mbas"
-          hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
-        />
-      </div>
-    )
-  }
-];
-
-import Joi from 'joi';
+import newApdSchema from '@cms-eapd/common/schemas/apdNew';
 import { joiResolver } from '@hookform/resolvers/joi';
-
-const createApdSchema = Joi.object({
-  apdType: Joi.string().valid('hitech', 'mmis').required().messages({
-    'string.base': 'Select an APD Type',
-    'string.empty': 'Select an APD Type',
-    'string.valid': 'Select an APD Type'
-  }),
-  apdname: Joi.any(),
-  years: Joi.array().min(1).required(),
-  hitechStatus: Joi.when('apdType', {
-    is: 'hitech',
-    then: Joi.array().min(1).required().messages({}),
-    otherwise: Joi.any()
-  }),
-  mmisStatus: Joi.when('apdType', {
-    is: 'mmis',
-    then: Joi.object({
-      value: Joi.string().valid('yes', 'no').required(),
-      type: Joi.when('value', {
-        is: 'yes',
-        then: Joi.array().min(1).required(),
-        otherwise: Joi.any()
-      })
-    }),
-    otherwise: Joi.any()
-  }),
-  medicaidBA: Joi.when('apdType', {
-    is: 'mmis',
-    then: Joi.array().min(1).required(),
-    otherwise: Joi.any()
-  })
-});
 
 const ApdNew = () => {
   const thisFFY = (() => {
@@ -131,7 +27,11 @@ const ApdNew = () => {
   const [apdname, setApdname] = useState('');
   const [hitechStatus, setHitechStatus] = useState([]);
   const [medicaidBA, setMedicaidBA] = useState([]);
-  const [mmisStatus, setMmisStatus] = useState({ value: '', types: [] });
+  const [mmisStatus, setMmisStatus] = useState({
+    updateValue: '',
+    updateTypes: []
+  });
+  const [otherDetails, setOtherDetails] = useState('');
   const [years, setYears] = useState(yearOptions.slice(0, 2));
 
   const initialState = {
@@ -140,7 +40,8 @@ const ApdNew = () => {
     years,
     hitechStatus,
     mmisStatus,
-    medicaidBA
+    medicaidBA,
+    otherDetails
   };
 
   const {
@@ -151,7 +52,7 @@ const ApdNew = () => {
     defaultValues: initialState,
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: joiResolver(createApdSchema)
+    resolver: joiResolver(newApdSchema)
   });
 
   const yearChoices = yearOptions.map((year, index) => ({
@@ -193,25 +94,21 @@ const ApdNew = () => {
 
   function updateMmisType(key, value) {
     let newStatus = mmisStatus;
-    if (key === 'value') {
-      newStatus.value = value;
+    if (key === 'updateValue') {
+      newStatus.updateValue = value;
       setMmisStatus(newStatus);
-      setValue('hitechStatus', newStatus, { shouldValidate: true });
-    } else if (key === 'type') {
-      let typesArray = mmisStatus.types,
+    } else if (key === 'updateTypes') {
+      let typesArray = mmisStatus.updateTypes,
         index = typesArray.indexOf(value);
       if (index > -1) {
         typesArray.splice(index, 1);
-        newStatus.types = typesArray;
+        newStatus.updateTypes = typesArray;
         console.log(newStatus);
         setMmisStatus(newStatus);
-        setValue('hitechStatus', newStatus, { shouldValidate: true });
       } else if (index === -1) {
         typesArray.push(value);
-        newStatus.types = typesArray;
+        newStatus.updateTypes = typesArray;
         setMmisStatus(newStatus);
-        setValue('hitechStatus', newStatus, { shouldValidate: true });
-        console.log({ newStatus });
       }
     }
   }
@@ -300,9 +197,9 @@ const ApdNew = () => {
             <Controller
               name="years"
               control={control}
-              label="Federal Fiscal Year (FFY)"
               render={({ field: { onBlur } }) => (
                 <ChoiceList
+                  label="Federal Fiscal Year (FFY)"
                   choices={yearChoices}
                   labelClassName="ds-u-margin-bottom--1"
                   hint="Choose the federal fiscal year(s) this APD covers."
@@ -312,6 +209,8 @@ const ApdNew = () => {
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
+                  errorMessage={errors?.years?.message}
+                  errorPlacement="bottom"
                 />
               )}
             />
@@ -321,19 +220,10 @@ const ApdNew = () => {
           <div>
             <Controller
               name="hitechStatus"
-              label="Update Type"
-              hint={
-                <div>
-                  Indicate if this update is an annual APD and/or as need APD
-                  update.
-                  <br />
-                  Keep in mind, an as needed update can serve as an annual
-                  update.
-                </div>
-              }
               control={control}
               render={({ field: { onBlur } }) => (
                 <ChoiceList
+                  label="Update Type"
                   hint={
                     <div>
                       Indicate if this update is an annual APD and/or as need
@@ -360,6 +250,8 @@ const ApdNew = () => {
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
+                  errorMessage={errors?.hitechStatus?.message}
+                  errorPlacement="bottom"
                 />
               )}
             />
@@ -368,7 +260,7 @@ const ApdNew = () => {
         {apdType === 'mmis' && (
           <div>
             <Controller
-              name="mmisStatus"
+              name="mmisStatus.updateValue"
               control={control}
               render={({ field: { onBlur, onChange, value } }) => (
                 <ChoiceList
@@ -383,7 +275,7 @@ const ApdNew = () => {
                       checkedChildren: (
                         <div className="ds-c-choice__checkedChild">
                           <Controller
-                            name="mmisUpdateStatus"
+                            name="mmisStatus.updateTypes"
                             control={control}
                             render={({ field: { onBlur } }) => (
                               <ChoiceList
@@ -410,7 +302,7 @@ const ApdNew = () => {
                                 labelClassName="ds-u-margin-bottom--1"
                                 type="checkbox"
                                 onChange={e => {
-                                  updateMmisType('type', e.target.value);
+                                  updateMmisType('updateTypes', e.target.value);
                                 }}
                                 onBlur={onBlur}
                                 onComponentBlur={onBlur}
@@ -428,10 +320,12 @@ const ApdNew = () => {
                   ]}
                   onChange={e => {
                     onChange(e);
-                    updateMmisType('value', e.target.value);
+                    updateMmisType('updateValue', e.target.value);
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
+                  errorMessage={errors?.mmisStatus?.updateValue?.message}
+                  errorPlacement="bottom"
                 />
               )}
             />
@@ -452,7 +346,90 @@ const ApdNew = () => {
                     </div>
                   }
                   type="checkbox"
-                  choices={businessAreaChoices}
+                  choices={[
+                    {
+                      label: '1115 or Waiver Support Systems',
+                      value: 'waiver-support-systems'
+                    },
+                    {
+                      label: 'Asset Verification System',
+                      value: 'asset-verification-system'
+                    },
+                    {
+                      label: 'Claims Processing',
+                      value: 'claims-processing'
+                    },
+                    {
+                      label: 'Decision Support System & Data Warehouse',
+                      value: 'decision-support'
+                    },
+                    {
+                      label: 'Electronic Visit Verification (EVV)',
+                      value: 'evv'
+                    },
+                    {
+                      label:
+                        'Encounter Processing System (EPS) & Managed Care System',
+                      value: 'eps'
+                    },
+                    {
+                      label: 'Financial Management',
+                      value: 'financial-management'
+                    },
+                    {
+                      label: 'Health Information Exchange (HIE)',
+                      value: 'hie'
+                    },
+                    {
+                      label: 'Long Term Services & Suports (LTSS)',
+                      value: 'ltss'
+                    },
+                    {
+                      label: 'Member Management',
+                      value: 'member-management'
+                    },
+                    {
+                      label:
+                        'Pharmacy Beefit Management (PBM) & Point of Sale (POS)',
+                      value: 'pbm-pos'
+                    },
+                    {
+                      label: 'Program Integrity',
+                      value: 'program-integrity'
+                    },
+                    {
+                      label: 'Provider Management',
+                      value: 'provider-management'
+                    },
+                    {
+                      label: 'Third Party Liability (TPL)',
+                      value: 'tpl'
+                    },
+                    {
+                      label: 'Other',
+                      value: 'other',
+                      checkedChildren: (
+                        <div className="ds-c-choice__checkedChild">
+                          <Controller
+                            name="otherDetails"
+                            control={control}
+                            render={({ field: { onChange, ...props } }) => (
+                              <TextArea
+                                {...props}
+                                label="Other Medicaid Business Area(s)"
+                                name="other-mbas"
+                                hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
+                                onChange={e => {
+                                  onChange(e);
+                                  setOtherDetails(e.target.value);
+                                }}
+                              />
+                            )}
+                          />
+                        </div>
+                      )
+                    }
+                  ]}
                   onChange={e => {
                     updateMedicaidBA(e.target.value);
                     console.log({ initialState });
