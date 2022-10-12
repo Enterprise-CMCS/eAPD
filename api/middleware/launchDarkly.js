@@ -7,12 +7,15 @@ const options = {
   eventsUri: 'https://events.launchdarkly.us'
 };
 
-const client = LaunchDarkly.init(LD_API_KEY, options);
+const client =
+  LD_API_KEY && LD_API_KEY !== ''
+    ? LaunchDarkly.init(LD_API_KEY, options)
+    : null;
 
 const waitForInitialization = async () => {
   // Using "await" instead, within an async function
   try {
-    if (LD_API_KEY && LD_API_KEY !== '') {
+    if (client) {
       await client.waitForInitialization();
       // Initialization complete
     }
