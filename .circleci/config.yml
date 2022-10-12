@@ -826,7 +826,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: LD_CLIENT_ID="${<< parameters.env >>_LD_CLIENT_ID TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: LD_CLIENT_ID="${<< parameters.env >>_LD_CLIENT_ID}" TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -954,7 +954,7 @@ jobs:
                 echo '.';
             done;
             echo 'Server is running and status is healthy'
-            
+
             docker run \
               --network api_default \
               -v $(pwd)/owasp:/zap/wrk:rw \
