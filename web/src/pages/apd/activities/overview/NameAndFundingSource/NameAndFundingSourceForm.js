@@ -11,6 +11,8 @@ import {
   setActivityFundingSource
 } from '../../../../../redux/actions/editActivity';
 
+import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
+
 const NameAndFundingSourceForm = ({
   index,
   item: { fundingSource, name },
@@ -107,7 +109,7 @@ NameAndFundingSourceForm.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    adminCheck: state.apd.adminCheck.enabled
+    adminCheck: selectAdminCheckEnabled(state)
   };
 };
 

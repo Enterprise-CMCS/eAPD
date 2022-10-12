@@ -118,8 +118,6 @@ export const selectApd =
           type: APD_ACTIVITIES_CHANGE,
           activities: res.data.apd.activities
         });
-        // Todo: Check if we can remove this now since the initial state is false
-        // dispatch({ type: ADMIN_CHECK_TOGGLE, data: false });
 
         // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
         // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial

@@ -13,6 +13,13 @@ import { Button, Drawer } from '@cmsgov/design-system';
 
 import Icon, { faExclamationTriangle } from '../components/Icons';
 
+import {
+  selectAdminCheckErrors,
+  selectAdminCheckEnabled,
+  selectAdminCheckCollapsed,
+  selectAdminCheckComplete
+} from '../redux/selectors/apd.selectors';
+
 const RequiredFieldsComponent = ({ adminCheckData, adminCheckComplete }) => (
   <Fragment>
     <div className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center">
@@ -225,15 +232,14 @@ AdminCheckPanel.propTypes = {
   adminCheckData: PropTypes.array.isRequired,
   adminCheckEnabled: PropTypes.bool.isRequired,
   adminCheckCollapsed: PropTypes.bool.isRequired,
-  adminCheckComplete: PropTypes.bool.isRequired,
-  adminCheck: PropTypes.object.isRequired
+  adminCheckComplete: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-  adminCheckEnabled: state.apd.adminCheck.enabled,
-  adminCheckCollapsed: state.apd.adminCheck.collapsed,
-  adminCheckComplete: state.apd.adminCheck.complete,
-  adminCheckData: state.apd.adminCheck.errors
+  adminCheckData: selectAdminCheckErrors(state),
+  adminCheckEnabled: selectAdminCheckEnabled(state),
+  adminCheckCollapsed: selectAdminCheckCollapsed(state),
+  adminCheckComplete: selectAdminCheckComplete(state)
 });
 
 const mapDispatchToProps = {

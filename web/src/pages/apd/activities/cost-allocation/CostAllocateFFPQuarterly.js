@@ -14,6 +14,7 @@ import Dollars from '../../../../components/Dollars';
 import PercentField from '../../../../components/PercentField';
 import { t } from '../../../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../../../redux/selectors/activities.selectors';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { formatPerc } from '../../../../util/formats';
 
 import costAllocateFFPQuarterlySchema from '@cms-eapd/common/schemas/costAllocateFFPQuarterly';
@@ -301,7 +302,7 @@ const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
   const mapStateToProps = (state, props) => {
     return {
-      adminCheck: state.apd.adminCheck.enabled,
+      adminCheck: selectAdminCheckEnabled(state),
       ...selectCostAllocateFFPBudget(state, props)
     };
   };

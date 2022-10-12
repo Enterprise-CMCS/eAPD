@@ -18,6 +18,7 @@ import {
   selectActivityTotalForBudgetByActivityIndex
 } from '../../../../redux/selectors/activities.selectors';
 import { getUserStateOrTerritory } from '../../../../redux/selectors/user.selector';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import CostAllocationRows, {
   CostSummaryRows
 } from '../cost-allocation/CostAllocationRows';
@@ -394,7 +395,7 @@ const mapStateToProps = (
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,
     otherFunding: activityTotal.data.otherFunding,
-    adminCheck: state.apd.adminCheck.enabled
+    adminCheck: selectAdminCheckEnabled(state)
   };
 };
 

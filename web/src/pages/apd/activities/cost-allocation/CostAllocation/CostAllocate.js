@@ -8,6 +8,7 @@ import { setCostAllocationMethodology } from '../../../../../redux/actions/editA
 import Instruction from '../../../../../components/Instruction';
 import RichText from '../../../../../components/RichText';
 import { selectActivityByIndex } from '../../../../../redux/selectors/activities.selectors';
+import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
 import { Subsection } from '../../../../../components/Section';
 
 import costAllocateSchema from '@cms-eapd/common/schemas/costAllocation';
@@ -92,7 +93,7 @@ CostAllocate.propTypes = {
 export const mapStateToProps = (state, { activityIndex }) => {
   return {
     activity: selectActivityByIndex(state, { activityIndex }),
-    adminCheck: state.apd.adminCheck.enabled
+    adminCheck: selectAdminCheckEnabled(state)
   };
 };
 

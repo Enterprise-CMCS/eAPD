@@ -17,7 +17,10 @@ import {
   setMedicaidOfficeZip
 } from '../../../redux/actions/editApd';
 import { t } from '../../../i18n';
-import { selectKeyStatePersonnel } from '../../../redux/selectors/apd.selectors';
+import {
+  selectKeyStatePersonnel,
+  selectAdminCheckEnabled
+} from '../../../redux/selectors/apd.selectors';
 import { selectState } from '../../../redux/reducers/user';
 import { STATES } from '../../../util';
 
@@ -265,7 +268,7 @@ ApdStateProfile.propTypes = {
 const mapStateToProps = state => ({
   defaultStateID: selectState(state).id,
   keyStatePersonnel: selectKeyStatePersonnel(state),
-  adminCheck: state.apd.adminCheck.enabled
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {

@@ -21,7 +21,10 @@ import { Section, Subsection } from '../../../components/Section';
 import TextArea from '../../../components/TextArea';
 import regLinks from '../../../data/assurancesAndCompliance.yaml';
 import { t } from '../../../i18n';
-import { selectFederalCitations } from '../../../redux/selectors/apd.selectors';
+import {
+  selectFederalCitations,
+  selectAdminCheckEnabled
+} from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const LinkOrText = ({ link, title }) => {
@@ -240,7 +243,7 @@ AssurancesAndCompliance.propTypes = {
 
 const mapStateToProps = state => ({
   citations: selectFederalCitations(state),
-  adminCheck: state.apd.adminCheck.enabled
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {

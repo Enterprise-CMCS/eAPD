@@ -19,6 +19,7 @@ import {
   selectActivityCostSummary,
   selectActivityByIndex
 } from '../../../../../redux/selectors/activities.selectors';
+import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
 
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
@@ -191,7 +192,7 @@ const mapStateToProps = (
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
-    adminCheck: state.apd.adminCheck.enabled
+    adminCheck: selectAdminCheckEnabled(state)
   };
 };
 

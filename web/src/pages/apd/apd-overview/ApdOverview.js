@@ -23,7 +23,10 @@ import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
 
-import { selectSummary } from '../../../redux/selectors/apd.selectors';
+import {
+  selectSummary,
+  selectAdminCheckEnabled
+} from '../../../redux/selectors/apd.selectors';
 import { getAllFundingSources } from '../../../redux/selectors/activities.selectors';
 
 const ApdOverview = ({
@@ -286,7 +289,7 @@ ApdOverview.defaultProps = {
 
 const mapStateToProps = state => ({
   fundingSources: getAllFundingSources(state),
-  adminCheck: state.apd.adminCheck.enabled,
+  adminCheck: selectAdminCheckEnabled(state),
   ...selectSummary(state)
 });
 
