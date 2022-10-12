@@ -93,7 +93,7 @@ const IncentivePayments = ({
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <th
-                      id={`q${q}`}
+                      id={`q${q}-${year}`}
                       key={q}
                       className="ds-u-text-align--right"
                       scope="col"
@@ -112,7 +112,7 @@ const IncentivePayments = ({
             </thead>
             <tbody>
               <tr>
-                <th id="eh-payments" scope="row">
+                <th id={`eh-payments-${year}`} scope="row">
                   EH Payments
                 </th>
                 <Fragment key={year}>
@@ -164,7 +164,7 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th id="eh-count" scope="row">
+                <th id={`eh-count-${year}`} scope="row">
                   EH Count (optional)
                 </th>
                 <Fragment key={year}>
@@ -196,7 +196,7 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th id="ep-payments" scope="row">
+                <th id={`ep-payments-${year}`} scope="row">
                   EP Payments
                 </th>
                 <Fragment key={year}>
@@ -248,7 +248,7 @@ const IncentivePayments = ({
               </tr>
 
               <tr>
-                <th id="ep-count" scope="row">
+                <th id={`ep-count-${year}`} scope="row">
                   EP Count (optional)
                 </th>
                 <Fragment key={year}>
