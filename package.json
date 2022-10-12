@@ -83,7 +83,9 @@
       "web/@uppy",
       "web/tinymce",
       "web/@tinymce/tinymce-react",
-      "web/@cmsgov/design-system"
+      "web/@cmsgov/design-system",
+      "e2e/cypress-axe",
+      "e2e/axe-core"
     ]
   },
   "dependencies": {

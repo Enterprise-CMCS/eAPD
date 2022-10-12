@@ -1,7 +1,8 @@
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import Review from './Review';
+import { fireEvent, screen } from '@testing-library/react';
+import { renderWithConnection } from 'apd-testing-library';
 
 describe('Review wrapper component', () => {
   it('renders properly if only the required props are set', () => {
@@ -40,22 +41,15 @@ describe('Review wrapper component', () => {
   });
 
   it('clicks the link if an edit link is set, when the button is clicked', () => {
-    const component = mount(
-      <Router>
-        <Review editHref="something">Hello</Review>
-      </Router>
-    );
+    renderWithConnection(<Review editHref="something">Hello</Review>);
 
     const handler = jest.fn();
-    component
-      .find('Review')
-      .find('Button')
-      .find('a')
-      .getDOMNode()
+
+    screen
+      .getByRole('link', { name: 'Edit' })
       .addEventListener('click', handler);
 
-    component.find('Review').find('Button').simulate('click');
-
+    fireEvent.click(screen.getByRole('link', { name: 'Edit' }));
     expect(handler).toHaveBeenCalled();
   });
 

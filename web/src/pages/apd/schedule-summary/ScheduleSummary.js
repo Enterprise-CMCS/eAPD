@@ -50,7 +50,7 @@ const ScheduleSummary = ({ activities }) => (
         )}
       </Subsection>
       <Subsection
-        id="schedule-summary-table"
+        id="schedule-milestones-table"
         resource="scheduleSummary.milestone"
       >
         {activities.length === 0 ? (

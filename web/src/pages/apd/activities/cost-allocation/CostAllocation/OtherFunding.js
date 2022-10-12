@@ -75,7 +75,7 @@ const OtherFunding = ({
               labelFor={`cost-allocation-narrative-${ffy}-other-sources-field`}
               source="activities.otherFunding.description.instruction"
               headingDisplay={{
-                level: 'h6',
+                level: 'h4',
                 className: 'ds-h5'
               }}
             />
@@ -118,7 +118,7 @@ const OtherFunding = ({
             <Instruction
               source="activities.otherFunding.amount.instruction"
               headingDisplay={{
-                level: 'h6',
+                level: 'h4',
                 className: 'ds-h5'
               }}
             />

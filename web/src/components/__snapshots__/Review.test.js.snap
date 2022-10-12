@@ -79,18 +79,11 @@ exports[`Review wrapper component renders properly if the edit link is set 1`] =
     <div
       className="nowrap visibility--screen ds-u-margin-top--2"
     >
-      <Button
-        aria-label="Edit"
-        onClick={[Function]}
-        size="small"
-        variation="transparent"
+      <Link
+        to="something"
       >
-        <Link
-          to="something"
-        >
-          Edit
-        </Link>
-      </Button>
+        Edit
+      </Link>
     </div>
   }
   headingLevel="3"

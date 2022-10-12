@@ -242,7 +242,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .contains('div', 'Activity 1: Program Administration')
         .parent()
         .parent()
-        .findByRole('button', { name: 'Edit' })
+        .findByRole('link', { name: 'Edit' })
         .click();
 
       cy.findByRole('heading', {
@@ -1343,6 +1343,68 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.findByRole('link', { name: /HITECH IAPD No Activities/i }).click();
       cy.goToActivityDashboard();
       cy.findByText('Add at least one activity.').should('exist');
+    });
+  });
+
+  describe.only('Accessibility Tests', () => {
+    it('Runs on APD Builder', () => {
+      cy.wait(5000); // Allows page to load
+
+      cy.checkPageA11y(); // APD Overview
+
+      cy.goToKeyStatePersonnel();
+      cy.checkPageA11y(); // Key State Personnel
+
+      cy.goToPreviousActivities();
+      cy.checkPageA11y(); // Results of Previous Activities
+
+      cy.goToActivityDashboard();
+      // cy.findByRole('button', { name: /Add Activity/i }).click(); // Add back for MMIS tests
+      cy.checkPageA11y(); // Activities Dashboard
+
+      cy.goToActivityOverview(0);
+      cy.checkPageA11y(); // Activity Overview
+
+      cy.goToOutcomesAndMilestones(0);
+      cy.findByRole('button', { name: /Add Outcome/i }).click();
+      cy.checkPageA11y(); // Outcomes Subform
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.findByRole('button', { name: /Add Milestone/i }).click();
+      cy.checkPageA11y(); // Milestones Subform
+
+      cy.goToStateStaffAndExpenses(0);
+      cy.findByRole('button', { name: /Add State Staff/i }).click();
+      cy.checkPageA11y(); // State Staff Subform
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.findByRole('button', { name: /Add State Expense/i }).click();
+      cy.checkPageA11y(); // State Expenses Subform
+
+      cy.goToPrivateContractorCosts(0);
+      cy.findByRole('button', { name: /Add Contractor/i }).click();
+      cy.checkPageA11y(); // Private Contractor
+
+      cy.goToCostAllocationAndOtherFunding(0);
+      cy.checkPageA11y(); // Cost Allocation and Other Funding
+
+      cy.goToBudgetAndFFP(0);
+      cy.checkPageA11y(); // Budget and FFP
+
+      cy.goToActivityScheduleSummary();
+      cy.checkPageA11y(); // Activity Schedule Summary
+
+      cy.goToProposedBudget();
+      cy.checkPageA11y(); // Proposed Budget
+
+      cy.goToAssurancesAndCompliance();
+      cy.checkPageA11y(); // Assurances and Compliance
+
+      cy.goToExecutiveSummary();
+      cy.checkPageA11y(); // Executive Summary
+
+      cy.contains('Export and Submit').click();
+      cy.checkPageA11y(); // Export and Submit
     });
   });
 
