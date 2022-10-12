@@ -12,14 +12,14 @@ const Costs = ({ activityIndex }) => (
     resource="activities.costs"
     id={`activity-cost-categories-${activityIndex}`}
   >
-    <h6 className="ds-h4">
+    <h4 className="ds-h4">
       {titleCase(t('activities.costs.subtitles.personnel'))}
-    </h6>
+    </h4>
     <StatePersonnel activityIndex={activityIndex} />
 
-    <h6 className="ds-h4">
+    <h4 className="ds-h4">
       {titleCase(t('activities.costs.subtitles.nonPersonnel'))}
-    </h6>
+    </h4>
     <Expenses activityIndex={activityIndex} />
   </Subsection>
 );
