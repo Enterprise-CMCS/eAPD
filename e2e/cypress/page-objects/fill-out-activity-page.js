@@ -222,6 +222,7 @@ class FillOutActivityPage {
         } else {
           cy.get('select.ds-c-field').eq(ffyIndex).select(secondSplit);
         }
+        cy.waitForSave();
 
         cy.get('[data-cy="FFPFedStateSplitTable"]')
           .eq(ffyIndex)
@@ -258,12 +259,20 @@ class FillOutActivityPage {
             cy.get(table).within(() => {
               cy.get('input').then(inputFields => {
                 _.forEach(inputFields, (elem, i) => {
+                  const value = budgetData.quarterVals[ffyIndex][i];
+                  cy.log(`value: ${value}`);
+                  cy.get(elem).clear();
+                  cy.waitForSave();
                   cy.get(elem)
-                    .clear()
-                    .type(budgetData.quarterVals[ffyIndex][i]);
+                    .type(value)
+                    .should('have.value', `${value}`)
+                    .blur();
+                  cy.wait(300);
+                  cy.waitForSave();
                 });
               });
             });
+            cy.waitForSave();
           }
           cy.get(table)
             .getActivityTable()

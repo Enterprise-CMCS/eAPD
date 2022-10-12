@@ -29,8 +29,8 @@ export const selectAllActivities = ({
   }
 }) => activities;
 
-const selectBudgetForActivity = ({ budget }, { aKey }) =>
-  budget.activities[aKey];
+const selectBudgetForActivity = ({ budget }, { activityId }) =>
+  budget.activities[activityId];
 
 export const selectCostAllocationForActivityByIndex = createSelector(
   selectActivityByIndex,
@@ -50,7 +50,7 @@ export const selectActivityCostSummary = createSelector(
       budget
     },
     { activityIndex }
-  ) => budget.activities[activities[activityIndex].key],
+  ) => budget.activities[activities[activityIndex].activityId],
   (
     // This intermediate selector maps key personnel into the same data
     // structure as activity state personnel IF AND ONLY IF we are working
@@ -72,6 +72,7 @@ export const selectActivityCostSummary = createSelector(
         [ffy]:
           activityIndex === 0
             ? keyPersonnel.map(kp => ({
+                key: kp.key,
                 description: `${
                   kp.name || 'Not specified'
                 } (APD Key Personnel)`,
@@ -97,6 +98,7 @@ export const selectActivityCostSummary = createSelector(
         ...o,
         [year]: {
           contractorResources: activity.contractorResources.map(c => ({
+            key: c.key,
             description:
               c.name || 'Private Contractor or Vendor Name not specified',
             totalCost: c.years[year],
@@ -114,10 +116,11 @@ export const selectActivityCostSummary = createSelector(
             0
           ),
           federalPercent: 0,
-          federalShare: budget.costsByFFY[year].federal,
+          federalShare: budget?.costsByFFY?.[year]?.federal,
           keyPersonnel: keyPersonnel[year],
-          medicaidShare: budget.costsByFFY[year].medicaidShare,
+          medicaidShare: budget?.costsByFFY?.[year]?.medicaid,
           nonPersonnel: activity.expenses.map(e => ({
+            key: e.key,
             description: e.category,
             totalCost: e.years[year],
             unitCost: null,
@@ -130,6 +133,7 @@ export const selectActivityCostSummary = createSelector(
           otherFunding: activity.costAllocation[year].other,
           statePercent: 0,
           statePersonnel: activity.statePersonnel.map(p => ({
+            key: p.key,
             description: p.title || 'Personnel title not specified',
             totalCost: p.years[year].amt * p.years[year].perc,
             unitCost: p.years[year].amt,
@@ -141,8 +145,8 @@ export const selectActivityCostSummary = createSelector(
                 sum + personnel.years[year].amt * personnel.years[year].perc,
               0
             ) + keyPersonnel[year].reduce((sum, kp) => sum + kp.totalCost, 0),
-          stateShare: budget.costsByFFY[year].state,
-          totalCost: budget.costsByFFY[year].total
+          stateShare: budget?.costsByFFY?.[year]?.state,
+          totalCost: budget?.costsByFFY?.[year]?.total
         }
       }),
       {}
@@ -169,10 +173,24 @@ export const selectActivityCostSummary = createSelector(
 );
 
 export const makeSelectCostAllocateFFPBudget = () =>
-  createSelector([selectApdData, selectBudgetForActivity], (apd, budget) => ({
-    quarterlyFFP: budget ? budget.quarterlyFFP : null,
-    years: apd.years
-  }));
+  createSelector(
+    [selectApdData, selectBudgetForActivity],
+    (apd, budget = {}) => {
+      if (budget?.quarterlyFFP) {
+        return {
+          quarterlyFFP: {
+            ...budget.quarterlyFFP.years,
+            total: budget.quarterlyFFP.total
+          },
+          years: apd.years
+        };
+      }
+      return {
+        quarterlyFFP: null,
+        years: apd.years
+      };
+    }
+  );
 
 export const selectActivitySchedule = createSelector(
   [selectAllActivities],

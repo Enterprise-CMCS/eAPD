@@ -1,19 +1,26 @@
 const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
-const { deepCopy } = require('@cms-eapd/common');
+const {
+  deepCopy,
+  calculateBudget,
+  hasBudgetUpdate
+} = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
-const { APD } = require('../models/index');
+const { Budget, APD } = require('../models/index');
 
 const createAPD = async apd => {
-  const newApd = await APD.create(apd);
+  const apdDoc = await APD.create(apd);
+  const newBudget = await Budget.create(calculateBudget(apdDoc.toJSON()));
+  apdDoc.budget = newBudget;
+  await apdDoc.save();
 
-  return newApd._id.toString(); // eslint-disable-line no-underscore-dangle
+  return apdDoc._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
 const deleteAPDByID = async id =>
-  APD.updateOne({ _id: id }, { status: 'archived' }).exec();
+  APD.updateOne({ _id: id }, { status: 'archived' });
 
 const getAllAPDsByState = async stateId =>
   APD.find(
@@ -21,10 +28,10 @@ const getAllAPDsByState = async stateId =>
     '_id id createdAt updatedAt stateId status name years'
   ).lean();
 
-const getAPDByID = async id => APD.findById(id).lean();
+const getAPDByID = async id => APD.findById(id).lean().populate('budget');
 
 const getAPDByIDAndState = (id, stateId) =>
-  APD.findOne({ _id: id, stateId }).lean();
+  APD.findOne({ _id: id, stateId }).lean().populate('budget');
 
 // Apply the patches to the APD document
 const patchAPD = async (id, stateId, apdDoc, patch) => {
@@ -37,8 +44,9 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
     multipleCastError: true,
     runValidators: true
   });
+
   // return the updated apd
-  return newDocument;
+  return APD.findOne({ _id: id, stateId }).lean();
 };
 
 const updateAPDDocument = async (
@@ -48,11 +56,16 @@ const updateAPDDocument = async (
   { updateProfile = updateStateProfile, validate = validateApd } = {}
 ) => {
   // Get the updated apd json
-  const apdDoc = await APD.findOne({ _id: id, stateId }).lean();
+  const apdDoc = await APD.findOne({ _id: id, stateId })
+    .populate('budget')
+    .lean();
   if (patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};
+    let updatedBudget = deepCopy(apdDoc.budget);
+    const budgetErrors = {};
     let updated = [...patch];
+    let validPatches = [...patch];
     // Add updatedAt timestamp to the patch
     patch.push({
       op: 'replace',
@@ -60,7 +73,7 @@ const updateAPDDocument = async (
       value: new Date().toISOString()
     });
     try {
-      updatedDoc = await patchAPD(id, stateId, apdDoc, patch, { APD });
+      updatedDoc = await patchAPD(id, stateId, apdDoc, patch);
     } catch (err) {
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
 
@@ -99,13 +112,25 @@ const updateAPDDocument = async (
       }
 
       // If there are errors, nothing was saved, so we need to try to update again
-      const validPatches = Object.keys(updatedPatch).map(
-        key => updatedPatch[key]
-      );
-      updatedDoc = await patchAPD(id, stateId, apdDoc, validPatches, { APD });
+      validPatches = Object.keys(updatedPatch).map(key => updatedPatch[key]);
+      updatedDoc = await patchAPD(id, stateId, apdDoc, validPatches);
 
       // convert updatedPatch map to an array and set it to updated
       updated = Object.keys(updatedPatch).map(key => updatedPatch[key]);
+    }
+
+    try {
+      if (hasBudgetUpdate(validPatches)) {
+        updatedBudget = calculateBudget(updatedDoc);
+        // eslint-disable-next-line no-underscore-dangle
+        await Budget.replaceOne({ _id: updatedDoc.budget }, updatedBudget, {
+          multipleCastError: true,
+          runValidators: true
+        });
+      }
+    } catch (e) {
+      logger.error(`Error updating budget for APD ${id}: ${JSON.stringify(e)}`);
+      budgetErrors.error = e;
     }
 
     // Determine if state profile needs to be updated in postgres
@@ -118,7 +143,9 @@ const updateAPDDocument = async (
 
     // Will probably eventually switch to apd.validate
     const validationErrors = {};
-    const valid = validate(deepCopy(updatedDoc));
+    const validationCopy = deepCopy(updatedDoc);
+    delete validationCopy.budget; // remove budget because it shouldn't be validated
+    const valid = validate(validationCopy);
     if (!valid) {
       // Rather than send back the full error from the validator, pull out just the relevant bits
       // and fetch the value that's causing the error.
@@ -133,7 +160,10 @@ const updateAPDDocument = async (
 
     return {
       errors: { ...updateErrors, ...validationErrors },
-      apd: updatedDoc,
+      apd: {
+        ...updatedDoc,
+        budget: updatedBudget
+      },
       stateUpdated,
       updated
     };

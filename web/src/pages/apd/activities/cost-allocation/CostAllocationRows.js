@@ -3,8 +3,8 @@ import React, { Fragment } from 'react';
 import Dollars from '../../../../components/Dollars';
 
 export const CostSummaryRows = ({ items }) =>
-  items.map(({ description, totalCost, unitCost, units }) => (
-    <tr key={description || 'notSelected'}>
+  items.map(({ key, description, totalCost, unitCost, units }) => (
+    <tr key={key || description}>
       <td className="title">{description || 'Category Not Selected'}</td>
       <td className="budget-table--number">
         {unitCost !== null && <Dollars>{unitCost}</Dollars>}

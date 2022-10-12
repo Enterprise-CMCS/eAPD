@@ -1,7 +1,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { UPDATE_BUDGET } from '../budget';
 import { EDIT_APD } from '../editApd';
 import {
   setCostAllocationMethodology,
@@ -56,8 +55,7 @@ describe('APD activity edit actions for cost allocation section', () => {
         type: EDIT_APD,
         path: '/activities/1/costAllocation/2020/other',
         value: 300
-      },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      }
     ]);
   });
 
@@ -73,8 +71,7 @@ describe('APD activity edit actions for cost allocation section', () => {
         type: EDIT_APD,
         path: '/activities/1/costAllocation/2020/ffp/state',
         value: 400
-      },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      }
     ]);
   });
 
@@ -85,8 +82,7 @@ describe('APD activity edit actions for cost allocation section', () => {
         type: EDIT_APD,
         path: '/activities/1/quarterlyFFP/2020/4/contractors',
         value: 340
-      },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      }
     ]);
   });
 
@@ -97,8 +93,7 @@ describe('APD activity edit actions for cost allocation section', () => {
         type: EDIT_APD,
         path: '/activities/1/quarterlyFFP/2020/2/inHouse',
         value: 400
-      },
-      { type: UPDATE_BUDGET, state: 'test state' }
+      }
     ]);
   });
 });

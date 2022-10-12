@@ -91,6 +91,8 @@ export const addHITActivity = years => {
         activityData.costAllocation,
         years
       );
+      cy.wait(1000);
+      cy.waitForSave();
 
       _.forEach(years, (year, i) => {
         budgetPage.checkActivityTotalCostTableNew({

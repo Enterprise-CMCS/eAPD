@@ -1,8 +1,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { UPDATE_BUDGET } from '../budget';
-
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from '../editApd';
 
 import { savePersonnel, removePersonnel } from './statePersonnel';
@@ -41,8 +39,7 @@ describe('APD activity edit actions for state personnel section', () => {
         type: EDIT_APD,
         path: '/activities/0/statePersonnel/0',
         value: {}
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 
@@ -58,8 +55,7 @@ describe('APD activity edit actions for state personnel section', () => {
       {
         type: REMOVE_APD_ITEM,
         path: '/activities/0/statePersonnel/0'
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 
@@ -84,8 +80,7 @@ describe('APD activity edit actions for state personnel section', () => {
         type: EDIT_APD,
         path: '/activities/0/statePersonnel/0',
         value: statePersonnel
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 });

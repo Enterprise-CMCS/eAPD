@@ -82,8 +82,10 @@ export const testAPDOverviewWithData = () => {
       }).uncheck({
         force: true
       });
+
       cy.contains('Delete FFY?').should('exist');
-      cy.contains('Cancel').click({ force: true });
+      cy.wait(500);
+      cy.get('button[id="dialog-cancel"]').click({ force: true });
 
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(
         'be.checked'
@@ -99,7 +101,7 @@ export const testAPDOverviewWithData = () => {
       }).uncheck({
         force: true
       });
-      cy.findByRole('button', { name: /Delete FFY/i }).click();
+      cy.get('button[id="dialog-delete"]').click({ force: true });
       cy.contains('Delete FFY?').should('not.exist');
 
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(

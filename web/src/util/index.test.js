@@ -42,7 +42,6 @@ describe('provides default years based on now', () => {
 describe('utility functions', () => {
   const {
     applyToNumbers,
-    generateKey,
     getParams,
     stateDateToDisplay,
     stateDateRangeToDisplay,
@@ -73,17 +72,6 @@ describe('utility functions', () => {
         long: 'this is text'
       }
     );
-  });
-
-  test('generates a key', () => {
-    // Letters are only 37.5% of hex digits, so running this test a lot makes
-    // it statistically very unlikely that we'd just happen to only generate
-    // keys that start with a letter
-    for (let i = 0; i < 50000; i += 1) {
-      const key = generateKey();
-      expect(key).toEqual(expect.stringMatching(/^[a-f0-9]{8}$/));
-      expect(key).toEqual(expect.stringMatching(/[a-f]/));
-    }
   });
 
   test('converts a state-formatted date string into a display string', () => {
