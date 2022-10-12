@@ -62,33 +62,17 @@ const ApdNew = () => {
     value: year
   }));
 
-  function updateYears(value) {
-    let index = years.indexOf(value),
-      newYears = years;
-    if (index > -1) {
-      // only splice array when item is found
-      newYears.splice(index, 1); // 2nd parameter means remove one item only
-      setValue('years', newYears, { shouldValidate: true });
-      setYears(newYears);
-    } else if (index === -1) {
-      newYears.push(value);
-      setValue('years', newYears, { shouldValidate: true });
-      setYears(newYears);
-    }
-  }
-
-  function updateHitechType(value) {
-    let index = hitechStatus.indexOf(value),
-      listTypes = hitechStatus;
-    if (index > -1) {
-      // only splice array when item is found
-      listTypes.splice(index, 1); // 2nd parameter means remove one item only
-      setHitechStatus(listTypes);
-      setValue('hitechStatus', listTypes, { shouldValidate: true });
-    } else if (index === -1) {
-      listTypes.push(value);
-      setValue('hitechStatus', listTypes, { shouldValidate: true });
-      setHitechStatus(listTypes);
+  function updateArray(array, name, setAction, value) {
+    let indexPrime = array.indexOf(value),
+      newArray = array;
+    if (indexPrime > -1) {
+      newArray.splice(indexPrime, 1);
+      setValue(name, newArray, { shouldValidate: true });
+      setAction(newArray);
+    } else if (indexPrime === -1) {
+      newArray.push(value);
+      setValue(name, newArray, { shouldValidate: true });
+      setAction(newArray);
     }
   }
 
@@ -98,33 +82,7 @@ const ApdNew = () => {
       newStatus.updateValue = value;
       setMmisStatus(newStatus);
     } else if (key === 'updateTypes') {
-      let typesArray = mmisStatus.updateTypes,
-        index = typesArray.indexOf(value);
-      if (index > -1) {
-        typesArray.splice(index, 1);
-        newStatus.updateTypes = typesArray;
-        console.log(newStatus);
-        setMmisStatus(newStatus);
-      } else if (index === -1) {
-        typesArray.push(value);
-        newStatus.updateTypes = typesArray;
-        setMmisStatus(newStatus);
-      }
-    }
-  }
-
-  function updateMedicaidBA(value) {
-    let index = medicaidBA.indexOf(value),
-      businessChoices = medicaidBA;
-    if (index > -1) {
-      // only splice array when item is found
-      businessChoices.splice(index, 1); // 2nd parameter means remove one item only
-      setValue('medicaidBA', businessChoices, { shouldValidate: true });
-      setMedicaidBA(businessChoices);
-    } else if (index === -1) {
-      businessChoices.push(value);
-      setValue('medicaidBA', businessChoices, { shouldValidate: true });
-      setMedicaidBA(businessChoices);
+      updateArray(mmisStatus.updateTypes, 'mmisStatus', setMmisStatus, value);
     }
   }
 
@@ -205,7 +163,7 @@ const ApdNew = () => {
                   hint="Choose the federal fiscal year(s) this APD covers."
                   type="checkbox"
                   onChange={e => {
-                    updateYears(e.target.value);
+                    updateArray(years, 'years', setYears, e.target.value);
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
@@ -246,7 +204,12 @@ const ApdNew = () => {
                   labelClassName="ds-u-margin-bottom--1"
                   type="checkbox"
                   onChange={e => {
-                    updateHitechType(e.target.value);
+                    updateArray(
+                      hitechStatus,
+                      'hitechStatus',
+                      setHitechStatus,
+                      e.target.value
+                    );
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
@@ -303,9 +266,14 @@ const ApdNew = () => {
                                 type="checkbox"
                                 onChange={e => {
                                   updateMmisType('updateTypes', e.target.value);
+                                  console.log({ errors });
                                 }}
                                 onBlur={onBlur}
                                 onComponentBlur={onBlur}
+                                errorMessage={
+                                  errors?.mmisStatus?.updateTypes?.message
+                                }
+                                errorPlacement="bottom"
                               />
                             )}
                           />
@@ -431,12 +399,17 @@ const ApdNew = () => {
                     }
                   ]}
                   onChange={e => {
-                    updateMedicaidBA(e.target.value);
-                    console.log({ initialState });
-                    console.log({ errors });
+                    updateArray(
+                      medicaidBA,
+                      'medicaidBA',
+                      setMedicaidBA,
+                      e.target.value
+                    );
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
+                  errorMessage={errors?.medicaidBA?.message}
+                  errorPlacement="bottom"
                 />
               )}
             />

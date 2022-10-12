@@ -21,7 +21,7 @@ const apdNewSchema = Joi.object({
       updateValue: Joi.string().valid('yes', 'no').required().messages({
         'any.only': 'Select an update type.'
       }),
-      updateTypes: Joi.when('value', {
+      updateTypes: Joi.when('updateValue', {
         is: 'yes',
         then: Joi.array().min(1).required().messages({
           'array.min': 'Select at least one type of update.'
@@ -33,7 +33,9 @@ const apdNewSchema = Joi.object({
   }),
   medicaidBA: Joi.when('apdType', {
     is: 'mmis',
-    then: Joi.array().min(1).required(),
+    then: Joi.array().min(1).required().messages({
+      'array.min': 'Select at least one Medicaid Business Area.'
+    }),
     otherwise: Joi.any()
   }),
   otherDetails: Joi.when('medicaidBA', {
