@@ -394,7 +394,7 @@ const mapStateToProps = (
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,
     otherFunding: activityTotal.data.otherFunding,
-    adminCheck: state.apd.adminCheck
+    adminCheck: state.apd.adminCheck.enabled
   };
 };
 

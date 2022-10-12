@@ -265,7 +265,7 @@ ApdStateProfile.propTypes = {
 const mapStateToProps = state => ({
   defaultStateID: selectState(state).id,
   keyStatePersonnel: selectKeyStatePersonnel(state),
-  adminCheck: state.apd.adminCheck
+  adminCheck: state.apd.adminCheck.enabled
 });
 
 const mapDispatchToProps = {

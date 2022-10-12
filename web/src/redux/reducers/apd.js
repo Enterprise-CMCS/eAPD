@@ -484,7 +484,7 @@ const reducer = (state = initialState, action) => {
         },
         adminCheck: {
           ...state.adminCheck,
-          errors: action.data.adminCheck.errors
+          errors: action.data.adminCheck
         }
       };
 
@@ -495,8 +495,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: {
-          ...action.apd,
-          activities: action.apd.activities.map(
+          ...action.data.apd,
+          activities: action.data.apd.activities.map(
             ({
               activityId,
               contractorResources,
@@ -536,17 +536,19 @@ const reducer = (state = initialState, action) => {
             })
           ),
           assurancesAndCompliances: getAssurancesAndCompliances(
-            action.apd.assurancesAndCompliances
+            action.data.apd.assurancesAndCompliances
           ),
           keyStatePersonnel: {
-            ...action.apd.keyStatePersonnel,
-            keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
-              ...kp,
-              key: generateKey()
-            }))
+            ...action.data.apd.keyStatePersonnel,
+            keyPersonnel: action.data.apd.keyStatePersonnel.keyPersonnel.map(
+              kp => ({
+                ...kp,
+                key: generateKey()
+              })
+            )
           },
-          created: getHumanDatestamp(action.apd.created),
-          updated: getHumanTimestamp(action.apd.updated),
+          created: getHumanDatestamp(action.data.apd.created),
+          updated: getHumanTimestamp(action.data.apd.updated),
           yearOptions: defaultAPDYearOptions
         }
       };

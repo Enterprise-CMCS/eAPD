@@ -107,7 +107,7 @@ NameAndFundingSourceForm.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    adminCheck: state.apd.adminCheck
+    adminCheck: state.apd.adminCheck.enabled
   };
 };
 

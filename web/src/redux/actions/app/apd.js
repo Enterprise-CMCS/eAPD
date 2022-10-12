@@ -106,24 +106,25 @@ export const selectApd =
     return axios
       .get(`/apds/${id}`)
       .then(res => {
-        const budget = deepCopy(res.data.budget);
-        delete res.data.budget;
+        const budget = deepCopy(res.data.apd.budget);
+        delete res.data.apd.budget;
 
         console.log('res', res);
         dispatch({
-          type: SAVE_APD_SUCCESS,
+          type: SELECT_APD_SUCCESS,
           data: { apd: res.data.apd, adminCheck: res.data.adminCheck }
         });
         dispatch({
           type: APD_ACTIVITIES_CHANGE,
           activities: res.data.apd.activities
         });
-        dispatch({ type: ADMIN_CHECK_TOGGLE, data: false });
+        // Todo: Check if we can remove this now since the initial state is false
+        // dispatch({ type: ADMIN_CHECK_TOGGLE, data: false });
 
         // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
         // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
         // values using an EDIT_APD action. That way the initial values get saved back to the API.
-        if (Object.keys(res.data.assurancesAndCompliances).length === 0) {
+        if (Object.keys(res.data.apd.assurancesAndCompliances).length === 0) {
           dispatch({
             type: EDIT_APD,
             path: '/assurancesAndCompliances',

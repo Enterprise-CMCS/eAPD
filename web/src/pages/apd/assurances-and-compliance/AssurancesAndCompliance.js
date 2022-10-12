@@ -240,7 +240,7 @@ AssurancesAndCompliance.propTypes = {
 
 const mapStateToProps = state => ({
   citations: selectFederalCitations(state),
-  adminCheck: state.apd.adminCheck
+  adminCheck: state.apd.adminCheck.enabled
 });
 
 const mapDispatchToProps = {

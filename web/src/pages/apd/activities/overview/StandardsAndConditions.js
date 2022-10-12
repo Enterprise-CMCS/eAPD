@@ -116,7 +116,7 @@ StandardsAndConditions.propTypes = {
 
 const mapStateToProps = (state, props) => ({
   activity: selectActivityByIndex(state, props),
-  adminCheck: state.apd.adminCheck
+  adminCheck: state.apd.adminCheck.enabled
 });
 
 const mapDispatchToProps = {

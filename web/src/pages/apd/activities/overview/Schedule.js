@@ -125,7 +125,7 @@ Schedule.propTypes = {
 
 const mapStateToProps = (state, { activityIndex }) => ({
   activity: selectActivityByIndex(state, { activityIndex }),
-  adminCheck: state.apd.adminCheck
+  adminCheck: state.apd.adminCheck.enabled
 });
 
 const mapDispatchToProps = {

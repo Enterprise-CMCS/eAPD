@@ -57,7 +57,7 @@ All.defaultProps = {
 
 const mapStateToProps = state => ({
   activities: selectAllActivities(state),
-  adminCheck: state.apd.adminCheck
+  adminCheck: state.apd.adminCheck.enabled
 });
 
 const mapDispatchToProps = {

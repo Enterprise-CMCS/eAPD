@@ -286,7 +286,7 @@ ApdOverview.defaultProps = {
 
 const mapStateToProps = state => ({
   fundingSources: getAllFundingSources(state),
-  adminCheck: state.apd.adminCheck,
+  adminCheck: state.apd.adminCheck.enabled,
   ...selectSummary(state)
 });
 
