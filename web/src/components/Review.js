@@ -53,27 +53,21 @@ const Review = ({
     <ReviewSummary
       editContent={
         <div className="nowrap visibility--screen ds-u-margin-top--2">
-          {onEditClick || editHref ? (
+          {onEditClick && (
             <Button
               size="small"
               variation="transparent"
               onClick={editHandler}
               aria-label={`Edit${ariaLabel ? ` ${ariaLabel}` : ''}`}
             >
-              {
-                // If the editHref is set, create a link element here so it'll
-                // behave as intended on the outside.  Otherwise, the button
-                // content can just be text.
-                editHref ? (
-                  <Link to={editHref} ref={anchor}>
-                    Edit
-                  </Link>
-                ) : (
-                  'Edit'
-                )
-              }
+              Edit
             </Button>
-          ) : null}
+          )}
+          {editHref && (
+            <Link to={editHref} ref={anchor}>
+              Edit
+            </Link>
+          )}
           {onDeleteClick && (
             // If there's a delete click handler, add a remove button to the
             // header area and wire it up

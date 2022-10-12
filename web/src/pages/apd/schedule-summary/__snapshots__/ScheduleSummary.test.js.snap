@@ -113,7 +113,7 @@ exports[`schedule summary component renders correctly 1`] = `
     </Subsection>
     <Subsection
       headerClassName={null}
-      id="schedule-summary-table"
+      id="schedule-milestones-table"
       nested={false}
       resource="scheduleSummary.milestone"
     >
@@ -352,7 +352,7 @@ exports[`schedule summary component renders correctly with no data 1`] = `
     </Subsection>
     <Subsection
       headerClassName={null}
-      id="schedule-summary-table"
+      id="schedule-milestones-table"
       nested={false}
       resource="scheduleSummary.milestone"
     >
