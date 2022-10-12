@@ -10,15 +10,12 @@ flowchart LR
     end
     subgraph auth [JWT middleware authentication]
         direction LR
-    
-
         subgraph api [API App using \nNode/Express]
             direction TB
             apd(APDs and Budget)
             states(States)
             users(User Admin)
             me(Profile)
-
         end
     end
     subgraph data [Databases]

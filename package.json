@@ -16,6 +16,7 @@
     "node": "16.16.0"
   },
   "scripts": {
+    "clean": "rm -rf yarn.lock node_modules */node_modules",
     "audit": "npx audit-ci --config ./audit-ci.json",
     "build": "yarn workspaces run build",
     "lint": "yarn workspaces run lint",
