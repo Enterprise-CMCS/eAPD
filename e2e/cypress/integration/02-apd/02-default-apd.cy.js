@@ -48,6 +48,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   describe('Form View', () => {
     /* eslint-disable-next-line prefer-arrow-callback, func-names */
     beforeEach(function () {
+      cy.updateFeatureFlags({ validation: true });
       cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     });
 

@@ -155,6 +155,10 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__TEALIUM_ENV__|`echo $TEALIUM_ENV`|g" aws.user-data.sh
 
+  sed -i'.backup' -e "s|__LD_API_KEY__|`echo $LD_API_KEY`|g" aws.user-data.sh
+
+  sed -i'.backup' -e "s|__LD_CLIENT_ID__|`echo $LD_CLIENT_ID`|g" aws.user-data.sh
+
   rm aws.user-data.sh.backup
 }
 

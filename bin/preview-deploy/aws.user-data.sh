@@ -95,7 +95,7 @@ cp -r ~/eAPD/common/* /app/common
 
 # move the web app into place
 cd ~/eAPD/web
-TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build 2>&1 | tee web-build.log
+LD_CLIENT_ID="__LD_CLIENT_ID__" TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build 2>&1 | tee web-build.log
 cp -r dist/* /app/web
 
 # move over node modules
