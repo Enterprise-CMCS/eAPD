@@ -1344,7 +1344,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
-  describe.only('Accessibility Tests', () => {
+  describe('Accessibility Tests', () => {
     it('Runs on APD Builder', () => {
       cy.wait(5000); // Allows page to load
 
