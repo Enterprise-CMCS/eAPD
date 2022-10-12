@@ -6,7 +6,6 @@ const {
   assurancesAndCompliance,
   activityCostAllocationFFP,
   activityCostAllocationOther,
-  // costAllocateFFPQuarterly, can't use because it validates against a calculated value
   costAllocation,
   proposedBudgetEhAmt,
   proposedBudgetEpAmt,
