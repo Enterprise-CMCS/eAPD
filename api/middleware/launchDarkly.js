@@ -32,15 +32,14 @@ const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
  * To use the flag:
  * const { getLaunchDarklyFlag } = require('../../middleware/launchDarkly');
  *
- * const shouldValidate = await getLaunchDarklyFlag(
- *   'validation',
- *   { key: 'anonymous', anonymous: true },
- *   false
- * );
+ * const validation = await getLaunchDarklyFlag(
+ *    'validation',
+ *    { key: 'anonymous', anonymous: true },
+ *    false
+ *  );
  */
 
 module.exports = {
-  ldClient: client,
   waitForInitialization,
   getLaunchDarklyFlag
 };
