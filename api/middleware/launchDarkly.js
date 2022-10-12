@@ -12,7 +12,7 @@ const client = LaunchDarkly.init(LD_API_KEY, options);
 const waitForInitialization = async () => {
   // Using "await" instead, within an async function
   try {
-    if (LD_API_KEY) {
+    if (LD_API_KEY && LD_API_KEY !== '') {
       await client.waitForInitialization();
       // Initialization complete
     }

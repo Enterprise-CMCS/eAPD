@@ -41,7 +41,7 @@ Root.propTypes = {
 
 let component;
 
-if (process.env.LD_CLIENT_ID) {
+if (process.env.LD_CLIENT_ID && process.env.LD_CLIENT_ID !== '') {
   component = withLDProvider({
     clientSideID: process.env.LD_CLIENT_ID,
     options: {
