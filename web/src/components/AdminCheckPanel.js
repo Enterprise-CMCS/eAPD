@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -56,9 +56,11 @@ const AdminCheckPanel = ({
     adminCheckCollapsed ? toggleCollapsed(false) : toggleCollapsed(true);
   };
 
-  const toggleComplete = () => {
-    adminCheckComplete ? toggleAdminComplete(false) : toggleAdminComplete(true);
-  };
+  useEffect(() => {
+    adminCheckData?.length === 0
+      ? toggleAdminComplete(true)
+      : toggleAdminComplete(false);
+  }, [adminCheckData]);
 
   return (
     <Fragment>
@@ -208,12 +210,6 @@ const AdminCheckPanel = ({
                   </Fragment>
                 )}
               </div>
-              <button
-                onClick={toggleComplete}
-                className="cursor-pointer ds-u-margin-top--2 ds-u-padding-left--0 ds-c-button--transparent"
-              >
-                [Demo: Toggle All Complete]
-              </button>
             </Fragment>
           )}
         </Drawer>

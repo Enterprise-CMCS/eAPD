@@ -23,7 +23,7 @@ import CostAllocationRows, {
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
 
-import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocateFFP';
+import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocationFFP';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -119,7 +119,7 @@ const CostAllocateFFP = ({
     setValue
   } = useForm({
     defaultValues: {
-      costAllocation
+      ...costAllocation
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -127,7 +127,9 @@ const CostAllocateFFP = ({
   });
 
   useEffect(() => {
-    setValue('costAllocation', costAllocation);
+    Object.keys(costAllocation).forEach(year => {
+      setValue(`${year}`, costAllocation[year]);
+    });
     if (adminCheck) {
       trigger();
     }
@@ -255,7 +257,7 @@ const CostAllocateFFP = ({
                   }}
                 />
                 <Controller
-                  name={`costAllocation`}
+                  name={`${ffy}`}
                   control={control}
                   render={({ field: { ...props } }) => (
                     <Dropdown
@@ -270,9 +272,7 @@ const CostAllocateFFP = ({
                       ]}
                       value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
                       onChange={setFederalStateSplit(ffy)}
-                      errorMessage={
-                        errors.costAllocation?.[ffy]?.ffp?.state?.message
-                      }
+                      errorMessage={errors[ffy]?.ffp?.state?.message}
                       errorPlacement="bottom"
                       data-cy="cost-allocation-dropdown"
                     />

@@ -23,7 +23,7 @@ import {
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
 
-import otherSourcesSchema from '@cms-eapd/common/schemas/otherSources';
+import otherSourcesSchema from '@cms-eapd/common/schemas/costAllocationOther';
 
 const OtherFunding = ({
   activityIndex,
