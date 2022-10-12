@@ -88,6 +88,7 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
     if (typeof errorPath[1] === 'undefined') {
       return `activities`;
     }
+
     return `activity/${errorPath[1]}/${subSectionURLPath[errorPath[2]]}`;
   };
 

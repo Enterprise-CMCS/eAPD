@@ -850,27 +850,27 @@ const apdForAdminCheck = {
       contractorResources: [
         {
           description: 'Maintain SLR',
-          end: '2022-02-22',
+          end: '2022-01-04',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Super SLR Incorporated',
-          start: '2021-02-22',
+          start: '2021-01-04',
           totalCost: 32423,
           years: { 2022: 999756, 2023: 342444 }
         },
         {
           description: 'Technology consulting and planning services.',
-          end: '2022-02-22',
+          end: '2022-01-04',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Tech Consulting Inc.',
-          start: '2021-02-22',
+          start: '2021-01-04',
           totalCost: 473573,
           years: { 2022: 333000, 2023: 200000 }
         }

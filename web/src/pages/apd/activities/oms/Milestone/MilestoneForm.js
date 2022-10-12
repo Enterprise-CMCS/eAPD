@@ -53,7 +53,7 @@ const MilestoneForm = forwardRef(
           style={{ display: 'none' }}
           aria-hidden="true"
         />
-        <h6 className="ds-h4">Milestone {index + 1}:</h6>
+        <h4 className="ds-h4">Milestone {index + 1}:</h4>
         <Controller
           control={control}
           name="milestone"

@@ -51,7 +51,7 @@ const CostAllocate = ({
           labelFor="cost-allocation-methodology-field"
           source="activities.costAllocate.methodology.instruction"
           headingDisplay={{
-            level: 'h6',
+            level: 'h4',
             className: 'ds-h5'
           }}
         />

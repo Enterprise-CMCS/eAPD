@@ -16,6 +16,7 @@
     "node": "16.16.0"
   },
   "scripts": {
+    "clean": "rm -rf yarn.lock node_modules */node_modules",
     "audit": "npx audit-ci --config ./audit-ci.json",
     "build": "yarn workspaces run build",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\" --config \".prettierrc\"",
@@ -81,7 +82,9 @@
       "web/@uppy",
       "web/tinymce",
       "web/@tinymce/tinymce-react",
-      "web/@cmsgov/design-system"
+      "web/@cmsgov/design-system",
+      "e2e/cypress-axe",
+      "e2e/axe-core"
     ]
   },
   "dependencies": {

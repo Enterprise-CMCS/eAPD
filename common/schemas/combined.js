@@ -6,7 +6,6 @@ const {
   assurancesAndCompliance,
   activityCostAllocationFFP,
   activityCostAllocationOther,
-  costAllocateFFPQuarterly,
   costAllocation,
   proposedBudgetEhAmt,
   proposedBudgetEpAmt,
