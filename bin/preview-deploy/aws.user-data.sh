@@ -63,6 +63,7 @@ export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
+export LD_API_KEY="__LD_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
@@ -157,6 +158,7 @@ echo "module.exports = {
       MONGO_URL: '__MONGO_URL__',
       MONGO_ADMIN_URL: '__MONGO_ADMIN_URL__',
       DATABASE_URL: '__DATABASE_URL__',
+			LD_API_KEY: '__LD_API_KEY__',
     },
   }]
 };" > ecosystem.config.js
