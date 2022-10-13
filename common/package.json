@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
+    "lint": "eslint '**/*.js'",
     "clean": "[ -d dist ] && rm -rf dist || echo \"doesn't exist, skipping clean\"",
     "scaffold": "yarn clean && mkdir dist",
     "build": "yarn scaffold && babel . -d ./dist -s --ignore \"node_modules\",\"dist\"",

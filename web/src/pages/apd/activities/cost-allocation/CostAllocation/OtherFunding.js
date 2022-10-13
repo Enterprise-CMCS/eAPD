@@ -34,13 +34,15 @@ const OtherFunding = ({
   syncOtherFunding,
   adminCheck
 }) => {
-  const { costAllocationNarrative = '', costAllocation = '' } = activity,
+  const { costAllocationNarrative = { years: {} }, costAllocation = '' } =
+      activity,
     { years } = costSummary,
     yearsArray = Object.keys(years);
 
   const {
     control,
     trigger,
+    clearErrors,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -55,6 +57,8 @@ const OtherFunding = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -77,12 +81,13 @@ const OtherFunding = ({
                 className: 'ds-h5'
               }}
             />
+
             <RichText
               name={`costAllocationNarrative.years.${ffy}.otherSources`}
               data-testid={`other-sources-${ffy}`}
               id={`cost-allocation-narrative-${ffy}-other-sources-field`}
               iframe_aria_text="Other Funding Description Text Area"
-              content={costAllocationNarrative.years[ffy].otherSources}
+              content={costAllocationNarrative?.years?.[ffy]?.otherSources}
               onSync={html => {
                 syncOtherFunding(activityIndex, ffy, html);
 
@@ -91,11 +96,16 @@ const OtherFunding = ({
                 }
               }}
               editorClassName="rte-textarea-l"
+              error={
+                adminCheck &&
+                costAllocation[ffy]?.other > 0 &&
+                !costAllocationNarrative?.years?.[ffy]?.otherSources
+              }
             />
             <div>
               {adminCheck &&
                 costAllocation[ffy]?.other > 0 &&
-                !costAllocationNarrative?.years[ffy]?.otherSources && (
+                !costAllocationNarrative?.years?.[ffy]?.otherSources && (
                   <span
                     className="ds-c-inline-error ds-c-field__error-message"
                     role="alert"

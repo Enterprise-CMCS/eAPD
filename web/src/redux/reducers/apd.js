@@ -39,6 +39,7 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
+import { FLAGS_UPDATED } from '../actions/flags';
 import { defaultAPDYearOptions } from '../../util';
 import { generateKey } from '@cms-eapd/common/utils/utils';
 import initialAssurances from '../../util/regulations';
@@ -406,6 +407,12 @@ const reducer = (state = initialState, action) => {
           ...state.adminCheck,
           enabled: action.data
         }
+      };
+    }
+    case FLAGS_UPDATED: {
+      return {
+        ...state,
+        adminCheck: action.flags.validation
       };
     }
 

@@ -53,7 +53,8 @@ const ApdOverview = ({
     control,
     formState: { errors },
     setValue,
-    trigger
+    trigger,
+    clearErrors
   } = useForm({
     defaultValues: {
       fundingSources,
@@ -70,8 +71,10 @@ const ApdOverview = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const changeName = ({ target: { value } }) => {
     setName(value);

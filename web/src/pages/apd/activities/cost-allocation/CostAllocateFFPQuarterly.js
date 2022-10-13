@@ -47,7 +47,8 @@ const CostAllocateFFPQuarterly = ({
     control,
     formState: { errors },
     setValue,
-    trigger
+    trigger,
+    clearErrors
   } = useForm({
     defaultValues: {
       ...quarterlyFFP[year]
@@ -58,7 +59,14 @@ const CostAllocateFFPQuarterly = ({
   });
 
   useEffect(() => {
-    console.log('activityId', activityId);
+    if (adminCheck && !isViewOnly) {
+      trigger();
+    } else {
+      clearErrors();
+    }
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     setValue('subtotal.inHouse', quarterlyFFP[year].subtotal.inHouse);
     if (adminCheck) {
       trigger('subtotal.inHouse');
@@ -120,7 +128,7 @@ const CostAllocateFFPQuarterly = ({
         <tbody>
           <tr
             className={`${
-              errors?.subtotal?.inHouse?.percent
+              errors?.subtotal?.inHouse?.percent && !isViewOnly
                 ? 'table-error-border-no-bottom'
                 : ''
             }`}
@@ -163,7 +171,7 @@ const CostAllocateFFPQuarterly = ({
           </tr>
           <tr
             className={`${
-              errors?.subtotal?.inHouse?.percent
+              errors?.subtotal?.inHouse?.percent && !isViewOnly
                 ? 'table-error-border-no-top'
                 : ''
             }`}
@@ -182,7 +190,7 @@ const CostAllocateFFPQuarterly = ({
 
           <tr
             className={`${
-              errors?.subtotal?.contractors?.percent
+              errors?.subtotal?.contractors?.percent && !isViewOnly
                 ? 'table-error-border-no-bottom'
                 : ''
             }`}
@@ -225,7 +233,7 @@ const CostAllocateFFPQuarterly = ({
           </tr>
           <tr
             className={`${
-              errors?.subtotal?.contractors?.percent
+              errors?.subtotal?.contractors?.percent && !isViewOnly
                 ? 'table-error-border-no-top'
                 : ''
             }`}
@@ -267,7 +275,7 @@ const CostAllocateFFPQuarterly = ({
           </tr>
         </tbody>
       </table>
-      {errors && (
+      {errors && !isViewOnly && (
         <div
           className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
           role="alert"

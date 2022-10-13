@@ -1,0 +1,17 @@
+sequenceDiagram
+  %% @config(./mermaid-config.json)
+  participant C as Client
+  participant L as LaunchDarkly
+  participant S as Server
+  C->>L: Connect to LaunchDarkly
+  loop Polling
+    C->>L: Request feature flags
+    L->>C: Return feature flags
+  end
+  S->>L: Connect to LaunchDarkly
+  loop Polling
+    S->>L: Request feature flags
+    L->>S: Return feature flags
+  end 
+  
+

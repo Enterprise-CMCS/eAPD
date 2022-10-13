@@ -65,6 +65,7 @@ const AssurancesAndCompliance = ({
   const {
     control,
     trigger,
+    clearErrors,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -81,8 +82,10 @@ const AssurancesAndCompliance = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleCheckChange(section, index, newValue) {
     switch (section) {

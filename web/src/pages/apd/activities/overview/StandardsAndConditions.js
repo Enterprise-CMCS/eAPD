@@ -31,7 +31,8 @@ const StandardsAndConditions = ({
   const {
     control,
     formState: { errors },
-    trigger
+    trigger,
+    clearErrors
   } = useForm({
     defaultValues: {
       supports: supports,
@@ -43,8 +44,10 @@ const StandardsAndConditions = ({
   useEffect(() => {
     if (adminCheck) {
       trigger(['supports']);
+    } else {
+      clearErrors();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>
