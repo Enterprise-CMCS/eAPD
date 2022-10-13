@@ -8,10 +8,11 @@ import { Alert, Button, ChoiceList, TextField } from '@cmsgov/design-system';
 import TextArea from '../../../components/TextArea';
 import { createApd } from '../../../redux/actions/app';
 
+import Loading from '../../../components/Loading';
 import newApdSchema from '@cms-eapd/common/schemas/apdNew';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-const ApdNew = () => {
+const ApdNew = create => {
   const thisFFY = (() => {
     const year = new Date().getFullYear();
     if (new Date().getMonth() > 8) {
@@ -24,32 +25,41 @@ const ApdNew = () => {
   const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
   const history = useHistory();
   const [apdType, setApdType] = useState('');
-  const [apdname, setApdname] = useState('');
   const [hitechStatus, setHitechStatus] = useState([]);
-  const [medicaidBA, setMedicaidBA] = useState([]);
-  const [mmisStatus, setMmisStatus] = useState({
-    updateValue: '',
-    updateTypes: []
-  });
-  const [otherDetails, setOtherDetails] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
 
-  const initialState = {
-    apdType,
-    apdname,
-    years,
-    hitechStatus,
-    mmisStatus,
-    medicaidBA,
-    otherDetails
+  const createNew = () => {
+    setIsLoading(true);
+    create();
   };
+
+  if (isLoading) {
+    return (
+      <div id="start-main-content">
+        <Loading>Loading your APD</Loading>
+      </div>
+    );
+  }
 
   const {
     control,
     setValue,
+    getValues,
     formState: { errors, isDirty, isValid }
   } = useForm({
-    defaultValues: initialState,
+    defaultValues: {
+      apdType: '',
+      apdname: '',
+      years,
+      hitechStatus: hitechStatus,
+      mmisStatus: {
+        updateValue: '',
+        updateTypes: []
+      },
+      medicaidBA: [],
+      otherDetails: ''
+    },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: joiResolver(newApdSchema)
@@ -73,16 +83,6 @@ const ApdNew = () => {
       newArray.push(value);
       setValue(name, newArray, { shouldValidate: true });
       setAction(newArray);
-    }
-  }
-
-  function updateMmisType(key, value) {
-    let newStatus = mmisStatus;
-    if (key === 'updateValue') {
-      newStatus.updateValue = value;
-      setMmisStatus(newStatus);
-    } else if (key === 'updateTypes') {
-      updateArray(mmisStatus.updateTypes, 'mmisStatus', setMmisStatus, value);
     }
   }
 
@@ -144,11 +144,9 @@ const ApdNew = () => {
                   label="APD Name"
                   className="remove-clearfix"
                   value={value}
-                  onChange={e => {
-                    onChange(e);
-                    setApdname(e.target.value);
-                  }}
+                  onChange={onChange}
                   onBlur={onBlur}
+                  onComponentBlur={onBlur}
                 />
               )}
             />
@@ -240,7 +238,7 @@ const ApdNew = () => {
                           <Controller
                             name="mmisStatus.updateTypes"
                             control={control}
-                            render={({ field: { onBlur } }) => (
+                            render={({ field: { onBlur, onChange } }) => (
                               <ChoiceList
                                 label="Update Type"
                                 hint={
@@ -264,10 +262,7 @@ const ApdNew = () => {
                                 ]}
                                 labelClassName="ds-u-margin-bottom--1"
                                 type="checkbox"
-                                onChange={e => {
-                                  updateMmisType('updateTypes', e.target.value);
-                                  console.log({ errors });
-                                }}
+                                onChange={onChange}
                                 onBlur={onBlur}
                                 onComponentBlur={onBlur}
                                 errorMessage={
@@ -286,10 +281,7 @@ const ApdNew = () => {
                       checked: value === 'no'
                     }
                   ]}
-                  onChange={e => {
-                    onChange(e);
-                    updateMmisType('updateValue', e.target.value);
-                  }}
+                  onChange={onChange}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
                   errorMessage={errors?.mmisStatus?.updateValue?.message}
@@ -381,16 +373,17 @@ const ApdNew = () => {
                           <Controller
                             name="otherDetails"
                             control={control}
-                            render={({ field: { onChange, ...props } }) => (
+                            render={({
+                              field: { onBlur, onChange, ...props }
+                            }) => (
                               <TextArea
                                 {...props}
                                 label="Other Medicaid Business Area(s)"
                                 name="other-mbas"
                                 hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
-                                onChange={e => {
-                                  onChange(e);
-                                  setOtherDetails(e.target.value);
-                                }}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                onComponentBlur={onBlur}
                               />
                             )}
                           />
@@ -398,14 +391,7 @@ const ApdNew = () => {
                       )
                     }
                   ]}
-                  onChange={e => {
-                    updateArray(
-                      medicaidBA,
-                      'medicaidBA',
-                      setMedicaidBA,
-                      e.target.value
-                    );
-                  }}
+                  onChange={console.log(getValues('medicaidBA'))}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
                   errorMessage={errors?.medicaidBA?.message}
@@ -423,6 +409,7 @@ const ApdNew = () => {
           variation="primary"
           disabled={disabled}
           className="ds-u-float--right"
+          onClick={createNew}
         >
           Create an APD
         </Button>
