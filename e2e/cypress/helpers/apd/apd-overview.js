@@ -48,6 +48,7 @@ export const testAPDOverviewWithData = () => {
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   beforeEach(function () {
+    cy.updateFeatureFlags({ validation: true });
     cy.fixture('apd-overview-template.json').then(userContent => {
       apdOverview = userContent;
     });
@@ -84,7 +85,7 @@ export const testAPDOverviewWithData = () => {
       });
 
       cy.contains('Delete FFY?').should('exist');
-      cy.wait(500);
+      cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.get('button[id="dialog-cancel"]').click({ force: true });
 
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(

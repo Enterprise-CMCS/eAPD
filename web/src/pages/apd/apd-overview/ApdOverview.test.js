@@ -24,8 +24,8 @@ const defaultProps = {
   setMMIS: jest.fn(),
   setName: jest.fn(),
   setOverview: jest.fn(),
-  years: ['2022', '2023'],
-  yearOptions: ['2022', '2023', '2024']
+  years: ['2023', '2024'],
+  yearOptions: ['2023', '2024', '2025']
 };
 
 const setup = async (props = {}) => {
@@ -67,35 +67,35 @@ describe('APD overview component', () => {
 
   test('user can add a year', async () => {
     const { user } = await setup();
-    expect(screen.getByLabelText('2022')).toBeChecked();
     expect(screen.getByLabelText('2023')).toBeChecked();
-    expect(screen.getByLabelText('2024')).not.toBeChecked();
-
-    await user.click(screen.getByLabelText('2024'));
     expect(screen.getByLabelText('2024')).toBeChecked();
+    expect(screen.getByLabelText('2025')).not.toBeChecked();
+
+    await user.click(screen.getByLabelText('2025'));
+    expect(screen.getByLabelText('2025')).toBeChecked();
   });
 
   test('user can attempt to delete a year and cancel', async () => {
     jest.setTimeout(30000);
     const { user } = await setup();
-    expect(screen.getByLabelText('2022')).toBeChecked();
-    await user.click(screen.getByLabelText('2022'));
+    expect(screen.getByLabelText('2023')).toBeChecked();
+    await user.click(screen.getByLabelText('2023'));
 
     await screen.findByRole('alertdialog');
     await user.click(screen.getByRole('button', { name: 'Cancel' }));
 
-    expect(screen.getByLabelText('2022')).toBeChecked();
+    expect(screen.getByLabelText('2023')).toBeChecked();
   });
 
   test('user can delete a year', async () => {
     jest.setTimeout(30000);
     const { user } = await setup();
-    expect(screen.getByLabelText('2022')).toBeChecked();
-    await user.click(screen.getByLabelText('2022'));
+    expect(screen.getByLabelText('2023')).toBeChecked();
+    await user.click(screen.getByLabelText('2023'));
 
     await screen.findByRole('alertdialog');
     await user.click(screen.getByRole('button', { name: 'Delete FFY' }));
 
-    expect(screen.getByLabelText('2022')).not.toBeChecked();
+    expect(screen.getByLabelText('2023')).not.toBeChecked();
   });
 });

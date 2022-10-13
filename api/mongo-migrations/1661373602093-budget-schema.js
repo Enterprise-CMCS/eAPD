@@ -3,13 +3,22 @@ const { calculateBudget, generateKey } = require('@cms-eapd/common');
 const { setup, teardown } = require('../db/mongodb');
 const { APD, Budget } = require('../models');
 
+const forAllYears = (currentObj, defaultObj, yearsToCover) =>
+  yearsToCover.reduce(
+    (acc, year) => ({
+      ...acc,
+      [year]: currentObj?.[year] || defaultObj
+    }),
+    {}
+  );
+
 /**
  * Make any changes you need to make to the database here
  */
 async function up() {
   // Grab all APDs
   await setup();
-  const apds = await APD.find({});
+  const apds = await APD.find({ status: 'draft' });
 
   await Promise.all(
     apds.map(async apd => {
@@ -17,10 +26,22 @@ async function up() {
       // need to add activityId to all activities
       apd.activities = apd.toJSON().activities.map(activity => ({
         ...activity,
-        activityId: generateKey()
+        activityId: generateKey(),
+        costAllocationNarrative: {
+          methodology: activity.costAllocationNarrative.methodology,
+          years: forAllYears(
+            activity.costAllocationNarrative.years,
+            { otherSources: '' },
+            apd.years
+          )
+        }
       }));
-      const budget = await Budget.create(calculateBudget(apd.toJSON()));
-      apd.budget = budget;
+      try {
+        const budget = await Budget.create(calculateBudget(apd.toJSON()));
+        apd.budget = budget;
+      } catch (err) {
+        logger.error(err);
+      }
       await apd.save();
     })
   ).catch(err => {
