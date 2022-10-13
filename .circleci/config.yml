@@ -1091,7 +1091,7 @@ jobs:
               --TEALIUM_TAG "${<< parameters.env >>_TEALIUM_TAG}" \
               --TEALIUM_ENV "${<< parameters.env >>_TEALIUM_ENV}" \
               --LD_API_KEY "${<< parameters.env >>_LD_API_KEY}" \
-              --LD_CLIENT_ID "${<< parameters.env >>_LD_CLIENT_ID
+              --LD_CLIENT_ID "${<< parameters.env >>_LD_CLIENT_ID}"
 
       - run:
           when: on_fail
