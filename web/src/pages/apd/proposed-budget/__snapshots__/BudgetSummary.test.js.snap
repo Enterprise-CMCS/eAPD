@@ -98,7 +98,7 @@ exports[`budget summary component data row renders with no data 1`] = `
 exports[`budget summary component header row renders 1`] = `
 <tr>
   <th
-    id="summary-budget-fy-1"
+    id="summary-budget-fy-1-undefined"
     key="1"
   >
     FFY 1
@@ -127,7 +127,7 @@ exports[`budget summary component header row renders 1`] = `
 exports[`budget summary component header row renders 2`] = `
 <tr>
   <th
-    id="summary-budget-fy-total"
+    id="summary-budget-fy-total-undefined"
     key="total"
   >
     Total
@@ -176,6 +176,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="hit"
           yr="1"
         />
       </thead>
@@ -205,6 +206,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="hit"
           yr="2"
         />
       </thead>
@@ -234,6 +236,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="hit"
           yr="total"
         />
       </thead>
@@ -271,6 +274,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="hie"
           yr="1"
         />
       </thead>
@@ -300,6 +304,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="hie"
           yr="2"
         />
       </thead>
@@ -329,6 +334,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="hie"
           yr="total"
         />
       </thead>
@@ -366,6 +372,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="mmis"
           yr="1"
         />
       </thead>
@@ -395,6 +402,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="mmis"
           yr="2"
         />
       </thead>
@@ -424,6 +432,7 @@ exports[`budget summary component renders correctly 1`] = `
       </caption>
       <thead>
         <HeaderRow
+          activity="mmis"
           yr="total"
         />
       </thead>

@@ -59,10 +59,10 @@ DataRowGroup.propTypes = {
   year: PropTypes.string.isRequired
 };
 
-const HeaderRow = ({ yr }) => {
+const HeaderRow = ({ yr, activity }) => {
   return (
     <tr>
-      <th key={yr} id={`summary-budget-fy-${yr}`}>
+      <th key={yr} id={`summary-budget-fy-${yr}-${activity}`}>
         {yr === 'total' ? 'Total' : `FFY ${yr}`}
       </th>
       <th className="ds-u-text-align--right" scope="col">
@@ -79,7 +79,8 @@ const HeaderRow = ({ yr }) => {
 };
 
 HeaderRow.propTypes = {
-  yr: PropTypes.string.isRequired
+  yr: PropTypes.string.isRequired,
+  activity: PropTypes.string.isRequired
 };
 
 const BudgetSummary = ({ activities, data, years }) => (
@@ -94,7 +95,7 @@ const BudgetSummary = ({ activities, data, years }) => (
             FFY {yr} HIT Activities
           </caption>
           <thead>
-            <HeaderRow yr={yr} />
+            <HeaderRow yr={yr} activity={'hit'} />
           </thead>
           <tbody>
             <DataRowGroup data={data.hit} entries={activities.hit} year={yr} />
@@ -113,7 +114,7 @@ const BudgetSummary = ({ activities, data, years }) => (
             FFY {yr} HIE Activities
           </caption>
           <thead>
-            <HeaderRow yr={yr} />
+            <HeaderRow yr={yr} activity={'hie'} />
           </thead>
           <tbody>
             <DataRowGroup data={data.hie} entries={activities.hie} year={yr} />
@@ -132,7 +133,7 @@ const BudgetSummary = ({ activities, data, years }) => (
             FFY {yr} MMIS Activities
           </caption>
           <thead>
-            <HeaderRow yr={yr} />
+            <HeaderRow yr={yr} activity={'mmis'} />
           </thead>
           <tbody>
             <DataRowGroup

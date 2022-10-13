@@ -84,6 +84,7 @@ const ApdPreviousActivityTableMMIS = ({
               <th
                 id={`prev_act_mmis${level}_total_approved`}
                 className="ds-u-text-align--right"
+                scope="col"
               >
                 {TABLE_HEADERS.approvedTotal}
               </th>
@@ -91,12 +92,14 @@ const ApdPreviousActivityTableMMIS = ({
               <th
                 id={`prev_act_mmis${level}_federal_approved`}
                 className="ds-u-text-align--right"
+                scope="col"
               >
                 {TABLE_HEADERS.approved(level)}
               </th>
               <th
                 id={`prev_act_mmis${level}_federal_actual`}
                 className="ds-u-text-align--right"
+                scope="col"
               >
                 {TABLE_HEADERS.actual}
               </th>
@@ -109,12 +112,13 @@ const ApdPreviousActivityTableMMIS = ({
 
               return (
                 <tr key={year}>
-                  <th id={`prev_act_mmis_row_${year}`}>
+                  <th id={`prev_act_mmis_row_${year}_${level}`} scope="row">
                     {TABLE_HEADERS.ffy(year)}
                   </th>
                   <td
-                    headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_total prev_act_mmis${level}_total_approved`}
+                    headers={`prev_act_mmis_row_${year}_${level}`}
                     className={isViewOnly ? 'budget-table--number' : ''}
+                    data-cy={`prev_act_mmis${level}_total_approved`}
                   >
                     {isViewOnly ? (
                       <Dollars>{expenses.totalApproved}</Dollars>
@@ -134,15 +138,17 @@ const ApdPreviousActivityTableMMIS = ({
                   </td>
 
                   <td
-                    headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_approved`}
+                    headers={`prev_act_mmis_row_${year}_${level}`}
                     className="budget-table--number"
+                    data-cy={`prev_act_mmis${level}_federal_approved_${year}`}
                   >
                     <Dollars>{federalApproved}</Dollars>
                   </td>
 
                   <td
-                    headers={`prev_act_mmis_row_${year} prev_act_mmis${level}_federal prev_act_mmis${level}_federal_actual`}
+                    headers={`prev_act_mmis_row_${year}_${level}`}
                     className={isViewOnly ? 'budget-table--number' : ''}
+                    data-cy={`prev_act_mmis${level}_federal_actual`}
                   >
                     {isViewOnly ? (
                       <Dollars>{expenses.federalActual}</Dollars>
