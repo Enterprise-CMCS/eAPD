@@ -65,6 +65,7 @@
     "js-cookie": "3.0.1",
     "jsonpatch": "3.1.0",
     "jwt-decode": "3.1.2",
+    "launchdarkly-react-client-sdk": "2.27.0",
     "markdown-it": "12.3.2",
     "mini-css-extract-plugin": "2.6.1",
     "moment": ">=2.29.4",

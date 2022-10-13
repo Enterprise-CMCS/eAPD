@@ -1,0 +1,55 @@
+flowchart
+%% @config(../.vscode/settings.json)
+user((web client))
+subgraph aws[AWS]
+  subgraph frontend
+    cloud[AWS CloudFront]
+    s3["S3 bucket\n\nstatic content:\nHTML, JavaScript,\nCSS, images"]
+    lambda["AWS Lamda\n\nAdds browser\nsecurity headers"]
+  end
+  subgraph backend
+    subgraph vpcGroup[AWS VPC]
+      elb["AWS Elastic Load Balancer\n\nListen on :443, terminate SSL,\nforwared to target group\n\nsg: eapd-elb\n- :443 from the world"]
+      target["ELB Target Group\n\ntraffic port :8000"]
+      subgraph api[eAPD API]
+        ec2["EC2 instance\n\nsg: eapd-api-vpc\n- :22 from jump box\n- :8000 from ELB"]
+        node["Node.js 10\n\n Listening on :8000"]
+      end
+      rdb["Database (RDS)\n\nsg: eapd-db\n- :5432 from EC2"]
+      mongo["EC2 (Mongo)\n\nsg: eapd\n- :27017 from EC2"]
+      ws[web subnet]
+      as[app subnet]
+      ds[data subnet]
+      dmz[dmz subnet]
+      ts[transitive subnet]
+      ms[mgmt subnet]
+      vpc[VPC]
+    end
+  end
+end
+
+user--HTTP GET :443-->cloud
+cloud-->s3
+cloud-->lambda
+user--HTTP GET, PUT, POST, DELETE :443-->elb
+elb-->target
+elb-..-dmz
+target-->ec2
+ec2-->node
+ec2-..-as
+node-->rdb
+rdb-..-ds
+node-->mongo
+mongo-..-as
+ws-..-vpc
+as-..-vpc
+ds-..-vpc
+dmz-..-vpc
+ts-..-vpc
+ms-..-vpc
+
+style s3 text-align: left
+style ec2 text-align: left
+style elb text-align: left
+style rdb text-align: left
+style mongo text-align: left

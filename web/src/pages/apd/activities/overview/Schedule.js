@@ -29,7 +29,8 @@ const Schedule = ({
   const {
     control,
     formState: { errors },
-    trigger
+    trigger,
+    clearErrors
   } = useForm({
     defaultValues: {
       plannedStartDate,
@@ -40,9 +41,11 @@ const Schedule = ({
 
   useEffect(() => {
     if (adminCheck) {
-      trigger(['plannedStartDate']);
+      triggerDates();
+    } else {
+      clearErrors();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const triggerDates = () => {
     if (adminCheck && plannedEndDate) {

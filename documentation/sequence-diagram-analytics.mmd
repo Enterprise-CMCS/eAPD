@@ -1,0 +1,6 @@
+sequenceDiagram
+  %% @config(./mermaid-config.json)
+  participant C as Client
+  participant G as Google Analytics
+  C->>G: Page view
+  Note over C,G: Sends {<br/>  content_language,<br/>  content_type,<br/>  page_name,<br/>  page_path,<br/>  site_domain,<br/>  site_environment,<br/>  site_section,<br/>  logged_in<br/>}

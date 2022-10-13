@@ -1,6 +1,6 @@
 import { Button, Alert } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -15,8 +15,15 @@ import activitiesDashboardSchema from '@cms-eapd/common/schemas/activitiesDashbo
 
 const All = ({ addActivity, activities, adminCheck }) => {
   const { apdId } = useParams();
+  const [validation, setValidation] = useState(adminCheck);
 
-  const validate = activitiesDashboardSchema.validate(activities);
+  useEffect(() => {
+    if (adminCheck) {
+      setValidation(activitiesDashboardSchema.validate(activities));
+    } else {
+      setValidation();
+    }
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <React.Fragment>
@@ -25,9 +32,9 @@ const All = ({ addActivity, activities, adminCheck }) => {
       <Section id="activities" resource="activities">
         <hr className="custom-hr" />
         {activities.length == 0 && <p>Add at least one activity.</p>}
-        {adminCheck && validate.error && (
+        {validation?.error && (
           <Fragment>
-            <Alert variation="error">{validate.error?.message}</Alert>
+            <Alert variation="error">{validation?.error?.message}</Alert>
           </Fragment>
         )}
         {activities.map((activity, index) => (

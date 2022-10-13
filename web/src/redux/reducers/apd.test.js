@@ -24,6 +24,7 @@ const {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } = require('../actions/editApd');
+const { FLAGS_UPDATED } = require('../actions/flags');
 const regulations = require('../../util/regulations').default;
 
 describe('APD reducer', () => {
@@ -1198,7 +1199,7 @@ describe('APD reducer', () => {
       { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
     );
   });
-
+  
   describe('admin check panel toggles', () => {
     it('should handle turning the admin check on', () => {
       expect(
@@ -1240,6 +1241,13 @@ describe('APD reducer', () => {
         adminCheckCollapsed: false,
         adminCheckComplete: true
       });
+
+  it('should handle updating flags', () => {
+    expect(
+      apd(initialState, { type: FLAGS_UPDATED, flags: { validation: true } })
+    ).toEqual({
+      ...initialState,
+      adminCheck: true
     });
   });
 });

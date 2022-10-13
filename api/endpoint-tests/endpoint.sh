@@ -4,22 +4,22 @@ rm ./endpoint-tests/endpoint-data.json
 
 export NODE_ENV=test
 export API_URL=http://localhost:8081
+export COMPOSE_HTTP_TIMEOUT=300
 
 unset DEV_DB_NAME
 
 echo "[]" > endpoint-data.json
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
-sleep 60
-
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
 echo 'Checking to see if the server is running'
 until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
     sleep 10;
     echo '.';
 done;
 echo 'Server is running and status is healthy'
+
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e ENDPOINT_COVERAGE_CAPTURE=true api-for-testing yarn run test-endpoints $@
 echo $?
 EXIT_CODE=$?

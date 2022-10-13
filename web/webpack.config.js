@@ -109,7 +109,8 @@ const config = {
       OKTA_DOMAIN: '',
       OKTA_SERVER_ID: '',
       OKTA_CLIENT_ID: '',
-      TEALIUM_ENV: process.env.TEALIUM_ENV
+      TEALIUM_ENV: process.env.TEALIUM_ENV,
+      LD_CLIENT_ID: process.env.LD_CLIENT_ID
     }),
 
     // Inject our app scripts into our HTML kickstarter
