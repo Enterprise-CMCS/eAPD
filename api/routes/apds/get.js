@@ -6,6 +6,14 @@ const {
 } = require('../../db');
 const { can } = require('../../middleware');
 
+const { getLaunchDarklyFlag } = require('../../middleware/launchDarkly');
+
+const adminCheckFlag = await getLaunchDarklyFlag(
+  'adminCheckFlag', // the tag name of the flag
+  { key: 'anonymous', anonymous: true }, // user information or anonymous user
+  false // the default value of the flag if LaunchDarkly is not responsive
+);
+
 module.exports = (
   app,
   {
@@ -103,7 +111,10 @@ module.exports = (
             id: req.id,
             message: `got single apd, id=${apd.id}, name="${apd.name}"`
           });
-          return res.send({ apd, adminCheck, budget });
+          if (adminCheckFlag === true) {
+            return res.send({ apd, adminCheck, budget });
+          }
+          return res.send({ apd, budget });
         }
 
         logger.verbose({ id: req.id, message: 'apd does not exist' });

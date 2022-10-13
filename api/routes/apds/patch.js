@@ -7,6 +7,16 @@ const {
 const { can, userCanEditAPD } = require('../../middleware');
 const { staticFields } = require('../../util/apds');
 
+const { getLaunchDarklyFlag } = require('../../middleware/launchDarkly');
+
+const adminCheckFlag = await getLaunchDarklyFlag(
+  'adminCheckFlag', // the tag name of the flag
+  { key: 'anonymous', anonymous: true }, // user information or anonymous user
+  false // the default value of the flag if LaunchDarkly is not responsive
+);
+
+// the validation constant now has the value of the flag and can be used like a regular constant
+
 module.exports = (
   app,
   { updateAPDDocument = ua, adminCheckAPDDocument = validate } = {}
@@ -63,6 +73,22 @@ module.exports = (
 
         const adminCheck = await adminCheckAPDDocument(req.params.id);
 
+        // This is temporary until we remove the feature flag
+        if (adminCheckFlag === true) {
+          return res.send({
+            errors,
+            apd: {
+              ...apd,
+              id: req.params.id,
+              created,
+              state,
+              updated
+            },
+            adminCheck,
+            budget
+          });
+        }
+
         return res.send({
           errors,
           apd: {
@@ -72,7 +98,6 @@ module.exports = (
             state,
             updated
           },
-          adminCheck,
           budget
         });
       } catch (e) {
