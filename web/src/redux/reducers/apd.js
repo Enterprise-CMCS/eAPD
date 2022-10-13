@@ -550,6 +550,10 @@ const reducer = (state = initialState, action) => {
           created: getHumanDatestamp(action.data.apd.created),
           updated: getHumanTimestamp(action.data.apd.updated),
           yearOptions: defaultAPDYearOptions
+        },
+        adminCheck: {
+          ...state.adminCheck,
+          errors: action.data.adminCheck
         }
       };
     }

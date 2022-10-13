@@ -221,7 +221,8 @@ describe('APD reducer', () => {
           // Some nobles are tossed out a window in the Second Defenestration
           // of Prague, kicking off the Thirty Years' War
           updated: '1618-05-23T10:30:00Z'
-        }
+        },
+        adminCheck: []
       }
     };
 

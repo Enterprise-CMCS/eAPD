@@ -4,8 +4,6 @@ import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
 // eslint-disable-next-line import/no-named-as-default
 import AdminCheckPanel from './AdminCheckPanel';
 
-// Note: this data is mocked in the app as well until the backend is
-// providing the data and handling frontend updates.
 const mockedData = [
   {
     section: 'APD Overview',
