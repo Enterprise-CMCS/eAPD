@@ -193,7 +193,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(0).click();
 
       cy.fixture('HIT-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, false, true); // DELETE THESE BOOLEANS
+        fillOutActivityPage.fillStateStaff(years, data.staff);
         cy.waitForSave();
       });
 
@@ -212,7 +212,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(1).click();
 
       cy.fixture('HIE-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, false, true);
+        fillOutActivityPage.fillStateStaff(years, data.staff);
         cy.waitForSave();
       });
 
@@ -231,7 +231,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(2).click();
 
       cy.fixture('MMIS-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, false, true);
+        fillOutActivityPage.fillStateStaff(years, data.staff);
         cy.waitForSave();
       });
 
@@ -250,7 +250,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(3).click();
 
       cy.fixture('HIT-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateStaff(years, data.staff, false, true);
+        fillOutActivityPage.fillStateStaff(years, data.staff);
         cy.waitForSave();
       });
 
@@ -270,12 +270,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(0).click();
 
       cy.fixture('HIT-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateExpenses(
-          years,
-          data.expenses,
-          false,
-          true
-        );
+        fillOutActivityPage.fillStateExpenses(years, data.expenses);
         cy.waitForSave();
       });
 
@@ -293,12 +288,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(1).click();
 
       cy.fixture('HIE-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateExpenses(
-          years,
-          data.expenses,
-          false,
-          true
-        );
+        fillOutActivityPage.fillStateExpenses(years, data.expenses);
         cy.waitForSave();
       });
 
@@ -316,12 +306,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(2).click();
 
       cy.fixture('MMIS-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateExpenses(
-          years,
-          data.expenses,
-          false,
-          true
-        );
+        fillOutActivityPage.fillStateExpenses(years, data.expenses);
         cy.waitForSave();
       });
 
@@ -339,12 +324,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findAllByText('State Staff and Expenses').eq(3).click();
 
       cy.fixture('HIT-activity-template.json').then(data => {
-        fillOutActivityPage.fillStateExpenses(
-          years,
-          data.expenses,
-          false,
-          true
-        );
+        fillOutActivityPage.fillStateExpenses(years, data.expenses);
         cy.waitForSave();
       });
 
@@ -366,9 +346,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.fixture('HIT-activity-template.json').then(data => {
         fillOutActivityPage.addPrivateContractors(
           data.privateContractors,
-          years,
-          false,
-          true
+          years
         );
         cy.waitForSave();
       });
@@ -391,9 +369,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.fixture('HIE-activity-template.json').then(data => {
         fillOutActivityPage.addPrivateContractors(
           data.privateContractors,
-          years,
-          false,
-          true
+          years
         );
         cy.waitForSave();
       });
@@ -414,9 +390,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.fixture('MMIS-activity-template.json').then(data => {
         fillOutActivityPage.addPrivateContractors(
           data.privateContractors,
-          years,
-          false,
-          true
+          years
         );
         cy.waitForSave();
       });
@@ -437,9 +411,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.fixture('HIT-activity-template.json').then(data => {
         fillOutActivityPage.addPrivateContractors(
           data.privateContractors,
-          years,
-          false,
-          true
+          years
         );
         cy.waitForSave();
       });
