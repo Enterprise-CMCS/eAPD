@@ -46,6 +46,7 @@ module.exports = (
             createdAt: created,
             updatedAt: updated,
             stateId: state,
+            budget: budget,
             ...apd
           } = {}
         } = await updateAPDDocument(
@@ -71,7 +72,8 @@ module.exports = (
             state,
             updated
           },
-          adminCheck
+          adminCheck,
+          budget
         });
       } catch (e) {
         logger.error({ id: req.id, message: e });

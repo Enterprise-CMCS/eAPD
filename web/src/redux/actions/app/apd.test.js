@@ -301,12 +301,11 @@ describe('application-level actions', () => {
 
     it('saves and does all the good things', () => {
       state.patch = [{ path: 'test path' }];
-      const updatedApd = { budget: {} };
       const store = mockStore(state);
 
       fetchMock
         .onPatch('/apds/id-to-update')
-        .reply(200, { apd: updatedApd, adminCheck: [] });
+        .reply(200, { apd: {}, adminCheck: [] });
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
@@ -321,12 +320,11 @@ describe('application-level actions', () => {
 
     it('saves and updates budget when necessary', () => {
       state.patch = [{ path: '/years' }];
-      const updatedApd = { budget: {} };
       const store = mockStore(state);
 
       fetchMock
         .onPatch('/apds/id-to-update')
-        .reply(200, { apd: updatedApd, adminCheck: [] });
+        .reply(200, { apd: {}, adminCheck: [] });
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },

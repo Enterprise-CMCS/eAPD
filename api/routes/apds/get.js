@@ -88,6 +88,7 @@ module.exports = (
             createdAt: created,
             updatedAt: updated,
             stateId: state,
+            budget: budget,
             ...rest
           } = apdFromDB;
           const apd = {
@@ -102,7 +103,7 @@ module.exports = (
             id: req.id,
             message: `got single apd, id=${apd.id}, name="${apd.name}"`
           });
-          return res.send({ apd, adminCheck });
+          return res.send({ apd, adminCheck, budget });
         }
 
         logger.verbose({ id: req.id, message: 'apd does not exist' });

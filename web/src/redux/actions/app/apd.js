@@ -65,9 +65,7 @@ export const saveApd = () => (dispatch, getState) => {
     return axios
       .patch(`/apds/${apdID}`, patches)
       .then(res => {
-        console.log('res', res);
-        const budget = deepCopy(res.data.apd.budget);
-        delete res.data.apd.budget;
+        const budget = (res.data.budget ??= {});
 
         dispatch({
           type: SAVE_APD_SUCCESS,
@@ -106,10 +104,8 @@ export const selectApd =
     return axios
       .get(`/apds/${id}`)
       .then(res => {
-        const budget = deepCopy(res.data.apd.budget);
-        delete res.data.apd.budget;
+        const budget = (res.data.budget ??= {});
 
-        console.log('res', res);
         dispatch({
           type: SELECT_APD_SUCCESS,
           data: { apd: res.data.apd, adminCheck: res.data.adminCheck }
