@@ -33,7 +33,8 @@ const OtherFunding = ({
   syncOtherFunding,
   adminCheck
 }) => {
-  const { costAllocationNarrative = '', costAllocation = '' } = activity,
+  const { costAllocationNarrative = { years: {} }, costAllocation = '' } =
+      activity,
     { years } = costSummary,
     yearsArray = Object.keys(years);
 
@@ -85,7 +86,7 @@ const OtherFunding = ({
               data-testid={`other-sources-${ffy}`}
               id={`cost-allocation-narrative-${ffy}-other-sources-field`}
               iframe_aria_text="Other Funding Description Text Area"
-              content={costAllocationNarrative.years[ffy].otherSources}
+              content={costAllocationNarrative?.years?.[ffy]?.otherSources}
               onSync={html => {
                 syncOtherFunding(activityIndex, ffy, html);
 
@@ -97,13 +98,13 @@ const OtherFunding = ({
               error={
                 adminCheck &&
                 costAllocation[ffy]?.other > 0 &&
-                !costAllocationNarrative?.years[ffy]?.otherSources
+                !costAllocationNarrative?.years?.[ffy]?.otherSources
               }
             />
             <div>
               {adminCheck &&
                 costAllocation[ffy]?.other > 0 &&
-                !costAllocationNarrative?.years[ffy]?.otherSources && (
+                !costAllocationNarrative?.years?.[ffy]?.otherSources && (
                   <span
                     className="ds-c-inline-error ds-c-field__error-message"
                     role="alert"

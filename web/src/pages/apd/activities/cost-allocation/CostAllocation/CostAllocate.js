@@ -19,7 +19,7 @@ const CostAllocate = ({
   adminCheck
 }) => {
   const {
-    costAllocationNarrative: { methodology }
+    costAllocationNarrative: { methodology = '' }
   } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
 
