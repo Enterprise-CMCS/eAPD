@@ -180,6 +180,7 @@ class FillOutActivityPage {
         allocation.costs[i],
         i
       );
+      cy.waitForSave();
     });
   };
 
