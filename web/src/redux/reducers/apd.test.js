@@ -1199,7 +1199,16 @@ describe('APD reducer', () => {
       { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
     );
   });
-  
+
+  it('should handle updating flags', () => {
+    expect(
+      apd(initialState, { type: FLAGS_UPDATED, flags: { validation: true } })
+    ).toEqual({
+      ...initialState,
+      adminCheck: true
+    });
+  });
+
   describe('admin check panel toggles', () => {
     it('should handle turning the admin check on', () => {
       expect(
@@ -1241,13 +1250,6 @@ describe('APD reducer', () => {
         adminCheckCollapsed: false,
         adminCheckComplete: true
       });
-
-  it('should handle updating flags', () => {
-    expect(
-      apd(initialState, { type: FLAGS_UPDATED, flags: { validation: true } })
-    ).toEqual({
-      ...initialState,
-      adminCheck: true
     });
   });
 });
