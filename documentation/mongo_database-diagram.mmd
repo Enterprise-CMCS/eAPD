@@ -1,22 +1,37 @@
-classDiagram
+erDiagram
 %% @config(../.vscode/settings.json)
-class apds {
-  +integer id
-  +json keyStatePersonnel
-  +json proposedBudget
-  +array years
-  +varchar stateId
-  +varchar status
-  +varchar name
-  +json apdOverview
-  +array activities
-  +json assurancesAndCompliances
-  +timestamp createdAt
-  +timestamp updatedAt
+apds {
+  integer id
+  json keyStatePersonnel
+  json proposedBudget
+  array years
+  varchar stateId
+  varchar status
+  varchar name
+  json apdOverview
+  array activities
+  json assurancesAndCompliances
+  timestamp createdAt
+  timestamp updatedAt
+  integer budget_id
 }
-class migrations {
-  +integer _id
-  +varchar state
-  +varchar name
-  +timestamp createdAt
+budgets {
+  integer id
+  array years
+  json federalShareByFFYQuarter
+  json hie
+  json hit
+  json mmis
+  json hitAndHie
+  json mmisByFFP
+  json combined
+  array activityTotals
+  json activities
 }
+migrations {
+  integer id
+  varchar state
+  varchar name
+  timestamp createdAt
+}
+apds ||--|| budgets : calculates

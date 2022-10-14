@@ -1,5 +1,5 @@
 import { arrToObj } from '@cms-eapd/common/utils/formatting';
-import { generateKey as defaultGenerateKey } from '../../util';
+import { generateKey as defaultGenerateKey } from '@cms-eapd/common/utils/utils';
 
 // Make this thing injectible for testing.
 let generateKey = defaultGenerateKey;
@@ -81,7 +81,8 @@ export const quarterlyFFPEntry = () =>
 export const newActivity = ({
   name = '',
   fundingSource = null,
-  years = []
+  years = [],
+  key = generateKey()
 } = {}) => {
   const costAllocationNarrativeYears = arrToObj(
     years,
@@ -101,7 +102,8 @@ export const newActivity = ({
     description: '',
     expenses: [],
     fundingSource,
-    key: generateKey(),
+    activityId: key,
+    key,
     name,
     plannedEndDate: '',
     plannedStartDate: '',

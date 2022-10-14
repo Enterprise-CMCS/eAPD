@@ -147,6 +147,7 @@ export const testExecutiveSummaryWithData = years => {
   });
 
   beforeEach(() => {
+    cy.updateFeatureFlags({ validation: true });
     cy.fixture('activity-overview-template.json').then(data => {
       activityData = data;
     });

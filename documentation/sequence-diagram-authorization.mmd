@@ -1,5 +1,5 @@
-```mermaid
 sequenceDiagram
+  %% @config(../.vscode/settings.json)
   participant W as Web App
   participant S as Server
   participant O as Okta
@@ -18,4 +18,4 @@ sequenceDiagram
   S->>S: Retrive allowed activities from database
   S-->>W: Return user profile, role, and access
   Note over W,S: {<br/>...,<br>activities: [activities],<br/>id: userId,<br/> name: displayName,<br/>state: state,<br/>role: role,<br/>...<br/>}
-```
+

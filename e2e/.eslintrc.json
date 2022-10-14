@@ -8,7 +8,7 @@
     "plugin:jsx-a11y/strict",
     "prettier"
   ],
-  "plugins": ["react"],
+  "plugins": ["react", "cypress"],
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
@@ -56,7 +56,7 @@
     "browser": true,
     "node": true,
     "commonjs": true,
-    "cypress": true
+    "cypress/globals": true
   },
   "overrides": [
     {

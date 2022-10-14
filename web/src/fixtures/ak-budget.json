@@ -5,165 +5,167 @@
         "costsByFFY": {
           "2020": {
             "federal": 3109348,
-            "medicaidShare": 3454831,
+            "medicaid": 3454831,
             "state": 345483,
             "total": 3454831
           },
           "2021": {
             "federal": 1803821,
-            "medicaidShare": 2004245,
+            "medicaid": 2004245,
             "state": 200424,
             "total": 2004245
           },
           "total": {
             "federal": 4913169,
-            "medicaidShare": 5459076,
+            "medicaid": 5459076,
             "state": 545907,
             "total": 5459076
           }
         },
         "quarterlyFFP": {
-          "2020": {
-            "1": {
-              "combined": {
-                "dollars": 777337,
-                "percent": 0
+          "years": {
+            "2020": {
+              "1": {
+                "combined": {
+                  "dollars": 777337,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 299870,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 477467,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 299870,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 777337,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 299870,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 477467,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 477467,
-                "percent": 0.25
+              "3": {
+                "combined": {
+                  "dollars": 777337,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 299870,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 477467,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 777337,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 299870,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 477467,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 3109348,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 1199480,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 1909868,
+                  "percent": 1
+                }
               }
             },
-            "2": {
-              "combined": {
-                "dollars": 777337,
-                "percent": 0
+            "2021": {
+              "1": {
+                "combined": {
+                  "dollars": 450956,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 122050,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 328906,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 299870,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 450955,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 122050,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 328905,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 477467,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 777337,
-                "percent": 0
+              "3": {
+                "combined": {
+                  "dollars": 450955,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 122050,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 328905,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 299870,
-                "percent": 0.25
+              "4": {
+                "combined": {
+                  "dollars": 450955,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 122050,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 328905,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 477467,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 777337,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 299870,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 477467,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 3109348,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 1199480,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 1909868,
-                "percent": 1
-              }
-            }
-          },
-          "2021": {
-            "1": {
-              "combined": {
-                "dollars": 450956,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 122050,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 328906,
-                "percent": 0.25
-              }
-            },
-            "2": {
-              "combined": {
-                "dollars": 450955,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 122050,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 328905,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 450955,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 122050,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 328905,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 450955,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 122050,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 328905,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 1803821,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 488200,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 1315621,
-                "percent": 1
+              "subtotal": {
+                "combined": {
+                  "dollars": 1803821,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 488200,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 1315621,
+                  "percent": 1
+                }
               }
             }
           },
@@ -178,165 +180,167 @@
         "costsByFFY": {
           "2020": {
             "federal": 1622700,
-            "medicaidShare": 1803000,
+            "medicaid": 1803000,
             "state": 180300,
             "total": 1803000
           },
           "2021": {
             "federal": 2319750,
-            "medicaidShare": 3093000,
+            "medicaid": 3093000,
             "state": 773250,
             "total": 3093000
           },
           "total": {
             "federal": 3942450,
-            "medicaidShare": 4896000,
+            "medicaid": 4896000,
             "state": 953550,
             "total": 4896000
           }
         },
         "quarterlyFFP": {
-          "2020": {
-            "1": {
-              "combined": {
-                "dollars": 405675,
-                "percent": 0
+          "years": {
+            "2020": {
+              "1": {
+                "combined": {
+                  "dollars": 405675,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 146250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 259425,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 146250,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 405675,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 146250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 259425,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 259425,
-                "percent": 0.25
+              "3": {
+                "combined": {
+                  "dollars": 405675,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 146250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 259425,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 405675,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 146250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 259425,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 1622700,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 585000,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 1037700,
+                  "percent": 1
+                }
               }
             },
-            "2": {
-              "combined": {
-                "dollars": 405675,
-                "percent": 0
+            "2021": {
+              "1": {
+                "combined": {
+                  "dollars": 579938,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 328125,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 251813,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 146250,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 579938,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 328125,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 251813,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 259425,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 405675,
-                "percent": 0
+              "3": {
+                "combined": {
+                  "dollars": 579937,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 328125,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 251812,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 146250,
-                "percent": 0.25
+              "4": {
+                "combined": {
+                  "dollars": 579937,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 328125,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 251812,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 259425,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 405675,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 146250,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 259425,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 1622700,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 585000,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 1037700,
-                "percent": 1
-              }
-            }
-          },
-          "2021": {
-            "1": {
-              "combined": {
-                "dollars": 579938,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 328125,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 251813,
-                "percent": 0.25
-              }
-            },
-            "2": {
-              "combined": {
-                "dollars": 579938,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 328125,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 251813,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 579937,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 328125,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 251812,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 579937,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 328125,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 251812,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 2319750,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 1312500,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 1007250,
-                "percent": 1
+              "subtotal": {
+                "combined": {
+                  "dollars": 2319750,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 1312500,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 1007250,
+                  "percent": 1
+                }
               }
             }
           },
@@ -351,165 +355,167 @@
         "costsByFFY": {
           "2020": {
             "federal": 414000,
-            "medicaidShare": 460000,
+            "medicaid": 460000,
             "state": 46000,
             "total": 460000
           },
           "2021": {
             "federal": 428400,
-            "medicaidShare": 476000,
+            "medicaid": 476000,
             "state": 47600,
             "total": 476000
           },
           "total": {
             "federal": 842400,
-            "medicaidShare": 936000,
+            "medicaid": 936000,
             "state": 93600,
             "total": 936000
           }
         },
         "quarterlyFFP": {
-          "2020": {
-            "1": {
-              "combined": {
-                "dollars": 103500,
-                "percent": 0
+          "years": {
+            "2020": {
+              "1": {
+                "combined": {
+                  "dollars": 103500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 103500,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 0,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 103500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 103500,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 103500,
-                "percent": 0.25
+              "3": {
+                "combined": {
+                  "dollars": 103500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 103500,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 103500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 103500,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 414000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 414000,
+                  "percent": 1
+                }
               }
             },
-            "2": {
-              "combined": {
-                "dollars": 103500,
-                "percent": 0
+            "2021": {
+              "1": {
+                "combined": {
+                  "dollars": 107100,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 107100,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 0,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 107100,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 107100,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 103500,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 103500,
-                "percent": 0
+              "3": {
+                "combined": {
+                  "dollars": 107100,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 107100,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 0,
-                "percent": 0.25
+              "4": {
+                "combined": {
+                  "dollars": 107100,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 107100,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 103500,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 103500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 0,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 103500,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 414000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 0,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 414000,
-                "percent": 1
-              }
-            }
-          },
-          "2021": {
-            "1": {
-              "combined": {
-                "dollars": 107100,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 0,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 107100,
-                "percent": 0.25
-              }
-            },
-            "2": {
-              "combined": {
-                "dollars": 107100,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 0,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 107100,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 107100,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 0,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 107100,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 107100,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 0,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 107100,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 428400,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 0,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 428400,
-                "percent": 1
+              "subtotal": {
+                "combined": {
+                  "dollars": 428400,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 428400,
+                  "percent": 1
+                }
               }
             }
           },
@@ -524,165 +530,167 @@
         "costsByFFY": {
           "2020": {
             "federal": 450000,
-            "medicaidShare": 500000,
+            "medicaid": 500000,
             "state": 50000,
             "total": 500000
           },
           "2021": {
             "federal": 1800000,
-            "medicaidShare": 2000000,
+            "medicaid": 2000000,
             "state": 200000,
             "total": 2000000
           },
           "total": {
             "federal": 2250000,
-            "medicaidShare": 2500000,
+            "medicaid": 2500000,
             "state": 250000,
             "total": 2500000
           }
         },
         "quarterlyFFP": {
-          "2020": {
-            "1": {
-              "combined": {
-                "dollars": 112500,
-                "percent": 0
+          "years": {
+            "2020": {
+              "1": {
+                "combined": {
+                  "dollars": 112500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 112500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 112500,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 112500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 112500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
+              "3": {
+                "combined": {
+                  "dollars": 112500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 112500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 112500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 112500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 450000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 450000,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 1
+                }
               }
             },
-            "2": {
-              "combined": {
-                "dollars": 112500,
-                "percent": 0
+            "2021": {
+              "1": {
+                "combined": {
+                  "dollars": 450000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 450000,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 112500,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 450000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 450000,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 112500,
-                "percent": 0
+              "3": {
+                "combined": {
+                  "dollars": 450000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 450000,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 112500,
-                "percent": 0.25
+              "4": {
+                "combined": {
+                  "dollars": 450000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 450000,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 112500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 112500,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 450000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 450000,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 1
-              }
-            }
-          },
-          "2021": {
-            "1": {
-              "combined": {
-                "dollars": 450000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 450000,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "2": {
-              "combined": {
-                "dollars": 450000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 450000,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 450000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 450000,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 450000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 450000,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 1800000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 1800000,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 1
+              "subtotal": {
+                "combined": {
+                  "dollars": 1800000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 1800000,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 1
+                }
               }
             }
           },
@@ -697,165 +705,167 @@
         "costsByFFY": {
           "2020": {
             "federal": 450000,
-            "medicaidShare": 500000,
+            "medicaid": 500000,
             "state": 50000,
             "total": 500000
           },
           "2021": {
             "federal": 1350000,
-            "medicaidShare": 1500000,
+            "medicaid": 1500000,
             "state": 150000,
             "total": 1500000
           },
           "total": {
             "federal": 1800000,
-            "medicaidShare": 2000000,
+            "medicaid": 2000000,
             "state": 200000,
             "total": 2000000
           }
         },
         "quarterlyFFP": {
-          "2020": {
-            "1": {
-              "combined": {
-                "dollars": 112500,
-                "percent": 0
+          "years": {
+            "2020": {
+              "1": {
+                "combined": {
+                  "dollars": 112500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 112500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 112500,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 112500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 112500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
+              "3": {
+                "combined": {
+                  "dollars": 112500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 112500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 112500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 112500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 450000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 450000,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 1
+                }
               }
             },
-            "2": {
-              "combined": {
-                "dollars": 112500,
-                "percent": 0
+            "2021": {
+              "1": {
+                "combined": {
+                  "dollars": 337500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 337500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 112500,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 337500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 337500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 112500,
-                "percent": 0
+              "3": {
+                "combined": {
+                  "dollars": 337500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 337500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 112500,
-                "percent": 0.25
+              "4": {
+                "combined": {
+                  "dollars": 337500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 337500,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 112500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 112500,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 450000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 450000,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 1
-              }
-            }
-          },
-          "2021": {
-            "1": {
-              "combined": {
-                "dollars": 337500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 337500,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "2": {
-              "combined": {
-                "dollars": 337500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 337500,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 337500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 337500,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 337500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 337500,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 1350000,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 1350000,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 0,
-                "percent": 1
+              "subtotal": {
+                "combined": {
+                  "dollars": 1350000,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 1350000,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 1
+                }
               }
             }
           },
@@ -870,165 +880,167 @@
         "costsByFFY": {
           "2020": {
             "federal": 362500,
-            "medicaidShare": 725000,
+            "medicaid": 725000,
             "state": 362500,
             "total": 725000
           },
           "2021": {
             "federal": 697500,
-            "medicaidShare": 775000,
+            "medicaid": 775000,
             "state": 77500,
             "total": 775000
           },
           "total": {
             "federal": 1060000,
-            "medicaidShare": 1500000,
+            "medicaid": 1500000,
             "state": 440000,
             "total": 1500000
           }
         },
         "quarterlyFFP": {
-          "2020": {
-            "1": {
-              "combined": {
-                "dollars": 90625,
-                "percent": 0
+          "years": {
+            "2020": {
+              "1": {
+                "combined": {
+                  "dollars": 90625,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 81250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 9375,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 81250,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 90625,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 81250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 9375,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 9375,
-                "percent": 0.25
+              "3": {
+                "combined": {
+                  "dollars": 90625,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 81250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 9375,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 90625,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 81250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 9375,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 362500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 325000,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 37500,
+                  "percent": 1
+                }
               }
             },
-            "2": {
-              "combined": {
-                "dollars": 90625,
-                "percent": 0
+            "2021": {
+              "1": {
+                "combined": {
+                  "dollars": 174375,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 146250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 28125,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 81250,
-                "percent": 0.25
+              "2": {
+                "combined": {
+                  "dollars": 174375,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 146250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 28125,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 9375,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 90625,
-                "percent": 0
+              "3": {
+                "combined": {
+                  "dollars": 174375,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 146250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 28125,
+                  "percent": 0.25
+                }
               },
-              "contractors": {
-                "dollars": 81250,
-                "percent": 0.25
+              "4": {
+                "combined": {
+                  "dollars": 174375,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 146250,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 28125,
+                  "percent": 0.25
+                }
               },
-              "inHouse": {
-                "dollars": 9375,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 90625,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 81250,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 9375,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 362500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 325000,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 37500,
-                "percent": 1
-              }
-            }
-          },
-          "2021": {
-            "1": {
-              "combined": {
-                "dollars": 174375,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 146250,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 28125,
-                "percent": 0.25
-              }
-            },
-            "2": {
-              "combined": {
-                "dollars": 174375,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 146250,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 28125,
-                "percent": 0.25
-              }
-            },
-            "3": {
-              "combined": {
-                "dollars": 174375,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 146250,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 28125,
-                "percent": 0.25
-              }
-            },
-            "4": {
-              "combined": {
-                "dollars": 174375,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 146250,
-                "percent": 0.25
-              },
-              "inHouse": {
-                "dollars": 28125,
-                "percent": 0.25
-              }
-            },
-            "subtotal": {
-              "combined": {
-                "dollars": 697500,
-                "percent": 0
-              },
-              "contractors": {
-                "dollars": 585000,
-                "percent": 1
-              },
-              "inHouse": {
-                "dollars": 112500,
-                "percent": 1
+              "subtotal": {
+                "combined": {
+                  "dollars": 697500,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 585000,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 112500,
+                  "percent": 1
+                }
               }
             }
           },
@@ -1062,58 +1074,60 @@
     },
     "federalShareByFFYQuarter": {
       "hitAndHie": {
-        "2020": {
-          "1": {
-            "inHouse": 590342,
-            "contractors": 606120,
-            "combined": 1196462
+        "years": {
+          "2020": {
+            "1": {
+              "inHouse": 590342,
+              "contractors": 606120,
+              "combined": 1196462
+            },
+            "2": {
+              "inHouse": 590342,
+              "contractors": 606120,
+              "combined": 1196462
+            },
+            "3": {
+              "inHouse": 590342,
+              "contractors": 606120,
+              "combined": 1196462
+            },
+            "4": {
+              "inHouse": 590342,
+              "contractors": 606120,
+              "combined": 1196462
+            },
+            "subtotal": {
+              "inHouse": 2361368,
+              "contractors": 2424480,
+              "combined": 4785848
+            }
           },
-          "2": {
-            "inHouse": 590342,
-            "contractors": 606120,
-            "combined": 1196462
-          },
-          "3": {
-            "inHouse": 590342,
-            "contractors": 606120,
-            "combined": 1196462
-          },
-          "4": {
-            "inHouse": 590342,
-            "contractors": 606120,
-            "combined": 1196462
-          },
-          "subtotal": {
-            "inHouse": 2361368,
-            "contractors": 2424480,
-            "combined": 4785848
-          }
-        },
-        "2021": {
-          "1": {
-            "inHouse": 464131,
-            "contractors": 1055800,
-            "combined": 1519931
-          },
-          "2": {
-            "inHouse": 464130,
-            "contractors": 1055800,
-            "combined": 1519930
-          },
-          "3": {
-            "inHouse": 464130,
-            "contractors": 1055800,
-            "combined": 1519930
-          },
-          "4": {
-            "inHouse": 464130,
-            "contractors": 1055800,
-            "combined": 1519930
-          },
-          "subtotal": {
-            "inHouse": 1856521,
-            "contractors": 4223200,
-            "combined": 6079721
+          "2021": {
+            "1": {
+              "inHouse": 464131,
+              "contractors": 1055800,
+              "combined": 1519931
+            },
+            "2": {
+              "inHouse": 464130,
+              "contractors": 1055800,
+              "combined": 1519930
+            },
+            "3": {
+              "inHouse": 464130,
+              "contractors": 1055800,
+              "combined": 1519930
+            },
+            "4": {
+              "inHouse": 464130,
+              "contractors": 1055800,
+              "combined": 1519930
+            },
+            "subtotal": {
+              "inHouse": 1856521,
+              "contractors": 4223200,
+              "combined": 6079721
+            }
           }
         },
         "total": {
@@ -1123,58 +1137,60 @@
         }
       },
       "mmis": {
-        "2020": {
-          "1": {
-            "inHouse": 259425,
-            "contractors": 146250,
-            "combined": 405675
+        "years": {
+          "2020": {
+            "1": {
+              "inHouse": 259425,
+              "contractors": 146250,
+              "combined": 405675
+            },
+            "2": {
+              "inHouse": 259425,
+              "contractors": 146250,
+              "combined": 405675
+            },
+            "3": {
+              "inHouse": 259425,
+              "contractors": 146250,
+              "combined": 405675
+            },
+            "4": {
+              "inHouse": 259425,
+              "contractors": 146250,
+              "combined": 405675
+            },
+            "subtotal": {
+              "inHouse": 1037700,
+              "contractors": 585000,
+              "combined": 1622700
+            }
           },
-          "2": {
-            "inHouse": 259425,
-            "contractors": 146250,
-            "combined": 405675
-          },
-          "3": {
-            "inHouse": 259425,
-            "contractors": 146250,
-            "combined": 405675
-          },
-          "4": {
-            "inHouse": 259425,
-            "contractors": 146250,
-            "combined": 405675
-          },
-          "subtotal": {
-            "inHouse": 1037700,
-            "contractors": 585000,
-            "combined": 1622700
-          }
-        },
-        "2021": {
-          "1": {
-            "inHouse": 251813,
-            "contractors": 328125,
-            "combined": 579938
-          },
-          "2": {
-            "inHouse": 251813,
-            "contractors": 328125,
-            "combined": 579938
-          },
-          "3": {
-            "inHouse": 251812,
-            "contractors": 328125,
-            "combined": 579937
-          },
-          "4": {
-            "inHouse": 251812,
-            "contractors": 328125,
-            "combined": 579937
-          },
-          "subtotal": {
-            "inHouse": 1007250,
-            "contractors": 1312500,
-            "combined": 2319750
+          "2021": {
+            "1": {
+              "inHouse": 251813,
+              "contractors": 328125,
+              "combined": 579938
+            },
+            "2": {
+              "inHouse": 251813,
+              "contractors": 328125,
+              "combined": 579938
+            },
+            "3": {
+              "inHouse": 251812,
+              "contractors": 328125,
+              "combined": 579937
+            },
+            "4": {
+              "inHouse": 251812,
+              "contractors": 328125,
+              "combined": 579937
+            },
+            "subtotal": {
+              "inHouse": 1007250,
+              "contractors": 1312500,
+              "combined": 2319750
+            }
           }
         },
         "total": {

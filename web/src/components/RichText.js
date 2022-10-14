@@ -28,7 +28,7 @@ import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
 
 import { uploadFile } from '../redux/actions/editApd';
-import { generateKey } from '../util';
+import { generateKey } from '@cms-eapd/common/utils/utils';
 import '../file-loader';
 
 const VALID_FILE_TYPES = [
@@ -196,6 +196,7 @@ class RichText extends Component {
     return (
       <Fragment>
         <div
+          id={'tinymce-wrapper'}
           className={
             this.props.error
               ? 'rte--wrapper ds-c-field--error ds-u-radius'

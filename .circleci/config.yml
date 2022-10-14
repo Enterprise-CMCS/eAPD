@@ -17,9 +17,7 @@ workflows:
   #    jobs:
   #      - cleanup preview deploys
 
-  # Workflow to scan dependencies for vulnerabilities every night
-
-
+# Workflows to validate IaC configurations  
   packer validation:
     triggers:
       - schedule:
@@ -32,9 +30,19 @@ workflows:
       - packer validation tests:
           name: Packer Validation Tests
           
+  terraform validation:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *'
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - terraform validation tests:
+          name: Terraform Validation Tests
 
-
-
+# Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
@@ -110,6 +118,7 @@ workflows:
             - frontend lint
             - backend lint
             - dependency vulnerability scan
+            - yaml test
 
       - chromatic deployment:
           filters:
@@ -123,6 +132,7 @@ workflows:
             - backend lint
             - dependency vulnerability scan
             - yaml test
+            - owasp zap scan
             - e2e test
 
       # backend jobs
@@ -339,6 +349,7 @@ jobs:
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
               --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
+              --var preview_ld_api_key=$PREVIEW_LD_API_KEY --var preview_ld_client_id=$PREVIEW_LD_CLIENT_ID \
               preview-ami.pkr.hcl
   
   packer validation tests:
@@ -371,6 +382,7 @@ jobs:
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
               --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
+              --var preview_ld_api_key=$PREVIEW_LD_API_KEY --var preview_ld_client_id=$PREVIEW_LD_CLIENT_ID \
             preview-ami.pkr.hcl
       - run:
           name: Validate Mongo AMI
@@ -396,7 +408,75 @@ jobs:
             packer validate --var vpc_id=$VPC_ID --var subnet_id=$SUBNET_ID --var gold_owner=$GOLD_OWNER --var environment=Production \
             backend-ami.pkr.hcl
 
-  
+
+  terraform validation tests:
+    docker:
+      - image: cimg/base:2022.06-22.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+          name: cloning AWS notify module
+          working_directory: ~/
+          command: |
+            git clone https://github.com/terraform-aws-modules/terraform-aws-notify-slack
+      - run: 
+          name: install terraform
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+            sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            sudo apt-get update && sudo apt-get install terraform=1.2.4 
+      - run:
+          name: validate main.tf
+          working_directory: ~/project/terraform/legacy/
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init            
+            terraform validate
+      - run: 
+          name: validate preview.tf
+          working_directory: ~/project/terraform/legacy/preview
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
+            terraform validate
+      - run: 
+          name: validate public.tf
+          working_directory: ~/project/terraform/legacy/public
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
+            terraform validate
+      - run: 
+          name: validate staging.tf
+          working_directory: ~/project/terraform/legacy/staging
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
+            terraform validate
+      - run: 
+          name: validate prod.tf
+          working_directory: ~/project/terraform/legacy/prod
+          command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            terraform init
+            terraform validate
+
   build production staging ami:
     docker:
       - image: cimg/base:2022.06-22.04
@@ -562,7 +642,6 @@ jobs:
             sudo dpkg -i google-chrome-stable_current_amd64.deb || true
             sudo apt-get -f install
             sudo dpkg -i google-chrome-stable_current_amd64.deb
-
              # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -582,11 +661,10 @@ jobs:
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
             export TEALIUM_TAG="$PREVIEW_TEALIUM_TAG"
             export TEALIUM_ENV="test"
-
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export LD_CLIENT_ID="$PREVIEW_LD_CLIENT_ID"
             nvm use 16.16.0
             yarn install --frozen-lockfile
-            yarn workspace @cms-eapd/common build
-            yarn workspace @cms-eapd/api build
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
             docker-compose exec api yarn run migrate
@@ -597,7 +675,6 @@ jobs:
           no_output_timeout: 30m
           command: |
             echo $CYPRESS_ENV >> ./cypress.env.json
-
             nvm use 16.16.0
             npx cypress@10.5.0 install --force
             npx cypress verify
@@ -678,15 +755,13 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_PORT=54325; fi
             if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "6" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
-
+  
   chromatic deployment:
-    yaml test:
     docker:
       - image: cimg/node:16.16.0
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
-    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -744,19 +819,17 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project/
+          working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: run tests
           working_directory: ~/project/api
+          no_output_timeout: 60m
           command: |
-            # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api 
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -785,19 +858,17 @@ jobs:
           at: ~/project
       - run:
           name: build API image
-          working_directory: ~/project/
+          working_directory: ~/project
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: run tests
           working_directory: ~/project/api
+          no_output_timeout: 60m
           command: |
-            # Switch to Node 16.16.0.
-            export NVM_DIR="/opt/circleci/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 16.16.0
-            nvm alias default 16.16.0
+            echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
+            export COMPOSE_PROJECT_NAME=api
             ./unit-test.sh
       - run:
           name: report coverage
@@ -831,7 +902,7 @@ jobs:
       - run:
           name: build the web app
           working_directory: ~/project/web
-          command: TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
+          command: LD_CLIENT_ID="${<< parameters.env >>_LD_CLIENT_ID}" TEALIUM_ENV="${<< parameters.env >>_TEALIUM_ENV}" TEALIUM_TAG="${<< parameters.env >>_TEALIUM_TAG}" API_URL="${<< parameters.env >>_WEB_API_URL}" OKTA_DOMAIN="${<< parameters.env >>_OKTA_DOMAIN}" OKTA_SERVER_ID="${<< parameters.env >>_OKTA_SERVER_ID}" OKTA_CLIENT_ID="${<< parameters.env >>_OKTA_CLIENT_ID}" JWT_SECRET="${<< parameters.env >>_JWT_SECRET}" MONGO_INITDB_DATABASE="${<< parameters.env >>_MONGO_INITDB_DATABASE}" MONGO_URL="${<< parameters.env >>_MONGO_URL}" yarn build
       - persist_to_workspace:
           root: ~/project
           paths:
@@ -871,11 +942,16 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project
+      - restore_cache:
+          name: restore yarn package cache
+          keys:
+            - cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: run tests
           working_directory: ~/project/web
           command: |
             export TEALIUM_ENV="test"
+            LD_CLIENT_ID=
             yarn test --runInBand
       - run:
           name: report coverage
@@ -913,13 +989,27 @@ jobs:
           name: start everything up
           working_directory: ~/project
           no_output_timeout: 30m
+          # setting LD_API_KEY to null so it doesn't connect to LD
           command: |
+            export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
+            export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
+            export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
+            export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
+            export JWT_SECRET="$PREVIEW_JWT_SECRET"
+            export LD_API_KEY=
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            sleep 5
-            docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
-            docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
+            echo 'Checking to see if the server is running'
+            until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
+                sleep 10;
+                echo '.';
+            done;
+            echo 'Server is running and status is healthy'
+
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
+            docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
           name: pull owasp zap docker image
           working_directory: ~/project/api
@@ -934,6 +1024,13 @@ jobs:
           command: |
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
+            echo 'Checking to see if the server is running'
+            until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
+                sleep 10;
+                echo '.';
+            done;
+            echo 'Server is running and status is healthy'
+
             docker run \
               --network api_default \
               -v $(pwd)/owasp:/zap/wrk:rw \
@@ -991,8 +1088,10 @@ jobs:
               --MONGO_DATABASE "${<< parameters.env >>_MONGO_DATABASE}" \
               --MONGO_URL "${<< parameters.env >>_MONGO_URL}" \
               --MONGO_ADMIN_URL "${<< parameters.env >>_MONGO_ADMIN_URL}" \
-              --TEALIUM_TAG "${<< parameters.env >>_PREVIEW_TEALIUM_TAG}" \
-              --TEALIUM_ENV "${<< parameters.env >>_PREVIEW_TEALIUM_ENV}"
+              --TEALIUM_TAG "${<< parameters.env >>_TEALIUM_TAG}" \
+              --TEALIUM_ENV "${<< parameters.env >>_TEALIUM_ENV}" \
+              --LD_API_KEY "${<< parameters.env >>_LD_API_KEY}" \
+              --LD_CLIENT_ID "${<< parameters.env >>_LD_CLIENT_ID}"
 
       - run:
           when: on_fail
@@ -1115,7 +1214,9 @@ jobs:
                 --MONGO_ADMIN_URL "$PREVIEW_MONGO_ADMIN_URL" \
                 --DATABASE_URL "$PREVIEW_DATABASE_URL" \
                 --TEALIUM_TAG "$PREVIEW_TEALIUM_TAG" \
-                --TEALIUM_ENV "$PREVIEW_TEALIUM_ENV"
+                --TEALIUM_ENV "$PREVIEW_TEALIUM_ENV" \
+                --LD_API_KEY "$PREVIEW_LD_API_KEY" \
+                --LD_CLIENT_ID "$PREVIEW_LD_CLIENT_ID"
               )
               ./github-comment.sh "$PRNUM" "https://$URL" "$CIRCLE_SHA1"
             else

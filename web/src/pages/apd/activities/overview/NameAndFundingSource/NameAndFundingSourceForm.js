@@ -23,6 +23,7 @@ const NameAndFundingSourceForm = ({
   const {
     control,
     trigger,
+    clearErrors,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -35,8 +36,10 @@ const NameAndFundingSourceForm = ({
   useEffect(() => {
     if (adminCheck) {
       trigger(['name', 'fundingSource']);
+    } else {
+      clearErrors();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const choices = ['HIT', 'HIE', 'MMIS'].map(choice => ({
     checked: fundingSource === choice,

@@ -1,8 +1,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { UPDATE_BUDGET } from '../budget';
-
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from './symbols';
 import { saveKeyPersonnel, removeKeyPersonnel } from './keyPersonnel';
 
@@ -33,8 +31,7 @@ describe('APD edit actions for APD key personnel', () => {
         type: EDIT_APD,
         path: '/keyStatePersonnel/keyPersonnel/0',
         value: {}
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 
@@ -48,10 +45,6 @@ describe('APD edit actions for APD key personnel', () => {
       {
         type: REMOVE_APD_ITEM,
         path: '/keyStatePersonnel/keyPersonnel/17'
-      },
-      {
-        type: UPDATE_BUDGET,
-        state: 'remove state'
       }
     ]);
   });
@@ -78,8 +71,7 @@ describe('APD edit actions for APD key personnel', () => {
         type: EDIT_APD,
         path: '/keyStatePersonnel/keyPersonnel/0',
         value: personnel
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 });

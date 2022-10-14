@@ -20,10 +20,20 @@ const DeleteModal = ({ onDelete, onCancel, objType }) => {
       className="ds-u-left-border-warning"
       actionsClassName="ds-u-text-align--right ds-u-margin-bottom--0"
       actions={[
-        <Button variation="danger" onClick={onDelete} key={uuidv4()}>
+        <Button
+          variation="danger"
+          onClick={onDelete}
+          key={uuidv4()}
+          id="dialog-delete"
+        >
           {bodyOptions?.buttonText || 'Delete'}
         </Button>,
-        <Button variation="transparent" onClick={onCancel} key={uuidv4()}>
+        <Button
+          variation="transparent"
+          onClick={onCancel}
+          key={uuidv4()}
+          id="dialog-cancel"
+        >
           Cancel
         </Button>
       ]}

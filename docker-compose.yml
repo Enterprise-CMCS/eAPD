@@ -34,13 +34,15 @@ services:
       context: .
       dockerfile: ./web/Dockerfile
     image: cms-eapd/web
+    restart: unless-stopped
     environment:
       - API_URL=http://localhost:8081
-      - TEALIUM_TAG=${TEALIUM_TAG}
+      - TEALIUM_TAG=${TEALIUM_TAG:-default}
       - OKTA_DOMAIN=${OKTA_DOMAIN}
       - OKTA_SERVER_ID=${OKTA_SERVER_ID}
       - OKTA_CLIENT_ID=${OKTA_CLIENT_ID}
       - TEALIUM_ENV=${TEALIUM_ENV:-dev}
+      - LD_CLIENT_ID=${LD_CLIENT_ID}
     volumes:
       - type: bind
         source: ./web
@@ -60,6 +62,7 @@ services:
       context: .
       dockerfile: ./api/Dockerfile
     image: cms-eapd/api
+    restart: unless-stopped
     depends_on:
       - db
       - mongo
@@ -78,6 +81,7 @@ services:
       - DISABLE_SAME_SITE=yes
       - DEV_DB_NAME=${DEV_DB_NAME:-hitech_apd}
       - TEST_DB_NAME=${TEST_DB_NAME:-hitech_apd_test}
+      - LD_API_KEY=${LD_API_KEY}
     volumes:
       - type: bind
         source: ./api

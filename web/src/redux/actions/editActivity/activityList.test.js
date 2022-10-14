@@ -1,8 +1,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { UPDATE_BUDGET } from '../budget';
-
 import {
   ADD_APD_ITEM,
   APD_ACTIVITIES_CHANGE,
@@ -40,10 +38,10 @@ describe('APD activity edit actions for overview section', () => {
       {
         type: ADD_APD_ITEM,
         path: '/activities/-',
+        key: expect.stringMatching(/^[a-f0-9]{8}$/),
         state
       },
-      { type: APD_ACTIVITIES_CHANGE, activities: [] },
-      { type: UPDATE_BUDGET, state }
+      { type: APD_ACTIVITIES_CHANGE, activities: [] }
     ]);
   });
 
@@ -52,8 +50,7 @@ describe('APD activity edit actions for overview section', () => {
 
     expect(store.getActions()).toEqual([
       { type: REMOVE_APD_ITEM, path: '/activities/3' },
-      { type: APD_ACTIVITIES_CHANGE, activities: [] },
-      { type: UPDATE_BUDGET, state }
+      { type: APD_ACTIVITIES_CHANGE, activities: [] }
     ]);
   });
 
@@ -77,8 +74,7 @@ describe('APD activity edit actions for overview section', () => {
         type: EDIT_APD,
         path: '/activities/13/fundingSource',
         value: 'funding source'
-      },
-      { type: UPDATE_BUDGET, state }
+      }
     ]);
   });
 });

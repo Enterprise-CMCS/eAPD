@@ -87,6 +87,7 @@ describe('activities reducer helpers', () => {
       expenses: [],
       fundingSource: null,
       key: '--- key ---',
+      activityId: '--- key ---',
       name: '',
       plannedEndDate: '',
       plannedStartDate: '',
