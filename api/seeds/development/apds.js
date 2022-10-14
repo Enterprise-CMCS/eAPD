@@ -1,5 +1,5 @@
-const { akAPD } = require('./01-akAPD');
-const { akAPDNoActivities } = require('./02-akAPDNoActivities');
+const { default: akAPD } = require('./01-akAPD');
+const { default: akAPDNoActivities } = require('./02-akAPDNoActivities');
 
 const data = [
   {
