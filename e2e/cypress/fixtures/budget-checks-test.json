@@ -73,18 +73,18 @@
 
   "afterContractorHIT": {
     "budgetAndFFP": [
-      ["Private Contractor Subtotal", "$25,000"],
-      ["Private Contractor Subtotal", "$25,000"]
+      ["Private Contractor Subtotal", "$30,000"],
+      ["Private Contractor Subtotal", "$30,000"]
     ],
-    "CACTable": [{ "HIT Total": ["$201,000"] }, { "HIT Total": ["$203,000"] }],
+    "CACTable": [{ "HIT Total": ["$418,000"] }, { "HIT Total": ["$442,000"] }],
     "FFPActivitiesTable": [
-      { "Private Contractor": ["$12,500", "$12,500", "$25,000"] },
-      { "Private Contractor": ["$2,500", "$22,500", "$25,000"] }
+      { "Private Contractor": ["$15,000", "$15,000", "$30,000"] },
+      { "Private Contractor": ["$3,000", "$27,000", "$30,000"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$258,500", "$319,750", "$578,250"],
-      "FFY 2024": ["$178,487", "$404,263", "$582,750"],
-      "Total": ["$436,987", "$724,013", "$1,161,000"]
+      "FFY 2023": ["$543,584", "$660,090", "$1,203,674"],
+      "FFY 2024": ["$418,680", "$922,940", "$1,341,620"],
+      "Total": ["$962,264", "$1,583,030", "$2,545,294"]
     },
     "noFFP": false
   },
@@ -127,18 +127,18 @@
 
   "afterContractorHIE": {
     "budgetAndFFP": [
-      ["Private Contractor Subtotal", "$40,000"],
-      ["Private Contractor Subtotal", "$40,000"]
+      ["Private Contractor Subtotal", "$41,500"],
+      ["Private Contractor Subtotal", "$41,500"]
     ],
-    "CACTable": [{ "HIE Total": ["$162,500"] }, { "HIE Total": ["$165,000"] }],
+    "CACTable": [{ "HIE Total": ["$274,512"] }, { "HIE Total": ["$277,802"] }],
     "FFPActivitiesTable": [
-      { "Private Contractor": ["$10,000", "$30,000", "$40,000"] },
-      { "Private Contractor": ["$20,000", "$20,000", "$40,000"] }
+      { "Private Contractor": ["$10,375", "$31,125", "$41,500"] },
+      { "Private Contractor": ["$20,750", "$20,750", "$41,500"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$268,500", "$349,750", "$618,250"],
-      "FFY 2024": ["$198,487", "$424,263", "$622,750"],
-      "Total": ["$466,987", "$774,013", "$1,241,000"]
+      "FFY 2023": ["$553,959", "$691,215", "$1,245,174"],
+      "FFY 2024": ["$439,430", "$943,690", "$1,383,120"],
+      "Total": ["$993,389", "$1,634,905", "$2,628,294"]
     },
     "noFFP": false
   },
@@ -187,21 +187,21 @@
 
   "afterContractorMMIS": {
     "budgetAndFFP": [
-      ["Private Contractor Subtotal", "$30,000"],
-      ["Private Contractor Subtotal", "$35,000"]
+      ["Private Contractor Subtotal", "$33,000"],
+      ["Private Contractor Subtotal", "$37,000"]
     ],
     "CACTable": [
-      { "MMIS Total": ["$158,750"] },
-      { "MMIS Total": ["$161,750"] }
+      { "MMIS Total": ["$247,662"] },
+      { "MMIS Total": ["$338,318"] }
     ],
     "FFPActivitiesTable": [
-      { "Private Contractor": ["$15,000", "$15,000", "$30,000"] },
-      { "Private Contractor": ["$8,750", "$26,250", "$35,000"] }
+      { "Private Contractor": ["$16,500", "$16,500", "$33,000"] },
+      { "Private Contractor": ["$9,250", "$27,750", "$37,000"] }
     ],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$283,500", "$364,750", "$648,250"],
-      "FFY 2024": ["$207,237", "$450,513", "$657,750"],
-      "Total": ["$490,737", "$815,263", "$1,306,000"]
+      "FFY 2023": ["$570,459", "$707,715", "$1,278,174"],
+      "FFY 2024": ["$448,680", "$971,440", "$1,420,120"],
+      "Total": ["$1,019,139", "$1,679,155", "$2,698,294"]
     },
     "noFFP": false
   },
@@ -238,15 +238,15 @@
 
   "afterContractorNoFFP": {
     "budgetAndFFP": [
-      ["Private Contractor Subtotal", "$25,000"],
-      ["Private Contractor Subtotal", "$25,000"]
+      ["Private Contractor Subtotal", "$30,000"],
+      ["Private Contractor Subtotal", "$30,000"]
     ],
     "CACTable": [],
     "FFPActivitiesTable": [],
     "summaryBudgetTotals": {
-      "FFY 2023": ["$296,000", "$377,250", "$673,250"],
-      "FFY 2024": ["$219,737", "$463,013", "$682,750"],
-      "Total": ["$515,737", "$840,263", "$1,356,000"]
+      "FFY 2023": ["$585,459", "$722,715", "$1,308,174"],
+      "FFY 2024": ["$463,680", "$986,440", "$1,450,120"],
+      "Total": ["$1,049,139", "$1,709,155", "$2,758,294"]
     },
     "noFFP": true
   }

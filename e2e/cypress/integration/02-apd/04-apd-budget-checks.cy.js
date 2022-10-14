@@ -52,9 +52,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   describe('Budget Checks', () => {
     it('Creates activities and sets fed state split on each one', () => {
       // HIT Activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(0).click();
-      cy.findAllByText('Budget and FFP').eq(0).click();
+      cy.goToBudgetAndFFP(0);
 
       _.forEach(years, (years, i) => {
         if (i === 0) {
@@ -69,10 +67,8 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.goToActivityDashboard();
       cy.findByRole('button', { name: 'Add Activity' }).click();
       cy.waitForSave();
-      cy.get('#activities').findAllByText('Edit').eq(1).click();
 
-      cy.findByRole('radio', { name: /HIE/i }).check({ force: true });
-      cy.findAllByText('Budget and FFP').eq(1).click();
+      cy.goToBudgetAndFFP(1);
 
       _.forEach(years, (years, i) => {
         if (i === 0) {
@@ -87,10 +83,8 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.goToActivityDashboard();
       cy.findByRole('button', { name: 'Add Activity' }).click();
       cy.waitForSave();
-      cy.get('#activities').findAllByText('Edit').eq(2).click();
 
-      cy.findByRole('radio', { name: /MMIS/i }).check({ force: true });
-      cy.findAllByText('Budget and FFP').eq(2).click();
+      cy.goToBudgetAndFFP(2);
 
       _.forEach(years, (years, i) => {
         if (i === 0) {
@@ -105,8 +99,8 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.goToActivityDashboard();
       cy.findByRole('button', { name: 'Add Activity' }).click();
       cy.waitForSave();
-      cy.get('#activities').findAllByText('Edit').eq(3).click();
-      cy.findAllByText('Budget and FFP').eq(3).click();
+
+      cy.goToBudgetAndFFP(3);
 
       _.forEach(years, (years, i) => {
         if (i === 0) {
@@ -188,9 +182,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
 
     it('Checks State Staff Budget', () => {
       // Adds state staff to HIT activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(0).click();
-      cy.findAllByText('State Staff and Expenses').eq(0).click();
+      cy.goToStateStaffAndExpenses(0);
 
       cy.fixture('HIT-activity-template.json').then(data => {
         fillOutActivityPage.fillStateStaff(years, data.staff);
@@ -206,10 +198,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
 
       // Adds state staff to HIE activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(1).click();
-
-      cy.findAllByText('State Staff and Expenses').eq(1).click();
+      cy.goToStateStaffAndExpenses(1);
 
       cy.fixture('HIE-activity-template.json').then(data => {
         fillOutActivityPage.fillStateStaff(years, data.staff);
@@ -225,10 +214,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
 
       // Adds state staff to MMIS activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(2).click();
-
-      cy.findAllByText('State Staff and Expenses').eq(2).click();
+      cy.goToStateStaffAndExpenses(2);
 
       cy.fixture('MMIS-activity-template.json').then(data => {
         fillOutActivityPage.fillStateStaff(years, data.staff);
@@ -244,10 +230,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
 
       // Adds state staff to a no FFP activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(3).click();
-
-      cy.findAllByText('State Staff and Expenses').eq(3).click();
+      cy.goToStateStaffAndExpenses(3);
 
       cy.fixture('HIT-activity-template.json').then(data => {
         fillOutActivityPage.fillStateStaff(years, data.staff);
@@ -265,9 +248,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
 
     it('Checks Other State Expense Budget', () => {
       // Adds Other State Expense to HIT activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(0).click();
-      cy.findAllByText('State Staff and Expenses').eq(0).click();
+      cy.goToStateStaffAndExpenses(0);
 
       cy.fixture('HIT-activity-template.json').then(data => {
         fillOutActivityPage.fillStateExpenses(years, data.expenses);
@@ -283,9 +264,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
 
       // Adds Other State Expense to HIE activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(1).click();
-      cy.findAllByText('State Staff and Expenses').eq(1).click();
+      cy.goToStateStaffAndExpenses(1);
 
       cy.fixture('HIE-activity-template.json').then(data => {
         fillOutActivityPage.fillStateExpenses(years, data.expenses);
@@ -301,9 +280,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
 
       // Adds Other State Expense to MMIS activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(2).click();
-      cy.findAllByText('State Staff and Expenses').eq(2).click();
+      cy.goToStateStaffAndExpenses(2);
 
       cy.fixture('MMIS-activity-template.json').then(data => {
         fillOutActivityPage.fillStateExpenses(years, data.expenses);
@@ -319,9 +296,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
 
       // Adds Other State Expense to a no FFP activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(3).click();
-      cy.findAllByText('State Staff and Expenses').eq(3).click();
+      cy.goToStateStaffAndExpenses(3);
 
       cy.fixture('HIT-activity-template.json').then(data => {
         fillOutActivityPage.fillStateExpenses(years, data.expenses);
@@ -337,11 +312,9 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
     });
 
-    it.skip('Checks Private Contractors Budget', () => {
+    it('Checks Private Contractors Budget', () => {
       // Adds Private Contractor to HIT activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(0).click();
-      cy.findAllByText('Private Contractor Costs').eq(0).click();
+      cy.goToPrivateContractorCosts(0);
 
       cy.fixture('HIT-activity-template.json').then(data => {
         fillOutActivityPage.addPrivateContractors(
@@ -351,20 +324,16 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
         cy.waitForSave();
       });
 
-      cy.wait(500000);
-
       checkBudgetAndFFP(years, budgetData.afterContractorHIT, 0);
       checkProposedBudget(
         years,
         budgetData.afterContractorHIT,
-        [578250, 582750],
+        [1203674, 1341620],
         'HIT'
       );
 
       // Adds Private Contractor to HIE activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(1).click();
-      cy.findAllByText('Private Contractor Costs').eq(1).click();
+      cy.goToPrivateContractorCosts(1);
 
       cy.fixture('HIE-activity-template.json').then(data => {
         fillOutActivityPage.addPrivateContractors(
@@ -378,14 +347,12 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterContractorHIE,
-        [618250, 622750],
+        [1245174, 1383120],
         'HIE'
       );
 
       // Adds Private Contractor to MMIS activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(2).click();
-      cy.findAllByText('Private Contractor Costs').eq(2).click();
+      cy.goToPrivateContractorCosts(2);
 
       cy.fixture('MMIS-activity-template.json').then(data => {
         fillOutActivityPage.addPrivateContractors(
@@ -399,14 +366,12 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterContractorMMIS,
-        [648250, 657750],
+        [1278174, 1420120],
         'MMIS'
       );
 
       // Adds Private Contractor to a no FFP activity
-      cy.goToActivityDashboard();
-      cy.get('#activities').findAllByText('Edit').eq(3).click();
-      cy.findAllByText('Private Contractor Costs').eq(3).click();
+      cy.goToPrivateContractorCosts(3);
 
       cy.fixture('HIT-activity-template.json').then(data => {
         fillOutActivityPage.addPrivateContractors(
@@ -420,7 +385,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       checkProposedBudget(
         years,
         budgetData.afterContractorNoFFP,
-        [673250, 682750],
+        [1308174, 1450120],
         'noFFP'
       );
     });
