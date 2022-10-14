@@ -68,6 +68,10 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.findByRole('button', { name: 'Add Activity' }).click();
       cy.waitForSave();
 
+      cy.get('#activities').findAllByText('Edit').eq(1).click();
+      cy.findByRole('radio', { name: /HIE/i }).check({ force: true });
+      cy.waitForSave();
+
       cy.goToBudgetAndFFP(1);
 
       _.forEach(years, (years, i) => {
@@ -82,6 +86,10 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       // MMIS Activity
       cy.goToActivityDashboard();
       cy.findByRole('button', { name: 'Add Activity' }).click();
+      cy.waitForSave();
+
+      cy.get('#activities').findAllByText('Edit').eq(2).click();
+      cy.findByRole('radio', { name: /MMIS/i }).check({ force: true });
       cy.waitForSave();
 
       cy.goToBudgetAndFFP(2);
