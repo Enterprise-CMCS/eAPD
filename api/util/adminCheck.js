@@ -156,8 +156,8 @@ const adminCheckApd = apd => {
     return activity.fundingSource;
   });
 
-  let activityIndexes = {};
-  const getActivityIndexes = apd?.activities?.forEach((activity, index) => {
+  const activityIndexes = {};
+  apd?.activities?.forEach((activity, index) => {
     activityIndexes[activity.activityId] = index;
   });
 

@@ -1,4 +1,4 @@
-export const akAPDNoActivities = {
+const akAPDNoActivities = {
   name: 'HITECH IAPD No Activities',
   years: ['2022', '2023'],
   apdOverview: {
@@ -159,3 +159,5 @@ export const akAPDNoActivities = {
     ]
   }
 };
+
+export default akAPDNoActivities;

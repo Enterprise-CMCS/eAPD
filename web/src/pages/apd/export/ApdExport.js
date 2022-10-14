@@ -16,14 +16,15 @@ import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
-// inside the component code
-const { adminCheckFlag } = useFlags();
-
 const ExportAndSubmit = ({
   push: pushRoute,
   toggleAdminCheck: toggleAdmin,
   years
 }) => {
+  // inside the component code
+  // Temporary feature flag
+  const { adminCheckFlag } = useFlags();
+
   const paramApdId = useParams().apdId;
 
   if (!paramApdId) {

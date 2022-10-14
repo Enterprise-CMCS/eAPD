@@ -1,5 +1,3 @@
-const ObjectId = require('mongoose').Types.ObjectId;
-
 const { akAPD } = require('./01-akAPD');
 const { akAPDNoActivities } = require('./02-akAPDNoActivities');
 
