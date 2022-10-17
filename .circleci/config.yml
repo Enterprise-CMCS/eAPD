@@ -72,11 +72,11 @@ workflows:
       - build preview ami:
           name: Build Preview AMI
           requires:
-            - packer validation tests
+            - Packer Validation Tests
       - build production staging ami:
           name: Build Prod Staging AMI
           requires:
-            - packer validation tests
+            - Packer Validation Tests
       - cleanup preview ami:
           name: Cleanup Old Unused Preview AMIs
           requires:
