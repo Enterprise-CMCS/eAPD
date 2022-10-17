@@ -287,14 +287,14 @@ const Activity = ({ activity, activityIndex }) => {
         className="subform__container"
         dangerouslySetInnerHTML={{
           __html:
-            activity.costAllocationNarrative.methodology ||
+            activity?.costAllocationNarrative?.methodology ||
             'No cost allocation methodology was provided.'
         }}
       />
 
       <hr className="subsection-rule" />
       <h3>Other Funding</h3>
-      {Object.entries(activity.costAllocationNarrative.years)
+      {Object.entries(activity?.costAllocationNarrative?.years)
         .filter(([year, _]) => isYear(year)) // eslint-disable-line no-unused-vars
         .map(([year, narrative]) => (
           <Fragment key={uuidv4()}>

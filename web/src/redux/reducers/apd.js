@@ -37,6 +37,7 @@ import {
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE
 } from '../actions/app';
+import { FLAGS_UPDATED } from '../actions/flags';
 import { defaultAPDYearOptions } from '../../util';
 import { generateKey } from '@cms-eapd/common/utils/utils';
 import initialAssurances from '../../util/regulations';
@@ -330,7 +331,7 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: process.env.TEALIUM_ENV !== 'prod'
+  adminCheck: false
 };
 
 // eslint-disable-next-line default-param-last
@@ -396,6 +397,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         adminCheck: action.data
+      };
+    }
+    case FLAGS_UPDATED: {
+      return {
+        ...state,
+        adminCheck: action.flags.validation
       };
     }
 

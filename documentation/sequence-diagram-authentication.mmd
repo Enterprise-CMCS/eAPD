@@ -1,5 +1,5 @@
-```mermaid
 sequenceDiagram
+%% @config(../.vscode/settings.json)
   participant W as Web App
   participant O as Okta
   W->>O: Authenticate
@@ -38,4 +38,3 @@ sequenceDiagram
     O-->>W: Response with access tokens
     Note over W,O: Store tokens in the token manager<br/>oktaClient.tokenManager.setTokens(tokens)
   end
-```
