@@ -67,6 +67,8 @@ workflows:
               only:
                 - main
     jobs:
+      - packer validation tests:
+          name: Packer Validation Tests
       - build preview ami:
           name: Build Preview AMI
           requires:
