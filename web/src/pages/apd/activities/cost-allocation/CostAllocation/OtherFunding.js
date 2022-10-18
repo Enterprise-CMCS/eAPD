@@ -35,22 +35,24 @@ const OtherFunding = ({
   adminCheck
 }) => {
   const { costAllocationNarrative = { years: {} }, costAllocation = '' } =
-      activity,
-    { years } = costSummary,
-    yearsArray = Object.keys(years);
+    activity;
+  const { years } = costSummary;
+  const yearsArray = Object.keys(years);
 
   const {
     control,
     trigger,
     clearErrors,
-    formState: { errors }
+    formState: { errors },
+    setValue,
+    getValues
   } = useForm({
     defaultValues: {
       costAllocation,
       costAllocationNarrative
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: joiResolver(otherSourcesSchema)
   });
 
@@ -61,6 +63,17 @@ const OtherFunding = ({
       clearErrors();
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleOtherFundingChange =
+    ffy =>
+    ({ target: { value } }) => {
+      setOtherFunding(activityIndex, ffy, value);
+      setValue(`costAllocation.${ffy}.other`, value);
+
+      if (adminCheck) {
+        trigger();
+      }
+    };
 
   return (
     <Fragment>
@@ -134,14 +147,7 @@ const OtherFunding = ({
                   value={value}
                   label={`FFY ${ffy}`}
                   labelClassName="sr-only"
-                  onChange={e => {
-                    setOtherFunding(activityIndex, ffy, value);
-                    onChange(e);
-
-                    if (adminCheck) {
-                      trigger();
-                    }
-                  }}
+                  onChange={handleOtherFundingChange(ffy)}
                   errorPlacement="bottom"
                   errorMessage={errors?.costAllocation?.[ffy]?.other?.message}
                 />

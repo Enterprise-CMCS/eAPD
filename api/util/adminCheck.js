@@ -29,7 +29,8 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
       return `Activities`;
     }
 
-    // Edge cases
+    // Edge case #1: The budget holds a calculated value that we validate
+    // against. Since it's not part of the apd object, we handle it here
     if (
       [
         'budget',
@@ -42,6 +43,9 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
     ) {
       return `Activity ${activityIndexes[errorPath[2]] + 1} Budget and FFP`;
     }
+    // Edge case #2: The costAllocation section of the apd data structure
+    // is used on two pages of the app. This handles mapping fpp to the
+    // Budget and FFP page instead of the Cost Allocation and Other Funding page
     if (
       ['activities', 'costAllocation', 'ffp'].every(val =>
         errorPath.includes(val)
@@ -102,7 +106,8 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
       assurancesAndCompliances: 'assurances-and-compliance'
     };
 
-    // Edge cases
+    // Edge case #1: The budget holds a calculated value that we validate
+    // against. Since it's not part of the apd object, we handle it here
     if (
       [
         'budget',
@@ -116,6 +121,9 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
       return `/apd/${apdId}/activity/${activityIndexes[errorPath[2]]}/ffp`;
     }
 
+    // Edge case #2: The costAllocation section of the apd data structure
+    // is used on two pages of the app. This handles mapping fpp to the
+    // Budget and FFP page instead of the Cost Allocation and Other Funding page
     if (
       ['activities', 'costAllocation', 'ffp'].every(val =>
         errorPath.includes(val)
@@ -142,9 +150,8 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
 };
 
 /**
- * Validates entire APD object using a combined schema
- * Schemas are shared with the frontend to support inline
- * and field-level validation
+ * Validates entire APD object using a combined schema. Schemas
+ * are shared with the frontend to support inline field-level validation
  * @param {Object} apd The full apd object
  * @returns an array of validation errors
  * }
