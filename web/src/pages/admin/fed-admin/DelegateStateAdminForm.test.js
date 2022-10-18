@@ -13,7 +13,6 @@ const defaultProps = {
   ffy: '2024',
   name: 'Walter White',
   email: 'walter@white.com',
-  phone: '987-654-3210',
   state: 'nm',
   fileUrl: ''
 };
@@ -55,10 +54,6 @@ describe('the DelegateStateAdminForm component', () => {
 
     expect(screen.getByLabelText('State employee email address')).toHaveValue(
       defaultProps.email
-    );
-
-    expect(screen.getByLabelText('State employee phone number')).toHaveValue(
-      defaultProps.phone
     );
 
     const file = new File(['hello'], 'hello.pdf', { type: 'pdf' });
