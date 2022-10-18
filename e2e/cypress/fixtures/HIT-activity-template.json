@@ -13,15 +13,8 @@
   },
 
   "outcomes": {
-    "names": [
-      "Accept attestations for 2021, and modify SLR to meet new spec sheets released by CMS.",
-      "Provide support to EPs and EHs through attestation process."
-    ],
+    "names": ["Provide support to EPs and EHs through attestation process."],
     "metrics": [
-      [
-        "Complete SLR modifications by 11/1/21",
-        "Accept attestations through 4/30/22"
-      ],
       [
         "Guidance available on Tycho''s websites",
         "Office hours availble for EPs and EHs"
@@ -30,23 +23,11 @@
   },
 
   "milestones": {
-    "names": [
-      "Implementation of Final Rule and Stage 3 System Developments",
-      "Environmental Scan Completion"
-    ],
-    "dates": [
-      [10, 5, 2021],
-      [3, 2, 2022]
-    ]
+    "names": ["Environmental Scan Completion"],
+    "dates": [[3, 2, 2022]]
   },
 
   "staff": [
-    {
-      "title": "Project Assistant",
-      "description": "Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.",
-      "costs": [86000, 88000],
-      "ftes": [1, 1]
-    },
     {
       "title": "Accountant III",
       "description": "Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.",
@@ -57,11 +38,6 @@
 
   "expenses": [
     {
-      "category": "Training and outreach",
-      "costs": [40000, 40000],
-      "description": "Recorded media and radio for supporting outreach."
-    },
-    {
       "category": "Travel",
       "costs": [35000, 35000],
       "description": "Airplane tickets, gasoline, and taxi services."
@@ -69,15 +45,6 @@
   ],
 
   "privateContractors": [
-    {
-      "name": "Super SLR Incorporated",
-      "description": "Maintain SLR",
-      "start": [12, 9, 2034],
-      "end": [5, 12, 2040],
-      "totalCosts": 50000,
-      "hourly": false,
-      "FFYcosts": [25000, 25000]
-    },
     {
       "name": "Bob the Builder",
       "description": "Can he build it? Yes he can!",
