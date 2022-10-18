@@ -26,12 +26,24 @@ const getAllAPDsByState = async stateId =>
   APD.find(
     { stateId, status: 'draft' },
     '_id id createdAt updatedAt stateId status name years'
-  ).lean();
+  )
+    .lean()
+    .sort({ updatedAt: 'desc' });
 
 const getAPDByID = async id => APD.findById(id).lean().populate('budget');
 
-const getAPDByIDAndState = (id, stateId) =>
+const getAPDByIDAndState = async (id, stateId) =>
   APD.findOne({ _id: id, stateId }).lean().populate('budget');
+
+const getAllSubmittedAPDs = async () =>
+  APD.find({ status: 'submitted' }).lean().populate('budget');
+
+const updateAPDReviewStatus = async updates =>
+  Promise.all(
+    updates.map(({ apdId, newStatus }) =>
+      APD.findOneAndUpdate({ _id: apdId, status: newStatus })
+    )
+  );
 
 // Apply the patches to the APD document
 const patchAPD = async (id, stateId, apdDoc, patch) => {
@@ -183,5 +195,7 @@ module.exports = {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
+  getAllSubmittedAPDs,
+  updateAPDReviewStatus,
   updateAPDDocument
 };
