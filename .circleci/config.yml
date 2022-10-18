@@ -633,6 +633,7 @@ jobs:
   e2e test:
     machine:
       image: ubuntu-2004:202104-01
+    resource_class: large
     parallelism: 7
     steps:
       - checkout
@@ -768,6 +769,7 @@ jobs:
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -987,6 +989,7 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2204:2022.04.2
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -1061,6 +1064,7 @@ jobs:
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
