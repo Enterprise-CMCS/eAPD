@@ -21,7 +21,6 @@ const sanitizeUser = user => ({
   id: user.id,
   name: user.displayName,
   permissions: user.permissions,
-  phone: user.primaryPhone,
   role: user.role,
   state: user.state,
   states: user.states,
@@ -164,24 +163,12 @@ const getUserByID = async (
     if (oktaUser) {
       const {
         id: oktaId,
-        profile: {
-          email,
-          displayName,
-          secondEmail,
-          primaryPhone,
-          mobilePhone,
-          login,
-          ...metadata
-        }
+        profile: { email, displayName, login }
       } = oktaUser;
       await createOrUpdateOktaUser(oktaId, {
         email,
         displayName,
-        secondEmail,
-        primaryPhone,
-        mobilePhone,
-        login,
-        metadata
+        login
       });
     }
   } else {
