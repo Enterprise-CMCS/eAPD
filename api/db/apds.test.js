@@ -292,7 +292,7 @@ tap.test('database wrappers / apds', async apdsTests => {
         });
 
         const errors = await adminCheckAPDDocument(id);
-        test.equal(errors, []); // eslint-disable-line no-underscore-dangle
+        test.equal(errors, []);
       });
     }
   );

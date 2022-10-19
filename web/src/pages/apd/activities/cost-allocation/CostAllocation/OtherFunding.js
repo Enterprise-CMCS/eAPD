@@ -44,8 +44,7 @@ const OtherFunding = ({
     trigger,
     clearErrors,
     formState: { errors },
-    setValue,
-    getValues
+    setValue
   } = useForm({
     defaultValues: {
       costAllocation,
@@ -141,7 +140,7 @@ const OtherFunding = ({
               name={`costAllocation.${ffy}.other`}
               control={control}
               value={costAllocation[ffy]?.other || '0'}
-              render={({ field: { onChange, value, ...props } }) => (
+              render={({ field: { value, ...props } }) => (
                 <DollarField
                   {...props}
                   value={value}
