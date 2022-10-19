@@ -112,34 +112,34 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - e2e test:
-          filters:
-            branches:
-              ignore:
-                - main
-                - gh-pages
-            tags:
-              ignore: ignore-e2e
-          requires:
-            - frontend lint
-            - backend lint
-            - dependency vulnerability scan
-            - yaml test
+      #- e2e test:
+          #filters:
+            #branches:
+              #ignore:
+                #- main
+                #- gh-pages
+            #tags:
+              #ignore: ignore-e2e
+          #requires:
+            #- frontend lint
+            #- backend lint
+            #- dependency vulnerability scan
+            #- yaml test
 
-      - chromatic deployment:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-            tags:
-              ignore: ignore-e2e
-          requires:
-            - frontend lint
-            - backend lint
-            - dependency vulnerability scan
-            - yaml test
-            - owasp zap scan
-            - e2e test
+      #- chromatic deployment:
+          #filters:
+            #branches:
+              #ignore:
+                #- gh-pages
+            #tags:
+              #ignore: ignore-e2e
+          #requires:
+            #- frontend lint
+            #- backend lint
+            #- dependency vulnerability scan
+            #- yaml test
+            #- owasp zap scan
+            #- e2e test
 
       # backend jobs
       - backend api endpoint test:
