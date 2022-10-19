@@ -43,7 +43,7 @@ function deployPreviewtoEC2() {
   EXISTING_INSTANCES=$(findExistingInstances)
 
   AMI_ID=$(findAMI)
-  print "• Using most recent eAPD Preview AMI: $AMI_ID"
+  print "• Using most recent eAPD Preview CentOS 7 AMI: $AMI_ID"
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
@@ -187,7 +187,7 @@ function findAMI() {
   aws ec2 describe-images \
     --query 'Images[*].{id:ImageId,name:Name,date:CreationDate}' \
     --filter 'Name=is-public,Values=false' \
-    --filter 'Name=name,Values=eAPD Preview AMI - *' \
+    --filter 'Name=name,Values=eAPD Preview CentOS 7 AMI - *' \
     | jq -r -c 'sort_by(.date)|last|.id'
 }
 

@@ -18,7 +18,9 @@ yum install newrelic-infra -y
 # Add a user group for the default user, and make it the owner of the /app
 # directory.  Unzip stuff there and then set permissions.
 groupadd eapd
-gpasswd -a ec2-user eapd
+#gpasswd -a ec2-user eapd
+gpasswd -a centos eapd
+
 mkdir /app
 mkdir /app/api
 mkdir /app/web
@@ -67,6 +69,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
 
 # Install packages
 yum -y install git
+yum -y install epel-release
 yum -y install nginx-1.20.1-9.el7
 yum -y install mongodb-org-5.0.3-1.el7 checkpolicy
 
