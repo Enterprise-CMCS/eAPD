@@ -16,15 +16,15 @@ const { getStateById: actualGetStateById } = require('./states');
 const { createOrUpdateOktaUser, getOktaUser } = require('./oktaUsers');
 
 const sanitizeUser = user => ({
-  activities: user.activities,
-  affiliation: user.affiliation,
   id: user.id,
   name: user.displayName,
-  permissions: user.permissions,
+  username: user.login,
   role: user.role,
   state: user.state,
   states: user.states,
-  username: user.login
+  permissions: user.permissions,
+  activities: user.activities,
+  affiliation: user.affiliation
 });
 
 /**
