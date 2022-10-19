@@ -262,8 +262,8 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            - e2e test
-            - chromatic deployment
+            #- e2e test
+            #- chromatic deployment
 
       - frontend deploy:
           name: frontend deploy production
@@ -279,8 +279,8 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            - e2e test
-            - chromatic deployment
+            #- e2e test
+            #- chromatic deployment
 
       # joint jobs
       - preview deploy:
