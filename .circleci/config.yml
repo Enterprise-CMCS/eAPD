@@ -86,6 +86,13 @@ workflows:
           requires:
             - Build Prod Staging AMI
 
+  # Tests
+  owasp, e2e, and chromatic:
+    jobs:
+      - owasp zap scan
+      - e2e test
+      - chromatic deployment
+
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
     jobs:
