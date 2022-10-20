@@ -117,9 +117,11 @@ workflows:
           env: STAGING
           filters:
             branches:
-              ignore:
+              only:
                 - main
-                - gh-pages
+              #ignore:
+                #- main
+                #- gh-pages
             tags:
               ignore: ignore-e2e
           requires:
@@ -132,9 +134,11 @@ workflows:
           env: PRODUCTION
           filters:
             branches:
-              ignore:
-                - main
-                - gh-pages
+              only:
+                - main            
+              #ignore:
+                #- main
+                #- gh-pages
             tags:
               ignore: ignore-e2e
           requires:
@@ -148,8 +152,10 @@ workflows:
           env: STAGING
           filters:
             branches:
-              ignore:
-                - gh-pages
+              only:
+                - main            
+              #ignore:
+                #- gh-pages
             tags:
               ignore: ignore-e2e
           requires:
@@ -164,8 +170,10 @@ workflows:
           env: PRODUCTION
           filters:
             branches:
-              ignore:
-                - gh-pages
+              only:
+                - main               
+              #ignore:
+                #- gh-pages
             tags:
               ignore: ignore-e2e
           requires:
