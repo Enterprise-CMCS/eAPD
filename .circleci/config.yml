@@ -92,20 +92,18 @@ workflows:
       - owasp zap scan:
           filters:
             branches:
-              only:
-                - $CIRCLE_BRANCH    
+            tags:
+              only: /.*/  
       - e2e test:
           env: PRODUCTION
           filters:
-            branches:
-              only:
-                - $CIRCLE_BRANCH    
+            tags:
+              only: /.*/  
       - chromatic deployment:
           env: PRODUCTION
           filters:
-            branches:
-              only:
-                - $CIRCLE_BRANCH    
+            tags:
+              only: /.*/
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
