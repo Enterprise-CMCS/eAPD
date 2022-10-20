@@ -149,58 +149,28 @@ export const testKeyStatePersonnelWithData = years => {
     cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
     cy.fixture('users').then(userData => {
-      cy.get('[data-cy="key-person-1__name"]').clear().type(userData[2].name);
+      cy.get('[data-cy="key-person-1__name"]').clear().type(userData[3].name);
 
-      cy.get('[data-cy="key-person-1__email"]').clear().type(userData[2].email);
+      cy.get('[data-cy="key-person-1__email"]').clear().type(userData[3].email);
 
       cy.get('[data-cy="key-person-1__position"]')
-        .clear()
-        .type(userData[2].username);
-
-      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
-
-      cy.findByRole('button', { name: /Save/i }).click();
-
-      cy.get('.ds-c-review__heading')
-        .contains('2.')
-        .should('have.text', `2. ${userData[2].name}`);
-      cy.get('.ds-c-review__heading')
-        .contains('2.')
-        .next()
-        .find('li')
-        .should($lis => {
-          expect($lis.eq(0)).to.contain(userData[2].username);
-        });
-
-      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.waitForSave();
-    });
-
-    cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-
-    cy.fixture('users').then(userData => {
-      cy.get('[data-cy="key-person-2__name"]').clear().type(userData[3].name);
-
-      cy.get('[data-cy="key-person-2__email"]').clear().type(userData[3].email);
-
-      cy.get('[data-cy="key-person-2__position"]')
         .clear()
         .type(userData[3].username);
 
       cy.get('input[type="radio"][value="yes"]').check({ force: true }).blur();
 
-      cy.get('[data-cy="key-person-2-0__cost"]').type('100000');
-      cy.get('[data-cy="key-person-2-0__fte"]').type('0.5');
-      cy.get('[data-cy="key-person-2-1__cost"]').type('100000');
-      cy.get('[data-cy="key-person-2-1__fte"]').type('0.5').blur();
+      cy.get('[data-cy="key-person-1-0__cost"]').type('100000');
+      cy.get('[data-cy="key-person-1-0__fte"]').type('0.5');
+      cy.get('[data-cy="key-person-1-1__cost"]').type('100000');
+      cy.get('[data-cy="key-person-1-1__fte"]').type('0.5').blur();
 
       cy.findByRole('button', { name: /Save/i }).click();
 
       cy.get('.ds-c-review__heading')
-        .contains('3.')
-        .should('have.text', `3. ${userData[3].name}`);
+        .contains('2.')
+        .should('have.text', `2. ${userData[3].name}`);
       cy.get('.ds-c-review__heading')
-        .contains('3.')
+        .contains('2.')
         .next()
         .find('li')
         .should($lis => {
@@ -210,14 +180,6 @@ export const testKeyStatePersonnelWithData = years => {
       cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.waitForSave();
     });
-
-    cy.findAllByRole('button', { name: /Delete/i })
-      .eq(0)
-      .click();
-    cy.get('.ds-c-button--danger').click();
-    cy.get('.form-and-review-list')
-      .findAllByRole('button', { name: /Edit/i })
-      .should('have.length', 2);
 
     cy.get('.form-and-review-list')
       .findAllByRole('button', { name: /Edit/i })

@@ -51,6 +51,9 @@
 set -e
 
 function deployAPItoEC2() {
+  # Configure AWS CLI with defaults
+  configureAWS
+
   # Adds the URL to the build artifacts to the user data file, so we can
   # download it when the EC2 instance starts up
   addBuildUrlToUserData
@@ -58,9 +61,6 @@ function deployAPItoEC2() {
   # Create PM2 ecosystem file using CI/CD environment and inject it into
   # EC2 run-instances user data file
   addEcosystemToUserData
-
-  # Configure AWS CLI with defaults
-  configureAWS
 
   # Get the instance IDs of the current API EC2 production instances, so we can 
   # delete them later
@@ -142,9 +142,9 @@ function addBuildUrlToUserData() {
 
   sed -i'.backup' -e "s|__MONGO_DATABASE__|`echo $MONGO_DATABASE`|g" aws.user-data.sh
 
-  sed -i'.backup' -e "s|__MONGO_URL__|`echo $MONGO_URL`|g" aws.user-data.sh
+  sed -i'.backup' -e "s|__MONGO_URL__|\"`echo $MONGO_URL`\"|g" aws.user-data.sh
 
-  sed -i'.backup' -e "s|__MONGO_ADMIN_URL__|`echo $MONGO_ADMIN_URL`|g" aws.user-data.sh
+  sed -i'.backup' -e "s|__MONGO_ADMIN_URL__|\"`echo $MONGO_ADMIN_URL`\"|g" aws.user-data.sh
 
   sed -i'.backup' -e "s|__NEW_RELIC_LICENSE_KEY__|`echo $NEW_RELIC_LICENSE_KEY`|g" aws.user-data.sh
 
@@ -212,8 +212,8 @@ function addEcosystemToUserData() {
         OKTA_API_KEY: '$OKTA_API_KEY',
         JWT_SECRET: '$JWT_SECRET',
         MONGO_DATABASE: '$MONGO_DATABASE',
-        MONGO_URL: '$MONGO_URL'
-
+        MONGO_URL: '$MONGO_URL',
+        LD_API_KEY: '$LD_API_KEY'
       },
     },{
       name: 'Database migration',
@@ -230,7 +230,8 @@ function addEcosystemToUserData() {
         OKTA_API_KEY: '$OKTA_API_KEY',
         JWT_SECRET: '$JWT_SECRET',
         MONGO_DATABASE: '$MONGO_DATABASE',
-        MONGO_URL: '$MONGO_URL'
+        MONGO_URL: '$MONGO_URL',
+        LD_API_KEY: '$LD_API_KEY'
       }
     },{
       name: 'Database seeding',
@@ -247,7 +248,8 @@ function addEcosystemToUserData() {
         OKTA_API_KEY: '$OKTA_API_KEY',
         JWT_SECRET: '$JWT_SECRET',
         MONGO_DATABASE: '$MONGO_DATABASE',
-        MONGO_URL: '$MONGO_URL'
+        MONGO_URL: '$MONGO_URL',
+        LD_API_KEY: '$LD_API_KEY'
       }
     }]
   };" | base64 -w 0`
