@@ -12,7 +12,25 @@ import Loading from '../../../components/Loading';
 import newApdSchema from '@cms-eapd/common/schemas/apdNew';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-const ApdNew = create => {
+const businessAreas = {
+  wws: false,
+  avs: false,
+  cp: false,
+  ds: false,
+  evv: false,
+  eps: false,
+  fm: false,
+  hie: false,
+  ltss: false,
+  mm: false,
+  pbmpos: false,
+  pi: false,
+  pm: false,
+  tpl: false,
+  other: false
+};
+
+const ApdNew = ({ createApd: create }) => {
   const thisFFY = (() => {
     const year = new Date().getFullYear();
     if (new Date().getMonth() > 8) {
@@ -29,19 +47,6 @@ const ApdNew = create => {
   const [isLoading, setIsLoading] = useState(false);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
 
-  const createNew = () => {
-    setIsLoading(true);
-    create();
-  };
-
-  if (isLoading) {
-    return (
-      <div id="start-main-content">
-        <Loading>Loading your APD</Loading>
-      </div>
-    );
-  }
-
   const {
     control,
     setValue,
@@ -50,7 +55,7 @@ const ApdNew = create => {
   } = useForm({
     defaultValues: {
       apdType: '',
-      apdname: '',
+      name: '',
       years,
       hitechStatus: hitechStatus,
       mmisStatus: {
@@ -64,6 +69,14 @@ const ApdNew = create => {
     reValidateMode: 'onBlur',
     resolver: joiResolver(newApdSchema)
   });
+
+  if (isLoading) {
+    return (
+      <div id="start-main-content">
+        <Loading>Loading your APD</Loading>
+      </div>
+    );
+  }
 
   const yearChoices = yearOptions.map((year, index) => ({
     defaultChecked: years.includes(year),
@@ -85,6 +98,13 @@ const ApdNew = create => {
       setAction(newArray);
     }
   }
+
+  const createNew = () => {
+    let values = getValues();
+    console.log({ values });
+    setIsLoading(true);
+    create(values);
+  };
 
   const disabled = !isValid || !isDirty || (!isValid && isDirty);
 
@@ -136,7 +156,7 @@ const ApdNew = create => {
         {(apdType === 'mmis' || apdType === 'hitech') && (
           <div>
             <Controller
-              name="apdname"
+              name="name"
               control={control}
               render={({ field: { value, onChange, onBlur, ...props } }) => (
                 <TextField
@@ -293,9 +313,9 @@ const ApdNew = create => {
             <Controller
               name="medicaidBA"
               control={control}
-              label="Medicaid Business Areas"
-              render={({ field: { onBlur } }) => (
+              render={({ field: { onBlur, onChange } }) => (
                 <ChoiceList
+                  label="Medicaid Business Areas"
                   hint={
                     <div>
                       Select the Medicaid Enterprise Systems Business Area(s)
@@ -309,79 +329,91 @@ const ApdNew = create => {
                   choices={[
                     {
                       label: '1115 or Waiver Support Systems',
-                      value: 'waiver-support-systems'
+                      value: 'wws',
+                      checked: businessAreas.wws
                     },
                     {
                       label: 'Asset Verification System',
-                      value: 'asset-verification-system'
+                      value: 'avs',
+                      checked: businessAreas.avs
                     },
                     {
                       label: 'Claims Processing',
-                      value: 'claims-processing'
+                      value: 'cp',
+                      checked: businessAreas.cp
                     },
                     {
                       label: 'Decision Support System & Data Warehouse',
-                      value: 'decision-support'
+                      value: 'ds',
+                      checked: businessAreas.ds
                     },
                     {
                       label: 'Electronic Visit Verification (EVV)',
-                      value: 'evv'
+                      value: 'evv',
+                      checked: businessAreas.evv
                     },
                     {
                       label:
                         'Encounter Processing System (EPS) & Managed Care System',
-                      value: 'eps'
+                      value: 'eps',
+                      checked: businessAreas.eps
                     },
                     {
                       label: 'Financial Management',
-                      value: 'financial-management'
+                      value: 'fm',
+                      checked: businessAreas.fm
                     },
                     {
                       label: 'Health Information Exchange (HIE)',
-                      value: 'hie'
+                      value: 'hie',
+                      checked: businessAreas.hie
                     },
                     {
                       label: 'Long Term Services & Suports (LTSS)',
-                      value: 'ltss'
+                      value: 'ltss',
+                      checked: businessAreas.ltss
                     },
                     {
                       label: 'Member Management',
-                      value: 'member-management'
+                      value: 'mm',
+                      checked: businessAreas.mm
                     },
                     {
                       label:
                         'Pharmacy Beefit Management (PBM) & Point of Sale (POS)',
-                      value: 'pbm-pos'
+                      value: 'pbmpos',
+                      checked: businessAreas.pbmpos
                     },
                     {
                       label: 'Program Integrity',
-                      value: 'program-integrity'
+                      value: 'pi',
+                      checked: businessAreas.pi
                     },
                     {
                       label: 'Provider Management',
-                      value: 'provider-management'
+                      value: 'pm',
+                      checked: businessAreas.pm
                     },
                     {
                       label: 'Third Party Liability (TPL)',
-                      value: 'tpl'
+                      value: 'tpl',
+                      checked: businessAreas.tpl
                     },
                     {
                       label: 'Other',
                       value: 'other',
+                      checked: businessAreas.other,
                       checkedChildren: (
                         <div className="ds-c-choice__checkedChild">
                           <Controller
                             name="otherDetails"
                             control={control}
-                            render={({
-                              field: { onBlur, onChange, ...props }
-                            }) => (
+                            render={({ field: { onBlur, ...props } }) => (
                               <TextArea
                                 {...props}
                                 label="Other Medicaid Business Area(s)"
                                 name="other-mbas"
                                 hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
-                                onChange={onChange}
                                 onBlur={onBlur}
                                 onComponentBlur={onBlur}
                               />
@@ -391,7 +423,14 @@ const ApdNew = create => {
                       )
                     }
                   ]}
-                  onChange={console.log(getValues('medicaidBA'))}
+                  onChange={({ target: { value } }) => {
+                    businessAreas[value] = !businessAreas[value];
+                    onChange(
+                      Object.keys(businessAreas).filter(
+                        key => businessAreas[key]
+                      )
+                    );
+                  }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
                   errorMessage={errors?.medicaidBA?.message}

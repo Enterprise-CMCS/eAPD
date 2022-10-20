@@ -136,15 +136,17 @@ export const setApdToSelectOnLoad = () => (dispatch, getState) => {
 };
 
 export const createApd =
-  ({ pushRoute = push } = {}) =>
+  (values, { pushRoute = push } = {}) =>
   dispatch => {
     dispatch({ type: CREATE_APD_REQUEST });
     return axios
       .post('/apds')
       .then(async req => {
-        dispatch({ type: CREATE_APD_SUCCESS, data: req.data });
+        let data = req.data,
+          merged = { ...data, ...values };
+        dispatch({ type: CREATE_APD_SUCCESS, data: merged });
         await dispatch(
-          selectApd(req.data.id, `/apd/${req.data.id}`, { pushRoute })
+          selectApd(merged.id, `/apd/${merged.id}`, { pushRoute })
         );
       })
       .catch(error => {

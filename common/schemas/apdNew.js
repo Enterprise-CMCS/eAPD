@@ -4,7 +4,7 @@ const apdNewSchema = Joi.object({
   apdType: Joi.string().valid('hitech', 'mmis').required().messages({
     'any.only': 'Select an APD Type.'
   }),
-  apdname: Joi.any(),
+  name: Joi.any(),
   years: Joi.array().min(1).required().messages({
     'array.min': 'Select at least one year.'
   }),
