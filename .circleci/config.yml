@@ -1204,6 +1204,10 @@ jobs:
 
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string  
     docker:
       - image: cimg/python:3.10.4
         auth:
