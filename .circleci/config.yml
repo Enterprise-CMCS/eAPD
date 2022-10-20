@@ -158,7 +158,23 @@ workflows:
             - dependency vulnerability scan
             - yaml test
             - owasp zap scan
-            - e2e test
+            - e2e test staging
+      - chromatic deployment:
+          name: chromatic deployment production
+          env: PRODUCTION
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+            tags:
+              ignore: ignore-e2e
+          requires:
+            - frontend lint
+            - backend lint
+            - dependency vulnerability scan
+            - yaml test
+            - owasp zap scan
+            - e2e test production            
 
       # backend jobs
       - backend api endpoint test:
@@ -282,7 +298,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
-            - chromatic deployment
+            - chromatic deployment staging
 
       - frontend deploy:
           name: frontend deploy production
@@ -299,7 +315,7 @@ workflows:
             - frontend test
             - yaml test
             - e2e test
-            - chromatic deployment
+            - chromatic deployment production
 
       # joint jobs
       - preview deploy:
