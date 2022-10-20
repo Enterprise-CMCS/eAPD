@@ -93,7 +93,7 @@ workflows:
         env: PRODUCTION
       - e2e test:
         env: PRODUCTION
-      - chromatic deployment
+      - chromatic deployment:
         env: PRODUCTION
 
   # Workflow to test, build, and deploy the backend and frontend
