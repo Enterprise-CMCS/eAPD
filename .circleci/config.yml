@@ -95,11 +95,13 @@ workflows:
               only:
                 - $CIRCLE_BRANCH    
       - e2e test:
+          env: PRODUCTION
           filters:
             branches:
               only:
                 - $CIRCLE_BRANCH    
       - chromatic deployment:
+          env: PRODUCTION
           filters:
             branches:
               only:
