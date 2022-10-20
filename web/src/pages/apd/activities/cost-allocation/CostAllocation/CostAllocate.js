@@ -19,13 +19,14 @@ const CostAllocate = ({
   adminCheck
 }) => {
   const {
-    costAllocationNarrative: { methodology }
+    costAllocationNarrative: { methodology = '' }
   } = activity;
   const syncMethodology = html => setMethodology(activityIndex, html);
 
   const {
     control,
     trigger,
+    clearErrors,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -37,8 +38,10 @@ const CostAllocate = ({
   useEffect(() => {
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
-  }, [adminCheck]);
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Subsection
@@ -50,7 +53,7 @@ const CostAllocate = ({
           labelFor="cost-allocation-methodology-field"
           source="activities.costAllocate.methodology.instruction"
           headingDisplay={{
-            level: 'h6',
+            level: 'h4',
             className: 'ds-h5'
           }}
         />

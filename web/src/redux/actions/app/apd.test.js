@@ -28,7 +28,7 @@ import {
   SET_APD_TO_SELECT_ON_LOAD
 } from './symbols';
 import { ARIA_ANNOUNCE_CHANGE } from '../aria';
-import { UPDATE_BUDGET } from '../budget';
+import { LOAD_BUDGET } from '../budget';
 import axios from '../../../util/api';
 import regulations from '../../../util/regulations';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
@@ -76,7 +76,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
-        { type: UPDATE_BUDGET, state },
+        { type: LOAD_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: '/apd/bloop' },
         {
           type: ARIA_ANNOUNCE_CHANGE,
@@ -291,14 +291,34 @@ describe('application-level actions', () => {
     });
 
     it('saves and does all the good things', () => {
-      const updatedApd = {};
+      state.patch = [{ path: 'test path' }];
+      const updatedApd = { budget: {} };
       const store = mockStore(state);
 
       fetchMock.onPatch('/apds/id-to-update').reply(200, { apd: updatedApd });
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
-        { type: SAVE_APD_SUCCESS, data: updatedApd }
+        { type: SAVE_APD_SUCCESS, apd: {} }
+        // { type: LOAD_BUDGET, budget: {} } doesn't dispatch this action because the patch isn't in the list of budget update patches
+      ];
+
+      return store.dispatch(saveApd()).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+    });
+
+    it('saves and updates budget when necessary', () => {
+      state.patch = [{ path: '/years' }];
+      const updatedApd = { budget: {} };
+      const store = mockStore(state);
+
+      fetchMock.onPatch('/apds/id-to-update').reply(200, { apd: updatedApd });
+
+      const expectedActions = [
+        { type: SAVE_APD_REQUEST },
+        { type: SAVE_APD_SUCCESS, apd: {} },
+        { type: LOAD_BUDGET, budget: {} }
       ];
 
       return store.dispatch(saveApd()).then(() => {
@@ -337,7 +357,7 @@ describe('application-level actions', () => {
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, apd },
         { type: APD_ACTIVITIES_CHANGE, activities },
-        { type: UPDATE_BUDGET, state },
+        { type: LOAD_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
           type: ARIA_ANNOUNCE_CHANGE,
@@ -394,7 +414,7 @@ describe('application-level actions', () => {
           path: '/assurancesAndCompliances',
           value: regulations
         },
-        { type: UPDATE_BUDGET, state },
+        { type: LOAD_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
           type: ARIA_ANNOUNCE_CHANGE,

@@ -29,7 +29,7 @@ data "aws_sns_topic" "aws_500x_errors" {
 }
 
 module "notify_slack" {
-  source = "../../../../terraform-aws-notify-slack" # Hardcoded local path
+  source = "../../../terraform-aws-notify-slack" # Hardcoded local path
 
   sns_topic_name   = data.aws_sns_topic.aws_500x_errors.name
   create_sns_topic = false

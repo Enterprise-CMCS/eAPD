@@ -6,10 +6,11 @@
   "module": "dist/main.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "scaffold": "rm -rf dist/db/* && rm -rf dist/migrations/* && rm -rf dist && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
-    "build": "yarn scaffold && babel . --ignore \"node_modules/!file-type/**\",\"dist\",\"coverage-endpoint\" -d ./dist -s",
+    "clean": "[ -d dist ] && (rm -rf dist/* && rm -rf dist) || echo \"doesn't exist, skipping clean\"",
+    "scaffold": "yarn clean && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
+    "build": "yarn workspace @cms-eapd/common build && yarn scaffold && babel . -d ./dist -s --ignore \"node_modules/!(file-type|@cms-eapd/common)/**\",\"dist\",\"coverage-endpoint\"",
     "start": "yarn build && node dist/main.js",
-    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
+    "start-dev": "yarn workspace @cms-eapd/common build && NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
     "npm-check": "npx npm-check-updates",
     "knex": "babel-node node_modules/.bin/knex",
     "knex-console": "node --experimental-repl-await knexrepl.js",
@@ -21,14 +22,14 @@
     "mongoose-migrate": "migrate --config mongo-migrate.js --autosync up",
     "mongoose-migrate-down": "migrate --config mongo-migrate.js down",
     "migrate": "yarn knex-migrate && yarn mongoose-migrate",
-    "seed": "yarn workspace @cms-eapd/common build && yarn knex seed:run --specific=main.js",
+    "seed": "yarn knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "yarn knex seed:run --specific=base-users.js",
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
     "test-endpoints": "jest --detectOpenHandles --forceExit --runInBand",
-    "test-specific": "NODE_ENV=test tap --cov --coverage-report=text-lcov --no-browser",
+    "test-specific": "NODE_ENV=test tap --no-coverage --coverage-report=text-lcov --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
   },
@@ -69,6 +70,7 @@
     "jsonpointer": "5.0.1",
     "jsonwebtoken": "8.5.1",
     "knex": "1.0.7",
+    "launchdarkly-node-server-sdk": "6.4.3",
     "migrate-mongoose": "4.0.0",
     "mongoose": "5.13.15",
     "morgan": "1.10.0",
@@ -116,7 +118,8 @@
       "^.+\\.jsx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!@cms-eapd/common|file-type)"
+      "node_modules/(?!@cms-eapd/common|file-type)",
+      "dist"
     ],
     "moduleFileExtensions": [
       "js",

@@ -21,6 +21,7 @@ const {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } = require('../actions/editApd');
+const { FLAGS_UPDATED } = require('../actions/flags');
 const regulations = require('../../util/regulations').default;
 
 describe('APD reducer', () => {
@@ -35,7 +36,7 @@ describe('APD reducer', () => {
     loaded: false,
     error: '',
     selectAPDOnLoad: false,
-    adminCheck: true
+    adminCheck: false
   };
 
   it('should handle initial state', () => {
@@ -78,7 +79,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: true
+      adminCheck: false
     });
   });
 
@@ -90,7 +91,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: true
+      adminCheck: false
     });
   });
 
@@ -135,7 +136,7 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: true,
       selectAPDOnLoad: false,
-      adminCheck: true
+      adminCheck: false
     };
 
     expect(
@@ -156,7 +157,7 @@ describe('APD reducer', () => {
       loaded: false,
       error: 'some error',
       selectAPDOnLoad: false,
-      adminCheck: true
+      adminCheck: false
     });
   });
 
@@ -167,6 +168,7 @@ describe('APD reducer', () => {
         activities: [
           {
             name: 'activity 1',
+            activityId: 'abcd1234',
             contractorResources: [{ name: 'contractor 1' }],
             expenses: [{ name: 'expense 1' }],
             outcomes: [{ name: 'outcome 1', metrics: [{ name: 'metric 1' }] }],
@@ -198,7 +200,8 @@ describe('APD reducer', () => {
         data: {
           activities: [
             {
-              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              key: 'abcd1234',
+              activityId: 'abcd1234',
               name: 'activity 1',
               contractorResources: [
                 {
@@ -263,7 +266,8 @@ describe('APD reducer', () => {
         data: {
           activities: [
             {
-              key: expect.stringMatching(/^[a-f0-9]{8}$/),
+              key: 'abcd1234',
+              activityId: 'abcd1234',
               name: 'activity 1',
               contractorResources: [
                 {
@@ -858,53 +862,58 @@ describe('APD reducer', () => {
         }
       };
 
-      expect(apd(state, { type: ADD_APD_ITEM, path: '/activities/-' })).toEqual(
-        {
-          data: {
-            activities: [
-              {
-                alternatives: '',
-                contractorResources: [],
-                costAllocation: {
-                  1787: { ffp: { federal: 0, state: 100 }, other: 0 }
+      expect(
+        apd(state, {
+          type: ADD_APD_ITEM,
+          path: '/activities/-',
+          key: '1234abcd'
+        })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              alternatives: '',
+              contractorResources: [],
+              costAllocation: {
+                1787: { ffp: { federal: 0, state: 100 }, other: 0 }
+              },
+              costAllocationNarrative: {
+                years: {
+                  1787: { otherSources: '' }
                 },
-                costAllocationNarrative: {
-                  years: {
-                    1787: { otherSources: '' }
-                  },
-                  methodology: ''
-                },
-                description: '',
-                expenses: [],
-                fundingSource: null,
-                key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                meta: { expanded: false },
-                name: '',
-                outcomes: [],
-                plannedEndDate: '',
-                plannedStartDate: '',
-                quarterlyFFP: {
-                  1787: {
-                    1: { combined: 25, contractors: 25, inHouse: 25 },
-                    2: { combined: 25, contractors: 25, inHouse: 25 },
-                    3: { combined: 25, contractors: 25, inHouse: 25 },
-                    4: { combined: 25, contractors: 25, inHouse: 25 }
-                  }
-                },
-                schedule: [],
-                standardsAndConditions: {
-                  doesNotSupport: '',
-                  supports: ''
-                },
-                statePersonnel: [],
-                summary: '',
-                years: ['1787']
-              }
-            ],
-            years: ['1787']
-          }
+                methodology: ''
+              },
+              description: '',
+              expenses: [],
+              fundingSource: null,
+              key: '1234abcd',
+              activityId: '1234abcd',
+              meta: { expanded: false },
+              name: '',
+              outcomes: [],
+              plannedEndDate: '',
+              plannedStartDate: '',
+              quarterlyFFP: {
+                1787: {
+                  1: { combined: 25, contractors: 25, inHouse: 25 },
+                  2: { combined: 25, contractors: 25, inHouse: 25 },
+                  3: { combined: 25, contractors: 25, inHouse: 25 },
+                  4: { combined: 25, contractors: 25, inHouse: 25 }
+                }
+              },
+              schedule: [],
+              standardsAndConditions: {
+                doesNotSupport: '',
+                supports: ''
+              },
+              statePersonnel: [],
+              summary: '',
+              years: ['1787']
+            }
+          ],
+          years: ['1787']
         }
-      );
+      });
     });
 
     it('should add a new activity contractor resource', () => {
@@ -1147,7 +1156,7 @@ describe('APD reducer', () => {
         },
         {
           type: SAVE_APD_SUCCESS,
-          data: {
+          apd: {
             id: 'apdID',
             // Medicare and Medicaid are created, 546 years to the day after
             // the First Defenestration of Prague.
@@ -1176,6 +1185,15 @@ describe('APD reducer', () => {
       },
       { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
     );
+  });
+
+  it('should handle updating flags', () => {
+    expect(
+      apd(initialState, { type: FLAGS_UPDATED, flags: { validation: true } })
+    ).toEqual({
+      ...initialState,
+      adminCheck: true
+    });
   });
 });
 

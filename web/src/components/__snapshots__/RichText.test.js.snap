@@ -4,6 +4,7 @@ exports[`RichText component renders as expected 1`] = `
 <Fragment>
   <div
     className="rte--wrapper"
+    id="tinymce-wrapper"
   >
     <Editor
       cloudChannel="community"

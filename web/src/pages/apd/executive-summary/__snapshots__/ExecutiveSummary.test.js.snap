@@ -321,7 +321,9 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
              |
              
-            <Dollars />
+            <Dollars>
+              23626
+            </Dollars>
              Total Computable Medicaid Cost | 
             <Dollars>
               2883
@@ -343,7 +345,9 @@ exports[`executive summary component renders correctly 1`] = `
             </Dollars>
              |
              
-            <Dollars />
+            <Dollars>
+              2468252
+            </Dollars>
              Total Computable Medicaid Cost | 
             <Dollars>
               826

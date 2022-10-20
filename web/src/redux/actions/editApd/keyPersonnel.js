@@ -1,5 +1,4 @@
 import { ADD_APD_ITEM, EDIT_APD, REMOVE_APD_ITEM } from './symbols';
-import { updateBudget } from '../budget';
 
 /**
  * Adds or updates a key personnel resource from an apd
@@ -28,8 +27,6 @@ export const saveKeyPersonnel = (index, data) => (dispatch, getState) => {
     path: `/keyStatePersonnel/keyPersonnel/${indexCalculated}`,
     value: data
   });
-
-  dispatch(updateBudget());
 };
 
 /**
@@ -42,5 +39,4 @@ export const removeKeyPersonnel = index => dispatch => {
     type: REMOVE_APD_ITEM,
     path: `/keyStatePersonnel/keyPersonnel/${index}`
   });
-  dispatch(updateBudget());
 };

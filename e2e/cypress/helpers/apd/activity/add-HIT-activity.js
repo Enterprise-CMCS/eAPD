@@ -53,8 +53,7 @@ export const addHITActivity = years => {
 
       fillOutActivityPage.fillOutcomesAndMilestones(
         activityData.outcomes,
-        activityData.milestones,
-        true // Test delete flag
+        activityData.milestones
       );
 
       cy.waitForSave();
@@ -66,9 +65,9 @@ export const addHITActivity = years => {
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillStateStaff(years, activityData.staff, true);
+      fillOutActivityPage.fillStateStaff(years, activityData.staff);
 
-      fillOutActivityPage.fillStateExpenses(years, activityData.expenses, true);
+      fillOutActivityPage.fillStateExpenses(years, activityData.expenses);
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
@@ -81,8 +80,7 @@ export const addHITActivity = years => {
 
       fillOutActivityPage.addPrivateContractors(
         activityData.privateContractors,
-        years,
-        true // Test delete flag
+        years
       );
 
       cy.waitForSave();
@@ -93,6 +91,8 @@ export const addHITActivity = years => {
         activityData.costAllocation,
         years
       );
+      cy.wait(1000);
+      cy.waitForSave();
 
       _.forEach(years, (year, i) => {
         budgetPage.checkActivityTotalCostTableNew({
@@ -171,29 +171,29 @@ export const addHITActivity = years => {
 
               // Check Outcomes and Milestones
               exportPage.checkOutcomes({
-                outcome: activityData.outcomes.names[1],
-                metrics: activityData.outcomes.metrics[1]
+                outcome: activityData.outcomes.names[0],
+                metrics: activityData.outcomes.metrics[0]
               });
 
               exportPage.checkMilestones({
-                milestone: activityData.milestones.names[1],
+                milestone: activityData.milestones.names[0],
                 milestoneCompletionDate:
-                  activityData.milestones.dates[1].join('/')
+                  activityData.milestones.dates[0].join('/')
               });
 
               // Check State Staff and Expenses
               exportPage.checkStateStaff({
-                staff: activityData.staff.slice(1),
+                staff: activityData.staff.slice(0),
                 years
               });
               exportPage.checkStateExpenses({
-                expenses: activityData.expenses.slice(1),
+                expenses: activityData.expenses.slice(0),
                 years
               });
 
               // Check Private Contractors
               exportPage.checkPrivateContractorCosts({
-                contractors: activityData.privateContractors.slice(1),
+                contractors: activityData.privateContractors.slice(0),
                 years
               });
 

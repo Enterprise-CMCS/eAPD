@@ -37,6 +37,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   });
 
   beforeEach(() => {
+    cy.updateFeatureFlags({ validation: true });
     cy.visit(apdUrl);
   });
 

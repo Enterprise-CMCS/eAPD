@@ -4,7 +4,6 @@ import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
 import ExportPage from '../../page-objects/export-page';
 import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
 import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
-import { logDOM } from '@testing-library/dom';
 
 /// <reference types="cypress" />
 
@@ -31,6 +30,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   before(() => {
     cy.useStateStaff();
+    cy.updateFeatureFlags({ validation: true });
 
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.findByRole(
@@ -49,6 +49,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
+    cy.updateFeatureFlags({ validation: true });
     cy.visit(apdUrl);
   });
 
@@ -241,7 +242,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .contains('div', 'Activity 1: Program Administration')
         .parent()
         .parent()
-        .findByRole('button', { name: 'Edit' })
+        .findByRole('link', { name: 'Edit' })
         .click();
 
       cy.findByRole('heading', {
@@ -1224,7 +1225,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
           .parent()
           .contains('Delete')
           .click();
-        cy.get('[class="ds-c-button ds-c-button--danger"]').click();
+        cy.findByRole('alertdialog').within(() => {
+          cy.findByRole('button', { name: /Delete/i }).click({ force: true });
+        });
         cy.waitForSave();
         cy.contains('Delete Key Personnel?').should('not.exist');
 
@@ -1322,6 +1325,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.waitForSave();
       cy.contains('AK APD Home').click();
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(5000); // Gives time to load the APD dashboard
 
       cy.visit(apdUrl);
@@ -1342,6 +1346,68 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
+  describe('Accessibility Tests', () => {
+    it('Runs on APD Builder', () => {
+      cy.wait(5000); // Allows page to load
+
+      cy.checkPageA11y(); // APD Overview
+
+      cy.goToKeyStatePersonnel();
+      cy.checkPageA11y(); // Key State Personnel
+
+      cy.goToPreviousActivities();
+      cy.checkPageA11y(); // Results of Previous Activities
+
+      cy.goToActivityDashboard();
+      // cy.findByRole('button', { name: /Add Activity/i }).click(); // Add back for MMIS tests
+      cy.checkPageA11y(); // Activities Dashboard
+
+      cy.goToActivityOverview(0);
+      cy.checkPageA11y(); // Activity Overview
+
+      cy.goToOutcomesAndMilestones(0);
+      cy.findByRole('button', { name: /Add Outcome/i }).click();
+      cy.checkPageA11y(); // Outcomes Subform
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.findByRole('button', { name: /Add Milestone/i }).click();
+      cy.checkPageA11y(); // Milestones Subform
+
+      cy.goToStateStaffAndExpenses(0);
+      cy.findByRole('button', { name: /Add State Staff/i }).click();
+      cy.checkPageA11y(); // State Staff Subform
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.findByRole('button', { name: /Add State Expense/i }).click();
+      cy.checkPageA11y(); // State Expenses Subform
+
+      cy.goToPrivateContractorCosts(0);
+      cy.findByRole('button', { name: /Add Contractor/i }).click();
+      cy.checkPageA11y(); // Private Contractor
+
+      cy.goToCostAllocationAndOtherFunding(0);
+      cy.checkPageA11y(); // Cost Allocation and Other Funding
+
+      cy.goToBudgetAndFFP(0);
+      cy.checkPageA11y(); // Budget and FFP
+
+      cy.goToActivityScheduleSummary();
+      cy.checkPageA11y(); // Activity Schedule Summary
+
+      cy.goToProposedBudget();
+      cy.checkPageA11y(); // Proposed Budget
+
+      cy.goToAssurancesAndCompliance();
+      cy.checkPageA11y(); // Assurances and Compliance
+
+      cy.goToExecutiveSummary();
+      cy.checkPageA11y(); // Executive Summary
+
+      cy.contains('Export and Submit').click();
+      cy.checkPageA11y(); // Export and Submit
+    });
+  });
+
   describe('Delete APD', () => {
     it('deletes the APD', () => {
       cy.useStateStaff();
@@ -1355,7 +1421,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .contains('Delete')
         .click();
 
-      cy.get('.ds-c-button--danger').click();
+      cy.get('button[id="dialog-delete"]').click({ force: true });
+      cy.waitForSave();
 
       cy.get(`a[href='${apdUrl}']`).should('not.exist');
     });

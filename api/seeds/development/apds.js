@@ -943,5 +943,6 @@ const data = [
 
 module.exports = {
   data,
-  apd
+  apd,
+  apdNoActivities
 };

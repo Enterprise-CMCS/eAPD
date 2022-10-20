@@ -63,6 +63,7 @@ export OKTA_DOMAIN="__OKTA_DOMAIN__"
 export OKTA_SERVER_ID="__OKTA_SERVER_ID__"
 export OKTA_CLIENT_ID="__OKTA_CLIENT_ID__"
 export OKTA_API_KEY="__OKTA_API_KEY__"
+export LD_API_KEY="__LD_API_KEY__"
 export JWT_SECRET="__JWT_SECRET__"
 export MONGO_DATABASE="__MONGO_DATABASE__"
 export MONGO_URL="__MONGO_URL__"
@@ -95,7 +96,7 @@ cp -r ~/eAPD/common/* /app/common
 
 # move the web app into place
 cd ~/eAPD/web
-TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build 2>&1 | tee web-build.log
+LD_CLIENT_ID="__LD_CLIENT_ID__" TEALIUM_ENV="__TEALIUM_ENV__" API_URL=/api TEALIUM_TAG="__TEALIUM_TAG__" OKTA_DOMAIN="__OKTA_DOMAIN__" OKTA_SERVER_ID="__OKTA_SERVER_ID__" OKTA_CLIENT_ID="__OKTA_CLIENT_ID__" yarn build 2>&1 | tee web-build.log
 cp -r dist/* /app/web
 
 # move over node modules
@@ -157,6 +158,7 @@ echo "module.exports = {
       MONGO_URL: '__MONGO_URL__',
       MONGO_ADMIN_URL: '__MONGO_ADMIN_URL__',
       DATABASE_URL: '__DATABASE_URL__',
+			LD_API_KEY: '__LD_API_KEY__',
     },
   }]
 };" > ecosystem.config.js

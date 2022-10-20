@@ -14,6 +14,7 @@ export const testDefaultProposedBudget = years => {
   });
 
   beforeEach(() => {
+    cy.updateFeatureFlags({ validation: true });
     cy.fixture('proposed-budget-test.json').then(data => {
       budgetData = data;
     });
@@ -115,6 +116,7 @@ export const testProposedBudgetWithData = years => {
   });
 
   beforeEach(() => {
+    cy.updateFeatureFlags({ validation: true });
     cy.fixture('proposed-budget-test.json').then(data => {
       budgetData = data;
     });
