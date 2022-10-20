@@ -89,9 +89,12 @@ workflows:
   # Tests
   owasp, e2e, and chromatic:
     jobs:
-      - owasp zap scan
-      - e2e test
+      - owasp zap scan:
+        env: PRODUCTION
+      - e2e test:
+        env: PRODUCTION
       - chromatic deployment
+        env: PRODUCTION
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
