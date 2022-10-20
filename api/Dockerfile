@@ -14,8 +14,6 @@ RUN chown -R node:node /app
 USER node:node
 
 RUN yarn install --frozen-lockfile --non-interactive
-RUN yarn workspace @cms-eapd/common build
-RUN yarn workspace @cms-eapd/api build
 
 WORKDIR /app/api
 CMD yarn run start-dev

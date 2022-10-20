@@ -335,7 +335,8 @@ const activities = [
         key: 'b557e239'
       }
     ],
-    key: '5714113d'
+    key: '5714113d',
+    activityId: '5714113d'
   },
   {
     alternatives:
@@ -629,7 +630,8 @@ const activities = [
         key: '101eefdf'
       }
     ],
-    key: '2170fbea'
+    key: '2170fbea',
+    activityId: '2170fbea'
   },
   {
     alternatives:
@@ -840,7 +842,8 @@ const activities = [
         key: 'dae3e850'
       }
     ],
-    key: 'af9f9105'
+    key: 'af9f9105',
+    activityId: 'af9f9105'
   },
   {
     alternatives:
@@ -1023,7 +1026,8 @@ const activities = [
         key: '4107f92c'
       }
     ],
-    key: '5f66be81'
+    key: '5f66be81',
+    activityId: '5f66be81'
   },
   {
     alternatives:
@@ -1215,7 +1219,8 @@ const activities = [
         key: '14c8d2e0'
       }
     ],
-    key: 'd0963842'
+    key: 'd0963842',
+    activityId: 'd0963842'
   },
   {
     alternatives:
@@ -1393,7 +1398,8 @@ const activities = [
         key: 'a821e7ee'
       }
     ],
-    key: '7bd7353f'
+    key: '7bd7353f',
+    activityId: '7bd7353f'
   }
 ];
 

@@ -92,6 +92,19 @@
     "costs": [4000, 9000]
   },
 
+  "costAllocationActivityTotalCostTables": [
+    [
+      ["$274,512"],
+      ["Other Funding", "-", "$4,000"],
+      ["Total Computable Medicaid Cost", "$270,512"]
+    ],
+    [
+      ["$277,802"],
+      ["Other Funding", "-", "$9,000"],
+      ["Total Computable Medicaid Cost", "$268,802"]
+    ]
+  ],
+
   "splitConstants": [
     {
       "split": "75-25",

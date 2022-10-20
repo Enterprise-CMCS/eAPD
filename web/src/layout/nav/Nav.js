@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { VerticalNav } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import NavLink from './NavLink';
-import { generateKey as actualGenerateKey } from '../../util';
+import { generateKey as actualGenerateKey } from '@cms-eapd/common';
 
 const Nav = ({ generateKey, items, pathname }) => {
   // force component update when pathname changes

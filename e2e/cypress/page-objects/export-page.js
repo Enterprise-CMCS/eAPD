@@ -37,7 +37,7 @@ class ExportPage {
       .parent()
       .contains('HIT + HIE Federal share 90% FFP')
       .parent()
-      .find('[headers="prev_act_hit_header_ffy"]')
+      .find('[data-cy="yearRow"]')
       .each($el => {
         this.prevActYears.push(extractNumber($el.text()));
       });

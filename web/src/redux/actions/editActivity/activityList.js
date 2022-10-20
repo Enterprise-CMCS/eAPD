@@ -1,26 +1,27 @@
+import { generateKey } from '@cms-eapd/common/utils/utils';
 import {
   ADD_APD_ITEM,
   APD_ACTIVITIES_CHANGE,
   EDIT_APD,
   REMOVE_APD_ITEM
 } from '../editApd';
-import { updateBudget } from '../budget';
 
 /**
  * Add a new activity to the current APD
  */
 
 export const addActivity = () => (dispatch, getState) => {
+  const key = generateKey();
   dispatch({
     type: ADD_APD_ITEM,
     path: '/activities/-',
-    state: getState()
+    state: getState(),
+    key
   });
   dispatch({
     type: APD_ACTIVITIES_CHANGE,
     activities: getState().apd.data.activities
   });
-  dispatch(updateBudget());
 };
 
 /**
@@ -33,7 +34,6 @@ export const removeActivity = index => (dispatch, getState) => {
     type: APD_ACTIVITIES_CHANGE,
     activities: getState().apd.data.activities
   });
-  dispatch(updateBudget());
 };
 
 /**
@@ -65,5 +65,4 @@ export const setActivityFundingSource = (index, source) => dispatch => {
     path: `/activities/${index}/fundingSource`,
     value: source
   });
-  dispatch(updateBudget());
 };

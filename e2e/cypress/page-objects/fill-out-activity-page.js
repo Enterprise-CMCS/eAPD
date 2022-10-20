@@ -30,7 +30,7 @@ class FillOutActivityPage {
     );
   };
 
-  fillOutcomesAndMilestones = (outcomes, milestones, testDelete = false) => {
+  fillOutcomesAndMilestones = (outcomes, milestones) => {
     cy.findByRole('heading', {
       name: /Outcomes and Metrics/i,
       level: 3
@@ -43,16 +43,6 @@ class FillOutActivityPage {
       });
     });
 
-    if (testDelete) {
-      // Tests deleting Outcomes
-      cy.contains('Delete').click();
-      cy.contains('Delete Outcome and Metrics?').should('exist');
-      cy.get('[class="ds-c-button ds-c-button--danger"]').click();
-
-      cy.contains(outcomes.names[0]).should('not.exist');
-      cy.contains(`Outcome: ${outcomes.names[1]}`).should('exist');
-    }
-
     _.forEach(milestones.names, (name, i) => {
       cy.findByRole('button', { name: /Add Milestone/i }).click();
       populatePage.fillMilestoneForm({
@@ -60,31 +50,14 @@ class FillOutActivityPage {
         targetDate: milestones.dates[i]
       });
     });
-
-    if (testDelete) {
-      // Tests deleting milestone
-      cy.findAllByText('Delete').eq(1).click();
-      cy.contains('Delete Milestone?').should('exist');
-      cy.get('[class="ds-c-button ds-c-button--danger"]').click();
-
-      cy.contains('Delete Milestone?').should('not.exist');
-      cy.contains(milestones.names[0]).should('not.exist');
-      cy.contains(`1. ${milestones.names[1]}`).should('exist');
-    }
   };
 
-  fillStateStaff = (
-    years,
-    staffList,
-    testDelete = false,
-    testBudget = false
-  ) => {
+  fillStateStaff = (years, staffList) => {
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
     }).should('exist');
 
-    // Can't use break; in a forEach loop.
     for (let i = 0; i < staffList.length; i++) {
       staffExpensesPage.addStaff();
       staffExpensesPage.fillStaff({
@@ -95,9 +68,6 @@ class FillOutActivityPage {
         costs: staffList[i].costs,
         ftes: staffList[i].ftes
       });
-      if (testBudget) {
-        break;
-      }
       staffExpensesPage.verifyStaff(
         i,
         staffList[i].title,
@@ -106,46 +76,14 @@ class FillOutActivityPage {
         staffList[i].ftes
       );
     }
-
-    if (testDelete) {
-      // Tests deleting State Staff
-      cy.findByRole('heading', { name: /^State Staff$/i })
-        .next()
-        .next()
-        .children()
-        .then(children => {
-          if (children.length > 1) {
-            staffExpensesPage.deleteStaff(0);
-            cy.waitForSave();
-          }
-        });
-
-      // Check that the first staff on the page (index 0) has the second
-      // staff's info
-      if (staffList.length > 1) {
-        staffExpensesPage.verifyStaff(
-          0,
-          staffList[1].title,
-          staffList[1].description,
-          staffList[1].costs,
-          staffList[1].ftes
-        );
-      }
-    }
   };
 
-  fillStateExpenses = (
-    years,
-    expenseList,
-    testDelete = false,
-    testBudget = false
-  ) => {
+  fillStateExpenses = (years, expenseList) => {
     cy.findByRole('heading', {
       name: /State Staff and Expenses/i,
       level: 3
     }).should('exist');
 
-    // Can't use break; in a forEach loop.
     for (let i = 0; i < expenseList.length; i++) {
       staffExpensesPage.addExpense();
       staffExpensesPage.fillExpense({
@@ -155,9 +93,6 @@ class FillOutActivityPage {
         costs: expenseList[i].costs,
         desc: expenseList[i].description
       });
-      if (testBudget) {
-        break;
-      }
       staffExpensesPage.verifyExpense(
         i,
         expenseList[i].category,
@@ -165,41 +100,9 @@ class FillOutActivityPage {
         expenseList[i].description
       );
     }
-
-    if (testDelete) {
-      // Test deleting other state expense
-      cy.findByRole('heading', { name: /^Other State Expenses$/i })
-        .next()
-        .next()
-        .children()
-        .then(children => {
-          if (children.length > 1) {
-            staffExpensesPage.deleteExpense(0);
-          }
-        });
-
-      // If there are just two delete buttons, then an expense has been deleted;
-      // the other delete button is from the remaining staff.
-      cy.findAllByRole('button', { name: /Delete/i }).should('have.length', 2);
-      cy.waitForSave();
-
-      if (expenseList > 0) {
-        staffExpensesPage.verifyExpense(
-          0,
-          expenseList[1].category,
-          expenseList[1].costs,
-          expenseList[1].description
-        );
-      }
-    }
   };
 
-  addPrivateContractors = (
-    contractorList,
-    years,
-    testDelete = false,
-    testBudget = false
-  ) => {
+  addPrivateContractors = (contractorList, years) => {
     cy.findByRole('heading', {
       name: /Private Contractor Costs/i,
       level: 3
@@ -212,19 +115,6 @@ class FillOutActivityPage {
       this.fillPrivateContactor(contractorList[i], i, years);
 
       cy.findByRole('button', { name: /Save/i }).click();
-
-      if (testBudget) {
-        break;
-      }
-    }
-
-    if (testDelete) {
-      cy.findAllByText('Delete').eq(0).click();
-      cy.contains('Delete Private Contractor?').should('exist');
-      cy.get('.ds-c-button--danger').click();
-
-      cy.contains(`1. ${contractorList[0].name}`).should('not.exist');
-      cy.contains(`1. ${contractorList[1].name}`).should('exist');
     }
   };
 
@@ -290,6 +180,7 @@ class FillOutActivityPage {
         allocation.costs[i],
         i
       );
+      cy.waitForSave();
     });
   };
 
@@ -332,6 +223,7 @@ class FillOutActivityPage {
         } else {
           cy.get('select.ds-c-field').eq(ffyIndex).select(secondSplit);
         }
+        cy.waitForSave();
 
         cy.get('[data-cy="FFPFedStateSplitTable"]')
           .eq(ffyIndex)
@@ -368,12 +260,20 @@ class FillOutActivityPage {
             cy.get(table).within(() => {
               cy.get('input').then(inputFields => {
                 _.forEach(inputFields, (elem, i) => {
+                  const value = budgetData.quarterVals[ffyIndex][i];
+                  cy.log(`value: ${value}`);
+                  cy.get(elem).clear();
+                  cy.waitForSave();
                   cy.get(elem)
-                    .clear()
-                    .type(budgetData.quarterVals[ffyIndex][i]);
+                    .type(value)
+                    .should('have.value', `${value}`)
+                    .blur();
+                  cy.wait(300);
+                  cy.waitForSave();
                 });
               });
             });
+            cy.waitForSave();
           }
           cy.get(table)
             .getActivityTable()

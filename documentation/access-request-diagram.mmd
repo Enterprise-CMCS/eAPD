@@ -1,0 +1,47 @@
+flowchart
+  subgraph roles [Roles]
+    fed(eAPD Federal Admin)
+    sys(eAPD System Admin)
+    sa(eAPD State Admin)
+    ss(eAPD State Staff)
+    sc(eAPD State Contractor)
+  end
+  subgraph approval [Access Approval Process]
+    direction TB
+    cms(User requests EUA account)
+    job(User requests EUA job code)
+    okta(User sets up Okta MFA)
+    staff(User requests access to State)
+    state(State Admin approves user request)
+    letter(State Medicaid Director<br/>submits State Authorization letter)
+    upload(Federal Admin uploads letter)
+    match(System suggests match<br/>between letter and request)
+    admin(Federal Admin approves user<br/>request as State Admin)
+    cms --> job
+    job --> okta
+    okta --> staff
+    staff --> state
+    letter --> upload
+    upload --> match
+    match --> admin
+    staff --> match
+  end
+
+style roles fill:#fff
+style approval fill:#fff
+style cms fill:#ccc
+style job fill:#ccc
+style okta fill:#ccc
+style letter fill:#ccc
+style upload fill:#6BAA75
+style match fill:#F5B841
+style admin fill:#6BAA75
+style staff fill:#5774B2,color:#fff
+style state fill:#4C4C9D,color:#fff
+style sys fill:#712F79,color:#fff
+style sa fill:#4C4C9D,color:#fff
+style fed fill:#6BAA75,color:#fff
+style ss fill:#FF1F4B,color:#fff
+style sc fill:#FC2F00,color:#fff
+
+

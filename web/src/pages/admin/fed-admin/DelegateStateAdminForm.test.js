@@ -10,7 +10,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { plain as DelegateStateAdminForm } from './DelegateStateAdminForm';
 
 const defaultProps = {
-  ffy: '2022',
+  ffy: '2024',
   name: 'Walter White',
   email: 'walter@white.com',
   phone: '987-654-3210',
@@ -41,9 +41,9 @@ describe('the DelegateStateAdminForm component', () => {
     const { user } = setup();
     fetchMock.onPost('/auth/certifications').reply(200);
 
-    await user.click(screen.getByRole('radio', { name: 'FFY 2022' }));
+    await user.click(screen.getByRole('radio', { name: 'FFY 2024' }));
 
-    expect(screen.getByRole('radio', { name: 'FFY 2022' })).toBeChecked();
+    expect(screen.getByRole('radio', { name: 'FFY 2024' })).toBeChecked();
 
     expect(
       screen.getByRole('textbox', {

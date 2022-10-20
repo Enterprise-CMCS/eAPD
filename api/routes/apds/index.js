@@ -9,9 +9,9 @@ const events = require('./events');
 module.exports = (
   app,
   {
-    deleteEndpoint = del,
     filesEndpoints = files,
     eventsEndpoints = events,
+    deleteEndpoint = del,
     getEndpoint = get,
     patchEndpoint = patch,
     postEndpoint = post

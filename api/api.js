@@ -17,13 +17,28 @@ const errorHandler = require('./middleware/errorHandler');
 
 const { setup: mongoSetup, getConnectionStatus } = require('./db/mongodb');
 const knex = require('./db/knex');
+const {
+  waitForInitialization: ldWaitForInitialization
+} = require('./middleware/launchDarkly'); // initialize LaunchDarkly
 const me = require('./routes/me/index');
 
-try {
-  mongoSetup();
-} catch (err) {
-  logger.error(`Error setting up MongoDB: ${err}`);
-}
+(async () => {
+  try {
+    await mongoSetup();
+    logger.info('Mongo connected');
+  } catch (err) {
+    logger.error(`Error setting up MongoDB: ${err}`);
+  }
+})();
+
+(async () => {
+  try {
+    await ldWaitForInitialization();
+    logger.info('LaunchDarkly connected');
+  } catch (err) {
+    logger.error(`Error setting up LaunchDarkly: ${err}`);
+  }
+})();
 
 // deepcode ignore UseCsurfForExpress: we need a larger ticket to implement csurf
 const api = express();
