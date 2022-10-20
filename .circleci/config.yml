@@ -649,6 +649,10 @@ jobs:
             node yaml-tests.js
 
   e2e test:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string  
     machine:
       image: ubuntu-2004:202104-01
     resource_class: large
@@ -782,6 +786,10 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "6" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
   
   chromatic deployment:
+    parameters:
+      env:
+        description: The environment being deployed
+        type: string  
     docker:
       - image: cimg/node:16.16.0
         auth:
@@ -1204,10 +1212,6 @@ jobs:
 
   # Preview deployment, used to put up preview links in pull requests
   preview deploy:
-    parameters:
-      env:
-        description: The environment being deployed
-        type: string  
     docker:
       - image: cimg/python:3.10.4
         auth:
