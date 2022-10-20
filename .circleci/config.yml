@@ -112,34 +112,53 @@ workflows:
           filters:
             tags:
               only: /.*/
-      #- e2e test:
-          #filters:
-            #branches:
-              #ignore:
-                #- main
-                #- gh-pages
-            #tags:
-              #ignore: ignore-e2e
-          #requires:
-            #- frontend lint
-            #- backend lint
-            #- dependency vulnerability scan
-            #- yaml test
+      - e2e test:
+          name: e2e test staging
+          env: STAGING
+          filters:
+            branches:
+              ignore:
+                - main
+                - gh-pages
+            tags:
+              ignore: ignore-e2e
+          requires:
+            - frontend lint
+            - backend lint
+            - dependency vulnerability scan
+            - yaml test
+      - e2e test:
+          name: e2e test prod
+          env: PRODUCTION
+          filters:
+            branches:
+              ignore:
+                - main
+                - gh-pages
+            tags:
+              ignore: ignore-e2e
+          requires:
+            - frontend lint
+            - backend lint
+            - dependency vulnerability scan
+            - yaml test
 
-      #- chromatic deployment:
-          #filters:
-            #branches:
-              #ignore:
-                #- gh-pages
-            #tags:
-              #ignore: ignore-e2e
-          #requires:
-            #- frontend lint
-            #- backend lint
-            #- dependency vulnerability scan
-            #- yaml test
-            #- owasp zap scan
-            #- e2e test
+      - chromatic deployment:
+          name: chromatic deployment staging
+          env: STAGING
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+            tags:
+              ignore: ignore-e2e
+          requires:
+            - frontend lint
+            - backend lint
+            - dependency vulnerability scan
+            - yaml test
+            - owasp zap scan
+            - e2e test
 
       # backend jobs
       - backend api endpoint test:
@@ -262,8 +281,8 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            #- e2e test
-            #- chromatic deployment
+            - e2e test
+            - chromatic deployment
 
       - frontend deploy:
           name: frontend deploy production
@@ -279,8 +298,8 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
-            #- e2e test
-            #- chromatic deployment
+            - e2e test
+            - chromatic deployment
 
       # joint jobs
       - preview deploy:
