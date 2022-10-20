@@ -128,7 +128,7 @@ workflows:
             - dependency vulnerability scan
             - yaml test
       - e2e test:
-          name: e2e test prod
+          name: e2e test production
           env: PRODUCTION
           filters:
             branches:
