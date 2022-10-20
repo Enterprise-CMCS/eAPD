@@ -95,31 +95,9 @@ export const addMMISActivity = years => {
         years
       );
 
-      const staff1 = activityData.staff[0];
-      const staff2 = activityData.staff[1];
-      const expense1 = activityData.expenses[0];
-      const expense2 = activityData.expenses[1];
-      const contractor1 = activityData.privateContractors[0];
-      const contractor2 = activityData.privateContractors[1];
-
       _.forEach(years, (year, i) => {
-        const staffTotal =
-          staff1.costs[i] * staff1.ftes[i] + staff2.costs[i] * staff2.ftes[i];
-
-        const expenseTotal = expense1.costs[i] + expense2.costs[i];
-
-        const contractorTotal =
-          contractor1.FFYcosts[i] +
-          contractor2.FFYcosts[i][0] * contractor2.FFYcosts[i][1];
-
-        const activityTotalCosts = staffTotal + expenseTotal + contractorTotal;
-
-        const otherFunding = activityData.costAllocation.costs[i];
-
-        budgetPage.checkActivityTotalCostTable({
-          activityTotalCosts,
-          otherFunding,
-          totalComputableMedicaidCost: activityTotalCosts - otherFunding,
+        budgetPage.checkActivityTotalCostTableNew({
+          expectedTable: activityData.costAllocationActivityTotalCostTables[i],
           index: i
         });
       });
