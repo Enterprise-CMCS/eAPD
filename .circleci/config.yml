@@ -90,11 +90,20 @@ workflows:
   owasp, e2e, and chromatic:
     jobs:
       - owasp zap scan:
-        env: PRODUCTION
+          filters:
+            branches:
+              only:
+                - $CIRCLE_BRANCH    
       - e2e test:
-        env: PRODUCTION
+          filters:
+            branches:
+              only:
+                - $CIRCLE_BRANCH    
       - chromatic deployment:
-        env: PRODUCTION
+          filters:
+            branches:
+              only:
+                - $CIRCLE_BRANCH    
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
