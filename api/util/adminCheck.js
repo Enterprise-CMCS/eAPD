@@ -1,142 +1,142 @@
 const { combinedSchemas } = require('@cms-eapd/common');
 
-const getActivitiesName = errorPath => {
-  const subSectionNameDict = {
-    contractorResources: 'Private Contractor Costs',
-    costAllocation: 'Cost Allocation',
-    costAllocationNarrative: 'Cost Allocation',
-    description: 'Activity Overview',
-    name: 'Activity Overview',
-    fundingSource: 'Activity Overview',
-    expenses: 'State Staff and Expenses',
-    outcomes: 'Outcomes and Milestones',
-    plannedEndDate: 'Activity Schedule',
-    plannedStartDate: 'Activity Schedule',
-    schedule: 'Outcomes and Milestones',
-    standardsAndConditions: 'Activity Overview',
-    statePersonnel: 'State Staff and Expenses',
-    summary: 'Activity Overview'
-  };
-
-  if (typeof errorPath[1] === 'undefined') {
-    return `Activities`;
-  }
-
-  // Edge case #1: The budget holds a calculated value that we validate
-  // against. Since it's not part of the apd object, we handle it here
-  if (
-    [
-      'budget',
-      'activities',
-      'quarterlyFFP',
-      'years',
-      'subtotal',
-      'percent'
-    ].every(val => errorPath.includes(val))
-  ) {
-    return `Activity ${activityIndexes[errorPath[2]] + 1} Budget and FFP`;
-  }
-  // Edge case #2: The costAllocation section of the apd data structure
-  // is used on two pages of the app. This handles mapping fpp to the
-  // Budget and FFP page instead of the Cost Allocation and Other Funding page
-  if (
-    ['activities', 'costAllocation', 'ffp'].every(val =>
-      errorPath.includes(val)
-    )
-  ) {
-    return `Activity ${errorPath[1] + 1} Budget and FFP`;
-  }
-
-  return `Activity ${errorPath[1] + 1} ${subSectionNameDict[errorPath[2]]}`;
-};
-
-const getSectionName = errorPath => {
-  const sectionNameDict = {
-    apdOverview: 'APD Overview',
-    keyStatePersonnel: 'Key State Personnel',
-    previousActivities: 'Previous Activities',
-    activities: getActivitiesName(errorPath),
-    proposedBudget: 'Proposed Budget',
-    assurancesAndCompliances: 'Assurances and Compliance',
-    budget: getActivitiesName(errorPath)
-  };
-
-  return `${sectionNameDict[errorPath[0]]}`;
-};
-
-const getActivitiesURLPath = errorPath => {
-  const subSectionURLPath = {
-    contractorResources: 'contractor-costs',
-    costAllocation: 'cost-allocation',
-    costAllocationNarrative: 'cost-allocation',
-    description: 'overview',
-    expenses: 'state-costs',
-    outcomes: 'oms',
-    plannedEndDate: 'overview',
-    plannedStartDate: 'overview',
-    name: 'overview',
-    fundingSource: 'overview',
-    schedule: 'oms',
-    standardsAndConditions: 'overview',
-    statePersonnel: 'state-costs',
-    summary: 'overview'
-  };
-
-  if (typeof errorPath[1] === 'undefined') {
-    return `activities`;
-  }
-
-  return `activity/${errorPath[1]}/${subSectionURLPath[errorPath[2]]}`;
-};
-
-const getURLPath = (errorPath, apdId) => {
-  const sectionURLPath = {
-    apdOverview: 'apd-overview',
-    keyStatePersonnel: 'state-profile',
-    previousActivities: 'previous-activities',
-    activities: getActivitiesURLPath(errorPath),
-    proposedBudget: 'proposed-budget',
-    assurancesAndCompliances: 'assurances-and-compliance'
-  };
-
-  // Edge case #1: The budget holds a calculated value that we validate
-  // against. Since it's not part of the apd object, we handle it here
-  if (
-    [
-      'budget',
-      'activities',
-      'quarterlyFFP',
-      'years',
-      'subtotal',
-      'percent'
-    ].every(val => errorPath.includes(val))
-  ) {
-    return `/apd/${apdId}/activity/${activityIndexes[errorPath[2]]}/ffp`;
-  }
-
-  // Edge case #2: The costAllocation section of the apd data structure
-  // is used on two pages of the app. This handles mapping fpp to the
-  // Budget and FFP page instead of the Cost Allocation and Other Funding page
-  if (
-    ['activities', 'costAllocation', 'ffp'].every(val =>
-      errorPath.includes(val)
-    )
-  ) {
-    return `/apd/${apdId}/activity/${errorPath[1]}/ffp`;
-  }
-
-  return `/apd/${apdId}/${sectionURLPath[errorPath[0]]}`;
-};
-
 /**
  * Builds an error list for use in the frontend admin check panel
  * @param {Array} validationResults An array of errors
  * @returns an array of errors with section name, url, message
  */
 const buildErrorList = (validationResults, apdId, activityIndexes) => {
+  const getActivitiesName = errorPath => {
+    const subSectionNameDict = {
+      contractorResources: 'Private Contractor Costs',
+      costAllocation: 'Cost Allocation',
+      costAllocationNarrative: 'Cost Allocation',
+      description: 'Activity Overview',
+      name: 'Activity Overview',
+      fundingSource: 'Activity Overview',
+      expenses: 'State Staff and Expenses',
+      outcomes: 'Outcomes and Milestones',
+      plannedEndDate: 'Activity Schedule',
+      plannedStartDate: 'Activity Schedule',
+      schedule: 'Outcomes and Milestones',
+      standardsAndConditions: 'Activity Overview',
+      statePersonnel: 'State Staff and Expenses',
+      summary: 'Activity Overview'
+    };
+
+    if (typeof errorPath[1] === 'undefined') {
+      return `Activities`;
+    }
+
+    // Edge case #1: The budget holds a calculated value that we validate
+    // against. Since it's not part of the apd object, we handle it here
+    if (
+      [
+        'budget',
+        'activities',
+        'quarterlyFFP',
+        'years',
+        'subtotal',
+        'percent'
+      ].every(val => errorPath.includes(val))
+    ) {
+      return `Activity ${activityIndexes[errorPath[2]] + 1} Budget and FFP`;
+    }
+    // Edge case #2: The costAllocation section of the apd data structure
+    // is used on two pages of the app. This handles mapping fpp to the
+    // Budget and FFP page instead of the Cost Allocation and Other Funding page
+    if (
+      ['activities', 'costAllocation', 'ffp'].every(val =>
+        errorPath.includes(val)
+      )
+    ) {
+      return `Activity ${errorPath[1] + 1} Budget and FFP`;
+    }
+
+    return `Activity ${errorPath[1] + 1} ${subSectionNameDict[errorPath[2]]}`;
+  };
+
+  const getSectionName = errorPath => {
+    const sectionNameDict = {
+      apdOverview: 'APD Overview',
+      keyStatePersonnel: 'Key State Personnel',
+      previousActivities: 'Previous Activities',
+      activities: getActivitiesName(errorPath),
+      proposedBudget: 'Proposed Budget',
+      assurancesAndCompliances: 'Assurances and Compliance',
+      budget: getActivitiesName(errorPath)
+    };
+
+    return `${sectionNameDict[errorPath[0]]}`;
+  };
+
+  const getActivitiesURLPath = errorPath => {
+    const subSectionURLPath = {
+      contractorResources: 'contractor-costs',
+      costAllocation: 'cost-allocation',
+      costAllocationNarrative: 'cost-allocation',
+      description: 'overview',
+      expenses: 'state-costs',
+      outcomes: 'oms',
+      plannedEndDate: 'overview',
+      plannedStartDate: 'overview',
+      name: 'overview',
+      fundingSource: 'overview',
+      schedule: 'oms',
+      standardsAndConditions: 'overview',
+      statePersonnel: 'state-costs',
+      summary: 'overview'
+    };
+
+    if (typeof errorPath[1] === 'undefined') {
+      return `activities`;
+    }
+
+    return `activity/${errorPath[1]}/${subSectionURLPath[errorPath[2]]}`;
+  };
+
+  const getURLPath = errorPath => {
+    const sectionURLPath = {
+      apdOverview: 'apd-overview',
+      keyStatePersonnel: 'state-profile',
+      previousActivities: 'previous-activities',
+      activities: getActivitiesURLPath(errorPath),
+      proposedBudget: 'proposed-budget',
+      assurancesAndCompliances: 'assurances-and-compliance'
+    };
+
+    // Edge case #1: The budget holds a calculated value that we validate
+    // against. Since it's not part of the apd object, we handle it here
+    if (
+      [
+        'budget',
+        'activities',
+        'quarterlyFFP',
+        'years',
+        'subtotal',
+        'percent'
+      ].every(val => errorPath.includes(val))
+    ) {
+      return `/apd/${apdId}/activity/${activityIndexes[errorPath[2]]}/ffp`;
+    }
+
+    // Edge case #2: The costAllocation section of the apd data structure
+    // is used on two pages of the app. This handles mapping fpp to the
+    // Budget and FFP page instead of the Cost Allocation and Other Funding page
+    if (
+      ['activities', 'costAllocation', 'ffp'].every(val =>
+        errorPath.includes(val)
+      )
+    ) {
+      return `/apd/${apdId}/activity/${errorPath[1]}/ffp`;
+    }
+
+    return `/apd/${apdId}/${sectionURLPath[errorPath[0]]}`;
+  };
+
   const fullErrorList = validationResults.map(elem => {
     const sectionName = getSectionName(elem.path);
-    const linkURL = getURLPath(elem.path, apdId);
+    const linkURL = getURLPath(elem.path);
 
     return {
       section: sectionName,
@@ -161,7 +161,7 @@ const getManualValidations = apd => {
    *  }
    */
 
-  let results = [];
+  const results = [];
   apd?.activities?.forEach((activity, index) => {
     Object.keys(activity.costAllocation).forEach(year => {
       if (
