@@ -91,7 +91,6 @@ workflows:
     jobs:
       - owasp zap scan:
           filters:
-            branches:
             tags:
               only: /.*/  
       - e2e test:
