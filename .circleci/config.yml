@@ -748,7 +748,8 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
             docker-compose exec api yarn workspace @cms-eapd/common build
-            sleep 3
+            sleep 10
+            echo "Sleep has run"
             docker-compose exec api yarn run migrate
             docker-compose exec api yarn run seed
       - run:
