@@ -86,16 +86,9 @@ workflows:
 
   # Tests
   owasp, e2e, and chromatic:
-    triggers:
-      - schedule:
-          cron: '0 6 * * *' # Every day at 6 am
-          filters:
-            branches:
-              ignore:
-                - main
-                - gh-pages
-                - snyk-upgrade-*    
     jobs:
+      - hold:
+        type: approval
       - owasp zap scan:
           filters:
             tags:
