@@ -94,17 +94,23 @@ workflows:
       - owasp zap scan:
           filters:
             tags:
-              ignore: /.*/    
+              ignore: /.*/
+          requires: 
+            - hold
       - e2e test:
           env: PRODUCTION
           filters:
             tags:
-              ignore: /.*/  
+              ignore: /.*/
+          requires: 
+            - hold
       - chromatic deployment:
           env: PRODUCTION
           filters:
             tags:
               ignore: /.*/
+          requires: 
+            - hold
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
