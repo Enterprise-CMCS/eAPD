@@ -90,8 +90,11 @@ workflows:
       - schedule:
           cron: '0 6 * * *' # Every day at 6 am
           filters:
-            tags:
-              only: /.*/      
+            branches:
+              ignore:
+                - main
+                - gh-pages
+                - snyk-upgrade-*    
     jobs:
       - owasp zap scan:
           filters:
