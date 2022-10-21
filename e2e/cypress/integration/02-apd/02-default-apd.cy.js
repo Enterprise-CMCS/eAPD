@@ -76,7 +76,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
       testDefaultActivityScheduleSummary(years);
     });
 
-    describe.only('default Proposed Budget', () => {
+    describe('default Proposed Budget', () => {
       testDefaultProposedBudget(years);
     });
 

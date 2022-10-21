@@ -172,29 +172,6 @@ Cypress.Commands.add(
   }
 );
 
-// Cypress command to turn on a feature flag for launch darkly
-Cypress.Commands.add('updateFeatureFlags', featureFlags => {
-  const body = {};
-  Object.entries(featureFlags).forEach(
-    ([featureFlagName, featureFlagValue]) => {
-      body[featureFlagName] = { value: featureFlagValue };
-    }
-  );
-
-  // turn off push (EventSource) updates from LaunchDarkly
-  cy.intercept({ hostname: /.*stream.launchdarkly.us/ }, req => {
-    req.reply({ body });
-  });
-
-  // ignore api calls to events endpoint
-  cy.intercept({ hostname: /.*events.launchdarkly.us/ }, { body: {} });
-
-  // return feature flag values in format expected by launchdarkly client
-  cy.intercept({ hostname: /.*app.launchdarkly.us/ }, req => {
-    req.reply({ body });
-  });
-});
-
 Cypress.Commands.add('waitForSave', () => {
   // Adding a wait initially to allow the save to complete
   // and another save to start if it was queued
@@ -629,4 +606,33 @@ Cypress.Commands.add('checkPageA11y', () => {
     null,
     callback
   ); // Remove ignored nav when upgrading cms design system
+});
+
+// Cypress command to turn on a feature flag for launch darkly
+Cypress.Commands.add('updateFeatureFlags', featureFlags => {
+  // ignore api calls to events endpoint
+  cy.intercept(
+    { method: 'POST', hostname: /.*events.launchdarkly.us/ },
+    { body: {} }
+  ).as('LDEvents');
+
+  // turn off push (EventSource) updates from LaunchDarkly
+  cy.intercept({ method: 'GET', hostname: /.*stream.launchdarkly.us/ }, req => {
+    req.reply('Random message');
+  }).as('LDClientStream');
+
+  // return feature flag values in format expected by launchdarkly client
+  return cy
+    .intercept(
+      { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
+      req => {
+        req.reply(({ body }) => {
+          Cypress._.map(featureFlags, (ffValue, ffKey) => {
+            body[ffKey] = { value: ffValue };
+            return body;
+          });
+        });
+      }
+    )
+    .as('LDApp');
 });
