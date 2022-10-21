@@ -90,7 +90,7 @@ workflows:
   owasp, e2e, and chromatic:
     jobs:
       - hold:
-        type: approval
+          type: approval
       - owasp zap scan:
           filters:
             tags:
