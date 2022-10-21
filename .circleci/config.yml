@@ -90,9 +90,8 @@ workflows:
       - schedule:
           cron: '0 6 * * *' # Every day at 6 am
           filters:
-            branches:
-              only:
-                - main          
+            tags:
+              only: /.*/      
     jobs:
       - owasp zap scan:
           filters:
