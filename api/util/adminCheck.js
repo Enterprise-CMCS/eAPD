@@ -213,16 +213,14 @@ const adminCheckApd = apd => {
     }
   };
 
-  const { error: { details = [] } = {} } = combinedSchemas.validate(
-    modifiedApd,
-    {
+  const { error: { details: schemaValidation = [] } = {} } =
+    combinedSchemas.validate(modifiedApd, {
       abortEarly: false
-    }
-  );
+    });
 
   const manualValidations = getManualValidations(apd);
 
-  const validationResults = [...details, ...manualValidations];
+  const validationResults = [...schemaValidation, ...manualValidations];
 
   const errorList = buildErrorList(validationResults, apd._id, activityIndexes); // eslint-disable-line no-underscore-dangle
   return errorList;
