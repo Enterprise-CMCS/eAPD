@@ -10,46 +10,46 @@ module.exports = (
 
   app.get('/apds', can('view-document'), async (req, res, next) => {
     logger.silly({ id: req.id, message: 'handling GET /apds' });
-
-    try {
-      const stateId = req.user.state.id;
-
-      if (!stateId) {
-        logger.verbose('user does not have an associated state');
-        return res
-          .status(403)
-          .send({ error: 'user does not have an associated state' })
-          .end();
-      }
-
-      const apds = (await getAllAPDsByState(stateId)).map(
-        ({
-          _id: id,
-          createdAt: created,
-          updatedAt: updated,
-          stateId: state,
-          name,
-          status,
-          years
-        }) => ({
-          id,
-          created,
-          updated,
-          state,
-          name,
-          status,
-          years
-        })
-      );
-
-      logger.silly({
-        id: req.id,
-        message: `got apds: ${apds.map(({ id, name }) => ({ id, name }))}`
-      });
-      return res.send(apds);
-    } catch (e) {
-      return next(e);
-    }
+    return null;
+    //     try {
+    //       const stateId = req.user.state.id;
+    //
+    //       if (!stateId) {
+    //         logger.verbose('user does not have an associated state');
+    //         return res
+    //           .status(403)
+    //           .send({ error: 'user does not have an associated state' })
+    //           .end();
+    //       }
+    //
+    //       const apds = (await getAllAPDsByState(stateId)).map(
+    //         ({
+    //           _id: id,
+    //           createdAt: created,
+    //           updatedAt: updated,
+    //           stateId: state,
+    //           name,
+    //           status,
+    //           years
+    //         }) => ({
+    //           id,
+    //           created,
+    //           updated,
+    //           state,
+    //           name,
+    //           status,
+    //           years
+    //         })
+    //       );
+    //
+    //       logger.silly({
+    //         id: req.id,
+    //         message: `got apds: ${apds.map(({ id, name }) => ({ id, name }))}`
+    //       });
+    //       return res.send(apds);
+    //     } catch (e) {
+    //       return next(e);
+    //     }
   });
 
   app.get(
