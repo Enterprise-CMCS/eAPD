@@ -3,25 +3,23 @@ version: 2.1
 workflows:
   version: 2
 
-  # Workflow to cleanup preview deploys from AWS.  Runs every two hours.
-  #  cleanup preview deploys:
-  #    triggers:
-  #      - schedule:
-  # Run every hour, every day. Specified this way because the more
-  # compact cron syntax wasn't working.
-  #          cron: "0 0 * * *"
-  #          filters:
-  #            branches:
-  #              only:
-  #                - master
-  #    jobs:
-  #      - cleanup preview deploys
+  # Workflow to cleanup preview deploys from AWS.
+  cleanup preview deploys:
+    triggers:
+      - schedule:
+          cron: "0 5 * * *" # Every day at 5 am
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cleanup preview deploys
 
 # Workflows to validate IaC configurations  
   packer validation:
     triggers:
       - schedule:
-          cron: '0 0 * * *'
+          cron: '0 4 * * *' # Every day at 4 am
           filters:
             branches:
               only:
@@ -33,7 +31,7 @@ workflows:
   terraform validation:
     triggers:
       - schedule:
-          cron: '0 0 * * *'
+          cron: '0 4 * * *' # Every day at 4 am
           filters:
             branches:
               only:
@@ -46,7 +44,7 @@ workflows:
   nightly dependency vulnerability scan:
     triggers:
       - schedule:
-          cron: '0 0 * * *'
+          cron: '0 0 * * *' # Every night at midnight
           filters:
             branches:
               only:
@@ -61,7 +59,7 @@ workflows:
   weekly aws ami builds:
     triggers:
       - schedule:
-          cron: '0 0 * * 1' # Mondays at midnight
+          cron: '0 1 * * 1' # Mondays at 1 am
           filters:
             branches:
               only:
@@ -88,6 +86,9 @@ workflows:
 
   # Tests
   owasp, e2e, and chromatic:
+    triggers:
+      - schedule:
+          cron: '0 6 * * *' # Every day at 6 am  
     jobs:
       - hold:
           type: approval
@@ -746,7 +747,6 @@ jobs:
             export LD_API_KEY="$PREVIEW_LD_API_KEY"
             export LD_CLIENT_ID="$PREVIEW_LD_CLIENT_ID"
             nvm use 16.16.0
-            yarn workspace @cms-eapd/common build
             yarn install --frozen-lockfile
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
@@ -1206,22 +1206,22 @@ jobs:
 
   # Cleans up preview deploys that are no longer associated with open pull
   # requests.
-  #  cleanup preview deploys:
-  #    docker:
-  #      - image: python:3
-  #    steps:
-  #      - checkout
-  #      - run:
-  #          name: cleanup deploys with no open PR
-  #          working_directory: ~/project/bin/preview-deploy
-  #          command: |
-  #            apt-get -qq update
-  #            apt-get -qq install jq -y
-  #            pip install --quiet awscli
-  #            ./aws.cleanup.sh \
-  #              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
-  #              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
-  #              --GH_BOT_USER "$GH_BOT_USER"
+    cleanup preview deploys:
+      docker:
+        - image: python:3
+      steps:
+        - checkout
+        - run:
+            name: cleanup deploys with no open PR
+            working_directory: ~/project/bin/preview-deploy
+            command: |
+              apt-get -qq update
+              apt-get -qq install jq -y
+              pip install --quiet awscli
+              ./aws.cleanup.sh \
+                --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+                --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
+                --GH_BOT_USER "$GH_BOT_USER"
 
   # Frontend production deployment.
   frontend deploy:
