@@ -90,23 +90,14 @@ workflows:
       - hold:
         type: approval
       - owasp zap scan:
-          filters:
-            tags:
-              ignore: /.*/
           requires: 
             - hold
       - e2e test:
           env: PRODUCTION
-          filters:
-            tags:
-              ignore: /.*/
           requires: 
             - hold
       - chromatic deployment:
           env: PRODUCTION
-          filters:
-            tags:
-              ignore: /.*/
           requires: 
             - hold
 
