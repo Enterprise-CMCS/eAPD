@@ -90,28 +90,20 @@ workflows:
       - schedule:
           cron: '0 6 * * *' # Every day at 6 am  
     jobs:
-      - hold:
-          type: approval
       - owasp zap scan:
           filters:
             tags:
               ignore: /.*/
-          requires: 
-            - hold
       - e2e test:
           env: PRODUCTION
           filters:
             tags:
               ignore: /.*/
-          requires: 
-            - hold
       - chromatic deployment:
           env: PRODUCTION
           filters:
             tags:
               ignore: /.*/
-          requires: 
-            - hold
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
@@ -1206,22 +1198,22 @@ jobs:
 
   # Cleans up preview deploys that are no longer associated with open pull
   # requests.
-    cleanup preview deploys:
-      docker:
-        - image: python:3
-      steps:
-        - checkout
-        - run:
-            name: cleanup deploys with no open PR
-            working_directory: ~/project/bin/preview-deploy
-            command: |
-              apt-get -qq update
-              apt-get -qq install jq -y
-              pip install --quiet awscli
-              ./aws.cleanup.sh \
-                --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
-                --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
-                --GH_BOT_USER "$GH_BOT_USER"
+  cleanup preview deploys:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: cleanup deploys with no open PR
+          working_directory: ~/project/bin/preview-deploy
+          command: |
+            apt-get -qq update
+            apt-get -qq install jq -y
+            pip install --quiet awscli
+            ./aws.cleanup.sh \
+              --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
+              --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
+              --GH_BOT_USER "$GH_BOT_USER"
 
   # Frontend production deployment.
   frontend deploy:
