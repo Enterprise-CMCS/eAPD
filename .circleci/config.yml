@@ -7,7 +7,7 @@ workflows:
   cleanup preview deploys:
     triggers:
       - schedule:
-          cron: "0 5 * * *" # Every day at 5 am
+          cron: "0 */4 * * *" # Every 4 hours
           filters:
             branches:
               only:
@@ -88,7 +88,11 @@ workflows:
   owasp, e2e, and chromatic:
     triggers:
       - schedule:
-          cron: '0 6 * * *' # Every day at 6 am  
+          cron: '0 6 * * *' # Every day at 6 am
+          filters:
+            branches:
+              only:
+                - main          
     jobs:
       - owasp zap scan:
           filters:
