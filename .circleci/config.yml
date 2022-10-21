@@ -7,7 +7,7 @@ workflows:
   cleanup preview deploys:
     triggers:
       - schedule:
-          cron: "0 */4 * * *" # Every 4 hours
+          cron: "0 0,4,8,12,16,20 * * *" # Every 4 hours
           filters:
             branches:
               only:
