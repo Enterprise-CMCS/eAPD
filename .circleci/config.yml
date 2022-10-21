@@ -89,10 +89,12 @@ workflows:
   # Tests
   owasp, e2e, and chromatic:
     jobs:
+      - hold:
+        type: approval
       - owasp zap scan:
           filters:
             tags:
-              ignore: /.*/  
+              ignore: /.*/    
       - e2e test:
           env: PRODUCTION
           filters:
