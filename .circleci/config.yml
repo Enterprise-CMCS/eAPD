@@ -746,8 +746,9 @@ jobs:
             export LD_API_KEY="$PREVIEW_LD_API_KEY"
             export LD_CLIENT_ID="$PREVIEW_LD_CLIENT_ID"
             nvm use 16.16.0
-            yarn install --frozen-lockfile
             yarn workspace @cms-eapd/common build
+            yarn install --frozen-lockfile
+            sleep 3
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
             #docker-compose exec api yarn workspace @cms-eapd/common build
