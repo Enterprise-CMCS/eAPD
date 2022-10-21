@@ -93,21 +93,21 @@ workflows:
           filters:
             tags:
               ignore: /.*/
-          requires:
+          requires: 
             - hold
       - e2e test:
           env: PRODUCTION
           filters:
             tags:
               ignore: /.*/
-          requires:
+          requires: 
             - hold
       - chromatic deployment:
           env: PRODUCTION
           filters:
             tags:
               ignore: /.*/
-          requires:
+          requires: 
             - hold
 
   # Workflow to test, build, and deploy the backend and frontend
