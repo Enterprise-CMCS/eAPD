@@ -29,36 +29,24 @@ tap.test(
             user_id: 'stateadmin1',
             email: 'stateAdminApproved@email.com',
             displayName: 'should not be returned',
-            secondEmail: '',
-            primaryPhone: '',
-            mobilePhone: '',
             login: 'test1'
           },
           stateAdminPending: {
             user_id: 'stateadmin2',
             email: 'stateAdminPending@email.com',
             displayName: 'should be returned',
-            secondEmail: '',
-            primaryPhone: '',
-            mobilePhone: '',
             login: 'test2'
           },
           stateStaffRevoked: {
             user_id: 'statestaff1',
             email: 'stateStaffRevoked@email.com',
             displayName: 'shoould not be returned',
-            secondEmail: '',
-            primaryPhone: '',
-            mobilePhone: '',
             login: 'test3'
           },
           stateStaffApproved: {
             user_id: 'statestaff2',
             email: 'stateStaffApproved@email.com',
             displayName: 'should be returned',
-            secondEmail: '',
-            primaryPhone: '',
-            mobilePhone: '',
             login: 'test4'
           }
         };

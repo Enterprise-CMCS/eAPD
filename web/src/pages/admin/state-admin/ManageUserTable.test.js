@@ -6,10 +6,7 @@ const requestedAffiliation = {
   displayName: 'Liz Lemon',
   email: 'liz@lemon.com',
   id: 24,
-  mobilePhone: null,
-  primaryPhone: '4045555555',
   role: null,
-  secondEmail: null,
   stateId: 'md',
   status: 'requested',
   userId: '00u5mfj967KsdvBBB297'
@@ -19,10 +16,7 @@ const approvedAffiliation = {
   displayName: 'Taylor Baylor',
   email: 'taylor@baylor.com',
   id: 24,
-  mobilePhone: null,
-  primaryPhone: '4045555555',
   role: 'State Admin',
-  secondEmail: null,
   stateId: 'md',
   status: 'approved',
   userId: '00u5mfj967KsdvCCC297'
@@ -32,10 +26,7 @@ const deniedAffiliation = {
   displayName: 'Jimmy Stewart',
   email: 'jimmy@stewart.com',
   id: 24,
-  mobilePhone: null,
-  primaryPhone: '4045555555',
   role: 'State Staff',
-  secondEmail: null,
   stateId: 'md',
   status: 'denied',
   userId: '00u5mfj967KsdvDDD297'
@@ -68,7 +59,6 @@ describe('<ManageUserTable />', () => {
     setup(props);
     expect(screen.getByText('Name')).toBeTruthy();
     expect(screen.getByText('Email')).toBeTruthy();
-    expect(screen.getByText('Phone Number')).toBeTruthy();
     expect(screen.getByText('Actions')).toBeTruthy();
   });
 
@@ -83,7 +73,6 @@ describe('<ManageUserTable />', () => {
     setup(props);
     expect(screen.getByText('Name')).toBeTruthy();
     expect(screen.getByText('Email')).toBeTruthy();
-    expect(screen.getByText('Phone Number')).toBeTruthy();
     expect(screen.getByText('Role')).toBeTruthy();
     expect(screen.getByText('Actions')).toBeTruthy();
   });
@@ -119,7 +108,6 @@ describe('<ManageUserTable />', () => {
     setup(props);
     expect(screen.getByText('Name')).toBeTruthy();
     expect(screen.getByText('Email')).toBeTruthy();
-    expect(screen.getByText('Phone Number')).toBeTruthy();
     expect(screen.getByText('Status')).toBeTruthy();
     expect(screen.getByText('Actions')).toBeTruthy();
   });
@@ -135,7 +123,6 @@ describe('<ManageUserTable />', () => {
     setup(props);
     expect(screen.getByText(requestedAffiliation.displayName)).toBeTruthy();
     expect(screen.getByText(requestedAffiliation.email)).toBeTruthy();
-    expect(screen.getByText(requestedAffiliation.primaryPhone)).toBeTruthy();
   });
 
   test('shows correct data in active tab', () => {
@@ -149,7 +136,6 @@ describe('<ManageUserTable />', () => {
     setup(props);
     expect(screen.getByText(approvedAffiliation.displayName)).toBeTruthy();
     expect(screen.getByText(approvedAffiliation.email)).toBeTruthy();
-    expect(screen.getByText(approvedAffiliation.primaryPhone)).toBeTruthy();
     expect(screen.getByText(approvedAffiliation.role)).toBeTruthy();
   });
 
@@ -164,7 +150,6 @@ describe('<ManageUserTable />', () => {
     setup(props);
     expect(screen.getByText(deniedAffiliation.displayName)).toBeTruthy();
     expect(screen.getByText(deniedAffiliation.email)).toBeTruthy();
-    expect(screen.getByText(deniedAffiliation.primaryPhone)).toBeTruthy();
     expect(
       screen.getByText(deniedAffiliation.status, { exact: false })
     ).toBeTruthy();

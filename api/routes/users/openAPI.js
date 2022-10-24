@@ -3,41 +3,129 @@ const {
   schema: { arrayOf, jsonResponse }
 } = require('../openAPI/helpers');
 
-const userObjectSchema = {
+const userObjectSchema = jsonResponse({
   type: 'object',
   properties: {
     id: {
-      type: 'number',
-      description: "User's unique ID"
-    },
-    email: {
       type: 'string',
-      format: 'email',
-      description: "User's email address"
+      description: `User's unique ID, used internally and for identifying the user when interacting with the API`
     },
     name: {
       type: 'string',
-      description: "User's name"
+      description: `The user's name, if defined`
     },
-    phone: {
+    username: {
       type: 'string',
-      description: "User's phone number; up to 10 digits"
-    },
-    position: {
-      type: 'string',
-      description: "User's position in the state’s Medicaid program"
-    },
-    state: {
-      type: 'string',
-      description:
-        'Two-letter ID of the state this user is associated with, if any'
+      description: `User's unique username`
     },
     role: {
       type: 'string',
-      description: "The user's role name, if any. Can be null."
+      description: `The user's access role`
+    },
+    state: {
+      type: 'object',
+      description: 'The state/territory/district that this user is assigned to',
+      properties: {
+        id: {
+          type: 'string',
+          description: 'Lowercase 2-letter code'
+        },
+        name: {
+          type: 'string',
+          description: 'State/territory/district full name'
+        },
+        medicaid_office: {
+          type: 'object',
+          properties: {
+            address1: {
+              type: 'string'
+            },
+            city: {
+              type: 'string'
+            },
+            zip: {
+              type: 'string'
+            },
+            state: {
+              type: 'string'
+            },
+            director: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string'
+                },
+                email: {
+                  type: 'string'
+                },
+                phone: {
+                  type: 'string'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    states: {
+      type: 'object',
+      properties: {
+        '{state_id}': {
+          type: 'string',
+          description: 'The affiliation status for the state in the field',
+          enum: ['requested', 'approved', 'denied', 'revoked']
+        }
+      }
+    },
+    permissions: arrayOf({
+      type: 'object',
+      properties: {
+        '{state_id}': arrayOf({
+          type: 'string',
+          description:
+            'Names of system activities this user can perform for that state'
+        })
+      }
+    }),
+    activities: arrayOf({
+      type: 'string',
+      description:
+        'Names of system activities this user can perform for the selected state'
+    }),
+    affiliation: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string'
+        },
+        user_id: {
+          type: 'string'
+        },
+        username: {
+          type: 'string'
+        },
+        state_id: {
+          type: 'string'
+        },
+        role_id: {
+          type: 'string'
+        },
+        state: {
+          type: 'string'
+        },
+        created_at: {
+          type: 'string'
+        },
+        updated_at: {
+          type: 'string'
+        },
+        expires_at: {
+          type: 'string'
+        }
+      }
     }
   }
-};
+});
 
 const openAPI = {
   '/users': {

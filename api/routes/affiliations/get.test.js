@@ -61,10 +61,7 @@ tap.test('GET /affiliations/me', async tests => {
           role: 'eAPD State Staff',
           updatedBy: 'Regular User',
           displayName: 'Jesse James',
-          email: 'jjames@fearless.tech',
-          secondEmail: null,
-          primaryPhone: '1111111111',
-          mobilePhone: null
+          email: 'jjames@fearless.tech'
         }
       ];
       getAffiliationsByUserId.withArgs('30').resolves(affiliations);

@@ -13,7 +13,7 @@ describe('user state reducer', () => {
       error: false,
       fetching: false,
       loaded: false,
-      data: { email: '', id: '', name: '', phone: '', position: '', state: '' }
+      data: { email: '', id: '', name: '', position: '', state: '' }
     };
 
     it('should handle initial state', () => {

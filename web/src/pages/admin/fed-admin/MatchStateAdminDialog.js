@@ -104,10 +104,6 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
                 <strong>Email:</strong> <span>{selectedAffiliation.email}</span>
               </li>
               <li>
-                <strong>Phone:</strong>{' '}
-                <span>{selectedAffiliation.primaryPhone}</span>
-              </li>
-              <li>
                 <strong>State:</strong>{' '}
                 <span>
                   {selectedAffiliation.stateId
@@ -130,9 +126,6 @@ const MatchStateAdminDialog = ({ certification, hideModal }) => {
               </li>
               <li>
                 <strong>Email:</strong> <span>{certification.email}</span>
-              </li>
-              <li>
-                <strong>Phone:</strong> <span>{certification.phone}</span>
               </li>
               <li>
                 <strong>State:</strong> <span>{certification.state}</span>
