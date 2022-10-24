@@ -23,7 +23,10 @@ import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
 
-import { selectSummary } from '../../../redux/selectors/apd.selectors';
+import {
+  selectSummary,
+  selectAdminCheckEnabled
+} from '../../../redux/selectors/apd.selectors';
 import { getAllFundingSources } from '../../../redux/selectors/activities.selectors';
 
 const ApdOverview = ({
@@ -60,8 +63,8 @@ const ApdOverview = ({
       narrativeHIE,
       narrativeMMIS
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: joiResolver(apdOverviewSchema)
   });
 
@@ -111,21 +114,25 @@ const ApdOverview = ({
   const handleProgramOverview = html => {
     setOverview(html);
     setValue('programOverview', html);
+    trigger();
   };
 
   const handleHIEOverview = html => {
     setHIE(html);
     setValue('narrativeHIE', html);
+    trigger();
   };
 
   const handleHITOverview = html => {
     setHIT(html);
     setValue('narrativeHIT', html);
+    trigger();
   };
 
   const handleMMISOverview = html => {
     setMMIS(html);
     setValue('narrativeMMIS', html);
+    trigger();
   };
 
   const yearChoices = yearOptions.map(year => ({
@@ -289,7 +296,7 @@ ApdOverview.defaultProps = {
 
 const mapStateToProps = state => ({
   fundingSources: getAllFundingSources(state),
-  adminCheck: state.apd.adminCheck,
+  adminCheck: selectAdminCheckEnabled(state),
   ...selectSummary(state)
 });
 

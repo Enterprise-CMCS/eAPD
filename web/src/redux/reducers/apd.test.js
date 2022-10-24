@@ -24,7 +24,6 @@ const {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } = require('../actions/editApd');
-const { FLAGS_UPDATED } = require('../actions/flags');
 const regulations = require('../../util/regulations').default;
 
 describe('APD reducer', () => {
@@ -39,9 +38,12 @@ describe('APD reducer', () => {
     loaded: false,
     error: '',
     selectAPDOnLoad: false,
-    adminCheck: false,
-    adminCheckCollapsed: false,
-    adminCheckComplete: false
+    adminCheck: {
+      errors: [],
+      enabled: false,
+      collapsed: false,
+      complete: false
+    }
   };
 
   it('should handle initial state', () => {
@@ -84,9 +86,12 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false,
-      adminCheckCollapsed: false,
-      adminCheckComplete: false
+      adminCheck: {
+        errors: [],
+        enabled: false,
+        collapsed: false,
+        complete: false
+      }
     });
   });
 
@@ -98,9 +103,12 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false,
-      adminCheckCollapsed: false,
-      adminCheckComplete: false
+      adminCheck: {
+        errors: [],
+        enabled: false,
+        collapsed: false,
+        complete: false
+      }
     });
   });
 
@@ -145,9 +153,12 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: true,
       selectAPDOnLoad: false,
-      adminCheck: false,
-      adminCheckCollapsed: false,
-      adminCheckComplete: false
+      adminCheck: {
+        errors: [],
+        enabled: false,
+        collapsed: false,
+        complete: false
+      }
     };
 
     expect(
@@ -168,42 +179,50 @@ describe('APD reducer', () => {
       loaded: false,
       error: 'some error',
       selectAPDOnLoad: false,
-      adminCheck: false,
-      adminCheckCollapsed: false,
-      adminCheckComplete: false
+      adminCheck: {
+        errors: [],
+        enabled: false,
+        collapsed: false,
+        complete: false
+      }
     });
   });
 
   describe('should handle selecting an APD', () => {
     const action = {
       type: SELECT_APD_SUCCESS,
-      apd: {
-        activities: [
-          {
-            name: 'activity 1',
-            activityId: 'abcd1234',
-            contractorResources: [{ name: 'contractor 1' }],
-            expenses: [{ name: 'expense 1' }],
-            outcomes: [{ name: 'outcome 1', metrics: [{ name: 'metric 1' }] }],
-            schedule: [{ name: 'schedule 1' }],
-            statePersonnel: [{ name: 'person 1' }]
-          }
-        ],
-        // A priest led an angry mob to the town council chambers and threw
-        // them out a window. The king literally died of shock. This was the
-        // First Defenestration of Prague.
-        created: '1419-07-30T00:00:00Z',
-        assurancesAndCompliances: {
-          procurement: [],
-          recordsAccess: [],
-          softwareRights: [],
-          security: []
+      data: {
+        apd: {
+          activities: [
+            {
+              name: 'activity 1',
+              activityId: 'abcd1234',
+              contractorResources: [{ name: 'contractor 1' }],
+              expenses: [{ name: 'expense 1' }],
+              outcomes: [
+                { name: 'outcome 1', metrics: [{ name: 'metric 1' }] }
+              ],
+              schedule: [{ name: 'schedule 1' }],
+              statePersonnel: [{ name: 'person 1' }]
+            }
+          ],
+          // A priest led an angry mob to the town council chambers and threw
+          // them out a window. The king literally died of shock. This was the
+          // First Defenestration of Prague.
+          created: '1419-07-30T00:00:00Z',
+          assurancesAndCompliances: {
+            procurement: [],
+            recordsAccess: [],
+            softwareRights: [],
+            security: []
+          },
+          keyStatePersonnel: { keyPersonnel: [{ name: 'key person 1' }] },
+          value: `hurr hurr i'm a burr`,
+          // Some nobles are tossed out a window in the Second Defenestration
+          // of Prague, kicking off the Thirty Years' War
+          updated: '1618-05-23T10:30:00Z'
         },
-        keyStatePersonnel: { keyPersonnel: [{ name: 'key person 1' }] },
-        value: `hurr hurr i'm a burr`,
-        // Some nobles are tossed out a window in the Second Defenestration
-        // of Prague, kicking off the Thirty Years' War
-        updated: '1618-05-23T10:30:00Z'
+        adminCheck: []
       }
     };
 
@@ -272,7 +291,7 @@ describe('APD reducer', () => {
     });
 
     it('sets keys and preserves the federal citations if they are defined', () => {
-      action.apd.assurancesAndCompliances = { key: 'value' };
+      action.data.apd.assurancesAndCompliances = { key: 'value' };
 
       expect(apd(initialState, action)).toEqual({
         ...initialState,
@@ -1165,17 +1184,23 @@ describe('APD reducer', () => {
           data: {
             name: 'Timmothert',
             updated: 'in the present'
+          },
+          adminCheck: {
+            errors: []
           }
         },
         {
           type: SAVE_APD_SUCCESS,
-          apd: {
-            id: 'apdID',
-            // Medicare and Medicaid are created, 546 years to the day after
-            // the First Defenestration of Prague.
-            created: '1965-07-30T00:00:00Z',
-            // US Department of Health and Human Services is created
-            updated: '1953-04-11T00:00:00Z'
+          data: {
+            apd: {
+              id: 'apdID',
+              // Medicare and Medicaid are created, 546 years to the day after
+              // the First Defenestration of Prague.
+              created: '1965-07-30T00:00:00Z',
+              // US Department of Health and Human Services is created
+              updated: '1953-04-11T00:00:00Z'
+            },
+            adminCheck: []
           }
         }
       )
@@ -1194,19 +1219,13 @@ describe('APD reducer', () => {
           created: 'July 30, 1965',
           name: 'Timmothert',
           updated: 'April 11, 1953, 12:00 AM GMT'
+        },
+        adminCheck: {
+          errors: []
         }
       },
-      { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
+      { type: SAVE_APD_SUCCESS, data: { apd: { id: 'apdID', updated: '' } } }
     );
-  });
-
-  it('should handle updating flags', () => {
-    expect(
-      apd(initialState, { type: FLAGS_UPDATED, flags: { validation: true } })
-    ).toEqual({
-      ...initialState,
-      adminCheck: true
-    });
   });
 
   describe('admin check panel toggles', () => {
@@ -1218,13 +1237,16 @@ describe('APD reducer', () => {
         })
       ).toEqual({
         ...initialState,
-        adminCheck: true,
-        adminCheckCollapsed: false,
-        adminCheckComplete: false
+        adminCheck: {
+          errors: [],
+          enabled: true,
+          collapsed: false,
+          complete: false
+        }
       });
     });
 
-    it('should handle turning the admin check mini on', () => {
+    it('should handle turning the admin check collapsed on', () => {
       expect(
         apd(initialState, {
           type: ADMIN_CHECK_COLLAPSE_TOGGLE,
@@ -1232,13 +1254,16 @@ describe('APD reducer', () => {
         })
       ).toEqual({
         ...initialState,
-        adminCheck: false,
-        adminCheckCollapsed: true,
-        adminCheckComplete: false
+        adminCheck: {
+          errors: [],
+          enabled: false,
+          collapsed: true,
+          complete: false
+        }
       });
     });
 
-    it('should handle turning the admin check mini on', () => {
+    it('should handle turning setting the admin check to complete', () => {
       expect(
         apd(initialState, {
           type: ADMIN_CHECK_COMPLETE_TOGGLE,
@@ -1246,9 +1271,12 @@ describe('APD reducer', () => {
         })
       ).toEqual({
         ...initialState,
-        adminCheck: false,
-        adminCheckCollapsed: false,
-        adminCheckComplete: true
+        adminCheck: {
+          errors: [],
+          enabled: false,
+          collapsed: false,
+          complete: true
+        }
       });
     });
   });

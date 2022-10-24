@@ -579,6 +579,204 @@ const invalidActivity = {
   }
 };
 
+const invalidActivityCostAllocationOther = {
+  alternatives: 'abc',
+  contractorResources: [
+    {
+      description: 'Maintain SLR',
+      end: '2021-01-15',
+      hourly: {
+        2022: { hours: '', rate: '' },
+        2023: { hours: '', rate: '' }
+      },
+      useHourly: false,
+      name: 'Super SLR Incorporated',
+      start: '2020-01-15',
+      totalCost: 32423,
+      years: { 2022: 999756, 2023: 342444 }
+    },
+    {
+      description: 'Technology consulting and planning services.',
+      end: '2023-01-15',
+      hourly: {
+        2022: { hours: '', rate: '' },
+        2023: { hours: '', rate: '' }
+      },
+      useHourly: 'true',
+      name: 'Tech Consulting Inc.',
+      start: '2021-01-15',
+      totalCost: 473573,
+      years: { 2022: 333000, 2023: 200000 }
+    }
+  ],
+  costAllocation: {
+    2022: { ffp: { federal: 90, state: 10 }, other: 1 },
+    2023: { ffp: { federal: 90, state: 10 }, other: 0 }
+  },
+  costAllocationNarrative: {
+    years: {
+      2022: {
+        otherSources: ''
+      },
+      2023: {
+        otherSources: ''
+      }
+    },
+    methodology: '<p>No cost allocation is necessary for this activity.</p>'
+  },
+  description: 'abc',
+  expenses: [
+    {
+      description: 'abc',
+      category: 'Training and outreach',
+      years: { 2022: 40000, 2023: 40000 }
+    },
+    {
+      description: 'abc',
+      category: 'Travel',
+      years: { 2022: 35000, 2023: 35000 }
+    },
+    {
+      description: 'abc',
+      category: 'Hardware, software, and licensing',
+      years: { 2022: 700000, 2023: 0 }
+    }
+  ],
+  fundingSource: 'HIT',
+  outcomes: [
+    {
+      outcome:
+        'Accept attestations for 2022, and modify SLR to meet new spec sheets released by CMS.',
+      metrics: [
+        { metric: 'Complete SLR modifications by 11/1/21' },
+        { metric: 'Accept attestations through 4/30/22.' }
+      ]
+    },
+    {
+      outcome: 'Provide support to EPs and EHs through attestation process.',
+      metrics: [
+        { metric: "Guidance available on Tycho''s websites" },
+        { metric: 'Office hours availble for EPs and EHs' },
+        { metric: 'Site visits, as needed, for EPs and EHs' }
+      ]
+    }
+  ],
+  name: 'Program Administration',
+  plannedEndDate: '2023-09-30',
+  plannedStartDate: '2021-09-30',
+  schedule: [
+    {
+      endDate: '2020-09-07',
+      milestone: 'Implementation of Final Rule and Stage 3 System Developments'
+    },
+    {
+      endDate: '2019-12-31',
+      milestone: 'Environmental Scan Completion'
+    },
+    {
+      endDate: '2022-05-30',
+      milestone: 'HIT Roadmap Development'
+    }
+  ],
+  standardsAndConditions: {
+    doesNotSupport: '',
+    supports:
+      '<p class="p1"><span class="s1">We will comply with standards and conditions</span></p>'
+  },
+  statePersonnel: [
+    {
+      title: 'Project Assistant',
+      description:
+        'Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.',
+      years: {
+        2022: { amt: 86000, perc: 1 },
+        2023: { amt: 88000, perc: 1 }
+      }
+    },
+    {
+      title:
+        'EHR Incentive Program Meaningful Use Coordinator (Research Analyst III)',
+      description:
+        'Develop and monitor reports, assist data users in developing and managing queries.',
+      years: {
+        2022: { amt: 101115, perc: 1 },
+        2023: { amt: 102111, perc: 1 }
+      }
+    },
+    {
+      title: 'IT Liaison',
+      description:
+        'Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.',
+      years: {
+        2022: { amt: 101000, perc: 1 },
+        2023: { amt: 104000, perc: 1 }
+      }
+    },
+    {
+      title: 'Accountant III',
+      description:
+        'Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.',
+      years: {
+        2022: { amt: 101000, perc: 3 },
+        2023: { amt: 109000, perc: 3 }
+      }
+    },
+    {
+      title: 'Public Information Officer',
+      description:
+        'Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program',
+      years: {
+        2022: { amt: 165000, perc: 0.5 },
+        2023: { amt: 170000, perc: 0.5 }
+      }
+    },
+    {
+      title: 'Systems Chief',
+      description:
+        'Coordinate office resources, manage staff, budget, and resource assignments, and report program status.',
+      years: {
+        2022: { amt: 135000, perc: 0.5 },
+        2023: { amt: 140000, perc: 0.5 }
+      }
+    },
+    {
+      title:
+        'Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)',
+      description:
+        'Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.',
+      years: {
+        2022: { amt: 110012, perc: 1 },
+        2023: { amt: 111102, perc: 1 }
+      }
+    },
+    {
+      title: 'System Analyst (Analyst Programmer IV)',
+      description:
+        'Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.',
+      years: {
+        2022: { amt: 98987, perc: 4 },
+        2023: { amt: 99897, perc: 4 }
+      }
+    }
+  ],
+  summary:
+    '1 Continued Operations of the Medicaid EHR Incentive Payment Program, includes modifications to the SLR, HIT staff, auditing, outreach, and non-personnel expenses for administering the program.',
+  quarterlyFFP: {
+    2022: {
+      1: { combined: 25, contractors: 25, inHouse: 25 },
+      2: { combined: 25, contractors: 25, inHouse: 25 },
+      3: { combined: 25, contractors: 25, inHouse: 25 },
+      4: { combined: 25, contractors: 25, inHouse: 25 }
+    },
+    2023: {
+      1: { combined: 25, contractors: 25, inHouse: 25 },
+      2: { combined: 25, contractors: 25, inHouse: 25 },
+      3: { combined: 25, contractors: 25, inHouse: 25 },
+      4: { combined: 25, contractors: 25, inHouse: 25 }
+    }
+  }
+};
+
 const invalidProposedBudget = {
   incentivePayments: {
     ehAmt: {
@@ -1215,7 +1413,7 @@ const mockApdRandomInvalid = {
 
 const expectedErrorsMockApdRandom = [
   {
-    section: 'Activity Overview',
+    section: 'APD Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
     fieldDescription: 'Provide a summary of HIT-funded activities.'
   },
@@ -1240,8 +1438,8 @@ const expectedErrorsMockApdRandom = [
     fieldDescription: 'Must select hourly or yearly.'
   },
   {
-    section: 'Activity 1 Cost Allocation',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/cost-allocation',
+    section: 'Activity 1 Budget and FFP',
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/ffp',
     fieldDescription: 'Select a federal-state split.'
   },
   {
@@ -1260,8 +1458,8 @@ const expectedErrorsMockApdRandom = [
     fieldDescription: 'Must select hourly or yearly.'
   },
   {
-    section: 'Activity 2 Cost Allocation',
-    link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/cost-allocation',
+    section: 'Activity 2 Budget and FFP',
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/ffp',
     fieldDescription: 'Select a federal-state split.'
   },
   {
@@ -1315,7 +1513,7 @@ tap.test('apd document admin check', async apdValidationTests => {
         proposedBudget: validProposedBudget,
         assurancesAndCompliances: validAssurancesAndCompliances
       });
-      test.same(results, null);
+      test.same(results, []);
     }
   );
 
@@ -1336,12 +1534,12 @@ tap.test('apd document admin check', async apdValidationTests => {
       // Only expecting HIT to be required since that's the validActivity's fundingSource
       test.same(results, [
         {
-          section: 'Activity Overview',
+          section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
           fieldDescription: 'Provide a brief introduction to the state program.'
         },
         {
-          section: 'Activity Overview',
+          section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
           fieldDescription: 'Provide a summary of HIT-funded activities.'
         }
@@ -1392,7 +1590,7 @@ tap.test('apd document admin check', async apdValidationTests => {
     });
     test.same(results, [
       {
-        section: 'Activity Overview',
+        section: 'APD Overview',
         link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
         fieldDescription: 'Funding sources are required'
       },
@@ -1413,8 +1611,8 @@ tap.test('apd document admin check', async apdValidationTests => {
         fieldDescription: 'Must select hourly or yearly.'
       },
       {
-        section: 'Activity 1 undefined',
-        link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/undefined',
+        section: 'Activity 1 Activity Overview',
+        link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
         fieldDescription: 'Must select program type.'
       },
       {
@@ -1516,6 +1714,30 @@ tap.test('apd document admin check', async apdValidationTests => {
       }
     ]);
   });
+
+  apdValidationTests.test(
+    'test cost allocation other funding descrption validates conditionally based on the cost allocation other amount',
+    async test => {
+      const results = adminCheckApd({
+        _id: '632a0fbc5665670a34b3bbd7',
+        name: 'Test APD',
+        years: ['2022', '2023'],
+        apdOverview: validApdOverview,
+        keyStatePersonnel: validKeyStatePersonnel,
+        previousActivities: validPreviousActivities,
+        activities: [invalidActivityCostAllocationOther],
+        proposedBudget: validProposedBudget,
+        assurancesAndCompliances: validAssurancesAndCompliances
+      });
+      test.same(results, [
+        {
+          section: 'Activity 1 Cost Allocation',
+          link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/cost-allocation',
+          fieldDescription: 'Provide a description of other funding.'
+        }
+      ]);
+    }
+  );
 
   apdValidationTests.test(
     'test an invalid apd returns expected errors',

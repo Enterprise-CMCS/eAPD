@@ -14,11 +14,17 @@ import Waypoint from '../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 import { selectApdYears } from '../../../redux/selectors/apd.selectors';
 
+import { useFlags } from 'launchdarkly-react-client-sdk';
+
 const ExportAndSubmit = ({
   push: pushRoute,
   toggleAdminCheck: toggleAdmin,
   years
 }) => {
+  // inside the component code
+  // Temporary feature flag
+  const { adminCheckFlag } = useFlags();
+
   const paramApdId = useParams().apdId;
 
   if (!paramApdId) {
@@ -34,7 +40,7 @@ const ExportAndSubmit = ({
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
       <AlertMissingFFY />
       <Section resource="exportAndSubmit">
-        {process.env.TEALIUM_ENV !== 'prod' && (
+        {adminCheckFlag === true && (
           <Subsection resource="adminCheck">
             <p>
               Choose Run Administrative Check to see a list of required fields

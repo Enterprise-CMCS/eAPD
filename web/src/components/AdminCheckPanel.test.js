@@ -4,43 +4,31 @@ import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
 // eslint-disable-next-line import/no-named-as-default
 import AdminCheckPanel from './AdminCheckPanel';
 
-// Note: this data is mocked in the app as well until the backend is
-// providing the data and handling frontend updates.
 const mockedData = [
   {
     section: 'APD Overview',
-    subSection: null,
     link: 'apd-overview',
-    fieldDescription: 'Please fill out name',
-    complete: false
+    fieldDescription: 'Please fill out name'
   },
   {
     section: 'Key State Personnel',
-    subSection: null,
     link: 'state-profile',
-    fieldDescription: 'Provide the email address of the Medicaid Director',
-    complete: false
+    fieldDescription: 'Provide the email address of the Medicaid Director'
   },
   {
     section: 'Key State Personnel',
-    subSection: null,
     link: 'state-profile',
-    fieldDescription: 'Provide the phone number of the Medicaid Director',
-    complete: false
+    fieldDescription: 'Provide the phone number of the Medicaid Director'
   },
   {
     section: 'Activity 1',
-    subSection: 'Overview',
     link: 'activity/0/overview',
-    fieldDescription: 'Provide a short overview of the Activity',
-    complete: false
+    fieldDescription: 'Provide a short overview of the Activity'
   },
   {
     section: 'Activity 2',
-    subSection: 'Outcomes and Metrics',
     link: 'activity/1/oms',
-    fieldDescription: 'Add at least one outcome for this activity',
-    complete: false
+    fieldDescription: 'Add at least one outcome for this activity'
   }
 ];
 
@@ -57,11 +45,11 @@ describe('admin check panel', () => {
     setup(null, {
       initialState: {
         apd: {
-          adminCheck: true,
-          adminCheckCollapsed: false,
-          adminCheckComplete: false,
-          data: {
-            adminCheck: mockedData
+          adminCheck: {
+            errors: mockedData,
+            enabled: true,
+            collapsed: false,
+            complete: false
           }
         }
       }
@@ -74,11 +62,11 @@ describe('admin check panel', () => {
     setup(null, {
       initialState: {
         apd: {
-          adminCheck: true,
-          adminCheckCollapsed: false,
-          adminCheckComplete: false,
-          data: {
-            adminCheck: mockedData
+          adminCheck: {
+            errors: mockedData,
+            enabled: true,
+            collapsed: false,
+            complete: false
           }
         }
       }
@@ -95,11 +83,11 @@ describe('admin check panel', () => {
     setup(null, {
       initialState: {
         apd: {
-          adminCheck: true,
-          adminCheckCollapsed: false,
-          adminCheckComplete: true,
-          data: {
-            adminCheck: []
+          adminCheck: {
+            errors: [],
+            enabled: true,
+            collapsed: false,
+            complete: true
           }
         }
       }

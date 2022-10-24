@@ -51,12 +51,10 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
 };
 
 const adminCheckAPDDocument = async id => {
-  // Get the updated apd json
+  // get the updated apd json
   const apdDoc = await getAPDByID(id);
-  // Call validation from util, pass in apd (may need to also pass in apd ID)
-  const adminCheckResults = adminCheckApd(apdDoc);
-  // Return results
-  return adminCheckResults;
+  // call admin check util
+  return adminCheckApd(apdDoc);
 };
 
 const updateAPDDocument = async (

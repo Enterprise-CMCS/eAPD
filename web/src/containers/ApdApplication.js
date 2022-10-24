@@ -24,6 +24,8 @@ import {
   getCanUserEditAPD
 } from '../redux/selectors/user.selector';
 
+import { useFlags } from 'launchdarkly-react-client-sdk';
+
 const ApdApplication = ({
   isAdmin,
   isEditor,
@@ -39,6 +41,10 @@ const ApdApplication = ({
   const paramApdId = useParams().apdId;
   const history = useHistory();
   const location = useLocation();
+
+  // inside the component code
+  // Temporary feature flag
+  const { adminCheckFlag } = useFlags();
 
   useEffect(
     () => {
@@ -88,7 +94,7 @@ const ApdApplication = ({
             <ApdPageRoutes apdId={paramApdId} />
           </div>
         </main>
-        <AdminCheckPanel />
+        {adminCheckFlag === true && <AdminCheckPanel />}
       </div>
     </div>
   );

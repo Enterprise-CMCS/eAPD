@@ -3,16 +3,17 @@ const { combinedSchemas } = require('@cms-eapd/common');
 /**
  * Builds an error list for use in the frontend admin check panel
  * @param {Array} validationResults An array of errors
- * @returns an array of errors with section name, url,
- * error message and completion status
+ * @returns an array of errors with section name, url, message
  */
-const buildErrorList = (validationResults, apdId) => {
+const buildErrorList = (validationResults, apdId, activityIndexes) => {
   const getActivitiesName = errorPath => {
     const subSectionNameDict = {
       contractorResources: 'Private Contractor Costs',
       costAllocation: 'Cost Allocation',
       costAllocationNarrative: 'Cost Allocation',
       description: 'Activity Overview',
+      name: 'Activity Overview',
+      fundingSource: 'Activity Overview',
       expenses: 'State Staff and Expenses',
       outcomes: 'Outcomes and Milestones',
       plannedEndDate: 'Activity Schedule',
@@ -26,17 +27,44 @@ const buildErrorList = (validationResults, apdId) => {
     if (typeof errorPath[1] === 'undefined') {
       return `Activities`;
     }
+
+    // Edge case #1: The budget holds a calculated value that we validate
+    // against. Since it's not part of the apd object, we handle it here
+    if (
+      [
+        'budget',
+        'activities',
+        'quarterlyFFP',
+        'years',
+        'subtotal',
+        'percent'
+      ].every(val => errorPath.includes(val))
+    ) {
+      return `Activity ${activityIndexes[errorPath[2]] + 1} Budget and FFP`;
+    }
+    // Edge case #2: The costAllocation section of the apd data structure
+    // is used on two pages of the app. This handles mapping fpp to the
+    // Budget and FFP page instead of the Cost Allocation and Other Funding page
+    if (
+      ['activities', 'costAllocation', 'ffp'].every(val =>
+        errorPath.includes(val)
+      )
+    ) {
+      return `Activity ${errorPath[1] + 1} Budget and FFP`;
+    }
+
     return `Activity ${errorPath[1] + 1} ${subSectionNameDict[errorPath[2]]}`;
   };
 
   const getSectionName = errorPath => {
     const sectionNameDict = {
-      apdOverview: 'Activity Overview',
+      apdOverview: 'APD Overview',
       keyStatePersonnel: 'Key State Personnel',
       previousActivities: 'Previous Activities',
       activities: getActivitiesName(errorPath),
       proposedBudget: 'Proposed Budget',
-      assurancesAndCompliances: 'Assurances and Compliance'
+      assurancesAndCompliances: 'Assurances and Compliance',
+      budget: getActivitiesName(errorPath)
     };
 
     return `${sectionNameDict[errorPath[0]]}`;
@@ -52,6 +80,8 @@ const buildErrorList = (validationResults, apdId) => {
       outcomes: 'oms',
       plannedEndDate: 'overview',
       plannedStartDate: 'overview',
+      name: 'overview',
+      fundingSource: 'overview',
       schedule: 'oms',
       standardsAndConditions: 'overview',
       statePersonnel: 'state-costs',
@@ -75,10 +105,36 @@ const buildErrorList = (validationResults, apdId) => {
       assurancesAndCompliances: 'assurances-and-compliance'
     };
 
+    // Edge case #1: The budget holds a calculated value that we validate
+    // against. Since it's not part of the apd object, we handle it here
+    if (
+      [
+        'budget',
+        'activities',
+        'quarterlyFFP',
+        'years',
+        'subtotal',
+        'percent'
+      ].every(val => errorPath.includes(val))
+    ) {
+      return `/apd/${apdId}/activity/${activityIndexes[errorPath[2]]}/ffp`;
+    }
+
+    // Edge case #2: The costAllocation section of the apd data structure
+    // is used on two pages of the app. This handles mapping fpp to the
+    // Budget and FFP page instead of the Cost Allocation and Other Funding page
+    if (
+      ['activities', 'costAllocation', 'ffp'].every(val =>
+        errorPath.includes(val)
+      )
+    ) {
+      return `/apd/${apdId}/activity/${errorPath[1]}/ffp`;
+    }
+
     return `/apd/${apdId}/${sectionURLPath[errorPath[0]]}`;
   };
 
-  const fullErrorList = validationResults.error.details.map(elem => {
+  const fullErrorList = validationResults.map(elem => {
     const sectionName = getSectionName(elem.path);
     const linkURL = getURLPath(elem.path);
 
@@ -93,10 +149,46 @@ const buildErrorList = (validationResults, apdId) => {
 };
 
 /**
- * Validates entire APD object using a combined schema
- * Schemas are shared with the frontend to support inline
- * and field-level validation
- * @param {Object} apd The full apd object
+ * Manually check for validation errors
+ * @param {Object} apd The full APD
+ * @returns an array of errors with section name, url, message
+ */
+const getManualValidations = apd => {
+  /*
+   *  {
+   *    message: 'Blah blah blah'
+   *    path: [ 'activities', 0, 'costAllocationNarrative', 'years', '2022', 'otherSources' ],
+   *  }
+   */
+
+  const results = [];
+  apd?.activities?.forEach((activity, index) => {
+    Object.keys(activity.costAllocation).forEach(year => {
+      if (
+        activity.costAllocation[year].other > 0 &&
+        activity.costAllocationNarrative.years[year].otherSources === ''
+      ) {
+        results.push({
+          message: 'Provide a description of other funding.',
+          path: [
+            'activities',
+            index,
+            'costAllocationNarrative',
+            'years',
+            year,
+            'otherSources'
+          ]
+        });
+      }
+    });
+  });
+  return results;
+};
+
+/**
+ * Validates entire APD object using a combined schema. Schemas
+ * are shared with the frontend to support inline field-level validation
+ * @param {Object} apd The full apd
  * @returns an array of validation errors
  * }
  */
@@ -107,7 +199,12 @@ const adminCheckApd = apd => {
     return activity.fundingSource;
   });
 
-  // Inject funding sources into apd object
+  const activityIndexes = {};
+  apd?.activities?.forEach((activity, index) => {
+    activityIndexes[activity.activityId] = index;
+  });
+
+  // Inject funding sources into apd object to support conditional validations
   const modifiedApd = {
     ...apd,
     apdOverview: {
@@ -116,16 +213,16 @@ const adminCheckApd = apd => {
     }
   };
 
-  const validationResults = combinedSchemas.validate(modifiedApd, {
-    abortEarly: false
-  });
+  const { error: { details: schemaValidation = [] } = {} } =
+    combinedSchemas.validate(modifiedApd, {
+      abortEarly: false
+    });
 
-  if (!validationResults.error) {
-    return null;
-  }
+  const manualValidations = getManualValidations(apd);
 
-  const errorList = buildErrorList(validationResults, apd._id); // eslint-disable-line no-underscore-dangle
+  const validationResults = [...schemaValidation, ...manualValidations];
 
+  const errorList = buildErrorList(validationResults, apd._id, activityIndexes); // eslint-disable-line no-underscore-dangle
   return errorList;
 };
 

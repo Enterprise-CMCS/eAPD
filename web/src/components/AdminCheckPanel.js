@@ -13,6 +13,13 @@ import { Button, Drawer } from '@cmsgov/design-system';
 
 import Icon, { faExclamationTriangle } from '../components/Icons';
 
+import {
+  selectAdminCheckErrors,
+  selectAdminCheckEnabled,
+  selectAdminCheckCollapsed,
+  selectAdminCheckComplete
+} from '../redux/selectors/apd.selectors';
+
 const RequiredFieldsComponent = ({ adminCheckData, adminCheckComplete }) => (
   <Fragment>
     <div className="ds-u-display--flex ds-u-justify-content--start ds-u-align-items--center">
@@ -21,7 +28,7 @@ const RequiredFieldsComponent = ({ adminCheckData, adminCheckComplete }) => (
           adminCheckComplete ? 'ds-u-fill--success' : 'ds-u-fill--error'
         } ds-u-color--white ds-u-radius ds-u-padding-x--1 ds-u-padding-y--0 ds-u-font-weight--bold`}
       >
-        {adminCheckComplete ? '0' : adminCheckData.length}
+        {adminCheckData.length}
       </span>
       <span
         className={`${
@@ -225,15 +232,14 @@ AdminCheckPanel.propTypes = {
   adminCheckData: PropTypes.array.isRequired,
   adminCheckEnabled: PropTypes.bool.isRequired,
   adminCheckCollapsed: PropTypes.bool.isRequired,
-  adminCheckComplete: PropTypes.bool.isRequired,
-  adminCheck: PropTypes.object.isRequired
+  adminCheckComplete: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-  adminCheckEnabled: state.apd.adminCheck,
-  adminCheckCollapsed: state.apd.adminCheckCollapsed,
-  adminCheckComplete: state.apd.adminCheckComplete,
-  adminCheckData: state.apd.data.adminCheck
+  adminCheckData: selectAdminCheckErrors(state),
+  adminCheckEnabled: selectAdminCheckEnabled(state),
+  adminCheckCollapsed: selectAdminCheckCollapsed(state),
+  adminCheckComplete: selectAdminCheckComplete(state)
 });
 
 const mapDispatchToProps = {

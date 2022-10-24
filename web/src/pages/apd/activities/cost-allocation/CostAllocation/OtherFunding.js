@@ -19,6 +19,7 @@ import {
   selectActivityCostSummary,
   selectActivityByIndex
 } from '../../../../../redux/selectors/activities.selectors';
+import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
 
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
@@ -34,22 +35,23 @@ const OtherFunding = ({
   adminCheck
 }) => {
   const { costAllocationNarrative = { years: {} }, costAllocation = '' } =
-      activity,
-    { years } = costSummary,
-    yearsArray = Object.keys(years);
+    activity;
+  const { years } = costSummary;
+  const yearsArray = Object.keys(years);
 
   const {
     control,
     trigger,
     clearErrors,
-    formState: { errors }
+    formState: { errors },
+    setValue
   } = useForm({
     defaultValues: {
       costAllocation,
       costAllocationNarrative
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: joiResolver(otherSourcesSchema)
   });
 
@@ -60,6 +62,17 @@ const OtherFunding = ({
       clearErrors();
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleOtherFundingChange =
+    ffy =>
+    ({ target: { value } }) => {
+      setOtherFunding(activityIndex, ffy, value);
+      setValue(`costAllocation.${ffy}.other`, value);
+
+      if (adminCheck) {
+        trigger();
+      }
+    };
 
   return (
     <Fragment>
@@ -127,20 +140,13 @@ const OtherFunding = ({
               name={`costAllocation.${ffy}.other`}
               control={control}
               value={costAllocation[ffy]?.other || '0'}
-              render={({ field: { onChange, value, ...props } }) => (
+              render={({ field: { value, ...props } }) => (
                 <DollarField
                   {...props}
                   value={value}
                   label={`FFY ${ffy}`}
                   labelClassName="sr-only"
-                  onChange={e => {
-                    setOtherFunding(activityIndex, ffy, value);
-                    onChange(e);
-
-                    if (adminCheck) {
-                      trigger();
-                    }
-                  }}
+                  onChange={handleOtherFundingChange(ffy)}
                   errorPlacement="bottom"
                   errorMessage={errors?.costAllocation?.[ffy]?.other?.message}
                 />
@@ -201,7 +207,7 @@ const mapStateToProps = (
     activity,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
-    adminCheck: state.apd.adminCheck
+    adminCheck: selectAdminCheckEnabled(state)
   };
 };
 

@@ -11,6 +11,7 @@ import {
 import { Subsection } from '../../../../components/Section';
 import DateField from '../../../../components/DateField';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { stateDateToDisplay } from '../../../../util';
 
 import scheduleSchema from '@cms-eapd/common/schemas/plannedActivityShedule';
@@ -128,7 +129,7 @@ Schedule.propTypes = {
 
 const mapStateToProps = (state, { activityIndex }) => ({
   activity: selectActivityByIndex(state, { activityIndex }),
-  adminCheck: state.apd.adminCheck
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {

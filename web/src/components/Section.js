@@ -39,7 +39,7 @@ const Subsection = ({ children, headerClassName, id, nested, resource }) => {
 
   return (
     <div className="subsection--title">
-      {!nested && (
+      {!nested && title && (
         <h3 id={id} className={`${headerClassName || ''} ds-h3`}>
           {title}
         </h3>

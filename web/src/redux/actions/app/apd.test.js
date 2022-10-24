@@ -53,14 +53,16 @@ describe('application-level actions', () => {
       const newapd = { id: 'bloop' };
       fetchMock.onPost('/apds').reply(200, newapd);
 
-      const apd = {
-        id: 'apd-id',
-        activities: [],
-        assurancesAndCompliances: { already: 'exist' },
-        keyStatePersonnel: {}
+      const data = {
+        apd: {
+          id: 'apd-id',
+          activities: [],
+          assurancesAndCompliances: { already: 'exist' },
+          keyStatePersonnel: {}
+        }
       };
 
-      fetchMock.onGet('/apds/bloop').reply(200, apd);
+      fetchMock.onGet('/apds/bloop').reply(200, data);
 
       const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
       const state = {
@@ -80,7 +82,7 @@ describe('application-level actions', () => {
         { type: CREATE_APD_SUCCESS, data: newapd },
         { type: SELECT_APD_REQUEST },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
-        { type: SELECT_APD_SUCCESS, apd },
+        { type: SELECT_APD_SUCCESS, data },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
         { type: ADMIN_CHECK_TOGGLE, data: false },
         { type: LOAD_BUDGET, budget: {} },
@@ -299,14 +301,15 @@ describe('application-level actions', () => {
 
     it('saves and does all the good things', () => {
       state.patch = [{ path: 'test path' }];
-      const updatedApd = { budget: {} };
       const store = mockStore(state);
 
-      fetchMock.onPatch('/apds/id-to-update').reply(200, { apd: updatedApd });
+      fetchMock
+        .onPatch('/apds/id-to-update')
+        .reply(200, { apd: {}, adminCheck: [] });
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
-        { type: SAVE_APD_SUCCESS, apd: {} }
+        { type: SAVE_APD_SUCCESS, data: { apd: {}, adminCheck: [] } }
         // { type: LOAD_BUDGET, budget: {} } doesn't dispatch this action because the patch isn't in the list of budget update patches
       ];
 
@@ -317,14 +320,15 @@ describe('application-level actions', () => {
 
     it('saves and updates budget when necessary', () => {
       state.patch = [{ path: '/years' }];
-      const updatedApd = { budget: {} };
       const store = mockStore(state);
 
-      fetchMock.onPatch('/apds/id-to-update').reply(200, { apd: updatedApd });
+      fetchMock
+        .onPatch('/apds/id-to-update')
+        .reply(200, { apd: {}, adminCheck: [] });
 
       const expectedActions = [
         { type: SAVE_APD_REQUEST },
-        { type: SAVE_APD_SUCCESS, apd: {} },
+        { type: SAVE_APD_SUCCESS, data: { apd: {}, adminCheck: [] } },
         { type: LOAD_BUDGET, budget: {} }
       ];
 
@@ -340,13 +344,16 @@ describe('application-level actions', () => {
         { name: 'Outcomes and metrics' },
         { name: 'FFP and budget' }
       ];
-      const apd = {
-        activities,
-        id: 'apd-id',
-        selected: 'apd goes here',
-        assurancesAndCompliances: { already: 'exists' }
+      const data = {
+        apd: {
+          activities,
+          id: 'apd-id',
+          selected: 'apd goes here',
+          assurancesAndCompliances: { already: 'exists' }
+        },
+        adminCheck: []
       };
-      fetchMock.onGet('/apds/apd-id').reply(200, apd);
+      fetchMock.onGet('/apds/apd-id').reply(200, data);
 
       const state = {
         apd: {
@@ -362,7 +369,7 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: SELECT_APD_REQUEST },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
-        { type: SELECT_APD_SUCCESS, apd },
+        { type: SELECT_APD_SUCCESS, data },
         { type: APD_ACTIVITIES_CHANGE, activities },
         { type: ADMIN_CHECK_TOGGLE, data: false },
         { type: LOAD_BUDGET, budget: {} },
@@ -393,13 +400,16 @@ describe('application-level actions', () => {
         { name: 'Outcomes and metrics' },
         { name: 'FFP and budget' }
       ];
-      const apd = {
-        activities,
-        id: 'apd-id',
-        selected: 'apd goes here',
-        assurancesAndCompliances: {}
+      const data = {
+        apd: {
+          activities,
+          id: 'apd-id',
+          selected: 'apd goes here',
+          assurancesAndCompliances: {}
+        },
+        adminCheck: []
       };
-      fetchMock.onGet('/apds/apd-id').reply(200, apd);
+      fetchMock.onGet('/apds/apd-id').reply(200, data);
 
       const state = {
         apd: {
@@ -415,7 +425,7 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: SELECT_APD_REQUEST },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
-        { type: SELECT_APD_SUCCESS, apd },
+        { type: SELECT_APD_SUCCESS, data },
         { type: APD_ACTIVITIES_CHANGE, activities },
         { type: ADMIN_CHECK_TOGGLE, data: false },
         {

@@ -14,6 +14,7 @@ import {
 import RichText from '../../../../components/RichText';
 import TextArea from '../../../../components/TextArea';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 
 const StandardsAndConditions = ({
   activity,
@@ -119,7 +120,7 @@ StandardsAndConditions.propTypes = {
 
 const mapStateToProps = (state, props) => ({
   activity: selectActivityByIndex(state, props),
-  adminCheck: state.apd.adminCheck
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {
