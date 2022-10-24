@@ -10,8 +10,12 @@ const { mnAPDId, akAPDId, badAPDId } = require('../../seeds/test/apds');
 
 describe('APD endpoint', () => {
   const db = getDB();
-  beforeAll(() => setupDB(db));
-  afterAll(() => teardownDB(db));
+  beforeAll(() => {
+    setupDB(db);
+  });
+  afterAll(() => {
+    teardownDB(db);
+  });
 
   describe('List APDs endpoint | GET /apds', () => {
     const url = '/apds';

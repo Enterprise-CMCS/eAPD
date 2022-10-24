@@ -23,7 +23,7 @@ tap.test('apds/submissions GET endpoint', async endpointTest => {
     td.update(
       td.flag('sharepoint-endpoints-4196').on(true).valueForAllUsers(false)
     );
-    createLDClient();
+    await createLDClient();
     await waitForInitialization();
   });
 

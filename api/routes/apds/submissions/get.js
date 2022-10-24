@@ -20,7 +20,7 @@ module.exports = (app, { getAllSubmittedAPDs = sub } = {}) => {
       false
     );
     console.log({ sharepoint });
-    if (!sharepoint) {
+    if (sharepoint !== true) {
       return res.status(403).end();
     }
 
