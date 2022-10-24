@@ -18,6 +18,17 @@ const axiosDefaults = {
 
 const api = axios.create(axiosDefaults);
 
+const apiKeyAuth = token => {
+  const ip = token || '127.0.0.1';
+  const options = {
+    ...axiosDefaults,
+    headers: {
+      'x-forwarded-for': ip
+    }
+  };
+  return axios.create(options);
+};
+
 const login = token => {
   const jwt = token || 'all-permissions';
   const options = {
@@ -67,6 +78,7 @@ module.exports = {
   getDB,
   setupDB,
   teardownDB,
+  apiKeyAuth,
   login,
   unauthenticatedTest,
   unauthorizedTest

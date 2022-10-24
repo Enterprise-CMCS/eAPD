@@ -4,7 +4,6 @@ const affiliations = require('./affiliations');
 const apds = require('./apds');
 const apdsEvents = require('./apds/events');
 const apdsFiles = require('./apds/files');
-const apdsSubmissions = require('./apds/submissions');
 const auth = require('./auth');
 const docs = require('./docs');
 const roles = require('./roles');
@@ -50,8 +49,6 @@ module.exports = (
   stateAffiliationEndpoint(app);
   logger.debug('setting up routes for users');
   usersEndpoint(app);
-  logger.debug('setting up routes for apds/submissions');
-  apdsSubmissions(app);
 
   // ############### ROUTE REGISTRATION INSERTION POINT #######################
   logger.debug('setting up route for OpenAPI');

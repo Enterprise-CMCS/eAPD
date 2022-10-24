@@ -5,6 +5,8 @@ const {
   createAPD,
   deleteAPDByID,
   getAllAPDsByState,
+  getAllSubmittedAPDs,
+  updateAPDReviewStatus,
   getAPDByID,
   getAPDByIDAndState,
   updateAPDDocument
@@ -85,6 +87,126 @@ tap.test('database wrappers / apds', async apdsTests => {
     test.equal(apds[0]._id.toString(), id, 'the APD was found'); // eslint-disable-line no-underscore-dangle
     await deleteAPD(approvedId);
     await deleteAPD(mnId);
+  });
+
+  apdsTests.test('getting all submitted APDs for a state', async test => {
+    const coSubmittedId = await createAPD({
+      stateId: 'co',
+      status: 'submitted',
+      ...apd
+    });
+    const mnSubmittedId = await createAPD({
+      stateId: 'mn',
+      status: 'submitted',
+      ...apd
+    });
+    const mnDraftId = await createAPD({
+      stateId: 'mn',
+      status: 'draft',
+      ...apd
+    });
+
+    const apds = await getAllSubmittedAPDs();
+
+    test.ok(apds.length === 2, '2 APD was found');
+    test.ok(
+      // eslint-disable-next-line no-underscore-dangle
+      apds.findIndex(item => item._id.toString() === coSubmittedId) > -1,
+      'the APD was found'
+    );
+    test.ok(
+      // eslint-disable-next-line no-underscore-dangle
+      apds.findIndex(item => item._id.toString() === mnSubmittedId) > -1,
+      'the APD was found'
+    );
+    await deleteAPD(coSubmittedId);
+    await deleteAPD(mnSubmittedId);
+    await deleteAPD(mnDraftId);
+  });
+
+  apdsTests.test('empty status update', async test => {
+    const coSubmittedId = await createAPD({
+      stateId: 'co',
+      status: 'submitted',
+      ...apd
+    });
+    const mnSubmittedId = await createAPD({
+      stateId: 'mn',
+      status: 'submitted',
+      ...apd
+    });
+
+    const status = await updateAPDReviewStatus();
+    test.equal(status.length, 0, 'the empty update was handled');
+    await deleteAPD(coSubmittedId);
+    await deleteAPD(mnSubmittedId);
+  });
+
+  apdsTests.test('updating the status of an APD', async test => {
+    const coSubmittedId = await createAPD({
+      stateId: 'co',
+      status: 'submitted',
+      ...apd
+    });
+    const mnSubmittedId = await createAPD({
+      stateId: 'mn',
+      status: 'submitted',
+      ...apd
+    });
+
+    const status = await updateAPDReviewStatus([
+      { apdId: coSubmittedId, newStatus: 'approved' }
+    ]);
+    test.equal(status.length, 1, 'the APD was updated');
+    test.equal(status[0].status, 'approved');
+    await deleteAPD(coSubmittedId);
+    await deleteAPD(mnSubmittedId);
+  });
+
+  apdsTests.test('updating the status of two APDs', async test => {
+    const coSubmittedId = await createAPD({
+      stateId: 'co',
+      status: 'submitted',
+      ...apd
+    });
+    const mnSubmittedId = await createAPD({
+      stateId: 'mn',
+      status: 'submitted',
+      ...apd
+    });
+
+    const status = await updateAPDReviewStatus([
+      { apdId: coSubmittedId, newStatus: 'approved' },
+      { apdId: mnSubmittedId, newStatus: 'approved' }
+    ]);
+    test.equal(status.length, 2, 'the APDs were updated');
+    test.equal(status[0].status, 'approved');
+    test.equal(status[1].status, 'approved');
+    await deleteAPD(coSubmittedId);
+    await deleteAPD(mnSubmittedId);
+  });
+
+  apdsTests.test('invalid status update', async test => {
+    const coSubmittedId = await createAPD({
+      stateId: 'co',
+      status: 'submitted',
+      ...apd
+    });
+    const mnSubmittedId = await createAPD({
+      stateId: 'mn',
+      status: 'submitted',
+      ...apd
+    });
+
+    const status = await updateAPDReviewStatus([
+      { apdId: 'bad id', newStatus: 'approved' },
+      { apdId: mnSubmittedId, newStatus: 'approved' }
+    ]);
+    test.equal(status.length, 2, 'the APDs were updated');
+    test.equal(status[0].error, 'update failed');
+    test.equal(status[1].status, 'approved');
+    await deleteAPD(coSubmittedId);
+    await deleteAPD(mnSubmittedId);
   });
 
   apdsTests.test('getting a single APD by ID', async test => {

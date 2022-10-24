@@ -938,6 +938,11 @@ const data = [
     stateId: 'ak',
     status: 'draft',
     ...apdNoActivities
+  },
+  {
+    stateId: 'ak',
+    status: 'submitted',
+    ...apd
   }
 ];
 

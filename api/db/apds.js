@@ -1,5 +1,6 @@
 const { applyPatch } = require('fast-json-patch');
 const jsonpointer = require('jsonpointer');
+const ObjectId = require('mongoose').Types.ObjectId;
 const {
   deepCopy,
   calculateBudget,
@@ -38,12 +39,39 @@ const getAPDByIDAndState = async (id, stateId) =>
 const getAllSubmittedAPDs = async () =>
   APD.find({ status: 'submitted' }).lean().populate('budget');
 
-const updateAPDReviewStatus = async updates =>
-  Promise.all(
-    updates.map(({ apdId, newStatus }) =>
-      APD.findOneAndUpdate({ _id: apdId, status: newStatus })
-    )
+const updateAPDReviewStatus = async (updates = []) => {
+  const results = await Promise.all(
+    updates.map(({ apdId = '', newStatus = '' }) => {
+      if (
+        apdId &&
+        newStatus &&
+        apdId !== '' &&
+        newStatus !== '' &&
+        ObjectId.isValid(apdId)
+      ) {
+        try {
+          return APD.findByIdAndUpdate(
+            apdId,
+            { status: newStatus },
+            { new: true }
+          );
+        } catch (e) {
+          logger.error(`Error updating APD ${apdId} status: ${e}`);
+        }
+      }
+      return new Promise(resolve => {
+        resolve({ apdId, status: newStatus, error: 'update failed' });
+      });
+    })
   );
+
+  // eslint-disable-next-line no-underscore-dangle
+  return results.map(({ _id: apdId, status, error = '' }) => ({
+    apdId,
+    status,
+    error
+  }));
+};
 
 // Apply the patches to the APD document
 const patchAPD = async (id, stateId, apdDoc, patch) => {

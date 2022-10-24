@@ -1,4 +1,6 @@
 const LaunchDarkly = require('launchdarkly-node-server-sdk');
+const LaunchDarklyMock = require('./launchDarklyMock');
+const logger = require('../logger')('apds/submissions get');
 
 const { LD_API_KEY } = process.env;
 const options = {
@@ -7,21 +9,21 @@ const options = {
   eventsUri: 'https://events.launchdarkly.us'
 };
 
-const client =
-  LD_API_KEY && LD_API_KEY !== ''
-    ? LaunchDarkly.init(LD_API_KEY, options)
-    : null;
+let client = null;
 
 const waitForInitialization = async () => {
-  // Using "await" instead, within an async function
   try {
+    if (!client && LD_API_KEY && LD_API_KEY !== '') {
+      client = LaunchDarkly.init(LD_API_KEY, options);
+    }
     if (client) {
       await client.waitForInitialization();
-      // Initialization complete
+      logger.silly('LaunchDarkly client initialized');
     }
   } catch (err) {
-    // Initialization failed
+    logger.error(`Error connecting to LaunchDarkly: ${err}`);
   }
+  return client;
 };
 
 const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
@@ -42,7 +44,11 @@ const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
  *  );
  */
 
-module.exports = {
-  waitForInitialization,
-  getLaunchDarklyFlag
-};
+if (process.env.NODE_ENV === 'test') {
+  module.exports = LaunchDarklyMock;
+} else {
+  module.exports = {
+    waitForInitialization,
+    getLaunchDarklyFlag
+  };
+}

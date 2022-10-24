@@ -1,3 +1,5 @@
 const { teardown } = require('./db/mongodb');
 
-module.exports = async () => teardown();
+module.exports = async () => {
+  await teardown();
+};

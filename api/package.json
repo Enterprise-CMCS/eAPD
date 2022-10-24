@@ -84,6 +84,7 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.21.2",
     "babel-jest": "27.5.1",
     "colors": "1.4.0",
     "core-js": "3.25.0",
@@ -109,8 +110,8 @@
       "/dist/",
       "/coverage-endpoint/"
     ],
-    "globalSetup": "./jest.setup.js",
-    "globalTeardown": "./jest.teardown.js",
+    "globalSetup": "<rootDir>/jest.setup.js",
+    "globalTeardown": "<rootDir>/jest.teardown.js",
     "testRegex": ".*.endpoint.(j|t)s[x]?$",
     "testEnvironment": "node",
     "testTimeout": 30000,

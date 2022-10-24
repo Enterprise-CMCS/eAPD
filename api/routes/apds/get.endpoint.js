@@ -22,6 +22,7 @@ describe('APD endpoint', () => {
     describe('when authenticated', () => {
       it('as a user with all permissions', async () => {
         const api = login('all-permissions');
+        console.log(`api ${JSON.stringify(api)}`);
         const response = await api.get(url);
         expect(response.status).toEqual(200);
       });

@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 export NODE_ENV=test
+export LD_API_KEY=
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
 sleep 60
