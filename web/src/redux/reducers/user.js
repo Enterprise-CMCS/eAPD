@@ -6,7 +6,7 @@ import {
   ADMIN_EDIT_ME_SUCCESS
 } from '../actions/admin';
 
-const fields = ['id', 'email', 'name', 'position', 'phone', 'state'];
+const fields = ['id', 'email', 'name', 'position', 'state'];
 const fieldsObj = Object.assign({}, ...fields.map(f => ({ [f]: '' })));
 
 const initialState = {

@@ -35,13 +35,6 @@ exports[`<ManageRoleDialog /> matches snapshot 1`] = `
   </p>
   <p>
     <strong>
-      Phone Number
-    </strong>
-     
-    4045555555
-  </p>
-  <p>
-    <strong>
       Email
     </strong>
      

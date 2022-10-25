@@ -23,10 +23,7 @@ const requestedAffiliation = {
   displayName: 'Liz Lemon',
   email: 'liz@lemon.com',
   id: 24,
-  mobilePhone: null,
-  primaryPhone: '4045555555',
   role: null,
-  secondEmail: null,
   stateId: 'md',
   status: 'requested',
   userId: '00u5mfj967KsdvBBB297'
@@ -36,10 +33,7 @@ const activeAffiliation = {
   displayName: 'Liz Lemon',
   email: 'liz@lemon.com',
   id: 24,
-  mobilePhone: null,
-  primaryPhone: '4045555555',
   role: 'eAPD State Admin',
-  secondEmail: null,
   stateId: 'md',
   status: 'approved',
   userId: '00u5mfj967KsdvBBB297'
@@ -49,10 +43,7 @@ const inactiveAffiliation = {
   displayName: 'Liz Lemon',
   email: 'liz@lemon.com',
   id: 24,
-  mobilePhone: null,
-  primaryPhone: '4045555555',
   role: null,
-  secondEmail: null,
   stateId: 'md',
   status: 'Revoked',
   userId: '00u5mfj967KsdvBBB297'
@@ -151,7 +142,7 @@ describe('<StateAdmin />', () => {
         .reply(200, [requestedAffiliation]);
     });
 
-    it('renders name, email, phone', async () => {
+    it('renders name and email', async () => {
       setup({}, { initialState });
       await loadTab('Requests');
       // Note: we render the affiliations in each tab and update on tab change, so we
@@ -160,9 +151,6 @@ describe('<StateAdmin />', () => {
         screen.getAllByText(requestedAffiliation.displayName)
       ).toHaveLength(3);
       expect(screen.getAllByText(requestedAffiliation.email)).toHaveLength(3);
-      expect(
-        screen.getAllByText(requestedAffiliation.primaryPhone)
-      ).toHaveLength(3);
     });
 
     it('renders approve and deny buttons', async () => {
@@ -194,16 +182,13 @@ describe('<StateAdmin />', () => {
         .reply(200, []);
     });
 
-    test('renders name, email, phone, role', async () => {
+    test('renders name, email, role', async () => {
       setup({}, { initialState });
       await loadTab('Active');
       expect(screen.getAllByText(activeAffiliation.displayName)).toHaveLength(
         3
       );
       expect(screen.getAllByText(activeAffiliation.email)).toHaveLength(3);
-      expect(screen.getAllByText(activeAffiliation.primaryPhone)).toHaveLength(
-        3
-      );
       // Only show role in the active tab
       expect(screen.getAllByText(activeAffiliation.role)).toHaveLength(1);
     });
@@ -240,16 +225,13 @@ describe('<StateAdmin />', () => {
         .reply(200, [inactiveAffiliation]);
     });
 
-    test('renders name, email, phone, status', async () => {
+    test('renders name, email, status', async () => {
       setup({}, { initialState });
       await loadTab('Inactive');
       expect(screen.getAllByText(inactiveAffiliation.displayName)).toHaveLength(
         3
       );
       expect(screen.getAllByText(inactiveAffiliation.email)).toHaveLength(3);
-      expect(
-        screen.getAllByText(inactiveAffiliation.primaryPhone)
-      ).toHaveLength(3);
       // Only show status in the active tab
       expect(screen.getAllByText(inactiveAffiliation.status)).toHaveLength(1);
     });

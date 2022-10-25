@@ -10,7 +10,6 @@ const defaultProps = {
   certification: {
     state: 'ak',
     name: 'Sally Shire',
-    phone: '431-231-5548',
     email: 'sally@shire.com',
     id: 'placeholder',
     ffy: 2022

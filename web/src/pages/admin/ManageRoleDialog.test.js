@@ -6,10 +6,7 @@ const selectedAffiliation = {
   displayName: 'Liz Lemon',
   email: 'liz@lemon.com',
   id: 24,
-  mobilePhone: null,
-  primaryPhone: '4045555555',
   role: null,
-  secondEmail: null,
   stateId: 'md',
   status: 'requested',
   userId: '00u5mfj967KsdvBBB297'
@@ -38,9 +35,6 @@ describe('<ManageRoleDialog />', () => {
       `Name ${selectedAffiliation.displayName}`
     );
     expect(component.find('p').at(1).text()).toEqual(
-      `Phone Number ${selectedAffiliation.primaryPhone}`
-    );
-    expect(component.find('p').at(2).text()).toEqual(
       `Email ${selectedAffiliation.email}`
     );
   });

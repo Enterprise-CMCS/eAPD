@@ -51,13 +51,6 @@ const ManageAllUsersTable = ({
         >
           {primaryAffiliation.email}
         </TableCell>
-        <TableCell
-          component="td"
-          style={{ verticalAlign: 'top' }}
-          rowSpan={primaryAffiliation.affiliations.length}
-        >
-          {primaryAffiliation.primaryPhone}
-        </TableCell>
         <TableCell className="all-users-table--state">
           {affiliation.stateId.toUpperCase()}
         </TableCell>
@@ -146,7 +139,6 @@ const ManageAllUsersTable = ({
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
               <TableCell>State</TableCell>
               {tab === 'active' ? <TableCell>Role</TableCell> : null}
               {tab === 'inactive' ? <TableCell>Status</TableCell> : null}

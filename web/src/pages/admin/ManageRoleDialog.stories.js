@@ -23,7 +23,6 @@ ManageRoleStory.args = {
   ],
   selectedAffiliation: {
     displayName: 'Test User',
-    primaryPhone: '555-555-5555',
     email: 'user@email.com'
   },
   hideManageModal: action('close'),
