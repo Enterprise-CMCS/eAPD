@@ -35,14 +35,7 @@ const createOrUpdateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
     );
 
 const sanitizeProfile = profile => {
-  const desiredFields = [
-    'displayName',
-    'email',
-    'secondEmail',
-    'primaryPhone',
-    'mobilePhone',
-    'login'
-  ];
+  const desiredFields = ['displayName', 'email', 'login'];
   const cleanProfile = {};
   desiredFields.forEach(field => {
     cleanProfile[field] = profile[field];

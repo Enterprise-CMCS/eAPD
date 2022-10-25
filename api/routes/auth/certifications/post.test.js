@@ -47,7 +47,6 @@ tap.test('state certifications post endpoint', async postTest => {
           ffy: 2021,
           name: 'Test Name',
           email: 'test@email.com',
-          phone: '4105555555',
           state: 'MD'
         },
         user: {

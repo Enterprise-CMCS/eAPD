@@ -1039,7 +1039,7 @@ jobs:
           working_directory: ~/project/web
           command: |
             export TEALIUM_ENV="test"
-            LD_CLIENT_ID=
+            export LD_CLIENT_ID=
             yarn test --runInBand
       - run:
           name: report coverage
