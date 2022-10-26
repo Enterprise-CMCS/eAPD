@@ -17,10 +17,7 @@ const defaultPopulatedAffiliation = {
   userId: 'userId',
   updatedBy: null,
   displayName: 'displayName',
-  email: 'email',
-  secondEmail: 'secondEmail',
-  primaryPhone: 'primaryPhone',
-  mobilePhone: 'mobilePhone'
+  email: 'email'
 };
 
 tap.test('database wrappers / affiliations', async affiliationsTests => {

@@ -17,7 +17,6 @@ describe('auth/certifications endpoints', () => {
       ffy: 2021,
       name: 'Roger Klotz',
       email: 'fake@email.com',
-      phone: '4105555555',
       state: 'md',
       fileUrl: '/auth/certifications/files/12345'
     };

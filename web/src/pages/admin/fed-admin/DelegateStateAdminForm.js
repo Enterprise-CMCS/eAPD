@@ -6,7 +6,6 @@ import { TextField, Dropdown, Button, ChoiceList } from '@cmsgov/design-system';
 import axios, { apiUrl } from '../../../util/api';
 import { twoYears } from '../../../util';
 import { STATES } from '../../../util/states';
-import NumberField from '../../../components/NumberField';
 import DocumentUpload from '../../../components/DocumentUpload';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -32,7 +31,6 @@ const DelegateStateAdminForm = populatedState => {
     ffy: '' || populatedState.ffy,
     name: '' || populatedState.name,
     email: '' || populatedState.email,
-    phone: '' || populatedState.phone,
     state: '' || populatedState.state,
     fileUrl: '' || populatedState.fileUrl
   };
@@ -132,19 +130,6 @@ const DelegateStateAdminForm = populatedState => {
             })
           }
           value={state.email}
-        />
-        <NumberField
-          mask="phone"
-          label="State employee phone number"
-          name="state-employee-phone"
-          onChange={e =>
-            dispatch({
-              type: 'update',
-              field: 'phone',
-              payload: e.target.value
-            })
-          }
-          value={state.phone}
         />
         <hr className="custom-hr ds-u-margin-y--3" />
         <label className="ds-c-label ds-u-measure--wide" htmlFor="file-input">

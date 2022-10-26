@@ -67,10 +67,16 @@ workflows:
               only:
                 - main
     jobs:
+      - packer validation tests:
+          name: Packer Validation Tests
       - build preview ami:
           name: Build Preview AMI
+          requires:
+            - Packer Validation Tests
       - build production staging ami:
           name: Build Prod Staging AMI
+          requires:
+            - Packer Validation Tests
       - cleanup preview ami:
           name: Cleanup Old Unused Preview AMIs
           requires:
@@ -951,7 +957,7 @@ jobs:
           working_directory: ~/project/web
           command: |
             export TEALIUM_ENV="test"
-            LD_CLIENT_ID=
+            export LD_CLIENT_ID=
             yarn test --runInBand
       - run:
           name: report coverage

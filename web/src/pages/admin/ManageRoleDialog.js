@@ -89,9 +89,6 @@ const ManageRoleDialog = ({
         <strong>Name</strong> {selectedAffiliation.displayName}
       </p>
       <p>
-        <strong>Phone Number</strong> {selectedAffiliation.primaryPhone}
-      </p>
-      <p>
         <strong>Email</strong> {selectedAffiliation.email}
       </p>
       <Dropdown

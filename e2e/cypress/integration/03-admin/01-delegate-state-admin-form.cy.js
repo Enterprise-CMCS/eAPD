@@ -62,7 +62,6 @@ describe(
       ).should('have.value', '');
       cy.get('select').first().contains('Select an Option');
       getInputByLabel('State employee email address').should('have.value', '');
-      getInputByLabel('State employee phone number').should('have.value', '');
 
       // Check the drop target zone is rendered
       cy.get('[id=file-input]').contains('Drag files here');
@@ -96,7 +95,6 @@ describe(
         ).type(userData[0].name);
         cy.get('select').select('Maryland');
         getInputByLabel('State employee email address').type(userData[0].email);
-        getInputByLabel('State employee phone number').type(userData[0].phone);
 
         cy.fixture('test.pdf', 'binary')
           .then(Cypress.Blob.binaryStringToBlob)
@@ -180,7 +178,6 @@ describe(
         ).type(userData[0].name);
         cy.get('select').select('Maryland');
         getInputByLabel('State employee email address').type(userData[0].email);
-        getInputByLabel('State employee phone number').type(userData[0].phone);
 
         cy.fixture('test.pdf', 'binary')
           .then(Cypress.Blob.binaryStringToBlob)

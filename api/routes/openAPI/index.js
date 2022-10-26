@@ -15,7 +15,6 @@ const me = require('../me/openAPI');
 const roles = require('../roles/openAPI');
 const states = require('../states/openAPI');
 const statesAffiliations = require('../states/affilitations/openAPI');
-const users = require('../users/openAPI');
 
 // ############## OPENAPI IMPORT INSERTION POINT ######################
 const { arrayOf } = require('./helpers').schema;
@@ -43,7 +42,6 @@ module.exports = {
     ...roles,
     ...states,
     ...statesAffiliations,
-    ...users,
 
     // ############## OPENAPI PATH INSERTION POINT ######################
     '/open-api': {
