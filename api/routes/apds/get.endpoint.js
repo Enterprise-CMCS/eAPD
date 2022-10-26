@@ -10,12 +10,8 @@ const { mnAPDId, akAPDId, badAPDId } = require('../../seeds/test/apds');
 
 describe('APD endpoint', () => {
   const db = getDB();
-  beforeAll(() => {
-    setupDB(db);
-  });
-  afterAll(() => {
-    teardownDB(db);
-  });
+  beforeAll(() => setupDB(db));
+  afterAll(() => teardownDB(db));
 
   describe('List APDs endpoint | GET /apds', () => {
     const url = '/apds';
@@ -26,7 +22,6 @@ describe('APD endpoint', () => {
     describe('when authenticated', () => {
       it('as a user with all permissions', async () => {
         const api = login('all-permissions');
-        console.log(`api ${JSON.stringify(api)}`);
         const response = await api.get(url);
         expect(response.status).toEqual(200);
       });

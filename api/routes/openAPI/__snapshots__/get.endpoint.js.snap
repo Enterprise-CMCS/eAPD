@@ -1362,6 +1362,11 @@ Object {
       },
     },
     "securitySchemes": Object {
+      "apiKeyAuth": Object {
+        "in": "header",
+        "name": "X-API-KEY",
+        "type": "apiKey",
+      },
       "bearerAuth": Object {
         "bearerFormat": "Bearer xxx.yyy.zzz",
         "scheme": "bearer",
@@ -1531,6 +1536,85 @@ Object {
           },
         ],
         "summary": "Create a new draft APD associated with the user's state",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+    },
+    "/apds/submissions": Object {
+      "get": Object {
+        "description": "Get a list of all APDs that have been submitted",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "$ref": "#/components/schemas/apd",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "The list of submitted APDs",
+          },
+          "403": Object {
+            "description": "Unauthenticated error",
+          },
+        },
+        "security": Object {
+          "apiKeyAuth": Array [],
+        },
+        "summary": "Get all of the APDs that have been submitted",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+      "patch": Object {
+        "description": "Update the APD status",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "items": Object {
+                  "description": "A JSON status update object",
+                  "properties": Object {
+                    "apdId": Object {
+                      "description": "The APD ID",
+                      "type": "string",
+                    },
+                    "newStatus": Object {
+                      "description": "The new status of the APD",
+                      "enum": Array [
+                        "",
+                      ],
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "type": "array",
+              },
+            },
+          },
+          "description": "Updates to the status of APDs that have been submitted",
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "description": "response description",
+          },
+          "400": Object {
+            "description": "Request body is invalid",
+          },
+          "403": Object {
+            "description": "Unauthenticated error",
+          },
+        },
+        "security": Object {
+          "apiKeyAuth": Array [],
+        },
+        "summary": "Update the APD status",
         "tags": Array [
           "APDs",
         ],

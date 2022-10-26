@@ -1,5 +1,6 @@
+const { FileDataSource } = require('launchdarkly-node-server-sdk/integrations');
 const LaunchDarkly = require('launchdarkly-node-server-sdk');
-const LaunchDarklyMock = require('./launchDarklyMock');
+// const LaunchDarklyMock = require('./launchDarklyMock');
 const logger = require('../logger')('apds/submissions get');
 
 const { LD_API_KEY } = process.env;
@@ -9,12 +10,33 @@ const options = {
   eventsUri: 'https://events.launchdarkly.us'
 };
 
+const testOptions = {
+  updateProcessor: FileDataSource({
+    paths: ['./test-data/test_feature_flags.json']
+  })
+};
+
 let client = null;
+
+const createLDClient = () => {
+  if (LD_API_KEY && LD_API_KEY !== '') {
+    if (process.env.NODE_ENV === 'test') {
+      client = LaunchDarkly.init(LD_API_KEY, {
+        ...options,
+        ...testOptions
+      });
+      return client;
+    }
+    client = LaunchDarkly.init(LD_API_KEY, options);
+    return client;
+  }
+  return null;
+};
 
 const waitForInitialization = async () => {
   try {
-    if (!client && LD_API_KEY && LD_API_KEY !== '') {
-      client = LaunchDarkly.init(LD_API_KEY, options);
+    if (!client) {
+      createLDClient();
     }
     if (client) {
       await client.waitForInitialization();
@@ -44,11 +66,8 @@ const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
  *  );
  */
 
-if (process.env.NODE_ENV === 'test') {
-  module.exports = LaunchDarklyMock;
-} else {
-  module.exports = {
-    waitForInitialization,
-    getLaunchDarklyFlag
-  };
-}
+module.exports = {
+  createLDClient,
+  waitForInitialization,
+  getLaunchDarklyFlag
+};

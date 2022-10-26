@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint '**/*.js'",
     "clean": "[ -d dist ] && (rm -rf dist/* && rm -rf dist) || echo \"doesn't exist, skipping clean\"",
-    "scaffold": "yarn clean && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
+    "scaffold": "yarn clean && mkdir dist && cp package.json dist/ && cp -r schemas dist/ && cp -r test-data dist/",
     "build": "yarn workspace @cms-eapd/common build && yarn scaffold && babel . -d ./dist -s --ignore \"node_modules/!(file-type|@cms-eapd/common)/**\",\"dist\",\"coverage-endpoint\"",
     "start": "yarn build && node dist/main.js",
     "start-dev": "yarn workspace @cms-eapd/common build && NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
@@ -28,7 +28,7 @@
     "jest": "NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
-    "test-endpoints": "jest --detectOpenHandles --forceExit --runInBand",
+    "test-endpoints": "jest -u --detectOpenHandles --forceExit --runInBand",
     "test-specific": "NODE_ENV=test tap --no-coverage --coverage-report=text-lcov --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
@@ -84,7 +84,6 @@
     "zxcvbn": "4.4.2"
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.21.2",
     "babel-jest": "27.5.1",
     "colors": "1.4.0",
     "core-js": "3.25.0",

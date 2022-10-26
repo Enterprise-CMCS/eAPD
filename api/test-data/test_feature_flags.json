@@ -1,0 +1,88 @@
+{
+  "segments": {},
+  "flags": {
+    "adminCheckFlag": {
+      "key": "adminCheckFlag",
+      "on": true,
+      "prerequisites": [],
+      "targets": [],
+      "rules": [],
+      "fallthrough": {
+        "variation": 0
+      },
+      "offVariation": 1,
+      "variations": [true, false],
+      "clientSideAvailability": {
+        "usingMobileKey": false,
+        "usingEnvironmentId": true
+      },
+      "clientSide": true,
+      "salt": "04e51dae83b24536a3335d0d7c973cde",
+      "trackEvents": false,
+      "trackEventsFallthrough": false,
+      "debugEventsUntilDate": null,
+      "version": 11,
+      "deleted": false
+    },
+    "sharepoint-endpoints-4196": {
+      "key": "sharepoint-endpoints-4196",
+      "on": true,
+      "prerequisites": [],
+      "targets": [],
+      "rules": [
+        {
+          "variation": 0,
+          "id": "a15a97f2-9458-4eb0-b7a5-341fd6162678",
+          "clauses": [
+            {
+              "attribute": "ip",
+              "op": "in",
+              "values": ["10.0.0.0"],
+              "negate": false
+            }
+          ],
+          "trackEvents": false
+        }
+      ],
+      "fallthrough": {
+        "variation": 1
+      },
+      "offVariation": 1,
+      "variations": [true, false],
+      "clientSideAvailability": {
+        "usingMobileKey": false,
+        "usingEnvironmentId": true
+      },
+      "clientSide": true,
+      "salt": "18f4e75bf858489496c23d18c3c2fef0",
+      "trackEvents": false,
+      "trackEventsFallthrough": false,
+      "debugEventsUntilDate": null,
+      "version": 20,
+      "deleted": false
+    },
+    "validation": {
+      "key": "validation",
+      "on": false,
+      "prerequisites": [],
+      "targets": [],
+      "rules": [],
+      "fallthrough": {
+        "variation": 0
+      },
+      "offVariation": 1,
+      "variations": [true, false],
+      "clientSideAvailability": {
+        "usingMobileKey": false,
+        "usingEnvironmentId": true
+      },
+      "clientSide": true,
+      "salt": "295e3a5320ac42298548b7e5aada8a1d",
+      "trackEvents": false,
+      "trackEventsFallthrough": false,
+      "debugEventsUntilDate": null,
+      "version": 80,
+      "deleted": false
+    }
+  }
+}

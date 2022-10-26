@@ -1,5 +1,4 @@
 const {
-  requiresAuth,
   schema: { arrayOf, jsonResponse }
 } = require('../../openAPI/helpers');
 
@@ -16,6 +15,9 @@ const openAPI = {
         200: {
           description: 'The list of submitted APDs',
           content: jsonResponse(arrayOf({ $ref: '#/components/schemas/apd' }))
+        },
+        403: {
+          description: 'Unauthenticated error'
         }
       }
     },
@@ -50,10 +52,16 @@ const openAPI = {
       responses: {
         200: {
           description: 'response description'
+        },
+        400: {
+          description: 'Request body is invalid'
+        },
+        403: {
+          description: 'Unauthenticated error'
         }
       }
     }
   }
 };
 
-module.exports = requiresAuth(openAPI);
+module.exports = openAPI;

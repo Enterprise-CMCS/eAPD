@@ -1,22 +1,28 @@
 const logger = require('../../../logger')('apds/submissions get');
-const { getLaunchDarklyFlag } = require('../../../middleware/launchDarkly');
+const {
+  getLaunchDarklyFlag: flag
+} = require('../../../middleware/launchDarkly');
 const { updateAPDReviewStatus: urs } = require('../../../db/apds');
 
-module.exports = (app, { updateAPDReviewStatus = urs } = {}) => {
+module.exports = (
+  app,
+  { updateAPDReviewStatus = urs, getLaunchDarklyFlag = flag } = {}
+) => {
   logger.silly('setting up PATCH /apds/submissions route');
 
   app.patch('/apds/submissions', async (req, res, next) => {
-    let ip = req.headers['x-forwarded-for'] || req.ip || '';
+    let ip = req?.headers?.['x-forwarded-for'] || req?.ip || '';
     ip = ip.toString().replace('::ffff:', '');
     const sharepoint = await getLaunchDarklyFlag(
       'sharepoint-endpoints-4196',
       {
-        key: 'API User',
+        key: 'anonymous',
+        anonymous: true,
         ip
       },
       false
     );
-    if (!sharepoint) {
+    if (sharepoint !== true) {
       return res.status(403).end();
     }
 
@@ -25,12 +31,17 @@ module.exports = (app, { updateAPDReviewStatus = urs } = {}) => {
       return res.status(400).end();
     }
 
+    logger.silly({
+      id: req.id,
+      message: 'attempting to update APDs'
+    });
+
     try {
       await updateAPDReviewStatus(req.body);
     } catch (e) {
-      logger.error({ id: req.id, message: 'change me' });
+      logger.error({ id: req.id, message: 'Error updating APDs' });
       logger.error({ id: req.id, message: e });
-      next({ message: 'change me' });
+      next({ message: 'Error updating APDs' });
     }
     return res.status(204).end();
   });
