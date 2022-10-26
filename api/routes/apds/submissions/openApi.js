@@ -8,9 +8,9 @@ const openAPI = {
       tags: ['APDs'],
       summary: 'Get all of the APDs that have been submitted',
       description: 'Get a list of all APDs that have been submitted',
-      security: {
-        apiKeyAuth: []
-      },
+      // security: {
+      //   apiKeyAuth: []
+      // },
       responses: {
         200: {
           description: 'The list of submitted APDs',
@@ -25,9 +25,9 @@ const openAPI = {
       tags: ['APDs'],
       summary: 'Update the APD status',
       description: 'Update the APD status',
-      security: {
-        apiKeyAuth: []
-      },
+      // security: {
+      //   apiKeyAuth: []
+      // },
       requestBody: {
         description: 'Updates to the status of APDs that have been submitted',
         required: true,
