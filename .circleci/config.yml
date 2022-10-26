@@ -995,14 +995,14 @@ jobs:
           name: start everything up
           working_directory: ~/project
           no_output_timeout: 30m
-          # setting LD_API_KEY to null so it doesn't connect to LD
           command: |
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
             export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
-            export LD_API_KEY=
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export NODE_ENV=test
 
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
