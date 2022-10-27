@@ -20,7 +20,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     fillOutActivityPage = new FillOutActivityPage();
 
     cy.useStateStaff();
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
 
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.findByRole(
@@ -43,7 +43,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
     cy.visit(apdUrl);
   });
 
