@@ -37,7 +37,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
     cy.visit(apdUrl);
   });
 
@@ -48,7 +48,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   describe('Form View', () => {
     /* eslint-disable-next-line prefer-arrow-callback, func-names */
     beforeEach(function () {
-      cy.updateFeatureFlags({ validation: true });
+      cy.updateFeatureFlags();
       cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     });
 
@@ -76,7 +76,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
       testDefaultActivityScheduleSummary(years);
     });
 
-    describe.only('default Proposed Budget', () => {
+    describe('default Proposed Budget', () => {
       testDefaultProposedBudget(years);
     });
 

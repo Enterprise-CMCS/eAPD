@@ -92,7 +92,7 @@ export const testResultsOfPreviousActivitiesWithData = () => {
 
   // eslint-disable-next-line prefer-arrow-callback, func-names
   beforeEach(function () {
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
     cy.fixture('results-of-previous-activities-test.json').then(
       activityData => {
         resultsOfPreviousActivities = activityData;
