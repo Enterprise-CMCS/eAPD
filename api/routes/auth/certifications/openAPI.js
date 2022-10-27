@@ -45,10 +45,6 @@ const stateCertifications = {
                   type: 'string',
                   description: 'Email of individual being certified'
                 },
-                phone: {
-                  type: 'string',
-                  description: 'Phone Number of individual being certified'
-                },
                 state: {
                   type: 'string',
                   description: 'State of individual being certified'
