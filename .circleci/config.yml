@@ -430,7 +430,7 @@ jobs:
               --var preview_mongo_database_username=$PREVIEW_MONGO_DATABASE_USERNAME --var preview_mongo_database_password=$PREVIEW_MONGO_DATABASE_PASSWORD \
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
-              --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV
+              --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
               preview-ami.pkr.hcl
   
   packer validation tests:
@@ -463,8 +463,7 @@ jobs:
               --var preview_mongo_admin_url=$PREVIEW_MONGO_ADMIN_URL --var preview_mongo_url=$PREVIEW_MONGO_URL --var preview_database_url=$PREVIEW_DATABASE_URL \
               --var preview_okta_domain=$PREVIEW_OKTA_DOMAIN --var preview_okta_api_key=$PREVIEW_OKTA_API_KEY --var environment=Preview \
               --var preview_tealium_tag=$PREVIEW_TEALIUM_TAG --var preview_tealium_env=$PREVIEW_TEALIUM_ENV \
-              --var preview_ld_api_key=$PREVIEW_LD_API_KEY --var preview_ld_client_id=$PREVIEW_LD_CLIENT_ID \
-            preview-ami.pkr.hcl
+              preview-ami.pkr.hcl
       - run:
           name: Validate Mongo AMI
           working_directory: ~/project/packer
@@ -1045,7 +1044,7 @@ jobs:
           working_directory: ~/project/web
           command: |
             export TEALIUM_ENV="test"
-            LD_CLIENT_ID=
+            export LD_CLIENT_ID=
             yarn test --runInBand
       - run:
           name: report coverage

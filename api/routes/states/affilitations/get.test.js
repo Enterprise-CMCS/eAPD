@@ -75,10 +75,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
           role: null,
           updatedBy: null,
           displayName: 'Ty Bolchoz',
-          email: 'tbolchoz@fearless.tech',
-          secondEmail: null,
-          primaryPhone: '4438664337',
-          mobilePhone: null
+          email: 'tbolchoz@fearless.tech'
         },
         {
           id: 28,
@@ -91,10 +88,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
           role: null,
           updatedBy: null,
           displayName: 'MFA User',
-          email: 'tforkner+testmfa@fearless.tech',
-          secondEmail: null,
-          primaryPhone: '5555555555',
-          mobilePhone: null
+          email: 'tforkner+testmfa@fearless.tech'
         }
       ];
       getPopulatedAffiliationsByStateId.returns(pending);
@@ -195,10 +189,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
         role: 'eAPD State Staff',
         updatedBy: 'Regular User',
         displayName: 'Jesse James',
-        email: 'jjames@fearless.tech',
-        secondEmail: null,
-        primaryPhone: '1111111111',
-        mobilePhone: null
+        email: 'jjames@fearless.tech'
       };
       getPopulatedAffiliationById.returns(affiliation);
 

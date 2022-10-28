@@ -31,13 +31,6 @@ exports[`<ManageAllUsersTable /> renders correctly for users with multiple affil
           role="columnheader"
           scope="col"
         >
-          Phone Number
-        </th>
-        <th
-          class="ds-c-table__cell--align-left"
-          role="columnheader"
-          scope="col"
-        >
           State
         </th>
         <th
@@ -78,14 +71,6 @@ exports[`<ManageAllUsersTable /> renders correctly for users with multiple affil
           style="vertical-align: top;"
         >
           liz@lemon.com
-        </td>
-        <td
-          class="ds-c-table__cell--align-left"
-          role="cell"
-          rowspan="2"
-          style="vertical-align: top;"
-        >
-          4045555555
         </td>
         <td
           class="ds-c-table__cell--align-left all-users-table--state"
@@ -175,13 +160,6 @@ exports[`<ManageAllUsersTable /> renders correctly for users with single affilia
           role="columnheader"
           scope="col"
         >
-          Phone Number
-        </th>
-        <th
-          class="ds-c-table__cell--align-left"
-          role="columnheader"
-          scope="col"
-        >
           State
         </th>
         <th
@@ -215,14 +193,6 @@ exports[`<ManageAllUsersTable /> renders correctly for users with single affilia
           style="vertical-align: top;"
         >
           liz@lemon.com
-        </td>
-        <td
-          class="ds-c-table__cell--align-left"
-          role="cell"
-          rowspan="1"
-          style="vertical-align: top;"
-        >
-          4045555555
         </td>
         <td
           class="ds-c-table__cell--align-left all-users-table--state"
@@ -278,13 +248,6 @@ exports[`<ManageAllUsersTable /> renders correctly with both single and multi-af
           role="columnheader"
           scope="col"
         >
-          Phone Number
-        </th>
-        <th
-          class="ds-c-table__cell--align-left"
-          role="columnheader"
-          scope="col"
-        >
           State
         </th>
         <th
@@ -325,14 +288,6 @@ exports[`<ManageAllUsersTable /> renders correctly with both single and multi-af
           style="vertical-align: top;"
         >
           liz@lemon.com
-        </td>
-        <td
-          class="ds-c-table__cell--align-left"
-          role="cell"
-          rowspan="1"
-          style="vertical-align: top;"
-        >
-          4045555555
         </td>
         <td
           class="ds-c-table__cell--align-left all-users-table--state"
@@ -377,14 +332,6 @@ exports[`<ManageAllUsersTable /> renders correctly with both single and multi-af
           style="vertical-align: top;"
         >
           liz@lemon.com
-        </td>
-        <td
-          class="ds-c-table__cell--align-left"
-          role="cell"
-          rowspan="2"
-          style="vertical-align: top;"
-        >
-          4045555555
         </td>
         <td
           class="ds-c-table__cell--align-left all-users-table--state"

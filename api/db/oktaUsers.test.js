@@ -25,9 +25,6 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
   const toSanitize = {
     displayName: 'displayName',
     email: 'email',
-    secondEmail: 'secondEmail',
-    primaryPhone: 'primaryPhone',
-    mobilePhone: 'mobilePhone',
     login: 'login'
   };
 
@@ -37,12 +34,12 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
 
   oktaUsersTests.test('creating an Okta User', async test => {
     db.insert
-      .withArgs({ user_id: 'oktaUser', email: 'email', metadata: 'metadata' })
+      .withArgs({ user_id: 'oktaUser', email: 'email' })
       .resolves('oktaUser id');
 
     const newUser = await createOktaUser(
       'oktaUser',
-      { email: 'email', metadata: 'metadata' },
+      { email: 'email' },
       { db }
     );
 
@@ -51,13 +48,11 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
 
   oktaUsersTests.test('updating an Okta User', async test => {
     db.where.withArgs({ user_id: 'oktaUser' }).returnsThis();
-    db.update
-      .withArgs({ email: 'email', metadata: 'metadata' })
-      .resolves('updated okta_user');
+    db.update.withArgs({ email: 'email' }).resolves('updated okta_user');
 
     const updatedUser = await updateOktaUser(
       'oktaUser',
-      { email: 'email', metadata: 'metadata' },
+      { email: 'email' },
       { db }
     );
 
@@ -69,12 +64,12 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
     db.first.resolves(false);
 
     db.insert
-      .withArgs({ user_id: 'oktaUser', email: 'email', metadata: 'metadata' })
+      .withArgs({ user_id: 'oktaUser', email: 'email' })
       .resolves('oktaUser id');
 
     const updatedUser = await createOrUpdateOktaUser(
       'oktaUser',
-      { email: 'email', metadata: 'metadata' },
+      { email: 'email' },
       { db }
     );
 
@@ -86,13 +81,11 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
     db.first.resolves(true);
 
     db.where.withArgs({ user_id: 'oktaUser' }).returnsThis();
-    db.update
-      .withArgs({ email: 'email', metadata: 'metadata' })
-      .resolves('updated okta_user');
+    db.update.withArgs({ email: 'email' }).resolves('updated okta_user');
 
     const updatedUser = await createOrUpdateOktaUser(
       'oktaUser',
-      { email: 'email', metadata: 'metadata' },
+      { email: 'email' },
       { db }
     );
 
@@ -111,17 +104,6 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
     sanitizeMe.qux = 'qux';
     const sanitized = sanitizeProfile(sanitizeMe);
     test.same(sanitized, toSanitize);
-  });
-
-  oktaUsersTests.test('sanitize Profile with missing fields', async test => {
-    const sanitizeMe = { ...toSanitize };
-    delete sanitizeMe.mobilePhone;
-    delete sanitizeMe.secondEmail;
-    const sanitized = sanitizeProfile(sanitizeMe);
-    // same keys, but not same values
-    test.same(Object.keys(sanitized), Object.keys(toSanitize));
-    test.equal(sanitized.mobilePhone, undefined);
-    test.equal(sanitized.secondEmail, undefined);
   });
 
   oktaUsersTests.test(

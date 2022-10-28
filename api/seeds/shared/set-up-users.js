@@ -19,16 +19,11 @@ const currentFfy = (() => {
 const PostgresDateFormat = 'yyyy-MM-dd HH:mm:ss';
 
 const formatOktaUser = oktaResult => {
-  const { email, displayName, secondEmail, primaryPhone, mobilePhone, login } =
-    oktaResult.profile;
+  const { email, displayName, login } = oktaResult.profile;
   return {
     user_id: oktaResult.id,
     email,
-    // metadata: JSON.stringify(oktaResult.profile),
     displayName,
-    secondEmail,
-    primaryPhone,
-    mobilePhone,
     login
   };
 };
@@ -141,7 +136,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'ak',
       email: stateAdmin.profile.email,
-      phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
       fileUrl:
@@ -155,7 +149,6 @@ const createUsersToAdd = async (knex, oktaClient) => {
       name: `${stateAdmin.profile.firstName} ${stateAdmin.profile.lastName}`,
       state: 'tn',
       email: stateAdmin.profile.email,
-      phone: stateAdmin.profile.primaryPhone,
       uploadedBy: fedAdmin.id,
       uploadedOn: new Date(),
       fileUrl:
