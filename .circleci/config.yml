@@ -3,7 +3,7 @@ version: 2.1
 workflows:
   version: 2
 
-  # Workflow to cleanup preview deploys from AWS.
+# Workflow to cleanup preview deploys from AWS.
   cleanup preview deploys:
     triggers:
       - schedule:
@@ -14,6 +14,18 @@ workflows:
                 - master
     jobs:
       - cleanup preview deploys
+
+# Workflow to cleanup Packer AMIs from AWS.
+  cleanup packer amis:
+    triggers:
+      - schedule:
+          cron: "0 6 * * *" # Every day at 6 am
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cleanup packer ami images
 
 # Workflows to validate IaC configurations  
   packer validation:
@@ -1225,6 +1237,22 @@ jobs:
               --AWS_REGION "$PRODUCTION_API_AWS_REGION" \
               --GH_BOT_TOKEN "$GH_BOT_TOKEN" \
               --GH_BOT_USER "$GH_BOT_USER"
+
+  # Cleans up Packer AMIs that are no longer in use
+  cleanup packer amis:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - run:
+          name: cleanup unused packer ami images
+          working_directory: ~/project/bin/preview-deploy
+          command: |
+            apt-get -qq update
+            apt-get -qq install jq -y
+            pip install --quiet awscli
+            ./aws.preview-ami-cleanup.sh \
+              --AWS_REGION "$PRODUCTION_API_AWS_REGION"
 
   # Frontend production deployment.
   frontend deploy:
