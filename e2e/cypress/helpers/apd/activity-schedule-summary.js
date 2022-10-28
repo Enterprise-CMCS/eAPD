@@ -120,7 +120,7 @@ export const testActivityScheduleSummaryWithData = () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
     cy.fixture('activity-overview-template.json').as('data');
   });
 
