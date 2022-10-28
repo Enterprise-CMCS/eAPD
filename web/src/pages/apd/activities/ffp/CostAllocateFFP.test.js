@@ -202,7 +202,9 @@ const initialStateWithAdminCheck = {
   ...initialState,
   apd: {
     ...initialState.apd,
-    adminCheck: true
+    adminCheck: {
+      enabled: true
+    }
   }
 };
 
