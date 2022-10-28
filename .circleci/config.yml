@@ -109,6 +109,12 @@ workflows:
               ignore: /.*/
           requires: 
             - hold
+      - packer validation tests:
+          requires:
+            - hold
+      - terraform validation tests:
+          requires:
+            - hold
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
