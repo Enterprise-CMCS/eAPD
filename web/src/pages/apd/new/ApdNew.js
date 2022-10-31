@@ -38,6 +38,13 @@ const typeStatus = {
 };
 
 const ApdNew = ({ createApd: create }) => {
+  useEffect(() => {
+    if (enableMmis === false) {
+      setApdType('hitech');
+      setValue('apdType', 'hitech', { shouldValidate: true });
+    }
+  }, []);
+
   const thisFFY = (() => {
     const year = new Date().getFullYear();
     if (new Date().getMonth() > 8) {
@@ -53,14 +60,6 @@ const ApdNew = ({ createApd: create }) => {
   const [apdType, setApdType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
-
-  useEffect(() => {
-    console.log({ enableMmis });
-    if (enableMmis === false) {
-      setApdType('hitech');
-      setValue('apdType', 'hitech', { shouldValidate: true });
-    }
-  }, []);
 
   const {
     control,
@@ -154,6 +153,7 @@ const ApdNew = ({ createApd: create }) => {
                 onChange={e => {
                   setApdType(e.target.value);
                   onChange(e);
+                  trigger();
                 }}
                 onBlur={onBlur}
                 onComponentBlur={onBlur}
