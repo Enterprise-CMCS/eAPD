@@ -38,7 +38,6 @@ const ManageUserTable = ({
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Phone Number</TableCell>
               {tab === 'active' ? <TableCell>Role</TableCell> : null}
               {tab === 'inactive' ? <TableCell>Status</TableCell> : null}
               <TableCell>Actions</TableCell>
@@ -49,7 +48,6 @@ const ManageUserTable = ({
               <TableRow key={affiliation.id}>
                 <TableCell>{affiliation.displayName}</TableCell>
                 <TableCell>{affiliation.email}</TableCell>
-                <TableCell>{affiliation.primaryPhone}</TableCell>
                 {tab === 'active' ? (
                   <TableCell>{affiliation.role}</TableCell>
                 ) : null}

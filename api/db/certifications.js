@@ -98,7 +98,6 @@ const getStateAdminCertifications = ({ db = knex } = {}) => {
       'state_admin_certifications.id',
       'state_admin_certifications.name',
       'state_admin_certifications.email',
-      'state_admin_certifications.phone',
       'state_admin_certifications.state',
       'state_admin_certifications.affiliationId',
       'state_admin_certifications.fileUrl',

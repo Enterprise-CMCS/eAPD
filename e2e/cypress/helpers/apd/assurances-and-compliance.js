@@ -13,7 +13,7 @@ export const testDefaultAssurancesAndCompliance = () => {
 
   // eslint-disable-next-line prefer-arrow-callback, func-names
   beforeEach(function () {
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
     cy.fixture('assurances-compliance-test.json').then(data => {
       assurancesAndCompliance = data;
     });
@@ -82,7 +82,7 @@ export const testAssurancesAndComplianceWithData = () => {
 
   // eslint-disable-next-line prefer-arrow-callback, func-names
   beforeEach(function () {
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
     cy.fixture('assurances-compliance-test.json').then(data => {
       assurancesAndCompliance = data;
     });

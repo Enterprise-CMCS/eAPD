@@ -14,14 +14,13 @@ module.exports = (app, { addStateAdminCertification = addCert } = {}) => {
     loggedIn,
     can('edit-state-certifications'),
     async (req, res, next) => {
-      const { ffy, name, email, phone, state, fileUrl } = req.body;
+      const { ffy, name, email, state, fileUrl } = req.body;
 
       try {
         const { error = null } = await addStateAdminCertification({
           ffy,
           name,
           email,
-          phone,
           state,
           fileUrl,
           uploadedBy: req.user.id,

@@ -10,9 +10,6 @@ const selectedColumns = [
   'auth_affiliations.updated_at as updatedAt',
   'auth_roles.name as role',
   'okta_users.displayName as displayName',
-  'okta_users.secondEmail as secondEmail',
-  'okta_users.primaryPhone as primaryPhone',
-  'okta_users.mobilePhone as mobilePhone',
   'okta_users.email as email'
 ];
 

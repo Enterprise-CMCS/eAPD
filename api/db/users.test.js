@@ -25,7 +25,6 @@ tap.test('database wrappers / users', async usersTests => {
     id: 'user id',
     name: 'real name',
     permissions: 'permissions',
-    phone: 'phone number',
     role: 'role',
     state: 'user state',
     states: [],
@@ -38,7 +37,6 @@ tap.test('database wrappers / users', async usersTests => {
     id: 'user id',
     displayName: 'real name',
     permissions: 'permissions',
-    primaryPhone: 'phone number',
     login: 'email address',
     other: 'junk',
     password: 'oh no password',
@@ -77,7 +75,6 @@ tap.test('database wrappers / users', async usersTests => {
       id: 'user id',
       displayName: 'real name',
       permissions: 'permissions',
-      primaryPhone: 'phone number',
       login: 'email address',
       other: 'junk',
       password: 'oh no password',
@@ -379,8 +376,7 @@ tap.test('database wrappers / users', async usersTests => {
       db.where.withArgs({ user_id: 'user id' }).returnsThis();
       db.first.resolves({
         user_id: 'user id',
-        email: 'someAddress@email.com',
-        metadata: '{foo:bar}'
+        email: 'someAddress@email.com'
       });
       const user = await getUserByID('user id', false, {
         client,
@@ -694,7 +690,6 @@ tap.test('database wrappers / users', async usersTests => {
         affiliation: 'user affiliation',
         id: 'my user id',
         displayName: 'this is my name',
-        primaryPhone: 'call me maybe',
         permissions: 'permissions',
         bob: 'builds bridges',
         login: 'purple_unicorn@compuserve.net',
@@ -712,7 +707,6 @@ tap.test('database wrappers / users', async usersTests => {
         id: 'my user id',
         name: 'this is my name',
         permissions: 'permissions',
-        phone: 'call me maybe',
         role: 'role',
         state: 'this is where I live',
         states: [],
