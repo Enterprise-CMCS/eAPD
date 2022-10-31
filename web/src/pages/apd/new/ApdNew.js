@@ -12,6 +12,8 @@ import Loading from '../../../components/Loading';
 import newApdSchema from '@cms-eapd/common/schemas/apdNew';
 import { joiResolver } from '@hookform/resolvers/joi';
 
+import { useFlags } from 'launchdarkly-react-client-sdk';
+
 const businessAreas = {
   waiverSupport: false,
   assetVerification: false,
@@ -47,9 +49,18 @@ const ApdNew = ({ createApd: create }) => {
 
   const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
   const history = useHistory();
+  const { enableMmis } = useFlags();
   const [apdType, setApdType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
+
+  useEffect(() => {
+    console.log({ enableMmis });
+    if (enableMmis === false) {
+      setApdType('hitech');
+      setValue('apdType', 'hitech', { shouldValidate: true });
+    }
+  }, []);
 
   const {
     control,
@@ -136,6 +147,7 @@ const ApdNew = ({ createApd: create }) => {
                 {
                   label: 'MMIS IAPD',
                   value: 'mmis',
+                  disabled: !enableMmis,
                   checked: value === 'mmis'
                 }
               ]}
@@ -243,7 +255,7 @@ const ApdNew = ({ createApd: create }) => {
             />
           </div>
         )}
-        {apdType === 'mmis' && (
+        {apdType === 'mmis' && enableMmis === true && (
           <div>
             <Controller
               name="mmisUpdate"
