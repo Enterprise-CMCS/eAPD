@@ -35,6 +35,7 @@ describe('tests state admin portal', () => {
   // });
 
   describe('Admin Check', () => {
+    //REMEMBER TO USE CYPRESS AXE ON THE ADMIN CHECK
     it(
       'tests basic admin check functionality',
       { tags: ['@state', '@admin'] },
@@ -76,7 +77,7 @@ describe('tests state admin portal', () => {
 
         cy.get('[class="eapd-admin-check-list"]').within(() => {
           cy.contains('Assurances and Compliance').click();
-          cy.get('.ds-h2').should('contain', 'Assurances and Compliance');
+          cy.get('.ds-h2').should('contain', 'Assurances and Compliance'); //this isnt gonna work since it's within the help panel
         });
       }
     );
