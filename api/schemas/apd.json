@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "apd.json",
+  "type": "object",
+  "required": [
+    "name",
+    "years",
+    "apdOverview",
+    "keyStatePersonnel",
+    "previousActivities",
+    "activities",
+    "proposedBudget",
+    "assurancesAndCompliances"
+  ],
+  "properties": {
+    "_id": { "type": "string" },
+    "name": { "type": "string" },
+    "years": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "createdAt": { "$ref": "definitions.json#/definitions/optionalFullDate" },
+    "updatedAt": { "$ref": "definitions.json#/definitions/optionalFullDate" },
+    "stateId": { "type": "string" },
+    "status": { "type": "string" },
+    "__v": { "type": "number" },
+    "apdOverview": { "$ref": "apdOverview.json" },
+    "keyStatePersonnel": { "$ref": "keyStatePersonnel.json" },
+    "previousActivities": { "$ref": "previousActivities.json" },
+    "activities": {
+      "type": "array",
+      "items": { "$ref": "activity.json" }
+    },
+    "proposedBudget": { "$ref": "proposedBudget.json" },
+    "assurancesAndCompliances": { "$ref": "assurancesAndCompliances.json" },
+    "adminCheck": { "type": "array" }
+  },
+  "additionalProperties": false
+}

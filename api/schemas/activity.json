@@ -1,0 +1,134 @@
+{
+  "$id": "activity.json",
+  "type": "object",
+  "required": [
+    "alternatives",
+    "contractorResources",
+    "costAllocation",
+    "costAllocationNarrative",
+    "description",
+    "expenses",
+    "fundingSource",
+    "name",
+    "plannedEndDate",
+    "plannedStartDate",
+    "schedule",
+    "standardsAndConditions",
+    "statePersonnel",
+    "summary",
+    "quarterlyFFP"
+  ],
+  "properties": {
+    "alternatives": {
+      "type": "string"
+    },
+    "contractorResources": {
+      "type": "array",
+      "items": {
+        "$ref": "contractorResource.json"
+      }
+    },
+    "costAllocation": {
+      "$ref": "costAllocation.json"
+    },
+    "costAllocationNarrative": {
+      "$ref": "costAllocationNarrative.json"
+    },
+    "description": {
+      "type": "string"
+    },
+    "expenses": {
+      "type": "array",
+      "items": {
+        "$ref": "expense.json"
+      }
+    },
+    "fundingSource": {
+      "enum": ["HIE", "HIT", "MMIS", null]
+    },
+    "name": {
+      "type": "string"
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "$ref": "outcome.json"
+      }
+    },
+    "plannedEndDate": {
+      "$ref": "definitions.json#/definitions/optionalFullDate"
+    },
+    "plannedStartDate": {
+      "$ref": "definitions.json#/definitions/optionalFullDate"
+    },
+    "schedule": {
+      "type": "array",
+      "items": {
+        "$id": "#/properties/activities/items/properties/schedule/items",
+        "type": "object",
+        "required": ["endDate", "milestone"],
+        "properties": {
+          "endDate": {
+            "$id": "#/properties/activities/items/properties/schedule/items/properties/endDate",
+            "$ref": "definitions.json#/definitions/optionalFullDate"
+          },
+          "milestone": {
+            "$id": "#/properties/activities/items/properties/schedule/items/properties/milestone",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "standardsAndConditions": {
+      "type": "object",
+      "required": ["doesNotSupport", "supports"],
+      "properties": {
+        "doesNotSupport": {
+          "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/doesNotSupport",
+          "type": "string"
+        },
+        "supports": {
+          "$id": "#/properties/activities/items/properties/standardsAndConditions/properties/supports",
+          "type": "string"
+        }
+      }
+    },
+    "statePersonnel": {
+      "type": "array",
+      "items": {
+        "$ref": "person.json"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "quarterlyFFP": {
+      "type": "object",
+      "patternProperties": {
+        "^[0-9]{4}$": {
+          "$id": "#/properties/activities/items/properties/quarterlyFFP/year",
+          "type": "object",
+          "required": ["1", "2", "3", "4"],
+          "patternProperties": {
+            "^(1|2|3|4)$": {
+              "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter",
+              "type": "object",
+              "required": ["contractors", "inHouse"],
+              "properties": {
+                "contractors": {
+                  "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/contractors",
+                  "$ref": "definitions.json#/definitions/optionalNumber"
+                },
+                "inHouse": {
+                  "$id": "#/properties/activities/items/properties/quarterlyFFP/year/quarter/inHouse",
+                  "$ref": "definitions.json#/definitions/optionalNumber"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
+}

@@ -1,0 +1,24 @@
+{
+  "$id": "definitions.json",
+  "definitions": {
+    "optionalFullDate": {
+      "type": "string",
+      "format": "custom-date-time",
+      "nullable": true
+    },
+    "optionalNumber": {
+      "anyOf": [
+        {
+          "type": "number",
+          "nullable": true
+        },
+        {
+          "type": "string",
+          "pattern": "\\d*",
+          "nullable": true
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
+}

@@ -1,0 +1,22 @@
+{
+  "$id": "costAllocationNarrative.json",
+  "type": "object",
+  "required": ["methodology"],
+  "properties": {
+    "methodology": {
+      "type": "string"
+    }
+  },
+  "patternProperties": {
+    "^[0-9]{4}$": {
+      "required": ["otherSources"],
+      "type": "object",
+      "properties": {
+        "otherSources": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
+}

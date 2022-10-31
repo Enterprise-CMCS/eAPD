@@ -1,0 +1,27 @@
+{
+  "$id": "outcome.json",
+  "type": "object",
+  "required": ["metrics", "outcome"],
+  "properties": {
+    "metrics": {
+      "$id": "#/properties/activities/items/properties/outcomes/items/properties/metrics",
+      "type": "array",
+      "items": {
+        "$id": "#/properties/activities/items/properties/outcomes/items/properties/metrics/items",
+        "type": "object",
+        "required": ["metric"],
+        "properties": {
+          "metric": {
+            "$id": "#/properties/activities/items/properties/outcomes/items/properties/metrics/items/properties/metric",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "outcome": {
+      "$id": "#/properties/activities/items/properties/outcomes/items/properties/outcome",
+      "type": "string"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
+}

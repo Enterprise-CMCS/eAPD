@@ -1,0 +1,25 @@
+{
+  "$id": "incentivePayments.json",
+  "type": "object",
+  "required": ["ehAmt", "ehCt", "epAmt", "epCt"],
+  "patternProperties": {
+    "^e(h|p)(Amt|Ct)$": {
+      "$id": "#/properties/incentivePayments/type",
+      "type": "object",
+      "patternProperties": {
+        "^[0-9]{4}$": {
+          "$id": "#/properties/incentivePayments/type/year",
+          "type": "object",
+          "required": ["1", "2", "3", "4"],
+          "patternProperties": {
+            "^[0-9]$": {
+              "$id": "#/properties/incentivePayments/type/year/quarter",
+              "$ref": "definitions.json#/definitions/optionalNumber"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
+}

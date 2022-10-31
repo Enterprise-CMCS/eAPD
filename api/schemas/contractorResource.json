@@ -1,0 +1,69 @@
+{
+  "$id": "contractorResource.json",
+  "type": "object",
+  "required": [
+    "description",
+    "end",
+    "hourly",
+    "name",
+    "start",
+    "totalCost",
+    "years"
+  ],
+  "properties": {
+    "description": {
+      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/description",
+      "type": "string"
+    },
+    "end": {
+      "$ref": "definitions.json#/definitions/optionalFullDate"
+    },
+    "hourly": {
+      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly",
+      "type": "object",
+      "patternProperties": {
+        "^[0-9]{4}$": {
+          "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year",
+          "type": "object",
+          "required": ["hours", "rate"],
+          "properties": {
+            "hours": {
+              "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/hours",
+              "$ref": "definitions.json#/definitions/optionalNumber"
+            },
+            "rate": {
+              "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/year/rate",
+              "$ref": "definitions.json#/definitions/optionalNumber"
+            }
+          }
+        }
+      }
+    },
+    "useHourly": {
+      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/hourly/useHourly",
+      "type": "boolean"
+    },
+    "name": {
+      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/name",
+      "type": "string"
+    },
+    "start": {
+      "$ref": "definitions.json#/definitions/optionalFullDate"
+    },
+    "totalCost": {
+      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/totalCost",
+      "type": "integer"
+    },
+    "years": {
+      "$id": "#/properties/activities/items/properties/contractorResources/items/properties/years",
+      "type": "object",
+      "patternProperties": {
+        "^[0-9]{4}$": {
+          "$id": "#/properties/activities/items/properties/contractorResources/items/properties/years/year",
+          "type": "number"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema"
+}

@@ -78,6 +78,7 @@
     ],
     "nohoist": [
       "knex",
+      "api/ajv",
       "api/@babel/node",
       "web/@uppy",
       "web/tinymce",
