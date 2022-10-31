@@ -131,37 +131,64 @@ const ApdNew = ({ createApd: create }) => {
             This selection cannot be changed after creating a new APD.
           </p>
         </Alert>
-        <Controller
-          name="apdType"
-          control={control}
-          render={({ field: { onBlur, onChange, value, ...props } }) => (
-            <ChoiceList
-              {...props}
-              type="radio"
-              choices={[
-                {
-                  label: 'HITECH IAPD',
-                  value: 'hitech',
-                  checked: value === 'hitech'
-                },
-                {
-                  label: 'MMIS IAPD',
-                  value: 'mmis',
-                  disabled: !enableMmis,
-                  checked: value === 'mmis'
-                }
-              ]}
-              onChange={e => {
-                setApdType(e.target.value);
-                onChange(e);
-              }}
-              onBlur={onBlur}
-              onComponentBlur={onBlur}
-              errorMessage={errors?.apdType?.message}
-              errorPlacement="bottom"
-            />
-          )}
-        />
+        {enableMmis === true ? (
+          <Controller
+            name="apdType"
+            control={control}
+            render={({ field: { onBlur, onChange, value, ...props } }) => (
+              <ChoiceList
+                {...props}
+                type="radio"
+                choices={[
+                  {
+                    label: 'HITECH IAPD',
+                    value: 'hitech',
+                    checked: value === 'hitech'
+                  },
+                  {
+                    label: 'MMIS IAPD',
+                    value: 'mmis',
+                    checked: value === 'mmis'
+                  }
+                ]}
+                onChange={e => {
+                  setApdType(e.target.value);
+                  onChange(e);
+                }}
+                onBlur={onBlur}
+                onComponentBlur={onBlur}
+                errorMessage={errors?.apdType?.message}
+                errorPlacement="bottom"
+              />
+            )}
+          />
+        ) : (
+          <Controller
+            name="apdType"
+            control={control}
+            render={({ field: { onBlur, onChange, value, ...props } }) => (
+              <ChoiceList
+                {...props}
+                type="radio"
+                choices={[
+                  {
+                    label: 'HITECH IAPD',
+                    value: 'hitech',
+                    checked: value === 'hitech'
+                  }
+                ]}
+                onChange={e => {
+                  setApdType(e.target.value);
+                  onChange(e);
+                }}
+                onBlur={onBlur}
+                onComponentBlur={onBlur}
+                errorMessage={errors?.apdType?.message}
+                errorPlacement="bottom"
+              />
+            )}
+          />
+        )}
         {(apdType === 'mmis' || apdType === 'hitech') && (
           <div>
             <Controller
