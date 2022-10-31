@@ -30,7 +30,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   before(() => {
     cy.useStateStaff();
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
 
     cy.findByRole('button', { name: /Create new/i }).click();
     cy.findByRole(
@@ -49,7 +49,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags();
     cy.visit(apdUrl);
   });
 
@@ -1346,7 +1346,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
-  describe.only('Accessibility Tests', () => {
+  describe('Accessibility Tests', () => {
     it('Runs on APD Builder', () => {
       cy.wait(5000); // Allows page to load
 
