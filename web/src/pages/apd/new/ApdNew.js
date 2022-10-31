@@ -141,7 +141,6 @@ const ApdNew = ({ createApd: create }) => {
               ]}
               onChange={e => {
                 setApdType(e.target.value);
-                setValue('apdType', e.target.value, { shouldValidate: true });
                 onChange(e);
               }}
               onBlur={onBlur}
