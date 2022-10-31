@@ -74,11 +74,15 @@ const apdSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   years: [
     {
       _id: false,
       type: String,
+      required: true,
       validate: {
         validator: v => {
           const re = /^[0-9]{4}$/;
@@ -133,9 +137,13 @@ const apdSchema = new mongoose.Schema({
     ]
   },
   previousActivities: {
-    previousActivitySummary: String,
+    previousActivitySummary: {
+      type: String,
+      required: true
+    },
     actualExpenditures: {
       type: Map,
+      required: true,
       of: new mongoose.Schema(
         {
           hithie: {

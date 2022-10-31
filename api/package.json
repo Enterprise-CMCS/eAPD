@@ -50,7 +50,6 @@
     "@cms-eapd/common": "0.0.1",
     "@okta/jwt-verifier": "2.6.0",
     "@okta/okta-sdk-nodejs": "6.5.0",
-    "ajv": "8.11.0",
     "aws-sdk": "2.1202.0",
     "axios": "0.27.2",
     "body-parser": "1.20.0",
