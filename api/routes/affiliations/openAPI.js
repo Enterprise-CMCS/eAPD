@@ -5,54 +5,48 @@ const {
   responses
 } = require('../openAPI/helpers');
 
-const id = {
-  type: 'integer',
-  description: 'ID of record'
-};
-
-const user_id = {
-  type: 'string',
-  description: 'ID of user'
-};
-
-const state_id = {
-  type: 'string',
-  description: '2-letter US State or Territory abbreviation, lowercase'
-};
-
-const role_id = {
-  type: 'integer',
-  description: 'ID of the role applied to this user for this US State'
-};
-
-const status = {
-  type: 'string',
-  description: 'The status of the user role for this US State',
-  enum: ['requested', 'approved', 'denied', 'revoked']
-};
-
-const created_at = {
-  type: 'string',
-  format: 'date-time',
-  description: 'Timestamp of record creation'
-};
-
-const updated_at = {
-  type: 'string',
-  format: 'date-time',
-  description: 'Timestamp of last update'
-};
-
 const affiliationSchema = {
   type: 'object',
   properties: {
-    id,
-    user_id,
-    state_id,
-    role_id,
-    status,
-    created_at,
-    updated_at
+    id: {
+      type: 'integer',
+      description: 'ID of record'
+    },
+    userId: {
+      type: 'string',
+      description: 'ID of user'
+    },
+    displayName: {
+      type: 'string',
+      description: 'The full name of the user'
+    },
+    email: {
+      type: 'string',
+      description: 'The email address of the user'
+    },
+    stateId: {
+      type: 'string',
+      description: '2-letter US State or Territory abbreviation, lowercase'
+    },
+    status: {
+      type: 'string',
+      description: 'The status of the user role for this US State',
+      enum: ['requested', 'approved', 'denied', 'revoked']
+    },
+    role: {
+      type: 'string',
+      description: 'The role applied to this user for this US State'
+    },
+    createdAt: {
+      type: 'string',
+      format: 'date-time',
+      description: 'Timestamp of record creation'
+    },
+    updatedAt: {
+      type: 'string',
+      format: 'date-time',
+      description: 'Timestamp of last update'
+    }
   }
 };
 

@@ -33,7 +33,6 @@ UnauthenticatedUserStory.decorators = [
             email: '',
             name: '',
             position: '',
-            phone: '',
             state: ''
           },
           fetching: false,
@@ -89,7 +88,6 @@ StateStaffUserStory.decorators = [
                 ]
               }
             ],
-            phone: '5555555555',
             role: 'eAPD State Staff',
             state: {
               id: 'ak',
@@ -158,7 +156,6 @@ StateAdminUserStory.decorators = [
                 ]
               }
             ],
-            phone: '5555555555',
             role: 'eAPD State Admin',
             state: {
               id: 'ak',

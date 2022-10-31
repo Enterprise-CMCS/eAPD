@@ -90,38 +90,31 @@ exports.seed = async knex => {
   await knex('okta_users').insert([
     {
       user_id: 2010,
-      email: '2010@email.com',
-      metadata: '{}'
+      email: '2010@email.com'
     },
     {
       user_id: 2020,
-      email: '2020@email.com',
-      metadata: '{}'
+      email: '2020@email.com'
     },
     {
       user_id: 'all-permissions',
-      email: 'all-permissions@email.com',
-      metadata: '{}'
+      email: 'all-permissions@email.com'
     },
     {
       user_id: 'no-permissions',
-      email: 'no-permissions@email.com',
-      metadata: '{}'
+      email: 'no-permissions@email.com'
     },
     {
       user_id: 'fed-admin',
-      email: 'fedadmin@email.com',
-      metadata: '{}'
+      email: 'fedadmin@email.com'
     },
     {
       user_id: 'state-admin',
-      email: 'stateadmin@email.com',
-      metadata: '{}'
+      email: 'stateadmin@email.com'
     },
     {
       user_id: 'state-admin-match',
-      email: 'stateadminmatch@email.com',
-      metadata: '{}'
+      email: 'stateadminmatch@email.com'
     }
   ]);
 };
