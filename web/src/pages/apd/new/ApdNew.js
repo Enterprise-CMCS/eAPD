@@ -202,7 +202,6 @@ const ApdNew = ({ createApd: create }) => {
                   value={value}
                   onChange={e => {
                     onChange(e);
-                    trigger();
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
