@@ -8,40 +8,49 @@ const apdNewSchema = Joi.object({
   years: Joi.array().min(1).required().messages({
     'array.min': 'Select at least one year.'
   }),
-  hitechStatus: Joi.when('apdType', {
-    is: 'hitech',
-    then: Joi.array().min(1).required().messages({
-      'array.min': 'Select at least one type of update.'
-    }),
-    otherwise: Joi.any()
-  }),
-  mmisStatus: Joi.when('apdType', {
+  mmisUpdate: Joi.when('apdType', {
     is: 'mmis',
+    then: Joi.string().valid('yes', 'no').required().messages({
+      'any.only': 'Select an update type'
+    }),
+    otherwise: Joi.string().valid('')
+  }),
+  updateStatus: Joi.when('apdType', {
+    is: 'hitech',
     then: Joi.object({
-      updateValue: Joi.string().valid('yes', 'no').required().messages({
-        'any.only': 'Select an update type.'
+      typeStatus: Joi.object({
+        annualUpdate: Joi.boolean(),
+        asNeededUpdate: Joi.boolean()
       }),
-      updateTypes: Joi.when('updateValue', {
-        is: 'yes',
-        then: Joi.array().min(1).required().messages({
-          'array.min': 'Select at least one type of update.'
-        }),
-        otherwise: Joi.any()
+      updateList: Joi.array().min(1).required().messages({
+        'array.min': 'Select at least type of update.'
       })
     }),
-    otherwise: Joi.any()
+    otherwise: Joi.when('mmisUpdate', {
+      is: 'yes',
+      then: Joi.object({
+        typeStatus: Joi.object({
+          annualUpdate: Joi.boolean(),
+          asNeededUpdate: Joi.boolean()
+        }),
+        updateList: Joi.array().min(1).required().messages({
+          'array.min': 'Select at least one type of update.'
+        })
+      })
+    })
   }),
-  medicaidBA: Joi.when('apdType', {
+  apdOverview: Joi.when('apdType', {
     is: 'mmis',
-    then: Joi.array().min(1).required().messages({
-      'array.min': 'Select at least one Medicaid Business Area.'
-    }),
-    otherwise: Joi.any()
-  }),
-  otherDetails: Joi.when('medicaidBA', {
-    is: Joi.array().items(Joi.string()).has(Joi.string().valid('other')),
-    then: Joi.string().min(1).required(),
-    otherwise: Joi.any()
+    then: Joi.object({
+      medicaidBA: Joi.array().min(1).required().messages({
+        'array.min': 'Select at least one business area.'
+      }),
+      otherDetails: Joi.when('medicaidBA', {
+        is: Joi.array().items(Joi.string()).has(Joi.string().valid('other')),
+        then: Joi.string().min(1).required(),
+        otherwise: Joi.any()
+      })
+    })
   })
 });
 

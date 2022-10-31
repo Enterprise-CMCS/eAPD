@@ -75,6 +75,18 @@ const apdSchema = new mongoose.Schema({
     required: true
   },
   name: String,
+  apdType: {
+    type: String,
+    enum: ['hitech', 'mmis'],
+    required: true
+  },
+  updateStatus: {
+    updateList: ['annualUpdate', 'asNeededUpdate'],
+    typeStatus: {
+      annual: Boolean,
+      asNeeded: Boolean
+    }
+  },
   years: [
     {
       _id: false,
@@ -92,7 +104,30 @@ const apdSchema = new mongoose.Schema({
     programOverview: String,
     narrativeHIT: String,
     narrativeHIE: String,
-    narrativeMMIS: String
+    narrativeMMIS: String,
+    updateStatus: {
+      isUpdateAPD: Boolean,
+      annualUpdate: Boolean,
+      asNeededUpdate: Boolean
+    },
+    medicaidBusinessAreas: {
+      waiverSupport: Boolean,
+      assetVerificationSystem: Boolean,
+      claimsProcessing: Boolean,
+      decisionSupport: Boolean,
+      electronicVisitVerify: Boolean,
+      encounterProcessingSystem: Boolean,
+      financialManagement: Boolean,
+      healthInfoExchange: Boolean,
+      longTermServiceSupport: Boolean,
+      memberManagement: Boolean,
+      pharmacyBenefitManagement: Boolean,
+      programIntegrity: Boolean,
+      providerManagement: Boolean,
+      thirdPartyLiability: Boolean,
+      other: Boolean
+    },
+    otherMedicaidBusinessAreas: String
   },
   keyStatePersonnel: {
     medicaidDirector: {

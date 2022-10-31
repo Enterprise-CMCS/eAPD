@@ -1,5 +1,5 @@
 import PropType from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -13,21 +13,26 @@ import newApdSchema from '@cms-eapd/common/schemas/apdNew';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 const businessAreas = {
-  wws: false,
-  avs: false,
-  cp: false,
-  ds: false,
-  evv: false,
-  eps: false,
-  fm: false,
-  hie: false,
-  ltss: false,
-  mm: false,
-  pbmpos: false,
-  pi: false,
-  pm: false,
-  tpl: false,
+  waiverSupport: false,
+  assetVerification: false,
+  claimsProcessing: false,
+  decisionSupport: false,
+  electronicVisitVerify: false,
+  encounterProcessingSystem: false,
+  financialMangement: false,
+  healthInfoExchange: false,
+  longTermServiceSupport: false,
+  memberManagement: false,
+  pharmacyBenefitManagement: false,
+  programIntegrity: false,
+  providerManagement: false,
+  thirdPartyLiability: false,
   other: false
+};
+
+const typeStatus = {
+  annualUpdate: false,
+  asNeededUpdate: false
 };
 
 const ApdNew = ({ createApd: create }) => {
@@ -43,7 +48,6 @@ const ApdNew = ({ createApd: create }) => {
   const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
   const history = useHistory();
   const [apdType, setApdType] = useState('');
-  const [hitechStatus, setHitechStatus] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
 
@@ -51,19 +55,11 @@ const ApdNew = ({ createApd: create }) => {
     control,
     setValue,
     getValues,
+    trigger,
     formState: { errors, isDirty, isValid }
   } = useForm({
     defaultValues: {
-      apdType: '',
-      name: '',
-      years,
-      hitechStatus: hitechStatus,
-      mmisStatus: {
-        updateValue: '',
-        updateTypes: []
-      },
-      medicaidBA: [],
-      otherDetails: ''
+      years: years
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -106,7 +102,7 @@ const ApdNew = ({ createApd: create }) => {
     create(values);
   };
 
-  const disabled = !isValid || !isDirty || (!isValid && isDirty);
+  const disabled = !isValid || !isDirty || (isDirty && !isValid);
 
   return (
     <Fragment>
@@ -127,7 +123,7 @@ const ApdNew = ({ createApd: create }) => {
         <Controller
           name="apdType"
           control={control}
-          render={({ field: { onChange, value, ...props } }) => (
+          render={({ field: { onBlur, onChange, value, ...props } }) => (
             <ChoiceList
               {...props}
               type="radio"
@@ -144,10 +140,12 @@ const ApdNew = ({ createApd: create }) => {
                 }
               ]}
               onChange={e => {
-                onChange(e);
                 setApdType(e.target.value);
                 setValue('apdType', e.target.value, { shouldValidate: true });
+                onChange(e);
               }}
+              onBlur={onBlur}
+              onComponentBlur={onBlur}
               errorMessage={errors?.apdType?.message}
               errorPlacement="bottom"
             />
@@ -164,7 +162,10 @@ const ApdNew = ({ createApd: create }) => {
                   label="APD Name"
                   className="remove-clearfix"
                   value={value}
-                  onChange={onChange}
+                  onChange={e => {
+                    onChange(e);
+                    trigger();
+                  }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
                 />
@@ -182,6 +183,7 @@ const ApdNew = ({ createApd: create }) => {
                   type="checkbox"
                   onChange={e => {
                     updateArray(years, 'years', setYears, e.target.value);
+                    trigger();
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
@@ -195,9 +197,9 @@ const ApdNew = ({ createApd: create }) => {
         {apdType === 'hitech' && (
           <div>
             <Controller
-              name="hitechStatus"
+              name="updateStatus.updateList"
               control={control}
-              render={({ field: { onBlur } }) => (
+              render={({ field: { onBlur, onChange } }) => (
                 <ChoiceList
                   label="Update Type"
                   hint={
@@ -212,26 +214,30 @@ const ApdNew = ({ createApd: create }) => {
                   choices={[
                     {
                       label: 'Annual update',
-                      value: 'annual'
+                      value: 'annualUpdate',
+                      checked: typeStatus.annualUpdate
                     },
                     {
                       label: 'As-needed update',
-                      value: 'as-needed'
+                      value: 'asNeededUpdate',
+                      checked: typeStatus.asNeededUpdate
                     }
                   ]}
                   labelClassName="ds-u-margin-bottom--1"
                   type="checkbox"
-                  onChange={e => {
-                    updateArray(
-                      hitechStatus,
-                      'hitechStatus',
-                      setHitechStatus,
-                      e.target.value
+                  onChange={({ target: { value } }) => {
+                    typeStatus[value] = !typeStatus[value];
+                    onChange(
+                      Object.keys(typeStatus).filter(key => typeStatus[key])
                     );
+                    setValue('updateStatus.typeStatus', typeStatus, {
+                      shouldValidate: true
+                    });
+                    trigger();
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
-                  errorMessage={errors?.hitechStatus?.message}
+                  errorMessage={errors?.updateStatus?.updateList?.message}
                   errorPlacement="bottom"
                 />
               )}
@@ -241,7 +247,7 @@ const ApdNew = ({ createApd: create }) => {
         {apdType === 'mmis' && (
           <div>
             <Controller
-              name="mmisStatus.updateValue"
+              name="mmisUpdate"
               control={control}
               render={({ field: { onBlur, onChange, value } }) => (
                 <ChoiceList
@@ -256,7 +262,7 @@ const ApdNew = ({ createApd: create }) => {
                       checkedChildren: (
                         <div className="ds-c-choice__checkedChild">
                           <Controller
-                            name="mmisStatus.updateTypes"
+                            name="updateStatus.updateList"
                             control={control}
                             render={({ field: { onBlur, onChange } }) => (
                               <ChoiceList
@@ -273,20 +279,35 @@ const ApdNew = ({ createApd: create }) => {
                                 choices={[
                                   {
                                     label: 'Annual update',
-                                    value: 'annual'
+                                    value: 'annualUpdate',
+                                    checked: typeStatus.annualUpdate
                                   },
                                   {
                                     label: 'As-needed update',
-                                    value: 'as-needed'
+                                    value: 'asNeededUpdate',
+                                    checked: typeStatus.asNeededUpdate
                                   }
                                 ]}
                                 labelClassName="ds-u-margin-bottom--1"
                                 type="checkbox"
-                                onChange={onChange}
+                                onChange={({ target: { value } }) => {
+                                  typeStatus[value] = !typeStatus[value];
+                                  onChange(
+                                    Object.keys(typeStatus).filter(
+                                      key => typeStatus[key]
+                                    )
+                                  );
+                                  setValue(
+                                    'updateStatus.typeStatus',
+                                    typeStatus,
+                                    { shouldValidate: true }
+                                  );
+                                  trigger();
+                                }}
                                 onBlur={onBlur}
                                 onComponentBlur={onBlur}
                                 errorMessage={
-                                  errors?.mmisStatus?.updateTypes?.message
+                                  errors?.updateStatus?.updateList?.message
                                 }
                                 errorPlacement="bottom"
                               />
@@ -301,17 +322,20 @@ const ApdNew = ({ createApd: create }) => {
                       checked: value === 'no'
                     }
                   ]}
-                  onChange={onChange}
+                  onChange={e => {
+                    onChange(e);
+                    trigger();
+                  }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
-                  errorMessage={errors?.mmisStatus?.updateValue?.message}
+                  errorMessage={errors?.typeStatus?.mmisUpdate?.message}
                   errorPlacement="bottom"
                 />
               )}
             />
 
             <Controller
-              name="medicaidBA"
+              name="apdOverview.medicaidBA"
               control={control}
               render={({ field: { onBlur, onChange } }) => (
                 <ChoiceList
@@ -329,75 +353,75 @@ const ApdNew = ({ createApd: create }) => {
                   choices={[
                     {
                       label: '1115 or Waiver Support Systems',
-                      value: 'wws',
-                      checked: businessAreas.wws
+                      value: 'waiverSupport',
+                      checked: businessAreas.waiverSupport
                     },
                     {
                       label: 'Asset Verification System',
-                      value: 'avs',
-                      checked: businessAreas.avs
+                      value: 'assetVerification',
+                      checked: businessAreas.assetVerification
                     },
                     {
                       label: 'Claims Processing',
-                      value: 'cp',
-                      checked: businessAreas.cp
+                      value: 'claimsProcessing',
+                      checked: businessAreas.claimsProcessing
                     },
                     {
                       label: 'Decision Support System & Data Warehouse',
-                      value: 'ds',
-                      checked: businessAreas.ds
+                      value: 'decisionSupport',
+                      checked: businessAreas.decisionSupport
                     },
                     {
                       label: 'Electronic Visit Verification (EVV)',
-                      value: 'evv',
-                      checked: businessAreas.evv
+                      value: 'electronicVisitVerify',
+                      checked: businessAreas.electronicVisitVerify
                     },
                     {
                       label:
                         'Encounter Processing System (EPS) & Managed Care System',
-                      value: 'eps',
-                      checked: businessAreas.eps
+                      value: 'encounterProcessingSystem',
+                      checked: businessAreas.encounterProcessingSystem
                     },
                     {
                       label: 'Financial Management',
-                      value: 'fm',
-                      checked: businessAreas.fm
+                      value: 'financialMangement',
+                      checked: businessAreas.financialMangement
                     },
                     {
                       label: 'Health Information Exchange (HIE)',
-                      value: 'hie',
-                      checked: businessAreas.hie
+                      value: 'healthInfoExchange',
+                      checked: businessAreas.healthInfoExchange
                     },
                     {
                       label: 'Long Term Services & Suports (LTSS)',
-                      value: 'ltss',
-                      checked: businessAreas.ltss
+                      value: 'longTermServiceSupport',
+                      checked: businessAreas.longTermServiceSupport
                     },
                     {
                       label: 'Member Management',
-                      value: 'mm',
-                      checked: businessAreas.mm
+                      value: 'memberMangagement',
+                      checked: businessAreas.memberMangagement
                     },
                     {
                       label:
                         'Pharmacy Beefit Management (PBM) & Point of Sale (POS)',
-                      value: 'pbmpos',
-                      checked: businessAreas.pbmpos
+                      value: 'pharmacyBenefitManagement',
+                      checked: businessAreas.pharmacyBenefitManagement
                     },
                     {
                       label: 'Program Integrity',
-                      value: 'pi',
-                      checked: businessAreas.pi
+                      value: 'programIntegrity',
+                      checked: businessAreas.programIntegrity
                     },
                     {
                       label: 'Provider Management',
-                      value: 'pm',
-                      checked: businessAreas.pm
+                      value: 'providerManagement',
+                      checked: businessAreas.providerManagement
                     },
                     {
                       label: 'Third Party Liability (TPL)',
-                      value: 'tpl',
-                      checked: businessAreas.tpl
+                      value: 'thirdPartyLiability',
+                      checked: businessAreas.thirdPartyLiability
                     },
                     {
                       label: 'Other',
@@ -406,7 +430,7 @@ const ApdNew = ({ createApd: create }) => {
                       checkedChildren: (
                         <div className="ds-c-choice__checkedChild">
                           <Controller
-                            name="otherDetails"
+                            name="apdOverview.otherDetails"
                             control={control}
                             render={({ field: { onBlur, ...props } }) => (
                               <TextArea
@@ -416,6 +440,11 @@ const ApdNew = ({ createApd: create }) => {
                                 hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
                                 onBlur={onBlur}
                                 onComponentBlur={onBlur}
+                                errorMessage={
+                                  errors?.apdOverview
+                                    ?.otherMedicaidBusinessAreas?.message
+                                }
+                                errorPlacement="bottom"
                               />
                             )}
                           />
@@ -430,10 +459,11 @@ const ApdNew = ({ createApd: create }) => {
                         key => businessAreas[key]
                       )
                     );
+                    trigger();
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
-                  errorMessage={errors?.medicaidBA?.message}
+                  errorMessage={errors?.apdOverview?.medicaidBA?.message}
                   errorPlacement="bottom"
                 />
               )}
@@ -457,7 +487,7 @@ const ApdNew = ({ createApd: create }) => {
   );
 };
 
-ApdNew.PropTypes = {
+ApdNew.propTypes = {
   createApd: PropType.func.isRequired,
   yearChoices: PropType.arrayOf(PropType.string).isRequired
 };
