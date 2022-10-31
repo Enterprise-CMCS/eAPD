@@ -45,16 +45,38 @@ describe('tests state admin portal', () => {
         });
 
         cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
-        // check if validation is on
+
+        cy.goToApdOverview();
+        cy.get('[data-cy="validationError"]').should('exist');
 
         cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
           force: true
         });
-        cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('not.exist');
-        // check if validation is off
+        cy.get('[data-cy="validationError"]').should('not.exist');
 
+        cy.contains('Export and Submit').click();
         cy.findByRole('button', { name: /Run Administrative Check/i }).click({
           force: true
+        });
+
+        cy.get('[data-cy="numRequired"]').should('have.text', '35');
+
+        cy.findByRole('button', { name: /Collapse/i }).click({
+          force: true
+        });
+
+        cy.get('[class="eapd-admin-check-list"]').should('not.exist');
+        cy.findByRole('button', { name: /Stop Administrative Check/i }).should(
+          'not.exist'
+        );
+
+        cy.findByRole('button', { name: /Expand/i }).click({
+          force: true
+        });
+
+        cy.get('[class="eapd-admin-check-list"]').within(() => {
+          cy.contains('Assurances and Compliance').click();
+          cy.get('.ds-h2').should('contain', 'Assurances and Compliance');
         });
       }
     );
