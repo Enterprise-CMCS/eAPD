@@ -12,11 +12,13 @@ import { plain as Schedule } from './Schedule';
 
 const defaultProps = {
   activity: {
-    // The Battle of the Scheldt results in a key Allied victory, when
-    // Canadian forces successfully opened shipping routes to Antwerp, enabling
-    // supplies to reach Allied forces in northwest Europe.
-    plannedEndDate: '1944-11-08',
-    plannedStartDate: '1944-10-02'
+    activitySchedule: {
+      // The Battle of the Scheldt results in a key Allied victory, when
+      // Canadian forces successfully opened shipping routes to Antwerp, enabling
+      // supplies to reach Allied forces in northwest Europe.
+      plannedStartDate: '1944-10-02',
+      plannedEndDate: '1944-11-08'
+    }
   },
   activityIndex: 7,
   setEndDate: jest.fn(),

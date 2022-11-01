@@ -22,10 +22,20 @@ const initialState = {
   },
   apd: {
     data: {
-      keyStatePersonnel: {},
       years: ['2023'],
+      keyStatePersonnel: {},
       activities: [
         {
+          name: 'Our Flag Means Death',
+          activityOverview: {
+            summary:
+              'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.',
+            description:
+              'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.',
+            alternatives: 'Pirates of the Caribbean is also a Pirate movie.'
+          },
+          statePersonnel: [],
+          expenses: [],
           contractorResources: [
             {
               hourly: {
@@ -44,15 +54,7 @@ const initialState = {
               3: {},
               4: {}
             }
-          },
-          expenses: [],
-          statePersonnel: [],
-          name: 'Our Flag Means Death',
-          alternatives: 'Pirates of the Caribbean is also a Pirate movie.',
-          description:
-            'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.',
-          summary:
-            'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
+          }
         }
       ]
     }

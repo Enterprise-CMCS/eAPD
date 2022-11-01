@@ -3,15 +3,41 @@ const jsonpointer = require('jsonpointer');
 const {
   deepCopy,
   calculateBudget,
-  hasBudgetUpdate
+  hasBudgetUpdate,
+  defaultAPDYearOptions
 } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
-const { Budget, APD } = require('../models/index');
+const { Budget, APD, HITECH, MMIS } = require('../models/index');
+
+// APD Types
+const APD_TYPE = {
+  HITECH: 'HITECH',
+  MMIS: 'MMIS'
+};
 
 const createAPD = async apd => {
-  const apdDoc = await APD.create(apd);
+  const apdJSON = deepCopy(apd);
+  if (!apdJSON.yearOptions) {
+    apdJSON.yearOptions = defaultAPDYearOptions();
+  }
+
+  let apdDoc;
+  switch (
+    apd.__t // eslint-disable-line no-underscore-dangle
+  ) {
+    case APD_TYPE.HITECH: {
+      apdDoc = await HITECH.create(apdJSON);
+      break;
+    }
+    case APD_TYPE.MMIS: {
+      apdDoc = await MMIS.create(apdJSON);
+      break;
+    }
+    default:
+      apdDoc = await APD.create(apdJSON);
+  }
   const newBudget = await Budget.create(calculateBudget(apdDoc.toJSON()));
   apdDoc.budget = newBudget;
   await apdDoc.save();

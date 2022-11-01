@@ -30,7 +30,8 @@ const ActivityOverview = ({
 }) => {
   ActivityOverview.displayName = 'ActivityOverview';
 
-  const { alternatives, description, summary } = activity;
+  const { activityOverview: { alternatives, description, summary } = {} } =
+    activity;
 
   const {
     control,

@@ -60,7 +60,8 @@ describe('APD reducer', () => {
           // Queen Elizabeth II is born
           updated: '1926-04-21T00:00:00Z',
           other: 'data',
-          goes: 'here'
+          goes: 'here',
+          yearOptions: ['1990', '1991', '1992']
         }
       })
     ).toEqual({
@@ -101,18 +102,18 @@ describe('APD reducer', () => {
         id: 'apd-id-1',
         // Albert the monkey is launched into space.
         created: '1948-06-11T00:00:00Z',
-        name: 'my first apd',
         // Laika the dog is launched into space
-        updated: '1957-11-03T06:30:00Z'
+        updated: '1957-11-03T06:30:00Z',
+        name: 'my first apd'
       },
       {
         id: 'apd-id-2',
         // By law, England includes Wales.
         created: '1746-01-01T00:00:00Z',
-        name: 'a second apd',
         // The Battle of Hastings, essentially completing the Norman conquest
         // of England and securing William the Conqueror's seat on the throne
-        updated: '1066-10-14T18:00:00Z'
+        updated: '1066-10-14T18:00:00Z',
+        name: 'a second apd'
       }
     ];
 
@@ -121,14 +122,14 @@ describe('APD reducer', () => {
         'apd-id-1': {
           id: 'apd-id-1',
           created: 'June 11, 1948',
-          name: 'my first apd',
-          updated: 'November 3, 1957, 6:30 AM GMT'
+          updated: 'November 3, 1957, 6:30 AM GMT',
+          name: 'my first apd'
         },
         'apd-id-2': {
           id: 'apd-id-2',
           created: 'January 1, 1746',
-          name: 'a second apd',
-          updated: 'October 14, 1066, 6:00 PM GMT'
+          updated: 'October 14, 1066, 6:00 PM GMT',
+          name: 'a second apd'
         }
       },
       data: initialState.data,
@@ -165,32 +166,32 @@ describe('APD reducer', () => {
     const action = {
       type: SELECT_APD_SUCCESS,
       apd: {
-        activities: [
-          {
-            name: 'activity 1',
-            activityId: 'abcd1234',
-            contractorResources: [{ name: 'contractor 1' }],
-            expenses: [{ name: 'expense 1' }],
-            outcomes: [{ name: 'outcome 1', metrics: [{ name: 'metric 1' }] }],
-            schedule: [{ name: 'schedule 1' }],
-            statePersonnel: [{ name: 'person 1' }]
-          }
-        ],
         // A priest led an angry mob to the town council chambers and threw
         // them out a window. The king literally died of shock. This was the
         // First Defenestration of Prague.
         created: '1419-07-30T00:00:00Z',
+        // Some nobles are tossed out a window in the Second Defenestration
+        // of Prague, kicking off the Thirty Years' War
+        updated: '1618-05-23T10:30:00Z',
+        keyStatePersonnel: { keyPersonnel: [{ name: 'key person 1' }] },
+        activities: [
+          {
+            activityId: 'abcd1234',
+            name: 'activity 1',
+            milestones: [{ name: 'milestone 1' }],
+            outcomes: [{ name: 'outcome 1', metrics: [{ name: 'metric 1' }] }],
+            statePersonnel: [{ name: 'person 1' }],
+            expenses: [{ name: 'expense 1' }],
+            contractorResources: [{ name: 'contractor 1' }]
+          }
+        ],
         assurancesAndCompliances: {
           procurement: [],
           recordsAccess: [],
           softwareRights: [],
           security: []
         },
-        keyStatePersonnel: { keyPersonnel: [{ name: 'key person 1' }] },
-        value: `hurr hurr i'm a burr`,
-        // Some nobles are tossed out a window in the Second Defenestration
-        // of Prague, kicking off the Thirty Years' War
-        updated: '1618-05-23T10:30:00Z'
+        value: `hurr hurr i'm a burr`
       }
     };
 
@@ -198,21 +199,25 @@ describe('APD reducer', () => {
       expect(apd(initialState, action)).toEqual({
         ...initialState,
         data: {
+          created: 'July 30, 1419',
+          updated: 'May 23, 1618, 10:30 AM GMT',
+          keyStatePersonnel: {
+            keyPersonnel: [
+              {
+                key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                name: 'key person 1'
+              }
+            ]
+          },
           activities: [
             {
               key: 'abcd1234',
               activityId: 'abcd1234',
               name: 'activity 1',
-              contractorResources: [
+              milestones: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'contractor 1'
-                }
-              ],
-              expenses: [
-                {
-                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'expense 1'
+                  name: 'milestone 1'
                 }
               ],
               outcomes: [
@@ -227,33 +232,28 @@ describe('APD reducer', () => {
                   ]
                 }
               ],
-              schedule: [
-                {
-                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'schedule 1'
-                }
-              ],
               statePersonnel: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   name: 'person 1'
                 }
+              ],
+              expenses: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'expense 1'
+                }
+              ],
+              contractorResources: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'contractor 1'
+                }
               ]
             }
           ],
-          created: 'July 30, 1419',
           assurancesAndCompliances: regulations,
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                name: 'key person 1'
-              }
-            ]
-          },
-          value: `hurr hurr i'm a burr`,
-          updated: 'May 23, 1618, 10:30 AM GMT',
-          yearOptions: ['1990', '1991', '1992']
+          value: `hurr hurr i'm a burr`
         }
       });
     });
@@ -264,21 +264,25 @@ describe('APD reducer', () => {
       expect(apd(initialState, action)).toEqual({
         ...initialState,
         data: {
+          created: 'July 30, 1419',
+          updated: 'May 23, 1618, 10:30 AM GMT',
+          keyStatePersonnel: {
+            keyPersonnel: [
+              {
+                key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                name: 'key person 1'
+              }
+            ]
+          },
           activities: [
             {
               key: 'abcd1234',
               activityId: 'abcd1234',
               name: 'activity 1',
-              contractorResources: [
+              milestones: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'contractor 1'
-                }
-              ],
-              expenses: [
-                {
-                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'expense 1'
+                  name: 'milestone 1'
                 }
               ],
               outcomes: [
@@ -293,33 +297,28 @@ describe('APD reducer', () => {
                   ]
                 }
               ],
-              schedule: [
-                {
-                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'schedule 1'
-                }
-              ],
               statePersonnel: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   name: 'person 1'
                 }
+              ],
+              expenses: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'expense 1'
+                }
+              ],
+              contractorResources: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'contractor 1'
+                }
               ]
             }
           ],
-          created: 'July 30, 1419',
           assurancesAndCompliances: { key: 'value' },
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                name: 'key person 1'
-              }
-            ]
-          },
-          value: `hurr hurr i'm a burr`,
-          updated: 'May 23, 1618, 10:30 AM GMT',
-          yearOptions: ['1990', '1991', '1992']
+          value: `hurr hurr i'm a burr`
         }
       });
     });
@@ -335,25 +334,24 @@ describe('APD reducer', () => {
   it('should handle adding an APD year', () => {
     const state = {
       data: {
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1742: 1,
+                1743: 2
+              },
+              fte: {
+                1742: 1,
+                1743: 2
+              }
+            }
+          ]
+        },
         activities: [
           {
-            costAllocation: {
-              1742: 'yes',
-              1743: 'no'
-            },
-            costAllocationNarrative: {
-              years: {
-                1741: { otherSources: '' },
-                1742: { otherSources: '' }
-              },
-              methodology: ''
-            },
-            contractorResources: [
+            statePersonnel: [
               {
-                hourly: {
-                  1742: { hours: 20, rate: 22 },
-                  1743: { hours: 25, rate: 27 }
-                },
                 years: {
                   1742: 0,
                   1743: 0
@@ -368,18 +366,33 @@ describe('APD reducer', () => {
                 }
               }
             ],
-            quarterlyFFP: {
-              1742: 'sometimes',
-              1743: 'rarely'
-            },
-            statePersonnel: [
+            contractorResources: [
               {
+                hourly: {
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
+                },
                 years: {
                   1742: 0,
                   1743: 0
                 }
               }
-            ]
+            ],
+            costAllocation: {
+              1742: 'yes',
+              1743: 'no'
+            },
+            costAllocationNarrative: {
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
+              methodology: ''
+            },
+            quarterlyFFP: {
+              1742: 'sometimes',
+              1743: 'rarely'
+            }
           }
         ],
         proposedBudget: {
@@ -402,40 +415,49 @@ describe('APD reducer', () => {
             }
           }
         },
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: {
-                1742: 1,
-                1243: 2
-              },
-              fte: {
-                1742: 1,
-                1243: 2
-              }
-            }
-          ]
-        },
-        years: ['1742', '1743']
+        years: ['1742', '1743'],
+        yearOptions: ['1741', '1742', '1743']
       }
     };
 
     expect(apd(state, { type: ADD_APD_YEAR, value: '1741' })).toEqual({
       data: {
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              },
+              fte: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              }
+            }
+          ]
+        },
         activities: [
           {
-            costAllocation: {
-              1741: { other: 0, ffp: { federal: 0, state: 100 } },
-              1742: 'yes',
-              1743: 'no'
-            },
-            costAllocationNarrative: {
-              years: {
-                1741: { otherSources: '' },
-                1742: { otherSources: '' }
-              },
-              methodology: ''
-            },
+            statePersonnel: [
+              {
+                years: {
+                  1741: { amt: null, perc: null },
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  1741: null,
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
             contractorResources: [
               {
                 hourly: {
@@ -450,15 +472,18 @@ describe('APD reducer', () => {
                 }
               }
             ],
-            expenses: [
-              {
-                years: {
-                  1741: null,
-                  1742: 0,
-                  1743: 0
-                }
-              }
-            ],
+            costAllocation: {
+              1741: { other: 0, ffp: { federal: 0, state: 100 } },
+              1742: 'yes',
+              1743: 'no'
+            },
+            costAllocationNarrative: {
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
+              methodology: ''
+            },
             quarterlyFFP: {
               1741: {
                 1: {
@@ -484,16 +509,7 @@ describe('APD reducer', () => {
               },
               1742: 'sometimes',
               1743: 'rarely'
-            },
-            statePersonnel: [
-              {
-                years: {
-                  1741: { amt: null, perc: null },
-                  1742: 0,
-                  1743: 0
-                }
-              }
-            ]
+            }
           }
         ],
         proposedBudget: {
@@ -520,23 +536,8 @@ describe('APD reducer', () => {
             }
           }
         },
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: {
-                1741: 0,
-                1742: 1,
-                1243: 2
-              },
-              fte: {
-                1741: 0,
-                1742: 1,
-                1243: 2
-              }
-            }
-          ]
-        },
-        years: ['1741', '1742', '1743']
+        years: ['1741', '1742', '1743'],
+        yearOptions: ['1741', '1742', '1743']
       }
     });
   });
@@ -544,20 +545,42 @@ describe('APD reducer', () => {
   it('should handle removing an APD year', () => {
     const state = {
       data: {
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              },
+              fte: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              }
+            }
+          ]
+        },
         activities: [
           {
-            costAllocation: {
-              1741: { other: 0, ffp: { federal: 90, state: 10 } },
-              1742: 'yes',
-              1743: 'no'
-            },
-            costAllocationNarrative: {
-              years: {
-                1741: { otherSources: '' },
-                1742: { otherSources: '' }
-              },
-              methodology: ''
-            },
+            statePersonnel: [
+              {
+                years: {
+                  1741: { amt: '', perc: '' },
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  1741: 0,
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
             contractorResources: [
               {
                 hourly: {
@@ -572,15 +595,18 @@ describe('APD reducer', () => {
                 }
               }
             ],
-            expenses: [
-              {
-                years: {
-                  1741: 0,
-                  1742: 0,
-                  1743: 0
-                }
-              }
-            ],
+            costAllocation: {
+              1741: { other: 0, ffp: { federal: 90, state: 10 } },
+              1742: 'yes',
+              1743: 'no'
+            },
+            costAllocationNarrative: {
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
+              methodology: ''
+            },
             quarterlyFFP: {
               1741: {
                 1: {
@@ -606,16 +632,7 @@ describe('APD reducer', () => {
               },
               1742: 'sometimes',
               1743: 'rarely'
-            },
-            statePersonnel: [
-              {
-                years: {
-                  1741: { amt: '', perc: '' },
-                  1742: 0,
-                  1743: 0
-                }
-              }
-            ]
+            }
           }
         ],
         proposedBudget: {
@@ -642,46 +659,31 @@ describe('APD reducer', () => {
             }
           }
         },
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: {
-                1741: 0,
-                1742: 1,
-                1243: 2
-              },
-              fte: {
-                1741: 0,
-                1742: 1,
-                1243: 2
-              }
-            }
-          ]
-        },
-        years: ['1741', '1742', '1743']
+        years: ['1741', '1742', '1743'],
+        yearOptions: ['1741', '1742', '1743']
       }
     };
 
     expect(apd(state, { type: REMOVE_APD_YEAR, value: '1741' })).toEqual({
       data: {
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1742: 1,
+                1743: 2
+              },
+              fte: {
+                1742: 1,
+                1743: 2
+              }
+            }
+          ]
+        },
         activities: [
           {
-            costAllocation: {
-              1742: 'yes',
-              1743: 'no'
-            },
-            costAllocationNarrative: {
-              years: {
-                1742: { otherSources: '' }
-              },
-              methodology: ''
-            },
-            contractorResources: [
+            statePersonnel: [
               {
-                hourly: {
-                  1742: { hours: 20, rate: 22 },
-                  1743: { hours: 25, rate: 27 }
-                },
                 years: {
                   1742: 0,
                   1743: 0
@@ -696,18 +698,32 @@ describe('APD reducer', () => {
                 }
               }
             ],
-            quarterlyFFP: {
-              1742: 'sometimes',
-              1743: 'rarely'
-            },
-            statePersonnel: [
+            contractorResources: [
               {
+                hourly: {
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
+                },
                 years: {
                   1742: 0,
                   1743: 0
                 }
               }
-            ]
+            ],
+            costAllocation: {
+              1742: 'yes',
+              1743: 'no'
+            },
+            costAllocationNarrative: {
+              years: {
+                1742: { otherSources: '' }
+              },
+              methodology: ''
+            },
+            quarterlyFFP: {
+              1742: 'sometimes',
+              1743: 'rarely'
+            }
           }
         ],
         proposedBudget: {
@@ -730,21 +746,8 @@ describe('APD reducer', () => {
             }
           }
         },
-        keyStatePersonnel: {
-          keyPersonnel: [
-            {
-              costs: {
-                1742: 1,
-                1243: 2
-              },
-              fte: {
-                1742: 1,
-                1243: 2
-              }
-            }
-          ]
-        },
-        years: ['1742', '1743']
+        years: ['1742', '1743'],
+        yearOptions: ['1741', '1742', '1743']
       }
     });
   });
@@ -872,7 +875,27 @@ describe('APD reducer', () => {
         data: {
           activities: [
             {
-              alternatives: '',
+              key: '1234abcd',
+              activityId: '1234abcd',
+              fundingSource: null,
+              name: '',
+              activityOverview: {
+                summary: '',
+                description: '',
+                alternatives: '',
+                standardsAndConditions: {
+                  doesNotSupport: '',
+                  supports: ''
+                }
+              },
+              activitySchedule: {
+                plannedStartDate: '',
+                plannedEndDate: ''
+              },
+              milestones: [],
+              outcomes: [],
+              statePersonnel: [],
+              expenses: [],
               contractorResources: [],
               costAllocation: {
                 1787: { ffp: { federal: 0, state: 100 }, other: 0 }
@@ -883,16 +906,6 @@ describe('APD reducer', () => {
                 },
                 methodology: ''
               },
-              description: '',
-              expenses: [],
-              fundingSource: null,
-              key: '1234abcd',
-              activityId: '1234abcd',
-              meta: { expanded: false },
-              name: '',
-              outcomes: [],
-              plannedEndDate: '',
-              plannedStartDate: '',
               quarterlyFFP: {
                 1787: {
                   1: { combined: 25, contractors: 25, inHouse: 25 },
@@ -901,13 +914,7 @@ describe('APD reducer', () => {
                   4: { combined: 25, contractors: 25, inHouse: 25 }
                 }
               },
-              schedule: [],
-              standardsAndConditions: {
-                doesNotSupport: '',
-                supports: ''
-              },
-              statePersonnel: [],
-              summary: '',
+              meta: { expanded: false },
               years: ['1787']
             }
           ],
@@ -1022,17 +1029,17 @@ describe('APD reducer', () => {
     it('should add a new activity milestone', () => {
       const state = {
         data: {
-          activities: [{ schedule: [] }]
+          activities: [{ milestones: [] }]
         }
       };
 
       expect(
-        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/schedule/-` })
+        apd(state, { type: ADD_APD_ITEM, path: `/activities/0/milestones/-` })
       ).toEqual({
         data: {
           activities: [
             {
-              schedule: [
+              milestones: [
                 {
                   endDate: '',
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),

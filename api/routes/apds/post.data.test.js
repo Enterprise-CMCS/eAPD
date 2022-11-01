@@ -23,15 +23,88 @@ tap.test('APD data initializer', async test => {
   test.same(output, {
     name: 'HITECH IAPD',
     years: ['1997', '1998'],
+    yearOptions: ['1997', '1998', '1999'],
     apdOverview: {
       programOverview: '',
       narrativeHIE: '',
       narrativeHIT: '',
       narrativeMMIS: ''
     },
+    keyStatePersonnel: {
+      medicaidDirector: {
+        email: '',
+        name: '',
+        phone: ''
+      },
+      medicaidOffice: {
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zip: ''
+      },
+      keyPersonnel: []
+    },
+    previousActivities: {
+      previousActivitySummary: '',
+      actualExpenditures: {
+        1997: {
+          hithie: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          mmis: {
+            90: { federalActual: 0, totalApproved: 0 },
+            75: { federalActual: 0, totalApproved: 0 },
+            50: { federalActual: 0, totalApproved: 0 }
+          }
+        },
+        1996: {
+          hithie: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          mmis: {
+            90: { federalActual: 0, totalApproved: 0 },
+            75: { federalActual: 0, totalApproved: 0 },
+            50: { federalActual: 0, totalApproved: 0 }
+          }
+        },
+        1995: {
+          hithie: {
+            federalActual: 0,
+            totalApproved: 0
+          },
+          mmis: {
+            90: { federalActual: 0, totalApproved: 0 },
+            75: { federalActual: 0, totalApproved: 0 },
+            50: { federalActual: 0, totalApproved: 0 }
+          }
+        }
+      }
+    },
     activities: [
       {
-        alternatives: '',
+        fundingSource: 'HIT',
+        name: 'Program Administration',
+
+        activityOverview: {
+          summary: '',
+          description: '',
+          alternatives: '',
+          standardsAndConditions: {
+            doesNotSupport: '',
+            supports: ''
+          }
+        },
+        activitySchedule: {
+          plannedStartDate: '',
+          plannedEndDate: ''
+        },
+        milestones: [],
+        outcomes: [],
+        statePersonnel: [],
+        expenses: [],
         contractorResources: [],
         costAllocation: {
           1997: { ffp: { federal: 0, state: 100 }, other: 0 },
@@ -44,20 +117,6 @@ tap.test('APD data initializer', async test => {
             1998: { otherSources: '' }
           }
         },
-        description: '',
-        expenses: [],
-        fundingSource: 'HIT',
-        outcomes: [],
-        name: 'Program Administration',
-        plannedEndDate: '',
-        plannedStartDate: '',
-        schedule: [],
-        standardsAndConditions: {
-          doesNotSupport: '',
-          supports: ''
-        },
-        statePersonnel: [],
-        summary: '',
         quarterlyFFP: {
           1997: {
             1: { contractors: 0, inHouse: 0 },
@@ -120,59 +179,6 @@ tap.test('APD data initializer', async test => {
         epCt: {
           1997: { 1: 0, 2: 0, 3: 0, 4: 0 },
           1998: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        }
-      }
-    },
-    keyStatePersonnel: {
-      medicaidDirector: {
-        email: '',
-        name: '',
-        phone: ''
-      },
-      medicaidOffice: {
-        address1: '',
-        address2: '',
-        city: '',
-        state: '',
-        zip: ''
-      },
-      keyPersonnel: []
-    },
-    previousActivities: {
-      previousActivitySummary: '',
-      actualExpenditures: {
-        1997: {
-          hithie: {
-            federalActual: 0,
-            totalApproved: 0
-          },
-          mmis: {
-            90: { federalActual: 0, totalApproved: 0 },
-            75: { federalActual: 0, totalApproved: 0 },
-            50: { federalActual: 0, totalApproved: 0 }
-          }
-        },
-        1996: {
-          hithie: {
-            federalActual: 0,
-            totalApproved: 0
-          },
-          mmis: {
-            90: { federalActual: 0, totalApproved: 0 },
-            75: { federalActual: 0, totalApproved: 0 },
-            50: { federalActual: 0, totalApproved: 0 }
-          }
-        },
-        1995: {
-          hithie: {
-            federalActual: 0,
-            totalApproved: 0
-          },
-          mmis: {
-            90: { federalActual: 0, totalApproved: 0 },
-            75: { federalActual: 0, totalApproved: 0 },
-            50: { federalActual: 0, totalApproved: 0 }
-          }
         }
       }
     }

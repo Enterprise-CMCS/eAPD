@@ -13,7 +13,7 @@ describe('APD activity edit actions for activity schedule and milestones section
       data: {
         activities: [
           {
-            schedule: []
+            milestones: []
           }
         ]
       }
@@ -32,12 +32,12 @@ describe('APD activity edit actions for activity schedule and milestones section
     expect(store.getActions()).toEqual([
       {
         type: ADD_APD_ITEM,
-        path: '/activities/0/schedule/-',
+        path: '/activities/0/milestones/-',
         state
       },
       {
         type: EDIT_APD,
-        path: '/activities/0/schedule/0',
+        path: '/activities/0/milestones/0',
         value: {}
       }
     ]);
@@ -54,7 +54,7 @@ describe('APD activity edit actions for activity schedule and milestones section
     expect(store.getActions()).toEqual([
       {
         type: REMOVE_APD_ITEM,
-        path: '/activities/17/schedule/9'
+        path: '/activities/17/milestones/9'
       }
     ]);
   });
@@ -65,7 +65,7 @@ describe('APD activity edit actions for activity schedule and milestones section
         data: {
           activities: [
             {
-              schedule: [{ milestone: 'milestone' }]
+              milestones: [{ milestone: 'milestone' }]
             }
           ]
         }
@@ -77,7 +77,7 @@ describe('APD activity edit actions for activity schedule and milestones section
     expect(storeWithMilestone.getActions()).toEqual([
       {
         type: EDIT_APD,
-        path: '/activities/0/schedule/0',
+        path: '/activities/0/milestones/0',
         value: milestone
       }
     ]);

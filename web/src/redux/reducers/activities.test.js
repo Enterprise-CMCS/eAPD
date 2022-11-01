@@ -74,7 +74,27 @@ describe('activities reducer helpers', () => {
 
   it('can create a new activity', () => {
     expect(newActivity({ years: ['2020'] })).toEqual({
-      alternatives: '',
+      key: '--- key ---',
+      activityId: '--- key ---',
+      fundingSource: null,
+      name: '',
+      activityOverview: {
+        summary: '',
+        description: '',
+        alternatives: '',
+        standardsAndConditions: {
+          doesNotSupport: '',
+          supports: ''
+        }
+      },
+      activitySchedule: {
+        plannedStartDate: '',
+        plannedEndDate: ''
+      },
+      milestones: [],
+      outcomes: [],
+      statePersonnel: [],
+      expenses: [],
       contractorResources: [],
       costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
       costAllocationNarrative: {
@@ -82,22 +102,6 @@ describe('activities reducer helpers', () => {
           2020: { otherSources: '' }
         },
         methodology: ''
-      },
-      description: '',
-      expenses: [],
-      fundingSource: null,
-      key: '--- key ---',
-      activityId: '--- key ---',
-      name: '',
-      plannedEndDate: '',
-      plannedStartDate: '',
-      outcomes: [],
-      schedule: [],
-      statePersonnel: [],
-      summary: '',
-      standardsAndConditions: {
-        doesNotSupport: '',
-        supports: ''
       },
       quarterlyFFP: {
         2020: {

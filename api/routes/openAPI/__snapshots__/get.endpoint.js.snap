@@ -228,9 +228,9 @@ Object {
                     },
                   },
                 },
-                "schedule": Object {
+                "milestones": Object {
                   "items": Object {
-                    "description": "Activity schedule item",
+                    "description": "Activity milestone item",
                     "properties": Object {
                       "endDate": Object {
                         "description": "The date this milestone is planned to be met",
@@ -238,7 +238,7 @@ Object {
                         "type": "string",
                       },
                       "milestone": Object {
-                        "description": "The name of the milestone this schedule entry refers to",
+                        "description": "The name of the milestone",
                         "type": "string",
                       },
                     },

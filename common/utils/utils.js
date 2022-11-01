@@ -73,3 +73,28 @@ export const hasBudgetUpdate = patches =>
   patches.some(({ path }) =>
     budgetPaths.find(pathRegex => path.match(pathRegex))
   );
+
+const thisFFY = () => {
+  const year = new Date().getFullYear();
+
+  // Federal fiscal year starts October 1,
+  // but Javascript months start with 0 for
+  // some reason, so October is month 9.
+  if (new Date().getMonth() > 8) {
+    return year + 1;
+  }
+  return year;
+};
+
+// The UI turns the years into strings, so let's
+// just make them strings in the state as well;
+// that simplifies things
+export const defaultAPDYearOptions = startFFY => {
+  const ffy = startFFY || thisFFY();
+  return [ffy, ffy + 1, ffy + 2].map(y => `${y}`);
+};
+
+export const defaultAPDYears = startFFY => {
+  const ffy = startFFY || thisFFY();
+  return [ffy, ffy + 1].map(y => `${y}`);
+};

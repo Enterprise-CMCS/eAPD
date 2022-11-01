@@ -1,18 +1,9 @@
+const { defaultAPDYears, defaultAPDYearOptions } = require('@cms-eapd/common');
+
 const getNewApd = () => {
-  const thisFFY = (() => {
-    const year = new Date().getFullYear();
-
-    // Federal fiscal year starts October 1,
-    // but Javascript months start with 0 for
-    // some reason, so October is month 9.
-    if (new Date().getMonth() > 8) {
-      return year + 1;
-    }
-    return year;
-  })();
-
-  const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
-  const years = yearOptions.slice(0, 2);
+  // TODO: change this to getNewHitechAPD
+  const years = defaultAPDYears();
+  const yearOptions = defaultAPDYearOptions();
 
   const forAllYears = (obj, yearsToCover = years) =>
     yearsToCover.reduce(
@@ -56,54 +47,12 @@ const getNewApd = () => {
   return {
     name: 'HITECH IAPD',
     years,
+    yearOptions,
     apdOverview: {
       narrativeHIE: '',
       narrativeHIT: '',
       narrativeMMIS: '',
       programOverview: ''
-    },
-    activities: [
-      {
-        alternatives: '',
-        contractorResources: [],
-        costAllocation: forAllYears({
-          ffp: { federal: 0, state: 100 },
-          other: 0
-        }),
-        costAllocationNarrative: {
-          methodology: '',
-          years: forAllYears({ otherSources: '' })
-        },
-        description: '',
-        expenses: [],
-        fundingSource: 'HIT',
-        name: 'Program Administration',
-        outcomes: [],
-        plannedEndDate: '',
-        plannedStartDate: '',
-        schedule: [],
-        standardsAndConditions: {
-          doesNotSupport: '',
-          supports: ''
-        },
-        statePersonnel: [],
-        summary: '',
-        quarterlyFFP: forAllYears({
-          1: { contractors: 0, inHouse: 0 },
-          2: { contractors: 0, inHouse: 0 },
-          3: { contractors: 0, inHouse: 0 },
-          4: { contractors: 0, inHouse: 0 }
-        })
-      }
-    ],
-    assurancesAndCompliances: regsGenerator(),
-    proposedBudget: {
-      incentivePayments: {
-        ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-        ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-        epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-        epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
-      }
     },
     keyStatePersonnel: {
       medicaidDirector: {
@@ -136,7 +85,54 @@ const getNewApd = () => {
         },
         [0, 1, 2].map(past => yearOptions[0] - past)
       )
-    }
+    },
+    activities: [
+      {
+        fundingSource: 'HIT',
+        name: 'Program Administration',
+        activityOverview: {
+          summary: '',
+          description: '',
+          alternatives: '',
+          standardsAndConditions: {
+            doesNotSupport: '',
+            supports: ''
+          }
+        },
+        activitySchedule: {
+          plannedStartDate: '',
+          plannedEndDate: ''
+        },
+        milestones: [],
+        outcomes: [],
+        statePersonnel: [],
+        expenses: [],
+        contractorResources: [],
+        costAllocation: forAllYears({
+          ffp: { federal: 0, state: 100 },
+          other: 0
+        }),
+        costAllocationNarrative: {
+          methodology: '',
+          years: forAllYears({ otherSources: '' })
+        },
+        quarterlyFFP: forAllYears({
+          1: { contractors: 0, inHouse: 0 },
+          2: { contractors: 0, inHouse: 0 },
+          3: { contractors: 0, inHouse: 0 },
+          4: { contractors: 0, inHouse: 0 }
+        })
+      }
+    ],
+    proposedBudget: {
+      incentivePayments: {
+        ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
+        epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
+      }
+    },
+    assurancesAndCompliances: regsGenerator()
   };
 };
 

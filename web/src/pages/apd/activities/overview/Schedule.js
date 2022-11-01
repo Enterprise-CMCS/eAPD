@@ -24,7 +24,8 @@ const Schedule = ({
 }) => {
   Schedule.displayName = 'Schedule';
 
-  const { plannedStartDate, plannedEndDate } = activity;
+  const { activitySchedule: { plannedStartDate, plannedEndDate } = {} } =
+    activity;
 
   const {
     control,
@@ -56,7 +57,7 @@ const Schedule = ({
   };
 
   return (
-    <Subsection resource="activities.schedule">
+    <Subsection resource="activities.milestones">
       <Fragment>
         <div className="ds-u-padding-y--0 visibility--screen">
           <Controller
@@ -105,11 +106,11 @@ const Schedule = ({
         <div className="visibility--print">
           <p>
             <strong>Start date:</strong>{' '}
-            {stateDateToDisplay(activity.plannedStartDate)}
+            {stateDateToDisplay(activity?.activitySchedule?.plannedStartDate)}
           </p>
           <p>
             <strong>End date:</strong>{' '}
-            {stateDateToDisplay(activity.plannedEndDate)}
+            {stateDateToDisplay(activity?.activitySchedule?.plannedEndDate)}
           </p>
           <hr />
         </div>

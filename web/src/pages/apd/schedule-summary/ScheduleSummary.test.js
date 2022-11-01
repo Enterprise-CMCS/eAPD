@@ -75,12 +75,14 @@ describe('schedule summary component', () => {
           activities: [
             {
               name: 'activity 1',
-              // Chuck Yeager became the first person to break the sound barrier.
-              plannedEndDate: '1947-10-14',
-              // The Centennial Light, a 60-watt lightbulb was installed at a
-              // firehouse in Livermore, California, where it's still lit.
-              plannedStartDate: '1901-01-01',
-              schedule: [
+              activitySchedule: {
+                // The Centennial Light, a 60-watt lightbulb was installed at a
+                // firehouse in Livermore, California, where it's still lit.
+                plannedStartDate: '1901-01-01',
+                // Chuck Yeager became the first person to break the sound barrier.
+                plannedEndDate: '1947-10-14'
+              },
+              milestones: [
                 // Sandra Day O'Connor, first woman to serve on the US Supreme
                 // Court, retires.
                 { endDate: '2006-01-31', milestone: '1-one' },
@@ -94,12 +96,14 @@ describe('schedule summary component', () => {
             },
             {
               name: 'activity 2',
-              // Franklin Pierce becomes President, and kicks off a truly bizarre
-              // episode in American military history.
-              plannedEndDate: '1853-03-04',
-              // The United States Camel Corps is created. Seriously, look it up.
-              plannedStartDate: '1855-03-03',
-              schedule: [
+              activitySchedule: {
+                // The United States Camel Corps is created. Seriously, look it up.
+                plannedStartDate: '1855-03-03',
+                // Franklin Pierce becomes President, and kicks off a truly bizarre
+                // episode in American military history.
+                plannedEndDate: '1853-03-04'
+              },
+              milestones: [
                 // The Army sells its camels at auction, giving up the project.
                 { endDate: '1864-06-06', milestone: '2-one' },
                 // The last of the Army camels is sighted for the last time,

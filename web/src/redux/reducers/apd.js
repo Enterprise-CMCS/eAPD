@@ -38,8 +38,10 @@ import {
   ADMIN_CHECK_TOGGLE
 } from '../actions/app';
 import { FLAGS_UPDATED } from '../actions/flags';
-import { defaultAPDYearOptions } from '../../util';
-import { generateKey } from '@cms-eapd/common/utils/utils';
+import {
+  generateKey,
+  defaultAPDYearOptions
+} from '@cms-eapd/common/utils/utils';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
@@ -309,7 +311,7 @@ export const getPatchesForAddingItem = (state, path, key = null) => {
       if (/^\/activities\/\d+\/outcomes\/\d+\/metrics\/-$/.test(path)) {
         return [{ op: 'add', path, value: newOutcomeMetric() }];
       }
-      if (/^\/activities\/\d+\/schedule\/-$/.test(path)) {
+      if (/^\/activities\/\d+\/milestones\/-$/.test(path)) {
         return [{ op: 'add', path, value: newMilestone() }];
       }
       if (/^\/activities\/\d+\/statePersonnel\/-$/.test(path)) {
@@ -414,7 +416,7 @@ const reducer = (state = initialState, action) => {
               ...action.data,
               created: getHumanDatestamp(action.data.created),
               updated: getHumanTimestamp(action.data.updated),
-              yearOptions: defaultAPDYearOptions
+              yearOptions: defaultAPDYearOptions()
             }
           }
         },
@@ -469,23 +471,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         data: {
           ...action.apd,
+          created: getHumanDatestamp(action.apd.created),
+          updated: getHumanTimestamp(action.apd.updated),
+          keyStatePersonnel: {
+            ...action.apd.keyStatePersonnel,
+            keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
+              ...kp,
+              key: generateKey()
+            }))
+          },
           activities: action.apd.activities.map(
             ({
               activityId,
-              contractorResources,
-              expenses,
+              milestones,
               outcomes,
-              schedule,
               statePersonnel,
+              expenses,
+              contractorResources,
               ...activity
             }) => ({
               ...activity,
-              contractorResources: contractorResources.map(contractor => ({
-                ...contractor,
-                key: generateKey()
-              })),
-              expenses: expenses.map(expense => ({
-                ...expense,
+              key: activityId,
+              activityId,
+              milestones: milestones.map(milestone => ({
+                ...milestone,
                 key: generateKey()
               })),
               outcomes: outcomes.map(({ metrics = [], ...outcome }) => ({
@@ -496,31 +505,23 @@ const reducer = (state = initialState, action) => {
                 })),
                 key: generateKey()
               })),
-              schedule: schedule.map(milestone => ({
-                ...milestone,
-                key: generateKey()
-              })),
               statePersonnel: statePersonnel.map(person => ({
                 ...person,
                 key: generateKey()
               })),
-              key: activityId,
-              activityId
+              expenses: expenses.map(expense => ({
+                ...expense,
+                key: generateKey()
+              })),
+              contractorResources: contractorResources.map(contractor => ({
+                ...contractor,
+                key: generateKey()
+              }))
             })
           ),
           assurancesAndCompliances: getAssurancesAndCompliances(
             action.apd.assurancesAndCompliances
-          ),
-          keyStatePersonnel: {
-            ...action.apd.keyStatePersonnel,
-            keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
-              ...kp,
-              key: generateKey()
-            }))
-          },
-          created: getHumanDatestamp(action.apd.created),
-          updated: getHumanTimestamp(action.apd.updated),
-          yearOptions: defaultAPDYearOptions
+          )
         }
       };
     }

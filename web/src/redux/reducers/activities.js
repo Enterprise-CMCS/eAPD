@@ -90,7 +90,27 @@ export const newActivity = ({
   );
 
   return {
-    alternatives: '',
+    key,
+    activityId: key,
+    fundingSource,
+    name,
+    activityOverview: {
+      summary: '',
+      description: '',
+      alternatives: '',
+      standardsAndConditions: {
+        doesNotSupport: '',
+        supports: ''
+      }
+    },
+    activitySchedule: {
+      plannedEndDate: '',
+      plannedStartDate: ''
+    },
+    milestones: [],
+    outcomes: [],
+    statePersonnel: [],
+    expenses: [],
     contractorResources: [],
     costAllocation: arrToObj(years, costAllocationEntry()),
     costAllocationNarrative: {
@@ -98,22 +118,6 @@ export const newActivity = ({
       years: {
         ...costAllocationNarrativeYears
       }
-    },
-    description: '',
-    expenses: [],
-    fundingSource,
-    activityId: key,
-    key,
-    name,
-    plannedEndDate: '',
-    plannedStartDate: '',
-    outcomes: [],
-    schedule: [],
-    statePersonnel: [],
-    summary: '',
-    standardsAndConditions: {
-      doesNotSupport: '',
-      supports: ''
     },
     quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
     years,

@@ -675,8 +675,8 @@ Object {
     ],
   },
   "errors": Object {
-    "/activities/0/schedule/0/endDate": Object {
-      "dataPath": "/activities/0/schedule/0/endDate",
+    "/activities/0/milestones/0/endDate": Object {
+      "dataPath": "/activities/0/milestones/0/endDate",
       "errorValue": "2022-13-12",
       "kind": "date",
       "message": "Cast to date failed for value \\"2022-13-12\\" (type string) at path \\"endDate\\"",

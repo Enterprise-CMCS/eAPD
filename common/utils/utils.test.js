@@ -1,4 +1,9 @@
-import { generateKey, hasBudgetUpdate } from './utils';
+import {
+  generateKey,
+  hasBudgetUpdate,
+  defaultAPDYearOptions,
+  defaultAPDYears
+} from './utils';
 
 describe('utility functions', () => {
   test('generates a key', () => {
@@ -797,6 +802,30 @@ describe('utility functions', () => {
         { op: 'remove', path: '/activities/0/contractorResources/2' }
       ]);
       expect(result).toBeTruthy();
+    });
+  });
+
+  describe('provides default years based on now', () => {
+    test('before October', () => {
+      jest.useFakeTimers().setSystemTime(new Date('1970-09-01').getTime());
+      // tick forward 10 days, so we're not on the weird date boundary
+      jest.advanceTimersByTime(864000000);
+
+      expect(defaultAPDYearOptions()).toEqual(['1970', '1971', '1972']);
+      expect(defaultAPDYears()).toEqual(['1970', '1971']);
+
+      jest.clearAllTimers();
+    });
+
+    test('after October', () => {
+      jest.useFakeTimers().setSystemTime(new Date('1970-10-01').getTime());
+      // tick forward 360 days
+      jest.advanceTimersByTime(31104000000);
+
+      expect(defaultAPDYearOptions()).toEqual(['1971', '1972', '1973']);
+      expect(defaultAPDYears()).toEqual(['1971', '1972']);
+
+      jest.clearAllTimers();
     });
   });
 });

@@ -3,8 +3,32 @@
 exports[`APD endpoint | POST /apds when authenticated as a user with permission 1`] = `
 Object {
   "activities": Array [
+    "apdOverview": Object {
+    "narrativeHIE": "",
+    "narrativeHIT": "",
+    "narrativeMMIS": "",
+    "programOverview": "",
+  },
     Object {
+      "fundingSource": "HIT",
+      "name": "Program Administration",
+      "activityOverview": Object {
+      "summary": "",
+      "description": "",
       "alternatives": "",
+      "standardsAndConditions": Object {
+        "doesNotSupport": "",
+        "supports": "",
+      }
+      },
+      "activitySchedule": Object {
+        "plannedEndDate": "",
+      "plannedStartDate": "",
+      },
+      "milestones": Array [],
+      "outcomes": Array [],
+      "statePersonnel": Array [],
+      "expenses": Array [],
       "contractorResources": Array [],
       "costAllocation": Object {
         "2023": Object {
@@ -33,13 +57,6 @@ Object {
           },
         },
       },
-      "description": "",
-      "expenses": Array [],
-      "fundingSource": "HIT",
-      "name": "Program Administration",
-      "outcomes": Array [],
-      "plannedEndDate": "",
-      "plannedStartDate": "",
       "quarterlyFFP": Object {
         "2023": Object {
           "1": Object {
@@ -77,22 +94,10 @@ Object {
             "inHouse": 0,
           },
         },
-      },
-      "schedule": Array [],
-      "standardsAndConditions": Object {
-        "doesNotSupport": "",
-        "supports": "",
-      },
-      "statePersonnel": Array [],
-      "summary": "",
+      }
     },
   ],
-  "apdOverview": Object {
-    "narrativeHIE": "",
-    "narrativeHIT": "",
-    "narrativeMMIS": "",
-    "programOverview": "",
-  },
+  
   "assurancesAndCompliances": Object {
     "procurement": Array [
       Object {

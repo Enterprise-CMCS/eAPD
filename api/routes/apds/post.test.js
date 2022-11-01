@@ -73,15 +73,89 @@ tap.test('apds POST endpoint', async endpointTest => {
       const expectedApd = {
         name: 'HITECH IAPD',
         years: ['2004', '2005'],
+        yearOptions: ['2004', '2005', '2006'],
         apdOverview: {
           programOverview: '',
           narrativeHIE: '',
           narrativeHIT: '',
           narrativeMMIS: ''
         },
+        keyStatePersonnel: {
+          medicaidDirector: {
+            email: '',
+            name: '',
+            phone: '',
+            bert: 'ernie'
+          },
+          medicaidOffice: {
+            address1: '',
+            address2: '',
+            city: '',
+            state: '',
+            zip: '',
+            bigBird: 'grover'
+          },
+          keyPersonnel: []
+        },
+        previousActivities: {
+          previousActivitySummary: '',
+          actualExpenditures: {
+            2004: {
+              hithie: {
+                federalActual: 0,
+                totalApproved: 0
+              },
+              mmis: {
+                90: { federalActual: 0, totalApproved: 0 },
+                75: { federalActual: 0, totalApproved: 0 },
+                50: { federalActual: 0, totalApproved: 0 }
+              }
+            },
+            2003: {
+              hithie: {
+                federalActual: 0,
+                totalApproved: 0
+              },
+              mmis: {
+                90: { federalActual: 0, totalApproved: 0 },
+                75: { federalActual: 0, totalApproved: 0 },
+                50: { federalActual: 0, totalApproved: 0 }
+              }
+            },
+            2002: {
+              hithie: {
+                federalActual: 0,
+                totalApproved: 0
+              },
+              mmis: {
+                90: { federalActual: 0, totalApproved: 0 },
+                75: { federalActual: 0, totalApproved: 0 },
+                50: { federalActual: 0, totalApproved: 0 }
+              }
+            }
+          }
+        },
         activities: [
           {
-            alternatives: '',
+            fundingSource: 'HIT',
+            name: 'Program Administration',
+            activityOverview: {
+              summary: '',
+              description: '',
+              alternatives: '',
+              standardsAndConditions: {
+                doesNotSupport: '',
+                supports: ''
+              }
+            },
+            activitySchedule: {
+              plannedStartDate: '',
+              plannedEndDate: ''
+            },
+            milestones: [],
+            outcomes: [],
+            statePersonnel: [],
+            expenses: [],
             contractorResources: [],
             costAllocation: {
               2004: { ffp: { federal: 0, state: 100 }, other: 0 },
@@ -94,20 +168,6 @@ tap.test('apds POST endpoint', async endpointTest => {
                 2005: { otherSources: '' }
               }
             },
-            description: '',
-            expenses: [],
-            fundingSource: 'HIT',
-            outcomes: [],
-            name: 'Program Administration',
-            plannedEndDate: '',
-            plannedStartDate: '',
-            schedule: [],
-            standardsAndConditions: {
-              doesNotSupport: '',
-              supports: ''
-            },
-            statePersonnel: [],
-            summary: '',
             quarterlyFFP: {
               2004: {
                 1: { contractors: 0, inHouse: 0 },
@@ -170,61 +230,6 @@ tap.test('apds POST endpoint', async endpointTest => {
             epCt: {
               2004: { 1: 0, 2: 0, 3: 0, 4: 0 },
               2005: { 1: 0, 2: 0, 3: 0, 4: 0 }
-            }
-          }
-        },
-        keyStatePersonnel: {
-          medicaidDirector: {
-            email: '',
-            name: '',
-            phone: '',
-            bert: 'ernie'
-          },
-          medicaidOffice: {
-            address1: '',
-            address2: '',
-            city: '',
-            state: '',
-            zip: '',
-            bigBird: 'grover'
-          },
-          keyPersonnel: []
-        },
-        previousActivities: {
-          previousActivitySummary: '',
-          actualExpenditures: {
-            2004: {
-              hithie: {
-                federalActual: 0,
-                totalApproved: 0
-              },
-              mmis: {
-                90: { federalActual: 0, totalApproved: 0 },
-                75: { federalActual: 0, totalApproved: 0 },
-                50: { federalActual: 0, totalApproved: 0 }
-              }
-            },
-            2003: {
-              hithie: {
-                federalActual: 0,
-                totalApproved: 0
-              },
-              mmis: {
-                90: { federalActual: 0, totalApproved: 0 },
-                75: { federalActual: 0, totalApproved: 0 },
-                50: { federalActual: 0, totalApproved: 0 }
-              }
-            },
-            2002: {
-              hithie: {
-                federalActual: 0,
-                totalApproved: 0
-              },
-              mmis: {
-                90: { federalActual: 0, totalApproved: 0 },
-                75: { federalActual: 0, totalApproved: 0 },
-                50: { federalActual: 0, totalApproved: 0 }
-              }
             }
           }
         }

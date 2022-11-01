@@ -60,28 +60,6 @@ export const STANDARDS = [
   }
 ];
 
-const thisFFY = (() => {
-  const year = new Date().getFullYear();
-
-  // Federal fiscal year starts October 1,
-  // but Javascript months start with 0 for
-  // some reason, so October is month 9.
-  if (new Date().getMonth() > 8) {
-    return year + 1;
-  }
-  return year;
-})();
-
-// The UI turns the years into strings, so let's
-// just make them strings in the state as well;
-// that simplifies things
-const threeYears = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
-
-export const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
-
-export const defaultAPDYearOptions = threeYears;
-export const defaultAPDYears = threeYears.slice(0, 2);
-
 export const stateLookup = id => STATES.find(s => s.id === id.toLowerCase());
 
 export const getParams = str =>

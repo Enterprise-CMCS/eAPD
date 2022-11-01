@@ -1475,11 +1475,11 @@
                     }
                   }
                 },
-                "schedule": {
+                "milestones": {
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "description": "Activity schedule item",
+                    "description": "Activity milestone item",
                     "properties": {
                       "endDate": {
                         "type": "string",
@@ -1488,7 +1488,7 @@
                       },
                       "milestone": {
                         "type": "string",
-                        "description": "The name of the milestone this schedule entry refers to"
+                        "description": "The name of the milestone"
                       }
                     }
                   }

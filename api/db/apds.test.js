@@ -113,31 +113,31 @@ tap.test('database wrappers / apds', async apdsTests => {
       } = await updateAPDDocument(id, 'co', [
         {
           op: 'replace',
-          path: '/activities/0/schedule/0/endDate',
+          path: '/activities/0/milestones/0/endDate',
           value: '2021-01-36'
         },
         {
           op: 'replace',
-          path: '/activities/0/schedule/1/endDate',
+          path: '/activities/0/milestones/1/endDate',
           value: '2022-15-31'
         }
       ]);
 
       test.ok(
-        errors['/activities/0/schedule/0/endDate'],
+        errors['/activities/0/milestones/0/endDate'],
         'found endDate validation error'
       );
       test.ok(
-        errors['/activities/0/schedule/1/endDate'],
+        errors['/activities/0/milestones/1/endDate'],
         'found endDate validation error'
       );
       test.equal(
-        activities[0].schedule[0].endDate,
+        activities[0].milestones[0].endDate,
         null,
         'Error in Activity 1, Milestone 1, endDate; it has been set to null'
       );
       test.equal(
-        activities[0].schedule[1].endDate,
+        activities[0].milestones[1].endDate,
         null,
         'Error in Activity 1 Milestone 2 endDate; it has been set to null'
       );
@@ -157,27 +157,27 @@ tap.test('database wrappers / apds', async apdsTests => {
         } = await updateAPDDocument(id, 'co', [
           {
             op: 'replace',
-            path: '/activities/0/schedule/0/endDate',
+            path: '/activities/0/milestones/0/endDate',
             value: '2021-01-36'
           },
           {
             op: 'replace',
-            path: '/activities/0/schedule/0/milestone',
+            path: '/activities/0/milestones/0/milestone',
             value: 'Updated milestone'
           }
         ]);
 
         test.ok(
-          errors['/activities/0/schedule/0/endDate'],
+          errors['/activities/0/milestones/0/endDate'],
           'found endDate validation error'
         );
         test.equal(
-          activities[0].schedule[0].endDate,
+          activities[0].milestones[0].endDate,
           null,
           'Error in Activity 1, Milestone 1, endDate; it has been set to null'
         );
         test.equal(
-          activities[0].schedule[0].milestone,
+          activities[0].milestones[0].milestone,
           'Updated milestone',
           'Activity 1, Milestone 1, milestone was updated'
         );
@@ -221,7 +221,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       } = await updateAPDDocument(id, 'co', [
         {
           op: 'replace',
-          path: '/activities/0/schedule/1/endDate',
+          path: '/activities/0/milestones/1/endDate',
           value: '2022-12-31'
         }
       ]);

@@ -1,38 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the Root component renders correctly 1`] = `
-<Provider
-  store={
+<LDProvider
+  clientSideID="632b257a7cb8135b685301f2"
+  options={
     Object {
-      "clearActions": [Function],
-      "dispatch": [Function],
-      "getActions": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
+      "baseUrl": "https://clientsdk.launchdarkly.us",
+      "eventsUrl": "https://events.launchdarkly.us",
+      "streamUrl": "https://clientstream.launchdarkly.us",
+    }
+  }
+  reactOptions={
+    Object {
+      "sendEventsOnFlagRead": true,
+      "useCamelCaseFlagKeys": true,
     }
   }
 >
-  <Connect(ConnectedRouterWithContext)
+  <Root
     history={
       Object {
-        "listen": [MockFunction] {
-          "calls": Array [
-            Array [
-              [Function],
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        },
+        "listen": [MockFunction],
       }
     }
-  >
-    <App />
-  </Connect(ConnectedRouterWithContext)>
-</Provider>
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+  />
+</LDProvider>
 `;
