@@ -34,7 +34,8 @@ const apdNewSchema = Joi.object({
           asNeededUpdate: Joi.boolean()
         }),
         updateList: Joi.array().min(1).required().messages({
-          'array.min': 'Select at least one type of update.'
+          'array.min': 'Select at least one type of update.',
+          'any.only': 'Select at least one type of update.'
         })
       })
     })
