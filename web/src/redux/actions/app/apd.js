@@ -150,14 +150,11 @@ export const createApd =
   dispatch => {
     dispatch({ type: CREATE_APD_REQUEST });
     return axios
-      .post('/apds')
+      .post('/apds', values)
       .then(async req => {
-        let data = req.data,
-          merged = { ...data, ...values };
-        dispatch({ type: CREATE_APD_SUCCESS, data: merged });
-        await dispatch(
-          selectApd(merged.id, `/apd/${merged.id}`, { pushRoute })
-        );
+        let data = req.data;
+        dispatch({ type: CREATE_APD_SUCCESS, data: data });
+        await dispatch(selectApd(data.id, `/apd/${data.id}`, { pushRoute }));
       })
       .catch(error => {
         const reason = error.response ? error.response.data : 'N/A';

@@ -31,6 +31,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       }
 
       try {
+        logger.silly('THIS IS A TEST');
         const id = await createAPD({
           stateId: req.user.state.id,
           status: 'draft',

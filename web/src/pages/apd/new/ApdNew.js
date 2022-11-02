@@ -72,7 +72,6 @@ const ApdNew = ({ createApd: create }) => {
     control,
     setValue,
     getValues,
-    trigger,
     formState: { errors, isDirty, isValid }
   } = useForm({
     defaultValues: {
@@ -114,7 +113,6 @@ const ApdNew = ({ createApd: create }) => {
 
   const createNew = () => {
     let values = getValues();
-    console.log({ values });
     setIsLoading(true);
     create(values);
   };
@@ -209,6 +207,7 @@ const ApdNew = ({ createApd: create }) => {
                   choices={[
                     {
                       label: 'HITECH IAPD',
+                      labelClassName: 'choicelist__label_flex',
                       value: 'hitech',
                       hint: (
                         <Tooltip
