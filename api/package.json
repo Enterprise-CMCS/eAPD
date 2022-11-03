@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint '**/*.js'",
     "clean": "[ -d dist ] && (rm -rf dist/* && rm -rf dist) || echo \"doesn't exist, skipping clean\"",
-    "scaffold": "yarn clean && mkdir dist && cp package.json dist/ && cp -r schemas dist/",
+    "scaffold": "yarn clean && mkdir dist && cp package.json dist/",
     "build": "yarn workspace @cms-eapd/common build && yarn scaffold && babel . -d ./dist -s --ignore \"node_modules/!(file-type|@cms-eapd/common)/**\",\"dist\",\"coverage-endpoint\"",
     "start": "yarn build && node dist/main.js",
     "start-dev": "yarn workspace @cms-eapd/common build && NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
@@ -147,7 +147,6 @@
       "--exclude=./**/mongo-migrations/**",
       "--exclude=./**/openAPI.js",
       "--exclude=./**/routes/**/index.js",
-      "--exclude=./**/schemas/**",
       "--exclude=./**/seeds/**",
       "--exclude=./**/test-data/**",
       "--exclude=./**/node_modules/**",
