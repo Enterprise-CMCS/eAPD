@@ -57,7 +57,7 @@ const Schedule = ({
   };
 
   return (
-    <Subsection resource="activities.milestones">
+    <Subsection resource="activities.schedule">
       <Fragment>
         <div className="ds-u-padding-y--0 visibility--screen">
           <Controller

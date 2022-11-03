@@ -1,3 +1,4 @@
+require('./mmisBudget');
 const mongoose = require('mongoose');
 const { mmisActivitySchema } = require('./mmisActivity');
 const { APD, discriminatorOptions } = require('./apd');
@@ -14,70 +15,75 @@ const mmisSchema = new mongoose.Schema(
         waiverSupportSystems: Boolean,
         assetVerificationSystem: Boolean,
         claimsProcessing: Boolean,
-        decisionSupportSystem_dataWarehouse: Boolean,
+        decisionSupportSystemDW: Boolean,
         electronicVisitVerification: Boolean,
-        encounterProcessingSystem_managedCareSystem: Boolean,
+        encounterProcessingSystemMCS: Boolean,
         financialManagement: Boolean,
         healthInformationExchange: Boolean,
         longTermServicesSupports: Boolean,
         memberManagement: Boolean,
-        pharmacyBenefitManagement_pointOfSale: Boolean,
+        pharmacyBenefitManagementPOS: Boolean,
         programIntegrity: Boolean,
         providerManagement: Boolean,
         thirdPartyLiability: Boolean,
         other: Boolean,
         otherMedicaidBusinessAreas: String
-      },
-      statePriortiesAndScope: {
-        medicaidProgramAndPriorities: String,
-        medicaidEnterpriseSystemIntroduction: String,
-        scopeOfAPD: String
-      },
-      previousActivities: {
-        previousActivitySummary: String,
-        actualExpenditures: {
-          type: Map,
-          of: new mongoose.Schema(
-            {
-              mmis: {
-                50: {
-                  federalActual: {
-                    type: Number,
-                    default: 0
-                  },
-                  totalApproved: {
-                    type: Number,
-                    default: 0
-                  }
-                },
-                75: {
-                  federalActual: {
-                    type: Number,
-                    default: 0
-                  },
-                  totalApproved: {
-                    type: Number,
-                    default: 0
-                  }
-                },
-                90: {
-                  federalActual: {
-                    type: Number,
-                    default: 0
-                  },
-                  totalApproved: {
-                    type: Number,
-                    default: 0
-                  }
-                }
-              }
-            },
-            { _id: false }
-          )
-        }
       }
     },
-    activities: [mmisActivitySchema]
+    statePriortiesAndScope: {
+      medicaidProgramAndPriorities: String,
+      mesIntroduction: String,
+      scopeOfAPD: String
+    },
+    previousActivities: {
+      previousActivitySummary: String,
+      actualExpenditures: {
+        type: Map,
+        of: new mongoose.Schema(
+          {
+            mmis: {
+              50: {
+                federalActual: {
+                  type: Number,
+                  default: 0
+                },
+                totalApproved: {
+                  type: Number,
+                  default: 0
+                }
+              },
+              75: {
+                federalActual: {
+                  type: Number,
+                  default: 0
+                },
+                totalApproved: {
+                  type: Number,
+                  default: 0
+                }
+              },
+              90: {
+                federalActual: {
+                  type: Number,
+                  default: 0
+                },
+                totalApproved: {
+                  type: Number,
+                  default: 0
+                }
+              }
+            }
+          },
+          { _id: false }
+        )
+      }
+    },
+    activities: [mmisActivitySchema],
+    budget: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'MMISBudget',
+      default: null
+    }
   },
   discriminatorOptions
 );

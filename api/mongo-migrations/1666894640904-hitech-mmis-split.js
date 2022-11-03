@@ -1,14 +1,12 @@
 const logger = require('../logger')('migrate-mongoose/hitech-mmis-split');
 const { setup, teardown } = require('../db/mongodb');
 const { APD, HITECH, MMIS, Budget } = require('../models');
-const { defaultAPDYearOptions, deepCopy } = require('@cms-eapd/common');
+const {
+  defaultAPDYearOptions,
+  deepCopy,
+  APD_TYPE
+} = require('@cms-eapd/common');
 const { createAPD } = require('../db/apds');
-
-// APD Types
-const APD_TYPE = {
-  HITECH: 'HITECH',
-  MMIS: 'MMIS'
-};
 
 /**
  * Make any changes you need to make to the database here

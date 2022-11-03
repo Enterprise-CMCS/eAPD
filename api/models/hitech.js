@@ -1,3 +1,4 @@
+require('./hitechBudget');
 const mongoose = require('mongoose');
 const { incentivePayment, hitechActivitySchema } = require('./hitechActivity');
 const { APD, discriminatorOptions } = require('./apd');
@@ -88,6 +89,11 @@ const hitechSchema = new mongoose.Schema(
           of: incentivePayment
         }
       }
+    },
+    budget: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'HITECHBudget',
+      default: null
     }
   },
   discriminatorOptions

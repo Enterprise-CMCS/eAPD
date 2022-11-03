@@ -2,7 +2,8 @@ import {
   generateKey,
   hasBudgetUpdate,
   defaultAPDYearOptions,
-  defaultAPDYears
+  defaultAPDYears,
+  forAllYears
 } from './utils';
 
 describe('utility functions', () => {
@@ -826,6 +827,40 @@ describe('utility functions', () => {
       expect(defaultAPDYears()).toEqual(['1971', '1972']);
 
       jest.clearAllTimers();
+    });
+  });
+
+  describe('forAllYears', () => {
+    test('default years', () => {
+      jest.useFakeTimers().setSystemTime(new Date('1970-10-01').getTime());
+      const expected = {
+        1971: {
+          a: true,
+          b: false
+        },
+        1972: {
+          a: true,
+          b: false
+        }
+      };
+      expect(forAllYears({ a: true, b: false })).toEqual(expected);
+      jest.clearAllTimers();
+    });
+
+    test('passed in years', () => {
+      const expected = {
+        2004: {
+          a: true,
+          b: false
+        },
+        2005: {
+          a: true,
+          b: false
+        }
+      };
+      expect(forAllYears({ a: true, b: false }, [2004, 2005])).toEqual(
+        expected
+      );
     });
   });
 });

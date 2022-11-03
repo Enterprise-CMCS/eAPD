@@ -4,18 +4,20 @@ const {
   deepCopy,
   calculateBudget,
   hasBudgetUpdate,
-  defaultAPDYearOptions
+  defaultAPDYearOptions,
+  APD_TYPE
 } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
-const { Budget, APD, HITECH, MMIS } = require('../models/index');
-
-// APD Types
-const APD_TYPE = {
-  HITECH: 'HITECH',
-  MMIS: 'MMIS'
-};
+const {
+  Budget,
+  HITECHBudget,
+  MMISBudget,
+  APD,
+  HITECH,
+  MMIS
+} = require('../models/index');
 
 const createAPD = async apd => {
   const apdJSON = deepCopy(apd);
@@ -24,21 +26,24 @@ const createAPD = async apd => {
   }
 
   let apdDoc;
+  let newBudget;
   switch (
     apd.__t // eslint-disable-line no-underscore-dangle
   ) {
     case APD_TYPE.HITECH: {
       apdDoc = await HITECH.create(apdJSON);
+      newBudget = await HITECHBudget.create(calculateBudget(apdDoc.toJSON()));
       break;
     }
     case APD_TYPE.MMIS: {
       apdDoc = await MMIS.create(apdJSON);
+      newBudget = await MMISBudget.create(calculateBudget(apdDoc.toJSON()));
       break;
     }
     default:
       apdDoc = await APD.create(apdJSON);
+      newBudget = await Budget.create(calculateBudget(apdDoc.toJSON()));
   }
-  const newBudget = await Budget.create(calculateBudget(apdDoc.toJSON()));
   apdDoc.budget = newBudget;
   await apdDoc.save();
 

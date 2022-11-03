@@ -1,6 +1,7 @@
 import roundedPercents from './roundedPercents';
 import { arrToObj, convertToNumber } from './formatting';
 import { deepCopy, roundObjectValues } from './utils';
+import { APD_TYPE } from './constants';
 
 export const CATEGORY_NAMES = [
   'statePersonnel',
@@ -175,7 +176,7 @@ export const defaultFederalShareByFFYQuarterObject = (years = []) =>
  *   years: [2022, 2023, 2024]
  * }
  */
-export const defaultBudgetObject = (years = []) => ({
+export const defaultHITECHBudgetObject = (years = []) => ({
   federalShareByFFYQuarter: {
     hitAndHie: defaultFederalShareByFFYQuarterObject(years),
     mmis: defaultFederalShareByFFYQuarterObject(years)
@@ -188,6 +189,114 @@ export const defaultBudgetObject = (years = []) => ({
     ...FFP_OPTIONS,
     'combined'
   ]),
+  combined: getDefaultFundingSourceObject(years),
+  activityTotals: [],
+  activities: {},
+  years
+});
+
+/**
+ * Creates a default Budget object by years
+ * @param {Array} years The list of years in the APD
+ * @returns the default Budget object
+ * e.g, for years: [2022, 2023, 2024] the object would look like
+ * {
+ *   federalShareByFFYQuarter: {
+ *     mmis: {
+ *       years: {
+ *         2022: {...}, 2023: {...}, 2024: {...}, total: {...}
+ *       }
+ *       // see defaultFederalShareByFFYQuarterObject for details
+ *     }
+ *   },
+ *   mmis: {
+ *     statePersonnel: {...}, contractors: {...}, expenses: {...}, combined: {...}
+ *     // see getDefaultFundingSourceByCategoryObject for details
+ *   },
+ *   mmisByFFP: {
+ *     '90-10': {
+ *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+ *       // see getDefaultFundingSourceObject for details
+ *     },
+ *     '75-25': {...}, // same as '90-10'
+ *     '50-50': {...}, // same as '90-10'
+ *     '0-100': {...}, // same as '90-10'
+ *     combined: {...} // same as '90-10'
+ *   },
+ *   combined: {
+ *     2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+ *     // see getDefaultFundingSourceObject for details
+ *   },
+ *   activityTotals: [],
+ *   activities: {},
+ *   years: [2022, 2023, 2024]
+ * }
+ */
+export const defaultMMISBudgetObject = (years = []) => ({
+  federalShareByFFYQuarter: {
+    mmis: defaultFederalShareByFFYQuarterObject(years)
+  },
+  mmis: getDefaultFundingSourceByCategoryObject(years),
+  mmisByFFP: getDefaultFundingSourceByCategoryObject(years, [
+    ...FFP_OPTIONS,
+    'combined'
+  ]),
+  combined: getDefaultFundingSourceObject(years),
+  activityTotals: [],
+  activities: {},
+  years
+});
+
+/**
+ * Creates a default Budget object by years
+ * @param {Array} years The list of years in the APD
+ * @returns the default Budget object
+ * e.g, for years: [2022, 2023, 2024] the object would look like
+ * {
+ *   mmis: {
+ *     hitAndHie: {
+ *       years: {
+ *         2022: {...}, 2023: {...}, 2024: {...}, total: {...}
+ *       }
+ *       // see defaultFederalShareByFFYQuarterObject for details
+ *     }
+ *   },
+ *   mmis: {
+ *     statePersonnel: {...}, contractors: {...}, expenses: {...}, combined: {...}
+ *     // see getDefaultFundingSourceByCategoryObject for details
+ *   },
+ *   mmisByFFP: {
+ *     '90-10': {
+ *       2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *       total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+ *       // see getDefaultFundingSourceObject for details
+ *     },
+ *     '75-25': {...}, // same as '90-10'
+ *     '50-50': {...}, // same as '90-10'
+ *     '0-100': {...}, // same as '90-10'
+ *     combined: {...} // same as '90-10'
+ *   },
+ *   combined: {
+ *     2022: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2023: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     2024: { total: 0, federal: 0, medicaid: 0, state: 0 },
+ *     total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+ *     // see getDefaultFundingSourceObject for details
+ *   },
+ *   activityTotals: [],
+ *   activities: {},
+ *   years: [2022, 2023, 2024]
+ * }
+ */
+export const defaultBudgetObject = (years = []) => ({
   combined: getDefaultFundingSourceObject(years),
   activityTotals: [],
   activities: {},
@@ -1222,26 +1331,41 @@ export const calculateBudget = apd => {
   const {
     years,
     activities,
-    keyStatePersonnel: { keyPersonnel } = {}
+    keyStatePersonnel: { keyPersonnel } = {},
+    __t: type // eslint-disable-line no-underscore-dangle
   } = deepCopy(apd);
 
   // Create a default budget object so that all of the properties and stuff
   // will exist, so we don't have to have a bunch of code checking for it.
-  let newBudget = defaultBudgetObject(years);
+  let newBudget;
+  switch (type) {
+    case APD_TYPE.HITECH:
+      newBudget = defaultHITECHBudgetObject(years);
+      break;
+    case APD_TYPE.MMIS:
+      newBudget = defaultMMISBudgetObject(years);
+      break;
+    default:
+      newBudget = defaultBudgetObject(years);
+  }
+
   if (years && activities && keyPersonnel) {
     // Since all of our expenses are tied up in activities, we'll start
     // by looking at all of them and doing Magic Math™. (It's not magic.)
     activities.forEach(activity => {
       // Update the statePersonnel with keyPersonnel, if applicable
-      activity.statePersonnel = updateStatePersonnel({
-        name: activity.name,
-        statePersonnel: activity.statePersonnel,
-        keyPersonnel
-      });
+      if (type === APD_TYPE.HITECH) {
+        activity.statePersonnel = updateStatePersonnel({
+          name: activity.name,
+          statePersonnel: activity.statePersonnel,
+          keyPersonnel
+        });
+      }
 
       // We need to know the funding source so we know where to apply
       // this data in the big rollup budget.
-      const fundingSource = activity.fundingSource?.toLowerCase();
+      const fundingSource =
+        type === APD_TYPE.MMIS ? 'mmis' : activity.fundingSource?.toLowerCase();
 
       // And of course we need to know how the costs are allocated between
       // the state and federal shares.

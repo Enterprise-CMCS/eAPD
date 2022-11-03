@@ -98,3 +98,12 @@ export const defaultAPDYears = startFFY => {
   const ffy = startFFY || thisFFY();
   return [ffy, ffy + 1].map(y => `${y}`);
 };
+
+export const forAllYears = (obj, yearsToCover = defaultAPDYears()) =>
+  yearsToCover.reduce(
+    (acc, year) => ({
+      ...acc,
+      [year]: obj
+    }),
+    {}
+  );

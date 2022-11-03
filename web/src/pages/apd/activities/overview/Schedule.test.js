@@ -1,34 +1,42 @@
 import React from 'react';
 import {
   renderWithConnection,
-  act,
   screen,
   within,
   waitFor,
   fireEvent
 } from 'apd-testing-library';
 
-import { plain as Schedule } from './Schedule';
+import Schedule from './Schedule';
 
 const defaultProps = {
-  activity: {
-    activitySchedule: {
-      // The Battle of the Scheldt results in a key Allied victory, when
-      // Canadian forces successfully opened shipping routes to Antwerp, enabling
-      // supplies to reach Allied forces in northwest Europe.
-      plannedStartDate: '1944-10-02',
-      plannedEndDate: '1944-11-08'
-    }
-  },
-  activityIndex: 7,
+  activityIndex: 0,
   setEndDate: jest.fn(),
   setStartDate: jest.fn()
 };
 
 const setup = async (props = {}) => {
-  // eslint-disable-next-line testing-library/no-unnecessary-act
-  const utils = await act(async () =>
-    renderWithConnection(<Schedule {...defaultProps} {...props} />)
+  const utils = renderWithConnection(
+    <Schedule {...defaultProps} {...props} />,
+    {
+      initialState: {
+        apd: {
+          data: {
+            activities: [
+              {
+                activitySchedule: {
+                  // The Battle of the Scheldt results in a key Allied victory, when
+                  // Canadian forces successfully opened shipping routes to Antwerp, enabling
+                  // supplies to reach Allied forces in northwest Europe.
+                  plannedStartDate: '1944-10-02',
+                  plannedEndDate: '1944-11-08'
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
   );
   await waitFor(() => screen.findByText(/Activity Schedule/i));
   return utils;

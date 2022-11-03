@@ -6,48 +6,7 @@ describe('budget reducer', () => {
   const initialState = {
     activities: {},
     combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-    federalShareByFFYQuarter: {
-      hitAndHie: {
-        years: {},
-        total: { contractors: 0, inHouse: 0, combined: 0 }
-      },
-      mmis: {
-        years: {},
-        total: { contractors: 0, inHouse: 0, combined: 0 }
-      }
-    },
-    hie: {
-      combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      statePersonnel: {
-        total: { total: 0, medicaid: 0, federal: 0, state: 0 }
-      }
-    },
-    hit: {
-      combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      statePersonnel: {
-        total: { total: 0, medicaid: 0, federal: 0, state: 0 }
-      }
-    },
-    mmis: {
-      combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      contractors: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      expenses: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-      statePersonnel: {
-        total: { total: 0, medicaid: 0, federal: 0, state: 0 }
-      }
-    },
-    hitAndHie: {
-      combined: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
-      contractors: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
-      expenses: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
-      statePersonnel: {
-        total: { medicaid: 0, federal: 0, state: 0, total: 0 }
-      }
-    },
+    federalShareByFFYQuarter: {},
     mmisByFFP: {
       '50-50': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
       '75-25': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
