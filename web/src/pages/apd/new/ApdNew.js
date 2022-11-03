@@ -21,30 +21,30 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
-const businessAreas = {
-  waiverSupport: false,
-  assetVerification: false,
-  claimsProcessing: false,
-  decisionSupport: false,
-  electronicVisitVerify: false,
-  encounterProcessingSystem: false,
-  financialMangement: false,
-  healthInfoExchange: false,
-  longTermServiceSupport: false,
-  memberManagement: false,
-  pharmacyBenefitManagement: false,
-  programIntegrity: false,
-  providerManagement: false,
-  thirdPartyLiability: false,
-  other: false
-};
-
-const typeStatus = {
-  annualUpdate: false,
-  asNeededUpdate: false
-};
-
 const ApdNew = ({ createApd: create }) => {
+  const businessAreas = {
+    waiverSupport: false,
+    assetVerification: false,
+    claimsProcessing: false,
+    decisionSupport: false,
+    electronicVisitVerify: false,
+    encounterProcessingSystem: false,
+    financialMangement: false,
+    healthInfoExchange: false,
+    longTermServiceSupport: false,
+    memberManagement: false,
+    pharmacyBenefitManagement: false,
+    programIntegrity: false,
+    providerManagement: false,
+    thirdPartyLiability: false,
+    other: false
+  };
+
+  const typeStatus = {
+    annualUpdate: false,
+    asNeededUpdate: false
+  };
+
   useEffect(() => {
     if (enableMmis === false) {
       setApdType('hitech');
