@@ -1,7 +1,7 @@
 require('./hitechBudget');
 const mongoose = require('mongoose');
 const { incentivePayment, hitechActivitySchema } = require('./hitechActivity');
-const { APD, discriminatorOptions } = require('./apd');
+const { APD, discriminatorOptions, federalCitation } = require('./apd');
 
 const hitechSchema = new mongoose.Schema(
   {
@@ -89,6 +89,12 @@ const hitechSchema = new mongoose.Schema(
           of: incentivePayment
         }
       }
+    },
+    assurancesAndCompliances: {
+      procurement: [federalCitation],
+      recordsAccess: [federalCitation],
+      softwareRights: [federalCitation],
+      security: [federalCitation]
     },
     budget: {
       type: mongoose.Schema.Types.ObjectId,

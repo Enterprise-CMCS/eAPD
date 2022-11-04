@@ -295,7 +295,11 @@ export const getPatchesForAddingItem = (state, path, key = null) => {
         {
           op: 'add',
           path,
-          value: newActivity({ years: state.data.years, key })
+          value: newActivity({
+            years: state.data.years,
+            key,
+            apdType: state.data.apdType
+          })
         }
       ];
     default:
@@ -471,6 +475,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         data: {
           ...action.apd,
+          apdType: action.apd.__t,
           created: getHumanDatestamp(action.apd.created),
           updated: getHumanTimestamp(action.apd.updated),
           keyStatePersonnel: {

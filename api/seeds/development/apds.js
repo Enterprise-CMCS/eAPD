@@ -1,3 +1,6 @@
+const mmis = require('./03-mmis');
+const mmisNoActivities = require('./04-mmisNoActivities');
+
 const apd = {
   __t: 'HITECH',
   name: 'HITECH IAPD',
@@ -968,11 +971,23 @@ const data = [
     stateId: 'ak',
     status: 'draft',
     ...apdNoActivities
+  },
+  {
+    stateId: 'ak',
+    status: 'draft',
+    ...mmis
+  },
+  {
+    stateId: 'ak',
+    status: 'draft',
+    ...mmisNoActivities
   }
 ];
 
 module.exports = {
   data,
-  apd,
-  apdNoActivities
+  hitech: apd,
+  hitechNoActivities: apdNoActivities,
+  mmis,
+  mmisNoActivities
 };

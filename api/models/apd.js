@@ -112,15 +112,7 @@ const apdSchema = new mongoose.Schema({
     previousActivitySummary: String
   },
   activities: [activitySchema],
-  // Currently there are no inputs in activity schedule summary
-  // but this should be used to follow the sections pattern
-  // activityScheduleSummary: {},
-  assurancesAndCompliances: {
-    procurement: [federalCitation],
-    recordsAccess: [federalCitation],
-    softwareRights: [federalCitation],
-    security: [federalCitation]
-  },
+  assurancesAndCompliances: {},
   budget: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Budget',
@@ -130,4 +122,4 @@ const apdSchema = new mongoose.Schema({
 
 const APD = mongoose.model('APD', apdSchema);
 
-module.exports = { APD, discriminatorOptions };
+module.exports = { APD, discriminatorOptions, federalCitation };

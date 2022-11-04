@@ -490,7 +490,7 @@ export const updateStatePersonnel = ({
  */
 export const getCostFromItemByYear = (item, year) => {
   if (item?.years?.[year] !== undefined) {
-    const costs = item.years[year] || 0;
+    const costs = item?.years?.[year] || 0;
     return typeof costs === 'object'
       ? convertToNumber(costs?.amt || 0) * convertToNumber(costs?.perc || 0)
       : costs;
@@ -611,8 +611,8 @@ export const sumCostsForFundingSourceByCategory = ({
 } = {}) => {
   let updatedBudget = deepCopy(budget);
   if (Array.isArray(items)) {
-    items.forEach(item => {
-      if (item.years) {
+    items?.forEach(item => {
+      if (item?.years) {
         updatedBudget = Object.keys(item.years).reduce((totals, year) => {
           const cost = getCostFromItemByYear(item, year);
           // New activities don't have a funding program by default, so in that case,
@@ -736,9 +736,9 @@ export const sumCostsByFFY = ({
     return {
       ...updatedCostsByFFY,
       [year]: {
-        federal: totalMedicaidCostShares.fedShare,
+        federal: totalMedicaidCostShares?.fedShare || 0,
         medicaid: totalMedicaidCost,
-        state: totalMedicaidCostShares.stateShare,
+        state: totalMedicaidCostShares?.stateShare || 0,
         total: totalCost
       },
       total: {
@@ -1332,13 +1332,12 @@ export const calculateBudget = apd => {
     years,
     activities,
     keyStatePersonnel: { keyPersonnel } = {},
-    __t: type // eslint-disable-line no-underscore-dangle
+    __t: apdType // eslint-disable-line no-underscore-dangle
   } = deepCopy(apd);
-
   // Create a default budget object so that all of the properties and stuff
   // will exist, so we don't have to have a bunch of code checking for it.
   let newBudget;
-  switch (type) {
+  switch (apdType) {
     case APD_TYPE.HITECH:
       newBudget = defaultHITECHBudgetObject(years);
       break;
@@ -1354,7 +1353,7 @@ export const calculateBudget = apd => {
     // by looking at all of them and doing Magic Math™. (It's not magic.)
     activities.forEach(activity => {
       // Update the statePersonnel with keyPersonnel, if applicable
-      if (type === APD_TYPE.HITECH) {
+      if (apdType === APD_TYPE.HITECH) {
         activity.statePersonnel = updateStatePersonnel({
           name: activity.name,
           statePersonnel: activity.statePersonnel,
@@ -1365,7 +1364,9 @@ export const calculateBudget = apd => {
       // We need to know the funding source so we know where to apply
       // this data in the big rollup budget.
       const fundingSource =
-        type === APD_TYPE.MMIS ? 'mmis' : activity.fundingSource?.toLowerCase();
+        apdType === APD_TYPE.MMIS
+          ? 'mmis'
+          : activity.fundingSource?.toLowerCase();
 
       // And of course we need to know how the costs are allocated between
       // the state and federal shares.

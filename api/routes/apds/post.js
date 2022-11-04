@@ -10,7 +10,14 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
     logger.silly({ id: req.id, message: 'handling POST /apds route' });
 
     try {
-      const apd = getNewApd();
+      const { apdType, apdOverview } = req.body;
+      const apd = getNewApd(apdType);
+
+      apd.__t = apdType; // eslint-disable-line no-underscore-dangle
+      apd.apdOverview = {
+        ...apd.apdOverview,
+        ...apdOverview
+      };
 
       const stateProfile = await getStateProfile(req.user.state.id);
 

@@ -42,11 +42,11 @@ module.exports = (app, { updateAPDDocument = ua } = {}) => {
             stateId: state,
             ...apd
           } = {}
-        } = await updateAPDDocument(
-          req.params.id,
-          req.user.state.id,
-          sanitizedPatch
-        );
+        } = await updateAPDDocument({
+          id: req.params.id,
+          stateId: req.user.state.id,
+          patch: sanitizedPatch
+        });
 
         if (errors) {
           // Rather than send back the full error from the validator, pull out just the relevant bits

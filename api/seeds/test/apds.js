@@ -2,11 +2,12 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const mnAPD = require('./01-mnAPD.json');
 const akAPD = require('./02-akAPD.json');
-const finalAPD = require('./03-finalAPD.json');
+const akMMIS = require('./03-akMMIS.json');
+const finalAPD = require('./04-finalAPD.json');
 
 const mnAPDId = '21ad69c0682b10ba1c54aa2d';
 const akAPDId = 'eeac3c9865059f26eccb0600';
-const akAPD2Id = '600eeac3c9865059f26eccb0';
+const akMMISId = '600eeac3c9865059f26eccb0';
 const finalAPDId = 'de66754e9513b78d72875bcf';
 const badAPDId = '0123456789abcdef01234567';
 
@@ -36,7 +37,7 @@ const data = [
     ...akAPD
   },
   {
-    _id: ObjectId(akAPD2Id),
+    _id: ObjectId(akMMISId),
     // The 13th Amendment to the US Constitution is officially ratified,
     // formally outlawing slavery
     createdAt: '1865-12-06T00:00:00Z',
@@ -45,7 +46,7 @@ const data = [
     updatedAt: '1919-06-04T16:30:00Z',
     stateId: 'ak',
     status: 'draft',
-    ...akAPD
+    ...akMMIS
   },
   {
     _id: ObjectId(finalAPDId),
@@ -63,7 +64,7 @@ module.exports = {
   data,
   mnAPDId,
   akAPDId,
-  akAPD2Id,
+  akMMISId,
   finalAPDId,
   badAPDId
 };

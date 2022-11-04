@@ -1,6 +1,24 @@
 const mongoose = require('mongoose');
 const { generateKey } = require('@cms-eapd/common');
 
+const quarterlyFFP = new mongoose.Schema(
+  {
+    combined: {
+      type: Number,
+      default: 0
+    },
+    contractors: {
+      type: Number,
+      default: 0
+    },
+    inHouse: {
+      type: Number,
+      default: 0
+    }
+  },
+  { _id: false }
+);
+
 const activitySchema = new mongoose.Schema({
   _id: false,
   activityId: {
@@ -117,6 +135,18 @@ const activitySchema = new mongoose.Schema({
           type: Number,
           default: 0
         }
+      },
+      { _id: false }
+    )
+  },
+  quarterlyFFP: {
+    type: Map,
+    of: new mongoose.Schema(
+      {
+        1: quarterlyFFP,
+        2: quarterlyFFP,
+        3: quarterlyFFP,
+        4: quarterlyFFP
       },
       { _id: false }
     )

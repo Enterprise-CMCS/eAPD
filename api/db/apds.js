@@ -4,7 +4,6 @@ const {
   deepCopy,
   calculateBudget,
   hasBudgetUpdate,
-  defaultAPDYearOptions,
   APD_TYPE
 } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
@@ -19,31 +18,44 @@ const {
   MMIS
 } = require('../models/index');
 
+const getApdModel = apdType => {
+  let model;
+  switch (apdType) {
+    case APD_TYPE.HITECH:
+      model = HITECH;
+      break;
+    case APD_TYPE.MMIS:
+      model = MMIS;
+      break;
+    default:
+      model = APD;
+  }
+  return model;
+};
+
+const getBudgetModel = apdType => {
+  let model;
+  switch (apdType) {
+    case APD_TYPE.HITECH:
+      model = HITECHBudget;
+      break;
+    case APD_TYPE.MMIS:
+      model = MMISBudget;
+      break;
+    default:
+      model = Budget;
+  }
+  return model;
+};
+
 const createAPD = async apd => {
   const apdJSON = deepCopy(apd);
-  if (!apdJSON.yearOptions) {
-    apdJSON.yearOptions = defaultAPDYearOptions();
-  }
+  const apdType = apd.__t; // eslint-disable-line
 
-  let apdDoc;
-  let newBudget;
-  switch (
-    apd.__t // eslint-disable-line no-underscore-dangle
-  ) {
-    case APD_TYPE.HITECH: {
-      apdDoc = await HITECH.create(apdJSON);
-      newBudget = await HITECHBudget.create(calculateBudget(apdDoc.toJSON()));
-      break;
-    }
-    case APD_TYPE.MMIS: {
-      apdDoc = await MMIS.create(apdJSON);
-      newBudget = await MMISBudget.create(calculateBudget(apdDoc.toJSON()));
-      break;
-    }
-    default:
-      apdDoc = await APD.create(apdJSON);
-      newBudget = await Budget.create(calculateBudget(apdDoc.toJSON()));
-  }
+  const apdDoc = await getApdModel(apdType).create(apdJSON);
+  const newBudget = await getBudgetModel(apdType).create(
+    calculateBudget(apdDoc.toJSON())
+  );
   apdDoc.budget = newBudget;
   await apdDoc.save();
 
@@ -65,7 +77,7 @@ const getAPDByIDAndState = (id, stateId) =>
   APD.findOne({ _id: id, stateId }).lean().populate('budget');
 
 // Apply the patches to the APD document
-const patchAPD = async (id, stateId, apdDoc, patch) => {
+const patchAPD = async ({ id, stateId, apdDoc, patch }) => {
   // duplicate the apdDoc so that dates will be converted to strings
   const apdJSON = deepCopy(apdDoc);
   // apply the patches to the apd
@@ -81,16 +93,14 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
 };
 
 const updateAPDDocument = async (
-  id,
-  stateId,
-  patch,
+  { id, stateId, patch },
   { updateProfile = updateStateProfile, validate = validateApd } = {}
 ) => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId })
     .populate('budget')
     .lean();
-  if (patch.length > 0) {
+  if (apdDoc && patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};
     let updatedBudget = deepCopy(apdDoc.budget);
@@ -104,7 +114,7 @@ const updateAPDDocument = async (
       value: new Date().toISOString()
     });
     try {
-      updatedDoc = await patchAPD(id, stateId, apdDoc, patch);
+      updatedDoc = await patchAPD({ id, stateId, apdDoc, patch });
     } catch (err) {
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
 
@@ -144,7 +154,7 @@ const updateAPDDocument = async (
 
       // If there are errors, nothing was saved, so we need to try to update again
       validPatches = Object.keys(updatedPatch).map(key => updatedPatch[key]);
-      updatedDoc = await patchAPD(id, stateId, apdDoc, validPatches);
+      updatedDoc = await patchAPD({ id, stateId, apdDoc, patch: validPatches });
 
       // convert updatedPatch map to an array and set it to updated
       updated = Object.keys(updatedPatch).map(key => updatedPatch[key]);
@@ -176,7 +186,7 @@ const updateAPDDocument = async (
     const validationErrors = {};
     const validationCopy = deepCopy(updatedDoc);
     delete validationCopy.budget; // remove budget because it shouldn't be validated
-    const valid = validate(validationCopy);
+    const valid = true; // TODO new validation validate(validationCopy);
     if (!valid) {
       // Rather than send back the full error from the validator, pull out just the relevant bits
       // and fetch the value that's causing the error.

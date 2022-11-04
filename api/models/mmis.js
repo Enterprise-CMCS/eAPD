@@ -1,7 +1,7 @@
 require('./mmisBudget');
 const mongoose = require('mongoose');
 const { mmisActivitySchema } = require('./mmisActivity');
-const { APD, discriminatorOptions } = require('./apd');
+const { APD, discriminatorOptions, federalCitation } = require('./apd');
 
 const mmisSchema = new mongoose.Schema(
   {
@@ -79,6 +79,13 @@ const mmisSchema = new mongoose.Schema(
       }
     },
     activities: [mmisActivitySchema],
+    // TODO this will change once the Assurances and Compliances designs are done
+    assurancesAndCompliances: {
+      procurement: [federalCitation],
+      recordsAccess: [federalCitation],
+      softwareRights: [federalCitation],
+      security: [federalCitation]
+    },
     budget: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'MMISBudget',
