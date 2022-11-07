@@ -66,6 +66,7 @@ const AssurancesAndCompliance = ({
     control,
     trigger,
     clearErrors,
+    setValue,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -166,15 +167,16 @@ const AssurancesAndCompliance = ({
                               <Controller
                                 name={`${name}.${index}.explanation`}
                                 control={control}
-                                render={({
-                                  field: { onChange: textOnChange, ...props }
-                                }) => (
+                                render={({ field: { ...props } }) => (
                                   <TextArea
                                     {...props}
                                     label="Please explain"
                                     value={explanation}
                                     onChange={({ target: { value } }) => {
-                                      textOnChange(value);
+                                      setValue(
+                                        `${name}.${index}.explanation`,
+                                        value
+                                      );
                                       handleExplanationChange(
                                         name,
                                         index,

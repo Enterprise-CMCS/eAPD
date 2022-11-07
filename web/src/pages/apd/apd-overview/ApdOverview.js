@@ -114,25 +114,33 @@ const ApdOverview = ({
   const handleProgramOverview = html => {
     setOverview(html);
     setValue('programOverview', html);
-    trigger();
+    if (adminCheck) {
+      trigger();
+    }
   };
 
   const handleHIEOverview = html => {
     setHIE(html);
     setValue('narrativeHIE', html);
-    trigger();
+    if (adminCheck) {
+      trigger();
+    }
   };
 
   const handleHITOverview = html => {
     setHIT(html);
     setValue('narrativeHIT', html);
-    trigger();
+    if (adminCheck) {
+      trigger();
+    }
   };
 
   const handleMMISOverview = html => {
     setMMIS(html);
     setValue('narrativeMMIS', html);
-    trigger();
+    if (adminCheck) {
+      trigger();
+    }
   };
 
   const yearChoices = yearOptions.map(year => ({

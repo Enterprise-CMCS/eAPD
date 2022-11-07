@@ -115,6 +115,7 @@ const CostAllocateFFP = ({
 }) => {
   const {
     control,
+    clearErrors,
     formState: { errors },
     trigger,
     setValue
@@ -122,23 +123,27 @@ const CostAllocateFFP = ({
     defaultValues: {
       ...costAllocation
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: joiResolver(costAllocateFFPSchema)
   });
 
   useEffect(() => {
-    Object.keys(costAllocation).forEach(year => {
-      setValue(`${year}`, costAllocation[year]);
-    });
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
-  }, [costAllocation]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
+    setValue(`[${year}].ffp.federal`, federal);
+    setValue(`[${year}].ffp.state`, state);
+    if (adminCheck) {
+      trigger();
+    }
   };
 
   const { years } = costSummary;
