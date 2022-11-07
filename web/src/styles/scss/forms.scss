@@ -200,23 +200,8 @@ div.form--computed-value__input-aligned {
   padding-left: 18px;
 }
 
-// Choice List
-.choicelist__label_flex {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-
-  span:first-of-type {
-    width: 200px;
-  }
-
+.label-extended {
   .ds-c-field__hint {
-    margin: -6px;
-  }
-
-  .ds-c-tooltip__container {
-    button {
-      width: 40px !important;
-    }
+    width: 640px;
   }
 }

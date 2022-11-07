@@ -149,38 +149,16 @@ const ApdNew = ({ createApd: create }) => {
                   choices={[
                     {
                       label: 'HITECH IAPD',
-                      labelClassName: 'choicelist__label_flex',
+                      labelClassName: 'label-extended',
                       value: 'hitech',
-                      hint: (
-                        <Tooltip
-                          ariaLabel="Label describing the subject of the tooltip"
-                          className="ds-c-tooltip__trigger-icon"
-                          onClose={function noRefCheck() {}}
-                          onOpen={function noRefCheck() {}}
-                          title="Health Information Techology for Economic and Clinical Health Implementation APD"
-                        >
-                          {' '}
-                          <TooltipIcon />{' '}
-                        </Tooltip>
-                      ),
+                      hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
                       checked: value === 'hitech'
                     },
                     {
                       label: 'MMIS IAPD',
-                      labelClassName: 'choicelist__label_flex',
+                      labelClassName: 'label-extended',
                       value: 'mmis',
-                      hint: (
-                        <Tooltip
-                          ariaLabel="Label describing the subject of the tooltip"
-                          className="ds-c-tooltip__trigger-icon"
-                          onClose={function noRefCheck() {}}
-                          onOpen={function noRefCheck() {}}
-                          title="Medicaid Management Information System Implementation APD"
-                        >
-                          {' '}
-                          <TooltipIcon />{' '}
-                        </Tooltip>
-                      ),
+                      hint: 'Medicaid Management Information System Implementation APD',
                       checked: value === 'mmis'
                     }
                   ]}
@@ -207,20 +185,8 @@ const ApdNew = ({ createApd: create }) => {
                   choices={[
                     {
                       label: 'HITECH IAPD',
-                      labelClassName: 'choicelist__label_flex',
                       value: 'hitech',
-                      hint: (
-                        <Tooltip
-                          ariaLabel="Label describing the subject of the tooltip"
-                          className="ds-c-tooltip__trigger-icon"
-                          onClose={function noRefCheck() {}}
-                          onOpen={function noRefCheck() {}}
-                          title="Health Information Techology for Economic and Clinical Health Implementation APD"
-                        >
-                          {' '}
-                          <TooltipIcon />{' '}
-                        </Tooltip>
-                      ),
+                      hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
                       checked: value === 'hitech'
                     }
                   ]}
