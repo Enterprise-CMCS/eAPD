@@ -1,11 +1,6 @@
-const apd = {
-  apdType: 'hitech',
+const akAPD = {
   name: 'HITECH IAPD',
   years: ['2022', '2023'],
-  typeStatus: {
-    mmisUpdate: false,
-    typeUpdate: ['annual']
-  },
   apdOverview: {
     programOverview:
       "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.</p>\n<p>The original IAPD request supported the first phase of the Station''s participation in the development and expansion of the use of EHR and collaboration among state entities in a Health Information Exchange (HIE) network. In the first phase, Tycho implemented the system changes necessary to support the Tycho EHR Provider Incentive Payment Program as well as the administrative supports necessary for implementation and operation of this program.&nbsp;</p>\n<ol>\n<li>The first IAPDU requested additional support for the EHR Provider Incentive Payment Program and additional project support.</li>\n<li>The second IAPDU requested funding for the Division of Senior and Disabilities Services (DSDS) Automated Service Plan (ASP) system, supporting expanded use of EHRs.</li>\n<li>The third IAPDU requested additional and continued support of HIT initiatives.</li>\n</ol>\n<p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>\n<p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
@@ -87,27 +82,27 @@ const apd = {
       contractorResources: [
         {
           description: 'Maintain SLR',
-          end: '',
+          end: '1996-04-28',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Super SLR Incorporated',
-          start: '',
+          start: '1986-04-28',
           totalCost: 32423,
           years: { 2022: 999756, 2023: 342444 }
         },
         {
           description: 'Technology consulting and planning services.',
-          end: '',
+          end: '1996-04-28',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Tech Consulting Inc.',
-          start: '',
+          start: '1986-04-28',
           totalCost: 473573,
           years: { 2022: 333000, 2023: 200000 }
         }
@@ -133,17 +128,17 @@ const apd = {
         '<p><strong><ins>III.A.1: Modifications to the State Level Repository</ins></strong></p>\n<p>Tycho Medicaid is seeking funding to design, develop, and implement modifications to the existing State Level Repository (SLR) for continued administration of the EHR Incentive Program. The modifications of the SLR for CMS program rule changes and guidance changes (Stage 3, IPPS, and OPPS) will require extensive development and implementation efforts and is essential to the effective administration of the Medicaid EHR Incentive Program. Modifications to the SLR are done in phases depending on how CMS rule changes occur. The implementation of the design elements will require provider onboarding activities to be initiated and completed including outreach and training for all program participants. The SLR will increase the efficiency with which Tycho Medicaid administers the program; allow for increased oversight and assure that the program is operated in accordance with the complex and evolving program rules and requirements.</p>\n<p>&nbsp;</p>\n<p>Additionally, Tycho Medicaid is seeking funding to complete a security risk assessment for the State Level Repository to ensure the SLR meets the required system security standards for HIPAA, MARSe, NIST and other state and federal security requirements for information technology.</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.B.1 Administrative and Technical Support Consulting</ins></strong></p>\n<p>The DHSS is requesting funding to support activities under the Medicaid EHR Incentive Payment Program to provide technical assistance for statewide activities and implementations. Activities of this initiative will include support of the activities included in this IAPDU, SMPHU development, eCQM implementation, project management services, and assistance with the public health expansion modernization initiative.</p>',
       expenses: [
         {
-          description: '',
+          description: 'Training and outreach things',
           category: 'Training and outreach',
           years: { 2022: 40000, 2023: 40000 }
         },
         {
-          description: '',
+          description: 'Travel business and such',
           category: 'Travel',
           years: { 2022: 35000, 2023: 35000 }
         },
         {
-          description: '',
+          description: 'Hardware, software, and.......licensing!',
           category: 'Hardware, software, and licensing',
           years: { 2022: 700000, 2023: 0 }
         }
@@ -290,27 +285,27 @@ const apd = {
       contractorResources: [
         {
           description: 'Hosting and development support.',
-          end: '',
+          end: '1999-12-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Interface Vendor Inc.',
-          start: '',
+          start: '1998-12-31',
           totalCost: 26453574,
           years: { 2022: 650000, 2023: 750000 }
         },
         {
           description: 'Interface M&O contractor.',
-          end: '',
+          end: '2001-12-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'TBD',
-          start: '',
+          start: '2000-12-31',
           totalCost: 7398,
           years: { 2022: 0, 2023: 1000000 }
         }
@@ -337,9 +332,9 @@ const apd = {
         "<p><strong><ins>III.B.3 Medicaid Claims Data Feed to the HIE</ins></strong></p>\n<p>Currently, Tycho does not have an All-Payers&rsquo; Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
       expenses: [
         {
-          description: '',
+          description: 'Travel related expenses',
           category: 'Travel',
-          years: { 2022: 0, 2023: 0 }
+          years: { 2022: 100, 2023: 100 }
         }
       ],
       fundingSource: 'MMIS',
@@ -489,7 +484,7 @@ const apd = {
           2022: { otherSources: '' },
           2023: { otherSources: '' }
         },
-        methodology: ''
+        methodology: 'Cost allocation methodology'
       },
       description:
         "<p>&nbsp;</p>\n<p><img style=\"float: none; height: auto; width: auto;\" src=\"/api/apds/1/files/622a24569b39c8f67d684882c8abe55dbebf98d0a9813df3aa8f07a509c10f29\" alt=\"undefined\" /></p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.D. Statewide HIE Enhancement, Onboarding, and Support of Statewide HIE Operational Strategic Plan</ins></strong></p>\n<p>DHSS is requesting funding to support the continued enhancement and provider onboarding activities to the statewide HIE. The success of the statewide HIE is critical for improving data exchange, coordination of care, and modernizing healthcare across Tycho. The following funding requests are for projects that will provide enhanced technical capabilities to providers, support providers in onboarding, support modernizations required for Medicaid redesign, and ensure sustainability beyond State of Tycho and CMS funding. The projects have been designed to meet the following goals and desires for the statewide HIE:</p>\n<ul>\n<li>&bull; Support the HIE&rsquo;s operational needs, including staffing, contract resources, administrative expenses, and technology expenses to support operations and ongoing maintenance of the HIE</li>\n<li>&bull; Provide technical assistance to support HIE onboarding and implementation within provider organizations who are meaningful use-eligible and who refer directly with tribal organizations</li>\n<li>&bull; Develop tools and HIE interfaces that support enhanced care coordination services, and increase HIE value to ensure sustainability beyond current funding streams</li>\n<li>All initiatives described below are funded at 90/10 funds and do not require cost allocation. All projects below support the onboarding and connection for Medicaid providers, EPs, EHs, and additional providers supported by SMD #16-003. Section VII. Cost Allocation Plan and Appendix D of this IAPD further describes the cost allocation methodology.</li>\n</ul>\n<p><strong><ins>III.D.1 Behavioral Health Onboarding &amp; Care Coordination</ins></strong></p>\n<p>The Department recognizes the need to increase Behavioral Health (BH) data capacity and sharing to achieve its goals and outcomes related to care coordination. This includes promoting effective communication to coordinate care and enhancing the ability for providers to share and gain access to Protected Class Patient Data where appropriate. To support the capacity of data sharing and improving coordination of care, funding is requested to support Behavioral Health provider connectivity through the onboarding program by the development and implementation of a Behavioral Health-centric Unified Landing Page Application. The Behavioral Health Unified Landing Page Application will improve the quality and completeness of behavioral health data and thus, support the ability for providers to achieve MU.</p>\n<p>&nbsp;</p>\n<p>In addition to the Unified Landing Page, funding is requested to support behavioral health provider onboarding to the HIE. The HIE onboarding program will provide funds to offset expenses required for behavioral health providers to adequately participate in statewide health information exchange. The onboarding program will support Tycho''s HIE vision of increasing onboarding Medicaid providers and care coordination to help Tycho providers demonstrate MU. This program relates to the guidance provided by CMS in the SMD 16-003 letter dated February 2016 and will assist with covering costs associated with connectivity including but not limited to the following activities:</p>\n<ul>\n<li>&bull; Legal activities including establishment of user agreements</li>\n<li>&bull; Configuration and technical development activities</li>\n<li>&bull; Testing of connection</li>\n<li>&bull; Workflow integration</li>\n<li>&bull; Implementation support and user training</li>\n<li>&bull; Post production support</li>\n</ul>\n<p>The goal is for the onboarding program to support 40 provider organizations across the State. The initial phase of the program will be focused on Medicaid behavioral health providers with additional provider types potentially targeted in later phases of the initiative. Administrative offset funding will be on-time funding only and will be issued as pass-through funding through healtheConnect (Tycho''s HIE organization). The funding will be distributed in 2 parts: 75% upon onboarding initialization (participation/contract signed) and the remaining 25% upon the HIE connection being live or in production.</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.D.2 HIE Strategic Planning</ins></strong></p>\n<p>Having a robust HIE is a critical component of Tycho''s HIT landscape and will continue to play a role in enhancing Tycho''s EPs and EHs ability to achieve MU. As part of the Department&rsquo;s responsibility for administration of the EHR Incentive Program and in an effort to enhance the maturity of HIE in Tycho, the Department is requesting funds to support a health information exchange assessment using CMS&rsquo; standards of the HIE Maturity Model and MITA and a Strategic Plan to enhance platform functionality and initial steps necessary to establish a long-term vision of HIE in Tycho''s HIT landscape. This work will further ensure that the Department&rsquo;s goals and target state (To-Be vision) aligns with CMS guidelines as specified under 42 CFR 495.338, as well as the HIE Maturity Model, MITA and the Seven Standards and Conditions.</p>\n<p>&nbsp;</p>\n<p>The Department is requesting funds to support the statewide HIE in conducting an HIE Assessment using the CMS HIE Maturity Model and MITA standards. The information gathered in the assessment will help clearly articulate the long-term HIE vision for Tycho, define a governance model, and establish a robust sustainability plan built on the framework of the HIE Maturity Model and MITA standards. This information will also be used to identify areas where the statewide HIE can provide services and make connections with the Medicaid enterprise of systems to support health information exchange requirements and sustainability of the HIE.</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.D.3 Integration of Social Determinants of Health</ins></strong></p>\n<p>To further drive Tycho''s goals around improved health outcomes through HIE, the Department is seeking funds to support the integration of the Social Determinants of Health into the statewide HIE system which will improve coordination of care and information exchange across the state.</p>\n<p>&nbsp;</p>\n<p>This is an important and practical step to help the healthcare delivery system build effective, coordinated, data-driven healthcare services into communities hit hardest by social structures and economic systems. The integration of social determinants of health data will provide support for addressing social determinants of health drivers in Tycho and will identify ways to improve intervention using Social Determinants of Health as part of a comprehensive coordinated care model impacting payment, incentivizing purposeful intervention in the specific needs of their patients and populations to improve health outcomes.</p>\n<p>&nbsp;</p>\n<p>To complete the scope of work, the HIE will integrate a limited CDR and interface to the network as well as provide onboarding services to connect Medicaid providers. The integration of the Social Determinates of Health project will support Medicaid providers ability to achieve meaningful use by allowing providers to incorporate summary of care information from other providers into their EHR using the functions of CEHRT through the HIE.</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.D.4 Staff Augmentation for Adoption and Utilization</ins></strong></p>\n<p>DHSS seeks to support onboarding efforts to connect Medicaid Meaningful Use eligible providers and providers supporting eligible providers to the HIE. The provider onboarding program will fund staffing outreach/educational support and technical services to Medicaid EPs that have adopted EHRs but not made HIE use part of day to day operations, not made use of new HIE capabilities, not yet connected, or were unable to take advantage of the ONC Regional Extension Center (REC) services because they were not eligible.</p>\n<p>Onboarding will include efforts to provide outreach/educational support and technical services. The Provider Onboarding Program includes the following outcomes:</p>\n<ul>\n<li>Provide staff for outreach, education, training, and organization change management to targeted provider groups to assist with interfacing and connecting to the HIE to support ongoing utilization of the HIE services</li>\n<li>Meet milestones established by the HIE and the Department for provider connectivity to the HIE</li>\n<li>Cover the onboarding costs (personnel and technical) for connecting Medicaid providers and hospitals to the statewide HIE and integrating HIE use into the provider workflow</li>\n</ul>\n<p>The funds requested in this IAPD-U will be used to establish provider groups for onboarding support, establish onboarding benchmarks, and specifically implement training and technical assistance services. Funds will be used to assess barriers to onboarding and adoption of the HIE services, strategies for work flow analysis, and other ways to reduce Medicaid provider burden to onboard to the HIE. The proposed solution shall provide support services that coordinate with HIE processes to onboard and improve participant interoperability (e.g., clinic readiness assessments, bi-directional connection builds development and deployment of bi-directional interface with Medicaid) through utilization of the HIE system.</p>\n<p>&nbsp;</p>\n<p>The adoption and utilization program will continue to expand outreach efforts and technical services to Medicaid providers and continue to boost MU numbers and milestones in Tycho to enhance the HIT vision outlined in the SMHP. In addition to AIU and MU education and technical services, the program will also seek to assist providers in meeting MU Stages 2 and 3 through onboarding provider interfaces and providing the capabilities to automatically meet several MU measures through the enhanced functionality of the HIE.</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.D.5 Trauma Registry</ins></strong></p>\n<p>DHSS recognizes the need for a trauma registry as an essential component of information exchange. The trauma registry is necessary to drive an efficient and effective performance improvement program for the care of injured enrollees. Furthermore, as published recently by SAMHSA, there are a range of evidence-based treatments that are effective in helping children and youth who have experienced trauma. Through the HIE, health providers will share and gain access to trauma information to drive an efficient and effective performance improvement program for the care of injured enrollees. The trauma register information will interoperate with the Behavioral Health Unified Landing Page Application to promote evidence-based treatments that are effective in helping enrollees who have experienced trauma. The trauma registry will be recognized as a specialized registry by the State to support MU and data exchange.</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.D.6 Air Medical Resource Location</ins></strong></p>\n<p>Tycho is currently struggling with tracking and maintaining the location and availability of air medical resources within the state. This information is critical to the timely delivery of care given the remote nature of Tycho''s geography and unique dependence on air transportation. Currently, Tycho''s air medical resources are using out of state dispatch centers who do not clearly understand the geography of Tycho or time needed to travel within the state. To address this gap in services and mitigate potential life-threatening delays in air medical resources, the Department would like to request funds to support the integration of the LifeMed application into the HIE. This application will allow healthcare entities: Public Health, hospitals, primary care providers, EMS, and all other authorized provider types to track all air medical resources in the state. The LifeMed application allows for tracking of specific tail numbers on planes and locations/timing for air resources.</p>\n<p>&nbsp;</p>\n<p>The HIE will integrate with the LifeMed application so that Tycho providers and healthcare entities are able to seamlessly track all air medical resources in the state, thus greatly improve coordination and transition of care. The ability to track this information through the HIE will further support providers ability to enhance care coordination by accurately tracking patient location and improves health information exchange by giving providers access to information on patient&rsquo;s location to submit summary of care records through the HIE to other provider EHR systems. Funds will be used to support the LifeMed software costs, provider training and implementation services.</p>\n<p>&nbsp;</p>\n<p><strong><ins>III.D.7 AURORA-HIE Integration</ins></strong></p>\n<p>AURORA is a Public Health online patient care reporting system for EMS developed by Image Trend. The Department is requesting funds to support the connection of the AURORA system to the HIE. This activity would activate the HIE integration with the Image Trend solution to allow for Medicaid providers to send patient information to the AURORA system through the HIE. Upon delivery of the patient to the hospital the patient&rsquo;s health data from EMS would be transmitted via the HIE to the hospital&rsquo;s EHR system, and when the patient is discharge the ADT feed from the hospital would be transmitted back to EMS to the AURORA system.</p>\n<p>DHSS is seeking funds to integrate the AURORA Public Health online patient care reporting system for EMS to the HIE to help support Medicaid providers ability to achieve Meaningful Use by meeting outcomes and measures pertaining to Health Information Exchange, Coordination of Care, and Public Health Reporting. Funds will be used to develop interfaces between the HIE and 10 hospitals and provider training and technical onboarding assistance to providers to connect to the HIE and AURORA system.</p>",
@@ -592,28 +587,28 @@ const apd = {
         '<p>Medicaid PHR/Blue Button</p>\n<p>Integrate MMIS DW into the HIE with Blue Button download</p>\n<p>Allows Medicaid recipients to view their Medicaid claims information in a portal and access it through a Blue Button download</p>\n<p>Assists providers in achieving MU by helping them meet the VDT requirements</p>\n<p>Supports the MU CQMs including EP Core Measure:Electronic Copy of health information</p>\n<p>Alaskans will be able to access their PHRs</p>\n<p>User friendly, easy to use technology helps ensure access</p>\n<p>There are no significant negatives to this approach</p>\n<p>Implement Medicaid PHR/Blue Button</p>',
       contractorResources: [
         {
-          description: '',
-          end: '',
+          description: 'Contractor that does some work',
+          end: '1999-12-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'RFP Planning Vendor Inc.',
-          start: '',
+          start: '1989-12-31',
           totalCost: 68734,
           years: { 2022: 50000, 2023: 5000 }
         },
         {
-          description: '',
-          end: '',
+          description: 'Contractor that does some work',
+          end: '2010-02-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Blue Button Builder Inc.',
-          start: '',
+          start: '2009-02-31',
           totalCost: 1235246,
           years: { 2022: 735246, 2023: 500000 }
         }
@@ -629,13 +624,13 @@ const apd = {
           },
           2023: { otherSources: '' }
         },
-        methodology: ''
+        methodology: 'Calculated value'
       },
       description:
         '<p><strong><ins>III.C.1 Medicaid Personal Health Record (PHR)/Blue Button Initiative</ins></strong></p>\n<p>DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE. The requested funds will be utilized to enhance the ability of patients to access their own health care data in an electronic format that supports MU CQMs including EP Core Measure: Electronic copy of health information. Medicaid PHR/Blue Button (or similar) implementation supports this functionality.</p>\n<p>&nbsp;</p>\n<p>The PHR will not collect CQMs or interface to public health registries. However, it will provide short and long-term value to providers by assisting them in achieving MU.</p>\n<p>Alaska plans to integrate the MMIS DW into the HIE, allowing Medicaid recipients to view their Medicaid claims information in a portal and access it through a Blue Button (or similar) download. Additionally, this initiative will benefit providers by assisting them in achieving MU by helping them meet View, Download, and Transmit (VDT) requirements.</p>\n<p>&nbsp;</p>\n<p>This Medicaid PHR/Blue Button (or similar) approach allows providers to meet VDT requirements without having to create individual patient portals. This supports providers in achieving MU. Medicaid Eligible population will benefit by being able to obtain their Medicaid claim information, along with access to their PHRs. See further cost allocation details in Section VIII and Appendix D.</p>',
       expenses: [
         {
-          description: '',
+          description: 'Computery things probably',
           category: 'Hardware, software, and licensing',
           years: { 2022: 0, 2023: 0 }
         }
@@ -661,11 +656,14 @@ const apd = {
           milestone: 'On-Boarding of PHR/Blue Button Participants'
         }
       ],
-      standardsAndConditions: { doesNotSupport: '', supports: '' },
+      standardsAndConditions: {
+        doesNotSupport: '',
+        supports: 'It will support all standards and conditions'
+      },
       statePersonnel: [
         {
-          title: '',
-          description: '',
+          title: 'Programmer II',
+          description: 'Making programs and making them work',
           years: { 2022: { amt: 0, perc: 0 }, 2023: { amt: 0, perc: 0 } }
         }
       ],
@@ -771,183 +769,4 @@ const apd = {
   }
 };
 
-const apdNoActivities = {
-  name: 'HITECH IAPD No Activities',
-  years: ['2022', '2023'],
-  apdOverview: {
-    programOverview:
-      "<p>The Department is the state agency that administers the Tycho Medicaid program. The Information Technology (IT) Planning Office is responsible for Health Information Technology (HIT) efforts. Tycho Medicaid has elected to participate in the Electronic Health Record (EHR) Provider Incentive Payment Program funded through CMS. In accordance with Federal regulations, Tycho, requests enhanced Federal Financial Participation (FFP) from the CMS through this Implementation Advance Planning Document Update #9 (IAPDU#9). The State Medicaid Health Information Technology Plan (SMHP) was approved by CMS in March 2017, and is currently being updated for submission in June 2022.</p>\n<p>The original IAPD request supported the first phase of the Station''s participation in the development and expansion of the use of EHR and collaboration among state entities in a Health Information Exchange (HIE) network. In the first phase, Tycho implemented the system changes necessary to support the Tycho EHR Provider Incentive Payment Program as well as the administrative supports necessary for implementation and operation of this program.&nbsp;</p>\n<ol>\n<li>The first IAPDU requested additional support for the EHR Provider Incentive Payment Program and additional project support.</li>\n<li>The second IAPDU requested funding for the Division of Senior and Disabilities Services (DSDS) Automated Service Plan (ASP) system, supporting expanded use of EHRs.</li>\n<li>The third IAPDU requested additional and continued support of HIT initiatives.</li>\n</ol>\n<p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>\n<p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
-    narrativeHIT:
-      '<p><span style="font-size: 18px;"><strong><ins>Continued Operations of the Medicaid EHR Incentive Payment Program</ins></strong></span></p>\n<p><span style="font-size: 18px;">Participate in the CMS EHR incentive program and continue to administer payments to EPs and EHs through the remaining years of the program (2023).</span></p>',
-    narrativeHIE:
-      "<p>Tycho''s existing health information infrastructure consists of various organizations operating at the enterprise, local, regional and state levels, and includes:</p>\n<ul>\n<li>Health systems, affiliated providers, and ancillary services;</li>\n<li>State agencies health data repositories;</li>\n<li>Specialized participants that operate for specific purposes including, but not limited to, laboratory services, radiology, public health, research and quality assessment;</li>\n<li>Information and service providers that operate in vertical markets such as e-Prescribing, State registries, Medicaid and Medicare;</li>\n<li>Private payers and clearinghouses that transmit administrative data for claims purposes and for pay for performance programs.</li>\n</ul>\n<p>The Tycho HIE has planned to implement a robust public health modernization plan which includes the development of specialized registries and interfaces to the HIE to significantly increase the ability for EPs and EHs to achieve meaningful use. Additionally, plans to collect CQM data and the creation of a Personal Health Record (PHR) has been identified as activities to complete.</p>\n<p></p>\n<p>Payers/Providers must complete a participation agreement form and possible addendum to participate in the HIE and other services. Governance for the HIE has been defined by the State statute, any related regulations and by the HIE board of directors.</p>\n<p></p>\n<p>Appropriate cost allocation is a fundamental principle of the federal FFP program to ensure that private sector beneficiaries of public investments are covering the incremental cost of their use. A sustainability plan for proportional investments by other payers/providers than Medicaid was developed in concert with the Tycho HIE Board of Directors and a broad cross-section of stakeholders under the leadership of the Tycho HIE Executive Director and State HIT Coordinator. The Tycho HIEâs fee structure and detailed participation agreements can be viewed at: tychoMedicaid.com</p>",
-    narrativeMMIS:
-      "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>\n<p>Currently, Tycho does not have an All-Payersâ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>"
-  },
-  keyStatePersonnel: {
-    medicaidDirector: {
-      name: 'Cornelius Fudge',
-      email: 'c.fudge@ministry.magic',
-      phone: '5551234567'
-    },
-    medicaidOffice: {
-      address1: '100 Round Sq',
-      address2: '',
-      city: 'Cityville',
-      state: 'AK',
-      zip: '12345'
-    },
-    keyPersonnel: [
-      {
-        name: 'James Holden',
-        position: 'HIT Coordinator',
-        email: 'JimPushesButtons@tycho.com',
-        isPrimary: true,
-        fte: { 2022: 1, 2023: 1 },
-        hasCosts: true,
-        costs: { 2022: 100000, 2023: 100000 }
-      },
-      {
-        name: 'Fred Johnson',
-        position: 'Project Management Office Director',
-        email: 'FJohnson@tycho.com',
-        isPrimary: false,
-        fte: { 2022: 0.3, 2023: 0.3 },
-        hasCosts: false,
-        costs: { 2022: 0, 2023: 0 }
-      }
-    ]
-  },
-  previousActivities: {
-    previousActivitySummary:
-      '<p><span style="font-size: 18px;"><strong><ins>EHR Incentive Payment Program</ins></strong></span></p>\n<p>As of May 31, 2018, the state has disbursed $22,145,454 to 1200Eligible Professionals (EPs) and $19,884,887 to 32 Eligible Hospitals (EHs) for Adopt/Implement/Upgrade (AIU) incentive payments and $25,454,444 for 1988 EP Meaningful Use (MU) Incentive payments and $19,444,444 for 98 EH MU Incentive payments. Tycho has anticipated payments for the remainder of FFY19 through FFY20 to be approximately $98,888,555.</p>\n<p></p>\n<p>Tycho has updated the SMHP, and CMS has approved, to reflect the changes such as the auditing contract, the Stateâs audit strategy, and alignment with the Stage 3 Final Rule. This IAPDU #6 includes updated costs for existing project and EHR Incentive Payment Program administration, as well as several new initiatives. The SMHP will continue to be aligned with CMS rule changes and the IAPDU requests. All planning activities approved under the PAPD have been completed. Table 1 below identifies the approved amounts from the PAPD and the expenses available in the stateâs accounting system. The PAPD previously approved was requested to be closed out to the HIT IAPD in March 2011; the remaining balance was carried over to the approved IAPD at that time to complete planning activities related to MU.</p>\n<p></p>\n<p>IAPD Funding Milestones and Expenditures</p>\n<p>The first IAPDU which was approved by CMS in October 2012 requested funding for HIT initiatives. The primary focus of the activities in the IAPDU # 2, which was approved in April 2013 was support of MU Stage 1, preparation for MU Stage 2, and the ongoing administration of the EHR Incentive Payment program. Subsequent IAPD submissions requested continued funding to support program operations and modernization of enterprise systems.</p>\n<p></p>\n<p>Tycho recently transitioned to a new state-wide financial system and it would be overly burdensome and a manual process to detail expenses out in the method done in previous HITECH IAPD submissions. Tycho has elected to report expenditures based on the CMS-64 line reporting for HITECH as this will be the most audible method due to the stateâs transition to a new financial system.</p>\n<p>Detailed List of Expenditure Types:</p>\n<ul>\n<li>State personnel</li>\n<li>Travel and conferences: CMS Regional Meeting, attendance at local/Anchorage-based conferences to support EHR Incentive Program and Meaningful Use, and other HIT/HIE related conferences such as StateHealth IT Connect, IT Solutions Management (ISM) annual conference</li>\n<li>Contract payments for State Level Registry solution</li>\n<li>Contract payments for post-payment audits for the Medicaid EHR Incentive Program</li>\n<li>Contract payments for Technical Assistance for EHR Incentive Program and other HITECH activities identified in HITECH IAPD</li>\n<li>Contract payments for MITA 3.0 COTS solution as outlined in HITECH IAPD to support the development of a HITECH MITA 3.0 State Self-Assessment</li>\n<li>Administrative costs: copy paper, office supplies</li>\n</ul>',
-    actualExpenditures: {
-      2019: {
-        hithie: { federalActual: 140000, totalApproved: 280000 },
-        mmis: {
-          50: { federalActual: 23445, totalApproved: 82545 },
-          75: { federalActual: 23440, totalApproved: 75340 },
-          90: { federalActual: 235720, totalApproved: 262460 }
-        }
-      },
-      2020: {
-        hithie: { federalActual: 146346, totalApproved: 234526 },
-        mmis: {
-          50: { federalActual: 129387, totalApproved: 375445 },
-          75: { federalActual: 413246, totalApproved: 654455 },
-          90: { federalActual: 614544, totalApproved: 863455 }
-        }
-      },
-      2021: {
-        hithie: { federalActual: 320000, totalApproved: 540000 },
-        mmis: {
-          50: { federalActual: 0, totalApproved: 0 },
-          75: { federalActual: 0, totalApproved: 0 },
-          90: { federalActual: 0, totalApproved: 0 }
-        }
-      }
-    }
-  },
-  activities: [],
-  proposedBudget: {
-    incentivePayments: {
-      ehAmt: {
-        2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
-      },
-      ehCt: {
-        2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
-      },
-      epAmt: {
-        2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
-      },
-      epCt: {
-        2022: { 1: 0, 2: 0, 3: 0, 4: 0 },
-        2023: { 1: 0, 2: 0, 3: 0, 4: 0 }
-      }
-    }
-  },
-  assurancesAndCompliances: {
-    procurement: [
-      {
-        title: '42 CFR Part 495.348',
-        checked: true,
-        explanation: ''
-      },
-      { title: 'SMM Section 11267', checked: true, explanation: '' },
-      {
-        title: '45 CFR 95.613',
-        checked: true,
-        explanation: ''
-      },
-      { title: '45 CFR 75.326', checked: true, explanation: '' }
-    ],
-    recordsAccess: [
-      {
-        title: '42 CFR Part 495.350',
-        checked: true,
-        explanation: ''
-      },
-      { title: '42 CFR Part 495.352', checked: true, explanation: '' },
-      {
-        title: '42 CFR Part 495.346',
-        checked: true,
-        explanation: ''
-      },
-      {
-        title: '42 CFR 433.112(b)',
-        checked: true,
-        explanation: ''
-      },
-      { title: '45 CFR Part 95.615', checked: true, explanation: '' },
-      {
-        title: 'SMM Section 11267',
-        checked: true,
-        explanation: ''
-      }
-    ],
-    softwareRights: [
-      {
-        title: '42 CFR 495.360',
-        checked: false,
-        explanation:
-          'We were able to get better pricing if we allowed the vendor to maintain ownership of the product they developed.'
-      },
-      { title: '45 CFR 95.617', checked: true, explanation: '' },
-      {
-        title: '42 CFR Part 431.300',
-        checked: true,
-        explanation: ''
-      },
-      { title: '42 CFR Part 433.112', checked: true, explanation: '' }
-    ],
-    security: [
-      {
-        title: '45 CFR 164 Security and Privacy',
-        checked: true,
-        explanation: ''
-      }
-    ]
-  }
-};
-
-const data = [
-  {
-    stateId: 'ak',
-    status: 'draft',
-    ...akAPD
-  },
-  {
-    stateId: 'ak',
-    status: 'draft',
-    ...akAPDNoActivities
-  }
-];
-
-module.exports = {
-  data,
-  akAPD,
-  akAPDNoActivities
-};
+export default akAPD;

@@ -54,15 +54,7 @@ class BudgetPage {
       .find(':selected')
       .should('have.value', '0-100');
 
-    cy.get('[data-cy="cost-allocation-dropdown"]').blur();
-
-    cy.get('[data-cy="cost-allocation-dropdown"]').next();
-    cy.contains('Select a federal-state split.').should('exist');
-
     cy.get('[data-cy="cost-allocation-dropdown"]').select('90-10');
-    cy.get('[data-cy="cost-allocation-dropdown"]').blur();
-
-    cy.contains('Select a federal-state split.').should('not.exist');
   };
 
   checkCostSplitTable = ({

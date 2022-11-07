@@ -11,6 +11,8 @@ jest.mock('react-router-dom', () => ({
   useRouteMatch: jest.fn()
 }));
 
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
+
 const setup = (options = {}) => {
   jest
     .spyOn(Router, 'useRouteMatch')
@@ -53,6 +55,10 @@ const setup = (options = {}) => {
 };
 
 describe('<ApdPageRoutes /> component', () => {
+  beforeEach(() => {
+    resetLDMocks();
+    mockFlags({ adminCheckFlag: true });
+  });
   it('redirects on /apd/0123456789abcdef01234567', () => {
     setup({
       initialHistory: ['/apd/0123456789abcdef01234567']

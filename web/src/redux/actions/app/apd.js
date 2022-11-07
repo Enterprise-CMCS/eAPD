@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import { deepCopy, hasBudgetUpdate } from '@cms-eapd/common/utils/utils';
+import { hasBudgetUpdate } from '@cms-eapd/common/utils/utils';
 
 import {
   CREATE_APD_FAILURE,
@@ -18,7 +18,9 @@ import {
   SELECT_APD_REQUEST,
   SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD,
-  ADMIN_CHECK_TOGGLE
+  ADMIN_CHECK_TOGGLE,
+  ADMIN_CHECK_COLLAPSE_TOGGLE,
+  ADMIN_CHECK_COMPLETE_TOGGLE
 } from './symbols';
 import { loadBudget } from '../budget';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
@@ -63,10 +65,12 @@ export const saveApd = () => (dispatch, getState) => {
     return axios
       .patch(`/apds/${apdID}`, patches)
       .then(res => {
-        const budget = deepCopy(res.data.apd.budget);
-        delete res.data.apd.budget;
+        const budget = (res.data.budget ??= {});
 
-        dispatch({ type: SAVE_APD_SUCCESS, apd: res.data.apd });
+        dispatch({
+          type: SAVE_APD_SUCCESS,
+          data: { apd: res.data.apd, adminCheck: res.data.adminCheck }
+        });
         if (hasBudgetUpdate(patches)) {
           dispatch(loadBudget(budget));
         }
@@ -100,19 +104,22 @@ export const selectApd =
     return axios
       .get(`/apds/${id}`)
       .then(res => {
-        const budget = deepCopy(res.data.budget);
-        delete res.data.budget;
+        const budget = (res.data.budget ??= {});
 
-        dispatch({ type: SELECT_APD_SUCCESS, apd: res.data });
+        dispatch({
+          type: SELECT_APD_SUCCESS,
+          data: { apd: res.data.apd, adminCheck: res.data.adminCheck }
+        });
         dispatch({
           type: APD_ACTIVITIES_CHANGE,
-          activities: res.data.activities
+          activities: res.data.apd.activities
         });
+        dispatch({ type: ADMIN_CHECK_TOGGLE, data: false });
 
         // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
         // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
         // values using an EDIT_APD action. That way the initial values get saved back to the API.
-        if (Object.keys(res.data.assurancesAndCompliances).length === 0) {
+        if (Object.keys(res.data.apd.assurancesAndCompliances).length === 0) {
           dispatch({
             type: EDIT_APD,
             path: '/assurancesAndCompliances',
@@ -219,5 +226,15 @@ export const deleteApd =
 // eslint-disable-next-line react/display-name
 export const toggleAdminCheck = value => dispatch => {
   dispatch({ type: ADMIN_CHECK_TOGGLE, data: value });
+  return null;
+};
+// eslint-disable-next-line react/display-name
+export const toggleMiniCheck = value => dispatch => {
+  dispatch({ type: ADMIN_CHECK_COLLAPSE_TOGGLE, data: value });
+  return null;
+};
+// eslint-disable-next-line react/display-name
+export const toggleAdminCheckComplete = value => dispatch => {
+  dispatch({ type: ADMIN_CHECK_COMPLETE_TOGGLE, data: value });
   return null;
 };

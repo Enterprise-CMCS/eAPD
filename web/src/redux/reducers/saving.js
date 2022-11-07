@@ -22,14 +22,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: false,
-        lastSaved: new Date(action.apd.updated).toLocaleString(),
+        lastSaved: new Date(action.data.apd.updated).toLocaleString(),
         saving: false
       };
     case SELECT_APD_SUCCESS:
       return {
         ...state,
         error: false,
-        lastSaved: new Date(action.apd.updated).toLocaleString(),
+        lastSaved: new Date(action.data.apd.updated).toLocaleString(),
         saving: false
       };
     default:
