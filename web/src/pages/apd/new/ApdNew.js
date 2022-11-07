@@ -9,8 +9,7 @@ import {
   Button,
   ChoiceList,
   TextField,
-  Tooltip,
-  TooltipIcon
+  Tooltip
 } from '@cmsgov/design-system';
 import TextArea from '../../../components/TextArea';
 import { createApd } from '../../../redux/actions/app';
