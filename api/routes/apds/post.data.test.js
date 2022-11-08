@@ -220,6 +220,7 @@ tap.test('APD data initializer', async apdTests => {
 
     test.same(output, {
       name: 'MMIS IAPD',
+      apdOverview: {},
       years: ['1997', '1998'],
       yearOptions: ['1997', '1998', '1999'],
       keyStatePersonnel: {
@@ -269,6 +270,7 @@ tap.test('APD data initializer', async apdTests => {
         }
       },
       activities: [],
+      // TODO this will change once the Assurances and Compliances designs are done
       assurancesAndCompliances: {
         procurement: [
           { title: '42 CFR Part 495.348', checked: null, explanation: '' },

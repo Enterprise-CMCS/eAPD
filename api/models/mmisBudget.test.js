@@ -1,17 +1,12 @@
 const tap = require('tap');
-const { calculateBudget } = require('@cms-eapd/common');
+const { calculateBudget, APD_TYPE } = require('@cms-eapd/common');
 
 const { setup, teardown } = require('../db/mongodb');
-const { APD, Budget } = require('./index');
-const {
-  hitech: apd,
-  hitechNoActivities: apdNoActivities
-} = require('../seeds/development/apds');
+const { MMIS, MMISBudget } = require('./index');
+const { mmis, mmisNoActivities } = require('../seeds/development/apds');
 
 let apdId;
 let budgetId;
-delete apd.__t; // eslint-disable-line no-underscore-dangle
-delete apdNoActivities.__t; // eslint-disable-line no-underscore-dangle
 
 tap.test('Budget model test', async t => {
   t.before(async () => {
@@ -19,27 +14,27 @@ tap.test('Budget model test', async t => {
   });
 
   t.beforeEach(async () => {
-    const budget = await Budget.create(calculateBudget(apd));
+    const budget = await MMISBudget.create(calculateBudget(mmis));
     // eslint-disable-next-line no-underscore-dangle
     budgetId = budget._id.toString();
-    const { _id: apdObjId } = await APD.create({
+    const { _id: apdObjId } = await MMIS.create({
       status: 'draft',
       stateId: 'md',
-      ...apd,
+      ...mmis,
       budget
     });
     apdId = apdObjId.toString();
   });
 
-  t.test('get Budget from APD', async test => {
-    const found = await APD.findOne({ _id: apdId });
+  t.test('get Budget from MMIS', async test => {
+    const found = await MMIS.findOne({ _id: apdId });
     test.ok(!!found.budget, 'Found the Budget that was just added to the APD');
-    test.ok(!found.__t, 'Budget is not HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
+    test.ok(found.__t === APD_TYPE.MMIS, 'Budget is MMIS'); // eslint-disable-line no-underscore-dangle
     test.equal(found.budget.toString(), budgetId, 'Budget Id was retrieved');
   });
 
-  t.test('get populated Budget from APD', async test => {
-    const found = await APD.findOne({ _id: apdId }).populate('budget');
+  t.test('get populated Budget from MMIS', async test => {
+    const found = await MMIS.findOne({ _id: apdId }).populate('budget');
 
     test.ok(!!found.budget, 'Found the Budget that was just added to the APD');
     // eslint-disable-next-line no-underscore-dangle
@@ -47,13 +42,13 @@ tap.test('Budget model test', async t => {
   });
 
   t.test('recalculate budget', async test => {
-    const newBudget = calculateBudget(apdNoActivities);
+    const newBudget = calculateBudget(mmisNoActivities);
 
-    await Budget.replaceOne({ _id: budgetId }, newBudget, {
+    await MMISBudget.replaceOne({ _id: budgetId }, newBudget, {
       multipleCastError: true,
       runValidators: true
     });
-    const updatedBudget = await Budget.findOne({ _id: budgetId }).lean();
+    const updatedBudget = await MMISBudget.findOne({ _id: budgetId }).lean();
     delete updatedBudget._id; // eslint-disable-line no-underscore-dangle
     delete updatedBudget.__t; // eslint-disable-line no-underscore-dangle
 
@@ -61,8 +56,8 @@ tap.test('Budget model test', async t => {
   });
 
   t.afterEach(async () => {
-    await APD.deleteOne({ _id: apdId });
-    await Budget.deleteOne({ _id: budgetId });
+    await MMIS.deleteOne({ _id: apdId });
+    await MMISBudget.deleteOne({ _id: budgetId });
   });
 
   t.teardown(async () => {

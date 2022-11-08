@@ -36,6 +36,7 @@ const getNewMmisApd = () => {
 
   return {
     name: 'MMIS IAPD',
+    apdOverview: {},
     statePriortiesAndScope: {
       medicaidProgramAndPriorities: '',
       mesIntroduction: '',

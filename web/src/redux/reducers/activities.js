@@ -174,6 +174,10 @@ const newMmisActivity = ({
     expenses: [],
     contractorResources: [],
     costAllocation: arrToObj(years, costAllocationEntry()),
-    years
+    quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
+    years,
+    meta: {
+      expanded: false
+    }
   };
 };

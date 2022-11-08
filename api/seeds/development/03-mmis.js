@@ -136,7 +136,19 @@ module.exports = {
           milestone: 'Environmental Scan Completion'
         }
       ],
-      outcomes: [],
+      outcomes: [
+        {
+          outcome:
+            'Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.',
+          metrics: [
+            {
+              metric:
+                'Hire contracted support to build an open API for the DW that the HIE and PHR can consume.'
+            },
+            { metric: 'Provide support for using open API for DW' }
+          ]
+        }
+      ],
       statePersonnel: [],
       expenses: [
         {

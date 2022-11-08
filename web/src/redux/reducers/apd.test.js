@@ -1,3 +1,4 @@
+import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 import { RESET, SELECT_APD_SUCCESS } from '../actions/app/symbols';
 
 // The Hubble Space Telescope was launched on the space shuttle Discovery on
@@ -857,11 +858,12 @@ describe('APD reducer', () => {
       });
     });
 
-    it('should add a new activity', () => {
+    it('should add a new HITECH activity', () => {
       const state = {
         data: {
           activities: [],
-          years: ['1787']
+          years: ['1787'],
+          apdType: APD_TYPE.HITECH
         }
       };
 
@@ -918,6 +920,75 @@ describe('APD reducer', () => {
               years: ['1787']
             }
           ],
+          apdType: APD_TYPE.HITECH,
+          years: ['1787']
+        }
+      });
+    });
+
+    it('should add a new MMIS activity', () => {
+      const state = {
+        data: {
+          activities: [],
+          years: ['1787'],
+          apdType: APD_TYPE.MMIS
+        }
+      };
+
+      expect(
+        apd(state, {
+          type: ADD_APD_ITEM,
+          path: '/activities/-',
+          key: '1234abcd'
+        })
+      ).toEqual({
+        data: {
+          activities: [
+            {
+              key: '1234abcd',
+              activityId: '1234abcd',
+              name: '',
+              activityOverview: {
+                activitySnapshot: '',
+                problemStatement: '',
+                proposedSolution: ''
+              },
+              activitySchedule: {
+                plannedStartDate: '',
+                plannedEndDate: ''
+              },
+              analysisOfAlternativesAndRisks: {
+                alternativeAnalysis: '',
+                costBenefitAnalysis: '',
+                feasibilityStudy: '',
+                requirementsAnalysis: '',
+                forseeableRisks: ''
+              },
+              conditionsForEnhancedFunding: {
+                enhancedFundingQualification: null,
+                enhancedFundingJustification: ''
+              },
+              milestones: [],
+              outcomes: [],
+              statePersonnel: [],
+              expenses: [],
+              contractorResources: [],
+              costAllocation: {
+                1787: { ffp: { federal: 0, state: 100 }, other: 0 }
+              },
+              quarterlyFFP: {
+                1787: {
+                  1: { combined: 25, contractors: 25, inHouse: 25 },
+                  2: { combined: 25, contractors: 25, inHouse: 25 },
+                  3: { combined: 25, contractors: 25, inHouse: 25 },
+                  4: { combined: 25, contractors: 25, inHouse: 25 }
+                }
+              },
+              meta: { expanded: false },
+              years: ['1787']
+            }
+          ],
+          apdType: APD_TYPE.MMIS,
           years: ['1787']
         }
       });

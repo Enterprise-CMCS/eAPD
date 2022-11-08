@@ -779,22 +779,31 @@ export const sumShareCostsForFundingSource = ({
   const updatedBudget = deepCopy(budget);
   if (budget && year && costCategoryShare && totalMedicaidCostShares) {
     // Update the three cost categories for the funding source
-    if (fundingSource) {
+    if (
+      fundingSource &&
+      updatedBudget?.[fundingSource] !== undefined &&
+      typeof updatedBudget?.[fundingSource] === 'object'
+    ) {
       ['contractors', 'expenses', 'statePersonnel'].forEach(category => {
-        updatedBudget[fundingSource][category][year].federal +=
-          costCategoryShare.fedShare[category];
-        updatedBudget[fundingSource][category].total.federal +=
-          costCategoryShare.fedShare[category];
+        if (
+          updatedBudget?.[fundingSource]?.[category] !== undefined &&
+          typeof updatedBudget?.[fundingSource]?.[category] === 'object'
+        ) {
+          updatedBudget[fundingSource][category][year].federal +=
+            costCategoryShare.fedShare[category];
+          updatedBudget[fundingSource][category].total.federal +=
+            costCategoryShare.fedShare[category];
 
-        updatedBudget[fundingSource][category][year].state +=
-          costCategoryShare.stateShare[category];
-        updatedBudget[fundingSource][category].total.state +=
-          costCategoryShare.stateShare[category];
+          updatedBudget[fundingSource][category][year].state +=
+            costCategoryShare.stateShare[category];
+          updatedBudget[fundingSource][category].total.state +=
+            costCategoryShare.stateShare[category];
 
-        updatedBudget[fundingSource][category][year].medicaid +=
-          costCategoryShare.medicaidShare[category];
-        updatedBudget[fundingSource][category].total.medicaid +=
-          costCategoryShare.medicaidShare[category];
+          updatedBudget[fundingSource][category][year].medicaid +=
+            costCategoryShare.medicaidShare[category];
+          updatedBudget[fundingSource][category].total.medicaid +=
+            costCategoryShare.medicaidShare[category];
+        }
       });
 
       // Plus the subtotals for the cost categories (i.e., the Medicaid share)
@@ -1309,14 +1318,18 @@ export const calculateQuarterlyCosts = ({
           quarterlyInfo
         });
 
-      updatedBudget.federalShareByFFYQuarter[ffpSource] = sumQuarterlyFFP({
-        quarterlyFFP: updatedBudget.federalShareByFFYQuarter[ffpSource],
-        fundingSource,
-        fedShareAmount,
-        category,
-        year,
-        quarterlyInfo
-      });
+      if (
+        updatedBudget?.federalShareByFFYQuarter?.[ffpSource] !== undefined &&
+        typeof updatedBudget?.federalShareByFFYQuarter?.[ffpSource] === 'object'
+      )
+        updatedBudget.federalShareByFFYQuarter[ffpSource] = sumQuarterlyFFP({
+          quarterlyFFP: updatedBudget.federalShareByFFYQuarter[ffpSource],
+          fundingSource,
+          fedShareAmount,
+          category,
+          year,
+          quarterlyInfo
+        });
     });
   }
   return updatedBudget;

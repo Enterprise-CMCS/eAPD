@@ -6,14 +6,6 @@ describe('budget reducer', () => {
   const initialState = {
     activities: {},
     combined: { total: { total: 0, medicaid: 0, federal: 0, state: 0 } },
-    federalShareByFFYQuarter: {},
-    mmisByFFP: {
-      '50-50': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
-      '75-25': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
-      '90-10': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
-      '0-100': { total: { medicaid: 0, federal: 0, state: 0, total: 0 } },
-      combined: { total: { medicaid: 0, federal: 0, state: 0, total: 0 } }
-    },
     activityTotals: [],
     years: []
   };

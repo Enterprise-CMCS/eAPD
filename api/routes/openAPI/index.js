@@ -59,7 +59,7 @@ module.exports = {
   },
   components: {
     schemas: {
-      apd: {
+      hitech: {
         type: 'object',
         properties: {
           id: {
@@ -104,9 +104,15 @@ module.exports = {
                 type: 'object',
                 description: 'APD update status and type',
                 properties: {
-                  isUpdateAPD: 'boolean',
-                  annualUpdate: 'boolean',
-                  asNeededUpdate: 'boolean'
+                  isUpdateAPD: {
+                    type: 'boolean'
+                  },
+                  annualUpdate: {
+                    type: 'boolean'
+                  },
+                  asNeededUpdate: {
+                    type: 'boolean'
+                  }
                 }
               },
               programOverview: {
@@ -251,33 +257,48 @@ module.exports = {
                         description: 'HIT-funded expenses',
                         properties: {
                           50: {
-                            federalActual: {
-                              type: 'number',
-                              description: 'Total federal share actually spent'
-                            },
-                            totalApproved: {
-                              type: 'number',
-                              description: 'Total approved in the previous APD'
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
                             }
                           },
                           75: {
-                            federalActual: {
-                              type: 'number',
-                              description: 'Total federal share actually spent'
-                            },
-                            totalApproved: {
-                              type: 'number',
-                              description: 'Total approved in the previous APD'
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
                             }
                           },
                           90: {
-                            federalActual: {
-                              type: 'number',
-                              description: 'Total federal share actually spent'
-                            },
-                            totalApproved: {
-                              type: 'number',
-                              description: 'Total approved in the previous APD'
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
                             }
                           }
                         }
@@ -356,7 +377,6 @@ module.exports = {
                   }
                 }
               },
-
               milestones: arrayOf({
                 type: 'object',
                 description: 'Activity milestone item',
@@ -1120,6 +1140,1013 @@ module.exports = {
                 }
               },
               hitAndHie: {
+                type: 'object',
+                properties: {
+                  statePersonnel: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  contractors: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  expenses: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  combined: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              mmisByFFP: {
+                properties: {
+                  '90-10': {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^([0-9]{4}|total)$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  '75-25': {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^([0-9]{4}|total)$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  '50-50': {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^([0-9]{4}|total)$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  '0-100': {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^([0-9]{4}|total)$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  combined: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^([0-9]{4}|total)$': {
+                        type: 'object',
+                        properties: {
+                          total: {
+                            type: 'number'
+                          },
+                          federal: {
+                            type: 'number'
+                          },
+                          medicaid: {
+                            type: 'number'
+                          },
+                          state: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              combined: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              activityTotals: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    id: {
+                      type: 'string'
+                    },
+                    name: {
+                      type: 'string'
+                    },
+                    fundingSource: {
+                      type: 'string'
+                    },
+                    data: {
+                      type: 'object',
+                      properties: {
+                        combined: {
+                          type: 'object',
+                          'x-patternProperties': {
+                            '^([0-9]{4}|total)$': {
+                              type: 'number'
+                            }
+                          }
+                        },
+                        contractors: {
+                          type: 'object',
+                          'x-patternProperties': {
+                            '^([0-9]{4}|total)$': {
+                              type: 'number'
+                            }
+                          }
+                        },
+                        expenses: {
+                          type: 'object',
+                          'x-patternProperties': {
+                            '^([0-9]{4}|total)$': {
+                              type: 'number'
+                            }
+                          }
+                        },
+                        statePersonnel: {
+                          type: 'object',
+                          'x-patternProperties': {
+                            '^([0-9]{4}|total)$': {
+                              type: 'number'
+                            }
+                          }
+                        },
+                        otherFunding: {
+                          type: 'object',
+                          'x-patternProperties': {
+                            '^[0-9]{4}$': {
+                              type: 'object',
+                              properties: {
+                                contractors: {
+                                  type: 'number'
+                                },
+                                expenses: {
+                                  type: 'number'
+                                },
+                                statePersonnel: {
+                                  type: 'number'
+                                },
+                                total: {
+                                  type: 'number'
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              activities: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9a-zA-Z]{24}$': {
+                    $ref: 'activities.json'
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      mmis: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'number',
+            description: 'APD ID'
+          },
+          created: {
+            type: 'string',
+            format: 'date-time',
+            description: 'Timestamp of when this APD was created'
+          },
+          updated: {
+            type: 'string',
+            format: 'date-time',
+            description: 'Timestamp of the last save to this APD'
+          },
+          status: {
+            type: 'string',
+            description: 'Status'
+          },
+          state: {
+            type: 'string',
+            description:
+              'Two-letter ID of the state, territory, or district this APD belongs to, lowercase'
+          },
+          name: {
+            type: 'string',
+            description:
+              'The APD document name, following SEA naming conventions'
+          },
+          years: arrayOf({
+            type: 'string'
+          }),
+          yearOptions: arrayOf({
+            type: 'string'
+          }),
+          apdOverview: {
+            type: 'object',
+            description: 'APD Overview section',
+            properties: {
+              updateStatus: {
+                type: 'object',
+                description: 'APD update status and type',
+                properties: {
+                  isUpdateAPD: {
+                    type: 'boolean'
+                  },
+                  annualUpdate: {
+                    type: 'boolean'
+                  },
+                  asNeededUpdate: {
+                    type: 'boolean'
+                  }
+                }
+              },
+              medicaidBusinessAreas: {
+                type: 'object',
+                properties: {
+                  waiverSupportSystems: {
+                    type: 'boolean'
+                  },
+                  assetVerificationSystem: {
+                    type: 'boolean'
+                  },
+                  claimsProcessing: {
+                    type: 'boolean'
+                  },
+                  decisionSupportSystemDW: {
+                    type: 'boolean'
+                  },
+                  electronicVisitVerification: {
+                    type: 'boolean'
+                  },
+                  encounterProcessingSystemMCS: {
+                    type: 'boolean'
+                  },
+                  financialManagement: {
+                    type: 'boolean'
+                  },
+                  healthInformationExchange: {
+                    type: 'boolean'
+                  },
+                  longTermServicesSupports: {
+                    type: 'boolean'
+                  },
+                  memberManagement: {
+                    type: 'boolean'
+                  },
+                  pharmacyBenefitManagementPOS: {
+                    type: 'boolean'
+                  },
+                  programIntegrity: {
+                    type: 'boolean'
+                  },
+                  providerManagement: {
+                    type: 'boolean'
+                  },
+                  thirdPartyLiability: {
+                    type: 'boolean'
+                  },
+                  other: {
+                    type: 'boolean'
+                  },
+                  otherMedicaidBusinessAreas: {
+                    type: 'string'
+                  }
+                }
+              }
+            }
+          },
+          statePriortiesAndScope: {
+            type: 'object',
+            properties: {
+              medicaidProgramAndPriorities: {
+                type: 'string'
+              },
+              mesIntroduction: {
+                type: 'string'
+              },
+              scopeOfAPD: {
+                type: 'string'
+              }
+            }
+          },
+          keyStatePersonnel: {
+            type: 'object',
+            description: 'Key State Personnel section',
+            properties: {
+              medicaidDirector: {
+                type: 'object',
+                properties: {
+                  name: {
+                    type: 'string',
+                    description: `State Medicaid director's name`
+                  },
+                  email: {
+                    type: 'string',
+                    description: `State Medicaid director's email address`
+                  },
+                  phone: {
+                    type: 'string',
+                    description: `State Medicaid director's phone number`
+                  }
+                }
+              },
+              medicaidOffice: {
+                type: 'object',
+                properties: {
+                  address1: {
+                    type: 'string',
+                    description: 'State Medicaid office address'
+                  },
+                  address2: {
+                    type: 'string',
+                    description: 'State Medicaid office address'
+                  },
+                  city: {
+                    type: 'string',
+                    description: 'State Medicaid office address city'
+                  },
+                  state: {
+                    type: 'string',
+                    description: 'State Medicaid office address state'
+                  },
+                  zip: {
+                    type: 'string',
+                    description: 'State Medicaid office address ZIP code'
+                  }
+                }
+              },
+              keyPersonnel: arrayOf({
+                type: 'object',
+                properties: {
+                  costs: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'number',
+                        description: `Person's cost for the year described by the property name`
+                      }
+                    }
+                  },
+                  email: {
+                    type: 'string',
+                    description: `Person's email address`
+                  },
+                  hasCosts: {
+                    type: 'boolean',
+                    description:
+                      'Whether the person has costs attributable to the project'
+                  },
+                  isPrimary: {
+                    type: 'boolean',
+                    description:
+                      'Whether the person is the primary point of contact for the APD'
+                  },
+                  name: { type: 'string', description: `Person's name` },
+                  fte: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{0,2}': {
+                        type: 'number',
+                        description: `FTE equivalent of this person's time dedicated to the project`
+                      }
+                    }
+                  },
+                  position: { type: 'string', description: `Person's position` }
+                }
+              })
+            }
+          },
+          previousActivities: {
+            type: 'object',
+            description: 'Previous Activities section',
+            properties: {
+              previousActivitySummary: {
+                type: 'string',
+                description:
+                  'High-level outline of activities approved in previous APD'
+              },
+              actualExpenditures: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      mmis: {
+                        type: 'object',
+                        description: 'MMIS-funded expenses',
+                        properties: {
+                          50: {
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
+                            }
+                          },
+                          75: {
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
+                            }
+                          },
+                          90: {
+                            type: 'object',
+                            properties: {
+                              federalActual: {
+                                type: 'number',
+                                description:
+                                  'Total federal share actually spent'
+                              },
+                              totalApproved: {
+                                type: 'number',
+                                description:
+                                  'Total approved in the previous APD'
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          activities: arrayOf({
+            type: 'object',
+            properties: {
+              activityId: {
+                type: 'string',
+                description: 'Key for Activity'
+              },
+              name: {
+                type: 'string',
+                description: 'Activity name, unique within an APD'
+              },
+              activityOverview: {
+                type: 'object',
+                properties: {
+                  activitySnapshot: {
+                    type: 'string'
+                  },
+                  problemStatement: {
+                    type: 'string'
+                  },
+                  proposedSolution: {
+                    type: 'string'
+                  }
+                }
+              },
+              analysisOfAlternativesAndRisks: {
+                type: 'object',
+                properties: {
+                  alternativeAnalysis: {
+                    type: 'boolean'
+                  },
+                  costBenefitAnalysis: {
+                    type: 'boolean'
+                  },
+                  feasibilityStudy: {
+                    type: 'boolean'
+                  },
+                  requirementsAnalysis: {
+                    type: 'boolean'
+                  },
+                  forseeableRisks: {
+                    type: 'boolean'
+                  }
+                }
+              },
+              conditionsForEnhancedFunding: {
+                type: 'object',
+                properties: {
+                  enhancedFundingQualification: {
+                    type: 'boolean'
+                  },
+                  enhancedFundingJustification: {
+                    type: 'string'
+                  }
+                }
+              },
+              activitySchedule: {
+                type: 'object',
+                description: 'The start and end date for the activity',
+                properties: {
+                  plannedStartDate: {
+                    type: 'string',
+                    format: 'date-time',
+                    description:
+                      'The date this activity is planned to be completed'
+                  },
+                  plannedEndDate: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'The date this activity is planned to begin'
+                  }
+                }
+              },
+              milestones: arrayOf({
+                type: 'object',
+                description: 'Activity milestone item',
+                properties: {
+                  endDate: {
+                    type: 'string',
+                    format: 'date-time',
+                    description: 'The date this milestone is planned to be met'
+                  },
+                  milestone: {
+                    type: 'string',
+                    description: 'The name of the milestone'
+                  }
+                }
+              }),
+              outcomes: arrayOf({
+                type: 'object',
+                description: 'Activity outcome',
+                properties: {
+                  metrics: arrayOf({
+                    type: 'object',
+                    properties: {
+                      metric: { type: 'string', description: 'metric' }
+                    }
+                  }),
+                  outcome: {
+                    type: 'string',
+                    description: 'Outcome description'
+                  }
+                }
+              }),
+              statePersonnel: arrayOf({
+                type: 'object',
+                properties: {
+                  title: {
+                    type: 'string',
+                    description: 'Title for the state personnel'
+                  },
+                  description: {
+                    type: 'string',
+                    description: 'Description of the role'
+                  },
+                  years: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          amt: {
+                            type: 'number',
+                            description: `State personnel's total cost for the federal fiscal year`
+                          },
+                          perc: {
+                            type: 'number',
+                            description:
+                              'Number of FTEs this state personnel will spend on the project for the federal fiscal year'
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }),
+              expenses: arrayOf({
+                type: 'object',
+                description: 'Activity expense',
+                properties: {
+                  category: {
+                    type: 'string',
+                    description:
+                      'Expense category, such as "Hardware, software, and licensing"'
+                  },
+                  description: {
+                    type: 'string',
+                    description: 'Short description of the expense'
+                  },
+                  years: {
+                    type: 'object',
+                    description: 'Expense entry',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'number',
+                        description:
+                          'Expense amount for the given federal fiscal year'
+                      }
+                    }
+                  }
+                }
+              }),
+              contractorResources: arrayOf({
+                type: 'object',
+                description: 'Activity contractor resource',
+                properties: {
+                  name: {
+                    type: 'string',
+                    description: 'Name of the contractor resource'
+                  },
+                  description: {
+                    type: 'string',
+                    description: 'Description'
+                  },
+                  hourly: {
+                    type: 'object',
+                    properties: {
+                      data: {
+                        'x-patternProperties': {
+                          '^[0-9]{4}$': {
+                            type: 'object',
+                            properties: {
+                              hours: {
+                                type: 'number',
+                                description:
+                                  'Number of hours the contractor is expected to work for the given federal fiscal year'
+                              },
+                              rate: {
+                                type: 'number',
+                                description:
+                                  'Contractor hourly rate for the given federal fiscal year'
+                              }
+                            }
+                          }
+                        }
+                      },
+                      useHourly: {
+                        type: 'boolean',
+                        description:
+                          'Whether to use hourly rates for this contractor'
+                      }
+                    }
+                  },
+                  start: {
+                    type: 'string',
+                    format: 'date-time',
+                    description:
+                      'When the contractor resource will begin work; date only'
+                  },
+                  end: {
+                    type: 'string',
+                    format: 'date-time',
+                    description:
+                      'When the contractor resource will end work; date only'
+                  },
+                  totalCost: {
+                    type: 'number',
+                    description: 'Contractor resource total cost'
+                  },
+                  years: {
+                    type: 'object',
+                    description:
+                      'Details of each year the contractor resource will be working',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'number',
+                        description: 'Contractor resource cost of the year'
+                      }
+                    }
+                  },
+                  costAllocation: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          ffp: {
+                            type: 'object',
+                            properties: {
+                              federal: {
+                                type: 'number',
+                                description:
+                                  'Federal share for this activity for this year, from 0 to 100'
+                              },
+                              state: {
+                                type: 'number',
+                                description:
+                                  'State share for this activity for this year, from 0 to 100'
+                              }
+                            }
+                          },
+                          other: {
+                            type: 'number',
+                            description:
+                              'Other amount (dollars) for this activity for this year'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  quarterlyFFP: {
+                    type: 'object',
+                    description:
+                      'Federal share of this activity cost, by expense type, per fiscal quarter',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        'x-patternProperties': {
+                          '^[1-4]$': {
+                            type: 'object',
+                            properties: {
+                              contractors: {
+                                type: 'number',
+                                description:
+                                  'Contractor costs for the given quarter of the given federal fiscal year'
+                              },
+                              inHouse: {
+                                type: 'number',
+                                description:
+                                  'In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year'
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              })
+            }
+          }),
+          assurancesAndCompliances: {
+            type: 'object',
+            description:
+              'Federal citations that states must assert compliance with. This is a free-form object.'
+          },
+          budget: {
+            type: 'object',
+            properties: {
+              years: arrayOf({
+                type: 'string'
+              }),
+              federalShareByFFYQuarter: {
+                type: 'object',
+                properties: {
+                  mmis: {
+                    type: 'object',
+                    properties: {
+                      years: {
+                        type: 'object',
+                        'x-patternProperties': {
+                          '^[0-9]{4}$': {
+                            type: 'object',
+                            properties: {
+                              1: {
+                                type: 'object',
+                                properties: {
+                                  inHouse: {
+                                    type: 'number'
+                                  },
+                                  contractors: {
+                                    type: 'number'
+                                  },
+                                  combined: {
+                                    type: 'number'
+                                  }
+                                }
+                              },
+                              2: {
+                                type: 'object',
+                                properties: {
+                                  inHouse: {
+                                    type: 'number'
+                                  },
+                                  contractors: {
+                                    type: 'number'
+                                  },
+                                  combined: {
+                                    type: 'number'
+                                  }
+                                }
+                              },
+                              3: {
+                                type: 'object',
+                                properties: {
+                                  inHouse: {
+                                    type: 'number'
+                                  },
+                                  contractors: {
+                                    type: 'number'
+                                  },
+                                  combined: {
+                                    type: 'number'
+                                  }
+                                }
+                              },
+                              4: {
+                                type: 'object',
+                                properties: {
+                                  inHouse: {
+                                    type: 'number'
+                                  },
+                                  contractors: {
+                                    type: 'number'
+                                  },
+                                  combined: {
+                                    type: 'number'
+                                  }
+                                }
+                              },
+                              subtotal: {
+                                type: 'object',
+                                properties: {
+                                  inHouse: {
+                                    type: 'number'
+                                  },
+                                  contractors: {
+                                    type: 'number'
+                                  },
+                                  combined: {
+                                    type: 'number'
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      total: {
+                        type: 'object',
+                        properties: {
+                          inHouse: {
+                            type: 'number'
+                          },
+                          contractors: {
+                            type: 'number'
+                          },
+                          combined: {
+                            type: 'number'
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              mmis: {
                 type: 'object',
                 properties: {
                   statePersonnel: {

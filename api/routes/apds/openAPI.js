@@ -51,7 +51,12 @@ const openAPI = {
       responses: {
         200: {
           description: 'The new APD',
-          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+          content: jsonResponse({
+            oneOf: [
+              { $ref: '#/components/schemas/hitech' },
+              { $ref: '#/components/schemas/mmis' }
+            ]
+          })
         }
       }
     }
@@ -77,7 +82,12 @@ const openAPI = {
       responses: {
         200: {
           description: 'The APD',
-          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+          content: jsonResponse({
+            oneOf: [
+              { $ref: '#/components/schemas/hitech' },
+              { $ref: '#/components/schemas/mmis' }
+            ]
+          })
         },
         403: {
           description: 'The apd ID does not match any known apds for the user'
@@ -133,7 +143,12 @@ const openAPI = {
       responses: {
         200: {
           description: 'The update was successful',
-          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+          content: jsonResponse({
+            oneOf: [
+              { $ref: '#/components/schemas/hitech' },
+              { $ref: '#/components/schemas/mmis' }
+            ]
+          })
         },
         400: {
           description: 'The update failed due to a problem with the input data',

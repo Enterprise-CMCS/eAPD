@@ -3,6 +3,7 @@
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission patch succeeds with an invalid date 1`] = `
 Object {
   "apd": Object {
+    "__t": "HITECH",
     "__v": 0,
     "_id": "eeac3c9865059f26eccb0600",
     "activities": Any<Array>,
@@ -33,6 +34,11 @@ Object {
 </ol>
 <p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>
 <p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
+      "updateStatus": Object {
+        "annualUpdate": false,
+        "asNeededUpdate": false,
+        "isUpdateAPD": false,
+      },
     },
     "assurancesAndCompliances": Object {
       "procurement": Array [
@@ -330,23 +336,17 @@ Object {
     "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
+    "yearOptions": Array [
+      "2022",
+      "2023",
+      "2024",
+    ],
     "years": Array [
       "2022",
       "2023",
     ],
   },
-  "errors": Object {
-    "/activities/0/plannedStartDate": Object {
-      "dataPath": "/activities/0/plannedStartDate",
-      "errorValue": "9999-99-99",
-      "kind": "date",
-      "message": "Cast to date failed for value \\"9999-99-99\\" (type string) at path \\"plannedStartDate\\"",
-      "name": "CastError",
-      "newValue": null,
-      "stringValue": "\\"9999-99-99\\"",
-      "valueType": "string",
-    },
-  },
+  "errors": Object {},
 }
 `;
 
@@ -357,6 +357,7 @@ exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permis
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a patch that creates an invalid APD 1`] = `
 Object {
   "apd": Object {
+    "__t": "HITECH",
     "__v": 0,
     "_id": "eeac3c9865059f26eccb0600",
     "activities": Any<Array>,
@@ -387,6 +388,11 @@ Object {
 </ol>
 <p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>
 <p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
+      "updateStatus": Object {
+        "annualUpdate": false,
+        "asNeededUpdate": false,
+        "isUpdateAPD": false,
+      },
     },
     "assurancesAndCompliances": Object {
       "procurement": Array [
@@ -669,6 +675,11 @@ Object {
     "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
+    "yearOptions": Array [
+      "2022",
+      "2023",
+      "2024",
+    ],
     "years": Array [
       "2022",
       "2023",
@@ -692,6 +703,7 @@ Object {
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a valid patch that also attempts to update a readonly property 1`] = `
 Object {
   "apd": Object {
+    "__t": "HITECH",
     "__v": 0,
     "_id": "eeac3c9865059f26eccb0600",
     "activities": Any<Array>,
@@ -722,6 +734,11 @@ Object {
 </ol>
 <p>Effective with the approval of the original IAPD, Tycho closed the Planning Advance Planning Document (PAPD) submitted to CMS in December 2009 and opened the IAPD. This document represents the sixth update to the approved IAPD.</p>
 <p>This funding request time frame is for the period of October 1, 2018 to September 30, 2023.&nbsp;</p>",
+      "updateStatus": Object {
+        "annualUpdate": false,
+        "asNeededUpdate": false,
+        "isUpdateAPD": false,
+      },
     },
     "assurancesAndCompliances": Object {
       "procurement": Array [
@@ -1004,6 +1021,11 @@ Object {
     "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
+    "yearOptions": Array [
+      "2022",
+      "2023",
+      "2024",
+    ],
     "years": Array [
       "2022",
       "2023",
@@ -1016,6 +1038,7 @@ Object {
 exports[`APD endpoint | PATCH /apds/:id when authenticated as a user with permission with a valid patch that also attempts to update a readonly property 2`] = `
 Object {
   "apd": Object {
+    "__t": "HITECH",
     "__v": 0,
     "_id": "eeac3c9865059f26eccb0600",
     "activities": Any<Array>,
@@ -1038,6 +1061,11 @@ Object {
       "narrativeMMIS": "<p><strong><ins>Medicaid Claims Data Feed to the HIE</ins></strong></p>
 <p>Currently, Tycho does not have an All-Payersâ Claims database that can provide consumers and DHSS with consolidated claims data. To provide healthcare statistical information and support MU, Tycho plans to interface the MMIS Data Warehouse (DW) to the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE. This initiative will require contractor assistance from Conduent, LLC to complete required MMIS changes as well as Tycho''s HIE Service provider, Orion Health to implement the necessary HIE updates. DHSS IT Planning Office will coordinate the efforts of the three vendors.</p>",
       "programOverview": "<a>XSS</a>",
+      "updateStatus": Object {
+        "annualUpdate": false,
+        "asNeededUpdate": false,
+        "isUpdateAPD": false,
+      },
     },
     "assurancesAndCompliances": Object {
       "procurement": Array [
@@ -1335,6 +1363,11 @@ Object {
     "state": "ak",
     "status": "draft",
     "updated": StringMatching /\\^\\\\d\\{4\\}-\\\\d\\{2\\}-\\\\d\\{2\\}T\\\\d\\{2\\}:\\\\d\\{2\\}:\\\\d\\{2\\}\\\\\\.\\\\d\\{3\\}Z\\$/,
+    "yearOptions": Array [
+      "2022",
+      "2023",
+      "2024",
+    ],
     "years": Array [
       "2022",
       "2023",

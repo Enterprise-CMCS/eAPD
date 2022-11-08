@@ -1,11 +1,12 @@
 const tap = require('tap');
-const toMongodb = require('jsonpatch-to-mongodb');
+const { applyPatch } = require('fast-json-patch');
 
 const { setup, teardown } = require('../db/mongodb');
 const { APD } = require('./index');
-const { apd } = require('../seeds/development/apds');
+const { hitech: apd } = require('../seeds/development/apds');
 
 let apdId;
+delete apd.__t; // eslint-disable-line no-underscore-dangle
 
 tap.test('APD model test', async t => {
   t.before(async () => {
@@ -18,6 +19,7 @@ tap.test('APD model test', async t => {
       stateId: 'md',
       ...apd
     });
+
     apdId = _id.toString();
   });
 
@@ -25,21 +27,24 @@ tap.test('APD model test', async t => {
     const found = await APD.findOne({ _id: apdId }); // eslint-disable-line no-underscore-dangle
 
     test.ok(!!found, 'Found the APD that was just added');
+    test.ok(!found.__t, 'APD is not a HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
   });
 
   t.test('patch APD', async test => {
-    await APD.updateOne(
-      { _id: apdId },
-      toMongodb([
-        {
-          op: 'replace',
-          path: '/activities/0/outcomes/1/metrics/1/metric',
-          value: 'TEST VALUE'
-        }
-      ])
-    );
+    const apdJSON = await APD.findOne({ _id: apdId }).lean();
+    const { newDocument } = applyPatch(apdJSON, [
+      {
+        op: 'replace',
+        path: '/activities/0/outcomes/1/metrics/1/metric',
+        value: 'TEST VALUE'
+      }
+    ]);
+    await APD.replaceOne({ _id: apdId }, newDocument, {
+      multipleCastError: true,
+      runValidators: true
+    });
 
-    const updatedApd = await APD.findOne({ _id: apdId }).exec();
+    const updatedApd = await APD.findOne({ _id: apdId }).lean();
 
     test.equal(
       updatedApd.activities[0].outcomes[1].metrics[1].metric,
