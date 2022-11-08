@@ -14,6 +14,7 @@ import Dollars from '../../../../components/Dollars';
 import PercentField from '../../../../components/PercentField';
 import { t } from '../../../../i18n';
 import { makeSelectCostAllocateFFPBudget } from '../../../../redux/selectors/activities.selectors';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { formatPerc } from '../../../../util/formats';
 
 import costAllocateFFPQuarterlySchema from '@cms-eapd/common/schemas/costAllocateFFPQuarterly';
@@ -50,9 +51,7 @@ const CostAllocateFFPQuarterly = ({
     clearErrors
   } = useForm({
     defaultValues: {
-      formData: {
-        ...quarterlyFFP[year]
-      }
+      ...quarterlyFFP[year]
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -68,26 +67,23 @@ const CostAllocateFFPQuarterly = ({
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setValue('formData.subtotal.inHouse', quarterlyFFP[year].subtotal.inHouse);
+    setValue('subtotal.inHouse', quarterlyFFP[year].subtotal.inHouse);
     if (adminCheck) {
-      trigger('formData.subtotal.inHouse');
+      trigger('subtotal.inHouse');
     }
   }, [quarterlyFFP[year].subtotal.inHouse]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setValue(
-      'formData.subtotal.contractors',
-      quarterlyFFP[year].subtotal.contractors
-    );
+    setValue('subtotal.contractors', quarterlyFFP[year].subtotal.contractors);
     if (adminCheck) {
-      trigger('formData.subtotal.contractors');
+      trigger('subtotal.contractors');
     }
   }, [quarterlyFFP[year].subtotal.contractors]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setInHouse =
     quarter =>
     ({ target: { value } }) => {
-      setValue(`formData[${quarter}].inHouse.percent`, value / 100);
+      setValue(`[${quarter}].inHouse.percent`, value / 100);
       setInHouseFFP(activityIndex, year, quarter, value);
       announce(activityId, year, quarter, 'inHouse');
     };
@@ -95,7 +91,7 @@ const CostAllocateFFPQuarterly = ({
   const setContractor =
     quarter =>
     ({ target: { value } }) => {
-      setValue(`formData[${quarter}].contractors.percent`, value / 100);
+      setValue(`[${quarter}].contractors.percent`, value / 100);
       setContractorFFP(activityIndex, year, quarter, value);
       announce(activityId, year, quarter, 'contractors');
     };
@@ -132,7 +128,7 @@ const CostAllocateFFPQuarterly = ({
         <tbody>
           <tr
             className={`${
-              errors?.formData?.subtotal?.inHouse?.percent && !isViewOnly
+              errors?.subtotal?.inHouse?.percent && !isViewOnly
                 ? 'table-error-border-no-bottom'
                 : ''
             }`}
@@ -151,7 +147,7 @@ const CostAllocateFFPQuarterly = ({
                 ) : (
                   <Controller
                     control={control}
-                    name={`formData[${q}].inHouse.percent`}
+                    name={`[${q}].inHouse.percent`}
                     render={({ field: { onBlur, ...props } }) => (
                       <PercentField
                         {...props}
@@ -175,7 +171,7 @@ const CostAllocateFFPQuarterly = ({
           </tr>
           <tr
             className={`${
-              errors?.formData?.subtotal?.inHouse?.percent && !isViewOnly
+              errors?.subtotal?.inHouse?.percent && !isViewOnly
                 ? 'table-error-border-no-top'
                 : ''
             }`}
@@ -194,7 +190,7 @@ const CostAllocateFFPQuarterly = ({
 
           <tr
             className={`${
-              errors?.formData?.subtotal?.contractors?.percent && !isViewOnly
+              errors?.subtotal?.contractors?.percent && !isViewOnly
                 ? 'table-error-border-no-bottom'
                 : ''
             }`}
@@ -213,7 +209,7 @@ const CostAllocateFFPQuarterly = ({
                 ) : (
                   <Controller
                     control={control}
-                    name={`formData[${q}].contractors.percent`}
+                    name={`[${q}].contractors.percent`}
                     render={({ field: { onBlur, ...props } }) => (
                       <PercentField
                         {...props}
@@ -237,7 +233,7 @@ const CostAllocateFFPQuarterly = ({
           </tr>
           <tr
             className={`${
-              errors?.formData?.subtotal?.contractors?.percent && !isViewOnly
+              errors?.subtotal?.contractors?.percent && !isViewOnly
                 ? 'table-error-border-no-top'
                 : ''
             }`}
@@ -285,8 +281,8 @@ const CostAllocateFFPQuarterly = ({
           role="alert"
           aria-label="Error message for Estimated Quarterly Expenditure table"
         >
-          {errors?.formData?.subtotal?.inHouse?.percent?.message} <br />
-          {errors?.formData?.subtotal?.contractors?.percent?.message}
+          {errors?.subtotal?.inHouse?.percent?.message} <br />
+          {errors?.subtotal?.contractors?.percent?.message}
         </div>
       )}
     </Fragment>
@@ -314,7 +310,7 @@ const makeMapStateToProps = () => {
   const selectCostAllocateFFPBudget = makeSelectCostAllocateFFPBudget();
   const mapStateToProps = (state, props) => {
     return {
-      adminCheck: state.apd.adminCheck,
+      adminCheck: selectAdminCheckEnabled(state),
       ...selectCostAllocateFFPBudget(state, props)
     };
   };

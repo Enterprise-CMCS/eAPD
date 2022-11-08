@@ -8,6 +8,7 @@ const {
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { validateApd } = require('../schemas');
+const { adminCheckApd } = require('../util/adminCheck');
 const { Budget, APD } = require('../models/index');
 
 const createAPD = async apd => {
@@ -47,6 +48,13 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
 
   // return the updated apd
   return APD.findOne({ _id: id, stateId }).lean();
+};
+
+const adminCheckAPDDocument = async id => {
+  // get the updated apd json
+  const apdDoc = await getAPDByID(id);
+  // call admin check util
+  return adminCheckApd(apdDoc);
 };
 
 const updateAPDDocument = async (
@@ -183,5 +191,6 @@ module.exports = {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument
+  updateAPDDocument,
+  adminCheckAPDDocument
 };
