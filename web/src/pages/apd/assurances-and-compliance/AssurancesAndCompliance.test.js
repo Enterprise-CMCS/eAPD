@@ -337,7 +337,9 @@ describe('assurances and compliance component', () => {
         {
           initialState: {
             apd: {
-              adminCheck: true,
+              adminCheck: {
+                enabled: true
+              },
               data: {
                 years: [2020, 2021],
                 activities: [

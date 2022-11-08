@@ -1,10 +1,18 @@
 const logger = require('../../logger')('apds route get');
-const { getAllAPDsByState: gas, getAPDByIDAndState: ga } = require('../../db');
+const {
+  getAllAPDsByState: gas,
+  getAPDByIDAndState: ga,
+  adminCheckAPDDocument: validate
+} = require('../../db');
 const { can } = require('../../middleware');
 
 module.exports = (
   app,
-  { getAllAPDsByState = gas, getAPDByIDAndState = ga } = {}
+  {
+    getAllAPDsByState = gas,
+    getAPDByIDAndState = ga,
+    adminCheckAPDDocument = validate
+  } = {}
 ) => {
   logger.silly('setting up GET /apds route');
 
@@ -72,12 +80,15 @@ module.exports = (
         logger.info(`id: ${req.params.id}, state: ${stateId}`);
         const apdFromDB = await getAPDByIDAndState(req.params.id, stateId);
 
+        const adminCheck = await adminCheckAPDDocument(req.params.id);
+
         if (apdFromDB) {
           const {
             _id: id,
             createdAt: created,
             updatedAt: updated,
             stateId: state,
+            budget,
             ...rest
           } = apdFromDB;
           const apd = {
@@ -92,7 +103,8 @@ module.exports = (
             id: req.id,
             message: `got single apd, id=${apd.id}, name="${apd.name}"`
           });
-          return res.send(apd);
+
+          return res.send({ apd, adminCheck, budget });
         }
 
         logger.verbose({ id: req.id, message: 'apd does not exist' });

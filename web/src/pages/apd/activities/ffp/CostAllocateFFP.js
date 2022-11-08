@@ -18,12 +18,13 @@ import {
   selectActivityTotalForBudgetByActivityIndex
 } from '../../../../redux/selectors/activities.selectors';
 import { getUserStateOrTerritory } from '../../../../redux/selectors/user.selector';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import CostAllocationRows, {
   CostSummaryRows
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
 
-import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocateFFP';
+import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocationFFP';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -114,28 +115,35 @@ const CostAllocateFFP = ({
 }) => {
   const {
     control,
+    clearErrors,
     formState: { errors },
     trigger,
     setValue
   } = useForm({
     defaultValues: {
-      costAllocation
+      ...costAllocation
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: joiResolver(costAllocateFFPSchema)
   });
 
   useEffect(() => {
-    setValue('costAllocation', costAllocation);
     if (adminCheck) {
       trigger();
+    } else {
+      clearErrors();
     }
-  }, [costAllocation]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setFederalStateSplit = year => e => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setFundingSplit(activityIndex, year, federal, state);
+    setValue(`[${year}].ffp.federal`, federal);
+    setValue(`[${year}].ffp.state`, state);
+    if (adminCheck) {
+      trigger();
+    }
   };
 
   const { years } = costSummary;
@@ -255,7 +263,7 @@ const CostAllocateFFP = ({
                   }}
                 />
                 <Controller
-                  name={`costAllocation`}
+                  name={`${ffy}`}
                   control={control}
                   render={({ field: { ...props } }) => (
                     <Dropdown
@@ -270,9 +278,7 @@ const CostAllocateFFP = ({
                       ]}
                       value={`${costAllocation[ffy].ffp.federal}-${costAllocation[ffy].ffp.state}`}
                       onChange={setFederalStateSplit(ffy)}
-                      errorMessage={
-                        errors.costAllocation?.[ffy]?.ffp?.state?.message
-                      }
+                      errorMessage={errors[ffy]?.ffp?.state?.message}
                       errorPlacement="bottom"
                       data-cy="cost-allocation-dropdown"
                     />
@@ -394,7 +400,7 @@ const mapStateToProps = (
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,
     otherFunding: activityTotal.data.otherFunding,
-    adminCheck: state.apd.adminCheck
+    adminCheck: selectAdminCheckEnabled(state)
   };
 };
 

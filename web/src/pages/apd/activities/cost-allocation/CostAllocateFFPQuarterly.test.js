@@ -248,7 +248,9 @@ describe('the cost allocation quarterly FFP component', () => {
             data: {
               years: ['2022']
             },
-            adminCheck: true
+            adminCheck: {
+              enabled: true
+            }
           },
           budget: {
             activities: {
