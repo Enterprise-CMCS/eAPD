@@ -44,13 +44,6 @@ const ApdNew = ({ createApd: create }) => {
     asNeededUpdate: false
   };
 
-  useEffect(() => {
-    if (enableMmis === false) {
-      setApdType('hitech');
-      setValue('apdType', 'hitech', { shouldValidate: true });
-    }
-  }, []);
-
   const thisFFY = (() => {
     const year = new Date().getFullYear();
     if (new Date().getMonth() > 8) {
@@ -66,6 +59,12 @@ const ApdNew = ({ createApd: create }) => {
   const [apdType, setApdType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
+  useEffect(() => {
+    if (enableMmis === false) {
+      setApdType('hitech');
+      setValue('apdType', 'hitech', { shouldValidate: true });
+    }
+  }, []);
 
   const {
     control,
@@ -150,6 +149,7 @@ const ApdNew = ({ createApd: create }) => {
                       label: 'HITECH IAPD',
                       labelClassName: 'label-extended',
                       value: 'hitech',
+                      id: 'hitech',
                       hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
                       checked: value === 'hitech'
                     },
@@ -157,6 +157,7 @@ const ApdNew = ({ createApd: create }) => {
                       label: 'MMIS IAPD',
                       labelClassName: 'label-extended',
                       value: 'mmis',
+                      id: 'mmis',
                       hint: 'Medicaid Management Information System Implementation APD',
                       checked: value === 'mmis'
                     }
@@ -553,8 +554,7 @@ const ApdNew = ({ createApd: create }) => {
 };
 
 ApdNew.propTypes = {
-  createApd: PropType.func.isRequired,
-  yearChoices: PropType.arrayOf(PropType.string).isRequired
+  createApd: PropType.func.isRequired
 };
 
 ApdNew.defaultProps = {
