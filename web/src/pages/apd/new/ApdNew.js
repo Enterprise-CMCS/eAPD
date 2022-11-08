@@ -20,30 +20,30 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
+const businessAreas = {
+  waiverSupport: false,
+  assetVerification: false,
+  claimsProcessing: false,
+  decisionSupport: false,
+  electronicVisitVerify: false,
+  encounterProcessingSystem: false,
+  financialMangement: false,
+  healthInfoExchange: false,
+  longTermServiceSupport: false,
+  memberManagement: false,
+  pharmacyBenefitManagement: false,
+  programIntegrity: false,
+  providerManagement: false,
+  thirdPartyLiability: false,
+  other: false
+};
+
+const typeStatus = {
+  annualUpdate: false,
+  asNeededUpdate: false
+};
+
 const ApdNew = ({ createApd: create }) => {
-  const businessAreas = {
-    waiverSupport: false,
-    assetVerification: false,
-    claimsProcessing: false,
-    decisionSupport: false,
-    electronicVisitVerify: false,
-    encounterProcessingSystem: false,
-    financialMangement: false,
-    healthInfoExchange: false,
-    longTermServiceSupport: false,
-    memberManagement: false,
-    pharmacyBenefitManagement: false,
-    programIntegrity: false,
-    providerManagement: false,
-    thirdPartyLiability: false,
-    other: false
-  };
-
-  const typeStatus = {
-    annualUpdate: false,
-    asNeededUpdate: false
-  };
-
   const thisFFY = (() => {
     const year = new Date().getFullYear();
     if (new Date().getMonth() > 8) {
@@ -149,7 +149,6 @@ const ApdNew = ({ createApd: create }) => {
                       label: 'HITECH IAPD',
                       labelClassName: 'label-extended',
                       value: 'hitech',
-                      id: 'hitech',
                       hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
                       checked: value === 'hitech'
                     },
@@ -157,7 +156,6 @@ const ApdNew = ({ createApd: create }) => {
                       label: 'MMIS IAPD',
                       labelClassName: 'label-extended',
                       value: 'mmis',
-                      id: 'mmis',
                       hint: 'Medicaid Management Information System Implementation APD',
                       checked: value === 'mmis'
                     }
@@ -521,6 +519,17 @@ const ApdNew = ({ createApd: create }) => {
               Cancel
             </Button>
 
+            {/* {disabled === true ? (
+              <Tooltip
+                className="ds-c-tooltip__trigger-link ds-u-float--right"
+                component="a"
+                onClose={function noRefCheck() {}}
+                onOpen={function noRefCheck() {}}
+                title="All fields are required to create an APD."
+              >
+                <TooltipIcon />
+              </Tooltip>) : null } */}
+
             {disabled === true ? (
               <Tooltip
                 className="ds-c-tooltip__trigger-link ds-u-float--right"
@@ -531,7 +540,7 @@ const ApdNew = ({ createApd: create }) => {
               >
                 <Button
                   variation="primary"
-                  disabled={true}
+                  disabled={disabled}
                   className="ds-u-float--right"
                 >
                   Create an APD
@@ -540,6 +549,7 @@ const ApdNew = ({ createApd: create }) => {
             ) : (
               <Button
                 variation="primary"
+                disabled={disabled}
                 className="ds-u-float--right"
                 onClick={createNew}
               >

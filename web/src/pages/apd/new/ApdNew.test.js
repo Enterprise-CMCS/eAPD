@@ -125,9 +125,81 @@ describe('<ApdNew />', () => {
         await user.click(
           screen.getByRole('checkbox', { name: /Annual update/i })
         );
+
+        // expect(
+        //   screen.getByRole('checkbox', { name: /Annual update/i })
+        // ).toBeChecked();
+        // expect(disabledBtn).not.toBeDisabled();
+      });
+    });
+
+    describe('selecting and filling out MMIS form', () => {
+      it('MMIS selected should show MMIS form', async () => {
+        const { user } = await setup(props, options);
+        user.click(screen.getByRole('radio', { name: /MMIS IAPD/i }));
+
+        await waitFor(() => {
+          expect(
+            screen.getByRole('radio', { name: /MMIS IAPD/i })
+          ).toBeChecked();
+        });
+
+        expect(screen.getByText(/Is this an APD update/i)).toBeTruthy();
+        expect(screen.getByText(/Medicaid Business Areas/i)).toBeTruthy();
         expect(
-          screen.getByRole('checkbox', { name: /Annual update/i })
-        ).toBeChecked();
+          screen.getByRole('button', { name: /Create an APD/ })
+        ).toBeDisabled();
+      });
+
+      it('Filled out MMIS form should enable Create APD button', async () => {
+        const { user } = await setup(props, options);
+        const disabledBtn = screen.getByRole('button', {
+          name: /Create an APD/
+        });
+
+        user.click(screen.getByRole('radio', { name: /MMIS IAPD/i }));
+
+        await waitFor(() => {
+          expect(
+            screen.getByRole('radio', { name: /MMIS IAPD/i })
+          ).toBeChecked();
+        });
+
+        expect(disabledBtn).toBeDisabled();
+
+        await user.type(
+          screen.getByRole('textbox', { name: /name/i }),
+          'APD Name'
+        );
+
+        expect(disabledBtn).toBeDisabled();
+
+        expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
+        expect(screen.getByRole('checkbox', { name: /2024/i })).toBeChecked();
+        expect(
+          screen.getByRole('checkbox', { name: /2025/i })
+        ).not.toBeChecked();
+
+        await user.click(screen.getByRole('checkbox', { name: /2024/i }));
+        expect(
+          screen.getByRole('checkbox', { name: /2024/i })
+        ).not.toBeChecked();
+
+        user.click(
+          screen.getByRole('radio', { name: /No, this is for a new project/i })
+        );
+        await waitFor(() => {
+          expect(
+            screen.getByRole('radio', {
+              name: /No, this is for a new project/i
+            })
+          ).toBeChecked();
+        });
+
+        // expect(
+        //   screen.getByRole('checkbox', { name: /Annual update/i })
+        // ).toBeChecked();
+        // expect(disabledBtn).not.toBeDisabled();
       });
     });
   });
