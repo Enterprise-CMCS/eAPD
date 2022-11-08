@@ -2,6 +2,7 @@ import React from 'react';
 
 import Activities from './activities/activities-dashboard/ActivitiesDashboard';
 import AssurancesAndCompliance from './assurances-and-compliance/AssurancesAndCompliance';
+import StatePrioritiesAndScope from './state-priorities-and-scope/StatePrioritiesAndScope';
 import Export from './export/ApdExport';
 import ApdOverview from './apd-overview/ApdOverview';
 import ExecutiveSummary from './executive-summary/ExecutiveSummary';
@@ -18,6 +19,14 @@ const routes = [
     contentType: 'form',
     siteSection: 'APD',
     pageName: 'Overview'
+  },
+  {
+    path: '/apd/:apdId/state-priorities-and-scope',
+    children: <StatePrioritiesAndScope />,
+    isPublic: false,
+    contentType: 'form',
+    siteSection: 'APD',
+    pageName: 'State Priorities and Scope of APD'
   },
   {
     path: '/apd/:apdId/state-profile',

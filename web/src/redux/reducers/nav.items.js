@@ -9,6 +9,10 @@ const staticItems = apdId => {
         url: `/apd/${apdId}/apd-overview`
       },
       {
+        label: titleCase(t('statePrioritiesAndScope.title')),
+        url: `/apd/${apdId}/state-priorities-and-scope`
+      },
+      {
         label: titleCase(t('apd.stateProfile.title')),
         items: [
           {
