@@ -9,7 +9,8 @@ import {
   Button,
   ChoiceList,
   TextField,
-  Tooltip
+  Tooltip,
+  TooltipIcon
 } from '@cmsgov/design-system';
 import TextArea from '../../../components/TextArea';
 import { createApd } from '../../../redux/actions/app';
@@ -127,15 +128,6 @@ const ApdNew = ({ createApd: create }) => {
           <div className="ds-u-padding-bottom--1 ds-u-border-bottom--2">
             Complete all the fields below to create your APD.
           </div>
-          <h2 className="ds-h3">What type of APD are you creating?</h2>
-          <Alert
-            variation="warn"
-            className="ds-u-margin-y--3 ds-u-margin-right--7"
-          >
-            <p className="ds-c-alert__text">
-              This selection cannot be changed after creating a new APD.
-            </p>
-          </Alert>
           {enableMmis === true ? (
             <Controller
               name="apdType"
@@ -143,6 +135,19 @@ const ApdNew = ({ createApd: create }) => {
               render={({ field: { onBlur, onChange, value, ...props } }) => (
                 <ChoiceList
                   {...props}
+                  label="What type of APD are you creating?"
+                  labelClassName="ds-h3 label-header label-extended"
+                  hint={
+                    <Alert
+                      variation="warn"
+                      className="ds-u-margin-y--3 ds-u-margin-right--7"
+                    >
+                      <p className="ds-c-alert__text">
+                        This selection cannot be changed after creating a new
+                        APD.
+                      </p>
+                    </Alert>
+                  }
                   type="radio"
                   choices={[
                     {
@@ -179,6 +184,19 @@ const ApdNew = ({ createApd: create }) => {
               render={({ field: { onBlur, onChange, value, ...props } }) => (
                 <ChoiceList
                   {...props}
+                  label="What type of APD are you creating?"
+                  labelClassName="ds-h3 label-header label-extended"
+                  hint={
+                    <Alert
+                      variation="warn"
+                      className="ds-u-margin-y--3 ds-u-margin-right--7"
+                    >
+                      <p className="ds-c-alert__text">
+                        This selection cannot be changed after creating a new
+                        APD.
+                      </p>
+                    </Alert>
+                  }
                   type="radio"
                   choices={[
                     {
@@ -222,8 +240,9 @@ const ApdNew = ({ createApd: create }) => {
               <Controller
                 name="years"
                 control={control}
-                render={({ field: { onBlur } }) => (
+                render={({ field: { onBlur, ...props } }) => (
                   <ChoiceList
+                    {...props}
                     label="Federal Fiscal Year (FFY)"
                     choices={yearChoices}
                     labelClassName="ds-u-margin-bottom--1"
@@ -519,17 +538,6 @@ const ApdNew = ({ createApd: create }) => {
               Cancel
             </Button>
 
-            {/* {disabled === true ? (
-              <Tooltip
-                className="ds-c-tooltip__trigger-link ds-u-float--right"
-                component="a"
-                onClose={function noRefCheck() {}}
-                onOpen={function noRefCheck() {}}
-                title="All fields are required to create an APD."
-              >
-                <TooltipIcon />
-              </Tooltip>) : null } */}
-
             {disabled === true ? (
               <Tooltip
                 className="ds-c-tooltip__trigger-link ds-u-float--right"
@@ -538,24 +546,18 @@ const ApdNew = ({ createApd: create }) => {
                 onOpen={function noRefCheck() {}}
                 title="All fields are required to create an APD."
               >
-                <Button
-                  variation="primary"
-                  disabled={disabled}
-                  className="ds-u-float--right"
-                >
-                  Create an APD
-                </Button>
+                <TooltipIcon />
               </Tooltip>
-            ) : (
-              <Button
-                variation="primary"
-                disabled={disabled}
-                className="ds-u-float--right"
-                onClick={createNew}
-              >
-                Create an APD
-              </Button>
-            )}
+            ) : null}
+
+            <Button
+              variation="primary"
+              disabled={disabled}
+              className="ds-u-float--right"
+              onClick={createNew}
+            >
+              Create an APD
+            </Button>
           </div>
         </main>
       </div>

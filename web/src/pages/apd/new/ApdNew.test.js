@@ -125,11 +125,10 @@ describe('<ApdNew />', () => {
         await user.click(
           screen.getByRole('checkbox', { name: /Annual update/i })
         );
-
-        // expect(
-        //   screen.getByRole('checkbox', { name: /Annual update/i })
-        // ).toBeChecked();
-        // expect(disabledBtn).not.toBeDisabled();
+        expect(
+          screen.getByRole('checkbox', { name: /Annual update/i })
+        ).toBeChecked();
+        expect(disabledBtn).toBeEnabled();
       });
     });
 
@@ -157,21 +156,14 @@ describe('<ApdNew />', () => {
           name: /Create an APD/
         });
 
-        user.click(screen.getByRole('radio', { name: /MMIS IAPD/i }));
-
-        await waitFor(() => {
-          expect(
-            screen.getByRole('radio', { name: /MMIS IAPD/i })
-          ).toBeChecked();
-        });
-
+        await user.click(screen.getByRole('radio', { name: /MMIS IAPD/i }));
+        expect(screen.getByRole('radio', { name: /MMIS IAPD/i })).toBeChecked();
         expect(disabledBtn).toBeDisabled();
 
         await user.type(
           screen.getByRole('textbox', { name: /name/i }),
           'APD Name'
         );
-
         expect(disabledBtn).toBeDisabled();
 
         expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
@@ -185,6 +177,14 @@ describe('<ApdNew />', () => {
           screen.getByRole('checkbox', { name: /2024/i })
         ).not.toBeChecked();
 
+        await user.click(
+          screen.getByRole('checkbox', { name: /Claims Processing/i })
+        );
+        expect(
+          screen.getByRole('checkbox', { name: /Claims Processing/i })
+        ).toBeChecked();
+        expect(disabledBtn).toBeDisabled();
+
         user.click(
           screen.getByRole('radio', { name: /No, this is for a new project/i })
         );
@@ -195,11 +195,25 @@ describe('<ApdNew />', () => {
             })
           ).toBeChecked();
         });
+        expect(disabledBtn).toBeEnabled();
 
-        // expect(
-        //   screen.getByRole('checkbox', { name: /Annual update/i })
-        // ).toBeChecked();
-        // expect(disabledBtn).not.toBeDisabled();
+        await user.click(screen.getByRole('checkbox', { name: /Other/i }));
+        expect(screen.getByRole('checkbox', { name: /Other/i })).toBeChecked();
+        expect(disabledBtn).toBeDisabled();
+
+        const otherBox = screen.getByRole('textbox', {
+          name: 'Other Medicaid Business Area(s) Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon.'
+        });
+
+        await user.type(otherBox, 'other');
+
+        await user.click(
+          screen.getByRole('checkbox', { name: /Claims Processing/i })
+        );
+        expect(
+          screen.getByRole('checkbox', { name: /Claims Processing/i })
+        ).not.toBeChecked();
+        expect(disabledBtn).toBeEnabled();
       });
     });
   });
