@@ -16,7 +16,6 @@ workflows:
   #                - master
   #    jobs:
   #      - cleanup preview deploys
-  # Commment to push up
 
 # Workflows to validate IaC configurations  
   packer validation:
