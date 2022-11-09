@@ -4,12 +4,6 @@ const checkHyperlinks = (link, heading, level) => {
   });
 
   cy.get(`.ds-h${level}`).should('contain', heading);
-
-  // if (level === 2) {
-  //   cy.get('.ds-h2').should('contain', heading);
-  // } else if (level === 3) {
-  //   cy.get('.ds-h3').should('contain', heading);
-  // }
 };
 
 describe('tests state admin portal', () => {
@@ -40,17 +34,15 @@ describe('tests state admin portal', () => {
   });
 
   beforeEach(() => {
-    //   cy.updateFeatureFlags({ validation: true });
+    cy.updateFeatureFlags({ validation: false });
     cy.visit(apdUrl);
   });
 
-  // after(() => {
-  //   cy.deleteAPD(apdId);
-  // });
+  after(() => {
+    cy.deleteAPD(apdId);
+  });
 
   describe('Admin Check', () => {
-    //REMEMBER TO USE CYPRESS AXE ON THE ADMIN CHECK
-    //Testing push on new repo again
     it(
       'tests basic admin check functionality',
       { tags: ['@state', '@admin'] },
@@ -103,7 +95,7 @@ describe('tests state admin portal', () => {
 
         cy.goToApdOverview();
         cy.get('[data-cy="validationError"]')
-          .contains('ERROR MESSAGE HERE')
+          .contains('Provide a brief introduction to the state program.')
           .should('exist');
 
         cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
@@ -113,7 +105,7 @@ describe('tests state admin portal', () => {
           'No validation error under me!'
         );
         cy.get('[data-cy="validationError"]')
-          .contains('ERROR MESSAGE HERE INTRO')
+          .contains('Provide a brief introduction to the state program.')
           .should('not.exist');
         cy.get('[data-cy="numRequired"]').should('have.text', '34');
 
@@ -122,7 +114,7 @@ describe('tests state admin portal', () => {
         });
 
         cy.get('[data-cy="validationError"]')
-          .contains('ERROR MESSAGE HERE HIT')
+          .contains('Provide a summary of HIT-funded activities.')
           .should('exist');
 
         cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
@@ -132,9 +124,7 @@ describe('tests state admin portal', () => {
           'No Inline validation under here!'
         );
 
-        cy.get('[data-cy="validationError"]')
-          .contains('ERROR MESSAGE HERE HIT')
-          .should('not.exist');
+        cy.get('[data-cy="validationError"]').should('not.exist');
         cy.get('[data-cy="numRequired"]').should('have.text', '33');
 
         cy.findByRole('button', { name: /Expand/i }).click({
@@ -147,7 +137,7 @@ describe('tests state admin portal', () => {
 
         cy.setTinyMceContent('program-introduction-field', '');
         cy.get('[data-cy="validationError"]')
-          .contains('ERROR MESSAGE HERE')
+          .contains('Provide a brief introduction to the state program.')
           .should('exist');
         cy.get('[data-cy="numRequired"]').should('have.text', '34');
 
@@ -157,7 +147,7 @@ describe('tests state admin portal', () => {
 
         cy.setTinyMceContent('hit-overview-field', '');
         cy.get('[data-cy="validationError"]')
-          .contains('ERROR MESSAGE HERE HIT')
+          .contains('Provide a summary of HIT-funded activities.')
           .should('exist');
         cy.get('[data-cy="numRequired"]').should('have.text', '35');
 
@@ -168,6 +158,27 @@ describe('tests state admin portal', () => {
         cy.get('[class="eapd-admin-check-list"]').within(list => {
           cy.get(list).contains('APD Overview').should('exist');
         });
+      }
+    );
+
+    it(
+      'runs cypress-axe (accessibility test) on the help panel',
+      { tags: ['@state', '@admin'] },
+      () => {
+        cy.contains('Export and Submit').click();
+        cy.findByRole('button', { name: /Run Administrative Check/i }).click({
+          force: true
+        });
+
+        cy.checkPageA11y();
+      }
+    );
+
+    it(
+      'tests admin check on a functionally complete APD',
+      { tags: ['@state', '@admin'] },
+      () => {
+        //blah
       }
     );
   });
