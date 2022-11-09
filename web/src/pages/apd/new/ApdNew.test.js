@@ -216,4 +216,57 @@ describe('<ApdNew />', () => {
       });
     });
   });
+
+  describe('form with Mmis disabled', () => {
+    beforeEach(() => {
+      mockFlags({ enableMmis: false });
+    });
+
+    it('should not show Mmis option', async () => {
+      await setup(props, options);
+      expect(
+        screen.getByText(/Create a New Advanced Planning Document/)
+      ).toBeTruthy();
+      expect(screen.queryByText(/MMIS IAPD/)).toBeFalsy();
+      expect(
+        screen.getByRole('button', { name: /Create an APD/ })
+      ).toBeDisabled();
+    });
+
+    it('should automatically check HITECH IAPD', async () => {
+      await setup(props, options);
+      expect(screen.getByRole('radio', { name: /HITECH IAPD/i })).toBeChecked();
+    });
+
+    it('requires all fields to enable Create APD button', async () => {
+      const { user } = await setup(props, options);
+      const disabledBtn = screen.getByRole('button', {
+        name: /Create an APD/
+      });
+
+      expect(disabledBtn).toBeDisabled();
+
+      await user.type(
+        screen.getByRole('textbox', { name: /name/i }),
+        'APD Name'
+      );
+
+      expect(disabledBtn).toBeDisabled();
+
+      expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
+      expect(screen.getByRole('checkbox', { name: /2024/i })).toBeChecked();
+      expect(screen.getByRole('checkbox', { name: /2025/i })).not.toBeChecked();
+
+      await user.click(screen.getByRole('checkbox', { name: /2024/i }));
+      expect(screen.getByRole('checkbox', { name: /2024/i })).not.toBeChecked();
+
+      await user.click(
+        screen.getByRole('checkbox', { name: /Annual update/i })
+      );
+      expect(
+        screen.getByRole('checkbox', { name: /Annual update/i })
+      ).toBeChecked();
+      expect(disabledBtn).toBeEnabled();
+    });
+  });
 });
