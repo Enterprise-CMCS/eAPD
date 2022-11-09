@@ -206,7 +206,6 @@ describe('<ApdNew />', () => {
         });
 
         await user.type(otherBox, 'other');
-
         await user.click(
           screen.getByRole('checkbox', { name: /Claims Processing/i })
         );
