@@ -30,16 +30,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   before(() => {
     cy.useStateStaff();
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ validation: false, enableMmis: true });
 
-    cy.findByRole('button', { name: /Create new/i }).click();
-
-    cy.findByLabelText('APD Name').click();
-
-    cy.focused().clear().type('My new APD').blur();
-
-    cy.findByText('Annual update').click().blur();
-
+    cy.findAllByText('Create new').click();
+    cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
+    cy.findByRole('checkbox', { name: /Annual Update/i }).click();
     cy.findByRole('button', { name: /Create an APD/i }).click();
 
     cy.findByRole(
@@ -58,7 +53,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ enableMmis: false });
+    cy.updateFeatureFlags({ validation: false, enableMmis: true });
     cy.visit(apdUrl);
   });
 

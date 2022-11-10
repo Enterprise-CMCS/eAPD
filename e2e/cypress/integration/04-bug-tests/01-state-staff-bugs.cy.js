@@ -12,6 +12,11 @@ describe('APD builder bugs', { tags: ['@apd'] }, () => {
     cy.useStateStaff();
 
     cy.findByRole('button', { name: /Create new/i }).click();
+    cy.findAllByText('Create new').click();
+    cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
+    cy.findByRole('checkbox', { name: /Annual Update/i }).click();
+    cy.findByRole('button', { name: /Create an APD/i }).click();
+
     cy.findByRole(
       'heading',
       { name: /APD Overview/i },
