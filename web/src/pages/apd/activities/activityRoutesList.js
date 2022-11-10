@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AlternativesAndRisks from './alternatives-and-risks/AlternativesAndRisks';
 import ContractorResources from './contractor-costs/ContractorResources';
 import CostAllocation from './cost-allocation/CostAllocation';
 import FFP from './ffp/CostAllocateFFP';
@@ -71,6 +72,18 @@ const routes = activityIndex => [
     contentType: 'form',
     siteSection: 'APD - Activity',
     pageName: 'Budget and FFP'
+  },
+  {
+    path: '/apd/:apdId/activity/:activityIndex/alternatives-and-risks',
+    children: (
+      <Section>
+        <AlternativesAndRisks activityIndex={activityIndex} />
+      </Section>
+    ),
+    isPublic: false,
+    contentType: 'form',
+    siteSection: 'APD - Activity',
+    pageName: 'Analysis of Alternatives and Risks'
   },
   {
     path: '/apd/:apdId/activity/:activityIndex/overview',

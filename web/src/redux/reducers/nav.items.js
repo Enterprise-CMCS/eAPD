@@ -120,6 +120,10 @@ const buildActivitySection = (apdId, activityId) => [
     url: `/apd/${apdId}/activity/${activityId}/overview`
   },
   {
+    label: 'Analysis of Alternatives and Risks',
+    url: `/apd/${apdId}/activity/${activityId}/alternatives-and-risks`
+  },
+  {
     label: 'Outcomes and Milestones',
     url: `/apd/${apdId}/activity/${activityId}/oms`
   },

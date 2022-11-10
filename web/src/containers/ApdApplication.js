@@ -31,6 +31,7 @@ const ApdApplication = ({
   isEditor,
   place,
   apdId,
+  apdType,
   selectApd: dispatchSelectApd,
   setApdToSelectOnLoad: dispatchSelectApdOnLoad,
   useParams,
@@ -91,7 +92,7 @@ const ApdApplication = ({
         <main id="start-main-content" className="site-main">
           {isEditor && <UnexpectedError />}
           <div className="ds-u-padding-top--2">
-            <ApdPageRoutes apdId={paramApdId} />
+            <ApdPageRoutes apdId={paramApdId} apdType={apdType} />
           </div>
         </main>
         {adminCheckFlag === true && <AdminCheckPanel />}
@@ -110,11 +111,13 @@ ApdApplication.propTypes = {
   userRole: PropTypes.string.isRequired,
   useParams: PropTypes.func,
   useHistory: PropTypes.func,
-  useLocation: PropTypes.func
+  useLocation: PropTypes.func,
+  apdType: PropTypes.string.isRequired
 };
 
 ApdApplication.defaultProps = {
   apdId: null,
+  apdType: 'hitech',
   useParams: actualUseParams,
   useHistory: actualUseHistory,
   useLocation: actualUseLocation
@@ -125,7 +128,8 @@ const mapStateToProps = state => ({
   isEditor: getCanUserEditAPD(state),
   place: getUserStateOrTerritory(state),
   apdId: getAPDId(state),
-  userRole: state.user.data.role || 'Pending Role'
+  userRole: state.user.data.role || 'Pending Role',
+  apdType: 'hitech'
 });
 
 const mapDispatchToProps = { setApdToSelectOnLoad, selectApd };
