@@ -1,11 +1,3 @@
-const checkHyperlinks = (link, heading, level) => {
-  cy.get('[class="eapd-admin-check-list"]').within(() => {
-    cy.contains(link).click();
-  });
-
-  cy.get(`.ds-h${level}`).should('contain', heading);
-};
-
 describe('tests state admin portal', () => {
   let apdUrl;
   let apdId;
@@ -47,10 +39,7 @@ describe('tests state admin portal', () => {
       'tests basic admin check functionality',
       { tags: ['@state', '@admin'] },
       () => {
-        cy.contains('Export and Submit').click();
-        cy.findByRole('button', { name: /Run Administrative Check/i }).click({
-          force: true
-        });
+        cy.turnOnAdminCheck();
 
         cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
 
@@ -62,10 +51,7 @@ describe('tests state admin portal', () => {
         });
         cy.get('[data-cy="validationError"]').should('not.exist');
 
-        cy.contains('Export and Submit').click();
-        cy.findByRole('button', { name: /Run Administrative Check/i }).click({
-          force: true
-        });
+        cy.turnOnAdminCheck();
 
         cy.get('[data-cy="numRequired"]').should('have.text', '35');
 
@@ -82,12 +68,28 @@ describe('tests state admin portal', () => {
           force: true
         });
 
-        checkHyperlinks('APD Overview', 'APD Overview', 2);
-        checkHyperlinks('Key State Personnel', 'Key State Personnel', 2);
-        checkHyperlinks('Activity 1 Activity Overview', 'Activity Overview', 3);
-        checkHyperlinks('Activity 1 Cost Allocation', 'Cost Allocation', 3);
-        checkHyperlinks('Activity 1 Budget and FFP', 'Budget and FFP', 2);
-        checkHyperlinks(
+        cy.checkAdminCheckHyperlinks('APD Overview', 'APD Overview', 2);
+        cy.checkAdminCheckHyperlinks(
+          'Key State Personnel',
+          'Key State Personnel',
+          2
+        );
+        cy.checkAdminCheckHyperlinks(
+          'Activity 1 Activity Overview',
+          'Activity Overview',
+          3
+        );
+        cy.checkAdminCheckHyperlinks(
+          'Activity 1 Cost Allocation',
+          'Cost Allocation',
+          3
+        );
+        cy.checkAdminCheckHyperlinks(
+          'Activity 1 Budget and FFP',
+          'Budget and FFP',
+          2
+        );
+        cy.checkAdminCheckHyperlinks(
           'Assurances and Compliance',
           'Assurances and Compliance',
           2
@@ -169,10 +171,7 @@ describe('tests state admin portal', () => {
       'runs cypress-axe (accessibility test) on the help panel',
       { tags: ['@state', '@admin'] },
       () => {
-        cy.contains('Export and Submit').click();
-        cy.findByRole('button', { name: /Run Administrative Check/i }).click({
-          force: true
-        });
+        cy.turnOnAdminCheck();
 
         // Skipping test for now while problems with CMS Design System - Drawer and Help Drawer get resolved
         cy.checkPageA11y();
@@ -186,10 +185,7 @@ describe('tests state admin portal', () => {
         cy.contains('AK APD Home').click();
         cy.findAllByText('HITECH IAPD').eq(0).click();
 
-        cy.contains('Export and Submit').click();
-        cy.findByRole('button', { name: /Run Administrative Check/i }).click({
-          force: true
-        });
+        cy.turnOnAdminCheck();
 
         cy.goToApdOverview();
 
