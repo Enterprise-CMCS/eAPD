@@ -37,6 +37,7 @@ export const getContinuePreviousLinks = (apdId, pathname, links) => {
 
 const initialState = {
   apdId: null,
+  apdType: 'hitech',
   activities: [],
   continueLink: null,
   items: staticItems(),
@@ -47,6 +48,7 @@ const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case APD_ACTIVITIES_CHANGE: {
       const items = getItems({
+        apdType: 'mmis',
         activities: action.activities,
         items: state.items,
         url: action.url
@@ -75,6 +77,7 @@ const reducer = (state = initialState, action = {}) => {
 
       const items = getItems({
         apdId: state.apdId,
+        apdType: 'mmis',
         activities: state.activities,
         items: state.items,
         url

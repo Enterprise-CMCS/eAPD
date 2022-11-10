@@ -16,7 +16,6 @@ import Instruction from '../../../../components/Instruction';
 import { Subsection } from '../../../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource/';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
-import Schedule from './Schedule';
 
 import overviewSchema from '@cms-eapd/common/schemas/activityOverview';
 
@@ -162,8 +161,6 @@ const ActivityOverview = ({
           )}
         />
       </div>
-
-      <Schedule activityIndex={activityIndex} />
 
       <div className="data-entry-box">
         <FormLabel
