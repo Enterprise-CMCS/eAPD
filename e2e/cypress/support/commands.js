@@ -599,6 +599,7 @@ function callback(violations) {
 }
 
 Cypress.Commands.add('checkPageA11y', () => {
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(2500);
   cy.injectAxeForA11y();
   cy.checkA11y(

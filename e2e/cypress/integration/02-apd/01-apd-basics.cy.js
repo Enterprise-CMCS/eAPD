@@ -33,6 +33,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.updateFeatureFlags();
 
     cy.findByRole('button', { name: /Create new/i }).click();
+
+    cy.findByLabelText('APD Name').click();
+
+    cy.focused().clear().type('My new APD').blur();
+
+    cy.findByText('Annual update').click().blur();
+
+    cy.findByRole('button', { name: /Create an APD/i }).click();
+
     cy.findByRole(
       'heading',
       { name: /APD Overview/i },
@@ -49,7 +58,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ enableMmis: false });
     cy.visit(apdUrl);
   });
 
