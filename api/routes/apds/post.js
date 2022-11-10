@@ -13,7 +13,6 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       const { apdType, apdOverview } = req.body;
       const apd = getNewApd(apdType);
 
-      apd.__t = apdType; // eslint-disable-line no-underscore-dangle
       apd.apdOverview = {
         ...apd.apdOverview,
         ...apdOverview

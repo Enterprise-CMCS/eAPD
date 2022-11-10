@@ -94,7 +94,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         };
 
         const expectedApd = {
-          __t: APD_TYPE.HITECH,
+          apdType: APD_TYPE.HITECH,
           name: 'HITECH IAPD',
           years: ['2004', '2005'],
           yearOptions: ['2004', '2005', '2006'],
@@ -314,7 +314,7 @@ tap.test('apds POST endpoint', async endpointTest => {
         };
 
         const expectedApd = {
-          __t: APD_TYPE.MMIS,
+          apdType: APD_TYPE.MMIS,
           name: 'MMIS IAPD',
           years: ['2004', '2005'],
           yearOptions: ['2004', '2005', '2006'],

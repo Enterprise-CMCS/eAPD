@@ -146,3 +146,9 @@ export const selectApdDashboard = createSelector([selectApds], ({ byId }) =>
 );
 
 export const selectLastSavedTimestamp = state => state.apd.data.updated;
+
+export const selectAdminCheckErrors = state => state.apd.adminCheck?.errors;
+export const selectAdminCheckEnabled = state => state.apd.adminCheck?.enabled;
+export const selectAdminCheckCollapsed = state =>
+  state.apd.adminCheck?.collapsed;
+export const selectAdminCheckComplete = state => state.apd.adminCheck?.complete;

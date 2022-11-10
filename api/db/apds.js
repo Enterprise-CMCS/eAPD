@@ -17,6 +17,7 @@ const {
   HITECH,
   MMIS
 } = require('../models/index');
+const { adminCheckApd } = require('../util/adminCheck');
 
 const getApdModel = apdType => {
   let model;
@@ -50,7 +51,7 @@ const getBudgetModel = apdType => {
 
 const createAPD = async apd => {
   const apdJSON = deepCopy(apd);
-  const apdType = apd.__t; // eslint-disable-line
+  const { apdType } = apd;
 
   const apdDoc = await getApdModel(apdType).create(apdJSON);
   const newBudget = await getBudgetModel(apdType).create(
@@ -68,7 +69,7 @@ const deleteAPDByID = async id =>
 const getAllAPDsByState = async stateId =>
   APD.find(
     { stateId, status: 'draft' },
-    '_id id createdAt updatedAt stateId status name years'
+    '_id id createdAt updatedAt stateId status name years apdType'
   ).lean();
 
 const getAPDByID = async id => APD.findById(id).lean().populate('budget');
@@ -90,6 +91,13 @@ const patchAPD = async ({ id, stateId, apdDoc, patch }) => {
 
   // return the updated apd
   return APD.findOne({ _id: id, stateId }).lean();
+};
+
+const adminCheckAPDDocument = async id => {
+  // get the updated apd json
+  const apdDoc = await getAPDByID(id);
+  // call admin check util
+  return adminCheckApd(apdDoc);
 };
 
 const updateAPDDocument = async (
@@ -224,5 +232,6 @@ module.exports = {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument
+  updateAPDDocument,
+  adminCheckAPDDocument
 };

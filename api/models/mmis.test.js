@@ -27,7 +27,7 @@ tap.test('MMIS model test', async t => {
     const found = await MMIS.findOne({ _id: apdId }); // eslint-disable-line no-underscore-dangle
 
     test.ok(!!found, 'Found the MMIS that was just added');
-    test.ok(found.__t === APD_TYPE.MMIS, 'MMIS is not a MMIS or MMIS'); // eslint-disable-line no-underscore-dangle
+    test.ok(found.apdType === APD_TYPE.MMIS, 'MMIS is not a MMIS or MMIS'); // eslint-disable-line no-underscore-dangle
   });
 
   t.test('patch MMIS', async test => {

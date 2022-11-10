@@ -55,7 +55,7 @@ async function up() {
 
   await APD.deleteMany({ status: 'draft' });
   await Promise.all(
-    hitech.map(async item => createAPD({ ...item, __t: APD_TYPE.HITECH }))
+    hitech.map(async item => createAPD({ ...item, apdType: APD_TYPE.HITECH }))
   ).catch(err => logger.error(err));
 
   await teardown();

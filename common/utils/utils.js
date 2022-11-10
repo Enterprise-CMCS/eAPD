@@ -74,7 +74,7 @@ export const hasBudgetUpdate = patches =>
     budgetPaths.find(pathRegex => path.match(pathRegex))
   );
 
-const thisFFY = () => {
+export const thisFFY = () => {
   const year = new Date().getFullYear();
 
   // Federal fiscal year starts October 1,

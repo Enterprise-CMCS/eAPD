@@ -1345,7 +1345,7 @@ export const calculateBudget = apd => {
     years,
     activities,
     keyStatePersonnel: { keyPersonnel } = {},
-    __t: apdType // eslint-disable-line no-underscore-dangle
+    apdType // eslint-disable-line no-underscore-dangle
   } = deepCopy(apd);
   // Create a default budget object so that all of the properties and stuff
   // will exist, so we don't have to have a bunch of code checking for it.

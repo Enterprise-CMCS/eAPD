@@ -35,9 +35,11 @@ import {
   SELECT_APD_SUCCESS,
   SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD,
-  ADMIN_CHECK_TOGGLE
+  ADMIN_CHECK_TOGGLE,
+  ADMIN_CHECK_COLLAPSE_TOGGLE,
+  ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-import { FLAGS_UPDATED } from '../actions/flags';
+
 import {
   generateKey,
   defaultAPDYearOptions
@@ -337,7 +339,12 @@ const initialState = {
   loaded: false,
   error: '',
   selectAPDOnLoad: false,
-  adminCheck: false
+  adminCheck: {
+    errors: [],
+    enabled: false,
+    collapsed: false,
+    complete: false
+  }
 };
 
 // eslint-disable-next-line default-param-last
@@ -402,13 +409,30 @@ const reducer = (state = initialState, action) => {
     case ADMIN_CHECK_TOGGLE: {
       return {
         ...state,
-        adminCheck: action.data
+        adminCheck: {
+          ...state.adminCheck,
+          enabled: action.data
+        }
       };
     }
-    case FLAGS_UPDATED: {
+
+    case ADMIN_CHECK_COLLAPSE_TOGGLE: {
       return {
         ...state,
-        adminCheck: action.flags.validation
+        adminCheck: {
+          ...state.adminCheck,
+          collapsed: action.data
+        }
+      };
+    }
+
+    case ADMIN_CHECK_COMPLETE_TOGGLE: {
+      return {
+        ...state,
+        adminCheck: {
+          ...state.adminCheck,
+          complete: action.data
+        }
       };
     }
 
@@ -455,15 +479,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         byId: {
           ...state.byId,
-          [action.apd.id]: {
-            ...state.byId[action.apd.id],
-            updated: getHumanTimestamp(action.apd.updated)
+          [action.data.apd.id]: {
+            ...state.byId[action.data.apd.id],
+            updated: getHumanTimestamp(action.data.apd.updated)
           }
         },
         data: {
           ...state.data,
-          created: getHumanDatestamp(action.apd.created),
-          updated: getHumanTimestamp(action.apd.updated)
+          created: getHumanDatestamp(action.data.apd.created),
+          updated: getHumanTimestamp(action.data.apd.updated)
+        },
+        adminCheck: {
+          ...state.adminCheck,
+          errors: action.data.adminCheck
         }
       };
 
@@ -474,18 +502,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: {
-          ...action.apd,
-          apdType: action.apd.__t,
-          created: getHumanDatestamp(action.apd.created),
-          updated: getHumanTimestamp(action.apd.updated),
+          ...action.data.apd,
+          created: getHumanDatestamp(action.data.apd.created),
+          updated: getHumanTimestamp(action.data.apd.updated),
           keyStatePersonnel: {
-            ...action.apd.keyStatePersonnel,
-            keyPersonnel: action.apd.keyStatePersonnel.keyPersonnel.map(kp => ({
-              ...kp,
-              key: generateKey()
-            }))
+            ...action.data.apd.keyStatePersonnel,
+            keyPersonnel: action.data.apd.keyStatePersonnel.keyPersonnel.map(
+              kp => ({
+                ...kp,
+                key: generateKey()
+              })
+            )
           },
-          activities: action.apd.activities.map(
+          activities: action.data.apd.activities.map(
             ({
               activityId,
               milestones,
@@ -525,8 +554,12 @@ const reducer = (state = initialState, action) => {
             })
           ),
           assurancesAndCompliances: getAssurancesAndCompliances(
-            action.apd.assurancesAndCompliances
+            action.data.apd.assurancesAndCompliances
           )
+        },
+        adminCheck: {
+          ...state.adminCheck,
+          errors: action.data.adminCheck
         }
       };
     }

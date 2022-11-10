@@ -650,809 +650,6 @@ module.exports = {
                 }
               }
             }
-          },
-          budget: {
-            type: 'object',
-            properties: {
-              years: arrayOf({
-                type: 'string'
-              }),
-              federalShareByFFYQuarter: {
-                type: 'object',
-                properties: {
-                  hitAndHie: {
-                    type: 'object',
-                    properties: {
-                      years: {
-                        type: 'object',
-                        'x-patternProperties': {
-                          '^[0-9]{4}$': {
-                            type: 'object',
-                            properties: {
-                              1: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              },
-                              2: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              },
-                              3: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              },
-                              4: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              },
-                              subtotal: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      total: {
-                        type: 'object',
-                        properties: {
-                          inHouse: {
-                            type: 'number'
-                          },
-                          contractors: {
-                            type: 'number'
-                          },
-                          combined: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  mmis: {
-                    type: 'object',
-                    properties: {
-                      years: {
-                        type: 'object',
-                        'x-patternProperties': {
-                          '^[0-9]{4}$': {
-                            type: 'object',
-                            properties: {
-                              1: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              },
-                              2: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              },
-                              3: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              },
-                              4: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              },
-                              subtotal: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      total: {
-                        type: 'object',
-                        properties: {
-                          inHouse: {
-                            type: 'number'
-                          },
-                          contractors: {
-                            type: 'number'
-                          },
-                          combined: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              hie: {
-                type: 'object',
-                properties: {
-                  statePersonnel: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  contractors: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  expenses: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  combined: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              hit: {
-                type: 'object',
-                properties: {
-                  statePersonnel: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  contractors: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  expenses: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  combined: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              mmis: {
-                type: 'object',
-                properties: {
-                  statePersonnel: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  contractors: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  expenses: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  combined: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              hitAndHie: {
-                type: 'object',
-                properties: {
-                  statePersonnel: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  contractors: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  expenses: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  combined: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              mmisByFFP: {
-                properties: {
-                  '90-10': {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  '75-25': {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  '50-50': {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  '0-100': {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  combined: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              combined: {
-                type: 'object',
-                'x-patternProperties': {
-                  '^([0-9]{4}|total)$': {
-                    type: 'object',
-                    properties: {
-                      total: {
-                        type: 'number'
-                      },
-                      federal: {
-                        type: 'number'
-                      },
-                      medicaid: {
-                        type: 'number'
-                      },
-                      state: {
-                        type: 'number'
-                      }
-                    }
-                  }
-                }
-              },
-              activityTotals: {
-                type: 'array',
-                items: {
-                  type: 'object',
-                  properties: {
-                    id: {
-                      type: 'string'
-                    },
-                    name: {
-                      type: 'string'
-                    },
-                    fundingSource: {
-                      type: 'string'
-                    },
-                    data: {
-                      type: 'object',
-                      properties: {
-                        combined: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^([0-9]{4}|total)$': {
-                              type: 'number'
-                            }
-                          }
-                        },
-                        contractors: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^([0-9]{4}|total)$': {
-                              type: 'number'
-                            }
-                          }
-                        },
-                        expenses: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^([0-9]{4}|total)$': {
-                              type: 'number'
-                            }
-                          }
-                        },
-                        statePersonnel: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^([0-9]{4}|total)$': {
-                              type: 'number'
-                            }
-                          }
-                        },
-                        otherFunding: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^[0-9]{4}$': {
-                              type: 'object',
-                              properties: {
-                                contractors: {
-                                  type: 'number'
-                                },
-                                expenses: {
-                                  type: 'number'
-                                },
-                                statePersonnel: {
-                                  type: 'number'
-                                },
-                                total: {
-                                  type: 'number'
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              activities: {
-                type: 'object',
-                'x-patternProperties': {
-                  '^[0-9a-zA-Z]{24}$': {
-                    $ref: 'activities.json'
-                  }
-                }
-              }
-            }
           }
         }
       },
@@ -2035,112 +1232,289 @@ module.exports = {
             type: 'object',
             description:
               'Federal citations that states must assert compliance with. This is a free-form object.'
+          }
+        }
+      },
+      activityTotal: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string'
           },
-          budget: {
+          name: {
+            type: 'string'
+          },
+          fundingSource: {
+            type: 'string'
+          },
+          data: {
             type: 'object',
             properties: {
-              years: arrayOf({
-                type: 'string'
-              }),
-              federalShareByFFYQuarter: {
+              combined: {
                 type: 'object',
-                properties: {
-                  mmis: {
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'number'
+                  }
+                }
+              },
+              contractors: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'number'
+                  }
+                }
+              },
+              expenses: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'number'
+                  }
+                }
+              },
+              statePersonnel: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'number'
+                  }
+                }
+              },
+              otherFunding: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'object',
                     properties: {
-                      years: {
+                      contractors: {
+                        type: 'number'
+                      },
+                      expenses: {
+                        type: 'number'
+                      },
+                      statePersonnel: {
+                        type: 'number'
+                      },
+                      total: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      costPercentByCostType: {
+        type: 'object',
+        properties: {
+          inHouse: {
+            type: 'object',
+            properties: {
+              dollars: {
+                type: 'number'
+              },
+              percent: {
+                type: 'number'
+              }
+            }
+          },
+          contractors: {
+            type: 'object',
+            properties: {
+              dollars: {
+                type: 'number'
+              },
+              percent: {
+                type: 'number'
+              }
+            }
+          },
+          combined: {
+            type: 'object',
+            properties: {
+              dollars: {
+                type: 'number'
+              },
+              percent: {
+                type: 'number'
+              }
+            }
+          }
+        }
+      },
+      budgetActivity: {
+        type: 'object',
+        properties: {
+          costsByFFY: {
+            type: 'object',
+            'x-patternProperties': {
+              '^[0-9]{4}$': {
+                type: 'object',
+                properties: {
+                  total: {
+                    type: 'number'
+                  },
+                  federal: {
+                    type: 'number'
+                  },
+                  medicaid: {
+                    type: 'number'
+                  },
+                  state: {
+                    type: 'number'
+                  }
+                }
+              }
+            }
+          },
+          quarterlyFFP: {
+            type: 'object',
+            properties: {
+              year: {
+                type: 'object',
+                properties: {
+                  1: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  },
+                  2: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  },
+                  3: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  },
+                  4: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  },
+                  subtotal: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  }
+                }
+              },
+              total: {
+                type: 'object',
+                properties: {
+                  inHouse: {
+                    type: 'number'
+                  },
+                  contractors: {
+                    type: 'number'
+                  },
+                  combined: {
+                    type: 'number'
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      hitechBudget: {
+        type: 'object',
+        properties: {
+          years: arrayOf({
+            type: 'string'
+          }),
+          federalShareByFFYQuarter: {
+            type: 'object',
+            properties: {
+              hitAndHie: {
+                type: 'object',
+                properties: {
+                  years: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
                         type: 'object',
-                        'x-patternProperties': {
-                          '^[0-9]{4}$': {
+                        properties: {
+                          1: {
                             type: 'object',
                             properties: {
-                              1: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
+                              inHouse: {
+                                type: 'number'
                               },
-                              2: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
+                              contractors: {
+                                type: 'number'
                               },
-                              3: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
+                              combined: {
+                                type: 'number'
+                              }
+                            }
+                          },
+                          2: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
                               },
-                              4: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
+                              contractors: {
+                                type: 'number'
                               },
-                              subtotal: {
-                                type: 'object',
-                                properties: {
-                                  inHouse: {
-                                    type: 'number'
-                                  },
-                                  contractors: {
-                                    type: 'number'
-                                  },
-                                  combined: {
-                                    type: 'number'
-                                  }
-                                }
+                              combined: {
+                                type: 'number'
+                              }
+                            }
+                          },
+                          3: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
+                            }
+                          },
+                          4: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
+                            }
+                          },
+                          subtotal: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
                               }
                             }
                           }
                         }
+                      }
+                    }
+                  },
+                  total: {
+                    type: 'object',
+                    properties: {
+                      inHouse: {
+                        type: 'number'
                       },
-                      total: {
-                        type: 'object',
-                        properties: {
-                          inHouse: {
-                            type: 'number'
-                          },
-                          contractors: {
-                            type: 'number'
-                          },
-                          combined: {
-                            type: 'number'
-                          }
-                        }
+                      contractors: {
+                        type: 'number'
+                      },
+                      combined: {
+                        type: 'number'
                       }
                     }
                   }
@@ -2149,205 +1523,561 @@ module.exports = {
               mmis: {
                 type: 'object',
                 properties: {
-                  statePersonnel: {
+                  years: {
                     type: 'object',
                     'x-patternProperties': {
                       '^[0-9]{4}$': {
                         type: 'object',
                         properties: {
-                          total: {
-                            type: 'number'
+                          1: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
+                            }
                           },
-                          federal: {
-                            type: 'number'
+                          2: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
+                            }
                           },
-                          medicaid: {
-                            type: 'number'
+                          3: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
+                            }
                           },
-                          state: {
-                            type: 'number'
+                          4: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
+                            }
+                          },
+                          subtotal: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
+                            }
                           }
                         }
                       }
                     }
                   },
-                  contractors: {
+                  total: {
                     type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
+                    properties: {
+                      inHouse: {
+                        type: 'number'
+                      },
+                      contractors: {
+                        type: 'number'
+                      },
+                      combined: {
+                        type: 'number'
                       }
                     }
-                  },
-                  expenses: {
+                  }
+                }
+              }
+            }
+          },
+          hie: {
+            type: 'object',
+            properties: {
+              statePersonnel: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
-                      }
-                    }
-                  },
-                  combined: {
-                    type: 'object',
-                    'x-patternProperties': {
-                      '^[0-9]{4}$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
                       }
                     }
                   }
                 }
               },
-              mmisByFFP: {
-                properties: {
-                  '90-10': {
+              contractors: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
                       }
                     }
-                  },
-                  '75-25': {
+                  }
+                }
+              },
+              expenses: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
                       }
                     }
-                  },
-                  '50-50': {
+                  }
+                }
+              },
+              combined: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
                       }
                     }
-                  },
-                  '0-100': {
+                  }
+                }
+              }
+            }
+          },
+          hit: {
+            type: 'object',
+            properties: {
+              statePersonnel: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
                       }
                     }
-                  },
-                  combined: {
+                  }
+                }
+              },
+              contractors: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
                     type: 'object',
-                    'x-patternProperties': {
-                      '^([0-9]{4}|total)$': {
-                        type: 'object',
-                        properties: {
-                          total: {
-                            type: 'number'
-                          },
-                          federal: {
-                            type: 'number'
-                          },
-                          medicaid: {
-                            type: 'number'
-                          },
-                          state: {
-                            type: 'number'
-                          }
-                        }
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              expenses: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              combined: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          mmis: {
+            type: 'object',
+            properties: {
+              statePersonnel: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              contractors: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              expenses: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              combined: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          hitAndHie: {
+            type: 'object',
+            properties: {
+              statePersonnel: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              contractors: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              expenses: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              combined: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          mmisByFFP: {
+            properties: {
+              '90-10': {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              '75-25': {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              '50-50': {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              '0-100': {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
                       }
                     }
                   }
@@ -2374,95 +2104,425 @@ module.exports = {
                     }
                   }
                 }
-              },
-              activityTotals: {
-                type: 'array',
-                items: {
-                  type: 'object',
-                  properties: {
-                    id: {
-                      type: 'string'
-                    },
-                    name: {
-                      type: 'string'
-                    },
-                    fundingSource: {
-                      type: 'string'
-                    },
-                    data: {
-                      type: 'object',
-                      properties: {
-                        combined: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^([0-9]{4}|total)$': {
-                              type: 'number'
+              }
+            }
+          },
+          combined: {
+            type: 'object',
+            'x-patternProperties': {
+              '^([0-9]{4}|total)$': {
+                type: 'object',
+                properties: {
+                  total: {
+                    type: 'number'
+                  },
+                  federal: {
+                    type: 'number'
+                  },
+                  medicaid: {
+                    type: 'number'
+                  },
+                  state: {
+                    type: 'number'
+                  }
+                }
+              }
+            }
+          },
+          activityTotals: {
+            type: 'array',
+            items: {
+              $ref: '#/components/schemas/activityTotal'
+            }
+          },
+          activities: {
+            type: 'object',
+            'x-patternProperties': {
+              '^[0-9a-zA-Z]{6}$': {
+                type: 'object',
+                properties: {
+                  $ref: '#/components/schemas/budgetActivity'
+                }
+              }
+            }
+          }
+        }
+      },
+      mmisBudget: {
+        type: 'object',
+        properties: {
+          years: arrayOf({
+            type: 'string'
+          }),
+          federalShareByFFYQuarter: {
+            type: 'object',
+            properties: {
+              mmis: {
+                type: 'object',
+                properties: {
+                  years: {
+                    type: 'object',
+                    'x-patternProperties': {
+                      '^[0-9]{4}$': {
+                        type: 'object',
+                        properties: {
+                          1: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
                             }
-                          }
-                        },
-                        contractors: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^([0-9]{4}|total)$': {
-                              type: 'number'
+                          },
+                          2: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
                             }
-                          }
-                        },
-                        expenses: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^([0-9]{4}|total)$': {
-                              type: 'number'
+                          },
+                          3: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
                             }
-                          }
-                        },
-                        statePersonnel: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^([0-9]{4}|total)$': {
-                              type: 'number'
+                          },
+                          4: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
+                              }
                             }
-                          }
-                        },
-                        otherFunding: {
-                          type: 'object',
-                          'x-patternProperties': {
-                            '^[0-9]{4}$': {
-                              type: 'object',
-                              properties: {
-                                contractors: {
-                                  type: 'number'
-                                },
-                                expenses: {
-                                  type: 'number'
-                                },
-                                statePersonnel: {
-                                  type: 'number'
-                                },
-                                total: {
-                                  type: 'number'
-                                }
+                          },
+                          subtotal: {
+                            type: 'object',
+                            properties: {
+                              inHouse: {
+                                type: 'number'
+                              },
+                              contractors: {
+                                type: 'number'
+                              },
+                              combined: {
+                                type: 'number'
                               }
                             }
                           }
                         }
                       }
                     }
+                  },
+                  total: {
+                    type: 'object',
+                    properties: {
+                      inHouse: {
+                        type: 'number'
+                      },
+                      contractors: {
+                        type: 'number'
+                      },
+                      combined: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          mmis: {
+            type: 'object',
+            properties: {
+              statePersonnel: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
                   }
                 }
               },
-              activities: {
+              contractors: {
                 type: 'object',
                 'x-patternProperties': {
-                  '^[0-9a-zA-Z]{24}$': {
-                    $ref: 'activities.json'
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
                   }
+                }
+              },
+              expenses: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              combined: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^[0-9]{4}$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          mmisByFFP: {
+            properties: {
+              '90-10': {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              '75-25': {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              '50-50': {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              '0-100': {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              },
+              combined: {
+                type: 'object',
+                'x-patternProperties': {
+                  '^([0-9]{4}|total)$': {
+                    type: 'object',
+                    properties: {
+                      total: {
+                        type: 'number'
+                      },
+                      federal: {
+                        type: 'number'
+                      },
+                      medicaid: {
+                        type: 'number'
+                      },
+                      state: {
+                        type: 'number'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          combined: {
+            type: 'object',
+            'x-patternProperties': {
+              '^([0-9]{4}|total)$': {
+                type: 'object',
+                properties: {
+                  total: {
+                    type: 'number'
+                  },
+                  federal: {
+                    type: 'number'
+                  },
+                  medicaid: {
+                    type: 'number'
+                  },
+                  state: {
+                    type: 'number'
+                  }
+                }
+              }
+            }
+          },
+          activityTotals: {
+            type: 'array',
+            items: {
+              $ref: '#/components/schemas/activityTotal'
+            }
+          },
+          activities: {
+            type: 'object',
+            'x-patternProperties': {
+              '^[0-9a-zA-Z]{6}$': {
+                type: 'object',
+                properties: {
+                  $ref: '#/components/schemas/budgetActivity'
                 }
               }
             }
           }
         }
-      }
+      },
+      adminCheck: arrayOf({
+        type: 'object',
+        properties: {
+          section: {
+            type: 'string',
+            description: 'Section name/title of admin check error'
+          },
+          link: {
+            type: 'string',
+            description: 'Link to page where admin check error occured'
+          },
+          fieldDescription: {
+            type: 'string',
+            description: 'Error message returned from schema'
+          }
+        }
+      })
     },
     securitySchemes: {
       bearerAuth: {

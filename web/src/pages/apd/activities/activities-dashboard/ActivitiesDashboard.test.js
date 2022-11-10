@@ -83,7 +83,9 @@ describe('ActivitiesDashboard component', () => {
       {
         initialState: {
           apd: {
-            adminCheck: true,
+            adminCheck: {
+              enabled: true
+            },
             data: {
               years: ['2022', '2023'],
               activities: []

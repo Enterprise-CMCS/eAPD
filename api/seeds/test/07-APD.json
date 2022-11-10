@@ -2,7 +2,7 @@
   "_id": "62a76c4c10a0f01aaa737882",
   "status": "draft",
   "stateId": "ak",
-  "__t": "HITECH",
+  "apdType": "HITECH",
   "name": "HITECH IAPD Dio 3",
   "years": ["2022", "2023"],
   "yearOptions": ["2022", "2023", "2024"],

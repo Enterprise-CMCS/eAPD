@@ -27,7 +27,10 @@ tap.test('HITECH model test', async t => {
     const found = await HITECH.findOne({ _id: apdId }); // eslint-disable-line no-underscore-dangle
 
     test.ok(!!found, 'Found the HITECH that was just added');
-    test.ok(found.__t === APD_TYPE.HITECH, 'HITECH is not a HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
+    test.ok(
+      found.apdType === APD_TYPE.HITECH,
+      'HITECH is not a HITECH or MMIS'
+    ); // eslint-disable-line no-underscore-dangle
   });
 
   t.test('patch HITECH', async test => {

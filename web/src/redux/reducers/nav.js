@@ -60,7 +60,8 @@ const reducer = (state = initialState, action = {}) => {
     }
 
     case SELECT_APD_SUCCESS: {
-      const apdId = action.apd && action.apd.id ? action.apd.id : null;
+      const apdId =
+        action.data.apd && action.data.apd.id ? action.data.apd.id : null;
       return {
         ...state,
         apdId,

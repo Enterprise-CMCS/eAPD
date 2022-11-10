@@ -32,7 +32,8 @@
       "items": { "$ref": "activity.json" }
     },
     "proposedBudget": { "$ref": "proposedBudget.json" },
-    "assurancesAndCompliances": { "$ref": "assurancesAndCompliances.json" }
+    "assurancesAndCompliances": { "$ref": "assurancesAndCompliances.json" },
+    "adminCheck": { "type": "array" }
   },
   "additionalProperties": false
 }

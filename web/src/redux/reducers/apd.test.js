@@ -13,7 +13,10 @@ const {
   FETCH_ALL_APDS_REQUEST,
   FETCH_ALL_APDS_SUCCESS,
   SAVE_APD_SUCCESS,
-  SET_APD_TO_SELECT_ON_LOAD
+  SET_APD_TO_SELECT_ON_LOAD,
+  ADMIN_CHECK_TOGGLE,
+  ADMIN_CHECK_COLLAPSE_TOGGLE,
+  ADMIN_CHECK_COMPLETE_TOGGLE
 } = require('../actions/app');
 const {
   ADD_APD_ITEM,
@@ -22,7 +25,6 @@ const {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } = require('../actions/editApd');
-const { FLAGS_UPDATED } = require('../actions/flags');
 const regulations = require('../../util/regulations').default;
 
 describe('APD reducer', () => {
@@ -37,7 +39,12 @@ describe('APD reducer', () => {
     loaded: false,
     error: '',
     selectAPDOnLoad: false,
-    adminCheck: false
+    adminCheck: {
+      errors: [],
+      enabled: false,
+      collapsed: false,
+      complete: false
+    }
   };
 
   it('should handle initial state', () => {
@@ -56,6 +63,7 @@ describe('APD reducer', () => {
         type: CREATE_APD_SUCCESS,
         data: {
           id: 'apd-id',
+          apdType: APD_TYPE.HITECH,
           // King George VI is born
           created: '1895-12-14T00:00:00Z',
           // Queen Elizabeth II is born
@@ -69,6 +77,7 @@ describe('APD reducer', () => {
       byId: {
         'apd-id': {
           id: 'apd-id',
+          apdType: APD_TYPE.HITECH,
           created: 'December 14, 1895',
           other: 'data',
           goes: 'here',
@@ -81,7 +90,12 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: {
+        errors: [],
+        enabled: false,
+        collapsed: false,
+        complete: false
+      }
     });
   });
 
@@ -93,7 +107,12 @@ describe('APD reducer', () => {
       loaded: false,
       error: '',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: {
+        errors: [],
+        enabled: false,
+        collapsed: false,
+        complete: false
+      }
     });
   });
 
@@ -101,6 +120,7 @@ describe('APD reducer', () => {
     const data = [
       {
         id: 'apd-id-1',
+        apdType: APD_TYPE.HITECH,
         // Albert the monkey is launched into space.
         created: '1948-06-11T00:00:00Z',
         // Laika the dog is launched into space
@@ -109,6 +129,7 @@ describe('APD reducer', () => {
       },
       {
         id: 'apd-id-2',
+        apdType: APD_TYPE.HITECH,
         // By law, England includes Wales.
         created: '1746-01-01T00:00:00Z',
         // The Battle of Hastings, essentially completing the Norman conquest
@@ -122,12 +143,14 @@ describe('APD reducer', () => {
       byId: {
         'apd-id-1': {
           id: 'apd-id-1',
+          apdType: APD_TYPE.HITECH,
           created: 'June 11, 1948',
           updated: 'November 3, 1957, 6:30 AM GMT',
           name: 'my first apd'
         },
         'apd-id-2': {
           id: 'apd-id-2',
+          apdType: APD_TYPE.HITECH,
           created: 'January 1, 1746',
           updated: 'October 14, 1066, 6:00 PM GMT',
           name: 'a second apd'
@@ -138,7 +161,12 @@ describe('APD reducer', () => {
       fetching: false,
       loaded: true,
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: {
+        errors: [],
+        enabled: false,
+        collapsed: false,
+        complete: false
+      }
     };
 
     expect(
@@ -159,40 +187,51 @@ describe('APD reducer', () => {
       loaded: false,
       error: 'some error',
       selectAPDOnLoad: false,
-      adminCheck: false
+      adminCheck: {
+        errors: [],
+        enabled: false,
+        collapsed: false,
+        complete: false
+      }
     });
   });
 
   describe('should handle selecting an APD', () => {
     const action = {
       type: SELECT_APD_SUCCESS,
-      apd: {
-        // A priest led an angry mob to the town council chambers and threw
-        // them out a window. The king literally died of shock. This was the
-        // First Defenestration of Prague.
-        created: '1419-07-30T00:00:00Z',
-        // Some nobles are tossed out a window in the Second Defenestration
-        // of Prague, kicking off the Thirty Years' War
-        updated: '1618-05-23T10:30:00Z',
-        keyStatePersonnel: { keyPersonnel: [{ name: 'key person 1' }] },
-        activities: [
-          {
-            activityId: 'abcd1234',
-            name: 'activity 1',
-            milestones: [{ name: 'milestone 1' }],
-            outcomes: [{ name: 'outcome 1', metrics: [{ name: 'metric 1' }] }],
-            statePersonnel: [{ name: 'person 1' }],
-            expenses: [{ name: 'expense 1' }],
-            contractorResources: [{ name: 'contractor 1' }]
-          }
-        ],
-        assurancesAndCompliances: {
-          procurement: [],
-          recordsAccess: [],
-          softwareRights: [],
-          security: []
+      data: {
+        apd: {
+          apdType: APD_TYPE.HITECH,
+          activities: [
+            {
+              name: 'activity 1',
+              activityId: 'abcd1234',
+              contractorResources: [{ name: 'contractor 1' }],
+              expenses: [{ name: 'expense 1' }],
+              outcomes: [
+                { name: 'outcome 1', metrics: [{ name: 'metric 1' }] }
+              ],
+              milestones: [{ name: 'milestone 1' }],
+              statePersonnel: [{ name: 'person 1' }]
+            }
+          ],
+          // A priest led an angry mob to the town council chambers and threw
+          // them out a window. The king literally died of shock. This was the
+          // First Defenestration of Prague.
+          created: '1419-07-30T00:00:00Z',
+          assurancesAndCompliances: {
+            procurement: [],
+            recordsAccess: [],
+            softwareRights: [],
+            security: []
+          },
+          keyStatePersonnel: { keyPersonnel: [{ name: 'key person 1' }] },
+          value: `hurr hurr i'm a burr`,
+          // Some nobles are tossed out a window in the Second Defenestration
+          // of Prague, kicking off the Thirty Years' War
+          updated: '1618-05-23T10:30:00Z'
         },
-        value: `hurr hurr i'm a burr`
+        adminCheck: []
       }
     };
 
@@ -202,6 +241,7 @@ describe('APD reducer', () => {
         data: {
           created: 'July 30, 1419',
           updated: 'May 23, 1618, 10:30 AM GMT',
+          apdType: APD_TYPE.HITECH,
           keyStatePersonnel: {
             keyPersonnel: [
               {
@@ -260,30 +300,26 @@ describe('APD reducer', () => {
     });
 
     it('sets keys and preserves the federal citations if they are defined', () => {
-      action.apd.assurancesAndCompliances = { key: 'value' };
+      action.data.apd.assurancesAndCompliances = { key: 'value' };
 
       expect(apd(initialState, action)).toEqual({
         ...initialState,
         data: {
-          created: 'July 30, 1419',
-          updated: 'May 23, 1618, 10:30 AM GMT',
-          keyStatePersonnel: {
-            keyPersonnel: [
-              {
-                key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                name: 'key person 1'
-              }
-            ]
-          },
           activities: [
             {
               key: 'abcd1234',
               activityId: 'abcd1234',
               name: 'activity 1',
-              milestones: [
+              contractorResources: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'milestone 1'
+                  name: 'contractor 1'
+                }
+              ],
+              expenses: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'expense 1'
                 }
               ],
               outcomes: [
@@ -298,28 +334,33 @@ describe('APD reducer', () => {
                   ]
                 }
               ],
+              milestones: [
+                {
+                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                  name: 'milestone 1'
+                }
+              ],
               statePersonnel: [
                 {
                   key: expect.stringMatching(/^[a-f0-9]{8}$/),
                   name: 'person 1'
                 }
-              ],
-              expenses: [
-                {
-                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'expense 1'
-                }
-              ],
-              contractorResources: [
-                {
-                  key: expect.stringMatching(/^[a-f0-9]{8}$/),
-                  name: 'contractor 1'
-                }
               ]
             }
           ],
+          apdType: APD_TYPE.HITECH,
+          created: 'July 30, 1419',
           assurancesAndCompliances: { key: 'value' },
-          value: `hurr hurr i'm a burr`
+          keyStatePersonnel: {
+            keyPersonnel: [
+              {
+                key: expect.stringMatching(/^[a-f0-9]{8}$/),
+                name: 'key person 1'
+              }
+            ]
+          },
+          value: `hurr hurr i'm a burr`,
+          updated: 'May 23, 1618, 10:30 AM GMT'
         }
       });
     });
@@ -1230,17 +1271,23 @@ describe('APD reducer', () => {
           data: {
             name: 'Timmothert',
             updated: 'in the present'
+          },
+          adminCheck: {
+            errors: []
           }
         },
         {
           type: SAVE_APD_SUCCESS,
-          apd: {
-            id: 'apdID',
-            // Medicare and Medicaid are created, 546 years to the day after
-            // the First Defenestration of Prague.
-            created: '1965-07-30T00:00:00Z',
-            // US Department of Health and Human Services is created
-            updated: '1953-04-11T00:00:00Z'
+          data: {
+            apd: {
+              id: 'apdID',
+              // Medicare and Medicaid are created, 546 years to the day after
+              // the First Defenestration of Prague.
+              created: '1965-07-30T00:00:00Z',
+              // US Department of Health and Human Services is created
+              updated: '1953-04-11T00:00:00Z'
+            },
+            adminCheck: []
           }
         }
       )
@@ -1259,18 +1306,65 @@ describe('APD reducer', () => {
           created: 'July 30, 1965',
           name: 'Timmothert',
           updated: 'April 11, 1953, 12:00 AM GMT'
+        },
+        adminCheck: {
+          errors: []
         }
       },
-      { type: SAVE_APD_SUCCESS, data: { id: 'apdID', updated: '' } }
+      { type: SAVE_APD_SUCCESS, data: { apd: { id: 'apdID', updated: '' } } }
     );
   });
 
-  it('should handle updating flags', () => {
-    expect(
-      apd(initialState, { type: FLAGS_UPDATED, flags: { validation: true } })
-    ).toEqual({
-      ...initialState,
-      adminCheck: true
+  describe('admin check panel toggles', () => {
+    it('should handle turning the admin check on', () => {
+      expect(
+        apd(initialState, {
+          type: ADMIN_CHECK_TOGGLE,
+          data: true
+        })
+      ).toEqual({
+        ...initialState,
+        adminCheck: {
+          errors: [],
+          enabled: true,
+          collapsed: false,
+          complete: false
+        }
+      });
+    });
+
+    it('should handle turning the admin check collapsed on', () => {
+      expect(
+        apd(initialState, {
+          type: ADMIN_CHECK_COLLAPSE_TOGGLE,
+          data: true
+        })
+      ).toEqual({
+        ...initialState,
+        adminCheck: {
+          errors: [],
+          enabled: false,
+          collapsed: true,
+          complete: false
+        }
+      });
+    });
+
+    it('should handle turning setting the admin check to complete', () => {
+      expect(
+        apd(initialState, {
+          type: ADMIN_CHECK_COMPLETE_TOGGLE,
+          data: true
+        })
+      ).toEqual({
+        ...initialState,
+        adminCheck: {
+          errors: [],
+          enabled: false,
+          collapsed: false,
+          complete: true
+        }
+      });
     });
   });
 });

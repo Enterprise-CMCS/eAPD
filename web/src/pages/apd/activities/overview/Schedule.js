@@ -11,6 +11,7 @@ import {
 import { Subsection } from '../../../../components/Section';
 import DateField from '../../../../components/DateField';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { stateDateToDisplay } from '../../../../util';
 
 import scheduleSchema from '@cms-eapd/common/schemas/plannedActivityShedule';
@@ -34,8 +35,8 @@ const Schedule = ({
     clearErrors
   } = useForm({
     defaultValues: {
-      start: plannedStartDate || '',
-      end: plannedEndDate || ''
+      plannedStartDate,
+      plannedEndDate
     },
     resolver: joiResolver(scheduleSchema)
   });
@@ -52,7 +53,7 @@ const Schedule = ({
     if (adminCheck && plannedEndDate) {
       trigger();
     } else if (adminCheck && !plannedEndDate) {
-      trigger('start');
+      trigger('plannedStartDate');
     }
   };
 
@@ -61,7 +62,7 @@ const Schedule = ({
       <Fragment>
         <div className="ds-u-padding-y--0 visibility--screen">
           <Controller
-            name="start"
+            name="plannedStartDate"
             control={control}
             render={({
               field: { onChange, ...props },
@@ -77,13 +78,13 @@ const Schedule = ({
 
                   triggerDates();
                 }}
-                errorMessage={errors?.start?.message}
+                errorMessage={errors?.plannedStartDate?.message}
                 errorPlacement="bottom"
               />
             )}
           />
           <Controller
-            name="end"
+            name="plannedEndDate"
             control={control}
             render={({ field: { onChange, ...props } }) => {
               return (
@@ -96,7 +97,7 @@ const Schedule = ({
 
                     triggerDates();
                   }}
-                  errorMessage={errors?.end?.message}
+                  errorMessage={errors?.plannedEndDate?.message}
                   errorPlacement="bottom"
                 />
               );
@@ -129,7 +130,7 @@ Schedule.propTypes = {
 
 const mapStateToProps = (state, { activityIndex }) => ({
   activity: selectActivityByIndex(state, { activityIndex }),
-  adminCheck: state.apd.adminCheck
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {

@@ -144,10 +144,28 @@ const openAPI = {
         200: {
           description: 'The update was successful',
           content: jsonResponse({
-            oneOf: [
-              { $ref: '#/components/schemas/hitech' },
-              { $ref: '#/components/schemas/mmis' }
-            ]
+            type: 'object',
+            properties: {
+              apd: {
+                type: 'object',
+                properties: {
+                  oneOf: [
+                    { $ref: '#/components/schemas/hitech' },
+                    { $ref: '#/components/schemas/mmis' }
+                  ]
+                }
+              },
+              budget: {
+                type: 'object',
+                properties: {
+                  oneOf: [
+                    { $ref: '#/components/schemas/hitechBudget' },
+                    { $ref: '#/components/schemas/mmisBudget' }
+                  ]
+                }
+              },
+              adminCheck: {}
+            }
           })
         },
         400: {

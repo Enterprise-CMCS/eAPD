@@ -2,6 +2,7 @@ import {
   generateKey,
   hasBudgetUpdate,
   defaultAPDYearOptions,
+  thisFFY,
   defaultAPDYears,
   forAllYears
 } from './utils';
@@ -812,6 +813,7 @@ describe('utility functions', () => {
       // tick forward 10 days, so we're not on the weird date boundary
       jest.advanceTimersByTime(864000000);
 
+      expect(thisFFY()).toEqual(1970);
       expect(defaultAPDYearOptions()).toEqual(['1970', '1971', '1972']);
       expect(defaultAPDYears()).toEqual(['1970', '1971']);
 
@@ -823,6 +825,7 @@ describe('utility functions', () => {
       // tick forward 360 days
       jest.advanceTimersByTime(31104000000);
 
+      expect(thisFFY()).toEqual(1971);
       expect(defaultAPDYearOptions()).toEqual(['1971', '1972', '1973']);
       expect(defaultAPDYears()).toEqual(['1971', '1972']);
 

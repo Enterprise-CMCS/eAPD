@@ -120,6 +120,16 @@ const apdSchema = new mongoose.Schema({
   }
 });
 
+/* eslint-disable no-underscore-dangle, func-names */
+apdSchema
+  .virtual('apdType')
+  .get(function () {
+    return this.__t;
+  })
+  .set(function (v) {
+    this.set({ __t: v });
+  });
+
 const APD = mongoose.model('APD', apdSchema);
 
 module.exports = { APD, discriminatorOptions, federalCitation };

@@ -10,8 +10,8 @@ const {
 
 let apdId;
 let budgetId;
-delete apd.__t; // eslint-disable-line no-underscore-dangle
-delete apdNoActivities.__t; // eslint-disable-line no-underscore-dangle
+delete apd.apdType; // eslint-disable-line no-underscore-dangle
+delete apdNoActivities.apdType; // eslint-disable-line no-underscore-dangle
 
 tap.test('Budget model test', async t => {
   t.before(async () => {
@@ -34,7 +34,7 @@ tap.test('Budget model test', async t => {
   t.test('get Budget from APD', async test => {
     const found = await APD.findOne({ _id: apdId });
     test.ok(!!found.budget, 'Found the Budget that was just added to the APD');
-    test.ok(!found.__t, 'Budget is not HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
+    test.ok(!found.apdType, 'Budget is not HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
     test.equal(found.budget.toString(), budgetId, 'Budget Id was retrieved');
   });
 

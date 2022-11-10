@@ -5376,7 +5376,7 @@ describe('budget calculate methods', () => {
         years: ['1931', '1932', '1933']
       };
       const actual = calculateBudget({
-        __t: APD_TYPE.HITECH,
+        apdType: APD_TYPE.HITECH,
         activities: [
           {
             id: 1,
@@ -6047,7 +6047,7 @@ describe('budget calculate methods', () => {
         years: ['2017', '2018']
       };
       const actual = calculateBudget({
-        __t: APD_TYPE.MMIS,
+        apdType: APD_TYPE.MMIS,
         activities: [
           {
             id: 1,

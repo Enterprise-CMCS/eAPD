@@ -6,7 +6,7 @@ const { APD } = require('./index');
 const { hitech: apd } = require('../seeds/development/apds');
 
 let apdId;
-delete apd.__t; // eslint-disable-line no-underscore-dangle
+delete apd.apdType; // eslint-disable-line no-underscore-dangle
 
 tap.test('APD model test', async t => {
   t.before(async () => {
@@ -27,7 +27,7 @@ tap.test('APD model test', async t => {
     const found = await APD.findOne({ _id: apdId }); // eslint-disable-line no-underscore-dangle
 
     test.ok(!!found, 'Found the APD that was just added');
-    test.ok(!found.__t, 'APD is not a HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
+    test.ok(!found.apdType, 'APD is not a HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
   });
 
   t.test('patch APD', async test => {

@@ -239,7 +239,7 @@ ActivityOverview.propTypes = {
 const mapStateToProps = (state, { activityIndex }) => {
   return {
     activity: selectActivityByIndex(state, { activityIndex }),
-    adminCheck: state.apd.adminCheck
+    adminCheck: state.apd.adminCheck?.enabled
   };
 };
 

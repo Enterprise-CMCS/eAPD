@@ -29,7 +29,7 @@ tap.test('Budget model test', async t => {
   t.test('get Budget from MMIS', async test => {
     const found = await MMIS.findOne({ _id: apdId });
     test.ok(!!found.budget, 'Found the Budget that was just added to the APD');
-    test.ok(found.__t === APD_TYPE.MMIS, 'Budget is MMIS'); // eslint-disable-line no-underscore-dangle
+    test.ok(found.apdType === APD_TYPE.MMIS, 'Budget is MMIS'); // eslint-disable-line no-underscore-dangle
     test.equal(found.budget.toString(), budgetId, 'Budget Id was retrieved');
   });
 

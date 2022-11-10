@@ -1,5 +1,5 @@
-module.exports = {
-  __t: 'MMIS',
+const mmis = {
+  apdType: 'MMIS',
   name: 'MMIS IAPD',
   years: ['2023', '2024'],
   yearOptions: ['2023', '2024', '2025'],
@@ -418,3 +418,5 @@ module.exports = {
     ]
   }
 };
+
+module.exports = { mmis };

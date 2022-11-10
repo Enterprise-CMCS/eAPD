@@ -1,5 +1,5 @@
 {
-  "__t": "HITECH",
+  "apdType": "HITECH",
   "name": "HITECH IAPD",
   "years": ["2022", "2023"],
   "yearOptions": ["2022", "2023", "2024"],

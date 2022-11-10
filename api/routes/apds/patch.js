@@ -1,10 +1,16 @@
 const sanitize = require('../../util/sanitize');
 const logger = require('../../logger')('apds route put');
-const { updateAPDDocument: ua } = require('../../db');
+const {
+  updateAPDDocument: ua,
+  adminCheckAPDDocument: validate
+} = require('../../db');
 const { can, userCanEditAPD } = require('../../middleware');
 const { staticFields } = require('../../util/apds');
 
-module.exports = (app, { updateAPDDocument = ua } = {}) => {
+module.exports = (
+  app,
+  { updateAPDDocument = ua, adminCheckAPDDocument = validate } = {}
+) => {
   logger.silly('setting up PATCH /apds/:id route');
   app.patch(
     '/apds/:id',
@@ -40,6 +46,7 @@ module.exports = (app, { updateAPDDocument = ua } = {}) => {
             createdAt: created,
             updatedAt: updated,
             stateId: state,
+            budget,
             ...apd
           } = {}
         } = await updateAPDDocument({
@@ -54,6 +61,8 @@ module.exports = (app, { updateAPDDocument = ua } = {}) => {
           logger.error({ id: req.id, message: errors });
         }
 
+        const adminCheck = await adminCheckAPDDocument(req.params.id);
+
         return res.send({
           errors,
           apd: {
@@ -62,7 +71,9 @@ module.exports = (app, { updateAPDDocument = ua } = {}) => {
             created,
             state,
             updated
-          }
+          },
+          adminCheck,
+          budget
         });
       } catch (e) {
         logger.error({ id: req.id, message: e });
