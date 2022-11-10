@@ -1,5 +1,4 @@
 const { applyPatch } = require('fast-json-patch');
-const jsonpointer = require('jsonpointer');
 const {
   deepCopy,
   calculateBudget,
@@ -8,7 +7,6 @@ const {
 } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
-const { validateApd } = require('../schemas');
 const {
   Budget,
   HITECHBudget,
@@ -102,7 +100,7 @@ const adminCheckAPDDocument = async id => {
 
 const updateAPDDocument = async (
   { id, stateId, patch },
-  { updateProfile = updateStateProfile, validate = validateApd } = {}
+  { updateProfile = updateStateProfile } = {}
 ) => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId })
@@ -190,25 +188,8 @@ const updateAPDDocument = async (
       await updateProfile(stateId, updatedDoc.keyStatePersonnel);
     }
 
-    // Will probably eventually switch to apd.validate
-    const validationErrors = {};
-    const validationCopy = deepCopy(updatedDoc);
-    delete validationCopy.budget; // remove budget because it shouldn't be validated
-    const valid = true; // TODO new validation validate(validationCopy);
-    if (!valid) {
-      // Rather than send back the full error from the validator, pull out just the relevant bits
-      // and fetch the value that's causing the error.
-      validate.errors.forEach(({ instancePath, message }) => {
-        validationErrors[instancePath] = {
-          dataPath: instancePath,
-          message,
-          value: jsonpointer.get(updatedDoc, instancePath)
-        };
-      });
-    }
-
     return {
-      errors: { ...updateErrors, ...validationErrors },
+      errors: { ...updateErrors },
       apd: {
         ...updatedDoc,
         budget: updatedBudget
