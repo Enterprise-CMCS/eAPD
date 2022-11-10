@@ -20,7 +20,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     fillOutActivityPage = new FillOutActivityPage();
 
     cy.useStateStaff();
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ validation: false, enableMmis: false });
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
@@ -47,7 +47,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ validation: false, enableMmis: false });
     cy.visit(apdUrl);
   });
 

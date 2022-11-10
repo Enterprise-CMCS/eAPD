@@ -30,7 +30,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   before(() => {
     cy.useStateStaff();
-    cy.updateFeatureFlags({ validation: false, enableMmis: true });
+    cy.updateFeatureFlags({ validation: false, enableMmis: false });
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
@@ -53,7 +53,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: false, enableMmis: true });
+    cy.updateFeatureFlags({ validation: false, enableMmis: false });
     cy.visit(apdUrl);
   });
 
