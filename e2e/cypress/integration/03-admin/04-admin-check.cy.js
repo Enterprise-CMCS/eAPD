@@ -136,6 +136,8 @@ describe('tests state admin portal', () => {
         });
 
         cy.setTinyMceContent('program-introduction-field', '');
+        cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+
         cy.get('[data-cy="validationError"]')
           .contains('Provide a brief introduction to the state program.')
           .should('exist');
@@ -146,6 +148,8 @@ describe('tests state admin portal', () => {
         });
 
         cy.setTinyMceContent('hit-overview-field', '');
+        cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+
         cy.get('[data-cy="validationError"]')
           .contains('Provide a summary of HIT-funded activities.')
           .should('exist');
