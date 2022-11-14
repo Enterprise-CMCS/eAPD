@@ -45,7 +45,11 @@ describe('saving state reducer and selectors', () => {
             type: SAVE_APD_SUCCESS,
             // March 11, 2020, 10:53 AM CDT: When this test was written. Truly
             // a red-letter day in science.
-            apd: { updated: '2020-03-11T10:53:00-0500' }
+            data: {
+              apd: {
+                updated: '2020-03-11T10:53:00-0500'
+              }
+            }
           }
         )
       ).toEqual({
@@ -63,7 +67,10 @@ describe('saving state reducer and selectors', () => {
           { error: 'moop moop', lastSaved: 'builder', saving: true },
           // Marie Curie is selected for the Nobel Prize for Chemistry,
           // becoming the first person in history to receive two.
-          { type: SELECT_APD_SUCCESS, apd: { updated: '1911-11-07T00:00:00Z' } }
+          {
+            type: SELECT_APD_SUCCESS,
+            data: { apd: { updated: '1911-11-07T00:00:00Z' } }
+          }
         )
       ).toEqual({
         error: false,

@@ -1,0 +1,121 @@
+.eapd-admin-check {
+  z-index: 2;
+  top: 60px;
+  box-shadow: -2px 2px 3px 1px #8484848c;
+  max-width: 60ex;
+}
+
+.eapd-admin-check a:visited {
+  color: $color-primary;
+  text-decoration-color: $color-primary;
+}
+
+.eapd-admin-check .ds-c-drawer__header {
+  // To support our admin check panel with expand/collapse we
+  // are not using the design system provided header.
+  display: none;
+}
+
+.eapd-admin-check .ds-c-drawer__window {
+  overflow: scroll;
+}
+
+.eapd-admin-check .ds-c-drawer__body {
+  background: #ffffff;
+}
+
+.eapd-admin-check .ds-c-drawer__footer {
+  padding: 16px;
+  margin-bottom: 60px;
+}
+
+.eapd-admin-check .ds-c-drawer__footer a {
+  text-decoration-color: currentColor;
+}
+
+.eapd-admin-check .eapd-admin-check__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 24px 16px;
+  margin-top: -16px;
+  margin-left: -16px;
+  margin-right: -16px;
+  margin-bottom: 0;
+}
+
+.eapd-admin-check__divider {
+  border: none;
+  border-bottom: 3px solid $color-primary;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.eapd-admin-check-list ol {
+  padding-left: 0;
+}
+
+.eapd-admin-check-list ol > li {
+  counter-increment: item;
+  list-style: none inside;
+}
+
+.eapd-admin-check-list ol > li:before {
+  content: counter(item);
+  margin-right: 12px;
+  padding: 4px;
+  display: block;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  background: $color-primary;
+  color: #fff;
+  text-align: center;
+  font-weight: 100;
+  float: left;
+}
+
+.eapd-admin-check-list .eapd-admin-check--completed-item:before {
+  background: $color-gray;
+}
+
+.eapd-admin-check-list ol > li.democheck:before {
+  background: $color-gray;
+}
+
+.eapd-admin-check--collapsed {
+  height: auto;
+  bottom: auto;
+}
+
+.eapd-admin-check--collapsed_content {
+  padding-top: 10px;
+}
+
+.eapd-admin-check--collapsed .ds-c-drawer__footer {
+  display: none;
+}
+
+.eapd-admin-check--completed-item > div > a {
+  color: $color-gray;
+}
+
+.eapd-admin-check--completed-item > div > a:visited {
+  color: $color-gray;
+  text-decoration-color: $color-gray;
+}
+
+#complete-check {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  pointer-events: none;
+  animation: firstAnimation 1s linear forwards 1;
+}
+@keyframes firstAnimation {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

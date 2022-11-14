@@ -41,10 +41,14 @@ const schemas = Joi.object({
     'number.positive': 'Provide a contract cost greater than or equal to $0.',
     'number.allow': 'Provide a contract cost greater than or equal to $0.'
   }),
-  useHourly: Joi.string().required().messages({
-    'string.base': 'Must select hourly or yearly.',
-    'string.empty': 'Must select hourly or yearly.'
-  }),
+  useHourly: Joi.alternatives()
+    .try(Joi.string(), Joi.boolean())
+    .required()
+    .messages({
+      'alternatives.types': 'Must select hourly or yearly.',
+      'string.base': 'Must select hourly or yearly.',
+      'string.empty': 'Must select hourly or yearly.'
+    }),
   hourly: Joi.alternatives().conditional('useHourly', {
     is: 'yes',
     then: Joi.object().pattern(

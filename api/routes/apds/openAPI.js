@@ -76,8 +76,10 @@ const openAPI = {
       ],
       responses: {
         200: {
-          description: 'The APD',
-          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+          description: 'The APD, budget, and adminCheck',
+          content: jsonResponse({
+            $ref: '#/components/schemas/singleApd'
+          })
         },
         403: {
           description: 'The apd ID does not match any known apds for the user'
@@ -133,7 +135,9 @@ const openAPI = {
       responses: {
         200: {
           description: 'The update was successful',
-          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+          content: jsonResponse({
+            $ref: '#/components/schemas/singleApd'
+          })
         },
         400: {
           description: 'The update failed due to a problem with the input data',

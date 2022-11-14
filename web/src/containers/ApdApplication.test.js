@@ -10,6 +10,8 @@ import { setApdToSelectOnLoad, selectApd } from '../redux/actions/app';
 import apd from '../fixtures/ak-apd.json';
 import budget from '../fixtures/ak-budget.json';
 
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: jest.fn()
@@ -51,6 +53,8 @@ const setup = (props = {}, options = {}) => {
 describe('apd (application) component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    resetLDMocks();
+    mockFlags({ adminCheckFlag: true });
   });
 
   it('renders correctly for non-admin, APD already selected', () => {

@@ -1,7 +1,11 @@
 module.exports = {
   coverageDirectory: '../coverage/',
   rootDir: 'src',
-  setupFiles: ['../polyfills.test.js', '../setup.enzyme.test.js'],
+  setupFiles: [
+    '../polyfills.test.js',
+    '../setup.enzyme.test.js',
+    'jest-launchdarkly-mock'
+  ],
   setupFilesAfterEnv: ['../setup.rtl.test.js'],
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
