@@ -5,15 +5,6 @@ export const testDefaultKeyStatePersonnel = () => {
     cy.url().should('contain', '/state-profile');
     cy.findByRole('heading', { name: /Key State Personnel/i }).should('exist');
 
-    cy.contains('Provide the name of the State Medicaid Director.');
-    cy.contains('Provide the email address of the State Medicaid Director.');
-    cy.contains(
-      'Provide a valid phone number for the State Medicaid Director.'
-    );
-    cy.contains('Provide a mailing street address for the Medicaid office.');
-    cy.contains('Provide a city name.');
-    cy.contains('Provide a zip code.');
-
     cy.get('input[name="medicaidDirector.name"]')
       .clear()
       .should('have.text', '');

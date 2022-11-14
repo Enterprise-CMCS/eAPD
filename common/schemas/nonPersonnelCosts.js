@@ -12,9 +12,12 @@ const nonPersonnelCostsSchema = Joi.object({
       'Miscellaneous expenses for the project'
     )
     .messages({
+      'any.default': 'Select a category.',
       'any.only': 'Select a category.'
     }),
   description: Joi.string().required().messages({
+    'string.base':
+      'Provide a description of the selected non-personal category.',
     'string.empty':
       'Provide a description of the selected non-personal category.'
   }),

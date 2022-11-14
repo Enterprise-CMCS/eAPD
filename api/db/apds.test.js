@@ -7,11 +7,14 @@ const {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
-  updateAPDDocument
+  updateAPDDocument,
+  adminCheckAPDDocument
 } = require('./apds');
 const { setup, teardown } = require('./mongodb');
+
+const { apd, apdForAdminCheck } = require('../seeds/development/apds');
+
 const { APD, Budget } = require('../models/index');
-const { apd } = require('../seeds/development/apds');
 
 const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
 let clock;
@@ -277,6 +280,22 @@ tap.test('database wrappers / apds', async apdsTests => {
       clock.restore();
     });
   });
+
+  apdsTests.test(
+    'validating an APD for admin check',
+    async adminCheckAPDTest => {
+      adminCheckAPDTest.test('when no errors are expected', async test => {
+        id = await createAPD({
+          stateId: 'co',
+          status: 'draft',
+          ...apdForAdminCheck
+        });
+
+        const errors = await adminCheckAPDDocument(id);
+        test.equal(errors, []);
+      });
+    }
+  );
 
   apdsTests.teardown(async () => {
     if (id) {

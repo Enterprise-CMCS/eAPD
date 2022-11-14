@@ -39,11 +39,6 @@ export const testDefaultAssurancesAndCompliance = () => {
       });
     });
 
-    cy.findAllByText('Select yes or no', {
-      selector: 'span',
-      ignore: 'div'
-    }).should('have.length', 15);
-
     cy.waitForSave();
   });
 
@@ -95,11 +90,6 @@ export const testAssurancesAndComplianceWithData = () => {
     cy.findByRole('heading', { name: /Assurances and Compliance/i })
       .parent()
       .as('assurancesComplianceDiv');
-
-    cy.findAllByText('Select yes or no', {
-      selector: 'span',
-      ignore: 'div'
-    }).should('have.length', 15);
 
     categories.forEach(category => {
       const val = assurancesAndCompliance[category];

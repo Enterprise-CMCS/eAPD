@@ -9,6 +9,7 @@ const schemas = Joi.object({
     Joi.object({
       key: Joi.any(),
       metric: Joi.string().messages({
+        'string.base': 'Metric is required',
         'string.empty': 'Metric is required',
         'string.null': 'Metric is required'
       })
