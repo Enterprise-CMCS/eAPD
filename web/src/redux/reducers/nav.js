@@ -37,7 +37,7 @@ export const getContinuePreviousLinks = (apdId, pathname, links) => {
 
 const initialState = {
   apdId: null,
-  apdType: 'hitech',
+  apdType: null,
   activities: [],
   continueLink: null,
   items: staticItems(),

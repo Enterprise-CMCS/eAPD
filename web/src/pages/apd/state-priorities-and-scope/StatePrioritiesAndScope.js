@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Section, Subsection } from '../../../components/Section';
+import { Section } from '../../../components/Section';
 
 const StatePrioritiesAndScope = () => {
   return (
@@ -13,9 +12,7 @@ const StatePrioritiesAndScope = () => {
   );
 };
 
-StatePrioritiesAndScope.propTypes = {};
-
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {};
 

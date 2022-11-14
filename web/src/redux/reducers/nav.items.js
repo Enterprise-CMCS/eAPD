@@ -195,8 +195,8 @@ const staticItems = (apdId, apdType) => {
           ]
         },
         {
-          label: titleCase(t('disasterRecoveryBusinessContinuity.title')),
-          url: `/apd/${apdId}/disaster-recovery-business-continuity`
+          label: titleCase(t('securityPlanning.title')),
+          url: `/apd/${apdId}/security-planning`
         },
         {
           label: titleCase(t('assurancesAndCompliance.title')),

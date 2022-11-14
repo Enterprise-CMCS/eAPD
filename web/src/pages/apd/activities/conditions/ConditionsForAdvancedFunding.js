@@ -1,14 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { Subsection } from '../../../../components/Section';
+
 const ConditionsForAdvancedFunding = () => {
-  return <div>ConditionsForAdvancedFunding</div>;
+  return <Subsection resource="activities.conditions"></Subsection>;
 };
 
-ConditionsForAdvancedFunding.propTypes = {};
-
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {};
 

@@ -9,6 +9,7 @@ import ExecutiveSummary from './executive-summary/ExecutiveSummary';
 import PreviousActivities from './previous-activities/PreviousActivities';
 import ProposedBudget from './proposed-budget/ProposedBudget';
 import ScheduleSummary from './schedule-summary/ScheduleSummary';
+import SecurityPlanning from './security-planning/SecurityPlanning';
 import KeyStatePersonnel from './key-state-personnel/KeyStatePersonnel';
 
 const apdOverview = {
@@ -74,6 +75,15 @@ const proposedBudget = {
   pageName: 'Proposed Budget'
 };
 
+const securityPlanning = {
+  path: '/apd/:apdId/security-planning',
+  children: <SecurityPlanning />,
+  isPublic: false,
+  contentType: 'report',
+  siteSection: 'APD',
+  pageName: 'Security Planning'
+};
+
 const assurancesAndCompliance = {
   path: '/apd/:apdId/assurances-and-compliance',
   children: <AssurancesAndCompliance />,
@@ -106,6 +116,7 @@ const routes = [
   statePrioritiesAndScope,
   keyStatePersonnel,
   previousActivities,
+  securityPlanning,
   activitiesDashboard,
   schedule,
   proposedBudget,

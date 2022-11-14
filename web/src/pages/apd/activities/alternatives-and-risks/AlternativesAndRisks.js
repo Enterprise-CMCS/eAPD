@@ -1,14 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { Subsection } from '../../../../components/Section';
+
 const AlternativesAndRisks = () => {
-  return <div>hello</div>;
+  return <Subsection resource="activities.alternativesAndRisks"></Subsection>;
 };
 
-AlternativesAndRisks.propTypes = {};
-
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {};
 
