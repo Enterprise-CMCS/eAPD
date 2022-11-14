@@ -95,6 +95,7 @@ workflows:
           name: Cleanup Old Unused Production/Staging AMIs
           requires:
             - Build Prod Staging AMI
+            - Cleanup Old Unused Preview AMIs
 
   # Tests
   owasp, e2e, and chromatic:
