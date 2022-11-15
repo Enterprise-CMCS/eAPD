@@ -102,87 +102,34 @@ const mmisNoActivities = {
     }
   },
   activities: [],
+  securityPlanning: {
+    securityAndInterfacePlan: '',
+    businessContinuityAndDisasterRecovery: ''
+  },
   assurancesAndCompliances: {
     procurement: [
-      {
-        checked: null,
-        title: '42 CFR Part 495.348',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: 'SMM Section 11267',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '45 CFR 95.613',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '45 CFR 75.326',
-        explanation: ''
-      }
+      { title: 'SSM, Part 11', checked: null, explanation: '' },
+      { title: '45 CFR Part 95.615', checked: null, explanation: '' },
+      { title: '45 CFR Part 92.36', checked: null, explanation: '' }
     ],
     recordsAccess: [
       {
+        title: '42 CFR Part 433.112(b)(5)-(9)',
         checked: null,
-        title: '42 CFR Part 495.350',
         explanation: ''
       },
-      {
-        checked: null,
-        title: '42 CFR Part 495.352',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '42 CFR Part 495.346',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '42 CFR 433.112(b)',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '45 CFR Part 95.615',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: 'SMM Section 11267',
-        explanation: ''
-      }
+      { title: '45 CFR Part 95.615', checked: null, explanation: '' },
+      { title: 'SMM Section 11267', checked: null, explanation: '' }
     ],
     softwareRights: [
-      {
-        checked: null,
-        title: '42 CFR 495.360',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '45 CFR 95.617',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '42 CFR Part 431.300',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '42 CFR Part 433.112',
-        explanation: ''
-      }
+      { title: '45 CFR Part 95.617', checked: null, explanation: '' },
+      { title: '42 CFR Part 431.300', checked: null, explanation: '' },
+      { title: '45 CFR Part 164', checked: null, explanation: '' }
     ],
-    security: [
+    independentVV: [
       {
+        title: '45 CFR Part 95.626',
         checked: null,
-        title: '45 CFR 164 Security and Privacy',
         explanation: ''
       }
     ]

@@ -14,7 +14,7 @@ import { selectActivityByIndex } from '../../../../redux/selectors/activities.se
 import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { stateDateToDisplay } from '../../../../util';
 
-import scheduleSchema from '@cms-eapd/common/schemas/plannedActivityShedule';
+import activityScheduleSchema from '@cms-eapd/common/schemas/activitySchedule';
 
 const Schedule = ({
   activity,
@@ -38,7 +38,7 @@ const Schedule = ({
       plannedStartDate,
       plannedEndDate
     },
-    resolver: joiResolver(scheduleSchema)
+    resolver: joiResolver(activityScheduleSchema)
   });
 
   useEffect(() => {

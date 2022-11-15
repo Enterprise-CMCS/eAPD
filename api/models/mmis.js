@@ -79,12 +79,15 @@ const mmisSchema = new mongoose.Schema(
       }
     },
     activities: [mmisActivitySchema],
-    // TODO this will change once the Assurances and Compliances designs are done
+    securityPlanning: {
+      securityAndInterfacePlan: String,
+      businessContinuityAndDisasterRecovery: String
+    },
     assurancesAndCompliances: {
       procurement: [federalCitation],
       recordsAccess: [federalCitation],
       softwareRights: [federalCitation],
-      security: [federalCitation]
+      independentVV: [federalCitation]
     },
     budget: {
       type: mongoose.Schema.Types.ObjectId,

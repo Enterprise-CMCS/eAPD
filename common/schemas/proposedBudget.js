@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-export const proposedBudgetEhAmt = Joi.object().pattern(
+export const proposedBudgetEhAmtSchema = Joi.object().pattern(
   /\d{4}/,
   Joi.object().pattern(
     /[1-4]{1}/,
@@ -18,7 +18,7 @@ export const proposedBudgetEhAmt = Joi.object().pattern(
     })
   )
 );
-export const proposedBudgetEpAmt = Joi.object().pattern(
+export const proposedBudgetEpAmtSchema = Joi.object().pattern(
   /\d{4}/,
   Joi.object().pattern(
     /[1-4]{1}/,
@@ -37,13 +37,13 @@ export const proposedBudgetEpAmt = Joi.object().pattern(
   )
 );
 
-const incentivePaySchema = Joi.object({
-  data: Joi.object({
+const proposedBudgetSchema = Joi.object({
+  incentivePayments: Joi.object({
     ehCt: Joi.any(),
     epCt: Joi.any(),
-    ehAmt: proposedBudgetEhAmt,
-    epAmt: proposedBudgetEpAmt
+    ehAmt: proposedBudgetEhAmtSchema,
+    epAmt: proposedBudgetEpAmtSchema
   })
 });
 
-export default incentivePaySchema;
+export default proposedBudgetSchema;

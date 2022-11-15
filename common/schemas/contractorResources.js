@@ -1,6 +1,6 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
-const schemas = Joi.object({
+const contractorResourcesSchema = Joi.object({
   key: Joi.any(),
   name: Joi.string().trim().min(1).required().messages({
     'string.base': 'Provide a private contractor or vendor name.',
@@ -95,4 +95,4 @@ const schemas = Joi.object({
   files: Joi.any()
 });
 
-export default schemas;
+export default contractorResourcesSchema;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import incentivePayments from '@cms-eapd/common/schemas/incentivePayments';
+import proposedBudgetSchema from '@cms-eapd/common/schemas/proposedBudget';
 
 import {
   setIncentiveEHCount,
@@ -47,7 +47,7 @@ const IncentivePayments = ({
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(incentivePayments)
+    resolver: joiResolver(proposedBudgetSchema)
   });
 
   useEffect(() => {

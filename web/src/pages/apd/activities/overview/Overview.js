@@ -18,7 +18,7 @@ import { NameAndFundingSourceForm } from './NameAndFundingSource/';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import Schedule from './Schedule';
 
-import overviewSchema from '@cms-eapd/common/schemas/activityOverview';
+import { hitechActivityOverviewNoSCSchema } from '@cms-eapd/common/schemas/activityOverview';
 
 const ActivityOverview = ({
   activity,
@@ -44,7 +44,7 @@ const ActivityOverview = ({
       description: description,
       summary: summary
     },
-    resolver: joiResolver(overviewSchema)
+    resolver: joiResolver(hitechActivityOverviewNoSCSchema)
   });
 
   useEffect(() => {

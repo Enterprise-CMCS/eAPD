@@ -24,7 +24,7 @@ import CostAllocationRows, {
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
 
-import costAllocateFFPSchema from '@cms-eapd/common/schemas/costAllocationFFP';
+import { costAllocationFFPSchema } from '@cms-eapd/common/schemas/costAllocation';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -125,7 +125,7 @@ const CostAllocateFFP = ({
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(costAllocateFFPSchema)
+    resolver: joiResolver(costAllocationFFPSchema)
   });
 
   useEffect(() => {

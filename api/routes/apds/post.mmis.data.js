@@ -3,31 +3,29 @@ const { defaultAPDYearOptions, forAllYears } = require('@cms-eapd/common');
 const getNewMmisApd = () => {
   const yearOptions = defaultAPDYearOptions();
 
-  // TODO this will change once the Assurances and Compliances designs are done
   const regsGenerator = () => ({
     procurement: [
-      { title: '42 CFR Part 495.348', checked: null, explanation: '' },
-      { title: 'SMM Section 11267', checked: null, explanation: '' },
-      { title: '45 CFR 95.613', checked: null, explanation: '' },
-      { title: '45 CFR 75.326', checked: null, explanation: '' }
+      { title: 'SSM, Part 11', checked: null, explanation: '' },
+      { title: '45 CFR Part 95.615', checked: null, explanation: '' },
+      { title: '45 CFR Part 92.36', checked: null, explanation: '' }
     ],
     recordsAccess: [
-      { title: '42 CFR Part 495.350', checked: null, explanation: '' },
-      { title: '42 CFR Part 495.352', checked: null, explanation: '' },
-      { title: '42 CFR Part 495.346', checked: null, explanation: '' },
-      { title: '42 CFR 433.112(b)', checked: null, explanation: '' },
+      {
+        title: '42 CFR Part 433.112(b)(5)-(9)',
+        checked: null,
+        explanation: ''
+      },
       { title: '45 CFR Part 95.615', checked: null, explanation: '' },
       { title: 'SMM Section 11267', checked: null, explanation: '' }
     ],
     softwareRights: [
-      { title: '42 CFR 495.360', checked: null, explanation: '' },
-      { title: '45 CFR 95.617', checked: null, explanation: '' },
+      { title: '45 CFR Part 95.617', checked: null, explanation: '' },
       { title: '42 CFR Part 431.300', checked: null, explanation: '' },
-      { title: '42 CFR Part 433.112', checked: null, explanation: '' }
+      { title: '45 CFR Part 164', checked: null, explanation: '' }
     ],
-    security: [
+    independentVV: [
       {
-        title: '45 CFR 164 Security and Privacy',
+        title: '45 CFR Part 95.626',
         checked: null,
         explanation: ''
       }
@@ -56,6 +54,10 @@ const getNewMmisApd = () => {
       )
     },
     activities: [],
+    securityPlanning: {
+      securityAndInterfacePlan: '',
+      businessContinuityAndDisasterRecovery: ''
+    },
     assurancesAndCompliances: regsGenerator()
   };
 };
