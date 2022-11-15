@@ -14,11 +14,11 @@ function cleanupPreviewAMI() {
   printf "• Finding state of AWS environment\n"
   waitForAtRest
   printf "• Finding available Preview AMIs\n"
-  getAvailableAMIs
+  getAvailableAMIs |uniq
   printf "• Checking for Preview AMIs currently in use\n"
-  checkAMIForUsage
-  printf "• Checking for the most recently created Preview AMI\n"
-  getMostRecentAMI
+  checkAMIForUsage |uniq
+  printf "• Checking for the most recently created AMIs\n"
+  getMostRecentAMI |uniq
   printf "• AMI actions being taken\n"
   deregisterIfNotUsed
 }
@@ -31,7 +31,7 @@ function configureAWS() {
 function getAvailableAMIs() {
   aws ec2 describe-images \
     --owner self \
-    --filter 'Name=name,Values=eAPD Preview AMI - *' \
+    --filter 'Name=name,Values=eAPD *' \
     | jq -rc '.Images[].ImageId' 
 }
 
@@ -46,11 +46,42 @@ function checkAMIForUsage() {
 }
 
 function getMostRecentAMI() {
-  aws ec2 describe-images \
+  getMostRecentPreviewAMI
+  getMostRecentPreviewMongoAMI
+  getMostRecentStagingMongoAMI
+  getMostRecentProdMongoAMI
+}
+
+function getMostRecentPreviewAMI() {
+  echo $(aws ec2 describe-images \
     --owners self \
-    --filters "Name=name,Values=eAPD Preview AMI - *" \
+    --filters "Name=name,Values=eAPD Preview AMI *" \
     --query 'sort_by(Images, &CreationDate)[-1].ImageId' \
-    --output text
+    --output text)
+}
+
+function getMostRecentPreviewMongoAMI() {
+  echo $(aws ec2 describe-images \
+    --owners self \
+    --filters "Name=name,Values=eAPD Preview Mongo AMI *" \
+    --query 'sort_by(Images, &CreationDate)[-1].ImageId' \
+    --output text)
+}
+
+function getMostRecentStagingMongoAMI() {
+  echo $(aws ec2 describe-images \
+    --owners self \
+    --filters "Name=name,Values=eAPD Staging Mongo AMI *" \
+    --query 'sort_by(Images, &CreationDate)[-1].ImageId' \
+    --output text)
+}
+
+function getMostRecentProdMongoAMI() {
+  echo $(aws ec2 describe-images \
+    --owners self \
+    --filters "Name=name,Values=eAPD Production Mongo AMI *" \
+    --query 'sort_by(Images, &CreationDate)[-1].ImageId' \
+    --output text)
 }
 
 function deregisterIfNotUsed() {
@@ -59,7 +90,7 @@ function deregisterIfNotUsed() {
   MOST_RECENT_AMI=$(getMostRecentAMI)
   for AMI_ID in $AVAIL_AMIS
   do
-    if [[ $AMI_ID == $IN_USE_AMIS ]] || [[ $AMI_ID == $MOST_RECENT_AMI ]]; then
+    if [[ $IN_USE_AMIS =~ $AMI_ID ]] || [[ $MOST_RECENT_AMI =~ $AMI_ID ]]; then ### This keeps both most recent and in use AMIs
       printf "Keeping $AMI_ID\n"
     else
       aws ec2 deregister-image --image-id $AMI_ID
