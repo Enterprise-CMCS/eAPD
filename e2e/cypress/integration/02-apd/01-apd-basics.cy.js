@@ -1302,12 +1302,12 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         )}/apds/${apdId}/files/963d0316f487d49e9e0e8306682daa96720535acf195fb31973f2d0936d97eb1`
       ).as('loadImage');
 
-      cy.get('[class="tox-edit-area"]').eq(2).scrollIntoView();
+      cy.get('[class="tox-edit-area"]').eq(3).scrollIntoView();
 
       // Uploads cms-logo.png from /fixtures/
-      cy.setTinyMceContent('hie-overview-field', 'Drag and Drop here');
+      cy.setTinyMceContent('mmis-overview-field', 'Drag and Drop here');
 
-      cy.enter('iframe[id="hie-overview-field_ifr"]').then(getBody => {
+      cy.enter('iframe[id="mmis-overview-field_ifr"]').then(getBody => {
         cy.fixture('cms-logo.png', 'binary')
           .then(Cypress.Blob.binaryStringToBlob)
           .then(fileContent => {

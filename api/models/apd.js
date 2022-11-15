@@ -91,7 +91,8 @@ const apdSchema = new mongoose.Schema({
   apdOverview: {
     programOverview: String,
     narrativeHIT: String,
-    narrativeHIE: String
+    narrativeHIE: String,
+    narrativeMMIS: String
   },
   keyStatePersonnel: {
     medicaidDirector: {
