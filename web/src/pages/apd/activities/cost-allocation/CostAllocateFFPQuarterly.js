@@ -80,21 +80,18 @@ const CostAllocateFFPQuarterly = ({
     }
   }, [quarterlyFFP[year].subtotal.contractors]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const setInHouse =
-    quarter =>
-    ({ target: { value } }) => {
-      setValue(`[${quarter}].inHouse.percent`, value / 100);
-      setInHouseFFP(activityIndex, year, quarter, value);
-      announce(activityId, year, quarter, 'inHouse');
-    };
+  const setInHouse = quarter => value => {
+    console.log({ value });
+    setValue(`[${quarter}].inHouse.percent`, value / 100);
+    setInHouseFFP(activityIndex, year, quarter, value);
+    announce(activityId, year, quarter, 'inHouse');
+  };
 
-  const setContractor =
-    quarter =>
-    ({ target: { value } }) => {
-      setValue(`[${quarter}].contractors.percent`, value / 100);
-      setContractorFFP(activityIndex, year, quarter, value);
-      announce(activityId, year, quarter, 'contractors');
-    };
+  const setContractor = quarter => value => {
+    setValue(`[${quarter}].contractors.percent`, value / 100);
+    setContractorFFP(activityIndex, year, quarter, value);
+    announce(activityId, year, quarter, 'contractors');
+  };
 
   return (
     <Fragment>
@@ -148,17 +145,20 @@ const CostAllocateFFPQuarterly = ({
                   <Controller
                     control={control}
                     name={`[${q}].inHouse.percent`}
-                    render={({ field: { onBlur, ...props } }) => (
+                    value={quarterlyFFP[year][q].inHouse.percent}
+                    render={({ field: { onBlur, value, ...props } }) => (
                       <PercentField
                         {...props}
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, state`}
                         labelClassName="sr-only"
-                        onChange={setInHouse(q)}
+                        onChange={({ target: { value } }) => {
+                          setInHouse(q)(value);
+                        }}
                         onBlur={onBlur}
                         round
-                        value={quarterlyFFP[year][q].inHouse.percent * 100}
+                        value={(value * 100).toFixed(0)}
                       />
                     )}
                   />
@@ -210,17 +210,20 @@ const CostAllocateFFPQuarterly = ({
                   <Controller
                     control={control}
                     name={`[${q}].contractors.percent`}
-                    render={({ field: { onBlur, ...props } }) => (
+                    value={quarterlyFFP[year][q].contractors.percent * 100}
+                    render={({ field: { onBlur, value, ...props } }) => (
                       <PercentField
                         {...props}
                         className="budget-table--input-holder"
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, contractors`}
                         labelClassName="sr-only"
-                        onChange={setContractor(q)}
+                        onChange={({ target: { value } }) => {
+                          setContractor(q)(value);
+                        }}
                         onBlur={onBlur}
                         round
-                        value={quarterlyFFP[year][q].contractors.percent * 100}
+                        value={(value * 100).toFixed(0)}
                       />
                     )}
                   />
