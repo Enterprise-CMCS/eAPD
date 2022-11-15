@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Subsection } from '../../../../components/Section';
 
-const ConditionsForAdvancedFunding = () => {
+const ConditionsForEnhancedFunding = () => {
   return <Subsection resource="activities.conditions"></Subsection>;
 };
 
@@ -14,10 +14,10 @@ const mapDispatchToProps = {};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ConditionsForAdvancedFunding);
+)(ConditionsForEnhancedFunding);
 
 export {
-  ConditionsForAdvancedFunding as plain,
+  ConditionsForEnhancedFunding as plain,
   mapStateToProps,
   mapDispatchToProps
 };

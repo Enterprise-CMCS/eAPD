@@ -5,8 +5,8 @@ import staticItems, { getItems } from './nav.items';
 import reducer, { getContinuePreviousLinks } from './nav';
 
 describe('staticItems', () => {
-  it('defines the apd resources within the app', () => {
-    const labels = staticItems('0123456789abcdef01234567').map(
+  it('defines the apd resources for hitech within the app', () => {
+    const labels = staticItems('0123456789abcdef01234567', 'hitech').map(
       item => item.label
     );
     expect(labels).toEqual([
@@ -16,6 +16,25 @@ describe('staticItems', () => {
       'Activities',
       'Activity Schedule Summary',
       'Proposed Budget',
+      'Assurances and Compliance',
+      'Executive Summary',
+      'Export and Submit'
+    ]);
+  });
+
+  it('defines the apd resources for mmis within the app', () => {
+    const labels = staticItems('0123456789abcdef01234567', 'mmis').map(
+      item => item.label
+    );
+    expect(labels).toEqual([
+      'APD Overview',
+      'State Priorities and Scope of APD',
+      'Key State Personnel',
+      'Results of Previous Activities',
+      'Activities',
+      'Activity Schedule Summary',
+      'Proposed Budget',
+      'Security Planning',
       'Assurances and Compliance',
       'Executive Summary',
       'Export and Submit'
@@ -39,7 +58,7 @@ describe('getContinuePreviousLinks()', () => {
     const { continueLink, previousLink } = getContinuePreviousLinks(
       '1',
       '/apd/0123456789abcdef01234567/apd-overview',
-      staticItems('0123456789abcdef01234567')
+      staticItems('0123456789abcdef01234567', 'hitech')
     );
     expect(continueLink.url).toEqual(
       '/apd/0123456789abcdef01234567/state-profile'
@@ -47,11 +66,12 @@ describe('getContinuePreviousLinks()', () => {
     expect(previousLink).toBeFalsy();
   });
 
-  test('activities list page', () => {
+  test('activities list page hitech', () => {
     const apdId = '0123456789abcdef01234567';
+    const apdType = 'hitech';
     const url = '/apd/0123456789abcdef01234567/activities';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
-    const items = getItems({ apdId, activities, url });
+    const items = getItems({ apdId, apdType, activities, url });
     const { continueLink, previousLink } = getContinuePreviousLinks(
       apdId,
       url,
@@ -65,11 +85,50 @@ describe('getContinuePreviousLinks()', () => {
     );
   });
 
-  test('activity page', () => {
+  test('activities list page mmis', () => {
     const apdId = '0123456789abcdef01234567';
+    const apdType = 'mmis';
+    const url = '/apd/0123456789abcdef01234567/activities';
+    const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
+    const items = getItems({ apdId, apdType, activities, url });
+    const { continueLink, previousLink } = getContinuePreviousLinks(
+      apdId,
+      url,
+      items
+    );
+    expect(continueLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/schedule-summary'
+    );
+    expect(previousLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/previous-activities'
+    );
+  });
+
+  test('activity page hitech', () => {
+    const apdId = '0123456789abcdef01234567';
+    const apdType = 'hitech';
     const url = '/apd/0123456789abcdef01234567/activity/0/ffp';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
-    const items = getItems({ apdId, activities, url });
+    const items = getItems({ apdId, apdType, activities, url });
+    const { continueLink, previousLink } = getContinuePreviousLinks(
+      apdId,
+      url,
+      items
+    );
+    expect(continueLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/activity/1/overview'
+    );
+    expect(previousLink.url).toEqual(
+      '/apd/0123456789abcdef01234567/activity/0/cost-allocation'
+    );
+  });
+
+  test('activity page mmis', () => {
+    const apdId = '0123456789abcdef01234567';
+    const apdType = 'mmis';
+    const url = '/apd/0123456789abcdef01234567/activity/0/ffp';
+    const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
+    const items = getItems({ apdId, apdType, activities, url });
     const { continueLink, previousLink } = getContinuePreviousLinks(
       apdId,
       url,
@@ -85,9 +144,10 @@ describe('getContinuePreviousLinks()', () => {
 
   test('schedule summary page', () => {
     const apdId = '0123456789abcdef01234567';
+    const apdType = 'hitech';
     const url = '/apd/0123456789abcdef01234567/schedule-summary';
     const activities = [{ name: 'Thing X' }, { name: 'Thing Y' }];
-    const items = getItems({ apdId, activities, url });
+    const items = getItems({ apdId, apdType, activities, url });
     const { continueLink, previousLink } = getContinuePreviousLinks(
       apdId,
       url,
@@ -105,7 +165,7 @@ describe('getContinuePreviousLinks()', () => {
     const { continueLink, previousLink } = getContinuePreviousLinks(
       '1',
       '/apd/0123456789abcdef01234567/export',
-      staticItems('0123456789abcdef01234567')
+      staticItems('0123456789abcdef01234567', 'hitech')
     );
     expect(continueLink).toBeFalsy();
     expect(previousLink.url).toEqual(
@@ -120,9 +180,10 @@ describe('nav reducer', () => {
   beforeEach(() => {
     state = reducer({
       apdId: '0123456789abcdef01234567',
+      apdType: null,
       activities: [],
       continueLink: null,
-      items: staticItems('0123456789abcdef01234567'),
+      items: staticItems('0123456789abcdef01234567', 'hitech'),
       previousLink: null
     });
   });

@@ -2,7 +2,7 @@ import React from 'react';
 
 import AlternativesAndRisks from './alternatives-and-risks/AlternativesAndRisks';
 import ContractorResources from './contractor-costs/ContractorResources';
-import ConditionsForAdvancedFunding from './conditions/ConditionsForAdvancedFunding';
+import ConditionsForEnhancedFunding from './conditions/ConditionsForEnhancedFunding';
 import CostAllocation from './cost-allocation/CostAllocation';
 import FFP from './ffp/CostAllocateFFP';
 import Costs from './state-costs/Costs';
@@ -30,13 +30,13 @@ const routes = activityIndex => [
     path: '/apd/:apdId/activity/:activityIndex/conditions',
     children: (
       <Section>
-        <ConditionsForAdvancedFunding activityIndex={activityIndex} />
+        <ConditionsForEnhancedFunding activityIndex={activityIndex} />
       </Section>
     ),
     isPublic: false,
     contentType: 'form',
     siteSection: 'APD - Activity',
-    pageName: 'Conditions For Advanced Funding'
+    pageName: 'Conditions For Enhanced Funding'
   },
   {
     path: '/apd/:apdId/activity/:activityIndex/state-costs',
