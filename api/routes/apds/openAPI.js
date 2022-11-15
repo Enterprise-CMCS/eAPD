@@ -147,24 +147,20 @@ const openAPI = {
             type: 'object',
             properties: {
               apd: {
-                type: 'object',
-                properties: {
-                  oneOf: [
-                    { $ref: '#/components/schemas/hitech' },
-                    { $ref: '#/components/schemas/mmis' }
-                  ]
-                }
+                oneOf: [
+                  { $ref: '#/components/schemas/hitech' },
+                  { $ref: '#/components/schemas/mmis' }
+                ]
               },
               budget: {
-                type: 'object',
-                properties: {
-                  oneOf: [
-                    { $ref: '#/components/schemas/hitechBudget' },
-                    { $ref: '#/components/schemas/mmisBudget' }
-                  ]
-                }
+                oneOf: [
+                  { $ref: '#/components/schemas/hitechBudget' },
+                  { $ref: '#/components/schemas/mmisBudget' }
+                ]
               },
-              adminCheck: {}
+              adminCheck: {
+                $ref: '#/components/schemas/adminCheck'
+              }
             }
           })
         },

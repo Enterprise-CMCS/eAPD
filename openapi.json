@@ -491,10 +491,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    { "$ref": "#/components/schemas/hitech" },
-                    { "$ref": "#/components/schemas/mmis" }
-                  ]
+                  "type": "object",
+                  "properties": {
+                    "apd": {
+                      "oneOf": [
+                        { "$ref": "#/components/schemas/hitech" },
+                        { "$ref": "#/components/schemas/mmis" }
+                      ]
+                    },
+                    "budget": {
+                      "oneOf": [
+                        { "$ref": "#/components/schemas/hitechBudget" },
+                        { "$ref": "#/components/schemas/mmisBudget" }
+                      ]
+                    },
+                    "adminCheck": {
+                      "$ref": "#/components/schemas/adminCheck"
+                    }
+                  }
                 }
               }
             }

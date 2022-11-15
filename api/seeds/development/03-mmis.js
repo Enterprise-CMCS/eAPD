@@ -300,8 +300,8 @@ const mmis = {
         }
       ],
       costAllocation: {
-        2022: { ffp: { federal: 90, state: 10 }, other: 105000 },
-        2023: { ffp: { federal: 90, state: 10 }, other: 0 }
+        2023: { ffp: { federal: 90, state: 10 }, other: 105000 },
+        2024: { ffp: { federal: 90, state: 10 }, other: 0 }
       },
       quarterlyFFP: {
         2023: {
@@ -471,8 +471,8 @@ const mmis = {
         }
       ],
       costAllocation: {
-        2022: { ffp: { federal: 90, state: 10 }, other: 0 },
-        2023: { ffp: { federal: 75, state: 25 }, other: 0 }
+        2023: { ffp: { federal: 90, state: 10 }, other: 0 },
+        2024: { ffp: { federal: 75, state: 25 }, other: 0 }
       },
       quarterlyFFP: {
         2023: {

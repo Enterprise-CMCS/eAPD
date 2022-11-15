@@ -5,24 +5,24 @@ const { mmisNoActivities } = require('./04-mmisNoActivities');
 
 const data = [
   {
+    ...hitech,
     stateId: 'ak',
-    status: 'draft',
-    ...hitech
+    status: 'draft'
   },
   {
+    ...hitechNoActivities,
     stateId: 'ak',
-    status: 'draft',
-    ...hitechNoActivities
+    status: 'draft'
   },
   {
+    ...mmis,
     stateId: 'ak',
-    status: 'draft',
-    ...mmis
+    status: 'draft'
   },
   {
+    ...mmisNoActivities,
     stateId: 'ak',
-    status: 'draft',
-    ...mmisNoActivities
+    status: 'draft'
   }
 ];
 
