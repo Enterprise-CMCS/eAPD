@@ -183,14 +183,6 @@ const staticItems = (apdId, apdType) => {
             {
               label: titleCase(t('proposedBudget.summaryBudget.title')),
               url: `/apd/${apdId}/proposed-budget#budget-summary-table`
-            },
-            {
-              label: titleCase(t('proposedBudget.quarterlyBudget.title')),
-              url: `/apd/${apdId}/proposed-budget#budget-federal-by-quarter`
-            },
-            {
-              label: titleCase(t('proposedBudget.paymentsByFFYQuarter.title')),
-              url: `/apd/${apdId}/proposed-budget#budget-incentive-by-quarter`
             }
           ]
         },

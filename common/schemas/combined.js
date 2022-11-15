@@ -1,5 +1,4 @@
 const {
-  activitiesDashboard,
   activitySummary,
   activityDescription,
   apdOverview,
