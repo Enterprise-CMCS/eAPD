@@ -342,7 +342,7 @@ tap.test('apds POST endpoint', async endpointTest => {
             },
             keyPersonnel: []
           },
-          statePriortiesAndScope: {
+          statePrioritiesAndScope: {
             medicaidProgramAndPriorities: '',
             mesIntroduction: '',
             scopeOfAPD: ''

@@ -2,7 +2,7 @@ const {
   hitechOverviewSchema,
   mmisOverviewSchema,
   keyStatePersonnelSchema,
-  statePriortiesAndScopeSchema,
+  statePrioritiesAndScopeSchema,
   activityNameSchema,
   activityFundingSourceSchema,
   hitechActivityOverviewSchema,
@@ -29,9 +29,13 @@ const Joi = require('joi');
 export const hitechCombinedSchema = Joi.object({
   _id: Joi.any(),
   __v: Joi.any(),
+  __t: Joi.any(),
+  id: Joi.any(),
   createdAt: Joi.any(),
   updatedAt: Joi.any(),
-  apdType: Joi.any(),
+  apdType: Joi.any().valid('HITECH').required().messages({
+    'any.only': 'APD Type must be HITECH'
+  }),
   status: Joi.any(),
   stateId: Joi.any(),
   name: Joi.string().messages({
@@ -87,11 +91,15 @@ export const hitechCombinedSchema = Joi.object({
 export const mmisCombinedSchema = Joi.object({
   _id: Joi.any(),
   __v: Joi.any(),
+  __t: Joi.any(),
+  id: Joi.any(),
   createdAt: Joi.any(),
   updatedAt: Joi.any(),
   status: Joi.any(),
   stateId: Joi.any(),
-  apdType: Joi.any(),
+  apdType: Joi.any().valid('MMIS').required().messages({
+    'any.only': 'APD Type must be MMIS'
+  }),
   name: Joi.string().messages({
     'string.base': 'Provide an APD name',
     'string.empty': 'Provide an APD name'
@@ -100,7 +108,7 @@ export const mmisCombinedSchema = Joi.object({
   yearOptions: Joi.any(),
   apdOverview: mmisOverviewSchema,
   keyStatePersonnel: keyStatePersonnelSchema,
-  statePrioritiesAndScope: statePriortiesAndScopeSchema,
+  statePrioritiesAndScope: statePrioritiesAndScopeSchema,
   previousActivities: Joi.any(),
   // activities schema copied from schemas/activitiesDashboard.js
   activities: Joi.array()

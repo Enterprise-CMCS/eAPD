@@ -62,7 +62,7 @@ const mmis = {
       }
     ]
   },
-  statePriortiesAndScope: {
+  statePrioritiesAndScope: {
     medicaidProgramAndPriorities: 'Medicaid program and priorities',
     mesIntroduction: 'Introduction',
     scopeOfAPD: 'scope'

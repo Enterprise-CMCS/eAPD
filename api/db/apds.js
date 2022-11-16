@@ -68,12 +68,13 @@ const getAllAPDsByState = async stateId =>
   APD.find(
     { stateId, status: 'draft' },
     '_id id createdAt updatedAt stateId status name years apdType'
-  ).lean();
+  ).lean({ virtuals: true });
 
-const getAPDByID = async id => APD.findById(id).lean().populate('budget');
+const getAPDByID = async id =>
+  APD.findById(id).populate('budget').lean({ virtuals: true });
 
 const getAPDByIDAndState = (id, stateId) =>
-  APD.findOne({ _id: id, stateId }).lean().populate('budget');
+  APD.findOne({ _id: id, stateId }).populate('budget').lean({ virtuals: true });
 
 // Apply the patches to the APD document
 const patchAPD = async ({ id, stateId, apdDoc, patch }) => {
@@ -88,7 +89,7 @@ const patchAPD = async ({ id, stateId, apdDoc, patch }) => {
   });
 
   // return the updated apd
-  return APD.findOne({ _id: id, stateId }).lean();
+  return APD.findOne({ _id: id, stateId }).lean({ virtuals: true });
 };
 
 const adminCheckAPDDocument = async id => {
@@ -105,7 +106,7 @@ const updateAPDDocument = async (
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId })
     .populate('budget')
-    .lean();
+    .lean({ virtuals: true });
   if (apdDoc && patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};

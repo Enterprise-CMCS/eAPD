@@ -37,6 +37,7 @@ export const medicaidOfficeSchema = Joi.object({
 });
 
 export const keyPersonnelSchema = Joi.object({
+  id: Joi.any(),
   name: Joi.string().required().messages({
     'string.base': 'Provide a name for the point of contact.',
     'string.empty': 'Provide a name for the point of contact.'

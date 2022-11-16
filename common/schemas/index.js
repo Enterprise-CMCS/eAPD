@@ -5,7 +5,7 @@ export {
   medicaidOfficeSchema,
   keyPersonnelSchema
 } from './keyStatePersonnel';
-export { default as statePriortiesAndScopeSchema } from './statePrioritiesAndScope';
+export { default as statePrioritiesAndScopeSchema } from './statePrioritiesAndScope';
 export { default as activitiesDashboardSchema } from './activitiesDashboard';
 export {
   default as nameAndFundingSourceSchema,

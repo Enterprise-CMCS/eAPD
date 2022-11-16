@@ -238,7 +238,7 @@ tap.test('APD data initializer', async apdTests => {
         },
         keyPersonnel: []
       },
-      statePriortiesAndScope: {
+      statePrioritiesAndScope: {
         medicaidProgramAndPriorities: '',
         mesIntroduction: '',
         scopeOfAPD: ''

@@ -43,7 +43,7 @@ const mmisNoActivities = {
     },
     keyPersonnel: []
   },
-  statePriortiesAndScope: {
+  statePrioritiesAndScope: {
     medicaidProgramAndPriorities: '',
     mesIntroduction: '',
     scopeOfAPD: ''

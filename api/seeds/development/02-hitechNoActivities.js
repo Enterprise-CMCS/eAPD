@@ -1,4 +1,4 @@
-const hitechActivities = {
+const hitechNoActivities = {
   apdType: 'HITECH',
   name: 'HITECH IAPD No Activities',
   years: ['2022', '2023'],
@@ -167,4 +167,4 @@ const hitechActivities = {
   }
 };
 
-module.exports = { hitechActivities };
+module.exports = { hitechNoActivities };

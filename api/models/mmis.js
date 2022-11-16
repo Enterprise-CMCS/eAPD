@@ -30,7 +30,7 @@ const mmisSchema = new mongoose.Schema(
         otherMedicaidBusinessAreas: String
       }
     },
-    statePriortiesAndScope: {
+    statePrioritiesAndScope: {
       medicaidProgramAndPriorities: String,
       mesIntroduction: String,
       scopeOfAPD: String

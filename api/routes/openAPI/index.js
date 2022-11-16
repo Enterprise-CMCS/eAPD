@@ -764,7 +764,7 @@ module.exports = {
               }
             }
           },
-          statePriortiesAndScope: {
+          statePrioritiesAndScope: {
             type: 'object',
             properties: {
               medicaidProgramAndPriorities: {

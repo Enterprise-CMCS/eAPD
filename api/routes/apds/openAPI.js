@@ -166,28 +166,17 @@ const openAPI = {
         },
         400: {
           description: 'The update failed due to a problem with the input data',
-          content: jsonResponse({
-            oneOf: [
-              {
-                ...arrayOf({
-                  type: 'object',
-                  description:
-                    'If the requested patch caused a validation failure, the API will return a list of invalid paths',
-                  properties: {
-                    path: {
-                      type: 'string',
-                      description:
-                        'A JSON Pointer path whose patched value is invalid'
-                    }
-                  }
-                })
-              },
-              {
-                type: 'null',
+          content: arrayOf({
+            type: 'object',
+            description:
+              'If the requested patch caused a validation failure, the API will return a list of invalid paths',
+            properties: {
+              path: {
+                type: 'string',
                 description:
-                  'If the requested patch failed for unknown reasons, nothing will be returned'
+                  'A JSON Pointer path whose patched value is invalid'
               }
-            ]
+            }
           })
         },
         403: {

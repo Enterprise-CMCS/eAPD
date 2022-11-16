@@ -31,23 +31,6 @@
             }
           }
         ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "filter_status": {
-                    "type": "string",
-                    "description": "The filter status of the affiliations for this US State",
-                    "enum": ["pending", "active", "inactive"]
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "List of all user affiliations for a US State",
@@ -518,25 +501,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
-                        "properties": {
-                          "path": {
-                            "type": "string",
-                            "description": "A JSON Pointer path whose patched value is invalid"
-                          }
-                        }
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "description": "A JSON Pointer path whose patched value is invalid"
                       }
-                    },
-                    {
-                      "type": "null",
-                      "description": "If the requested patch failed for unknown reasons, nothing will be returned"
                     }
-                  ]
+                  }
                 }
               }
             }
@@ -1972,7 +1947,7 @@
               }
             }
           },
-          "statePriortiesAndScope": {
+          "statePrioritiesAndScope": {
             "type": "object",
             "properties": {
               "medicaidProgramAndPriorities": {
