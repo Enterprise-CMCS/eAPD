@@ -30,7 +30,7 @@ describe('tests state admin portal', async () => {
 
   it('tests state admin portal', { tags: ['@state', '@admin'] }, () => {
     // Request access on No Role
-    // cy.task('db:resetnorole');
+    cy.task('db:resetnorole');
     cy.loginWithEnv('norole');
     cy.contains('Verify Your Identity');
     cy.get('[class="ds-c-field"]').type('Alask');
