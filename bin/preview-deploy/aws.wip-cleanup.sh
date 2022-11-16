@@ -93,8 +93,9 @@ function deregisterIfNotUsed() {
     if [[ $IN_USE_AMIS =~ $AMI_ID ]] || [[ $MOST_RECENT_AMI =~ $AMI_ID ]]; then ### This keeps both most recent and in use AMIs
       printf "Keeping $AMI_ID\n"
     else
-      aws ec2 deregister-image --image-id $AMI_ID
-      printf "Deregistering $AMI_ID\n"
+      echo "$AMI_ID would be deregistered"
+#      aws ec2 deregister-image --image-id $AMI_ID
+#      printf "Deregistering $AMI_ID\n"
     fi
   done
 }
