@@ -48,7 +48,7 @@ const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case APD_ACTIVITIES_CHANGE: {
       const items = getItems({
-        apdType: 'mmis',
+        apdType: 'hitech',
         activities: action.activities,
         items: state.items,
         url: action.url
@@ -77,7 +77,7 @@ const reducer = (state = initialState, action = {}) => {
 
       const items = getItems({
         apdId: state.apdId,
-        apdType: 'mmis',
+        apdType: 'hitech',
         activities: state.activities,
         items: state.items,
         url

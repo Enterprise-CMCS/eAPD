@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import AlertMissingFFY from '../../../../components/AlertMissingFFY';
 import ActivityRoutes from '../ActivityRoutes';
 
-const EntryPage = ({ activityNames, apdType }) => {
+const EntryPage = ({ activityNames }) => {
   const activityIndex = +useParams().activityIndex;
 
   return (
@@ -16,19 +16,16 @@ const EntryPage = ({ activityNames, apdType }) => {
         {activityNames[activityIndex] || 'Untitled'}
       </h2>
       <AlertMissingFFY />
-      <ActivityRoutes activityIndex={activityIndex} apdType={apdType} />
+      <ActivityRoutes activityIndex={activityIndex} />
     </div>
   );
 };
 
 EntryPage.propTypes = {
-  activityNames: PropTypes.array.isRequired,
-  apdType: PropTypes.string.isRequired
+  activityNames: PropTypes.array.isRequired
 };
 
-EntryPage.defaultProps = {
-  apdType: 'hitech'
-};
+EntryPage.defaultProps = {};
 
 const mapStateToProps = ({
   apd: {
