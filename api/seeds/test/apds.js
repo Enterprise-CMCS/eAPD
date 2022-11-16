@@ -13,6 +13,7 @@ const badAPDId = '0123456789abcdef01234567';
 
 const data = [
   {
+    ...mnAPD,
     _id: ObjectId(mnAPDId),
     // William Howard Taft becomes the only person to serve as both
     // President and Chief Justice of the Supreme Court
@@ -21,10 +22,10 @@ const data = [
     // and Africa
     updatedAt: '1910-06-18T09:00:00Z',
     stateId: 'mn',
-    status: 'draft',
-    ...mnAPD
+    status: 'draft'
   },
   {
+    ...akAPD,
     _id: ObjectId(akAPDId),
     // The 13th Amendment to the US Constitution is officially ratified,
     // formally outlawing slavery
@@ -33,10 +34,10 @@ const data = [
     // extending the right to vote to women
     updatedAt: '1919-06-04T16:30:00Z',
     stateId: 'ak',
-    status: 'draft',
-    ...akAPD
+    status: 'draft'
   },
   {
+    ...akMMIS,
     _id: ObjectId(akMMISId),
     // The 13th Amendment to the US Constitution is officially ratified,
     // formally outlawing slavery
@@ -45,18 +46,17 @@ const data = [
     // extending the right to vote to women
     updatedAt: '1919-06-04T16:30:00Z',
     stateId: 'ak',
-    status: 'draft',
-    ...akMMIS
+    status: 'draft'
   },
   {
+    ...finalAPD,
     _id: ObjectId(finalAPDId),
     // Jesse Owens wins his first gold medal of the Berlin Olympics
     createdAt: '1936-08-03T00:00:00Z',
     // Jackie Robinson joins the Brooklyn Dodgers
     updatedAt: '1947-04-10T00:00:00Z',
     stateId: 'ak',
-    status: 'approved',
-    ...finalAPD
+    status: 'approved'
   }
 ];
 

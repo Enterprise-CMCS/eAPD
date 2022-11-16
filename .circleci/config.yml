@@ -85,6 +85,7 @@ workflows:
           name: Cleanup Old Unused Production/Staging AMIs
           requires:
             - Build Prod Staging AMI
+            - Cleanup Old Unused Preview AMIs
 
   # Workflow to test, build, and deploy the backend and frontend
   test, build, and deploy:
