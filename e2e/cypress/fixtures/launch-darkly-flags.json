@@ -1,4 +1,3 @@
 {
-  "enableMmis": false,
-  "validation": true
+  "adminCheckFlag": false
 }
