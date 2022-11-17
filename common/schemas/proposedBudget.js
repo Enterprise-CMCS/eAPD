@@ -37,13 +37,15 @@ export const proposedBudgetEpAmtSchema = Joi.object().pattern(
   )
 );
 
+export const incentivePaymentsSchema = Joi.object({
+  ehCt: Joi.any(),
+  epCt: Joi.any(),
+  ehAmt: proposedBudgetEhAmtSchema,
+  epAmt: proposedBudgetEpAmtSchema
+});
+
 const proposedBudgetSchema = Joi.object({
-  incentivePayments: Joi.object({
-    ehCt: Joi.any(),
-    epCt: Joi.any(),
-    ehAmt: proposedBudgetEhAmtSchema,
-    epAmt: proposedBudgetEpAmtSchema
-  })
+  incentivePayments: incentivePaymentsSchema
 });
 
 export default proposedBudgetSchema;

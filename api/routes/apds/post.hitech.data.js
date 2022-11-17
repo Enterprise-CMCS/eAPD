@@ -1,4 +1,8 @@
-const { defaultAPDYearOptions, forAllYears } = require('@cms-eapd/common');
+const {
+  defaultAPDYearOptions,
+  forAllYears,
+  APD_TYPE
+} = require('@cms-eapd/common');
 
 const getNewHitechApd = () => {
   const yearOptions = defaultAPDYearOptions();
@@ -34,6 +38,7 @@ const getNewHitechApd = () => {
   });
 
   return {
+    apdType: APD_TYPE.HITECH,
     name: 'HITECH IAPD',
     apdOverview: {
       narrativeHIE: '',

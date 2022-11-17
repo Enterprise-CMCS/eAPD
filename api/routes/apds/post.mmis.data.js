@@ -1,4 +1,8 @@
-const { defaultAPDYearOptions, forAllYears } = require('@cms-eapd/common');
+const {
+  defaultAPDYearOptions,
+  forAllYears,
+  APD_TYPE
+} = require('@cms-eapd/common');
 
 const getNewMmisApd = () => {
   const yearOptions = defaultAPDYearOptions();
@@ -33,6 +37,7 @@ const getNewMmisApd = () => {
   });
 
   return {
+    apdType: APD_TYPE.HITECH,
     name: 'MMIS IAPD',
     apdOverview: {},
     statePrioritiesAndScope: {

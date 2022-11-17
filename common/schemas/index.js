@@ -50,7 +50,8 @@ export {
 export {
   default as proposedBudgetSchema,
   proposedBudgetEhAmtSchema,
-  proposedBudgetEpAmtSchema
+  proposedBudgetEpAmtSchema,
+  incentivePaymentsSchema
 } from './proposedBudget';
 export { default as securityPlanningSchema } from './securityPlanning';
 export {

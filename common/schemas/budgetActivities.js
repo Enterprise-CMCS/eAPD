@@ -7,7 +7,10 @@ const costsSchema = Joi.object({
   state: Joi.number()
 });
 
-export const costsByFFYSchema = Joi.object().pattern(/\d{4}/, costsSchema);
+export const costsByFFYSchema = Joi.object().pattern(
+  /^(\d{4}|total)$/,
+  costsSchema
+);
 
 const quarterSchema = Joi.object({
   combined: Joi.any(),
