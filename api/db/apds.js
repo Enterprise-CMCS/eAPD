@@ -171,6 +171,8 @@ const updateAPDDocument = async (
       if (hasBudgetUpdate(validPatches)) {
         updatedBudget = calculateBudget(updatedDoc);
         // eslint-disable-next-line no-underscore-dangle
+        updatedBudget.__t = apdDoc.budget.__t;
+        // eslint-disable-next-line no-underscore-dangle
         await Budget.replaceOne({ _id: updatedDoc.budget }, updatedBudget, {
           multipleCastError: true,
           runValidators: true

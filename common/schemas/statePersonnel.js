@@ -1,5 +1,16 @@
 const Joi = require('joi');
 
+const titleSchema = Joi.string().required().messages({
+  'string.empty': 'Provide a personnel title.',
+  'string.base': 'Provide a personnel title.',
+  'string.format': 'Provide a personnel title.'
+});
+const descriptionSchema = Joi.string().required().messages({
+  'string.empty': 'Provide a personnel description.',
+  'string.base': 'Provide a personnel description.',
+  'string.format': 'Provide a personnel description.'
+});
+
 export const personYearlyCostsSchema = Joi.object().pattern(
   /\d{4}/,
   Joi.object({
@@ -21,18 +32,17 @@ export const personYearlyCostsSchema = Joi.object().pattern(
   })
 );
 
+export const statePersonnelDetailSchema = Joi.object({
+  key: Joi.string(),
+  title: titleSchema,
+  description: descriptionSchema,
+  years: Joi.any()
+});
+
 const statePersonnelSchema = Joi.object({
   key: Joi.string(),
-  title: Joi.string().required().messages({
-    'string.empty': 'Provide a personnel title.',
-    'string.base': 'Provide a personnel title.',
-    'string.format': 'Provide a personnel title.'
-  }),
-  description: Joi.string().required().messages({
-    'string.empty': 'Provide a personnel description.',
-    'string.base': 'Provide a personnel description.',
-    'string.format': 'Provide a personnel description.'
-  }),
+  title: titleSchema,
+  description: descriptionSchema,
   years: personYearlyCostsSchema
 });
 

@@ -8,7 +8,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import TextArea from '../../../../../components/TextArea';
 import PersonCostForm from '../../../../../components/PersonCostForm';
 
-import statePersonnelSchema from '@cms-eapd/common/schemas/statePersonnel';
+import { statePersonnelDetailSchema } from '@cms-eapd/common/schemas/statePersonnel';
 import { savePersonnel as actualSavePersonnel } from '../../../../../redux/actions/editActivity';
 
 const StatePersonForm = forwardRef(
@@ -30,7 +30,7 @@ const StatePersonForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(statePersonnelSchema)
+      resolver: joiResolver(statePersonnelDetailSchema)
     });
 
     const [subFormValid, setSubFormValid] = useState(false);

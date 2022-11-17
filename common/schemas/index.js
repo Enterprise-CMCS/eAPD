@@ -31,7 +31,8 @@ export { default as milestonesSchema } from './milestones';
 export { default as outcomeMetricsSchema } from './outcomeMetric';
 export {
   default as statePersonnelSchema,
-  personYearlyCostsSchema
+  personYearlyCostsSchema,
+  statePersonnelDetailSchema
 } from './statePersonnel';
 export { default as expensesSchema } from './expenses';
 export { default as contractorResourcesSchema } from './contractorResources';
@@ -40,7 +41,10 @@ export {
   costAllocationOtherSchema,
   costAllocationFFPSchema
 } from './costAllocation';
-export { default as costAllocationNarrativeSchema } from './costAllocationNarrative';
+export {
+  default as costAllocationNarrativeSchema,
+  costAllocationMethodologySchema
+} from './costAllocationNarrative';
 export {
   default as budgetActivitiesSchema,
   costsByFFYSchema,
