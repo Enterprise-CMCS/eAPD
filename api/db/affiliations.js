@@ -221,7 +221,7 @@ const updateAuthAffiliation = async ({
   };
 
   // Lookup role name and set expiration date accordingly
-  // The front end will pass in a -1 if the role is being revoked/denied
+  // The front end will pass in a -1 if the role is revoked/denied
   const { name: roleName } =
     newRoleId < 0
       ? { name: null }
