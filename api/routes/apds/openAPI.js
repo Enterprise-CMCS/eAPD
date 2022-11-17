@@ -166,18 +166,20 @@ const openAPI = {
         },
         400: {
           description: 'The update failed due to a problem with the input data',
-          content: arrayOf({
-            type: 'object',
-            description:
-              'If the requested patch caused a validation failure, the API will return a list of invalid paths',
-            properties: {
-              path: {
-                type: 'string',
-                description:
-                  'A JSON Pointer path whose patched value is invalid'
+          content: jsonResponse(
+            arrayOf({
+              type: 'object',
+              description:
+                'If the requested patch caused a validation failure, the API will return a list of invalid paths',
+              properties: {
+                path: {
+                  type: 'string',
+                  description:
+                    'A JSON Pointer path whose patched value is invalid'
+                }
               }
-            }
-          })
+            })
+          )
         },
         403: {
           description: 'The apd ID does not match any known apds for the user'

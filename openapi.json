@@ -250,14 +250,18 @@
           "400": {
             "description": "The update failed due to a problem with the input data",
             "content": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
-                "properties": {
-                  "path": {
-                    "type": "string",
-                    "description": "A JSON Pointer path whose patched value is invalid"
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "description": "A JSON Pointer path whose patched value is invalid"
+                      }
+                    }
                   }
                 }
               }
@@ -1297,108 +1301,99 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "application/json": {
-                    "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The user's name, if defined"
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "User's unique username"
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "The user's access role"
+                    },
+                    "state": {
                       "type": "object",
+                      "description": "The state/territory/district that this user is assigned to",
                       "properties": {
                         "id": {
                           "type": "string",
-                          "description": "User's unique ID, used internally and for identifying the user when interacting with the API"
+                          "description": "Lowercase 2-letter code"
                         },
                         "name": {
                           "type": "string",
-                          "description": "The user's name, if defined"
+                          "description": "State/territory/district full name"
                         },
-                        "username": {
-                          "type": "string",
-                          "description": "User's unique username"
-                        },
-                        "role": {
-                          "type": "string",
-                          "description": "The user's access role"
-                        },
-                        "state": {
+                        "medicaid_office": {
                           "type": "object",
-                          "description": "The state/territory/district that this user is assigned to",
                           "properties": {
-                            "id": {
-                              "type": "string",
-                              "description": "Lowercase 2-letter code"
-                            },
-                            "name": {
-                              "type": "string",
-                              "description": "State/territory/district full name"
-                            },
-                            "medicaid_office": {
+                            "address1": { "type": "string" },
+                            "city": { "type": "string" },
+                            "zip": { "type": "string" },
+                            "state": { "type": "string" },
+                            "director": {
                               "type": "object",
                               "properties": {
-                                "address1": { "type": "string" },
-                                "city": { "type": "string" },
-                                "zip": { "type": "string" },
-                                "state": { "type": "string" },
-                                "director": {
-                                  "type": "object",
-                                  "properties": {
-                                    "name": { "type": "string" },
-                                    "email": { "type": "string" },
-                                    "phone": { "type": "string" }
-                                  }
-                                }
+                                "name": { "type": "string" },
+                                "email": { "type": "string" },
+                                "phone": { "type": "string" }
                               }
                             }
-                          }
-                        },
-                        "states": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^[A-Za-z]{2}$": {
-                              "type": "string",
-                              "description": "The affiliation status for the state in the field",
-                              "enum": [
-                                "requested",
-                                "approved",
-                                "denied",
-                                "revoked"
-                              ]
-                            }
-                          }
-                        },
-                        "permissions": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "x-patternProperties": {
-                              "^[A-Za-z]{2}$": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string",
-                                  "description": "Names of system activities this user can perform for that state"
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "activities": {
-                          "type": "array",
-                          "items": {
-                            "type": "string",
-                            "description": "Names of system activities this user can perform for the selected state"
-                          }
-                        },
-                        "affiliation": {
-                          "type": "object",
-                          "properties": {
-                            "id": { "type": "string" },
-                            "user_id": { "type": "string" },
-                            "username": { "type": "string" },
-                            "state_id": { "type": "string" },
-                            "role_id": { "type": "string" },
-                            "state": { "type": "string" },
-                            "created_at": { "type": "string" },
-                            "updated_at": { "type": "string" },
-                            "expires_at": { "type": "string" }
                           }
                         }
+                      }
+                    },
+                    "states": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[A-Za-z]{2}$": {
+                          "type": "string",
+                          "description": "The affiliation status for the state in the field",
+                          "enum": ["requested", "approved", "denied", "revoked"]
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[A-Za-z]{2}$": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "description": "Names of system activities this user can perform for that state"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "activities": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Names of system activities this user can perform for the selected state"
+                      }
+                    },
+                    "affiliation": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "user_id": { "type": "string" },
+                        "username": { "type": "string" },
+                        "state_id": { "type": "string" },
+                        "role_id": { "type": "string" },
+                        "state": { "type": "string" },
+                        "created_at": { "type": "string" },
+                        "updated_at": { "type": "string" },
+                        "expires_at": { "type": "string" }
                       }
                     }
                   }

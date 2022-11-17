@@ -1,6 +1,6 @@
 const hitech = {
   apdType: 'HITECH',
-  name: 'HITECH IAPD',
+  name: 'HITECH IAPD Admin Check Complete',
   years: ['2022', '2023'],
   yearOptions: ['2022', '2023', '2024'],
   apdOverview: {
@@ -215,17 +215,17 @@ const hitech = {
       ],
       expenses: [
         {
-          description: '',
+          description: 'Training and outreach',
           category: 'Training and outreach',
           years: { 2022: 40000, 2023: 40000 }
         },
         {
-          description: '',
+          description: 'Travel',
           category: 'Travel',
           years: { 2022: 35000, 2023: 35000 }
         },
         {
-          description: '',
+          description: 'Hardware, software, and licensing',
           category: 'Hardware, software, and licensing',
           years: { 2022: 700000, 2023: 0 }
         }
@@ -233,27 +233,27 @@ const hitech = {
       contractorResources: [
         {
           description: 'Maintain SLR',
-          end: '',
+          end: '2022-05-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Super SLR Incorporated',
-          start: '',
+          start: '2022-01-01',
           totalCost: 32423,
           years: { 2022: 999756, 2023: 342444 }
         },
         {
           description: 'Technology consulting and planning services.',
-          end: '',
+          end: '2022-05-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Tech Consulting Inc.',
-          start: '',
+          start: '2022-01-01',
           totalCost: 473573,
           years: { 2022: 333000, 2023: 200000 }
         }
@@ -406,7 +406,7 @@ const hitech = {
       ],
       expenses: [
         {
-          description: '',
+          description: 'Travel',
           category: 'Travel',
           years: { 2022: 0, 2023: 0 }
         }
@@ -414,29 +414,29 @@ const hitech = {
       contractorResources: [
         {
           description: 'Hosting and development support.',
-          end: '',
+          end: '2022-05-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Interface Vendor Inc.',
-          start: '',
+          start: '2022-01-01',
           totalCost: 26453574,
           years: { 2022: 650000, 2023: 750000 }
         },
         {
           description: 'Interface M&O contractor.',
-          end: '',
+          end: '2022-05-31',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2022: { hours: '100', rate: '50' },
+            2023: { hours: '150', rate: '75' }
           },
-          useHourly: false,
+          useHourly: true,
           name: 'TBD',
-          start: '',
-          totalCost: 7398,
-          years: { 2022: 0, 2023: 1000000 }
+          start: '2022-01-01',
+          totalCost: 16250,
+          years: { 2022: 5000, 2023: 11250 }
         }
       ],
       costAllocation: {
@@ -581,10 +581,17 @@ const hitech = {
       },
       costAllocationNarrative: {
         years: {
-          2022: { otherSources: '' },
-          2023: { otherSources: '' }
+          2022: {
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2022.</p>'
+          },
+          2023: {
+            otherSources:
+              '<p>No other funding is provided for this activity for FFY 2023.</p>\n'
+          }
         },
-        methodology: ''
+        methodology:
+          '<p>No cost allocation is necessary for this activity.</p>\n'
       },
       quarterlyFFP: {
         2022: {
@@ -611,7 +618,12 @@ const hitech = {
           '<p><strong><ins>III.C.1 Medicaid Personal Health Record (PHR)/Blue Button Initiative</ins></strong></p>\n<p>DHSS is requesting HITECH funding to support the onboarding of Medicaid recipients to the developed personal health record (PHR) available within the HIE. The requested funds will be utilized to enhance the ability of patients to access their own health care data in an electronic format that supports MU CQMs including EP Core Measure: Electronic copy of health information. Medicaid PHR/Blue Button (or similar) implementation supports this functionality.</p>\n<p>&nbsp;</p>\n<p>The PHR will not collect CQMs or interface to public health registries. However, it will provide short and long-term value to providers by assisting them in achieving MU.</p>\n<p>Alaska plans to integrate the MMIS DW into the HIE, allowing Medicaid recipients to view their Medicaid claims information in a portal and access it through a Blue Button (or similar) download. Additionally, this initiative will benefit providers by assisting them in achieving MU by helping them meet View, Download, and Transmit (VDT) requirements.</p>\n<p>&nbsp;</p>\n<p>This Medicaid PHR/Blue Button (or similar) approach allows providers to meet VDT requirements without having to create individual patient portals. This supports providers in achieving MU. Medicaid Eligible population will benefit by being able to obtain their Medicaid claim information, along with access to their PHRs. See further cost allocation details in Section VIII and Appendix D.</p>',
         alternatives:
           '<p>Medicaid PHR/Blue Button</p>\n<p>Integrate MMIS DW into the HIE with Blue Button download</p>\n<p>Allows Medicaid recipients to view their Medicaid claims information in a portal and access it through a Blue Button download</p>\n<p>Assists providers in achieving MU by helping them meet the VDT requirements</p>\n<p>Supports the MU CQMs including EP Core Measure:Electronic Copy of health information</p>\n<p>Alaskans will be able to access their PHRs</p>\n<p>User friendly, easy to use technology helps ensure access</p>\n<p>There are no significant negatives to this approach</p>\n<p>Implement Medicaid PHR/Blue Button</p>',
-        standardsAndConditions: { doesNotSupport: '', supports: '' }
+        standardsAndConditions: {
+          doesNotSupport:
+            '<p class="p1"><span class="s1">We will not comply with standards and conditions</span></p>',
+          supports:
+            '<p class="p1"><span class="s1">We will not comply with standards and conditions</span></p>'
+        }
       },
       activitySchedule: {
         plannedStartDate: '2018-06-01',
@@ -636,42 +648,42 @@ const hitech = {
       ],
       statePersonnel: [
         {
-          title: '',
-          description: '',
+          title: 'Tester',
+          description: 'tests the app',
           years: { 2022: { amt: 0, perc: 0 }, 2023: { amt: 0, perc: 0 } }
         }
       ],
       expenses: [
         {
-          description: '',
+          description: 'Hardware, software, and licensing',
           category: 'Hardware, software, and licensing',
           years: { 2022: 0, 2023: 0 }
         }
       ],
       contractorResources: [
         {
-          description: '',
-          end: '',
+          description: 'Creates materials for training',
+          end: '2022-05-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'RFP Planning Vendor Inc.',
-          start: '',
+          start: '2022-01-01',
           totalCost: 68734,
           years: { 2022: 50000, 2023: 5000 }
         },
         {
-          description: '',
-          end: '',
+          description: 'Makes things faster',
+          end: '2022-05-31',
           hourly: {
             2022: { hours: '', rate: '' },
             2023: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Blue Button Builder Inc.',
-          start: '',
+          start: '2022-01-01',
           totalCost: 1235246,
           years: { 2022: 735246, 2023: 500000 }
         }
@@ -685,9 +697,12 @@ const hitech = {
           2022: {
             otherSources: '<p>Sample Grant Related to Blue Button $15000</p>'
           },
-          2023: { otherSources: '' }
+          2023: {
+            otherSources:
+              '<p>No cost allocation is necessary for this activity.</p>'
+          }
         },
-        methodology: ''
+        methodology: '<p>Sample Grant Related to Blue Button $15000</p>'
       },
       quarterlyFFP: {
         2022: {

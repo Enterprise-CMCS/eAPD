@@ -3,7 +3,7 @@ const {
   schema: { arrayOf, jsonResponse }
 } = require('../openAPI/helpers');
 
-const userObjectSchema = jsonResponse({
+const userObjectSchema = {
   type: 'object',
   properties: {
     id: {
@@ -128,7 +128,7 @@ const userObjectSchema = jsonResponse({
       }
     }
   }
-});
+};
 
 const openAPI = {
   '/users/{id}': {
