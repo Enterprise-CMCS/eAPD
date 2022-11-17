@@ -1,6 +1,7 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
 const contractorResourcesSchema = Joi.object({
+  id: Joi.any(),
   key: Joi.any(),
   name: Joi.string().trim().min(1).required().messages({
     'string.base': 'Provide a private contractor or vendor name.',

@@ -33,6 +33,7 @@ export const personYearlyCostsSchema = Joi.object().pattern(
 );
 
 export const statePersonnelDetailSchema = Joi.object({
+  id: Joi.any(),
   key: Joi.string(),
   title: titleSchema,
   description: descriptionSchema,
@@ -40,6 +41,7 @@ export const statePersonnelDetailSchema = Joi.object({
 });
 
 const statePersonnelSchema = Joi.object({
+  id: Joi.any(),
   key: Joi.string(),
   title: titleSchema,
   description: descriptionSchema,

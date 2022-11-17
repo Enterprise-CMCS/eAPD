@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
 const expensesSchema = Joi.object({
+  id: Joi.any(),
   key: Joi.string(),
   category: Joi.string()
     .valid(

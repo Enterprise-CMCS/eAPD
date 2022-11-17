@@ -3,9 +3,1052 @@
   "info": {
     "title": "CMS HITECH APD API",
     "description": "The API for the CMS HITECH APD app.",
-    "version": "1.0.0"
+    "version": "0.0.1"
   },
   "paths": {
+    "/affiliations/me": {
+      "get": {
+        "tags": ["Affiliations"],
+        "description": "Get the current affiliations for the logged in user",
+        "responses": {
+          "200": {
+            "description": "A list of affiliations for the logged in user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "ID of record"
+                      },
+                      "userId": {
+                        "type": "string",
+                        "description": "ID of user"
+                      },
+                      "displayName": {
+                        "type": "string",
+                        "description": "The full name of the user"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "The email address of the user"
+                      },
+                      "stateId": {
+                        "type": "string",
+                        "description": "2-letter US State or Territory abbreviation, lowercase"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "The status of the user role for this US State",
+                        "enum": ["requested", "approved", "denied", "revoked"]
+                      },
+                      "role": {
+                        "type": "string",
+                        "description": "The role applied to this user for this US State"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp of record creation"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp of last update"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/apds": {
+      "get": {
+        "tags": ["APDs"],
+        "summary": "Get all of the APDs available to the user",
+        "description": "Get a list of all apds associated with requesting user",
+        "responses": {
+          "200": {
+            "description": "The list of a user’s apds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "number", "description": "APD ID" },
+                      "created": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp of when this APD was created"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Current status of the APD; e.g., \"draft\", \"archived\", etc."
+                      },
+                      "updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp of the last save to this APD"
+                      },
+                      "years": {
+                        "type": "array",
+                        "items": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["APDs"],
+        "summary": "Create a new draft APD associated with the user's state",
+        "description": "Create a new draft APD for the current user's state",
+        "responses": {
+          "200": {
+            "description": "The new APD",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/hitech" },
+                    { "$ref": "#/components/schemas/mmis" }
+                  ]
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/apds/{id}": {
+      "get": {
+        "tags": ["APDs"],
+        "summary": "Get a single, complete APD",
+        "description": "Where the /apds GET method only returns a small portion of all APDs, this method returns all of one",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the apd to get",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The APD",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/hitech" },
+                    { "$ref": "#/components/schemas/mmis" }
+                  ]
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The apd ID does not match any known apds for the user"
+          },
+          "404": { "description": "The apd does not exist" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "patch": {
+        "tags": ["APDs"],
+        "summary": "Update a specific APD",
+        "description": "Update an APD in the system using a set of JSON Patch objects. If state profile information is included, the profile information is also updated for the APD's state.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the apd to update",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "description": "A set of JSON Patch objects to be applied to the APD to change it",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "A JSON Patch object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "enum": ["add", "remove", "replace"],
+                      "description": "The JSON Patch operation. This API only supports add, remove, and replace."
+                    },
+                    "path": {
+                      "type": "string",
+                      "description": "The path of the value to be operated on, specified as a JSON Pointer"
+                    },
+                    "value": {
+                      "description": "For add or replace operations, the new value to be applied"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The update was successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apd": {
+                      "oneOf": [
+                        { "$ref": "#/components/schemas/hitech" },
+                        { "$ref": "#/components/schemas/mmis" }
+                      ]
+                    },
+                    "budget": {
+                      "oneOf": [
+                        { "$ref": "#/components/schemas/hitechBudget" },
+                        { "$ref": "#/components/schemas/mmisBudget" }
+                      ]
+                    },
+                    "adminCheck": { "$ref": "#/components/schemas/adminCheck" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The update failed due to a problem with the input data",
+            "content": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "A JSON Pointer path whose patched value is invalid"
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The apd ID does not match any known apds for the user"
+          },
+          "404": { "description": "The apd does not exist" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["APDs"],
+        "summary": "Archive an APD",
+        "description": "Updates an APD's status to \"archive\" and prevents it from being edited",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the apd to archive",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "The APD was archived" },
+          "400": { "description": "The apd is not in draft" },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The apd ID does not match any known apds for the user"
+          },
+          "404": {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/apds/{id}/files": {
+      "post": {
+        "tags": ["APDs", "files"],
+        "summary": "Upload a file associated with an APD",
+        "description": "Uploads a file, associates it with a given APD, and stores any provided metadata.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the apd the file is associated with",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "type": "object",
+                    "description": "arbitrary metadata to attach to the file"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The file body"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The URL of the uploaded file, absolute, relative to the API host",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "The URL of the uploaded file, absolute, relative to the API host"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable"
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The apd ID does not match any known apds for the user"
+          },
+          "404": { "description": "The apd ID does not match any known apds" },
+          "415": { "description": "The file is not a valid format" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/apds/{id}/files/{fileID}": {
+      "get": {
+        "tags": ["APDs", "files"],
+        "summary": "Get a file associated with an APD",
+        "description": "Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the apd the file is associated with",
+            "required": true,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "fileID",
+            "in": "path",
+            "description": "The ID of the file to get",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "binary" } }
+            }
+          },
+          "400": {
+            "description": "The file does not belong to the APD or does not exist"
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/apds/{id}/events": {
+      "post": {
+        "tags": ["APDs", "events"],
+        "summary": "Log an event performed on an APD",
+        "description": "Posts an event, associates it with a given APD, and stores any provided metadata.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the apd the event is associated with",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "eventType": {
+                    "type": "string",
+                    "description": "the type of the event performed"
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "description": "anny additional metadata to add to the log"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The status of the event being logged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "whether the event was successfully logged"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The apd ID does not match any known apds for the user"
+          },
+          "404": { "description": "The apd ID does not match any known apds" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/activities": {
+      "get": {
+        "tags": ["Authentication and authorization"],
+        "summary": "Gets the list of all activities",
+        "description": "Get a list of all activities in the system",
+        "responses": {
+          "200": {
+            "description": "The list of activities known to the system",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "number", "description": "Activity ID" },
+                      "name": {
+                        "type": "string",
+                        "description": "Activity name"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/roles": {
+      "get": {
+        "tags": ["Authentication and authorization"],
+        "summary": "Gets the list of all roles",
+        "description": "Get a list of all roles in the system",
+        "responses": {
+          "200": {
+            "description": "The list of roles known to the system",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "number", "description": "Role ID" },
+                      "name": { "type": "string", "description": "Role name" },
+                      "activities": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "description": "Activity name"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/state/{stateId}": {
+      "get": {
+        "tags": ["Authentication and authorization"],
+        "parameters": [
+          {
+            "name": "stateId",
+            "in": "path",
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "summary": "Exchanges a user's token from one state to another.",
+        "description": "Switch from using one state to another, with updated and accurate permissions.",
+        "responses": {
+          "200": {
+            "description": "A JWT containing the new claims",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jwt": { "type": "string", "description": "a JWT" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": { "description": "The user can not switch to this state" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/certifications": {
+      "get": {
+        "tags": ["Certifications"],
+        "summary": "Retrieve the Add State Certifications and additional details",
+        "description": "get the state admin certifications and potential matches for loading up the state admin certification table",
+        "responses": {
+          "200": {
+            "description": "State Admin Certification form successfully saved"
+          },
+          "401": { "description": "Unauthorized" },
+          "403": {
+            "description": "The user does not have sufficient authorization to upload certification letters"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["Certifications"],
+        "summary": "Submit the Add State Certification and additional details",
+        "description": "Handle the submission of the state admin certification form which includes the URL of the file from the related /files endpoint as well as additional details that are added manually.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ffy": {
+                    "type": "integer",
+                    "description": "Federal Fiscal Year (FFY) that the certification is valid for"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of individual being certified"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Email of individual being certified"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State of individual being certified"
+                  },
+                  "fileUrl": {
+                    "type": "string",
+                    "description": "URL provided from the /certifications/files endpoint"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "State Admin Certification form successfully saved"
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have sufficient authorization to upload certification letters"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["Certifications"],
+        "summary": "Match a state admin certification letter to an affiliation",
+        "description": "update a state admin certification to associate it with an affiliation and approve that affiliation as a state admin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certificationId": {
+                    "type": "string",
+                    "description": "ID of the certification letter"
+                  },
+                  "certificationFfy": {
+                    "type": "string",
+                    "description": "Federal Fiscal Year (FFY) from the certification upload form"
+                  },
+                  "affiliationId": {
+                    "type": "string",
+                    "description": "ID of the affiliation to be matched"
+                  },
+                  "stateId": {
+                    "type": "string",
+                    "description": "ID of the state associated with the affiliation"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "State Admin Certification match successful"
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": {
+            "description": "The user does not have sufficient authorization to match certification letters"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["Certifications"],
+        "summary": "Archives a previously uploaded state admin certification letter.",
+        "description": "Archives a previously uploaded state admin certification letter. Only non-matched letters can be archived/deleted.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certificationId": {
+                    "type": "string",
+                    "description": "ID of the certification letter"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "State Admin Certification archived successfully"
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": {
+            "description": "The user does not have sufficient authorization to archive certification letters"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/certifications/files/{fileID}": {
+      "get": {
+        "tags": ["files"],
+        "summary": "Get a state admin certification letter",
+        "description": "Returns a state admin certification letter",
+        "parameters": [
+          {
+            "name": "fileID",
+            "in": "path",
+            "description": "The ID of the file to get",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "binary" } }
+            }
+          },
+          "400": { "description": "The file does not exist" },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/certifications/files": {
+      "post": {
+        "tags": ["files"],
+        "summary": "Upload a state admin certification file",
+        "description": "Uploads a state admin certification letter.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The file body"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The URL of the uploaded file, absolute, relative to the API host",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "The URL of the uploaded file, absolute, relative to the API host"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have sufficient authorization to upload certification letters"
+          },
+          "415": { "description": "The file is not a valid format" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/docs/account-registration": {
+      "get": {
+        "tags": ["Docs"],
+        "description": "Get the account registration documentation",
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "application/pdf": {
+                "schema": { "type": "string", "format": "binary" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/docs/system-access": {
+      "get": {
+        "tags": ["Docs"],
+        "description": "Get the eAPD system access documentation",
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "application/pdf": {
+                "schema": { "type": "string", "format": "binary" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Gets the current user's information",
+        "description": "Get information about the current user",
+        "responses": {
+          "200": {
+            "description": "The current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The user's name, if defined"
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "User's unique username"
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "The user's access role"
+                    },
+                    "state": {
+                      "type": "object",
+                      "description": "The state/territory/district that this user is assigned to",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Lowercase 2-letter code"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "State/territory/district full name"
+                        },
+                        "medicaid_office": {
+                          "type": "object",
+                          "properties": {
+                            "address1": { "type": "string" },
+                            "city": { "type": "string" },
+                            "zip": { "type": "string" },
+                            "state": { "type": "string" },
+                            "director": {
+                              "type": "object",
+                              "properties": {
+                                "name": { "type": "string" },
+                                "email": { "type": "string" },
+                                "phone": { "type": "string" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "states": {
+                      "type": "object",
+                      "properties": {
+                        "{state_id}": {
+                          "type": "string",
+                          "description": "The affiliation status for the state in the field",
+                          "enum": ["requested", "approved", "denied", "revoked"]
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "{state_id}": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "description": "Names of system activities this user can perform for that state"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "activities": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Names of system activities this user can perform for the selected state"
+                      }
+                    },
+                    "affiliation": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "user_id": { "type": "string" },
+                        "username": { "type": "string" },
+                        "state_id": { "type": "string" },
+                        "role_id": { "type": "string" },
+                        "state": { "type": "string" },
+                        "created_at": { "type": "string" },
+                        "updated_at": { "type": "string" },
+                        "expires_at": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/roles": {
+      "get": {
+        "tags": ["Roles"],
+        "description": "Get a list of all of the active roles",
+        "responses": {
+          "200": {
+            "description": "List of Active Roles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "Integer ID for a role"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Full name of the Role"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/states": {
+      "get": {
+        "tags": ["States"],
+        "description": "Get a list of all US States and Territories",
+        "responses": {
+          "200": {
+            "description": "List of US States and Territories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "2-letter US State or Territory abbreviation, lowercase"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Full name of US State or Territory"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/states/{id}": {
+      "get": {
+        "tags": ["States"],
+        "description": "Get a single US State or Territiory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "US State or Territory",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "2-letter US State or Territory abbreviation, lowercase"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Full name of US State or Territory"
+                    },
+                    "medicaid_office": {
+                      "type": "object",
+                      "description": "Contact information for this US State/Territory Medicaid office"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "Unauthorized, the user does not have permission to access this state.  Switching states may resolve the issue."
+          },
+          "404": {
+            "description": "The 2-letter, lowercase US State or Territory ID does not match any records"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
     "/states/{stateId}/affiliations": {
       "get": {
         "tags": ["Affiliations"],
@@ -16,9 +1059,7 @@
             "in": "path",
             "description": "2-letter US State or Territory abbreviation, lowercase",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           },
           {
             "in": "query",
@@ -71,10 +1112,6 @@
                         "type": "string",
                         "format": "date-time",
                         "description": "Timestamp of last update"
-                      },
-                      "updated_by": {
-                        "type": "string",
-                        "description": "ID of the user who last updated this record"
                       }
                     }
                   }
@@ -82,18 +1119,12 @@
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       },
       "post": {
         "tags": ["Affiliations"],
@@ -104,9 +1135,7 @@
             "in": "path",
             "description": "2-letter US State or Territory abbreviation, lowercase",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
@@ -114,25 +1143,16 @@
             "description": "Record was created",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "description": "ID of record"
-                }
+                "schema": { "type": "integer", "description": "ID of record" }
               }
             }
           },
           "400": {
-            "description": "Record exists, or US State ID is invalid"
+            "description": "Record does not exist or US State ID is invalid"
           },
-          "401": {
-            "description": "The user is not logged in"
-          }
+          "401": { "description": "The user is not logged in" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/states/{stateId}/affiliations/{id}": {
@@ -145,18 +1165,14 @@
             "in": "path",
             "description": "2-letter US State or Territory abbreviation, lowercase",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           },
           {
             "name": "id",
             "in": "path",
             "description": "ID of record",
             "required": true,
-            "schema": {
-              "type": "integer"
-            }
+            "schema": { "type": "integer" }
           }
         ],
         "responses": {
@@ -167,10 +1183,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer",
-                      "description": "ID of record"
-                    },
+                    "id": { "type": "integer", "description": "ID of record" },
                     "user_id": {
                       "type": "string",
                       "description": "ID of user"
@@ -197,31 +1210,19 @@
                       "type": "string",
                       "format": "date-time",
                       "description": "Timestamp of last update"
-                    },
-                    "updated_by": {
-                      "type": "string",
-                      "description": "ID of the user who last updated this record"
                     }
                   }
                 }
               }
             }
           },
-          "400": {
-            "description": "The stateId and affiliation ID do not correspond to a known record"
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
-          }
+          },
+          "404": { "description": "The affiliation does not exist" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       },
       "patch": {
         "tags": ["Affiliations"],
@@ -232,18 +1233,14 @@
             "in": "path",
             "description": "2-letter US State or Territory abbreviation, lowercase",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           },
           {
             "name": "id",
             "in": "path",
             "description": "ID of record",
             "required": true,
-            "schema": {
-              "type": "integer"
-            }
+            "schema": { "type": "integer" }
           }
         ],
         "requestBody": {
@@ -268,821 +1265,16 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Record was updated"
-          },
+          "200": { "description": "Record was updated" },
           "400": {
             "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid"
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/apds": {
-      "get": {
-        "tags": ["APDs"],
-        "summary": "Get all of the APDs available to the user",
-        "description": "Get a list of all apds associated with requesting user",
-        "responses": {
-          "200": {
-            "description": "The list of a user’s apds",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "number",
-                        "description": "APD ID"
-                      },
-                      "created": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "Timestamp of when this APD was created"
-                      },
-                      "status": {
-                        "type": "string",
-                        "description": "Current status of the APD; e.g., \"draft\", \"archived\", etc."
-                      },
-                      "updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "Timestamp of the last save to this APD"
-                      },
-                      "years": {
-                        "type": "array",
-                        "items": {
-                          "type": "number"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "tags": ["APDs"],
-        "summary": "Create a new draft APD associated with the user's state",
-        "description": "Create a new draft APD for the current user's state",
-        "responses": {
-          "200": {
-            "description": "The new APD",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    { "$ref": "#/components/schemas/hitech" },
-                    { "$ref": "#/components/schemas/mmis" }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/apds/{id}": {
-      "get": {
-        "tags": ["APDs"],
-        "summary": "Get a single, complete APD",
-        "description": "Where the /apds GET method only returns a small portion of all APDs, this method returns all of one",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the apd to get",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The APD",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    { "$ref": "#/components/schemas/hitech" },
-                    { "$ref": "#/components/schemas/mmis" }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The apd ID does not match any known apds"
-          },
-          "401": {
-            "description": "The apd ID does not match any known apds for the user"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "patch": {
-        "tags": ["APDs"],
-        "summary": "Update a specific APD",
-        "description": "Update an APD in the system using a set of JSON Patch objects. If state profile information is included, the profile information is also updated for the APD's state.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the apd to update",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "A set of JSON Patch objects to be applied to the APD to change it",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "description": "A JSON Patch object",
-                  "properties": {
-                    "op": {
-                      "type": "string",
-                      "enum": ["add", "remove", "replace"],
-                      "description": "The JSON Patch operation. This API only supports add, remove, and replace."
-                    },
-                    "path": {
-                      "type": "string",
-                      "description": "The path of the value to be operated on, specified as a JSON Pointer"
-                    },
-                    "value": {
-                      "description": "For add or replace operations, the new value to be applied"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The update was successful",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "apd": {
-                      "oneOf": [
-                        { "$ref": "#/components/schemas/hitech" },
-                        { "$ref": "#/components/schemas/mmis" }
-                      ]
-                    },
-                    "budget": {
-                      "oneOf": [
-                        { "$ref": "#/components/schemas/hitechBudget" },
-                        { "$ref": "#/components/schemas/mmisBudget" }
-                      ]
-                    },
-                    "adminCheck": {
-                      "$ref": "#/components/schemas/adminCheck"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The update failed due to a problem with the input data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
-                    "properties": {
-                      "path": {
-                        "type": "string",
-                        "description": "A JSON Pointer path whose patched value is invalid"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The apd ID does not match any known apds for the user"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": ["APDs"],
-        "summary": "Archive an APD",
-        "description": "Updates an APD's status to \"archive\" and prevents it from being edited",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the apd to archive",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The APD was archived"
-          },
-          "400": {
-            "description": "Invalid request, such as requesting to archive an APD that is not editable"
-          },
-          "401": {
-            "description": "The apd ID does not match any known apds for the user"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/apds/{id}/files": {
-      "post": {
-        "tags": ["APDs", "files"],
-        "summary": "Upload a file associated with an APD",
-        "description": "Uploads a file, associates it with a given APD, and stores any provided metadata.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the apd the file is associated with",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "metadata": {
-                    "type": "object",
-                    "description": "arbitrary metadata to attach to the file"
-                  },
-                  "file": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "The file body"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The URL of the uploaded file, absolute, relative to the API host",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "url": {
-                      "type": "string",
-                      "description": "The URL of the uploaded file, absolute, relative to the API host"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request, such as requesting to archive an APD that is not editable"
-          },
-          "401": {
-            "description": "The apd ID does not match any known apds for the user"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          },
-          "415": {
-            "description": "The file is not a valid format"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/apds/{id}/events": {
-      "post": {
-        "tags": ["APDs", "events"],
-        "summary": "Log an event performed on an APD",
-        "description": "Posts an event, associates it with a given APD, and stores any provided metadata.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the apd the event is associated with",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "eventType": {
-                    "type": "string",
-                    "description": "the type of the event performed"
-                  },
-                  "metadata": {
-                    "type": "object",
-                    "description": "anny additional metadata to add to the log"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "The status of the event being logged",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "whether the event was successfully logged"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The apd ID does not match any known apds"
-          },
-          "401": {
-            "description": "The apd ID does not match any known apds for the user"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/apds/{id}/files/{fileID}": {
-      "get": {
-        "tags": ["APDs", "files"],
-        "summary": "Get a file associated with an APD",
-        "description": "Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the apd the file is associated with",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "fileID",
-            "in": "path",
-            "description": "The ID of the file to get",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The file",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The file does not belong to the APD or does not exist"
-          }
-        }
-      }
-    },
-    "/auth/activities": {
-      "get": {
-        "tags": ["Authentication and authorization"],
-        "summary": "Gets the list of all activities",
-        "description": "Get a list of all activities in the system",
-        "responses": {
-          "200": {
-            "description": "The list of activities known to the system",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "number",
-                        "description": "Activity ID"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Activity name"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/auth/roles": {
-      "get": {
-        "tags": ["Authentication and authorization"],
-        "summary": "Gets the list of all roles",
-        "description": "Get a list of all roles in the system",
-        "responses": {
-          "200": {
-            "description": "The list of roles known to the system",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "number",
-                        "description": "Role ID"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Role name"
-                      },
-                      "activities": {
-                        "type": "array",
-                        "items": {
-                          "type": "string",
-                          "description": "Activity name"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/docs/account-registration": {
-      "get": {
-        "tags": ["Docs"],
-        "description": "Get the account registration documentation",
-        "responses": {
-          "200": {
-            "description": "The file",
-            "content": {
-              "application/pdf": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/docs/system-access": {
-      "get": {
-        "tags": ["Docs"],
-        "description": "Get the eAPD system access documentation",
-        "responses": {
-          "200": {
-            "description": "The file",
-            "content": {
-              "application/pdf": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/me": {
-      "get": {
-        "tags": ["Users"],
-        "summary": "Gets the current user's information",
-        "description": "Get information about the current user",
-        "responses": {
-          "200": {
-            "description": "The current user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "activities": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "Names of system activities this user can perform"
-                      }
-                    },
-                    "id": {
-                      "type": "number",
-                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "The user's name, if defined"
-                    },
-                    "phone": {
-                      "type": "string",
-                      "description": "The user's phone number, if defined"
-                    },
-                    "position": {
-                      "type": "string",
-                      "description": "The user's position, if defined"
-                    },
-                    "roles": {
-                      "type": "array",
-                      "description": "Names of system authorization role this user belongs to",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "state": {
-                      "type": "object",
-                      "description": "The state/territory/district that this user is assigned to",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "Lowercase 2-letter code"
-                        },
-                        "name": {
-                          "type": "string",
-                          "description": "State/territory/district full name"
-                        }
-                      }
-                    },
-                    "username": {
-                      "type": "string",
-                      "description": "User's unique username"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The user is not logged in"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/roles": {
-      "get": {
-        "tags": ["Roles"],
-        "description": "Get a list of all of the active roles",
-        "responses": {
-          "200": {
-            "description": "List of Active Roles",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "description": "Integer ID for a role"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Full name of the Role"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/states": {
-      "get": {
-        "tags": ["States"],
-        "description": "Get a list of all US States and Territories",
-        "responses": {
-          "200": {
-            "description": "List of US States and Territories",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "description": "2-letter US State or Territory abbreviation, lowercase"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Full name of US State or Territory"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/states/{id}": {
-      "get": {
-        "tags": ["States"],
-        "description": "Get a single US State or Territiory",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "2-letter US State or Territory abbreviation, lowercase",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "US State or Territory",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "2-letter US State or Territory abbreviation, lowercase"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "Full name of US State or Territory"
-                    },
-                    "medicaid_office": {
-                      "type": "object",
-                      "description": "Contact information for this US State/Territory Medicaid office"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The 2-letter, lowercase US State or Territory ID does not match any records"
-          },
-          "401": {
-            "description": "The user is not logged in"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/users/{id}": {
@@ -1096,9 +1288,7 @@
             "in": "path",
             "description": "The ID of the user to fetch",
             "required": true,
-            "schema": {
-              "type": "integer"
-            }
+            "schema": { "type": "integer" }
           }
         ],
         "responses": {
@@ -1107,166 +1297,122 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number",
-                      "description": "User's unique ID"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "User's name"
-                    },
-                    "username": {
-                      "type": "string",
-                      "description": "User's unique username"
-                    },
-                    "role": {
-                      "type": "string",
-                      "description": "The user's access role"
-                    },
-                    "state": {
+                  "application/json": {
+                    "schema": {
                       "type": "object",
-                      "description": "The state/territory/district that this user is assigned to",
                       "properties": {
                         "id": {
                           "type": "string",
-                          "description": "Lowercase 2-letter code"
+                          "description": "User's unique ID, used internally and for identifying the user when interacting with the API"
                         },
                         "name": {
                           "type": "string",
-                          "description": "State/territory/district full name"
+                          "description": "The user's name, if defined"
                         },
-                        "medicaid_office": {
+                        "username": {
+                          "type": "string",
+                          "description": "User's unique username"
+                        },
+                        "role": {
+                          "type": "string",
+                          "description": "The user's access role"
+                        },
+                        "state": {
                           "type": "object",
+                          "description": "The state/territory/district that this user is assigned to",
                           "properties": {
-                            "address1": {
-                              "type": "string"
+                            "id": {
+                              "type": "string",
+                              "description": "Lowercase 2-letter code"
                             },
-                            "city": {
-                              "type": "string"
+                            "name": {
+                              "type": "string",
+                              "description": "State/territory/district full name"
                             },
-                            "zip": {
-                              "type": "string"
-                            },
-                            "state": {
-                              "type": "string"
-                            },
-                            "director": {
+                            "medicaid_office": {
                               "type": "object",
                               "properties": {
-                                "name": {
-                                  "type": "string"
-                                },
-                                "email": {
-                                  "type": "string"
-                                },
-                                "phone": {
-                                  "type": "string"
+                                "address1": { "type": "string" },
+                                "city": { "type": "string" },
+                                "zip": { "type": "string" },
+                                "state": { "type": "string" },
+                                "director": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": { "type": "string" },
+                                    "email": { "type": "string" },
+                                    "phone": { "type": "string" }
+                                  }
                                 }
                               }
                             }
                           }
-                        }
-                      }
-                    },
-                    "states": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^[A-Za-z]{2}$": {
-                          "type": "string",
-                          "description": "The affiliation status for the state in the field",
-                          "enum": ["requested", "approved", "denied", "revoked"]
-                        }
-                      }
-                    },
-                    "permissions": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "x-patternProperties": {
-                          "^[A-Za-z]{2}$": {
-                            "type": "array",
-                            "items": {
+                        },
+                        "states": {
+                          "type": "object",
+                          "x-patternProperties": {
+                            "^[A-Za-z]{2}$": {
                               "type": "string",
-                              "description": "Names of system activities this user can perform for that state"
+                              "description": "The affiliation status for the state in the field",
+                              "enum": [
+                                "requested",
+                                "approved",
+                                "denied",
+                                "revoked"
+                              ]
                             }
+                          }
+                        },
+                        "permissions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "x-patternProperties": {
+                              "^[A-Za-z]{2}$": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "description": "Names of system activities this user can perform for that state"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "activities": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "Names of system activities this user can perform for the selected state"
+                          }
+                        },
+                        "affiliation": {
+                          "type": "object",
+                          "properties": {
+                            "id": { "type": "string" },
+                            "user_id": { "type": "string" },
+                            "username": { "type": "string" },
+                            "state_id": { "type": "string" },
+                            "role_id": { "type": "string" },
+                            "state": { "type": "string" },
+                            "created_at": { "type": "string" },
+                            "updated_at": { "type": "string" },
+                            "expires_at": { "type": "string" }
                           }
                         }
                       }
-                    },
-                    "activities": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "Names of system activities this user can perform for the selected state"
-                      }
-                    },
-                    "affiliation": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        },
-                        "user_id": {
-                          "type": "string"
-                        },
-                        "username": {
-                          "type": "string"
-                        },
-                        "state_id": {
-                          "type": "string"
-                        },
-                        "role_id": {
-                          "type": "string"
-                        },
-                        "state": {
-                          "type": "string"
-                        },
-                        "created_at": {
-                          "type": "string"
-                        },
-                        "updated_at": {
-                          "type": "string"
-                        },
-                        "expires_at": {
-                          "type": "string"
-                        }
-                      }
                     }
                   }
                 }
               }
             }
           },
-          "400": {
-            "description": "The user ID does not match any known users",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "description": "A string token indicating the error, which could be translated into a user-readable string for display by the client"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
-          }
+          },
+          "404": { "description": "The user ID does not match any known users" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/open-api": {
@@ -1274,11 +1420,7 @@
         "tags": ["Metadata"],
         "summary": "Gets this document",
         "description": "Returns this document",
-        "responses": {
-          "200": {
-            "description": "This OpenAPI document"
-          }
-        }
+        "responses": { "200": { "description": "This OpenAPI document" } }
       }
     }
   },
@@ -1287,10 +1429,7 @@
       "hitech": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "number",
-            "description": "APD ID"
-          },
+          "id": { "type": "number", "description": "APD ID" },
           "created": {
             "type": "string",
             "format": "date-time",
@@ -1301,10 +1440,7 @@
             "format": "date-time",
             "description": "Timestamp of the last save to this APD"
           },
-          "status": {
-            "type": "string",
-            "description": "Status"
-          },
+          "status": { "type": "string", "description": "Status" },
           "state": {
             "type": "string",
             "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase"
@@ -1313,18 +1449,8 @@
             "type": "string",
             "description": "The APD document name, following SEA naming conventions"
           },
-          "years": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "yearOptions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
+          "years": { "type": "array", "items": { "type": "string" } },
+          "yearOptions": { "type": "array", "items": { "type": "string" } },
           "apdOverview": {
             "type": "object",
             "description": "APD Overview section",
@@ -1333,15 +1459,9 @@
                 "type": "object",
                 "description": "APD update status and type",
                 "properties": {
-                  "isUpdateAPD": {
-                    "type": "boolean"
-                  },
-                  "annualUpdate": {
-                    "type": "boolean"
-                  },
-                  "asNeededUpdate": {
-                    "type": "boolean"
-                  }
+                  "isUpdateAPD": { "type": "boolean" },
+                  "annualUpdate": { "type": "boolean" },
+                  "asNeededUpdate": { "type": "boolean" }
                 }
               },
               "programOverview": {
@@ -1489,33 +1609,42 @@
                         "description": "HIT-funded expenses",
                         "properties": {
                           "50": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
                             }
                           },
                           "75": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
                             }
                           },
                           "90": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
                             }
                           }
                         }
@@ -1874,10 +2003,7 @@
       "mmis": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "number",
-            "description": "APD ID"
-          },
+          "id": { "type": "number", "description": "APD ID" },
           "created": {
             "type": "string",
             "format": "date-time",
@@ -1888,10 +2014,7 @@
             "format": "date-time",
             "description": "Timestamp of the last save to this APD"
           },
-          "status": {
-            "type": "string",
-            "description": "Status"
-          },
+          "status": { "type": "string", "description": "Status" },
           "state": {
             "type": "string",
             "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase"
@@ -1900,18 +2023,8 @@
             "type": "string",
             "description": "The APD document name, following SEA naming conventions"
           },
-          "years": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "yearOptions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
+          "years": { "type": "array", "items": { "type": "string" } },
+          "yearOptions": { "type": "array", "items": { "type": "string" } },
           "apdOverview": {
             "type": "object",
             "description": "APD Overview section",
@@ -1920,68 +2033,30 @@
                 "type": "object",
                 "description": "APD update status and type",
                 "properties": {
-                  "isUpdateAPD": {
-                    "type": "boolean"
-                  },
-                  "annualUpdate": {
-                    "type": "boolean"
-                  },
-                  "asNeededUpdate": {
-                    "type": "boolean"
-                  }
+                  "isUpdateAPD": { "type": "boolean" },
+                  "annualUpdate": { "type": "boolean" },
+                  "asNeededUpdate": { "type": "boolean" }
                 }
               },
               "medicaidBusinessAreas": {
                 "type": "object",
                 "properties": {
-                  "waiverSupportSystems": {
-                    "type": "boolean"
-                  },
-                  "assetVerificationSystem": {
-                    "type": "boolean"
-                  },
-                  "claimsProcessing": {
-                    "type": "boolean"
-                  },
-                  "decisionSupportSystemDW": {
-                    "type": "boolean"
-                  },
-                  "electronicVisitVerification": {
-                    "type": "boolean"
-                  },
-                  "encounterProcessingSystemMCS": {
-                    "type": "boolean"
-                  },
-                  "financialManagement": {
-                    "type": "boolean"
-                  },
-                  "healthInformationExchange": {
-                    "type": "boolean"
-                  },
-                  "longTermServicesSupports": {
-                    "type": "boolean"
-                  },
-                  "memberManagement": {
-                    "type": "boolean"
-                  },
-                  "pharmacyBenefitManagementPOS": {
-                    "type": "boolean"
-                  },
-                  "programIntegrity": {
-                    "type": "boolean"
-                  },
-                  "providerManagement": {
-                    "type": "boolean"
-                  },
-                  "thirdPartyLiability": {
-                    "type": "boolean"
-                  },
-                  "other": {
-                    "type": "boolean"
-                  },
-                  "otherMedicaidBusinessAreas": {
-                    "type": "string"
-                  }
+                  "waiverSupportSystems": { "type": "boolean" },
+                  "assetVerificationSystem": { "type": "boolean" },
+                  "claimsProcessing": { "type": "boolean" },
+                  "decisionSupportSystemDW": { "type": "boolean" },
+                  "electronicVisitVerification": { "type": "boolean" },
+                  "encounterProcessingSystemMCS": { "type": "boolean" },
+                  "financialManagement": { "type": "boolean" },
+                  "healthInformationExchange": { "type": "boolean" },
+                  "longTermServicesSupports": { "type": "boolean" },
+                  "memberManagement": { "type": "boolean" },
+                  "pharmacyBenefitManagementPOS": { "type": "boolean" },
+                  "programIntegrity": { "type": "boolean" },
+                  "providerManagement": { "type": "boolean" },
+                  "thirdPartyLiability": { "type": "boolean" },
+                  "other": { "type": "boolean" },
+                  "otherMedicaidBusinessAreas": { "type": "string" }
                 }
               }
             }
@@ -1989,15 +2064,9 @@
           "statePrioritiesAndScope": {
             "type": "object",
             "properties": {
-              "medicaidProgramAndPriorities": {
-                "type": "string"
-              },
-              "mesIntroduction": {
-                "type": "string"
-              },
-              "scopeOfAPD": {
-                "type": "string"
-              }
+              "medicaidProgramAndPriorities": { "type": "string" },
+              "mesIntroduction": { "type": "string" },
+              "scopeOfAPD": { "type": "string" }
             }
           },
           "keyStatePersonnel": {
@@ -2113,33 +2182,42 @@
                         "description": "MMIS-funded expenses",
                         "properties": {
                           "50": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
                             }
                           },
                           "75": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
                             }
                           },
                           "90": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
                             }
                           }
                         }
@@ -2166,46 +2244,26 @@
                 "activityOverview": {
                   "type": "object",
                   "properties": {
-                    "activitySnapshot": {
-                      "type": "string"
-                    },
-                    "problemStatement": {
-                      "type": "string"
-                    },
-                    "proposedSolution": {
-                      "type": "string"
-                    }
+                    "activitySnapshot": { "type": "string" },
+                    "problemStatement": { "type": "string" },
+                    "proposedSolution": { "type": "string" }
                   }
                 },
                 "analysisOfAlternativesAndRisks": {
                   "type": "object",
                   "properties": {
-                    "alternativeAnalysis": {
-                      "type": "boolean"
-                    },
-                    "costBenefitAnalysis": {
-                      "type": "boolean"
-                    },
-                    "feasibilityStudy": {
-                      "type": "boolean"
-                    },
-                    "requirementsAnalysis": {
-                      "type": "boolean"
-                    },
-                    "forseeableRisks": {
-                      "type": "boolean"
-                    }
+                    "alternativeAnalysis": { "type": "boolean" },
+                    "costBenefitAnalysis": { "type": "boolean" },
+                    "feasibilityStudy": { "type": "boolean" },
+                    "requirementsAnalysis": { "type": "boolean" },
+                    "forseeableRisks": { "type": "boolean" }
                   }
                 },
                 "conditionsForEnhancedFunding": {
                   "type": "object",
                   "properties": {
-                    "enhancedFundingQualification": {
-                      "type": "boolean"
-                    },
-                    "enhancedFundingJustification": {
-                      "type": "string"
-                    }
+                    "enhancedFundingQualification": { "type": "boolean" },
+                    "enhancedFundingJustification": { "type": "string" }
                   }
                 },
                 "activitySchedule": {
@@ -2391,54 +2449,54 @@
                             "description": "Contractor resource cost of the year"
                           }
                         }
-                      }
-                    }
-                  }
-                },
-                "costAllocation": {
-                  "type": "object",
-                  "x-patternProperties": {
-                    "^[0-9]{4}$": {
-                      "type": "object",
-                      "properties": {
-                        "ffp": {
-                          "type": "object",
-                          "properties": {
-                            "federal": {
-                              "type": "number",
-                              "description": "Federal share for this activity for this year, from 0 to 100"
-                            },
-                            "state": {
-                              "type": "number",
-                              "description": "State share for this activity for this year, from 0 to 100"
+                      },
+                      "costAllocation": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "properties": {
+                              "ffp": {
+                                "type": "object",
+                                "properties": {
+                                  "federal": {
+                                    "type": "number",
+                                    "description": "Federal share for this activity for this year, from 0 to 100"
+                                  },
+                                  "state": {
+                                    "type": "number",
+                                    "description": "State share for this activity for this year, from 0 to 100"
+                                  }
+                                }
+                              },
+                              "other": {
+                                "type": "number",
+                                "description": "Other amount (dollars) for this activity for this year"
+                              }
                             }
                           }
-                        },
-                        "other": {
-                          "type": "number",
-                          "description": "Other amount (dollars) for this activity for this year"
                         }
-                      }
-                    }
-                  }
-                },
-                "quarterlyFFP": {
-                  "type": "object",
-                  "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
-                  "x-patternProperties": {
-                    "^[0-9]{4}$": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^[1-4]$": {
-                          "type": "object",
-                          "properties": {
-                            "contractors": {
-                              "type": "number",
-                              "description": "Contractor costs for the given quarter of the given federal fiscal year"
-                            },
-                            "inHouse": {
-                              "type": "number",
-                              "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year"
+                      },
+                      "quarterlyFFP": {
+                        "type": "object",
+                        "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "x-patternProperties": {
+                              "^[1-4]$": {
+                                "type": "object",
+                                "properties": {
+                                  "contractors": {
+                                    "type": "number",
+                                    "description": "Contractor costs for the given quarter of the given federal fiscal year"
+                                  },
+                                  "inHouse": {
+                                    "type": "number",
+                                    "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year"
+                                  }
+                                }
+                              }
                             }
                           }
                         }
@@ -2458,48 +2516,34 @@
       "activityTotal": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "fundingSource": {
-            "type": "string"
-          },
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "fundingSource": { "type": "string" },
           "data": {
             "type": "object",
             "properties": {
               "combined": {
                 "type": "object",
                 "x-patternProperties": {
-                  "^([0-9]{4}|total)$": {
-                    "type": "number"
-                  }
+                  "^([0-9]{4}|total)$": { "type": "number" }
                 }
               },
               "contractors": {
                 "type": "object",
                 "x-patternProperties": {
-                  "^([0-9]{4}|total)$": {
-                    "type": "number"
-                  }
+                  "^([0-9]{4}|total)$": { "type": "number" }
                 }
               },
               "expenses": {
                 "type": "object",
                 "x-patternProperties": {
-                  "^([0-9]{4}|total)$": {
-                    "type": "number"
-                  }
+                  "^([0-9]{4}|total)$": { "type": "number" }
                 }
               },
               "statePersonnel": {
                 "type": "object",
                 "x-patternProperties": {
-                  "^([0-9]{4}|total)$": {
-                    "type": "number"
-                  }
+                  "^([0-9]{4}|total)$": { "type": "number" }
                 }
               },
               "otherFunding": {
@@ -2508,18 +2552,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "contractors": {
-                        "type": "number"
-                      },
-                      "expenses": {
-                        "type": "number"
-                      },
-                      "statePersonnel": {
-                        "type": "number"
-                      },
-                      "total": {
-                        "type": "number"
-                      }
+                      "contractors": { "type": "number" },
+                      "expenses": { "type": "number" },
+                      "statePersonnel": { "type": "number" },
+                      "total": { "type": "number" }
                     }
                   }
                 }
@@ -2534,34 +2570,22 @@
           "inHouse": {
             "type": "object",
             "properties": {
-              "dollars": {
-                "type": "number"
-              },
-              "percent": {
-                "type": "number"
-              }
+              "dollars": { "type": "number" },
+              "percent": { "type": "number" }
             }
           },
           "contractors": {
             "type": "object",
             "properties": {
-              "dollars": {
-                "type": "number"
-              },
-              "percent": {
-                "type": "number"
-              }
+              "dollars": { "type": "number" },
+              "percent": { "type": "number" }
             }
           },
           "combined": {
             "type": "object",
             "properties": {
-              "dollars": {
-                "type": "number"
-              },
-              "percent": {
-                "type": "number"
-              }
+              "dollars": { "type": "number" },
+              "percent": { "type": "number" }
             }
           }
         }
@@ -2575,18 +2599,10 @@
               "^[0-9]{4}$": {
                 "type": "object",
                 "properties": {
-                  "total": {
-                    "type": "number"
-                  },
-                  "federal": {
-                    "type": "number"
-                  },
-                  "medicaid": {
-                    "type": "number"
-                  },
-                  "state": {
-                    "type": "number"
-                  }
+                  "total": { "type": "number" },
+                  "federal": { "type": "number" },
+                  "medicaid": { "type": "number" },
+                  "state": { "type": "number" }
                 }
               }
             }
@@ -2597,18 +2613,10 @@
               "year": {
                 "type": "object",
                 "properties": {
-                  "1": {
-                    "$ref": "#/components/schemas/costPercentByCostType"
-                  },
-                  "2": {
-                    "$ref": "#/components/schemas/costPercentByCostType"
-                  },
-                  "3": {
-                    "$ref": "#/components/schemas/costPercentByCostType"
-                  },
-                  "4": {
-                    "$ref": "#/components/schemas/costPercentByCostType"
-                  },
+                  "1": { "$ref": "#/components/schemas/costPercentByCostType" },
+                  "2": { "$ref": "#/components/schemas/costPercentByCostType" },
+                  "3": { "$ref": "#/components/schemas/costPercentByCostType" },
+                  "4": { "$ref": "#/components/schemas/costPercentByCostType" },
                   "subtotal": {
                     "$ref": "#/components/schemas/costPercentByCostType"
                   }
@@ -2617,15 +2625,9 @@
               "total": {
                 "type": "object",
                 "properties": {
-                  "inHouse": {
-                    "type": "number"
-                  },
-                  "contractors": {
-                    "type": "number"
-                  },
-                  "combined": {
-                    "type": "number"
-                  }
+                  "inHouse": { "type": "number" },
+                  "contractors": { "type": "number" },
+                  "combined": { "type": "number" }
                 }
               }
             }
@@ -2635,12 +2637,7 @@
       "hitechBudget": {
         "type": "object",
         "properties": {
-          "years": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
+          "years": { "type": "array", "items": { "type": "string" } },
           "federalShareByFFYQuarter": {
             "type": "object",
             "properties": {
@@ -2656,71 +2653,41 @@
                           "1": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "2": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "3": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "4": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "subtotal": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           }
                         }
@@ -2730,15 +2697,9 @@
                   "total": {
                     "type": "object",
                     "properties": {
-                      "inHouse": {
-                        "type": "number"
-                      },
-                      "contractors": {
-                        "type": "number"
-                      },
-                      "combined": {
-                        "type": "number"
-                      }
+                      "inHouse": { "type": "number" },
+                      "contractors": { "type": "number" },
+                      "combined": { "type": "number" }
                     }
                   }
                 }
@@ -2755,71 +2716,41 @@
                           "1": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "2": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "3": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "4": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "subtotal": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           }
                         }
@@ -2829,15 +2760,9 @@
                   "total": {
                     "type": "object",
                     "properties": {
-                      "inHouse": {
-                        "type": "number"
-                      },
-                      "contractors": {
-                        "type": "number"
-                      },
-                      "combined": {
-                        "type": "number"
-                      }
+                      "inHouse": { "type": "number" },
+                      "contractors": { "type": "number" },
+                      "combined": { "type": "number" }
                     }
                   }
                 }
@@ -2853,18 +2778,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -2875,18 +2792,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -2897,18 +2806,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -2919,18 +2820,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -2946,18 +2839,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -2968,18 +2853,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -2990,18 +2867,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3012,18 +2881,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3039,18 +2900,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3061,18 +2914,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3083,18 +2928,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3105,18 +2942,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3132,18 +2961,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3154,18 +2975,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3176,18 +2989,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3198,18 +3003,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3224,18 +3021,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3246,18 +3035,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3268,18 +3049,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3290,18 +3063,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3312,18 +3077,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3336,36 +3093,24 @@
               "^([0-9]{4}|total)$": {
                 "type": "object",
                 "properties": {
-                  "total": {
-                    "type": "number"
-                  },
-                  "federal": {
-                    "type": "number"
-                  },
-                  "medicaid": {
-                    "type": "number"
-                  },
-                  "state": {
-                    "type": "number"
-                  }
+                  "total": { "type": "number" },
+                  "federal": { "type": "number" },
+                  "medicaid": { "type": "number" },
+                  "state": { "type": "number" }
                 }
               }
             }
           },
           "activityTotals": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/activityTotal"
-            }
+            "items": { "$ref": "#/components/schemas/activityTotal" }
           },
           "activities": {
             "type": "object",
             "x-patternProperties": {
               "^[0-9a-zA-Z]{6}$": {
                 "type": "object",
-                "properties": {
-                  "$ref": "#/components/schemas/budgetActivity"
-                }
+                "properties": { "$ref": "#/components/schemas/budgetActivity" }
               }
             }
           }
@@ -3374,12 +3119,7 @@
       "mmisBudget": {
         "type": "object",
         "properties": {
-          "years": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
+          "years": { "type": "array", "items": { "type": "string" } },
           "federalShareByFFYQuarter": {
             "type": "object",
             "properties": {
@@ -3395,71 +3135,41 @@
                           "1": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "2": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "3": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "4": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           },
                           "subtotal": {
                             "type": "object",
                             "properties": {
-                              "inHouse": {
-                                "type": "number"
-                              },
-                              "contractors": {
-                                "type": "number"
-                              },
-                              "combined": {
-                                "type": "number"
-                              }
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
                             }
                           }
                         }
@@ -3469,15 +3179,9 @@
                   "total": {
                     "type": "object",
                     "properties": {
-                      "inHouse": {
-                        "type": "number"
-                      },
-                      "contractors": {
-                        "type": "number"
-                      },
-                      "combined": {
-                        "type": "number"
-                      }
+                      "inHouse": { "type": "number" },
+                      "contractors": { "type": "number" },
+                      "combined": { "type": "number" }
                     }
                   }
                 }
@@ -3493,18 +3197,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3515,18 +3211,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3537,18 +3225,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3559,18 +3239,10 @@
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3585,18 +3257,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3607,18 +3271,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3629,18 +3285,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3651,18 +3299,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3673,18 +3313,10 @@
                   "^([0-9]{4}|total)$": {
                     "type": "object",
                     "properties": {
-                      "total": {
-                        "type": "number"
-                      },
-                      "federal": {
-                        "type": "number"
-                      },
-                      "medicaid": {
-                        "type": "number"
-                      },
-                      "state": {
-                        "type": "number"
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
@@ -3697,36 +3329,24 @@
               "^([0-9]{4}|total)$": {
                 "type": "object",
                 "properties": {
-                  "total": {
-                    "type": "number"
-                  },
-                  "federal": {
-                    "type": "number"
-                  },
-                  "medicaid": {
-                    "type": "number"
-                  },
-                  "state": {
-                    "type": "number"
-                  }
+                  "total": { "type": "number" },
+                  "federal": { "type": "number" },
+                  "medicaid": { "type": "number" },
+                  "state": { "type": "number" }
                 }
               }
             }
           },
           "activityTotals": {
             "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/activityTotal"
-            }
+            "items": { "$ref": "#/components/schemas/activityTotal" }
           },
           "activities": {
             "type": "object",
             "x-patternProperties": {
               "^[0-9a-zA-Z]{6}$": {
                 "type": "object",
-                "properties": {
-                  "$ref": "#/components/schemas/budgetActivity"
-                }
+                "properties": { "$ref": "#/components/schemas/budgetActivity" }
               }
             }
           }
