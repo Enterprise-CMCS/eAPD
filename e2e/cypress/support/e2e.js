@@ -18,6 +18,7 @@
 import 'cypress-react-selector'; // eslint-disable-line import/no-extraneous-dependencies
 import { commandTimings } from 'cypress-timings'; // eslint-disable-line import/no-extraneous-dependencies
 import 'cypress-axe'; // eslint-disable-line import/no-extraneous-dependencies
+import '@cypress/code-coverage/support';
 
 // Import commands.js using ES2015 syntax:
 import './commands';

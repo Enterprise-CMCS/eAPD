@@ -22,6 +22,7 @@ const knex = require('@cms-eapd/api/db/knex');
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
   require('cypress-grep/src/plugin')(config); // eslint-disable-line global-require, import/no-extraneous-dependencies
+  require('@cypress/code-coverage/task')(on, config);
 
   // eslint-disable-next-line no-unused-vars, default-param-last
   on('before:browser:launch', (browser = {}, launchOptions) => {
