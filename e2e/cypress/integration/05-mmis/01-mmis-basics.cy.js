@@ -9,14 +9,19 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     cy.useStateStaff();
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+    cy.reload();
 
+    // Tests new MMIS Create APD workflow
     cy.findAllByText('Create new').click();
 
-    // cy.wait(50000);
+    cy.findByRole('radio', { name: /MMIS/i }).click();
+    cy.findByLabelText('APD Name').clear().type('MMIS IAPD').blur();
+    cy.findByRole('radio', { name: /No, this is for a new project./i }).click();
+    cy.findByRole('checkbox', {
+      name: /1115 or Waiver Support Systems/i
+    }).click();
 
-    cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
-    cy.findByRole('checkbox', { name: /Annual Update/i }).click();
     cy.findByRole('button', { name: /Create an APD/i }).click();
 
     cy.findByRole(
@@ -37,7 +42,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.visit(apdUrl);
   });
 
@@ -48,14 +53,12 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   describe('Form View', () => {
     /* eslint-disable-next-line prefer-arrow-callback, func-names */
     beforeEach(function () {
-      cy.updateFeatureFlags();
+      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
       cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     });
 
     describe('default APD Overview', () => {
       it('should have two checked years', () => {
-        cy.contains('Export and Submit').click();
-        cy.wait(500000);
         cy.get('[type="checkbox"][checked]').should('have.length', 2);
       });
     });

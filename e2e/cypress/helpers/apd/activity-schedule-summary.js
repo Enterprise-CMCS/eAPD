@@ -120,7 +120,7 @@ export const testActivityScheduleSummaryWithData = () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('activity-overview-template.json').as('data');
   });
 

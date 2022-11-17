@@ -44,6 +44,8 @@ e2e/cypress.env.json
 e2e/cypress/screenshots/*
 e2e/cypress/videos/*
 e2e/tokens.json
+e2e/.nyc_output
+e2e/coverage
 
 web/.jest-test-results.json
 web/coverage
