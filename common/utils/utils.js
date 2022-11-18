@@ -90,7 +90,7 @@ export const thisFFY = () => {
 // just make them strings in the state as well;
 // that simplifies things
 export const defaultAPDYearOptions = startFFY => {
-  const ffy = startFFY || thisFFY();
+  const ffy = +startFFY || thisFFY();
   return [ffy, ffy + 1, ffy + 2].map(y => `${y}`);
 };
 

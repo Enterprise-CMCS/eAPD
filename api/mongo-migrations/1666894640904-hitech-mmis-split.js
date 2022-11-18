@@ -1,4 +1,5 @@
 const logger = require('../logger')('migrate-mongoose/hitech-mmis-split');
+const ObjectId = require('mongoose').Types.ObjectId;
 const { setup, teardown } = require('../db/mongodb');
 const { APD, HITECH, MMIS, Budget } = require('../models');
 const {
@@ -14,17 +15,23 @@ const { createAPD } = require('../db/apds');
 async function up() {
   // Grab all APDs
   await setup();
-  const apds = await APD.find({ status: 'draft' });
+  const apds = await APD.find();
+  const apdIds = [];
+  const budgetIds = [];
 
-  const hitech = apds.map(async apd => {
+  const hitech = apds.map(apd => {
     const apdJSON = deepCopy(apd.toJSON());
 
-    const years = apdJSON.years;
-    if (years.length === 3) {
-      apdJSON.yearOptions = years;
+    apdJSON.apdType = APD_TYPE.HITECH;
+    const { years = [] } = apdJSON;
+    if (years.length === 0) {
+      logger.error('No years found');
     }
     if (years.length < 3) {
       apdJSON.yearOptions = defaultAPDYearOptions(years[0]);
+    }
+    if (years.length === 3) {
+      apdJSON.yearOptions = years;
     }
     apdJSON.apdOverview = {
       ...apdJSON.apdOverview,
@@ -49,14 +56,23 @@ async function up() {
       milestones: activity.schedule
     }));
 
-    await Budget.deleteOne({ _id: apd.budget });
+    apdIds.push(apd._id);
+    if (apd.budget) {
+      budgetIds.push(apd.budget);
+    }
+    delete apdJSON._id; // eslint-disable-line no-underscore-dangle
     return apdJSON;
   });
 
-  await APD.deleteMany({ status: 'draft' });
-  await Promise.all(
-    hitech.map(async item => createAPD({ ...item, apdType: APD_TYPE.HITECH }))
-  ).catch(err => logger.error(err));
+  if (apds.length === hitech.length) {
+    await Promise.all(hitech.map(item => createAPD(item))).catch(err =>
+      logger.error(err)
+    );
+    await Promise.all(apdIds.map(id => APD.deleteOne({ _id: id })));
+    await Promise.all(budgetIds.map(id => Budget.deleteOne({ _id: id })));
+  } else {
+    logger.error('Not all of the values were converted');
+  }
 
   await teardown();
 }
