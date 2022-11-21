@@ -253,6 +253,68 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
+  describe('tests admin check validation errors', () => {
+    it('tests non-subform validation errors', () => {
+      cy.contains('Export and Submit').click();
+      cy.findByRole('button', { name: /Run Administrative Check/i }).click({
+        force: true
+      });
+
+      cy.goToApdOverview();
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a brief introduction to the state program.')
+        .should('exist');
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a summary of HIT-funded activities.')
+        .should('exist');
+
+      cy.goToKeyStatePersonnel();
+      cy.findAllByText('Provide the name of the State Medicaid Director.');
+      cy.findAllByText(
+        'Provide the email address of the State Medicaid Director.'
+      );
+      cy.findAllByText(
+        'Provide a valid phone number for the State Medicaid Director.'
+      );
+      cy.findAllByText(
+        'Provide a mailing street address for the Medicaid office.'
+      );
+      cy.findAllByText('Provide a city name.');
+      cy.findAllByText('Provide a zip code.');
+
+      cy.goToActivityOverview(0);
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a short overview of the activity.')
+        .should('exist');
+      cy.findAllByText('Provide a start date.');
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide details to explain this activity.')
+        .should('exist');
+      cy.get('[data-cy="validationError"]')
+        .contains(
+          'Provide a description about how this activity will support the Medicaid standards and conditions.'
+        )
+        .should('exist');
+
+      cy.goToCostAllocationAndOtherFunding(0);
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a description of the cost allocation methodology.')
+        .should('exist');
+
+      cy.goToBudgetAndFFP(0);
+      cy.findAllByText('Select a federal-state split.');
+      cy.findAllByText(
+        'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%'
+      );
+      cy.findAllByText(
+        'Private Contractor Costs quarterly percentages must total 100%'
+      );
+
+      cy.goToAssurancesAndCompliance();
+      cy.findAllByText('Select yes or no');
+    });
+  });
+
   describe('Subforms', () => {
     let activityPage;
     let budgetPage;
