@@ -21,29 +21,6 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
-const businessAreas = {
-  waiverSupport: false,
-  assetVerification: false,
-  claimsProcessing: false,
-  decisionSupport: false,
-  electronicVisitVerify: false,
-  encounterProcessingSystem: false,
-  financialMangement: false,
-  healthInfoExchange: false,
-  longTermServiceSupport: false,
-  memberManagement: false,
-  pharmacyBenefitManagement: false,
-  programIntegrity: false,
-  providerManagement: false,
-  thirdPartyLiability: false,
-  other: false
-};
-
-const typeStatus = {
-  annualUpdate: false,
-  asNeededUpdate: false
-};
-
 const ApdNew = ({ createApd: create }) => {
   const thisFFY = (() => {
     const year = new Date().getFullYear();
@@ -54,11 +31,36 @@ const ApdNew = ({ createApd: create }) => {
   })();
   ApdNew.displayName = 'ApdNew';
 
+  const businessAreaOptions = {
+    waiverSupport: false,
+    assetVerification: false,
+    claimsProcessing: false,
+    decisionSupport: false,
+    electronicVisitVerify: false,
+    encounterProcessingSystem: false,
+    financialMangement: false,
+    healthInfoExchange: false,
+    longTermServiceSupport: false,
+    memberManagement: false,
+    pharmacyBenefitManagement: false,
+    programIntegrity: false,
+    providerManagement: false,
+    thirdPartyLiability: false,
+    other: false
+  };
+
+  const updateTypes = {
+    annualUpdate: false,
+    asNeededUpdate: false
+  };
+
   const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
   const history = useHistory();
   const { enableMmis } = useFlags();
   const [apdType, setApdType] = useState('');
+  const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
   const [isLoading, setIsLoading] = useState(false);
+  const [typeStatus, setTypeStatus] = useState(updateTypes);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
   useEffect(() => {
     if (enableMmis === false) {
@@ -296,6 +298,7 @@ const ApdNew = ({ createApd: create }) => {
                       onChange(
                         Object.keys(typeStatus).filter(key => typeStatus[key])
                       );
+                      setTypeStatus(typeStatus);
                       setValue('updateStatus.typeStatus', typeStatus, {
                         shouldValidate: true
                       });
@@ -522,6 +525,7 @@ const ApdNew = ({ createApd: create }) => {
                           key => businessAreas[key]
                         )
                       );
+                      setBusinessAreas(businessAreas);
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}
