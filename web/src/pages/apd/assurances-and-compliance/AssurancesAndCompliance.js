@@ -21,7 +21,10 @@ import { Section, Subsection } from '../../../components/Section';
 import TextArea from '../../../components/TextArea';
 import regLinks from '../../../data/assurancesAndCompliance.yaml';
 import { t } from '../../../i18n';
-import { selectFederalCitations } from '../../../redux/selectors/apd.selectors';
+import {
+  selectFederalCitations,
+  selectAdminCheckEnabled
+} from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
 const LinkOrText = ({ link, title }) => {
@@ -63,6 +66,7 @@ const AssurancesAndCompliance = ({
     control,
     trigger,
     clearErrors,
+    setValue,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -71,8 +75,8 @@ const AssurancesAndCompliance = ({
       softwareRights,
       security
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: joiResolver(validationSchema)
   });
 
@@ -163,30 +167,24 @@ const AssurancesAndCompliance = ({
                               <Controller
                                 name={`${name}.${index}.explanation`}
                                 control={control}
-                                render={({
-                                  field: {
-                                    onChange: textOnChange,
-                                    onBlur: textOnBlur,
-                                    ...props
-                                  }
-                                }) => (
+                                render={({ field: { ...props } }) => (
                                   <TextArea
                                     {...props}
                                     label="Please explain"
                                     value={explanation}
-                                    onBlur={() => {
-                                      textOnBlur();
-                                      if (adminCheck) {
-                                        trigger(`${name}.${index}.explanation`);
-                                      }
-                                    }}
                                     onChange={({ target: { value } }) => {
-                                      textOnChange(value);
+                                      setValue(
+                                        `${name}.${index}.explanation`,
+                                        value
+                                      );
                                       handleExplanationChange(
                                         name,
                                         index,
                                         value
                                       );
+                                      if (adminCheck) {
+                                        trigger(`${name}.${index}.explanation`);
+                                      }
                                     }}
                                     errorMessage={
                                       errors?.[name]?.[index]?.explanation
@@ -243,7 +241,7 @@ AssurancesAndCompliance.propTypes = {
 
 const mapStateToProps = state => ({
   citations: selectFederalCitations(state),
-  adminCheck: state.apd.adminCheck
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {

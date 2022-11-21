@@ -36,6 +36,7 @@ api/seeds/test/tokens.json
 api/test-data/files
 
 common/coverage
+common/coverage-endpoint
 common/dist
 
 docs-build
@@ -44,6 +45,8 @@ e2e/cypress.env.json
 e2e/cypress/screenshots/*
 e2e/cypress/videos/*
 e2e/tokens.json
+e2e/coverage
+e2e/.nyc_output
 
 web/.jest-test-results.json
 web/coverage

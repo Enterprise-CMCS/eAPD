@@ -5,6 +5,10 @@ import Router from 'react-router-dom';
 
 import { plain as ExportAndSubmit, mapDispatchToProps } from './ApdExport';
 
+import { toggleAdminCheck } from '../../../redux/actions/app/apd';
+
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: jest.fn()
@@ -18,6 +22,12 @@ const setup = (push = () => {}) => {
 };
 
 describe('apd export component', () => {
+  beforeEach(() => {
+    // reset before each test case
+    resetLDMocks();
+    mockFlags({ adminCheckFlag: true });
+  });
+
   test('renders correctly', () => {
     expect(setup()).toMatchSnapshot();
   });
@@ -25,12 +35,15 @@ describe('apd export component', () => {
   test('routes to print preview', () => {
     const fakePush = jest.fn();
     const component = setup(fakePush);
-    component.find('Button').simulate('click');
+    component.find('Button[children="Continue to Review"]').simulate('click');
 
     expect(fakePush).toHaveBeenCalledTimes(1);
   });
 
   test('maps dispatch to props', () => {
-    expect(mapDispatchToProps).toEqual({ push });
+    expect(mapDispatchToProps).toEqual({
+      push,
+      toggleAdminCheck: toggleAdminCheck
+    });
   });
 });
