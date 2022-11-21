@@ -231,7 +231,10 @@ const updateAuthAffiliation = async ({
           .first();
 
   // Check user is assigning a valid role
-  if (!validAssignableRoles[`${changedByRoleName}`].includes(roleName)) {
+  if (
+    !validAssignableRoles[`${changedByRoleName}`].includes(roleName) &&
+    roleName !== null
+  ) {
     throw new Error('User is attempting to assign an invalid role');
   }
 
