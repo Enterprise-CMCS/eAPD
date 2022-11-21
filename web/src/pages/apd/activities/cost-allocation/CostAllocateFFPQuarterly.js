@@ -81,7 +81,6 @@ const CostAllocateFFPQuarterly = ({
   }, [quarterlyFFP[year].subtotal.contractors]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setInHouse = quarter => value => {
-    console.log({ value });
     setValue(`[${quarter}].inHouse.percent`, value / 100);
     setInHouseFFP(activityIndex, year, quarter, value);
     announce(activityId, year, quarter, 'inHouse');
