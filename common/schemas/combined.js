@@ -126,6 +126,7 @@ export const mmisCombinedSchema = Joi.object({
     expenses: Joi.array().items(expensesSchema),
     contractorResources: Joi.array().items(contractorResourcesSchema),
     costAllocation: costAllocationSchema,
+    costAllocationNarrative: costAllocationNarrativeSchema,
     quarterlyFFP: Joi.any() // quarterlyFFP is validated in the budget
   }),
   securityPlanning: securityPlanningSchema,

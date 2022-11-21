@@ -144,6 +144,11 @@ const newMmisActivity = ({
   years = [],
   key = generateKey()
 } = {}) => {
+  const costAllocationNarrativeYears = arrToObj(
+    years,
+    costAllocationNarrative()
+  );
+
   return {
     key,
     activityId: key,
@@ -174,6 +179,12 @@ const newMmisActivity = ({
     expenses: [],
     contractorResources: [],
     costAllocation: arrToObj(years, costAllocationEntry()),
+    costAllocationNarrative: {
+      methodology: '',
+      years: {
+        ...costAllocationNarrativeYears
+      }
+    },
     quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
     years,
     meta: {

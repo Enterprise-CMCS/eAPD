@@ -139,6 +139,18 @@ const activitySchema = new mongoose.Schema({
       { _id: false }
     )
   },
+  costAllocationNarrative: {
+    methodology: String,
+    years: {
+      type: Map,
+      of: new mongoose.Schema(
+        {
+          otherSources: String
+        },
+        { _id: false }
+      )
+    }
+  },
   quarterlyFFP: {
     type: Map,
     of: new mongoose.Schema(

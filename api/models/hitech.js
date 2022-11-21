@@ -1,7 +1,29 @@
 require('./hitechBudget');
 const mongoose = require('mongoose');
-const { incentivePayment, hitechActivitySchema } = require('./hitechActivity');
+const { hitechActivitySchema } = require('./hitechActivity');
 const { APD, discriminatorOptions, federalCitation } = require('./apd');
+
+const incentivePayment = new mongoose.Schema(
+  {
+    1: {
+      type: Number,
+      default: 0
+    },
+    2: {
+      type: Number,
+      default: 0
+    },
+    3: {
+      type: Number,
+      default: 0
+    },
+    4: {
+      type: Number,
+      default: 0
+    }
+  },
+  { _id: false }
+);
 
 const hitechSchema = new mongoose.Schema(
   {
