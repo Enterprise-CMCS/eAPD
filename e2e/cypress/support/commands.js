@@ -637,3 +637,18 @@ Cypress.Commands.add('updateFeatureFlags', ({ featureFlags }) => {
     )
     .as('LDApp');
 });
+
+Cypress.Commands.add('turnOnAdminCheck', () => {
+  cy.contains('Export and Submit').click();
+  cy.findByRole('button', { name: /Run Administrative Check/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('checkAdminCheckHyperlinks', (link, heading, level) => {
+  cy.get('[class="eapd-admin-check-list"]').within(() => {
+    cy.contains(link).click();
+  });
+
+  cy.get(`.ds-h${level}`).should('contain', heading);
+});
