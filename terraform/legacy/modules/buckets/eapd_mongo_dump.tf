@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "mongo_dump_staging" {
-  bucket = "eapd-mongo-dump_staging"
+  bucket = "eapd-mongo-dump-staging"
   # Enable versioning so we can see the full revision history of our
   # state files
   versioning {

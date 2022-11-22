@@ -54,7 +54,7 @@ function findExistingInstances() {
 # Gets a list of open pull requests
 function getOpenPullRequests() {
   curl -s \
-    https://api.github.com/repos/CMSgov/eAPD/pulls\?state\=open \
+    https://api.github.com/repos/Enterprise-CMCS/eAPD/pulls\?state\=open \
     | jq -rc ".[].number"
 }
 
