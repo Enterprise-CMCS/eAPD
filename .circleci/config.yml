@@ -760,6 +760,18 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
             if [[ $CIRCLE_NODE_INDEX == "6" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e bug tests" --spec "cypress/integration/04-bug-tests/*.cy.js"; fi
   
+      - run:
+          name: run e2e mmis tests
+          working_directory: ~/project/e2e
+          no_output_timeout: 60m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then nvm use 16.16.0; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export NODE_ENV=development; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_HOST=localhost; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export DEV_DB_PORT=54325; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then export CYPRESS_RECORD_KEY="$CYPRESS_RECORD_KEY"; fi
+            if [[ $CIRCLE_NODE_INDEX == "6" ]]; then yarn run cy:run:e2e-ci -- --record --key $CYPRESS_RECORD_KEY --ci-build-id "$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH" --group "e2e mmis tests" --spec "cypress/integration/05-mmis/*.cy.js"; fi
+
   chromatic deployment:
     docker:
       - image: cimg/node:16.16.0
