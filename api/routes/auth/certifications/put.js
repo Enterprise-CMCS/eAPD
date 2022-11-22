@@ -36,7 +36,7 @@ module.exports = (
           stateId,
           ffy: certificationFfy,
           changedBy: req.user.id,
-          changedByStateId: req.user.state.id,
+          changedByRole: req.user.role,
           newRoleId: stateAdminId,
           newStatus: 'approved'
         });
