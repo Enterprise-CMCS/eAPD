@@ -44,6 +44,10 @@ const openAPI = {
                 type: 'string',
                 enum: [''],
                 description: 'The new status of the APD'
+              },
+              comment: {
+                type: 'string',
+                description: 'Comments about the status change'
               }
             }
           })

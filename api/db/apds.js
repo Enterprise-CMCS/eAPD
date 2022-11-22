@@ -1,11 +1,11 @@
 const { applyPatch } = require('fast-json-patch');
-const ObjectId = require('mongoose').Types.ObjectId;
-
 const {
   deepCopy,
   calculateBudget,
   hasBudgetUpdate
 } = require('@cms-eapd/common');
+
+const knex = require('./knex');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const { adminCheckApd } = require('../util/adminCheck');
@@ -39,38 +39,30 @@ const getAPDByIDAndState = async (id, stateId) =>
 const getAllSubmittedAPDs = async () =>
   APD.find({ status: 'submitted' }).lean().populate('budget');
 
-const updateAPDReviewStatus = async (updates = []) => {
-  const results = await Promise.all(
-    updates.map(({ apdId = '', newStatus = '' }) => {
-      if (
-        apdId &&
-        newStatus &&
-        apdId !== '' &&
-        newStatus !== '' &&
-        ObjectId.isValid(apdId)
-      ) {
-        try {
-          return APD.findByIdAndUpdate(
-            apdId,
-            { status: newStatus },
-            { new: true }
-          );
-        } catch (e) {
-          logger.error(`Error updating APD ${apdId} status: ${e}`);
-        }
-      }
-      return new Promise(resolve => {
-        resolve({ apdId, status: newStatus, error: 'update failed' });
-      });
+const updateAPDReviewStatus = async (
+  { updates = [] } = {},
+  { db = knex } = {}
+) => {
+  const updatedAt = new Date().toISOString();
+  const rows = updates.map(
+    ({ apdId = null, comment = '', newStatus: status = null }) => ({
+      apd_id: apdId,
+      status,
+      comment,
+      updated_at: updatedAt
     })
   );
 
-  // eslint-disable-next-line no-underscore-dangle
-  return results.map(({ _id: apdId, status, error = '' }) => ({
-    apdId,
-    status,
-    error
-  }));
+  return db
+    .batchInsert('apd_review_status', rows)
+    .returning('id')
+    .then(ids => {
+      logger.info(`Updated ${ids.length} statuses of APDs`);
+    })
+    .catch(error => {
+      logger.error(`Error updating APD statuses: ${error}`);
+      throw error;
+    });
 };
 
 // Apply the patches to the APD document

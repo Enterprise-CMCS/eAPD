@@ -37,7 +37,7 @@ module.exports = (
     });
 
     try {
-      await updateAPDReviewStatus(req.body);
+      await updateAPDReviewStatus({ updates: req.body });
     } catch (e) {
       logger.error({ id: req.id, message: 'Error updating APDs' });
       logger.error({ id: req.id, message: e });
