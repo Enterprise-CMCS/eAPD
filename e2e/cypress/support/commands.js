@@ -408,7 +408,7 @@ Cypress.Commands.add('goToProposedSummary', () => {
 
       // Click on nav submenu button
       cy.get('a.ds-c-vertical-nav__label')
-        .contains(/Summary Budget by Activity/i)
+        .contains(/Combined Activity Costs/i)
         .click();
     });
 });
@@ -425,7 +425,7 @@ Cypress.Commands.add('goToProposedSummaryTable', () => {
 
       // Click on nav submenu button
       cy.get('a.ds-c-vertical-nav__label')
-        .contains(/Summary Budget by Activity/i)
+        .contains(/Combined Activity Costs/i)
         .click();
     });
 });

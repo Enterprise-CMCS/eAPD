@@ -184,9 +184,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         },
         {
           parent: 'Proposed Budget',
-          label: 'Summary Budget by Activity',
+          label: 'Combined Activity Costs',
           subnav: [
-            '#summary-schedule-by-activity-table',
+            '#combined-activity-costs-table',
             '#budget-summary-table',
             '#budget-federal-by-quarter',
             '#budget-incentive-by-quarter'

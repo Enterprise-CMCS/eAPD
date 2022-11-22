@@ -218,7 +218,7 @@ describe('nav reducer', () => {
         payload: {
           location: {
             pathname: '/apd/0123456789abcdef01234567/proposed-budget',
-            hash: '#budget-summary-table'
+            hash: '#state-and-contractor-cost-breakdown'
           }
         }
       };

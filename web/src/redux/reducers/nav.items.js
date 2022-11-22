@@ -64,14 +64,16 @@ const staticItems = (apdId, apdType) => {
               url: `/apd/${apdId}/proposed-budget`
             },
             {
-              label: titleCase(
-                t('proposedBudget.summaryBudgetByActivity.title')
-              ),
-              url: `/apd/${apdId}/proposed-budget#summary-schedule-by-activity-table`
+              label: titleCase(t('proposedBudget.combinedActivityCosts.title')),
+              url: `/apd/${apdId}/proposed-budget#combined-activity-costs-table`
             },
             {
-              label: titleCase(t('proposedBudget.summaryBudget.title')),
-              url: `/apd/${apdId}/proposed-budget#budget-summary-table`
+              label: titleCase(
+                t(
+                  'proposedBudget.combinedActivityCosts.activityBreakdown.title'
+                )
+              ),
+              url: `/apd/${apdId}/proposed-budget#state-and-contractor-cost-breakdown`
             },
             {
               label: titleCase(t('proposedBudget.quarterlyBudget.title')),
@@ -175,10 +177,16 @@ const staticItems = (apdId, apdType) => {
               url: `/apd/${apdId}/proposed-budget`
             },
             {
+              label: titleCase(t('proposedBudget.combinedActivityCosts.title')),
+              url: `/apd/${apdId}/proposed-budget#combined-activity-costs-table`
+            },
+            {
               label: titleCase(
-                t('proposedBudget.summaryBudgetByActivity.title')
+                t(
+                  'proposedBudget.combinedActivityCosts.activityBreakdown.title'
+                )
               ),
-              url: `/apd/${apdId}/proposed-budget#summary-schedule-by-activity-table`
+              url: `/apd/${apdId}/proposed-budget#state-and-contractor-cost-breakdown`
             },
             {
               label: titleCase(t('proposedBudget.summaryBudget.title')),

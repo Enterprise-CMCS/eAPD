@@ -1,0 +1,402 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly Combined Activity Costs Totals renders 1`] = `
+<table
+  className="budget-table"
+  data-cy="CACTable"
+>
+  <thead>
+    <tr
+      className="budget-table--row__primary-header"
+    >
+      <th
+        scope="col"
+      >
+        Combined Activity Costs FFY 
+        1975
+         (Total Computable Medicaid Cost)
+      </th>
+      <th
+        className="ds-u-text-align--right"
+        scope="col"
+      >
+        Total
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      className="budget-table--row__header"
+    >
+      <th
+        colSpan="2"
+        scope="row"
+      >
+        HIT
+      </th>
+    </tr>
+    <DataRowGroup
+      data={
+        Object {
+          "1975": Object {
+            "federal": 1,
+            "medicaid": 1000,
+            "state": 2,
+            "total": 3,
+          },
+          "1976": Object {
+            "federal": 10,
+            "medicaid": 2000,
+            "state": 20,
+            "total": 30,
+          },
+        }
+      }
+      groupTitle="HIT"
+      year="1975"
+    />
+    <tr
+      className="budget-table--row__header"
+    >
+      <th
+        colSpan="2"
+        scope="row"
+      >
+        HIE
+      </th>
+    </tr>
+    <DataRowGroup
+      data={
+        Object {
+          "1975": Object {
+            "federal": 2,
+            "medicaid": 2000,
+            "state": 3,
+            "total": 5,
+          },
+          "1976": Object {
+            "federal": 20,
+            "medicaid": 3000,
+            "state": 30,
+            "total": 50,
+          },
+        }
+      }
+      groupTitle="HIE"
+      year="1975"
+    />
+    <tr
+      className="budget-table--row__header"
+    >
+      <th
+        colSpan="2"
+        scope="row"
+      >
+        MMIS
+      </th>
+    </tr>
+    <DataRowGroup
+      data={
+        Object {
+          "1975": Object {
+            "federal": 3,
+            "medicaid": 3000,
+            "state": 4,
+            "total": 7,
+          },
+          "1976": Object {
+            "federal": 30,
+            "medicaid": 4000,
+            "state": 40,
+            "total": 70,
+          },
+        }
+      }
+      groupTitle="MMIS"
+      year="1975"
+    />
+    <tr
+      className="budget-table--row__header"
+      key="1975"
+    >
+      <th
+        scope="row"
+      >
+        FFY 
+        1975
+         Total Computable Medicaid Cost
+      </th>
+      <td
+        className="budget-table--number budget-table--total"
+      >
+        <Dollars>
+          4000
+        </Dollars>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`renders correctly Combined Activity Costs breakdown renders 1`] = `
+Array [
+  <Connect(SummaryActivityBreakdownTable)
+    activityIndex={0}
+    ffy="1975"
+    key="1975-0"
+    otherFunding={
+      Object {
+        "1990": Object {
+          "contractors": 350,
+          "expenses": 200,
+          "statePersonnel": 100,
+          "total": 650,
+        },
+        "1991": Object {
+          "contractors": 150,
+          "expenses": 700,
+          "statePersonnel": 400,
+          "total": 1250,
+        },
+      }
+    }
+  />,
+  <Connect(SummaryActivityBreakdownTable)
+    activityIndex={1}
+    ffy="1975"
+    key="1975-1"
+    otherFunding={
+      Object {
+        "1990": Object {
+          "contractors": 150,
+          "expenses": 400,
+          "statePersonnel": 200,
+          "total": 750,
+        },
+        "1991": Object {
+          "contractors": 250,
+          "expenses": 1000,
+          "statePersonnel": 600,
+          "total": 1850,
+        },
+      }
+    }
+  />,
+]
+`;
+
+exports[`renders correctly data row group renders 1`] = `
+<Fragment>
+  <DataRow
+    category="statePersonnel"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-statePersonnel-State Staff Total"
+    title="State Staff Total"
+  />
+  <DataRow
+    category="expenses"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-expenses-Other State Expenses Total"
+    title="Other State Expenses Total"
+  />
+  <DataRow
+    category="contractors"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-contractors-Private Contractor Total"
+    title="Private Contractor Total"
+  />
+  <DataRow
+    category="combined"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-combined-Total"
+    title="Total"
+  />
+</Fragment>
+`;
+
+exports[`renders correctly data row renders 1`] = `
+<tr
+  className=""
+  key="category"
+>
+  <th
+    className="title indent-title"
+    scope="row"
+  >
+    title text
+  </th>
+  <td
+    className="budget-table--number"
+  >
+    <Dollars>
+      1000
+    </Dollars>
+  </td>
+</tr>
+`;
+
+exports[`renders correctly renders correctly in standard mode 1`] = `
+Array [
+  <Fragment
+    key="1984"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1984
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="proposedBudget.combinedActivityCosts.totalMedicaidCost"
+    />
+    <SummaryBudgetByActivityTotals
+      data={Object {}}
+      ffy="1984"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+      id="state-and-contractor-cost-breakdown"
+    >
+      State and Contractor Cost Breakdown
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="proposedBudget.combinedActivityCosts.activityBreakdown"
+    />
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1984"
+    />
+  </Fragment>,
+  <Fragment
+    key="1985"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1985
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="proposedBudget.combinedActivityCosts.totalMedicaidCost"
+    />
+    <SummaryBudgetByActivityTotals
+      data={Object {}}
+      ffy="1985"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+      id="state-and-contractor-cost-breakdown"
+    >
+      State and Contractor Cost Breakdown
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="proposedBudget.combinedActivityCosts.activityBreakdown"
+    />
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1985"
+    />
+  </Fragment>,
+]
+`;
+
+exports[`renders correctly renders correctly in view-only mode 1`] = `
+Array [
+  <Fragment
+    key="1984"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1984
+    </h4>
+    <SummaryBudgetByActivityTotals
+      data={Object {}}
+      ffy="1984"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+      id="state-and-contractor-cost-breakdown"
+    >
+      State and Contractor Cost Breakdown
+    </h4>
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1984"
+    />
+  </Fragment>,
+  <Fragment
+    key="1985"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1985
+    </h4>
+    <SummaryBudgetByActivityTotals
+      data={Object {}}
+      ffy="1985"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+      id="state-and-contractor-cost-breakdown"
+    >
+      State and Contractor Cost Breakdown
+    </h4>
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1985"
+    />
+  </Fragment>,
+]
+`;
