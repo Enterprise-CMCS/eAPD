@@ -183,7 +183,7 @@ const updateAuthAffiliation = async ({
   newRoleId,
   newStatus,
   changedBy, // userId of the individual updating the affiliation
-  changedByStateId, // stateId of the individual updating the affiliation
+  changedByRole, // role name of the individual updating the affiliation
   stateId,
   ffy
 }) => {
@@ -200,20 +200,6 @@ const updateAuthAffiliation = async ({
   if (changedBy === affiliationUserId) {
     throw new Error('User is editing their own affiliation');
   }
-
-  // Lookup role id of the user making the affiliation update
-  const { role_id: changedByRoleId } = await (transaction || db)(
-    'auth_affiliations'
-  )
-    .select('role_id')
-    .where({ state_id: changedByStateId, user_id: changedBy })
-    .first();
-
-  // Lookup role name of who is updating the affiliation
-  const { name: changedByRoleName } = await (transaction || db)('auth_roles')
-    .select('name')
-    .where({ id: changedByRoleId })
-    .first();
 
   const validAssignableRoles = {
     'eAPD Federal Admin': ['eAPD State Admin'],
@@ -232,7 +218,7 @@ const updateAuthAffiliation = async ({
 
   // Check user is assigning a valid role
   if (
-    !validAssignableRoles[`${changedByRoleName}`].includes(roleName) &&
+    !validAssignableRoles[`${changedByRole}`].includes(roleName) &&
     roleName !== null
   ) {
     throw new Error('User is attempting to assign an invalid role');
