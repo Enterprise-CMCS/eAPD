@@ -1443,7 +1443,7 @@ const expectedErrorsMockApdRandom = [
     fieldDescription: 'Select a federal-state split.'
   },
   {
-    section: 'Activity 1 Outcomes and Milestones',
+    section: 'Activity 1 Outcomes and Metrics',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/oms',
     fieldDescription: 'Metric is required'
   },
@@ -1468,7 +1468,7 @@ const expectedErrorsMockApdRandom = [
     fieldDescription: 'Provide an annual cost.'
   },
   {
-    section: 'Activity 2 Outcomes and Milestones',
+    section: 'Activity 2 Outcomes and Metrics',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/oms',
     fieldDescription: 'Metric is required'
   },

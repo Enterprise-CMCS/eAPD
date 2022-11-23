@@ -48,7 +48,7 @@ export const addMMISActivity = years => {
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
 
-      // Fill out Outcomes and Milestones
+      // Fill out Outcomes and Metrics
       cy.findByRole('heading', {
         name: /^Activity 3:/i,
         level: 2
@@ -165,7 +165,7 @@ export const addMMISActivity = years => {
                 endDate: overviewData.endDate.join('/')
               });
 
-              // Check Outcomes and Milestones
+              // Check Outcomes and Metrics
               Cypress._.times(2, i => {
                 exportPage.checkOutcomes({
                   outcome: activityData.outcomes.names[i],

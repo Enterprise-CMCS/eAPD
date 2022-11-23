@@ -538,7 +538,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
       ];
 
-      cy.log('Outcomes and Milestones');
+      cy.log('Outcomes and Metrics');
       cy.goToOutcomesAndMilestones(0);
 
       cy.wrap(outcomes).each((element, index) => {

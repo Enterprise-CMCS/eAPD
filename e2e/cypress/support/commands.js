@@ -354,7 +354,7 @@ Cypress.Commands.add('goToActivityOverview', activityIndex => {
 });
 
 Cypress.Commands.add('goToOutcomesAndMilestones', activityIndex => {
-  openActivitySection(activityIndex, 'Outcomes and Milestones');
+  openActivitySection(activityIndex, 'Outcomes and Metrics');
 });
 
 Cypress.Commands.add('goToStateStaffAndExpenses', activityIndex => {

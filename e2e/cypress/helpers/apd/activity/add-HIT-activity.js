@@ -45,7 +45,7 @@ export const addHITActivity = years => {
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
 
-      // Fill out Outcomes and Milestones
+      // Fill out Outcomes and Metrics
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
@@ -169,7 +169,7 @@ export const addHITActivity = years => {
                 endDate: overviewData.endDate.join('/')
               });
 
-              // Check Outcomes and Milestones
+              // Check Outcomes and Metrics
               exportPage.checkOutcomes({
                 outcome: activityData.outcomes.names[0],
                 metrics: activityData.outcomes.metrics[0]

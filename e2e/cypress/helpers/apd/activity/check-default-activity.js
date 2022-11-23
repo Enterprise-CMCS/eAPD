@@ -66,7 +66,7 @@ export const checkDefaultActivity = years => {
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
 
-      // Check Outcomes and Milestones
+      // Check Outcomes and Metrics
       cy.findByRole('heading', {
         name: /Outcomes and Metrics/i,
         level: 3
@@ -225,7 +225,7 @@ export const checkDefaultActivity = years => {
                 ...overviewData
               });
 
-              // Check Outcomes and Milestones
+              // Check Outcomes and Metrics
               exportPage.checkOutcomes({});
 
               exportPage.checkMilestones({});
