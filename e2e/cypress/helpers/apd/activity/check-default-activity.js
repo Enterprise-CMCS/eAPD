@@ -54,14 +54,22 @@ export const checkDefaultActivity = years => {
       // Check Activity Overview
       cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
 
-      activityPage.checkDate('Start date');
-      activityPage.checkDate('End date');
-
       activityPage.checkTinyMCE('activity-short-overview-field', '');
       activityPage.checkTinyMCE('activity-description-field', '');
       activityPage.checkTinyMCE('activity-alternatives-field', '');
       activityPage.checkTinyMCE('standards-and-conditions-supports-field', '');
       activityPage.checkTextField('ds-c-field visibility--screen', '');
+
+      cy.waitForSave();
+      cy.get('[id="continue-button"]').click();
+
+      // Check Activity Schedule and Milestones
+      cy.findByRole('heading', { name: /Activity Schedule/i }).should('exist');
+      cy.findByRole('heading', { name: /Milestones/i }).should('exist');
+
+      activityPage.checkDate('Start date');
+      activityPage.checkDate('End date');
+      cy.contains('Add milestone(s) for this activity.').should('exist');
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
@@ -75,7 +83,6 @@ export const checkDefaultActivity = years => {
       cy.contains('Add at least one outcome for this activity.').should(
         'exist'
       );
-      cy.contains('Add milestone(s) for this activity.').should('exist');
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
