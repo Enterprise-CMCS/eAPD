@@ -183,7 +183,7 @@ describe('tests state admin portal', () => {
       { tags: ['@state', '@admin'] },
       () => {
         cy.contains('AK APD Home').click();
-        cy.findAllByText('HITECH IAPD Admin Check Complete').eq(0).click();
+        cy.findAllByText('HITECH IAPD Complete').eq(0).click();
 
         cy.turnOnAdminCheck();
 
