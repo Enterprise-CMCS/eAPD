@@ -5633,7 +5633,7 @@ describe('budget calculate methods', () => {
           {
             // This activity is to represent the case where an activity's
             // total costs are zero, because that was causing budget math
-            // errors. https://github.com/CMSgov/eAPD/issues/1740
+            // errors. https://github.com/Enterprise-CMCS/eAPD/issues/1740
             id: 5,
             key: '5',
             activityId: '5',
@@ -5681,7 +5681,7 @@ describe('budget calculate methods', () => {
             // This activity is to represent the case where an activity
             // does not have a funding program yet. New activities do not
             // get a funding program by default.
-            // https://github.com/CMSgov/eAPD/issues/2059
+            // https://github.com/Enterprise-CMCS/eAPD/issues/2059
             id: 6,
             key: '6',
             activityId: '6',

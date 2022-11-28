@@ -1,15 +1,13 @@
-const { applyPatch } = require('fast-json-patch');
-const {
-  deepCopy,
-  calculateBudget,
-  hasBudgetUpdate
-} = require('@cms-eapd/common');
-const logger = require('../logger')('db/apds');
-const { updateStateProfile } = require('./states');
-const { adminCheckApd } = require('../util/adminCheck');
-const { Budget, APD } = require('../models/index');
+import { applyPatch } from 'fast-json-patch';
+import { deepCopy, calculateBudget, hasBudgetUpdate } from '@cms-eapd/common';
+import loggerFactory from '../logger';
+import { updateStateProfile } from './states';
+import adminCheckApd from '../util/adminCheck';
+import { Budget, APD } from '../models/index';
 
-const createAPD = async apd => {
+const logger = loggerFactory('db/apds');
+
+export const createAPD = async apd => {
   const apdDoc = await APD.create(apd);
   const newBudget = await Budget.create(calculateBudget(apdDoc.toJSON()));
   apdDoc.budget = newBudget;
@@ -18,18 +16,19 @@ const createAPD = async apd => {
   return apdDoc._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
-const deleteAPDByID = async id =>
+export const deleteAPDByID = async id =>
   APD.updateOne({ _id: id }, { status: 'archived' });
 
-const getAllAPDsByState = async stateId =>
+export const getAllAPDsByState = async stateId =>
   APD.find(
     { stateId, status: 'draft' },
     '_id id createdAt updatedAt stateId status name years'
   ).lean();
 
-const getAPDByID = async id => APD.findById(id).lean().populate('budget');
+export const getAPDByID = async id =>
+  APD.findById(id).lean().populate('budget');
 
-const getAPDByIDAndState = (id, stateId) =>
+export const getAPDByIDAndState = (id, stateId) =>
   APD.findOne({ _id: id, stateId }).lean().populate('budget');
 
 // Apply the patches to the APD document
@@ -48,14 +47,14 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
   return APD.findOne({ _id: id, stateId }).lean();
 };
 
-const adminCheckAPDDocument = async id => {
+export const adminCheckAPDDocument = async id => {
   // get the updated apd json
   const apdDoc = await getAPDByID(id);
   // call admin check util
   return adminCheckApd(apdDoc);
 };
 
-const updateAPDDocument = async (
+export const updateAPDDocument = async (
   id,
   stateId,
   patch,
@@ -164,14 +163,4 @@ const updateAPDDocument = async (
     stateUpdated: false,
     updated: []
   };
-};
-
-module.exports = {
-  createAPD,
-  deleteAPDByID,
-  getAllAPDsByState,
-  getAPDByID,
-  getAPDByIDAndState,
-  updateAPDDocument,
-  adminCheckAPDDocument
 };

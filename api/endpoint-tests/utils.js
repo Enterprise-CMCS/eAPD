@@ -1,8 +1,10 @@
-const axios = require('axios');
-const FormData = require('form-data');
-const knex = require('knex');
-const knexConfig = require('../knexfile');
-const logger = require('../logger')('endpoint-utils');
+import axios from 'axios';
+import FormData from 'form-data';
+import knex from 'knex';
+import knexConfig from '../knexfile';
+import loggerFactory from '../logger';
+
+const logger = loggerFactory('endpoint-utils');
 
 const { API_HOST, API_PORT, PORT } = process.env;
 
@@ -16,9 +18,9 @@ const axiosDefaults = {
   validateStatus: status => status < 500
 };
 
-const api = axios.create(axiosDefaults);
+export const api = axios.create(axiosDefaults);
 
-const login = token => {
+export const login = token => {
   const jwt = token || 'all-permissions';
   const options = {
     ...axiosDefaults,
@@ -29,14 +31,14 @@ const login = token => {
   return axios.create(options);
 };
 
-const unauthenticatedTest = (method, url) => {
+export const unauthenticatedTest = (method, url) => {
   it('when unauthenticated', async () => {
     const response = await api[method](url);
     expect(response.status).toEqual(401);
   });
 };
 
-const unauthorizedTest = (method, url) => {
+export const unauthorizedTest = (method, url) => {
   it('when unauthorized', async () => {
     const authenticatedClient = login('no-permissions');
     const response = await authenticatedClient[method](url);
@@ -44,30 +46,19 @@ const unauthorizedTest = (method, url) => {
   });
 };
 
-const getDB = () => knex(knexConfig[process.env.NODE_ENV]);
+export const getDB = () => knex(knexConfig[process.env.NODE_ENV]);
 
-const setupDB = async db => {
+export const setupDB = async db => {
   await db.seed.run({ specific: 'main.js' });
 };
 
-const teardownDB = async db => {
+export const teardownDB = async db => {
   await db.destroy();
   logger.verbose('Database teardown complete.');
 };
 
-const buildForm = data => {
+export const buildForm = data => {
   const form = new FormData();
   Object.entries(data).forEach(([key, value]) => form.append(key, value));
   return form;
-};
-
-module.exports = {
-  api,
-  buildForm,
-  getDB,
-  setupDB,
-  teardownDB,
-  login,
-  unauthenticatedTest,
-  unauthorizedTest
 };

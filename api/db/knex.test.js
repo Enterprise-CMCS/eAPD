@@ -1,5 +1,5 @@
-const tap = require('tap');
-const knex = require('./knex');
+import tap from 'tap';
+import knex from './knex';
 
 tap.test('database wrappers / oktaUsers', async dbTest => {
   // This test will NOT succeed unless there is a valid DB in scope.

@@ -1,9 +1,9 @@
 /* eslint-disable no-shadow */
-const sinon = require('sinon');
-const tap = require('tap');
+import sinon from 'sinon';
 
-const errorHandler = require('./errorHandler');
-const mockResponse = require('../util/mockResponse');
+import tap from 'tap';
+import errorHandler from './errorHandler';
+import mockResponse from '../util/mockResponse';
 
 let err;
 let req;

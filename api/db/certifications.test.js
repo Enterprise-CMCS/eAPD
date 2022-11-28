@@ -1,9 +1,9 @@
-const tap = require('tap');
-const knex = require('./knex');
-const {
+import tap from 'tap';
+import knex from './knex';
+import {
   getStateAdminCertifications,
   archiveStateAdminCertification
-} = require('./certifications');
+} from './certifications';
 
 const setupDB = async (certifications, oktaUsers, authAffiliations) => {
   await knex('okta_users').insert(oktaUsers);

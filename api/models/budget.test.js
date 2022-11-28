@@ -1,10 +1,12 @@
-const tap = require('tap');
-const { calculateBudget } = require('@cms-eapd/common');
+import tap from 'tap';
+import { calculateBudget } from '@cms-eapd/common';
+
 // const toMongodb = require('jsonpatch-to-mongodb');
 
-const { setup, teardown } = require('../db/mongodb');
-const { APD, Budget } = require('./index');
-const { apd, apdNoActivities } = require('../seeds/development/apds');
+import { setup, teardown } from '../db/mongodb';
+
+import { APD, Budget } from './index';
+import { akAPD, akAPDNoActivities } from '../seeds/development/apds';
 
 let apdId;
 let budgetId;
@@ -15,14 +17,14 @@ tap.test('Budget model test', async t => {
   });
 
   t.beforeEach(async () => {
-    const budget = await Budget.create(calculateBudget(apd));
+    const budget = await Budget.create(calculateBudget(akAPD));
     // eslint-disable-next-line no-underscore-dangle
     budgetId = budget._id.toString();
 
     const { _id: apdObjId } = await APD.create({
       status: 'draft',
       stateId: 'md',
-      ...apd,
+      ...akAPD,
       budget
     });
     apdId = apdObjId.toString();
@@ -45,7 +47,7 @@ tap.test('Budget model test', async t => {
   });
 
   t.test('recalculate budget', async test => {
-    const newBudget = calculateBudget(apdNoActivities);
+    const newBudget = calculateBudget(akAPDNoActivities);
 
     await Budget.updateOne({ _id: budgetId }, newBudget);
     const updatedBudget = await Budget.findOne({ _id: budgetId }).lean();

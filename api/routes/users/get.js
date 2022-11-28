@@ -1,7 +1,7 @@
-const { getAllUsers: ga, getUserByID: gu } = require('../../db');
-const can = require('../../middleware').can;
+import { getAllUsers as ga, getUserByID as gu } from '../../db';
+import { can } from '../../middleware';
 
-module.exports = (app, { getAllUsers = ga, getUserByID = gu } = {}) => {
+export default (app, { getAllUsers = ga, getUserByID = gu } = {}) => {
   app.get('/users', can('view-users'), async (req, res, next) => {
     await getAllUsers()
       .then(users => res.json(users))

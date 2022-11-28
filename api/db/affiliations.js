@@ -1,7 +1,9 @@
-const logger = require('../logger')('db/affiliations');
-const knex = require('./knex');
+import loggerFactory from '../logger';
+import knex from './knex';
 
-const selectedColumns = [
+const logger = loggerFactory('db/affiliations');
+
+export const selectedColumns = [
   'auth_affiliations.id',
   'auth_affiliations.user_id as userId',
   'auth_affiliations.state_id as stateId',
@@ -20,7 +22,7 @@ const statusConverter = {
   null: ['requested', 'approved', 'denied', 'revoked']
 };
 
-const getAffiliationsByStateId = ({
+export const getAffiliationsByStateId = ({
   stateId,
   status = null,
   isFedAdmin = false,
@@ -55,7 +57,7 @@ const getAffiliationsByStateId = ({
   return [];
 };
 
-const getPopulatedAffiliationsByStateId = ({
+export const getPopulatedAffiliationsByStateId = ({
   stateId,
   status,
   isFedAdmin,
@@ -64,7 +66,7 @@ const getPopulatedAffiliationsByStateId = ({
   return getAffiliationsByStateId_({ stateId, status, isFedAdmin });
 };
 
-const getAffiliationsByUserId = (userId, { db = knex } = {}) => {
+export const getAffiliationsByUserId = (userId, { db = knex } = {}) => {
   return db('auth_affiliations')
     .select(selectedColumns)
     .where('auth_affiliations.user_id', userId)
@@ -72,7 +74,7 @@ const getAffiliationsByUserId = (userId, { db = knex } = {}) => {
     .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id');
 };
 
-const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
+export const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
   return db('auth_affiliations')
     .select(selectedColumns)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
@@ -84,11 +86,15 @@ const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
     .first();
 };
 
-const getPopulatedAffiliationById = ({ stateId, affiliationId, db = knex }) => {
+export const getPopulatedAffiliationById = ({
+  stateId,
+  affiliationId,
+  db = knex
+}) => {
   return getAffiliationById({ stateId, affiliationId, db });
 };
 
-const reduceAffiliations = affiliations => {
+export const reduceAffiliations = affiliations => {
   // combine affiliations for each user.
   // many fields are omitted for clarity
   // Given:
@@ -121,7 +127,7 @@ const reduceAffiliations = affiliations => {
   return Object.values(results);
 };
 
-const getAllAffiliations = async ({ status, db = knex } = {}) => {
+export const getAllAffiliations = async ({ status, db = knex } = {}) => {
   const query = db('auth_affiliations')
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
     .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
@@ -146,7 +152,7 @@ const getAllAffiliations = async ({ status, db = knex } = {}) => {
   return query;
 };
 
-const getAllPopulatedAffiliations = async ({
+export const getAllPopulatedAffiliations = async ({
   status,
   db = knex,
   getAllAffiliations_ = getAllAffiliations,
@@ -157,7 +163,7 @@ const getAllPopulatedAffiliations = async ({
   return reduceAffiliations_(affiliations);
 };
 
-const getAffiliationMatches = async ({ stateId, db = knex }) => {
+export const getAffiliationMatches = async ({ stateId, db = knex }) => {
   const query = db('auth_affiliations')
     .select(selectedColumns)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
@@ -176,7 +182,7 @@ const getAffiliationMatches = async ({ stateId, db = knex }) => {
   );
 };
 
-const updateAuthAffiliation = async ({
+export const updateAuthAffiliation = async ({
   db = knex,
   transaction = null,
   affiliationId,
@@ -250,18 +256,4 @@ const updateAuthAffiliation = async ({
         authAffiliationAudit
       );
     });
-};
-
-module.exports = {
-  getAffiliationsByStateId,
-  getPopulatedAffiliationsByStateId,
-  getAffiliationById,
-  getPopulatedAffiliationById,
-  getAllAffiliations,
-  reduceAffiliations,
-  getAllPopulatedAffiliations,
-  getAffiliationsByUserId,
-  getAffiliationMatches,
-  updateAuthAffiliation,
-  selectedColumns
 };

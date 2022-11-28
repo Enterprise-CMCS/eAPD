@@ -1,4 +1,4 @@
-const { login, api } = require('../../endpoint-tests/utils');
+import { login, api } from '../../endpoint-tests/utils';
 
 describe('Document endpoints', () => {
   describe('Get help doc | GET /docs/account-registration', () => {

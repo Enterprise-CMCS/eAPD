@@ -1,21 +1,21 @@
-const isPast = require('date-fns/isPast');
-const { oktaClient } = require('../auth/oktaAuth');
-const knex = require('./knex');
-const {
-  getUserAffiliatedStates: actualGetUserAffiliatedStates,
-  getAffiliationByState: actualGetAffiliationsByState,
-  getUserPermissionsForStates: actualGetUserPermissionsForStates,
-  getRolesAndActivities: actualGetRolesAndActivities,
-  auditUserLogin: actualAuditUserLogin,
-  getAuthRoleByName: actualGetAuthRoleByName
-} = require('./auth');
-const {
-  updateAuthAffiliation: actualUpdateAuthAffiliation
-} = require('./affiliations');
-const { getStateById: actualGetStateById } = require('./states');
-const { createOrUpdateOktaUser, getOktaUser } = require('./oktaUsers');
+import isPast from 'date-fns/isPast';
+import { oktaClient } from '../auth/oktaAuth';
+import knex from './knex';
 
-const sanitizeUser = user => ({
+import {
+  getUserAffiliatedStates as actualGetUserAffiliatedStates,
+  getAffiliationByState as actualGetAffiliationsByState,
+  getUserPermissionsForStates as actualGetUserPermissionsForStates,
+  getRolesAndActivities as actualGetRolesAndActivities,
+  auditUserLogin as actualAuditUserLogin,
+  getAuthRoleByName as actualGetAuthRoleByName
+} from './auth';
+
+import { updateAuthAffiliation as actualUpdateAuthAffiliation } from './affiliations';
+import { getStateById as actualGetStateById } from './states';
+import { createOrUpdateOktaUser, getOktaUser } from './oktaUsers';
+
+export const sanitizeUser = user => ({
   id: user.id,
   name: user.displayName,
   username: user.login,
@@ -34,7 +34,7 @@ const sanitizeUser = user => ({
  * @param {*} param2
  * @returns
  */
-const userLoggedIntoState = async (
+export const userLoggedIntoState = async (
   { name, states, displayName, affiliation } = {},
   stateId = null,
   { auditUserLogin = actualAuditUserLogin } = {}
@@ -60,7 +60,7 @@ const userLoggedIntoState = async (
  * @param {*} stateId state id to populate user permissions for
  * @returns user object with permissions for the state
  */
-const populateUserRole = async (
+export const populateUserRole = async (
   user,
   stateId = null,
   {
@@ -131,7 +131,7 @@ const populateUserRole = async (
   return null;
 };
 
-const getAllUsers = async ({
+export const getAllUsers = async ({
   clean = true,
   client = oktaClient,
   populate = populateUserRole
@@ -146,7 +146,7 @@ const getAllUsers = async ({
   return full;
 };
 
-const getUserByID = async (
+export const getUserByID = async (
   id,
   checkOkta,
   {
@@ -188,12 +188,4 @@ const getUserByID = async (
     return user && clean ? sanitizeUser(user) : user;
   }
   return null;
-};
-
-module.exports = {
-  getAllUsers,
-  getUserByID,
-  populateUserRole,
-  sanitizeUser,
-  userLoggedIntoState
 };

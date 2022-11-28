@@ -1,7 +1,6 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { cache } = require('./cache');
+import tap from 'tap';
+import sinon from 'sinon';
+import cache from './cache';
 
 tap.test('middleware cache', async cacheTests => {
   const key1 = ['something', 1, {}];

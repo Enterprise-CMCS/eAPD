@@ -1,7 +1,4 @@
-const {
-  requiresAuth,
-  schema: { arrayOf, jsonResponse }
-} = require('../openAPI/helpers');
+import { requiresAuth, jsonResponse, arrayOf } from '../openAPI/helpers';
 
 const userObjectSchema = jsonResponse({
   type: 'object',
@@ -170,4 +167,4 @@ const openAPI = {
   }
 };
 
-module.exports = requiresAuth(openAPI);
+export default requiresAuth(openAPI);

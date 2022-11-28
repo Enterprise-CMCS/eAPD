@@ -1,6 +1,8 @@
-const { format } = require('date-fns');
-const logger = require('../../logger')('user seeder');
-const { states } = require('../../util/states');
+import { format } from 'date-fns';
+import loggerFactory from '../../logger';
+import states from '../../util/states';
+
+const logger = loggerFactory('user seeder');
 
 const today = new Date();
 
@@ -223,6 +225,4 @@ const createUsersToAdd = async (knex, oktaClient) => {
   return { oktaAffiliations, stateCertifications, oktaUsers };
 };
 
-module.exports = {
-  createUsersToAdd
-};
+export default createUsersToAdd;

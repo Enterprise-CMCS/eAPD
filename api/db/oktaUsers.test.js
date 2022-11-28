@@ -1,14 +1,14 @@
-const sinon = require('sinon');
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
+import sinon from 'sinon';
+import tap from 'tap';
+import dbMock from './dbMock.test';
 
-const {
+import {
   createOktaUser,
   updateOktaUser,
   createOrUpdateOktaUser,
   sanitizeProfile,
   createOrUpdateOktaUserFromOkta
-} = require('./oktaUsers');
+} from './oktaUsers';
 
 tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
   //

@@ -52,7 +52,7 @@ const allPermissionsAndState = {
   }
 };
 
-const mockOktaClient = {
+export const mockOktaClient = {
   listUsers: () => {
     return new Promise(resolve => {
       resolve([
@@ -92,7 +92,7 @@ const mockOktaClient = {
   }
 };
 
-const mockVerifyJWT = token => {
+export const mockVerifyJWT = token => {
   if (token === 'no-permissions') {
     return {
       sub: 'no-permissions@email.com',
@@ -142,9 +142,4 @@ const mockVerifyJWT = token => {
     };
   }
   return false;
-};
-
-module.exports = {
-  mockOktaClient,
-  mockVerifyJWT
 };

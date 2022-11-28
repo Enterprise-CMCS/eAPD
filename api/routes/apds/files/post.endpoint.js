@@ -1,16 +1,16 @@
-const fs = require('fs');
-const FormData = require('form-data');
-const {
+import fs from 'fs';
+import FormData from 'form-data';
+import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
-const {
+} from '../../../endpoint-tests/utils';
+import {
   mnAPDId,
   akAPDId,
   finalAPDId,
   badAPDId
-} = require('../../../seeds/test/apds');
+} from '../../../seeds/test/apds';
 
 describe('APD files endpoints', () => {
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {

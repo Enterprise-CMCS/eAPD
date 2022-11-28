@@ -1,7 +1,6 @@
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
-
-const { getAllActiveRoles } = require('./roles');
+import tap from 'tap';
+import dbMock from './dbMock.test';
+import { getAllActiveRoles } from './roles';
 
 const allRoles = [
   {

@@ -2,7 +2,9 @@
 // set on each field that was changed. Finally call log when you're done to
 // persist the audit log. Uses the standard logger
 
-const logger = require('./logger')('AUDIT');
+import loggerFactory from './logger/index';
+
+const logger = loggerFactory('AUDIT');
 
 const CREATE_ACCOUNT = 'CREATE_ACCOUNT';
 const DISABLE_ACCOUNT = 'DISABLE_ACCOUNT';
@@ -16,6 +18,14 @@ const actionsToProps = {
   [ENABLE_ACCOUNT]: 'enableAccount',
   [MODIFY_ACCOUNT]: 'modifyAccount',
   [REMOVE_ACCOUNT]: 'removeAccount'
+};
+
+export const actions = {
+  CREATE_ACCOUNT,
+  DISABLE_ACCOUNT,
+  ENABLE_ACCOUNT,
+  MODIFY_ACCOUNT,
+  REMOVE_ACCOUNT
 };
 
 /**
@@ -33,7 +43,7 @@ const actionsToProps = {
  * @return {Auditor} An auditor object for the action and request
  *
  * */
-module.exports = (action, req) => {
+export default (action, req) => {
   try {
     if (!actionsToProps[action]) {
       throw new Error(`don't know how to audit ${action}`);
@@ -81,12 +91,4 @@ module.exports = (action, req) => {
     logger.error('ERROR CREATING AUDITOR', e);
     throw e;
   }
-};
-
-module.exports.actions = {
-  CREATE_ACCOUNT,
-  DISABLE_ACCOUNT,
-  ENABLE_ACCOUNT,
-  MODIFY_ACCOUNT,
-  REMOVE_ACCOUNT
 };

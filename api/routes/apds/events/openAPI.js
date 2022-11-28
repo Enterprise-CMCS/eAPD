@@ -1,7 +1,4 @@
-const {
-  requiresAuth,
-  schema: { jsonResponse }
-} = require('../../openAPI/helpers');
+import { requiresAuth, jsonResponse } from '../../openAPI/helpers';
 
 const openAPI = {
   '/apds/{id}/events': {
@@ -64,6 +61,6 @@ const openAPI = {
   }
 };
 
-module.exports = {
+export default {
   ...requiresAuth(openAPI)
 };

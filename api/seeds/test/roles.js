@@ -1,6 +1,6 @@
-const { getAllActiveRoles, getAllActivities } = require('../../db/roles');
+import { getAllActiveRoles, getAllActivities } from '../../db/roles';
 
-exports.seed = async knex => {
+const seed = async knex => {
   await knex('auth_roles').insert({ isActive: true, name: 'eAPD Tester' });
   const [{ id: adminRoleId }] = await getAllActiveRoles(['eAPD Tester'], {
     db: knex
@@ -36,3 +36,5 @@ exports.seed = async knex => {
     activity_id: noActivitiesId
   });
 };
+
+export default seed;

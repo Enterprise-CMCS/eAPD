@@ -1,7 +1,6 @@
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
-
-const { getStateProfile, updateStateProfile } = require('./states');
+import tap from 'tap';
+import dbMock from './dbMock.test';
+import { getStateProfile, updateStateProfile } from './states';
 
 tap.test('database wrappers / states', async statesTests => {
   const db = dbMock('states');

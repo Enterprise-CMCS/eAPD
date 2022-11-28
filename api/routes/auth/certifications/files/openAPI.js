@@ -1,7 +1,4 @@
-const {
-  requiresAuth,
-  schema: { jsonResponse }
-} = require('../../../openAPI/helpers');
+import { requiresAuth, jsonResponse } from '../../../openAPI/helpers';
 
 const getStateCertificationFile = {
   '/auth/certifications/files/{fileID}': {
@@ -85,7 +82,7 @@ const postStateCertificationFile = {
   }
 };
 
-module.exports = {
+export default {
   ...requiresAuth(getStateCertificationFile),
   ...requiresAuth(postStateCertificationFile)
 };

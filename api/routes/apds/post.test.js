@@ -1,9 +1,8 @@
-const tap = require('tap');
-const sinon = require('sinon');
-const { SchemaTypes } = require('mongoose');
-
-const { can } = require('../../middleware');
-const postEndpoint = require('./post');
+import tap from 'tap';
+import sinon from 'sinon';
+import { SchemaTypes } from 'mongoose';
+import { can } from '../../middleware';
+import postEndpoint from './post';
 
 // The Cassini probe enters orbit around Saturn, about 7 years after launch.
 // On its long journey, it surveyed Venus, Earth, an asteroid, and Jupiter.

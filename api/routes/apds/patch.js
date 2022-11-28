@@ -1,13 +1,15 @@
-const sanitize = require('../../util/sanitize');
-const logger = require('../../logger')('apds route put');
-const {
-  updateAPDDocument: ua,
-  adminCheckAPDDocument: validate
-} = require('../../db');
-const { can, userCanEditAPD } = require('../../middleware');
-const { staticFields } = require('../../util/apds');
+import sanitize from '../../util/sanitize';
+import loggerFactory from '../../logger';
+import {
+  updateAPDDocument as ua,
+  adminCheckAPDDocument as validate
+} from '../../db';
+import { can, userCanEditAPD } from '../../middleware';
+import staticFields from '../../util/apds';
 
-module.exports = (
+const logger = loggerFactory('apds route put');
+
+export default (
   app,
   { updateAPDDocument = ua, adminCheckAPDDocument = validate } = {}
 ) => {

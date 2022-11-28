@@ -1,7 +1,7 @@
-const tap = require('tap');
-const sinon = require('sinon');
-const { can } = require('../../../middleware');
-const endpoints = require('./get');
+import tap from 'tap';
+import sinon from 'sinon';
+import { can } from '../../../middleware';
+import endpoints from './get';
 
 tap.test('apds files endpoints', async endpointTest => {
   const sandbox = sinon.createSandbox();

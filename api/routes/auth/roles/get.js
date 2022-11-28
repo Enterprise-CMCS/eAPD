@@ -1,7 +1,7 @@
-const { getActiveAuthRoles: gr } = require('../../../db');
-const { can } = require('../../../middleware');
+import { getActiveAuthRoles as gr } from '../../../db';
+import { can } from '../../../middleware';
 
-module.exports = (app, { getActiveAuthRoles = gr } = {}) => {
+export default (app, { getActiveAuthRoles = gr } = {}) => {
   app.get('/auth/roles', can('view-roles'), async (req, res, next) => {
     await getActiveAuthRoles()
       .then(roles => res.send(roles))

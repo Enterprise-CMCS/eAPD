@@ -1,7 +1,4 @@
-const {
-  requiresAuth,
-  schema: { arrayOf, jsonResponse }
-} = require('../openAPI/helpers');
+import { requiresAuth, jsonResponse, arrayOf } from '../openAPI/helpers';
 
 const id = {
   type: 'string',
@@ -87,7 +84,7 @@ const getState = {
   }
 };
 
-module.exports = {
+export default {
   ...getStates,
   ...requiresAuth(getState, { has403: false })
 };

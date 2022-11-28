@@ -1,26 +1,26 @@
 // Sets up dotenv, sets default environment
 // variables if not defined
-require('./env');
+import './env';
 
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const { v4: uuidv4 } = require('uuid');
-const fileUpload = require('express-fileupload');
-const logger = require('./logger')('main');
-const { requestLoggerMiddleware } = require('./logger/morgan');
-const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
-const routes = require('./routes');
-const endpointCoverage = require('./middleware/endpointCoverage');
-const errorHandler = require('./middleware/errorHandler');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import { v4 as uuidv4 } from 'uuid';
+import fileUpload from 'express-fileupload';
 
-const { setup: mongoSetup, getConnectionStatus } = require('./db/mongodb');
-const knex = require('./db/knex');
-const {
-  waitForInitialization: ldWaitForInitialization
-} = require('./middleware/launchDarkly'); // initialize LaunchDarkly
-const me = require('./routes/me/index');
+import loggerFactory from './logger/index';
+import requestLoggerMiddleware from './logger/morgan';
+import jsonWebTokenMiddleware from './auth/jwtMiddleware';
+import routes from './routes/index';
+import endpointCoverage from './middleware/endpointCoverage';
+import errorHandler from './middleware/errorHandler';
+import { setup as mongoSetup, getConnectionStatus } from './db/mongodb';
+import knex from './db/knex';
+import { waitForInitialization as ldWaitForInitialization } from './middleware/launchDarkly'; // initialize LaunchDarkly
+import me from './routes/me/index';
+
+const logger = loggerFactory('main');
 
 (async () => {
   try {
@@ -155,4 +155,4 @@ api.all('*', (_, res) => {
 // Respond to api errors, accordingly. Must be loaded last.
 api.use(errorHandler);
 
-module.exports = api;
+export default api;

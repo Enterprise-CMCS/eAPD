@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const sinon = require('sinon');
+import sinon from 'sinon';
 
 // https://codewithhugo.com/express-request-response-mocking/#mockingstubbing-res-a-simple-express-response-with-sinon
 const mockResponse = () => {
@@ -14,4 +14,4 @@ const mockResponse = () => {
   return res;
 };
 
-module.exports = mockResponse;
+export default mockResponse;

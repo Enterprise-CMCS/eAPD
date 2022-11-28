@@ -1,4 +1,5 @@
-const tap = require('tap');
+import tap from 'tap';
+import adminCheckApd from './adminCheck';
 
 const validApdOverview = {
   programOverview: 'abc',
@@ -1495,8 +1496,6 @@ const expectedErrorsMockApdRandom = [
     fieldDescription: 'Select yes or no'
   }
 ];
-
-const { adminCheckApd } = require('./adminCheck');
 
 tap.test('apd document admin check', async apdValidationTests => {
   apdValidationTests.test(

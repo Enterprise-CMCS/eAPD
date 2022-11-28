@@ -1,7 +1,7 @@
-const { default: akAPD } = require('./01-akAPD');
-const { default: akAPDNoActivities } = require('./02-akAPDNoActivities');
+import akAPD from './01-akAPD';
+import akAPDNoActivities from './02-akAPDNoActivities';
 
-const data = [
+export const data = [
   {
     stateId: 'ak',
     status: 'draft',
@@ -14,8 +14,4 @@ const data = [
   }
 ];
 
-module.exports = {
-  data,
-  akAPD,
-  akAPDNoActivities
-};
+export { akAPD, akAPDNoActivities };

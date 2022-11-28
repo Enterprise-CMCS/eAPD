@@ -1,6 +1,6 @@
-const tap = require('tap');
-const sinon = require('sinon');
-const endpointIndex = require('./index');
+import tap from 'tap';
+import sinon from 'sinon';
+import endpointIndex from './index';
 
 tap.test('endpoint setup', async endpointTest => {
   const app = {

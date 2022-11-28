@@ -1,12 +1,11 @@
-const { loggedIn } = require('../../../middleware/auth');
-const { can } = require('../../../middleware');
-const logger = require('../../../logger')('auth certifications delete');
+import { loggedIn } from '../../../middleware/auth';
+import { can } from '../../../middleware';
+import loggerFactory from '../../../logger';
+import { archiveStateAdminCertification as archiveCertification } from '../../../db/certifications';
 
-const {
-  archiveStateAdminCertification: archiveCertification
-} = require('../../../db/certifications');
+const logger = loggerFactory('auth certifications delete');
 
-module.exports = (
+export default (
   app,
   { archiveStateAdminCertification = archiveCertification } = {}
 ) => {

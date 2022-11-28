@@ -1,11 +1,13 @@
-const chalk = require('chalk'); // eslint-disable-line import/no-unresolved
-const logger = require('../../logger')('roles seeder');
-const {
+import chalk from 'chalk'; // eslint-disable-line import/no-unresolved
+import loggerFactory from '../../logger';
+import {
   activities,
   roles,
   roleToActivityMappings,
   activeRoles
-} = require('../../util/roles');
+} from '../../util/roles';
+
+const logger = loggerFactory('roles seeder');
 
 // Take the knex object and the table name as arguments, instead of just
 // the knex table object.  The reason is that if you have an insert on
@@ -77,7 +79,7 @@ const setupMappings = async (
   logger.verbose(`Completed seeding ${chalk.cyan(tableName)} table`);
 };
 
-exports.seed = async knex => {
+const seed = async knex => {
   logger.verbose('Beginning to seed the roles, activities, and mapping tables');
 
   // drop current mappings for mapping table, must be done before auth_activities because of foreign key constraints
@@ -113,3 +115,5 @@ exports.seed = async knex => {
     .update({ isActive: true });
   logger.verbose('Updated active status for roles');
 };
+
+export default seed;

@@ -1,8 +1,8 @@
-const tap = require('tap');
-const { data } = require('./apds');
-const { createAPD } = require('../../db/apds');
-const { setup, teardown } = require('../../db/mongodb');
-const { APD } = require('../../models/index');
+import tap from 'tap';
+import { data } from './apds';
+import { createAPD } from '../../db/apds';
+import { setup, teardown } from '../../db/mongodb';
+import { APD } from '../../models/index';
 
 tap.test('development APD seed document', async t => {
   await setup();

@@ -1,6 +1,6 @@
-require('./budget');
-const mongoose = require('mongoose');
-const { generateKey } = require('@cms-eapd/common');
+import './budget';
+import mongoose from 'mongoose';
+import { generateKey } from '@cms-eapd/common';
 
 const quarterlyFFP = new mongoose.Schema(
   {
@@ -378,4 +378,4 @@ const apdSchema = new mongoose.Schema({
 
 const APD = mongoose.model('APD', apdSchema);
 
-module.exports = APD;
+export default APD;

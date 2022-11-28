@@ -1,5 +1,7 @@
-const { jwtExtractor, verifyEAPDToken } = require('./jwtUtils');
-const logger = require('../logger')('jwt middleware');
+import { jwtExtractor, verifyEAPDToken } from './jwtUtils';
+import loggerFactory from '../logger';
+
+const logger = loggerFactory('jwt middleware');
 
 /**
  * Extracts and verifies the JWT in the request Authorization header.
@@ -33,4 +35,4 @@ const jwtMiddleware = async (
   return next();
 };
 
-module.exports = jwtMiddleware;
+export default jwtMiddleware;

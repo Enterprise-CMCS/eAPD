@@ -1,5 +1,5 @@
-const sinon = require('sinon');
-const tap = require('tap');
+import sinon from 'sinon';
+import tap from 'tap';
 
 const sandbox = sinon.createSandbox();
 

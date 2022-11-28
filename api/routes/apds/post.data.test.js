@@ -1,5 +1,6 @@
-const tap = require('tap');
-const sinon = require('sinon');
+import tap from 'tap';
+import sinon from 'sinon';
+import getNewApd from './post.data';
 
 // The Mars Pathfinder mission landed on Mars on July 4, 1997.  The Sojourner
 // rover wandered around the surface for 83 solar days before communications
@@ -8,8 +9,6 @@ const sinon = require('sinon');
 // this clock before we import anything, so that the stuff we import will use
 // our faked-out clock.
 const mockClock = sinon.useFakeTimers(new Date(1997, 6, 4).getTime());
-
-const getNewApd = require('./post.data');
 
 tap.test('APD data initializer', async test => {
   test.teardown(() => {

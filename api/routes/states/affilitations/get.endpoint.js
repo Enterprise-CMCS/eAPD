@@ -1,11 +1,11 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
+} from '../../../endpoint-tests/utils';
 
 // using state AK because it's the first in the affiliations
 // list so it will be the first affiliation loaded into the

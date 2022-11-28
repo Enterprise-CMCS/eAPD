@@ -1,6 +1,6 @@
-const { akAPDId } = require('./apds');
+import { akAPDId } from './apds';
 
-exports.seed = async knex => {
+const seed = async knex => {
   await knex('apd_files').insert([
     {
       apd_id: akAPDId,
@@ -9,3 +9,5 @@ exports.seed = async knex => {
     }
   ]);
 };
+
+export default seed;

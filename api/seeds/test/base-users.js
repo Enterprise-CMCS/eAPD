@@ -1,10 +1,12 @@
-const fs = require('fs');
-const logger = require('../../logger')('user seeder');
-const { oktaClient } = require('../../auth/oktaAuth');
-const { createUsersToAdd } = require('../shared/set-up-users');
-const { issueTokens } = require('../shared/issueTokens');
+import fs from 'fs';
+import loggerFactory from '../../logger';
+import { oktaClient } from '../../auth/oktaAuth';
+import createUsersToAdd from '../shared/set-up-users';
+import issueTokens from '../shared/issueTokens';
 
-exports.seed = async knex => {
+const logger = loggerFactory('user seeder');
+
+const seed = async knex => {
   const { oktaAffiliations, stateCertifications, oktaUsers } =
     await createUsersToAdd(knex, oktaClient);
   logger.info(`Affiliations ${JSON.stringify(oktaAffiliations)}`);
@@ -27,3 +29,5 @@ exports.seed = async knex => {
     logger.error(`Error creating base users: ${err}`);
   }
 };
+
+export default seed;

@@ -1,7 +1,7 @@
-require('../env');
-const fs = require('fs');
-const winston = require('winston');
-const { name: packageName } = require('../package.json');
+import '../env';
+import fs from 'fs';
+import winston from 'winston';
+import { name as packageName } from '../package.json';
 
 const { LOG_CONSOLE, LOG_FILE, LOG_LEVEL } = process.env;
 
@@ -46,4 +46,4 @@ logger.stream = {
   }
 };
 
-module.exports = { logger };
+export default logger;

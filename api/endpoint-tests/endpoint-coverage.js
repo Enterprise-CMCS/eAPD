@@ -1,10 +1,9 @@
-#!/usr/bin/env node
-
-// The point of this script is to write stuff to the console.
+#!/usr/bin/env node// The point of this script is to write stuff to the console.
 /* eslint-disable no-console */
 
-const colors = require('colors'); // eslint-disable-line import/no-extraneous-dependencies
-const fs = require('fs');
+import colors from 'colors'; // eslint-disable-line import/no-extraneous-dependencies
+
+import fs from 'fs';
 
 let endpoints = [];
 if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {

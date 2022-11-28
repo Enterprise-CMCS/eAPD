@@ -1,11 +1,9 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { can, userCanEditAPD } = require('../../middleware');
-const endpoint = require('./delete');
-
-const mockExpress = require('../../util/mockExpress');
-const mockResponse = require('../../util/mockResponse');
+import tap from 'tap';
+import sinon from 'sinon';
+import { can, userCanEditAPD } from '../../middleware';
+import endpoint from './delete';
+import mockExpress from '../../util/mockExpress';
+import mockResponse from '../../util/mockResponse';
 
 let app;
 let req;

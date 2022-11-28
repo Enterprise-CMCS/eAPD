@@ -1,12 +1,7 @@
-const sinon = require('sinon');
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
-
-const {
-  createNewFileForAPD,
-  deleteFileByID,
-  fileBelongsToAPD
-} = require('./files');
+import sinon from 'sinon';
+import tap from 'tap';
+import dbMock from './dbMock.test';
+import { createNewFileForAPD, deleteFileByID, fileBelongsToAPD } from './files';
 
 tap.test('database wrappers / files', async filesTests => {
   const db = dbMock('apd_files');

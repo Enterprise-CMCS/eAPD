@@ -1,5 +1,5 @@
-const get = require('./get');
+import get from './get';
 
-module.exports = (app, { getEndpoint = get } = {}) => {
+export default (app, { getEndpoint = get } = {}) => {
   getEndpoint(app);
 };

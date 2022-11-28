@@ -1,11 +1,13 @@
-const { format } = require('date-fns');
-const fs = require('fs');
-const logger = require('../../logger')('user seeder');
-const { oktaClient } = require('../../auth/oktaAuth');
-const { createUsersToAdd } = require('../shared/set-up-users');
-const { issueTokens } = require('../shared/issueTokens');
+import { format } from 'date-fns';
+import fs from 'fs';
+import loggerFactory from '../../logger';
+import { oktaClient } from '../../auth/oktaAuth';
+import createUsersToAdd from '../shared/set-up-users';
+import issueTokens from '../shared/issueTokens';
 
-exports.seed = async knex => {
+const logger = loggerFactory('user seeder');
+
+const seed = async knex => {
   const { oktaAffiliations, stateCertifications, oktaUsers } =
     await createUsersToAdd(knex, oktaClient);
   await knex('auth_affiliations').insert(oktaAffiliations);
@@ -36,3 +38,5 @@ exports.seed = async knex => {
     logger.error(`Errors creating tokens ${err}`);
   }
 };
+
+export default seed;

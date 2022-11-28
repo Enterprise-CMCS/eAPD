@@ -1,3 +1,3 @@
-const { setup } = require('./db/mongodb');
+import { setup } from './db/mongodb';
 
-module.exports = async () => setup();
+export default async () => setup();

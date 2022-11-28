@@ -1,8 +1,10 @@
-const logger = require('../../logger')('apds route get');
-const { can, userCanEditAPD } = require('../../middleware');
-const { deleteAPDByID: da } = require('../../db');
+import loggerFactory from '../../logger';
+import { can, userCanEditAPD } from '../../middleware';
+import { deleteAPDByID as da } from '../../db';
 
-module.exports = (app, { deleteAPDByID = da } = {}) => {
+const logger = loggerFactory('apds route get');
+
+export default (app, { deleteAPDByID = da } = {}) => {
   logger.debug('setting up DELETE /apds/:id route');
 
   app.delete(

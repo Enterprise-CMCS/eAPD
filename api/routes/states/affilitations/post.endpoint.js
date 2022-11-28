@@ -1,10 +1,10 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest
-} = require('../../../endpoint-tests/utils');
+} from '../../../endpoint-tests/utils';
 
 describe('Affiliations endpoint | POST', () => {
   const api = login('no-permissions');

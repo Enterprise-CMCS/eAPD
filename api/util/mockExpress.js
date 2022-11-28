@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const sinon = require('sinon');
+import sinon from 'sinon';
 
 const mockExpress = () => ({
   get: sinon.stub(),
@@ -9,4 +9,4 @@ const mockExpress = () => ({
   delete: sinon.stub()
 });
 
-module.exports = mockExpress;
+export default mockExpress;

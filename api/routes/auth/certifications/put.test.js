@@ -1,13 +1,10 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { can } = require('../../../middleware');
-const { loggedIn } = require('../../../middleware/auth');
-
-const putEndpoint = require('./put');
-
-const mockExpress = require('../../../util/mockExpress');
-const mockResponse = require('../../../util/mockResponse');
+import tap from 'tap';
+import sinon from 'sinon';
+import { can } from '../../../middleware';
+import { loggedIn } from '../../../middleware/auth';
+import putEndpoint from './put';
+import mockExpress from '../../../util/mockExpress';
+import mockResponse from '../../../util/mockResponse';
 
 let app;
 let res;

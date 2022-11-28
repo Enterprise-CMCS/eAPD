@@ -1,11 +1,11 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
+} from '../../endpoint-tests/utils';
 
 describe('APD endpoint | POST /apds', () => {
   const db = getDB();

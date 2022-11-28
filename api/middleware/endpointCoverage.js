@@ -1,5 +1,7 @@
-const fs = require('fs');
-const logger = require('../logger')('endpoint coverage middleware');
+import fs from 'fs';
+import loggerFactory from '../logger';
+
+const logger = loggerFactory('endpoint coverage middleware');
 
 const { ENDPOINT_COVERAGE_CAPTURE } = process.env;
 
@@ -86,6 +88,6 @@ const registerCoverageMiddleware = server => {
   });
 };
 
-module.exports = {
+export default {
   registerCoverageMiddleware
 };

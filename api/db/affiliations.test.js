@@ -1,9 +1,8 @@
-const sinon = require('sinon');
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
+import sinon from 'sinon';
+import tap from 'tap';
+import dbMock from './dbMock.test';
 
-const {
-  // getAllAffiliations
+import {
   selectedColumns,
   getAffiliationsByStateId,
   getAffiliationById,
@@ -11,7 +10,7 @@ const {
   getAllPopulatedAffiliations,
   reduceAffiliations,
   getAffiliationsByUserId
-} = require('./affiliations');
+} from './affiliations';
 
 const defaultPopulatedAffiliation = {
   userId: 'userId',

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const shareByCostType = new mongoose.Schema(
   {
@@ -197,4 +197,4 @@ const budgetSchema = new mongoose.Schema({
 
 const Budget = mongoose.model('Budget', budgetSchema);
 
-module.exports = Budget;
+export default Budget;

@@ -1,8 +1,7 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { loadApd, userCanAccessAPD, userCanEditAPD } = require('./apd');
-const mockResponse = require('../util/mockResponse');
+import tap from 'tap';
+import sinon from 'sinon';
+import { loadApd, userCanAccessAPD, userCanEditAPD } from './apd';
+import mockResponse from '../util/mockResponse';
 
 let err;
 let res;

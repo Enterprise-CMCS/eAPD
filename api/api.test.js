@@ -1,9 +1,10 @@
 /* eslint-disable no-shadow, global-require */
-const request = require('supertest');
-const tap = require('tap');
-const sinon = require('sinon');
-const mongo = require('./db/mongodb');
-const knex = require('./db/knex');
+import request from 'supertest';
+
+import tap from 'tap';
+import sinon from 'sinon';
+import mongo from './db/mongodb';
+import knex from './db/knex';
 
 sinon.stub(mongo, 'setup').returns({});
 sinon.stub(mongo, 'getConnectionStatus').returns('connected');

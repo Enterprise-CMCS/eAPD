@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const tap = require('tap');
-
-const { setup, teardown } = require('./mongodb');
+import mongoose from 'mongoose';
+import tap from 'tap';
+import { setup, teardown } from './mongodb';
 
 const STATE = {
   disconnected: 0,

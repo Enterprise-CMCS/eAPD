@@ -1,16 +1,17 @@
-const ObjectId = require('mongoose').Types.ObjectId;
+import mongoose from 'mongoose';
+import mnAPD from './01-mnAPD';
+import akAPD from './02-akAPD';
+import finalAPD from './03-finalAPD';
 
-const mnAPD = require('./01-mnAPD.json');
-const akAPD = require('./02-akAPD.json');
-const finalAPD = require('./03-finalAPD.json');
+const ObjectId = mongoose.Types.ObjectId;
 
-const mnAPDId = '21ad69c0682b10ba1c54aa2d';
-const akAPDId = 'eeac3c9865059f26eccb0600';
-const akAPD2Id = '600eeac3c9865059f26eccb0';
-const finalAPDId = 'de66754e9513b78d72875bcf';
-const badAPDId = '0123456789abcdef01234567';
+export const mnAPDId = '21ad69c0682b10ba1c54aa2d';
+export const akAPDId = 'eeac3c9865059f26eccb0600';
+export const akAPD2Id = '600eeac3c9865059f26eccb0';
+export const finalAPDId = 'de66754e9513b78d72875bcf';
+export const badAPDId = '0123456789abcdef01234567';
 
-const data = [
+export const data = [
   {
     _id: ObjectId(mnAPDId),
     // William Howard Taft becomes the only person to serve as both
@@ -58,12 +59,3 @@ const data = [
     ...finalAPD
   }
 ];
-
-module.exports = {
-  data,
-  mnAPDId,
-  akAPDId,
-  akAPD2Id,
-  finalAPDId,
-  badAPDId
-};

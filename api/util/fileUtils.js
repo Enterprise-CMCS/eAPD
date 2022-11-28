@@ -1,5 +1,5 @@
-const ft = require('file-type');
-const knex = require('../db/knex');
+import ft from 'file-type';
+import knex from '../db/knex';
 
 const generateFileName = async (buffer, fileId, { db = knex } = {}) => {
   const { ext = null } = await ft.fromBuffer(buffer);
@@ -16,6 +16,4 @@ const generateFileName = async (buffer, fileId, { db = knex } = {}) => {
   return `${formattedName}-${upperCaseState}-${certification.ffy}.${ext}`;
 };
 
-module.exports = {
-  generateFileName
-};
+export default generateFileName;

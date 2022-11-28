@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
-const knex = require('./knex');
+import knex from './knex';
 
-const { updateAuthAffiliation } = require('./affiliations');
+import { updateAuthAffiliation } from './affiliations';
 
-const addStateAdminCertification = (data, { db = knex } = {}) => {
+export const addStateAdminCertification = (data, { db = knex } = {}) => {
   return db('state_admin_certifications')
     .insert({ ...data }, ['id'])
     .then(ids => {
@@ -16,7 +16,10 @@ const addStateAdminCertification = (data, { db = knex } = {}) => {
     });
 };
 
-const archiveStateAdminCertification = async (data, { db = knex } = {}) => {
+export const archiveStateAdminCertification = async (
+  data,
+  { db = knex } = {}
+) => {
   const record = await db('state_admin_certifications')
     .select('status', 'affiliationId')
     .where('id', data.id)
@@ -42,7 +45,7 @@ const archiveStateAdminCertification = async (data, { db = knex } = {}) => {
 };
 
 // Update the state admin certification and the associated auth affiliation
-const matchStateAdminCertification = async (
+export const matchStateAdminCertification = async (
   data,
   { db = knex, updateAffiliation = updateAuthAffiliation } = {}
 ) => {
@@ -73,7 +76,7 @@ const matchStateAdminCertification = async (
   }
 };
 
-const getStateAdminCertifications = ({ db = knex } = {}) => {
+export const getStateAdminCertifications = ({ db = knex } = {}) => {
   const subQuery = db('auth_affiliations')
     .select([
       'auth_affiliations.user_id',
@@ -122,11 +125,4 @@ const getStateAdminCertifications = ({ db = knex } = {}) => {
     })
 
     .groupBy('state_admin_certifications.id');
-};
-
-module.exports = {
-  addStateAdminCertification,
-  getStateAdminCertifications,
-  matchStateAdminCertification,
-  archiveStateAdminCertification
 };

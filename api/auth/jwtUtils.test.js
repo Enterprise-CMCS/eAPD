@@ -1,7 +1,8 @@
 /* eslint-disable global-require, no-shadow */
-const tap = require('tap');
-const sinon = require('sinon');
-const jwt = require('jsonwebtoken');
+import tap from 'tap';
+
+import sinon from 'sinon';
+import jwt from 'jsonwebtoken';
 
 const sandbox = sinon.createSandbox();
 const mockVerifier = sandbox.stub();

@@ -1,4 +1,4 @@
-const akAPD = {
+export default {
   name: 'HITECH IAPD',
   years: ['2022', '2023'],
   apdOverview: {
@@ -768,5 +768,3 @@ const akAPD = {
     ]
   }
 };
-
-export default akAPD;

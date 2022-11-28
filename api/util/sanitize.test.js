@@ -1,5 +1,5 @@
-const tap = require('tap');
-const sanitize = require('./sanitize');
+import tap from 'tap';
+import sanitize from './sanitize';
 
 tap.test('sanitize input', async sanitizeTests => {
   sanitizeTests.test('it should sanitize dangerous input', async test => {

@@ -1,12 +1,14 @@
-const logger = require('../../logger')('apds route index');
-const del = require('./delete');
-const get = require('./get');
-const patch = require('./patch');
-const post = require('./post');
-const files = require('./files');
-const events = require('./events');
+import loggerFactory from '../../logger';
+import del from './delete';
+import get from './get';
+import patch from './patch';
+import post from './post';
+import files from './files/index';
+import events from './events/index';
 
-module.exports = (
+const logger = loggerFactory('apds route index');
+
+export default (
   app,
   {
     filesEndpoints = files,

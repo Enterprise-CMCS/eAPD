@@ -1,12 +1,11 @@
 /* eslint-disable no-shadow */
-const tap = require('tap');
-const sinon = require('sinon');
+import tap from 'tap';
 
-const can = require('../../../middleware').can;
-const patchEndpoint = require('./patch');
-
-const mockExpress = require('../../../util/mockExpress');
-const mockResponse = require('../../../util/mockResponse');
+import sinon from 'sinon';
+import { can } from '../../../middleware';
+import patchEndpoint from './patch';
+import mockExpress from '../../../util/mockExpress';
+import mockResponse from '../../../util/mockResponse';
 
 let app;
 let res;

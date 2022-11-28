@@ -7,11 +7,11 @@
 // knex> await db.getPermissions(2020)
 // knex> .exit
 
-require('dotenv').config();
-const repl = require('repl');
+import repl from 'repl';
+import knex from './db/knex';
+import db from './db';
 
-const knex = require('./db/knex');
-const db = require('./db');
+require('dotenv').config();
 
 const r = repl.start('knex> ');
 const run = async () => {

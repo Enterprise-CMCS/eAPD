@@ -1,8 +1,7 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { can, userCanEditAPD } = require('../../middleware');
-const patchEndpoint = require('./patch');
+import tap from 'tap';
+import sinon from 'sinon';
+import { can, userCanEditAPD } from '../../middleware';
+import patchEndpoint from './patch';
 
 tap.test('apds PATCH endpoint', async tests => {
   const sandbox = sinon.createSandbox();

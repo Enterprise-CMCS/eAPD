@@ -1,7 +1,2 @@
-const apd = require('./apd');
-const auth = require('./auth');
-
-module.exports = {
-  ...apd,
-  ...auth
-};
+export * from './apd';
+export * from './auth';

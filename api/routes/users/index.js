@@ -1,7 +1,9 @@
-const logger = require('../../logger')('users route index');
-const get = require('./get');
+import loggerFactory from '../../logger';
+import get from './get';
 
-module.exports = (app, { getEndpoint = get } = {}) => {
+const logger = loggerFactory('users route index');
+
+export default (app, { getEndpoint = get } = {}) => {
   logger.debug('setting up GET endpoint');
   getEndpoint(app);
 };

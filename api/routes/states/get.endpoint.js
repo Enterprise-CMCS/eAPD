@@ -1,11 +1,11 @@
-const {
+import {
   api,
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest
-} = require('../../endpoint-tests/utils');
+} from '../../endpoint-tests/utils';
 
 describe('US States endpoint', () => {
   const db = getDB();

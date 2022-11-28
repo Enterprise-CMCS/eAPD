@@ -1,12 +1,12 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
-const { getAllActiveRoles } = require('../../../db/roles');
+} from '../../../endpoint-tests/utils';
+import { getAllActiveRoles } from '../../../db/roles';
 
 describe('Affiliations endpoint | PATCH', () => {
   const db = getDB();

@@ -140,4 +140,4 @@ const getNewApd = () => {
   };
 };
 
-module.exports = getNewApd;
+export default getNewApd;

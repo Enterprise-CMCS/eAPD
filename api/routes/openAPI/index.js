@@ -1,24 +1,23 @@
-const pkg = require('../../package.json');
+import pkg from '../../package.json';
+import affiliations from '../affiliations/openAPI';
+import apds from '../apds/openAPI';
+import apdsEvents from '../apds/events/openAPI';
+import apdsFiles from '../apds/files/openAPI';
+import authActivities from '../auth/activities/openAPI';
+import authRoles from '../auth/roles/openAPI';
+import authStates from '../auth/states/openAPI';
+import authCertifications from '../auth/certifications/openAPI';
+import authCertificationsFiles from '../auth/certifications/files/openAPI';
+import docs from '../docs/openAPI';
+import me from '../me/openAPI';
+import roles from '../roles/openAPI';
+import states from '../states/openAPI';
+import statesAffiliations from '../states/affilitations/openAPI';
 
-const affiliations = require('../affiliations/openAPI');
-const apds = require('../apds/openAPI');
-const apdsEvents = require('../apds/events/openAPI');
-const apdsFiles = require('../apds/files/openAPI');
-const authActivities = require('../auth/activities/openAPI');
-const authRoles = require('../auth/roles/openAPI');
-const authStates = require('../auth/states/openAPI');
-const authCertifications = require('../auth/certifications/openAPI');
-const authCertificationsFiles = require('../auth/certifications/files/openAPI');
-const docs = require('../docs/openAPI');
-const me = require('../me/openAPI');
-const roles = require('../roles/openAPI');
-const states = require('../states/openAPI');
-const statesAffiliations = require('../states/affilitations/openAPI');
-
+import { arrayOf } from './helpers';
 // ############## OPENAPI IMPORT INSERTION POINT ######################
-const { arrayOf } = require('./helpers').schema;
 
-module.exports = {
+export default {
   openapi: '3.0.0',
   info: {
     title: 'CMS HITECH APD API',

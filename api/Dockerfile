@@ -5,7 +5,6 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY package.json .
-COPY babel.config.js .
 COPY yarn.lock .
 COPY api ./api
 COPY common ./common

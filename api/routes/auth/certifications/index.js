@@ -1,11 +1,13 @@
-const logger = require('../../../logger')('auth certifications route index');
-const files = require('./files');
-const post = require('./post');
-const put = require('./put');
-const get = require('./get');
-const del = require('./delete');
+import loggerFactory from '../../../logger';
+import files from './files';
+import post from './post';
+import put from './put';
+import get from './get';
+import del from './delete';
 
-module.exports = (
+const logger = loggerFactory('auth certifications route index');
+
+export default (
   app,
   {
     filesEndpoint = files,

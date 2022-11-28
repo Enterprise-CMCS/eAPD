@@ -1,9 +1,8 @@
-const tap = require('tap');
-const toMongodb = require('jsonpatch-to-mongodb');
-
-const { setup, teardown } = require('../db/mongodb');
-const { APD } = require('./index');
-const { apd } = require('../seeds/development/apds');
+import tap from 'tap';
+import toMongodb from 'jsonpatch-to-mongodb';
+import { setup, teardown } from '../db/mongodb';
+import { APD } from './index';
+import { akAPD } from '../seeds/development/apds';
 
 let apdId;
 
@@ -16,7 +15,7 @@ tap.test('APD model test', async t => {
     const { _id } = await APD.create({
       status: 'draft',
       stateId: 'md',
-      ...apd
+      ...akAPD
     });
     apdId = _id.toString();
   });

@@ -1,16 +1,13 @@
-const ft = require('file-type');
+import ft from 'file-type';
+import { loggedIn } from '../../../../middleware/auth';
+import { can } from '../../../../middleware';
+import loggerFactory from '../../../../logger';
+import { getFile as get } from '../../../../files/index.cjs';
+import generateName from '../../../../util/fileUtils';
 
-const { loggedIn } = require('../../../../middleware/auth');
-const { can } = require('../../../../middleware');
-const logger = require('../../../../logger')('auth certifications get');
+const logger = loggerFactory('auth certifications get');
 
-const { getFile: get } = require('../../../../files');
-
-const {
-  generateFileName: generateName
-} = require('../../../../util/fileUtils');
-
-module.exports = (
+export default (
   app,
   { getFile = get, generateFileName = generateName } = {}
 ) => {

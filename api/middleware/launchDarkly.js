@@ -1,4 +1,4 @@
-const LaunchDarkly = require('launchdarkly-node-server-sdk');
+import LaunchDarkly from 'launchdarkly-node-server-sdk';
 
 const { LD_API_KEY } = process.env;
 const options = {
@@ -12,7 +12,7 @@ const client =
     ? LaunchDarkly.init(LD_API_KEY, options)
     : null;
 
-const waitForInitialization = async () => {
+export const waitForInitialization = async () => {
   // Using "await" instead, within an async function
   try {
     if (client) {
@@ -22,13 +22,6 @@ const waitForInitialization = async () => {
   } catch (err) {
     // Initialization failed
   }
-};
-
-const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
-  if (client) {
-    return client.variation(flagName, user, defaultValue);
-  }
-  return defaultValue;
 };
 
 /**
@@ -41,8 +34,9 @@ const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
  *    false
  *  );
  */
-
-module.exports = {
-  waitForInitialization,
-  getLaunchDarklyFlag
+export const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
+  if (client) {
+    return client.variation(flagName, user, defaultValue);
+  }
+  return defaultValue;
 };

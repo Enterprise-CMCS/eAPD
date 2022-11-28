@@ -1,7 +1,7 @@
-const { getAllActiveRoles } = require('../../db/roles');
-const { states } = require('../../util/states');
+import { getAllActiveRoles } from '../../db/roles';
+import states from '../../util/states';
 
-exports.seed = async knex => {
+const seed = async knex => {
   const [{ id: noPermissionsId }] = await getAllActiveRoles(
     ['eAPD No Permissions'],
     { db: knex }
@@ -118,3 +118,5 @@ exports.seed = async knex => {
     }
   ]);
 };
+
+export default seed;

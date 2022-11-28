@@ -1,4 +1,4 @@
-const { combinedSchemas } = require('@cms-eapd/common');
+import { combinedSchemas } from '@cms-eapd/common';
 
 /**
  * Builds an error list for use in the frontend admin check panel
@@ -226,6 +226,4 @@ const adminCheckApd = apd => {
   return errorList;
 };
 
-module.exports = {
-  adminCheckApd
-};
+export default adminCheckApd;

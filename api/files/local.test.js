@@ -1,6 +1,6 @@
-const systemFs = require('fs');
-const sinon = require('sinon');
-const tap = require('tap');
+import systemFs from 'fs';
+import sinon from 'sinon';
+import tap from 'tap';
 
 const sandbox = sinon.createSandbox();
 

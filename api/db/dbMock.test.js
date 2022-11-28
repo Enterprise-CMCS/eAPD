@@ -1,4 +1,4 @@
-const sinon = require('sinon');
+import sinon from 'sinon';
 
 const sandbox = sinon.createSandbox();
 const db = sinon.stub();
@@ -45,4 +45,4 @@ const creator = table => {
 
 creator.reset = reset;
 
-module.exports = creator;
+export default creator;

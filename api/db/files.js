@@ -1,7 +1,7 @@
-const nodeCrypto = require('crypto');
-const knex = require('./knex');
+import nodeCrypto from 'crypto';
+import knex from './knex';
 
-const createNewFileForAPD = async (
+export const createNewFileForAPD = async (
   fileBuffer,
   apdID,
   metadata = null,
@@ -25,12 +25,10 @@ const createNewFileForAPD = async (
   return id;
 };
 
-const deleteFileByID = async (id, { db = knex } = {}) =>
+export const deleteFileByID = async (id, { db = knex } = {}) =>
   db('apd_files').where('id', id).delete();
 
-const fileBelongsToAPD = async (id, apdID, { db = knex } = {}) => {
+export const fileBelongsToAPD = async (id, apdID, { db = knex } = {}) => {
   const c = await db('apd_files').where({ id, apd_id: apdID }).count();
   return +c[0].count === 1;
 };
-
-module.exports = { createNewFileForAPD, deleteFileByID, fileBelongsToAPD };

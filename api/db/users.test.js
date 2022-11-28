@@ -1,16 +1,16 @@
-const sinon = require('sinon');
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
-const oktaAuthMock = require('../auth/oktaAuthMock.test');
-const knex = require('./knex');
+import sinon from 'sinon';
+import tap from 'tap';
+import dbMock from './dbMock.test';
+import oktaAuthMock from '../auth/oktaAuthMock.test';
+import knex from './knex';
 
-const {
+import {
   getAllUsers,
   getUserByID,
   populateUserRole,
   sanitizeUser,
   userLoggedIntoState
-} = require('./users');
+} from './users';
 
 tap.test('database wrappers / users', async usersTests => {
   const sandbox = sinon.createSandbox();

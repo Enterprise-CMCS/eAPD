@@ -1,5 +1,7 @@
-const mongoose = require('mongoose');
-const logger = require('../logger')('mongoose');
+import mongoose from 'mongoose';
+import loggerFactory from '../logger';
+
+const logger = loggerFactory('mongoose');
 
 const getConnectionString = () =>
   process.env.MONGO_URL ||
@@ -7,7 +9,7 @@ const getConnectionString = () =>
 
 const getDBName = () => process.env.MONGO_DATABASE || 'eapd';
 
-const connect = async () => {
+export const connect = async () => {
   logger.verbose('Setting up MongoDB connection');
   const connectionString = getConnectionString();
   const dbName = getDBName();
@@ -28,13 +30,13 @@ const connect = async () => {
   }
 };
 
-const setup = async () => {
+export const setup = async () => {
   await connect();
   // eslint-disable-next-line global-require
   require('../models/index'); // import all of the mongo models
 };
 
-const teardown = async () => {
+export const teardown = async () => {
   try {
     await mongoose.connection.close();
     logger.verbose('MongoDB disconnected');
@@ -43,7 +45,7 @@ const teardown = async () => {
   }
 };
 
-const getConnectionStatus = () => {
+export const getConnectionStatus = () => {
   const status = mongoose.connection.readyState;
   if (status === 0) {
     return 'disconnected';
@@ -59,5 +61,3 @@ const getConnectionStatus = () => {
   }
   return 'unknown';
 };
-
-module.exports = { connect, setup, teardown, getConnectionStatus };

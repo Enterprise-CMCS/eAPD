@@ -1,10 +1,12 @@
-const logger = require('../../logger')('document routes');
-const { getFile: get } = require('../../files');
+import loggerFactory from '../../logger';
+import { getFile as get } from '../../files/index.cjs';
+
+const logger = loggerFactory('document routes');
 
 const ACCOUNT_REGISTRATION_DOC = 'EUAAccountRegistration.pdf';
 const SYSTEM_ACCESS_DOC = 'eAPDSystemAccess.pdf';
 
-module.exports = (app, { getFile = get } = {}) => {
+export default (app, { getFile = get } = {}) => {
   logger.silly('setting up GET /docs/account-registration route');
 
   app.get('/docs/account-registration', async (req, res, next) => {

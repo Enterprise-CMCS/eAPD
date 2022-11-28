@@ -1,4 +1,4 @@
-const tap = require('tap');
+import tap from 'tap';
 
 tap.beforeEach(() => {
   delete require.cache[require.resolve('./env')];

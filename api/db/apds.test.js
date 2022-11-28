@@ -1,7 +1,7 @@
-const sinon = require('sinon');
-const tap = require('tap');
+import sinon from 'sinon';
+import tap from 'tap';
 
-const {
+import {
   createAPD,
   deleteAPDByID,
   getAllAPDsByState,
@@ -9,12 +9,11 @@ const {
   getAPDByIDAndState,
   updateAPDDocument,
   adminCheckAPDDocument
-} = require('./apds');
-const { setup, teardown } = require('./mongodb');
+} from './apds';
 
-const { apd, apdForAdminCheck } = require('../seeds/development/apds');
-
-const { APD, Budget } = require('../models/index');
+import { setup, teardown } from './mongodb';
+import { akAPD, akAPDNoActivities } from '../seeds/development/apds';
+import { APD, Budget } from '../models/index';
 
 const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
 let clock;
@@ -46,7 +45,7 @@ tap.test('database wrappers / apds', async apdsTests => {
     id = await createAPD({
       stateId: 'co',
       status: 'draft',
-      ...apd
+      ...akAPD
     });
   });
 
@@ -58,7 +57,7 @@ tap.test('database wrappers / apds', async apdsTests => {
     const newId = await createAPD({
       stateId: 'md',
       status: 'draft',
-      ...apd
+      ...akAPD
     });
     test.ok(newId, 'APD was created');
     await deleteAPD(newId);
@@ -74,12 +73,12 @@ tap.test('database wrappers / apds', async apdsTests => {
     const approvedId = await createAPD({
       stateId: 'co',
       status: 'approved',
-      ...apd
+      ...akAPD
     });
     const mnId = await createAPD({
       stateId: 'mn',
       status: 'approved',
-      ...apd
+      ...akAPD
     });
 
     const apds = await getAllAPDsByState('co');
@@ -288,7 +287,7 @@ tap.test('database wrappers / apds', async apdsTests => {
         id = await createAPD({
           stateId: 'co',
           status: 'draft',
-          ...apdForAdminCheck
+          ...akAPDNoActivities
         });
 
         const errors = await adminCheckAPDDocument(id);

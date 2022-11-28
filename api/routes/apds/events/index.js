@@ -1,7 +1,9 @@
-const logger = require('../../../logger')('apds/events route index');
-const post = require('./post');
+import loggerFactory from '../../../logger';
+import post from './post';
 
-module.exports = (app, { postEndpoint = post } = {}) => {
+const logger = loggerFactory('apds/events route index');
+
+export default (app, { postEndpoint = post } = {}) => {
   logger.debug('setting up POST endpoint');
   postEndpoint(app);
 };

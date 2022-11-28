@@ -1,7 +1,8 @@
-const logger = require('../logger')('migrate-mongoose/migrate-budget-schema');
-const { calculateBudget, generateKey } = require('@cms-eapd/common');
-const { setup, teardown } = require('../db/mongodb');
-const { APD, Budget } = require('../models');
+import loggerFactory from '../logger';
+const logger = loggerFactory('migrate-mongoose/migrate-budget-schema');
+import { calculateBudget, generateKey } from '@cms-eapd/common';
+import { setup, teardown } from '../db/mongodb';
+import { APD, Budget } from '../models';
 
 const forAllYears = (currentObj, defaultObj, yearsToCover) =>
   yearsToCover.reduce(
@@ -15,7 +16,7 @@ const forAllYears = (currentObj, defaultObj, yearsToCover) =>
 /**
  * Make any changes you need to make to the database here
  */
-async function up() {
+export const up = async () => {
   // Grab all APDs
   await setup();
   const apds = await APD.find({ status: 'draft' });
@@ -48,12 +49,12 @@ async function up() {
     logger.error(err);
   });
   await teardown();
-}
+};
 
 /**
  * Make any changes that UNDO the up function side effects here (if possible)
  */
-async function down() {
+export const down = async () => {
   await setup();
   await Budget.deleteMany();
   const apds = await APD.find({});
@@ -67,6 +68,4 @@ async function down() {
     logger.error(err);
   });
   await teardown();
-}
-
-module.exports = { up, down };
+};

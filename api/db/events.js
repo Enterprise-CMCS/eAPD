@@ -1,6 +1,8 @@
-const { v4: uuidv4 } = require('uuid');
-const logger = require('../logger')('event management');
-const knex = require('./knex');
+import { v4 as uuidv4 } from 'uuid';
+import loggerFactory from '../logger';
+import knex from './knex';
+
+const logger = loggerFactory('event management');
 
 const createEventForAPD = async (
   { userID, apdID, eventType, metadata = null },
@@ -28,6 +30,4 @@ const createEventForAPD = async (
   return eventID;
 };
 
-module.exports = {
-  createEventForAPD
-};
+export default createEventForAPD;

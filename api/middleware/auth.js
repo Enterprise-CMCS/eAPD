@@ -1,12 +1,14 @@
-const logger = require('../logger')('auth middleware');
-const { cache } = require('./cache');
+import loggerFactory from '../logger';
+import cache from './cache';
+
+const logger = loggerFactory('auth middleware');
 
 /**
  * @description Middleware to check if the current request is authenticated.
  * Returns '401 Unauthorized' status and breaks the process chain if request
  * is not authenticated.
  */
-const loggedIn = (req, res, next) => {
+export const loggedIn = (req, res, next) => {
   logger.debug({ id: req.id, message: 'got a loggedIn middleware request' });
   if (req.user) {
     logger.verbose({ id: req.id, message: `user is logged in` });
@@ -17,8 +19,6 @@ const loggedIn = (req, res, next) => {
   }
 };
 
-module.exports.loggedIn = loggedIn;
-
 /**
  * @description Middleware to check if the authenticated user has a particular
  * activity permission. If an array is provided, a user only requires one matching
@@ -28,7 +28,7 @@ module.exports.loggedIn = loggedIn;
  * @param {string  | string[]} activity The activity or list of activities to check for
  * @returns {function} The middleware function
  */
-const can = activity =>
+export const can = activity =>
   cache(['can', activity], () => {
     return (req, res, next) => {
       logger.debug({
@@ -36,7 +36,7 @@ const can = activity =>
         message: `got a can middleware request for [${activity}]`
       });
       // First check if they're logged in
-      module.exports.loggedIn(req, res, () => {
+      loggedIn(req, res, () => {
         if (Array.isArray(activity)) {
           const hasActivity = activity.every(action => {
             return req.user.activities.includes(action);
@@ -85,7 +85,7 @@ const can = activity =>
  * If the url is '/states/:stateId/affiliations/:id' you would pass in 'stateId'
  * @returns {function} The middleware function
  */
-const validForState = paramName =>
+export const validForState = paramName =>
   cache(['validForState', paramName], () => {
     return (req, res, next) => {
       // This has to be how the param is named for this middleware
@@ -95,7 +95,7 @@ const validForState = paramName =>
         message: `got a validForState middleware request for [${stateId}]`
       });
       // First check if they're logged in
-      module.exports.loggedIn(req, res, () => {
+      loggedIn(req, res, () => {
         // Then check if they have the state or are in the "federal" state
         if ([stateId, 'fd'].includes(req.user.state.id)) {
           logger.verbose({
@@ -120,6 +120,3 @@ const validForState = paramName =>
       });
     };
   });
-
-module.exports.can = can;
-module.exports.validForState = validForState;

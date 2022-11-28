@@ -1,10 +1,10 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest
-} = require('../../endpoint-tests/utils');
+} from '../../endpoint-tests/utils';
 
 const url = '/me';
 

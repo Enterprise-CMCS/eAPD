@@ -1,7 +1,8 @@
-const logger = require('../logger')('apd middleware');
-const { cache } = require('./cache');
+import loggerFactory from '../logger';
+import cache from './cache';
+import { getAPDByID as ga } from '../db';
 
-const { getAPDByID: ga } = require('../db');
+const logger = loggerFactory('apd middleware');
 
 const toCacheLoadApd =
   ({ getAPDByID = ga } = {}) =>
@@ -87,27 +88,25 @@ const toCacheUserCanEditAPD =
 /**
  * @description Middleware to load an APD into the request "meta" property
  */
-const cachedLoadApd = ({ getAPDByID = ga } = {}) =>
+export const loadApd = ({ getAPDByID = ga } = {}) =>
   cache(['loadApd'], () => toCacheLoadApd({ getAPDByID }));
 
 /**
  * @description Middleware to determine if the current user has access
  *    to the APD they would load.  Also calls loadApd middleware
  */
-const cachedUserCanAccessAPD = ({ loadApd = toCacheLoadApd } = {}) =>
-  cache(['userCanAccessAPD'], () => toCacheUserCanAccessAPD({ loadApd }));
+export const userCanAccessAPD = ({ cachedLoadApd = toCacheLoadApd } = {}) =>
+  cache(['userCanAccessAPD'], () =>
+    toCacheUserCanAccessAPD({ loadApd: cachedLoadApd })
+  );
 
 /**
  * @description Middleware to determine if the current user can edit
  *    the APD they would load.  Also calls userCanAccessAPD middleware
  */
-const cachedUserCanEditAPD = ({
-  userCanAccessAPD = toCacheUserCanAccessAPD
+export const userCanEditAPD = ({
+  cachedUserCanAccessAPD = toCacheUserCanAccessAPD
 } = {}) =>
-  cache(['userCanEditAPD'], () => toCacheUserCanEditAPD({ userCanAccessAPD }));
-
-module.exports = {
-  loadApd: cachedLoadApd,
-  userCanAccessAPD: cachedUserCanAccessAPD,
-  userCanEditAPD: cachedUserCanEditAPD
-};
+  cache(['userCanEditAPD'], () =>
+    toCacheUserCanEditAPD({ userCanAccessAPD: cachedUserCanAccessAPD })
+  );

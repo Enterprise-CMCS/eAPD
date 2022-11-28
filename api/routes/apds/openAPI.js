@@ -1,7 +1,4 @@
-const {
-  requiresAuth,
-  schema: { arrayOf, jsonResponse }
-} = require('../openAPI/helpers');
+import { requiresAuth, jsonResponse, arrayOf } from '../openAPI/helpers';
 
 const openAPI = {
   '/apds': {
@@ -207,6 +204,6 @@ const openAPI = {
   }
 };
 
-module.exports = {
+export default {
   ...requiresAuth(openAPI)
 };

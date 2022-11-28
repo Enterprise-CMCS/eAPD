@@ -1,4 +1,4 @@
-const { api } = require('../../endpoint-tests/utils');
+import { api } from '../../endpoint-tests/utils';
 
 // Get rid of any undefineds in the OpenAPI object
 // by stringifying and then parsing again

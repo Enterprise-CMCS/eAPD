@@ -133,7 +133,6 @@ sudo chown -R ec2-user:eapd /app
 echo "module.exports = {
   apps : [{
     name: 'eAPD API',
-    script: 'dist/main.js',
     instances: 1,
     autorestart: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',

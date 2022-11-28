@@ -1,25 +1,27 @@
 /* eslint-disable camelcase */
-const logger = require('../logger')('db/oktaUsers');
-const knex = require('./knex');
-const { oktaClient } = require('../auth/oktaAuth');
+import loggerFactory from '../logger';
+import knex from './knex';
+import { oktaClient } from '../auth/oktaAuth';
 
-const getOktaUser = (user_id, { db = knex } = {}) => {
+const logger = loggerFactory('db/oktaUsers');
+
+export const getOktaUser = (user_id, { db = knex } = {}) => {
   return db('okta_users').where({ user_id }).first();
 };
 
-const getUserFromOkta = async username =>
+export const getUserFromOkta = async username =>
   (await oktaClient.getUser(username)) || {};
 
-const createOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
+export const createOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
   db('okta_users').insert({
     user_id,
     ...oktaUser
   });
 
-const updateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
+export const updateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
   db('okta_users').where({ user_id }).update(oktaUser);
 
-const createOrUpdateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
+export const createOrUpdateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
   getOktaUser(user_id, { db })
     .then(user => {
       if (!user) {
@@ -34,7 +36,7 @@ const createOrUpdateOktaUser = (user_id, oktaUser, { db = knex } = {}) =>
       })
     );
 
-const sanitizeProfile = profile => {
+export const sanitizeProfile = profile => {
   const desiredFields = ['displayName', 'email', 'login'];
   const cleanProfile = {};
   desiredFields.forEach(field => {
@@ -43,7 +45,7 @@ const sanitizeProfile = profile => {
   return cleanProfile;
 };
 
-const createOrUpdateOktaUserFromOkta = async (
+export const createOrUpdateOktaUserFromOkta = async (
   user_id,
   { okta = oktaClient, db = knex } = {}
 ) => {
@@ -64,14 +66,4 @@ const createOrUpdateOktaUserFromOkta = async (
         e
       })
     );
-};
-
-module.exports = {
-  createOktaUser,
-  createOrUpdateOktaUser,
-  getOktaUser,
-  getUserFromOkta,
-  updateOktaUser,
-  createOrUpdateOktaUserFromOkta,
-  sanitizeProfile
 };

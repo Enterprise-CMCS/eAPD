@@ -1,12 +1,11 @@
-const fs = require('fs');
-const FormData = require('form-data');
-
-const {
+import fs from 'fs';
+import FormData from 'form-data';
+import {
   buildForm,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../../endpoint-tests/utils');
+} from '../../../../endpoint-tests/utils';
 
 describe('auth/certifications/files endpoints', () => {
   describe('Upload a state certification letter/file | POST /auth/certifications/files', () => {

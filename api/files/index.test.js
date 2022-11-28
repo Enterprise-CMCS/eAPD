@@ -1,12 +1,11 @@
-const tap = require('tap');
+import tap from 'tap';
+import * as local from './local';
+import * as s3 from './s3';
 
 const getModule = () => {
   delete require.cache[require.resolve('./index')];
-  return require('./index'); // eslint-disable-line global-require
+  return require('./index.cjs'); // eslint-disable-line global-require
 };
-
-const local = require('./local');
-const s3 = require('./s3');
 
 tap.test('file storage index', async tests => {
   tests.test(

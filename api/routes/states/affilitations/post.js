@@ -1,9 +1,11 @@
-const { addYears, format } = require('date-fns');
-const { raw: knex } = require('../../../db');
-const { loggedIn } = require('../../../middleware/auth');
-const logger = require('../../../logger')('affiliations route post');
+import { addYears, format } from 'date-fns';
+import { raw as knex } from '../../../db';
+import { loggedIn } from '../../../middleware/auth';
+import loggerFactory from '../../../logger';
 
-module.exports = app => {
+const logger = loggerFactory('affiliations route post');
+
+export default app => {
   app.post(
     '/states/:stateId/affiliations',
     loggedIn,

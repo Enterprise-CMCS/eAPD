@@ -1,7 +1,7 @@
-const tap = require('tap');
-const sandbox = require('sinon').createSandbox();
+import tap from 'tap';
+import { loggedIn, can, validForState } from './auth';
 
-const middleware = require('./auth');
+const sandbox = require('sinon').createSandbox();
 
 const res = {
   status: sandbox.stub(),
@@ -20,7 +20,6 @@ tap.beforeEach(() => {
 });
 
 tap.test('logged in middleware', async loggedInMiddlewareTest => {
-  const loggedIn = middleware.loggedIn;
   loggedInMiddlewareTest.test(
     'rejects if the user is not logged in',
     async invalidTest => {
@@ -52,8 +51,6 @@ tap.test('logged in middleware', async loggedInMiddlewareTest => {
 });
 
 tap.test('"can" middleware', async canMiddlewareTest => {
-  const can = middleware.can;
-
   canMiddlewareTest.test(
     'rejects if the user is not logged in',
     async invalidTest => {
@@ -149,8 +146,6 @@ tap.test('"can" middleware', async canMiddlewareTest => {
 });
 
 tap.test('"validForState" middleware', async validForStateMiddlewareTest => {
-  const validForState = middleware.validForState;
-
   validForStateMiddlewareTest.test(
     'rejects if the user is not logged in',
     async invalidTest => {

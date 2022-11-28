@@ -1,18 +1,16 @@
 {
   "name": "@cms-eapd/api",
   "version": "0.0.1",
+  "type": "module",
   "description": "APD api for CMS HITECH program",
-  "main": "dist/main.js",
-  "module": "dist/main.js",
+  "main": "main.js",
+  "module": "main.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "clean": "[ -d dist ] && (rm -rf dist/* && rm -rf dist) || echo \"doesn't exist, skipping clean\"",
-    "scaffold": "yarn clean && mkdir dist && cp package.json dist/",
-    "build": "yarn workspace @cms-eapd/common build && yarn scaffold && babel . -d ./dist -s --ignore \"node_modules/!(file-type|@cms-eapd/common)/**\",\"dist\",\"coverage-endpoint\"",
-    "start": "yarn build && node dist/main.js",
-    "start-dev": "yarn workspace @cms-eapd/common build && NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
+    "start": "node main.js",
+    "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 main.js -e js",
     "npm-check": "npx npm-check-updates",
-    "knex": "babel-node node_modules/.bin/knex",
+    "knex": "node_modules/.bin/knex",
     "knex-console": "node --experimental-repl-await knexrepl.js",
     "knex-make-migrate": "yarn knex migrate:make",
     "knex-migrate": "yarn knex migrate:latest",
@@ -46,7 +44,6 @@
     "node": "16.16.0"
   },
   "dependencies": {
-    "@babel/node": "7.18.10",
     "@cms-eapd/common": "0.0.1",
     "@okta/jwt-verifier": "2.6.0",
     "@okta/okta-sdk-nodejs": "6.5.0",
@@ -103,44 +100,37 @@
   "jest": {
     "coverageDirectory": "./coverage-endpoint/",
     "rootDir": "./",
+    "testRegex": ".*.endpoint.(j|t)s[x]?$",
+    "transform": {
+      "\\.endpoint.[jt]sx?$": "babel-jest"
+    },
+    "testEnvironment": "node",
+    "testTimeout": 30000,
+    "collectCoverageFrom": [
+      "routes/**/*.{js,jsx}",
+      "!**/*.test.js",
+      "!**/__snapshots__/**",
+      "!**/openAPI.js"
+    ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "/dist/",
       "/coverage-endpoint/"
     ],
     "globalSetup": "./jest.setup.js",
     "globalTeardown": "./jest.teardown.js",
-    "testRegex": ".*.endpoint.(j|t)s[x]?$",
-    "testEnvironment": "node",
-    "testTimeout": 30000,
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!@cms-eapd/common|file-type)",
-      "dist"
-    ],
     "moduleFileExtensions": [
       "js",
       "jsx"
-    ],
-    "collectCoverageFrom": [
-      "routes/**/*.{js,jsx}",
-      "!/dist/**",
-      "!**/*.test.js",
-      "!**/__snapshots__/**",
-      "!**/openAPI.js"
     ]
   },
   "tap": {
-    "files": "!(node_modules|dist|coverage)/**/*.test.js",
+    "files": "!(node_modules|coverage)/**/*.test.js",
     "lines": 75,
     "functions": 60,
     "branches": 49,
     "statements": 75,
     "nyc-arg": [
       "--reporter-dir=./coverage/",
-      "--exclude=./dist/**",
       "--exclude=./**/*.endpoint.js",
       "--exclude=./**/index.js",
       "--exclude=./**/migrations/**",

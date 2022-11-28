@@ -1,11 +1,10 @@
-const sinon = require('sinon');
-const tap = require('tap');
+import sinon from 'sinon';
+import tap from 'tap';
 
-const {
+import {
   userApplicationProfileUrl,
-  actualCallOktaEndpoint: callOktaEndpoint,
-  actualVerifyJWT: verifyJWT
-} = require('./oktaAuth');
+  actualVerifyJWT as verifyJWT
+} from './oktaAuth';
 
 const { OKTA_CLIENT_ID } = process.env;
 
@@ -39,101 +38,6 @@ tap.test('okta wrappers', async oktaTests => {
       );
     }
   );
-
-  oktaTests.test('call Okta endpoint', async callOktaEndpointTest => {
-    const client = {
-      http: {
-        http: sandbox.stub()
-      }
-    };
-    const jsonResponse = {
-      status: 'ACTIVE',
-      credentials: { userName: 'test@email.com' },
-      json: sandbox.stub()
-    };
-
-    callOktaEndpointTest.test('testing GET endpoint', async test => {
-      client.http.http.resolves(jsonResponse);
-      jsonResponse.json.resolves({
-        profile: {
-          name: 'Regular User'
-        }
-      });
-
-      const { data } = await callOktaEndpoint('/endpoint', { client });
-      test.same(data, {
-        profile: {
-          name: 'Regular User'
-        }
-      });
-    });
-
-    callOktaEndpointTest.test(
-      'testing GET endpoint, failed json',
-      async test => {
-        client.http.http.resolves(jsonResponse);
-        jsonResponse.json.rejects({
-          error: 'JSON failed'
-        });
-
-        const { data } = await callOktaEndpoint('/endpoint', { client });
-        test.equal(data, null);
-      }
-    );
-
-    callOktaEndpointTest.test(
-      'testing GET endpoint, http failed',
-      async test => {
-        client.http.http.rejects({ error: 'http failed' });
-
-        const { data } = await callOktaEndpoint('/endpoint', { client });
-        test.equal(data, null);
-        test.equal(jsonResponse.json.callCount, 0);
-      }
-    );
-
-    callOktaEndpointTest.test(
-      'testing POST endpoint, with body',
-      async test => {
-        client.http.http.resolves(jsonResponse);
-        jsonResponse.json.resolves({
-          profile: {
-            name: 'Regular User'
-          }
-        });
-
-        const { data } = await callOktaEndpoint('/endpoint', {
-          method: 'POST',
-          body: { test: 'value' },
-          client
-        });
-        test.same(data, {
-          profile: {
-            name: 'Regular User'
-          }
-        });
-      }
-    );
-
-    callOktaEndpointTest.test('testing POST endpoint, no body', async test => {
-      client.http.http.resolves(jsonResponse);
-      jsonResponse.json.resolves({
-        profile: {
-          name: 'Regular User'
-        }
-      });
-
-      const { data } = await callOktaEndpoint('/endpoint', {
-        method: 'POST',
-        client
-      });
-      test.same(data, {
-        profile: {
-          name: 'Regular User'
-        }
-      });
-    });
-  });
 
   oktaTests.test('verify web token', async verifierTest => {
     const oktaVerifier = {
