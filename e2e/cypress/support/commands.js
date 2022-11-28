@@ -353,7 +353,11 @@ Cypress.Commands.add('goToActivityOverview', activityIndex => {
   openActivitySection(activityIndex, 'Activity Overview');
 });
 
-Cypress.Commands.add('goToOutcomesAndMilestones', activityIndex => {
+Cypress.Commands.add('goToActivitySchedule', activityIndex => {
+  openActivitySection(activityIndex, 'Activity Schedule and Milestones');
+});
+
+Cypress.Commands.add('goToOutcomesAndMetrics', activityIndex => {
   openActivitySection(activityIndex, 'Outcomes and Metrics');
 });
 

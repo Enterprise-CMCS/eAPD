@@ -132,11 +132,7 @@ const CombinedActivityCosts = ({ data, years, isViewOnly }) => {
       )}
       <SummaryBudgetByActivityTotals data={data} ffy={ffy} />
 
-      <h4
-        className="ds-h4"
-        aria-hidden="true"
-        id="state-and-contractor-cost-breakdown"
-      >
+      <h4 className="ds-h4" aria-hidden="true">
         State and Contractor Cost Breakdown
       </h4>
       {!isViewOnly && (
