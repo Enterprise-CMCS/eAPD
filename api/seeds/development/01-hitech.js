@@ -1,6 +1,6 @@
 const hitech = {
   apdType: 'HITECH',
-  name: 'HITECH IAPD Admin Check Complete',
+  name: 'HITECH IAPD Complete',
   years: ['2022', '2023'],
   yearOptions: ['2022', '2023', '2024'],
   apdOverview: {
