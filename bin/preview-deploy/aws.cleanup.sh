@@ -54,7 +54,7 @@ function findExistingInstances() {
 # Gets a list of open pull requests
 function getOpenPullRequests() {
   curl -s \
-    https://api.github.com/repos/CMSgov/eAPD/pulls\?state\=open \
+    https://api.github.com/repos/Enterprise-CMCS/eAPD/pulls\?state\=open \
     | jq -rc ".[].number"
 }
 
@@ -97,14 +97,14 @@ function terminateIfClosedPR() {
 #
 # $1 - pull request number
 function updateGithubComment() {
-  COMMENTS=$(curl -s -H "Authorization: token $GH_BOT_TOKEN" https://api.github.com/repos/CMSgov/eAPD/issues/$1/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
+  COMMENTS=$(curl -s -H "Authorization: token $GH_BOT_TOKEN" https://api.github.com/repos/Enterprise-CMCS/eAPD/issues/$1/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
   if [ "$COMMENTS" ]; then
     ID=$(echo "$COMMENTS" | jq -c -r .id)
     curl -s \
       -H "Authorization: token $GH_BOT_TOKEN" \
       -H "Content-Type: application/json" \
       -d '{"body":"This deploy was cleaned up."}' \
-      -X PATCH "https://api.github.com/repos/CMSgov/eAPD/issues/comments/$ID"
+      -X PATCH "https://api.github.com/repos/Enterprise-CMCS/eAPD/issues/comments/$ID"
   fi
 }
 
