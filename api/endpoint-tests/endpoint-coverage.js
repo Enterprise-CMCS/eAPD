@@ -14,7 +14,9 @@ if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {
 // don't do this, the object could contain undefineds, which
 // can mess up our reporting.  Stringifying and parsing will
 // strip out the undefineds, since those don't survive stringing
-const openAPI = JSON.parse(JSON.stringify(require('../routes/openAPI')));
+const openAPI = JSON.parse(
+  JSON.stringify(require('../routes/openAPI/index.js'))
+);
 
 Object.entries(openAPI.paths).forEach(([path, pathObj]) => {
   if (!endpoints.some(e => e.openAPIPath === path)) {

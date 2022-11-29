@@ -1,4 +1,4 @@
-import Budget from './budget';
-import APD from './apd';
+import Budget from './budget.js';
+import APD from './apd.js';
 
 export { Budget, APD };

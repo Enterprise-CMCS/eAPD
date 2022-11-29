@@ -1,5 +1,5 @@
 import tap from 'tap';
-import { loggedIn, can, validForState } from './auth';
+import { loggedIn, can, validForState } from './auth.js';
 
 const sandbox = require('sinon').createSandbox();
 

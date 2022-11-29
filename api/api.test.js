@@ -2,12 +2,12 @@
 import request from 'supertest';
 
 import tap from 'tap';
-import sinon from 'sinon';
-import mongo from './db/mongodb';
-import knex from './db/knex';
+import { stub } from 'sinon';
+import * as mongo from './db/mongodb.js';
+import knex from './db/knex.js';
 
-sinon.stub(mongo, 'setup').returns({});
-sinon.stub(mongo, 'getConnectionStatus').returns('connected');
+stub(mongo, 'setup').returns({});
+stub(mongo, 'getConnectionStatus').returns('connected');
 
 let api;
 let response;
@@ -15,7 +15,7 @@ let testDbHost;
 
 tap.test('express api', async t => {
   t.beforeEach(async () => {
-    api = require('./api');
+    api = require('./api.js');
   });
 
   t.test('GET /heartbeat', async test => {
@@ -63,7 +63,7 @@ tap.test('express api', async t => {
       testDbHost = process.env.TEST_DB_HOST;
       process.env.TEST_DB_HOST = 'undefined';
       await knex.destroy();
-      api = require('./api');
+      api = require('./api.js');
     });
 
     errorTests.test(

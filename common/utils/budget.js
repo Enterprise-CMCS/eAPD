@@ -1,6 +1,6 @@
-import roundedPercents from './roundedPercents';
-import { arrToObj, convertToNumber } from './formatting';
-import { deepCopy, roundObjectValues } from './utils';
+import roundedPercents from './roundedPercents.js';
+import { arrToObj, convertToNumber } from './formatting.js';
+import { deepCopy, roundObjectValues } from './utils.js';
 
 export const CATEGORY_NAMES = [
   'statePersonnel',
@@ -23,8 +23,8 @@ export const FFP_OPTIONS = new Set(['90-10', '75-25', '50-50', '0-100']);
  *   total: { total: 0, federal: 0, medicaid: 0, state: 0 }
  * }
  */
-export const getDefaultFundingSourceObject = (years = []) => ({
-  ...years.reduce(
+export const getDefaultFundingSourceObject = (years = []) => {
+  const yearValues = years.reduce(
     (o, year) => ({
       ...o,
       [year]: {
@@ -35,14 +35,18 @@ export const getDefaultFundingSourceObject = (years = []) => ({
       }
     }),
     {}
-  ),
-  total: {
-    total: 0,
-    federal: 0,
-    medicaid: 0,
-    state: 0
-  }
-});
+  );
+
+  return {
+    ...yearValues,
+    total: {
+      total: 0,
+      federal: 0,
+      medicaid: 0,
+      state: 0
+    }
+  };
+};
 
 /**
  * Creates a default Expense object with Funding Source objects for each

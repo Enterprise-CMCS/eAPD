@@ -1,7 +1,7 @@
 import OktaJwtVerifier from '@okta/jwt-verifier';
 import Okta from '@okta/okta-sdk-nodejs';
-import loggerFactory from '../logger';
-import { mockOktaClient, mockVerifyJWT } from './mockedOktaAuth';
+import loggerFactory from '../logger/index.js';
+import { mockOktaClient, mockVerifyJWT } from './mockedOktaAuth.js';
 
 const logger = loggerFactory('okta utils');
 

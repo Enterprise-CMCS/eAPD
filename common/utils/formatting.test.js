@@ -1,4 +1,4 @@
-import { arrToObj } from './formatting';
+import { arrToObj } from './formatting.js';
 
 describe('reformat tests', () => {
   beforeEach(() => {

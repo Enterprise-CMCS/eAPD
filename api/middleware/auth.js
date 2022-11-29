@@ -1,5 +1,5 @@
-import loggerFactory from '../logger';
-import cache from './cache';
+import loggerFactory from '../logger/index.js';
+import cache from './cache.js';
 
 const logger = loggerFactory('auth middleware');
 

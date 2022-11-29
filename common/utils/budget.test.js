@@ -4,7 +4,7 @@ import {
   calculateShareCostsByCategory,
   calculateQuarterlyCosts,
   calculateBudget
-} from './budget';
+} from './budget.js';
 
 describe('budget calculate methods', () => {
   describe('calculateCategoryPercentages', () => {

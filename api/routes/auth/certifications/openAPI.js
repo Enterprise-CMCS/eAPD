@@ -1,4 +1,4 @@
-import { requiresAuth } from '../../openAPI/helpers';
+import { requiresAuth } from '../../openAPI/helpers.js';
 
 const stateCertifications = {
   '/auth/certifications': {

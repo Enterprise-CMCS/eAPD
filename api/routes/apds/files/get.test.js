@@ -1,10 +1,10 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import { can } from '../../../middleware';
-import endpoints from './get';
+import { createSandbox, match } from 'sinon';
+import { can } from '../../../middleware/index.js';
+import endpoints from './get.js';
 
 tap.test('apds files endpoints', async endpointTest => {
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
   const app = { get: sandbox.stub(), post: sandbox.stub() };
 
   const di = {
@@ -40,7 +40,7 @@ tap.test('apds files endpoints', async endpointTest => {
       app.get.calledWith(
         '/apds/:id/files/:fileID',
         can('view-document'),
-        sinon.match.func
+        match.func
       ),
       'endpoint for fetching APD files is setup'
     );

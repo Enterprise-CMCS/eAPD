@@ -1,11 +1,11 @@
-import sanitize from '../../util/sanitize';
-import loggerFactory from '../../logger';
+import loggerFactory from '../../logger/index.js';
+import sanitize from '../../util/sanitize.js';
 import {
   updateAPDDocument as ua,
   adminCheckAPDDocument as validate
-} from '../../db';
-import { can, userCanEditAPD } from '../../middleware';
-import staticFields from '../../util/apds';
+} from '../../db/index.js';
+import { can, userCanEditAPD } from '../../middleware/index.js';
+import staticFields from '../../util/apds.js';
 
 const logger = loggerFactory('apds route put');
 

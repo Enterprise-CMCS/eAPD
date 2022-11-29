@@ -10,7 +10,7 @@ import {
   sumShareCosts,
   sumActivityQuarterlyFFP,
   sumQuarterlyFFP
-} from './budget';
+} from './budget.js';
 
 describe('budget summing methods', () => {
   describe('sumActivityTotalByCategories', () => {

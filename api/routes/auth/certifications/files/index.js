@@ -1,6 +1,6 @@
-import loggerFactory from '../../../../logger';
-import get from './get';
-import post from './post';
+import loggerFactory from '../../../../logger/index.js';
+import get from './get.js';
+import post from './post.js';
 
 const logger = loggerFactory('auth certifications route index');
 

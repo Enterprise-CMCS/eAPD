@@ -1,20 +1,19 @@
-import pkg from '../../package.json';
-import affiliations from '../affiliations/openAPI';
-import apds from '../apds/openAPI';
-import apdsEvents from '../apds/events/openAPI';
-import apdsFiles from '../apds/files/openAPI';
-import authActivities from '../auth/activities/openAPI';
-import authRoles from '../auth/roles/openAPI';
-import authStates from '../auth/states/openAPI';
-import authCertifications from '../auth/certifications/openAPI';
-import authCertificationsFiles from '../auth/certifications/files/openAPI';
-import docs from '../docs/openAPI';
-import me from '../me/openAPI';
-import roles from '../roles/openAPI';
-import states from '../states/openAPI';
-import statesAffiliations from '../states/affilitations/openAPI';
+import affiliations from '../affiliations/openAPI.js';
+import apds from '../apds/openAPI.js';
+import apdsEvents from '../apds/events/openAPI.js';
+import apdsFiles from '../apds/files/openAPI.js';
+import authActivities from '../auth/activities/openAPI.js';
+import authRoles from '../auth/roles/openAPI.js';
+import authStates from '../auth/states/openAPI.js';
+import authCertifications from '../auth/certifications/openAPI.js';
+import authCertificationsFiles from '../auth/certifications/files/openAPI.js';
+import docs from '../docs/openAPI.js';
+import me from '../me/openAPI.js';
+import roles from '../roles/openAPI.js';
+import states from '../states/openAPI.js';
+import statesAffiliations from '../states/affilitations/openAPI.js';
 
-import { arrayOf } from './helpers';
+import { arrayOf } from './helpers.js';
 // ############## OPENAPI IMPORT INSERTION POINT ######################
 
 export default {
@@ -22,7 +21,7 @@ export default {
   info: {
     title: 'CMS HITECH APD API',
     description: 'The API for the CMS HITECH APD app.',
-    version: pkg.version
+    version: '0.0.1' // from package.json
   },
   paths: {
     ...affiliations,

@@ -1,8 +1,8 @@
 import tap from 'tap';
 import toMongodb from 'jsonpatch-to-mongodb';
-import { setup, teardown } from '../db/mongodb';
-import { APD } from './index';
-import { akAPD } from '../seeds/development/apds';
+import { setup, teardown } from '../db/mongodb.js';
+import { APD } from './index.js';
+import { akAPD } from '../seeds/development/apds.js';
 
 let apdId;
 

@@ -1,11 +1,11 @@
 /* eslint-disable no-shadow */
 import tap from 'tap';
 
-import sinon from 'sinon';
-import { can } from '../../../middleware';
-import patchEndpoint from './patch';
-import mockExpress from '../../../util/mockExpress';
-import mockResponse from '../../../util/mockResponse';
+import { stub, match } from 'sinon';
+import { can } from '../../../middleware/index.js';
+import patchEndpoint from './patch.js';
+import mockExpress from '../../../util/mockExpress.js';
+import mockResponse from '../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -20,8 +20,8 @@ tap.test('PATCH affiliations endpoint', async t => {
   t.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    updateAuthAffiliation = sinon.stub();
+    next = stub();
+    updateAuthAffiliation = stub();
 
     patchEndpoint(app, { updateAuthAffiliation_: updateAuthAffiliation });
 
@@ -30,7 +30,7 @@ tap.test('PATCH affiliations endpoint', async t => {
 
   t.test('setup', async t => {
     t.ok(
-      app.patch.calledWith(route, canMiddleware, sinon.match.func),
+      app.patch.calledWith(route, canMiddleware, match.func),
       `express route to 'PATCH ${route}' is configured`
     );
   });

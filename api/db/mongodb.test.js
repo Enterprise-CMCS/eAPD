@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import tap from 'tap';
-import { setup, teardown } from './mongodb';
+import { setup, teardown } from './mongodb.js';
 
 const STATE = {
   disconnected: 0,

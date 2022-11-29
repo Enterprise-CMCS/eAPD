@@ -1,6 +1,6 @@
-import sinon from 'sinon';
+import { createSandbox } from 'sinon';
 
-const sandbox = sinon.createSandbox();
+const sandbox = createSandbox();
 const oktaClient = {
   listUsers: sandbox.stub(),
   getUser: sandbox.stub()

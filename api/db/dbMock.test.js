@@ -1,7 +1,7 @@
-import sinon from 'sinon';
+import { createSandbox, stub } from 'sinon';
 
-const sandbox = sinon.createSandbox();
-const db = sinon.stub();
+const sandbox = createSandbox();
+const db = stub();
 
 const reset = () => {
   sandbox.resetBehavior();

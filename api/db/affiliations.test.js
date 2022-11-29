@@ -1,6 +1,6 @@
-import sinon from 'sinon';
+import { useFakeTimers, stub } from 'sinon';
 import tap from 'tap';
-import dbMock from './dbMock.test';
+import dbMock from './dbMock.test.js';
 
 import {
   selectedColumns,
@@ -10,7 +10,7 @@ import {
   getAllPopulatedAffiliations,
   reduceAffiliations,
   getAffiliationsByUserId
-} from './affiliations';
+} from './affiliations.js';
 
 const defaultPopulatedAffiliation = {
   userId: 'userId',
@@ -22,7 +22,7 @@ const defaultPopulatedAffiliation = {
 tap.test('database wrappers / affiliations', async affiliationsTests => {
   // Water. Earth. Fire. Air. Long ago, the four nations lived together in harmony.
   // Then, everything changed when the Fire Nation attacked.
-  sinon.useFakeTimers(Date.UTC(1904, 9, 3, 0, 0, 0, 0));
+  useFakeTimers(Date.UTC(1904, 9, 3, 0, 0, 0, 0));
   const db = dbMock('auth_affiliations');
   const expectedUsers = [{ foo: 'foo' }, { foo: 'bar' }];
   const stateId = 'BC';
@@ -175,7 +175,7 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
       const status = 'irrelevant';
       const affiliations = ['foo', 'bar', 'baz'];
       const isFedAdmin = false;
-      const getAffiliationsByStateStub = sinon.stub();
+      const getAffiliationsByStateStub = stub();
       getAffiliationsByStateStub
         .withArgs({ stateId, status, isFedAdmin })
         .resolves(affiliations);
@@ -195,7 +195,7 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
     async test => {
       const status = 'irrelevant';
       const isFedAdmin = false;
-      const getAffiliationsByStateStub = sinon.stub();
+      const getAffiliationsByStateStub = stub();
       getAffiliationsByStateStub
         .withArgs({ stateId, status, isFedAdmin })
         .resolves([]);
@@ -348,10 +348,10 @@ tap.test('database wrappers / affiliations', async affiliationsTests => {
       const status = 'irrelevant';
       const affiliations = ['foo', 'bar', 'baz'];
 
-      const getAllAffiliationsStub = sinon.stub();
+      const getAllAffiliationsStub = stub();
       getAllAffiliationsStub.withArgs({ status, db }).resolves(affiliations);
 
-      const reduceAffiliationsStub = sinon.stub();
+      const reduceAffiliationsStub = stub();
       reduceAffiliationsStub.withArgs(affiliations).returns(affiliations);
 
       const results = await getAllPopulatedAffiliations({

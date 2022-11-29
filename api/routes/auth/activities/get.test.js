@@ -1,9 +1,9 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import { can } from '../../../middleware';
-import getEndpoint from './get';
-import mockExpress from '../../../util/mockExpress';
-import mockResponse from '../../../util/mockResponse';
+import { stub, match } from 'sinon';
+import { can } from '../../../middleware/index.js';
+import getEndpoint from './get.js';
+import mockExpress from '../../../util/mockExpress.js';
+import mockResponse from '../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -14,19 +14,15 @@ tap.test('auth activities GET endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    getAuthActivities = sinon.stub();
+    next = stub();
+    getAuthActivities = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith(
-        '/auth/activities',
-        can('view-roles'),
-        sinon.match.func
-      ),
+      app.get.calledWith('/auth/activities', can('view-roles'), match.func),
       'all activities GET endpoint is registered'
     );
   });

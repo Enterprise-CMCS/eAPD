@@ -1,5 +1,5 @@
 import tap from 'tap';
-import sanitize from './sanitize';
+import sanitize from './sanitize.js';
 
 tap.test('sanitize input', async sanitizeTests => {
   sanitizeTests.test('it should sanitize dangerous input', async test => {

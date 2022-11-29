@@ -1,16 +1,16 @@
 import swaggerUi from 'swagger-ui-express';
-import loggerFactory from '../logger';
-import affiliations from './affiliations/index';
-import apds from './apds/index';
+import loggerFactory from '../logger/index.js';
+import affiliations from './affiliations/index.js';
+import apds from './apds/index.js';
 // import apdsEvents from './apds/events';
 // import apdsFiles from './apds/files';
-import auth from './auth/index';
-import docs from './docs/index';
-import roles from './roles/index';
-import states from './states/index';
+import auth from './auth/index.js';
+import docs from './docs/index.js';
+import roles from './roles/index.js';
+import states from './states/index.js';
 // import stateAffiliations from './states/affilitations';
-import users from './users/index';
-import openAPI from './openAPI/index';
+import users from './users/index.js';
+import openAPI from './openAPI/index.js';
 
 const logger = loggerFactory('routes index');
 

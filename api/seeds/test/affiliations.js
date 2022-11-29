@@ -1,5 +1,5 @@
-import { getAllActiveRoles } from '../../db/roles';
-import states from '../../util/states';
+import { getAllActiveRoles } from '../../db/roles.js';
+import states from '../../util/states.js';
 
 const seed = async knex => {
   const [{ id: noPermissionsId }] = await getAllActiveRoles(

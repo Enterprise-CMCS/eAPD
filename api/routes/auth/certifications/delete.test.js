@@ -1,10 +1,9 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import { can } from '../../../middleware';
-import { loggedIn } from '../../../middleware/auth';
-import deleteEndpoint from './delete';
-import mockExpress from '../../../util/mockExpress';
-import mockResponse from '../../../util/mockResponse';
+import { stub, match } from 'sinon';
+import { can, loggedIn } from '../../../middleware/index.js';
+import deleteEndpoint from './delete.js';
+import mockExpress from '../../../util/mockExpress.js';
+import mockResponse from '../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -12,13 +11,13 @@ let next;
 
 tap.test('state certifications delete endpoint', async deleteTest => {
   const di = {
-    archiveStateAdminCertification: sinon.stub()
+    archiveStateAdminCertification: stub()
   };
 
   deleteTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
+    next = stub();
   });
 
   deleteTest.test('setup', async setupTest => {
@@ -29,7 +28,7 @@ tap.test('state certifications delete endpoint', async deleteTest => {
         '/auth/certifications',
         loggedIn,
         can('edit-state-certifications'),
-        sinon.match.func
+        match.func
       ),
       '/auth/certifications DELETE endpoint is setup'
     );

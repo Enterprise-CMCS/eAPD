@@ -1,5 +1,5 @@
-import { oktaClient } from '../auth/oktaAuth';
-import loggerFactory from '../logger';
+import { oktaClient } from '../auth/oktaAuth.js';
+import loggerFactory from '../logger/index.js';
 
 const logger = loggerFactory('user seeder');
 

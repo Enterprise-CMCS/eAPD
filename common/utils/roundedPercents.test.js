@@ -1,4 +1,4 @@
-import roundedPercents from './roundedPercents';
+import roundedPercents from './roundedPercents.js';
 
 describe('rounding percentages util', () => {
   test('spreads a number across a set of percentages', () => {

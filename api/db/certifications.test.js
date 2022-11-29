@@ -1,9 +1,9 @@
 import tap from 'tap';
-import knex from './knex';
+import knex from './knex.js';
 import {
   getStateAdminCertifications,
   archiveStateAdminCertification
-} from './certifications';
+} from './certifications.js';
 
 const setupDB = async (certifications, oktaUsers, authAffiliations) => {
   await knex('okta_users').insert(oktaUsers);

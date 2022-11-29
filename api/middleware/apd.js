@@ -1,6 +1,6 @@
-import loggerFactory from '../logger';
-import cache from './cache';
-import { getAPDByID as ga } from '../db';
+import loggerFactory from '../logger/index.js';
+import cache from './cache.js';
+import { getAPDByID as ga } from '../db/index.js';
 
 const logger = loggerFactory('apd middleware');
 

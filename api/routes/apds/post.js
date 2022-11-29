@@ -1,7 +1,7 @@
-import loggerFactory from '../../logger';
-import { createAPD as ga, getStateProfile as gs } from '../../db';
-import { can } from '../../middleware';
-import getNewApd from './post.data';
+import loggerFactory from '../../logger/index.js';
+import { createAPD as ga, getStateProfile as gs } from '../../db/index.js';
+import { can } from '../../middleware/index.js';
+import getNewApd from './post.data.js';
 
 const logger = loggerFactory('apds route post');
 

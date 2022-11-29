@@ -1,9 +1,9 @@
-import deleteAll from '../shared/delete-everything';
-import seedRoles from '../shared/roles-and-activities';
-import seedStates from '../shared/states';
-import seedState from './state';
-import seedUsers from './base-users';
-import { seed as seedApds } from '../shared/apds';
+import deleteAll from '../shared/delete-everything.js';
+import seedRoles from '../shared/roles-and-activities.js';
+import seedStates from '../shared/states.js';
+import seedState from './state.js';
+import seedUsers from './base-users.js';
+import { seed as seedApds } from '../shared/apds.js';
 
 const seed = async knex => {
   // Don't seed this data if we're not in a development environment.

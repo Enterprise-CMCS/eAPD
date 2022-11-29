@@ -1,7 +1,7 @@
 import tap from 'tap';
 
 tap.beforeEach(() => {
-  delete require.cache[require.resolve('./env')];
+  delete require.cache[require.resolve('./env.js')];
   process.env = {};
 });
 
@@ -19,7 +19,7 @@ tap.test('environment setup', async envTest => {
   envTest.test(
     'sets default values for known environment variables',
     async test => {
-      require('./env'); // eslint-disable-line global-require
+      require('./env.js'); // eslint-disable-line global-require
       knownEnvironmentVariables.forEach(envVar => {
         test.type(
           process.env[envVar.name],
@@ -48,7 +48,7 @@ tap.test('environment setup', async envTest => {
         ]
       });
 
-      require('./env'); // eslint-disable-line global-require
+      require('./env.js'); // eslint-disable-line global-require
       knownEnvironmentVariables.forEach(envVar => {
         test.same(
           process.env[envVar.name],

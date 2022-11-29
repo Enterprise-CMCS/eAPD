@@ -1,13 +1,13 @@
-import loggerFactory from '../../../logger';
+import loggerFactory from '../../../logger/index.js';
 
 import {
   getPopulatedAffiliationsByStateId as _getPopulatedAffiliationsByStateId,
   getPopulatedAffiliationById as _getPopulatedAffiliationsById,
   getAllPopulatedAffiliations as _getAllPopulatedAffiliations,
   getAffiliationMatches as _getAffiliationMatches
-} from '../../../db';
+} from '../../../db/index.js';
 
-import { can, validForState } from '../../../middleware';
+import { can, validForState } from '../../../middleware/index.js';
 
 const logger = loggerFactory('affiliations route get');
 

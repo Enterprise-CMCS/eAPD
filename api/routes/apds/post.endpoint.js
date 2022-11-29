@@ -5,7 +5,7 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../endpoint-tests/utils';
+} from '../../endpoint-tests/utils.js';
 
 describe('APD endpoint | POST /apds', () => {
   const db = getDB();

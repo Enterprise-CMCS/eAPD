@@ -1,5 +1,5 @@
 import nodeCrypto from 'crypto';
-import knex from './knex';
+import knex from './knex.js';
 
 export const createNewFileForAPD = async (
   fileBuffer,

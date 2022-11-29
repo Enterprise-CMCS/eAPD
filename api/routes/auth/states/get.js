@@ -1,4 +1,4 @@
-import { changeState as cs } from '../../../auth/jwtUtils';
+import { changeState as cs } from '../../../auth/jwtUtils.js';
 
 export default (app, { changeState = cs } = {}) => {
   app.get('/auth/state/:stateId', async (req, res) => {

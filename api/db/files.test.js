@@ -1,12 +1,16 @@
-import sinon from 'sinon';
+import { createSandbox } from 'sinon';
 import tap from 'tap';
-import dbMock from './dbMock.test';
-import { createNewFileForAPD, deleteFileByID, fileBelongsToAPD } from './files';
+import dbMock from './dbMock.test.js';
+import {
+  createNewFileForAPD,
+  deleteFileByID,
+  fileBelongsToAPD
+} from './files.js';
 
 tap.test('database wrappers / files', async filesTests => {
   const db = dbMock('apd_files');
 
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
   const crypto = {
     createHash: sandbox.stub(),
     update: sandbox.stub(),

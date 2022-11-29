@@ -1,6 +1,6 @@
-import loggerFactory from '../../logger';
-import { getAllActiveRoles as gr } from '../../db';
-import { can } from '../../middleware';
+import loggerFactory from '../../logger/index.js';
+import { getAllActiveRoles as gr } from '../../db/index.js';
+import { can } from '../../middleware/index.js';
 
 const logger = loggerFactory('roles route get');
 

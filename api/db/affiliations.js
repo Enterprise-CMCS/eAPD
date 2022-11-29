@@ -1,5 +1,5 @@
-import loggerFactory from '../logger';
-import knex from './knex';
+import loggerFactory from '../logger/index.js';
+import knex from './knex.js';
 
 const logger = loggerFactory('db/affiliations');
 

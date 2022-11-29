@@ -1,9 +1,9 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import { can } from '../../middleware';
-import getEndpoint from './get';
-import mockExpress from '../../util/mockExpress';
-import mockResponse from '../../util/mockResponse';
+import { stub, match } from 'sinon';
+import { can } from '../../middleware/index.js';
+import getEndpoint from './get.js';
+import mockExpress from '../../util/mockExpress.js';
+import mockResponse from '../../util/mockResponse.js';
 
 let res;
 let next;
@@ -15,21 +15,21 @@ let handler;
 tap.test('user GET endpoint', async endpointTest => {
   endpointTest.beforeEach(() => {
     res = mockResponse();
-    next = sinon.stub();
+    next = stub();
     app = mockExpress();
-    getAllUsers = sinon.stub();
-    getUserByID = sinon.stub();
+    getAllUsers = stub();
+    getUserByID = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/users/:id', can('view-users'), sinon.match.func),
+      app.get.calledWith('/users/:id', can('view-users'), match.func),
       'single user GET endpoint is registered'
     );
     setupTest.ok(
-      app.get.calledWith('/users', can('view-users'), sinon.match.func),
+      app.get.calledWith('/users', can('view-users'), match.func),
       'all users GET endpoint is registered'
     );
   });

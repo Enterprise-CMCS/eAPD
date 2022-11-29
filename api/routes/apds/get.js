@@ -1,12 +1,12 @@
-import loggerFactory from '../../logger';
+import loggerFactory from '../../logger/index.js';
 
 import {
   getAllAPDsByState as gas,
   getAPDByIDAndState as ga,
   adminCheckAPDDocument as validate
-} from '../../db';
+} from '../../db/index.js';
 
-import { can } from '../../middleware';
+import { can } from '../../middleware/index.js';
 
 const logger = loggerFactory('apds route get');
 

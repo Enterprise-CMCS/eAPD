@@ -1,5 +1,5 @@
 import tap from 'tap';
-import adminCheckApd from './adminCheck';
+import adminCheckApd from './adminCheck.js';
 
 const validApdOverview = {
   programOverview: 'abc',

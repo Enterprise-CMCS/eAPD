@@ -1,6 +1,6 @@
 // Sets up dotenv, sets default environment
 // variables if not defined
-import './env';
+import './env.js';
 
 import express from 'express';
 import cors from 'cors';
@@ -9,16 +9,16 @@ import compression from 'compression';
 import { v4 as uuidv4 } from 'uuid';
 import fileUpload from 'express-fileupload';
 
-import loggerFactory from './logger/index';
-import requestLoggerMiddleware from './logger/morgan';
-import jsonWebTokenMiddleware from './auth/jwtMiddleware';
-import routes from './routes/index';
-import endpointCoverage from './middleware/endpointCoverage';
-import errorHandler from './middleware/errorHandler';
-import { setup as mongoSetup, getConnectionStatus } from './db/mongodb';
-import knex from './db/knex';
-import { waitForInitialization as ldWaitForInitialization } from './middleware/launchDarkly'; // initialize LaunchDarkly
-import me from './routes/me/index';
+import loggerFactory from './logger/index.js';
+import requestLoggerMiddleware from './logger/morgan.js';
+import jsonWebTokenMiddleware from './auth/jwtMiddleware.js';
+import routes from './routes/index.js';
+import endpointCoverage from './middleware/endpointCoverage.js';
+import errorHandler from './middleware/errorHandler.js';
+import { setup as mongoSetup, getConnectionStatus } from './db/mongodb.js';
+import knex from './db/knex.js';
+import { waitForInitialization as ldWaitForInitialization } from './middleware/launchDarkly.js'; // initialize LaunchDarkly
+import me from './routes/me/index.js';
 
 const logger = loggerFactory('main');
 

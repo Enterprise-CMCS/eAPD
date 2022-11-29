@@ -1,10 +1,10 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import { can } from '../../../middleware';
-import endpoints from './post';
+import { createSandbox, match } from 'sinon';
+import { can } from '../../../middleware/index.js';
+import endpoints from './post.js';
 
 tap.only('apds files endpoints', async endpointTest => {
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
   const app = { get: sandbox.stub(), post: sandbox.stub() };
 
   const di = {
@@ -36,11 +36,7 @@ tap.only('apds files endpoints', async endpointTest => {
     endpoints(app);
 
     setupTest.ok(
-      app.post.calledWith(
-        '/apds/:id/files',
-        can('view-document'),
-        sinon.match.func
-      ),
+      app.post.calledWith('/apds/:id/files', can('view-document'), match.func),
       'endpoint for posting APD files is setup'
     );
   });

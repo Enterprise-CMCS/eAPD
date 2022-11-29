@@ -1,5 +1,5 @@
-import { raw, getStateAdmins } from '../../db';
-import { validForState } from '../../middleware/auth';
+import { raw, getStateAdmins } from '../../db/index.js';
+import { validForState } from '../../middleware/auth.js';
 
 export default app => {
   app.get('/states', (request, response, next) => {

@@ -1,7 +1,7 @@
-import loggerFactory from '../../../logger';
-import get from './get';
-import post from './post';
-import patch from './patch';
+import loggerFactory from '../../../logger/index.js';
+import get from './get.js';
+import post from './post.js';
+import patch from './patch.js';
 
 const logger = loggerFactory('affiliation route index');
 

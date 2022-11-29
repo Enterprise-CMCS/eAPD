@@ -1,8 +1,8 @@
-import sinon from 'sinon';
+import { createSandbox, stub } from 'sinon';
 import tap from 'tap';
-import dbMock from './dbMock.test';
-import oktaAuthMock from '../auth/oktaAuthMock.test';
-import knex from './knex';
+import dbMock from './dbMock.test.js';
+import oktaAuthMock from '../auth/oktaAuthMock.test.js';
+import knex from './knex.js';
 
 import {
   getAllUsers,
@@ -10,14 +10,14 @@ import {
   populateUserRole,
   sanitizeUser,
   userLoggedIntoState
-} from './users';
+} from './users.js';
 
 tap.test('database wrappers / users', async usersTests => {
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
   const db = dbMock('okta_users');
   const { oktaClient: client } = oktaAuthMock;
 
-  const populate = sinon.stub();
+  const populate = stub();
 
   const sanitizedUser = {
     activities: 'auth activities',

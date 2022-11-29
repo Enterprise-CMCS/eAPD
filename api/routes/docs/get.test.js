@@ -1,8 +1,8 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import getEndpoint from './get';
-import mockExpress from '../../util/mockExpress';
-import mockResponse from '../../util/mockResponse';
+import { stub, match } from 'sinon';
+import getEndpoint from './get.js';
+import mockExpress from '../../util/mockExpress.js';
+import mockResponse from '../../util/mockResponse.js';
 
 let app;
 let res;
@@ -13,19 +13,19 @@ tap.test('docs endpoints', async endpointTest => {
   endpointTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    getFile = sinon.stub();
+    next = stub();
+    getFile = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/docs/account-registration', sinon.match.func),
+      app.get.calledWith('/docs/account-registration', match.func),
       'endpoint for fetching account registration doc is setup'
     );
     setupTest.ok(
-      app.get.calledWith('/docs/system-access', sinon.match.func),
+      app.get.calledWith('/docs/system-access', match.func),
       'endpoint for fetching system access doc is setup'
     );
   });

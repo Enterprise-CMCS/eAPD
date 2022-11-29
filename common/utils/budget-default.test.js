@@ -5,7 +5,7 @@ import {
   defaultBudgetObject,
   defaultQuarterlyFFPObject,
   defaultActivityTotalsDataObject
-} from './budget';
+} from './budget.js';
 
 describe('budget getDefault methods', () => {
   describe('getDefaultFundingSourceObject', () => {

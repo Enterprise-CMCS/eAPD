@@ -1,6 +1,6 @@
-import loggerFactory from '../../logger';
-import { getAffiliationsByUserId as _getAffiliationsByUserId } from '../../db';
-import { loggedIn } from '../../middleware';
+import loggerFactory from '../../logger/index.js';
+import { getAffiliationsByUserId as _getAffiliationsByUserId } from '../../db/index.js';
+import { loggedIn } from '../../middleware/index.js';
 
 const logger = loggerFactory('affiliations route get');
 

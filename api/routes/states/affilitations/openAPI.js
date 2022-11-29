@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { jsonResponse, arrayOf, responses } from '../../openAPI/helpers';
+import { jsonResponse, arrayOf, responses } from '../../openAPI/helpers.js';
 
 const id = {
   type: 'integer',

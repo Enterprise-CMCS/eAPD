@@ -1,10 +1,10 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import usersIndex from './index';
+import { spy } from 'sinon';
+import usersIndex from './index.js';
 
 tap.test('users endpoint setup', async endpointTest => {
   const app = {};
-  const getEndpoint = sinon.spy();
+  const getEndpoint = spy();
 
   usersIndex(app, { getEndpoint });
 

@@ -1,10 +1,10 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import { can, userCanEditAPD } from '../../middleware';
-import patchEndpoint from './patch';
+import { createSandbox, match } from 'sinon';
+import { can, userCanEditAPD } from '../../middleware/index.js';
+import patchEndpoint from './patch.js';
 
 tap.test('apds PATCH endpoint', async tests => {
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
   let handler;
 
   const app = {
@@ -41,7 +41,7 @@ tap.test('apds PATCH endpoint', async tests => {
         '/apds/:id',
         can('edit-document'),
         userCanEditAPD(),
-        sinon.match.func
+        match.func
       ),
       'creates a PATCH endpoint at the right location with the right permissions'
     );

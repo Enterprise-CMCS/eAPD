@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import loggerFactory from '../logger';
-import knex from './knex';
-import { oktaClient } from '../auth/oktaAuth';
+import loggerFactory from '../logger/index.js';
+import knex from './knex.js';
+import { oktaClient } from '../auth/oktaAuth.js';
 
 const logger = loggerFactory('db/oktaUsers');
 

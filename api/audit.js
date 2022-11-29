@@ -2,7 +2,7 @@
 // set on each field that was changed. Finally call log when you're done to
 // persist the audit log. Uses the standard logger
 
-import loggerFactory from './logger/index';
+import loggerFactory from './logger/index.js';
 
 const logger = loggerFactory('AUDIT');
 

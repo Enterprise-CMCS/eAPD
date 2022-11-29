@@ -5,8 +5,13 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../endpoint-tests/utils';
-import { mnAPDId, akAPDId, finalAPDId, badAPDId } from '../../seeds/test/apds';
+} from '../../endpoint-tests/utils.js';
+import {
+  mnAPDId,
+  akAPDId,
+  finalAPDId,
+  badAPDId
+} from '../../seeds/test/apds.js';
 
 describe('APD endpoint', () => {
   describe('Delete/archive APD endpoint | DELETE /apds/:id', () => {

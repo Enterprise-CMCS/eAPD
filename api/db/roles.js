@@ -1,4 +1,4 @@
-import knex from './knex';
+import knex from './knex.js';
 
 export const getAllActiveRoles = (requestedRoles, { db = knex } = {}) => {
   const query = db('auth_roles').select('id', 'name').where({ isActive: true });

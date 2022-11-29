@@ -1,4 +1,4 @@
-import { generateKey, hasBudgetUpdate } from './utils';
+import { generateKey, hasBudgetUpdate } from './utils.js';
 
 describe('utility functions', () => {
   test('generates a key', () => {

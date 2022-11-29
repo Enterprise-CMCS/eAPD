@@ -1,14 +1,14 @@
-import sinon from 'sinon';
+import { createSandbox, useFakeTimers, match } from 'sinon';
 import tap from 'tap';
-import dbMock from './dbMock.test';
-import createEventForAPD from './events';
+import dbMock from './dbMock.test.js';
+import createEventForAPD from './events.js';
 
 let clock;
 
 tap.test('database wrappers / events', async eventsTests => {
   const db = dbMock('apd_events');
 
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
 
   eventsTests.beforeEach(async () => {
     dbMock.reset();
@@ -16,7 +16,7 @@ tap.test('database wrappers / events', async eventsTests => {
 
     // Fake out the clock so we know what time values to expect in queries.
     // Date.now() will return 0.
-    clock = sinon.useFakeTimers(new Date(Date.UTC(2020, 10, 1, 0, 0)));
+    clock = useFakeTimers(new Date(Date.UTC(2020, 10, 1, 0, 0)));
   });
 
   eventsTests.test('creates a new event for an APD', async test => {
@@ -29,7 +29,7 @@ tap.test('database wrappers / events', async eventsTests => {
 
     test.ok(
       db.insert.calledWith({
-        event_id: sinon.match(
+        event_id: match(
           /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
         ),
         user_id: 'user id',
@@ -64,7 +64,7 @@ tap.test('database wrappers / events', async eventsTests => {
 
       test.ok(
         db.insert.calledWith({
-          event_id: sinon.match(
+          event_id: match(
             /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
           ),
           user_id: 'user id',

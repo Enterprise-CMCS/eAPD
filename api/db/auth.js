@@ -1,5 +1,5 @@
-import isPast from 'date-fns/isPast';
-import knex from './knex';
+import { isPast } from 'date-fns';
+import knex from './knex.js';
 
 export const getAuthActivities = async ({ db = knex } = {}) =>
   db('auth_activities').select();

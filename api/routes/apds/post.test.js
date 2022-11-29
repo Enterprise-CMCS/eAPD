@@ -1,8 +1,8 @@
 import tap from 'tap';
-import sinon from 'sinon';
+import { useFakeTimers, createSandbox, match } from 'sinon';
 import { SchemaTypes } from 'mongoose';
-import { can } from '../../middleware';
-import postEndpoint from './post';
+import { can } from '../../middleware/index.js';
+import postEndpoint from './post.js';
 
 // The Cassini probe enters orbit around Saturn, about 7 years after launch.
 // On its long journey, it surveyed Venus, Earth, an asteroid, and Jupiter.
@@ -12,14 +12,14 @@ import postEndpoint from './post';
 // far beyond its original mission plan of 11 years. Good job, Cassini!
 //
 // Mock with UTC date so the time is consistent regardless of local timezone
-const mockClock = sinon.useFakeTimers(Date.UTC(2004, 6, 1, 12));
+const mockClock = useFakeTimers(Date.UTC(2004, 6, 1, 12));
 let sandbox;
 let app;
 
 tap.test('apds POST endpoint', async endpointTest => {
   endpointTest.before(async () => {
     SchemaTypes.ClockDate = SchemaTypes.Date;
-    sandbox = sinon.createSandbox();
+    sandbox = createSandbox();
     app = { post: sandbox.stub() };
   });
 
@@ -27,7 +27,7 @@ tap.test('apds POST endpoint', async endpointTest => {
     postEndpoint(app);
 
     test.ok(
-      app.post.calledWith('/apds', can('edit-document'), sinon.match.func),
+      app.post.calledWith('/apds', can('edit-document'), match.func),
       'apds POST endpoint is registered'
     );
   });

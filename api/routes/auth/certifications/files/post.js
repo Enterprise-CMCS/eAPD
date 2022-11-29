@@ -1,9 +1,8 @@
 import nodeCrypto from 'crypto';
-import { loggedIn } from '../../../../middleware/auth';
-import { can } from '../../../../middleware';
-import loggerFactory from '../../../../logger';
+import { can, loggedIn } from '../../../../middleware/index.js';
+import loggerFactory from '../../../../logger/index.js';
+import { validateDoc as validDoc } from '../../../../util/fileValidation.js';
 import { putFile as put } from '../../../../files/index.cjs';
-import { validateDoc as validDoc } from '../../../../util/fileValidation';
 
 const logger = loggerFactory('auth certifications files post');
 

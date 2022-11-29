@@ -1,4 +1,4 @@
-import loggerFactory from '../logger';
+import loggerFactory from '../logger/index.js';
 
 const logger = loggerFactory('errorHandler middleware');
 

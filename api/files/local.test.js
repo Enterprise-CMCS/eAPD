@@ -1,12 +1,12 @@
 import systemFs from 'fs';
-import sinon from 'sinon';
+import { createSandbox, stub } from 'sinon';
 import tap from 'tap';
 
-const sandbox = sinon.createSandbox();
+const sandbox = createSandbox();
 
 const getModule = () => {
   delete require.cache[require.resolve('./local')];
-  return require('./local'); // eslint-disable-line global-require
+  return require('./local.js'); // eslint-disable-line global-require
 };
 
 tap.test('local file storage module', async tests => {
@@ -39,7 +39,7 @@ tap.test('local file storage module', async tests => {
 
   tests.test('creates the local file path if it does not exist', async test => {
     fsExistsSync.returns(false);
-    const mkdir = sinon.stub(systemFs, 'mkdirSync');
+    const mkdir = stub(systemFs, 'mkdirSync');
 
     getModule();
 

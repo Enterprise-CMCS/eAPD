@@ -1,6 +1,6 @@
-import loggerFactory from '../../../logger';
-import { can } from '../../../middleware';
-import { fileBelongsToAPD as fb } from '../../../db';
+import loggerFactory from '../../../logger/index.js';
+import { can } from '../../../middleware/index.js';
+import { fileBelongsToAPD as fb } from '../../../db/index.js';
 import { getFile as get } from '../../../files/index.cjs';
 
 const logger = loggerFactory('apds file routes');

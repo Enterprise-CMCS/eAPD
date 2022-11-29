@@ -1,15 +1,15 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import apdsIndex from './index';
+import { spy } from 'sinon';
+import apdsIndex from './index.js';
 
 tap.test('apds endpoint setup', async endpointTest => {
   const app = {};
-  const deleteEndpoint = sinon.spy();
-  const filesEndpoints = sinon.spy();
-  const eventsEndpoints = sinon.spy();
-  const getEndpoint = sinon.spy();
-  const patchEndpoint = sinon.spy();
-  const postEndpoint = sinon.spy();
+  const deleteEndpoint = spy();
+  const filesEndpoints = spy();
+  const eventsEndpoints = spy();
+  const getEndpoint = spy();
+  const patchEndpoint = spy();
+  const postEndpoint = spy();
 
   apdsIndex(app, {
     deleteEndpoint,

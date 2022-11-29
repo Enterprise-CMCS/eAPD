@@ -1,4 +1,4 @@
-import { combinedSchemas } from '@cms-eapd/common';
+import { combinedSchemas } from '@cms-eapd/common/index.js';
 
 /**
  * Builds an error list for use in the frontend admin check panel

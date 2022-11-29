@@ -1,5 +1,5 @@
 import tap from 'tap';
-import dbMock from './dbMock.test';
+import dbMock from './dbMock.test.js';
 
 import {
   getAuthActivities,
@@ -7,7 +7,7 @@ import {
   getAuthRoleByID,
   getAuthRoleByName,
   getActiveAuthRoles
-} from './auth';
+} from './auth.js';
 
 tap.test('database wrappers / auth', async authTests => {
   const roles = dbMock('auth_roles');

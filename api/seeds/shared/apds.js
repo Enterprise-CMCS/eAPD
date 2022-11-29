@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { setup, teardown } from '../../db/mongodb';
-import { createAPD } from '../../db/apds';
-import loggerFactory from '../../logger';
-import { APD, Budget } from '../../models/index';
+import { setup, teardown } from '../../db/mongodb.js';
+import { createAPD } from '../../db/apds.js';
+import loggerFactory from '../../logger/index.js';
+import { APD, Budget } from '../../models/index.js';
 
 const { data: apdData } = require(`../${process.env.NODE_ENV}/apds`); // eslint-disable-line import/no-dynamic-require
 

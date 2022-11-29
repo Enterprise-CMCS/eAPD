@@ -1,4 +1,4 @@
-import { akAPDId } from './apds';
+import { akAPDId } from './apds.js';
 
 const seed = async knex => {
   await knex('apd_files').insert([

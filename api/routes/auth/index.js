@@ -1,8 +1,8 @@
-import loggerFactory from '../../logger';
-import activities from './activities/index';
-import roles from './roles/index';
-import states from './states/index';
-import certifications from './certifications/index';
+import loggerFactory from '../../logger/index.js';
+import activities from './activities/index.js';
+import roles from './roles/index.js';
+import states from './states/index.js';
+import certifications from './certifications/index.js';
 
 const logger = loggerFactory('auth route index');
 

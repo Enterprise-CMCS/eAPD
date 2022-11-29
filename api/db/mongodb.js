@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import loggerFactory from '../logger';
+import loggerFactory from '../logger/index.js';
 
 const logger = loggerFactory('mongoose');
 
@@ -33,7 +33,7 @@ export const connect = async () => {
 export const setup = async () => {
   await connect();
   // eslint-disable-next-line global-require
-  require('../models/index'); // import all of the mongo models
+  require('../models/index.js'); // import all of the mongo models
 };
 
 export const teardown = async () => {

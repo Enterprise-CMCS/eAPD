@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import knex from './knex';
+import knex from './knex.js';
 
-import { updateAuthAffiliation } from './affiliations';
+import { updateAuthAffiliation } from './affiliations.js';
 
 export const addStateAdminCertification = (data, { db = knex } = {}) => {
   return db('state_admin_certifications')

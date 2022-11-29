@@ -1,13 +1,13 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import apdsIndex from './index';
+import { spy } from 'sinon';
+import apdsIndex from './index.js';
 
 tap.test('auth endpoint setup', async endpointTest => {
   const app = {};
-  const activitiesEndpoint = sinon.spy();
-  const rolesEndpoint = sinon.spy();
-  const statesEndpoint = sinon.spy();
-  const certificationsEndpoint = sinon.spy();
+  const activitiesEndpoint = spy();
+  const rolesEndpoint = spy();
+  const statesEndpoint = spy();
+  const certificationsEndpoint = spy();
 
   apdsIndex(
     app,

@@ -1,4 +1,4 @@
-import knex from './knex';
+import knex from './knex.js';
 
 export const getStateProfile = async (stateID, { db = knex } = {}) => {
   const profile = await db('states')

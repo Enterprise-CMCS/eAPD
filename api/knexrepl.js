@@ -8,8 +8,8 @@
 // knex> .exit
 
 import repl from 'repl';
-import knex from './db/knex';
-import db from './db';
+import knex from './db/knex.js';
+import * as db from './db/index.js';
 
 require('dotenv').config();
 

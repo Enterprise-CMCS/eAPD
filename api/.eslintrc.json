@@ -1,25 +1,30 @@
 {
+  "extends": ["eslint:recommended", "plugin:import/recommended", "prettier"],
   "parserOptions": {
-    "ecmaVersion": 2020
-  },
-  "extends": ["airbnb-base", "prettier"],
-  "rules": {
-    "arrow-body-style": "off",
-    "prefer-destructuring": [0]
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "env": {
     "node": true,
     "es6": true
   },
-  "globals": {
-    "window": true,
-    "utag": true
+  "rules": {
+    "arrow-body-style": "off",
+    "no-param-reassign": [2, { "props": false }],
+    "prefer-destructuring": [0],
+    "import/extensions": ["error", "ignorePackages"]
   },
   "overrides": [
     {
       "files": ["**/*.test.js", "**/*.endpoint.js", "endpoint-tests/utils.js"],
       "env": {
         "jest": true
+      },
+      "rules": {
+        "import/named": "off"
       }
     }
   ]

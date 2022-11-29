@@ -1,5 +1,5 @@
 import tap from 'tap';
-import knex from './knex';
+import knex from './knex.js';
 
 tap.test('database wrappers / oktaUsers', async dbTest => {
   // This test will NOT succeed unless there is a valid DB in scope.

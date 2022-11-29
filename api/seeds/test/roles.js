@@ -1,4 +1,4 @@
-import { getAllActiveRoles, getAllActivities } from '../../db/roles';
+import { getAllActiveRoles, getAllActivities } from '../../db/roles.js';
 
 const seed = async knex => {
   await knex('auth_roles').insert({ isActive: true, name: 'eAPD Tester' });

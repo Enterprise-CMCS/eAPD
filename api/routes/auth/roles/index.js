@@ -1,5 +1,5 @@
-import loggerFactory from '../../../logger';
-import get from './get';
+import loggerFactory from '../../../logger/index.js';
+import get from './get.js';
 
 const logger = loggerFactory('auth roles route index');
 

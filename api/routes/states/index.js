@@ -1,6 +1,6 @@
-import loggerFactory from '../../logger';
-import get from './get';
-import affiliations from './affilitations/index';
+import loggerFactory from '../../logger/index.js';
+import get from './get.js';
+import affiliations from './affilitations/index.js';
 
 const logger = loggerFactory('state route index');
 

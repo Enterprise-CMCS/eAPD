@@ -1,10 +1,10 @@
 /* eslint-disable global-require, no-shadow */
 import tap from 'tap';
 
-import sinon from 'sinon';
+import { createSandbox, stub } from 'sinon';
 import jwt from 'jsonwebtoken';
 
-const sandbox = sinon.createSandbox();
+const sandbox = createSandbox();
 const mockVerifier = sandbox.stub();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'SOME_SECRET_VALUE_SHHHHH';
@@ -17,7 +17,7 @@ tap.test('Okta jwtUtils', async t => {
   });
 
   t.test('verifyWebToken()', async t => {
-    const { verifyWebToken } = require('./jwtUtils');
+    const { verifyWebToken } = require('./jwtUtils.js');
 
     t.test('given a valid JWT', async t => {
       const claims = { email: 'test@email.com' };
@@ -38,7 +38,7 @@ tap.test('Okta jwtUtils', async t => {
   });
 
   t.test('jwtExtractor() Authorization test', async t => {
-    const { jwtExtractor } = require('./jwtUtils');
+    const { jwtExtractor } = require('./jwtUtils.js');
     let request;
 
     t.beforeEach(async () => {
@@ -65,7 +65,7 @@ tap.test('Okta jwtUtils', async t => {
   });
 
   t.test('jwtExtractor() Cookie test', async t => {
-    const { jwtExtractor } = require('./jwtUtils');
+    const { jwtExtractor } = require('./jwtUtils.js');
     let request;
 
     t.beforeEach(async () => {
@@ -131,7 +131,7 @@ tap.test('Local jwtUtils', async t => {
     exchangeToken,
     updateUserToken,
     changeState
-  } = require('./jwtUtils');
+  } = require('./jwtUtils.js');
 
   const payload = {
     user: 'Test User',
@@ -304,10 +304,10 @@ tap.test('Local jwtUtils', async t => {
   });
 
   t.test('tokenExchanger works', async t => {
-    const extractor = sinon.stub();
-    const verifier = sinon.stub();
-    const getUser = sinon.stub();
-    const auditUserLogin = sinon.stub();
+    const extractor = stub();
+    const verifier = stub();
+    const getUser = stub();
+    const auditUserLogin = stub();
 
     const req = { jwt: 'AAAA.BBBB.DDDD' };
     const claims = { uid: '1234' };
@@ -315,7 +315,7 @@ tap.test('Local jwtUtils', async t => {
     extractor.withArgs(req).returns(req.jwt);
     verifier.withArgs(req.jwt).resolves(claims);
     const { uid, ...additionalValues } = claims;
-    getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+    getUser.withArgs(uid, true, { additionalValues }).returns(claims);
     auditUserLogin.resolves();
 
     const user = await exchangeToken(req, {
@@ -336,10 +336,10 @@ tap.test('Local jwtUtils', async t => {
   t.test(
     'tokenExchanger returns null if there is no JWT in the req',
     async t => {
-      const extractor = sinon.stub();
-      const oktaVerify = sinon.stub();
-      const getUser = sinon.stub();
-      const auditUserLogin = sinon.stub();
+      const extractor = stub();
+      const oktaVerify = stub();
+      const getUser = stub();
+      const auditUserLogin = stub();
 
       const req = { jwt: 'AAAA.BBBB.DDDD' };
       const claims = { uid: '1234' };
@@ -347,7 +347,7 @@ tap.test('Local jwtUtils', async t => {
       extractor.withArgs(req).returns(false);
       oktaVerify.withArgs(req.jwt).returns(claims);
       const { uid, ...additionalValues } = claims;
-      getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+      getUser.withArgs(uid, true, { additionalValues }).returns(claims);
       auditUserLogin.resolves();
 
       const user = await exchangeToken(req, {
@@ -367,10 +367,10 @@ tap.test('Local jwtUtils', async t => {
   );
 
   t.test("tokenExchanger returns null if okta doesn't validate it", async t => {
-    const extractor = sinon.stub();
-    const verifier = sinon.stub();
-    const getUser = sinon.stub();
-    const auditUserLogin = sinon.stub();
+    const extractor = stub();
+    const verifier = stub();
+    const getUser = stub();
+    const auditUserLogin = stub();
 
     const req = { jwt: 'AAAA.BBBB.DDDD' };
     const claims = { uid: '1234' };
@@ -378,7 +378,7 @@ tap.test('Local jwtUtils', async t => {
     extractor.withArgs(req).returns(req.jwt);
     verifier.withArgs(req.jwt).resolves(false);
     const { uid, ...additionalValues } = claims;
-    getUser.withArgs(claims.uid, true, { additionalValues }).returns(claims);
+    getUser.withArgs(uid, true, { additionalValues }).returns(claims);
     auditUserLogin.resolves();
 
     const user = await exchangeToken(req, {
@@ -397,9 +397,9 @@ tap.test('Local jwtUtils', async t => {
   });
 
   t.test('updateUserToken works', async t => {
-    const extractor = sinon.stub();
-    const verifier = sinon.stub();
-    const getUser = sinon.stub();
+    const extractor = stub();
+    const verifier = stub();
+    const getUser = stub();
 
     const req = { jwt: 'AAAA.BBBB.DDDD' };
     const user = { id: '1234' };
@@ -407,7 +407,7 @@ tap.test('Local jwtUtils', async t => {
     extractor.withArgs(req).returns(req.jwt);
     verifier.withArgs(req.jwt).resolves(user);
     const { id, ...additionalValues } = user;
-    getUser.withArgs(user.id, true, { additionalValues }).returns(user);
+    getUser.withArgs(id, true, { additionalValues }).returns(user);
 
     const updatedUser = await updateUserToken(req, {
       extractor,
@@ -427,9 +427,9 @@ tap.test('Local jwtUtils', async t => {
   t.test(
     'updateUserToken returns null if there is no JWT in the req',
     async t => {
-      const extractor = sinon.stub();
-      const oktaVerify = sinon.stub();
-      const getUser = sinon.stub();
+      const extractor = stub();
+      const oktaVerify = stub();
+      const getUser = stub();
 
       const req = { jwt: 'AAAA.BBBB.DDDD' };
       const user = { uid: '1234' };
@@ -437,7 +437,7 @@ tap.test('Local jwtUtils', async t => {
       extractor.withArgs(req).returns(false);
       oktaVerify.withArgs(req.jwt).returns(user);
       const { id, ...additionalValues } = user;
-      getUser.withArgs(user.id, true, { additionalValues }).returns(user);
+      getUser.withArgs(id, true, { additionalValues }).returns(user);
 
       const newUser = await updateUserToken(req, {
         extractor,
@@ -455,9 +455,9 @@ tap.test('Local jwtUtils', async t => {
   t.test(
     "updateUserToken returns null if eAPD verifier doesn't validate it",
     async t => {
-      const extractor = sinon.stub();
-      const verifier = sinon.stub();
-      const getUser = sinon.stub();
+      const extractor = stub();
+      const verifier = stub();
+      const getUser = stub();
 
       const req = { jwt: 'AAAA.BBBB.DDDD' };
       const user = { uid: '1234' };
@@ -465,7 +465,7 @@ tap.test('Local jwtUtils', async t => {
       extractor.withArgs(req).returns(req.jwt);
       verifier.withArgs(req.jwt).resolves(false);
       const { uid, ...additionalValues } = user;
-      getUser.withArgs(user.uid, true, { additionalValues }).returns(user);
+      getUser.withArgs(uid, true, { additionalValues }).returns(user);
 
       const newUser = await updateUserToken(req, {
         extractor,
@@ -481,8 +481,8 @@ tap.test('Local jwtUtils', async t => {
   );
 
   t.test('Change State of a token', async t => {
-    const populateUserRole = sinon.stub();
-    const auditUserLogin = sinon.stub();
+    const populateUserRole = stub();
+    const auditUserLogin = stub();
 
     const newPermissions = [
       'new-draft',

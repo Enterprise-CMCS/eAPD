@@ -1,7 +1,6 @@
-import { loggedIn } from '../../../middleware/auth';
-import { can } from '../../../middleware';
-import loggerFactory from '../../../logger';
-import { getStateAdminCertifications as adminCertificatons } from '../../../db/certifications';
+import { can, loggedIn } from '../../../middleware/index.js';
+import loggerFactory from '../../../logger/index.js';
+import { getStateAdminCertifications as adminCertificatons } from '../../../db/certifications.js';
 
 const logger = loggerFactory('auth certifications get');
 

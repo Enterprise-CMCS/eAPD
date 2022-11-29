@@ -1,15 +1,15 @@
-import sinon from 'sinon';
+import { createSandbox } from 'sinon';
 import tap from 'tap';
 
 import {
   userApplicationProfileUrl,
   actualVerifyJWT as verifyJWT
-} from './oktaAuth';
+} from './oktaAuth.js';
 
 const { OKTA_CLIENT_ID } = process.env;
 
 tap.test('okta wrappers', async oktaTests => {
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
 
   oktaTests.beforeEach(async () => {
     sandbox.resetBehavior();

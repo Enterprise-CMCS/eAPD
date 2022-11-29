@@ -1,11 +1,11 @@
 import chalk from 'chalk'; // eslint-disable-line import/no-unresolved
-import loggerFactory from '../../logger';
+import loggerFactory from '../../logger/index.js';
 import {
   activities,
   roles,
   roleToActivityMappings,
   activeRoles
-} from '../../util/roles';
+} from '../../util/roles.js';
 
 const logger = loggerFactory('roles seeder');
 

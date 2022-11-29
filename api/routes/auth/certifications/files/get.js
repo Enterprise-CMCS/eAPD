@@ -1,9 +1,8 @@
 import ft from 'file-type';
-import { loggedIn } from '../../../../middleware/auth';
-import { can } from '../../../../middleware';
-import loggerFactory from '../../../../logger';
+import { can, loggedIn } from '../../../../middleware/index.js';
+import loggerFactory from '../../../../logger/index.js';
+import generateName from '../../../../util/fileUtils.js';
 import { getFile as get } from '../../../../files/index.cjs';
-import generateName from '../../../../util/fileUtils';
 
 const logger = loggerFactory('auth certifications get');
 

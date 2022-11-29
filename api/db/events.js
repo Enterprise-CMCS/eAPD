@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import loggerFactory from '../logger';
-import knex from './knex';
+import loggerFactory from '../logger/index.js';
+import knex from './knex.js';
 
 const logger = loggerFactory('event management');
 

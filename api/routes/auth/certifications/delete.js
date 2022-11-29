@@ -1,7 +1,6 @@
-import { loggedIn } from '../../../middleware/auth';
-import { can } from '../../../middleware';
-import loggerFactory from '../../../logger';
-import { archiveStateAdminCertification as archiveCertification } from '../../../db/certifications';
+import { can, loggedIn } from '../../../middleware/index.js';
+import loggerFactory from '../../../logger/index.js';
+import { archiveStateAdminCertification as archiveCertification } from '../../../db/certifications.js';
 
 const logger = loggerFactory('auth certifications delete');
 

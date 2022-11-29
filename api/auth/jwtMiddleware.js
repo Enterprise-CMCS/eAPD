@@ -1,5 +1,5 @@
-import { jwtExtractor, verifyEAPDToken } from './jwtUtils';
-import loggerFactory from '../logger';
+import { jwtExtractor, verifyEAPDToken } from './jwtUtils.js';
+import loggerFactory from '../logger/index.js';
 
 const logger = loggerFactory('jwt middleware');
 

@@ -1,7 +1,10 @@
-import loggerFactory from '../../../logger';
-import { can, userCanEditAPD } from '../../../middleware';
-import { validateImage as vf } from '../../../util/fileValidation';
-import { createNewFileForAPD as cf, deleteFileByID as df } from '../../../db';
+import loggerFactory from '../../../logger/index.js';
+import { can, userCanEditAPD } from '../../../middleware/index.js';
+import { validateImage as vf } from '../../../util/fileValidation.js';
+import {
+  createNewFileForAPD as cf,
+  deleteFileByID as df
+} from '../../../db/index.js';
 import { putFile as put } from '../../../files/index.cjs';
 
 const logger = loggerFactory('apds file routes');

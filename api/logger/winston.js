@@ -1,9 +1,9 @@
-import '../env';
+import '../env.js';
 import fs from 'fs';
 import winston from 'winston';
-import { name as packageName } from '../package.json';
 
 const { LOG_CONSOLE, LOG_FILE, LOG_LEVEL } = process.env;
+const packageName = 'api';
 
 const formats = [
   winston.format.colorize(),

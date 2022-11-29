@@ -1,5 +1,5 @@
 const {
-  activitiesDashboard,
+  // activitiesDashboard,
   activitySummary,
   activityDescription,
   apdOverview,
@@ -23,7 +23,7 @@ const {
   privateContractor,
   standardsAndConditions,
   statePersonnel
-} = require('./index');
+} = require('./index.js');
 
 const Joi = require('joi');
 

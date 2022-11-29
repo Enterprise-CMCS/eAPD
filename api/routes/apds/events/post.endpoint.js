@@ -5,8 +5,8 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../../endpoint-tests/utils';
-import { akAPDId, badAPDId } from '../../../seeds/test/apds';
+} from '../../../endpoint-tests/utils.js';
+import { akAPDId, badAPDId } from '../../../seeds/test/apds.js';
 
 describe('APD events endpoints', () => {
   describe('Record an event associated with an APD | POST /apds/:id/events', () => {

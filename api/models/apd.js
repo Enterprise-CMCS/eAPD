@@ -1,4 +1,4 @@
-import './budget';
+import './budget.js';
 import mongoose from 'mongoose';
 import { generateKey } from '@cms-eapd/common';
 

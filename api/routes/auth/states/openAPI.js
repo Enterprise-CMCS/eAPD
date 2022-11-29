@@ -1,4 +1,4 @@
-import { requiresAuth, jsonResponse } from '../../openAPI/helpers';
+import { requiresAuth, jsonResponse } from '../../openAPI/helpers.js';
 
 const jwtObjectSchema = {
   type: 'object',

@@ -1,27 +1,27 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import endpointIndex from './index';
+import { spy, match } from 'sinon';
+import endpointIndex from './index.js';
 
 tap.test('endpoint setup', async endpointTest => {
   const app = {
-    get: sinon.spy(),
-    use: sinon.spy()
+    get: spy(),
+    use: spy()
   };
   const res = {
-    send: sinon.spy()
+    send: spy()
   };
 
-  const affiliationsEndpoint = sinon.spy();
-  const apdsEndpoint = sinon.spy();
-  const apdsEventsEndpoint = sinon.spy();
-  const apdsFilesEndpoint = sinon.spy();
-  const authEndpoint = sinon.spy();
-  const docsEndpoint = sinon.spy();
-  const meEndpoint = sinon.spy();
-  const rolesEndpoint = sinon.spy();
-  const statesEndpoint = sinon.spy();
-  const stateAffiliationEndpoint = sinon.spy();
-  const usersEndpoint = sinon.spy();
+  const affiliationsEndpoint = spy();
+  const apdsEndpoint = spy();
+  const apdsEventsEndpoint = spy();
+  const apdsFilesEndpoint = spy();
+  const authEndpoint = spy();
+  const docsEndpoint = spy();
+  const meEndpoint = spy();
+  const rolesEndpoint = spy();
+  const statesEndpoint = spy();
+  const stateAffiliationEndpoint = spy();
+  const usersEndpoint = spy();
   const openAPI = {};
 
   endpointIndex(app, {
@@ -86,7 +86,7 @@ tap.test('endpoint setup', async endpointTest => {
   );
 
   endpointTest.ok(
-    app.get.calledWith('/open-api', sinon.match.func),
+    app.get.calledWith('/open-api', match.func),
     'sets up an endpoint to fetch OpenAPI spec'
   );
 

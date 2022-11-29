@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
-import loggerFactory from '../../logger';
-import states from '../../util/states';
+import loggerFactory from '../../logger/index.js';
+import states from '../../util/states.js';
 
 const logger = loggerFactory('user seeder');
 

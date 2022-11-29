@@ -1,8 +1,8 @@
 import axios from 'axios';
 import FormData from 'form-data';
 import knex from 'knex';
-import knexConfig from '../knexfile';
-import loggerFactory from '../logger';
+import knexConfig from '../knexfile.js';
+import loggerFactory from '../logger/index.js';
 
 const logger = loggerFactory('endpoint-utils');
 

@@ -2,7 +2,7 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../../endpoint-tests/utils';
+} from '../../../endpoint-tests/utils.js';
 
 describe('auth activities endpoint | GET /auth/activities', () => {
   const url = '/auth/activities';

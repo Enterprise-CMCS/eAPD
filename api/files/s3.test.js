@@ -1,11 +1,11 @@
-import sinon from 'sinon';
+import { createSandbox } from 'sinon';
 import tap from 'tap';
 
-const sandbox = sinon.createSandbox();
+const sandbox = createSandbox();
 
 const getModule = () => {
   delete require.cache[require.resolve('./s3')];
-  return require('./s3'); // eslint-disable-line global-require
+  return require('./s3.js'); // eslint-disable-line global-require
 };
 
 tap.test('AWS S3 file storage module', async tests => {

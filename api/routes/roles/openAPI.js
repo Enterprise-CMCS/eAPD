@@ -1,4 +1,4 @@
-import { requiresAuth, jsonResponse, arrayOf } from '../openAPI/helpers';
+import { requiresAuth, jsonResponse, arrayOf } from '../openAPI/helpers.js';
 
 const id = {
   type: 'integer',

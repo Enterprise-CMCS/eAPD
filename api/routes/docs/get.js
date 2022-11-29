@@ -1,4 +1,4 @@
-import loggerFactory from '../../logger';
+import loggerFactory from '../../logger/index.js';
 import { getFile as get } from '../../files/index.cjs';
 
 const logger = loggerFactory('document routes');

@@ -1,5 +1,5 @@
-import loggerFactory from '../../../logger';
-import post from './post';
+import loggerFactory from '../../../logger/index.js';
+import post from './post.js';
 
 const logger = loggerFactory('apds/events route index');
 

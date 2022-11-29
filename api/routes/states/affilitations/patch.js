@@ -1,7 +1,7 @@
-import auditor, { actions } from '../../../audit';
-import loggerFactory from '../../../logger';
-import { can, validForState } from '../../../middleware';
-import { updateAuthAffiliation } from '../../../db/affiliations';
+import auditor, { actions } from '../../../audit.js';
+import loggerFactory from '../../../logger/index.js';
+import { can, validForState } from '../../../middleware/index.js';
+import { updateAuthAffiliation } from '../../../db/affiliations.js';
 
 const logger = loggerFactory('affiliations');
 

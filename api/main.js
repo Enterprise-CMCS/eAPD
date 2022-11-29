@@ -1,5 +1,5 @@
-import loggerFactory from './logger/index';
-import api from './api';
+import loggerFactory from './logger/index.js';
+import api from './api.js';
 
 const logger = loggerFactory('main');
 

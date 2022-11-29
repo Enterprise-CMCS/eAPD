@@ -5,8 +5,8 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../../endpoint-tests/utils';
-import { getAllActiveRoles } from '../../../db/roles';
+} from '../../../endpoint-tests/utils.js';
+import { getAllActiveRoles } from '../../../db/roles.js';
 
 describe('Affiliations endpoint | PATCH', () => {
   const db = getDB();

@@ -1,6 +1,6 @@
-import loggerFactory from '../../logger';
-import { can, userCanEditAPD } from '../../middleware';
-import { deleteAPDByID as da } from '../../db';
+import loggerFactory from '../../logger/index.js';
+import { can, userCanEditAPD } from '../../middleware/index.js';
+import { deleteAPDByID as da } from '../../db/index.js';
 
 const logger = loggerFactory('apds route get');
 

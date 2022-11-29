@@ -1,10 +1,10 @@
-import loggerFactory from '../../logger';
+import loggerFactory from '../../logger/index.js';
 import {
   verifyEAPDToken,
   exchangeToken,
   updateUserToken,
   verifyWebToken
-} from '../../auth/jwtUtils';
+} from '../../auth/jwtUtils.js';
 
 const logger = loggerFactory('me route get');
 

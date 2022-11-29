@@ -1,7 +1,7 @@
 import { addYears, format } from 'date-fns';
-import { raw as knex } from '../../../db';
-import { loggedIn } from '../../../middleware/auth';
-import loggerFactory from '../../../logger';
+import { raw as knex } from '../../../db/index.js';
+import { loggedIn } from '../../../middleware/index.js';
+import loggerFactory from '../../../logger/index.js';
 
 const logger = loggerFactory('affiliations route post');
 

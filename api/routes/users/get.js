@@ -1,5 +1,5 @@
-import { getAllUsers as ga, getUserByID as gu } from '../../db';
-import { can } from '../../middleware';
+import { getAllUsers as ga, getUserByID as gu } from '../../db/index.js';
+import { can } from '../../middleware/index.js';
 
 export default (app, { getAllUsers = ga, getUserByID = gu } = {}) => {
   app.get('/users', can('view-users'), async (req, res, next) => {

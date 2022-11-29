@@ -5,8 +5,8 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../endpoint-tests/utils';
-import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds';
+} from '../../endpoint-tests/utils.js';
+import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();

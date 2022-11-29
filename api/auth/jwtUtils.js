@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken'; // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
-import { verifyJWT } from './oktaAuth';
-import { getUserByID, populateUserRole, userLoggedIntoState } from '../db';
+import { verifyJWT } from './oktaAuth.js';
+import {
+  getUserByID,
+  populateUserRole,
+  userLoggedIntoState
+} from '../db/index.js';
 
 /**
  * Returns the payload from the signed JWT, or false.

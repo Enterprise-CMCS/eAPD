@@ -1,5 +1,5 @@
 import fs from 'fs';
-import loggerFactory from '../logger';
+import loggerFactory from '../logger/index.js';
 
 const logger = loggerFactory('endpoint coverage middleware');
 

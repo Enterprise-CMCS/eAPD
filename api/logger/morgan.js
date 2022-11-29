@@ -1,5 +1,5 @@
 import morgan from 'morgan';
-import logger from './winston';
+import logger from './winston.js';
 
 // https://www.npmjs.com/package/morgan#tokens
 morgan.token('id', req => req.id);

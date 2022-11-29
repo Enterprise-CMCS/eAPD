@@ -1,6 +1,6 @@
 import tap from 'tap';
-import dbMock from './dbMock.test';
-import { getAllActiveRoles } from './roles';
+import dbMock from './dbMock.test.js';
+import { getAllActiveRoles } from './roles.js';
 
 const allRoles = [
   {

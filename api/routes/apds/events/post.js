@@ -1,6 +1,6 @@
-import loggerFactory from '../../../logger';
-import { can, userCanAccessAPD } from '../../../middleware';
-import { createEventForAPD as ce } from '../../../db';
+import loggerFactory from '../../../logger/index.js';
+import { can, userCanAccessAPD } from '../../../middleware/index.js';
+import { createEventForAPD as ce } from '../../../db/index.js';
 
 const logger = loggerFactory('apd event routes');
 

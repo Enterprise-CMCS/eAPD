@@ -5,8 +5,13 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../../endpoint-tests/utils';
-import { mnAPDId, akAPDId, akAPD2Id, badAPDId } from '../../../seeds/test/apds';
+} from '../../../endpoint-tests/utils.js';
+import {
+  mnAPDId,
+  akAPDId,
+  akAPD2Id,
+  badAPDId
+} from '../../../seeds/test/apds.js';
 
 describe('APD files endpoints', () => {
   describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {

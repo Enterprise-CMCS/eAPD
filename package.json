@@ -18,7 +18,7 @@
   "scripts": {
     "clean": "rm -rf yarn.lock node_modules */node_modules",
     "audit": "npx audit-ci --config ./audit-ci.json",
-    "build": "yarn workspaces run build",
+    "build": "yarn workspace @cms-eapd/web build",
     "lint": "yarn workspaces run lint",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\" --config \".prettierrc\"",
     "npm-check": "npx npm-check-updates",

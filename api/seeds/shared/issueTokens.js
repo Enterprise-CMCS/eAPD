@@ -1,5 +1,5 @@
-import { getUserByID } from '../../db';
-import { sign, getDefaultOptions } from '../../auth/jwtUtils';
+import { getUserByID } from '../../db/index.js';
+import { sign, getDefaultOptions } from '../../auth/jwtUtils.js';
 
 const issueTokens = async oktaUsers => {
   const response = {};

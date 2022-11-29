@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import mnAPD from './01-mnAPD';
-import akAPD from './02-akAPD';
-import finalAPD from './03-finalAPD';
+import mnAPD from './01-mnAPD.js';
+import akAPD from './02-akAPD.js';
+import finalAPD from './03-finalAPD.js';
 
 const ObjectId = mongoose.Types.ObjectId;
 

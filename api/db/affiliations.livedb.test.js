@@ -1,6 +1,6 @@
 import tap from 'tap';
-import knex from './knex';
-import { getAffiliationMatches } from './affiliations';
+import knex from './knex.js';
+import { getAffiliationMatches } from './affiliations.js';
 
 const setupDB = async (oktaUsers, authAffiliations) => {
   await knex('okta_users').insert(oktaUsers);

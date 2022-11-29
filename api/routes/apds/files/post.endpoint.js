@@ -4,13 +4,13 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../../endpoint-tests/utils';
+} from '../../../endpoint-tests/utils.js';
 import {
   mnAPDId,
   akAPDId,
   finalAPDId,
   badAPDId
-} from '../../../seeds/test/apds';
+} from '../../../seeds/test/apds.js';
 
 describe('APD files endpoints', () => {
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {

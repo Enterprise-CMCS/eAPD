@@ -1,6 +1,6 @@
 import tap from 'tap';
-import * as local from './local';
-import * as s3 from './s3';
+import * as local from './local.js';
+import * as s3 from './s3.js';
 
 const getModule = () => {
   delete require.cache[require.resolve('./index')];

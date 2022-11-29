@@ -1,10 +1,10 @@
-import loggerFactory from '../../logger';
-import del from './delete';
-import get from './get';
-import patch from './patch';
-import post from './post';
-import files from './files/index';
-import events from './events/index';
+import loggerFactory from '../../logger/index.js';
+import del from './delete.js';
+import get from './get.js';
+import patch from './patch.js';
+import post from './post.js';
+import files from './files/index.js';
+import events from './events/index.js';
 
 const logger = loggerFactory('apds route index');
 

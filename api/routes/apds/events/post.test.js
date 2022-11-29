@@ -1,10 +1,10 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import { can, userCanAccessAPD } from '../../../middleware';
-import endpoints from './post';
+import { createSandbox, match } from 'sinon';
+import { can, userCanAccessAPD } from '../../../middleware/index.js';
+import endpoints from './post.js';
 
 tap.test('apds events endpoints', async endpointTest => {
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
   const app = { post: sandbox.stub() };
 
   const di = {
@@ -34,7 +34,7 @@ tap.test('apds events endpoints', async endpointTest => {
         '/apds/:id/events',
         can('view-document'),
         userCanAccessAPD(),
-        sinon.match.func
+        match.func
       ),
       'endpoint for posting APD events is setup'
     );

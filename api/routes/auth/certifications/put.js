@@ -1,8 +1,7 @@
-import { loggedIn } from '../../../middleware/auth';
-import { can } from '../../../middleware';
-import loggerFactory from '../../../logger';
-import { matchStateAdminCertification as matchCertification } from '../../../db/certifications';
-import { getAllActiveRoles as getActiveRoles } from '../../../db/roles';
+import { can, loggedIn } from '../../../middleware/index.js';
+import loggerFactory from '../../../logger/index.js';
+import { matchStateAdminCertification as matchCertification } from '../../../db/certifications.js';
+import { getAllActiveRoles as getActiveRoles } from '../../../db/roles.js';
 
 const logger = loggerFactory('auth certifications put');
 

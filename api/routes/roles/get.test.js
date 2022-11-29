@@ -1,10 +1,10 @@
 import tap from 'tap';
-import sinon from 'sinon';
-import { can } from '../../middleware';
-import getEndpoint from './get';
-import mockExpress from '../../util/mockExpress';
-import mockResponse from '../../util/mockResponse';
-import { activeRoles } from '../../util/roles';
+import { stub, match } from 'sinon';
+import { can } from '../../middleware/index.js';
+import getEndpoint from './get.js';
+import mockExpress from '../../util/mockExpress.js';
+import mockResponse from '../../util/mockResponse.js';
+import { activeRoles } from '../../util/roles.js';
 
 let app;
 let res;
@@ -16,15 +16,15 @@ tap.test('GET /roles', async endpointTest => {
   endpointTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    getAllActiveRoles = sinon.stub();
+    next = stub();
+    getAllActiveRoles = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/roles', can('view-roles'), sinon.match.func),
+      app.get.calledWith('/roles', can('view-roles'), match.func),
       'roles GET endpoint is registered'
     );
   });

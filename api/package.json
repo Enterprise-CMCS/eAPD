@@ -102,7 +102,7 @@
     "rootDir": "./",
     "testRegex": ".*.endpoint.(j|t)s[x]?$",
     "transform": {
-      "\\.endpoint.[jt]sx?$": "babel-jest"
+      "\\.[jt]sx?$": "babel-jest"
     },
     "testEnvironment": "node",
     "testTimeout": 30000,

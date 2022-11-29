@@ -1,9 +1,9 @@
 import { format } from 'date-fns';
 import fs from 'fs';
-import loggerFactory from '../../logger';
-import { oktaClient } from '../../auth/oktaAuth';
-import createUsersToAdd from '../shared/set-up-users';
-import issueTokens from '../shared/issueTokens';
+import loggerFactory from '../../logger/index.js';
+import { oktaClient } from '../../auth/oktaAuth.js';
+import createUsersToAdd from '../shared/set-up-users.js';
+import issueTokens from '../shared/issueTokens.js';
 
 const logger = loggerFactory('user seeder');
 

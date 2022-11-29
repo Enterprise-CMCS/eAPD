@@ -1,9 +1,9 @@
-import loggerFactory from '../../../logger';
-import files from './files';
-import post from './post';
-import put from './put';
-import get from './get';
-import del from './delete';
+import loggerFactory from '../../../logger/index.js';
+import files from './files/index.js';
+import post from './post.js';
+import put from './put.js';
+import get from './get.js';
+import del from './delete.js';
 
 const logger = loggerFactory('auth certifications route index');
 

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   coverageDirectory: './coverage-endpoint/',
   rootDir: './',
   testMatch: ['**/*.test.{js,jsx}'],

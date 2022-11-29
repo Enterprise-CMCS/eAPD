@@ -1,6 +1,6 @@
-import isPast from 'date-fns/isPast';
-import { oktaClient } from '../auth/oktaAuth';
-import knex from './knex';
+import { isPast } from 'date-fns';
+import { oktaClient } from '../auth/oktaAuth.js';
+import knex from './knex.js';
 
 import {
   getUserAffiliatedStates as actualGetUserAffiliatedStates,
@@ -9,11 +9,11 @@ import {
   getRolesAndActivities as actualGetRolesAndActivities,
   auditUserLogin as actualAuditUserLogin,
   getAuthRoleByName as actualGetAuthRoleByName
-} from './auth';
+} from './auth.js';
 
-import { updateAuthAffiliation as actualUpdateAuthAffiliation } from './affiliations';
-import { getStateById as actualGetStateById } from './states';
-import { createOrUpdateOktaUser, getOktaUser } from './oktaUsers';
+import { updateAuthAffiliation as actualUpdateAuthAffiliation } from './affiliations.js';
+import { getStateById as actualGetStateById } from './states.js';
+import { createOrUpdateOktaUser, getOktaUser } from './oktaUsers.js';
 
 export const sanitizeUser = user => ({
   id: user.id,

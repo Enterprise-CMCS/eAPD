@@ -5,7 +5,7 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../../../endpoint-tests/utils';
+} from '../../../../endpoint-tests/utils.js';
 
 describe('auth/certifications/files endpoints', () => {
   describe('Upload a state certification letter/file | POST /auth/certifications/files', () => {

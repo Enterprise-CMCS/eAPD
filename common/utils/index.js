@@ -1,4 +1,6 @@
-export * from './budget';
-export * from './formatting';
-export { default as roundedPercents } from './roundedPercents';
-export * from './utils';
+import roundedPercents from './roundedPercents.js';
+
+export * from './budget.js';
+export * from './formatting.js';
+export * from './utils.js';
+export { roundedPercents };

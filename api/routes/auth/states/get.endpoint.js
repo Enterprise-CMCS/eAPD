@@ -1,4 +1,4 @@
-import { actualVerifyEAPDToken } from '../../../auth/jwtUtils';
+import { actualVerifyEAPDToken } from '../../../auth/jwtUtils.js';
 import {
   getDB,
   setupDB,
@@ -6,7 +6,7 @@ import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} from '../../../endpoint-tests/utils';
+} from '../../../endpoint-tests/utils.js';
 
 describe('auth roles endpoint get endpoint', () => {
   describe('GET /auth/state/:stateId', () => {

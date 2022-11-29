@@ -4,7 +4,7 @@ import {
   teardownDB,
   login,
   unauthenticatedTest
-} from '../../endpoint-tests/utils';
+} from '../../endpoint-tests/utils.js';
 
 const url = '/me';
 

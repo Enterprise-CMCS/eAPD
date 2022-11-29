@@ -1,4 +1,4 @@
-import sinon from 'sinon';
+import { useFakeTimers, stub } from 'sinon';
 import tap from 'tap';
 
 import {
@@ -9,11 +9,11 @@ import {
   getAPDByIDAndState,
   updateAPDDocument,
   adminCheckAPDDocument
-} from './apds';
+} from './apds.js';
 
-import { setup, teardown } from './mongodb';
-import { akAPD, akAPDNoActivities } from '../seeds/development/apds';
-import { APD, Budget } from '../models/index';
+import { setup, teardown } from './mongodb.js';
+import { akAPD, akAPDNoActivities } from '../seeds/development/apds.js';
+import { APD, Budget } from '../models/index.js';
 
 const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
 let clock;
@@ -33,7 +33,7 @@ tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.before(async () => {
     // Trisha Elric, Edward and Alfonse's mother, dies of complications from
     // a plague, kicking off the Elric brothers' quest for human transmutation.
-    clockStub = sinon.stub(Date, 'now').returns(nowDate);
+    clockStub = stub(Date, 'now').returns(nowDate);
     await setup();
   });
 
@@ -105,7 +105,7 @@ tap.test('database wrappers / apds', async apdsTests => {
 
   apdsTests.test('updating an APD', async updateAPDDocumentTests => {
     updateAPDDocumentTests.beforeEach(() => {
-      clock = sinon.useFakeTimers(nowDate);
+      clock = useFakeTimers(nowDate);
     });
 
     updateAPDDocumentTests.test('with only patch errors', async test => {
@@ -234,7 +234,7 @@ tap.test('database wrappers / apds', async apdsTests => {
     });
 
     updateAPDDocumentTests.test('with a state profile', async test => {
-      const updateProfile = sinon.stub();
+      const updateProfile = stub();
       updateProfile
         .withArgs('co', {
           medicaidDirector: {

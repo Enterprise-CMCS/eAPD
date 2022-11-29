@@ -1,5 +1,5 @@
 import ft from 'file-type';
-import knex from '../db/knex';
+import knex from '../db/knex.js';
 
 const generateFileName = async (buffer, fileId, { db = knex } = {}) => {
   const { ext = null } = await ft.fromBuffer(buffer);
