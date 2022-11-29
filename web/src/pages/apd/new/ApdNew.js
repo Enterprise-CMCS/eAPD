@@ -233,7 +233,7 @@ const ApdNew = ({ createApd: create }) => {
               <Controller
                 name="updateStatus.updateList"
                 control={control}
-                render={({ field: { onBlur, onChange, ...field } }) => (
+                render={({ field: { onBlur, onChange } }) => (
                   <ChoiceList
                     label="Update Type"
                     hint={
