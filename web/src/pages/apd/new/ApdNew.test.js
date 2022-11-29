@@ -195,7 +195,6 @@ describe('<ApdNew />', () => {
             })
           ).toBeChecked();
         });
-        expect(disabledBtn).toBeEnabled();
 
         user.click(
           screen.getByRole('radio', { name: /Yes, it is an update./i })
