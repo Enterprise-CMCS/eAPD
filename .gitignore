@@ -72,3 +72,5 @@ package-lock.json
 */terraform.tfstate*
 *.terraform*
 env_vars.sh
+*/terraform/builds
+*/terraform/legacy/builds
