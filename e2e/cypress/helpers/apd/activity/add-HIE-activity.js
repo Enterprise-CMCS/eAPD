@@ -48,16 +48,27 @@ export const addHIEActivity = years => {
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
 
+      // Fill out Activity Schedule and Milestones
+      cy.findByRole('heading', {
+        name: /^Activity 2:/i,
+        level: 2
+      }).should('exist');
+
+      fillOutActivityPage.fillActivityScheduleAndMilestones(
+        activityData.activityOverview,
+        activityData.milestones
+      );
+
+      cy.waitForSave();
+      cy.get('[id="continue-button"]').click();
+
       // Fill out Outcomes and Metrics
       cy.findByRole('heading', {
         name: /^Activity 2:/i,
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillOutcomesAndMilestones(
-        activityData.outcomes,
-        activityData.milestones
-      );
+      fillOutActivityPage.fillOutcomesAndMetrics(activityData.outcomes);
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
