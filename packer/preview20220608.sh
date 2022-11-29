@@ -70,7 +70,8 @@ gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
 # Install packages
 yum -y install git
 yum -y install epel-release
-yum -y install nginx-1.20.1-9.el7
+yum -y install nginx
+
 yum -y install mongodb-org-5.0.3-1.el7 checkpolicy
 
 # Install CloudWatch Agent

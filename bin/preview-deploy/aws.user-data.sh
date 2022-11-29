@@ -79,7 +79,7 @@ sudo sh -c "echo license_key: '__NEW_RELIC_LICENSE_KEY__' >> /etc/newrelic-infra
 
 
 # Clone from Github
-git clone --single-branch -b __GIT_BRANCH__ https://github.com/CMSgov/eAPD.git
+git clone --single-branch -b __GIT_BRANCH__ https://github.com/Enterprise-CMCS/eAPD.git
 # Build the web app and move it into place
 cd eAPD
 npm i -g yarn@1.22.18
