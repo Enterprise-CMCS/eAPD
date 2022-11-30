@@ -610,7 +610,7 @@ Cypress.Commands.add('checkPageA11y', () => {
 });
 
 // Cypress command to turn on a feature flag for launch darkly
-Cypress.Commands.add('updateFeatureFlags', ({ featureFlags }) => {
+Cypress.Commands.add('updateFeatureFlags', featureFlags => {
   // ignore api calls to events endpoint
   cy.intercept(
     { method: 'POST', hostname: /.*events.launchdarkly.us/ },
