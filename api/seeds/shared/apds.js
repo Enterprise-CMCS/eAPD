@@ -4,7 +4,7 @@ import { createAPD } from '../../db/apds.js';
 import loggerFactory from '../../logger/index.js';
 import { APD, Budget } from '../../models/index.js';
 
-const { data: apdData } = await import(`../${process.env.NODE_ENV}/apds`); // eslint-disable-line import/no-dynamic-require
+const { data: apdData } = await import(`../${process.env.NODE_ENV}/apds.js`);
 
 const logger = loggerFactory('mongoose APD seeder');
 

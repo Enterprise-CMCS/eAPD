@@ -4,6 +4,9 @@
 import colors from 'colors'; // eslint-disable-line import/no-extraneous-dependencies
 import fs from 'fs';
 import openApi from '../routes/openAPI/index.js';
+import path from 'path';
+
+const __dirname = path.resolve();
 
 let endpoints = [];
 if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {

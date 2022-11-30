@@ -4,8 +4,10 @@ import loggerFactory from '../../logger/index.js';
 import { oktaClient } from '../../auth/oktaAuth.js';
 import createUsersToAdd from '../shared/set-up-users.js';
 import issueTokens from '../shared/issueTokens.js';
+import path from 'path';
 
 const logger = loggerFactory('user seeder');
+const __dirname = path.resolve();
 
 const seed = async knex => {
   const { oktaAffiliations, stateCertifications, oktaUsers } =
@@ -30,7 +32,7 @@ const seed = async knex => {
   // save the tokens to a file
   try {
     fs.writeFileSync(
-      `${__dirname}/../test/tokens.json`,
+      `${__dirname}/seeds/test/tokens.json`,
       JSON.stringify(testTokens, null, 4)
     );
   } catch (err) {

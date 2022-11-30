@@ -2,7 +2,6 @@
   "name": "cms-eapd",
   "private": true,
   "version": "4.2.0",
-  "type": "module",
   "description": "APD app for CMS HITECH program",
   "license": "CC0-1.0",
   "repository": {

@@ -8,7 +8,7 @@ import seedAffiliations from './affiliations.js';
 import seedCertifications from './certifications.js';
 import { seed as seedApds } from '../shared/apds.js';
 
-const seed = async knex => {
+export const seed = async knex => {
   // Don't seed this data if we're not in a test environment.
   if (process.env.NODE_ENV !== 'test') {
     return;
