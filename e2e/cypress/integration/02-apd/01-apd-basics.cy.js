@@ -54,14 +54,11 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
-    cy.reload();
     cy.visit(apdUrl);
   });
 
   describe('Create APD', () => {
     it('creates a default new APD and handles changing the name and summary', () => {
-      cy.updateFeatureFlags({ validation: false, enableMmis: false });
       const options = { month: 'long', day: 'numeric', year: 'numeric' };
       const today = new Date();
 
