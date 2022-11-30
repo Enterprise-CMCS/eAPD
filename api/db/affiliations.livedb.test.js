@@ -1,7 +1,7 @@
+const { thisFFY } = require('@cms-eapd/common');
+
 const tap = require('tap');
 const knex = require('./knex');
-
-const { thisFFY } = require('@cms-eapd/common');
 
 const {
   getAffiliationMatches,
