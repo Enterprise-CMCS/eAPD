@@ -10,8 +10,9 @@
 import repl from 'repl';
 import knex from './db/knex.js';
 import * as db from './db/index.js';
+import * as dotenv from 'dotenv';
 
-require('dotenv').config();
+dotenv.config();
 
 const r = repl.start('knex> ');
 const run = async () => {

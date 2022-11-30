@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const standardsConditionsSchema = Joi.object({
   doesNotSupport: Joi.any(),

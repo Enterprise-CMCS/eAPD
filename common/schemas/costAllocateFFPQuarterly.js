@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const costAllocateFFPQuarterlySchema = Joi.object({
   1: Joi.object({

@@ -2,8 +2,8 @@
 /* eslint-disable no-console */
 
 import colors from 'colors'; // eslint-disable-line import/no-extraneous-dependencies
-
 import fs from 'fs';
+import openApi from '../routes/openAPI/index.js';
 
 let endpoints = [];
 if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {
@@ -14,9 +14,7 @@ if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {
 // don't do this, the object could contain undefineds, which
 // can mess up our reporting.  Stringifying and parsing will
 // strip out the undefineds, since those don't survive stringing
-const openAPI = JSON.parse(
-  JSON.stringify(require('../routes/openAPI/index.js'))
-);
+const openAPI = JSON.parse(JSON.stringify(openApi));
 
 Object.entries(openAPI.paths).forEach(([path, pathObj]) => {
   if (!endpoints.some(e => e.openAPIPath === path)) {

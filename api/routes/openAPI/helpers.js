@@ -42,7 +42,7 @@ export const requiresAuth = (
         authed[route][verb].security = [{ bearerAuth: [] }];
       }
 
-      const authResponses = { ...module.exports.responses.unauthed };
+      const authResponses = { ...responses.unauthed };
       if (!has401) {
         authResponses[401] = undefined;
       }

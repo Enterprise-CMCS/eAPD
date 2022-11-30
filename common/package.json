@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "description": "APD app for CMS HITECH program",
-  "main": "index.js",
-  "module": "index.js",
+  "exports": "./index.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
     "stryker": "TZ=utc stryker run",

@@ -1,4 +1,6 @@
-const {
+import Joi from 'joi';
+
+import {
   // activitiesDashboard,
   activitySummary,
   activityDescription,
@@ -23,9 +25,7 @@ const {
   privateContractor,
   standardsAndConditions,
   statePersonnel
-} = require('./index.js');
-
-const Joi = require('joi');
+} from './index.js';
 
 const combinedApdSchema = Joi.object({
   _id: Joi.any(),

@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 export const activityCostAllocationFFP = Joi.object({
   federal: Joi.number().required(),

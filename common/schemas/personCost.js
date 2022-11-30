@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const personCostSchema = Joi.object().pattern(
   /\d{4}/,

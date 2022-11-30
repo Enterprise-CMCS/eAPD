@@ -5,7 +5,7 @@ import {
   createNewFileForAPD as cf,
   deleteFileByID as df
 } from '../../../db/index.js';
-import { putFile as put } from '../../../files/index.cjs';
+import { putFile as put } from '../../../files/index.js';
 
 const logger = loggerFactory('apds file routes');
 

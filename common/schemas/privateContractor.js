@@ -1,4 +1,7 @@
-const Joi = require('joi').extend(require('@joi/date'));
+import DateExtension from '@joi/date';
+import JoiImport from 'joi';
+
+const Joi = JoiImport.extend(DateExtension);
 
 const schemas = Joi.object({
   key: Joi.any(),

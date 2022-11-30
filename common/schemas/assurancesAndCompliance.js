@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const itemSchema = Joi.object({
   checked: Joi.boolean().required().label('checked').messages({

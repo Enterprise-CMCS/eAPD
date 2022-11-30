@@ -1,8 +1,10 @@
 import tap from 'tap';
+import './env.js';
+
+const initialProcessEnv = JSON.parse(JSON.stringify(process.env));
 
 tap.beforeEach(() => {
-  delete require.cache[require.resolve('./env.js')];
-  process.env = {};
+  process.env = { ...initialProcessEnv };
 });
 
 tap.test('environment setup', async envTest => {
@@ -19,7 +21,6 @@ tap.test('environment setup', async envTest => {
   envTest.test(
     'sets default values for known environment variables',
     async test => {
-      require('./env.js'); // eslint-disable-line global-require
       knownEnvironmentVariables.forEach(envVar => {
         test.type(
           process.env[envVar.name],
@@ -48,7 +49,6 @@ tap.test('environment setup', async envTest => {
         ]
       });
 
-      require('./env.js'); // eslint-disable-line global-require
       knownEnvironmentVariables.forEach(envVar => {
         test.same(
           process.env[envVar.name],

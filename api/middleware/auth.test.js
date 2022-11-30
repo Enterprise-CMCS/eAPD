@@ -1,7 +1,8 @@
 import tap from 'tap';
+import { createSandbox } from 'sinon';
 import { loggedIn, can, validForState } from './auth.js';
 
-const sandbox = require('sinon').createSandbox();
+const sandbox = createSandbox();
 
 const res = {
   status: sandbox.stub(),

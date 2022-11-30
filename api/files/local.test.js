@@ -1,13 +1,9 @@
 import systemFs from 'fs';
 import { createSandbox, stub } from 'sinon';
 import tap from 'tap';
+import { getFile, putFile } from './local.js';
 
 const sandbox = createSandbox();
-
-const getModule = () => {
-  delete require.cache[require.resolve('./local')];
-  return require('./local.js'); // eslint-disable-line global-require
-};
 
 tap.test('local file storage module', async tests => {
   const fsExistsSync = sandbox.stub(systemFs, 'existsSync');
@@ -30,7 +26,6 @@ tap.test('local file storage module', async tests => {
     'returns functions that always reject if FILE_PATH is missing',
     async test => {
       delete process.env.FILE_PATH;
-      const { getFile, putFile } = getModule();
 
       test.rejects(() => getFile());
       test.rejects(() => putFile());
@@ -41,16 +36,12 @@ tap.test('local file storage module', async tests => {
     fsExistsSync.returns(false);
     const mkdir = stub(systemFs, 'mkdirSync');
 
-    getModule();
-
     test.ok(mkdir.calledWith('local file path'));
 
     mkdir.restore();
   });
 
   tests.test('can get a file from local storage', async getTests => {
-    const { getFile } = getModule();
-
     getTests.test(
       'rejects if there is an error reading the file',
       async test => {
@@ -69,8 +60,6 @@ tap.test('local file storage module', async tests => {
   });
 
   tests.test('can put a file into local storage', async putTests => {
-    const { putFile } = getModule();
-
     putTests.test(
       'rejects if there is an error writing the file',
       async test => {

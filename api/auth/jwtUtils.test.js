@@ -1,8 +1,17 @@
 /* eslint-disable global-require, no-shadow */
 import tap from 'tap';
-
 import { createSandbox, stub } from 'sinon';
 import jwt from 'jsonwebtoken';
+import {
+  verifyWebToken,
+  jwtExtractor,
+  getDefaultOptions,
+  sign,
+  actualVerifyEAPDToken,
+  exchangeToken,
+  updateUserToken,
+  changeState
+} from './jwtUtils.js';
 
 const sandbox = createSandbox();
 const mockVerifier = sandbox.stub();
@@ -17,8 +26,6 @@ tap.test('Okta jwtUtils', async t => {
   });
 
   t.test('verifyWebToken()', async t => {
-    const { verifyWebToken } = require('./jwtUtils.js');
-
     t.test('given a valid JWT', async t => {
       const claims = { email: 'test@email.com' };
       mockVerifier.returns(claims);
@@ -38,7 +45,6 @@ tap.test('Okta jwtUtils', async t => {
   });
 
   t.test('jwtExtractor() Authorization test', async t => {
-    const { jwtExtractor } = require('./jwtUtils.js');
     let request;
 
     t.beforeEach(async () => {
@@ -65,7 +71,6 @@ tap.test('Okta jwtUtils', async t => {
   });
 
   t.test('jwtExtractor() Cookie test', async t => {
-    const { jwtExtractor } = require('./jwtUtils.js');
     let request;
 
     t.beforeEach(async () => {
@@ -124,15 +129,6 @@ tap.test('Okta jwtUtils', async t => {
 });
 
 tap.test('Local jwtUtils', async t => {
-  const {
-    getDefaultOptions,
-    sign,
-    actualVerifyEAPDToken,
-    exchangeToken,
-    updateUserToken,
-    changeState
-  } = require('./jwtUtils.js');
-
   const payload = {
     user: 'Test User',
     role: 'Some Role',

@@ -26,7 +26,7 @@ export const waitForInitialization = async () => {
 
 /**
  * To use the flag:
- * const { getLaunchDarklyFlag } = require('../../middleware/launchDarkly');
+ * import { getLaunchDarklyFlag } from '../../middleware/launchDarkly';
  *
  * const validation = await getLaunchDarklyFlag(
  *    'validation',

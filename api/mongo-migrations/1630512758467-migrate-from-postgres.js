@@ -1,8 +1,9 @@
 import knex from '../db/knex';
 import loggerFactory from '../logger';
-const logger = loggerFactory('mongoose-migrate/migrate-from-postgres');
 import { setup, teardown } from '../db/mongodb';
 import { APD } from '../models';
+
+const logger = loggerFactory('mongoose-migrate/migrate-from-postgres');
 
 /**
  * Copy the APDs that exist in the postgres database to the mongo database

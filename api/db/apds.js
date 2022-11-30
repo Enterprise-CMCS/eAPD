@@ -1,4 +1,4 @@
-import { applyPatch } from 'fast-json-patch';
+import fastPatch from 'fast-json-patch';
 import { deepCopy, calculateBudget, hasBudgetUpdate } from '@cms-eapd/common';
 import loggerFactory from '../logger/index.js';
 import { updateStateProfile } from './states.js';
@@ -36,7 +36,7 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
   // duplicate the apdDoc so that dates will be converted to strings
   const apdJSON = deepCopy(apdDoc);
   // apply the patches to the apd
-  const { newDocument } = applyPatch(apdJSON, patch);
+  const { newDocument } = fastPatch.applyPatch(apdJSON, patch);
   // update the apd in the database
   await APD.replaceOne({ _id: id, stateId }, newDocument, {
     multipleCastError: true,

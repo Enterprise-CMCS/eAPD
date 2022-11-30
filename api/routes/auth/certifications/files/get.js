@@ -2,7 +2,7 @@ import ft from 'file-type';
 import { can, loggedIn } from '../../../../middleware/index.js';
 import loggerFactory from '../../../../logger/index.js';
 import generateName from '../../../../util/fileUtils.js';
-import { getFile as get } from '../../../../files/index.cjs';
+import { getFile as get } from '../../../../files/index.js';
 
 const logger = loggerFactory('auth certifications get');
 
