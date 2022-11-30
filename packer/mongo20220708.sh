@@ -115,7 +115,7 @@ nvm alias default 16.16.0
 nvm use 16.16.0
 npm i -g yarn@1.22.18
 
-git clone --single-branch https://github.com/CMSgov/eAPD.git
+git clone --single-branch https://github.com/Enterprise-CMCS/eAPD.git
 cd ~/eAPD
 yarn install --frozen-lockfile --non-interactive --production=true
 
