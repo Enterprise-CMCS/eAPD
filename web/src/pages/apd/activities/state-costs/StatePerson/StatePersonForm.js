@@ -73,6 +73,7 @@ const StatePersonForm = forwardRef(
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <h4 className="ds-h4">Personnel {index + 1}:</h4>
         <Controller
@@ -130,6 +131,7 @@ const StatePersonForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );

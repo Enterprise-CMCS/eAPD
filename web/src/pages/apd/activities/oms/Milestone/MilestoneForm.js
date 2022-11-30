@@ -52,6 +52,7 @@ const MilestoneForm = forwardRef(
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <h4 className="ds-h4">Milestone {index + 1}:</h4>
         <Controller
@@ -98,6 +99,7 @@ const MilestoneForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );
