@@ -1,5 +1,5 @@
-resource "aws_s3_bucket" "mongo_dump_staging" {
-  bucket = "eapd-mongo-dump-staging"
+resource "aws_s3_bucket" "eapd_user_uploads" {
+  bucket = "eapd-user-uploads"
   # Enable versioning so we can see the full revision history of our
   # state files
   versioning {
@@ -15,8 +15,8 @@ resource "aws_s3_bucket" "mongo_dump_staging" {
   }
 }
 
-resource "aws_s3_bucket" "mongo_dump_production" {
-  bucket = "eapd-mongo-dump-production"
+resource "aws_s3_bucket" "eapd_interal_uploads" {
+  bucket = "eapd-interal-uploads"
   # Enable versioning so we can see the full revision history of our
   # state files
   versioning {
