@@ -21,6 +21,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
 
     cy.useStateStaff();
     cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.reload();
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
