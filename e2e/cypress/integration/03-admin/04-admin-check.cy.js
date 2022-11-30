@@ -43,7 +43,7 @@ describe('tests state admin portal', () => {
 
         cy.turnOnAdminCheck();
 
-        cy.get('[data-cy="numRequired"]').should('have.text', '29');
+        cy.get('[data-cy="numRequired"]').should('have.text', '35');
 
         cy.findByRole('button', { name: /Collapse/i }).click({
           force: true
