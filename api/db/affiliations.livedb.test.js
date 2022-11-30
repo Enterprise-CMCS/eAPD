@@ -1,6 +1,8 @@
 const tap = require('tap');
 const knex = require('./knex');
 
+const { thisFFY } = require('@cms-eapd/common');
+
 const {
   getAffiliationMatches,
   updateAuthAffiliation
@@ -174,17 +176,22 @@ tap.test(
           .where({ user_id: 'statestaff1' })
           .first();
 
-        const results = await updateAuthAffiliation({
-          affiliationId: affiliationId,
-          newRoleId: systemAdminRoleId,
-          newStatus: 'approved',
-          changedBy: 'stateadmin1',
-          changedByRole: 'eAPD State Admin',
-          stateId: 'ak'
-          // ffy: blah
-        });
+        let results;
+        try {
+          results = await updateAuthAffiliation({
+            affiliationId,
+            newRoleId: systemAdminRoleId,
+            newStatus: 'approved',
+            changedBy: 'stateadmin1',
+            changedByRole: 'eAPD State Admin',
+            stateId: 'ak',
+            ffy: thisFFY
+          });
+        } catch (e) {
+          results = e.message;
+        }
 
-        console.log('yep1234511', results);
+        test.same(results, 'User is attempting to assign an invalid role');
       }
     );
 
