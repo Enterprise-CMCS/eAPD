@@ -80,13 +80,13 @@ const CostAllocateFFPQuarterly = ({
     }
   }, [quarterlyFFP[year].subtotal.contractors]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const setInHouse = quarter => value => {
+  const setInHouse = (quarter, value) => {
     setValue(`[${quarter}].inHouse.percent`, value / 100);
     setInHouseFFP(activityIndex, year, quarter, value);
     announce(activityId, year, quarter, 'inHouse');
   };
 
-  const setContractor = quarter => value => {
+  const setContractor = (quarter, value) => {
     setValue(`[${quarter}].contractors.percent`, value / 100);
     setContractorFFP(activityIndex, year, quarter, value);
     announce(activityId, year, quarter, 'contractors');
@@ -153,7 +153,7 @@ const CostAllocateFFPQuarterly = ({
                         label={`federal share for ffy ${year}, quarter ${q}, state`}
                         labelClassName="sr-only"
                         onChange={({ target: { value } }) => {
-                          setInHouse(q)(value);
+                          setInHouse(q, value);
                         }}
                         onBlur={onBlur}
                         round
@@ -218,7 +218,7 @@ const CostAllocateFFPQuarterly = ({
                         label={`federal share for ffy ${year}, quarter ${q}, contractors`}
                         labelClassName="sr-only"
                         onChange={({ target: { value } }) => {
-                          setContractor(q)(value);
+                          setContractor(q, value);
                         }}
                         onBlur={onBlur}
                         round
