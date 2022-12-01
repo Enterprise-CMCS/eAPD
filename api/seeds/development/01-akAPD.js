@@ -1,5 +1,5 @@
 const akAPD = {
-  name: 'HITECH IAPD',
+  name: 'HITECH IAPD Complete',
   years: ['2022', '2023'],
   apdOverview: {
     programOverview:

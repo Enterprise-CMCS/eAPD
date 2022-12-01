@@ -31,6 +31,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   before(() => {
     cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.reload();
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
@@ -254,6 +255,68 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         level: 2
       }).should('exist');
       cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
+    });
+  });
+
+  describe('tests admin check validation errors', () => {
+    it('tests non-subform validation errors', () => {
+      cy.contains('Export and Submit').click();
+      cy.findByRole('button', { name: /Run Administrative Check/i }).click({
+        force: true
+      });
+
+      cy.goToApdOverview();
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a brief introduction to the state program.')
+        .should('exist');
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a summary of HIT-funded activities.')
+        .should('exist');
+
+      cy.goToKeyStatePersonnel();
+      cy.findAllByText('Provide the name of the State Medicaid Director.');
+      cy.findAllByText(
+        'Provide the email address of the State Medicaid Director.'
+      );
+      cy.findAllByText(
+        'Provide a valid phone number for the State Medicaid Director.'
+      );
+      cy.findAllByText(
+        'Provide a mailing street address for the Medicaid office.'
+      );
+      cy.findAllByText('Provide a city name.');
+      cy.findAllByText('Provide a zip code.');
+
+      cy.goToActivityOverview(0);
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a short overview of the activity.')
+        .should('exist');
+      cy.findAllByText('Provide a start date.');
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide details to explain this activity.')
+        .should('exist');
+      cy.get('[data-cy="validationError"]')
+        .contains(
+          'Provide a description about how this activity will support the Medicaid standards and conditions.'
+        )
+        .should('exist');
+
+      cy.goToCostAllocationAndOtherFunding(0);
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a description of the cost allocation methodology.')
+        .should('exist');
+
+      cy.goToBudgetAndFFP(0);
+      cy.findAllByText('Select a federal-state split.');
+      cy.findAllByText(
+        'State Staff and Expenses (In-House Costs) quarterly percentages must total 100%'
+      );
+      cy.findAllByText(
+        'Private Contractor Costs quarterly percentages must total 100%'
+      );
+
+      cy.goToAssurancesAndCompliance();
+      cy.findAllByText('Select yes or no');
     });
   });
 
@@ -1287,57 +1350,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         'Delete Private Contractor?',
         'Test Private Contractor'
       );
-    });
-  });
-
-  describe('tests rich text field functionality', () => {
-    it('tests uploading an image', () => {
-      cy.intercept('POST', `${Cypress.env('API')}/apds/${apdId}/files`).as(
-        'uploadImage'
-      );
-      cy.intercept(
-        'GET',
-        `${Cypress.env(
-          'API'
-        )}/apds/${apdId}/files/963d0316f487d49e9e0e8306682daa96720535acf195fb31973f2d0936d97eb1`
-      ).as('loadImage');
-
-      cy.get('[class="tox-edit-area"]').eq(3).scrollIntoView();
-
-      // Uploads cms-logo.png from /fixtures/
-      cy.setTinyMceContent('mmis-overview-field', 'Drag and Drop here');
-
-      cy.enter('iframe[id="mmis-overview-field_ifr"]').then(getBody => {
-        cy.fixture('cms-logo.png', 'binary')
-          .then(Cypress.Blob.binaryStringToBlob)
-          .then(fileContent => {
-            const file = new File([fileContent], 'cms-logo.png', {
-              type: 'image/png'
-            });
-
-            getBody()
-              .contains('Drag and Drop here')
-              .trigger('drop', {
-                dataTransfer: {
-                  files: [file]
-                }
-              });
-          });
-      });
-
-      cy.wait('@uploadImage', { timeout: 30000 });
-
-      cy.waitForSave();
-      cy.contains('AK APD Home').click();
-      // eslint-disable-next-line cypress/no-unnecessary-waiting
-      cy.wait(5000); // Gives time to load the APD dashboard
-
-      cy.visit(apdUrl);
-      cy.wait('@loadImage', { timeout: 60000 });
-
-      cy.contains('Export and Submit').click();
-      cy.findByRole('button', { name: 'Continue to Review' }).click();
-      cy.wait('@loadImage', { timeout: 30000 });
     });
   });
 

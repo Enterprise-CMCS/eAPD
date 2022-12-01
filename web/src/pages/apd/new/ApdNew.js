@@ -21,30 +21,12 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
-const businessAreas = {
-  waiverSupport: false,
-  assetVerification: false,
-  claimsProcessing: false,
-  decisionSupport: false,
-  electronicVisitVerify: false,
-  encounterProcessingSystem: false,
-  financialMangement: false,
-  healthInfoExchange: false,
-  longTermServiceSupport: false,
-  memberManagement: false,
-  pharmacyBenefitManagement: false,
-  programIntegrity: false,
-  providerManagement: false,
-  thirdPartyLiability: false,
-  other: false
-};
-
-const typeStatus = {
-  annualUpdate: false,
-  asNeededUpdate: false
-};
-
 const ApdNew = ({ createApd: create }) => {
+  ApdNew.displayName = 'ApdNew';
+  let value;
+  const history = useHistory();
+  const { enableMmis } = useFlags();
+
   const thisFFY = (() => {
     const year = new Date().getFullYear();
     if (new Date().getMonth() > 8) {
@@ -52,20 +34,64 @@ const ApdNew = ({ createApd: create }) => {
     }
     return year;
   })();
-  ApdNew.displayName = 'ApdNew';
+
+  const businessAreaOptions = {
+    waiverSupport: false,
+    assetVerification: false,
+    claimsProcessing: false,
+    decisionSupport: false,
+    electronicVisitVerify: false,
+    encounterProcessingSystem: false,
+    financialMangement: false,
+    healthInfoExchange: false,
+    longTermServiceSupport: false,
+    memberManagement: false,
+    pharmacyBenefitManagement: false,
+    programIntegrity: false,
+    providerManagement: false,
+    thirdPartyLiability: false,
+    other: false
+  };
+
+  const updateTypes = {
+    annualUpdate: false,
+    asNeededUpdate: false
+  };
 
   const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
-  const history = useHistory();
-  const { enableMmis } = useFlags();
   const [apdType, setApdType] = useState('');
+  const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
   const [isLoading, setIsLoading] = useState(false);
+  const [typeStatus, setTypeStatus] = useState(updateTypes);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
+
+  const apdTypeChoices = [
+    {
+      label: 'HITECH IAPD',
+      labelClassName: 'label-extended',
+      value: 'hitech',
+      hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
+      checked: value
+    },
+    {
+      label: 'MMIS IAPD',
+      labelClassName: 'label-extended',
+      value: 'mmis',
+      hint: 'Medicaid Management Information System Implementation APD',
+      checked: value
+    }
+  ];
+  const [apdChoices, setApdChoices] = useState(apdTypeChoices);
+
   useEffect(() => {
-    if (enableMmis === false) {
+    if (!enableMmis) {
+      apdChoices.pop();
+      apdChoices[0].checked = true;
+      setApdChoices(apdChoices);
       setApdType('hitech');
       setValue('apdType', 'hitech', { shouldValidate: true });
     }
-  }, []);
+  }, [apdChoices]);
 
   const {
     control,
@@ -128,96 +154,38 @@ const ApdNew = ({ createApd: create }) => {
           <div className="ds-u-padding-bottom--1 ds-u-border-bottom--2">
             Complete all the fields below to create your APD.
           </div>
-          {enableMmis === true ? (
-            <Controller
-              name="apdType"
-              control={control}
-              render={({ field: { onBlur, onChange, value, ...props } }) => (
-                <ChoiceList
-                  {...props}
-                  label="What type of APD are you creating?"
-                  labelClassName="ds-h3 label-header label-extended"
-                  hint={
-                    <Alert
-                      variation="warn"
-                      className="ds-u-margin-y--3 ds-u-margin-right--7"
-                    >
-                      <p className="ds-c-alert__text">
-                        This selection cannot be changed after creating a new
-                        APD.
-                      </p>
-                    </Alert>
-                  }
-                  type="radio"
-                  choices={[
-                    {
-                      label: 'HITECH IAPD',
-                      labelClassName: 'label-extended',
-                      value: 'hitech',
-                      hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
-                      checked: value === 'hitech'
-                    },
-                    {
-                      label: 'MMIS IAPD',
-                      labelClassName: 'label-extended',
-                      value: 'mmis',
-                      hint: 'Medicaid Management Information System Implementation APD',
-                      checked: value === 'mmis'
-                    }
-                  ]}
-                  onChange={e => {
-                    setApdType(e.target.value);
+          <Controller
+            name="apdType"
+            control={control}
+            render={({ field: { onBlur, onChange, ...props } }) => (
+              <ChoiceList
+                {...props}
+                label="What type of APD are you creating?"
+                labelClassName="ds-h3 label-header label-extended"
+                hint={
+                  <Alert
+                    variation="warn"
+                    className="ds-u-margin-y--3 ds-u-margin-right--7"
+                  >
+                    <p className="ds-c-alert__text">
+                      This selection cannot be changed after creating a new APD.
+                    </p>
+                  </Alert>
+                }
+                type="radio"
+                choices={apdChoices}
+                onChange={e => {
+                  setApdType(e.target.value);
 
-                    onChange(e);
-                  }}
-                  onBlur={onBlur}
-                  onComponentBlur={onBlur}
-                  errorMessage={errors?.apdType?.message}
-                  errorPlacement="bottom"
-                />
-              )}
-            />
-          ) : (
-            <Controller
-              name="apdType"
-              control={control}
-              render={({ field: { onBlur, onChange, value, ...props } }) => (
-                <ChoiceList
-                  {...props}
-                  label="What type of APD are you creating?"
-                  labelClassName="ds-h3 label-header label-extended"
-                  hint={
-                    <Alert
-                      variation="warn"
-                      className="ds-u-margin-y--3 ds-u-margin-right--7"
-                    >
-                      <p className="ds-c-alert__text">
-                        This selection cannot be changed after creating a new
-                        APD.
-                      </p>
-                    </Alert>
-                  }
-                  type="radio"
-                  choices={[
-                    {
-                      label: 'HITECH IAPD',
-                      value: 'hitech',
-                      hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
-                      checked: value === 'hitech'
-                    }
-                  ]}
-                  onChange={e => {
-                    setApdType(e.target.value);
-                    onChange(e);
-                  }}
-                  onBlur={onBlur}
-                  onComponentBlur={onBlur}
-                  errorMessage={errors?.apdType?.message}
-                  errorPlacement="bottom"
-                />
-              )}
-            />
-          )}
+                  onChange(e);
+                }}
+                onBlur={onBlur}
+                onComponentBlur={onBlur}
+                errorMessage={errors?.apdType?.message}
+                errorPlacement="bottom"
+              />
+            )}
+          />
           {(apdType === 'mmis' || apdType === 'hitech') && (
             <div>
               <Controller
@@ -296,6 +264,7 @@ const ApdNew = ({ createApd: create }) => {
                       onChange(
                         Object.keys(typeStatus).filter(key => typeStatus[key])
                       );
+                      setTypeStatus(typeStatus);
                       setValue('updateStatus.typeStatus', typeStatus, {
                         shouldValidate: true
                       });
@@ -309,7 +278,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             </div>
           )}
-          {apdType === 'mmis' && enableMmis === true && (
+          {apdType === 'mmis' && (
             <div>
               <Controller
                 name="mmisUpdate"
@@ -522,6 +491,7 @@ const ApdNew = ({ createApd: create }) => {
                           key => businessAreas[key]
                         )
                       );
+                      setBusinessAreas(businessAreas);
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}

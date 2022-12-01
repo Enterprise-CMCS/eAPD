@@ -195,6 +195,25 @@ describe('<ApdNew />', () => {
             })
           ).toBeChecked();
         });
+
+        user.click(
+          screen.getByRole('radio', { name: /Yes, it is an update./i })
+        );
+        await waitFor(() => {
+          expect(
+            screen.getByRole('radio', {
+              name: /Yes, it is an update./i
+            })
+          ).toBeChecked();
+        });
+        expect(disabledBtn).toBeDisabled();
+
+        user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
+        await waitFor(() => {
+          expect(
+            screen.getByRole('checkbox', { name: /Annual update/i })
+          ).toBeChecked();
+        });
         expect(disabledBtn).toBeEnabled();
 
         await user.click(screen.getByRole('checkbox', { name: /Other/i }));
@@ -243,13 +262,6 @@ describe('<ApdNew />', () => {
       const disabledBtn = screen.getByRole('button', {
         name: /Create an APD/
       });
-
-      expect(disabledBtn).toBeDisabled();
-
-      await user.type(
-        screen.getByRole('textbox', { name: /name/i }),
-        'APD Name'
-      );
 
       expect(disabledBtn).toBeDisabled();
 

@@ -609,7 +609,7 @@ Cypress.Commands.add('checkPageA11y', () => {
   ); // Remove ignored nav when upgrading cms design system
 });
 
-// // Cypress command to turn on a feature flag for launch darkly
+// Cypress command to turn on a feature flag for launch darkly
 Cypress.Commands.add('updateFeatureFlags', featureFlags => {
   // ignore api calls to events endpoint
   cy.intercept(
@@ -636,4 +636,19 @@ Cypress.Commands.add('updateFeatureFlags', featureFlags => {
       }
     )
     .as('LDApp');
+});
+
+Cypress.Commands.add('turnOnAdminCheck', () => {
+  cy.contains('Export and Submit').click();
+  cy.findByRole('button', { name: /Run Administrative Check/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('checkAdminCheckHyperlinks', (link, heading, level) => {
+  cy.get('[class="eapd-admin-check-list"]').within(() => {
+    cy.contains(link).click();
+  });
+
+  cy.get(`.ds-h${level}`).should('contain', heading);
 });

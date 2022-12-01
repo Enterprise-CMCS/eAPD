@@ -240,6 +240,7 @@ class RichText extends Component {
           <span
             className="ds-c-inline-error ds-c-field__error-message ds-u-fill--white ds-u-padding-top--1"
             role="alert"
+            data-cy="validationError"
           >
             {this.props.error}
           </span>
