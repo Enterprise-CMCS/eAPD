@@ -13,6 +13,10 @@ const setupDB = async (oktaUsers, authAffiliations) => {
   await knex('auth_affiliations').insert(authAffiliations);
 };
 
+const setupDBCertifications = async certifications => {
+  await knex('state_admin_certifications').insert(certifications);
+};
+
 tap.test(
   'database wrappers / affiliations with live db',
   async affiliations => {
@@ -192,6 +196,177 @@ tap.test(
         }
 
         test.same(results, 'User is attempting to assign an invalid role');
+      }
+    );
+
+    affiliations.test(
+      'throws an error if a user assigns a state admin role without a matching certification',
+      async test => {
+        const stateStaffRoleId = await knex('auth_roles')
+          .where({ name: 'eAPD State Staff' })
+          .first()
+          .then(role => role.id);
+
+        const stateAdminRoleId = await knex('auth_roles')
+          .where({ name: 'eAPD State Admin' })
+          .first()
+          .then(role => role.id);
+
+        const federalAdminRoleId = await knex('auth_roles')
+          .where({ name: 'eAPD Federal Admin' })
+          .first()
+          .then(role => role.id);
+
+        const OKTA_USERS = {
+          stateAdmin: {
+            user_id: 'stateadmin1',
+            email: 'stateAdmin@email.com',
+            login: 'test1'
+          },
+          fedAdmin: {
+            user_id: 'fedadmin1',
+            email: 'fedAdmin@email.com',
+            login: 'test2'
+          }
+        };
+
+        const AUTH_AFFILIATIONS = {
+          stateAdmin: {
+            user_id: 'stateadmin1',
+            state_id: 'ak',
+            role_id: stateStaffRoleId,
+            status: 'approved',
+            username: 'test1'
+          }
+        };
+
+        const oktaUsers = [OKTA_USERS.stateAdmin, OKTA_USERS.stateStaff];
+        const authAffiliations = [
+          AUTH_AFFILIATIONS.stateAdmin,
+          AUTH_AFFILIATIONS.stateStaff
+        ];
+
+        await knex('auth_affiliations').delete();
+        await knex('okta_users').delete();
+        await knex('state_admin_certifications').delete();
+
+        await setupDB(oktaUsers, authAffiliations);
+
+        const { id: affiliationId } = await knex('auth_affiliations')
+          .where({ user_id: 'stateadmin1' })
+          .first();
+
+        let results;
+        try {
+          results = await updateAuthAffiliation({
+            affiliationId,
+            newRoleId: stateAdminRoleId,
+            newStatus: 'approved',
+            changedBy: 'fedadmin1',
+            changedByRole: 'eAPD Federal Admin',
+            stateId: 'ak',
+            ffy: thisFFY
+          });
+        } catch (e) {
+          results = e.message;
+        }
+
+        test.same(
+          results,
+          'Unable to update affiliation: missing certification'
+        );
+      }
+    );
+
+    affiliations.test(
+      'throws an error if a user assigns a state admin role without an active and valid certification',
+      async test => {
+        const stateStaffRoleId = await knex('auth_roles')
+          .where({ name: 'eAPD State Staff' })
+          .first()
+          .then(role => role.id);
+
+        const stateAdminRoleId = await knex('auth_roles')
+          .where({ name: 'eAPD State Admin' })
+          .first()
+          .then(role => role.id);
+
+        const federalAdminRoleId = await knex('auth_roles')
+          .where({ name: 'eAPD Federal Admin' })
+          .first()
+          .then(role => role.id);
+
+        const OKTA_USERS = {
+          stateAdmin: {
+            user_id: 'stateadmin1',
+            email: 'stateAdmin@email.com',
+            login: 'test1'
+          },
+          fedAdmin: {
+            user_id: 'fedadmin1',
+            email: 'fedAdmin@email.com',
+            login: 'test2'
+          }
+        };
+
+        const AUTH_AFFILIATIONS = {
+          stateAdmin: {
+            user_id: 'stateadmin1',
+            state_id: 'ak',
+            role_id: stateStaffRoleId,
+            status: 'approved',
+            username: 'test1'
+          }
+        };
+
+        const oktaUsers = [OKTA_USERS.stateAdmin, OKTA_USERS.stateStaff];
+        const authAffiliations = [
+          AUTH_AFFILIATIONS.stateAdmin,
+          AUTH_AFFILIATIONS.stateStaff
+        ];
+
+        const stateAdminCertifications = [
+          {
+            state: 'ak',
+            ffy: '2020',
+            name: 'stateadmin1',
+            email: 'stateAdmin@email.com',
+            fileUrl: 'abc123',
+            uploadedBy: 'fedadmin1',
+            uploadedOn: new Date()
+          }
+        ];
+
+        await knex('auth_affiliations').delete();
+        await knex('okta_users').delete();
+        await knex('state_admin_certifications').delete();
+
+        await setupDB(oktaUsers, authAffiliations);
+        await setupDBCertifications(stateAdminCertifications);
+
+        const { id: affiliationId } = await knex('auth_affiliations')
+          .where({ user_id: 'stateadmin1' })
+          .first();
+
+        let results;
+        try {
+          results = await updateAuthAffiliation({
+            affiliationId,
+            newRoleId: stateAdminRoleId,
+            newStatus: 'approved',
+            changedBy: 'fedadmin1',
+            changedByRole: 'eAPD Federal Admin',
+            stateId: 'ak',
+            ffy: thisFFY
+          });
+        } catch (e) {
+          results = e.message;
+        }
+
+        test.same(
+          results,
+          'Unable to update affiliation: no current certifications'
+        );
       }
     );
 

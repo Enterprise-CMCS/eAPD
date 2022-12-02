@@ -1,3 +1,5 @@
+const { defaultAPDYears } = require('@cms-eapd/common');
+
 const logger = require('../logger')('db/affiliations');
 const knex = require('./knex');
 
@@ -224,19 +226,44 @@ const updateAuthAffiliation = async ({
     throw new Error('User is attempting to assign an invalid role');
   }
 
+  // For State Admin roles, check there is a matching certificate on file
+  if (roleName === 'eAPD State Admin') {
+    // Get email of assignee
+    const { email: affiliationUserEmail } = await (transaction || db)(
+      'okta_users'
+    )
+      .select('email')
+      .where({ user_id: affiliationUserId })
+      .first();
+
+    // Lookup matching certificate
+    const allCertifications = await (transaction || db)(
+      'state_admin_certifications'
+    )
+      .select('status', 'ffy')
+      .where({ email: affiliationUserEmail, state: stateId });
+
+    if (allCertifications.length === 0) {
+      throw new Error('Unable to update affiliation: missing certification');
+    }
+
+    const activeCertYears = allCertifications
+      .filter(cert => cert.status === 'active')
+      .map(cert => String(cert.ffy));
+    const hasActiveCert = defaultAPDYears().some(i =>
+      activeCertYears.includes(i)
+    );
+
+    if (!hasActiveCert) {
+      throw new Error(
+        'Unable to update affiliation: no current certifications'
+      );
+    }
+  }
+
   let expirationDate = null;
   if (newStatus === 'approved') {
     const today = new Date();
-    if (
-      roleName === 'eAPD State Staff' ||
-      roleName === 'eAPD State Contractor'
-    ) {
-      expirationDate = new Date(
-        today.getFullYear() + 1,
-        today.getMonth(),
-        today.getDate()
-      );
-    }
     if (roleName === 'eAPD State Admin') {
       expirationDate = ffy === undefined ? null : new Date(ffy, '09', '01');
     }
