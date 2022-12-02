@@ -212,11 +212,6 @@ tap.test(
           .first()
           .then(role => role.id);
 
-        const federalAdminRoleId = await knex('auth_roles')
-          .where({ name: 'eAPD Federal Admin' })
-          .first()
-          .then(role => role.id);
-
         const OKTA_USERS = {
           stateAdmin: {
             user_id: 'stateadmin1',
@@ -288,11 +283,6 @@ tap.test(
 
         const stateAdminRoleId = await knex('auth_roles')
           .where({ name: 'eAPD State Admin' })
-          .first()
-          .then(role => role.id);
-
-        const federalAdminRoleId = await knex('auth_roles')
-          .where({ name: 'eAPD Federal Admin' })
           .first()
           .then(role => role.id);
 

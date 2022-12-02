@@ -263,7 +263,6 @@ const updateAuthAffiliation = async ({
 
   let expirationDate = null;
   if (newStatus === 'approved') {
-    const today = new Date();
     if (roleName === 'eAPD State Admin') {
       expirationDate = ffy === undefined ? null : new Date(ffy, '09', '01');
     }
