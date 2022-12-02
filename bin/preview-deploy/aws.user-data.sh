@@ -125,8 +125,8 @@ sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|require('newrelic');\n|" main.js
 
-#sudo chown -R ec2-user:eapd /app
-sudo chown -R centos:eapd /app
+sudo chown -R ec2-user:eapd /app
+#sudo chown -R centos:eapd /app
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
@@ -173,8 +173,8 @@ E_USER
 sudo yum remove -y gcc-c++
 
 # SELinux context so Nginx can READ the files in /app/web
-#mv /home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf
-mv /home/centos/nginx.conf.tpl /etc/nginx/nginx.conf
+mv /home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf
+#mv /home/centos/nginx.conf.tpl /etc/nginx/nginx.conf
 chown -R nginx /app/web
 semanage fcontext -a -t httpd_sys_content_t /etc/nginx/nginx.conf
 restorecon -Rv /etc/nginx/nginx.conf
@@ -192,9 +192,9 @@ systemctl start newrelic-infra
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
-#su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.16.0/bin /home/ec2-user/.nvm/versions/node/v16.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
-#su - ec2-user -c 'pm2 save'
-#su - ec2-user -c 'pm2 restart "eAPD API"'
-su - centos -c '~/.bash_profile; sudo env PATH=$PATH:/home/centos/.nvm/versions/node/v16.16.0/bin /home/centos/.nvm/versions/node/v16.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u centos --hp /home/centos'
-su - centos -c 'pm2 save'
-su - centos -c 'pm2 restart "eAPD API"'
+su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.16.0/bin /home/ec2-user/.nvm/versions/node/v16.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
+su - ec2-user -c 'pm2 save'
+su - ec2-user -c 'pm2 restart "eAPD API"'
+#su - centos -c '~/.bash_profile; sudo env PATH=$PATH:/home/centos/.nvm/versions/node/v16.16.0/bin /home/centos/.nvm/versions/node/v16.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u centos --hp /home/centos'
+#su - centos -c 'pm2 save'
+#su - centos -c 'pm2 restart "eAPD API"'
