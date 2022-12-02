@@ -43,7 +43,7 @@ function deployPreviewtoEC2() {
   EXISTING_INSTANCES=$(findExistingInstances)
 
   AMI_ID=$(findAMI)
-  print "• Using most recent eAPD Preview CentOS 7 AMI: $AMI_ID"
+  print "• Using most recent eAPD Preview AMI: $AMI_ID"
 
   # Create new EC2 instance
   print "• Creating EC2 instance"
