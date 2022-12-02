@@ -54,8 +54,8 @@ CWAGENTCONFIG
 sudo yum install -y gcc-c++
 
 # Test to see the command that is getting built for pulling the Git Branch
-#sudo su - ec2-user <<E_USER
-sudo su - centos <<E_USER
+sudo su - ec2-user <<E_USER
+#sudo su - centos <<E_USER
 # The su block begins inside the root user's home directory.  Switch to the
 # ec2-user home directory.
 cd ~
