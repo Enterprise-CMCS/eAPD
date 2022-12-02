@@ -1,21 +1,16 @@
-import knex from '../db/knex';
-import loggerFactory from '../logger';
-import { setup, teardown } from '../db/mongodb';
-import { APD } from '../models';
+import loggerFactory from '../logger/index.js';
+import { setup, teardown } from '../db/mongodb.js';
+import { APD } from '../models/index.js';
 
 const logger = loggerFactory('mongoose-migrate/migrate-from-postgres');
 
-/**
- * Copy the APDs that exist in the postgres database to the mongo database
- */
-export const up = async () => {
-  // eslint-disable-next-line no-restricted-globals
-  const normalizeDate = date => (isNaN(Date.parse(date)) ? null : date);
-  const normalizeNarrativeYears = narrativeYears =>
-    Object.keys(narrativeYears).every(year => year.match(/^\d{4}$/))
-      ? { ...narrativeYears }
-      : {};
+const normalizeDate = date => (isNaN(Date.parse(date)) ? null : date);
+const normalizeNarrativeYears = narrativeYears =>
+  Object.keys(narrativeYears).every(year => year.match(/^\d{4}$/))
+    ? { ...narrativeYears }
+    : {};
 
+export const up = async knex => {
   const convertActivities = activities =>
     activities.map(activity => {
       const {
@@ -90,9 +85,6 @@ export const up = async () => {
   }
 };
 
-/**
- * Copy the APDs that exist in the mongo database to the postgres database (if possible)
- */
-export const down = async () => {
-  // Write migration here
+export const down = () => {
+  // we are not planning on returning the APDs to PostGreSQL
 };

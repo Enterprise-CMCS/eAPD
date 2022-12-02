@@ -1,8 +1,9 @@
-import loggerFactory from '../logger';
-const logger = loggerFactory('migrate-mongoose/migrate-budget-schema');
 import { calculateBudget, generateKey } from '@cms-eapd/common';
-import { setup, teardown } from '../db/mongodb';
-import { APD, Budget } from '../models';
+import loggerFactory from '../logger/index.js';
+import { setup, teardown } from '../db/mongodb.js';
+import { APD, Budget } from '../models/index.js';
+
+const logger = loggerFactory('migrate-mongoose/migrate-budget-schema');
 
 const forAllYears = (currentObj, defaultObj, yearsToCover) =>
   yearsToCover.reduce(
@@ -13,13 +14,10 @@ const forAllYears = (currentObj, defaultObj, yearsToCover) =>
     {}
   );
 
-/**
- * Make any changes you need to make to the database here
- */
 export const up = async () => {
   // Grab all APDs
   await setup();
-  const apds = await APD.find({ status: 'draft' });
+  const apds = await APD.find();
 
   await Promise.all(
     apds.map(async apd => {
@@ -38,23 +36,24 @@ export const up = async () => {
         }
       }));
       try {
-        const budget = await Budget.create(calculateBudget(apd.toJSON()));
-        apd.budget = budget;
+        return Budget.create(calculateBudget(apd.toJSON())).then(budget => {
+          apd.budget = budget;
+          return apd.save();
+        });
       } catch (err) {
         logger.error(err);
       }
-      await apd.save();
     })
   ).catch(err => {
     logger.error(err);
   });
+
   await teardown();
 };
 
-/**
- * Make any changes that UNDO the up function side effects here (if possible)
- */
 export const down = async () => {
+  // We do not plan on returning to this previous format for the APD
+  // but we can remove the budget
   await setup();
   await Budget.deleteMany();
   const apds = await APD.find({});

@@ -602,7 +602,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: save OpenAPI JSON
-          command: node -e "console.log(JSON.stringify(require('./api/routes/openAPI/index.js')))" > openapi.json
+          command: node -e "import('./api/routes/openAPI/index.js').then(loadedModule => console.log(JSON.stringify(loadedModule)))" > openapi.json
       - run:
           name: validate
           command: |
