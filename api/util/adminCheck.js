@@ -233,10 +233,12 @@ const getManualMmisValidations = apd => {
  */
 const adminCheckHitechApd = apd => {
   // apdOverview Schema relies on knowing the funding source(s)
-  // to do a conditional validation
-  const getFundingSources = apd?.activities?.map(activity => {
-    return activity.fundingSource;
-  });
+  // to do a conditional validation.
+  const getFundingSources = apd?.activities
+    ?.map(activity => {
+      return activity.fundingSource;
+    })
+    .filter(values => values !== null); // when activities are added the type is initially null
 
   const activityIndexes = {};
   apd?.activities?.forEach((activity, index) => {
