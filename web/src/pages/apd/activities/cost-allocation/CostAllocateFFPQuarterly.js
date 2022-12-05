@@ -144,8 +144,7 @@ const CostAllocateFFPQuarterly = ({
                   <Controller
                     control={control}
                     name={`[${q}].inHouse.percent`}
-                    value={quarterlyFFP[year][q].inHouse.percent}
-                    render={({ field: { onBlur, value, ...props } }) => (
+                    render={({ field: { onBlur, ...props } }) => (
                       <PercentField
                         {...props}
                         className="budget-table--input-holder"
@@ -157,7 +156,9 @@ const CostAllocateFFPQuarterly = ({
                         }}
                         onBlur={onBlur}
                         round
-                        value={(value * 100).toFixed(0)}
+                        value={(
+                          quarterlyFFP[year][q].inHouse.percent * 100
+                        ).toFixed(0)}
                       />
                     )}
                   />
@@ -209,8 +210,7 @@ const CostAllocateFFPQuarterly = ({
                   <Controller
                     control={control}
                     name={`[${q}].contractors.percent`}
-                    value={quarterlyFFP[year][q].contractors.percent * 100}
-                    render={({ field: { onBlur, value, ...props } }) => (
+                    render={({ field: { onBlur, ...props } }) => (
                       <PercentField
                         {...props}
                         className="budget-table--input-holder"
@@ -222,7 +222,9 @@ const CostAllocateFFPQuarterly = ({
                         }}
                         onBlur={onBlur}
                         round
-                        value={(value * 100).toFixed(0)}
+                        value={(
+                          quarterlyFFP[year][q].contractors.percent * 100
+                        ).toFixed(0)}
                       />
                     )}
                   />
