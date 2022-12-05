@@ -80,17 +80,21 @@ const CostAllocateFFPQuarterly = ({
     }
   }, [quarterlyFFP[year].subtotal.contractors]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const setInHouse = (quarter, value) => {
-    setValue(`[${quarter}].inHouse.percent`, value / 100);
-    setInHouseFFP(activityIndex, year, quarter, value);
-    announce(activityId, year, quarter, 'inHouse');
-  };
+  const setInHouse =
+    quarter =>
+    ({ target: { value } }) => {
+      setValue(`[${quarter}].inHouse.percent`, value / 100);
+      setInHouseFFP(activityIndex, year, quarter, value);
+      announce(activityId, year, quarter, 'inHouse');
+    };
 
-  const setContractor = (quarter, value) => {
-    setValue(`[${quarter}].contractors.percent`, value / 100);
-    setContractorFFP(activityIndex, year, quarter, value);
-    announce(activityId, year, quarter, 'contractors');
-  };
+  const setContractor =
+    quarter =>
+    ({ target: { value } }) => {
+      setValue(`[${quarter}].contractors.percent`, value / 100);
+      setContractorFFP(activityIndex, year, quarter, value);
+      announce(activityId, year, quarter, 'contractors');
+    };
 
   return (
     <Fragment>
@@ -151,9 +155,7 @@ const CostAllocateFFPQuarterly = ({
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, state`}
                         labelClassName="sr-only"
-                        onChange={({ target: { value } }) => {
-                          setInHouse(q, value);
-                        }}
+                        onChange={setInHouse(q)}
                         onBlur={onBlur}
                         round
                         value={(
@@ -217,9 +219,7 @@ const CostAllocateFFPQuarterly = ({
                         fieldClassName="budget-table--input__number"
                         label={`federal share for ffy ${year}, quarter ${q}, contractors`}
                         labelClassName="sr-only"
-                        onChange={({ target: { value } }) => {
-                          setContractor(q, value);
-                        }}
+                        onChange={setContractor(q)}
                         onBlur={onBlur}
                         round
                         value={(
