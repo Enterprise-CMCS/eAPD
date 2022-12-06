@@ -16,7 +16,7 @@ import statesAffiliations from '../states/affilitations/openAPI.js';
 import { arrayOf } from './helpers.js';
 // ############## OPENAPI IMPORT INSERTION POINT ######################
 
-export default {
+const openapi = {
   openapi: '3.0.0',
   info: {
     title: 'CMS HITECH APD API',
@@ -2816,3 +2816,5 @@ export default {
     }
   }
 };
+
+export default openapi;
