@@ -1,4 +1,8 @@
-const Budget = require('./budget');
-const APD = require('./apd');
+const { Budget } = require('./budget');
+const { HITECHBudget } = require('./hitechBudget');
+const { MMISBudget } = require('./mmisBudget');
+const { APD } = require('./apd');
+const { HITECH } = require('./hitech');
+const { MMIS } = require('./mmis');
 
-module.exports = { APD, Budget };
+module.exports = { APD, HITECH, MMIS, Budget, HITECHBudget, MMISBudget };

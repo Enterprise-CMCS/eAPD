@@ -95,16 +95,22 @@ describe('executive summary component', () => {
             {
               activityId: 'a1',
               name: 'activity 1',
-              // Hiram Revels is seated to the United States Senate
-              plannedEndDate: '1870-02-25',
-              // Shirley Chisholm is seated to the United States House of Representatives
-              plannedStartDate: '1969-01-03',
-              summary: 'first activity'
+              activityOverview: {
+                summary: 'first activity'
+              },
+              activitySchedule: {
+                // Shirley Chisholm is seated to the United States House of Representatives
+                plannedStartDate: '1969-01-03',
+                // Hiram Revels is seated to the United States Senate
+                plannedEndDate: '1870-02-25'
+              }
             },
             {
               activityId: 'a2',
               name: '',
-              summary: 'second activity'
+              activityOverview: {
+                summary: 'second activity'
+              }
             }
           ],
           years: ['1', '2']
