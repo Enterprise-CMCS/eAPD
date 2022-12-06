@@ -14,7 +14,7 @@ function postOrUpdateComment() {
   local GIT_SHA=$3
 
   # Update the comment on Github, if there's one already.  This way we'll know the bot updated the thing.
-  COMMENTS=$(curl -s -H "Authorization: token $GH_BOT_TOKEN" https://api.github.com/repos/CMSgov/eAPD/issues/$PRNUM/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
+  COMMENTS=$(curl -s -H "Authorization: token $GH_BOT_TOKEN" https://api.github.com/repos/Enterprise-CMCS/eAPD/issues/$PRNUM/comments | jq -c -r '.[] | {id:.id,user:.user.login}' | grep "$GH_BOT_USER" || true)
   if [ "$COMMENTS" ]; then
     ID=$(echo "$COMMENTS" | jq -c -r .id)
     # Use $ before the body to use ANSI encoding, which preserves the newlines.
@@ -23,14 +23,14 @@ function postOrUpdateComment() {
       -H "Authorization: token $GH_BOT_TOKEN" \
       -H "Content-Type: application/json" \
       -d $'{"body":"See this pull request in action: '"$PREVIEW_URL"'\n\n'"$GIT_SHA"'"}' \
-      -X PATCH "https://api.github.com/repos/CMSgov/eAPD/issues/comments/$ID"
+      -X PATCH "https://api.github.com/repos/Enterprise-CMCS/eAPD/issues/comments/$ID"
   else
     # Post a new message if one doesn't already exist.
     curl -s \
       -H "Authorization: token $GH_BOT_TOKEN" \
       -H "Content-Type: application/json" \
       -d '{"body":"See this pull request in action: '"$PREVIEW_URL"'"}' \
-      -X POST "https://api.github.com/repos/CMSgov/eAPD/issues/$PRNUM/comments"
+      -X POST "https://api.github.com/repos/Enterprise-CMCS/eAPD/issues/$PRNUM/comments"
   fi
 }
 
