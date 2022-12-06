@@ -377,8 +377,16 @@ const ApdNew = ({ createApd: create }) => {
                         Select the Medicaid Enterprise Systems Business Area(s)
                         that cover the scope of this APD. A more detailed
                         description of these business areas, along with the
-                        associated outcomes and metrics, are available at the
-                        MES Certification Repository.
+                        associated outcomes and metrics, are available at
+                        the&nbsp;
+                        <a
+                          href="https://cmsgov.github.io/CMCS-DSG-DSS-Certification/"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          MES Certification Repository
+                        </a>
+                        .
                       </div>
                     }
                     type="checkbox"
@@ -502,10 +510,8 @@ const ApdNew = ({ createApd: create }) => {
             </div>
           )}
 
-          <div className="ds-u-padding-bottom--3">
-            <Button variation="transparent" onClick={history.goBack}>
-              Cancel
-            </Button>
+          <div className="ds-u-padding-y--3">
+            <Button onClick={history.goBack}>Cancel</Button>
 
             {disabled === true ? (
               <Tooltip
