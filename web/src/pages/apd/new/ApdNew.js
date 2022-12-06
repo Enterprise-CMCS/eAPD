@@ -360,7 +360,7 @@ const ApdNew = ({ createApd: create }) => {
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}
-                    errorMessage={errors?.typeStatus?.mmisUpdate?.message}
+                    errorMessage={errors?.mmisUpdate?.message}
                     errorPlacement="bottom"
                   />
                 )}
@@ -473,8 +473,7 @@ const ApdNew = ({ createApd: create }) => {
                                   onBlur={onBlur}
                                   onComponentBlur={onBlur}
                                   errorMessage={
-                                    errors?.apdOverview
-                                      ?.otherMedicaidBusinessAreas?.message
+                                    errors?.apdOverview?.otherDetails?.message
                                   }
                                   errorPlacement="bottom"
                                 />
