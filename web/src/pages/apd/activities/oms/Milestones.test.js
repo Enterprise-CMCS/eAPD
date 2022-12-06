@@ -12,7 +12,7 @@ import { removeMilestone } from '../../../../redux/actions/editActivity';
 describe('the Milestones component', () => {
   const props = {
     activity: {
-      schedule: [
+      milestones: [
         {
           key: 'milestone 1',
           milestone: 'Liberation Day',

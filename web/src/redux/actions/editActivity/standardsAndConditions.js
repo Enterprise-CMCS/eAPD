@@ -5,7 +5,7 @@ export const setActivityStandardAndConditionDoesNotSupportExplanation = (
   explanation
 ) => ({
   type: EDIT_APD,
-  path: `/activities/${activityIndex}/standardsAndConditions/doesNotSupport`,
+  path: `/activities/${activityIndex}/activityOverview/standardsAndConditions/doesNotSupport`,
   value: explanation
 });
 
@@ -14,6 +14,6 @@ export const setActivityStandardAndConditionSupportExplanation = (
   explanation
 ) => ({
   type: EDIT_APD,
-  path: `/activities/${activityIndex}/standardsAndConditions/supports`,
+  path: `/activities/${activityIndex}/activityOverview/standardsAndConditions/supports`,
   value: explanation
 });

@@ -11,7 +11,7 @@ import Dollars from '../../../../../components/Dollars';
 import NumberField from '../../../../../components/NumberField';
 import RichText from '../../../../../components/RichText';
 
-import validationSchema from '@cms-eapd/common/schemas/privateContractor';
+import validationSchema from '@cms-eapd/common/schemas/contractorResources';
 import { saveContractor as actualSaveContractor } from '../../../../../redux/actions/editActivity';
 
 const getCheckedValue = value => {

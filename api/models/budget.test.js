@@ -1,13 +1,17 @@
 const tap = require('tap');
 const { calculateBudget } = require('@cms-eapd/common');
-// const toMongodb = require('jsonpatch-to-mongodb');
 
 const { setup, teardown } = require('../db/mongodb');
 const { APD, Budget } = require('./index');
-const { apd, apdNoActivities } = require('../seeds/development/apds');
+const {
+  hitech: apd,
+  hitechNoActivities: apdNoActivities
+} = require('../seeds/development/apds');
 
 let apdId;
 let budgetId;
+delete apd.apdType; // eslint-disable-line no-underscore-dangle
+delete apdNoActivities.apdType; // eslint-disable-line no-underscore-dangle
 
 tap.test('Budget model test', async t => {
   t.before(async () => {
@@ -18,7 +22,6 @@ tap.test('Budget model test', async t => {
     const budget = await Budget.create(calculateBudget(apd));
     // eslint-disable-next-line no-underscore-dangle
     budgetId = budget._id.toString();
-
     const { _id: apdObjId } = await APD.create({
       status: 'draft',
       stateId: 'md',
@@ -30,9 +33,8 @@ tap.test('Budget model test', async t => {
 
   t.test('get Budget from APD', async test => {
     const found = await APD.findOne({ _id: apdId });
-
     test.ok(!!found.budget, 'Found the Budget that was just added to the APD');
-    // eslint-disable-next-line no-underscore-dangle
+    test.ok(!found.apdType, 'Budget is not HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
     test.equal(found.budget.toString(), budgetId, 'Budget Id was retrieved');
   });
 
@@ -47,10 +49,13 @@ tap.test('Budget model test', async t => {
   t.test('recalculate budget', async test => {
     const newBudget = calculateBudget(apdNoActivities);
 
-    await Budget.updateOne({ _id: budgetId }, newBudget);
+    await Budget.replaceOne({ _id: budgetId }, newBudget, {
+      multipleCastError: true,
+      runValidators: true
+    });
     const updatedBudget = await Budget.findOne({ _id: budgetId }).lean();
     delete updatedBudget._id; // eslint-disable-line no-underscore-dangle
-    delete updatedBudget.__v; // eslint-disable-line no-underscore-dangle
+    delete updatedBudget.__t; // eslint-disable-line no-underscore-dangle
 
     test.same(updatedBudget, newBudget, 'Budget was patched');
   });

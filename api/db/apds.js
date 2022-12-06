@@ -2,16 +2,59 @@ const { applyPatch } = require('fast-json-patch');
 const {
   deepCopy,
   calculateBudget,
-  hasBudgetUpdate
+  hasBudgetUpdate,
+  APD_TYPE
 } = require('@cms-eapd/common');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
+const {
+  Budget,
+  HITECHBudget,
+  MMISBudget,
+  APD,
+  HITECH,
+  MMIS
+} = require('../models/index');
 const { adminCheckApd } = require('../util/adminCheck');
-const { Budget, APD } = require('../models/index');
+
+const getApdModel = apdType => {
+  let model;
+  switch (apdType) {
+    case APD_TYPE.HITECH:
+      model = HITECH;
+      break;
+    case APD_TYPE.MMIS:
+      model = MMIS;
+      break;
+    default:
+      model = APD;
+  }
+  return model;
+};
+
+const getBudgetModel = apdType => {
+  let model;
+  switch (apdType) {
+    case APD_TYPE.HITECH:
+      model = HITECHBudget;
+      break;
+    case APD_TYPE.MMIS:
+      model = MMISBudget;
+      break;
+    default:
+      model = Budget;
+  }
+  return model;
+};
 
 const createAPD = async apd => {
-  const apdDoc = await APD.create(apd);
-  const newBudget = await Budget.create(calculateBudget(apdDoc.toJSON()));
+  const apdJSON = deepCopy(apd);
+  const { apdType } = apd;
+
+  const apdDoc = await getApdModel(apdType).create(apdJSON);
+  const newBudget = await getBudgetModel(apdType).create(
+    calculateBudget(apdDoc.toJSON())
+  );
   apdDoc.budget = newBudget;
   await apdDoc.save();
 
@@ -24,16 +67,17 @@ const deleteAPDByID = async id =>
 const getAllAPDsByState = async stateId =>
   APD.find(
     { stateId, status: 'draft' },
-    '_id id createdAt updatedAt stateId status name years'
-  ).lean();
+    '_id id createdAt updatedAt stateId status name years apdType'
+  ).lean({ virtuals: true });
 
-const getAPDByID = async id => APD.findById(id).lean().populate('budget');
+const getAPDByID = async id =>
+  APD.findById(id).populate('budget').lean({ virtuals: true });
 
 const getAPDByIDAndState = (id, stateId) =>
-  APD.findOne({ _id: id, stateId }).lean().populate('budget');
+  APD.findOne({ _id: id, stateId }).populate('budget').lean({ virtuals: true });
 
 // Apply the patches to the APD document
-const patchAPD = async (id, stateId, apdDoc, patch) => {
+const patchAPD = async ({ id, stateId, apdDoc, patch }) => {
   // duplicate the apdDoc so that dates will be converted to strings
   const apdJSON = deepCopy(apdDoc);
   // apply the patches to the apd
@@ -45,7 +89,7 @@ const patchAPD = async (id, stateId, apdDoc, patch) => {
   });
 
   // return the updated apd
-  return APD.findOne({ _id: id, stateId }).lean();
+  return APD.findOne({ _id: id, stateId }).lean({ virtuals: true });
 };
 
 const adminCheckAPDDocument = async id => {
@@ -56,16 +100,14 @@ const adminCheckAPDDocument = async id => {
 };
 
 const updateAPDDocument = async (
-  id,
-  stateId,
-  patch,
+  { id, stateId, patch },
   { updateProfile = updateStateProfile } = {}
 ) => {
   // Get the updated apd json
   const apdDoc = await APD.findOne({ _id: id, stateId })
     .populate('budget')
-    .lean();
-  if (patch.length > 0) {
+    .lean({ virtuals: true });
+  if (apdDoc && patch.length > 0) {
     let updatedDoc;
     const updateErrors = {};
     let updatedBudget = deepCopy(apdDoc.budget);
@@ -79,7 +121,7 @@ const updateAPDDocument = async (
       value: new Date().toISOString()
     });
     try {
-      updatedDoc = await patchAPD(id, stateId, apdDoc, patch);
+      updatedDoc = await patchAPD({ id, stateId, apdDoc, patch });
     } catch (err) {
       logger.error(`Error patching APD ${id}: ${JSON.stringify(err)}`);
 
@@ -119,7 +161,7 @@ const updateAPDDocument = async (
 
       // If there are errors, nothing was saved, so we need to try to update again
       validPatches = Object.keys(updatedPatch).map(key => updatedPatch[key]);
-      updatedDoc = await patchAPD(id, stateId, apdDoc, validPatches);
+      updatedDoc = await patchAPD({ id, stateId, apdDoc, patch: validPatches });
 
       // convert updatedPatch map to an array and set it to updated
       updated = Object.keys(updatedPatch).map(key => updatedPatch[key]);
@@ -128,6 +170,8 @@ const updateAPDDocument = async (
     try {
       if (hasBudgetUpdate(validPatches)) {
         updatedBudget = calculateBudget(updatedDoc);
+        // eslint-disable-next-line no-underscore-dangle
+        updatedBudget.__t = apdDoc.budget.__t;
         // eslint-disable-next-line no-underscore-dangle
         await Budget.replaceOne({ _id: updatedDoc.budget }, updatedBudget, {
           multipleCastError: true,

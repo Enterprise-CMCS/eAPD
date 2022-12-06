@@ -12,7 +12,7 @@ import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import NumberField from '../../../components/NumberField';
 
-import validationSchema from '@cms-eapd/common/schemas/keyPerson';
+import { keyPersonnelSchema } from '@cms-eapd/common/schemas/keyStatePersonnel';
 import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 const getCheckedValue = value => {
@@ -48,7 +48,7 @@ const PersonForm = forwardRef(
       },
       mode: 'onChange',
       reValidateMode: 'onChange',
-      resolver: joiResolver(validationSchema)
+      resolver: joiResolver(keyPersonnelSchema)
     });
 
     useEffect(() => {
