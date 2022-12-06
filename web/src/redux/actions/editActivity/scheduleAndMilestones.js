@@ -13,22 +13,22 @@ export const saveMilestone =
     let indexCalculated = milestoneIndex;
 
     if (
-      previousState.apd.data.activities[activityIndex].schedule[
+      previousState.apd.data.activities[activityIndex].milestones[
         milestoneIndex
       ] === undefined
     ) {
       indexCalculated =
-        previousState.apd.data.activities[activityIndex].schedule.length;
+        previousState.apd.data.activities[activityIndex].milestones.length;
       dispatch({
         type: ADD_APD_ITEM,
-        path: `/activities/${activityIndex}/schedule/-`,
+        path: `/activities/${activityIndex}/milestones/-`,
         state: getState()
       });
     }
 
     dispatch({
       type: EDIT_APD,
-      path: `/activities/${activityIndex}/schedule/${indexCalculated}`,
+      path: `/activities/${activityIndex}/milestones/${indexCalculated}`,
       value: data
     });
   };
@@ -41,18 +41,18 @@ export const saveMilestone =
 export const removeMilestone = (activityIndex, milestoneIndex) => dispatch => {
   dispatch({
     type: REMOVE_APD_ITEM,
-    path: `/activities/${activityIndex}/schedule/${milestoneIndex}`
+    path: `/activities/${activityIndex}/milestones/${milestoneIndex}`
   });
 };
 
 export const setActivityStartDate = (activityIndex, date) => ({
   type: EDIT_APD,
-  path: `/activities/${activityIndex}/plannedStartDate`,
+  path: `/activities/${activityIndex}/activitySchedule/plannedStartDate`,
   value: date
 });
 
 export const setActivityEndDate = (activityIndex, date) => ({
   type: EDIT_APD,
-  path: `/activities/${activityIndex}/plannedEndDate`,
+  path: `/activities/${activityIndex}/activitySchedule/plannedEndDate`,
   value: date
 });
