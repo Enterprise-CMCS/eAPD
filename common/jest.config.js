@@ -7,7 +7,17 @@ module.exports = {
   },
   testEnvironment: 'node',
   testTimeout: 30000,
-  collectCoverageFrom: ['**/*.{js,jsx}'],
+  collectCoverageFrom: [
+    '**/*.{js,jsx}',
+    '!**/schemas/**',
+    '!**/*.test.{js,jsx}',
+    '!**/coverage-endpoint/**',
+    '!**/*.config.{js,jsx}',
+    '!**/index.{js,jsx}',
+    '!**/block-navigation.js',
+    '!**/prettify.js',
+    '!**/sorter.js'
+  ],
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   coverageThreshold: {
     global: {

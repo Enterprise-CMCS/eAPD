@@ -1,5 +1,6 @@
 import { push } from 'connected-react-router';
 import { hasBudgetUpdate } from '@cms-eapd/common/utils/utils';
+import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 
 import {
   CREATE_APD_FAILURE,
@@ -157,7 +158,7 @@ export const createApd =
   dispatch => {
     dispatch({ type: CREATE_APD_REQUEST });
     return axios
-      .post('/apds')
+      .post('/apds', { apdType: APD_TYPE.HITECH })
       .then(async req => {
         dispatch({ type: CREATE_APD_SUCCESS, data: req.data });
         await dispatch(

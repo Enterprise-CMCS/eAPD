@@ -13,32 +13,6 @@ describe('utility arrays', () => {
   });
 });
 
-describe('provides default years based on now', () => {
-  test('before October', () => {
-    jest.useFakeTimers().setSystemTime(new Date('1970-09-01').getTime());
-    // tick forward 10 days, so we're not on the weird date boundary
-    jest.advanceTimersByTime(864000000);
-    const { defaultAPDYearOptions, defaultAPDYears } = load();
-
-    expect(defaultAPDYearOptions).toEqual(['1970', '1971', '1972']);
-    expect(defaultAPDYears).toEqual(['1970', '1971']);
-
-    jest.clearAllTimers();
-  });
-
-  test('after October', () => {
-    jest.useFakeTimers().setSystemTime(new Date('1970-10-01').getTime());
-    // tick forward 360 days
-    jest.advanceTimersByTime(31104000000);
-    const { defaultAPDYearOptions, defaultAPDYears } = load();
-
-    expect(defaultAPDYearOptions).toEqual(['1971', '1972', '1973']);
-    expect(defaultAPDYears).toEqual(['1971', '1972']);
-
-    jest.clearAllTimers();
-  });
-});
-
 describe('utility functions', () => {
   const {
     applyToNumbers,

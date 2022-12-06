@@ -603,7 +603,7 @@ function callback(violations) {
 }
 
 Cypress.Commands.add('checkPageA11y', () => {
-  cy.wait(2500);
+  cy.wait(2500); // eslint-disable-line cypress/no-unnecessary-waiting
   cy.injectAxeForA11y();
   cy.checkA11y(
     { exclude: [['#tinymce-wrapper'], ['[aria-label="Main Navigation"]']] },

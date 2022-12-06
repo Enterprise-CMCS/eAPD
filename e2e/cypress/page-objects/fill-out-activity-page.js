@@ -281,7 +281,7 @@ class FillOutActivityPage {
                     .type(value)
                     .should('have.value', `${value}`)
                     .blur();
-                  cy.wait(300);
+                  cy.wait(300); // eslint-disable-line cypress/no-unnecessary-waiting
                   cy.waitForSave();
                 });
               });

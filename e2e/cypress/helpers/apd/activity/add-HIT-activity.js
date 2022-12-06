@@ -102,7 +102,7 @@ export const addHITActivity = years => {
         activityData.costAllocation,
         years
       );
-      cy.wait(1000);
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.waitForSave();
 
       _.forEach(years, (year, i) => {
