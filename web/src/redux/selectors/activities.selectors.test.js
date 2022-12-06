@@ -392,9 +392,11 @@ describe('activities state selectors', () => {
             activities: [
               {
                 name: 'activity 1',
-                plannedEndDate: '1997-01-01',
-                plannedStartDate: '1996-06-01',
-                schedule: [
+                activitySchedule: {
+                  plannedEndDate: '1997-01-01',
+                  plannedStartDate: '1996-06-01'
+                },
+                milestones: [
                   // Test all the weird orderings to make sure sorting works
                   // as intended.
                   { milestone: 'milestone 1.1', endDate: '1996-12-15' },

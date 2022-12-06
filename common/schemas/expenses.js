@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
-const nonPersonnelCostsSchema = Joi.object({
+const expensesSchema = Joi.object({
+  id: Joi.any(),
   key: Joi.string(),
   category: Joi.string()
     .valid(
@@ -34,4 +35,4 @@ const nonPersonnelCostsSchema = Joi.object({
   )
 });
 
-export default nonPersonnelCostsSchema;
+export default expensesSchema;

@@ -17,7 +17,7 @@ import { makeSelectCostAllocateFFPBudget } from '../../../../redux/selectors/act
 import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { formatPerc } from '../../../../util/formats';
 
-import costAllocateFFPQuarterlySchema from '@cms-eapd/common/schemas/costAllocateFFPQuarterly';
+import { quarterFFPSchema } from '@cms-eapd/common/schemas/budgetActivities';
 
 const QUARTERS = [1, 2, 3, 4];
 const EXPENSE_NAME_DISPLAY = {
@@ -55,7 +55,7 @@ const CostAllocateFFPQuarterly = ({
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: joiResolver(costAllocateFFPQuarterlySchema)
+    resolver: joiResolver(quarterFFPSchema)
   });
 
   useEffect(() => {
