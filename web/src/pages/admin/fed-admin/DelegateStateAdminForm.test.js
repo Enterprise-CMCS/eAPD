@@ -2,6 +2,7 @@ import React from 'react';
 import { screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 import { render, fireEvent } from '@testing-library/react';
+import { thisFFY } from '@cms-eapd/common/utils/utils';
 import { setCookie } from '../../../util/auth';
 import * as mockAuth from '../../../util/auth';
 import axios from '../../../util/api';
@@ -9,10 +10,8 @@ import MockAdapter from 'axios-mock-adapter';
 
 import { plain as DelegateStateAdminForm } from './DelegateStateAdminForm';
 
-import { thisFFY } from '../../../util';
-
 const defaultProps = {
-  ffy: thisFFY,
+  ffy: thisFFY(),
   name: 'Walter White',
   email: 'walter@white.com',
   state: 'nm',
@@ -42,9 +41,13 @@ describe('the DelegateStateAdminForm component', () => {
     const { user } = setup();
     fetchMock.onPost('/auth/certifications').reply(200);
 
-    await user.click(screen.getByRole('radio', { name: `FFY ${thisFFY}` }));
+    await user.click(
+      screen.getByRole('radio', { name: `FFY ${defaultProps.ffy}` })
+    );
 
-    expect(screen.getByRole('radio', { name: `FFY ${thisFFY}` })).toBeChecked();
+    expect(
+      screen.getByRole('radio', { name: `FFY ${defaultProps.ffy}` })
+    ).toBeChecked();
 
     expect(
       screen.getByRole('textbox', {

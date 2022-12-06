@@ -10,7 +10,8 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
     logger.silly({ id: req.id, message: 'handling POST /apds route' });
 
     try {
-      const apd = getNewApd();
+      const { apdType, ...additionalValues } = req.body;
+      const apd = getNewApd(apdType);
 
       const stateProfile = await getStateProfile(req.user.state.id);
 
@@ -34,7 +35,8 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         const id = await createAPD({
           stateId: req.user.state.id,
           status: 'draft',
-          ...apd
+          ...apd,
+          ...additionalValues
         });
 
         return res.send({

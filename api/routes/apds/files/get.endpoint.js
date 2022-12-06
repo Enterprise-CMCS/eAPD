@@ -9,7 +9,7 @@ const {
 const {
   mnAPDId,
   akAPDId,
-  akAPD2Id,
+  akMMISId,
   badAPDId
 } = require('../../../seeds/test/apds');
 
@@ -51,7 +51,7 @@ describe('APD files endpoints', () => {
 
       it('with an APD that is not associated with the file', async () => {
         const response = await api.get(
-          url(akAPD2Id, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
+          url(akMMISId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
         expect(response.status).toEqual(400);

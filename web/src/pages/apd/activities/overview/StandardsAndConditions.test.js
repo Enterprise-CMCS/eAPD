@@ -11,10 +11,12 @@ import { plain as StandardsAndConditions } from './StandardsAndConditions';
 
 const defaultProps = {
   activity: {
-    description: 'description',
-    standardsAndConditions: {
-      doesNotSupport: 'does not support',
-      supports: 'support'
+    activityOverview: {
+      description: 'description',
+      standardsAndConditions: {
+        doesNotSupport: 'does not support',
+        supports: 'support'
+      }
     }
   },
   activityIndex: 7,
@@ -41,7 +43,7 @@ describe('the StandardsAndConditions component', () => {
     await setup();
     await waitFor(() => {
       expect(screen.getByLabelText('Standards and Conditions')).toHaveValue(
-        defaultProps.activity.standardsAndConditions.supports
+        defaultProps.activity.activityOverview.standardsAndConditions.supports
       );
     });
 
