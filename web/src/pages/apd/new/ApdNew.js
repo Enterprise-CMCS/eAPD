@@ -477,6 +477,7 @@ const ApdNew = ({ createApd: create }) => {
                                   {...props}
                                   label="Other Medicaid Business Area(s)"
                                   name="other-mbas"
+                                  data-cy="other_details"
                                   hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
                                   onBlur={onBlur}
                                   onComponentBlur={onBlur}
@@ -529,6 +530,7 @@ const ApdNew = ({ createApd: create }) => {
               variation="primary"
               disabled={disabled}
               className="ds-u-float--right"
+              data-cy="create_apd_btn"
               onClick={createNew}
             >
               Create an APD
