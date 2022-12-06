@@ -1,6 +1,7 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
 const milestonesSchema = Joi.object({
+  id: Joi.any(),
   key: Joi.any(),
   milestone: Joi.string().required().messages({
     'string.base': 'Milestone is required.',

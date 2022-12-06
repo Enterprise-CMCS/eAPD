@@ -4,7 +4,7 @@ import React, { useEffect, Fragment } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import personCostSchema from '@cms-eapd/common/schemas/personCost';
+import { personYearlyCostsSchema } from '@cms-eapd/common/schemas/statePersonnel';
 
 import DollarField from './DollarField';
 import Dollars from './Dollars';
@@ -30,7 +30,7 @@ const PersonCostForm = ({
     },
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    resolver: joiResolver(personCostSchema)
+    resolver: joiResolver(personYearlyCostsSchema)
   });
 
   const formValues = watch();
