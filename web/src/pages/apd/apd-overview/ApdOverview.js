@@ -8,6 +8,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 import apdOverviewSchema from '@cms-eapd/common/schemas/apdOverview';
+import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import {
   addYear,
@@ -31,6 +32,7 @@ import { getAllFundingSources } from '../../../redux/selectors/activities.select
 
 const ApdOverview = ({
   addApdYear,
+  apdType,
   name,
   narrativeHIE,
   narrativeHIT,
@@ -48,6 +50,7 @@ const ApdOverview = ({
   adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
+  const { enableMmis } = useFlags();
 
   const {
     control,
@@ -169,6 +172,29 @@ const ApdOverview = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
+      <ChoiceList
+        type="radio"
+        className="apd_disabled_choice"
+        choices={[
+          {
+            defaultChecked: !enableMmis || apdType === 'hitech',
+            disabled: true,
+            label: 'HITECH IAPD'
+          }
+        ]}
+      />
+      {enableMmis == true && (
+        <ChoiceList
+          type="radio"
+          className="apd_disabled_choice"
+          choices={[
+            {
+              disabled: true,
+              label: 'MMIS IAPD'
+            }
+          ]}
+        />
+      )}
       <TextField
         className="remove-clearfix"
         label="APD Name"
@@ -280,6 +306,7 @@ const ApdOverview = ({
 
 ApdOverview.propTypes = {
   addApdYear: PropTypes.func.isRequired,
+  apdType: PropTypes.string.isRequired,
   removeApdYear: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   narrativeHIE: PropTypes.string.isRequired,
