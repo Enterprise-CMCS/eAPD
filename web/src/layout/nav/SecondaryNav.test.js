@@ -22,7 +22,7 @@ describe('Secondary Nav component', () => {
   it('renders with activity button description when activity button is diplayed', () => {
     const component = setup();
     const activityButton = component.find('Link');
-    const buttonDescription = component.find('.button-description');
+    const buttonDescription = component.find('#activity-button-description');
     expect(activityButton.text()).toEqual('Add Activity');
     expect(buttonDescription.text()).toEqual('Create an Additional Activity');
   });
