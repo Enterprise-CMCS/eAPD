@@ -55,6 +55,110 @@ const openapi = {
   },
   components: {
     schemas: {
+      costPercentByCostType: {
+        type: 'object',
+        properties: {
+          inHouse: {
+            type: 'object',
+            properties: {
+              dollars: {
+                type: 'number'
+              },
+              percent: {
+                type: 'number'
+              }
+            }
+          },
+          contractors: {
+            type: 'object',
+            properties: {
+              dollars: {
+                type: 'number'
+              },
+              percent: {
+                type: 'number'
+              }
+            }
+          },
+          combined: {
+            type: 'object',
+            properties: {
+              dollars: {
+                type: 'number'
+              },
+              percent: {
+                type: 'number'
+              }
+            }
+          }
+        }
+      },
+      budgetActivity: {
+        type: 'object',
+        properties: {
+          costsByFFY: {
+            type: 'object',
+            'x-patternProperties': {
+              '^[0-9]{4}$': {
+                type: 'object',
+                properties: {
+                  total: {
+                    type: 'number'
+                  },
+                  federal: {
+                    type: 'number'
+                  },
+                  medicaid: {
+                    type: 'number'
+                  },
+                  state: {
+                    type: 'number'
+                  }
+                }
+              }
+            }
+          },
+          quarterlyFFP: {
+            type: 'object',
+            properties: {
+              year: {
+                type: 'object',
+                properties: {
+                  1: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  },
+                  2: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  },
+                  3: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  },
+                  4: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  },
+                  subtotal: {
+                    $ref: '#/components/schemas/costPercentByCostType'
+                  }
+                }
+              },
+              total: {
+                type: 'object',
+                properties: {
+                  inHouse: {
+                    type: 'number'
+                  },
+                  contractors: {
+                    type: 'number'
+                  },
+                  combined: {
+                    type: 'number'
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       singleApd: {
         type: 'object',
         properties: {
@@ -872,7 +976,7 @@ const openapi = {
                 type: 'object',
                 'x-patternProperties': {
                   '^[0-9a-zA-Z]{24}$': {
-                    $ref: 'activities.json'
+                    $ref: '#/components/schemas/budgetActivity'
                   }
                 }
               }
@@ -2253,7 +2357,7 @@ const openapi = {
             type: 'object',
             'x-patternProperties': {
               '^[0-9a-zA-Z]{24}$': {
-                $ref: 'activities.json'
+                $ref: '#/components/schemas/budgetActivity'
               }
             }
           }
