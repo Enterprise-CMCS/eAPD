@@ -24,7 +24,7 @@ import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.sele
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
 
-import otherSourcesSchema from '@cms-eapd/common/schemas/costAllocationOther';
+import { costAllocationOtherSchema } from '@cms-eapd/common/schemas/costAllocation';
 
 const OtherFunding = ({
   activityIndex,
@@ -52,7 +52,7 @@ const OtherFunding = ({
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(otherSourcesSchema)
+    resolver: joiResolver(costAllocationOtherSchema)
   });
 
   useEffect(() => {

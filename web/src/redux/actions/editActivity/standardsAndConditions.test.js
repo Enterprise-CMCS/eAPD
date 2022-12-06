@@ -13,7 +13,7 @@ describe('APD activity edit actions for activity standards and conditions sectio
       )
     ).toEqual({
       type: EDIT_APD,
-      path: '/activities/37/standardsAndConditions/doesNotSupport',
+      path: '/activities/37/activityOverview/standardsAndConditions/doesNotSupport',
       value: 'new non-support'
     });
   });
@@ -23,7 +23,7 @@ describe('APD activity edit actions for activity standards and conditions sectio
       setActivityStandardAndConditionSupportExplanation(37, 'new support')
     ).toEqual({
       type: EDIT_APD,
-      path: '/activities/37/standardsAndConditions/supports',
+      path: '/activities/37/activityOverview/standardsAndConditions/supports',
       value: 'new support'
     });
   });

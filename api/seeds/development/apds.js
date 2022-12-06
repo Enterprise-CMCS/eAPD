@@ -1,21 +1,35 @@
-const { default: akAPD } = require('./01-akAPD');
-const { default: akAPDNoActivities } = require('./02-akAPDNoActivities');
+const { hitech } = require('./01-hitech');
+const { hitechNoActivities } = require('./02-hitechNoActivities');
+const { mmis } = require('./03-mmis');
+const { mmisNoActivities } = require('./04-mmisNoActivities');
 
 const data = [
   {
+    ...hitech,
     stateId: 'ak',
-    status: 'draft',
-    ...akAPD
+    status: 'draft'
   },
   {
+    ...hitechNoActivities,
     stateId: 'ak',
-    status: 'draft',
-    ...akAPDNoActivities
+    status: 'draft'
+  },
+  {
+    ...mmis,
+    stateId: 'ak',
+    status: 'draft'
+  },
+  {
+    ...mmisNoActivities,
+    stateId: 'ak',
+    status: 'draft'
   }
 ];
 
 module.exports = {
   data,
-  akAPD,
-  akAPDNoActivities
+  hitech,
+  hitechNoActivities,
+  mmis,
+  mmisNoActivities
 };
