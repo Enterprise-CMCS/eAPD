@@ -152,19 +152,29 @@ const Activity = ({ activity, activityIndex }) => {
         Activity {activityIndex + 1}: {activity.name || 'Untitled'}
       </h2>
       <strong>Provide a short overview of the activity: </strong>
-      {!activity.summary && <span>No response was provided.</span>}
-      <p dangerouslySetInnerHTML={{ __html: activity.summary }} />
+      {!activity.activityOverview.summary && (
+        <span>No response was provided.</span>
+      )}
+      <p
+        dangerouslySetInnerHTML={{ __html: activity.activityOverview.summary }}
+      />
       <p>
         <strong>Start date: </strong>
-        {stateDateToDisplay(activity.plannedStartDate) || 'None provided'}
+        {stateDateToDisplay(activity.activitySchedule.plannedStartDate) ||
+          'None provided'}
       </p>
       <p>
         <strong>End date: </strong>
-        {stateDateToDisplay(activity.plannedEndDate) || 'None provided'}
+        {stateDateToDisplay(activity.activitySchedule.plannedEndDate) ||
+          'None provided'}
       </p>
       <hr className="subsection-rule" />
       <h3>Activity Overview</h3>
-      <div dangerouslySetInnerHTML={{ __html: activity.description }} />
+      <div
+        dangerouslySetInnerHTML={{
+          __html: activity.activityOverview.description
+        }}
+      />
 
       <h3 className="viewonly-activity-header">
         <small>
@@ -175,7 +185,9 @@ const Activity = ({ activity, activityIndex }) => {
       </h3>
       <div
         dangerouslySetInnerHTML={{
-          __html: activity.alternatives || 'No response was provided.'
+          __html:
+            activity?.activityOverview?.alternatives ||
+            'No response was provided.'
         }}
       />
 
@@ -192,10 +204,10 @@ const Activity = ({ activity, activityIndex }) => {
           CFR 433.112.
         </strong>
       </p>
-      {activity.standardsAndConditions.supports ? (
+      {activity?.activityOverview?.standardsAndConditions?.supports ? (
         <p
           dangerouslySetInnerHTML={{
-            __html: activity.standardsAndConditions.supports
+            __html: activity?.activityOverview?.standardsAndConditions?.supports
           }}
         />
       ) : (
@@ -212,8 +224,10 @@ const Activity = ({ activity, activityIndex }) => {
             from 42 CFR 433.112.
           </strong>
         </p>
-        {activity.standardsAndConditions.doesNotSupport ? (
-          <p>{activity.standardsAndConditions.doesNotSupport}</p>
+        {activity?.activityOverview?.standardsAndConditions?.doesNotSupport ? (
+          <p>
+            {activity?.activityOverview?.standardsAndConditions?.doesNotSupport}
+          </p>
         ) : (
           <p>
             No response was provided for how this activity will support the
@@ -235,8 +249,8 @@ const Activity = ({ activity, activityIndex }) => {
       {activity.outcomes.map(buildOutcome)}
 
       <h3>Milestones</h3>
-      {activity.schedule.length === 0 && 'No milestones were provided.'}
-      {activity.schedule.map((milestone, index) =>
+      {activity.milestones.length === 0 && 'No milestones were provided.'}
+      {activity.milestones.map((milestone, index) =>
         buildMilestone(milestone, index)
       )}
 

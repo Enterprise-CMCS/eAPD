@@ -14,11 +14,13 @@ const initialState = {
         {
           name: 'Our Flag Means Death',
           fundingSource: 'HBO',
-          alternatives: 'Pirates of the Caribbean is also a Pirate movie.',
-          description:
-            'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.',
-          summary:
-            'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
+          activityOverview: {
+            alternatives: 'Pirates of the Caribbean is also a Pirate movie.',
+            description:
+              'Set in the early 1700s during the Golden Age of Piracy, the series follows the misadventures of aristocrat-turned-pirate Stede Bonnet and his crew aboard the Revenge as they try to make a name for themselves as pirates. The crew crosses paths with famed pirate captain Blackbeard and his right-hand-man Izzy Hands.',
+            summary:
+              'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
+          }
         }
       ]
     }
