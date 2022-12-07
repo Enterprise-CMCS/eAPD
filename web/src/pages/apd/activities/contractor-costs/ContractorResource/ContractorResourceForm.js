@@ -90,6 +90,7 @@ const ContractorResourceForm = forwardRef(
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <Controller
           name="name"
@@ -355,6 +356,7 @@ const ContractorResourceForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );
