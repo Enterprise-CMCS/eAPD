@@ -13,11 +13,11 @@ import { removeMilestone } from '../../../../redux/actions/editActivity';
 import { newMilestone } from '../../../../redux/reducers/activities';
 
 const Milestone = ({ activity, activityIndex, remove }) => {
-  const [localList, setLocalList] = useState(activity.schedule);
+  const [localList, setLocalList] = useState(activity.milestones);
 
   useEffect(() => {
-    setLocalList(activity.schedule);
-  }, [activity.schedule]);
+    setLocalList(activity.milestones);
+  }, [activity.milestones]);
 
   const handleAdd = () => {
     const newListItem = newMilestone();
@@ -29,7 +29,7 @@ const Milestone = ({ activity, activityIndex, remove }) => {
   };
 
   const onCancel = () => {
-    setLocalList(activity.schedule);
+    setLocalList(activity.milestones);
   };
 
   return (

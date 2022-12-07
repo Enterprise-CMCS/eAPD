@@ -1,5 +1,6 @@
 import { arrToObj } from '@cms-eapd/common/utils/formatting';
 import { generateKey as defaultGenerateKey } from '@cms-eapd/common/utils/utils';
+import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 
 // Make this thing injectible for testing.
 let generateKey = defaultGenerateKey;
@@ -78,7 +79,18 @@ export const quarterlyFFPEntry = () =>
     {}
   );
 
-export const newActivity = ({
+export const newActivity = ({ years, key, apdType } = {}) => {
+  switch (apdType) {
+    case APD_TYPE.HITECH:
+      return newHitechActivity({ years, key });
+    case APD_TYPE.MMIS:
+      return newMmisActivity({ years, key });
+    default:
+      return {};
+  }
+};
+
+const newHitechActivity = ({
   name = '',
   fundingSource = null,
   years = [],
@@ -90,7 +102,27 @@ export const newActivity = ({
   );
 
   return {
-    alternatives: '',
+    key,
+    activityId: key,
+    fundingSource,
+    name,
+    activityOverview: {
+      summary: '',
+      description: '',
+      alternatives: '',
+      standardsAndConditions: {
+        doesNotSupport: '',
+        supports: ''
+      }
+    },
+    activitySchedule: {
+      plannedEndDate: '',
+      plannedStartDate: ''
+    },
+    milestones: [],
+    outcomes: [],
+    statePersonnel: [],
+    expenses: [],
     contractorResources: [],
     costAllocation: arrToObj(years, costAllocationEntry()),
     costAllocationNarrative: {
@@ -99,26 +131,64 @@ export const newActivity = ({
         ...costAllocationNarrativeYears
       }
     },
-    description: '',
-    expenses: [],
-    fundingSource,
-    activityId: key,
-    key,
-    name,
-    plannedEndDate: '',
-    plannedStartDate: '',
-    outcomes: [],
-    schedule: [],
-    statePersonnel: [],
-    summary: '',
-    standardsAndConditions: {
-      doesNotSupport: '',
-      supports: ''
-    },
     quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
     years,
     meta: {
       expanded: name === 'Program Administration'
+    }
+  };
+};
+
+const newMmisActivity = ({
+  name = '',
+  years = [],
+  key = generateKey()
+} = {}) => {
+  const costAllocationNarrativeYears = arrToObj(
+    years,
+    costAllocationNarrative()
+  );
+
+  return {
+    key,
+    activityId: key,
+    name,
+    activityOverview: {
+      activitySnapshot: '',
+      problemStatement: '',
+      proposedSolution: ''
+    },
+    activitySchedule: {
+      plannedEndDate: '',
+      plannedStartDate: ''
+    },
+    analysisOfAlternativesAndRisks: {
+      alternativeAnalysis: '',
+      costBenefitAnalysis: '',
+      feasibilityStudy: '',
+      requirementsAnalysis: '',
+      forseeableRisks: ''
+    },
+    conditionsForEnhancedFunding: {
+      enhancedFundingQualification: null,
+      enhancedFundingJustification: ''
+    },
+    milestones: [],
+    outcomes: [],
+    statePersonnel: [],
+    expenses: [],
+    contractorResources: [],
+    costAllocation: arrToObj(years, costAllocationEntry()),
+    costAllocationNarrative: {
+      methodology: '',
+      years: {
+        ...costAllocationNarrativeYears
+      }
+    },
+    quarterlyFFP: arrToObj(years, quarterlyFFPEntry()),
+    years,
+    meta: {
+      expanded: false
     }
   };
 };

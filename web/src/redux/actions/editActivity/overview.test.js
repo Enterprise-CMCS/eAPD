@@ -10,7 +10,7 @@ describe('APD activity edit actions for activity overview section', () => {
   it('dispatches an action for setting an activity statement of alternatives', () => {
     expect(setActivityAlternatives(17, 'new alternatives')).toEqual({
       type: EDIT_APD,
-      path: '/activities/17/alternatives',
+      path: '/activities/17/activityOverview/alternatives',
       value: 'new alternatives'
     });
   });
@@ -18,7 +18,7 @@ describe('APD activity edit actions for activity overview section', () => {
   it('dispatches an action for setting an activity description', () => {
     expect(setActivityDescription(17, 'new description')).toEqual({
       type: EDIT_APD,
-      path: '/activities/17/description',
+      path: '/activities/17/activityOverview/description',
       value: 'new description'
     });
   });
@@ -26,7 +26,7 @@ describe('APD activity edit actions for activity overview section', () => {
   it('dispatches an action for setting an activity overview', () => {
     expect(setActivityOverview(17, 'new overview')).toEqual({
       type: EDIT_APD,
-      path: '/activities/17/summary',
+      path: '/activities/17/activityOverview/summary',
       value: 'new overview'
     });
   });

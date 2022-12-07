@@ -37,12 +37,12 @@ module.exports = (
     });
 
     try {
-      await updateAPDReviewStatus({ updates: req.body });
+      const statuses = await updateAPDReviewStatus({ updates: req.body });
+      return res.send(statuses);
     } catch (e) {
       logger.error({ id: req.id, message: 'Error updating APDs' });
       logger.error({ id: req.id, message: e });
-      next({ message: 'Error updating APDs' });
+      return next({ message: 'Error updating APDs' });
     }
-    return res.status(204).end();
   });
 };

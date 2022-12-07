@@ -63,8 +63,8 @@ services:
     expose:
       - 8000
     volumes:
-      - api:/app/api
-      - common:/app/common
+      - ./api:/app/api
+      - ./common:/app/common
       - /app/node_modules
 
 volumes:

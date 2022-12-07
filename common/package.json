@@ -10,7 +10,7 @@
     "scaffold": "yarn clean && mkdir dist",
     "build": "yarn scaffold && babel . -d ./dist -s --ignore \"node_modules\",\"dist\"",
     "stryker": "TZ=utc stryker run",
-    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest",
+    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch",
     "npm-check": "npx npm-check-updates"
   },

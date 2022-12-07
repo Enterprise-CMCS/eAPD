@@ -34,6 +34,7 @@ module.exports = (
     let submittedApds = [];
     try {
       submittedApds = await getAllSubmittedAPDs();
+      return res.send(submittedApds);
     } catch (e) {
       logger.error({
         id: req.id,

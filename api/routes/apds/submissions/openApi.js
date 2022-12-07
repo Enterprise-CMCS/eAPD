@@ -55,7 +55,30 @@ const openAPI = {
       },
       responses: {
         200: {
-          description: 'response description'
+          description: 'response description',
+          content: jsonResponse(
+            arrayOf({
+              type: 'object',
+              properties: {
+                apdId: {
+                  type: 'string',
+                  description: 'the id of the APD updated'
+                },
+                updatedStatus: {
+                  type: 'string',
+                  description: 'the updated status for the APD'
+                },
+                success: {
+                  type: 'boolean',
+                  description: 'whether the update was successful'
+                },
+                error: {
+                  type: 'string',
+                  description: 'error message describing unsuccessful updates'
+                }
+              }
+            })
+          )
         },
         400: {
           description: 'Request body is invalid'

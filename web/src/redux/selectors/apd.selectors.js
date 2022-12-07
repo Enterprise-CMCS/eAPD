@@ -6,6 +6,12 @@ export const selectApds = ({ apd }) => apd;
 
 export const selectApdData = ({ apd: { data } }) => data;
 
+export const selectApdType = ({
+  apd: {
+    data: { apdType }
+  }
+}) => apdType;
+
 export const selectApdYears = ({
   apd: {
     data: { years }
