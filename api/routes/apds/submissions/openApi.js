@@ -14,7 +14,12 @@ const openAPI = {
       responses: {
         200: {
           description: 'The list of submitted APDs',
-          content: jsonResponse(arrayOf({ $ref: '#/components/schemas/apd' }))
+          content: jsonResponse({
+            oneOf: [
+              { $ref: '#/components/schemas/hitech' },
+              { $ref: '#/components/schemas/mmis' }
+            ]
+          })
         },
         403: {
           description: 'Unauthenticated error'
