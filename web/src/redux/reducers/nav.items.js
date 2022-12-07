@@ -3,7 +3,7 @@ import { t } from '../../i18n';
 
 const staticItems = (apdId, apdType) => {
   if (apdId) {
-    if (apdType === 'hitech') {
+    if (apdType === 'HITECH') {
       return [
         {
           label: titleCase(t('apd.title')),
@@ -108,7 +108,7 @@ const staticItems = (apdId, apdType) => {
         }
       ];
     }
-    if (apdType === 'mmis') {
+    if (apdType === 'MMIS') {
       return [
         {
           label: titleCase(t('apd.title')),
@@ -219,7 +219,7 @@ const staticItems = (apdId, apdType) => {
 };
 
 const buildActivitySection = (apdId, apdType, activityId) => {
-  if (apdType === 'hitech') {
+  if (apdType === 'HITECH') {
     return [
       {
         label: 'Activity Overview',
@@ -251,7 +251,7 @@ const buildActivitySection = (apdId, apdType, activityId) => {
       }
     ];
   }
-  if (apdType === 'mmis') {
+  if (apdType === 'MMIS') {
     return [
       {
         label: 'Activity Overview',

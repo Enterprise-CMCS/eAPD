@@ -48,7 +48,7 @@ const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case APD_ACTIVITIES_CHANGE: {
       const items = getItems({
-        apdType: 'hitech',
+        apdType: action.apdType,
         activities: action.activities,
         items: state.items,
         url: action.url
@@ -64,9 +64,11 @@ const reducer = (state = initialState, action = {}) => {
     case SELECT_APD_SUCCESS: {
       const apdId =
         action.data.apd && action.data.apd.id ? action.data.apd.id : null;
+      const apdType = action.data?.apd?.apdType;
       return {
         ...state,
         apdId,
+        apdType,
         items: staticItems(apdId)
       };
     }
@@ -77,7 +79,7 @@ const reducer = (state = initialState, action = {}) => {
 
       const items = getItems({
         apdId: state.apdId,
-        apdType: 'hitech',
+        apdType: state.apdType,
         activities: state.activities,
         items: state.items,
         url
