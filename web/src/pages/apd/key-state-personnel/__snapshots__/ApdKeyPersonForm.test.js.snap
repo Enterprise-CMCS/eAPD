@@ -50,6 +50,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
   >
     <button
       aria-hidden="true"
+      aria-label="submitButton"
       disabled={true}
       style={
         Object {
@@ -68963,6 +68964,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       </ChoiceList>
     </Component>
     <input
+      aria-label="submitButton"
       className="ds-u-visibility--hidden"
       hidden={true}
       type="submit"
@@ -68979,6 +68981,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
 >
   <button
     aria-hidden="true"
+    aria-label="submitButton"
     disabled={true}
     style={
       Object {
@@ -69470,6 +69473,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     render={[Function]}
   />
   <input
+    aria-label="submitButton"
     className="ds-u-visibility--hidden"
     hidden={true}
     type="submit"
@@ -69485,6 +69489,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
 >
   <button
     aria-hidden="true"
+    aria-label="submitButton"
     disabled={true}
     style={
       Object {
@@ -69976,6 +69981,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     render={[Function]}
   />
   <input
+    aria-label="submitButton"
     className="ds-u-visibility--hidden"
     hidden={true}
     type="submit"
