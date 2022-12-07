@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 const apdNewSchema = Joi.object({
-  apdType: Joi.string().valid('hitech', 'mmis').required().messages({
+  apdType: Joi.string().valid('HITECH', 'MMIS').required().messages({
     'any.only': 'Select an APD Type.',
     'any.required': 'Select an APD Type.'
   }),
@@ -10,7 +10,7 @@ const apdNewSchema = Joi.object({
     'array.min': 'Select at least one year.'
   }),
   mmisUpdate: Joi.when('apdType', {
-    is: 'mmis',
+    is: 'MMIS',
     then: Joi.string().valid('yes', 'no').required().messages({
       'any.only': 'Indicate whether this APD is an update.',
       'any.required': 'Indicate whether this APD is an update.'
@@ -18,7 +18,7 @@ const apdNewSchema = Joi.object({
     otherwise: Joi.string().valid('')
   }),
   updateStatus: Joi.when('apdType', {
-    is: 'hitech',
+    is: 'HITECH',
     then: Joi.object({
       typeStatus: Joi.object({
         annualUpdate: Joi.boolean(),

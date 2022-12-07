@@ -158,7 +158,7 @@ export const createApd =
   dispatch => {
     dispatch({ type: CREATE_APD_REQUEST });
     return axios
-      .post('/apds', { apdType: APD_TYPE.HITECH })
+      .post('/apds', values)
       .then(async req => {
         let data = req.data;
         dispatch({ type: CREATE_APD_SUCCESS, data: data });

@@ -69,14 +69,14 @@ const ApdNew = ({ createApd: create }) => {
     {
       label: 'HITECH IAPD',
       labelClassName: 'label-extended',
-      value: 'hitech',
+      value: 'HITECH',
       hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
       checked: value
     },
     {
       label: 'MMIS IAPD',
       labelClassName: 'label-extended',
-      value: 'mmis',
+      value: 'MMIS',
       hint: 'Medicaid Management Information System Implementation APD',
       checked: value
     }
@@ -88,8 +88,8 @@ const ApdNew = ({ createApd: create }) => {
       apdChoices.pop();
       apdChoices[0].checked = true;
       setApdChoices(apdChoices);
-      setApdType('hitech');
-      setValue('apdType', 'hitech', { shouldValidate: true });
+      setApdType('HITECH');
+      setValue('apdType', 'HITECH', { shouldValidate: true });
     }
   }, [apdChoices]);
 
@@ -186,7 +186,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             )}
           />
-          {(apdType === 'mmis' || apdType === 'hitech') && (
+          {(apdType === 'MMIS' || apdType === 'HITECH') && (
             <div>
               <Controller
                 name="name"
@@ -228,7 +228,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             </div>
           )}
-          {apdType === 'hitech' && (
+          {apdType === 'HITECH' && (
             <div>
               <Controller
                 name="updateStatus.updateList"
@@ -278,7 +278,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             </div>
           )}
-          {apdType === 'mmis' && (
+          {apdType === 'MMIS' && (
             <div>
               <Controller
                 name="mmisUpdate"

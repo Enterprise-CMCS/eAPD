@@ -37,7 +37,7 @@ const getNewMmisApd = () => {
   });
 
   return {
-    apdType: APD_TYPE.HITECH,
+    apdType: APD_TYPE.MMIS,
     name: 'MMIS IAPD',
     apdOverview: {},
     statePrioritiesAndScope: {
