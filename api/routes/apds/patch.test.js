@@ -140,7 +140,7 @@ tap.test('apds PATCH endpoint', async tests => {
       }
     });
 
-    const patches = [
+    const patch = [
       { op: 'replace', path: '/keyPersonnel/0/name', value: 'Sam I Am' },
       {
         op: 'replace',
@@ -151,7 +151,7 @@ tap.test('apds PATCH endpoint', async tests => {
 
     await handler(
       {
-        body: patches,
+        body: patch,
         params: { id: 'apd id' },
         user: { state: { id: 'co' } }
       },
@@ -160,7 +160,7 @@ tap.test('apds PATCH endpoint', async tests => {
     );
 
     test.ok(
-      updateAPDDocument.calledWith('apd id', 'co', patches),
+      updateAPDDocument.calledWith({ id: 'apd id', stateId: 'co', patch }),
       'updates the right set of things'
     );
 

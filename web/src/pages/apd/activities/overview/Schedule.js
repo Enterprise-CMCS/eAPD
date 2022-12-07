@@ -14,7 +14,7 @@ import { selectActivityByIndex } from '../../../../redux/selectors/activities.se
 import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { stateDateToDisplay } from '../../../../util';
 
-import scheduleSchema from '@cms-eapd/common/schemas/plannedActivityShedule';
+import activityScheduleSchema from '@cms-eapd/common/schemas/activitySchedule';
 
 const Schedule = ({
   activity,
@@ -25,7 +25,8 @@ const Schedule = ({
 }) => {
   Schedule.displayName = 'Schedule';
 
-  const { plannedStartDate, plannedEndDate } = activity;
+  const { activitySchedule: { plannedStartDate, plannedEndDate } = {} } =
+    activity;
 
   const {
     control,
@@ -37,7 +38,7 @@ const Schedule = ({
       plannedStartDate,
       plannedEndDate
     },
-    resolver: joiResolver(scheduleSchema)
+    resolver: joiResolver(activityScheduleSchema)
   });
 
   useEffect(() => {
@@ -106,11 +107,11 @@ const Schedule = ({
         <div className="visibility--print">
           <p>
             <strong>Start date:</strong>{' '}
-            {stateDateToDisplay(activity.plannedStartDate)}
+            {stateDateToDisplay(activity?.activitySchedule?.plannedStartDate)}
           </p>
           <p>
             <strong>End date:</strong>{' '}
-            {stateDateToDisplay(activity.plannedEndDate)}
+            {stateDateToDisplay(activity?.activitySchedule?.plannedEndDate)}
           </p>
           <hr />
         </div>

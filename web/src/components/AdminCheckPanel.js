@@ -68,7 +68,7 @@ const AdminCheckPanel = ({
     adminCheckData?.length === 0
       ? toggleAdminComplete(true)
       : toggleAdminComplete(false);
-  }, [adminCheckData]);
+  }, [adminCheckData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>

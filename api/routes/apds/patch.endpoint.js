@@ -56,7 +56,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = [
         {
           op: 'replace',
-          path: '/activities/0/schedule/0/endDate',
+          path: '/activities/0/milestones/0/endDate',
           value: '2022-13-12'
         }
       ];
