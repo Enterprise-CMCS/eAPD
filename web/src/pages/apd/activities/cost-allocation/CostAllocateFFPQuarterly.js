@@ -158,7 +158,9 @@ const CostAllocateFFPQuarterly = ({
                         onChange={setInHouse(q)}
                         onBlur={onBlur}
                         round
-                        value={quarterlyFFP[year][q].inHouse.percent * 100}
+                        value={(
+                          quarterlyFFP[year][q].inHouse.percent * 100
+                        ).toFixed(0)}
                       />
                     )}
                   />
@@ -220,7 +222,9 @@ const CostAllocateFFPQuarterly = ({
                         onChange={setContractor(q)}
                         onBlur={onBlur}
                         round
-                        value={quarterlyFFP[year][q].contractors.percent * 100}
+                        value={(
+                          quarterlyFFP[year][q].contractors.percent * 100
+                        ).toFixed(0)}
                       />
                     )}
                   />
