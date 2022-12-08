@@ -388,6 +388,116 @@ describe('the cost allocation quarterly FFP component', () => {
     ).toBeInTheDocument();
   });
 
+  it('shows the correct number in the FFP table', async () => {
+    await setup(
+      {},
+      {
+        initialState: {
+          apd: {
+            data: {
+              years: ['2022']
+            },
+            adminCheck: false
+          },
+          budget: {
+            activities: {
+              '6ea6b4a2': {
+                quarterlyFFP: {
+                  years: {
+                    2022: {
+                      1: {
+                        combined: {
+                          dollars: 827785,
+                          percent: 0
+                        },
+                        contractors: {
+                          dollars: 537029,
+                          percent: 0.29
+                        },
+                        inHouse: {
+                          dollars: 518510,
+                          percent: 0.28
+                        }
+                      },
+                      2: {
+                        combined: {
+                          dollars: 753712,
+                          percent: 0
+                        },
+                        contractors: {
+                          dollars: 388882,
+                          percent: 0.21
+                        },
+                        inHouse: {
+                          dollars: 407401,
+                          percent: 0.22
+                        }
+                      },
+                      3: {
+                        combined: {
+                          dollars: 753711,
+                          percent: 0
+                        },
+                        contractors: {
+                          dollars: 290756,
+                          percent: 0.25
+                        },
+                        inHouse: {
+                          dollars: 462955,
+                          percent: 0.25
+                        }
+                      },
+                      4: {
+                        combined: {
+                          dollars: 753711,
+                          percent: 0
+                        },
+                        contractors: {
+                          dollars: 290756,
+                          percent: 0.25
+                        },
+                        inHouse: {
+                          dollars: 462955,
+                          percent: 0.25
+                        }
+                      },
+                      subtotal: {
+                        combined: {
+                          dollars: 3014848,
+                          percent: 0
+                        },
+                        contractors: {
+                          dollars: 1163026,
+                          percent: 1
+                        },
+                        inHouse: {
+                          dollars: 1851822,
+                          percent: 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    );
+
+    expect(
+      screen.getByRole('textbox', {
+        name: `federal share for ffy 2022, quarter 1, contractors`
+      })
+    ).toHaveValue('29');
+
+    expect(
+      screen.getByRole('textbox', {
+        name: `federal share for ffy 2022, quarter 1, state`
+      })
+    ).toHaveValue('28');
+  });
+
   // Todo: Revisit this. It seems that the component is trying
   // to call deeply nested functions. Unsure what a workaround
   // would be. Perhaps the component should be refactored.
@@ -422,13 +532,31 @@ describe('the cost allocation quarterly FFP component', () => {
       screen.getByRole('textbox', {
         name: 'federal share for ffy 2022, quarter 1, state'
       }),
-      '5'
+      '57'
     );
 
     expect(
       screen.getByRole('textbox', {
         name: 'federal share for ffy 2022, quarter 1, state'
       })
-    ).toHaveValue('5');
+    ).toHaveValue('57');
+
+    await user.clear(
+      screen.getByRole('textbox', {
+        name: 'federal share for ffy 2022, quarter 1, state'
+      })
+    );
+    await user.type(
+      screen.getByRole('textbox', {
+        name: 'federal share for ffy 2022, quarter 1, state'
+      }),
+      '56'
+    );
+
+    expect(
+      screen.getByRole('textbox', {
+        name: 'federal share for ffy 2022, quarter 1, state'
+      })
+    ).toHaveValue('56');
   });
 });
