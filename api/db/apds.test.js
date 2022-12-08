@@ -1,7 +1,9 @@
 const sinon = require('sinon');
 const tap = require('tap');
-
 const { APD_TYPE } = require('@cms-eapd/common');
+const ObjectId = require('mongoose').Types.ObjectId;
+const knex = require('./knex');
+
 const {
   createAPD,
   deleteAPDByID,
@@ -38,12 +40,16 @@ const deleteAPD = async apdId => {
   }
 };
 
-tap.test('database wrappers / apds', async apdsTests => {
+tap.test('database wrappers / apds', { timeout: 900000 }, async apdsTests => {
   apdsTests.before(async () => {
     // Trisha Elric, Edward and Alfonse's mother, dies of complications from
     // a plague, kicking off the Elric brothers' quest for human transmutation.
     clockStub = sinon.stub(Date, 'now').returns(nowDate);
     await setup();
+
+    await Budget.deleteMany();
+    await APD.deleteMany();
+    await knex('apd_review_status').delete();
   });
 
   apdsTests.beforeEach(async () => {
@@ -179,101 +185,101 @@ tap.test('database wrappers / apds', async apdsTests => {
     await deleteAPD(mnDraftId);
   });
 
-  apdsTests.test('updating APD status', async updateApdStatus => {
-    updateApdStatus.test('empty status update', async test => {
-      const coSubmittedId = await createAPD({
-        stateId: 'co',
-        status: 'submitted',
-        ...hitech
-      });
-      const mnSubmittedId = await createAPD({
-        stateId: 'mn',
-        status: 'submitted',
-        ...mmis
+  apdsTests.test(
+    'updating APD status',
+    { timeout: 300000 },
+    async updateApdStatus => {
+      updateApdStatus.test('empty status update', async test => {
+        const status = await updateAPDReviewStatus();
+        test.equal(status.length, 0, 'the empty update was handled');
       });
 
-      const status = await updateAPDReviewStatus();
-      test.equal(status.length, 0, 'the empty update was handled');
-      await deleteAPD(coSubmittedId);
-      await deleteAPD(mnSubmittedId);
-    });
+      updateApdStatus.test(
+        'successfully updating the status of an APD',
+        async test => {
+          const status = await updateAPDReviewStatus({
+            updates: [{ apdId: hitechId, newStatus: 'approved' }]
+          });
 
-    // TODO: these aren't working because node-tap is hanging
-    // updateApdStatus.test('updating the status of an APD', async test => {
-    //   const coSubmittedId = await createAPD({
-    //     stateId: 'co',
-    //     status: 'submitted',
-    //     ...hitech
-    //   });
-    //   const mnSubmittedId = await createAPD({
-    //     stateId: 'mn',
-    //     status: 'submitted',
-    //     ...mmis
-    //   });
+          test.equal(status[0].apdId, hitechId, 'apd Ids match');
+          test.equal(status[0].updatedStatus, 'approved');
+          test.ok(status[0].success, 'the APD update was successful');
+        }
+      );
 
-    //   const status = await updateAPDReviewStatus({
-    //     updates: [{ apdId: coSubmittedId, newStatus: 'approved' }]
-    //   });
+      updateApdStatus.test(
+        'successfully updating the status of two APDs',
+        async test => {
+          const status = await updateAPDReviewStatus({
+            updates: [
+              { apdId: hitechId, newStatus: 'approved' },
+              { apdId: mmisId, newStatus: 'approved' }
+            ]
+          });
+          test.equal(status.length, 2, '2 APDs were updated');
+          test.equal(status[0].updatedStatus, 'approved');
+          test.equal(status[1].updatedStatus, 'approved');
+        }
+      );
 
-    //   test.equal(status.length, 1, 'the APD was updated');
-    //   test.equal(status[0].apdId, coSubmittedId);
-    //   test.equal(status[0].updatedStatus, 'approved');
-    //   await deleteAPD(coSubmittedId);
-    //   await deleteAPD(mnSubmittedId);
-    // });
+      updateApdStatus.test('bad apd id error', async test => {
+        const status = await updateAPDReviewStatus({
+          updates: [{ apdId: 'bad id', newStatus: 'approved' }]
+        });
+        test.equal(status[0].error, 'APD Id is invalid');
+        test.ok(status[0].updatedStatus === undefined);
+        test.ok(!status[0].success);
+      });
 
-    // TODO: these aren't working because node-tap is hanging
-    // updateApdStatus.test('updating the status of two APDs', async test => {
-    //   const coSubmittedId = await createAPD({
-    //     stateId: 'co',
-    //     status: 'submitted',
-    //     ...hitech
-    //   });
-    //   const mnSubmittedId = await createAPD({
-    //     stateId: 'mn',
-    //     status: 'submitted',
-    //     ...mmis
-    //   });
+      updateApdStatus.test('apd not found error', async test => {
+        const status = await updateAPDReviewStatus({
+          updates: [{ apdId: new ObjectId(), newStatus: 'approved' }]
+        });
+        test.equal(status[0].error, 'No APD found for APD Id');
+        test.ok(status[0].updatedStatus === undefined);
+        test.ok(!status[0].success);
+      });
 
-    //   const status = await updateAPDReviewStatus({
-    //     updates: [
-    //       { apdId: coSubmittedId, newStatus: 'approved' },
-    //       { apdId: mnSubmittedId, newStatus: 'approved' }
-    //     ]
-    //   });
-    //   test.equal(status.length, 2, 'the APDs were updated');
-    //   test.equal(status[0].updatedStatus, 'approved');
-    //   test.equal(status[1].updatedStatus, 'approved');
-    //   await deleteAPD(coSubmittedId);
-    //   await deleteAPD(mnSubmittedId);
-    // });
+      updateApdStatus.test('newStatus missing error', async test => {
+        const status = await updateAPDReviewStatus({
+          updates: [{ apdId: mmisId }]
+        });
+        test.equal(status[0].error, 'newStatus missing');
+        test.ok(status[0].updatedStatus === undefined);
+        test.ok(!status[0].success);
+      });
 
-    // TODO: these aren't working because node-tap is hanging
-    // updateApdStatus.test('invalid status update', async test => {
-    //   const coSubmittedId = await createAPD({
-    //     stateId: 'co',
-    //     status: 'submitted',
-    //     ...hitech
-    //   });
-    //   const mnSubmittedId = await createAPD({
-    //     stateId: 'mn',
-    //     status: 'submitted',
-    //     ...mmis
-    //   });
+      updateApdStatus.test(
+        'all error types and successful update',
+        async test => {
+          const status = await updateAPDReviewStatus({
+            updates: [
+              { apdId: 'badId', newStatus: 'approved' },
+              { apdId: new ObjectId(), newStatus: 'approved' },
+              { apdId: hitechId },
+              { apdId: mmisId, newStatus: 'approved' }
+            ]
+          });
 
-    //   const status = await updateAPDReviewStatus({
-    //     updates: [
-    //       { apdId: 'bad id', newStatus: 'approved' },
-    //       { apdId: mnSubmittedId, newStatus: 'approved' }
-    //     ]
-    //   });
-    //   test.equal(status.length, 2, 'the APDs were updated');
-    //   test.equal(status[0].error, 'update failed');
-    //   test.equal(status[1].status, 'approved');
-    //   await deleteAPD(coSubmittedId);
-    //   await deleteAPD(mnSubmittedId);
-    // });
-  });
+          test.equal(status[0].error, 'APD Id is invalid');
+          test.ok(status[0].updatedStatus === undefined);
+          test.ok(!status[0].success);
+
+          test.equal(status[1].error, 'No APD found for APD Id');
+          test.ok(status[1].updatedStatus === undefined);
+          test.ok(!status[1].success);
+
+          test.equal(status[2].error, 'newStatus missing');
+          test.ok(status[2].updatedStatus === undefined);
+          test.ok(!status[2].success);
+
+          test.equal(status[3].apdId, mmisId, 'apd Ids match');
+          test.equal(status[3].updatedStatus, 'approved');
+          test.ok(status[3].success, 'the APD update was successful');
+        }
+      );
+    }
+  );
 
   apdsTests.test('deleting an APD', async test => {
     const result = await deleteAPDByID(hitechId);
@@ -329,64 +335,19 @@ tap.test('database wrappers / apds', async apdsTests => {
     );
   });
 
-  apdsTests.test('updating an APD', async updateAPDDocumentTests => {
-    updateAPDDocumentTests.beforeEach(() => {
-      clockStub = sinon.useFakeTimers(nowDate);
-    });
-
-    updateAPDDocumentTests.afterEach(async () => {
-      clockStub.restore();
-    });
-
-    updateAPDDocumentTests.test('with only patch errors', async test => {
-      const {
-        errors,
-        apd: { updatedAt, activities }
-      } = await updateAPDDocument({
-        id: mmisId,
-        stateId: 'ak',
-        patch: [
-          {
-            op: 'replace',
-            path: '/activities/0/milestones/0/endDate',
-            value: '2021-01-36'
-          },
-          {
-            op: 'replace',
-            path: '/activities/0/milestones/1/endDate',
-            value: '2022-15-31'
-          }
-        ]
+  apdsTests.test(
+    'updating an APD',
+    { timeout: 300000 },
+    async updateAPDDocumentTests => {
+      updateAPDDocumentTests.beforeEach(() => {
+        clockStub = sinon.useFakeTimers(nowDate);
       });
 
-      test.ok(
-        errors['/activities/0/milestones/0/endDate'],
-        'found endDate validation error'
-      );
-      test.ok(
-        errors['/activities/0/milestones/1/endDate'],
-        'found endDate validation error'
-      );
-      test.equal(
-        activities[0].milestones[0].endDate,
-        null,
-        'Error in Activity 1, Milestone 1, endDate; it has been set to null'
-      );
-      test.equal(
-        activities[0].milestones[1].endDate,
-        null,
-        'Error in Activity 1 Milestone 2 endDate; it has been set to null'
-      );
-      test.equal(
-        updatedAt.toJSON(),
-        '1904-10-03T00:00:00.000Z',
-        'updatedAt was updated'
-      );
-    });
+      updateAPDDocumentTests.afterEach(async () => {
+        clockStub.restore();
+      });
 
-    updateAPDDocumentTests.test(
-      'with patch error and valid patch',
-      async test => {
+      updateAPDDocumentTests.test('with only patch errors', async test => {
         const {
           errors,
           apd: { updatedAt, activities }
@@ -401,8 +362,8 @@ tap.test('database wrappers / apds', async apdsTests => {
             },
             {
               op: 'replace',
-              path: '/activities/0/milestones/0/milestone',
-              value: 'Updated milestone'
+              path: '/activities/0/milestones/1/endDate',
+              value: '2022-15-31'
             }
           ]
         });
@@ -411,132 +372,87 @@ tap.test('database wrappers / apds', async apdsTests => {
           errors['/activities/0/milestones/0/endDate'],
           'found endDate validation error'
         );
+        test.ok(
+          errors['/activities/0/milestones/1/endDate'],
+          'found endDate validation error'
+        );
         test.equal(
           activities[0].milestones[0].endDate,
           null,
           'Error in Activity 1, Milestone 1, endDate; it has been set to null'
         );
         test.equal(
-          activities[0].milestones[0].milestone,
-          'Updated milestone',
-          'Activity 1, Milestone 1, milestone was updated'
+          activities[0].milestones[1].endDate,
+          null,
+          'Error in Activity 1 Milestone 2 endDate; it has been set to null'
         );
         test.equal(
           updatedAt.toJSON(),
           '1904-10-03T00:00:00.000Z',
           'updatedAt was updated'
         );
-      }
-    );
+      });
 
-    updateAPDDocumentTests.test('with a valid patch', async test => {
-      const {
-        errors,
-        apd: {
-          updatedAt,
-          apdOverview: { programOverview }
+      updateAPDDocumentTests.test(
+        'with patch error and valid patch',
+        async test => {
+          const {
+            errors,
+            apd: { updatedAt, activities }
+          } = await updateAPDDocument({
+            id: mmisId,
+            stateId: 'ak',
+            patch: [
+              {
+                op: 'replace',
+                path: '/activities/0/milestones/0/endDate',
+                value: '2021-01-36'
+              },
+              {
+                op: 'replace',
+                path: '/activities/0/milestones/0/milestone',
+                value: 'Updated milestone'
+              }
+            ]
+          });
+
+          test.ok(
+            errors['/activities/0/milestones/0/endDate'],
+            'found endDate validation error'
+          );
+          test.equal(
+            activities[0].milestones[0].endDate,
+            null,
+            'Error in Activity 1, Milestone 1, endDate; it has been set to null'
+          );
+          test.equal(
+            activities[0].milestones[0].milestone,
+            'Updated milestone',
+            'Activity 1, Milestone 1, milestone was updated'
+          );
+          test.equal(
+            updatedAt.toJSON(),
+            '1904-10-03T00:00:00.000Z',
+            'updatedAt was updated'
+          );
         }
-      } = await updateAPDDocument({
-        id: hitechId,
-        stateId: 'co',
-        patch: [
-          {
-            op: 'replace',
-            path: `/apdOverview/programOverview`,
-            value: 'This is the test of a <a>program overview</a>'
-          }
-        ]
-      });
-
-      test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
-      test.equal(
-        programOverview,
-        'This is the test of a <a>program overview</a>',
-        'programOverview was updated'
-      );
-    });
-
-    updateAPDDocumentTests.test('without a state profile', async test => {
-      const {
-        errors,
-        apd: { updatedAt },
-        stateUpdated
-      } = await updateAPDDocument({
-        id: mmisId,
-        stateId: 'ak',
-        patch: [
-          {
-            op: 'replace',
-            path: '/activities/0/milestones/1/endDate',
-            value: '2022-12-31'
-          }
-        ]
-      });
-
-      test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
-      test.notOk(stateUpdated, 'state was not updated');
-    });
-
-    updateAPDDocumentTests.test('with a state profile', async test => {
-      const updateProfile = sinon.stub();
-      updateProfile
-        .withArgs('ak', {
-          medicaidDirector: {
-            name: 'Cornelius Fudge',
-            email: 'c.fudge@ministry.magic',
-            phone: '5551234567'
-          },
-          medicaidOffice: {
-            address1: '132 Green St',
-            address2: '',
-            city: 'Cityville',
-            state: 'AK',
-            zip: '12345'
-          },
-          years: ['2021', '2022']
-        })
-        .resolves();
-
-      const {
-        errors,
-        apd: { updatedAt },
-        stateUpdated
-      } = await updateAPDDocument(
-        {
-          id: mmisId,
-          stateId: 'ak',
-          patch: [
-            {
-              op: 'replace',
-              path: '/keyStatePersonnel/medicaidOffice/address1',
-              value: '132 Green St'
-            }
-          ]
-        },
-        { updateProfile }
       );
 
-      test.equal(Object.keys(errors).length, 0, 'no errors');
-      test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
-      test.ok(stateUpdated, 'state was updated');
-    });
-
-    updateAPDDocumentTests.test(
-      'HITECH with a valid patch that triggers budget update',
-      async test => {
+      updateAPDDocumentTests.test('with a valid patch', async test => {
         const {
           errors,
-          apd: { updatedAt, activities }
+          apd: {
+            updatedAt,
+            apdOverview: { programOverview }
+          }
         } = await updateAPDDocument({
           id: hitechId,
           stateId: 'co',
           patch: [
             {
               op: 'replace',
-              path: '/activities/0/expenses/0/years/2022',
-              value: 50000
+              path: `/apdOverview/programOverview`,
+              value: 'This is the test of a <a>program overview</a>'
             }
           ]
         });
@@ -544,41 +460,135 @@ tap.test('database wrappers / apds', async apdsTests => {
         test.equal(Object.keys(errors).length, 0, 'no errors');
         test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
         test.equal(
-          activities[0].expenses[0].years['2022'],
-          50000,
-          'expense coast was updated'
+          programOverview,
+          'This is the test of a <a>program overview</a>',
+          'programOverview was updated'
         );
-      }
-    );
+      });
 
-    updateAPDDocumentTests.test(
-      'MMIS with a valid patch that triggers budget update',
-      async test => {
+      updateAPDDocumentTests.test('without a state profile', async test => {
         const {
           errors,
-          apd: { updatedAt, activities }
+          apd: { updatedAt },
+          stateUpdated
         } = await updateAPDDocument({
           id: mmisId,
           stateId: 'ak',
           patch: [
             {
               op: 'replace',
-              path: '/activities/0/expenses/0/years/2022',
-              value: 50000
+              path: '/activities/0/milestones/1/endDate',
+              value: '2022-12-31'
             }
           ]
         });
 
         test.equal(Object.keys(errors).length, 0, 'no errors');
         test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
-        test.equal(
-          activities[0].expenses[0].years['2022'],
-          50000,
-          'expense coast was updated'
+        test.notOk(stateUpdated, 'state was not updated');
+      });
+
+      updateAPDDocumentTests.test('with a state profile', async test => {
+        const updateProfile = sinon.stub();
+        updateProfile
+          .withArgs('ak', {
+            medicaidDirector: {
+              name: 'Cornelius Fudge',
+              email: 'c.fudge@ministry.magic',
+              phone: '5551234567'
+            },
+            medicaidOffice: {
+              address1: '132 Green St',
+              address2: '',
+              city: 'Cityville',
+              state: 'AK',
+              zip: '12345'
+            },
+            years: ['2021', '2022']
+          })
+          .resolves();
+
+        const {
+          errors,
+          apd: { updatedAt },
+          stateUpdated
+        } = await updateAPDDocument(
+          {
+            id: mmisId,
+            stateId: 'ak',
+            patch: [
+              {
+                op: 'replace',
+                path: '/keyStatePersonnel/medicaidOffice/address1',
+                value: '132 Green St'
+              }
+            ]
+          },
+          { updateProfile }
         );
-      }
-    );
-  });
+
+        test.equal(Object.keys(errors).length, 0, 'no errors');
+        test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
+        test.ok(stateUpdated, 'state was updated');
+      });
+
+      updateAPDDocumentTests.test(
+        'HITECH with a valid patch that triggers budget update',
+        async test => {
+          const {
+            errors,
+            apd: { updatedAt, activities }
+          } = await updateAPDDocument({
+            id: hitechId,
+            stateId: 'co',
+            patch: [
+              {
+                op: 'replace',
+                path: '/activities/0/expenses/0/years/2022',
+                value: 50000
+              }
+            ]
+          });
+
+          test.equal(Object.keys(errors).length, 0, 'no errors');
+          test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
+          test.equal(
+            activities[0].expenses[0].years['2022'],
+            50000,
+            'expense coast was updated'
+          );
+        }
+      );
+
+      updateAPDDocumentTests.test(
+        'MMIS with a valid patch that triggers budget update',
+        async test => {
+          const {
+            errors,
+            apd: { updatedAt, activities }
+          } = await updateAPDDocument({
+            id: mmisId,
+            stateId: 'ak',
+            patch: [
+              {
+                op: 'replace',
+                path: '/activities/0/expenses/0/years/2022',
+                value: 50000
+              }
+            ]
+          });
+
+          test.equal(Object.keys(errors).length, 0, 'no errors');
+          test.equal(updatedAt.toJSON(), '1904-10-03T00:00:00.000Z');
+          test.equal(
+            activities[0].expenses[0].years['2022'],
+            50000,
+            'expense coast was updated'
+          );
+        }
+      );
+    }
+  );
 
   apdsTests.test(
     'validating an APD for admin check',
@@ -591,16 +601,12 @@ tap.test('database wrappers / apds', async apdsTests => {
   );
 
   apdsTests.teardown(async () => {
-    console.log('in teardown');
-    if (hitechId) {
-      await deleteAPD(hitechId);
-      hitechId = null;
-    }
-    if (mmisId) {
-      await deleteAPD(mmisId);
-      mmisId = null;
-    }
+    await Budget.deleteMany();
+    await APD.deleteMany();
+    await knex('apd_review_status').delete();
+
     await teardown();
+    await knex.destroy();
     clockStub.restore();
   });
 });

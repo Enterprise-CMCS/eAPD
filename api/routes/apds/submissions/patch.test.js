@@ -62,16 +62,17 @@ tap.test('apds/submissions PATCH endpoint', async endpointTest => {
 
     tests.test('flag on, body valid', async test => {
       getLaunchDarklyFlag.returns(true);
-      updateAPDReviewStatus.returns([
-        { apdId: 'apd id', updatedStatus: 'approved' }
-      ]);
+      const status = [
+        { apdId: 'apd id', updatedStatus: 'approved', success: true }
+      ];
+      updateAPDReviewStatus.returns(status);
       const req = {
         headers: {},
         ip: '127.0.0.1',
         body: [{ apdId: 'apd id', newStatus: 'completed' }]
       };
       await handler(req, res, next);
-      test.ok(res.status.calledWith(204));
+      test.ok(res.send.calledWith(status));
     });
   });
 });

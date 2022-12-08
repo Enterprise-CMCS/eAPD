@@ -9,11 +9,9 @@ until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" 
 done;
 echo 'Server is running and status is healthy'
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run test $@
-echo $?
-EXIT_CODE=$?
+EXIT_CODE=$? # this must stay right after the test run so that the EXIT_CODE is properly reported
 
 docker cp api-container:/app/api/coverage ./coverage
-
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 
 exit $EXIT_CODE

@@ -13,6 +13,7 @@ tap.test('apds PATCH endpoint', async tests => {
   };
 
   const updateAPDDocument = sandbox.stub();
+  const adminCheckAPDDocument = sandbox.stub();
 
   const res = {
     end: sandbox.spy(),
@@ -30,7 +31,8 @@ tap.test('apds PATCH endpoint', async tests => {
     res.status.returns(res);
 
     patchEndpoint(app, {
-      updateAPDDocument
+      updateAPDDocument,
+      adminCheckAPDDocument
     });
     handler = app.patch.args[0][app.patch.args[0].length - 1];
   });
@@ -92,6 +94,7 @@ tap.test('apds PATCH endpoint', async tests => {
     };
 
     updateAPDDocument.resolves({ errors, apd: {} });
+    adminCheckAPDDocument.resolves([]);
 
     const patches = [{ value: 'patch 1' }, { value: 'patch 2' }];
 
@@ -113,7 +116,9 @@ tap.test('apds PATCH endpoint', async tests => {
           created: undefined,
           state: undefined,
           updated: undefined
-        }
+        },
+        adminCheck: [],
+        budget: {}
       }),
       'sends back the list of invalid paths'
     );
@@ -136,9 +141,11 @@ tap.test('apds PATCH endpoint', async tests => {
             name: 'Sam I Am',
             email: 'sam@greeneggs.com'
           }
-        ]
+        ],
+        budget: {}
       }
     });
+    adminCheckAPDDocument.resolves([]);
 
     const patch = [
       { op: 'replace', path: '/keyPersonnel/0/name', value: 'Sam I Am' },
@@ -180,7 +187,9 @@ tap.test('apds PATCH endpoint', async tests => {
               email: 'sam@greeneggs.com'
             }
           ]
-        }
+        },
+        adminCheck: [],
+        budget: {}
       })
     );
   });

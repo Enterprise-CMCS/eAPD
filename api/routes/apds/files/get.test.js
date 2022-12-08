@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const { can } = require('../../../middleware');
 const endpoints = require('./get');
 
-tap.test('apds files endpoints', async endpointTest => {
+tap.test('apds files endpoints', { timeout: 300000 }, async endpointTest => {
   const sandbox = sinon.createSandbox();
   const app = { get: sandbox.stub(), post: sandbox.stub() };
 

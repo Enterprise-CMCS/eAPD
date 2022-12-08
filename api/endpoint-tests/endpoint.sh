@@ -21,10 +21,9 @@ echo 'Server is running and status is healthy'
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e ENDPOINT_COVERAGE_CAPTURE=true api-for-testing yarn run test-endpoints $@
-echo $?
-EXIT_CODE=$?
-docker cp api-container:/app/api/endpoint-data.json endpoint-data.json
+EXIT_CODE=$? # this must stay right after the test run so that the EXIT_CODE is properly reported
 
+docker cp api-container:/app/api/endpoint-data.json endpoint-data.json
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 
 mv endpoint-data.json ./endpoint-tests

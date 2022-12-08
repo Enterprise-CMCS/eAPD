@@ -90,9 +90,9 @@ const processUpdate = (
   { db = knex } = {}
 ) =>
   new Promise(resolve => {
-    const result = { apdId, updatedStatus: status, success: false };
+    const result = { apdId, success: false };
     // check that the status has a value
-    if (!status) {
+    if (!status || status === '') {
       logger.error(`Error updating ${apdId} status: newStatus is missing`);
       resolve({ ...result, error: 'newStatus missing' });
     }
