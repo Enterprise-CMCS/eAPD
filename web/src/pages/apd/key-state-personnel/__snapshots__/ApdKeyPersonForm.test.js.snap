@@ -25793,12 +25793,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                     <div>
                       <React.Fragment />
                     </div>
-                    <strong>
-                      Total: 
-                    </strong>
-                    <Dollars>
-                      32
-                    </Dollars>
+                    <div
+                      className="ds-u-margin-top--2"
+                    >
+                      <strong>
+                        Total: 
+                      </strong>
+                      <Dollars>
+                        32
+                      </Dollars>
+                      <span
+                        className="ds-c-field__hint"
+                      >
+                        Cost with benefits x FTE = Total
+                      </span>
+                    </div>
                   </div>
                 </React.Fragment>
                 <React.Fragment>
@@ -34316,12 +34325,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                     <div>
                       <React.Fragment />
                     </div>
-                    <strong>
-                      Total: 
-                    </strong>
-                    <Dollars>
-                      170.99999999999997
-                    </Dollars>
+                    <div
+                      className="ds-u-margin-top--2"
+                    >
+                      <strong>
+                        Total: 
+                      </strong>
+                      <Dollars>
+                        170.99999999999997
+                      </Dollars>
+                      <span
+                        className="ds-c-field__hint"
+                      >
+                        Cost with benefits x FTE = Total
+                      </span>
+                    </div>
                   </div>
                 </React.Fragment>
               </div>,
@@ -42890,12 +42908,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       <div>
                         <React.Fragment />
                       </div>
-                      <strong>
-                        Total: 
-                      </strong>
-                      <Dollars>
-                        32
-                      </Dollars>
+                      <div
+                        className="ds-u-margin-top--2"
+                      >
+                        <strong>
+                          Total: 
+                        </strong>
+                        <Dollars>
+                          32
+                        </Dollars>
+                        <span
+                          className="ds-c-field__hint"
+                        >
+                          Cost with benefits x FTE = Total
+                        </span>
+                      </div>
                     </div>
                   </React.Fragment>
                   <React.Fragment>
@@ -51413,12 +51440,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       <div>
                         <React.Fragment />
                       </div>
-                      <strong>
-                        Total: 
-                      </strong>
-                      <Dollars>
-                        170.99999999999997
-                      </Dollars>
+                      <div
+                        className="ds-u-margin-top--2"
+                      >
+                        <strong>
+                          Total: 
+                        </strong>
+                        <Dollars>
+                          170.99999999999997
+                        </Dollars>
+                        <span
+                          className="ds-c-field__hint"
+                        >
+                          Cost with benefits x FTE = Total
+                        </span>
+                      </div>
                     </div>
                   </React.Fragment>
                 </div>
@@ -60179,14 +60215,23 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       </NumberField>
                     </Component>
                     <div />
-                    <strong>
-                      Total: 
-                    </strong>
-                    <Dollars>
-                      <span>
-                        $32
+                    <div
+                      className="ds-u-margin-top--2"
+                    >
+                      <strong>
+                        Total: 
+                      </strong>
+                      <Dollars>
+                        <span>
+                          $32
+                        </span>
+                      </Dollars>
+                      <span
+                        className="ds-c-field__hint"
+                      >
+                        Cost with benefits x FTE = Total
                       </span>
-                    </Dollars>
+                    </div>
                   </div>
                   <h5
                     className="ds-h5"
@@ -68899,14 +68944,23 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       </NumberField>
                     </Component>
                     <div />
-                    <strong>
-                      Total: 
-                    </strong>
-                    <Dollars>
-                      <span>
-                        $171
+                    <div
+                      className="ds-u-margin-top--2"
+                    >
+                      <strong>
+                        Total: 
+                      </strong>
+                      <Dollars>
+                        <span>
+                          $171
+                        </span>
+                      </Dollars>
+                      <span
+                        className="ds-c-field__hint"
+                      >
+                        Cost with benefits x FTE = Total
                       </span>
-                    </Dollars>
+                    </div>
                   </div>
                 </div>
               </div>

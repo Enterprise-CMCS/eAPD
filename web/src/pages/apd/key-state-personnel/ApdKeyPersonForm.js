@@ -330,8 +330,13 @@ const PersonForm = forwardRef(
                                 )}
                               </Fragment>
                             </div>
-                            <strong>Total: </strong>
-                            <Dollars>{totalCostFte(year)}</Dollars>
+                            <div className="ds-u-margin-top--2">
+                              <strong>Total: </strong>
+                              <Dollars>{totalCostFte(year)}</Dollars>
+                              <span className="ds-c-field__hint">
+                                Cost with benefits x FTE = Total
+                              </span>
+                            </div>
                           </div>
                         </Fragment>
                       ))}
