@@ -2033,7 +2033,7 @@ const expectedErrorsMockHitechApdRandom = [
     fieldDescription: 'Select a federal-state split.'
   },
   {
-    section: 'Activity 1 Outcomes and Metrics',
+    section: 'Activity 1 Outcomes and Milestones',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/oms',
     fieldDescription: 'Metric is required'
   },
@@ -2058,7 +2058,7 @@ const expectedErrorsMockHitechApdRandom = [
     fieldDescription: 'Provide an annual cost.'
   },
   {
-    section: 'Activity 2 Outcomes and Metrics',
+    section: 'Activity 2 Outcomes and Milestones',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/oms',
     fieldDescription: 'Metric is required'
   },
