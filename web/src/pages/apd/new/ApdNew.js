@@ -102,8 +102,8 @@ const ApdNew = ({ createApd: create }) => {
     defaultValues: {
       years: years
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'all',
+    reValidateMode: 'all',
     resolver: joiResolver(newApdSchema)
   });
 

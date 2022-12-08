@@ -218,7 +218,6 @@ describe('<ApdNew />', () => {
 
         await user.click(screen.getByRole('checkbox', { name: /Other/i }));
         expect(screen.getByRole('checkbox', { name: /Other/i })).toBeChecked();
-        expect(disabledBtn).toBeDisabled();
 
         const otherBox = screen.getByRole('textbox', {
           name: 'Other Medicaid Business Area(s) Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon.'
