@@ -19,16 +19,6 @@ describe('users endpoint', () => {
   beforeAll(() => setupDB(db));
   afterAll(() => teardownDB(db));
 
-  describe('users endpoint | GET /users', () => {
-    unauthenticatedTest('get', url);
-    unauthorizedTest('get', url);
-
-    it('when authenticated', async () => {
-      const response = await get();
-      expect(response.status).toEqual(200);
-    });
-  });
-
   describe('users endpoint | GET /users/:userID', () => {
     unauthenticatedTest('get', `${url}/some-id`);
     unauthorizedTest('get', `${url}/some-id`);

@@ -54,11 +54,7 @@ services:
       - API_HOST=api-for-testing
     command: yarn start
     healthcheck:
-      test:
-        [
-          'CMD-SHELL',
-          'wget -q --spider http://api-for-testing:8000/heartbeat || exit 1'
-        ]
+      test: curl --fail http://localhost:8000/heartbeat || exit 1
       interval: 30s
       retries: 10
       start_period: 750s

@@ -1,7 +1,7 @@
 export NODE_ENV=test
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
-sleep 750;
+sleep 775;
 
 echo "waiting for api-for-testing..."
 
@@ -17,7 +17,7 @@ is_healthy() {
     fi
 }
 
-while ! is_healthy api-for-testing; do sleep 1; done
+while ! is_healthy api-for-testing; do sleep 60; done
 
 echo "api-for-testing is running"
 

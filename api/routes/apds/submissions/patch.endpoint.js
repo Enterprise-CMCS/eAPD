@@ -28,16 +28,14 @@ describe(' /apds/submissions', () => {
 
   it('it returns 400 when body is invalid', async () => {
     const api = apiKeyAuth('10.0.0.0');
-    const response = await api.patch('/apds/submissions', [
-      {
-        apdId: badAPDId,
-        newStatus: 'approved'
-      }
-    ]);
+    const response = await api.patch('/apds/submissions', {
+      apdId: badAPDId,
+      newStatus: 'approved'
+    });
     expect(response.status).toBe(400);
   });
 
-  it('returns 204', async () => {
+  it('returns 200', async () => {
     const api = apiKeyAuth('10.0.0.0');
     const response = await api.patch('/apds/submissions', [
       {
