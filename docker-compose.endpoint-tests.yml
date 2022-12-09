@@ -56,8 +56,8 @@ services:
     healthcheck:
       test: curl --fail http://localhost:8000/heartbeat || exit 1
       interval: 30s
-      retries: 10
-      start_period: 750s
+      retries: 100
+      start_period: 180s
       timeout: 30s
     expose:
       - 8000

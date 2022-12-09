@@ -40,7 +40,7 @@ const deleteAPD = async apdId => {
   }
 };
 
-tap.test('database wrappers / apds', { timeout: 900000 }, async apdsTests => {
+tap.test('database wrappers / apds', { timeout: 1000000 }, async apdsTests => {
   apdsTests.before(async () => {
     // Trisha Elric, Edward and Alfonse's mother, dies of complications from
     // a plague, kicking off the Elric brothers' quest for human transmutation.
@@ -187,7 +187,7 @@ tap.test('database wrappers / apds', { timeout: 900000 }, async apdsTests => {
 
   apdsTests.test(
     'updating APD status',
-    { timeout: 300000 },
+    { timeout: 450000 },
     async updateApdStatus => {
       updateApdStatus.test('empty status update', async test => {
         const status = await updateAPDReviewStatus();
@@ -337,7 +337,7 @@ tap.test('database wrappers / apds', { timeout: 900000 }, async apdsTests => {
 
   apdsTests.test(
     'updating an APD',
-    { timeout: 300000 },
+    { timeout: 450000 },
     async updateAPDDocumentTests => {
       updateAPDDocumentTests.beforeEach(() => {
         clockStub = sinon.useFakeTimers(nowDate);

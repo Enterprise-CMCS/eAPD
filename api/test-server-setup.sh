@@ -1,7 +1,8 @@
 export NODE_ENV=test
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
-sleep 775;
+echo "containers created"
+sleep 200;
 
 echo "waiting for api-for-testing..."
 
@@ -13,6 +14,7 @@ is_healthy() {
     if [ "$health_status" = "healthy" ]; then
         return 0
     else
+        echo '.'
         return 1
     fi
 }
