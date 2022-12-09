@@ -1,4 +1,5 @@
 export NODE_ENV=test
+export COMPOSE_HTTP_TIMEOUT=300
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
 echo "containers created"

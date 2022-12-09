@@ -76,7 +76,6 @@ tap.test(
     });
 
     sacQueryTest.test('query returns all expected fields', async t => {
-      t.ok(false);
       // insert a state admin certification
       const certifications = {
         email: 'matchme@email.com',

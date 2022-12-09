@@ -1,38 +1,13 @@
 #!/usr/bin/env sh
 
-rm ./endpoint-tests/endpoint-data.json
-
-export NODE_ENV=test
 export API_URL=http://localhost:8081
-export COMPOSE_HTTP_TIMEOUT=300
-
 unset DEV_DB_NAME
 
+rm ./endpoint-tests/endpoint-data.json
 echo "[]" > endpoint-data.json
 
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
-sleep 750;
+./test-server-setup.sh
 
-echo "waiting for api-for-testing..."
-
-is_healthy() {
-    service="$1"
-    container_id="$(docker-compose -f ../docker-compose.endpoint-tests.yml -p api ps -q "$service")"
-    health_status="$(docker inspect -f "{{.State.Health.Status}}" "$container_id")"
-
-    if [ "$health_status" = "healthy" ]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-while ! is_healthy api-for-testing; do sleep 1; done
-
-echo "api-for-testing is running"
-
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e ENDPOINT_COVERAGE_CAPTURE=true api-for-testing yarn run test-endpoints $@
 EXIT_CODE=$? # this must stay right after the test run so that the EXIT_CODE is properly reported
 
