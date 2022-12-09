@@ -11,12 +11,25 @@ unset DEV_DB_NAME
 echo "[]" > endpoint-data.json
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
-echo 'Checking to see if the server is running'
-until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
-    sleep 10;
-    echo '.';
-done;
-echo 'Server is running and status is healthy'
+sleep 750;
+
+echo "waiting for api-for-testing..."
+
+is_healthy() {
+    service="$1"
+    container_id="$(docker-compose -f ../docker-compose.endpoint-tests.yml -p api ps -q "$service")"
+    health_status="$(docker inspect -f "{{.State.Health.Status}}" "$container_id")"
+
+    if [ "$health_status" = "healthy" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+while ! is_healthy api-for-testing; do sleep 1; done
+
+echo "api-for-testing is running"
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
