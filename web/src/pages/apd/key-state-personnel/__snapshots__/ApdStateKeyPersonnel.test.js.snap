@@ -13,6 +13,7 @@ exports[`apd state profile, Medicaid office component renders correctly 1`] = `
       "WrappedComponent": Object {
         "$$typeof": Symbol(react.forward_ref),
         "propTypes": Object {
+          "apdType": [Function],
           "index": [Function],
           "item": [Function],
           "savePerson": [Function],

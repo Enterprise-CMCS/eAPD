@@ -2,6 +2,7 @@
 
 exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 <PersonForm
+  apdType="HITECH"
   index={1}
   item={
     Object {

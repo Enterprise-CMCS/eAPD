@@ -7,6 +7,7 @@ import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 describe('the ApdKeyPersonForm component', () => {
   const props = {
+    apdType: 'HITECH',
     index: 1,
     item: {
       costs: {

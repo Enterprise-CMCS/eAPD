@@ -18,13 +18,15 @@ directorAndAddress:
       zip: ZIP Code
 keyPersonnel:
   title: Key Personnel and Program Management
+keyPersonnelHITECH:
+  title: Key Personnel and Program Management
   instruction:
     short: ''
     detail: ''
     list:
-      - Key personnel are individuals who are directly involved with
-        governance, coordination, stakeholder decision-making, oversight, and/
-        or performance of the activities as they affect the state’s Medicaid
+      - Key personnel are individuals who are directly involved with governance,
+        coordination, stakeholder decision-making, oversight, and/ or
+        performance of the activities as they affect the state’s Medicaid
         program. They may also be individuals who are involved with all or most
         activities within this APD vs one single activity.
       - Staff whose responsibilities apply only to specific activities will be
@@ -33,6 +35,52 @@ keyPersonnel:
         Key personnel costs entered here are represented in the budget in
         Activity 1: Program Administration, at the 90/10 split.
     helpText: 'Examples: Program Manager, Director, HIT Coordinator'
+  contact: 'Contact #{{number}}'
+  labels:
+    titlePrimary: Primary APD Point of Contact
+    titleSecondary: Additional Key Personnel
+    notePrimary: >-
+      Personnel listed in this section must be assigned to APD by name, role,
+      time commitment, and cost, where applicable.
+    noteSecondary: >-
+      Provide the name, email, and role for this key personnel. If applicable,
+      provide the individual's total annual cost (including benefits) and their
+      allocation to the overall project work.
+    name: Name
+    position: Role
+    email: Email
+    fte: Percent commitment to program
+    primary: 'This person is the primary APD point of contact:'
+    hasCosts: Does this person have costs directly attributable to this program?
+    addButton:
+      zero: Add Key Personnel
+      one: Add Person
+      other: Add Person
+  delete:
+    text: Remove contact
+    confirm:
+      header: Confirm
+      body: Remove this contact?
+      _yes: 'Yes'
+      _no: 'No'
+keyPersonnelMMIS:
+  title: Key Personnel and Program Management
+  instruction:
+    short: ''
+    detail: ''
+    list:
+      - Key personnel are individuals who are directly involved with governance,
+        coordination, stakeholder decision-making, oversight, and/ or
+        performance of the activities as they affect the state’s Medicaid
+        program. They may also be individuals who are involved with all or most
+        activities within this APD vs one single activity.
+      - Staff whose responsibilities apply only to specific activities will be
+        entered directly in each relevant activity.
+      - >-
+        Key personnel costs entered here are represented in the Proposed Budget,
+        at the FFP specified below.
+    helpText:
+      'Examples: Project/Product Manager, Development Lead, Business Owner'
   contact: 'Contact #{{number}}'
   labels:
     titlePrimary: Primary APD Point of Contact

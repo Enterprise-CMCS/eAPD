@@ -15,6 +15,8 @@ import NumberField from '../../../components/NumberField';
 import { keyPersonnelSchema } from '@cms-eapd/common/schemas/keyStatePersonnel';
 import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
+
 const getCheckedValue = value => {
   if (value !== null) {
     if (value === true) return 'yes';
@@ -24,10 +26,8 @@ const getCheckedValue = value => {
   return null;
 };
 
-const tRoot = 'apd.stateProfile.keyPersonnel';
-
 const PersonForm = forwardRef(
-  ({ index, item, savePerson, years, setFormValid }, ref) => {
+  ({ index, item, savePerson, years, setFormValid, apdType }, ref) => {
     PersonForm.displayName = 'PersonForm';
     const { name, email, position, hasCosts, isPrimary, costs, fte } =
       JSON.parse(JSON.stringify({ ...item }));
@@ -161,6 +161,8 @@ const PersonForm = forwardRef(
     };
 
     const primary = index === 0;
+
+    const tRoot = `apd.stateProfile.keyPersonnel${apdType}`;
 
     return (
       <form index={index} onSubmit={onSubmit} aria-label="form">
@@ -337,6 +339,25 @@ const PersonForm = forwardRef(
                                 Cost with benefits x FTE = Total
                               </span>
                             </div>
+                            {apdType === 'MMIS' && (
+                              <ChoiceList
+                                choices={[
+                                  {
+                                    defaultChecked: true,
+                                    label: '90/10 DDI',
+                                    value: null
+                                  },
+                                  {
+                                    label: '75/25 Operations',
+                                    value: null
+                                  }
+                                ]}
+                                type="radio"
+                                label="Federal-State Split"
+                                hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share."
+                                id={`abc`}
+                              />
+                            )}
                           </div>
                         </Fragment>
                       ))}
@@ -388,15 +409,20 @@ PersonForm.propTypes = {
   }).isRequired,
   years: PropTypes.array.isRequired,
   savePerson: PropTypes.func.isRequired,
-  setFormValid: PropTypes.func.isRequired
+  setFormValid: PropTypes.func.isRequired,
+  apdType: PropTypes.string.isRequired
 };
+
+const mapStateToProps = state => ({
+  apdType: selectApdType(state)
+});
 
 const mapDispatchToProps = {
   savePerson: saveKeyPersonnel
 };
 
-export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
-  PersonForm
-);
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  forwardRef: true
+})(PersonForm);
 
 export { PersonForm as plain, mapDispatchToProps };
