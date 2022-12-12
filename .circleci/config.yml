@@ -96,14 +96,22 @@ workflows:
           requires:
             - Build Prod Staging AMI
             - Cleanup Old Unused Preview AMIs
+  # Workflow to create dumps of Mongo databases and store them in S3            
   mongo dumps:
     jobs:
       - staging dump:
           name: Create Staging MongoDB Dump
+          filters:
+            tags:
+              ignore: /.*/          
       - production dump:
           name: Create Production MongoDB Dump
+          filters:
+            tags:
+              ignore: /.*/          
         requires:
           - Create Staging MongoDB Dump
+
   # Tests
   owasp, e2e, and chromatic:
     jobs:
