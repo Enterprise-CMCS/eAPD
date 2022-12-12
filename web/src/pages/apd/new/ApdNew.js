@@ -138,9 +138,24 @@ const ApdNew = ({ createApd: create }) => {
   }
 
   const createNew = () => {
-    let values = getValues();
+    const { years, name, mmisUpdate } = getValues();
+    const apdValues = {
+      years,
+      name,
+      apdType,
+      apdOverview: {
+        ...typeStatus
+      }
+    };
+    if (apdType === APD_TYPE.HITECH) {
+      apdValues.apdOverview.isUpdateAPD = true;
+    }
+    if (apdType === APD_TYPE.MMIS) {
+      apdValues.apdOverview.isUpdateAPD = mmisUpdate === 'yes';
+      apdValues.apdOverview.medicaidBusinessAreas = businessAreas;
+    }
     setIsLoading(true);
-    create(values);
+    create(apdValues);
   };
 
   const disabled = !isValid || !isDirty || (isDirty && !isValid);
