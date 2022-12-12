@@ -19,21 +19,21 @@ variable "preview_tealium_env" {}
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
 source "amazon-ebs" "Golden_Image" {
-    ami_name      = "eAPD Preview CentOS 7 AMI - ${local.timestamp}"
+    ami_name      = "eAPD Preview AMI - ${local.timestamp}"
     instance_type = "t3.medium"
     access_key    = ""
     secret_key    = ""
     region        = ""
     source_ami_filter {
         filters = {
-            name                = "CentOS-7-*"
+            name                = "EAST-RH 7-9 Gold Image V.*"
             root-device-type    = "ebs"
             virtualization-type = "hvm"
         }
         most_recent = true
-        owners      = ["679593333241"]
+        owners      = ["842420567215"]
     }
-    ssh_username = "centos"
+    ssh_username = "ec2-user"
     ena_support = true
     associate_public_ip_address = true
     vpc_id = var.vpc_id
@@ -64,6 +64,6 @@ build {
     }
     provisioner "file" {
         source = "nginx.conf.tpl"
-        destination = "/home/centos/nginx.conf.tpl"
+        destination = "/home/ec2-user/nginx.conf.tpl"
     }
 }
