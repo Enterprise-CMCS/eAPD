@@ -96,12 +96,12 @@ workflows:
           requires:
             - Build Prod Staging AMI
             - Cleanup Old Unused Preview AMIs
-  mongo_dumps:
+  mongo dumps:
     jobs:
-      - staging_dump:
-      - production_dump:
+      - staging dump:
+      - production dump:
         requires:
-          - staging_dump
+          - staging dump
   # Tests
   owasp, e2e, and chromatic:
     jobs:
@@ -575,7 +575,7 @@ jobs:
             terraform init
             terraform validate
 
-  staging_dump:
+  staging dump:
     docker:
       - image: cimg/base:2022.06-22.04
         auth:
@@ -594,7 +594,7 @@ jobs:
             export ENVIRONMENT=staging
             ./mongo-dump.sh
 
-  production_dump:
+  production dump:
     docker:
       - image: cimg/base:2022.06-22.04
         auth:
