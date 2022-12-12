@@ -1,16 +1,20 @@
 import Joi from 'joi';
+import { APD_TYPE } from '../utils/constants';
 
 const apdNewSchema = Joi.object({
-  apdType: Joi.string().valid('HITECH', 'MMIS').required().messages({
-    'any.only': 'Select an APD Type.',
-    'any.required': 'Select an APD Type.'
-  }),
+  apdType: Joi.string()
+    .valid(APD_TYPE.HITECH, APD_TYPE.MMIS)
+    .required()
+    .messages({
+      'any.only': 'Select an APD Type.',
+      'any.required': 'Select an APD Type.'
+    }),
   name: Joi.any(),
   years: Joi.array().min(1).required().messages({
     'array.min': 'Select at least one year.'
   }),
   mmisUpdate: Joi.when('apdType', {
-    is: 'MMIS',
+    is: APD_TYPE.MMIS,
     then: Joi.string().valid('yes', 'no').required().messages({
       'any.only': 'Indicate whether this APD is an update.',
       'any.required': 'Indicate whether this APD is an update.'
@@ -18,7 +22,7 @@ const apdNewSchema = Joi.object({
     otherwise: Joi.string().valid('')
   }),
   updateStatus: Joi.when('apdType', {
-    is: 'HITECH',
+    is: APD_TYPE.HITECH,
     then: Joi.object({
       typeStatus: Joi.object({
         annualUpdate: Joi.boolean(),

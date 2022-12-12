@@ -14,6 +14,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 import { hitechOverviewSchema } from '@cms-eapd/common/schemas/apdOverview';
+import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 
 import {
   addYear,
@@ -184,7 +185,7 @@ const ApdOverview = ({
           className="apd_disabled_choice"
           choices={[
             {
-              defaultChecked: !enableMmis || apdType === 'HITECH',
+              defaultChecked: !enableMmis || apdType === APD_TYPE.HITECH,
               disabled: true,
               label: 'HITECH IAPD'
             }
@@ -209,7 +210,7 @@ const ApdOverview = ({
             className="apd_disabled_choice"
             choices={[
               {
-                defaultChecked: apdType === 'MMIS',
+                defaultChecked: apdType === APD_TYPE.MMIS,
                 disabled: true,
                 label: 'MMIS IAPD'
               }

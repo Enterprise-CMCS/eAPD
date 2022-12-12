@@ -14,6 +14,7 @@ import {
 } from '@cmsgov/design-system';
 import TextArea from '../../../components/TextArea';
 import { createApd } from '../../../redux/actions/app';
+import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 
 import Loading from '../../../components/Loading';
 import newApdSchema from '@cms-eapd/common/schemas/apdNew';
@@ -69,14 +70,14 @@ const ApdNew = ({ createApd: create }) => {
     {
       label: 'HITECH IAPD',
       labelClassName: 'label-extended',
-      value: 'HITECH',
+      value: APD_TYPE.HITECH,
       hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
       checked: value
     },
     {
       label: 'MMIS IAPD',
       labelClassName: 'label-extended',
-      value: 'MMIS',
+      value: APD_TYPE.MMIS,
       hint: 'Medicaid Management Information System Implementation APD',
       checked: value
     }
@@ -88,10 +89,10 @@ const ApdNew = ({ createApd: create }) => {
       apdChoices.pop();
       apdChoices[0].checked = true;
       setApdChoices(apdChoices);
-      setApdType('HITECH');
-      setValue('apdType', 'HITECH', { shouldValidate: true });
+      setApdType(APD_TYPE.HITECH);
+      setValue('apdType', APD_TYPE.HITECH, { shouldValidate: true });
     }
-  }, [apdChoices]);
+  }, [apdChoices, enableMmis]);
 
   const {
     control,
@@ -186,7 +187,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             )}
           />
-          {(apdType === 'MMIS' || apdType === 'HITECH') && (
+          {(apdType === APD_TYPE.MMIS || apdType === APD_TYPE.HITECH) && (
             <div>
               <Controller
                 name="name"
@@ -228,7 +229,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             </div>
           )}
-          {apdType === 'HITECH' && (
+          {apdType === APD_TYPE.HITECH && (
             <div>
               <Controller
                 name="updateStatus.updateList"
@@ -278,7 +279,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             </div>
           )}
-          {apdType === 'MMIS' && (
+          {apdType === APD_TYPE.MMIS && (
             <div>
               <Controller
                 name="mmisUpdate"
