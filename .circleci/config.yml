@@ -96,7 +96,12 @@ workflows:
           requires:
             - Build Prod Staging AMI
             - Cleanup Old Unused Preview AMIs
-
+  mongo_dumps:
+    jobs:
+      - staging_dump:
+      - production_dump:
+        requires:
+          - staging_dump
   # Tests
   owasp, e2e, and chromatic:
     jobs:
@@ -570,6 +575,44 @@ jobs:
             terraform init
             terraform validate
 
+  staging_dump:
+    docker:
+      - image: cimg/base:2022.06-22.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+        name: Create Staging MongoDB Dump
+        working_directory: ~/project/bin/prod-deploy
+        command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            export STAGING_MONGO_URL=$STAGING_MONGO_URL
+            export ENVIRONMENT=staging
+            ./mongo-dump.sh
+
+  production_dump:
+    docker:
+      - image: cimg/base:2022.06-22.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+        name: Create Production MongoDB Dump
+        working_directory: ~/project/bin/prod-deploy
+        command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            export PRODUCTION_MONGO_URL=$PRODUCTION_MONGO_URL
+            export ENVIRONMENT=production
+            ./mongo-dump.sh
+  
   build production staging ami:
     docker:
       - image: cimg/base:2022.06-22.04

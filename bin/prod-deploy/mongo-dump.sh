@@ -1,23 +1,10 @@
-#!/bin/sh
-# S3 bucket name
-BUCKET=eapd-mongo-dump-$ENVIRONMENT/
-# Linux user account
-USER=ubuntu
-# Backup directory
-DEST=/home/$USER/backups/dump
-# Dump z2p & poststodos
-mongodump — db z2p — out $DEST
-# File name
-TIME=`/bin/date — date=’+5 hour 30 minutes’ ‘+%d-%m-%Y-%I-%M-%S-%p’`
-# Tar file of backup directory
-TAR=$DEST/../$TIME.tar
-# Create tar of backup directory
-/bin/tar cvf $TAR -C $DEST .
-# Upload tar to s3
-/usr/bin/aws s3 cp $TAR s3://$BUCKET
-# Remove tar file locally
-/bin/rm -f $TAR
-# Remove backup directory
-/bin/rm -rf $DEST
-# All done
-echo “Backup available at https://s3.amazonaws.com/$BUCKET/$TIME.tar"
+ #Create var for time so value doesn't drift between creating tarball and aws cp to S3
+ TIMESTAMP=$(date +%Y%m%d%H%M%S)
+ #Create dump
+ #mongodump --uri=\"$"$ENVIRONMENT"_MONGO_URL\"
+ mongodump --uri=$STAGING_MONGO_URL
+ #Tar zip dump
+ tar -cvf "$ENVIRONMENT"_mongo_"$("$TIMESTAMP")".tar.gz dump/
+ #Send it
+ aws s3 cp "$ENVIRONMENT"_mongo_"$TIMESTAMP".tar.gz s3://eapd-mongo-dump-"$ENVIRONMENT"
+ echo $TIMESTAMP
