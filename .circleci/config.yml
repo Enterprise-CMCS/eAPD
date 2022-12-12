@@ -279,7 +279,7 @@ workflows:
             - backend api endpoint test
             - backend lint
             - backend unit test
-      - common tests:
+      - common test:
           filters:
             tags:
               only: /.*/
