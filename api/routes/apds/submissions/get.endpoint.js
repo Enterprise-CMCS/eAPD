@@ -5,7 +5,8 @@ const {
   teardownDB
 } = require('../../../endpoint-tests/utils');
 
-describe(' /apds/submissions', () => {
+describe('Submissions endpoint | GET', () => {
+  jest.setTimeout(300000);
   const db = getDB();
   beforeAll(async () => {
     await setupDB(db);

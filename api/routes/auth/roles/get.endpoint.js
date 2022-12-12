@@ -8,6 +8,7 @@ const {
 } = require('../../../endpoint-tests/utils');
 
 describe('auth roles endpoint get endpoint', () => {
+  jest.setTimeout(300000);
   describe('GET /auth/roles', () => {
     const db = getDB();
     beforeAll(() => setupDB(db));
