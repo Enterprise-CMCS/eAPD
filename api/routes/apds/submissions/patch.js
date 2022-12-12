@@ -13,6 +13,7 @@ module.exports = (
   app.patch('/apds/submissions', async (req, res, next) => {
     let ip = req?.headers?.['x-forwarded-for'] || req?.ip || '';
     ip = ip.toString().replace('::ffff:', '');
+    console.log({ ip });
     const sharepoint = await getLaunchDarklyFlag(
       'sharepoint-endpoints-4196',
       {

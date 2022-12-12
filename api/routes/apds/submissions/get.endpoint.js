@@ -21,7 +21,7 @@ describe(' /apds/submissions', () => {
   });
 
   it('returns 200 when the IP is allowed', async () => {
-    const api = apiKeyAuth('10.0.0.0');
+    const api = apiKeyAuth();
     const response = await api.get('/apds/submissions');
     expect(response.status).toEqual(200);
   });

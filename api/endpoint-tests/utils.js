@@ -19,7 +19,7 @@ const axiosDefaults = {
 const api = axios.create(axiosDefaults);
 
 const apiKeyAuth = token => {
-  const ip = token || '127.0.0.1';
+  const ip = token || '10.0.0.0';
   const options = {
     ...axiosDefaults,
     headers: {

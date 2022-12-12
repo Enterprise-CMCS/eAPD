@@ -7,9 +7,7 @@
       "prerequisites": [],
       "targets": [],
       "rules": [],
-      "fallthrough": {
-        "variation": 0
-      },
+      "fallthrough": { "variation": 0 },
       "offVariation": 1,
       "variations": [true, false],
       "clientSideAvailability": {
@@ -21,7 +19,28 @@
       "trackEvents": false,
       "trackEventsFallthrough": false,
       "debugEventsUntilDate": null,
-      "version": 11,
+      "version": 15,
+      "deleted": false
+    },
+    "enableMmis": {
+      "key": "enableMmis",
+      "on": true,
+      "prerequisites": [],
+      "targets": [],
+      "rules": [],
+      "fallthrough": { "variation": 0 },
+      "offVariation": 1,
+      "variations": [true, false],
+      "clientSideAvailability": {
+        "usingMobileKey": false,
+        "usingEnvironmentId": true
+      },
+      "clientSide": true,
+      "salt": "41c65c594ab14a92bdc3936636276fe2",
+      "trackEvents": false,
+      "trackEventsFallthrough": false,
+      "debugEventsUntilDate": null,
+      "version": 39,
       "deleted": false
     },
     "sharepoint-endpoints-4196": {
@@ -44,9 +63,7 @@
           "trackEvents": false
         }
       ],
-      "fallthrough": {
-        "variation": 1
-      },
+      "fallthrough": { "variation": 1 },
       "offVariation": 1,
       "variations": [true, false],
       "clientSideAvailability": {
@@ -58,7 +75,7 @@
       "trackEvents": false,
       "trackEventsFallthrough": false,
       "debugEventsUntilDate": null,
-      "version": 20,
+      "version": 28,
       "deleted": false
     },
     "validation": {
@@ -67,9 +84,7 @@
       "prerequisites": [],
       "targets": [],
       "rules": [],
-      "fallthrough": {
-        "variation": 0
-      },
+      "fallthrough": { "variation": 0 },
       "offVariation": 1,
       "variations": [true, false],
       "clientSideAvailability": {
