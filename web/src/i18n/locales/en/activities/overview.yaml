@@ -9,26 +9,39 @@ activityDescriptionInput:
     label: Include as much detail as is necessary to explain the activity.
   hie:
     hint: >-
-      Detail linkage to meaningful use, including value proposition to providers,
-      and a sustainability plan describing how the activity will be sustained after
-      HIE DDI funding is exhausted.
+      Detail linkage to meaningful use, including value proposition to
+      providers, and a sustainability plan describing how the activity will be
+      sustained after HIE DDI funding is exhausted.
     helpText: >-
-      Diagrams and/or descriptions of other HIE linkages can be included, if relevant.
+      Diagrams and/or descriptions of other HIE linkages can be included, if
+      relevant.
 
 activityAlternativesInput:
   label: Statement of alternative considerations and supporting justification
   helpText: >-
-    Example: Explain and justify the decision to build a custom software solution instead of using a COTS or SaaS option.
+    Example: Explain and justify the decision to build a custom software
+    solution instead of using a COTS or SaaS option.
 
 
-    Example: Explain and justify the decision to conduct a contract modification instead of doing a fully competitive procurement.
+    Example: Explain and justify the decision to conduct a contract modification
+    instead of doing a fully competitive procurement.
   detail: >-
-    Provide a brief description of each alternative considered for the implementation of this activity. 
-    The description should include considerations for costs/benefits/risks for each option. Indicate 
-    which option was finally selected and why the final selection was made. As applicable, 
-    include how the selected approach supports the economic and efficient management of the Medicaid program.
+    Provide a brief description of each alternative considered for the
+    implementation of this activity.  The description should include
+    considerations for costs/benefits/risks for each option. Indicate  which
+    option was finally selected and why the final selection was made. As
+    applicable,  include how the selected approach supports the economic and
+    efficient management of the Medicaid program.
 
 
-    If this is a previously approved activity, only use this section to discuss alternative considerations made 
-    for substantive changes / decisions made during the implementation of the project. 
-    Do NOT include the alternative analysis conducted when justifying the original activity.
+    If this is a previously approved activity, only use this section to discuss
+    alternative considerations made  for substantive changes / decisions made
+    during the implementation of the project.  Do NOT include the alternative
+    analysis conducted when justifying the original activity.
+
+activitySnapshotInput:
+  label: Activity Snapshot
+  detail: >-
+    Provide a brief and high-level snapshot of the activity. You can speak on
+    the purpose of your activity, its benefits, and any additional information
+    that would give a reviewer a quick understanding of your activity.

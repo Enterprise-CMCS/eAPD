@@ -17,3 +17,27 @@ export const setActivityAlternatives = (activityIndex, alternatives) => ({
   path: `/activities/${activityIndex}/activityOverview/alternatives`,
   value: alternatives
 });
+
+export const setActivitySnapshot = (activityIndex, activitySnapshot) => ({
+  type: EDIT_APD,
+  path: `/activities/${activityIndex}/activityOverview/activitySnapshot`,
+  value: activitySnapshot
+});
+
+export const setActivityProblemStatement = (
+  activityIndex,
+  problemStatement
+) => ({
+  type: EDIT_APD,
+  path: `/activities/${activityIndex}/activityOverview/problemStatement`,
+  value: problemStatement
+});
+
+export const setActivityProposedSolution = (
+  activityIndex,
+  proposedSolution
+) => ({
+  type: EDIT_APD,
+  path: `/activities/${activityIndex}/activityOverview/proposedSolution`,
+  value: proposedSolution
+});
