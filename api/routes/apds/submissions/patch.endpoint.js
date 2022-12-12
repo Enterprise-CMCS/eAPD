@@ -43,6 +43,6 @@ describe(' /apds/submissions', () => {
         newStatus: 'approved'
       }
     ]);
-    expect(response.status).toEqual(204);
+    expect(response.status).toEqual(200);
   });
 });
