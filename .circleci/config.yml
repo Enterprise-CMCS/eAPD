@@ -467,7 +467,6 @@ jobs:
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
-
     steps:
       - checkout
       - run: 
@@ -476,7 +475,6 @@ jobs:
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
             sudo apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
             sudo apt-get update && sudo apt-get install packer
-
       - run: 
           name: Validate Preview AMI
           working_directory: ~/project/packer
@@ -585,44 +583,6 @@ jobs:
             terraform init
             terraform validate
 
-  staging dump:
-    docker:
-      - image: cimg/base:2022.06-22.04
-        auth:
-          username: $DOCKER_EAPD_UN
-          password: $DOCKER_EAPD_PW
-    steps:
-      - checkout
-      - run:
-        name: Create Staging MongoDB Dump
-        working_directory: ~/project/bin/prod-deploy
-        command: |
-            export AWS_REGION=$AWS_REGION
-            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-            export STAGING_MONGO_URL=$STAGING_MONGO_URL
-            export ENVIRONMENT=staging
-            ./mongo-dump.sh
-
-  production dump:
-    docker:
-      - image: cimg/base:2022.06-22.04
-        auth:
-          username: $DOCKER_EAPD_UN
-          password: $DOCKER_EAPD_PW
-    steps:
-      - checkout
-      - run:
-        name: Create Production MongoDB Dump
-        working_directory: ~/project/bin/prod-deploy
-        command: |
-            export AWS_REGION=$AWS_REGION
-            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-            export PRODUCTION_MONGO_URL=$PRODUCTION_MONGO_URL
-            export ENVIRONMENT=production
-            ./mongo-dump.sh
-  
   build production staging ami:
     docker:
       - image: cimg/base:2022.06-22.04
@@ -926,7 +886,6 @@ jobs:
         auth:
           username: $DOCKER_EAPD_UN
           password: $DOCKER_EAPD_PW
-    #resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -1438,3 +1397,33 @@ jobs:
           root: ~/project
           paths:
             - ./build-url.txt
+
+  #Jobs for creating and storing Mongo Dumps
+  mongo dumps:
+    docker:
+      - image: cimg/base:2022.06-22.04
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - run:
+        name: Create Staging MongoDB Dump
+        working_directory: ~/project/bin/prod-deploy
+        command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            export STAGING_MONGO_URL=$STAGING_MONGO_URL
+            export ENVIRONMENT=staging
+            ./mongo-dump.sh
+      - run:
+        name: Create Production MongoDB Dump
+        working_directory: ~/project/bin/prod-deploy
+        command: |
+            export AWS_REGION=$AWS_REGION
+            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+            export PRODUCTION_MONGO_URL=$PRODUCTION_MONGO_URL
+            export ENVIRONMENT=production
+            ./mongo-dump.sh
