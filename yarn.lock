@@ -18169,11 +18169,6 @@ tiny-warning@^1.0.0, tiny-warning@^1.0.3:
   resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
   integrity sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
 
-tinymce@5.10.4:
-  version "5.10.4"
-  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.10.4.tgz#24ee843c7648ade708605dec15d8dad07809f7db"
-  integrity sha512-L0ivAhGu7bEo6cUBrCzhtKlkIQqG2sTcL+uu7soMSxrECQIC5VwUnzp9HCEf+fRl36q6zavLV48lf8jelj+gXA==
-
 tinymce@5.10.7:
   version "5.10.7"
   resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.10.7.tgz#d89d446f1962f2a1df6b2b70018ce475ec7ffb80"
