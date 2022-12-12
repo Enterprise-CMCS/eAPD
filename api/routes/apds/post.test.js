@@ -327,7 +327,7 @@ tap.test('apds POST endpoint', async endpointTest => {
                 other: false,
                 otherMedicaidBusinessAreas: ''
               }
-            }
+            } 
           }
         };
 
@@ -410,6 +410,10 @@ tap.test('apds POST endpoint', async endpointTest => {
             }
           },
           activities: [],
+          securityPlanning: {                   
+            securityAndInterfacePlan: '',              
+            businessContinuityAndDisasterRecovery: '', 
+          },
           assurancesAndCompliances: {
             procurement: [
               { title: 'SSM, Part 11', checked: null, explanation: '' },
