@@ -74,9 +74,7 @@ describe('<ApdList />', () => {
     it('should handle clicking the create APD button', async () => {
       mockAxios.post.mockImplementation(() => Promise.resolve({ data: apd }));
       setup(props, options);
-      expect(screen.getByRole('button', { name: /Create new/i })).toBeTruthy();
-      // fireEvent.click(getByRole('button', { name: /Create new/i }));
-      // expect(props.createApd).toHaveBeenCalled();
+      expect(screen.getByRole('link', { name: /Create new/i })).toBeTruthy();
     });
 
     it('should display the empty APD message', () => {
