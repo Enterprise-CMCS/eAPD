@@ -1452,6 +1452,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.checkPageA11y(); // Cost Allocation and Other Funding
 
       cy.goToBudgetAndFFP(0);
+      cy.contains('Create an Additional Activity').should('exist');
       cy.checkPageA11y(); // Budget and FFP
 
       cy.goToActivityScheduleSummary();
