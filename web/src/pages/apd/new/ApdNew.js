@@ -144,14 +144,16 @@ const ApdNew = ({ createApd: create }) => {
       name,
       apdType,
       apdOverview: {
-        ...typeStatus
+        updateStatus: {
+          ...typeStatus
+        }
       }
     };
     if (apdType === APD_TYPE.HITECH) {
-      apdValues.apdOverview.isUpdateAPD = true;
+      apdValues.apdOverview.updateStatus.isUpdateAPD = true;
     }
     if (apdType === APD_TYPE.MMIS) {
-      apdValues.apdOverview.isUpdateAPD = mmisUpdate === 'yes';
+      apdValues.apdOverview.updateStatus.isUpdateAPD = mmisUpdate === 'yes';
       apdValues.apdOverview.medicaidBusinessAreas = businessAreas;
     }
     setIsLoading(true);
