@@ -316,6 +316,7 @@ workflows:
             - dependency vulnerability scan
             - frontend test
             - yaml test
+            - common test
             - backend unit test
             - backend api endpoint test
 
@@ -357,6 +358,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            - common test
             - e2e test staging
             - chromatic deployment staging
 
@@ -374,6 +376,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            - common test
             - e2e test production
             - chromatic deployment production
 
@@ -1003,12 +1006,19 @@ jobs:
   # ===== Common jobs ===== #
   # Runs common tests and reports coverage to codecov.io.
   common test:
-    machine:
-      image: ubuntu-2204:2022.04.2
+    docker:
+      - image: cimg/node:16.16.0
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
     steps:
       - checkout
       - attach_workspace:
           at: ~/project
+      - restore_cache:
+          name: restore yarn package cache
+          keys:
+            - cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: run tests
           working_directory: ~/project/common
