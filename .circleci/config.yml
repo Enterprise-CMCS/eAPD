@@ -99,9 +99,11 @@ workflows:
   mongo dumps:
     jobs:
       - staging dump:
+          name: Create Staging MongoDB Dump
       - production dump:
+          name: Create Production MongoDB Dump
         requires:
-          - staging dump
+          - Create Staging MongoDB Dump
   # Tests
   owasp, e2e, and chromatic:
     jobs:
