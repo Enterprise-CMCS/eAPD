@@ -99,18 +99,11 @@ workflows:
   # Workflow to create dumps of Mongo databases and store them in S3            
   mongo dumps:
     jobs:
-      - staging dump:
+      - mongo database dumps:
           name: Create Staging MongoDB Dump
           filters:
             tags:
               ignore: /.*/          
-      - production dump:
-          name: Create Production MongoDB Dump
-          filters:
-            tags:
-              ignore: /.*/          
-        requires:
-          - Create Staging MongoDB Dump
 
   # Tests
   owasp, e2e, and chromatic:
@@ -1399,7 +1392,7 @@ jobs:
             - ./build-url.txt
 
   #Jobs for creating and storing Mongo Dumps
-  mongo dumps:
+  mongo database dumps:
     docker:
       - image: cimg/base:2022.06-22.04
         auth:
