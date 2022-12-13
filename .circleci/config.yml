@@ -1404,6 +1404,26 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install awscli
+          working_directory: ~/project/bin/prod-deploy
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+      - run:
+          name: Install Mongo
+          command: |
+            sudo touch /etc/yum.repos.d/mongodb-org-5.0.repo
+            echo "
+            [mongodb-org-5.0]
+            name=MongoDB Repository
+            baseurl=https://repo.mongodb.org/yum/redhat/7/mongodb-org/5.0/x86_64/
+            gpgcheck=1
+            enabled=1
+            gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
+            " > /etc/yum.repos.d/mongodb-org-5.0.repo
+            sudo yum -y install mongodb-org-5.0.3-1.el7 checkpolicy
+      - run:
           name: Create Staging MongoDB Dump
           working_directory: ~/project/bin/prod-deploy
           command: |
