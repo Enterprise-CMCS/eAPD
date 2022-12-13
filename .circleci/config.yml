@@ -1414,7 +1414,7 @@ jobs:
           name: Install Mongo
           command: |
             wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-debian11-x86_64-100.6.1.deb
-            sudo apt install mongodb-database-tools-debian11-x86_64-100.6.1.deb
+            sudo apt install ./mongodb-database-tools-debian11-x86_64-100.6.1.deb
       - run:
           name: Create Staging MongoDB Dump
           working_directory: ~/project/bin/prod-deploy
