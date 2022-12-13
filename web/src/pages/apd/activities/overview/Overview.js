@@ -5,10 +5,16 @@ import { connect } from 'react-redux';
 import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 import MMISOverview from './MMISOverview';
 import HITECHOverview from './HITECHOverview';
+import StandardsAndConditions from './StandardsAndConditions';
 
 const Overview = ({ activityIndex, apdType }) => {
   const apdTypeToActivityOverviewMapping = {
-    [APD_TYPE.HITECH]: <HITECHOverview activityIndex={activityIndex} />,
+    [APD_TYPE.HITECH]: (
+      <>
+        <HITECHOverview activityIndex={activityIndex} />
+        <StandardsAndConditions activityIndex={activityIndex} />
+      </>
+    ),
     [APD_TYPE.MMIS]: <MMISOverview activityIndex={activityIndex} />
   };
 
