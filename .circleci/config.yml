@@ -1413,13 +1413,8 @@ jobs:
       - run:
           name: Install Mongo
           command: |
-            wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-            sudo apt-get install gnupg
-            wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-            sudo touch /etc/apt/sources.list.d/mongodb-org-6.0.list
-            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-            sudo apt-get update
-            sudo apt-get install -y mongodb-org
+            wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-debian11-x86_64-100.6.1.deb
+            sudo apt install ./mongodb-database-tools-*-100.6.0.deb
       - run:
           name: Create Staging MongoDB Dump
           working_directory: ~/project/bin/prod-deploy
