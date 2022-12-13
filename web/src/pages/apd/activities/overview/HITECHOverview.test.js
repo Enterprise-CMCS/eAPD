@@ -3,7 +3,7 @@ import { renderWithConnection, screen } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
 
 import axios from '../../../../util/api';
-import Overview from './Overview';
+import HITECHOverview from './HITECHOverview';
 
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
@@ -28,9 +28,9 @@ const initialState = {
 };
 
 const setup = (props = {}, options = {}) =>
-  renderWithConnection(<Overview {...props} />, options);
+  renderWithConnection(<HITECHOverview {...props} />, options);
 
-describe('<Overview />', () => {
+describe('<HITECHOverview />', () => {
   beforeEach(() => {
     fetchMock.reset();
   });

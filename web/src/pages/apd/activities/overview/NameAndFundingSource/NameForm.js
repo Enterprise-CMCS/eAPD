@@ -11,8 +11,6 @@ import { setActivityName } from '../../../../../redux/actions/editActivity';
 import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
 
 const NameForm = ({ index, item: { name }, setName, adminCheck }) => {
-  NameForm.displayName = 'NameForm';
-
   const {
     control,
     trigger,

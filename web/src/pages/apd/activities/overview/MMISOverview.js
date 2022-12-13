@@ -19,7 +19,7 @@ import { selectActivityByIndex } from '../../../../redux/selectors/activities.se
 
 import { mmisActivityOverviewSchema } from '@cms-eapd/common/schemas/activityOverview';
 
-const ActivityOverview = ({
+const MMISActivityOverview = ({
   activity,
   activityIndex,
   setProblemStatement,
@@ -27,8 +27,6 @@ const ActivityOverview = ({
   setSnapshot,
   adminCheck
 }) => {
-  ActivityOverview.displayName = 'ActivityOverview';
-
   const {
     activityOverview: {
       activitySnapshot,
@@ -37,11 +35,7 @@ const ActivityOverview = ({
     } = {}
   } = activity;
 
-  const {
-    trigger,
-    clearErrors,
-    formState: { errors }
-  } = useForm({
+  const { trigger, clearErrors } = useForm({
     defaultValues: {
       activitySnapshot: activitySnapshot,
       problemStatement: problemStatement,
@@ -195,12 +189,9 @@ const ActivityOverview = ({
   );
 };
 
-ActivityOverview.propTypes = {
+MMISActivityOverview.propTypes = {
   activity: PropTypes.object.isRequired,
   activityIndex: PropTypes.number.isRequired,
-  setAlternatives: PropTypes.func.isRequired,
-  setDescription: PropTypes.func.isRequired,
-  setOverview: PropTypes.func.isRequired,
   setProblemStatement: PropTypes.func.isRequired,
   setProposedSolution: PropTypes.func.isRequired,
   setSnapshot: PropTypes.func.isRequired,
@@ -220,6 +211,9 @@ const mapDispatchToProps = {
   setSnapshot: setActivitySnapshot
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivityOverview);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MMISActivityOverview);
 
-export { ActivityOverview as plain, mapStateToProps, mapDispatchToProps };
+export { MMISActivityOverview as plain, mapStateToProps, mapDispatchToProps };
