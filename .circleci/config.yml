@@ -1413,16 +1413,13 @@ jobs:
       - run:
           name: Install Mongo
           command: |
-            sudo touch /etc/yum.repos.d/mongodb-org-5.0.repo
-            echo "
-            [mongodb-org-5.0]
-            name=MongoDB Repository
-            baseurl=https://repo.mongodb.org/yum/redhat/7/mongodb-org/5.0/x86_64/
-            gpgcheck=1
-            enabled=1
-            gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
-            " > /etc/yum.repos.d/mongodb-org-5.0.repo
-            sudo yum -y install mongodb-org-5.0.3-1.el7 checkpolicy
+            wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+            sudo apt-get install gnupg
+            wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+            sudo touch /etc/apt/sources.list.d/mongodb-org-5.0.list
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+            sudo apt-get update
+            sudo apt-get install -y mongodb-org
       - run:
           name: Create Staging MongoDB Dump
           working_directory: ~/project/bin/prod-deploy
