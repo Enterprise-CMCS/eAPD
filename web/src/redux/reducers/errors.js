@@ -1,19 +1,28 @@
 import { CREATE_APD_SUCCESS } from '../actions/app';
-import { t } from '../../i18n';
 
-// import {
-//   ADMIN_CREATE_USER_SUCCESS,
-//   ADMIN_CREATE_USER_ERROR,
-//   ADMIN_EDIT_ACCOUNT_SUCCESS,
-//   ADMIN_EDIT_ACCOUNT_ERROR,
-//   ADMIN_EDIT_ME_SUCCESS,
-//   ADMIN_EDIT_ME_ERROR,
-//   ADMIN_CREATE_USER_REQUEST,
-//   ADMIN_EDIT_ACCOUNT_REQUEST,
-//   ADMIN_EDIT_ME_REQUEST
-// } from '../actions/admin';
+const initialState = {
+  tempMessage: []
+};
 
-// import { t } from '../../i18n';
+const apdSuccess = {
+  message:
+    'You have successfully created an APD. Select continue to fill out the rest of the APD',
+  variation: 'success'
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case CREATE_APD_SUCCESS:
+      state.tempMessage.push(apdSuccess);
+      return state;
+    default:
+      return state;
+  }
+};
+
+export const getTempMessage = state => state.tempMessage;
+
+export default reducer;
 
 // /**
 //  * Gets an error message from resource files, based on raw API message

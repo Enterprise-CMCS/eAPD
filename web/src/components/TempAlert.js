@@ -3,7 +3,7 @@ import PropType from 'prop-types';
 
 import { Alert } from '@cmsgov/design-system';
 
-const TempAlert = ({ message, variation }) => {
+const TempAlert = () => {
   return <Alert variation={`${variation}`}>{{ message }}</Alert>;
 };
 
