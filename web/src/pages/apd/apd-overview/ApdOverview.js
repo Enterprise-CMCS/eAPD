@@ -181,6 +181,7 @@ const ApdOverview = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
+      <TempAlert />
       <div className="apd_type_choice-container">
         <ChoiceList
           type="radio"
