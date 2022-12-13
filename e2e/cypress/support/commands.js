@@ -7,7 +7,7 @@ import 'tinymce/tinymce';
 import 'cypress-iframe';
 import 'cypress-file-upload'; // eslint-disable-line import/no-extraneous-dependencies
 
-import tokens from '@cms-eapd/api/seeds/test/tokens.json';
+import { tokens } from '@cms-eapd/api';
 
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
@@ -599,7 +599,7 @@ function callback(violations) {
 }
 
 Cypress.Commands.add('checkPageA11y', () => {
-  cy.wait(2500);
+  cy.wait(2500); // eslint-disable-line cypress/no-unnecessary-waiting
   cy.injectAxeForA11y();
   cy.checkA11y(
     { exclude: [['#tinymce-wrapper'], ['[aria-label="Main Navigation"]']] },

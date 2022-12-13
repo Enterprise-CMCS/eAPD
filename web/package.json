@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
+  "exports": "./index.js",
   "scripts": {
     "lint": "eslint 'src/**/*.js'",
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",

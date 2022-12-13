@@ -32,6 +32,7 @@ api/coverage-unit
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
 api/seeds/test/tokens.json
+api/seeds/test/tokens.js
 api/test-data/files
 
 common/coverage-endpoint

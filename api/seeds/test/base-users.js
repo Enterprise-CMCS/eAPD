@@ -23,8 +23,8 @@ const seed = async knex => {
   // save the tokens to a file
   try {
     fs.writeFileSync(
-      `${__dirname}/seeds/test/tokens.json`,
-      JSON.stringify(testTokens, null, 4)
+      `${__dirname}/seeds/test/tokens.js`,
+      `export default ${JSON.stringify(testTokens, null, 4)}`
     );
   } catch (err) {
     // not much to do here but log it

@@ -1410,7 +1410,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   describe('Accessibility Tests', () => {
     it('Runs on APD Builder', () => {
-      cy.wait(5000); // Allows page to load
+      // Allows page to load
+      cy.wait(5000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.checkPageA11y(); // APD Overview
 

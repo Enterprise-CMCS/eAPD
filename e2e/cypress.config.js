@@ -1,8 +1,8 @@
-const { defineConfig } = require('cypress'); // eslint-disable-line import/no-extraneous-dependencies
-const webpackConfig = require('../web/webpack.config.dev');
-const setupNodeEvents = require('./cypress/plugins/index');
+import { defineConfig } from 'cypress'; // eslint-disable-line import/no-extraneous-dependencies
+import { webpackConfig } from '@cms-eapd/web';
+import setupNodeEvents from './cypress/plugins/index.js';
 
-module.exports = defineConfig({
+export default defineConfig({
   e2e: {
     setupNodeEvents,
     environment: 'development',

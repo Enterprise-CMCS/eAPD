@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Cypress tests for the EAPD tool",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint 'cypress/**/*.js'",
     "npm-check": "npx npm-check-updates",
@@ -23,6 +24,7 @@
   },
   "dependencies": {
     "@cms-eapd/api": "0.0.1",
+    "@cms-eapd/web": "0.0.1",
     "@foreachbe/cypress-tinymce": "1.0.0",
     "react": "17.0.2",
     "tinymce": "5.10.7"
@@ -67,11 +69,6 @@
     "style-loader": "3.3.1",
     "url-loader": "4.1.1",
     "yaml-loader": "0.8.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
   },
   "jest": {
     "setupFiles": [

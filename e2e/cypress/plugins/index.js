@@ -12,15 +12,15 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const { lighthouse, pa11y, prepareAudit } = require('cypress-audit'); // eslint-disable-line import/no-extraneous-dependencies
-const browserify = require('@cypress/browserify-preprocessor'); // eslint-disable-line import/no-extraneous-dependencies
-const knex = require('@cms-eapd/api/db/knex');
+import { lighthouse, pa11y, prepareAudit } from 'cypress-audit'; // eslint-disable-line import/no-extraneous-dependencies
+import browserify from '@cypress/browserify-preprocessor'; // eslint-disable-line import/no-extraneous-dependencies
+import { knex } from '@cms-eapd/api';
 
 /**
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-module.exports = (on, config) => {
+export default (on, config) => {
   require('cypress-grep/src/plugin')(config); // eslint-disable-line global-require, import/no-extraneous-dependencies
   require('@cypress/code-coverage/task')(on, config);
 
