@@ -91,6 +91,11 @@
     "file-type": "can't upgrade to 17 because it requires babel",
     "mongoose": "we aren't upgrading to 6.x yet because it's not highly supported by other packages"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
   "jest": {
     "coverageDirectory": "./coverage-endpoint/",
     "rootDir": "./",

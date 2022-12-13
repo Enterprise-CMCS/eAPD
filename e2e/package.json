@@ -68,6 +68,11 @@
     "url-loader": "4.1.1",
     "yaml-loader": "0.8.0"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
   "jest": {
     "setupFiles": [
       "./polyfills.test.js"
