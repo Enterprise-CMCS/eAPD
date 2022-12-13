@@ -28,19 +28,19 @@ workflows:
       - cleanup packer amis
 
 # Workflows to validate IaC configurations  
-  packer validation:
-    triggers:
-      - schedule:
-          cron: '0 4 * * *' # Every day at 4 am
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - packer validation tests:
-          name: Packer Validation Tests
+#  packer validation:
+#    triggers:
+#      - schedule:
+#          cron: '0 4 * * *' # Every day at 4 am
+#          filters:
+#            branches:
+#              only:
+#                - main
+#    jobs:
+#      - packer validation tests:
+#          name: Packer Validation Tests
           
-  terraform validation:
+  iac validation:
     triggers:
       - schedule:
           cron: '0 4 * * *' # Every day at 4 am
@@ -51,6 +51,17 @@ workflows:
     jobs:
       - terraform validation tests:
           name: Terraform Validation Tests
+      - packer validation tests:
+          name: Packer Validation Tests          
+
+  # Workflow to create dumps of Mongo databases and store them in S3            
+  mongo dumps:
+    jobs:
+      - mongo database dumps:
+          name: Create Staging MongoDB Dump
+          filters:
+            tags:
+              ignore: /.*/       
 
 # Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
@@ -96,14 +107,6 @@ workflows:
           requires:
             - Build Prod Staging AMI
             - Cleanup Old Unused Preview AMIs
-  # Workflow to create dumps of Mongo databases and store them in S3            
-  mongo dumps:
-    jobs:
-      - mongo database dumps:
-          name: Create Staging MongoDB Dump
-          filters:
-            tags:
-              ignore: /.*/          
 
   # Tests
   owasp, e2e, and chromatic:
@@ -1409,7 +1412,7 @@ jobs:
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             export STAGING_MONGO_URL=$STAGING_MONGO_URL
             export ENVIRONMENT=staging
-            ./mongo-dump.sh
+            bash mongo-dump.sh
       - run:
           name: Create Production MongoDB Dump
           working_directory: ~/project/bin/prod-deploy
@@ -1419,4 +1422,4 @@ jobs:
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             export PRODUCTION_MONGO_URL=$PRODUCTION_MONGO_URL
             export ENVIRONMENT=production
-            ./mongo-dump.sh
+            bash mongo-dump.sh
