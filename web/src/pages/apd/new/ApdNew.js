@@ -144,6 +144,7 @@ const ApdNew = ({ createApd: create }) => {
       name,
       apdType,
       apdOverview: {
+        programOverview: '',
         updateStatus: {
           ...typeStatus
         }
