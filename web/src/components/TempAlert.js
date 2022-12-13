@@ -12,17 +12,19 @@ const TempAlert = props => {
   if (tempMessages.length > 0) {
     let messages = [];
 
-    function removeMsg () => {
+    // function removeMsg () => {
 
-    }
+    // }
 
     tempMessages.forEach(el => {
-      messages.push(<div>{el.message}</div>)
-    })
+      messages.push(<div>{el.message}</div>);
+    });
 
-    return (<Alert variation={tempMessages[0].variation} className="ds-u-margin-y--3">
-      {messages}
-    </Alert>)
+    return (
+      <Alert variation={tempMessages[0].variation} className="ds-u-margin-y--3">
+        {messages}
+      </Alert>
+    );
   }
 
   return null;
@@ -30,16 +32,16 @@ const TempAlert = props => {
 
 TempAlert.propTypes = {
   tempMessages: PropTypes.array
-}
+};
 
 TempAlert.defaultProps = {
   tempMessages: []
-}
+};
 
 const mapStateToProps = state => ({
   tempMessages: getTempMessages(state)
-})
+});
 
 export default connect(mapStateToProps)(TempAlert);
 
-export { TempAlert as plain};
+export { TempAlert as plain };
