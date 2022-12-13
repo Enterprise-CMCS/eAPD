@@ -1,4 +1,4 @@
-import { generateKey } from '@cms-eapd/common/utils/utils';
+import { generateKey } from '@cms-eapd/common';
 import {
   ADD_APD_ITEM,
   APD_ACTIVITIES_CHANGE,

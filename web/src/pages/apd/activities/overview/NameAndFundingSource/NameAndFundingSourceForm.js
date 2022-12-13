@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import nameFundingSourceSchema from '@cms-eapd/common/schemas/nameAndFundingSource';
+import { nameAndFundingSource as schema } from '@cms-eapd/common';
 import {
   setActivityName,
   setActivityFundingSource
@@ -32,7 +32,7 @@ const NameAndFundingSourceForm = ({
       name: name,
       fundingSource: fundingSource
     },
-    resolver: joiResolver(nameFundingSourceSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

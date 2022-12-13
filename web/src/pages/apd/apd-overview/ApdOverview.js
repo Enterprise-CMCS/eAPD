@@ -7,7 +7,7 @@ import DeleteModal from '../../../components/DeleteModal';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import apdOverviewSchema from '@cms-eapd/common/schemas/apdOverview';
+import { apdOverview as schema } from '@cms-eapd/common';
 
 import {
   addYear,
@@ -65,7 +65,7 @@ const ApdOverview = ({
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(apdOverviewSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

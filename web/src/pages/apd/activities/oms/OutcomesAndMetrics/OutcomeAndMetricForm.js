@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Icon, { faPlusCircle } from '../../../../../components/Icons';
 import Review from '../../../../../components/Review';
 
-import validationSchema from '@cms-eapd/common/schemas/outcomeMetric';
+import { outcomeMetric as schema } from '@cms-eapd/common';
 import { saveOutcome as actualSaveOutcome } from '../../../../../redux/actions/editActivity';
 
 import { newOutcomeMetric } from '../../../../../redux/reducers/activities';
@@ -29,7 +29,7 @@ const OutcomeAndMetricForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(validationSchema)
+      resolver: joiResolver(schema)
     });
 
     const { fields, append, remove } = useFieldArray({

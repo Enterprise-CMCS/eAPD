@@ -40,7 +40,7 @@ import {
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
 import { defaultAPDYearOptions } from '../../util';
-import { generateKey } from '@cms-eapd/common/utils/utils';
+import { generateKey } from '@cms-eapd/common';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
