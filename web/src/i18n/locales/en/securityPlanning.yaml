@@ -1,1 +1,21 @@
 title: Security Planning
+
+securityInterfacePlan:
+  title: Security and Interface Plan
+  instruction:
+    detail: >-
+      Provide a comprehensive Security and Interface Plan for IT systems and
+      installations involed in the administration of the Medicaid Program.
+      Briefly Describe what is in this plan. Include topics such as site and
+      facility security, security of data communications equipment, and security
+      of Personal Helth Information (PHI).
+
+bcDrplan:
+  title: Business Continuity and Disaster Recovery Plan
+  instruction:
+    detail: >-
+      Provide a comprehensive Business Continuity and Disaster Recovery Plan for
+      IT systems and installations involed in the administration of the Medicaid
+      Program. Briefly describe what is in this plan. Include topics such as
+      contingency plan, key personnel emergency contacts, and maintenance of a
+      complete set of backup programs and related system documentation.
