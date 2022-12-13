@@ -18,8 +18,7 @@ yum install newrelic-infra -y
 # Add a user group for the default user, and make it the owner of the /app
 # directory.  Unzip stuff there and then set permissions.
 groupadd eapd
-#gpasswd -a ec2-user eapd
-gpasswd -a centos eapd
+gpasswd -a ec2-user eapd
 
 mkdir /app
 mkdir /app/api
