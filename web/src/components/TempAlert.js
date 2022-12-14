@@ -38,51 +38,6 @@ const TempAlert = props => {
       ))}
     </div>
   );
-
-  // let messages = [];
-
-  // function removeMsg (index) {
-  //   console.log('Before: ' + tempMessages);
-  //   tempMessages.splice(index, 1);
-  //   console.log('After: ' + tempMessages);
-  //   setMessages(tempMessages);
-  // }
-
-  // function setMessages (messageList) {
-  //   if (messageList.length > 0) {
-  //     messageList.forEach((value, i) => {
-  //       messages.push(
-  //         <Alert variation={value.variation}>
-  //           <div className="tempMessage">
-  //             <div>
-  //               {value.message}
-  //             </div>
-  //             <div>
-  //               <Button
-  //                 onClick={() => removeMsg(i)}
-  //                 variation="ghost"
-  //               >
-  //                 X
-  //               </Button>
-  //             </div>
-  //           </div>
-  //         </Alert>
-  //       );
-  //     });
-  //   }
-  // }
-
-  // if (tempMessages.length > 0) {
-  //   setMessages(tempMessages);
-
-  //   return (
-  //     <div className="ds-u-margin-y--3">
-  //       {messages}
-  //     </div>
-  //   );
-  // }
-
-  // return null;
 };
 
 TempAlert.propTypes = {
