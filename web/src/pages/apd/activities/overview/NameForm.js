@@ -6,9 +6,9 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
 import nameFundingSourceSchema from '@cms-eapd/common/schemas/nameAndFundingSource';
-import { setActivityName } from '../../../../../redux/actions/editActivity';
+import { setActivityName } from '../../../../redux/actions/editActivity';
 
-import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
+import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 
 const NameForm = ({ index, item: { name }, setName, adminCheck }) => {
   const {

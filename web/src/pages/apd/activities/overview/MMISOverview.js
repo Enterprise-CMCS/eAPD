@@ -13,9 +13,9 @@ import {
 } from '../../../../redux/actions/editActivity';
 import RichText from '../../../../components/RichText';
 import Instruction from '../../../../components/Instruction';
-import { Subsection } from '../../../../components/Section';
-import { NameForm } from './NameAndFundingSource/';
+import NameForm from './NameForm';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
+import { Subsection } from '../../../../components/Section';
 
 import { mmisActivityOverviewSchema } from '@cms-eapd/common/schemas/activityOverview';
 

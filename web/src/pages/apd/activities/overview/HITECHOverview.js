@@ -11,11 +11,14 @@ import {
   setActivityDescription,
   setActivityOverview
 } from '../../../../redux/actions/editActivity';
-import RichText from '../../../../components/RichText';
+import FundingSourceForm from './FundingSourceForm';
 import Instruction from '../../../../components/Instruction';
 import { Subsection } from '../../../../components/Section';
-import { NameAndFundingSourceForm } from './NameAndFundingSource';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
+import NameForm from './NameForm';
+import RichText from '../../../../components/RichText';
+import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
+import { Subsection } from '../../../../components/Section';
 
 import { hitechActivityOverviewNoSCSchema } from '@cms-eapd/common/schemas/activityOverview';
 
@@ -122,10 +125,19 @@ const HITECHOverview = ({
           <h4>Funding source: {activity.fundingSource}</h4>
         </Fragment>
       ) : (
-        <NameAndFundingSourceForm
-          index={activityIndex}
-          item={{ fundingSource: activity.fundingSource, name: activity.name }} // item is activity[index]
-        />
+        <Fragment>
+          <NameForm
+            index={activityIndex}
+            item={{ name: activity.name }} // item is activity[index]
+          />
+          <FundingSourceForm
+            index={activityIndex}
+            item={{
+              fundingSource: activity.fundingSource,
+              name: activity.name
+            }} // item is activity[index]
+          />
+        </Fragment>
       )}
 
       <div className="data-entry-box">
