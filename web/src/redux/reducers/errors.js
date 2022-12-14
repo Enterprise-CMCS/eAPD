@@ -11,9 +11,14 @@ const apdSuccess = {
 };
 
 const reducer = (state = initialState, action) => {
+  let tempMessages = state.tempMessages,
+    tempMsgIndex = tempMessages.indexOf(apdSuccess);
+
   switch (action.type) {
     case CREATE_APD_SUCCESS:
-      state.tempMessages.push(apdSuccess);
+      if (tempMsgIndex === -1) {
+        state.tempMessages.push(apdSuccess);
+      }
       return state;
     default:
       return state;

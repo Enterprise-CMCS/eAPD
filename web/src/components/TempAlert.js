@@ -8,12 +8,11 @@ import { getTempMessages } from '../redux/reducers/errors';
 
 const TempAlert = props => {
   const { tempMessages } = props;
+  const [tempMsgState, setTempMsgState] = useState(tempMessages);
 
   if (!tempMessages) {
     return null;
   }
-
-  const [tempMsgState, setTempMsgState] = useState(tempMessages);
 
   const removeMsg = i => {
     setTempMsgState([
@@ -25,11 +24,15 @@ const TempAlert = props => {
   return (
     <div>
       {tempMsgState.map((value, index) => (
-        <Alert key={`tempMsg-${index + 1}`} variation={value.variation}>
+        <Alert
+          key={`tempMsg-${index + 1}`}
+          className="ds-u-margin-y--2"
+          variation={value.variation}
+        >
           <div className="tempMessage">
             <div>{value.message}</div>
             <div>
-              <Button onClick={() => removeMsg(index)} variation="ghost">
+              <Button onClick={() => removeMsg(index)} className="tempMsgBtn">
                 X
               </Button>
             </div>

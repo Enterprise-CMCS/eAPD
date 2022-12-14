@@ -39,4 +39,12 @@
 .tempMessage {
   display: flex;
   flex-direction: row;
+
+  .tempMsgBtn,
+  .tempMsgBtn:visited {
+    background-color: #0071bc;
+    color: #fff;
+    font-weight: 500;
+    padding: 2px 10px;
+  }
 }
