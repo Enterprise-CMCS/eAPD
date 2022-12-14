@@ -48,13 +48,17 @@ const getBudgetModel = apdType => {
 };
 
 const createAPD = async apd => {
+  console.log('Still going1');
   const apdJSON = deepCopy(apd);
+  console.log('Still going2');
   const { apdType } = apd;
+  console.log('Still going3');
 
   const apdDoc = await getApdModel(apdType).create(apdJSON);
-  const newBudget = await getBudgetModel(apdType).create(
-    calculateBudget(apdDoc.toJSON())
-  );
+  console.log('Still going4');
+  const json = calculateBudget(apdDoc.toJSON());
+  console.log({ json });
+  const newBudget = await getBudgetModel(apdType).create(json);
   apdDoc.budget = newBudget;
   await apdDoc.save();
 

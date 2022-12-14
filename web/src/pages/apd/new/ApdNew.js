@@ -60,6 +60,7 @@ const ApdNew = ({ createApd: create }) => {
   };
 
   const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
+  console.log({ yearOptions });
   const [apdType, setApdType] = useState('');
   const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
   const [isLoading, setIsLoading] = useState(false);
@@ -386,7 +387,7 @@ const ApdNew = ({ createApd: create }) => {
               />
 
               <Controller
-                name="businessAreas"
+                name="apdOverview.medicaidBusinessAreas"
                 control={control}
                 render={({ field: { onBlur, onChange } }) => (
                   <ChoiceList
@@ -519,9 +520,13 @@ const ApdNew = ({ createApd: create }) => {
                         )
                       );
                       setBusinessAreas(businessAreas);
-                      setValue('apdOverview.businessAreas', businessAreas, {
-                        shouldValidate: true
-                      });
+                      setValue(
+                        'apdOverview.medicaidBusinessAreas',
+                        businessAreas,
+                        {
+                          shouldValidate: true
+                        }
+                      );
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}

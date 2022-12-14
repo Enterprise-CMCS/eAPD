@@ -40,11 +40,13 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       }
 
       try {
+        console.log('Is this working? 0');
         const id = await createAPD({
           stateId: req.user.state.id,
           status: 'draft',
           ...apd
         });
+        console.log('Is this working? 1');
 
         return res.send({
           ...apd,
@@ -55,6 +57,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       } catch (e) {
         // This is just here to protect us from the case where the APD schema changed but the
         // APD creation function was not also updated
+        logger.error(`error: ${JSON.stringify(e, null, 2)}`);
         logger.error({
           id: req.id,
           message: 'Newly-created APD fails validation'
