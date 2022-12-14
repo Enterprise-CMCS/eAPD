@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { APD_TYPE } from '@cms-eapd/common/utils/constants';
@@ -10,10 +10,10 @@ import StandardsAndConditions from './StandardsAndConditions';
 const Overview = ({ activityIndex, apdType }) => {
   const apdTypeToActivityOverviewMapping = {
     [APD_TYPE.HITECH]: (
-      <>
+      <Fragment>
         <HITECHOverview activityIndex={activityIndex} />
         <StandardsAndConditions activityIndex={activityIndex} />
-      </>
+      </Fragment>
     ),
     [APD_TYPE.MMIS]: <MMISOverview activityIndex={activityIndex} />
   };

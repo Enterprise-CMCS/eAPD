@@ -1,7 +1,7 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
@@ -35,7 +35,12 @@ const MMISActivityOverview = ({
     } = {}
   } = activity;
 
-  const { trigger, clearErrors } = useForm({
+  const {
+    control,
+    trigger,
+    clearErrors,
+    formState: { errors }
+  } = useForm({
     defaultValues: {
       activitySnapshot: activitySnapshot,
       problemStatement: problemStatement,
@@ -103,23 +108,16 @@ const MMISActivityOverview = ({
   );
 
   return (
-    <>
+    <Fragment>
       <Subsection
         headerClassName="header-with-top-margin"
         resource="activities.overview"
         id={`activity-overview-${activityIndex}`}
       >
-        {activityIndex === 0 ? (
-          <Fragment>
-            <h4>Activity name: {activity.name || 'Untitled'}</h4>
-          </Fragment>
-        ) : (
-          <NameForm
-            index={activityIndex}
-            item={{ name: activity.name }} // item is activity[index]
-          />
-        )}
-
+        <NameForm
+          index={activityIndex}
+          item={{ name: activity.name }} // item is activity[index]
+        />
         <div className="data-entry-box">
           <FormLabel
             className="ds-c-label--full-width"
@@ -129,14 +127,27 @@ const MMISActivityOverview = ({
             {snapshotLabel}
           </FormLabel>
           <Instruction source="activities.overview.activitySnapshotInput" />
-          <RichText
-            id="activity-snapshot-field"
-            iframe_aria_text="Activity Snapshot Text Area"
-            content={activitySnapshot}
-            onSync={html => {
-              setSnapshot(activityIndex, html);
-            }}
-            editorClassName="rte-textarea-l"
+          <Controller
+            name="activitySnapshot"
+            control={control}
+            render={({ field: { onChange } }) => (
+              <RichText
+                id="activity-snapshot-field"
+                iframe_aria_text="Activity Snapshot Text Area"
+                content={activitySnapshot}
+                onSync={html => {
+                  setSnapshot(activityIndex, html);
+                  onChange(html);
+
+                  if (adminCheck) {
+                    trigger();
+                  }
+                }}
+                data-cy="activity-snapshot"
+                editorClassName="rte-textarea-l"
+                error={errors?.activitySnapshot?.message}
+              />
+            )}
           />
         </div>
       </Subsection>
@@ -154,14 +165,27 @@ const MMISActivityOverview = ({
             {problemStatementLabel}
           </FormLabel>
           <Instruction source="activities.comprehensiveOverview.problemStatementInput" />
-          <RichText
-            id="activity-problem-statement-field"
-            iframe_aria_text="Problem Statement Text Area"
-            content={problemStatement}
-            onSync={html => {
-              setProblemStatement(activityIndex, html);
-            }}
-            editorClassName="rte-textarea-l"
+          <Controller
+            name="problemStatement"
+            control={control}
+            render={({ field: { onChange } }) => (
+              <RichText
+                id="activity-problem-statement-field"
+                iframe_aria_text="Problem Statement Text Area"
+                content={problemStatement}
+                onSync={html => {
+                  setProblemStatement(activityIndex, html);
+                  onChange(html);
+
+                  if (adminCheck) {
+                    trigger();
+                  }
+                }}
+                data-cy="activity-problem-statement"
+                editorClassName="rte-textarea-l"
+                error={errors?.problemStatement?.message}
+              />
+            )}
           />
         </div>
 
@@ -174,18 +198,31 @@ const MMISActivityOverview = ({
             {proposedSolutionLabel}
           </FormLabel>
           <Instruction source="activities.comprehensiveOverview.proposedSolutionInput" />
-          <RichText
-            id="activity-proposed-solution-field"
-            iframe_aria_text="Proposed Solution Text Area"
-            content={proposedSolution}
-            onSync={html => {
-              setProposedSolution(activityIndex, html);
-            }}
-            editorClassName="rte-textarea-l"
+          <Controller
+            name="proposedSolution"
+            control={control}
+            render={({ field: { onChange } }) => (
+              <RichText
+                id="activity-proposed-solution-field"
+                iframe_aria_text="Proposed Solution Text Area"
+                content={proposedSolution}
+                onSync={html => {
+                  setProposedSolution(activityIndex, html);
+                  onChange(html);
+
+                  if (adminCheck) {
+                    trigger();
+                  }
+                }}
+                data-cy="activity-proposed-solution"
+                editorClassName="rte-textarea-l"
+                error={errors?.description?.message}
+              />
+            )}
           />
         </div>
       </Subsection>
-    </>
+    </Fragment>
   );
 };
 
