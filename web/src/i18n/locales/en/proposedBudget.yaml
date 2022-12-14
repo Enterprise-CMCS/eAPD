@@ -1,35 +1,45 @@
 title: Proposed Budget
 helpText: >-
-  Review topline budget data associated with this APD. Totals are based on the information entered by
-  the state. Capture incentive payments if applicable.
-summaryBudgetByActivity:
-  title: Summary Budget by Activity
+  Review topline budget data associated with this APD. Totals are based on the
+  information entered by the state. Capture incentive payments if applicable.
+combinedActivityCosts:
+  title: Combined Activity Costs
   totalMedicaidCost:
     detail: >-
-      The following tables summarize the **Total Computable Medicaid Cost** for all activities organized by their funding 
-      source (**HIT**, **HIE**, and/or **MMIS**) and their cost category (**State Personnel**, **Other State Expenses**, and **Private 
-      Contractor Costs**) by FFY. Other funding amounts described in the cost allocation section of the activities are 
-      not included in these tables, but can be reviewed in the individual activity summary tables on this page.
+      The following tables summarize the **Total Computable Medicaid Cost** for
+      all activities organized by their funding  source (**HIT**, **HIE**,
+      and/or **MMIS**) and their cost category (**State Personnel**, **Other
+      State Expenses**, and **Private  Contractor Costs**) by FFY. Other funding
+      amounts described in the cost allocation section of the activities are not
+      included in these tables, but can be reviewed in the individual activity
+      summary tables on this page.
   activityBreakdown:
+    title: State and Contractor Cost Breakdown
     detail: >-
-      These tables summarize **State Staff**, **Other State Expenses**, and **Private Contractors** for all activities in this APD, organized by FFY.  
-      These tables provide subtotals for each FFY and calculate the **Total Computable Medicaid Cost** by subtracting other costs that 
-      were described in each activity. The other costs provided here are the sum of other costs from each activity.
+      These tables summarize **State Staff**, **Other State Expenses**, and
+      **Private Contractors** for all activities in this APD, organized by
+      FFY.  
+      These tables provide subtotals for each FFY and calculate the **Total
+      Computable Medicaid Cost** by subtracting other costs that  were described
+      in each activity. The other costs provided here are the sum of other costs
+      from each activity.
 summaryBudget:
   title: Summary Budget Table
   instruction:
     detail: >-
-      These tables summarize the calculated Medicaid Total Computable (Total Activity Cost minus any Other Funding amounts)
-      for state personnel, private contractor, and other state expenses for all activities by FFY. 
-      The tables provide subtotals for each of these categories by program area with the calculated 
-      Federal share by FFP rate and the associated state share. The final table in this section
-      provides the total Medicaid cost for all activities in this APD by FFY.
+      These tables summarize the calculated Medicaid Total Computable (Total
+      Activity Cost minus any Other Funding amounts) for state personnel,
+      private contractor, and other state expenses for all activities by FFY.
+      The tables provide subtotals for each of these categories by program area
+      with the calculated  Federal share by FFP rate and the associated state
+      share. The final table in this section provides the total Medicaid cost
+      for all activities in this APD by FFY.
 quarterlyBudget:
   title: Quarterly Federal Share
   instruction:
     detail: >-
-      These tables summarize the proposed budget for federal financial participation
-      (FFP) broken out by FFY quarter.
+      These tables summarize the proposed budget for federal financial
+      participation (FFP) broken out by FFY quarter.
   expenseNames:
     state: In-House Costs
     contractor: Private Contractor Costs
@@ -38,7 +48,7 @@ paymentsByFFYQuarter:
   title: Estimated Quarterly Incentive Payments
   instruction:
     detail: >-
-      Use this table to capture incentive payments for Eligible Hospitals (EHs) and
-      Eligible Professionals (EPs). Provide the total amount paid (Payments) and the
-      number of providers who receive payments (Count) for each quarter. The table will
-      calculate yearly totals automatically.
+      Use this table to capture incentive payments for Eligible Hospitals (EHs)
+      and Eligible Professionals (EPs). Provide the total amount paid (Payments)
+      and the number of providers who receive payments (Count) for each quarter.
+      The table will calculate yearly totals automatically.
