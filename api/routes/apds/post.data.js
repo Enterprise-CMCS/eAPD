@@ -1,5 +1,5 @@
 const {
-  // defaultAPDYears,
+  defaultAPDYears,
   defaultAPDYearOptions,
   APD_TYPE
 } = require('@cms-eapd/common');
@@ -7,7 +7,7 @@ const getNewHitechApd = require('./post.hitech.data');
 const getNewMmisApd = require('./post.mmis.data');
 
 const getNewApd = apdType => {
-  // const years = defaultAPDYears();
+  const years = defaultAPDYears();
   const yearOptions = defaultAPDYearOptions();
 
   let specific = {};
@@ -25,7 +25,7 @@ const getNewApd = apdType => {
   }
 
   return {
-    // years,
+    years,
     yearOptions,
     keyStatePersonnel: {
       medicaidDirector: {

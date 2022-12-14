@@ -60,10 +60,11 @@ const ApdNew = ({ createApd: create }) => {
   };
 
   const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
-  console.log({ yearOptions });
   const [apdType, setApdType] = useState('');
   const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
+  const [businessList, setBusinessList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [otherDetails, setOtherDetails] = useState('');
   const [typeStatus, setTypeStatus] = useState(updateTypes);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
 
@@ -102,7 +103,8 @@ const ApdNew = ({ createApd: create }) => {
     formState: { errors, isDirty, isValid }
   } = useForm({
     defaultValues: {
-      years: years
+      years: years,
+      businessList: businessList
     },
     mode: 'all',
     reValidateMode: 'all',
@@ -157,6 +159,8 @@ const ApdNew = ({ createApd: create }) => {
     if (apdType === APD_TYPE.MMIS) {
       apdValues.apdOverview.updateStatus.isUpdateAPD = mmisUpdate === 'yes';
       apdValues.apdOverview.medicaidBusinessAreas = businessAreas;
+      apdValues.apdOverview.medicaidBusinessAreas.otherMedicaidBusinessAreas =
+        otherDetails;
     }
     setIsLoading(true);
     create(apdValues);
@@ -387,7 +391,7 @@ const ApdNew = ({ createApd: create }) => {
               />
 
               <Controller
-                name="apdOverview.medicaidBusinessAreas"
+                name="businessList"
                 control={control}
                 render={({ field: { onBlur, onChange } }) => (
                   <ChoiceList
@@ -490,7 +494,7 @@ const ApdNew = ({ createApd: create }) => {
                         checkedChildren: (
                           <div className="ds-c-choice__checkedChild">
                             <Controller
-                              name="apdOverview.otherDetails"
+                              name="otherDetails"
                               control={control}
                               render={({ field: { onBlur, ...props } }) => (
                                 <TextArea
@@ -501,9 +505,7 @@ const ApdNew = ({ createApd: create }) => {
                                   hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
                                   onBlur={onBlur}
                                   onComponentBlur={onBlur}
-                                  errorMessage={
-                                    errors?.apdOverview?.otherDetails?.message
-                                  }
+                                  errorMessage={errors?.otherDetails?.message}
                                   errorPlacement="bottom"
                                 />
                               )}
@@ -513,24 +515,21 @@ const ApdNew = ({ createApd: create }) => {
                       }
                     ]}
                     onChange={({ target: { value } }) => {
+                      // Set boolean values for medicaid business areas
+                      // For createApd
                       businessAreas[value] = !businessAreas[value];
-                      onChange(
-                        Object.keys(businessAreas).filter(
-                          key => businessAreas[key]
-                        )
-                      );
                       setBusinessAreas(businessAreas);
-                      setValue(
-                        'apdOverview.medicaidBusinessAreas',
-                        businessAreas,
-                        {
-                          shouldValidate: true
-                        }
+
+                      // For validation
+                      let keys = Object.keys(businessAreas).filter(
+                        key => businessAreas[key]
                       );
+                      onChange(keys);
+                      setBusinessList(keys);
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}
-                    errorMessage={errors?.apdOverview?.medicaidBA?.message}
+                    errorMessage={errors?.businessList?.message}
                     errorPlacement="bottom"
                   />
                 )}

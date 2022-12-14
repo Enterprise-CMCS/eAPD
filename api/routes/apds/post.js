@@ -40,13 +40,11 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       }
 
       try {
-        console.log('Is this working? 0');
         const id = await createAPD({
           stateId: req.user.state.id,
           status: 'draft',
           ...apd
         });
-        console.log('Is this working? 1');
 
         return res.send({
           ...apd,
