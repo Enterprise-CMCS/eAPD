@@ -29,13 +29,15 @@ const getCheckedValue = value => {
 const PersonForm = forwardRef(
   ({ index, item, savePerson, years, setFormValid, apdType }, ref) => {
     PersonForm.displayName = 'PersonForm';
-    const { name, email, position, hasCosts, isPrimary, costs, fte } =
+    const { name, email, position, hasCosts, isPrimary, costs, split, fte } =
       JSON.parse(JSON.stringify({ ...item }));
     const {
       handleSubmit,
       control,
       trigger,
       formState: { errors, isValid },
+      setValue,
+      getValues,
       resetField: resetFieldErrors
     } = useForm({
       defaultValues: {
@@ -44,6 +46,7 @@ const PersonForm = forwardRef(
         position,
         hasCosts: getCheckedValue(hasCosts),
         costs,
+        split,
         fte
       },
       mode: 'onChange',
@@ -62,6 +65,7 @@ const PersonForm = forwardRef(
       hasCosts,
       isPrimary,
       costs,
+      split,
       fte
     };
 
@@ -86,6 +90,17 @@ const PersonForm = forwardRef(
             fte: {
               ...state.fte,
               [action.year]: action.value
+            }
+          };
+        case 'updateSplit':
+          return {
+            ...state,
+            split: {
+              ...state.split,
+              [action.year]: {
+                federal: action.federal,
+                state: action.state
+              }
             }
           };
         default:
@@ -144,6 +159,20 @@ const PersonForm = forwardRef(
         year: year,
         value: e.target.value
       });
+    };
+
+    const handleSplitChange = (year, e) => {
+      const [federal, state] = e.target.value.split('-').map(Number);
+
+      dispatch({
+        type: 'updateSplit',
+        year: year,
+        federal,
+        state
+      });
+
+      setValue(`split.${year}.federal`, federal);
+      setValue(`split.${year}.state`, state);
     };
 
     const onSubmit = e => {
@@ -340,22 +369,46 @@ const PersonForm = forwardRef(
                               </span>
                             </div>
                             {apdType === 'MMIS' && (
-                              <ChoiceList
-                                choices={[
-                                  {
-                                    defaultChecked: true,
-                                    label: '90/10 DDI',
-                                    value: null
-                                  },
-                                  {
-                                    label: '75/25 Operations',
-                                    value: null
-                                  }
-                                ]}
-                                type="radio"
-                                label="Federal-State Split"
-                                hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share."
-                                id={`abc`}
+                              <Controller
+                                key={`${year}-split`}
+                                name={`split.${year}`}
+                                control={control}
+                                render={({
+                                  field: { onChange, onBlur, value, ...props }
+                                }) => (
+                                  <ChoiceList
+                                    {...props}
+                                    choices={[
+                                      {
+                                        checked: value?.federal == 90,
+                                        label: '90/10 DDI',
+                                        value: '90-10'
+                                      },
+                                      {
+                                        checked: value?.federal == 75,
+                                        label: '75/25 Operations',
+                                        value: '75-25'
+                                      }
+                                    ]}
+                                    type="radio"
+                                    label="Federal-State Split"
+                                    hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share."
+                                    // id={`apd-state-profile-pocemail${index}`}
+                                    onChange={e => {
+                                      console.log('value', value);
+                                      handleSplitChange(year, e);
+                                    }}
+                                    onBlur={() => {
+                                      trigger('split');
+                                    }}
+                                    errorMessage={
+                                      errors?.split &&
+                                      errors?.split[year] &&
+                                      errors?.split[year]?.state?.message
+                                    }
+                                    errorPlacement="bottom"
+                                  />
+                                )}
                               />
                             )}
                           </div>

@@ -246,6 +246,10 @@ export const getKeyPersonnel = (years = [], isPrimary = false) => ({
   hasCosts: null,
   isPrimary,
   fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
+  split: years.reduce(
+    (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }), // Todo: set the fed-state split to 90-10 for HITECH
+    {}
+  ),
   name: '',
   position: '',
   key: generateKey()

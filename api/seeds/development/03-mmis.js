@@ -49,7 +49,11 @@ const mmis = {
         isPrimary: true,
         fte: { 2022: 1, 2023: 1 },
         hasCosts: true,
-        costs: { 2022: 100000, 2023: 100000 }
+        costs: { 2022: 100000, 2023: 100000 },
+        split: {
+          2023: { federal: 0, state: 0 },
+          2024: { federal: 0, state: 0 }
+        }
       },
       {
         name: 'Fred Johnson',
@@ -58,7 +62,11 @@ const mmis = {
         isPrimary: false,
         fte: { 2022: 0.3, 2023: 0.3 },
         hasCosts: false,
-        costs: { 2022: 0, 2023: 0 }
+        costs: { 2022: 0, 2023: 0 },
+        split: {
+          2023: { federal: 0, state: 0 },
+          2024: { federal: 0, state: 0 }
+        }
       }
     ]
   },
