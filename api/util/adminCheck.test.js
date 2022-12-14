@@ -2023,6 +2023,16 @@ const expectedErrorsMockHitechApdRandom = [
     fieldDescription: 'Provide a role for the point of contact.'
   },
   {
+    section: 'Activity 1 Private Contractor Costs',
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/contractor-costs',
+    fieldDescription: 'Must select hourly or yearly.'
+  },
+  {
+    section: 'Activity 1 Budget and FFP',
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/ffp',
+    fieldDescription: 'Select a federal-state split.'
+  },
+  {
     section: 'Activity 1 Outcomes and Milestones',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/oms',
     fieldDescription: 'Metric is required'
@@ -2041,6 +2051,11 @@ const expectedErrorsMockHitechApdRandom = [
     section: 'Activity 1 Budget and FFP',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/ffp',
     fieldDescription: 'Select a federal-state split.'
+  },
+  {
+    section: 'Activity 2 State Staff and Expenses',
+    link: '/apd/632a0fbc5665670a34b3bbd7/activity/1/state-costs',
+    fieldDescription: 'Provide an annual cost.'
   },
   {
     section: 'Activity 2 Outcomes and Milestones',

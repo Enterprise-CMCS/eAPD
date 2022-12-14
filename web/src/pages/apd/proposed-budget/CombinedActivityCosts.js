@@ -121,35 +121,35 @@ SummaryBudgetByActivityBreakdown.propTypes = {
   ffy: PropTypes.string.isRequired
 };
 
-const SummaryBudgetByActivity = ({ data, years, isViewOnly }) => {
+const CombinedActivityCosts = ({ data, years, isViewOnly }) => {
   return years.map(ffy => (
     <Fragment key={ffy}>
       <h4 className="ds-h4" aria-hidden="true">
         FFY {ffy}
       </h4>
       {!isViewOnly && (
-        <Instruction source="proposedBudget.summaryBudgetByActivity.totalMedicaidCost" />
+        <Instruction source="proposedBudget.combinedActivityCosts.totalMedicaidCost" />
       )}
       <SummaryBudgetByActivityTotals data={data} ffy={ffy} />
 
       <h4 className="ds-h4" aria-hidden="true">
-        Activity Breakdown
+        State and Contractor Cost Breakdown
       </h4>
       {!isViewOnly && (
-        <Instruction source="proposedBudget.summaryBudgetByActivity.activityBreakdown" />
+        <Instruction source="proposedBudget.combinedActivityCosts.activityBreakdown" />
       )}
       <SummaryBudgetByActivityBreakdown data={data} ffy={ffy} />
     </Fragment>
   ));
 };
 
-SummaryBudgetByActivity.propTypes = {
+CombinedActivityCosts.propTypes = {
   data: PropTypes.object.isRequired,
   years: PropTypes.array.isRequired,
   isViewOnly: PropTypes.bool
 };
 
-SummaryBudgetByActivity.defaultProps = {
+CombinedActivityCosts.defaultProps = {
   isViewOnly: false
 };
 
@@ -158,10 +158,10 @@ const mapStateToProps = state => ({
   years: state.apd.data.years
 });
 
-export default connect(mapStateToProps)(SummaryBudgetByActivity);
+export default connect(mapStateToProps)(CombinedActivityCosts);
 
 export {
-  SummaryBudgetByActivity as plain,
+  CombinedActivityCosts as plain,
   mapStateToProps,
   DataRow,
   DataRowGroup,
