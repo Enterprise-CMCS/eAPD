@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Section, Subsection } from '../../../components/Section';
+import { Section } from '../../../components/Section';
 import RichText from '../../../components/RichText';
 import {
   setSecurityInterfacePlan,
@@ -10,49 +10,103 @@ import {
 } from '../../../redux/actions/editApd';
 import {
   selectSecurityInterfacePlan,
-  selectBusinessContinuityAndDisasterRecovery
+  selectBusinessContinuityAndDisasterRecovery,
+  selectAdminCheckEnabled
 } from '../../../redux/selectors/apd.selectors';
+
+import { securityPlanningSchema } from '@cms-eapd/common';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Instruction from '../../../components/Instruction';
 
 const SecurityPlanning = ({
   securityInterfacePlan,
   BCDRPlan,
   setPlanForSI,
-  setPlanforBCDR
+  setPlanforBCDR,
+  adminCheck
 }) => {
-  const handleSIPlan = html => {
-    setPlanForSI(html);
-    // setValue('securityInterfacePlan', html);
-  };
+  const {
+    control,
+    formState: { errors },
+    setValue,
+    trigger,
+    clearErrors
+  } = useForm({
+    defaultValues: {
+      securityAndInterfacePlan: securityInterfacePlan || '',
+      businessContinuityAndDisasterRecovery: BCDRPlan || ''
+    },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    resolver: joiResolver(securityPlanningSchema)
+  });
 
-  const handleBCDRPlan = html => {
-    setPlanforBCDR(html);
-    // setValue('BCDRPlan', html);
-  };
+  console.log(`schema is ${securityPlanningSchema}`);
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    } else {
+      clearErrors();
+    }
+  }, [adminCheck]);
 
   return (
     <React.Fragment>
       <Section id="security-planning" resource="securityPlanning">
-        <Subsection
-          id="security-interface-plan"
-          resource="securityPlanning.securityInterfacePlan"
-        >
-          <RichText
-            id="security-interface-plan-field"
-            iframe_aria_text="Security Interface Planning Text Area"
-            content={securityInterfacePlan}
-            onSync={handleSIPlan}
-            editorClassName="rte-textarea-l"
+        <hr className="custom-hr" />
+        <div className="ds-u-margin-y--3">
+          <Instruction
+            labelFor="security-interface-plan"
+            source="securityPlanning.securityInterfacePlan.instruction"
           />
-        </Subsection>
-        <Subsection id="bc-dr-plan" resource="securityPlanning.bcDrplan">
-          <RichText
-            id="bc-dr-plan-field"
-            iframe_aria_text="Business Continuity and Disaster Recovery Text Area"
-            content={BCDRPlan}
-            onSync={handleBCDRPlan}
-            editorClassName="rte-textarea-l"
+          <Controller
+            name="securityAndInterfacePlan"
+            control={control}
+            render={({ field: { onChange, ...props } }) => (
+              <RichText
+                {...props}
+                id="security-interface-plan"
+                iframe_aria_text="Security Interface Planning Text Area"
+                content={securityInterfacePlan}
+                onSync={html => {
+                  setPlanForSI(html);
+                  onChange(html);
+                }}
+                editorClassName="rte-textarea-l"
+                error={adminCheck && errors?.securityAndInterfacePlan?.message}
+              />
+            )}
           />
-        </Subsection>
+        </div>
+        <div className="ds-u-margin-y--3">
+          <Instruction
+            labelFor="bc-dr-plan"
+            source="securityPlanning.bcDrplan.instruction"
+          />
+          <Controller
+            name="businessContinuityAndDisasterRecovery"
+            control={control}
+            render={({ field: { onChange, ...props } }) => (
+              <RichText
+                {...props}
+                id="bc-dr-plan"
+                iframe_aria_text="Business Continuity and Disaster Recovery Text Area"
+                content={BCDRPlan}
+                onSync={html => {
+                  setPlanforBCDR(html);
+                  onChange(html);
+                }}
+                editorClassName="rte-textarea-l"
+                error={
+                  adminCheck &&
+                  errors?.businessContinuityAndDisasterRecovery?.message
+                }
+              />
+            )}
+          />
+        </div>
       </Section>
     </React.Fragment>
   );
@@ -62,12 +116,18 @@ SecurityPlanning.propTypes = {
   securityInterfacePlan: PropTypes.string,
   BCDRPlan: PropTypes.string,
   setPlanForSI: PropTypes.func.isRequired,
-  setPlanforBCDR: PropTypes.func.isRequired
+  setPlanforBCDR: PropTypes.func.isRequired,
+  adminCheck: PropTypes.bool
+};
+
+SecurityPlanning.defaultProps = {
+  adminCheck: false
 };
 
 const mapStateToProps = state => ({
   securityInterfacePlan: selectSecurityInterfacePlan(state),
-  BCDRPlan: selectBusinessContinuityAndDisasterRecovery(state)
+  BCDRPlan: selectBusinessContinuityAndDisasterRecovery(state),
+  adminCheck: selectAdminCheckEnabled(state)
 });
 
 const mapDispatchToProps = {

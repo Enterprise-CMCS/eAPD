@@ -1,8 +1,8 @@
 title: Security Planning
 
 securityInterfacePlan:
-  title: Security and Interface Plan
   instruction:
+    heading: Security and Interface Plan
     detail: >-
       Provide a comprehensive Security and Interface Plan for IT systems and
       installations involed in the administration of the Medicaid Program.
@@ -11,8 +11,8 @@ securityInterfacePlan:
       of Personal Helth Information (PHI).
 
 bcDrplan:
-  title: Business Continuity and Disaster Recovery Plan
   instruction:
+    heading: Business Continuity and Disaster Recovery Plan
     detail: >-
       Provide a comprehensive Business Continuity and Disaster Recovery Plan for
       IT systems and installations involed in the administration of the Medicaid
