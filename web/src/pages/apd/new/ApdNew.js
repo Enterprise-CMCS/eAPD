@@ -386,7 +386,7 @@ const ApdNew = ({ createApd: create }) => {
               />
 
               <Controller
-                name="apdOverview.medicaidBA"
+                name="businessAreas"
                 control={control}
                 render={({ field: { onBlur, onChange } }) => (
                   <ChoiceList
@@ -519,6 +519,9 @@ const ApdNew = ({ createApd: create }) => {
                         )
                       );
                       setBusinessAreas(businessAreas);
+                      setValue('apdOverview.businessAreas', businessAreas, {
+                        shouldValidate: true
+                      });
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}

@@ -52,21 +52,36 @@ const apdNewSchema = Joi.object({
   apdOverview: Joi.when('apdType', {
     is: 'mmis',
     then: Joi.object({
-      medicaidBA: Joi.array().min(1).required().messages({
-        'any.only': 'Select at least one Medicaid Business Area.',
-        'any.required': 'Select at least one Medicaid Business Area.',
-        'array.min': 'Select at least one Medicaid Business Area.',
-        'array.required': 'Select at least one Medicaid Business Area.'
-      }),
-      otherDetails: Joi.when('medicaidBA', {
-        is: Joi.array().items(Joi.string()).has(Joi.string().valid('other')),
-        then: Joi.string().min(1).required().messages({
-          'string.empty': 'Provide an other Medicaid Business Area(s)',
-          'any.required': 'Provide an other Medicaid Business Area(s)',
-          'any.only': 'Provide any other Medicaid Business Area(s)'
-        }),
-        otherwise: Joi.any()
-      })
+      businessAreas: Joi.array()
+        .items(
+          Joi.object().keys({
+            label: Joi.string().required(),
+            value: Joi.string().required(),
+            checked: Joi.boolean().required()
+          })
+        )
+        .has(
+          Joi.object().keys({
+            label: Joi.string().required(),
+            value: Joi.string().required(),
+            checked: Joi.boolean().invalid(false).required()
+          })
+        )
+      // medicaidBA: Joi.array().min(1).required().messages({
+      //   'any.only': 'Select at least one Medicaid Business Area.',
+      //   'any.required': 'Select at least one Medicaid Business Area.',
+      //   'array.min': 'Select at least one Medicaid Business Area.',
+      //   'array.required': 'Select at least one Medicaid Business Area.'
+      // }),
+      // otherDetails: Joi.when('medicaidBA', {
+      //   is: Joi.array().items(Joi.string()).has(Joi.string().valid('other')),
+      //   then: Joi.string().min(1).required().messages({
+      //     'string.empty': 'Provide an other Medicaid Business Area(s)',
+      //     'any.required': 'Provide an other Medicaid Business Area(s)',
+      //     'any.only': 'Provide any other Medicaid Business Area(s)'
+      //   }),
+      //   otherwise: Joi.any()
+      // })
     })
   })
 });
