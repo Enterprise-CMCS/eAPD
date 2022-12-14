@@ -83,6 +83,7 @@ tap.test('apds POST endpoint', async endpointTest => {
           user: { state: { id: 'st' } },
           body: {
             apdType: APD_TYPE.HITECH,
+            years: ['2004', '2005'],
             apdOverview: {
               updateStatus: {
                 isUpdateAPD: true,
@@ -303,6 +304,7 @@ tap.test('apds POST endpoint', async endpointTest => {
           user: { state: { id: 'st' } },
           body: {
             apdType: APD_TYPE.MMIS,
+            years: ['2005', '2006'],
             apdOverview: {
               updateStatus: {
                 isUpdateAPD: true,
@@ -327,14 +329,14 @@ tap.test('apds POST endpoint', async endpointTest => {
                 other: false,
                 otherMedicaidBusinessAreas: ''
               }
-            } 
+            }
           }
         };
 
         const expectedApd = {
           apdType: APD_TYPE.MMIS,
           name: 'MMIS IAPD',
-          years: ['2004', '2005'],
+          years: ['2005', '2006'],
           yearOptions: ['2004', '2005', '2006'],
           apdOverview: {
             updateStatus: {
@@ -410,9 +412,9 @@ tap.test('apds POST endpoint', async endpointTest => {
             }
           },
           activities: [],
-          securityPlanning: {                   
-            securityAndInterfacePlan: '',              
-            businessContinuityAndDisasterRecovery: '', 
+          securityPlanning: {
+            securityAndInterfacePlan: '',
+            businessContinuityAndDisasterRecovery: ''
           },
           assurancesAndCompliances: {
             procurement: [

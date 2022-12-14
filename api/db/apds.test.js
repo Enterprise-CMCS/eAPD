@@ -40,7 +40,7 @@ const deleteAPD = async apdId => {
   }
 };
 
-tap.test('database wrappers / apds', { timeout: 1000000 }, async apdsTests => {
+tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.before(async () => {
     // Trisha Elric, Edward and Alfonse's mother, dies of complications from
     // a plague, kicking off the Elric brothers' quest for human transmutation.
@@ -79,7 +79,7 @@ tap.test('database wrappers / apds', { timeout: 1000000 }, async apdsTests => {
     apdsTests.end();
   });
 
-  apdsTests.test('creating a HITECH APD', async test => {
+  apdsTests.test('creating a HITECH APD', { timeout: 300000 }, async test => {
     const newId = await createAPD({
       stateId: 'md',
       status: 'draft',
@@ -115,7 +115,7 @@ tap.test('database wrappers / apds', { timeout: 1000000 }, async apdsTests => {
     await deleteAPD(newId);
   });
 
-  apdsTests.test('creating a MMIS APD', async test => {
+  apdsTests.test('creating a MMIS APD', { timeout: 300000 }, async test => {
     const newId = await createAPD({
       stateId: 'md',
       status: 'draft',
@@ -150,40 +150,44 @@ tap.test('database wrappers / apds', { timeout: 1000000 }, async apdsTests => {
     await deleteAPD(newId);
   });
 
-  apdsTests.test('getting all submitted APDs for a state', async test => {
-    const coSubmittedId = await createAPD({
-      stateId: 'co',
-      status: 'submitted',
-      ...hitech
-    });
-    const mnSubmittedId = await createAPD({
-      stateId: 'mn',
-      status: 'submitted',
-      ...mmis
-    });
-    const mnDraftId = await createAPD({
-      stateId: 'mn',
-      status: 'draft',
-      ...hitech
-    });
+  apdsTests.test(
+    'getting all submitted APDs for a state',
+    { timeout: 300000 },
+    async test => {
+      const coSubmittedId = await createAPD({
+        stateId: 'co',
+        status: 'submitted',
+        ...hitech
+      });
+      const mnSubmittedId = await createAPD({
+        stateId: 'mn',
+        status: 'submitted',
+        ...mmis
+      });
+      const mnDraftId = await createAPD({
+        stateId: 'mn',
+        status: 'draft',
+        ...hitech
+      });
 
-    const apds = await getAllSubmittedAPDs();
+      const apds = await getAllSubmittedAPDs();
 
-    test.ok(apds.length === 2, '2 APDs were found');
-    test.ok(
-      // eslint-disable-next-line no-underscore-dangle
-      apds.findIndex(item => item._id.toString() === coSubmittedId) > -1,
-      'the APD was found'
-    );
-    test.ok(
-      // eslint-disable-next-line no-underscore-dangle
-      apds.findIndex(item => item._id.toString() === mnSubmittedId) > -1,
-      'the APD was found'
-    );
-    await deleteAPD(coSubmittedId);
-    await deleteAPD(mnSubmittedId);
-    await deleteAPD(mnDraftId);
-  });
+      test.ok(apds.length === 2, '2 APDs were found');
+      test.ok(
+        // eslint-disable-next-line no-underscore-dangle
+        apds.findIndex(item => item._id.toString() === coSubmittedId) > -1,
+        'the APD was found'
+      );
+      test.ok(
+        // eslint-disable-next-line no-underscore-dangle
+        apds.findIndex(item => item._id.toString() === mnSubmittedId) > -1,
+        'the APD was found'
+      );
+      await deleteAPD(coSubmittedId);
+      await deleteAPD(mnSubmittedId);
+      await deleteAPD(mnDraftId);
+    }
+  );
 
   apdsTests.test(
     'updating APD status',
@@ -281,7 +285,7 @@ tap.test('database wrappers / apds', { timeout: 1000000 }, async apdsTests => {
     }
   );
 
-  apdsTests.test('deleting an APD', async test => {
+  apdsTests.test('deleting an APD', { timeout: 300000 }, async test => {
     const result = await deleteAPDByID(hitechId);
     test.equal(result.n, 1, 'one APD was found');
     test.equal(result.nModified, 1, 'one APD was updated');
@@ -289,51 +293,63 @@ tap.test('database wrappers / apds', { timeout: 1000000 }, async apdsTests => {
     test.ok(deleted.status === 'archived', 'APD was deleted');
   });
 
-  apdsTests.test('getting all APDs for a state', async test => {
-    const approvedId = await createAPD({
-      stateId: 'co',
-      status: 'approved',
-      ...hitech
-    });
-    const mnId = await createAPD({
-      stateId: 'mn',
-      status: 'approved',
-      ...mmis
-    });
+  apdsTests.test(
+    'getting all APDs for a state',
+    { timeout: 300000 },
+    async test => {
+      const approvedId = await createAPD({
+        stateId: 'co',
+        status: 'approved',
+        ...hitech
+      });
+      const mnId = await createAPD({
+        stateId: 'mn',
+        status: 'approved',
+        ...mmis
+      });
 
-    const apds = await getAllAPDsByState('co');
+      const apds = await getAllAPDsByState('co');
 
-    test.ok(apds.length === 1, '1 APD was found');
-    test.equal(apds[0]._id.toString(), hitechId, 'the APD was found'); // eslint-disable-line no-underscore-dangle
-    await deleteAPD(approvedId);
-    await deleteAPD(mnId);
-  });
+      test.ok(apds.length === 1, '1 APD was found');
+      test.equal(apds[0]._id.toString(), hitechId, 'the APD was found'); // eslint-disable-line no-underscore-dangle
+      await deleteAPD(approvedId);
+      await deleteAPD(mnId);
+    }
+  );
 
-  apdsTests.test('getting a single APD by ID', async test => {
-    const found = await getAPDByID(mmisId);
+  apdsTests.test(
+    'getting a single APD by ID',
+    { timeout: 300000 },
+    async test => {
+      const found = await getAPDByID(mmisId);
 
-    /* eslint-disable no-underscore-dangle */
-    test.equal(found._id.toString(), mmisId);
-    test.ok(found.apdType === APD_TYPE.MMIS, 'found the right APD type');
-    test.ok(!!found.budget, 'Budget was populated');
-    test.ok(
-      found.budget.__t === `${APD_TYPE.MMIS}Budget`,
-      'found the right Budget Type'
-    );
-  });
+      /* eslint-disable no-underscore-dangle */
+      test.equal(found._id.toString(), mmisId);
+      test.ok(found.apdType === APD_TYPE.MMIS, 'found the right APD type');
+      test.ok(!!found.budget, 'Budget was populated');
+      test.ok(
+        found.budget.__t === `${APD_TYPE.MMIS}Budget`,
+        'found the right Budget Type'
+      );
+    }
+  );
 
-  apdsTests.test('getting a single APD by ID for a state', async test => {
-    const found = await getAPDByIDAndState(hitechId, 'co');
+  apdsTests.test(
+    'getting a single APD by ID for a state',
+    { timeout: 300000 },
+    async test => {
+      const found = await getAPDByIDAndState(hitechId, 'co');
 
-    /* eslint-disable no-underscore-dangle */
-    test.equal(found._id.toString(), hitechId);
-    test.ok(found.apdType === APD_TYPE.HITECH, 'found the right APD type');
-    test.ok(!!found.budget, 'Budget was populated');
-    test.ok(
-      found.budget.__t === `${APD_TYPE.HITECH}Budget`,
-      'found the right Budget Type'
-    );
-  });
+      /* eslint-disable no-underscore-dangle */
+      test.equal(found._id.toString(), hitechId);
+      test.ok(found.apdType === APD_TYPE.HITECH, 'found the right APD type');
+      test.ok(!!found.budget, 'Budget was populated');
+      test.ok(
+        found.budget.__t === `${APD_TYPE.HITECH}Budget`,
+        'found the right Budget Type'
+      );
+    }
+  );
 
   apdsTests.test(
     'updating an APD',
@@ -592,6 +608,7 @@ tap.test('database wrappers / apds', { timeout: 1000000 }, async apdsTests => {
 
   apdsTests.test(
     'validating an APD for admin check',
+    { timeout: 300000 },
     async adminCheckAPDTest => {
       adminCheckAPDTest.test('when no errors are expected', async test => {
         const errors = await adminCheckAPDDocument(hitechId);

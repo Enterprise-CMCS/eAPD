@@ -10,11 +10,12 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
     logger.silly({ id: req.id, message: 'handling POST /apds route' });
 
     try {
-      const { apdType, ...additionalValues } = req.body;
-      const blankApd = getNewApd(apdType);
+      const { apdType, years, ...additionalValues } = req.body;
+      const blankApd = getNewApd(apdType, years);
       const apd = {
         ...blankApd,
         ...additionalValues,
+        years,
         apdOverview: {
           ...blankApd.apdOverview,
           ...additionalValues.apdOverview
