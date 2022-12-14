@@ -13,8 +13,6 @@ import {
 } from '../../../../redux/actions/editActivity';
 import FundingSourceForm from './FundingSourceForm';
 import Instruction from '../../../../components/Instruction';
-import { Subsection } from '../../../../components/Section';
-import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import NameForm from './NameForm';
 import RichText from '../../../../components/RichText';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
