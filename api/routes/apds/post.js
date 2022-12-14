@@ -15,7 +15,6 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       const apd = {
         ...blankApd,
         ...additionalValues,
-        years,
         apdOverview: {
           ...blankApd.apdOverview,
           ...additionalValues.apdOverview

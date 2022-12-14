@@ -83,7 +83,6 @@ tap.test('apds POST endpoint', async endpointTest => {
           user: { state: { id: 'st' } },
           body: {
             apdType: APD_TYPE.HITECH,
-            years: ['2004', '2005'],
             apdOverview: {
               updateStatus: {
                 isUpdateAPD: true,
