@@ -1,9 +1,10 @@
 ---
 name: Content
 about: Content Issue template
-title: '[Content Issue]'
-labels: content,design
+title: "[Content Issue]"
+labels: content
 assignees: ''
+
 ---
 
 Link or add dependencies to any applicable issues.

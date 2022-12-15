@@ -1,9 +1,10 @@
 ---
 name: Maintenance
 about: Maintenance Issue Template
-title: '[Maintenance]'
-labels: development
+title: "[Maintenance]"
+labels: ''
 assignees: ''
+
 ---
 
 ### Description and related issues

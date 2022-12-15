@@ -1,6 +1,15 @@
 ---
 name: Feature
 about: Feature Issue Template
+title: "[Feature]"
+labels: ''
+assignees: ''
+
+---
+
+---
+name: Feature
+about: Feature Issue Template
 title: '[Feature]'
 labels: development
 assignees: ''
@@ -10,13 +19,17 @@ assignees: ''
 
 ### Mockups or link to Figma
 
+## Behind the scene changes
+
+### Feature Flags
+
+### Refactors
+
 ### Acceptance criteria
-
-| Given | When | Then |
-| ----- | ---- | ---- |
-|       |      |      |
-
-### This task is done when…
-
-- [ ] all acceptance criteria are met
 - [ ]
+
+### Testing criteria
+
+|        | Given | When | Then |
+| ---- | ----- | ---- | ---- |
+|        |           |        |         |

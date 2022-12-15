@@ -1,9 +1,10 @@
 ---
 name: Design
 about: Design Issue template
-title: '[Design Issue]'
-labels: design
+title: "[Design Issue]"
+labels: ''
 assignees: ''
+
 ---
 
 Link or add dependencies to any applicable issues.
