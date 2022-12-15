@@ -55,13 +55,13 @@ workflows:
           name: Packer Validation Tests          
 
   # Workflow to create dumps of Mongo databases and store them in S3            
-  mongo dumps:
-    jobs:
-      - mongo database dumps:
-          name: Create MongoDB Dumps
-          filters:
-            tags:
-              ignore: /.*/       
+#  mongo dumps:
+#    jobs:
+#      - mongo database dumps:
+#          name: Create MongoDB Dumps
+#          filters:
+#            tags:
+#              ignore: /.*/       
 
 # Workflow to scan dependencies for vulnerabilities every night
   nightly dependency vulnerability scan:
@@ -1395,43 +1395,43 @@ jobs:
             - ./build-url.txt
 
   #Jobs for creating and storing Mongo Dumps
-  mongo database dumps:
-    docker:
-      - image: cimg/base:2022.06-22.04
-        auth:
-          username: $DOCKER_EAPD_UN
-          password: $DOCKER_EAPD_PW
-    steps:
-      - checkout
-      - run:
-          name: Install awscli
-          working_directory: ~/project/bin/prod-deploy
-          command: |
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
-      - run:
-          name: Install Mongo
-          command: |
-            wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-debian11-x86_64-100.6.1.deb
-            sudo apt install ./mongodb-database-tools-debian11-x86_64-100.6.1.deb
-      - run:
-          name: Create Staging MongoDB Dump
-          working_directory: ~/project/bin/prod-deploy
-          command: |
-            export AWS_REGION=$AWS_REGION
-            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-            export STAGING_MONGO_URL=$STAGING_MONGO_URL
-            export ENVIRONMENT=staging
-            bash mongo-dump.sh
-      - run:
-          name: Create Production MongoDB Dump
-          working_directory: ~/project/bin/prod-deploy
-          command: |
-            export AWS_REGION=$AWS_REGION
-            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-            export PRODUCTION_MONGO_URL=$PRODUCTION_MONGO_URL
-            export ENVIRONMENT=production
-            bash mongo-dump.sh
+#  mongo database dumps:
+#    docker:
+#      - image: cimg/base:2022.06-22.04
+#        auth:
+#          username: $DOCKER_EAPD_UN
+#          password: $DOCKER_EAPD_PW
+#    steps:
+#      - checkout
+#      - run:
+#          name: Install awscli
+#          working_directory: ~/project/bin/prod-deploy
+#          command: |
+#            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+#            unzip awscliv2.zip
+#            sudo ./aws/install
+#      - run:
+#          name: Install Mongo
+#          command: |
+#            wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-debian11-x86_64-100.6.1.deb
+#            sudo apt install ./mongodb-database-tools-debian11-x86_64-100.6.1.deb
+#      - run:
+#          name: Create Staging MongoDB Dump
+#          working_directory: ~/project/bin/prod-deploy
+#          command: |
+#            export AWS_REGION=$AWS_REGION
+#            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+#            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+#            export STAGING_MONGO_URL=$STAGING_MONGO_URL
+#            export ENVIRONMENT=staging
+#            bash mongo-dump.sh
+#      - run:
+#          name: Create Production MongoDB Dump
+#          working_directory: ~/project/bin/prod-deploy
+#          command: |
+#            export AWS_REGION=$AWS_REGION
+#            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+#            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+#            export PRODUCTION_MONGO_URL=$PRODUCTION_MONGO_URL
+#            export ENVIRONMENT=production
+#            bash mongo-dump.sh
