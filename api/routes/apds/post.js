@@ -10,8 +10,8 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
     logger.silly({ id: req.id, message: 'handling POST /apds route' });
 
     try {
-      const { apdType, ...additionalValues } = req.body;
-      const blankApd = getNewApd(apdType);
+      const { apdType, years, ...additionalValues } = req.body;
+      const blankApd = getNewApd(apdType, years);
       const apd = {
         ...blankApd,
         ...additionalValues,
@@ -55,7 +55,6 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
       } catch (e) {
         // This is just here to protect us from the case where the APD schema changed but the
         // APD creation function was not also updated
-        logger.error(`error: ${JSON.stringify(e, null, 2)}`);
         logger.error({
           id: req.id,
           message: 'Newly-created APD fails validation'
