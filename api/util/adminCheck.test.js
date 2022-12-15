@@ -2492,10 +2492,10 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
 
   // hitechValidationTests.test(
   //   'test an invalid HITECH apd returns expected errors',
-  // async test => {
-  //   const results = adminCheckApd(mockHitechApdRandomInvalid);
-  //   test.same(results, expectedErrorsMockHitechApdRandom);
-  // }
+  //   async test => {
+  //     const results = adminCheckApd(mockHitechApdRandomInvalid);
+  //     test.same(results, expectedErrorsMockHitechApdRandom);
+  //   }
   // );
 });
 

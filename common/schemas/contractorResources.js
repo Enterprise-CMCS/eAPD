@@ -43,7 +43,7 @@ const contractorResourcesSchema = Joi.object({
     'number.allow': 'Provide a contract cost greater than or equal to $0.'
   }),
   useHourly: Joi.alternatives()
-    .try(Joi.string().valid('true', 'false'), Joi.boolean())
+    .try(Joi.string().min(1), Joi.boolean())
     .required()
     .messages({
       'alternatives.match': 'Must select hourly or yearly.',

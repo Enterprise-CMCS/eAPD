@@ -1,7 +1,28 @@
 import contractorResourcesSchema from './contractorResources';
 
 describe('contractor validation', () => {
-  test('valid contractor', () => {
+  test('valid contractor, useHourly true', () => {
+    const { error: { details: schemaValidation = [] } = {} } =
+      contractorResourcesSchema.validate(
+        {
+          description: 'Technology consulting and planning services.',
+          end: '2023-01-15',
+          hourly: {
+            2022: { hours: 1110, rate: 300 },
+            2023: { hours: 500, rate: 400 }
+          },
+          useHourly: true,
+          name: 'Tech Consulting Inc.',
+          start: '2021-01-15',
+          totalCost: 473573,
+          years: { 2022: 333000, 2023: 200000 }
+        },
+        { abortEarly: false }
+      );
+
+    expect(schemaValidation).toEqual([]);
+  });
+  test('valid contractor, useHourly "false"', () => {
     const { error: { details: schemaValidation = [] } = {} } =
       contractorResourcesSchema.validate(
         {
