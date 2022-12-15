@@ -258,8 +258,12 @@ const adminCheckHitechApd = apd => {
     hitechCombinedSchema.validate(modifiedApd, {
       abortEarly: false
     });
+  console.log({ schemaValidation });
+  console.log(`schema error length: ${schemaValidation.length}`);
 
   const manualValidations = getManualHitechValidations(apd);
+  console.log({ manualValidations });
+  console.log(`manual error length: ${manualValidations.length}`);
 
   const validationResults = [...schemaValidation, ...manualValidations];
 
