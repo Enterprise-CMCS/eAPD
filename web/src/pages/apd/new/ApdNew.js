@@ -504,8 +504,9 @@ const ApdNew = ({ createApd: create }) => {
                                   data-cy="other_details"
                                   hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
                                   onBlur={onBlur}
-                                  onChange={({ target: { value } }) => {
-                                    setOtherDetails(value);
+                                  onChange={e => {
+                                    setOtherDetails(e.target.value);
+                                    setValue('otherDetails', e.target.value);
                                   }}
                                   onComponentBlur={onBlur}
                                   errorMessage={errors?.otherDetails?.message}
