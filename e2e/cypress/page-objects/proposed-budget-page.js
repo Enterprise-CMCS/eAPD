@@ -27,7 +27,7 @@ class ProposedBudgetPage {
     });
   };
 
-  // Activity Breakdown
+  // State and Contractor Cost Breakdown
   getBreakdownByFFYAndActivity = ({ ffy, index }) =>
     cy.get(`#activity-${index + 1}-${ffy}`);
 
