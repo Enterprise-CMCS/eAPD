@@ -25,6 +25,8 @@ EntryPage.propTypes = {
   activityNames: PropTypes.array.isRequired
 };
 
+EntryPage.defaultProps = {};
+
 const mapStateToProps = ({
   apd: {
     data: { activities }
