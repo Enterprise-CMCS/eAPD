@@ -1,4 +1,5 @@
 title: APD Overview
+
 overview:
   instruction:
     short: >-
@@ -8,7 +9,11 @@ introduction:
   instruction:
     heading: Introduction
     detail: >-
-      Provide a brief introduction to the state program. Include context for this funding request by providing information such as current size of the program and how the program is positioned within the state. You might also include a high-level look at the history and context of the program and the state’s future vision for it.
+      Provide a brief introduction to the state program. Include context for
+      this funding request by providing information such as current size of the
+      program and how the program is positioned within the state. You might also
+      include a high-level look at the history and context of the program and
+      the state’s future vision for it.
 
 hit:
   instruction:
@@ -25,25 +30,24 @@ hie:
       If there are no HIE activities, enter “No HIE activities.”
 
 
-      [ol]
-      Description of the state’s HIE approach (statewide, sub-state
-      health information organization (HIO), etc.);
+      [ol] Description of the state’s HIE approach (statewide, sub-state health
+      information organization (HIO), etc.);
 
       Anticipated risks and mitigation strategies;
 
       The short and long term value proposition to providers;
 
-      The role of state government in governance and policy-setting.
-      [/ol]
+      The role of state government in governance and policy-setting. [/ol]
     helpText: >-
-      CMS recommends that states connect with regional CMS HITECH contacts prior to
-      developing an HIE funding request. HIE funding requests are complex. Early
-      consultation with CMS facilitates a more efficient approval process.
+      CMS recommends that states connect with regional CMS HITECH contacts prior
+      to developing an HIE funding request. HIE funding requests are complex.
+      Early consultation with CMS facilitates a more efficient approval process.
 
 mmis:
   instruction:
     heading: MMIS Overview
     detail: >-
-      Briefly summarize planned MMIS-funded activities contained within this APD.
+      Briefly summarize planned MMIS-funded activities contained within this
+      APD.
 
       If there are no MMIS activities, enter “No MMIS activities.”
