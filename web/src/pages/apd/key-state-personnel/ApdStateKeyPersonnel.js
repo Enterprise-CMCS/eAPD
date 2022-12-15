@@ -13,7 +13,9 @@ import {
 import { removeKeyPersonnel } from '../../../redux/actions/editApd';
 import { getKeyPersonnel } from '../../../redux/reducers/apd';
 
-const ApdStateKeyPersonnel = ({ remove, list, years }) => {
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
+
+const ApdStateKeyPersonnel = ({ remove, list, years, apdType }) => {
   const [localList, setLocalList] = useState(list);
 
   useEffect(() => {
@@ -22,7 +24,8 @@ const ApdStateKeyPersonnel = ({ remove, list, years }) => {
 
   const addClick = () => {
     const isPrimary = list.length === 0;
-    const newListItem = getKeyPersonnel(years, isPrimary);
+    const newListItem = getKeyPersonnel(years, isPrimary, apdType);
+    console.log('newListItem', apdType);
     setLocalList([...localList, newListItem]);
   };
 
@@ -50,12 +53,14 @@ const ApdStateKeyPersonnel = ({ remove, list, years }) => {
 ApdStateKeyPersonnel.propTypes = {
   remove: PropTypes.func.isRequired,
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   list: selectKeyPersonnel(state),
-  years: selectApdYears(state)
+  years: selectApdYears(state),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {

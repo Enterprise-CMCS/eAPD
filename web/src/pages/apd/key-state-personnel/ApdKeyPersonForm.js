@@ -31,6 +31,7 @@ const PersonForm = forwardRef(
     PersonForm.displayName = 'PersonForm';
     const { name, email, position, hasCosts, isPrimary, costs, split, fte } =
       JSON.parse(JSON.stringify({ ...item }));
+    console.log('Split', split);
     const {
       handleSubmit,
       control,

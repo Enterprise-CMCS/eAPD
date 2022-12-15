@@ -239,17 +239,42 @@ const getHumanTimestamp = iso8601 => {
   })}`;
 };
 
-export const getKeyPersonnel = (years = [], isPrimary = false) => ({
+const getKeyPersonnelSplit = (years, apdType) => {
+  let split;
+  switch (apdType) {
+    case 'HITECH':
+      split = years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
+        {}
+      );
+      break;
+    case 'MMIS':
+      split = years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        {}
+      );
+      break;
+    default:
+      return years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        {}
+      );
+  }
+  return split;
+};
+
+export const getKeyPersonnel = (
+  years = [],
+  isPrimary = false,
+  apdType = ''
+) => ({
   costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
   email: '',
   expanded: true,
   hasCosts: null,
   isPrimary,
   fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
-  split: years.reduce(
-    (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }), // Todo: set the fed-state split to 90-10 for HITECH
-    {}
-  ),
+  split: getKeyPersonnelSplit(years, apdType),
   name: '',
   position: '',
   key: generateKey()
