@@ -1,25 +1,25 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import {
-  plain as SummaryBudgetByActivity,
+  plain as CombinedActivityCosts,
   mapStateToProps,
   DataRow,
   DataRowGroup,
   SummaryBudgetByActivityTotals,
   SummaryBudgetByActivityBreakdown
-} from './SummaryBudgetByActivity';
+} from './CombinedActivityCosts';
 
 describe('renders correctly', () => {
   it('renders correctly in view-only mode', () => {
     const component = shallow(
-      <SummaryBudgetByActivity data={{}} years={['1984', '1985']} isViewOnly />
+      <CombinedActivityCosts data={{}} years={['1984', '1985']} isViewOnly />
     );
     expect(component).toMatchSnapshot();
   });
 
   it('renders correctly in standard mode', () => {
     const component = shallow(
-      <SummaryBudgetByActivity data={{}} years={['1984', '1985']} />
+      <CombinedActivityCosts data={{}} years={['1984', '1985']} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -53,7 +53,7 @@ describe('renders correctly', () => {
     ).toMatchSnapshot();
   });
 
-  test('Summary Budget by Activity Totals renders', () => {
+  test('Combined Activity Costs Totals renders', () => {
     expect(
       shallow(
         <SummaryBudgetByActivityTotals
@@ -81,7 +81,7 @@ describe('renders correctly', () => {
     ).toMatchSnapshot();
   });
 
-  test('Summary Budget by activity breakdown renders', () => {
+  test('Combined Activity Costs breakdown renders', () => {
     const data = {
       activityTotals: [
         {
