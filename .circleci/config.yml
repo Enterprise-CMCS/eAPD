@@ -58,7 +58,7 @@ workflows:
   mongo dumps:
     jobs:
       - mongo database dumps:
-          name: Create Staging MongoDB Dump
+          name: Create MongoDB Dumps
           filters:
             tags:
               ignore: /.*/       

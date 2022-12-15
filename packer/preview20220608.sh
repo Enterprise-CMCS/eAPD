@@ -138,6 +138,7 @@ export MONGO_INITDB_DATABASE="$MONGO_INITDB_DATABASE"
 export MONGO_DATABASE_USERNAME="$MONGO_DATABASE_USERNAME"
 export MONGO_DATABASE_PASSWORD="$MONGO_DATABASE_PASSWORD"
 export MONGO_ADMIN_URL="$MONGO_ADMIN_URL"
+export MONGO_URL="$MONGO_URL"
 export DATABASE_URL="$DATABASE_URL"
 export OKTA_DOMAIN="$OKTA_DOMAIN"
 export OKTA_API_KEY="$OKTA_API_KEY"
@@ -175,6 +176,22 @@ MONGOUSERSEED
 sh ~/mongo-user.sh
 rm ~/mongo-init.sh
 rm ~/mongo-user.sh
+
+touch ~/mongo-dump.sh
+echo "
+#Create var for time so value doesn't drift between creating tarball and aws cp to S3
+ TIMESTAMP=$(date +%Y%m%d%H%M%S)
+ echo $TIMESTAMP
+ #Create dump
+ #mongodump --uri=\"$"$ENVIRONMENT"_MONGO_URL\"
+ MONGO_URL="$ENVIRONMENT"_MONGO_URL
+ mongodump --uri=$MONGO_URL
+ #Tar zip dump
+ tar -cvf "$ENVIRONMENT"_mongo_"$TIMESTAMP".tar.gz dump/
+ #Send it
+ aws s3 cp "$ENVIRONMENT"_mongo_"$TIMESTAMP".tar.gz s3://eapd-mongo-dump-"$ENVIRONMENT"
+" > ~/mongo-dump.sh
+
 E_USER
 
 sudo su <<R_USER
