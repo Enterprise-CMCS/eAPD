@@ -92,7 +92,7 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
       description: 'overview',
       summary: 'overview',
       standardsAndConditions: 'overview',
-      activitySchedule: 'overview',
+      activitySchedule: 'schedule-and-milestones',
       plannedStartDate: 'overview',
       plannedEndDate: 'overview',
       analysisOfAlternativesAndRisks: 'alternatives-risks',
