@@ -17,7 +17,21 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
       <Connect(Outcomes)
         activityIndex={3}
       />
-      <Connect(Milestone)
+    </Section>
+  </Route>
+  <Route
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/conditions"
+    pageName="Conditions For Enhanced Funding"
+    path="/apd/:apdId/activity/:activityIndex/conditions"
+    siteSection="APD - Activity"
+  >
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(ConditionsForEnhancedFunding)
         activityIndex={3}
       />
     </Section>
@@ -86,6 +100,43 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
       resource={null}
     >
       <Connect(CostAllocateFFP)
+        activityIndex={3}
+      />
+    </Section>
+  </Route>
+  <Route
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/schedule-and-milestones"
+    pageName="Activity Schedule and Milestones"
+    path="/apd/:apdId/activity/:activityIndex/schedule-and-milestones"
+    siteSection="APD - Activity"
+  >
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(Schedule)
+        activityIndex={3}
+      />
+      <Connect(Milestone)
+        activityIndex={3}
+      />
+    </Section>
+  </Route>
+  <Route
+    contentType="form"
+    isPublic={false}
+    key="/apd/:apdId/activity/:activityIndex/alternatives-and-risks"
+    pageName="Analysis of Alternatives and Risks"
+    path="/apd/:apdId/activity/:activityIndex/alternatives-and-risks"
+    siteSection="APD - Activity"
+  >
+    <Section
+      id={null}
+      resource={null}
+    >
+      <Connect(AlternativesAndRisks)
         activityIndex={3}
       />
     </Section>
