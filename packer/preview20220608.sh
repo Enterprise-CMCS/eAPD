@@ -144,6 +144,7 @@ export OKTA_DOMAIN="$OKTA_DOMAIN"
 export OKTA_API_KEY="$OKTA_API_KEY"
 export ENVIRONMENT="$ENVIRONMENT"
 export TERM="xterm"
+export TIMESTAMP=$(date +%Y%m%d%H%M%S)
 
 #Migrate from PostGres
 # Seed eAPD Mongo Database
@@ -180,7 +181,6 @@ rm ~/mongo-user.sh
 touch ~/mongo-dump.sh
 echo "
 #Create var for time so value doesn't drift between creating tarball and aws cp to S3
- TIMESTAMP=$(date +%Y%m%d%H%M%S)
  echo $TIMESTAMP
  #Create dump
  #mongodump --uri=\"$"$ENVIRONMENT"_MONGO_URL\"
