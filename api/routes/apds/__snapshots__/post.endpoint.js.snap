@@ -2,7 +2,69 @@
 
 exports[`APD endpoint | POST /apds when authenticated as a user with permission 1`] = `
 Object {
+  "activities": Array [],
   "apdOverview": Object {},
+  "apdType": "MMIS",
+  "assurancesAndCompliances": Object {
+    "independentVV": Array [
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "45 CFR Part 95.626",
+      },
+    ],
+    "procurement": Array [
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "SSM, Part 11",
+      },
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "45 CFR Part 95.615",
+      },
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "45 CFR Part 92.36",
+      },
+    ],
+    "recordsAccess": Array [
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "42 CFR Part 433.112(b)(5)-(9)",
+      },
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "45 CFR Part 95.615",
+      },
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "SMM Section 11267",
+      },
+    ],
+    "softwareRights": Array [
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "45 CFR Part 95.617",
+      },
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "42 CFR Part 431.300",
+      },
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "45 CFR Part 164",
+      },
+    ],
+  },
   "keyStatePersonnel": Object {
     "keyPersonnel": Array [],
     "medicaidDirector": Object {
@@ -17,6 +79,69 @@ Object {
       "state": "",
       "zip": "",
     },
+  },
+  "name": "MMIS IAPD",
+  "previousActivities": Object {
+    "actualExpenditures": Object {
+      "2021": Object {
+        "mmis": Object {
+          "50": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "75": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "90": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+        },
+      },
+      "2022": Object {
+        "mmis": Object {
+          "50": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "75": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "90": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+        },
+      },
+      "2023": Object {
+        "mmis": Object {
+          "50": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "75": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+          "90": Object {
+            "federalActual": 0,
+            "totalApproved": 0,
+          },
+        },
+      },
+    },
+    "previousActivitySummary": "",
+  },
+  "securityPlanning": Object {
+    "businessContinuityAndDisasterRecovery": "",
+    "securityAndInterfacePlan": "",
+  },
+  "statePrioritiesAndScope": Object {
+    "medicaidProgramAndPriorities": "",
+    "mesIntroduction": "",
+    "scopeOfAPD": "",
   },
   "yearOptions": Array [
     "2023",

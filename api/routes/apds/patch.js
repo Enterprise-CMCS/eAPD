@@ -46,7 +46,7 @@ module.exports = (
             createdAt: created,
             updatedAt: updated,
             stateId: state,
-            budget,
+            budget = {},
             ...apd
           } = {}
         } = await updateAPDDocument({
