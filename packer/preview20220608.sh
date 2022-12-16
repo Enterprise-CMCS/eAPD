@@ -198,7 +198,7 @@ sudo su <<R_USER
 touch /etc/cron.hourly/mongodump
 echo "
 bash /home/ec2-user/mongo-dump.sh $(date +%Y%m%d%H%M%S) $ENVIRONMENT $MONGO_DATABASE
-"
+" > /etc/cron.hourly/mongodump
 
 # Harden & Restart Mongo
 sed -i 's|#security:|security:|g' /etc/mongod.conf
