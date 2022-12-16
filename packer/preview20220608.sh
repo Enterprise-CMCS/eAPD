@@ -144,7 +144,6 @@ export OKTA_DOMAIN="$OKTA_DOMAIN"
 export OKTA_API_KEY="$OKTA_API_KEY"
 export ENVIRONMENT="$ENVIRONMENT"
 export TERM="xterm"
-export TIMESTAMP=$(date +%Y%m%d%H%M%S)
 
 #Migrate from PostGres
 # Seed eAPD Mongo Database
@@ -180,21 +179,26 @@ rm ~/mongo-user.sh
 
 touch ~/mongo-dump.sh
 echo "
+# Var 1 is timestamp, 2 is environment, 3 is Mongo URL
 #Create var for time so value doesn't drift between creating tarball and aws cp to S3
- echo $TIMESTAMP
+ echo $1
  #Create dump
- #mongodump --uri=\"$"$ENVIRONMENT"_MONGO_URL\"
- MONGO_URL="$ENVIRONMENT"_MONGO_URL
- mongodump --uri=$MONGO_URL
+ #mongodump --uri=\"$"$2"_MONGO_URL\"
+ MONGO_URL="$2"_MONGO_URL
+ mongodump --uri=$3
  #Tar zip dump
- tar -cvf "$ENVIRONMENT"_mongo_"$TIMESTAMP".tar.gz dump/
+ tar -cvf "$2"_mongo_"$1".tar.gz dump/
  #Send it
- aws s3 cp "$ENVIRONMENT"_mongo_"$TIMESTAMP".tar.gz s3://eapd-mongo-dump-"$ENVIRONMENT"
+ aws s3 cp "$2"_mongo_"$1".tar.gz s3://eapd-mongo-dump-"$2"
 " > ~/mongo-dump.sh
-
 E_USER
 
 sudo su <<R_USER
+# Create cronjob to run MongoDump Hourly (For Testing)
+touch /etc/cron.hourly/mongodump
+echo "
+bash /home/ec2-user/mongo-dump.sh $(date +%Y%m%d%H%M%S) $ENVIRONMENT $MONGO_DATABASE
+
 # Harden & Restart Mongo
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
