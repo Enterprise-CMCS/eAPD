@@ -3,6 +3,8 @@ import {
   getDefaultFundingSourceByCategoryObject,
   defaultFederalShareByFFYQuarterObject,
   defaultBudgetObject,
+  defaultHITECHBudgetObject,
+  defaultMMISBudgetObject,
   defaultQuarterlyFFPObject,
   defaultActivityTotalsDataObject
 } from './budget.js';
@@ -144,6 +146,36 @@ describe('budget getDefault methods', () => {
   describe('defaultBudgetObject', () => {
     test('with no years', () => {
       const expected = {
+        combined: {
+          total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+        },
+        activityTotals: [],
+        activities: {},
+        years: []
+      };
+      const actual = defaultBudgetObject();
+      expect(actual).toEqual(expected);
+    });
+
+    test('with years', () => {
+      const expected = {
+        combined: {
+          2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+          2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+          total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+        },
+        activityTotals: [],
+        activities: {},
+        years: [2017, 2018]
+      };
+      const actual = defaultBudgetObject([2017, 2018]);
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('defaultHITECHBudgetObject', () => {
+    test('with no years', () => {
+      const expected = {
         federalShareByFFYQuarter: {
           hitAndHie: {
             years: {},
@@ -234,7 +266,7 @@ describe('budget getDefault methods', () => {
         activities: {},
         years: []
       };
-      const actual = defaultBudgetObject();
+      const actual = defaultHITECHBudgetObject();
       expect(actual).toEqual(expected);
     });
 
@@ -404,7 +436,144 @@ describe('budget getDefault methods', () => {
         activities: {},
         years: [2017, 2018]
       };
-      const actual = defaultBudgetObject([2017, 2018]);
+      const actual = defaultHITECHBudgetObject([2017, 2018]);
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe('defaultMMISBudgetObject', () => {
+    test('with no years', () => {
+      const expected = {
+        federalShareByFFYQuarter: {
+          mmis: {
+            years: {},
+            total: { inHouse: 0, contractors: 0, combined: 0 }
+          }
+        },
+        mmis: {
+          statePersonnel: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        mmisByFFP: {
+          '90-10': {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          '75-25': {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          '50-50': {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          '0-100': {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        combined: {
+          total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+        },
+        activityTotals: [],
+        activities: {},
+        years: []
+      };
+      const actual = defaultMMISBudgetObject();
+      expect(actual).toEqual(expected);
+    });
+
+    test('with years', () => {
+      const expected = {
+        federalShareByFFYQuarter: {
+          mmis: {
+            years: {
+              2017: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              },
+              2018: {
+                1: { inHouse: 0, contractors: 0, combined: 0 },
+                2: { inHouse: 0, contractors: 0, combined: 0 },
+                3: { inHouse: 0, contractors: 0, combined: 0 },
+                4: { inHouse: 0, contractors: 0, combined: 0 },
+                subtotal: { inHouse: 0, contractors: 0, combined: 0 }
+              }
+            },
+            total: { inHouse: 0, contractors: 0, combined: 0 }
+          }
+        },
+        mmis: {
+          statePersonnel: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          contractors: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          expenses: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        mmisByFFP: {
+          '90-10': {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          '75-25': {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          '50-50': {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          '0-100': {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          },
+          combined: {
+            2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+            total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+          }
+        },
+        combined: {
+          2017: { total: 0, federal: 0, medicaid: 0, state: 0 },
+          2018: { total: 0, federal: 0, medicaid: 0, state: 0 },
+          total: { total: 0, federal: 0, medicaid: 0, state: 0 }
+        },
+        activityTotals: [],
+        activities: {},
+        years: [2017, 2018]
+      };
+      const actual = defaultMMISBudgetObject([2017, 2018]);
       expect(actual).toEqual(expected);
     });
   });

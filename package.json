@@ -6,12 +6,12 @@
   "license": "CC0-1.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CMSgov/eAPD.git"
+    "url": "git+https://github.com/Enterprise-CMCS/eAPD.git"
   },
   "bugs": {
-    "url": "https://github.com/CMSgov/eAPD/issues"
+    "url": "https://github.com/Enterprise-CMCS/eAPD/issues"
   },
-  "homepage": "https://github.com/CMSgov/eAPD#readme",
+  "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
     "node": "16.16.0"
   },

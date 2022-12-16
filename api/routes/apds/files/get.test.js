@@ -3,7 +3,7 @@ import { createSandbox, match } from 'sinon';
 import { can } from '../../../middleware/index.js';
 import endpoints from './get.js';
 
-tap.test('apds files endpoints', async endpointTest => {
+tap.test('apds files endpoints', { timeout: 300000 }, async endpointTest => {
   const sandbox = createSandbox();
   const app = { get: sandbox.stub(), post: sandbox.stub() };
 

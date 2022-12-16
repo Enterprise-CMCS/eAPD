@@ -7,8 +7,18 @@ export default {
   },
   testEnvironment: 'node',
   testTimeout: 30000,
-  collectCoverageFrom: ['**/*.{js,jsx}'],
   testPathIgnorePatterns: ['/node_modules/', '/coverage-endpoint/'],
+  collectCoverageFrom: [
+    '**/*.{js,jsx}',
+    '!**/schemas/**',
+    '!**/*.test.{js,jsx}',
+    '!**/coverage-endpoint/**',
+    '!**/*.config.{js,jsx}',
+    '!**/index.{js,jsx}',
+    '!**/block-navigation.js',
+    '!**/prettify.js',
+    '!**/sorter.js'
+  ],
   coverageThreshold: {
     global: {
       branches: 74,

@@ -8,7 +8,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import TextArea from '../../../../../components/TextArea';
 import PersonCostForm from '../../../../../components/PersonCostForm';
 
-import { statePersonnel as schema } from '@cms-eapd/common';
+import { statePersonnelDetailSchema as schema } from '@cms-eapd/common';
 import { savePersonnel as actualSavePersonnel } from '../../../../../redux/actions/editActivity';
 
 const StatePersonForm = forwardRef(
@@ -73,6 +73,7 @@ const StatePersonForm = forwardRef(
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <h4 className="ds-h4">Personnel {index + 1}:</h4>
         <Controller
@@ -130,6 +131,7 @@ const StatePersonForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );

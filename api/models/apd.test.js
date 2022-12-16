@@ -1,10 +1,11 @@
 import tap from 'tap';
-import toMongodb from 'jsonpatch-to-mongodb';
+import fastPatch from 'fast-json-patch';
 import { setup, teardown } from '../db/mongodb.js';
 import { APD } from './index.js';
-import { akAPD } from '../seeds/development/apds.js';
+import { hitech as apd } from '../seeds/development/apds.js';
 
 let apdId;
+delete apd.apdType; // eslint-disable-line no-underscore-dangle
 
 tap.test('APD model test', async t => {
   t.before(async () => {
@@ -15,8 +16,9 @@ tap.test('APD model test', async t => {
     const { _id } = await APD.create({
       status: 'draft',
       stateId: 'md',
-      ...akAPD
+      ...apd
     });
+
     apdId = _id.toString();
   });
 
@@ -24,21 +26,24 @@ tap.test('APD model test', async t => {
     const found = await APD.findOne({ _id: apdId }); // eslint-disable-line no-underscore-dangle
 
     test.ok(!!found, 'Found the APD that was just added');
+    test.ok(!found.apdType, 'APD is not a HITECH or MMIS'); // eslint-disable-line no-underscore-dangle
   });
 
   t.test('patch APD', async test => {
-    await APD.updateOne(
-      { _id: apdId },
-      toMongodb([
-        {
-          op: 'replace',
-          path: '/activities/0/outcomes/1/metrics/1/metric',
-          value: 'TEST VALUE'
-        }
-      ])
-    );
+    const apdJSON = await APD.findOne({ _id: apdId }).lean();
+    const { newDocument } = fastPatch.applyPatch(apdJSON, [
+      {
+        op: 'replace',
+        path: '/activities/0/outcomes/1/metrics/1/metric',
+        value: 'TEST VALUE'
+      }
+    ]);
+    await APD.replaceOne({ _id: apdId }, newDocument, {
+      multipleCastError: true,
+      runValidators: true
+    });
 
-    const updatedApd = await APD.findOne({ _id: apdId }).exec();
+    const updatedApd = await APD.findOne({ _id: apdId }).lean();
 
     test.equal(
       updatedApd.activities[0].outcomes[1].metrics[1].metric,

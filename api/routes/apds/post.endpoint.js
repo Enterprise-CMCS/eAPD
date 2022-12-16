@@ -1,3 +1,4 @@
+import { APD_TYPE } from '@cms-eapd/common';
 import {
   getDB,
   setupDB,
@@ -23,7 +24,9 @@ describe('APD endpoint | POST /apds', () => {
 
   it('when authenticated as a user with permission', async () => {
     const api = login();
-    const response = await api.post(url);
+    const response = await api.post(url, {
+      apdType: APD_TYPE.MMIS
+    });
 
     expect(response.status).toEqual(200);
 

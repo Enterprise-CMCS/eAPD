@@ -13,6 +13,7 @@ import loggerFactory from './logger/index.js';
 import requestLoggerMiddleware from './logger/morgan.js';
 import jsonWebTokenMiddleware from './auth/jwtMiddleware.js';
 import routes from './routes/index.js';
+import apiKeyRoutes from './routes/keyIndex.js';
 import endpointCoverage from './middleware/endpointCoverage.js';
 import errorHandler from './middleware/errorHandler.js';
 import { setup as mongoSetup, getConnectionStatus } from './db/mongodb.js';
@@ -135,6 +136,9 @@ api.get('/heartbeat-mongo', (_, res) => {
     res.status(503).json({ status }).end();
   }
 });
+
+logger.debug('setting up routes for API Keys');
+apiKeyRoutes(api);
 
 // Registers Passport, related handlers, and
 // login/logout endpoints

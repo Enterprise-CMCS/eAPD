@@ -8,7 +8,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import DollarField from '../../../../../components/DollarField';
 import TextArea from '../../../../../components/TextArea';
 
-import { nonPersonnelCosts as schema } from '@cms-eapd/common';
+import { expensesSchema as schema } from '@cms-eapd/common';
 
 import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../redux/actions/editActivity';
 
@@ -65,6 +65,7 @@ const NonPersonnelCostForm = forwardRef(
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <h4 className="ds-h4">Non-Personnel Cost {index + 1}:</h4>
         {/* eslint-disable jsx-a11y/no-autofocus */}
@@ -136,6 +137,7 @@ const NonPersonnelCostForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );

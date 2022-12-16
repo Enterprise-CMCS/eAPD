@@ -17,6 +17,11 @@
     "prefer-destructuring": [0],
     "import/extensions": ["error", "ignorePackages"]
   },
+  "globals": {
+    "window": true,
+    "utag": true,
+    "jest": true
+  },
   "overrides": [
     {
       "files": ["**/*.test.js", "**/*.endpoint.js", "endpoint-tests/utils.js"],

@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
-import { assurancesAndCompliance as schema } from '@cms-eapd/common';
+import { hitechAssurancesAndComplianceSchema as schema } from '@cms-eapd/common';
 
 import { titleCase } from 'title-case';
 import {

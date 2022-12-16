@@ -353,8 +353,12 @@ Cypress.Commands.add('goToActivityOverview', activityIndex => {
   openActivitySection(activityIndex, 'Activity Overview');
 });
 
-Cypress.Commands.add('goToOutcomesAndMilestones', activityIndex => {
-  openActivitySection(activityIndex, 'Outcomes and Milestones');
+Cypress.Commands.add('goToActivitySchedule', activityIndex => {
+  openActivitySection(activityIndex, 'Activity Schedule and Milestones');
+});
+
+Cypress.Commands.add('goToOutcomesAndMetrics', activityIndex => {
+  openActivitySection(activityIndex, 'Outcomes and Metrics');
 });
 
 Cypress.Commands.add('goToStateStaffAndExpenses', activityIndex => {
@@ -408,7 +412,7 @@ Cypress.Commands.add('goToProposedSummary', () => {
 
       // Click on nav submenu button
       cy.get('a.ds-c-vertical-nav__label')
-        .contains(/Summary Budget by Activity/i)
+        .contains(/Combined Activity Costs/i)
         .click();
     });
 });
@@ -425,7 +429,7 @@ Cypress.Commands.add('goToProposedSummaryTable', () => {
 
       // Click on nav submenu button
       cy.get('a.ds-c-vertical-nav__label')
-        .contains(/Summary Budget by Activity/i)
+        .contains(/Combined Activity Costs/i)
         .click();
     });
 });

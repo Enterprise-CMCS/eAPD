@@ -126,7 +126,12 @@
             "description": "The new APD",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/apd" }
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/hitech" },
+                    { "$ref": "#/components/schemas/mmis" }
+                  ]
+                }
               }
             }
           },
@@ -154,10 +159,15 @@
         ],
         "responses": {
           "200": {
-            "description": "The APD, budget, and adminCheck",
+            "description": "The APD",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/singleApd" }
+                "schema": {
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/hitech" },
+                    { "$ref": "#/components/schemas/mmis" }
+                  ]
+                }
               }
             }
           },
@@ -216,7 +226,24 @@
             "description": "The update was successful",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/singleApd" }
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "apd": {
+                      "oneOf": [
+                        { "$ref": "#/components/schemas/hitech" },
+                        { "$ref": "#/components/schemas/mmis" }
+                      ]
+                    },
+                    "budget": {
+                      "oneOf": [
+                        { "$ref": "#/components/schemas/hitechBudget" },
+                        { "$ref": "#/components/schemas/mmisBudget" }
+                      ]
+                    },
+                    "adminCheck": { "$ref": "#/components/schemas/adminCheck" }
+                  }
+                }
               }
             }
           },
@@ -225,25 +252,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
-                        "properties": {
-                          "path": {
-                            "type": "string",
-                            "description": "A JSON Pointer path whose patched value is invalid"
-                          }
-                        }
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "description": "A JSON Pointer path whose patched value is invalid"
                       }
-                    },
-                    {
-                      "type": "null",
-                      "description": "If the requested patch failed for unknown reasons, nothing will be returned"
                     }
-                  ]
+                  }
                 }
               }
             }
@@ -1057,23 +1076,6 @@
             }
           }
         ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "filter_status": {
-                    "type": "string",
-                    "description": "The filter status of the affiliations for this US State",
-                    "enum": ["pending", "active", "inactive"]
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "List of all user affiliations for a US State",
@@ -1279,6 +1281,135 @@
         "security": [{ "bearerAuth": [] }]
       }
     },
+    "/users/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Gets the information for a specific user",
+        "description": "Get a specific user in the system",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the user to fetch",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The matching user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The user's name, if defined"
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "User's unique username"
+                    },
+                    "role": {
+                      "type": "string",
+                      "description": "The user's access role"
+                    },
+                    "state": {
+                      "type": "object",
+                      "description": "The state/territory/district that this user is assigned to",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Lowercase 2-letter code"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "State/territory/district full name"
+                        },
+                        "medicaid_office": {
+                          "type": "object",
+                          "properties": {
+                            "address1": { "type": "string" },
+                            "city": { "type": "string" },
+                            "zip": { "type": "string" },
+                            "state": { "type": "string" },
+                            "director": {
+                              "type": "object",
+                              "properties": {
+                                "name": { "type": "string" },
+                                "email": { "type": "string" },
+                                "phone": { "type": "string" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "states": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[A-Za-z]{2}$": {
+                          "type": "string",
+                          "description": "The affiliation status for the state in the field",
+                          "enum": ["requested", "approved", "denied", "revoked"]
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[A-Za-z]{2}$": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "description": "Names of system activities this user can perform for that state"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "activities": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Names of system activities this user can perform for the selected state"
+                      }
+                    },
+                    "affiliation": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "user_id": { "type": "string" },
+                        "username": { "type": "string" },
+                        "state_id": { "type": "string" },
+                        "role_id": { "type": "string" },
+                        "state": { "type": "string" },
+                        "created_at": { "type": "string" },
+                        "updated_at": { "type": "string" },
+                        "expires_at": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          },
+          "404": { "description": "The user ID does not match any known users" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
     "/open-api": {
       "get": {
         "tags": ["Metadata"],
@@ -1290,6 +1421,1144 @@
   },
   "components": {
     "schemas": {
+      "hitech": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "APD ID" },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of when this APD was created"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the last save to this APD"
+          },
+          "status": { "type": "string", "description": "Status" },
+          "state": {
+            "type": "string",
+            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase"
+          },
+          "name": {
+            "type": "string",
+            "description": "The APD document name, following SEA naming conventions"
+          },
+          "years": { "type": "array", "items": { "type": "string" } },
+          "yearOptions": { "type": "array", "items": { "type": "string" } },
+          "apdOverview": {
+            "type": "object",
+            "description": "APD Overview section",
+            "properties": {
+              "updateStatus": {
+                "type": "object",
+                "description": "APD update status and type",
+                "properties": {
+                  "isUpdateAPD": { "type": "boolean" },
+                  "annualUpdate": { "type": "boolean" },
+                  "asNeededUpdate": { "type": "boolean" }
+                }
+              },
+              "programOverview": {
+                "type": "string",
+                "description": "An overview of the overall program"
+              },
+              "narrativeHIE": {
+                "type": "string",
+                "description": "Brief description of HIE-funded activities contained in this APD"
+              },
+              "narrativeHIT": {
+                "type": "string",
+                "description": "Brief description of HIT-funded activities contained in this APD"
+              },
+              "narrativeMMIS": {
+                "type": "string",
+                "description": "Brief description of MMIS-funded activities contained in this APD"
+              }
+            }
+          },
+          "keyStatePersonnel": {
+            "type": "object",
+            "description": "Key State Personnel section",
+            "properties": {
+              "medicaidDirector": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "State Medicaid director's name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "State Medicaid director's email address"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "State Medicaid director's phone number"
+                  }
+                }
+              },
+              "medicaidOffice": {
+                "type": "object",
+                "properties": {
+                  "address1": {
+                    "type": "string",
+                    "description": "State Medicaid office address"
+                  },
+                  "address2": {
+                    "type": "string",
+                    "description": "State Medicaid office address"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "State Medicaid office address city"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State Medicaid office address state"
+                  },
+                  "zip": {
+                    "type": "string",
+                    "description": "State Medicaid office address ZIP code"
+                  }
+                }
+              },
+              "keyPersonnel": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "costs": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{4}$": {
+                          "type": "number",
+                          "description": "Person's cost for the year described by the property name"
+                        }
+                      }
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Person's email address"
+                    },
+                    "hasCosts": {
+                      "type": "boolean",
+                      "description": "Whether the person has costs attributable to the project"
+                    },
+                    "isPrimary": {
+                      "type": "boolean",
+                      "description": "Whether the person is the primary point of contact for the APD"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Person's name"
+                    },
+                    "fte": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{0,2}": {
+                          "type": "number",
+                          "description": "FTE equivalent of this person's time dedicated to the project"
+                        }
+                      }
+                    },
+                    "position": {
+                      "type": "string",
+                      "description": "Person's position"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "previousActivities": {
+            "type": "object",
+            "description": "Previous Activities section",
+            "properties": {
+              "previousActivitySummary": {
+                "type": "string",
+                "description": "High-level outline of activities approved in previous APD"
+              },
+              "actualExpenditures": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "hithie": {
+                        "type": "object",
+                        "description": "HIT- and HIE-funded expenses",
+                        "properties": {
+                          "federalActual": {
+                            "type": "number",
+                            "description": "Total federal share actually spent"
+                          },
+                          "totalApproved": {
+                            "type": "number",
+                            "description": "Total approved in the previous APD"
+                          }
+                        }
+                      },
+                      "mmis": {
+                        "type": "object",
+                        "description": "HIT-funded expenses",
+                        "properties": {
+                          "50": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          },
+                          "75": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          },
+                          "90": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "activityId": {
+                  "type": "string",
+                  "description": "Key for Activity"
+                },
+                "fundingSource": {
+                  "type": "string",
+                  "description": "Federal funding source that applies to this activity"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Activity name, unique within an APD"
+                },
+                "activityOverview": {
+                  "type": "object",
+                  "description": "The Activity overview",
+                  "properties": {
+                    "summary": {
+                      "type": "string",
+                      "description": "Short summary of the activity"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Activity description"
+                    },
+                    "alernatives": {
+                      "type": "string",
+                      "description": "Alternative considerations for the activity"
+                    },
+                    "standardsAndConditions": {
+                      "type": "object",
+                      "description": "Description of the 11 standards and conditions",
+                      "properties": {
+                        "doesNotSupport": {
+                          "description": "If this activity does not support the standards and conditions, an explanation of why not",
+                          "type": "string"
+                        },
+                        "supports": {
+                          "description": "A description of how this activity supports the standards and conditions",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "activitySchedule": {
+                  "type": "object",
+                  "description": "The start and end date for the activity",
+                  "properties": {
+                    "plannedStartDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date this activity is planned to be completed"
+                    },
+                    "plannedEndDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date this activity is planned to begin"
+                    }
+                  }
+                },
+                "milestones": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity milestone item",
+                    "properties": {
+                      "endDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date this milestone is planned to be met"
+                      },
+                      "milestone": {
+                        "type": "string",
+                        "description": "The name of the milestone"
+                      }
+                    }
+                  }
+                },
+                "outcomes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity outcome",
+                    "properties": {
+                      "metrics": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "metric": {
+                              "type": "string",
+                              "description": "metric"
+                            }
+                          }
+                        }
+                      },
+                      "outcome": {
+                        "type": "string",
+                        "description": "Outcome description"
+                      }
+                    }
+                  }
+                },
+                "statePersonnel": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title for the state personnel"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description of the role"
+                      },
+                      "years": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "properties": {
+                              "amt": {
+                                "type": "number",
+                                "description": "State personnel's total cost for the federal fiscal year"
+                              },
+                              "perc": {
+                                "type": "number",
+                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "expenses": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity expense",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "description": "Expense category, such as \"Hardware, software, and licensing\""
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Short description of the expense"
+                      },
+                      "years": {
+                        "type": "object",
+                        "description": "Expense entry",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "number",
+                            "description": "Expense amount for the given federal fiscal year"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "contractorResources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity contractor resource",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the contractor resource"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description"
+                      },
+                      "hourly": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "x-patternProperties": {
+                              "^[0-9]{4}$": {
+                                "type": "object",
+                                "properties": {
+                                  "hours": {
+                                    "type": "number",
+                                    "description": "Number of hours the contractor is expected to work for the given federal fiscal year"
+                                  },
+                                  "rate": {
+                                    "type": "number",
+                                    "description": "Contractor hourly rate for the given federal fiscal year"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "useHourly": {
+                            "type": "boolean",
+                            "description": "Whether to use hourly rates for this contractor"
+                          }
+                        }
+                      },
+                      "start": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "When the contractor resource will begin work; date only"
+                      },
+                      "end": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "When the contractor resource will end work; date only"
+                      },
+                      "totalCost": {
+                        "type": "number",
+                        "description": "Contractor resource total cost"
+                      },
+                      "years": {
+                        "type": "object",
+                        "description": "Details of each year the contractor resource will be working",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "number",
+                            "description": "Contractor resource cost of the year"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "costAllocationNarrative": {
+                  "type": "object",
+                  "properties": {
+                    "methodology": {
+                      "type": "string",
+                      "description": "Description of the cost allocation methodology"
+                    },
+                    "years": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{4}$": {
+                          "type": "object",
+                          "properties": {
+                            "otherSources": {
+                              "type": "string",
+                              "description": "Description of other funding sources"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "costAllocation": {
+                  "type": "object",
+                  "x-patternProperties": {
+                    "^[0-9]{4}$": {
+                      "type": "object",
+                      "properties": {
+                        "ffp": {
+                          "type": "object",
+                          "properties": {
+                            "federal": {
+                              "type": "number",
+                              "description": "Federal share for this activity for this year, from 0 to 100"
+                            },
+                            "state": {
+                              "type": "number",
+                              "description": "State share for this activity for this year, from 0 to 100"
+                            }
+                          }
+                        },
+                        "other": {
+                          "type": "number",
+                          "description": "Other amount (dollars) for this activity for this year"
+                        }
+                      }
+                    }
+                  }
+                },
+                "quarterlyFFP": {
+                  "type": "object",
+                  "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
+                  "x-patternProperties": {
+                    "^[0-9]{4}$": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[1-4]$": {
+                          "type": "object",
+                          "properties": {
+                            "contractors": {
+                              "type": "number",
+                              "description": "Contractor costs for the given quarter of the given federal fiscal year"
+                            },
+                            "inHouse": {
+                              "type": "number",
+                              "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "assurancesAndCompliances": {
+            "type": "object",
+            "description": "Federal citations that states must assert compliance with. This is a free-form object."
+          },
+          "proposedBudget": {
+            "type": "object",
+            "description": "Proposed budget section",
+            "properties": {
+              "incentivePayments": {
+                "type": "object",
+                "description": "APD incentive payments",
+                "x-patternProperties": {
+                  "^e[hc](Amt|Ct)$": {
+                    "type": "object",
+                    "x-patternProperties": {
+                      "^[0-9]{4}$": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[1-4]$": {
+                            "type": "number",
+                            "description": "EH or EC payment or count for the given federal fiscal year and quarter"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "mmis": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "APD ID" },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of when this APD was created"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the last save to this APD"
+          },
+          "status": { "type": "string", "description": "Status" },
+          "state": {
+            "type": "string",
+            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase"
+          },
+          "name": {
+            "type": "string",
+            "description": "The APD document name, following SEA naming conventions"
+          },
+          "years": { "type": "array", "items": { "type": "string" } },
+          "yearOptions": { "type": "array", "items": { "type": "string" } },
+          "apdOverview": {
+            "type": "object",
+            "description": "APD Overview section",
+            "properties": {
+              "updateStatus": {
+                "type": "object",
+                "description": "APD update status and type",
+                "properties": {
+                  "isUpdateAPD": { "type": "boolean" },
+                  "annualUpdate": { "type": "boolean" },
+                  "asNeededUpdate": { "type": "boolean" }
+                }
+              },
+              "medicaidBusinessAreas": {
+                "type": "object",
+                "properties": {
+                  "waiverSupportSystems": { "type": "boolean" },
+                  "assetVerificationSystem": { "type": "boolean" },
+                  "claimsProcessing": { "type": "boolean" },
+                  "decisionSupportSystemDW": { "type": "boolean" },
+                  "electronicVisitVerification": { "type": "boolean" },
+                  "encounterProcessingSystemMCS": { "type": "boolean" },
+                  "financialManagement": { "type": "boolean" },
+                  "healthInformationExchange": { "type": "boolean" },
+                  "longTermServicesSupports": { "type": "boolean" },
+                  "memberManagement": { "type": "boolean" },
+                  "pharmacyBenefitManagementPOS": { "type": "boolean" },
+                  "programIntegrity": { "type": "boolean" },
+                  "providerManagement": { "type": "boolean" },
+                  "thirdPartyLiability": { "type": "boolean" },
+                  "other": { "type": "boolean" },
+                  "otherMedicaidBusinessAreas": { "type": "string" }
+                }
+              }
+            }
+          },
+          "statePrioritiesAndScope": {
+            "type": "object",
+            "properties": {
+              "medicaidProgramAndPriorities": { "type": "string" },
+              "mesIntroduction": { "type": "string" },
+              "scopeOfAPD": { "type": "string" }
+            }
+          },
+          "keyStatePersonnel": {
+            "type": "object",
+            "description": "Key State Personnel section",
+            "properties": {
+              "medicaidDirector": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "State Medicaid director's name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "State Medicaid director's email address"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "State Medicaid director's phone number"
+                  }
+                }
+              },
+              "medicaidOffice": {
+                "type": "object",
+                "properties": {
+                  "address1": {
+                    "type": "string",
+                    "description": "State Medicaid office address"
+                  },
+                  "address2": {
+                    "type": "string",
+                    "description": "State Medicaid office address"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "State Medicaid office address city"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State Medicaid office address state"
+                  },
+                  "zip": {
+                    "type": "string",
+                    "description": "State Medicaid office address ZIP code"
+                  }
+                }
+              },
+              "keyPersonnel": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "costs": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{4}$": {
+                          "type": "number",
+                          "description": "Person's cost for the year described by the property name"
+                        }
+                      }
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Person's email address"
+                    },
+                    "hasCosts": {
+                      "type": "boolean",
+                      "description": "Whether the person has costs attributable to the project"
+                    },
+                    "isPrimary": {
+                      "type": "boolean",
+                      "description": "Whether the person is the primary point of contact for the APD"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Person's name"
+                    },
+                    "fte": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{0,2}": {
+                          "type": "number",
+                          "description": "FTE equivalent of this person's time dedicated to the project"
+                        }
+                      }
+                    },
+                    "position": {
+                      "type": "string",
+                      "description": "Person's position"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "previousActivities": {
+            "type": "object",
+            "description": "Previous Activities section",
+            "properties": {
+              "previousActivitySummary": {
+                "type": "string",
+                "description": "High-level outline of activities approved in previous APD"
+              },
+              "actualExpenditures": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "mmis": {
+                        "type": "object",
+                        "description": "MMIS-funded expenses",
+                        "properties": {
+                          "50": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          },
+                          "75": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          },
+                          "90": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "activityId": {
+                  "type": "string",
+                  "description": "Key for Activity"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Activity name, unique within an APD"
+                },
+                "activityOverview": {
+                  "type": "object",
+                  "properties": {
+                    "activitySnapshot": { "type": "string" },
+                    "problemStatement": { "type": "string" },
+                    "proposedSolution": { "type": "string" }
+                  }
+                },
+                "analysisOfAlternativesAndRisks": {
+                  "type": "object",
+                  "properties": {
+                    "alternativeAnalysis": { "type": "boolean" },
+                    "costBenefitAnalysis": { "type": "boolean" },
+                    "feasibilityStudy": { "type": "boolean" },
+                    "requirementsAnalysis": { "type": "boolean" },
+                    "forseeableRisks": { "type": "boolean" }
+                  }
+                },
+                "conditionsForEnhancedFunding": {
+                  "type": "object",
+                  "properties": {
+                    "enhancedFundingQualification": { "type": "boolean" },
+                    "enhancedFundingJustification": { "type": "string" }
+                  }
+                },
+                "activitySchedule": {
+                  "type": "object",
+                  "description": "The start and end date for the activity",
+                  "properties": {
+                    "plannedStartDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date this activity is planned to be completed"
+                    },
+                    "plannedEndDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date this activity is planned to begin"
+                    }
+                  }
+                },
+                "milestones": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity milestone item",
+                    "properties": {
+                      "endDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date this milestone is planned to be met"
+                      },
+                      "milestone": {
+                        "type": "string",
+                        "description": "The name of the milestone"
+                      }
+                    }
+                  }
+                },
+                "outcomes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity outcome",
+                    "properties": {
+                      "metrics": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "metric": {
+                              "type": "string",
+                              "description": "metric"
+                            }
+                          }
+                        }
+                      },
+                      "outcome": {
+                        "type": "string",
+                        "description": "Outcome description"
+                      }
+                    }
+                  }
+                },
+                "statePersonnel": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title for the state personnel"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description of the role"
+                      },
+                      "years": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "properties": {
+                              "amt": {
+                                "type": "number",
+                                "description": "State personnel's total cost for the federal fiscal year"
+                              },
+                              "perc": {
+                                "type": "number",
+                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "expenses": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity expense",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "description": "Expense category, such as \"Hardware, software, and licensing\""
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Short description of the expense"
+                      },
+                      "years": {
+                        "type": "object",
+                        "description": "Expense entry",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "number",
+                            "description": "Expense amount for the given federal fiscal year"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "contractorResources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity contractor resource",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the contractor resource"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description"
+                      },
+                      "hourly": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "x-patternProperties": {
+                              "^[0-9]{4}$": {
+                                "type": "object",
+                                "properties": {
+                                  "hours": {
+                                    "type": "number",
+                                    "description": "Number of hours the contractor is expected to work for the given federal fiscal year"
+                                  },
+                                  "rate": {
+                                    "type": "number",
+                                    "description": "Contractor hourly rate for the given federal fiscal year"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "useHourly": {
+                            "type": "boolean",
+                            "description": "Whether to use hourly rates for this contractor"
+                          }
+                        }
+                      },
+                      "start": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "When the contractor resource will begin work; date only"
+                      },
+                      "end": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "When the contractor resource will end work; date only"
+                      },
+                      "totalCost": {
+                        "type": "number",
+                        "description": "Contractor resource total cost"
+                      },
+                      "years": {
+                        "type": "object",
+                        "description": "Details of each year the contractor resource will be working",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "number",
+                            "description": "Contractor resource cost of the year"
+                          }
+                        }
+                      },
+                      "costAllocation": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "properties": {
+                              "ffp": {
+                                "type": "object",
+                                "properties": {
+                                  "federal": {
+                                    "type": "number",
+                                    "description": "Federal share for this activity for this year, from 0 to 100"
+                                  },
+                                  "state": {
+                                    "type": "number",
+                                    "description": "State share for this activity for this year, from 0 to 100"
+                                  }
+                                }
+                              },
+                              "other": {
+                                "type": "number",
+                                "description": "Other amount (dollars) for this activity for this year"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "quarterlyFFP": {
+                        "type": "object",
+                        "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "x-patternProperties": {
+                              "^[1-4]$": {
+                                "type": "object",
+                                "properties": {
+                                  "contractors": {
+                                    "type": "number",
+                                    "description": "Contractor costs for the given quarter of the given federal fiscal year"
+                                  },
+                                  "inHouse": {
+                                    "type": "number",
+                                    "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "assurancesAndCompliances": {
+            "type": "object",
+            "description": "Federal citations that states must assert compliance with. This is a free-form object."
+          }
+        }
+      },
+      "activityTotal": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "fundingSource": { "type": "string" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": { "type": "number" }
+                }
+              },
+              "contractors": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": { "type": "number" }
+                }
+              },
+              "expenses": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": { "type": "number" }
+                }
+              },
+              "statePersonnel": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": { "type": "number" }
+                }
+              },
+              "otherFunding": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "contractors": { "type": "number" },
+                      "expenses": { "type": "number" },
+                      "statePersonnel": { "type": "number" },
+                      "total": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "costPercentByCostType": {
         "type": "object",
         "properties": {
@@ -1360,1122 +2629,7 @@
           }
         }
       },
-      "singleApd": {
-        "type": "object",
-        "properties": {
-          "adminCheck": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "section": {
-                  "type": "string",
-                  "description": "Section name/title of admin check error"
-                },
-                "link": {
-                  "type": "string",
-                  "description": "Link to page where admin check error occured"
-                },
-                "fieldDescription": {
-                  "type": "string",
-                  "description": "Error message returned from schema"
-                }
-              }
-            }
-          },
-          "budget": {
-            "type": "object",
-            "properties": {
-              "years": { "type": "array", "items": { "type": "string" } },
-              "federalShareByFFYQuarter": {
-                "type": "object",
-                "properties": {
-                  "hitAndHie": {
-                    "type": "object",
-                    "properties": {
-                      "years": {
-                        "type": "object",
-                        "x-patternProperties": {
-                          "^[0-9]{4}$": {
-                            "type": "object",
-                            "properties": {
-                              "1": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              },
-                              "2": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              },
-                              "3": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              },
-                              "4": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              },
-                              "subtotal": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "total": {
-                        "type": "object",
-                        "properties": {
-                          "inHouse": { "type": "number" },
-                          "contractors": { "type": "number" },
-                          "combined": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "mmis": {
-                    "type": "object",
-                    "properties": {
-                      "years": {
-                        "type": "object",
-                        "x-patternProperties": {
-                          "^[0-9]{4}$": {
-                            "type": "object",
-                            "properties": {
-                              "1": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              },
-                              "2": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              },
-                              "3": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              },
-                              "4": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              },
-                              "subtotal": {
-                                "type": "object",
-                                "properties": {
-                                  "inHouse": { "type": "number" },
-                                  "contractors": { "type": "number" },
-                                  "combined": { "type": "number" }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "total": {
-                        "type": "object",
-                        "properties": {
-                          "inHouse": { "type": "number" },
-                          "contractors": { "type": "number" },
-                          "combined": { "type": "number" }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "hie": {
-                "type": "object",
-                "properties": {
-                  "statePersonnel": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "contractors": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "expenses": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "combined": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "hit": {
-                "type": "object",
-                "properties": {
-                  "statePersonnel": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "contractors": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "expenses": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "combined": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "mmis": {
-                "type": "object",
-                "properties": {
-                  "statePersonnel": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "contractors": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "expenses": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "combined": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "hitAndHie": {
-                "type": "object",
-                "properties": {
-                  "statePersonnel": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "contractors": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "expenses": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "combined": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "mmisByFFP": {
-                "properties": {
-                  "90-10": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^([0-9]{4}|total)$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "75-25": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^([0-9]{4}|total)$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "50-50": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^([0-9]{4}|total)$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "0-100": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^([0-9]{4}|total)$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  },
-                  "combined": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^([0-9]{4}|total)$": {
-                        "type": "object",
-                        "properties": {
-                          "total": { "type": "number" },
-                          "federal": { "type": "number" },
-                          "medicaid": { "type": "number" },
-                          "state": { "type": "number" }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "combined": {
-                "type": "object",
-                "x-patternProperties": {
-                  "^([0-9]{4}|total)$": {
-                    "type": "object",
-                    "properties": {
-                      "total": { "type": "number" },
-                      "federal": { "type": "number" },
-                      "medicaid": { "type": "number" },
-                      "state": { "type": "number" }
-                    }
-                  }
-                }
-              },
-              "activityTotals": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": { "type": "string" },
-                    "name": { "type": "string" },
-                    "fundingSource": { "type": "string" },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "combined": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^([0-9]{4}|total)$": { "type": "number" }
-                          }
-                        },
-                        "contractors": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^([0-9]{4}|total)$": { "type": "number" }
-                          }
-                        },
-                        "expenses": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^([0-9]{4}|total)$": { "type": "number" }
-                          }
-                        },
-                        "statePersonnel": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^([0-9]{4}|total)$": { "type": "number" }
-                          }
-                        },
-                        "otherFunding": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^[0-9]{4}$": {
-                              "type": "object",
-                              "properties": {
-                                "contractors": { "type": "number" },
-                                "expenses": { "type": "number" },
-                                "statePersonnel": { "type": "number" },
-                                "total": { "type": "number" }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "activities": {
-                "type": "object",
-                "x-patternProperties": {
-                  "^[0-9a-zA-Z]{24}$": {
-                    "$ref": "#/components/schemas/budgetActivity"
-                  }
-                }
-              }
-            }
-          },
-          "apd": {
-            "type": "object",
-            "properties": {
-              "id": { "type": "number", "description": "APD ID" },
-              "created": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Timestamp of when this APD was created"
-              },
-              "name": {
-                "type": "string",
-                "description": "The APD document name, following SEA naming conventions"
-              },
-              "apdOverview": {
-                "type": "object",
-                "description": "APD Overview section",
-                "properties": {
-                  "programOverview": {
-                    "type": "string",
-                    "description": "An overview of the overall program"
-                  },
-                  "narrativeHIE": {
-                    "type": "string",
-                    "description": "Brief description of HIE-funded activities contained in this APD"
-                  },
-                  "narrativeHIT": {
-                    "type": "string",
-                    "description": "Brief description of HIT-funded activities contained in this APD"
-                  },
-                  "narrativeMMIS": {
-                    "type": "string",
-                    "description": "Brief description of MMIS-funded activities contained in this APD"
-                  }
-                }
-              },
-              "activities": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Activity name, unique within an APD"
-                    },
-                    "fundingSource": {
-                      "type": "string",
-                      "description": "Federal funding source that applies to this activity"
-                    },
-                    "summary": {
-                      "type": "string",
-                      "description": "Short summary of the activity"
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Activity description"
-                    },
-                    "alernatives": {
-                      "type": "string",
-                      "description": "Alternative considerations for the activity"
-                    },
-                    "plannedEndDate": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date this activity is planned to begin"
-                    },
-                    "plannedStartDate": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "The date this activity is planned to be completed"
-                    },
-                    "contractorResources": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "description": "Activity contractor resource",
-                        "properties": {
-                          "name": {
-                            "type": "string",
-                            "description": "Name of the contractor resource"
-                          },
-                          "description": {
-                            "type": "string",
-                            "description": "Description"
-                          },
-                          "hourly": {
-                            "type": "object",
-                            "properties": {
-                              "data": {
-                                "x-patternProperties": {
-                                  "^[0-9]{4}$": {
-                                    "type": "object",
-                                    "properties": {
-                                      "hours": {
-                                        "type": "number",
-                                        "description": "Number of hours the contractor is expected to work for the given federal fiscal year"
-                                      },
-                                      "rate": {
-                                        "type": "number",
-                                        "description": "Contractor hourly rate for the given federal fiscal year"
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "useHourly": {
-                                "type": "boolean",
-                                "description": "Whether to use hourly rates for this contractor"
-                              }
-                            }
-                          },
-                          "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "When the contractor resource will begin work; date only"
-                          },
-                          "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "When the contractor resource will end work; date only"
-                          },
-                          "totalCost": {
-                            "type": "number",
-                            "description": "Contractor resource total cost"
-                          },
-                          "years": {
-                            "type": "object",
-                            "description": "Details of each year the contractor resource will be working",
-                            "x-patternProperties": {
-                              "^[0-9]{4}$": {
-                                "type": "number",
-                                "description": "Contractor resource cost of the year"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "costAllocationNarrative": {
-                      "type": "object",
-                      "properties": {
-                        "methodology": {
-                          "type": "string",
-                          "description": "Description of the cost allocation methodology"
-                        },
-                        "years": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^[0-9]{4}$": {
-                              "type": "object",
-                              "properties": {
-                                "otherSources": {
-                                  "type": "string",
-                                  "description": "Description of other funding sources"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "costAllocation": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^[0-9]{4}$": {
-                          "type": "object",
-                          "properties": {
-                            "ffp": {
-                              "type": "object",
-                              "properties": {
-                                "federal": {
-                                  "type": "number",
-                                  "description": "Federal share for this activity for this year, from 0 to 100"
-                                },
-                                "state": {
-                                  "type": "number",
-                                  "description": "State share for this activity for this year, from 0 to 100"
-                                }
-                              }
-                            },
-                            "other": {
-                              "type": "number",
-                              "description": "Other amount (dollars) for this activity for this year"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "expenses": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "description": "Activity expense",
-                        "properties": {
-                          "category": {
-                            "type": "string",
-                            "description": "Expense category, such as \"Hardware, software, and licensing\""
-                          },
-                          "description": {
-                            "type": "string",
-                            "description": "Short description of the expense"
-                          },
-                          "years": {
-                            "type": "object",
-                            "description": "Expense entry",
-                            "x-patternProperties": {
-                              "^[0-9]{4}$": {
-                                "type": "number",
-                                "description": "Expense amount for the given federal fiscal year"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "outcomes": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "description": "Activity outcome",
-                        "properties": {
-                          "metrics": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "metric": {
-                                  "type": "string",
-                                  "description": "metric"
-                                }
-                              }
-                            }
-                          },
-                          "outcome": {
-                            "type": "string",
-                            "description": "Outcome description"
-                          }
-                        }
-                      }
-                    },
-                    "schedule": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "description": "Activity schedule item",
-                        "properties": {
-                          "endDate": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this milestone is planned to be met"
-                          },
-                          "milestone": {
-                            "type": "string",
-                            "description": "The name of the milestone this schedule entry refers to"
-                          }
-                        }
-                      }
-                    },
-                    "standardsAndConditions": {
-                      "type": "object",
-                      "description": "Description of the 11 standards and conditions",
-                      "properties": {
-                        "doesNotSupport": {
-                          "description": "If this activity does not support the standards and conditions, an explanation of why not",
-                          "type": "string"
-                        },
-                        "supports": {
-                          "description": "A description of how this activity supports the standards and conditions",
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "statePersonnel": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "title": {
-                            "type": "string",
-                            "description": "Title for the state personnel"
-                          },
-                          "description": {
-                            "type": "string",
-                            "description": "Description of the role"
-                          },
-                          "years": {
-                            "type": "object",
-                            "x-patternProperties": {
-                              "^[0-9]{4}$": {
-                                "type": "object",
-                                "properties": {
-                                  "amt": {
-                                    "type": "number",
-                                    "description": "State personnel's total cost for the federal fiscal year"
-                                  },
-                                  "perc": {
-                                    "type": "number",
-                                    "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "quarterlyFFP": {
-                      "type": "object",
-                      "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
-                      "x-patternProperties": {
-                        "^[0-9]{4}$": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^[1-4]$": {
-                              "type": "object",
-                              "properties": {
-                                "contractors": {
-                                  "type": "number",
-                                  "description": "Contractor costs for the given quarter of the given federal fiscal year"
-                                },
-                                "inHouse": {
-                                  "type": "number",
-                                  "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "assurancesAndCompliances": {
-                "type": "object",
-                "description": "Federal citations that states must assert compliance with. This is a free-form object."
-              },
-              "proposedBudget": {
-                "type": "object",
-                "description": "Proposed budget section",
-                "properties": {
-                  "incentivePayments": {
-                    "type": "object",
-                    "description": "APD incentive payments",
-                    "x-patternProperties": {
-                      "^e[hc](Amt|Ct)$": {
-                        "type": "object",
-                        "x-patternProperties": {
-                          "^[0-9]{4}$": {
-                            "type": "object",
-                            "x-patternProperties": {
-                              "^[1-4]$": {
-                                "type": "number",
-                                "description": "EH or EC payment or count for the given federal fiscal year and quarter"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "keyStatePersonnel": {
-                "type": "object",
-                "description": "Key State Personnel section",
-                "properties": {
-                  "medicaidDirector": {
-                    "type": "object",
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "description": "State Medicaid director's name"
-                      },
-                      "email": {
-                        "type": "string",
-                        "description": "State Medicaid director's email address"
-                      },
-                      "phone": {
-                        "type": "string",
-                        "description": "State Medicaid director's phone number"
-                      }
-                    }
-                  },
-                  "medicaidOffice": {
-                    "type": "object",
-                    "properties": {
-                      "address1": {
-                        "type": "string",
-                        "description": "State Medicaid office address"
-                      },
-                      "address2": {
-                        "type": "string",
-                        "description": "State Medicaid office address"
-                      },
-                      "city": {
-                        "type": "string",
-                        "description": "State Medicaid office address city"
-                      },
-                      "state": {
-                        "type": "string",
-                        "description": "State Medicaid office address state"
-                      },
-                      "zip": {
-                        "type": "string",
-                        "description": "State Medicaid office address ZIP code"
-                      }
-                    }
-                  },
-                  "keyPersonnel": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "costs": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^[0-9]{4}$": {
-                              "type": "number",
-                              "description": "Person's cost for the year described by the property name"
-                            }
-                          }
-                        },
-                        "email": {
-                          "type": "string",
-                          "description": "Person's email address"
-                        },
-                        "hasCosts": {
-                          "type": "boolean",
-                          "description": "Whether the person has costs attributable to the project"
-                        },
-                        "isPrimary": {
-                          "type": "boolean",
-                          "description": "Whether the person is the primary point of contact for the APD"
-                        },
-                        "name": {
-                          "type": "string",
-                          "description": "Person's name"
-                        },
-                        "fte": {
-                          "type": "object",
-                          "x-patternProperties": {
-                            "^[0-9]{0,2}": {
-                              "type": "number",
-                              "description": "FTE equivalent of this person's time dedicated to the project"
-                            }
-                          }
-                        },
-                        "position": {
-                          "type": "string",
-                          "description": "Person's position"
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "previousActivities": {
-                "type": "object",
-                "description": "Previous Activities section",
-                "properties": {
-                  "previousActivitySummary": {
-                    "type": "string",
-                    "description": "High-level outline of activities approved in previous APD"
-                  },
-                  "actualExpenditures": {
-                    "type": "object",
-                    "x-patternProperties": {
-                      "^[0-9]{4}$": {
-                        "type": "object",
-                        "properties": {
-                          "hithie": {
-                            "type": "object",
-                            "description": "HIT- and HIE-funded expenses",
-                            "properties": {
-                              "federalActual": {
-                                "type": "number",
-                                "description": "Total federal share actually spent"
-                              },
-                              "totalApproved": {
-                                "type": "number",
-                                "description": "Total approved in the previous APD"
-                              }
-                            }
-                          },
-                          "mmis": {
-                            "type": "object",
-                            "description": "HIT-funded expenses",
-                            "properties": {
-                              "50": {
-                                "federalActual": {
-                                  "type": "number",
-                                  "description": "Total federal share actually spent"
-                                },
-                                "totalApproved": {
-                                  "type": "number",
-                                  "description": "Total approved in the previous APD"
-                                }
-                              },
-                              "75": {
-                                "federalActual": {
-                                  "type": "number",
-                                  "description": "Total federal share actually spent"
-                                },
-                                "totalApproved": {
-                                  "type": "number",
-                                  "description": "Total approved in the previous APD"
-                                }
-                              },
-                              "90": {
-                                "federalActual": {
-                                  "type": "number",
-                                  "description": "Total federal share actually spent"
-                                },
-                                "totalApproved": {
-                                  "type": "number",
-                                  "description": "Total approved in the previous APD"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "state": {
-                "type": "string",
-                "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase"
-              },
-              "status": { "type": "string", "description": "Status" },
-              "updated": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Timestamp of the last save to this APD"
-              },
-              "years": { "type": "array", "items": { "type": "string" } }
-            }
-          }
-        }
-      },
-      "adminCheck": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "section": {
-              "type": "string",
-              "description": "Section name/title of admin check error"
-            },
-            "link": {
-              "type": "string",
-              "description": "Link to page where admin check error occured"
-            },
-            "fieldDescription": {
-              "type": "string",
-              "description": "Error message returned from schema"
-            }
-          }
-        }
-      },
-      "budget": {
+      "hitechBudget": {
         "type": "object",
         "properties": {
           "years": { "type": "array", "items": { "type": "string" } },
@@ -2944,605 +3098,273 @@
           },
           "activityTotals": {
             "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": { "type": "string" },
-                "name": { "type": "string" },
-                "fundingSource": { "type": "string" },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "combined": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^([0-9]{4}|total)$": { "type": "number" }
-                      }
-                    },
-                    "contractors": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^([0-9]{4}|total)$": { "type": "number" }
-                      }
-                    },
-                    "expenses": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^([0-9]{4}|total)$": { "type": "number" }
-                      }
-                    },
-                    "statePersonnel": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^([0-9]{4}|total)$": { "type": "number" }
-                      }
-                    },
-                    "otherFunding": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^[0-9]{4}$": {
-                          "type": "object",
-                          "properties": {
-                            "contractors": { "type": "number" },
-                            "expenses": { "type": "number" },
-                            "statePersonnel": { "type": "number" },
-                            "total": { "type": "number" }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "items": { "$ref": "#/components/schemas/activityTotal" }
           },
           "activities": {
             "type": "object",
             "x-patternProperties": {
-              "^[0-9a-zA-Z]{24}$": {
-                "$ref": "#/components/schemas/budgetActivity"
+              "^[0-9a-zA-Z]{6}$": {
+                "type": "object",
+                "properties": { "$ref": "#/components/schemas/budgetActivity" }
               }
             }
           }
         }
       },
-      "apd": {
+      "mmisBudget": {
         "type": "object",
         "properties": {
-          "id": { "type": "number", "description": "APD ID" },
-          "created": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp of when this APD was created"
-          },
-          "name": {
-            "type": "string",
-            "description": "The APD document name, following SEA naming conventions"
-          },
-          "apdOverview": {
+          "years": { "type": "array", "items": { "type": "string" } },
+          "federalShareByFFYQuarter": {
             "type": "object",
-            "description": "APD Overview section",
             "properties": {
-              "programOverview": {
-                "type": "string",
-                "description": "An overview of the overall program"
-              },
-              "narrativeHIE": {
-                "type": "string",
-                "description": "Brief description of HIE-funded activities contained in this APD"
-              },
-              "narrativeHIT": {
-                "type": "string",
-                "description": "Brief description of HIT-funded activities contained in this APD"
-              },
-              "narrativeMMIS": {
-                "type": "string",
-                "description": "Brief description of MMIS-funded activities contained in this APD"
-              }
-            }
-          },
-          "activities": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Activity name, unique within an APD"
-                },
-                "fundingSource": {
-                  "type": "string",
-                  "description": "Federal funding source that applies to this activity"
-                },
-                "summary": {
-                  "type": "string",
-                  "description": "Short summary of the activity"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Activity description"
-                },
-                "alernatives": {
-                  "type": "string",
-                  "description": "Alternative considerations for the activity"
-                },
-                "plannedEndDate": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "The date this activity is planned to begin"
-                },
-                "plannedStartDate": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "The date this activity is planned to be completed"
-                },
-                "contractorResources": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Activity contractor resource",
-                    "properties": {
-                      "name": {
-                        "type": "string",
-                        "description": "Name of the contractor resource"
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "Description"
-                      },
-                      "hourly": {
-                        "type": "object",
-                        "properties": {
-                          "data": {
-                            "x-patternProperties": {
-                              "^[0-9]{4}$": {
-                                "type": "object",
-                                "properties": {
-                                  "hours": {
-                                    "type": "number",
-                                    "description": "Number of hours the contractor is expected to work for the given federal fiscal year"
-                                  },
-                                  "rate": {
-                                    "type": "number",
-                                    "description": "Contractor hourly rate for the given federal fiscal year"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "useHourly": {
-                            "type": "boolean",
-                            "description": "Whether to use hourly rates for this contractor"
-                          }
-                        }
-                      },
-                      "start": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "When the contractor resource will begin work; date only"
-                      },
-                      "end": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "When the contractor resource will end work; date only"
-                      },
-                      "totalCost": {
-                        "type": "number",
-                        "description": "Contractor resource total cost"
-                      },
-                      "years": {
-                        "type": "object",
-                        "description": "Details of each year the contractor resource will be working",
-                        "x-patternProperties": {
-                          "^[0-9]{4}$": {
-                            "type": "number",
-                            "description": "Contractor resource cost of the year"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "costAllocationNarrative": {
-                  "type": "object",
-                  "properties": {
-                    "methodology": {
-                      "type": "string",
-                      "description": "Description of the cost allocation methodology"
-                    },
-                    "years": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^[0-9]{4}$": {
-                          "type": "object",
-                          "properties": {
-                            "otherSources": {
-                              "type": "string",
-                              "description": "Description of other funding sources"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "costAllocation": {
-                  "type": "object",
-                  "x-patternProperties": {
-                    "^[0-9]{4}$": {
-                      "type": "object",
-                      "properties": {
-                        "ffp": {
-                          "type": "object",
-                          "properties": {
-                            "federal": {
-                              "type": "number",
-                              "description": "Federal share for this activity for this year, from 0 to 100"
-                            },
-                            "state": {
-                              "type": "number",
-                              "description": "State share for this activity for this year, from 0 to 100"
-                            }
-                          }
-                        },
-                        "other": {
-                          "type": "number",
-                          "description": "Other amount (dollars) for this activity for this year"
-                        }
-                      }
-                    }
-                  }
-                },
-                "expenses": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Activity expense",
-                    "properties": {
-                      "category": {
-                        "type": "string",
-                        "description": "Expense category, such as \"Hardware, software, and licensing\""
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "Short description of the expense"
-                      },
-                      "years": {
-                        "type": "object",
-                        "description": "Expense entry",
-                        "x-patternProperties": {
-                          "^[0-9]{4}$": {
-                            "type": "number",
-                            "description": "Expense amount for the given federal fiscal year"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "outcomes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Activity outcome",
-                    "properties": {
-                      "metrics": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "metric": {
-                              "type": "string",
-                              "description": "metric"
-                            }
-                          }
-                        }
-                      },
-                      "outcome": {
-                        "type": "string",
-                        "description": "Outcome description"
-                      }
-                    }
-                  }
-                },
-                "schedule": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Activity schedule item",
-                    "properties": {
-                      "endDate": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "The date this milestone is planned to be met"
-                      },
-                      "milestone": {
-                        "type": "string",
-                        "description": "The name of the milestone this schedule entry refers to"
-                      }
-                    }
-                  }
-                },
-                "standardsAndConditions": {
-                  "type": "object",
-                  "description": "Description of the 11 standards and conditions",
-                  "properties": {
-                    "doesNotSupport": {
-                      "description": "If this activity does not support the standards and conditions, an explanation of why not",
-                      "type": "string"
-                    },
-                    "supports": {
-                      "description": "A description of how this activity supports the standards and conditions",
-                      "type": "string"
-                    }
-                  }
-                },
-                "statePersonnel": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "title": {
-                        "type": "string",
-                        "description": "Title for the state personnel"
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "Description of the role"
-                      },
-                      "years": {
-                        "type": "object",
-                        "x-patternProperties": {
-                          "^[0-9]{4}$": {
-                            "type": "object",
-                            "properties": {
-                              "amt": {
-                                "type": "number",
-                                "description": "State personnel's total cost for the federal fiscal year"
-                              },
-                              "perc": {
-                                "type": "number",
-                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "quarterlyFFP": {
-                  "type": "object",
-                  "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
-                  "x-patternProperties": {
-                    "^[0-9]{4}$": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^[1-4]$": {
-                          "type": "object",
-                          "properties": {
-                            "contractors": {
-                              "type": "number",
-                              "description": "Contractor costs for the given quarter of the given federal fiscal year"
-                            },
-                            "inHouse": {
-                              "type": "number",
-                              "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "assurancesAndCompliances": {
-            "type": "object",
-            "description": "Federal citations that states must assert compliance with. This is a free-form object."
-          },
-          "proposedBudget": {
-            "type": "object",
-            "description": "Proposed budget section",
-            "properties": {
-              "incentivePayments": {
+              "mmis": {
                 "type": "object",
-                "description": "APD incentive payments",
-                "x-patternProperties": {
-                  "^e[hc](Amt|Ct)$": {
+                "properties": {
+                  "years": {
                     "type": "object",
                     "x-patternProperties": {
                       "^[0-9]{4}$": {
                         "type": "object",
-                        "x-patternProperties": {
-                          "^[1-4]$": {
-                            "type": "number",
-                            "description": "EH or EC payment or count for the given federal fiscal year and quarter"
+                        "properties": {
+                          "1": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "2": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "3": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "4": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "subtotal": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
                           }
                         }
                       }
                     }
-                  }
-                }
-              }
-            }
-          },
-          "keyStatePersonnel": {
-            "type": "object",
-            "description": "Key State Personnel section",
-            "properties": {
-              "medicaidDirector": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "State Medicaid director's name"
                   },
-                  "email": {
-                    "type": "string",
-                    "description": "State Medicaid director's email address"
-                  },
-                  "phone": {
-                    "type": "string",
-                    "description": "State Medicaid director's phone number"
-                  }
-                }
-              },
-              "medicaidOffice": {
-                "type": "object",
-                "properties": {
-                  "address1": {
-                    "type": "string",
-                    "description": "State Medicaid office address"
-                  },
-                  "address2": {
-                    "type": "string",
-                    "description": "State Medicaid office address"
-                  },
-                  "city": {
-                    "type": "string",
-                    "description": "State Medicaid office address city"
-                  },
-                  "state": {
-                    "type": "string",
-                    "description": "State Medicaid office address state"
-                  },
-                  "zip": {
-                    "type": "string",
-                    "description": "State Medicaid office address ZIP code"
-                  }
-                }
-              },
-              "keyPersonnel": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "costs": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^[0-9]{4}$": {
-                          "type": "number",
-                          "description": "Person's cost for the year described by the property name"
-                        }
-                      }
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "Person's email address"
-                    },
-                    "hasCosts": {
-                      "type": "boolean",
-                      "description": "Whether the person has costs attributable to the project"
-                    },
-                    "isPrimary": {
-                      "type": "boolean",
-                      "description": "Whether the person is the primary point of contact for the APD"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "Person's name"
-                    },
-                    "fte": {
-                      "type": "object",
-                      "x-patternProperties": {
-                        "^[0-9]{0,2}": {
-                          "type": "number",
-                          "description": "FTE equivalent of this person's time dedicated to the project"
-                        }
-                      }
-                    },
-                    "position": {
-                      "type": "string",
-                      "description": "Person's position"
+                  "total": {
+                    "type": "object",
+                    "properties": {
+                      "inHouse": { "type": "number" },
+                      "contractors": { "type": "number" },
+                      "combined": { "type": "number" }
                     }
                   }
                 }
               }
             }
           },
-          "previousActivities": {
+          "mmis": {
             "type": "object",
-            "description": "Previous Activities section",
             "properties": {
-              "previousActivitySummary": {
-                "type": "string",
-                "description": "High-level outline of activities approved in previous APD"
-              },
-              "actualExpenditures": {
+              "statePersonnel": {
                 "type": "object",
                 "x-patternProperties": {
                   "^[0-9]{4}$": {
                     "type": "object",
                     "properties": {
-                      "hithie": {
-                        "type": "object",
-                        "description": "HIT- and HIE-funded expenses",
-                        "properties": {
-                          "federalActual": {
-                            "type": "number",
-                            "description": "Total federal share actually spent"
-                          },
-                          "totalApproved": {
-                            "type": "number",
-                            "description": "Total approved in the previous APD"
-                          }
-                        }
-                      },
-                      "mmis": {
-                        "type": "object",
-                        "description": "HIT-funded expenses",
-                        "properties": {
-                          "50": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
-                            }
-                          },
-                          "75": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
-                            }
-                          },
-                          "90": {
-                            "federalActual": {
-                              "type": "number",
-                              "description": "Total federal share actually spent"
-                            },
-                            "totalApproved": {
-                              "type": "number",
-                              "description": "Total approved in the previous APD"
-                            }
-                          }
-                        }
-                      }
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "contractors": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "expenses": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
                     }
                   }
                 }
               }
             }
           },
-          "state": {
-            "type": "string",
-            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase"
+          "mmisByFFP": {
+            "properties": {
+              "90-10": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "75-25": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "50-50": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "0-100": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
           },
-          "status": { "type": "string", "description": "Status" },
-          "updated": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp of the last save to this APD"
+          "combined": {
+            "type": "object",
+            "x-patternProperties": {
+              "^([0-9]{4}|total)$": {
+                "type": "object",
+                "properties": {
+                  "total": { "type": "number" },
+                  "federal": { "type": "number" },
+                  "medicaid": { "type": "number" },
+                  "state": { "type": "number" }
+                }
+              }
+            }
           },
-          "years": { "type": "array", "items": { "type": "string" } }
+          "activityTotals": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/activityTotal" }
+          },
+          "activities": {
+            "type": "object",
+            "x-patternProperties": {
+              "^[0-9a-zA-Z]{6}$": {
+                "type": "object",
+                "properties": { "$ref": "#/components/schemas/budgetActivity" }
+              }
+            }
+          }
+        }
+      },
+      "adminCheck": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "section": {
+              "type": "string",
+              "description": "Section name/title of admin check error"
+            },
+            "link": {
+              "type": "string",
+              "description": "Link to page where admin check error occured"
+            },
+            "fieldDescription": {
+              "type": "string",
+              "description": "Error message returned from schema"
+            }
+          }
         }
       }
     },

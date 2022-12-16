@@ -20,6 +20,17 @@ const axiosDefaults = {
 
 export const api = axios.create(axiosDefaults);
 
+export const apiKeyAuth = token => {
+  const ip = token || '10.0.0.0';
+  const options = {
+    ...axiosDefaults,
+    headers: {
+      'x-forwarded-for': ip
+    }
+  };
+  return axios.create(options);
+};
+
 export const login = token => {
   const jwt = token || 'all-permissions';
   const options = {

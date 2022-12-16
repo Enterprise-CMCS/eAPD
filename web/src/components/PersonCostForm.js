@@ -4,7 +4,7 @@ import React, { useEffect, Fragment } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { personCost as schema } from '@cms-eapd/common';
+import { personYearlyCostsSchema as schema } from '@cms-eapd/common';
 
 import DollarField from './DollarField';
 import Dollars from './Dollars';

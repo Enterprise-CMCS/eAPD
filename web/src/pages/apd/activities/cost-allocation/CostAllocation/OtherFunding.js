@@ -24,7 +24,7 @@ import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.sele
 import { t } from '../../../../../i18n';
 import RichText from '../../../../../components/RichText';
 
-import { costAllocationOther as schema } from '@cms-eapd/common';
+import { costAllocationOtherSchema as schema } from '@cms-eapd/common';
 
 const OtherFunding = ({
   activityIndex,

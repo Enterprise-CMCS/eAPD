@@ -8,7 +8,6 @@ import mockResponse from '../../util/mockResponse.js';
 let res;
 let next;
 let app;
-let getAllUsers;
 let getUserByID;
 let handler;
 
@@ -17,7 +16,6 @@ tap.test('user GET endpoint', async endpointTest => {
     res = mockResponse();
     next = stub();
     app = mockExpress();
-    getAllUsers = stub();
     getUserByID = stub();
   });
 
@@ -28,37 +26,6 @@ tap.test('user GET endpoint', async endpointTest => {
       app.get.calledWith('/users/:id', can('view-users'), match.func),
       'single user GET endpoint is registered'
     );
-    setupTest.ok(
-      app.get.calledWith('/users', can('view-users'), match.func),
-      'all users GET endpoint is registered'
-    );
-  });
-
-  endpointTest.test('get all users handler', async handlerTest => {
-    handlerTest.beforeEach(() => {
-      getEndpoint(app, { getAllUsers });
-      handler = app.get.args.find(args => args[0] === '/users')[2];
-    });
-
-    handlerTest.test('database error', async invalidTest => {
-      const err = { error: 'err0r' };
-      getAllUsers.rejects(err);
-      await handler({}, res, next);
-      invalidTest.ok(next.called, 'next is called');
-      invalidTest.ok(next.calledWith(err), 'pass error to middleware');
-    });
-
-    handlerTest.test('sends back a list of users', async validTest => {
-      getAllUsers.resolves([{ userInfo: 'these are all the users' }]);
-
-      await handler({}, res);
-
-      validTest.ok(res.status.notCalled, 'HTTP status is not explicitly set');
-      validTest.ok(
-        res.json.calledWith([{ userInfo: 'these are all the users' }]),
-        'body is set to the list of users'
-      );
-    });
   });
 
   endpointTest.test('get single user handler', async handlerTest => {

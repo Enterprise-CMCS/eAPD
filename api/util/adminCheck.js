@@ -1,4 +1,8 @@
-import { combinedSchemas } from '@cms-eapd/common';
+import {
+  hitechCombinedSchema,
+  mmisCombinedSchema,
+  APD_TYPE
+} from '@cms-eapd/common';
 
 /**
  * Builds an error list for use in the frontend admin check panel
@@ -8,20 +12,28 @@ import { combinedSchemas } from '@cms-eapd/common';
 const buildErrorList = (validationResults, apdId, activityIndexes) => {
   const getActivitiesName = errorPath => {
     const subSectionNameDict = {
+      fundingSource: 'Activity Overview',
+      name: 'Activity Overview',
+      activityOverview: 'Activity Overview',
+      summary: 'Activity Overview',
+      description: 'Activity Overview',
+      standardsAndConditions: 'Activity Overview',
+      updateStatus: 'Activity Overview',
+      isUpdateAPD: 'Activity Overview',
+      annualUpdate: 'Activity Overview',
+      asNeededUpdate: 'Activity Overview',
+      activitySchedule: 'Activity Schedule',
+      plannedStartDate: 'Activity Schedule',
+      plannedEndDate: 'Activity Schedule',
+      analysisOfAlternativesAndRisks: 'Analysis of Alternatives and Risks',
+      conditionsForEnhancedFunding: 'Conditions for Enhanced Funding',
+      milestones: 'Outcomes and Milestones',
+      outcomes: 'Outcomes and Milestones',
+      statePersonnel: 'State Staff and Expenses',
+      expenses: 'State Staff and Expenses',
       contractorResources: 'Private Contractor Costs',
       costAllocation: 'Cost Allocation',
-      costAllocationNarrative: 'Cost Allocation',
-      description: 'Activity Overview',
-      name: 'Activity Overview',
-      fundingSource: 'Activity Overview',
-      expenses: 'State Staff and Expenses',
-      outcomes: 'Outcomes and Milestones',
-      plannedEndDate: 'Activity Schedule',
-      plannedStartDate: 'Activity Schedule',
-      schedule: 'Outcomes and Milestones',
-      standardsAndConditions: 'Activity Overview',
-      statePersonnel: 'State Staff and Expenses',
-      summary: 'Activity Overview'
+      costAllocationNarrative: 'Cost Allocation'
     };
 
     if (typeof errorPath[1] === 'undefined') {
@@ -43,7 +55,7 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
       return `Activity ${activityIndexes[errorPath[2]] + 1} Budget and FFP`;
     }
     // Edge case #2: The costAllocation section of the apd data structure
-    // is used on two pages of the app. This handles mapping fpp to the
+    // is used on two pages of the app. This handles mapping ffp to the
     // Budget and FFP page instead of the Cost Allocation and Other Funding page
     if (
       ['activities', 'costAllocation', 'ffp'].every(val =>
@@ -60,9 +72,11 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
     const sectionNameDict = {
       apdOverview: 'APD Overview',
       keyStatePersonnel: 'Key State Personnel',
+      statePrioritiesAndScope: 'State Priorities and Scope',
       previousActivities: 'Previous Activities',
       activities: getActivitiesName(errorPath),
       proposedBudget: 'Proposed Budget',
+      securityPlanning: 'Security Planning',
       assurancesAndCompliances: 'Assurances and Compliance',
       budget: getActivitiesName(errorPath)
     };
@@ -72,20 +86,24 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
 
   const getActivitiesURLPath = errorPath => {
     const subSectionURLPath = {
+      fundingSource: 'overview',
+      name: 'overview',
+      activityOverview: 'overview',
+      description: 'overview',
+      summary: 'overview',
+      standardsAndConditions: 'overview',
+      activitySchedule: 'schedule-and-milestones',
+      plannedStartDate: 'overview',
+      plannedEndDate: 'overview',
+      analysisOfAlternativesAndRisks: 'alternatives-risks',
+      conditionsForEnhancedFunding: 'enhanced-funding',
+      milestones: 'oms',
+      outcomes: 'oms',
+      statePersonnel: 'state-costs',
+      expenses: 'state-costs',
       contractorResources: 'contractor-costs',
       costAllocation: 'cost-allocation',
-      costAllocationNarrative: 'cost-allocation',
-      description: 'overview',
-      expenses: 'state-costs',
-      outcomes: 'oms',
-      plannedEndDate: 'overview',
-      plannedStartDate: 'overview',
-      name: 'overview',
-      fundingSource: 'overview',
-      schedule: 'oms',
-      standardsAndConditions: 'overview',
-      statePersonnel: 'state-costs',
-      summary: 'overview'
+      costAllocationNarrative: 'cost-allocation'
     };
 
     if (typeof errorPath[1] === 'undefined') {
@@ -99,9 +117,11 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
     const sectionURLPath = {
       apdOverview: 'apd-overview',
       keyStatePersonnel: 'state-profile',
+      statePrioritiesAndScope: 'priorities-scope',
       previousActivities: 'previous-activities',
       activities: getActivitiesURLPath(errorPath),
       proposedBudget: 'proposed-budget',
+      securityPlanning: 'security-planning',
       assurancesAndCompliances: 'assurances-and-compliance'
     };
 
@@ -149,11 +169,11 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
 };
 
 /**
- * Manually check for validation errors
- * @param {Object} apd The full APD
+ * Manually check for HITECH validation errors
+ * @param {Object} apd The full HITECH  APD
  * @returns an array of errors with section name, url, message
  */
-const getManualValidations = apd => {
+const getManualHitechValidations = apd => {
   /*
    *  {
    *    message: 'Blah blah blah'
@@ -186,18 +206,39 @@ const getManualValidations = apd => {
 };
 
 /**
+ * Manually check for MMIS validation errors
+ * @param {Object} apd The full MMIS APD
+ * @returns an array of errors with section name, url, message
+ */
+const getManualMmisValidations = apd => {
+  /*
+   *  {
+   *    message: 'Blah blah blah'
+   *    path: [ 'activities', 0, 'costAllocation', 'years', '2022', 'other' ],
+   *  }
+   */
+
+  const results = [];
+  if (apd) {
+    // do something
+  }
+  return results;
+};
+
+/**
  * Validates entire APD object using a combined schema. Schemas
  * are shared with the frontend to support inline field-level validation
  * @param {Object} apd The full apd
  * @returns an array of validation errors
- * }
  */
-const adminCheckApd = apd => {
+const adminCheckHitechApd = apd => {
   // apdOverview Schema relies on knowing the funding source(s)
-  // to do a conditional validation
-  const getFundingSources = apd?.activities?.map(activity => {
-    return activity.fundingSource;
-  });
+  // to do a conditional validation.
+  const getFundingSources = apd?.activities
+    ?.map(activity => {
+      return activity.fundingSource;
+    })
+    .filter(values => values !== null); // when activities are added the type is initially null
 
   const activityIndexes = {};
   apd?.activities?.forEach((activity, index) => {
@@ -214,16 +255,48 @@ const adminCheckApd = apd => {
   };
 
   const { error: { details: schemaValidation = [] } = {} } =
-    combinedSchemas.validate(modifiedApd, {
+    hitechCombinedSchema.validate(modifiedApd, {
       abortEarly: false
     });
 
-  const manualValidations = getManualValidations(apd);
-
+  const manualValidations = getManualHitechValidations(apd);
   const validationResults = [...schemaValidation, ...manualValidations];
-
   const errorList = buildErrorList(validationResults, apd._id, activityIndexes); // eslint-disable-line no-underscore-dangle
   return errorList;
+};
+
+const adminCheckMmisApd = apd => {
+  const activityIndexes = {};
+  apd?.activities?.forEach((activity, index) => {
+    activityIndexes[activity.activityId] = index;
+  });
+
+  const { error: { details: schemaValidation = [] } = {} } =
+    mmisCombinedSchema.validate(apd, {
+      abortEarly: false
+    });
+
+  const manualValidations = getManualMmisValidations(apd);
+
+  const validationResults = [...schemaValidation, ...manualValidations];
+  const errorList = buildErrorList(validationResults, apd._id, activityIndexes); // eslint-disable-line no-underscore-dangle
+  return errorList;
+};
+
+const adminCheckApd = apd => {
+  switch (apd.apdType) {
+    case APD_TYPE.HITECH:
+      return adminCheckHitechApd(apd);
+    case APD_TYPE.MMIS:
+      return adminCheckMmisApd(apd);
+    default:
+      return [
+        {
+          message: 'APD Type is invalid.',
+          path: ['apdType']
+        }
+      ];
+  }
 };
 
 export default adminCheckApd;

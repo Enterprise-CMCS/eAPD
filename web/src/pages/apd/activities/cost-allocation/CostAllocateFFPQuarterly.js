@@ -17,7 +17,7 @@ import { makeSelectCostAllocateFFPBudget } from '../../../../redux/selectors/act
 import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import { formatPerc } from '../../../../util/formats';
 
-import { costAllocateFFPQuarterly as schema } from '@cms-eapd/common';
+import { quarterFFPSchema as schema } from '@cms-eapd/common';
 
 const QUARTERS = [1, 2, 3, 4];
 const EXPENSE_NAME_DISPLAY = {
@@ -158,7 +158,9 @@ const CostAllocateFFPQuarterly = ({
                         onChange={setInHouse(q)}
                         onBlur={onBlur}
                         round
-                        value={quarterlyFFP[year][q].inHouse.percent * 100}
+                        value={(
+                          quarterlyFFP[year][q].inHouse.percent * 100
+                        ).toFixed(0)}
                       />
                     )}
                   />
@@ -220,7 +222,9 @@ const CostAllocateFFPQuarterly = ({
                         onChange={setContractor(q)}
                         onBlur={onBlur}
                         round
-                        value={quarterlyFFP[year][q].contractors.percent * 100}
+                        value={(
+                          quarterlyFFP[year][q].contractors.percent * 100
+                        ).toFixed(0)}
                       />
                     )}
                   />

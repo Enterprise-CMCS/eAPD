@@ -1,5 +1,5 @@
 import {
-  defaultBudgetObject,
+  defaultHITECHBudgetObject,
   sumActivityTotalByCategories,
   sumActivityTotals,
   sumCostsForFundingSourceByCategory,
@@ -2276,7 +2276,7 @@ describe('budget summing methods', () => {
         years: [2017, 2018, 2019]
       };
       const actual = sumTotalCostsByCategory({
-        budget: defaultBudgetObject([2017, 2018, 2019]),
+        budget: defaultHITECHBudgetObject([2017, 2018, 2019]),
         activity: {
           id: 1,
           key: '1',

@@ -5,7 +5,6 @@ import oktaAuthMock from '../auth/oktaAuthMock.test.js';
 import knex from './knex.js';
 
 import {
-  getAllUsers,
   getUserByID,
   populateUserRole,
   sanitizeUser,
@@ -330,30 +329,6 @@ tap.test('database wrappers / users', async usersTests => {
       });
       test.ok(getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'exp'));
       test.ok(updateAuthAffiliation.calledOnce);
-    });
-  });
-
-  usersTests.test('getting all users', async getAllUsersTests => {
-    getAllUsersTests.beforeEach(async () => {
-      client.listUsers.resolves([1, 2, 3]);
-    });
-
-    getAllUsersTests.test('with cleaned output', async test => {
-      const users = await getAllUsers({ client, populate });
-
-      test.ok(populate.calledWith(1));
-      test.ok(populate.calledWith(2));
-      test.ok(populate.calledWith(3));
-      test.same(users, [sanitizedUser, sanitizedUser, sanitizedUser]);
-    });
-
-    getAllUsersTests.test('with uncleaned output', async test => {
-      const users = await getAllUsers({ clean: false, client, populate });
-
-      test.ok(populate.calledWith(1));
-      test.ok(populate.calledWith(2));
-      test.ok(populate.calledWith(3));
-      test.same(users, [unsanitizedUser, unsanitizedUser, unsanitizedUser]);
     });
   });
 

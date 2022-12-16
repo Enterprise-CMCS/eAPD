@@ -16,9 +16,8 @@ import Instruction from '../../../../components/Instruction';
 import { Subsection } from '../../../../components/Section';
 import { NameAndFundingSourceForm } from './NameAndFundingSource/';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
-import Schedule from './Schedule';
 
-import { activityOverview as schema } from '@cms-eapd/common';
+import { hitechActivityOverviewNoSCSchema as schema } from '@cms-eapd/common';
 
 const ActivityOverview = ({
   activity,
@@ -30,7 +29,8 @@ const ActivityOverview = ({
 }) => {
   ActivityOverview.displayName = 'ActivityOverview';
 
-  const { alternatives, description, summary } = activity;
+  const { activityOverview: { alternatives, description, summary } = {} } =
+    activity;
 
   const {
     control,
@@ -162,8 +162,6 @@ const ActivityOverview = ({
           )}
         />
       </div>
-
-      <Schedule activityIndex={activityIndex} />
 
       <div className="data-entry-box">
         <FormLabel

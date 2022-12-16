@@ -24,7 +24,7 @@ import {
 import { selectState } from '../../../redux/reducers/user';
 import { STATES } from '../../../util';
 
-import keyMedicaidSchema from '../../../../../common/schemas/keyMedicaid';
+import { keyPersonnelSchema as schema } from '@cms-eapd/common';
 
 const dirTRoot = 'apd.stateProfile.directorAndAddress.director';
 const offTRoot = 'apd.stateProfile.directorAndAddress.address';
@@ -63,7 +63,7 @@ const ApdStateProfile = ({
         zip: medicaidOffice.zip
       }
     },
-    resolver: joiResolver(keyMedicaidSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

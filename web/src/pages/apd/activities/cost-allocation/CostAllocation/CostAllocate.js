@@ -11,7 +11,7 @@ import { selectActivityByIndex } from '../../../../../redux/selectors/activities
 import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
 import { Subsection } from '../../../../../components/Section';
 
-import { costAllocation as schema } from '@cms-eapd/common';
+import { costAllocationNarrativeSchema as schema } from '@cms-eapd/common';
 
 const CostAllocate = ({
   activity,

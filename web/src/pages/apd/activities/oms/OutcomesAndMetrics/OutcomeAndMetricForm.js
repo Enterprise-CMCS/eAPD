@@ -130,6 +130,7 @@ const OutcomeAndMetricForm = forwardRef(
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <Controller
           key={`activity${activityIndex}-index${index}`}
@@ -223,6 +224,7 @@ const OutcomeAndMetricForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );

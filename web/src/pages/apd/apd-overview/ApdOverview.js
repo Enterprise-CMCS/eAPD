@@ -7,7 +7,7 @@ import DeleteModal from '../../../components/DeleteModal';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { apdOverview as schema } from '@cms-eapd/common';
+import { hitechOverviewSchema as schema } from '@cms-eapd/common';
 
 import {
   addYear,

@@ -19,7 +19,7 @@ const mockVerifier = sandbox.stub();
 const JWT_SECRET = process.env.JWT_SECRET || 'SOME_SECRET_VALUE_SHHHHH';
 process.env.JWT_SECRET = JWT_SECRET;
 
-tap.test('Okta jwtUtils', async t => {
+tap.test('Okta jwtUtils', { timeout: 300000 }, async t => {
   t.afterEach(async () => {
     sandbox.resetBehavior();
     sandbox.resetHistory();

@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-const shareByCostType = new mongoose.Schema(
+export const discriminatorOptions = { discriminatorKey: 'type' };
+
+export const shareByCostType = new mongoose.Schema(
   {
     inHouse: Number,
     contractors: Number,
@@ -9,7 +11,7 @@ const shareByCostType = new mongoose.Schema(
   { _id: false }
 );
 
-const shareByCostTypeByQuarter = new mongoose.Schema(
+export const shareByCostTypeByQuarter = new mongoose.Schema(
   {
     1: shareByCostType,
     2: shareByCostType,
@@ -20,7 +22,7 @@ const shareByCostTypeByQuarter = new mongoose.Schema(
   { _id: false }
 );
 
-const fedStateSplit = new mongoose.Schema(
+export const fedStateSplit = new mongoose.Schema(
   {
     total: Number,
     federal: Number,
@@ -30,7 +32,7 @@ const fedStateSplit = new mongoose.Schema(
   { _id: false }
 );
 
-const fedStateSplitByCost = new mongoose.Schema(
+export const fedStateSplitByCost = new mongoose.Schema(
   {
     statePersonnel: {
       type: Map,
@@ -102,48 +104,6 @@ const budgetSchema = new mongoose.Schema({
       type: String
     }
   ],
-  federalShareByFFYQuarter: {
-    hitAndHie: {
-      years: {
-        type: Map,
-        of: shareByCostTypeByQuarter
-      },
-      total: shareByCostType
-    },
-    mmis: {
-      years: {
-        type: Map,
-        of: shareByCostTypeByQuarter
-      },
-      total: shareByCostType
-    }
-  },
-  hie: fedStateSplitByCost,
-  hit: fedStateSplitByCost,
-  mmis: fedStateSplitByCost,
-  hitAndHie: fedStateSplitByCost,
-  mmisByFFP: {
-    '90-10': {
-      type: Map,
-      of: fedStateSplit
-    },
-    '75-25': {
-      type: Map,
-      of: fedStateSplit
-    },
-    '50-50': {
-      type: Map,
-      of: fedStateSplit
-    },
-    '0-100': {
-      type: Map,
-      of: fedStateSplit
-    },
-    combined: {
-      type: Map,
-      of: fedStateSplit
-    }
-  },
   combined: {
     type: Map,
     of: fedStateSplit
@@ -195,6 +155,4 @@ const budgetSchema = new mongoose.Schema({
   }
 });
 
-const Budget = mongoose.model('Budget', budgetSchema);
-
-export default Budget;
+export default mongoose.model('Budget', budgetSchema);

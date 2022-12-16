@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { incentivePayments as schema } from '@cms-eapd/common';
+import { incentivePaymentsSchema as schema } from '@cms-eapd/common';
 
 import {
   setIncentiveEHCount,
@@ -43,7 +43,8 @@ const IncentivePayments = ({
     clearErrors
   } = useForm({
     defaultValues: {
-      data
+      ehAmt: data.ehAmt,
+      epAmt: data.epAmt
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -125,7 +126,7 @@ const IncentivePayments = ({
                         <Dollars>{data.ehAmt[year][q] || ''}</Dollars>
                       ) : (
                         <Controller
-                          name={`data.ehAmt.${year}.${q}`}
+                          name={`ehAmt.${year}.${q}`}
                           control={control}
                           render={({ field: { onChange, name, ...props } }) => (
                             <DollarField
@@ -209,7 +210,7 @@ const IncentivePayments = ({
                         <Dollars>{data.epAmt[year][q] || '0'}</Dollars>
                       ) : (
                         <Controller
-                          name={`data.epAmt.${year}.${q}`}
+                          name={`epAmt.${year}.${q}`}
                           control={control}
                           render={({ field: { onChange, name, ...props } }) => (
                             <DollarField
@@ -286,7 +287,7 @@ const IncentivePayments = ({
         </Fragment>
       ))}
       <div>
-        {errors?.data && (
+        {(errors?.ehAmt || errors?.epAmt) && (
           <span
             className="ds-u-margin-top--2 ds-u-font-size--sm ds-u-font-weight--bold ds-c-inline-error ds-c-field__error-message"
             role="alert"

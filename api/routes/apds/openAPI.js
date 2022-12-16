@@ -48,7 +48,12 @@ const openAPI = {
       responses: {
         200: {
           description: 'The new APD',
-          content: jsonResponse({ $ref: '#/components/schemas/apd' })
+          content: jsonResponse({
+            oneOf: [
+              { $ref: '#/components/schemas/hitech' },
+              { $ref: '#/components/schemas/mmis' }
+            ]
+          })
         }
       }
     }
@@ -73,9 +78,12 @@ const openAPI = {
       ],
       responses: {
         200: {
-          description: 'The APD, budget, and adminCheck',
+          description: 'The APD',
           content: jsonResponse({
-            $ref: '#/components/schemas/singleApd'
+            oneOf: [
+              { $ref: '#/components/schemas/hitech' },
+              { $ref: '#/components/schemas/mmis' }
+            ]
           })
         },
         403: {
@@ -133,34 +141,42 @@ const openAPI = {
         200: {
           description: 'The update was successful',
           content: jsonResponse({
-            $ref: '#/components/schemas/singleApd'
+            type: 'object',
+            properties: {
+              apd: {
+                oneOf: [
+                  { $ref: '#/components/schemas/hitech' },
+                  { $ref: '#/components/schemas/mmis' }
+                ]
+              },
+              budget: {
+                oneOf: [
+                  { $ref: '#/components/schemas/hitechBudget' },
+                  { $ref: '#/components/schemas/mmisBudget' }
+                ]
+              },
+              adminCheck: {
+                $ref: '#/components/schemas/adminCheck'
+              }
+            }
           })
         },
         400: {
           description: 'The update failed due to a problem with the input data',
-          content: jsonResponse({
-            oneOf: [
-              {
-                ...arrayOf({
-                  type: 'object',
+          content: jsonResponse(
+            arrayOf({
+              type: 'object',
+              description:
+                'If the requested patch caused a validation failure, the API will return a list of invalid paths',
+              properties: {
+                path: {
+                  type: 'string',
                   description:
-                    'If the requested patch caused a validation failure, the API will return a list of invalid paths',
-                  properties: {
-                    path: {
-                      type: 'string',
-                      description:
-                        'A JSON Pointer path whose patched value is invalid'
-                    }
-                  }
-                })
-              },
-              {
-                type: 'null',
-                description:
-                  'If the requested patch failed for unknown reasons, nothing will be returned'
+                    'A JSON Pointer path whose patched value is invalid'
+                }
               }
-            ]
-          })
+            })
+          )
         },
         403: {
           description: 'The apd ID does not match any known apds for the user'

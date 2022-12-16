@@ -2,7 +2,7 @@ import tap from 'tap';
 import { spy, match } from 'sinon';
 import endpointIndex from './index.js';
 
-tap.test('endpoint setup', async endpointTest => {
+tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
   const app = {
     get: spy(),
     use: spy()

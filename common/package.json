@@ -7,25 +7,25 @@
   "scripts": {
     "lint": "eslint '**/*.js'",
     "stryker": "TZ=utc stryker run",
-    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest",
+    "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch",
     "npm-check": "npx npm-check-updates"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CMSgov/eAPD.git"
+    "url": "git+https://github.com/Enterprise-CMCS/eAPD.git"
   },
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/CMSgov/eAPD/issues"
+    "url": "https://github.com/Enterprise-CMCS/eAPD/issues"
   },
-  "homepage": "https://github.com/CMSgov/eAPD#readme",
+  "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
     "node": "16.16.0"
   },
   "dependencies": {
     "@joi/date": "2.1.0",
-    "joi": "17.6.0"
+    "joi": "17.7.0"
   },
   "devDependencies": {
     "@stryker-mutator/core": "6.1.2",

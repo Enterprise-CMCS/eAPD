@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import { standardsAndConditions as schema } from '@cms-eapd/common';
+import { standardsAndConditionsSchema as schema } from '@cms-eapd/common';
 import {
   setActivityStandardAndConditionDoesNotSupportExplanation,
   setActivityStandardAndConditionSupportExplanation
@@ -25,8 +25,11 @@ const StandardsAndConditions = ({
 }) => {
   StandardsAndConditions.displayName = 'StandardsAndConditions';
 
-  const { doesNotSupport = '', supports = '' } =
-    activity.standardsAndConditions;
+  const {
+    activityOverview: {
+      standardsAndConditions: { doesNotSupport = '', supports = '' } = {}
+    } = {}
+  } = activity;
 
   const {
     control,
@@ -96,7 +99,9 @@ const StandardsAndConditions = ({
       <div className="ds-c-choice__checkedChild ds-u-margin-top--3">
         <TextArea
           name="doesNotSupport"
-          value={activity.standardsAndConditions.doesNotSupport}
+          value={
+            activity?.activityOverview?.standardsAndConditions?.doesNotSupport
+          }
           label="If this activity does not support the Medicaid standards and conditions, please explain."
           id="activity-set-standards-and-conditions-non-support"
           onChange={({ target: { value } }) => {

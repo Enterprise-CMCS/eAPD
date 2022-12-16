@@ -1,4 +1,7 @@
+import { APD_TYPE } from '@cms-eapd/common';
+
 export default {
+  apdType: APD_TYPE.HITECH,
   name: 'MN-1921-07-11-HITECH-APD',
   years: ['2022', '2023'],
   apdOverview: {
