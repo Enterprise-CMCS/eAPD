@@ -1,8 +1,8 @@
 const mmis = {
   apdType: 'MMIS',
   name: 'MMIS IAPD',
-  years: ['2023', '2024'],
-  yearOptions: ['2023', '2024', '2025'],
+  years: ['2022', '2023'],
+  yearOptions: ['2022', '2023', '2024'],
   apdOverview: {
     updateStatus: {
       isUpdateAPD: false,
@@ -51,8 +51,8 @@ const mmis = {
         hasCosts: true,
         costs: { 2022: 100000, 2023: 100000 },
         split: {
-          2023: { federal: 0, state: 0 },
-          2024: { federal: 0, state: 0 }
+          2022: { federal: 0, state: 0 },
+          2023: { federal: 0, state: 0 }
         }
       },
       {
@@ -64,8 +64,8 @@ const mmis = {
         hasCosts: false,
         costs: { 2022: 0, 2023: 0 },
         split: {
-          2023: { federal: 0, state: 0 },
-          2024: { federal: 0, state: 0 }
+          2022: { federal: 0, state: 0 },
+          2023: { federal: 0, state: 0 }
         }
       }
     ]

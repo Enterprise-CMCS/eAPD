@@ -31,7 +31,6 @@ const PersonForm = forwardRef(
     PersonForm.displayName = 'PersonForm';
     const { name, email, position, hasCosts, isPrimary, costs, split, fte } =
       JSON.parse(JSON.stringify({ ...item }));
-    console.log('Split', split);
     const {
       handleSubmit,
       control,
@@ -396,11 +395,10 @@ const PersonForm = forwardRef(
                                     hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share."
                                     // id={`apd-state-profile-pocemail${index}`}
                                     onChange={e => {
-                                      console.log('value', value);
                                       handleSplitChange(year, e);
                                     }}
                                     onBlur={() => {
-                                      trigger('split');
+                                      trigger(`split.${year}`);
                                     }}
                                     errorMessage={
                                       errors?.split &&

@@ -6,7 +6,7 @@ import Review from '../../../components/Review';
 const ApdStateKeyPerson = ({
   expand,
   index,
-  item: { costs, email, hasCosts, name, fte, position },
+  item: { costs, email, hasCosts, name, fte, position, split },
   onDeleteClick
 }) => {
   const primary = index === 0;
@@ -26,7 +26,11 @@ const ApdStateKeyPerson = ({
               <strong>FFY {year} Cost: </strong>
               <Dollars>{costs[year]}</Dollars> | <strong>FTE: </strong>
               {fte[year]} | <strong>Total: </strong>
-              <Dollars>{costs[year] * fte[year]}</Dollars>
+              <Dollars>{costs[year] * fte[year]} </Dollars> ({' '}
+              <Dollars>
+                {costs[year] * fte[year] * (split[year].federal / 100)})
+              </Dollars>{' '}
+              Federal Share )
             </div>
           ))
         ) : (

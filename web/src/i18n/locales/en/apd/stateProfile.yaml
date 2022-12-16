@@ -76,9 +76,8 @@ keyPersonnelMMIS:
         activities within this APD vs one single activity.
       - Staff whose responsibilities apply only to specific activities will be
         entered directly in each relevant activity.
-      - >-
-        Key personnel costs entered here are represented in the Proposed Budget,
-        at the FFP specified below.
+      - Key personnel costs entered here are represented in the <a
+        href="proposed-budget">Proposed Budget</a>, at the FFP specified below.
     helpText:
       'Examples: Project/Product Manager, Development Lead, Business Owner'
   contact: 'Contact #{{number}}'
