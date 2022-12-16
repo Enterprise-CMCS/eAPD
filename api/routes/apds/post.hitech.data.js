@@ -1,12 +1,6 @@
-const {
-  defaultAPDYearOptions,
-  forAllYears,
-  APD_TYPE
-} = require('@cms-eapd/common');
+const { forAllYears, APD_TYPE } = require('@cms-eapd/common');
 
-const getNewHitechApd = () => {
-  const yearOptions = defaultAPDYearOptions();
-
+const getNewHitechApd = (years, yearOptions) => {
   const regsGenerator = () => ({
     procurement: [
       { title: '42 CFR Part 495.348', checked: null, explanation: '' },
@@ -85,28 +79,34 @@ const getNewHitechApd = () => {
         statePersonnel: [],
         expenses: [],
         contractorResources: [],
-        costAllocation: forAllYears({
-          ffp: { federal: 0, state: 100 },
-          other: 0
-        }),
+        costAllocation: forAllYears(
+          {
+            ffp: { federal: 0, state: 100 },
+            other: 0
+          },
+          years
+        ),
         costAllocationNarrative: {
           methodology: '',
-          years: forAllYears({ otherSources: '' })
+          years: forAllYears({ otherSources: '' }, years)
         },
-        quarterlyFFP: forAllYears({
-          1: { contractors: 0, inHouse: 0 },
-          2: { contractors: 0, inHouse: 0 },
-          3: { contractors: 0, inHouse: 0 },
-          4: { contractors: 0, inHouse: 0 }
-        })
+        quarterlyFFP: forAllYears(
+          {
+            1: { contractors: 0, inHouse: 0 },
+            2: { contractors: 0, inHouse: 0 },
+            3: { contractors: 0, inHouse: 0 },
+            4: { contractors: 0, inHouse: 0 }
+          },
+          years
+        )
       }
     ],
     proposedBudget: {
       incentivePayments: {
-        ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-        ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-        epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }),
-        epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 })
+        ehAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }, years),
+        ehCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }, years),
+        epAmt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }, years),
+        epCt: forAllYears({ 1: 0, 2: 0, 3: 0, 4: 0 }, years)
       }
     },
     assurancesAndCompliances: regsGenerator()
