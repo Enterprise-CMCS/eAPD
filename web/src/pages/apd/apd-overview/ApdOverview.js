@@ -240,7 +240,7 @@ const ApdOverview = ({
         onBlur={onBlur}
         value={name}
       />
-      <div className="ds-u-margin-y--3">
+      <div className="ds-u-margin-y--3" data-cy="yearList">
         <ChoiceList
           choices={yearChoices}
           label={getLabelElement()}

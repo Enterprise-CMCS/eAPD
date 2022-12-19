@@ -176,13 +176,6 @@ describe('<ApdNew />', () => {
         expect(
           screen.getByRole('checkbox', { name: /2024/i })
         ).not.toBeChecked();
-
-        await user.click(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        );
-        expect(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        ).toBeChecked();
         expect(disabledBtn).toBeDisabled();
 
         user.click(
@@ -195,6 +188,24 @@ describe('<ApdNew />', () => {
             })
           ).toBeChecked();
         });
+        expect(disabledBtn).toBeDisabled();
+
+        await user.click(
+          screen.getByRole('checkbox', { name: /Claims Processing/i })
+        );
+        expect(
+          screen.getByRole('checkbox', { name: /Claims Processing/i })
+        ).toBeChecked();
+        expect(disabledBtn).toBeEnabled();
+
+        await user.click(screen.getByRole('checkbox', { name: /2023/i }));
+        expect(
+          screen.getByRole('checkbox', { name: /2023/i })
+        ).not.toBeChecked();
+        expect(disabledBtn).toBeDisabled();
+
+        await user.click(screen.getByRole('checkbox', { name: /2023/i }));
+        expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
 
         user.click(
           screen.getByRole('radio', { name: /Yes, it is an update./i })
@@ -218,18 +229,13 @@ describe('<ApdNew />', () => {
 
         await user.click(screen.getByRole('checkbox', { name: /Other/i }));
         expect(screen.getByRole('checkbox', { name: /Other/i })).toBeChecked();
+        expect(disabledBtn).toBeDisabled();
 
         const otherBox = screen.getByRole('textbox', {
           name: 'Other Medicaid Business Area(s) Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon.'
         });
 
         await user.type(otherBox, 'other');
-        await user.click(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        );
-        expect(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        ).not.toBeChecked();
         expect(disabledBtn).toBeEnabled();
       });
     });

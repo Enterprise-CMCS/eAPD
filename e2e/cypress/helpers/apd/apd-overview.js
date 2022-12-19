@@ -60,18 +60,22 @@ export const testAPDOverviewWithData = () => {
     cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
 
     const allYears = [];
-    cy.get("[class='ds-c-choice']").each(($el, index, list) => {
-      allYears.push(list[index].value);
-      if (!list[index].checked) {
-        cy.findByRole('checkbox', { name: list[index].value }).check({
-          force: true
-        });
-      } else {
-        years.push(list[index].value);
-      }
+
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get("[class='ds-c-choice']").each(($el, index, list) => {
+        allYears.push(list[index].value);
+        if (!list[index].checked) {
+          cy.findByRole('checkbox', { name: list[index].value }).check({
+            force: true
+          });
+        } else {
+          years.push(list[index].value);
+        }
+      });
     });
 
     cy.then(() => {
+      cy.log(JSON.stringify(allYears));
       cy.get('#apd-header-info').should('contain', allYears[0]);
       cy.get('#apd-header-info').should(
         'contain',

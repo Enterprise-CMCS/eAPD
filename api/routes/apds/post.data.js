@@ -1,23 +1,22 @@
 const {
-  defaultAPDYears,
   defaultAPDYearOptions,
+  defaultAPDYears,
   APD_TYPE
 } = require('@cms-eapd/common');
 const getNewHitechApd = require('./post.hitech.data');
 const getNewMmisApd = require('./post.mmis.data');
 
-const getNewApd = apdType => {
-  const years = defaultAPDYears();
+const getNewApd = (apdType, years = [...defaultAPDYears()]) => {
   const yearOptions = defaultAPDYearOptions();
 
   let specific = {};
   switch (apdType) {
     case APD_TYPE.HITECH: {
-      specific = getNewHitechApd();
+      specific = getNewHitechApd(years, yearOptions);
       break;
     }
     case APD_TYPE.MMIS: {
-      specific = getNewMmisApd();
+      specific = getNewMmisApd(years, yearOptions);
       break;
     }
     default:

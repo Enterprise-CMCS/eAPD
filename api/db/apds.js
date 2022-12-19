@@ -52,9 +52,8 @@ const createAPD = async apd => {
   const { apdType } = apd;
 
   const apdDoc = await getApdModel(apdType).create(apdJSON);
-  const newBudget = await getBudgetModel(apdType).create(
-    calculateBudget(apdDoc.toJSON())
-  );
+  const json = calculateBudget(apdDoc.toJSON());
+  const newBudget = await getBudgetModel(apdType).create(json);
   apdDoc.budget = newBudget;
   await apdDoc.save();
 

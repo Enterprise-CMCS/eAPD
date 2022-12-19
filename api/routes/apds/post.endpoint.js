@@ -1,3 +1,4 @@
+const { APD_TYPE } = require('@cms-eapd/common');
 const {
   getDB,
   setupDB,
@@ -23,7 +24,10 @@ describe('APD endpoint | POST /apds', () => {
 
   it('when authenticated as a user with permission', async () => {
     const api = login();
-    const response = await api.post(url);
+    const response = await api.post(url, {
+      apdType: APD_TYPE.MMIS
+    });
+    console.log(`response ${JSON.stringify(response.data, null, 2)}`);
 
     expect(response.status).toEqual(200);
 

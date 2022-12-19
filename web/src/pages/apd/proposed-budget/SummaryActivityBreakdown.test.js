@@ -137,7 +137,7 @@ const props = {
   fundingSource: 'HIE'
 };
 
-describe('Summary Activity Breakdown Table renders correctly', () => {
+describe('State and Contractor Cost Breakdown Table renders correctly', () => {
   it('renders correctly', () => {
     const component = shallow(<SummaryActivityBreakdownTable {...props} />);
     expect(component).toMatchSnapshot();
