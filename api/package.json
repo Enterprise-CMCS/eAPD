@@ -6,11 +6,15 @@
   "module": "dist/main.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "clean": "[ -d dist ] && (rm -rf dist/* && rm -rf dist) || echo \"doesn't exist, skipping clean\"",
-    "scaffold": "yarn clean && mkdir dist && cp package.json dist/",
+    "clean-db": "[ -d dist/db ] && (rm -rf dist/db/* && rm -rf dist/db) || echo \"dist/db doesn't exist, skipping\"",
+    "clean-migrations": "[ -d dist/migrations ] && (rm -rf dist/migrations/* && rm -rf dist/migrations) || echo \"dist/migrations doesn't exist, skipping\"",
+    "clean-dist": "[ -d dist ] && (rm -rf dist/* && rm -rf dist) || echo \"doesn't exist, skipping clean\"",
+    "clean": "yarn clean-db && yarn clean-migrations && yarn clean-dist",
+    "scaffold": "yarn clean && mkdir dist && cp package.json dist/ && cp -r test-data dist/",
     "build": "yarn workspace @cms-eapd/common build && yarn scaffold && babel . -d ./dist -s --ignore \"node_modules/!(file-type|@cms-eapd/common)/**\",\"dist\",\"coverage-endpoint\"",
     "start": "yarn build && node dist/main.js",
     "start-dev": "yarn workspace @cms-eapd/common build && NODE_ENV=development nodemon --inspect=0.0.0.0 --exec babel-node ./main.js -e js",
+    "start-test-server": "./test-server-setup.sh",
     "npm-check": "npx npm-check-updates",
     "knex": "babel-node node_modules/.bin/knex",
     "knex-console": "node --experimental-repl-await knexrepl.js",
@@ -35,13 +39,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CMSgov/eAPD.git"
+    "url": "git+https://github.com/Enterprise-CMCS/eAPD.git"
   },
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/CMSgov/eAPD/issues"
+    "url": "https://github.com/Enterprise-CMCS/eAPD/issues"
   },
-  "homepage": "https://github.com/CMSgov/eAPD#readme",
+  "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
     "node": "16.16.0"
   },
@@ -110,8 +114,8 @@
       "/dist/",
       "/coverage-endpoint/"
     ],
-    "globalSetup": "./jest.setup.js",
-    "globalTeardown": "./jest.teardown.js",
+    "globalSetup": "<rootDir>/jest.setup.js",
+    "globalTeardown": "<rootDir>/jest.teardown.js",
     "testRegex": ".*.endpoint.(j|t)s[x]?$",
     "testEnvironment": "node",
     "testTimeout": 30000,
