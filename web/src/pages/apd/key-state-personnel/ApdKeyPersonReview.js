@@ -40,7 +40,7 @@ const ApdStateKeyPerson = ({
         )}
       </div>
     ),
-    [hasCosts, costs, fte]
+    [hasCosts, costs, fte, split]
   );
 
   return (
@@ -84,7 +84,8 @@ ApdStateKeyPerson.propTypes = {
     hasCosts: PropTypes.bool,
     name: PropTypes.string.isRequired,
     fte: PropTypes.object.isRequired,
-    position: PropTypes.string.isRequired
+    position: PropTypes.string.isRequired,
+    split: PropTypes.string.isRequired
   }).isRequired,
   onDeleteClick: PropTypes.func
 };

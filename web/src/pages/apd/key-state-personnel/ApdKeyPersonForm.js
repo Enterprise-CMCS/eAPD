@@ -37,7 +37,6 @@ const PersonForm = forwardRef(
       trigger,
       formState: { errors, isValid },
       setValue,
-      getValues,
       resetField: resetFieldErrors
     } = useForm({
       defaultValues: {
@@ -373,9 +372,7 @@ const PersonForm = forwardRef(
                                 key={`${year}-split`}
                                 name={`split.${year}`}
                                 control={control}
-                                render={({
-                                  field: { onChange, onBlur, value, ...props }
-                                }) => (
+                                render={({ field: { value, ...props } }) => (
                                   <ChoiceList
                                     {...props}
                                     choices={[
