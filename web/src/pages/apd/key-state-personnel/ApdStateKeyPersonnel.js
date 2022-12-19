@@ -7,13 +7,12 @@ import ApdKeyPersonReview from './ApdKeyPersonReview';
 import FormAndReviewList from '../../../components/FormAndReviewList';
 import {
   selectApdYears,
-  selectKeyPersonnel
+  selectKeyPersonnel,
+  selectApdType
 } from '../../../redux/selectors/apd.selectors';
 
 import { removeKeyPersonnel } from '../../../redux/actions/editApd';
 import { getKeyPersonnel } from '../../../redux/reducers/apd';
-
-import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
 const ApdStateKeyPersonnel = ({ remove, list, years, apdType }) => {
   const [localList, setLocalList] = useState(list);
