@@ -1,12 +1,6 @@
-const {
-  defaultAPDYearOptions,
-  forAllYears,
-  APD_TYPE
-} = require('@cms-eapd/common');
+const { forAllYears, APD_TYPE } = require('@cms-eapd/common');
 
-const getNewMmisApd = () => {
-  const yearOptions = defaultAPDYearOptions();
-
+const getNewMmisApd = (years, yearOptions) => {
   const regsGenerator = () => ({
     procurement: [
       { title: 'SSM, Part 11', checked: null, explanation: '' },
@@ -37,7 +31,7 @@ const getNewMmisApd = () => {
   });
 
   return {
-    apdType: APD_TYPE.HITECH,
+    apdType: APD_TYPE.MMIS,
     name: 'MMIS IAPD',
     apdOverview: {},
     statePrioritiesAndScope: {
