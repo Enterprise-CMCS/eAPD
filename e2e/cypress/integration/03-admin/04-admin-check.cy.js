@@ -6,28 +6,18 @@ describe('tests state admin portal', () => {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     cy.useRegularUser();
+    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.reload();
 
-    cy.findByRole('button', { name: /Create new/i }).click();
-    cy.findByRole(
-      'heading',
-      { name: /APD Overview/i },
-      { timeout: 100000 }
-    ).should('exist');
-    cy.location('pathname').then(pathname => {
-      apdUrl = pathname.replace('/apd-overview', '');
-      cy.log({ apdUrl });
-      apdId = apdUrl.split('/').pop();
-      cy.log({ apdId });
-    });
+    cy.findByRole('link', { name: /Create new/i }).click();
+
+    cy.findByLabelText('APD Name').clear().type('APD Overview').blur();
+    cy.findByRole('checkbox', { name: /Annual Update/i }).click();
+    cy.findByRole('button', { name: /Create an APD/i }).click();
 
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
       years.push(list[index].value)
     );
-  });
-
-  beforeEach(() => {
-    cy.updateFeatureFlags({ validation: false });
-    cy.visit(apdUrl);
   });
 
   after(() => {
