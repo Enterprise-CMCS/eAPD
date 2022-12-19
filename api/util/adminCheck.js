@@ -260,9 +260,7 @@ const adminCheckHitechApd = apd => {
     });
 
   const manualValidations = getManualHitechValidations(apd);
-
   const validationResults = [...schemaValidation, ...manualValidations];
-
   const errorList = buildErrorList(validationResults, apd._id, activityIndexes); // eslint-disable-line no-underscore-dangle
   return errorList;
 };

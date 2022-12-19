@@ -1,5 +1,5 @@
-[![Build status](https://img.shields.io/circleci/project/github/CMSgov/eAPD.svg)](https://circleci.com/gh/CMSgov/workflows/eAPD)
-[![Test coverage](https://img.shields.io/codecov/c/github/CMSgov/eAPD.svg)](https://codecov.io/gh/CMSgov/eAPD)
+[![Build status](https://img.shields.io/circleci/project/github/Enterprise-CMCS/eAPD.svg)](https://circleci.com/gh/Enterprise-CMCS/workflows/eAPD)
+[![Test coverage](https://img.shields.io/codecov/c/github/Enterprise-CMCS/eAPD.svg)](https://codecov.io/gh/Enterprise-CMCS/eAPD)
 ![Node.js >= 16.16.0](https://img.shields.io/badge/node-%3E%3D%2016.16.0-brightgreen.svg)
 
 # CMS eAPD app
@@ -29,17 +29,18 @@ have your SSH keys configured, you'll clone from the SSH link. You can find the
 link by clicking the green "Clone or download" button above the file listing on
 this page.
 
-The HTTPS link is https://github.com/CMSgov/eAPD.git
+The HTTPS link is https://github.com/Enterprise-CMCS/eAPD.git
 
 If you're familiar with git and just want to work from the command line, you
 just need to run:
 
 ```shell
-git clone https://github.com/CMSgov/eAPD.git
+git clone https://github.com/Enterprise-CMCS/eAPD.git
 ```
 
 If you can't use git for some reason, you can also download the most recent code
-as [a ZIP file](https://github.com/CMSgov/eAPD/archive/refs/heads/main.zip).
+as
+[a ZIP file](https://github.com/Enterprise-CMCS/eAPD/archive/refs/heads/main.zip).
 
 ### Setting up environment variables
 
@@ -84,9 +85,9 @@ We recommend using [Docker](https://www.docker.com) to run the app locally. We
 provide a Docker configuration that will quickly install and build everything
 you need, so don't have to. It'll also take care of getting everything running
 and connected. For more details,
-[see our wiki](https://github.com/CMSgov/eAPD/wiki/Development-Environment#docker).
+[see our wiki](https://github.com/Enterprise-CMCS/eAPD/wiki/Development-Environment#docker).
 If you don't have or can't use Docker, you can also run everything
-[manually](https://github.com/CMSgov/eAPD/wiki/Development-Environment#manually).
+[manually](https://github.com/Enterprise-CMCS/eAPD/wiki/Development-Environment#manually).
 
 From your command line, switch to the directory where you put the code and then
 run `docker-compose up`. This step could take a few minutes. Once it's finished,
@@ -105,17 +106,17 @@ admin. The rest have roles that match their usernames. This is handled in the
 seed and does not need to be set in Okta.
 
 See the
-[testing documentation](https://github.com/CMSgov/eAPD/wiki/Development-accessibility%2C-testing%2C-and-linting#testing)
+[testing documentation](https://github.com/Enterprise-CMCS/eAPD/wiki/Development-accessibility%2C-testing%2C-and-linting#testing)
 for information about running tests.
 
 ### More technical documentation
 
 Check out the
-[developer documentation](https://github.com/CMSgov/eAPD/wiki/Development-index)
+[developer documentation](https://github.com/Enterprise-CMCS/eAPD/wiki/Development-index)
 for a deeper dive into how the app works.
 
 Check out
-[our troubleshooting guide](https://github.com/CMSgov/eAPD/wiki/Troubleshooting-Development-Environment)
+[our troubleshooting guide](https://github.com/Enterprise-CMCS/eAPD/wiki/Troubleshooting-Development-Environment)
 if you run into any difficulties.
 
 ## Contributing
