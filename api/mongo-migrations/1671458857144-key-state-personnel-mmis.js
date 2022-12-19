@@ -27,7 +27,15 @@ async function up() {
             keyPersonnel => ({
               ...keyPersonnel,
               split: years.reduce(
-                (ac, year) => ({ ...ac, [year]: { federal: 90, state: 10 } }),
+                /**
+                 * Iterate over each year and return an object with the year as the key
+                 * So if years is ['2022', '2023'] the resulting object will look like this:
+                 * {
+                 *   '2022': { federal: 90, state: 10 }
+                 *   '2023': { federal: 90, state: 10 }
+                 * }
+                 */
+                (acc, year) => ({ ...acc, [year]: { federal: 90, state: 10 } }),
                 {}
               )
             })
