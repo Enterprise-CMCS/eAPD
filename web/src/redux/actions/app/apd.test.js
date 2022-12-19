@@ -54,6 +54,7 @@ describe('application-level actions', () => {
       fetchMock.onPost('/apds').reply(200, newapd);
 
       const data = {
+        adminCheck: [],
         apd: {
           id: 'apd-id',
           activities: [],
@@ -64,7 +65,10 @@ describe('application-level actions', () => {
 
       fetchMock.onGet('/apds/bloop').reply(200, data);
 
-      const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+      const pushRoute = route => ({
+        type: '@@router/CALL_HISTORY_METHOD',
+        pushRoute: route
+      });
       const state = {
         apd: {
           byId: {
@@ -86,7 +90,10 @@ describe('application-level actions', () => {
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
         { type: ADMIN_CHECK_TOGGLE, data: false },
         { type: LOAD_BUDGET, budget: {} },
-        { type: 'FAKE_PUSH', pushRoute: '/apd/bloop' },
+        {
+          type: '@@router/CALL_HISTORY_METHOD',
+          payload: { args: ['/apd/bloop'], method: 'push' }
+        },
         {
           type: ARIA_ANNOUNCE_CHANGE,
           message:
