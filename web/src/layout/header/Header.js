@@ -66,6 +66,7 @@ class Header extends Component {
     const { ariaExpanded } = this.state;
 
     const withinApd = pathname.startsWith('/apd');
+    const newApdPage = pathname.startsWith('/apd/new');
 
     const title = () => {
       if (!showSiteTitle && !authenticated) {
@@ -104,7 +105,9 @@ class Header extends Component {
             {authenticated && (
               <Fragment>
                 <div className="ds-l-col--12 ds-l-md-col--5">
-                  {!showSiteTitle && withinApd && <HeaderSaveMessage />}
+                  {!showSiteTitle && withinApd && !newApdPage && (
+                    <HeaderSaveMessage />
+                  )}
                 </div>
                 <div className="ds-l-col--12 ds-l-md-col--4">
                   <ul className="nav--dropdown">
