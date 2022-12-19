@@ -13,7 +13,36 @@ describe('MMMIS Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   describe('Create APD', () => {
-    it('creates an MMIS APD after Create New page', () => {
+    let apdUrl;
+    let apdId;
+
+    before(() => {
+      // Create a new MMIS APD
+      cy.findAllByText('Create new').click();
+      cy.findByText('MMIS IAPD').click();
+      cy.findByLabelText('APD Name').clear().type('MMIS APD Name!').blur();
+      cy.findByText('No, this is for a new project.').click();
+      cy.findByText('Program Integrity').click();
+      cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled').click();
+
+      cy.findByRole(
+        'heading',
+        { name: /APD Overview/i },
+        { timeout: 100000 }
+      ).should('exist');
+
+      cy.location('pathname').then(pathname => {
+        apdUrl = pathname.replace('/apd-overview', '');
+        apdId = apdUrl.split('/').pop();
+      });
+    });
+
+    beforeEach(() => {
+      cy.visit(apdUrl);
+    });
+
+    it('tests Create New page', () => {
+      cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
 
       cy.log('select MMIS APD type');
@@ -24,7 +53,7 @@ describe('MMMIS Basics', { tags: ['@apd', '@default'] }, () => {
       cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
 
       cy.log('add the APD name');
-      cy.findByLabelText('APD Name').clear().type('MMIS APD Name!').blur();
+      cy.findByLabelText('APD Name').clear().type('MMIS APD Test').blur();
 
       cy.log('change update type');
       cy.findByText('No, this is for a new project.').click();
@@ -46,7 +75,64 @@ describe('MMMIS Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.get(`[data-cy='other_details']`).type('This is other stuff.').blur();
 
-      cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled').click();
+      cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled');
+      cy.findByRole('button', { name: /Cancel/i }).click();
+
+      cy.contains('MMIS APD Test').should('not.exist');
+    });
+
+    it('tests the Security Planning page', () => {
+      cy.turnOnAdminCheck();
+      cy.checkAdminCheckHyperlinks(
+        'Security Planning',
+        'Security Planning',
+        LEVEL
+      );
+
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('Security Planning').should('exist');
+      });
+
+      cy.contains('Provide Security and Interface Plan').should('exist');
+      cy.get('[id="security-interface-plan"]').should('have.value', '');
+      cy.setTinyMceContent(
+        'security-interface-plan',
+        'This is the Security Interface plan'
+      );
+      cy.contains('Provide Security and Interface Plan').should('not.exist');
+
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'exist'
+      );
+      cy.get('[id="bc-dr-plan"]').should('have.value', '');
+      cy.setTinyMceContent(
+        'bc-dr-plan',
+        'This is the Business Continuity and Disaster Recovery plan'
+      );
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'not.exist'
+      );
+
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('Security Planning').should('not.exist');
+      });
+
+      cy.setTinyMceContent('security-interface-plan', '');
+      cy.contains('Provide Security and Interface Plan').should('exist');
+
+      cy.setTinyMceContent('bc-dr-plan', '');
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'exist'
+      );
+
+      cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
+        force: true
+      });
+
+      cy.contains('Provide Security and Interface Plan').should('not.exist');
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'not.exist'
+      );
     });
   });
 });
