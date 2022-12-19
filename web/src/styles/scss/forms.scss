@@ -199,3 +199,50 @@ div.form--computed-value__input-aligned {
   margin-left: 22px;
   padding-left: 18px;
 }
+
+.label-extended {
+  .ds-c-field__hint {
+    width: 640px;
+  }
+}
+
+.label-header {
+  font-size: 21px;
+
+  .ds-c-field__hint {
+    font-size: initial !important;
+  }
+}
+
+.apd_disabled_choice {
+  margin-top: 0;
+  width: 150px;
+
+  .ds-c-choice[type='radio']:checked {
+    border-color: #fff;
+  }
+
+  .ds-c-choice[type='radio']:checked::before {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-radius: 0;
+    border: solid;
+    border-color: #fff;
+    border-width: 0 0 4px 4px;
+    content: '';
+    grid-area: 1/-1;
+    height: 4px;
+    opacity: 1;
+    transform: rotate(-45deg) translateX(0.075em);
+    width: 10px;
+  }
+}
+
+.apd_type_choice-container {
+  display: flex;
+  flex-direction: row;
+
+  .tooltip-container {
+    margin-top: 9px;
+  }
+}
