@@ -27,7 +27,6 @@ describe('APD endpoint | POST /apds', () => {
     const response = await api.post(url, {
       apdType: APD_TYPE.MMIS
     });
-    console.log(`response ${JSON.stringify(response.data, null, 2)}`);
 
     expect(response.status).toEqual(200);
 

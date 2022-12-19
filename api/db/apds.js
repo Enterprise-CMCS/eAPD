@@ -5,6 +5,8 @@ const {
   hasBudgetUpdate,
   APD_TYPE
 } = require('@cms-eapd/common');
+
+const knex = require('./knex');
 const logger = require('../logger')('db/apds');
 const { updateStateProfile } = require('./states');
 const {
@@ -67,13 +69,77 @@ const getAllAPDsByState = async stateId =>
   APD.find(
     { stateId, status: 'draft' },
     '_id id createdAt updatedAt stateId status name years apdType'
-  ).lean({ virtuals: true });
+  )
+    .lean({ virtuals: true })
+    .sort({ updatedAt: 'desc' });
 
 const getAPDByID = async id =>
   APD.findById(id).populate('budget').lean({ virtuals: true });
 
-const getAPDByIDAndState = (id, stateId) =>
+const getAPDByIDAndState = async (id, stateId) =>
   APD.findOne({ _id: id, stateId }).populate('budget').lean({ virtuals: true });
+
+const getAllSubmittedAPDs = async () =>
+  APD.find({ status: 'submitted' }).populate('budget').lean({ virtuals: true });
+
+const processUpdate = (
+  updatedAt,
+  { apdId, newStatus: status = null, comment } = {},
+  { db = knex } = {}
+) =>
+  new Promise(resolve => {
+    const result = { apdId, success: false };
+    // check that the status has a value
+    if (!status || status === '') {
+      logger.error(`Error updating ${apdId} status: newStatus is missing`);
+      resolve({ ...result, error: 'newStatus missing' });
+    }
+    // check that the apdId is a valid APD
+    APD.findById(apdId)
+      .lean({ virtuals: true })
+      .then(found => {
+        if (!found) {
+          logger.error(
+            `Error updating ${apdId} status: No APD found for APD Id`
+          );
+          resolve({ ...result, error: 'No APD found for APD Id' });
+        }
+        // Insert the status update
+        db('apd_review_status')
+          .insert({
+            apd_id: apdId,
+            status,
+            comment,
+            updated_at: updatedAt
+          })
+          .returning(['apd_id', 'status'])
+          .then(([updated]) => {
+            logger.info(
+              `Success: updated ${updated.apd_id} status to ${updated.status}`
+            );
+            resolve({
+              apdId: updated.apd_id,
+              updatedStatus: updated.status,
+              success: true
+            });
+          })
+          .catch(error => {
+            // catch for inserting into the database
+            logger.error(`Error updating ${apdId} status: ${error}`);
+            resolve({ ...result, error });
+          });
+      })
+      .catch(() => {
+        // catch for APD look up
+        logger.error(`Error updating ${apdId} status: APD Id is invalid`);
+        resolve({ ...result, error: 'APD Id is invalid' });
+      });
+  });
+
+const updateAPDReviewStatus = async ({ updates = [] } = {}) => {
+  const updatedAt = new Date().toISOString();
+  return Promise.all(updates.map(update => processUpdate(updatedAt, update)));
+};
 
 // Apply the patches to the APD document
 const patchAPD = async ({ id, stateId, apdDoc, patch }) => {
@@ -215,6 +281,8 @@ module.exports = {
   getAllAPDsByState,
   getAPDByID,
   getAPDByIDAndState,
+  getAllSubmittedAPDs,
+  updateAPDReviewStatus,
   updateAPDDocument,
   adminCheckAPDDocument
 };

@@ -2091,7 +2091,7 @@ Object {
             "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase",
             "type": "string",
           },
-          "statePriortiesAndScope": Object {
+          "statePrioritiesAndScope": Object {
             "properties": Object {
               "medicaidProgramAndPriorities": Object {
                 "type": "string",
@@ -2492,6 +2492,11 @@ Object {
       },
     },
     "securitySchemes": Object {
+      "apiKeyAuth": Object {
+        "in": "header",
+        "name": "X-API-KEY",
+        "type": "apiKey",
+      },
       "bearerAuth": Object {
         "bearerFormat": "Bearer xxx.yyy.zzz",
         "scheme": "bearer",
@@ -2681,6 +2686,115 @@ Object {
         ],
       },
     },
+    "/apds/submissions": Object {
+      "get": Object {
+        "description": "Get a list of all APDs that have been submitted",
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "oneOf": Array [
+                    Object {
+                      "$ref": "#/components/schemas/hitech",
+                    },
+                    Object {
+                      "$ref": "#/components/schemas/mmis",
+                    },
+                  ],
+                },
+              },
+            },
+            "description": "The list of submitted APDs",
+          },
+          "403": Object {
+            "description": "Unauthenticated error",
+          },
+        },
+        "summary": "Get all of the APDs that have been submitted",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+      "patch": Object {
+        "description": "Update the APD status",
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "items": Object {
+                  "description": "A JSON status update object",
+                  "properties": Object {
+                    "apdId": Object {
+                      "description": "The APD ID",
+                      "type": "string",
+                    },
+                    "comment": Object {
+                      "description": "Comments about the status change",
+                      "type": "string",
+                    },
+                    "newStatus": Object {
+                      "description": "The new status of the APD",
+                      "enum": Array [
+                        "",
+                      ],
+                      "type": "string",
+                    },
+                  },
+                  "type": "object",
+                },
+                "type": "array",
+              },
+            },
+          },
+          "description": "Updates to the status of APDs that have been submitted",
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "items": Object {
+                    "properties": Object {
+                      "apdId": Object {
+                        "description": "the id of the APD updated",
+                        "type": "string",
+                      },
+                      "error": Object {
+                        "description": "error message describing unsuccessful updates",
+                        "type": "string",
+                      },
+                      "success": Object {
+                        "description": "whether the update was successful",
+                        "type": "boolean",
+                      },
+                      "updatedStatus": Object {
+                        "description": "the updated status for the APD",
+                        "type": "string",
+                      },
+                    },
+                    "type": "object",
+                  },
+                  "type": "array",
+                },
+              },
+            },
+            "description": "response description",
+          },
+          "400": Object {
+            "description": "Request body is invalid",
+          },
+          "403": Object {
+            "description": "Unauthenticated error",
+          },
+        },
+        "summary": "Update the APD status",
+        "tags": Array [
+          "APDs",
+        ],
+      },
+    },
     "/apds/{id}": Object {
       "delete": Object {
         "description": "Updates an APD's status to \\"archive\\" and prevents it from being edited",
@@ -2825,32 +2939,28 @@ Object {
               "application/json": Object {
                 "schema": Object {
                   "properties": Object {
-                    "adminCheck": Object {},
+                    "adminCheck": Object {
+                      "$ref": "#/components/schemas/adminCheck",
+                    },
                     "apd": Object {
-                      "properties": Object {
-                        "oneOf": Array [
-                          Object {
-                            "$ref": "#/components/schemas/hitech",
-                          },
-                          Object {
-                            "$ref": "#/components/schemas/mmis",
-                          },
-                        ],
-                      },
-                      "type": "object",
+                      "oneOf": Array [
+                        Object {
+                          "$ref": "#/components/schemas/hitech",
+                        },
+                        Object {
+                          "$ref": "#/components/schemas/mmis",
+                        },
+                      ],
                     },
                     "budget": Object {
-                      "properties": Object {
-                        "oneOf": Array [
-                          Object {
-                            "$ref": "#/components/schemas/hitechBudget",
-                          },
-                          Object {
-                            "$ref": "#/components/schemas/mmisBudget",
-                          },
-                        ],
-                      },
-                      "type": "object",
+                      "oneOf": Array [
+                        Object {
+                          "$ref": "#/components/schemas/hitechBudget",
+                        },
+                        Object {
+                          "$ref": "#/components/schemas/mmisBudget",
+                        },
+                      ],
                     },
                   },
                   "type": "object",
@@ -2863,25 +2973,17 @@ Object {
             "content": Object {
               "application/json": Object {
                 "schema": Object {
-                  "oneOf": Array [
-                    Object {
-                      "items": Object {
-                        "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
-                        "properties": Object {
-                          "path": Object {
-                            "description": "A JSON Pointer path whose patched value is invalid",
-                            "type": "string",
-                          },
-                        },
-                        "type": "object",
+                  "items": Object {
+                    "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
+                    "properties": Object {
+                      "path": Object {
+                        "description": "A JSON Pointer path whose patched value is invalid",
+                        "type": "string",
                       },
-                      "type": "array",
                     },
-                    Object {
-                      "description": "If the requested patch failed for unknown reasons, nothing will be returned",
-                      "type": "null",
-                    },
-                  ],
+                    "type": "object",
+                  },
+                  "type": "array",
                 },
               },
             },
@@ -3929,27 +4031,6 @@ Object {
             },
           },
         ],
-        "requestBody": Object {
-          "content": Object {
-            "application/json": Object {
-              "schema": Object {
-                "properties": Object {
-                  "filter_status": Object {
-                    "description": "The filter status of the affiliations for this US State",
-                    "enum": Array [
-                      "pending",
-                      "active",
-                      "inactive",
-                    ],
-                    "type": "string",
-                  },
-                },
-                "type": "object",
-              },
-            },
-          },
-          "required": false,
-        },
         "responses": Object {
           "200": Object {
             "content": Object {
@@ -4242,143 +4323,139 @@ Object {
             "content": Object {
               "application/json": Object {
                 "schema": Object {
-                  "application/json": Object {
-                    "schema": Object {
+                  "properties": Object {
+                    "activities": Object {
+                      "items": Object {
+                        "description": "Names of system activities this user can perform for the selected state",
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "affiliation": Object {
                       "properties": Object {
-                        "activities": Object {
-                          "items": Object {
-                            "description": "Names of system activities this user can perform for the selected state",
-                            "type": "string",
-                          },
-                          "type": "array",
+                        "created_at": Object {
+                          "type": "string",
                         },
-                        "affiliation": Object {
-                          "properties": Object {
-                            "created_at": Object {
-                              "type": "string",
-                            },
-                            "expires_at": Object {
-                              "type": "string",
-                            },
-                            "id": Object {
-                              "type": "string",
-                            },
-                            "role_id": Object {
-                              "type": "string",
-                            },
-                            "state": Object {
-                              "type": "string",
-                            },
-                            "state_id": Object {
-                              "type": "string",
-                            },
-                            "updated_at": Object {
-                              "type": "string",
-                            },
-                            "user_id": Object {
-                              "type": "string",
-                            },
-                            "username": Object {
-                              "type": "string",
-                            },
-                          },
-                          "type": "object",
+                        "expires_at": Object {
+                          "type": "string",
                         },
                         "id": Object {
-                          "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
                           "type": "string",
                         },
-                        "name": Object {
-                          "description": "The user's name, if defined",
-                          "type": "string",
-                        },
-                        "permissions": Object {
-                          "items": Object {
-                            "type": "object",
-                            "x-patternProperties": Object {
-                              "^[A-Za-z]{2}$": Object {
-                                "items": Object {
-                                  "description": "Names of system activities this user can perform for that state",
-                                  "type": "string",
-                                },
-                                "type": "array",
-                              },
-                            },
-                          },
-                          "type": "array",
-                        },
-                        "role": Object {
-                          "description": "The user's access role",
+                        "role_id": Object {
                           "type": "string",
                         },
                         "state": Object {
-                          "description": "The state/territory/district that this user is assigned to",
-                          "properties": Object {
-                            "id": Object {
-                              "description": "Lowercase 2-letter code",
-                              "type": "string",
-                            },
-                            "medicaid_office": Object {
-                              "properties": Object {
-                                "address1": Object {
-                                  "type": "string",
-                                },
-                                "city": Object {
-                                  "type": "string",
-                                },
-                                "director": Object {
-                                  "properties": Object {
-                                    "email": Object {
-                                      "type": "string",
-                                    },
-                                    "name": Object {
-                                      "type": "string",
-                                    },
-                                    "phone": Object {
-                                      "type": "string",
-                                    },
-                                  },
-                                  "type": "object",
-                                },
-                                "state": Object {
-                                  "type": "string",
-                                },
-                                "zip": Object {
-                                  "type": "string",
-                                },
-                              },
-                              "type": "object",
-                            },
-                            "name": Object {
-                              "description": "State/territory/district full name",
-                              "type": "string",
-                            },
-                          },
-                          "type": "object",
+                          "type": "string",
                         },
-                        "states": Object {
-                          "type": "object",
-                          "x-patternProperties": Object {
-                            "^[A-Za-z]{2}$": Object {
-                              "description": "The affiliation status for the state in the field",
-                              "enum": Array [
-                                "requested",
-                                "approved",
-                                "denied",
-                                "revoked",
-                              ],
-                              "type": "string",
-                            },
-                          },
+                        "state_id": Object {
+                          "type": "string",
+                        },
+                        "updated_at": Object {
+                          "type": "string",
+                        },
+                        "user_id": Object {
+                          "type": "string",
                         },
                         "username": Object {
-                          "description": "User's unique username",
                           "type": "string",
                         },
                       },
                       "type": "object",
                     },
+                    "id": Object {
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API",
+                      "type": "string",
+                    },
+                    "name": Object {
+                      "description": "The user's name, if defined",
+                      "type": "string",
+                    },
+                    "permissions": Object {
+                      "items": Object {
+                        "type": "object",
+                        "x-patternProperties": Object {
+                          "^[A-Za-z]{2}$": Object {
+                            "items": Object {
+                              "description": "Names of system activities this user can perform for that state",
+                              "type": "string",
+                            },
+                            "type": "array",
+                          },
+                        },
+                      },
+                      "type": "array",
+                    },
+                    "role": Object {
+                      "description": "The user's access role",
+                      "type": "string",
+                    },
+                    "state": Object {
+                      "description": "The state/territory/district that this user is assigned to",
+                      "properties": Object {
+                        "id": Object {
+                          "description": "Lowercase 2-letter code",
+                          "type": "string",
+                        },
+                        "medicaid_office": Object {
+                          "properties": Object {
+                            "address1": Object {
+                              "type": "string",
+                            },
+                            "city": Object {
+                              "type": "string",
+                            },
+                            "director": Object {
+                              "properties": Object {
+                                "email": Object {
+                                  "type": "string",
+                                },
+                                "name": Object {
+                                  "type": "string",
+                                },
+                                "phone": Object {
+                                  "type": "string",
+                                },
+                              },
+                              "type": "object",
+                            },
+                            "state": Object {
+                              "type": "string",
+                            },
+                            "zip": Object {
+                              "type": "string",
+                            },
+                          },
+                          "type": "object",
+                        },
+                        "name": Object {
+                          "description": "State/territory/district full name",
+                          "type": "string",
+                        },
+                      },
+                      "type": "object",
+                    },
+                    "states": Object {
+                      "type": "object",
+                      "x-patternProperties": Object {
+                        "^[A-Za-z]{2}$": Object {
+                          "description": "The affiliation status for the state in the field",
+                          "enum": Array [
+                            "requested",
+                            "approved",
+                            "denied",
+                            "revoked",
+                          ],
+                          "type": "string",
+                        },
+                      },
+                    },
+                    "username": Object {
+                      "description": "User's unique username",
+                      "type": "string",
+                    },
                   },
+                  "type": "object",
                 },
               },
             },

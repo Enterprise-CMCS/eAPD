@@ -80,9 +80,9 @@ module.exports = (
         logger.info(`id: ${req.params.id}, state: ${stateId}`);
         const apdFromDB = await getAPDByIDAndState(req.params.id, stateId);
 
-        const adminCheck = await adminCheckAPDDocument(req.params.id);
-
         if (apdFromDB) {
+          const adminCheck = await adminCheckAPDDocument(req.params.id);
+
           const {
             _id: id,
             createdAt: created,
