@@ -38,7 +38,8 @@ export const costAllocationOtherSchema = Joi.number()
       'Provide an other funding amount greater than or equal to $0.',
     'number.empty':
       'Provide an other funding amount greater than or equal to $0.',
-    'number.format': 'Provide a valid funding amount.'
+    'number.format': 'Provide a valid funding amount.',
+    'any.required': 'Provide a valid funding amount.'
   });
 
 const costAllocationSchema = Joi.object().pattern(

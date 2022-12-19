@@ -279,6 +279,12 @@ workflows:
             - backend api endpoint test
             - backend lint
             - backend unit test
+      - common test:
+          filters:
+            tags:
+              only: /.*/
+          requires: 
+            - install dependencies
 
       # frontend jobs
       - frontend lint:
@@ -310,6 +316,7 @@ workflows:
             - dependency vulnerability scan
             - frontend test
             - yaml test
+            - common test
             - backend unit test
             - backend api endpoint test
 
@@ -351,6 +358,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            - common test
             - e2e test staging
             - chromatic deployment staging
 
@@ -368,6 +376,7 @@ workflows:
             - frontend lint
             - frontend test
             - yaml test
+            - common test
             - e2e test production
             - chromatic deployment production
 
@@ -933,6 +942,9 @@ jobs:
           name: build API image
           working_directory: ~/project
           command: |
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export NODE_ENV=test
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
@@ -940,6 +952,9 @@ jobs:
           working_directory: ~/project/api
           no_output_timeout: 60m
           command: |
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export NODE_ENV=test
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api 
             ./endpoint-tests/endpoint.sh
@@ -986,6 +1001,34 @@ jobs:
           name: report coverage
           when: always
           working_directory: ~/project/api
+          command: bash <(curl -s https://codecov.io/bash)
+
+  # ===== Common jobs ===== #
+  # Runs common tests and reports coverage to codecov.io.
+  common test:
+    docker:
+      - image: cimg/node:16.16.0
+        auth:
+          username: $DOCKER_EAPD_UN
+          password: $DOCKER_EAPD_PW
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          name: restore yarn package cache
+          keys:
+            - cms-eapd-yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: run tests
+          working_directory: ~/project/common
+          no_output_timeout: 60m
+          command: |
+            yarn test
+      - run:
+          name: report coverage
+          when: always
+          working_directory: ~/project/common
           command: bash <(curl -s https://codecov.io/bash)
 
   # ===== Frontend jobs =====
@@ -1101,24 +1144,38 @@ jobs:
           name: start everything up
           working_directory: ~/project
           no_output_timeout: 30m
-          # setting LD_API_KEY to null so it doesn't connect to LD
           command: |
             export OKTA_DOMAIN="$PREVIEW_OKTA_DOMAIN"
             export OKTA_API_KEY="$PREVIEW_OKTA_API_KEY"
             export OKTA_SERVER_ID="$PREVIEW_OKTA_SERVER_ID"
             export OKTA_CLIENT_ID="$PREVIEW_OKTA_CLIENT_ID"
             export JWT_SECRET="$PREVIEW_JWT_SECRET"
-            export LD_API_KEY=
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export NODE_ENV=test
 
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-            echo 'Checking to see if the server is running'
-            until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
-                sleep 10;
-                echo '.';
-            done;
-            echo 'Server is running and status is healthy'
+            
+            echo "containers created"
+            sleep 200;
+            echo "waiting for api-for-testing..."
+
+            is_healthy() {
+                service="$1"
+                container_id="$(docker-compose -f ../docker-compose.endpoint-tests.yml -p api ps -q "$service")"
+                health_status="$(docker inspect -f "{{.State.Health.Status}}" "$container_id")"
+
+                if [ "$health_status" = "healthy" ]; then
+                    return 0
+                else
+                    echo '.'
+                    return 1
+                fi
+            }
+
+            while ! is_healthy api-for-testing; do sleep 60; done
+            echo "api-for-testing is running"
 
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
