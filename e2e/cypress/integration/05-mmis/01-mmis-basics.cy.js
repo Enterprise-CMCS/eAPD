@@ -5,42 +5,40 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable prefer-arrow-callback */
 
-describe('MMMIS Basics', { tags: ['@apd', '@default'] }, () => {
+describe('MMIS Basics', { tags: ['@apd', '@default'] }, () => {
+  let apdUrl;
+  let apdId;
+
   before(() => {
     cy.useStateStaff();
     cy.updateFeatureFlags({ validation: false, enableMmis: true });
     cy.reload();
+
+    // Create a new MMIS APD
+    cy.findAllByText('Create new').click();
+    cy.findByText('MMIS IAPD').click();
+    cy.findByLabelText('APD Name').clear().type('MMIS APD Name!').blur();
+    cy.findByText('No, this is for a new project.').click();
+    cy.findByText('Program Integrity').click();
+    cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled').click();
+
+    cy.findByRole(
+      'heading',
+      { name: /APD Overview/i },
+      { timeout: 100000 }
+    ).should('exist');
+
+    cy.location('pathname').then(pathname => {
+      apdUrl = pathname.replace('/apd-overview', '');
+      apdId = apdUrl.split('/').pop();
+    });
+  });
+
+  beforeEach(() => {
+    cy.visit(apdUrl);
   });
 
   describe('Create APD', () => {
-    let apdUrl;
-    let apdId;
-
-    before(() => {
-      // Create a new MMIS APD
-      cy.findAllByText('Create new').click();
-      cy.findByText('MMIS IAPD').click();
-      cy.findByLabelText('APD Name').clear().type('MMIS APD Name!').blur();
-      cy.findByText('No, this is for a new project.').click();
-      cy.findByText('Program Integrity').click();
-      cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled').click();
-
-      cy.findByRole(
-        'heading',
-        { name: /APD Overview/i },
-        { timeout: 100000 }
-      ).should('exist');
-
-      cy.location('pathname').then(pathname => {
-        apdUrl = pathname.replace('/apd-overview', '');
-        apdId = apdUrl.split('/').pop();
-      });
-    });
-
-    beforeEach(() => {
-      cy.visit(apdUrl);
-    });
-
     it('tests Create New page', () => {
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
@@ -54,6 +52,9 @@ describe('MMMIS Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.log('add the APD name');
       cy.findByLabelText('APD Name').clear().type('MMIS APD Test').blur();
+
+      cy.findByText('No, this is for a new project.').focus().blur();
+      cy.wait(50000);
 
       cy.log('change update type');
       cy.findByText('No, this is for a new project.').click();
@@ -80,14 +81,11 @@ describe('MMMIS Basics', { tags: ['@apd', '@default'] }, () => {
 
       cy.contains('MMIS APD Test').should('not.exist');
     });
-
+  });
+  describe('MMIS Pages', () => {
     it('tests the Security Planning page', () => {
       cy.turnOnAdminCheck();
-      cy.checkAdminCheckHyperlinks(
-        'Security Planning',
-        'Security Planning',
-        LEVELGOESHERE
-      );
+      cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
 
       cy.get('[class="eapd-admin-check-list"]').within(list => {
         cy.get(list).contains('Security Planning').should('exist');
