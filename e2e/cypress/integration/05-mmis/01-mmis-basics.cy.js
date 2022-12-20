@@ -86,7 +86,7 @@ describe('MMMIS Basics', { tags: ['@apd', '@default'] }, () => {
       cy.checkAdminCheckHyperlinks(
         'Security Planning',
         'Security Planning',
-        LEVEL
+        LEVELGOESHERE
       );
 
       cy.get('[class="eapd-admin-check-list"]').within(list => {
@@ -133,6 +133,8 @@ describe('MMMIS Basics', { tags: ['@apd', '@default'] }, () => {
       cy.contains('Provide Business Continuity and Disaster Recovery').should(
         'not.exist'
       );
+
+      // TEST CONTINUE AND BACK BUTTONS
     });
   });
 });
