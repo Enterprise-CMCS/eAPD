@@ -13,7 +13,8 @@
   },
   "globals": {
     "window": true,
-    "utag": true
+    "utag": true,
+    "jest": true
   },
   "overrides": [
     {
