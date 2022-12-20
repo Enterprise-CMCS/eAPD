@@ -11,7 +11,9 @@ const fileUpload = require('express-fileupload');
 const logger = require('./logger')('main');
 const { requestLoggerMiddleware } = require('./logger/morgan');
 const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
+const apiKeyRoutes = require('./routes/keyIndex');
 const routes = require('./routes');
+const me = require('./routes/me/index');
 const endpointCoverage = require('./middleware/endpointCoverage');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -20,7 +22,6 @@ const knex = require('./db/knex');
 const {
   waitForInitialization: ldWaitForInitialization
 } = require('./middleware/launchDarkly'); // initialize LaunchDarkly
-const me = require('./routes/me/index');
 
 (async () => {
   try {
@@ -135,6 +136,9 @@ api.get('/heartbeat-mongo', (_, res) => {
     res.status(503).json({ status }).end();
   }
 });
+
+logger.debug('setting up routes for API Keys');
+apiKeyRoutes(api);
 
 // Registers Passport, related handlers, and
 // login/logout endpoints

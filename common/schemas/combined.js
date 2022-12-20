@@ -96,11 +96,11 @@ export const mmisCombinedSchema = Joi.object({
   id: Joi.any(),
   createdAt: Joi.any(),
   updatedAt: Joi.any(),
-  status: Joi.any(),
-  stateId: Joi.any(),
   apdType: Joi.any().valid('MMIS').required().messages({
     'any.only': 'APD Type must be MMIS'
   }),
+  status: Joi.any(),
+  stateId: Joi.any(),
   name: Joi.string().messages({
     'string.base': 'Provide an APD name',
     'string.empty': 'Provide an APD name'
@@ -117,9 +117,9 @@ export const mmisCombinedSchema = Joi.object({
     activityId: Joi.any(),
     name: activityNameSchema,
     activityOverview: mmisActivityOverviewSchema,
-    activitySchedule: activityScheduleSchema,
     analysisOfAlternativesAndRisks: analysisOfAlternativesAndRisksSchema,
     conditionsForEnhancedFunding: conditionsForEnhancedFundingSchema,
+    activitySchedule: activityScheduleSchema,
     milestones: Joi.array().items(milestonesSchema),
     outcomes: Joi.array().items(outcomeMetricsSchema),
     statePersonnel: Joi.array().items(statePersonnelSchema),
