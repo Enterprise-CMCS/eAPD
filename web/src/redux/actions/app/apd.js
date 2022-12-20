@@ -25,6 +25,7 @@ import {
 import { loadBudget } from '../budget';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import {
+  ariaAnnounceCreateApd,
   ariaAnnounceApdLoaded,
   ariaAnnounceApdLoading,
   ariaAnnounceApdLoadingFailure
@@ -161,6 +162,7 @@ export const createApd =
       .then(async req => {
         let data = req.data;
         dispatch({ type: CREATE_APD_SUCCESS, data: data });
+        dispatch(ariaAnnounceCreateApd());
         await dispatch(selectApd(data.id, `/apd/${data.id}`, { pushRoute }));
       })
       .catch(error => {
