@@ -84,13 +84,13 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: CREATE_APD_REQUEST },
         { type: CREATE_APD_SUCCESS, data: newapd },
-        { type: SELECT_APD_REQUEST },
-        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         {
           type: ARIA_ANNOUNCE_CHANGE,
           message:
             'You have successfully created an APD. Select continue to fill out the rest of the APD.'
         },
+        { type: SELECT_APD_REQUEST },
+        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, data },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
         { type: ADMIN_CHECK_TOGGLE, data: false },
