@@ -38,11 +38,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.findByRole('checkbox', { name: /Annual Update/i }).click();
     cy.findByRole('button', { name: /Create an APD/i }).click();
 
-    cy.findAllByText('Create new').click();
-    cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
-    cy.findByRole('checkbox', { name: /Annual Update/i }).click();
-    cy.findByRole('button', { name: /Create an APD/i }).click();
-
     cy.findByRole(
       'heading',
       { name: /APD Overview/i },

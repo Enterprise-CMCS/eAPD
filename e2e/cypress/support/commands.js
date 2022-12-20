@@ -615,36 +615,17 @@ Cypress.Commands.add('checkPageA11y', () => {
 
 // Cypress command to turn on a feature flag for launch darkly
 Cypress.Commands.add('updateFeatureFlags', featureFlags => {
-  Cypress.Commands.add('updateFeatureFlags', featureFlags => {
-    // ignore api calls to events endpoint
-    cy.intercept(
-      { method: 'POST', hostname: /.*events.launchdarkly.us/ },
-      { body: {} }
-    ).as('LDEvents');
+  // ignore api calls to events endpoint
+  cy.intercept(
+    { method: 'POST', hostname: /.*events.launchdarkly.us/ },
+    { body: {} }
+  ).as('LDEvents');
 
-    // turn off push (EventSource) updates from LaunchDarkly
-    cy.intercept(
-      { method: 'GET', hostname: /.*stream.launchdarkly.us/ },
-      req => {
-        req.reply('Random message');
-      }
-    ).as('LDClientStream');
+  // turn off push (EventSource) updates from LaunchDarkly
+  cy.intercept({ method: 'GET', hostname: /.*stream.launchdarkly.us/ }, req => {
+    req.reply('Random message');
+  }).as('LDClientStream');
 
-    // return feature flag values in format expected by launchdarkly client
-    return cy
-      .intercept(
-        { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
-        req => {
-          req.reply(({ body }) => {
-            Cypress._.map(featureFlags, (ffValue, ffKey) => {
-              body[ffKey] = { value: ffValue };
-              return body;
-            });
-          });
-        }
-      )
-      .as('LDApp');
-  });
   // return feature flag values in format expected by launchdarkly client
   return cy
     .intercept(
