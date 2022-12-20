@@ -45,16 +45,27 @@ export const addHITActivity = years => {
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
 
-      // Fill out Outcomes and Milestones
+      // Fill out Activity Schedule and Milestones
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
         level: 2
       }).should('exist');
 
-      fillOutActivityPage.fillOutcomesAndMilestones(
-        activityData.outcomes,
+      fillOutActivityPage.fillActivityScheduleAndMilestones(
+        activityData.activityOverview,
         activityData.milestones
       );
+
+      cy.waitForSave();
+      cy.get('[id="continue-button"]').click();
+
+      // Fill out Outcomes and Metrics
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+
+      fillOutActivityPage.fillOutcomesAndMetrics(activityData.outcomes);
 
       cy.waitForSave();
       cy.get('[id="continue-button"]').click();
@@ -91,7 +102,7 @@ export const addHITActivity = years => {
         activityData.costAllocation,
         years
       );
-      cy.wait(1000);
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.waitForSave();
 
       _.forEach(years, (year, i) => {
@@ -169,7 +180,7 @@ export const addHITActivity = years => {
                 endDate: overviewData.endDate.join('/')
               });
 
-              // Check Outcomes and Milestones
+              // Check Outcomes and Metrics
               exportPage.checkOutcomes({
                 outcome: activityData.outcomes.names[0],
                 metrics: activityData.outcomes.metrics[0]

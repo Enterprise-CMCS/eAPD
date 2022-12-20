@@ -9,9 +9,6 @@ const staffExpensesPage = new StaffExpensesPage();
 class FillOutActivityPage {
   // Activity Overview
   fillActivityOverview = (overviewData = {}) => {
-    populatePage.fillDate('Start date', overviewData.startDate);
-    populatePage.fillDate('End date', overviewData.endDate);
-
     cy.setTinyMceContent(
       'activity-short-overview-field',
       overviewData.shortOverview
@@ -30,7 +27,31 @@ class FillOutActivityPage {
     );
   };
 
-  fillOutcomesAndMilestones = (outcomes, milestones) => {
+  // Activity Schedule and Milestones
+  fillActivityScheduleAndMilestones = (overviewData = {}, milestones) => {
+    cy.findByRole('heading', {
+      name: /Activity Schedule/i,
+      level: 3
+    }).should('exist');
+
+    cy.findByRole('heading', {
+      name: /Milestones/i,
+      level: 3
+    }).should('exist');
+
+    populatePage.fillDate('Start date', overviewData.startDate);
+    populatePage.fillDate('End date', overviewData.endDate);
+
+    _.forEach(milestones.names, (name, i) => {
+      cy.findByRole('button', { name: /Add Milestone/i }).click();
+      populatePage.fillMilestoneForm({
+        milestone: milestones.names[i],
+        targetDate: milestones.dates[i]
+      });
+    });
+  };
+
+  fillOutcomesAndMetrics = outcomes => {
     cy.findByRole('heading', {
       name: /Outcomes and Metrics/i,
       level: 3
@@ -40,14 +61,6 @@ class FillOutActivityPage {
       populatePage.fillOutcomeForm({
         outcome: outcomes.names[i],
         metrics: outcomes.metrics[i]
-      });
-    });
-
-    _.forEach(milestones.names, (name, i) => {
-      cy.findByRole('button', { name: /Add Milestone/i }).click();
-      populatePage.fillMilestoneForm({
-        milestone: milestones.names[i],
-        targetDate: milestones.dates[i]
       });
     });
   };
@@ -268,7 +281,7 @@ class FillOutActivityPage {
                     .type(value)
                     .should('have.value', `${value}`)
                     .blur();
-                  cy.wait(300);
+                  cy.wait(300); // eslint-disable-line cypress/no-unnecessary-waiting
                   cy.waitForSave();
                 });
               });

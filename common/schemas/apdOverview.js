@@ -1,6 +1,29 @@
 import Joi from 'joi';
 
-const apdOverviewSchema = Joi.object({
+const updateStatusSchema = Joi.object({
+  isUpdateAPD: Joi.boolean().required().messages({
+    'boolean.base': 'Select yes or no',
+    'boolean.empty': 'Select yes or no',
+    'boolean.required': 'Select yes or no'
+  }),
+  annualUpdate: Joi.when('isUpdateAPD', {
+    is: true,
+    then: Joi.boolean(),
+    otherwise: Joi.any()
+  }),
+  asNeededUpdate: Joi.when('isUpdateAPD', {
+    is: true,
+    then: Joi.boolean(),
+    otherwise: Joi.any()
+  })
+})
+  .or('annualUpdate', 'asNeededUpdate')
+  .messages({
+    'object.missing': 'Select an update type'
+  });
+
+export const hitechOverviewSchema = Joi.object({
+  updateStatus: updateStatusSchema,
   // Funding sources is not a user input but we use this as a dependency for
   // conditionally validating the narratives below
   fundingSources: Joi.array().items(Joi.string()).required().messages({
@@ -37,4 +60,34 @@ const apdOverviewSchema = Joi.object({
   })
 });
 
-export default apdOverviewSchema;
+export const medicaidBusinessAreasSchema = Joi.object({
+  waiverSupportSystems: Joi.boolean(),
+  assetVerificationSystem: Joi.boolean(),
+  claimsProcessing: Joi.boolean(),
+  decisionSupportSystemDW: Joi.boolean(),
+  electronicVisitVerification: Joi.boolean(),
+  encounterProcessingSystemMCS: Joi.boolean(),
+  financialManagement: Joi.boolean(),
+  healthInformationExchange: Joi.boolean(),
+  longTermServicesSupports: Joi.boolean(),
+  memberManagement: Joi.boolean(),
+  pharmacyBenefitManagementPOS: Joi.boolean(),
+  programIntegrity: Joi.boolean(),
+  providerManagement: Joi.boolean(),
+  thirdPartyLiability: Joi.boolean(),
+  other: Joi.boolean(),
+  otherMedicaidBusinessAreas: Joi.when('other', {
+    is: true,
+    then: Joi.string().min(1).required().messages({
+      'string.base': 'Provide another Medicaid Business Area(s)',
+      'string.empty': 'Provide another Medicaid Business Area(s)',
+      'string.required': 'Provide another Medicaid Business Area(s)'
+    }),
+    otherwise: Joi.any()
+  })
+}).or('waiverSupportSystems', 'assetVerificationSystem');
+
+export const mmisOverviewSchema = Joi.object({
+  updateStatus: updateStatusSchema,
+  medicaidBusinessAreas: medicaidBusinessAreasSchema
+});

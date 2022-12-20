@@ -2,7 +2,7 @@ const tap = require('tap');
 const sinon = require('sinon');
 const endpointIndex = require('./index');
 
-tap.test('endpoint setup', async endpointTest => {
+tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
   const app = {
     get: sinon.spy(),
     use: sinon.spy()

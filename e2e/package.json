@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CMSgov/eAPD.git"
+    "url": "git+https://github.com/Enterprise-CMCS/eAPD.git"
   },
   "author": "",
   "license": "CC0-1.0",
@@ -26,7 +26,7 @@
     "@cms-eapd/api": "0.0.1",
     "@foreachbe/cypress-tinymce": "1.0.0",
     "react": "17.0.2",
-    "tinymce": "5.10.4"
+    "tinymce": "5.10.7"
   },
   "devDependencies": {
     "@cmsgov/design-system": "3.8.0",

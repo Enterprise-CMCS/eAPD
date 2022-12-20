@@ -1,13 +1,20 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { Alert, ChoiceList, TextField } from '@cmsgov/design-system';
+import {
+  Alert,
+  ChoiceList,
+  TextField,
+  Tooltip,
+  TooltipIcon
+} from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import DeleteModal from '../../../components/DeleteModal';
 
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import apdOverviewSchema from '@cms-eapd/common/schemas/apdOverview';
+import { hitechOverviewSchema } from '@cms-eapd/common/schemas/apdOverview';
+import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 
 import {
   addYear,
@@ -28,9 +35,11 @@ import {
   selectAdminCheckEnabled
 } from '../../../redux/selectors/apd.selectors';
 import { getAllFundingSources } from '../../../redux/selectors/activities.selectors';
+import { useFlags } from 'launchdarkly-react-client-sdk';
 
 const ApdOverview = ({
   addApdYear,
+  apdType,
   name,
   narrativeHIE,
   narrativeHIT,
@@ -48,6 +57,7 @@ const ApdOverview = ({
   adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
+  const { enableMmis } = useFlags();
 
   const {
     control,
@@ -65,7 +75,7 @@ const ApdOverview = ({
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(apdOverviewSchema)
+    resolver: joiResolver(hitechOverviewSchema)
   });
 
   useEffect(() => {
@@ -169,6 +179,56 @@ const ApdOverview = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
+      <div className="apd_type_choice-container">
+        <ChoiceList
+          type="radio"
+          className="apd_disabled_choice"
+          choices={[
+            {
+              defaultChecked: !enableMmis || apdType === APD_TYPE.HITECH,
+              disabled: true,
+              label: 'HITECH IAPD'
+            }
+          ]}
+        />
+        <span className="tooltip-container">
+          <Tooltip
+            className="ds-c-tooltip__trigger-link"
+            component="a"
+            onClose={function noRefCheck() {}}
+            onOpen={function noRefCheck() {}}
+            title="Health Information Techology for Economic and Clinical Health"
+          >
+            <TooltipIcon />
+          </Tooltip>
+        </span>
+      </div>
+      {enableMmis == true && (
+        <div className="apd_type_choice-container">
+          <ChoiceList
+            type="radio"
+            className="apd_disabled_choice"
+            choices={[
+              {
+                defaultChecked: apdType === APD_TYPE.MMIS,
+                disabled: true,
+                label: 'MMIS IAPD'
+              }
+            ]}
+          />
+          <span className="tooltip-container">
+            <Tooltip
+              className="ds-c-tooltip__trigger-link"
+              component="a"
+              onClose={function noRefCheck() {}}
+              onOpen={function noRefCheck() {}}
+              title="Medicaid Management Information System"
+            >
+              <TooltipIcon />
+            </Tooltip>
+          </span>
+        </div>
+      )}
       <TextField
         className="remove-clearfix"
         label="APD Name"
@@ -177,7 +237,7 @@ const ApdOverview = ({
         onBlur={onBlur}
         value={name}
       />
-      <div className="ds-u-margin-y--3">
+      <div className="ds-u-margin-y--3" data-cy="yearList">
         <ChoiceList
           choices={yearChoices}
           label={getLabelElement()}
@@ -280,6 +340,7 @@ const ApdOverview = ({
 
 ApdOverview.propTypes = {
   addApdYear: PropTypes.func.isRequired,
+  apdType: PropTypes.string,
   removeApdYear: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   narrativeHIE: PropTypes.string.isRequired,
@@ -305,6 +366,7 @@ ApdOverview.defaultProps = {
 const mapStateToProps = state => ({
   fundingSources: getAllFundingSources(state),
   adminCheck: selectAdminCheckEnabled(state),
+  apdType: state.apd.data.apdType,
   ...selectSummary(state)
 });
 

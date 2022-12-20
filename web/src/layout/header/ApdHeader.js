@@ -12,7 +12,7 @@ import { setApdName } from '../../redux/actions/editApd';
 
 import Icon, { faEdit } from '../../components/Icons';
 
-const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
+const ApdHeader = ({ apdCreated, apdName, apdType, setName, year }) => {
   const [isEditing, setEditing] = useState(false);
 
   useEffect(() => {
@@ -85,7 +85,9 @@ const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
         </Button>
       </div>
       <div id="apd-header-info">
-        <h1 className="ds-h5 ds-u-margin-top--1">HITECH IAPD | FFY {year}</h1>
+        <h1 className="ds-h5 ds-u-margin-top--1">
+          {apdType} IAPD | FFY {year}
+        </h1>
 
         <span className="ds-h6 ds-u-display--block ds-u-margin-top--1 ds-u-margin-bottom--3">
           <strong>Created:</strong> {apdCreated}
@@ -98,6 +100,7 @@ const ApdHeader = ({ apdCreated, apdName, setName, year }) => {
 ApdHeader.propTypes = {
   apdCreated: PropTypes.string.isRequired,
   apdName: PropTypes.string,
+  apdType: PropTypes.string,
   setName: PropTypes.func.isRequired,
   year: PropTypes.string.isRequired
 };
@@ -107,6 +110,7 @@ ApdHeader.defaultProps = { apdName: '' };
 const mapStateToProps = state => ({
   apdCreated: getAPDCreation(state),
   apdName: getAPDName(state),
+  apdType: state.apd.data.apdType,
   year: getAPDYearRange(state)
 });
 

@@ -36,6 +36,7 @@ api/seeds/test/tokens.json
 api/test-data/files
 
 common/coverage
+common/coverage-endpoint
 common/dist
 
 docs-build

@@ -11,7 +11,7 @@ import Dollars from '../../../../../components/Dollars';
 import NumberField from '../../../../../components/NumberField';
 import RichText from '../../../../../components/RichText';
 
-import validationSchema from '@cms-eapd/common/schemas/privateContractor';
+import validationSchema from '@cms-eapd/common/schemas/contractorResources';
 import { saveContractor as actualSaveContractor } from '../../../../../redux/actions/editActivity';
 
 const getCheckedValue = value => {
@@ -90,6 +90,7 @@ const ContractorResourceForm = forwardRef(
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <Controller
           name="name"
@@ -355,6 +356,7 @@ const ContractorResourceForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );

@@ -176,13 +176,6 @@ describe('<ApdNew />', () => {
         expect(
           screen.getByRole('checkbox', { name: /2024/i })
         ).not.toBeChecked();
-
-        await user.click(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        );
-        expect(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        ).toBeChecked();
         expect(disabledBtn).toBeDisabled();
 
         user.click(
@@ -195,6 +188,24 @@ describe('<ApdNew />', () => {
             })
           ).toBeChecked();
         });
+        expect(disabledBtn).toBeDisabled();
+
+        await user.click(
+          screen.getByRole('checkbox', { name: /Claims Processing/i })
+        );
+        expect(
+          screen.getByRole('checkbox', { name: /Claims Processing/i })
+        ).toBeChecked();
+        expect(disabledBtn).toBeEnabled();
+
+        await user.click(screen.getByRole('checkbox', { name: /2023/i }));
+        expect(
+          screen.getByRole('checkbox', { name: /2023/i })
+        ).not.toBeChecked();
+        expect(disabledBtn).toBeDisabled();
+
+        await user.click(screen.getByRole('checkbox', { name: /2023/i }));
+        expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
 
         user.click(
           screen.getByRole('radio', { name: /Yes, it is an update./i })
@@ -225,12 +236,6 @@ describe('<ApdNew />', () => {
         });
 
         await user.type(otherBox, 'other');
-        await user.click(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        );
-        expect(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        ).not.toBeChecked();
         expect(disabledBtn).toBeEnabled();
       });
     });

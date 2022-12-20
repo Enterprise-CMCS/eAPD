@@ -14,6 +14,7 @@ import {
 } from '@cmsgov/design-system';
 import TextArea from '../../../components/TextArea';
 import { createApd } from '../../../redux/actions/app';
+import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 
 import Loading from '../../../components/Loading';
 import newApdSchema from '@cms-eapd/common/schemas/apdNew';
@@ -61,7 +62,9 @@ const ApdNew = ({ createApd: create }) => {
   const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
   const [apdType, setApdType] = useState('');
   const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
+  const [businessList, setBusinessList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [otherDetails, setOtherDetails] = useState('');
   const [typeStatus, setTypeStatus] = useState(updateTypes);
   const [years, setYears] = useState(yearOptions.slice(0, 2));
 
@@ -69,14 +72,14 @@ const ApdNew = ({ createApd: create }) => {
     {
       label: 'HITECH IAPD',
       labelClassName: 'label-extended',
-      value: 'hitech',
+      value: APD_TYPE.HITECH,
       hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
       checked: value
     },
     {
       label: 'MMIS IAPD',
       labelClassName: 'label-extended',
-      value: 'mmis',
+      value: APD_TYPE.MMIS,
       hint: 'Medicaid Management Information System Implementation APD',
       checked: value
     }
@@ -88,10 +91,10 @@ const ApdNew = ({ createApd: create }) => {
       apdChoices.pop();
       apdChoices[0].checked = true;
       setApdChoices(apdChoices);
-      setApdType('hitech');
-      setValue('apdType', 'hitech', { shouldValidate: true });
+      setApdType(APD_TYPE.HITECH);
+      setValue('apdType', APD_TYPE.HITECH, { shouldValidate: true });
     }
-  }, [apdChoices]);
+  }, [apdChoices, enableMmis]);
 
   const {
     control,
@@ -100,10 +103,11 @@ const ApdNew = ({ createApd: create }) => {
     formState: { errors, isDirty, isValid }
   } = useForm({
     defaultValues: {
-      years: years
+      years: years,
+      businessList: businessList
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
+    mode: 'all',
+    reValidateMode: 'all',
     resolver: joiResolver(newApdSchema)
   });
 
@@ -137,9 +141,29 @@ const ApdNew = ({ createApd: create }) => {
   }
 
   const createNew = () => {
-    let values = getValues();
+    const { years, name, mmisUpdate } = getValues();
+    const apdValues = {
+      years,
+      name,
+      apdType,
+      apdOverview: {
+        programOverview: '',
+        updateStatus: {
+          ...typeStatus
+        }
+      }
+    };
+    if (apdType === APD_TYPE.HITECH) {
+      apdValues.apdOverview.updateStatus.isUpdateAPD = true;
+    }
+    if (apdType === APD_TYPE.MMIS) {
+      apdValues.apdOverview.updateStatus.isUpdateAPD = mmisUpdate === 'yes';
+      apdValues.apdOverview.medicaidBusinessAreas = businessAreas;
+      apdValues.apdOverview.medicaidBusinessAreas.otherMedicaidBusinessAreas =
+        otherDetails;
+    }
     setIsLoading(true);
-    create(values);
+    create(apdValues);
   };
 
   const disabled = !isValid || !isDirty || (isDirty && !isValid);
@@ -186,7 +210,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             )}
           />
-          {(apdType === 'mmis' || apdType === 'hitech') && (
+          {(apdType === APD_TYPE.MMIS || apdType === APD_TYPE.HITECH) && (
             <div>
               <Controller
                 name="name"
@@ -228,7 +252,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             </div>
           )}
-          {apdType === 'hitech' && (
+          {apdType === APD_TYPE.HITECH && (
             <div>
               <Controller
                 name="updateStatus.updateList"
@@ -278,7 +302,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             </div>
           )}
-          {apdType === 'mmis' && (
+          {apdType === APD_TYPE.MMIS && (
             <div>
               <Controller
                 name="mmisUpdate"
@@ -360,14 +384,14 @@ const ApdNew = ({ createApd: create }) => {
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}
-                    errorMessage={errors?.typeStatus?.mmisUpdate?.message}
+                    errorMessage={errors?.mmisUpdate?.message}
                     errorPlacement="bottom"
                   />
                 )}
               />
 
               <Controller
-                name="apdOverview.medicaidBA"
+                name="businessList"
                 control={control}
                 render={({ field: { onBlur, onChange } }) => (
                   <ChoiceList
@@ -377,8 +401,16 @@ const ApdNew = ({ createApd: create }) => {
                         Select the Medicaid Enterprise Systems Business Area(s)
                         that cover the scope of this APD. A more detailed
                         description of these business areas, along with the
-                        associated outcomes and metrics, are available at the
-                        MES Certification Repository.
+                        associated outcomes and metrics, are available at
+                        the&nbsp;
+                        <a
+                          href="https://cmsgov.github.io/CMCS-DSG-DSS-Certification/"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          MES Certification Repository
+                        </a>
+                        .
                       </div>
                     }
                     type="checkbox"
@@ -462,20 +494,22 @@ const ApdNew = ({ createApd: create }) => {
                         checkedChildren: (
                           <div className="ds-c-choice__checkedChild">
                             <Controller
-                              name="apdOverview.otherDetails"
+                              name="otherDetails"
                               control={control}
                               render={({ field: { onBlur, ...props } }) => (
                                 <TextArea
                                   {...props}
                                   label="Other Medicaid Business Area(s)"
                                   name="other-mbas"
+                                  data-cy="other_details"
                                   hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
                                   onBlur={onBlur}
+                                  onChange={e => {
+                                    setOtherDetails(e.target.value);
+                                    setValue('otherDetails', e.target.value);
+                                  }}
                                   onComponentBlur={onBlur}
-                                  errorMessage={
-                                    errors?.apdOverview
-                                      ?.otherMedicaidBusinessAreas?.message
-                                  }
+                                  errorMessage={errors?.otherDetails?.message}
                                   errorPlacement="bottom"
                                 />
                               )}
@@ -485,17 +519,21 @@ const ApdNew = ({ createApd: create }) => {
                       }
                     ]}
                     onChange={({ target: { value } }) => {
+                      // Set boolean values for medicaid business areas
+                      // For createApd
                       businessAreas[value] = !businessAreas[value];
-                      onChange(
-                        Object.keys(businessAreas).filter(
-                          key => businessAreas[key]
-                        )
-                      );
                       setBusinessAreas(businessAreas);
+
+                      // For validation
+                      let keys = Object.keys(businessAreas).filter(
+                        key => businessAreas[key]
+                      );
+                      onChange(keys);
+                      setBusinessList(keys);
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}
-                    errorMessage={errors?.apdOverview?.medicaidBA?.message}
+                    errorMessage={errors?.businessList?.message}
                     errorPlacement="bottom"
                   />
                 )}
@@ -503,10 +541,8 @@ const ApdNew = ({ createApd: create }) => {
             </div>
           )}
 
-          <div className="ds-u-padding-bottom--3">
-            <Button variation="transparent" onClick={history.goBack}>
-              Cancel
-            </Button>
+          <div className="ds-u-padding-y--3">
+            <Button onClick={history.goBack}>Cancel</Button>
 
             {disabled === true ? (
               <Tooltip
@@ -524,6 +560,7 @@ const ApdNew = ({ createApd: create }) => {
               variation="primary"
               disabled={disabled}
               className="ds-u-float--right"
+              data-cy="create_apd_btn"
               onClick={createNew}
             >
               Create an APD
