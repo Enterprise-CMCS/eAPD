@@ -1,7 +1,7 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": [],
+  "allowlist": [1085234],
   "_comment": {
     "[1085234]": {
       "module": "knex",
