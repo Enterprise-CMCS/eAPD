@@ -43,8 +43,7 @@ module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
         const id = await createAPD({
           stateId: req.user.state.id,
           status: 'draft',
-          ...apd,
-          ...req.body
+          ...apd
         });
 
         return res.send({
