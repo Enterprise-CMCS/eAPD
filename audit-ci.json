@@ -3,9 +3,9 @@
   "package-manager": "yarn",
   "allowlist": [],
   "_comment": {
-    "[advisory id]": {
-      "module": "",
-      "affects": ""
+    "[1085234]": {
+      "module": "knex",
+      "affects": "@cms-eapd/e2e"
     }
   }
 }
