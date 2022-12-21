@@ -1,11 +1,14 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": [1085234],
+  "allowlist": [
+    "1085234|@cms-eapd/api>knex",
+    "1085234|@cms-eapd/e2e>@cms-eapd/api>knex"
+  ],
   "_comment": {
-    "[1085234]": {
+    "1085234": {
       "module": "knex",
-      "affects": "@cms-eapd/e2e"
+      "affects": "@cms-eapd/e2e - limited SQL injection vulnerability"
     }
   }
 }
