@@ -13,8 +13,8 @@ describe('Affiliations endpoint | PATCH', () => {
   let stateAdminId = 0;
   beforeAll(async () => {
     await setupDB(db);
-    const [{ id }] = await getAllActiveRoles(['eAPD State Admin'], { db });
-    stateAdminId = id;
+    const [{ id }] = await getAllActiveRoles(['eAPD State Staff'], { db });
+    stateStaffId = id;
   });
   afterAll(async () => {
     await teardownDB(db);
@@ -37,7 +37,7 @@ describe('Affiliations endpoint | PATCH', () => {
       it(`returns 200, when an affiliation is ${status}`, async () => {
         const response = await api.patch(url('ak', 4000), {
           status,
-          roleId: stateAdminId
+          roleId: stateStaffId
         });
         expect(response.status).toEqual(200);
       });
@@ -64,7 +64,7 @@ describe('Affiliations endpoint | PATCH', () => {
     it('returns 400 when status is invalid', async () => {
       const response = await api.patch(url('ak', 4000), {
         status: 'blarg',
-        roleId: stateAdminId
+        roleId: stateStaffId
       });
       expect(response.status).toEqual(400);
     });
@@ -80,7 +80,7 @@ describe('Affiliations endpoint | PATCH', () => {
     it(`returns 403, when user tries to change their status`, async () => {
       const response = await api.patch(url('ak', 4004), {
         status: 'approved',
-        roleId: stateAdminId
+        roleId: stateStaffId
       });
       expect(response.status).toEqual(400);
     });
@@ -88,7 +88,7 @@ describe('Affiliations endpoint | PATCH', () => {
     it(`returns 403, when user tries to change for a state they are not authorized for`, async () => {
       const response = await api.patch(url('az', 4020), {
         status: 'approved',
-        roleId: stateAdminId
+        roleId: stateStaffId
       });
       expect(response.status).toEqual(403);
     });
