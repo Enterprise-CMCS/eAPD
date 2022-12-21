@@ -166,6 +166,21 @@ echo "module.exports = {
 pm2 start ecosystem.config.js
 pm2 save
 
+touch ~/mongo-dump.sh
+echo "
+# Var 1 is timestamp, 2 is environment, 3 is Mongo URL
+#Create var for time so value doesn't drift between creating tarball and aws cp to S3
+echo \$1
+#Create dump
+#mongodump --uri=\$2_MONGO_URL
+MONGO_URL=\$2_MONGO_URL
+mongodump --uri=\$3
+#Tar zip dump
+tar -cvf \$2_mongo_\$1.tar.gz dump/
+#Send it
+aws s3 cp \$2_mongo_\$1.tar.gz s3://eapd-mongo-dump-\$2
+" > ~/mongo-dump.sh
+
 E_USER
 
 sudo yum remove -y gcc-c++
