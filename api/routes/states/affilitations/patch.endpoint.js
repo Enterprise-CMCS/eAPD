@@ -10,7 +10,7 @@ const { getAllActiveRoles } = require('../../../db/roles');
 
 describe('Affiliations endpoint | PATCH', () => {
   const db = getDB();
-  let stateAdminId = 0;
+  let stateStaffId = 0;
   beforeAll(async () => {
     await setupDB(db);
     const [{ id }] = await getAllActiveRoles(['eAPD State Staff'], { db });
