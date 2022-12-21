@@ -28,7 +28,7 @@ describe('auth/certifications put endpoint', () => {
     describe('when authenticated as a user with permissions', () => {
       let api;
       beforeAll(async () => {
-        api = login('fed-admin');
+        api = login('federal-admin');
       });
 
       it('with no request body', async () => {
