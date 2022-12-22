@@ -203,7 +203,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
         'not.exist'
       );
 
-      // TEST CONTINUE AND BACK BUTTONS
+      // TEST CONTINUE AND BACK BUTTONS, Assurances and Compliance page crashes though.
     });
   });
 });
