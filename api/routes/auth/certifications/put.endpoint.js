@@ -19,7 +19,7 @@ describe('auth/certifications put endpoint', () => {
       certificationId: '5004',
       affiliationId: '4005',
       stateId: 'ak',
-      certificationFfy: '2022'
+      certificationFfy: '2023'
     };
 
     unauthenticatedTest('put', url);
@@ -33,7 +33,6 @@ describe('auth/certifications put endpoint', () => {
 
       it('with no request body', async () => {
         const response = await api.put(url, {});
-        console.log('response 1:', response);
 
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
@@ -41,7 +40,6 @@ describe('auth/certifications put endpoint', () => {
 
       it('with a valid request body', async () => {
         const response = await api.put(url, payload);
-        console.log('response 2:', response);
 
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
