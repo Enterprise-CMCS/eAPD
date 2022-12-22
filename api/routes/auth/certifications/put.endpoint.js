@@ -17,7 +17,7 @@ describe('auth/certifications put endpoint', () => {
 
     const payload = {
       certificationId: '5004',
-      affiliationId: '4004',
+      affiliationId: '4005',
       stateId: 'ak',
       certificationFfy: '2022'
     };
