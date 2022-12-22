@@ -1,6 +1,6 @@
 # CircleCi-oidc
 
-This module creates the resources necessary to use CircleCi's OIDC provider to retrieve short-term credentials from AWS for performing AWS API calls in an Actions workflow. The advantage of this approach is that there is no need to create an IAM user and store long-term AWS credentials in CircleCi secrets.
+This module creates the resources necessary to use CircleCi's OIDC provider to retrieve short-term credentials from AWS for performing AWS API calls. The advantage of this approach is that there is no need to create an IAM user and store long-term AWS credentials in CircleCi secrets.
 
 [Read more about configuring OpenID Connect in AWS](https://circleci.com/docs/openid-connect-tokens/)
 
