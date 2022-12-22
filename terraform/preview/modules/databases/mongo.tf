@@ -41,5 +41,4 @@ resource "aws_instance" "eapd_mongo" {
             "sudo sh -c 'echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml'",
         ]
     }
-
 }

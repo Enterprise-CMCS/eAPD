@@ -181,15 +181,15 @@ rm ~/mongo-user.sh
 #echo "
 ## Var 1 is timestamp, 2 is environment, 3 is Mongo URL
 ##Create var for time so value doesn't drift between creating tarball and aws cp to S3
-#echo $1
+echo PLACEHOLDER_TIMESTAMP
 ##Create dump
-##mongodump --uri=$2_MONGO_URL
-#MONGO_URL=$2_MONGO_URL
-#mongodump --uri=$3
+##mongodump --uri=PLACEHOLDER_ENVIRONMENT_MONGO_URL
+#MONGO_URL=PLACEHOLDER_ENVIRONMENT_MONGO_URL
+#mongodump --uri=PLACEHOLDER_MONGOURL
 ##Tar zip dump
-#tar -cvf $2_mongo_$1.tar.gz dump/
+#tar -cvf PLACEHOLDER_ENVIRONMENT_mongo_PLACEHOLDER_TIMESTAMP.tar.gz dump/
 ##Send it
-#aws s3 cp $2_mongo_$1.tar.gz s3://eapd-mongo-dump-$2
+#aws s3 cp PLACEHOLDER_ENVIRONMENT_mongo_PLACEHOLDER_TIMESTAMP.tar.gz s3://eapd-mongo-dump-PLACEHOLDER_ENVIRONMENT
 #" > ~/mongo-dump.sh
 E_USER
 
@@ -197,7 +197,7 @@ sudo su <<R_USER
 # Create cronjob to run MongoDump Hourly (For Testing)
 touch /etc/cron.hourly/mongodump
 echo "
-bash /home/ec2-user/mongo-dump.sh $(date +%Y%m%d%H%M%S) $ENVIRONMENT $MONGO_DATABASE
+bash /home/ec2-user/mongo-dump.sh $(date +%Y%m%d%H%M%S) PLACEHOLDER_ENVIRONMENT PLACEHOLDER_MONGOURL
 " > /etc/cron.hourly/mongodump
 
 # Harden & Restart Mongo

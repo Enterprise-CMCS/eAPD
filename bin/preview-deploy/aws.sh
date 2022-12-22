@@ -159,10 +159,6 @@ function configureUserData() {
 
   sed -i'.backup' -e "s|__LD_CLIENT_ID__|`echo $LD_CLIENT_ID`|g" aws.user-data.sh
 
-  sed -i'.backup' -e "s|__TIME_STAMP__|`echo $TIMESTAMP`|g" aws.user-data.sh
-
-  sed -i'.backup' -e "s|__ENVIRONMENT__|`echo $ENVIRONMENT`|g" aws.user-data.sh
-
   rm aws.user-data.sh.backup
 }
 
