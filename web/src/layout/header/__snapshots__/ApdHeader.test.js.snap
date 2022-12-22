@@ -89,7 +89,7 @@ exports[`APD header renders correctly 1`] = `
     <h1
       className="ds-h5 ds-u-margin-top--1"
     >
-      HITECH IAPD | FFY 
+       IAPD | FFY 
       ffys
     </h1>
     <span

@@ -17,26 +17,26 @@ describe('api wrapper', () => {
   describe('url', () => {
     beforeEach(() => jest.resetModules());
 
-    test('uses API_URL env var', () => {
+    test('uses API_URL env var', async () => {
       const reset = set('api-url');
-      const api = require('./api').default; // eslint-disable-line global-require
+      const api = await import('./api'); // eslint-disable-line global-require
       expect(api.defaults.baseURL).toBe('api-url');
       reset();
     });
 
-    test('uses default URL when env var is empty', () => {
+    test('uses default URL when env var is empty', async () => {
       const reset = set();
-      const api = require('./api').default; // eslint-disable-line global-require
+      const api = await import('./api'); // eslint-disable-line global-require
       expect(api.defaults.baseURL).toBe('http://localhost:8000');
       reset();
     });
   });
 
-  describe('token auth', () => {
+  describe('token auth', async () => {
     test('auth header is populated when jwt is present in localStorage', async () => {
-      const api = require('./api').default; // eslint-disable-line global-require
+      const api = await import('./api').default; // eslint-disable-line global-require
       const apiMock = new MockAdapter(api, { onNoMatch: 'throwException' });
-      const mockAuth = require('./auth'); // eslint-disable-line global-require
+      const mockAuth = await import('./auth'); // eslint-disable-line global-require
       const managerSpy = jest
         .spyOn(mockAuth, 'getLocalAccessToken')
         .mockImplementation(() => 'aaa.bbb.ccc');
@@ -49,9 +49,9 @@ describe('api wrapper', () => {
     });
 
     test('auth header is empty', async () => {
-      const api = require('./api').default; // eslint-disable-line global-require
+      const api = await import('./api').default; // eslint-disable-line global-require
       const apiMock = new MockAdapter(api, { onNoMatch: 'throwException' });
-      const mockAuth = require('./auth'); // eslint-disable-line global-require
+      const mockAuth = await import('./auth'); // eslint-disable-line global-require
       const managerSpy = jest
         .spyOn(mockAuth, 'getLocalAccessToken')
         .mockImplementation(() => '');

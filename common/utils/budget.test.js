@@ -1,4 +1,4 @@
-import { APD_TYPE } from './constants';
+import { APD_TYPE } from './constants.js';
 import {
   calculateCategoryPercentages,
   calculateOtherFundingByYear,

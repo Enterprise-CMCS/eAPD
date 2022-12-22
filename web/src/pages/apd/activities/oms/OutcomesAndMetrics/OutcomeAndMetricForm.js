@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Icon, { faPlusCircle } from '../../../../../components/Icons';
 import Review from '../../../../../components/Review';
 
-import { outcomeMetric as schema } from '@cms-eapd/common';
+import { outcomeMetricsSchema as schema } from '@cms-eapd/common';
 import { saveOutcome as actualSaveOutcome } from '../../../../../redux/actions/editActivity';
 
 import { newOutcomeMetric } from '../../../../../redux/reducers/activities';

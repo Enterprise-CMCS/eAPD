@@ -1,6 +1,6 @@
 import './mmisBudget.js';
 import mongoose from 'mongoose';
-import { mmisActivitySchema } from './mmisActivity.js';
+import mmisActivitySchema from './mmisActivity.js';
 import {
   default as APD,
   discriminatorOptions,

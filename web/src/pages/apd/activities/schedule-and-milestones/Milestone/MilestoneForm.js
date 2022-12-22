@@ -8,7 +8,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 import DateField from '../../../../../components/DateField';
 
-import { milestones as schema } from '@cms-eapd/common';
+import { milestonesSchema as schema } from '@cms-eapd/common';
 
 import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actions/editActivity';
 

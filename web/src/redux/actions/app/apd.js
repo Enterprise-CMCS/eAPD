@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import { hasBudgetUpdate, APD_TYPE } from '@cms-eapd/common';
+import { hasBudgetUpdate } from '@cms-eapd/common';
 
 import {
   CREATE_APD_FAILURE,
@@ -153,16 +153,15 @@ export const setApdToSelectOnLoad = () => (dispatch, getState) => {
 };
 
 export const createApd =
-  ({ pushRoute = push } = {}) =>
+  (values, { pushRoute = push } = {}) =>
   dispatch => {
     dispatch({ type: CREATE_APD_REQUEST });
     return axios
-      .post('/apds', { apdType: APD_TYPE.HITECH })
+      .post('/apds', values)
       .then(async req => {
-        dispatch({ type: CREATE_APD_SUCCESS, data: req.data });
-        await dispatch(
-          selectApd(req.data.id, `/apd/${req.data.id}`, { pushRoute })
-        );
+        let data = req.data;
+        dispatch({ type: CREATE_APD_SUCCESS, data: data });
+        await dispatch(selectApd(data.id, `/apd/${data.id}`, { pushRoute }));
       })
       .catch(error => {
         const reason = error.response ? error.response.data : 'N/A';

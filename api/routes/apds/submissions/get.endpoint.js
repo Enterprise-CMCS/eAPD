@@ -1,9 +1,9 @@
-const {
+import {
   apiKeyAuth,
   getDB,
   setupDB,
   teardownDB
-} = require('../../../endpoint-tests/utils');
+} from '../../../endpoint-tests/utils.js';
 
 describe('Submissions endpoint | GET', () => {
   jest.setTimeout(300000);

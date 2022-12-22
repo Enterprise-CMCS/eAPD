@@ -5,6 +5,7 @@ import patch from './patch.js';
 import post from './post.js';
 import files from './files/index.js';
 import events from './events/index.js';
+import submissions from './submissions/index.js';
 
 const logger = loggerFactory('apds route index');
 
@@ -16,7 +17,8 @@ export default (
     deleteEndpoint = del,
     getEndpoint = get,
     patchEndpoint = patch,
-    postEndpoint = post
+    postEndpoint = post,
+    submissionsEndpoints = submissions
   } = {}
 ) => {
   logger.debug('setting up DELETE endpoint');
@@ -33,4 +35,7 @@ export default (
 
   logger.debug('setting up APD events endpoints');
   eventsEndpoints(app);
+
+  logger.debug('setting up APD submissions endpoints');
+  submissionsEndpoints(app);
 };

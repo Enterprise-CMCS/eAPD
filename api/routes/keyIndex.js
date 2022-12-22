@@ -1,5 +1,5 @@
 import loggerFactory from '../logger/index.js';
-const apdsSubmissions = require('./apds/submissions/index.js');
+import apdsSubmissions from './apds/submissions/index.js';
 
 const logger = loggerFactory('api key routes index');
 

@@ -1,4 +1,4 @@
-const { forAllYears, APD_TYPE } = require('@cms-eapd/common');
+import { forAllYears, APD_TYPE } from '@cms-eapd/common';
 
 const getNewMmisApd = (years, yearOptions) => {
   const regsGenerator = () => ({
@@ -61,4 +61,4 @@ const getNewMmisApd = (years, yearOptions) => {
   };
 };
 
-module.exports = getNewMmisApd;
+export default getNewMmisApd;

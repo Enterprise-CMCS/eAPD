@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Cypress tests for the EAPD tool",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "lint": "eslint 'cypress/**/*.js'",
     "npm-check": "npx npm-check-updates",

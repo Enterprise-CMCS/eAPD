@@ -15,14 +15,16 @@
 import { lighthouse, pa11y, prepareAudit } from 'cypress-audit'; // eslint-disable-line import/no-extraneous-dependencies
 import browserify from '@cypress/browserify-preprocessor'; // eslint-disable-line import/no-extraneous-dependencies
 import { knex } from '@cms-eapd/api';
+import grep from 'cypress-grep/src/plugin';
+import codeCoverage from '@cypress/code-coverage/task';
 
 /**
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
 export default (on, config) => {
-  require('cypress-grep/src/plugin')(config); // eslint-disable-line global-require, import/no-extraneous-dependencies
-  require('@cypress/code-coverage/task')(on, config);
+  grep(config); // eslint-disable-line global-require, import/no-extraneous-dependencies
+  codeCoverage(on, config);
 
   // eslint-disable-next-line no-unused-vars, default-param-last
   on('before:browser:launch', (browser = {}, launchOptions) => {

@@ -12,7 +12,6 @@ import me from '../me/openAPI.js';
 import roles from '../roles/openAPI.js';
 import states from '../states/openAPI.js';
 import statesAffiliations from '../states/affilitations/openAPI.js';
-import apdsSubmissions from '../apds/submissions/openApi.js';
 import users from '../users/openAPI.js';
 
 import { arrayOf } from './helpers.js';
@@ -30,7 +29,6 @@ const openapi = {
     ...apds,
     ...apdsFiles,
     ...apdsEvents,
-    ...apdsSubmissions,
     ...authActivities,
     ...authRoles,
     ...authStates,

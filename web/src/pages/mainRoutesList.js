@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ApdNew from './apd/new/ApdNew';
 import NoMatch from '../components/NoMatch';
 import Dashboard from './dashboard/Dashboard';
 import ApdApplication from '../containers/ApdApplication';
@@ -20,6 +21,14 @@ const routes = [
     contentType: 'apd',
     siteSection: 'State',
     pageName: 'Dashboard'
+  },
+  {
+    path: '/apd/new',
+    children: <ApdNew />,
+    isPublic: false,
+    contentType: 'form',
+    siteSection: 'APD',
+    pageName: 'New Apd'
   },
   {
     path: '/apd/:apdId',
