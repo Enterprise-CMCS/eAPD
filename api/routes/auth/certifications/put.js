@@ -30,6 +30,7 @@ module.exports = (
         req.body;
 
       try {
+        console.log('req.user', req.user);
         const { error = null } = await matchStateAdminCertification({
           certificationId,
           affiliationId,

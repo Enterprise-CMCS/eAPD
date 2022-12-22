@@ -28,17 +28,20 @@ describe('auth/certifications put endpoint', () => {
     describe('when authenticated as a user with permissions', () => {
       let api;
       beforeAll(async () => {
-        api = login('federal-admin');
+        api = login('fed-admin');
       });
 
       it('with no request body', async () => {
         const response = await api.put(url, {});
+        console.log('response 1:', response);
+
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });
 
       it('with a valid request body', async () => {
         const response = await api.put(url, payload);
+        console.log('response 2:', response);
 
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
