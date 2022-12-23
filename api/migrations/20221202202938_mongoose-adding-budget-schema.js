@@ -27,9 +27,9 @@ export const up = async () => {
         ...activity,
         activityId: generateKey(),
         costAllocationNarrative: {
-          methodology: activity.costAllocationNarrative.methodology,
+          methodology: activity?.costAllocationNarrative?.methodology || '',
           years: forAllYears(
-            activity.costAllocationNarrative.years,
+            activity?.costAllocationNarrative?.years || apd.years,
             { otherSources: '' },
             apd.years
           )

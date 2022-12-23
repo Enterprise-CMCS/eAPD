@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "type": "module",
   "description": "APD api for CMS HITECH program",
-  "exports": "./index.js",
+  "exports": {
+    ".": "./main.js",
+    "./shared.js": "./shared.js"
+  },
   "scripts": {
     "lint": "eslint '**/*.js'",
     "start": "node main.js",
     "start-dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 main.js -e js",
+    "start-test-server": "./test-server-setup.sh",
     "npm-check": "npx npm-check-updates",
     "knex": "node_modules/.bin/knex",
     "knex-console": "node --experimental-repl-await knexrepl.js",
@@ -18,10 +22,10 @@
     "seed": "yarn knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "yarn knex seed:run --specific=base-users.js",
-    "jest": "NODE_ENV=test jest",
+    "jest": "NODE_OPTIONS=--experimental-vm-modules NODE_ENV=test jest",
     "tap": "NODE_ENV=test tap -J --no-browser --no-coverage --no-timeout",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
-    "test-endpoints": "jest --detectOpenHandles --forceExit --runInBand",
+    "test-endpoints": "yarn jest --detectOpenHandles --forceExit --runInBand",
     "test-specific": "NODE_ENV=test tap --no-coverage --coverage-report=text-lcov --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
@@ -93,26 +97,9 @@
     "file-type": "can't upgrade to 17 because it requires babel",
     "mongoose": "we aren't upgrading to 6.x yet because it's not highly supported by other packages"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
   "jest": {
     "coverageDirectory": "./coverage-endpoint/",
     "rootDir": "./",
-    "testRegex": ".*.endpoint.(j|t)s[x]?$",
-    "transform": {
-      "\\.[jt]sx?$": "babel-jest"
-    },
-    "testEnvironment": "node",
-    "testTimeout": 30000,
-    "collectCoverageFrom": [
-      "routes/**/*.{js,jsx}",
-      "!**/*.test.js",
-      "!**/__snapshots__/**",
-      "!**/openAPI.js"
-    ],
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/coverage-endpoint/"
@@ -126,12 +113,17 @@
       "^.+\\.jsx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!@cms-eapd/common|file-type)",
-      "dist"
+      "node_modules/(?!@cms-eapd/common|file-type)"
     ],
     "moduleFileExtensions": [
       "js",
       "jsx"
+    ],
+    "collectCoverageFrom": [
+      "routes/**/*.{js,jsx}",
+      "!**/*.test.js",
+      "!**/__snapshots__/**",
+      "!**/openAPI.js"
     ]
   },
   "tap": {

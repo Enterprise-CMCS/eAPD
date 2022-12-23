@@ -151,6 +151,7 @@ describe('<ApdNew />', () => {
       });
 
       it('Filled out MMIS form should enable Create APD button', async () => {
+        jest.setTimeout(300000);
         const { user } = await setup(props, options);
         const disabledBtn = screen.getByRole('button', {
           name: /Create an APD/

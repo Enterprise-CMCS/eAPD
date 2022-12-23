@@ -94,8 +94,8 @@ describe('APD overview component', () => {
   });
 
   test('user can delete a year', async () => {
-    mockFlags({ enableMmis: false });
     jest.setTimeout(30000);
+    mockFlags({ enableMmis: false });
     const { user } = await setup();
     expect(screen.getByLabelText('2023')).toBeChecked();
     await user.click(screen.getByLabelText('2023'));

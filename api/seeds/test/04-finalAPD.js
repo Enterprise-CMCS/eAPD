@@ -4,7 +4,13 @@ export default {
   apdType: APD_TYPE.HITECH,
   name: 'MN-1936-08-03-HITECH-APD',
   years: [],
+  yearOptions: [],
   apdOverview: {
+    updateStatus: {
+      isUpdateAPD: false,
+      annualUpdate: false,
+      asNeededUpdate: false
+    },
     programOverview: '',
     narrativeHIE: '',
     narrativeHIT: '',

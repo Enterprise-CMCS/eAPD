@@ -1,5 +1,5 @@
 import LaunchDarkly from 'launchdarkly-node-server-sdk';
-import { FileDataSource } from 'launchdarkly-node-server-sdk/integrations';
+import { FileDataSource } from 'launchdarkly-node-server-sdk/integrations.js';
 import loggerFactory from '../logger/index.js';
 
 const logger = loggerFactory('apds/submissions get');

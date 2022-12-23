@@ -64,3 +64,5 @@ export {
 } from './assurancesAndCompliance.js';
 
 export { hitechCombinedSchema, mmisCombinedSchema } from './combined.js';
+
+export { default as newApdSchema } from './apdNew.js';

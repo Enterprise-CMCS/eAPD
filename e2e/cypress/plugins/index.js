@@ -14,7 +14,7 @@
 
 import { lighthouse, pa11y, prepareAudit } from 'cypress-audit'; // eslint-disable-line import/no-extraneous-dependencies
 import browserify from '@cypress/browserify-preprocessor'; // eslint-disable-line import/no-extraneous-dependencies
-import { knex } from '@cms-eapd/api';
+import { knex } from '@cms-eapd/api/shared.js';
 import grep from 'cypress-grep/src/plugin';
 import codeCoverage from '@cypress/code-coverage/task';
 

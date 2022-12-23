@@ -24,7 +24,7 @@ import CostAllocationRows, {
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
 
-import { costAllocationOtherSchema as schema } from '@cms-eapd/common';
+import { costAllocationSchema as schema } from '@cms-eapd/common';
 
 const AllFFYsSummaryNarrative = ({
   activityName,

@@ -26,6 +26,7 @@ export default (
     userCanEditAPD(),
     async (req, res, next) => {
       try {
+        console.log(`user ${JSON.stringify(req.user)}`);
         const { metadata = null } = req.body;
         const { size = 0, data = null } = req.files.file;
 

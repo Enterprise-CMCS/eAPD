@@ -1,5 +1,7 @@
+import { APD_TYPE } from '@cms-eapd/common';
+
 export default {
-  apdType: 'MMIS',
+  apdType: APD_TYPE.MMIS,
   name: 'MMIS IAPD No Activities',
   years: ['2023', '2024'],
   yearOptions: ['2023', '2024', '2025'],
@@ -30,16 +32,16 @@ export default {
   },
   keyStatePersonnel: {
     medicaidDirector: {
-      email: '',
-      name: '',
-      phone: ''
+      name: 'Cornelius Fudge',
+      email: 'c.fudge@ministry.magic',
+      phone: '5551234567'
     },
     medicaidOffice: {
-      address1: '',
+      address1: '100 Round Sq',
       address2: '',
-      city: '',
-      state: '',
-      zip: ''
+      city: 'Cityville',
+      state: 'AK',
+      zip: '12345'
     },
     keyPersonnel: []
   },
