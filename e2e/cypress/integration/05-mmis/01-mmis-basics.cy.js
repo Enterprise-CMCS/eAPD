@@ -155,7 +155,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       // Should redirect to dashboard and not save
-      cy.contains('MMIS APD Test').should('exist');
+      cy.contains('MMIS APD Test').should('not.exist');
     });
   });
 });
