@@ -14,7 +14,7 @@ export const testDefaultProposedBudget = years => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('proposed-budget-test.json').then(data => {
       budgetData = data;
     });
@@ -116,7 +116,7 @@ export const testProposedBudgetWithData = years => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('proposed-budget-test.json').then(data => {
       budgetData = data;
     });
