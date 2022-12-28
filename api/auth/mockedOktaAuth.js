@@ -19,6 +19,7 @@ const allPermissions = {
 const fedAdmin = {
   status: 'ACTIVE',
   id: 'fed-admin',
+  role: 'eAPD Federal Admin',
   profile: {
     displayName: 'Federal Admin',
     email: 'fedadmin@email.com'
