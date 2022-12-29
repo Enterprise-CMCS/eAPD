@@ -170,6 +170,9 @@ E_USER
 
 sudo yum remove -y gcc-c++
 
+# Move Mongo Cron to Daily Cron Directory
+mv /home/ec2-user/mongo-dump.cron /etc/cron.hourly/mongo-dump
+
 # SELinux context so Nginx can READ the files in /app/web
 mv /home/ec2-user/nginx.conf.tpl /etc/nginx/nginx.conf
 chown -R nginx /app/web

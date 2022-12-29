@@ -69,5 +69,9 @@ build {
     provisioner "file" {    
         source = "mongo-dump.sh.tpl"
         destination = "/home/ec2-user/mongo-dumps.sh"
+    }
+    provisioner "file" {    
+        source = "mongo-dump.cron.tpl"
+        destination = "/home/ec2-user/mongo-dump.cron"
     }    
 }
