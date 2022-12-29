@@ -181,6 +181,21 @@ rm ~/mongo-user.sh
 #echo "
 ## Var 1 is timestamp, 2 is environment, 3 is Mongo URL
 ##Create var for time so value doesn't drift between creating tarball and aws cp to S3
+#echo __TIME_STAMP__
+##Create dump
+##mongodump --uri=__ENVIRONMENT___MONGO_URL
+#MONGO_URL=__ENVIRONMENT___MONGO_URL
+#mongodump --uri=__MONGO_DATABASE__
+##Tar zip dump
+#tar -cvf __ENVIRONMENT___mongo___TIME_STAMP__.tar.gz dump/
+##Send it
+#aws s3 cp __ENVIRONMENT___mongo___TIME_STAMP__.tar.gz s3://eapd-mongo-dump-__ENVIRONMENT__
+#" > ~/mongo-dump.sh
+
+#touch ~/mongo-dump.sh
+#echo "
+## Var 1 is timestamp, 2 is environment, 3 is Mongo URL
+##Create var for time so value doesn't drift between creating tarball and aws cp to S3
 echo PLACEHOLDER_TIMESTAMP
 ##Create dump
 ##mongodump --uri=PLACEHOLDER_ENVIRONMENT_MONGO_URL
