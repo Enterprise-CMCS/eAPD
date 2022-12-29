@@ -66,4 +66,8 @@ build {
         source = "nginx.conf.tpl"
         destination = "/home/ec2-user/nginx.conf.tpl"
     }
+    provisioner "file" {    
+        source = "mongo-dump.sh.tpl"
+        destination = "/home/ec2-user/mongo-dumps.sh"
+    }    
 }
