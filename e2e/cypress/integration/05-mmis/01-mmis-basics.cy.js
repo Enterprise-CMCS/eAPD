@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import ActivityPage from '../../../page-objects/activity-page';
+import ActivityPage from '../../page-objects/activity-page';
 
 // Tests performing basic MMIS APD tasks
 
