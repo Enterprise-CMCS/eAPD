@@ -17,7 +17,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     cy.useStateStaff();
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.reload();
 
     cy.findAllByText('Create new').click();
@@ -43,7 +43,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.visit(apdUrl);
   });
 
@@ -54,7 +54,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
   describe('Form View', () => {
     /* eslint-disable-next-line prefer-arrow-callback, func-names */
     beforeEach(function () {
-      cy.updateFeatureFlags({ validation: false, enableMmis: false });
+      cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
       cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     });
 
