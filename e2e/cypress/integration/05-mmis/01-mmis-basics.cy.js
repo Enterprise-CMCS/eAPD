@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import ActivityPage from '../../../page-objects/activity-page';
+
 // Tests performing basic MMIS APD tasks
 
 /* eslint-disable no-return-assign */
@@ -9,8 +11,11 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
   let apdUrl;
   let apdId;
   const years = [];
+  let activityPage;
 
   before(() => {
+    activityPage = new ActivityPage();
+
     cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.reload();
@@ -164,28 +169,49 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
 
       cy.contains('Provide Security and Interface Plan').should('exist');
       cy.get('[id="security-interface-plan"]').should('have.value', '');
+
       cy.setTinyMceContent(
         'security-interface-plan',
         'This is the Security Interface plan'
       );
+      cy.waitForSave();
+
       cy.contains('Provide Security and Interface Plan').should('not.exist');
 
       cy.contains('Provide Business Continuity and Disaster Recovery').should(
         'exist'
       );
       cy.get('[id="bc-dr-plan"]').should('have.value', '');
+
       cy.setTinyMceContent(
         'bc-dr-plan',
         'This is the Business Continuity and Disaster Recovery plan'
       );
+      cy.waitForSave();
+
       cy.contains('Provide Business Continuity and Disaster Recovery').should(
         'not.exist'
+      );
+
+      // Verify fields save
+      cy.goToApdOverview();
+      cy.wait(2000);
+      cy.goToSecurityPlanning();
+
+      activityPage.checkTinyMCE(
+        'security-interface-plan',
+        'This is the Security Interface plan'
+      );
+      activityPage.checkTinyMCE(
+        'bc-dr-plan',
+        'This is the Business Continuity and Disaster Recovery plan'
       );
 
       cy.get('[class="eapd-admin-check-list"]').within(list => {
         cy.get(list).contains('Security Planning').should('not.exist');
       });
 
+      // Verify validation disappears when Admin Check is off
       cy.setTinyMceContent('security-interface-plan', '');
       cy.contains('Provide Security and Interface Plan').should('exist');
 

@@ -29,7 +29,6 @@ const SecurityPlanning = ({
   const {
     control,
     formState: { errors },
-    setValue,
     trigger,
     clearErrors
   } = useForm({
