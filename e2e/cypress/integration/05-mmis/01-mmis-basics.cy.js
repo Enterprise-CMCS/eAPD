@@ -158,7 +158,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.contains('MMIS APD Test').should('not.exist');
     });
   });
-  describe('MMIS Pages', () => {
+  describe.only('MMIS Pages', () => {
     it('tests the Security Planning page', () => {
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
@@ -198,13 +198,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.wait(2000);
       cy.goToSecurityPlanning();
 
-      activityPage.checkTinyMCE(
-        'security-interface-plan',
-        'This is the Security Interface plan'
+      cy.get('[id="security-interface-plan"]').should(
+        'have.value',
+        '<p>This is the Security Interface plan</p>'
       );
-      activityPage.checkTinyMCE(
-        'bc-dr-plan',
-        'This is the Business Continuity and Disaster Recovery plan'
+      cy.get('[id="bc-dr-plan"]').should(
+        'have.value',
+        '<p>This is the Business Continuity and Disaster Recovery plan</p>'
       );
 
       cy.get('[class="eapd-admin-check-list"]').within(list => {
