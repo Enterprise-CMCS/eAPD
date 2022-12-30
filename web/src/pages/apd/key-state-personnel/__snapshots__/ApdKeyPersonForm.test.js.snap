@@ -19,6 +19,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       "key": "person key",
       "name": "Bob the Builder",
       "position": "The Builder",
+      "split": Object {
+        "1992": Object {
+          "federal": 90,
+          "state": 10,
+        },
+        "1993": Object {
+          "federal": 90,
+          "state": 10,
+        },
+      },
     }
   }
   savePerson={[MockFunction]}
@@ -86,6 +96,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_executeSchema": [Function],
           "_fields": Object {
@@ -4183,6 +4203,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_getDirty": [Function],
           "_getFieldArray": [Function],
@@ -4216,6 +4246,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "hasCosts": "yes",
               "name": "Bob the Builder",
               "position": "The Builder",
+              "split": Object {
+                "1992": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+                "1993": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+              },
             },
             "mode": "onChange",
             "reValidateMode": "onChange",
@@ -4404,6 +4444,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_executeSchema": [Function],
           "_fields": Object {
@@ -8501,6 +8551,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_getDirty": [Function],
           "_getFieldArray": [Function],
@@ -8534,6 +8594,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "hasCosts": "yes",
               "name": "Bob the Builder",
               "position": "The Builder",
+              "split": Object {
+                "1992": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+                "1993": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+              },
             },
             "mode": "onChange",
             "reValidateMode": "onChange",
@@ -8722,6 +8792,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_executeSchema": [Function],
           "_fields": Object {
@@ -12819,6 +12899,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_getDirty": [Function],
           "_getFieldArray": [Function],
@@ -12852,6 +12942,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "hasCosts": "yes",
               "name": "Bob the Builder",
               "position": "The Builder",
+              "split": Object {
+                "1992": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+                "1993": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+              },
             },
             "mode": "onChange",
             "reValidateMode": "onChange",
@@ -13040,6 +13140,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_executeSchema": [Function],
           "_fields": Object {
@@ -17137,6 +17247,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_getDirty": [Function],
           "_getFieldArray": [Function],
@@ -17170,6 +17290,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "hasCosts": "yes",
               "name": "Bob the Builder",
               "position": "The Builder",
+              "split": Object {
+                "1992": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+                "1993": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+              },
             },
             "mode": "onChange",
             "reValidateMode": "onChange",
@@ -17306,6 +17436,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -21403,6 +21543,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -21436,6 +21586,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -21558,6 +21718,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -25655,6 +25825,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -25688,6 +25868,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -25838,6 +26028,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -29935,6 +30135,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -29968,6 +30178,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -30090,6 +30310,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -34187,6 +34417,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -34220,6 +34460,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -34421,6 +34671,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_executeSchema": [Function],
                             "_fields": Object {
@@ -38518,6 +38778,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_getDirty": [Function],
                             "_getFieldArray": [Function],
@@ -38551,6 +38821,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "hasCosts": "yes",
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
+                                "split": Object {
+                                  "1992": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                  "1993": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                },
                               },
                               "mode": "onChange",
                               "reValidateMode": "onChange",
@@ -38673,6 +38953,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_executeSchema": [Function],
                             "_fields": Object {
@@ -42770,6 +43060,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_getDirty": [Function],
                             "_getFieldArray": [Function],
@@ -42803,6 +43103,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "hasCosts": "yes",
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
+                                "split": Object {
+                                  "1992": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                  "1993": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                },
                               },
                               "mode": "onChange",
                               "reValidateMode": "onChange",
@@ -42953,6 +43263,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_executeSchema": [Function],
                             "_fields": Object {
@@ -47050,6 +47370,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_getDirty": [Function],
                             "_getFieldArray": [Function],
@@ -47083,6 +47413,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "hasCosts": "yes",
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
+                                "split": Object {
+                                  "1992": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                  "1993": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                },
                               },
                               "mode": "onChange",
                               "reValidateMode": "onChange",
@@ -47205,6 +47545,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_executeSchema": [Function],
                             "_fields": Object {
@@ -51302,6 +51652,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_getDirty": [Function],
                             "_getFieldArray": [Function],
@@ -51335,6 +51695,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "hasCosts": "yes",
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
+                                "split": Object {
+                                  "1992": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                  "1993": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                },
                               },
                               "mode": "onChange",
                               "reValidateMode": "onChange",
@@ -51531,6 +51901,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -55628,6 +56008,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -55661,6 +56051,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -55891,6 +56291,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -59988,6 +60398,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -60021,6 +60441,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -60260,6 +60690,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -64357,6 +64797,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -64390,6 +64840,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -64620,6 +65080,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -68717,6 +69187,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "hasCosts": "yes",
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -68750,6 +69230,16 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "hasCosts": "yes",
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -69071,6 +69561,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "hasCosts": "no",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
@@ -69099,6 +69599,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "hasCosts": "no",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69123,6 +69633,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "hasCosts": "no",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69189,6 +69709,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "hasCosts": "no",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
@@ -69217,6 +69747,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "hasCosts": "no",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69241,6 +69781,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "hasCosts": "no",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69307,6 +69857,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "hasCosts": "no",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
@@ -69335,6 +69895,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "hasCosts": "no",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69359,6 +69929,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "hasCosts": "no",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69425,6 +70005,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "hasCosts": "no",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
@@ -69453,6 +70043,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "hasCosts": "no",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69477,6 +70077,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "hasCosts": "no",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69579,6 +70189,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "hasCosts": "yes",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
@@ -69607,6 +70227,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "hasCosts": "yes",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69631,6 +70261,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69697,6 +70337,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "hasCosts": "yes",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
@@ -69725,6 +70375,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "hasCosts": "yes",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69749,6 +70409,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69815,6 +70485,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "hasCosts": "yes",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
@@ -69843,6 +70523,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "hasCosts": "yes",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69867,6 +70557,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69933,6 +70633,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "hasCosts": "yes",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
@@ -69961,6 +70671,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "hasCosts": "yes",
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69985,6 +70705,16 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "hasCosts": "yes",
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",

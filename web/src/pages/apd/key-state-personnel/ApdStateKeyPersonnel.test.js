@@ -65,7 +65,11 @@ describe('apd state profile, Medicaid office component', () => {
           }
         }
       })
-    ).toEqual({ list: 'these are my people', years: 'and these are my years' });
+    ).toEqual({
+      list: 'these are my people',
+      years: 'and these are my years',
+      apdType: 'HITECH'
+    });
   });
 
   it('maps dispatch to props', () => {

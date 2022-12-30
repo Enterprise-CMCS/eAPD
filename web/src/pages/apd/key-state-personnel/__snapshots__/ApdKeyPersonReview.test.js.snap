@@ -49,7 +49,16 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </strong>
           <Dollars>
             32
+             
           </Dollars>
+           (
+           
+          <Dollars>
+            0
+            )
+          </Dollars>
+           
+          Federal Share )
         </div>
         <div
           key="1993"
@@ -73,7 +82,16 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </strong>
           <Dollars>
             252
+             
           </Dollars>
+           (
+           
+          <Dollars>
+            0
+            )
+          </Dollars>
+           
+          Federal Share )
         </div>
       </div>
     </Review>
@@ -127,7 +145,16 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </strong>
           <Dollars>
             32
+             
           </Dollars>
+           (
+           
+          <Dollars>
+            0
+            )
+          </Dollars>
+           
+          Federal Share )
         </div>
         <div
           key="1993"
@@ -151,7 +178,16 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </strong>
           <Dollars>
             252
+             
           </Dollars>
+           (
+           
+          <Dollars>
+            0
+            )
+          </Dollars>
+           
+          Federal Share )
         </div>
       </div>
     </Review>

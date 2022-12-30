@@ -22,6 +22,16 @@ describe('the ApdKeyPersonForm component', () => {
         1992: 0.32,
         1993: 0.57
       },
+      split: {
+        1992: {
+          federal: 90,
+          state: 10
+        },
+        1993: {
+          federal: 90,
+          state: 10
+        }
+      },
       position: 'The Builder'
     },
     savePerson: jest.fn(),

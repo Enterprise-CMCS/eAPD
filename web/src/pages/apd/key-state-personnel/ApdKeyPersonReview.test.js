@@ -20,6 +20,16 @@ describe('the ApdKeyPersonReview component', () => {
         1992: 0.32,
         1993: 0.84
       },
+      split: {
+        1992: {
+          federal: 0,
+          state: 0
+        },
+        1993: {
+          federal: 0,
+          state: 0
+        }
+      },
       position: 'The Builder'
     },
     onDeleteClick: jest.fn(),
