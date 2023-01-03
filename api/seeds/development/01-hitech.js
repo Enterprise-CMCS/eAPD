@@ -39,7 +39,11 @@ const hitech = {
         isPrimary: true,
         fte: { 2022: 1, 2023: 1 },
         hasCosts: true,
-        costs: { 2022: 100000, 2023: 100000 }
+        costs: { 2022: 100000, 2023: 100000 },
+        split: {
+          2022: { federal: 90, state: 10 },
+          2023: { federal: 90, state: 10 }
+        }
       },
       {
         name: 'Fred Johnson',
@@ -48,7 +52,11 @@ const hitech = {
         isPrimary: false,
         fte: { 2022: 0.3, 2023: 0.3 },
         hasCosts: false,
-        costs: { 2022: 0, 2023: 0 }
+        costs: { 2022: 0, 2023: 0 },
+        split: {
+          2022: { federal: 90, state: 10 },
+          2023: { federal: 90, state: 10 }
+        }
       }
     ]
   },
