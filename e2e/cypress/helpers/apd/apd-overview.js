@@ -48,7 +48,7 @@ export const testAPDOverviewWithData = () => {
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   beforeEach(function () {
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('apd-overview-template.json').then(userContent => {
       apdOverview = userContent;
     });
