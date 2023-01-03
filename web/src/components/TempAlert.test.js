@@ -1,24 +1,34 @@
-// import React from 'react';
-// import { renderWithConnection, screen } from 'apd-testing-library';
+import React from 'react';
+import { renderWithConnection, screen } from 'apd-testing-library';
 
-// import TempAlert from './TempAlert';
+import TempAlert from './TempAlert';
 
-// const setup = (props = {}, options = {}) => {
-//   console.log(props)
-//   return renderWithConnection(<TempAlert {...props} />, options);
-// };
+const setup = (props = {}, options = {}) => {
+  return renderWithConnection(<TempAlert {...props} />, options);
+};
 
-// describe('<TempAlert />', () => {
-//   it('displays apd success message', () => {
-//     let msg = 'Test message.';
+describe('temporary alert/message', () => {
+  beforeEach(() => {});
 
-//     setup({tempMessages: [{
-//       message: msg,
-//       variation: 'success'
-//     }]})
+  afterAll(() => {});
 
-//     console.log(screen)
+  test('renders temporary message when apd created', async () => {
+    const successMsg =
+      'You have successfully created an APD. Select continue to fill out the rest of the APD.';
 
-//     expect(screen.getByText(msg)).toBeTruthy();
-//   });
-// });
+    setup(null, {
+      initialState: {
+        errors: {
+          tempMessages: [
+            {
+              message: successMsg,
+              variation: 'success'
+            }
+          ]
+        }
+      }
+    });
+
+    expect(await screen.findByText(successMsg)).toBeTruthy();
+  });
+});

@@ -6,8 +6,7 @@ import { Alert, Button } from '@cmsgov/design-system';
 
 import { getTempMessages } from '../redux/reducers/errors';
 
-const TempAlert = props => {
-  const { tempMessages } = props;
+const TempAlert = ({ tempMessages }) => {
   const [tempMsgState, setTempMsgState] = useState(tempMessages);
 
   if (!tempMessages) {
