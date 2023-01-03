@@ -146,6 +146,16 @@ Object {
           "isPrimary": true,
           "name": "James Holden",
           "position": "HIT Coordinator",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         Object {
           "costs": Object {
@@ -162,6 +172,16 @@ Object {
           "isPrimary": false,
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         Object {
           "costs": Object {
@@ -505,6 +525,16 @@ Object {
           "isPrimary": true,
           "name": "James Holden",
           "position": "HIT Coordinator",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         Object {
           "costs": Object {
@@ -521,6 +551,16 @@ Object {
           "isPrimary": false,
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
       ],
       "medicaidDirector": Object {
@@ -855,6 +895,16 @@ Object {
           "isPrimary": true,
           "name": "James Holden",
           "position": "HIT Coordinator",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         Object {
           "costs": Object {
@@ -871,6 +921,16 @@ Object {
           "isPrimary": false,
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
       ],
       "medicaidDirector": Object {
@@ -1186,6 +1246,16 @@ Object {
           "isPrimary": true,
           "name": "James Holden",
           "position": "HIT Coordinator",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         Object {
           "costs": Object {
@@ -1202,6 +1272,16 @@ Object {
           "isPrimary": false,
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         Object {
           "costs": Object {
