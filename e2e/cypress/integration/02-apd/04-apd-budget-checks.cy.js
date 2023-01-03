@@ -20,7 +20,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     fillOutActivityPage = new FillOutActivityPage();
 
     cy.useStateStaff();
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.reload();
 
     cy.findAllByText('Create new').click();
@@ -48,7 +48,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.visit(apdUrl);
   });
 
