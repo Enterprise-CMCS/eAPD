@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import { APD_TYPE } from '@cms-eapd/common';
 import {
   newActivity,
   newContractor,

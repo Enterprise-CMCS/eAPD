@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import { APD_TYPE } from '@cms-eapd/common';
 import { RESET, SELECT_APD_SUCCESS } from '../actions/app/symbols';
 
 // The Hubble Space Telescope was launched on the space shuttle Discovery on

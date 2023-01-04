@@ -122,13 +122,14 @@ tap.test('PATCH affiliations endpoint', async t => {
         newRoleId: 5,
         newStatus: 'approved',
         changedBy: 10,
+        changedByRole: 'eAPD State Admin',
         affiliationId: 8
       })
       .rejects(err);
 
     await handler(
       {
-        user: { id: 10 },
+        user: { id: 10, role: 'eAPD State Admin' },
         body: { roleId: 5, status: 'approved' },
         params: { stateId: 'ak', id: 8 }
       },

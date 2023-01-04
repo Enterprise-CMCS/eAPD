@@ -13,14 +13,21 @@ describe('utility arrays', () => {
   });
 });
 
-describe('utility functions', async () => {
-  const {
-    applyToNumbers,
-    getParams,
-    stateDateToDisplay,
-    stateDateRangeToDisplay,
-    stateLookup
-  } = await load();
+describe('utility functions', () => {
+  let applyToNumbers;
+  let getParams;
+  let stateDateToDisplay;
+  let stateDateRangeToDisplay;
+  let stateLookup;
+  beforeAll(async () => {
+    ({
+      applyToNumbers,
+      getParams,
+      stateDateToDisplay,
+      stateDateRangeToDisplay,
+      stateLookup
+    } = await load());
+  });
 
   test('apply a function to numbers in an object, deeply', () => {
     expect(applyToNumbers({ a: 1, b: 2, c: { d: 7 } }, () => 'boop')).toEqual({
