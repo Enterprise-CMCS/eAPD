@@ -209,12 +209,6 @@ echo PLACEHOLDER_TIMESTAMP
 E_USER
 
 sudo su <<R_USER
-## Create cronjob to run MongoDump Hourly (For Testing)
-#touch /etc/cron.hourly/mongodump
-#echo "
-#bash /home/ec2-user/mongo-dump.sh $(date +%Y%m%d%H%M%S) PLACEHOLDER_ENVIRONMENT PLACEHOLDER_MONGOURL
-#" > /etc/cron.hourly/mongodump
-
 # Harden & Restart Mongo
 sed -i 's|#security:|security:|g' /etc/mongod.conf
 sed -i '/security:/a \ \ authorization: "enabled"' /etc/mongod.conf
