@@ -18,12 +18,6 @@ export const setActivityAlternatives = (activityIndex, alternatives) => ({
   value: alternatives
 });
 
-export const setActivitySnapshot = (activityIndex, activitySnapshot) => ({
-  type: EDIT_APD,
-  path: `/activities/${activityIndex}/activityOverview/activitySnapshot`,
-  value: activitySnapshot
-});
-
 export const setActivityProblemStatement = (
   activityIndex,
   problemStatement
@@ -40,4 +34,10 @@ export const setActivityProposedSolution = (
   type: EDIT_APD,
   path: `/activities/${activityIndex}/activityOverview/proposedSolution`,
   value: proposedSolution
+});
+
+export const setActivitySnapshot = (activityIndex, activitySnapshot) => ({
+  type: EDIT_APD,
+  path: `/activities/${activityIndex}/activityOverview/activitySnapshot`,
+  value: activitySnapshot
 });

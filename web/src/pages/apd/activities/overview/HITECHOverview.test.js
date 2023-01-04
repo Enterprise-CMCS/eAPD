@@ -1,11 +1,7 @@
 import React from 'react';
 import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
-import MockAdapter from 'axios-mock-adapter';
 
-import axios from '../../../../util/api';
 import HITECHOverview from './HITECHOverview';
-
-const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 const initialState = {
   apd: {
@@ -34,10 +30,6 @@ const setup = (props = {}, options = {}) =>
   renderWithConnection(<HITECHOverview {...props} />, options);
 
 describe('<HITECHOverview />', () => {
-  beforeEach(() => {
-    fetchMock.reset();
-  });
-
   describe('existing Activity', () => {
     it('displays data from existing activity', async () => {
       setup(

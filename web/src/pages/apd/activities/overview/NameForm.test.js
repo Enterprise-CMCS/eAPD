@@ -9,6 +9,7 @@ import {
 import { plain as NameForm } from './NameForm';
 
 const defaultProps = {
+  adminCheck: false,
   index: 1,
   item: {
     key: 'key 1',

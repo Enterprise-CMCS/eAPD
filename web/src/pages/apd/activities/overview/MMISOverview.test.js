@@ -1,11 +1,7 @@
 import React from 'react';
 import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
-import MockAdapter from 'axios-mock-adapter';
 
-import axios from '../../../../util/api';
 import MMISOverview from './MMISOverview';
-
-const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
 const initialState = {
   apd: {
@@ -31,10 +27,6 @@ const setup = (props = {}, options = {}) =>
   renderWithConnection(<MMISOverview {...props} />, options);
 
 describe('<MMISOverview />', () => {
-  beforeEach(() => {
-    fetchMock.reset();
-  });
-
   describe('existing activity', () => {
     it('displays data from existing activity', async () => {
       setup(
