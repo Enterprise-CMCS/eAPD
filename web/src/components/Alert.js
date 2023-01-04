@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Alert, Button } from '@cmsgov/design-system';
 
-import { getTempMessages } from '../redux/reducers/errors';
+import { getTempMessages } from '../redux/reducers/alerts';
 
 const TempAlert = ({ tempMessages }) => {
   const [tempMsgState, setTempMsgState] = useState(tempMessages);

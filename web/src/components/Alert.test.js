@@ -1,10 +1,10 @@
 import React from 'react';
 import { renderWithConnection, screen } from 'apd-testing-library';
 
-import TempAlert from './TempAlert';
+import Alert from './Alert';
 
 const setup = (props = {}, options = {}) => {
-  return renderWithConnection(<TempAlert {...props} />, options);
+  return renderWithConnection(<Alert {...props} />, options);
 };
 
 describe('temporary alert/message', () => {
