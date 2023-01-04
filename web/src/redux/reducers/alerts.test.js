@@ -1,19 +1,19 @@
-import errors from './errors';
+import alerts from './alerts';
 
 import { CREATE_APD_SUCCESS } from '../actions/app';
 
-describe('errors reducer', () => {
+describe('alerts reducer', () => {
   const initialState = {
     tempMessages: []
   };
 
   it('should handle initial state', () => {
-    expect(errors(undefined, initialState)).toEqual(initialState);
+    expect(alerts(undefined, initialState)).toEqual(initialState);
   });
 
   describe('create APD success message', () => {
     it('an APD is created', () => {
-      expect(errors(undefined, { type: CREATE_APD_SUCCESS })).toEqual({
+      expect(alerts(undefined, { type: CREATE_APD_SUCCESS })).toEqual({
         tempMessages: [
           {
             message:

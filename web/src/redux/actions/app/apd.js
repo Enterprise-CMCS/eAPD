@@ -162,6 +162,7 @@ export const createApd =
       .then(async req => {
         let data = req.data;
         dispatch({ type: CREATE_APD_SUCCESS, data: data });
+        // dispatch({ type: ALERT_SUCCESS, message: APD_CREATE_SUCCESS_MSG })
         dispatch(ariaAnnounceApdCreateSuccess());
         await dispatch(selectApd(data.id, `/apd/${data.id}`, { pushRoute }));
       })

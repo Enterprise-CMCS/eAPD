@@ -1,12 +1,12 @@
 import { CREATE_APD_SUCCESS } from '../actions/app';
+import { APD_CREATE_SUCCESS_MSG } from '../actions/aria';
 
 const initialState = {
-  tempMessages: []
+  alerts: []
 };
 
 const apdSuccess = {
-  message:
-    'You have successfully created an APD. Select continue to fill out the rest of the APD.',
+  message: APD_CREATE_SUCCESS_MSG,
   variation: 'success'
 };
 
