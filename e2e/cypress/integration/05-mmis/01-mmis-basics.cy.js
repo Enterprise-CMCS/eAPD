@@ -158,7 +158,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.contains('MMIS APD Test').should('not.exist');
     });
   });
-  describe.only('MMIS Pages', () => {
+  describe('MMIS Pages', () => {
     it('tests the Security Planning page', () => {
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
