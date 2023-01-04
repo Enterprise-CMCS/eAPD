@@ -1,11 +1,5 @@
 export const ARIA_ANNOUNCE_CHANGE = 'ARIA_ANNOUNCE_CHANGE';
 
-export const ariaAnnounceCreateApd = () => ({
-  type: ARIA_ANNOUNCE_CHANGE,
-  message:
-    'You have successfully created an APD. Select continue to fill out the rest of the APD.'
-});
-
 export const ariaAnnounceFFPQuarterly =
   (activityId, year, q, name) => (dispatch, getState) => {
     dispatch({
@@ -17,6 +11,12 @@ export const ariaAnnounceFFPQuarterly =
       } dollars`
     });
   };
+
+export const ariaAnnounceApdCreateSuccess = () => ({
+  type: ARIA_ANNOUNCE_CHANGE,
+  message:
+    'You have successfully created an APD. Select continue to fill out the rest of the APD.'
+});
 
 export const ariaAnnounceApdLoading = () => ({
   type: ARIA_ANNOUNCE_CHANGE,
