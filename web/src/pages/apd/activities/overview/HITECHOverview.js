@@ -185,9 +185,8 @@ const HITECHOverview = ({
         <Controller
           name="description"
           control={control}
-          render={({ field: { onChange, ...props } }) => (
+          render={({ field: { onChange } }) => (
             <RichText
-              {...props}
               id="activity-description-field"
               iframe_aria_text="Include as much detail as is necessary to explain the activity Text Area"
               role={description}
