@@ -29,6 +29,8 @@ module.exports = (
     validForState('stateId'),
     async (request, response, next) => {
       const userId = request.user.id;
+      const userRole = request.user.role;
+
       const { stateId, id } = request.params;
       const { status, roleId } = request.body;
 
@@ -51,6 +53,7 @@ module.exports = (
           newRoleId: roleId,
           newStatus: status,
           changedBy: userId,
+          changedByRole: userRole,
           affiliationId: id
         });
       } catch (e) {

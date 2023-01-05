@@ -30,9 +30,14 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   before(() => {
     cy.useStateStaff();
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.reload();
 
-    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.findAllByText('Create new').click();
+    cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
+    cy.findByRole('checkbox', { name: /Annual Update/i }).click();
+    cy.findByRole('button', { name: /Create an APD/i }).click();
+
     cy.findByRole(
       'heading',
       { name: /APD Overview/i },
@@ -49,7 +54,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.visit(apdUrl);
   });
 
@@ -184,9 +189,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         },
         {
           parent: 'Proposed Budget',
-          label: 'Summary Budget by Activity',
+          label: 'Combined Activity Costs',
           subnav: [
-            '#summary-schedule-by-activity-table',
+            '#combined-activity-costs-table',
             '#budget-summary-table',
             '#budget-federal-by-quarter',
             '#budget-incentive-by-quarter'
@@ -538,8 +543,60 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         }
       ];
 
-      cy.log('Outcomes and Milestones');
-      cy.goToOutcomesAndMilestones(0);
+      cy.log('Activity Schedule and Milestones');
+      cy.goToActivitySchedule(0);
+
+      cy.wrap(milestones).each((element, index) => {
+        cy.findByRole('button', { name: /Add Milestone/i }).click();
+        cy.findByRole('button', { name: /Add Milestone/i }).should('not.exist');
+
+        cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '');
+
+        cy.findByRole('button', { name: /Cancel/i }).click();
+
+        cy.get('.form-and-review-list')
+          .contains('Add milestone(s) for this activity.')
+          .should('exist');
+
+        cy.findByRole('button', { name: /Add Milestone/i }).click();
+
+        cy.get(`[data-cy=milestone-${index}]`)
+          .click()
+          .type(element.milestoneName);
+
+        cy.get(`.ds-c-field--month`).eq(2).click().type(element.dateMonth);
+
+        cy.get(`.ds-c-field--day`).eq(2).click().type(element.dateDay);
+
+        cy.get(`.ds-c-field--year`).eq(2).click().type(element.dateYear).blur();
+
+        cy.findByRole('button', { name: /Save/i }).click();
+
+        cy.waitForSave();
+
+        cy.get('.form-and-review-list')
+          .eq(0)
+          .findAllByRole('button', { name: /Edit/i })
+          .click();
+
+        cy.get(`[data-cy='milestone-${index}']`)
+          .click()
+          .clear()
+          .type(`Test cancel`);
+
+        cy.get('.form-and-review-list')
+          .eq(0)
+          .findByRole('button', { name: /Cancel/i })
+          .click();
+
+        activityPage.checkMilestoneOutput({
+          milestone: element.milestoneName,
+          targetDate: '1/2/2023'
+        });
+      });
+
+      cy.log('Outcomes and Metrics');
+      cy.goToOutcomesAndMetrics(0);
 
       cy.wrap(outcomes).each((element, index) => {
         cy.findByRole('button', { name: /Add Outcome/i }).click();
@@ -635,55 +692,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .click();
 
       cy.get('[class="ds-c-review"]').should('have.length', 1);
-
-      cy.wrap(milestones).each((element, index) => {
-        cy.findByRole('button', { name: /Add Milestone/i }).click();
-        cy.findByRole('button', { name: /Add Milestone/i }).should('not.exist');
-
-        cy.get(`[data-cy=milestone-${index}]`).click().should('have.value', '');
-
-        cy.findByRole('button', { name: /Cancel/i }).click();
-
-        cy.get('.form-and-review-list')
-          .contains('Add milestone(s) for this activity.')
-          .should('exist');
-
-        cy.findByRole('button', { name: /Add Milestone/i }).click();
-
-        cy.get(`[data-cy=milestone-${index}]`)
-          .click()
-          .type(element.milestoneName);
-
-        cy.get(`.ds-c-field--month`).click().type(element.dateMonth);
-
-        cy.get(`.ds-c-field--day`).click().type(element.dateDay);
-
-        cy.get(`.ds-c-field--year`).click().type(element.dateYear).blur();
-
-        cy.findByRole('button', { name: /Save/i }).click();
-
-        cy.waitForSave();
-
-        cy.get('.form-and-review-list')
-          .eq(1)
-          .findAllByRole('button', { name: /Edit/i })
-          .click();
-
-        cy.get(`[data-cy='milestone-${index}']`)
-          .click()
-          .clear()
-          .type(`Test cancel`);
-
-        cy.get('.form-and-review-list')
-          .eq(1)
-          .findByRole('button', { name: /Cancel/i })
-          .click();
-
-        activityPage.checkMilestoneOutput({
-          milestone: element.milestoneName,
-          targetDate: '1/2/2023'
-        });
-      });
 
       cy.log('State Staff and Expenses');
       cy.goToStateStaffAndExpenses(0);
@@ -1311,7 +1319,15 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         .findByRole('heading', { name: /3.*/i })
         .should('not.exist');
 
-      cy.goToOutcomesAndMilestones(0);
+      cy.goToActivitySchedule(0);
+
+      activityPage.checkDeleteButton(
+        'Add milestone(s) for this activity.',
+        'Delete Milestone?',
+        "Miles's Milestone"
+      );
+
+      cy.goToOutcomesAndMetrics(0);
 
       activityPage.checkDeleteButton(
         'Add at least one outcome for this activity.',
@@ -1319,11 +1335,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         'This is an outcome.'
       );
 
-      activityPage.checkDeleteButton(
-        'Add milestone(s) for this activity.',
-        'Delete Milestone?',
-        "Miles's Milestone"
-      );
       cy.goToStateStaffAndExpenses(0);
 
       activityPage.checkDeleteButton(
@@ -1348,57 +1359,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     });
   });
 
-  describe('tests rich text field functionality', () => {
-    it('tests uploading an image', () => {
-      cy.intercept('POST', `${Cypress.env('API')}/apds/${apdId}/files`).as(
-        'uploadImage'
-      );
-      cy.intercept(
-        'GET',
-        `${Cypress.env(
-          'API'
-        )}/apds/${apdId}/files/963d0316f487d49e9e0e8306682daa96720535acf195fb31973f2d0936d97eb1`
-      ).as('loadImage');
-
-      cy.get('[class="tox-edit-area"]').eq(3).scrollIntoView();
-
-      // Uploads cms-logo.png from /fixtures/
-      cy.setTinyMceContent('mmis-overview-field', 'Drag and Drop here');
-
-      cy.enter('iframe[id="mmis-overview-field_ifr"]').then(getBody => {
-        cy.fixture('cms-logo.png', 'binary')
-          .then(Cypress.Blob.binaryStringToBlob)
-          .then(fileContent => {
-            const file = new File([fileContent], 'cms-logo.png', {
-              type: 'image/png'
-            });
-
-            getBody()
-              .contains('Drag and Drop here')
-              .trigger('drop', {
-                dataTransfer: {
-                  files: [file]
-                }
-              });
-          });
-      });
-
-      cy.wait('@uploadImage', { timeout: 30000 });
-
-      cy.waitForSave();
-      cy.contains('AK APD Home').click();
-      // eslint-disable-next-line cypress/no-unnecessary-waiting
-      cy.wait(5000); // Gives time to load the APD dashboard
-
-      cy.visit(apdUrl);
-      cy.wait('@loadImage', { timeout: 60000 });
-
-      cy.contains('Export and Submit').click();
-      cy.findByRole('button', { name: 'Continue to Review' }).click();
-      cy.wait('@loadImage', { timeout: 30000 });
-    });
-  });
-
   describe('tests an APD with no activities', () => {
     it('shows message', () => {
       cy.visit('/');
@@ -1410,7 +1370,8 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   describe('Accessibility Tests', () => {
     it('Runs on APD Builder', () => {
-      cy.wait(5000); // Allows page to load
+      // Allows page to load
+      cy.wait(5000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.checkPageA11y(); // APD Overview
 
@@ -1427,13 +1388,16 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.goToActivityOverview(0);
       cy.checkPageA11y(); // Activity Overview
 
-      cy.goToOutcomesAndMilestones(0);
-      cy.findByRole('button', { name: /Add Outcome/i }).click();
-      cy.checkPageA11y(); // Outcomes Subform
-      cy.findByRole('button', { name: /Cancel/i }).click();
+      cy.goToActivitySchedule(0);
+      cy.checkPageA11y();
 
       cy.findByRole('button', { name: /Add Milestone/i }).click();
       cy.checkPageA11y(); // Milestones Subform
+
+      cy.goToOutcomesAndMetrics(0);
+      cy.findByRole('button', { name: /Add Outcome/i }).click();
+      cy.checkPageA11y(); // Outcomes Subform
+      cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.goToStateStaffAndExpenses(0);
       cy.findByRole('button', { name: /Add State Staff/i }).click();
@@ -1451,6 +1415,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
       cy.checkPageA11y(); // Cost Allocation and Other Funding
 
       cy.goToBudgetAndFFP(0);
+      cy.contains('Create an Additional Activity').should('exist');
       cy.checkPageA11y(); // Budget and FFP
 
       cy.goToActivityScheduleSummary();

@@ -9,15 +9,15 @@ exports[`ProposedBudget component renders correctly 1`] = `
     resource="proposedBudget"
   >
     <Connect(ConnectedWaypoint)
-      id="summary-schedule-by-activity-table"
+      id="combined-activity-costs-table"
     />
     <Subsection
       headerClassName={null}
-      id="summary-schedule-by-activity-table"
+      id="combined-activity-costs-table"
       nested={false}
-      resource="proposedBudget.summaryBudgetByActivity"
+      resource="proposedBudget.combinedActivityCosts"
     >
-      <Connect(SummaryBudgetByActivity) />
+      <Connect(CombinedActivityCosts) />
     </Subsection>
     <Connect(ConnectedWaypoint)
       id="budget-summary-table"

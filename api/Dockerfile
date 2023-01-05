@@ -1,5 +1,5 @@
 FROM node:16.16.0-alpine3.15
-RUN apk add --no-cache python3 g++ make
+RUN apk add --no-cache python3 g++ make curl
 
 RUN mkdir /app
 WORKDIR /app

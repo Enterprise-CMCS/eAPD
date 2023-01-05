@@ -45,7 +45,9 @@ const populate = async ({ model, data, create }) => {
       `Seeding ${model.collection.name} with ${data.length} records`
     );
     if (Array.isArray(data)) {
-      return Promise.all(data.map(item => create(item)));
+      return Promise.all(data.map(item => create(item))).catch(err =>
+        logger.error(err)
+      );
     }
     return create(data);
   }
