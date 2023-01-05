@@ -1,30 +1,28 @@
-import { CREATE_APD_SUCCESS } from '../actions/app';
-import { APD_CREATE_SUCCESS_MSG } from '../actions/aria';
+import { ALERT_SUCCESS } from '../actions/alert';
 
 const initialState = {
-  alerts: []
-};
-
-const apdSuccess = {
-  message: APD_CREATE_SUCCESS_MSG,
-  variation: 'success'
+  messages: []
 };
 
 const reducer = (state = initialState, action) => {
-  let tempMessages = state.tempMessages,
-    tempMsgIndex = tempMessages.indexOf(apdSuccess);
-
   switch (action.type) {
-    case CREATE_APD_SUCCESS:
-      if (tempMsgIndex === -1) {
-        state.tempMessages.push(apdSuccess);
-      }
-      return state;
+    case ALERT_SUCCESS:
+      return {
+        ...state,
+        messages: [
+          ...new Set(
+            state.messages.concat({
+              message: action.message,
+              variation: 'success'
+            })
+          )
+        ]
+      };
     default:
       return state;
   }
 };
 
-export const getTempMessages = state => state.errors.tempMessages;
+export const getTempAlerts = state => state.alerts.messages;
 
 export default reducer;

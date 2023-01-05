@@ -30,7 +30,7 @@ import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
 
-import TempAlert from '../../../components/Alert';
+import TempAlert from '../../../components/TempAlert';
 
 import {
   selectSummary,
