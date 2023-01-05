@@ -29,7 +29,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
 
   before(() => {
     cy.useStateStaff();
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.reload();
 
     cy.findAllByText('Create new').click();
@@ -52,6 +52,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   });
 
   beforeEach(() => {
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.visit(apdUrl);
   });
 
