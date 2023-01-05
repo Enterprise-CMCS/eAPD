@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Alert, Button } from '@cmsgov/design-system';
+import { Alert, Button, CloseIcon } from '@cmsgov/design-system';
 
 import { getTempAlerts } from '../redux/reducers/alerts';
 
@@ -32,7 +32,7 @@ const TempAlert = ({ alerts }) => {
             <div>{value.message}</div>
             <div>
               <Button onClick={() => removeMsg(index)} className="tempMsgBtn">
-                X
+                <CloseIcon />
               </Button>
             </div>
           </div>
