@@ -18,8 +18,8 @@ describe('temporary alert/message', () => {
 
     setup(null, {
       initialState: {
-        errors: {
-          tempMessages: [
+        alerts: {
+          messages: [
             {
               message: successMsg,
               variation: 'success'

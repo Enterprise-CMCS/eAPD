@@ -1,23 +1,25 @@
 import alerts from './alerts';
-
-import { CREATE_APD_SUCCESS } from '../actions/app';
+import { ALERT_SUCCESS } from '../actions/alert';
 
 describe('alerts reducer', () => {
   const initialState = {
-    tempMessages: []
+    messages: []
   };
+
+  const msg = 'this is a message';
 
   it('should handle initial state', () => {
     expect(alerts(undefined, initialState)).toEqual(initialState);
   });
 
-  describe('create APD success message', () => {
-    it('an APD is created', () => {
-      expect(alerts(undefined, { type: CREATE_APD_SUCCESS })).toEqual({
-        tempMessages: [
+  describe('success alert', () => {
+    it('returns message with variation success', () => {
+      expect(
+        alerts(initialState, { type: ALERT_SUCCESS, message: msg })
+      ).toEqual({
+        messages: [
           {
-            message:
-              'You have successfully created an APD. Select continue to fill out the rest of the APD.',
+            message: msg,
             variation: 'success'
           }
         ]
