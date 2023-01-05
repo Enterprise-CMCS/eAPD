@@ -41,8 +41,6 @@ const SecurityPlanning = ({
     resolver: joiResolver(securityPlanningSchema)
   });
 
-  console.log(`schema is ${securityPlanningSchema}`);
-
   useEffect(() => {
     if (adminCheck) {
       trigger();
