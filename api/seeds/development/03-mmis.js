@@ -47,12 +47,12 @@ const mmis = {
         position: 'HIT Coordinator',
         email: 'JimPushesButtons@tycho.com',
         isPrimary: true,
-        fte: { 2022: 1, 2023: 1 },
+        fte: { 2023: 1, 2024: 1 },
         hasCosts: true,
-        costs: { 2022: 100000, 2023: 100000 },
+        costs: { 2023: 100000, 2024: 100000 },
         split: {
-          2022: { federal: 90, state: 10 },
-          2023: { federal: 90, state: 10 }
+          2023: { federal: 90, state: 10 },
+          2024: { federal: 90, state: 10 }
         }
       },
       {
@@ -60,12 +60,12 @@ const mmis = {
         position: 'Project Management Office Director',
         email: 'FJohnson@tycho.com',
         isPrimary: false,
-        fte: { 2022: 0.3, 2023: 0.3 },
+        fte: { 2023: 0.3, 2024: 0.3 },
         hasCosts: false,
-        costs: { 2022: 0, 2023: 0 },
+        costs: { 2023: 0, 2024: 0 },
         split: {
-          2022: { federal: 90, state: 10 },
-          2023: { federal: 90, state: 10 }
+          2023: { federal: 90, state: 10 },
+          2024: { federal: 90, state: 10 }
         }
       }
     ]
