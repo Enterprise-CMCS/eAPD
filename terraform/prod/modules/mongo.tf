@@ -12,8 +12,7 @@ data "aws_ami" "latest_mongo_image" {
 }
 
 resource "aws_instance" "eapd_mongo" {
-    #ami                         = data.aws_ami.latest_mongo_image.id
-    ami                         = "ami-0610f22bf733e32ed"
+    ami                         = data.aws_ami.latest_mongo_image.id
     instance_type               = "m3.medium"
     vpc_security_group_ids      = ["sg-01e01435dbbe6ce32", aws_security_group.eapd-production-mongo-ec2.id]
     subnet_id                   = "subnet-07e1b9ed6ed5fb8c7"
