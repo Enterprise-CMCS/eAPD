@@ -493,8 +493,8 @@
     }
   ],
   "securityPlanning": {
-    "securityAndInterfacePlan": "",
-    "businessContinuityAndDisasterRecovery": ""
+    "securityAndInterfacePlan": "This is the Security Interface plan",
+    "businessContinuityAndDisasterRecovery": "This is the Business Continuity and Disaster Recovery plan"
   },
   "assurancesAndCompliances": {
     "procurement": [

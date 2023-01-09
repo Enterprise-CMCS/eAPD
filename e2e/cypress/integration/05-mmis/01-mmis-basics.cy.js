@@ -12,6 +12,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
   let apdId;
   const years = [];
   let activityPage;
+  let data;
 
   before(() => {
     activityPage = new ActivityPage();
@@ -49,7 +50,9 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
 
   beforeEach(() => {
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
-    cy.fixture('mmis-basics.json').as('data');
+    cy.fixture('mmis-basics.json').then(fixture => {
+      data = fixture;
+    });
     cy.visit(apdUrl);
   });
 
@@ -168,13 +171,18 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
         cy.get(list).contains('Security Planning').should('exist');
       });
 
+      cy.log(
+        `data.securityPlanning is ${JSON.stringify(data.securityPlanning)}`
+      );
+
       cy.contains('Provide Security and Interface Plan').should('exist');
-      cy.get('[id="security-interface-plan"]').should('have.value', '');
+      cy.checkTinyMCE('security-interface-plan', '');
 
       cy.setTinyMceContent(
         'security-interface-plan',
-        'This is the Security Interface plan'
+        data.securityPlanning.securityAndInterfacePlan
       );
+
       cy.waitForSave();
 
       cy.contains('Provide Security and Interface Plan').should('not.exist');
@@ -182,11 +190,11 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.contains('Provide Business Continuity and Disaster Recovery').should(
         'exist'
       );
-      cy.get('[id="bc-dr-plan"]').should('have.value', '');
+      cy.checkTinyMCE('bc-dr-plan', '');
 
       cy.setTinyMceContent(
         'bc-dr-plan',
-        'This is the Business Continuity and Disaster Recovery plan'
+        data.securityPlanning.businessContinuityAndDisasterRecovery
       );
       cy.waitForSave();
 
@@ -194,18 +202,18 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
         'not.exist'
       );
 
-      // Verify fields save
+      // Verify fields saved
       cy.goToApdOverview();
       cy.wait(2000);
       cy.goToSecurityPlanning();
 
-      cy.get('[id="security-interface-plan"]').should(
-        'have.value',
-        '<p>This is the Security Interface plan</p>'
+      cy.checkTinyMCE(
+        'security-interface-plan',
+        `<p>${data.securityPlanning.securityAndInterfacePlan}</p>`
       );
-      cy.get('[id="bc-dr-plan"]').should(
-        'have.value',
-        '<p>This is the Business Continuity and Disaster Recovery plan</p>'
+      cy.checkTinyMCE(
+        'bc-dr-plan',
+        `<p>${data.securityPlanning.businessContinuityAndDisasterRecovery}</p>`
       );
 
       cy.get('[class="eapd-admin-check-list"]').within(list => {
