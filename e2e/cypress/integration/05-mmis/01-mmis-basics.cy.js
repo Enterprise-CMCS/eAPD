@@ -44,6 +44,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
 
   beforeEach(() => {
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+    cy.fixture('mmis-basics.json').as('data');
     cy.visit(apdUrl);
   });
 
