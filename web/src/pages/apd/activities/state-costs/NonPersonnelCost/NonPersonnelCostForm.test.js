@@ -170,6 +170,10 @@ describe('Selection removes "Administrative operations" for in MMIS apd', () => 
     mockFlags({ enableMmis: true });
   });
 
+  afterAll(() => {
+    resetLDMocks();
+  });
+
   it('shows "Administrative operations" on HITECH APD', async () => {
     await setup({}, hitechApd);
 
