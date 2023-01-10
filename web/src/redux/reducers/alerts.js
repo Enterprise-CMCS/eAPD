@@ -23,6 +23,15 @@ const reducer = (state = initialState, action) => {
   }
 };
 
+export const removeAlert = (i, state) => {
+  let messages = state.alerts.messages,
+    newMessages;
+
+  newMessages([...messages.slice(0, i), ...messages.slice(i + 1)]);
+
+  return newMessages;
+};
+
 export const getTempAlerts = state => state.alerts.messages;
 
 export default reducer;

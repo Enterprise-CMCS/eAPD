@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Alert, Button, CloseIcon } from '@cmsgov/design-system';
 
-import { getTempAlerts } from '../redux/reducers/alerts';
+import { getTempAlerts, removeAlert } from '../redux/reducers/alerts';
 
 const TempAlert = ({ alerts }) => {
   const [tempAlertState, setTempAlertState] = useState(alerts);
@@ -14,10 +14,8 @@ const TempAlert = ({ alerts }) => {
   }
 
   const removeMsg = i => {
-    setTempAlertState([
-      ...tempAlertState.slice(0, i),
-      ...tempAlertState.slice(i + 1)
-    ]);
+    let messages = removeAlert(i);
+    setTempAlertState(messages);
   };
 
   return (
