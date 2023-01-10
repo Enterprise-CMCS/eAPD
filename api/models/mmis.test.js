@@ -1,5 +1,5 @@
 import tap from 'tap';
-import { applyPatch } from 'fast-json-patch';
+import fastPatch from 'fast-json-patch';
 import { APD_TYPE } from '@cms-eapd/common';
 
 import { setup, teardown } from '../db/mongodb.js';
@@ -32,7 +32,7 @@ tap.test('MMIS model test', async t => {
 
   t.test('patch MMIS', async test => {
     const apdJSON = await MMIS.findOne({ _id: apdId }).lean();
-    const { newDocument } = applyPatch(apdJSON, [
+    const { newDocument } = fastPatch.applyPatch(apdJSON, [
       {
         op: 'replace',
         path: '/activities/0/outcomes/0/metrics/0/metric',

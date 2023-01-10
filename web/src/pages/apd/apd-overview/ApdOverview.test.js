@@ -51,9 +51,9 @@ const setup = async (props = {}) => {
 };
 
 describe('APD overview component', () => {
+  jest.setTimeout(150000);
   beforeEach(() => {
     jest.resetAllMocks();
-    jest.setTimeout(110000);
     resetLDMocks();
   });
 

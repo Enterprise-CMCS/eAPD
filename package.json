@@ -84,6 +84,7 @@
       "web/@tinymce/tinymce-react",
       "web/@cmsgov/design-system",
       "e2e/cypress-axe",
+      "e2e/@cypress/grep",
       "e2e/axe-core"
     ]
   },

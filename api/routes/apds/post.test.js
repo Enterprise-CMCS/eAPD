@@ -1,9 +1,11 @@
 import tap from 'tap';
 import { useFakeTimers, createSandbox, match } from 'sinon';
-import { SchemaTypes } from 'mongoose';
+import mongoose from 'mongoose';
 import { can } from '../../middleware/index.js';
 import postEndpoint from './post.js';
 import { APD_TYPE } from '@cms-eapd/common';
+
+const { SchemaTypes } = mongoose;
 
 // The Cassini probe enters orbit around Saturn, about 7 years after launch.
 // On its long journey, it surveyed Venus, Earth, an asteroid, and Jupiter.

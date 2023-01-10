@@ -47,9 +47,10 @@ const setup = async (props = {}, options = {}) => {
 };
 
 describe('<ApdNew />', () => {
+  jest.setTimeout(30000);
+
   beforeEach(() => {
     jest.clearAllMocks();
-    jest.setTimeout(30000);
     resetLDMocks();
   });
 

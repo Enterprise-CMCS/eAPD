@@ -5,19 +5,21 @@ import apdsIndex from './index.js';
 tap.test('apds endpoint setup', async endpointTest => {
   const app = {};
   const deleteEndpoint = spy();
-  const filesEndpoints = spy();
-  const eventsEndpoints = spy();
   const getEndpoint = spy();
   const patchEndpoint = spy();
   const postEndpoint = spy();
+  const filesEndpoints = spy();
+  const eventsEndpoints = spy();
+  const submissionsEndpoints = spy();
 
   apdsIndex(app, {
     deleteEndpoint,
-    filesEndpoints,
-    eventsEndpoints,
     getEndpoint,
     patchEndpoint,
-    postEndpoint
+    postEndpoint,
+    filesEndpoints,
+    eventsEndpoints,
+    submissionsEndpoints
   });
 
   endpointTest.ok(
@@ -43,5 +45,9 @@ tap.test('apds endpoint setup', async endpointTest => {
   endpointTest.ok(
     eventsEndpoints.calledWith(app),
     'apds events endpoint are setup with the app'
+  );
+  endpointTest.ok(
+    submissionsEndpoints.calledWith(app),
+    'apds submissions endpoints are setup with the app'
   );
 });

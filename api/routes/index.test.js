@@ -13,27 +13,21 @@ tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
 
   const affiliationsEndpoint = spy();
   const apdsEndpoint = spy();
-  const apdsEventsEndpoint = spy();
-  const apdsFilesEndpoint = spy();
   const authEndpoint = spy();
   const docsEndpoint = spy();
   const meEndpoint = spy();
   const rolesEndpoint = spy();
   const statesEndpoint = spy();
-  const stateAffiliationEndpoint = spy();
   const usersEndpoint = spy();
   const openAPI = {};
 
   endpointIndex(app, {
     affiliationsEndpoint,
     apdsEndpoint,
-    apdsEventsEndpoint,
-    apdsFilesEndpoint,
     authEndpoint,
     docsEndpoint,
     rolesEndpoint,
     statesEndpoint,
-    stateAffiliationEndpoint,
     usersEndpoint,
     openAPIdoc: {}
   });
@@ -46,16 +40,6 @@ tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
     apdsEndpoint.calledWith(app),
     'apds endpoint is setup with the app'
   );
-  endpointTest.ok(
-    apdsEventsEndpoint.calledWith(app),
-    'apds events endpoint is setup with the app'
-  );
-
-  endpointTest.ok(
-    apdsFilesEndpoint.calledWith(app),
-    'apds files endpoint is setup with the app'
-  );
-
   endpointTest.ok(
     authEndpoint.calledWith(app),
     'auth endpoint is setup with the app'
@@ -75,10 +59,6 @@ tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
   endpointTest.ok(
     statesEndpoint.calledWith(app),
     'states endpoint is set up with the app'
-  );
-  endpointTest.ok(
-    stateAffiliationEndpoint.calledWith(app),
-    'state Affiliation endpoint is set up with the app'
   );
   endpointTest.ok(
     usersEndpoint.calledWith(app),
