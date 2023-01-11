@@ -39,7 +39,7 @@ describe('<MMISOverview />', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByLabelText('Activity name')).toHaveValue(
+        expect(screen.getByLabelText('Activity Name')).toHaveValue(
           'Activity 1'
         );
       });
