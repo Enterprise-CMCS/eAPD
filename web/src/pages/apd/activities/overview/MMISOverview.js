@@ -214,7 +214,7 @@ const MMISActivityOverview = ({
                 }}
                 data-cy="activity-proposed-solution"
                 editorClassName="rte-textarea-l"
-                error={errors?.description?.message}
+                error={errors?.proposedSolution?.message}
               />
             )}
           />

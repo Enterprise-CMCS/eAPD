@@ -39,7 +39,9 @@ const NameForm = ({ index, item: { name }, setName, adminCheck }) => {
         render={({ field: { onChange, ...props } }) => (
           <TextField
             {...props}
-            label="Activity name"
+            id="activity-name-field"
+            data-cy="activity-name"
+            label="Activity Name"
             onChange={({ target: { value } }) => {
               onChange(value);
               setName(index, value);

@@ -8,14 +8,13 @@ import ActivityPage from '../../page-objects/activity-page';
 /* eslint-disable prefer-arrow-callback */
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
+  let activityPage;
   let apdUrl;
   let apdId;
   const years = [];
-  let activityPage;
 
   before(() => {
     activityPage = new ActivityPage();
-
     cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.reload();
@@ -156,6 +155,122 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.contains('MMIS APD Test').should('not.exist');
+    });
+    it('tests Activity Overview page', () => {
+      cy.goToActivityDashboard();
+
+      // Create new Activity
+      cy.contains('Add Activity').click();
+      cy.contains('Activity 1').should('exist');
+
+      // Check Activity Overview
+      cy.goToActivityOverview(0);
+      cy.url().should('contain', '/activity/0/overview');
+      cy.findAllByRole('heading', { name: /Activity Overview/i }).should(
+        'exist'
+      );
+
+      // Defaults to empty field values
+      cy.contains('Activity Name').should('exist');
+      activityPage.checkTinyMCE('activity-name-field', '');
+      cy.contains('Activity Snapshot').should('exist');
+      activityPage.checkTinyMCE('activity-snapshot-field', '');
+      cy.contains('Problem Statement').should('exist');
+      activityPage.checkTinyMCE('activity-problem-statement-field', '');
+      cy.contains('Proposed Solution').should('exist');
+      activityPage.checkTinyMCE('activity-proposed-solution-field', '');
+
+      // Check validation errors
+      cy.turnOnAdminCheck();
+
+      // Validation errors within admin check list
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('Activity 1 Activity Overview').should('exist');
+        cy.get(list).contains('Provide an Activity Name').should('exist');
+        cy.get(list).contains('Provide an Activity Snapshot').should('exist');
+        cy.get(list).contains('Provide a Problem Statement').should('exist');
+        cy.get(list).contains('Provide a Proposed Solution').should('exist');
+      });
+
+      // Verifies Activity Overview exists in the admin check list and navigates to that page
+      cy.checkAdminCheckHyperlinks(
+        'Activity 1 Activity Overview',
+        'Activity Overview',
+        3
+      );
+
+      // Validation errors on the Activity Overview page
+      cy.contains('Provide an Activity Name').should('exist');
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide an Activity Snapshot')
+        .should('exist');
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a Problem Statement')
+        .should('exist');
+      cy.get('[data-cy="validationError"]')
+        .contains('Provide a Proposed Solution')
+        .should('exist');
+
+      cy.collapseAdminCheck();
+
+      // Fill out fields and check that each validation error is cleared
+      cy.get(`[data-cy="activity-name"]`).click().type('The Coolest Activity');
+      cy.waitForSave();
+      cy.contains('Provide an Activity Name').should('not.exist');
+
+      cy.setTinyMceContent(
+        'activity-snapshot-field',
+        'This is an activity snapshot.'
+      );
+      cy.waitForSave();
+      cy.contains('Provide an Activity Snapshot').should('not.exist');
+
+      cy.setTinyMceContent(
+        'activity-problem-statement-field',
+        'This is a problem statement.'
+      );
+      cy.waitForSave();
+      cy.contains('Provide a Problem Statement').should('not.exist');
+
+      cy.setTinyMceContent(
+        'activity-proposed-solution-field',
+        'This is a proposed solution.'
+      );
+      cy.waitForSave();
+      cy.contains('Provide a Proposed Solution').should('not.exist');
+
+      // Check validation errors are gone from admin check
+      cy.expandAdminCheck();
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list)
+          .contains('Activity 1 Activity Overview')
+          .should('not.exist');
+      });
+      cy.turnOffAdminCheck();
+
+      // Verify that fields save
+      // Navigates away from page and back to check persistence of entered data
+      cy.goToApdOverview();
+      cy.wait(2000);
+      cy.goToActivityOverview(0);
+
+      cy.contains('Activity Name').should('exist');
+      activityPage.checkTinyMCE('activity-name-field', 'The Coolest Activity');
+      cy.contains('Activity Snapshot').should('exist');
+      activityPage.checkTinyMCE(
+        'activity-snapshot-field',
+        '<p>This is an activity snapshot.</p>'
+      );
+      cy.contains('Problem Statement').should('exist');
+      activityPage.checkTinyMCE(
+        'activity-problem-statement-field',
+        '<p>This is a problem statement.</p>'
+      );
+      cy.contains('Proposed Solution').should('exist');
+      activityPage.checkTinyMCE(
+        'activity-proposed-solution-field',
+        '<p>This is a proposed solution.</p>'
+      );
     });
   });
   describe('MMIS Pages', () => {
