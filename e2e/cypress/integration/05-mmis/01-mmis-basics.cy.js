@@ -171,10 +171,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
         cy.get(list).contains('Security Planning').should('exist');
       });
 
-      cy.log(
-        `data.securityPlanning is ${JSON.stringify(data.securityPlanning)}`
-      );
-
       cy.contains('Provide Security and Interface Plan').should('exist');
       cy.checkTinyMCE('security-interface-plan', '');
 
