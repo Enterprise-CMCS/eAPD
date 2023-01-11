@@ -156,6 +156,8 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
 
       cy.contains('MMIS APD Test').should('not.exist');
     });
+  });
+  describe('MMIS Pages', () => {
     it('tests Activity Overview page', () => {
       cy.goToActivityDashboard();
 
@@ -272,8 +274,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
         '<p>This is a proposed solution.</p>'
       );
     });
-  });
-  describe('MMIS Pages', () => {
+
     it('tests the Security Planning page', () => {
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
