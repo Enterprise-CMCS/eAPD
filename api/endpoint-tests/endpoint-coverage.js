@@ -10,6 +10,7 @@ const __dirname = path.resolve();
 
 let endpoints = [];
 
+console.log(`looking for file: ${__dirname}/endpoint-tests/endpoint-data.json`);
 if (fs.existsSync(`${__dirname}/endpoint-tests/endpoint-data.json`)) {
   endpoints = JSON.parse(
     fs.readFileSync(`${__dirname}/endpoint-tests/endpoint-data.json`)
