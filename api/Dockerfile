@@ -16,4 +16,6 @@ RUN yarn install --frozen-lockfile --non-interactive
 
 WORKDIR /app/api
 
+RUN mkdir /app/api/.nyc_output
+
 CMD yarn run start-dev
