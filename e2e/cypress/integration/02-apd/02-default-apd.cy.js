@@ -1,24 +1,26 @@
 // <reference types="cypress" />
-import { testDefaultAPDOverview } from '../../helpers/apd/apd-overview';
-import { testDefaultKeyStatePersonnel } from '../../helpers/apd/key-state-personnel';
-import { testDefaultResultsOfPreviousActivities } from '../../helpers/apd/results-of-previous-activities';
-import { testDefaultActivityScheduleSummary } from '../../helpers/apd/activity-schedule-summary';
-import { testDefaultProposedBudget } from '../../helpers/apd/proposed-budget';
-import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance';
-import { testDefaultExecutiveSummary } from '../../helpers/apd/executive-summary';
-import { checkDefaultActivity } from '../../helpers/apd/activity/check-default-activity';
+import { testDefaultAPDOverview } from '../../helpers/apd/apd-overview.js';
+import { testDefaultKeyStatePersonnel } from '../../helpers/apd/key-state-personnel.js';
+import { testDefaultResultsOfPreviousActivities } from '../../helpers/apd/results-of-previous-activities.js';
+import { testDefaultActivityScheduleSummary } from '../../helpers/apd/activity-schedule-summary.js';
+import { testDefaultProposedBudget } from '../../helpers/apd/proposed-budget.js';
+import { testDefaultAssurancesAndCompliance } from '../../helpers/apd/assurances-and-compliance.js';
+import { testDefaultExecutiveSummary } from '../../helpers/apd/executive-summary.js';
+import { checkDefaultActivity } from '../../helpers/apd/activity/check-default-activity.js';
 
 // Tests the default values of an APD
-describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
+
+Cypress.session.clearAllSavedSessions();
+
+describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
   let apdUrl;
   let apdId;
   const years = [];
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
-    cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.reload();
+    cy.useStateStaff('/');
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
@@ -32,9 +34,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
     ).should('exist');
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
-      cy.log({ apdUrl });
       apdId = apdUrl.split('/').pop();
-      cy.log({ apdId });
     });
 
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
@@ -42,56 +42,57 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, () => {
     );
   });
 
-  beforeEach(() => {
+  /* eslint-disable-next-line prefer-arrow-callback, func-names */
+  beforeEach(function () {
+    cy.wrap(apdUrl).as('apdUrl');
+    cy.wrap(apdId).as('apdId');
+    cy.wrap(years).as('years');
+
+    cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.visit(apdUrl);
+    cy.useStateStaff(apdUrl);
   });
 
   after(() => {
-    cy.deleteAPD(apdId);
+    cy.visit('/');
+    cy.deleteAPD(this.apdId);
   });
 
-  describe('Form View', () => {
-    /* eslint-disable-next-line prefer-arrow-callback, func-names */
-    beforeEach(function () {
-      cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-      cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
-    });
+  describe('Form View', function () {
+    describe('default APD Overview', function () {
+      testDefaultAPDOverview();
 
-    describe('default APD Overview', () => {
-      testDefaultAPDOverview(years);
-
-      it('should have two checked years', () => {
+      it('should have two checked years', function () {
         cy.get('[type="checkbox"][checked]').should('have.length', 2);
       });
     });
 
-    describe('default Key State Personnel', () => {
-      testDefaultKeyStatePersonnel(years);
+    describe('default Key State Personnel', function () {
+      testDefaultKeyStatePersonnel();
     });
 
-    describe('default Results of Previous Activities', () => {
-      testDefaultResultsOfPreviousActivities(years);
+    describe('default Results of Previous Activities', function () {
+      testDefaultResultsOfPreviousActivities();
     });
 
-    describe('Checks Default Activity', () => {
-      checkDefaultActivity(years);
+    describe('Checks Default Activity', function () {
+      checkDefaultActivity();
     });
 
-    describe('default Activity Schedule Summary', () => {
-      testDefaultActivityScheduleSummary(years);
+    describe('default Activity Schedule Summary', function () {
+      testDefaultActivityScheduleSummary();
     });
 
-    describe('default Proposed Budget', () => {
-      testDefaultProposedBudget(years);
+    describe('default Proposed Budget', function () {
+      testDefaultProposedBudget();
     });
 
-    describe('default Assurances and Compliance', () => {
-      testDefaultAssurancesAndCompliance(years);
+    describe('default Assurances and Compliance', function () {
+      testDefaultAssurancesAndCompliance();
     });
 
-    describe('default Executive Summary', () => {
-      testDefaultExecutiveSummary(years);
+    describe('default Executive Summary', function () {
+      testDefaultExecutiveSummary();
     });
   });
 });

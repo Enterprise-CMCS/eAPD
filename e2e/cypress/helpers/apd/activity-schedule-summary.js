@@ -1,5 +1,5 @@
-import ExportPage from '../../page-objects/export-page';
-import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
+import ExportPage from '../../page-objects/export-page.js';
+import ActivitySchedulePage from '../../page-objects/activity-schedule-page.js';
 
 const testActivityListOver = page => {
   cy.get('@data').then(data => {
@@ -47,8 +47,8 @@ const testActivityMilestone = page => {
   });
 };
 
-export const testDefaultActivityScheduleSummary = () => {
-  it('should have the default values for Activity Schedule Summary', () => {
+export const testDefaultActivityScheduleSummary = function () {
+  it('should have the default values for Activity Schedule Summary', function () {
     const schedulePage = new ActivitySchedulePage();
 
     cy.goToActivityScheduleSummary();
@@ -80,7 +80,7 @@ export const testDefaultActivityScheduleSummary = () => {
     schedulePage.getAllActivityScheduleMilestones(0).should('not.exist');
   });
 
-  it('should have the default values for Activity Schedule Summary in the export view', () => {
+  it('should have the default values for Activity Schedule Summary in the export view', function () {
     const exportPage = new ExportPage();
     cy.goToExportView();
 
@@ -110,56 +110,55 @@ export const testDefaultActivityScheduleSummary = () => {
   });
 };
 
-export const testActivityScheduleSummaryWithData = () => {
+export const testActivityScheduleSummaryWithData = function () {
   let schedulePage;
   let exportPage;
 
-  before(() => {
+  before(function () {
     schedulePage = new ActivitySchedulePage();
     exportPage = new ExportPage();
   });
 
-  beforeEach(() => {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+  beforeEach(function () {
     cy.fixture('activity-overview-template.json').as('data');
   });
 
-  it('should display the correct values for the Activity Schedule Summary', () => {
+  it('should display the correct values for the Activity Schedule Summary', function () {
+    const data = this.data;
+
     cy.goToActivityScheduleSummary();
     cy.url().should('include', '/schedule-summary');
     cy.findByRole('heading', {
       name: /Activity Schedule Summary/i
     }).should('exist');
 
-    cy.get('@data').then(data => {
-      schedulePage
-        .getAllActivityScheduleOverviews()
-        .should('have.length', data.activityOverview.length);
+    schedulePage
+      .getAllActivityScheduleOverviews()
+      .should('have.length', data.activityOverview.length);
 
-      testActivityListOver(schedulePage);
+    testActivityListOver(schedulePage);
 
-      schedulePage
-        .getAllActivityScheduleMilestoneTables()
-        .should('have.length', data.milestones.length);
+    schedulePage
+      .getAllActivityScheduleMilestoneTables()
+      .should('have.length', data.milestones.length);
 
-      testActivityMilestone(schedulePage);
-    });
+    testActivityMilestone(schedulePage);
   });
 
-  it('should display the correct values for the Activity Schedule Summary Export View', () => {
+  it('should display the correct values for the Activity Schedule Summary Export View', function () {
+    const data = this.data;
     cy.goToExportView();
-    cy.get('@data').then(data => {
-      exportPage
-        .getAllActivityScheduleOverviews()
-        .should('have.length', data.activityOverview.length);
-      testActivityListOver(exportPage);
 
-      exportPage
-        .getAllActivityScheduleMilestoneTables()
-        .should('have.length', data.milestones.length);
-      testActivityMilestone(exportPage);
+    exportPage
+      .getAllActivityScheduleOverviews()
+      .should('have.length', data.activityOverview.length);
+    testActivityListOver(exportPage);
 
-      cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
-    });
+    exportPage
+      .getAllActivityScheduleMilestoneTables()
+      .should('have.length', data.milestones.length);
+    testActivityMilestone(exportPage);
+
+    cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };

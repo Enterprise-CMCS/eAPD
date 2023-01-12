@@ -1,5 +1,5 @@
-import AssurancesCompliancePage from '../../page-objects/assurances-compliance-page';
-import ExportPage from '../../page-objects/export-page';
+import AssurancesCompliancePage from '../../page-objects/assurances-compliance-page.js';
+import ExportPage from '../../page-objects/export-page.js';
 
 const categories = [
   'Procurement Standards (Competition / Sole Source)',
@@ -8,18 +8,12 @@ const categories = [
   'Security and Interface Requirements to Be Employed for All State HIT Systems'
 ];
 
-export const testDefaultAssurancesAndCompliance = () => {
-  let assurancesAndCompliance;
-
-  // eslint-disable-next-line prefer-arrow-callback, func-names
+export const testDefaultAssurancesAndCompliance = function () {
   beforeEach(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.fixture('assurances-compliance-test.json').then(data => {
-      assurancesAndCompliance = data;
-    });
+    cy.fixture('assurances-compliance-test.json').as('assurancesAndCompliance');
   });
 
-  it('should display the default settings in Assurance and Compliance', () => {
+  it('should display the default settings in Assurance and Compliance', function () {
     const assurancesCompliancePage = new AssurancesCompliancePage();
 
     cy.goToAssurancesAndCompliance();
@@ -30,7 +24,7 @@ export const testDefaultAssurancesAndCompliance = () => {
       .as('previousActivitiesDiv');
 
     categories.forEach(category => {
-      const val = assurancesAndCompliance[category];
+      const val = this.assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
         // Check that regulations link to the correct URLs
@@ -42,7 +36,7 @@ export const testDefaultAssurancesAndCompliance = () => {
     cy.waitForSave();
   });
 
-  it('should display default Assurance and Compliance in export view', () => {
+  it('should display default Assurance and Compliance in export view', function () {
     const exportPage = new ExportPage();
 
     cy.goToExportView();
@@ -52,7 +46,7 @@ export const testDefaultAssurancesAndCompliance = () => {
       .as('assurancesComplianceDiv');
 
     categories.forEach(category => {
-      const val = assurancesAndCompliance[category];
+      const val = this.assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
         // Check that regulations link to the correct URLs
@@ -72,20 +66,16 @@ export const testDefaultAssurancesAndCompliance = () => {
   });
 };
 
-export const testAssurancesAndComplianceWithData = () => {
-  let assurancesAndCompliance;
-
-  // eslint-disable-next-line prefer-arrow-callback, func-names
+export const testAssurancesAndComplianceWithData = function () {
   beforeEach(function () {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.fixture('assurances-compliance-test.json').then(data => {
-      assurancesAndCompliance = data;
-    });
-    cy.goToAssurancesAndCompliance();
+    cy.fixture('assurances-compliance-test.json').as('assurancesAndCompliance');
   });
 
-  it('should handle setting Assurance and Compliance', () => {
+  it('should handle setting Assurance and Compliance', function () {
     const assurancesCompliancePage = new AssurancesCompliancePage();
+    const assurancesAndCompliance = this.assurancesAndCompliance;
+
+    cy.goToAssurancesAndCompliance();
     cy.url().should('contain', '/assurances-and-compliance');
     cy.findByRole('heading', { name: /Assurances and Compliance/i })
       .parent()
@@ -111,8 +101,9 @@ export const testAssurancesAndComplianceWithData = () => {
     cy.waitForSave();
   });
 
-  it('should display Assurance and Compliance in export view', () => {
+  it('should display Assurance and Compliance in export view', function () {
     const exportPage = new ExportPage();
+    const assurancesAndCompliance = this.assurancesAndCompliance;
 
     cy.goToExportView();
 

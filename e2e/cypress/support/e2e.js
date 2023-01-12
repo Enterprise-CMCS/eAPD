@@ -19,21 +19,12 @@ import 'cypress-react-selector'; // eslint-disable-line import/no-extraneous-dep
 import { commandTimings } from 'cypress-timings'; // eslint-disable-line import/no-extraneous-dependencies
 import 'cypress-axe'; // eslint-disable-line import/no-extraneous-dependencies
 import '@cypress/code-coverage/support';
-import grep from 'cypress-grep';
+import grep from '@cypress/grep';
 
 // Import commands.js using ES2015 syntax:
-import './commands';
-
-const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
-const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
+import './commands.js';
 
 grep();
-
-Cypress.Cookies.defaults({
-  preserve: [CONSENT_COOKIE_NAME, API_COOKIE_NAME]
-});
-Cypress.Cookies.debug(true, { verbose: true });
-
 commandTimings();
 
 // eslint-disable-next-line no-unused-vars
