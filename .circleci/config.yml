@@ -967,9 +967,6 @@ jobs:
             export LD_API_KEY="$PREVIEW_LD_API_KEY"
             export NODE_ENV=test
 
-            name: run tests
-          working_directory: ~/project/api
-          command: |
             # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
