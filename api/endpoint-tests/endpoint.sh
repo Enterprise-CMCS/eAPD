@@ -22,7 +22,7 @@ docker cp api-container:/app/api/endpoint-data.json endpoint-data.json
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 
-mv endpoint-data.json ./endpoint-tests
+mv endpoint-data.json endpoint-tests/
 
-node ./endpoint-tests/endpoint-coverage.js
+node endpoint-tests/endpoint-coverage.js
 exit $EXIT_CODE
