@@ -422,7 +422,7 @@ const validHitechAssurancesAndCompliances = {
 
 const validMmisAssurancesAndCompliances = {
   procurement: [
-    { title: 'SSM, Part 11', checked: true, explanation: '' },
+    { title: 'SMM, Part 11', checked: true, explanation: '' },
     { title: '45 CFR Part 95.615', checked: true, explanation: '' },
     { title: '45 CFR Part 92.36', checked: true, explanation: '' }
   ],
@@ -889,7 +889,7 @@ const invalidHitechAssurancesAndCompliances = {
 
 const invalidMmisAssurancesAndCompliances = {
   procurement: [
-    { title: 'SSM, Part 11', checked: false, explanation: '' },
+    { title: 'SMM, Part 11', checked: false, explanation: '' },
     { title: '45 CFR Part 95.615', checked: true, explanation: '' },
     { title: '45 CFR Part 92.36', checked: true, explanation: '' }
   ],
@@ -1993,7 +1993,7 @@ const mockMmisApdRandomInvalid = {
   },
   assurancesAndCompliances: {
     procurement: [
-      { title: 'SSM, Part 11', checked: null, explanation: '' },
+      { title: 'SMM, Part 11', checked: null, explanation: '' },
       { title: '45 CFR Part 95.615', checked: true, explanation: '' },
       { title: '45 CFR Part 92.36', checked: true, explanation: '' }
     ],

@@ -524,7 +524,7 @@ export default {
   },
   assurancesAndCompliances: {
     procurement: [
-      { title: 'SSM, Part 11', checked: null, explanation: '' },
+      { title: 'SMM, Part 11', checked: null, explanation: '' },
       { title: '45 CFR Part 95.615', checked: null, explanation: '' },
       { title: '45 CFR Part 92.36', checked: null, explanation: '' }
     ],

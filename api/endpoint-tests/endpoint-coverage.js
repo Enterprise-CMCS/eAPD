@@ -9,8 +9,11 @@ import path from 'path';
 const __dirname = path.resolve();
 
 let endpoints = [];
-if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {
-  endpoints = JSON.parse(fs.readFileSync(`${__dirname}/endpoint-data.json`));
+
+if (fs.existsSync(`${__dirname}/endpoint-tests/endpoint-data.json`)) {
+  endpoints = JSON.parse(
+    fs.readFileSync(`${__dirname}/endpoint-tests/endpoint-data.json`)
+  );
 }
 
 // Treat it the same as the outside world will see it.  If we

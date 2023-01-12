@@ -1,28 +1,9 @@
+#!/usr/bin/env sh
+
 export NODE_ENV=test
 export COMPOSE_HTTP_TIMEOUT=300
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
-echo "containers created"
-sleep 200;
-
-echo "waiting for api-for-testing..."
-
-is_healthy() {
-    service="$1"
-    container_id="$(docker-compose -f ../docker-compose.endpoint-tests.yml -p api ps -q "$service")"
-    health_status="$(docker inspect -f "{{.State.Health.Status}}" "$container_id")"
-
-    if [ "$health_status" = "healthy" ]; then
-        return 0
-    else
-        echo '.'
-        return 1
-    fi
-}
-
-while ! is_healthy api-for-testing; do sleep 60; done
-
-echo "api-for-testing is running"
 
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "DROP DATABASE IF EXISTS hitech_apd_test;"'
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "CREATE DATABASE hitech_apd_test;"'
