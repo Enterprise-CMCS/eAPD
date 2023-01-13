@@ -40,7 +40,7 @@ activityAlternativesInput:
     analysis conducted when justifying the original activity.
 
 activitySnapshotInput:
-  label: Activity Snapshot
+  label: Activity snapshot
   detail: >-
     Provide a brief and high-level snapshot of the activity. You can speak on
     the purpose of your activity, its benefits, and any additional information

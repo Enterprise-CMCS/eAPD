@@ -41,7 +41,7 @@ const NameForm = ({ index, item: { name }, setName, adminCheck }) => {
             {...props}
             id="activity-name-field"
             data-cy="activity-name"
-            label="Activity Name"
+            label="Activity name"
             onChange={({ target: { value } }) => {
               onChange(value);
               setName(index, value);

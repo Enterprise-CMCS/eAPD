@@ -39,20 +39,20 @@ describe('<MMISOverview />', () => {
       );
 
       await waitFor(() => {
-        expect(screen.getByLabelText('Activity Name')).toHaveValue(
+        expect(screen.getByLabelText('Activity name')).toHaveValue(
           'Activity 1'
         );
       });
 
-      expect(screen.getByLabelText('Activity Snapshot')).toHaveValue(
+      expect(screen.getByLabelText('Activity snapshot')).toHaveValue(
         'This is a snapshot'
       );
 
-      expect(screen.getByLabelText('Problem Statement')).toHaveValue(
+      expect(screen.getByLabelText('Problem statement')).toHaveValue(
         'This is a problem statement'
       );
 
-      expect(screen.getByLabelText('Proposed Solution')).toHaveValue(
+      expect(screen.getByLabelText('Proposed solution')).toHaveValue(
         'This is a proposed solution'
       );
     });

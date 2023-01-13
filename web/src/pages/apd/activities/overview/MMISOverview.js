@@ -60,7 +60,7 @@ const MMISActivityOverview = ({
   const snapshotLabel = useMemo(
     () =>
       t('activities.overview.activitySnapshotInput.label', {
-        defaultValue: 'Activity Snapshot'
+        defaultValue: 'Activity snapshot'
       }),
     []
   );
@@ -76,7 +76,7 @@ const MMISActivityOverview = ({
   const problemStatementLabel = useMemo(
     () =>
       t('activities.overview.problemStatementInput.label', {
-        defaultValue: 'Problem Statement'
+        defaultValue: 'Problem statement'
       }),
     []
   );
@@ -92,7 +92,7 @@ const MMISActivityOverview = ({
   const proposedSolutionLabel = useMemo(
     () =>
       t('activities.overview.proposedSolutionInput.label', {
-        defaultValue: 'Proposed Solution'
+        defaultValue: 'Proposed solution'
       }),
     []
   );

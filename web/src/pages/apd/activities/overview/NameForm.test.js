@@ -23,7 +23,7 @@ const setup = async (props = {}) => {
   const utils = await act(async () =>
     renderWithConnection(<NameForm {...defaultProps} {...props} />)
   );
-  await waitFor(() => screen.findByText(/Activity Name/i));
+  await waitFor(() => screen.findByText(/Activity name/i));
   return utils;
 };
 

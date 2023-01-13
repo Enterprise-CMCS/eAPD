@@ -1,7 +1,7 @@
 title: Comprehensive Activity Overview
 
 problemStatementInput:
-  label: Problem Statement
+  label: Problem statement
   helpText: >-
     Example: Explain what problem you are trying to solve with this particular
     activity.
@@ -13,7 +13,7 @@ problemStatementInput:
     Make sure to expain its significance and scope.
 
 proposedSolutionInput:
-  label: Proposed Solution
+  label: Proposed solution
   detail: >-
     Explain your proposed solution and how it addresses the state’s problem.
     Additionally, justifiy how enhanced funding will support the proposed

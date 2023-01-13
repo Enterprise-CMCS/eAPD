@@ -173,13 +173,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       );
 
       // Defaults to empty field values
-      cy.contains('Activity Name').should('exist');
+      cy.contains('Activity name').should('exist');
       activityPage.checkTinyMCE('activity-name-field', '');
-      cy.contains('Activity Snapshot').should('exist');
+      cy.contains('Activity snapshot').should('exist');
       activityPage.checkTinyMCE('activity-snapshot-field', '');
-      cy.contains('Problem Statement').should('exist');
+      cy.contains('Problem statement').should('exist');
       activityPage.checkTinyMCE('activity-problem-statement-field', '');
-      cy.contains('Proposed Solution').should('exist');
+      cy.contains('Proposed solution').should('exist');
       activityPage.checkTinyMCE('activity-proposed-solution-field', '');
 
       // Check validation errors
@@ -188,10 +188,10 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       // Validation errors within admin check list
       cy.get('[class="eapd-admin-check-list"]').within(list => {
         cy.get(list).contains('Activity 1 Activity Overview').should('exist');
-        cy.get(list).contains('Provide an Activity Name').should('exist');
-        cy.get(list).contains('Provide an Activity Snapshot').should('exist');
-        cy.get(list).contains('Provide a Problem Statement').should('exist');
-        cy.get(list).contains('Provide a Proposed Solution').should('exist');
+        cy.get(list).contains('Provide an Activity name').should('exist');
+        cy.get(list).contains('Provide an Activity snapshot').should('exist');
+        cy.get(list).contains('Provide a Problem statement').should('exist');
+        cy.get(list).contains('Provide a Proposed solution').should('exist');
       });
 
       // Verifies Activity Overview exists in the admin check list and navigates to that page
@@ -202,15 +202,15 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       );
 
       // Validation errors on the Activity Overview page
-      cy.contains('Provide an Activity Name').should('exist');
+      cy.contains('Provide an Activity name').should('exist');
       cy.get('[data-cy="validationError"]')
-        .contains('Provide an Activity Snapshot')
+        .contains('Provide an Activity snapshot')
         .should('exist');
       cy.get('[data-cy="validationError"]')
-        .contains('Provide a Problem Statement')
+        .contains('Provide a Problem statement')
         .should('exist');
       cy.get('[data-cy="validationError"]')
-        .contains('Provide a Proposed Solution')
+        .contains('Provide a Proposed solution')
         .should('exist');
 
       cy.collapseAdminCheck();
@@ -218,28 +218,28 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       // Fill out fields and check that each validation error is cleared
       cy.get(`[data-cy="activity-name"]`).click().type('The Coolest Activity');
       cy.waitForSave();
-      cy.contains('Provide an Activity Name').should('not.exist');
+      cy.contains('Provide an Activity name').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-snapshot-field',
         'This is an activity snapshot.'
       );
       cy.waitForSave();
-      cy.contains('Provide an Activity Snapshot').should('not.exist');
+      cy.contains('Provide an Activity snapshot').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-problem-statement-field',
         'This is a problem statement.'
       );
       cy.waitForSave();
-      cy.contains('Provide a Problem Statement').should('not.exist');
+      cy.contains('Provide a Problem statement').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-proposed-solution-field',
         'This is a proposed solution.'
       );
       cy.waitForSave();
-      cy.contains('Provide a Proposed Solution').should('not.exist');
+      cy.contains('Provide a Proposed solution').should('not.exist');
 
       // Check validation errors are gone from admin check
       cy.expandAdminCheck();
@@ -256,19 +256,19 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.wait(2000);
       cy.goToActivityOverview(0);
 
-      cy.contains('Activity Name').should('exist');
+      cy.contains('Activity name').should('exist');
       activityPage.checkTinyMCE('activity-name-field', 'The Coolest Activity');
-      cy.contains('Activity Snapshot').should('exist');
+      cy.contains('Activity snapshot').should('exist');
       activityPage.checkTinyMCE(
         'activity-snapshot-field',
         '<p>This is an activity snapshot.</p>'
       );
-      cy.contains('Problem Statement').should('exist');
+      cy.contains('Problem statement').should('exist');
       activityPage.checkTinyMCE(
         'activity-problem-statement-field',
         '<p>This is a problem statement.</p>'
       );
-      cy.contains('Proposed Solution').should('exist');
+      cy.contains('Proposed solution').should('exist');
       activityPage.checkTinyMCE(
         'activity-proposed-solution-field',
         '<p>This is a proposed solution.</p>'
