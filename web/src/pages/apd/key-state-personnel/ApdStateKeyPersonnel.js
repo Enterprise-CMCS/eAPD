@@ -24,7 +24,6 @@ const ApdStateKeyPersonnel = ({ remove, list, years, apdType }) => {
   const addClick = () => {
     const isPrimary = list.length === 0;
     const newListItem = getKeyPersonnel(years, isPrimary, apdType);
-    console.log('newListItem', apdType);
     setLocalList([...localList, newListItem]);
   };
 

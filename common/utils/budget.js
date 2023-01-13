@@ -481,6 +481,24 @@ export const updateStatePersonnel = ({
 };
 
 /**
+ * For MMIS APDs app the key state personnel costs to the budget
+ * before iterating over the activities and adding those costs.
+ * @param {Object} budget The current budget object
+ * @param {String} year As a four-character year string (e.g., '2018')
+ * @param {Array} keyPersonnel List of key personnel for the APD
+ * @returns {Object} an updated budget with key state personnel costs included
+ */
+export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
+  console.log('budget', budget);
+  console.log('years', years);
+  console.log('keyPersonnel', keyPersonnel);
+  // Basically need to do everything the calculate budget does but only for
+  // parts of the budget that are impacted by the Key State Personnel. So
+  // just start bringing in each calculate budget function and refactor it
+  // to work with just the key state personnel
+};
+
+/**
  * The cost from the item by year for the category.
  * statePersonnel is a special case, because it's years don't have a
  * number value, but an object with amount and percent
@@ -1347,6 +1365,7 @@ export const calculateBudget = apd => {
     keyStatePersonnel: { keyPersonnel } = {},
     apdType // eslint-disable-line no-underscore-dangle
   } = deepCopy(apd);
+
   // Create a default budget object so that all of the properties and stuff
   // will exist, so we don't have to have a bunch of code checking for it.
   let newBudget;
@@ -1362,6 +1381,18 @@ export const calculateBudget = apd => {
   }
 
   if (years && activities && keyPersonnel) {
+    // Before looping over the activities, if it's an MMIS APD update the budget
+    // to include Key State Personnel
+    if (apdType === APD_TYPE.MMIS) {
+      // Tif: Loop over key state personnel and each year and update the budget with all of the impacted
+      // fields/totals/etc...
+      newBudget = addKeyStatePersonnel({
+        budget: newBudget,
+        years,
+        keyPersonnel
+      });
+    }
+
     // Since all of our expenses are tied up in activities, we'll start
     // by looking at all of them and doing Magic Math™. (It's not magic.)
     activities.forEach(activity => {

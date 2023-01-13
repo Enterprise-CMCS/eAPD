@@ -4120,6 +4120,274 @@ describe('budget calculate methods', () => {
       expect(actual).toEqual(expected);
     });
 
+    test.only('handles new Key State Personnel in MMIS', () => {
+      const expected = {
+        activities: [],
+        activityTotals: [],
+        combined: {
+          2023: {
+            total: 0,
+            federal: 0, // Displayed in the UI in the Summary Budget Table (Activities Totals)
+            state: 0, // Displayed in the UI in the Summary Budget Table (Activities Totals)
+            medicaid: 0 // Displayed in the UI in the Combined Activity Costs table(s) and Summary Budget Table (Activities Totals)
+          },
+          2024: {
+            total: 0,
+            federal: 0, // Displayed in the UI in the Summary Budget Table (Activities Totals)
+            state: 0, // Displayed in the UI in the Summary Budget Table (Activities Totals)
+            medicaid: 0 // Displayed in the UI in the Combined Activity Costs table(s) and Summary Budget Table (Activities Totals)
+          },
+          total: {
+            total: 0,
+            federal: 0, // Displayed in the UI in the Summary Budget Table (Activities Totals)
+            state: 0, // Displayed in the UI in the Summary Budget Table (Activities Totals)
+            medicaid: 0 // Displayed in the UI in the Combined Activity Costs table(s) and Summary Budget Table (Activities Totals)
+          }
+        },
+        federalShareByFFYQuarter: {
+          mmis: {
+            total: {
+              combined: 0,
+              contractors: 0,
+              inHouse: 0
+            },
+            years: {}
+          }
+        },
+        mmis: {
+          combined: {
+            // Called Subtotal in UI Table
+            2023: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Combined Activity Costs table(s) and Summary Budget Table (MMIS Activities)
+            },
+            2024: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Combined Activity Costs table(s) and Summary Budget Table (MMIS Activities)
+            },
+            total: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            }
+          },
+          contractors: {
+            2023: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            },
+            2024: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            },
+            total: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            }
+          },
+          expenses: {
+            2023: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            },
+            2024: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            },
+            total: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            }
+          },
+          statePersonnel: {
+            2023: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            },
+            2024: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            },
+            total: {
+              total: 0,
+              federal: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              state: 0, // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+              medicaid: 0 // Displayed in the UI in the Summary Budget Table (MMIS Activities)
+            }
+          },
+          keyStatePersonnel: {
+            2023: {
+              total: 0,
+              federal: 0,
+              state: 0,
+              medicaid: 0 // Displayed in the UI in the Combined Activity Costs table(s)
+            },
+            2024: {
+              total: 0,
+              federal: 0,
+              state: 0,
+              medicaid: 0 // Displayed in the UI in the Combined Activity Costs table(s)
+            },
+            total: {
+              total: 0,
+              federal: 0,
+              state: 0,
+              medicaid: 0
+            }
+          }
+        },
+        mmisByFFP: {
+          '0-100': {
+            total: {
+              federal: 0,
+              medicaid: 0,
+              state: 0,
+              total: 0
+            }
+          },
+          '50-50': {
+            total: {
+              federal: 0,
+              medicaid: 0,
+              state: 0,
+              total: 0
+            }
+          },
+          '75-25': {
+            total: {
+              federal: 0,
+              medicaid: 0,
+              state: 0,
+              total: 0
+            }
+          },
+          '90-10': {
+            total: {
+              federal: 0,
+              medicaid: 0,
+              state: 0,
+              total: 0
+            }
+          },
+          combined: {
+            total: {
+              federal: 0,
+              medicaid: 0,
+              state: 0,
+              total: 0
+            }
+          }
+        },
+        years: []
+      };
+      const actual = calculateBudget({
+        apdType: APD_TYPE.MMIS,
+        activities: [],
+        years: ['2023', '2024'],
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              name: 'James Holden',
+              position: 'HIT Coordinator',
+              email: 'JimPushesButtons@tycho.com',
+              isPrimary: true,
+              fte: {
+                2023: 1,
+                2024: 1
+              },
+              hasCosts: true,
+              costs: {
+                2023: 100,
+                2024: 100
+              },
+              split: {
+                2023: {
+                  federal: 90,
+                  state: 10
+                },
+                2024: {
+                  federal: 90,
+                  state: 10
+                }
+              }
+            },
+            {
+              name: 'Tracy Stayen',
+              position: 'HIE Superstar',
+              email: 'coordinator@mail.com',
+              isPrimary: true,
+              fte: {
+                2023: 1,
+                2024: 1
+              },
+              hasCosts: true,
+              costs: {
+                2023: 200,
+                2024: 200
+              },
+              split: {
+                2023: {
+                  federal: 90,
+                  state: 10
+                },
+                2024: {
+                  federal: 90,
+                  state: 10
+                }
+              }
+            },
+            {
+              name: 'Tracy Stayen',
+              position: 'HIE Superstar',
+              email: 'coordinator@mail.com',
+              isPrimary: true,
+              hasCosts: false,
+              costs: {
+                2023: 0,
+                2024: 0
+              },
+              fte: {
+                2023: 0,
+                2024: 0
+              },
+              split: {
+                2023: {
+                  federal: 0,
+                  state: 0
+                },
+                2024: {
+                  federal: 0,
+                  state: 0
+                }
+              }
+            }
+          ]
+        }
+      });
+      expect(actual).toEqual(expected);
+    });
+
     test('with HITECH values', () => {
       const expected = {
         activities: {
