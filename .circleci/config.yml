@@ -1002,12 +1002,18 @@ jobs:
           name: build API image
           working_directory: ~/project
           command: |
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export NODE_ENV=test
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
           name: run tests
           working_directory: ~/project/api
           command: |
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export NODE_ENV=test
+            
             # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
