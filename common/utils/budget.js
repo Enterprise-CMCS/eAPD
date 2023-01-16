@@ -480,6 +480,50 @@ export const updateStatePersonnel = ({
   return [];
 };
 
+// Todo: Add comment block documenting how this works
+export const calculateKeyStatePersonnelCost = (keyPersonnel, year) => {
+  // Need to figure out here what the cost should be per year.
+  // Should it be the straight cost? Is it Cost x FTE. Is it Cost x FTE x Split(Fed/State)?
+
+  // Assuming we just want the Cost X FTE here...
+  // Also, do we need to check if `hasCosts === true`?
+  if (keyPersonnel.costs?.[year] !== undefined) {
+    const costs = keyPersonnel?.costs?.[year] || 0;
+    const fte = keyPersonnel?.fte?.[year] || 0;
+    return keyPersonnel?.fte?.[year] !== undefined
+      ? convertToNumber(costs || 0) * convertToNumber(fte || 0)
+      : costs;
+  }
+  return 0;
+};
+
+// Todo: Add comment block documenting how this works
+export const calulateKeyStatePersonnelFedShare = (keyPersonnel, year) => {
+  // Return the (cost * fte) * fed-split percentage
+  return (
+    keyPersonnel?.costs[year] *
+    keyPersonnel?.fte[year] *
+    (keyPersonnel?.split[year].federal / 100)
+  );
+};
+
+// Todo: Add comment block documenting how this works
+export const calulateKeyStatePersonnelStateShare = (keyPersonnel, year) => {
+  // Return the (cost * fte) * state-split percentage
+  return (
+    keyPersonnel?.costs[year] *
+    keyPersonnel?.fte[year] *
+    (keyPersonnel?.split[year].state / 100)
+  );
+};
+
+// Todo: Add comment block documenting how this works
+// Tif question: what should this be?
+export const calulateKeyStatePersonnelMedicaidShare = (keyPersonnel, year) => {
+  keyPersonnel + year;
+  return 0;
+};
+
 /**
  * For MMIS APDs app the key state personnel costs to the budget
  * before iterating over the activities and adding those costs.
@@ -489,13 +533,74 @@ export const updateStatePersonnel = ({
  * @returns {Object} an updated budget with key state personnel costs included
  */
 export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
-  console.log('budget', budget);
-  console.log('years', years);
-  console.log('keyPersonnel', keyPersonnel);
   // Basically need to do everything the calculate budget does but only for
   // parts of the budget that are impacted by the Key State Personnel. So
   // just start bringing in each calculate budget function and refactor it
   // to work with just the key state personnel
+
+  // Hackily update the mmis budget to have a default keyStatePersonnel object
+  // Todo: make this not hacky. Refactor the defaultMMISBudgetObject above
+  budget.mmis = {
+    ...budget.mmis,
+    keyStatePersonnel: getDefaultFundingSourceObject(years)
+  };
+
+  let updatedBudget = deepCopy(budget);
+  if (Array.isArray(keyPersonnel)) {
+    keyPersonnel?.forEach(keyPersonnel => {
+      // Totals here is the initial value seen below which is the budget
+      updatedBudget = years.reduce((budget, year) => {
+        // For this first pass through, refactor the below code(from sumCostsForFundingSourceByCategory) to
+        // add the keyPersonnel costs to the combined[year] and combined.total.total
+        // This will need to be refactored to get cost based on split and/or FTE
+        const cost = calculateKeyStatePersonnelCost(keyPersonnel, year);
+        if (budget?.combined?.[year]?.total !== undefined) {
+          budget.combined[year].total += cost;
+        }
+        if (budget?.combined?.total?.total !== undefined) {
+          budget.combined.total.total += cost;
+        }
+
+        // Next we imitate sumShareCostsForFundingSource to update the mmis funding source budget.
+        // Note: Not 100% sure this is needed. Need to understand if this needs to happen or only the sumMMISbyFFP
+        // Todo: determine how to compute costCategoryShare
+        budget['mmis']['keyStatePersonnel'][year].federal +=
+          calulateKeyStatePersonnelFedShare(keyPersonnel, year);
+        budget['mmis']['keyStatePersonnel'].total.federal +=
+          calulateKeyStatePersonnelFedShare(keyPersonnel, year);
+
+        budget['mmis']['keyStatePersonnel'][year].state +=
+          calulateKeyStatePersonnelStateShare(keyPersonnel, year);
+        budget['mmis']['keyStatePersonnel'].total.state +=
+          calulateKeyStatePersonnelStateShare(keyPersonnel, year);
+
+        budget['mmis']['keyStatePersonnel'][year].medicaid +=
+          calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
+        budget['mmis']['keyStatePersonnel'].total.medicaid +=
+          calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
+
+        // Plus the subtotals for the cost categories (i.e., the Medicaid share)
+        budget['mmis'].combined[year].federal +=
+          calulateKeyStatePersonnelFedShare(keyPersonnel, year);
+        budget['mmis'].combined.total.federal +=
+          calulateKeyStatePersonnelFedShare(keyPersonnel, year);
+
+        budget['mmis'].combined[year].state +=
+          calulateKeyStatePersonnelStateShare(keyPersonnel, year);
+        budget['mmis'].combined.total.state +=
+          calulateKeyStatePersonnelStateShare(keyPersonnel, year);
+
+        budget['mmis'].combined[year].medicaid +=
+          calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
+        budget['mmis'].combined.total.medicaid +=
+          calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
+
+        return budget;
+      }, updatedBudget);
+    });
+  }
+
+  return updatedBudget;
 };
 
 /**
@@ -618,7 +723,7 @@ export const sumActivityTotals = ({ activity, years } = {}) => {
  * @param {Object} budget The current budget object
  * @param {String} fundingSource The funding source for the Activity (e.g., "HIT", "HIE")
  * @param {String} category The category this cost comes from (e.g., "contractors", "statePersonnel")
- * @param {Array} items The list of items of the category type in the budget
+ * @param {Array} items The list of items of the category type in the budget (e.g., a personnel in the list of "statePersonnel")
  * @return {Object} The budget object with the totals updated
  */
 export const sumCostsForFundingSourceByCategory = ({
@@ -631,6 +736,7 @@ export const sumCostsForFundingSourceByCategory = ({
   if (Array.isArray(items)) {
     items?.forEach(item => {
       if (item?.years) {
+        // Totals here is the initial value seen below which is the budget
         updatedBudget = Object.keys(item.years).reduce((totals, year) => {
           const cost = getCostFromItemByYear(item, year);
           // New activities don't have a funding program by default, so in that case,
@@ -1440,6 +1546,7 @@ export const calculateBudget = apd => {
       years.forEach(year => {
         const totalOtherFunding = convertToNumber(allocation[year].other);
         const totalCost = activityTotals.data.combined[year];
+        // Todo: For MMIS APDs add key state personnel costs to totalCost?
         const totalMedicaidCost = totalCost - totalOtherFunding;
 
         // This is the total medicaid costs broken into state and federal shares
