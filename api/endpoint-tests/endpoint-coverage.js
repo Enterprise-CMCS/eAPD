@@ -10,11 +10,9 @@ const __dirname = path.resolve();
 
 let endpoints = [];
 
-console.log(`looking for file: ${__dirname}/endpoint-tests/endpoint-data.json`);
-if (fs.existsSync(`${__dirname}/endpoint-tests/endpoint-data.json`)) {
-  endpoints = JSON.parse(
-    fs.readFileSync(`${__dirname}/endpoint-tests/endpoint-data.json`)
-  );
+console.log(`looking for file: ${__dirname}/endpoint-data.json`);
+if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {
+  endpoints = JSON.parse(fs.readFileSync(`${__dirname}/endpoint-data.json`));
 }
 
 // Treat it the same as the outside world will see it.  If we

@@ -972,7 +972,6 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 16.16.0
             nvm alias default 16.16.0
-            touch ~/project/api/endpoint-tests/endpoint-data.json
             
             ./endpoint-tests/endpoint.sh
 
