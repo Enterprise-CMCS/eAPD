@@ -4,10 +4,11 @@
 import colors from 'colors'; // eslint-disable-line import/no-extraneous-dependencies
 import fs from 'fs';
 import openApi from '../routes/openAPI/index.js';
+import { resolve } from 'path';
 import * as url from 'url';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-const filename = `${__dirname}endpoint-data.json`;
+const filename = resolve(__dirname, 'endpoint-data.json');
 
 let endpoints = [];
 console.log(`looking for file: ${filename}`);
