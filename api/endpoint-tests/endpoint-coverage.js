@@ -7,11 +7,12 @@ import openApi from '../routes/openAPI/index.js';
 import * as url from 'url';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const filename = `${__dirname}endpoint-data.json`;
 
 let endpoints = [];
-console.log(`looking for file: ${__dirname}/endpoint-data.json`);
-if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {
-  endpoints = JSON.parse(fs.readFileSync(`${__dirname}/endpoint-data.json`));
+console.log(`looking for file: ${filename}`);
+if (fs.existsSync(`${filename}`)) {
+  endpoints = JSON.parse(fs.readFileSync(`${filename}`));
 }
 
 // Treat it the same as the outside world will see it.  If we
