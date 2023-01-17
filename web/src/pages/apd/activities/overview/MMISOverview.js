@@ -1,6 +1,6 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect, useMemo } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -57,52 +57,40 @@ const MMISActivityOverview = ({
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const snapshotLabel = useMemo(
-    () =>
-      t('activities.overview.activitySnapshotInput.label', {
-        defaultValue: 'Activity snapshot'
-      }),
-    []
+  const snapshotLabel = t('activities.overview.activitySnapshotInput.label', {
+    defaultValue: 'Activity snapshot'
+  });
+
+  const snapshotHint = t('activities.overview.activitySnapshotInput.hint', {
+    defaultValue: ''
+  });
+
+  const problemStatementLabel = t(
+    'activities.overview.problemStatementInput.label',
+    {
+      defaultValue: 'Problem statement'
+    }
   );
 
-  const snapshotHint = useMemo(
-    () =>
-      t('activities.overview.activitySnapshotInput.hint', {
-        defaultValue: ''
-      }),
-    []
+  const problemStatementHint = t(
+    'activities.overview.problemStatementInput.hint',
+    {
+      defaultValue: ''
+    }
   );
 
-  const problemStatementLabel = useMemo(
-    () =>
-      t('activities.overview.problemStatementInput.label', {
-        defaultValue: 'Problem statement'
-      }),
-    []
+  const proposedSolutionLabel = t(
+    'activities.overview.proposedSolutionInput.label',
+    {
+      defaultValue: 'Proposed solution'
+    }
   );
 
-  const problemStatementHint = useMemo(
-    () =>
-      t('activities.overview.problemStatementInput.hint', {
-        defaultValue: ''
-      }),
-    []
-  );
-
-  const proposedSolutionLabel = useMemo(
-    () =>
-      t('activities.overview.proposedSolutionInput.label', {
-        defaultValue: 'Proposed solution'
-      }),
-    []
-  );
-
-  const proposedSolutionHint = useMemo(
-    () =>
-      t('activities.overview.proposedSolutionInput.hint', {
-        defaultValue: ''
-      }),
-    []
+  const proposedSolutionHint = t(
+    'activities.overview.proposedSolutionInput.hint',
+    {
+      defaultValue: ''
+    }
   );
 
   return (

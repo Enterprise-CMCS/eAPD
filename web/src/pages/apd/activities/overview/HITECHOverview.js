@@ -1,6 +1,6 @@
 import { FormLabel } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { Fragment, useEffect, useMemo } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
@@ -53,62 +53,44 @@ const HITECHOverview = ({
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const overviewLabel = useMemo(
-    () =>
-      t('activities.overview.activityOverviewInput.label', {
-        defaultValue: 'Provide a short overview of the activity.'
-      }),
-    []
+  const overviewLabel = t('activities.overview.activityOverviewInput.label', {
+    defaultValue: 'Provide a short overview of the activity.'
+  });
+
+  const overviewHint = t('activities.overview.activityOverviewInput.hint', {
+    defaultValue: ''
+  });
+
+  const descriptionLabel = t(
+    `activities.overview.activityDescriptionInput.${
+      activity.fundingSource === 'HIE' ? 'hie' : 'standard'
+    }.label`,
+    {
+      defaultValue:
+        'Include as much detail as is necessary to explain the activity.'
+    }
+  );
+  const descriptionHint = t(
+    `activities.overview.activityDescriptionInput.${
+      activity.fundingSource === 'HIE' ? 'hie' : 'standard'
+    }.hint`,
+    {
+      defaultValue: ''
+    }
   );
 
-  const overviewHint = useMemo(
-    () =>
-      t('activities.overview.activityOverviewInput.hint', {
-        defaultValue: ''
-      }),
-    []
+  const alternativesLabel = t(
+    'activities.overview.activityAlternativesInput.label',
+    {
+      defaultValue: 'Provide a short overview of the activity.'
+    }
   );
 
-  const descriptionLabel = useMemo(
-    () =>
-      t(
-        `activities.overview.activityDescriptionInput.${
-          activity.fundingSource === 'HIE' ? 'hie' : 'standard'
-        }.label`,
-        {
-          defaultValue:
-            'Include as much detail as is necessary to explain the activity.'
-        }
-      ),
-    [activity.fundingSource]
-  );
-  const descriptionHint = useMemo(
-    () =>
-      t(
-        `activities.overview.activityDescriptionInput.${
-          activity.fundingSource === 'HIE' ? 'hie' : 'standard'
-        }.hint`,
-        {
-          defaultValue: ''
-        }
-      ),
-    [activity.fundingSource]
-  );
-
-  const alternativesLabel = useMemo(
-    () =>
-      t('activities.overview.activityAlternativesInput.label', {
-        defaultValue: 'Provide a short overview of the activity.'
-      }),
-    []
-  );
-
-  const alternativesHint = useMemo(
-    () =>
-      t('activities.overview.activityAlternativesInput.hint', {
-        defaultValue: ''
-      }),
-    []
+  const alternativesHint = t(
+    'activities.overview.activityAlternativesInput.hint',
+    {
+      defaultValue: ''
+    }
   );
 
   return (
