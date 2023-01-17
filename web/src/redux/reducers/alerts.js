@@ -19,11 +19,15 @@ const reducer = (state = initialState, action) => {
         ]
       };
     case ALERT_RESOLVE:
-      console.log('HIIIIII');
-      return state;
+      return removeMsg(action.message_index, state);
     default:
       return state;
   }
+};
+
+export const removeMsg = (index, state) => {
+  let newState = state.messages.splice(index, 1);
+  return newState;
 };
 
 export const getTempAlerts = state => state.alerts.messages;

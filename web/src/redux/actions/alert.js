@@ -8,4 +8,9 @@ export const alertApdCreateSuccess = () => ({
   message: APD_CREATE_SUCCESS_MSG
 });
 
-export const resolveAlertMessage = i => dispatch => {};
+export const resolveAlertMessage = i => dispatch => {
+  dispatch({
+    type: ALERT_RESOLVE,
+    message_index: i
+  });
+};

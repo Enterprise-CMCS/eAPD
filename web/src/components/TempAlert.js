@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { Alert, Button, CloseIcon } from '@cmsgov/design-system';
 
 import { resolveAlertMessage } from '../redux/actions/alert';
-import { getTempAlerts, removeAlert } from '../redux/reducers/alerts';
+import { getTempAlerts } from '../redux/reducers/alerts';
 
-const TempAlert = ({ alerts }) => {
+const TempAlert = ({ alerts, resolveAlert }) => {
   if (!alerts) {
     return null;
   }
@@ -45,7 +45,8 @@ const TempAlert = ({ alerts }) => {
 };
 
 TempAlert.propTypes = {
-  alerts: PropTypes.array
+  alerts: PropTypes.array,
+  resolveAlert: PropTypes.func
 };
 
 TempAlert.defaultProps = {
