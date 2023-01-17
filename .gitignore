@@ -25,10 +25,10 @@ pgdata/*
 schema.sql
 
 api/.env
-api/.nyc_output
-api/coverage
-api/coverage-endpoint
-api/coverage-unit
+api/.nyc_output/*
+api/coverage/*
+api/coverage-endpoint/*
+api/coverage-unit/*
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
 api/seeds/test/tokens.json
