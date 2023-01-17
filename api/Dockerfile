@@ -6,13 +6,13 @@ WORKDIR /app
 
 COPY package.json .
 COPY yarn.lock .
-COPY api ./api
-COPY common ./common
-
-RUN yarn install --frozen-lockfile --non-interactive
+COPY --chown=node api ./api
+COPY --chown=node common ./common
 
 RUN chown -R node:node /app
 USER node:node
+
+RUN yarn install --frozen-lockfile --non-interactive
 
 WORKDIR /app/api
 
