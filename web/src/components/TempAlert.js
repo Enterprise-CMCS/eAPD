@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { Alert, Button, CloseIcon } from '@cmsgov/design-system';
 
+import { resolveAlertMessage } from '../redux/actions/alert';
 import { getTempAlerts, removeAlert } from '../redux/reducers/alerts';
 
 const TempAlert = ({ alerts }) => {
-  const [tempAlertState, setTempAlertState] = useState(alerts);
-
   if (!alerts) {
     return null;
   }
 
-  const removeMsg = i => {
-    let messages = removeAlert(i);
-    setTempAlertState(messages);
-  };
+  // const removeMsg = i => {
+  //   setTempAlertState([
+  //     ...tempAlertState.slice(0, i),
+  //     ...tempAlertState.slice(i + 1)
+  //   ]);
+  // };
 
   return (
     <div>
-      {tempAlertState.map((value, index) => (
+      {alerts.map((value, index) => (
         <Alert
           key={`tempAlert-${index + 1}`}
           className="ds-u-margin-y--2"
@@ -29,7 +30,10 @@ const TempAlert = ({ alerts }) => {
           <div className="tempMessage">
             <div>{value.message}</div>
             <div>
-              <Button onClick={() => removeMsg(index)} className="tempMsgBtn">
+              <Button
+                onClick={() => resolveAlert(index)}
+                className="tempMsgBtn"
+              >
                 <CloseIcon />
               </Button>
             </div>
@@ -52,6 +56,10 @@ const mapStateToProps = state => ({
   alerts: getTempAlerts(state)
 });
 
-export default connect(mapStateToProps)(TempAlert);
+const mapDispatchToProps = {
+  resolveAlert: resolveAlertMessage
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TempAlert);
 
 export { TempAlert as plain };

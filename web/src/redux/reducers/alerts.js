@@ -1,4 +1,4 @@
-import { ALERT_SUCCESS } from '../actions/alert';
+import { ALERT_RESOLVE, ALERT_SUCCESS } from '../actions/alert';
 
 const initialState = {
   messages: []
@@ -18,18 +18,12 @@ const reducer = (state = initialState, action) => {
           )
         ]
       };
+    case ALERT_RESOLVE:
+      console.log('HIIIIII');
+      return state;
     default:
       return state;
   }
-};
-
-export const removeAlert = (i, state) => {
-  let messages = state.alerts.messages,
-    newMessages;
-
-  newMessages([...messages.slice(0, i), ...messages.slice(i + 1)]);
-
-  return newMessages;
 };
 
 export const getTempAlerts = state => state.alerts.messages;
