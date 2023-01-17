@@ -972,6 +972,8 @@ jobs:
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 16.16.0
             nvm alias default 16.16.0
+            touch ~/project/api/endpoint-tests/endpoint-data.json
+            
             ./endpoint-tests/endpoint.sh
 
   # Lints the backend code.
@@ -1013,12 +1015,13 @@ jobs:
           command: |
             export LD_API_KEY="$PREVIEW_LD_API_KEY"
             export NODE_ENV=test
-            
+
             # Switch to Node 16.16.0.
             export NVM_DIR="/opt/circleci/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 16.16.0
             nvm alias default 16.16.0
+            
             ./unit-test.sh
       - run:
           name: report coverage

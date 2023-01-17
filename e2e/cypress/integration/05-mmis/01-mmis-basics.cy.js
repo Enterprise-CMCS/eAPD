@@ -13,6 +13,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   const years = [];
 
   before(() => {
+    cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff('/');
 
@@ -154,14 +155,83 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.get(`[data-cy='other_details']`).type('This is other stuff.').blur();
 
       cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled');
-
-      // Once MMIS pages have been implemented, we can actually create the
-      // apd here and check that the information saved on the right pages.
-
       cy.findByRole('button', { name: /Cancel/i }).click();
 
-      // Should redirect to dashboard and not save
       cy.contains('MMIS APD Test').should('not.exist');
+    });
+  });
+  describe('MMIS Pages', () => {
+    it('tests the Security Planning page', () => {
+      cy.turnOnAdminCheck();
+      cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
+
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('Security Planning').should('exist');
+      });
+
+      cy.contains('Provide Security and Interface Plan').should('exist');
+      cy.get('[id="security-interface-plan"]').should('have.value', '');
+
+      cy.setTinyMceContent(
+        'security-interface-plan',
+        'This is the Security Interface plan'
+      );
+      cy.waitForSave();
+
+      cy.contains('Provide Security and Interface Plan').should('not.exist');
+
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'exist'
+      );
+      cy.get('[id="bc-dr-plan"]').should('have.value', '');
+
+      cy.setTinyMceContent(
+        'bc-dr-plan',
+        'This is the Business Continuity and Disaster Recovery plan'
+      );
+      cy.waitForSave();
+
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'not.exist'
+      );
+
+      // Verify fields save
+      cy.goToApdOverview();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.goToSecurityPlanning();
+
+      cy.get('[id="security-interface-plan"]').should(
+        'have.value',
+        '<p>This is the Security Interface plan</p>'
+      );
+      cy.get('[id="bc-dr-plan"]').should(
+        'have.value',
+        '<p>This is the Business Continuity and Disaster Recovery plan</p>'
+      );
+
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('Security Planning').should('not.exist');
+      });
+
+      // Verify validation disappears when Admin Check is off
+      cy.setTinyMceContent('security-interface-plan', '');
+      cy.contains('Provide Security and Interface Plan').should('exist');
+
+      cy.setTinyMceContent('bc-dr-plan', '');
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'exist'
+      );
+
+      cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
+        force: true
+      });
+
+      cy.contains('Provide Security and Interface Plan').should('not.exist');
+      cy.contains('Provide Business Continuity and Disaster Recovery').should(
+        'not.exist'
+      );
+
+      // Todo: TEST CONTINUE AND BACK BUTTONS, Assurances and Compliance page crashes though.
     });
   });
 });
