@@ -58,7 +58,6 @@ const NonPersonnelCostForm = forwardRef(
     }, [apdType]);
 
     const onSubmit = e => {
-      console.log('onSubmit called', e);
       e.preventDefault();
       saveNonPersonnelCost(activityIndex, index, {
         ...item,

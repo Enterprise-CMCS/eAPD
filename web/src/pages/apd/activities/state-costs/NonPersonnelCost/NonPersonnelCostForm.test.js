@@ -178,11 +178,31 @@ describe('Selection removes "Administrative operations" for in MMIS apd', () => 
     await setup({}, hitechApd);
 
     expect(screen.getAllByRole('option').length).toBe(7);
+
+    const dropdown = screen.getByRole('combobox');
+
+    await waitFor(() => {
+      dropdown.click();
+    });
+
+    expect(
+      await screen.findByText('Administrative operations')
+    ).toBeInTheDocument();
   });
 
-  it('shows "Administrative operations" on HITECH APD', async () => {
+  it('shows default list on MMIS APD', async () => {
     await setup({}, mmisApd);
 
     expect(screen.getAllByRole('option').length).toBe(6);
+
+    const dropdown = screen.getByRole('combobox');
+
+    await waitFor(() => {
+      dropdown.click();
+    });
+
+    expect(
+      screen.queryByText('Administrative operations')
+    ).not.toBeInTheDocument();
   });
 });
