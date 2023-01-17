@@ -946,6 +946,7 @@ jobs:
   backend api endpoint test:
     machine:
       image: ubuntu-2204:2022.04.2
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -995,6 +996,7 @@ jobs:
   backend unit test:
     machine:
       image: ubuntu-2204:2022.04.2
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -1160,7 +1162,7 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2204:2022.04.2
-    #resource_class: large
+    resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -1181,7 +1183,8 @@ jobs:
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
-           
+            sleep 30
+
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run seed
       - run:
