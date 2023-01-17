@@ -32,6 +32,7 @@ export const standardsAndConditionsSchema = Joi.object({
   })
 });
 
+// No Standards and Conditions (SC)
 export const hitechActivityOverviewNoSCSchema = Joi.object({
   summary: activitySummarySchema,
   description: activityDescriptionSchema,
