@@ -53,7 +53,7 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
     cy.useStateStaff(apdUrl);
   });
 
-  after(() => {
+  after(function () {
     cy.visit('/');
     cy.deleteAPD(this.apdId);
   });
