@@ -1,6 +1,6 @@
-import base from './activities.yaml';
-
 import alternativesAndRisks from './alternativesAndRisks.yaml';
+import base from './activities.yaml';
+import comprehensiveOverview from './comprehensiveOverview.yaml';
 import contractorResources from './contractorResources.yaml';
 import conditions from './conditions.yaml';
 import costAllocate from './costAllocate.yaml';
@@ -16,6 +16,7 @@ import statePersonnel from './statePersonnel.yaml';
 export default {
   ...base,
   alternativesAndRisks,
+  comprehensiveOverview,
   contractorResources,
   conditions,
   costAllocate,
