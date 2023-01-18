@@ -1,14 +1,13 @@
 import React from 'react';
-import { renderWithConnection, screen } from 'apd-testing-library';
-import MockAdapter from 'axios-mock-adapter';
+import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
 
-import axios from '../../../../util/api';
-import Overview from './Overview';
-
-const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
+import HITECHOverview from './HITECHOverview';
 
 const initialState = {
   apd: {
+    adminCheck: {
+      enabled: false
+    },
     data: {
       activities: [
         {
@@ -28,29 +27,27 @@ const initialState = {
 };
 
 const setup = (props = {}, options = {}) =>
-  renderWithConnection(<Overview {...props} />, options);
+  renderWithConnection(<HITECHOverview {...props} />, options);
 
-describe('<Overview />', () => {
-  beforeEach(() => {
-    fetchMock.reset();
-  });
-
-  describe('create new Activity', () => {
-    it('on success, adds new Activity and switches to it', async () => {
+describe('<HITECHOverview />', () => {
+  describe('existing Activity', () => {
+    it('displays data from existing activity', async () => {
       setup(
         {
-          activityIndex: '0'
+          activityIndex: 0
         },
         {
           initialState
         }
       );
 
-      expect(
-        screen.getByLabelText('Provide a short overview of the activity.')
-      ).toHaveValue(
-        'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
-      );
+      await waitFor(() => {
+        expect(
+          screen.getByLabelText('Provide a short overview of the activity.')
+        ).toHaveValue(
+          'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
+        );
+      });
 
       expect(
         screen.getByLabelText(
