@@ -530,6 +530,10 @@ Cypress.Commands.add('goToExportView', () => {
   cy.contains('Continue to Review').click();
 });
 
+Cypress.Commands.add('goToSecurityPlanning', () => {
+  cy.get('a.ds-c-vertical-nav__label').contains('Security Planning').click();
+});
+
 Cypress.Commands.add('getEAPDTable', { prevSubject: true }, subject => {
   if (subject.get().length > 1)
     throw new Error(
