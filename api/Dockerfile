@@ -9,11 +9,11 @@ COPY yarn.lock .
 COPY api ./api
 COPY common ./common
 
-RUN yarn install --frozen-lockfile --non-interactive
-
+USER root
 RUN chown -R node:node /app
 USER node:node
 
-WORKDIR /app/api
+RUN yarn install --frozen-lockfile --non-interactive
 
+WORKDIR /app/api
 CMD yarn run start-dev
