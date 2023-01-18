@@ -1,9 +1,11 @@
-const logger = require('../../../logger')('apds file routes');
-const { can } = require('../../../middleware');
-const { fileBelongsToAPD: fb } = require('../../../db');
-const { getFile: get } = require('../../../files');
+import loggerFactory from '../../../logger/index.js';
+import { can } from '../../../middleware/index.js';
+import { fileBelongsToAPD as fb } from '../../../db/index.js';
+import { getFile as get } from '../../../files/index.js';
 
-module.exports = (app, { fileBelongsToAPD = fb, getFile = get } = {}) => {
+const logger = loggerFactory('apds file routes');
+
+export default (app, { fileBelongsToAPD = fb, getFile = get } = {}) => {
   logger.silly('setting up GET /apds/:id/files/:fileID route');
 
   app.get(

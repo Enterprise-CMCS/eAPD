@@ -1,7 +1,7 @@
-const sinon = require('sinon');
+import { createSandbox, stub } from 'sinon';
 
-const sandbox = sinon.createSandbox();
-const db = sinon.stub();
+const sandbox = createSandbox();
+const db = stub();
 
 const reset = () => {
   sandbox.resetBehavior();
@@ -45,4 +45,4 @@ const creator = table => {
 
 creator.reset = reset;
 
-module.exports = creator;
+export default creator;

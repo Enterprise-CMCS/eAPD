@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   // Gotta drop these in the right order due to key constraints
   await Promise.all([
     knex.schema.dropTable('activity_contractor_files'),
@@ -49,4 +49,4 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async () => {};
+export const down = async () => {};

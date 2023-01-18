@@ -1,17 +1,17 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
-const {
+} from '../../endpoint-tests/utils.js';
+import {
   mnAPDId,
   akAPDId,
   finalAPDId,
   badAPDId
-} = require('../../seeds/test/apds');
+} from '../../seeds/test/apds.js';
 
 describe('APD endpoint', () => {
   describe('Delete/archive APD endpoint | DELETE /apds/:id', () => {

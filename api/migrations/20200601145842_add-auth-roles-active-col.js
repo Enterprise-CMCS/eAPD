@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.table('auth_roles', table => {
     table.boolean('isActive').notNullable().defaultTo(true);
   });
@@ -13,4 +13,4 @@ exports.up = async knex => {
     .update({ isActive: false });
 };
 
-exports.down = () => {};
+export const down = () => {};

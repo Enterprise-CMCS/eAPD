@@ -1,7 +1,11 @@
-require('./mmisBudget');
-const mongoose = require('mongoose');
-const { mmisActivitySchema } = require('./mmisActivity');
-const { APD, discriminatorOptions, federalCitation } = require('./apd');
+import './mmisBudget.js';
+import mongoose from 'mongoose';
+import mmisActivitySchema from './mmisActivity.js';
+import {
+  default as APD,
+  discriminatorOptions,
+  federalCitation
+} from './apd.js';
 
 const mmisSchema = new mongoose.Schema(
   {
@@ -100,6 +104,4 @@ const mmisSchema = new mongoose.Schema(
 
 const MMIS = APD.discriminator('MMIS', mmisSchema);
 
-module.exports = {
-  MMIS
-};
+export default MMIS;

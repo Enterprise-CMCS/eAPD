@@ -1,10 +1,15 @@
-const logger = require('../../../logger')('apds file routes');
-const { can, userCanEditAPD } = require('../../../middleware');
-const { validateFile: vf } = require('../../../util/fileValidation');
-const { createNewFileForAPD: cf, deleteFileByID: df } = require('../../../db');
-const { putFile: put } = require('../../../files');
+import loggerFactory from '../../../logger/index.js';
+import { can, userCanEditAPD } from '../../../middleware/index.js';
+import { validateImage as vf } from '../../../util/fileValidation.js';
+import {
+  createNewFileForAPD as cf,
+  deleteFileByID as df
+} from '../../../db/index.js';
+import { putFile as put } from '../../../files/index.js';
 
-module.exports = (
+const logger = loggerFactory('apds file routes');
+
+export default (
   app,
   {
     validateFile = vf,

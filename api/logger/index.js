@@ -1,4 +1,4 @@
-const { logger } = require('./winston');
+import logger from './winston.js';
 
 // export a labeled logger function
-module.exports = label => logger.child({ label });
+export default label => logger.child({ label });

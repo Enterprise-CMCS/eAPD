@@ -1,9 +1,9 @@
 /* eslint-disable no-shadow */
-const sinon = require('sinon');
-const tap = require('tap');
+import { stub } from 'sinon';
 
-const errorHandler = require('./errorHandler');
-const mockResponse = require('../util/mockResponse');
+import tap from 'tap';
+import errorHandler from './errorHandler.js';
+import mockResponse from '../util/mockResponse.js';
 
 let err;
 let req;
@@ -14,7 +14,7 @@ tap.test('errorHandler middleware', async t => {
   t.beforeEach(async () => {
     req = { id: 'unique id per request' };
     res = mockResponse();
-    next = sinon.stub();
+    next = stub();
   });
 
   t.test('when an error string occurs', async t => {

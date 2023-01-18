@@ -1,9 +1,9 @@
-const tap = require('tap');
-const { calculateBudget, APD_TYPE } = require('@cms-eapd/common');
+import tap from 'tap';
+import { calculateBudget, APD_TYPE } from '@cms-eapd/common';
 
-const { setup, teardown } = require('../db/mongodb');
-const { HITECH, HITECHBudget } = require('./index');
-const { hitech, hitechNoActivities } = require('../seeds/development/apds');
+import { setup, teardown } from '../db/mongodb.js';
+import { HITECH, HITECHBudget } from './index.js';
+import { hitech, hitechNoActivities } from '../seeds/development/apds.js';
 
 let apdId;
 let budgetId;

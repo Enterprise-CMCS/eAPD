@@ -1,10 +1,8 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const getEndpoint = require('./get');
-
-const mockExpress = require('../../util/mockExpress');
-const mockResponse = require('../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import getEndpoint from './get.js';
+import mockExpress from '../../util/mockExpress.js';
+import mockResponse from '../../util/mockResponse.js';
 
 let app;
 let res;
@@ -16,8 +14,8 @@ tap.test('GET /affiliations/me', async tests => {
   tests.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    getAffiliationsByUserId = sinon.stub();
+    next = stub();
+    getAffiliationsByUserId = stub();
   });
 
   tests.test('setup', async setupTest => {
@@ -25,7 +23,7 @@ tap.test('GET /affiliations/me', async tests => {
 
     setupTest.beforeEach(() => {
       setupTest.ok(
-        app.get.calledWith('/affiliations/me', sinon.match.func),
+        app.get.calledWith('/affiliations/me', match.func),
         'specific affiliation GET endpoint is registered'
       );
     });

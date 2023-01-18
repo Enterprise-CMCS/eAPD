@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { activitySchema } = require('./apdActivity');
+import mongoose from 'mongoose';
+import activitySchema from './apdActivity.js';
 
 const mmisActivitySchema = new mongoose.Schema({
   _id: false,
@@ -23,6 +23,4 @@ const mmisActivitySchema = new mongoose.Schema({
 
 mmisActivitySchema.add(activitySchema);
 
-module.exports = {
-  mmisActivitySchema
-};
+export default mmisActivitySchema;

@@ -1,3 +1,3 @@
-const { teardown } = require('./db/mongodb');
+import { setup } from './db/mongodb.js';
 
-module.exports = async () => teardown();
+export default async () => setup();

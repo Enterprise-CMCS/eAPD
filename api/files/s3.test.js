@@ -1,12 +1,8 @@
-const sinon = require('sinon');
-const tap = require('tap');
+import { createSandbox } from 'sinon';
+import tap from 'tap';
+import { getFile, putFile } from './s3.js';
 
-const sandbox = sinon.createSandbox();
-
-const getModule = () => {
-  delete require.cache[require.resolve('./s3')];
-  return require('./s3'); // eslint-disable-line global-require
-};
+const sandbox = createSandbox();
 
 tap.test('AWS S3 file storage module', async tests => {
   const S3 = sandbox.stub();
@@ -33,7 +29,6 @@ tap.test('AWS S3 file storage module', async tests => {
     'returns functions that always reject if FILE_S3_BUCKET is missing',
     async test => {
       delete process.env.FILE_S3_BUCKET;
-      const { getFile, putFile } = getModule();
 
       test.rejects(() => getFile());
       test.rejects(() => putFile());
@@ -44,7 +39,6 @@ tap.test('AWS S3 file storage module', async tests => {
     'returns functions that always reject if AWS_ACCESS_KEY_ID is missing',
     async test => {
       delete process.env.AWS_ACCESS_KEY_ID;
-      const { getFile, putFile } = getModule();
 
       test.rejects(() => getFile());
       test.rejects(() => putFile());
@@ -55,7 +49,6 @@ tap.test('AWS S3 file storage module', async tests => {
     'returns functions that always reject if AWS_SECRET_ACCESS_KEY is missing',
     async test => {
       delete process.env.AWS_SECRET_ACCESS_KEY;
-      const { getFile, putFile } = getModule();
 
       test.rejects(() => getFile());
       test.rejects(() => putFile());
@@ -63,8 +56,6 @@ tap.test('AWS S3 file storage module', async tests => {
   );
 
   tests.test('can get a file from S3 storage', async getTests => {
-    const { getFile } = getModule();
-
     getTests.test(
       'rejects if there is an error reading the file',
       async test => {
@@ -95,8 +86,6 @@ tap.test('AWS S3 file storage module', async tests => {
   });
 
   tests.test('can put a file into S3 storage', async putTests => {
-    const { putFile } = getModule();
-
     putTests.test(
       'rejects if there is an error writing the file',
       async test => {

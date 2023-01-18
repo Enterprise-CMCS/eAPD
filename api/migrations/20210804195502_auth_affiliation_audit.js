@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.createTable('auth_affiliation_audit', table => {
     table.comment('Audit log for changes to auth affiliations');
 
@@ -24,7 +24,7 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async knex => {
+export const down = async knex => {
   await knex.schema.dropTable('auth_affiliation_audit');
   await knex.schema.table('auth_affiliations', table => {
     table

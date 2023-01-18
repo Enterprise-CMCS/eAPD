@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.createTable('auth_roles', table => {
     table.comment(
       'authorization roles - users belong to a role, and a role encapuslates a list of activities'
@@ -601,4 +601,4 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async () => {};
+export const down = async () => {};
