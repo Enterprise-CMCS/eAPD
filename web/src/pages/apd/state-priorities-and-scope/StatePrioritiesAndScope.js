@@ -1,11 +1,40 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Section } from '../../../components/Section';
 import RichText from '../../../components/RichText';
 import Instruction from '../../../components/Instruction';
+import { useForm, Controller } from 'react-hook-form';
 
-const StatePrioritiesAndScope = () => {
+import statePrioritiesAndScopeSchema from '@cms-eapd/common/schemas/statePrioritiesAndScope';
+import { joiResolver } from '@hookform/resolvers/joi';
+
+const StatePrioritiesAndScope = ({
+  medicaidProgramAndPriorities,
+  mesIntroduction,
+  scopeOfAPD
+}) => {
+  const {
+    control,
+    formState: { errors },
+    trigger
+    // clearErrors
+  } = useForm({
+    defaultValues: {
+      medicaidProgramAndPriorities,
+      mesIntroduction,
+      scopeOfAPD
+    },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    resolver: joiResolver(statePrioritiesAndScopeSchema)
+  });
+
+  useEffect(() => {
+    trigger();
+  });
+
   return (
     <Section id="state-priorities-and-scope" resource="statePrioritiesAndScope">
       <hr />
@@ -15,9 +44,22 @@ const StatePrioritiesAndScope = () => {
         id="medicaid-program-priorities-container"
       >
         <Instruction source="statePrioritiesAndScope.programPriorities" />
-        <RichText
-          id="medicaid-program-priorities-field"
-          iframe_aria_text="Medicaid Program and Priorities Text Area"
+        <Controller
+          name="medicaidProgramAndPriorities"
+          control={control}
+          render={({ field: { onChange, value, ...props } }) => (
+            <RichText
+              {...props}
+              id="medicaid-program-priorities-field"
+              iframe_aria_text="Medicaid Program and Priorities Text Area"
+              content={value}
+              onSync={html => {
+                onChange(html);
+              }}
+              editorClassName="rte-textarea-l"
+              error={errors?.medicaidProgramAndPriorities?.message}
+            />
+          )}
         />
       </div>
 
@@ -26,18 +68,53 @@ const StatePrioritiesAndScope = () => {
         id="medicaid-enterprise-system-intro-container"
       >
         <Instruction source="statePrioritiesAndScope.enterpriseSystemIntro" />
-        <RichText
-          id="medicaid-enterprise-system-intro"
-          iframe_aria_text="Medicaid Enterprise System Introduction Text Area"
+        <Controller
+          name="mesIntroduction"
+          control={control}
+          render={({ field: { onChange, value, ...props } }) => (
+            <RichText
+              {...props}
+              id="medicaid-enterprise-system-intro"
+              iframe_aria_text="Medicaid Enterprise System Introduction Text Area"
+              content={value}
+              onSync={html => {
+                onChange(html);
+              }}
+              editorClassName="rte-textarea-l"
+              error={errors?.mesIntroduction?.message}
+            />
+          )}
         />
       </div>
 
       <div className="ds-u-margin-top--6" id="scope-of-apd-container">
         <Instruction source="statePrioritiesAndScope.scopeOfApd" />
-        <RichText id="scope-of-apd" iframe_aria_text="Scope of APD Text Area" />
+        <Controller
+          name="scopeOfAPD"
+          control={control}
+          render={({ field: { onChange, value, ...props } }) => (
+            <RichText
+              {...props}
+              id="scope-of-apd"
+              iframe_aria_text="Scope of APD Text Area"
+              content={value}
+              onSync={html => {
+                onChange(html);
+              }}
+              editorClassName="rte-textarea-l"
+              error={errors?.scopeOfAPD?.message}
+            />
+          )}
+        />
       </div>
     </Section>
   );
+};
+
+StatePrioritiesAndScope.propTypes = {
+  medicaidProgramAndPriorities: PropTypes.string.isRequired,
+  mesIntroduction: PropTypes.string.isRequired,
+  scopeOfAPD: PropTypes.string.isRequired
 };
 
 const mapStateToProps = () => ({});
