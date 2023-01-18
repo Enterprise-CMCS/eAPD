@@ -852,7 +852,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
         'exist'
       );
 
-      activityPage.checkTinyMCE('contractor-description-field-0', '');
+      cy.checkTinyMCE('contractor-description-field-0', '');
 
       activityPage.checkDate('Contract start date');
       cy.contains('Contract start date')
