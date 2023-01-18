@@ -521,7 +521,7 @@ export const calulateKeyStatePersonnelStateShare = (keyPersonnel, year) => {
 // Tif question: what should this be?
 export const calulateKeyStatePersonnelMedicaidShare = (keyPersonnel, year) => {
   keyPersonnel + year;
-  return 0;
+  return 1;
 };
 
 /**
@@ -563,7 +563,7 @@ export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
 
         // Next we imitate sumShareCostsForFundingSource to update the mmis funding source budget.
         // Note: Not 100% sure this is needed. Need to understand if this needs to happen or only the sumMMISbyFFP
-        // Todo: determine how to compute costCategoryShare
+        // Todo: determine how to compute costCategoryShare?
         budget['mmis']['keyStatePersonnel'][year].federal +=
           calulateKeyStatePersonnelFedShare(keyPersonnel, year);
         budget['mmis']['keyStatePersonnel'].total.federal +=
@@ -594,6 +594,13 @@ export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
           calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
         budget['mmis'].combined.total.medicaid +=
           calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
+
+        // budget.combined[year].federal += totalMedicaidCostShares.fedShare;
+        // budget.combined.total.federal += totalMedicaidCostShares.fedShare;
+        // budget.combined[year].state += totalMedicaidCostShares.stateShare;
+        // budget.combined.total.state += totalMedicaidCostShares.stateShare;
+        // budget.combined[year].medicaid += totalMedicaidCost;
+        // budget.combined.total.medicaid += totalMedicaidCost;
 
         return budget;
       }, updatedBudget);
@@ -1491,7 +1498,7 @@ export const calculateBudget = apd => {
     // to include Key State Personnel
     if (apdType === APD_TYPE.MMIS) {
       // Tif: Loop over key state personnel and each year and update the budget with all of the impacted
-      // fields/totals/etc...
+      // fields/totals/etc... *before* the activities are calculated
       newBudget = addKeyStatePersonnel({
         budget: newBudget,
         years,
@@ -1545,8 +1552,8 @@ export const calculateBudget = apd => {
       // of all the costs.
       years.forEach(year => {
         const totalOtherFunding = convertToNumber(allocation[year].other);
-        const totalCost = activityTotals.data.combined[year];
         // Todo: For MMIS APDs add key state personnel costs to totalCost?
+        const totalCost = activityTotals.data.combined[year];
         const totalMedicaidCost = totalCost - totalOtherFunding;
 
         // This is the total medicaid costs broken into state and federal shares
