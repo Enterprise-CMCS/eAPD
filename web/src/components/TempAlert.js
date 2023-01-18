@@ -12,13 +12,6 @@ const TempAlert = ({ alerts, resolveAlert }) => {
     return null;
   }
 
-  // const removeMsg = i => {
-  //   setTempAlertState([
-  //     ...tempAlertState.slice(0, i),
-  //     ...tempAlertState.slice(i + 1)
-  //   ]);
-  // };
-
   return (
     <div>
       {alerts.map((value, index) => (

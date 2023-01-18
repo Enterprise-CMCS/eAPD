@@ -25,10 +25,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export const removeMsg = (index, state) => {
-  let newState = state.messages.splice(index, 1);
-  return newState;
-};
+export const removeMsg = (index, state) => state.messages.splice(index, 1);
 
 export const getTempAlerts = state => state.alerts.messages;
 
