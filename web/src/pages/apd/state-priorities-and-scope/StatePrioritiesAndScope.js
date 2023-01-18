@@ -7,19 +7,22 @@ import RichText from '../../../components/RichText';
 import Instruction from '../../../components/Instruction';
 import { useForm, Controller } from 'react-hook-form';
 
+import { selectAdminCheckEnabled } from '../../../redux/selectors/apd.selectors';
+
 import statePrioritiesAndScopeSchema from '@cms-eapd/common/schemas/statePrioritiesAndScope';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 const StatePrioritiesAndScope = ({
   medicaidProgramAndPriorities,
   mesIntroduction,
-  scopeOfAPD
+  scopeOfAPD,
+  adminCheck
 }) => {
   const {
     control,
     formState: { errors },
-    trigger
-    // clearErrors
+    trigger,
+    clearErrors
   } = useForm({
     defaultValues: {
       medicaidProgramAndPriorities,
@@ -32,8 +35,12 @@ const StatePrioritiesAndScope = ({
   });
 
   useEffect(() => {
-    trigger();
-  });
+    if (adminCheck) {
+      trigger();
+    } else {
+      clearErrors();
+    }
+  }, [adminCheck]);
 
   return (
     <Section id="state-priorities-and-scope" resource="statePrioritiesAndScope">
@@ -114,10 +121,17 @@ const StatePrioritiesAndScope = ({
 StatePrioritiesAndScope.propTypes = {
   medicaidProgramAndPriorities: PropTypes.string.isRequired,
   mesIntroduction: PropTypes.string.isRequired,
-  scopeOfAPD: PropTypes.string.isRequired
+  scopeOfAPD: PropTypes.string.isRequired,
+  adminCheck: PropTypes.bool
 };
 
-const mapStateToProps = () => ({});
+StatePrioritiesAndScope.defaultProps = {
+  adminCheck: false
+};
+
+const mapStateToProps = state => ({
+  adminCheck: selectAdminCheckEnabled(state)
+});
 
 const mapDispatchToProps = {};
 

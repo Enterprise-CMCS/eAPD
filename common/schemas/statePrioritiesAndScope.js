@@ -1,10 +1,10 @@
 import Joi from 'joi';
 
 const statePrioritiesAndScopeSchema = Joi.object({
-  medicaidProgramAndPriorities: Joi.string().required().messages({
+  medicaidProgramAndPriorities: Joi.string().min(1).required().messages({
+    'string.required': 'Provide Medicaid Program and Priorities',
     'string.base': 'Provide Medicaid Program and Priorities',
-    'string.empty': 'Provide Medicaid Program and Priorities',
-    'string.required': 'Provide Medicaid Program and Priorities'
+    'string.empty': 'Provide Medicaid Program and Priorities'
   }),
   mesIntroduction: Joi.string().required().messages({
     'string.base': 'Provide a Medicaid Enterprise System Introduction',
