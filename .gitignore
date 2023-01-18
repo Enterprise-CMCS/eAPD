@@ -25,19 +25,19 @@ pgdata/*
 schema.sql
 
 api/.env
-api/.nyc_output/*
-api/coverage/*
-api/coverage-endpoint/*
-api/coverage-unit/*
+api/.nyc_output
+api/coverage
+api/coverage-endpoint
+api/coverage-unit
+api/dist
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
 api/seeds/test/tokens.json
-api/seeds/test/tokens.js
 api/test-data/files
 
-common/coverage-endpoint
 common/coverage
 common/coverage-endpoint
+common/dist
 
 docs-build
 

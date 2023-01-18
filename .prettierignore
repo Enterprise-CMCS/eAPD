@@ -27,6 +27,7 @@ api/.nyc_output
 api/coverage
 api/coverage-endpoint
 api/coverage-unit
+api/dist
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
 api/seed/test/tokens.json
@@ -36,6 +37,7 @@ bin
 
 common/.stryker-tmp
 common/coverage
+common/dist
 common/reports
 
 docs-build

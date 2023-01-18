@@ -999,9 +999,6 @@ jobs:
           name: build API image
           working_directory: ~/project
           command: |
-            export LD_API_KEY="$PREVIEW_LD_API_KEY"
-            export NODE_ENV=test
-
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
@@ -1009,9 +1006,6 @@ jobs:
           working_directory: ~/project/api
           no_output_timeout: 60m
           command: |
-            export LD_API_KEY="$PREVIEW_LD_API_KEY"
-            export NODE_ENV=test
-
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             ./unit-test.sh
@@ -1153,7 +1147,7 @@ jobs:
   owasp zap scan:
     machine:
       image: ubuntu-2204:2022.04.2
-    resource_class: large
+    #resource_class: large
     steps:
       - checkout
       - attach_workspace:
@@ -1175,21 +1169,24 @@ jobs:
             export COMPOSE_PROJECT_NAME=api
             COMPOSE_HTTP_TIMEOUT=200 docker-compose -f docker-compose.endpoint-tests.yml -p api up -d
             
-             echo "containers created"	
-            sleep 200;	
-            echo "waiting for api-for-testing..."	
-            is_healthy() {	
-                service="$1"	
-                container_id="$(docker-compose -f ../docker-compose.endpoint-tests.yml -p api ps -q "$service")"	
-                health_status="$(docker inspect -f "{{.State.Health.Status}}" "$container_id")"	
-                if [ "$health_status" = "healthy" ]; then	
-                    return 0	
-                else	
-                    echo '.'	
-                    return 1	
-                fi	
-            }	
-            while ! is_healthy api-for-testing; do sleep 60; done	
+            echo "containers created"
+            sleep 200;
+            echo "waiting for api-for-testing..."
+
+            is_healthy() {
+                service="$1"
+                container_id="$(docker-compose -f ../docker-compose.endpoint-tests.yml -p api ps -q "$service")"
+                health_status="$(docker inspect -f "{{.State.Health.Status}}" "$container_id")"
+
+                if [ "$health_status" = "healthy" ]; then
+                    return 0
+                else
+                    echo '.'
+                    return 1
+                fi
+            }
+
+            while ! is_healthy api-for-testing; do sleep 60; done
             echo "api-for-testing is running"
 
             docker-compose -f docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run migrate
