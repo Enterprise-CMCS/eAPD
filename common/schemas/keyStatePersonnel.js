@@ -113,6 +113,16 @@ export const keyPersonnelSchema = Joi.object({
           'alternatives.any': 'Select a federal-state split.'
         })
     })
+  ),
+  medicaidShare: Joi.object().pattern(
+    /\d{4}/,
+    Joi.number().positive().allow(0).max(100).required().messages({
+      'number.base': 'Provide a percentage.',
+      'number.empty': 'Provide a percentage.',
+      'number.format': 'Provide a percentage.',
+      'number.max': 'Provide a percentage.',
+      'number.positive': 'Provide a percentage.'
+    })
   )
 });
 

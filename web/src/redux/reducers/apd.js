@@ -275,6 +275,7 @@ export const getKeyPersonnel = (
   isPrimary,
   fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
   split: getKeyPersonnelSplit(years, apdType),
+  medicaidShare: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
   name: '',
   position: '',
   key: generateKey()

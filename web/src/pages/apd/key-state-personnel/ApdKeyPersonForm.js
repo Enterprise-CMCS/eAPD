@@ -29,8 +29,18 @@ const getCheckedValue = value => {
 const PersonForm = forwardRef(
   ({ index, item, savePerson, years, setFormValid, apdType }, ref) => {
     PersonForm.displayName = 'PersonForm';
-    const { name, email, position, hasCosts, isPrimary, costs, split, fte } =
-      JSON.parse(JSON.stringify({ ...item }));
+    const {
+      name,
+      email,
+      position,
+      hasCosts,
+      isPrimary,
+      costs,
+      split,
+      fte,
+      medicaidShare
+    } = JSON.parse(JSON.stringify({ ...item }));
+
     const {
       handleSubmit,
       control,
@@ -46,7 +56,8 @@ const PersonForm = forwardRef(
         hasCosts: getCheckedValue(hasCosts),
         costs,
         split,
-        fte
+        fte,
+        medicaidShare
       },
       mode: 'onChange',
       reValidateMode: 'onChange',
@@ -65,6 +76,7 @@ const PersonForm = forwardRef(
       isPrimary,
       costs,
       split,
+      medicaidShare,
       fte
     };
 
@@ -100,6 +112,14 @@ const PersonForm = forwardRef(
                 federal: action.federal,
                 state: action.state
               }
+            }
+          };
+        case 'updateMedicaidShare':
+          return {
+            ...state,
+            medicaidShare: {
+              ...state.medicaidShare,
+              [action.year]: action.value
             }
           };
         default:
@@ -174,6 +194,18 @@ const PersonForm = forwardRef(
       setValue(`split.${year}.state`, state);
     };
 
+    const handleMedicaidShareChange = (year, e) => {
+      const value = e.target.value;
+
+      dispatch({
+        type: 'updateSplit',
+        year: year,
+        value
+      });
+
+      setValue(`medicaidShare.${year}`, value);
+    };
+
     const onSubmit = e => {
       e.preventDefault();
       savePerson(index, {
@@ -187,6 +219,75 @@ const PersonForm = forwardRef(
       let total = state.costs[year] * state.fte[year];
       return total;
     };
+
+    const renderMMISFields = ({ year, errors, control }) => (
+      <Fragment>
+        <Controller
+          key={`${year}-medicaidShare`}
+          name={`medicaidShare.${year}`}
+          control={control}
+          render={({ field: { ...props } }) => (
+            <NumberField
+              {...props}
+              label="Medicaid Share (%)"
+              size="medium"
+              min={0}
+              hint="Enter the percentage that is allocated towards Medicaid"
+              data-cy={`key-person-${index}__medicaidShare`}
+              onChange={e => {
+                handleMedicaidShareChange(year, e);
+              }}
+              onBlur={() => {
+                trigger(`medicaidShare.${year}`);
+              }}
+              errorMessage={
+                errors?.medicaidShare &&
+                errors?.medicaidShare[year] &&
+                errors?.medicaidShare[year]?.message
+              }
+              errorPlacement="bottom"
+            />
+          )}
+        />
+        <Controller
+          key={`${year}-split`}
+          name={`split.${year}`}
+          control={control}
+          render={({ field: { value, ...props } }) => (
+            <ChoiceList
+              {...props}
+              choices={[
+                {
+                  checked: value?.federal == 90,
+                  label: '90/10 DDI',
+                  value: '90-10'
+                },
+                {
+                  checked: value?.federal == 75,
+                  label: '75/25 Operations',
+                  value: '75-25'
+                }
+              ]}
+              type="radio"
+              label="Federal-State Split"
+              hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share."
+              onChange={e => {
+                handleSplitChange(year, e);
+              }}
+              onBlur={() => {
+                trigger(`split.${year}`);
+              }}
+              errorMessage={
+                errors?.split &&
+                errors?.split[year] &&
+                errors?.split[year]?.state?.message
+              }
+              errorPlacement="bottom"
+            />
+          )}
+        />
+      </Fragment>
+    );
 
     const primary = index === 0;
 
@@ -367,46 +468,12 @@ const PersonForm = forwardRef(
                                 Cost with benefits x FTE = Total
                               </span>
                             </div>
-                            {apdType === 'MMIS' && (
-                              <Controller
-                                key={`${year}-split`}
-                                name={`split.${year}`}
-                                control={control}
-                                render={({ field: { value, ...props } }) => (
-                                  <ChoiceList
-                                    {...props}
-                                    choices={[
-                                      {
-                                        checked: value?.federal == 90,
-                                        label: '90/10 DDI',
-                                        value: '90-10'
-                                      },
-                                      {
-                                        checked: value?.federal == 75,
-                                        label: '75/25 Operations',
-                                        value: '75-25'
-                                      }
-                                    ]}
-                                    type="radio"
-                                    label="Federal-State Split"
-                                    hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share."
-                                    // id={`apd-state-profile-pocemail${index}`}
-                                    onChange={e => {
-                                      handleSplitChange(year, e);
-                                    }}
-                                    onBlur={() => {
-                                      trigger(`split.${year}`);
-                                    }}
-                                    errorMessage={
-                                      errors?.split &&
-                                      errors?.split[year] &&
-                                      errors?.split[year]?.state?.message
-                                    }
-                                    errorPlacement="bottom"
-                                  />
-                                )}
-                              />
-                            )}
+                            {apdType === 'MMIS' &&
+                              renderMMISFields({
+                                year,
+                                errors,
+                                control
+                              })}
                           </div>
                         </Fragment>
                       ))}

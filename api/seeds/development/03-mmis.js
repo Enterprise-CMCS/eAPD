@@ -53,6 +53,10 @@ const mmis = {
         split: {
           2023: { federal: 90, state: 10 },
           2024: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2023: 90,
+          2024: 50
         }
       },
       {
@@ -66,6 +70,10 @@ const mmis = {
         split: {
           2023: { federal: 90, state: 10 },
           2024: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2023: 50,
+          2024: 10
         }
       }
     ]
