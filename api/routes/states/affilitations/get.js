@@ -1,13 +1,17 @@
-const logger = require('../../../logger')('affiliations route get');
-const {
-  getPopulatedAffiliationsByStateId: _getPopulatedAffiliationsByStateId,
-  getPopulatedAffiliationById: _getPopulatedAffiliationsById,
-  getAllPopulatedAffiliations: _getAllPopulatedAffiliations,
-  getAffiliationMatches: _getAffiliationMatches
-} = require('../../../db');
-const { can, validForState } = require('../../../middleware');
+import loggerFactory from '../../../logger/index.js';
 
-module.exports = (
+import {
+  getPopulatedAffiliationsByStateId as _getPopulatedAffiliationsByStateId,
+  getPopulatedAffiliationById as _getPopulatedAffiliationsById,
+  getAllPopulatedAffiliations as _getAllPopulatedAffiliations,
+  getAffiliationMatches as _getAffiliationMatches
+} from '../../../db/index.js';
+
+import { can, validForState } from '../../../middleware/index.js';
+
+const logger = loggerFactory('affiliations route get');
+
+export default (
   app,
   {
     getPopulatedAffiliationsByStateId = _getPopulatedAffiliationsByStateId,

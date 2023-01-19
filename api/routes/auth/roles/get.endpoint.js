@@ -1,11 +1,12 @@
-const {
+import { jest } from '@jest/globals';
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
+} from '../../../endpoint-tests/utils.js';
 
 describe('auth roles endpoint get endpoint', () => {
   jest.setTimeout(300000);

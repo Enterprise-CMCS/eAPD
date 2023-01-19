@@ -1,15 +1,15 @@
-const jsonResponse = schema => ({
+export const jsonResponse = schema => ({
   'application/json': {
     schema
   }
 });
 
-const arrayOf = schema => ({
+export const arrayOf = schema => ({
   type: 'array',
   items: schema
 });
 
-const errorToken = jsonResponse({
+export const errorToken = jsonResponse({
   type: 'object',
   properties: {
     error: {
@@ -20,13 +20,7 @@ const errorToken = jsonResponse({
   }
 });
 
-module.exports.schema = {
-  jsonResponse,
-  arrayOf,
-  errorToken
-};
-
-module.exports.responses = {
+export const responses = {
   unauthed: {
     401: {
       description: 'The user is not logged in'
@@ -37,7 +31,7 @@ module.exports.responses = {
   }
 };
 
-module.exports.requiresAuth = (
+export const requiresAuth = (
   openAPI,
   { has401 = true, has403 = true } = {}
 ) => {
@@ -48,7 +42,7 @@ module.exports.requiresAuth = (
         authed[route][verb].security = [{ bearerAuth: [] }];
       }
 
-      const authResponses = { ...module.exports.responses.unauthed };
+      const authResponses = { ...responses.unauthed };
       if (!has401) {
         authResponses[401] = undefined;
       }
@@ -56,10 +50,10 @@ module.exports.requiresAuth = (
         authResponses[403] = undefined;
       }
 
-      const responses = authed[route][verb].responses;
+      const verbResponses = authed[route][verb].responses;
       authed[route][verb].responses = {
         ...authResponses,
-        ...responses
+        ...verbResponses
       };
     });
   });

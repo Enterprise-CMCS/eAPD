@@ -1,23 +1,29 @@
 // affiliation.spec.js created with Cypress
 
-describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
-  beforeEach(() => {
+Cypress.session.clearAllSavedSessions();
+
+describe('Affiliation', { tags: ['@auth', '@affiliations'] }, function () {
+  beforeEach(function () {
     cy.clearAuthCookies();
   });
 
-  after(() => cy.task('db:resetnorole'));
+  after(function () {
+    cy.task('db:resetnorole');
+  });
 
-  describe('Logging in with a user that does not have an affiliation', () => {
-    before(() => cy.task('db:resetnorole'));
+  describe('Logging in with a user that does not have an affiliation', function () {
+    before(function () {
+      cy.task('db:resetnorole');
+    });
 
-    it('should let the user cancel selecting an affiliation', () => {
+    it('should let the user cancel selecting an affiliation', function () {
       cy.loginWithEnv('norole');
       cy.findByRole('button', { name: /Back to Login/ }).click();
 
       cy.findByRole('heading', { name: /Log in/ }).should('exist');
     });
 
-    it('should ask a user without affiliations to request one', () => {
+    it('should ask a user without affiliations to request one', function () {
       cy.loginWithEnv('norole');
       cy.findByLabelText(/Select your State Affiliation/i)
         .clear()
@@ -31,12 +37,12 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
     });
 
-    it('should not ask the user to select an affiliation on next login', () => {
+    it('should not ask the user to select an affiliation on next login', function () {
       cy.loginWithEnv('norole');
       cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
     });
 
-    it('should let the user open the account management page', () => {
+    it('should let the user open the account management page', function () {
       cy.loginWithEnv('norole');
       cy.findByRole('button', { name: /norole/ }).click();
       cy.findByText(/Manage Account/).click();
@@ -51,7 +57,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
     });
 
-    it('should let the user request additional affiliations', () => {
+    it('should let the user request additional affiliations', function () {
       cy.loginWithEnv('norole');
       cy.findByRole('button', { name: /norole/ }).click();
       cy.findByText(/Manage Account/).click();
@@ -64,7 +70,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('button', { name: /Submit/ }).click();
     });
 
-    it('should show the newly requested affiliations on the account management page', () => {
+    it('should show the newly requested affiliations on the account management page', function () {
       cy.loginWithEnv('norole');
 
       // select from the new affiliations
@@ -91,7 +97,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
     });
 
-    it('should allow the user to close the accounts management page', () => {
+    it('should allow the user to close the accounts management page', function () {
       cy.loginWithEnv('norole');
 
       // select from the new affiliations
@@ -106,7 +112,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
     });
 
-    it('should show the newly requested affiliation on the switch states page', () => {
+    it('should show the newly requested affiliation on the switch states page', function () {
       cy.loginWithEnv('norole');
 
       // select from the new affiliations
@@ -118,7 +124,7 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
       cy.findByRole('heading', { name: /Alabama APDs/ }).should('exist');
     });
 
-    it('should let users switch states', () => {
+    it('should let users switch states', function () {
       cy.loginWithEnv('norole');
 
       // select from the new affiliations
@@ -135,8 +141,8 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
     });
   });
 
-  describe('New user selecting multiple affiliation the first time', () => {
-    it('should allow a new user to select multiple affiliations the first time', () => {
+  describe('New user selecting multiple affiliation the first time', function () {
+    it('should allow a new user to select multiple affiliations the first time', function () {
       cy.task('db:resetnorole');
       cy.loginWithEnv('norole');
 
@@ -183,8 +189,8 @@ describe('Affiliation', { tags: ['@auth', '@affiliations'] }, () => {
     });
   });
 
-  describe('New user selecting affiliation the first time and the requesting multiple additional affiliations', () => {
-    it('should handle a user selecting one affiliation and then requesting multiple additional affiliations', () => {
+  describe('New user selecting affiliation the first time and the requesting multiple additional affiliations', function () {
+    it('should handle a user selecting one affiliation and then requesting multiple additional affiliations', function () {
       cy.task('db:resetnorole');
       cy.loginWithEnv('norole');
 

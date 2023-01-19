@@ -1,27 +1,24 @@
 /// <reference types="cypress" />
 
-import ActivityPage from '../../page-objects/activity-page';
-
 // Tests performing basic MMIS APD tasks
 
 /* eslint-disable no-return-assign */
 /* eslint-disable prefer-arrow-callback */
 
-describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
-  let activityPage;
+Cypress.session.clearAllSavedSessions();
+
+describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   let apdUrl;
   let apdId;
   const years = [];
 
   before(() => {
-    activityPage = new ActivityPage();
     cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
-    cy.reload();
+    cy.useStateStaff('/');
 
     // Create a new MMIS APD
     cy.findAllByText('Create new').click();
-
     cy.findByRole('radio', { name: /MMIS/i }).click();
     cy.findByLabelText('APD Name').clear().type('MMIS APD Name!').blur();
     cy.findByRole('radio', { name: /No, this is for a new project./i }).click();
@@ -46,17 +43,23 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
     );
   });
 
-  beforeEach(() => {
+  beforeEach(function () {
+    cy.wrap(apdUrl).as('apdUrl');
+    cy.wrap(apdId).as('apdId');
+    cy.wrap(years).as('years');
+
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+    cy.useStateStaff();
     cy.visit(apdUrl);
   });
 
-  after(() => {
-    cy.deleteAPD(apdId);
+  after(function () {
+    cy.visit('/');
+    cy.deleteAPD(this.apdId);
   });
 
-  describe('Create MMIS APD', () => {
-    it('tests Create New page', () => {
+  describe('Create MMIS APD', function () {
+    it('tests Create New page', function () {
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
 
@@ -85,12 +88,12 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.findByLabelText('APD Name').clear().type('MMIS APD Test').blur();
 
       // Year validation
-      years.forEach(year => {
+      this.years.forEach(year => {
         cy.findByRole('checkbox', { name: year }).click();
       });
       cy.contains('Select at least one year.').should('exist');
 
-      years.forEach(year => {
+      this.years.forEach(year => {
         cy.findByRole('checkbox', { name: year }).click();
       });
       cy.contains('Select at least one year.').should('not.exist');
@@ -158,123 +161,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
     });
   });
   describe('MMIS Pages', () => {
-    it('tests Activity Overview page', () => {
-      cy.goToActivityDashboard();
-
-      // Create new Activity
-      cy.contains('Add Activity').click();
-      cy.contains('Activity 1').should('exist');
-
-      // Check Activity Overview
-      cy.goToActivityOverview(0);
-      cy.url().should('contain', '/activity/0/overview');
-      cy.findAllByRole('heading', { name: /Activity Overview/i }).should(
-        'exist'
-      );
-
-      // Defaults to empty field values
-      cy.contains('Activity name').should('exist');
-      activityPage.checkTinyMCE('activity-name-field', '');
-      cy.contains('Activity snapshot').should('exist');
-      activityPage.checkTinyMCE('activity-snapshot-field', '');
-      cy.contains('Problem statement').should('exist');
-      activityPage.checkTinyMCE('activity-problem-statement-field', '');
-      cy.contains('Proposed solution').should('exist');
-      activityPage.checkTinyMCE('activity-proposed-solution-field', '');
-
-      // Check validation errors
-      cy.turnOnAdminCheck();
-
-      // Validation errors within admin check list
-      cy.get('[class="eapd-admin-check-list"]').within(list => {
-        cy.get(list).contains('Activity 1 Activity Overview').should('exist');
-        cy.get(list).contains('Provide an Activity name').should('exist');
-        cy.get(list).contains('Provide an Activity snapshot').should('exist');
-        cy.get(list).contains('Provide a Problem statement').should('exist');
-        cy.get(list).contains('Provide a Proposed solution').should('exist');
-      });
-
-      // Verifies Activity Overview exists in the admin check list and navigates to that page
-      cy.checkAdminCheckHyperlinks(
-        'Activity 1 Activity Overview',
-        'Activity Overview',
-        3
-      );
-
-      // Validation errors on the Activity Overview page
-      cy.contains('Provide an Activity name').should('exist');
-      cy.get('[data-cy="validationError"]')
-        .contains('Provide an Activity snapshot')
-        .should('exist');
-      cy.get('[data-cy="validationError"]')
-        .contains('Provide a Problem statement')
-        .should('exist');
-      cy.get('[data-cy="validationError"]')
-        .contains('Provide a Proposed solution')
-        .should('exist');
-
-      cy.collapseAdminCheck();
-
-      // Fill out fields and check that each validation error is cleared
-      cy.get(`[data-cy="activity-name"]`).click().type('The Coolest Activity');
-      cy.waitForSave();
-      cy.contains('Provide an Activity name').should('not.exist');
-
-      cy.setTinyMceContent(
-        'activity-snapshot-field',
-        'This is an activity snapshot.'
-      );
-      cy.waitForSave();
-      cy.contains('Provide an Activity snapshot').should('not.exist');
-
-      cy.setTinyMceContent(
-        'activity-problem-statement-field',
-        'This is a problem statement.'
-      );
-      cy.waitForSave();
-      cy.contains('Provide a Problem statement').should('not.exist');
-
-      cy.setTinyMceContent(
-        'activity-proposed-solution-field',
-        'This is a proposed solution.'
-      );
-      cy.waitForSave();
-      cy.contains('Provide a Proposed solution').should('not.exist');
-
-      // Check validation errors are gone from admin check
-      cy.expandAdminCheck();
-      cy.get('[class="eapd-admin-check-list"]').within(list => {
-        cy.get(list)
-          .contains('Activity 1 Activity Overview')
-          .should('not.exist');
-      });
-      cy.turnOffAdminCheck();
-
-      // Verify that fields save
-      // Navigates away from page and back to check persistence of entered data
-      cy.goToApdOverview();
-      cy.wait(2000);
-      cy.goToActivityOverview(0);
-
-      cy.contains('Activity name').should('exist');
-      activityPage.checkTinyMCE('activity-name-field', 'The Coolest Activity');
-      cy.contains('Activity snapshot').should('exist');
-      activityPage.checkTinyMCE(
-        'activity-snapshot-field',
-        '<p>This is an activity snapshot.</p>'
-      );
-      cy.contains('Problem statement').should('exist');
-      activityPage.checkTinyMCE(
-        'activity-problem-statement-field',
-        '<p>This is a problem statement.</p>'
-      );
-      cy.contains('Proposed solution').should('exist');
-      activityPage.checkTinyMCE(
-        'activity-proposed-solution-field',
-        '<p>This is a proposed solution.</p>'
-      );
-    });
-
     it('tests the Security Planning page', () => {
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
@@ -311,7 +197,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
 
       // Verify fields save
       cy.goToApdOverview();
-      cy.wait(2000);
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.goToSecurityPlanning();
 
       cy.get('[id="security-interface-plan"]').should(

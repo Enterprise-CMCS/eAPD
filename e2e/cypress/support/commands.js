@@ -7,7 +7,7 @@ import 'tinymce/tinymce';
 import 'cypress-iframe';
 import 'cypress-file-upload'; // eslint-disable-line import/no-extraneous-dependencies
 
-import tokens from '@cms-eapd/api/seeds/test/tokens.json';
+import tokens from '../../../api/seeds/test/tokens.js'; // eslint-disable-line
 
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
@@ -65,12 +65,26 @@ Cypress.Commands.add('login', (username, password) => {
     expiry: EXPIRY_DATE
   });
   cy.visit('/');
-  cy.waitForReact(1000, '#app', '../node_modules/resq/dist/index.js');
   cy.findByLabelText('EUA ID').type(username);
   cy.findByLabelText('Password').type(password, {
     log: false
   });
   cy.findByRole('button', { name: /Log in/i }).click();
+});
+
+Cypress.Commands.add('loginSession', (username, password) => {
+  cy.session(
+    [username, password],
+    () => {
+      cy.login(username, password);
+    },
+    {
+      validate() {
+        cy.getCookie(API_COOKIE_NAME).should('exist');
+      },
+      cacheAcrossSpecs: true
+    }
+  );
 });
 
 Cypress.Commands.add('logout', () => {
@@ -86,21 +100,31 @@ Cypress.Commands.add('loginWithEnv', username => {
   cy.login(Cypress.env(username), Cypress.env(`${username}_pw`));
 });
 
-Cypress.Commands.add('useJwtUser', (username, url) => {
-  cy.clearAuthCookies();
-  cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
-    expiry: EXPIRY_DATE
-  });
-  cy.setCookie(
-    API_COOKIE_NAME,
-    JSON.stringify({ accessToken: tokens[username] }),
+Cypress.Commands.add('useJwtUser', (username, url = '/') => {
+  cy.session(
+    [username],
+    () => {
+      cy.clearAuthCookies();
+      cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
+        expiry: EXPIRY_DATE
+      });
+      cy.setCookie(
+        API_COOKIE_NAME,
+        JSON.stringify({ accessToken: tokens[username] }),
+        {
+          expiry: EXPIRY_DATE,
+          sameSite: 'strict'
+        }
+      );
+    },
     {
-      expiry: EXPIRY_DATE,
-      sameSite: 'strict'
+      validate() {
+        cy.getCookie(API_COOKIE_NAME).should('exist');
+      },
+      cacheAcrossSpecs: true
     }
   );
-  cy.visit(url || '/');
-  cy.waitForReact(1000, '#app', '../node_modules/resq/dist/index.js');
+  cy.visit(url);
 });
 
 Cypress.Commands.add('useSysAdmin', url => {
@@ -135,8 +159,8 @@ Cypress.Commands.add('useDeniedRole', url => {
   cy.useJwtUser('deniedrole', url);
 });
 
-Cypress.Commands.add('useJWTrevokedrole', url => {
-  cy.useJwtUser('revokedrole', url);
+Cypress.Commands.add('useJWTrevokedrole', () => {
+  cy.useJwtUser('revokedrole');
 });
 
 // TinyMCE
@@ -190,7 +214,6 @@ Cypress.Commands.add('waitForSave', () => {
 
 Cypress.Commands.add('deleteAPD', apdId => {
   if (apdId) {
-    cy.useStateStaff();
     cy.get(`a[href='/apd/${apdId}']`).then($el => {
       cy.intercept('DELETE', `${Cypress.env('API')}/apds/${apdId}`).as(
         'delete'
@@ -649,24 +672,6 @@ Cypress.Commands.add('updateFeatureFlags', featureFlags => {
 Cypress.Commands.add('turnOnAdminCheck', () => {
   cy.contains('Export and Submit').click();
   cy.findByRole('button', { name: /Run Administrative Check/i }).click({
-    force: true
-  });
-});
-
-Cypress.Commands.add('turnOffAdminCheck', () => {
-  cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
-    force: true
-  });
-});
-
-Cypress.Commands.add('collapseAdminCheck', () => {
-  cy.findByRole('button', { name: /Collapse/i }).click({
-    force: true
-  });
-});
-
-Cypress.Commands.add('expandAdminCheck', () => {
-  cy.findByRole('button', { name: /Expand/i }).click({
     force: true
   });
 });

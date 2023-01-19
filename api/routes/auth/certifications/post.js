@@ -1,12 +1,10 @@
-const { loggedIn } = require('../../../middleware/auth');
-const { can } = require('../../../middleware');
-const logger = require('../../../logger')('auth certifications post');
+import { can, loggedIn } from '../../../middleware/index.js';
+import loggerFactory from '../../../logger/index.js';
+import { addStateAdminCertification as addCert } from '../../../db/certifications.js';
 
-const {
-  addStateAdminCertification: addCert
-} = require('../../../db/certifications');
+const logger = loggerFactory('auth certifications post');
 
-module.exports = (app, { addStateAdminCertification = addCert } = {}) => {
+export default (app, { addStateAdminCertification = addCert } = {}) => {
   logger.silly('setting up POST /auth/certifications route');
 
   app.post(

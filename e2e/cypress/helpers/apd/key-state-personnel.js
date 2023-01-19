@@ -1,5 +1,5 @@
-export const testDefaultKeyStatePersonnel = () => {
-  it('should have the default values for Key State Personnel', () => {
+export const testDefaultKeyStatePersonnel = function () {
+  it('should have the default values for Key State Personnel', function () {
     cy.goToKeyStatePersonnel();
 
     cy.url().should('contain', '/state-profile');
@@ -42,7 +42,7 @@ export const testDefaultKeyStatePersonnel = () => {
     cy.waitForSave();
   });
 
-  it('should display the default values in the export view', () => {
+  it('should display the default values in the export view', function () {
     cy.goToExportView();
 
     cy.findByRole('heading', { name: /Key State Personnel/i })
@@ -63,8 +63,10 @@ export const testDefaultKeyStatePersonnel = () => {
   });
 };
 
-export const testKeyStatePersonnelWithData = years => {
-  it('Fill out Key State Personnel', () => {
+export const testKeyStatePersonnelWithData = function () {
+  it('Fill out Key State Personnel', function () {
+    const years = this.years;
+
     cy.goToKeyStatePersonnel();
 
     cy.url().should('include', '/state-profile');
@@ -189,7 +191,10 @@ export const testKeyStatePersonnelWithData = years => {
     cy.findByRole('button', { name: /Cancel/i }).click();
   });
 
-  it('should display the correct values in the export view', () => {
+  it('should display the correct values in the export view', function () {
+    const years = this.years;
+    cy.log({ years });
+
     cy.goToExportView();
 
     cy.findByRole('heading', { name: /Key State Personnel/i })

@@ -1,5 +1,6 @@
-const tap = require('tap');
-const { APD_TYPE } = require('@cms-eapd/common');
+import tap from 'tap';
+import adminCheckApd from './adminCheck.js';
+import { APD_TYPE } from '@cms-eapd/common';
 
 const validHitechApdOverview = {
   programOverview: 'abc',
@@ -421,7 +422,7 @@ const validHitechAssurancesAndCompliances = {
 
 const validMmisAssurancesAndCompliances = {
   procurement: [
-    { title: 'SSM, Part 11', checked: true, explanation: '' },
+    { title: 'SMM, Part 11', checked: true, explanation: '' },
     { title: '45 CFR Part 95.615', checked: true, explanation: '' },
     { title: '45 CFR Part 92.36', checked: true, explanation: '' }
   ],
@@ -888,7 +889,7 @@ const invalidHitechAssurancesAndCompliances = {
 
 const invalidMmisAssurancesAndCompliances = {
   procurement: [
-    { title: 'SSM, Part 11', checked: false, explanation: '' },
+    { title: 'SMM, Part 11', checked: false, explanation: '' },
     { title: '45 CFR Part 95.615', checked: true, explanation: '' },
     { title: '45 CFR Part 92.36', checked: true, explanation: '' }
   ],
@@ -1992,7 +1993,7 @@ const mockMmisApdRandomInvalid = {
   },
   assurancesAndCompliances: {
     procurement: [
-      { title: 'SSM, Part 11', checked: null, explanation: '' },
+      { title: 'SMM, Part 11', checked: null, explanation: '' },
       { title: '45 CFR Part 95.615', checked: true, explanation: '' },
       { title: '45 CFR Part 92.36', checked: true, explanation: '' }
     ],
@@ -2159,7 +2160,7 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'Activity 1 Activity Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-    fieldDescription: 'Provide an Activity snapshot'
+    fieldDescription: 'Provide an Activity Snapshot'
   },
   {
     section: 'Activity 1 Conditions for Enhanced Funding',
@@ -2227,8 +2228,6 @@ const expectedErrorsMockMmisApdRandom = [
     fieldDescription: 'Provide an explanation'
   }
 ];
-
-const { adminCheckApd } = require('./adminCheck');
 
 tap.test('HITECH apd document admin check', async hitechValidationTests => {
   hitechValidationTests.test(
@@ -2617,12 +2616,12 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
       {
         section: 'Activity 1 Activity Overview',
         link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-        fieldDescription: 'Provide an Activity name'
+        fieldDescription: 'Provide an Activity Name'
       },
       {
         section: 'Activity 1 Activity Overview',
         link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-        fieldDescription: 'Provide a Problem statement'
+        fieldDescription: 'Provide a Problem Statement'
       },
       {
         section: 'Activity 1 Conditions for Enhanced Funding',

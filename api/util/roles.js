@@ -1,5 +1,5 @@
 // AFAICT, the boolean values here are not used for anything, yet.
-const activities = {
+export const activities = {
   'view-users': false,
   'view-roles': false,
   'export-document': false,
@@ -14,7 +14,7 @@ const activities = {
   'view-state-certifications': true
 };
 
-const roles = {
+export const roles = {
   'eAPD Admin': false,
   'eAPD System Admin': true,
   'eAPD Federal Admin': true,
@@ -27,7 +27,7 @@ const roles = {
   'eAPD State SME': false
 };
 
-const roleToActivityMappings = {
+export const roleToActivityMappings = {
   'eAPD System Admin': [
     'view-users',
     'view-roles',
@@ -67,17 +67,10 @@ const roleToActivityMappings = {
   ]
 };
 
-const activeRoles = [
+export const activeRoles = [
   'eAPD System Admin',
   'eAPD Federal Admin',
   'eAPD State Admin',
   'eAPD State Staff',
   'eAPD State Contractor'
 ];
-
-module.exports = {
-  activities,
-  roles,
-  roleToActivityMappings,
-  activeRoles
-};

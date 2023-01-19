@@ -1,5 +1,7 @@
-const hitechNoActivities = {
-  apdType: 'HITECH',
+import { APD_TYPE } from '@cms-eapd/common';
+
+export default {
+  apdType: APD_TYPE.HITECH,
   name: 'HITECH IAPD No Activities',
   years: ['2022', '2023'],
   yearOptions: ['2022', '2023', '2024'],
@@ -166,5 +168,3 @@ const hitechNoActivities = {
     ]
   }
 };
-
-module.exports = { hitechNoActivities };

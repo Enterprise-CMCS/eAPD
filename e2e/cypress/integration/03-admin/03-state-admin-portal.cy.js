@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
-const goToStateAdminPortal = () => {
+const goToStateAdminPortal = function () {
+  Cypress.session.clearAllSavedSessions();
   cy.useRegularUser();
   cy.get(
     '[class="nav--dropdown__trigger ds-c-button ds-c-button--small ds-c-button--transparent"]'
@@ -7,29 +8,32 @@ const goToStateAdminPortal = () => {
   cy.contains('AK State admin').click();
 };
 
-const clickButton = (role, button) => {
+const clickButton = function (role, button) {
   cy.findAllByText(role)
+    .filter(':visible')
     .parent()
     .within(() => {
       cy.contains(button).click();
     });
 };
 
-const verifyRole = (name, role) => {
+const verifyRole = function (name, role) {
   cy.findAllByText(name)
+    .filter(':visible')
     .parent()
     .within(() => {
       cy.contains(role);
     });
 };
 
-describe('tests state admin portal', async () => {
-  before(() => {
+describe('tests state admin portal', async function () {
+  before(function () {
     cy.task('db:resetnorole');
   });
 
-  it('tests state admin portal', { tags: ['@state', '@admin'] }, () => {
+  it('tests state admin portal', { tags: ['@state', '@admin'] }, function () {
     // Request access on No Role
+    cy.visit('/');
     cy.loginWithEnv('norole');
     cy.contains('Verify Your Identity');
     cy.get('[class="ds-c-field"]').type('Alask');
@@ -67,6 +71,7 @@ describe('tests state admin portal', async () => {
     clickButton('State Staff', 'Edit Role');
     cy.get('select').select('eAPD State Contractor');
     cy.findByRole('button', { name: 'Save' }).click();
+    cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     verifyRole('State Staff', 'eAPD State Contractor');
 
     // Test changing roles on State Contractor to State Staff

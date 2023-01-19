@@ -1,5 +1,7 @@
-const hitech = {
-  apdType: 'HITECH',
+import { APD_TYPE } from '@cms-eapd/common';
+
+export default {
+  apdType: APD_TYPE.HITECH,
   name: 'HITECH IAPD Complete',
   years: ['2022', '2023'],
   yearOptions: ['2022', '2023', '2024'],
@@ -84,6 +86,7 @@ const hitech = {
   },
   activities: [
     {
+      activityId: '235a3d2e',
       fundingSource: 'HIT',
       name: 'Program Administration',
       activityOverview: {
@@ -291,6 +294,7 @@ const hitech = {
       }
     },
     {
+      activityId: '2313d32a',
       fundingSource: 'MMIS',
       name: 'Claims Data Analytics',
       activityOverview: {
@@ -473,6 +477,7 @@ const hitech = {
       }
     },
     {
+      activityId: '543ace23',
       fundingSource: 'HIE',
       name: 'HIE Enhancement and Onboarding',
       activityOverview: {
@@ -609,6 +614,7 @@ const hitech = {
       }
     },
     {
+      activityId: '7893e324',
       fundingSource: 'HIE',
       name: 'Medicaid Blue Button',
       activityOverview: {
@@ -803,5 +809,3 @@ const hitech = {
     ]
   }
 };
-
-module.exports = { hitech };

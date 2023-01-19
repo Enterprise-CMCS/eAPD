@@ -1,7 +1,7 @@
 // These need to be deleted in a particular order to handle
 // relationships between them, otherwise we get a key
 // constraint violation.
-exports.seed = async knex =>
+const seed = async knex =>
   Promise.all([
     // These tables don't reference any other tables, so
     // they can be cleared out right off the bat.
@@ -26,3 +26,5 @@ exports.seed = async knex =>
     .then(() => knex('auth_roles').del())
     .then(() => knex('apds').del())
     .then(() => knex('states').del());
+
+export default seed;
