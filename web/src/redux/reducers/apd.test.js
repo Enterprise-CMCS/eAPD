@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import { APD_TYPE } from '@cms-eapd/common';
 import { RESET, SELECT_APD_SUCCESS } from '../actions/app/symbols';
 
 // The Hubble Space Telescope was launched on the space shuttle Discovery on
@@ -6,8 +6,8 @@ import { RESET, SELECT_APD_SUCCESS } from '../actions/app/symbols';
 // so that the stuff we import will use our faked-out clock.
 jest.useFakeTimers().setSystemTime(new Date('1990-04-24').getTime());
 
-const { default: apd, getPatchesForAddingItem } = require('./apd');
-const {
+import { default as apd, getPatchesForAddingItem } from './apd';
+import {
   CREATE_APD_SUCCESS,
   FETCH_ALL_APDS_FAILURE,
   FETCH_ALL_APDS_REQUEST,
@@ -17,15 +17,15 @@ const {
   ADMIN_CHECK_TOGGLE,
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
-} = require('../actions/app');
-const {
+} from '../actions/app';
+import {
   ADD_APD_ITEM,
   ADD_APD_YEAR,
   EDIT_APD,
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
-} = require('../actions/editApd');
-const regulations = require('../../util/regulations').default;
+} from '../actions/editApd';
+import regulations from '../../util/regulations';
 
 describe('APD reducer', () => {
   afterAll(() => {

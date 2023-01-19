@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { TextField, Dropdown, Button, ChoiceList } from '@cmsgov/design-system';
-import { defaultAPDYears } from '@cms-eapd/common/utils/utils';
+import { defaultAPDYears } from '@cms-eapd/common';
 
 import axios, { apiUrl } from '../../../util/api';
 import { STATES } from '../../../util/states';

@@ -11,7 +11,7 @@ import Dollars from '../../../../../components/Dollars';
 import NumberField from '../../../../../components/NumberField';
 import RichText from '../../../../../components/RichText';
 
-import validationSchema from '@cms-eapd/common/schemas/contractorResources';
+import { contractorResourcesSchema as schema } from '@cms-eapd/common';
 import { saveContractor as actualSaveContractor } from '../../../../../redux/actions/editActivity';
 
 const getCheckedValue = value => {
@@ -63,7 +63,7 @@ const ContractorResourceForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(validationSchema)
+      resolver: joiResolver(schema)
     });
     const [useHourly, setUseHourly] = useState(getCheckedValue(item.useHourly));
 

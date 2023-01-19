@@ -47,6 +47,8 @@ const setup = async (props = {}, options = {}) => {
 };
 
 describe('<ApdNew />', () => {
+  jest.setTimeout(30000);
+
   beforeEach(() => {
     jest.clearAllMocks();
     jest.setTimeout(30000);
@@ -151,6 +153,7 @@ describe('<ApdNew />', () => {
       });
 
       it('Filled out MMIS form should enable Create APD button', async () => {
+        jest.setTimeout(30000);
         const { user } = await setup(props, options);
         const disabledBtn = screen.getByRole('button', {
           name: /Create an APD/

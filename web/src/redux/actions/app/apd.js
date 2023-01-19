@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import { hasBudgetUpdate } from '@cms-eapd/common/utils/utils';
+import { hasBudgetUpdate } from '@cms-eapd/common';
 
 import {
   CREATE_APD_FAILURE,

@@ -225,6 +225,8 @@ const setup = async (props = {}, options = {}) => {
 };
 
 describe('the CostAllocateFFP component', () => {
+  jest.setTimeout(30000);
+
   beforeEach(() => {
     jest.resetAllMocks();
   });

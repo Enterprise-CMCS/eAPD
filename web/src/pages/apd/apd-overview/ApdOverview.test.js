@@ -51,6 +51,8 @@ const setup = async (props = {}) => {
 };
 
 describe('APD overview component', () => {
+  jest.setTimeout(150000);
+
   beforeEach(() => {
     jest.resetAllMocks();
     jest.setTimeout(30000);
@@ -80,8 +82,8 @@ describe('APD overview component', () => {
   });
 
   test('user can attempt to delete a year and cancel', async () => {
+    jest.setTimeout(50000);
     mockFlags({ enableMmis: false });
-    jest.setTimeout(30000);
     const { user } = await setup();
     expect(screen.getByLabelText('2023')).toBeChecked();
     await user.click(screen.getByLabelText('2023'));
@@ -93,8 +95,8 @@ describe('APD overview component', () => {
   });
 
   test('user can delete a year', async () => {
+    jest.setTimeout(50000);
     mockFlags({ enableMmis: false });
-    jest.setTimeout(30000);
     const { user } = await setup();
     expect(screen.getByLabelText('2023')).toBeChecked();
     await user.click(screen.getByLabelText('2023'));

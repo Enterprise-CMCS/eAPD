@@ -17,7 +17,7 @@ import NameForm from './NameForm';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import { Subsection } from '../../../../components/Section';
 
-import { mmisActivityOverviewSchema } from '@cms-eapd/common/schemas/activityOverview';
+import { mmisOverviewSchema as schema } from '@cms-eapd/common';
 
 const MMISActivityOverview = ({
   activity,
@@ -46,7 +46,7 @@ const MMISActivityOverview = ({
       problemStatement: problemStatement,
       proposedSolution: proposedSolution
     },
-    resolver: joiResolver(mmisActivityOverviewSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {
