@@ -13,6 +13,7 @@ import Waypoint from '../../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../../components/AlertMissingFFY';
 
 import activitiesDashboardSchema from '@cms-eapd/common/schemas/activitiesDashboard';
+import Instruction from '../../../../components/Instruction';
 
 const All = ({ addActivity, activities, adminCheck }) => {
   const { apdId } = useParams();
@@ -31,6 +32,10 @@ const All = ({ addActivity, activities, adminCheck }) => {
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
       <AlertMissingFFY />
       <Section id="activities" resource="activities">
+        <Instruction
+          labelFor="dashboard-instructions"
+          source="activities.dashboardInstructions.instruction"
+        />
         <hr className="custom-hr" />
         {activities.length == 0 && <p>Add at least one activity.</p>}
         {validation?.error && (

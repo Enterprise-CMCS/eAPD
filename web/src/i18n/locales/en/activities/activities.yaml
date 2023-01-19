@@ -1,21 +1,34 @@
 title: Activities
-helpText: >-
-  Activities are narrowly scoped bodies of work that comprise the APD. This section will help you 
-  explain the goals, timelines, and cost of each activity.
+dashboardInstructions:
+  instruction:
+    detail: >-
+      Activities are narrowly scoped bodies of work that comprise the APD. This
+      section will help you  explain the goals, timelines, and cost of each
+      activity.
+    helpText: >-
+      Examples of individual activities include but are not limited to: E&E
+      online application, E&E worker  portal, E&E noticing system, claims
+      processing engine, claims processing prior authorization, claims
+      processing record keeping, HIE interface(s), CQM databases, decision
+      support systems analytics  platform, provider enrollment screening,
+      provider fraud/waste/abuse, managed care member  enrollment, etc. For each
+      activity added, you will have the opportunity to provide details in their
+      own  respective subsections.
 list:
   title: Activities Dashboard
   instruction:
     short: >-
-      List as many activities as necessary to cover all scope related to this APD.
+      List as many activities as necessary to cover all scope related to this
+      APD.
     detail: >-
-      Examples of individual activities include:
-      auditing, environmental scans, HIE registry development,
-      CQM database development, data and analytics, HIE onboarding, etc.
+      Examples of individual activities include: auditing, environmental scans,
+      HIE registry development, CQM database development, data and analytics,
+      HIE onboarding, etc.
     helpText: >-
-      Program administration pertains to implementing the EHR Incentive program itself, including
-      state and contractor costs associated with operating EHR incentive program
-      and SLR enhancements/upgrades. All APDs must provide activity details for program
-      administration.
+      Program administration pertains to implementing the EHR Incentive program
+      itself, including state and contractor costs associated with operating EHR
+      incentive program and SLR enhancements/upgrades. All APDs must provide
+      activity details for program administration.
 addActivityButtonText: Add activity
 noActivityMessage: There are no activities. Add one below.
 noNameYet: Untitled
