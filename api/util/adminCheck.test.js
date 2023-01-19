@@ -2160,7 +2160,7 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'Activity 1 Activity Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-    fieldDescription: 'Provide an Activity Snapshot'
+    fieldDescription: 'Provide an Activity snapshot'
   },
   {
     section: 'Activity 1 Conditions for Enhanced Funding',
@@ -2616,12 +2616,12 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
       {
         section: 'Activity 1 Activity Overview',
         link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-        fieldDescription: 'Provide an Activity Name'
+        fieldDescription: 'Provide an Activity name'
       },
       {
         section: 'Activity 1 Activity Overview',
         link: '/apd/632a0fbc5665670a34b3bbd7/activity/0/overview',
-        fieldDescription: 'Provide a Problem Statement'
+        fieldDescription: 'Provide a Problem statement'
       },
       {
         section: 'Activity 1 Conditions for Enhanced Funding',

@@ -999,6 +999,9 @@ jobs:
           name: build API image
           working_directory: ~/project
           command: |
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export NODE_ENV=test
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker build -t cms-eapd/api -f ./api/Dockerfile ./
       - run:
@@ -1006,6 +1009,9 @@ jobs:
           working_directory: ~/project/api
           no_output_timeout: 60m
           command: |
+            export LD_API_KEY="$PREVIEW_LD_API_KEY"
+            export NODE_ENV=test
+
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             export COMPOSE_PROJECT_NAME=api
             ./unit-test.sh
