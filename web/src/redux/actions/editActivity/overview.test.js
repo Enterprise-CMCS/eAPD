@@ -3,7 +3,10 @@ import { EDIT_APD } from '../editApd/symbols';
 import {
   setActivityAlternatives,
   setActivityDescription,
-  setActivityOverview
+  setActivityOverview,
+  setActivityProblemStatement,
+  setActivityProposedSolution,
+  setActivitySnapshot
 } from './overview';
 
 describe('APD activity edit actions for activity overview section', () => {
@@ -28,6 +31,30 @@ describe('APD activity edit actions for activity overview section', () => {
       type: EDIT_APD,
       path: '/activities/17/activityOverview/summary',
       value: 'new overview'
+    });
+  });
+
+  it('dispatches an action for setting an activity problem statement', () => {
+    expect(setActivityProblemStatement(17, 'new problem statement')).toEqual({
+      type: EDIT_APD,
+      path: '/activities/17/activityOverview/problemStatement',
+      value: 'new problem statement'
+    });
+  });
+
+  it('dispatches an action for setting an activity proposed solution', () => {
+    expect(setActivityProposedSolution(17, 'new proposed solution')).toEqual({
+      type: EDIT_APD,
+      path: '/activities/17/activityOverview/proposedSolution',
+      value: 'new proposed solution'
+    });
+  });
+
+  it('dispatches an action for setting an activity snapshot', () => {
+    expect(setActivitySnapshot(17, 'new snapshot')).toEqual({
+      type: EDIT_APD,
+      path: '/activities/17/activityOverview/activitySnapshot',
+      value: 'new snapshot'
     });
   });
 });
