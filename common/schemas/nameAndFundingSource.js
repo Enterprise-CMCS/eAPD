@@ -1,8 +1,8 @@
 import Joi from 'joi';
 
 export const activityNameSchema = Joi.string().required().messages({
-  'string.base': 'Provide an Activity Name',
-  'string.empty': 'Provide an Activity Name'
+  'string.base': 'Provide an Activity name',
+  'string.empty': 'Provide an Activity name'
 });
 
 export const activityFundingSourceSchema = Joi.string().required().messages({

@@ -153,10 +153,7 @@ exports[`<ActivityRoutes /> component renders as expected 1`] = `
       id={null}
       resource={null}
     >
-      <Connect(ActivityOverview)
-        activityIndex={3}
-      />
-      <Connect(StandardsAndConditions)
+      <Connect(Overview)
         activityIndex={3}
       />
     </Section>
