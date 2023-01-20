@@ -15,5 +15,4 @@ USER node:node
 RUN yarn install --frozen-lockfile --non-interactive
 
 WORKDIR /app/api
-
 CMD yarn run start-dev
