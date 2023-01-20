@@ -131,7 +131,7 @@ sudo chown -R ec2-user:eapd /app
 echo "module.exports = {
   apps : [{
     name: 'eAPD API',
-		script: 'main.js',
+    script: 'main.js',
     instances: 1,
     autorestart: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
@@ -190,4 +190,3 @@ systemctl start newrelic-infra
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.16.0/bin /home/ec2-user/.nvm/versions/node/v16.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'
-
