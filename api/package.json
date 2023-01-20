@@ -22,10 +22,10 @@
     "seed": "yarn knex seed:run --specific=main.js",
     "seed-dev": "NODE_ENV=development DEV_DB_HOST=localhost yarn run seed",
     "seed-users": "yarn knex seed:run --specific=base-users.js",
-    "jest": "NODE_OPTIONS=--experimental-vm-modules NODE_ENV=test jest",
+    "jest": "NODE_ENV=test node --experimental-vm-modules ./node_modules/.bin/jest",
     "tap": "NODE_ENV=test TAP_DIAG=1 tap -J --no-browser --no-coverage --no-timeout",
     "test": "NODE_ENV=test tap -J --cov --coverage-report=text --coverage-report=lcov --no-browser",
-    "test-endpoints": "yarn jest --detectOpenHandles --forceExit --runInBand",
+    "test-endpoints": "yarn jest --forceExit",
     "test-specific": "NODE_ENV=test tap --no-coverage --coverage-report=text-lcov --no-browser",
     "endpointFullTest": "./endpoint-tests/endpoint.sh",
     "fullTest": "./unit-test.sh"
