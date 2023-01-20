@@ -233,9 +233,9 @@ sed -i "1 s|^|require('newrelic');\n|" main.js
 # so we won't put them here.  Instead, the CI/CD process should replace the
 # "ECOSYSTEM" placeholder below with a base64-encoded JSON string of an
 # ecosystem file.
-echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
+echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.cjs
 # Start it up
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 E_USER
 
 # Restart New Relic Infrastructure Monitor

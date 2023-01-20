@@ -86,7 +86,6 @@ yarn cache clean
 yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 2>&1 | tee yarn-install.log
 cp package.json /app
 cp yarn.lock /app
-cp babel.config.js /app
 
 # move the common folder into place
 cd ~/eAPD/common
@@ -132,7 +131,7 @@ sudo chown -R ec2-user:eapd /app
 echo "module.exports = {
   apps : [{
     name: 'eAPD API',
-		script: 'main.js'
+		script: 'main.js',
     instances: 1,
     autorestart: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
@@ -160,9 +159,9 @@ echo "module.exports = {
 			LD_API_KEY: '__LD_API_KEY__',
     },
   }]
-};" > ecosystem.config.js
+};" > ecosystem.config.cjs
 # Start it up
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 pm2 save
 
 E_USER
