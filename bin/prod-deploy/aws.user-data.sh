@@ -226,16 +226,16 @@ cd api
 
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|require('newrelic');\n|" main.js
+sed -i "1 s|^|import('newrelic');\n|" main.js
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace the
 # "ECOSYSTEM" placeholder below with a base64-encoded JSON string of an
 # ecosystem file.
-echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.cjs
+echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.json
 # Start it up
-pm2 start ecosystem.config.cjs
+pm2 start ecosystem.config.json
 E_USER
 
 # Restart New Relic Infrastructure Monitor

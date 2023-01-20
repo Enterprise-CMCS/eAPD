@@ -120,7 +120,7 @@ yarn add newrelic --save
 cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|require('newrelic');\n|" main.js
+sed -i "1 s|^|import('newrelic');\n|" main.js
 
 sudo chown -R ec2-user:eapd /app
 
@@ -128,40 +128,42 @@ sudo chown -R ec2-user:eapd /app
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace
 # "__ECOSYSTEM__" with a base64-encoded JSON string of an ecosystem file.
-echo "module.exports = {
-  apps : [{
-    name: 'eAPD API',
-    script: 'main.js',
-    instances: 1,
-    autorestart: true,
-    error_file: '/app/api/logs/eAPD-API-error-0.log',
-    out_file: '/app/api/logs/eAPD-API-out-0.log',
-    env: {
-      AUTH_LOCK_FAILED_ATTEMPTS_COUNT: 15,
-      AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES: 1,
-      AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES: 10,
-      FILE_PATH: '__files',
-      FILE_STORE: 'local',
-      NODE_ENV: 'development',
-      PBKDF2_ITERATIONS: '__PBKDF2_ITERATIONS__',
-      PORT: '8000',
-      DEV_DB_HOST: 'localhost',
-      DISABLE_SAME_SITE: 'yes',
-      OKTA_DOMAIN: '__OKTA_DOMAIN__',
-      OKTA_SERVER_ID: '__OKTA_SERVER_ID__',
-      OKTA_CLIENT_ID: '__OKTA_CLIENT_ID__',
-      OKTA_API_KEY: '__OKTA_API_KEY__',
-      JWT_SECRET: '__JWT_SECRET__',
-      MONGO_DATABASE: '__MONGO_DATABASE__',
-      MONGO_URL: '__MONGO_URL__',
-      MONGO_ADMIN_URL: '__MONGO_ADMIN_URL__',
-      DATABASE_URL: '__DATABASE_URL__',
-			LD_API_KEY: '__LD_API_KEY__',
-    },
-  }]
-};" > ecosystem.config.cjs
+echo '{
+  "apps": [
+    {
+      "name": "eAPD API",
+      "script": "main.js",
+      "instances": 1,
+      "autorestart": true,
+      "error_file": "/app/api/logs/eAPD-API-error-0.log",
+      "out_file": "/app/api/logs/eAPD-API-out-0.log",
+      "env": {
+        "AUTH_LOCK_FAILED_ATTEMPTS_COUNT": 15,
+        "AUTH_LOCK_FAILED_ATTEMPTS_WINDOW_TIME_MINUTES": 1,
+        "AUTH_LOCK_FAILED_ATTEMPTS_DURATION_MINUTES": 10,
+        "FILE_PATH": "__files",
+        "FILE_STORE": "local",
+        "NODE_ENV": "development",
+        "PBKDF2_ITERATIONS": "__PBKDF2_ITERATIONS__",
+        "PORT": "8000",
+        "DEV_DB_HOST": "localhost",
+        "DISABLE_SAME_SITE": "yes",
+        "OKTA_DOMAIN": "__OKTA_DOMAIN__",
+        "OKTA_SERVER_ID": "__OKTA_SERVER_ID__",
+        "OKTA_CLIENT_ID": "__OKTA_CLIENT_ID__",
+        "OKTA_API_KEY": "__OKTA_API_KEY__",
+        "JWT_SECRET": "__JWT_SECRET__",
+        "MONGO_DATABASE": "__MONGO_DATABASE__",
+        "MONGO_URL": "__MONGO_URL__",
+        "MONGO_ADMIN_URL": "__MONGO_ADMIN_URL__",
+        "DATABASE_URL": "__DATABASE_URL__",
+        "LD_API_KEY": "__LD_API_KEY__"
+      }
+    }
+  ]
+}' > ecosystem.config.json
 # Start it up
-pm2 start ecosystem.config.cjs
+pm2 start ecosystem.config.json
 pm2 save
 
 E_USER
