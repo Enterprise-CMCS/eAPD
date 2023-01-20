@@ -91,7 +91,6 @@ cp babel.config.js /app
 # move the common folder into place
 cd ~/eAPD/common
 mkdir -p /app/common
-yarn build 2>&1 | tee common-build.log
 cp -r ~/eAPD/common/* /app/common
 
 # move the web app into place
@@ -106,7 +105,7 @@ cp -r ~/eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
 cd ~/eAPD/api
-yarn build 2>&1 | tee api-build.log
+mkdir -p /app/api
 cp -r ~/eAPD/api/* /app/api
 
 cd /app

@@ -223,7 +223,6 @@ yarn add newrelic
 cp node_modules/newrelic/newrelic.js api/newrelic.js
 
 cd api
-yarn build
 
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
