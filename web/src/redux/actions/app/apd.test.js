@@ -86,6 +86,7 @@ describe('application-level actions', () => {
         { type: CREATE_APD_REQUEST },
         { type: CREATE_APD_SUCCESS, data: newapd },
         {
+          apdId: 'bloop',
           type: ALERT_SUCCESS,
           message: APD_CREATE_SUCCESS_MSG
         },
