@@ -128,10 +128,10 @@ sudo chown -R ec2-user:eapd /app
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace
 # "__ECOSYSTEM__" with a base64-encoded JSON string of an ecosystem file.
-echo "export default {
+echo "module.exports = {
   apps : [{
     name: 'eAPD API',
-    script: 'dist/main.js',
+    script: 'main.js',
     instances: 1,
     autorestart: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
@@ -158,7 +158,7 @@ echo "export default {
 			LD_API_KEY: '__LD_API_KEY__',
     },
   }]
-};" > ecosystem.config.js
+};" > ecosystem.config.cjs
 # Start it up
 pm2 start ecosystem.config.js
 pm2 save
