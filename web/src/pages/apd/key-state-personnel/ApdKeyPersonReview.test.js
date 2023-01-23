@@ -30,14 +30,35 @@ describe('the ApdKeyPersonReview component', () => {
           state: 0
         }
       },
+      medicaidShare: {
+        1992: 100,
+        1993: 100
+      },
       position: 'The Builder'
     },
     onDeleteClick: jest.fn(),
     years: ['1992', '1993']
   };
 
-  test('renders correctly', () => {
-    const component = shallow(<ApdKeyPersonReview {...props} />);
+  test('renders correctly for hitech apds', () => {
+    const component = shallow(
+      <ApdKeyPersonReview apdType={'HITECH'} {...props} />
+    );
+    expect(component).toMatchSnapshot();
+
+    expect(component.find('Review').first().prop('onEditClick')).toEqual(
+      props.expand
+    );
+
+    expect(component.find('Review').first().prop('onDeleteClick')).toEqual(
+      props.onDeleteClick
+    );
+  });
+
+  test('renders correctly for mmis apds', () => {
+    const component = shallow(
+      <ApdKeyPersonReview apdType={'MMIS'} {...props} />
+    );
     expect(component).toMatchSnapshot();
 
     expect(component.find('Review').first().prop('onEditClick')).toEqual(

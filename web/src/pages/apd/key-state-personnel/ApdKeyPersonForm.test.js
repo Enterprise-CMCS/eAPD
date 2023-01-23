@@ -32,6 +32,10 @@ describe('the ApdKeyPersonForm component', () => {
           state: 10
         }
       },
+      medicaidShare: {
+        1992: 100,
+        1993: 100
+      },
       position: 'The Builder'
     },
     savePerson: jest.fn(),
@@ -60,6 +64,8 @@ describe('the ApdKeyPersonForm component', () => {
       )
     ).toMatchSnapshot();
   });
+  // Todo: Add test to verify it renders correctly for HITECH type apds
+  // Todo: Add test to verify it renders correctly for MMIS type apds
 
   describe('events', () => {
     it('handles submitting the form', () => {

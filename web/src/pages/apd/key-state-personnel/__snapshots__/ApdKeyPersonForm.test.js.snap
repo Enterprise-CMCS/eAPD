@@ -17,6 +17,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       },
       "hasCosts": true,
       "key": "person key",
+      "medicaidShare": Object {
+        "1992": 100,
+        "1993": 100,
+      },
       "name": "Bob the Builder",
       "position": "The Builder",
       "split": Object {
@@ -94,6 +98,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -4201,6 +4209,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -4244,6 +4256,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "1993": 0.57,
               },
               "hasCosts": "yes",
+              "medicaidShare": Object {
+                "1992": 100,
+                "1993": 100,
+              },
               "name": "Bob the Builder",
               "position": "The Builder",
               "split": Object {
@@ -4442,6 +4458,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -8549,6 +8569,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -8592,6 +8616,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "1993": 0.57,
               },
               "hasCosts": "yes",
+              "medicaidShare": Object {
+                "1992": 100,
+                "1993": 100,
+              },
               "name": "Bob the Builder",
               "position": "The Builder",
               "split": Object {
@@ -8790,6 +8818,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -12897,6 +12929,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -12940,6 +12976,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "1993": 0.57,
               },
               "hasCosts": "yes",
+              "medicaidShare": Object {
+                "1992": 100,
+                "1993": 100,
+              },
               "name": "Bob the Builder",
               "position": "The Builder",
               "split": Object {
@@ -13138,6 +13178,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -17245,6 +17289,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -17288,6 +17336,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "1993": 0.57,
               },
               "hasCosts": "yes",
+              "medicaidShare": Object {
+                "1992": 100,
+                "1993": 100,
+              },
               "name": "Bob the Builder",
               "position": "The Builder",
               "split": Object {
@@ -17434,6 +17486,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -21541,6 +21597,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -21584,6 +21644,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -21716,6 +21780,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -25823,6 +25891,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -25866,6 +25938,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -26026,6 +26102,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -30133,6 +30213,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -30176,6 +30260,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -30308,6 +30396,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -34415,6 +34507,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -34458,6 +34554,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -34669,6 +34769,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -38776,6 +38880,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -38819,6 +38927,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "1993": 0.57,
                                 },
                                 "hasCosts": "yes",
+                                "medicaidShare": Object {
+                                  "1992": 100,
+                                  "1993": 100,
+                                },
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
                                 "split": Object {
@@ -38951,6 +39063,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -43058,6 +43174,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -43101,6 +43221,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "1993": 0.57,
                                 },
                                 "hasCosts": "yes",
+                                "medicaidShare": Object {
+                                  "1992": 100,
+                                  "1993": 100,
+                                },
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
                                 "split": Object {
@@ -43261,6 +43385,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -47368,6 +47496,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -47411,6 +47543,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "1993": 0.57,
                                 },
                                 "hasCosts": "yes",
+                                "medicaidShare": Object {
+                                  "1992": 100,
+                                  "1993": 100,
+                                },
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
                                 "split": Object {
@@ -47543,6 +47679,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -51650,6 +51790,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -51693,6 +51837,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "1993": 0.57,
                                 },
                                 "hasCosts": "yes",
+                                "medicaidShare": Object {
+                                  "1992": 100,
+                                  "1993": 100,
+                                },
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
                                 "split": Object {
@@ -51899,6 +52047,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -56006,6 +56158,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -56049,6 +56205,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -56289,6 +56449,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -60396,6 +60560,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -60439,6 +60607,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -60688,6 +60860,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -64795,6 +64971,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -64838,6 +65018,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -65078,6 +65262,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -69185,6 +69373,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
                             "split": Object {
@@ -69228,6 +69420,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
                               "split": Object {
@@ -69559,6 +69755,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -69597,6 +69797,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -69631,6 +69835,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               "1993": 0.57,
             },
             "hasCosts": "no",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -69707,6 +69915,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -69745,6 +69957,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -69779,6 +69995,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               "1993": 0.57,
             },
             "hasCosts": "no",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -69855,6 +70075,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -69893,6 +70117,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -69927,6 +70155,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               "1993": 0.57,
             },
             "hasCosts": "no",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -70003,6 +70235,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70041,6 +70277,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70075,6 +70315,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               "1993": 0.57,
             },
             "hasCosts": "no",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -70187,6 +70431,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70225,6 +70473,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70259,6 +70511,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -70335,6 +70591,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70373,6 +70633,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70407,6 +70671,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -70483,6 +70751,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70521,6 +70793,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70555,6 +70831,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {
@@ -70631,6 +70911,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70669,6 +70953,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
           "split": Object {
@@ -70703,6 +70991,10 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
             "split": Object {

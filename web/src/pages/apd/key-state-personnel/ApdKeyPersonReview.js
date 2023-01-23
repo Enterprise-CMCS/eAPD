@@ -6,8 +6,9 @@ import Review from '../../../components/Review';
 const ApdStateKeyPerson = ({
   expand,
   index,
-  item: { costs, email, hasCosts, name, fte, position, split },
-  onDeleteClick
+  item: { costs, email, hasCosts, name, fte, position, split, medicaidShare },
+  onDeleteClick,
+  apdType
 }) => {
   const primary = index === 0;
   let displayName = name;
@@ -25,12 +26,36 @@ const ApdStateKeyPerson = ({
             <div key={year}>
               <strong>FFY {year} Cost: </strong>
               <Dollars>{costs[year]}</Dollars> | <strong>FTE: </strong>
-              {fte[year]} | <strong>Total: </strong>
-              <Dollars>{costs[year] * fte[year]} </Dollars> ({' '}
-              <Dollars>
-                {costs[year] * fte[year] * (split[year].federal / 100)})
-              </Dollars>{' '}
-              Federal Share )
+              {fte[year]} |
+              {apdType === 'HITECH' && (
+                <Fragment>
+                  <strong>Total: </strong>
+                  <Dollars>{costs[year] * fte[year]} </Dollars> ({' '}
+                  <Dollars>
+                    {costs[year] * fte[year] * (split[year].federal / 100)})
+                  </Dollars>{' '}
+                  Federal Share )
+                </Fragment>
+              )}
+              {apdType === 'MMIS' && (
+                <Fragment>
+                  <strong>Total: </strong>
+                  <Dollars>{costs[year] * fte[year]} </Dollars> |{' '}
+                  <strong>Total Computable Medicaid: </strong>
+                  <Dollars>
+                    {costs[year] * fte[year] * (medicaidShare[year] / 100)}
+                  </Dollars>{' '}
+                  (
+                  <Dollars>
+                    {costs[year] *
+                      fte[year] *
+                      (split[year].federal / 100) *
+                      (medicaidShare[year] / 100)}
+                    )
+                  </Dollars>{' '}
+                  Federal Share)
+                </Fragment>
+              )}
             </div>
           ))
         ) : (
@@ -40,7 +65,7 @@ const ApdStateKeyPerson = ({
         )}
       </div>
     ),
-    [hasCosts, costs, fte, split]
+    [hasCosts, costs, fte, split, medicaidShare, apdType]
   );
 
   return (
@@ -85,9 +110,11 @@ ApdStateKeyPerson.propTypes = {
     name: PropTypes.string.isRequired,
     fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired,
-    split: PropTypes.object.isRequired
+    split: PropTypes.object.isRequired,
+    medicaidShare: PropTypes.object.isRequired
   }).isRequired,
-  onDeleteClick: PropTypes.func
+  onDeleteClick: PropTypes.func,
+  apdType: PropTypes.string.isRequired
 };
 
 ApdStateKeyPerson.defaultProps = {
