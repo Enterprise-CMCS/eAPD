@@ -156,6 +156,10 @@ Object {
               "state": 10,
             },
           },
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100
+          }
         },
         Object {
           "costs": Object {
@@ -182,6 +186,10 @@ Object {
               "state": 10,
             },
           },
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100
+          }
         },
         Object {
           "costs": Object {
@@ -535,6 +543,10 @@ Object {
               "state": 10,
             },
           },
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100
+          }
         },
         Object {
           "costs": Object {
@@ -561,6 +573,10 @@ Object {
               "state": 10,
             },
           },
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100
+          }
         },
       ],
       "medicaidDirector": Object {
@@ -905,6 +921,10 @@ Object {
               "state": 10,
             },
           },
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100
+          }
         },
         Object {
           "costs": Object {
@@ -931,6 +951,10 @@ Object {
               "state": 10,
             },
           },
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100
+          }
         },
       ],
       "medicaidDirector": Object {
@@ -1256,6 +1280,10 @@ Object {
               "state": 10,
             },
           },
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100
+          }
         },
         Object {
           "costs": Object {
@@ -1282,6 +1310,10 @@ Object {
               "state": 10,
             },
           },
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100
+          }
         },
         Object {
           "costs": Object {

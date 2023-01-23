@@ -85,7 +85,7 @@ ApdStateKeyPerson.propTypes = {
     name: PropTypes.string.isRequired,
     fte: PropTypes.object.isRequired,
     position: PropTypes.string.isRequired,
-    split: PropTypes.string.isRequired
+    split: PropTypes.object.isRequired
   }).isRequired,
   onDeleteClick: PropTypes.func
 };

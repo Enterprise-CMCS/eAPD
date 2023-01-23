@@ -198,7 +198,7 @@ const PersonForm = forwardRef(
       const value = e.target.value;
 
       dispatch({
-        type: 'updateSplit',
+        type: 'updateMedicaidShare',
         year: year,
         value
       });
