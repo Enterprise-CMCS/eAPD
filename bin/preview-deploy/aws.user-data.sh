@@ -121,6 +121,8 @@ cp node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|import('newrelic');\n|" main.js
+mv newrelic.js newrelic.cjs
+node --experimental-loader newrelic/esm-loader.mjs main.js
 
 sudo chown -R ec2-user:eapd /app
 
