@@ -9,7 +9,6 @@ import Costs from './state-costs/Costs';
 import Milestones from './schedule-and-milestones/Milestones';
 import Overview from './overview/Overview';
 import Outcomes from './oms/Outcomes';
-import StandardsAndConditions from './overview/StandardsAndConditions';
 import Schedule from './schedule-and-milestones/Schedule';
 import { Section } from '../../../components/Section';
 
@@ -116,7 +115,6 @@ const routes = activityIndex => [
     children: (
       <Section>
         <Overview activityIndex={activityIndex} />
-        <StandardsAndConditions activityIndex={activityIndex} />
       </Section>
     ),
     isPublic: false,

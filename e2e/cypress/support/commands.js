@@ -653,6 +653,24 @@ Cypress.Commands.add('turnOnAdminCheck', () => {
   });
 });
 
+Cypress.Commands.add('turnOffAdminCheck', () => {
+  cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('collapseAdminCheck', () => {
+  cy.findByRole('button', { name: /Collapse/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('expandAdminCheck', () => {
+  cy.findByRole('button', { name: /Expand/i }).click({
+    force: true
+  });
+});
+
 Cypress.Commands.add('checkAdminCheckHyperlinks', (link, heading, level) => {
   cy.get('[class="eapd-admin-check-list"]').within(() => {
     cy.contains(link).click();

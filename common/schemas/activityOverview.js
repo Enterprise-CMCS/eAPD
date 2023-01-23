@@ -32,6 +32,7 @@ export const standardsAndConditionsSchema = Joi.object({
   })
 });
 
+// No Standards and Conditions (SC)
 export const hitechActivityOverviewNoSCSchema = Joi.object({
   summary: activitySummarySchema,
   description: activityDescriptionSchema,
@@ -46,21 +47,21 @@ export const hitechActivityOverviewSchema = Joi.object({
 });
 
 export const activitySnapshotSchema = Joi.string().required().messages({
-  'string.base': 'Provide an Activity Snapshot',
-  'string.empty': 'Provide an Activity Snapshot',
-  'string.required': 'Provide an Activity Snapshot'
+  'string.base': 'Provide an Activity snapshot',
+  'string.empty': 'Provide an Activity snapshot',
+  'string.required': 'Provide an Activity snapshot'
 });
 
 export const problemStatementSchema = Joi.string().required().messages({
-  'string.base': 'Provide a Problem Statement',
-  'string.empty': 'Provide a Problem Statement',
-  'string.required': 'Provide a Problem Statement'
+  'string.base': 'Provide a Problem statement',
+  'string.empty': 'Provide a Problem statement',
+  'string.required': 'Provide a Problem statement'
 });
 
 export const proposedSolutionSchema = Joi.string().required().messages({
-  'string.base': 'Provide a Proposed Solution',
-  'string.empty': 'Provide a Proposed Solution',
-  'string.required': 'Provide a Proposed Solution'
+  'string.base': 'Provide a Proposed solution',
+  'string.empty': 'Provide a Proposed solution',
+  'string.required': 'Provide a Proposed solution'
 });
 
 export const mmisActivityOverviewSchema = Joi.object({
