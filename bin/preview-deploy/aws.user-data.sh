@@ -103,7 +103,7 @@ mkdir -p /app/node_modules
 cp -r ~/eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
-cd ~/eAPD/api
+cd ~/eAPD
 mkdir -p /app/api
 cp -r ~/eAPD/api/* /app/api
 
