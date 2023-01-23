@@ -160,7 +160,7 @@ echo "module.exports = {
   }]
 };" > ecosystem.config.cjs
 # Start it up
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 pm2 save
 
 E_USER

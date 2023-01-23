@@ -184,7 +184,7 @@ function addBuildUrlToUserData() {
 #   API_PBKDF2_ITERATIONS - Number of iterations for hashing passwords
 #   API_SESSION_SECRET - The secret key used to sign session tokens
 function addEcosystemToUserData() {
-  ECOSYSTEM=`echo '{
+  ECOSYSTEM=`echo 'module.exports = {
   "apps": [
     {
       "name": "eAPD API",
