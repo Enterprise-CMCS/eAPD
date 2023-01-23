@@ -117,12 +117,10 @@ LOG_LEVEL=verbose NODE_ENV=development DEV_DB_HOST=localhost yarn run seed 2>&1 
 
 # Setting Up New Relic Application Monitor
 yarn add newrelic --save
-cp node_modules/newrelic/newrelic.js ./newrelic.js
-sed -i 's|My Application|eAPD API|g' newrelic.js
-sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|import('newrelic');\n|" main.js
-mv newrelic.js newrelic.cjs
-node --experimental-loader newrelic/esm-loader.mjs main.js
+cp node_modules/newrelic/newrelic.js ./newrelic.cjs
+sed -i 's|My Application|eAPD API|g' newrelic.cjs
+sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.cjs
+sed -i "1 s|^|import newrelic from 'newrelic';\n|" main.js
 
 sudo chown -R ec2-user:eapd /app
 
@@ -130,7 +128,7 @@ sudo chown -R ec2-user:eapd /app
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace
 # "__ECOSYSTEM__" with a base64-encoded JSON string of an ecosystem file.
-echo '{
+echo "{
   "apps": [
     {
       "name": "eAPD API",
@@ -163,7 +161,7 @@ echo '{
       }
     }
   ]
-}' > ecosystem.config.json
+}" > ecosystem.config.json
 # Start it up
 pm2 start ecosystem.config.json
 pm2 save
