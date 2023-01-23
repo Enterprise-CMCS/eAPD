@@ -14,6 +14,11 @@ const successState = {
         apdId: '1234',
         message: successMsg,
         variation: 'success'
+      },
+      {
+        apdId: '5678',
+        message: successMsg,
+        variation: 'success'
       }
     ]
   },
@@ -37,6 +42,7 @@ describe('temporary alert/message', () => {
     setup(null, { initialState: successState });
 
     expect(await screen.findByText(successMsg)).toBeTruthy();
+    expect(screen.getAllByRole('button').length).toBe(1);
   });
 
   test('removes message when close button clicked', () => {
