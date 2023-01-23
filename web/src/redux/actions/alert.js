@@ -3,8 +3,9 @@ import { APD_CREATE_SUCCESS_MSG } from './aria';
 export const ALERT_SUCCESS = 'ALERT_SUCCESS';
 export const ALERT_RESOLVE = 'ALERT_RESOLVE';
 
-export const alertApdCreateSuccess = () => ({
+export const alertApdCreateSuccess = id => ({
   type: ALERT_SUCCESS,
+  apdId: id,
   message: APD_CREATE_SUCCESS_MSG
 });
 

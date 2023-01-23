@@ -13,6 +13,7 @@ const reducer = (state = initialState, action) => {
           ...new Set(
             state.messages.concat({
               message: action.message,
+              apdId: action.apdId,
               variation: 'success'
             })
           )

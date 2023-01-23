@@ -4,17 +4,24 @@ import { connect } from 'react-redux';
 
 import { Alert, Button, CloseIcon } from '@cmsgov/design-system';
 
+import { getAPDId } from '../redux/reducers/apd';
 import { resolveAlertMessage } from '../redux/actions/alert';
 import { getTempAlerts } from '../redux/reducers/alerts';
 
-const TempAlert = ({ alerts, resolveAlert }) => {
+const TempAlert = ({ alerts, apdId, resolveAlert }) => {
   if (!alerts) {
     return null;
   }
 
+  const apdMessages = alerts.filter(function (item) {
+    if (item.apdId === apdId) {
+      return item;
+    }
+  });
+
   return (
     <div>
-      {alerts.map((value, index) => (
+      {apdMessages.map((value, index) => (
         <Alert
           key={`tempAlert-${index + 1}`}
           className="ds-u-margin-y--2"
@@ -39,15 +46,18 @@ const TempAlert = ({ alerts, resolveAlert }) => {
 
 TempAlert.propTypes = {
   alerts: PropTypes.array,
+  apdId: PropTypes.string,
   resolveAlert: PropTypes.func
 };
 
 TempAlert.defaultProps = {
-  alerts: []
+  alerts: [],
+  apdId: null
 };
 
 const mapStateToProps = state => ({
-  alerts: getTempAlerts(state)
+  alerts: getTempAlerts(state),
+  apdId: getAPDId(state)
 });
 
 const mapDispatchToProps = {
