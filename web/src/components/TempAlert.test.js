@@ -11,10 +11,16 @@ const successState = {
   alerts: {
     messages: [
       {
+        apdId: '1234',
         message: successMsg,
         variation: 'success'
       }
     ]
+  },
+  apd: {
+    data: {
+      id: '1234'
+    }
   }
 };
 
