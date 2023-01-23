@@ -117,7 +117,7 @@ LOG_LEVEL=verbose NODE_ENV=development DEV_DB_HOST=localhost yarn run seed 2>&1 
 
 # Setting Up New Relic Application Monitor
 yarn add newrelic --save
-cp node_modules/newrelic/newrelic.js ./newrelic.js
+cp ../node_modules/newrelic/newrelic.js ./newrelic.js
 sed -i 's|My Application|eAPD API|g' newrelic.js
 sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
 sed -i "1 s|^|import('newrelic');\n|" main.js
