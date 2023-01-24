@@ -11,7 +11,7 @@ import AlertMissingFFY from '../../../components/AlertMissingFFY';
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
 import { connect } from 'react-redux';
 
-const ProposedBudget = apdType => (
+const ProposedBudget = ({ apdType }) => (
   <React.Fragment>
     <Waypoint />
     <AlertMissingFFY />
@@ -32,7 +32,7 @@ const ProposedBudget = apdType => (
         <BudgetSummary />
       </Subsection>
 
-      {apdType.apdType === 'HITECH' && (
+      {apdType === 'HITECH' && (
         <Fragment>
           <Waypoint id="budget-federal-by-quarter" />
           <Subsection
