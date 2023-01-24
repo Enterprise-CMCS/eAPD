@@ -45,7 +45,7 @@ const MilestoneForm = forwardRef(
     };
 
     return (
-      <form index={index} onSubmit={onSubmit}>
+      <form id={`milestone-${index}`} onSubmit={onSubmit}>
         {/* Prevent implicit submission of the form. */}
         <button
           type="submit"

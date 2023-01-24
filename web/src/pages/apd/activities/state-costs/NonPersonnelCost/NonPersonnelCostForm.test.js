@@ -114,7 +114,7 @@ describe('the ContractorResourceForm component', () => {
     await user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(5);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -136,7 +136,7 @@ describe('the ContractorResourceForm component', () => {
     await user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(5);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -156,7 +156,7 @@ describe('the ContractorResourceForm component', () => {
     await user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(5);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 

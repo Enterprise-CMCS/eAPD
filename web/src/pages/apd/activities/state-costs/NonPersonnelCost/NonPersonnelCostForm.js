@@ -75,7 +75,7 @@ const NonPersonnelCostForm = forwardRef(
     }));
     categories.unshift({ label: 'Select an option', value: '' });
     return (
-      <form index={index} onSubmit={onSubmit}>
+      <form id={`non-personnel-cost-${index}`} onSubmit={onSubmit}>
         {/* Prevent implicit submission of the form. */}
         <button
           type="submit"

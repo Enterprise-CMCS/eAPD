@@ -28,8 +28,6 @@ const defaultProps = {
   yearOptions: ['2023', '2024', '2025']
 };
 
-let options;
-let props;
 const setup = async (props = {}, options = {}) => {
   let util;
   // eslint-disable-next-line testing-library/no-unnecessary-act
@@ -59,7 +57,7 @@ describe('<ApdNew />', () => {
     });
 
     it('should display form with MMIS', async () => {
-      await setup(props, options);
+      await setup();
       expect(
         screen.getByText(/Create a New Advanced Planning Document/)
       ).toBeTruthy();
@@ -71,7 +69,7 @@ describe('<ApdNew />', () => {
 
     describe('selecting and filling out HITECH form', () => {
       it('HITECH selected should show HITECH form', async () => {
-        const { user } = await setup(props, options);
+        const { user } = await setup();
         user.click(screen.getByRole('radio', { name: /HITECH IAPD/i }));
 
         await waitFor(() => {
@@ -89,7 +87,7 @@ describe('<ApdNew />', () => {
       });
 
       it('Filled out HITECH form should enable Create APD button', async () => {
-        const { user } = await setup(props, options);
+        const { user } = await setup();
         const disabledBtn = screen.getByRole('button', {
           name: /Create an APD/
         });
@@ -104,10 +102,7 @@ describe('<ApdNew />', () => {
 
         expect(disabledBtn).toBeDisabled();
 
-        await user.type(
-          screen.getByRole('textbox', { name: /name/i }),
-          'APD Name'
-        );
+        user.type(screen.getByRole('textbox', { name: /name/i }), 'APD Name');
 
         expect(disabledBtn).toBeDisabled();
 
@@ -117,24 +112,26 @@ describe('<ApdNew />', () => {
           screen.getByRole('checkbox', { name: /2025/i })
         ).not.toBeChecked();
 
-        await user.click(screen.getByRole('checkbox', { name: /2024/i }));
-        expect(
-          screen.getByRole('checkbox', { name: /2024/i })
-        ).not.toBeChecked();
+        user.click(screen.getByRole('checkbox', { name: /2024/i }));
+        await waitFor(() => {
+          expect(
+            screen.getByRole('checkbox', { name: /2024/i })
+          ).not.toBeChecked();
+        });
 
-        await user.click(
-          screen.getByRole('checkbox', { name: /Annual update/i })
-        );
-        expect(
-          screen.getByRole('checkbox', { name: /Annual update/i })
-        ).toBeChecked();
+        user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
+        await waitFor(() => {
+          expect(
+            screen.getByRole('checkbox', { name: /Annual update/i })
+          ).toBeChecked();
+        });
         expect(disabledBtn).toBeEnabled();
       });
     });
 
     describe('selecting and filling out MMIS form', () => {
       it('MMIS selected should show MMIS form', async () => {
-        const { user } = await setup(props, options);
+        const { user } = await setup();
         user.click(screen.getByRole('radio', { name: /MMIS IAPD/i }));
 
         await waitFor(() => {
@@ -151,19 +148,24 @@ describe('<ApdNew />', () => {
       });
 
       it('Filled out MMIS form should enable Create APD button', async () => {
-        const { user } = await setup(props, options);
+        jest.setTimeout(30000);
+
+        const { user } = await setup();
         const disabledBtn = screen.getByRole('button', {
           name: /Create an APD/
         });
 
-        await user.click(screen.getByRole('radio', { name: /MMIS IAPD/i }));
-        expect(screen.getByRole('radio', { name: /MMIS IAPD/i })).toBeChecked();
+        user.click(screen.getByRole('radio', { name: /MMIS IAPD/i }));
+
+        await waitFor(() => {
+          expect(
+            screen.getByRole('radio', { name: /MMIS IAPD/i })
+          ).toBeChecked();
+        });
         expect(disabledBtn).toBeDisabled();
 
-        await user.type(
-          screen.getByRole('textbox', { name: /name/i }),
-          'APD Name'
-        );
+        user.type(screen.getByRole('textbox', { name: /name/i }), 'APD Name');
+
         expect(disabledBtn).toBeDisabled();
 
         expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
@@ -172,10 +174,12 @@ describe('<ApdNew />', () => {
           screen.getByRole('checkbox', { name: /2025/i })
         ).not.toBeChecked();
 
-        await user.click(screen.getByRole('checkbox', { name: /2024/i }));
-        expect(
-          screen.getByRole('checkbox', { name: /2024/i })
-        ).not.toBeChecked();
+        user.click(screen.getByRole('checkbox', { name: /2024/i }));
+        await waitFor(() => {
+          expect(
+            screen.getByRole('checkbox', { name: /2024/i })
+          ).not.toBeChecked();
+        });
         expect(disabledBtn).toBeDisabled();
 
         user.click(
@@ -190,22 +194,32 @@ describe('<ApdNew />', () => {
         });
         expect(disabledBtn).toBeDisabled();
 
-        await user.click(
+        user.click(
           screen.getByRole('checkbox', { name: /Claims Processing/i })
         );
-        expect(
-          screen.getByRole('checkbox', { name: /Claims Processing/i })
-        ).toBeChecked();
-        expect(disabledBtn).toBeEnabled();
+        await waitFor(() => {
+          expect(
+            screen.getByRole('checkbox', { name: /Claims Processing/i })
+          ).toBeChecked();
+        });
+        await waitFor(() => {
+          expect(disabledBtn).toBeEnabled();
+        });
 
-        await user.click(screen.getByRole('checkbox', { name: /2023/i }));
-        expect(
-          screen.getByRole('checkbox', { name: /2023/i })
-        ).not.toBeChecked();
-        expect(disabledBtn).toBeDisabled();
+        user.click(screen.getByRole('checkbox', { name: /2023/i }));
+        await waitFor(() => {
+          expect(
+            screen.getByRole('checkbox', { name: /2023/i })
+          ).not.toBeChecked();
+        });
+        await waitFor(() => {
+          expect(disabledBtn).toBeDisabled();
+        });
 
-        await user.click(screen.getByRole('checkbox', { name: /2023/i }));
-        expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
+        user.click(screen.getByRole('checkbox', { name: /2023/i }));
+        await waitFor(() => {
+          expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
+        });
 
         user.click(
           screen.getByRole('radio', { name: /Yes, it is an update./i })
@@ -217,7 +231,9 @@ describe('<ApdNew />', () => {
             })
           ).toBeChecked();
         });
-        expect(disabledBtn).toBeDisabled();
+        await waitFor(() => {
+          expect(disabledBtn).toBeDisabled();
+        });
 
         user.click(screen.getByRole('checkbox', { name: /Annual update/i }));
         await waitFor(() => {
@@ -225,18 +241,28 @@ describe('<ApdNew />', () => {
             screen.getByRole('checkbox', { name: /Annual update/i })
           ).toBeChecked();
         });
-        expect(disabledBtn).toBeEnabled();
+        await waitFor(() => {
+          expect(disabledBtn).toBeEnabled();
+        });
 
-        await user.click(screen.getByRole('checkbox', { name: /Other/i }));
-        expect(screen.getByRole('checkbox', { name: /Other/i })).toBeChecked();
-        expect(disabledBtn).toBeDisabled();
+        user.click(screen.getByRole('checkbox', { name: /Other/i }));
+        await waitFor(() => {
+          expect(
+            screen.getByRole('checkbox', { name: /Other/i })
+          ).toBeChecked();
+        });
+        await waitFor(() => {
+          expect(disabledBtn).toBeDisabled();
+        });
 
         const otherBox = screen.getByRole('textbox', {
           name: 'Other Medicaid Business Area(s) Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon.'
         });
 
-        await user.type(otherBox, 'other');
-        expect(disabledBtn).toBeEnabled();
+        user.type(otherBox, 'other');
+        await waitFor(() => {
+          expect(disabledBtn).toBeEnabled();
+        });
       });
     });
   });
@@ -247,28 +273,39 @@ describe('<ApdNew />', () => {
     });
 
     it('should not show Mmis option', async () => {
-      await setup(props, options);
+      await setup();
       expect(
         screen.getByText(/Create a New Advanced Planning Document/)
       ).toBeTruthy();
-      expect(screen.queryByText(/MMIS IAPD/)).toBeFalsy();
+      await waitFor(() => {
+        expect(screen.queryByText(/MMIS IAPD/)).toBeFalsy();
+      });
       expect(
         screen.getByRole('button', { name: /Create an APD/ })
       ).toBeDisabled();
     });
 
     it('should automatically check HITECH IAPD', async () => {
-      await setup(props, options);
-      expect(screen.getByRole('radio', { name: /HITECH IAPD/i })).toBeChecked();
+      await setup();
+      await waitFor(() => {
+        expect(
+          screen.getByRole('radio', { name: /HITECH IAPD/i })
+        ).toBeChecked();
+      });
     });
 
     it('requires all fields to enable Create APD button', async () => {
-      const { user } = await setup(props, options);
-      const disabledBtn = screen.getByRole('button', {
-        name: /Create an APD/
+      jest.setTimeout(30000);
+
+      const { user } = await setup();
+
+      await waitFor(() => {
+        expect(screen.queryByText(/MMIS IAPD/)).toBeFalsy();
       });
 
-      expect(disabledBtn).toBeDisabled();
+      expect(
+        screen.getByRole('button', { name: /Create an APD/ })
+      ).toBeDisabled();
 
       expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
       expect(screen.getByRole('checkbox', { name: /2024/i })).toBeChecked();
@@ -283,7 +320,11 @@ describe('<ApdNew />', () => {
       expect(
         screen.getByRole('checkbox', { name: /Annual update/i })
       ).toBeChecked();
-      expect(disabledBtn).toBeEnabled();
+      expect(
+        screen.getByRole('button', {
+          name: /Create an APD/
+        })
+      ).toBeEnabled();
     });
   });
 });

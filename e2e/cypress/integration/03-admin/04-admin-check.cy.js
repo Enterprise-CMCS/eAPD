@@ -1,5 +1,4 @@
 describe('tests state admin portal', () => {
-  let apdUrl;
   let apdId;
   const years = [];
 

@@ -14,7 +14,7 @@ import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
 
 describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
   let apdUrl;
-  let apdId;
+
   const years = [];
   const pageTitles = [
     'APD Overview',
@@ -45,7 +45,6 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     ).should('exist');
     cy.location('pathname').then(pathname => {
       apdUrl = pathname.replace('/apd-overview', '');
-      apdId = apdUrl.split('/').pop();
     });
 
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>

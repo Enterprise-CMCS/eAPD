@@ -253,7 +253,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       // Verify that fields save
       // Navigates away from page and back to check persistence of entered data
       cy.goToApdOverview();
-      cy.wait(2000);
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.goToActivityOverview(0);
 
       cy.contains('Activity name').should('exist');
@@ -311,7 +311,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
 
       // Verify fields save
       cy.goToApdOverview();
-      cy.wait(2000);
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.goToSecurityPlanning();
 
       cy.get('[id="security-interface-plan"]').should(

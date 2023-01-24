@@ -163,7 +163,7 @@ const PersonForm = forwardRef(
     const primary = index === 0;
 
     return (
-      <form index={index} onSubmit={onSubmit} aria-label="form">
+      <form id={`key-person-${index}`} onSubmit={onSubmit} aria-label="form">
         {/* Prevent implicit submission of the form. */}
         <button
           type="submit"

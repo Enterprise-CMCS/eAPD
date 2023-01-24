@@ -94,7 +94,7 @@ const ApdNew = ({ createApd: create }) => {
       setApdType(APD_TYPE.HITECH);
       setValue('apdType', APD_TYPE.HITECH, { shouldValidate: true });
     }
-  }, [apdChoices, enableMmis]);
+  }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const {
     control,
@@ -580,13 +580,8 @@ ApdNew.defaultProps = {
   route: '/apd'
 };
 
-const mapStateToProps = state => ({
-  state: state.user.data.state || null,
-  activities: state.user.data.activities
-});
-
 const mapDispatchToProps = {
   createApd
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ApdNew);
+export default connect(null, mapDispatchToProps)(ApdNew);
