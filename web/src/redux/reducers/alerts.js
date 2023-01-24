@@ -20,13 +20,22 @@ const reducer = (state = initialState, action) => {
         ]
       };
     case ALERT_RESOLVE:
-      return removeMsg(action.message_index, state);
+      return {
+        ...state,
+        messages: state.messages.filter((_, i) => i !== action.message_index)
+      };
     default:
       return state;
   }
 };
+export const removeMsg = (index, state) => {
+  let msgList = state.messages,
+    newMsgList = msgList.filter((_, i) => i !== index);
 
-export const removeMsg = (index, state) => state.messages.splice(index, 1);
+  console.log({ newMsgList });
+
+  return newMsgList;
+};
 
 export const getTempAlerts = state => state.alerts.messages;
 
