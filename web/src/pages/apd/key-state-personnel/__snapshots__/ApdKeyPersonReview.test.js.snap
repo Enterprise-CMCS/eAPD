@@ -28,6 +28,7 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
         className="ds-u-margin-top--2"
       >
         <div
+          className="ds-u-padding-bottom--2"
           key="1992"
         >
           <strong>
@@ -43,7 +44,7 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
             FTE: 
           </strong>
           0.32
-           |
+           | 
           <strong>
             Total: 
           </strong>
@@ -51,16 +52,17 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
             32
              
           </Dollars>
-           (
-           
-          <Dollars>
-            0
-            )
-          </Dollars>
-           
-          Federal Share )
+          <div>
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+            </Dollars>
+          </div>
         </div>
         <div
+          className="ds-u-padding-bottom--2"
           key="1993"
         >
           <strong>
@@ -76,7 +78,7 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
             FTE: 
           </strong>
           0.84
-           |
+           | 
           <strong>
             Total: 
           </strong>
@@ -84,14 +86,14 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
             252
              
           </Dollars>
-           (
-           
-          <Dollars>
-            0
-            )
-          </Dollars>
-           
-          Federal Share )
+          <div>
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+            </Dollars>
+          </div>
         </div>
       </div>
     </Review>
@@ -124,6 +126,7 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
         className="ds-u-margin-top--2"
       >
         <div
+          className="ds-u-padding-bottom--2"
           key="1992"
         >
           <strong>
@@ -139,7 +142,7 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
             FTE: 
           </strong>
           0.32
-           |
+           | 
           <strong>
             Total: 
           </strong>
@@ -147,16 +150,17 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
             32
              
           </Dollars>
-           (
-           
-          <Dollars>
-            0
-            )
-          </Dollars>
-           
-          Federal Share )
+          <div>
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+            </Dollars>
+          </div>
         </div>
         <div
+          className="ds-u-padding-bottom--2"
           key="1993"
         >
           <strong>
@@ -172,7 +176,7 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
             FTE: 
           </strong>
           0.84
-           |
+           | 
           <strong>
             Total: 
           </strong>
@@ -180,14 +184,14 @@ exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] 
             252
              
           </Dollars>
-           (
-           
-          <Dollars>
-            0
-            )
-          </Dollars>
-           
-          Federal Share )
+          <div>
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+            </Dollars>
+          </div>
         </div>
       </div>
     </Review>
@@ -223,6 +227,7 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
         className="ds-u-margin-top--2"
       >
         <div
+          className="ds-u-padding-bottom--2"
           key="1992"
         >
           <strong>
@@ -238,7 +243,7 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
             FTE: 
           </strong>
           0.32
-           |
+           | 
           <strong>
             Total: 
           </strong>
@@ -246,24 +251,29 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
             32
              
           </Dollars>
-           |
-           
-          <strong>
-            Total Computable Medicaid: 
-          </strong>
-          <Dollars>
-            32
-          </Dollars>
-           
-          (
-          <Dollars>
-            0
-            )
-          </Dollars>
-           
-          Federal Share)
+          <div>
+            <strong>
+              Total Computable Medicaid: 
+            </strong>
+            <Dollars>
+              32
+            </Dollars>
+             
+            (
+            100
+            % Medicaid Share) |
+             
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+              )
+            </Dollars>
+          </div>
         </div>
         <div
+          className="ds-u-padding-bottom--2"
           key="1993"
         >
           <strong>
@@ -279,7 +289,7 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
             FTE: 
           </strong>
           0.84
-           |
+           | 
           <strong>
             Total: 
           </strong>
@@ -287,22 +297,26 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
             252
              
           </Dollars>
-           |
-           
-          <strong>
-            Total Computable Medicaid: 
-          </strong>
-          <Dollars>
-            252
-          </Dollars>
-           
-          (
-          <Dollars>
-            0
-            )
-          </Dollars>
-           
-          Federal Share)
+          <div>
+            <strong>
+              Total Computable Medicaid: 
+            </strong>
+            <Dollars>
+              252
+            </Dollars>
+             
+            (
+            100
+            % Medicaid Share) |
+             
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+              )
+            </Dollars>
+          </div>
         </div>
       </div>
     </Review>
@@ -335,6 +349,7 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
         className="ds-u-margin-top--2"
       >
         <div
+          className="ds-u-padding-bottom--2"
           key="1992"
         >
           <strong>
@@ -350,7 +365,7 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
             FTE: 
           </strong>
           0.32
-           |
+           | 
           <strong>
             Total: 
           </strong>
@@ -358,24 +373,29 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
             32
              
           </Dollars>
-           |
-           
-          <strong>
-            Total Computable Medicaid: 
-          </strong>
-          <Dollars>
-            32
-          </Dollars>
-           
-          (
-          <Dollars>
-            0
-            )
-          </Dollars>
-           
-          Federal Share)
+          <div>
+            <strong>
+              Total Computable Medicaid: 
+            </strong>
+            <Dollars>
+              32
+            </Dollars>
+             
+            (
+            100
+            % Medicaid Share) |
+             
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+              )
+            </Dollars>
+          </div>
         </div>
         <div
+          className="ds-u-padding-bottom--2"
           key="1993"
         >
           <strong>
@@ -391,7 +411,7 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
             FTE: 
           </strong>
           0.84
-           |
+           | 
           <strong>
             Total: 
           </strong>
@@ -399,22 +419,26 @@ exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = 
             252
              
           </Dollars>
-           |
-           
-          <strong>
-            Total Computable Medicaid: 
-          </strong>
-          <Dollars>
-            252
-          </Dollars>
-           
-          (
-          <Dollars>
-            0
-            )
-          </Dollars>
-           
-          Federal Share)
+          <div>
+            <strong>
+              Total Computable Medicaid: 
+            </strong>
+            <Dollars>
+              252
+            </Dollars>
+             
+            (
+            100
+            % Medicaid Share) |
+             
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+              )
+            </Dollars>
+          </div>
         </div>
       </div>
     </Review>

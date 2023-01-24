@@ -64,8 +64,22 @@ describe('the ApdKeyPersonForm component', () => {
       )
     ).toMatchSnapshot();
   });
-  // Todo: Add test to verify it renders correctly for HITECH type apds
-  // Todo: Add test to verify it renders correctly for MMIS type apds
+
+  it('renders correctly for hitech type apds', () => {
+    expect(
+      shallow(
+        <KeyPersonForm {...props} item={{ ...props.item, apdType: 'HITECH' }} />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly for mmis type apds', () => {
+    expect(
+      shallow(
+        <KeyPersonForm {...props} item={{ ...props.item, apdType: 'MMIS' }} />
+      )
+    ).toMatchSnapshot();
+  });
 
   describe('events', () => {
     it('handles submitting the form', () => {

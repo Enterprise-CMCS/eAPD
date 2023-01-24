@@ -69714,6 +69714,1358 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 </PersonForm>
 `;
 
+exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1`] = `
+<form
+  aria-label="form"
+  index={1}
+  onSubmit={[Function]}
+>
+  <button
+    aria-hidden="true"
+    aria-label="submitButton"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
+  <h4
+    className="ds-h4"
+  >
+    Additional Key Personnel
+  </h4>
+  <p
+    className="ds-u-margin-bottom--0"
+  >
+    Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
+  </p>
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="name"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="email"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="position"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="hasCosts"
+    render={[Function]}
+  />
+  <input
+    aria-label="submitButton"
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
+</form>
+`;
+
+exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`] = `
+<form
+  aria-label="form"
+  index={1}
+  onSubmit={[Function]}
+>
+  <button
+    aria-hidden="true"
+    aria-label="submitButton"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
+  <h4
+    className="ds-h4"
+  >
+    Additional Key Personnel
+  </h4>
+  <p
+    className="ds-u-margin-bottom--0"
+  >
+    Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
+  </p>
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="name"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="email"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="position"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="hasCosts"
+    render={[Function]}
+  />
+  <input
+    aria-label="submitButton"
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
+</form>
+`;
+
 exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `
 <form
   aria-label="form"

@@ -841,6 +841,10 @@ describe('APD reducer', () => {
                     state: 0
                   }
                 },
+                medicaidShare: {
+                  1: 0,
+                  2: 0
+                },
                 key: expect.stringMatching(/^[a-f0-9]{8}$/)
               }
             ]
@@ -873,6 +877,10 @@ describe('APD reducer', () => {
                     federal: 0,
                     state: 0
                   }
+                },
+                medicaidShare: {
+                  1: 0,
+                  2: 0
                 },
                 key: 'primary'
               }
@@ -909,6 +917,10 @@ describe('APD reducer', () => {
                     state: 0
                   }
                 },
+                medicaidShare: {
+                  1: 0,
+                  2: 0
+                },
                 key: 'primary'
               },
               {
@@ -929,6 +941,10 @@ describe('APD reducer', () => {
                     federal: 0,
                     state: 0
                   }
+                },
+                medicaidShare: {
+                  1: 0,
+                  2: 0
                 },
                 key: expect.stringMatching(/^[a-f0-9]{8}$/)
               }
@@ -1452,6 +1468,10 @@ describe('APD reducer helper methods', () => {
                 state: 0
               }
             },
+            medicaidShare: {
+              1: 0,
+              2: 0
+            },
             key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }
         }
@@ -1491,6 +1511,10 @@ describe('APD reducer helper methods', () => {
                 federal: 0,
                 state: 0
               }
+            },
+            medicaidShare: {
+              1: 0,
+              2: 0
             },
             key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }

@@ -23,38 +23,35 @@ const ApdStateKeyPerson = ({
       <div className="ds-u-margin-top--2">
         {hasCosts === true ? (
           Object.keys(costs).map(year => (
-            <div key={year}>
+            <div key={year} className="ds-u-padding-bottom--2">
               <strong>FFY {year} Cost: </strong>
               <Dollars>{costs[year]}</Dollars> | <strong>FTE: </strong>
-              {fte[year]} |
+              {fte[year]} | <strong>Total: </strong>
+              <Dollars>{costs[year] * fte[year]} </Dollars>
               {apdType === 'HITECH' && (
-                <Fragment>
-                  <strong>Total: </strong>
-                  <Dollars>{costs[year] * fte[year]} </Dollars> ({' '}
+                <div>
+                  <strong>Federal Share: </strong>
                   <Dollars>
-                    {costs[year] * fte[year] * (split[year].federal / 100)})
-                  </Dollars>{' '}
-                  Federal Share )
-                </Fragment>
+                    {costs[year] * fte[year] * (split[year].federal / 100)}
+                  </Dollars>
+                </div>
               )}
               {apdType === 'MMIS' && (
-                <Fragment>
-                  <strong>Total: </strong>
-                  <Dollars>{costs[year] * fte[year]} </Dollars> |{' '}
+                <div>
                   <strong>Total Computable Medicaid: </strong>
                   <Dollars>
                     {costs[year] * fte[year] * (medicaidShare[year] / 100)}
                   </Dollars>{' '}
-                  (
+                  ({medicaidShare[year]}% Medicaid Share) |{' '}
+                  <strong>Federal Share: </strong>
                   <Dollars>
                     {costs[year] *
                       fte[year] *
                       (split[year].federal / 100) *
                       (medicaidShare[year] / 100)}
                     )
-                  </Dollars>{' '}
-                  Federal Share)
-                </Fragment>
+                  </Dollars>
+                </div>
               )}
             </div>
           ))
