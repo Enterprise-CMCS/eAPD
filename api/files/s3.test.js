@@ -5,7 +5,7 @@ import { getFile, putFile } from './s3.js';
 const sandbox = createSandbox();
 
 tap.test('AWS S3 file storage module', async tests => {
-  const S3 = sandbox.stub();
+  const S3Client = sandbox.stub();
   const s3Proto = {
     getObject: sandbox.stub(),
     putObject: sandbox.stub()
@@ -20,7 +20,7 @@ tap.test('AWS S3 file storage module', async tests => {
     sandbox.resetBehavior();
     sandbox.resetHistory();
 
-    S3.returns(s3Proto);
+    S3Client.returns(s3Proto);
     s3Proto.getObject.returns({ promise: s3Promise });
     s3Proto.putObject.returns({ promise: s3Promise });
   });
@@ -60,8 +60,8 @@ tap.test('AWS S3 file storage module', async tests => {
       'rejects if there is an error reading the file',
       async test => {
         s3Promise.rejects();
-        test.rejects(() => getFile('file id', { S3 }));
-        test.ok(S3.calledWith({ apiVersion: '2006-03-01' }));
+        test.rejects(() => getFile('file id', { S3Client }));
+        test.ok(S3Client.calledWith({ apiVersion: '2006-03-01' }));
         test.ok(
           s3Proto.getObject.calledWith({
             Bucket: 's3 bucket path',
@@ -73,9 +73,9 @@ tap.test('AWS S3 file storage module', async tests => {
 
     getTests.test('returns data if it can read the file', async test => {
       s3Promise.resolves({ Body: 'this is the data' });
-      const data = await getFile('file id', { S3 });
+      const data = await getFile('file id', { S3Client });
       test.equal(data, 'this is the data');
-      test.ok(S3.calledWith({ apiVersion: '2006-03-01' }));
+      test.ok(S3Client.calledWith({ apiVersion: '2006-03-01' }));
       test.ok(
         s3Proto.getObject.calledWith({
           Bucket: 's3 bucket path',
@@ -90,8 +90,8 @@ tap.test('AWS S3 file storage module', async tests => {
       'rejects if there is an error writing the file',
       async test => {
         s3Promise.rejects();
-        test.rejects(() => putFile('file id', 'file buffer data', { S3 }));
-        test.ok(S3.calledWith({ apiVersion: '2006-03-01' }));
+        test.rejects(() => putFile('file id', 'file buffer data', { S3Client }));
+        test.ok(S3Client.calledWith({ apiVersion: '2006-03-01' }));
         test.ok(
           s3Proto.putObject.calledWith({
             Body: 'file buffer data',
@@ -105,8 +105,8 @@ tap.test('AWS S3 file storage module', async tests => {
 
     putTests.test('resolves if it can write the file', async test => {
       s3Promise.resolves();
-      test.resolves(() => putFile('file id', 'file buffer data', { S3 }));
-      test.ok(S3.calledWith({ apiVersion: '2006-03-01' }));
+      test.resolves(() => putFile('file id', 'file buffer data', { S3Client }));
+      test.ok(S3Client.calledWith({ apiVersion: '2006-03-01' }));
       test.ok(
         s3Proto.putObject.calledWith({
           Body: 'file buffer data',
