@@ -23,18 +23,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         messages: state.messages.filter((_, i) => i !== action.message_index)
-      };
+      }
     default:
       return state;
   }
-};
-export const removeMsg = (index, state) => {
-  let msgList = state.messages,
-    newMsgList = msgList.filter((_, i) => i !== index);
-
-  console.log({ newMsgList });
-
-  return newMsgList;
 };
 
 export const getTempAlerts = state => state.alerts.messages;
