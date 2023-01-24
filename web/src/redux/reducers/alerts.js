@@ -23,12 +23,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         messages: state.messages.filter((_, i) => i !== action.message_index)
-      }
+      };
     default:
       return state;
   }
 };
-
-export const getTempAlerts = state => state.alerts.messages;
 
 export default reducer;

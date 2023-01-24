@@ -6,7 +6,7 @@ import { Alert, Button, CloseIcon } from '@cmsgov/design-system';
 
 import { getAPDId } from '../redux/reducers/apd';
 import { resolveAlertMessage } from '../redux/actions/alert';
-import { getTempAlerts } from '../redux/reducers/alerts';
+import { getTempAlerts } from '../redux/selectors/alerts.selectors';
 
 const TempAlert = ({ alerts, apdId, resolveAlert }) => {
   if (!alerts) {
