@@ -219,7 +219,7 @@ yarn install --frozen-lockfile --non-interactive --production --network-timeout 
 # the knex CLI will work correctly.
 #yarn rebuild knex ### TODO use when yarn is updated
 yarn add --force knex
-yarn add newrelic --save
+yarn add newrelic
 cp node_modules/newrelic/newrelic.js api/newrelic.cjs
 
 cd api

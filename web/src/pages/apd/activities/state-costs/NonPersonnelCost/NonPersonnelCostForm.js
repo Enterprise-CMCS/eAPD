@@ -1,6 +1,6 @@
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
-import React, { useEffect, forwardRef } from 'react';
+import React, { useEffect, useState, forwardRef } from 'react';
 import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -8,12 +8,15 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import DollarField from '../../../../../components/DollarField';
 import TextArea from '../../../../../components/TextArea';
 
-import { expensesSchema as schema } from '@cms-eapd/common';
+import { expensesSchema as schema, APD_TYPE } from '@cms-eapd/common';
 
 import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../redux/actions/editActivity';
 
 const NonPersonnelCostForm = forwardRef(
-  ({ activityIndex, index, item, saveNonPersonnelCost, setFormValid }, ref) => {
+  (
+    { activityIndex, apdType, index, item, saveNonPersonnelCost, setFormValid },
+    ref
+  ) => {
     NonPersonnelCostForm.displayName = 'NonPersonnelCostForm';
     const { category, description, years } = JSON.parse(
       JSON.stringify({ ...item })
@@ -35,8 +38,25 @@ const NonPersonnelCostForm = forwardRef(
       resolver: joiResolver(schema)
     });
 
+    const categoryList = [
+      'Equipment and supplies',
+      'Hardware, software, and licensing',
+      'Miscellaneous expenses for the project',
+      'Training and outreach',
+      'Travel'
+    ];
+
+    const [catList, setCatList] = useState(categoryList);
+
+    useEffect(() => {
+      if (apdType === APD_TYPE.HITECH) {
+        let newCatList = ['Administrative operations', ...categoryList];
+        setCatList(newCatList);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [apdType]);
+
     const onSubmit = e => {
-      console.log('onSubmit called', e);
       e.preventDefault();
       saveNonPersonnelCost(activityIndex, index, {
         ...item,
@@ -48,14 +68,10 @@ const NonPersonnelCostForm = forwardRef(
       setFormValid(isValid);
     }, [isValid]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const categories = [
-      'Hardware, software, and licensing',
-      'Equipment and supplies',
-      'Training and outreach',
-      'Travel',
-      'Administrative operations',
-      'Miscellaneous expenses for the project'
-    ].map(category => ({ label: category, value: category }));
+    const categories = catList.map(category => ({
+      label: category,
+      value: category
+    }));
     categories.unshift({ label: 'Select an option', value: '' });
     return (
       <form index={index} onSubmit={onSubmit}>
@@ -146,6 +162,7 @@ const NonPersonnelCostForm = forwardRef(
 
 NonPersonnelCostForm.propTypes = {
   activityIndex: PropTypes.number.isRequired,
+  apdType: PropTypes.string,
   index: PropTypes.number.isRequired,
   item: PropTypes.shape({
     category: PropTypes.string.isRequired,
@@ -156,12 +173,16 @@ NonPersonnelCostForm.propTypes = {
   setFormValid: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+  apdType: state.apd.data.apdType
+});
+
 const mapDispatchToProps = {
   saveNonPersonnelCost: actualSaveNonPersonnelCost
 };
 
-export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
-  NonPersonnelCostForm
-);
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  forwardRef: true
+})(NonPersonnelCostForm);
 
 export { NonPersonnelCostForm as plain, mapDispatchToProps };
