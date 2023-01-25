@@ -1,4 +1,4 @@
-import { S3Client as awsS3Client } from "@aws-sdk/client-s3";
+import { S3Client as awsS3Client } from '@aws-sdk/client-s3';
 
 export const getFile = async (id, { S3Client = awsS3Client } = {}) => {
   if (!process.env.FILE_S3_BUCKET) {

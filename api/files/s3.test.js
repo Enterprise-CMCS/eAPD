@@ -90,7 +90,9 @@ tap.test('AWS S3 file storage module', async tests => {
       'rejects if there is an error writing the file',
       async test => {
         s3Promise.rejects();
-        test.rejects(() => putFile('file id', 'file buffer data', { S3Client }));
+        test.rejects(() =>
+          putFile('file id', 'file buffer data', { S3Client })
+        );
         test.ok(S3Client.calledWith({ apiVersion: '2006-03-01' }));
         test.ok(
           s3Proto.putObject.calledWith({

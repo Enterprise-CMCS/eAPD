@@ -20,7 +20,7 @@
     "audit": "npx audit-ci --config ./audit-ci.json",
     "build": "yarn workspace @cms-eapd/web build",
     "lint": "yarn workspaces run lint",
-    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\" --config \".prettierrc\"",
+    "prettier": "prettier --write \"**/*.{js,jsx,cjs,ts,tsx,css,md,json}\" --config \".prettierrc\"",
     "npm-check": "npx npm-check-updates",
     "prepare": "yarn run snyk-protect && husky install",
     "snyk-protect": "snyk-protect",
