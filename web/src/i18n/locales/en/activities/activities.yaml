@@ -1,10 +1,10 @@
 title: Activities
+helpText: >-
+  Activities are narrowly scoped bodies of work that comprise the APD. This
+  section will help you  explain the goals, timelines, and cost of each
+  activity.
 dashboardInstructions:
   instruction:
-    detail: >-
-      Activities are narrowly scoped bodies of work that comprise the APD. This
-      section will help you  explain the goals, timelines, and cost of each
-      activity.
     helpText: >-
       Examples of individual activities include but are not limited to: E&E
       online application, E&E worker  portal, E&E noticing system, claims
