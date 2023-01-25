@@ -5,7 +5,7 @@ import TempAlert from './TempAlert';
 import { fireEvent } from '@testing-library/react';
 
 const successMsg =
-  'You have successfully created an APD. Select continue to fill out the rest of the APD.';
+  'You have successfully created an APD. Close this message and continue to fill out the rest of the APD.';
 
 const successState = {
   alerts: {

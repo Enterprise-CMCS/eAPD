@@ -41,7 +41,7 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, () => {
     cy.log('announces success of creating APD and user dismisses');
     cy.get('.ds-c-alert--success').should('exist');
     cy.get('.tempMessage').contains(
-      'You have successfully created an APD. Select continue to fill out the rest of the APD.'
+      'You have successfully created an APD. Close this message and continue to fill out the rest of the APD.'
     );
     cy.get('.tempMsgBtn').click();
     cy.get('.ds-c-alert--success').should('not.exist');
