@@ -6,7 +6,7 @@ import aria from './aria';
 import apd from './apd';
 import auth from './auth';
 import budget from './budget';
-import errors from './errors';
+import alerts from './alerts';
 import nav from './nav';
 import patch from './patch';
 import saving from './saving';
@@ -20,7 +20,7 @@ const rootReducer = history =>
     apd,
     auth,
     budget,
-    errors,
+    alerts,
     nav,
     patch,
     saving,

@@ -45,7 +45,9 @@ export const testDefaultAPDOverview = function () {
 export const testAPDOverviewWithData = function () {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   beforeEach(function () {
+    cy.updateFeatureFlags({ validation: false, enableMmis: false });
     cy.fixture('apd-overview-template.json').as('apdOverview');
+    cy.useStateState(this.apdUrl);
   });
 
   it('should handle the FFYs and APD Overview', function () {

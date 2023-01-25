@@ -9,7 +9,7 @@ describe('root reducer', () => {
       'apd',
       'auth',
       'budget',
-      'errors',
+      'alerts',
       'nav',
       'patch',
       'saving',
