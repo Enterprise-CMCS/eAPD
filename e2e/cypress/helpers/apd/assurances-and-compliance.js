@@ -10,6 +10,7 @@ const categories = [
 
 export const testDefaultAssurancesAndCompliance = function () {
   beforeEach(function () {
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('assurances-compliance-test.json').as('assurancesAndCompliance');
     cy.useStateStaff(this.apdUrl);
   });
