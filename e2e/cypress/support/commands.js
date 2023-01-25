@@ -530,6 +530,10 @@ Cypress.Commands.add('goToExportView', () => {
   cy.contains('Continue to Review').click();
 });
 
+Cypress.Commands.add('goToSecurityPlanning', () => {
+  cy.get('a.ds-c-vertical-nav__label').contains('Security Planning').click();
+});
+
 Cypress.Commands.add('getEAPDTable', { prevSubject: true }, subject => {
   if (subject.get().length > 1)
     throw new Error(
@@ -645,6 +649,24 @@ Cypress.Commands.add('updateFeatureFlags', featureFlags => {
 Cypress.Commands.add('turnOnAdminCheck', () => {
   cy.contains('Export and Submit').click();
   cy.findByRole('button', { name: /Run Administrative Check/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('turnOffAdminCheck', () => {
+  cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('collapseAdminCheck', () => {
+  cy.findByRole('button', { name: /Collapse/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('expandAdminCheck', () => {
+  cy.findByRole('button', { name: /Expand/i }).click({
     force: true
   });
 });

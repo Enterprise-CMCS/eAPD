@@ -30,6 +30,8 @@ import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
 
+import TempAlert from '../../../components/TempAlert';
+
 import {
   selectSummary,
   selectAdminCheckEnabled
@@ -179,6 +181,7 @@ const ApdOverview = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
+      <TempAlert />
       <div className="apd_type_choice-container">
         <ChoiceList
           type="radio"
