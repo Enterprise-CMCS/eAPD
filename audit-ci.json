@@ -6,10 +6,9 @@
     "GHSA-4jv9-3563-23j3|@cms-****/e2e>@cms-****/api>knex"
   ],
   "_comment": {
-    "GHSA-4jv9-3563-23j3": {
+    "1085234|GHSA-4jv9-3563-23j3": {
       "module": "knex",
-      "affects": "connection to PostGreSQL",
-      "justification": "there isn't a patch yet"
+      "affects": "@cms-eapd/e2e - limited SQL injection vulnerability"
     }
   }
 }
