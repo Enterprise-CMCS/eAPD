@@ -11,6 +11,7 @@ const categories = [
 export const testDefaultAssurancesAndCompliance = function () {
   beforeEach(function () {
     cy.fixture('assurances-compliance-test.json').as('assurancesAndCompliance');
+    cy.useStateStaff(this.apdUrl);
   });
 
   it('should display the default settings in Assurance and Compliance', function () {

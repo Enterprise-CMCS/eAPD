@@ -8,7 +8,6 @@ COPY package.json .
 COPY yarn.lock .
 COPY api ./api
 COPY common ./common
-RUN mkdir /app/api/.nyc_output
 
 USER root
 RUN chown -R node:node /app
