@@ -220,7 +220,7 @@ const PersonForm = forwardRef(
       return total;
     };
 
-    const renderMMISFields = ({ year, errors, control }) => (
+    const renderMMISFields = ({ year, errors, control, i }) => (
       <Fragment>
         <Controller
           key={`${year}-medicaidShare`}
@@ -233,7 +233,7 @@ const PersonForm = forwardRef(
               size="medium"
               min={0}
               hint="Enter the percentage that is allocated towards Medicaid"
-              data-cy={`key-person-${index}__medicaidShare`}
+              data-cy={`key-person-${index}-${i}__medicaidShare`}
               onChange={e => {
                 handleMedicaidShareChange(year, e);
               }}
@@ -253,6 +253,7 @@ const PersonForm = forwardRef(
           key={`${year}-split`}
           name={`split.${year}`}
           control={control}
+          data-cy={`key-person-${index}-${i}__split`}
           render={({ field: { value, ...props } }) => (
             <ChoiceList
               {...props}
@@ -472,7 +473,8 @@ const PersonForm = forwardRef(
                               renderMMISFields({
                                 year,
                                 errors,
-                                control
+                                control,
+                                i
                               })}
                           </div>
                         </Fragment>
