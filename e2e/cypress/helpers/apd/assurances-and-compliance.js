@@ -14,7 +14,6 @@ export const testDefaultAssurancesAndCompliance = function () {
     cy.fixture('assurances-compliance-test.json').as('assurancesAndCompliance');
     cy.useStateStaff();
     cy.visit(this.apdUrl);
-    cy.wait('@LDApp');
   });
 
   it('should display the default settings in Assurance and Compliance', function () {

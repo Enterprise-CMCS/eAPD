@@ -653,27 +653,16 @@ Cypress.Commands.add('updateFeatureFlags', featureFlags => {
     req.reply('Random message');
   }).as('LDClientStream');
 
-  // eslint-disable-next-line no-unused-vars
-  Cypress.on('uncaught:exception', err => {
-    // returning false here prevents Cypress from
-    // failing the test
-    return false;
+  const flags = {};
+  Cypress._.forEach(featureFlags, function (ffValue, ffKey) {
+    flags[ffKey] = { value: ffValue };
   });
 
   // return feature flag values in format expected by launchdarkly client
-  return cy
-    .intercept(
-      { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
-      req => {
-        req.reply(({ body }) => {
-          Cypress._.map(featureFlags, (ffValue, ffKey) => {
-            body[ffKey] = { value: ffValue };
-            return body;
-          });
-        });
-      }
-    )
-    .as('LDApp');
+  cy.intercept(
+    { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
+    { body: flags }
+  ).as('LDApp');
 });
 
 Cypress.Commands.add('turnOnAdminCheck', () => {
