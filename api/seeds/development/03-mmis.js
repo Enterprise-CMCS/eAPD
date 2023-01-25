@@ -53,6 +53,10 @@ const mmis = {
         split: {
           2023: { federal: 90, state: 10 },
           2024: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2023: 90,
+          2024: 50
         }
       },
       {
@@ -66,6 +70,10 @@ const mmis = {
         split: {
           2023: { federal: 90, state: 10 },
           2024: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2023: 50,
+          2024: 10
         }
       }
     ]
@@ -133,7 +141,7 @@ const mmis = {
       activityId: '152a1e2b',
       name: 'Activity 1',
       activityOverview: {
-        activitySnapshot: 'This is an snapshot',
+        activitySnapshot: 'This is a snapshot',
         problemStatement: 'This is a problem statement',
         proposedSolution: 'This is a proposed solution'
       },

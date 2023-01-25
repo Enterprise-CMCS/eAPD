@@ -32,6 +32,10 @@ describe('the ApdKeyPersonForm component', () => {
           state: 10
         }
       },
+      medicaidShare: {
+        1992: 100,
+        1993: 100
+      },
       position: 'The Builder'
     },
     savePerson: jest.fn(),
@@ -57,6 +61,22 @@ describe('the ApdKeyPersonForm component', () => {
     expect(
       shallow(
         <KeyPersonForm {...props} item={{ ...props.item, hasCosts: false }} />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly for hitech type apds', () => {
+    expect(
+      shallow(
+        <KeyPersonForm {...props} item={{ ...props.item, apdType: 'HITECH' }} />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly for mmis type apds', () => {
+    expect(
+      shallow(
+        <KeyPersonForm {...props} item={{ ...props.item, apdType: 'MMIS' }} />
       )
     ).toMatchSnapshot();
   });

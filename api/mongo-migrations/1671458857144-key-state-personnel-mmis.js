@@ -25,14 +25,27 @@ async function up() {
           ...keyPersonnel,
           split: years.reduce(
             /**
-             * Iterate over each year and return an object with the year as the key
-             * So if years is ['2022', '2023'] the resulting object will look like this:
+             * Iterate over each year and return an object with the year as the key and
+             * set the default for existing HITECH APDs to a 90/10 split.
+             * If years is ['2022', '2023'] the resulting object will look like this:
              * {
              *   '2022': { federal: 90, state: 10 }
              *   '2023': { federal: 90, state: 10 }
              * }
              */
             (acc, year) => ({ ...acc, [year]: { federal: 90, state: 10 } }),
+            {}
+          ),
+          medicaidShare: years.reduce(
+            /**
+             * Similar to above, set existing HITECH APDs to have a Medicaid share of 100%
+             * So if years is ['2022', '2023'] the resulting object will look like this:
+             * {
+             *   '2022': 100
+             *   '2023': 100
+             * }
+             */
+            (acc, year) => ({ ...acc, [year]: 100 }),
             {}
           )
         }))

@@ -28,6 +28,7 @@ exports[`activity non-personnel costs subsection renders correctly 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "propTypes": Object {
             "activityIndex": [Function],
+            "apdType": [Function],
             "index": [Function],
             "item": [Function],
             "saveNonPersonnelCost": [Function],

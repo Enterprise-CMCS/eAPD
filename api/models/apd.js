@@ -123,6 +123,13 @@ const apdSchema = new mongoose.Schema(
               },
               { _id: false }
             )
+          },
+          medicaidShare: {
+            type: Map,
+            of: {
+              type: Number,
+              default: 0
+            }
           }
         }
       ]

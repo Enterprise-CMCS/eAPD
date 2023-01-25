@@ -5,7 +5,9 @@ import {
   screen,
   waitFor
 } from 'apd-testing-library';
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import userEvent from '@testing-library/user-event';
+import { APD_TYPE } from '@cms-eapd/common/utils';
 
 import NonPersonnelCostForm from './NonPersonnelCostForm';
 
@@ -25,10 +27,27 @@ const defaultProps = {
   setFormValid: jest.fn()
 };
 
-const setup = async (props = {}) => {
+const hitechApd = {
+  initialState: {
+    apd: {
+      data: {
+        apdType: APD_TYPE.HITECH
+      }
+    }
+  }
+};
+
+const mmisApd = {
+  initialState: { apd: { data: { apdType: APD_TYPE.MMIS } } }
+};
+
+const setup = async (props = {}, options = {}) => {
   // eslint-disable-next-line testing-library/no-unnecessary-act
   const utils = await act(async () => {
-    renderWithConnection(<NonPersonnelCostForm {...defaultProps} {...props} />);
+    renderWithConnection(
+      <NonPersonnelCostForm {...defaultProps} {...props} />,
+      options
+    );
   });
   const user = userEvent.setup();
   return {
@@ -60,7 +79,7 @@ describe('the ContractorResourceForm component', () => {
   test('renders error when no category is selected', async () => {
     const { user } = await setup({});
 
-    expect(screen.getAllByRole('option').length).toBe(7);
+    expect(screen.getAllByRole('option').length).toBe(6);
 
     await user.selectOptions(
       screen.getByRole('combobox'),
@@ -143,5 +162,47 @@ describe('the ContractorResourceForm component', () => {
 
     const error = await screen.findByText('Provide an annual cost.');
     expect(error).toBeInTheDocument();
+  });
+});
+
+describe('Selection removes "Administrative operations" for in MMIS apd', () => {
+  beforeEach(() => {
+    mockFlags({ enableMmis: true });
+  });
+
+  afterAll(() => {
+    resetLDMocks();
+  });
+
+  it('shows "Administrative operations" on HITECH APD', async () => {
+    await setup({}, hitechApd);
+
+    expect(screen.getAllByRole('option').length).toBe(7);
+
+    const dropdown = screen.getByRole('combobox');
+
+    await waitFor(() => {
+      dropdown.click();
+    });
+
+    expect(
+      await screen.findByText('Administrative operations')
+    ).toBeInTheDocument();
+  });
+
+  it('shows default list on MMIS APD', async () => {
+    await setup({}, mmisApd);
+
+    expect(screen.getAllByRole('option').length).toBe(6);
+
+    const dropdown = screen.getByRole('combobox');
+
+    await waitFor(() => {
+      dropdown.click();
+    });
+
+    expect(
+      screen.queryByText('Administrative operations')
+    ).not.toBeInTheDocument();
   });
 });

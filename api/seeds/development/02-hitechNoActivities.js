@@ -43,6 +43,10 @@ const hitechNoActivities = {
         split: {
           2022: { federal: 90, state: 10 },
           2023: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100
         }
       },
       {
@@ -56,6 +60,10 @@ const hitechNoActivities = {
         split: {
           2022: { federal: 90, state: 10 },
           2023: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100
         }
       }
     ]

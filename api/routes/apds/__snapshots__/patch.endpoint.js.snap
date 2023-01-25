@@ -144,6 +144,10 @@ Object {
           "hasCosts": true,
           "id": null,
           "isPrimary": true,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "James Holden",
           "position": "HIT Coordinator",
           "split": Object {
@@ -170,6 +174,10 @@ Object {
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
           "split": Object {
@@ -523,6 +531,10 @@ Object {
           "hasCosts": true,
           "id": null,
           "isPrimary": true,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "James Holden",
           "position": "HIT Coordinator",
           "split": Object {
@@ -549,6 +561,10 @@ Object {
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
           "split": Object {
@@ -893,6 +909,10 @@ Object {
           "hasCosts": true,
           "id": null,
           "isPrimary": true,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "James Holden",
           "position": "HIT Coordinator",
           "split": Object {
@@ -919,6 +939,10 @@ Object {
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
           "split": Object {
@@ -1244,6 +1268,10 @@ Object {
           "hasCosts": true,
           "id": null,
           "isPrimary": true,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "James Holden",
           "position": "HIT Coordinator",
           "split": Object {
@@ -1270,6 +1298,10 @@ Object {
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
           "split": Object {
