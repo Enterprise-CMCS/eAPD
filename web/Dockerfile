@@ -9,7 +9,6 @@ COPY yarn.lock .
 COPY web ./web
 COPY common ./common
 
-USER root
 RUN chown -R node:node /app
 USER node:node
 

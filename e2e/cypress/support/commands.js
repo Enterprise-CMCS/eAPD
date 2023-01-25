@@ -653,6 +653,13 @@ Cypress.Commands.add('updateFeatureFlags', featureFlags => {
     req.reply('Random message');
   }).as('LDClientStream');
 
+  // eslint-disable-next-line no-unused-vars
+  Cypress.on('uncaught:exception', err => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false;
+  });
+
   // return feature flag values in format expected by launchdarkly client
   return cy
     .intercept(

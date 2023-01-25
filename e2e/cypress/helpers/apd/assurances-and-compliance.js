@@ -12,11 +12,14 @@ export const testDefaultAssurancesAndCompliance = function () {
   beforeEach(function () {
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('assurances-compliance-test.json').as('assurancesAndCompliance');
-    cy.useStateStaff(this.apdUrl);
+    cy.useStateStaff();
+    cy.visit(this.apdUrl);
+    cy.wait('@LDApp');
   });
 
   it('should display the default settings in Assurance and Compliance', function () {
     const assurancesCompliancePage = new AssurancesCompliancePage();
+    const assurancesAndCompliance = this.assurancesAndCompliance;
 
     cy.goToAssurancesAndCompliance();
     cy.url().should('contain', '/assurances-and-compliance');
@@ -26,7 +29,7 @@ export const testDefaultAssurancesAndCompliance = function () {
       .as('previousActivitiesDiv');
 
     categories.forEach(category => {
-      const val = this.assurancesAndCompliance[category];
+      const val = assurancesAndCompliance[category];
 
       val.regulations.forEach((regulation, i) => {
         // Check that regulations link to the correct URLs
@@ -70,7 +73,10 @@ export const testDefaultAssurancesAndCompliance = function () {
 
 export const testAssurancesAndComplianceWithData = function () {
   beforeEach(function () {
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('assurances-compliance-test.json').as('assurancesAndCompliance');
+    cy.useStateStaff();
+    cy.visit(this.apdUrl);
   });
 
   it('should handle setting Assurance and Compliance', function () {
