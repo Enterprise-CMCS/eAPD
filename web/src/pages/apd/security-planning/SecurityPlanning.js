@@ -55,7 +55,7 @@ const SecurityPlanning = ({
     <React.Fragment>
       <Section id="security-planning" resource="securityPlanning">
         <hr className="custom-hr" />
-        <div className="data-entry-box">
+        <div className="data-entry-box ds-u-margin-y--3">
           <label
             id="label-for-security-interface-plan"
             className="ds-c-label--full-width"
