@@ -40,6 +40,7 @@ const StatePrioritiesAndScope = ({
     } else {
       clearErrors();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adminCheck]);
 
   return (
