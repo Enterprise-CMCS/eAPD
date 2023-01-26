@@ -18,6 +18,8 @@ import { securityPlanningSchema } from '@cms-eapd/common';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Instruction from '../../../components/Instruction';
+import { t } from '../../../i18n';
+import { titleCase } from 'title-case';
 
 const SecurityPlanning = ({
   securityInterfacePlan,
@@ -53,76 +55,76 @@ const SecurityPlanning = ({
     <React.Fragment>
       <Section id="security-planning" resource="securityPlanning">
         <hr className="custom-hr" />
-        <div className="ds-u-margin-y--3">
+        <div className="data-entry-box">
+          <label
+            id="label-for-security-interface-plan"
+            className="ds-c-label--full-width"
+            htmlFor="security-interface-plan"
+          >
+            <h2 className="ds-c-label">
+              {titleCase(
+                t('securityPlanning.securityInterfacePlan.instruction.label')
+              )}
+            </h2>
+          </label>
           <Instruction
             labelFor="security-interface-plan"
             source="securityPlanning.securityInterfacePlan.instruction"
           />
-          <div className="data-entry-box">
-            <label
-              id="label-for-security-interface-plan"
-              className="ds-c-label--full-width"
-              htmlFor="security-interface-plan"
-            >
-              Security Interface Plan
-            </label>
-            <Controller
-              name="securityAndInterfacePlan"
-              control={control}
-              render={({ field: { onChange, ...props } }) => (
-                <RichText
-                  {...props}
-                  id="security-interface-plan"
-                  iframe_aria_text="Security Interface Planning Text Area"
-                  content={securityInterfacePlan}
-                  onSync={html => {
-                    setPlanForSI(html);
-                    onChange(html);
-                  }}
-                  editorClassName="rte-textarea-l"
-                  error={
-                    adminCheck && errors?.securityAndInterfacePlan?.message
-                  }
-                />
-              )}
-            />
-          </div>
+          <Controller
+            name="securityAndInterfacePlan"
+            control={control}
+            render={({ field: { onChange, ...props } }) => (
+              <RichText
+                {...props}
+                id="security-interface-plan"
+                iframe_aria_text="Security Interface Planning Text Area"
+                content={securityInterfacePlan}
+                onSync={html => {
+                  setPlanForSI(html);
+                  onChange(html);
+                }}
+                editorClassName="rte-textarea-l"
+                error={adminCheck && errors?.securityAndInterfacePlan?.message}
+              />
+            )}
+          />
         </div>
-        <div className="ds-u-margin-y--3">
+        <div className="data-entry-box">
+          <label
+            id="label-for-business-continuity-and-disaster-recovery-plan"
+            className="ds-c-label--full-width"
+            htmlFor="bc-dr-plan"
+          >
+            <h2 className="ds-c-label">
+              {titleCase(t('securityPlanning.bcDrplan.instruction.label'))}
+            </h2>
+          </label>
           <Instruction
             labelFor="bc-dr-plan"
             source="securityPlanning.bcDrplan.instruction"
           />
-          <div className="data-entry-box">
-            <label
-              id="label-for-business-continuity-and-disaster-recovery-plan"
-              className="ds-c-label--full-width"
-              htmlFor="bc-dr-plan"
-            >
-              Business Continuity and Disaaster Recovery Plan
-            </label>
-            <Controller
-              name="businessContinuityAndDisasterRecovery"
-              control={control}
-              render={({ field: { onChange, ...props } }) => (
-                <RichText
-                  {...props}
-                  id="bc-dr-plan"
-                  iframe_aria_text="Business Continuity and Disaster Recovery Text Area"
-                  content={BCDRPlan}
-                  onSync={html => {
-                    setPlanforBCDR(html);
-                    onChange(html);
-                  }}
-                  editorClassName="rte-textarea-l"
-                  error={
-                    adminCheck &&
-                    errors?.businessContinuityAndDisasterRecovery?.message
-                  }
-                />
-              )}
-            />
-          </div>
+          <Controller
+            name="businessContinuityAndDisasterRecovery"
+            control={control}
+            render={({ field: { onChange, ...props } }) => (
+              <RichText
+                {...props}
+                id="bc-dr-plan"
+                iframe_aria_text="Business Continuity and Disaster Recovery Text Area"
+                content={BCDRPlan}
+                onSync={html => {
+                  setPlanforBCDR(html);
+                  onChange(html);
+                }}
+                editorClassName="rte-textarea-l"
+                error={
+                  adminCheck &&
+                  errors?.businessContinuityAndDisasterRecovery?.message
+                }
+              />
+            )}
+          />
         </div>
       </Section>
     </React.Fragment>

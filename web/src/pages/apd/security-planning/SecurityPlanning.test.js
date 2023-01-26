@@ -27,6 +27,6 @@ describe('<Security Planning />', () => {
 
   it.only('should load existing data', () => {
     setup({}, { initialState });
-    screen.getByLabelText('security-interface-plan');
+    screen.getByLabelText('Security and Interface Plan');
   });
 });
