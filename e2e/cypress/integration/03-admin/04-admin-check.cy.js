@@ -5,8 +5,9 @@ describe('tests state admin portal', () => {
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
-    cy.updateFeatureFlags({ enableMmis: false });
-    cy.useRegularUser('/');
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.useRegularUser();
+    cy.visit('/');
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
@@ -33,7 +34,8 @@ describe('tests state admin portal', () => {
     cy.wrap(apdId).as('apdId');
     cy.wrap(years).as('years');
 
-    cy.useStateStaff(apdUrl);
+    cy.useStateStaff();
+    cy.visit(apdUrl);
   });
 
   after(function () {

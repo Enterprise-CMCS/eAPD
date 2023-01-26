@@ -10,7 +10,8 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
 
   before(function () {
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.useStateStaff('/');
+    cy.useStateStaff();
+    cy.visit('/');
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
@@ -37,7 +38,8 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
     cy.wrap(apdId).as('apdId');
     cy.wrap(years).as('years');
 
-    cy.useStateStaff(apdUrl);
+    cy.useStateStaff();
+    cy.visit(apdUrl);
   });
 
   after(function () {

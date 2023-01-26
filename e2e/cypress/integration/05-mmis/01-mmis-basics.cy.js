@@ -17,9 +17,9 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   before(() => {
     activityPage = new ActivityPage();
-    cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
-    cy.useStateStaff('/');
+    cy.useStateStaff();
+    cy.visit('/');
 
     // Create a new MMIS APD
     cy.findAllByText('Create new').click();

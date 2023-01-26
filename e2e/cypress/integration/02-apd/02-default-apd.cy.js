@@ -20,7 +20,8 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.useStateStaff('/');
+    cy.useStateStaff();
+    cy.visit('/');
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
@@ -50,7 +51,8 @@ describe('Default APD', { tags: ['@apd', '@default', '@slow'] }, function () {
 
     cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.useStateStaff(apdUrl);
+    cy.useStateStaff();
+    cy.visit(apdUrl);
   });
 
   after(function () {
