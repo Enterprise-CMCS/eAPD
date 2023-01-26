@@ -31,18 +31,18 @@ describe('<ProposedBudget />', () => {
     setup({}, hitechApd);
 
     await waitFor(() => {
-      expect(screen.getByRole('heading', { name: 'Proposed Budget' }));
-      expect(screen.getByRole('heading', { name: 'Combined Activity Costs' }));
-      expect(screen.getByRole('heading', { name: 'Summary Budget Table' }));
-      expect(screen.getByRole('heading', { name: 'Quarterly Federal Share' }));
-      expect(
-        screen.getByRole('heading', {
-          name: 'Estimated Quarterly Incentive Payments'
-        })
-      );
-
       expect(screen.getAllByRole('table')).toHaveLength(32);
     });
+
+    expect(screen.getByRole('heading', { name: 'Proposed Budget' }));
+    expect(screen.getByRole('heading', { name: 'Combined Activity Costs' }));
+    expect(screen.getByRole('heading', { name: 'Summary Budget Table' }));
+    expect(screen.getByRole('heading', { name: 'Quarterly Federal Share' }));
+    expect(
+      screen.getByRole('heading', {
+        name: 'Estimated Quarterly Incentive Payments'
+      })
+    );
   });
 
   it.skip('render correctly mmis', () => {
