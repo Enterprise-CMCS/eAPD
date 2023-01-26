@@ -88,7 +88,10 @@ const StatePrioritiesAndScope = ({
         className="ds-u-margin-top--6"
         id="medicaid-program-priorities-container"
       >
-        <Instruction source="statePrioritiesAndScope.programPriorities" />
+        <Instruction
+          labelFor="medicaid-program-priorities-field"
+          source="statePrioritiesAndScope.programPriorities"
+        />
         <Controller
           name="medicaidProgramAndPriorities"
           control={control}
@@ -111,7 +114,10 @@ const StatePrioritiesAndScope = ({
         className="ds-u-margin-top--6"
         id="medicaid-enterprise-system-intro-container"
       >
-        <Instruction source="statePrioritiesAndScope.enterpriseSystemIntro" />
+        <Instruction
+          labelFor="medicaid-enterprise-system-intro"
+          source="statePrioritiesAndScope.enterpriseSystemIntro"
+        />
         <Controller
           name="mesIntroduction"
           control={control}
@@ -130,7 +136,10 @@ const StatePrioritiesAndScope = ({
       </div>
 
       <div className="ds-u-margin-top--6" id="scope-of-apd-container">
-        <Instruction source="statePrioritiesAndScope.scopeOfApd" />
+        <Instruction
+          labelFor="scope-of-apd"
+          source="statePrioritiesAndScope.scopeOfApd"
+        />
         <Controller
           name="scopeOfAPD"
           control={control}
