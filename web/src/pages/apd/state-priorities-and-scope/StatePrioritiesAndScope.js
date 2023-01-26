@@ -7,6 +7,11 @@ import RichText from '../../../components/RichText';
 import Instruction from '../../../components/Instruction';
 import { useForm, Controller } from 'react-hook-form';
 
+import {
+  setProgramPriorities,
+  setEnterpriseSystemIntro,
+  setScopeOfAPD
+} from '../../../redux/actions/editApd';
 import { selectAdminCheckEnabled } from '../../../redux/selectors/apd.selectors';
 
 import statePrioritiesAndScopeSchema from '@cms-eapd/common/schemas/statePrioritiesAndScope';
@@ -134,7 +139,9 @@ const mapStateToProps = state => ({
   adminCheck: selectAdminCheckEnabled(state)
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  set
+};
 
 export default connect(
   mapStateToProps,
