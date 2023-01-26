@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
-import { APD_TYPE } from '@cms-eapd/common/utils';
 import apd from '../../../fixtures/ak-apd.json';
 import budget from '../../../fixtures/ak-budget.json';
 import mmisApd from '../../../fixtures/ak-apd-mmis.json';
