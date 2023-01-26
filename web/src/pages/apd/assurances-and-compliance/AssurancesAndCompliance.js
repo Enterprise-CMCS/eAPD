@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
-import validationSchema from '@cms-eapd/common/schemas/assurancesAndCompliance';
+import { hitechAssurancesAndComplianceSchema } from '@cms-eapd/common/schemas/assurancesAndCompliance';
 
 import { titleCase } from 'title-case';
 import {
@@ -77,7 +77,7 @@ const AssurancesAndCompliance = ({
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(validationSchema)
+    resolver: joiResolver(hitechAssurancesAndComplianceSchema)
   });
 
   useEffect(() => {

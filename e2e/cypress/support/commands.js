@@ -353,8 +353,12 @@ Cypress.Commands.add('goToActivityOverview', activityIndex => {
   openActivitySection(activityIndex, 'Activity Overview');
 });
 
-Cypress.Commands.add('goToOutcomesAndMilestones', activityIndex => {
-  openActivitySection(activityIndex, 'Outcomes and Milestones');
+Cypress.Commands.add('goToActivitySchedule', activityIndex => {
+  openActivitySection(activityIndex, 'Activity Schedule and Milestones');
+});
+
+Cypress.Commands.add('goToOutcomesAndMetrics', activityIndex => {
+  openActivitySection(activityIndex, 'Outcomes and Metrics');
 });
 
 Cypress.Commands.add('goToStateStaffAndExpenses', activityIndex => {
@@ -408,7 +412,7 @@ Cypress.Commands.add('goToProposedSummary', () => {
 
       // Click on nav submenu button
       cy.get('a.ds-c-vertical-nav__label')
-        .contains(/Summary Budget by Activity/i)
+        .contains(/Combined Activity Costs/i)
         .click();
     });
 });
@@ -425,7 +429,7 @@ Cypress.Commands.add('goToProposedSummaryTable', () => {
 
       // Click on nav submenu button
       cy.get('a.ds-c-vertical-nav__label')
-        .contains(/Summary Budget by Activity/i)
+        .contains(/Combined Activity Costs/i)
         .click();
     });
 });
@@ -526,6 +530,10 @@ Cypress.Commands.add('goToExportView', () => {
   cy.contains('Continue to Review').click();
 });
 
+Cypress.Commands.add('goToSecurityPlanning', () => {
+  cy.get('a.ds-c-vertical-nav__label').contains('Security Planning').click();
+});
+
 Cypress.Commands.add('getEAPDTable', { prevSubject: true }, subject => {
   if (subject.get().length > 1)
     throw new Error(
@@ -599,6 +607,7 @@ function callback(violations) {
 }
 
 Cypress.Commands.add('checkPageA11y', () => {
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(2500);
   cy.injectAxeForA11y();
   cy.checkA11y(
@@ -609,7 +618,7 @@ Cypress.Commands.add('checkPageA11y', () => {
 });
 
 // Cypress command to turn on a feature flag for launch darkly
-Cypress.Commands.add('updateFeatureFlags', () => {
+Cypress.Commands.add('updateFeatureFlags', featureFlags => {
   // ignore api calls to events endpoint
   cy.intercept(
     { method: 'POST', hostname: /.*events.launchdarkly.us/ },
@@ -621,27 +630,43 @@ Cypress.Commands.add('updateFeatureFlags', () => {
     req.reply('Random message');
   }).as('LDClientStream');
 
-  cy.fixture('launch-darkly-flags.json').then(featureFlags => {
-    // return feature flag values in format expected by launchdarkly client
-    return cy
-      .intercept(
-        { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
-        req => {
-          req.reply(({ body }) => {
-            Cypress._.map(featureFlags, (ffValue, ffKey) => {
-              body[ffKey] = { value: ffValue };
-              return body;
-            });
+  // return feature flag values in format expected by launchdarkly client
+  return cy
+    .intercept(
+      { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
+      req => {
+        req.reply(({ body }) => {
+          Cypress._.map(featureFlags, (ffValue, ffKey) => {
+            body[ffKey] = { value: ffValue };
+            return body;
           });
-        }
-      )
-      .as('LDApp');
-  });
+        });
+      }
+    )
+    .as('LDApp');
 });
 
 Cypress.Commands.add('turnOnAdminCheck', () => {
   cy.contains('Export and Submit').click();
   cy.findByRole('button', { name: /Run Administrative Check/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('turnOffAdminCheck', () => {
+  cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('collapseAdminCheck', () => {
+  cy.findByRole('button', { name: /Collapse/i }).click({
+    force: true
+  });
+});
+
+Cypress.Commands.add('expandAdminCheck', () => {
+  cy.findByRole('button', { name: /Expand/i }).click({
     force: true
   });
 });

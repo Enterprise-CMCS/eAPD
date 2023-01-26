@@ -131,21 +131,6 @@ const populateUserRole = async (
   return null;
 };
 
-const getAllUsers = async ({
-  clean = true,
-  client = oktaClient,
-  populate = populateUserRole
-} = {}) => {
-  const users = await client.listUsers();
-
-  const full = await Promise.all(users.map(user => populate(user)));
-
-  if (clean) {
-    return full.map(sanitizeUser);
-  }
-  return full;
-};
-
 const getUserByID = async (
   id,
   checkOkta,
@@ -191,7 +176,6 @@ const getUserByID = async (
 };
 
 module.exports = {
-  getAllUsers,
   getUserByID,
   populateUserRole,
   sanitizeUser,

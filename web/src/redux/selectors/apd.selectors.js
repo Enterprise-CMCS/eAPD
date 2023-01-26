@@ -6,6 +6,12 @@ export const selectApds = ({ apd }) => apd;
 
 export const selectApdData = ({ apd: { data } }) => data;
 
+export const selectApdType = ({
+  apd: {
+    data: { apdType }
+  }
+}) => apdType;
+
 export const selectApdYears = ({
   apd: {
     data: { years }
@@ -140,6 +146,10 @@ export const selectApdDashboard = createSelector([selectApds], ({ byId }) =>
 );
 
 export const selectLastSavedTimestamp = state => state.apd.data.updated;
+export const selectSecurityInterfacePlan = state =>
+  state.apd.data.securityPlanning.securityAndInterfacePlan;
+export const selectBusinessContinuityAndDisasterRecovery = state =>
+  state.apd.data.securityPlanning.businessContinuityAndDisasterRecovery;
 
 export const selectAdminCheckErrors = state => state.apd.adminCheck?.errors;
 export const selectAdminCheckEnabled = state => state.apd.adminCheck?.enabled;

@@ -147,7 +147,7 @@ export const testExecutiveSummaryWithData = years => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.fixture('activity-overview-template.json').then(data => {
       activityData = data;
     });

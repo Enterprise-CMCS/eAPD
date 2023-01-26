@@ -20,7 +20,8 @@ export const addActivity = () => (dispatch, getState) => {
   });
   dispatch({
     type: APD_ACTIVITIES_CHANGE,
-    activities: getState().apd.data.activities
+    activities: getState().apd.data.activities,
+    apdType: getState().apd.data.apdType
   });
 };
 
@@ -32,7 +33,8 @@ export const removeActivity = index => (dispatch, getState) => {
   dispatch({ type: REMOVE_APD_ITEM, path: `/activities/${index}` });
   dispatch({
     type: APD_ACTIVITIES_CHANGE,
-    activities: getState().apd.data.activities
+    activities: getState().apd.data.activities,
+    apdType: getState().apd.data.apdType
   });
 };
 
@@ -50,6 +52,7 @@ export const setActivityName = (index, name) => (dispatch, getState) => {
   dispatch({
     type: APD_ACTIVITIES_CHANGE,
     activities: getState().apd.data.activities,
+    apdType: getState().apd.data.apdType,
     url: `/apd/activity/${index}/overview`
   });
 };

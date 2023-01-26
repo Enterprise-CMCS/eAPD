@@ -1,18 +1,18 @@
 import Joi from 'joi';
 
-export const activityName = Joi.string().required().messages({
-  'string.base': 'Activity Name is required.',
-  'string.empty': 'Activity Name is required.'
+export const activityNameSchema = Joi.string().required().messages({
+  'string.base': 'Provide an Activity name',
+  'string.empty': 'Provide an Activity name'
 });
 
-export const activityFundingSource = Joi.string().required().messages({
-  'string.base': 'Must select program type.',
-  'string.empty': 'Must select program type.'
+export const activityFundingSourceSchema = Joi.string().required().messages({
+  'string.base': 'Select a Program Type',
+  'string.empty': 'Select a Program Type'
 });
 
 const nameAndFundingSourceSchema = Joi.object({
-  name: activityName,
-  fundingSource: activityFundingSource
+  name: activityNameSchema,
+  fundingSource: activityFundingSourceSchema
 });
 
 export default nameAndFundingSourceSchema;

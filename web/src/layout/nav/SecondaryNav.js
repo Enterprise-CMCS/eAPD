@@ -22,6 +22,12 @@ const SecondaryNav = ({ activityCount, addActivity, location, useParams }) => {
     <Fragment>
       {showAddActivityLink && (
         <div className="pre-button-section-break">
+          <div
+            id="activity-button-description"
+            className="ds-u-margin-bottom--2"
+          >
+            Create an Additional Activity
+          </div>
           <Link
             to={`/apd/${apdId}/activities`}
             onClick={addActivity}

@@ -19,8 +19,14 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     cy.useStateStaff();
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.reload();
 
-    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.findAllByText('Create new').click();
+    cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
+    cy.findByRole('checkbox', { name: /Annual Update/i }).click();
+    cy.findByRole('button', { name: /Create an APD/i }).click();
+
     cy.findByRole(
       'heading',
       { name: /APD Overview/i },
@@ -37,7 +43,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   });
 
   beforeEach(() => {
-    cy.updateFeatureFlags();
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.visit(apdUrl);
   });
 

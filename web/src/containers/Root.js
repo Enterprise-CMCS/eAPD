@@ -1,25 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { withLDProvider, useFlags } from 'launchdarkly-react-client-sdk';
+import { withLDProvider } from 'launchdarkly-react-client-sdk';
 
 import { setLatestActivity } from '../redux/actions/auth';
-import { updateFlags } from '../redux/actions/flags';
 
 import App from './App';
 
 const Root = ({ history, store }) => {
-  // when the app opens, get all of the flags
-  // update the flags you are watching here
-  const { validation = true } = useFlags();
-
-  // use the updateFlags action if a reducer needs to use a flag
-  // then it can listen for the FLAGS_UPDATED type
-  useEffect(() => {
-    store.dispatch(updateFlags({ validation }));
-  }, [validation]); // eslint-disable-line react-hooks/exhaustive-deps
-
   // Create listener for location changing to track activity
   history.listen(() => {
     store.dispatch(setLatestActivity());

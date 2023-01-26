@@ -100,15 +100,6 @@ const getAffiliationByState = {
     tags,
     description: 'Get a list of all user affiliations for a US State',
     parameters: [stateIdParameter, filterStatusParameter],
-    requestBody: {
-      required: false,
-      content: jsonResponse({
-        type: 'object',
-        properties: {
-          filter_status
-        }
-      })
-    },
     responses: {
       200: {
         description: 'List of all user affiliations for a US State',
