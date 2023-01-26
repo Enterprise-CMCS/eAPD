@@ -99,6 +99,7 @@ const StatePrioritiesAndScope = ({
               iframe_aria_text="Medicaid Program and Priorities Text Area"
               content={medicaidProgramAndPriorities}
               onSync={handleProgramPriorities}
+              data-testid="medicaidProgramAndPriorities"
               editorClassName="rte-textarea-l"
               error={errors?.medicaidProgramAndPriorities?.message}
             />

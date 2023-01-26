@@ -9,7 +9,7 @@ describe('APD edit actions for MMIS APD program priorities', () => {
   it('dispatches an action for setting program priorities', () => {
     expect(setProgramPriorities('priorities')).toEqual({
       type: EDIT_APD,
-      path: '/statePrioritiesAndScope/programPriorities',
+      path: '/statePrioritiesAndScope/medicaidProgramAndPriorities',
       value: 'priorities'
     });
   });
@@ -19,7 +19,7 @@ describe('APD edit actions for MMIS APD enterprise system intro', () => {
   it('dispatches an action for setting mes intro', () => {
     expect(setEnterpriseSystemIntro('intro')).toEqual({
       type: EDIT_APD,
-      path: '/statePrioritiesAndScope/enterpriseSystemIntro',
+      path: '/statePrioritiesAndScope/mesIntroduction',
       value: 'intro'
     });
   });
