@@ -42,6 +42,13 @@ export const selectSummary = ({
   yearOptions
 });
 
+export const selectPriorities = state =>
+  state.apd.data.statePrioritiesAndScope.medicaidProgramAndPriorities;
+export const selectMesIntro = state =>
+  state.apd.data.statePrioritiesAndScope.mesIntroduction;
+export const selectScope = state =>
+  state.apd.data.statePrioritiesAndScope.scopeOfAPD;
+
 export const selectKeyPersonnel = state =>
   state.apd.data.keyStatePersonnel.keyPersonnel;
 export const selectKeyStatePersonnel = state =>

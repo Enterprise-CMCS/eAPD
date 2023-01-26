@@ -12,7 +12,12 @@ import {
   setEnterpriseSystemIntro,
   setScopeOfAPD
 } from '../../../redux/actions/editApd/statePrioritiesAndScope';
-import { selectAdminCheckEnabled } from '../../../redux/selectors/apd.selectors';
+import {
+  selectAdminCheckEnabled,
+  selectPriorities,
+  selectMesIntro,
+  selectScope
+} from '../../../redux/selectors/apd.selectors';
 
 import statePrioritiesAndScopeSchema from '@cms-eapd/common/schemas/statePrioritiesAndScope';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -69,7 +74,7 @@ const StatePrioritiesAndScope = ({
 
   const handleScope = html => {
     setScope(html);
-    setValue('medicaidProgramAndPriorities', html);
+    setValue('scopeOfAPD', html);
     if (adminCheck) {
       trigger();
     }
@@ -92,6 +97,7 @@ const StatePrioritiesAndScope = ({
               {...props}
               id="medicaid-program-priorities-field"
               iframe_aria_text="Medicaid Program and Priorities Text Area"
+              content={medicaidProgramAndPriorities}
               onSync={handleProgramPriorities}
               editorClassName="rte-textarea-l"
               error={errors?.medicaidProgramAndPriorities?.message}
@@ -113,6 +119,7 @@ const StatePrioritiesAndScope = ({
               {...props}
               id="medicaid-enterprise-system-intro"
               iframe_aria_text="Medicaid Enterprise System Introduction Text Area"
+              content={mesIntroduction}
               onSync={handleMESIntro}
               editorClassName="rte-textarea-l"
               error={errors?.mesIntroduction?.message}
@@ -131,6 +138,7 @@ const StatePrioritiesAndScope = ({
               {...props}
               id="scope-of-apd"
               iframe_aria_text="Scope of APD Text Area"
+              content={scopeOfAPD}
               onSync={handleScope}
               editorClassName="rte-textarea-l"
               error={errors?.scopeOfAPD?.message}
@@ -157,7 +165,10 @@ StatePrioritiesAndScope.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  adminCheck: selectAdminCheckEnabled(state)
+  adminCheck: selectAdminCheckEnabled(state),
+  medicaidProgramAndPriorities: selectPriorities(state),
+  mesIntroduction: selectMesIntro(state),
+  scopeOfAPD: selectScope(state)
 });
 
 const mapDispatchToProps = {

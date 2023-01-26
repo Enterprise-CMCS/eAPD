@@ -6,7 +6,7 @@ import { EDIT_APD } from './symbols';
  */
 export const setProgramPriorities = text => ({
   type: EDIT_APD,
-  path: `/statePrioritiesAndScope/programPriorities`,
+  path: `/statePrioritiesAndScope/medicaidProgramAndPriorities`,
   value: text
 });
 
@@ -16,7 +16,7 @@ export const setProgramPriorities = text => ({
  */
 export const setEnterpriseSystemIntro = text => ({
   type: EDIT_APD,
-  path: `/statePrioritiesAndScope/enterpriseSystemIntro`,
+  path: `/statePrioritiesAndScope/mesIntroduction`,
   value: text
 });
 
