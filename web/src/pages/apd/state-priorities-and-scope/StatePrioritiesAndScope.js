@@ -11,21 +11,25 @@ import {
   setProgramPriorities,
   setEnterpriseSystemIntro,
   setScopeOfAPD
-} from '../../../redux/actions/editApd';
+} from '../../../redux/actions/editApd/statePrioritiesAndScope';
 import { selectAdminCheckEnabled } from '../../../redux/selectors/apd.selectors';
 
 import statePrioritiesAndScopeSchema from '@cms-eapd/common/schemas/statePrioritiesAndScope';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 const StatePrioritiesAndScope = ({
+  adminCheck,
   medicaidProgramAndPriorities,
   mesIntroduction,
   scopeOfAPD,
-  adminCheck
+  setPP,
+  setESI,
+  setScope
 }) => {
   const {
     control,
     formState: { errors },
+    setValue,
     trigger,
     clearErrors
   } = useForm({
@@ -45,8 +49,31 @@ const StatePrioritiesAndScope = ({
     } else {
       clearErrors();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [adminCheck]);
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleProgramPriorities = html => {
+    setPP(html);
+    setValue('medicaidProgramAndPriorities', html);
+    if (adminCheck) {
+      trigger();
+    }
+  };
+
+  const handleMESIntro = html => {
+    setESI(html);
+    setValue('mesIntroduction', html);
+    if (adminCheck) {
+      trigger();
+    }
+  };
+
+  const handleScope = html => {
+    setScope(html);
+    setValue('medicaidProgramAndPriorities', html);
+    if (adminCheck) {
+      trigger();
+    }
+  };
 
   return (
     <Section id="state-priorities-and-scope" resource="statePrioritiesAndScope">
@@ -60,15 +87,12 @@ const StatePrioritiesAndScope = ({
         <Controller
           name="medicaidProgramAndPriorities"
           control={control}
-          render={({ field: { onChange, value, ...props } }) => (
+          render={({ field: { ...props } }) => (
             <RichText
               {...props}
               id="medicaid-program-priorities-field"
               iframe_aria_text="Medicaid Program and Priorities Text Area"
-              content={value}
-              onSync={html => {
-                onChange(html);
-              }}
+              onSync={handleProgramPriorities}
               editorClassName="rte-textarea-l"
               error={errors?.medicaidProgramAndPriorities?.message}
             />
@@ -84,15 +108,12 @@ const StatePrioritiesAndScope = ({
         <Controller
           name="mesIntroduction"
           control={control}
-          render={({ field: { onChange, value, ...props } }) => (
+          render={({ field: { ...props } }) => (
             <RichText
               {...props}
               id="medicaid-enterprise-system-intro"
               iframe_aria_text="Medicaid Enterprise System Introduction Text Area"
-              content={value}
-              onSync={html => {
-                onChange(html);
-              }}
+              onSync={handleMESIntro}
               editorClassName="rte-textarea-l"
               error={errors?.mesIntroduction?.message}
             />
@@ -105,15 +126,12 @@ const StatePrioritiesAndScope = ({
         <Controller
           name="scopeOfAPD"
           control={control}
-          render={({ field: { onChange, value, ...props } }) => (
+          render={({ field: { ...props } }) => (
             <RichText
               {...props}
               id="scope-of-apd"
               iframe_aria_text="Scope of APD Text Area"
-              content={value}
-              onSync={html => {
-                onChange(html);
-              }}
+              onSync={handleScope}
               editorClassName="rte-textarea-l"
               error={errors?.scopeOfAPD?.message}
             />
@@ -125,10 +143,13 @@ const StatePrioritiesAndScope = ({
 };
 
 StatePrioritiesAndScope.propTypes = {
+  adminCheck: PropTypes.bool,
   medicaidProgramAndPriorities: PropTypes.string.isRequired,
   mesIntroduction: PropTypes.string.isRequired,
   scopeOfAPD: PropTypes.string.isRequired,
-  adminCheck: PropTypes.bool
+  setPP: PropTypes.func.isRequired,
+  setESI: PropTypes.func.isRequired,
+  setScope: PropTypes.func.isRequired
 };
 
 StatePrioritiesAndScope.defaultProps = {
@@ -140,7 +161,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  set
+  setPP: setProgramPriorities,
+  setESI: setEnterpriseSystemIntro,
+  setScope: setScopeOfAPD
 };
 
 export default connect(
