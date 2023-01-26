@@ -498,30 +498,37 @@ export const calculateKeyStatePersonnelCost = (keyPersonnel, year) => {
 };
 
 // Todo: Add comment block documenting how this works
-export const calulateKeyStatePersonnelFedShare = (keyPersonnel, year) => {
-  // Return the (cost * fte) * fed-split percentage
-  return (
+export const calculateKeyStatePersonnelTotal = (keyPersonnel, year) => {
+  return Math.round(keyPersonnel?.costs[year] * keyPersonnel?.fte[year] || 0);
+};
+
+// Todo: Add comment block documenting how this works
+export const calculateKeyStatePersonnelMedicaid = (keyPersonnel, year) => {
+  return Math.round(
     keyPersonnel?.costs[year] *
-    keyPersonnel?.fte[year] *
-    (keyPersonnel?.split[year].federal / 100)
+      keyPersonnel?.fte[year] *
+      (keyPersonnel?.medicaidShare?.[year] / 100) || 0
   );
 };
 
 // Todo: Add comment block documenting how this works
-export const calulateKeyStatePersonnelStateShare = (keyPersonnel, year) => {
-  // Return the (cost * fte) * state-split percentage
-  return (
-    keyPersonnel?.costs[year] *
-    keyPersonnel?.fte[year] *
-    (keyPersonnel?.split[year].state / 100)
+export const calculateKeyStatePersonnelFed = (keyPersonnel, year) => {
+  return Math.round(
+    keyPersonnel?.costs?.[year] *
+      keyPersonnel?.fte?.[year] *
+      (keyPersonnel?.medicaidShare?.[year] / 100) *
+      (keyPersonnel?.split?.[year].federal / 100) || 0
   );
 };
 
 // Todo: Add comment block documenting how this works
-// Tif question: what should this be?
-export const calulateKeyStatePersonnelMedicaidShare = (keyPersonnel, year) => {
-  keyPersonnel + year;
-  return 1;
+export const calculateKeyStatePersonnelState = (keyPersonnel, year) => {
+  return Math.round(
+    keyPersonnel?.costs?.[year] *
+      keyPersonnel?.fte?.[year] *
+      (keyPersonnel?.medicaidShare?.[year] / 100) *
+      (keyPersonnel?.split?.[year].state / 100) || 0
+  );
 };
 
 /**
@@ -538,8 +545,7 @@ export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
   // just start bringing in each calculate budget function and refactor it
   // to work with just the key state personnel
 
-  // Hackily update the mmis budget to have a default keyStatePersonnel object
-  // Todo: make this not hacky. Refactor the defaultMMISBudgetObject above
+  // Todo: Consider moving this to be part of defaultMMISBudgetObject above
   budget.mmis = {
     ...budget.mmis,
     keyStatePersonnel: getDefaultFundingSourceObject(years)
@@ -553,54 +559,95 @@ export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
         // For this first pass through, refactor the below code(from sumCostsForFundingSourceByCategory) to
         // add the keyPersonnel costs to the combined[year] and combined.total.total
         // This will need to be refactored to get cost based on split and/or FTE
-        const cost = calculateKeyStatePersonnelCost(keyPersonnel, year);
-        if (budget?.combined?.[year]?.total !== undefined) {
-          budget.combined[year].total += cost;
-        }
-        if (budget?.combined?.total?.total !== undefined) {
-          budget.combined.total.total += cost;
-        }
+        // const cost = calculateKeyStatePersonnelCost(keyPersonnel, year);
+        // if (budget?.combined?.[year]?.total !== undefined) {
+        //   budget.combined[year].total += cost;
+        // }
+        // if (budget?.combined?.total?.total !== undefined) {
+        //   budget.combined.total.total += cost;
+        // }
+
+        const keyStatePersonnelTotal = calculateKeyStatePersonnelTotal(
+          keyPersonnel,
+          year
+        );
+        const keyStatePersonnelMedicaid = calculateKeyStatePersonnelMedicaid(
+          keyPersonnel,
+          year
+        );
+        const keyStatePersonnelFed = calculateKeyStatePersonnelFed(
+          keyPersonnel,
+          year
+        );
+        const keyStatePersonnelState = calculateKeyStatePersonnelState(
+          keyPersonnel,
+          year
+        );
 
         // Next we imitate sumShareCostsForFundingSource to update the mmis funding source budget.
-        // Note: Not 100% sure this is needed. Need to understand if this needs to happen or only the sumMMISbyFFP
-        // Todo: determine how to compute costCategoryShare?
+        // Add total cost (before medicaid and fed-state split) to
+        // mmis.keyStatePersonnel.year.total
+        // mmis.keyStatePersonnel.total.total
+        // mmis.combined.year.total
+        // mmis.combined.total.total
+        // combined.year.total
+        // combined.total.total
+        budget['mmis']['keyStatePersonnel'][year].total +=
+          keyStatePersonnelTotal;
+        budget['mmis']['keyStatePersonnel'].total.total +=
+          keyStatePersonnelTotal;
+        budget['mmis']['combined'][year].total += keyStatePersonnelTotal;
+        budget['mmis']['combined'].total.total += keyStatePersonnelTotal;
+        budget['combined'][year].total += keyStatePersonnelTotal;
+        budget['combined'].total.total += keyStatePersonnelTotal;
+
+        // Add federal cost (total cost * medicaid share * fed-split) to
+        // mmis.keyStatePersonnel.year.federal
+        // mmis.keyStatePersonnel.total.federal
+        // mmis.combined.year.federal
+        // mmis.combined.total.federal
+        // combined.year.federal
+        // combined.total.federal
         budget['mmis']['keyStatePersonnel'][year].federal +=
-          calulateKeyStatePersonnelFedShare(keyPersonnel, year);
+          keyStatePersonnelFed;
         budget['mmis']['keyStatePersonnel'].total.federal +=
-          calulateKeyStatePersonnelFedShare(keyPersonnel, year);
+          keyStatePersonnelFed;
+        budget['mmis']['combined'][year].federal += keyStatePersonnelFed;
+        budget['mmis']['combined'].total.federal += keyStatePersonnelFed;
+        budget['combined'][year].federal += keyStatePersonnelFed;
+        budget['combined'].total.federal += keyStatePersonnelFed;
 
+        // Add state cost (total cost * medicaid share * state-split) to
+        // mmis.keyStatePersonnel.year.state
+        // mmis.keyStatePersonnel.total.state
+        // mmis.combined.year.state
+        // mmis.combined.total.state
+        // combined.year.state
+        // combined.total.state
         budget['mmis']['keyStatePersonnel'][year].state +=
-          calulateKeyStatePersonnelStateShare(keyPersonnel, year);
+          keyStatePersonnelState;
         budget['mmis']['keyStatePersonnel'].total.state +=
-          calulateKeyStatePersonnelStateShare(keyPersonnel, year);
+          keyStatePersonnelState;
+        budget['mmis']['combined'][year].state += keyStatePersonnelState;
+        budget['mmis']['combined'].total.state += keyStatePersonnelState;
+        budget['combined'][year].state += keyStatePersonnelState;
+        budget['combined'].total.state += keyStatePersonnelState;
 
+        // Add medicaid cost (total cost * medicaid share) to
+        // mmis.keyStatePersonnel.year.medicaid
+        // mmis.keyStatePersonnel.total.medicaid
+        // mmis.combined.year.medicaid
+        // mmis.combined.total.medicaid
+        // combined.year.medicaid
+        // combined.total.medicaid
         budget['mmis']['keyStatePersonnel'][year].medicaid +=
-          calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
+          keyStatePersonnelMedicaid;
         budget['mmis']['keyStatePersonnel'].total.medicaid +=
-          calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
-
-        // Plus the subtotals for the cost categories (i.e., the Medicaid share)
-        budget['mmis'].combined[year].federal +=
-          calulateKeyStatePersonnelFedShare(keyPersonnel, year);
-        budget['mmis'].combined.total.federal +=
-          calulateKeyStatePersonnelFedShare(keyPersonnel, year);
-
-        budget['mmis'].combined[year].state +=
-          calulateKeyStatePersonnelStateShare(keyPersonnel, year);
-        budget['mmis'].combined.total.state +=
-          calulateKeyStatePersonnelStateShare(keyPersonnel, year);
-
-        budget['mmis'].combined[year].medicaid +=
-          calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
-        budget['mmis'].combined.total.medicaid +=
-          calulateKeyStatePersonnelMedicaidShare(keyPersonnel, year);
-
-        // budget.combined[year].federal += totalMedicaidCostShares.fedShare;
-        // budget.combined.total.federal += totalMedicaidCostShares.fedShare;
-        // budget.combined[year].state += totalMedicaidCostShares.stateShare;
-        // budget.combined.total.state += totalMedicaidCostShares.stateShare;
-        // budget.combined[year].medicaid += totalMedicaidCost;
-        // budget.combined.total.medicaid += totalMedicaidCost;
+          keyStatePersonnelMedicaid;
+        budget['mmis']['combined'][year].medicaid += keyStatePersonnelMedicaid;
+        budget['mmis']['combined'].total.medicaid += keyStatePersonnelMedicaid;
+        budget['combined'][year].medicaid += keyStatePersonnelMedicaid;
+        budget['combined'].total.medicaid += keyStatePersonnelMedicaid;
 
         return budget;
       }, updatedBudget);
