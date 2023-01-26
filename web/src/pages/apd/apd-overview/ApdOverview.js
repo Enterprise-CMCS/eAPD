@@ -10,81 +10,41 @@ import {
 import { connect } from 'react-redux';
 import DeleteModal from '../../../components/DeleteModal';
 
-import { useForm, Controller } from 'react-hook-form';
-import { joiResolver } from '@hookform/resolvers/joi';
-
-import { hitechOverviewSchema } from '@cms-eapd/common/schemas/apdOverview';
 import { APD_TYPE } from '@cms-eapd/common/utils/constants';
 
 import {
   addYear,
   removeYear,
-  setApdName,
-  setNarrativeForHIE,
-  setNarrativeForHIT,
-  setNarrativeForMMIS,
-  setProgramOverview
+  setApdName
 } from '../../../redux/actions/editApd';
-import RichText from '../../../components/RichText';
-import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
 
-import {
-  selectSummary,
-  selectAdminCheckEnabled
-} from '../../../redux/selectors/apd.selectors';
-import { getAllFundingSources } from '../../../redux/selectors/activities.selectors';
+import { selectSummary } from '../../../redux/selectors/apd.selectors';
 import { useFlags } from 'launchdarkly-react-client-sdk';
+
+import ApdOverviewHITECHFields from './ApdOverviewHITECHFields';
+import ApdOverviewMMISFields from './ApdOverviewMMISFields';
+
+const renderApdTypeSpecificFields = apdType => {
+  const apdTypeSpecificFieldsMapping = {
+    [APD_TYPE.HITECH]: <ApdOverviewHITECHFields />,
+    [APD_TYPE.MMIS]: <ApdOverviewMMISFields />
+  };
+  return apdTypeSpecificFieldsMapping[apdType];
+};
 
 const ApdOverview = ({
   addApdYear,
   apdType,
   name,
-  narrativeHIE,
-  narrativeHIT,
-  narrativeMMIS,
-  programOverview,
   removeApdYear,
-  setHIE,
-  setHIT,
-  setMMIS,
   setName,
-  setOverview,
   years,
-  yearOptions,
-  fundingSources,
-  adminCheck
+  yearOptions
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
   const { enableMmis } = useFlags();
-
-  const {
-    control,
-    formState: { errors },
-    setValue,
-    trigger,
-    clearErrors
-  } = useForm({
-    defaultValues: {
-      fundingSources,
-      programOverview,
-      narrativeHIT,
-      narrativeHIE,
-      narrativeMMIS
-    },
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    resolver: joiResolver(hitechOverviewSchema)
-  });
-
-  useEffect(() => {
-    if (adminCheck) {
-      trigger();
-    } else {
-      clearErrors();
-    }
-  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const changeName = ({ target: { value } }) => {
     setName(value);
@@ -118,38 +78,6 @@ const ApdOverview = ({
     } else {
       addApdYear(year);
       e.target.checked = true;
-    }
-  };
-
-  const handleProgramOverview = html => {
-    setOverview(html);
-    setValue('programOverview', html);
-    if (adminCheck) {
-      trigger();
-    }
-  };
-
-  const handleHIEOverview = html => {
-    setHIE(html);
-    setValue('narrativeHIE', html);
-    if (adminCheck) {
-      trigger();
-    }
-  };
-
-  const handleHITOverview = html => {
-    setHIT(html);
-    setValue('narrativeHIT', html);
-    if (adminCheck) {
-      trigger();
-    }
-  };
-
-  const handleMMISOverview = html => {
-    setMMIS(html);
-    setValue('narrativeMMIS', html);
-    if (adminCheck) {
-      trigger();
     }
   };
 
@@ -247,90 +175,7 @@ const ApdOverview = ({
           type="checkbox"
         />
       </div>
-      <div className="ds-u-margin-y--3">
-        <Instruction
-          labelFor="program-introduction-field"
-          source="apd.introduction.instruction"
-        />
-        <Controller
-          name="programOverview"
-          control={control}
-          render={({ field: { ...props } }) => (
-            <RichText
-              {...props}
-              id="program-introduction-field"
-              iframe_aria_text="Program Introduction Text Area"
-              content={programOverview}
-              onSync={handleProgramOverview}
-              editorClassName="rte-textarea-l"
-              error={errors?.programOverview?.message}
-            />
-          )}
-        />
-      </div>
-      <div className="ds-u-margin-bottom--3">
-        <Instruction
-          labelFor="hit-overview-field"
-          source="apd.hit.instruction"
-        />
-        <Controller
-          name="narrativeHIT"
-          control={control}
-          render={({ field: { ...props } }) => (
-            <RichText
-              {...props}
-              id="hit-overview-field"
-              iframe_aria_text="HIT Overview Text Area"
-              content={narrativeHIT}
-              onSync={handleHITOverview}
-              editorClassName="rte-textarea-l"
-              error={errors?.narrativeHIT?.message}
-            />
-          )}
-        />
-      </div>
-      <div className="ds-u-margin-bottom--3">
-        <Instruction
-          labelFor="hie-overview-field"
-          source="apd.hie.instruction"
-        />
-        <Controller
-          name="narrativeHIE"
-          control={control}
-          render={({ field: { ...props } }) => (
-            <RichText
-              {...props}
-              id="hie-overview-field"
-              iframe_aria_text="HIE Overview Text Area"
-              content={narrativeHIE}
-              onSync={handleHIEOverview}
-              editorClassName="rte-textarea-l"
-              error={errors?.narrativeHIE?.message}
-            />
-          )}
-        />
-      </div>
-      <div>
-        <Instruction
-          labelFor="mmis-overview-field"
-          source="apd.mmis.instruction"
-        />
-        <Controller
-          name="narrativeMMIS"
-          control={control}
-          render={({ field: { ...props } }) => (
-            <RichText
-              {...props}
-              id="mmis-overview-field"
-              iframe_aria_text="MMIS Overview Text Area"
-              content={narrativeMMIS}
-              onSync={handleMMISOverview}
-              editorClassName="rte-textarea-l"
-              error={errors?.narrativeMMIS?.message}
-            />
-          )}
-        />
-      </div>
+      {renderApdTypeSpecificFields(apdType)}
       {elementDeleteFFY && (
         <DeleteModal objType="FFY" onCancel={onCancel} onDelete={onRemove} />
       )}
@@ -343,29 +188,11 @@ ApdOverview.propTypes = {
   apdType: PropTypes.string,
   removeApdYear: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  narrativeHIE: PropTypes.string.isRequired,
-  narrativeHIT: PropTypes.string.isRequired,
-  narrativeMMIS: PropTypes.string.isRequired,
-  programOverview: PropTypes.string.isRequired,
-  setHIE: PropTypes.func.isRequired,
-  setHIT: PropTypes.func.isRequired,
-  setMMIS: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired,
-  setOverview: PropTypes.func.isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
-  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  fundingSources: PropTypes.array,
-  adminCheck: PropTypes.bool
-};
-
-ApdOverview.defaultProps = {
-  fundingSources: ['HIT'],
-  adminCheck: false
+  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const mapStateToProps = state => ({
-  fundingSources: getAllFundingSources(state),
-  adminCheck: selectAdminCheckEnabled(state),
   apdType: state.apd.data.apdType,
   ...selectSummary(state)
 });
@@ -373,11 +200,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   addApdYear: addYear,
   removeApdYear: removeYear,
-  setHIE: setNarrativeForHIE,
-  setHIT: setNarrativeForHIT,
-  setMMIS: setNarrativeForMMIS,
-  setName: setApdName,
-  setOverview: setProgramOverview
+  setName: setApdName
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApdOverview);

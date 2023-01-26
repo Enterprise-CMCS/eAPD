@@ -79,13 +79,30 @@ export const medicaidBusinessAreasSchema = Joi.object({
   otherMedicaidBusinessAreas: Joi.when('other', {
     is: true,
     then: Joi.string().min(1).required().messages({
-      'string.base': 'Provide another Medicaid Business Area(s)',
-      'string.empty': 'Provide another Medicaid Business Area(s)',
-      'string.required': 'Provide another Medicaid Business Area(s)'
+      'string.base': 'Provide an other Medicaid Business Area(s)',
+      'string.empty': 'Provide an other Medicaid Business Area(s)',
+      'string.required': 'Provide an other Medicaid Business Area(s)'
     }),
     otherwise: Joi.any()
   })
-}).or('waiverSupportSystems', 'assetVerificationSystem');
+}).or(
+  'waiverSupportSystems',
+  'assetVerificationSystem',
+  'claimsProcessing',
+  'decisionSupportSystemDW',
+  'electronicVisitVerification',
+  'encounterProcessingSystemMCS',
+  'financialManagement',
+  'healthInformationExchange',
+  'longTermServicesSupports',
+  'memberManagement',
+  'pharmacyBenefitManagementPOS',
+  'programIntegrity',
+  'providerManagement',
+  'thirdPartyLiability',
+  'other',
+  { isPresent: resolved => resolved === true }
+);
 
 export const mmisOverviewSchema = Joi.object({
   updateStatus: updateStatusSchema,

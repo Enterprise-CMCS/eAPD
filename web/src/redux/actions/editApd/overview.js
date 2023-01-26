@@ -78,3 +78,15 @@ export const setProgramOverview = text => ({
   path: '/apdOverview/programOverview',
   value: text
 });
+
+/**
+ * Set medicaid business area for the APD
+ * @param {String} key Key name of business area
+ * @param {Boolean} value Value of business area
+ */
+export const setBusinessAreaField = (key, value) => ({
+  type: EDIT_APD,
+  path: `/apdOverview/medicaidBusinessAreas/${key}`,
+  // path: `/apdOverview/medicaidBusinessAreas`,
+  value: value
+});

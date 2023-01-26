@@ -15,16 +15,8 @@ jest.mock('../../../util/api', () => ({
 const defaultProps = {
   addApdYear: jest.fn(),
   name: 'apd #1',
-  narrativeHIE: 'narrative HIE',
-  narrativeHIT: 'narrative HIT',
-  narrativeMMIS: 'narrative MMIS',
-  programOverview: '',
   removeApdYear: jest.fn(),
-  setHIE: jest.fn(),
-  setHIT: jest.fn(),
-  setMMIS: jest.fn(),
   setName: jest.fn(),
-  setOverview: jest.fn(),
   years: ['2023', '2024'],
   yearOptions: ['2023', '2024', '2025']
 };
@@ -55,17 +47,6 @@ describe('APD overview component', () => {
     jest.resetAllMocks();
     jest.setTimeout(30000);
     resetLDMocks();
-  });
-
-  test('dispatches on text change', async () => {
-    mockFlags({ enableMmis: false });
-    jest.setTimeout(30000);
-    const { user } = await setup();
-
-    await user.type(screen.getByLabelText('Introduction'), 'it is really cool');
-    expect(screen.getByLabelText('Introduction')).toHaveValue(
-      'it is really cool'
-    );
   });
 
   test('user can add a year', async () => {
