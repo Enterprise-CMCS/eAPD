@@ -1,4 +1,4 @@
-import { arrToObj, convertToNumber } from './formatting';
+import { arrToObj, convertToNumber } from './formatting.js';
 
 describe('reformat tests', () => {
   beforeEach(() => {

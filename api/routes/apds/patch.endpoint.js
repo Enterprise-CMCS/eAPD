@@ -1,12 +1,12 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
-const { mnAPDId, akAPDId, badAPDId } = require('../../seeds/test/apds');
+} from '../../endpoint-tests/utils.js';
+import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();
@@ -25,7 +25,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
   describe('when authenticated as a user with permission', () => {
     let api;
     beforeAll(() => {
-      api = login('state-admin');
+      api = login('state-staff');
     });
 
     it('with a non-existant apd ID', async () => {

@@ -7,13 +7,14 @@ import ApdKeyPersonReview from './ApdKeyPersonReview';
 import FormAndReviewList from '../../../components/FormAndReviewList';
 import {
   selectApdYears,
-  selectKeyPersonnel
+  selectKeyPersonnel,
+  selectApdType
 } from '../../../redux/selectors/apd.selectors';
 
 import { removeKeyPersonnel } from '../../../redux/actions/editApd';
 import { getKeyPersonnel } from '../../../redux/reducers/apd';
 
-const ApdStateKeyPersonnel = ({ remove, list, years }) => {
+const ApdStateKeyPersonnel = ({ remove, list, years, apdType }) => {
   const [localList, setLocalList] = useState(list);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const ApdStateKeyPersonnel = ({ remove, list, years }) => {
 
   const addClick = () => {
     const isPrimary = list.length === 0;
-    const newListItem = getKeyPersonnel(years, isPrimary);
+    const newListItem = getKeyPersonnel(years, isPrimary, apdType);
     setLocalList([...localList, newListItem]);
   };
 
@@ -43,6 +44,7 @@ const ApdStateKeyPersonnel = ({ remove, list, years }) => {
       onDeleteClick={index => remove(index)}
       noDataMessage="Primary Point of Contact has not been added for this activity."
       years={years}
+      apdType={apdType}
     />
   );
 };
@@ -50,12 +52,14 @@ const ApdStateKeyPersonnel = ({ remove, list, years }) => {
 ApdStateKeyPersonnel.propTypes = {
   remove: PropTypes.func.isRequired,
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   list: selectKeyPersonnel(state),
-  years: selectApdYears(state)
+  years: selectApdYears(state),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {

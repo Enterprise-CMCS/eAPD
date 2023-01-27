@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.createTable('auth_affiliations', table => {
     table.comment('stores a user role for a particular US state');
     table.increments('id');
@@ -23,6 +23,6 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async knex => {
+export const down = async knex => {
   await knex.schema.dropTable('auth_affiliations');
 };

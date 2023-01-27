@@ -1,12 +1,12 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
-const { akAPDId, badAPDId } = require('../../../seeds/test/apds');
+} from '../../../endpoint-tests/utils.js';
+import { akAPDId, badAPDId } from '../../../seeds/test/apds.js';
 
 describe('APD events endpoints', () => {
   describe('Record an event associated with an APD | POST /apds/:id/events', () => {

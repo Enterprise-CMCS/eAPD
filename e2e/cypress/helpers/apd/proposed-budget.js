@@ -1,26 +1,28 @@
-import ProposedBudgetPage from '../../page-objects/proposed-budget-page';
-import ActivitySchedulePage from '../../page-objects/activity-schedule-page';
+import ProposedBudgetPage from '../../page-objects/proposed-budget-page.js';
+import ActivitySchedulePage from '../../page-objects/activity-schedule-page.js';
 
-export const testDefaultProposedBudget = years => {
+export const testDefaultProposedBudget = function () {
   let proposedBudgetPage;
-  let activityList;
-  let budgetData;
 
-  before(() => {
+  before(function () {
     proposedBudgetPage = new ProposedBudgetPage();
+  });
+
+  beforeEach(function () {
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.fixture('proposed-budget-test.json').as('budgetData');
+
+    cy.useStateStaff();
+    cy.visit(this.apdUrl);
     const activityPage = new ActivitySchedulePage();
     cy.goToActivityScheduleSummary();
-    activityList = activityPage.getActivityScheduleOverviewNameList();
+    cy.wrap(activityPage.getActivityScheduleOverviewNameList()).as(
+      'activityList'
+    );
   });
 
-  beforeEach(() => {
-    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.fixture('proposed-budget-test.json').then(data => {
-      budgetData = data;
-    });
-  });
-
-  it('should have the default values for Proposed Budget', () => {
+  it('should have the default values for Proposed Budget', function () {
+    const years = this.years;
     cy.goToProposedBudget();
 
     cy.url().should('include', '/proposed-budget');
@@ -28,113 +30,115 @@ export const testDefaultProposedBudget = years => {
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
-      expected: budgetData.defaultCombinedActivityCost
+      expected: this.budgetData.defaultCombinedActivityCost
     });
 
     proposedBudgetPage.verifyActvityBreakdown({
       years,
-      activityList,
-      expected: budgetData.defaultActivityBreakdown
+      activityList: this.activityList,
+      expected: this.budgetData.defaultActivityBreakdown
     });
 
     proposedBudgetPage.verifySummaryBudgetTables({
       years: [...years, 'total'],
-      expected: budgetData.defaultSummaryBudget,
-      expectedTotals: budgetData.defaultSummaryBudgetTotals
+      expected: this.budgetData.defaultSummaryBudget,
+      expectedTotals: this.budgetData.defaultSummaryBudgetTotals
     });
 
     proposedBudgetPage.verifyQuarterlyFederalShareByActivity({
       years,
-      expected: budgetData.defaultQFSByActivity
+      expected: this.budgetData.defaultQFSByActivity
     });
 
     proposedBudgetPage.verifyQuarterlyFederalShareByTotals({
-      expectedHITandHIETotal: budgetData.defaultHITandHIETotal,
-      expectedMMISTotal: budgetData.defaultMMISTotal
+      expectedHITandHIETotal: this.budgetData.defaultHITandHIETotal,
+      expectedMMISTotal: this.budgetData.defaultMMISTotal
     });
 
     proposedBudgetPage.verifyEQIPFormByFFY({
       years,
-      expected: budgetData.defaultEQIP
+      expected: this.budgetData.defaultEQIP
     });
   });
 
-  it('should display the default values for Proposed Budget in export view', () => {
+  it('should display the default values for Proposed Budget in export view', function () {
+    const years = this.years;
     cy.goToExportView();
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
-      expected: budgetData.defaultCombinedActivityCost
+      expected: this.budgetData.defaultCombinedActivityCost
     });
 
     proposedBudgetPage.verifyActvityBreakdown({
       years,
-      activityList,
-      expected: budgetData.defaultActivityBreakdown
+      activityList: this.activityList,
+      expected: this.budgetData.defaultActivityBreakdown
     });
 
     proposedBudgetPage.verifySummaryBudgetTables({
       years: [...years, 'total'],
-      expected: budgetData.defaultSummaryBudget,
-      expectedTotals: budgetData.defaultSummaryBudgetTotals
+      expected: this.budgetData.defaultSummaryBudget,
+      expectedTotals: this.budgetData.defaultSummaryBudgetTotals
     });
 
     proposedBudgetPage.verifyQuarterlyFederalShareByActivity({
       years,
-      expected: budgetData.defaultQFSByActivity
+      expected: this.budgetData.defaultQFSByActivity
     });
 
     proposedBudgetPage.verifyQuarterlyFederalShareByTotals({
-      expectedHITandHIETotal: budgetData.defaultHITandHIETotal,
-      expectedMMISTotal: budgetData.defaultMMISTotal
+      expectedHITandHIETotal: this.budgetData.defaultHITandHIETotal,
+      expectedMMISTotal: this.budgetData.defaultMMISTotal
     });
 
     proposedBudgetPage.verifyEQIPFormByFFY({
       years,
-      expected: budgetData.defaultEQIP
+      expected: this.budgetData.defaultEQIP
     });
 
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
 
-export const testProposedBudgetWithData = years => {
+export const testProposedBudgetWithData = function () {
   let proposedBudgetPage;
-  let activityList;
-  let budgetData;
 
-  before(() => {
+  before(function () {
     proposedBudgetPage = new ProposedBudgetPage();
-    const activityPage = new ActivitySchedulePage();
-
-    cy.goToActivityScheduleSummary();
-    cy.findByRole('heading', {
-      name: /Activity Schedule Summary/i,
-      timeout: 10000
-    }).should('exist');
-    activityList = activityPage.getActivityScheduleOverviewNameList();
   });
 
-  beforeEach(() => {
+  beforeEach(function () {
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.fixture('proposed-budget-test.json').then(data => {
-      budgetData = data;
-    });
+    cy.fixture('proposed-budget-test.json').as('budgetData');
+
+    cy.useStateStaff();
+    cy.visit(this.apdUrl);
+    const activityPage = new ActivitySchedulePage();
+    cy.goToActivityScheduleSummary();
+    cy.wrap(activityPage.getActivityScheduleOverviewNameList()).as(
+      'activityList'
+    );
   });
 
-  it('should have the correct values for Proposed Budget', () => {
+  it('should have the correct values for Proposed Budget', function () {
+    const years = this.years;
+    const activityList = this.activityList;
+    const budgetData = this.budgetData;
+
     cy.goToProposedBudget();
+
     cy.url().should('include', '/proposed-budget');
     cy.findByRole('heading', { level: 2, name: 'Proposed Budget' });
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
       years,
-      expected: budgetData.populatedCombinedActivityCost
+      expected: this.budgetData.populatedCombinedActivityCost
     });
 
     proposedBudgetPage.verifyActvityBreakdown({
       years,
-      activityList,
+      activityList: activityList,
       expected: budgetData.populatedActivityBreakdown
     });
 
@@ -163,7 +167,11 @@ export const testProposedBudgetWithData = years => {
     cy.waitForSave();
   });
 
-  it('should export the correct values for Proposed Budget Export View', () => {
+  it('should export the correct values for Proposed Budget Export View', function () {
+    const years = this.years;
+    const activityList = this.activityList;
+    const budgetData = this.budgetData;
+
     cy.goToExportView();
 
     proposedBudgetPage.verifyComputableMedicaidCostByFFY({
@@ -173,7 +181,7 @@ export const testProposedBudgetWithData = years => {
 
     proposedBudgetPage.verifyActvityBreakdown({
       years,
-      activityList,
+      activityList: activityList,
       expected: budgetData.populatedActivityBreakdown
     });
 

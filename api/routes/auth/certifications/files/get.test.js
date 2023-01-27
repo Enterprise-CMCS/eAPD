@@ -1,13 +1,9 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { can } = require('../../../../middleware');
-const { loggedIn } = require('../../../../middleware/auth');
-
-const getEndpoint = require('./get');
-
-const mockExpress = require('../../../../util/mockExpress');
-const mockResponse = require('../../../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import { can, loggedIn } from '../../../../middleware/index.js';
+import getEndpoint from './get.js';
+import mockExpress from '../../../../util/mockExpress.js';
+import mockResponse from '../../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -15,21 +11,21 @@ let next;
 
 tap.test('state certifications files endpoints', async endpointTest => {
   const di = {
-    getFile: sinon.stub(),
-    putFile: sinon.stub(),
+    getFile: stub(),
+    putFile: stub(),
     crypto: {
-      createHash: sinon.stub(),
-      update: sinon.stub(),
-      digest: sinon.stub()
+      createHash: stub(),
+      update: stub(),
+      digest: stub()
     },
-    validateDoc: sinon.stub(),
-    generateFileName: sinon.stub()
+    validateDoc: stub(),
+    generateFileName: stub()
   };
 
   endpointTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
+    next = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -40,7 +36,7 @@ tap.test('state certifications files endpoints', async endpointTest => {
         '/auth/certifications/files/:fileID',
         loggedIn,
         can('view-state-certifications'),
-        sinon.match.func
+        match.func
       ),
       '/auth/certifications/files/:fileId GET endpoint is setup'
     );

@@ -1,11 +1,15 @@
-const { format } = require('date-fns');
-const fs = require('fs');
-const logger = require('../../logger')('user seeder');
-const { oktaClient } = require('../../auth/oktaAuth');
-const { createUsersToAdd } = require('../shared/set-up-users');
-const { issueTokens } = require('../shared/issueTokens');
+import { format } from 'date-fns';
+import fs from 'fs';
+import loggerFactory from '../../logger/index.js';
+import { oktaClient } from '../../auth/oktaAuth.js';
+import createUsersToAdd from '../shared/set-up-users.js';
+import issueTokens from '../shared/issueTokens.js';
+import path from 'path';
 
-exports.seed = async knex => {
+const logger = loggerFactory('user seeder');
+const __dirname = path.resolve();
+
+const seed = async knex => {
   const { oktaAffiliations, stateCertifications, oktaUsers } =
     await createUsersToAdd(knex, oktaClient);
   await knex('auth_affiliations').insert(oktaAffiliations);
@@ -28,11 +32,13 @@ exports.seed = async knex => {
   // save the tokens to a file
   try {
     fs.writeFileSync(
-      `${__dirname}/../test/tokens.json`,
-      JSON.stringify(testTokens, null, 4)
+      `${__dirname}/seeds/test/tokens.js`,
+      `export default ${JSON.stringify(testTokens, null, 4)}`
     );
   } catch (err) {
     // not much to do here but log it
     logger.error(`Errors creating tokens ${err}`);
   }
 };
+
+export default seed;

@@ -1,4 +1,4 @@
-const { forAllYears, APD_TYPE } = require('@cms-eapd/common');
+import { forAllYears, APD_TYPE } from '@cms-eapd/common';
 
 const getNewHitechApd = (years, yearOptions) => {
   const regsGenerator = () => ({
@@ -113,4 +113,4 @@ const getNewHitechApd = (years, yearOptions) => {
   };
 };
 
-module.exports = getNewHitechApd;
+export default getNewHitechApd;

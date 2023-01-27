@@ -4,10 +4,11 @@ const { _ } = Cypress;
 class ProposedBudgetPage {
   // Combined Activity Costs - CAC
 
-  getTotalComputableMedicaidCostByFFY = ({ ffy }) =>
-    cy.contains(`FFY ${ffy} Total Computable Medicaid Cost`).next();
+  getTotalComputableMedicaidCostByFFY({ ffy }) {
+    return cy.contains(`FFY ${ffy} Total Computable Medicaid Cost`).next();
+  }
 
-  verifyComputableMedicaidCostByFFY = ({ years, expected }) => {
+  verifyComputableMedicaidCostByFFY({ years, expected }) {
     _.forEach(years, (ffy, index) => {
       cy.get('[data-cy="CACTable"]')
         .eq(index)
@@ -25,19 +26,22 @@ class ProposedBudgetPage {
           });
         });
     });
-  };
+    return this;
+  }
 
   // State and Contractor Cost Breakdown
-  getBreakdownByFFYAndActivity = ({ ffy, index }) =>
-    cy.get(`#activity-${index + 1}-${ffy}`);
+  getBreakdownByFFYAndActivity({ ffy, index }) {
+    return cy.get(`#activity-${index + 1}-${ffy}`);
+  }
 
-  getBreakdownByFFYAndActivityAndExpense = ({ ffy, index, expense }) =>
-    this.getBreakdownByFFYAndActivity({ ffy, index })
+  getBreakdownByFFYAndActivityAndExpense({ ffy, index, expense }) {
+    return this.getBreakdownByFFYAndActivity({ ffy, index })
       .contains(expense)
       .parent()
       .nextUntil('.budget-table--row__header');
+  }
 
-  verifyActvityBreakdown = ({ years, activityList, expected }) => {
+  verifyActvityBreakdown({ years, activityList, expected }) {
     _.forEach(years, (ffy, ffyIndex) => {
       _.forEach(activityList, (activityName, index) => {
         const { expenses, totalComputableMedicaidCost } =
@@ -55,10 +59,11 @@ class ProposedBudgetPage {
         });
       });
     });
-  };
+    return this;
+  }
 
   // Summary Budget Table
-  verifySummaryBudgetTables = ({ years, expected, expectedTotals }) => {
+  verifySummaryBudgetTables({ years, expected, expectedTotals }) {
     _.forEach(years, (ffy, index) => {
       const { programTypes } = expected[index];
       _.forEach(programTypes, (item, type) => {
@@ -81,10 +86,11 @@ class ProposedBudgetPage {
           expect(tableData).to.deep.include(expectedTotals);
         });
     });
-  };
+    return this;
+  }
 
   // Quarterly Federal Share - QFS
-  verifyQuarterlyFederalShareByActivity = ({ years, expected }) => {
+  verifyQuarterlyFederalShareByActivity({ years, expected }) {
     _.forEach(years, (ffy, index) => {
       const { programTypes } = expected[index];
       _.forEach(programTypes, (item, type) => {
@@ -111,12 +117,13 @@ class ProposedBudgetPage {
         }
       });
     });
-  };
+    return this;
+  }
 
-  verifyQuarterlyFederalShareByTotals = ({
+  verifyQuarterlyFederalShareByTotals({
     expectedHITandHIETotal,
     expectedMMISTotal
-  }) => {
+  }) {
     cy.get('[data-cy="QFSTotals"]')
       .eq(0)
       .then(table => {
@@ -136,10 +143,11 @@ class ProposedBudgetPage {
             expect(tableData).to.deep.include(expectedMMISTotal);
           });
       });
-  };
+    return this;
+  }
 
   // Estimated Quarterly Incentive Payments - EQIP
-  fillInEQIPFormByFFY = ({ years, expected }) => {
+  fillInEQIPFormByFFY({ years, expected }) {
     _.forEach(years, (ffy, index) => {
       const ffyValues = expected[index];
       cy.get('[data-cy="EQIPTable"]') // Could fail here
@@ -165,9 +173,10 @@ class ProposedBudgetPage {
           });
         });
     });
-  };
+    return this;
+  }
 
-  verifyEQIPFormByFFY = ({ years, expected }) => {
+  verifyEQIPFormByFFY({ years, expected }) {
     _.forEach(years, (ffy, index) => {
       const ffyValues = expected[index];
       _.forEach(ffyValues, (typeValues, type) => {
@@ -182,7 +191,8 @@ class ProposedBudgetPage {
           });
       });
     });
-  };
+    return this;
+  }
 }
 
 export default ProposedBudgetPage;

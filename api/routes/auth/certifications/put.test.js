@@ -1,13 +1,9 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { can } = require('../../../middleware');
-const { loggedIn } = require('../../../middleware/auth');
-
-const putEndpoint = require('./put');
-
-const mockExpress = require('../../../util/mockExpress');
-const mockResponse = require('../../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import { can, loggedIn } from '../../../middleware/index.js';
+import putEndpoint from './put.js';
+import mockExpress from '../../../util/mockExpress.js';
+import mockResponse from '../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -15,15 +11,15 @@ let next;
 
 tap.test('state certifications post endpoint', async putTest => {
   const di = {
-    matchStateAdminCertification: sinon.stub(),
-    updateAuthAffiliation: sinon.stub(),
-    getAllActiveRoles: sinon.stub()
+    matchStateAdminCertification: stub(),
+    updateAuthAffiliation: stub(),
+    getAllActiveRoles: stub()
   };
 
   putTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
+    next = stub();
   });
 
   putTest.test('setup', async setupTest => {
@@ -34,7 +30,7 @@ tap.test('state certifications post endpoint', async putTest => {
         '/auth/certifications',
         loggedIn,
         can('edit-state-certifications'),
-        sinon.match.func
+        match.func
       ),
       '/auth/certifications PUT endpoint is setup'
     );

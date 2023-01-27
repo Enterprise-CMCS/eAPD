@@ -1,19 +1,19 @@
-const isPast = require('date-fns/isPast');
-const knex = require('./knex');
+import { isPast } from 'date-fns';
+import knex from './knex.js';
 
-const getAuthActivities = async ({ db = knex } = {}) =>
+export const getAuthActivities = async ({ db = knex } = {}) =>
   db('auth_activities').select();
 
-const getAuthActivitiesByIDs = async (ids, { db = knex } = {}) =>
+export const getAuthActivitiesByIDs = async (ids, { db = knex } = {}) =>
   db('auth_activities').whereIn('id', ids).select();
 
-const getAuthRoleByID = async (roleID, { db = knex } = {}) =>
+export const getAuthRoleByID = async (roleID, { db = knex } = {}) =>
   db('auth_roles').where('id', roleID).first();
 
-const getAuthRoleByName = async (roleName, { db = knex } = {}) =>
+export const getAuthRoleByName = async (roleName, { db = knex } = {}) =>
   db('auth_roles').where('name', roleName).first();
 
-const getActiveAuthRoles = async ({ db = knex } = {}) => {
+export const getActiveAuthRoles = async ({ db = knex } = {}) => {
   const roles = await db('auth_roles').where('isActive', true).select();
   await Promise.all(
     roles.map(async role => {
@@ -43,7 +43,7 @@ const getActiveAuthRoles = async ({ db = knex } = {}) => {
  * @function
  * @returns {Object} { id, name, activities: [] }
  */
-const getRolesAndActivities = async ({ db = knex } = {}) =>
+export const getRolesAndActivities = async ({ db = knex } = {}) =>
   db
     .select({
       id: 'roles.id',
@@ -66,7 +66,7 @@ const getRolesAndActivities = async ({ db = knex } = {}) =>
  * @function
  * @returns {Array} state ids
  */
-const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
+export const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
   db
     .select('state_id', 'status')
     .from('auth_affiliations')
@@ -85,7 +85,7 @@ const getUserAffiliatedStates = async (userId, { db = knex } = {}) =>
  * @function
  * @returns {Array}
  */
-const getExpiredUserAffiliations = async (userId, { db = knex } = {}) =>
+export const getExpiredUserAffiliations = async (userId, { db = knex } = {}) =>
   db('auth_affiliations')
     .select()
     .where('user_id', userId)
@@ -100,7 +100,11 @@ const getExpiredUserAffiliations = async (userId, { db = knex } = {}) =>
  * @function
  * @returns {Object}
  */
-const getAffiliationByState = async (userId, stateId, { db = knex } = {}) =>
+export const getAffiliationByState = async (
+  userId,
+  stateId,
+  { db = knex } = {}
+) =>
   db('auth_affiliations')
     .where('user_id', userId)
     .andWhere('state_id', stateId)
@@ -113,7 +117,10 @@ const getAffiliationByState = async (userId, stateId, { db = knex } = {}) =>
  * @function
  * @returns {Object} { stateId: activities }
  */
-const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
+export const getUserPermissionsForStates = async (
+  userId,
+  { db = knex } = {}
+) => {
   const roles = (await getRolesAndActivities()) || [];
 
   return db
@@ -140,7 +147,7 @@ const getUserPermissionsForStates = async (userId, { db = knex } = {}) => {
  * @function
  * @returns {Object}
  */
-const auditUserLogin = async (
+export const auditUserLogin = async (
   { user_id, username, name, state_id, role_id, status }, // eslint-disable-line camelcase
   { db = knex } = {}
 ) =>
@@ -152,17 +159,3 @@ const auditUserLogin = async (
     role_id, // eslint-disable-line camelcase
     affiliation_status: status
   });
-
-module.exports = {
-  getAuthActivities,
-  getAuthActivitiesByIDs,
-  getAuthRoleByID,
-  getAuthRoleByName,
-  getActiveAuthRoles,
-  getRolesAndActivities,
-  getUserAffiliatedStates,
-  getUserPermissionsForStates,
-  getExpiredUserAffiliations,
-  getAffiliationByState,
-  auditUserLogin
-};

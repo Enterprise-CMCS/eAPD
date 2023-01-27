@@ -1,17 +1,17 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
-const {
+} from '../../../endpoint-tests/utils.js';
+import {
   mnAPDId,
   akAPDId,
   akMMISId,
   badAPDId
-} = require('../../../seeds/test/apds');
+} from '../../../seeds/test/apds.js';
 
 describe('APD files endpoints', () => {
   describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {

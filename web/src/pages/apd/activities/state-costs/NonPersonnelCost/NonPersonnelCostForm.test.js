@@ -7,7 +7,7 @@ import {
 } from 'apd-testing-library';
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 import userEvent from '@testing-library/user-event';
-import { APD_TYPE } from '@cms-eapd/common/utils';
+import { APD_TYPE } from '@cms-eapd/common';
 
 import NonPersonnelCostForm from './NonPersonnelCostForm';
 

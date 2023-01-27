@@ -1,8 +1,10 @@
-const logger = require('../../logger')('roles route get');
-const { getAllActiveRoles: gr } = require('../../db');
-const { can } = require('../../middleware');
+import loggerFactory from '../../logger/index.js';
+import { getAllActiveRoles as gr } from '../../db/index.js';
+import { can } from '../../middleware/index.js';
 
-module.exports = (app, { getAllActiveRoles = gr } = {}) => {
+const logger = loggerFactory('roles route get');
+
+export default (app, { getAllActiveRoles = gr } = {}) => {
   const accessibleRoles = {
     'eAPD System Admin': null,
     'eAPD Federal Admin': ['eAPD Federal Admin', 'eAPD State Admin'],

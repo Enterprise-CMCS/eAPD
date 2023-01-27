@@ -1,11 +1,10 @@
-const sinon = require('sinon');
+import { createSandbox } from 'sinon';
 
-const sandbox = sinon.createSandbox();
+const sandbox = createSandbox();
 const oktaClient = {
   listUsers: sandbox.stub(),
   getUser: sandbox.stub()
 };
-const callOktaEndpoint = sandbox.stub();
 const verifier = sandbox.stub();
 
 const reset = () => {
@@ -13,9 +12,8 @@ const reset = () => {
   sandbox.resetHistory();
 };
 
-module.exports = {
+export default {
   reset,
   oktaClient,
-  callOktaEndpoint,
   verifier
 };

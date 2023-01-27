@@ -1,5 +1,5 @@
-const morgan = require('morgan');
-const { logger } = require('./winston');
+import morgan from 'morgan';
+import logger from './winston.js';
 
 // https://www.npmjs.com/package/morgan#tokens
 morgan.token('id', req => req.id);
@@ -28,4 +28,4 @@ const formatAsJSON = `{${tokenString}, "content-length": ":res[content-length]"}
 
 const requestLoggerMiddleware = morgan(formatAsJSON, { stream: logger.stream });
 
-module.exports = { requestLoggerMiddleware };
+export default requestLoggerMiddleware;

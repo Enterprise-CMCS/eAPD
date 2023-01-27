@@ -699,7 +699,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: save OpenAPI JSON
-          command: node -e "console.log(JSON.stringify(require('./api/routes/openAPI/index.js')))" > openapi.json
+          command: node -e "import('./api/routes/openAPI/index.js').then(loadedModule => console.log(JSON.stringify(loadedModule.default)))" > openapi.json
       - run:
           name: validate
           command: |
@@ -774,7 +774,6 @@ jobs:
             yarn install --frozen-lockfile
             echo "$DOCKER_EAPD_PW" |docker login -u $DOCKER_EAPD_UN --password-stdin
             docker-compose up -d
-            #docker-compose exec api yarn workspace @cms-eapd/common build
             sleep 10
             echo "Sleep has run"
             docker-compose exec api yarn run migrate
@@ -1440,9 +1439,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install zip -y
             yarn install --frozen-lockfile --production=true --network-timeout 1000000
-            yarn workspace @cms-eapd/common build
-            yarn workspace @cms-eapd/api build
-            zip -r /tmp/backend.zip api/* common/* package.json yarn.lock babel.config.js
+            zip -r /tmp/backend.zip api/* common/* package.json yarn.lock
       - store_artifacts:
           path: /tmp/backend.zip
           destination: backend.zip

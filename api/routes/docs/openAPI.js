@@ -32,7 +32,7 @@ const getSystemAccessDoc = {
   }
 };
 
-module.exports = {
+export default {
   ...getAccountRegistrationDoc,
   ...getSystemAccessDoc
 };

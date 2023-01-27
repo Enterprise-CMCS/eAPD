@@ -1,4 +1,4 @@
-import contractorResourcesSchema from './contractorResources';
+import contractorResourcesSchema from './contractorResources.js';
 
 describe('contractor validation', () => {
   test('valid contractor, useHourly true', () => {

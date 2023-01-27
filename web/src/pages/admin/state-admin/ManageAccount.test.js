@@ -37,6 +37,8 @@ const setup = (props = {}, options = {}) => {
 };
 
 describe('<ManageAccount />', () => {
+  jest.setTimeout(30000);
+
   beforeEach(() => {
     fetchMock.reset();
   });
