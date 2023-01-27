@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
+import { MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING } from '@cms-eapd/common/utils/constants';
 import { mmisOverviewSchema } from '@cms-eapd/common/schemas/apdOverview';
 
 import { setBusinessAreaField } from '../../../redux/actions/editApd';
@@ -43,58 +44,61 @@ const ApdOverviewMMISFields = ({
   const handleBusinessAreas = e => {
     const labelElement = document.querySelector(`label[for='${e.target.id}']`);
     const labelText = labelElement.textContent;
-    setBusinessAreaField(labelText, e.target.checked);
+    const key = Object.keys(MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING).find(
+      key => MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[key] === labelText
+    );
+    setBusinessAreaField(key, e.target.checked);
   };
 
   const getBusinessAreaChoices = () => {
     const businessAreasForCheckbox = Object.assign({}, medicaidBusinessAreas);
-    delete businessAreasForCheckbox.otherMedicaidBusinessAreas;
+    delete businessAreasForCheckbox.otherMedicaidBusinessAreas; // This is a text area field handled as a child element of the 'other' key
+
     let choiceList = [];
+
     for (const [key, value] of Object.entries(businessAreasForCheckbox)) {
-      console.log(`${key}: ${value}`);
+      let choice = {
+        label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[key],
+        value: key,
+        checked: value
+      };
+
       if (key === 'other') {
-        choiceList.push({
-          label: key,
-          value: key,
-          checked: value,
-          checkedChildren: (
-            <div className="ds-c-choice__checkedChild">
-              <Controller
-                name="otherMedicaidBusinessAreas"
-                control={control}
-                render={({ field: { onBlur } }) => (
-                  <TextArea
-                    value={medicaidBusinessAreas.otherMedicaidBusinessAreas}
-                    label="Other Medicaid Business Area(s)"
-                    name="otherMedicaidBusinessAreasText"
-                    data-cy="other_details"
-                    hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
-                    onBlur={onBlur}
-                    onChange={e => {
-                      setValue('otherMedicaidBusinessAreas', e.target.value);
-                      setBusinessAreaField(
-                        'otherMedicaidBusinessAreas',
-                        e.target.value
-                      );
-                    }}
-                    errorMessage={
-                      errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas
-                        ?.messages
-                    }
-                    errorPlacement="bottom"
-                  />
-                )}
-              />
-            </div>
-          )
-        });
-      } else {
-        choiceList.push({
-          checked: value,
-          label: key,
-          value: key
-        });
+        choice.checkedChildren = (
+          <div className="ds-c-choice__checkedChild">
+            <Controller
+              name="otherMedicaidBusinessAreas"
+              control={control}
+              render={({ field: { onBlur } }) => (
+                <TextArea
+                  value={medicaidBusinessAreas.otherMedicaidBusinessAreas}
+                  label={
+                    MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
+                  }
+                  name="otherMedicaidBusinessAreasText"
+                  data-cy="other_details"
+                  hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
+                  onBlur={onBlur}
+                  onChange={e => {
+                    setValue('otherMedicaidBusinessAreas', e.target.value);
+                    setBusinessAreaField(
+                      'otherMedicaidBusinessAreas',
+                      e.target.value
+                    );
+                  }}
+                  errorMessage={
+                    errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas
+                      ?.messages
+                  }
+                  errorPlacement="bottom"
+                />
+              )}
+            />
+          </div>
+        );
       }
+
+      choiceList.push(choice);
     }
     return choiceList;
   };
