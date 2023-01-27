@@ -45,7 +45,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 >
   <form
     aria-label="form"
-    index={1}
+    id="key-personnel-1"
     onSubmit={[Function]}
   >
     <button
@@ -68976,7 +68976,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `
 <form
   aria-label="form"
-  index={1}
+  id="key-personnel-1"
   onSubmit={[Function]}
 >
   <button
@@ -69484,7 +69484,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
 exports[`the ApdKeyPersonForm component renders correctly if the person is a primary contact 1`] = `
 <form
   aria-label="form"
-  index={0}
+  id="key-personnel-0"
   onSubmit={[Function]}
 >
   <button

@@ -2,7 +2,7 @@
 
 exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
 <form
-  index={1}
+  id="metrics-1"
   key="activity93-index1-form"
   onSubmit={[Function]}
 >
