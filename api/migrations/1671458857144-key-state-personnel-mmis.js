@@ -9,7 +9,7 @@ const logger = loggerFactory(
 /**
  * Update HITECH APDs to have a default 90-10 split for key state personnel
  */
-async function up() {
+export const up = async () => {
   // Grab all APDs
   await setup();
   const apds = await HITECH.find().lean();
@@ -65,11 +65,9 @@ async function up() {
     logger.error(err);
   });
   await teardown();
-}
+};
 
 /**
  * Make any changes that UNDO the up function side effects here (if possible)
  */
-async function down() {}
-
-module.exports = { up, down };
+export const down = async () => {};
