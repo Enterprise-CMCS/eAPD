@@ -939,8 +939,22 @@ Object {
           "hasCosts": false,
           "id": null,
           "isPrimary": false,
+          "medicaidShare": Object {
+            "2022": 100,
+            "2023": 100,
+          },
           "name": "Fred Johnson",
           "position": "Project Management Office Director",
+          "split": Object {
+            "2022": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "2023": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
       ],
       "medicaidDirector": Object {
@@ -956,7 +970,7 @@ Object {
         "zip": "12345",
       },
     },
-    "name": "HITECH IAPD",
+    "name": "new APD name",
     "previousActivities": Object {
       "actualExpenditures": Object {
         "2019": Object {
