@@ -1,10 +1,10 @@
-const logger = require('../../logger')('affiliations route get');
-const {
-  getAffiliationsByUserId: _getAffiliationsByUserId
-} = require('../../db');
-const { loggedIn } = require('../../middleware');
+import loggerFactory from '../../logger/index.js';
+import { getAffiliationsByUserId as _getAffiliationsByUserId } from '../../db/index.js';
+import { loggedIn } from '../../middleware/index.js';
 
-module.exports = (
+const logger = loggerFactory('affiliations route get');
+
+export default (
   app,
   { getAffiliationsByUserId = _getAffiliationsByUserId } = {}
 ) => {

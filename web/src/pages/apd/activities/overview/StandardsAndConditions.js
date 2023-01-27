@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import { standardsAndConditionsSchema } from '@cms-eapd/common/schemas/activityOverview';
+import { standardsAndConditionsSchema as schema } from '@cms-eapd/common';
 import {
   setActivityStandardAndConditionDoesNotSupportExplanation,
   setActivityStandardAndConditionSupportExplanation
@@ -41,7 +41,7 @@ const StandardsAndConditions = ({
       supports: supports,
       doesNotSupport: doesNotSupport
     },
-    resolver: joiResolver(standardsAndConditionsSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

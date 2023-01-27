@@ -1,14 +1,14 @@
-const sinon = require('sinon');
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
+import { useFakeTimers, stub } from 'sinon';
+import tap from 'tap';
+import dbMock from './dbMock.test.js';
 
-const {
+import {
   createOktaUser,
   updateOktaUser,
   createOrUpdateOktaUser,
   sanitizeProfile,
   createOrUpdateOktaUserFromOkta
-} = require('./oktaUsers');
+} from './oktaUsers.js';
 
 tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
   //
@@ -19,7 +19,7 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
   // Might solve a mystery
   // Or rewrite history!
   //
-  sinon.useFakeTimers(Date.UTC(1904, 9, 3, 0, 0, 0, 0));
+  useFakeTimers(Date.UTC(1904, 9, 3, 0, 0, 0, 0));
   const db = dbMock('okta_users');
 
   const toSanitize = {
@@ -109,7 +109,7 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
   oktaUsersTests.test(
     'createOrUpdateOktaUserFromOkta creating oktaUser',
     async test => {
-      const okta = sinon.stub();
+      const okta = stub();
       okta.getUser = () => {
         return { profile: toSanitize };
       };
@@ -134,7 +134,7 @@ tap.test('database wrappers / oktaUsers', async oktaUsersTests => {
   oktaUsersTests.test(
     'createOrUpdateOktaUserFromOkta updating oktaUser',
     async test => {
-      const okta = sinon.stub();
+      const okta = stub();
       okta.getUser = () => {
         return { profile: toSanitize };
       };

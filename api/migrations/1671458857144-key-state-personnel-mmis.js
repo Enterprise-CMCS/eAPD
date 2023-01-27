@@ -1,13 +1,15 @@
-const logger = require('../logger')(
+import loggerFactory from '../logger/index.js';
+import { setup, teardown } from '../db/mongodb.js';
+import { HITECH } from '../models/index.js';
+
+const logger = loggerFactory(
   'mongoose-migrate/migrate-key-state-personnel-mmis'
 );
-const { setup, teardown } = require('../db/mongodb');
-const { HITECH } = require('../models');
 
 /**
  * Update HITECH APDs to have a default 90-10 split for key state personnel
  */
-async function up() {
+export const up = async () => {
   // Grab all APDs
   await setup();
   const apds = await HITECH.find().lean();
@@ -63,11 +65,9 @@ async function up() {
     logger.error(err);
   });
   await teardown();
-}
+};
 
 /**
  * Make any changes that UNDO the up function side effects here (if possible)
  */
-async function down() {}
-
-module.exports = { up, down };
+export const down = async () => {};

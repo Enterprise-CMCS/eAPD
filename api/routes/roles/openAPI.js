@@ -1,7 +1,4 @@
-const {
-  requiresAuth,
-  schema: { arrayOf, jsonResponse }
-} = require('../openAPI/helpers');
+import { requiresAuth, jsonResponse, arrayOf } from '../openAPI/helpers.js';
 
 const id = {
   type: 'integer',
@@ -36,4 +33,4 @@ const getRoles = {
   }
 };
 
-module.exports = requiresAuth(getRoles);
+export default requiresAuth(getRoles);

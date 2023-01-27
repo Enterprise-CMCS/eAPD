@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.table('state_admin_certifications', table => {
     table.dropColumn('certifiedBy'); // replaced by the ones below
     table.dropColumn('username'); // replaced by uploadedBy
@@ -70,7 +70,7 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async knex => {
+export const down = async knex => {
   await knex.schema.table('state_admin_certifications', table => {
     table
       .string('certifiedBy')

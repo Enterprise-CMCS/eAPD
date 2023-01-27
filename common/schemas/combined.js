@@ -1,4 +1,7 @@
-const {
+import Joi from 'joi';
+
+import {
+  // activitiesDashboard,
   hitechOverviewSchema,
   mmisOverviewSchema,
   keyStatePersonnelSchema,
@@ -22,9 +25,7 @@ const {
   hitechAssurancesAndComplianceSchema,
   mmisAssurancesAndComplianceSchema,
   budgetActivitiesSchema
-} = require('./index');
-
-const Joi = require('joi');
+} from './index.js';
 
 export const hitechCombinedSchema = Joi.object({
   _id: Joi.any(),

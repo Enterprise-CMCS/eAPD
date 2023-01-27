@@ -33,6 +33,7 @@ api/dist
 api/endpoint-data.json
 api/endpoint-tests/endpoint-data.json
 api/seeds/test/tokens.json
+api/seeds/test/tokens.js
 api/test-data/files
 
 common/coverage
@@ -72,6 +73,7 @@ package-lock.json
 *.terraform.lock.hcl
 */terraform.tfstate*
 *.terraform*
-env_vars.sh
 terraform/builds/
 terraform/legacy/builds/
+*terraform/builds
+env_vars.sh

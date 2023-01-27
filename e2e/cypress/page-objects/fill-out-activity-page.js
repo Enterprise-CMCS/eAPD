@@ -1,5 +1,5 @@
-import PopulatePage from './populate-page';
-import StaffExpensesPage from './activities-state-staff-expenses-page';
+import PopulatePage from './populate-page.js';
+import StaffExpensesPage from './activities-state-staff-expenses-page.js';
 
 const { _ } = Cypress;
 

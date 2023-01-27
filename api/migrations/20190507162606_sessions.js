@@ -1,4 +1,4 @@
-exports.up = async knex =>
+export const up = async knex =>
   knex.schema.createTable('auth_sessions', table => {
     table.comment('authentication sessions');
     table
@@ -18,4 +18,4 @@ exports.up = async knex =>
     table.foreign('user_id').references('users.id');
   });
 
-exports.down = async () => {};
+export const down = async () => {};

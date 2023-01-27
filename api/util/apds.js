@@ -2,4 +2,4 @@
 // Any patches pointing at these paths will be ignored.
 const staticFields = ['/createdAt', '/updatedAt', '/status', '/stateId'];
 
-module.exports = { staticFields };
+export default staticFields;

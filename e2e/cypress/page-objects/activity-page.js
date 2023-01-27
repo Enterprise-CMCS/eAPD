@@ -1,5 +1,5 @@
-import BudgetPage from './budget-page';
-import { addCommas, getDateRange } from './helper';
+import BudgetPage from './budget-page.js';
+import { addCommas, getDateRange } from './helper.js';
 
 class ActivityPage {
   budgetPage = new BudgetPage();

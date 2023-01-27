@@ -1,12 +1,10 @@
-const { thisFFY } = require('@cms-eapd/common');
-
-const tap = require('tap');
-const knex = require('./knex');
-
-const {
+import tap from 'tap';
+import knex from './knex.js';
+import {
   getAffiliationMatches,
   updateAuthAffiliation
-} = require('./affiliations');
+} from './affiliations.js';
+import { thisFFY } from '@cms-eapd/common';
 
 const setupDB = async (oktaUsers, authAffiliations) => {
   await knex('okta_users').insert(oktaUsers);

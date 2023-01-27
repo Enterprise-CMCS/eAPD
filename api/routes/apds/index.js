@@ -1,12 +1,15 @@
-const logger = require('../../logger')('apds route index');
-const del = require('./delete');
-const get = require('./get');
-const patch = require('./patch');
-const post = require('./post');
-const files = require('./files');
-const events = require('./events');
+import loggerFactory from '../../logger/index.js';
+import del from './delete.js';
+import get from './get.js';
+import patch from './patch.js';
+import post from './post.js';
+import files from './files/index.js';
+import events from './events/index.js';
+import submissions from './submissions/index.js';
 
-module.exports = (
+const logger = loggerFactory('apds route index');
+
+export default (
   app,
   {
     filesEndpoints = files,
@@ -14,7 +17,8 @@ module.exports = (
     deleteEndpoint = del,
     getEndpoint = get,
     patchEndpoint = patch,
-    postEndpoint = post
+    postEndpoint = post,
+    submissionsEndpoints = submissions
   } = {}
 ) => {
   logger.debug('setting up DELETE endpoint');
@@ -31,4 +35,7 @@ module.exports = (
 
   logger.debug('setting up APD events endpoints');
   eventsEndpoints(app);
+
+  logger.debug('setting up APD submissions endpoints');
+  submissionsEndpoints(app);
 };

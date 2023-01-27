@@ -1,24 +1,13 @@
+import { defaultAPDYears } from '@cms-eapd/common';
 /// <reference types="cypress" />
 
 // Tests filling out state admin delegation form
 
-const thisFFY = (() => {
-  const year = new Date().getFullYear();
-
-  // Federal fiscal year starts October 1,
-  // but Javascript months start with 0 for
-  // some reason, so October is month 9.
-  if (new Date().getMonth() > 8) {
-    return year + 1;
-  }
-  return year;
-})();
-
-const twoYears = [thisFFY, thisFFY + 1].map(y => `${y}`);
 let delegateStateAdminFormUrl;
 
-before(() => {
+before(function () {
   cy.useFedAdmin();
+  cy.visit('/');
   cy.findByRole('button', { name: /Add State Admin Letter/i }).click();
   cy.location('pathname').then(pathname => {
     delegateStateAdminFormUrl = pathname;
@@ -28,14 +17,15 @@ before(() => {
   });
 });
 
-beforeEach(() => {
-  cy.useFedAdmin(delegateStateAdminFormUrl);
+beforeEach(function () {
+  cy.useFedAdmin();
+  cy.visit(delegateStateAdminFormUrl);
 });
 
 describe(
   'adding and removing state admin delegation forms',
   { tags: ['@fed', '@admin'] },
-  () => {
+  function () {
     const getInputByLabel = label => {
       return cy
         .contains('label', label)
@@ -45,13 +35,14 @@ describe(
         });
     };
 
-    it('tests default values', () => {
+    it('tests default values', function () {
       cy.url().should('include', '/delegate-state-admin');
 
       cy.get('legend').contains('Period of Delegated Authority');
 
       cy.get('input[type=radio]').should('have.length', 2);
 
+      const twoYears = defaultAPDYears();
       twoYears.forEach(year => {
         getInputByLabel(year).should('have.value', year);
         getInputByLabel(year).should('not.be.checked');
@@ -67,12 +58,12 @@ describe(
       cy.get('[id=file-input]').contains('Drag files here');
     });
 
-    it('hitting cancel should return user back to federal dashboard', () => {
+    it('hitting cancel should return user back to federal dashboard', function () {
       cy.contains('Cancel').click();
       cy.contains('Federal Administrator Portal').should('be.visible');
     });
 
-    it('tests filling out and submitting the form', () => {
+    it('tests filling out and submitting the form', function () {
       cy.intercept(
         'POST',
         `${Cypress.env('API')}/auth/certifications/files`
@@ -127,7 +118,7 @@ describe(
       });
     });
 
-    it('allows a letter to be deleted', () => {
+    it('allows a letter to be deleted', function () {
       cy.intercept('GET', `${Cypress.env('API')}/auth/certifications`).as(
         'loadCertifications'
       );
@@ -155,7 +146,7 @@ describe(
       });
     });
 
-    it('allows a letter previously deleted to be added again', () => {
+    it('allows a letter previously deleted to be added again', function () {
       cy.intercept(
         'POST',
         `${Cypress.env('API')}/auth/certifications/files`

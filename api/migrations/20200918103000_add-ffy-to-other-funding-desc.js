@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-exports.up = async knex => {
+export const up = async knex => {
   const apdRecords = await knex('apds').select('document', 'id', 'years');
 
   apdRecords.forEach(({ document, id }) => {
@@ -19,4 +19,4 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async () => {};
+export const down = async () => {};

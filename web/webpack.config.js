@@ -34,7 +34,7 @@ const config = {
     rules: [
       {
         test: /\.m?js$/,
-        exclude: /node_modules\/(?!(d3-array|d3-format|d3-geo)\/)/,
+        exclude: /node_modules\/(?!(d3-array|d3-format|d3-geo|@cms-eapd)\/)/,
         use: ['babel-loader']
       },
       {

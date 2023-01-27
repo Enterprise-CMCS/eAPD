@@ -16,4 +16,4 @@ const cache = (key, getMiddleware) => {
   return middlewareCache[key];
 };
 
-module.exports = { cache };
+export default cache;

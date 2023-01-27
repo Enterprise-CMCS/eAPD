@@ -1,11 +1,10 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const rolesIndex = require('./index');
+import tap from 'tap';
+import { spy } from 'sinon';
+import rolesIndex from './index.js';
 
 tap.test('auth roles endpoint setup', async endpointTest => {
   const app = {};
-  const getEndpoint = sinon.spy();
+  const getEndpoint = spy();
 
   rolesIndex(app, getEndpoint);
 

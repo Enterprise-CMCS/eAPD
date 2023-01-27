@@ -1,14 +1,11 @@
 {
   "name": "@cms-eapd/common",
   "version": "0.0.1",
+  "type": "module",
   "description": "APD app for CMS HITECH program",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "exports": "./index.js",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "clean": "[ -d dist ] && rm -rf dist || echo \"doesn't exist, skipping clean\"",
-    "scaffold": "yarn clean && mkdir dist",
-    "build": "yarn scaffold && babel . -d ./dist -s --ignore \"node_modules\",\"dist\"",
     "stryker": "TZ=utc stryker run",
     "test": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --collectCoverage",
     "test-watch": "DEBUG_PRINT_LIMIT=10000 TZ=utc jest --watch",
@@ -34,5 +31,37 @@
     "@stryker-mutator/core": "6.1.2",
     "@stryker-mutator/jest-runner": "6.1.2"
   },
-  "packageManager": "yarn@1.22.18"
+  "packageManager": "yarn@1.22.18",
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "rootDir": "./",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/coverage/"
+    ],
+    "testRegex": ".*.test.(j|t)s[x]?$",
+    "testEnvironment": "node",
+    "testTimeout": 30000,
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/schemas/**",
+      "!**/*.test.{js,jsx}",
+      "!**/coverage/**",
+      "!**/*.config.{js,jsx}",
+      "!**/index.{js,jsx}",
+      "!**/block-navigation.js",
+      "!**/prettify.js",
+      "!**/sorter.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 74,
+        "functions": 80,
+        "lines": 80
+      }
+    }
+  }
 }

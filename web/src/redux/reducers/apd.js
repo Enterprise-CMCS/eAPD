@@ -39,11 +39,7 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-
-import {
-  generateKey,
-  defaultAPDYearOptions
-} from '@cms-eapd/common/utils/utils';
+import { generateKey, defaultAPDYearOptions } from '@cms-eapd/common';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {

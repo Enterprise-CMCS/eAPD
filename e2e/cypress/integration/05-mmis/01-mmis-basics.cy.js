@@ -1,13 +1,15 @@
-/// <reference types="cypress" />
-
 import ActivityPage from '../../page-objects/activity-page';
+
+/// <reference types="cypress" />
 
 // Tests performing basic MMIS APD tasks
 
 /* eslint-disable no-return-assign */
 /* eslint-disable prefer-arrow-callback */
 
-describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
+Cypress.session.clearAllSavedSessions();
+
+describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   let activityPage;
   let apdUrl;
   let apdId;
@@ -15,13 +17,12 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
 
   before(() => {
     activityPage = new ActivityPage();
-    cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
-    cy.reload();
+    cy.useStateStaff();
+    cy.visit('/');
 
     // Create a new MMIS APD
     cy.findAllByText('Create new').click();
-
     cy.findByRole('radio', { name: /MMIS/i }).click();
     cy.findByLabelText('APD Name').clear().type('MMIS APD Name!').blur();
     cy.findByRole('radio', { name: /No, this is for a new project./i }).click();
@@ -46,17 +47,23 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
     );
   });
 
-  beforeEach(() => {
+  beforeEach(function () {
+    cy.wrap(apdUrl).as('apdUrl');
+    cy.wrap(apdId).as('apdId');
+    cy.wrap(years).as('years');
+
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+    cy.useStateStaff();
     cy.visit(apdUrl);
   });
 
-  after(() => {
-    cy.deleteAPD(apdId);
+  after(function () {
+    cy.visit('/');
+    cy.deleteAPD(this.apdId);
   });
 
-  describe('Create MMIS APD', () => {
-    it('tests Create New page', () => {
+  describe('Create MMIS APD', function () {
+    it('tests Create New page', function () {
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
 
@@ -85,12 +92,12 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       cy.findByLabelText('APD Name').clear().type('MMIS APD Test').blur();
 
       // Year validation
-      years.forEach(year => {
+      this.years.forEach(year => {
         cy.findByRole('checkbox', { name: year }).click();
       });
       cy.contains('Select at least one year.').should('exist');
 
-      years.forEach(year => {
+      this.years.forEach(year => {
         cy.findByRole('checkbox', { name: year }).click();
       });
       cy.contains('Select at least one year.').should('not.exist');
@@ -253,7 +260,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
       // Verify that fields save
       // Navigates away from page and back to check persistence of entered data
       cy.goToApdOverview();
-      cy.wait(2000);
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.goToActivityOverview(0);
 
       cy.contains('Activity name').should('exist');
@@ -374,7 +381,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, () => {
 
       // Verify fields save
       cy.goToApdOverview();
-      cy.wait(2000);
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.goToSecurityPlanning();
 
       cy.get('[id="security-interface-plan"]').should(

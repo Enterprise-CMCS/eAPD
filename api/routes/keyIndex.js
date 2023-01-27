@@ -1,7 +1,9 @@
-const logger = require('../logger')('api key routes index');
-const apdsSubmissions = require('./apds/submissions');
+import loggerFactory from '../logger/index.js';
+import apdsSubmissions from './apds/submissions/index.js';
 
-module.exports = (app, { apdsSubmissionsEndpoint = apdsSubmissions } = {}) => {
+const logger = loggerFactory('api key routes index');
+
+export default (app, { apdsSubmissionsEndpoint = apdsSubmissions } = {}) => {
   logger.debug('setting up routes for apds/submissions');
   apdsSubmissionsEndpoint(app);
 };

@@ -1,5 +1,5 @@
-const knex = require('knex');
-const config = require('../knexfile');
+import knex from 'knex';
+import config from '../knexfile.js';
 
 const { NODE_ENV } = process.env;
 if (!NODE_ENV) {
@@ -10,4 +10,4 @@ if (!NODE_ENV) {
   process.exit(1);
 }
 
-module.exports = knex(config[NODE_ENV]);
+export default knex(config[NODE_ENV]);

@@ -239,7 +239,7 @@ describe('Auth Util', () => {
 
   it('exchanges an okta token for an eAPD one', async () => {
     const accessToken = 'AAA.BBBBB.CCC';
-    const axios = require('axios'); // eslint-disable-line global-require
+    const axios = await import('axios'); // eslint-disable-line global-require
     const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
     fetchMock.onGet('/me/jwToken').reply(200, { jwt: accessToken });

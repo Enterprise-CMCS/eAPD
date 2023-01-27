@@ -1,11 +1,11 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
+} from '../../../endpoint-tests/utils.js';
 
 describe('auth/certifications delete endpoint', () => {
   describe('DELETE /auth/certifications', () => {

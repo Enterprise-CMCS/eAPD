@@ -1,11 +1,9 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { can, userCanEditAPD } = require('../../middleware');
-const endpoint = require('./delete');
-
-const mockExpress = require('../../util/mockExpress');
-const mockResponse = require('../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import { can, userCanEditAPD } from '../../middleware/index.js';
+import endpoint from './delete.js';
+import mockExpress from '../../util/mockExpress.js';
+import mockResponse from '../../util/mockResponse.js';
 
 let app;
 let req;
@@ -25,8 +23,8 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    deleteAPDByID = sinon.stub();
+    next = stub();
+    deleteAPDByID = stub();
   });
 
   endpointTest.test('setup', async test => {
@@ -37,7 +35,7 @@ tap.test('apds/:id DELETE endpoint', async endpointTest => {
         '/apds/:id',
         can('view-document'),
         userCanEditAPD(),
-        sinon.match.func
+        match.func
       ),
       'DELETE endpoint is registered'
     );

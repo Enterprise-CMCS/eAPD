@@ -2,8 +2,8 @@
 import {
   checkBudgetAndFFP,
   checkProposedBudget
-} from '../../helpers/apd/budget-checks';
-import FillOutActivityPage from '../../page-objects/fill-out-activity-page';
+} from '../../helpers/apd/budget-checks.js';
+import FillOutActivityPage from '../../page-objects/fill-out-activity-page.js';
 
 const { _ } = Cypress;
 
@@ -11,17 +11,17 @@ const { _ } = Cypress;
 describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
   let apdUrl;
   let apdId;
-  let budgetData;
-  let fillOutActivityPage;
   const years = [];
+
+  let fillOutActivityPage;
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     fillOutActivityPage = new FillOutActivityPage();
 
-    cy.useStateStaff();
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.reload();
+    cy.useStateStaff();
+    cy.visit('/');
 
     cy.findAllByText('Create new').click();
     cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
@@ -41,23 +41,27 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
       years.push(list[index].value)
     );
-
-    cy.fixture('budget-checks-test.json').then(data => {
-      budgetData = data;
-    });
   });
 
-  beforeEach(() => {
+  beforeEach(function () {
+    cy.wrap(apdUrl).as('apdUrl');
+    cy.wrap(apdId).as('apdId');
+    cy.wrap(years).as('years');
+
+    cy.fixture('budget-checks-test.json').as('budgetData');
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+    cy.useStateStaff();
     cy.visit(apdUrl);
   });
 
-  after(() => {
-    cy.deleteAPD(apdId);
+  after(function () {
+    cy.visit('/');
+    cy.deleteAPD(this.apdId);
   });
 
-  describe('Budget Checks', () => {
-    it('Creates activities and sets fed state split on each one', () => {
+  describe('Budget Checks', function () {
+    it('Creates activities and sets fed state split on each one', function () {
+      const years = this.years;
       // HIT Activity
       cy.goToBudgetAndFFP(0);
 
@@ -127,7 +131,10 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       cy.waitForSave();
     });
 
-    it('Checks Key State Personnel Budgets', () => {
+    it('Checks Key State Personnel Budgets', function () {
+      const years = this.years;
+      const budgetData = this.budgetData;
+
       cy.goToKeyStatePersonnel();
       cy.url().should('include', '/state-profile');
 
@@ -195,7 +202,10 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
     });
 
-    it('Checks State Staff Budget', () => {
+    it('Checks State Staff Budget', function () {
+      const years = this.years;
+      const budgetData = this.budgetData;
+
       // Adds state staff to HIT activity
       cy.goToStateStaffAndExpenses(0);
 
@@ -261,7 +271,10 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
     });
 
-    it('Checks Other State Expense Budget', () => {
+    it('Checks Other State Expense Budget', function () {
+      const years = this.years;
+      const budgetData = this.budgetData;
+
       // Adds Other State Expense to HIT activity
       cy.goToStateStaffAndExpenses(0);
 
@@ -327,7 +340,10 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
       );
     });
 
-    it('Checks Private Contractors Budget', () => {
+    it('Checks Private Contractors Budget', function () {
+      const years = this.years;
+      const budgetData = this.budgetData;
+
       // Adds Private Contractor to HIT activity
       cy.goToPrivateContractorCosts(0);
 

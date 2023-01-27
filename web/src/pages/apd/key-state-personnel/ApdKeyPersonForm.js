@@ -12,7 +12,7 @@ import DollarField from '../../../components/DollarField';
 import Dollars from '../../../components/Dollars';
 import NumberField from '../../../components/NumberField';
 
-import { keyPersonnelSchema } from '@cms-eapd/common/schemas/keyStatePersonnel';
+import { keyPersonnelSchema as schema } from '@cms-eapd/common';
 import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 import { selectApdType } from '../../../redux/selectors/apd.selectors';
@@ -61,7 +61,7 @@ const PersonForm = forwardRef(
       },
       mode: 'onChange',
       reValidateMode: 'onChange',
-      resolver: joiResolver(keyPersonnelSchema)
+      resolver: joiResolver(schema)
     });
 
     useEffect(() => {

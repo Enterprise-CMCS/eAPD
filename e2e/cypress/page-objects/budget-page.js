@@ -1,5 +1,5 @@
 /* eslint-disable radix */
-import { addCommas } from './helper';
+import { addCommas } from './helper.js';
 
 const { _ } = Cypress;
 
