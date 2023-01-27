@@ -1,8 +1,6 @@
-const {
-  schema: { arrayOf, jsonResponse }
-} = require('../../openAPI/helpers');
+import { arrayOf, jsonResponse } from '../../openAPI/helpers.js';
 
-const openAPI = {
+export default {
   '/apds/submissions': {
     get: {
       tags: ['APDs'],
@@ -95,5 +93,3 @@ const openAPI = {
     }
   }
 };
-
-module.exports = openAPI;

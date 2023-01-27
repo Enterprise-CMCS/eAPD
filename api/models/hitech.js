@@ -1,7 +1,11 @@
-require('./hitechBudget');
-const mongoose = require('mongoose');
-const { hitechActivitySchema } = require('./hitechActivity');
-const { APD, discriminatorOptions, federalCitation } = require('./apd');
+import './hitechBudget.js';
+import mongoose from 'mongoose';
+import hitechActivitySchema from './hitechActivity.js';
+import {
+  default as APD,
+  discriminatorOptions,
+  federalCitation
+} from './apd.js';
 
 const incentivePayment = new mongoose.Schema(
   {
@@ -129,6 +133,4 @@ const hitechSchema = new mongoose.Schema(
 
 const HITECH = APD.discriminator('HITECH', hitechSchema);
 
-module.exports = {
-  HITECH
-};
+export default HITECH;

@@ -1,4 +1,4 @@
-const sanitizeHtml = require('sanitize-html');
+import sanitizeHtml from 'sanitize-html';
 
 const sanitize = dirty => {
   if (typeof dirty === 'string' || dirty instanceof String) {
@@ -92,4 +92,4 @@ const sanitize = dirty => {
   return dirty;
 };
 
-module.exports = sanitize;
+export default sanitize;

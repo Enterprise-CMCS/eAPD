@@ -1,7 +1,7 @@
-const get = require('./get');
-const post = require('./post');
+import get from './get.js';
+import post from './post.js';
 
-module.exports = (app, { getEndpoint = get, postEndpoint = post } = {}) => {
+export default (app, { getEndpoint = get, postEndpoint = post } = {}) => {
   getEndpoint(app);
   postEndpoint(app);
 };

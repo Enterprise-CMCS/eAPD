@@ -1,12 +1,12 @@
-const { APD_TYPE } = require('@cms-eapd/common');
-const {
+import { APD_TYPE } from '@cms-eapd/common';
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
+} from '../../endpoint-tests/utils.js';
 
 describe('APD endpoint | POST /apds', () => {
   const db = getDB();

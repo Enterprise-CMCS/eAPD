@@ -1,4 +1,4 @@
-exports.up = async knex =>
+export const up = async knex =>
   // We don't need to worry about transforming old APDs from the relational
   // model into the document model. This migration will only be used when
   // creating new databases for the first time, so there will not be existing
@@ -8,4 +8,4 @@ exports.up = async knex =>
     table.json('document').comment('APD as a single document object');
   });
 
-exports.down = async () => {};
+export const down = async () => {};

@@ -1,33 +1,40 @@
 // affiliation-statuses.spec.js created with Cypress
 
-describe('Invalid Login Attempts', { tags: ['@auth', '@affiliations'] }, () => {
-  beforeEach(() => {
-    cy.clearAuthCookies();
-  });
-  it('show the pending page for a user with a pending request', () => {
-    cy.loginWithEnv('requestedrole');
+Cypress.session.clearAllSavedSessions();
 
-    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
-    cy.findByRole('heading', {
-      name: 'Approval Pending From State Administrator'
-    }).should('exist');
-  });
+describe(
+  'Invalid Login Attempts',
+  { tags: ['@auth', '@affiliations'] },
+  function () {
+    beforeEach(function () {
+      cy.clearAuthCookies();
+    });
 
-  it('show the denied page for a user with a denied request', () => {
-    cy.loginWithEnv('deniedrole');
+    it('show the pending page for a user with a pending request', function () {
+      cy.loginWithEnv('requestedrole');
 
-    cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
-    cy.findByRole('heading', { name: 'Approval Has Been Denied' }).should(
-      'exist'
-    );
-  });
+      cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
+      cy.findByRole('heading', {
+        name: 'Approval Pending From State Administrator'
+      }).should('exist');
+    });
 
-  it('show the revoked page for a user with a revoked request', () => {
-    cy.loginWithEnv('revokedrole');
+    it('show the denied page for a user with a denied request', function () {
+      cy.loginWithEnv('deniedrole');
 
-    cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
-    cy.findByRole('heading', { name: 'Approval Permissions Revoked' }).should(
-      'exist'
-    );
-  });
-});
+      cy.findByRole('heading', { name: 'Alaska APDs' }).should('exist');
+      cy.findByRole('heading', { name: 'Approval Has Been Denied' }).should(
+        'exist'
+      );
+    });
+
+    it('show the revoked page for a user with a revoked request', function () {
+      cy.loginWithEnv('revokedrole');
+
+      cy.findByRole('heading', { name: /Alaska APDs/ }).should('exist');
+      cy.findByRole('heading', { name: 'Approval Permissions Revoked' }).should(
+        'exist'
+      );
+    });
+  }
+);

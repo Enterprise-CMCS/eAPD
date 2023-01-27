@@ -1,7 +1,6 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { cache } = require('./cache');
+import tap from 'tap';
+import { stub } from 'sinon';
+import cache from './cache.js';
 
 tap.test('middleware cache', async cacheTests => {
   const key1 = ['something', 1, {}];
@@ -11,8 +10,8 @@ tap.test('middleware cache', async cacheTests => {
     const middleware1 = {};
     const middleware2 = {};
 
-    const getter1 = sinon.stub().returns(middleware1);
-    const getter2 = sinon.stub().returns(middleware2);
+    const getter1 = stub().returns(middleware1);
+    const getter2 = stub().returns(middleware2);
 
     const out1 = cache(key1, getter1);
     const out2 = cache(key2, getter2);

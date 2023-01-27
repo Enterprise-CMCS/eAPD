@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.table('users', table => {
     table.dropForeign('auth_role');
   });
@@ -28,7 +28,7 @@ exports.up = async knex => {
     .update({ name: 'eAPD State SME', isActive: false });
 };
 
-exports.down = async knex => {
+export const down = async knex => {
   await knex('auth_roles')
     .where({ name: 'eAPD Admin' })
     .update({ name: 'admin' });

@@ -1,8 +1,10 @@
-const logger = require('../../../logger')('apd event routes');
-const { can, userCanAccessAPD } = require('../../../middleware');
-const { createEventForAPD: ce } = require('../../../db');
+import loggerFactory from '../../../logger/index.js';
+import { can, userCanAccessAPD } from '../../../middleware/index.js';
+import { createEventForAPD as ce } from '../../../db/index.js';
 
-module.exports = (app, { createEventForAPD = ce } = {}) => {
+const logger = loggerFactory('apd event routes');
+
+export default (app, { createEventForAPD = ce } = {}) => {
   logger.debug('setting up POST /apds/:id/events route');
 
   app.post(

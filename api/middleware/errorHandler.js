@@ -1,4 +1,6 @@
-const logger = require('../logger')('errorHandler middleware');
+import loggerFactory from '../logger/index.js';
+
+const logger = loggerFactory('errorHandler middleware');
 
 const ERROR_MESSAGES = {
   400: 'The server could not process the request',
@@ -66,4 +68,4 @@ const errorHandler = (err, req, res, next) => {
   return res.status(status).json(message).end();
 };
 
-module.exports = errorHandler;
+export default errorHandler;

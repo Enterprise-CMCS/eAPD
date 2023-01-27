@@ -1,8 +1,8 @@
-const {
+import {
   hitechCombinedSchema,
   mmisCombinedSchema,
   APD_TYPE
-} = require('@cms-eapd/common');
+} from '@cms-eapd/common';
 
 /**
  * Builds an error list for use in the frontend admin check panel
@@ -299,6 +299,4 @@ const adminCheckApd = apd => {
   }
 };
 
-module.exports = {
-  adminCheckApd
-};
+export default adminCheckApd;

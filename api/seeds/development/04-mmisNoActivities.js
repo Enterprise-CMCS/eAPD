@@ -1,5 +1,7 @@
-const mmisNoActivities = {
-  apdType: 'MMIS',
+import { APD_TYPE } from '@cms-eapd/common';
+
+export default {
+  apdType: APD_TYPE.MMIS,
   name: 'MMIS IAPD No Activities',
   years: ['2023', '2024'],
   yearOptions: ['2023', '2024', '2025'],
@@ -30,16 +32,16 @@ const mmisNoActivities = {
   },
   keyStatePersonnel: {
     medicaidDirector: {
-      email: '',
-      name: '',
-      phone: ''
+      name: 'Cornelius Fudge',
+      email: 'c.fudge@ministry.magic',
+      phone: '5551234567'
     },
     medicaidOffice: {
-      address1: '',
+      address1: '100 Round Sq',
       address2: '',
-      city: '',
-      state: '',
-      zip: ''
+      city: 'Cityville',
+      state: 'AK',
+      zip: '12345'
     },
     keyPersonnel: []
   },
@@ -108,7 +110,7 @@ const mmisNoActivities = {
   },
   assurancesAndCompliances: {
     procurement: [
-      { title: 'SSM, Part 11', checked: null, explanation: '' },
+      { title: 'SMM, Part 11', checked: null, explanation: '' },
       { title: '45 CFR Part 95.615', checked: null, explanation: '' },
       { title: '45 CFR Part 92.36', checked: null, explanation: '' }
     ],
@@ -135,5 +137,3 @@ const mmisNoActivities = {
     ]
   }
 };
-
-module.exports = { mmisNoActivities };

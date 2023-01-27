@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   const apds = await knex('apds').select('id', 'document');
 
   await Promise.all(
@@ -23,4 +23,4 @@ exports.up = async knex => {
   );
 };
 
-exports.down = async () => {};
+export const down = async () => {};

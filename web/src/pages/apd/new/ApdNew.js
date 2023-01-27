@@ -12,15 +12,13 @@ import {
   Tooltip,
   TooltipIcon
 } from '@cmsgov/design-system';
+import { newApdSchema as schema, APD_TYPE } from '@cms-eapd/common';
+import { joiResolver } from '@hookform/resolvers/joi';
+import { useFlags } from 'launchdarkly-react-client-sdk';
+
 import TextArea from '../../../components/TextArea';
 import { createApd } from '../../../redux/actions/app';
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
-
 import Loading from '../../../components/Loading';
-import newApdSchema from '@cms-eapd/common/schemas/apdNew';
-import { joiResolver } from '@hookform/resolvers/joi';
-
-import { useFlags } from 'launchdarkly-react-client-sdk';
 
 const ApdNew = ({ createApd: create }) => {
   ApdNew.displayName = 'ApdNew';
@@ -108,7 +106,7 @@ const ApdNew = ({ createApd: create }) => {
     },
     mode: 'all',
     reValidateMode: 'all',
-    resolver: joiResolver(newApdSchema)
+    resolver: joiResolver(schema)
   });
 
   if (isLoading) {

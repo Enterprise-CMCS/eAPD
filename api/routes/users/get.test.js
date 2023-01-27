@@ -1,11 +1,9 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const can = require('../../middleware').can;
-const getEndpoint = require('./get');
-
-const mockExpress = require('../../util/mockExpress');
-const mockResponse = require('../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import { can } from '../../middleware/index.js';
+import getEndpoint from './get.js';
+import mockExpress from '../../util/mockExpress.js';
+import mockResponse from '../../util/mockResponse.js';
 
 let res;
 let next;
@@ -16,16 +14,16 @@ let handler;
 tap.test('user GET endpoint', async endpointTest => {
   endpointTest.beforeEach(() => {
     res = mockResponse();
-    next = sinon.stub();
+    next = stub();
     app = mockExpress();
-    getUserByID = sinon.stub();
+    getUserByID = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/users/:id', can('view-users'), sinon.match.func),
+      app.get.calledWith('/users/:id', can('view-users'), match.func),
       'single user GET endpoint is registered'
     );
   });

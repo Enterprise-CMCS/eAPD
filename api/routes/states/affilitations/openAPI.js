@@ -1,9 +1,6 @@
 /* eslint-disable camelcase */
 
-const {
-  schema: { arrayOf, jsonResponse },
-  responses
-} = require('../../openAPI/helpers');
+import { jsonResponse, arrayOf, responses } from '../../openAPI/helpers.js';
 
 const id = {
   type: 'integer',
@@ -192,4 +189,4 @@ const affiliationRoutes = {
   }
 };
 
-module.exports = affiliationRoutes;
+export default affiliationRoutes;

@@ -1,10 +1,12 @@
-const logger = require('../../logger')('auth route index');
-const activities = require('./activities');
-const roles = require('./roles');
-const states = require('./states');
-const certifications = require('./certifications');
+import loggerFactory from '../../logger/index.js';
+import activities from './activities/index.js';
+import roles from './roles/index.js';
+import states from './states/index.js';
+import certifications from './certifications/index.js';
 
-module.exports = (
+const logger = loggerFactory('auth route index');
+
+export default (
   app,
   activitiesEndpoint = activities,
   rolesEndpoint = roles,

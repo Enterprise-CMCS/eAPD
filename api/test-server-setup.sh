@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 export NODE_ENV=test
 export COMPOSE_HTTP_TIMEOUT=300
 

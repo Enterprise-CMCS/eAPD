@@ -1,10 +1,8 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const getEndpoint = require('./get');
-
-const mockExpress = require('../../../util/mockExpress');
-const mockResponse = require('../../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import getEndpoint from './get.js';
+import mockExpress from '../../../util/mockExpress.js';
+import mockResponse from '../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -14,14 +12,14 @@ tap.test('auth roles GET endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
-    changeState = sinon.stub();
+    changeState = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/auth/state/:stateId', sinon.match.func),
+      app.get.calledWith('/auth/state/:stateId', match.func),
       'change state GET endpoint is registered'
     );
   });

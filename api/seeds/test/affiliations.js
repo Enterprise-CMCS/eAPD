@@ -1,7 +1,7 @@
-const { getAllActiveRoles } = require('../../db/roles');
-const { states } = require('../../util/states');
+import { getAllActiveRoles } from '../../db/roles.js';
+import states from '../../util/states.js';
 
-exports.seed = async knex => {
+const seed = async knex => {
   const [{ id: noPermissionsId }] = await getAllActiveRoles(
     ['eAPD No Permissions'],
     { db: knex }
@@ -71,19 +71,17 @@ exports.seed = async knex => {
     },
     {
       id: 4006,
-      user_id: 'state-admin',
-      state_id: 'md',
+      user_id: 'state-staff',
+      state_id: 'ak',
       role_id: stateStaffRoleId,
-      status: 'approved',
-      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
+      status: 'approved'
     },
     {
       id: 4007,
       user_id: 'no-permissions',
       state_id: 'wy',
       role_id: noPermissionsId,
-      status: 'approved',
-      expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365)
+      status: 'approved'
     }
   ]);
   await knex('okta_users').del();
@@ -115,6 +113,12 @@ exports.seed = async knex => {
     {
       user_id: 'state-admin-match',
       email: 'stateadminmatch@email.com'
+    },
+    {
+      user_id: 'state-staff',
+      email: 'statestaff@email.com'
     }
   ]);
 };
+
+export default seed;
