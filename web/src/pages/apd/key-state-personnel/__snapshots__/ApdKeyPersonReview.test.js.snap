@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the ApdKeyPersonReview component renders correctly 1`] = `
+exports[`the ApdKeyPersonReview component renders correctly for hitech apds 1`] = `
 <Fragment>
   <div
     className="visibility--screen"
@@ -28,6 +28,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
         className="ds-u-margin-top--2"
       >
         <div
+          className="ds-u-padding-bottom--2"
           key="1992"
         >
           <strong>
@@ -49,9 +50,19 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </strong>
           <Dollars>
             32
+             
           </Dollars>
+          <div>
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+            </Dollars>
+          </div>
         </div>
         <div
+          className="ds-u-padding-bottom--2"
           key="1993"
         >
           <strong>
@@ -73,7 +84,16 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </strong>
           <Dollars>
             252
+             
           </Dollars>
+          <div>
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+            </Dollars>
+          </div>
         </div>
       </div>
     </Review>
@@ -106,6 +126,7 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
         className="ds-u-margin-top--2"
       >
         <div
+          className="ds-u-padding-bottom--2"
           key="1992"
         >
           <strong>
@@ -127,9 +148,19 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </strong>
           <Dollars>
             32
+             
           </Dollars>
+          <div>
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+            </Dollars>
+          </div>
         </div>
         <div
+          className="ds-u-padding-bottom--2"
           key="1993"
         >
           <strong>
@@ -151,7 +182,263 @@ exports[`the ApdKeyPersonReview component renders correctly 1`] = `
           </strong>
           <Dollars>
             252
+             
           </Dollars>
+          <div>
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+            </Dollars>
+          </div>
+        </div>
+      </div>
+    </Review>
+  </div>
+</Fragment>
+`;
+
+exports[`the ApdKeyPersonReview component renders correctly for mmis apds 1`] = `
+<Fragment>
+  <div
+    className="visibility--screen"
+  >
+    <Review
+      ariaLabel="Bob the Builder"
+      editHref={null}
+      heading="13. Bob the Builder"
+      headingLevel="4"
+      objType="Key Personnel"
+      onDeleteClick={[MockFunction]}
+      onDeleteLabel={null}
+      onEditClick={[MockFunction]}
+      skipConfirmation={false}
+      title={null}
+    >
+      <ul
+        className="ds-c-list--bare"
+      >
+        <li>
+          The Builder
+        </li>
+      </ul>
+      <div
+        className="ds-u-margin-top--2"
+      >
+        <div
+          className="ds-u-padding-bottom--2"
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             Cost: 
+          </strong>
+          <Dollars>
+            100
+          </Dollars>
+           | 
+          <strong>
+            FTE: 
+          </strong>
+          0.32
+           | 
+          <strong>
+            Total: 
+          </strong>
+          <Dollars>
+            32
+             
+          </Dollars>
+          <div>
+            <strong>
+              Total Computable Medicaid: 
+            </strong>
+            <Dollars>
+              32
+            </Dollars>
+             
+            (
+            100
+            % Medicaid Share) |
+             
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+              )
+            </Dollars>
+          </div>
+        </div>
+        <div
+          className="ds-u-padding-bottom--2"
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             Cost: 
+          </strong>
+          <Dollars>
+            300
+          </Dollars>
+           | 
+          <strong>
+            FTE: 
+          </strong>
+          0.84
+           | 
+          <strong>
+            Total: 
+          </strong>
+          <Dollars>
+            252
+             
+          </Dollars>
+          <div>
+            <strong>
+              Total Computable Medicaid: 
+            </strong>
+            <Dollars>
+              252
+            </Dollars>
+             
+            (
+            100
+            % Medicaid Share) |
+             
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+              )
+            </Dollars>
+          </div>
+        </div>
+      </div>
+    </Review>
+  </div>
+  <div
+    className="visibility--print"
+  >
+    <Review
+      ariaLabel={null}
+      editHref={null}
+      heading="13. Bob the Builder"
+      objType={null}
+      onDeleteClick={null}
+      onDeleteLabel={null}
+      onEditClick={null}
+      skipConfirmation={false}
+      title={null}
+    >
+      <ul
+        className="ds-c-list--bare"
+      >
+        <li>
+          The Builder
+        </li>
+        <li>
+          email address
+        </li>
+      </ul>
+      <div
+        className="ds-u-margin-top--2"
+      >
+        <div
+          className="ds-u-padding-bottom--2"
+          key="1992"
+        >
+          <strong>
+            FFY 
+            1992
+             Cost: 
+          </strong>
+          <Dollars>
+            100
+          </Dollars>
+           | 
+          <strong>
+            FTE: 
+          </strong>
+          0.32
+           | 
+          <strong>
+            Total: 
+          </strong>
+          <Dollars>
+            32
+             
+          </Dollars>
+          <div>
+            <strong>
+              Total Computable Medicaid: 
+            </strong>
+            <Dollars>
+              32
+            </Dollars>
+             
+            (
+            100
+            % Medicaid Share) |
+             
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+              )
+            </Dollars>
+          </div>
+        </div>
+        <div
+          className="ds-u-padding-bottom--2"
+          key="1993"
+        >
+          <strong>
+            FFY 
+            1993
+             Cost: 
+          </strong>
+          <Dollars>
+            300
+          </Dollars>
+           | 
+          <strong>
+            FTE: 
+          </strong>
+          0.84
+           | 
+          <strong>
+            Total: 
+          </strong>
+          <Dollars>
+            252
+             
+          </Dollars>
+          <div>
+            <strong>
+              Total Computable Medicaid: 
+            </strong>
+            <Dollars>
+              252
+            </Dollars>
+             
+            (
+            100
+            % Medicaid Share) |
+             
+            <strong>
+              Federal Share: 
+            </strong>
+            <Dollars>
+              0
+              )
+            </Dollars>
+          </div>
         </div>
       </div>
     </Review>

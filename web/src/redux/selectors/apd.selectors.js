@@ -2,15 +2,15 @@ import { createSelector } from 'reselect';
 import { INCENTIVE_ENTRIES } from '../../util';
 import { stringToNumber } from '../../util/formats';
 
+import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+
 export const selectApds = ({ apd }) => apd;
 
 export const selectApdData = ({ apd: { data } }) => data;
 
-export const selectApdType = ({
-  apd: {
-    data: { apdType }
-  }
-}) => apdType;
+export const selectApdType = state => {
+  return state?.apd?.data?.apdType || APD_TYPE.HITECH;
+};
 
 export const selectApdYears = ({
   apd: {
