@@ -1,4 +1,4 @@
-module.exports.states = [
+const states = [
   { id: 'ak', name: 'Alaska' },
   { id: 'al', name: 'Alabama' },
   { id: 'az', name: 'Arizona' },
@@ -63,3 +63,5 @@ module.exports.states = [
   // Federal
   { id: 'fd', name: 'Federal' }
 ];
+
+export default states;

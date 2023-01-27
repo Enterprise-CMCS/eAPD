@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.up = async knex =>
+export const up = async knex =>
   knex.schema.createTable('apd_review_status', table => {
     table.comment('Changes to APD status in the Federal Review');
     table.increments('id').unique();
@@ -22,4 +22,4 @@ exports.up = async knex =>
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = async knex => knex.schema.dropTable('apd_review_status');
+export const down = async knex => knex.schema.dropTable('apd_review_status');

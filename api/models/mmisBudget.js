@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const {
-  Budget,
+import mongoose from 'mongoose';
+import {
+  default as Budget,
   discriminatorOptions,
-  shareByCostTypeByQuarter,
   shareByCostType,
-  fedStateSplitByCost,
-  fedStateSplit
-} = require('./budget');
+  shareByCostTypeByQuarter,
+  fedStateSplit,
+  fedStateSplitByCost
+} from './budget.js';
 
 const mmisBudgetSchema = new mongoose.Schema(
   {
@@ -46,8 +46,4 @@ const mmisBudgetSchema = new mongoose.Schema(
   discriminatorOptions
 );
 
-const MMISBudget = Budget.discriminator('MMISBudget', mmisBudgetSchema);
-
-module.exports = {
-  MMISBudget
-};
+export default Budget.discriminator('MMISBudget', mmisBudgetSchema);

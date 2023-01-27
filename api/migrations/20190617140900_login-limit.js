@@ -1,4 +1,4 @@
-exports.up = async knex =>
+export const up = async knex =>
   knex.schema.alterTable('users', table => {
     table
       .json('failed_logons')
@@ -9,4 +9,4 @@ exports.up = async knex =>
       .comment('the timestamp of when this account will be unlocked');
   });
 
-exports.down = () => {};
+export const down = () => {};

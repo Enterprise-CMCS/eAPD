@@ -1,9 +1,9 @@
-const tap = require('tap');
-const sinon = require('sinon');
-const patchEndpoint = require('./patch');
+import tap from 'tap';
+import { stub, match } from 'sinon';
 
-const mockExpress = require('../../../util/mockExpress');
-const mockResponse = require('../../../util/mockResponse');
+import patchEndpoint from './patch.js';
+import mockExpress from '../../../util/mockExpress.js';
+import mockResponse from '../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -15,16 +15,16 @@ tap.test('apds/submissions PATCH endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    updateAPDReviewStatus = sinon.stub();
-    getLaunchDarklyFlag = sinon.stub();
+    next = stub();
+    updateAPDReviewStatus = stub();
+    getLaunchDarklyFlag = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     patchEndpoint(app);
 
     setupTest.ok(
-      app.patch.calledWith('/apds/submissions', sinon.match.func),
+      app.patch.calledWith('/apds/submissions', match.func),
       'apds/submissions PATCH endpoint is registered'
     );
   });

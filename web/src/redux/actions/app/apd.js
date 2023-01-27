@@ -1,5 +1,5 @@
 import { push } from 'connected-react-router';
-import { hasBudgetUpdate } from '@cms-eapd/common/utils/utils';
+import { hasBudgetUpdate } from '@cms-eapd/common';
 
 import {
   CREATE_APD_FAILURE,
@@ -24,7 +24,9 @@ import {
 } from './symbols';
 import { loadBudget } from '../budget';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
+import { alertApdCreateSuccess } from '../alert';
 import {
+  ariaAnnounceApdCreateSuccess,
   ariaAnnounceApdLoaded,
   ariaAnnounceApdLoading,
   ariaAnnounceApdLoadingFailure
@@ -161,6 +163,8 @@ export const createApd =
       .then(async req => {
         let data = req.data;
         dispatch({ type: CREATE_APD_SUCCESS, data: data });
+        dispatch(alertApdCreateSuccess(data.id));
+        dispatch(ariaAnnounceApdCreateSuccess());
         await dispatch(selectApd(data.id, `/apd/${data.id}`, { pushRoute }));
       })
       .catch(error => {

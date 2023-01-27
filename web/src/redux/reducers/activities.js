@@ -1,6 +1,8 @@
-import { arrToObj } from '@cms-eapd/common/utils/formatting';
-import { generateKey as defaultGenerateKey } from '@cms-eapd/common/utils/utils';
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import {
+  generateKey as defaultGenerateKey,
+  arrToObj,
+  APD_TYPE
+} from '@cms-eapd/common';
 
 // Make this thing injectible for testing.
 let generateKey = defaultGenerateKey;

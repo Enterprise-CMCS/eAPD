@@ -39,11 +39,7 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-
-import {
-  generateKey,
-  defaultAPDYearOptions
-} from '@cms-eapd/common/utils/utils';
+import { generateKey, defaultAPDYearOptions } from '@cms-eapd/common';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
@@ -239,13 +235,43 @@ const getHumanTimestamp = iso8601 => {
   })}`;
 };
 
-export const getKeyPersonnel = (years = [], isPrimary = false) => ({
+const getKeyPersonnelSplit = (years, apdType) => {
+  let split;
+  switch (apdType) {
+    case 'HITECH':
+      split = years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
+        {}
+      );
+      break;
+    case 'MMIS':
+      split = years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        {}
+      );
+      break;
+    default:
+      return years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        {}
+      );
+  }
+  return split;
+};
+
+export const getKeyPersonnel = (
+  years = [],
+  isPrimary = false,
+  apdType = ''
+) => ({
   costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
   email: '',
   expanded: true,
   hasCosts: null,
   isPrimary,
   fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
+  split: getKeyPersonnelSplit(years, apdType),
+  medicaidShare: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
   name: '',
   position: '',
   key: generateKey()

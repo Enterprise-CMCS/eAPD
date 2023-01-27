@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   const apds = await knex('apds').select('id', 'document');
   apds.map(async apd =>
     knex('apds')
@@ -7,4 +7,4 @@ exports.up = async knex => {
   );
 };
 
-exports.down = () => {};
+export const down = () => {};

@@ -1,4 +1,4 @@
-import expensesSchema from './expenses';
+import expensesSchema from './expenses.js';
 
 describe('expenses validation', () => {
   test('valid expenses', () => {

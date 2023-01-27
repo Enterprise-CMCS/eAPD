@@ -1,4 +1,4 @@
-exports.seed = async knex => {
+const seed = async knex => {
   await knex
     .table('states')
     .where({ id: 'ak' })
@@ -33,3 +33,5 @@ exports.seed = async knex => {
       })
     });
 };
+
+export default seed;

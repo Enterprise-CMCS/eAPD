@@ -1,4 +1,4 @@
-exports.seed = async knex => {
+const seed = async knex => {
   await knex('state_admin_certifications').insert([
     {
       id: 5004, // manually set for testing
@@ -14,3 +14,5 @@ exports.seed = async knex => {
     }
   ]);
 };
+
+export default seed;

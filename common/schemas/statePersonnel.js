@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const titleSchema = Joi.string().required().messages({
   'string.empty': 'Provide a personnel title.',

@@ -1,10 +1,10 @@
-const logger = require('../../../logger')('apds/submissions get');
-const {
-  getLaunchDarklyFlag: flag
-} = require('../../../middleware/launchDarkly');
-const { updateAPDReviewStatus: urs } = require('../../../db/apds');
+import loggerFactory from '../../../logger/index.js';
+import { getLaunchDarklyFlag as flag } from '../../../middleware/launchDarkly.js';
+import { updateAPDReviewStatus as urs } from '../../../db/apds.js';
 
-module.exports = (
+const logger = loggerFactory('apds/submissions get');
+
+export default (
   app,
   { updateAPDReviewStatus = urs, getLaunchDarklyFlag = flag } = {}
 ) => {
