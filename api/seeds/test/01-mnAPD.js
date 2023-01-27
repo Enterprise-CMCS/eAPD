@@ -43,6 +43,14 @@ export default {
         costs: {
           2022: 100000,
           2023: 100000
+        },
+        split: {
+          2022: { federal: 90, state: 10 },
+          2023: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100
         }
       },
       {
@@ -55,7 +63,9 @@ export default {
           2023: 0.3
         },
         hasCosts: false,
-        costs: {}
+        costs: {},
+        split: {},
+        medicaidShare: {}
       }
     ]
   },

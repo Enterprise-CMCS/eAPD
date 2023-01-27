@@ -15,6 +15,8 @@ import NumberField from '../../../components/NumberField';
 import { keyPersonnelSchema as schema } from '@cms-eapd/common';
 import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
+
 const getCheckedValue = value => {
   if (value !== null) {
     if (value === true) return 'yes';
@@ -24,18 +26,27 @@ const getCheckedValue = value => {
   return null;
 };
 
-const tRoot = 'apd.stateProfile.keyPersonnel';
-
 const PersonForm = forwardRef(
-  ({ index, item, savePerson, years, setFormValid }, ref) => {
+  ({ index, item, savePerson, years, setFormValid, apdType }, ref) => {
     PersonForm.displayName = 'PersonForm';
-    const { name, email, position, hasCosts, isPrimary, costs, fte } =
-      JSON.parse(JSON.stringify({ ...item }));
+    const {
+      name,
+      email,
+      position,
+      hasCosts,
+      isPrimary,
+      costs,
+      split,
+      fte,
+      medicaidShare
+    } = JSON.parse(JSON.stringify({ ...item }));
+
     const {
       handleSubmit,
       control,
       trigger,
       formState: { errors, isValid },
+      setValue,
       resetField: resetFieldErrors
     } = useForm({
       defaultValues: {
@@ -44,7 +55,9 @@ const PersonForm = forwardRef(
         position,
         hasCosts: getCheckedValue(hasCosts),
         costs,
-        fte
+        split,
+        fte,
+        medicaidShare
       },
       mode: 'onChange',
       reValidateMode: 'onChange',
@@ -62,6 +75,8 @@ const PersonForm = forwardRef(
       hasCosts,
       isPrimary,
       costs,
+      split,
+      medicaidShare,
       fte
     };
 
@@ -85,6 +100,25 @@ const PersonForm = forwardRef(
             ...state,
             fte: {
               ...state.fte,
+              [action.year]: action.value
+            }
+          };
+        case 'updateSplit':
+          return {
+            ...state,
+            split: {
+              ...state.split,
+              [action.year]: {
+                federal: action.federal,
+                state: action.state
+              }
+            }
+          };
+        case 'updateMedicaidShare':
+          return {
+            ...state,
+            medicaidShare: {
+              ...state.medicaidShare,
               [action.year]: action.value
             }
           };
@@ -146,6 +180,32 @@ const PersonForm = forwardRef(
       });
     };
 
+    const handleSplitChange = (year, e) => {
+      const [federal, state] = e.target.value.split('-').map(Number);
+
+      dispatch({
+        type: 'updateSplit',
+        year: year,
+        federal,
+        state
+      });
+
+      setValue(`split.${year}.federal`, federal);
+      setValue(`split.${year}.state`, state);
+    };
+
+    const handleMedicaidShareChange = (year, e) => {
+      const value = e.target.value;
+
+      dispatch({
+        type: 'updateMedicaidShare',
+        year: year,
+        value
+      });
+
+      setValue(`medicaidShare.${year}`, value);
+    };
+
     const onSubmit = e => {
       e.preventDefault();
       savePerson(index, {
@@ -160,7 +220,79 @@ const PersonForm = forwardRef(
       return total;
     };
 
+    const renderMMISFields = ({ year, errors, control, i }) => (
+      <Fragment>
+        <Controller
+          key={`${year}-medicaidShare`}
+          name={`medicaidShare.${year}`}
+          control={control}
+          render={({ field: { ...props } }) => (
+            <NumberField
+              {...props}
+              label="Medicaid Share (%)"
+              size="medium"
+              min={0}
+              hint="Enter the percentage that is allocated towards Medicaid"
+              data-cy={`key-person-${index}-${i}__medicaidShare`}
+              onChange={e => {
+                handleMedicaidShareChange(year, e);
+              }}
+              onBlur={() => {
+                trigger(`medicaidShare.${year}`);
+              }}
+              errorMessage={
+                errors?.medicaidShare &&
+                errors?.medicaidShare[year] &&
+                errors?.medicaidShare[year]?.message
+              }
+              errorPlacement="bottom"
+            />
+          )}
+        />
+        <Controller
+          key={`${year}-split`}
+          name={`split.${year}`}
+          control={control}
+          data-cy={`key-person-${index}-${i}__split`}
+          render={({ field: { value, ...props } }) => (
+            <ChoiceList
+              {...props}
+              choices={[
+                {
+                  checked: value?.federal == 90,
+                  label: '90/10 DDI',
+                  value: '90-10'
+                },
+                {
+                  checked: value?.federal == 75,
+                  label: '75/25 Operations',
+                  value: '75-25'
+                }
+              ]}
+              type="radio"
+              label="Federal-State Split"
+              hint="Select the match rate for Federal Financial Participation applicable to this activity. A FFP of 90-10 means 90% of the total will be Federal government’s share and 10% will be the State’s share."
+              onChange={e => {
+                handleSplitChange(year, e);
+              }}
+              onBlur={() => {
+                trigger(`split.${year}`);
+              }}
+              errorMessage={
+                errors?.split &&
+                errors?.split[year] &&
+                errors?.split[year]?.state?.message
+              }
+              errorPlacement="bottom"
+            />
+          )}
+        />
+      </Fragment>
+    );
+
     const primary = index === 0;
+
+    const tRoot = `apd.stateProfile.keyPersonnel${apdType}`;
 
     return (
       <form id={`key-personnel-${index}`} onSubmit={onSubmit} aria-label="form">
@@ -330,8 +462,20 @@ const PersonForm = forwardRef(
                                 )}
                               </Fragment>
                             </div>
-                            <strong>Total: </strong>
-                            <Dollars>{totalCostFte(year)}</Dollars>
+                            <div className="ds-u-margin-top--2">
+                              <strong>Total: </strong>
+                              <Dollars>{totalCostFte(year)}</Dollars>
+                              <span className="ds-c-field__hint">
+                                Cost with benefits x FTE = Total
+                              </span>
+                            </div>
+                            {apdType === 'MMIS' &&
+                              renderMMISFields({
+                                year,
+                                errors,
+                                control,
+                                i
+                              })}
                           </div>
                         </Fragment>
                       ))}
@@ -383,15 +527,20 @@ PersonForm.propTypes = {
   }).isRequired,
   years: PropTypes.array.isRequired,
   savePerson: PropTypes.func.isRequired,
-  setFormValid: PropTypes.func.isRequired
+  setFormValid: PropTypes.func.isRequired,
+  apdType: PropTypes.string.isRequired
 };
+
+const mapStateToProps = state => ({
+  apdType: selectApdType(state)
+});
 
 const mapDispatchToProps = {
   savePerson: saveKeyPersonnel
 };
 
-export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
-  PersonForm
-);
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  forwardRef: true
+})(PersonForm);
 
 export { PersonForm as plain, mapDispatchToProps };

@@ -9,13 +9,14 @@
   },
   "env": {
     "node": true,
-    "es6": true
+    "es2021": true
   },
   "rules": {
     "arrow-body-style": "off",
     "no-param-reassign": [2, { "props": false }],
     "prefer-destructuring": [0],
-    "import/extensions": ["error", "ignorePackages"]
+    "import/extensions": ["error", "ignorePackages"],
+    "import/no-commonjs": [2]
   },
   "overrides": [
     {
