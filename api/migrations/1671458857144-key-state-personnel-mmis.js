@@ -1,8 +1,10 @@
-const logger = require('../logger/index.js')(
+import loggerFactory from '../logger/index.js';
+import { setup, teardown } from '../db/mongodb.js';
+import { HITECH } from '../models/index.js';
+
+const logger = loggerFactory(
   'mongoose-migrate/migrate-key-state-personnel-mmis'
 );
-const { setup, teardown } = require('../db/mongodb.js');
-const { HITECH } = require('../models/index.js');
 
 /**
  * Update HITECH APDs to have a default 90-10 split for key state personnel
