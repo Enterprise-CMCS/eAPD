@@ -1,13 +1,9 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const can = require('../../../middleware').can;
-const validForState = require('../../../middleware').validForState;
-
-const getEndpoint = require('./get');
-
-const mockExpress = require('../../../util/mockExpress');
-const mockResponse = require('../../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import { can, validForState } from '../../../middleware/index.js';
+import getEndpoint from './get.js';
+import mockExpress from '../../../util/mockExpress.js';
+import mockResponse from '../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -19,8 +15,8 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
   endpointTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    getPopulatedAffiliationsByStateId = sinon.stub();
+    next = stub();
+    getPopulatedAffiliationsByStateId = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
@@ -31,7 +27,7 @@ tap.test('GET /states/:stateId/affiliations', async endpointTest => {
         '/states/:stateId/affiliations',
         can('view-affiliations'),
         validForState('stateId'),
-        sinon.match.func
+        match.func
       ),
       'state-specific affiliations GET endpoint is registered'
     );
@@ -117,8 +113,8 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
   tests.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    getPopulatedAffiliationById = sinon.stub();
+    next = stub();
+    getPopulatedAffiliationById = stub();
   });
 
   tests.test('setup', async setupTest => {
@@ -129,7 +125,7 @@ tap.test('GET /states/:stateId/affiliations/:id', async tests => {
         '/states/:stateId/affiliations/:id',
         can('view-affiliations'),
         validForState('stateId'),
-        sinon.match.func
+        match.func
       ),
       'specific affiliation GET endpoint is registered'
     );

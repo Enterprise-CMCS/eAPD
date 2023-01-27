@@ -1,5 +1,7 @@
-const logger = require('./logger')('main');
-const api = require('./api');
+import loggerFactory from './logger/index.js';
+import api from './api.js';
+
+const logger = loggerFactory('main');
 
 const { PORT } = process.env;
 

@@ -2,7 +2,7 @@ import {
   default as costAllocationSchema,
   costAllocationFFPSchema,
   costAllocationOtherSchema
-} from './costAllocation';
+} from './costAllocation.js';
 
 describe('cost allocation validation', () => {
   describe('cost allocation ffp', () => {

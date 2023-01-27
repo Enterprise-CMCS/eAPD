@@ -18,7 +18,7 @@ import RichText from '../../../../components/RichText';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import { Subsection } from '../../../../components/Section';
 
-import { hitechActivityOverviewNoSCSchema } from '@cms-eapd/common/schemas/activityOverview';
+import { hitechActivityOverviewNoSCSchema as schema } from '@cms-eapd/common';
 
 const HITECHOverview = ({
   activity,
@@ -42,7 +42,7 @@ const HITECHOverview = ({
       description: description,
       summary: summary
     },
-    resolver: joiResolver(hitechActivityOverviewNoSCSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

@@ -1,5 +1,9 @@
-const fs = require('fs');
-const logger = require('../logger')('endpoint coverage middleware');
+import fs from 'fs';
+import loggerFactory from '../logger/index.js';
+import { resolve } from 'path';
+import * as url from 'url';
+
+const logger = loggerFactory('endpoint coverage middleware');
 
 const { ENDPOINT_COVERAGE_CAPTURE } = process.env;
 
@@ -32,9 +36,12 @@ const getOpenApiUrl = url => {
   return out;
 };
 
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const filename = resolve(__dirname, '..', 'endpoint-data.json');
+
 let endpoints = [];
-if (fs.existsSync('./endpoint-data.json')) {
-  endpoints = JSON.parse(fs.readFileSync('./endpoint-data.json'));
+if (fs.existsSync(filename)) {
+  endpoints = JSON.parse(fs.readFileSync(filename));
 }
 
 const registerCoverageMiddleware = server => {
@@ -77,7 +84,7 @@ const registerCoverageMiddleware = server => {
         logger.error(e, path);
       }
 
-      fs.writeFileSync('./endpoint-data.json', JSON.stringify(endpoints));
+      fs.writeFileSync(filename, JSON.stringify(endpoints));
 
       return end(...args);
     };
@@ -86,6 +93,6 @@ const registerCoverageMiddleware = server => {
   });
 };
 
-module.exports = {
+export default {
   registerCoverageMiddleware
 };

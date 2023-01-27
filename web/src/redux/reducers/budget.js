@@ -1,6 +1,6 @@
 import { RESET } from '../actions/app';
 import { LOAD_BUDGET } from '../actions/budget';
-import { defaultBudgetObject } from '@cms-eapd/common/utils/budget';
+import { defaultBudgetObject } from '@cms-eapd/common';
 
 // eslint-disable-next-line default-param-last
 const reducer = (state = defaultBudgetObject([]), action) => {

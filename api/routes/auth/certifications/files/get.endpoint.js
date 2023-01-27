@@ -1,8 +1,8 @@
-const {
+import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../../endpoint-tests/utils');
+} from '../../../../endpoint-tests/utils.js';
 
 describe('auth/certifications/files endpoints', () => {
   describe('Get a file by fileId | GET /auth/certifications/:fileID', () => {

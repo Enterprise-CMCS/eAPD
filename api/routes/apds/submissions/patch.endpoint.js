@@ -1,10 +1,10 @@
-const {
+import {
   apiKeyAuth,
   getDB,
   setupDB,
   teardownDB
-} = require('../../../endpoint-tests/utils');
-const { mnAPDId, badAPDId } = require('../../../seeds/test/apds');
+} from '../../../endpoint-tests/utils.js';
+import { mnAPDId, badAPDId } from '../../../seeds/test/apds.js';
 
 describe(' /apds/submissions', () => {
   const db = getDB();

@@ -1,23 +1,24 @@
-const { applyPatch } = require('fast-json-patch');
-const {
+import fastPatch from 'fast-json-patch';
+import {
   deepCopy,
   calculateBudget,
   hasBudgetUpdate,
   APD_TYPE
-} = require('@cms-eapd/common');
-
-const knex = require('./knex');
-const logger = require('../logger')('db/apds');
-const { updateStateProfile } = require('./states');
-const {
+} from '@cms-eapd/common';
+import loggerFactory from '../logger/index.js';
+import { updateStateProfile } from './states.js';
+import adminCheckApd from '../util/adminCheck.js';
+import knex from './knex.js';
+import {
   Budget,
   HITECHBudget,
   MMISBudget,
   APD,
   HITECH,
   MMIS
-} = require('../models/index');
-const { adminCheckApd } = require('../util/adminCheck');
+} from '../models/index.js';
+
+const logger = loggerFactory('db/apds');
 
 const getApdModel = apdType => {
   let model;
@@ -49,7 +50,7 @@ const getBudgetModel = apdType => {
   return model;
 };
 
-const createAPD = async apd => {
+export const createAPD = async apd => {
   const apdJSON = deepCopy(apd);
   const { apdType } = apd;
 
@@ -62,10 +63,10 @@ const createAPD = async apd => {
   return apdDoc._id.toString(); // eslint-disable-line no-underscore-dangle
 };
 
-const deleteAPDByID = async id =>
+export const deleteAPDByID = async id =>
   APD.updateOne({ _id: id }, { status: 'archived' });
 
-const getAllAPDsByState = async stateId =>
+export const getAllAPDsByState = async stateId =>
   APD.find(
     { stateId, status: 'draft' },
     '_id id createdAt updatedAt stateId status name years apdType'
@@ -73,13 +74,13 @@ const getAllAPDsByState = async stateId =>
     .lean({ virtuals: true })
     .sort({ updatedAt: 'desc' });
 
-const getAPDByID = async id =>
+export const getAPDByID = async id =>
   APD.findById(id).populate('budget').lean({ virtuals: true });
 
-const getAPDByIDAndState = async (id, stateId) =>
+export const getAPDByIDAndState = async (id, stateId) =>
   APD.findOne({ _id: id, stateId }).populate('budget').lean({ virtuals: true });
 
-const getAllSubmittedAPDs = async () =>
+export const getAllSubmittedAPDs = async () =>
   APD.find({ status: 'submitted' }).populate('budget').lean({ virtuals: true });
 
 const processUpdate = (
@@ -136,7 +137,7 @@ const processUpdate = (
       });
   });
 
-const updateAPDReviewStatus = async ({ updates = [] } = {}) => {
+export const updateAPDReviewStatus = async ({ updates = [] } = {}) => {
   const updatedAt = new Date().toISOString();
   return Promise.all(updates.map(update => processUpdate(updatedAt, update)));
 };
@@ -146,7 +147,7 @@ const patchAPD = async ({ id, stateId, apdDoc, patch }) => {
   // duplicate the apdDoc so that dates will be converted to strings
   const apdJSON = deepCopy(apdDoc);
   // apply the patches to the apd
-  const { newDocument } = applyPatch(apdJSON, patch);
+  const { newDocument } = fastPatch.applyPatch(apdJSON, patch);
   // update the apd in the database
   await APD.replaceOne({ _id: id, stateId }, newDocument, {
     multipleCastError: true,
@@ -157,14 +158,14 @@ const patchAPD = async ({ id, stateId, apdDoc, patch }) => {
   return APD.findOne({ _id: id, stateId }).lean({ virtuals: true });
 };
 
-const adminCheckAPDDocument = async id => {
+export const adminCheckAPDDocument = async id => {
   // get the updated apd json
   const apdDoc = await getAPDByID(id);
   // call admin check util
   return adminCheckApd(apdDoc);
 };
 
-const updateAPDDocument = async (
+export const updateAPDDocument = async (
   { id, stateId, patch },
   { updateProfile = updateStateProfile } = {}
 ) => {
@@ -273,16 +274,4 @@ const updateAPDDocument = async (
     stateUpdated: false,
     updated: []
   };
-};
-
-module.exports = {
-  createAPD,
-  deleteAPDByID,
-  getAllAPDsByState,
-  getAPDByID,
-  getAPDByIDAndState,
-  getAllSubmittedAPDs,
-  updateAPDReviewStatus,
-  updateAPDDocument,
-  adminCheckAPDDocument
 };

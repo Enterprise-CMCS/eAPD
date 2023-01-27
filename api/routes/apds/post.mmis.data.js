@@ -1,9 +1,9 @@
-const { forAllYears, APD_TYPE } = require('@cms-eapd/common');
+import { forAllYears, APD_TYPE } from '@cms-eapd/common';
 
 const getNewMmisApd = (years, yearOptions) => {
   const regsGenerator = () => ({
     procurement: [
-      { title: 'SSM, Part 11', checked: null, explanation: '' },
+      { title: 'SMM, Part 11', checked: null, explanation: '' },
       { title: '45 CFR Part 95.615', checked: null, explanation: '' },
       { title: '45 CFR Part 92.36', checked: null, explanation: '' }
     ],
@@ -61,4 +61,4 @@ const getNewMmisApd = (years, yearOptions) => {
   };
 };
 
-module.exports = getNewMmisApd;
+export default getNewMmisApd;

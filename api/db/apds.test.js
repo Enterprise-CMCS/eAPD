@@ -1,10 +1,9 @@
-const sinon = require('sinon');
-const tap = require('tap');
-const { APD_TYPE } = require('@cms-eapd/common');
-const ObjectId = require('mongoose').Types.ObjectId;
-const knex = require('./knex');
-
-const {
+import { useFakeTimers, stub } from 'sinon';
+import tap from 'tap';
+import { APD_TYPE } from '@cms-eapd/common';
+import mongoose from 'mongoose';
+import knex from './knex.js';
+import {
   createAPD,
   deleteAPDByID,
   getAllAPDsByState,
@@ -14,17 +13,17 @@ const {
   getAPDByIDAndState,
   updateAPDDocument,
   adminCheckAPDDocument
-} = require('./apds');
-const { setup, teardown } = require('./mongodb');
-const {
+} from './apds.js';
+import { setup, teardown } from './mongodb.js';
+import {
   APD,
   HITECH,
   MMIS,
   Budget,
   HITECHBudget,
   MMISBudget
-} = require('../models/index');
-const { hitech, mmis } = require('../seeds/development/apds');
+} from '../models/index.js';
+import { hitech, mmis } from '../seeds/development/apds.js';
 
 const nowDate = Date.UTC(1904, 9, 3, 0, 0, 0, 0);
 let clockStub;
@@ -44,7 +43,7 @@ tap.test('database wrappers / apds', async apdsTests => {
   apdsTests.before(async () => {
     // Trisha Elric, Edward and Alfonse's mother, dies of complications from
     // a plague, kicking off the Elric brothers' quest for human transmutation.
-    clockStub = sinon.stub(Date, 'now').returns(nowDate);
+    clockStub = stub(Date, 'now').returns(nowDate);
     await setup();
 
     await Budget.deleteMany();
@@ -237,7 +236,9 @@ tap.test('database wrappers / apds', async apdsTests => {
 
       updateApdStatus.test('apd not found error', async test => {
         const status = await updateAPDReviewStatus({
-          updates: [{ apdId: new ObjectId(), newStatus: 'approved' }]
+          updates: [
+            { apdId: new mongoose.Types.ObjectId(), newStatus: 'approved' }
+          ]
         });
         test.equal(status[0].error, 'No APD found for APD Id');
         test.ok(status[0].updatedStatus === undefined);
@@ -259,7 +260,7 @@ tap.test('database wrappers / apds', async apdsTests => {
           const status = await updateAPDReviewStatus({
             updates: [
               { apdId: 'badId', newStatus: 'approved' },
-              { apdId: new ObjectId(), newStatus: 'approved' },
+              { apdId: new mongoose.Types.ObjectId(), newStatus: 'approved' },
               { apdId: hitechId },
               { apdId: mmisId, newStatus: 'approved' }
             ]
@@ -356,7 +357,7 @@ tap.test('database wrappers / apds', async apdsTests => {
     { timeout: 450000 },
     async updateAPDDocumentTests => {
       updateAPDDocumentTests.beforeEach(() => {
-        clockStub = sinon.useFakeTimers(nowDate);
+        clockStub = useFakeTimers(nowDate);
       });
 
       updateAPDDocumentTests.afterEach(async () => {
@@ -505,7 +506,7 @@ tap.test('database wrappers / apds', async apdsTests => {
       });
 
       updateAPDDocumentTests.test('with a state profile', async test => {
-        const updateProfile = sinon.stub();
+        const updateProfile = stub();
         updateProfile
           .withArgs('ak', {
             medicaidDirector: {
