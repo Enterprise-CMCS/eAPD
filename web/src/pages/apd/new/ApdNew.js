@@ -92,8 +92,8 @@ const ApdNew = ({ createApd: create }) => {
       setApdType(APD_TYPE.HITECH);
       setValue('apdType', APD_TYPE.HITECH, { shouldValidate: true });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apdChoices, enableMmis]);
+  }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const {
     control,
     setValue,

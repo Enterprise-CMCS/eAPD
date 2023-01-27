@@ -831,6 +831,20 @@ describe('APD reducer', () => {
                 fte: { 1: 0, 2: 0 },
                 name: '',
                 position: '',
+                split: {
+                  1: {
+                    federal: 0,
+                    state: 0
+                  },
+                  2: {
+                    federal: 0,
+                    state: 0
+                  }
+                },
+                medicaidShare: {
+                  1: 0,
+                  2: 0
+                },
                 key: expect.stringMatching(/^[a-f0-9]{8}$/)
               }
             ]
@@ -854,6 +868,20 @@ describe('APD reducer', () => {
                 fte: { 1: 0, 2: 0 },
                 name: '',
                 position: '',
+                split: {
+                  1: {
+                    federal: 0,
+                    state: 0
+                  },
+                  2: {
+                    federal: 0,
+                    state: 0
+                  }
+                },
+                medicaidShare: {
+                  1: 0,
+                  2: 0
+                },
                 key: 'primary'
               }
             ]
@@ -879,6 +907,20 @@ describe('APD reducer', () => {
                 fte: { 1: 0, 2: 0 },
                 name: '',
                 position: '',
+                split: {
+                  1: {
+                    federal: 0,
+                    state: 0
+                  },
+                  2: {
+                    federal: 0,
+                    state: 0
+                  }
+                },
+                medicaidShare: {
+                  1: 0,
+                  2: 0
+                },
                 key: 'primary'
               },
               {
@@ -890,6 +932,20 @@ describe('APD reducer', () => {
                 fte: { 1: 0, 2: 0 },
                 name: '',
                 position: '',
+                split: {
+                  1: {
+                    federal: 0,
+                    state: 0
+                  },
+                  2: {
+                    federal: 0,
+                    state: 0
+                  }
+                },
+                medicaidShare: {
+                  1: 0,
+                  2: 0
+                },
                 key: expect.stringMatching(/^[a-f0-9]{8}$/)
               }
             ]
@@ -1402,6 +1458,20 @@ describe('APD reducer helper methods', () => {
             fte: { 1: 0, 2: 0 },
             name: '',
             position: '',
+            split: {
+              1: {
+                federal: 0,
+                state: 0
+              },
+              2: {
+                federal: 0,
+                state: 0
+              }
+            },
+            medicaidShare: {
+              1: 0,
+              2: 0
+            },
             key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }
         }
@@ -1432,6 +1502,20 @@ describe('APD reducer helper methods', () => {
             fte: { 1: 0, 2: 0 },
             name: '',
             position: '',
+            split: {
+              1: {
+                federal: 0,
+                state: 0
+              },
+              2: {
+                federal: 0,
+                state: 0
+              }
+            },
+            medicaidShare: {
+              1: 0,
+              2: 0
+            },
             key: expect.stringMatching(/^[a-f0-9]{8}$/)
           }
         }

@@ -106,6 +106,29 @@ const apdSchema = new mongoose.Schema(
               type: Number,
               default: 0
             }
+          },
+          split: {
+            type: Map,
+            of: new mongoose.Schema(
+              {
+                federal: {
+                  type: Number,
+                  default: 0
+                },
+                state: {
+                  type: Number,
+                  default: 0
+                }
+              },
+              { _id: false }
+            )
+          },
+          medicaidShare: {
+            type: Map,
+            of: {
+              type: Number,
+              default: 0
+            }
           }
         }
       ]
