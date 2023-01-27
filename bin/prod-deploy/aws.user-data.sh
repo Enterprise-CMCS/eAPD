@@ -220,23 +220,22 @@ yarn install --frozen-lockfile --non-interactive --production --network-timeout 
 #yarn rebuild knex ### TODO use when yarn is updated
 yarn add --force knex
 yarn add newrelic
-cp node_modules/newrelic/newrelic.js api/newrelic.js
+cp node_modules/newrelic/newrelic.js api/newrelic.cjs
 
 cd api
-yarn build
 
-sed -i 's|My Application|eAPD API|g' newrelic.js
-sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|require('newrelic');\n|" main.js
+sed -i 's|My Application|eAPD API|g' newrelic.cjs
+sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.cjs
+sed -i "1 s|^|import('newrelic');\n|" main.js
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace the
 # "ECOSYSTEM" placeholder below with a base64-encoded JSON string of an
 # ecosystem file.
-echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
+echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.cjs
 # Start it up
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 E_USER
 
 # Restart New Relic Infrastructure Monitor

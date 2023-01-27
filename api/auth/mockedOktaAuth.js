@@ -35,6 +35,15 @@ const stateAdmin = {
   }
 };
 
+const stateStaff = {
+  status: 'ACTIVE',
+  id: 'state-staff',
+  profile: {
+    displayName: 'State Staff',
+    email: 'statestaff@email.com'
+  }
+};
+
 const allPermissionsNoState = {
   status: 'ACTIVE',
   id: 'all-permissions-no-state',
@@ -53,7 +62,7 @@ const allPermissionsAndState = {
   }
 };
 
-const mockOktaClient = {
+export const mockOktaClient = {
   listUsers: () => {
     return new Promise(resolve => {
       resolve([
@@ -62,7 +71,8 @@ const mockOktaClient = {
         allPermissionsNoState,
         allPermissionsAndState,
         fedAdmin,
-        stateAdmin
+        stateAdmin,
+        stateStaff
       ]);
     });
   },
@@ -87,13 +97,18 @@ const mockOktaClient = {
         resolve(stateAdmin);
       });
     }
+    if (id === 'state-staff') {
+      return new Promise(resolve => {
+        resolve(stateStaff);
+      });
+    }
     return new Promise(resolve => {
       resolve(allPermissionsAndState);
     });
   }
 };
 
-const mockVerifyJWT = token => {
+export const mockVerifyJWT = token => {
   if (token === 'no-permissions') {
     return {
       sub: 'no-permissions@email.com',
@@ -136,16 +151,11 @@ const mockVerifyJWT = token => {
       uid: 'state-admin'
     };
   }
-  if (token === 'state-admin') {
+  if (token === 'state-staff') {
     return {
-      sub: 'stateadmin@email.com',
-      uid: 'state-admin'
+      sub: 'statestaff@email.com',
+      uid: 'state-staff'
     };
   }
   return false;
-};
-
-module.exports = {
-  mockOktaClient,
-  mockVerifyJWT
 };

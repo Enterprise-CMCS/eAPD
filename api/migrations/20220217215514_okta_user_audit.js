@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.up = async knex =>
+export const up = async knex =>
   knex.schema.createTable('okta_user_audit', table => {
     table.string('user_id').notNullable().comment('id of the user in the okta');
     table.string('username').comment('username of the user');
@@ -34,4 +34,4 @@ exports.up = async knex =>
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = async knex => knex.schema.dropTable('okta_user_audit');
+export const down = async knex => knex.schema.dropTable('okta_user_audit');

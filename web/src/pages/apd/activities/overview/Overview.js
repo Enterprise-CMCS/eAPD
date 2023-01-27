@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import { APD_TYPE } from '@cms-eapd/common';
 import MMISOverview from './MMISOverview';
 import HITECHOverview from './HITECHOverview';
 import StandardsAndConditions from './StandardsAndConditions';

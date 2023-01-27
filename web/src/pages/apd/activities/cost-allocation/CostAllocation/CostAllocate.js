@@ -11,7 +11,7 @@ import { selectActivityByIndex } from '../../../../../redux/selectors/activities
 import { selectAdminCheckEnabled } from '../../../../../redux/selectors/apd.selectors';
 import { Subsection } from '../../../../../components/Section';
 
-import costAllocationNarrativeSchema from '@cms-eapd/common/schemas/costAllocationNarrative';
+import { costAllocationNarrativeSchema as schema } from '@cms-eapd/common';
 
 const CostAllocate = ({
   activity,
@@ -33,7 +33,7 @@ const CostAllocate = ({
     defaultValues: {
       methodology: methodology
     },
-    resolver: joiResolver(costAllocationNarrativeSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

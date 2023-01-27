@@ -1,8 +1,8 @@
-const {
+import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
+} from '../../../endpoint-tests/utils.js';
 
 describe('auth activities endpoint | GET /auth/activities', () => {
   const url = '/auth/activities';

@@ -1,6 +1,10 @@
-const jwt = require('jsonwebtoken'); // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
-const { verifyJWT } = require('./oktaAuth');
-const { getUserByID, populateUserRole, userLoggedIntoState } = require('../db');
+import jwt from 'jsonwebtoken'; // https://github.com/auth0/node-jsonwebtoken/tree/v8.3.0
+import { verifyJWT } from './oktaAuth.js';
+import {
+  getUserByID,
+  populateUserRole,
+  userLoggedIntoState
+} from '../db/index.js';
 
 /**
  * Returns the payload from the signed JWT, or false.
@@ -11,7 +15,7 @@ const { getUserByID, populateUserRole, userLoggedIntoState } = require('../db');
  * allows for switching between okta and local varification patterns
  * @returns {(Object|Boolean)} JWT payload, or false
  */
-const verifyWebToken = (token, { verifier = verifyJWT } = {}) =>
+export const verifyWebToken = (token, { verifier = verifyJWT } = {}) =>
   verifier(token);
 
 /**
@@ -20,7 +24,7 @@ const verifyWebToken = (token, { verifier = verifyJWT } = {}) =>
  * @param {Object} req - request
  * @returns {(String|null)} JWT string or null
  */
-const jwtExtractor = req => {
+export const jwtExtractor = req => {
   const token = req.get('Authorization');
 
   if (token && token !== '') {
@@ -76,15 +80,15 @@ const defaultOptions = {
   issuer: 'eAPD'
 };
 
-const getDefaultOptions = () => {
+export const getDefaultOptions = () => {
   return { ...defaultOptions };
 };
 
-const sign = (payload, options = defaultOptions) => {
+export const sign = (payload, options = defaultOptions) => {
   return jwt.sign(payload, getSecret(), options);
 };
 
-const verifyEAPDToken = token => {
+export const actualVerifyEAPDToken = token => {
   try {
     return jwt.verify(token, getSecret());
   } catch (err) {
@@ -92,7 +96,14 @@ const verifyEAPDToken = token => {
   }
 };
 
-const exchangeToken = async (
+export const verifyEAPDToken = token => {
+  if (process.env.NODE_ENV === 'test') {
+    return getUserByID(token, false);
+  }
+  return actualVerifyEAPDToken(token);
+};
+
+export const exchangeToken = async (
   req,
   {
     extractor = jwtExtractor,
@@ -114,7 +125,7 @@ const exchangeToken = async (
   return user;
 };
 
-const updateUserToken = async (
+export const updateUserToken = async (
   req,
   {
     extractor = jwtExtractor,
@@ -134,7 +145,7 @@ const updateUserToken = async (
   return user;
 };
 
-const changeState = async (
+export const changeState = async (
   user,
   stateId,
   { populate = populateUserRole, auditUserLogin = userLoggedIntoState } = {}
@@ -143,33 +154,3 @@ const changeState = async (
   auditUserLogin(populatedUser, stateId);
   return sign(populatedUser, {});
 };
-
-const mockVerifyEAPDJWT = async token => {
-  const user = await getUserByID(token, false);
-  return user;
-};
-
-if (process.env.NODE_ENV === 'test') {
-  module.exports = {
-    verifyWebToken,
-    jwtExtractor,
-    getDefaultOptions,
-    sign,
-    verifyEAPDToken: mockVerifyEAPDJWT,
-    exchangeToken,
-    updateUserToken,
-    actualVerifyEAPDToken: verifyEAPDToken,
-    changeState
-  };
-} else {
-  module.exports = {
-    verifyWebToken,
-    jwtExtractor,
-    getDefaultOptions,
-    sign,
-    verifyEAPDToken,
-    exchangeToken,
-    updateUserToken,
-    changeState
-  };
-}

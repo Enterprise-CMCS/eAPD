@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   const apds = await knex('apds').select('id', 'document');
 
   // In the old model, some string values defaulted to null. In the new
@@ -30,4 +30,4 @@ exports.up = async knex => {
   );
 };
 
-exports.down = async () => {};
+export const down = async () => {};

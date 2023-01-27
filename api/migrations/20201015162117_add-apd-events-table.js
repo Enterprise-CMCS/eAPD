@@ -1,4 +1,4 @@
-exports.up = async knex =>
+export const up = async knex =>
   knex.schema.createTable('apd_events', table => {
     table.comment('events performed on the APD');
     table
@@ -22,4 +22,4 @@ exports.up = async knex =>
     table.primary(['event_id']);
   });
 
-exports.down = async () => {};
+export const down = async () => {};

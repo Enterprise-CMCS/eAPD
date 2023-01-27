@@ -1,5 +1,5 @@
-import ActivityPage from './activity-page';
-import BudgetPage from './budget-page';
+import ActivityPage from './activity-page.js';
+import BudgetPage from './budget-page.js';
 
 class PopulatePage {
   budgetPage = new BudgetPage();

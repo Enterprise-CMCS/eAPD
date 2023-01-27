@@ -1,13 +1,12 @@
-const nodeCrypto = require('crypto');
+import nodeCrypto from 'crypto';
+import { can, loggedIn } from '../../../../middleware/index.js';
+import loggerFactory from '../../../../logger/index.js';
+import { validateDoc as validDoc } from '../../../../util/fileValidation.js';
+import { putFile as put } from '../../../../files/index.js';
 
-const { loggedIn } = require('../../../../middleware/auth');
-const { can } = require('../../../../middleware');
-const logger = require('../../../../logger')('auth certifications files post');
+const logger = loggerFactory('auth certifications files post');
 
-const { putFile: put } = require('../../../../files');
-const { validateDoc: validDoc } = require('../../../../util/fileValidation');
-
-module.exports = (
+export default (
   app,
   { putFile = put, crypto = nodeCrypto, validateDoc = validDoc } = {}
 ) => {

@@ -1,12 +1,11 @@
-const mongoose = require('mongoose');
-const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
+import './budget.js';
+import mongoose from 'mongoose';
+import mongooseLeanVirtuals from 'mongoose-lean-virtuals';
+import activitySchema from './apdActivity.js';
 
-const { activitySchema } = require('./apdActivity');
-require('./budget');
+export const discriminatorOptions = { discriminatorKey: 'type' };
 
-const discriminatorOptions = { discriminatorKey: 'type' };
-
-const federalCitation = new mongoose.Schema(
+export const federalCitation = new mongoose.Schema(
   {
     title: String,
     checked: {
@@ -107,6 +106,29 @@ const apdSchema = new mongoose.Schema(
               type: Number,
               default: 0
             }
+          },
+          split: {
+            type: Map,
+            of: new mongoose.Schema(
+              {
+                federal: {
+                  type: Number,
+                  default: 0
+                },
+                state: {
+                  type: Number,
+                  default: 0
+                }
+              },
+              { _id: false }
+            )
+          },
+          medicaidShare: {
+            type: Map,
+            of: {
+              type: Number,
+              default: 0
+            }
           }
         }
       ]
@@ -140,6 +162,4 @@ apdSchema
 
 apdSchema.plugin(mongooseLeanVirtuals);
 
-const APD = mongoose.model('APD', apdSchema);
-
-module.exports = { APD, discriminatorOptions, federalCitation };
+export default mongoose.model('APD', apdSchema);

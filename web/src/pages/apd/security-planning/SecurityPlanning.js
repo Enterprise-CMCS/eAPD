@@ -49,7 +49,7 @@ const SecurityPlanning = ({
     } else {
       clearErrors();
     }
-  }, [adminCheck]);
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <React.Fragment>

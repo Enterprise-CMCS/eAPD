@@ -1,10 +1,10 @@
-const {
+import {
   defaultAPDYearOptions,
   defaultAPDYears,
   APD_TYPE
-} = require('@cms-eapd/common');
-const getNewHitechApd = require('./post.hitech.data');
-const getNewMmisApd = require('./post.mmis.data');
+} from '@cms-eapd/common';
+import getNewHitechApd from './post.hitech.data.js';
+import getNewMmisApd from './post.mmis.data.js';
 
 const getNewApd = (apdType, years = [...defaultAPDYears()]) => {
   const yearOptions = defaultAPDYearOptions();
@@ -45,4 +45,4 @@ const getNewApd = (apdType, years = [...defaultAPDYears()]) => {
   };
 };
 
-module.exports = getNewApd;
+export default getNewApd;

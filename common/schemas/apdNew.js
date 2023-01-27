@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { APD_TYPE } from '../utils/constants';
+import { APD_TYPE } from '../utils/constants.js';
 
 const apdNewSchema = Joi.object({
   apdType: Joi.string()

@@ -1,30 +1,26 @@
-const swaggerUi = require('swagger-ui-express');
-const logger = require('../logger')('routes index');
-const affiliations = require('./affiliations');
-const apds = require('./apds');
-const apdsEvents = require('./apds/events');
-const apdsFiles = require('./apds/files');
-const auth = require('./auth');
-const docs = require('./docs');
-const roles = require('./roles');
-const states = require('./states');
-const stateAffiliations = require('./states/affilitations');
-const users = require('./users');
-const openAPI = require('./openAPI');
+import swaggerUi from 'swagger-ui-express';
+import loggerFactory from '../logger/index.js';
+import affiliations from './affiliations/index.js';
+import apds from './apds/index.js';
+import auth from './auth/index.js';
+import docs from './docs/index.js';
+import roles from './roles/index.js';
+import states from './states/index.js';
+import users from './users/index.js';
+import openAPI from './openAPI/index.js';
+
+const logger = loggerFactory('routes index');
 
 // ############### ROUTE IMPORT INSERTION POINT #######################
-module.exports = (
+export default (
   app,
   {
     affiliationsEndpoint = affiliations,
     apdsEndpoint = apds,
-    apdsEventsEndpoint = apdsEvents,
-    apdsFilesEndpoint = apdsFiles,
     authEndpoint = auth,
     docsEndpoint = docs,
     rolesEndpoint = roles,
     statesEndpoint = states,
-    stateAffiliationEndpoint = stateAffiliations,
     usersEndpoint = users,
     openAPIdoc = openAPI
   } = {}
@@ -33,10 +29,6 @@ module.exports = (
   affiliationsEndpoint(app);
   logger.debug('setting up routes for apds');
   apdsEndpoint(app);
-  logger.debug('setting up routes for apds/events');
-  apdsEventsEndpoint(app);
-  logger.debug('setting up routes for apds/files');
-  apdsFilesEndpoint(app);
   logger.debug('setting up routes for auth');
   authEndpoint(app);
   logger.debug('setting up routes for docs');
@@ -45,8 +37,6 @@ module.exports = (
   rolesEndpoint(app);
   logger.debug('setting up routes for states');
   statesEndpoint(app);
-  logger.debug('setting up routes for states/affiliation');
-  stateAffiliationEndpoint(app);
   logger.debug('setting up routes for users');
   usersEndpoint(app);
 

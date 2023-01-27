@@ -5,7 +5,6 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY package.json .
-COPY babel.config.js .
 COPY yarn.lock .
 COPY web ./web
 COPY common ./common
@@ -14,8 +13,6 @@ RUN chown -R node:node /app
 USER node:node
 
 RUN yarn install --frozen-lockfile --non-interactive
-WORKDIR /app/common
-RUN yarn build
 
 WORKDIR /app/web
 CMD yarn run start

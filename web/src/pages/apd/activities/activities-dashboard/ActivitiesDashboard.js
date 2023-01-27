@@ -13,7 +13,7 @@ import Waypoint from '../../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../../components/AlertMissingFFY';
 import { selectApdType } from '../../../../redux/selectors/apd.selectors';
 
-import activitiesDashboardSchema from '@cms-eapd/common/schemas/activitiesDashboard';
+import { activitiesDashboard as schema } from '@cms-eapd/common';
 import Instruction from '../../../../components/Instruction';
 
 const All = ({ addActivity, activities, adminCheck, apdType }) => {
@@ -22,7 +22,7 @@ const All = ({ addActivity, activities, adminCheck, apdType }) => {
 
   useEffect(() => {
     if (adminCheck) {
-      setValidation(activitiesDashboardSchema.validate(activities));
+      setValidation(schema.validate(activities));
     } else {
       setValidation();
     }

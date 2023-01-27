@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 import { render, fireEvent } from '@testing-library/react';
-import { thisFFY } from '@cms-eapd/common/utils/utils';
+import { thisFFY } from '@cms-eapd/common';
 import { setCookie } from '../../../util/auth';
 import * as mockAuth from '../../../util/auth';
 import axios from '../../../util/api';
