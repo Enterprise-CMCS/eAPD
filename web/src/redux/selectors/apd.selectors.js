@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { INCENTIVE_ENTRIES } from '../../util';
 import { stringToNumber } from '../../util/formats';
 
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import { APD_TYPE } from '@cms-eapd/common';
 
 export const selectApds = ({ apd }) => apd;
 
