@@ -57,7 +57,6 @@ const SecurityPlanning = ({
         <hr className="custom-hr" />
         <div className="data-entry-box ds-u-margin-y--3">
           <label
-            id="label-for-security-interface-plan"
             className="ds-c-label--full-width"
             htmlFor="security-interface-plan"
           >
@@ -91,11 +90,7 @@ const SecurityPlanning = ({
           />
         </div>
         <div className="data-entry-box">
-          <label
-            id="label-for-business-continuity-and-disaster-recovery-plan"
-            className="ds-c-label--full-width"
-            htmlFor="bc-dr-plan"
-          >
+          <label className="ds-c-label--full-width" htmlFor="bc-dr-plan">
             <h2 className="ds-c-label">
               {titleCase(t('securityPlanning.bcDrplan.instruction.label'))}
             </h2>
