@@ -54,6 +54,8 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.fixture('mmis-basics.json').as('mmisBasics');
+
+    cy.useStateStaff();
     cy.visit(apdUrl);
   });
 
@@ -64,8 +66,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('Create MMIS APD', function () {
     it('tests Create New page', function () {
-      const mmisBasics = this.mmisBasics;
-
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
 
@@ -166,8 +166,10 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.contains('MMIS APD Test').should('not.exist');
     });
   });
-  describe('MMIS Pages', () => {
-    it('tests Activity Overview page', () => {
+  describe('MMIS Pages', function () {
+    it('tests Activity Overview page', function () {
+      const mmisBasics = this.mmisBasics;
+
       cy.goToActivityDashboard();
 
       // Create new Activity
@@ -225,27 +227,29 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.collapseAdminCheck();
 
       // Fill out fields and check that each validation error is cleared
-      cy.get(`[data-cy="activity-name"]`).click().type('The Coolest Activity');
+      cy.get(`[data-cy="activity-name"]`)
+        .click()
+        .type(mmisBasics.activities[0].name);
       cy.waitForSave();
       cy.contains('Provide an Activity name').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-snapshot-field',
-        'This is an activity snapshot.'
+        mmisBasics.activities[0].activityOverview.activitySnapshot
       );
       cy.waitForSave();
       cy.contains('Provide an Activity snapshot').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-problem-statement-field',
-        'This is a problem statement.'
+        mmisBasics.activities[0].activityOverview.problemStatement
       );
       cy.waitForSave();
       cy.contains('Provide a Problem statement').should('not.exist');
 
       cy.setTinyMceContent(
         'activity-proposed-solution-field',
-        'This is a proposed solution.'
+        mmisBasics.activities[0].activityOverview.proposedSolution
       );
       cy.waitForSave();
       cy.contains('Provide a Proposed solution').should('not.exist');
@@ -266,25 +270,25 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.goToActivityOverview(0);
 
       cy.contains('Activity name').should('exist');
-      cy.checkTinyMCE('activity-name-field', 'The Coolest Activity');
+      cy.checkTinyMCE('activity-name-field', mmisBasics.activities[0].name);
       cy.contains('Activity snapshot').should('exist');
       cy.checkTinyMCE(
         'activity-snapshot-field',
-        '<p>This is an activity snapshot.</p>'
+        `<p>${mmisBasics.activities[0].activityOverview.activitySnapshot}</p>`
       );
       cy.contains('Problem statement').should('exist');
       cy.checkTinyMCE(
         'activity-problem-statement-field',
-        '<p>This is a problem statement.</p>'
+        `<p>${mmisBasics.activities[0].activityOverview.problemStatement}</p>`
       );
       cy.contains('Proposed solution').should('exist');
       cy.checkTinyMCE(
         'activity-proposed-solution-field',
-        '<p>This is a proposed solution.</p>'
+        `<p>${mmisBasics.activities[0].activityOverview.proposedSolution}</p>`
       );
     });
 
-    it('tests Activity Overview page', () => {
+    it('tests Key State Personnel page', function () {
       cy.goToKeyStatePersonnel();
       cy.contains('Key Personnel and Program Management').should('exist');
 
@@ -347,7 +351,9 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       });
     });
 
-    it('tests the Security Planning page', () => {
+    it('tests the Security Planning page', function () {
+      const mmisBasics = this.mmisBasics;
+
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
 
