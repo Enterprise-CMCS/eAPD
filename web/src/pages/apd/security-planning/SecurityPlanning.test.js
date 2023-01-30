@@ -3,6 +3,21 @@ import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
 
 import SecurityPlanning from './SecurityPlanning';
 
+const initialStateEmpty = {
+  initialState: {
+    apd: {
+      data: {
+        apdType: 'MMIS',
+        securityPlanning: {
+          securityAndInterfacePlan: '',
+          businessContinuityAndDisasterRecovery: ''
+        },
+        activities: []
+      }
+    }
+  }
+};
+
 const initialState = {
   apd: {
     data: {
@@ -22,7 +37,7 @@ const setup = (props = {}, options = {}) =>
 
 describe('<Security Planning />', () => {
   it('should render correctly', () => {
-    setup({}, { initialState });
+    setup({}, initialStateEmpty);
   });
 
   it('should load existing data', async () => {
