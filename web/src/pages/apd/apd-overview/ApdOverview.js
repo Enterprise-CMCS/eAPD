@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Alert,
   ChoiceList,
@@ -8,9 +8,11 @@ import {
   TooltipIcon
 } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
-import DeleteModal from '../../../components/DeleteModal';
+import { useForm, Controller } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import sharedApdOverviewFields from '@cms-eapd/common/schemas/apdOverview';
 
 import {
   addYear,
@@ -20,11 +22,15 @@ import {
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
 
-import { selectSummary } from '../../../redux/selectors/apd.selectors';
+import {
+  selectSummary,
+  selectAdminCheckEnabled
+} from '../../../redux/selectors/apd.selectors';
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import ApdOverviewHITECHFields from './ApdOverviewHITECHFields';
 import ApdOverviewMMISFields from './ApdOverviewMMISFields';
+import DeleteModal from '../../../components/DeleteModal';
 
 const renderApdTypeSpecificFields = apdType => {
   const apdTypeSpecificFieldsMapping = {
@@ -41,17 +47,46 @@ const ApdOverview = ({
   removeApdYear,
   setName,
   years,
-  yearOptions
+  yearOptions,
+  adminCheck
 }) => {
   const [elementDeleteFFY, setElementDeleteFFY] = useState(null);
   const { enableMmis } = useFlags();
 
+  const {
+    control,
+    formState: { errors },
+    setValue,
+    trigger,
+    clearErrors,
+    register
+  } = useForm({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    resolver: joiResolver(sharedApdOverviewFields),
+    defaultValues: {
+      name: name
+    }
+  });
+
+  useEffect(() => {
+    if (adminCheck) {
+      trigger();
+    } else {
+      clearErrors();
+    }
+  }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const changeName = ({ target: { value } }) => {
+    setValue('name', value);
     setName(value);
   };
 
-  const onBlur = e => {
-    const apdNameInput = e.target.value;
+  const onBlur = ({ target: { value } }) => {
+    const apdNameInput = value;
+    if (adminCheck) {
+      trigger();
+    }
 
     if (apdNameInput.trim() === '') {
       setName('Untitled APD');
@@ -157,13 +192,25 @@ const ApdOverview = ({
           </span>
         </div>
       )}
-      <TextField
-        className="remove-clearfix"
-        label="APD Name"
-        name="apd-name"
-        onChange={changeName}
-        onBlur={onBlur}
-        value={name}
+      <Controller
+        name="name"
+        control={control}
+        render={() => {
+          return (
+            <TextField
+              {...register('name')}
+              label="APD Name"
+              className="remove-clearfix"
+              name="name"
+              value={name}
+              onChange={changeName}
+              onBlur={onBlur}
+              onComponentBlur={onBlur}
+              errorMessage={errors?.name?.message}
+              errorPlacement="bottom"
+            />
+          );
+        }}
       />
       <div className="ds-u-margin-y--3" data-cy="yearList">
         <ChoiceList
@@ -189,10 +236,16 @@ ApdOverview.propTypes = {
   removeApdYear: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
-  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired
+  yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  adminCheck: PropTypes.bool
+};
+
+ApdOverview.defaultProps = {
+  adminCheck: false
 };
 
 const mapStateToProps = state => ({
+  adminCheck: selectAdminCheckEnabled(state),
   apdType: state.apd.data.apdType,
   ...selectSummary(state)
 });

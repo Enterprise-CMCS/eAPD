@@ -22,6 +22,15 @@ const updateStatusSchema = Joi.object({
     'object.missing': 'Select an update type'
   });
 
+export const sharedApdOverviewFields = Joi.object({
+  name: Joi.string().pattern(/^((?!untitled).)*$/i).min(50).required().messages({
+    'any.required': 'Enter a name for the APD.',
+    'string.empty': 'Enter a name for the APD.',
+    'string.base': 'Enter a name for the APD.',
+    'string.pattern.base': 'The name cannot contain "untitled".'
+  }),
+})
+
 export const hitechOverviewSchema = Joi.object({
   updateStatus: updateStatusSchema,
   // Funding sources is not a user input but we use this as a dependency for
