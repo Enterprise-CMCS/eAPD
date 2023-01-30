@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  requireConfigFile: 'false',
   parser: '@babel/eslint-parser',
   extends: [
     'eslint:recommended',
@@ -16,8 +17,7 @@ module.exports = {
     ecmaVersion: 8,
     ecmaFeatures: {
       jsx: true
-    },
-    requireConfigFile: 'false'
+    }
   },
   settings: {
     react: {
