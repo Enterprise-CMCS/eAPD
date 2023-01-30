@@ -82,21 +82,11 @@ const ApdNew = ({ createApd: create }) => {
   ];
   const [apdChoices, setApdChoices] = useState(apdTypeChoices);
 
-  useEffect(() => {
-    if (!enableMmis) {
-      apdChoices.pop();
-      apdChoices[0].checked = true;
-      setApdChoices(apdChoices);
-      setApdType(APD_TYPE.HITECH);
-      setValue('apdType', APD_TYPE.HITECH, { shouldValidate: true });
-    }
-  }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
-
   const {
     control,
     setValue,
     getValues,
-    formState: { errors, isDirty, isValid }
+    formState: { errors, isValid }
   } = useForm({
     defaultValues: {
       years: years,
@@ -109,6 +99,20 @@ const ApdNew = ({ createApd: create }) => {
     reValidateMode: 'all',
     resolver: joiResolver(schema)
   });
+
+  useEffect(() => {
+    if (!enableMmis) {
+      apdChoices.pop();
+      apdChoices[0].checked = true;
+      setApdChoices(apdChoices);
+      setApdType(APD_TYPE.HITECH);
+      setValue('apdType', APD_TYPE.HITECH, { shouldValidate: true });
+    }
+  }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    setSubmitDisabled(!isValid);
+  }, [isValid]);
 
   if (isLoading) {
     return (
@@ -164,10 +168,6 @@ const ApdNew = ({ createApd: create }) => {
     setIsLoading(true);
     create(apdValues);
   };
-
-  useEffect(() => {
-    setSubmitDisabled(!isValid);
-  }, [isValid]);
 
   return (
     <Fragment>
