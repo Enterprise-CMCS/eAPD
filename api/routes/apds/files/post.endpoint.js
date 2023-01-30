@@ -1,16 +1,16 @@
-const fs = require('fs');
-const FormData = require('form-data');
-const {
+import fs from 'fs';
+import FormData from 'form-data';
+import {
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
-const {
+} from '../../../endpoint-tests/utils.js';
+import {
   mnAPDId,
   akAPDId,
   finalAPDId,
   badAPDId
-} = require('../../../seeds/test/apds');
+} from '../../../seeds/test/apds.js';
 
 describe('APD files endpoints', () => {
   describe('Upload a file associated with an APD | POST /apds/:id/files', () => {
@@ -36,7 +36,7 @@ describe('APD files endpoints', () => {
     describe('when authenticated as a user with permission', () => {
       let api;
       beforeAll(() => {
-        api = login('state-admin');
+        api = login('state-staff');
       });
 
       it('with a non-existant apd ID', async () => {

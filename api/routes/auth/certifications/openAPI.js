@@ -1,4 +1,4 @@
-const { requiresAuth } = require('../../openAPI/helpers');
+import { requiresAuth } from '../../openAPI/helpers.js';
 
 const stateCertifications = {
   '/auth/certifications': {
@@ -163,6 +163,6 @@ const stateCertifications = {
   }
 };
 
-module.exports = {
+export default {
   ...requiresAuth(stateCertifications)
 };

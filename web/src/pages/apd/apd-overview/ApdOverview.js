@@ -13,8 +13,7 @@ import DeleteModal from '../../../components/DeleteModal';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { hitechOverviewSchema } from '@cms-eapd/common/schemas/apdOverview';
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import { hitechOverviewSchema as schema, APD_TYPE } from '@cms-eapd/common';
 
 import {
   addYear,
@@ -29,6 +28,8 @@ import RichText from '../../../components/RichText';
 import Instruction from '../../../components/Instruction';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
+
+import TempAlert from '../../../components/TempAlert';
 
 import {
   selectSummary,
@@ -75,7 +76,7 @@ const ApdOverview = ({
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(hitechOverviewSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {
@@ -179,6 +180,7 @@ const ApdOverview = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
+      <TempAlert />
       <div className="apd_type_choice-container">
         <ChoiceList
           type="radio"

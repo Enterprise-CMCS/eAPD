@@ -1,5 +1,5 @@
 /* eslint class-methods-use-this: "off" */
-import { getDateRange } from './helper';
+import { getDateRange } from './helper.js';
 
 class ExecutiveSummaryPage {
   // 0 based indexing

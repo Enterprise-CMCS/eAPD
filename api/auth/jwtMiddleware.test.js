@@ -1,9 +1,10 @@
 /* eslint-disable no-shadow */
-const tap = require('tap');
-const sinon = require('sinon');
-const jwtMiddleware = require('./jwtMiddleware');
+import tap from 'tap';
 
-const sandbox = sinon.createSandbox();
+import { createSandbox } from 'sinon';
+import jwtMiddleware from './jwtMiddleware.js';
+
+const sandbox = createSandbox();
 
 tap.test('jwtMiddleware', async t => {
   const res = {

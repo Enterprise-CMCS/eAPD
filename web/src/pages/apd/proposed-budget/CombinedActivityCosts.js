@@ -71,24 +71,39 @@ const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
         </tr>
       </thead>
       <tbody>
-        <tr className="budget-table--row__header">
-          <th scope="row" colSpan="2">
-            HIT
-          </th>
-        </tr>
-        <DataRowGroup data={data.hit} year={ffy} groupTitle="HIT" />
-        <tr className="budget-table--row__header">
-          <th scope="row" colSpan="2">
-            HIE
-          </th>
-        </tr>
-        <DataRowGroup data={data.hie} year={ffy} groupTitle="HIE" />
-        <tr className="budget-table--row__header">
-          <th scope="row" colSpan="2">
-            MMIS
-          </th>
-        </tr>
-        <DataRowGroup data={data.mmis} year={ffy} groupTitle="MMIS" />
+        {data?.hit && (
+          <Fragment>
+            <tr className="budget-table--row__header">
+              <th scope="row" colSpan="2">
+                HIT
+              </th>
+            </tr>
+            <DataRowGroup data={data.hit} year={ffy} groupTitle="HIT" />
+          </Fragment>
+        )}
+
+        {data?.hie && (
+          <Fragment>
+            <tr className="budget-table--row__header">
+              <th scope="row" colSpan="2">
+                HIE
+              </th>
+            </tr>
+            <DataRowGroup data={data.hie} year={ffy} groupTitle="HIE" />
+          </Fragment>
+        )}
+
+        {data?.mmis && (
+          <Fragment>
+            <tr className="budget-table--row__header">
+              <th scope="row" colSpan="2">
+                MMIS
+              </th>
+            </tr>
+            <DataRowGroup data={data.mmis} year={ffy} groupTitle="MMIS" />
+          </Fragment>
+        )}
+
         <tr key={ffy} className="budget-table--row__header">
           <th scope="row">FFY {ffy} Total Computable Medicaid Cost</th>
           <td className="budget-table--number budget-table--total">

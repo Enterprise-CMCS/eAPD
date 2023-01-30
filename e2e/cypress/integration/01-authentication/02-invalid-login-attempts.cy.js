@@ -1,17 +1,16 @@
 // invalid-password.spec.js created with Cypress
 
-describe('Invalid Login Attempts', { tags: ['@auth'] }, () => {
-  beforeEach(() => {
+Cypress.session.clearAllSavedSessions();
+
+describe('Invalid Login Attempts', { tags: ['@auth'] }, function () {
+  beforeEach(function () {
     cy.clearAuthCookies();
     cy.setCookie('gov.cms.eapd.hasConsented', 'true');
     cy.visit('/');
   });
 
-  describe('password issues', () => {
-    it('disabled the login button until there is a username and password', () => {
-      cy.setCookie('gov.cms.eapd.hasConsented', 'true');
-      cy.visit('/');
-
+  describe('password issues', function () {
+    it('disabled the login button until there is a username and password', function () {
       cy.findByRole('button', { name: /Log in/i }).should('be.disabled');
 
       cy.findByLabelText('EUA ID').clear().type(Cypress.env('statestaff'));
@@ -25,7 +24,7 @@ describe('Invalid Login Attempts', { tags: ['@auth'] }, () => {
       cy.findByRole('button', { name: /Log in/i }).should('be.enabled');
     });
 
-    it('uses the wrong username and password', () => {
+    it('uses the wrong username and password', function () {
       cy.login('bad user', 'bad password');
       cy.findByRole('button', { name: /Logging in/i }).should('exist');
 
@@ -35,7 +34,7 @@ describe('Invalid Login Attempts', { tags: ['@auth'] }, () => {
       );
     });
 
-    it('uses the wrong password', () => {
+    it('uses the wrong password', function () {
       cy.login(Cypress.env('lockedoutmfa'), 'bad password');
 
       cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
@@ -53,7 +52,7 @@ describe('Invalid Login Attempts', { tags: ['@auth'] }, () => {
     });
   });
 
-  it('locks the user out if they have three failed password attempts', () => {
+  it('locks the user out if they have three failed password attempts', function () {
     const attemptLogin = () => {
       cy.wait(3000); // eslint-disable-line cypress/no-unnecessary-waiting
       return cy.url().then(url => {
@@ -83,7 +82,7 @@ describe('Invalid Login Attempts', { tags: ['@auth'] }, () => {
     cy.findByLabelText('EUA ID').should('exist');
   });
 
-  it('shows error message for expired password', () => {
+  it('shows error message for expired password', function () {
     cy.loginWithEnv('expired');
 
     cy.findByText(/Your password has expired/).should('exist');

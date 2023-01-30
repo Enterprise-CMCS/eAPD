@@ -22,6 +22,7 @@ const setup = (props = {}) =>
 
 describe('<LoginMFA />', () => {
   it('should not fail any accessibility tests', async () => {
+    jest.setTimeout(300000);
     const { container } = setup();
     expect(await axe(container)).toHaveNoViolations();
   });

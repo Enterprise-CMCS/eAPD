@@ -7,7 +7,7 @@ import 'tinymce/tinymce';
 import 'cypress-iframe';
 import 'cypress-file-upload'; // eslint-disable-line import/no-extraneous-dependencies
 
-import tokens from '@cms-eapd/api/seeds/test/tokens.json';
+import tokens from '../../../api/seeds/test/tokens.js';
 
 const API_COOKIE_NAME = 'gov.cms.eapd.api-token';
 const CONSENT_COOKIE_NAME = 'gov.cms.eapd.hasConsented';
@@ -65,12 +65,26 @@ Cypress.Commands.add('login', (username, password) => {
     expiry: EXPIRY_DATE
   });
   cy.visit('/');
-  cy.waitForReact(1000, '#app', '../node_modules/resq/dist/index.js');
   cy.findByLabelText('EUA ID').type(username);
   cy.findByLabelText('Password').type(password, {
     log: false
   });
   cy.findByRole('button', { name: /Log in/i }).click();
+});
+
+Cypress.Commands.add('loginSession', (username, password) => {
+  cy.session(
+    [username, password],
+    () => {
+      cy.login(username, password);
+    },
+    {
+      validate() {
+        cy.getCookie(API_COOKIE_NAME).should('exist');
+      },
+      cacheAcrossSpecs: true
+    }
+  );
 });
 
 Cypress.Commands.add('logout', () => {
@@ -86,21 +100,31 @@ Cypress.Commands.add('loginWithEnv', username => {
   cy.login(Cypress.env(username), Cypress.env(`${username}_pw`));
 });
 
-Cypress.Commands.add('useJwtUser', (username, url) => {
-  cy.clearAuthCookies();
-  cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
-    expiry: EXPIRY_DATE
-  });
-  cy.setCookie(
-    API_COOKIE_NAME,
-    JSON.stringify({ accessToken: tokens[username] }),
+Cypress.Commands.add('useJwtUser', (username, url = '/') => {
+  cy.session(
+    [username],
+    () => {
+      cy.clearAuthCookies();
+      cy.setCookie('gov.cms.eapd.hasConsented', 'true', {
+        expiry: EXPIRY_DATE
+      });
+      cy.setCookie(
+        API_COOKIE_NAME,
+        JSON.stringify({ accessToken: tokens[username] }),
+        {
+          expiry: EXPIRY_DATE,
+          sameSite: 'strict'
+        }
+      );
+    },
     {
-      expiry: EXPIRY_DATE,
-      sameSite: 'strict'
+      validate() {
+        cy.getCookie(API_COOKIE_NAME).should('exist');
+      },
+      cacheAcrossSpecs: true
     }
   );
-  cy.visit(url || '/');
-  cy.waitForReact(1000, '#app', '../node_modules/resq/dist/index.js');
+  cy.visit(url);
 });
 
 Cypress.Commands.add('useSysAdmin', url => {
@@ -135,8 +159,8 @@ Cypress.Commands.add('useDeniedRole', url => {
   cy.useJwtUser('deniedrole', url);
 });
 
-Cypress.Commands.add('useJWTrevokedrole', url => {
-  cy.useJwtUser('revokedrole', url);
+Cypress.Commands.add('useJWTrevokedrole', () => {
+  cy.useJwtUser('revokedrole');
 });
 
 // TinyMCE
@@ -190,7 +214,6 @@ Cypress.Commands.add('waitForSave', () => {
 
 Cypress.Commands.add('deleteAPD', apdId => {
   if (apdId) {
-    cy.useStateStaff();
     cy.get(`a[href='/apd/${apdId}']`).then($el => {
       cy.intercept('DELETE', `${Cypress.env('API')}/apds/${apdId}`).as(
         'delete'
@@ -634,20 +657,16 @@ Cypress.Commands.add('updateFeatureFlags', featureFlags => {
     req.reply('Random message');
   }).as('LDClientStream');
 
+  const flags = {};
+  Cypress._.forEach(featureFlags, function (ffValue, ffKey) {
+    flags[ffKey] = { value: ffValue };
+  });
+
   // return feature flag values in format expected by launchdarkly client
-  return cy
-    .intercept(
-      { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
-      req => {
-        req.reply(({ body }) => {
-          Cypress._.map(featureFlags, (ffValue, ffKey) => {
-            body[ffKey] = { value: ffValue };
-            return body;
-          });
-        });
-      }
-    )
-    .as('LDApp');
+  cy.intercept(
+    { method: 'GET', hostname: /.*clientsdk.launchdarkly.us/ },
+    { body: flags }
+  ).as('LDApp');
 });
 
 Cypress.Commands.add('turnOnAdminCheck', () => {

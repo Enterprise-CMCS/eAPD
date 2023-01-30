@@ -1,5 +1,7 @@
-const hitechNoActivities = {
-  apdType: 'HITECH',
+import { APD_TYPE } from '@cms-eapd/common';
+
+export default {
+  apdType: APD_TYPE.HITECH,
   name: 'HITECH IAPD No Activities',
   years: ['2022', '2023'],
   yearOptions: ['2022', '2023', '2024'],
@@ -39,7 +41,15 @@ const hitechNoActivities = {
         isPrimary: true,
         fte: { 2022: 1, 2023: 1 },
         hasCosts: true,
-        costs: { 2022: 100000, 2023: 100000 }
+        costs: { 2022: 100000, 2023: 100000 },
+        split: {
+          2022: { federal: 90, state: 10 },
+          2023: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100
+        }
       },
       {
         name: 'Fred Johnson',
@@ -48,7 +58,15 @@ const hitechNoActivities = {
         isPrimary: false,
         fte: { 2022: 0.3, 2023: 0.3 },
         hasCosts: false,
-        costs: { 2022: 0, 2023: 0 }
+        costs: { 2022: 0, 2023: 0 },
+        split: {
+          2022: { federal: 90, state: 10 },
+          2023: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100
+        }
       }
     ]
   },
@@ -166,5 +184,3 @@ const hitechNoActivities = {
     ]
   }
 };
-
-module.exports = { hitechNoActivities };

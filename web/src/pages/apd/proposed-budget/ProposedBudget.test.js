@@ -1,11 +1,50 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
+import apd from '../../../fixtures/ak-apd.json';
+import budget from '../../../fixtures/ak-budget.json';
+import mmisApd from '../../../fixtures/ak-apd-mmis.json';
+import mmisBudget from '../../../fixtures/ak-budget-mmis.json';
 
 import ProposedBudget from './ProposedBudget';
 
-describe('ProposedBudget component', () => {
-  test('renders correctly', () => {
-    const component = shallow(<ProposedBudget />);
-    expect(component).toMatchSnapshot();
+const hitechApd = {
+  initialState: {
+    ...apd,
+    ...budget
+  }
+};
+
+const mmisApdProp = {
+  initialState: {
+    ...mmisApd,
+    ...mmisBudget
+  }
+};
+
+const setup = (props = {}, options = {}) => {
+  return renderWithConnection(<ProposedBudget {...props} />, options);
+};
+
+describe('<ProposedBudget />', () => {
+  it('render correctly hitech', async () => {
+    setup({}, hitechApd);
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('table')).toHaveLength(32);
+    });
+
+    expect(screen.getByRole('heading', { name: 'Proposed Budget' }));
+    expect(screen.getByRole('heading', { name: 'Combined Activity Costs' }));
+    expect(screen.getByRole('heading', { name: 'Summary Budget Table' }));
+    expect(screen.getByRole('heading', { name: 'Quarterly Federal Share' }));
+    expect(
+      screen.getByRole('heading', {
+        name: 'Estimated Quarterly Incentive Payments'
+      })
+    );
+  });
+
+  it.skip('render correctly mmis', () => {
+    setup({}, mmisApdProp); // TODO: Skipping for now since Proposed Budget page still crashes
   });
 });

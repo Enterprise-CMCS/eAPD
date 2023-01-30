@@ -1,7 +1,7 @@
-const get = require('./get');
-const patch = require('./patch');
+import get from './get.js';
+import patch from './patch.js';
 
-module.exports = (app, { getEndpoint = get, patchEndpoint = patch } = {}) => {
+export default (app, { getEndpoint = get, patchEndpoint = patch } = {}) => {
   getEndpoint(app);
   patchEndpoint(app);
 };

@@ -12,7 +12,7 @@ import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selecto
 import Waypoint from '../../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../../components/AlertMissingFFY';
 
-import activitiesDashboardSchema from '@cms-eapd/common/schemas/activitiesDashboard';
+import { activitiesDashboard as schema } from '@cms-eapd/common';
 
 const All = ({ addActivity, activities, adminCheck }) => {
   const { apdId } = useParams();
@@ -20,7 +20,7 @@ const All = ({ addActivity, activities, adminCheck }) => {
 
   useEffect(() => {
     if (adminCheck) {
-      setValidation(activitiesDashboardSchema.validate(activities));
+      setValidation(schema.validate(activities));
     } else {
       setValidation();
     }

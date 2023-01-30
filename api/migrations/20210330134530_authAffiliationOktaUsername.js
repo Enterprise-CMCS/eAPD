@@ -1,7 +1,9 @@
-const { oktaClient } = require('../auth/oktaAuth');
-const logger = require('../logger')('user seeder');
+import { oktaClient } from '../auth/oktaAuth.js';
+import loggerFactory from '../logger/index.js';
 
-exports.up = async knex => {
+const logger = loggerFactory('user seeder');
+
+export const up = async knex => {
   await knex.schema.table('users', table => {
     table
       .string('username')
@@ -29,7 +31,7 @@ exports.up = async knex => {
   }
 };
 
-exports.down = async knex => {
+export const down = async knex => {
   // remove uid from users
   await knex.schema.table('users', table => {
     table.dropColumn('username');

@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const {
-  Budget,
+import mongoose from 'mongoose';
+import {
+  default as Budget,
   discriminatorOptions,
   shareByCostTypeByQuarter,
   shareByCostType,
   fedStateSplitByCost,
   fedStateSplit
-} = require('./budget');
+} from './budget.js';
 
 const hitechBudgetSchema = new mongoose.Schema(
   {
@@ -58,6 +58,4 @@ const hitechBudgetSchema = new mongoose.Schema(
 
 const HITECHBudget = Budget.discriminator('HITECHBudget', hitechBudgetSchema);
 
-module.exports = {
-  HITECHBudget
-};
+export default HITECHBudget;

@@ -1,5 +1,5 @@
-const { getUserByID } = require('../../db');
-const { sign, getDefaultOptions } = require('../../auth/jwtUtils');
+import { getUserByID } from '../../db/index.js';
+import { sign, getDefaultOptions } from '../../auth/jwtUtils.js';
 
 const issueTokens = async oktaUsers => {
   const response = {};
@@ -16,6 +16,4 @@ const issueTokens = async oktaUsers => {
   return response;
 };
 
-module.exports = {
-  issueTokens
-};
+export default issueTokens;

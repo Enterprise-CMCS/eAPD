@@ -1,27 +1,27 @@
 // Sets up dotenv, sets default environment
 // variables if not defined
-require('./env');
+import './env.js';
 
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const { v4: uuidv4 } = require('uuid');
-const fileUpload = require('express-fileupload');
-const logger = require('./logger')('main');
-const { requestLoggerMiddleware } = require('./logger/morgan');
-const jsonWebTokenMiddleware = require('./auth/jwtMiddleware');
-const apiKeyRoutes = require('./routes/keyIndex');
-const routes = require('./routes');
-const me = require('./routes/me/index');
-const endpointCoverage = require('./middleware/endpointCoverage');
-const errorHandler = require('./middleware/errorHandler');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import { v4 as uuidv4 } from 'uuid';
+import fileUpload from 'express-fileupload';
 
-const { setup: mongoSetup, getConnectionStatus } = require('./db/mongodb');
-const knex = require('./db/knex');
-const {
-  waitForInitialization: ldWaitForInitialization
-} = require('./middleware/launchDarkly'); // initialize LaunchDarkly
+import loggerFactory from './logger/index.js';
+import requestLoggerMiddleware from './logger/morgan.js';
+import jsonWebTokenMiddleware from './auth/jwtMiddleware.js';
+import routes from './routes/index.js';
+import apiKeyRoutes from './routes/keyIndex.js';
+import endpointCoverage from './middleware/endpointCoverage.js';
+import errorHandler from './middleware/errorHandler.js';
+import { setup as mongoSetup, getConnectionStatus } from './db/mongodb.js';
+import knex from './db/knex.js';
+import { waitForInitialization as ldWaitForInitialization } from './middleware/launchDarkly.js'; // initialize LaunchDarkly
+import me from './routes/me/index.js';
+
+const logger = loggerFactory('main');
 
 (async () => {
   try {
@@ -159,4 +159,4 @@ api.all('*', (_, res) => {
 // Respond to api errors, accordingly. Must be loaded last.
 api.use(errorHandler);
 
-module.exports = api;
+export default api;

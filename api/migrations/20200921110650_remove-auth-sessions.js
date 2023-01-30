@@ -1,8 +1,8 @@
-exports.up = async knex => {
+export const up = async knex => {
   knex.schema.dropTable('auth_sessions');
 };
 
-exports.down = async knex => {
+export const down = async knex => {
   knex.schema.createTable('auth_sessions', table => {
     table.comment('authentication sessions');
     table

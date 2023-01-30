@@ -1,13 +1,13 @@
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
+import tap from 'tap';
+import dbMock from './dbMock.test.js';
 
-const {
+import {
   getAuthActivities,
   getAuthActivitiesByIDs,
   getAuthRoleByID,
   getAuthRoleByName,
   getActiveAuthRoles
-} = require('./auth');
+} from './auth.js';
 
 tap.test('database wrappers / auth', async authTests => {
   const roles = dbMock('auth_roles');
