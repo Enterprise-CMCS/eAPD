@@ -2,6 +2,7 @@
   "apd": {
     "data": {
       "name": "HITECH IAPD",
+      "apdType": "HITECH",
       "apdOverview": {
         "updateStatus": {
           "isUpdateAPD": false,
