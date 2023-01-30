@@ -12,7 +12,12 @@ import {
   Tooltip,
   TooltipIcon
 } from '@cmsgov/design-system';
-import { newApdSchema as schema, APD_TYPE } from '@cms-eapd/common';
+import {
+  newApdSchema as schema,
+  APD_TYPE,
+  defaultAPDYearOptions,
+  defaultAPDYears
+} from '@cms-eapd/common';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
@@ -25,14 +30,6 @@ const ApdNew = ({ createApd: create }) => {
   let value;
   const history = useHistory();
   const { enableMmis } = useFlags();
-
-  const thisFFY = (() => {
-    const year = new Date().getFullYear();
-    if (new Date().getMonth() > 8) {
-      return year + 1;
-    }
-    return year;
-  })();
 
   const businessAreaOptions = {
     waiverSupport: false,
@@ -57,14 +54,15 @@ const ApdNew = ({ createApd: create }) => {
     asNeededUpdate: false
   };
 
-  const yearOptions = [thisFFY, thisFFY + 1, thisFFY + 2].map(y => `${y}`);
+  const yearOptions = defaultAPDYearOptions();
+  const [years, setYears] = useState(defaultAPDYears());
   const [apdType, setApdType] = useState('');
   const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
   const [businessList, setBusinessList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [otherDetails, setOtherDetails] = useState('');
   const [typeStatus, setTypeStatus] = useState(updateTypes);
-  const [years, setYears] = useState(yearOptions.slice(0, 2));
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   const apdTypeChoices = [
     {
@@ -102,7 +100,10 @@ const ApdNew = ({ createApd: create }) => {
   } = useForm({
     defaultValues: {
       years: years,
-      businessList: businessList
+      businessList: businessList,
+      updateStatus: {
+        typeStatus
+      }
     },
     mode: 'all',
     reValidateMode: 'all',
@@ -164,7 +165,9 @@ const ApdNew = ({ createApd: create }) => {
     create(apdValues);
   };
 
-  const disabled = !isValid || !isDirty || (isDirty && !isValid);
+  useEffect(() => {
+    setSubmitDisabled(!isValid);
+  }, [isValid]);
 
   return (
     <Fragment>
@@ -213,17 +216,11 @@ const ApdNew = ({ createApd: create }) => {
               <Controller
                 name="name"
                 control={control}
-                render={({ field: { value, onChange, onBlur, ...props } }) => (
+                render={({ field: { ...props } }) => (
                   <TextField
                     {...props}
                     label="APD Name"
                     className="remove-clearfix"
-                    value={value}
-                    onChange={e => {
-                      onChange(e);
-                    }}
-                    onBlur={onBlur}
-                    onComponentBlur={onBlur}
                   />
                 )}
               />
@@ -253,7 +250,7 @@ const ApdNew = ({ createApd: create }) => {
           {apdType === APD_TYPE.HITECH && (
             <div>
               <Controller
-                name="updateStatus.updateList"
+                name="updateStatus.typeStatus"
                 control={control}
                 render={({ field: { onBlur, onChange } }) => (
                   <ChoiceList
@@ -283,17 +280,12 @@ const ApdNew = ({ createApd: create }) => {
                     type="checkbox"
                     onChange={({ target: { value } }) => {
                       typeStatus[value] = !typeStatus[value];
-                      onChange(
-                        Object.keys(typeStatus).filter(key => typeStatus[key])
-                      );
                       setTypeStatus(typeStatus);
-                      setValue('updateStatus.typeStatus', typeStatus, {
-                        shouldValidate: true
-                      });
+                      onChange(typeStatus);
                     }}
                     onBlur={onBlur}
                     onComponentBlur={onBlur}
-                    errorMessage={errors?.updateStatus?.updateList?.message}
+                    errorMessage={errors?.updateStatus?.typeStatus?.message}
                     errorPlacement="bottom"
                   />
                 )}
@@ -318,7 +310,7 @@ const ApdNew = ({ createApd: create }) => {
                         checkedChildren: (
                           <div className="ds-c-choice__checkedChild">
                             <Controller
-                              name="updateStatus.updateList"
+                              name="updateStatus.typeStatus"
                               control={control}
                               render={({ field: { onBlur, onChange } }) => (
                                 <ChoiceList
@@ -348,21 +340,13 @@ const ApdNew = ({ createApd: create }) => {
                                   type="checkbox"
                                   onChange={({ target: { value } }) => {
                                     typeStatus[value] = !typeStatus[value];
-                                    onChange(
-                                      Object.keys(typeStatus).filter(
-                                        key => typeStatus[key]
-                                      )
-                                    );
-                                    setValue(
-                                      'updateStatus.typeStatus',
-                                      typeStatus,
-                                      { shouldValidate: true }
-                                    );
+                                    setTypeStatus(typeStatus);
+                                    onChange(typeStatus);
                                   }}
                                   onBlur={onBlur}
                                   onComponentBlur={onBlur}
                                   errorMessage={
-                                    errors?.updateStatus?.updateList?.message
+                                    errors?.updateStatus?.typeStatus?.message
                                   }
                                   errorPlacement="bottom"
                                 />
@@ -542,7 +526,7 @@ const ApdNew = ({ createApd: create }) => {
           <div className="ds-u-padding-y--3">
             <Button onClick={history.goBack}>Cancel</Button>
 
-            {disabled === true ? (
+            {submitDisabled === true ? (
               <Tooltip
                 className="ds-c-tooltip__trigger-link ds-u-float--right"
                 component="a"
@@ -556,7 +540,7 @@ const ApdNew = ({ createApd: create }) => {
 
             <Button
               variation="primary"
-              disabled={disabled}
+              disabled={submitDisabled}
               className="ds-u-float--right"
               data-cy="create_apd_btn"
               onClick={createNew}
