@@ -19,7 +19,7 @@ import {
   selectScope
 } from '../../../redux/selectors/apd.selectors';
 
-import statePrioritiesAndScopeSchema from '@cms-eapd/common/schemas/statePrioritiesAndScope';
+import { statePrioritiesAndScopeSchema } from '@cms-eapd/common';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 const StatePrioritiesAndScope = ({
