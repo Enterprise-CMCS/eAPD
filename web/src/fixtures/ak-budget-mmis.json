@@ -1,0 +1,715 @@
+{
+  "budget": {
+    "_id": "63cee9a287b7b1012eb95fff",
+    "federalShareByFFYQuarter": {
+      "mmis": {
+        "years": {
+          "2023": {
+            "1": {
+              "inHouse": 591686,
+              "contractors": 509070,
+              "combined": 1100756
+            },
+            "2": {
+              "inHouse": 591686,
+              "contractors": 509070,
+              "combined": 1100756
+            },
+            "3": {
+              "inHouse": 591685,
+              "contractors": 509070,
+              "combined": 1100755
+            },
+            "4": {
+              "inHouse": 591684,
+              "contractors": 509070,
+              "combined": 1100754
+            },
+            "subtotal": {
+              "inHouse": 2366741,
+              "contractors": 2036280,
+              "combined": 4403021
+            }
+          },
+          "2024": {
+            "1": {
+              "inHouse": 0,
+              "contractors": 0,
+              "combined": 0
+            },
+            "2": {
+              "inHouse": 0,
+              "contractors": 0,
+              "combined": 0
+            },
+            "3": {
+              "inHouse": 0,
+              "contractors": 0,
+              "combined": 0
+            },
+            "4": {
+              "inHouse": 0,
+              "contractors": 0,
+              "combined": 0
+            },
+            "subtotal": {
+              "inHouse": 0,
+              "contractors": 0,
+              "combined": 0
+            }
+          }
+        },
+        "total": {
+          "inHouse": 2366741,
+          "contractors": 2036280,
+          "combined": 4403021
+        }
+      }
+    },
+    "years": ["2023", "2024"],
+    "__t": "MMISBudget",
+    "mmis": {
+      "statePersonnel": {
+        "2023": {
+          "total": 2629801,
+          "federal": 2302963,
+          "medicaid": 2558847,
+          "state": 255884
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 5029876,
+          "federal": 2302963,
+          "medicaid": 2558847,
+          "state": 255884
+        }
+      },
+      "contractors": {
+        "2023": {
+          "total": 2292444,
+          "federal": 2036280,
+          "medicaid": 2262534,
+          "state": 226253
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 4275200,
+          "federal": 2036280,
+          "medicaid": 2262534,
+          "state": 226253
+        }
+      },
+      "expenses": {
+        "2023": {
+          "total": 75000,
+          "federal": 63778,
+          "medicaid": 70864,
+          "state": 7087
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 850000,
+          "federal": 63778,
+          "medicaid": 70864,
+          "state": 7087
+        }
+      },
+      "combined": {
+        "2023": {
+          "total": 4997245,
+          "federal": 4403021,
+          "medicaid": 4892245,
+          "state": 489224
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 10155076,
+          "federal": 4403021,
+          "medicaid": 4892245,
+          "state": 489224
+        }
+      }
+    },
+    "mmisByFFP": {
+      "90-10": {
+        "2023": {
+          "total": 4997245,
+          "federal": 4403021,
+          "medicaid": 4892245,
+          "state": 489224
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 4997245,
+          "federal": 4403021,
+          "medicaid": 4892245,
+          "state": 489224
+        }
+      },
+      "75-25": {
+        "2023": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        }
+      },
+      "50-50": {
+        "2023": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        }
+      },
+      "0-100": {
+        "2023": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        }
+      },
+      "combined": {
+        "2023": {
+          "total": 4997245,
+          "federal": 4403021,
+          "medicaid": 4892245,
+          "state": 489224
+        },
+        "2024": {
+          "total": 0,
+          "federal": 0,
+          "medicaid": 0,
+          "state": 0
+        },
+        "total": {
+          "total": 4997245,
+          "federal": 4403021,
+          "medicaid": 4892245,
+          "state": 489224
+        }
+      }
+    },
+    "combined": {
+      "2023": {
+        "total": 4997245,
+        "federal": 4403021,
+        "medicaid": 4892245,
+        "state": 489224
+      },
+      "2024": {
+        "total": 0,
+        "federal": 0,
+        "medicaid": 0,
+        "state": 0
+      },
+      "total": {
+        "total": 10155076,
+        "federal": 4403021,
+        "medicaid": 4892245,
+        "state": 489224
+      }
+    },
+    "activityTotals": [
+      {
+        "id": "152a1e2b",
+        "name": "Activity 1",
+        "fundingSource": null,
+        "data": {
+          "combined": {
+            "2023": 1904245,
+            "2024": 0,
+            "total": 5259076
+          },
+          "contractors": {
+            "2023": 542444,
+            "2024": 0,
+            "total": 1875200
+          },
+          "expenses": {
+            "2023": 75000,
+            "2024": 0,
+            "total": 850000
+          },
+          "otherFunding": {
+            "2023": {
+              "contractors": 29910,
+              "expenses": 4136,
+              "statePersonnel": 70954,
+              "total": 105000
+            },
+            "2024": {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0
+            }
+          },
+          "statePersonnel": {
+            "2023": 1286801,
+            "2024": 0,
+            "total": 2533876
+          }
+        }
+      },
+      {
+        "id": "3110a314",
+        "name": "Activity 2",
+        "fundingSource": null,
+        "data": {
+          "combined": {
+            "2023": 3093000,
+            "2024": 0,
+            "total": 4896000
+          },
+          "contractors": {
+            "2023": 1750000,
+            "2024": 0,
+            "total": 2400000
+          },
+          "expenses": {
+            "2023": 0,
+            "2024": 0,
+            "total": 0
+          },
+          "otherFunding": {
+            "2023": {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0
+            },
+            "2024": {
+              "contractors": 0,
+              "expenses": 0,
+              "statePersonnel": 0,
+              "total": 0
+            }
+          },
+          "statePersonnel": {
+            "2023": 1343000,
+            "2024": 0,
+            "total": 2496000
+          }
+        }
+      }
+    ],
+    "activities": {
+      "152a1e2b": {
+        "_id": "63cee9a287b7b1012eb96000",
+        "costsByFFY": {
+          "2023": {
+            "federal": 1619321,
+            "medicaid": 1799245,
+            "state": 179924,
+            "total": 1904245
+          },
+          "2024": {
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0,
+            "total": 0
+          },
+          "total": {
+            "federal": 1619321,
+            "medicaid": 1799245,
+            "state": 179924,
+            "total": 1904245
+          }
+        },
+        "quarterlyFFP": {
+          "years": {
+            "2023": {
+              "1": {
+                "combined": {
+                  "dollars": 404831,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 115320,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 289511,
+                  "percent": 0.25
+                }
+              },
+              "2": {
+                "combined": {
+                  "dollars": 404831,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 115320,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 289511,
+                  "percent": 0.25
+                }
+              },
+              "3": {
+                "combined": {
+                  "dollars": 404830,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 115320,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 289510,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 404829,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 115320,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 289509,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 1619321,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 461280,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 1158041,
+                  "percent": 1
+                }
+              }
+            },
+            "2024": {
+              "1": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "2": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "3": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 1
+                }
+              }
+            }
+          },
+          "total": {
+            "combined": 1619321,
+            "contractors": 461280,
+            "inHouse": 1158041
+          }
+        }
+      },
+      "3110a314": {
+        "_id": "63cee9a287b7b1012eb96001",
+        "costsByFFY": {
+          "2023": {
+            "federal": 2783700,
+            "medicaid": 3093000,
+            "state": 309300,
+            "total": 3093000
+          },
+          "2024": {
+            "federal": 0,
+            "medicaid": 0,
+            "state": 0,
+            "total": 0
+          },
+          "total": {
+            "federal": 2783700,
+            "medicaid": 3093000,
+            "state": 309300,
+            "total": 3093000
+          }
+        },
+        "quarterlyFFP": {
+          "years": {
+            "2023": {
+              "1": {
+                "combined": {
+                  "dollars": 695925,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 393750,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 302175,
+                  "percent": 0.25
+                }
+              },
+              "2": {
+                "combined": {
+                  "dollars": 695925,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 393750,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 302175,
+                  "percent": 0.25
+                }
+              },
+              "3": {
+                "combined": {
+                  "dollars": 695925,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 393750,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 302175,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 695925,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 393750,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 302175,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 2783700,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 1575000,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 1208700,
+                  "percent": 1
+                }
+              }
+            },
+            "2024": {
+              "1": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "2": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "3": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "4": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 0.25
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 0.25
+                }
+              },
+              "subtotal": {
+                "combined": {
+                  "dollars": 0,
+                  "percent": 0
+                },
+                "contractors": {
+                  "dollars": 0,
+                  "percent": 1
+                },
+                "inHouse": {
+                  "dollars": 0,
+                  "percent": 1
+                }
+              }
+            }
+          },
+          "total": {
+            "combined": 2783700,
+            "contractors": 1575000,
+            "inHouse": 1208700
+          }
+        }
+      }
+    },
+    "__v": 0
+  }
+}
