@@ -183,13 +183,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
       // Defaults to empty field values
       cy.contains('Activity name').should('exist');
-      activityPage.checkTinyMCE('activity-name-field', '');
+      cy.checkTinyMCE('activity-name-field', '');
       cy.contains('Activity snapshot').should('exist');
-      activityPage.checkTinyMCE('activity-snapshot-field', '');
+      cy.checkTinyMCE('activity-snapshot-field', '');
       cy.contains('Problem statement').should('exist');
-      activityPage.checkTinyMCE('activity-problem-statement-field', '');
+      cy.checkTinyMCE('activity-problem-statement-field', '');
       cy.contains('Proposed solution').should('exist');
-      activityPage.checkTinyMCE('activity-proposed-solution-field', '');
+      cy.checkTinyMCE('activity-proposed-solution-field', '');
 
       // Check validation errors
       cy.turnOnAdminCheck();
@@ -266,19 +266,19 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.goToActivityOverview(0);
 
       cy.contains('Activity name').should('exist');
-      activityPage.checkTinyMCE('activity-name-field', 'The Coolest Activity');
+      cy.checkTinyMCE('activity-name-field', 'The Coolest Activity');
       cy.contains('Activity snapshot').should('exist');
-      activityPage.checkTinyMCE(
+      cy.checkTinyMCE(
         'activity-snapshot-field',
         '<p>This is an activity snapshot.</p>'
       );
       cy.contains('Problem statement').should('exist');
-      activityPage.checkTinyMCE(
+      cy.checkTinyMCE(
         'activity-problem-statement-field',
         '<p>This is a problem statement.</p>'
       );
       cy.contains('Proposed solution').should('exist');
-      activityPage.checkTinyMCE(
+      cy.checkTinyMCE(
         'activity-proposed-solution-field',
         '<p>This is a proposed solution.</p>'
       );

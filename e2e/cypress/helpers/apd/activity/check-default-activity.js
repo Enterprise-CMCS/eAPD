@@ -129,7 +129,7 @@ export const checkDefaultActivity = function () {
           level: 3
         }).should('exist');
         cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
-        activityPage.checkTinyMCE('cost-allocation-methodology-field', '');
+        cy.checkTinyMCE('cost-allocation-methodology-field', '');
 
         _.forEach(years, (year, i) => {
           cy.checkTinyMCE(
