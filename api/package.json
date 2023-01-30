@@ -43,10 +43,10 @@
     "node": "16.19.0"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.218.0",
+    "@aws-sdk/client-s3": "3.259.0",
     "@cms-eapd/common": "0.0.1",
     "@okta/jwt-verifier": "2.6.0",
-    "@okta/okta-sdk-nodejs": "6.5.0",
+    "@okta/okta-sdk-nodejs": "6.6.0",
     "axios": "0.27.2",
     "babel-plugin-istanbul": "^6.1.1",
     "body-parser": "1.20.1",
@@ -71,10 +71,10 @@
     "mongoose-lean-virtuals": "^0.9.1",
     "morgan": "1.10.0",
     "newrelic": "8.16.0",
-    "pg": "8.8.0",
-    "sanitize-html": "2.7.1",
+    "pg": "8.9.0",
+    "sanitize-html": "2.8.1",
     "sharp": "0.30.7",
-    "swagger-ui-express": "4.5.0",
+    "swagger-ui-express": "4.6.0",
     "uuid": "8.3.2",
     "winston": "3.8.2",
     "zxcvbn": "4.4.2"
@@ -82,15 +82,15 @@
   "devDependencies": {
     "babel-jest": "27.5.1",
     "colors": "1.4.0",
-    "core-js": "3.25.0",
-    "eslint": "8.32.0",
+    "core-js": "3.27.2",
+    "eslint": "8.33.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-import": "2.27.5",
     "jest": "27.5.1",
     "nodemon": "2.0.20",
     "sinon": "14.0.0",
-    "supertest": "6.2.4",
+    "supertest": "6.3.3",
     "tap": "16.3.4"
   },
   "updateRestrictions": {
