@@ -14,3 +14,14 @@ export const testStatePrioritiesAndScope = function () {
     cy.waitForSave();
   });
 };
+
+export const testStatePrioritiesAndScopeWithData = function () {
+  it('Fill out State Priorities and Scope', function () {
+    cy.goToStatePrioritiesAndScope();
+
+    cy.url().should('include', '/state-priorities-and-scope');
+    cy.findByRole('heading', {
+      name: /State Priorities and Scope of APD/
+    }).should('exist');
+  });
+};

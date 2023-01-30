@@ -1,15 +1,14 @@
 // <reference types="cypress" />
-import { testDefaultMmisAPDOverview } from '../../helpers/apd/apd-overview';
-import { testStatePrioritiesAndScope } from '../../helpers/apd/state-priorities-and-scope';
+import {
+  testAPDOverviewWithData,
+  testMmisAPDOverviewWithData
+} from '../../helpers/apd/apd-overview';
 
-// Tests the default values of an MMIS APD
-
-Cypress.session.clearAllSavedSessions();
-
+// Tests an MMIS APD by adding data and checking the results
 describe(
-  'Default MMIS APD',
-  { tags: ['@apd', '@mmis', '@default', '@slow'] },
-  function () {
+  'MMIS APD with Data',
+  { tags: ['@apd', '@mmis', '@data', '@slow'] },
+  () => {
     let apdUrl;
     let apdId;
     const years = [];
@@ -50,8 +49,7 @@ describe(
       cy.wrap(apdId).as('apdId');
       cy.wrap(years).as('years');
 
-      cy.intercept('PATCH', `${Cypress.env('API')}/apds/**`).as('saveAPD');
-      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
+      cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
       cy.useStateStaff();
       cy.visit(apdUrl);
     });
@@ -62,16 +60,8 @@ describe(
     });
 
     describe('Form View', function () {
-      describe('default APD Overview', function () {
-        testDefaultMmisAPDOverview();
-
-        it('should have two checked years', function () {
-          cy.get('[type="checkbox"][checked]').should('have.length', 2);
-        });
-      });
-
-      describe('default State Priorities and Scope', function () {
-        testStatePrioritiesAndScope();
+      describe('MMIS APD Overview', function () {
+        testAPDOverviewWithData();
       });
     });
   }
