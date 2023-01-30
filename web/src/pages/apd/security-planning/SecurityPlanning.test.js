@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, screen, fireEvent } from 'apd-testing-library';
+import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
 
 import SecurityPlanning from './SecurityPlanning';
 
@@ -25,8 +25,17 @@ describe('<Security Planning />', () => {
     setup({}, { initialState });
   });
 
-  it.only('should load existing data', () => {
+  it('should load existing data', async () => {
     setup({}, { initialState });
-    screen.getByLabelText('Security and Interface Plan');
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('Security and Interface Plan')).toHaveValue(
+        'This is the security and interface plan'
+      );
+    });
+
+    expect(
+      screen.getByLabelText('Business Continuity and Disaaster Recovery Plan')
+    ).toHaveValue('Come on and slam and welcome to the jam');
   });
 });
