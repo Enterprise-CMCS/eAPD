@@ -13,8 +13,7 @@ import DeleteModal from '../../../components/DeleteModal';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { hitechOverviewSchema } from '@cms-eapd/common/schemas/apdOverview';
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
+import { hitechOverviewSchema as schema, APD_TYPE } from '@cms-eapd/common';
 
 import {
   addYear,
@@ -77,7 +76,7 @@ const ApdOverview = ({
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(hitechOverviewSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

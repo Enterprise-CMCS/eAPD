@@ -1,24 +1,25 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const apdsIndex = require('./index');
+import tap from 'tap';
+import { spy } from 'sinon';
+import apdsIndex from './index.js';
 
 tap.test('apds endpoint setup', async endpointTest => {
   const app = {};
-  const deleteEndpoint = sinon.spy();
-  const filesEndpoints = sinon.spy();
-  const eventsEndpoints = sinon.spy();
-  const getEndpoint = sinon.spy();
-  const patchEndpoint = sinon.spy();
-  const postEndpoint = sinon.spy();
+  const deleteEndpoint = spy();
+  const getEndpoint = spy();
+  const patchEndpoint = spy();
+  const postEndpoint = spy();
+  const filesEndpoints = spy();
+  const eventsEndpoints = spy();
+  const submissionsEndpoints = spy();
 
   apdsIndex(app, {
     deleteEndpoint,
-    filesEndpoints,
-    eventsEndpoints,
     getEndpoint,
     patchEndpoint,
-    postEndpoint
+    postEndpoint,
+    filesEndpoints,
+    eventsEndpoints,
+    submissionsEndpoints
   });
 
   endpointTest.ok(
@@ -44,5 +45,9 @@ tap.test('apds endpoint setup', async endpointTest => {
   endpointTest.ok(
     eventsEndpoints.calledWith(app),
     'apds events endpoint are setup with the app'
+  );
+  endpointTest.ok(
+    submissionsEndpoints.calledWith(app),
+    'apds submissions endpoints are setup with the app'
   );
 });

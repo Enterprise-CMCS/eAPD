@@ -7,6 +7,7 @@ import { saveKeyPersonnel } from '../../../redux/actions/editApd';
 
 describe('the ApdKeyPersonForm component', () => {
   const props = {
+    apdType: 'HITECH',
     index: 1,
     item: {
       costs: {
@@ -20,6 +21,20 @@ describe('the ApdKeyPersonForm component', () => {
       fte: {
         1992: 0.32,
         1993: 0.57
+      },
+      split: {
+        1992: {
+          federal: 90,
+          state: 10
+        },
+        1993: {
+          federal: 90,
+          state: 10
+        }
+      },
+      medicaidShare: {
+        1992: 100,
+        1993: 100
       },
       position: 'The Builder'
     },
@@ -46,6 +61,22 @@ describe('the ApdKeyPersonForm component', () => {
     expect(
       shallow(
         <KeyPersonForm {...props} item={{ ...props.item, hasCosts: false }} />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly for hitech type apds', () => {
+    expect(
+      shallow(
+        <KeyPersonForm {...props} item={{ ...props.item, apdType: 'HITECH' }} />
+      )
+    ).toMatchSnapshot();
+  });
+
+  it('renders correctly for mmis type apds', () => {
+    expect(
+      shallow(
+        <KeyPersonForm {...props} item={{ ...props.item, apdType: 'MMIS' }} />
       )
     ).toMatchSnapshot();
   });

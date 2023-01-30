@@ -1,9 +1,8 @@
-const tap = require('tap');
-const { applyPatch } = require('fast-json-patch');
-
-const { setup, teardown } = require('../db/mongodb');
-const { APD } = require('./index');
-const { hitech: apd } = require('../seeds/development/apds');
+import tap from 'tap';
+import fastPatch from 'fast-json-patch';
+import { setup, teardown } from '../db/mongodb.js';
+import { APD } from './index.js';
+import { hitech as apd } from '../seeds/development/apds.js';
 
 let apdId;
 delete apd.apdType; // eslint-disable-line no-underscore-dangle
@@ -32,7 +31,7 @@ tap.test('APD model test', async t => {
 
   t.test('patch APD', async test => {
     const apdJSON = await APD.findOne({ _id: apdId }).lean();
-    const { newDocument } = applyPatch(apdJSON, [
+    const { newDocument } = fastPatch.applyPatch(apdJSON, [
       {
         op: 'replace',
         path: '/activities/0/outcomes/1/metrics/1/metric',

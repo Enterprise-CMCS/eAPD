@@ -8,7 +8,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 import DateField from '../../../../../components/DateField';
 
-import milestonesSchema from '@cms-eapd/common/schemas/milestones';
+import { milestonesSchema as schema } from '@cms-eapd/common';
 
 import { saveMilestone as actualSaveMilestone } from '../../../../../redux/actions/editActivity';
 
@@ -29,7 +29,7 @@ const MilestoneForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(milestonesSchema)
+      resolver: joiResolver(schema)
     });
 
     useEffect(() => {

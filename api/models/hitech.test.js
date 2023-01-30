@@ -1,10 +1,10 @@
-const tap = require('tap');
-const { applyPatch } = require('fast-json-patch');
-const { APD_TYPE } = require('@cms-eapd/common');
+import tap from 'tap';
+import fastPatch from 'fast-json-patch';
+import { APD_TYPE } from '@cms-eapd/common';
 
-const { setup, teardown } = require('../db/mongodb');
-const { HITECH } = require('./index');
-const { hitech } = require('../seeds/development/apds');
+import { setup, teardown } from '../db/mongodb.js';
+import { HITECH } from './index.js';
+import { hitech } from '../seeds/development/apds.js';
 
 let apdId;
 
@@ -35,7 +35,7 @@ tap.test('HITECH model test', async t => {
 
   t.test('patch HITECH', async test => {
     const apdJSON = await HITECH.findOne({ _id: apdId }).lean();
-    const { newDocument } = applyPatch(apdJSON, [
+    const { newDocument } = fastPatch.applyPatch(apdJSON, [
       {
         op: 'replace',
         path: '/activities/0/outcomes/1/metrics/1/metric',

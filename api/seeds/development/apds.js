@@ -1,9 +1,9 @@
-const { hitech } = require('./01-hitech');
-const { hitechNoActivities } = require('./02-hitechNoActivities');
-const { mmis } = require('./03-mmis');
-const { mmisNoActivities } = require('./04-mmisNoActivities');
+import hitech from './01-hitech.js';
+import hitechNoActivities from './02-hitechNoActivities.js';
+import mmis from './03-mmis.js';
+import mmisNoActivities from './04-mmisNoActivities.js';
 
-const data = [
+export const data = [
   {
     ...hitech,
     stateId: 'ak',
@@ -26,10 +26,4 @@ const data = [
   }
 ];
 
-module.exports = {
-  data,
-  hitech,
-  hitechNoActivities,
-  mmis,
-  mmisNoActivities
-};
+export { hitech, hitechNoActivities, mmis, mmisNoActivities };

@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
+  "exports": "./index.js",
   "scripts": {
     "lint": "eslint 'src/**/*.js'",
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "build": "yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
-    "start": "yarn workspace @cms-eapd/common build && yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
+    "start": "yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
     "npm-check": "npx npm-check-updates",
     "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
     "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json -i --silent",

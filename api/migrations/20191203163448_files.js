@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   // Get rid of the old files table. We never used it.
   await knex.schema.dropTable('files');
 
@@ -17,4 +17,4 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async () => {};
+export const down = async () => {};

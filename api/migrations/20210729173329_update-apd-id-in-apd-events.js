@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.table('apd_events', table => {
     table.dropForeign('apd_id');
   });
@@ -13,4 +13,4 @@ exports.up = async knex => {
   });
 };
 
-exports.down = () => {};
+export const down = () => {};

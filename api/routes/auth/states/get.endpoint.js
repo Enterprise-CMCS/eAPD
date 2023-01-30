@@ -1,13 +1,12 @@
-const { actualVerifyEAPDToken } = require('../../../auth/jwtUtils');
-
-const {
+import { actualVerifyEAPDToken } from '../../../auth/jwtUtils.js';
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
+} from '../../../endpoint-tests/utils.js';
 
 describe('auth roles endpoint get endpoint', () => {
   describe('GET /auth/state/:stateId', () => {

@@ -1,12 +1,10 @@
-const { loggedIn } = require('../../../middleware/auth');
-const { can } = require('../../../middleware');
-const logger = require('../../../logger')('auth certifications get');
+import { can, loggedIn } from '../../../middleware/index.js';
+import loggerFactory from '../../../logger/index.js';
+import { getStateAdminCertifications as adminCertificatons } from '../../../db/certifications.js';
 
-const {
-  getStateAdminCertifications: adminCertificatons
-} = require('../../../db/certifications');
+const logger = loggerFactory('auth certifications get');
 
-module.exports = (
+export default (
   app,
   { getStateAdminCertifications = adminCertificatons } = {}
 ) => {

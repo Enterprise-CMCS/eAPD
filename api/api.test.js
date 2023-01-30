@@ -1,22 +1,19 @@
 /* eslint-disable no-shadow, global-require */
-const request = require('supertest');
-const tap = require('tap');
-const sinon = require('sinon');
-const mongo = require('./db/mongodb');
-const knex = require('./db/knex');
+import request from 'supertest';
 
-sinon.stub(mongo, 'setup').returns({});
-sinon.stub(mongo, 'getConnectionStatus').returns('connected');
+import tap from 'tap';
+import { stub } from 'sinon';
+import * as mongo from './db/mongodb.js';
+import knex from './db/knex.js';
+import api from './api.js';
 
-let api;
+stub(mongo, 'setup').returns({});
+stub(mongo, 'getConnectionStatus').returns('connected');
+
 let response;
 let testDbHost;
 
 tap.test('express api', async t => {
-  t.beforeEach(async () => {
-    api = require('./api');
-  });
-
   t.test('GET /heartbeat', async test => {
     response = await request(api).get('/heartbeat');
     test.equal(response.status, 204, 'HTTP status set to 204');
@@ -24,7 +21,7 @@ tap.test('express api', async t => {
 
   t.test('GET /api-docs', async t => {
     response = await request(api).get('/api-docs');
-    t.equals(response.status, 301, 'successful');
+    t.equal(response.status, 301, 'successful');
   });
 
   t.test('headers', async test => {
@@ -62,7 +59,6 @@ tap.test('express api', async t => {
       testDbHost = process.env.TEST_DB_HOST;
       process.env.TEST_DB_HOST = 'undefined';
       await knex.destroy();
-      api = require('./api');
     });
 
     errorTests.test(

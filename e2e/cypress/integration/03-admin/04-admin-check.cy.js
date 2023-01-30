@@ -5,30 +5,49 @@ describe('tests state admin portal', () => {
 
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.useRegularUser();
-    cy.updateFeatureFlags({ validation: false, enableMmis: false });
-    cy.reload();
+    cy.visit('/');
 
-    cy.findByRole('link', { name: /Create new/i }).click();
-
-    cy.findByLabelText('APD Name').clear().type('APD Overview').blur();
+    cy.findAllByText('Create new').click();
+    cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
     cy.findByRole('checkbox', { name: /Annual Update/i }).click();
     cy.findByRole('button', { name: /Create an APD/i }).click();
+
+    cy.findByRole(
+      'heading',
+      { name: /APD Overview/i },
+      { timeout: 100000 }
+    ).should('exist');
+    cy.location('pathname').then(pathname => {
+      apdUrl = pathname.replace('/apd-overview', '');
+      apdId = apdUrl.split('/').pop();
+    });
 
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
       years.push(list[index].value)
     );
   });
 
-  after(() => {
-    cy.deleteAPD(apdId);
+  beforeEach(function () {
+    cy.wrap(apdUrl).as('apdUrl');
+    cy.wrap(apdId).as('apdId');
+    cy.wrap(years).as('years');
+
+    cy.useStateStaff();
+    cy.visit(apdUrl);
   });
 
-  describe('Admin Check', () => {
+  after(function () {
+    cy.visit('/');
+    cy.deleteAPD(this.apdId);
+  });
+
+  describe('Admin Check', function () {
     it(
       'tests basic admin check functionality',
       { tags: ['@state', '@admin'] },
-      () => {
+      function () {
         cy.turnOnAdminCheck();
 
         cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
@@ -160,7 +179,7 @@ describe('tests state admin portal', () => {
     it.skip(
       'runs cypress-axe (accessibility test) on the help panel',
       { tags: ['@state', '@admin'] },
-      () => {
+      function () {
         cy.turnOnAdminCheck();
 
         // Skipping test for now while problems with CMS Design System - Drawer and Help Drawer get resolved
@@ -171,7 +190,7 @@ describe('tests state admin portal', () => {
     it(
       'tests admin check on a functionally complete APD',
       { tags: ['@state', '@admin'] },
-      () => {
+      function () {
         cy.contains('AK APD Home').click();
         cy.findAllByText('HITECH IAPD Complete').eq(0).click();
 

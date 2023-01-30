@@ -86,12 +86,10 @@ yarn cache clean
 yarn install --frozen-lockfile --non-interactive --production --network-timeout 1000000 2>&1 | tee yarn-install.log
 cp package.json /app
 cp yarn.lock /app
-cp babel.config.js /app
 
 # move the common folder into place
 cd ~/eAPD/common
 mkdir -p /app/common
-yarn build 2>&1 | tee common-build.log
 cp -r ~/eAPD/common/* /app/common
 
 # move the web app into place
@@ -105,8 +103,8 @@ mkdir -p /app/node_modules
 cp -r ~/eAPD/node_modules/* /app/node_modules
 
 # Move the API code into place, then go set it up
-cd ~/eAPD/api
-yarn build 2>&1 | tee api-build.log
+cd ~/eAPD
+mkdir -p /app/api
 cp -r ~/eAPD/api/* /app/api
 
 cd /app
@@ -119,10 +117,10 @@ LOG_LEVEL=verbose NODE_ENV=development DEV_DB_HOST=localhost yarn run seed 2>&1 
 
 # Setting Up New Relic Application Monitor
 yarn add newrelic --save
-cp node_modules/newrelic/newrelic.js ./newrelic.js
-sed -i 's|My Application|eAPD API|g' newrelic.js
-sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|require('newrelic');\n|" main.js
+cp node_modules/newrelic/newrelic.js ./newrelic.cjs
+sed -i 's|My Application|eAPD API|g' newrelic.cjs
+sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.cjs
+sed -i "1 s|^|import('newrelic');\n|" main.js
 
 sudo chown -R ec2-user:eapd /app
 
@@ -133,7 +131,7 @@ sudo chown -R ec2-user:eapd /app
 echo "module.exports = {
   apps : [{
     name: 'eAPD API',
-    script: 'dist/main.js',
+    script: 'main.js',
     instances: 1,
     autorestart: true,
     error_file: '/app/api/logs/eAPD-API-error-0.log',
@@ -156,14 +154,13 @@ echo "module.exports = {
       JWT_SECRET: '__JWT_SECRET__',
       MONGO_DATABASE: '__MONGO_DATABASE__',
       MONGO_URL: '__MONGO_URL__',
-      MONGO_ADMIN_URL: '__MONGO_ADMIN_URL__',
       DATABASE_URL: '__DATABASE_URL__',
 			LD_API_KEY: '__LD_API_KEY__',
     },
   }]
-};" > ecosystem.config.js
+};" > ecosystem.config.cjs
 # Start it up
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 pm2 save
 
 E_USER
@@ -192,4 +189,3 @@ systemctl start newrelic-infra
 su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.16.0/bin /home/ec2-user/.nvm/versions/node/v16.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'
-

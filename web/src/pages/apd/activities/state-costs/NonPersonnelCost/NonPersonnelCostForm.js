@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { APD_TYPE } from '@cms-eapd/common/utils';
 import DollarField from '../../../../../components/DollarField';
 import TextArea from '../../../../../components/TextArea';
 
-import expensesSchema from '@cms-eapd/common/schemas/expenses';
+import { expensesSchema as schema, APD_TYPE } from '@cms-eapd/common';
 
 import { saveNonPersonnelCost as actualSaveNonPersonnelCost } from '../../../../../redux/actions/editActivity';
 
@@ -36,7 +35,7 @@ const NonPersonnelCostForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(expensesSchema)
+      resolver: joiResolver(schema)
     });
 
     const categoryList = [

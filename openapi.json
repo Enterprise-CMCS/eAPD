@@ -3373,7 +3373,8 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "Bearer xxx.yyy.zzz"
-      }
+      },
+      "apiKeyAuth": { "type": "apiKey", "in": "header", "name": "X-API-KEY" }
     }
   }
 }
