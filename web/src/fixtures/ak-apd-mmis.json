@@ -1,0 +1,1083 @@
+{
+  "apd": {
+    "data": {
+      "apdOverview": {
+        "updateStatus": {
+          "isUpdateAPD": false,
+          "annualUpdate": false,
+          "asNeededUpdate": false
+        },
+        "medicaidBusinessAreas": {
+          "waiverSupportSystems": false,
+          "assetVerificationSystem": false,
+          "claimsProcessing": true,
+          "decisionSupportSystemDW": false,
+          "electronicVisitVerification": false,
+          "encounterProcessingSystemMCS": false,
+          "financialManagement": true,
+          "healthInformationExchange": false,
+          "longTermServicesSupports": false,
+          "memberManagement": false,
+          "pharmacyBenefitManagementPOS": false,
+          "programIntegrity": true,
+          "providerManagement": false,
+          "thirdPartyLiability": false,
+          "other": false,
+          "otherMedicaidBusinessAreas": ""
+        }
+      },
+      "keyStatePersonnel": {
+        "medicaidDirector": {
+          "name": "Cornelius Fudge",
+          "email": "c.fudge@ministry.magic",
+          "phone": "5551234567"
+        },
+        "medicaidOffice": {
+          "address1": "100 Round Sq",
+          "address2": "",
+          "city": "Cityville",
+          "state": "AK",
+          "zip": "12345"
+        },
+        "keyPersonnel": [
+          {
+            "name": "James Holden",
+            "position": "HIT Coordinator",
+            "email": "JimPushesButtons@tycho.com",
+            "isPrimary": true,
+            "fte": {
+              "2022": 1,
+              "2023": 1
+            },
+            "hasCosts": true,
+            "costs": {
+              "2022": 100000,
+              "2023": 100000
+            },
+            "id": null,
+            "key": "1cfce025"
+          },
+          {
+            "name": "Fred Johnson",
+            "position": "Project Management Office Director",
+            "email": "FJohnson@tycho.com",
+            "isPrimary": false,
+            "fte": {
+              "2022": 0.3,
+              "2023": 0.3
+            },
+            "hasCosts": false,
+            "costs": {
+              "2022": 0,
+              "2023": 0
+            },
+            "id": null,
+            "key": "9a4d8803"
+          }
+        ]
+      },
+      "years": ["2023", "2024"],
+      "yearOptions": ["2023", "2024", "2025"],
+      "__t": "MMIS",
+      "name": "MMIS IAPD",
+      "statePrioritiesAndScope": {
+        "medicaidProgramAndPriorities": "Medicaid program and priorities",
+        "mesIntroduction": "Introduction",
+        "scopeOfAPD": "scope"
+      },
+      "previousActivities": {
+        "previousActivitySummary": "",
+        "actualExpenditures": {
+          "2021": {
+            "mmis": {
+              "50": {
+                "federalActual": 0,
+                "totalApproved": 0
+              },
+              "75": {
+                "federalActual": 0,
+                "totalApproved": 0
+              },
+              "90": {
+                "federalActual": 0,
+                "totalApproved": 0
+              }
+            }
+          },
+          "2022": {
+            "mmis": {
+              "50": {
+                "federalActual": 0,
+                "totalApproved": 0
+              },
+              "75": {
+                "federalActual": 0,
+                "totalApproved": 0
+              },
+              "90": {
+                "federalActual": 0,
+                "totalApproved": 0
+              }
+            }
+          },
+          "2023": {
+            "mmis": {
+              "50": {
+                "federalActual": 0,
+                "totalApproved": 0
+              },
+              "75": {
+                "federalActual": 0,
+                "totalApproved": 0
+              },
+              "90": {
+                "federalActual": 0,
+                "totalApproved": 0
+              }
+            }
+          }
+        }
+      },
+      "activities": [
+        {
+          "activityOverview": {
+            "activitySnapshot": "This is a snapshot",
+            "problemStatement": "This is a problem statement",
+            "proposedSolution": "This is a proposed solution"
+          },
+          "name": "Activity 1",
+          "activitySchedule": {
+            "plannedStartDate": "2017-10-01T00:00:00.000Z",
+            "plannedEndDate": "2023-09-30T00:00:00.000Z"
+          },
+          "analysisOfAlternativesAndRisks": {
+            "alternativeAnalysis": "Alternative and analysis",
+            "costBenefitAnalysis": "Cost benefit analysis",
+            "feasibilityStudy": "Feasibility study",
+            "requirementsAnalysis": "Requirements analysis",
+            "forseeableRisks": "Forseeable risks"
+          },
+          "conditionsForEnhancedFunding": {
+            "enhancedFundingQualification": true,
+            "enhancedFundingJustification": "justification"
+          },
+          "costAllocation": {
+            "2023": {
+              "ffp": {
+                "federal": 90,
+                "state": 10
+              },
+              "other": 105000
+            },
+            "2024": {
+              "ffp": {
+                "federal": 90,
+                "state": 10
+              },
+              "other": 0
+            }
+          },
+          "costAllocationNarrative": {
+            "years": {
+              "2023": {
+                "otherSources": "<p>No other funding is provided for this activity for FFY 2022.</p>"
+              },
+              "2024": {
+                "otherSources": "<p>No other funding is provided for this activity for FFY 2023.</p>"
+              }
+            },
+            "methodology": "<p>No cost allocation is necessary for this activity.</p>"
+          },
+          "quarterlyFFP": {
+            "2023": {
+              "1": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "2": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "3": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "4": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              }
+            },
+            "2024": {
+              "1": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "2": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "3": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "4": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              }
+            }
+          },
+          "id": null,
+          "key": "152a1e2b",
+          "activityId": "152a1e2b",
+          "milestones": [
+            {
+              "endDate": "2020-09-07T00:00:00.000Z",
+              "milestone": "Implementation of Final Rule and Stage 3 System Developments",
+              "id": null,
+              "key": "199905f6"
+            },
+            {
+              "endDate": "2019-12-31T00:00:00.000Z",
+              "milestone": "Environmental Scan Completion",
+              "id": null,
+              "key": "ba380312"
+            },
+            {
+              "endDate": "2022-05-30T00:00:00.000Z",
+              "milestone": "HIT Roadmap Development",
+              "id": null,
+              "key": "524f9372"
+            }
+          ],
+          "outcomes": [
+            {
+              "outcome": "Accept attestations for 2022, and modify SLR to meet new spec sheets released by CMS.",
+              "id": null,
+              "metrics": [
+                {
+                  "metric": "Complete SLR modifications by 11/1/21",
+                  "id": null,
+                  "key": "2b82b81e"
+                },
+                {
+                  "metric": "Accept attestations through 4/30/22.",
+                  "id": null,
+                  "key": "54ad5742"
+                }
+              ],
+              "key": "b100bd9e"
+            },
+            {
+              "outcome": "Provide support to EPs and EHs through attestation process.",
+              "id": null,
+              "metrics": [
+                {
+                  "metric": "Guidance available on Tycho\"\"s websites",
+                  "id": null,
+                  "key": "d0484d98"
+                },
+                {
+                  "metric": "Office hours availble for EPs and EHs",
+                  "id": null,
+                  "key": "917b4a1b"
+                },
+                {
+                  "metric": "Site visits, as needed, for EPs and EHs",
+                  "id": null,
+                  "key": "cb62bc70"
+                }
+              ],
+              "key": "4ac40597"
+            }
+          ],
+          "statePersonnel": [
+            {
+              "title": "Project Assistant",
+              "description": "Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.",
+              "years": {
+                "2022": {
+                  "amt": 86000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 88000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "16bf2cdd"
+            },
+            {
+              "title": "EHR Incentive Program Meaningful Use Coordinator (Research Analyst III)",
+              "description": "Develop and monitor reports, assist data users in developing and managing queries.",
+              "years": {
+                "2022": {
+                  "amt": 101115,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 102111,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "5f37256d"
+            },
+            {
+              "title": "IT Liaison",
+              "description": "Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.",
+              "years": {
+                "2022": {
+                  "amt": 101000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 104000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "4541e969"
+            },
+            {
+              "title": "Accountant III",
+              "description": "Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.",
+              "years": {
+                "2022": {
+                  "amt": 101000,
+                  "perc": 3
+                },
+                "2023": {
+                  "amt": 109000,
+                  "perc": 3
+                }
+              },
+              "id": null,
+              "key": "ce6dee79"
+            },
+            {
+              "title": "Public Information Officer",
+              "description": "Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program",
+              "years": {
+                "2022": {
+                  "amt": 165000,
+                  "perc": 0.5
+                },
+                "2023": {
+                  "amt": 170000,
+                  "perc": 0.5
+                }
+              },
+              "id": null,
+              "key": "ec3d0f6e"
+            },
+            {
+              "title": "Systems Chief",
+              "description": "Coordinate office resources, manage staff, budget, and resource assignments, and report program status.",
+              "years": {
+                "2022": {
+                  "amt": 135000,
+                  "perc": 0.5
+                },
+                "2023": {
+                  "amt": 140000,
+                  "perc": 0.5
+                }
+              },
+              "id": null,
+              "key": "4bf8af18"
+            },
+            {
+              "title": "Medicaid EHR Incentive Program Manager (Medical Assistance Administrator III)",
+              "description": "Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.",
+              "years": {
+                "2022": {
+                  "amt": 110012,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 111102,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "4d25a955"
+            },
+            {
+              "title": "System Analyst (Analyst Programmer IV)",
+              "description": "Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.",
+              "years": {
+                "2022": {
+                  "amt": 98987,
+                  "perc": 4
+                },
+                "2023": {
+                  "amt": 99897,
+                  "perc": 4
+                }
+              },
+              "id": null,
+              "key": "2bc92e7a"
+            }
+          ],
+          "expenses": [
+            {
+              "description": "",
+              "category": "Training and outreach",
+              "years": {
+                "2022": 40000,
+                "2023": 40000
+              },
+              "id": null,
+              "key": "de22861d"
+            },
+            {
+              "description": "",
+              "category": "Travel",
+              "years": {
+                "2022": 35000,
+                "2023": 35000
+              },
+              "id": null,
+              "key": "c0f0bac5"
+            },
+            {
+              "description": "",
+              "category": "Hardware, software, and licensing",
+              "years": {
+                "2022": 700000,
+                "2023": 0
+              },
+              "id": null,
+              "key": "7ae2d207"
+            }
+          ],
+          "contractorResources": [
+            {
+              "description": "Maintain SLR",
+              "end": null,
+              "hourly": {
+                "2022": {
+                  "hours": null,
+                  "rate": null
+                },
+                "2023": {
+                  "hours": null,
+                  "rate": null
+                }
+              },
+              "useHourly": false,
+              "name": "Super SLR Incorporated",
+              "start": null,
+              "totalCost": 32423,
+              "years": {
+                "2022": 999756,
+                "2023": 342444
+              },
+              "id": null,
+              "key": "9fc4ed44"
+            },
+            {
+              "description": "Technology consulting and planning services.",
+              "end": null,
+              "hourly": {
+                "2022": {
+                  "hours": null,
+                  "rate": null
+                },
+                "2023": {
+                  "hours": null,
+                  "rate": null
+                }
+              },
+              "useHourly": false,
+              "name": "Tech Consulting Inc.",
+              "start": null,
+              "totalCost": 473573,
+              "years": {
+                "2022": 333000,
+                "2023": 200000
+              },
+              "id": null,
+              "key": "58cae978"
+            }
+          ]
+        },
+        {
+          "activityOverview": {
+            "activitySnapshot": "Snapshot",
+            "problemStatement": "Problem statement",
+            "proposedSolution": "Prosed solution"
+          },
+          "name": "Activity 2",
+          "activitySchedule": {
+            "plannedStartDate": "2019-10-01T00:00:00.000Z",
+            "plannedEndDate": "2022-09-30T00:00:00.000Z"
+          },
+          "analysisOfAlternativesAndRisks": {
+            "alternativeAnalysis": "Alternative analysis",
+            "costBenefitAnalysis": "Cost benefit analysis",
+            "feasibilityStudy": "Feasibility study",
+            "requirementsAnalysis": "Requirements analysis",
+            "forseeableRisks": "Forseeable risks"
+          },
+          "conditionsForEnhancedFunding": {
+            "enhancedFundingQualification": false,
+            "enhancedFundingJustification": ""
+          },
+          "costAllocation": {
+            "2023": {
+              "ffp": {
+                "federal": 90,
+                "state": 10
+              },
+              "other": 0
+            },
+            "2024": {
+              "ffp": {
+                "federal": 75,
+                "state": 25
+              },
+              "other": 0
+            }
+          },
+          "costAllocationNarrative": {
+            "years": {
+              "2023": {
+                "otherSources": "<p>No other funding is provided for this activity for FFY 2022.</p>"
+              },
+              "2024": {
+                "otherSources": "<p>No other funding is provided for this activity for FFY 2023.</p>"
+              }
+            },
+            "methodology": "<p>No cost allocation is necessary for this activity.</p>"
+          },
+          "quarterlyFFP": {
+            "2023": {
+              "1": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "2": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "3": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "4": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              }
+            },
+            "2024": {
+              "1": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "2": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "3": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              },
+              "4": {
+                "combined": 25,
+                "contractors": 25,
+                "inHouse": 25
+              }
+            }
+          },
+          "id": null,
+          "key": "3110a314",
+          "activityId": "3110a314",
+          "milestones": [
+            {
+              "endDate": "2022-12-31T00:00:00.000Z",
+              "milestone": "Implement MMIS-HIE Interface",
+              "id": null,
+              "key": "ae414668"
+            },
+            {
+              "endDate": "2022-12-31T00:00:00.000Z",
+              "milestone": "Develop MMIS-HIE Interface Requirements",
+              "id": null,
+              "key": "346a5fae"
+            }
+          ],
+          "outcomes": [
+            {
+              "outcome": "Build interface between the MMIS Data Warehouse (DW) and the HIE so that Medicaid claims data can be made available to consumers in their Personal Health Record (PHR) within the HIE.",
+              "id": null,
+              "metrics": [
+                {
+                  "metric": "Hire contracted support to build an open API for the DW that the HIE and PHR can consume.",
+                  "id": null,
+                  "key": "cbc12c43"
+                },
+                {
+                  "metric": "Provide support for using open API for DW",
+                  "id": null,
+                  "key": "b05445a1"
+                }
+              ],
+              "key": "f3905d30"
+            }
+          ],
+          "statePersonnel": [
+            {
+              "title": "Project Assistant",
+              "description": "Assist with stuff",
+              "years": {
+                "2022": {
+                  "amt": 98000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 99000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "2f930a61"
+            },
+            {
+              "title": "MMIS Project Manager",
+              "description": "This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info",
+              "years": {
+                "2022": {
+                  "amt": 140000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 144000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "971e7e1d"
+            },
+            {
+              "title": "MMIS Trainer",
+              "description": "Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System",
+              "years": {
+                "2022": {
+                  "amt": 115000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 115000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "c28e353d"
+            },
+            {
+              "title": "Programmer IV",
+              "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
+              "years": {
+                "2022": {
+                  "amt": 140000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 145000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "c2dcd28e"
+            },
+            {
+              "title": "Security IT",
+              "description": "Make sure its secure.",
+              "years": {
+                "2022": {
+                  "amt": 115000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 120000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "d277ae24"
+            },
+            {
+              "title": "Operations Specialist",
+              "description": "Run the day to day.",
+              "years": {
+                "2022": {
+                  "amt": 125000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 130000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "c8c46912"
+            },
+            {
+              "title": "Programmer V",
+              "description": "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems",
+              "years": {
+                "2022": {
+                  "amt": 150000,
+                  "perc": 2
+                },
+                "2023": {
+                  "amt": 155000,
+                  "perc": 3
+                }
+              },
+              "id": null,
+              "key": ["26094c18"]
+            },
+            {
+              "title": ["Programmer III"],
+              "description": [
+                "The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems"
+              ],
+              "years": {
+                "2022": {
+                  "amt": 120000,
+                  "perc": 1
+                },
+                "2023": {
+                  "amt": 125000,
+                  "perc": 1
+                }
+              },
+              "id": null,
+              "key": "33e572aa"
+            }
+          ],
+          "expenses": [
+            {
+              "description": "",
+              "category": "Travel",
+              "years": {
+                "2022": 0,
+                "2023": 0
+              },
+              "id": null,
+              "key": "52b3e81e"
+            }
+          ],
+          "contractorResources": [
+            {
+              "description": "Hosting and development support.",
+              "end": null,
+              "hourly": {
+                "2022": {
+                  "hours": null,
+                  "rate": null
+                },
+                "2023": {
+                  "hours": null,
+                  "rate": null
+                }
+              },
+              "useHourly": false,
+              "name": "Interface Vendor Inc.",
+              "start": null,
+              "totalCost": 26453574,
+              "years": {
+                "2022": 650000,
+                "2023": 750000
+              },
+              "id": null,
+              "key": "2cd8a78f"
+            },
+            {
+              "description": "Interface M&O contractor.",
+              "end": null,
+              "hourly": {
+                "2022": {
+                  "hours": null,
+                  "rate": null
+                },
+                "2023": {
+                  "hours": null,
+                  "rate": null
+                }
+              },
+              "useHourly": false,
+              "name": "TBD",
+              "start": null,
+              "totalCost": 7398,
+              "years": {
+                "2022": 0,
+                "2023": 1000000
+              },
+              "id": null,
+              "key": "94dbd8cd"
+            }
+          ]
+        }
+      ],
+      "securityPlanning": {
+        "securityAndInterfacePlan": "",
+        "businessContinuityAndDisasterRecovery": ""
+      },
+      "assurancesAndCompliances": {
+        "procurement": [
+          {
+            "checked": null,
+            "title": "SSM, Part 11",
+            "explanation": ""
+          },
+          {
+            "checked": null,
+            "title": "45 CFR Part 95.615",
+            "explanation": ""
+          },
+          {
+            "checked": null,
+            "title": "45 CFR Part 92.36",
+            "explanation": ""
+          }
+        ],
+        "recordsAccess": [
+          {
+            "checked": null,
+            "title": "42 CFR Part 433.112(b)(5)-(9)",
+            "explanation": ""
+          },
+          {
+            "checked": null,
+            "title": "45 CFR Part 95.615",
+            "explanation": ""
+          },
+          {
+            "checked": null,
+            "title": "SMM Section 11267",
+            "explanation": ""
+          }
+        ],
+        "softwareRights": [
+          {
+            "checked": null,
+            "title": "45 CFR Part 95.617",
+            "explanation": ""
+          },
+          {
+            "checked": null,
+            "title": "42 CFR Part 431.300",
+            "explanation": ""
+          },
+          {
+            "checked": null,
+            "title": "45 CFR Part 164",
+            "explanation": ""
+          }
+        ],
+        "independentVV": [
+          {
+            "checked": null,
+            "title": "45 CFR Part 95.626",
+            "explanation": ""
+          }
+        ]
+      },
+      "status": "draft",
+      "__v": 0,
+      "apdType": "MMIS",
+      "id": "63cee9a187b7b1012eb95fef",
+      "created": "January 23, 2023",
+      "updated": "January 23, 2023, 3:10 PM EST",
+      "state": "ak"
+    },
+    "byId": {
+      "63cee9a187b7b1012eb95ff0": {
+        "id": "63cee9a187b7b1012eb95ff0",
+        "created": "January 23, 2023",
+        "updated": "January 23, 2023, 3:10 PM EST",
+        "state": "ak",
+        "name": "MMIS IAPD No Activities",
+        "status": "draft",
+        "years": ["2023", "2024"]
+      },
+      "63cee9a187b7b1012eb95fef": {
+        "id": "63cee9a187b7b1012eb95fef",
+        "created": "January 23, 2023",
+        "updated": "January 23, 2023, 3:10 PM EST",
+        "state": "ak",
+        "name": "MMIS IAPD",
+        "status": "draft",
+        "years": ["2023", "2024"]
+      },
+      "63cee9a187b7b1012eb95fee": {
+        "id": "63cee9a187b7b1012eb95fee",
+        "created": "January 23, 2023",
+        "updated": "January 23, 2023, 3:10 PM EST",
+        "state": "ak",
+        "name": "HITECH IAPD No Activities",
+        "status": "draft",
+        "years": ["2022", "2023"]
+      },
+      "63cee9a187b7b1012eb95fed": {
+        "id": "63cee9a187b7b1012eb95fed",
+        "created": "January 23, 2023",
+        "updated": "January 23, 2023, 3:10 PM EST",
+        "state": "ak",
+        "name": "HITECH IAPD Complete",
+        "status": "draft",
+        "years": ["2022", "2023"]
+      }
+    },
+    "fetching": false,
+    "loaded": true,
+    "error": "",
+    "selectAPDOnLoad": false,
+    "adminCheck": {
+      "errors": [
+        {
+          "section": "Activity 1 State Staff and Expenses",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/0/state-costs",
+          "fieldDescription": "Provide a description of the selected non-personal category."
+        },
+        {
+          "section": "Activity 1 State Staff and Expenses",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/0/state-costs",
+          "fieldDescription": "Provide a description of the selected non-personal category."
+        },
+        {
+          "section": "Activity 1 State Staff and Expenses",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/0/state-costs",
+          "fieldDescription": "Provide a description of the selected non-personal category."
+        },
+        {
+          "section": "Activity 1 Private Contractor Costs",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/0/contractor-costs",
+          "fieldDescription": "Provide a start date."
+        },
+        {
+          "section": "Activity 1 Private Contractor Costs",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/0/contractor-costs",
+          "fieldDescription": "Provide an end date."
+        },
+        {
+          "section": "Activity 1 Private Contractor Costs",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/0/contractor-costs",
+          "fieldDescription": "Provide a start date."
+        },
+        {
+          "section": "Activity 1 Private Contractor Costs",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/0/contractor-costs",
+          "fieldDescription": "Provide an end date."
+        },
+        {
+          "section": "Activity 2 State Staff and Expenses",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/1/state-costs",
+          "fieldDescription": "Provide a description of the selected non-personal category."
+        },
+        {
+          "section": "Activity 2 Private Contractor Costs",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/1/contractor-costs",
+          "fieldDescription": "Provide a start date."
+        },
+        {
+          "section": "Activity 2 Private Contractor Costs",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/1/contractor-costs",
+          "fieldDescription": "Provide an end date."
+        },
+        {
+          "section": "Activity 2 Private Contractor Costs",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/1/contractor-costs",
+          "fieldDescription": "Provide a start date."
+        },
+        {
+          "section": "Activity 2 Private Contractor Costs",
+          "link": "/apd/63cee9a187b7b1012eb95fef/activity/1/contractor-costs",
+          "fieldDescription": "Provide an end date."
+        },
+        {
+          "section": "Security Planning",
+          "link": "/apd/63cee9a187b7b1012eb95fef/security-planning",
+          "fieldDescription": "Provide Security and Interface Plan"
+        },
+        {
+          "section": "Security Planning",
+          "link": "/apd/63cee9a187b7b1012eb95fef/security-planning",
+          "fieldDescription": "Provide Business Continuity and Disaster Recovery"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        },
+        {
+          "section": "Assurances and Compliance",
+          "link": "/apd/63cee9a187b7b1012eb95fef/assurances-and-compliance",
+          "fieldDescription": "Select yes or no"
+        }
+      ],
+      "enabled": false,
+      "collapsed": false,
+      "complete": false
+    }
+  }
+}
