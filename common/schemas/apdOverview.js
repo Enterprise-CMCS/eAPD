@@ -22,17 +22,19 @@ const updateStatusSchema = Joi.object({
     'object.missing': 'Select an update type'
   });
 
+export const apdNameSchema = Joi.string()
+  .pattern(/^((?!untitled).)*$/i)
+  .min(1)
+  .required()
+  .messages({
+    'any.required': 'Provide an APD name.',
+    'string.empty': 'Provide an APD name.',
+    'string.base': 'Provide an APD name.',
+    'string.pattern.base': 'APD name cannot contain "untitled".'
+  });
+
 export const sharedApdOverviewFields = Joi.object({
-  name: Joi.string()
-    .pattern(/^((?!untitled).)*$/i)
-    .min(50)
-    .required()
-    .messages({
-      'any.required': 'Enter a name for the APD.',
-      'string.empty': 'Enter a name for the APD.',
-      'string.base': 'Enter a name for the APD.',
-      'string.pattern.base': 'The name cannot contain "untitled".'
-    })
+  name: apdNameSchema
 });
 
 export const hitechOverviewSchema = Joi.object({
@@ -92,9 +94,9 @@ export const medicaidBusinessAreasSchema = Joi.object({
   otherMedicaidBusinessAreas: Joi.when('other', {
     is: true,
     then: Joi.string().min(1).required().messages({
-      'string.base': 'Provide an other Medicaid Business Area(s)',
-      'string.empty': 'Provide an other Medicaid Business Area(s)',
-      'string.required': 'Provide an other Medicaid Business Area(s)'
+      'string.base': 'Provide an other Medicaid Business Area(s).',
+      'string.empty': 'Provide an other Medicaid Business Area(s).',
+      'string.required': 'Provide an other Medicaid Business Area(s).'
     }),
     otherwise: Joi.any()
   })
@@ -118,7 +120,7 @@ export const medicaidBusinessAreasSchema = Joi.object({
     { isPresent: resolved => resolved === true }
   )
   .messages({
-    'object.missing': 'Select at least one Medicaid Business Area'
+    'object.missing': 'Select at least one Medicaid Business Area.'
   });
 
 export const mmisOverviewSchema = Joi.object({

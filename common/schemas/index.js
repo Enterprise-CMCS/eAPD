@@ -1,4 +1,5 @@
 export {
+  apdNameSchema,
   hitechOverviewSchema,
   mmisOverviewSchema,
   sharedApdOverviewFields

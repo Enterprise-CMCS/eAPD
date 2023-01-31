@@ -70,6 +70,7 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
 
   const getSectionName = errorPath => {
     const sectionNameDict = {
+      name: 'APD Overview',
       apdOverview: 'APD Overview',
       keyStatePersonnel: 'Key State Personnel',
       statePrioritiesAndScope: 'State Priorities and Scope',
@@ -115,6 +116,7 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
 
   const getURLPath = errorPath => {
     const sectionURLPath = {
+      name: 'apd-overview',
       apdOverview: 'apd-overview',
       keyStatePersonnel: 'state-profile',
       statePrioritiesAndScope: 'priorities-scope',
