@@ -22,6 +22,7 @@ const setup = async (props = {}) => {
       <StatePrioritiesAndScope {...defaultProps} {...props} />,
       {
         initialState: {
+          adminCheck: true,
           apd: {
             data: {
               activities: []
@@ -69,6 +70,10 @@ describe('MMIS APD State Priorities and Scope', () => {
     expect(
       screen.getByLabelText('Medicaid Enterprise System Introduction')
     ).toHaveValue('Introducing Medicaid Enterprise System.');
+  });
+
+  test('renders error for required fields on admin check', async () => {
+    const { user } = await setup({});
   });
 
   test('setting Scope of APD', async () => {

@@ -45,7 +45,7 @@ describe(
       cy.wrap(apdId).as('apdId');
       cy.wrap(years).as('years');
 
-      cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
+      cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
       cy.useStateStaff();
       cy.visit(apdUrl);
     });
