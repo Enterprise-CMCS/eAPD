@@ -6,8 +6,10 @@ import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING } from '@cms-eapd/common/utils/constants';
-import { mmisOverviewSchema } from '@cms-eapd/common/schemas/apdOverview';
+import {
+  mmisOverviewSchema,
+  MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
+} from '@cms-eapd/common';
 
 import { setBusinessAreaField } from '../../../redux/actions/editApd';
 import TextArea from '../../../components/TextArea';

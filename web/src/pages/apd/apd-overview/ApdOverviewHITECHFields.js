@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { hitechOverviewSchema } from '@cms-eapd/common/schemas/apdOverview';
+import { hitechOverviewSchema } from '@cms-eapd/common';
 
 import {
   setNarrativeForHIE,
