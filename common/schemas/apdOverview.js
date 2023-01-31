@@ -23,13 +23,17 @@ const updateStatusSchema = Joi.object({
   });
 
 export const sharedApdOverviewFields = Joi.object({
-  name: Joi.string().pattern(/^((?!untitled).)*$/i).min(50).required().messages({
-    'any.required': 'Enter a name for the APD.',
-    'string.empty': 'Enter a name for the APD.',
-    'string.base': 'Enter a name for the APD.',
-    'string.pattern.base': 'The name cannot contain "untitled".'
-  }),
-})
+  name: Joi.string()
+    .pattern(/^((?!untitled).)*$/i)
+    .min(50)
+    .required()
+    .messages({
+      'any.required': 'Enter a name for the APD.',
+      'string.empty': 'Enter a name for the APD.',
+      'string.base': 'Enter a name for the APD.',
+      'string.pattern.base': 'The name cannot contain "untitled".'
+    })
+});
 
 export const hitechOverviewSchema = Joi.object({
   updateStatus: updateStatusSchema,
@@ -94,24 +98,28 @@ export const medicaidBusinessAreasSchema = Joi.object({
     }),
     otherwise: Joi.any()
   })
-}).or(
-  'waiverSupportSystems',
-  'assetVerificationSystem',
-  'claimsProcessing',
-  'decisionSupportSystemDW',
-  'electronicVisitVerification',
-  'encounterProcessingSystemMCS',
-  'financialManagement',
-  'healthInformationExchange',
-  'longTermServicesSupports',
-  'memberManagement',
-  'pharmacyBenefitManagementPOS',
-  'programIntegrity',
-  'providerManagement',
-  'thirdPartyLiability',
-  'other',
-  { isPresent: resolved => resolved === true }
-);
+})
+  .or(
+    'waiverSupportSystems',
+    'assetVerificationSystem',
+    'claimsProcessing',
+    'decisionSupportSystemDW',
+    'electronicVisitVerification',
+    'encounterProcessingSystemMCS',
+    'financialManagement',
+    'healthInformationExchange',
+    'longTermServicesSupports',
+    'memberManagement',
+    'pharmacyBenefitManagementPOS',
+    'programIntegrity',
+    'providerManagement',
+    'thirdPartyLiability',
+    'other',
+    { isPresent: resolved => resolved === true }
+  )
+  .messages({
+    'object.missing': 'Select at least one Medicaid Business Area'
+  });
 
 export const mmisOverviewSchema = Joi.object({
   updateStatus: updateStatusSchema,

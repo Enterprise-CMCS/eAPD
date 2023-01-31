@@ -87,6 +87,5 @@ export const setProgramOverview = text => ({
 export const setBusinessAreaField = (key, value) => ({
   type: EDIT_APD,
   path: `/apdOverview/medicaidBusinessAreas/${key}`,
-  // path: `/apdOverview/medicaidBusinessAreas`,
   value: value
 });
