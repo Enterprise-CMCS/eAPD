@@ -289,66 +289,68 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     });
 
     it('tests Key State Personnel page', function () {
+      const mmisBasics = this.mmisBasics;
+
       cy.goToKeyStatePersonnel();
       cy.contains('Key Personnel and Program Management').should('exist');
 
       cy.findByRole('button', { name: /Add Primary Contact/i }).click();
 
-      cy.fixture('users').then(userData => {
-        cy.get('[data-cy="key-person-0__name"]').clear().type(userData[0].name);
+      cy.get('[data-cy="key-person-0__name"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].name);
 
-        cy.get('[data-cy="key-person-0__email"]')
-          .clear()
-          .type(userData[0].email);
+      cy.get('[data-cy="key-person-0__email"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].email);
 
-        cy.get('[data-cy="key-person-0__position"]')
-          .clear()
-          .type(userData[0].position);
+      cy.get('[data-cy="key-person-0__position"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].position);
 
-        cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
-        cy.findByRole('button', { name: /Save/i }).click();
+      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+      cy.findByRole('button', { name: /Save/i }).click();
 
-        cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
 
-        cy.get('[data-cy="key-person-1__name"]').clear().type(userData[1].name);
+      cy.get('[data-cy="key-person-1__name"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].name);
 
-        cy.get('[data-cy="key-person-1__email"]')
-          .clear()
-          .type(userData[1].email);
+      cy.get('[data-cy="key-person-1__email"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].email);
 
-        cy.get('[data-cy="key-person-1__position"]')
-          .clear()
-          .type(userData[1].position);
+      cy.get('[data-cy="key-person-1__position"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].position);
 
-        cy.get('input[type="radio"][value="yes"]')
-          .check({ force: true })
-          .blur();
-        cy.get('[data-cy="key-person-1-0__cost"]').clear().type('1000');
-        cy.get('[data-cy="key-person-1-0__fte"]').clear().type('.5');
-        cy.get('[data-cy="key-person-1-0__medicaidShare"]')
-          .eq(0)
-          .clear()
-          .type('50');
-        cy.findAllByRole('radio', { name: '90/10 DDI' }).check({ force: true });
+      cy.get('input[type="radio"][value="yes"]').check({ force: true }).blur();
+      cy.get('[data-cy="key-person-1-0__cost"]').clear().type('1000');
+      cy.get('[data-cy="key-person-1-0__fte"]').clear().type('.5');
+      cy.get('[data-cy="key-person-1-0__medicaidShare"]')
+        .eq(0)
+        .clear()
+        .type('50');
+      cy.findAllByRole('radio', { name: '90/10 DDI' }).check({ force: true });
 
-        cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
-        cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
-        cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
-        cy.findAllByRole('radio', { name: '90/10 DDI' })
-          .eq(1)
-          .check({ force: true });
+      cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
+      cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
+      cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
+      cy.findAllByRole('radio', { name: '90/10 DDI' })
+        .eq(1)
+        .check({ force: true });
 
-        cy.findByRole('button', { name: /Save/i }).click();
+      cy.findByRole('button', { name: /Save/i }).click();
 
-        cy.contains(
-          'Total Computable Medicaid: $250 (50% Medicaid Share) '
-        ).should('exist');
-        cy.contains('Federal Share: $225').should('exist');
-        cy.contains(
-          'Total Computable Medicaid: $2,000 (100% Medicaid Share)'
-        ).should('exist');
-        cy.contains('Federal Share: $1,800').should('exist');
-      });
+      cy.contains(
+        'Total Computable Medicaid: $250 (50% Medicaid Share) '
+      ).should('exist');
+      cy.contains('Federal Share: $225').should('exist');
+      cy.contains(
+        'Total Computable Medicaid: $2,000 (100% Medicaid Share)'
+      ).should('exist');
+      cy.contains('Federal Share: $1,800').should('exist');
     });
 
     it('tests the Security Planning page', function () {
