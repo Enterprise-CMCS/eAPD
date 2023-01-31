@@ -1,2 +1,2 @@
-export * from './schemas';
-export * from './utils';
+export * from './schemas/index.js';
+export * from './utils/index.js';

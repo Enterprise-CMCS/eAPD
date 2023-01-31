@@ -1,21 +1,26 @@
-#!/usr/bin/env node
-
-// The point of this script is to write stuff to the console.
+#!/usr/bin/env node// The point of this script is to write stuff to the console.
 /* eslint-disable no-console */
 
-const colors = require('colors'); // eslint-disable-line import/no-extraneous-dependencies
-const fs = require('fs');
+import colors from 'colors'; // eslint-disable-line import/no-extraneous-dependencies
+import fs from 'fs';
+import openApi from '../routes/openAPI/index.js';
+import { resolve } from 'path';
+import * as url from 'url';
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const filename = resolve(__dirname, 'endpoint-data.json');
 
 let endpoints = [];
-if (fs.existsSync(`${__dirname}/endpoint-data.json`)) {
-  endpoints = JSON.parse(fs.readFileSync(`${__dirname}/endpoint-data.json`));
+console.log(`looking for file: ${filename}`);
+if (fs.existsSync(`${filename}`)) {
+  endpoints = JSON.parse(fs.readFileSync(`${filename}`));
 }
 
 // Treat it the same as the outside world will see it.  If we
 // don't do this, the object could contain undefineds, which
 // can mess up our reporting.  Stringifying and parsing will
 // strip out the undefineds, since those don't survive stringing
-const openAPI = JSON.parse(JSON.stringify(require('../routes/openAPI')));
+const openAPI = JSON.parse(JSON.stringify(openApi));
 
 Object.entries(openAPI.paths).forEach(([path, pathObj]) => {
   if (!endpoints.some(e => e.openAPIPath === path)) {

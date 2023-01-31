@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   const stateStaff = await knex('auth_roles')
     .where({ name: 'eAPD State Staff' })
     .first();
@@ -9,7 +9,7 @@ exports.up = async knex => {
   }
 };
 
-exports.down = async knex => {
+export const down = async knex => {
   const stateContractor = await knex('auth_roles')
     .where({ name: 'eAPD State Coordinator' })
     .first();

@@ -1,31 +1,32 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 
-import BudgetPage from '../../../page-objects/budget-page';
-import FillOutActivityPage from '../../../page-objects/fill-out-activity-page';
-import ExportPage from '../../../page-objects/export-page';
+import BudgetPage from '../../../page-objects/budget-page.js';
+import FillOutActivityPage from '../../../page-objects/fill-out-activity-page.js';
+import ExportPage from '../../../page-objects/export-page.js';
 
 const { _ } = Cypress;
 
-export const addHIEActivity = years => {
+export const addHIEActivity = function () {
   let budgetPage;
   let exportPage;
   let fillOutActivityPage;
 
-  let activityData;
-
-  before(() => {
+  before(function () {
     budgetPage = new BudgetPage();
     exportPage = new ExportPage();
     fillOutActivityPage = new FillOutActivityPage();
-
-    cy.fixture('HIE-activity-template.json').then(data => {
-      activityData = data;
-    });
   });
 
-  describe('Add a HIE Activity and check in export view', () => {
-    it('Adds an HIE Activity and checks the export view', () => {
+  beforeEach(function () {
+    cy.fixture('HIE-activity-template.json').as('activityData');
+  });
+
+  describe('Add a HIE Activity and check in export view', function () {
+    it('Adds an HIE Activity and checks the export view', function () {
+      const years = this.years;
+      const activityData = this.activityData;
+
       cy.goToActivityDashboard();
 
       // Add activity
@@ -164,6 +165,7 @@ export const addHIEActivity = years => {
         .parent()
         .within(() => {
           cy.findAllByText(`Activity 2: ${activityData.activityName}`)
+            .first()
             .parent()
             .within(() => {
               // Check Activity Overview

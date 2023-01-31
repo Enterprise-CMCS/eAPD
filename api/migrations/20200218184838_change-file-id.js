@@ -1,4 +1,4 @@
-exports.up = async knex =>
+export const up = async knex =>
   knex.schema.alterTable('apd_files', table => {
     table
       .string('id', 64)
@@ -10,4 +10,4 @@ exports.up = async knex =>
     table.unique(['id', 'apd_id']);
   });
 
-exports.down = async () => {};
+export const down = async () => {};

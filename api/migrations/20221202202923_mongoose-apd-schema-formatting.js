@@ -1,11 +1,10 @@
-const logger = require('../logger')('mongoose-migrate/migrate-apd-schema');
-const { setup, teardown } = require('../db/mongodb');
-const { APD } = require('../models');
+import loggerFactory from '../logger/index.js';
+import { setup, teardown } from '../db/mongodb.js';
+import { APD } from '../models/index.js';
 
-/**
- * Update the APD schema to more closely match the front end nav/page sections
- */
-async function up() {
+const logger = loggerFactory('mongoose-migrate/migrate-apd-schema');
+
+export const up = async () => {
   // Grab all APDs
   await setup();
   const apds = await APD.find({}).lean();
@@ -60,19 +59,18 @@ async function up() {
     }));
 
   // Update them into the database
-  await Promise.all(
-    updatedApds.map(async apd => {
-      await APD.replaceOne({ _id: apd.id }, { ...apd });
-    })
-  ).catch(err => {
-    logger.error(err);
-  });
+  if (updatedApds) {
+    await Promise.all(
+      updatedApds.map(async apd => {
+        await APD.replaceOne({ _id: apd.id }, { ...apd });
+      })
+    ).catch(err => {
+      logger.error(err);
+    });
+  }
   await teardown();
-}
+};
 
-/**
- * Make any changes that UNDO the up function side effects here (if possible)
- */
-async function down() {}
-
-module.exports = { up, down };
+export const down = () => {
+  // we are not planning on returning to this older format
+};

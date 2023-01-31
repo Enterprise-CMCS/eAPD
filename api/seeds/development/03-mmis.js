@@ -1,5 +1,7 @@
-const mmis = {
-  apdType: 'MMIS',
+import { APD_TYPE } from '@cms-eapd/common';
+
+export default {
+  apdType: APD_TYPE.MMIS,
   name: 'MMIS IAPD',
   years: ['2023', '2024'],
   yearOptions: ['2023', '2024', '2025'],
@@ -47,18 +49,34 @@ const mmis = {
         position: 'HIT Coordinator',
         email: 'JimPushesButtons@tycho.com',
         isPrimary: true,
-        fte: { 2022: 1, 2023: 1 },
+        fte: { 2023: 1, 2024: 1 },
         hasCosts: true,
-        costs: { 2022: 100000, 2023: 100000 }
+        costs: { 2023: 100000, 2024: 100000 },
+        split: {
+          2023: { federal: 90, state: 10 },
+          2024: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2023: 90,
+          2024: 50
+        }
       },
       {
         name: 'Fred Johnson',
         position: 'Project Management Office Director',
         email: 'FJohnson@tycho.com',
         isPrimary: false,
-        fte: { 2022: 0.3, 2023: 0.3 },
+        fte: { 2023: 0.3, 2024: 0.3 },
         hasCosts: false,
-        costs: { 2022: 0, 2023: 0 }
+        costs: { 2023: 0, 2024: 0 },
+        split: {
+          2023: { federal: 90, state: 10 },
+          2024: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2023: 50,
+          2024: 10
+        }
       }
     ]
   },
@@ -522,7 +540,7 @@ const mmis = {
   },
   assurancesAndCompliances: {
     procurement: [
-      { title: 'SSM, Part 11', checked: null, explanation: '' },
+      { title: 'SMM, Part 11', checked: null, explanation: '' },
       { title: '45 CFR Part 95.615', checked: null, explanation: '' },
       { title: '45 CFR Part 92.36', checked: null, explanation: '' }
     ],
@@ -549,5 +567,3 @@ const mmis = {
     ]
   }
 };
-
-module.exports = { mmis };

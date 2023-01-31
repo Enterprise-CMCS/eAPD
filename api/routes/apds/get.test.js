@@ -1,11 +1,9 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const can = require('../../middleware').can;
-const getEndpoint = require('./get');
-
-const mockExpress = require('../../util/mockExpress');
-const mockResponse = require('../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import { can } from '../../middleware/index.js';
+import getEndpoint from './get.js';
+import mockExpress from '../../util/mockExpress.js';
+import mockResponse from '../../util/mockResponse.js';
 
 let app;
 let res;
@@ -16,15 +14,15 @@ tap.test('GET /apds', async endpointTest => {
   endpointTest.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    getAllAPDsByState = sinon.stub();
+    next = stub();
+    getAllAPDsByState = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/apds', can('view-document'), sinon.match.func),
+      app.get.calledWith('/apds', can('view-document'), match.func),
       'user-specific apds GET endpoint is registered'
     );
   });
@@ -136,9 +134,10 @@ tap.test('apds/:id GET endpoint', async tests => {
   tests.beforeEach(() => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    getAPDByIDAndState = sinon.stub();
-    adminCheckAPDDocument = sinon.stub();
+
+    next = stub();
+    getAPDByIDAndState = stub();
+    adminCheckAPDDocument = stub();
   });
 
   tests.test('setup', async test => {
@@ -148,7 +147,7 @@ tap.test('apds/:id GET endpoint', async tests => {
       app.get.calledWith(
         '/apds/:id([0-9a-fA-F]{24}$)',
         can('view-document'),
-        sinon.match.func
+        match.func
       ),
       'user-specific apds GET endpoint is registered'
     );

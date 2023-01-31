@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { generateKey } = require('@cms-eapd/common');
+import mongoose from 'mongoose';
+import { generateKey } from '@cms-eapd/common';
 
 const quarterlyFFP = new mongoose.Schema(
   {
@@ -165,6 +165,4 @@ const activitySchema = new mongoose.Schema({
   }
 });
 
-module.exports = {
-  activitySchema
-};
+export default activitySchema;

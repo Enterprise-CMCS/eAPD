@@ -1,17 +1,18 @@
-const ObjectId = require('mongoose').Types.ObjectId;
+import mongoose from 'mongoose';
+import mnAPD from './01-mnAPD.js';
+import akAPD from './02-akAPD.js';
+import akMMIS from './03-akMMIS.js';
+import finalAPD from './04-finalAPD.js';
 
-const mnAPD = require('./01-mnAPD.json');
-const akAPD = require('./02-akAPD.json');
-const akMMIS = require('./03-akMMIS.json');
-const finalAPD = require('./04-finalAPD.json');
+const ObjectId = mongoose.Types.ObjectId;
 
-const mnAPDId = '21ad69c0682b10ba1c54aa2d';
-const akAPDId = 'eeac3c9865059f26eccb0600';
-const akMMISId = '600eeac3c9865059f26eccb0';
-const finalAPDId = 'de66754e9513b78d72875bcf';
-const badAPDId = '0123456789abcdef01234567';
+export const mnAPDId = '21ad69c0682b10ba1c54aa2d';
+export const akAPDId = 'eeac3c9865059f26eccb0600';
+export const akMMISId = '600eeac3c9865059f26eccb0';
+export const finalAPDId = 'de66754e9513b78d72875bcf';
+export const badAPDId = '0123456789abdcef01234567';
 
-const data = [
+export const data = [
   {
     ...mnAPD,
     _id: ObjectId(mnAPDId),
@@ -59,12 +60,3 @@ const data = [
     status: 'approved'
   }
 ];
-
-module.exports = {
-  data,
-  mnAPDId,
-  akAPDId,
-  akMMISId,
-  finalAPDId,
-  badAPDId
-};

@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import nameFundingSourceSchema from '@cms-eapd/common/schemas/nameAndFundingSource';
+import { nameAndFundingSourceSchema as schema } from '@cms-eapd/common';
 import { setActivityFundingSource } from '../../../../redux/actions/editActivity';
 
 import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
@@ -25,7 +25,7 @@ const FundingSourceForm = ({
     defaultValues: {
       fundingSource: fundingSource
     },
-    resolver: joiResolver(nameFundingSourceSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

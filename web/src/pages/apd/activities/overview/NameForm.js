@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
 
-import nameFundingSourceSchema from '@cms-eapd/common/schemas/nameAndFundingSource';
+import { nameAndFundingSourceSchema as schema } from '@cms-eapd/common';
 import { setActivityName } from '../../../../redux/actions/editActivity';
 
 import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
@@ -20,7 +20,7 @@ const NameForm = ({ index, item: { name }, setName, adminCheck }) => {
     defaultValues: {
       name: name
     },
-    resolver: joiResolver(nameFundingSourceSchema)
+    resolver: joiResolver(schema)
   });
 
   useEffect(() => {

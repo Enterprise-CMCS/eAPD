@@ -1,8 +1,7 @@
-const tap = require('tap');
-const sinon = require('sinon');
-
-const { loadApd, userCanAccessAPD, userCanEditAPD } = require('./apd');
-const mockResponse = require('../util/mockResponse');
+import tap from 'tap';
+import { stub } from 'sinon';
+import { loadApd, userCanAccessAPD, userCanEditAPD } from './apd.js';
+import mockResponse from '../util/mockResponse.js';
 
 let err;
 let res;
@@ -12,11 +11,11 @@ tap.test('APD-related middleware', async middlewareTests => {
   middlewareTests.beforeEach(() => {
     err = { error: 'err0r' };
     res = mockResponse();
-    next = sinon.stub();
+    next = stub();
   });
 
   middlewareTests.test('load apd', async loadApdTests => {
-    const getAPDByID = sinon.stub();
+    const getAPDByID = stub();
 
     loadApdTests.test(
       'when there is an error loading the APD',
@@ -74,7 +73,7 @@ tap.test('APD-related middleware', async middlewareTests => {
   });
 
   middlewareTests.test('user can access apd', async accessApdTests => {
-    const loadApdMock = sinon.stub();
+    const loadApdMock = stub();
     const loadApdFake = () => loadApdMock;
 
     accessApdTests.beforeEach(async () => {
@@ -113,7 +112,7 @@ tap.test('APD-related middleware', async middlewareTests => {
   });
 
   middlewareTests.test('user can edit apd', async tests => {
-    const userCanAccessAPDMock = sinon.stub();
+    const userCanAccessAPDMock = stub();
     const userCanAccessAPDFake = () => userCanAccessAPDMock;
 
     tests.beforeEach(async () => {

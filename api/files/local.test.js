@@ -1,17 +1,16 @@
-const systemFs = require('fs');
-const sinon = require('sinon');
-const tap = require('tap');
+import systemFs from 'fs';
+import { createSandbox, stub, resetHistory } from 'sinon';
+import tap from 'tap';
 
-const sandbox = sinon.createSandbox();
+const fsExistsSync = stub(systemFs, 'existsSync');
+const fsMkdirSync = stub(systemFs, 'mkdirSync');
 
-const getModule = () => {
-  delete require.cache[require.resolve('./local')];
-  return require('./local'); // eslint-disable-line global-require
-};
+const sandbox = createSandbox();
+
+// adding a random string to the end of the import will force it to import again
+const getModule = async () => import(`./local.js#${Math.random()}`);
 
 tap.test('local file storage module', async tests => {
-  const fsExistsSync = sandbox.stub(systemFs, 'existsSync');
-
   const fs = {
     readFile: sandbox.stub(),
     writeFile: sandbox.stub()
@@ -22,6 +21,7 @@ tap.test('local file storage module', async tests => {
 
     sandbox.resetBehavior();
     sandbox.resetHistory();
+    resetHistory();
 
     fsExistsSync.returns(true);
   });
@@ -30,7 +30,7 @@ tap.test('local file storage module', async tests => {
     'returns functions that always reject if FILE_PATH is missing',
     async test => {
       delete process.env.FILE_PATH;
-      const { getFile, putFile } = getModule();
+      const { getFile, putFile } = await getModule();
 
       test.rejects(() => getFile());
       test.rejects(() => putFile());
@@ -38,18 +38,15 @@ tap.test('local file storage module', async tests => {
   );
 
   tests.test('creates the local file path if it does not exist', async test => {
-    fsExistsSync.returns(false);
-    const mkdir = sinon.stub(systemFs, 'mkdirSync');
+    fsExistsSync.callsFake(() => false);
 
-    getModule();
+    await getModule();
 
-    test.ok(mkdir.calledWith('local file path'));
-
-    mkdir.restore();
+    test.ok(fsMkdirSync.calledWith('local file path'));
   });
 
   tests.test('can get a file from local storage', async getTests => {
-    const { getFile } = getModule();
+    const { getFile } = await getModule();
 
     getTests.test(
       'rejects if there is an error reading the file',
@@ -69,7 +66,7 @@ tap.test('local file storage module', async tests => {
   });
 
   tests.test('can put a file into local storage', async putTests => {
-    const { putFile } = getModule();
+    const { putFile } = await getModule();
 
     putTests.test(
       'rejects if there is an error writing the file',

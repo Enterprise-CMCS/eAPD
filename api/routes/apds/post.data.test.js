@@ -1,6 +1,7 @@
-const tap = require('tap');
-const sinon = require('sinon');
-const { APD_TYPE } = require('@cms-eapd/common');
+import tap from 'tap';
+import { useFakeTimers } from 'sinon';
+import getNewApd from './post.data.js';
+import { APD_TYPE } from '@cms-eapd/common';
 
 // The Mars Pathfinder mission landed on Mars on July 4, 1997.  The Sojourner
 // rover wandered around the surface for 83 solar days before communications
@@ -10,11 +11,9 @@ const { APD_TYPE } = require('@cms-eapd/common');
 // our faked-out clock.
 let mockClock;
 
-const getNewApd = require('./post.data');
-
 tap.test('APD data initializer', async apdTests => {
   apdTests.before(() => {
-    mockClock = sinon.useFakeTimers(new Date(1997, 6, 4).getTime());
+    mockClock = useFakeTimers(new Date(1997, 6, 4).getTime());
   });
 
   apdTests.teardown(() => {
@@ -447,7 +446,7 @@ tap.test('APD data initializer', async apdTests => {
       },
       assurancesAndCompliances: {
         procurement: [
-          { title: 'SSM, Part 11', checked: null, explanation: '' },
+          { title: 'SMM, Part 11', checked: null, explanation: '' },
           { title: '45 CFR Part 95.615', checked: null, explanation: '' },
           { title: '45 CFR Part 92.36', checked: null, explanation: '' }
         ],
@@ -538,7 +537,7 @@ tap.test('APD data initializer', async apdTests => {
       },
       assurancesAndCompliances: {
         procurement: [
-          { title: 'SSM, Part 11', checked: null, explanation: '' },
+          { title: 'SMM, Part 11', checked: null, explanation: '' },
           { title: '45 CFR Part 95.615', checked: null, explanation: '' },
           { title: '45 CFR Part 92.36', checked: null, explanation: '' }
         ],

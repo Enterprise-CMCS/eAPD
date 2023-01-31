@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { activitySchema } = require('./apdActivity');
+import mongoose from 'mongoose';
+import activitySchema from './apdActivity.js';
 
 const hitechActivitySchema = new mongoose.Schema({
   _id: false,
@@ -17,6 +17,4 @@ const hitechActivitySchema = new mongoose.Schema({
 
 hitechActivitySchema.add(activitySchema);
 
-module.exports = {
-  hitechActivitySchema
-};
+export default hitechActivitySchema;

@@ -1,6 +1,6 @@
-const { changeState: cs } = require('../../../auth/jwtUtils');
+import { changeState as cs } from '../../../auth/jwtUtils.js';
 
-module.exports = (app, { changeState = cs } = {}) => {
+export default (app, { changeState = cs } = {}) => {
   app.get('/auth/state/:stateId', async (req, res) => {
     const { stateId } = req.params;
     const user = req.user;
