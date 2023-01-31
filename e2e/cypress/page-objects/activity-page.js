@@ -4,10 +4,6 @@ import { addCommas, getDateRange } from './helper.js';
 class ActivityPage {
   budgetPage = new BudgetPage();
 
-  checkTinyMCE = (id, expectedValue) => {
-    cy.get(`[id="${id}"]`).should('have.value', expectedValue);
-  };
-
   checkTextField = (className, expectedValue, index) => {
     // I CHANGED THIS TO 'CONTAIN' FROM 'HAVE.VALUE' FOR populatePage.fillQuarters()
     if (Number.isInteger(index)) {
