@@ -58,13 +58,10 @@ export const checkDefaultActivity = function () {
           'exist'
         );
 
-        activityPage.checkTinyMCE('activity-short-overview-field', '');
-        activityPage.checkTinyMCE('activity-description-field', '');
-        activityPage.checkTinyMCE('activity-alternatives-field', '');
-        activityPage.checkTinyMCE(
-          'standards-and-conditions-supports-field',
-          ''
-        );
+        cy.checkTinyMCE('activity-short-overview-field', '');
+        cy.checkTinyMCE('activity-description-field', '');
+        cy.checkTinyMCE('activity-alternatives-field', '');
+        cy.checkTinyMCE('standards-and-conditions-supports-field', '');
         activityPage.checkTextField('ds-c-field visibility--screen', '');
 
         cy.waitForSave();
@@ -132,10 +129,10 @@ export const checkDefaultActivity = function () {
           level: 3
         }).should('exist');
         cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
-        activityPage.checkTinyMCE('cost-allocation-methodology-field', '');
+        cy.checkTinyMCE('cost-allocation-methodology-field', '');
 
         _.forEach(years, (year, i) => {
-          activityPage.checkTinyMCE(
+          cy.checkTinyMCE(
             `cost-allocation-narrative-${year}-other-sources-field`,
             ''
           );
