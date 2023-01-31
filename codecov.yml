@@ -6,7 +6,7 @@ comment:
   layout: 'reach,diff,flags,files,footer'
   require_changes: false
   require_base: yes
-  require_head: yes 
+  require_head: yes
   show_carryforward_flags: true
 
 github_checks:
@@ -25,7 +25,7 @@ coverage:
         target: 60% #overall project/ repo coverage
       api:
         target: 75%
-       flags:
+        flags:
           - api
       common:
         target: 74%
