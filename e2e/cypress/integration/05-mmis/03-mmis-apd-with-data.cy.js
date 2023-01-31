@@ -1,8 +1,4 @@
-// <reference types="cypress" />
-import {
-  testAPDOverviewWithData,
-  testMmisAPDOverviewWithData
-} from '../../helpers/apd/apd-overview';
+import { testStatePrioritiesAndScopeWithData } from '../../helpers/apd/state-priorities-and-scope';
 
 // Tests an MMIS APD by adding data and checking the results
 describe(
@@ -60,8 +56,12 @@ describe(
     });
 
     describe('Form View', function () {
-      describe('MMIS APD Overview', function () {
-        testAPDOverviewWithData();
+      // describe('MMIS APD Overview', function () {
+      //   testAPDOverviewWithData();
+      // });
+
+      describe('first', function () {
+        testStatePrioritiesAndScopeWithData();
       });
     });
   }
