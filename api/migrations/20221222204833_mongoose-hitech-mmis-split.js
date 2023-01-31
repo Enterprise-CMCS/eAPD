@@ -1,18 +1,20 @@
-const logger = require('../logger')('migrate-mongoose/hitech-mmis-split');
-const ObjectId = require('mongoose').Types.ObjectId;
-const { setup, teardown } = require('../db/mongodb');
-const { APD, HITECH, MMIS, Budget } = require('../models');
-const {
+import loggerFactory from '../logger/index.js';
+import { setup, teardown } from '../db/mongodb.js';
+import { APD, HITECH, Budget } from '../models/index.js';
+import {
   defaultAPDYearOptions,
   deepCopy,
-  APD_TYPE
-} = require('@cms-eapd/common');
-const { createAPD } = require('../db/apds');
+  APD_TYPE,
+  defaultAPDYears
+} from '@cms-eapd/common';
+import { createAPD } from '../db/apds.js';
+
+const logger = loggerFactory('migrate-mongoose/hitech-mmis-split');
 
 /**
  * Make any changes you need to make to the database here
  */
-async function up() {
+export const up = async () => {
   // Grab all APDs
   await setup();
   const apds = await APD.find();
@@ -25,7 +27,11 @@ async function up() {
     apdJSON.apdType = APD_TYPE.HITECH;
     const { years = [] } = apdJSON;
     if (years.length === 0) {
-      logger.error('No years found');
+      apdJSON.years = defaultAPDYears();
+      apdJSON.yearOptions = defaultAPDYearOptions();
+      logger.info(
+        'Error with APD Id ${apd._id}, no years found, using default ${apdJSON.years}'
+      );
     }
     if (years.length < 3) {
       apdJSON.yearOptions = defaultAPDYearOptions(years[0]);
@@ -75,12 +81,12 @@ async function up() {
   }
 
   await teardown();
-}
+};
 
 /**
  * Make any changes that UNDO the up function side effects here (if possible)
  */
-async function down() {
+export const down = async () => {
   await setup();
   const hitech = await HITECH.find();
 
@@ -106,6 +112,4 @@ async function down() {
   });
 
   await teardown();
-}
-
-module.exports = { up, down };
+};

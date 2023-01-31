@@ -7,7 +7,7 @@ import {
   defaultMMISBudgetObject,
   defaultQuarterlyFFPObject,
   defaultActivityTotalsDataObject
-} from './budget';
+} from './budget.js';
 
 describe('budget getDefault methods', () => {
   describe('getDefaultFundingSourceObject', () => {

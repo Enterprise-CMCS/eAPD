@@ -26,7 +26,7 @@ import { createMemoryHistory } from 'history';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import reducer from '../../../web/src/redux/reducers';
+import reducer from '../../../web/src/redux/reducers/index.js';
 
 Cypress.Commands.add('mount', mount);
 

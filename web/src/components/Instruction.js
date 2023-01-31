@@ -53,7 +53,7 @@ const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
                 {/* eslint-disable react/no-array-index-key */}
                 {list.map((item, i) => (
                   <li className="ds-u-margin-bottom--2" key={i}>
-                    {item}
+                    <Md content={item} />
                   </li>
                 ))}
                 {/* eslint-enable react/no-array-index-key */}

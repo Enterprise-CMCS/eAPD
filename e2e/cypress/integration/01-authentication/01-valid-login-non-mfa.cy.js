@@ -5,6 +5,8 @@
 // check out the link below and learn how to write your first test:
 // https://on.cypress.io/writing-first-test
 
+Cypress.session.clearAllSavedSessions();
+
 describe(
   'Logging in with a state staff user (no MFA) with an approved affiliation',
   {
@@ -14,20 +16,13 @@ describe(
       openMode: 1
     }
   },
-  () => {
-    beforeEach(() => {
-      cy.clearAuthCookies();
-    });
-
-    it('accept notice', () => {
+  function () {
+    it('accept notice and login', function () {
       cy.visit('/');
 
       cy.findByRole('button', { name: /Agree and continue/i }).click();
       cy.findByRole('heading', { name: /Log in/i }).should('exist');
-    });
 
-    it('should login', () => {
-      cy.findByRole('heading', { name: /Log in/i }).should('exist');
       cy.findByLabelText('EUA ID').clear().type(Cypress.env('statestaff'));
       cy.findByLabelText('Password')
         .clear()

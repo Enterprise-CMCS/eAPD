@@ -1,39 +1,33 @@
-const tap = require('tap');
-const sinon = require('sinon');
-const endpointIndex = require('./index');
+import tap from 'tap';
+import { spy, match } from 'sinon';
+import endpointIndex from './index.js';
 
 tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
   const app = {
-    get: sinon.spy(),
-    use: sinon.spy()
+    get: spy(),
+    use: spy()
   };
   const res = {
-    send: sinon.spy()
+    send: spy()
   };
 
-  const affiliationsEndpoint = sinon.spy();
-  const apdsEndpoint = sinon.spy();
-  const apdsEventsEndpoint = sinon.spy();
-  const apdsFilesEndpoint = sinon.spy();
-  const authEndpoint = sinon.spy();
-  const docsEndpoint = sinon.spy();
-  const meEndpoint = sinon.spy();
-  const rolesEndpoint = sinon.spy();
-  const statesEndpoint = sinon.spy();
-  const stateAffiliationEndpoint = sinon.spy();
-  const usersEndpoint = sinon.spy();
+  const affiliationsEndpoint = spy();
+  const apdsEndpoint = spy();
+  const authEndpoint = spy();
+  const docsEndpoint = spy();
+  const meEndpoint = spy();
+  const rolesEndpoint = spy();
+  const statesEndpoint = spy();
+  const usersEndpoint = spy();
   const openAPI = {};
 
   endpointIndex(app, {
     affiliationsEndpoint,
     apdsEndpoint,
-    apdsEventsEndpoint,
-    apdsFilesEndpoint,
     authEndpoint,
     docsEndpoint,
     rolesEndpoint,
     statesEndpoint,
-    stateAffiliationEndpoint,
     usersEndpoint,
     openAPIdoc: {}
   });
@@ -46,16 +40,6 @@ tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
     apdsEndpoint.calledWith(app),
     'apds endpoint is setup with the app'
   );
-  endpointTest.ok(
-    apdsEventsEndpoint.calledWith(app),
-    'apds events endpoint is setup with the app'
-  );
-
-  endpointTest.ok(
-    apdsFilesEndpoint.calledWith(app),
-    'apds files endpoint is setup with the app'
-  );
-
   endpointTest.ok(
     authEndpoint.calledWith(app),
     'auth endpoint is setup with the app'
@@ -77,16 +61,12 @@ tap.test('endpoint setup', { timeout: 300000 }, async endpointTest => {
     'states endpoint is set up with the app'
   );
   endpointTest.ok(
-    stateAffiliationEndpoint.calledWith(app),
-    'state Affiliation endpoint is set up with the app'
-  );
-  endpointTest.ok(
     usersEndpoint.calledWith(app),
     'users endpoint is setup with the app'
   );
 
   endpointTest.ok(
-    app.get.calledWith('/open-api', sinon.match.func),
+    app.get.calledWith('/open-api', match.func),
     'sets up an endpoint to fetch OpenAPI spec'
   );
 

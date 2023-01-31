@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const discriminatorOptions = { discriminatorKey: 'type' };
+export const discriminatorOptions = { discriminatorKey: 'type' };
 
-const shareByCostType = new mongoose.Schema(
+export const shareByCostType = new mongoose.Schema(
   {
     inHouse: Number,
     contractors: Number,
@@ -11,7 +11,7 @@ const shareByCostType = new mongoose.Schema(
   { _id: false }
 );
 
-const shareByCostTypeByQuarter = new mongoose.Schema(
+export const shareByCostTypeByQuarter = new mongoose.Schema(
   {
     1: shareByCostType,
     2: shareByCostType,
@@ -22,7 +22,7 @@ const shareByCostTypeByQuarter = new mongoose.Schema(
   { _id: false }
 );
 
-const fedStateSplit = new mongoose.Schema(
+export const fedStateSplit = new mongoose.Schema(
   {
     total: Number,
     federal: Number,
@@ -32,7 +32,7 @@ const fedStateSplit = new mongoose.Schema(
   { _id: false }
 );
 
-const fedStateSplitByCost = new mongoose.Schema(
+export const fedStateSplitByCost = new mongoose.Schema(
   {
     statePersonnel: {
       type: Map,
@@ -155,13 +155,4 @@ const budgetSchema = new mongoose.Schema({
   }
 });
 
-const Budget = mongoose.model('Budget', budgetSchema);
-
-module.exports = {
-  Budget,
-  discriminatorOptions,
-  shareByCostTypeByQuarter,
-  shareByCostType,
-  fedStateSplitByCost,
-  fedStateSplit
-};
+export default mongoose.model('Budget', budgetSchema);

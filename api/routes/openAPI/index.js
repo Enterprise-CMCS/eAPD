@@ -1,38 +1,34 @@
-const pkg = require('../../package.json');
+import affiliations from '../affiliations/openAPI.js';
+import apds from '../apds/openAPI.js';
+import apdsEvents from '../apds/events/openAPI.js';
+import apdsFiles from '../apds/files/openAPI.js';
+import authActivities from '../auth/activities/openAPI.js';
+import authRoles from '../auth/roles/openAPI.js';
+import authStates from '../auth/states/openAPI.js';
+import authCertifications from '../auth/certifications/openAPI.js';
+import authCertificationsFiles from '../auth/certifications/files/openAPI.js';
+import docs from '../docs/openAPI.js';
+import me from '../me/openAPI.js';
+import roles from '../roles/openAPI.js';
+import states from '../states/openAPI.js';
+import statesAffiliations from '../states/affilitations/openAPI.js';
+import users from '../users/openAPI.js';
 
-const affiliations = require('../affiliations/openAPI');
-const apds = require('../apds/openAPI');
-const apdsEvents = require('../apds/events/openAPI');
-const apdsFiles = require('../apds/files/openAPI');
-const apdsSubmissions = require('../apds/submissions/openApi');
-const authActivities = require('../auth/activities/openAPI');
-const authRoles = require('../auth/roles/openAPI');
-const authStates = require('../auth/states/openAPI');
-const authCertifications = require('../auth/certifications/openAPI');
-const authCertificationsFiles = require('../auth/certifications/files/openAPI');
-const docs = require('../docs/openAPI');
-const me = require('../me/openAPI');
-const roles = require('../roles/openAPI');
-const states = require('../states/openAPI');
-const statesAffiliations = require('../states/affilitations/openAPI');
-const users = require('../users/openAPI');
-
+import { arrayOf } from './helpers.js';
 // ############## OPENAPI IMPORT INSERTION POINT ######################
-const { arrayOf } = require('./helpers').schema;
 
-module.exports = {
+const openapi = {
   openapi: '3.0.0',
   info: {
     title: 'CMS HITECH APD API',
     description: 'The API for the CMS HITECH APD app.',
-    version: pkg.version
+    version: '0.0.1' // from package.json
   },
   paths: {
     ...affiliations,
     ...apds,
     ...apdsFiles,
     ...apdsEvents,
-    ...apdsSubmissions,
     ...authActivities,
     ...authRoles,
     ...authStates,
@@ -2540,3 +2536,5 @@ module.exports = {
     }
   }
 };
+
+export default openapi;

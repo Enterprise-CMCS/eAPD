@@ -1,9 +1,8 @@
-const tap = require('tap');
-const sinon = require('sinon');
-const getEndpoint = require('./get');
-
-const mockExpress = require('../../util/mockExpress');
-const mockResponse = require('../../util/mockResponse');
+import tap from 'tap';
+import { stub, match } from 'sinon';
+import getEndpoint from './get.js';
+import mockExpress from '../../util/mockExpress.js';
+import mockResponse from '../../util/mockResponse.js';
 
 let app;
 let res;
@@ -16,20 +15,20 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
+    next = stub();
   });
 
   endpointTest.test('setup', async setupTest => {
     getEndpoint(app);
 
     setupTest.ok(
-      app.get.calledWith('/me', sinon.match.func),
+      app.get.calledWith('/me', match.func),
       'me GET endpoint is registered'
     );
   });
 
   endpointTest.test('get me handler', async test => {
-    const updateUserToken = sinon.stub();
+    const updateUserToken = stub();
 
     updateUserToken.withArgs(req).resolves(claims);
 
@@ -46,7 +45,7 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test(
     "get me handler returns 401 if it can't extract a token ",
     async test => {
-      const updateUserToken = sinon.stub();
+      const updateUserToken = stub();
 
       updateUserToken.withArgs(req).returns(null);
 
@@ -62,7 +61,7 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test(
     'get me handler returns 400 if the verifier throws an error ',
     async test => {
-      const updateUserToken = sinon.stub();
+      const updateUserToken = stub();
       const error = new Error('some error');
 
       updateUserToken.withArgs(req).throws(error);
@@ -77,7 +76,7 @@ tap.test('me GET endpoint', async endpointTest => {
   );
 
   endpointTest.test('get me/jwToken handler returns a token', async test => {
-    const tokenExchanger = sinon.stub();
+    const tokenExchanger = stub();
 
     tokenExchanger.withArgs(req).returns(user);
 
@@ -94,7 +93,7 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test(
     'get me/jwToken handler returns a 401 when it there is no user',
     async test => {
-      const tokenExchanger = sinon.stub();
+      const tokenExchanger = stub();
 
       tokenExchanger.withArgs(req).returns(null);
 
@@ -115,7 +114,7 @@ tap.test('me GET endpoint', async endpointTest => {
   endpointTest.test(
     'get me/jwToken handler returns a 400 when it there is no user',
     async test => {
-      const tokenExchanger = sinon.stub();
+      const tokenExchanger = stub();
       const error = new Error('some error');
 
       tokenExchanger.withArgs(req).throws(error);

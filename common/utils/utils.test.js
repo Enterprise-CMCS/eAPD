@@ -5,7 +5,7 @@ import {
   thisFFY,
   defaultAPDYears,
   forAllYears
-} from './utils';
+} from './utils.js';
 
 describe('utility functions', () => {
   test('generates a key', () => {

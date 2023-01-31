@@ -12,6 +12,8 @@
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
+    "requireConfigFile": false,
+    "allowImportExportEverywhere": true,
     "ecmaFeatures": {
       "jsx": true
     }
@@ -25,7 +27,7 @@
   "rules": {
     "arrow-body-style": "off",
     "no-param-reassign": [2, { "props": false }],
-
+    "import/no-commonjs": [2],
     "jsx-a11y/anchor-is-valid": [
       2,
       {
@@ -52,10 +54,9 @@
     "react/no-array-index-key": "warn"
   },
   "env": {
-    "es6": true,
+    "es2021": true,
     "browser": true,
     "node": true,
-    "commonjs": true,
     "cypress/globals": true
   },
   "overrides": [

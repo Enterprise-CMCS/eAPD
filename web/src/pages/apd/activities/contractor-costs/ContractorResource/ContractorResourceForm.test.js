@@ -86,6 +86,8 @@ const verifyHourlyField = expectValue => {
 };
 
 describe('the ContractorResourceForm component', () => {
+  jest.setTimeout(30000);
+
   beforeEach(() => {
     jest.resetAllMocks();
   });

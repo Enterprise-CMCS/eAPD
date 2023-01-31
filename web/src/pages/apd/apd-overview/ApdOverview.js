@@ -11,8 +11,7 @@ import { connect } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { APD_TYPE } from '@cms-eapd/common/utils/constants';
-import sharedApdOverviewFields from '@cms-eapd/common/schemas/apdOverview';
+import { sharedApdOverviewFields as schema, APD_TYPE } from '@cms-eapd/common';
 
 import {
   addYear,
@@ -21,6 +20,8 @@ import {
 } from '../../../redux/actions/editApd';
 import { Section } from '../../../components/Section';
 import { t } from '../../../i18n';
+
+import TempAlert from '../../../components/TempAlert';
 
 import {
   selectSummary,
@@ -63,7 +64,7 @@ const ApdOverview = ({
   } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(sharedApdOverviewFields),
+    resolver: joiResolver(schema),
     defaultValues: {
       name: name
     }
@@ -142,6 +143,7 @@ const ApdOverview = ({
   return (
     <Section resource="apd">
       <hr className="custom-hr" />
+      <TempAlert />
       <div className="apd_type_choice-container">
         <ChoiceList
           type="radio"

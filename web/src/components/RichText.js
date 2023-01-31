@@ -28,7 +28,7 @@ import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
 
 import { uploadFile } from '../redux/actions/editApd';
-import { generateKey } from '@cms-eapd/common/utils/utils';
+import { generateKey } from '@cms-eapd/common';
 import '../file-loader';
 
 const VALID_FILE_TYPES = [

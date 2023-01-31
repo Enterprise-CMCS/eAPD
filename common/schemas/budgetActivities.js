@@ -1,4 +1,4 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
 const costsSchema = Joi.object({
   total: Joi.number(),
