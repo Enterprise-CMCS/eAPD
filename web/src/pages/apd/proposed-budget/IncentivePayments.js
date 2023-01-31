@@ -91,9 +91,7 @@ const IncentivePayments = ({
             </caption>
             <thead>
               <tr>
-                <th>
-                  <span aria-hidden="true">{t('ffy', { year })}</span>
-                </th>
+                <th aria-label={`FFY ${year}`}>{t('ffy', { year })}</th>
                 <Fragment key={year}>
                   {QUARTERS.map(q => (
                     <th
