@@ -24,4 +24,11 @@ module "eAPD" {
     instance_name = var.instance_name
     newrelic_liscense_key = var.newrelic_liscense_key
     aws_account_id = var.aws_account_id
+    root_block_device {
+      encrypted = true
+    }
+    metadata_options {
+      http_tokens = "required"
+    }
+    disable_api_termination = true
 }
