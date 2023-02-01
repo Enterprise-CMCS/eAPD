@@ -27,7 +27,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     cy.findByLabelText('APD Name').clear().type('MMIS APD Name!').blur();
     cy.findByRole('radio', { name: /No, this is for a new project./i }).click();
     cy.findByRole('checkbox', {
-      name: /1115 or Waiver Support Systems/i
+      name: /Claims Processing/i
     }).click();
     cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled').click();
 
@@ -42,7 +42,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       apdId = apdUrl.split('/').pop();
     });
 
-    cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+    cy.get('input[name="apd-years"][checked]').each((_, index, list) =>
       years.push(list[index].value)
     );
   });
@@ -164,7 +164,74 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.contains('MMIS APD Test').should('not.exist');
     });
   });
+
   describe('MMIS Pages', () => {
+    it('tests APD Overview page', () => {
+      cy.goToApdOverview();
+
+      // Uncheck the option chosen when APD was created in the test's "before" hook
+      cy.findByRole('checkbox', {
+        name: /Claims Processing/i
+      }).click();
+
+      // Check validation errors within admin check list
+      cy.turnOnAdminCheck();
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('APD Overview').should('exist');
+        cy.get(list)
+          .contains('Select at least one Medicaid Business Area.')
+          .should('exist');
+      });
+
+      cy.collapseAdminCheck();
+      cy.goToApdOverview();
+
+      // Fill out field and check that validation errors change in admin check
+      cy.findByRole('checkbox', {
+        name: /Other/i
+      }).click();
+      cy.expandAdminCheck();
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        // Selecting a choice will clear this error
+        cy.get(list)
+          .contains('Select at least one Medicaid Business Area.')
+          .should('not.exist');
+
+        // Selecting "Other" without filling in the "Other Medicaid Business Area(s)" text box will show a new error
+        cy.get(list).contains('APD Overview').should('exist');
+        cy.get(list)
+          .contains('Provide an other Medicaid Business Area(s).')
+          .should('exist');
+      });
+
+      // Fill out "Other Medicaid Business Area(s)" text box and check that error is cleared
+      cy.collapseAdminCheck();
+      cy.get(`[data-cy='other_details']`)
+        .type('This info in the text box should clear the error.')
+        .blur();
+      cy.expandAdminCheck();
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('APD Overview').should('not.exist');
+        cy.get(list)
+          .contains('Provide an other Medicaid Business Area(s).')
+          .should('not.exist');
+      });
+      cy.turnOffAdminCheck();
+
+      // Verify that fields save
+      // Navigates away from page and back to check persistence of entered data
+      cy.contains('Export and Submit').click();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.goToApdOverview();
+      cy.findByRole('checkbox', {
+        name: /Other/i
+      }).should('be.checked');
+      cy.get(`[data-cy='other_details']`).should(
+        'have.value',
+        'This info in the text box should clear the error.'
+      );
+    });
+
     it('tests Activity Overview page', () => {
       cy.goToActivityDashboard();
 
@@ -282,7 +349,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
     });
 
-    it('tests Activity Overview page', () => {
+    it('tests Key State Personnel page', () => {
       cy.goToKeyStatePersonnel();
       cy.contains('Key Personnel and Program Management').should('exist');
 
