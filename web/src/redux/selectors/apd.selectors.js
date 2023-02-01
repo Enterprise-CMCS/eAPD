@@ -85,14 +85,14 @@ export const selectPreviousActivityExpensesTotals = createSelector(
         ...acc,
         [ffy]: {
           actual:
-            expenses.hithie.federalActual +
+            (expenses?.hithie?.federalActual || 0) +
             [90, 75, 50].reduce(
               (sum, ffp) =>
                 sum + stringToNumber(expenses.mmis[ffp].federalActual),
               0
             ),
           approved:
-            expenses.hithie.totalApproved * 0.9 +
+            (expenses?.hithie?.totalApproved * 0.9 || 0) +
             [90, 75, 50].reduce(
               (sum, ffp) =>
                 sum +
