@@ -592,6 +592,10 @@ Cypress.Commands.add('getActivityTable', { prevSubject: true }, subject => {
   return rows;
 });
 
+Cypress.Commands.add('checkTinyMCE', (id, expectedValue) => {
+  cy.get(`[id="${id}"]`).should('have.value', expectedValue);
+});
+
 Cypress.Commands.add('injectAxeForA11y', () => {
   cy.readFile('../node_modules/axe-core/axe.min.js').then(source => {
     return cy.window({ log: false }).then(window => {
