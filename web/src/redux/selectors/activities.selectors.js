@@ -60,7 +60,8 @@ export const selectActivityCostSummary = createSelector(
       apd: {
         data: {
           keyStatePersonnel: { keyPersonnel },
-          years
+          years,
+          apdType
         }
       }
     },
@@ -70,7 +71,7 @@ export const selectActivityCostSummary = createSelector(
       (activityKeyPersonnel, ffy) => ({
         ...activityKeyPersonnel,
         [ffy]:
-          activityIndex === 0
+          activityIndex === 0 && apdType == 'HITECH'
             ? keyPersonnel.map(kp => ({
                 key: kp.key,
                 description: `${

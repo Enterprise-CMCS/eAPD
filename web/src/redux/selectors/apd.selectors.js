@@ -8,9 +8,11 @@ export const selectApds = ({ apd }) => apd;
 
 export const selectApdData = ({ apd: { data } }) => data;
 
-export const selectApdType = state => {
-  return state?.apd?.data?.apdType || APD_TYPE.HITECH;
-};
+export const selectApdType = ({
+  apd: {
+    data: { apdType }
+  }
+}) => apdType;
 
 export const selectApdYears = ({
   apd: {

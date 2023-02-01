@@ -17,7 +17,8 @@ module.exports = {
     ecmaVersion: 8,
     ecmaFeatures: {
       jsx: true
-    }
+    },
+    requireConfigFile: 'false'
   },
   settings: {
     react: {
