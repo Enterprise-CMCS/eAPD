@@ -120,7 +120,7 @@ const OutcomeAndMetricForm = forwardRef(
 
     return (
       <form
-        index={index}
+        id={`metrics-${index}`}
         key={`activity${activityIndex}-index${index}-form`}
         onSubmit={onSubmit}
       >

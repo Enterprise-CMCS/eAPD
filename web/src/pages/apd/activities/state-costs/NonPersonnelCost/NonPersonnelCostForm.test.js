@@ -42,9 +42,10 @@ const mmisApd = {
 };
 
 const setup = async (props = {}, options = {}) => {
+  let utils;
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  const utils = await act(async () => {
-    renderWithConnection(
+  await act(async () => {
+    utils = renderWithConnection(
       <NonPersonnelCostForm {...defaultProps} {...props} />,
       options
     );
@@ -56,7 +57,7 @@ const setup = async (props = {}, options = {}) => {
   };
 };
 
-describe('the ContractorResourceForm component', () => {
+describe('the NonPersonnelCostForm component', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -81,22 +82,22 @@ describe('the ContractorResourceForm component', () => {
 
     expect(screen.getAllByRole('option').length).toBe(6);
 
-    await user.selectOptions(
+    user.selectOptions(
       screen.getByRole('combobox'),
       screen.getByRole('option', { name: 'Select an option' })
     );
 
-    expect(
-      screen.getByRole('option', { name: 'Select an option' }).selected
-    ).toBe(true);
-
-    const dropdown = screen.getByRole('combobox');
-
     await waitFor(() => {
-      dropdown.blur();
+      expect(
+        screen.getByRole('option', { name: 'Select an option' }).selected
+      ).toBe(true);
     });
 
-    expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    screen.getByRole('combobox').blur();
+
+    await waitFor(() => {
+      expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
+    });
 
     const error = await screen.findByText('Select a category.');
     expect(error).toBeInTheDocument();
@@ -107,14 +108,14 @@ describe('the ContractorResourceForm component', () => {
 
     const input = screen.getByRole('textbox', { name: /description/i });
 
-    await user.clear(input);
+    user.clear(input);
     await waitFor(() => {
       expect(input).toHaveFocus();
     });
-    await user.tab();
+    user.tab();
 
     await waitFor(() => {
-      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
+      expect(defaultProps.setFormValid).toHaveBeenCalledTimes(1);
     });
     expect(defaultProps.setFormValid).toHaveBeenLastCalledWith(false);
 
@@ -129,11 +130,11 @@ describe('the ContractorResourceForm component', () => {
 
     const input = screen.getByLabelText(`FFY 2022 Cost`);
 
-    await user.clear(input);
+    user.clear(input);
     await waitFor(() => {
       expect(input).toHaveFocus();
     });
-    await user.tab();
+    user.tab();
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
@@ -149,11 +150,11 @@ describe('the ContractorResourceForm component', () => {
 
     const input = screen.getByLabelText(`FFY 2023 Cost`);
 
-    await user.clear(input);
+    user.clear(input);
     await waitFor(() => {
       expect(input).toHaveFocus();
     });
-    await user.tab();
+    user.tab();
 
     await waitFor(() => {
       expect(defaultProps.setFormValid).toHaveBeenCalledTimes(3);
@@ -171,13 +172,14 @@ describe('Selection removes "Administrative operations" for in MMIS apd', () => 
   });
 
   afterAll(() => {
+    jest.resetAllMocks();
     resetLDMocks();
   });
 
   it('shows "Administrative operations" on HITECH APD', async () => {
     await setup({}, hitechApd);
 
-    expect(screen.getAllByRole('option').length).toBe(7);
+    expect(screen.getAllByRole('option').length).toBe(6);
 
     const dropdown = screen.getByRole('combobox');
 

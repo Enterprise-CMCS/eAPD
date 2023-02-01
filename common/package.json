@@ -21,15 +21,15 @@
   },
   "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
-    "node": "16.16.0"
+    "node": "16.19.0"
   },
   "dependencies": {
     "@joi/date": "2.1.0",
     "joi": "17.7.0"
   },
   "devDependencies": {
-    "@stryker-mutator/core": "6.1.2",
-    "@stryker-mutator/jest-runner": "6.1.2"
+    "@stryker-mutator/core": "6.3.1",
+    "@stryker-mutator/jest-runner": "6.3.1"
   },
   "packageManager": "yarn@1.22.18",
   "jest": {
