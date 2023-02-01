@@ -1,8 +1,10 @@
-const chalk = require('chalk'); // eslint-disable-line import/no-unresolved
-const logger = require('../../logger')('state seeder');
-const { states } = require('../../util/states');
+import chalk from 'chalk'; // eslint-disable-line import/no-unresolved
+import loggerFactory from '../../logger/index.js';
+import states from '../../util/states.js';
 
-exports.seed = async knex => {
+const logger = loggerFactory('state seeder');
+
+const seed = async knex => {
   logger.verbose(`Beginning to seed the ${chalk.cyan('states')} table`);
   const total = await knex('states').count('id').first();
   logger.verbose(`${chalk.cyan('states')} table currently has ${total.count}`);
@@ -13,3 +15,5 @@ exports.seed = async knex => {
     logger.verbose(`Skipping seeding the ${chalk.cyan('states')} table`);
   }
 };
+
+export default seed;

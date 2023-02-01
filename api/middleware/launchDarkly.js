@@ -1,4 +1,8 @@
-const LaunchDarkly = require('launchdarkly-node-server-sdk');
+import LaunchDarkly from 'launchdarkly-node-server-sdk';
+import { FileDataSource } from 'launchdarkly-node-server-sdk/integrations.js';
+import loggerFactory from '../logger/index.js';
+
+const logger = loggerFactory('apds/submissions get');
 
 const { LD_API_KEY } = process.env;
 const options = {
@@ -7,33 +11,48 @@ const options = {
   eventsUri: 'https://events.launchdarkly.us'
 };
 
-const client =
-  LD_API_KEY && LD_API_KEY !== ''
-    ? LaunchDarkly.init(LD_API_KEY, options)
-    : null;
-
-const waitForInitialization = async () => {
-  // Using "await" instead, within an async function
-  try {
-    if (client) {
-      await client.waitForInitialization();
-      // Initialization complete
-    }
-  } catch (err) {
-    // Initialization failed
-  }
+const testOptions = {
+  updateProcessor: FileDataSource({
+    paths: ['./test-data/test_feature_flags.json']
+  })
 };
 
-const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
-  if (client) {
-    return client.variation(flagName, user, defaultValue);
+let client = null;
+
+const createLDClient = () => {
+  if (LD_API_KEY && LD_API_KEY !== '') {
+    if (process.env.NODE_ENV === 'test') {
+      client = LaunchDarkly.init(LD_API_KEY, {
+        ...options,
+        ...testOptions
+      });
+      return client;
+    }
+    client = LaunchDarkly.init(LD_API_KEY, options);
+    return client;
   }
-  return defaultValue;
+  return null;
+};
+
+export const waitForInitialization = async () => {
+  // Using "await" instead, within an async function
+  try {
+    if (!client) {
+      createLDClient();
+    }
+    if (client) {
+      await client.waitForInitialization();
+      logger.silly('LaunchDarkly client initialized');
+    }
+  } catch (err) {
+    logger.error(`Error connecting to LaunchDarkly: ${err}`);
+  }
+  return client;
 };
 
 /**
  * To use the flag:
- * const { getLaunchDarklyFlag } = require('../../middleware/launchDarkly');
+ * import { getLaunchDarklyFlag } from '../../middleware/launchDarkly';
  *
  * const validation = await getLaunchDarklyFlag(
  *    'validation',
@@ -41,8 +60,9 @@ const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
  *    false
  *  );
  */
-
-module.exports = {
-  waitForInitialization,
-  getLaunchDarklyFlag
+export const getLaunchDarklyFlag = async (flagName, user, defaultValue) => {
+  if (client) {
+    return client.variation(flagName, user, defaultValue);
+  }
+  return defaultValue;
 };

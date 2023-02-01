@@ -2,140 +2,39 @@
 
 exports[`APD endpoint | POST /apds when authenticated as a user with permission 1`] = `
 Object {
-  "activities": Array [
-    Object {
-      "alternatives": "",
-      "contractorResources": Array [],
-      "costAllocation": Object {
-        "2023": Object {
-          "ffp": Object {
-            "federal": 0,
-            "state": 100,
-          },
-          "other": 0,
-        },
-        "2024": Object {
-          "ffp": Object {
-            "federal": 0,
-            "state": 100,
-          },
-          "other": 0,
-        },
-      },
-      "costAllocationNarrative": Object {
-        "methodology": "",
-        "years": Object {
-          "2023": Object {
-            "otherSources": "",
-          },
-          "2024": Object {
-            "otherSources": "",
-          },
-        },
-      },
-      "description": "",
-      "expenses": Array [],
-      "fundingSource": "HIT",
-      "name": "Program Administration",
-      "outcomes": Array [],
-      "plannedEndDate": "",
-      "plannedStartDate": "",
-      "quarterlyFFP": Object {
-        "2023": Object {
-          "1": Object {
-            "contractors": 0,
-            "inHouse": 0,
-          },
-          "2": Object {
-            "contractors": 0,
-            "inHouse": 0,
-          },
-          "3": Object {
-            "contractors": 0,
-            "inHouse": 0,
-          },
-          "4": Object {
-            "contractors": 0,
-            "inHouse": 0,
-          },
-        },
-        "2024": Object {
-          "1": Object {
-            "contractors": 0,
-            "inHouse": 0,
-          },
-          "2": Object {
-            "contractors": 0,
-            "inHouse": 0,
-          },
-          "3": Object {
-            "contractors": 0,
-            "inHouse": 0,
-          },
-          "4": Object {
-            "contractors": 0,
-            "inHouse": 0,
-          },
-        },
-      },
-      "schedule": Array [],
-      "standardsAndConditions": Object {
-        "doesNotSupport": "",
-        "supports": "",
-      },
-      "statePersonnel": Array [],
-      "summary": "",
-    },
-  ],
-  "apdOverview": Object {
-    "narrativeHIE": "",
-    "narrativeHIT": "",
-    "narrativeMMIS": "",
-    "programOverview": "",
-  },
+  "activities": Array [],
+  "apdOverview": Object {},
+  "apdType": "MMIS",
   "assurancesAndCompliances": Object {
+    "independentVV": Array [
+      Object {
+        "checked": null,
+        "explanation": "",
+        "title": "45 CFR Part 95.626",
+      },
+    ],
     "procurement": Array [
       Object {
         "checked": null,
         "explanation": "",
-        "title": "42 CFR Part 495.348",
+        "title": "SMM, Part 11",
       },
       Object {
         "checked": null,
         "explanation": "",
-        "title": "SMM Section 11267",
+        "title": "45 CFR Part 95.615",
       },
       Object {
         "checked": null,
         "explanation": "",
-        "title": "45 CFR 95.613",
-      },
-      Object {
-        "checked": null,
-        "explanation": "",
-        "title": "45 CFR 75.326",
+        "title": "45 CFR Part 92.36",
       },
     ],
     "recordsAccess": Array [
       Object {
         "checked": null,
         "explanation": "",
-        "title": "42 CFR Part 495.350",
-      },
-      Object {
-        "checked": null,
-        "explanation": "",
-        "title": "42 CFR Part 495.352",
-      },
-      Object {
-        "checked": null,
-        "explanation": "",
-        "title": "42 CFR Part 495.346",
-      },
-      Object {
-        "checked": null,
-        "explanation": "",
-        "title": "42 CFR 433.112(b)",
+        "title": "42 CFR Part 433.112(b)(5)-(9)",
       },
       Object {
         "checked": null,
@@ -148,23 +47,11 @@ Object {
         "title": "SMM Section 11267",
       },
     ],
-    "security": Array [
-      Object {
-        "checked": null,
-        "explanation": "",
-        "title": "45 CFR 164 Security and Privacy",
-      },
-    ],
     "softwareRights": Array [
       Object {
         "checked": null,
         "explanation": "",
-        "title": "42 CFR 495.360",
-      },
-      Object {
-        "checked": null,
-        "explanation": "",
-        "title": "45 CFR 95.617",
+        "title": "45 CFR Part 95.617",
       },
       Object {
         "checked": null,
@@ -174,7 +61,7 @@ Object {
       Object {
         "checked": null,
         "explanation": "",
-        "title": "42 CFR Part 433.112",
+        "title": "45 CFR Part 164",
       },
     ],
   },
@@ -193,14 +80,10 @@ Object {
       "zip": "",
     },
   },
-  "name": "HITECH IAPD",
+  "name": "MMIS IAPD",
   "previousActivities": Object {
     "actualExpenditures": Object {
       "2021": Object {
-        "hithie": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
         "mmis": Object {
           "50": Object {
             "federalActual": 0,
@@ -217,10 +100,6 @@ Object {
         },
       },
       "2022": Object {
-        "hithie": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
         "mmis": Object {
           "50": Object {
             "federalActual": 0,
@@ -237,10 +116,6 @@ Object {
         },
       },
       "2023": Object {
-        "hithie": Object {
-          "federalActual": 0,
-          "totalApproved": 0,
-        },
         "mmis": Object {
           "50": Object {
             "federalActual": 0,
@@ -259,66 +134,20 @@ Object {
     },
     "previousActivitySummary": "",
   },
-  "proposedBudget": Object {
-    "incentivePayments": Object {
-      "ehAmt": Object {
-        "2023": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2024": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "ehCt": Object {
-        "2023": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2024": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epAmt": Object {
-        "2023": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2024": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-      "epCt": Object {
-        "2023": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-        "2024": Object {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-        },
-      },
-    },
+  "securityPlanning": Object {
+    "businessContinuityAndDisasterRecovery": "",
+    "securityAndInterfacePlan": "",
   },
+  "statePrioritiesAndScope": Object {
+    "medicaidProgramAndPriorities": "",
+    "mesIntroduction": "",
+    "scopeOfAPD": "",
+  },
+  "yearOptions": Array [
+    "2023",
+    "2024",
+    "2025",
+  ],
   "years": Array [
     "2023",
     "2024",

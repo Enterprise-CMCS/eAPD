@@ -1,4 +1,4 @@
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.table('state_admin_certifications', table => {
     table.dropUnique(['state', 'email', 'ffy']);
   });
@@ -7,6 +7,6 @@ exports.up = async knex => {
   );
 };
 
-exports.down = () => {
+export const down = () => {
   // Can't reverse this since postgres will fail if there are already unique certifications
 };

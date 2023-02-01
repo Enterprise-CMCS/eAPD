@@ -1,17 +1,16 @@
-const sinon = require('sinon');
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
-
-const {
+import { createSandbox } from 'sinon';
+import tap from 'tap';
+import dbMock from './dbMock.test.js';
+import {
   createNewFileForAPD,
   deleteFileByID,
   fileBelongsToAPD
-} = require('./files');
+} from './files.js';
 
 tap.test('database wrappers / files', async filesTests => {
   const db = dbMock('apd_files');
 
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
   const crypto = {
     createHash: sandbox.stub(),
     update: sandbox.stub(),

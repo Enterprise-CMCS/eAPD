@@ -1,13 +1,15 @@
-const sanitize = require('../../util/sanitize');
-const logger = require('../../logger')('apds route put');
-const {
-  updateAPDDocument: ua,
-  adminCheckAPDDocument: validate
-} = require('../../db');
-const { can, userCanEditAPD } = require('../../middleware');
-const { staticFields } = require('../../util/apds');
+import loggerFactory from '../../logger/index.js';
+import sanitize from '../../util/sanitize.js';
+import {
+  updateAPDDocument as ua,
+  adminCheckAPDDocument as validate
+} from '../../db/index.js';
+import { can, userCanEditAPD } from '../../middleware/index.js';
+import staticFields from '../../util/apds.js';
 
-module.exports = (
+const logger = loggerFactory('apds route put');
+
+export default (
   app,
   { updateAPDDocument = ua, adminCheckAPDDocument = validate } = {}
 ) => {
@@ -46,14 +48,14 @@ module.exports = (
             createdAt: created,
             updatedAt: updated,
             stateId: state,
-            budget,
+            budget = {},
             ...apd
           } = {}
-        } = await updateAPDDocument(
-          req.params.id,
-          req.user.state.id,
-          sanitizedPatch
-        );
+        } = await updateAPDDocument({
+          id: req.params.id,
+          stateId: req.user.state.id,
+          patch: sanitizedPatch
+        });
 
         if (errors) {
           // Rather than send back the full error from the validator, pull out just the relevant bits

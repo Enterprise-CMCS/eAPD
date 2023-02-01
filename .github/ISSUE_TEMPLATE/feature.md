@@ -10,13 +10,18 @@ assignees: ''
 
 ### Mockups or link to Figma
 
+### Behind the scene changes
+
+**Feature flags-**
+
+**Refactors-**
+
 ### Acceptance criteria
 
-| Given | When | Then |
-| ----- | ---- | ---- |
-|       |      |      |
-
-### This task is done when…
-
-- [ ] all acceptance criteria are met
 - [ ]
+
+### Testing criteria
+
+| Given | When | Then | Covered |
+| ----- | ---- | ---- | ------- |
+|       |      |      |         |

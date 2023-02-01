@@ -1,12 +1,14 @@
 import Joi from 'joi';
 
-const schemas = Joi.object({
+const outcomeMetricsSchemas = Joi.object({
+  id: Joi.any(),
   outcome: Joi.string().required().messages({
     'string.base': 'Outcome is required',
     'string.empty': 'Outcome is required'
   }),
   metrics: Joi.array().items(
     Joi.object({
+      id: Joi.any(),
       key: Joi.any(),
       metric: Joi.string().messages({
         'string.base': 'Metric is required',
@@ -17,4 +19,4 @@ const schemas = Joi.object({
   )
 });
 
-export default schemas;
+export default outcomeMetricsSchemas;

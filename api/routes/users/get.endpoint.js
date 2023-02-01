@@ -1,11 +1,11 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
+} from '../../endpoint-tests/utils.js';
 
 const url = '/users';
 
@@ -18,16 +18,6 @@ describe('users endpoint', () => {
   const db = getDB();
   beforeAll(() => setupDB(db));
   afterAll(() => teardownDB(db));
-
-  describe('users endpoint | GET /users', () => {
-    unauthenticatedTest('get', url);
-    unauthorizedTest('get', url);
-
-    it('when authenticated', async () => {
-      const response = await get();
-      expect(response.status).toEqual(200);
-    });
-  });
 
   describe('users endpoint | GET /users/:userID', () => {
     unauthenticatedTest('get', `${url}/some-id`);

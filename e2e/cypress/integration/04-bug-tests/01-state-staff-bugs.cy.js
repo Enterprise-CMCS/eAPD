@@ -3,15 +3,21 @@
 // Tests out bugs that have been fixed
 // so the same bugs don't happen twice
 
-describe('APD builder bugs', { tags: ['@apd'] }, () => {
+describe('APD builder bugs', { tags: ['@apd'] }, function () {
   let apdUrl;
   let apdId;
   const years = [];
 
-  before(() => {
+  before(function () {
+    cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
     cy.useStateStaff();
+    cy.visit('/');
 
-    cy.findByRole('button', { name: /Create new/i }).click();
+    cy.findAllByText('Create new').click();
+    cy.findByLabelText('APD Name').clear().type('HITECH IAPD').blur();
+    cy.findByRole('checkbox', { name: /Annual Update/i }).click();
+    cy.findByRole('button', { name: /Create an APD/i }).click();
+
     cy.findByRole(
       'heading',
       { name: /APD Overview/i },
@@ -27,15 +33,21 @@ describe('APD builder bugs', { tags: ['@apd'] }, () => {
     );
   });
 
-  beforeEach(() => {
+  beforeEach(function () {
+    cy.wrap(apdUrl).as('apdUrl');
+    cy.wrap(apdId).as('apdId');
+    cy.wrap(years).as('years');
+
+    cy.useStateStaff();
     cy.visit(apdUrl);
   });
 
-  after(() => {
-    cy.deleteAPD(apdId);
+  after(function () {
+    cy.visit('/');
+    cy.deleteAPD(this.apdId);
   });
 
-  it('tests out FTE number bug, #4168', () => {
+  it('tests out FTE number bug, #4168', function () {
     cy.get('#continue-button').click();
     cy.get('.ds-h2').should('contain', 'Key State Personnel');
 
@@ -45,5 +57,51 @@ describe('APD builder bugs', { tags: ['@apd'] }, () => {
     cy.get('[data-cy="key-person-0-0__fte"]').type('0.001');
     cy.get('[data-cy="key-person-0-1__fte"]').click(); //Triggers blur
     cy.get('[data-cy="key-person-0-0__fte"]').should('have.value', 0.001);
+  });
+
+  it('tests uploading an image', function () {
+    cy.intercept('POST', `${Cypress.env('API')}/apds/${this.apdId}/files`).as(
+      'uploadImage'
+    );
+    cy.intercept('GET', `${Cypress.env('API')}/apds/${this.apdId}/files/*`).as(
+      'loadImage'
+    );
+
+    cy.get('[class="tox-edit-area"]').eq(3).scrollIntoView();
+
+    // Uploads cms-logo.png from /fixtures/
+    cy.setTinyMceContent('mmis-overview-field', 'Drag and Drop here');
+
+    cy.enter('iframe[id="mmis-overview-field_ifr"]').then(getBody => {
+      cy.fixture('cms-logo.png', 'binary')
+        .then(Cypress.Blob.binaryStringToBlob)
+        .then(fileContent => {
+          const file = new File([fileContent], 'cms-logo.png', {
+            type: 'image/png'
+          });
+
+          getBody()
+            .contains('Drag and Drop here')
+            .trigger('drop', {
+              dataTransfer: {
+                files: [file]
+              }
+            });
+        });
+    });
+
+    cy.wait('@uploadImage', { timeout: 30000 });
+
+    cy.waitForSave();
+    cy.contains('AK APD Home').click();
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(5000); // Gives time to load the APD dashboard
+
+    cy.visit(this.apdUrl);
+    cy.wait('@loadImage', { timeout: 90000 });
+
+    cy.contains('Export and Submit').click();
+    cy.findByRole('button', { name: 'Continue to Review' }).click();
+    cy.wait('@loadImage', { timeout: 30000 });
   });
 });

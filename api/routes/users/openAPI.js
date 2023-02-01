@@ -1,9 +1,6 @@
-const {
-  requiresAuth,
-  schema: { arrayOf, jsonResponse }
-} = require('../openAPI/helpers');
+import { requiresAuth, jsonResponse, arrayOf } from '../openAPI/helpers.js';
 
-const userObjectSchema = jsonResponse({
+const userObjectSchema = {
   type: 'object',
   properties: {
     id: {
@@ -69,8 +66,8 @@ const userObjectSchema = jsonResponse({
     },
     states: {
       type: 'object',
-      properties: {
-        '{state_id}': {
+      'x-patternProperties': {
+        '^[A-Za-z]{2}$': {
           type: 'string',
           description: 'The affiliation status for the state in the field',
           enum: ['requested', 'approved', 'denied', 'revoked']
@@ -79,12 +76,15 @@ const userObjectSchema = jsonResponse({
     },
     permissions: arrayOf({
       type: 'object',
-      properties: {
-        '{state_id}': arrayOf({
-          type: 'string',
-          description:
-            'Names of system activities this user can perform for that state'
-        })
+      'x-patternProperties': {
+        '^[A-Za-z]{2}$': {
+          type: 'array',
+          items: {
+            type: 'string',
+            description:
+              'Names of system activities this user can perform for that state'
+          }
+        }
       }
     }),
     activities: arrayOf({
@@ -125,22 +125,9 @@ const userObjectSchema = jsonResponse({
       }
     }
   }
-});
+};
 
 const openAPI = {
-  '/users': {
-    get: {
-      tags: ['Users'],
-      summary: 'Gets a list of all users',
-      description: 'Get a list of all users in the system',
-      responses: {
-        200: {
-          description: 'The list of users known to the system',
-          content: jsonResponse(arrayOf(userObjectSchema))
-        }
-      }
-    }
-  },
   '/users/{id}': {
     get: {
       tags: ['Users'],
@@ -170,4 +157,4 @@ const openAPI = {
   }
 };
 
-module.exports = requiresAuth(openAPI);
+export default requiresAuth(openAPI);

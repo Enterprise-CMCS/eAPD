@@ -1,12 +1,11 @@
 /* eslint-disable no-shadow */
-const tap = require('tap');
-const sinon = require('sinon');
+import tap from 'tap';
 
-const can = require('../../../middleware').can;
-const patchEndpoint = require('./patch');
-
-const mockExpress = require('../../../util/mockExpress');
-const mockResponse = require('../../../util/mockResponse');
+import { stub, match } from 'sinon';
+import { can } from '../../../middleware/index.js';
+import patchEndpoint from './patch.js';
+import mockExpress from '../../../util/mockExpress.js';
+import mockResponse from '../../../util/mockResponse.js';
 
 let app;
 let res;
@@ -21,8 +20,8 @@ tap.test('PATCH affiliations endpoint', async t => {
   t.beforeEach(async () => {
     app = mockExpress();
     res = mockResponse();
-    next = sinon.stub();
-    updateAuthAffiliation = sinon.stub();
+    next = stub();
+    updateAuthAffiliation = stub();
 
     patchEndpoint(app, { updateAuthAffiliation_: updateAuthAffiliation });
 
@@ -31,7 +30,7 @@ tap.test('PATCH affiliations endpoint', async t => {
 
   t.test('setup', async t => {
     t.ok(
-      app.patch.calledWith(route, canMiddleware, sinon.match.func),
+      app.patch.calledWith(route, canMiddleware, match.func),
       `express route to 'PATCH ${route}' is configured`
     );
   });
@@ -123,13 +122,14 @@ tap.test('PATCH affiliations endpoint', async t => {
         newRoleId: 5,
         newStatus: 'approved',
         changedBy: 10,
+        changedByRole: 'eAPD State Admin',
         affiliationId: 8
       })
       .rejects(err);
 
     await handler(
       {
-        user: { id: 10 },
+        user: { id: 10, role: 'eAPD State Admin' },
         body: { roleId: 5, status: 'approved' },
         params: { stateId: 'ak', id: 8 }
       },

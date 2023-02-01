@@ -33,12 +33,13 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from './symbols';
-import { ARIA_ANNOUNCE_CHANGE } from '../aria';
+import { ARIA_ANNOUNCE_CHANGE, APD_CREATE_SUCCESS_MSG } from '../aria';
 import { LOAD_BUDGET } from '../budget';
 import axios from '../../../util/api';
 import regulations from '../../../util/regulations';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import { t } from '../../../i18n';
+import { ALERT_SUCCESS } from '../alert';
 
 const mockStore = configureStore([thunk]);
 const fetchMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
@@ -54,6 +55,7 @@ describe('application-level actions', () => {
       fetchMock.onPost('/apds').reply(200, newapd);
 
       const data = {
+        adminCheck: [],
         apd: {
           id: 'apd-id',
           activities: [],
@@ -64,7 +66,10 @@ describe('application-level actions', () => {
 
       fetchMock.onGet('/apds/bloop').reply(200, data);
 
-      const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
+      const pushRoute = route => ({
+        type: '@@router/CALL_HISTORY_METHOD',
+        pushRoute: route
+      });
       const state = {
         apd: {
           byId: {
@@ -80,13 +85,25 @@ describe('application-level actions', () => {
       const expectedActions = [
         { type: CREATE_APD_REQUEST },
         { type: CREATE_APD_SUCCESS, data: newapd },
+        {
+          apdId: 'bloop',
+          type: ALERT_SUCCESS,
+          message: APD_CREATE_SUCCESS_MSG
+        },
+        {
+          type: ARIA_ANNOUNCE_CHANGE,
+          message: APD_CREATE_SUCCESS_MSG
+        },
         { type: SELECT_APD_REQUEST },
         { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
         { type: SELECT_APD_SUCCESS, data },
         { type: APD_ACTIVITIES_CHANGE, activities: [] },
         { type: ADMIN_CHECK_TOGGLE, data: false },
         { type: LOAD_BUDGET, budget: {} },
-        { type: 'FAKE_PUSH', pushRoute: '/apd/bloop' },
+        {
+          type: '@@router/CALL_HISTORY_METHOD',
+          payload: { args: ['/apd/bloop'], method: 'push' }
+        },
         {
           type: ARIA_ANNOUNCE_CHANGE,
           message:

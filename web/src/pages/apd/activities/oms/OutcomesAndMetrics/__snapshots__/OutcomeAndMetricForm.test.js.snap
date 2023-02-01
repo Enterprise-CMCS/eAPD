@@ -8,6 +8,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
 >
   <button
     aria-hidden="true"
+    aria-label="submitButton"
     disabled={true}
     style={
       Object {
@@ -464,6 +465,7 @@ exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
     </Button>
   </div>
   <input
+    aria-label="submitButton"
     className="ds-u-visibility--hidden"
     hidden={true}
     type="submit"

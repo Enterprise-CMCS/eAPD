@@ -11,8 +11,9 @@ class PreviousActivitiesPage {
   years = [];
 
   getYears() {
-    if (this.years.length > 0) return;
-    cy.contains('HIT + HIE Federal share 90% FFP')
+    if (this.years.length > 0) return this;
+    return cy
+      .contains('HIT + HIE Federal share 90% FFP')
       .parent()
       .find('[data-cy="yearRow"]')
       .each($el => {
@@ -24,6 +25,7 @@ class PreviousActivitiesPage {
     // Wait for textbox to load before filling data
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('previous-activity-summary-field', summary);
+    return this;
   }
 
   setExpenditures(expenditures) {
@@ -57,6 +59,7 @@ class PreviousActivitiesPage {
         .type(expenditures.mmis50.actual[i])
         .blur();
     });
+    return this;
   }
 
   // Check that the value entered for approved funding matches what is
@@ -131,6 +134,7 @@ class PreviousActivitiesPage {
             });
         });
     });
+    return this;
   }
 
   verifyTotalFFP() {
@@ -170,6 +174,7 @@ class PreviousActivitiesPage {
           cy.wrap(yearlyTotalFFP).should('eq', totals[year]);
         });
     });
+    return this;
   }
 
   verifyTotalExpenditures() {
@@ -209,6 +214,7 @@ class PreviousActivitiesPage {
           cy.wrap(yearlyTotalExpenditure).should('eq', totals[year]);
         });
     });
+    return this;
   }
 }
 

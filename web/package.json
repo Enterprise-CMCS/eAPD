@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "description": "APD app for CMS HITECH program",
   "main": "app.js",
+  "exports": "./index.js",
   "scripts": {
     "lint": "eslint 'src/**/*.js'",
     "scaffold": "rm -rf dist && mkdir dist && cp -r src/static dist/",
     "build": "yarn run scaffold && NODE_ENV=production webpack --config webpack.config.js",
-    "start": "yarn workspace @cms-eapd/common build && yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
+    "start": "yarn run scaffold && webpack serve --config webpack.config.dev.js --port ${WEB_PORT:-8001}",
     "npm-check": "npx npm-check-updates",
     "make-state-icons": "babel-node scripts/stateIcons.js && cp src/data/states-small/* src/static/img/states/",
     "test:generate-output": "TZ=utc jest --json --outputFile=.jest-test-results.json -i --silent",
@@ -22,13 +23,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CMSgov/eAPD.git"
+    "url": "git+https://github.com/Enterprise-CMCS/eAPD.git"
   },
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/CMSgov/eAPD/issues"
+    "url": "https://github.com/Enterprise-CMCS/eAPD/issues"
   },
-  "homepage": "https://github.com/CMSgov/eAPD#readme",
+  "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
     "node": "16.16.0"
   },
@@ -93,7 +94,7 @@
     "sass-loader": "13.0.2",
     "stickybits": "3.7.11",
     "style-loader": "3.3.1",
-    "tinymce": "5.10.4",
+    "tinymce": "5.10.7",
     "title-case": "3.0.3",
     "topojson-client": "3.1.0",
     "updeep": "1.2.1",

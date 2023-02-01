@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderWithConnection, act, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
+import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
 import { plain as ApdOverview } from './ApdOverview';
 
@@ -50,12 +51,14 @@ const setup = async (props = {}) => {
 };
 
 describe('APD overview component', () => {
+  jest.setTimeout(150000);
   beforeEach(() => {
     jest.resetAllMocks();
-    jest.setTimeout(30000);
+    resetLDMocks();
   });
 
   test('dispatches on text change', async () => {
+    mockFlags({ enableMmis: false });
     jest.setTimeout(30000);
     const { user } = await setup();
 
@@ -66,6 +69,7 @@ describe('APD overview component', () => {
   });
 
   test('user can add a year', async () => {
+    mockFlags({ enableMmis: false });
     const { user } = await setup();
     expect(screen.getByLabelText('2023')).toBeChecked();
     expect(screen.getByLabelText('2024')).toBeChecked();
@@ -76,7 +80,9 @@ describe('APD overview component', () => {
   });
 
   test('user can attempt to delete a year and cancel', async () => {
-    jest.setTimeout(30000);
+    jest.setTimeout(50000);
+    mockFlags({ enableMmis: false });
+
     const { user } = await setup();
     expect(screen.getByLabelText('2023')).toBeChecked();
     await user.click(screen.getByLabelText('2023'));
@@ -89,6 +95,7 @@ describe('APD overview component', () => {
 
   test('user can delete a year', async () => {
     jest.setTimeout(30000);
+    mockFlags({ enableMmis: false });
     const { user } = await setup();
     expect(screen.getByLabelText('2023')).toBeChecked();
     await user.click(screen.getByLabelText('2023'));

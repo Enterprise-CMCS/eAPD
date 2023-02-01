@@ -1,18 +1,19 @@
-import ExecutiveSummaryPage from '../../page-objects/executive-summary-page';
-import ExportPage from '../../page-objects/export-page';
+import ExecutiveSummaryPage from '../../page-objects/executive-summary-page.js';
+import ExportPage from '../../page-objects/export-page.js';
 
 const tableTitles = ['HIT + HIE', 'MMIS'];
 
-export const testDefaultExecutiveSummary = years => {
+export const testDefaultExecutiveSummary = function () {
   let summaryPage;
   let exportPage;
 
-  before(() => {
+  before(function () {
     summaryPage = new ExecutiveSummaryPage();
     exportPage = new ExportPage();
   });
 
-  it('should display the default values for Executive Summary page', () => {
+  it('should display the default values for Executive Summary page', function () {
+    const years = this.years;
     cy.goToExecutiveSummary();
 
     cy.url().should('contain', '/executive-summary');
@@ -71,7 +72,8 @@ export const testDefaultExecutiveSummary = years => {
     });
   });
 
-  it('should display the default values in the export view', () => {
+  it('should display the default values in the export view', function () {
+    const years = this.years;
     cy.goToExportView();
 
     exportPage.checkExecutiveSummaryTotalCostSummary({
@@ -134,30 +136,25 @@ export const testDefaultExecutiveSummary = years => {
   });
 };
 
-export const testExecutiveSummaryWithData = years => {
+export const testExecutiveSummaryWithData = function () {
   let summaryPage;
   let exportPage;
 
-  let activityData;
-  let executiveSummaryData;
-
-  before(() => {
+  before(function () {
     summaryPage = new ExecutiveSummaryPage();
     exportPage = new ExportPage();
   });
 
-  beforeEach(() => {
-    cy.updateFeatureFlags();
-    cy.fixture('activity-overview-template.json').then(data => {
-      activityData = data;
-    });
-    cy.fixture('executive-summary-test.json').then(data => {
-      executiveSummaryData = data;
-    });
-    cy.goToBudgetAndFFP(0);
+  beforeEach(function () {
+    cy.fixture('activity-overview-template.json').as('activityData');
+    cy.fixture('executive-summary-test.json').as('executiveSummaryData');
   });
 
-  it('should display the correct values for Executive Summary page', () => {
+  it('should display the correct values for Executive Summary page', function () {
+    const years = this.years;
+    const activityData = this.activityData;
+    const executiveSummaryData = this.executiveSummaryData;
+
     cy.goToExecutiveSummary();
 
     cy.url().should('contain', '/executive-summary');
@@ -206,7 +203,11 @@ export const testExecutiveSummaryWithData = years => {
     });
   });
 
-  it('should display the default values in the export view', () => {
+  it('should display the default values in the export view', function () {
+    const years = this.years;
+    const activityData = this.activityData;
+    const executiveSummaryData = this.executiveSummaryData;
+
     cy.goToExportView();
 
     const { totalCost, totalTotalMedicaidCost, totalFederalShare, ffys } =

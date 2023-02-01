@@ -1,12 +1,16 @@
-const logger = require('../../logger')('apds route get');
-const {
-  getAllAPDsByState: gas,
-  getAPDByIDAndState: ga,
-  adminCheckAPDDocument: validate
-} = require('../../db');
-const { can } = require('../../middleware');
+import loggerFactory from '../../logger/index.js';
 
-module.exports = (
+import {
+  getAllAPDsByState as gas,
+  getAPDByIDAndState as ga,
+  adminCheckAPDDocument as validate
+} from '../../db/index.js';
+
+import { can } from '../../middleware/index.js';
+
+const logger = loggerFactory('apds route get');
+
+export default (
   app,
   {
     getAllAPDsByState = gas,
@@ -80,9 +84,9 @@ module.exports = (
         logger.info(`id: ${req.params.id}, state: ${stateId}`);
         const apdFromDB = await getAPDByIDAndState(req.params.id, stateId);
 
-        const adminCheck = await adminCheckAPDDocument(req.params.id);
-
         if (apdFromDB) {
+          const adminCheck = await adminCheckAPDDocument(req.params.id);
+
           const {
             _id: id,
             createdAt: created,

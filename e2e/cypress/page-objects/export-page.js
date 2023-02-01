@@ -1,5 +1,5 @@
 /* eslint class-methods-use-this: "off" */
-import { extractNumber, addCommas, getDateRange } from './helper';
+import { extractNumber, addCommas, getDateRange } from './helper.js';
 
 class ExportPage {
   // Get the years referenced by previous activities

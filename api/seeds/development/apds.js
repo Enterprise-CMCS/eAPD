@@ -1,21 +1,29 @@
-const { default: akAPD } = require('./01-akAPD');
-const { default: akAPDNoActivities } = require('./02-akAPDNoActivities');
+import hitech from './01-hitech.js';
+import hitechNoActivities from './02-hitechNoActivities.js';
+import mmis from './03-mmis.js';
+import mmisNoActivities from './04-mmisNoActivities.js';
 
-const data = [
+export const data = [
   {
+    ...hitech,
     stateId: 'ak',
-    status: 'draft',
-    ...akAPD
+    status: 'draft'
   },
   {
+    ...hitechNoActivities,
     stateId: 'ak',
-    status: 'draft',
-    ...akAPDNoActivities
+    status: 'draft'
+  },
+  {
+    ...mmis,
+    stateId: 'ak',
+    status: 'draft'
+  },
+  {
+    ...mmisNoActivities,
+    stateId: 'ak',
+    status: 'draft'
   }
 ];
 
-module.exports = {
-  data,
-  akAPD,
-  akAPDNoActivities
-};
+export { hitech, hitechNoActivities, mmis, mmisNoActivities };

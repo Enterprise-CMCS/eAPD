@@ -1,5 +1,5 @@
-export const testDefaultAPDOverview = () => {
-  it('should verify the default values the FFYs and APD Overview', () => {
+export const testDefaultAPDOverview = function () {
+  it('should verify the default values the FFYs and APD Overview', function () {
     cy.url().should('include', '/apd-overview');
     cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
 
@@ -19,7 +19,7 @@ export const testDefaultAPDOverview = () => {
     cy.waitForSave();
   });
 
-  it('should display the default values in the export view', () => {
+  it('should display the default values in the export view', function () {
     cy.goToExportView();
 
     cy.contains('Program introduction')
@@ -42,52 +42,56 @@ export const testDefaultAPDOverview = () => {
   });
 };
 
-export const testAPDOverviewWithData = () => {
-  let apdOverview;
-  const years = [];
-
+export const testAPDOverviewWithData = function () {
   /* eslint-disable-next-line prefer-arrow-callback, func-names */
   beforeEach(function () {
-    cy.updateFeatureFlags();
-    cy.fixture('apd-overview-template.json').then(userContent => {
-      apdOverview = userContent;
-    });
+    cy.updateFeatureFlags({ validation: false, enableMmis: false });
+    cy.fixture('apd-overview-template.json').as('apdOverview');
+    cy.useStateStaff();
+    cy.visit(this.apdUrl);
   });
 
-  it('should handle the FFYs and APD Overview', () => {
+  it('should handle the FFYs and APD Overview', function () {
+    const apdOverview = this.apdOverview;
+
     cy.url().should('include', '/apd-overview');
     cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
 
     const allYears = [];
-    cy.get("[class='ds-c-choice']").each(($el, index, list) => {
-      allYears.push(list[index].value);
-      if (!list[index].checked) {
-        cy.findByRole('checkbox', { name: list[index].value }).check({
-          force: true
-        });
-      } else {
-        years.push(list[index].value);
-      }
+
+    // Check all of the years
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get("[class='ds-c-choice']").each(($el, index, list) => {
+        allYears.push(list[index].value);
+        if (!list[index].checked) {
+          cy.findByRole('checkbox', { name: list[index].value }).check({
+            force: true
+          });
+        }
+      });
     });
 
     cy.then(() => {
+      // The last FFY should be check
       cy.get('#apd-header-info').should('contain', allYears[0]);
       cy.get('#apd-header-info').should(
         'contain',
         allYears[allYears.length - 1]
       );
 
-      // Testing delete(cancel) FFY
+      // Testing delete(cancel) last FFY
       cy.findByRole('checkbox', {
         name: allYears[allYears.length - 1]
       }).uncheck({
         force: true
       });
 
+      // Cancel the delete
       cy.contains('Delete FFY?').should('exist');
       cy.wait(500); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.get('button[id="dialog-cancel"]').click({ force: true });
 
+      // the last FFY should still be check
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(
         'be.checked'
       );
@@ -96,7 +100,7 @@ export const testAPDOverviewWithData = () => {
         allYears[allYears.length - 1]
       );
 
-      // Testing delete(confirm) FFY
+      // Testing delete(confirm) last FFY
       cy.findByRole('checkbox', {
         name: allYears[allYears.length - 1]
       }).uncheck({
@@ -105,6 +109,7 @@ export const testAPDOverviewWithData = () => {
       cy.get('button[id="dialog-delete"]').click({ force: true });
       cy.contains('Delete FFY?').should('not.exist');
 
+      // the last FFY should not be checked
       cy.findByRole('checkbox', { name: allYears[allYears.length - 1] }).should(
         'not.be.checked'
       );
@@ -133,7 +138,9 @@ export const testAPDOverviewWithData = () => {
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
   });
 
-  it('should display the correct values in the export view', () => {
+  it('should display the correct values in the export view', function () {
+    const years = this.years;
+    const apdOverview = this.apdOverview;
     const numberOfYears = years.length;
     const yearRange = [years[0], years[numberOfYears - 1]];
     cy.goToExportView();

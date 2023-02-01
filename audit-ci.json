@@ -1,11 +1,14 @@
 {
   "low": true,
   "package-manager": "yarn",
-  "allowlist": [],
+  "allowlist": [
+    "GHSA-4jv9-3563-23j3|@cms-****/api>knex",
+    "GHSA-4jv9-3563-23j3|@cms-****/e2e>@cms-****/api>knex"
+  ],
   "_comment": {
-    "[advisory id]": {
-      "module": "",
-      "affects": ""
+    "1085234|GHSA-4jv9-3563-23j3": {
+      "module": "knex",
+      "affects": "@cms-eapd/e2e - limited SQL injection vulnerability"
     }
   }
 }

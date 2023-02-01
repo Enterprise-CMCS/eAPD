@@ -8,8 +8,10 @@ import executiveSummary from './executiveSummary.yaml';
 import previousActivities from './previousActivities.yaml';
 import proposedBudget from './proposedBudget.yaml';
 import scheduleSummary from './scheduleSummary.yaml';
+import securityPlanning from './securityPlanning.yaml';
 import sidebar from './sidebar.yaml';
 import stateDashboard from './stateDashboard.yaml';
+import statePrioritiesAndScope from './statePrioritiesAndScope.yaml';
 import storybook from './storybook.yaml';
 import table from './table.yaml';
 
@@ -24,8 +26,10 @@ export default {
   previousActivities,
   proposedBudget,
   scheduleSummary,
+  securityPlanning,
   sidebar,
   stateDashboard,
+  statePrioritiesAndScope,
   storybook,
   table
 };

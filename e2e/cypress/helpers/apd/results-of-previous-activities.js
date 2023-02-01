@@ -1,8 +1,8 @@
-import ExportPage from '../../page-objects/export-page';
-import PreviousActivitiesPage from '../../page-objects/previous-activities-page';
+import ExportPage from '../../page-objects/export-page.js';
+import PreviousActivitiesPage from '../../page-objects/previous-activities-page.js';
 
-export const testDefaultResultsOfPreviousActivities = () => {
-  it('should have the default values for Results of Previous Activities', () => {
+export const testDefaultResultsOfPreviousActivities = function () {
+  it('should have the default values for Results of Previous Activities', function () {
     const previousActivitiesPage = new PreviousActivitiesPage();
     cy.goToPreviousActivities();
     // Get the years referenced by previous activities
@@ -20,7 +20,7 @@ export const testDefaultResultsOfPreviousActivities = () => {
     previousActivitiesPage.verifyTotalExpenditures();
   });
 
-  it('should display the default values in the export view', () => {
+  it('should display the default values in the export view', function () {
     cy.goToExportView();
 
     const exportPage = new ExportPage();
@@ -79,28 +79,27 @@ export const testDefaultResultsOfPreviousActivities = () => {
   });
 };
 
-export const testResultsOfPreviousActivitiesWithData = () => {
+export const testResultsOfPreviousActivitiesWithData = function () {
   let previousActivitiesPage;
-  let resultsOfPreviousActivities;
 
-  before(() => {
+  before(function () {
     previousActivitiesPage = new PreviousActivitiesPage();
+
+    cy.useStateStaff();
+    cy.visit(this.apdUrl);
     cy.goToPreviousActivities();
     // Get the years referenced by previous activities
     previousActivitiesPage.getYears();
   });
 
-  // eslint-disable-next-line prefer-arrow-callback, func-names
   beforeEach(function () {
-    cy.updateFeatureFlags();
-    cy.fixture('results-of-previous-activities-test.json').then(
-      activityData => {
-        resultsOfPreviousActivities = activityData;
-      }
+    cy.fixture('results-of-previous-activities-test.json').as(
+      'resultsOfPreviousActivities'
     );
   });
 
-  it('fill form', () => {
+  it('fill form', function () {
+    const resultsOfPreviousActivities = this.resultsOfPreviousActivities;
     cy.goToPreviousActivities();
 
     cy.url().should('include', '/previous-activities');
@@ -121,7 +120,8 @@ export const testResultsOfPreviousActivitiesWithData = () => {
     cy.waitForSave();
   });
 
-  it('should have the correct values on the export view', () => {
+  it('should have the correct values on the export view', function () {
+    const resultsOfPreviousActivities = this.resultsOfPreviousActivities;
     const exportPage = new ExportPage();
     exportPage.getPrevActExpenditureVals();
 

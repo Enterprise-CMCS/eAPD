@@ -1,11 +1,12 @@
-const {
+import { APD_TYPE } from '@cms-eapd/common';
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
+} from '../../endpoint-tests/utils.js';
 
 describe('APD endpoint | POST /apds', () => {
   const db = getDB();
@@ -23,7 +24,9 @@ describe('APD endpoint | POST /apds', () => {
 
   it('when authenticated as a user with permission', async () => {
     const api = login();
-    const response = await api.post(url);
+    const response = await api.post(url, {
+      apdType: APD_TYPE.MMIS
+    });
 
     expect(response.status).toEqual(200);
 

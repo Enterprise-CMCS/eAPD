@@ -1,16 +1,26 @@
-const logger = require('../../logger')('apds route post');
-const { createAPD: ga, getStateProfile: gs } = require('../../db');
-const { can } = require('../../middleware');
+import loggerFactory from '../../logger/index.js';
+import { createAPD as ga, getStateProfile as gs } from '../../db/index.js';
+import { can } from '../../middleware/index.js';
+import getNewApd from './post.data.js';
 
-const getNewApd = require('./post.data');
+const logger = loggerFactory('apds route post');
 
-module.exports = (app, { createAPD = ga, getStateProfile = gs } = {}) => {
+export default (app, { createAPD = ga, getStateProfile = gs } = {}) => {
   logger.silly('setting up POST /apds/ route');
   app.post('/apds', can('edit-document'), async (req, res, next) => {
     logger.silly({ id: req.id, message: 'handling POST /apds route' });
 
     try {
-      const apd = getNewApd();
+      const { apdType, years, ...additionalValues } = req.body;
+      const blankApd = getNewApd(apdType, years);
+      const apd = {
+        ...blankApd,
+        ...additionalValues,
+        apdOverview: {
+          ...blankApd.apdOverview,
+          ...additionalValues.apdOverview
+        }
+      };
 
       const stateProfile = await getStateProfile(req.user.state.id);
 

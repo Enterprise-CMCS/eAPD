@@ -39,8 +39,7 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-import { defaultAPDYearOptions } from '../../util';
-import { generateKey } from '@cms-eapd/common/utils/utils';
+import { generateKey, defaultAPDYearOptions } from '@cms-eapd/common';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
@@ -236,13 +235,43 @@ const getHumanTimestamp = iso8601 => {
   })}`;
 };
 
-export const getKeyPersonnel = (years = [], isPrimary = false) => ({
+const getKeyPersonnelSplit = (years, apdType) => {
+  let split;
+  switch (apdType) {
+    case 'HITECH':
+      split = years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
+        {}
+      );
+      break;
+    case 'MMIS':
+      split = years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        {}
+      );
+      break;
+    default:
+      return years.reduce(
+        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        {}
+      );
+  }
+  return split;
+};
+
+export const getKeyPersonnel = (
+  years = [],
+  isPrimary = false,
+  apdType = ''
+) => ({
   costs: years.reduce((c, year) => ({ ...c, [year]: 0 }), {}),
   email: '',
   expanded: true,
   hasCosts: null,
   isPrimary,
   fte: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
+  split: getKeyPersonnelSplit(years, apdType),
+  medicaidShare: years.reduce((p, year) => ({ ...p, [year]: 0 }), {}),
   name: '',
   position: '',
   key: generateKey()
@@ -294,7 +323,11 @@ export const getPatchesForAddingItem = (state, path, key = null) => {
         {
           op: 'add',
           path,
-          value: newActivity({ years: state.data.years, key })
+          value: newActivity({
+            years: state.data.years,
+            key,
+            apdType: state.data.apdType
+          })
         }
       ];
     default:
@@ -310,7 +343,7 @@ export const getPatchesForAddingItem = (state, path, key = null) => {
       if (/^\/activities\/\d+\/outcomes\/\d+\/metrics\/-$/.test(path)) {
         return [{ op: 'add', path, value: newOutcomeMetric() }];
       }
-      if (/^\/activities\/\d+\/schedule\/-$/.test(path)) {
+      if (/^\/activities\/\d+\/milestones\/-$/.test(path)) {
         return [{ op: 'add', path, value: newMilestone() }];
       }
       if (/^\/activities\/\d+\/statePersonnel\/-$/.test(path)) {
@@ -437,7 +470,7 @@ const reducer = (state = initialState, action) => {
               ...action.data,
               created: getHumanDatestamp(action.data.created),
               updated: getHumanTimestamp(action.data.updated),
-              yearOptions: defaultAPDYearOptions
+              yearOptions: defaultAPDYearOptions()
             }
           }
         },
@@ -496,23 +529,32 @@ const reducer = (state = initialState, action) => {
         ...state,
         data: {
           ...action.data.apd,
+          created: getHumanDatestamp(action.data.apd.created),
+          updated: getHumanTimestamp(action.data.apd.updated),
+          keyStatePersonnel: {
+            ...action.data.apd.keyStatePersonnel,
+            keyPersonnel: action.data.apd.keyStatePersonnel.keyPersonnel.map(
+              kp => ({
+                ...kp,
+                key: generateKey()
+              })
+            )
+          },
           activities: action.data.apd.activities.map(
             ({
               activityId,
-              contractorResources,
-              expenses,
+              milestones,
               outcomes,
-              schedule,
               statePersonnel,
+              expenses,
+              contractorResources,
               ...activity
             }) => ({
               ...activity,
-              contractorResources: contractorResources.map(contractor => ({
-                ...contractor,
-                key: generateKey()
-              })),
-              expenses: expenses.map(expense => ({
-                ...expense,
+              key: activityId,
+              activityId,
+              milestones: milestones.map(milestone => ({
+                ...milestone,
                 key: generateKey()
               })),
               outcomes: outcomes.map(({ metrics = [], ...outcome }) => ({
@@ -523,33 +565,23 @@ const reducer = (state = initialState, action) => {
                 })),
                 key: generateKey()
               })),
-              schedule: schedule.map(milestone => ({
-                ...milestone,
-                key: generateKey()
-              })),
               statePersonnel: statePersonnel.map(person => ({
                 ...person,
                 key: generateKey()
               })),
-              key: activityId,
-              activityId
+              expenses: expenses.map(expense => ({
+                ...expense,
+                key: generateKey()
+              })),
+              contractorResources: contractorResources.map(contractor => ({
+                ...contractor,
+                key: generateKey()
+              }))
             })
           ),
           assurancesAndCompliances: getAssurancesAndCompliances(
             action.data.apd.assurancesAndCompliances
-          ),
-          keyStatePersonnel: {
-            ...action.data.apd.keyStatePersonnel,
-            keyPersonnel: action.data.apd.keyStatePersonnel.keyPersonnel.map(
-              kp => ({
-                ...kp,
-                key: generateKey()
-              })
-            )
-          },
-          created: getHumanDatestamp(action.data.apd.created),
-          updated: getHumanTimestamp(action.data.apd.updated),
-          yearOptions: defaultAPDYearOptions
+          )
         },
         adminCheck: {
           ...state.adminCheck,
