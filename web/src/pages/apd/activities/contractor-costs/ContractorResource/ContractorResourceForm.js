@@ -83,7 +83,7 @@ const ContractorResourceForm = forwardRef(
     };
 
     return (
-      <form index={index} onSubmit={onSubmit} aria-label="form">
+      <form id={`contractor-${index}`} onSubmit={onSubmit} aria-label="form">
         {/* Prevent implicit submission of the form. */}
         <button
           type="submit"
