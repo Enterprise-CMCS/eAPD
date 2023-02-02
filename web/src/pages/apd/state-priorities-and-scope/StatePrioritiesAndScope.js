@@ -34,7 +34,6 @@ const StatePrioritiesAndScope = ({
   const {
     control,
     formState: { errors },
-    setValue,
     trigger,
     clearErrors
   } = useForm({
@@ -71,7 +70,7 @@ const StatePrioritiesAndScope = ({
         <Controller
           name="medicaidProgramAndPriorities"
           control={control}
-          render={({ field: { ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <RichText
               {...props}
               id="medicaid-program-priorities-field"
@@ -100,7 +99,7 @@ const StatePrioritiesAndScope = ({
         <Controller
           name="mesIntroduction"
           control={control}
-          render={({ field: { ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <RichText
               {...props}
               id="medicaid-enterprise-system-intro"
@@ -125,7 +124,7 @@ const StatePrioritiesAndScope = ({
         <Controller
           name="scopeOfAPD"
           control={control}
-          render={({ field: { ...props } }) => (
+          render={({ field: { onChange, ...props } }) => (
             <RichText
               {...props}
               id="scope-of-apd"
