@@ -50,7 +50,7 @@ describe('<Security Planning />', () => {
     });
 
     expect(
-      screen.getByLabelText('Business Continuity and Disaaster Recovery Plan')
+      screen.getByLabelText('Business Continuity and Disaster Recovery Plan')
     ).toHaveValue('Come on and slam and welcome to the jam');
   });
 });
