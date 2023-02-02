@@ -3,22 +3,29 @@ import React, { Fragment } from 'react';
 import Dollars from '../../../../components/Dollars';
 
 export const CostSummaryRows = ({ items }) =>
-  items.map(({ key, description, totalCost, unitCost, units }) => (
-    <tr key={key || description}>
-      <td className="title">{description || 'Category Not Selected'}</td>
-      <td className="budget-table--number">
-        {unitCost !== null && <Dollars>{unitCost}</Dollars>}
-      </td>
-      <td className="budget-table--number ds-u-padding--0">
-        {unitCost !== null && '×'}
-      </td>
-      <td className="budget-table--number ds-u-text-align--left">{units}</td>
-      <td className="budget-table--number">{unitCost !== null && '='}</td>
-      <td className="budget-table--number">
-        <Dollars>{totalCost}</Dollars>
-      </td>
-    </tr>
-  ));
+  items.map(
+    ({ key, description, totalCost, unitCost, units, medicaidShare }) => (
+      <tr key={key || description}>
+        <td className="title">{description || 'Category Not Selected'}</td>
+        <td className="budget-table--number">
+          {unitCost !== null && <Dollars>{unitCost}</Dollars>}
+        </td>
+        <td className="budget-table--number ds-u-padding--0">
+          {unitCost !== null && '×'}
+        </td>
+        <td className="budget-table--number ds-u-text-align--left">{units}</td>
+        {medicaidShare && (
+          <td className="budget-table--number ds-u-text-align--left">
+            × {medicaidShare}%
+          </td>
+        )}
+        <td className="budget-table--number">{unitCost !== null && '='}</td>
+        <td className="budget-table--number">
+          <Dollars>{totalCost}</Dollars>
+        </td>
+      </tr>
+    )
+  );
 
 CostSummaryRows.propTypes = {
   items: PropTypes.array.isRequired

@@ -52,9 +52,12 @@ export const selectKeyStatePersonnelCostSummary = createSelector(
         [ffy]: keyPersonnel.map(kp => ({
           key: kp.key,
           description: `${kp.name || 'Not specified'}`,
-          totalCost: kp.hasCosts ? kp.costs[ffy] * kp.fte[ffy] : 0,
+          totalCost: kp.hasCosts
+            ? kp.costs[ffy] * kp.fte[ffy] * (kp.medicaidShare[ffy] / 100)
+            : 0,
           unitCost: kp.hasCosts ? kp.costs[ffy] : null,
-          units: kp.hasCosts ? `${kp.fte[ffy]} FTE` : null
+          units: kp.hasCosts ? `${kp.fte[ffy]} FTE` : null,
+          medicaidShare: kp.hasCosts ? kp.medicaidShare[ffy] : null
         }))
       }),
       {}

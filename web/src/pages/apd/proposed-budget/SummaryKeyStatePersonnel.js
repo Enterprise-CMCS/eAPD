@@ -16,8 +16,8 @@ const SummaryKeyStatePersonnel = ({ ffy, costSummary, apdName }) => {
       <thead>
         <tr className="budget-table--row__primary-header">
           <th scope="col">{apdName}</th>
-          <th scope="col" colSpan="4">
-            Personnel Cost × FTE
+          <th scope="col" colSpan="5">
+            Personnel Cost × FTE x Medicaid Share (%)
           </th>
           <th scope="col" className="ds-u-text-align--right">
             Total cost
@@ -26,13 +26,13 @@ const SummaryKeyStatePersonnel = ({ ffy, costSummary, apdName }) => {
       </thead>
       <tbody>
         <tr className="budget-table--row__header">
-          <th scope="row" colSpan="6">
+          <th scope="row" colSpan="7">
             Key State Personnel
           </th>
         </tr>
         <CostSummaryRows items={costSummary.keyStatePersonnel[ffy]} />
         <tr className="budget-table--subtotal budget-table--row__highlight">
-          <td className="title" colSpan="5">
+          <td className="title" colSpan="6">
             Key Personnel Subtotal
           </td>
           <td className="budget-table--number" data-cy="subtotal">
