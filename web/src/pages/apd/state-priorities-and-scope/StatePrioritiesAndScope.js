@@ -56,30 +56,6 @@ const StatePrioritiesAndScope = ({
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleProgramPriorities = html => {
-    setPP(html);
-    setValue('medicaidProgramAndPriorities', html);
-    if (adminCheck) {
-      trigger();
-    }
-  };
-
-  const handleMESIntro = html => {
-    setESI(html);
-    setValue('mesIntroduction', html);
-    if (adminCheck) {
-      trigger();
-    }
-  };
-
-  const handleScope = html => {
-    setScope(html);
-    setValue('scopeOfAPD', html);
-    if (adminCheck) {
-      trigger();
-    }
-  };
-
   return (
     <Section id="state-priorities-and-scope" resource="statePrioritiesAndScope">
       <hr />
@@ -101,7 +77,10 @@ const StatePrioritiesAndScope = ({
               id="medicaid-program-priorities-field"
               iframe_aria_text="Medicaid Program and Priorities Text Area"
               content={medicaidProgramAndPriorities}
-              onSync={handleProgramPriorities}
+              onSync={html => {
+                setPP(html);
+                onchange(html);
+              }}
               data-testid="medicaidProgramAndPriorities"
               editorClassName="rte-textarea-l"
               error={errors?.medicaidProgramAndPriorities?.message}
@@ -127,7 +106,10 @@ const StatePrioritiesAndScope = ({
               id="medicaid-enterprise-system-intro"
               iframe_aria_text="Medicaid Enterprise System Introduction Text Area"
               content={mesIntroduction}
-              onSync={handleMESIntro}
+              onSync={html => {
+                setESI(html);
+                onChange(html);
+              }}
               editorClassName="rte-textarea-l"
               error={errors?.mesIntroduction?.message}
             />
@@ -149,7 +131,10 @@ const StatePrioritiesAndScope = ({
               id="scope-of-apd"
               iframe_aria_text="Scope of APD Text Area"
               content={scopeOfAPD}
-              onSync={handleScope}
+              onSync={html => {
+                setScope(html);
+                onChange(html);
+              }}
               editorClassName="rte-textarea-l"
               error={errors?.scopeOfAPD?.message}
             />
