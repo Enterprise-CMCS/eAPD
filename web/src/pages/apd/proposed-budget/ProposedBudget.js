@@ -24,15 +24,15 @@ const ProposedBudget = ({ apdType }) => (
         <CombinedActivityCosts apdType={apdType} />
       </Subsection>
 
+      <Waypoint id="budget-summary-table" />
+      <Subsection
+        id="budget-summary-table"
+        resource="proposedBudget.summaryBudget"
+      >
+        <BudgetSummary apdType={apdType} />
+      </Subsection>
       {apdType === 'HITECH' && (
         <Fragment>
-          <Waypoint id="budget-summary-table" />
-          <Subsection
-            id="budget-summary-table"
-            resource="proposedBudget.summaryBudget"
-          >
-            <BudgetSummary />
-          </Subsection>
           <Waypoint id="budget-federal-by-quarter" />
           <Subsection
             id="budget-federal-by-quarter"

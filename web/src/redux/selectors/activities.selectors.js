@@ -37,6 +37,44 @@ export const selectCostAllocationForActivityByIndex = createSelector(
   ({ costAllocation }) => costAllocation
 );
 
+export const selectKeyStatePersonnelCostSummary = createSelector(
+  ({
+    apd: {
+      data: {
+        keyStatePersonnel: { keyPersonnel },
+        years
+      }
+    }
+  }) =>
+    years.reduce(
+      (keyStatePersonnel, ffy) => ({
+        ...keyStatePersonnel,
+        [ffy]: keyPersonnel.map(kp => ({
+          key: kp.key,
+          description: `${kp.name || 'Not specified'}`,
+          totalCost: kp.hasCosts ? kp.costs[ffy] * kp.fte[ffy] : 0,
+          unitCost: kp.hasCosts ? kp.costs[ffy] : null,
+          units: kp.hasCosts ? `${kp.fte[ffy]} FTE` : null
+        }))
+      }),
+      {}
+    ),
+  keyPersonnel => {
+    return {
+      keyStatePersonnel: keyPersonnel,
+      keyStatePersonnelTotal: Object.keys(keyPersonnel).reduce(
+        (o, year) => ({
+          ...o,
+          [year]: keyPersonnel[year].reduce((sum, kp) => {
+            return sum + kp.totalCost; // Todo: find out if we want to calculate totalCost with medicaid share
+          }, 0)
+        }),
+        {}
+      )
+    };
+  }
+);
+
 export const selectActivityCostSummary = createSelector(
   selectApdYears,
   selectActivityByIndex,
@@ -168,7 +206,6 @@ export const selectActivityCostSummary = createSelector(
         total.totalCost += totalCost;
       }
     );
-
     return { years: summary, total };
   }
 );

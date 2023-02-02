@@ -5,13 +5,6 @@ import { connect } from 'react-redux';
 import Dollars from '../../../components/Dollars';
 import { selectBudgetActivitiesByFundingSource } from '../../../redux/selectors/budget.selectors';
 
-const categories = [
-  { category: 'statePersonnel', title: 'State Staff' },
-  { category: 'expenses', title: 'Other State Expenses' },
-  { category: 'contractors', title: 'Private Contractor' },
-  { category: 'combined', title: 'Subtotal' }
-];
-
 function DataRow({ category, data, title }) {
   return (
     <tr
@@ -41,22 +34,37 @@ DataRow.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-const DataRowGroup = ({ data, year }) => (
-  <Fragment>
-    {categories.map(({ category, title }, i) => (
-      <DataRow
-        category={category}
-        data={data[category][year]}
-        key={i} // eslint-disable-line react/no-array-index-key
-        title={title}
-      />
-    ))}
-  </Fragment>
-);
+const DataRowGroup = ({ data, year, apdType }) => {
+  const categories = [
+    { category: 'statePersonnel', title: 'State Staff Total' },
+    { category: 'expenses', title: 'Other State Expenses Total' },
+    { category: 'contractors', title: 'Private Contractor Total' },
+    { category: 'combined', title: 'Total' }
+  ];
+  apdType === 'MMIS'
+    ? categories.splice(0, 0, {
+        category: 'keyStatePersonnel',
+        title: 'Key State Personnel Total'
+      })
+    : null;
+  return (
+    <Fragment>
+      {categories.map(({ category, title }, i) => (
+        <DataRow
+          category={category}
+          data={data[category][year]}
+          key={i} // eslint-disable-line react/no-array-index-key
+          title={title}
+        />
+      ))}
+    </Fragment>
+  );
+};
 
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
-  year: PropTypes.string.isRequired
+  year: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const HeaderRow = ({ yr, activity }) => {
@@ -83,45 +91,57 @@ HeaderRow.propTypes = {
   activity: PropTypes.string.isRequired
 };
 
-const BudgetSummary = ({ activities, data, years }) => (
+const BudgetSummary = ({ activities, data, years, apdType }) => (
   <div>
-    <div>
-      <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
-        HIT Activities
-      </h4>
-      {[...years, 'total'].map(yr => (
-        <table className="budget-table" key={yr} data-cy="summaryBudgetHIT">
-          <caption className="ds-u-visibility--screen-reader">
-            FFY {yr} HIT Activities
-          </caption>
-          <thead>
-            <HeaderRow yr={yr} activity={'hit'} />
-          </thead>
-          <tbody>
-            <DataRowGroup data={data.hit} entries={activities.hit} year={yr} />
-          </tbody>
-        </table>
-      ))}
-    </div>
+    {apdType === 'HITECH' && (
+      <Fragment>
+        <div>
+          <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
+            HIT Activities
+          </h4>
+          {[...years, 'total'].map(yr => (
+            <table className="budget-table" key={yr} data-cy="summaryBudgetHIT">
+              <caption className="ds-u-visibility--screen-reader">
+                FFY {yr} HIT Activities
+              </caption>
+              <thead>
+                <HeaderRow yr={yr} activity={'hit'} />
+              </thead>
+              <tbody>
+                <DataRowGroup
+                  data={data.hit}
+                  entries={activities.hit}
+                  year={yr}
+                />
+              </tbody>
+            </table>
+          ))}
+        </div>
 
-    <div>
-      <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
-        HIE Activities
-      </h4>
-      {[...years, 'total'].map(yr => (
-        <table className="budget-table" key={yr} data-cy="summaryBudgetHIE">
-          <caption className="ds-u-visibility--screen-reader">
-            FFY {yr} HIE Activities
-          </caption>
-          <thead>
-            <HeaderRow yr={yr} activity={'hie'} />
-          </thead>
-          <tbody>
-            <DataRowGroup data={data.hie} entries={activities.hie} year={yr} />
-          </tbody>
-        </table>
-      ))}
-    </div>
+        <div>
+          <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
+            HIE Activities
+          </h4>
+          {[...years, 'total'].map(yr => (
+            <table className="budget-table" key={yr} data-cy="summaryBudgetHIE">
+              <caption className="ds-u-visibility--screen-reader">
+                FFY {yr} HIE Activities
+              </caption>
+              <thead>
+                <HeaderRow yr={yr} activity={'hie'} />
+              </thead>
+              <tbody>
+                <DataRowGroup
+                  data={data.hie}
+                  entries={activities.hie}
+                  year={yr}
+                />
+              </tbody>
+            </table>
+          ))}
+        </div>
+      </Fragment>
+    )}
 
     <div>
       <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">
@@ -140,6 +160,7 @@ const BudgetSummary = ({ activities, data, years }) => (
               data={data.mmis}
               entries={activities.mmis}
               year={yr}
+              apdType={apdType}
             />
           </tbody>
         </table>
@@ -195,7 +216,8 @@ const BudgetSummary = ({ activities, data, years }) => (
 BudgetSummary.propTypes = {
   activities: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
-  years: PropTypes.array.isRequired
+  years: PropTypes.array.isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => {

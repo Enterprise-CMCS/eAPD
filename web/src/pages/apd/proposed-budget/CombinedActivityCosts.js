@@ -3,14 +3,8 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import Instruction from '../../../components/Instruction';
 import SummaryActivityBreakdownTable from './SummaryActivityBreakdown';
+import SummaryKeyStatePersonnel from './SummaryKeyStatePersonnel';
 import Dollars from '../../../components/Dollars';
-
-const categories = [
-  { category: 'statePersonnel', title: 'State Staff Total' },
-  { category: 'expenses', title: 'Other State Expenses Total' },
-  { category: 'contractors', title: 'Private Contractor Total' },
-  { category: 'combined', title: 'Total' }
-];
 
 const DataRow = ({ category, data, title, groupTitle }) => (
   <tr
@@ -37,27 +31,42 @@ DataRow.propTypes = {
   groupTitle: PropTypes.string.isRequired
 };
 
-const DataRowGroup = ({ data, year, groupTitle }) => (
-  <Fragment>
-    {categories.map(({ category, title }) => (
-      <DataRow
-        key={`${groupTitle}-${category}-${title}`}
-        category={category}
-        data={data[category][year]}
-        title={title}
-        groupTitle={groupTitle}
-      />
-    ))}
-  </Fragment>
-);
+const DataRowGroup = ({ data, year, groupTitle, apdType }) => {
+  const categories = [
+    { category: 'statePersonnel', title: 'State Staff Total' },
+    { category: 'expenses', title: 'Other State Expenses Total' },
+    { category: 'contractors', title: 'Private Contractor Total' },
+    { category: 'combined', title: 'Total' }
+  ];
+  apdType === 'MMIS'
+    ? categories.splice(0, 0, {
+        category: 'keyStatePersonnel',
+        title: 'Key State Personnel Total'
+      })
+    : null;
+  return (
+    <Fragment>
+      {categories.map(({ category, title }) => (
+        <DataRow
+          key={`${groupTitle}-${category}-${title}`}
+          category={category}
+          data={data[category][year]}
+          title={title}
+          groupTitle={groupTitle}
+        />
+      ))}
+    </Fragment>
+  );
+};
 
 DataRowGroup.propTypes = {
   data: PropTypes.object.isRequired,
   year: PropTypes.string.isRequired,
-  groupTitle: PropTypes.string.isRequired
+  groupTitle: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
-const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
+const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
   return (
     <table className="budget-table" data-cy="CACTable">
       <thead>
@@ -100,7 +109,12 @@ const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
                 MMIS
               </th>
             </tr>
-            <DataRowGroup data={data.mmis} year={ffy} groupTitle="MMIS" />
+            <DataRowGroup
+              data={data.mmis}
+              year={ffy}
+              groupTitle="MMIS"
+              apdType={apdType}
+            />
           </Fragment>
         )}
 
@@ -117,7 +131,8 @@ const SummaryBudgetByActivityTotals = ({ data, ffy }) => {
 
 SummaryBudgetByActivityTotals.propTypes = {
   data: PropTypes.object.isRequired,
-  ffy: PropTypes.string.isRequired
+  ffy: PropTypes.string.isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const SummaryBudgetByActivityBreakdown = ({ data, ffy }) => {
@@ -136,7 +151,7 @@ SummaryBudgetByActivityBreakdown.propTypes = {
   ffy: PropTypes.string.isRequired
 };
 
-const CombinedActivityCosts = ({ data, years, isViewOnly }) => {
+const CombinedActivityCosts = ({ data, years, isViewOnly, apdType }) => {
   return years.map(ffy => (
     <Fragment key={ffy}>
       <h4 className="ds-h4" aria-hidden="true">
@@ -145,7 +160,7 @@ const CombinedActivityCosts = ({ data, years, isViewOnly }) => {
       {!isViewOnly && (
         <Instruction source="proposedBudget.combinedActivityCosts.totalMedicaidCost" />
       )}
-      <SummaryBudgetByActivityTotals data={data} ffy={ffy} />
+      <SummaryBudgetByActivityTotals data={data} ffy={ffy} apdType={apdType} />
 
       <h4 className="ds-h4" aria-hidden="true">
         State and Contractor Cost Breakdown
@@ -153,6 +168,7 @@ const CombinedActivityCosts = ({ data, years, isViewOnly }) => {
       {!isViewOnly && (
         <Instruction source="proposedBudget.combinedActivityCosts.activityBreakdown" />
       )}
+      {apdType === 'MMIS' && <SummaryKeyStatePersonnel ffy={ffy} />}
       <SummaryBudgetByActivityBreakdown data={data} ffy={ffy} />
     </Fragment>
   ));
