@@ -78,7 +78,7 @@ const StatePrioritiesAndScope = ({
               content={medicaidProgramAndPriorities}
               onSync={html => {
                 setPP(html);
-                onchange(html);
+                onChange(html);
               }}
               data-testid="medicaidProgramAndPriorities"
               editorClassName="rte-textarea-l"
