@@ -12,7 +12,7 @@ securityInterfacePlan:
 
 bcDrplan:
   instruction:
-    label: Business Continuity and Disaaster Recovery Plan
+    label: Business Continuity and Disaster Recovery Plan
     detail: >-
       Provide a comprehensive Business Continuity and Disaster Recovery Plan for
       IT systems and installations involved in the administration of the
