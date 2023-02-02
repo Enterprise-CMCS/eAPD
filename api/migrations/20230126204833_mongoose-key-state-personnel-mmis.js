@@ -12,7 +12,17 @@ const logger = loggerFactory(
 export const up = async () => {
   // Grab all APDs
   await setup();
-  const apds = await HITECH.find().lean();
+  const apds = await HITECH.find({
+    keyStatePersonnel: {
+      keyPersonnel: {
+        $elemMatch: {
+          split: { $exists: false },
+          medicaidShare: { $exists: false }
+        }
+      }
+    }
+  }).lean();
+  logger.info(`Updating ${apds.length} APDs`);
 
   // Create new object with updated keyPersonnel.split
   const updatedApds = apds.map(apd => {
@@ -25,31 +35,35 @@ export const up = async () => {
         ...apd.keyStatePersonnel,
         keyPersonnel: apd.keyStatePersonnel.keyPersonnel.map(keyPersonnel => ({
           ...keyPersonnel,
-          split: years.reduce(
-            /**
-             * Iterate over each year and return an object with the year as the key and
-             * set the default for existing HITECH APDs to a 90/10 split.
-             * If years is ['2022', '2023'] the resulting object will look like this:
-             * {
-             *   '2022': { federal: 90, state: 10 }
-             *   '2023': { federal: 90, state: 10 }
-             * }
-             */
-            (acc, year) => ({ ...acc, [year]: { federal: 90, state: 10 } }),
-            {}
-          ),
-          medicaidShare: years.reduce(
-            /**
-             * Similar to above, set existing HITECH APDs to have a Medicaid share of 100%
-             * So if years is ['2022', '2023'] the resulting object will look like this:
-             * {
-             *   '2022': 100
-             *   '2023': 100
-             * }
-             */
-            (acc, year) => ({ ...acc, [year]: 100 }),
-            {}
-          )
+          split:
+            keyPersonnel?.split ||
+            years.reduce(
+              /**
+               * Iterate over each year and return an object with the year as the key and
+               * set the default for existing HITECH APDs to a 90/10 split.
+               * If years is ['2022', '2023'] the resulting object will look like this:
+               * {
+               *   '2022': { federal: 90, state: 10 }
+               *   '2023': { federal: 90, state: 10 }
+               * }
+               */
+              (acc, year) => ({ ...acc, [year]: { federal: 90, state: 10 } }),
+              {}
+            ),
+          medicaidShare:
+            keyPersonnel?.medicaidShare ||
+            years.reduce(
+              /**
+               * Similar to above, set existing HITECH APDs to have a Medicaid share of 100%
+               * So if years is ['2022', '2023'] the resulting object will look like this:
+               * {
+               *   '2022': 100
+               *   '2023': 100
+               * }
+               */
+              (acc, year) => ({ ...acc, [year]: 100 }),
+              {}
+            )
         }))
       }
     };
