@@ -12,10 +12,12 @@ import {
   setComplyingWithRecordsAccess,
   setComplyingWithSecurity,
   setComplyingWithSoftwareRights,
+  setComplyingWithIndependentVV,
   setJustificationForProcurement,
   setJustificationForRecordsAccess,
   setJustificationForSecurity,
-  setJustificationForSoftwareRights
+  setJustificationForSoftwareRights,
+  setJustificationForIndependentVV
 } from '../../../redux/actions/editApd';
 import { Section, Subsection } from '../../../components/Section';
 import TextArea from '../../../components/TextArea';
@@ -23,7 +25,8 @@ import regLinks from '../../../data/assurancesAndCompliance.yaml';
 import { t } from '../../../i18n';
 import {
   selectFederalCitations,
-  selectAdminCheckEnabled
+  selectAdminCheckEnabled,
+  selectApdType
 } from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
 
@@ -52,15 +55,24 @@ const AssurancesAndCompliance = ({
   complyingWithRecordsAccess,
   complyingWithSecurity,
   complyingWithSoftwareRights,
+  complyingWithIndependentVV,
   justificationForProcurement,
   justificationForRecordsAccess,
   justificationForSecurity,
   justificationForSoftwareRights,
+  justificationForIndependentVV,
+  apdType,
   adminCheck
 }) => {
   AssurancesAndCompliance.displayName = 'AssurancesAndCompliance';
 
-  const { procurement, recordsAccess, softwareRights, security } = citations;
+  const {
+    procurement = {},
+    recordsAccess = {},
+    softwareRights = {},
+    security = {},
+    independentVV = {}
+  } = citations;
 
   const {
     control,
@@ -73,7 +85,8 @@ const AssurancesAndCompliance = ({
       procurement,
       recordsAccess,
       softwareRights,
-      security
+      security,
+      independentVV
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -98,6 +111,8 @@ const AssurancesAndCompliance = ({
         return complyingWithSecurity(index, newValue);
       case 'softwareRights':
         return complyingWithSoftwareRights(index, newValue);
+      case 'independentVV':
+        return complyingWithIndependentVV(index, newValue);
       default:
         return null;
     }
@@ -113,6 +128,8 @@ const AssurancesAndCompliance = ({
         return justificationForSecurity(index, value);
       case 'softwareRights':
         return justificationForSoftwareRights(index, value);
+      case 'independentVV':
+        return justificationForIndependentVV(index, value);
       default:
         return null;
     }
@@ -126,100 +143,108 @@ const AssurancesAndCompliance = ({
           id="assurances-compliance-fed-citations"
           resource="assurancesAndCompliance.citations"
         >
-          {Object.entries(regLinks).map(([name, regulations]) => (
-            <div key={name} className="ds-u-margin-bottom--3">
-              <h4 className="ds-h4">
-                {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
-              </h4>
-              {citations[name].map(({ title, checked, explanation }, index) => (
-                <Controller
-                  key={title}
-                  name={`${name}.${index}.checked`}
-                  control={control}
-                  render={({ field: { onChange: radioOnChange } }) => (
-                    <ChoiceList
-                      label={
-                        <legend className="ds-c-label">
-                          Are you complying with{' '}
-                          <strong>
-                            <LinkOrText
-                              link={regulations[title]}
-                              title={title}
-                            />
-                          </strong>
-                          ?
-                        </legend>
-                      }
+          {Object.entries(regLinks[apdType.toLowerCase()]).map(
+            ([name, regulations]) => (
+              <div key={name} className="ds-u-margin-bottom--3">
+                <h4 className="ds-h4">
+                  {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
+                </h4>
+                {citations[name].map(
+                  ({ title, checked, explanation }, index) => (
+                    <Controller
+                      key={title}
                       name={`${name}.${index}.checked`}
-                      value={checked}
-                      choices={[
-                        {
-                          label: 'Yes',
-                          value: 'yes',
-                          checked: checked === true
-                        },
-                        {
-                          label: 'No',
-                          value: 'no',
-                          checked: checked === false,
-                          checkedChildren: (
-                            <div className="ds-c-choice__checkedChild">
-                              <Controller
-                                name={`${name}.${index}.explanation`}
-                                control={control}
-                                render={({ field: { ...props } }) => (
-                                  <TextArea
-                                    {...props}
-                                    label="Please explain"
-                                    value={explanation}
-                                    onChange={({ target: { value } }) => {
-                                      setValue(
-                                        `${name}.${index}.explanation`,
-                                        value
-                                      );
-                                      handleExplanationChange(
-                                        name,
-                                        index,
-                                        value
-                                      );
-                                      if (adminCheck) {
-                                        trigger(`${name}.${index}.explanation`);
-                                      }
-                                    }}
-                                    errorMessage={
-                                      errors?.[name]?.[index]?.explanation
-                                        ?.message
-                                    }
-                                    errorPlacement="bottom"
-                                    rows={5}
-                                  />
-                                )}
-                              />
-                            </div>
-                          )
-                        }
-                      ]}
-                      type="radio"
-                      size="small"
-                      onChange={e => {
-                        const boolValue = e.target.value === 'yes';
-                        radioOnChange(boolValue);
-                        handleCheckChange(name, index, boolValue);
-                        if (adminCheck) {
-                          trigger(`${name}.${index}.checked`);
-                          if (boolValue === false) {
-                            trigger(`${name}.${index}.explanation`);
+                      control={control}
+                      render={({ field: { onChange: radioOnChange } }) => (
+                        <ChoiceList
+                          label={
+                            <legend className="ds-c-label">
+                              Are you complying with{' '}
+                              <strong>
+                                <LinkOrText
+                                  link={regulations[title]}
+                                  title={title}
+                                />
+                              </strong>
+                              ?
+                            </legend>
                           }
-                        }
-                      }}
-                      errorMessage={errors?.[name]?.[index]?.checked?.message}
-                      errorPlacement="bottom"
+                          name={`${name}.${index}.checked`}
+                          value={checked}
+                          choices={[
+                            {
+                              label: 'Yes',
+                              value: 'yes',
+                              checked: checked === true
+                            },
+                            {
+                              label: 'No',
+                              value: 'no',
+                              checked: checked === false,
+                              checkedChildren: (
+                                <div className="ds-c-choice__checkedChild">
+                                  <Controller
+                                    name={`${name}.${index}.explanation`}
+                                    control={control}
+                                    render={({ field: { ...props } }) => (
+                                      <TextArea
+                                        {...props}
+                                        label="Please explain"
+                                        value={explanation}
+                                        onChange={({ target: { value } }) => {
+                                          setValue(
+                                            `${name}.${index}.explanation`,
+                                            value
+                                          );
+                                          handleExplanationChange(
+                                            name,
+                                            index,
+                                            value
+                                          );
+                                          if (adminCheck) {
+                                            trigger(
+                                              `${name}.${index}.explanation`
+                                            );
+                                          }
+                                        }}
+                                        errorMessage={
+                                          errors?.[name]?.[index]?.explanation
+                                            ?.message
+                                        }
+                                        errorPlacement="bottom"
+                                        rows={5}
+                                      />
+                                    )}
+                                  />
+                                </div>
+                              )
+                            }
+                          ]}
+                          type="radio"
+                          size="small"
+                          onChange={e => {
+                            const boolValue = e.target.value === 'yes';
+                            radioOnChange(boolValue);
+                            handleCheckChange(name, index, boolValue);
+                            if (adminCheck) {
+                              trigger(`${name}.${index}.checked`);
+                              if (boolValue === false) {
+                                trigger(`${name}.${index}.explanation`);
+                              }
+                            }
+                          }}
+                          errorMessage={
+                            errors?.[name]?.[index]?.checked?.message
+                          }
+                          errorPlacement="bottom"
+                        />
+                      )}
                     />
-                  )}
-                />
-              ))}
-            </div>
-          ))}
+                  )
+                )}
+              </div>
+            )
+          )}
         </Subsection>
       </Section>
     </React.Fragment>
@@ -232,15 +257,19 @@ AssurancesAndCompliance.propTypes = {
   complyingWithRecordsAccess: PropTypes.func.isRequired,
   complyingWithSecurity: PropTypes.func.isRequired,
   complyingWithSoftwareRights: PropTypes.func.isRequired,
+  complyingWithIndependentVV: PropTypes.func.isRequired,
   justificationForProcurement: PropTypes.func.isRequired,
   justificationForRecordsAccess: PropTypes.func.isRequired,
   justificationForSecurity: PropTypes.func.isRequired,
   justificationForSoftwareRights: PropTypes.func.isRequired,
+  justificationForIndependentVV: PropTypes.func.isRequired,
+  apdType: PropTypes.string.isRequired,
   adminCheck: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   citations: selectFederalCitations(state),
+  apdType: selectApdType(state),
   adminCheck: selectAdminCheckEnabled(state)
 });
 
@@ -249,10 +278,12 @@ const mapDispatchToProps = {
   complyingWithRecordsAccess: setComplyingWithRecordsAccess,
   complyingWithSecurity: setComplyingWithSecurity,
   complyingWithSoftwareRights: setComplyingWithSoftwareRights,
+  complyingWithIndependentVV: setComplyingWithIndependentVV,
   justificationForProcurement: setJustificationForProcurement,
   justificationForRecordsAccess: setJustificationForRecordsAccess,
   justificationForSecurity: setJustificationForSecurity,
-  justificationForSoftwareRights: setJustificationForSoftwareRights
+  justificationForSoftwareRights: setJustificationForSoftwareRights,
+  justificationForIndependentVV: setJustificationForIndependentVV
 };
 
 export default connect(
