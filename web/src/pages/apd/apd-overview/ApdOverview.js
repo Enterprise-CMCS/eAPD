@@ -71,6 +71,11 @@ const ApdOverview = ({
   });
 
   useEffect(() => {
+    clearErrors('name');
+    trigger('name');
+  }, [name])
+
+  useEffect(() => {
     if (adminCheck) {
       trigger();
     } else {
@@ -208,7 +213,7 @@ const ApdOverview = ({
               onChange={changeName}
               onBlur={onBlur}
               onComponentBlur={onBlur}
-              errorMessage={errors?.name?.message}
+              errorMessage={adminCheck && errors?.name?.message}
               errorPlacement="bottom"
             />
           );

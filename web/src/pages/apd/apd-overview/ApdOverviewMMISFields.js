@@ -30,7 +30,10 @@ const ApdOverviewMMISFields = ({
   } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: joiResolver(mmisOverviewSchema)
+    resolver: joiResolver(mmisOverviewSchema),
+    defaultValues: {
+      medicaidBusinessAreas
+    }
   });
 
   useEffect(() => {
@@ -44,12 +47,12 @@ const ApdOverviewMMISFields = ({
   useEffect(() => {}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleBusinessAreas = e => {
-    const labelElement = document.querySelector(`label[for='${e.target.id}']`);
-    const labelText = labelElement.textContent;
-    const key = Object.keys(MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING).find(
-      key => MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[key] === labelText
-    );
-    setBusinessAreaField(key, e.target.checked);
+    setValue('medicaidBusinessAreas', {
+      ...medicaidBusinessAreas,
+      [e.target.value]: e.target.checked
+    });
+    setBusinessAreaField(e.target.value, e.target.checked);
+    trigger('medicaidBusinessAreas');
   };
 
   const getBusinessAreaChoices = () => {
@@ -69,7 +72,7 @@ const ApdOverviewMMISFields = ({
         choice.checkedChildren = (
           <div className="ds-c-choice__checkedChild">
             <Controller
-              name="otherMedicaidBusinessAreas"
+              name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
               control={control}
               render={({ field: { onBlur } }) => (
                 <TextArea
@@ -77,7 +80,6 @@ const ApdOverviewMMISFields = ({
                   label={
                     MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
                   }
-                  name="otherMedicaidBusinessAreasText"
                   data-cy="other_details"
                   hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
                   onBlur={onBlur}
@@ -89,8 +91,9 @@ const ApdOverviewMMISFields = ({
                     );
                   }}
                   errorMessage={
+                    adminCheck &&
                     errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas
-                      ?.messages
+                      ?.message
                   }
                   errorPlacement="bottom"
                 />
@@ -140,7 +143,9 @@ const ApdOverviewMMISFields = ({
               onChange={handleBusinessAreas}
               onBlur={onBlur}
               onComponentBlur={onBlur}
-              errorMessage={errors?.medicaidBusinessAreas?.message}
+              errorMessage={
+                adminCheck && errors?.medicaidBusinessAreas?.message
+              }
               errorPlacement="bottom"
               name="medicaid-business-areas"
             />
