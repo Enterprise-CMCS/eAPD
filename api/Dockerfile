@@ -1,5 +1,5 @@
-FROM node:16.16.0-alpine3.15
-RUN apk add --no-cache python3 g++ make curl
+FROM node:16.19.0-bullseye-slim
+RUN apt-get update && apt-get install build-essential curl -y
 
 RUN mkdir /app
 WORKDIR /app
