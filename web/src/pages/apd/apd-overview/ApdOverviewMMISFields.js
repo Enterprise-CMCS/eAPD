@@ -2,6 +2,10 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useMemo } from 'react';
 import { ChoiceList } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
+import {
+  selectMedicaidBusinessAreasBooleanFields,
+  selectMedicaidBusinessAreasTextField
+} from '../../../redux/selectors/apd.selectors';
 
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -18,6 +22,7 @@ import { selectAdminCheckEnabled } from '../../../redux/selectors/apd.selectors'
 
 const ApdOverviewMMISFields = ({
   medicaidBusinessAreas,
+  otherMedicaidBusinessAreas,
   setBusinessAreaField,
   adminCheck
 }) => {
@@ -28,11 +33,12 @@ const ApdOverviewMMISFields = ({
     trigger,
     clearErrors
   } = useForm({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+    mode: 'all',
+    reValidateMode: 'all',
     resolver: joiResolver(mmisOverviewSchema),
     defaultValues: {
-      medicaidBusinessAreas
+      medicaidBusinessAreas,
+      otherMedicaidBusinessAreas
     }
   });
 
@@ -55,13 +61,53 @@ const ApdOverviewMMISFields = ({
     trigger('medicaidBusinessAreas');
   };
 
-  const getBusinessAreaChoices = () => {
-    const businessAreasForCheckbox = Object.assign({}, medicaidBusinessAreas);
-    delete businessAreasForCheckbox.otherMedicaidBusinessAreas; // This is a text area field handled as a child element of the 'other' key
+  const otherMedicaidBusinessAreaComponent = (
+    <div className="ds-c-choice__checkedChild">
+      <Controller
+        name="otherMedicaidBusinessAreas"
+        control={control}
+        render={({ field: { onBlur, ...props } }) => (
+          <TextArea
+            {...props}
+            value={otherMedicaidBusinessAreas}
+            label={
+              MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
+            }
+            data-cy="other_details"
+            hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
+            onBlur={onBlur}
+            onComponentBlur={onBlur}
+            onChange={e => {
+              setBusinessAreaField(
+                'otherMedicaidBusinessAreas',
+                e.target.value
+              );
+              setValue('otherMedicaidBusinessAreas', e.target.value);
+              trigger();
+            }}
+            errorMessage={
+              adminCheck && errors?.otherMedicaidBusinessAreas?.message
+            }
+            errorPlacement="bottom"
+          />
+        )}
+      />
+    </div>
+  );
 
+  const handleBusinessAreas = e => {
+    setValue('medicaidBusinessAreas', {
+      ...medicaidBusinessAreas,
+      [e.target.value]: e.target.checked
+    });
+    setBusinessAreaField(e.target.value, e.target.checked);
+    trigger();
+  };
+
+  const getBusinessAreaChoices = () => {
     let choiceList = [];
 
-    for (const [key, value] of Object.entries(businessAreasForCheckbox)) {
+    for (const [key, value] of Object.entries(medicaidBusinessAreas)) {
       let choice = {
         label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[key],
         value: key,
@@ -69,38 +115,7 @@ const ApdOverviewMMISFields = ({
       };
 
       if (key === 'other') {
-        choice.checkedChildren = (
-          <div className="ds-c-choice__checkedChild">
-            <Controller
-              name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
-              control={control}
-              render={({ field: { onBlur } }) => (
-                <TextArea
-                  value={medicaidBusinessAreas.otherMedicaidBusinessAreas}
-                  label={
-                    MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
-                  }
-                  data-cy="other_details"
-                  hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
-                  onBlur={onBlur}
-                  onChange={e => {
-                    setValue('otherMedicaidBusinessAreas', e.target.value);
-                    setBusinessAreaField(
-                      'otherMedicaidBusinessAreas',
-                      e.target.value
-                    );
-                  }}
-                  errorMessage={
-                    adminCheck &&
-                    errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas
-                      ?.message
-                  }
-                  errorPlacement="bottom"
-                />
-              )}
-            />
-          </div>
-        );
+        choice.checkedChildren = otherMedicaidBusinessAreaComponent;
       }
 
       choiceList.push(choice);
@@ -168,7 +183,8 @@ ApdOverviewMMISFields.defaultProps = {
 
 const mapStateToProps = state => ({
   adminCheck: selectAdminCheckEnabled(state),
-  medicaidBusinessAreas: state.apd.data.apdOverview.medicaidBusinessAreas
+  medicaidBusinessAreas: selectMedicaidBusinessAreasBooleanFields(state),
+  otherMedicaidBusinessAreas: selectMedicaidBusinessAreasTextField(state)
 });
 
 const mapDispatchToProps = {

@@ -90,16 +90,7 @@ export const medicaidBusinessAreasSchema = Joi.object({
   programIntegrity: Joi.boolean(),
   providerManagement: Joi.boolean(),
   thirdPartyLiability: Joi.boolean(),
-  other: Joi.boolean(),
-  otherMedicaidBusinessAreas: Joi.when('other', {
-    is: true,
-    then: Joi.string().min(1).required().messages({
-      'string.base': 'Provide an other Medicaid Business Area(s).',
-      'string.empty': 'Provide an other Medicaid Business Area(s).',
-      'string.required': 'Provide an other Medicaid Business Area(s).'
-    }),
-    otherwise: Joi.any()
-  })
+  other: Joi.boolean()
 })
   .or(
     'waiverSupportSystems',
@@ -124,6 +115,14 @@ export const medicaidBusinessAreasSchema = Joi.object({
   });
 
 export const mmisOverviewSchema = Joi.object({
-  updateStatus: updateStatusSchema,
-  medicaidBusinessAreas: medicaidBusinessAreasSchema
+  medicaidBusinessAreas: medicaidBusinessAreasSchema,
+  otherMedicaidBusinessAreas: Joi.when('medicaidBusinessAreas.other', {
+    is: true,
+    then: Joi.string().min(1).required().messages({
+      'string.base': 'Provide an other Medicaid Business Area(s).',
+      'string.empty': 'Provide an other Medicaid Business Area(s).',
+      'string.required': 'Provide an other Medicaid Business Area(s).'
+    }),
+    otherwise: Joi.any()
+  })
 });

@@ -73,7 +73,7 @@ const ApdOverview = ({
   useEffect(() => {
     clearErrors('name');
     trigger('name');
-  }, [name])
+  }, [name]);
 
   useEffect(() => {
     if (adminCheck) {
