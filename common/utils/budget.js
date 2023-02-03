@@ -1411,7 +1411,9 @@ export const calculateBudget = apd => {
       // Now loop back over the years and compute state and federal shares
       // of all the costs.
       years.forEach(year => {
-        const totalOtherFunding = convertToNumber(allocation[year].other);
+        const totalOtherFunding = convertToNumber(
+          allocation?.[year]?.other || 0
+        );
         const totalCost = activityTotals.data.combined[year];
         const totalMedicaidCost = totalCost - totalOtherFunding;
 
