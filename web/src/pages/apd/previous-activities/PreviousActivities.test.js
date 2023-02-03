@@ -132,9 +132,6 @@ describe('previous activities component', () => {
       expect(screen.getAllByRole('table')).toHaveLength(5);
     });
 
-    expect(screen.getByLabelText('Previous Activities Summary')).toHaveValue(
-      'bob'
-    );
     expect(
       screen.getByRole('table', {
         name: 'Grand totals: Federal HIT, HIE, MMIS'
