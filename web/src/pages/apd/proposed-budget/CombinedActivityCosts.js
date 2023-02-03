@@ -158,7 +158,9 @@ const CombinedActivityCosts = ({ data, years, isViewOnly, apdType }) => {
         FFY {ffy}
       </h4>
       {!isViewOnly && (
-        <Instruction source="proposedBudget.combinedActivityCosts.totalMedicaidCost" />
+        <Instruction
+          source={`proposedBudget.combinedActivityCosts.totalMedicaidCost${apdType}`}
+        />
       )}
       <SummaryBudgetByActivityTotals data={data} ffy={ffy} apdType={apdType} />
 

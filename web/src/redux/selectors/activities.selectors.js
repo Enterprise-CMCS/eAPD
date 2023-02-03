@@ -49,9 +49,11 @@ export const selectKeyStatePersonnelCostSummary = createSelector(
     years.reduce(
       (keyStatePersonnel, ffy) => ({
         ...keyStatePersonnel,
-        [ffy]: keyPersonnel.map(kp => ({
+        [ffy]: keyPersonnel.map((kp, index) => ({
           key: kp.key,
-          description: `${kp.name || 'Not specified'}`,
+          description: `${kp.position}: ${kp.name || 'Not specified'} ${
+            index == 0 ? '(APD Point of Contact)' : ''
+          }`,
           totalCost: kp.hasCosts
             ? kp.costs[ffy] * kp.fte[ffy] * (kp.medicaidShare[ffy] / 100)
             : 0,

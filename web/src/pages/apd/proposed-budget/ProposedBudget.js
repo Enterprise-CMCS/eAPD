@@ -27,7 +27,7 @@ const ProposedBudget = ({ apdType }) => (
       <Waypoint id="budget-summary-table" />
       <Subsection
         id="budget-summary-table"
-        resource="proposedBudget.summaryBudget"
+        resource={`proposedBudget.summaryBudget${apdType}`}
       >
         <BudgetSummary apdType={apdType} />
       </Subsection>
