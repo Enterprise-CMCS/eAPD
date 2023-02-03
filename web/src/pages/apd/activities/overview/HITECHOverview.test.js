@@ -43,7 +43,7 @@ describe('<HITECHOverview />', () => {
 
       await waitFor(() => {
         expect(
-          screen.getByLabelText('Provide a short overview of the activity.')
+          screen.getByLabelText(/Provide a short overview of the activity/)
         ).toHaveValue(
           'Our Flag Means Death is an American period romantic comedy television series created by David Jenkins.'
         );

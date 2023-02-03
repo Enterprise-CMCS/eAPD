@@ -110,9 +110,9 @@ source ~/.bashrc
 
 # We're using Node 16, and we don't care about minor/patch versions, so always
 # get the latest.
-nvm install 16.16.0
-nvm alias default 16.16.0
-nvm use 16.16.0
+nvm install 16.19.0
+nvm alias default 16.19.0
+nvm use 16.19.0
 npm i -g yarn@1.22.18
 
 git clone --single-branch https://github.com/Enterprise-CMCS/eAPD.git
