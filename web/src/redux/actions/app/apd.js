@@ -44,7 +44,6 @@ import {
 } from '../../selectors/user.selector';
 
 import axios from '../../../util/api';
-import initialAssurances from '../../../util/regulations';
 
 const LAST_APD_ID_STORAGE_KEY = 'last-apd-id';
 
@@ -117,18 +116,6 @@ export const selectApd =
           activities: res.data.apd.activities
         });
         dispatch({ type: ADMIN_CHECK_TOGGLE, data: false });
-
-        // By default, APDs get an empty object for federal citations. The canonical list of citations is in frontend
-        // code, not backend. So if we get an APD with no federal citations, set its federal citations to the initial
-        // values using an EDIT_APD action. That way the initial values get saved back to the API.
-        if (Object.keys(res.data.apd.assurancesAndCompliances).length === 0) {
-          dispatch({
-            type: EDIT_APD,
-            path: '/assurancesAndCompliances',
-            value: initialAssurances
-          });
-        }
-
         dispatch(loadBudget(budget));
         dispatch(pushRoute(route));
         dispatch(ariaAnnounceApdLoaded());

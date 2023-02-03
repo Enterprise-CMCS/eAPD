@@ -4,10 +4,12 @@ import {
   setComplyingWithRecordsAccess,
   setComplyingWithSecurity,
   setComplyingWithSoftwareRights,
+  setComplyingWithIndependentVV,
   setJustificationForProcurement,
   setJustificationForRecordsAccess,
   setJustificationForSecurity,
-  setJustificationForSoftwareRights
+  setJustificationForSoftwareRights,
+  setJustificationForIndependentVV
 } from './assurancesAndCompliance';
 
 describe('APD edit actions for assurance and compliance', () => {
@@ -71,6 +73,22 @@ describe('APD edit actions for assurance and compliance', () => {
     expect(setJustificationForSoftwareRights(9, 'this is some text')).toEqual({
       type: EDIT_APD,
       path: '/assurancesAndCompliances/softwareRights/9/explanation',
+      value: 'this is some text'
+    });
+  });
+
+  it('dispatches an action for setting whether the APD is in compliance with a independent verification and validation citation', () => {
+    expect(setComplyingWithIndependentVV(7, false)).toEqual({
+      type: EDIT_APD,
+      path: '/assurancesAndCompliances/independentVV/7/checked',
+      value: false
+    });
+  });
+
+  it('dispatches an actino for setting the justification for a independent verification and validation citation', () => {
+    expect(setJustificationForIndependentVV(9, 'this is some text')).toEqual({
+      type: EDIT_APD,
+      path: '/assurancesAndCompliances/independentVV/9/explanation',
       value: 'this is some text'
     });
   });

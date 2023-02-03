@@ -4,7 +4,11 @@ import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { connect } from 'react-redux';
-import { hitechAssurancesAndComplianceSchema as schema } from '@cms-eapd/common';
+import {
+  APD_TYPE,
+  hitechAssurancesAndComplianceSchema,
+  mmisAssurancesAndComplianceSchema
+} from '@cms-eapd/common';
 
 import { titleCase } from 'title-case';
 import {
@@ -73,6 +77,10 @@ const AssurancesAndCompliance = ({
     security = {},
     independentVV = {}
   } = citations;
+  const schema =
+    apdType === APD_TYPE.HITECH
+      ? hitechAssurancesAndComplianceSchema
+      : mmisAssurancesAndComplianceSchema;
 
   const {
     control,
@@ -143,108 +151,104 @@ const AssurancesAndCompliance = ({
           id="assurances-compliance-fed-citations"
           resource="assurancesAndCompliance.citations"
         >
-          {Object.entries(regLinks[apdType.toLowerCase()]).map(
-            ([name, regulations]) => (
-              <div key={name} className="ds-u-margin-bottom--3">
-                <h4 className="ds-h4">
-                  {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
-                </h4>
-                {citations[name].map(
-                  ({ title, checked, explanation }, index) => (
-                    <Controller
-                      key={title}
+          {Object.entries(regLinks[apdType]).map(([name, regulations]) => (
+            <div
+              key={name}
+              className="ds-u-margin-top--6 ds-u-margin-bottom--0"
+            >
+              <h4 className="ds-h4">
+                {titleCase(t(`assurancesAndCompliance.headings.${name}`))}
+              </h4>
+              {citations[name].map(({ title, checked, explanation }, index) => (
+                <Controller
+                  key={title}
+                  name={`${name}.${index}.checked`}
+                  control={control}
+                  render={({ field: { onChange: radioOnChange } }) => (
+                    <ChoiceList
+                      label={
+                        <legend className="ds-c-label">
+                          Are you complying with{' '}
+                          <strong>
+                            <LinkOrText
+                              link={regulations[title]}
+                              title={title}
+                            />
+                          </strong>
+                          ?
+                        </legend>
+                      }
                       name={`${name}.${index}.checked`}
-                      control={control}
-                      render={({ field: { onChange: radioOnChange } }) => (
-                        <ChoiceList
-                          label={
-                            <legend className="ds-c-label">
-                              Are you complying with{' '}
-                              <strong>
-                                <LinkOrText
-                                  link={regulations[title]}
-                                  title={title}
-                                />
-                              </strong>
-                              ?
-                            </legend>
-                          }
-                          name={`${name}.${index}.checked`}
-                          value={checked}
-                          choices={[
-                            {
-                              label: 'Yes',
-                              value: 'yes',
-                              checked: checked === true
-                            },
-                            {
-                              label: 'No',
-                              value: 'no',
-                              checked: checked === false,
-                              checkedChildren: (
-                                <div className="ds-c-choice__checkedChild">
-                                  <Controller
-                                    name={`${name}.${index}.explanation`}
-                                    control={control}
-                                    render={({ field: { ...props } }) => (
-                                      <TextArea
-                                        {...props}
-                                        label="Please explain"
-                                        value={explanation}
-                                        onChange={({ target: { value } }) => {
-                                          setValue(
-                                            `${name}.${index}.explanation`,
-                                            value
-                                          );
-                                          handleExplanationChange(
-                                            name,
-                                            index,
-                                            value
-                                          );
-                                          if (adminCheck) {
-                                            trigger(
-                                              `${name}.${index}.explanation`
-                                            );
-                                          }
-                                        }}
-                                        errorMessage={
-                                          errors?.[name]?.[index]?.explanation
-                                            ?.message
-                                        }
-                                        errorPlacement="bottom"
-                                        rows={5}
-                                      />
-                                    )}
+                      value={checked}
+                      choices={[
+                        {
+                          label: 'Yes',
+                          value: 'yes',
+                          checked: checked === true
+                        },
+                        {
+                          label: 'No',
+                          value: 'no',
+                          checked: checked === false,
+                          checkedChildren: (
+                            <div className="ds-c-choice__checkedChild">
+                              <Controller
+                                name={`${name}.${index}.explanation`}
+                                control={control}
+                                render={({ field: { ...props } }) => (
+                                  <TextArea
+                                    {...props}
+                                    label="Please explain"
+                                    value={explanation}
+                                    onChange={({ target: { value } }) => {
+                                      setValue(
+                                        `${name}.${index}.explanation`,
+                                        value
+                                      );
+                                      handleExplanationChange(
+                                        name,
+                                        index,
+                                        value
+                                      );
+                                      if (adminCheck) {
+                                        trigger(`${name}.${index}.explanation`);
+                                      }
+                                    }}
+                                    errorMessage={
+                                      errors?.[name]?.[index]?.explanation
+                                        ?.message
+                                    }
+                                    errorPlacement="bottom"
+                                    rows={5}
                                   />
-                                </div>
-                              )
-                            }
-                          ]}
-                          type="radio"
-                          size="small"
-                          onChange={e => {
-                            const boolValue = e.target.value === 'yes';
-                            radioOnChange(boolValue);
-                            handleCheckChange(name, index, boolValue);
-                            if (adminCheck) {
-                              trigger(`${name}.${index}.checked`);
-                              if (boolValue === false) {
-                                trigger(`${name}.${index}.explanation`);
-                              }
-                            }
-                          }}
-                          errorMessage={
-                            errors?.[name]?.[index]?.checked?.message
+                                )}
+                              />
+                            </div>
+                          )
+                        }
+                      ]}
+                      type="radio"
+                      size="small"
+                      className="ds-u-margin-top--0"
+                      onChange={e => {
+                        const boolValue = e.target.value === 'yes';
+                        radioOnChange(boolValue);
+                        handleCheckChange(name, index, boolValue);
+                        if (adminCheck) {
+                          trigger(`${name}.${index}.checked`);
+                          if (boolValue === false) {
+                            trigger(`${name}.${index}.explanation`);
                           }
-                          errorPlacement="bottom"
-                        />
-                      )}
+                        }
+                      }}
+                      errorMessage={errors?.[name]?.[index]?.checked?.message}
+                      errorPlacement="bottom"
                     />
-                  )
-                )}
-              </div>
-            )
-          )}
+                  )}
+                />
+              ))}
+            </div>
+          ))}
         </Subsection>
       </Section>
     </React.Fragment>
@@ -253,6 +257,8 @@ const AssurancesAndCompliance = ({
 
 AssurancesAndCompliance.propTypes = {
   citations: PropTypes.object.isRequired,
+  apdType: PropTypes.string.isRequired,
+  adminCheck: PropTypes.bool.isRequired,
   complyingWithProcurement: PropTypes.func.isRequired,
   complyingWithRecordsAccess: PropTypes.func.isRequired,
   complyingWithSecurity: PropTypes.func.isRequired,
@@ -262,14 +268,12 @@ AssurancesAndCompliance.propTypes = {
   justificationForRecordsAccess: PropTypes.func.isRequired,
   justificationForSecurity: PropTypes.func.isRequired,
   justificationForSoftwareRights: PropTypes.func.isRequired,
-  justificationForIndependentVV: PropTypes.func.isRequired,
-  apdType: PropTypes.string.isRequired,
-  adminCheck: PropTypes.bool.isRequired
+  justificationForIndependentVV: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   citations: selectFederalCitations(state),
-  apdType: selectApdType(state),
+  apdType: (selectApdType(state) || '').toLowerCase(),
   adminCheck: selectAdminCheckEnabled(state)
 });
 

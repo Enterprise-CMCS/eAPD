@@ -9,6 +9,7 @@ import {
 } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 
+import { APD_TYPE } from '@cms-eapd/common';
 import AssurancesAndCompliance, {
   mapStateToProps,
   mapDispatchToProps,
@@ -20,10 +21,12 @@ import {
   setComplyingWithRecordsAccess,
   setComplyingWithSecurity,
   setComplyingWithSoftwareRights,
+  setComplyingWithIndependentVV,
   setJustificationForProcurement,
   setJustificationForRecordsAccess,
   setJustificationForSecurity,
-  setJustificationForSoftwareRights
+  setJustificationForSoftwareRights,
+  setJustificationForIndependentVV
 } from '../../../redux/actions/editApd';
 
 const defaultProps = {
@@ -31,14 +34,15 @@ const defaultProps = {
   complyingWithRecordsAccess: jest.fn(),
   complyingWithSecurity: jest.fn(),
   complyingWithSoftwareRights: jest.fn(),
+  setComplyingWithIndependentVV: jest.fn(),
   justificationForProcurement: jest.fn(),
   justificationForRecordsAccess: jest.fn(),
   justificationForSecurity: jest.fn(),
-  justificationForSoftwareRights: jest.fn()
+  justificationForSoftwareRights: jest.fn(),
+  setJustificationForIndependentVV: jest.fn()
 };
 
 const setup = async (props = {}, options = {}) => {
-  // eslint-disable-next-line testing-library/no-unnecessary-act
   const utils = renderWithConnection(
     <AssurancesAndCompliance {...defaultProps} {...props} />,
     options
@@ -60,7 +64,7 @@ describe('assurances and compliance component', () => {
       jest.resetAllMocks();
     });
 
-    test('renders correctly', async () => {
+    test('renders HITECH correctly', async () => {
       await setup(
         {},
         {
@@ -68,6 +72,7 @@ describe('assurances and compliance component', () => {
             apd: {
               adminCheck: false,
               data: {
+                apdType: APD_TYPE.HITECH,
                 years: [2020, 2021],
                 activities: [
                   {
@@ -79,79 +84,67 @@ describe('assurances and compliance component', () => {
                   procurement: [
                     {
                       title: '42 CFR Part 495.348',
-                      checked: true,
+                      checked: null,
                       explanation: ''
                     },
                     {
                       title: 'SMM Section 11267',
-                      checked: true,
+                      checked: null,
                       explanation: ''
                     },
-                    { title: '45 CFR 95.613', checked: '', explanation: '' },
-                    {
-                      title: '45 CFR Part 75.326',
-                      checked: false,
-                      explanation: ''
-                    }
+                    { title: '45 CFR 95.613', checked: null, explanation: '' },
+                    { title: '45 CFR 75.326', checked: null, explanation: '' }
                   ],
                   recordsAccess: [
                     {
                       title: '42 CFR Part 495.350',
-                      checked: false,
-                      explanation: 'some words'
+                      checked: null,
+                      explanation: ''
                     },
                     {
                       title: '42 CFR Part 495.352',
-                      checked: true,
+                      checked: null,
                       explanation: ''
                     },
                     {
                       title: '42 CFR Part 495.346',
-                      checked: true,
+                      checked: null,
                       explanation: ''
                     },
                     {
                       title: '42 CFR 433.112(b)',
-                      checked: true,
+                      checked: null,
                       explanation: ''
                     },
                     {
                       title: '45 CFR Part 95.615',
-                      checked: true,
-                      explanation: 'other words'
+                      checked: null,
+                      explanation: ''
                     },
                     {
                       title: 'SMM Section 11267',
-                      checked: true,
+                      checked: null,
                       explanation: ''
                     }
                   ],
                   softwareRights: [
-                    {
-                      title: '42 CFR Part 495.360',
-                      checked: true,
-                      explanation: ''
-                    },
-                    {
-                      title: '45 CFR Part 95.617',
-                      checked: true,
-                      explanation: ''
-                    },
+                    { title: '42 CFR 495.360', checked: null, explanation: '' },
+                    { title: '45 CFR 95.617', checked: null, explanation: '' },
                     {
                       title: '42 CFR Part 431.300',
-                      checked: false,
+                      checked: null,
                       explanation: ''
                     },
                     {
                       title: '42 CFR Part 433.112',
-                      checked: true,
+                      checked: null,
                       explanation: ''
                     }
                   ],
                   security: [
                     {
                       title: '45 CFR 164 Security and Privacy',
-                      checked: false,
+                      checked: null,
                       explanation: ''
                     }
                   ]
@@ -182,6 +175,98 @@ describe('assurances and compliance component', () => {
       ).toBeInTheDocument();
     });
 
+    test('renders MMIS correctly', async () => {
+      await setup(
+        {},
+        {
+          initialState: {
+            apd: {
+              adminCheck: false,
+              data: {
+                apdType: APD_TYPE.MMIS,
+                years: [2020, 2021],
+                activities: [
+                  {
+                    key: '1234',
+                    name: 'Program Administration'
+                  }
+                ],
+                assurancesAndCompliances: {
+                  procurement: [
+                    { title: 'SMM, Part 11', checked: null, explanation: '' },
+                    {
+                      title: '45 CFR Part 95.615',
+                      checked: null,
+                      explanation: ''
+                    },
+                    {
+                      title: '45 CFR Part 92.36',
+                      checked: null,
+                      explanation: ''
+                    }
+                  ],
+                  recordsAccess: [
+                    {
+                      title: '42 CFR Part 433.112(b)(5)-(9)',
+                      checked: null,
+                      explanation: ''
+                    },
+                    {
+                      title: '45 CFR Part 95.615',
+                      checked: null,
+                      explanation: ''
+                    },
+                    {
+                      title: 'SMM Section 11267',
+                      checked: null,
+                      explanation: ''
+                    }
+                  ],
+                  softwareRights: [
+                    {
+                      title: '45 CFR Part 95.617',
+                      checked: null,
+                      explanation: ''
+                    },
+                    {
+                      title: '42 CFR Part 431.300',
+                      checked: null,
+                      explanation: ''
+                    },
+                    { title: '45 CFR Part 164', checked: null, explanation: '' }
+                  ],
+                  independentVV: [
+                    {
+                      title: '45 CFR Part 95.626',
+                      checked: null,
+                      explanation: ''
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      );
+      expect(
+        screen.getByText(/Federal Citations and Justification/i)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Procurement Standards (Competition / Sole Source)')
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Access to Records, Reporting and Agency Attestations')
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          'Software & Ownership Rights, Federal Licenses, Information Safeguarding, HIPAA Compliance, and Progress Reports'
+        )
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText('Independent Verification and Validation (IV&V)')
+      ).toBeInTheDocument();
+    });
+
     test('dispatches when a citation is toggled yes/no', async () => {
       const { user } = await setup(
         {},
@@ -190,6 +275,7 @@ describe('assurances and compliance component', () => {
             apd: {
               adminCheck: false,
               data: {
+                apdType: APD_TYPE.HITECH,
                 years: [2020, 2021],
                 activities: [
                   {
@@ -341,6 +427,7 @@ describe('assurances and compliance component', () => {
                 enabled: true
               },
               data: {
+                apdType: APD_TYPE.MMIS,
                 years: [2020, 2021],
                 activities: [
                   {
@@ -351,47 +438,31 @@ describe('assurances and compliance component', () => {
                 assurancesAndCompliances: {
                   procurement: [
                     {
-                      title: '42 CFR Part 495.348',
-                      checked: null,
-                      explanation: ''
-                    },
-                    {
-                      title: 'SMM Section 11267',
-                      checked: null,
-                      explanation: ''
-                    },
-                    { title: '45 CFR 95.613', checked: null, explanation: '' },
-                    {
-                      title: '45 CFR Part 75.326',
-                      checked: null,
-                      explanation: ''
-                    }
-                  ],
-                  recordsAccess: [
-                    {
-                      title: '42 CFR Part 495.350',
-                      checked: null,
-                      explanation: 'some words'
-                    },
-                    {
-                      title: '42 CFR Part 495.352',
-                      checked: null,
-                      explanation: ''
-                    },
-                    {
-                      title: '42 CFR Part 495.346',
-                      checked: null,
-                      explanation: ''
-                    },
-                    {
-                      title: '42 CFR 433.112(b)',
+                      title: 'SMM, Part 11',
                       checked: null,
                       explanation: ''
                     },
                     {
                       title: '45 CFR Part 95.615',
                       checked: null,
-                      explanation: 'other words'
+                      explanation: ''
+                    },
+                    {
+                      title: '45 CFR Part 92.36',
+                      checked: null,
+                      explanation: ''
+                    }
+                  ],
+                  recordsAccess: [
+                    {
+                      title: '42 CFR Part 433.112(b)(5)-(9)',
+                      checked: null,
+                      explanation: 'some words'
+                    },
+                    {
+                      title: '45 CFR Part 95.615',
+                      checked: null,
+                      explanation: ''
                     },
                     {
                       title: 'SMM Section 11267',
@@ -400,11 +471,6 @@ describe('assurances and compliance component', () => {
                     }
                   ],
                   softwareRights: [
-                    {
-                      title: '42 CFR Part 495.360',
-                      checked: null,
-                      explanation: ''
-                    },
                     {
                       title: '45 CFR Part 95.617',
                       checked: null,
@@ -416,14 +482,14 @@ describe('assurances and compliance component', () => {
                       explanation: ''
                     },
                     {
-                      title: '42 CFR Part 433.112',
+                      title: '45 CFR Part 164',
                       checked: null,
                       explanation: ''
                     }
                   ],
-                  security: [
+                  independentVV: [
                     {
-                      title: '45 CFR 164 Security and Privacy',
+                      title: '45 CFR Part 95.626',
                       checked: null,
                       explanation: ''
                     }
@@ -436,7 +502,7 @@ describe('assurances and compliance component', () => {
       );
 
       const cfrFieldset = screen
-        .getByRole('link', { name: /42 CFR Part 495.348/i })
+        .getByRole('link', { name: /SMM, Part 11/i })
         // eslint-disable-next-line testing-library/no-node-access
         .closest('fieldset');
       const cfrWithin = within(cfrFieldset);
@@ -509,12 +575,20 @@ describe('assurances and compliance component', () => {
     expect(
       mapStateToProps({
         apd: {
+          adminCheck: {
+            enabled: false
+          },
           data: {
+            apdType: APD_TYPE.HITECH,
             assurancesAndCompliances: 'this gets mapped over'
           }
         }
       })
-    ).toEqual({ citations: 'this gets mapped over' });
+    ).toEqual({
+      adminCheck: false,
+      apdType: 'hitech',
+      citations: 'this gets mapped over'
+    });
   });
 
   it('maps dispatch to props', () => {
@@ -523,10 +597,12 @@ describe('assurances and compliance component', () => {
       complyingWithRecordsAccess: setComplyingWithRecordsAccess,
       complyingWithSecurity: setComplyingWithSecurity,
       complyingWithSoftwareRights: setComplyingWithSoftwareRights,
+      complyingWithIndependentVV: setComplyingWithIndependentVV,
       justificationForProcurement: setJustificationForProcurement,
       justificationForRecordsAccess: setJustificationForRecordsAccess,
       justificationForSecurity: setJustificationForSecurity,
-      justificationForSoftwareRights: setJustificationForSoftwareRights
+      justificationForSoftwareRights: setJustificationForSoftwareRights,
+      justificationForIndependentVV: setJustificationForIndependentVV
     });
   });
 

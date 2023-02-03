@@ -36,7 +36,6 @@ import {
 import { ARIA_ANNOUNCE_CHANGE, APD_CREATE_SUCCESS_MSG } from '../aria';
 import { LOAD_BUDGET } from '../budget';
 import axios from '../../../util/api';
-import regulations from '../../../util/regulations';
 import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
 import { t } from '../../../i18n';
 import { ALERT_SUCCESS } from '../alert';
@@ -389,67 +388,6 @@ describe('application-level actions', () => {
         { type: SELECT_APD_SUCCESS, data },
         { type: APD_ACTIVITIES_CHANGE, activities },
         { type: ADMIN_CHECK_TOGGLE, data: false },
-        { type: LOAD_BUDGET, budget: {} },
-        { type: 'FAKE_PUSH', pushRoute: testRoute },
-        {
-          type: ARIA_ANNOUNCE_CHANGE,
-          message:
-            'Your APD is loaded and ready to edit. Changes to this APD will be saved automatically.'
-        }
-      ];
-
-      await store.dispatch(
-        selectApd('apd-id', '/test', {
-          global,
-          pushRoute
-        })
-      );
-
-      expect(store.getActions()).toEqual(expectedActions);
-      expect(global.localStorage.setItem).toHaveBeenCalledWith(
-        'last-apd-id',
-        'apd-id'
-      );
-    });
-
-    it('does the same, but queues a save if the federal citations is initially blank', async () => {
-      const activities = [
-        { name: 'Outcomes and metrics' },
-        { name: 'FFP and budget' }
-      ];
-      const data = {
-        apd: {
-          activities,
-          id: 'apd-id',
-          selected: 'apd goes here',
-          assurancesAndCompliances: {}
-        },
-        adminCheck: []
-      };
-      fetchMock.onGet('/apds/apd-id').reply(200, data);
-
-      const state = {
-        apd: {
-          byId: { apdID: 'hello there' }
-        }
-      };
-      const store = mockStore(state);
-      const testRoute = '/test';
-
-      const global = { localStorage: { setItem: jest.fn() } };
-      const pushRoute = route => ({ type: 'FAKE_PUSH', pushRoute: route });
-
-      const expectedActions = [
-        { type: SELECT_APD_REQUEST },
-        { type: ARIA_ANNOUNCE_CHANGE, message: 'Your APD is loading.' },
-        { type: SELECT_APD_SUCCESS, data },
-        { type: APD_ACTIVITIES_CHANGE, activities },
-        { type: ADMIN_CHECK_TOGGLE, data: false },
-        {
-          type: EDIT_APD,
-          path: '/assurancesAndCompliances',
-          value: regulations
-        },
         { type: LOAD_BUDGET, budget: {} },
         { type: 'FAKE_PUSH', pushRoute: testRoute },
         {
