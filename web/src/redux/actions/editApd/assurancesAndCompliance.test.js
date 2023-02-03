@@ -85,7 +85,7 @@ describe('APD edit actions for assurance and compliance', () => {
     });
   });
 
-  it('dispatches an actino for setting the justification for a independent verification and validation citation', () => {
+  it('dispatches an action for setting the justification for a independent verification and validation citation', () => {
     expect(setJustificationForIndependentVV(9, 'this is some text')).toEqual({
       type: EDIT_APD,
       path: '/assurancesAndCompliances/independentVV/9/explanation',
