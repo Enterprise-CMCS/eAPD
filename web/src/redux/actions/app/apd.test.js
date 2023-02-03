@@ -36,7 +36,7 @@ import {
 import { ARIA_ANNOUNCE_CHANGE, APD_CREATE_SUCCESS_MSG } from '../aria';
 import { LOAD_BUDGET } from '../budget';
 import axios from '../../../util/api';
-import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
+import { APD_ACTIVITIES_CHANGE } from '../editApd/symbols';
 import { t } from '../../../i18n';
 import { ALERT_SUCCESS } from '../alert';
 

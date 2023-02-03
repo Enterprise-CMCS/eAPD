@@ -3,7 +3,6 @@ import AssurancesAndComplianceReadOnly from './AssurancesAndComplianceReadOnly';
 import { withDesign } from 'storybook-addon-designs';
 import { renderWithProvider } from 'apd-storybook-library';
 import { APD_TYPE } from '@cms-eapd/common';
-import { render } from 'react-dom';
 
 export default {
   title: 'Pages/Apd/Assurances and Compliance Read Only (Redux)',

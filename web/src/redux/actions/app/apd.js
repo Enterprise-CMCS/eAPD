@@ -23,7 +23,7 @@ import {
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from './symbols';
 import { loadBudget } from '../budget';
-import { APD_ACTIVITIES_CHANGE, EDIT_APD } from '../editApd/symbols';
+import { APD_ACTIVITIES_CHANGE } from '../editApd/symbols';
 import { alertApdCreateSuccess } from '../alert';
 import {
   ariaAnnounceApdCreateSuccess,
