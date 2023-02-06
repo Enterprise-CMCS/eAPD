@@ -484,23 +484,44 @@ export const updateStatePersonnel = ({
   return [];
 };
 
-// Todo: Add comment block documenting how this works
+/**
+ * Calculates the key state personnel total
+ * @param {Object} keyPersonnel The individual key state personnel
+ * @param {String} years The year of the key state personnel to calculate
+ * @returns {Number} the overall total of an individual key state
+ * personnel by year which is calculated as:
+ * Cost with Benefits x FTE
+ */
 export const calculateKeyStatePersonnelTotal = (keyPersonnel, year) => {
-  return Math.round(keyPersonnel?.costs[year] * keyPersonnel?.fte[year] || 0);
+  return keyPersonnel?.costs[year] * keyPersonnel?.fte[year] || 0;
 };
 
-// Todo: Add comment block documenting how this works
+/**
+ * Calculates the key state personnel medicaid total
+ * @param {Object} keyPersonnel The individual key state personnel
+ * @param {String} years The year of the key state personnel to calculate
+ * @returns {Number} the medicaid computable total of an individual key state
+ * personnel by year which is calculated as:
+ * Cost with Benefits x FTE x Medicaid Share(%)
+ */
 export const calculateKeyStatePersonnelMedicaid = (keyPersonnel, year) => {
-  return Math.round(
+  return (
     keyPersonnel?.costs[year] *
       keyPersonnel?.fte[year] *
       (keyPersonnel?.medicaidShare?.[year] / 100) || 0
   );
 };
 
-// Todo: Add comment block documenting how this works
+/**
+ * Calculates the key state personnel federal share total
+ * @param {Object} keyPersonnel The individual key state personnel
+ * @param {String} years The year of the key state personnel to calculate
+ * @returns {Number} the federal share total of an individual key state
+ * personnel by year which is calculated as:
+ * Cost with Benefits x FTE x Medicaid Share(%) x Federal Share(%)
+ */
 export const calculateKeyStatePersonnelFed = (keyPersonnel, year) => {
-  return Math.round(
+  return (
     keyPersonnel?.costs?.[year] *
       keyPersonnel?.fte?.[year] *
       (keyPersonnel?.medicaidShare?.[year] / 100) *
@@ -508,9 +529,16 @@ export const calculateKeyStatePersonnelFed = (keyPersonnel, year) => {
   );
 };
 
-// Todo: Add comment block documenting how this works
+/**
+ * Calculates the key state personnel state share total
+ * @param {Object} keyPersonnel The individual key state personnel
+ * @param {String} years The year of the key state personnel to calculate
+ * @returns {Number} the state share total of an individual key state
+ * personnel by year which is calculated as:
+ * Cost with Benefits x FTE x Medicaid Share(%) x State Share(%)
+ */
 export const calculateKeyStatePersonnelState = (keyPersonnel, year) => {
-  return Math.round(
+  return (
     keyPersonnel?.costs?.[year] *
       keyPersonnel?.fte?.[year] *
       (keyPersonnel?.medicaidShare?.[year] / 100) *
@@ -519,15 +547,15 @@ export const calculateKeyStatePersonnelState = (keyPersonnel, year) => {
 };
 
 /**
- * For MMIS APDs app the key state personnel costs to the budget
- * before iterating over the activities and adding those costs.
+ * For MMIS APDs add the key state personnel costs to the budget
+ * before iterating over the activities and adding those costs
  * @param {Object} budget The current budget object
  * @param {Array} years Array of years as a four-character year string (e.g., '2018')
  * @param {Array} keyPersonnel List of key personnel for the APD
  * @returns {Object} an updated budget with key state personnel costs included
  */
 export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
-  // Add key state personnel the default data structure
+  // Add to key state personnel the default data structure
   budget.mmis = {
     ...budget.mmis,
     keyStatePersonnel: getDefaultFundingSourceObject(years)
