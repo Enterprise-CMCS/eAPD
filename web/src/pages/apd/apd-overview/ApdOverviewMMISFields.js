@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { ChoiceList } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
 import {
@@ -33,8 +33,8 @@ const ApdOverviewMMISFields = ({
     trigger,
     clearErrors
   } = useForm({
-    mode: 'all',
-    reValidateMode: 'all',
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: joiResolver(mmisOverviewSchema),
     defaultValues: {
       medicaidBusinessAreas,
@@ -50,23 +50,12 @@ const ApdOverviewMMISFields = ({
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {}, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleBusinessAreas = e => {
-    setValue('medicaidBusinessAreas', {
-      ...medicaidBusinessAreas,
-      [e.target.value]: e.target.checked
-    });
-    setBusinessAreaField(e.target.value, e.target.checked);
-    trigger('medicaidBusinessAreas');
-  };
-
   const otherMedicaidBusinessAreaComponent = (
     <div className="ds-c-choice__checkedChild">
       <Controller
         name="otherMedicaidBusinessAreas"
         control={control}
-        render={({ field: { onBlur, ...props } }) => (
+        render={({ field: { onChange, onBlur, ...props } }) => (
           <TextArea
             {...props}
             value={otherMedicaidBusinessAreas}
@@ -76,14 +65,12 @@ const ApdOverviewMMISFields = ({
             data-cy="other_details"
             hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
             onBlur={onBlur}
-            onComponentBlur={onBlur}
             onChange={e => {
               setBusinessAreaField(
                 'otherMedicaidBusinessAreas',
                 e.target.value
               );
-              setValue('otherMedicaidBusinessAreas', e.target.value);
-              trigger();
+              onChange(e);
             }}
             errorMessage={
               adminCheck && errors?.otherMedicaidBusinessAreas?.message
@@ -96,11 +83,11 @@ const ApdOverviewMMISFields = ({
   );
 
   const handleBusinessAreas = e => {
+    setBusinessAreaField(e.target.value, e.target.checked);
     setValue('medicaidBusinessAreas', {
       ...medicaidBusinessAreas,
       [e.target.value]: e.target.checked
     });
-    setBusinessAreaField(e.target.value, e.target.checked);
     trigger();
   };
 
@@ -123,11 +110,7 @@ const ApdOverviewMMISFields = ({
     return choiceList;
   };
 
-  const businessAreaChoices = useMemo(
-    () => getBusinessAreaChoices(),
-    [medicaidBusinessAreas]
-  );
-
+  const businessAreaChoices = getBusinessAreaChoices();
   if (businessAreaChoices) {
     return (
       <div className="ds-u-margin-y--3" data-cy="businessAreasList">
@@ -137,6 +120,7 @@ const ApdOverviewMMISFields = ({
           render={({ field: { onBlur } }) => (
             <ChoiceList
               label="Medicaid Business Areas"
+              name="medicaidBusinessAreas"
               hint={
                 <div>
                   Select the Medicaid Enterprise Systems Business Area(s) that
@@ -162,7 +146,6 @@ const ApdOverviewMMISFields = ({
                 adminCheck && errors?.medicaidBusinessAreas?.message
               }
               errorPlacement="bottom"
-              name="medicaid-business-areas"
             />
           )}
         />

@@ -71,11 +71,6 @@ const ApdOverview = ({
   });
 
   useEffect(() => {
-    clearErrors('name');
-    trigger('name');
-  }, [name]);
-
-  useEffect(() => {
     if (adminCheck) {
       trigger();
     } else {
@@ -83,15 +78,23 @@ const ApdOverview = ({
     }
   }, [adminCheck]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const changeName = ({ target: { value } }) => {
+  // Since name can be edited from outside the component (ApdHeader),
+  // we need to set the value inside react hook form
+  // so the error message correctly reflects name changes
+  useEffect(() => {
+    setValue('name', name);
+    trigger('name');
+  }, [name]);
+
+  const onChangeName = ({ target: { value } }) => {
     setValue('name', value);
     setName(value);
   };
 
-  const onBlur = ({ target: { value } }) => {
+  const onBlurName = ({ target: { value } }) => {
     const apdNameInput = value;
     if (adminCheck) {
-      trigger();
+      trigger('name');
     }
 
     if (apdNameInput.trim() === '') {
@@ -210,9 +213,8 @@ const ApdOverview = ({
               className="remove-clearfix"
               name="name"
               value={name}
-              onChange={changeName}
-              onBlur={onBlur}
-              onComponentBlur={onBlur}
+              onBlur={onBlurName}
+              onChange={onChangeName}
               errorMessage={adminCheck && errors?.name?.message}
               errorPlacement="bottom"
             />
