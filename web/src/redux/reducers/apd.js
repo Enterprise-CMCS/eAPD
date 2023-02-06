@@ -115,30 +115,30 @@ export const getPatchesToAddYear = (state, year) => {
 
 export const addPatches = (apdType, year, years) => {
   const patches = [{ op: 'replace', path: '/years', value: years }];
+  const hitechPatches = patches.concat([
+    {
+      op: 'add',
+      path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
+      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+    },
+    {
+      op: 'add',
+      path: `/proposedBudget/incentivePayments/ehCt/${year}`,
+      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+    },
+    {
+      op: 'add',
+      path: `/proposedBudget/incentivePayments/epAmt/${year}`,
+      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+    },
+    {
+      op: 'add',
+      path: `/proposedBudget/incentivePayments/epCt/${year}`,
+      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+    }
+  ]);
   switch (apdType) {
     case APD_TYPE.HITECH:
-      let hitechPatches = patches.concat([
-        {
-          op: 'add',
-          path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
-          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        },
-        {
-          op: 'add',
-          path: `/proposedBudget/incentivePayments/ehCt/${year}`,
-          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        },
-        {
-          op: 'add',
-          path: `/proposedBudget/incentivePayments/epAmt/${year}`,
-          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        },
-        {
-          op: 'add',
-          path: `/proposedBudget/incentivePayments/epCt/${year}`,
-          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        }
-      ]);
       return hitechPatches;
     case APD_TYPE.MMIS:
       return patches;
