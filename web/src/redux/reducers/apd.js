@@ -39,83 +39,14 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-import { generateKey, defaultAPDYearOptions, APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, generateKey, defaultAPDYearOptions } from '@cms-eapd/common';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
   const apdType = state.data.apdType;
-  const patches = addPatches(apdType, year, years);
-
-  state.data.activities.forEach((activity, activityIndex) => {
-    activity.contractorResources.forEach((_, i) => {
-      patches.push({
-        op: 'add',
-        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`,
-        value: contractorDefaultHourly()
-      });
-      patches.push({
-        op: 'add',
-        path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`,
-        value: contractorDefaultYear()
-      });
-    });
-
-    activity.expenses.forEach((_, i) => {
-      patches.push({
-        op: 'add',
-        path: `/activities/${activityIndex}/expenses/${i}/years/${year}`,
-        value: expenseDefaultYear()
-      });
-    });
-
-    activity.statePersonnel.forEach((_, i) => {
-      patches.push({
-        op: 'add',
-        path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`,
-        value: statePersonDefaultYear()
-      });
-    });
-
-    patches.push({
-      op: 'add',
-      path: `/activities/${activityIndex}/costAllocation/${year}`,
-      value: costAllocationEntry()
-    });
-
-    patches.push({
-      op: 'add',
-      path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`,
-      value: costAllocationNarrative()
-    });
-
-    patches.push({
-      op: 'add',
-      path: `/activities/${activityIndex}/quarterlyFFP/${year}`,
-      value: quarterlyFFPEntry()
-    });
-  });
-
-  state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
-    patches.push({
-      op: 'add',
-      path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`,
-      value: 0
-    });
-
-    patches.push({
-      op: 'add',
-      path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
-      value: 0
-    });
-  });
-
-  return patches;
-};
-
-export const addPatches = (apdType, year, years) => {
-  const patches = [{ op: 'replace', path: '/years', value: years }];
-  const hitechPatches = patches.concat([
+  const hitechPatches = [
+    { op: 'replace', path: '/years', value: years },
     {
       op: 'add',
       path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
@@ -136,12 +67,140 @@ export const addPatches = (apdType, year, years) => {
       path: `/proposedBudget/incentivePayments/epCt/${year}`,
       value: { 1: 0, 2: 0, 3: 0, 4: 0 }
     }
-  ]);
+  ];
+  const mmisPatches = [{ op: 'replace', path: '/years', value: years }];
+
   switch (apdType) {
     case APD_TYPE.HITECH:
+      state.data.activities.forEach((activity, activityIndex) => {
+        activity.contractorResources.forEach((_, i) => {
+          hitechPatches.push({
+            op: 'add',
+            path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`,
+            value: contractorDefaultHourly()
+          });
+          hitechPatches.push({
+            op: 'add',
+            path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`,
+            value: contractorDefaultYear()
+          });
+        });
+
+        activity.expenses.forEach((_, i) => {
+          hitechPatches.push({
+            op: 'add',
+            path: `/activities/${activityIndex}/expenses/${i}/years/${year}`,
+            value: expenseDefaultYear()
+          });
+        });
+
+        activity.statePersonnel.forEach((_, i) => {
+          hitechPatches.push({
+            op: 'add',
+            path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`,
+            value: statePersonDefaultYear()
+          });
+        });
+
+        hitechPatches.push({
+          op: 'add',
+          path: `/activities/${activityIndex}/costAllocation/${year}`,
+          value: costAllocationEntry()
+        });
+
+        hitechPatches.push({
+          op: 'add',
+          path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`,
+          value: costAllocationNarrative()
+        });
+
+        hitechPatches.push({
+          op: 'add',
+          path: `/activities/${activityIndex}/quarterlyFFP/${year}`,
+          value: quarterlyFFPEntry()
+        });
+      });
+
+      state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
+        hitechPatches.push({
+          op: 'add',
+          path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`,
+          value: 0
+        });
+
+        hitechPatches.push({
+          op: 'add',
+          path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
+          value: 0
+        });
+      });
+
       return hitechPatches;
     case APD_TYPE.MMIS:
-      return patches;
+      state.data.activities.forEach((activity, activityIndex) => {
+        activity.contractorResources.forEach((_, i) => {
+          mmisPatches.push({
+            op: 'add',
+            path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`,
+            value: contractorDefaultHourly()
+          });
+          mmisPatches.push({
+            op: 'add',
+            path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`,
+            value: contractorDefaultYear()
+          });
+        });
+
+        activity.expenses.forEach((_, i) => {
+          mmisPatches.push({
+            op: 'add',
+            path: `/activities/${activityIndex}/expenses/${i}/years/${year}`,
+            value: expenseDefaultYear()
+          });
+        });
+
+        activity.statePersonnel.forEach((_, i) => {
+          mmisPatches.push({
+            op: 'add',
+            path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`,
+            value: statePersonDefaultYear()
+          });
+        });
+
+        mmisPatches.push({
+          op: 'add',
+          path: `/activities/${activityIndex}/costAllocation/${year}`,
+          value: costAllocationEntry()
+        });
+
+        mmisPatches.push({
+          op: 'add',
+          path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`,
+          value: costAllocationNarrative()
+        });
+
+        mmisPatches.push({
+          op: 'add',
+          path: `/activities/${activityIndex}/quarterlyFFP/${year}`,
+          value: quarterlyFFPEntry()
+        });
+      });
+
+      state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
+        mmisPatches.push({
+          op: 'add',
+          path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`,
+          value: 0
+        });
+
+        mmisPatches.push({
+          op: 'add',
+          path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
+          value: 0
+        });
+      });
+
+      return mmisPatches;
   }
 };
 
@@ -149,68 +208,8 @@ export const getPatchesToRemoveYear = (state, year) => {
   const index = state.data.years.indexOf(year);
   const apdType = state.data.apdType;
 
-  const patches = removePatches(apdType, year, index);
-
-  state.data.activities.forEach((activity, activityIndex) => {
-    activity.contractorResources.forEach((_, i) => {
-      patches.push({
-        op: 'remove',
-        path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`
-      });
-      patches.push({
-        op: 'remove',
-        path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`
-      });
-    });
-
-    activity.expenses.forEach((_, i) => {
-      patches.push({
-        op: 'remove',
-        path: `/activities/${activityIndex}/expenses/${i}/years/${year}`
-      });
-    });
-
-    activity.statePersonnel.forEach((_, i) => {
-      patches.push({
-        op: 'remove',
-        path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`
-      });
-    });
-
-    patches.push({
-      op: 'remove',
-      path: `/activities/${activityIndex}/costAllocation/${year}`
-    });
-
-    patches.push({
-      op: 'remove',
-      path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`
-    });
-
-    patches.push({
-      op: 'remove',
-      path: `/activities/${activityIndex}/quarterlyFFP/${year}`
-    });
-  });
-
-  state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
-    patches.push({
-      op: 'remove',
-      path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`
-    });
-
-    patches.push({
-      op: 'remove',
-      path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`
-    });
-  });
-
-  return patches;
-};
-
-export const removePatches = (apdType, year, index) => {
-  const patches = [{ op: 'remove', path: `/years/${index}` }];
-  const hitechPatches = patches.concat([
+  const hitechPatches = [
+    { op: 'remove', path: `/years/${index}` },
     {
       op: 'remove',
       path: `/proposedBudget/incentivePayments/ehAmt/${year}`
@@ -227,13 +226,119 @@ export const removePatches = (apdType, year, index) => {
       op: 'remove',
       path: `/proposedBudget/incentivePayments/epCt/${year}`
     }
-  ]);
+  ];
+
+  const mmisPatches = [{ op: 'remove', path: `/years/${index}` }];
 
   switch (apdType) {
     case APD_TYPE.HITECH:
+      state.data.activities.forEach((activity, activityIndex) => {
+        activity.contractorResources.forEach((_, i) => {
+          hitechPatches.push({
+            op: 'remove',
+            path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`
+          });
+          hitechPatches.push({
+            op: 'remove',
+            path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`
+          });
+        });
+
+        activity.expenses.forEach((_, i) => {
+          hitechPatches.push({
+            op: 'remove',
+            path: `/activities/${activityIndex}/expenses/${i}/years/${year}`
+          });
+        });
+
+        activity.statePersonnel.forEach((_, i) => {
+          hitechPatches.push({
+            op: 'remove',
+            path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`
+          });
+        });
+
+        hitechPatches.push({
+          op: 'remove',
+          path: `/activities/${activityIndex}/costAllocation/${year}`
+        });
+
+        hitechPatches.push({
+          op: 'remove',
+          path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`
+        });
+
+        hitechPatches.push({
+          op: 'remove',
+          path: `/activities/${activityIndex}/quarterlyFFP/${year}`
+        });
+      });
+
+      state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
+        hitechPatches.push({
+          op: 'remove',
+          path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`
+        });
+
+        hitechPatches.push({
+          op: 'remove',
+          path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`
+        });
+      });
+
       return hitechPatches;
     case APD_TYPE.MMIS:
-      return patches;
+      state.data.activities.forEach((activity, activityIndex) => {
+        activity.contractorResources.forEach((_, i) => {
+          mmisPatches.push({
+            op: 'remove',
+            path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`
+          });
+        });
+
+        activity.expenses.forEach((_, i) => {
+          mmisPatches.push({
+            op: 'remove',
+            path: `/activities/${activityIndex}/expenses/${i}/years/${year}`
+          });
+        });
+
+        activity.statePersonnel.forEach((_, i) => {
+          mmisPatches.push({
+            op: 'remove',
+            path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`
+          });
+        });
+
+        mmisPatches.push({
+          op: 'remove',
+          path: `/activities/${activityIndex}/costAllocation/${year}`
+        });
+
+        mmisPatches.push({
+          op: 'remove',
+          path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`
+        });
+
+        mmisPatches.push({
+          op: 'remove',
+          path: `/activities/${activityIndex}/quarterlyFFP/${year}`
+        });
+      });
+
+      state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
+        mmisPatches.push({
+          op: 'remove',
+          path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`
+        });
+
+        mmisPatches.push({
+          op: 'remove',
+          path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`
+        });
+      });
+
+      return mmisPatches;
   }
 };
 
@@ -261,13 +366,13 @@ const getHumanTimestamp = iso8601 => {
 const getKeyPersonnelSplit = (years, apdType) => {
   let split;
   switch (apdType) {
-    case APD_TYPE.HITECH:
+    case 'HITECH':
       split = years.reduce(
         (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
         {}
       );
       break;
-    case APD_TYPE.MMIS:
+    case 'MMIS':
       split = years.reduce(
         (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
         {}
