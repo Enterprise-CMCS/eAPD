@@ -261,13 +261,13 @@ const getHumanTimestamp = iso8601 => {
 const getKeyPersonnelSplit = (years, apdType) => {
   let split;
   switch (apdType) {
-    case 'HITECH':
+    case APD_TYPE.HITECH:
       split = years.reduce(
         (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
         {}
       );
       break;
-    case 'MMIS':
+    case APD_TYPE.MMIS:
       split = years.reduce(
         (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
         {}
