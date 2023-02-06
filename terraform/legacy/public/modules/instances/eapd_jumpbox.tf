@@ -20,9 +20,9 @@ resource "aws_instance" "eapd_jumpbox_bb" {
     root_block_device {
       encrypted = true
     }
-    metadata_options {
-        http_tokens = "required"
-    }
+#    metadata_options {
+#        http_tokens = "required"
+#    }
     associate_public_ip_address = false
     tags = {
         Name = "eAPD Jumpbox BB"
@@ -42,9 +42,9 @@ resource "aws_instance" "eapd_jumpbox_tf" {
     root_block_device {
       encrypted = true
     }
-    metadata_options {
-        http_tokens = "required"
-    }
+#    metadata_options {
+#        http_tokens = "required"
+#    }
     associate_public_ip_address = false
     tags = {
         Name = "eAPD Jumpbox TF"
