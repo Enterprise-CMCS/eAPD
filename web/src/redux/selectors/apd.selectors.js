@@ -42,29 +42,6 @@ export const selectSummary = ({
   yearOptions
 });
 
-// returns boolean fields in medicaidBusinessAreas after removing the text field otherMedicaidBusinessAreas
-export const selectMedicaidBusinessAreasBooleanFields = createSelector(
-  [selectApdData],
-  ({ apdOverview: { medicaidBusinessAreas } }) => {
-    const medicaidBusinessAreasBooleanFields = Object.assign(
-      {},
-      medicaidBusinessAreas
-    );
-    delete medicaidBusinessAreasBooleanFields.otherMedicaidBusinessAreas;
-    return medicaidBusinessAreasBooleanFields;
-  }
-);
-
-// returns the text field otherMedicaidBusinessAreas from medicaidBusinessAreas
-export const selectMedicaidBusinessAreasTextField = createSelector(
-  [selectApdData],
-  ({
-    apdOverview: {
-      medicaidBusinessAreas: { otherMedicaidBusinessAreas }
-    }
-  }) => otherMedicaidBusinessAreas
-);
-
 export const selectKeyPersonnel = state =>
   state.apd.data.keyStatePersonnel.keyPersonnel;
 export const selectKeyStatePersonnel = state =>

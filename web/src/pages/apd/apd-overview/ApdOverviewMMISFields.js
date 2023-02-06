@@ -2,17 +2,13 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { ChoiceList } from '@cmsgov/design-system';
 import { connect } from 'react-redux';
-import {
-  selectMedicaidBusinessAreasBooleanFields,
-  selectMedicaidBusinessAreasTextField
-} from '../../../redux/selectors/apd.selectors';
 
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 import {
-  mmisOverviewSchema,
-  MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING
+  MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING,
+  mmisOverviewSchema
 } from '@cms-eapd/common';
 
 import { setBusinessAreaField } from '../../../redux/actions/editApd';
@@ -22,7 +18,6 @@ import { selectAdminCheckEnabled } from '../../../redux/selectors/apd.selectors'
 
 const ApdOverviewMMISFields = ({
   medicaidBusinessAreas,
-  otherMedicaidBusinessAreas,
   setBusinessAreaField,
   adminCheck
 }) => {
@@ -37,8 +32,7 @@ const ApdOverviewMMISFields = ({
     reValidateMode: 'onChange',
     resolver: joiResolver(mmisOverviewSchema),
     defaultValues: {
-      medicaidBusinessAreas,
-      otherMedicaidBusinessAreas
+      medicaidBusinessAreas
     }
   });
 
@@ -53,12 +47,12 @@ const ApdOverviewMMISFields = ({
   const otherMedicaidBusinessAreaComponent = (
     <div className="ds-c-choice__checkedChild">
       <Controller
-        name="otherMedicaidBusinessAreas"
+        name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
         control={control}
         render={({ field: { onChange, onBlur, ...props } }) => (
           <TextArea
             {...props}
-            value={otherMedicaidBusinessAreas}
+            value={medicaidBusinessAreas.otherMedicaidBusinessAreas}
             label={
               MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
             }
@@ -73,7 +67,8 @@ const ApdOverviewMMISFields = ({
               onChange(e);
             }}
             errorMessage={
-              adminCheck && errors?.otherMedicaidBusinessAreas?.message
+              adminCheck &&
+              errors?.medicaidBusinessAreas?.otherMedicaidBusinessAreas?.message
             }
             errorPlacement="bottom"
           />
@@ -82,19 +77,18 @@ const ApdOverviewMMISFields = ({
     </div>
   );
 
-  const handleBusinessAreas = e => {
-    setBusinessAreaField(e.target.value, e.target.checked);
-    setValue('medicaidBusinessAreas', {
-      ...medicaidBusinessAreas,
-      [e.target.value]: e.target.checked
-    });
-    trigger();
-  };
-
   const getBusinessAreaChoices = () => {
+    const medicaidBusinessAreasBooleanFields = Object.assign(
+      {},
+      medicaidBusinessAreas
+    );
+    delete medicaidBusinessAreasBooleanFields.otherMedicaidBusinessAreas;
+
     let choiceList = [];
 
-    for (const [key, value] of Object.entries(medicaidBusinessAreas)) {
+    for (const [key, value] of Object.entries(
+      medicaidBusinessAreasBooleanFields
+    )) {
       let choice = {
         label: MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING[key],
         value: key,
@@ -108,6 +102,15 @@ const ApdOverviewMMISFields = ({
       choiceList.push(choice);
     }
     return choiceList;
+  };
+
+  const handleBusinessAreas = e => {
+    setBusinessAreaField(e.target.value, e.target.checked);
+    setValue('medicaidBusinessAreas', {
+      ...medicaidBusinessAreas,
+      [e.target.value]: e.target.checked
+    });
+    trigger();
   };
 
   const businessAreaChoices = getBusinessAreaChoices();
@@ -166,8 +169,7 @@ ApdOverviewMMISFields.defaultProps = {
 
 const mapStateToProps = state => ({
   adminCheck: selectAdminCheckEnabled(state),
-  medicaidBusinessAreas: selectMedicaidBusinessAreasBooleanFields(state),
-  otherMedicaidBusinessAreas: selectMedicaidBusinessAreasTextField(state)
+  medicaidBusinessAreas: state.apd.data.apdOverview.medicaidBusinessAreas
 });
 
 const mapDispatchToProps = {
