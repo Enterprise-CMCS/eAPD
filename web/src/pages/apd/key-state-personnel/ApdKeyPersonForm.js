@@ -295,7 +295,7 @@ const PersonForm = forwardRef(
     const tRoot = `apd.stateProfile.keyPersonnel${apdType}`;
 
     return (
-      <form index={index} onSubmit={onSubmit} aria-label="form">
+      <form id={`key-personnel-${index}`} onSubmit={onSubmit} aria-label="form">
         {/* Prevent implicit submission of the form. */}
         <button
           type="submit"

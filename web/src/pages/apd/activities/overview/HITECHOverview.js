@@ -121,14 +121,14 @@ const HITECHOverview = ({
       )}
 
       <div className="data-entry-box">
-        <label
+        <FormLabel
           id="label-for-summary"
           className="ds-c-label--full-width"
           hint={overviewHint}
           htmlFor="activity-short-overview-field"
         >
           {overviewLabel}
-        </label>
+        </FormLabel>
         <Controller
           name="summary"
           control={control}
