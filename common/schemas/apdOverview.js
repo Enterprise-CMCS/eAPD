@@ -118,7 +118,7 @@ export const mmisOverviewSchema = Joi.object({
   medicaidBusinessAreas: medicaidBusinessAreasSchema,
   otherMedicaidBusinessAreas: Joi.when('medicaidBusinessAreas.other', {
     is: true,
-    then: Joi.string().min(1).required().messages({
+    then: Joi.string().trim().min(1).required().messages({
       'string.base': 'Provide an other Medicaid Business Area(s).',
       'string.empty': 'Provide an other Medicaid Business Area(s).',
       'string.required': 'Provide an other Medicaid Business Area(s).'
