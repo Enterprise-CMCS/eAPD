@@ -117,7 +117,7 @@ const buildErrorList = (validationResults, apdId, activityIndexes) => {
     const sectionURLPath = {
       apdOverview: 'apd-overview',
       keyStatePersonnel: 'state-profile',
-      statePrioritiesAndScope: 'priorities-scope',
+      statePrioritiesAndScope: 'state-priorities-and-scope',
       previousActivities: 'previous-activities',
       activities: getActivitiesURLPath(errorPath),
       proposedBudget: 'proposed-budget',

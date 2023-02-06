@@ -230,7 +230,7 @@ written in YAML). Deployment scripts are written in Bash script.
 The backend API application uses these primary software libraries and
 frameworks:
 
-- Node.js 16.16.0, or higher 16.x version
+- Node.js 16.19.0, or higher 16.x version
 - Express web application server
 - Knex.js database query builder and migration management
 - Passport authentication middleware
