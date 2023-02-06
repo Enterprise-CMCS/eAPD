@@ -210,27 +210,27 @@ export const getPatchesToRemoveYear = (state, year) => {
 
 export const removePatches = (apdType, year, index) => {
   const patches = [{ op: 'remove', path: `/years/${index}` }];
+  const hitechPatches = patches.concat([
+    {
+      op: 'remove',
+      path: `/proposedBudget/incentivePayments/ehAmt/${year}`
+    },
+    {
+      op: 'remove',
+      path: `/proposedBudget/incentivePayments/ehCt/${year}`
+    },
+    {
+      op: 'remove',
+      path: `/proposedBudget/incentivePayments/epAmt/${year}`
+    },
+    {
+      op: 'remove',
+      path: `/proposedBudget/incentivePayments/epCt/${year}`
+    }
+  ]);
 
   switch (apdType) {
     case APD_TYPE.HITECH:
-      let hitechPatches = patches.concat([
-        {
-          op: 'remove',
-          path: `/proposedBudget/incentivePayments/ehAmt/${year}`
-        },
-        {
-          op: 'remove',
-          path: `/proposedBudget/incentivePayments/ehCt/${year}`
-        },
-        {
-          op: 'remove',
-          path: `/proposedBudget/incentivePayments/epAmt/${year}`
-        },
-        {
-          op: 'remove',
-          path: `/proposedBudget/incentivePayments/epCt/${year}`
-        }
-      ]);
       return hitechPatches;
     case APD_TYPE.MMIS:
       return patches;
