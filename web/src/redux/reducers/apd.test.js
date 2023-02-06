@@ -376,6 +376,7 @@ describe('APD reducer', () => {
   it('should handle adding an APD year', () => {
     const state = {
       data: {
+        apdType: APD_TYPE.HITECH,
         keyStatePersonnel: {
           keyPersonnel: [
             {
@@ -464,6 +465,7 @@ describe('APD reducer', () => {
 
     expect(apd(state, { type: ADD_APD_YEAR, value: '1741' })).toEqual({
       data: {
+        apdType: APD_TYPE.HITECH,
         keyStatePersonnel: {
           keyPersonnel: [
             {
@@ -587,6 +589,7 @@ describe('APD reducer', () => {
   it('should handle removing an APD year', () => {
     const state = {
       data: {
+        apdType: APD_TYPE.HITECH,
         keyStatePersonnel: {
           keyPersonnel: [
             {
@@ -708,6 +711,7 @@ describe('APD reducer', () => {
 
     expect(apd(state, { type: REMOVE_APD_YEAR, value: '1741' })).toEqual({
       data: {
+        apdType: APD_TYPE.HITECH,
         keyStatePersonnel: {
           keyPersonnel: [
             {
