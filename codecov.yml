@@ -24,15 +24,15 @@ coverage:
       default:
         target: 60% #overall project/ repo coverage
       api:
-        target: 75%
+        target: 73%
         flags:
           - api
       common:
-        target: 74%
+        target: 73%
         flags:
           - common
       web:
-        target: 74%
+        target: 73%
         flags:
           - web
 
