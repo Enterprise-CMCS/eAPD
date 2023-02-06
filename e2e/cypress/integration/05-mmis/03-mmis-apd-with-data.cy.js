@@ -1,3 +1,4 @@
+import { testMmisAPDOverviewWithData } from '../../helpers/apd/apd-overview.js';
 import { testStatePrioritiesAndScopeWithData } from '../../helpers/apd/state-priorities-and-scope';
 
 // Tests an MMIS APD by adding data and checking the results
@@ -56,9 +57,9 @@ describe(
     });
 
     describe('Form View', function () {
-      // describe('MMIS APD Overview', function () {
-      //   testAPDOverviewWithData();
-      // });
+      describe('MMIS APD Overview', function () {
+        testMmisAPDOverviewWithData();
+      });
 
       describe('first', function () {
         testStatePrioritiesAndScopeWithData();
