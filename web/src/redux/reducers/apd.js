@@ -45,33 +45,33 @@ import initialAssurances from '../../util/regulations';
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
   const apdType = state.data.apdType;
-  const hitechPatches = [
-    { op: 'replace', path: '/years', value: years },
-    {
-      op: 'add',
-      path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
-      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-    },
-    {
-      op: 'add',
-      path: `/proposedBudget/incentivePayments/ehCt/${year}`,
-      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-    },
-    {
-      op: 'add',
-      path: `/proposedBudget/incentivePayments/epAmt/${year}`,
-      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-    },
-    {
-      op: 'add',
-      path: `/proposedBudget/incentivePayments/epCt/${year}`,
-      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-    }
-  ];
-  const mmisPatches = [{ op: 'replace', path: '/years', value: years }];
+  const patches = [{ op: 'replace', path: '/years', value: years }];
 
   switch (apdType) {
     case APD_TYPE.HITECH:
+      let patches = patches.concat([
+        {
+          op: 'add',
+          path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
+          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+        },
+        {
+          op: 'add',
+          path: `/proposedBudget/incentivePayments/ehCt/${year}`,
+          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+        },
+        {
+          op: 'add',
+          path: `/proposedBudget/incentivePayments/epAmt/${year}`,
+          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+        },
+        {
+          op: 'add',
+          path: `/proposedBudget/incentivePayments/epCt/${year}`,
+          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+        }
+      ]);
+
       state.data.activities.forEach((activity, activityIndex) => {
         activity.contractorResources.forEach((_, i) => {
           hitechPatches.push({
@@ -139,12 +139,12 @@ export const getPatchesToAddYear = (state, year) => {
     case APD_TYPE.MMIS:
       state.data.activities.forEach((activity, activityIndex) => {
         activity.contractorResources.forEach((_, i) => {
-          mmisPatches.push({
+          patches.push({
             op: 'add',
             path: `/activities/${activityIndex}/contractorResources/${i}/hourly/${year}`,
             value: contractorDefaultHourly()
           });
-          mmisPatches.push({
+          patches.push({
             op: 'add',
             path: `/activities/${activityIndex}/contractorResources/${i}/years/${year}`,
             value: contractorDefaultYear()
@@ -152,7 +152,7 @@ export const getPatchesToAddYear = (state, year) => {
         });
 
         activity.expenses.forEach((_, i) => {
-          mmisPatches.push({
+          patches.push({
             op: 'add',
             path: `/activities/${activityIndex}/expenses/${i}/years/${year}`,
             value: expenseDefaultYear()
@@ -160,26 +160,26 @@ export const getPatchesToAddYear = (state, year) => {
         });
 
         activity.statePersonnel.forEach((_, i) => {
-          mmisPatches.push({
+          patches.push({
             op: 'add',
             path: `/activities/${activityIndex}/statePersonnel/${i}/years/${year}`,
             value: statePersonDefaultYear()
           });
         });
 
-        mmisPatches.push({
+        patches.push({
           op: 'add',
           path: `/activities/${activityIndex}/costAllocation/${year}`,
           value: costAllocationEntry()
         });
 
-        mmisPatches.push({
+        patches.push({
           op: 'add',
           path: `/activities/${activityIndex}/costAllocationNarrative/years/${year}`,
           value: costAllocationNarrative()
         });
 
-        mmisPatches.push({
+        patches.push({
           op: 'add',
           path: `/activities/${activityIndex}/quarterlyFFP/${year}`,
           value: quarterlyFFPEntry()
@@ -187,20 +187,20 @@ export const getPatchesToAddYear = (state, year) => {
       });
 
       state.data.keyStatePersonnel.keyPersonnel.forEach((_, i) => {
-        mmisPatches.push({
+        patches.push({
           op: 'add',
           path: `/keyStatePersonnel/keyPersonnel/${i}/costs/${year}`,
           value: 0
         });
 
-        mmisPatches.push({
+        patches.push({
           op: 'add',
           path: `/keyStatePersonnel/keyPersonnel/${i}/fte/${year}`,
           value: 0
         });
       });
 
-      return mmisPatches;
+      return patches;
   }
 };
 
