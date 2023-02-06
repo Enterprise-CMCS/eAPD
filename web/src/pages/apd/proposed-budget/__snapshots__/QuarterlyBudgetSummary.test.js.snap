@@ -33,12 +33,10 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       </colgroup>
       <thead>
         <tr>
-          <th>
-            <span
-              aria-hidden="true"
-            >
-              FFY 1
-            </span>
+          <th
+            aria-label="FFY 1"
+          >
+            FFY 1
           </th>
           <th
             className="ds-u-text-align--right"
@@ -247,12 +245,10 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       </colgroup>
       <thead>
         <tr>
-          <th>
-            <span
-              aria-hidden="true"
-            >
-              FFY 2
-            </span>
+          <th
+            aria-label="FFY 2"
+          >
+            FFY 2
           </th>
           <th
             className="ds-u-text-align--right"
@@ -546,12 +542,10 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       </colgroup>
       <thead>
         <tr>
-          <th>
-            <span
-              aria-hidden="true"
-            >
-              FFY 1
-            </span>
+          <th
+            aria-label="FFY 1"
+          >
+            FFY 1
           </th>
           <th
             className="ds-u-text-align--right"
@@ -762,12 +756,10 @@ exports[`quarterly budget summary component renders correctly if data is loaded 
       </colgroup>
       <thead>
         <tr>
-          <th>
-            <span
-              aria-hidden="true"
-            >
-              FFY 2
-            </span>
+          <th
+            aria-label="FFY 2"
+          >
+            FFY 2
           </th>
           <th
             className="ds-u-text-align--right"

@@ -27,12 +27,13 @@ const apdNewSchema = Joi.object({
       typeStatus: Joi.object({
         annualUpdate: Joi.boolean(),
         asNeededUpdate: Joi.boolean()
-      }),
-      updateList: Joi.array().min(1).required().messages({
-        'array.min': 'Select at least type of update.',
-        'any.only': 'Select at least one type of update.',
-        'any.required': 'Select at least one type of update.'
       })
+        .or('annualUpdate', 'asNeededUpdate', {
+          isPresent: resolved => resolved === true
+        })
+        .messages({
+          'object.missing': 'Select at least one type of update.'
+        })
     }),
     otherwise: Joi.when('mmisUpdate', {
       is: 'yes',
@@ -40,12 +41,13 @@ const apdNewSchema = Joi.object({
         typeStatus: Joi.object({
           annualUpdate: Joi.boolean(),
           asNeededUpdate: Joi.boolean()
-        }),
-        updateList: Joi.array().min(1).required().messages({
-          'array.min': 'Select at least one type of update.',
-          'any.only': 'Select at least one type of update.',
-          'any.required': 'Select at least one type of update.'
         })
+          .or('annualUpdate', 'asNeededUpdate', {
+            isPresent: resolved => resolved === true
+          })
+          .messages({
+            'object.missing': 'Select at least one type of update.'
+          })
       })
     })
   }),
