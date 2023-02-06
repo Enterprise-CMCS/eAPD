@@ -165,3 +165,27 @@ export const testAPDOverviewWithData = function () {
     cy.findByRole('button', { name: /Back to APD/i }).click({ force: true });
   });
 };
+
+export const testDefaultMmisAPDOverview = function () {
+  it('should verify the default values the FFYs and APD Overview', function () {
+    cy.url().should('include', '/apd-overview');
+    cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
+    cy.findByRole('radio', { name: /MMIS IAPD/i }).should('be.checked');
+    cy.findByRole('radio', { name: /HITECH IAPD/i }).should('not.be.checked');
+
+    cy.get('[type="checkbox"]').each(($year, index, list) => {
+      if (index === list.length - 1) {
+        cy.wrap($year).should('not.be.checked');
+      } else {
+        cy.wrap($year).should('be.checked');
+      }
+    });
+
+    cy.get('[id="program-introduction-field"]').should('have.value', '');
+    cy.get('[id="hit-overview-field"]').should('have.value', '');
+    cy.get('[id="hie-overview-field"]').should('have.value', '');
+    cy.get('[id="mmis-overview-field"]').should('have.value', '');
+
+    cy.waitForSave();
+  });
+};
