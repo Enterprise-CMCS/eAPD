@@ -59,8 +59,7 @@ const ApdOverview = ({
     formState: { errors },
     setValue,
     trigger,
-    clearErrors,
-    register
+    clearErrors
   } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
