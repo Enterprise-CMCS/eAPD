@@ -6,19 +6,20 @@ import { connect } from 'react-redux';
 import { titleCase } from 'title-case';
 import { selectActivityByIndex } from '../../../../redux/selectors/activities.selectors';
 import { removeActivity } from '../../../../redux/actions/editActivity';
+import { selectApdType } from '../../../../redux/selectors/apd.selectors';
 import NavLink from '../../../../layout/nav/NavLink';
 
 import { t } from '../../../../i18n';
 import DeleteModal from '../../../../components/DeleteModal';
 
-const makeTitle = ({ name, fundingSource }, i) => {
+const makeTitle = ({ name, fundingSource, apdType }, i) => {
   let title = `${t('activities.namePrefix')} ${i}`;
   if (name) {
     title += `: ${name}`;
   } else {
     title += `: Untitled`;
   }
-  if (fundingSource) {
+  if (fundingSource && apdType === 'HITECH') {
     title += ` (${fundingSource})`;
   }
   return titleCase(title);
@@ -30,7 +31,8 @@ const EntryDetails = ({
   activityId,
   fundingSource,
   name,
-  remove
+  remove,
+  apdType
 }) => {
   const container = useRef();
 
@@ -42,7 +44,7 @@ const EntryDetails = ({
   };
 
   const title = useMemo(
-    () => makeTitle({ name, fundingSource }, activityIndex + 1),
+    () => makeTitle({ name, fundingSource, apdType }, activityIndex + 1),
     [fundingSource, name, activityIndex]
   );
 
@@ -112,7 +114,8 @@ EntryDetails.propTypes = {
   activityId: PropTypes.string.isRequired,
   fundingSource: PropTypes.string,
   name: PropTypes.string,
-  remove: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired,
+  apdType: PropTypes.string
 };
 
 EntryDetails.defaultProps = {
@@ -124,7 +127,8 @@ const mapStateToProps = (state, { activityIndex }) => {
   const { fundingSource, activityId, name } = selectActivityByIndex(state, {
     activityIndex
   });
-  return { activityId: activityId, fundingSource, name };
+  const apdType = selectApdType(state);
+  return { activityId: activityId, fundingSource, name, apdType };
 };
 
 const mapDispatchToProps = {

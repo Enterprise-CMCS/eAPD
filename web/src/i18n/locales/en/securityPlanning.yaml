@@ -2,7 +2,7 @@ title: Security Planning
 
 securityInterfacePlan:
   instruction:
-    heading: Security and Interface Plan
+    label: Security and Interface Plan
     detail: >-
       Provide a comprehensive Security and Interface Plan for IT systems and
       installations involved in the administration of the Medicaid Program.
@@ -12,7 +12,7 @@ securityInterfacePlan:
 
 bcDrplan:
   instruction:
-    heading: Business Continuity and Disaster Recovery Plan
+    label: Business Continuity and Disaster Recovery Plan
     detail: >-
       Provide a comprehensive Business Continuity and Disaster Recovery Plan for
       IT systems and installations involved in the administration of the

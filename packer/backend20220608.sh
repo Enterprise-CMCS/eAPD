@@ -49,10 +49,10 @@ touch /app/api/logs/cms-hitech-apd-api.logs
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16.16.0, we care about minor/patch versions
+# We're using Node 16.19.0, we care about minor/patch versions
 export TERM="xterm"
-nvm install 16.16.0
-nvm alias default 16.16.0
+nvm install 16.19.0
+nvm alias default 16.19.0
 
 # Install pm2: https://www.npmjs.com/package/pm2
 # This is what'll manage running the API Node app. It'll keep it alive and make

@@ -17,56 +17,84 @@ const logger = loggerFactory('migrate-mongoose/hitech-mmis-split');
 export const up = async () => {
   // Grab all APDs
   await setup();
-  const apds = await APD.find();
+  const apds = await APD.find({
+    __t: { $exists: false },
+    yearOptions: { $exists: false },
+    apdOverview: { $exists: false }
+  });
+  logger.info(`Updating ${apds.length} APDs`);
+
   const apdIds = [];
   const budgetIds = [];
 
   const hitech = apds.map(apd => {
+    apdIds.push(apd._id);
+    if (apd.budget) {
+      budgetIds.push(apd.budget);
+    }
     const apdJSON = deepCopy(apd.toJSON());
+    delete apdJSON._id; // eslint-disable-line no-underscore-dangle
+
+    if (
+      apd.apdType &&
+      apd.yearOptions &&
+      apd.apdOverview &&
+      apd.apdOverview.updateStatus
+    ) {
+      logger.info(`Skipping APD Id ${apd._id} because it's already converted`);
+      return apdJSON;
+    }
 
     apdJSON.apdType = APD_TYPE.HITECH;
     const { years = [] } = apdJSON;
-    if (years.length === 0) {
-      apdJSON.years = defaultAPDYears();
-      apdJSON.yearOptions = defaultAPDYearOptions();
-      logger.info(
-        'Error with APD Id ${apd._id}, no years found, using default ${apdJSON.years}'
-      );
-    }
-    if (years.length < 3) {
-      apdJSON.yearOptions = defaultAPDYearOptions(years[0]);
-    }
-    if (years.length === 3) {
-      apdJSON.yearOptions = years;
+    if (!apdJSON.yearOptions) {
+      if (years.length === 0) {
+        apdJSON.years = defaultAPDYears();
+        apdJSON.yearOptions = defaultAPDYearOptions();
+        logger.info(
+          `Error with APD Id ${apd._id}, no years found, using default ${apdJSON.years}`
+        );
+      }
+      if (years.length < 3) {
+        apdJSON.yearOptions = defaultAPDYearOptions(years[0]);
+      }
+      if (years.length === 3) {
+        apdJSON.yearOptions = years;
+      }
     }
     apdJSON.apdOverview = {
       ...apdJSON.apdOverview,
       updateStatus: {
-        isUpdateAPD: false,
-        annualUpdate: false,
-        asNeededUpdate: false
+        isUpdateAPD: apdJSON?.apdOverview?.updateStatus?.isUpdateAPD || false,
+        annualUpdate: apdJSON?.apdOverview?.updateStatus?.annualUpdate || false,
+        asNeededUpdate:
+          apdJSON?.apdOverview?.updateStatus?.asNeededUpdate || false
       }
     };
     apdJSON.activities = apdJSON.activities.map(activity => ({
       ...activity,
       activityOverview: {
-        summary: activity.summary,
-        description: activity.description,
-        alternatives: activity.alternatives,
-        standardsAndConditions: activity.standardsAndConditions
+        summary: activity?.summary || activity?.activityOverview?.summary,
+        description:
+          activity?.description || activity?.activityOverview?.description,
+        alternatives:
+          activity?.alternatives || activity?.activityOverview?.alternatives,
+        standardsAndConditions:
+          activity?.standardsAndConditions ||
+          activity?.activityOverview?.standardsAndConditions
       },
       activitySchedule: {
-        plannedStartDate: activity.plannedStartDate,
-        plannedEndDate: activity.plannedEndDate
+        plannedStartDate:
+          activity?.plannedStartDate ||
+          activity?.activitySchedule?.plannedStartDate,
+        plannedEndDate:
+          activity?.plannedEndDate || activity?.activitySchedule?.plannedEndDate
       },
-      milestones: activity.schedule
+      milestones: activity?.schedule || activity?.milestones
     }));
 
-    apdIds.push(apd._id);
-    if (apd.budget) {
-      budgetIds.push(apd.budget);
-    }
-    delete apdJSON._id; // eslint-disable-line no-underscore-dangle
+    logger.info(`Updating APD Id ${apd._id} with new MMIS schema`);
+
     return apdJSON;
   });
 
