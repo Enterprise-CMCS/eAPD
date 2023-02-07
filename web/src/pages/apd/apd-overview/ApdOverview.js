@@ -208,7 +208,6 @@ const ApdOverview = ({
         render={() => {
           return (
             <TextField
-              {...register('name')}
               label="APD Name"
               className="remove-clearfix"
               name="name"

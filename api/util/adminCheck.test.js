@@ -2539,6 +2539,11 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
           fieldDescription: 'Select yes or no'
+        },
+        {
+          section: 'APD Overview',
+          link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
+          fieldDescription: 'Select at least one Medicaid Business Area.'
         }
       ]);
     }
