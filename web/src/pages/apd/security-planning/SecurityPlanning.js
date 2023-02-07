@@ -18,6 +18,8 @@ import { securityPlanningSchema } from '@cms-eapd/common';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Instruction from '../../../components/Instruction';
+import { t } from '../../../i18n';
+import { titleCase } from 'title-case';
 
 const SecurityPlanning = ({
   securityInterfacePlan,
@@ -53,7 +55,17 @@ const SecurityPlanning = ({
     <React.Fragment>
       <Section id="security-planning" resource="securityPlanning">
         <hr className="custom-hr" />
-        <div className="ds-u-margin-y--3">
+        <div className="data-entry-box ds-u-margin-y--3">
+          <label
+            className="ds-c-label--full-width"
+            htmlFor="security-interface-plan"
+          >
+            <h2 className="ds-c-label">
+              {titleCase(
+                t('securityPlanning.securityInterfacePlan.instruction.label')
+              )}
+            </h2>
+          </label>
           <Instruction
             labelFor="security-interface-plan"
             source="securityPlanning.securityInterfacePlan.instruction"
@@ -77,7 +89,12 @@ const SecurityPlanning = ({
             )}
           />
         </div>
-        <div className="ds-u-margin-y--3">
+        <div className="data-entry-box">
+          <label className="ds-c-label--full-width" htmlFor="bc-dr-plan">
+            <h2 className="ds-c-label">
+              {titleCase(t('securityPlanning.bcDrplan.instruction.label'))}
+            </h2>
+          </label>
           <Instruction
             labelFor="bc-dr-plan"
             source="securityPlanning.bcDrplan.instruction"

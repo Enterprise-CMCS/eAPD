@@ -235,6 +235,12 @@ Cypress.Commands.add('goToApdOverview', () => {
     .click();
 });
 
+Cypress.Commands.add('goToStatePrioritiesAndScope', () => {
+  cy.get('a.ds-c-vertical-nav__label')
+    .contains(/State Priorities And Scope/i)
+    .click();
+});
+
 Cypress.Commands.add('goToKeyStateProgramManagememt', () => {
   // Expand nav menu option
   cy.get('.ds-c-vertical-nav__label--parent')
@@ -590,6 +596,10 @@ Cypress.Commands.add('getActivityTable', { prevSubject: true }, subject => {
   });
 
   return rows;
+});
+
+Cypress.Commands.add('checkTinyMCE', (id, expectedValue) => {
+  cy.get(`[id="${id}"]`).should('have.value', expectedValue);
 });
 
 Cypress.Commands.add('injectAxeForA11y', () => {
