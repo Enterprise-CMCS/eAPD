@@ -3,9 +3,11 @@ codecov:
 
 comment:
   behavior: default
-  layout: 'reach,diff,flags,tree,reach,files,footer'
+  layout: 'reach,diff,flags,files,footer'
   require_changes: false
-  show_carryforward_flags: false
+  require_base: yes
+  require_head: yes
+  show_carryforward_flags: true
 
 github_checks:
   annotations: true
@@ -18,7 +20,41 @@ coverage:
     changes: false
     default_rules:
       flag_coverage_not_uploaded_behavior: include
-    project: true
+    project:
+      default:
+        target: 60% #overall project/ repo coverage
+      api:
+        target: 73%
+        flags:
+          - api
+      common:
+        target: 73%
+        flags:
+          - common
+      web:
+        target: 73%
+        flags:
+          - web
+
+flags:
+  api:
+    paths: #note, accepts globs, not regexes
+      - api/
+    carryforward: true
+  common:
+    paths:
+      - common/
+    carryforward: true
+  e2e:
+    paths:
+      - e2e/
+    carryforward: true
+  web:
+    paths:
+      - web/
+    carryforward: true
+    # If no Carryfoward flag specified in YAML, the
+    # default configuration is false.
 
 parsers:
   gcov:
@@ -51,6 +87,7 @@ ignore:
   - 'api/**/*.test.js'
   - 'api/**/*.endpoint.js'
   - 'api/**/index.js'
+  - 'api/**/shared.js'
   - 'api/**/migrations/**'
   - 'api/**/mongo-migrations/**'
   - 'api/**/openAPI.js'
@@ -67,7 +104,6 @@ ignore:
   - '.github/**'
   - 'bin/**'
   - 'documentation/**'
-  - 'e2e/**'
   - 'owasp/**'
   - 'packer/**'
   - 'postman/**'
