@@ -6191,7 +6191,7 @@ describe('budget calculate methods', () => {
                 2017: 50,
                 2018: 100
               },
-              hasCosts: false
+              hasCosts: true
             },
             {
               costs: { 2017: 200000, 2018: 150000 },

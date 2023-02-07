@@ -564,66 +564,70 @@ export const addKeyStatePersonnel = ({ budget, years, keyPersonnel }) => {
   let updatedBudget = deepCopy(budget);
   if (Array.isArray(keyPersonnel)) {
     keyPersonnel?.forEach(keyPersonnel => {
-      updatedBudget = years.reduce((budget, year) => {
-        const keyStatePersonnelTotal = calculateKeyStatePersonnelTotal(
-          keyPersonnel,
-          year
-        );
-        const keyStatePersonnelMedicaid = calculateKeyStatePersonnelMedicaid(
-          keyPersonnel,
-          year
-        );
-        const keyStatePersonnelFed = calculateKeyStatePersonnelFed(
-          keyPersonnel,
-          year
-        );
-        const keyStatePersonnelState = calculateKeyStatePersonnelState(
-          keyPersonnel,
-          year
-        );
+      if (keyPersonnel.hasCosts) {
+        updatedBudget = years.reduce((budget, year) => {
+          const keyStatePersonnelTotal = calculateKeyStatePersonnelTotal(
+            keyPersonnel,
+            year
+          );
+          const keyStatePersonnelMedicaid = calculateKeyStatePersonnelMedicaid(
+            keyPersonnel,
+            year
+          );
+          const keyStatePersonnelFed = calculateKeyStatePersonnelFed(
+            keyPersonnel,
+            year
+          );
+          const keyStatePersonnelState = calculateKeyStatePersonnelState(
+            keyPersonnel,
+            year
+          );
 
-        // Add total cost (before medicaid and fed-state split)
-        budget['mmis']['keyStatePersonnel'][year].total +=
-          keyStatePersonnelTotal;
-        budget['mmis']['keyStatePersonnel'].total.total +=
-          keyStatePersonnelTotal;
-        budget['mmis']['combined'][year].total += keyStatePersonnelTotal;
-        budget['mmis']['combined'].total.total += keyStatePersonnelTotal;
-        budget['combined'][year].total += keyStatePersonnelTotal;
-        budget['combined'].total.total += keyStatePersonnelTotal;
+          // Add total cost (before medicaid and fed-state split)
+          budget['mmis']['keyStatePersonnel'][year].total +=
+            keyStatePersonnelTotal;
+          budget['mmis']['keyStatePersonnel'].total.total +=
+            keyStatePersonnelTotal;
+          budget['mmis']['combined'][year].total += keyStatePersonnelTotal;
+          budget['mmis']['combined'].total.total += keyStatePersonnelTotal;
+          budget['combined'][year].total += keyStatePersonnelTotal;
+          budget['combined'].total.total += keyStatePersonnelTotal;
 
-        // Add federal cost (total cost * medicaid share * fed-split)
-        budget['mmis']['keyStatePersonnel'][year].federal +=
-          keyStatePersonnelFed;
-        budget['mmis']['keyStatePersonnel'].total.federal +=
-          keyStatePersonnelFed;
-        budget['mmis']['combined'][year].federal += keyStatePersonnelFed;
-        budget['mmis']['combined'].total.federal += keyStatePersonnelFed;
-        budget['combined'][year].federal += keyStatePersonnelFed;
-        budget['combined'].total.federal += keyStatePersonnelFed;
+          // Add federal cost (total cost * medicaid share * fed-split)
+          budget['mmis']['keyStatePersonnel'][year].federal +=
+            keyStatePersonnelFed;
+          budget['mmis']['keyStatePersonnel'].total.federal +=
+            keyStatePersonnelFed;
+          budget['mmis']['combined'][year].federal += keyStatePersonnelFed;
+          budget['mmis']['combined'].total.federal += keyStatePersonnelFed;
+          budget['combined'][year].federal += keyStatePersonnelFed;
+          budget['combined'].total.federal += keyStatePersonnelFed;
 
-        // Add state cost (total cost * medicaid share * state-split)
-        budget['mmis']['keyStatePersonnel'][year].state +=
-          keyStatePersonnelState;
-        budget['mmis']['keyStatePersonnel'].total.state +=
-          keyStatePersonnelState;
-        budget['mmis']['combined'][year].state += keyStatePersonnelState;
-        budget['mmis']['combined'].total.state += keyStatePersonnelState;
-        budget['combined'][year].state += keyStatePersonnelState;
-        budget['combined'].total.state += keyStatePersonnelState;
+          // Add state cost (total cost * medicaid share * state-split)
+          budget['mmis']['keyStatePersonnel'][year].state +=
+            keyStatePersonnelState;
+          budget['mmis']['keyStatePersonnel'].total.state +=
+            keyStatePersonnelState;
+          budget['mmis']['combined'][year].state += keyStatePersonnelState;
+          budget['mmis']['combined'].total.state += keyStatePersonnelState;
+          budget['combined'][year].state += keyStatePersonnelState;
+          budget['combined'].total.state += keyStatePersonnelState;
 
-        // Add medicaid cost (total cost * medicaid share)
-        budget['mmis']['keyStatePersonnel'][year].medicaid +=
-          keyStatePersonnelMedicaid;
-        budget['mmis']['keyStatePersonnel'].total.medicaid +=
-          keyStatePersonnelMedicaid;
-        budget['mmis']['combined'][year].medicaid += keyStatePersonnelMedicaid;
-        budget['mmis']['combined'].total.medicaid += keyStatePersonnelMedicaid;
-        budget['combined'][year].medicaid += keyStatePersonnelMedicaid;
-        budget['combined'].total.medicaid += keyStatePersonnelMedicaid;
+          // Add medicaid cost (total cost * medicaid share)
+          budget['mmis']['keyStatePersonnel'][year].medicaid +=
+            keyStatePersonnelMedicaid;
+          budget['mmis']['keyStatePersonnel'].total.medicaid +=
+            keyStatePersonnelMedicaid;
+          budget['mmis']['combined'][year].medicaid +=
+            keyStatePersonnelMedicaid;
+          budget['mmis']['combined'].total.medicaid +=
+            keyStatePersonnelMedicaid;
+          budget['combined'][year].medicaid += keyStatePersonnelMedicaid;
+          budget['combined'].total.medicaid += keyStatePersonnelMedicaid;
 
-        return budget;
-      }, updatedBudget);
+          return budget;
+        }, updatedBudget);
+      }
     });
   }
 
