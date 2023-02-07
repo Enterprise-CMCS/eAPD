@@ -84,7 +84,7 @@ const ApdOverview = ({
   useEffect(() => {
     setValue('name', name);
     trigger('name');
-  }, [name]);
+  }, [name, setValue, trigger]);
 
   const onChangeName = ({ target: { value } }) => {
     setValue('name', value);
@@ -244,6 +244,7 @@ ApdOverview.propTypes = {
   apdType: PropTypes.string,
   removeApdYear: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
+  setName: PropTypes.func.isRequired,
   years: PropTypes.arrayOf(PropTypes.string).isRequired,
   yearOptions: PropTypes.arrayOf(PropTypes.string).isRequired,
   adminCheck: PropTypes.bool

@@ -51,7 +51,7 @@ describe('APD overview component', () => {
 
   test('displays APD name', async () => {
     mockFlags({ enableMmis: false });
-    const {} = await setup();
+    await setup();
     expect(screen.getByLabelText('APD Name')).toHaveValue(defaultProps.name);
   });
 

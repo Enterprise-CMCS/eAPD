@@ -29,6 +29,7 @@ const defaultProps = {
 
 const setup = async (props = {}) => {
   let util;
+  // eslint-disable-next-line testing-library/no-unnecessary-act
   await act(async () => {
     util = renderWithConnection(
       <ApdOverviewMMISFields {...defaultProps} {...props} />
