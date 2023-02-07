@@ -72,9 +72,10 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
   });
 
   describe('Create APD', function () {
-    it('creates a default new APD and handles changing the name and summary', function () {
+    it('checks fields on newly created APD', function () {
       const options = { month: 'long', day: 'numeric', year: 'numeric' };
       const today = new Date();
+      const title = 'HITECH IAPD';
 
       cy.get('#apd-header-info').contains(
         `Created: ${today.toLocaleDateString('en-us', options)}`
@@ -84,17 +85,32 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         `Created: ${today.toLocaleDateString('en-us', options)}`
       );
 
-      cy.log('change the APD name');
+      // APD Header
+      cy.get(`[data-cy='apd-name-header']`).contains(`${title}`);
+
+      // APD Summary text box
+      cy.findByLabelText('APD Name').should('have.value', `${title}`);
+
+      cy.get('[type="checkbox"][checked]').should('have.length', 2);
+
+      cy.get('[id="program-introduction-field"]').should('have.value', '');
+    });
+  });
+
+  describe('APD Name', function () {
+    it('Allows APD name to be changed', function () {
       const title1 = 'HITECH IAPD';
       const title2 = 'My Awesome eAPD';
       const title3 = 'Magnus Archive Project';
 
-      cy.get('#apd-title-input').contains(`${title1}`);
+      cy.get(`[data-cy='apd-name-header']`).contains(`${title1}`);
 
       // Change name in APD Summary text box
       cy.findByLabelText('APD Name').clear().type(`${title2}`).blur();
+      cy.findByLabelText('APD Name').should('have.value', `${title2}`);
 
-      cy.get('#apd-title-input').contains(`${title2}`).click();
+      // APD name in Header reflects change
+      cy.get(`[data-cy='apd-name-header']`).contains(`${title2}`).click();
 
       // Change name via APD Header
       cy.focused()
@@ -103,7 +119,9 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         .type(`${title3}`)
         .blur();
 
-      cy.get('#apd-title-input').contains(`${title3}`);
+      // APD name in Summary text box reflects change
+      cy.get(`[data-cy='apd-name-header']`).contains(`${title3}`);
+      cy.findByLabelText('APD Name').should('have.value', `${title3}`);
 
       // Change name by clicking EDIT button
       cy.get('#title-edit-link').click();
@@ -114,10 +132,40 @@ describe('APD Basics', { tags: ['@apd', '@default'] }, function () {
         .type(`${title2}`)
         .blur();
 
-      cy.get('#apd-title-input').contains(`${title2}`);
-      cy.get('[type="checkbox"][checked]').should('have.length', 2);
+      cy.get(`[data-cy='apd-name-header']`).contains(`${title2}`);
+    });
+    it('Validates APD Name', function () {
+      const untitledName = 'Untitled APD';
+      const untitledErrorMessage = 'APD name cannot contain "untitled".';
+      const newName = 'Project of the Ages';
 
-      cy.get('[id="program-introduction-field"]').should('have.value', '');
+      // Clear the existing APD Name and see that the field populates with Untitled APD name
+      cy.goToApdOverview();
+      cy.findByLabelText('APD Name').clear().blur();
+      cy.findByLabelText('APD Name').should('have.value', `${untitledName}`);
+
+      // Check validation error in admin check
+      cy.turnOnAdminCheck();
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains('APD Overview').should('exist');
+        cy.get(list).contains(untitledErrorMessage).should('exist');
+      });
+      cy.collapseAdminCheck();
+
+      // Check validation error in form field
+      cy.goToApdOverview();
+      cy.contains(untitledErrorMessage).should('exist');
+
+      // Change name to see error removed from form field
+      cy.findByLabelText('APD Name').clear().type(`${newName}`).blur();
+      cy.findByLabelText('APD Name').should('have.value', `${newName}`);
+      cy.contains(untitledErrorMessage).should('not.exist');
+
+      // Check validation error removed from admin check
+      cy.expandAdminCheck();
+      cy.get('[class="eapd-admin-check-list"]').within(list => {
+        cy.get(list).contains(untitledErrorMessage).should('not.exist');
+      });
     });
   });
 

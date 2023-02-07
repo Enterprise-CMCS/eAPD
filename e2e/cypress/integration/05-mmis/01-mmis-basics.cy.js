@@ -186,10 +186,25 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.collapseAdminCheck();
       cy.goToApdOverview();
 
-      // Fill out field and check that validation errors change in admin check
+      // Check validation error exists within form
+      cy.contains('Select at least one Medicaid Business Area.').should(
+        'exist'
+      );
+
+      // Fill out field
       cy.findByRole('checkbox', {
         name: /Other/i
       }).click();
+
+      // Check validation errors change on page
+      cy.contains('Select at least one Medicaid Business Area.').should(
+        'not.exist'
+      );
+      cy.contains('Provide an other Medicaid Business Area(s).').should(
+        'exist'
+      );
+
+      // Check validation errors change in admin check
       cy.expandAdminCheck();
       cy.get('[class="eapd-admin-check-list"]').within(list => {
         // Selecting a choice will clear this error
@@ -209,6 +224,11 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.get(`[data-cy='other_details']`)
         .type('This info in the text box should clear the error.')
         .blur();
+      // Error cleared in form
+      cy.contains('Provide an other Medicaid Business Area(s).').should(
+        'not.exist'
+      );
+      // Error cleared in admin check
       cy.expandAdminCheck();
       cy.get('[class="eapd-admin-check-list"]').within(list => {
         cy.get(list).contains('APD Overview').should('not.exist');

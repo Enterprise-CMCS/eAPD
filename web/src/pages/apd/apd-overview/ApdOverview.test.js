@@ -49,6 +49,12 @@ describe('APD overview component', () => {
     resetLDMocks();
   });
 
+  test('displays APD name', async () => {
+    mockFlags({ enableMmis: false });
+    const {} = await setup();
+    expect(screen.getByLabelText('APD Name')).toHaveValue(defaultProps.name);
+  });
+
   test('user can add a year', async () => {
     mockFlags({ enableMmis: false });
     const { user } = await setup();
