@@ -1,9 +1,6 @@
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "eapd-terraform-state"
-  # Enable versioning so we can see the full revision history of our
-  aws_s3_bucket_public_access_block = true
-  block_public_acls = true
-  # state files
+  # Enable versioning so we can see the full revision history of our state files
   versioning {
     enabled = true
   }
