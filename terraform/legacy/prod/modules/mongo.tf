@@ -36,7 +36,6 @@ resource "aws_instance" "eapd_mongo" {
         Terraform = "True"
     }
     depends_on = [aws_security_group.eapd-production-mongo-ec2]
-    disable_api_termination = true # True in Prod
     user_data = <<-EOL
     #!/bin/bash -xe
     sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
