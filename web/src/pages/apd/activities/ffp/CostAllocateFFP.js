@@ -17,6 +17,7 @@ import {
   selectActivityByIndex,
   selectActivityTotalForBudgetByActivityIndex
 } from '../../../../redux/selectors/activities.selectors';
+import { getAPDYearRange } from '../../../../redux/reducers/apd';
 import { getUserStateOrTerritory } from '../../../../redux/selectors/user.selector';
 import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import CostAllocationRows, {
@@ -24,7 +25,7 @@ import CostAllocationRows, {
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
 
-import { costAllocationSchema as schema } from '@cms-eapd/common';
+import { APD_TYPE, costAllocationSchema as schema } from '@cms-eapd/common';
 
 const AllFFYsSummaryNarrative = ({
   activityName,
@@ -104,6 +105,7 @@ AllFFYsSummaryNarrative.propTypes = {
 const CostAllocateFFP = ({
   activityIndex,
   activityName,
+  apdType,
   costAllocation,
   costSummary,
   otherFunding,
@@ -111,7 +113,8 @@ const CostAllocateFFP = ({
   isViewOnly,
   setFundingSplit,
   stateName,
-  adminCheck
+  adminCheck,
+  year
 }) => {
   const {
     control,
@@ -129,6 +132,7 @@ const CostAllocateFFP = ({
   });
 
   useEffect(() => {
+    console.log({ apdType });
     if (adminCheck) {
       trigger();
     } else {
@@ -317,40 +321,40 @@ const CostAllocateFFP = ({
             </Fragment>
           )}
 
-          <div className="data-entry-box ds-u-margin-bottom--5">
-            {!isViewOnly && (
-              <Instruction
-                source="activities.costAllocate.ffp.quarterlyFFPInstruction"
-                headingDisplay={{
-                  level: 'p',
-                  className: 'ds-h4'
-                }}
+          {apdType === APD_TYPE.HITECH && (
+            <div className="data-entry-box ds-u-margin-bottom--5">
+              {!isViewOnly && (
+                <Instruction
+                  source="activities.costAllocate.ffp.quarterlyFFPInstruction"
+                  headingDisplay={{
+                    level: 'p',
+                    className: 'ds-h4'
+                  }}
+                />
+              )}
+
+              {isViewOnly && (
+                <h4>
+                  {titleCase(
+                    t(
+                      'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
+                    )
+                  )}
+                </h4>
+              )}
+
+              <CostAllocateFFPQuarterly
+                activityIndex={activityIndex}
+                activityId={activityId}
+                isViewOnly={isViewOnly}
+                year={ffy}
               />
-            )}
-
-            {isViewOnly && (
-              <h4>
-                {titleCase(
-                  t(
-                    'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
-                  )
-                )}
-              </h4>
-            )}
-
-            <CostAllocateFFPQuarterly
-              activityIndex={activityIndex}
-              activityId={activityId}
-              isViewOnly={isViewOnly}
-              year={ffy}
-            />
-          </div>
+            </div>
+          )}
         </div>
       ))}
 
-      <h3 className="subsection--title ds-h3">
-        FFY {Object.keys(years)[0]}-{Object.keys(years).pop()} Totals
-      </h3>
+      <h3 className="subsection--title ds-h3">FFY {year} Totals</h3>
       <AllFFYsSummaryNarrative
         activityName={activityName}
         costAllocation={costAllocation}
@@ -365,13 +369,15 @@ CostAllocateFFP.propTypes = {
   activityId: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityName: PropTypes.string.isRequired,
+  apdType: PropTypes.string,
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
   otherFunding: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired,
-  adminCheck: PropTypes.bool
+  adminCheck: PropTypes.bool,
+  year: PropTypes.string.isRequired
 };
 
 CostAllocateFFP.defaultProps = {
@@ -396,11 +402,13 @@ const mapStateToProps = (
   return {
     activityId: activity.activityId,
     activityName: activity.name || 'Untitled',
+    apdType: state.apd.data.apdType,
     costAllocation: getCostAllocation(state, { activityIndex }),
     costSummary: getCostSummary(state, { activityIndex }),
     stateName: getState(state).name,
     otherFunding: activityTotal.data.otherFunding,
-    adminCheck: selectAdminCheckEnabled(state)
+    adminCheck: selectAdminCheckEnabled(state),
+    year: getAPDYearRange(state)
   };
 };
 
