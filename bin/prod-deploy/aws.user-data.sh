@@ -220,23 +220,22 @@ yarn install --frozen-lockfile --non-interactive --production --network-timeout 
 #yarn rebuild knex ### TODO use when yarn is updated
 yarn add --force knex
 yarn add newrelic
-cp node_modules/newrelic/newrelic.js api/newrelic.js
+cp node_modules/newrelic/newrelic.js api/newrelic.cjs
 
 cd api
-yarn build
 
-sed -i 's|My Application|eAPD API|g' newrelic.js
-sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.js
-sed -i "1 s|^|require('newrelic');\n|" main.js
+sed -i 's|My Application|eAPD API|g' newrelic.cjs
+sed -i 's|license key here|__NEW_RELIC_LICENSE_KEY__|g' newrelic.cjs
+sed -i "1 s|^|import('newrelic');\n|" main.js
 
 # pm2 wants an ecosystem file that describes the apps to run and sets any
 # environment variables they need.  The environment variables are sensitive,
 # so we won't put them here.  Instead, the CI/CD process should replace the
 # "ECOSYSTEM" placeholder below with a base64-encoded JSON string of an
 # ecosystem file.
-echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.js
+echo "__ECOSYSTEM__" | base64 --decode > ecosystem.config.cjs
 # Start it up
-pm2 start ecosystem.config.js
+pm2 start ecosystem.config.cjs
 E_USER
 
 # Restart New Relic Infrastructure Monitor
@@ -245,6 +244,6 @@ systemctl start newrelic-infra
 
 # Setup pm2 to start itself at machine launch, and save its current
 # configuration to be restored when it starts
-su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.16.0/bin /home/ec2-user/.nvm/versions/node/v16.16.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
+su - ec2-user -c '~/.bash_profile; sudo env PATH=$PATH:/home/ec2-user/.nvm/versions/node/v16.19.0/bin /home/ec2-user/.nvm/versions/node/v16.19.0/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user'
 su - ec2-user -c 'pm2 save'
 su - ec2-user -c 'pm2 restart "eAPD API"'

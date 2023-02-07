@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-exports.up = async knex => {
+export const up = async knex => {
   await knex.schema.table('auth_affiliations', table => {
     table.date('expires_at').comment('expiration date');
   });
@@ -34,7 +34,7 @@ exports.up = async knex => {
   );
 };
 
-exports.down = knex => {
+export const down = knex => {
   return knex.schema.table('auth_affiliations', table => {
     table.dropColumn('expires_at');
   });

@@ -3,54 +3,16 @@
   "info": {
     "title": "CMS HITECH APD API",
     "description": "The API for the CMS HITECH APD app.",
-    "version": "1.0.0"
+    "version": "0.0.1"
   },
   "paths": {
-    "/states/{stateId}/affiliations": {
+    "/affiliations/me": {
       "get": {
         "tags": ["Affiliations"],
-        "description": "Get a list of all user affiliations for a US State",
-        "parameters": [
-          {
-            "name": "stateId",
-            "in": "path",
-            "description": "2-letter US State or Territory abbreviation, lowercase",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "status",
-            "description": "The filter status of the affiliations for this US State",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": ["pending", "active", "inactive"]
-            }
-          }
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "filter_status": {
-                    "type": "string",
-                    "description": "The filter status of the affiliations for this US State",
-                    "enum": ["pending", "active", "inactive"]
-                  }
-                }
-              }
-            }
-          }
-        },
+        "description": "Get the current affiliations for the logged in user",
         "responses": {
           "200": {
-            "description": "List of all user affiliations for a US State",
+            "description": "A list of affiliations for the logged in user",
             "content": {
               "application/json": {
                 "schema": {
@@ -62,36 +24,40 @@
                         "type": "integer",
                         "description": "ID of record"
                       },
-                      "user_id": {
+                      "userId": {
                         "type": "string",
                         "description": "ID of user"
                       },
-                      "state_id": {
+                      "displayName": {
+                        "type": "string",
+                        "description": "The full name of the user"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "The email address of the user"
+                      },
+                      "stateId": {
                         "type": "string",
                         "description": "2-letter US State or Territory abbreviation, lowercase"
-                      },
-                      "role_id": {
-                        "type": "integer",
-                        "description": "ID of the role applied to this user for this US State"
                       },
                       "status": {
                         "type": "string",
                         "description": "The status of the user role for this US State",
                         "enum": ["requested", "approved", "denied", "revoked"]
                       },
-                      "created_at": {
+                      "role": {
+                        "type": "string",
+                        "description": "The role applied to this user for this US State"
+                      },
+                      "createdAt": {
                         "type": "string",
                         "format": "date-time",
                         "description": "Timestamp of record creation"
                       },
-                      "updated_at": {
+                      "updatedAt": {
                         "type": "string",
                         "format": "date-time",
                         "description": "Timestamp of last update"
-                      },
-                      "updated_by": {
-                        "type": "string",
-                        "description": "ID of the user who last updated this record"
                       }
                     }
                   }
@@ -99,210 +65,9 @@
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
+          "401": { "description": "The user is not logged in" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "tags": ["Affiliations"],
-        "description": "Create a request for the currently logged in user to be affiliated with a US State",
-        "parameters": [
-          {
-            "name": "stateId",
-            "in": "path",
-            "description": "2-letter US State or Territory abbreviation, lowercase",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Record was created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "description": "ID of record"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Record exists, or US State ID is invalid"
-          },
-          "401": {
-            "description": "The user is not logged in"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/states/{stateId}/affiliations/{id}": {
-      "get": {
-        "tags": ["Affiliations"],
-        "description": "Get a single user affiliation with a US State",
-        "parameters": [
-          {
-            "name": "stateId",
-            "in": "path",
-            "description": "2-letter US State or Territory abbreviation, lowercase",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of record",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A single user affiliation with a US State",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "description": "ID of record"
-                    },
-                    "user_id": {
-                      "type": "string",
-                      "description": "ID of user"
-                    },
-                    "state_id": {
-                      "type": "string",
-                      "description": "2-letter US State or Territory abbreviation, lowercase"
-                    },
-                    "role_id": {
-                      "type": "integer",
-                      "description": "ID of the role applied to this user for this US State"
-                    },
-                    "status": {
-                      "type": "string",
-                      "description": "The status of the user role for this US State",
-                      "enum": ["requested", "approved", "denied", "revoked"]
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Timestamp of record creation"
-                    },
-                    "updated_at": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Timestamp of last update"
-                    },
-                    "updated_by": {
-                      "type": "string",
-                      "description": "ID of the user who last updated this record"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The stateId and affiliation ID do not correspond to a known record"
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "patch": {
-        "tags": ["Affiliations"],
-        "description": "Update a user affiliation with a US State",
-        "parameters": [
-          {
-            "name": "stateId",
-            "in": "path",
-            "description": "2-letter US State or Territory abbreviation, lowercase",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of record",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "roleId": {
-                    "type": "integer",
-                    "description": "ID of the role applied to this user for this US State"
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "The status of the user role for this US State",
-                    "enum": ["requested", "approved", "denied", "revoked"]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Record was updated"
-          },
-          "400": {
-            "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid"
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/apds": {
@@ -320,10 +85,7 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
-                        "type": "number",
-                        "description": "APD ID"
-                      },
+                      "id": { "type": "number", "description": "APD ID" },
                       "created": {
                         "type": "string",
                         "format": "date-time",
@@ -340,9 +102,7 @@
                       },
                       "years": {
                         "type": "array",
-                        "items": {
-                          "type": "number"
-                        }
+                        "items": { "type": "number" }
                       }
                     }
                   }
@@ -350,18 +110,12 @@
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       },
       "post": {
         "tags": ["APDs"],
@@ -373,23 +127,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/apd"
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/hitech" },
+                    { "$ref": "#/components/schemas/mmis" }
+                  ]
                 }
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/apds/{id}": {
@@ -403,9 +154,7 @@
             "in": "path",
             "description": "The ID of the apd to get",
             "required": true,
-            "schema": {
-              "type": "number"
-            }
+            "schema": { "type": "number" }
           }
         ],
         "responses": {
@@ -414,26 +163,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/apd"
+                  "oneOf": [
+                    { "$ref": "#/components/schemas/hitech" },
+                    { "$ref": "#/components/schemas/mmis" }
+                  ]
                 }
               }
             }
           },
-          "400": {
-            "description": "The apd ID does not match any known apds"
-          },
-          "401": {
+          "401": { "description": "The user is not logged in" },
+          "403": {
             "description": "The apd ID does not match any known apds for the user"
           },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
+          "404": { "description": "The apd does not exist" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       },
       "patch": {
         "tags": ["APDs"],
@@ -445,9 +189,7 @@
             "in": "path",
             "description": "The ID of the apd to update",
             "required": true,
-            "schema": {
-              "type": "number"
-            }
+            "schema": { "type": "number" }
           }
         ],
         "requestBody": {
@@ -485,7 +227,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/apd"
+                  "type": "object",
+                  "properties": {
+                    "apd": {
+                      "oneOf": [
+                        { "$ref": "#/components/schemas/hitech" },
+                        { "$ref": "#/components/schemas/mmis" }
+                      ]
+                    },
+                    "budget": {
+                      "oneOf": [
+                        { "$ref": "#/components/schemas/hitechBudget" },
+                        { "$ref": "#/components/schemas/mmisBudget" }
+                      ]
+                    },
+                    "adminCheck": { "$ref": "#/components/schemas/adminCheck" }
+                  }
                 }
               }
             }
@@ -495,41 +252,28 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
-                        "properties": {
-                          "path": {
-                            "type": "string",
-                            "description": "A JSON Pointer path whose patched value is invalid"
-                          }
-                        }
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "If the requested patch caused a validation failure, the API will return a list of invalid paths",
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "description": "A JSON Pointer path whose patched value is invalid"
                       }
-                    },
-                    {
-                      "type": "null",
-                      "description": "If the requested patch failed for unknown reasons, nothing will be returned"
                     }
-                  ]
+                  }
                 }
               }
             }
           },
-          "401": {
+          "401": { "description": "The user is not logged in" },
+          "403": {
             "description": "The apd ID does not match any known apds for the user"
           },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
+          "404": { "description": "The apd does not exist" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       },
       "delete": {
         "tags": ["APDs"],
@@ -541,30 +285,21 @@
             "in": "path",
             "description": "The ID of the apd to archive",
             "required": true,
-            "schema": {
-              "type": "number"
-            }
+            "schema": { "type": "number" }
           }
         ],
         "responses": {
-          "204": {
-            "description": "The APD was archived"
-          },
-          "400": {
-            "description": "Invalid request, such as requesting to archive an APD that is not editable"
-          },
-          "401": {
+          "204": { "description": "The APD was archived" },
+          "400": { "description": "The apd is not in draft" },
+          "401": { "description": "The user is not logged in" },
+          "403": {
             "description": "The apd ID does not match any known apds for the user"
           },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
+          "404": {
+            "description": "Invalid request, such as requesting to archive an APD that is not editable"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/apds/{id}/files": {
@@ -578,9 +313,7 @@
             "in": "path",
             "description": "The ID of the apd the file is associated with",
             "required": true,
-            "schema": {
-              "type": "number"
-            }
+            "schema": { "type": "number" }
           }
         ],
         "requestBody": {
@@ -623,21 +356,53 @@
           "400": {
             "description": "Invalid request, such as requesting to archive an APD that is not editable"
           },
-          "401": {
+          "401": { "description": "The user is not logged in" },
+          "403": {
             "description": "The apd ID does not match any known apds for the user"
           },
+          "404": { "description": "The apd ID does not match any known apds" },
+          "415": { "description": "The file is not a valid format" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/apds/{id}/files/{fileID}": {
+      "get": {
+        "tags": ["APDs", "files"],
+        "summary": "Get a file associated with an APD",
+        "description": "Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the apd the file is associated with",
+            "required": true,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "fileID",
+            "in": "path",
+            "description": "The ID of the file to get",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "binary" } }
+            }
+          },
+          "400": {
+            "description": "The file does not belong to the APD or does not exist"
+          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
-          },
-          "415": {
-            "description": "The file is not a valid format"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/apds/{id}/events": {
@@ -651,9 +416,7 @@
             "in": "path",
             "description": "The ID of the apd the event is associated with",
             "required": true,
-            "schema": {
-              "type": "number"
-            }
+            "schema": { "type": "number" }
           }
         ],
         "requestBody": {
@@ -692,64 +455,13 @@
               }
             }
           },
-          "400": {
-            "description": "The apd ID does not match any known apds"
-          },
-          "401": {
+          "401": { "description": "The user is not logged in" },
+          "403": {
             "description": "The apd ID does not match any known apds for the user"
           },
-          "403": {
-            "description": "The user does not have permission to perform this activity"
-          }
+          "404": { "description": "The apd ID does not match any known apds" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/apds/{id}/files/{fileID}": {
-      "get": {
-        "tags": ["APDs", "files"],
-        "summary": "Get a file associated with an APD",
-        "description": "Returns a file that is associated with a given APD. This method returns a data blob with no information about the contents (such as the content-type); it is the responsibility of the consumer to understand the context of the file.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the apd the file is associated with",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "fileID",
-            "in": "path",
-            "description": "The ID of the file to get",
-            "required": true,
-            "schema": {
-              "type": "number"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The file",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The file does not belong to the APD or does not exist"
-          }
-        }
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/auth/activities": {
@@ -767,10 +479,7 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
-                        "type": "number",
-                        "description": "Activity ID"
-                      },
+                      "id": { "type": "number", "description": "Activity ID" },
                       "name": {
                         "type": "string",
                         "description": "Activity name"
@@ -781,18 +490,12 @@
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/auth/roles": {
@@ -810,14 +513,8 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
-                        "type": "number",
-                        "description": "Role ID"
-                      },
-                      "name": {
-                        "type": "string",
-                        "description": "Role name"
-                      },
+                      "id": { "type": "number", "description": "Role ID" },
+                      "name": { "type": "string", "description": "Role name" },
                       "activities": {
                         "type": "array",
                         "items": {
@@ -831,18 +528,265 @@
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
           }
         },
-        "security": [
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/state/{stateId}": {
+      "get": {
+        "tags": ["Authentication and authorization"],
+        "parameters": [
           {
-            "bearerAuth": []
+            "name": "stateId",
+            "in": "path",
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "required": true,
+            "schema": { "type": "string" }
           }
-        ]
+        ],
+        "summary": "Exchanges a user's token from one state to another.",
+        "description": "Switch from using one state to another, with updated and accurate permissions.",
+        "responses": {
+          "200": {
+            "description": "A JWT containing the new claims",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jwt": { "type": "string", "description": "a JWT" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": { "description": "The user can not switch to this state" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/certifications": {
+      "get": {
+        "tags": ["Certifications"],
+        "summary": "Retrieve the Add State Certifications and additional details",
+        "description": "get the state admin certifications and potential matches for loading up the state admin certification table",
+        "responses": {
+          "200": {
+            "description": "State Admin Certification form successfully saved"
+          },
+          "401": { "description": "Unauthorized" },
+          "403": {
+            "description": "The user does not have sufficient authorization to upload certification letters"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["Certifications"],
+        "summary": "Submit the Add State Certification and additional details",
+        "description": "Handle the submission of the state admin certification form which includes the URL of the file from the related /files endpoint as well as additional details that are added manually.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ffy": {
+                    "type": "integer",
+                    "description": "Federal Fiscal Year (FFY) that the certification is valid for"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of individual being certified"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Email of individual being certified"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State of individual being certified"
+                  },
+                  "fileUrl": {
+                    "type": "string",
+                    "description": "URL provided from the /certifications/files endpoint"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "State Admin Certification form successfully saved"
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have sufficient authorization to upload certification letters"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "put": {
+        "tags": ["Certifications"],
+        "summary": "Match a state admin certification letter to an affiliation",
+        "description": "update a state admin certification to associate it with an affiliation and approve that affiliation as a state admin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certificationId": {
+                    "type": "string",
+                    "description": "ID of the certification letter"
+                  },
+                  "certificationFfy": {
+                    "type": "string",
+                    "description": "Federal Fiscal Year (FFY) from the certification upload form"
+                  },
+                  "affiliationId": {
+                    "type": "string",
+                    "description": "ID of the affiliation to be matched"
+                  },
+                  "stateId": {
+                    "type": "string",
+                    "description": "ID of the state associated with the affiliation"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "State Admin Certification match successful"
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": {
+            "description": "The user does not have sufficient authorization to match certification letters"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "delete": {
+        "tags": ["Certifications"],
+        "summary": "Archives a previously uploaded state admin certification letter.",
+        "description": "Archives a previously uploaded state admin certification letter. Only non-matched letters can be archived/deleted.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "certificationId": {
+                    "type": "string",
+                    "description": "ID of the certification letter"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "State Admin Certification archived successfully"
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": {
+            "description": "The user does not have sufficient authorization to archive certification letters"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/certifications/files/{fileID}": {
+      "get": {
+        "tags": ["files"],
+        "summary": "Get a state admin certification letter",
+        "description": "Returns a state admin certification letter",
+        "parameters": [
+          {
+            "name": "fileID",
+            "in": "path",
+            "description": "The ID of the file to get",
+            "required": true,
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The file",
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "binary" } }
+            }
+          },
+          "400": { "description": "The file does not exist" },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/auth/certifications/files": {
+      "post": {
+        "tags": ["files"],
+        "summary": "Upload a state admin certification file",
+        "description": "Uploads a state admin certification letter.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The file body"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The URL of the uploaded file, absolute, relative to the API host",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "The URL of the uploaded file, absolute, relative to the API host"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have sufficient authorization to upload certification letters"
+          },
+          "415": { "description": "The file is not a valid format" }
+        },
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/docs/account-registration": {
@@ -854,10 +798,7 @@
             "description": "The file",
             "content": {
               "application/pdf": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
+                "schema": { "type": "string", "format": "binary" }
               }
             }
           }
@@ -873,10 +814,7 @@
             "description": "The file",
             "content": {
               "application/pdf": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
+                "schema": { "type": "string", "format": "binary" }
               }
             }
           }
@@ -896,35 +834,21 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "activities": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "Names of system activities this user can perform"
-                      }
-                    },
                     "id": {
-                      "type": "number",
+                      "type": "string",
                       "description": "User's unique ID, used internally and for identifying the user when interacting with the API"
                     },
                     "name": {
                       "type": "string",
                       "description": "The user's name, if defined"
                     },
-                    "phone": {
+                    "username": {
                       "type": "string",
-                      "description": "The user's phone number, if defined"
+                      "description": "User's unique username"
                     },
-                    "position": {
+                    "role": {
                       "type": "string",
-                      "description": "The user's position, if defined"
-                    },
-                    "roles": {
-                      "type": "array",
-                      "description": "Names of system authorization role this user belongs to",
-                      "items": {
-                        "type": "string"
-                      }
+                      "description": "The user's access role"
                     },
                     "state": {
                       "type": "object",
@@ -937,27 +861,80 @@
                         "name": {
                           "type": "string",
                           "description": "State/territory/district full name"
+                        },
+                        "medicaid_office": {
+                          "type": "object",
+                          "properties": {
+                            "address1": { "type": "string" },
+                            "city": { "type": "string" },
+                            "zip": { "type": "string" },
+                            "state": { "type": "string" },
+                            "director": {
+                              "type": "object",
+                              "properties": {
+                                "name": { "type": "string" },
+                                "email": { "type": "string" },
+                                "phone": { "type": "string" }
+                              }
+                            }
+                          }
                         }
                       }
                     },
-                    "username": {
-                      "type": "string",
-                      "description": "User's unique username"
+                    "states": {
+                      "type": "object",
+                      "properties": {
+                        "{state_id}": {
+                          "type": "string",
+                          "description": "The affiliation status for the state in the field",
+                          "enum": ["requested", "approved", "denied", "revoked"]
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "{state_id}": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "description": "Names of system activities this user can perform for that state"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "activities": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Names of system activities this user can perform for the selected state"
+                      }
+                    },
+                    "affiliation": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "user_id": { "type": "string" },
+                        "username": { "type": "string" },
+                        "state_id": { "type": "string" },
+                        "role_id": { "type": "string" },
+                        "state": { "type": "string" },
+                        "created_at": { "type": "string" },
+                        "updated_at": { "type": "string" },
+                        "expires_at": { "type": "string" }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          }
+          "401": { "description": "The user is not logged in" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/roles": {
@@ -988,18 +965,12 @@
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/states": {
@@ -1043,9 +1014,7 @@
             "in": "path",
             "description": "2-letter US State or Territory abbreviation, lowercase",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
@@ -1073,28 +1042,43 @@
               }
             }
           },
-          "400": {
-            "description": "The 2-letter, lowercase US State or Territory ID does not match any records"
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "Unauthorized, the user does not have permission to access this state.  Switching states may resolve the issue."
           },
-          "401": {
-            "description": "The user is not logged in"
+          "404": {
+            "description": "The 2-letter, lowercase US State or Territory ID does not match any records"
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
-    "/users": {
+    "/states/{stateId}/affiliations": {
       "get": {
-        "tags": ["Users"],
-        "summary": "Gets a list of all users",
-        "description": "Get a list of all users in the system",
+        "tags": ["Affiliations"],
+        "description": "Get a list of all user affiliations for a US State",
+        "parameters": [
+          {
+            "name": "stateId",
+            "in": "path",
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "description": "The filter status of the affiliations for this US State",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["pending", "active", "inactive"]
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "The list of users known to the system",
+            "description": "List of all user affiliations for a US State",
             "content": {
               "application/json": {
                 "schema": {
@@ -1103,33 +1087,35 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "number",
-                        "description": "User's unique ID"
+                        "type": "integer",
+                        "description": "ID of record"
                       },
-                      "email": {
+                      "user_id": {
                         "type": "string",
-                        "format": "email",
-                        "description": "User's email address"
+                        "description": "ID of user"
                       },
-                      "name": {
+                      "state_id": {
                         "type": "string",
-                        "description": "User's name"
+                        "description": "2-letter US State or Territory abbreviation, lowercase"
                       },
-                      "phone": {
-                        "type": "string",
-                        "description": "User's phone number; up to 10 digits"
+                      "role_id": {
+                        "type": "integer",
+                        "description": "ID of the role applied to this user for this US State"
                       },
-                      "position": {
+                      "status": {
                         "type": "string",
-                        "description": "User's position in the state’s Medicaid program"
+                        "description": "The status of the user role for this US State",
+                        "enum": ["requested", "approved", "denied", "revoked"]
                       },
-                      "state": {
+                      "created_at": {
                         "type": "string",
-                        "description": "Two-letter ID of the state this user is associated with, if any"
+                        "format": "date-time",
+                        "description": "Timestamp of record creation"
                       },
-                      "role": {
+                      "updated_at": {
                         "type": "string",
-                        "description": "The user's role name, if any. Can be null."
+                        "format": "date-time",
+                        "description": "Timestamp of last update"
                       }
                     }
                   }
@@ -1137,18 +1123,162 @@
               }
             }
           },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
           }
         },
-        "security": [
+        "security": [{ "bearerAuth": [] }]
+      },
+      "post": {
+        "tags": ["Affiliations"],
+        "description": "Create a request for the currently logged in user to be affiliated with a US State",
+        "parameters": [
           {
-            "bearerAuth": []
+            "name": "stateId",
+            "in": "path",
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "required": true,
+            "schema": { "type": "string" }
           }
-        ]
+        ],
+        "responses": {
+          "201": {
+            "description": "Record was created",
+            "content": {
+              "application/json": {
+                "schema": { "type": "integer", "description": "ID of record" }
+              }
+            }
+          },
+          "400": {
+            "description": "Record does not exist or US State ID is invalid"
+          },
+          "401": { "description": "The user is not logged in" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+    "/states/{stateId}/affiliations/{id}": {
+      "get": {
+        "tags": ["Affiliations"],
+        "description": "Get a single user affiliation with a US State",
+        "parameters": [
+          {
+            "name": "stateId",
+            "in": "path",
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of record",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single user affiliation with a US State",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer", "description": "ID of record" },
+                    "user_id": {
+                      "type": "string",
+                      "description": "ID of user"
+                    },
+                    "state_id": {
+                      "type": "string",
+                      "description": "2-letter US State or Territory abbreviation, lowercase"
+                    },
+                    "role_id": {
+                      "type": "integer",
+                      "description": "ID of the role applied to this user for this US State"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status of the user role for this US State",
+                      "enum": ["requested", "approved", "denied", "revoked"]
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Timestamp of record creation"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Timestamp of last update"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          },
+          "404": { "description": "The affiliation does not exist" }
+        },
+        "security": [{ "bearerAuth": [] }]
+      },
+      "patch": {
+        "tags": ["Affiliations"],
+        "description": "Update a user affiliation with a US State",
+        "parameters": [
+          {
+            "name": "stateId",
+            "in": "path",
+            "description": "2-letter US State or Territory abbreviation, lowercase",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of record",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "roleId": {
+                    "type": "integer",
+                    "description": "ID of the role applied to this user for this US State"
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The status of the user role for this US State",
+                    "enum": ["requested", "approved", "denied", "revoked"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Record was updated" },
+          "400": {
+            "description": "US State ID and affiliation ID are invalid, roleId is invalid, or status is invalid"
+          },
+          "401": { "description": "The user is not logged in" },
+          "403": {
+            "description": "The user does not have permission to perform this activity"
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/users/{id}": {
@@ -1162,9 +1292,7 @@
             "in": "path",
             "description": "The ID of the user to fetch",
             "required": true,
-            "schema": {
-              "type": "integer"
-            }
+            "schema": { "type": "integer" }
           }
         ],
         "responses": {
@@ -1176,67 +1304,110 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "number",
-                      "description": "User's unique ID"
-                    },
-                    "email": {
                       "type": "string",
-                      "format": "email",
-                      "description": "User's email address"
+                      "description": "User's unique ID, used internally and for identifying the user when interacting with the API"
                     },
                     "name": {
                       "type": "string",
-                      "description": "User's name"
+                      "description": "The user's name, if defined"
                     },
-                    "phone": {
+                    "username": {
                       "type": "string",
-                      "description": "User's phone number; up to 10 digits"
-                    },
-                    "position": {
-                      "type": "string",
-                      "description": "User's position in the state’s Medicaid program"
-                    },
-                    "state": {
-                      "type": "string",
-                      "description": "Two-letter ID of the state this user is associated with, if any"
+                      "description": "User's unique username"
                     },
                     "role": {
                       "type": "string",
-                      "description": "The user's role name, if any. Can be null."
+                      "description": "The user's access role"
+                    },
+                    "state": {
+                      "type": "object",
+                      "description": "The state/territory/district that this user is assigned to",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Lowercase 2-letter code"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "State/territory/district full name"
+                        },
+                        "medicaid_office": {
+                          "type": "object",
+                          "properties": {
+                            "address1": { "type": "string" },
+                            "city": { "type": "string" },
+                            "zip": { "type": "string" },
+                            "state": { "type": "string" },
+                            "director": {
+                              "type": "object",
+                              "properties": {
+                                "name": { "type": "string" },
+                                "email": { "type": "string" },
+                                "phone": { "type": "string" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "states": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[A-Za-z]{2}$": {
+                          "type": "string",
+                          "description": "The affiliation status for the state in the field",
+                          "enum": ["requested", "approved", "denied", "revoked"]
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[A-Za-z]{2}$": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "description": "Names of system activities this user can perform for that state"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "activities": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Names of system activities this user can perform for the selected state"
+                      }
+                    },
+                    "affiliation": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "user_id": { "type": "string" },
+                        "username": { "type": "string" },
+                        "state_id": { "type": "string" },
+                        "role_id": { "type": "string" },
+                        "state": { "type": "string" },
+                        "created_at": { "type": "string" },
+                        "updated_at": { "type": "string" },
+                        "expires_at": { "type": "string" }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "400": {
-            "description": "The user ID does not match any known users",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "description": "A string token indicating the error, which could be translated into a user-readable string for display by the client"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The user is not logged in"
-          },
+          "401": { "description": "The user is not logged in" },
           "403": {
             "description": "The user does not have permission to perform this activity"
-          }
+          },
+          "404": { "description": "The user ID does not match any known users" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
     "/open-api": {
@@ -1244,66 +1415,409 @@
         "tags": ["Metadata"],
         "summary": "Gets this document",
         "description": "Returns this document",
-        "responses": {
-          "200": {
-            "description": "This OpenAPI document"
-          }
-        }
+        "responses": { "200": { "description": "This OpenAPI document" } }
       }
     }
   },
   "components": {
     "schemas": {
-      "apd": {
+      "hitech": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "number",
-            "description": "APD ID"
-          },
+          "id": { "type": "number", "description": "APD ID" },
           "created": {
             "type": "string",
             "format": "date-time",
             "description": "Timestamp of when this APD was created"
           },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the last save to this APD"
+          },
+          "status": { "type": "string", "description": "Status" },
+          "state": {
+            "type": "string",
+            "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase"
+          },
           "name": {
             "type": "string",
             "description": "The APD document name, following SEA naming conventions"
+          },
+          "years": { "type": "array", "items": { "type": "string" } },
+          "yearOptions": { "type": "array", "items": { "type": "string" } },
+          "apdOverview": {
+            "type": "object",
+            "description": "APD Overview section",
+            "properties": {
+              "updateStatus": {
+                "type": "object",
+                "description": "APD update status and type",
+                "properties": {
+                  "isUpdateAPD": { "type": "boolean" },
+                  "annualUpdate": { "type": "boolean" },
+                  "asNeededUpdate": { "type": "boolean" }
+                }
+              },
+              "programOverview": {
+                "type": "string",
+                "description": "An overview of the overall program"
+              },
+              "narrativeHIE": {
+                "type": "string",
+                "description": "Brief description of HIE-funded activities contained in this APD"
+              },
+              "narrativeHIT": {
+                "type": "string",
+                "description": "Brief description of HIT-funded activities contained in this APD"
+              },
+              "narrativeMMIS": {
+                "type": "string",
+                "description": "Brief description of MMIS-funded activities contained in this APD"
+              }
+            }
+          },
+          "keyStatePersonnel": {
+            "type": "object",
+            "description": "Key State Personnel section",
+            "properties": {
+              "medicaidDirector": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "State Medicaid director's name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "State Medicaid director's email address"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "State Medicaid director's phone number"
+                  }
+                }
+              },
+              "medicaidOffice": {
+                "type": "object",
+                "properties": {
+                  "address1": {
+                    "type": "string",
+                    "description": "State Medicaid office address"
+                  },
+                  "address2": {
+                    "type": "string",
+                    "description": "State Medicaid office address"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "State Medicaid office address city"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "State Medicaid office address state"
+                  },
+                  "zip": {
+                    "type": "string",
+                    "description": "State Medicaid office address ZIP code"
+                  }
+                }
+              },
+              "keyPersonnel": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "costs": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{4}$": {
+                          "type": "number",
+                          "description": "Person's cost for the year described by the property name"
+                        }
+                      }
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Person's email address"
+                    },
+                    "hasCosts": {
+                      "type": "boolean",
+                      "description": "Whether the person has costs attributable to the project"
+                    },
+                    "isPrimary": {
+                      "type": "boolean",
+                      "description": "Whether the person is the primary point of contact for the APD"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Person's name"
+                    },
+                    "fte": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{0,2}": {
+                          "type": "number",
+                          "description": "FTE equivalent of this person's time dedicated to the project"
+                        }
+                      }
+                    },
+                    "position": {
+                      "type": "string",
+                      "description": "Person's position"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "previousActivities": {
+            "type": "object",
+            "description": "Previous Activities section",
+            "properties": {
+              "previousActivitySummary": {
+                "type": "string",
+                "description": "High-level outline of activities approved in previous APD"
+              },
+              "actualExpenditures": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "hithie": {
+                        "type": "object",
+                        "description": "HIT- and HIE-funded expenses",
+                        "properties": {
+                          "federalActual": {
+                            "type": "number",
+                            "description": "Total federal share actually spent"
+                          },
+                          "totalApproved": {
+                            "type": "number",
+                            "description": "Total approved in the previous APD"
+                          }
+                        }
+                      },
+                      "mmis": {
+                        "type": "object",
+                        "description": "HIT-funded expenses",
+                        "properties": {
+                          "50": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          },
+                          "75": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          },
+                          "90": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "activities": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "name": {
+                "activityId": {
                   "type": "string",
-                  "description": "Activity name, unique within an APD"
+                  "description": "Key for Activity"
                 },
                 "fundingSource": {
                   "type": "string",
                   "description": "Federal funding source that applies to this activity"
                 },
-                "summary": {
+                "name": {
                   "type": "string",
-                  "description": "Short summary of the activity"
+                  "description": "Activity name, unique within an APD"
                 },
-                "description": {
-                  "type": "string",
-                  "description": "Activity description"
+                "activityOverview": {
+                  "type": "object",
+                  "description": "The Activity overview",
+                  "properties": {
+                    "summary": {
+                      "type": "string",
+                      "description": "Short summary of the activity"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Activity description"
+                    },
+                    "alernatives": {
+                      "type": "string",
+                      "description": "Alternative considerations for the activity"
+                    },
+                    "standardsAndConditions": {
+                      "type": "object",
+                      "description": "Description of the 11 standards and conditions",
+                      "properties": {
+                        "doesNotSupport": {
+                          "description": "If this activity does not support the standards and conditions, an explanation of why not",
+                          "type": "string"
+                        },
+                        "supports": {
+                          "description": "A description of how this activity supports the standards and conditions",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
                 },
-                "alernatives": {
-                  "type": "string",
-                  "description": "Alternative considerations for the activity"
+                "activitySchedule": {
+                  "type": "object",
+                  "description": "The start and end date for the activity",
+                  "properties": {
+                    "plannedStartDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date this activity is planned to be completed"
+                    },
+                    "plannedEndDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date this activity is planned to begin"
+                    }
+                  }
                 },
-                "plannedEndDate": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "The date this activity is planned to begin"
+                "milestones": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity milestone item",
+                    "properties": {
+                      "endDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date this milestone is planned to be met"
+                      },
+                      "milestone": {
+                        "type": "string",
+                        "description": "The name of the milestone"
+                      }
+                    }
+                  }
                 },
-                "plannedStartDate": {
-                  "type": "string",
-                  "format": "date-time",
-                  "description": "The date this activity is planned to be completed"
+                "outcomes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity outcome",
+                    "properties": {
+                      "metrics": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "metric": {
+                              "type": "string",
+                              "description": "metric"
+                            }
+                          }
+                        }
+                      },
+                      "outcome": {
+                        "type": "string",
+                        "description": "Outcome description"
+                      }
+                    }
+                  }
+                },
+                "statePersonnel": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title for the state personnel"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description of the role"
+                      },
+                      "years": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "properties": {
+                              "amt": {
+                                "type": "number",
+                                "description": "State personnel's total cost for the federal fiscal year"
+                              },
+                              "perc": {
+                                "type": "number",
+                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "expenses": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity expense",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "description": "Expense category, such as \"Hardware, software, and licensing\""
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Short description of the expense"
+                      },
+                      "years": {
+                        "type": "object",
+                        "description": "Expense entry",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "number",
+                            "description": "Expense amount for the given federal fiscal year"
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 "contractorResources": {
                   "type": "array",
@@ -1375,9 +1889,12 @@
                 "costAllocationNarrative": {
                   "type": "object",
                   "properties": {
+                    "methodology": {
+                      "type": "string",
+                      "description": "Description of the cost allocation methodology"
+                    },
                     "years": {
                       "type": "object",
-                      "description": "Details of each year",
                       "x-patternProperties": {
                         "^[0-9]{4}$": {
                           "type": "object",
@@ -1389,10 +1906,6 @@
                           }
                         }
                       }
-                    },
-                    "methodology": {
-                      "type": "string",
-                      "description": "Description of the cost allocation methodology"
                     }
                   }
                 },
@@ -1418,124 +1931,6 @@
                         "other": {
                           "type": "number",
                           "description": "Other amount (dollars) for this activity for this year"
-                        }
-                      }
-                    }
-                  }
-                },
-                "expenses": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Activity expense",
-                    "properties": {
-                      "category": {
-                        "type": "string",
-                        "description": "Expense category, such as \"Hardware, software, and licensing\""
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "Short description of the expense"
-                      },
-                      "years": {
-                        "type": "object",
-                        "description": "Expense entry",
-                        "x-patternProperties": {
-                          "^[0-9]{4}$": {
-                            "type": "number",
-                            "description": "Expense amount for the given federal fiscal year"
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "outcomes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Activity outcome",
-                    "properties": {
-                      "metrics": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "metric": {
-                              "type": "string",
-                              "description": "metric"
-                            }
-                          }
-                        }
-                      },
-                      "outcome": {
-                        "type": "string",
-                        "description": "Outcome description"
-                      }
-                    }
-                  }
-                },
-                "schedule": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "description": "Activity schedule item",
-                    "properties": {
-                      "endDate": {
-                        "type": "string",
-                        "format": "date-time",
-                        "description": "The date this milestone is planned to be met"
-                      },
-                      "milestone": {
-                        "type": "string",
-                        "description": "The name of the milestone this schedule entry refers to"
-                      }
-                    }
-                  }
-                },
-                "standardsAndConditions": {
-                  "type": "object",
-                  "description": "Description of the 11 standards and conditions",
-                  "properties": {
-                    "doesNotSupport": {
-                      "description": "If this activity does not support the standards and conditions, an explanation of why not",
-                      "type": "string"
-                    },
-                    "supports": {
-                      "description": "A description of how this activity supports the standards and conditions",
-                      "type": "string"
-                    }
-                  }
-                },
-                "statePersonnel": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "title": {
-                        "type": "string",
-                        "description": "Title for the state personnel"
-                      },
-                      "description": {
-                        "type": "string",
-                        "description": "Description of the role"
-                      },
-                      "years": {
-                        "type": "object",
-                        "x-patternProperties": {
-                          "^[0-9]{4}$": {
-                            "type": "object",
-                            "properties": {
-                              "amt": {
-                                "type": "number",
-                                "description": "State personnel's total cost for the federal fiscal year"
-                              },
-                              "perc": {
-                                "type": "number",
-                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year"
-                              }
-                            }
-                          }
                         }
                       }
                     }
@@ -1568,140 +1963,28 @@
               }
             }
           },
-          "federalCitations": {
+          "assurancesAndCompliances": {
             "type": "object",
             "description": "Federal citations that states must assert compliance with. This is a free-form object."
           },
-          "incentivePayments": {
+          "proposedBudget": {
             "type": "object",
-            "description": "APD incentive payments",
-            "x-patternProperties": {
-              "^e[hc](Amt|Ct)$": {
+            "description": "Proposed budget section",
+            "properties": {
+              "incentivePayments": {
                 "type": "object",
+                "description": "APD incentive payments",
                 "x-patternProperties": {
-                  "^[0-9]{4}$": {
+                  "^e[hc](Amt|Ct)$": {
                     "type": "object",
                     "x-patternProperties": {
-                      "^[1-4]$": {
-                        "type": "number",
-                        "description": "EH or EC payment or count for the given federal fiscal year and quarter"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "keyPersonnel": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "costs": {
-                  "type": "object",
-                  "x-patternProperties": {
-                    "^[0-9]{4}$": {
-                      "type": "number",
-                      "description": "Person's cost for the year described by the property name"
-                    }
-                  }
-                },
-                "email": {
-                  "type": "string",
-                  "description": "Person's email address"
-                },
-                "hasCosts": {
-                  "type": "boolean",
-                  "description": "Whether the person has costs attributable to the project"
-                },
-                "isPrimary": {
-                  "type": "boolean",
-                  "description": "Whether the person is the primary point of contact for the APD"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "Person's name"
-                },
-                "fte": {
-                  "type": "object",
-                  "x-patternProperties": {
-                    "^[0-9]{0,2}": {
-                      "type": "number",
-                      "description": "FTE equivalent of this person's time dedicated to the project"
-                    }
-                  }
-                },
-                "position": {
-                  "type": "string",
-                  "description": "Person's position"
-                }
-              }
-            }
-          },
-          "narrativeHIE": {
-            "type": "string",
-            "description": "Brief description of HIE-funded activities contained in this APD"
-          },
-          "narrativeHIT": {
-            "type": "string",
-            "description": "Brief description of HIT-funded activities contained in this APD"
-          },
-          "narrativeMMIS": {
-            "type": "string",
-            "description": "Brief description of MMIS-funded activities contained in this APD"
-          },
-          "previousActivityExpenses": {
-            "type": "object",
-            "x-patternProperties": {
-              "^[0-9]{4}$": {
-                "type": "object",
-                "properties": {
-                  "hithie": {
-                    "type": "object",
-                    "description": "HIT- and HIE-funded expenses",
-                    "properties": {
-                      "federalActual": {
-                        "type": "number",
-                        "description": "Total federal share actually spent"
-                      },
-                      "totalApproved": {
-                        "type": "number",
-                        "description": "Total approved in the previous APD"
-                      }
-                    }
-                  },
-                  "mmis": {
-                    "type": "object",
-                    "description": "HIT-funded expenses",
-                    "properties": {
-                      "50": {
-                        "federalActual": {
-                          "type": "number",
-                          "description": "Total federal share actually spent"
-                        },
-                        "totalApproved": {
-                          "type": "number",
-                          "description": "Total approved in the previous APD"
-                        }
-                      },
-                      "75": {
-                        "federalActual": {
-                          "type": "number",
-                          "description": "Total federal share actually spent"
-                        },
-                        "totalApproved": {
-                          "type": "number",
-                          "description": "Total approved in the previous APD"
-                        }
-                      },
-                      "90": {
-                        "federalActual": {
-                          "type": "number",
-                          "description": "Total federal share actually spent"
-                        },
-                        "totalApproved": {
-                          "type": "number",
-                          "description": "Total approved in the previous APD"
+                      "^[0-9]{4}$": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[1-4]$": {
+                            "type": "number",
+                            "description": "EH or EC payment or count for the given federal fiscal year and quarter"
+                          }
                         }
                       }
                     }
@@ -1709,22 +1992,81 @@
                 }
               }
             }
-          },
-          "previousActivitySummary": {
+          }
+        }
+      },
+      "mmis": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "APD ID" },
+          "created": {
             "type": "string",
-            "description": "High-level outline of activities approved in previous APD"
+            "format": "date-time",
+            "description": "Timestamp of when this APD was created"
           },
-          "programOverview": {
+          "updated": {
             "type": "string",
-            "description": "An overview of the overall program"
+            "format": "date-time",
+            "description": "Timestamp of the last save to this APD"
           },
+          "status": { "type": "string", "description": "Status" },
           "state": {
             "type": "string",
             "description": "Two-letter ID of the state, territory, or district this APD belongs to, lowercase"
           },
-          "stateProfile": {
+          "name": {
+            "type": "string",
+            "description": "The APD document name, following SEA naming conventions"
+          },
+          "years": { "type": "array", "items": { "type": "string" } },
+          "yearOptions": { "type": "array", "items": { "type": "string" } },
+          "apdOverview": {
             "type": "object",
-            "description": "The state profile for this specific APD",
+            "description": "APD Overview section",
+            "properties": {
+              "updateStatus": {
+                "type": "object",
+                "description": "APD update status and type",
+                "properties": {
+                  "isUpdateAPD": { "type": "boolean" },
+                  "annualUpdate": { "type": "boolean" },
+                  "asNeededUpdate": { "type": "boolean" }
+                }
+              },
+              "medicaidBusinessAreas": {
+                "type": "object",
+                "properties": {
+                  "waiverSupportSystems": { "type": "boolean" },
+                  "assetVerificationSystem": { "type": "boolean" },
+                  "claimsProcessing": { "type": "boolean" },
+                  "decisionSupportSystemDW": { "type": "boolean" },
+                  "electronicVisitVerification": { "type": "boolean" },
+                  "encounterProcessingSystemMCS": { "type": "boolean" },
+                  "financialManagement": { "type": "boolean" },
+                  "healthInformationExchange": { "type": "boolean" },
+                  "longTermServicesSupports": { "type": "boolean" },
+                  "memberManagement": { "type": "boolean" },
+                  "pharmacyBenefitManagementPOS": { "type": "boolean" },
+                  "programIntegrity": { "type": "boolean" },
+                  "providerManagement": { "type": "boolean" },
+                  "thirdPartyLiability": { "type": "boolean" },
+                  "other": { "type": "boolean" },
+                  "otherMedicaidBusinessAreas": { "type": "string" }
+                }
+              }
+            }
+          },
+          "statePrioritiesAndScope": {
+            "type": "object",
+            "properties": {
+              "medicaidProgramAndPriorities": { "type": "string" },
+              "mesIntroduction": { "type": "string" },
+              "scopeOfAPD": { "type": "string" }
+            }
+          },
+          "keyStatePersonnel": {
+            "type": "object",
+            "description": "Key State Personnel section",
             "properties": {
               "medicaidDirector": {
                 "type": "object",
@@ -1767,22 +2109,1260 @@
                     "description": "State Medicaid office address ZIP code"
                   }
                 }
+              },
+              "keyPersonnel": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "costs": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{4}$": {
+                          "type": "number",
+                          "description": "Person's cost for the year described by the property name"
+                        }
+                      }
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Person's email address"
+                    },
+                    "hasCosts": {
+                      "type": "boolean",
+                      "description": "Whether the person has costs attributable to the project"
+                    },
+                    "isPrimary": {
+                      "type": "boolean",
+                      "description": "Whether the person is the primary point of contact for the APD"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Person's name"
+                    },
+                    "fte": {
+                      "type": "object",
+                      "x-patternProperties": {
+                        "^[0-9]{0,2}": {
+                          "type": "number",
+                          "description": "FTE equivalent of this person's time dedicated to the project"
+                        }
+                      }
+                    },
+                    "position": {
+                      "type": "string",
+                      "description": "Person's position"
+                    }
+                  }
+                }
               }
             }
           },
-          "status": {
-            "type": "string",
-            "description": "Status"
+          "previousActivities": {
+            "type": "object",
+            "description": "Previous Activities section",
+            "properties": {
+              "previousActivitySummary": {
+                "type": "string",
+                "description": "High-level outline of activities approved in previous APD"
+              },
+              "actualExpenditures": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "mmis": {
+                        "type": "object",
+                        "description": "MMIS-funded expenses",
+                        "properties": {
+                          "50": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          },
+                          "75": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          },
+                          "90": {
+                            "type": "object",
+                            "properties": {
+                              "federalActual": {
+                                "type": "number",
+                                "description": "Total federal share actually spent"
+                              },
+                              "totalApproved": {
+                                "type": "number",
+                                "description": "Total approved in the previous APD"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
-          "updated": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp of the last save to this APD"
-          },
-          "years": {
+          "activities": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "object",
+              "properties": {
+                "activityId": {
+                  "type": "string",
+                  "description": "Key for Activity"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Activity name, unique within an APD"
+                },
+                "activityOverview": {
+                  "type": "object",
+                  "properties": {
+                    "activitySnapshot": { "type": "string" },
+                    "problemStatement": { "type": "string" },
+                    "proposedSolution": { "type": "string" }
+                  }
+                },
+                "analysisOfAlternativesAndRisks": {
+                  "type": "object",
+                  "properties": {
+                    "alternativeAnalysis": { "type": "boolean" },
+                    "costBenefitAnalysis": { "type": "boolean" },
+                    "feasibilityStudy": { "type": "boolean" },
+                    "requirementsAnalysis": { "type": "boolean" },
+                    "forseeableRisks": { "type": "boolean" }
+                  }
+                },
+                "conditionsForEnhancedFunding": {
+                  "type": "object",
+                  "properties": {
+                    "enhancedFundingQualification": { "type": "boolean" },
+                    "enhancedFundingJustification": { "type": "string" }
+                  }
+                },
+                "activitySchedule": {
+                  "type": "object",
+                  "description": "The start and end date for the activity",
+                  "properties": {
+                    "plannedStartDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date this activity is planned to be completed"
+                    },
+                    "plannedEndDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "The date this activity is planned to begin"
+                    }
+                  }
+                },
+                "milestones": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity milestone item",
+                    "properties": {
+                      "endDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The date this milestone is planned to be met"
+                      },
+                      "milestone": {
+                        "type": "string",
+                        "description": "The name of the milestone"
+                      }
+                    }
+                  }
+                },
+                "outcomes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity outcome",
+                    "properties": {
+                      "metrics": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "metric": {
+                              "type": "string",
+                              "description": "metric"
+                            }
+                          }
+                        }
+                      },
+                      "outcome": {
+                        "type": "string",
+                        "description": "Outcome description"
+                      }
+                    }
+                  }
+                },
+                "statePersonnel": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title for the state personnel"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description of the role"
+                      },
+                      "years": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "properties": {
+                              "amt": {
+                                "type": "number",
+                                "description": "State personnel's total cost for the federal fiscal year"
+                              },
+                              "perc": {
+                                "type": "number",
+                                "description": "Number of FTEs this state personnel will spend on the project for the federal fiscal year"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "expenses": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity expense",
+                    "properties": {
+                      "category": {
+                        "type": "string",
+                        "description": "Expense category, such as \"Hardware, software, and licensing\""
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Short description of the expense"
+                      },
+                      "years": {
+                        "type": "object",
+                        "description": "Expense entry",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "number",
+                            "description": "Expense amount for the given federal fiscal year"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "contractorResources": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "description": "Activity contractor resource",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the contractor resource"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Description"
+                      },
+                      "hourly": {
+                        "type": "object",
+                        "properties": {
+                          "data": {
+                            "x-patternProperties": {
+                              "^[0-9]{4}$": {
+                                "type": "object",
+                                "properties": {
+                                  "hours": {
+                                    "type": "number",
+                                    "description": "Number of hours the contractor is expected to work for the given federal fiscal year"
+                                  },
+                                  "rate": {
+                                    "type": "number",
+                                    "description": "Contractor hourly rate for the given federal fiscal year"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "useHourly": {
+                            "type": "boolean",
+                            "description": "Whether to use hourly rates for this contractor"
+                          }
+                        }
+                      },
+                      "start": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "When the contractor resource will begin work; date only"
+                      },
+                      "end": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "When the contractor resource will end work; date only"
+                      },
+                      "totalCost": {
+                        "type": "number",
+                        "description": "Contractor resource total cost"
+                      },
+                      "years": {
+                        "type": "object",
+                        "description": "Details of each year the contractor resource will be working",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "number",
+                            "description": "Contractor resource cost of the year"
+                          }
+                        }
+                      },
+                      "costAllocation": {
+                        "type": "object",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "properties": {
+                              "ffp": {
+                                "type": "object",
+                                "properties": {
+                                  "federal": {
+                                    "type": "number",
+                                    "description": "Federal share for this activity for this year, from 0 to 100"
+                                  },
+                                  "state": {
+                                    "type": "number",
+                                    "description": "State share for this activity for this year, from 0 to 100"
+                                  }
+                                }
+                              },
+                              "other": {
+                                "type": "number",
+                                "description": "Other amount (dollars) for this activity for this year"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "quarterlyFFP": {
+                        "type": "object",
+                        "description": "Federal share of this activity cost, by expense type, per fiscal quarter",
+                        "x-patternProperties": {
+                          "^[0-9]{4}$": {
+                            "type": "object",
+                            "x-patternProperties": {
+                              "^[1-4]$": {
+                                "type": "object",
+                                "properties": {
+                                  "contractors": {
+                                    "type": "number",
+                                    "description": "Contractor costs for the given quarter of the given federal fiscal year"
+                                  },
+                                  "inHouse": {
+                                    "type": "number",
+                                    "description": "In-house (state personnel + non-personnel) costs for the given quarter of the given federal fiscal year"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "assurancesAndCompliances": {
+            "type": "object",
+            "description": "Federal citations that states must assert compliance with. This is a free-form object."
+          }
+        }
+      },
+      "activityTotal": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "fundingSource": { "type": "string" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": { "type": "number" }
+                }
+              },
+              "contractors": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": { "type": "number" }
+                }
+              },
+              "expenses": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": { "type": "number" }
+                }
+              },
+              "statePersonnel": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": { "type": "number" }
+                }
+              },
+              "otherFunding": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "contractors": { "type": "number" },
+                      "expenses": { "type": "number" },
+                      "statePersonnel": { "type": "number" },
+                      "total": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "costPercentByCostType": {
+        "type": "object",
+        "properties": {
+          "inHouse": {
+            "type": "object",
+            "properties": {
+              "dollars": { "type": "number" },
+              "percent": { "type": "number" }
+            }
+          },
+          "contractors": {
+            "type": "object",
+            "properties": {
+              "dollars": { "type": "number" },
+              "percent": { "type": "number" }
+            }
+          },
+          "combined": {
+            "type": "object",
+            "properties": {
+              "dollars": { "type": "number" },
+              "percent": { "type": "number" }
+            }
+          }
+        }
+      },
+      "budgetActivity": {
+        "type": "object",
+        "properties": {
+          "costsByFFY": {
+            "type": "object",
+            "x-patternProperties": {
+              "^[0-9]{4}$": {
+                "type": "object",
+                "properties": {
+                  "total": { "type": "number" },
+                  "federal": { "type": "number" },
+                  "medicaid": { "type": "number" },
+                  "state": { "type": "number" }
+                }
+              }
+            }
+          },
+          "quarterlyFFP": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "type": "object",
+                "properties": {
+                  "1": { "$ref": "#/components/schemas/costPercentByCostType" },
+                  "2": { "$ref": "#/components/schemas/costPercentByCostType" },
+                  "3": { "$ref": "#/components/schemas/costPercentByCostType" },
+                  "4": { "$ref": "#/components/schemas/costPercentByCostType" },
+                  "subtotal": {
+                    "$ref": "#/components/schemas/costPercentByCostType"
+                  }
+                }
+              },
+              "total": {
+                "type": "object",
+                "properties": {
+                  "inHouse": { "type": "number" },
+                  "contractors": { "type": "number" },
+                  "combined": { "type": "number" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "hitechBudget": {
+        "type": "object",
+        "properties": {
+          "years": { "type": "array", "items": { "type": "string" } },
+          "federalShareByFFYQuarter": {
+            "type": "object",
+            "properties": {
+              "hitAndHie": {
+                "type": "object",
+                "properties": {
+                  "years": {
+                    "type": "object",
+                    "x-patternProperties": {
+                      "^[0-9]{4}$": {
+                        "type": "object",
+                        "properties": {
+                          "1": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "2": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "3": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "4": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "subtotal": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "total": {
+                    "type": "object",
+                    "properties": {
+                      "inHouse": { "type": "number" },
+                      "contractors": { "type": "number" },
+                      "combined": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "mmis": {
+                "type": "object",
+                "properties": {
+                  "years": {
+                    "type": "object",
+                    "x-patternProperties": {
+                      "^[0-9]{4}$": {
+                        "type": "object",
+                        "properties": {
+                          "1": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "2": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "3": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "4": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "subtotal": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "total": {
+                    "type": "object",
+                    "properties": {
+                      "inHouse": { "type": "number" },
+                      "contractors": { "type": "number" },
+                      "combined": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "hie": {
+            "type": "object",
+            "properties": {
+              "statePersonnel": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "contractors": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "expenses": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "hit": {
+            "type": "object",
+            "properties": {
+              "statePersonnel": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "contractors": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "expenses": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "mmis": {
+            "type": "object",
+            "properties": {
+              "statePersonnel": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "contractors": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "expenses": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "hitAndHie": {
+            "type": "object",
+            "properties": {
+              "statePersonnel": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "contractors": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "expenses": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "mmisByFFP": {
+            "properties": {
+              "90-10": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "75-25": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "50-50": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "0-100": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "combined": {
+            "type": "object",
+            "x-patternProperties": {
+              "^([0-9]{4}|total)$": {
+                "type": "object",
+                "properties": {
+                  "total": { "type": "number" },
+                  "federal": { "type": "number" },
+                  "medicaid": { "type": "number" },
+                  "state": { "type": "number" }
+                }
+              }
+            }
+          },
+          "activityTotals": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/activityTotal" }
+          },
+          "activities": {
+            "type": "object",
+            "x-patternProperties": {
+              "^[0-9a-zA-Z]{6}$": {
+                "type": "object",
+                "properties": { "$ref": "#/components/schemas/budgetActivity" }
+              }
+            }
+          }
+        }
+      },
+      "mmisBudget": {
+        "type": "object",
+        "properties": {
+          "years": { "type": "array", "items": { "type": "string" } },
+          "federalShareByFFYQuarter": {
+            "type": "object",
+            "properties": {
+              "mmis": {
+                "type": "object",
+                "properties": {
+                  "years": {
+                    "type": "object",
+                    "x-patternProperties": {
+                      "^[0-9]{4}$": {
+                        "type": "object",
+                        "properties": {
+                          "1": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "2": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "3": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "4": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          },
+                          "subtotal": {
+                            "type": "object",
+                            "properties": {
+                              "inHouse": { "type": "number" },
+                              "contractors": { "type": "number" },
+                              "combined": { "type": "number" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "total": {
+                    "type": "object",
+                    "properties": {
+                      "inHouse": { "type": "number" },
+                      "contractors": { "type": "number" },
+                      "combined": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "mmis": {
+            "type": "object",
+            "properties": {
+              "statePersonnel": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "contractors": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "expenses": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^[0-9]{4}$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "mmisByFFP": {
+            "properties": {
+              "90-10": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "75-25": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "50-50": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "0-100": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              },
+              "combined": {
+                "type": "object",
+                "x-patternProperties": {
+                  "^([0-9]{4}|total)$": {
+                    "type": "object",
+                    "properties": {
+                      "total": { "type": "number" },
+                      "federal": { "type": "number" },
+                      "medicaid": { "type": "number" },
+                      "state": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "combined": {
+            "type": "object",
+            "x-patternProperties": {
+              "^([0-9]{4}|total)$": {
+                "type": "object",
+                "properties": {
+                  "total": { "type": "number" },
+                  "federal": { "type": "number" },
+                  "medicaid": { "type": "number" },
+                  "state": { "type": "number" }
+                }
+              }
+            }
+          },
+          "activityTotals": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/activityTotal" }
+          },
+          "activities": {
+            "type": "object",
+            "x-patternProperties": {
+              "^[0-9a-zA-Z]{6}$": {
+                "type": "object",
+                "properties": { "$ref": "#/components/schemas/budgetActivity" }
+              }
+            }
+          }
+        }
+      },
+      "adminCheck": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "section": {
+              "type": "string",
+              "description": "Section name/title of admin check error"
+            },
+            "link": {
+              "type": "string",
+              "description": "Link to page where admin check error occured"
+            },
+            "fieldDescription": {
+              "type": "string",
+              "description": "Error message returned from schema"
             }
           }
         }
@@ -1793,7 +3373,8 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "Bearer xxx.yyy.zzz"
-      }
+      },
+      "apiKeyAuth": { "type": "apiKey", "in": "header", "name": "X-API-KEY" }
     }
   }
 }

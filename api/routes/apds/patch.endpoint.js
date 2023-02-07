@@ -1,12 +1,12 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
-const { mnAPDId, akAPDId, badAPDId } = require('../../seeds/test/apds');
+} from '../../endpoint-tests/utils.js';
+import { mnAPDId, akAPDId, badAPDId } from '../../seeds/test/apds.js';
 
 describe('APD endpoint | PATCH /apds/:id', () => {
   const db = getDB();
@@ -25,7 +25,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
   describe('when authenticated as a user with permission', () => {
     let api;
     beforeAll(() => {
-      api = login('state-admin');
+      api = login('state-staff');
     });
 
     it('with a non-existant apd ID', async () => {
@@ -56,7 +56,7 @@ describe('APD endpoint | PATCH /apds/:id', () => {
       const data = [
         {
           op: 'replace',
-          path: '/activities/0/schedule/0/endDate',
+          path: '/activities/0/milestones/0/endDate',
           value: '2022-13-12'
         }
       ];
@@ -69,9 +69,10 @@ describe('APD endpoint | PATCH /apds/:id', () => {
           updated: expect.stringMatching(
             /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
           ),
-          activities: expect.any(Array),
-          budget: expect.any(Object)
-        }
+          activities: expect.any(Array)
+        },
+        budget: expect.any(Object),
+        adminCheck: expect.any(Array)
       });
     });
 
@@ -102,9 +103,10 @@ describe('APD endpoint | PATCH /apds/:id', () => {
           updated: expect.stringMatching(
             /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
           ),
-          activities: expect.any(Array),
-          budget: expect.any(Object)
-        }
+          activities: expect.any(Array)
+        },
+        budget: expect.any(Object),
+        adminCheck: expect.any(Array)
       });
     });
 
@@ -144,9 +146,10 @@ describe('APD endpoint | PATCH /apds/:id', () => {
           updated: expect.stringMatching(
             /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
           ),
-          activities: expect.any(Array),
-          budget: expect.any(Object)
-        }
+          activities: expect.any(Array)
+        },
+        budget: expect.any(Object),
+        adminCheck: expect.any(Array)
       });
     });
 
@@ -196,9 +199,10 @@ describe('APD endpoint | PATCH /apds/:id', () => {
           updated: expect.stringMatching(
             /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
           ),
-          activities: expect.any(Array),
-          budget: expect.any(Object)
-        }
+          activities: expect.any(Array)
+        },
+        budget: expect.any(Object),
+        adminCheck: expect.any(Array)
       });
     });
   });

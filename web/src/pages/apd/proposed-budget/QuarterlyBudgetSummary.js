@@ -38,9 +38,7 @@ const QuarterlyBudgetSummary = ({ budget, years }) => {
                 </colgroup>
                 <thead>
                   <tr>
-                    <th>
-                      <span aria-hidden="true">{t('ffy', { year })}</span>
-                    </th>
+                    <th aria-label={`FFY ${year}`}>{t('ffy', { year })}</th>
                     {QUARTERS.map(q => (
                       <th
                         key={q}

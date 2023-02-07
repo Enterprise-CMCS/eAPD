@@ -1,27 +1,11 @@
 #!/usr/bin/env sh
 
-export NODE_ENV=test
+./test-server-setup.sh
 
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api up -d
-sleep 60
-
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "DROP DATABASE IF EXISTS hitech_apd_test;"'
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec db sh -c 'PGPASSWORD=cms psql -U postgres -tc "CREATE DATABASE hitech_apd_test;"'
-
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run migrate
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec -e LOG_LEVEL=verbose api-for-testing yarn run seed
-echo 'Checking to see if the server is running'
-until [ "`docker inspect -f {{.State.Health.Status}} api-container`"=="healthy" ]; do
-    sleep 10;
-    echo '.';
-done;
-echo 'Server is running and status is healthy'
-docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn run test $@
-echo $?
-EXIT_CODE=$?
+docker-compose -f ../docker-compose.endpoint-tests.yml -p api exec api-for-testing yarn test $@
+EXIT_CODE=$? # this must stay right after the test run so that the EXIT_CODE is properly reported
 
 docker cp api-container:/app/api/coverage ./coverage
-
 docker-compose -f ../docker-compose.endpoint-tests.yml -p api down
 
 exit $EXIT_CODE

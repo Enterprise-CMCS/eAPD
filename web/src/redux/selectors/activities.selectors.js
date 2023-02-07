@@ -198,7 +198,11 @@ export const selectActivitySchedule = createSelector(
     const activities = [];
 
     apdActivities.forEach(
-      ({ name, plannedEndDate, plannedStartDate, schedule }) => {
+      ({
+        name,
+        activitySchedule: { plannedStartDate, plannedEndDate } = {},
+        milestones: milestonesUnsorted
+      }) => {
         const milestones = [];
         activities.push({
           dateRange: stateDateRangeToDisplay(plannedStartDate, plannedEndDate),
@@ -208,7 +212,7 @@ export const selectActivitySchedule = createSelector(
           start: stateDateToDisplay(plannedStartDate)
         });
 
-        schedule.forEach(({ milestone, endDate }) => {
+        milestonesUnsorted.forEach(({ milestone, endDate }) => {
           milestones.push({
             end: stateDateToDisplay(endDate),
             name: milestone,

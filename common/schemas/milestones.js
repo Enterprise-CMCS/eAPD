@@ -1,6 +1,10 @@
-const Joi = require('joi').extend(require('@joi/date'));
+import DateExtension from '@joi/date';
+import JoiImport from 'joi';
+
+const Joi = JoiImport.extend(DateExtension);
 
 const milestonesSchema = Joi.object({
+  id: Joi.any(),
   key: Joi.any(),
   milestone: Joi.string().required().messages({
     'string.base': 'Milestone is required.',

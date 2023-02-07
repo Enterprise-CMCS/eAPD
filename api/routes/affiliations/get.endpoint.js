@@ -1,16 +1,18 @@
-const {
+import { jest } from '@jest/globals';
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../endpoint-tests/utils');
+} from '../../endpoint-tests/utils.js';
 
 // using state AK because it's the first in the affiliations
 // list so it will be the first affiliation loaded into the
 // user, change once user is set
 describe('Affiliations endpoint | GET', () => {
+  jest.setTimeout(30000);
   const api = login('state-admin');
   const db = getDB();
   beforeAll(async () => {

@@ -2,6 +2,7 @@
 
 exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 <PersonForm
+  apdType="HITECH"
   index={1}
   item={
     Object {
@@ -16,8 +17,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       },
       "hasCosts": true,
       "key": "person key",
+      "medicaidShare": Object {
+        "1992": 100,
+        "1993": 100,
+      },
       "name": "Bob the Builder",
       "position": "The Builder",
+      "split": Object {
+        "1992": Object {
+          "federal": 90,
+          "state": 10,
+        },
+        "1993": Object {
+          "federal": 90,
+          "state": 10,
+        },
+      },
     }
   }
   savePerson={[MockFunction]}
@@ -45,11 +60,12 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 >
   <form
     aria-label="form"
-    index={1}
+    id="key-personnel-1"
     onSubmit={[Function]}
   >
     <button
       aria-hidden="true"
+      aria-label="submitButton"
       disabled={true}
       style={
         Object {
@@ -82,8 +98,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_executeSchema": [Function],
           "_fields": Object {
@@ -2106,7 +2136,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "email",
                 "ref": Object {
-                  "name": "email",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "email address",
               },
@@ -4140,7 +4173,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "name",
                 "ref": Object {
-                  "name": "name",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "Bob the Builder",
               },
@@ -4150,16 +4186,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "position",
                 "ref": Object {
-                  "name": "position",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "The Builder",
               },
             },
           },
+          "_focusError": [Function],
           "_formState": Object {
             "dirtyFields": Object {},
             "errors": Object {},
             "isDirty": false,
+            "isLoading": true,
             "isSubmitSuccessful": false,
             "isSubmitted": false,
             "isSubmitting": false,
@@ -4179,8 +4220,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_getDirty": [Function],
           "_getFieldArray": [Function],
@@ -4212,8 +4267,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "1993": 0.57,
               },
               "hasCosts": "yes",
+              "medicaidShare": Object {
+                "1992": 100,
+                "1993": 100,
+              },
               "name": "Bob the Builder",
               "position": "The Builder",
+              "split": Object {
+                "1992": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+                "1993": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+              },
             },
             "mode": "onChange",
             "reValidateMode": "onChange",
@@ -4229,6 +4298,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "touchedFields": false,
           },
           "_removeUnmounted": [Function],
+          "_reset": [Function],
           "_stateFlags": Object {
             "action": false,
             "mount": true,
@@ -4308,6 +4378,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             },
           },
           "_updateFieldArray": [Function],
+          "_updateFormState": [Function],
           "_updateValid": [Function],
           "getFieldState": [Function],
           "register": [Function],
@@ -4400,8 +4471,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_executeSchema": [Function],
           "_fields": Object {
@@ -6424,7 +6509,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "email",
                 "ref": Object {
-                  "name": "email",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "email address",
               },
@@ -8458,7 +8546,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "name",
                 "ref": Object {
-                  "name": "name",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "Bob the Builder",
               },
@@ -8468,16 +8559,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "position",
                 "ref": Object {
-                  "name": "position",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "The Builder",
               },
             },
           },
+          "_focusError": [Function],
           "_formState": Object {
             "dirtyFields": Object {},
             "errors": Object {},
             "isDirty": false,
+            "isLoading": true,
             "isSubmitSuccessful": false,
             "isSubmitted": false,
             "isSubmitting": false,
@@ -8497,8 +8593,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_getDirty": [Function],
           "_getFieldArray": [Function],
@@ -8530,8 +8640,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "1993": 0.57,
               },
               "hasCosts": "yes",
+              "medicaidShare": Object {
+                "1992": 100,
+                "1993": 100,
+              },
               "name": "Bob the Builder",
               "position": "The Builder",
+              "split": Object {
+                "1992": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+                "1993": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+              },
             },
             "mode": "onChange",
             "reValidateMode": "onChange",
@@ -8547,6 +8671,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "touchedFields": false,
           },
           "_removeUnmounted": [Function],
+          "_reset": [Function],
           "_stateFlags": Object {
             "action": false,
             "mount": true,
@@ -8626,6 +8751,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             },
           },
           "_updateFieldArray": [Function],
+          "_updateFormState": [Function],
           "_updateValid": [Function],
           "getFieldState": [Function],
           "register": [Function],
@@ -8718,8 +8844,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_executeSchema": [Function],
           "_fields": Object {
@@ -10742,7 +10882,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "email",
                 "ref": Object {
-                  "name": "email",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "email address",
               },
@@ -12776,7 +12919,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "name",
                 "ref": Object {
-                  "name": "name",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "Bob the Builder",
               },
@@ -12786,16 +12932,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "position",
                 "ref": Object {
-                  "name": "position",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "The Builder",
               },
             },
           },
+          "_focusError": [Function],
           "_formState": Object {
             "dirtyFields": Object {},
             "errors": Object {},
             "isDirty": false,
+            "isLoading": true,
             "isSubmitSuccessful": false,
             "isSubmitted": false,
             "isSubmitting": false,
@@ -12815,8 +12966,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_getDirty": [Function],
           "_getFieldArray": [Function],
@@ -12848,8 +13013,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "1993": 0.57,
               },
               "hasCosts": "yes",
+              "medicaidShare": Object {
+                "1992": 100,
+                "1993": 100,
+              },
               "name": "Bob the Builder",
               "position": "The Builder",
+              "split": Object {
+                "1992": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+                "1993": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+              },
             },
             "mode": "onChange",
             "reValidateMode": "onChange",
@@ -12865,6 +13044,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "touchedFields": false,
           },
           "_removeUnmounted": [Function],
+          "_reset": [Function],
           "_stateFlags": Object {
             "action": false,
             "mount": true,
@@ -12944,6 +13124,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             },
           },
           "_updateFieldArray": [Function],
+          "_updateFormState": [Function],
           "_updateValid": [Function],
           "getFieldState": [Function],
           "register": [Function],
@@ -13036,8 +13217,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_executeSchema": [Function],
           "_fields": Object {
@@ -15060,7 +15255,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "email",
                 "ref": Object {
-                  "name": "email",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "email address",
               },
@@ -17094,7 +17292,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "name",
                 "ref": Object {
-                  "name": "name",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "Bob the Builder",
               },
@@ -17104,16 +17305,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "mount": true,
                 "name": "position",
                 "ref": Object {
-                  "name": "position",
+                  "focus": [Function],
+                  "reportValidity": [Function],
+                  "select": [Function],
+                  "setCustomValidity": [Function],
                 },
                 "value": "The Builder",
               },
             },
           },
+          "_focusError": [Function],
           "_formState": Object {
             "dirtyFields": Object {},
             "errors": Object {},
             "isDirty": false,
+            "isLoading": true,
             "isSubmitSuccessful": false,
             "isSubmitted": false,
             "isSubmitting": false,
@@ -17133,8 +17339,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "_getDirty": [Function],
           "_getFieldArray": [Function],
@@ -17166,8 +17386,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                 "1993": 0.57,
               },
               "hasCosts": "yes",
+              "medicaidShare": Object {
+                "1992": 100,
+                "1993": 100,
+              },
               "name": "Bob the Builder",
               "position": "The Builder",
+              "split": Object {
+                "1992": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+                "1993": Object {
+                  "federal": 90,
+                  "state": 10,
+                },
+              },
             },
             "mode": "onChange",
             "reValidateMode": "onChange",
@@ -17183,6 +17417,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             "touchedFields": false,
           },
           "_removeUnmounted": [Function],
+          "_reset": [Function],
           "_stateFlags": Object {
             "action": false,
             "mount": true,
@@ -17262,6 +17497,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
             },
           },
           "_updateFieldArray": [Function],
+          "_updateFormState": [Function],
           "_updateValid": [Function],
           "getFieldState": [Function],
           "register": [Function],
@@ -17302,8 +17538,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -19326,7 +19576,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "email",
                                 "ref": Object {
-                                  "name": "email",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "email address",
                               },
@@ -21360,7 +21613,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "name",
                                 "ref": Object {
-                                  "name": "name",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "Bob the Builder",
                               },
@@ -21370,16 +21626,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "position",
                                 "ref": Object {
-                                  "name": "position",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "The Builder",
                               },
                             },
                           },
+                          "_focusError": [Function],
                           "_formState": Object {
                             "dirtyFields": Object {},
                             "errors": Object {},
                             "isDirty": false,
+                            "isLoading": true,
                             "isSubmitSuccessful": false,
                             "isSubmitted": false,
                             "isSubmitting": false,
@@ -21399,8 +21660,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -21432,8 +21707,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -21449,6 +21738,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "touchedFields": false,
                           },
                           "_removeUnmounted": [Function],
+                          "_reset": [Function],
                           "_stateFlags": Object {
                             "action": false,
                             "mount": true,
@@ -21528,6 +21818,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             },
                           },
                           "_updateFieldArray": [Function],
+                          "_updateFormState": [Function],
                           "_updateValid": [Function],
                           "getFieldState": [Function],
                           "register": [Function],
@@ -21554,8 +21845,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -23578,7 +23883,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "email",
                                 "ref": Object {
-                                  "name": "email",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "email address",
                               },
@@ -25612,7 +25920,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "name",
                                 "ref": Object {
-                                  "name": "name",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "Bob the Builder",
                               },
@@ -25622,16 +25933,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "position",
                                 "ref": Object {
-                                  "name": "position",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "The Builder",
                               },
                             },
                           },
+                          "_focusError": [Function],
                           "_formState": Object {
                             "dirtyFields": Object {},
                             "errors": Object {},
                             "isDirty": false,
+                            "isLoading": true,
                             "isSubmitSuccessful": false,
                             "isSubmitted": false,
                             "isSubmitting": false,
@@ -25651,8 +25967,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -25684,8 +26014,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -25701,6 +26045,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "touchedFields": false,
                           },
                           "_removeUnmounted": [Function],
+                          "_reset": [Function],
                           "_stateFlags": Object {
                             "action": false,
                             "mount": true,
@@ -25780,6 +26125,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             },
                           },
                           "_updateFieldArray": [Function],
+                          "_updateFormState": [Function],
                           "_updateValid": [Function],
                           "getFieldState": [Function],
                           "register": [Function],
@@ -25792,12 +26138,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                     <div>
                       <React.Fragment />
                     </div>
-                    <strong>
-                      Total: 
-                    </strong>
-                    <Dollars>
-                      32
-                    </Dollars>
+                    <div
+                      className="ds-u-margin-top--2"
+                    >
+                      <strong>
+                        Total: 
+                      </strong>
+                      <Dollars>
+                        32
+                      </Dollars>
+                      <span
+                        className="ds-c-field__hint"
+                      >
+                        Cost with benefits x FTE = Total
+                      </span>
+                    </div>
                   </div>
                 </React.Fragment>
                 <React.Fragment>
@@ -25825,8 +26180,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -27849,7 +28218,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "email",
                                 "ref": Object {
-                                  "name": "email",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "email address",
                               },
@@ -29883,7 +30255,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "name",
                                 "ref": Object {
-                                  "name": "name",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "Bob the Builder",
                               },
@@ -29893,16 +30268,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "position",
                                 "ref": Object {
-                                  "name": "position",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "The Builder",
                               },
                             },
                           },
+                          "_focusError": [Function],
                           "_formState": Object {
                             "dirtyFields": Object {},
                             "errors": Object {},
                             "isDirty": false,
+                            "isLoading": true,
                             "isSubmitSuccessful": false,
                             "isSubmitted": false,
                             "isSubmitting": false,
@@ -29922,8 +30302,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -29955,8 +30349,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -29972,6 +30380,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "touchedFields": false,
                           },
                           "_removeUnmounted": [Function],
+                          "_reset": [Function],
                           "_stateFlags": Object {
                             "action": false,
                             "mount": true,
@@ -30051,6 +30460,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             },
                           },
                           "_updateFieldArray": [Function],
+                          "_updateFormState": [Function],
                           "_updateValid": [Function],
                           "getFieldState": [Function],
                           "register": [Function],
@@ -30077,8 +30487,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -32101,7 +32525,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "email",
                                 "ref": Object {
-                                  "name": "email",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "email address",
                               },
@@ -34135,7 +34562,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "name",
                                 "ref": Object {
-                                  "name": "name",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "Bob the Builder",
                               },
@@ -34145,16 +34575,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "position",
                                 "ref": Object {
-                                  "name": "position",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "The Builder",
                               },
                             },
                           },
+                          "_focusError": [Function],
                           "_formState": Object {
                             "dirtyFields": Object {},
                             "errors": Object {},
                             "isDirty": false,
+                            "isLoading": true,
                             "isSubmitSuccessful": false,
                             "isSubmitted": false,
                             "isSubmitting": false,
@@ -34174,8 +34609,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -34207,8 +34656,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -34224,6 +34687,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "touchedFields": false,
                           },
                           "_removeUnmounted": [Function],
+                          "_reset": [Function],
                           "_stateFlags": Object {
                             "action": false,
                             "mount": true,
@@ -34303,6 +34767,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             },
                           },
                           "_updateFieldArray": [Function],
+                          "_updateFormState": [Function],
                           "_updateValid": [Function],
                           "getFieldState": [Function],
                           "register": [Function],
@@ -34315,12 +34780,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                     <div>
                       <React.Fragment />
                     </div>
-                    <strong>
-                      Total: 
-                    </strong>
-                    <Dollars>
-                      170.99999999999997
-                    </Dollars>
+                    <div
+                      className="ds-u-margin-top--2"
+                    >
+                      <strong>
+                        Total: 
+                      </strong>
+                      <Dollars>
+                        170.99999999999997
+                      </Dollars>
+                      <span
+                        className="ds-c-field__hint"
+                      >
+                        Cost with benefits x FTE = Total
+                      </span>
+                    </div>
                   </div>
                 </React.Fragment>
               </div>,
@@ -34399,8 +34873,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_executeSchema": [Function],
                             "_fields": Object {
@@ -36423,7 +36911,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "email",
                                   "ref": Object {
-                                    "name": "email",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "email address",
                                 },
@@ -38457,7 +38948,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "name",
                                   "ref": Object {
-                                    "name": "name",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "Bob the Builder",
                                 },
@@ -38467,16 +38961,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "position",
                                   "ref": Object {
-                                    "name": "position",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "The Builder",
                                 },
                               },
                             },
+                            "_focusError": [Function],
                             "_formState": Object {
                               "dirtyFields": Object {},
                               "errors": Object {},
                               "isDirty": false,
+                              "isLoading": true,
                               "isSubmitSuccessful": false,
                               "isSubmitted": false,
                               "isSubmitting": false,
@@ -38496,8 +38995,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_getDirty": [Function],
                             "_getFieldArray": [Function],
@@ -38529,8 +39042,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "1993": 0.57,
                                 },
                                 "hasCosts": "yes",
+                                "medicaidShare": Object {
+                                  "1992": 100,
+                                  "1993": 100,
+                                },
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
+                                "split": Object {
+                                  "1992": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                  "1993": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                },
                               },
                               "mode": "onChange",
                               "reValidateMode": "onChange",
@@ -38546,6 +39073,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "touchedFields": false,
                             },
                             "_removeUnmounted": [Function],
+                            "_reset": [Function],
                             "_stateFlags": Object {
                               "action": false,
                               "mount": true,
@@ -38625,6 +39153,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               },
                             },
                             "_updateFieldArray": [Function],
+                            "_updateFormState": [Function],
                             "_updateValid": [Function],
                             "getFieldState": [Function],
                             "register": [Function],
@@ -38651,8 +39180,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_executeSchema": [Function],
                             "_fields": Object {
@@ -40675,7 +41218,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "email",
                                   "ref": Object {
-                                    "name": "email",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "email address",
                                 },
@@ -42709,7 +43255,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "name",
                                   "ref": Object {
-                                    "name": "name",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "Bob the Builder",
                                 },
@@ -42719,16 +43268,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "position",
                                   "ref": Object {
-                                    "name": "position",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "The Builder",
                                 },
                               },
                             },
+                            "_focusError": [Function],
                             "_formState": Object {
                               "dirtyFields": Object {},
                               "errors": Object {},
                               "isDirty": false,
+                              "isLoading": true,
                               "isSubmitSuccessful": false,
                               "isSubmitted": false,
                               "isSubmitting": false,
@@ -42748,8 +43302,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_getDirty": [Function],
                             "_getFieldArray": [Function],
@@ -42781,8 +43349,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "1993": 0.57,
                                 },
                                 "hasCosts": "yes",
+                                "medicaidShare": Object {
+                                  "1992": 100,
+                                  "1993": 100,
+                                },
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
+                                "split": Object {
+                                  "1992": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                  "1993": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                },
                               },
                               "mode": "onChange",
                               "reValidateMode": "onChange",
@@ -42798,6 +43380,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "touchedFields": false,
                             },
                             "_removeUnmounted": [Function],
+                            "_reset": [Function],
                             "_stateFlags": Object {
                               "action": false,
                               "mount": true,
@@ -42877,6 +43460,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               },
                             },
                             "_updateFieldArray": [Function],
+                            "_updateFormState": [Function],
                             "_updateValid": [Function],
                             "getFieldState": [Function],
                             "register": [Function],
@@ -42889,12 +43473,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       <div>
                         <React.Fragment />
                       </div>
-                      <strong>
-                        Total: 
-                      </strong>
-                      <Dollars>
-                        32
-                      </Dollars>
+                      <div
+                        className="ds-u-margin-top--2"
+                      >
+                        <strong>
+                          Total: 
+                        </strong>
+                        <Dollars>
+                          32
+                        </Dollars>
+                        <span
+                          className="ds-c-field__hint"
+                        >
+                          Cost with benefits x FTE = Total
+                        </span>
+                      </div>
                     </div>
                   </React.Fragment>
                   <React.Fragment>
@@ -42922,8 +43515,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_executeSchema": [Function],
                             "_fields": Object {
@@ -44946,7 +45553,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "email",
                                   "ref": Object {
-                                    "name": "email",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "email address",
                                 },
@@ -46980,7 +47590,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "name",
                                   "ref": Object {
-                                    "name": "name",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "Bob the Builder",
                                 },
@@ -46990,16 +47603,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "position",
                                   "ref": Object {
-                                    "name": "position",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "The Builder",
                                 },
                               },
                             },
+                            "_focusError": [Function],
                             "_formState": Object {
                               "dirtyFields": Object {},
                               "errors": Object {},
                               "isDirty": false,
+                              "isLoading": true,
                               "isSubmitSuccessful": false,
                               "isSubmitted": false,
                               "isSubmitting": false,
@@ -47019,8 +47637,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_getDirty": [Function],
                             "_getFieldArray": [Function],
@@ -47052,8 +47684,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "1993": 0.57,
                                 },
                                 "hasCosts": "yes",
+                                "medicaidShare": Object {
+                                  "1992": 100,
+                                  "1993": 100,
+                                },
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
+                                "split": Object {
+                                  "1992": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                  "1993": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                },
                               },
                               "mode": "onChange",
                               "reValidateMode": "onChange",
@@ -47069,6 +47715,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "touchedFields": false,
                             },
                             "_removeUnmounted": [Function],
+                            "_reset": [Function],
                             "_stateFlags": Object {
                               "action": false,
                               "mount": true,
@@ -47148,6 +47795,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               },
                             },
                             "_updateFieldArray": [Function],
+                            "_updateFormState": [Function],
                             "_updateValid": [Function],
                             "getFieldState": [Function],
                             "register": [Function],
@@ -47174,8 +47822,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_executeSchema": [Function],
                             "_fields": Object {
@@ -49198,7 +49860,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "email",
                                   "ref": Object {
-                                    "name": "email",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "email address",
                                 },
@@ -51232,7 +51897,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "name",
                                   "ref": Object {
-                                    "name": "name",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "Bob the Builder",
                                 },
@@ -51242,16 +51910,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "mount": true,
                                   "name": "position",
                                   "ref": Object {
-                                    "name": "position",
+                                    "focus": [Function],
+                                    "reportValidity": [Function],
+                                    "select": [Function],
+                                    "setCustomValidity": [Function],
                                   },
                                   "value": "The Builder",
                                 },
                               },
                             },
+                            "_focusError": [Function],
                             "_formState": Object {
                               "dirtyFields": Object {},
                               "errors": Object {},
                               "isDirty": false,
+                              "isLoading": true,
                               "isSubmitSuccessful": false,
                               "isSubmitted": false,
                               "isSubmitting": false,
@@ -51271,8 +51944,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "_getDirty": [Function],
                             "_getFieldArray": [Function],
@@ -51304,8 +51991,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                   "1993": 0.57,
                                 },
                                 "hasCosts": "yes",
+                                "medicaidShare": Object {
+                                  "1992": 100,
+                                  "1993": 100,
+                                },
                                 "name": "Bob the Builder",
                                 "position": "The Builder",
+                                "split": Object {
+                                  "1992": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                  "1993": Object {
+                                    "federal": 90,
+                                    "state": 10,
+                                  },
+                                },
                               },
                               "mode": "onChange",
                               "reValidateMode": "onChange",
@@ -51321,6 +52022,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "touchedFields": false,
                             },
                             "_removeUnmounted": [Function],
+                            "_reset": [Function],
                             "_stateFlags": Object {
                               "action": false,
                               "mount": true,
@@ -51400,6 +52102,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               },
                             },
                             "_updateFieldArray": [Function],
+                            "_updateFormState": [Function],
                             "_updateValid": [Function],
                             "getFieldState": [Function],
                             "register": [Function],
@@ -51412,12 +52115,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       <div>
                         <React.Fragment />
                       </div>
-                      <strong>
-                        Total: 
-                      </strong>
-                      <Dollars>
-                        170.99999999999997
-                      </Dollars>
+                      <div
+                        className="ds-u-margin-top--2"
+                      >
+                        <strong>
+                          Total: 
+                        </strong>
+                        <Dollars>
+                          170.99999999999997
+                        </Dollars>
+                        <span
+                          className="ds-c-field__hint"
+                        >
+                          Cost with benefits x FTE = Total
+                        </span>
+                      </div>
                     </div>
                   </React.Fragment>
                 </div>
@@ -51491,8 +52203,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -53515,7 +54241,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "email",
                                 "ref": Object {
-                                  "name": "email",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "email address",
                               },
@@ -55549,7 +56278,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "name",
                                 "ref": Object {
-                                  "name": "name",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "Bob the Builder",
                               },
@@ -55559,16 +56291,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "position",
                                 "ref": Object {
-                                  "name": "position",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "The Builder",
                               },
                             },
                           },
+                          "_focusError": [Function],
                           "_formState": Object {
                             "dirtyFields": Object {},
                             "errors": Object {},
                             "isDirty": false,
+                            "isLoading": true,
                             "isSubmitSuccessful": false,
                             "isSubmitted": false,
                             "isSubmitting": false,
@@ -55588,8 +56325,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -55621,8 +56372,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -55638,6 +56403,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "touchedFields": false,
                           },
                           "_removeUnmounted": [Function],
+                          "_reset": [Function],
                           "_stateFlags": Object {
                             "action": false,
                             "mount": true,
@@ -55717,6 +56483,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             },
                           },
                           "_updateFieldArray": [Function],
+                          "_updateFormState": [Function],
                           "_updateValid": [Function],
                           "getFieldState": [Function],
                           "register": [Function],
@@ -55851,8 +56618,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -57875,7 +58656,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "email",
                                 "ref": Object {
-                                  "name": "email",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "email address",
                               },
@@ -59909,7 +60693,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "name",
                                 "ref": Object {
-                                  "name": "name",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "Bob the Builder",
                               },
@@ -59919,16 +60706,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "position",
                                 "ref": Object {
-                                  "name": "position",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "The Builder",
                               },
                             },
                           },
+                          "_focusError": [Function],
                           "_formState": Object {
                             "dirtyFields": Object {},
                             "errors": Object {},
                             "isDirty": false,
+                            "isLoading": true,
                             "isSubmitSuccessful": false,
                             "isSubmitted": false,
                             "isSubmitting": false,
@@ -59948,8 +60740,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -59981,8 +60787,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -59998,6 +60818,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "touchedFields": false,
                           },
                           "_removeUnmounted": [Function],
+                          "_reset": [Function],
                           "_stateFlags": Object {
                             "action": false,
                             "mount": true,
@@ -60077,6 +60898,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             },
                           },
                           "_updateFieldArray": [Function],
+                          "_updateFormState": [Function],
                           "_updateValid": [Function],
                           "getFieldState": [Function],
                           "register": [Function],
@@ -60178,14 +61000,23 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       </NumberField>
                     </Component>
                     <div />
-                    <strong>
-                      Total: 
-                    </strong>
-                    <Dollars>
-                      <span>
-                        $32
+                    <div
+                      className="ds-u-margin-top--2"
+                    >
+                      <strong>
+                        Total: 
+                      </strong>
+                      <Dollars>
+                        <span>
+                          $32
+                        </span>
+                      </Dollars>
+                      <span
+                        className="ds-c-field__hint"
+                      >
+                        Cost with benefits x FTE = Total
                       </span>
-                    </Dollars>
+                    </div>
                   </div>
                   <h5
                     className="ds-h5"
@@ -60211,8 +61042,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -62235,7 +63080,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "email",
                                 "ref": Object {
-                                  "name": "email",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "email address",
                               },
@@ -64269,7 +65117,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "name",
                                 "ref": Object {
-                                  "name": "name",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "Bob the Builder",
                               },
@@ -64279,16 +65130,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "position",
                                 "ref": Object {
-                                  "name": "position",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "The Builder",
                               },
                             },
                           },
+                          "_focusError": [Function],
                           "_formState": Object {
                             "dirtyFields": Object {},
                             "errors": Object {},
                             "isDirty": false,
+                            "isLoading": true,
                             "isSubmitSuccessful": false,
                             "isSubmitted": false,
                             "isSubmitting": false,
@@ -64308,8 +65164,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -64341,8 +65211,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -64358,6 +65242,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "touchedFields": false,
                           },
                           "_removeUnmounted": [Function],
+                          "_reset": [Function],
                           "_stateFlags": Object {
                             "action": false,
                             "mount": true,
@@ -64437,6 +65322,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             },
                           },
                           "_updateFieldArray": [Function],
+                          "_updateFormState": [Function],
                           "_updateValid": [Function],
                           "getFieldState": [Function],
                           "register": [Function],
@@ -64571,8 +65457,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_executeSchema": [Function],
                           "_fields": Object {
@@ -66595,7 +67495,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "email",
                                 "ref": Object {
-                                  "name": "email",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "email address",
                               },
@@ -68629,7 +69532,10 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "name",
                                 "ref": Object {
-                                  "name": "name",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "Bob the Builder",
                               },
@@ -68639,16 +69545,21 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "mount": true,
                                 "name": "position",
                                 "ref": Object {
-                                  "name": "position",
+                                  "focus": [Function],
+                                  "reportValidity": [Function],
+                                  "select": [Function],
+                                  "setCustomValidity": [Function],
                                 },
                                 "value": "The Builder",
                               },
                             },
                           },
+                          "_focusError": [Function],
                           "_formState": Object {
                             "dirtyFields": Object {},
                             "errors": Object {},
                             "isDirty": false,
+                            "isLoading": true,
                             "isSubmitSuccessful": false,
                             "isSubmitted": false,
                             "isSubmitting": false,
@@ -68668,8 +69579,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                               "1993": 0.57,
                             },
                             "hasCosts": "yes",
+                            "medicaidShare": Object {
+                              "1992": 100,
+                              "1993": 100,
+                            },
                             "name": "Bob the Builder",
                             "position": "The Builder",
+                            "split": Object {
+                              "1992": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                              "1993": Object {
+                                "federal": 90,
+                                "state": 10,
+                              },
+                            },
                           },
                           "_getDirty": [Function],
                           "_getFieldArray": [Function],
@@ -68701,8 +69626,22 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                                 "1993": 0.57,
                               },
                               "hasCosts": "yes",
+                              "medicaidShare": Object {
+                                "1992": 100,
+                                "1993": 100,
+                              },
                               "name": "Bob the Builder",
                               "position": "The Builder",
+                              "split": Object {
+                                "1992": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                                "1993": Object {
+                                  "federal": 90,
+                                  "state": 10,
+                                },
+                              },
                             },
                             "mode": "onChange",
                             "reValidateMode": "onChange",
@@ -68718,6 +69657,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             "touchedFields": false,
                           },
                           "_removeUnmounted": [Function],
+                          "_reset": [Function],
                           "_stateFlags": Object {
                             "action": false,
                             "mount": true,
@@ -68797,6 +69737,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                             },
                           },
                           "_updateFieldArray": [Function],
+                          "_updateFormState": [Function],
                           "_updateValid": [Function],
                           "getFieldState": [Function],
                           "register": [Function],
@@ -68898,14 +69839,23 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
                       </NumberField>
                     </Component>
                     <div />
-                    <strong>
-                      Total: 
-                    </strong>
-                    <Dollars>
-                      <span>
-                        $171
+                    <div
+                      className="ds-u-margin-top--2"
+                    >
+                      <strong>
+                        Total: 
+                      </strong>
+                      <Dollars>
+                        <span>
+                          $171
+                        </span>
+                      </Dollars>
+                      <span
+                        className="ds-c-field__hint"
+                      >
+                        Cost with benefits x FTE = Total
                       </span>
-                    </Dollars>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -68963,6 +69913,7 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
       </ChoiceList>
     </Component>
     <input
+      aria-label="submitButton"
       className="ds-u-visibility--hidden"
       hidden={true}
       type="submit"
@@ -68971,14 +69922,1399 @@ exports[`the ApdKeyPersonForm component renders correctly 1`] = `
 </PersonForm>
 `;
 
-exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `
+exports[`the ApdKeyPersonForm component renders correctly for hitech type apds 1`] = `
 <form
   aria-label="form"
-  index={1}
+  id="key-personnel-1"
   onSubmit={[Function]}
 >
   <button
     aria-hidden="true"
+    aria-label="submitButton"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
+  <h4
+    className="ds-h4"
+  >
+    Additional Key Personnel
+  </h4>
+  <p
+    className="ds-u-margin-bottom--0"
+  >
+    Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
+  </p>
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_focusError": [Function],
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isLoading": true,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_reset": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="name"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_focusError": [Function],
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isLoading": true,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_reset": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="email"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_focusError": [Function],
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isLoading": true,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_reset": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="position"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_focusError": [Function],
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isLoading": true,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_reset": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="hasCosts"
+    render={[Function]}
+  />
+  <input
+    aria-label="submitButton"
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
+</form>
+`;
+
+exports[`the ApdKeyPersonForm component renders correctly for mmis type apds 1`] = `
+<form
+  aria-label="form"
+  id="key-personnel-1"
+  onSubmit={[Function]}
+>
+  <button
+    aria-hidden="true"
+    aria-label="submitButton"
+    disabled={true}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="submit"
+  />
+  <h4
+    className="ds-h4"
+  >
+    Additional Key Personnel
+  </h4>
+  <p
+    className="ds-u-margin-bottom--0"
+  >
+    Provide the name, email, and role for this key personnel. If applicable, provide the individual's total annual cost (including benefits) and their allocation to the overall project work.
+  </p>
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_focusError": [Function],
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isLoading": true,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_reset": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="name"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_focusError": [Function],
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isLoading": true,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_reset": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="email"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_focusError": [Function],
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isLoading": true,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_reset": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="position"
+    render={[Function]}
+  />
+  <Component
+    control={
+      Object {
+        "_defaultValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_executeSchema": [Function],
+        "_fields": Object {},
+        "_focusError": [Function],
+        "_formState": Object {
+          "dirtyFields": Object {},
+          "errors": Object {},
+          "isDirty": false,
+          "isLoading": true,
+          "isSubmitSuccessful": false,
+          "isSubmitted": false,
+          "isSubmitting": false,
+          "isValid": false,
+          "isValidating": false,
+          "submitCount": 0,
+          "touchedFields": Object {},
+        },
+        "_formValues": Object {
+          "costs": Object {
+            "1992": 100,
+            "1993": 300,
+          },
+          "email": "email address",
+          "fte": Object {
+            "1992": 0.32,
+            "1993": 0.57,
+          },
+          "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
+          "name": "Bob the Builder",
+          "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
+        },
+        "_getDirty": [Function],
+        "_getFieldArray": [Function],
+        "_getWatch": [Function],
+        "_names": Object {
+          "array": Set {},
+          "mount": Set {},
+          "unMount": Set {},
+          "watch": Set {},
+        },
+        "_options": Object {
+          "defaultValues": Object {
+            "costs": Object {
+              "1992": 100,
+              "1993": 300,
+            },
+            "email": "email address",
+            "fte": Object {
+              "1992": 0.32,
+              "1993": 0.57,
+            },
+            "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
+            "name": "Bob the Builder",
+            "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
+          },
+          "mode": "onChange",
+          "reValidateMode": "onChange",
+          "resolver": [Function],
+          "shouldFocusError": true,
+        },
+        "_proxyFormState": Object {
+          "dirtyFields": false,
+          "errors": "all",
+          "isDirty": false,
+          "isValid": "all",
+          "isValidating": false,
+          "touchedFields": false,
+        },
+        "_removeUnmounted": [Function],
+        "_reset": [Function],
+        "_stateFlags": Object {
+          "action": false,
+          "mount": false,
+          "watch": false,
+        },
+        "_subjects": Object {
+          "array": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "state": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+          "watch": Object {
+            "next": [Function],
+            "observers": Array [],
+            "subscribe": [Function],
+            "unsubscribe": [Function],
+          },
+        },
+        "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
+        "_updateValid": [Function],
+        "getFieldState": [Function],
+        "register": [Function],
+        "unregister": [Function],
+      }
+    }
+    name="hasCosts"
+    render={[Function]}
+  />
+  <input
+    aria-label="submitButton"
+    className="ds-u-visibility--hidden"
+    hidden={true}
+    type="submit"
+  />
+</form>
+`;
+
+exports[`the ApdKeyPersonForm component renders correctly if the person does not have costs 1`] = `
+<form
+  aria-label="form"
+  id="key-personnel-1"
+  onSubmit={[Function]}
+>
+  <button
+    aria-hidden="true"
+    aria-label="submitButton"
     disabled={true}
     style={
       Object {
@@ -69011,15 +71347,31 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
+        "_focusError": [Function],
         "_formState": Object {
           "dirtyFields": Object {},
           "errors": Object {},
           "isDirty": false,
+          "isLoading": true,
           "isSubmitSuccessful": false,
           "isSubmitted": false,
           "isSubmitting": false,
@@ -69039,8 +71391,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69063,8 +71429,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               "1993": 0.57,
             },
             "hasCosts": "no",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69080,6 +71460,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "touchedFields": false,
         },
         "_removeUnmounted": [Function],
+        "_reset": [Function],
         "_stateFlags": Object {
           "action": false,
           "mount": false,
@@ -69106,6 +71487,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           },
         },
         "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
         "_updateValid": [Function],
         "getFieldState": [Function],
         "register": [Function],
@@ -69129,15 +71511,31 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
+        "_focusError": [Function],
         "_formState": Object {
           "dirtyFields": Object {},
           "errors": Object {},
           "isDirty": false,
+          "isLoading": true,
           "isSubmitSuccessful": false,
           "isSubmitted": false,
           "isSubmitting": false,
@@ -69157,8 +71555,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69181,8 +71593,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               "1993": 0.57,
             },
             "hasCosts": "no",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69198,6 +71624,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "touchedFields": false,
         },
         "_removeUnmounted": [Function],
+        "_reset": [Function],
         "_stateFlags": Object {
           "action": false,
           "mount": false,
@@ -69224,6 +71651,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           },
         },
         "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
         "_updateValid": [Function],
         "getFieldState": [Function],
         "register": [Function],
@@ -69247,15 +71675,31 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
+        "_focusError": [Function],
         "_formState": Object {
           "dirtyFields": Object {},
           "errors": Object {},
           "isDirty": false,
+          "isLoading": true,
           "isSubmitSuccessful": false,
           "isSubmitted": false,
           "isSubmitting": false,
@@ -69275,8 +71719,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69299,8 +71757,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               "1993": 0.57,
             },
             "hasCosts": "no",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69316,6 +71788,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "touchedFields": false,
         },
         "_removeUnmounted": [Function],
+        "_reset": [Function],
         "_stateFlags": Object {
           "action": false,
           "mount": false,
@@ -69342,6 +71815,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           },
         },
         "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
         "_updateValid": [Function],
         "getFieldState": [Function],
         "register": [Function],
@@ -69365,15 +71839,31 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
+        "_focusError": [Function],
         "_formState": Object {
           "dirtyFields": Object {},
           "errors": Object {},
           "isDirty": false,
+          "isLoading": true,
           "isSubmitSuccessful": false,
           "isSubmitted": false,
           "isSubmitting": false,
@@ -69393,8 +71883,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
             "1993": 0.57,
           },
           "hasCosts": "no",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69417,8 +71921,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
               "1993": 0.57,
             },
             "hasCosts": "no",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69434,6 +71952,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           "touchedFields": false,
         },
         "_removeUnmounted": [Function],
+        "_reset": [Function],
         "_stateFlags": Object {
           "action": false,
           "mount": false,
@@ -69460,6 +71979,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
           },
         },
         "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
         "_updateValid": [Function],
         "getFieldState": [Function],
         "register": [Function],
@@ -69470,6 +71990,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
     render={[Function]}
   />
   <input
+    aria-label="submitButton"
     className="ds-u-visibility--hidden"
     hidden={true}
     type="submit"
@@ -69480,11 +72001,12 @@ exports[`the ApdKeyPersonForm component renders correctly if the person does not
 exports[`the ApdKeyPersonForm component renders correctly if the person is a primary contact 1`] = `
 <form
   aria-label="form"
-  index={0}
+  id="key-personnel-0"
   onSubmit={[Function]}
 >
   <button
     aria-hidden="true"
+    aria-label="submitButton"
     disabled={true}
     style={
       Object {
@@ -69517,15 +72039,31 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
+        "_focusError": [Function],
         "_formState": Object {
           "dirtyFields": Object {},
           "errors": Object {},
           "isDirty": false,
+          "isLoading": true,
           "isSubmitSuccessful": false,
           "isSubmitted": false,
           "isSubmitting": false,
@@ -69545,8 +72083,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69569,8 +72121,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69586,6 +72152,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "touchedFields": false,
         },
         "_removeUnmounted": [Function],
+        "_reset": [Function],
         "_stateFlags": Object {
           "action": false,
           "mount": false,
@@ -69612,6 +72179,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           },
         },
         "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
         "_updateValid": [Function],
         "getFieldState": [Function],
         "register": [Function],
@@ -69635,15 +72203,31 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
+        "_focusError": [Function],
         "_formState": Object {
           "dirtyFields": Object {},
           "errors": Object {},
           "isDirty": false,
+          "isLoading": true,
           "isSubmitSuccessful": false,
           "isSubmitted": false,
           "isSubmitting": false,
@@ -69663,8 +72247,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69687,8 +72285,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69704,6 +72316,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "touchedFields": false,
         },
         "_removeUnmounted": [Function],
+        "_reset": [Function],
         "_stateFlags": Object {
           "action": false,
           "mount": false,
@@ -69730,6 +72343,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           },
         },
         "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
         "_updateValid": [Function],
         "getFieldState": [Function],
         "register": [Function],
@@ -69753,15 +72367,31 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
+        "_focusError": [Function],
         "_formState": Object {
           "dirtyFields": Object {},
           "errors": Object {},
           "isDirty": false,
+          "isLoading": true,
           "isSubmitSuccessful": false,
           "isSubmitted": false,
           "isSubmitting": false,
@@ -69781,8 +72411,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69805,8 +72449,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69822,6 +72480,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "touchedFields": false,
         },
         "_removeUnmounted": [Function],
+        "_reset": [Function],
         "_stateFlags": Object {
           "action": false,
           "mount": false,
@@ -69848,6 +72507,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           },
         },
         "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
         "_updateValid": [Function],
         "getFieldState": [Function],
         "register": [Function],
@@ -69871,15 +72531,31 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_executeSchema": [Function],
         "_fields": Object {},
+        "_focusError": [Function],
         "_formState": Object {
           "dirtyFields": Object {},
           "errors": Object {},
           "isDirty": false,
+          "isLoading": true,
           "isSubmitSuccessful": false,
           "isSubmitted": false,
           "isSubmitting": false,
@@ -69899,8 +72575,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
             "1993": 0.57,
           },
           "hasCosts": "yes",
+          "medicaidShare": Object {
+            "1992": 100,
+            "1993": 100,
+          },
           "name": "Bob the Builder",
           "position": "The Builder",
+          "split": Object {
+            "1992": Object {
+              "federal": 90,
+              "state": 10,
+            },
+            "1993": Object {
+              "federal": 90,
+              "state": 10,
+            },
+          },
         },
         "_getDirty": [Function],
         "_getFieldArray": [Function],
@@ -69923,8 +72613,22 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
               "1993": 0.57,
             },
             "hasCosts": "yes",
+            "medicaidShare": Object {
+              "1992": 100,
+              "1993": 100,
+            },
             "name": "Bob the Builder",
             "position": "The Builder",
+            "split": Object {
+              "1992": Object {
+                "federal": 90,
+                "state": 10,
+              },
+              "1993": Object {
+                "federal": 90,
+                "state": 10,
+              },
+            },
           },
           "mode": "onChange",
           "reValidateMode": "onChange",
@@ -69940,6 +72644,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           "touchedFields": false,
         },
         "_removeUnmounted": [Function],
+        "_reset": [Function],
         "_stateFlags": Object {
           "action": false,
           "mount": false,
@@ -69966,6 +72671,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
           },
         },
         "_updateFieldArray": [Function],
+        "_updateFormState": [Function],
         "_updateValid": [Function],
         "getFieldState": [Function],
         "register": [Function],
@@ -69976,6 +72682,7 @@ exports[`the ApdKeyPersonForm component renders correctly if the person is a pri
     render={[Function]}
   />
   <input
+    aria-label="submitButton"
     className="ds-u-visibility--hidden"
     hidden={true}
     type="submit"

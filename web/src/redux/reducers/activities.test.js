@@ -1,3 +1,4 @@
+import { APD_TYPE } from '@cms-eapd/common';
 import {
   newActivity,
   newContractor,
@@ -73,8 +74,28 @@ describe('activities reducer helpers', () => {
   });
 
   it('can create a new activity', () => {
-    expect(newActivity({ years: ['2020'] })).toEqual({
-      alternatives: '',
+    expect(newActivity({ years: ['2020'], apdType: APD_TYPE.HITECH })).toEqual({
+      key: '--- key ---',
+      activityId: '--- key ---',
+      fundingSource: null,
+      name: '',
+      activityOverview: {
+        summary: '',
+        description: '',
+        alternatives: '',
+        standardsAndConditions: {
+          doesNotSupport: '',
+          supports: ''
+        }
+      },
+      activitySchedule: {
+        plannedStartDate: '',
+        plannedEndDate: ''
+      },
+      milestones: [],
+      outcomes: [],
+      statePersonnel: [],
+      expenses: [],
       contractorResources: [],
       costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
       costAllocationNarrative: {
@@ -83,21 +104,57 @@ describe('activities reducer helpers', () => {
         },
         methodology: ''
       },
-      description: '',
-      expenses: [],
-      fundingSource: null,
+      quarterlyFFP: {
+        2020: {
+          1: { inHouse: 25, contractors: 25, combined: 25 },
+          2: { inHouse: 25, contractors: 25, combined: 25 },
+          3: { inHouse: 25, contractors: 25, combined: 25 },
+          4: { inHouse: 25, contractors: 25, combined: 25 }
+        }
+      },
+      years: ['2020'],
+      meta: {
+        expanded: false
+      }
+    });
+  });
+
+  it('can create a new activity', () => {
+    expect(newActivity({ years: ['2020'], apdType: APD_TYPE.MMIS })).toEqual({
       key: '--- key ---',
       activityId: '--- key ---',
       name: '',
-      plannedEndDate: '',
-      plannedStartDate: '',
+      activityOverview: {
+        activitySnapshot: '',
+        problemStatement: '',
+        proposedSolution: ''
+      },
+      activitySchedule: {
+        plannedStartDate: '',
+        plannedEndDate: ''
+      },
+      analysisOfAlternativesAndRisks: {
+        alternativeAnalysis: '',
+        costBenefitAnalysis: '',
+        feasibilityStudy: '',
+        requirementsAnalysis: '',
+        forseeableRisks: ''
+      },
+      conditionsForEnhancedFunding: {
+        enhancedFundingQualification: null,
+        enhancedFundingJustification: ''
+      },
+      milestones: [],
       outcomes: [],
-      schedule: [],
       statePersonnel: [],
-      summary: '',
-      standardsAndConditions: {
-        doesNotSupport: '',
-        supports: ''
+      expenses: [],
+      contractorResources: [],
+      costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
+      costAllocationNarrative: {
+        years: {
+          2020: { otherSources: '' }
+        },
+        methodology: ''
       },
       quarterlyFFP: {
         2020: {

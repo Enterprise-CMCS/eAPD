@@ -1,21 +1,11 @@
-const knex = require('./knex');
-const affiliations = require('./affiliations');
-const apds = require('./apds');
-const auth = require('./auth');
-const files = require('./files');
-const events = require('./events');
-const roles = require('./roles');
-const states = require('./states');
-const users = require('./users');
+import raw from './knex.js';
+import createEventForAPD from './events.js';
 
-module.exports = {
-  raw: knex,
-  ...affiliations,
-  ...auth,
-  ...apds,
-  ...files,
-  ...events,
-  ...roles,
-  ...states,
-  ...users
-};
+export * from './affiliations.js';
+export * from './apds.js';
+export * from './auth.js';
+export * from './files.js';
+export * from './roles.js';
+export * from './states.js';
+export * from './users.js';
+export { raw, createEventForAPD };

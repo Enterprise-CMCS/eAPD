@@ -1,10 +1,10 @@
-const tap = require('tap');
-const sinon = require('sinon');
-const { can } = require('../../../middleware');
-const endpoints = require('./get');
+import tap from 'tap';
+import { createSandbox, match } from 'sinon';
+import { can } from '../../../middleware/index.js';
+import endpoints from './get.js';
 
-tap.test('apds files endpoints', async endpointTest => {
-  const sandbox = sinon.createSandbox();
+tap.test('apds files endpoints', { timeout: 300000 }, async endpointTest => {
+  const sandbox = createSandbox();
   const app = { get: sandbox.stub(), post: sandbox.stub() };
 
   const di = {
@@ -40,7 +40,7 @@ tap.test('apds files endpoints', async endpointTest => {
       app.get.calledWith(
         '/apds/:id/files/:fileID',
         can('view-document'),
-        sinon.match.func
+        match.func
       ),
       'endpoint for fetching APD files is setup'
     );

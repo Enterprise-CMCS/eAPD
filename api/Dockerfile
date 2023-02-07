@@ -1,11 +1,10 @@
-FROM node:16.16.0-alpine3.15
-RUN apk add --no-cache python3 g++ make
+FROM node:16.19.0-bullseye-slim
+RUN apt-get update && apt-get install build-essential curl -y
 
 RUN mkdir /app
 WORKDIR /app
 
 COPY package.json .
-COPY babel.config.js .
 COPY yarn.lock .
 COPY api ./api
 COPY common ./common
@@ -16,5 +15,4 @@ USER node:node
 RUN yarn install --frozen-lockfile --non-interactive
 
 WORKDIR /app/api
-
 CMD yarn run start-dev

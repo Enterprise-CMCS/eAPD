@@ -1,23 +1,22 @@
-const sinon = require('sinon');
-const tap = require('tap');
-const dbMock = require('./dbMock.test');
-const oktaAuthMock = require('../auth/oktaAuthMock.test');
-const knex = require('./knex');
+import { createSandbox, stub } from 'sinon';
+import tap from 'tap';
+import dbMock from './dbMock.test.js';
+import oktaAuthMock from '../auth/oktaAuthMock.test.js';
+import knex from './knex.js';
 
-const {
-  getAllUsers,
+import {
   getUserByID,
   populateUserRole,
   sanitizeUser,
   userLoggedIntoState
-} = require('./users');
+} from './users.js';
 
 tap.test('database wrappers / users', async usersTests => {
-  const sandbox = sinon.createSandbox();
+  const sandbox = createSandbox();
   const db = dbMock('okta_users');
   const { oktaClient: client } = oktaAuthMock;
 
-  const populate = sinon.stub();
+  const populate = stub();
 
   const sanitizedUser = {
     activities: 'auth activities',
@@ -330,30 +329,6 @@ tap.test('database wrappers / users', async usersTests => {
       });
       test.ok(getAffiliationByState.calledOnceWith(unsanitizedUser.id, 'exp'));
       test.ok(updateAuthAffiliation.calledOnce);
-    });
-  });
-
-  usersTests.test('getting all users', async getAllUsersTests => {
-    getAllUsersTests.beforeEach(async () => {
-      client.listUsers.resolves([1, 2, 3]);
-    });
-
-    getAllUsersTests.test('with cleaned output', async test => {
-      const users = await getAllUsers({ client, populate });
-
-      test.ok(populate.calledWith(1));
-      test.ok(populate.calledWith(2));
-      test.ok(populate.calledWith(3));
-      test.same(users, [sanitizedUser, sanitizedUser, sanitizedUser]);
-    });
-
-    getAllUsersTests.test('with uncleaned output', async test => {
-      const users = await getAllUsers({ clean: false, client, populate });
-
-      test.ok(populate.calledWith(1));
-      test.ok(populate.calledWith(2));
-      test.ok(populate.calledWith(3));
-      test.same(users, [unsanitizedUser, unsanitizedUser, unsanitizedUser]);
     });
   });
 

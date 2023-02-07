@@ -1,6 +1,6 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-const itemSchema = Joi.object({
+const complianceSchema = Joi.object({
   checked: Joi.boolean().required().label('checked').messages({
     'boolean.base': 'Select yes or no',
     'boolean.empty': 'Select yes or no',
@@ -19,11 +19,16 @@ const itemSchema = Joi.object({
   })
 });
 
-const schemas = Joi.object({
-  procurement: Joi.array().items(itemSchema).required(),
-  recordsAccess: Joi.array().items(itemSchema).required(),
-  softwareRights: Joi.array().items(itemSchema).required(),
-  security: Joi.array().items(itemSchema).required()
+export const hitechAssurancesAndComplianceSchema = Joi.object({
+  procurement: Joi.array().items(complianceSchema).required(),
+  recordsAccess: Joi.array().items(complianceSchema).required(),
+  softwareRights: Joi.array().items(complianceSchema).required(),
+  security: Joi.array().items(complianceSchema).required()
 });
 
-export default schemas;
+export const mmisAssurancesAndComplianceSchema = Joi.object({
+  procurement: Joi.array().items(complianceSchema).required(),
+  recordsAccess: Joi.array().items(complianceSchema).required(),
+  softwareRights: Joi.array().items(complianceSchema).required(),
+  independentVV: Joi.array().items(complianceSchema).required()
+});

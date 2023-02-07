@@ -3,27 +3,27 @@ import fr from './locales/fr.json';
 describe('i18n translations', () => {
   let container;
 
-  const load = () => {
+  const load = async () => {
     jest.resetModules();
-    container = require('./index'); // eslint-disable-line global-require
+    container = await import('./index'); // eslint-disable-line global-require
     container.I18n = container.default;
     container.I18n.locale = 'en';
   };
 
-  beforeEach(() => load());
+  beforeEach(async () => load());
 
   test('t function', () => {
     expect(container.t('title', { year: 2018 })).toBe('2018 HITECH APD');
     expect(container.t('nonsense')).toBe('[missing "en.nonsense" translation]');
   });
 
-  test('t function, debug mode', () => {
+  test('t function, debug mode', async () => {
     const env = process.env.NODE_ENV;
     const { hash } = window.location;
 
     process.env.NODE_ENV = 'dev';
     window.location.hash = 'i18n';
-    load();
+    await load();
 
     expect(
       container.t(['i18n', 'resource', 'path'], {

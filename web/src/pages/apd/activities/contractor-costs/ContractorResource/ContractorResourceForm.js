@@ -11,7 +11,7 @@ import Dollars from '../../../../../components/Dollars';
 import NumberField from '../../../../../components/NumberField';
 import RichText from '../../../../../components/RichText';
 
-import validationSchema from '@cms-eapd/common/schemas/privateContractor';
+import { contractorResourcesSchema as schema } from '@cms-eapd/common';
 import { saveContractor as actualSaveContractor } from '../../../../../redux/actions/editActivity';
 
 const getCheckedValue = value => {
@@ -63,7 +63,7 @@ const ContractorResourceForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(validationSchema)
+      resolver: joiResolver(schema)
     });
     const [useHourly, setUseHourly] = useState(getCheckedValue(item.useHourly));
 
@@ -83,13 +83,14 @@ const ContractorResourceForm = forwardRef(
     };
 
     return (
-      <form index={index} onSubmit={onSubmit} aria-label="form">
+      <form id={`contractor-${index}`} onSubmit={onSubmit} aria-label="form">
         {/* Prevent implicit submission of the form. */}
         <button
           type="submit"
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <Controller
           name="name"
@@ -355,6 +356,7 @@ const ContractorResourceForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );

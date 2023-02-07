@@ -19,6 +19,7 @@ yum install newrelic-infra -y
 # directory.  Unzip stuff there and then set permissions.
 groupadd eapd
 gpasswd -a ec2-user eapd
+
 mkdir /app
 mkdir /app/api
 mkdir /app/web
@@ -67,7 +68,9 @@ gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
 
 # Install packages
 yum -y install git
+yum -y install epel-release
 yum -y install nginx
+
 yum -y install mongodb-org-5.0.3-1.el7 checkpolicy
 
 # Install CloudWatch Agent
@@ -149,10 +152,10 @@ export TERM="xterm"
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 source ~/.bashrc
 
-# We're using Node 16.16.0, we care about minor/patch versions
-nvm install 16.16.0
-nvm alias default 16.16.0
-nvm use 16.16.0
+# We're using Node 16.19.0, we care about minor/patch versions
+nvm install 16.19.0
+nvm alias default 16.19.0
+nvm use 16.19.0
 npm i -g yarn@1.22.18
 
 # Install pm2: https://www.npmjs.com/package/pm2

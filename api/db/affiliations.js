@@ -1,7 +1,10 @@
-const logger = require('../logger')('db/affiliations');
-const knex = require('./knex');
+import loggerFactory from '../logger/index.js';
+import knex from './knex.js';
+import { defaultAPDYears } from '@cms-eapd/common';
 
-const selectedColumns = [
+const logger = loggerFactory('db/affiliations');
+
+export const selectedColumns = [
   'auth_affiliations.id',
   'auth_affiliations.user_id as userId',
   'auth_affiliations.state_id as stateId',
@@ -20,7 +23,7 @@ const statusConverter = {
   null: ['requested', 'approved', 'denied', 'revoked']
 };
 
-const getAffiliationsByStateId = ({
+export const getAffiliationsByStateId = ({
   stateId,
   status = null,
   isFedAdmin = false,
@@ -55,7 +58,7 @@ const getAffiliationsByStateId = ({
   return [];
 };
 
-const getPopulatedAffiliationsByStateId = ({
+export const getPopulatedAffiliationsByStateId = ({
   stateId,
   status,
   isFedAdmin,
@@ -64,7 +67,7 @@ const getPopulatedAffiliationsByStateId = ({
   return getAffiliationsByStateId_({ stateId, status, isFedAdmin });
 };
 
-const getAffiliationsByUserId = (userId, { db = knex } = {}) => {
+export const getAffiliationsByUserId = (userId, { db = knex } = {}) => {
   return db('auth_affiliations')
     .select(selectedColumns)
     .where('auth_affiliations.user_id', userId)
@@ -72,7 +75,7 @@ const getAffiliationsByUserId = (userId, { db = knex } = {}) => {
     .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id');
 };
 
-const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
+export const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
   return db('auth_affiliations')
     .select(selectedColumns)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
@@ -84,11 +87,15 @@ const getAffiliationById = ({ stateId, affiliationId, db = knex }) => {
     .first();
 };
 
-const getPopulatedAffiliationById = ({ stateId, affiliationId, db = knex }) => {
+export const getPopulatedAffiliationById = ({
+  stateId,
+  affiliationId,
+  db = knex
+}) => {
   return getAffiliationById({ stateId, affiliationId, db });
 };
 
-const reduceAffiliations = affiliations => {
+export const reduceAffiliations = affiliations => {
   // combine affiliations for each user.
   // many fields are omitted for clarity
   // Given:
@@ -121,7 +128,7 @@ const reduceAffiliations = affiliations => {
   return Object.values(results);
 };
 
-const getAllAffiliations = async ({ status, db = knex } = {}) => {
+export const getAllAffiliations = async ({ status, db = knex } = {}) => {
   const query = db('auth_affiliations')
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
     .leftJoin('okta_users', 'auth_affiliations.user_id', 'okta_users.user_id')
@@ -146,7 +153,7 @@ const getAllAffiliations = async ({ status, db = knex } = {}) => {
   return query;
 };
 
-const getAllPopulatedAffiliations = async ({
+export const getAllPopulatedAffiliations = async ({
   status,
   db = knex,
   getAllAffiliations_ = getAllAffiliations,
@@ -157,7 +164,7 @@ const getAllPopulatedAffiliations = async ({
   return reduceAffiliations_(affiliations);
 };
 
-const getAffiliationMatches = async ({ stateId, db = knex }) => {
+export const getAffiliationMatches = async ({ stateId, db = knex }) => {
   const query = db('auth_affiliations')
     .select(selectedColumns)
     .leftJoin('auth_roles', 'auth_affiliations.role_id', 'auth_roles.id')
@@ -176,13 +183,14 @@ const getAffiliationMatches = async ({ stateId, db = knex }) => {
   );
 };
 
-const updateAuthAffiliation = async ({
+export const updateAuthAffiliation = async ({
   db = knex,
   transaction = null,
   affiliationId,
   newRoleId,
   newStatus,
-  changedBy,
+  changedBy, // userId of the individual updating the affiliation
+  changedByRole, // role name of the individual updating the affiliation
   stateId,
   ffy
 }) => {
@@ -200,9 +208,13 @@ const updateAuthAffiliation = async ({
     throw new Error('User is editing their own affiliation');
   }
 
+  const validAssignableRoles = {
+    'eAPD Federal Admin': ['eAPD State Admin'],
+    'eAPD State Admin': ['eAPD State Staff', 'eAPD State Contractor']
+  };
+
   // Lookup role name and set expiration date accordingly
-  // The front end will pass in a -1 if the role is being revoked/denied so we
-  // need to handle that case here
+  // The front end will pass in a -1 if the role is revoked/denied
   const { name: roleName } =
     newRoleId < 0
       ? { name: null }
@@ -211,19 +223,51 @@ const updateAuthAffiliation = async ({
           .where({ id: newRoleId })
           .first();
 
-  let expirationDate = null;
-  if (newStatus === 'approved') {
-    const today = new Date();
-    if (
-      roleName === 'eAPD State Staff' ||
-      roleName === 'eAPD State Contractor'
-    ) {
-      expirationDate = new Date(
-        today.getFullYear() + 1,
-        today.getMonth(),
-        today.getDate()
+  // Check user is assigning a valid role
+  if (
+    !validAssignableRoles[`${changedByRole}`].includes(roleName) &&
+    roleName !== null
+  ) {
+    throw new Error('User is attempting to assign an invalid role');
+  }
+
+  // For State Admin roles, check there is a matching certificate on file
+  if (roleName === 'eAPD State Admin') {
+    // Get email of assignee
+    const { email: affiliationUserEmail } = await (transaction || db)(
+      'okta_users'
+    )
+      .select('email')
+      .where({ user_id: affiliationUserId })
+      .first();
+
+    // Lookup matching certificate
+    const allCertifications = await (transaction || db)(
+      'state_admin_certifications'
+    )
+      .select('status', 'ffy')
+      .where({ email: affiliationUserEmail, state: stateId });
+
+    if (allCertifications.length === 0) {
+      throw new Error('Unable to update affiliation: missing certification');
+    }
+
+    const activeCertYears = allCertifications
+      .filter(cert => cert.status === 'active')
+      .map(cert => String(cert.ffy));
+    const hasActiveCert = defaultAPDYears().some(i =>
+      activeCertYears.includes(i)
+    );
+
+    if (!hasActiveCert) {
+      throw new Error(
+        'Unable to update affiliation: no current certifications'
       );
     }
+  }
+
+  let expirationDate = null;
+  if (newStatus === 'approved') {
     if (roleName === 'eAPD State Admin') {
       expirationDate = ffy === undefined ? null : new Date(ffy, '09', '01');
     }
@@ -250,18 +294,4 @@ const updateAuthAffiliation = async ({
         authAffiliationAudit
       );
     });
-};
-
-module.exports = {
-  getAffiliationsByStateId,
-  getPopulatedAffiliationsByStateId,
-  getAffiliationById,
-  getPopulatedAffiliationById,
-  getAllAffiliations,
-  reduceAffiliations,
-  getAllPopulatedAffiliations,
-  getAffiliationsByUserId,
-  getAffiliationMatches,
-  updateAuthAffiliation,
-  selectedColumns
 };

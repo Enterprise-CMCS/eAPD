@@ -1,11 +1,11 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
+} from '../../../endpoint-tests/utils.js';
 
 describe('auth/certifications put endpoint', () => {
   describe('PUT /auth/certifications', () => {
@@ -17,9 +17,9 @@ describe('auth/certifications put endpoint', () => {
 
     const payload = {
       certificationId: '5004',
-      affiliationId: '4004',
+      affiliationId: '4005',
       stateId: 'ak',
-      certificationFfy: '2022'
+      certificationFfy: '2023'
     };
 
     unauthenticatedTest('put', url);
@@ -28,11 +28,12 @@ describe('auth/certifications put endpoint', () => {
     describe('when authenticated as a user with permissions', () => {
       let api;
       beforeAll(async () => {
-        api = login();
+        api = login('fed-admin');
       });
 
       it('with no request body', async () => {
         const response = await api.put(url, {});
+
         expect(response.status).toEqual(400);
         expect(response.data).toMatchSnapshot();
       });

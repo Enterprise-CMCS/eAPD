@@ -1,12 +1,14 @@
-const logger = require('../../logger')('me route get');
-const {
+import loggerFactory from '../../logger/index.js';
+import {
   verifyEAPDToken,
   exchangeToken,
   updateUserToken,
   verifyWebToken
-} = require('../../auth/jwtUtils');
+} from '../../auth/jwtUtils.js';
 
-module.exports = (
+const logger = loggerFactory('me route get');
+
+export default (
   app,
   {
     verifyOkta = verifyWebToken,

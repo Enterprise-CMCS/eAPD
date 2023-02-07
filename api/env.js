@@ -1,6 +1,6 @@
 // Checks the environment for necessary data, sets defaults as necessary
 
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 
 const defaults = {
   ENDPOINT_COVERAGE_CAPTURE: 'false',

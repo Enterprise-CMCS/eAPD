@@ -1,9 +1,6 @@
 /* eslint-disable camelcase */
 
-const {
-  schema: { arrayOf, jsonResponse },
-  responses
-} = require('../../openAPI/helpers');
+import { jsonResponse, arrayOf, responses } from '../../openAPI/helpers.js';
 
 const id = {
   type: 'integer',
@@ -100,15 +97,6 @@ const getAffiliationByState = {
     tags,
     description: 'Get a list of all user affiliations for a US State',
     parameters: [stateIdParameter, filterStatusParameter],
-    requestBody: {
-      required: false,
-      content: jsonResponse({
-        type: 'object',
-        properties: {
-          filter_status
-        }
-      })
-    },
     responses: {
       200: {
         description: 'List of all user affiliations for a US State',
@@ -201,4 +189,4 @@ const affiliationRoutes = {
   }
 };
 
-module.exports = affiliationRoutes;
+export default affiliationRoutes;

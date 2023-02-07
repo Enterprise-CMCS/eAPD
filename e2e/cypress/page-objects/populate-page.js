@@ -1,5 +1,5 @@
-import ActivityPage from './activity-page';
-import BudgetPage from './budget-page';
+import ActivityPage from './activity-page.js';
+import BudgetPage from './budget-page.js';
 
 class PopulatePage {
   budgetPage = new BudgetPage();
@@ -31,15 +31,10 @@ class PopulatePage {
 
   fillActivityOverview = ({
     shortOverview,
-    startDate,
-    endDate,
     detailedDescription,
     supportingJustifications,
     supportsMedicaid
   } = {}) => {
-    this.fillDate('Start date', startDate);
-    this.fillDate('End date', endDate);
-
     cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
     cy.setTinyMceContent('activity-short-overview-field', shortOverview);
     cy.setTinyMceContent('activity-description-field', detailedDescription);
@@ -69,9 +64,11 @@ class PopulatePage {
 
   fillMilestoneForm = ({ milestone, targetDate } = {}) => {
     this.fillInputField('Name', milestone);
-    cy.get('[class="ds-c-fieldset"]').within(() => {
-      this.fillDate('Target completion date', targetDate);
-    });
+    cy.get('[class="ds-c-fieldset"]')
+      .eq(2)
+      .within(() => {
+        this.fillDate('Target completion date', targetDate);
+      });
     cy.get('button[id="form-and-review-list--done-btn"]').click();
     // cy.findByRole('button', { name: /Save/i }).click();
   };

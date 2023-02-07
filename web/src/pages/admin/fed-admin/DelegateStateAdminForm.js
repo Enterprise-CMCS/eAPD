@@ -2,9 +2,9 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { TextField, Dropdown, Button, ChoiceList } from '@cmsgov/design-system';
+import { defaultAPDYears } from '@cms-eapd/common';
 
 import axios, { apiUrl } from '../../../util/api';
-import { twoYears } from '../../../util';
 import { STATES } from '../../../util/states';
 import DocumentUpload from '../../../components/DocumentUpload';
 import PropTypes from 'prop-types';
@@ -18,7 +18,7 @@ const dropdownOptions = STATES.map(item => {
 });
 dropdownOptions.unshift({ label: 'Select an Option', value: '' });
 
-const yearChoices = twoYears.map(year => ({
+const yearChoices = defaultAPDYears().map(year => ({
   label: `FFY ${year}`,
   value: year
 }));

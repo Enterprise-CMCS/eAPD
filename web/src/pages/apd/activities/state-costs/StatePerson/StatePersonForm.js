@@ -8,7 +8,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import TextArea from '../../../../../components/TextArea';
 import PersonCostForm from '../../../../../components/PersonCostForm';
 
-import statePersonnelSchema from '@cms-eapd/common/schemas/statePersonnel';
+import { statePersonnelDetailSchema as schema } from '@cms-eapd/common';
 import { savePersonnel as actualSavePersonnel } from '../../../../../redux/actions/editActivity';
 
 const StatePersonForm = forwardRef(
@@ -30,7 +30,7 @@ const StatePersonForm = forwardRef(
       },
       mode: 'onBlur',
       reValidateMode: 'onBlur',
-      resolver: joiResolver(statePersonnelSchema)
+      resolver: joiResolver(schema)
     });
 
     const [subFormValid, setSubFormValid] = useState(false);
@@ -66,13 +66,14 @@ const StatePersonForm = forwardRef(
     };
 
     return (
-      <form index={index} onSubmit={onSubmit}>
+      <form id={`state-staff-${index}`} onSubmit={onSubmit}>
         {/* Prevent implicit submission of the form. */}
         <button
           type="submit"
           disabled
           style={{ display: 'none' }}
           aria-hidden="true"
+          aria-label="submitButton"
         />
         <h4 className="ds-h4">Personnel {index + 1}:</h4>
         <Controller
@@ -130,6 +131,7 @@ const StatePersonForm = forwardRef(
           type="submit"
           ref={ref}
           hidden
+          aria-label="submitButton"
         />
       </form>
     );

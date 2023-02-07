@@ -1,11 +1,12 @@
-const mongoose = require('mongoose');
-const { setup, teardown } = require('../../db/mongodb');
-const { createAPD } = require('../../db/apds');
+import mongoose from 'mongoose';
+import { setup, teardown } from '../../db/mongodb.js';
+import { createAPD } from '../../db/apds.js';
+import loggerFactory from '../../logger/index.js';
+import { APD, Budget } from '../../models/index.js';
 
-const { data: apdData } = require(`../${process.env.NODE_ENV}/apds`); // eslint-disable-line import/no-dynamic-require
+const { data: apdData } = await import(`../${process.env.NODE_ENV}/apds.js`);
 
-const logger = require('../../logger')('mongoose APD seeder');
-const { APD, Budget } = require('../../models/index');
+const logger = loggerFactory('mongoose APD seeder');
 
 const models = [APD, Budget];
 
@@ -45,7 +46,9 @@ const populate = async ({ model, data, create }) => {
       `Seeding ${model.collection.name} with ${data.length} records`
     );
     if (Array.isArray(data)) {
-      return Promise.all(data.map(item => create(item)));
+      return Promise.all(data.map(item => create(item))).catch(err =>
+        logger.error(err)
+      );
     }
     return create(data);
   }
@@ -56,7 +59,7 @@ const populate = async ({ model, data, create }) => {
 };
 
 // Connect to MongoDB via Mongoose
-exports.seed = async () => {
+export const seed = async () => {
   try {
     logger.verbose(`Connecting to MongoDB to seed data`);
     await setup();
@@ -75,7 +78,7 @@ exports.seed = async () => {
   }
 };
 
-exports.drop = async () => {
+export const drop = async () => {
   try {
     await setup();
     logger.verbose(

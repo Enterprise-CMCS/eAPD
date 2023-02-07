@@ -1,13 +1,11 @@
-const { loggedIn } = require('../../../middleware/auth');
-const { can } = require('../../../middleware');
-const logger = require('../../../logger')('auth certifications put');
+import { can, loggedIn } from '../../../middleware/index.js';
+import loggerFactory from '../../../logger/index.js';
+import { matchStateAdminCertification as matchCertification } from '../../../db/certifications.js';
+import { getAllActiveRoles as getActiveRoles } from '../../../db/roles.js';
 
-const {
-  matchStateAdminCertification: matchCertification
-} = require('../../../db/certifications');
-const { getAllActiveRoles: getActiveRoles } = require('../../../db/roles');
+const logger = loggerFactory('auth certifications put');
 
-module.exports = (
+export default (
   app,
   {
     matchStateAdminCertification = matchCertification,
@@ -36,6 +34,7 @@ module.exports = (
           stateId,
           ffy: certificationFfy,
           changedBy: req.user.id,
+          changedByRole: req.user.role,
           newRoleId: stateAdminId,
           newStatus: 'approved'
         });

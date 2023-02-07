@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Summary Activity Breakdown Table renders correctly renders correctly 1`] = `
+exports[`State and Contractor Cost Breakdown Table renders correctly renders correctly 1`] = `
 <table
   className="budget-table activity-budget-table"
   id="activity-3-2016"

@@ -3,7 +3,7 @@ import {
   updateStatePersonnel,
   getCostFromItemByYear,
   getPropCostType
-} from './budget';
+} from './budget.js';
 
 describe('budget util methods', () => {
   describe('getSharesOfTotalMedicaidCost', () => {

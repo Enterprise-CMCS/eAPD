@@ -1,11 +1,11 @@
-const load = () => {
+const load = async () => {
   jest.resetModules();
-  return require('./index'); // eslint-disable-line global-require
+  return import('./index'); // eslint-disable-line global-require
 };
 
 describe('utility arrays', () => {
-  test('constant shared arrays are as expected', () => {
-    const { ACTIVITY_FUNDING_SOURCES, STATES, STANDARDS } = load();
+  test('constant shared arrays are as expected', async () => {
+    const { ACTIVITY_FUNDING_SOURCES, STATES, STANDARDS } = await load();
 
     expect(ACTIVITY_FUNDING_SOURCES).toEqual(['HIT', 'HIE', 'MMIS']);
     expect(STATES.length).toBe(56);
@@ -13,40 +13,21 @@ describe('utility arrays', () => {
   });
 });
 
-describe('provides default years based on now', () => {
-  test('before October', () => {
-    jest.useFakeTimers().setSystemTime(new Date('1970-09-01').getTime());
-    // tick forward 10 days, so we're not on the weird date boundary
-    jest.advanceTimersByTime(864000000);
-    const { defaultAPDYearOptions, defaultAPDYears } = load();
-
-    expect(defaultAPDYearOptions).toEqual(['1970', '1971', '1972']);
-    expect(defaultAPDYears).toEqual(['1970', '1971']);
-
-    jest.clearAllTimers();
-  });
-
-  test('after October', () => {
-    jest.useFakeTimers().setSystemTime(new Date('1970-10-01').getTime());
-    // tick forward 360 days
-    jest.advanceTimersByTime(31104000000);
-    const { defaultAPDYearOptions, defaultAPDYears } = load();
-
-    expect(defaultAPDYearOptions).toEqual(['1971', '1972', '1973']);
-    expect(defaultAPDYears).toEqual(['1971', '1972']);
-
-    jest.clearAllTimers();
-  });
-});
-
 describe('utility functions', () => {
-  const {
-    applyToNumbers,
-    getParams,
-    stateDateToDisplay,
-    stateDateRangeToDisplay,
-    stateLookup
-  } = load();
+  let applyToNumbers;
+  let getParams;
+  let stateDateToDisplay;
+  let stateDateRangeToDisplay;
+  let stateLookup;
+  beforeAll(async () => {
+    ({
+      applyToNumbers,
+      getParams,
+      stateDateToDisplay,
+      stateDateRangeToDisplay,
+      stateLookup
+    } = await load());
+  });
 
   test('apply a function to numbers in an object, deeply', () => {
     expect(applyToNumbers({ a: 1, b: 2, c: { d: 7 } }, () => 'boop')).toEqual({

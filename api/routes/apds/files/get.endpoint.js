@@ -1,17 +1,17 @@
-const {
+import {
   getDB,
   setupDB,
   teardownDB,
   login,
   unauthenticatedTest,
   unauthorizedTest
-} = require('../../../endpoint-tests/utils');
-const {
+} from '../../../endpoint-tests/utils.js';
+import {
   mnAPDId,
   akAPDId,
-  akAPD2Id,
+  akMMISId,
   badAPDId
-} = require('../../../seeds/test/apds');
+} from '../../../seeds/test/apds.js';
 
 describe('APD files endpoints', () => {
   describe('Get a file associated with an APD | GET /apds/:id/files/:fileID', () => {
@@ -51,7 +51,7 @@ describe('APD files endpoints', () => {
 
       it('with an APD that is not associated with the file', async () => {
         const response = await api.get(
-          url(akAPD2Id, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
+          url(akMMISId, '74aa0d06-ae6f-472f-8999-6ca0487c494f')
         );
 
         expect(response.status).toEqual(400);

@@ -31,9 +31,10 @@ source "amazon-ebs" "Golden_Image" {
             virtualization-type = "hvm"
         }
         most_recent = true
-        owners      = [var.gold_owner]
+        owners      = ["842420567215"]
     }
     ssh_username = "ec2-user"
+    ena_support = true
     associate_public_ip_address = true
     vpc_id = var.vpc_id
     subnet_id = var.subnet_id
