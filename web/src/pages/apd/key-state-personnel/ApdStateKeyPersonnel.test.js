@@ -58,6 +58,7 @@ describe('apd state profile, Medicaid office component', () => {
       mapStateToProps({
         apd: {
           data: {
+            apdType: 'HITECH',
             keyStatePersonnel: {
               keyPersonnel: 'these are my people'
             },

@@ -1471,6 +1471,7 @@ const activities = [
 
 const apd = {
   data: {
+    apdType: 'HITECH',
     name,
     apdOverview: {
       updateStatus: {
