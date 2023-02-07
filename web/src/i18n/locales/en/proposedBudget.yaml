@@ -22,7 +22,7 @@ combinedActivityCosts:
       amounts described in the cost allocation section of the activities are not
       included in these tables, but can be reviewed in the individual activity
       summary tables on this page.
-  activityBreakdown:
+  activityBreakdownHITECH:
     title: State and Contractor Cost Breakdown
     detail: >-
       These tables summarize **State Staff**, **Other State Expenses**, and
@@ -32,6 +32,15 @@ combinedActivityCosts:
       Computable Medicaid Cost** by subtracting other costs that  were described
       in each activity. The other costs provided here are the sum of other costs
       from each activity.
+  activityBreakdownMMIS:
+    title: State and Contractor Cost Breakdown
+    detail: >-
+      These tables summarize **Key State Personnel**, **State Staff**, **Other
+      State Expenses**, and **Private Contractors** for all activities in this
+      APD, organized by FFY. These tables provide subtotals for each FFY and
+      calculate the **Total Computable Medicaid Cost** by subtracting other
+      costs that were described in each activity. The other costs provided here
+      are the sum of other costs from each activity.
 summaryBudget:
   title: Summary Budget Table
 summaryBudgetHITECH:

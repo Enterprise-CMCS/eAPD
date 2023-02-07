@@ -90,6 +90,7 @@ describe('activities state selectors', () => {
     const state = {
       apd: {
         data: {
+          apdType: 'HITECH',
           activities: [
             {
               activityId: 'activity one',

@@ -168,7 +168,9 @@ const CombinedActivityCosts = ({ data, years, isViewOnly, apdType }) => {
         State and Contractor Cost Breakdown
       </h4>
       {!isViewOnly && (
-        <Instruction source="proposedBudget.combinedActivityCosts.activityBreakdown" />
+        <Instruction
+          source={`proposedBudget.combinedActivityCosts.activityBreakdown${apdType}`}
+        />
       )}
       {apdType === 'MMIS' && <SummaryKeyStatePersonnel ffy={ffy} />}
       <SummaryBudgetByActivityBreakdown data={data} ffy={ffy} />
