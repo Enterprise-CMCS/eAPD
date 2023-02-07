@@ -15,6 +15,7 @@ const hitechApd = {
 };
 
 const mmisApdProp = {
+  apdType: 'MMIS',
   initialState: {
     ...mmisApd,
     ...mmisBudget
@@ -26,7 +27,7 @@ const setup = (props = {}, options = {}) => {
 };
 
 describe('<ProposedBudget />', () => {
-  it('render correctly hitech', async () => {
+  it('renders correctly for hitech apds', async () => {
     setup({}, hitechApd);
 
     await waitFor(() => {
@@ -44,7 +45,22 @@ describe('<ProposedBudget />', () => {
     );
   });
 
-  it.skip('render correctly mmis', () => {
-    setup({}, mmisApdProp); // TODO: Skipping for now since Proposed Budget page still crashes
+  it('renders correctly for mmis apds', () => {
+    setup({}, mmisApdProp);
+
+    expect(screen.getByRole('heading', { name: 'Proposed Budget' }));
+    expect(screen.getByRole('heading', { name: 'Combined Activity Costs' }));
+    expect(screen.getByRole('heading', { name: 'Summary Budget Table' }));
+
+    // MMIS apds should *not* render quarterly federal share or est. quarterly incentive payments
+    expect(
+      screen.queryByRole('heading', { name: 'Quarterly Federal Share' })
+    ).toBeNull();
+
+    expect(
+      screen.queryByRole('heading', {
+        name: 'Estimated Quarterly Incentive Payments'
+      })
+    ).toBeNull();
   });
 });

@@ -121,11 +121,11 @@ export const keyPersonnelSchema = Joi.object({
   medicaidShare: Joi.object().pattern(
     /\d{4}/,
     Joi.number().positive().allow(0).max(100).required().messages({
-      'number.base': ' Provide a valid Medicaid Share as a percentage.',
-      'number.empty': ' Provide a valid Medicaid Share as a percentage.',
-      'number.format': ' Provide a valid Medicaid Share as a percentage.',
-      'number.max': ' Provide a valid Medicaid Share as a percentage.',
-      'number.positive': ' Provide a valid Medicaid Share as a percentage.'
+      'number.base': 'Provide a valid Medicaid Share as a percentage.',
+      'number.empty': 'Provide a valid Medicaid Share as a percentage.',
+      'number.format': 'Provide a valid Medicaid Share as a percentage.',
+      'number.max': 'Provide a valid Medicaid Share as a percentage.',
+      'number.positive': 'Provide a valid Medicaid Share as a percentage.'
     })
   )
 });

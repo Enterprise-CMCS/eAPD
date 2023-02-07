@@ -763,7 +763,6 @@ export const sumCostsForFundingSourceByCategory = ({
   if (Array.isArray(items)) {
     items?.forEach(item => {
       if (item?.years) {
-        // Totals here is the initial value seen below which is the budget
         updatedBudget = Object.keys(item.years).reduce((totals, year) => {
           const cost = getCostFromItemByYear(item, year);
           // New activities don't have a funding program by default, so in that case,

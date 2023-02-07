@@ -12,14 +12,34 @@ import {
 describe('renders correctly', () => {
   it('renders correctly in view-only mode', () => {
     const component = shallow(
-      <CombinedActivityCosts data={{}} years={['1984', '1985']} isViewOnly />
+      <CombinedActivityCosts
+        apdType="HITECH"
+        data={{}}
+        years={['1984', '1985']}
+        isViewOnly
+      />
     );
     expect(component).toMatchSnapshot();
   });
 
   it('renders correctly in standard mode', () => {
     const component = shallow(
-      <CombinedActivityCosts data={{}} years={['1984', '1985']} />
+      <CombinedActivityCosts
+        apdType="HITECH"
+        data={{}}
+        years={['1984', '1985']}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
+  it('renders correctly in standard mode for mmis apds', () => {
+    const component = shallow(
+      <CombinedActivityCosts
+        apdType="MMIS"
+        data={{}}
+        years={['1984', '1985']}
+      />
     );
     expect(component).toMatchSnapshot();
   });
@@ -46,6 +66,25 @@ describe('renders correctly', () => {
             contractors: { 1448: {} },
             expenses: { 1448: {} },
             statePersonnel: { 1448: {} }
+          }}
+          groupTitle="MMIS"
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
+  test('data row group renders for mmis', () => {
+    expect(
+      shallow(
+        <DataRowGroup
+          apdType="MMIS"
+          year="1448"
+          data={{
+            combined: { 1448: {} },
+            contractors: { 1448: {} },
+            expenses: { 1448: {} },
+            statePersonnel: { 1448: {} },
+            keyStatePersonnel: { 1448: {} }
           }}
           groupTitle="MMIS"
         />

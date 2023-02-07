@@ -36,15 +36,15 @@ DataRow.propTypes = {
 
 const DataRowGroup = ({ data, year, apdType }) => {
   const categories = [
-    { category: 'statePersonnel', title: 'State Staff Total' },
-    { category: 'expenses', title: 'Other State Expenses Total' },
-    { category: 'contractors', title: 'Private Contractor Total' },
-    { category: 'combined', title: 'Total' }
+    { category: 'statePersonnel', title: 'State Staff' },
+    { category: 'expenses', title: 'Other State Expenses' },
+    { category: 'contractors', title: 'Private Contractor' },
+    { category: 'combined', title: 'Subtotal' }
   ];
   apdType === 'MMIS'
     ? categories.splice(0, 0, {
         category: 'keyStatePersonnel',
-        title: 'Key State Personnel Total'
+        title: 'Key State Personnel'
       })
     : null;
   return (

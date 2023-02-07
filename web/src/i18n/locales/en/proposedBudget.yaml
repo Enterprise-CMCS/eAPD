@@ -35,6 +35,7 @@ combinedActivityCosts:
 summaryBudget:
   title: Summary Budget Table
 summaryBudgetHITECH:
+  title: Summary Budget Table
   instruction:
     detail: >-
       These tables summarize the calculated Medicaid Total Computable (Total
@@ -45,6 +46,7 @@ summaryBudgetHITECH:
       share. The final table in this section provides the total Medicaid cost
       for all activities in this APD by FFY.
 summaryBudgetMMIS:
+  title: Summary Budget Table
   instruction:
     detail: >-
       These tables summarize the calculated Medicaid Total Computable (Total

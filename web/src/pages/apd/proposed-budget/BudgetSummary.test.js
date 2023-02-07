@@ -10,9 +10,10 @@ import {
 } from './BudgetSummary';
 
 describe('budget summary component', () => {
-  test('renders correctly', () => {
+  test('renders correctly for hitech apds', () => {
     const component = shallow(
       <BudgetSummary
+        apdType="HITECH"
         activities={{
           hie: ['hie data'],
           hit: ['hit data'],
@@ -21,6 +22,26 @@ describe('budget summary component', () => {
         data={{
           hie: {},
           hit: {},
+          mmis: {},
+          combined: {
+            1: { federal: 1, state: 2, medicaid: 1000, total: 3 },
+            2: { federal: 10, state: 20, medicaid: 2000, total: 30 }
+          }
+        }}
+        years={['1', '2']}
+      />
+    );
+    expect(component).toMatchSnapshot();
+  });
+
+  test('renders correctly for mmis apds', () => {
+    const component = shallow(
+      <BudgetSummary
+        apdType="MMIS"
+        activities={{
+          mmis: ['mmis data']
+        }}
+        data={{
           mmis: {},
           combined: {
             1: { federal: 1, state: 2, medicaid: 1000, total: 3 },
@@ -74,6 +95,25 @@ describe('budget summary component', () => {
             contractors: { 1448: {} },
             expenses: { 1448: {} },
             statePersonnel: { 1448: {} }
+          }}
+          entries={[10, 20, 30]}
+          year="1448"
+        />
+      )
+    ).toMatchSnapshot();
+  });
+
+  test('data row group renders with keyStatePersonnel', () => {
+    expect(
+      shallow(
+        <DataRowGroup
+          apdType="MMIS"
+          data={{
+            combined: { 1448: {} },
+            contractors: { 1448: {} },
+            expenses: { 1448: {} },
+            statePersonnel: { 1448: {} },
+            keyStatePersonnel: { 1448: {} }
           }}
           entries={[10, 20, 30]}
           year="1448"

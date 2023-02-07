@@ -218,6 +218,46 @@ exports[`renders correctly data row group renders 1`] = `
 </Fragment>
 `;
 
+exports[`renders correctly data row group renders for mmis 1`] = `
+<Fragment>
+  <DataRow
+    category="keyStatePersonnel"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-keyStatePersonnel-Key State Personnel Total"
+    title="Key State Personnel Total"
+  />
+  <DataRow
+    category="statePersonnel"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-statePersonnel-State Staff Total"
+    title="State Staff Total"
+  />
+  <DataRow
+    category="expenses"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-expenses-Other State Expenses Total"
+    title="Other State Expenses Total"
+  />
+  <DataRow
+    category="contractors"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-contractors-Private Contractor Total"
+    title="Private Contractor Total"
+  />
+  <DataRow
+    category="combined"
+    data={Object {}}
+    groupTitle="MMIS"
+    key="MMIS-combined-Total"
+    title="Total"
+  />
+</Fragment>
+`;
+
 exports[`renders correctly data row renders 1`] = `
 <tr
   className=""
@@ -261,9 +301,10 @@ Array [
       }
       labelFor={null}
       reverse={false}
-      source="proposedBudget.combinedActivityCosts.totalMedicaidCost"
+      source="proposedBudget.combinedActivityCosts.totalMedicaidCostHITECH"
     />
     <SummaryBudgetByActivityTotals
+      apdType="HITECH"
       data={Object {}}
       ffy="1984"
     />
@@ -310,9 +351,10 @@ Array [
       }
       labelFor={null}
       reverse={false}
-      source="proposedBudget.combinedActivityCosts.totalMedicaidCost"
+      source="proposedBudget.combinedActivityCosts.totalMedicaidCostHITECH"
     />
     <SummaryBudgetByActivityTotals
+      apdType="HITECH"
       data={Object {}}
       ffy="1985"
     />
@@ -342,6 +384,117 @@ Array [
 ]
 `;
 
+exports[`renders correctly renders correctly in standard mode for mmis apds 1`] = `
+Array [
+  <Fragment
+    key="1984"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1984
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="proposedBudget.combinedActivityCosts.totalMedicaidCostMMIS"
+    />
+    <SummaryBudgetByActivityTotals
+      apdType="MMIS"
+      data={Object {}}
+      ffy="1984"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      State and Contractor Cost Breakdown
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="proposedBudget.combinedActivityCosts.activityBreakdown"
+    />
+    <Connect(SummaryKeyStatePersonnel)
+      ffy="1984"
+    />
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1984"
+    />
+  </Fragment>,
+  <Fragment
+    key="1985"
+  >
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      FFY 
+      1985
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="proposedBudget.combinedActivityCosts.totalMedicaidCostMMIS"
+    />
+    <SummaryBudgetByActivityTotals
+      apdType="MMIS"
+      data={Object {}}
+      ffy="1985"
+    />
+    <h4
+      aria-hidden="true"
+      className="ds-h4"
+    >
+      State and Contractor Cost Breakdown
+    </h4>
+    <Instruction
+      args={null}
+      headingDisplay={
+        Object {
+          "className": "ds-h3",
+          "level": "h3",
+        }
+      }
+      labelFor={null}
+      reverse={false}
+      source="proposedBudget.combinedActivityCosts.activityBreakdown"
+    />
+    <Connect(SummaryKeyStatePersonnel)
+      ffy="1985"
+    />
+    <SummaryBudgetByActivityBreakdown
+      data={Object {}}
+      ffy="1985"
+    />
+  </Fragment>,
+]
+`;
+
 exports[`renders correctly renders correctly in view-only mode 1`] = `
 Array [
   <Fragment
@@ -355,6 +508,7 @@ Array [
       1984
     </h4>
     <SummaryBudgetByActivityTotals
+      apdType="HITECH"
       data={Object {}}
       ffy="1984"
     />
@@ -380,6 +534,7 @@ Array [
       1985
     </h4>
     <SummaryBudgetByActivityTotals
+      apdType="HITECH"
       data={Object {}}
       ffy="1985"
     />
