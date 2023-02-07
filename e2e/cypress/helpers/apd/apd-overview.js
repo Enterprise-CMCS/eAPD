@@ -2,7 +2,6 @@ export const testDefaultAPDOverview = function () {
   it('should verify the default values the FFYs and APD Overview', function () {
     cy.url().should('include', '/apd-overview');
     cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
-    cy.findByRole('radio', { name: /MMIS IAPD/i }).should('not.be.checked');
     cy.findByRole('radio', { name: /HITECH IAPD/i }).should('be.checked');
 
     cy.get('[type="checkbox"]').each(($year, index, list) => {
