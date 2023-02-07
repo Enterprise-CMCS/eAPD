@@ -324,7 +324,7 @@ Array [
       }
       labelFor={null}
       reverse={false}
-      source="proposedBudget.combinedActivityCosts.activityBreakdown"
+      source="proposedBudget.combinedActivityCosts.activityBreakdownHITECH"
     />
     <SummaryBudgetByActivityBreakdown
       data={Object {}}
@@ -374,7 +374,7 @@ Array [
       }
       labelFor={null}
       reverse={false}
-      source="proposedBudget.combinedActivityCosts.activityBreakdown"
+      source="proposedBudget.combinedActivityCosts.activityBreakdownHITECH"
     />
     <SummaryBudgetByActivityBreakdown
       data={Object {}}
@@ -429,7 +429,7 @@ Array [
       }
       labelFor={null}
       reverse={false}
-      source="proposedBudget.combinedActivityCosts.activityBreakdown"
+      source="proposedBudget.combinedActivityCosts.activityBreakdownMMIS"
     />
     <Connect(SummaryKeyStatePersonnel)
       ffy="1984"
@@ -482,7 +482,7 @@ Array [
       }
       labelFor={null}
       reverse={false}
-      source="proposedBudget.combinedActivityCosts.activityBreakdown"
+      source="proposedBudget.combinedActivityCosts.activityBreakdownMMIS"
     />
     <Connect(SummaryKeyStatePersonnel)
       ffy="1985"

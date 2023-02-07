@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithConnection, screen, waitFor } from 'apd-testing-library';
+import { renderWithConnection, screen } from 'apd-testing-library';
 import mmisApd from '../../../fixtures/ak-apd-mmis.json';
 import mmisBudget from '../../../fixtures/ak-budget-mmis.json';
 
