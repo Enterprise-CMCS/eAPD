@@ -8,7 +8,8 @@ import {
   setNarrativeForHIT,
   setNarrativeForHIE,
   setNarrativeForMMIS,
-  setProgramOverview
+  setProgramOverview,
+  setBusinessAreaField
 } from './overview';
 
 const mockStore = configureStore([thunk]);
@@ -73,6 +74,16 @@ describe('APD edit actions for APD overview and HIE/HIT/MMIS narratives', () => 
       type: EDIT_APD,
       path: '/apdOverview/narrativeMMIS',
       value: 'narrative'
+    });
+  });
+});
+
+describe('APD edit actions for Medicaid Business Areas', () => {
+  it('dispatches an action for changing a field', () => {
+    expect(setBusinessAreaField('waiverSupportSystems', false)).toEqual({
+      type: EDIT_APD,
+      path: '/apdOverview/medicaidBusinessAreas/waiverSupportSystems',
+      value: false
     });
   });
 });
