@@ -1981,8 +1981,8 @@ Object {
                       "type": "object",
                       "x-patternProperties": Object {
                         "^[0-9]{4}$": Object {
-                        "description": "The Federal-State split by year",
-                        "type": "number",
+                          "description": "The Federal-State split by year",
+                          "type": "number",
                         },
                       },
                     },
