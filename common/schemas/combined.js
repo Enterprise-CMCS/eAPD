@@ -18,7 +18,8 @@ import {
   statePersonnelSchema,
   expensesSchema,
   contractorResourcesSchema,
-  costAllocationSchema,
+  hitechCostAllocationSchema,
+  mmisCostAllocationSchema,
   costAllocationNarrativeSchema,
   proposedBudgetSchema,
   securityPlanningSchema,
@@ -67,7 +68,7 @@ export const hitechCombinedSchema = Joi.object({
       statePersonnel: Joi.array().items(statePersonnelSchema),
       expenses: Joi.array().items(expensesSchema),
       contractorResources: Joi.array().items(contractorResourcesSchema),
-      costAllocation: costAllocationSchema,
+      costAllocation: hitechCostAllocationSchema,
       costAllocationNarrative: costAllocationNarrativeSchema,
       quarterlyFFP: Joi.any() // quarterlyFFP is validated in the budget
     }),
@@ -126,7 +127,7 @@ export const mmisCombinedSchema = Joi.object({
     statePersonnel: Joi.array().items(statePersonnelSchema),
     expenses: Joi.array().items(expensesSchema),
     contractorResources: Joi.array().items(contractorResourcesSchema),
-    costAllocation: costAllocationSchema,
+    costAllocation: mmisCostAllocationSchema,
     costAllocationNarrative: costAllocationNarrativeSchema,
     quarterlyFFP: Joi.any() // quarterlyFFP is validated in the budget
   }),

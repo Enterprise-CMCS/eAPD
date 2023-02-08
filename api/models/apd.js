@@ -2,6 +2,7 @@ import './budget.js';
 import mongoose from 'mongoose';
 import mongooseLeanVirtuals from 'mongoose-lean-virtuals';
 import activitySchema from './apdActivity.js';
+import { FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export const discriminatorOptions = { discriminatorKey: 'type' };
 
@@ -118,6 +119,14 @@ const apdSchema = new mongoose.Schema(
                 state: {
                   type: Number,
                   default: 0
+                },
+                fundingCategory: {
+                  type: String,
+                  enum: [
+                    FUNDING_CATEGORY_TYPE.ddi,
+                    FUNDING_CATEGORY_TYPE.mando,
+                    null
+                  ]
                 }
               },
               { _id: false }

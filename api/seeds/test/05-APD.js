@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   _id: '62a76c3510a0f01aaa737864',
@@ -38,38 +38,82 @@ export default {
     },
     keyPersonnel: [
       {
-        costs: {
-          2022: 78000,
-          2023: 78000,
-          2024: 98000
-        },
+        name: 'Sample',
+        position: 'Director',
         email: 'sample@testing.com',
-        hasCosts: true,
         isPrimary: true,
         fte: {
           2022: 1,
           2023: 1,
           2024: 2
         },
-        name: 'Sample',
-        position: 'Director'
+        hasCosts: true,
+        costs: {
+          2022: 78000,
+          2023: 78000,
+          2024: 98000
+        },
+        split: {
+          2022: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+          },
+          2023: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+          },
+          2024: {
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+          }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100,
+          2024: 100
+        }
       },
       {
-        costs: {
-          2022: 52800,
-          2023: 65000,
-          2024: 65000
-        },
+        name: 'Marius Garcia',
+        position: 'Warlock of Bliss',
         email: 'sample@testing.com',
-        hasCosts: true,
         isPrimary: false,
         fte: {
           2022: 4,
           2023: 4,
           2024: 4
         },
-        name: 'Marius Garcia',
-        position: 'Warlock of Bliss'
+        hasCosts: true,
+        costs: {
+          2022: 52800,
+          2023: 65000,
+          2024: 65000
+        },
+        split: {
+          2022: {
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+          },
+          2023: {
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+          },
+          2024: {
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+          }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100,
+          2024: 100
+        }
       }
     ]
   },
@@ -226,21 +270,24 @@ export default {
         2022: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         },
         2023: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         },
         2024: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         }
@@ -454,21 +501,24 @@ export default {
         2022: {
           ffp: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 398700
         },
         2023: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
           },
           other: 170000
         },
         2024: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 89000
         }
@@ -671,21 +721,24 @@ export default {
         2022: {
           ffp: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 390000
         },
         2023: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 0
         },
         2024: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
           },
           other: 0
         }

@@ -37,9 +37,11 @@ export {
 export { default as expensesSchema } from './expenses.js';
 export { default as contractorResourcesSchema } from './contractorResources.js';
 export {
-  default as costAllocationSchema,
+  costAllocationSplitSchema,
+  costAllocationMatchRateSchema,
   costAllocationOtherSchema,
-  costAllocationFFPSchema
+  hitechCostAllocationSchema,
+  mmisCostAllocationSchema
 } from './costAllocation.js';
 export {
   default as costAllocationNarrativeSchema,

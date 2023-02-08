@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   _id: '62a76c4c10a0f01aaa737882',
@@ -104,19 +104,35 @@ export default {
     },
     keyPersonnel: [
       {
-        costs: {
-          2022: 180000,
-          2023: 230000
-        },
+        name: ' Kendrick Rollins',
+        position: 'Chief of Guards',
         email: 'KRollings@sample.com',
-        hasCosts: true,
         isPrimary: true,
         fte: {
           2022: 2,
           2023: 3
         },
-        name: ' Kendrick Rollins',
-        position: 'Chief of Guards'
+        hasCosts: true,
+        costs: {
+          2022: 180000,
+          2023: 230000
+        },
+        split: {
+          2022: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+          },
+          2023: {
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+          }
+        },
+        medicaidShare: {
+          2022: 100,
+          2023: 100
+        }
       }
     ]
   },
@@ -146,14 +162,16 @@ export default {
         2022: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         },
         2023: {
           ffp: {
             federal: 0,
-            state: 100
+            state: 100,
+            fundingCategory: null
           },
           other: 0
         }
@@ -317,14 +335,16 @@ export default {
         2022: {
           ffp: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 32000
         },
         2023: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 390200
         }

@@ -81,7 +81,7 @@ const getNewHitechApd = (years, yearOptions) => {
         contractorResources: [],
         costAllocation: forAllYears(
           {
-            ffp: { federal: 0, state: 100 },
+            ffp: { federal: 0, state: 100, fundingCategory: null },
             other: 0
           },
           years

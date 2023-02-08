@@ -59,9 +59,14 @@ export const newExpense = years => ({
   years: arrToObj(years, expenseDefaultYear())
 });
 
-export const costAllocationEntry = (other = 0, federal = 0, state = 100) => ({
+export const costAllocationEntry = (
+  other = 0,
+  federal = 0,
+  state = 100,
+  fundingCategory = null
+) => ({
   other,
-  ffp: { federal, state }
+  ffp: { federal, state, fundingCategory }
 });
 
 export const costAllocationNarrative = () => ({

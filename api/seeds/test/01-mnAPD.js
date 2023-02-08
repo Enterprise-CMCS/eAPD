@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   apdType: APD_TYPE.HITECH,
@@ -45,8 +45,16 @@ export default {
           2023: 100000
         },
         split: {
-          2022: { federal: 90, state: 10 },
-          2023: { federal: 90, state: 10 }
+          2022: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+          },
+          2023: {
+            federal: 75,
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+          }
         },
         medicaidShare: {
           2022: 100,
@@ -394,14 +402,16 @@ export default {
         2022: {
           ffp: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 0
         },
         2023: {
           ffp: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 0
         }
@@ -690,15 +700,17 @@ export default {
       costAllocation: {
         2022: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
           },
           other: 0
         },
         2023: {
           ffp: {
             federal: 75,
-            state: 25
+            state: 25,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
           },
           other: 0
         }
@@ -905,15 +917,17 @@ export default {
       costAllocation: {
         2022: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
           },
           other: 0
         },
         2023: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 0
         }
@@ -1095,15 +1109,17 @@ export default {
       costAllocation: {
         2022: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 75,
+            state: 75,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
           },
           other: 0
         },
         2023: {
           ffp: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 0
         }
@@ -1293,15 +1309,17 @@ export default {
       costAllocation: {
         2022: {
           ffp: {
-            federal: 90,
-            state: 10
+            federal: 50,
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.mando
           },
           other: 0
         },
         2023: {
           ffp: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 0
         }
@@ -1481,14 +1499,16 @@ export default {
         2022: {
           ffp: {
             federal: 50,
-            state: 50
+            state: 50,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 125000
         },
         2023: {
           ffp: {
             federal: 90,
-            state: 10
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           other: 125000
         }

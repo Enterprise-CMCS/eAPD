@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { FUNDING_CATEGORY_TYPE } from '../utils/constants.js';
 
 export const medicaidDirectorSchema = Joi.object().keys({
   name: Joi.string().required().messages({
@@ -113,7 +114,19 @@ export const keyPersonnelSchema = Joi.object({
           .messages({
             'alternatives.base': 'Select a federal-state split.',
             'alternatives.any': 'Select a federal-state split.'
-          })
+          }),
+        fundingCategory: Joi.alternatives().conditional('federal', {
+          switch: [
+            {
+              is: 90,
+              then: Joi.string().valid(FUNDING_CATEGORY_TYPE.ddi)
+            },
+            {
+              is: 75,
+              then: Joi.string().valid(FUNDING_CATEGORY_TYPE.mando)
+            }
+          ]
+        })
       })
     ),
     otherwise: Joi.any()
