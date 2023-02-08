@@ -3,6 +3,7 @@ import {
   selectActivityKeyByIndex,
   selectAllActivities,
   selectCostAllocationForActivityByIndex,
+  selectKeyStatePersonnelCostSummary,
   selectActivityCostSummary,
   selectActivitySchedule,
   selectActivityNonPersonnelCosts,
@@ -84,6 +85,147 @@ describe('activities state selectors', () => {
         { activityIndex: 1 }
       )
     ).toEqual('cost allocation');
+  });
+
+  it('selects key state personnel cost summary', () => {
+    const state = {
+      apd: {
+        data: {
+          apdType: 'MMIS',
+          keyStatePersonnel: {
+            keyPersonnel: [
+              {
+                name: 'James Holden',
+                position: 'HIT Coordinator',
+                email: 'JimPushesButtons@tycho.com',
+                isPrimary: true,
+                fte: {
+                  1990: 1,
+                  1991: 1
+                },
+                hasCosts: true,
+                costs: {
+                  1990: 100000,
+                  1991: 100000
+                },
+                split: {
+                  1990: {
+                    federal: 90,
+                    state: 10
+                  },
+                  1991: {
+                    federal: 90,
+                    state: 10
+                  }
+                },
+                medicaidShare: {
+                  1990: 90,
+                  1991: 50
+                },
+                key: '7290a5d6'
+              },
+              {
+                name: 'Fred Johnson',
+                position: 'Project Management Office Director',
+                email: 'FJohnson@tycho.com',
+                isPrimary: false,
+                fte: {
+                  1990: 0.3,
+                  1991: 0.3
+                },
+                hasCosts: false,
+                costs: {
+                  1990: 0,
+                  1991: 0
+                },
+                split: {
+                  1990: {
+                    federal: 90,
+                    state: 10
+                  },
+                  1991: {
+                    federal: 90,
+                    state: 10
+                  }
+                },
+                medicaidShare: {
+                  1990: 50,
+                  1991: 10
+                },
+                key: '92270fe8'
+              }
+            ]
+          },
+          years: ['1990', '1991']
+        }
+      },
+      budget: {}
+    };
+
+    expect(selectKeyStatePersonnelCostSummary(state)).toEqual({
+      keyStatePersonnel: {
+        1990: [
+          {
+            description: 'HIT Coordinator: James Holden (APD Point of Contact)',
+            key: '7290a5d6',
+            medicaidShare: 90,
+            totalCost: 90000,
+            unitCost: 100000,
+            units: '1 FTE'
+          },
+          {
+            description: 'Project Management Office Director: Fred Johnson ',
+            key: '92270fe8',
+            medicaidShare: null,
+            totalCost: 0,
+            unitCost: null,
+            units: null
+          }
+        ],
+        1991: [
+          {
+            description: 'HIT Coordinator: James Holden (APD Point of Contact)',
+            key: '7290a5d6',
+            medicaidShare: 50,
+            totalCost: 50000,
+            unitCost: 100000,
+            units: '1 FTE'
+          },
+          {
+            description: 'Project Management Office Director: Fred Johnson ',
+            key: '92270fe8',
+            medicaidShare: null,
+            totalCost: 0,
+            unitCost: null,
+            units: null
+          }
+        ]
+      },
+      keyStatePersonnelTotal: { 1990: 90000, 1991: 50000 }
+    });
+  });
+
+  it('selects key state personnel cost summary with no key personnel', () => {
+    const state = {
+      apd: {
+        data: {
+          apdType: 'MMIS',
+          keyStatePersonnel: {
+            keyPersonnel: []
+          },
+          years: ['1990', '1991']
+        }
+      },
+      budget: {}
+    };
+
+    expect(selectKeyStatePersonnelCostSummary(state)).toEqual({
+      keyStatePersonnel: {
+        1990: [],
+        1991: []
+      },
+      keyStatePersonnelTotal: { 1990: 0, 1991: 0 }
+    });
   });
 
   it('selects an activity cost summary by index', () => {
