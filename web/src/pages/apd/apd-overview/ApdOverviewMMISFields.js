@@ -49,13 +49,13 @@ const ApdOverviewMMISFields = ({
       <Controller
         name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
         control={control}
-        render={({ field: { onChange, onBlur, ...props } }) => (
+        render={({ field: { onChange, onBlur } }) => (
           <TextArea
-            {...props}
             value={medicaidBusinessAreas.otherMedicaidBusinessAreas}
             label={
               MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
             }
+            name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
             data-cy="other_details"
             hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
             onBlur={onBlur}
@@ -113,48 +113,43 @@ const ApdOverviewMMISFields = ({
     trigger();
   };
 
-  const businessAreaChoices = getBusinessAreaChoices();
-  if (businessAreaChoices) {
-    return (
-      <div className="ds-u-margin-y--3" data-cy="businessAreasList">
-        <Controller
-          name="medicaidBusinessAreas"
-          control={control}
-          render={({ field: { onBlur } }) => (
-            <ChoiceList
-              label="Medicaid Business Areas"
-              name="medicaidBusinessAreas"
-              hint={
-                <div>
-                  Select the Medicaid Enterprise Systems Business Area(s) that
-                  cover the scope of this APD. A more detailed description of
-                  these business areas, along with the associated outcomes and
-                  metrics, are available at the&nbsp;
-                  <a
-                    href="https://cmsgov.github.io/CMCS-DSG-DSS-Certification/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    MES Certification Repository
-                  </a>
-                  .
-                </div>
-              }
-              type="checkbox"
-              choices={businessAreaChoices}
-              onChange={handleBusinessAreas}
-              onBlur={onBlur}
-              onComponentBlur={onBlur}
-              errorMessage={
-                adminCheck && errors?.medicaidBusinessAreas?.message
-              }
-              errorPlacement="bottom"
-            />
-          )}
-        />
-      </div>
-    );
-  } else return null;
+  return (
+    <div className="ds-u-margin-y--3" data-cy="businessAreasList">
+      <Controller
+        name="medicaidBusinessAreas"
+        control={control}
+        render={({ field: { onBlur } }) => (
+          <ChoiceList
+            label="Medicaid Business Areas"
+            name="medicaidBusinessAreas"
+            hint={
+              <div>
+                Select the Medicaid Enterprise Systems Business Area(s) that
+                cover the scope of this APD. A more detailed description of
+                these business areas, along with the associated outcomes and
+                metrics, are available at the&nbsp;
+                <a
+                  href="https://cmsgov.github.io/CMCS-DSG-DSS-Certification/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  MES Certification Repository
+                </a>
+                .
+              </div>
+            }
+            type="checkbox"
+            choices={getBusinessAreaChoices()}
+            onChange={handleBusinessAreas}
+            onBlur={onBlur}
+            onComponentBlur={onBlur}
+            errorMessage={adminCheck && errors?.medicaidBusinessAreas?.message}
+            errorPlacement="bottom"
+          />
+        )}
+      />
+    </div>
+  );
 };
 
 ApdOverviewMMISFields.propTypes = {
