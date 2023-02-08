@@ -1968,7 +1968,7 @@ Object {
                           "type": "number",
                         },
                       },
-                    }
+                    },
                     "name": Object {
                       "description": "Person's name",
                       "type": "string",
@@ -1983,8 +1983,8 @@ Object {
                         "^[0-9]{4}$": Object {
                         "description": "The Federal-State split by year",
                         "type": "number",
-                       },
-                     },
+                        },
+                      },
                     },
                   },
                   "type": "object",
