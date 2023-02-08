@@ -109,6 +109,10 @@ See the
 [testing documentation](https://github.com/Enterprise-CMCS/eAPD/wiki/Development-accessibility%2C-testing%2C-and-linting#testing)
 for information about running tests.
 
+### Secret scanning
+
+Configure gitleaks pre-commit hook by running  `pre-commit install` in your local. This will guard secrets from acccidentally being commited to this repository. Please take a look at [gitleaks](https://github.com/zricethezav/gitleaks) for installation instruction and for more information.
+
 ### More technical documentation
 
 Check out the
