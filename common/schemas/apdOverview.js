@@ -94,9 +94,9 @@ export const medicaidBusinessAreasSchema = Joi.object({
   otherMedicaidBusinessAreas: Joi.when('other', {
     is: true,
     then: Joi.string().trim().min(1).required().messages({
-      'string.base': 'Provide an other Medicaid Business Area(s).',
-      'string.empty': 'Provide an other Medicaid Business Area(s).',
-      'string.required': 'Provide an other Medicaid Business Area(s).'
+      'string.base': 'Provide Other Medicaid Business Area(s).',
+      'string.empty': 'Provide Other Medicaid Business Area(s).',
+      'string.required': 'Provide Other Medicaid Business Area(s).'
     }),
     otherwise: Joi.any()
   })

@@ -137,12 +137,12 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       })
         .focus()
         .blur();
-      cy.contains('Provide an other Medicaid Business Area(s)').should('exist');
+      cy.contains('Provide Other Medicaid Business Area(s)').should('exist');
 
       cy.findByRole('checkbox', {
         name: /Program Integrity/i
       }).click();
-      cy.contains('Provide an other Medicaid Business Area(s)').should(
+      cy.contains('Provide Other Medicaid Business Area(s)').should(
         'not.exist'
       );
 
@@ -154,7 +154,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
 
       cy.get(`[data-cy='other_details']`).focus().blur();
-      cy.contains('Provide an other Medicaid Business Area(s)').should(
+      cy.contains('Provide Other Medicaid Business Area(s)').should(
         'not.exist'
       );
 
@@ -202,9 +202,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.contains('Select at least one Medicaid Business Area.').should(
         'not.exist'
       );
-      cy.contains('Provide an other Medicaid Business Area(s).').should(
-        'exist'
-      );
+      cy.contains('Provide Other Medicaid Business Area(s).').should('exist');
 
       // Check validation errors change in admin check
       cy.expandAdminCheck();
@@ -217,7 +215,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         // Selecting "Other" without filling in the "Other Medicaid Business Area(s)" text box will show a new error
         cy.get(list).contains('APD Overview').should('exist');
         cy.get(list)
-          .contains('Provide an other Medicaid Business Area(s).')
+          .contains('Provide Other Medicaid Business Area(s).')
           .should('exist');
       });
 
@@ -227,7 +225,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         .type('This info in the text box should clear the error.')
         .blur();
       // Error cleared in form
-      cy.contains('Provide an other Medicaid Business Area(s).').should(
+      cy.contains('Provide Other Medicaid Business Area(s).').should(
         'not.exist'
       );
       // Error cleared in admin check
@@ -235,7 +233,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.get('[class="eapd-admin-check-list"]').within(list => {
         cy.get(list).contains('APD Overview').should('not.exist');
         cy.get(list)
-          .contains('Provide an other Medicaid Business Area(s).')
+          .contains('Provide Other Medicaid Business Area(s).')
           .should('not.exist');
       });
       cy.turnOffAdminCheck();
