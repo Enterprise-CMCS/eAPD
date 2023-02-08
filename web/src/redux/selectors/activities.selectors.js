@@ -49,7 +49,7 @@ export const selectKeyStatePersonnelCostSummary = createSelector(
     years.reduce(
       (keyStatePersonnel, ffy) => ({
         ...keyStatePersonnel,
-        [ffy]: keyPersonnel.map((kp, index) => ({
+        [ffy]: keyPersonnel.map(kp => ({
           key: kp.key,
           description: `${kp.position}: ${kp.name || 'Not specified'} ${
             kp.isPrimary ? '(APD Point of Contact)' : ''

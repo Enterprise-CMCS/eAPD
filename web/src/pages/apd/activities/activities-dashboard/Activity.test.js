@@ -80,6 +80,7 @@ describe('the (Activity) EntryDetails component', () => {
     const state = {
       apd: {
         data: {
+          apdType: 'HITECH',
           activities: [
             {
               fundingSource: 'money pit',
