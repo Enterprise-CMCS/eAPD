@@ -231,6 +231,7 @@ describe('<ApdNew />', () => {
             screen.getByRole('radio', { name: /MMIS IAPD/i })
           ).toBeChecked();
         });
+
         expect(disabledBtn).toBeDisabled();
 
         await user.type(
