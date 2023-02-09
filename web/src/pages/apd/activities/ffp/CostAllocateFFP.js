@@ -325,6 +325,7 @@ const CostAllocateFFP = ({
             <div className="data-entry-box ds-u-margin-bottom--5">
               {!isViewOnly && (
                 <Instruction
+                  labelFor="ffp-quarterly-table"
                   source="activities.costAllocate.ffp.quarterlyFFPInstruction"
                   headingDisplay={{
                     level: 'p',
@@ -344,6 +345,7 @@ const CostAllocateFFP = ({
               )}
 
               <CostAllocateFFPQuarterly
+                id="ffp-quarterly-table"
                 activityIndex={activityIndex}
                 activityId={activityId}
                 isViewOnly={isViewOnly}
