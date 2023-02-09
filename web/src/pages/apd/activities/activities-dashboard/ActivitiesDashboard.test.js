@@ -151,7 +151,7 @@ describe('ActivitiesDashboard component', () => {
 
     expect(
       screen.getByText(
-        'Example of individual activities include, but are not limited to'
+        'Example of individual activities include, but are not limited to:'
       )
     ).toBeInTheDocument();
   });
