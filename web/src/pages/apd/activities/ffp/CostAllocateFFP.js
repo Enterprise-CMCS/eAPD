@@ -132,7 +132,6 @@ const CostAllocateFFP = ({
   });
 
   useEffect(() => {
-    console.log({ apdType });
     if (adminCheck) {
       trigger();
     } else {
