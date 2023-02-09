@@ -13,8 +13,13 @@ import { Section, Subsection } from '../../../components/Section';
 import { t } from '../../../i18n';
 import { selectPreviousActivitySummary } from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
-const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
+const PreviousActivities = ({
+  previousActivitySummary,
+  setSummary,
+  apdType
+}) => {
   const onChange = value => setSummary(value);
 
   return (
@@ -46,7 +51,7 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
           id="prev-activities-table"
           resource="previousActivities.actualExpenses"
         >
-          <ApdPreviousActivityTableHI />
+          {apdType === 'HITECH' && <ApdPreviousActivityTableHI />}
           <ApdPreviousActivityTableMMIS />
           <ApdPreviousActivityTableTotal />
         </Subsection>
@@ -57,11 +62,13 @@ const PreviousActivities = ({ previousActivitySummary, setSummary }) => {
 
 PreviousActivities.propTypes = {
   previousActivitySummary: PropTypes.string.isRequired,
-  setSummary: PropTypes.func.isRequired
+  setSummary: PropTypes.func.isRequired,
+  apdType: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  previousActivitySummary: selectPreviousActivitySummary(state)
+  previousActivitySummary: selectPreviousActivitySummary(state),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {
