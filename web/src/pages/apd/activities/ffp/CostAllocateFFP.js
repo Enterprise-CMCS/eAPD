@@ -30,7 +30,11 @@ import CostAllocationRows, {
 } from '../cost-allocation/CostAllocationRows';
 import { t } from '../../../../i18n';
 
-import { costAllocationSchema as schema, APD_TYPE } from '@cms-eapd/common';
+import {
+  hitechCostAllocationSchema,
+  mmisCostAllocationSchema,
+  APD_TYPE
+} from '@cms-eapd/common';
 
 import MatchRateSelector from './MatchRateSelector';
 
@@ -123,6 +127,10 @@ const CostAllocateFFP = ({
   apdType,
   adminCheck
 }) => {
+  const schema =
+    apdType === APD_TYPE.HITECH
+      ? hitechCostAllocationSchema
+      : mmisCostAllocationSchema;
   const methods = useForm({
     defaultValues: {
       ...costAllocation
@@ -362,7 +370,7 @@ CostAllocateFFP.propTypes = {
   otherFunding: PropTypes.object.isRequired,
   isViewOnly: PropTypes.bool,
   setFundingSplit: PropTypes.func.isRequired,
-  setMatchRate: PropTypes.func.isRequired,
+  setFundingMatchRate: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired,
   apdType: PropTypes.string.isRequired,
   adminCheck: PropTypes.bool.isRequired

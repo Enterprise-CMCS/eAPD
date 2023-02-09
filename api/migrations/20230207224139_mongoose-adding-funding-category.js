@@ -86,7 +86,7 @@ export const up = async () => {
               state:
                 apdType === APD_TYPE.HITECH
                   ? activity?.costAllocation?.[year]?.ffp?.state
-                  : 100,
+                  : 0,
               fundingCategory: null
             },
             other:

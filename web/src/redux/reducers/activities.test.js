@@ -97,7 +97,12 @@ describe('activities reducer helpers', () => {
       statePersonnel: [],
       expenses: [],
       contractorResources: [],
-      costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
+      costAllocation: {
+        2020: {
+          other: 0,
+          ffp: { federal: 0, state: 100, fundingCategory: null }
+        }
+      },
       costAllocationNarrative: {
         years: {
           2020: { otherSources: '' }
@@ -149,7 +154,12 @@ describe('activities reducer helpers', () => {
       statePersonnel: [],
       expenses: [],
       contractorResources: [],
-      costAllocation: { 2020: { other: 0, ffp: { federal: 0, state: 100 } } },
+      costAllocation: {
+        2020: {
+          other: 0,
+          ffp: { federal: 0, state: 100, fundingCategory: null }
+        }
+      },
       costAllocationNarrative: {
         years: {
           2020: { otherSources: '' }

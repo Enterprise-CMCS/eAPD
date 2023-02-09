@@ -23,7 +23,7 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
       <Controller
         name={`${ffy}.ffp`}
         control={control}
-        render={({ field: { onChange, ...props } }) => (
+        render={({ field: { ...props } }) => (
           <Dropdown
             {...props}
             label="federal-state split"

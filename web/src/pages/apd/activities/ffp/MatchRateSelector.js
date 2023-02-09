@@ -44,6 +44,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             size="small"
             onChange={e => {
               const [federal, state] = fedStateSplit.split('-').map(Number);
+              setValue(`${ffy}.ffp.fundingCategory`, e.target.value);
               setMatchRate(ffy, federal, state, e.target.value);
             }}
             errorMessage={errors?.[ffy]?.fundingCategory?.message}

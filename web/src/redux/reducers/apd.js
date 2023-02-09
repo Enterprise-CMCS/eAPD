@@ -39,7 +39,11 @@ import {
   ADMIN_CHECK_COLLAPSE_TOGGLE,
   ADMIN_CHECK_COMPLETE_TOGGLE
 } from '../actions/app';
-import { generateKey, defaultAPDYearOptions } from '@cms-eapd/common';
+import {
+  generateKey,
+  defaultAPDYearOptions,
+  FUNDING_CATEGORY_TYPE
+} from '@cms-eapd/common';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
@@ -240,19 +244,32 @@ const getKeyPersonnelSplit = (years, apdType) => {
   switch (apdType) {
     case 'HITECH':
       split = years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 90, state: 10 } }),
+        (s, year) => ({
+          ...s,
+          [year]: {
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+          }
+        }),
         {}
       );
       break;
     case 'MMIS':
       split = years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        (s, year) => ({
+          ...s,
+          [year]: { federal: 0, state: 0, fundingCategory: null }
+        }),
         {}
       );
       break;
     default:
       return years.reduce(
-        (s, year) => ({ ...s, [year]: { federal: 0, state: 0 } }),
+        (s, year) => ({
+          ...s,
+          [year]: { federal: 0, state: 0, fundingCategory: null }
+        }),
         {}
       );
   }
