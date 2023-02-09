@@ -47,30 +47,29 @@ export const getPatchesToAddYear = (state, year) => {
   const apdType = state.data.apdType;
   let patches = [{ op: 'replace', path: '/years', value: years }];
 
-  switch (apdType) {
-    case APD_TYPE.HITECH:
-      patches = patches.concat([
-        {
-          op: 'add',
-          path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
-          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        },
-        {
-          op: 'add',
-          path: `/proposedBudget/incentivePayments/ehCt/${year}`,
-          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        },
-        {
-          op: 'add',
-          path: `/proposedBudget/incentivePayments/epAmt/${year}`,
-          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        },
-        {
-          op: 'add',
-          path: `/proposedBudget/incentivePayments/epCt/${year}`,
-          value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-        }
-      ]);
+  if (apdType === APD_TYPE.HITECH) {
+    patches = patches.concat([
+      {
+        op: 'add',
+        path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
+        value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      {
+        op: 'add',
+        path: `/proposedBudget/incentivePayments/ehCt/${year}`,
+        value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      {
+        op: 'add',
+        path: `/proposedBudget/incentivePayments/epAmt/${year}`,
+        value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      {
+        op: 'add',
+        path: `/proposedBudget/incentivePayments/epCt/${year}`,
+        value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      }
+    ]);
   }
 
   state.data.activities.forEach((activity, activityIndex) => {
@@ -144,26 +143,25 @@ export const getPatchesToRemoveYear = (state, year) => {
   const apdType = state.data.apdType;
   let patches = [{ op: 'remove', path: `/years/${index}` }];
 
-  switch (apdType) {
-    case APD_TYPE.HITECH:
-      patches = patches.concat([
-        {
-          op: 'remove',
-          path: `/proposedBudget/incentivePayments/ehAmt/${year}`
-        },
-        {
-          op: 'remove',
-          path: `/proposedBudget/incentivePayments/ehCt/${year}`
-        },
-        {
-          op: 'remove',
-          path: `/proposedBudget/incentivePayments/epAmt/${year}`
-        },
-        {
-          op: 'remove',
-          path: `/proposedBudget/incentivePayments/epCt/${year}`
-        }
-      ]);
+  if (apdType === APD_TYPE.HITECH) {
+    patches = patches.concat([
+      {
+        op: 'remove',
+        path: `/proposedBudget/incentivePayments/ehAmt/${year}`
+      },
+      {
+        op: 'remove',
+        path: `/proposedBudget/incentivePayments/ehCt/${year}`
+      },
+      {
+        op: 'remove',
+        path: `/proposedBudget/incentivePayments/epAmt/${year}`
+      },
+      {
+        op: 'remove',
+        path: `/proposedBudget/incentivePayments/epCt/${year}`
+      }
+    ]);
   }
 
   state.data.activities.forEach((activity, activityIndex) => {

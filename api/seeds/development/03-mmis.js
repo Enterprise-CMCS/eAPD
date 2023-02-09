@@ -32,8 +32,8 @@ export default {
   },
   keyStatePersonnel: {
     medicaidDirector: {
-      name: 'Cornelius Fudge',
-      email: 'c.fudge@ministry.magic',
+      name: 'Benedick Padua',
+      email: 'benedick@much.ado',
       phone: '5551234567'
     },
     medicaidOffice: {
@@ -149,7 +149,7 @@ export default {
       },
       activitySchedule: {
         plannedStartDate: '2017-10-01',
-        plannedEndDate: '2023-09-30'
+        plannedEndDate: '2024-09-30'
       },
       analysisOfAlternativesAndRisks: {
         alternativeAnalysis: 'Alternative and analysis',
@@ -202,8 +202,8 @@ export default {
           description:
             'Coordination and document management support daily administrative support such as meeting minutes and scribe, manages project library, scheduling, and correspondence tracking.',
           years: {
-            2022: { amt: 86000, perc: 1 },
-            2023: { amt: 88000, perc: 1 }
+            2023: { amt: 86000, perc: 1 },
+            2024: { amt: 88000, perc: 1 }
           }
         },
         {
@@ -212,8 +212,8 @@ export default {
           description:
             'Develop and monitor reports, assist data users in developing and managing queries.',
           years: {
-            2022: { amt: 101115, perc: 1 },
-            2023: { amt: 102111, perc: 1 }
+            2023: { amt: 101115, perc: 1 },
+            2024: { amt: 102111, perc: 1 }
           }
         },
         {
@@ -221,8 +221,8 @@ export default {
           description:
             'Provide analysis and coordination activities between the HIT Program Office and the IT section, to ensure that adequate resources and priority are established to complete the technology projects as identified.',
           years: {
-            2022: { amt: 101000, perc: 1 },
-            2023: { amt: 104000, perc: 1 }
+            2023: { amt: 101000, perc: 1 },
+            2024: { amt: 104000, perc: 1 }
           }
         },
         {
@@ -230,8 +230,8 @@ export default {
           description:
             'Coordinate program state and federal budget and expense reporting, review and validate charges to CMS federal reports.',
           years: {
-            2022: { amt: 101000, perc: 3 },
-            2023: { amt: 109000, perc: 3 }
+            2023: { amt: 101000, perc: 3 },
+            2024: { amt: 109000, perc: 3 }
           }
         },
         {
@@ -239,8 +239,8 @@ export default {
           description:
             'Develop outreach materials including: written, television and radio publications to support outreach for the Medicaid EHR Incentive Program',
           years: {
-            2022: { amt: 165000, perc: 0.5 },
-            2023: { amt: 170000, perc: 0.5 }
+            2023: { amt: 165000, perc: 0.5 },
+            2024: { amt: 170000, perc: 0.5 }
           }
         },
         {
@@ -248,8 +248,8 @@ export default {
           description:
             'Coordinate office resources, manage staff, budget, and resource assignments, and report program status.',
           years: {
-            2022: { amt: 135000, perc: 0.5 },
-            2023: { amt: 140000, perc: 0.5 }
+            2023: { amt: 135000, perc: 0.5 },
+            2024: { amt: 140000, perc: 0.5 }
           }
         },
         {
@@ -258,8 +258,8 @@ export default {
           description:
             'Data collection and analysis, reporting, planning, service delivery modification, support administration of the EHR Incentive Payment Program including provider application review.',
           years: {
-            2022: { amt: 110012, perc: 1 },
-            2023: { amt: 111102, perc: 1 }
+            2023: { amt: 110012, perc: 1 },
+            2024: { amt: 111102, perc: 1 }
           }
         },
         {
@@ -267,8 +267,8 @@ export default {
           description:
             'Supports design, development and implementation of information technology infrastructure for the projects/programs under the IT Planning office supported by this Implementation Advanced Planning Document.',
           years: {
-            2022: { amt: 98987, perc: 4 },
-            2023: { amt: 99897, perc: 4 }
+            2023: { amt: 98987, perc: 4 },
+            2024: { amt: 99897, perc: 4 }
           }
         }
       ],
@@ -276,17 +276,17 @@ export default {
         {
           description: '',
           category: 'Training and outreach',
-          years: { 2022: 40000, 2023: 40000 }
+          years: { 2023: 40000, 2024: 40000 }
         },
         {
           description: '',
           category: 'Travel',
-          years: { 2022: 35000, 2023: 35000 }
+          years: { 2023: 35000, 2024: 35000 }
         },
         {
           description: '',
           category: 'Hardware, software, and licensing',
-          years: { 2022: 700000, 2023: 0 }
+          years: { 2023: 700000, 2024: 0 }
         }
       ],
       contractorResources: [
@@ -294,27 +294,27 @@ export default {
           description: 'Maintain SLR',
           end: '',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2023: { hours: '', rate: '' },
+            2024: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Super SLR Incorporated',
           start: '',
           totalCost: 32423,
-          years: { 2022: 999756, 2023: 342444 }
+          years: { 2023: 999756, 2024: 342444 }
         },
         {
           description: 'Technology consulting and planning services.',
           end: '',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2023: { hours: '', rate: '' },
+            2024: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Tech Consulting Inc.',
           start: '',
           totalCost: 473573,
-          years: { 2022: 333000, 2023: 200000 }
+          years: { 2023: 333000, 2024: 200000 }
         }
       ],
       costAllocation: {
@@ -400,8 +400,8 @@ export default {
           title: 'Project Assistant',
           description: 'Assist with stuff',
           years: {
-            2022: { amt: 98000, perc: 1 },
-            2023: { amt: 99000, perc: 1 }
+            2023: { amt: 98000, perc: 1 },
+            2024: { amt: 99000, perc: 1 }
           }
         },
         {
@@ -409,8 +409,8 @@ export default {
           description:
             'This position is responsible for the program development, planning, coordination, evaluation, independent management and oversight of the Tycho Automated Info',
           years: {
-            2022: { amt: 140000, perc: 1 },
-            2023: { amt: 144000, perc: 1 }
+            2023: { amt: 140000, perc: 1 },
+            2024: { amt: 144000, perc: 1 }
           }
         },
         {
@@ -418,8 +418,8 @@ export default {
           description:
             'Under the direct supervision of the Project Manager, this position is responsible for the development of a comprehensive training and support program for the Tycho Automated Information Management System',
           years: {
-            2022: { amt: 115000, perc: 1 },
-            2023: { amt: 115000, perc: 1 }
+            2023: { amt: 115000, perc: 1 },
+            2024: { amt: 115000, perc: 1 }
           }
         },
         {
@@ -427,24 +427,24 @@ export default {
           description:
             'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
           years: {
-            2022: { amt: 140000, perc: 1 },
-            2023: { amt: 145000, perc: 1 }
+            2023: { amt: 140000, perc: 1 },
+            2024: { amt: 145000, perc: 1 }
           }
         },
         {
           title: 'Security IT',
           description: 'Make sure its secure.',
           years: {
-            2022: { amt: 115000, perc: 1 },
-            2023: { amt: 120000, perc: 1 }
+            2023: { amt: 115000, perc: 1 },
+            2024: { amt: 120000, perc: 1 }
           }
         },
         {
           title: 'Operations Specialist',
           description: 'Run the day to day.',
           years: {
-            2022: { amt: 125000, perc: 1 },
-            2023: { amt: 130000, perc: 1 }
+            2023: { amt: 125000, perc: 1 },
+            2024: { amt: 130000, perc: 1 }
           }
         },
         {
@@ -452,8 +452,8 @@ export default {
           description:
             'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
           years: {
-            2022: { amt: 150000, perc: 2 },
-            2023: { amt: 155000, perc: 3 }
+            2023: { amt: 150000, perc: 2 },
+            2024: { amt: 155000, perc: 3 }
           }
         },
         {
@@ -461,8 +461,8 @@ export default {
           description:
             'The main purpose of this position is to develop and support Web and Client/Server applications. Duties include analysis, design, testing, debugging, documenting and supporting new and existing systems',
           years: {
-            2022: { amt: 120000, perc: 1 },
-            2023: { amt: 125000, perc: 1 }
+            2023: { amt: 120000, perc: 1 },
+            2024: { amt: 125000, perc: 1 }
           }
         }
       ],
@@ -470,7 +470,7 @@ export default {
         {
           description: '',
           category: 'Travel',
-          years: { 2022: 0, 2023: 0 }
+          years: { 2023: 0, 2024: 0 }
         }
       ],
       contractorResources: [
@@ -478,27 +478,27 @@ export default {
           description: 'Hosting and development support.',
           end: '',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2023: { hours: '', rate: '' },
+            2024: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Interface Vendor Inc.',
           start: '',
           totalCost: 26453574,
-          years: { 2022: 650000, 2023: 750000 }
+          years: { 2023: 650000, 2024: 750000 }
         },
         {
           description: 'Interface M&O contractor.',
           end: '',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2023: { hours: '', rate: '' },
+            2024: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'TBD',
           start: '',
           totalCost: 7398,
-          years: { 2022: 0, 2023: 1000000 }
+          years: { 2023: 0, 2024: 1000000 }
         }
       ],
       costAllocation: {

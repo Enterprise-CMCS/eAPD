@@ -1,0 +1,11 @@
+name: gitleaks
+on: [pull_request, push, workflow_dispatch]
+jobs:
+  gitleaks-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run gitlakes docker	    
+      uses: docker://zricethezav/gitleaks
+      with:
+        args: detect --source /github/workspace/ --no-git --verbose

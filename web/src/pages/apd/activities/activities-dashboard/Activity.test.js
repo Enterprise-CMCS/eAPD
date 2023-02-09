@@ -108,6 +108,7 @@ describe('the (Activity) EntryDetails component', () => {
 
     expect(mapStateToProps(state, { activityIndex: 2 })).toEqual({
       activityId: 'key3',
+      apdType: 'HITECH',
       fundingSource: 'appropriations',
       name: 'Congress Dollars'
     });
