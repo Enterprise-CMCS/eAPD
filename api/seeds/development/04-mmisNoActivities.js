@@ -43,12 +43,47 @@ export default {
       state: 'AK',
       zip: '12345'
     },
-    keyPersonnel: []
+    keyPersonnel: [
+      {
+        name: 'James Holden',
+        position: 'HIT Coordinator',
+        email: 'JimPushesButtons@tycho.com',
+        isPrimary: true,
+        fte: { 2023: 1, 2024: 1 },
+        hasCosts: true,
+        costs: { 2023: 100000, 2024: 100000 },
+        split: {
+          2023: { federal: 90, state: 10 },
+          2024: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2023: 90,
+          2024: 50
+        }
+      },
+      {
+        name: 'Fred Johnson',
+        position: 'Project Management Office Director',
+        email: 'FJohnson@tycho.com',
+        isPrimary: false,
+        fte: { 2023: 0.3, 2024: 0.3 },
+        hasCosts: false,
+        costs: { 2023: 0, 2024: 0 },
+        split: {
+          2023: { federal: 90, state: 10 },
+          2024: { federal: 90, state: 10 }
+        },
+        medicaidShare: {
+          2023: 50,
+          2024: 10
+        }
+      }
+    ]
   },
   statePrioritiesAndScope: {
-    medicaidProgramAndPriorities: '',
-    mesIntroduction: '',
-    scopeOfAPD: ''
+    medicaidProgramAndPriorities: 'Medicaid program and priorities',
+    mesIntroduction: 'Introduction',
+    scopeOfAPD: 'scope'
   },
   previousActivities: {
     previousActivitySummary: '',
