@@ -32,8 +32,8 @@ export default {
   },
   keyStatePersonnel: {
     medicaidDirector: {
-      name: 'Cornelius Fudge',
-      email: 'c.fudge@ministry.magic',
+      name: 'Benedick Padua',
+      email: 'benedick@much.ado',
       phone: '5551234567'
     },
     medicaidOffice: {
@@ -149,7 +149,7 @@ export default {
       },
       activitySchedule: {
         plannedStartDate: '2017-10-01',
-        plannedEndDate: '2023-09-30'
+        plannedEndDate: '2024-09-30'
       },
       analysisOfAlternativesAndRisks: {
         alternativeAnalysis: 'Alternative and analysis',
@@ -276,17 +276,17 @@ export default {
         {
           description: '',
           category: 'Training and outreach',
-          years: { 2022: 40000, 2023: 40000 }
+          years: { 2023: 40000, 2024: 40000 }
         },
         {
           description: '',
           category: 'Travel',
-          years: { 2022: 35000, 2023: 35000 }
+          years: { 2023: 35000, 2024: 35000 }
         },
         {
           description: '',
           category: 'Hardware, software, and licensing',
-          years: { 2022: 700000, 2023: 0 }
+          years: { 2023: 700000, 2024: 0 }
         }
       ],
       contractorResources: [
@@ -294,27 +294,27 @@ export default {
           description: 'Maintain SLR',
           end: '',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2023: { hours: '', rate: '' },
+            2024: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Super SLR Incorporated',
           start: '',
           totalCost: 32423,
-          years: { 2022: 999756, 2023: 342444 }
+          years: { 2023: 999756, 2024: 342444 }
         },
         {
           description: 'Technology consulting and planning services.',
           end: '',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2023: { hours: '', rate: '' },
+            2024: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Tech Consulting Inc.',
           start: '',
           totalCost: 473573,
-          years: { 2022: 333000, 2023: 200000 }
+          years: { 2023: 333000, 2024: 200000 }
         }
       ],
       costAllocation: {
@@ -470,7 +470,7 @@ export default {
         {
           description: '',
           category: 'Travel',
-          years: { 2022: 0, 2023: 0 }
+          years: { 2023: 0, 2024: 0 }
         }
       ],
       contractorResources: [
@@ -478,27 +478,27 @@ export default {
           description: 'Hosting and development support.',
           end: '',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2023: { hours: '', rate: '' },
+            2024: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'Interface Vendor Inc.',
           start: '',
           totalCost: 26453574,
-          years: { 2022: 650000, 2023: 750000 }
+          years: { 2023: 650000, 2024: 750000 }
         },
         {
           description: 'Interface M&O contractor.',
           end: '',
           hourly: {
-            2022: { hours: '', rate: '' },
-            2023: { hours: '', rate: '' }
+            2023: { hours: '', rate: '' },
+            2024: { hours: '', rate: '' }
           },
           useHourly: false,
           name: 'TBD',
           start: '',
           totalCost: 7398,
-          years: { 2022: 0, 2023: 1000000 }
+          years: { 2023: 0, 2024: 1000000 }
         }
       ],
       costAllocation: {

@@ -11,46 +11,6 @@ Array [
   },
   Object {
     "op": "add",
-    "path": "/proposedBudget/incentivePayments/ehAmt/2019",
-    "value": Object {
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
-    },
-  },
-  Object {
-    "op": "add",
-    "path": "/proposedBudget/incentivePayments/ehCt/2019",
-    "value": Object {
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
-    },
-  },
-  Object {
-    "op": "add",
-    "path": "/proposedBudget/incentivePayments/epAmt/2019",
-    "value": Object {
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
-    },
-  },
-  Object {
-    "op": "add",
-    "path": "/proposedBudget/incentivePayments/epCt/2019",
-    "value": Object {
-      "1": 0,
-      "2": 0,
-      "3": 0,
-      "4": 0,
-    },
-  },
-  Object {
-    "op": "add",
     "path": "/activities/0/contractorResources/0/hourly/2019",
     "value": Object {
       "hours": null,
@@ -137,22 +97,6 @@ Array [
   Object {
     "op": "remove",
     "path": "/years/0",
-  },
-  Object {
-    "op": "remove",
-    "path": "/proposedBudget/incentivePayments/ehAmt/2019",
-  },
-  Object {
-    "op": "remove",
-    "path": "/proposedBudget/incentivePayments/ehCt/2019",
-  },
-  Object {
-    "op": "remove",
-    "path": "/proposedBudget/incentivePayments/epAmt/2019",
-  },
-  Object {
-    "op": "remove",
-    "path": "/proposedBudget/incentivePayments/epCt/2019",
   },
   Object {
     "op": "remove",

@@ -1,7 +1,6 @@
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "eapd-terraform-state"
-  # Enable versioning so we can see the full revision history of our
-  # state files
+  # Enable versioning so we can see the full revision history of our state files
   versioning {
     enabled = true
   }
@@ -13,6 +12,15 @@ resource "aws_s3_bucket" "terraform_state" {
       }
     }
   }
+}
+
+resource "aws_s3_bucket_public_access_block" "terraform_state" {
+  bucket = aws_s3_bucket.terraform_state.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 ### Potential future use, allows for resource locking to prevent collisions from multiple users 

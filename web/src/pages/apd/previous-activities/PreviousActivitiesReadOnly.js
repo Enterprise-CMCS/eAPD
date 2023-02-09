@@ -7,8 +7,9 @@ import ApdPreviousActivityTableMMIS from './ApdPreviousActivityTableMMIS';
 import ApdPreviousActivityTableTotal from './ApdPreviousActivityTableTotal';
 
 import { selectPreviousActivitySummary } from '../../../redux/selectors/apd.selectors';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
-const PreviousActivities = ({ previousActivitySummary }) => {
+const PreviousActivities = ({ previousActivitySummary, apdType }) => {
   /* eslint-disable react/no-danger */
   return (
     <div>
@@ -17,7 +18,7 @@ const PreviousActivities = ({ previousActivitySummary }) => {
       <div dangerouslySetInnerHTML={{ __html: previousActivitySummary }} />
       <hr className="subsection-rule" />
       <h3>Actual Expenditures</h3>
-      <ApdPreviousActivityTableHI isViewOnly />
+      {apdType === 'HITECH' && <ApdPreviousActivityTableHI isViewOnly />}
       <ApdPreviousActivityTableMMIS isViewOnly />
       <ApdPreviousActivityTableTotal />
     </div>
@@ -25,11 +26,13 @@ const PreviousActivities = ({ previousActivitySummary }) => {
 };
 
 PreviousActivities.propTypes = {
-  previousActivitySummary: PropTypes.string.isRequired
+  previousActivitySummary: PropTypes.string.isRequired,
+  apdType: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  previousActivitySummary: selectPreviousActivitySummary(state)
+  previousActivitySummary: selectPreviousActivitySummary(state),
+  apdType: selectApdType(state)
 });
 
 export default connect(mapStateToProps)(PreviousActivities);
