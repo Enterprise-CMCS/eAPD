@@ -22,7 +22,7 @@ describe('renders correctly', () => {
     expect(component).toMatchSnapshot();
   });
 
-  it('renders correctly in standard mode', () => {
+  it('renders correctly in standard mode for hitech apds', () => {
     const component = shallow(
       <CombinedActivityCosts
         apdType="HITECH"

@@ -42,7 +42,7 @@ const DataRowGroup = ({ data, year, apdType }) => {
     { category: 'combined', title: 'Subtotal' }
   ];
   apdType === 'MMIS'
-    ? categories.splice(0, 0, {
+    ? categories.unshift({
         category: 'keyStatePersonnel',
         title: 'Key State Personnel'
       })

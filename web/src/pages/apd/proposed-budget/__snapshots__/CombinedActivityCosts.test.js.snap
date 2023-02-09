@@ -279,7 +279,7 @@ exports[`renders correctly data row renders 1`] = `
 </tr>
 `;
 
-exports[`renders correctly renders correctly in standard mode 1`] = `
+exports[`renders correctly renders correctly in standard mode for hitech apds 1`] = `
 Array [
   <Fragment
     key="1984"

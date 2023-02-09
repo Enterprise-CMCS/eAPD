@@ -71,7 +71,7 @@ export const selectKeyStatePersonnelCostSummary = createSelector(
         (o, year) => ({
           ...o,
           [year]: keyPersonnel[year].reduce((sum, kp) => {
-            return sum + kp.totalCost; // Todo: find out if we want to calculate totalCost with medicaid share
+            return sum + kp.totalCost;
           }, 0)
         }),
         {}
