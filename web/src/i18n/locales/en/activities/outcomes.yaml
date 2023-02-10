@@ -1,43 +1,133 @@
-title: Outcomes and Metrics
-instruction:
-  detail: >-
-    Please describe how you will achieve the stated purpose of this activity in terms of Outcomes and Metrics.
+outcomesHITECH:
+  title: Outcomes and Metrics
+  instruction:
+    detail: >-
+      Please describe how you will achieve the stated purpose of this activity
+      in terms of Outcomes and Metrics.
 
 
-    An **Outcome** is a distinct and measurable improvement to Medicaid program management, monitoring, or administration, resulting from the delivery of IT system functionality. Outcomes should support the priorities of the Medicaid program and be directly enabled by the state’s IT project.
+      An **Outcome** is a distinct and measurable improvement to Medicaid
+      program management, monitoring, or administration, resulting from the
+      delivery of IT system functionality. Outcomes should support the
+      priorities of the Medicaid program and be directly enabled by the state’s
+      IT project.
 
 
-    A **Metric** is a measure that would demonstrate whether a system is meeting an outcome. Metrics support both 
-    CMS-required and state-proposed outcomes, and are comprised of underlying data. In accordance with 42 CFR §433.112.
+      A **Metric** is a measure that would demonstrate whether a system is
+      meeting an outcome. Metrics support both  CMS-required and state-proposed
+      outcomes, and are comprised of underlying data. In accordance with 42 CFR
+      §433.112.
 
-  helpText: >-
-    **Example:**
-
-
-    **Outcome:** Develop and implement an MES Module to coordinate and improve public health and environmental services for children exposed to lead.
-
-
-    **Metrics:**
-
-    1. Percentage of children in Medicaid that are receiving lead screening at 12 and 24 months of age.
+    helpText: >-
+      **Example:**
 
 
-    2. Percentage of children in Medicaid that receive timely public health case management and environmental services based on the Childhood Lead Poisoning Prevention Protocol for lead-exposed children.
+      **Outcome:** Develop and implement an MES Module to coordinate and improve
+      public health and environmental services for children exposed to lead.
 
 
-    3. Percentage of children in Medicaid with lead poisoning that had timely follow-up testing by providers.
+      **Metrics:**
 
-noDataNotice: Add at least one outcome for this activity.
+      1. Percentage of children in Medicaid that are receiving lead screening at
+      12 and 24 months of age.
 
-description:
-  input:
-    label: Goal name
-    hint: >-
-      Examples of goals include: improved health outcomes for benficiaries, transformation of public health services,
-      enabling implementation of other initiatives, etc.
 
-objective:
-  input:
-    label: Benchmarks
-    hint: >-
-      Explain how the state will make measurable progress towards the activity goal.
+      2. Percentage of children in Medicaid that receive timely public health
+      case management and environmental services based on the Childhood Lead
+      Poisoning Prevention Protocol for lead-exposed children.
+
+
+      3. Percentage of children in Medicaid with lead poisoning that had timely
+      follow-up testing by providers.
+
+  noDataNotice: Add at least one outcome for this activity.
+
+  description:
+    input:
+      label: Goal name
+      hint: >-
+        Examples of goals include: improved health outcomes for benficiaries,
+        transformation of public health services, enabling implementation of
+        other initiatives, etc.
+
+  objective:
+    input:
+      label: Benchmarks
+      hint: >-
+        Explain how the state will make measurable progress towards the activity
+        goal.
+
+outcomesMMIS:
+  title: Outcomes and Metrics
+  instruction:
+    detail: >-
+      Please describe how you will achieve the stated purpose of this activity
+      in terms of Outcomes and Metrics.
+
+
+      An **Outcome** is a distinct and measurable improvement to Medicaid
+      program management, monitoring, or administration, resulting from the
+      delivery of IT system functionality. Outcomes should support the
+      priorities of the Medicaid program and be directly enabled by the state’s
+      IT project.
+
+
+      A **Metric** is a measure that would demonstrate whether a system is
+      meeting an outcome. Metrics support both  CMS-required and state-proposed
+      outcomes, and are comprised of underlying data. In accordance with 42 CFR
+      §433.112.
+
+    helpText: >-
+      **CMS Required Outcome Exmaple:**
+
+      Outcome: A provider can initiate, save, and apply to be a Medicaid
+      provider.
+
+      Metrics:
+
+      1. Number of requests to help desk for problems with initiating, saving,
+      and applying.
+
+      2. Average time to enroll from point of submit.
+
+      &emsp;a. Total time to enroll all providers
+
+      &emsp;b. Total # of enrolled providers
+
+
+      **State Specific Outcome Example**
+
+      Outcome: Transform MHD from a transactional, request as needed data
+      approach to a business intelligence driven model recognizing and treating
+      data as an asset.
+
+      Metrics:
+
+      1. Conducting an initial data maturity analysis and prioritizing
+      recommendations and review every two (2) years.
+
+      2. Establishing a Data Governance Council who is engaged and meets at a
+      minimum of quarterly and has at least 60% participation as measure by
+      attendance.
+
+
+      To view other outcome and metrics examples, visit the <a
+      href="https://cmsgov.github.io/CMCS-DSG-DSS-Certification/">CMS
+      Certification Repository.</a>
+
+  noDataNotice: Add at least one outcome for this activity.
+
+  description:
+    input:
+      label: Goal name
+      hint: >-
+        Examples of goals include: improved health outcomes for benficiaries,
+        transformation of public health services, enabling implementation of
+        other initiatives, etc.
+
+  objective:
+    input:
+      label: Benchmarks
+      hint: >-
+        Explain how the state will make measurable progress towards the activity
+        goal.
