@@ -5,13 +5,22 @@ import { connect } from 'react-redux';
 import Dollars from '../../../components/Dollars';
 import { TABLE_HEADERS } from '../../../constants';
 import { selectPreviousActivityExpensesTotals } from '../../../redux/selectors/apd.selectors';
+import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
-const ApdPreviousActivityTableMMIS = ({ totals }) => {
+const ApdPreviousActivityTableMMIS = ({ totals, apdType }) => {
   const years = Object.keys(totals);
 
   return (
     <table className="budget-table">
-      <caption className="ds-h4">Grand totals: Federal HIT, HIE, MMIS</caption>
+      {apdType === 'HITECH' && (
+        <caption className="ds-h4">
+          Grand totals: Federal HIT, HIE, MMIS
+        </caption>
+      )}
+
+      {apdType === 'MMIS' && (
+        <caption className="ds-h4">Grand totals: Federal MMIS</caption>
+      )}
       <thead>
         <tr>
           <th id="prev_act_totals_ffy">
@@ -56,11 +65,13 @@ const ApdPreviousActivityTableMMIS = ({ totals }) => {
 };
 
 ApdPreviousActivityTableMMIS.propTypes = {
-  totals: PropTypes.object.isRequired
+  totals: PropTypes.object.isRequired,
+  apdType: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  totals: selectPreviousActivityExpensesTotals(state)
+  totals: selectPreviousActivityExpensesTotals(state),
+  apdType: selectApdType(state)
 });
 
 export default connect(mapStateToProps, null)(ApdPreviousActivityTableMMIS);

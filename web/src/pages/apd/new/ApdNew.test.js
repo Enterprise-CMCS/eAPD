@@ -230,6 +230,7 @@ describe('<ApdNew />', () => {
             screen.getByRole('radio', { name: /MMIS IAPD/i })
           ).toBeChecked();
         });
+
         expect(disabledBtn).toBeDisabled();
 
         user.type(screen.getByRole('textbox', { name: /name/i }), 'APD Name');

@@ -20,6 +20,13 @@ resource "aws_instance" "eapd_mongo" {
     key_name                    = "eapd_bbrooks"
     iam_instance_profile        = "CCSPatchRole"
     hibernation                 = false
+    root_block_device {
+      encrypted = true
+    }
+    metadata_options {
+      http_tokens = "required"
+    }
+    disable_api_termination = true
     tags = {
         Name = var.instance_name
         Environment = "production"
@@ -29,7 +36,6 @@ resource "aws_instance" "eapd_mongo" {
         Terraform = "True"
     }
     depends_on = [aws_security_group.eapd-production-mongo-ec2]
-    disable_api_termination = false # True in Prod
     user_data = <<-EOL
     #!/bin/bash -xe
     sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
