@@ -377,6 +377,7 @@ describe('APD reducer', () => {
   it('should handle adding an APD year', () => {
     const state = {
       data: {
+        apdType: APD_TYPE.HITECH,
         keyStatePersonnel: {
           keyPersonnel: [
             {
@@ -465,6 +466,7 @@ describe('APD reducer', () => {
 
     expect(apd(state, { type: ADD_APD_YEAR, value: '1741' })).toEqual({
       data: {
+        apdType: APD_TYPE.HITECH,
         keyStatePersonnel: {
           keyPersonnel: [
             {
@@ -591,6 +593,7 @@ describe('APD reducer', () => {
   it('should handle removing an APD year', () => {
     const state = {
       data: {
+        apdType: APD_TYPE.HITECH,
         keyStatePersonnel: {
           keyPersonnel: [
             {
@@ -719,6 +722,7 @@ describe('APD reducer', () => {
 
     expect(apd(state, { type: REMOVE_APD_YEAR, value: '1741' })).toEqual({
       data: {
+        apdType: APD_TYPE.HITECH,
         keyStatePersonnel: {
           keyPersonnel: [
             {
@@ -799,6 +803,174 @@ describe('APD reducer', () => {
             }
           }
         },
+        years: ['1742', '1743'],
+        yearOptions: ['1741', '1742', '1743']
+      }
+    });
+  });
+
+  it('should handle removing an MMIS APD year', () => {
+    const state = {
+      data: {
+        apdType: APD_TYPE.MMIS,
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              },
+              fte: {
+                1741: 0,
+                1742: 1,
+                1743: 2
+              }
+            }
+          ]
+        },
+        activities: [
+          {
+            statePersonnel: [
+              {
+                years: {
+                  1741: { amt: '', perc: '' },
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  1741: 0,
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            contractorResources: [
+              {
+                hourly: {
+                  1741: { hours: '', rate: '' },
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
+                },
+                years: {
+                  1741: 0,
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            costAllocation: {
+              1741: { other: 0, ffp: { federal: 90, state: 10 } },
+              1742: 'yes',
+              1743: 'no'
+            },
+            costAllocationNarrative: {
+              years: {
+                1741: { otherSources: '' },
+                1742: { otherSources: '' }
+              },
+              methodology: ''
+            },
+            quarterlyFFP: {
+              1741: {
+                1: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                2: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                3: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                },
+                4: {
+                  state: 25,
+                  contractors: 25,
+                  combined: 25
+                }
+              },
+              1742: 'sometimes',
+              1743: 'rarely'
+            }
+          }
+        ],
+        years: ['1741', '1742', '1743'],
+        yearOptions: ['1741', '1742', '1743']
+      }
+    };
+
+    expect(apd(state, { type: REMOVE_APD_YEAR, value: '1741' })).toEqual({
+      data: {
+        apdType: APD_TYPE.MMIS,
+        keyStatePersonnel: {
+          keyPersonnel: [
+            {
+              costs: {
+                1742: 1,
+                1743: 2
+              },
+              fte: {
+                1742: 1,
+                1743: 2
+              }
+            }
+          ]
+        },
+        activities: [
+          {
+            statePersonnel: [
+              {
+                years: {
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            expenses: [
+              {
+                years: {
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            contractorResources: [
+              {
+                hourly: {
+                  1742: { hours: 20, rate: 22 },
+                  1743: { hours: 25, rate: 27 }
+                },
+                years: {
+                  1742: 0,
+                  1743: 0
+                }
+              }
+            ],
+            costAllocation: {
+              1742: 'yes',
+              1743: 'no'
+            },
+            costAllocationNarrative: {
+              years: {
+                1742: { otherSources: '' }
+              },
+              methodology: ''
+            },
+            quarterlyFFP: {
+              1742: 'sometimes',
+              1743: 'rarely'
+            }
+          }
+        ],
         years: ['1742', '1743'],
         yearOptions: ['1741', '1742', '1743']
       }

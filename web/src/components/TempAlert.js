@@ -32,6 +32,7 @@ const TempAlert = ({ alerts, apdId, resolveAlert }) => {
             <div>
               <Button
                 onClick={() => resolveAlert(index)}
+                aria-label="Close and continue"
                 className="tempMsgBtn"
               >
                 <CloseIcon />

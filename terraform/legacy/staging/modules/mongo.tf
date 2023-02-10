@@ -16,6 +16,12 @@ resource "aws_instance" "eapd_mongo" {
     instance_type               = "m3.medium"
     vpc_security_group_ids      = ["sg-01e01435dbbe6ce32", aws_security_group.eapd-staging-mongo-ec2.id]
     subnet_id                   = "subnet-07e1b9ed6ed5fb8c7"
+    root_block_device {
+      encrypted = true
+    }
+    metadata_options {
+      http_tokens = "required"
+    }    
     key_name                    = "eapd_bbrooks"
 
     tags = {
@@ -27,7 +33,6 @@ resource "aws_instance" "eapd_mongo" {
         Terraform = "True"
     }
     depends_on = [aws_security_group.eapd-staging-mongo-ec2]
-    disable_api_termination = false # True in Prod
     user_data = <<-EOL
     #!/bin/bash -xe
     sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"

@@ -42,35 +42,40 @@ import {
 import {
   generateKey,
   defaultAPDYearOptions,
+  APD_TYPE,
   FUNDING_CATEGORY_TYPE
 } from '@cms-eapd/common';
 import initialAssurances from '../../util/regulations';
 
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
-  const patches = [
-    { op: 'replace', path: '/years', value: years },
-    {
-      op: 'add',
-      path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
-      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-    },
-    {
-      op: 'add',
-      path: `/proposedBudget/incentivePayments/ehCt/${year}`,
-      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-    },
-    {
-      op: 'add',
-      path: `/proposedBudget/incentivePayments/epAmt/${year}`,
-      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-    },
-    {
-      op: 'add',
-      path: `/proposedBudget/incentivePayments/epCt/${year}`,
-      value: { 1: 0, 2: 0, 3: 0, 4: 0 }
-    }
-  ];
+  const apdType = state.data.apdType;
+  let patches = [{ op: 'replace', path: '/years', value: years }];
+
+  if (apdType === APD_TYPE.HITECH) {
+    patches = patches.concat([
+      {
+        op: 'add',
+        path: `/proposedBudget/incentivePayments/ehAmt/${year}`,
+        value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      {
+        op: 'add',
+        path: `/proposedBudget/incentivePayments/ehCt/${year}`,
+        value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      {
+        op: 'add',
+        path: `/proposedBudget/incentivePayments/epAmt/${year}`,
+        value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      },
+      {
+        op: 'add',
+        path: `/proposedBudget/incentivePayments/epCt/${year}`,
+        value: { 1: 0, 2: 0, 3: 0, 4: 0 }
+      }
+    ]);
+  }
 
   state.data.activities.forEach((activity, activityIndex) => {
     activity.contractorResources.forEach((_, i) => {
@@ -140,26 +145,29 @@ export const getPatchesToAddYear = (state, year) => {
 
 export const getPatchesToRemoveYear = (state, year) => {
   const index = state.data.years.indexOf(year);
+  const apdType = state.data.apdType;
+  let patches = [{ op: 'remove', path: `/years/${index}` }];
 
-  const patches = [
-    { op: 'remove', path: `/years/${index}` },
-    {
-      op: 'remove',
-      path: `/proposedBudget/incentivePayments/ehAmt/${year}`
-    },
-    {
-      op: 'remove',
-      path: `/proposedBudget/incentivePayments/ehCt/${year}`
-    },
-    {
-      op: 'remove',
-      path: `/proposedBudget/incentivePayments/epAmt/${year}`
-    },
-    {
-      op: 'remove',
-      path: `/proposedBudget/incentivePayments/epCt/${year}`
-    }
-  ];
+  if (apdType === APD_TYPE.HITECH) {
+    patches = patches.concat([
+      {
+        op: 'remove',
+        path: `/proposedBudget/incentivePayments/ehAmt/${year}`
+      },
+      {
+        op: 'remove',
+        path: `/proposedBudget/incentivePayments/ehCt/${year}`
+      },
+      {
+        op: 'remove',
+        path: `/proposedBudget/incentivePayments/epAmt/${year}`
+      },
+      {
+        op: 'remove',
+        path: `/proposedBudget/incentivePayments/epCt/${year}`
+      }
+    ]);
+  }
 
   state.data.activities.forEach((activity, activityIndex) => {
     activity.contractorResources.forEach((_, i) => {

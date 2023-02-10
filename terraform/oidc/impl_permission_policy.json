@@ -1,0 +1,11 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ImplS3Access",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject", "s3:ListBucket"],
+      "Resource": ["arn:aws:s3:::files.staging.eapd.cms.gov/*"]
+    }
+  ]
+}
