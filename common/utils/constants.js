@@ -6,7 +6,7 @@ export const APD_TYPE = {
 
 export const FUNDING_CATEGORY_TYPE = {
   ddi: 'DDI',
-  mando: 'M&O'
+  mando: 'MO'
 };
 
 export const FUNDING_CATEGORY_LABEL_MAPPING = {

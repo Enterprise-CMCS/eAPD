@@ -45,7 +45,7 @@ ffp:
     heading: Federal-State Split
     detail: >-
       Select the match rate for Federal Financial Participation applicable to
-      this activity. A FFP of 90-10 means 90% of the total will be the Federal
+      this activity. A FFP of 90/10 means 90% of the total will be the Federal
       government's share and 10% will be the State's share. If the APD includes
       multiple FFPs, separate activities by their FFP.
   quarterlyFFPInstruction:

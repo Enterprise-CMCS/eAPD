@@ -240,10 +240,9 @@ const getHumanTimestamp = iso8601 => {
 };
 
 const getKeyPersonnelSplit = (years, apdType) => {
-  let split;
   switch (apdType) {
     case 'HITECH':
-      split = years.reduce(
+      return years.reduce(
         (s, year) => ({
           ...s,
           [year]: {
@@ -254,16 +253,14 @@ const getKeyPersonnelSplit = (years, apdType) => {
         }),
         {}
       );
-      break;
     case 'MMIS':
-      split = years.reduce(
+      return years.reduce(
         (s, year) => ({
           ...s,
           [year]: { federal: 0, state: 0, fundingCategory: null }
         }),
         {}
       );
-      break;
     default:
       return years.reduce(
         (s, year) => ({
@@ -273,7 +270,6 @@ const getKeyPersonnelSplit = (years, apdType) => {
         {}
       );
   }
-  return split;
 };
 
 export const getKeyPersonnel = (

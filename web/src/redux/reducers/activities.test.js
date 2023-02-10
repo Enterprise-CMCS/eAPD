@@ -1,4 +1,4 @@
-import { APD_TYPE } from '@cms-eapd/common';
+import { APD_TYPE, FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 import {
   newActivity,
   newContractor,
@@ -7,7 +7,9 @@ import {
   newOutcome,
   newOutcomeMetric,
   newStatePerson,
-  setKeyGenerator
+  setKeyGenerator,
+  costAllocationEntry,
+  quarterlyFFPEntry
 } from './activities';
 
 describe('activities reducer helpers', () => {
@@ -70,6 +72,44 @@ describe('activities reducer helpers', () => {
       title: '',
       description: '',
       years: { 8732: { amt: null, perc: null }, bob: { amt: null, perc: null } }
+    });
+  });
+
+  it('can create a cost allocation entry', () => {
+    expect(costAllocationEntry(0, 75, 25, FUNDING_CATEGORY_TYPE.mando)).toEqual(
+      {
+        other: 0,
+        ffp: {
+          federal: 75,
+          state: 25,
+          fundingCategory: FUNDING_CATEGORY_TYPE.mando
+        }
+      }
+    );
+  });
+
+  it('can create a quarterly ffp entry', () => {
+    expect(quarterlyFFPEntry()).toEqual({
+      1: {
+        inHouse: 25,
+        contractors: 25,
+        combined: 25
+      },
+      2: {
+        inHouse: 25,
+        contractors: 25,
+        combined: 25
+      },
+      3: {
+        inHouse: 25,
+        contractors: 25,
+        combined: 25
+      },
+      4: {
+        inHouse: 25,
+        contractors: 25,
+        combined: 25
+      }
     });
   });
 

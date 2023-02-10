@@ -13,6 +13,7 @@ import {
   FETCH_ALL_APDS_REQUEST,
   FETCH_ALL_APDS_SUCCESS,
   SAVE_APD_SUCCESS,
+  SELECT_APD_FAILURE,
   SET_APD_TO_SELECT_ON_LOAD,
   ADMIN_CHECK_TOGGLE,
   ADMIN_CHECK_COLLAPSE_TOGGLE,
@@ -1399,6 +1400,45 @@ describe('APD reducer', () => {
       },
       { type: SAVE_APD_SUCCESS, data: { apd: { id: 'apdID', updated: '' } } }
     );
+  });
+
+  it('should handle APD select failure', () => {
+    expect(
+      apd(
+        {
+          a: 'alpha',
+          b: 'beta',
+          byId: {
+            apdID: { name: 'Bobbert', updated: 'in the past' },
+            otherID: { name: 'Jimbob', updated: 'in the future' }
+          },
+          data: {
+            name: 'Timmothert',
+            updated: 'in the present'
+          },
+          adminCheck: {
+            errors: []
+          }
+        },
+        {
+          type: SELECT_APD_FAILURE,
+          data: 'Error selected APD'
+        }
+      )
+    ).toEqual({
+      a: 'alpha',
+      b: 'beta',
+      byId: {
+        apdID: { name: 'Bobbert', updated: 'in the past' },
+        otherID: { name: 'Jimbob', updated: 'in the future' }
+      },
+      data: {},
+      adminCheck: {
+        errors: []
+      },
+      error: 'Error selected APD',
+      fetching: false
+    });
   });
 
   describe('admin check panel toggles', () => {

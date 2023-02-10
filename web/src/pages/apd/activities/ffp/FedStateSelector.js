@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
@@ -10,6 +10,13 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
     formState: { errors },
     setValue
   } = useFormContext();
+  const [fedStateSplit, setFedStateSplit] = useState(
+    `${ffp.federal}-${ffp.state}`
+  );
+
+  useEffect(() => {
+    setFedStateSplit(`${ffp.federal}-${ffp.state}`);
+  }, [ffp.federal, ffp.state]);
 
   return (
     <div className="data-entry-box ds-u-margin-bottom--5">
@@ -34,11 +41,12 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
               { label: '75-25', value: '75-25' },
               { label: '50-50', value: '50-50' }
             ]}
-            value={`${ffp.federal}-${ffp.state}`}
+            value={fedStateSplit}
             onChange={e => {
               const [federal, state] = e.target.value.split('-').map(Number);
               setValue(`${ffy}.ffp.federal`, federal);
               setValue(`${ffy}.ffp.state`, state);
+              setFedStateSplit(`${federal}-${state}`);
               setFederalStateSplit(ffy, federal, state);
             }}
             errorMessage={errors[ffy]?.ffp?.state?.message}

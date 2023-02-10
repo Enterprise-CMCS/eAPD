@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import MatchRateSelector from './MatchRateSelector';
 import { action } from '@storybook/addon-actions';
 import { withDesign } from 'storybook-addon-designs';
+import { FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 export default {
   title: 'Pages/Apd/Activities/FFP/Match Rate Selector',
@@ -72,6 +73,38 @@ Fed75State25SelectorStory.args = {
   setFederalStateSplit: action('setFederalStateSplit')
 };
 
+export const Fed75State25DdiSelectorStory = Template.bind({});
+Fed75State25DdiSelectorStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=2281%3A17681&t=i3lIkizqZLNdTnKe-1'
+  }
+};
+Fed75State25DdiSelectorStory.args = {
+  ffp: {
+    federal: 75,
+    state: 25,
+    fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+  },
+  setFederalStateSplit: action('setFederalStateSplit')
+};
+
+export const Fed75State25MoSelectorStory = Template.bind({});
+Fed75State25MoSelectorStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=2281%3A17681&t=i3lIkizqZLNdTnKe-1'
+  }
+};
+Fed75State25MoSelectorStory.args = {
+  ffp: {
+    federal: 75,
+    state: 25,
+    fundingCategory: FUNDING_CATEGORY_TYPE.mando
+  },
+  setFederalStateSplit: action('setFederalStateSplit')
+};
+
 export const Fed50State50SelectorStory = Template.bind({});
 Fed50State50SelectorStory.parameters = {
   design: {
@@ -83,6 +116,38 @@ Fed50State50SelectorStory.args = {
   ffp: {
     federal: 50,
     state: 50
+  },
+  setFederalStateSplit: action('setFederalStateSplit')
+};
+
+export const Fed50State50DdiSelectorStory = Template.bind({});
+Fed50State50DdiSelectorStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=2281%3A18378&t=i3lIkizqZLNdTnKe-4'
+  }
+};
+Fed50State50DdiSelectorStory.args = {
+  ffp: {
+    federal: 50,
+    state: 50,
+    fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+  },
+  setFederalStateSplit: action('setFederalStateSplit')
+};
+
+export const Fed50State50MoSelectorStory = Template.bind({});
+Fed50State50MoSelectorStory.parameters = {
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/hJpKHKU6fz5J0Z7fisSwa2/eAPD-MMIS-2022?node-id=2281%3A18378&t=i3lIkizqZLNdTnKe-4'
+  }
+};
+Fed50State50MoSelectorStory.args = {
+  ffp: {
+    federal: 50,
+    state: 50,
+    fundingCategory: FUNDING_CATEGORY_TYPE.mando
   },
   setFederalStateSplit: action('setFederalStateSplit')
 };

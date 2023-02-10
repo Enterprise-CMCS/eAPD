@@ -1,5 +1,6 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
+import { FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 import { plain as KeyPersonForm, mapDispatchToProps } from './ApdKeyPersonForm';
 
@@ -25,11 +26,13 @@ describe('the ApdKeyPersonForm component', () => {
       split: {
         1992: {
           federal: 90,
-          state: 10
+          state: 10,
+          fundingCategory: FUNDING_CATEGORY_TYPE.ddi
         },
         1993: {
           federal: 90,
-          state: 10
+          state: 10,
+          fundingCategory: FUNDING_CATEGORY_TYPE.ddi
         }
       },
       medicaidShare: {

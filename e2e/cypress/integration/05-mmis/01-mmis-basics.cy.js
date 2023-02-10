@@ -62,6 +62,11 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('Create MMIS APD', function () {
     it('tests Create New page', function () {
+      const mmisBasics = this.mmisBasics;
+
+      //
+      // APD Overview
+      //
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
 
@@ -160,11 +165,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.contains('MMIS APD Test').should('not.exist');
-    });
-  });
-  describe('MMIS Pages', function () {
-    it('tests Activity Overview page', function () {
-      const mmisBasics = this.mmisBasics;
 
       cy.goToActivityDashboard();
 
@@ -172,7 +172,9 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.contains('Add Activity').click();
       cy.contains('Activity 1').should('exist');
 
+      //
       // Check Activity Overview
+      //
       cy.goToActivityOverview(0);
       cy.url().should('contain', '/activity/0/overview');
       cy.findAllByRole('heading', { name: /Activity Overview/i }).should(
@@ -192,6 +194,9 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       // Check validation errors
       cy.turnOnAdminCheck();
 
+      //
+      // Activities
+      //
       // Validation errors within admin check list
       cy.get('[class="eapd-admin-check-list"]').within(list => {
         cy.get(list).contains('Activity 1 Activity Overview').should('exist');
@@ -282,10 +287,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         'activity-proposed-solution-field',
         `<p>${mmisBasics.activities[0].activityOverview.proposedSolution}</p>`
       );
-    });
-
-    it('tests Key State Personnel page', function () {
-      const mmisBasics = this.mmisBasics;
 
       cy.goToKeyStatePersonnel();
       cy.contains('Key Personnel and Program Management').should('exist');
@@ -347,10 +348,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         'Total Computable Medicaid: $2,000 (100% Medicaid Share)'
       ).should('exist');
       cy.contains('Federal Share: $1,800').should('exist');
-    });
-
-    it('tests the Security Planning page', function () {
-      const mmisBasics = this.mmisBasics;
 
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);

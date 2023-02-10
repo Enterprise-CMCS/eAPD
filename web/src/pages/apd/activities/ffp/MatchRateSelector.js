@@ -11,12 +11,18 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
     formState: { errors },
     setValue
   } = useFormContext();
-  const { federal, state } = ffp;
-  const [fedStateSplit, setFedStateSplit] = useState(`${federal}-${state}`);
+  const [fundingCategory, setFundingCategory] = useState(ffp.fundingCategory);
+  const [fedStateSplit, setFedStateSplit] = useState(
+    `${ffp.federal}-${ffp.state}`
+  );
 
   useEffect(() => {
     setFedStateSplit(`${ffp.federal}-${ffp.state}`);
-  }, [ffp, ffp.federal, ffp.state]);
+  }, [ffp.federal, ffp.state]);
+
+  useEffect(() => {
+    setFundingCategory(ffp.fundingCategory);
+  }, [ffp.fundingCategory]);
 
   const checkedChildren = (
     <div className="ds-c-choice__checkedChild">
@@ -32,12 +38,12 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
               {
                 label: 'Design, Development, and Installation (DDI)',
                 value: FUNDING_CATEGORY_TYPE.ddi,
-                checked: ffy.fundingCategory === FUNDING_CATEGORY_TYPE.ddi
+                checked: fundingCategory === FUNDING_CATEGORY_TYPE.ddi
               },
               {
                 label: 'Maintenance & Operations (M&O)',
                 value: FUNDING_CATEGORY_TYPE.mando,
-                checked: ffy.fundingCategory === FUNDING_CATEGORY_TYPE.mando
+                checked: fundingCategory === FUNDING_CATEGORY_TYPE.mando
               }
             ]}
             type="radio"
@@ -46,8 +52,9 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
               const [federal, state] = fedStateSplit.split('-').map(Number);
               setValue(`${ffy}.ffp.fundingCategory`, e.target.value);
               setMatchRate(ffy, federal, state, e.target.value);
+              setFundingCategory(e.target.value);
             }}
-            errorMessage={errors?.[ffy]?.fundingCategory?.message}
+            errorMessage={errors?.[ffy]?.ffp?.fundingCategory?.message}
             errorPlacement="bottom"
           />
         )}
@@ -74,18 +81,18 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             labelClassName="sr-only"
             choices={[
               {
-                label: '90 - 10 Design, Development, and Installation (DDI)',
+                label: '90/10 Design, Development, and Installation (DDI)',
                 value: '90-10',
                 checked: fedStateSplit === '90-10'
               },
               {
-                label: '75 - 25',
+                label: '75/25',
                 value: '75-25',
                 checked: fedStateSplit === '75-25',
                 checkedChildren
               },
               {
-                label: '50 - 50',
+                label: '50/50',
                 value: '50-50',
                 checked: fedStateSplit === '50-50',
                 checkedChildren
@@ -98,6 +105,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
               setValue(`${ffy}.ffp.federal`, federal);
               setValue(`${ffy}.ffp.state`, state);
               setFedStateSplit(`${federal}-${state}`);
+              setFundingCategory(null);
 
               if (federal === 90 && state === 10) {
                 setMatchRate(ffy, federal, state, FUNDING_CATEGORY_TYPE.ddi);
