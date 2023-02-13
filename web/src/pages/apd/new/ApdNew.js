@@ -94,8 +94,7 @@ const ApdNew = ({ createApd: create }) => {
     setValue,
     getValues,
     formState: { errors, isValid },
-    reset,
-    resetField
+    reset
   } = useForm({
     defaultValues: {
       apdType: '',
@@ -175,6 +174,7 @@ const ApdNew = ({ createApd: create }) => {
             setOtherDetails={setOtherDetails}
             typeStatus={typeStatus}
             setTypeStatus={setTypeStatus}
+            setValue={setValue}
           />
         );
       default:
@@ -311,6 +311,7 @@ const ApdNew = ({ createApd: create }) => {
             </div>
           )}
 
+          {/* Show relevant fields based on APD type selected */}
           {fieldComponents(apdType)}
 
           <div className="ds-u-padding-y--3">

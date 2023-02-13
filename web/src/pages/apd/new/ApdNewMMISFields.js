@@ -12,7 +12,8 @@ export default function ApdNewMMISFields({
   setBusinessList,
   setOtherDetails,
   typeStatus,
-  setTypeStatus
+  setTypeStatus,
+  setValue
 }) {
   return (
     <div>
@@ -208,6 +209,7 @@ export default function ApdNewMMISFields({
                           onBlur={onBlur}
                           onChange={e => {
                             setOtherDetails(e.target.value);
+                            setValue('otherDetails', e.target.value);
                           }}
                           onComponentBlur={onBlur}
                           errorMessage={errors?.otherDetails?.message}
