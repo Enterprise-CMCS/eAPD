@@ -1,486 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the OutcomeAndMetricForm component renders correctly 1`] = `
-<form
-  id="metrics-1"
-  key="activity93-index1-form"
-  onSubmit={[Function]}
+exports[`activity Outcomes and Metrics component renders properly 1`] = `
+<Subsection
+  headerClassName={null}
+  id="activity-outcomes-0"
+  nested={false}
+  resource="activities.outcomes"
 >
-  <button
-    aria-hidden="true"
-    aria-label="submitButton"
-    disabled={true}
-    style={
+  <hr
+    className="subsection-rule"
+  />
+  <FormAndReviewList
+    activityIndex={0}
+    addButtonText="Add Outcome"
+    allowDeleteAll={true}
+    className={null}
+    collapsed={[Function]}
+    errorCheck={false}
+    expanded={
       Object {
-        "display": "none",
+        "$$typeof": Symbol(react.forward_ref),
+        "WrappedComponent": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "activityIndex": [Function],
+            "index": [Function],
+            "item": [Function],
+            "saveOutcome": [Function],
+            "setFormValid": [Function],
+          },
+          "render": [Function],
+        },
+        "render": [Function],
       }
     }
-    type="submit"
-  />
-  <Component
-    control={
-      Object {
-        "_defaultValues": Object {
-          "metrics": Array [
-            Object {
-              "key": "om key 1",
-              "metric": "metric 1",
-            },
-            Object {
-              "key": "om key 2",
-              "metric": "metric 2",
-            },
-          ],
-          "outcome": "outcome description",
+    list={
+      Array [
+        Object {
+          "key": "outcome 1",
         },
-        "_executeSchema": [Function],
-        "_fields": Object {},
-        "_focusError": [Function],
-        "_formState": Object {
-          "dirtyFields": Object {},
-          "errors": Object {},
-          "isDirty": false,
-          "isLoading": true,
-          "isSubmitSuccessful": false,
-          "isSubmitted": false,
-          "isSubmitting": false,
-          "isValid": false,
-          "isValidating": false,
-          "submitCount": 0,
-          "touchedFields": Object {},
+        Object {
+          "key": "outcome 2",
         },
-        "_formValues": Object {
-          "metrics": Array [
-            Object {
-              "key": "om key 1",
-              "metric": "metric 1",
-            },
-            Object {
-              "key": "om key 2",
-              "metric": "metric 2",
-            },
-          ],
-          "outcome": "outcome description",
+        Object {
+          "key": "outcome 3",
         },
-        "_getDirty": [Function],
-        "_getFieldArray": [Function],
-        "_getWatch": [Function],
-        "_names": Object {
-          "array": Set {
-            "metrics",
-          },
-          "mount": Set {},
-          "unMount": Set {},
-          "watch": Set {},
-        },
-        "_options": Object {
-          "defaultValues": Object {
-            "metrics": Array [
-              Object {
-                "key": "om key 1",
-                "metric": "metric 1",
-              },
-              Object {
-                "key": "om key 2",
-                "metric": "metric 2",
-              },
-            ],
-            "outcome": "outcome description",
-          },
-          "mode": "onBlur",
-          "reValidateMode": "onBlur",
-          "resolver": [Function],
-          "shouldFocusError": true,
-        },
-        "_proxyFormState": Object {
-          "dirtyFields": false,
-          "errors": "all",
-          "isDirty": false,
-          "isValid": "all",
-          "isValidating": false,
-          "touchedFields": false,
-        },
-        "_removeUnmounted": [Function],
-        "_reset": [Function],
-        "_stateFlags": Object {
-          "action": false,
-          "mount": false,
-          "watch": false,
-        },
-        "_subjects": Object {
-          "array": Object {
-            "next": [Function],
-            "observers": Array [],
-            "subscribe": [Function],
-            "unsubscribe": [Function],
-          },
-          "state": Object {
-            "next": [Function],
-            "observers": Array [],
-            "subscribe": [Function],
-            "unsubscribe": [Function],
-          },
-          "watch": Object {
-            "next": [Function],
-            "observers": Array [],
-            "subscribe": [Function],
-            "unsubscribe": [Function],
-          },
-        },
-        "_updateFieldArray": [Function],
-        "_updateFormState": [Function],
-        "_updateValid": [Function],
-        "getFieldState": [Function],
-        "register": [Function],
-        "unregister": [Function],
-      }
+      ]
     }
-    data-cy="outcome-1"
-    key="activity93-index1"
-    name="outcome"
-    render={[Function]}
-  />
-  <Review
-    ariaLabel="1. metric 1"
-    editHref={null}
-    key="om key 1"
-    objType="Metric"
+    noDataMessage="Add at least one outcome for this activity."
+    onAddClick={[Function]}
+    onCancelClick={[Function]}
     onDeleteClick={[Function]}
-    onDeleteLabel="Remove"
-    onEditClick={null}
-    skipConfirmation={true}
-    title={null}
-  >
-    <div
-      className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-      key="om key 1"
-    >
-      <Component
-        control={
-          Object {
-            "_defaultValues": Object {
-              "metrics": Array [
-                Object {
-                  "key": "om key 1",
-                  "metric": "metric 1",
-                },
-                Object {
-                  "key": "om key 2",
-                  "metric": "metric 2",
-                },
-              ],
-              "outcome": "outcome description",
-            },
-            "_executeSchema": [Function],
-            "_fields": Object {},
-            "_focusError": [Function],
-            "_formState": Object {
-              "dirtyFields": Object {},
-              "errors": Object {},
-              "isDirty": false,
-              "isLoading": true,
-              "isSubmitSuccessful": false,
-              "isSubmitted": false,
-              "isSubmitting": false,
-              "isValid": false,
-              "isValidating": false,
-              "submitCount": 0,
-              "touchedFields": Object {},
-            },
-            "_formValues": Object {
-              "metrics": Array [
-                Object {
-                  "key": "om key 1",
-                  "metric": "metric 1",
-                },
-                Object {
-                  "key": "om key 2",
-                  "metric": "metric 2",
-                },
-              ],
-              "outcome": "outcome description",
-            },
-            "_getDirty": [Function],
-            "_getFieldArray": [Function],
-            "_getWatch": [Function],
-            "_names": Object {
-              "array": Set {
-                "metrics",
-              },
-              "mount": Set {},
-              "unMount": Set {},
-              "watch": Set {},
-            },
-            "_options": Object {
-              "defaultValues": Object {
-                "metrics": Array [
-                  Object {
-                    "key": "om key 1",
-                    "metric": "metric 1",
-                  },
-                  Object {
-                    "key": "om key 2",
-                    "metric": "metric 2",
-                  },
-                ],
-                "outcome": "outcome description",
-              },
-              "mode": "onBlur",
-              "reValidateMode": "onBlur",
-              "resolver": [Function],
-              "shouldFocusError": true,
-            },
-            "_proxyFormState": Object {
-              "dirtyFields": false,
-              "errors": "all",
-              "isDirty": false,
-              "isValid": "all",
-              "isValidating": false,
-              "touchedFields": false,
-            },
-            "_removeUnmounted": [Function],
-            "_reset": [Function],
-            "_stateFlags": Object {
-              "action": false,
-              "mount": false,
-              "watch": false,
-            },
-            "_subjects": Object {
-              "array": Object {
-                "next": [Function],
-                "observers": Array [],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
-              },
-              "state": Object {
-                "next": [Function],
-                "observers": Array [],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
-              },
-              "watch": Object {
-                "next": [Function],
-                "observers": Array [],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
-              },
-            },
-            "_updateFieldArray": [Function],
-            "_updateFormState": [Function],
-            "_updateValid": [Function],
-            "getFieldState": [Function],
-            "register": [Function],
-            "unregister": [Function],
-          }
-        }
-        defaultValue="metric 1"
-        name="metrics[0].metric"
-        render={[Function]}
-      />
-    </div>
-  </Review>
-  <Review
-    ariaLabel="2. metric 2"
-    editHref={null}
-    key="om key 2"
-    objType="Metric"
-    onDeleteClick={[Function]}
-    onDeleteLabel="Remove"
-    onEditClick={null}
-    skipConfirmation={true}
-    title={null}
-  >
-    <div
-      className="ds-c-choice__checkedChild ds-u-margin-top--3 ds-u-padding-top--0"
-      key="om key 2"
-    >
-      <Component
-        control={
-          Object {
-            "_defaultValues": Object {
-              "metrics": Array [
-                Object {
-                  "key": "om key 1",
-                  "metric": "metric 1",
-                },
-                Object {
-                  "key": "om key 2",
-                  "metric": "metric 2",
-                },
-              ],
-              "outcome": "outcome description",
-            },
-            "_executeSchema": [Function],
-            "_fields": Object {},
-            "_focusError": [Function],
-            "_formState": Object {
-              "dirtyFields": Object {},
-              "errors": Object {},
-              "isDirty": false,
-              "isLoading": true,
-              "isSubmitSuccessful": false,
-              "isSubmitted": false,
-              "isSubmitting": false,
-              "isValid": false,
-              "isValidating": false,
-              "submitCount": 0,
-              "touchedFields": Object {},
-            },
-            "_formValues": Object {
-              "metrics": Array [
-                Object {
-                  "key": "om key 1",
-                  "metric": "metric 1",
-                },
-                Object {
-                  "key": "om key 2",
-                  "metric": "metric 2",
-                },
-              ],
-              "outcome": "outcome description",
-            },
-            "_getDirty": [Function],
-            "_getFieldArray": [Function],
-            "_getWatch": [Function],
-            "_names": Object {
-              "array": Set {
-                "metrics",
-              },
-              "mount": Set {},
-              "unMount": Set {},
-              "watch": Set {},
-            },
-            "_options": Object {
-              "defaultValues": Object {
-                "metrics": Array [
-                  Object {
-                    "key": "om key 1",
-                    "metric": "metric 1",
-                  },
-                  Object {
-                    "key": "om key 2",
-                    "metric": "metric 2",
-                  },
-                ],
-                "outcome": "outcome description",
-              },
-              "mode": "onBlur",
-              "reValidateMode": "onBlur",
-              "resolver": [Function],
-              "shouldFocusError": true,
-            },
-            "_proxyFormState": Object {
-              "dirtyFields": false,
-              "errors": "all",
-              "isDirty": false,
-              "isValid": "all",
-              "isValidating": false,
-              "touchedFields": false,
-            },
-            "_removeUnmounted": [Function],
-            "_reset": [Function],
-            "_stateFlags": Object {
-              "action": false,
-              "mount": false,
-              "watch": false,
-            },
-            "_subjects": Object {
-              "array": Object {
-                "next": [Function],
-                "observers": Array [],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
-              },
-              "state": Object {
-                "next": [Function],
-                "observers": Array [],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
-              },
-              "watch": Object {
-                "next": [Function],
-                "observers": Array [],
-                "subscribe": [Function],
-                "unsubscribe": [Function],
-              },
-            },
-            "_updateFieldArray": [Function],
-            "_updateFormState": [Function],
-            "_updateValid": [Function],
-            "getFieldState": [Function],
-            "register": [Function],
-            "unregister": [Function],
-          }
-        }
-        defaultValue="metric 2"
-        name="metrics[1].metric"
-        render={[Function]}
-      />
-    </div>
-  </Review>
-  <div
-    className="align-content-right ds-u-margin-y--0 ds-u-margin-top--2"
-    style={
-      Object {
-        "width": 485,
-      }
-    }
-  >
-    <Button
-      className="ds-c-button ds-c-button--transparent"
-      key="activity93-index1-add-metric"
-      onClick={[Function]}
-    >
-      <FontAwesomeIcon
-        beat={false}
-        beatFade={false}
-        border={false}
-        bounce={false}
-        className="ds-u-margin-right--1"
-        fade={false}
-        fixedWidth={false}
-        flip={false}
-        icon={
-          Object {
-            "icon": Array [
-              512,
-              512,
-              Array [
-                "plus-circle",
-              ],
-              "f055",
-              "M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z",
-            ],
-            "iconName": "circle-plus",
-            "prefix": "fas",
-          }
-        }
-        inverse={false}
-        listItem={false}
-        mask={null}
-        maskId={null}
-        pull={null}
-        pulse={false}
-        rotation={null}
-        shake={false}
-        size={null}
-        spin={false}
-        spinPulse={false}
-        spinReverse={false}
-        swapOpacity={false}
-        symbol={false}
-        title=""
-        titleId={null}
-        transform={null}
-      />
-      Add Metric to Outcome
-    </Button>
-  </div>
-  <input
-    aria-label="submitButton"
-    className="ds-u-visibility--hidden"
-    hidden={true}
-    type="submit"
   />
-</form>
+</Subsection>
 `;
