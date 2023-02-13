@@ -43,7 +43,7 @@ const ApdNew = ({ createApd: create }) => {
     decisionSupport: false,
     electronicVisitVerify: false,
     encounterProcessingSystem: false,
-    financialMangement: false,
+    financialManagement: false,
     healthInfoExchange: false,
     longTermServiceSupport: false,
     memberManagement: false,
@@ -64,7 +64,7 @@ const ApdNew = ({ createApd: create }) => {
       label: 'HITECH IAPD',
       labelClassName: 'label-extended',
       value: APD_TYPE.HITECH,
-      hint: 'Health Information Techology for Economic and Clinical Health Implementation APD',
+      hint: 'Health Information Technology for Economic and Clinical Health Implementation APD',
       checked: value
     },
     {
@@ -80,7 +80,6 @@ const ApdNew = ({ createApd: create }) => {
 
   // State management
   const [apdChoices, setApdChoices] = useState(apdTypeChoices);
-  const [apdType, setApdType] = useState('');
   const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
   const [businessList, setBusinessList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -100,21 +99,20 @@ const ApdNew = ({ createApd: create }) => {
       apdType: '',
       years: years,
       businessList: businessList,
-      updateStatus: {
-        typeStatus
-      }
+      updateStatus: typeStatus
     },
     mode: 'all',
     reValidateMode: 'all',
     resolver: joiResolver(schema)
   });
 
+  const { apdType } = getValues();
+
   useEffect(() => {
     if (!enableMmis) {
       apdChoices.pop();
       apdChoices[0].checked = true;
       setApdChoices(apdChoices);
-      setApdType(APD_TYPE.HITECH);
       setValue('apdType', APD_TYPE.HITECH, { shouldValidate: true });
     }
   }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -183,7 +181,7 @@ const ApdNew = ({ createApd: create }) => {
   }
 
   const createNew = () => {
-    const { years, name, mmisUpdate } = getValues();
+    const { apdType, years, name, mmisUpdate } = getValues();
     const apdValues = {
       years,
       name,
@@ -237,7 +235,8 @@ const ApdNew = ({ createApd: create }) => {
                 type="radio"
                 choices={apdChoices}
                 onChange={e => {
-                  setApdType(e.target.value);
+                  // setApdType(e.target.value);
+                  onChange(e);
                   reset({
                     apdType: e.target.value,
                     years: years,
@@ -254,7 +253,7 @@ const ApdNew = ({ createApd: create }) => {
                     decisionSupport: false,
                     electronicVisitVerify: false,
                     encounterProcessingSystem: false,
-                    financialMangement: false,
+                    financialManagement: false,
                     healthInfoExchange: false,
                     longTermServiceSupport: false,
                     memberManagement: false,
@@ -264,8 +263,6 @@ const ApdNew = ({ createApd: create }) => {
                     thirdPartyLiability: false,
                     other: false
                   });
-
-                  onChange(e);
                 }}
                 onBlur={onBlur}
                 onComponentBlur={onBlur}

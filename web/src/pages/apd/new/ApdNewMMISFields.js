@@ -152,8 +152,8 @@ export default function ApdNewMMISFields({
               },
               {
                 label: 'Financial Management',
-                value: 'financialMangement',
-                checked: businessAreas.financialMangement
+                value: 'financialManagement',
+                checked: businessAreas.financialManagement
               },
               {
                 label: 'Health Information Exchange (HIE)',
@@ -161,17 +161,18 @@ export default function ApdNewMMISFields({
                 checked: businessAreas.healthInfoExchange
               },
               {
-                label: 'Long Term Services & Suports (LTSS)',
+                label: 'Long Term Services & Supports (LTSS)',
                 value: 'longTermServiceSupport',
                 checked: businessAreas.longTermServiceSupport
               },
               {
                 label: 'Member Management',
-                value: 'memberMangagement',
-                checked: businessAreas.memberMangagement
+                value: 'memberManagement',
+                checked: businessAreas.memberManagement
               },
               {
-                label: 'Pharmacy Beefit Management (PBM) & Point of Sale (POS)',
+                label:
+                  'Pharmacy Benefit Management (PBM) & Point of Sale (POS)',
                 value: 'pharmacyBenefitManagement',
                 checked: businessAreas.pharmacyBenefitManagement
               },
