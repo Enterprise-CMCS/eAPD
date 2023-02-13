@@ -6,7 +6,7 @@ import { RESET, SELECT_APD_SUCCESS } from '../actions/app/symbols';
 // so that the stuff we import will use our faked-out clock.
 jest.useFakeTimers().setSystemTime(new Date('1990-04-24').getTime());
 
-import { default as apd, getPatchesForAddingItem } from './apd';
+import { default as apd, apdValid, getPatchesForAddingItem } from './apd';
 import {
   CREATE_APD_SUCCESS,
   FETCH_ALL_APDS_FAILURE,
@@ -1604,6 +1604,14 @@ describe('APD reducer', () => {
 });
 
 describe('APD reducer helper methods', () => {
+  describe('it can validate APD type', () => {
+    it('validates APD types correctly', () => {
+      expect(apdValid(APD_TYPE.HITECH)).toEqual(true);
+      expect(apdValid(APD_TYPE.MMIS)).toEqual(true);
+      expect(apdValid('NART')).toEqual(false);
+    });
+  });
+
   describe('it can get patches for adding new APD items', () => {
     it(`gets patches for paths that don't need anything special`, () => {
       expect(getPatchesForAddingItem({}, '/fake/path')).toEqual([

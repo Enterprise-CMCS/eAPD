@@ -1,5 +1,6 @@
 import React from 'react';
 
+import TextArea from '../../../components/TextArea';
 import { ChoiceList } from '@cmsgov/design-system';
 import { Controller } from 'react-hook-form';
 
@@ -207,7 +208,6 @@ export default function ApdNewMMISFields({
                           onBlur={onBlur}
                           onChange={e => {
                             setOtherDetails(e.target.value);
-                            setValue('otherDetails', e.target.value);
                           }}
                           onComponentBlur={onBlur}
                           errorMessage={errors?.otherDetails?.message}

@@ -176,6 +176,8 @@ const ApdNew = ({ createApd: create }) => {
             setTypeStatus={setTypeStatus}
           />
         );
+      default:
+        return null;
     }
   }
 
