@@ -39,5 +39,6 @@ resource "aws_instance" "eapd_mongo" {
     user_data = <<-EOL
     #!/bin/bash -xe
     sudo sh -c "echo license_key: ${var.newrelic_liscense_key} >> /etc/newrelic-infra.yml"
-    EOL        
+    EOL
+    user_data_replace_on_change = true
 }
