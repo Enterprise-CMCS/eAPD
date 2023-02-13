@@ -47,7 +47,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
         },
       ]
     }
-    noDataMessage="[missing \\"en.activities.outcomes.noDataNotice\\" translation]"
+    noDataMessage="[missing \\"en.activities.outcomes.outcomesundefined.noDataNotice\\" translation]"
     onAddClick={[Function]}
     onCancelClick={[Function]}
     onDeleteClick={[Function]}
