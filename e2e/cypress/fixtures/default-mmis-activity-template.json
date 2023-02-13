@@ -1,0 +1,137 @@
+{
+  "activityName": "Program Administration",
+
+  "activityOverview": {
+    "name": "Program Administration",
+    "fundingType": "HIT",
+    "shortOverview": "No response was provided.",
+    "startDate": "Date not specified",
+    "endDate": "Date not specified",
+    "detailedDescription": "",
+    "supportingJustifications": "No response was provided.",
+    "supportsMedicaid": "No response was provided for how this activity will support the Medicaid standards and conditions.",
+    "doesNotSupportsMedicaid": "No response was provided for how this activity will support the Medicaid standards and conditions."
+  },
+
+  "costAllocation": {
+    "description": "No cost allocation methodology was provided.",
+    "FFYdescriptions": [
+      "No response was provided.",
+      "No response was provided."
+    ],
+    "costs": [0, 0]
+  },
+
+  "splits": ["75-25", "50-50", "90-10"],
+
+  "ninteyTenSplit": [
+    ["$0"],
+    ["Federal Share", "$0", "×", "90%", "=", "$0"],
+    ["State Share", "$0", "×", "10%", "=", "$0"]
+  ],
+
+  "fiftyFiftySplit": [
+    ["$0"],
+    ["Federal Share", "$0", "×", "50%", "=", "$0"],
+    ["State Share", "$0", "×", "50%", "=", "$0"]
+  ],
+
+  "seventyFiveTwentyFiveSplit": [
+    ["$0"],
+    ["Federal Share", "$0", "×", "75%", "=", "$0"],
+    ["State Share", "$0", "×", "25%", "=", "$0"]
+  ],
+
+  "budgetAndFFPTables": {
+    "activityBudgetTable": [
+      [
+        [],
+        ["Other Funding Amount", "-", "$0"],
+        ["State Staff Subtotal", "$0"],
+        [],
+        ["Other Funding Amount", "-", "$0"],
+        ["Other State Expenses Subtotal", "$0"],
+        [],
+        ["Other Funding Amount", "-", "$0"],
+        ["Private Contractor Subtotal", "$0"],
+        ["Activity 1 Total Computable Medicaid Cost", "$0"]
+      ],
+      [
+        [],
+        ["Other Funding Amount", "-", "$0"],
+        ["State Staff Subtotal", "$0"],
+        [],
+        ["Other Funding Amount", "-", "$0"],
+        ["Other State Expenses Subtotal", "$0"],
+        [],
+        ["Other Funding Amount", "-", "$0"],
+        ["Private Contractor Subtotal", "$0"],
+        ["Activity 1 Total Computable Medicaid Cost", "$0"]
+      ]
+    ],
+
+    "activityTotalCostTable": [
+      [
+        ["$0"],
+        ["Other Funding", "-", "$0"],
+        ["Activity Total Computable Medicaid Cost", "$0"]
+      ],
+      [
+        ["$0"],
+        ["Other Funding", "-", "$0"],
+        ["Activity Total Computable Medicaid Cost", "$0"]
+      ]
+    ],
+
+    "activityFedSplitTable": [
+      [
+        ["$0"],
+        ["Federal Share", "$0", "×", "90%", "=", "$0"],
+        ["State Share", "$0", "×", "10%", "=", "$0"]
+      ],
+      [
+        ["$0"],
+        ["Federal Share", "$0", "×", "90%", "=", "$0"],
+        ["State Share", "$0", "×", "10%", "=", "$0"]
+      ]
+    ],
+
+    "activityEstQuarterlyExpenditure": [
+      [
+        ["$0", "$0", "$0", "$0", "$0"],
+        ["$0", "$0", "$0", "$0", "$0"],
+        ["$0", "$0", "$0", "$0", "$0"]
+      ],
+      [
+        ["$0", "$0", "$0", "$0", "$0"],
+        ["$0", "$0", "$0", "$0", "$0"],
+        ["$0", "$0", "$0", "$0", "$0"]
+      ]
+    ],
+
+    "activityTotalCostTableExportView": [
+      [
+        ["$0"],
+        ["Other Funding", "", "-", "$0"],
+        ["Activity Total Computable Medicaid Cost", "", "$0"],
+        ["Federal Share", "$0", "×", "90%", "=", "$0"],
+        ["State Share", "$0", "×", "10%", "=", "$0"]
+      ],
+      [
+        ["$0"],
+        ["Other Funding", "", "-", "$0"],
+        ["Activity Total Computable Medicaid Cost", "", "$0"],
+        ["Federal Share", "$0", "×", "90%", "=", "$0"],
+        ["State Share", "$0", "×", "10%", "=", "$0"]
+      ]
+    ]
+  },
+
+  "FFYTotalDescription": {
+    "totalCost": 0,
+    "totalOtherFunding": 0,
+    "totalTotalMedicaidCost": 0,
+    "totalFederalShare": 0,
+    "totalStateShare": 0
+  }
+}
