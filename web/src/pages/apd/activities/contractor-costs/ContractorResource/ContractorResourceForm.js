@@ -16,16 +16,16 @@ import { saveContractor as actualSaveContractor } from '../../../../../redux/act
 
 const getCheckedValue = value => {
   if (value !== null) {
-    if (value === true) return 'yes';
-    if (value === false) return 'no';
+    if (value === true) return 'true';
+    if (value === false) return 'false';
     return value;
   }
   return null;
 };
 
 const getBooleanValue = value => {
-  if (value === 'yes') return true;
-  if (value === 'no') return false;
+  if (value === 'true') return true;
+  if (value === 'false') return false;
   return null;
 };
 
@@ -219,8 +219,8 @@ const ContractorResourceForm = forwardRef(
               choices={[
                 {
                   label: 'Yes',
-                  value: 'yes',
-                  checked: value === 'yes',
+                  value: 'true',
+                  checked: value === 'true',
                   checkedChildren: (
                     <div className="ds-c-choice__checkedChild">
                       {apdFFYs.map(ffy => (
@@ -304,8 +304,8 @@ const ContractorResourceForm = forwardRef(
                 },
                 {
                   label: 'No',
-                  value: 'no',
-                  checked: value === 'no'
+                  value: 'false',
+                  checked: value === 'false'
                 }
               ]}
               type="radio"
@@ -322,7 +322,7 @@ const ContractorResourceForm = forwardRef(
             />
           )}
         />
-        {useHourly === 'yes' || useHourly === true || useHourly === null ? (
+        {useHourly === 'true' || useHourly === true || useHourly === null ? (
           <div className="ds-u-margin-bottom--0">
             {apdFFYs.map(ffy => (
               <div key={ffy}>

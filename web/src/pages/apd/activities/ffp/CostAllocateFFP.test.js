@@ -371,6 +371,7 @@ describe('the CostAllocateFFP component', () => {
     });
 
     expect(
+      // eslint-disable-next-line testing-library/prefer-presence-queries
       screen.queryByText('Select a federal-state split.')
     ).toBeInTheDocument();
   });

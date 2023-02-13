@@ -23,7 +23,8 @@ export const costAllocationSplitSchema = Joi.object().keys({
     .messages({
       'alternatives.base': 'Select a federal-state split.',
       'alternatives.any': 'Select a federal-state split.'
-    })
+    }),
+  fundingCategory: Joi.any()
 });
 
 export const costAllocationMatchRateSchema = costAllocationSplitSchema.keys({

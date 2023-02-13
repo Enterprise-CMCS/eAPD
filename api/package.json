@@ -107,14 +107,9 @@
     "globalSetup": "<rootDir>/jest.setup.js",
     "globalTeardown": "<rootDir>/jest.teardown.js",
     "testRegex": ".*.endpoint.(j|t)s[x]?$",
-    "testEnvironment": "node",
     "testTimeout": 30000,
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!@cms-eapd/common|file-type)"
-    ],
+    "testEnvironment": "jest-environment-node",
+    "transform": {},
     "moduleFileExtensions": [
       "js",
       "jsx"

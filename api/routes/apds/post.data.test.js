@@ -137,8 +137,14 @@ tap.test('APD data initializer', async apdTests => {
           expenses: [],
           contractorResources: [],
           costAllocation: {
-            1997: { ffp: { federal: 0, state: 100 }, other: 0 },
-            1998: { ffp: { federal: 0, state: 100 }, other: 0 }
+            1997: {
+              ffp: { federal: 0, state: 100, fundingCategory: null },
+              other: 0
+            },
+            1998: {
+              ffp: { federal: 0, state: 100, fundingCategory: null },
+              other: 0
+            }
           },
           costAllocationNarrative: {
             methodology: '',
@@ -306,8 +312,14 @@ tap.test('APD data initializer', async apdTests => {
           expenses: [],
           contractorResources: [],
           costAllocation: {
-            1998: { ffp: { federal: 0, state: 100 }, other: 0 },
-            1999: { ffp: { federal: 0, state: 100 }, other: 0 }
+            1998: {
+              ffp: { federal: 0, state: 100, fundingCategory: null },
+              other: 0
+            },
+            1999: {
+              ffp: { federal: 0, state: 100, fundingCategory: null },
+              other: 0
+            }
           },
           costAllocationNarrative: {
             methodology: '',

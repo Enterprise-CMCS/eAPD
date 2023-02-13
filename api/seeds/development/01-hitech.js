@@ -69,14 +69,14 @@ export default {
         costs: { 2022: 0, 2023: 0 },
         split: {
           2022: {
-            federal: 75,
-            state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           },
           2023: {
-            federal: 75,
-            state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            federal: 90,
+            state: 10,
+            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
           }
         },
         medicaidShare: {
@@ -298,7 +298,7 @@ export default {
           ffp: {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: null
           },
           other: 105000
         },
@@ -306,7 +306,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: null
           },
           other: 0
         }
@@ -494,7 +494,7 @@ export default {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: null
           },
           other: 0
         },
@@ -502,7 +502,7 @@ export default {
           ffp: {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: null
           },
           other: 0
         }
@@ -645,7 +645,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: null
           },
           other: 0
         },
@@ -653,7 +653,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: null
           },
           other: 0
         }
@@ -773,7 +773,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: null
           },
           other: 15000
         },
@@ -781,7 +781,7 @@ export default {
           ffp: {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: null
           },
           other: 0
         }
