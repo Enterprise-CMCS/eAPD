@@ -48,12 +48,12 @@ describe('activity Outcomes and Metrics component', () => {
     const state = {
       apd: {
         data: {
+          apdType: 'HITECH',
           activities: [
             'activity 1',
             'activity 2',
             { outcomes: 'these are OMs from state' }
-          ],
-          apdType: 'HITECH'
+          ]
         }
       }
     };
@@ -61,6 +61,7 @@ describe('activity Outcomes and Metrics component', () => {
     const ownProps = { activityIndex: 2 };
 
     expect(mapStateToProps(state, ownProps)).toEqual({
+      apdType: 'HITECH',
       outcomes: 'these are OMs from state'
     });
   });
