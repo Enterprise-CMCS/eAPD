@@ -21,6 +21,7 @@ import {
 import { joiResolver } from '@hookform/resolvers/joi';
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
+import { apdValid } from '../../../redux/reducers/apd';
 import { createApd } from '../../../redux/actions/app';
 import Loading from '../../../components/Loading';
 
@@ -151,6 +152,33 @@ const ApdNew = ({ createApd: create }) => {
     }
   }
 
+  function fieldComponents(apdType) {
+    switch (apdType) {
+      case APD_TYPE.HITECH:
+        return (
+          <ApdNewHITECHFields
+            control={control}
+            errors={errors}
+            typeStatus={typeStatus}
+            setTypeStatus={setTypeStatus}
+          />
+        );
+      case APD_TYPE.MMIS:
+        return (
+          <ApdNewMMISFields
+            control={control}
+            errors={errors}
+            businessAreas={businessAreas}
+            setBusinessAreas={setBusinessAreas}
+            setBusinessList={setBusinessList}
+            setOtherDetails={setOtherDetails}
+            typeStatus={typeStatus}
+            setTypeStatus={setTypeStatus}
+          />
+        );
+    }
+  }
+
   const createNew = () => {
     const { years, name, mmisUpdate } = getValues();
     const apdValues = {
@@ -220,7 +248,7 @@ const ApdNew = ({ createApd: create }) => {
               />
             )}
           />
-          {(apdType === APD_TYPE.MMIS || apdType === APD_TYPE.HITECH) && (
+          {apdValid(apdType) && (
             <div>
               <Controller
                 name="name"
@@ -257,28 +285,7 @@ const ApdNew = ({ createApd: create }) => {
             </div>
           )}
 
-          {apdType === APD_TYPE.HITECH && (
-            <ApdNewHITECHFields
-              control={control}
-              errors={errors}
-              typeStatus={typeStatus}
-              setTypeStatus={setTypeStatus}
-            />
-          )}
-          {apdType === APD_TYPE.MMIS && (
-            <ApdNewMMISFields
-              control={control}
-              errors={errors}
-              businessAreas={businessAreas}
-              setBusinessAreas={setBusinessAreas}
-              businessList={businessList}
-              setBusinessList={setBusinessList}
-              otherDetails={otherDetails}
-              setOtherDetails={setOtherDetails}
-              typeStatus={typeStatus}
-              setTypeStatus={setTypeStatus}
-            />
-          )}
+          {fieldComponents(apdType)}
 
           <div className="ds-u-padding-y--3">
             <Button onClick={history.goBack}>Cancel</Button>
