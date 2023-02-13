@@ -47,7 +47,7 @@ const Outcomes = ({ activityIndex, outcomes, remove, apdType }) => {
         list={localList}
         collapsed={OutcomeAndMetricReview}
         expanded={OutcomeAndMetricForm}
-        noDataMessage={t('activities.outcomes.noDataNotice')}
+        noDataMessage={t(`activities.outcomes.outcomes${apdType}.noDataNotice`)}
         onAddClick={handleAdd}
         onCancelClick={onCancel}
         onDeleteClick={handleDelete}
