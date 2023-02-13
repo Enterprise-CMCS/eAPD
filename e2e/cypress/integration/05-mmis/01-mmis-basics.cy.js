@@ -194,9 +194,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       // Check validation errors
       cy.turnOnAdminCheck();
 
-      //
-      // Activities
-      //
       // Validation errors within admin check list
       cy.get('[class="eapd-admin-check-list"]').within(list => {
         cy.get(list).contains('Activity 1 Activity Overview').should('exist');
@@ -329,12 +326,16 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         .eq(0)
         .clear()
         .type('50');
-      cy.findAllByRole('radio', { name: '90/10 DDI' }).check({ force: true });
+      cy.findAllByRole('radio', {
+        name: '90/10 Design, Development, and Installation (DDI)'
+      }).check({ force: true });
 
       cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
       cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
       cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
-      cy.findAllByRole('radio', { name: '90/10 DDI' })
+      cy.findAllByRole('radio', {
+        name: '90/10 Design, Development, and Installation (DDI)'
+      })
         .eq(1)
         .check({ force: true });
 
@@ -437,7 +438,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
       cy.waitForSave();
       cy.goToApdOverview();
-      cy.wait(2000);
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
       cy.goToPreviousActivities();
       cy.checkTinyMCE(
         'previous-activity-summary-field',

@@ -52,12 +52,12 @@ describe('the MatchRateSelector component', () => {
     expect(screen.getByRole('radio', { name: '50/50' })).toBeInTheDocument();
 
     expect(
-      screen.getAllByRole('radio', {
+      screen.queryAllByRole('radio', {
         name: 'Design, Development, and Installation (DDI)'
       })
     ).toHaveLength(0);
     expect(
-      screen.getAllByRole('radio', {
+      screen.queryAllByRole('radio', {
         name: 'Maintenance & Operations (M&O)'
       })
     ).toHaveLength(0);
@@ -352,12 +352,12 @@ describe('the MatchRateSelector component', () => {
     expect(screen.getByRole('radio', { name: '50/50' })).not.toBeChecked();
 
     expect(
-      screen.getAllByRole('radio', {
+      screen.queryAllByRole('radio', {
         name: 'Design, Development, and Installation (DDI)'
       })
     ).toHaveLength(0);
     expect(
-      screen.getAllByRole('radio', {
+      screen.queryAllByRole('radio', {
         name: 'Maintenance & Operations (M&O)'
       })
     ).toHaveLength(0);

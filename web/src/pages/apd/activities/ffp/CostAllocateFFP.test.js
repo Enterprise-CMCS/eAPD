@@ -310,6 +310,9 @@ describe('the CostAllocateFFP component', () => {
             data: {
               ...initialStateWithAdminCheck.apd.data,
               apdType: APD_TYPE.HITECH
+            },
+            adminCheck: {
+              enabled: true
             }
           }
         }
@@ -329,8 +332,7 @@ describe('the CostAllocateFFP component', () => {
       dropdown.blur();
     });
 
-    const error = screen.getByText('Select a federal-state split.');
-    expect(error).not.toBeInTheDocument();
+    expect(screen.queryByText('Select a federal-state split.')).toBeNull();
   });
 
   it('renders error when no federal-state split is selected for HITECH', async () => {
@@ -368,8 +370,9 @@ describe('the CostAllocateFFP component', () => {
       dropdown.blur();
     });
 
-    const error = await screen.findByText('Select a federal-state split.');
-    expect(error).toBeInTheDocument();
+    expect(
+      screen.queryByText('Select a federal-state split.')
+    ).toBeInTheDocument();
   });
 
   it('renders correct options in the match rate radio group for MMIS', async () => {
@@ -397,12 +400,12 @@ describe('the CostAllocateFFP component', () => {
     expect(screen.getByRole('radio', { name: '50/50' })).toBeInTheDocument();
 
     expect(
-      screen.getAllByRole('radio', {
+      screen.queryAllByRole('radio', {
         name: 'Design, Development, and Installation (DDI)'
       })
     ).toHaveLength(0);
     expect(
-      screen.getAllByRole('radio', {
+      screen.queryAllByRole('radio', {
         name: 'Maintenance & Operations (M&O)'
       })
     ).toHaveLength(0);
@@ -459,7 +462,8 @@ describe('the CostAllocateFFP component', () => {
       }
     );
 
-    const error = await screen.findAllByText('Select a federal-state split.');
-    expect(error).toHaveLength(2);
+    expect(
+      await screen.findAllByText('Select a federal-state split.')
+    ).toHaveLength(2);
   });
 });
