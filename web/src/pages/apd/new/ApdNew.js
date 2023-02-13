@@ -94,6 +94,7 @@ const ApdNew = ({ createApd: create }) => {
     setValue,
     getValues,
     formState: { errors, isValid },
+    reset,
     resetField
   } = useForm({
     defaultValues: {
@@ -189,9 +190,7 @@ const ApdNew = ({ createApd: create }) => {
       apdType,
       apdOverview: {
         programOverview: '',
-        updateStatus: {
-          ...typeStatus
-        }
+        updateStatus: updateTypes
       }
     };
     if (apdType === APD_TYPE.HITECH) {
@@ -239,7 +238,32 @@ const ApdNew = ({ createApd: create }) => {
                 choices={apdChoices}
                 onChange={e => {
                   setApdType(e.target.value);
-                  resetField('businessList', { keepDirty: true });
+                  reset({
+                    apdType: e.target.value,
+                    years: years,
+                    businessList: [],
+                    updateStatus: {
+                      typeStatus
+                    }
+                  });
+
+                  setBusinessAreas({
+                    waiverSupport: false,
+                    assetVerification: false,
+                    claimsProcessing: false,
+                    decisionSupport: false,
+                    electronicVisitVerify: false,
+                    encounterProcessingSystem: false,
+                    financialMangement: false,
+                    healthInfoExchange: false,
+                    longTermServiceSupport: false,
+                    memberManagement: false,
+                    pharmacyBenefitManagement: false,
+                    programIntegrity: false,
+                    providerManagement: false,
+                    thirdPartyLiability: false,
+                    other: false
+                  });
 
                   onChange(e);
                 }}
