@@ -52,7 +52,8 @@ describe('activity Outcomes and Metrics component', () => {
             'activity 1',
             'activity 2',
             { outcomes: 'these are OMs from state' }
-          ]
+          ],
+          apdType: 'HITECH'
         }
       }
     };
