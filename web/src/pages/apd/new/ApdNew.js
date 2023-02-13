@@ -38,7 +38,7 @@ const ApdNew = ({ createApd: create }) => {
     decisionSupport: false,
     electronicVisitVerify: false,
     encounterProcessingSystem: false,
-    financialMangement: false,
+    financialManagement: false,
     healthInfoExchange: false,
     longTermServiceSupport: false,
     memberManagement: false,
@@ -430,8 +430,8 @@ const ApdNew = ({ createApd: create }) => {
                       },
                       {
                         label: 'Financial Management',
-                        value: 'financialMangement',
-                        checked: businessAreas.financialMangement
+                        value: 'financialManagement',
+                        checked: businessAreas.financialManagement
                       },
                       {
                         label: 'Health Information Exchange (HIE)',
@@ -445,8 +445,8 @@ const ApdNew = ({ createApd: create }) => {
                       },
                       {
                         label: 'Member Management',
-                        value: 'memberMangagement',
-                        checked: businessAreas.memberMangagement
+                        value: 'memberManagement',
+                        checked: businessAreas.memberManagement
                       },
                       {
                         label:
