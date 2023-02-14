@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ApdNew /> form with Mmis enabled selecting and filling out HITECH form should render all field options correctly 1`] = `
+exports[`<ApdNew /> form with MMIS enabled selecting and filling out HITECH form should render all field options correctly 1`] = `
 Array [
   <input
     apdname="years[0]"
     checked=""
     class="ds-c-choice"
-    id="checkbox_years_117"
+    id="checkbox_years_125"
     name="years"
     type="checkbox"
     value="2023"
@@ -15,7 +15,7 @@ Array [
     apdname="years[1]"
     checked=""
     class="ds-c-choice"
-    id="checkbox_years_118"
+    id="checkbox_years_126"
     name="years"
     type="checkbox"
     value="2024"
@@ -23,33 +23,33 @@ Array [
   <input
     apdname="years[2]"
     class="ds-c-choice"
-    id="checkbox_years_119"
+    id="checkbox_years_127"
     name="years"
     type="checkbox"
     value="2025"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_121"
+    id="checkbox_undefined_129"
     type="checkbox"
     value="annualUpdate"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_122"
+    id="checkbox_undefined_130"
     type="checkbox"
     value="asNeededUpdate"
   />,
 ]
 `;
 
-exports[`<ApdNew /> form with Mmis enabled selecting and filling out MMIS form should render all field options correctly 1`] = `
+exports[`<ApdNew /> form with MMIS enabled selecting and filling out MMIS form should render all field options correctly 1`] = `
 Array [
   <input
     apdname="years[0]"
     checked=""
     class="ds-c-choice"
-    id="checkbox_years_195"
+    id="checkbox_years_211"
     name="years"
     type="checkbox"
     value="2023"
@@ -58,7 +58,7 @@ Array [
     apdname="years[1]"
     checked=""
     class="ds-c-choice"
-    id="checkbox_years_196"
+    id="checkbox_years_212"
     name="years"
     type="checkbox"
     value="2024"
@@ -66,98 +66,98 @@ Array [
   <input
     apdname="years[2]"
     class="ds-c-choice"
-    id="checkbox_years_197"
+    id="checkbox_years_213"
     name="years"
     type="checkbox"
     value="2025"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_202"
+    id="checkbox_undefined_218"
     type="checkbox"
     value="waiverSupport"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_203"
+    id="checkbox_undefined_219"
     type="checkbox"
     value="assetVerification"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_204"
+    id="checkbox_undefined_220"
     type="checkbox"
     value="claimsProcessing"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_205"
+    id="checkbox_undefined_221"
     type="checkbox"
     value="decisionSupport"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_206"
+    id="checkbox_undefined_222"
     type="checkbox"
     value="electronicVisitVerify"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_207"
+    id="checkbox_undefined_223"
     type="checkbox"
     value="encounterProcessingSystem"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_208"
+    id="checkbox_undefined_224"
     type="checkbox"
     value="financialManagement"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_209"
+    id="checkbox_undefined_225"
     type="checkbox"
     value="healthInfoExchange"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_210"
+    id="checkbox_undefined_226"
     type="checkbox"
     value="longTermServiceSupport"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_211"
+    id="checkbox_undefined_227"
     type="checkbox"
     value="memberManagement"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_212"
+    id="checkbox_undefined_228"
     type="checkbox"
     value="pharmacyBenefitManagement"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_213"
+    id="checkbox_undefined_229"
     type="checkbox"
     value="programIntegrity"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_214"
+    id="checkbox_undefined_230"
     type="checkbox"
     value="providerManagement"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_215"
+    id="checkbox_undefined_231"
     type="checkbox"
     value="thirdPartyLiability"
   />,
   <input
     class="ds-c-choice"
-    id="checkbox_undefined_216"
+    id="checkbox_undefined_232"
     type="checkbox"
     value="other"
   />,

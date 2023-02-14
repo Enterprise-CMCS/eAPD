@@ -49,14 +49,14 @@ const setup = async (props = {}, options = {}) => {
 describe('<ApdNew />', () => {
   jest.setTimeout(30000);
 
-  describe('form with Mmis disabled', () => {
+  describe('form with MMIS disabled', () => {
     beforeEach(() => {
       jest.clearAllMocks();
       resetLDMocks();
       mockFlags({ enableMmis: false });
     });
 
-    it('should not show Mmis option', async () => {
+    it('should not show MMIS option', async () => {
       await setup(props, options);
       expect(
         screen.getByText(/Create a New Advanced Planning Document/)
@@ -74,13 +74,17 @@ describe('<ApdNew />', () => {
 
     it('requires all fields to enable Create APD button', async () => {
       const { user } = await setup(props, options);
+      const disabledBtn = screen.getByRole('button', { name: /Create an APD/ });
       expect(screen.getByRole('radio', { name: /HITECH IAPD/i })).toBeChecked();
 
-      expect(
-        screen.getByRole('button', {
-          name: /Create an APD/
-        })
-      ).toBeDisabled();
+      expect(disabledBtn).toBeDisabled();
+
+      await user.type(
+        screen.getByRole('textbox', { name: /name/i }),
+        'APD Name'
+      );
+
+      expect(disabledBtn).toBeDisabled();
 
       expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
       expect(screen.getByRole('checkbox', { name: /2024/i })).toBeChecked();
@@ -100,19 +104,19 @@ describe('<ApdNew />', () => {
         ).toBeChecked();
       });
       await waitFor(() => {
-        expect(
-          screen.getByRole('button', {
-            name: /Create an APD/
-          })
-        ).toBeEnabled();
+        expect(disabledBtn).toBeEnabled();
       });
     });
   });
 
-  describe('form with Mmis enabled', () => {
-    it('should display form with MMIS', async () => {
+  describe('form with MMIS enabled', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+      resetLDMocks();
       mockFlags({ enableMmis: true });
+    });
 
+    it('should display form with MMIS', async () => {
       await setup(props, options);
       expect(
         screen.getByText(/Create a New Advanced Planning Document/)
@@ -177,7 +181,10 @@ describe('<ApdNew />', () => {
 
         expect(disabledBtn).toBeDisabled();
 
-        user.type(screen.getByRole('textbox', { name: /name/i }), 'APD Name');
+        await user.type(
+          screen.getByRole('textbox', { name: /name/i }),
+          'APD Name'
+        );
 
         expect(disabledBtn).toBeDisabled();
 
@@ -259,7 +266,11 @@ describe('<ApdNew />', () => {
 
         expect(disabledBtn).toBeDisabled();
 
-        user.type(screen.getByRole('textbox', { name: /name/i }), 'APD Name');
+        await user.type(
+          screen.getByRole('textbox', { name: /name/i }),
+          'APD Name'
+        );
+
         expect(disabledBtn).toBeDisabled();
 
         expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
