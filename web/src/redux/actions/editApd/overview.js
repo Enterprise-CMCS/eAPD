@@ -89,3 +89,14 @@ export const setBusinessAreaField = (key, value) => ({
   path: `/apdOverview/medicaidBusinessAreas/${key}`,
   value: value
 });
+
+/**
+ * Set update status field for the APD
+ * @param {String} key Key name
+ * @param {Boolean} value Value
+ */
+export const setUpdateStatusField = (key, value) => ({
+  type: EDIT_APD,
+  path: `/apdOverview/updateStatus/${key}`,
+  value: value
+});

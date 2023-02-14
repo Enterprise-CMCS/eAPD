@@ -31,6 +31,7 @@ import { useFlags } from 'launchdarkly-react-client-sdk';
 
 import ApdOverviewHITECHFields from './ApdOverviewHITECHFields';
 import ApdOverviewMMISFields from './ApdOverviewMMISFields';
+import ApdUpdate from '../../../components/ApdUpdate';
 import DeleteModal from '../../../components/DeleteModal';
 
 const renderApdTypeSpecificFields = apdType => {
@@ -229,6 +230,7 @@ const ApdOverview = ({
           type="checkbox"
         />
       </div>
+      <ApdUpdate />
       {renderApdTypeSpecificFields(apdType)}
       {elementDeleteFFY && (
         <DeleteModal objType="FFY" onCancel={onCancel} onDelete={onRemove} />
