@@ -10,8 +10,11 @@ import { removeContractor } from '../../../../redux/actions/editActivity';
 
 describe('the ContractorResources component', () => {
   const activityIndex = 0;
+  const apdType = 'HITECH';
+
   const props = {
     activityIndex,
+    apdType,
     contractors: [
       {
         id: 'contractor 1',
@@ -87,6 +90,7 @@ describe('the ContractorResources component', () => {
         {
           apd: {
             data: {
+              apdType: 'HITECH',
               activities: [
                 {
                   contractorResources: [{ key: '123' }]
@@ -100,7 +104,8 @@ describe('the ContractorResources component', () => {
       )
     ).toEqual({
       list: [{ key: '123' }],
-      years: ['2022', '2023']
+      years: ['2022', '2023'],
+      apdType: 'HITECH'
     });
   });
 
