@@ -11,10 +11,9 @@ import {
   mmisOverviewSchema
 } from '@cms-eapd/common';
 
+import { selectAdminCheckEnabled } from '../../../redux/selectors/apd.selectors';
 import { setBusinessAreaField } from '../../../redux/actions/editApd';
 import TextArea from '../../../components/TextArea';
-
-import { selectAdminCheckEnabled } from '../../../redux/selectors/apd.selectors';
 
 const ApdOverviewMMISFields = ({
   medicaidBusinessAreas,

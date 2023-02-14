@@ -12,20 +12,20 @@ const updateStatusCustomValidation = (obj, helpers) => {
 
 const mmisUpdateStatusSchema = Joi.object({
   isUpdateAPD: Joi.boolean().required().messages({
-    'boolean.base': 'Select yes or no',
-    'boolean.empty': 'Select yes or no',
-    'boolean.required': 'Select yes or no'
+    'boolean.base': 'Select yes or no.',
+    'boolean.empty': 'Select yes or no.',
+    'boolean.required': 'Select yes or no.'
   }),
   annualUpdate: Joi.boolean(),
   asNeededUpdate: Joi.boolean()
 })
   .custom(updateStatusCustomValidation)
   .messages({
-    'object.missing': 'Select an update type'
+    'object.missing': 'Select an update type.'
   });
 
 const hitechUpdateStatusSchema = Joi.object({
-  isUpdateAPD: Joi.boolean(),
+  isUpdateAPD: Joi.boolean().allow(null),
   annualUpdate: Joi.boolean(),
   asNeededUpdate: Joi.boolean()
 })
@@ -33,7 +33,7 @@ const hitechUpdateStatusSchema = Joi.object({
     isPresent: resolved => resolved === true
   })
   .messages({
-    'object.missing': 'Select an update type'
+    'object.missing': 'Select an update type.'
   });
 
 export const apdNameSchema = Joi.string()

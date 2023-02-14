@@ -49,6 +49,7 @@ const ApdUpdate = ({
         render={({ field: { onBlur } }) => (
           <ChoiceList
             label="Update Type"
+            name="updateStatus"
             hint={
               <div>
                 Indicate if this update is an annual APD and/or as need APD

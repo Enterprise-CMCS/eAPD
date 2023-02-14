@@ -461,16 +461,16 @@ const invalidHitechApdOverview = {
   narrativeMMIS: '',
   updateStatus: {
     isUpdateAPD: null,
-    annualUpdate: null,
-    asNeededUpdate: null
+    annualUpdate: false,
+    asNeededUpdate: false
   }
 };
 
 const invalidMmisApdOverview = {
   updateStatus: {
-    isUpdateAPD: null,
-    annualUpdate: null,
-    asNeededUpdate: null
+    isUpdateAPD: true,
+    annualUpdate: false,
+    asNeededUpdate: false
   },
   medicaidBusinessAreas: {
     waiverSupportSystems: false,
@@ -2135,6 +2135,11 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'APD Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
+    fieldDescription: 'Select an update type.'
+  },
+  {
+    section: 'APD Overview',
+    link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
     fieldDescription: 'Provide Other Medicaid Business Area(s).'
   },
   {
@@ -2269,7 +2274,7 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
         {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Select yes or no'
+          fieldDescription: 'Select an update type.'
         },
         {
           section: 'APD Overview',
@@ -2280,6 +2285,16 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
           fieldDescription: 'Provide a summary of HIT-funded activities.'
+        },
+        {
+          section: 'APD Overview',
+          link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
+          fieldDescription: 'Provide a summary of HIE-funded activities.'
+        },
+        {
+          section: 'APD Overview',
+          link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
+          fieldDescription: 'Provide a summary of MMIS-funded activities.'
         }
       ]);
     }
@@ -2538,7 +2553,7 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
         {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Select yes or no'
+          fieldDescription: 'Select an update type.'
         },
         {
           section: 'APD Overview',

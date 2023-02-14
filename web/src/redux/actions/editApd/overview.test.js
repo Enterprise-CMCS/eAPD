@@ -14,6 +14,16 @@ import {
 
 const mockStore = configureStore([thunk]);
 
+describe('APD edit actions for APD update status', () => {
+  it('dispatches an action for changing a field', () => {
+    expect(setUpdateStatusField('isUpdateAPD', false)).toEqual({
+      type: EDIT_APD,
+      path: '/apdOverview/updateStatus/isUpdateAPD',
+      value: false
+    });
+  });
+});
+
 describe('APD edit actions for adding or removing APD years', () => {
   it('dispatchs an action for adding an APD year', () => {
     const store = mockStore('add year state');
