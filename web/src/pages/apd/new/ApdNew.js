@@ -56,7 +56,8 @@ const ApdNew = ({ createApd: create }) => {
 
   const updateTypes = {
     annualUpdate: false,
-    asNeededUpdate: false
+    asNeededUpdate: false,
+    isUpdateAPD: false
   };
 
   const apdTypeChoices = [
@@ -97,16 +98,22 @@ const ApdNew = ({ createApd: create }) => {
   } = useForm({
     defaultValues: {
       apdType: '',
+      apdName: '',
+      apdOverview: {
+        programOverview: '',
+        updateStatus: typeStatus,
+        medicaidBusinessAreas: businessAreas
+      },
       years: years,
-      businessList: businessList,
-      updateStatus: typeStatus
+      yearOptions: yearOptions,
+      businessList: businessList
     },
     mode: 'all',
     reValidateMode: 'all',
     resolver: joiResolver(schema)
   });
 
-  const { apdType } = getValues();
+  const { apdType, updateStatus } = getValues();
 
   useEffect(() => {
     if (!enableMmis) {
@@ -181,15 +188,16 @@ const ApdNew = ({ createApd: create }) => {
   }
 
   const createNew = () => {
-    const { apdType, years, name, mmisUpdate } = getValues();
+    const { apdType, years, apdName, mmisUpdate } = getValues();
     const apdValues = {
-      years,
-      name,
-      apdType,
       apdOverview: {
         programOverview: '',
         updateStatus: updateTypes
-      }
+      },
+      years,
+      yearOptions,
+      name: apdName,
+      apdType
     };
     if (apdType === APD_TYPE.HITECH) {
       apdValues.apdOverview.updateStatus.isUpdateAPD = true;
@@ -274,7 +282,7 @@ const ApdNew = ({ createApd: create }) => {
           {apdValid(apdType) && (
             <div>
               <Controller
-                name="name"
+                name="apdName"
                 control={control}
                 render={({ field: { ...props } }) => (
                   <TextField
