@@ -61,7 +61,7 @@ describe('activity state personnel costs subsection', () => {
         },
         { activityIndex: 0 }
       )
-    ).toEqual({ personnel: 'these are personnel' });
+    ).toEqual({ personnel: 'these are personnel', apdType: 'HITECH' });
   });
 
   it('maps dispatch actions to props', () => {
