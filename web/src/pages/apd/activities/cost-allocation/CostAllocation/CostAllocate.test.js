@@ -14,6 +14,7 @@ import {
 import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
 
 const initialState = {
+  apdType: 'HITECH',
   activityIndex: 1,
   activity: {
     key: 'activity key',
@@ -51,6 +52,7 @@ describe('<setCostAllocationMethodology />', () => {
     const state = {
       apd: {
         data: {
+          apdType: 'HITECH',
           activities: [
             {
               key: 'activity key'
@@ -62,7 +64,8 @@ describe('<setCostAllocationMethodology />', () => {
     expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
       activity: {
         key: 'activity key'
-      }
+      },
+      apdType: 'HITECH'
     });
   });
 
