@@ -147,11 +147,11 @@ export default {
     procurement: [
       { title: 'SMM, Part 11', checked: null, explanation: '' },
       { title: '45 CFR Part 95.615', checked: null, explanation: '' },
-      { title: '45 CFR Part 92.36', checked: null, explanation: '' }
+      { title: '45 CFR Part 75.326', checked: null, explanation: '' }
     ],
     recordsAccess: [
       {
-        title: '42 CFR Part 433.112(b)(5)-(9)',
+        title: '42 CFR Part 433.112 (b)(5)-(9)',
         checked: null,
         explanation: ''
       },

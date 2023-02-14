@@ -374,22 +374,7 @@ export default {
     recordsAccess: [
       {
         checked: null,
-        title: '42 CFR Part 495.350',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '42 CFR Part 495.352',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '42 CFR Part 495.346',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '42 CFR 433.112(b)',
+        title: '45 CFR Part 433.112 (b)(5)-(9)',
         explanation: ''
       },
       {
@@ -406,11 +391,6 @@ export default {
     softwareRights: [
       {
         checked: null,
-        title: '42 CFR 495.360',
-        explanation: ''
-      },
-      {
-        checked: null,
         title: '45 CFR 95.617',
         explanation: ''
       },
@@ -421,14 +401,14 @@ export default {
       },
       {
         checked: null,
-        title: '42 CFR Part 433.112',
+        title: '45 CFR Part 164',
         explanation: ''
       }
     ],
-    security: [
+    independentVV: [
       {
         checked: null,
-        title: '45 CFR 164 Security and Privacy',
+        title: '45 CFR Part 95.626',
         explanation: ''
       }
     ]

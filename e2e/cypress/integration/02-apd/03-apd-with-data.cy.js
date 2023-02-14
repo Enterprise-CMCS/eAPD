@@ -4,7 +4,7 @@ import { testKeyStatePersonnelWithData } from '../../helpers/apd/key-state-perso
 import { testResultsOfPreviousActivitiesWithData } from '../../helpers/apd/results-of-previous-activities.js';
 import { testActivityScheduleSummaryWithData } from '../../helpers/apd/activity-schedule-summary.js';
 import { testProposedBudgetWithData } from '../../helpers/apd/proposed-budget.js';
-import { testAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
+import { testHitechAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
 import { testExecutiveSummaryWithData } from '../../helpers/apd/executive-summary.js';
 import { addHITActivity } from '../../helpers/apd/activity/add-HIT-activity.js';
 import { addHIEActivity } from '../../helpers/apd/activity/add-HIE-activity.js';
@@ -97,7 +97,7 @@ describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {
     });
 
     describe('Assurances and Compliance', function () {
-      testAssurancesAndComplianceWithData();
+      testHitechAssurancesAndComplianceWithData();
     });
 
     describe('Executive Summary', function () {
