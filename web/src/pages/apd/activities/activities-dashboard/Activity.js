@@ -45,7 +45,7 @@ const EntryDetails = ({
 
   const title = useMemo(
     () => makeTitle({ name, fundingSource, apdType }, activityIndex + 1),
-    [fundingSource, name, activityIndex]
+    [fundingSource, name, apdType, activityIndex]
   );
 
   const editContent = (
@@ -115,7 +115,7 @@ EntryDetails.propTypes = {
   fundingSource: PropTypes.string,
   name: PropTypes.string,
   remove: PropTypes.func.isRequired,
-  apdType: PropTypes.string
+  apdType: PropTypes.string.isRequired
 };
 
 EntryDetails.defaultProps = {
