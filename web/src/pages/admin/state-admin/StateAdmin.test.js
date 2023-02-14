@@ -5,7 +5,6 @@ import {
   screen,
   fireEvent,
   within,
-  waitFor,
   waitForElementToBeRemoved
 } from 'apd-testing-library';
 import MockAdapter from 'axios-mock-adapter';
