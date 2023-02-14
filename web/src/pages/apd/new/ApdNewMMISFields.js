@@ -9,16 +9,15 @@ export default function ApdNewMMISFields({
   errors,
   businessAreas,
   setBusinessAreas,
-  setBusinessList,
-  setOtherDetails,
   typeStatus,
   setTypeStatus,
+  setUpdateAPD,
   setValue
 }) {
   return (
     <div>
       <Controller
-        name="updateStatus.typeStatus.isUpdateAPD"
+        name="updateAPD"
         control={control}
         render={({ field: { onBlur, onChange, value } }) => (
           <ChoiceList
@@ -28,12 +27,12 @@ export default function ApdNewMMISFields({
             choices={[
               {
                 label: 'Yes, it is an update.',
-                value: 'true',
-                checked: value === 'true',
+                value: 'yes',
+                checked: value === 'yes',
                 checkedChildren: (
                   <div className="ds-c-choice__checkedChild">
                     <Controller
-                      name="updateStatus.typeStatus"
+                      name="updateStatus"
                       control={control}
                       render={({ field: { onBlur, onChange } }) => (
                         <ChoiceList
@@ -61,16 +60,14 @@ export default function ApdNewMMISFields({
                           ]}
                           labelClassName="ds-u-margin-bottom--1"
                           type="checkbox"
-                          onChange={({ target: { value } }) => {
-                            typeStatus[value] = !typeStatus[value];
+                          onChange={({ target: { value, checked } }) => {
+                            typeStatus[value] = checked;
                             setTypeStatus(typeStatus);
                             onChange(typeStatus);
                           }}
                           onBlur={onBlur}
                           onComponentBlur={onBlur}
-                          errorMessage={
-                            errors?.updateStatus?.typeStatus?.message
-                          }
+                          errorMessage={errors?.updateStatus?.message}
                           errorPlacement="bottom"
                         />
                       )}
@@ -80,24 +77,28 @@ export default function ApdNewMMISFields({
               },
               {
                 label: 'No, this is for a new project.',
-                value: 'false',
-                checked: value === 'false'
+                value: 'no',
+                checked: value === 'no'
               }
             ]}
             onChange={({ target: { value } }) => {
-              typeStatus.isUpdateAPD = value === 'true';
+              setUpdateAPD(value);
+              setTypeStatus({
+                annualUpdate: false,
+                asNeededUpdate: false
+              });
               onChange(value);
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
-            errorMessage={errors?.updateStatus?.typeStatus?.isUpdateAPD.message}
+            errorMessage={errors?.updateAPD?.message}
             errorPlacement="bottom"
           />
         )}
       />
 
       <Controller
-        name="businessList"
+        name="medicaidBusinessAreas"
         control={control}
         render={({ field: { onBlur, onChange } }) => (
           <ChoiceList
@@ -122,13 +123,13 @@ export default function ApdNewMMISFields({
             choices={[
               {
                 label: '1115 or Waiver Support Systems',
-                value: 'waiverSupport',
-                checked: businessAreas.waiverSupport
+                value: 'waiverSupportSystems',
+                checked: businessAreas.waiverSupportSystems
               },
               {
                 label: 'Asset Verification System',
-                value: 'assetVerification',
-                checked: businessAreas.assetVerification
+                value: 'assetVerificationSystem',
+                checked: businessAreas.assetVerificationSystem
               },
               {
                 label: 'Claims Processing',
@@ -137,19 +138,19 @@ export default function ApdNewMMISFields({
               },
               {
                 label: 'Decision Support System & Data Warehouse',
-                value: 'decisionSupport',
-                checked: businessAreas.decisionSupport
+                value: 'decisionSupportSystemDW',
+                checked: businessAreas.decisionSupportSystemDW
               },
               {
                 label: 'Electronic Visit Verification (EVV)',
-                value: 'electronicVisitVerify',
-                checked: businessAreas.electronicVisitVerify
+                value: 'electronicVisitVerification',
+                checked: businessAreas.electronicVisitVerification
               },
               {
                 label:
                   'Encounter Processing System (EPS) & Managed Care System',
-                value: 'encounterProcessingSystem',
-                checked: businessAreas.encounterProcessingSystem
+                value: 'encounterProcessingSystemMCS',
+                checked: businessAreas.encounterProcessingSystemMCS
               },
               {
                 label: 'Financial Management',
@@ -158,13 +159,13 @@ export default function ApdNewMMISFields({
               },
               {
                 label: 'Health Information Exchange (HIE)',
-                value: 'healthInfoExchange',
-                checked: businessAreas.healthInfoExchange
+                value: 'healthInformationExchange',
+                checked: businessAreas.healthInformationExchange
               },
               {
                 label: 'Long Term Services & Supports (LTSS)',
-                value: 'longTermServiceSupport',
-                checked: businessAreas.longTermServiceSupport
+                value: 'longTermServicesSupports',
+                checked: businessAreas.longTermServicesSupports
               },
               {
                 label: 'Member Management',
@@ -174,8 +175,8 @@ export default function ApdNewMMISFields({
               {
                 label:
                   'Pharmacy Benefit Management (PBM) & Point of Sale (POS)',
-                value: 'pharmacyBenefitManagement',
-                checked: businessAreas.pharmacyBenefitManagement
+                value: 'pharmacyBenefitManagementPOS',
+                checked: businessAreas.pharmacyBenefitManagementPOS
               },
               {
                 label: 'Program Integrity',
@@ -199,22 +200,20 @@ export default function ApdNewMMISFields({
                 checkedChildren: (
                   <div className="ds-c-choice__checkedChild">
                     <Controller
-                      name="otherDetails"
+                      name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
                       control={control}
                       render={({ field: { onBlur, ...props } }) => (
                         <TextArea
                           {...props}
                           label="Other Medicaid Business Area(s)"
-                          name="other-mbas"
                           data-cy="other_details"
                           hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
                           onBlur={onBlur}
-                          onChange={e => {
-                            setOtherDetails(e.target.value);
-                            setValue('otherDetails', e.target.value);
-                          }}
                           onComponentBlur={onBlur}
-                          errorMessage={errors?.otherDetails?.message}
+                          errorMessage={
+                            errors?.medicaidBusinessAreas
+                              ?.otherMedicaidBusinessAreas?.message
+                          }
                           errorPlacement="bottom"
                         />
                       )}
@@ -223,22 +222,14 @@ export default function ApdNewMMISFields({
                 )
               }
             ]}
-            onChange={({ target: { value } }) => {
-              // Set boolean values for medicaid business areas
-              // For createApd
-              businessAreas[value] = !businessAreas[value];
+            onChange={({ target: { value, checked } }) => {
+              businessAreas[value] = checked;
               setBusinessAreas(businessAreas);
-
-              // For validation
-              let keys = Object.keys(businessAreas).filter(
-                key => businessAreas[key]
-              );
-              onChange(keys);
-              setBusinessList(keys);
+              onChange(businessAreas);
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
-            errorMessage={errors?.businessList?.message}
+            errorMessage={errors?.medicaidBusinessAreas?.message}
             errorPlacement="bottom"
           />
         )}

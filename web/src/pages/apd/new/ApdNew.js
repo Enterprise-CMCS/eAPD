@@ -37,21 +37,22 @@ const ApdNew = ({ createApd: create }) => {
 
   // Default values for form
   const businessAreaOptions = {
-    waiverSupport: false,
-    assetVerification: false,
+    waiverSupportSystems: false,
+    assetVerificationSystem: false,
     claimsProcessing: false,
-    decisionSupport: false,
-    electronicVisitVerify: false,
-    encounterProcessingSystem: false,
+    decisionSupportSystemDW: false,
+    electronicVisitVerification: false,
+    encounterProcessingSystemMCS: false,
     financialManagement: false,
-    healthInfoExchange: false,
-    longTermServiceSupport: false,
+    healthInformationExchange: false,
+    longTermServicesSupports: false,
     memberManagement: false,
-    pharmacyBenefitManagement: false,
+    pharmacyBenefitManagementPOS: false,
     programIntegrity: false,
     providerManagement: false,
     thirdPartyLiability: false,
-    other: false
+    other: false,
+    otherMedicaidBusinessAreas: ''
   };
 
   const updateTypes = {
@@ -81,11 +82,10 @@ const ApdNew = ({ createApd: create }) => {
   // State management
   const [apdChoices, setApdChoices] = useState(apdTypeChoices);
   const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
-  const [businessList, setBusinessList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [otherDetails, setOtherDetails] = useState('');
   const [typeStatus, setTypeStatus] = useState(updateTypes);
   const [submitDisabled, setSubmitDisabled] = useState(true);
+  const [updateAPD, setUpdateAPD] = useState('');
   const [years, setYears] = useState(defaultAPDYears());
 
   const {
@@ -98,18 +98,18 @@ const ApdNew = ({ createApd: create }) => {
     defaultValues: {
       apdType: '',
       apdName: '',
-      updateStatus: typeStatus,
-      isUpdateAPD: '',
-      years: years,
       yearOptions: yearOptions,
-      businessList: businessList
+      years: years,
+      updateAPD: updateAPD,
+      updateStatus: { typeStatus },
+      medicaidBusinessAreas: businessAreas
     },
     mode: 'all',
     reValidateMode: 'all',
     resolver: joiResolver(schema)
   });
 
-  const { apdType, updateStatus } = getValues();
+  const { apdType } = getValues();
 
   useEffect(() => {
     if (!enableMmis) {
@@ -153,6 +153,11 @@ const ApdNew = ({ createApd: create }) => {
     }
   }
 
+  function updateMBA(businessAreas) {
+    console.log(businessAreas);
+    setValue('medicaidBusinessAreas', businessAreas);
+  }
+
   function fieldComponents(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
@@ -171,10 +176,9 @@ const ApdNew = ({ createApd: create }) => {
             errors={errors}
             businessAreas={businessAreas}
             setBusinessAreas={setBusinessAreas}
-            setBusinessList={setBusinessList}
-            setOtherDetails={setOtherDetails}
             typeStatus={typeStatus}
             setTypeStatus={setTypeStatus}
+            setUpdateAPD={setUpdateAPD}
             setValue={setValue}
           />
         );
@@ -243,29 +247,12 @@ const ApdNew = ({ createApd: create }) => {
                   onChange(e);
                   reset({
                     apdType: e.target.value,
+                    apdName: '',
                     years: years,
-                    businessList: [],
                     updateStatus: {
-                      typeStatus
+                      annualUpdate: false,
+                      asNeededUpdate: false
                     }
-                  });
-
-                  setBusinessAreas({
-                    waiverSupport: false,
-                    assetVerification: false,
-                    claimsProcessing: false,
-                    decisionSupport: false,
-                    electronicVisitVerify: false,
-                    encounterProcessingSystem: false,
-                    financialManagement: false,
-                    healthInfoExchange: false,
-                    longTermServiceSupport: false,
-                    memberManagement: false,
-                    pharmacyBenefitManagement: false,
-                    programIntegrity: false,
-                    providerManagement: false,
-                    thirdPartyLiability: false,
-                    other: false
                   });
                 }}
                 onBlur={onBlur}

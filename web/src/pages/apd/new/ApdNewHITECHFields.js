@@ -39,8 +39,8 @@ export default function ApdNewHITECHFields({
             ]}
             labelClassName="ds-u-margin-bottom--1"
             type="checkbox"
-            onChange={({ target: { value } }) => {
-              typeStatus[value] = !typeStatus[value];
+            onChange={({ target: { value, checked } }) => {
+              typeStatus[value] = checked;
               setTypeStatus(typeStatus);
               onChange(typeStatus);
             }}
