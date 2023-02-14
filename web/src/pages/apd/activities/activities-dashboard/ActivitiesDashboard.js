@@ -11,10 +11,12 @@ import { selectAllActivities } from '../../../../redux/selectors/activities.sele
 import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
 import Waypoint from '../../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../../components/AlertMissingFFY';
+import { selectApdType } from '../../../../redux/selectors/apd.selectors';
 
 import { activitiesDashboard as schema } from '@cms-eapd/common';
+import Instruction from '../../../../components/Instruction';
 
-const All = ({ addActivity, activities, adminCheck }) => {
+const All = ({ addActivity, activities, adminCheck, apdType }) => {
   const { apdId } = useParams();
   const [validation, setValidation] = useState(adminCheck);
 
@@ -31,6 +33,12 @@ const All = ({ addActivity, activities, adminCheck }) => {
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
       <AlertMissingFFY />
       <Section id="activities" resource="activities">
+        {apdType === 'MMIS' && (
+          <Instruction
+            labelFor="dashboard-instructions"
+            source="activities.dashboardInstructions.instruction"
+          />
+        )}
         <hr className="custom-hr" />
         {activities.length == 0 && <p>Add at least one activity.</p>}
         {validation?.error && (
@@ -56,7 +64,8 @@ const All = ({ addActivity, activities, adminCheck }) => {
 All.propTypes = {
   addActivity: PropTypes.func.isRequired,
   activities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  adminCheck: PropTypes.bool
+  adminCheck: PropTypes.bool,
+  apdType: PropTypes.string
 };
 
 All.defaultProps = {
@@ -65,7 +74,8 @@ All.defaultProps = {
 
 const mapStateToProps = state => ({
   activities: selectAllActivities(state),
-  adminCheck: selectAdminCheckEnabled(state)
+  adminCheck: selectAdminCheckEnabled(state),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {

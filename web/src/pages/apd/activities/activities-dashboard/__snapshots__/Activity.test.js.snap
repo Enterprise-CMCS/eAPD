@@ -12,7 +12,7 @@ exports[`the (Activity) EntryDetails component does not render the delete button
         className="nowrap visibility--screen"
       >
         <Button
-          aria-label="Edit: Activity 1: Activity 1 Name (Money Pit)"
+          aria-label="Edit: Activity 1: Activity 1 Name"
           component={[Function]}
           href="/apd/0123456789abcdef01234567/activity/0/overview"
           size="small"
@@ -22,7 +22,7 @@ exports[`the (Activity) EntryDetails component does not render the delete button
         </Button>
       </div>
     }
-    heading="Activity 1: Activity 1 Name (Money Pit)"
+    heading="Activity 1: Activity 1 Name"
     headingLevel="3"
   />
 </div>
@@ -82,7 +82,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         className="nowrap visibility--screen"
       >
         <Button
-          aria-label="Edit: Activity 3: Untitled (Money Pit)"
+          aria-label="Edit: Activity 3: Untitled"
           component={[Function]}
           href="/apd/0123456789abcdef01234567/activity/2/overview"
           size="small"
@@ -95,7 +95,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
             |
           </span>
           <Button
-            aria-label="Delete: Activity 3: Untitled (Money Pit)"
+            aria-label="Delete: Activity 3: Untitled"
             className="ds-u-color--error"
             onClick={[Function]}
             size="small"
@@ -106,7 +106,7 @@ exports[`the (Activity) EntryDetails component renders correctly with no activit
         </React.Fragment>
       </div>
     }
-    heading="Activity 3: Untitled (Money Pit)"
+    heading="Activity 3: Untitled"
     headingLevel="3"
   />
 </div>
