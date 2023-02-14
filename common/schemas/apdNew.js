@@ -21,17 +21,15 @@ const apdNewSchema = Joi.object({
   updateStatus: Joi.when('apdType', {
     is: APD_TYPE.HITECH,
     then: Joi.object({
-      typeStatus: Joi.object({
-        annualUpdate: Joi.boolean(),
-        asNeededUpdate: Joi.boolean()
+      annualUpdate: Joi.boolean(),
+      asNeededUpdate: Joi.boolean()
+    })
+      .or('annualUpdate', 'asNeededUpdate', {
+        isPresent: resolved => resolved === true
       })
-        .or('annualUpdate', 'asNeededUpdate', {
-          isPresent: resolved => resolved === true
-        })
-        .messages({
-          'object.missing': 'Select at least one type of update.'
-        })
-    }),
+      .messages({
+        'object.missing': 'Select at least one type of update.'
+      }),
     otherwise: Joi.when('updateStatus.typeStatus.isUpdateAPD', {
       is: true,
       then: Joi.object({

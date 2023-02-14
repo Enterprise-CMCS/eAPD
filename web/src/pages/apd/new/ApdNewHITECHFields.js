@@ -12,7 +12,7 @@ export default function ApdNewHITECHFields({
   return (
     <div>
       <Controller
-        name="updateStatus.typeStatus"
+        name="updateStatus"
         control={control}
         render={({ field: { onBlur, onChange } }) => (
           <ChoiceList
@@ -46,7 +46,7 @@ export default function ApdNewHITECHFields({
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
-            errorMessage={errors?.updateStatus?.typeStatus?.message}
+            errorMessage={errors?.updateStatus?.message}
             errorPlacement="bottom"
           />
         )}

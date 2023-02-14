@@ -99,7 +99,7 @@ const ApdNew = ({ createApd: create }) => {
       apdType: '',
       apdName: '',
       updateStatus: typeStatus,
-      isUpdateAPD: false,
+      isUpdateAPD: '',
       years: years,
       yearOptions: yearOptions,
       businessList: businessList
@@ -121,7 +121,6 @@ const ApdNew = ({ createApd: create }) => {
   }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    console.log(updateStatus);
     setSubmitDisabled(!isValid);
   }, [isValid]);
 
