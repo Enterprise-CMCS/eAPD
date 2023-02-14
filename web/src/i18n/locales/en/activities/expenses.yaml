@@ -1,11 +1,20 @@
-instruction:
+instructionHITECH:
   detail: >-
     Provide a breakout and brief description of each non-personnel cost related
-    to this activity. These costs should only apply to state (in-house)
-    expenses and should not include costs related to private contractors.
+    to this activity. These costs should only apply to state (in-house) expenses
+    and should not include costs related to private contractors.
   helpText: >-
-    “Miscellaneous expenses” is one of the options in the drop-down menu. It includes
-    materials and supplies, communications‐related expenses, printing costs and
-    facilities expenses.
+    “Miscellaneous expenses” is one of the options in the drop-down menu. It
+    includes materials and supplies, communications‐related expenses, printing
+    costs and facilities expenses.
+instructionMMIS:
+  detail: >-
+    Provide a breakout and brief description of each non-personnel cost related
+    to this activity. These costs should only apply to state (in-house) expenses
+    and should not include costs related to private contractors.
+  helpText: >-
+    Refer to <a
+    href="https://www.medicaid.gov/federal-policy-guidance/downloads/SMD16004.pdf">SMDL
+    16-004</a> for guidance on allowable expenses and FFP rates.
 noDataNotice: Add other state expense(s) for this activity.
 addButtonText: Add State Expense
