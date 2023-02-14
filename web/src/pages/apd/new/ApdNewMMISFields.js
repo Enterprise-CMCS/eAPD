@@ -18,7 +18,7 @@ export default function ApdNewMMISFields({
   return (
     <div>
       <Controller
-        name="mmisUpdate"
+        name="updateStatus.typeStatus.isUpdateAPD"
         control={control}
         render={({ field: { onBlur, onChange, value } }) => (
           <ChoiceList
@@ -28,8 +28,8 @@ export default function ApdNewMMISFields({
             choices={[
               {
                 label: 'Yes, it is an update.',
-                value: 'yes',
-                checked: value === 'yes',
+                value: 'true',
+                checked: value === 'true',
                 checkedChildren: (
                   <div className="ds-c-choice__checkedChild">
                     <Controller
@@ -80,16 +80,17 @@ export default function ApdNewMMISFields({
               },
               {
                 label: 'No, this is for a new project.',
-                value: 'no',
-                checked: value === 'no'
+                value: 'false',
+                checked: value === 'false'
               }
             ]}
-            onChange={e => {
-              onChange(e);
+            onChange={({ target: { value } }) => {
+              typeStatus.isUpdateAPD = value === 'true';
+              onChange(value);
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
-            errorMessage={errors?.mmisUpdate?.message}
+            errorMessage={errors?.updateStatus?.typeStatus?.isUpdateAPD.message}
             errorPlacement="bottom"
           />
         )}

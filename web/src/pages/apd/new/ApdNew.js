@@ -56,8 +56,7 @@ const ApdNew = ({ createApd: create }) => {
 
   const updateTypes = {
     annualUpdate: false,
-    asNeededUpdate: false,
-    isUpdateAPD: false
+    asNeededUpdate: false
   };
 
   const apdTypeChoices = [
@@ -99,11 +98,8 @@ const ApdNew = ({ createApd: create }) => {
     defaultValues: {
       apdType: '',
       apdName: '',
-      apdOverview: {
-        programOverview: '',
-        updateStatus: typeStatus,
-        medicaidBusinessAreas: businessAreas
-      },
+      updateStatus: typeStatus,
+      isUpdateAPD: false,
       years: years,
       yearOptions: yearOptions,
       businessList: businessList
@@ -125,6 +121,7 @@ const ApdNew = ({ createApd: create }) => {
   }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    console.log(updateStatus);
     setSubmitDisabled(!isValid);
   }, [isValid]);
 
@@ -192,7 +189,7 @@ const ApdNew = ({ createApd: create }) => {
     const apdValues = {
       apdOverview: {
         programOverview: '',
-        updateStatus: updateTypes
+        updateStatus: typeStatus
       },
       years,
       yearOptions,
@@ -289,6 +286,8 @@ const ApdNew = ({ createApd: create }) => {
                     {...props}
                     label="APD Name"
                     className="remove-clearfix"
+                    errorMessage={errors?.apdName?.message}
+                    errorPlacement="bottom"
                   />
                 )}
               />
