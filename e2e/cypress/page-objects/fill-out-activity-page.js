@@ -1,5 +1,6 @@
 import PopulatePage from './populate-page.js';
 import StaffExpensesPage from './activities-state-staff-expenses-page.js';
+import { FUNDING_CATEGORY_LABEL_MAPPING } from '@cms-eapd/common';
 
 const { _ } = Cypress;
 
@@ -297,6 +298,70 @@ class FillOutActivityPage {
                   expect(tableData).to.deep.include(data);
                 }
               );
+            });
+        });
+    });
+  };
+
+  checkMmisBudgetAndFFPTables = ({
+    years,
+    costAllocation,
+    activityTotal,
+    costByFFY
+  }) => {
+    _.forEach(years, (year, ffyIndex) => {
+      const { ffp } = costAllocation[year];
+      const split = `${ffp.federal}-${ffp.state}`;
+
+      if (split === '90-10') {
+        cy.contains(`Budget for FFY ${year}`)
+          .parent()
+          .parent()
+          .within(() => {
+            cy.findByRole('radio', {
+              name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
+            }).click();
+          });
+      } else {
+        cy.contains(`Budget for FFY ${year}`)
+          .parent()
+          .parent()
+          .within(() => {
+            cy.findByRole('radio', {
+              name: `${ffp.federal}/${ffp.state}`
+            }).click();
+            cy.findByRole('radio', {
+              name: FUNDING_CATEGORY_LABEL_MAPPING[ffp.fundingCategory]
+            });
+          });
+      }
+      cy.waitForSave();
+
+      cy.get('[data-cy="FFPFedStateSplitTable"]')
+        .eq(ffyIndex)
+        .then(table => {
+          cy.get(table)
+            .getActivityTable()
+            .then(tableData => {
+              expect(tableData).to.deep.include([
+                [`$${activityTotal.combined[year].total}`],
+                [
+                  'Federal Share',
+                  `$${activityTotal.data.combined[year]}`,
+                  '×',
+                  `${ffp.federal}%`,
+                  '=',
+                  `$${costByFFY[year].federal}`
+                ],
+                [
+                  'State Share',
+                  `$${activityTotal.data.combined[year]}`,
+                  '×',
+                  `${ffp.state}%`,
+                  '=',
+                  `$${costByFFY[year].state}`
+                ]
+              ]);
             });
         });
     });

@@ -1,5 +1,6 @@
 /* eslint-disable radix */
 import { addCommas } from './helper.js';
+import { FUNDING_CATEGORY_LABEL_MAPPING } from '@cms-eapd/common';
 
 const { _ } = Cypress;
 
@@ -55,6 +56,68 @@ class BudgetPage {
       .should('have.value', '0-100');
 
     cy.get('[data-cy="cost-allocation-dropdown"]').select('90-10');
+  };
+
+  checkMatchRateFunctionality = () => {
+    cy.findByRole('radio', {
+      name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
+    }).should('exist');
+    cy.findByRole('radio', { name: '75/25' }).should('exist');
+    cy.findByRole('radio', { name: '50/50' }).should('exist');
+
+    cy.findByRole('radio', {
+      name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
+    }).click();
+    cy.waitForSave();
+    this.checkCostSplitTable({
+      federalSharePercentage: 0.9,
+      federalShareAmount: 0,
+      stateSharePercentage: 0.1,
+      stateShareAmount: 0,
+      totalComputableMedicaidCost: 0
+    });
+
+    cy.findByRole('radio', { name: '75/25' }).click();
+
+    cy.findByRole('radio', { name: FUNDING_CATEGORY_LABEL_MAPPING.ddi }).should(
+      'exist'
+    );
+    cy.findByRole('radio', {
+      name: FUNDING_CATEGORY_LABEL_MAPPING.mando
+    }).should('exist');
+
+    cy.findByRole('radio', {
+      name: FUNDING_CATEGORY_LABEL_MAPPING.ddi
+    }).click();
+    cy.waitForSave();
+    this.checkCostSplitTable({
+      federalSharePercentage: 0.75,
+      federalShareAmount: 0,
+      stateSharePercentage: 0.25,
+      stateShareAmount: 0,
+      totalComputableMedicaidCost: 0
+    });
+
+    cy.findByRole('radio', { name: '50/50' }).click();
+
+    cy.findByRole('radio', { name: FUNDING_CATEGORY_LABEL_MAPPING.ddi }).should(
+      'exist'
+    );
+    cy.findByRole('radio', {
+      name: FUNDING_CATEGORY_LABEL_MAPPING.mando
+    }).should('exist');
+
+    cy.findByRole('radio', {
+      name: FUNDING_CATEGORY_LABEL_MAPPING.mando
+    }).click();
+    cy.waitForSave();
+    this.checkCostSplitTable({
+      federalSharePercentage: 0.5,
+      federalShareAmount: 0,
+      stateSharePercentage: 0.5,
+      stateShareAmount: 0,
+      totalComputableMedicaidCost: 0
+    });
   };
 
   checkCostSplitTable = ({
@@ -133,6 +196,56 @@ class BudgetPage {
         cy.contains(`${state} share of $${addCommas(totalStateShare)}`).should(
           'exist'
         );
+
+        years.forEach(year => {
+          cy.contains(year).should('exist');
+        });
+      });
+  };
+
+  checkMmisFFYtotals = ({
+    years,
+    activityIndex,
+    activityId,
+    activityName,
+    state,
+    fundingSplit,
+    totalOtherFunding,
+    budget
+  }) => {
+    cy.contains(
+      `Activity ${activityIndex + 1} Budget for FFY ${years[years.length - 1]}`
+    )
+      .parent()
+      .parent()
+      .next()
+      .should('contain', `FFY ${years[0]}-${years[years.length - 1]} Totals`)
+      .next()
+      .within(() => {
+        cy.contains(
+          `${activityName} activity is $${addCommas(
+            budget.activities[activityId].costsByFFY.total.total
+          )}`
+        ).should('exist');
+        cy.contains(`other funding of $${addCommas(totalOtherFunding)}`).should(
+          'exist'
+        );
+        cy.contains(
+          `Medicaid cost is $${addCommas(
+            budget.activities[activityId].costsByFFY.total.medicaid
+          )}`
+        ).should('exist');
+        cy.contains(fundingSplit).should('exist');
+        cy.contains(
+          `federal share of $${addCommas(
+            budget.activities[activityId].costsByFFY.total.federal
+          )}`
+        ).should('exist');
+        cy.contains(
+          `${state} share of $${addCommas(
+            budget.activities[activityId].costsByFFY.total.state
+          )}`
+        ).should('exist');
 
         years.forEach(year => {
           cy.contains(year).should('exist');

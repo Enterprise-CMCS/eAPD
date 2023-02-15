@@ -8,6 +8,7 @@ import { titleCase } from 'title-case';
 import Instruction from '../../../../components/Instruction';
 import CostAllocateFFPQuarterly from '../cost-allocation/CostAllocateFFPQuarterly';
 import FedStateSelector from './FedStateSelector';
+import MatchRateSelector from './MatchRateSelector';
 
 import {
   setCostAllocationFFPFundingSplit,
@@ -20,6 +21,7 @@ import {
   selectActivityByIndex,
   selectActivityTotalForBudgetByActivityIndex
 } from '../../../../redux/selectors/activities.selectors';
+import { getAPDYearRange } from '../../../../redux/reducers/apd';
 import { getUserStateOrTerritory } from '../../../../redux/selectors/user.selector';
 import {
   selectAdminCheckEnabled,
@@ -33,12 +35,12 @@ import { t } from '../../../../i18n';
 import {
   hitechCostAllocationSchema,
   mmisCostAllocationSchema,
-  APD_TYPE
+  APD_TYPE,
+  FUNDING_CATEGORY_TYPE
 } from '@cms-eapd/common';
 
-import MatchRateSelector from './MatchRateSelector';
-
 const AllFFYsSummaryNarrative = ({
+  apdType,
   activityName,
   costAllocation,
   costSummary: { total },
@@ -48,7 +50,15 @@ const AllFFYsSummaryNarrative = ({
   let fundingSplitBits = [];
 
   Object.keys(costAllocation).forEach(ffy => {
-    const split = `${costAllocation[ffy].ffp.federal}/${costAllocation[ffy].ffp.state}`;
+    let split = `${costAllocation[ffy].ffp.federal}/${costAllocation[ffy].ffp.state}`;
+    if (apdType === APD_TYPE.MMIS) {
+      let matchRate = '';
+      const fundingCategory = costAllocation[ffy].ffp.fundingCategory;
+      if (fundingCategory === FUNDING_CATEGORY_TYPE.ddi) matchRate = ' DDI';
+      if (fundingCategory === FUNDING_CATEGORY_TYPE.mando) matchRate = ' M&O';
+
+      split += `${matchRate}`;
+    }
 
     if (split !== lastSplit) {
       fundingSplitBits.push({ split, ffys: [] });
@@ -107,6 +117,7 @@ const AllFFYsSummaryNarrative = ({
 };
 
 AllFFYsSummaryNarrative.propTypes = {
+  apdType: PropTypes.string.isRequired,
   activityName: PropTypes.string.isRequired,
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
@@ -116,6 +127,7 @@ AllFFYsSummaryNarrative.propTypes = {
 const CostAllocateFFP = ({
   activityIndex,
   activityName,
+  apdType,
   costAllocation,
   costSummary,
   otherFunding,
@@ -124,8 +136,8 @@ const CostAllocateFFP = ({
   setFundingSplit,
   setFundingMatchRate,
   stateName,
-  apdType,
-  adminCheck
+  adminCheck,
+  year
 }) => {
   const schema =
     apdType === APD_TYPE.HITECH
@@ -317,41 +329,44 @@ const CostAllocateFFP = ({
             </Fragment>
           )}
 
-          <div className="data-entry-box ds-u-margin-bottom--5">
-            {!isViewOnly && (
-              <Instruction
-                source="activities.costAllocate.ffp.quarterlyFFPInstruction"
-                headingDisplay={{
-                  level: 'p',
-                  className: 'ds-h4'
-                }}
+          {apdType === APD_TYPE.HITECH && (
+            <div className="data-entry-box ds-u-margin-bottom--5">
+              {!isViewOnly && (
+                <Instruction
+                  labelFor="ffp-quarterly-table"
+                  source="activities.costAllocate.ffp.quarterlyFFPInstruction"
+                  headingDisplay={{
+                    level: 'p',
+                    className: 'ds-h4'
+                  }}
+                />
+              )}
+
+              {isViewOnly && (
+                <h4>
+                  {titleCase(
+                    t(
+                      'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
+                    )
+                  )}
+                </h4>
+              )}
+
+              <CostAllocateFFPQuarterly
+                id="ffp-quarterly-table"
+                activityIndex={activityIndex}
+                activityId={activityId}
+                isViewOnly={isViewOnly}
+                year={ffy}
               />
-            )}
-
-            {isViewOnly && (
-              <h4>
-                {titleCase(
-                  t(
-                    'activities.costAllocate.ffp.quarterlyFFPInstruction.heading'
-                  )
-                )}
-              </h4>
-            )}
-
-            <CostAllocateFFPQuarterly
-              activityIndex={activityIndex}
-              activityId={activityId}
-              isViewOnly={isViewOnly}
-              year={ffy}
-            />
-          </div>
+            </div>
+          )}
         </div>
       ))}
 
-      <h3 className="subsection--title ds-h3">
-        FFY {Object.keys(years)[0]}-{Object.keys(years).pop()} Totals
-      </h3>
+      <h3 className="subsection--title ds-h3">FFY {year} Totals</h3>
       <AllFFYsSummaryNarrative
+        apdType={apdType}
         activityName={activityName}
         costAllocation={costAllocation}
         costSummary={costSummary}
@@ -365,6 +380,7 @@ CostAllocateFFP.propTypes = {
   activityId: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityName: PropTypes.string.isRequired,
+  apdType: PropTypes.string,
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
   otherFunding: PropTypes.object.isRequired,
@@ -373,7 +389,8 @@ CostAllocateFFP.propTypes = {
   setFundingMatchRate: PropTypes.func.isRequired,
   stateName: PropTypes.string.isRequired,
   apdType: PropTypes.string.isRequired,
-  adminCheck: PropTypes.bool.isRequired
+  adminCheck: PropTypes.bool.isRequired,
+  year: PropTypes.string.isRequired
 };
 
 CostAllocateFFP.defaultProps = {
@@ -403,7 +420,8 @@ const mapStateToProps = (
     stateName: getState(state).name,
     apdType: getApdType(state),
     otherFunding: activityTotal.data.otherFunding,
-    adminCheck: selectAdminCheckEnabled(state)
+    adminCheck: selectAdminCheckEnabled(state),
+    year: getAPDYearRange(state)
   };
 };
 

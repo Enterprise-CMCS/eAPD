@@ -1,6 +1,7 @@
 // <reference types="cypress" />
 import { testDefaultMmisAPDOverview } from '../../helpers/apd/apd-overview';
 import { testStatePrioritiesAndScope } from '../../helpers/apd/state-priorities-and-scope';
+import { testDefaultMMISActivity } from '../../helpers/mmis/activity/default-activity';
 
 // Tests the default values of an MMIS APD
 
@@ -72,6 +73,10 @@ describe(
 
       describe('default State Priorities and Scope', function () {
         testStatePrioritiesAndScope();
+      });
+
+      describe('default Activity', function () {
+        testDefaultMMISActivity();
       });
     });
   }

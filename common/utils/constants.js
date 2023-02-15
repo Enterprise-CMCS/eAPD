@@ -11,5 +11,7 @@ export const FUNDING_CATEGORY_TYPE = {
 
 export const FUNDING_CATEGORY_LABEL_MAPPING = {
   ddi: 'Design, Development, and Installation (DDI)',
-  mando: 'Maintenance & Operations (M&O)'
+  mando: 'Maintenance & Operations (M&O)',
+  DDI: 'Design, Development, and Installation (DDI)',
+  MO: 'Maintenance & Operations (M&O)'
 };

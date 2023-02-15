@@ -1,3 +1,7 @@
+import { FUNDING_CATEGORY_LABEL_MAPPING } from '@cms-eapd/common';
+import BudgetPage from '../../page-objects/budget-page.js';
+// import { FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
+
 /// <reference types="cypress" />
 
 // Tests performing basic MMIS APD tasks
@@ -8,9 +12,10 @@
 Cypress.session.clearAllSavedSessions();
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
-  let apdUrl;
+  let apdUrl = '/';
   let apdId;
   const years = [];
+  let budgetPage;
 
   before(() => {
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
@@ -41,6 +46,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
       years.push(list[index].value)
     );
+    budgetPage = new BudgetPage();
   });
 
   beforeEach(function () {
@@ -56,14 +62,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   });
 
   after(function () {
+    cy.useStateStaff();
     cy.visit('/');
     cy.deleteAPD(this.apdId);
   });
 
   describe('Create MMIS APD', function () {
-    it('tests Create New page', function () {
-      const mmisBasics = this.mmisBasics;
-
+    it('tests Create New page and do not save', function () {
       //
       // APD Overview
       //
@@ -163,8 +168,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
       cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled');
       cy.findByRole('button', { name: /Cancel/i }).click();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.contains('MMIS APD Test').should('not.exist');
+    });
+
+    it('test MMIS APD Basics', function () {
+      const mmisBasics = this.mmisBasics;
 
       cy.goToActivityDashboard();
 
@@ -252,6 +262,27 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.waitForSave();
       cy.contains('Provide a Proposed solution').should('not.exist');
 
+      // Previous Activities
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
+      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
+
+      cy.checkTinyMCE('previous-activity-summary-field', '');
+      cy.setTinyMceContent(
+        'previous-activity-summary-field',
+        mmisBasics.previousActivities.previousActivitySummary
+      );
+      cy.waitForSave();
+
+      cy.goToApdOverview();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.goToPreviousActivities();
+      cy.checkTinyMCE(
+        'previous-activity-summary-field',
+        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
+      );
+
       // Check validation errors are gone from admin check
       cy.expandAdminCheck();
       cy.get('[class="eapd-admin-check-list"]').within(list => {
@@ -285,6 +316,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         `<p>${mmisBasics.activities[0].activityOverview.proposedSolution}</p>`
       );
 
+      // Key State Personnel
       cy.goToKeyStatePersonnel();
       cy.contains('Key Personnel and Program Management').should('exist');
 
@@ -327,14 +359,14 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         .clear()
         .type('50');
       cy.findAllByRole('radio', {
-        name: '90/10 Design, Development, and Installation (DDI)'
+        name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
       }).check({ force: true });
 
       cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
       cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
       cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
       cy.findAllByRole('radio', {
-        name: '90/10 Design, Development, and Installation (DDI)'
+        name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
       })
         .eq(1)
         .check({ force: true });
@@ -349,6 +381,21 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         'Total Computable Medicaid: $2,000 (100% Medicaid Share)'
       ).should('exist');
       cy.contains('Federal Share: $1,800').should('exist');
+
+      // Budget and FFP
+      cy.goToBudgetAndFFP(0);
+      cy.contains('Budget and FFP').should('exist');
+
+      cy.then(() => {
+        this.years.forEach(year => {
+          cy.contains(`Budget for FFY ${year}`)
+            .parent()
+            .parent()
+            .within(() => {
+              budgetPage.checkMatchRateFunctionality();
+            });
+        });
+      });
 
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
@@ -423,27 +470,18 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       // Todo: TEST CONTINUE AND BACK BUTTONS, Assurances and Compliance page crashes though.
     });
 
-    it('tests the Results of Previous Activities section', function () {
-      const mmisBasics = this.mmisBasics;
-
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-      cy.goToApdOverview();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.goToPreviousActivities();
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
-      );
-    });
+    // it('test the Budget and FFP page', function () {
+    //   // const mmisBasics = this.mmisBasics;
+    //   // cy.then(() => {
+    //   //   this.years.forEach(year => {
+    //   //     cy.contains(`Budget for FFY ${year}`)
+    //   //       .parent()
+    //   //       .parent()
+    //   //       .within(() => {
+    //   //         budgetPage.checkMatchRateFunctionality();
+    //   //       });
+    //   //   });
+    //   // });
+    // });
   });
 });

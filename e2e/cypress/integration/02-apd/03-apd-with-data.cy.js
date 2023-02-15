@@ -6,9 +6,9 @@ import { testActivityScheduleSummaryWithData } from '../../helpers/apd/activity-
 import { testProposedBudgetWithData } from '../../helpers/apd/proposed-budget.js';
 import { testAssurancesAndComplianceWithData } from '../../helpers/apd/assurances-and-compliance.js';
 import { testExecutiveSummaryWithData } from '../../helpers/apd/executive-summary.js';
-import { addHITActivity } from '../../helpers/apd/activity/add-HIT-activity.js';
-import { addHIEActivity } from '../../helpers/apd/activity/add-HIE-activity.js';
-import { addMMISActivity } from '../../helpers/apd/activity/add-MMIS-activity.js';
+import { addHITActivity } from '../../helpers/apd/activity/add-HITECH-HIT-activity.js';
+import { addHIEActivity } from '../../helpers/apd/activity/add-HITECH-HIE-activity.js';
+import { addMMISActivity } from '../../helpers/apd/activity/add-HITECH-MMIS-activity.js';
 
 // Tests an APD by adding data and checking the results
 describe('APD with Data', { tags: ['@apd', '@data', '@slow'] }, () => {

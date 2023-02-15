@@ -221,6 +221,8 @@ const ApdNew = ({ createApd: create }) => {
                     {...props}
                     label="APD Name"
                     className="remove-clearfix"
+                    errorMessage={errors?.name?.message}
+                    errorPlacement="bottom"
                   />
                 )}
               />

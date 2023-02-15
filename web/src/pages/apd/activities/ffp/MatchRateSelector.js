@@ -56,6 +56,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             }}
             errorMessage={errors?.[ffy]?.ffp?.fundingCategory?.message}
             errorPlacement="bottom"
+            data-cy="cost-allocation-radio-group"
           />
         )}
       />
