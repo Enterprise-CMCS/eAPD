@@ -16,7 +16,8 @@ export default function ApdNewMMISFields({
   setUpdateAPD
 }) {
   useEffect(() => {
-    setBusinessAreas(businessAreas);
+    // trigger();
+    trigger('medicaidBusinessAreas');
   });
 
   return (
