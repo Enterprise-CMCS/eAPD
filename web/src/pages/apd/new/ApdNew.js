@@ -109,7 +109,6 @@ const ApdNew = ({ createApd: create }) => {
     control,
     formState: { errors, isValid },
     getValues,
-    // reset,
     setValue
   } = methods;
 
@@ -118,7 +117,7 @@ const ApdNew = ({ createApd: create }) => {
       apdChoices.pop();
       apdChoices[0].checked = true;
       setApdChoices(apdChoices);
-      setValue('apdType', APD_TYPE.HITECH, { shouldValidate: true });
+      setApdType(APD_TYPE.HITECH);
     }
   }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
 

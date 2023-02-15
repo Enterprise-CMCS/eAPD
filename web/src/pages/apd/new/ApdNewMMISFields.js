@@ -200,7 +200,7 @@ const ApdNewMMISFields = ({
                 checkedChildren: (
                   <div className="ds-c-choice__checkedChild">
                     <Controller
-                      name="medicaidmedicaidBusinessAreas.otherMedicaidmedicaidBusinessAreas"
+                      name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
                       control={control}
                       render={({ field: { onBlur, ...props } }) => (
                         <TextArea
@@ -211,8 +211,8 @@ const ApdNewMMISFields = ({
                           onBlur={onBlur}
                           onComponentBlur={onBlur}
                           errorMessage={
-                            errors?.medicaidmedicaidBusinessAreas
-                              ?.otherMedicaidmedicaidBusinessAreas?.message
+                            errors?.medicaidBusinessAreas
+                              ?.otherMedicaidBusinessAreas?.message
                           }
                           errorPlacement="bottom"
                         />

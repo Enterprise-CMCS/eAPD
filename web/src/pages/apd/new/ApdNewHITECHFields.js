@@ -58,7 +58,7 @@ const ApdNewHITECHFields = ({ setUpdateStatus, updateStatus }) => {
 };
 
 ApdNewHITECHFields.propTypes = {
-  typeStatus: PropTypes.object.isRequired,
+  updateStatus: PropTypes.object.isRequired,
   setUpdateStatus: PropTypes.func.isRequired
 };
 
