@@ -244,8 +244,8 @@ export default function ApdNewMMISFields({
 }
 
 ApdNewMMISFields.propTypes = {
-  // control,
-  // errors,
+  control: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   businessAreas: PropTypes.object.isRequired,
   setBusinessAreas: PropTypes.func.isRequired,
   typeStatus: PropTypes.object.isRequired,

@@ -58,6 +58,8 @@ export default function ApdNewHITECHFields({
 }
 
 ApdNewHITECHFields.propTypes = {
+  control: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   typeStatus: PropTypes.object.isRequired,
   setTypeStatus: PropTypes.func.isRequired
 };
