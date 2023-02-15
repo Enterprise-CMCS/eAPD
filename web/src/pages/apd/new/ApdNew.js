@@ -82,40 +82,23 @@ const ApdNew = ({ createApd: create }) => {
 
   // State management
   const [apdChoices, setApdChoices] = useState(apdTypeChoices);
+  const [apdType, setApdType] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [medicaidBusinessAreas, setMedicaidBusinessAreas] =
     useState(businessAreaOptions);
-  const [isLoading, setIsLoading] = useState(false);
   const [updateStatus, setUpdateStatus] = useState(updateTypes);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [updateAPD, setUpdateAPD] = useState('');
   const [years, setYears] = useState(defaultAPDYears());
 
-  // const {
-  //   control,
-  //   setValue,
-  //   getValues,
-  //   formState: { errors, isValid },
-  //   reset,
-  //   trigger
-  // } = useForm({
-  //   defaultValues: {
-  //     apdType: '',
-  //     name: '',
-  //     years,
-  //     updateAPD,
-  //     updateStatus: updateStatus,
-  //     medicaidBusinessAreas: businessAreas
-  //   },
-  //   mode: 'all',
-  //   reValidateMode: 'all',
-  //   resolver: joiResolver(schema)
-  // });
-
   const methods = useForm({
     defaultValues: {
-      apdType: '',
+      apdType,
       name: '',
-      years
+      years,
+      medicaidBusinessAreas,
+      updateStatus,
+      updateAPD
     },
     mode: 'all',
     reValidateMode: 'all',
@@ -126,11 +109,9 @@ const ApdNew = ({ createApd: create }) => {
     control,
     formState: { errors, isValid },
     getValues,
-    reset,
+    // reset,
     setValue
   } = methods;
-
-  const { apdType } = getValues();
 
   useEffect(() => {
     if (!enableMmis) {
@@ -252,17 +233,17 @@ const ApdNew = ({ createApd: create }) => {
                   type="radio"
                   choices={apdChoices}
                   onChange={e => {
-                    // setApdType(e.target.value);
+                    setApdType(e.target.value);
                     onChange(e);
-                    reset({
-                      apdType: e.target.value,
-                      name: '',
-                      years: years,
-                      updateStatus: {
-                        annualUpdate: false,
-                        asNeededUpdate: false
-                      }
-                    });
+                    // reset({
+                    //   apdType: e.target.value,
+                    //   name: '',
+                    //   years: years,
+                    //   updateStatus: {
+                    //     annualUpdate: false,
+                    //     asNeededUpdate: false
+                    //   }
+                    // });
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
