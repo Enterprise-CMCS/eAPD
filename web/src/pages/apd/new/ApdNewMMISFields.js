@@ -11,8 +11,7 @@ export default function ApdNewMMISFields({
   setBusinessAreas,
   typeStatus,
   setTypeStatus,
-  setUpdateAPD,
-  setValue
+  setUpdateAPD
 }) {
   return (
     <div>
@@ -62,6 +61,7 @@ export default function ApdNewMMISFields({
                           type="checkbox"
                           onChange={({ target: { value, checked } }) => {
                             typeStatus[value] = checked;
+                            typeStatus.isUpdateAPD = true;
                             setTypeStatus(typeStatus);
                             onChange(typeStatus);
                           }}
@@ -85,7 +85,8 @@ export default function ApdNewMMISFields({
               setUpdateAPD(value);
               setTypeStatus({
                 annualUpdate: false,
-                asNeededUpdate: false
+                asNeededUpdate: false,
+                isUpdateAPD: false
               });
               onChange(value);
             }}

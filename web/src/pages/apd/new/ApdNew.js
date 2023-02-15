@@ -57,7 +57,8 @@ const ApdNew = ({ createApd: create }) => {
 
   const updateTypes = {
     annualUpdate: false,
-    asNeededUpdate: false
+    asNeededUpdate: false,
+    isUpdateAPD: false
   };
 
   const apdTypeChoices = [
@@ -153,11 +154,6 @@ const ApdNew = ({ createApd: create }) => {
     }
   }
 
-  function updateMBA(businessAreas) {
-    console.log(businessAreas);
-    setValue('medicaidBusinessAreas', businessAreas);
-  }
-
   function fieldComponents(apdType) {
     switch (apdType) {
       case APD_TYPE.HITECH:
@@ -179,7 +175,6 @@ const ApdNew = ({ createApd: create }) => {
             typeStatus={typeStatus}
             setTypeStatus={setTypeStatus}
             setUpdateAPD={setUpdateAPD}
-            setValue={setValue}
           />
         );
       default:
@@ -188,26 +183,22 @@ const ApdNew = ({ createApd: create }) => {
   }
 
   const createNew = () => {
-    const { apdType, years, apdName, mmisUpdate } = getValues();
+    const { apdName, updateStatus } = getValues();
     const apdValues = {
       apdOverview: {
         programOverview: '',
-        updateStatus: typeStatus
+        updateStatus: updateStatus
       },
       years,
       yearOptions,
       name: apdName,
       apdType
     };
-    if (apdType === APD_TYPE.HITECH) {
-      apdValues.apdOverview.updateStatus.isUpdateAPD = true;
-    }
+
     if (apdType === APD_TYPE.MMIS) {
-      apdValues.apdOverview.updateStatus.isUpdateAPD = mmisUpdate === 'yes';
       apdValues.apdOverview.medicaidBusinessAreas = businessAreas;
-      apdValues.apdOverview.medicaidBusinessAreas.otherMedicaidBusinessAreas =
-        otherDetails;
     }
+
     setIsLoading(true);
     create(apdValues);
   };

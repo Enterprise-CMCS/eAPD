@@ -41,6 +41,7 @@ export default function ApdNewHITECHFields({
             type="checkbox"
             onChange={({ target: { value, checked } }) => {
               typeStatus[value] = checked;
+              typeStatus.isUpdateAPD = true;
               setTypeStatus(typeStatus);
               onChange(typeStatus);
             }}

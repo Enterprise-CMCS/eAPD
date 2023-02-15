@@ -4,7 +4,8 @@ import { APD_TYPE } from '../utils/constants.js';
 
 export const updateStatusSchema = Joi.object({
   annualUpdate: Joi.boolean(),
-  asNeededUpdate: Joi.boolean()
+  asNeededUpdate: Joi.boolean(),
+  isUpdateAPD: Joi.boolean()
 })
   .or('annualUpdate', 'asNeededUpdate', {
     isPresent: resolved => resolved === true
@@ -42,11 +43,7 @@ const apdNewSchema = Joi.object({
     then: updateStatusSchema,
     otherwise: Joi.when('updateAPD', {
       is: 'yes',
-      then: updateStatusSchema,
-      otherwise: Joi.object({
-        annualUpdate: Joi.boolean().valid(false),
-        asNeededUpdate: Joi.boolean().valid(false)
-      })
+      then: updateStatusSchema
     })
   }),
   medicaidBusinessAreas: medicaidBusinessAreasSchema
