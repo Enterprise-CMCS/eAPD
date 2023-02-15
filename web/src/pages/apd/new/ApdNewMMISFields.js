@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TextArea from '../../../components/TextArea';
 import { ChoiceList } from '@cmsgov/design-system';
@@ -89,6 +90,9 @@ export default function ApdNewMMISFields({
                 isUpdateAPD: false
               });
               onChange(value);
+
+              console.log(typeof control);
+              console.log(typeof errors);
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
@@ -238,3 +242,13 @@ export default function ApdNewMMISFields({
     </div>
   );
 }
+
+ApdNewMMISFields.propTypes = {
+  // control,
+  // errors,
+  businessAreas: PropTypes.object.isRequired,
+  setBusinessAreas: PropTypes.func.isRequired,
+  typeStatus: PropTypes.object.isRequired,
+  setTypeStatus: PropTypes.func.isRequired,
+  setUpdateAPD: PropTypes.func.isRequired
+};
