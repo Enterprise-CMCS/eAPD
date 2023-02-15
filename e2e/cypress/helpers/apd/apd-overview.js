@@ -4,12 +4,14 @@ export const testDefaultAPDOverview = function () {
     cy.findByRole('heading', { name: /APD Overview/i }).should('exist');
     cy.findByRole('radio', { name: /HITECH IAPD/i }).should('be.checked');
 
-    cy.get('[type="checkbox"]').each(($year, index, list) => {
-      if (index === list.length - 1) {
-        cy.wrap($year).should('not.be.checked');
-      } else {
-        cy.wrap($year).should('be.checked');
-      }
+    cy.get('[data-cy=yearList]').within(() => {
+      cy.get('[type="checkbox"]').each(($year, index, list) => {
+        if (index === list.length - 1) {
+          cy.wrap($year).should('not.be.checked');
+        } else {
+          cy.wrap($year).should('be.checked');
+        }
+      });
     });
 
     cy.get('[id="program-introduction-field"]').should('have.value', '');

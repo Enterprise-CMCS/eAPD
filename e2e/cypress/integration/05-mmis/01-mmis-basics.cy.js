@@ -1,4 +1,5 @@
 import ActivityPage from '../../page-objects/activity-page';
+import { testApdName } from '../../helpers/apd/apd-name.js';
 
 /// <reference types="cypress" />
 
@@ -169,6 +170,8 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('MMIS Pages', function () {
     describe('APD Overview page', () => {
+      testApdName();
+
       it('tests APD Update section', () => {
         cy.goToApdOverview();
 
@@ -179,11 +182,11 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
           name: /No, this is for a new project./i
         }).click();
 
-        cy.findAllByText('Update Type').should('not.exist');
+        cy.findByText('Update Type').should('not.exist');
 
         // When Yes is selected in the Is Update section, Update Type options display
         cy.findByRole('radio', { name: /Yes, it is an update./i }).click();
-        cy.findAllByText('Update Type').should('exist');
+        cy.findByText('Update Type').should('exist');
 
         // Before selecting an update type validation error shows up in admin check
         cy.turnOnAdminCheck();
