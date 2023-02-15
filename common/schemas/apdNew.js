@@ -46,7 +46,11 @@ const apdNewSchema = Joi.object({
       then: updateStatusSchema
     })
   }),
-  medicaidBusinessAreas: medicaidBusinessAreasSchema
+  medicaidBusinessAreas: Joi.when('apdType', {
+    is: APD_TYPE.MMIS,
+    then: medicaidBusinessAreasSchema,
+    otherwise: Joi.any()
+  })
 });
 
 export default apdNewSchema;
