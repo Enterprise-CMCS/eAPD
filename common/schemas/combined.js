@@ -39,7 +39,7 @@ export const hitechCombinedSchema = Joi.object({
   }),
   status: Joi.any(),
   stateId: Joi.any(),
-  name: Joi.string().messages({
+  name: Joi.string().trim().messages({
     'string.base': 'Provide an APD name',
     'string.empty': 'Provide an APD name'
   }),
@@ -102,7 +102,7 @@ export const mmisCombinedSchema = Joi.object({
   }),
   status: Joi.any(),
   stateId: Joi.any(),
-  name: Joi.string().messages({
+  name: Joi.string().trim().messages({
     'string.base': 'Provide an APD name',
     'string.empty': 'Provide an APD name'
   }),

@@ -30,13 +30,13 @@ export const hitechOverviewSchema = Joi.object({
     'string.base': 'Funding sources are required',
     'string.empty': 'Funding sources are required'
   }),
-  programOverview: Joi.string().messages({
+  programOverview: Joi.string().trim().messages({
     'string.base': 'Provide a brief introduction to the state program.',
     'string.empty': 'Provide a brief introduction to the state program.'
   }),
   narrativeHIT: Joi.when('fundingSources', {
     is: Joi.array().items(Joi.string().valid('HIT').required(), Joi.any()),
-    then: Joi.string().messages({
+    then: Joi.string().trim().messages({
       'string.base': 'Provide a summary of HIT-funded activities.',
       'string.empty': 'Provide a summary of HIT-funded activities.'
     }),
@@ -44,7 +44,7 @@ export const hitechOverviewSchema = Joi.object({
   }),
   narrativeHIE: Joi.when('fundingSources', {
     is: Joi.array().items(Joi.string().valid('HIE').required(), Joi.any()),
-    then: Joi.string().messages({
+    then: Joi.string().trim().messages({
       'string.base': 'Provide a summary of HIE-funded activities.',
       'string.empty': 'Provide a summary of HIE-funded activities.'
     }),
@@ -52,7 +52,7 @@ export const hitechOverviewSchema = Joi.object({
   }),
   narrativeMMIS: Joi.when('fundingSources', {
     is: Joi.array().items(Joi.string().valid('MMIS').required(), Joi.any()),
-    then: Joi.string().messages({
+    then: Joi.string().trim().messages({
       'string.base': 'Provide a summary of MMIS-funded activities.',
       'string.empty': 'Provide a summary of MMIS-funded activities.'
     }),
@@ -78,7 +78,7 @@ export const medicaidBusinessAreasSchema = Joi.object({
   other: Joi.boolean(),
   otherMedicaidBusinessAreas: Joi.when('other', {
     is: true,
-    then: Joi.string().min(1).required().messages({
+    then: Joi.string().trim().required().messages({
       'string.base': 'Provide another Medicaid Business Area(s)',
       'string.empty': 'Provide another Medicaid Business Area(s)',
       'string.required': 'Provide another Medicaid Business Area(s)'
