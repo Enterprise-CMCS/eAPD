@@ -1,54 +1,117 @@
 import React from 'react';
-import { act, renderWithConnection, screen } from 'apd-testing-library';
-import { plain as ApdUpdate } from './ApdUpdate';
+import { renderWithConnection, screen } from 'apd-testing-library';
+import { APD_TYPE } from '@cms-eapd/common';
+import ApdUpdate from './ApdUpdate';
 
-const defaultProps = {
-  updateStatus: {
-    isUpdateAPD: true,
-    annualUpdate: true,
-    asNeededUpdate: false
-  },
-  apdType: 'MMIS',
-  setUpdateStatusField: jest.fn()
+const setup = (props = {}, options = {}) => {
+  return renderWithConnection(<ApdUpdate {...props} />, options);
 };
 
-const setup = async (props = {}) => {
-  let util;
-  // eslint-disable-next-line testing-library/no-unnecessary-act
-  await act(async () => {
-    util = renderWithConnection(<ApdUpdate {...defaultProps} {...props} />);
-  });
-  return {
-    util
+let reduxState;
+beforeEach(() => {
+  reduxState = {
+    initialState: {
+      apd: {
+        data: {
+          apdOverview: {
+            updateStatus: {
+              isUpdateAPD: true,
+              annualUpdate: true,
+              asNeededUpdate: false
+            }
+          },
+          apdType: APD_TYPE.MMIS
+        }
+      }
+    }
   };
-};
+});
 
-describe('APD update component', () => {
+describe('APD Update for any APD type', () => {
+  it('allows both "annualUpdate" and "asNeededUpdate" options to be checked', () => {
+    const { updateStatus } = reduxState.initialState.apd.data.apdOverview;
+    updateStatus.annualUpdate = true;
+    updateStatus.asNeededUpdate = true;
+    setup(null, reduxState);
+
+    expect(screen.getByLabelText('Annual update')).toBeChecked();
+    expect(screen.getByLabelText('As-needed update')).toBeChecked();
+  });
+});
+
+describe('APD Update for MMIS APD type', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
-    jest.setTimeout(30000);
+    reduxState.initialState.apd.data.apdType = APD_TYPE.MMIS;
+  });
+  it('renders "Is this an APD update?" options and "Update Type" options when "isUpdateAPD" is true', () => {
+    const updateStatus = {
+      isUpdateAPD: true,
+      annualUpdate: true,
+      asNeededUpdate: false
+    };
+    reduxState.initialState.apd.data.apdOverview.updateStatus = updateStatus;
+    setup(null, reduxState);
+
+    expect(screen.getByText('Is this an APD update?')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('No, this is for a new project.')
+    ).not.toBeChecked();
+    expect(screen.getByLabelText('Yes, it is an update.')).toBeChecked();
+
+    expect(screen.getByText('Update Type')).toBeInTheDocument();
+    expect(screen.getByLabelText('Annual update')).toBeChecked();
+    expect(screen.getByLabelText('As-needed update')).not.toBeChecked();
   });
 
-  afterAll(() => {
-    jest.resetAllMocks();
+  it('renders "Is this an APD update?" options only when "isUpdateAPD" is false', () => {
+    const updateStatus = {
+      isUpdateAPD: false,
+      annualUpdate: false,
+      asNeededUpdate: false
+    };
+    reduxState.initialState.apd.data.apdOverview.updateStatus = updateStatus;
+    setup(null, reduxState);
+
+    expect(screen.getByText('Is this an APD update?')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('No, this is for a new project.')
+    ).toBeChecked();
+    expect(screen.getByLabelText('Yes, it is an update.')).not.toBeChecked();
+
+    expect(screen.queryByText('Update Type')).not.toBeInTheDocument();
   });
 
-  test('displays options as selected or unselected based on initial data', async () => {
-    const newProps = Object.assign({}, defaultProps);
-    newProps.updateStatus.isUpdateAPD = true;
-    newProps.updateStatus.annualUpdate = true;
-    newProps.updateStatus.asNeededUpdate = false;
-    setup(newProps);
+  it('hides "Update Type" options when "Is this an APD update?" option has not yet been selected', () => {
+    reduxState.initialState.apd.data.apdOverview.updateStatus.isUpdateAPD =
+      null;
+    setup(null, reduxState);
 
-    // const selectedMedicaidBusinessAreaElement = screen.getByLabelText(
-    //   MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING['waiverSupportSystems']
-    // );
-    // const unselectedMedicaidBusinessAreaElement = screen.getByLabelText(
-    //   MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING['claimsProcessing']
-    // );
+    expect(screen.getByText('Is this an APD update?')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('No, this is for a new project.')
+    ).not.toBeChecked();
+    expect(screen.getByLabelText('Yes, it is an update.')).not.toBeChecked();
 
-    // expect(selectedMedicaidBusinessAreaElement).toBeChecked();
-    // expect(unselectedMedicaidBusinessAreaElement).not.toBeChecked();
-    expect(screen.getByText('Is this an APD Update?'));
+    expect(screen.queryByText('Update Type')).not.toBeInTheDocument();
+  });
+});
+
+describe('APD Update for HITECH APD type', () => {
+  beforeEach(() => {
+    reduxState.initialState.apd.data.apdType = APD_TYPE.HITECH;
+  });
+  it('renders "Update Type" options only', () => {
+    const { updateStatus } = reduxState.initialState.apd.data.apdOverview;
+    updateStatus.annualUpdate = true;
+    updateStatus.asNeededUpdate = false;
+    setup(null, reduxState);
+
+    expect(screen.getByText('Update Type')).toBeInTheDocument();
+    expect(screen.getByLabelText('Annual update')).toBeChecked();
+    expect(screen.getByLabelText('As-needed update')).not.toBeChecked();
+
+    expect(
+      screen.queryByText('Is this an APD update?')
+    ).not.toBeInTheDocument();
   });
 });

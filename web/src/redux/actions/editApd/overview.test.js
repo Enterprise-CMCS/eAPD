@@ -5,11 +5,12 @@ import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from './symbols';
 import {
   addYear,
   removeYear,
+  setBusinessAreaField,
   setNarrativeForHIT,
   setNarrativeForHIE,
   setNarrativeForMMIS,
   setProgramOverview,
-  setBusinessAreaField
+  setUpdateStatusField
 } from './overview';
 
 const mockStore = configureStore([thunk]);
