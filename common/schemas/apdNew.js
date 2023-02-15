@@ -31,6 +31,11 @@ const apdNewSchema = Joi.object({
   years: Joi.array().min(1).required().messages({
     'array.min': 'Select at least one year.'
   }),
+  medicaidBusinessAreas: Joi.when('apdType', {
+    is: APD_TYPE.MMIS,
+    then: medicaidBusinessAreasSchema,
+    otherwise: Joi.any()
+  }),
   updateAPD: Joi.when('apdType', {
     is: APD_TYPE.MMIS,
     then: Joi.string().valid('yes', 'no').required().messages({
@@ -45,11 +50,6 @@ const apdNewSchema = Joi.object({
       is: 'yes',
       then: updateStatusSchema
     })
-  }),
-  medicaidBusinessAreas: Joi.when('apdType', {
-    is: APD_TYPE.MMIS,
-    then: medicaidBusinessAreasSchema,
-    otherwise: Joi.any()
   })
 });
 

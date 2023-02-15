@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import TextArea from '../../../components/TextArea';
@@ -11,9 +11,14 @@ export default function ApdNewMMISFields({
   businessAreas,
   setBusinessAreas,
   typeStatus,
+  trigger,
   setTypeStatus,
   setUpdateAPD
 }) {
+  useEffect(() => {
+    setBusinessAreas(businessAreas);
+  });
+
   return (
     <div>
       <Controller
@@ -84,15 +89,7 @@ export default function ApdNewMMISFields({
             ]}
             onChange={({ target: { value } }) => {
               setUpdateAPD(value);
-              setTypeStatus({
-                annualUpdate: false,
-                asNeededUpdate: false,
-                isUpdateAPD: false
-              });
               onChange(value);
-
-              console.log(typeof control);
-              console.log(typeof errors);
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
@@ -249,6 +246,7 @@ ApdNewMMISFields.propTypes = {
   businessAreas: PropTypes.object.isRequired,
   setBusinessAreas: PropTypes.func.isRequired,
   typeStatus: PropTypes.object.isRequired,
+  trigger: PropTypes.func,
   setTypeStatus: PropTypes.func.isRequired,
   setUpdateAPD: PropTypes.func.isRequired
 };

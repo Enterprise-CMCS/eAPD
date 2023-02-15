@@ -94,7 +94,8 @@ const ApdNew = ({ createApd: create }) => {
     setValue,
     getValues,
     formState: { errors, isValid },
-    reset
+    reset,
+    trigger
   } = useForm({
     defaultValues: {
       apdType: '',
@@ -173,6 +174,7 @@ const ApdNew = ({ createApd: create }) => {
             businessAreas={businessAreas}
             setBusinessAreas={setBusinessAreas}
             typeStatus={typeStatus}
+            trigger={trigger}
             setTypeStatus={setTypeStatus}
             setUpdateAPD={setUpdateAPD}
           />
