@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { ChoiceList } from '@cmsgov/design-system';
 import { Controller } from 'react-hook-form';
@@ -6,8 +7,8 @@ import { Controller } from 'react-hook-form';
 export default function ApdNewHITECHFields({
   control,
   errors,
-  typeStatus,
-  setTypeStatus
+  setTypeStatus,
+  typeStatus
 }) {
   return (
     <div>
@@ -55,3 +56,8 @@ export default function ApdNewHITECHFields({
     </div>
   );
 }
+
+ApdNewHITECHFields.propTypes = {
+  typeStatus: PropTypes.object.isRequired,
+  setTypeStatus: PropTypes.func.isRequired
+};
