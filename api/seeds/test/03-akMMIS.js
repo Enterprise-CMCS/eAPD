@@ -350,26 +350,9 @@ export default {
   ],
   assurancesAndCompliances: {
     procurement: [
-      {
-        checked: null,
-        title: '42 CFR Part 495.348',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: 'SMM Section 11267',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '45 CFR 95.613',
-        explanation: ''
-      },
-      {
-        checked: null,
-        title: '45 CFR 75.326',
-        explanation: ''
-      }
+      { title: 'SMM, Part 11', checked: null, explanation: '' },
+      { title: '45 CFR Part 95.615', checked: null, explanation: '' },
+      { title: '45 CFR Part 75.326', checked: null, explanation: '' }
     ],
     recordsAccess: [
       {
