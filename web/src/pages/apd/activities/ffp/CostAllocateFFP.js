@@ -380,7 +380,6 @@ CostAllocateFFP.propTypes = {
   activityId: PropTypes.string.isRequired,
   activityIndex: PropTypes.number.isRequired,
   activityName: PropTypes.string.isRequired,
-  apdType: PropTypes.string,
   costAllocation: PropTypes.object.isRequired,
   costSummary: PropTypes.object.isRequired,
   otherFunding: PropTypes.object.isRequired,
