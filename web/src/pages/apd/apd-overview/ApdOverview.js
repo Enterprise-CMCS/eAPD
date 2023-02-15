@@ -156,6 +156,7 @@ const ApdOverview = ({
         <ChoiceList
           type="radio"
           className="apd_disabled_choice"
+          name="HITECH choice"
           choices={[
             {
               defaultChecked: !enableMmis || apdType === APD_TYPE.HITECH,
@@ -181,6 +182,7 @@ const ApdOverview = ({
           <ChoiceList
             type="radio"
             className="apd_disabled_choice"
+            name="MMIS choice"
             choices={[
               {
                 defaultChecked: apdType === APD_TYPE.MMIS,

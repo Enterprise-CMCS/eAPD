@@ -3,6 +3,7 @@ import { renderWithConnection, act, screen } from 'apd-testing-library';
 import userEvent from '@testing-library/user-event';
 import { mockFlags, resetLDMocks } from 'jest-launchdarkly-mock';
 
+import { APD_TYPE } from '@cms-eapd/common';
 import { plain as ApdOverview } from './ApdOverview';
 
 jest.mock('../../../util/api', () => ({
@@ -29,7 +30,15 @@ const setup = async (props = {}) => {
       initialState: {
         apd: {
           data: {
-            activities: []
+            apdOverview: {
+              updateStatus: {
+                isUpdateAPD: true,
+                annualUpdate: true,
+                asNeededUpdate: false
+              }
+            },
+            activities: [],
+            apdType: APD_TYPE.MMIS
           }
         }
       }

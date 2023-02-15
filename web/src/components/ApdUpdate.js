@@ -142,6 +142,8 @@ const ApdUpdate = ({
       return renderSelectUpdateType();
     case APD_TYPE.MMIS:
       return renderIsUpdate();
+    default:
+      return null;
   }
 };
 
