@@ -162,7 +162,7 @@ describe('<ApdNew />', () => {
 
         expect(disabledBtn).toBeDisabled();
 
-        await user.type(e/i }),
+        await user.type(
           screen.getByRole('textbox', { name: /name/i }),
           'APD Name'
         );
