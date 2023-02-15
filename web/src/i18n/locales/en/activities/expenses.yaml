@@ -14,7 +14,8 @@ instructionMMIS:
     and should not include costs related to private contractors.
   helpText: >-
     Refer to <a
-    href="https://www.medicaid.gov/federal-policy-guidance/downloads/SMD16004.pdf">SMDL
-    16-004</a> for guidance on allowable expenses and FFP rates.
+    href="https://www.medicaid.gov/federal-policy-guidance/downloads/SMD16004.pdf"
+    target="_blank">SMDL 16-004</a> for guidance on allowable expenses and FFP
+    rates.
 noDataNotice: Add other state expense(s) for this activity.
 addButtonText: Add State Expense
