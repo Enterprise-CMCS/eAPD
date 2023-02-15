@@ -33,8 +33,6 @@ const ApdNew = ({ createApd: create }) => {
   const history = useHistory();
   const { enableMmis } = useFlags();
 
-  let value;
-
   // Default values for form
   const businessAreaOptions = {
     waiverSupportSystems: false,
@@ -57,26 +55,37 @@ const ApdNew = ({ createApd: create }) => {
 
   const updateTypes = {
     annualUpdate: false,
-    asNeededUpdate: false,
-    isUpdateAPD: false
+    asNeededUpdate: false
   };
 
-  const apdTypeChoices = [
+  const apdTypeChoicesWithMmis = [
     {
       label: 'HITECH IAPD',
       labelClassName: 'label-extended',
       value: APD_TYPE.HITECH,
       hint: 'Health Information Technology for Economic and Clinical Health Implementation APD',
-      checked: value
+      checked: null
     },
     {
       label: 'MMIS IAPD',
       labelClassName: 'label-extended',
       value: APD_TYPE.MMIS,
       hint: 'Medicaid Management Information System Implementation APD',
-      checked: value
+      checked: null
     }
   ];
+
+  const apdTypeHitechOnly = [
+    {
+      label: 'HITECH IAPD',
+      labelClassName: 'label-extended',
+      value: APD_TYPE.HITECH,
+      hint: 'Health Information Technology for Economic and Clinical Health Implementation APD',
+      checked: true
+    }
+  ];
+
+  let apdTypeChoices = apdTypeChoicesWithMmis;
 
   const yearOptions = defaultAPDYearOptions();
 
@@ -114,16 +123,15 @@ const ApdNew = ({ createApd: create }) => {
 
   useEffect(() => {
     if (!enableMmis) {
-      apdChoices.pop();
-      apdChoices[0].checked = true;
-      setApdChoices(apdChoices);
+      setApdChoices(apdTypeHitechOnly);
       setApdType(APD_TYPE.HITECH);
+      setValue('apdType', APD_TYPE.HITECH);
     }
-  }, [apdChoices, enableMmis]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
+    console.log({ apdType });
+
     setSubmitDisabled(!isValid);
-  }, [isValid]);
+  }, [enableMmis, isValid]);
 
   if (isLoading) {
     return (
@@ -234,15 +242,6 @@ const ApdNew = ({ createApd: create }) => {
                   onChange={e => {
                     setApdType(e.target.value);
                     onChange(e);
-                    // reset({
-                    //   apdType: e.target.value,
-                    //   name: '',
-                    //   years: years,
-                    //   updateStatus: {
-                    //     annualUpdate: false,
-                    //     asNeededUpdate: false
-                    //   }
-                    // });
                   }}
                   onBlur={onBlur}
                   onComponentBlur={onBlur}
