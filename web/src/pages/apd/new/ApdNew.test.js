@@ -271,6 +271,8 @@ describe('<ApdNew />', () => {
           expect(
             screen.getByRole('checkbox', { name: /2024/i })
           ).not.toBeChecked();
+        });
+        await waitFor(() => {
           expect(
             screen.getByRole('checkbox', { name: /2023/i })
           ).not.toBeChecked();
