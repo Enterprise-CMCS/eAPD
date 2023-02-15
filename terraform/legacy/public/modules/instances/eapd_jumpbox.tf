@@ -29,7 +29,7 @@ resource "aws_instance" "eapd_jumpbox_bb" {
         "Patch Group" = "RHEL7"
         "cms-cloud-exempt:open-sg" = "CLDSPT-5877"
         "Patch Window" = "ITOPS-Wave1-Non-Mktplc-Prod-MW"
-        Terraform = "True"        
+        Terraform = "True"
     }   
 }
 
