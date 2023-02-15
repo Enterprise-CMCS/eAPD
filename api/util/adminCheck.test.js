@@ -2285,16 +2285,6 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
           fieldDescription: 'Provide a summary of HIT-funded activities.'
-        },
-        {
-          section: 'APD Overview',
-          link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Provide a summary of HIE-funded activities.'
-        },
-        {
-          section: 'APD Overview',
-          link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Provide a summary of MMIS-funded activities.'
         }
       ]);
     }
