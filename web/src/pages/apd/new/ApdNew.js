@@ -82,7 +82,8 @@ const ApdNew = ({ createApd: create }) => {
 
   // State management
   const [apdChoices, setApdChoices] = useState(apdTypeChoices);
-  const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
+  const [medicaidBusinessAreas, setMedicaidBusinessAreas] =
+    useState(businessAreaOptions);
   const [isLoading, setIsLoading] = useState(false);
   const [updateStatus, setUpdateStatus] = useState(updateTypes);
   const [submitDisabled, setSubmitDisabled] = useState(true);
@@ -185,8 +186,8 @@ const ApdNew = ({ createApd: create }) => {
       case APD_TYPE.MMIS:
         return (
           <ApdNewMMISFields
-            businessAreas={businessAreas}
-            setBusinessAreas={setBusinessAreas}
+            medicaidBusinessAreas={medicaidBusinessAreas}
+            setMedicaidBusinessAreas={setMedicaidBusinessAreas}
             updateStatus={updateStatus}
             setUpdateStatus={setUpdateStatus}
             setUpdateAPD={setUpdateAPD}
@@ -211,7 +212,7 @@ const ApdNew = ({ createApd: create }) => {
     };
 
     if (apdType === APD_TYPE.MMIS) {
-      apdValues.apdOverview.medicaidBusinessAreas = businessAreas;
+      apdValues.apdOverview.medicaidBusinessAreas = medicaidBusinessAreas;
     }
 
     setIsLoading(true);

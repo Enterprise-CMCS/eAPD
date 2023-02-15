@@ -6,8 +6,8 @@ import { ChoiceList } from '@cmsgov/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const ApdNewMMISFields = ({
-  businessAreas,
-  setBusinessAreas,
+  medicaidBusinessAreas,
+  setMedicaidBusinessAreas,
   updateStatus,
   setUpdateStatus,
   setUpdateAPD
@@ -124,83 +124,83 @@ const ApdNewMMISFields = ({
               {
                 label: '1115 or Waiver Support Systems',
                 value: 'waiverSupportSystems',
-                checked: businessAreas.waiverSupportSystems
+                checked: medicaidBusinessAreas.waiverSupportSystems
               },
               {
                 label: 'Asset Verification System',
                 value: 'assetVerificationSystem',
-                checked: businessAreas.assetVerificationSystem
+                checked: medicaidBusinessAreas.assetVerificationSystem
               },
               {
                 label: 'Claims Processing',
                 value: 'claimsProcessing',
-                checked: businessAreas.claimsProcessing
+                checked: medicaidBusinessAreas.claimsProcessing
               },
               {
                 label: 'Decision Support System & Data Warehouse',
                 value: 'decisionSupportSystemDW',
-                checked: businessAreas.decisionSupportSystemDW
+                checked: medicaidBusinessAreas.decisionSupportSystemDW
               },
               {
                 label: 'Electronic Visit Verification (EVV)',
                 value: 'electronicVisitVerification',
-                checked: businessAreas.electronicVisitVerification
+                checked: medicaidBusinessAreas.electronicVisitVerification
               },
               {
                 label:
                   'Encounter Processing System (EPS) & Managed Care System',
                 value: 'encounterProcessingSystemMCS',
-                checked: businessAreas.encounterProcessingSystemMCS
+                checked: medicaidBusinessAreas.encounterProcessingSystemMCS
               },
               {
                 label: 'Financial Management',
                 value: 'financialManagement',
-                checked: businessAreas.financialManagement
+                checked: medicaidBusinessAreas.financialManagement
               },
               {
                 label: 'Health Information Exchange (HIE)',
                 value: 'healthInformationExchange',
-                checked: businessAreas.healthInformationExchange
+                checked: medicaidBusinessAreas.healthInformationExchange
               },
               {
                 label: 'Long Term Services & Supports (LTSS)',
                 value: 'longTermServicesSupports',
-                checked: businessAreas.longTermServicesSupports
+                checked: medicaidBusinessAreas.longTermServicesSupports
               },
               {
                 label: 'Member Management',
                 value: 'memberManagement',
-                checked: businessAreas.memberManagement
+                checked: medicaidBusinessAreas.memberManagement
               },
               {
                 label:
                   'Pharmacy Benefit Management (PBM) & Point of Sale (POS)',
                 value: 'pharmacyBenefitManagementPOS',
-                checked: businessAreas.pharmacyBenefitManagementPOS
+                checked: medicaidBusinessAreas.pharmacyBenefitManagementPOS
               },
               {
                 label: 'Program Integrity',
                 value: 'programIntegrity',
-                checked: businessAreas.programIntegrity
+                checked: medicaidBusinessAreas.programIntegrity
               },
               {
                 label: 'Provider Management',
                 value: 'providerManagement',
-                checked: businessAreas.providerManagement
+                checked: medicaidBusinessAreas.providerManagement
               },
               {
                 label: 'Third Party Liability (TPL)',
                 value: 'thirdPartyLiability',
-                checked: businessAreas.thirdPartyLiability
+                checked: medicaidBusinessAreas.thirdPartyLiability
               },
               {
                 label: 'Other',
                 value: 'other',
-                checked: businessAreas.other,
+                checked: medicaidBusinessAreas.other,
                 checkedChildren: (
                   <div className="ds-c-choice__checkedChild">
                     <Controller
-                      name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
+                      name="medicaidmedicaidBusinessAreas.otherMedicaidmedicaidBusinessAreas"
                       control={control}
                       render={({ field: { onBlur, ...props } }) => (
                         <TextArea
@@ -211,8 +211,8 @@ const ApdNewMMISFields = ({
                           onBlur={onBlur}
                           onComponentBlur={onBlur}
                           errorMessage={
-                            errors?.medicaidBusinessAreas
-                              ?.otherMedicaidBusinessAreas?.message
+                            errors?.medicaidmedicaidBusinessAreas
+                              ?.otherMedicaidmedicaidBusinessAreas?.message
                           }
                           errorPlacement="bottom"
                         />
@@ -223,9 +223,9 @@ const ApdNewMMISFields = ({
               }
             ]}
             onChange={({ target: { value, checked } }) => {
-              businessAreas[value] = checked;
-              setBusinessAreas(businessAreas);
-              onChange(businessAreas);
+              medicaidBusinessAreas[value] = checked;
+              setMedicaidBusinessAreas(medicaidBusinessAreas);
+              onChange(medicaidBusinessAreas);
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
@@ -239,8 +239,8 @@ const ApdNewMMISFields = ({
 };
 
 ApdNewMMISFields.propTypes = {
-  businessAreas: PropTypes.object.isRequired,
-  setBusinessAreas: PropTypes.func.isRequired,
+  medicaidBusinessAreas: PropTypes.object.isRequired,
+  setMedicaidBusinessAreas: PropTypes.func.isRequired,
   updateStatus: PropTypes.object.isRequired,
   setUpdateStatus: PropTypes.func.isRequired,
   setUpdateAPD: PropTypes.func.isRequired
