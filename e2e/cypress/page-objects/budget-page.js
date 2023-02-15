@@ -1,6 +1,5 @@
 /* eslint-disable radix */
 import { addCommas } from './helper.js';
-import { FUNDING_CATEGORY_LABEL_MAPPING } from '@cms-eapd/common';
 
 const { _ } = Cypress;
 
@@ -60,13 +59,13 @@ class BudgetPage {
 
   checkMatchRateFunctionality = () => {
     cy.findByRole('radio', {
-      name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
+      name: '90/10 Design, Development, and Installation (DDI)'
     }).should('exist');
     cy.findByRole('radio', { name: '75/25' }).should('exist');
     cy.findByRole('radio', { name: '50/50' }).should('exist');
 
     cy.findByRole('radio', {
-      name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
+      name: '90/10 Design, Development, and Installation (DDI)'
     }).click();
     cy.waitForSave();
     this.checkCostSplitTable({
@@ -79,15 +78,15 @@ class BudgetPage {
 
     cy.findByRole('radio', { name: '75/25' }).click();
 
-    cy.findByRole('radio', { name: FUNDING_CATEGORY_LABEL_MAPPING.ddi }).should(
-      'exist'
-    );
     cy.findByRole('radio', {
-      name: FUNDING_CATEGORY_LABEL_MAPPING.mando
+      name: 'Design, Development, and Installation (DDI)'
+    }).should('exist');
+    cy.findByRole('radio', {
+      name: 'Maintenance & Operations (M&O)'
     }).should('exist');
 
     cy.findByRole('radio', {
-      name: FUNDING_CATEGORY_LABEL_MAPPING.ddi
+      name: 'Design, Development, and Installation (DDI)'
     }).click();
     cy.waitForSave();
     this.checkCostSplitTable({
@@ -100,15 +99,15 @@ class BudgetPage {
 
     cy.findByRole('radio', { name: '50/50' }).click();
 
-    cy.findByRole('radio', { name: FUNDING_CATEGORY_LABEL_MAPPING.ddi }).should(
-      'exist'
-    );
     cy.findByRole('radio', {
-      name: FUNDING_CATEGORY_LABEL_MAPPING.mando
+      name: 'Design, Development, and Installation (DDI)'
+    }).should('exist');
+    cy.findByRole('radio', {
+      name: 'Maintenance & Operations (M&O)'
     }).should('exist');
 
     cy.findByRole('radio', {
-      name: FUNDING_CATEGORY_LABEL_MAPPING.mando
+      name: 'Maintenance & Operations (M&O)'
     }).click();
     cy.waitForSave();
     this.checkCostSplitTable({
@@ -206,12 +205,11 @@ class BudgetPage {
   checkMmisFFYtotals = ({
     years,
     activityIndex,
-    activityId,
     activityName,
     state,
     fundingSplit,
     totalOtherFunding,
-    budget
+    totals
   }) => {
     cy.contains(
       `Activity ${activityIndex + 1} Budget for FFY ${years[years.length - 1]}`
@@ -223,29 +221,22 @@ class BudgetPage {
       .next()
       .within(() => {
         cy.contains(
-          `${activityName} activity is $${addCommas(
-            budget.activities[activityId].costsByFFY.total.total
+          `The total cost of the ${activityName} activity is $${addCommas(
+            totals.total
           )}`
-        ).should('exist');
-        cy.contains(`other funding of $${addCommas(totalOtherFunding)}`).should(
-          'exist'
         );
         cy.contains(
-          `Medicaid cost is $${addCommas(
-            budget.activities[activityId].costsByFFY.total.medicaid
-          )}`
-        ).should('exist');
-        cy.contains(fundingSplit).should('exist');
+          `Because of other funding of $${addCommas(totalOtherFunding)}`
+        );
         cy.contains(
-          `federal share of $${addCommas(
-            budget.activities[activityId].costsByFFY.total.federal
-          )}`
-        ).should('exist');
+          `the total computable Medicaid cost is $${addCommas(
+            totals.medicaid
+          )}.`
+        );
+        cy.contains(`This activity is using a ${fundingSplit} funding split,`);
         cy.contains(
-          `${state} share of $${addCommas(
-            budget.activities[activityId].costsByFFY.total.state
-          )}`
-        ).should('exist');
+          `resulting in a federal share of $${totals.federal} and a ${state} share of $${totals.state}.`
+        );
 
         years.forEach(year => {
           cy.contains(year).should('exist');

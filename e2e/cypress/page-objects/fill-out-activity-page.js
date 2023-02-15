@@ -1,6 +1,5 @@
 import PopulatePage from './populate-page.js';
 import StaffExpensesPage from './activities-state-staff-expenses-page.js';
-import { FUNDING_CATEGORY_LABEL_MAPPING } from '@cms-eapd/common';
 
 const { _ } = Cypress;
 
@@ -306,8 +305,7 @@ class FillOutActivityPage {
   checkMmisBudgetAndFFPTables = ({
     years,
     costAllocation,
-    activityTotal,
-    costByFFY
+    expectedTableData
   }) => {
     _.forEach(years, (year, ffyIndex) => {
       const { ffp } = costAllocation[year];
@@ -319,7 +317,7 @@ class FillOutActivityPage {
           .parent()
           .within(() => {
             cy.findByRole('radio', {
-              name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
+              name: '90/10 Design, Development, and Installation (DDI)'
             }).click();
           });
       } else {
@@ -330,9 +328,11 @@ class FillOutActivityPage {
             cy.findByRole('radio', {
               name: `${ffp.federal}/${ffp.state}`
             }).click();
-            cy.findByRole('radio', {
-              name: FUNDING_CATEGORY_LABEL_MAPPING[ffp.fundingCategory]
-            });
+            const name =
+              ffp.fundingCategory === 'DDI'
+                ? 'Design, Development, and Installation (DDI)'
+                : 'Maintenance & Operations (M&O)';
+            cy.findByRole('radio', { name }).click();
           });
       }
       cy.waitForSave();
@@ -343,25 +343,9 @@ class FillOutActivityPage {
           cy.get(table)
             .getActivityTable()
             .then(tableData => {
-              expect(tableData).to.deep.include([
-                [`$${activityTotal.combined[year].total}`],
-                [
-                  'Federal Share',
-                  `$${activityTotal.data.combined[year]}`,
-                  '×',
-                  `${ffp.federal}%`,
-                  '=',
-                  `$${costByFFY[year].federal}`
-                ],
-                [
-                  'State Share',
-                  `$${activityTotal.data.combined[year]}`,
-                  '×',
-                  `${ffp.state}%`,
-                  '=',
-                  `$${costByFFY[year].state}`
-                ]
-              ]);
+              _.forEach(expectedTableData[ffyIndex], data => {
+                expect(tableData).to.deep.include(data);
+              });
             });
         });
     });

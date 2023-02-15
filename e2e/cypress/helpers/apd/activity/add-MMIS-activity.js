@@ -20,64 +20,16 @@ export const addMMISActivity = function () {
 
   beforeEach(function () {
     cy.fixture('mmis-basics.json').as('mmisBasic');
+    cy.fixture('mmis-basics-budget.json').as('budget');
+    cy.fixture('mmis-basics-table-data.json').as('tableData');
   });
 
   describe('Add a MMIS Activity', function () {
     it('Adds an MMIS Activity and checks the export view', function () {
       const years = this.years;
       const mmisBasic = this.mmisBasic;
-      const budget = {
-        activityTotals: [
-          {
-            id: 'abc123',
-            data: {
-              combined: {
-                2023: 0,
-                2024: 0,
-                total: 0
-              },
-              otherFunding: {
-                2023: {
-                  contractors: 0,
-                  expenses: 0,
-                  statePersonnel: 0,
-                  total: 0
-                },
-                2024: {
-                  contractors: 0,
-                  expenses: 0,
-                  statePersonnel: 0,
-                  total: 0
-                }
-              }
-            }
-          }
-        ],
-        activities: {
-          abc123: {
-            costsByFFY: {
-              2023: {
-                federal: 0,
-                medicaid: 0,
-                state: 0,
-                total: 0
-              },
-              2024: {
-                federal: 0,
-                medicaid: 0,
-                state: 0,
-                total: 0
-              },
-              total: {
-                federal: 0,
-                medicaid: 0,
-                state: 0,
-                total: 0
-              }
-            }
-          }
-        }
-      };
+      const budget = this.budget;
+      const tableData = this.tableData;
 
       cy.goToActivityDashboard();
 
@@ -86,9 +38,10 @@ export const addMMISActivity = function () {
       cy.findByRole('heading', { name: /Activities/i, level: 2 }).should(
         'exist'
       );
+
       cy.contains('Add Activity').click();
       cy.contains('Activity 1: Untitled').should('exist');
-      cy.get('#activities').findAllByText('Edit').eq(2).click();
+      cy.get('#activities').findAllByText('Edit').eq(0).click();
 
       // Fill out Activity Overview
       cy.findByLabelText('Activity name').type(mmisBasic.activities[0].name);
@@ -99,10 +52,9 @@ export const addMMISActivity = function () {
       cy.goToBudgetAndFFP(0);
 
       fillOutActivityPage.checkMmisBudgetAndFFPTables({
+        years,
         costAllocation: mmisBasic.activities[0].costAllocation,
-        activityTotal: budget.activityTotals[0],
-        costsByFFY: budget.activities[budget.activityTotals[0].id].costsByFFY,
-        years
+        expectedTableData: tableData.activityFedSplitTable
       });
 
       budgetPage.checkMmisFFYtotals({
@@ -113,7 +65,8 @@ export const addMMISActivity = function () {
         state: 'Alaska',
         fundingSplit: `90/10 DDI (FFY ${years[0]}) and 50/50 M&O (FFY ${years[1]})`,
         totalOtherFunding: 0,
-        budget
+        totals:
+          budget.activities[mmisBasic.activities[0].activityId].costsByFFY.total
       });
 
       cy.waitForSave();

@@ -1,6 +1,4 @@
-import { FUNDING_CATEGORY_LABEL_MAPPING } from '@cms-eapd/common';
 import BudgetPage from '../../page-objects/budget-page.js';
-// import { FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
 
 /// <reference types="cypress" />
 
@@ -359,14 +357,14 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         .clear()
         .type('50');
       cy.findAllByRole('radio', {
-        name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
+        name: '90/10 Design, Development, and Installation (DDI)'
       }).check({ force: true });
 
       cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
       cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
       cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
       cy.findAllByRole('radio', {
-        name: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`
+        name: '90/10 Design, Development, and Installation (DDI)'
       })
         .eq(1)
         .check({ force: true });

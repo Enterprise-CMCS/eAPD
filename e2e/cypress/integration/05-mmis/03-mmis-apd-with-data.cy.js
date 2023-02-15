@@ -53,6 +53,7 @@ describe(
     });
 
     after(function () {
+      cy.useStateStaff();
       cy.visit('/');
       cy.deleteAPD(this.apdId);
     });

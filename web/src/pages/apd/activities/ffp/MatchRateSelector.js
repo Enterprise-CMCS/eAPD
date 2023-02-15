@@ -3,7 +3,10 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { ChoiceList } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import Instruction from '../../../../components/Instruction';
-import { FUNDING_CATEGORY_TYPE } from '@cms-eapd/common';
+import {
+  FUNDING_CATEGORY_TYPE,
+  FUNDING_CATEGORY_LABEL_MAPPING
+} from '@cms-eapd/common';
 
 const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
   const {
@@ -36,12 +39,12 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             label="Select funding category"
             choices={[
               {
-                label: 'Design, Development, and Installation (DDI)',
+                label: FUNDING_CATEGORY_LABEL_MAPPING.ddi,
                 value: FUNDING_CATEGORY_TYPE.ddi,
                 checked: fundingCategory === FUNDING_CATEGORY_TYPE.ddi
               },
               {
-                label: 'Maintenance & Operations (M&O)',
+                label: FUNDING_CATEGORY_LABEL_MAPPING.mando,
                 value: FUNDING_CATEGORY_TYPE.mando,
                 checked: fundingCategory === FUNDING_CATEGORY_TYPE.mando
               }
@@ -82,7 +85,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             labelClassName="sr-only"
             choices={[
               {
-                label: '90/10 Design, Development, and Installation (DDI)',
+                label: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`,
                 value: '90-10',
                 checked: fedStateSplit === '90-10'
               },
