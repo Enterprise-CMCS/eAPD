@@ -185,12 +185,9 @@ const ApdNew = ({ createApd: create }) => {
       case APD_TYPE.MMIS:
         return (
           <ApdNewMMISFields
-            control={control}
-            errors={errors}
             businessAreas={businessAreas}
             setBusinessAreas={setBusinessAreas}
             updateStatus={updateStatus}
-            trigger={trigger}
             setUpdateStatus={setUpdateStatus}
             setUpdateAPD={setUpdateAPD}
           />

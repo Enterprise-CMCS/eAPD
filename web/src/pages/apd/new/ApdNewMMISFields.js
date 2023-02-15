@@ -1,24 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import TextArea from '../../../components/TextArea';
 import { ChoiceList } from '@cmsgov/design-system';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
-export default function ApdNewMMISFields({
-  control,
-  errors,
+const ApdNewMMISFields = ({
   businessAreas,
   setBusinessAreas,
-  typeStatus,
-  // trigger,
-  setTypeStatus,
+  updateStatus,
+  setUpdateStatus,
   setUpdateAPD
-}) {
-  useEffect(() => {
-    // trigger();
-    // trigger('medicaidBusinessAreas');
-  });
+}) => {
+  const {
+    control,
+    formState: { errors }
+  } = useFormContext();
 
   return (
     <div>
@@ -56,21 +53,21 @@ export default function ApdNewMMISFields({
                             {
                               label: 'Annual update',
                               value: 'annualUpdate',
-                              checked: typeStatus.annualUpdate
+                              checked: updateStatus.annualUpdate
                             },
                             {
                               label: 'As-needed update',
                               value: 'asNeededUpdate',
-                              checked: typeStatus.asNeededUpdate
+                              checked: updateStatus.asNeededUpdate
                             }
                           ]}
                           labelClassName="ds-u-margin-bottom--1"
                           type="checkbox"
                           onChange={({ target: { value, checked } }) => {
-                            typeStatus[value] = checked;
-                            typeStatus.isUpdateAPD = true;
-                            setTypeStatus(typeStatus);
-                            onChange(typeStatus);
+                            updateStatus[value] = checked;
+                            updateStatus.isUpdateAPD = true;
+                            setUpdateStatus(updateStatus);
+                            onChange(updateStatus);
                           }}
                           onBlur={onBlur}
                           onComponentBlur={onBlur}
@@ -239,15 +236,14 @@ export default function ApdNewMMISFields({
       />
     </div>
   );
-}
+};
 
 ApdNewMMISFields.propTypes = {
-  control: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
   businessAreas: PropTypes.object.isRequired,
   setBusinessAreas: PropTypes.func.isRequired,
-  typeStatus: PropTypes.object.isRequired,
-  trigger: PropTypes.func,
-  setTypeStatus: PropTypes.func.isRequired,
+  updateStatus: PropTypes.object.isRequired,
+  setUpdateStatus: PropTypes.func.isRequired,
   setUpdateAPD: PropTypes.func.isRequired
 };
+
+export default ApdNewMMISFields;
