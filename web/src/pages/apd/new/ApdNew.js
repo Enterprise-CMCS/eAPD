@@ -1,6 +1,6 @@
 import PropType from 'prop-types';
 import React, { Fragment, useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -84,32 +84,50 @@ const ApdNew = ({ createApd: create }) => {
   const [apdChoices, setApdChoices] = useState(apdTypeChoices);
   const [businessAreas, setBusinessAreas] = useState(businessAreaOptions);
   const [isLoading, setIsLoading] = useState(false);
-  const [typeStatus, setTypeStatus] = useState(updateTypes);
+  const [updateStatus, setUpdateStatus] = useState(updateTypes);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [updateAPD, setUpdateAPD] = useState('');
   const [years, setYears] = useState(defaultAPDYears());
 
-  const {
-    control,
-    setValue,
-    getValues,
-    formState: { errors, isValid },
-    reset,
-    trigger
-  } = useForm({
+  // const {
+  //   control,
+  //   setValue,
+  //   getValues,
+  //   formState: { errors, isValid },
+  //   reset,
+  //   trigger
+  // } = useForm({
+  //   defaultValues: {
+  //     apdType: '',
+  //     name: '',
+  //     years,
+  //     updateAPD,
+  //     updateStatus: updateStatus,
+  //     medicaidBusinessAreas: businessAreas
+  //   },
+  //   mode: 'all',
+  //   reValidateMode: 'all',
+  //   resolver: joiResolver(schema)
+  // });
+
+  const methods = useForm({
     defaultValues: {
       apdType: '',
       name: '',
-      yearOptions: yearOptions,
-      years: years,
-      updateAPD: updateAPD,
-      updateStatus: { typeStatus },
-      medicaidBusinessAreas: businessAreas
+      years
     },
     mode: 'all',
     reValidateMode: 'all',
     resolver: joiResolver(schema)
   });
+
+  const {
+    control,
+    formState: { errors, isValid },
+    getValues,
+    reset,
+    setValue
+  } = methods;
 
   const { apdType } = getValues();
 
@@ -160,10 +178,8 @@ const ApdNew = ({ createApd: create }) => {
       case APD_TYPE.HITECH:
         return (
           <ApdNewHITECHFields
-            control={control}
-            errors={errors}
-            typeStatus={typeStatus}
-            setTypeStatus={setTypeStatus}
+            updateStatus={updateStatus}
+            setUpdateStatus={setUpdateStatus}
           />
         );
       case APD_TYPE.MMIS:
@@ -173,9 +189,9 @@ const ApdNew = ({ createApd: create }) => {
             errors={errors}
             businessAreas={businessAreas}
             setBusinessAreas={setBusinessAreas}
-            typeStatus={typeStatus}
+            updateStatus={updateStatus}
             trigger={trigger}
-            setTypeStatus={setTypeStatus}
+            setUpdateStatus={setUpdateStatus}
             setUpdateAPD={setUpdateAPD}
           />
         );
@@ -209,119 +225,122 @@ const ApdNew = ({ createApd: create }) => {
     <Fragment>
       <div className="site-body ds-l-container">
         <main id="start-main-content">
-          <h1 className="ds-h2 ds-u-padding-top--3">
-            Create a New Advanced Planning Document (APD)
-          </h1>
-          <div className="ds-u-padding-bottom--1 ds-u-border-bottom--2">
-            Complete all the fields below to create your APD.
-          </div>
-          <Controller
-            name="apdType"
-            control={control}
-            render={({ field: { onBlur, onChange, ...props } }) => (
-              <ChoiceList
-                {...props}
-                label="What type of APD are you creating?"
-                labelClassName="ds-h3 label-header label-extended"
-                hint={
-                  <Alert
-                    variation="warn"
-                    className="ds-u-margin-y--3 ds-u-margin-right--7"
-                  >
-                    <p className="ds-c-alert__text">
-                      This selection cannot be changed after creating a new APD.
-                    </p>
-                  </Alert>
-                }
-                type="radio"
-                choices={apdChoices}
-                onChange={e => {
-                  // setApdType(e.target.value);
-                  onChange(e);
-                  reset({
-                    apdType: e.target.value,
-                    name: '',
-                    years: years,
-                    updateStatus: {
-                      annualUpdate: false,
-                      asNeededUpdate: false
-                    }
-                  });
-                }}
-                onBlur={onBlur}
-                onComponentBlur={onBlur}
-                errorMessage={errors?.apdType?.message}
-                errorPlacement="bottom"
-              />
-            )}
-          />
-          {apdValid(apdType) && (
-            <div>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field: { ...props } }) => (
-                  <TextField
-                    {...props}
-                    label="APD Name"
-                    className="remove-clearfix"
-                    errorMessage={errors?.name?.message}
-                    errorPlacement="bottom"
-                  />
-                )}
-              />
-              <Controller
-                name="years"
-                control={control}
-                render={({ field: { onBlur, ...props } }) => (
-                  <ChoiceList
-                    {...props}
-                    label="Federal Fiscal Year (FFY)"
-                    choices={yearChoices}
-                    labelClassName="ds-u-margin-bottom--1"
-                    hint="Choose the federal fiscal year(s) this APD covers."
-                    type="checkbox"
-                    onChange={e => {
-                      updateArray(years, 'years', setYears, e.target.value);
-                    }}
-                    onBlur={onBlur}
-                    onComponentBlur={onBlur}
-                    errorMessage={errors?.years?.message}
-                    errorPlacement="bottom"
-                  />
-                )}
-              />
+          <FormProvider {...methods}>
+            <h1 className="ds-h2 ds-u-padding-top--3">
+              Create a New Advanced Planning Document (APD)
+            </h1>
+            <div className="ds-u-padding-bottom--1 ds-u-border-bottom--2">
+              Complete all the fields below to create your APD.
             </div>
-          )}
+            <Controller
+              name="apdType"
+              control={control}
+              render={({ field: { onBlur, onChange, ...props } }) => (
+                <ChoiceList
+                  {...props}
+                  label="What type of APD are you creating?"
+                  labelClassName="ds-h3 label-header label-extended"
+                  hint={
+                    <Alert
+                      variation="warn"
+                      className="ds-u-margin-y--3 ds-u-margin-right--7"
+                    >
+                      <p className="ds-c-alert__text">
+                        This selection cannot be changed after creating a new
+                        APD.
+                      </p>
+                    </Alert>
+                  }
+                  type="radio"
+                  choices={apdChoices}
+                  onChange={e => {
+                    // setApdType(e.target.value);
+                    onChange(e);
+                    reset({
+                      apdType: e.target.value,
+                      name: '',
+                      years: years,
+                      updateStatus: {
+                        annualUpdate: false,
+                        asNeededUpdate: false
+                      }
+                    });
+                  }}
+                  onBlur={onBlur}
+                  onComponentBlur={onBlur}
+                  errorMessage={errors?.apdType?.message}
+                  errorPlacement="bottom"
+                />
+              )}
+            />
+            {apdValid(apdType) && (
+              <div>
+                <Controller
+                  name="name"
+                  control={control}
+                  render={({ field: { ...props } }) => (
+                    <TextField
+                      {...props}
+                      label="APD Name"
+                      className="remove-clearfix"
+                      errorMessage={errors?.name?.message}
+                      errorPlacement="bottom"
+                    />
+                  )}
+                />
+                <Controller
+                  name="years"
+                  control={control}
+                  render={({ field: { onBlur, ...props } }) => (
+                    <ChoiceList
+                      {...props}
+                      label="Federal Fiscal Year (FFY)"
+                      choices={yearChoices}
+                      labelClassName="ds-u-margin-bottom--1"
+                      hint="Choose the federal fiscal year(s) this APD covers."
+                      type="checkbox"
+                      onChange={e => {
+                        updateArray(years, 'years', setYears, e.target.value);
+                      }}
+                      onBlur={onBlur}
+                      onComponentBlur={onBlur}
+                      errorMessage={errors?.years?.message}
+                      errorPlacement="bottom"
+                    />
+                  )}
+                />
+              </div>
+            )}
 
-          {/* Show relevant fields based on APD type selected */}
-          {fieldComponents(apdType)}
+            {/* Show relevant fields based on APD type selected */}
+            {fieldComponents(apdType)}
 
-          <div className="ds-u-padding-y--3">
-            <Button onClick={history.goBack}>Cancel</Button>
+            <div className="ds-u-padding-y--3">
+              <Button onClick={history.goBack}>Cancel</Button>
 
-            {submitDisabled === true ? (
-              <Tooltip
-                className="ds-c-tooltip__trigger-link ds-u-float--right"
-                component="a"
-                onClose={function noRefCheck() {}}
-                onOpen={function noRefCheck() {}}
-                title="All fields are required to create an APD."
+              {submitDisabled === true ? (
+                <Tooltip
+                  className="ds-c-tooltip__trigger-link ds-u-float--right"
+                  component="a"
+                  onClose={function noRefCheck() {}}
+                  onOpen={function noRefCheck() {}}
+                  title="All fields are required to create an APD."
+                >
+                  <TooltipIcon />
+                </Tooltip>
+              ) : null}
+
+              <Button
+                variation="primary"
+                disabled={submitDisabled}
+                className="ds-u-float--right"
+                data-cy="create_apd_btn"
+                onClick={createNew}
               >
-                <TooltipIcon />
-              </Tooltip>
-            ) : null}
-
-            <Button
-              variation="primary"
-              disabled={submitDisabled}
-              className="ds-u-float--right"
-              data-cy="create_apd_btn"
-              onClick={createNew}
-            >
-              Create an APD
-            </Button>
-          </div>
+                Create an APD
+              </Button>
+            </div>
+          </FormProvider>
         </main>
       </div>
     </Fragment>

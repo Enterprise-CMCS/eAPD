@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ChoiceList } from '@cmsgov/design-system';
-import { Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
-export default function ApdNewHITECHFields({
-  control,
-  errors,
-  setTypeStatus,
-  typeStatus
-}) {
+export default function ApdNewHITECHFields({ setUpdateStatus, updateStatus }) {
+  const {
+    control,
+    formState: { errors }
+  } = useFormContext();
+
   return (
     <div>
       <Controller
@@ -30,21 +30,21 @@ export default function ApdNewHITECHFields({
               {
                 label: 'Annual update',
                 value: 'annualUpdate',
-                checked: typeStatus.annualUpdate
+                checked: updateStatus.annualUpdate
               },
               {
                 label: 'As-needed update',
                 value: 'asNeededUpdate',
-                checked: typeStatus.asNeededUpdate
+                checked: updateStatus.asNeededUpdate
               }
             ]}
             labelClassName="ds-u-margin-bottom--1"
             type="checkbox"
             onChange={({ target: { value, checked } }) => {
-              typeStatus[value] = checked;
-              typeStatus.isUpdateAPD = true;
-              setTypeStatus(typeStatus);
-              onChange(typeStatus);
+              updateStatus[value] = checked;
+              updateStatus.isUpdateAPD = true;
+              setUpdateStatus(updateStatus);
+              onChange(updateStatus);
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
@@ -58,8 +58,6 @@ export default function ApdNewHITECHFields({
 }
 
 ApdNewHITECHFields.propTypes = {
-  control: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
   typeStatus: PropTypes.object.isRequired,
-  setTypeStatus: PropTypes.func.isRequired
+  setUpdateStatus: PropTypes.func.isRequired
 };

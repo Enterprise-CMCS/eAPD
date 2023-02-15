@@ -11,13 +11,13 @@ export default function ApdNewMMISFields({
   businessAreas,
   setBusinessAreas,
   typeStatus,
-  trigger,
+  // trigger,
   setTypeStatus,
   setUpdateAPD
 }) {
   useEffect(() => {
     // trigger();
-    trigger('medicaidBusinessAreas');
+    // trigger('medicaidBusinessAreas');
   });
 
   return (
