@@ -75,13 +75,13 @@ Array [
     class="ds-c-choice"
     id="checkbox_undefined_218"
     type="checkbox"
-    value="waiverSupport"
+    value="waiverSupportSystems"
   />,
   <input
     class="ds-c-choice"
     id="checkbox_undefined_219"
     type="checkbox"
-    value="assetVerification"
+    value="assetVerificationSystem"
   />,
   <input
     class="ds-c-choice"
@@ -93,19 +93,19 @@ Array [
     class="ds-c-choice"
     id="checkbox_undefined_221"
     type="checkbox"
-    value="decisionSupport"
+    value="decisionSupportSystemDW"
   />,
   <input
     class="ds-c-choice"
     id="checkbox_undefined_222"
     type="checkbox"
-    value="electronicVisitVerify"
+    value="electronicVisitVerification"
   />,
   <input
     class="ds-c-choice"
     id="checkbox_undefined_223"
     type="checkbox"
-    value="encounterProcessingSystem"
+    value="encounterProcessingSystemMCS"
   />,
   <input
     class="ds-c-choice"
@@ -117,13 +117,13 @@ Array [
     class="ds-c-choice"
     id="checkbox_undefined_225"
     type="checkbox"
-    value="healthInfoExchange"
+    value="healthInformationExchange"
   />,
   <input
     class="ds-c-choice"
     id="checkbox_undefined_226"
     type="checkbox"
-    value="longTermServiceSupport"
+    value="longTermServicesSupports"
   />,
   <input
     class="ds-c-choice"
@@ -135,7 +135,7 @@ Array [
     class="ds-c-choice"
     id="checkbox_undefined_228"
     type="checkbox"
-    value="pharmacyBenefitManagement"
+    value="pharmacyBenefitManagementPOS"
   />,
   <input
     class="ds-c-choice"
