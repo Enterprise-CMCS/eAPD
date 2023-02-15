@@ -5,14 +5,25 @@ import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from './symbols';
 import {
   addYear,
   removeYear,
+  setBusinessAreaField,
   setNarrativeForHIT,
   setNarrativeForHIE,
   setNarrativeForMMIS,
   setProgramOverview,
-  setBusinessAreaField
+  setUpdateStatusField
 } from './overview';
 
 const mockStore = configureStore([thunk]);
+
+describe('APD edit actions for APD update status', () => {
+  it('dispatches an action for changing a field', () => {
+    expect(setUpdateStatusField('isUpdateAPD', false)).toEqual({
+      type: EDIT_APD,
+      path: '/apdOverview/updateStatus/isUpdateAPD',
+      value: false
+    });
+  });
+});
 
 describe('APD edit actions for adding or removing APD years', () => {
   it('dispatchs an action for adding an APD year', () => {

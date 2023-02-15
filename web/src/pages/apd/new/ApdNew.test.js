@@ -80,7 +80,7 @@ describe('<ApdNew />', () => {
       expect(disabledBtn).toBeDisabled();
 
       await user.type(
-        screen.getByRole('textbox', { name: /APD Name/i }),
+        screen.getByRole('textbox', { name: /name/i }),
         'APD Name'
       );
 
@@ -162,8 +162,8 @@ describe('<ApdNew />', () => {
 
         expect(disabledBtn).toBeDisabled();
 
-        await user.type(
-          screen.getByRole('textbox', { name: /APD Name/i }),
+        await user.type(e/i }),
+          screen.getByRole('textbox', { name: /name/i }),
           'APD Name'
         );
 
@@ -235,7 +235,7 @@ describe('<ApdNew />', () => {
         expect(disabledBtn).toBeDisabled();
 
         await user.type(
-          screen.getByRole('textbox', { name: /APD Name/i }),
+          screen.getByRole('textbox', { name: /name/i }),
           'APD Name'
         );
 

@@ -22,7 +22,7 @@ const apdNewSchema = Joi.object({
       'any.only': 'Select an APD Type.',
       'any.required': 'Select an APD Type.'
     }),
-  apdName: Joi.string().trim().min(1).required().messages({
+  name: Joi.string().trim().min(1).required().messages({
     'any.only': 'Provide an APD name.',
     'any.required': 'Provide an APD name.',
     'string.empty': 'Provide an APD name',

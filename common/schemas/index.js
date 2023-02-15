@@ -1,5 +1,6 @@
 export {
   apdNameSchema,
+  apdTypeToOverviewSchemaMapping,
   hitechOverviewSchema,
   mmisOverviewSchema,
   sharedApdOverviewFields

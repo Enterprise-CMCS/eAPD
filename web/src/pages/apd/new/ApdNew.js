@@ -99,7 +99,7 @@ const ApdNew = ({ createApd: create }) => {
   } = useForm({
     defaultValues: {
       apdType: '',
-      apdName: '',
+      name: '',
       yearOptions: yearOptions,
       years: years,
       updateAPD: updateAPD,
@@ -185,7 +185,7 @@ const ApdNew = ({ createApd: create }) => {
   }
 
   const createNew = () => {
-    const { apdName, updateStatus } = getValues();
+    const { name, updateStatus } = getValues();
     const apdValues = {
       apdOverview: {
         programOverview: '',
@@ -193,7 +193,7 @@ const ApdNew = ({ createApd: create }) => {
       },
       years,
       yearOptions,
-      name: apdName,
+      name,
       apdType
     };
 
@@ -240,7 +240,7 @@ const ApdNew = ({ createApd: create }) => {
                   onChange(e);
                   reset({
                     apdType: e.target.value,
-                    apdName: '',
+                    name: '',
                     years: years,
                     updateStatus: {
                       annualUpdate: false,
@@ -258,14 +258,14 @@ const ApdNew = ({ createApd: create }) => {
           {apdValid(apdType) && (
             <div>
               <Controller
-                name="apdName"
+                name="name"
                 control={control}
                 render={({ field: { ...props } }) => (
                   <TextField
                     {...props}
                     label="APD Name"
                     className="remove-clearfix"
-                    errorMessage={errors?.apdName?.message}
+                    errorMessage={errors?.name?.message}
                     errorPlacement="bottom"
                   />
                 )}
