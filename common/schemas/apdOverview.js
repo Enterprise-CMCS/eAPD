@@ -30,32 +30,44 @@ export const hitechOverviewSchema = Joi.object({
     'string.base': 'Funding sources are required',
     'string.empty': 'Funding sources are required'
   }),
-  programOverview: Joi.string().trim().messages({
-    'string.base': 'Provide a brief introduction to the state program.',
-    'string.empty': 'Provide a brief introduction to the state program.'
-  }),
+  programOverview: Joi.string()
+    .trim()
+    .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+    .messages({
+      'string.base': 'Provide a brief introduction to the state program.',
+      'string.empty': 'Provide a brief introduction to the state program.'
+    }),
   narrativeHIT: Joi.when('fundingSources', {
     is: Joi.array().items(Joi.string().valid('HIT').required(), Joi.any()),
-    then: Joi.string().trim().messages({
-      'string.base': 'Provide a summary of HIT-funded activities.',
-      'string.empty': 'Provide a summary of HIT-funded activities.'
-    }),
+    then: Joi.string()
+      .trim()
+      .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+      .messages({
+        'string.base': 'Provide a summary of HIT-funded activities.',
+        'string.empty': 'Provide a summary of HIT-funded activities.'
+      }),
     otherwise: Joi.any()
   }),
   narrativeHIE: Joi.when('fundingSources', {
     is: Joi.array().items(Joi.string().valid('HIE').required(), Joi.any()),
-    then: Joi.string().trim().messages({
-      'string.base': 'Provide a summary of HIE-funded activities.',
-      'string.empty': 'Provide a summary of HIE-funded activities.'
-    }),
+    then: Joi.string()
+      .trim()
+      .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+      .messages({
+        'string.base': 'Provide a summary of HIE-funded activities.',
+        'string.empty': 'Provide a summary of HIE-funded activities.'
+      }),
     otherwise: Joi.any()
   }),
   narrativeMMIS: Joi.when('fundingSources', {
     is: Joi.array().items(Joi.string().valid('MMIS').required(), Joi.any()),
-    then: Joi.string().trim().messages({
-      'string.base': 'Provide a summary of MMIS-funded activities.',
-      'string.empty': 'Provide a summary of MMIS-funded activities.'
-    }),
+    then: Joi.string()
+      .trim()
+      .replace(/^<p>\s*(&nbsp;\s*)*<\/p>$/gi, '')
+      .messages({
+        'string.base': 'Provide a summary of MMIS-funded activities.',
+        'string.empty': 'Provide a summary of MMIS-funded activities.'
+      }),
     otherwise: Joi.any()
   })
 });
