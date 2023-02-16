@@ -4,6 +4,7 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
 <Fragment>
   <Instruction
     args={null}
+    disableTitleCaseConversion={false}
     headingDisplay={
       Object {
         "className": "ds-h3",
