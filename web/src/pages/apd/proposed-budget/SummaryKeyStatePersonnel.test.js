@@ -34,7 +34,31 @@ describe('<SummaryKeyStatePersonnel />', () => {
 
     expect(
       screen.getByRole('cell', {
-        name: `Key Personnel Subtotal`
+        name: `Key Personnel Total`
+      })
+    );
+  });
+
+  it('renders correctly with no key state personnel', async () => {
+    setup(
+      { ffy: '2023' },
+      {
+        initialState: {
+          apd: {
+            data: {
+              keyStatePersonnel: {
+                keyPersonnel: []
+              },
+              years: ['2022', '2023']
+            }
+          }
+        }
+      }
+    );
+
+    expect(
+      screen.getByRole('cell', {
+        name: `No Key State Personnel Specified`
       })
     );
   });

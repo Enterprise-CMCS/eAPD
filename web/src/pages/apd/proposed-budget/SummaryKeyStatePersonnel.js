@@ -30,10 +30,27 @@ const SummaryKeyStatePersonnel = ({ ffy, costSummary, apdName }) => {
             Key State Personnel
           </th>
         </tr>
+        {costSummary.keyStatePersonnel[ffy].length === 0 && (
+          <tr>
+            <td className="title">No Key State Personnel Specified</td>
+            <td className="budget-table--number">
+              <Dollars>0</Dollars>
+            </td>
+            <td className="budget-table--number ds-u-padding--0">×</td>
+            <td className="budget-table--number ds-u-text-align--left">
+              1 FTE
+            </td>
+            <td className="budget-table--number ds-u-text-align--left">× 0%</td>
+            <td className="budget-table--number">-</td>
+            <td className="budget-table--number">
+              <Dollars>$0</Dollars>
+            </td>
+          </tr>
+        )}
         <CostSummaryRows items={costSummary.keyStatePersonnel[ffy]} />
         <tr className="budget-table--subtotal budget-table--row__highlight">
           <td className="title" colSpan="6">
-            Key Personnel Subtotal
+            Key Personnel Total
           </td>
           <td className="budget-table--number" data-cy="subtotal">
             <Dollars>{costSummary.keyStatePersonnelTotal[ffy]}</Dollars>
