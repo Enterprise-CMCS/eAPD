@@ -194,8 +194,7 @@ const ContractorResourceForm = forwardRef(
             field: {
               name,
               onChange: radioHourlyOnChange,
-              onBlur: radioHourlyOnBlur,
-              value
+              onBlur: radioHourlyOnBlur
             }
           }) => (
             <ChoiceList
