@@ -88,7 +88,7 @@ Instruction.propTypes = {
 
 Instruction.defaultProps = {
   args: null,
-  disableTitleCaseConversion: true,
+  disableTitleCaseConversion: false,
   reverse: false,
   headingDisplay: {
     level: 'h3',
