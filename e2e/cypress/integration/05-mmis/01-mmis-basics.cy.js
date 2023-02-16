@@ -453,21 +453,30 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     });
 
     it.only('mmis navigation and cypress-axe', function () {
+      // Decided to omit the activities page since the first subnav doesn't match the page title
       const pageTitles = [
-        'APD Overview',
-        'State Priorities and Scope of APD',
-        'Key State Personnel',
-        'Results of Previous Activities',
-        'Activities',
-        'Activity Schedule Summary',
-        'Proposed Budget',
-        'Security Planning',
-        'Assurances and Compliance',
-        'Executive Summary',
-        'Export and Submit'
+        ['APD Overview'],
+        ['State Priorities and Scope of APD'],
+        [
+          'Key State Personnel',
+          'State Director and Office Address',
+          'Key Personnel and Program Management'
+        ],
+        [
+          'Results of Previous Activities',
+          'Prior Activities Overview',
+          'Actual Expenditures'
+        ],
+        ['Activity Schedule Summary'],
+        ['Proposed Budget', 'Combined Activity Costs', 'Summary Budget Table'],
+        ['Security Planning'],
+        ['Assurances and Compliance'],
+        ['Executive Summary', 'Activities Summary', 'Program Budget Tables'],
+        ['Export and Submit']
       ];
 
       const activityPageTitles = [
+        ['Activities', 'Activities Dashboard'],
         'Activity Overview',
         'Analysis of Alternatives and Risks',
         'Activity Schedule and Milestones',
@@ -480,27 +489,64 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       ];
 
       cy.log('Click through Continue buttons');
-      cy.wrap([...pageTitles]).each((title, index, titles) => {
-        // split this up, into one continue and one clicking sidenav, how to test subnav?
-        if (
-          title !== 'Proposed Budget' &&
-          title !== 'Assurances and Compliance'
-        ) {
-          cy.get('.ds-c-vertical-nav__item').contains(title).click();
-          cy.pause();
-          cy.get('.ds-h2').should('contain', title);
-
-          cy.log(`${titles[index + 1]}`);
-          if (
-            index < titles.length - 1 &&
-            title !== 'Activity Schedule Summary' &&
-            title !== 'Security Planning'
-          ) {
+      cy.get('.ds-c-vertical-nav__item').contains('APD Overview').click();
+      pageTitles.forEach((titles, index) => {
+        cy.get('.ds-h2').should('contain', titles[0]);
+        if (index < titles.length - 1) {
+          cy.get('#continue-button').click();
+          if (index === 4)
+            // Skips over activity page index
             cy.get('#continue-button').click();
-            cy.get('.ds-h2').should('contain', titles[index + 1]);
-          }
         }
       });
+
+      cy.log('Click through Previous buttons');
+      cy.get('.ds-c-vertical-nav__item').contains('Export and Submit').click();
+      cy.wrap(pageTitles.reverse()).forEach((titles, index) => {
+        cy.get('.ds-h2').should('contain', titles[0]);
+        if (index < titles.length - 1) {
+          cy.get('#continue-button').click();
+          if (index === 5)
+            // Skips over activity page index
+            cy.get('#continue-button').click();
+        }
+      });
+
+      cy.log('Click through sidenav');
+      pageTitles.forEach(title => {
+        cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
+
+        if (title.length > 1) {
+          title.forEach((subnav, index) => {
+            cy.get('.ds-c-vertical-nav__subnav').contains(subnav).click();
+            if (index !== 0) cy.get('.ds-h3').should('contain', subnav);
+          });
+        }
+        cy.get('.ds-h2').should('contain', title[0]);
+      });
+
+      // cy.log('Click through Continue buttons');
+      // cy.wrap([...pageTitles]).each((title, index, titles) => {
+      //   // split this up, into one continue and one clicking sidenav, how to test subnav?
+      //   if (
+      //     title !== 'Proposed Budget' &&
+      //     title !== 'Assurances and Compliance'
+      //   ) {
+      //     cy.get('.ds-c-vertical-nav__item').contains(title).click();
+      //     cy.pause();
+      //     cy.get('.ds-h2').should('contain', title);
+
+      //     cy.log(`${titles[index + 1]}`);
+      //     if (
+      //       index < titles.length - 1 &&
+      //       title !== 'Activity Schedule Summary' &&
+      //       title !== 'Security Planning'
+      //     ) {
+      //       cy.get('#continue-button').click();
+      //       cy.get('.ds-h2').should('contain', titles[index + 1]);
+      //     }
+      //   }
+      // });
 
       // cy.log('Click through Previous buttons');
       // cy.wrap([...pageTitles].reverse()).each((title, index, reverseTitles) => {
