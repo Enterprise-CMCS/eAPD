@@ -189,10 +189,10 @@ const PersonForm = forwardRef(
       const [federal, state] = e.target.value.split('-').map(Number);
       let fundingCategory = null;
       if (federal === 90 && state === 10) {
-        fundingCategory = FUNDING_CATEGORY_TYPE.ddi;
+        fundingCategory = FUNDING_CATEGORY_TYPE.DDI;
       }
       if (federal === 75 && state === 25) {
-        fundingCategory = FUNDING_CATEGORY_TYPE.mando;
+        fundingCategory = FUNDING_CATEGORY_TYPE.MANDO;
       }
 
       dispatch({
@@ -274,12 +274,12 @@ const PersonForm = forwardRef(
               choices={[
                 {
                   checked: value?.federal == 90,
-                  label: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`,
+                  label: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.DDI}`,
                   value: '90-10'
                 },
                 {
                   checked: value?.federal == 75,
-                  label: `75/25 ${FUNDING_CATEGORY_LABEL_MAPPING.mando}`,
+                  label: `75/25 ${FUNDING_CATEGORY_LABEL_MAPPING.MANDO}`,
                   value: '75-25'
                 }
               ]}

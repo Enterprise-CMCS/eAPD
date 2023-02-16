@@ -56,7 +56,7 @@ describe('cost allocation validation', () => {
           {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           { abortEarly: false }
         );
@@ -69,7 +69,7 @@ describe('cost allocation validation', () => {
           {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           { abortEarly: false }
         );
@@ -82,7 +82,7 @@ describe('cost allocation validation', () => {
           {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           { abortEarly: false }
         );
@@ -95,7 +95,7 @@ describe('cost allocation validation', () => {
           {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           { abortEarly: false }
         );
@@ -108,7 +108,7 @@ describe('cost allocation validation', () => {
           {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           { abortEarly: false }
         );
@@ -133,7 +133,7 @@ describe('cost allocation validation', () => {
           {
             federal: 0,
             state: 100,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           { abortEarly: false }
         );
@@ -231,7 +231,7 @@ describe('cost allocation validation', () => {
               ffp: {
                 federal: 75,
                 state: 25,
-                fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+                fundingCategory: FUNDING_CATEGORY_TYPE.DDI
               },
               other: 0
             },
@@ -239,7 +239,7 @@ describe('cost allocation validation', () => {
               ffp: {
                 federal: 50,
                 state: 50,
-                fundingCategory: FUNDING_CATEGORY_TYPE.mando
+                fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
               },
               other: 0
             }
@@ -261,7 +261,7 @@ describe('cost allocation validation', () => {
               ffp: {
                 federal: 90,
                 state: 10,
-                fundingCategory: FUNDING_CATEGORY_TYPE.mando
+                fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
               },
               other: 0
             },

@@ -76,13 +76,13 @@ describe('activities reducer helpers', () => {
   });
 
   it('can create a cost allocation entry', () => {
-    expect(costAllocationEntry(0, 75, 25, FUNDING_CATEGORY_TYPE.mando)).toEqual(
+    expect(costAllocationEntry(0, 75, 25, FUNDING_CATEGORY_TYPE.MANDO)).toEqual(
       {
         other: 0,
         ffp: {
           federal: 75,
           state: 25,
-          fundingCategory: FUNDING_CATEGORY_TYPE.mando
+          fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
         }
       }
     );

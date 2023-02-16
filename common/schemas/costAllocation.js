@@ -38,7 +38,7 @@ export const costAllocationMatchRateSchema = costAllocationSplitSchema.keys({
         is: 90,
         then: Joi.string()
           .trim()
-          .valid(FUNDING_CATEGORY_TYPE.ddi)
+          .valid(FUNDING_CATEGORY_TYPE.DDI)
           .required()
           .messages({
             'string.base': 'Select a valid match rate.',
@@ -47,7 +47,7 @@ export const costAllocationMatchRateSchema = costAllocationSplitSchema.keys({
           }),
         otherwise: Joi.string()
           .trim()
-          .valid(FUNDING_CATEGORY_TYPE.ddi, FUNDING_CATEGORY_TYPE.mando)
+          .valid(FUNDING_CATEGORY_TYPE.DDI, FUNDING_CATEGORY_TYPE.MANDO)
           .required()
           .messages({
             'string.base': 'Select a funding category.',

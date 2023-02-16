@@ -14,10 +14,10 @@ const logger = loggerFactory(
 
 const updateFundingCategory = ({ federal = null, state = null } = {}) => {
   if (federal === 90 && state === 10) {
-    return FUNDING_CATEGORY_TYPE.ddi;
+    return FUNDING_CATEGORY_TYPE.DDI;
   }
   if (federal === 75 && state === 25) {
-    return FUNDING_CATEGORY_TYPE.mando;
+    return FUNDING_CATEGORY_TYPE.MANDO;
   }
   return null;
 };
@@ -31,9 +31,18 @@ export const up = async () => {
   // Grab all APDs
   await setup();
   const apds = await APD.find({
-    'activities.costAllocation.$[].ffp.fundingCategory': { $exists: false }
+    $or: [
+      {
+        'activities.costAllocation.$[].ffp.fundingCategory': { $exists: false }
+      },
+      {
+        'keyStatePersonnel.keyPersonnel.split.$[].fundingCategory': {
+          $exists: false
+        }
+      }
+    ]
   }).lean();
-  logger.info(`Updating ${apds.lengths} APDs`);
+  logger.info(`Updating ${apds.length} APDs`);
 
   const apdIds = [];
   const budgetIds = [];
@@ -45,7 +54,7 @@ export const up = async () => {
     }
     const apdJSON = deepCopy(apd);
     const years = apd.years;
-    const apdType = apd.apdType;
+    const apdType = apd.__t;
 
     apdJSON.keyStatePersonnel.keyPersonnel =
       apdJSON.keyStatePersonnel.keyPersonnel.map(keyPersonnel => ({
@@ -63,9 +72,10 @@ export const up = async () => {
           (acc, year) => ({
             ...acc,
             [year]: {
-              federal: keyPersonnel?.[year]?.federal,
-              state: keyPersonnel?.[year]?.state,
-              fundingCategory: updateFundingCategory(keyPersonnel?.[year])
+              ...keyPersonnel?.split?.[year],
+              fundingCategory: updateFundingCategory(
+                keyPersonnel?.split?.[year]
+              )
             }
           }),
           {}
@@ -74,8 +84,22 @@ export const up = async () => {
 
     apdJSON.activities = apdJSON.activities.map(activity => ({
       ...activity,
-      costAllocation: years.reduce(
-        (acc, year) => ({
+      costAllocation: years.reduce((acc, year) => {
+        if (
+          activity?.costAllocation?.[year]?.ffp?.fundingCategory !==
+            undefined &&
+          activity?.costAllocation?.[year]?.ffp?.fundingCategory !== null
+        ) {
+          return {
+            ...acc,
+            [year]: {
+              ffp: {
+                ...activity?.costAllocation?.[year]?.ffp
+              }
+            }
+          };
+        }
+        return {
           ...acc,
           [year]: {
             ffp: {
@@ -94,9 +118,8 @@ export const up = async () => {
                 ? activity?.costAllocation?.[year]?.other
                 : 0
           }
-        }),
-        {}
-      )
+        };
+      }, {})
     }));
 
     return apdJSON;

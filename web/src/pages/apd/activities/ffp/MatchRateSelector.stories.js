@@ -84,7 +84,7 @@ Fed75State25DdiSelectorStory.args = {
   ffp: {
     federal: 75,
     state: 25,
-    fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+    fundingCategory: FUNDING_CATEGORY_TYPE.DDI
   },
   setFederalStateSplit: action('setFederalStateSplit')
 };
@@ -100,7 +100,7 @@ Fed75State25MoSelectorStory.args = {
   ffp: {
     federal: 75,
     state: 25,
-    fundingCategory: FUNDING_CATEGORY_TYPE.mando
+    fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
   },
   setFederalStateSplit: action('setFederalStateSplit')
 };
@@ -131,7 +131,7 @@ Fed50State50DdiSelectorStory.args = {
   ffp: {
     federal: 50,
     state: 50,
-    fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+    fundingCategory: FUNDING_CATEGORY_TYPE.DDI
   },
   setFederalStateSplit: action('setFederalStateSplit')
 };
@@ -147,7 +147,7 @@ Fed50State50MoSelectorStory.args = {
   ffp: {
     federal: 50,
     state: 50,
-    fundingCategory: FUNDING_CATEGORY_TYPE.mando
+    fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
   },
   setFederalStateSplit: action('setFederalStateSplit')
 };

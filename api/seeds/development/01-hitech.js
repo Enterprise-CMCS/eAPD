@@ -46,12 +46,12 @@ export default {
           2022: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           2023: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           }
         },
         medicaidShare: {
@@ -71,12 +71,12 @@ export default {
           2022: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           2023: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           }
         },
         medicaidShare: {

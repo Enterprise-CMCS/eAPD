@@ -18,6 +18,14 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
     setFedStateSplit(`${ffp.federal}-${ffp.state}`);
   }, [ffp.federal, ffp.state]);
 
+  const handleFedStateSplit = e => {
+    const [federal, state] = e.target.value.split('-').map(Number);
+    setValue(`${ffy}.ffp.federal`, federal);
+    setValue(`${ffy}.ffp.state`, state);
+    setFedStateSplit(`${federal}-${state}`);
+    setFederalStateSplit(ffy, federal, state);
+  };
+
   return (
     <div className="data-entry-box ds-u-margin-bottom--5">
       <Instruction
@@ -42,13 +50,7 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
               { label: '50-50', value: '50-50' }
             ]}
             value={fedStateSplit}
-            onChange={e => {
-              const [federal, state] = e.target.value.split('-').map(Number);
-              setValue(`${ffy}.ffp.federal`, federal);
-              setValue(`${ffy}.ffp.state`, state);
-              setFedStateSplit(`${federal}-${state}`);
-              setFederalStateSplit(ffy, federal, state);
-            }}
+            onChange={handleFedStateSplit}
             errorMessage={errors[ffy]?.ffp?.state?.message}
             errorPlacement="bottom"
             data-cy="cost-allocation-dropdown"

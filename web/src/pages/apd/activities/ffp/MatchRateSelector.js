@@ -27,6 +27,25 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
     setFundingCategory(ffp.fundingCategory);
   }, [ffp.fundingCategory]);
 
+  const handleFedStateSplit = e => {
+    const [federal, state] = e.target.value.split('-').map(Number);
+    setValue(`${ffy}.ffp.federal`, federal);
+    setValue(`${ffy}.ffp.state`, state);
+    setFedStateSplit(`${federal}-${state}`);
+    setFundingCategory(null);
+
+    if (federal === 90 && state === 10) {
+      setMatchRate(ffy, federal, state, FUNDING_CATEGORY_TYPE.DDI);
+    }
+  };
+
+  const handleFundingCategory = e => {
+    const [federal, state] = fedStateSplit.split('-').map(Number);
+    setValue(`${ffy}.ffp.fundingCategory`, e.target.value);
+    setMatchRate(ffy, federal, state, e.target.value);
+    setFundingCategory(e.target.value);
+  };
+
   const checkedChildren = (
     <div className="ds-c-choice__checkedChild">
       <Controller
@@ -39,24 +58,19 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             label="Select funding category"
             choices={[
               {
-                label: FUNDING_CATEGORY_LABEL_MAPPING.ddi,
-                value: FUNDING_CATEGORY_TYPE.ddi,
-                checked: fundingCategory === FUNDING_CATEGORY_TYPE.ddi
+                label: FUNDING_CATEGORY_LABEL_MAPPING.DDI,
+                value: FUNDING_CATEGORY_TYPE.DDI,
+                checked: fundingCategory === FUNDING_CATEGORY_TYPE.DDI
               },
               {
-                label: FUNDING_CATEGORY_LABEL_MAPPING.mando,
-                value: FUNDING_CATEGORY_TYPE.mando,
-                checked: fundingCategory === FUNDING_CATEGORY_TYPE.mando
+                label: FUNDING_CATEGORY_LABEL_MAPPING.MANDO,
+                value: FUNDING_CATEGORY_TYPE.MANDO,
+                checked: fundingCategory === FUNDING_CATEGORY_TYPE.MANDO
               }
             ]}
             type="radio"
             size="small"
-            onChange={e => {
-              const [federal, state] = fedStateSplit.split('-').map(Number);
-              setValue(`${ffy}.ffp.fundingCategory`, e.target.value);
-              setMatchRate(ffy, federal, state, e.target.value);
-              setFundingCategory(e.target.value);
-            }}
+            onChange={handleFundingCategory}
             errorMessage={errors?.[ffy]?.ffp?.fundingCategory?.message}
             errorPlacement="bottom"
             data-cy="cost-allocation-radio-group"
@@ -85,7 +99,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             labelClassName="sr-only"
             choices={[
               {
-                label: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.ddi}`,
+                label: `90/10 ${FUNDING_CATEGORY_LABEL_MAPPING.DDI}`,
                 value: '90-10',
                 checked: fedStateSplit === '90-10'
               },
@@ -104,17 +118,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             ]}
             type="radio"
             size="small"
-            onChange={e => {
-              const [federal, state] = e.target.value.split('-').map(Number);
-              setValue(`${ffy}.ffp.federal`, federal);
-              setValue(`${ffy}.ffp.state`, state);
-              setFedStateSplit(`${federal}-${state}`);
-              setFundingCategory(null);
-
-              if (federal === 90 && state === 10) {
-                setMatchRate(ffy, federal, state, FUNDING_CATEGORY_TYPE.ddi);
-              }
-            }}
+            onChange={handleFedStateSplit}
             errorMessage={errors?.[ffy]?.ffp?.state?.message}
             errorPlacement="bottom"
             data-cy="cost-allocation-match-rate"

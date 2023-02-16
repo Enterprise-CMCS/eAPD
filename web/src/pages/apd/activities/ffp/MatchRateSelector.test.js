@@ -90,7 +90,7 @@ describe('the MatchRateSelector component', () => {
       '2023',
       90,
       10,
-      FUNDING_CATEGORY_TYPE.ddi
+      FUNDING_CATEGORY_TYPE.DDI
     );
   });
 
@@ -150,7 +150,7 @@ describe('the MatchRateSelector component', () => {
       '2023',
       75,
       25,
-      FUNDING_CATEGORY_TYPE.ddi
+      FUNDING_CATEGORY_TYPE.DDI
     );
   });
 
@@ -210,7 +210,7 @@ describe('the MatchRateSelector component', () => {
       '2023',
       75,
       25,
-      FUNDING_CATEGORY_TYPE.mando
+      FUNDING_CATEGORY_TYPE.MANDO
     );
   });
 
@@ -270,7 +270,7 @@ describe('the MatchRateSelector component', () => {
       '2023',
       50,
       50,
-      FUNDING_CATEGORY_TYPE.ddi
+      FUNDING_CATEGORY_TYPE.DDI
     );
   });
 
@@ -330,7 +330,7 @@ describe('the MatchRateSelector component', () => {
       '2023',
       50,
       50,
-      FUNDING_CATEGORY_TYPE.mando
+      FUNDING_CATEGORY_TYPE.MANDO
     );
   });
 
@@ -339,7 +339,7 @@ describe('the MatchRateSelector component', () => {
       ffp: {
         federal: 90,
         state: 10,
-        fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+        fundingCategory: FUNDING_CATEGORY_TYPE.DDI
       }
     });
 
@@ -368,7 +368,7 @@ describe('the MatchRateSelector component', () => {
       ffp: {
         federal: 75,
         state: 25,
-        fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+        fundingCategory: FUNDING_CATEGORY_TYPE.DDI
       }
     });
 
@@ -409,7 +409,7 @@ describe('the MatchRateSelector component', () => {
       ffp: {
         federal: 75,
         state: 25,
-        fundingCategory: FUNDING_CATEGORY_TYPE.mando
+        fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
       }
     });
 
@@ -450,7 +450,7 @@ describe('the MatchRateSelector component', () => {
       ffp: {
         federal: 50,
         state: 50,
-        fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+        fundingCategory: FUNDING_CATEGORY_TYPE.DDI
       }
     });
 
@@ -490,7 +490,7 @@ describe('the MatchRateSelector component', () => {
       ffp: {
         federal: 50,
         state: 50,
-        fundingCategory: FUNDING_CATEGORY_TYPE.mando
+        fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
       }
     });
 
@@ -530,7 +530,7 @@ describe('the MatchRateSelector component', () => {
       ffp: {
         federal: 50,
         state: 50,
-        fundingCategory: FUNDING_CATEGORY_TYPE.mando
+        fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
       }
     });
 
@@ -567,7 +567,7 @@ describe('the MatchRateSelector component', () => {
         '2023',
         75,
         25,
-        FUNDING_CATEGORY_TYPE.ddi
+        FUNDING_CATEGORY_TYPE.DDI
       );
     });
   });

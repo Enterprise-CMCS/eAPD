@@ -132,7 +132,7 @@ const activitySchema = new mongoose.Schema({
           },
           fundingCategory: {
             type: String,
-            enum: [FUNDING_CATEGORY_TYPE.ddi, FUNDING_CATEGORY_TYPE.mando, null]
+            enum: [FUNDING_CATEGORY_TYPE.DDI, FUNDING_CATEGORY_TYPE.MANDO, null]
           }
         },
         other: {

@@ -650,7 +650,7 @@ describe('APD reducer', () => {
                 ffp: {
                   federal: 90,
                   state: 10,
-                  fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+                  fundingCategory: FUNDING_CATEGORY_TYPE.DDI
                 }
               },
               1742: 'yes',

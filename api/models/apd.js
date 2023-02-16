@@ -123,8 +123,8 @@ const apdSchema = new mongoose.Schema(
                 fundingCategory: {
                   type: String,
                   enum: [
-                    FUNDING_CATEGORY_TYPE.ddi,
-                    FUNDING_CATEGORY_TYPE.mando,
+                    FUNDING_CATEGORY_TYPE.DDI,
+                    FUNDING_CATEGORY_TYPE.MANDO,
                     null
                   ]
                 }

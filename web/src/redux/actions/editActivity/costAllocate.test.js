@@ -79,7 +79,7 @@ describe('APD activity edit actions for cost allocation section', () => {
 
   it('dispatches an action for setting the cost allocation FFP other funding', () => {
     store.dispatch(
-      setCostAllocationMatchRate(1, 2020, 90, 10, FUNDING_CATEGORY_TYPE.ddi)
+      setCostAllocationMatchRate(1, 2020, 90, 10, FUNDING_CATEGORY_TYPE.DDI)
     );
     expect(store.getActions()).toEqual([
       {
@@ -95,7 +95,7 @@ describe('APD activity edit actions for cost allocation section', () => {
       {
         type: EDIT_APD,
         path: '/activities/1/costAllocation/2020/ffp/fundingCategory',
-        value: FUNDING_CATEGORY_TYPE.ddi
+        value: FUNDING_CATEGORY_TYPE.DDI
       }
     ]);
   });

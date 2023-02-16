@@ -54,8 +54,8 @@ const AllFFYsSummaryNarrative = ({
     if (apdType === APD_TYPE.MMIS) {
       let matchRate = '';
       const fundingCategory = costAllocation[ffy].ffp.fundingCategory;
-      if (fundingCategory === FUNDING_CATEGORY_TYPE.ddi) matchRate = ' DDI';
-      if (fundingCategory === FUNDING_CATEGORY_TYPE.mando) matchRate = ' M&O';
+      if (fundingCategory === FUNDING_CATEGORY_TYPE.DDI) matchRate = ' DDI';
+      if (fundingCategory === FUNDING_CATEGORY_TYPE.MANDO) matchRate = ' M&O';
 
       split += `${matchRate}`;
     }

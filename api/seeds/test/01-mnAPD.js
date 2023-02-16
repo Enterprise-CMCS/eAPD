@@ -48,12 +48,12 @@ export default {
           2022: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           2023: {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           }
         },
         medicaidShare: {
@@ -403,7 +403,7 @@ export default {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         },
@@ -411,7 +411,7 @@ export default {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         }
@@ -702,7 +702,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           other: 0
         },
@@ -710,7 +710,7 @@ export default {
           ffp: {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           other: 0
         }
@@ -919,7 +919,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           other: 0
         },
@@ -927,7 +927,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         }
@@ -1111,7 +1111,7 @@ export default {
           ffp: {
             federal: 75,
             state: 75,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           other: 0
         },
@@ -1119,7 +1119,7 @@ export default {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         }
@@ -1311,7 +1311,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           other: 0
         },
@@ -1319,7 +1319,7 @@ export default {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         }
@@ -1500,7 +1500,7 @@ export default {
           ffp: {
             federal: 50,
             state: 50,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 125000
         },
@@ -1508,7 +1508,7 @@ export default {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 125000
         }

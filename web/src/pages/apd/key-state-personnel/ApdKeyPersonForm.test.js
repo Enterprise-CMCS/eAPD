@@ -27,12 +27,12 @@ describe('the ApdKeyPersonForm component', () => {
         1992: {
           federal: 90,
           state: 10,
-          fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+          fundingCategory: FUNDING_CATEGORY_TYPE.DDI
         },
         1993: {
           federal: 90,
           state: 10,
-          fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+          fundingCategory: FUNDING_CATEGORY_TYPE.DDI
         }
       },
       medicaidShare: {

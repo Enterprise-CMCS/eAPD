@@ -56,12 +56,12 @@ export default {
           2023: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           2024: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           }
         },
         medicaidShare: {
@@ -81,12 +81,12 @@ export default {
           2023: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           2024: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           }
         },
         medicaidShare: {
@@ -338,7 +338,7 @@ export default {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 105000
         },
@@ -346,7 +346,7 @@ export default {
           ffp: {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.mando
+            fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
           },
           other: 0
         }
@@ -536,7 +536,7 @@ export default {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         },
@@ -544,7 +544,7 @@ export default {
           ffp: {
             federal: 75,
             state: 25,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         }

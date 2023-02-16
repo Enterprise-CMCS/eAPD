@@ -119,11 +119,11 @@ export const keyPersonnelSchema = Joi.object({
           switch: [
             {
               is: 90,
-              then: Joi.string().valid(FUNDING_CATEGORY_TYPE.ddi)
+              then: Joi.string().valid(FUNDING_CATEGORY_TYPE.DDI)
             },
             {
               is: 75,
-              then: Joi.string().valid(FUNDING_CATEGORY_TYPE.mando)
+              then: Joi.string().valid(FUNDING_CATEGORY_TYPE.MANDO)
             }
           ]
         })

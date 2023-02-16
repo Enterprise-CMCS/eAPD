@@ -334,7 +334,7 @@ const validMmisActivity = {
       ffp: {
         federal: 90,
         state: 10,
-        fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+        fundingCategory: FUNDING_CATEGORY_TYPE.DDI
       },
       other: 0
     },
@@ -342,7 +342,7 @@ const validMmisActivity = {
       ffp: {
         federal: 90,
         state: 10,
-        fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+        fundingCategory: FUNDING_CATEGORY_TYPE.DDI
       },
       other: 0
     }
@@ -773,7 +773,7 @@ const invalidMmisActivity = {
       ffp: {
         federal: 75,
         state: 25,
-        fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+        fundingCategory: FUNDING_CATEGORY_TYPE.DDI
       },
       other: 0
     },
@@ -781,7 +781,7 @@ const invalidMmisActivity = {
       ffp: {
         federal: 50,
         state: 50,
-        fundingCategory: FUNDING_CATEGORY_TYPE.mando
+        fundingCategory: FUNDING_CATEGORY_TYPE.MANDO
       },
       other: 0
     }
@@ -1792,7 +1792,7 @@ const mockMmisApdRandomInvalid = {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         }
@@ -2010,7 +2010,7 @@ const mockMmisApdRandomInvalid = {
           ffp: {
             federal: 90,
             state: 10,
-            fundingCategory: FUNDING_CATEGORY_TYPE.ddi
+            fundingCategory: FUNDING_CATEGORY_TYPE.DDI
           },
           other: 0
         }
