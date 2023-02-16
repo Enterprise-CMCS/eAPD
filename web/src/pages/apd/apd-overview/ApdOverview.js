@@ -33,6 +33,7 @@ import ApdOverviewHITECHFields from './ApdOverviewHITECHFields';
 import ApdOverviewMMISFields from './ApdOverviewMMISFields';
 import ApdUpdate from '../../../components/ApdUpdate';
 import DeleteModal from '../../../components/DeleteModal';
+import Instruction from '../../../components/Instruction';
 
 const renderApdTypeSpecificFields = apdType => {
   const apdTypeSpecificFieldsMapping = {
@@ -133,11 +134,11 @@ const ApdOverview = ({
 
   const getLabelElement = () => {
     if (years.length > 0) {
-      return t('apd.overview.instruction.short');
+      return t('apd.overview.years.instruction.heading');
     }
     return (
       <React.Fragment>
-        {t('apd.overview.instruction.short')}
+        {t('apd.overview.years.instruction.heading')}
         <Alert variation="error">
           <div style={{ fontWeight: 400 }}>
             At least one FFY must be selected to continue with your APD. Select
@@ -152,11 +153,18 @@ const ApdOverview = ({
     <Section resource="apd">
       <hr className="custom-hr" />
       <TempAlert />
-      <div className="apd_type_choice-container">
+      <Instruction
+        labelFor="apd-type-list"
+        source="apd.overview.apdType"
+        disableTitleCaseConversion
+      />
+      <div className="apd_type_choice-container" id="apd-type-list">
         <ChoiceList
           type="radio"
           className="apd_disabled_choice"
           name="HITECH choice"
+          label="HITECH choice"
+          labelClassName="hidden-display"
           choices={[
             {
               defaultChecked: !enableMmis || apdType === APD_TYPE.HITECH,
@@ -183,6 +191,8 @@ const ApdOverview = ({
             type="radio"
             className="apd_disabled_choice"
             name="MMIS choice"
+            label="MMIS choice"
+            labelClassName="hidden-display"
             choices={[
               {
                 defaultChecked: apdType === APD_TYPE.MMIS,
@@ -210,7 +220,9 @@ const ApdOverview = ({
         render={() => {
           return (
             <TextField
+              id="apd-overview-name-field"
               label="APD Name"
+              labelClassName="label-header"
               className="remove-clearfix"
               name="name"
               value={name}
@@ -226,7 +238,8 @@ const ApdOverview = ({
         <ChoiceList
           choices={yearChoices}
           label={getLabelElement()}
-          labelClassName="ds-u-margin-bottom--1"
+          labelClassName="ds-u-margin-bottom--1 label-header"
+          hint={t('apd.overview.years.instruction.detail')}
           name="apd-years"
           onChange={handleYears}
           type="checkbox"

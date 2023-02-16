@@ -28,7 +28,14 @@ Heading.defaultProps = {
   level: 'h3'
 };
 
-const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
+const Instruction = ({
+  args,
+  disableTitleCaseConversion,
+  reverse,
+  source,
+  headingDisplay,
+  labelFor
+}) => {
   const heading = t([source, 'heading'], { defaultValue: false, ...args });
   const short = t([source, 'short'], { defaultValue: false, ...args });
   const detail = t([source, 'detail'], { defaultValue: false, ...args });
@@ -40,7 +47,7 @@ const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
       <div>
         {heading && (
           <Heading {...headingDisplay} labelFor={labelFor}>
-            {titleCase(heading)}
+            {disableTitleCaseConversion ? heading : titleCase(heading)}
           </Heading>
         )}
         {(short || detail || list || helpText) && (
@@ -72,6 +79,7 @@ const Instruction = ({ args, reverse, source, headingDisplay, labelFor }) => {
 
 Instruction.propTypes = {
   args: PropTypes.object,
+  disableTitleCaseConversion: PropTypes.bool,
   reverse: PropTypes.bool,
   source: PropTypes.string.isRequired,
   headingDisplay: PropTypes.object,
@@ -80,6 +88,7 @@ Instruction.propTypes = {
 
 Instruction.defaultProps = {
   args: null,
+  disableTitleCaseConversion: true,
   reverse: false,
   headingDisplay: {
     level: 'h3',

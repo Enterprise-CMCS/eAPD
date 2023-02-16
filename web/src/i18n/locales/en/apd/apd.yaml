@@ -1,9 +1,13 @@
 title: APD Overview
 
 overview:
-  instruction:
-    short: >-
-      Choose the federal fiscal year(s) this APD covers.
+  apdType:
+    heading: What type of APD are you creating?
+  years:
+    instruction:
+      heading: Federal Fiscal Year (FFY)
+      detail: >-
+        Choose the federal fiscal year(s) this APD covers.
 
 introduction:
   instruction:

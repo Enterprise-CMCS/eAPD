@@ -49,6 +49,7 @@ const ApdUpdate = ({
         render={({ field: { onBlur } }) => (
           <ChoiceList
             label="Update Type"
+            labelClassName="label-header"
             name="updateStatus"
             hint={
               <div>
@@ -70,7 +71,6 @@ const ApdUpdate = ({
                 checked: updateStatus.asNeededUpdate
               }
             ]}
-            labelClassName="ds-u-margin-bottom--1"
             type="checkbox"
             onChange={e => {
               setUpdateStatusField(e.target.value, e.target.checked);
@@ -98,6 +98,7 @@ const ApdUpdate = ({
         render={({ field: { onBlur, onChange: radioOnChange } }) => (
           <ChoiceList
             label="Is this an APD update?"
+            labelClassName="label-header"
             hint="Indicate if this APD is for a new project or if it is an update to an existing one."
             type="radio"
             name="updateStatus.isUpdateAPD"

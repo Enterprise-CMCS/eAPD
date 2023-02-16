@@ -54,6 +54,7 @@ const ApdOverviewMMISFields = ({
             label={
               MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING.otherMedicaidBusinessAreas
             }
+            labelClassName="label-header"
             name="medicaidBusinessAreas.otherMedicaidBusinessAreas"
             data-cy="other_details"
             hint="Since the Medicaid Business is not listed above, provide the name of the Medicaid Business Area. If there are multiple, separate other business areas with a semi-colon."
@@ -120,6 +121,7 @@ const ApdOverviewMMISFields = ({
         render={({ field: { onBlur } }) => (
           <ChoiceList
             label="Medicaid Business Areas"
+            labelClassName="label-header"
             name="medicaidBusinessAreas"
             hint={
               <div>
