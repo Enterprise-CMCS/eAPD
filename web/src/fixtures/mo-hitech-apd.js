@@ -1,3 +1,5 @@
+import { APD_TYPE } from '@cms-eapd/common';
+
 const name = 'HITECH IAPD';
 const activities = [
   {
@@ -1471,7 +1473,7 @@ const activities = [
 
 const apd = {
   data: {
-    apdType: 'HITECH',
+    apdType: APD_TYPE.HITECH,
     name,
     apdOverview: {
       updateStatus: {

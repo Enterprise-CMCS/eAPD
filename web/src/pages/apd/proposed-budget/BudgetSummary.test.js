@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 import {
   plain as BudgetSummary,
   mapStateToProps,
@@ -13,7 +15,7 @@ describe('budget summary component', () => {
   test('renders correctly for hitech apds', () => {
     const component = shallow(
       <BudgetSummary
-        apdType="HITECH"
+        apdType={APD_TYPE.HITECH}
         activities={{
           hie: ['hie data'],
           hit: ['hit data'],
@@ -37,7 +39,7 @@ describe('budget summary component', () => {
   test('renders correctly for mmis apds', () => {
     const component = shallow(
       <BudgetSummary
-        apdType="MMIS"
+        apdType={APD_TYPE.MMIS}
         activities={{
           mmis: ['mmis data']
         }}
@@ -107,7 +109,7 @@ describe('budget summary component', () => {
     expect(
       shallow(
         <DataRowGroup
-          apdType="MMIS"
+          apdType={APD_TYPE.MMIS}
           data={{
             combined: { 1448: {} },
             contractors: { 1448: {} },

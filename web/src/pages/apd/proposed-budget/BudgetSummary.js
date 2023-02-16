@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 import Dollars from '../../../components/Dollars';
 import { selectBudgetActivitiesByFundingSource } from '../../../redux/selectors/budget.selectors';
 
@@ -41,7 +43,7 @@ const DataRowGroup = ({ data, year, apdType }) => {
     { category: 'contractors', title: 'Private Contractor' },
     { category: 'combined', title: 'Subtotal' }
   ];
-  apdType === 'MMIS'
+  apdType === APD_TYPE.MMIS
     ? categories.unshift({
         category: 'keyStatePersonnel',
         title: 'Key State Personnel'
@@ -93,7 +95,7 @@ HeaderRow.propTypes = {
 
 const BudgetSummary = ({ activities, data, years, apdType }) => (
   <div>
-    {apdType === 'HITECH' && (
+    {apdType === APD_TYPE.HITECH && (
       <Fragment>
         <div>
           <h4 className="ds-h4 header-with-top-margin" aria-hidden="true">

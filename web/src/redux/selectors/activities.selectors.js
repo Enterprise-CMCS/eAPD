@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 import { selectApdData, selectApdYears } from './apd.selectors';
 import { stateDateRangeToDisplay, stateDateToDisplay } from '../../util';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 export const selectActivityCount = state => state.apd.data.activities.length;
 
 export const selectActivityByIndex = (
@@ -114,7 +116,7 @@ export const selectActivityCostSummary = createSelector(
       (activityKeyPersonnel, ffy) => ({
         ...activityKeyPersonnel,
         [ffy]:
-          activityIndex === 0 && apdType == 'HITECH'
+          activityIndex === 0 && apdType == APD_TYPE.HITECH
             ? keyPersonnel.map(kp => ({
                 key: kp.key,
                 description: `${

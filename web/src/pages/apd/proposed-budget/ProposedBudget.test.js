@@ -5,6 +5,8 @@ import budget from '../../../fixtures/ak-budget.json';
 import mmisApd from '../../../fixtures/ak-apd-mmis.json';
 import mmisBudget from '../../../fixtures/ak-budget-mmis.json';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 import ProposedBudget from './ProposedBudget';
 
 const hitechApd = {
@@ -15,7 +17,7 @@ const hitechApd = {
 };
 
 const mmisApdProp = {
-  apdType: 'MMIS',
+  apdType: APD_TYPE.MMIS,
   initialState: {
     ...mmisApd,
     ...mmisBudget

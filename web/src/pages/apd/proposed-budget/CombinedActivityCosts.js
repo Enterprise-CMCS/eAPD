@@ -6,6 +6,8 @@ import SummaryActivityBreakdownTable from './SummaryActivityBreakdown';
 import SummaryKeyStatePersonnel from './SummaryKeyStatePersonnel';
 import Dollars from '../../../components/Dollars';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 const DataRow = ({ category, data, title, groupTitle }) => (
   <tr
     key={category}
@@ -38,7 +40,7 @@ const DataRowGroup = ({ data, year, groupTitle, apdType }) => {
     { category: 'contractors', title: 'Private Contractor Total' },
     { category: 'combined', title: 'Total' }
   ];
-  apdType === 'MMIS'
+  apdType === APD_TYPE.MMIS
     ? categories.splice(0, 0, {
         category: 'keyStatePersonnel',
         title: 'Key State Personnel Total'
@@ -112,7 +114,7 @@ const SummaryBudgetByActivityTotals = ({ data, ffy, apdType }) => {
             <DataRowGroup
               data={data.mmis}
               year={ffy}
-              groupTitle="MMIS"
+              groupTitle={APD_TYPE.MMIS}
               apdType={apdType}
             />
           </Fragment>
@@ -172,7 +174,7 @@ const CombinedActivityCosts = ({ data, years, isViewOnly, apdType }) => {
           source={`proposedBudget.combinedActivityCosts.activityBreakdown${apdType}`}
         />
       )}
-      {apdType === 'MMIS' && <SummaryKeyStatePersonnel ffy={ffy} />}
+      {apdType === APD_TYPE.MMIS && <SummaryKeyStatePersonnel ffy={ffy} />}
       <SummaryBudgetByActivityBreakdown data={data} ffy={ffy} />
     </Fragment>
   ));

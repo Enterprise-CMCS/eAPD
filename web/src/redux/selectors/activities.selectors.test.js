@@ -16,6 +16,8 @@ import {
   selectActivityCount
 } from './activities.selectors';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 describe('activities state selectors', () => {
   it('selects the activity count', () => {
     expect(
@@ -91,7 +93,7 @@ describe('activities state selectors', () => {
     const state = {
       apd: {
         data: {
-          apdType: 'MMIS',
+          apdType: APD_TYPE.MMIS,
           keyStatePersonnel: {
             keyPersonnel: [
               {
@@ -209,7 +211,7 @@ describe('activities state selectors', () => {
     const state = {
       apd: {
         data: {
-          apdType: 'MMIS',
+          apdType: APD_TYPE.MMIS,
           keyStatePersonnel: {
             keyPersonnel: []
           },
@@ -232,7 +234,7 @@ describe('activities state selectors', () => {
     const state = {
       apd: {
         data: {
-          apdType: 'HITECH',
+          apdType: APD_TYPE.HITECH,
           activities: [
             {
               activityId: 'activity one',

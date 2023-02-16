@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 import { removeActivity } from '../../../../redux/actions/editActivity';
 
 import {
@@ -80,7 +82,7 @@ describe('the (Activity) EntryDetails component', () => {
     const state = {
       apd: {
         data: {
-          apdType: 'HITECH',
+          apdType: APD_TYPE.HITECH,
           activities: [
             {
               fundingSource: 'money pit',

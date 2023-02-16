@@ -1,6 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 import {
   plain as KeyPersonnel,
   mapStateToProps,
@@ -58,7 +60,7 @@ describe('apd state profile, Medicaid office component', () => {
       mapStateToProps({
         apd: {
           data: {
-            apdType: 'HITECH',
+            apdType: APD_TYPE.HITECH,
             keyStatePersonnel: {
               keyPersonnel: 'these are my people'
             },

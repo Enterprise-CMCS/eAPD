@@ -1,5 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+
+import { APD_TYPE } from '@cms-eapd/common';
+
 import {
   plain as CombinedActivityCosts,
   mapStateToProps,
@@ -13,7 +16,7 @@ describe('renders correctly', () => {
   it('renders correctly in view-only mode', () => {
     const component = shallow(
       <CombinedActivityCosts
-        apdType="HITECH"
+        apdType={APD_TYPE.HITECH}
         data={{}}
         years={['1984', '1985']}
         isViewOnly
@@ -25,7 +28,7 @@ describe('renders correctly', () => {
   it('renders correctly in standard mode for hitech apds', () => {
     const component = shallow(
       <CombinedActivityCosts
-        apdType="HITECH"
+        apdType={APD_TYPE.HITECH}
         data={{}}
         years={['1984', '1985']}
       />
@@ -36,7 +39,7 @@ describe('renders correctly', () => {
   it('renders correctly in standard mode for mmis apds', () => {
     const component = shallow(
       <CombinedActivityCosts
-        apdType="MMIS"
+        apdType={APD_TYPE.MMIS}
         data={{}}
         years={['1984', '1985']}
       />
@@ -67,7 +70,7 @@ describe('renders correctly', () => {
             expenses: { 1448: {} },
             statePersonnel: { 1448: {} }
           }}
-          groupTitle="MMIS"
+          groupTitle={APD_TYPE.MMIS}
         />
       )
     ).toMatchSnapshot();
@@ -77,7 +80,7 @@ describe('renders correctly', () => {
     expect(
       shallow(
         <DataRowGroup
-          apdType="MMIS"
+          apdType={APD_TYPE.MMIS}
           year="1448"
           data={{
             combined: { 1448: {} },
@@ -86,7 +89,7 @@ describe('renders correctly', () => {
             statePersonnel: { 1448: {} },
             keyStatePersonnel: { 1448: {} }
           }}
-          groupTitle="MMIS"
+          groupTitle={APD_TYPE.MMIS}
         />
       )
     ).toMatchSnapshot();
