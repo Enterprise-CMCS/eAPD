@@ -35,13 +35,13 @@ const All = ({ addActivity, activities, adminCheck, apdType }) => {
       <Waypoint /> {/* Waypoint w/o id indicates top of page */}
       <AlertMissingFFY />
       <Section id="activities" resource="activities">
+        <hr className="custom-hr" />
         {apdType === 'MMIS' && (
           <Instruction
             labelFor="dashboard-instructions"
-            source="activities.dashboardInstructions.instruction"
+            source="activities.dashboardInstructionsMMIS.instruction"
           />
         )}
-        <hr className="custom-hr" />
         {activities.length == 0 && <p>Add at least one activity.</p>}
         {validation?.error && (
           <Fragment>
