@@ -66,7 +66,7 @@ describe('activity non-personnel costs subsection', () => {
         },
         { activityIndex: 2 }
       )
-    ).toEqual({ expenses: 'these are expenses' });
+    ).toEqual({ expenses: 'these are expenses', apdType: 'HITECH' });
   });
 
   it('maps dispatch actions to props', () => {
