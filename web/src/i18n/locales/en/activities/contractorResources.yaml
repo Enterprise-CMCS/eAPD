@@ -44,7 +44,7 @@ MMIS:
     detail: Outline contracts by contract or vendor name.
     helpText: >-
       **Example:** Contractor A, Total Contract Costs $2,000,000, Full Contract
-      Term: 04/15/2021 - 04/14/2025; FFY 2023 Cost: $100,000, FFY 2024 Cost:
+      Term: 4/15/2021 - 4/14/2025; FFY 2023 Cost: $100,000, FFY 2024 Cost:
       $300,000.
   delete:
     text: ✗
