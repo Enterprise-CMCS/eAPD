@@ -258,17 +258,17 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--subtotal budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight"
       >
         <td
           className="title"
           colSpan="5"
         >
-          State Staff Subtotal
+          State Staff Total
         </td>
         <td
           className="budget-table--number"
-          data-cy="subtotal"
+          data-cy="total"
         >
           <Dollars>
             <span>
@@ -351,17 +351,17 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--subtotal budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight"
       >
         <td
           className="title"
           colSpan="5"
         >
-          Other State Expenses Subtotal
+          Other State Expenses Total
         </td>
         <td
           className="budget-table--number"
-          data-cy="subtotal"
+          data-cy="total"
         >
           <Dollars>
             <span>
@@ -492,17 +492,17 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--subtotal budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight"
       >
         <td
           className="title"
           colSpan="5"
         >
-          Private Contractor Subtotal
+          Private Contractor Total
         </td>
         <td
           className="budget-table--number"
-          data-cy="subtotal"
+          data-cy="total"
         >
           <Dollars>
             <span>
@@ -512,7 +512,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--subtotal budget-table--row__header"
+        className="budget-table--total budget-table--row__header"
       >
         <td
           colSpan="5"
@@ -522,7 +522,7 @@ exports[`renders correctly renders correctly with otherFunding 1`] = `
         </td>
         <td
           className="budget-table--number"
-          data-cy="subtotal"
+          data-cy="total"
         >
           <Dollars>
             <span>
@@ -783,17 +783,17 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </tr>
       </CostSummaryRows>
       <tr
-        className="budget-table--subtotal budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight"
       >
         <td
           className="title"
           colSpan="5"
         >
-          State Staff Subtotal
+          State Staff Total
         </td>
         <td
           className="budget-table--number"
-          data-cy="subtotal"
+          data-cy="total"
         >
           <Dollars>
             <span>
@@ -856,17 +856,17 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </tr>
       </CostSummaryRows>
       <tr
-        className="budget-table--subtotal budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight"
       >
         <td
           className="title"
           colSpan="5"
         >
-          Other State Expenses Subtotal
+          Other State Expenses Total
         </td>
         <td
           className="budget-table--number"
-          data-cy="subtotal"
+          data-cy="total"
         >
           <Dollars>
             <span>
@@ -977,17 +977,17 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </tr>
       </CostSummaryRows>
       <tr
-        className="budget-table--subtotal budget-table--row__highlight"
+        className="budget-table--total budget-table--row__highlight"
       >
         <td
           className="title"
           colSpan="5"
         >
-          Private Contractor Subtotal
+          Private Contractor Total
         </td>
         <td
           className="budget-table--number"
-          data-cy="subtotal"
+          data-cy="total"
         >
           <Dollars>
             <span>
@@ -997,7 +997,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </td>
       </tr>
       <tr
-        className="budget-table--subtotal budget-table--row__header"
+        className="budget-table--total budget-table--row__header"
       >
         <td
           colSpan="5"
@@ -1007,7 +1007,7 @@ exports[`renders correctly renders correctly without otherFunding 1`] = `
         </td>
         <td
           className="budget-table--number"
-          data-cy="subtotal"
+          data-cy="total"
         >
           <Dollars>
             <span>
