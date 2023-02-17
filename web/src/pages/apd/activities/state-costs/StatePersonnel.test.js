@@ -50,6 +50,8 @@ describe('activity state personnel costs subsection', () => {
         {
           apd: {
             data: {
+              apdType: 'HITECH',
+              years: ['2021', '2022'],
               activities: [
                 {
                   statePersonnel: 'these are personnel'
@@ -61,7 +63,11 @@ describe('activity state personnel costs subsection', () => {
         },
         { activityIndex: 0 }
       )
-    ).toEqual({ personnel: 'these are personnel', apdType: 'HITECH' });
+    ).toEqual({
+      personnel: 'these are personnel',
+      apdType: 'HITECH',
+      years: ['2021', '2022']
+    });
   });
 
   it('maps dispatch actions to props', () => {

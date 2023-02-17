@@ -50,6 +50,8 @@ describe('activity non-personnel costs subsection', () => {
         {
           apd: {
             data: {
+              years: ['2021', '2022'],
+              apdType: 'HITECH',
               activities: [
                 {
                   expenses: 'these are wrong expenses'
@@ -66,7 +68,11 @@ describe('activity non-personnel costs subsection', () => {
         },
         { activityIndex: 2 }
       )
-    ).toEqual({ expenses: 'these are expenses', apdType: 'HITECH' });
+    ).toEqual({
+      expenses: 'these are expenses',
+      apdType: 'HITECH',
+      years: ['2021', '2022']
+    });
   });
 
   it('maps dispatch actions to props', () => {
