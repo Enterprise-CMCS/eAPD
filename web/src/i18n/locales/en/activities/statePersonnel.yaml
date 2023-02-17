@@ -1,14 +1,30 @@
-instruction:
+instructionHITECH:
   detail: >-
     The cost for state (in-house) staff with benefits is per full time employee
     (FTE). The number of FTEs represents the combined amount of staff time for
-    the duration of the activity. Combine multiple individuals’ commitments
-    only when their costs and roles are the same. Do not include contract
-    personnel in this section; account for them under Private Contractor Costs.
+    the duration of the activity. Combine multiple individuals’ commitments only
+    when their costs and roles are the same. Do not include contract personnel
+    in this section; account for them under Private Contractor Costs.
   helpText: >-
     For example: If two people work as Analyst Class 1 on this activity 75
-    percent of the time, record one entry of 1.5 FTE. If they are in different roles,
-    record two separate entries of 0.75 FTE.
+    percent of the time, record one entry of 1.5 FTE. If they are in different
+    roles, record two separate entries of 0.75 FTE.
+
+instructionMMIS:
+  detail: >-
+    The cost for state (in-house) staff with benefits is per full time employee
+    (FTE). The number of FTEs represents the combined amount of staff time for
+    the duration of the activity. Combine multiple individuals’ commitments only
+    when their costs and roles are the same. Do not include contract personnel
+    in this section; account for them under Private Contractor Costs.
+  helpText: >-
+    **Example**: Two Auditors, Class 1, working at 75% time = Auditor, Class 1
+    at 1.5 FTE
+
+
+    **Example**: Two Auditors, Class 1 and Class 2, working at 75% time =
+    Auditor, Class 1, 0.75 and Auditor, class 2, 0.75 FTE.
+
 noDataNotice: State staff have not been added for this activity.
 labels:
   entryNum: '#'
