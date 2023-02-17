@@ -17,12 +17,14 @@ import { selectApdYears } from '../../../../redux/selectors/apd.selectors';
 import { selectActivityNonPersonnelCosts } from '../../../../redux/selectors/activities.selectors';
 import Instruction from '../../../../components/Instruction';
 import { t } from '../../../../i18n';
+import { selectApdType } from '../../../../redux/selectors/apd.selectors';
 
 const NonPersonnelCosts = ({
   activityIndex,
   expenses,
   removeExpense,
-  years
+  years,
+  apdType
 }) => {
   const [localList, setLocalList] = useState(expenses);
 
@@ -45,7 +47,7 @@ const NonPersonnelCosts = ({
 
   return (
     <Fragment>
-      <Instruction source="activities.expenses.instruction" />
+      <Instruction source={`activities.expenses.instruction${apdType}`} />
       <FormAndReviewList
         activityIndex={activityIndex}
         addButtonText={t('activities.expenses.addButtonText')}
@@ -66,12 +68,14 @@ NonPersonnelCosts.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   expenses: PropTypes.array.isRequired,
   removeExpense: PropTypes.func.isRequired,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
   expenses: selectActivityNonPersonnelCosts(state, activityIndex),
-  years: selectApdYears(state)
+  years: selectApdYears(state),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {
