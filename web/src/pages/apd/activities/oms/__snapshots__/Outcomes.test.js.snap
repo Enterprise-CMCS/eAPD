@@ -5,7 +5,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
   headerClassName={null}
   id="activity-outcomes-0"
   nested={false}
-  resource="activities.outcomes"
+  resource="activities.outcomes.outcomesundefined"
 >
   <hr
     className="subsection-rule"
@@ -47,7 +47,7 @@ exports[`activity Outcomes and Metrics component renders properly 1`] = `
         },
       ]
     }
-    noDataMessage="Add at least one outcome for this activity."
+    noDataMessage="[missing \\"en.activities.outcomes.outcomesundefined.noDataNotice\\" translation]"
     onAddClick={[Function]}
     onCancelClick={[Function]}
     onDeleteClick={[Function]}
