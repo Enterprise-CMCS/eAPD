@@ -148,6 +148,12 @@ describe('ActivitiesDashboard component', () => {
     expect(
       screen.getByText('Activity 1: Our Flag Means Death')
     ).toBeInTheDocument();
+
+    expect(
+      screen.getByText(
+        'Example of individual activities include, but are not limited to:'
+      )
+    ).toBeInTheDocument();
   });
 
   it('should render error message when there are no activities', async () => {
