@@ -5,25 +5,13 @@ import { ADD_APD_YEAR, EDIT_APD, REMOVE_APD_YEAR } from './symbols';
 import {
   addYear,
   removeYear,
-  setBusinessAreaField,
   setNarrativeForHIT,
   setNarrativeForHIE,
   setNarrativeForMMIS,
-  setProgramOverview,
-  setUpdateStatusField
+  setProgramOverview
 } from './overview';
 
 const mockStore = configureStore([thunk]);
-
-describe('APD edit actions for APD update status', () => {
-  it('dispatches an action for changing a field', () => {
-    expect(setUpdateStatusField('isUpdateAPD', false)).toEqual({
-      type: EDIT_APD,
-      path: '/apdOverview/updateStatus/isUpdateAPD',
-      value: false
-    });
-  });
-});
 
 describe('APD edit actions for adding or removing APD years', () => {
   it('dispatchs an action for adding an APD year', () => {
@@ -85,16 +73,6 @@ describe('APD edit actions for APD overview and HIE/HIT/MMIS narratives', () => 
       type: EDIT_APD,
       path: '/apdOverview/narrativeMMIS',
       value: 'narrative'
-    });
-  });
-});
-
-describe('APD edit actions for Medicaid Business Areas', () => {
-  it('dispatches an action for changing a field', () => {
-    expect(setBusinessAreaField('waiverSupportSystems', false)).toEqual({
-      type: EDIT_APD,
-      path: '/apdOverview/medicaidBusinessAreas/waiverSupportSystems',
-      value: false
     });
   });
 });
