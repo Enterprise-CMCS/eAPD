@@ -2135,7 +2135,7 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'APD Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-    fieldDescription: 'Provide another Medicaid Business Area(s)'
+    fieldDescription: 'Provide Other Medicaid Business Area(s).'
   },
   {
     section: 'Key State Personnel',
