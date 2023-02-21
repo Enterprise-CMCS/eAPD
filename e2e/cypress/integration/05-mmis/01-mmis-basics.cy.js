@@ -512,7 +512,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         }
       });
 
-      cy.log('Click through sidenav');
+      cy.log('Click through sidenav and runs cypress-axe');
       pageTitles.forEach(title => {
         cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
 
@@ -525,39 +525,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         cy.get('.ds-h2').should('contain', title[0]);
       });
 
-      // cy.log('Click through Continue buttons');
-      // cy.wrap([...pageTitles]).each((title, index, titles) => {
-      //   // split this up, into one continue and one clicking sidenav, how to test subnav?
-      //   if (
-      //     title !== 'Proposed Budget' &&
-      //     title !== 'Assurances and Compliance'
-      //   ) {
-      //     cy.get('.ds-c-vertical-nav__item').contains(title).click();
-      //     cy.pause();
-      //     cy.get('.ds-h2').should('contain', title);
-
-      //     cy.log(`${titles[index + 1]}`);
-      //     if (
-      //       index < titles.length - 1 &&
-      //       title !== 'Activity Schedule Summary' &&
-      //       title !== 'Security Planning'
-      //     ) {
-      //       cy.get('#continue-button').click();
-      //       cy.get('.ds-h2').should('contain', titles[index + 1]);
-      //     }
-      //   }
-      // });
-
-      // cy.log('Click through Previous buttons');
-      // cy.wrap([...pageTitles].reverse()).each((title, index, reverseTitles) => {
-      //   cy.get('.ds-c-vertical-nav__item').contains(title).click();
-      //   cy.get('.ds-h2').should('contain', title);
-
-      //   if (index < reverseTitles.length - 1) {
-      //     cy.get('#previous-button').click();
-      //     cy.get('.ds-h2').should('contain', reverseTitles[index + 1]);
-      //   }
-      // });
+      // --------------------------------------------------------------------
 
       // cy.log('confirms side nav buttons redirect to correct sections');
       // const pages = [
@@ -648,7 +616,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       //       cy.get('a.ds-c-vertical-nav__label').contains(index.label).click();
       //     });
 
-      //   if (Array.isArray(subnav)) {
+      //   if (Array.isArray(subnav)) { // Is this level of depth necessary? Way I have it now, it is clicks on the subnav then checks if it exists
       //     cy.wrap(subnav).each(sub => {
       //       cy.get(sub)
       //         .then(element => element[0].offsetTop)
