@@ -1,37 +1,77 @@
-title: Private Contractor Costs
-instruction:
-  detail: Outline contracts by contract or vendor name.
-  helpText: >-
-    Itemize federal fiscal year (FFY) costs per contract. If the 
-    vendor or contractor name is unknown, generalize by resource
-    name. (For example, computer resources/TBD)
 noDataNotice: Add private contractor(s) for this activity.
-delete:
-  text: ✗
-  confirm:
-    header: Please Confirm
-    body: Remove this file?
-    _yes: 'Yes'
-    _no: 'No'
-labels:
-  entryNumber: '#'
-  contractorName: Private Contractor or Vendor Name
-  description: Procurement Methodology and Description of Services
-  term: Contract Term
-  start: 'Start:'
-  end: 'End:'
-  cost: Cost
-  costInput: FFY {{year}} cost
-  totalCost: Total Contract Cost
-  totalCostInput: Total Contract Cost
-  hourly: Hourly Resource
-  attachments: Attachments
-  yearCost: '{{year}} Cost'
-srLabels:
-  name: Private Contractor or Vender Name
-  description: Describe the services each contractor will provide.
-  start: Start
-  end: End
-  cost: Contractor cost for {{year}}
-removeLabel: Remove resource
-addContractorButtonText: Add contractor
+
+HITECH:
+  title: Private Contractor Costs
+  instruction:
+    detail: Outline contracts by contract or vendor name.
+    helpText: >-
+      Itemize federal fiscal year (FFY) costs per contract. If the  vendor or
+      contractor name is unknown, generalize by resource name. (For example,
+      computer resources/TBD)
+  delete:
+    text: ✗
+    confirm:
+      header: Please Confirm
+      body: Remove this file?
+      _yes: 'Yes'
+      _no: 'No'
+  labels:
+    entryNumber: '#'
+    contractorName: Private Contractor or Vendor Name
+    description: Procurement Methodology and Description of Services
+    term: Contract Term
+    start: 'Start:'
+    end: 'End:'
+    cost: Cost
+    costInput: FFY {{year}} cost
+    totalCost: Total Contract Cost
+    totalCostInput: Total Contract Cost
+    hourly: Hourly Resource
+    attachments: Attachments
+    yearCost: '{{year}} Cost'
+  srLabels:
+    name: Private Contractor or Vender Name
+    description: Describe the services each contractor will provide.
+    start: Start
+    end: End
+    cost: Contractor cost for {{year}}
+  removeLabel: Remove resource
+  addContractorButtonText: Add contractor
+
+MMIS:
+  title: Private Contractor Costs
+  instruction:
+    detail: Outline contracts by contract or vendor name.
+    helpText: >-
+      **Example:** Contractor A, Total Contract Costs $2,000,000, Full Contract
+      Term: 4/15/2021 - 4/14/2025; FFY 2023 Cost: $100,000, FFY 2024 Cost:
+      $300,000.
+  delete:
+    text: ✗
+    confirm:
+      header: Please Confirm
+      body: Remove this file?
+      _yes: 'Yes'
+      _no: 'No'
+  labels:
+    entryNumber: '#'
+    contractorName: Private Contractor or Vendor Name
+    description: Procurement Methodology and Description of Services
+    term: Contract Term
+    start: 'Start:'
+    end: 'End:'
+    cost: Cost
+    costInput: FFY {{year}} cost
+    totalCost: Total Contract Cost
+    totalCostInput: Total Contract Cost
+    hourly: Hourly Resource
+    attachments: Attachments
+    yearCost: '{{year}} Cost'
+  srLabels:
+    name: Private Contractor or Vender Name
+    description: Describe the services each contractor will provide.
+    start: Start
+    end: End
+    cost: Contractor cost for {{year}}
+  removeLabel: Remove resource
+  addContractorButtonText: Add contractor
