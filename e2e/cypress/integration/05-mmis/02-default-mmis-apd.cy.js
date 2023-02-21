@@ -40,11 +40,10 @@ describe(
         apdUrl = pathname.replace('/apd-overview', '');
         apdId = apdUrl.split('/').pop();
       });
-      cy.get('[data-cy=yearList]').within(() => {
-        cy.get('[type="checkbox"][checked]').each((_, index, list) =>
-          years.push(list[index].value)
-        );
-      });
+
+      cy.get('[type="checkbox"][checked]').each((_, index, list) =>
+        years.push(list[index].value)
+      );
     });
 
     beforeEach(function () {
@@ -68,9 +67,7 @@ describe(
         testDefaultMmisAPDOverview();
 
         it('should have two checked years', function () {
-          cy.get('[data-cy=yearList]').within(() => {
-            cy.get('[type="checkbox"][checked]').should('have.length', 2);
-          });
+          cy.get('[type="checkbox"][checked]').should('have.length', 2);
         });
       });
 
