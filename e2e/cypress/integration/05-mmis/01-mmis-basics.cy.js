@@ -137,12 +137,12 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       })
         .focus()
         .blur();
-      cy.contains('Provide an other Medicaid Business Area(s)').should('exist');
+      cy.contains('Provide Other Medicaid Business Area(s)').should('exist');
 
       cy.findByRole('checkbox', {
         name: /Program Integrity/i
       }).click();
-      cy.contains('Provide an other Medicaid Business Area(s)').should(
+      cy.contains('Provide Other Medicaid Business Area(s)').should(
         'not.exist'
       );
 
@@ -154,7 +154,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
 
       cy.get(`[data-cy='other_details']`).focus().blur();
-      cy.contains('Provide an other Medicaid Business Area(s)').should(
+      cy.contains('Provide Other Medicaid Business Area(s)').should(
         'not.exist'
       );
 
