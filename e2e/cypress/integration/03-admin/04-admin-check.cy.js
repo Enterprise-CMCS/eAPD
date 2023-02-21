@@ -1,16 +1,12 @@
-/// <reference types="cypress" />
-
-// Tests out bugs that have been fixed
-// so the same bugs don't happen twice
-
-describe('APD builder bugs', { tags: ['@apd'] }, function () {
+describe('tests state admin portal', () => {
   let apdUrl;
   let apdId;
   const years = [];
 
+  /* eslint-disable-next-line prefer-arrow-callback, func-names */
   before(function () {
     cy.updateFeatureFlags({ enableMmis: false, adminCheckFlag: true });
-    cy.useStateStaff();
+    cy.useRegularUser();
     cy.visit('/');
 
     cy.findAllByText('Create new').click();
@@ -47,61 +43,178 @@ describe('APD builder bugs', { tags: ['@apd'] }, function () {
     cy.deleteAPD(this.apdId);
   });
 
-  it('tests out FTE number bug, #4168', function () {
-    cy.get('#continue-button').click();
-    cy.get('.ds-h2').should('contain', 'Key State Personnel');
+  describe('Admin Check', function () {
+    it(
+      'tests basic admin check functionality',
+      { tags: ['@state', '@admin'] },
+      function () {
+        cy.turnOnAdminCheck();
 
-    cy.findByRole('button', { name: 'Add Primary Contact' }).click();
-    cy.get('input[type="radio"][value="yes"]').check({ force: true });
+        cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('exist');
 
-    cy.get('[data-cy="key-person-0-0__fte"]').type('0.001');
-    cy.get('[data-cy="key-person-0-1__fte"]').click(); //Triggers blur
-    cy.get('[data-cy="key-person-0-0__fte"]').should('have.value', 0.001);
-  });
+        cy.goToApdOverview();
+        cy.get('[data-cy="validationError"]').should('exist');
 
-  it('tests uploading an image', function () {
-    cy.intercept('POST', `${Cypress.env('API')}/apds/${this.apdId}/files`).as(
-      'uploadImage'
-    );
-    cy.intercept('GET', `${Cypress.env('API')}/apds/${this.apdId}/files/*`).as(
-      'loadImage'
-    );
-
-    cy.get('[class="tox-edit-area"]').eq(3).scrollIntoView();
-
-    // Uploads cms-logo.png from /fixtures/
-    cy.setTinyMceContent('mmis-overview-field', 'Drag and Drop here');
-
-    cy.enter('iframe[id="mmis-overview-field_ifr"]').then(getBody => {
-      cy.fixture('cms-logo.png', 'binary')
-        .then(Cypress.Blob.binaryStringToBlob)
-        .then(fileContent => {
-          const file = new File([fileContent], 'cms-logo.png', {
-            type: 'image/png'
-          });
-
-          getBody()
-            .contains('Drag and Drop here')
-            .trigger('drop', {
-              dataTransfer: {
-                files: [file]
-              }
-            });
+        cy.findByRole('button', { name: /Stop Administrative Check/i }).click({
+          force: true
         });
-    });
+        cy.get('[data-cy="validationError"]').should('not.exist');
 
-    cy.wait('@uploadImage', { timeout: 30000 });
+        cy.turnOnAdminCheck();
 
-    cy.waitForSave();
-    cy.contains('AK APD Home').click();
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(5000); // Gives time to load the APD dashboard
+        cy.get('[data-cy="numRequired"]').should('have.text', '35');
 
-    cy.visit(this.apdUrl);
-    cy.wait('@loadImage', { timeout: 90000 });
+        cy.findByRole('button', { name: /Collapse/i }).click({
+          force: true
+        });
 
-    cy.contains('Export and Submit').click();
-    cy.findByRole('button', { name: 'Continue to Review' }).click();
-    cy.wait('@loadImage', { timeout: 30000 });
+        cy.get('[class="eapd-admin-check-list"]').should('not.exist');
+        cy.findByRole('button', { name: /Stop Administrative Check/i }).should(
+          'not.exist'
+        );
+
+        cy.findByRole('button', { name: /Expand/i }).click({
+          force: true
+        });
+
+        cy.checkAdminCheckHyperlinks('APD Overview', 'APD Overview', 2);
+        cy.checkAdminCheckHyperlinks(
+          'Key State Personnel',
+          'Key State Personnel',
+          2
+        );
+        cy.checkAdminCheckHyperlinks(
+          'Activity 1 Activity Overview',
+          'Activity Overview',
+          3
+        );
+        cy.checkAdminCheckHyperlinks(
+          'Activity 1 Cost Allocation',
+          'Cost Allocation',
+          3
+        );
+        cy.checkAdminCheckHyperlinks(
+          'Activity 1 Budget and FFP',
+          'Budget and FFP',
+          2
+        );
+        cy.checkAdminCheckHyperlinks(
+          'Assurances and Compliance',
+          'Assurances and Compliance',
+          2
+        );
+
+        cy.goToApdOverview();
+        cy.get('[data-cy="validationError"]')
+          .contains('Provide a brief introduction to the state program.')
+          .should('exist');
+
+        cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+
+        cy.setTinyMceContent(
+          'program-introduction-field',
+          'No validation error under me!'
+        );
+        cy.get('[data-cy="validationError"]')
+          .contains('Provide a brief introduction to the state program.')
+          .should('not.exist');
+        cy.get('[data-cy="numRequired"]').should('have.text', '34');
+
+        cy.findByRole('button', { name: /Collapse/i }).click({
+          force: true
+        });
+
+        cy.get('[data-cy="validationError"]')
+          .contains('Provide a summary of HIT-funded activities.')
+          .should('exist');
+
+        cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+
+        cy.setTinyMceContent(
+          'hit-overview-field',
+          'No Inline validation under here!'
+        );
+
+        cy.get('[data-cy="validationError"]').should('not.exist');
+        cy.get('[data-cy="numRequired"]').should('have.text', '33');
+
+        cy.findByRole('button', { name: /Expand/i }).click({
+          force: true
+        });
+
+        cy.get('[class="eapd-admin-check-list"]').within(list => {
+          cy.get(list).contains('APD Overview').should('not.exist');
+        });
+
+        cy.setTinyMceContent('program-introduction-field', '');
+        cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+
+        cy.get('[data-cy="validationError"]')
+          .contains('Provide a brief introduction to the state program.')
+          .should('exist');
+        cy.get('[data-cy="numRequired"]').should('have.text', '34');
+
+        cy.findByRole('button', { name: /Collapse/i }).click({
+          force: true
+        });
+
+        cy.setTinyMceContent('hit-overview-field', '');
+        cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+
+        cy.get('[data-cy="validationError"]')
+          .contains('Provide a summary of HIT-funded activities.')
+          .should('exist');
+        cy.get('[data-cy="numRequired"]').should('have.text', '35');
+
+        cy.findByRole('button', { name: /Expand/i }).click({
+          force: true
+        });
+
+        cy.get('[class="eapd-admin-check-list"]').within(list => {
+          cy.get(list).contains('APD Overview').should('exist');
+        });
+      }
+    );
+
+    it.skip(
+      'runs cypress-axe (accessibility test) on the help panel',
+      { tags: ['@state', '@admin'] },
+      function () {
+        cy.turnOnAdminCheck();
+
+        // Skipping test for now while problems with CMS Design System - Drawer and Help Drawer get resolved
+        cy.checkPageA11y();
+      }
+    );
+
+    it(
+      'tests admin check on a functionally complete APD',
+      { tags: ['@state', '@admin'] },
+      function () {
+        cy.contains('AK APD Home').click();
+        cy.findAllByText('HITECH IAPD Complete').eq(0).click();
+
+        cy.turnOnAdminCheck();
+
+        cy.goToApdOverview();
+
+        cy.get('[data-cy="numRequired"]').should('have.text', '0');
+
+        cy.get('[class="eapd-admin-check-list"]').within(list => {
+          cy.get(list)
+            .contains('Administrative Check is Complete')
+            .should('exist');
+          cy.contains('export and submit').click();
+        });
+
+        cy.get('.ds-h2').should('contain', 'Export and Submit');
+
+        cy.findByRole('button', { name: /Close/i }).click({
+          force: true
+        });
+
+        cy.get('[class="eapd-admin-check  ds-c-drawer"]').should('not.exist');
+      }
+    );
   });
 });
