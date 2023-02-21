@@ -461,16 +461,16 @@ const invalidHitechApdOverview = {
   narrativeMMIS: '',
   updateStatus: {
     isUpdateAPD: null,
-    annualUpdate: false,
-    asNeededUpdate: false
+    annualUpdate: null,
+    asNeededUpdate: null
   }
 };
 
 const invalidMmisApdOverview = {
   updateStatus: {
-    isUpdateAPD: true,
-    annualUpdate: false,
-    asNeededUpdate: false
+    isUpdateAPD: null,
+    annualUpdate: null,
+    asNeededUpdate: null
   },
   medicaidBusinessAreas: {
     waiverSupportSystems: false,
@@ -2135,12 +2135,7 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'APD Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-    fieldDescription: 'Select an update type.'
-  },
-  {
-    section: 'APD Overview',
-    link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-    fieldDescription: 'Provide Other Medicaid Business Area(s).'
+    fieldDescription: 'Provide another Medicaid Business Area(s)'
   },
   {
     section: 'Key State Personnel',
@@ -2274,7 +2269,7 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
         {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Select an update type.'
+          fieldDescription: 'Select yes or no'
         },
         {
           section: 'APD Overview',
@@ -2285,16 +2280,6 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
           fieldDescription: 'Provide a summary of HIT-funded activities.'
-        },
-        {
-          section: 'APD Overview',
-          link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Provide a summary of HIE-funded activities.'
-        },
-        {
-          section: 'APD Overview',
-          link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Provide a summary of MMIS-funded activities.'
         }
       ]);
     }
@@ -2553,12 +2538,7 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
         {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Select an update type.'
-        },
-        {
-          section: 'APD Overview',
-          link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Select at least one Medicaid Business Area.'
+          fieldDescription: 'Select yes or no'
         }
       ]);
     }
