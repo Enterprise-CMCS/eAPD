@@ -5,7 +5,7 @@ exports[`the ContractorResources component renders correctly 1`] = `
   headerClassName={null}
   id="activity-contractor-costs-0"
   nested={false}
-  resource="activities.contractorResources"
+  resource="activities.contractorResources.HITECH"
 >
   <FormAndReviewList
     activityIndex={0}
