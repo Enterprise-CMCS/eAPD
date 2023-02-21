@@ -13,8 +13,9 @@ import { t } from '../../../../i18n';
 import { selectOMsByActivityIndex } from '../../../../redux/selectors/activities.selectors';
 
 import { newOutcome } from '../../../../redux/reducers/activities';
+import { selectApdType } from '../../../../redux/selectors/apd.selectors';
 
-const Outcomes = ({ activityIndex, outcomes, remove }) => {
+const Outcomes = ({ activityIndex, outcomes, remove, apdType }) => {
   const [localList, setLocalList] = useState(outcomes);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const Outcomes = ({ activityIndex, outcomes, remove }) => {
 
   return (
     <Subsection
-      resource="activities.outcomes"
+      resource={`activities.outcomes.outcomes${apdType}`}
       id={`activity-outcomes-${activityIndex}`}
     >
       <hr className="subsection-rule" />
@@ -46,7 +47,7 @@ const Outcomes = ({ activityIndex, outcomes, remove }) => {
         list={localList}
         collapsed={OutcomeAndMetricReview}
         expanded={OutcomeAndMetricForm}
-        noDataMessage={t('activities.outcomes.noDataNotice')}
+        noDataMessage={t(`activities.outcomes.outcomes${apdType}.noDataNotice`)}
         onAddClick={handleAdd}
         onCancelClick={onCancel}
         onDeleteClick={handleDelete}
@@ -59,11 +60,13 @@ const Outcomes = ({ activityIndex, outcomes, remove }) => {
 Outcomes.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   outcomes: PropTypes.array.isRequired,
-  remove: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired,
+  apdType: PropTypes.string
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
-  outcomes: selectOMsByActivityIndex(state, { activityIndex })
+  outcomes: selectOMsByActivityIndex(state, { activityIndex }),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {
