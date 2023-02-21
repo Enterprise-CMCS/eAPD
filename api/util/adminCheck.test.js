@@ -1487,7 +1487,7 @@ const mockMmisApdRandomInvalid = {
   years: ['2022', '2023'],
   apdOverview: {
     updateStatus: {
-      isUpdateAPD: true,
+      isUpdateAPD: false,
       annualUpdate: false,
       asNeededUpdate: false
     },
