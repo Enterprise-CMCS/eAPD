@@ -12,7 +12,7 @@ exports[`activity state personnel costs subsection renders correctly 1`] = `
     }
     labelFor={null}
     reverse={false}
-    source="activities.statePersonnel.instruction"
+    source="activities.statePersonnel.instructionundefined"
   />
   <FormAndReviewList
     activityIndex={72}

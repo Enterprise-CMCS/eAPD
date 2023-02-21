@@ -12,7 +12,10 @@ import FormAndReviewList from '../../../../components/FormAndReviewList';
 import { Subsection } from '../../../../components/Section';
 
 import { selectContractorsByActivityIndex } from '../../../../redux/selectors/activities.selectors';
-import { selectApdYears } from '../../../../redux/selectors/apd.selectors';
+import {
+  selectApdYears,
+  selectApdType
+} from '../../../../redux/selectors/apd.selectors';
 
 import { removeContractor as removeAction } from '../../../../redux/actions/editActivity';
 import { newContractor } from '../../../../redux/reducers/activities';
@@ -21,7 +24,8 @@ const ContractorResources = ({
   activityIndex,
   list,
   removeContractor,
-  years
+  years,
+  apdType
 }) => {
   const [localList, setLocalList] = useState(list);
 
@@ -43,7 +47,7 @@ const ContractorResources = ({
   };
   return (
     <Subsection
-      resource="activities.contractorResources"
+      resource={`activities.contractorResources.${apdType}`}
       id={`activity-contractor-costs-${activityIndex}`}
     >
       <FormAndReviewList
@@ -66,12 +70,14 @@ ContractorResources.propTypes = {
   activityIndex: PropTypes.number.isRequired,
   list: PropTypes.array.isRequired,
   removeContractor: PropTypes.func.isRequired,
-  years: PropTypes.arrayOf(PropTypes.string).isRequired
+  years: PropTypes.arrayOf(PropTypes.string).isRequired,
+  apdType: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state, { activityIndex }) => ({
   list: selectContractorsByActivityIndex(state, { activityIndex }),
-  years: selectApdYears(state)
+  years: selectApdYears(state),
+  apdType: selectApdType(state)
 });
 
 const mapDispatchToProps = {
