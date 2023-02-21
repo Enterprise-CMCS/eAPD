@@ -174,15 +174,18 @@ export const testDefaultMmisAPDOverview = function () {
     cy.findByRole('radio', { name: /MMIS IAPD/i }).should('be.checked');
     cy.findByRole('radio', { name: /HITECH IAPD/i }).should('not.be.checked');
 
-    cy.get('[data-cy=yearList]').within(() => {
-      cy.get('[type="checkbox"]').each(($year, index, list) => {
-        if (index === list.length - 1) {
-          cy.wrap($year).should('not.be.checked');
-        } else {
-          cy.wrap($year).should('be.checked');
-        }
-      });
+    cy.get('[type="checkbox"]').each(($year, index, list) => {
+      if (index === list.length - 1) {
+        cy.wrap($year).should('not.be.checked');
+      } else {
+        cy.wrap($year).should('be.checked');
+      }
     });
+
+    cy.get('[id="program-introduction-field"]').should('have.value', '');
+    cy.get('[id="hit-overview-field"]').should('have.value', '');
+    cy.get('[id="hie-overview-field"]').should('have.value', '');
+    cy.get('[id="mmis-overview-field"]').should('have.value', '');
 
     cy.waitForSave();
   });
