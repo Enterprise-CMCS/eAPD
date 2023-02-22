@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 
 import Dollars from '../../../components/Dollars';
 import { TABLE_HEADERS } from '../../../constants';
-import { selectPreviousActivityExpensesTotals } from '../../../redux/selectors/apd.selectors';
-import { selectApdType } from '../../../redux/selectors/apd.selectors';
+import {
+  selectPreviousActivityExpensesTotals,
+  selectApdType
+} from '../../../redux/selectors/apd.selectors';
 
 const ApdPreviousActivityTableMMIS = ({ totals, apdType }) => {
   const years = Object.keys(totals);

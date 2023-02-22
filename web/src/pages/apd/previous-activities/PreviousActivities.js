@@ -11,9 +11,11 @@ import { setPreviousActivitySummary } from '../../../redux/actions/editApd';
 import RichText from '../../../components/RichText';
 import { Section, Subsection } from '../../../components/Section';
 import { t } from '../../../i18n';
-import { selectPreviousActivitySummary } from '../../../redux/selectors/apd.selectors';
+import {
+  selectPreviousActivitySummary,
+  selectApdType
+} from '../../../redux/selectors/apd.selectors';
 import AlertMissingFFY from '../../../components/AlertMissingFFY';
-import { selectApdType } from '../../../redux/selectors/apd.selectors';
 
 const PreviousActivities = ({
   previousActivitySummary,

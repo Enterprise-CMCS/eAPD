@@ -12,12 +12,14 @@ import { removeNonPersonnelCost } from '../../../../redux/actions/editActivity';
 
 import { newExpense } from '../../../../redux/reducers/activities';
 
-import { selectApdYears } from '../../../../redux/selectors/apd.selectors';
+import {
+  selectApdYears,
+  selectApdType
+} from '../../../../redux/selectors/apd.selectors';
 
 import { selectActivityNonPersonnelCosts } from '../../../../redux/selectors/activities.selectors';
 import Instruction from '../../../../components/Instruction';
 import { t } from '../../../../i18n';
-import { selectApdType } from '../../../../redux/selectors/apd.selectors';
 
 const NonPersonnelCosts = ({
   activityIndex,

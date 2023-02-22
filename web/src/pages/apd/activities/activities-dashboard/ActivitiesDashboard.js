@@ -8,10 +8,12 @@ import EntryDetails from './Activity';
 import { addActivity as actualAddActivity } from '../../../../redux/actions/editActivity';
 import { Section } from '../../../../components/Section';
 import { selectAllActivities } from '../../../../redux/selectors/activities.selectors';
-import { selectAdminCheckEnabled } from '../../../../redux/selectors/apd.selectors';
+import {
+  selectAdminCheckEnabled,
+  selectApdType
+} from '../../../../redux/selectors/apd.selectors';
 import Waypoint from '../../../../components/ConnectedWaypoint';
 import AlertMissingFFY from '../../../../components/AlertMissingFFY';
-import { selectApdType } from '../../../../redux/selectors/apd.selectors';
 
 import { activitiesDashboard as schema } from '@cms-eapd/common';
 import Instruction from '../../../../components/Instruction';
