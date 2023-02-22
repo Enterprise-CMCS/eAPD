@@ -157,13 +157,11 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.findByText('Other').click();
 
       cy.get(createBtn).should('be.disabled');
-
-      cy.get(`[data-cy='other_details']`).focus().blur();
+      cy.contains('Provide Other Medicaid Business Area(s)').should('exist');
+      cy.get(`[data-cy='other_details']`).type('This is other stuff.').blur();
       cy.contains('Provide Other Medicaid Business Area(s)').should(
         'not.exist'
       );
-
-      cy.get(`[data-cy='other_details']`).type('This is other stuff.').blur();
 
       cy.get(createBtn).should('not.be.disabled');
       cy.findByRole('button', { name: /Cancel/i }).click();
