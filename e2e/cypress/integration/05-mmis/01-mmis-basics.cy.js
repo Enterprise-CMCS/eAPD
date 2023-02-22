@@ -59,10 +59,10 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     cy.visit(apdUrl);
   });
 
-  after(function () {
-    cy.visit('/');
-    cy.deleteAPD(this.apdId);
-  });
+  // after(function () {
+  //   cy.visit('/');
+  //   cy.deleteAPD(this.apdId);
+  // });
 
   describe('Create MMIS APD', function () {
     it('tests Create New page', function () {
@@ -425,8 +425,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.contains('Provide Business Continuity and Disaster Recovery').should(
         'not.exist'
       );
-
-      // Todo: TEST CONTINUE AND BACK BUTTONS, Assurances and Compliance page crashes though.
     });
 
     it('tests the Results of Previous Activities section', function () {
@@ -452,7 +450,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
     });
 
-    it.only('mmis navigation and cypress-axe', function () {
+    it('mmis navigation and cypress-axe', function () {
       // Decided to omit the activities page since the first subnav doesn't match the page title
       const pageTitles = [
         ['APD Overview'],
@@ -476,179 +474,116 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       ];
 
       const activityPageTitles = [
-        ['Activities', 'Activities Dashboard'],
-        'Activity Overview',
-        'Analysis of Alternatives and Risks',
-        'Activity Schedule and Milestones',
-        'Conditions for Enhanced Funding',
-        'Outcomes and Metrics',
-        'State Staff and Expenses',
-        'Private Contractor Costs',
-        'Cost Allocation and Other Funding',
-        'Budget and FFP'
+        ['Activity Overview'],
+        ['Analysis of Alternatives and Risk'],
+        [
+          'Activity Schedule and Milestones',
+          ['Activity Schedule', 'Milestones']
+        ],
+        ['Conditions for Enhanced Funding'],
+        ['Outcomes and Metrics'],
+        ['State Staff and Expenses'],
+        ['Private Contractor Costs'],
+        [
+          'Cost Allocation and Other Funding',
+          ['Cost Allocation', 'Other Funding']
+        ],
+        ['Budget and FFP']
       ];
 
+      cy.log('Click through sidenav and runs cypress-axe');
+      pageTitles.forEach(title => {
+        cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
+        if (title.length > 1) {
+          title.forEach((subnav, index) => {
+            cy.get('.ds-c-vertical-nav__subnav').contains(subnav).click();
+
+            // if (index !== 0) cy.get('.ds-h3').should('contain', subnav);
+            if (index !== 0)
+              cy.get('.ds-h3').contains(subnav).should('be.visible');
+          });
+        }
+        cy.get('.ds-h2').should('contain', title[0]);
+        cy.checkPageA11y();
+      });
+
+      cy.log('Click through sidenav of an activity and runs cypress-axe');
+      cy.goToActivityDashboard();
+      cy.get('.ds-h2').should('contain', 'Activities');
+
+      cy.findAllByText('Add Activity').click();
+
+      // TODO: Bug Ticket 4481, Uncomment code below to navigate via side panel
+      // cy.get('.ds-c-vertical-nav__item').contains('Activity 1: Untitled').click();
+
+      // Once 4481 is fixed, and the code above expands the subnav of the activity, we can delete this line
+      cy.get('#activities').contains('Edit').click();
+
+      activityPageTitles.forEach(title => {
+        if (title.length > 1) {
+          cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
+          title[1].forEach(altHeader => {
+            cy.get('.ds-h3').should('contain', altHeader);
+          });
+          cy.checkPageA11y();
+        } else {
+          cy.get('.ds-c-vertical-nav__item').contains(title).click();
+          cy.get('.ds-h3').should('contain', title);
+          cy.checkPageA11y();
+        }
+      });
+
       cy.log('Click through Continue buttons');
-      cy.get('.ds-c-vertical-nav__item').contains('APD Overview').click();
       pageTitles.forEach((titles, index) => {
         cy.get('.ds-h2').should('contain', titles[0]);
-        if (index < titles.length - 1) {
+        if (index < pageTitles.length - 1) {
           cy.get('#continue-button').click();
-          if (index === 4)
-            // Skips over activity page index
-            cy.get('#continue-button').click();
+          if (index === 3) {
+            // Activity page index
+            cy.get('#activities').contains('Edit').click();
+            activityPageTitles.forEach(titles => {
+              cy.get('.ds-h3').should('contain', titles);
+              cy.get('#continue-button').click();
+            });
+          }
         }
       });
 
       cy.log('Click through Previous buttons');
       cy.get('.ds-c-vertical-nav__item').contains('Export and Submit').click();
-      cy.wrap(pageTitles.reverse()).forEach((titles, index) => {
+      pageTitles.reverse().forEach((titles, index) => {
         cy.get('.ds-h2').should('contain', titles[0]);
-        if (index < titles.length - 1) {
-          cy.get('#continue-button').click();
-          if (index === 5)
-            // Skips over activity page index
-            cy.get('#continue-button').click();
+        if (index < pageTitles.length - 1) {
+          cy.get('#previous-button').click();
+          if (index === 5) {
+            // Activity page index
+            cy.goToBudgetandFFP(0);
+            activityPageTitles.reverse().forEach(titles => {
+              cy.get('.ds-h3').should('contain', titles);
+              cy.get('#previous-button').click();
+            });
+          }
         }
       });
 
-      cy.log('Click through sidenav and runs cypress-axe');
-      pageTitles.forEach(title => {
-        cy.get('.ds-c-vertical-nav__item').contains(title[0]).click();
+      cy.log(
+        'should go to the Activity Overview page when edit is clicked in Executive Summary'
+      );
+      cy.goToExecutiveSummary();
 
-        if (title.length > 1) {
-          title.forEach((subnav, index) => {
-            cy.get('.ds-c-vertical-nav__subnav').contains(subnav).click();
-            if (index !== 0) cy.get('.ds-h3').should('contain', subnav);
-          });
-        }
-        cy.get('.ds-h2').should('contain', title[0]);
-      });
+      cy.get('#executive-summary-summary')
+        .parent()
+        .contains('div', 'Activity 1: Untitled')
+        .parent()
+        .parent()
+        .findByRole('link', { name: 'Edit' })
+        .click();
 
-      // --------------------------------------------------------------------
-
-      // cy.log('confirms side nav buttons redirect to correct sections');
-      // const pages = [
-      //   { parent: 'APD Overview', label: '' },
-      //   {
-      //     parent: 'Key State Personnel',
-      //     label: 'Key Personnel and Program Management'
-      //   },
-      //   {
-      //     parent: 'Results of Previous Activities',
-      //     label: 'Results of Previous Activities'
-      //   },
-      //   { parent: 'Activities', label: '' },
-      //   { parent: 'Activity Schedule Summary', label: '' },
-      //   { parent: 'Proposed Budget', label: 'Proposed Budget' },
-      //   { parent: 'Assurances and Compliance', label: '' },
-      //   { parent: 'Executive Summary', label: 'Executive Summary' },
-      //   { parent: 'Export and Submit', label: '' }
-      // ];
-
-      // cy.wrap(pages).each(index => {
-      //   if (index.label !== '') {
-      //     // Expand nav menu option
-      //     cy.get('.ds-c-vertical-nav__label--parent')
-      //       .contains(index.parent)
-      //       .then($el => {
-      //         if ($el.attr('aria-expanded') === 'false') {
-      //           // if it's not expanded, expand it
-      //           cy.wrap($el).click();
-      //         }
-
-      //         // Click on nav submenu button
-      //         cy.get('a.ds-c-vertical-nav__label')
-      //           .contains(index.label)
-      //           .click();
-      //       });
-      //   } else {
-      //     cy.get('a.ds-c-vertical-nav__label').contains(index.parent).click();
-      //   }
-
-      //   cy.get('.ds-h2').should('contain', index.parent);
-      // });
-
-      // cy.log('confirms anchor links redirect to correct sections');
-      // const pageWithAnchors = [
-      //   {
-      //     parent: 'Key State Personnel',
-      //     label: 'Key Personnel and Program Management',
-      //     subnav: '#apd-state-profile-key-personnel'
-      //   },
-      //   {
-      //     parent: 'Results of Previous Activities',
-      //     label: 'Prior Activities Overview',
-      //     subnav: ['#prev-activities-outline', '#prev-activities-table']
-      //   },
-      //   {
-      //     parent: 'Proposed Budget',
-      //     label: 'Combined Activity Costs',
-      //     subnav: [
-      //       '#combined-activity-costs-table',
-      //       '#budget-summary-table',
-      //       '#budget-federal-by-quarter',
-      //       '#budget-incentive-by-quarter'
-      //     ]
-      //   },
-      //   {
-      //     parent: 'Executive Summary',
-      //     label: 'Activities Summary',
-      //     subnav: [
-      //       '#executive-summary-summary',
-      //       '#executive-summary-budget-table'
-      //     ]
-      //   }
-      // ];
-
-      // cy.wrap(pageWithAnchors).each(index => {
-      //   const { subnav } = index;
-
-      //   cy.get('.ds-c-vertical-nav__label--parent')
-      //     .contains(index.parent)
-      //     .then($el => {
-      //       if ($el.attr('aria-expanded') === 'false') {
-      //         // if it's not expanded, expand it
-      //         cy.wrap($el).click();
-      //       }
-
-      //       // Click on anchor link
-      //       cy.get('a.ds-c-vertical-nav__label').contains(index.label).click();
-      //     });
-
-      //   if (Array.isArray(subnav)) { // Is this level of depth necessary? Way I have it now, it is clicks on the subnav then checks if it exists
-      //     cy.wrap(subnav).each(sub => {
-      //       cy.get(sub)
-      //         .then(element => element[0].offsetTop)
-      //         .then(() => cy.window().its('scrollY').should('be.gt', 0))
-      //         .then(offset => cy.window().its('scrollY').should('eq', offset));
-      //     });
-      //   } else {
-      //     cy.get(subnav)
-      //       .then(element => element[0].offsetTop)
-      //       .then(() => cy.window().its('scrollY').should('be.gt', 0))
-      //       .then(offset => cy.window().its('scrollY').should('eq', offset));
-      //   }
-      // });
-
-      // cy.log(
-      //   'should go to the Activity Overview page when edit is clicked in Executive Summary'
-      // );
-      // cy.goToExecutiveSummary();
-
-      // cy.get('#executive-summary-summary')
-      //   .parent()
-      //   .contains('div', 'Activity 1: Program Administration')
-      //   .parent()
-      //   .parent()
-      //   .findByRole('link', { name: 'Edit' })
-      //   .click();
-
-      // cy.findByRole('heading', {
-      //   name: /^Activity 1:/i,
-      //   level: 2
-      // }).should('exist');
-      // cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
+      cy.findByRole('heading', {
+        name: /^Activity 1:/i,
+        level: 2
+      }).should('exist');
+      cy.findByRole('heading', { name: /Activity Overview/i }).should('exist');
     });
   });
 });
