@@ -35,6 +35,7 @@ NoContractorStory.decorators = [
       initialState: {
         apd: {
           data: {
+            apdType: 'HITECH',
             activities: [
               {
                 contractorResources: []
@@ -61,6 +62,7 @@ SingleContractorStory.decorators = [
       initialState: {
         apd: {
           data: {
+            apdType: 'HITECH',
             activities: [
               {
                 contractorResources: [
@@ -111,6 +113,7 @@ MultipleContractorsStory.decorators = [
       initialState: {
         apd: {
           data: {
+            apdType: 'HITECH',
             activities: [
               {
                 contractorResources: [
