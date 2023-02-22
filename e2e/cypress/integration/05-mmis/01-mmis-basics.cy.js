@@ -66,6 +66,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
   describe('Create MMIS APD', function () {
     it('tests Create New page', function () {
+      const createBtn = `[data-cy='create_apd_btn']`;
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
 
@@ -89,7 +90,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.findAllByText('Is this an APD update?').should('exist');
       cy.findAllByText('Medicaid Business Areas').should('exist');
 
-      cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
+      cy.get(createBtn).should('be.disabled');
 
       cy.findByLabelText('APD Name').clear().type('MMIS APD Test').blur();
 
@@ -103,6 +104,8 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         cy.findByRole('checkbox', { name: year }).click();
       });
       cy.contains('Select at least one year.').should('not.exist');
+
+      cy.get(createBtn).should('be.disabled');
 
       // Update section validation
       cy.findByRole('radio', { name: /No, this is for a new project./i })
@@ -129,14 +132,14 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.findByRole('checkbox', { name: /As-needed update/i }).click();
       cy.contains('Select at least one type of update.').should('not.exist');
 
-      cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
+      cy.get(createBtn).should('be.disabled');
 
       // Medicaid Business Area validation
       cy.findByRole('checkbox', {
         name: /1115 or Waiver Support Systems/i
       })
-        .focus()
-        .blur();
+        .click()
+        .click();
       cy.contains('Select at least one Medicaid Business Area.').should(
         'exist'
       );
@@ -148,12 +151,12 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         'not.exist'
       );
 
-      cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled');
+      cy.get(createBtn).should('not.be.disabled');
 
       // Other MBA Validation
       cy.findByText('Other').click();
 
-      cy.get(`[data-cy='create_apd_btn']`).should('be.disabled');
+      cy.get(createBtn).should('be.disabled');
 
       cy.get(`[data-cy='other_details']`).focus().blur();
       cy.contains('Provide Other Medicaid Business Area(s)').should(
@@ -162,12 +165,13 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
       cy.get(`[data-cy='other_details']`).type('This is other stuff.').blur();
 
-      cy.get(`[data-cy='create_apd_btn']`).should('not.be.disabled');
+      cy.get(createBtn).should('not.be.disabled');
       cy.findByRole('button', { name: /Cancel/i }).click();
 
       cy.contains('MMIS APD Test').should('not.exist');
     });
   });
+
   describe('MMIS Pages', function () {
     it('tests Activity Overview page', function () {
       const mmisBasics = this.mmisBasics;
