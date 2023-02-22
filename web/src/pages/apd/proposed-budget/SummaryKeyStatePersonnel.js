@@ -10,7 +10,7 @@ import { getAPDName } from '../../../redux/reducers/apd';
 const SummaryKeyStatePersonnel = ({ ffy, costSummary, apdName }) => {
   return (
     <table
-      className="budget-table key-state-personnel-summary"
+      className="budget-table activity-budget-table key-state-personnel-summary"
       id={`key-state-personnel-budget-${ffy}`}
     >
       <thead>
