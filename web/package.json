@@ -147,6 +147,7 @@
     "react-test-renderer": "17.0.2",
     "redux-mock-store": "1.5.4",
     "storybook-addon-designs": "6.3.1",
+    "storybook-addon-launchdarkly": "^1.0.2",
     "stream-browserify": "3.0.0",
     "webpack-dev-server": "4.11.1",
     "yaml-jest": "1.2.0"
