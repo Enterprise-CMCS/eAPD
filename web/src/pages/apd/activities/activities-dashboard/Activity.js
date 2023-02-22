@@ -45,7 +45,7 @@ const EntryDetails = ({
 
   const title = useMemo(
     () => makeTitle({ name, fundingSource, apdType }, activityIndex + 1),
-    [fundingSource, name, activityIndex]
+    [fundingSource, name, activityIndex, apdType]
   );
 
   const editContent = (
