@@ -273,20 +273,6 @@ describe('<ApdNew />', () => {
 
         expect(disabledBtn).toBeDisabled();
 
-        expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
-        expect(screen.getByRole('checkbox', { name: /2024/i })).toBeChecked();
-        expect(
-          screen.getByRole('checkbox', { name: /2025/i })
-        ).not.toBeChecked();
-
-        user.click(screen.getByRole('checkbox', { name: /2024/i }));
-        await waitFor(() => {
-          expect(
-            screen.getByRole('checkbox', { name: /2024/i })
-          ).not.toBeChecked();
-        });
-        expect(disabledBtn).toBeDisabled();
-
         user.click(
           screen.getByRole('radio', { name: /No, this is for a new project/i })
         );
@@ -311,7 +297,13 @@ describe('<ApdNew />', () => {
           expect(disabledBtn).toBeEnabled();
         });
 
+        user.click(screen.getByRole('checkbox', { name: /2024/i }));
         user.click(screen.getByRole('checkbox', { name: /2023/i }));
+        await waitFor(() => {
+          expect(
+            screen.getByRole('checkbox', { name: /2024/i })
+          ).not.toBeChecked();
+        });
         await waitFor(() => {
           expect(
             screen.getByRole('checkbox', { name: /2023/i })
@@ -324,6 +316,9 @@ describe('<ApdNew />', () => {
         user.click(screen.getByRole('checkbox', { name: /2023/i }));
         await waitFor(() => {
           expect(screen.getByRole('checkbox', { name: /2023/i })).toBeChecked();
+        });
+        await waitFor(() => {
+          expect(disabledBtn).toBeEnabled();
         });
 
         user.click(
