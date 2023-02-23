@@ -128,6 +128,25 @@ describe('<ApdNew />', () => {
     });
 
     describe('selecting and filling out HITECH form', () => {
+      beforeEach(() => {
+        jest.clearAllMocks();
+        resetLDMocks();
+        mockFlags({ enableMmis: true });
+      });
+
+      it('should render all field options correctly', async () => {
+        const { user } = await setup(props, options);
+        user.click(screen.getByRole('radio', { name: /HITECH IAPD/i }));
+
+        await waitFor(() => {
+          expect(
+            screen.getByRole('radio', { name: /HITECH IAPD/i })
+          ).toBeChecked();
+        });
+
+        expect(screen.getAllByRole('checkbox')).toMatchSnapshot();
+      });
+
       it('HITECH selected should show HITECH form', async () => {
         const { user } = await setup(props, options);
         user.click(screen.getByRole('radio', { name: /HITECH IAPD/i }));
@@ -199,6 +218,19 @@ describe('<ApdNew />', () => {
         jest.clearAllMocks();
         resetLDMocks();
         mockFlags({ enableMmis: true });
+      });
+
+      it('should render all field options correctly', async () => {
+        const { user } = await setup(props, options);
+        user.click(screen.getByRole('radio', { name: /MMIS IAPD/i }));
+
+        await waitFor(() => {
+          expect(
+            screen.getByRole('radio', { name: /MMIS IAPD/i })
+          ).toBeChecked();
+        });
+
+        expect(screen.getAllByRole('checkbox')).toMatchSnapshot();
       });
 
       it('MMIS selected should show MMIS form', async () => {
