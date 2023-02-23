@@ -3,3 +3,24 @@ export const APD_TYPE = {
   HITECH: 'HITECH',
   MMIS: 'MMIS'
 };
+
+export const MEDICAID_BUSINESS_AREAS_DISPLAY_LABEL_MAPPING = {
+  waiverSupportSystems: '1115 or Waiver Support Systems',
+  assetVerificationSystem: 'Asset Verification System',
+  claimsProcessing: 'Claims Processing',
+  decisionSupportSystemDW: 'Decision Support System & Data Warehouse',
+  electronicVisitVerification: 'Electronic Visit Verification (EVV)',
+  encounterProcessingSystemMCS:
+    'Encounter Processing System (EPS) & Managed Care System',
+  financialManagement: 'Financial Management',
+  healthInformationExchange: 'Health Information Exchange (HIE)',
+  longTermServicesSupports: 'Long Term Services & Supports (LTSS)',
+  memberManagement: 'Member Management',
+  pharmacyBenefitManagementPOS:
+    'Pharmacy Benefit Management (PBM) & Point of Sale (POS)',
+  programIntegrity: 'Program Integrity',
+  providerManagement: 'Provider Management',
+  thirdPartyLiability: 'Third Party Liability (TPL)',
+  other: 'Other',
+  otherMedicaidBusinessAreas: 'Other Medicaid Business Area(s)'
+};

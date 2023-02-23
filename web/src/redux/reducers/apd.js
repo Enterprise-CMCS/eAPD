@@ -42,6 +42,13 @@ import {
 
 import { generateKey, defaultAPDYearOptions, APD_TYPE } from '@cms-eapd/common';
 
+export const apdValid = apdType => {
+  if (apdType === APD_TYPE.HITECH || apdType === APD_TYPE.MMIS) {
+    return true;
+  }
+  return false;
+};
+
 export const getPatchesToAddYear = (state, year) => {
   const years = [...state.data.years, year].sort();
   const apdType = state.data.apdType;

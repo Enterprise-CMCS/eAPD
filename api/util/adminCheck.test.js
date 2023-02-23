@@ -460,7 +460,7 @@ const invalidHitechApdOverview = {
   narrativeHIE: '',
   narrativeMMIS: '',
   updateStatus: {
-    isUpdateAPD: true,
+    isUpdateAPD: false,
     annualUpdate: false,
     asNeededUpdate: false
   }
@@ -468,7 +468,7 @@ const invalidHitechApdOverview = {
 
 const invalidMmisApdOverview = {
   updateStatus: {
-    isUpdateAPD: true,
+    isUpdateAPD: false,
     annualUpdate: false,
     asNeededUpdate: false
   },
@@ -1487,7 +1487,7 @@ const mockMmisApdRandomInvalid = {
   years: ['2022', '2023'],
   apdOverview: {
     updateStatus: {
-      isUpdateAPD: true,
+      isUpdateAPD: false,
       annualUpdate: false,
       asNeededUpdate: false
     },
@@ -2135,7 +2135,7 @@ const expectedErrorsMockMmisApdRandom = [
   {
     section: 'APD Overview',
     link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-    fieldDescription: 'Provide another Medicaid Business Area(s)'
+    fieldDescription: 'Provide Other Medicaid Business Area(s).'
   },
   {
     section: 'Key State Personnel',
@@ -2269,7 +2269,7 @@ tap.test('HITECH apd document admin check', async hitechValidationTests => {
         {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Select yes or no'
+          fieldDescription: 'Select an update type.'
         },
         {
           section: 'APD Overview',
@@ -2538,7 +2538,7 @@ tap.test('MMIS apd document admin check', async mmisValidationTests => {
         {
           section: 'APD Overview',
           link: '/apd/632a0fbc5665670a34b3bbd7/apd-overview',
-          fieldDescription: 'Select yes or no'
+          fieldDescription: 'Select at least one Medicaid Business Area.'
         }
       ]);
     }
