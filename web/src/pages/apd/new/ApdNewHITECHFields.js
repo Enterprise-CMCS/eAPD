@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ChoiceList } from '@cmsgov/design-system';
 import { Controller, useFormContext } from 'react-hook-form';
 
-const ApdNewHITECHFields = ({ setUpdateStatus, updateStatus }) => {
+const ApdNewHITECHFields = ({ setHitechUpdateStatus, hitechUpdateStatus }) => {
   const {
     control,
     formState: { errors }
@@ -13,7 +13,7 @@ const ApdNewHITECHFields = ({ setUpdateStatus, updateStatus }) => {
   return (
     <div>
       <Controller
-        name="updateStatus"
+        name="hitechUpdateStatus"
         control={control}
         render={({ field: { onBlur, onChange } }) => (
           <ChoiceList
@@ -30,25 +30,25 @@ const ApdNewHITECHFields = ({ setUpdateStatus, updateStatus }) => {
               {
                 label: 'Annual update',
                 value: 'annualUpdate',
-                checked: updateStatus.annualUpdate
+                checked: hitechUpdateStatus.annualUpdate
               },
               {
                 label: 'As-needed update',
                 value: 'asNeededUpdate',
-                checked: updateStatus.asNeededUpdate
+                checked: hitechUpdateStatus.asNeededUpdate
               }
             ]}
             labelClassName="ds-u-margin-bottom--1"
             type="checkbox"
             onChange={({ target: { value, checked } }) => {
-              updateStatus[value] = checked;
-              updateStatus.isUpdateAPD = true;
-              setUpdateStatus(updateStatus);
-              onChange(updateStatus);
+              hitechUpdateStatus[value] = checked;
+              hitechUpdateStatus.isUpdateAPD = true;
+              setHitechUpdateStatus(hitechUpdateStatus);
+              onChange(hitechUpdateStatus);
             }}
             onBlur={onBlur}
             onComponentBlur={onBlur}
-            errorMessage={errors?.updateStatus?.message}
+            errorMessage={errors?.hitechUpdateStatus?.message}
             errorPlacement="bottom"
           />
         )}
@@ -58,8 +58,8 @@ const ApdNewHITECHFields = ({ setUpdateStatus, updateStatus }) => {
 };
 
 ApdNewHITECHFields.propTypes = {
-  updateStatus: PropTypes.object.isRequired,
-  setUpdateStatus: PropTypes.func.isRequired
+  hitechUpdateStatus: PropTypes.object.isRequired,
+  setHitechUpdateStatus: PropTypes.func.isRequired
 };
 
 export default ApdNewHITECHFields;

@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { APD_TYPE } from '../utils/constants.js';
+import medicaidBusinessAreasSchema from './medicaidBusinessArea.js';
 
 const updateStatusCustomValidation = (obj, helpers) => {
   const { isUpdateAPD, annualUpdate, asNeededUpdate } = obj;
@@ -47,6 +48,17 @@ export const apdNameSchema = Joi.string()
     'string.pattern.base': 'APD name cannot contain "untitled".'
   });
 
+// export const apdNewSchema = Joi.object({
+//   apdType: Joi.string()
+//     .valid(APD_TYPE.HITECH, APD_TYPE.MMIS)
+//     .required()
+//     .messages({
+//       'any.only': 'Select an APD Type.',
+//       'any.required': 'Select an APD Type.'
+//     }),
+//   apdNameSchema: apdNameSchema
+// })
+
 // Used for form validations in [APD] type-agnostic components
 export const sharedApdOverviewFields = Joi.object({
   name: apdNameSchema
@@ -89,54 +101,6 @@ export const hitechOverviewSchema = Joi.object({
     otherwise: Joi.any()
   })
 });
-
-export const medicaidBusinessAreasSchema = Joi.object({
-  waiverSupportSystems: Joi.boolean(),
-  assetVerificationSystem: Joi.boolean(),
-  claimsProcessing: Joi.boolean(),
-  decisionSupportSystemDW: Joi.boolean(),
-  electronicVisitVerification: Joi.boolean(),
-  encounterProcessingSystemMCS: Joi.boolean(),
-  financialManagement: Joi.boolean(),
-  healthInformationExchange: Joi.boolean(),
-  longTermServicesSupports: Joi.boolean(),
-  memberManagement: Joi.boolean(),
-  pharmacyBenefitManagementPOS: Joi.boolean(),
-  programIntegrity: Joi.boolean(),
-  providerManagement: Joi.boolean(),
-  thirdPartyLiability: Joi.boolean(),
-  other: Joi.boolean(),
-  otherMedicaidBusinessAreas: Joi.when('other', {
-    is: true,
-    then: Joi.string().trim().min(1).required().messages({
-      'string.base': 'Provide Other Medicaid Business Area(s).',
-      'string.empty': 'Provide Other Medicaid Business Area(s).',
-      'string.required': 'Provide Other Medicaid Business Area(s).'
-    }),
-    otherwise: Joi.any()
-  })
-})
-  .or(
-    'waiverSupportSystems',
-    'assetVerificationSystem',
-    'claimsProcessing',
-    'decisionSupportSystemDW',
-    'electronicVisitVerification',
-    'encounterProcessingSystemMCS',
-    'financialManagement',
-    'healthInformationExchange',
-    'longTermServicesSupports',
-    'memberManagement',
-    'pharmacyBenefitManagementPOS',
-    'programIntegrity',
-    'providerManagement',
-    'thirdPartyLiability',
-    'other',
-    { isPresent: resolved => resolved === true }
-  )
-  .messages({
-    'object.missing': 'Select at least one Medicaid Business Area.'
-  });
 
 export const mmisOverviewSchema = Joi.object({
   updateStatus: mmisUpdateStatusSchema,

@@ -8,9 +8,9 @@ import { Controller, useFormContext } from 'react-hook-form';
 const ApdNewMMISFields = ({
   medicaidBusinessAreas,
   setMedicaidBusinessAreas,
-  updateStatus,
-  setUpdateStatus,
-  setUpdateAPD
+  mmisUpdateStatus,
+  setMmisUpdateStatus,
+  setIsUpdateAPD
 }) => {
   const {
     control,
@@ -35,7 +35,7 @@ const ApdNewMMISFields = ({
                 checkedChildren: (
                   <div className="ds-c-choice__checkedChild">
                     <Controller
-                      name="updateStatus"
+                      name="mmisUpdateStatus"
                       control={control}
                       render={({ field: { onBlur, onChange } }) => (
                         <ChoiceList
@@ -53,25 +53,25 @@ const ApdNewMMISFields = ({
                             {
                               label: 'Annual update',
                               value: 'annualUpdate',
-                              checked: updateStatus.annualUpdate
+                              checked: mmisUpdateStatus.annualUpdate
                             },
                             {
                               label: 'As-needed update',
                               value: 'asNeededUpdate',
-                              checked: updateStatus.asNeededUpdate
+                              checked: mmisUpdateStatus.asNeededUpdate
                             }
                           ]}
                           labelClassName="ds-u-margin-bottom--1"
                           type="checkbox"
                           onChange={({ target: { value, checked } }) => {
-                            updateStatus[value] = checked;
-                            updateStatus.isUpdateAPD = true;
-                            setUpdateStatus(updateStatus);
-                            onChange(updateStatus);
+                            mmisUpdateStatus[value] = checked;
+                            mmisUpdateStatus.isUpdateAPD = true;
+                            setMmisUpdateStatus(mmisUpdateStatus);
+                            onChange(mmisUpdateStatus);
                           }}
                           onBlur={onBlur}
                           onComponentBlur={onBlur}
-                          errorMessage={errors?.updateStatus?.message}
+                          errorMessage={errors?.mmisUpdateStatus?.message}
                           errorPlacement="bottom"
                         />
                       )}
@@ -86,7 +86,7 @@ const ApdNewMMISFields = ({
               }
             ]}
             onChange={({ target: { value } }) => {
-              setUpdateAPD(value);
+              setIsUpdateAPD(value);
               onChange(value);
             }}
             onBlur={onBlur}
@@ -241,9 +241,9 @@ const ApdNewMMISFields = ({
 ApdNewMMISFields.propTypes = {
   medicaidBusinessAreas: PropTypes.object.isRequired,
   setMedicaidBusinessAreas: PropTypes.func.isRequired,
-  updateStatus: PropTypes.object.isRequired,
-  setUpdateStatus: PropTypes.func.isRequired,
-  setUpdateAPD: PropTypes.func.isRequired
+  mmisUpdateStatus: PropTypes.object.isRequired,
+  setMmisUpdateStatus: PropTypes.func.isRequired,
+  setIsUpdateAPD: PropTypes.func.isRequired
 };
 
 export default ApdNewMMISFields;

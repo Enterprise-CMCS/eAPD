@@ -95,9 +95,10 @@ const ApdNew = ({ createApd: create }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [medicaidBusinessAreas, setMedicaidBusinessAreas] =
     useState(businessAreaOptions);
-  const [updateStatus, setUpdateStatus] = useState(updateTypes);
+  const [hitechUpdateStatus, setHitechUpdateStatus] = useState(updateTypes);
+  const [mmisUpdateStatus, setMmisUpdateStatus] = useState(updateTypes);
   const [submitDisabled, setSubmitDisabled] = useState(true);
-  const [updateAPD, setUpdateAPD] = useState('');
+  const [isUpdateAPD, setIsUpdateAPD] = useState('');
   const [years, setYears] = useState(defaultAPDYears());
 
   const methods = useForm({
@@ -106,8 +107,8 @@ const ApdNew = ({ createApd: create }) => {
       name: '',
       years,
       medicaidBusinessAreas,
-      updateStatus,
-      updateAPD
+      mmisUpdateStatus,
+      isUpdateAPD
     },
     mode: 'all',
     reValidateMode: 'all',
@@ -165,8 +166,8 @@ const ApdNew = ({ createApd: create }) => {
       case APD_TYPE.HITECH:
         return (
           <ApdNewHITECHFields
-            updateStatus={updateStatus}
-            setUpdateStatus={setUpdateStatus}
+            hitechUpdateStatus={hitechUpdateStatus}
+            setHitechUpdateStatus={setHitechUpdateStatus}
           />
         );
       case APD_TYPE.MMIS:
@@ -174,9 +175,9 @@ const ApdNew = ({ createApd: create }) => {
           <ApdNewMMISFields
             medicaidBusinessAreas={medicaidBusinessAreas}
             setMedicaidBusinessAreas={setMedicaidBusinessAreas}
-            updateStatus={updateStatus}
-            setUpdateStatus={setUpdateStatus}
-            setUpdateAPD={setUpdateAPD}
+            mmisUpdateStatus={mmisUpdateStatus}
+            setMmisUpdateStatus={setMmisUpdateStatus}
+            setIsUpdateAPD={setIsUpdateAPD}
           />
         );
       default:

@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { medicaidBusinessAreasSchema } from './apdOverview.js';
+import medicaidBusinessAreasSchema from './medicaidBusinessArea.js';
 import { APD_TYPE } from '../utils/constants.js';
 
 export const updateStatusSchema = Joi.object({
