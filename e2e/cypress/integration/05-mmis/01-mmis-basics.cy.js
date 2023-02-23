@@ -1,5 +1,3 @@
-import ActivityPage from '../../page-objects/activity-page';
-
 /// <reference types="cypress" />
 
 // Tests performing basic MMIS APD tasks
@@ -10,13 +8,11 @@ import ActivityPage from '../../page-objects/activity-page';
 Cypress.session.clearAllSavedSessions();
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
-  let activityPage;
   let apdUrl;
   let apdId;
   const years = [];
 
   before(() => {
-    activityPage = new ActivityPage();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');
@@ -534,6 +530,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       });
 
       cy.log('Click through Continue buttons');
+      cy.goToApdOverview();
       pageTitles.forEach((titles, index) => {
         cy.get('.ds-h2').should('contain', titles[0]);
         if (index < pageTitles.length - 1) {
@@ -571,13 +568,15 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
       cy.goToExecutiveSummary();
 
-      cy.get('#executive-summary-summary')
-        .parent()
-        .contains('div', 'Activity 1: Untitled')
-        .parent()
-        .parent()
-        .findByRole('link', { name: 'Edit' })
-        .click();
+      // cy.get('#executive-summary-summary')
+      //   .parent()
+      //   .contains('div', 'Activity 1: Untitled')
+      //   .parent()
+      //   .parent()
+      //   .findByRole('link', { name: 'Edit' })
+      //   .click();
+
+      cy.get('#activities').contains('Edit').click();
 
       cy.findByRole('heading', {
         name: /^Activity 1:/i,
