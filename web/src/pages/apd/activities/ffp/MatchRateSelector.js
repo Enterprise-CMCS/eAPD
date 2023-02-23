@@ -12,7 +12,8 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
   const {
     control,
     formState: { errors },
-    setValue
+    setValue,
+    trigger
   } = useFormContext();
   const [fundingCategory, setFundingCategory] = useState(ffp.fundingCategory);
   const [fedStateSplit, setFedStateSplit] = useState(
@@ -33,6 +34,8 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
     setValue(`${ffy}.ffp.state`, state);
     setFedStateSplit(`${federal}-${state}`);
     setFundingCategory(null);
+    setValue(`${ffy}.ffp.fundingCategory`, null);
+    trigger();
 
     if (federal === 90 && state === 10) {
       setMatchRate(ffy, federal, state, FUNDING_CATEGORY_TYPE.DDI);
@@ -42,6 +45,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
   const handleFundingCategory = e => {
     const [federal, state] = fedStateSplit.split('-').map(Number);
     setValue(`${ffy}.ffp.fundingCategory`, e.target.value);
+    trigger();
     setMatchRate(ffy, federal, state, e.target.value);
     setFundingCategory(e.target.value);
   };
