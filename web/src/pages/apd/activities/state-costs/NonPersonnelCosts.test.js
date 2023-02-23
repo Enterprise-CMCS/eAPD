@@ -1,5 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
+import { APD_TYPE } from '@cms-eapd/common';
 
 import {
   plain as NonPersonnelCosts,
@@ -50,6 +51,7 @@ describe('activity non-personnel costs subsection', () => {
         {
           apd: {
             data: {
+              apdType: APD_TYPE.HITECH,
               activities: [
                 {
                   expenses: 'these are wrong expenses'
@@ -60,13 +62,18 @@ describe('activity non-personnel costs subsection', () => {
                 {
                   expenses: 'these are expenses'
                 }
-              ]
+              ],
+              years: [2027, 2028]
             }
           }
         },
         { activityIndex: 2 }
       )
-    ).toEqual({ expenses: 'these are expenses', apdType: 'HITECH' });
+    ).toEqual({
+      expenses: 'these are expenses',
+      apdType: 'HITECH',
+      years: [2027, 2028]
+    });
   });
 
   it('maps dispatch actions to props', () => {

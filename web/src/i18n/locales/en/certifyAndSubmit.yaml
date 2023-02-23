@@ -5,13 +5,12 @@ certify:
   draft:
     instruction:
       short: >-
-        Before you submit your APD, double-check that you have
-        entered everything correctly. Once you submit,
-        your APD will be locked from further edits
-        until reviewed by a CMS analyst.
+        Before you submit your APD, double-check that you have entered
+        everything correctly. Once you submit, your APD will be locked from
+        further edits until reviewed by a CMS analyst.
       detail: >-
-        To submit your APD for reviews, sign your name in the
-        box below then select the Submit APD button.
+        To submit your APD for reviews, sign your name in the box below then
+        select the Submit APD button.
   buttonText: Submit APD
   submitted:
     buttonText: My Dashboard
@@ -19,34 +18,31 @@ certify:
       instruction:
         heading: Submitted!
         detail: >-
-          Thank you for your {{state}} {{year}} HITECH APD submission.
+          Thank you for your {{state}} {{year}} APD submission.
     next:
       instruction:
         heading: What to expect next
         detail: >-
-          Your CMS analyst has been notified of your submission
-          and will begin the review process.  If they have any
-          questions for you, you will receive a notification
-          through the app with a link to respond.
+          Your CMS analyst has been notified of your submission and will begin
+          the review process.  If they have any questions for you, you will
+          receive a notification through the app with a link to respond.
 
-          If you would like to check the status of your request
-          or start a new document, please go to your state’s
-          dashboard.
+          If you would like to check the status of your request or start a new
+          document, please go to your state’s dashboard.
 withdraw:
   prompt:
     instruction:
       heading: Withdraw submission
       detail: >-
-        Withdrawing an APD submission resets the review process by
-        CMS. APD submissions can be withdrawn to make changes.
+        Withdrawing an APD submission resets the review process by CMS. APD
+        submissions can be withdrawn to make changes.
 
-        _Note: Withdrawing this submission will reset the APD
-        review process._
+        _Note: Withdrawing this submission will reset the APD review process._
     buttonText: Withdraw Submission
   confirmation:
     instruction:
       heading: Your APD submissions has been withdrawn
       detail: >-
-        The document is now editable. It will need to be resubmitted
-        before it can be reviewed by CMS.
+        The document is now editable. It will need to be resubmitted before it
+        can be reviewed by CMS.
     buttonText: Back to top

@@ -448,11 +448,11 @@ tap.test('APD data initializer', async apdTests => {
         procurement: [
           { title: 'SMM, Part 11', checked: null, explanation: '' },
           { title: '45 CFR Part 95.615', checked: null, explanation: '' },
-          { title: '45 CFR Part 92.36', checked: null, explanation: '' }
+          { title: '45 CFR Part 75.326', checked: null, explanation: '' }
         ],
         recordsAccess: [
           {
-            title: '42 CFR Part 433.112(b)(5)-(9)',
+            title: '45 CFR Part 433.112 (b)(5)-(9)',
             checked: null,
             explanation: ''
           },
@@ -460,7 +460,7 @@ tap.test('APD data initializer', async apdTests => {
           { title: 'SMM Section 11267', checked: null, explanation: '' }
         ],
         softwareRights: [
-          { title: '45 CFR Part 95.617', checked: null, explanation: '' },
+          { title: '45 CFR 95.617', checked: null, explanation: '' },
           { title: '42 CFR Part 431.300', checked: null, explanation: '' },
           { title: '45 CFR Part 164', checked: null, explanation: '' }
         ],
@@ -539,11 +539,11 @@ tap.test('APD data initializer', async apdTests => {
         procurement: [
           { title: 'SMM, Part 11', checked: null, explanation: '' },
           { title: '45 CFR Part 95.615', checked: null, explanation: '' },
-          { title: '45 CFR Part 92.36', checked: null, explanation: '' }
+          { title: '45 CFR Part 75.326', checked: null, explanation: '' }
         ],
         recordsAccess: [
           {
-            title: '42 CFR Part 433.112(b)(5)-(9)',
+            title: '45 CFR Part 433.112 (b)(5)-(9)',
             checked: null,
             explanation: ''
           },
@@ -551,7 +551,7 @@ tap.test('APD data initializer', async apdTests => {
           { title: 'SMM Section 11267', checked: null, explanation: '' }
         ],
         softwareRights: [
-          { title: '45 CFR Part 95.617', checked: null, explanation: '' },
+          { title: '45 CFR 95.617', checked: null, explanation: '' },
           { title: '42 CFR Part 431.300', checked: null, explanation: '' },
           { title: '45 CFR Part 164', checked: null, explanation: '' }
         ],

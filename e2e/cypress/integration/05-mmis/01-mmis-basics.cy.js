@@ -60,6 +60,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
   });
 
   after(function () {
+    cy.useStateStaff();
     cy.visit('/');
     cy.deleteAPD(this.apdId);
   });

@@ -25,7 +25,6 @@ import {
   REMOVE_APD_ITEM,
   REMOVE_APD_YEAR
 } from '../actions/editApd';
-import regulations from '../../util/regulations';
 
 describe('APD reducer', () => {
   afterAll(() => {
@@ -293,7 +292,12 @@ describe('APD reducer', () => {
               ]
             }
           ],
-          assurancesAndCompliances: regulations,
+          assurancesAndCompliances: {
+            procurement: [],
+            recordsAccess: [],
+            security: [],
+            softwareRights: []
+          },
           value: `hurr hurr i'm a burr`
         }
       });
