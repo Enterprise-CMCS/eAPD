@@ -1,5 +1,5 @@
-// import BudgetPage from '../../page-objects/budget-page.js';
 // import ActivityPage from '../../page-objects/activity-page';
+import BudgetPage from '../../page-objects/budget-page.js';
 
 /// <reference types="cypress" />
 
@@ -11,14 +11,15 @@
 Cypress.session.clearAllSavedSessions();
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
-  let apdUrl = '/';
   // let activityPage;
+  let budgetPage;
+  let apdUrl = '/';
   let apdId;
   const years = [];
-  let budgetPage;
 
   before(() => {
     // activityPage = new ActivityPage();
+    budgetPage = new BudgetPage();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');
@@ -47,7 +48,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
     cy.get('[type="checkbox"][checked]').each((_, index, list) =>
       years.push(list[index].value)
     );
-    // budgetPage = new BudgetPage();
   });
 
   beforeEach(function () {
@@ -75,6 +75,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       //
       cy.contains('AK APD Home').click();
       cy.findAllByText('Create new').click();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
 
       cy.contains(
         'This selection cannot be changed after creating a new APD.'
@@ -176,7 +177,94 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
 
     it('test MMIS APD Basics', function () {
       const mmisBasics = this.mmisBasics;
+      // Key State Personnel
+      cy.goToKeyStatePersonnel();
+      cy.contains('Key Personnel and Program Management').should('exist');
 
+      cy.findByRole('button', { name: /Add Primary Contact/i }).click();
+
+      cy.get('[data-cy="key-person-0__name"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].name);
+
+      cy.get('[data-cy="key-person-0__email"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].email);
+
+      cy.get('[data-cy="key-person-0__position"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].position);
+
+      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
+      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
+
+      cy.get('[data-cy="key-person-1__name"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].name);
+
+      cy.get('[data-cy="key-person-1__email"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].email);
+
+      cy.get('[data-cy="key-person-1__position"]')
+        .clear()
+        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].position);
+
+      cy.get('input[type="radio"][value="yes"]').check({ force: true }).blur();
+      cy.get('[data-cy="key-person-1-0__cost"]').clear().type('1000');
+      cy.get('[data-cy="key-person-1-0__fte"]').clear().type('.5');
+      cy.get('[data-cy="key-person-1-0__medicaidShare"]')
+        .eq(0)
+        .clear()
+        .type('50');
+      cy.findAllByRole('radio', {
+        name: '90/10 Design, Development, and Installation (DDI)'
+      }).check({ force: true });
+
+      cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
+      cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
+      cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
+      cy.findAllByRole('radio', {
+        name: '90/10 Design, Development, and Installation (DDI)'
+      })
+        .eq(1)
+        .check({ force: true });
+
+      cy.findByRole('button', { name: /Save/i }).click();
+
+      cy.contains(
+        'Total Computable Medicaid: $250 (50% Medicaid Share) '
+      ).should('exist');
+      cy.contains('Federal Share: $225').should('exist');
+      cy.contains(
+        'Total Computable Medicaid: $2,000 (100% Medicaid Share)'
+      ).should('exist');
+      cy.contains('Federal Share: $1,800').should('exist');
+
+      // Previous Activities
+      cy.goToPreviousActivities();
+
+      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
+      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
+
+      cy.checkTinyMCE('previous-activity-summary-field', '');
+      cy.setTinyMceContent(
+        'previous-activity-summary-field',
+        mmisBasics.previousActivities.previousActivitySummary
+      );
+      cy.waitForSave();
+
+      cy.goToApdOverview();
+      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.goToPreviousActivities();
+      cy.checkTinyMCE(
+        'previous-activity-summary-field',
+        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
+      );
+
+      // Activity Tests
       cy.goToActivityDashboard();
 
       // Create new Activity
@@ -263,27 +351,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       cy.waitForSave();
       cy.contains('Provide a Proposed solution').should('not.exist');
 
-      // Previous Activities
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-
-      cy.goToApdOverview();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.goToPreviousActivities();
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
-      );
-
       // Check validation errors are gone from admin check
       cy.expandAdminCheck();
       cy.get('[class="eapd-admin-check-list"]').within(list => {
@@ -317,72 +384,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         `<p>${mmisBasics.activities[0].activityOverview.proposedSolution}</p>`
       );
 
-      // Key State Personnel
-      cy.goToKeyStatePersonnel();
-      cy.contains('Key Personnel and Program Management').should('exist');
-
-      cy.findByRole('button', { name: /Add Primary Contact/i }).click();
-
-      cy.get('[data-cy="key-person-0__name"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].name);
-
-      cy.get('[data-cy="key-person-0__email"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].email);
-
-      cy.get('[data-cy="key-person-0__position"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[0].position);
-
-      cy.get('input[type="radio"][value="no"]').check({ force: true }).blur();
-      cy.findByRole('button', { name: /Save/i }).click();
-
-      cy.findByRole('button', { name: /Add Key Personnel/i }).click();
-
-      cy.get('[data-cy="key-person-1__name"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].name);
-
-      cy.get('[data-cy="key-person-1__email"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].email);
-
-      cy.get('[data-cy="key-person-1__position"]')
-        .clear()
-        .type(mmisBasics.keyStatePersonnel.keyPersonnel[1].position);
-
-      cy.get('input[type="radio"][value="yes"]').check({ force: true }).blur();
-      cy.get('[data-cy="key-person-1-0__cost"]').clear().type('1000');
-      cy.get('[data-cy="key-person-1-0__fte"]').clear().type('.5');
-      cy.get('[data-cy="key-person-1-0__medicaidShare"]')
-        .eq(0)
-        .clear()
-        .type('50');
-      cy.findAllByRole('radio', {
-        name: '90/10 Design, Development, and Installation (DDI)'
-      }).check({ force: true });
-
-      cy.get('[data-cy="key-person-1-1__cost"]').clear().type('2000');
-      cy.get('[data-cy="key-person-1-1__fte"]').clear().type('1');
-      cy.get('[data-cy="key-person-1-1__medicaidShare"]').clear().type('100');
-      cy.findAllByRole('radio', {
-        name: '90/10 Design, Development, and Installation (DDI)'
-      })
-        .eq(1)
-        .check({ force: true });
-
-      cy.findByRole('button', { name: /Save/i }).click();
-
-      cy.contains(
-        'Total Computable Medicaid: $250 (50% Medicaid Share) '
-      ).should('exist');
-      cy.contains('Federal Share: $225').should('exist');
-      cy.contains(
-        'Total Computable Medicaid: $2,000 (100% Medicaid Share)'
-      ).should('exist');
-      cy.contains('Federal Share: $1,800').should('exist');
-
       // Budget and FFP
       cy.goToBudgetAndFFP(0);
       cy.contains('Budget and FFP').should('exist');
@@ -398,6 +399,7 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
         });
       });
 
+      // Security Planning
       cy.turnOnAdminCheck();
       cy.checkAdminCheckHyperlinks('Security Planning', 'Security Planning', 2);
 
@@ -469,29 +471,6 @@ describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
       );
 
       // Todo: TEST CONTINUE AND BACK BUTTONS, Assurances and Compliance page crashes though.
-    });
-
-    it('tests the Results of Previous Activities section', function () {
-      const mmisBasics = this.mmisBasics;
-
-      cy.goToPreviousActivities();
-
-      cy.findAllByText('Grand totals: Federal MMIS').should('exist');
-      cy.findAllByText('HIT + HIE Federal share 90% FFP').should('not.exist');
-
-      cy.checkTinyMCE('previous-activity-summary-field', '');
-      cy.setTinyMceContent(
-        'previous-activity-summary-field',
-        mmisBasics.previousActivities.previousActivitySummary
-      );
-      cy.waitForSave();
-      cy.goToApdOverview();
-      cy.wait(2000); // eslint-disable-line cypress/no-unnecessary-waiting
-      cy.goToPreviousActivities();
-      cy.checkTinyMCE(
-        'previous-activity-summary-field',
-        `<p>${mmisBasics.previousActivities.previousActivitySummary}</p>`
-      );
     });
   });
 });

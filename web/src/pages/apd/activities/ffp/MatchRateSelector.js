@@ -8,7 +8,7 @@ import {
   FUNDING_CATEGORY_LABEL_MAPPING
 } from '@cms-eapd/common';
 
-const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
+const MatchRateSelector = ({ ffp, ffy, setMatchRate, adminCheck }) => {
   const {
     control,
     formState: { errors },
@@ -35,7 +35,9 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
     setFedStateSplit(`${federal}-${state}`);
     setFundingCategory(null);
     setValue(`${ffy}.ffp.fundingCategory`, null);
-    trigger();
+    if (adminCheck) {
+      trigger();
+    }
 
     if (federal === 90 && state === 10) {
       setMatchRate(ffy, federal, state, FUNDING_CATEGORY_TYPE.DDI);
@@ -45,7 +47,9 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
   const handleFundingCategory = e => {
     const [federal, state] = fedStateSplit.split('-').map(Number);
     setValue(`${ffy}.ffp.fundingCategory`, e.target.value);
-    trigger();
+    if (adminCheck) {
+      trigger();
+    }
     setMatchRate(ffy, federal, state, e.target.value);
     setFundingCategory(e.target.value);
   };
@@ -75,7 +79,9 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             type="radio"
             size="small"
             onChange={handleFundingCategory}
-            errorMessage={errors?.[ffy]?.ffp?.fundingCategory?.message}
+            errorMessage={
+              adminCheck && errors?.[ffy]?.ffp?.fundingCategory?.message
+            }
             errorPlacement="bottom"
             data-cy="cost-allocation-radio-group"
           />
@@ -123,7 +129,7 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
             type="radio"
             size="small"
             onChange={handleFedStateSplit}
-            errorMessage={errors?.[ffy]?.ffp?.state?.message}
+            errorMessage={adminCheck && errors?.[ffy]?.ffp?.state?.message}
             errorPlacement="bottom"
             data-cy="cost-allocation-match-rate"
           />
@@ -136,7 +142,12 @@ const MatchRateSelector = ({ ffp, ffy, setMatchRate }) => {
 MatchRateSelector.propTypes = {
   ffp: PropTypes.object.isRequired,
   ffy: PropTypes.string.isRequired,
-  setMatchRate: PropTypes.func.isRequired
+  setMatchRate: PropTypes.func.isRequired,
+  adminCheck: PropTypes.bool
+};
+
+MatchRateSelector.defaultProps = {
+  adminCheck: false
 };
 
 export default MatchRateSelector;

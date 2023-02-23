@@ -4,11 +4,12 @@ import { Dropdown } from '@cmsgov/design-system';
 import PropTypes from 'prop-types';
 import Instruction from '../../../../components/Instruction';
 
-const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
+const FedStateSelector = ({ ffp, ffy, setFederalStateSplit, adminCheck }) => {
   const {
     control,
     formState: { errors },
-    setValue
+    setValue,
+    trigger
   } = useFormContext();
   const [fedStateSplit, setFedStateSplit] = useState(
     `${ffp.federal}-${ffp.state}`
@@ -22,6 +23,9 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
     const [federal, state] = e.target.value.split('-').map(Number);
     setValue(`${ffy}.ffp.federal`, federal);
     setValue(`${ffy}.ffp.state`, state);
+    if (adminCheck) {
+      trigger();
+    }
     setFedStateSplit(`${federal}-${state}`);
     setFederalStateSplit(ffy, federal, state);
   };
@@ -51,7 +55,7 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
             ]}
             value={fedStateSplit}
             onChange={handleFedStateSplit}
-            errorMessage={errors[ffy]?.ffp?.state?.message}
+            errorMessage={adminCheck && errors[ffy]?.ffp?.state?.message}
             errorPlacement="bottom"
             data-cy="cost-allocation-dropdown"
           />
@@ -64,7 +68,12 @@ const FedStateSelector = ({ ffp, ffy, setFederalStateSplit }) => {
 FedStateSelector.propTypes = {
   ffp: PropTypes.string.isRequired,
   ffy: PropTypes.string.isRequired,
-  setFederalStateSplit: PropTypes.func.isRequired
+  setFederalStateSplit: PropTypes.func.isRequired,
+  adminCheck: PropTypes.bool
+};
+
+FedStateSelector.defaultProps = {
+  adminCheck: false
 };
 
 export default FedStateSelector;

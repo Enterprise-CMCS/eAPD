@@ -288,6 +288,7 @@ const CostAllocateFFP = ({
                   ffp={costAllocation[ffy].ffp}
                   ffy={ffy}
                   setFederalStateSplit={setFederalStateSplit}
+                  adminCheck={adminCheck}
                 />
               )}
               {apdType === APD_TYPE.MMIS && (
@@ -295,6 +296,7 @@ const CostAllocateFFP = ({
                   ffp={costAllocation[ffy].ffp}
                   ffy={ffy}
                   setMatchRate={setMatchRate}
+                  adminCheck={adminCheck}
                 />
               )}
               <table
