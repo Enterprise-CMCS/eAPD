@@ -9,10 +9,12 @@ import FormAndReviewList from '../../../../components/FormAndReviewList';
 import { StatePersonForm, StatePersonReview } from './StatePerson';
 
 import { selectActivityStatePersonnel } from '../../../../redux/selectors/activities.selectors';
-import { selectApdYears } from '../../../../redux/selectors/apd.selectors';
+import {
+  selectApdYears,
+  selectApdType
+} from '../../../../redux/selectors/apd.selectors';
 import { newStatePerson } from '../../../../redux/reducers/activities';
 import { removePersonnel } from '../../../../redux/actions/editActivity';
-import { selectApdType } from '../../../../redux/selectors/apd.selectors';
 
 const StatePersonnel = ({
   activityIndex,

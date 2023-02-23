@@ -10,11 +10,13 @@ import { testApdName } from '../../helpers/apd/apd-name.js';
 Cypress.session.clearAllSavedSessions();
 
 describe('MMIS Basics', { tags: ['@apd', '@default', '@mmis'] }, function () {
+  // let activityPage;
   let apdUrl;
   let apdId;
   const years = [];
 
   before(() => {
+    // activityPage = new ActivityPage();
     cy.updateFeatureFlags({ enableMmis: true, adminCheckFlag: true });
     cy.useStateStaff();
     cy.visit('/');

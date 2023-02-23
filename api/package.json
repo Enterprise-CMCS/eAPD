@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/Enterprise-CMCS/eAPD#readme",
   "engines": {
-    "node": "16.19.0"
+    "node": "16.19.1"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.259.0",
