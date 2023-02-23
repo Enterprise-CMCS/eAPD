@@ -32,17 +32,17 @@ const ApdNew = ({ createApd: create }) => {
   const { enableMmis } = useFlags();
 
   const businessAreaOptions = {
-    waiverSupport: false,
-    assetVerification: false,
+    waiverSupportSystems: false,
+    assetVerificationSystem: false,
     claimsProcessing: false,
-    decisionSupport: false,
-    electronicVisitVerify: false,
-    encounterProcessingSystem: false,
-    financialMangement: false,
-    healthInfoExchange: false,
-    longTermServiceSupport: false,
+    decisionSupportSystemDW: false,
+    electronicVisitVerification: false,
+    encounterProcessingSystemMCS: false,
+    financialManagement: false,
+    healthInformationExchange: false,
+    longTermServicesSupports: false,
     memberManagement: false,
-    pharmacyBenefitManagement: false,
+    pharmacyBenefitManagementPOS: false,
     programIntegrity: false,
     providerManagement: false,
     thirdPartyLiability: false,
@@ -401,13 +401,13 @@ const ApdNew = ({ createApd: create }) => {
                     choices={[
                       {
                         label: '1115 or Waiver Support Systems',
-                        value: 'waiverSupport',
-                        checked: businessAreas.waiverSupport
+                        value: 'waiverSupportSystems',
+                        checked: businessAreas.waiverSupportSystems
                       },
                       {
                         label: 'Asset Verification System',
-                        value: 'assetVerification',
-                        checked: businessAreas.assetVerification
+                        value: 'assetVerificationSystem',
+                        checked: businessAreas.assetVerificationSystem
                       },
                       {
                         label: 'Claims Processing',
@@ -416,45 +416,45 @@ const ApdNew = ({ createApd: create }) => {
                       },
                       {
                         label: 'Decision Support System & Data Warehouse',
-                        value: 'decisionSupport',
-                        checked: businessAreas.decisionSupport
+                        value: 'decisionSupportSystemDW',
+                        checked: businessAreas.decisionSupportSystemDW
                       },
                       {
                         label: 'Electronic Visit Verification (EVV)',
-                        value: 'electronicVisitVerify',
-                        checked: businessAreas.electronicVisitVerify
+                        value: 'electronicVisitVerification',
+                        checked: businessAreas.electronicVisitVerification
                       },
                       {
                         label:
                           'Encounter Processing System (EPS) & Managed Care System',
-                        value: 'encounterProcessingSystem',
-                        checked: businessAreas.encounterProcessingSystem
+                        value: 'encounterProcessingSystemMCS',
+                        checked: businessAreas.encounterProcessingSystemMCS
                       },
                       {
                         label: 'Financial Management',
-                        value: 'financialMangement',
-                        checked: businessAreas.financialMangement
+                        value: 'financialManagement',
+                        checked: businessAreas.financialManagement
                       },
                       {
                         label: 'Health Information Exchange (HIE)',
-                        value: 'healthInfoExchange',
-                        checked: businessAreas.healthInfoExchange
+                        value: 'healthInformationExchange',
+                        checked: businessAreas.healthInformationExchange
                       },
                       {
                         label: 'Long Term Services & Suports (LTSS)',
-                        value: 'longTermServiceSupport',
-                        checked: businessAreas.longTermServiceSupport
+                        value: 'longTermServicesSupports',
+                        checked: businessAreas.longTermServicesSupports
                       },
                       {
                         label: 'Member Management',
-                        value: 'memberMangagement',
-                        checked: businessAreas.memberMangagement
+                        value: 'memberManagement',
+                        checked: businessAreas.memberManagement
                       },
                       {
                         label:
                           'Pharmacy Beefit Management (PBM) & Point of Sale (POS)',
-                        value: 'pharmacyBenefitManagement',
-                        checked: businessAreas.pharmacyBenefitManagement
+                        value: 'pharmacyBenefitManagementPOS',
+                        checked: businessAreas.pharmacyBenefitManagementPOS
                       },
                       {
                         label: 'Program Integrity',

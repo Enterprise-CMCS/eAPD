@@ -6,6 +6,8 @@ import {
   screen
 } from 'apd-testing-library';
 
+import { APD_TYPE } from '@cms-eapd/common';
+
 import {
   plain as CostAllocate,
   mapStateToProps,
@@ -14,6 +16,7 @@ import {
 import { setCostAllocationMethodology } from '../../../../../redux/actions/editActivity/costAllocate';
 
 const initialState = {
+  apdType: APD_TYPE.HITECH,
   activityIndex: 1,
   activity: {
     key: 'activity key',
@@ -51,6 +54,7 @@ describe('<setCostAllocationMethodology />', () => {
     const state = {
       apd: {
         data: {
+          apdType: APD_TYPE.HITECH,
           activities: [
             {
               key: 'activity key'
@@ -62,7 +66,8 @@ describe('<setCostAllocationMethodology />', () => {
     expect(mapStateToProps(state, { activityIndex: 0 })).toEqual({
       activity: {
         key: 'activity key'
-      }
+      },
+      apdType: APD_TYPE.HITECH
     });
   });
 
