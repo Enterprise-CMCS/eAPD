@@ -460,17 +460,17 @@ const invalidHitechApdOverview = {
   narrativeHIE: '',
   narrativeMMIS: '',
   updateStatus: {
-    isUpdateAPD: null,
-    annualUpdate: null,
-    asNeededUpdate: null
+    isUpdateAPD: true,
+    annualUpdate: false,
+    asNeededUpdate: false
   }
 };
 
 const invalidMmisApdOverview = {
   updateStatus: {
-    isUpdateAPD: null,
-    annualUpdate: null,
-    asNeededUpdate: null
+    isUpdateAPD: true,
+    annualUpdate: false,
+    asNeededUpdate: false
   },
   medicaidBusinessAreas: {
     waiverSupportSystems: false,
